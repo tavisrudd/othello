@@ -1,0 +1,2060 @@
+{
+  "claim": "All sixteen previously open modulo-60 plateau phases are boundary-surjective for every integer q>=1, and these anchors propagate through all twenty-one eventual strict peak families in the full graded path corner.",
+  "peak_propagation": {
+    "argument": "The sixteen phase quotients anchor every previously unanchored equal-rank plateau component. At each eventual strict peak both neighboring corners have smaller multiplicity; the lower-hyperplane propagation lemma applies, the all-weight two-sided-defect theorem makes the supported lower and upper images span, and the displayed global-Weyl two-step witness makes them nonorthogonal.",
+    "claim_boundary": "This closes eventual strict peaks in the full graded path corner. It does not prove the remaining off-peak propagation step or identify the full path corner with the algebra of the three local returns.",
+    "families": {
+      "1": [
+        {
+          "base_profile": [
+            2,
+            3,
+            2
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "9805969812672000",
+              "24101377217280000",
+              "34695728179200000",
+              "37747242086400000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g30",
+              1
+            ],
+            "target_key": [
+              "g30",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 0
+        },
+        {
+          "base_profile": [
+            2,
+            3,
+            2
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "17693364237120000",
+              "37469334862080000",
+              "47392053350400000",
+              "48392163072000000",
+              "22491177984000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g30",
+              1
+            ],
+            "target_key": [
+              "g30",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 12
+        },
+        {
+          "base_profile": [
+            2,
+            3,
+            2
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "15578768221632000",
+              "32576466574080000",
+              "45290969856000000",
+              "43708759142400000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g30",
+              1
+            ],
+            "target_key": [
+              "g30",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 20
+        },
+        {
+          "base_profile": [
+            2,
+            3,
+            2
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "26978966498880000",
+              "49278123290880000",
+              "61023754598400000",
+              "55889222400000000",
+              "22491177984000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g30",
+              1
+            ],
+            "target_key": [
+              "g30",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 32
+        },
+        {
+          "base_profile": [
+            2,
+            3,
+            2
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "23367342220992000",
+              "43920912372480000",
+              "57873383884800000",
+              "49670276198400000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g30",
+              1
+            ],
+            "target_key": [
+              "g30",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 40
+        },
+        {
+          "base_profile": [
+            2,
+            3,
+            2
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "39148979538240000",
+              "64797805543680000",
+              "77154475622400000",
+              "63386281728000000",
+              "22491177984000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g30",
+              1
+            ],
+            "target_key": [
+              "g30",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 52
+        }
+      ],
+      "2": [
+        {
+          "base_profile": [
+            4,
+            5,
+            4
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "5622228978300000",
+              "14780544672960000",
+              "29769064997760000",
+              "38045317939200000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g11",
+              1
+            ],
+            "target_key": [
+              "g11",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 1
+        },
+        {
+          "base_profile": [
+            4,
+            5,
+            4
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "4908968652060000",
+              "13999829944320000",
+              "32954186136960000",
+              "41026076467200000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g1",
+              1
+            ],
+            "target_key": [
+              "g1",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 11
+        },
+        {
+          "base_profile": [
+            4,
+            5,
+            4
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "8853889969980000",
+              "21580293430080000",
+              "40463665292160000",
+              "44006834995200000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g11",
+              1
+            ],
+            "target_key": [
+              "g11",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 21
+        },
+        {
+          "base_profile": [
+            5,
+            6,
+            5
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "40372537162320000",
+              "64856055369600000",
+              "67698276370560000",
+              "84382564147200000",
+              "46337246208000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g1",
+              2
+            ],
+            "target_key": [
+              "g1",
+              2
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 31
+        },
+        {
+          "base_profile": [
+            5,
+            6,
+            5
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "59971921471440000",
+              "90625324426560000",
+              "87164661893760000",
+              "92105438515200000",
+              "46337246208000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g11",
+              2
+            ],
+            "target_key": [
+              "g11",
+              2
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 41
+        },
+        {
+          "base_profile": [
+            5,
+            6,
+            5
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "57771109273680000",
+              "80906630872320000",
+              "90677214840960000",
+              "99828312883200000",
+              "46337246208000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g1",
+              2
+            ],
+            "target_key": [
+              "g1",
+              2
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 51
+        }
+      ],
+      "3": [
+        {
+          "base_profile": [
+            5,
+            7,
+            6
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "5956458171840000",
+              "15454690384320000",
+              "30464744682240000",
+              "38343393792000000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g12",
+              1
+            ],
+            "target_key": [
+              "g12",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 2
+        },
+        {
+          "base_profile": [
+            6,
+            7,
+            6
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "4808546861184000",
+              "14154147551808000",
+              "29862646513920000",
+              "33641924659200000",
+              "13819880448000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g12",
+              1
+            ],
+            "target_key": [
+              "g12",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 10
+        },
+        {
+          "base_profile": [
+            6,
+            8,
+            7
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "9353936401920000",
+              "22453212830400000",
+              "41258703594240000",
+              "44304910848000000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g12",
+              1
+            ],
+            "target_key": [
+              "g12",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 22
+        },
+        {
+          "base_profile": [
+            7,
+            8,
+            7
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "38758499543808000",
+              "64794715432128000",
+              "69823503256320000",
+              "77833927987200000",
+              "39562795008000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g12",
+              2
+            ],
+            "target_key": [
+              "g12",
+              2
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 30
+        },
+        {
+          "base_profile": [
+            7,
+            9,
+            8
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "62315137494720000",
+              "93568108392000000",
+              "89248539536640000",
+              "92877725952000000",
+              "46337246208000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g12",
+              2
+            ],
+            "target_key": [
+              "g12",
+              2
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 42
+        },
+        {
+          "base_profile": [
+            8,
+            9,
+            8
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "55775035888704000",
+              "81863150136768000",
+              "91372279806720000",
+              "91021526323200000",
+              "39562795008000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g12",
+              2
+            ],
+            "target_key": [
+              "g12",
+              2
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 50
+        }
+      ],
+      "3p": [
+        {
+          "base_profile": [
+            6,
+            7,
+            6
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "7466545548000000",
+              "18383302887840000",
+              "33352561503360000",
+              "39535697203200000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g16",
+              1
+            ],
+            "target_key": [
+              "g16",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 6
+        },
+        {
+          "base_profile": [
+            7,
+            8,
+            7
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "11592958386240000",
+              "26211952784160000",
+              "44543954885760000",
+              "45497214259200000",
+              "17884551168000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g16",
+              1
+            ],
+            "target_key": [
+              "g16",
+              1
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 26
+        },
+        {
+          "base_profile": [
+            8,
+            9,
+            8
+          ],
+          "composition_witness": {
+            "degree_bound": 6,
+            "exact_degree": 4,
+            "finite_prefix_signs": [],
+            "newton_coefficients_at_q1": [
+              "72475211635200000",
+              "106104667854240000",
+              "97877327391360000",
+              "95966875699200000",
+              "46337246208000000"
+            ],
+            "positivity_threshold_q": 1,
+            "shifted_coefficient_sign": 1,
+            "source_key": [
+              "g16",
+              2
+            ],
+            "target_key": [
+              "g16",
+              2
+            ]
+          },
+          "nonorthogonality": "certified by a nonzero two-step composition",
+          "residue_mod_60": 46
+        }
+      ]
+    },
+    "family_count": 21,
+    "period": 60
+  },
+  "phase_count": 16,
+  "phases": {
+    "1_24": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 54,
+      "endpoint_keys": [
+        [
+          "g30",
+          0
+        ],
+        [
+          "g30",
+          1
+        ]
+      ],
+      "exact_degree": 47,
+      "family": "n=84+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "module": "1",
+      "phase_mod_60": 24,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 2,
+      "residual_degree": 40,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 10
+    },
+    "1_44": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 54,
+      "endpoint_keys": [
+        [
+          "g30",
+          0
+        ],
+        [
+          "g30",
+          1
+        ]
+      ],
+      "exact_degree": 47,
+      "family": "n=104+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "module": "1",
+      "phase_mod_60": 44,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 2,
+      "residual_degree": 40,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 10
+    },
+    "2_23": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 96,
+      "endpoint_keys": [
+        [
+          "g29",
+          0
+        ],
+        [
+          "g29",
+          1
+        ],
+        [
+          "g29",
+          2
+        ]
+      ],
+      "exact_degree": 81,
+      "family": "n=83+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5,
+        -5,
+        -4,
+        -4,
+        -3,
+        -3,
+        -2
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3
+      ],
+      "module": "2",
+      "phase_mod_60": 23,
+      "positivity_threshold_q": 28,
+      "quotient_dimension": 3,
+      "residual_degree": 67,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 20
+    },
+    "2_33": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 96,
+      "endpoint_keys": [
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g19",
+          2
+        ]
+      ],
+      "exact_degree": 81,
+      "family": "n=93+60q",
+      "finite_boundary_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5,
+        -5,
+        -4,
+        -4,
+        -3,
+        -3,
+        -2
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3
+      ],
+      "module": "2",
+      "phase_mod_60": 33,
+      "positivity_threshold_q": 28,
+      "quotient_dimension": 3,
+      "residual_degree": 67,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 20
+    },
+    "2_43": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 96,
+      "endpoint_keys": [
+        [
+          "g29",
+          0
+        ],
+        [
+          "g29",
+          1
+        ],
+        [
+          "g29",
+          2
+        ]
+      ],
+      "exact_degree": 81,
+      "family": "n=103+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5,
+        -5,
+        -4,
+        -4,
+        -3,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3
+      ],
+      "module": "2",
+      "phase_mod_60": 43,
+      "positivity_threshold_q": 28,
+      "quotient_dimension": 3,
+      "residual_degree": 68,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 20
+    },
+    "2_53": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 96,
+      "endpoint_keys": [
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g19",
+          2
+        ]
+      ],
+      "exact_degree": 81,
+      "family": "n=113+60q",
+      "finite_boundary_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5,
+        -5,
+        -4,
+        -4,
+        -3,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3
+      ],
+      "module": "2",
+      "phase_mod_60": 53,
+      "positivity_threshold_q": 28,
+      "quotient_dimension": 3,
+      "residual_degree": 68,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 20
+    },
+    "3_32": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g18",
+          2
+        ],
+        [
+          "g18",
+          3
+        ]
+      ],
+      "exact_degree": 113,
+      "family": "n=92+60q",
+      "finite_boundary_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3",
+      "phase_mod_60": 32,
+      "positivity_threshold_q": 43,
+      "quotient_dimension": 4,
+      "residual_degree": 94,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    },
+    "3_34": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g28",
+          0
+        ],
+        [
+          "g28",
+          1
+        ],
+        [
+          "g28",
+          2
+        ],
+        [
+          "g28",
+          3
+        ]
+      ],
+      "exact_degree": 120,
+      "family": "n=94+60q",
+      "finite_boundary_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3",
+      "phase_mod_60": 34,
+      "positivity_threshold_q": 21,
+      "quotient_dimension": 4,
+      "residual_degree": 98,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 30
+    },
+    "3_52": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g18",
+          2
+        ],
+        [
+          "g18",
+          3
+        ]
+      ],
+      "exact_degree": 113,
+      "family": "n=112+60q",
+      "finite_boundary_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3",
+      "phase_mod_60": 52,
+      "positivity_threshold_q": 43,
+      "quotient_dimension": 4,
+      "residual_degree": 92,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    },
+    "3_54": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g28",
+          0
+        ],
+        [
+          "g28",
+          1
+        ],
+        [
+          "g28",
+          2
+        ],
+        [
+          "g28",
+          3
+        ]
+      ],
+      "exact_degree": 120,
+      "family": "n=114+60q",
+      "finite_boundary_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3",
+      "phase_mod_60": 54,
+      "positivity_threshold_q": 21,
+      "quotient_dimension": 4,
+      "residual_degree": 99,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 30
+    },
+    "3p_30": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g24",
+          1
+        ],
+        [
+          "g24",
+          2
+        ],
+        [
+          "g24",
+          3
+        ]
+      ],
+      "exact_degree": 120,
+      "family": "n=90+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "phase_mod_60": 30,
+      "positivity_threshold_q": 20,
+      "quotient_dimension": 4,
+      "residual_degree": 98,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    },
+    "3p_34": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g24",
+          1
+        ],
+        [
+          "g24",
+          2
+        ],
+        [
+          "g24",
+          3
+        ]
+      ],
+      "exact_degree": 120,
+      "family": "n=94+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "phase_mod_60": 34,
+      "positivity_threshold_q": 20,
+      "quotient_dimension": 4,
+      "residual_degree": 101,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    },
+    "3p_38": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g24",
+          1
+        ],
+        [
+          "g24",
+          2
+        ],
+        [
+          "g24",
+          3
+        ]
+      ],
+      "exact_degree": 118,
+      "family": "n=98+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "phase_mod_60": 38,
+      "positivity_threshold_q": 27,
+      "quotient_dimension": 4,
+      "residual_degree": 98,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    },
+    "3p_50": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g24",
+          1
+        ],
+        [
+          "g24",
+          2
+        ],
+        [
+          "g24",
+          3
+        ]
+      ],
+      "exact_degree": 120,
+      "family": "n=110+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "phase_mod_60": 50,
+      "positivity_threshold_q": 20,
+      "quotient_dimension": 4,
+      "residual_degree": 99,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    },
+    "3p_54": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g24",
+          1
+        ],
+        [
+          "g24",
+          2
+        ],
+        [
+          "g24",
+          3
+        ]
+      ],
+      "exact_degree": 120,
+      "family": "n=114+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "phase_mod_60": 54,
+      "positivity_threshold_q": 20,
+      "quotient_dimension": 4,
+      "residual_degree": 99,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    },
+    "3p_58": {
+      "conclusion": "the complete local boundary quotient is spanned for every integer q>=1",
+      "degree_bound": 138,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g24",
+          1
+        ],
+        [
+          "g24",
+          2
+        ],
+        [
+          "g24",
+          3
+        ]
+      ],
+      "exact_degree": 118,
+      "family": "n=118+60q",
+      "finite_boundary_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "phase_mod_60": 58,
+      "positivity_threshold_q": 27,
+      "quotient_dimension": 4,
+      "residual_degree": 99,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 30
+    }
+  },
+  "schema": "c682-global-phase-propagation-v1",
+  "trusted_boundary": "Boundary determinants are evaluated from the exact global falling-factorial Weyl operators. Polynomial identity uses the formal differential-order degree bound, exact Newton data, coefficientwise one-sign residuals, and exact finite prefixes. Peak propagation uses the previously proved lower-hyperplane and supported-two-subspace lemmas."
+}

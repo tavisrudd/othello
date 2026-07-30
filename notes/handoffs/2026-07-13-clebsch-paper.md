@@ -30,7 +30,7 @@
 | [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | ready after C691 | integrate C611/C690/C691 without importing Paper III's reveal |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; all first plateau families controlled | propagate boundary anchors and close off-peak mixing |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; all periodic phase quotients and strict peaks controlled | close off-peak path-corner mixing |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -275,10 +275,16 @@ exponents \((F,h)\) now realize the third- and ninth-transvectants on the
 complete \(2,3,3'\) free modules, eliminating phase-specific operator
 construction.  Four further all-\(q\) Wronskians give one certified
 representative of every plateau type modulo \(20\); an exact audit shows
-that sixteen modulo-\(60\) phases remain because Hilbert translation by
-degree \(20\) is not transvectant linearity.  The remaining full-corner gate
-is evaluation of those compressed phase quotients, propagation through all
-eventual peaks, and the off-peak step.
+that Hilbert translation by degree \(20\) is not transvectant linearity.
+The sixteen resulting modulo-\(60\) phase quotients are now all
+boundary-surjective for every integer \(q\ge1\).  Together with the prior
+eight rays, they anchor every periodic plateau-entry phase.  Exact
+global-Weyl two-step compositions are coefficientwise one-signed
+degree-four polynomials on all twenty-one eventual strict peak families;
+combined with the all-weight defect and supported-two-subspace theorems,
+this propagates the full graded path corner through every peak.  The
+remaining full-corner gate is the off-peak path-corner step; the
+three-local-return identification remains logically separate.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

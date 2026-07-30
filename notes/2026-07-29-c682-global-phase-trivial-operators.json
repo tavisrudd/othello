@@ -1,0 +1,1948 @@
+{
+  "1": {
+    "3": {
+      "degree_shift": 6,
+      "generator_degrees": [
+        0,
+        30
+      ],
+      "generator_names": [
+        "g0",
+        "g30"
+      ],
+      "order": 3,
+      "pair_count": 2,
+      "term_count": 17,
+      "terms": [
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 0,
+          "coefficient": "7260",
+          "dF_order": 2,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 1,
+          "coefficient": "6600",
+          "dF_order": 2,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 0,
+          "coefficient": "2640",
+          "dF_order": 3,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 0,
+          "coefficient": "-10560000",
+          "dF_order": 0,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 3,
+          "coefficient": "-17160",
+          "dF_order": 2,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 4,
+          "coefficient": "-6600",
+          "dF_order": 2,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 3,
+          "coefficient": "-2640",
+          "dF_order": 3,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 0,
+          "coefficient": "87278400",
+          "dF_order": 0,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 1,
+          "coefficient": "137808000",
+          "dF_order": 0,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 2,
+          "coefficient": "47520000",
+          "dF_order": 0,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 3,
+          "coefficient": "10560000",
+          "dF_order": 0,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 0,
+          "coefficient": "114048000",
+          "dF_order": 1,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 1,
+          "coefficient": "57024000",
+          "dF_order": 1,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 0,
+          "coefficient": "46759680",
+          "dF_order": 2,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 1,
+          "coefficient": "11404800",
+          "dF_order": 2,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 0,
+          "coefficient": "4561920",
+          "dF_order": 3,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 0,
+          "coefficient": "-18247680000",
+          "dF_order": 0,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        }
+      ],
+      "training_grid": "0..4",
+      "verification_grid": "0..5"
+    },
+    "9": {
+      "degree_shift": -6,
+      "generator_degrees": [
+        0,
+        30
+      ],
+      "generator_names": [
+        "g0",
+        "g30"
+      ],
+      "order": 9,
+      "pair_count": 2,
+      "term_count": 195,
+      "terms": [
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 3,
+          "coefficient": "-5269017600",
+          "dF_order": 8,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 4,
+          "coefficient": "-1197504000",
+          "dF_order": 8,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 3,
+          "coefficient": "-638668800",
+          "dF_order": 9,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 0,
+          "coefficient": "-63291439411200000",
+          "dF_order": 3,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 1,
+          "coefficient": "-1260075021004800000",
+          "dF_order": 3,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 2,
+          "coefficient": "-3606505552742400000",
+          "dF_order": 3,
+          "dH_order": 2,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 3,
+          "coefficient": "-3059086238208000000",
+          "dF_order": 3,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 4,
+          "coefficient": "-977738065920000000",
+          "dF_order": 3,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 5,
+          "coefficient": "-123390812160000000",
+          "dF_order": 3,
+          "dH_order": 5,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 6,
+          "coefficient": "-5109350400000000",
+          "dF_order": 3,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 0,
+          "coefficient": "-294106024396800000",
+          "dF_order": 4,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 1,
+          "coefficient": "-2373147324979200000",
+          "dF_order": 4,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 2,
+          "coefficient": "-3613114337817600000",
+          "dF_order": 4,
+          "dH_order": 2,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 3,
+          "coefficient": "-1730455550208000000",
+          "dF_order": 4,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 4,
+          "coefficient": "-296789391360000000",
+          "dF_order": 4,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 5,
+          "coefficient": "-15711252480000000",
+          "dF_order": 4,
+          "dH_order": 5,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 0,
+          "coefficient": "-357928580782080000",
+          "dF_order": 5,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 1,
+          "coefficient": "-1377511421755392000",
+          "dF_order": 5,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 2,
+          "coefficient": "-1131244666675200000",
+          "dF_order": 5,
+          "dH_order": 2,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 3,
+          "coefficient": "-283484642918400000",
+          "dF_order": 5,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 4,
+          "coefficient": "-20079747072000000",
+          "dF_order": 5,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 0,
+          "coefficient": "-166264904171520000",
+          "dF_order": 6,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 1,
+          "coefficient": "-322954987880448000",
+          "dF_order": 6,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 2,
+          "coefficient": "-134427775426560000",
+          "dF_order": 6,
+          "dH_order": 2,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 3,
+          "coefficient": "-13649629593600000",
+          "dF_order": 6,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 0,
+          "coefficient": "-33505893679104000",
+          "dF_order": 7,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 1,
+          "coefficient": "-31618704015360000",
+          "dF_order": 7,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 2,
+          "coefficient": "-5214603018240000",
+          "dF_order": 7,
+          "dH_order": 2,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 0,
+          "coefficient": "-2913555972096000",
+          "dF_order": 8,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 1,
+          "coefficient": "-1059474898944000",
+          "dF_order": 8,
+          "dH_order": 1,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 0,
+          "coefficient": "-88289574912000",
+          "dF_order": 9,
+          "dH_order": 0,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 0,
+          "coefficient": "8317518142348800000000",
+          "dF_order": 0,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 1,
+          "coefficient": "38520719116830720000000",
+          "dF_order": 0,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 2,
+          "coefficient": "46426995369216000000000",
+          "dF_order": 0,
+          "dH_order": 5,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 3,
+          "coefficient": "21153998212300800000000",
+          "dF_order": 0,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 4,
+          "coefficient": "4150069862400000000000",
+          "dF_order": 0,
+          "dH_order": 7,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 5,
+          "coefficient": "349479567360000000000",
+          "dF_order": 0,
+          "dH_order": 8,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 6,
+          "coefficient": "10218700800000000000",
+          "dF_order": 0,
+          "dH_order": 9,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 0,
+          "coefficient": "21462092041420800000000",
+          "dF_order": 1,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 1,
+          "coefficient": "57317394301009920000000",
+          "dF_order": 1,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 2,
+          "coefficient": "42567898860748800000000",
+          "dF_order": 1,
+          "dH_order": 5,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 3,
+          "coefficient": "11920564106035200000000",
+          "dF_order": 1,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 4,
+          "coefficient": "1329248600064000000000",
+          "dF_order": 1,
+          "dH_order": 7,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 5,
+          "coefficient": "49049763840000000000",
+          "dF_order": 1,
+          "dH_order": 8,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 0,
+          "coefficient": "15880468800430080000000",
+          "dF_order": 2,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 1,
+          "coefficient": "25505018825932800000000",
+          "dF_order": 2,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 2,
+          "coefficient": "11449640389017600000000",
+          "dF_order": 2,
+          "dH_order": 5,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 3,
+          "coefficient": "1800126332928000000000",
+          "dF_order": 2,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 4,
+          "coefficient": "87063330816000000000",
+          "dF_order": 2,
+          "dH_order": 7,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 0,
+          "coefficient": "4865454536785920000000",
+          "dF_order": 3,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 1,
+          "coefficient": "4624221667000320000000",
+          "dF_order": 3,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 2,
+          "coefficient": "1148426645667840000000",
+          "dF_order": 3,
+          "dH_order": 5,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 3,
+          "coefficient": "77498626867200000000",
+          "dF_order": 3,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 0,
+          "coefficient": "690976285655040000000",
+          "dF_order": 4,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 1,
+          "coefficient": "357076149534720000000",
+          "dF_order": 4,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 2,
+          "coefficient": "37578250321920000000",
+          "dF_order": 4,
+          "dH_order": 5,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 0,
+          "coefficient": "44762814480384000000",
+          "dF_order": 5,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 1,
+          "coefficient": "9667708452864000000",
+          "dF_order": 5,
+          "dH_order": 4,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 0,
+          "coefficient": "1059474898944000000",
+          "dF_order": 6,
+          "dH_order": 3,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 0,
+          "coefficient": "1242847195811020800000000",
+          "dF_order": 0,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 1,
+          "coefficient": "719228949626880000000000",
+          "dF_order": 0,
+          "dH_order": 7,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 2,
+          "coefficient": "117425134632960000000000",
+          "dF_order": 0,
+          "dH_order": 8,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 3,
+          "coefficient": "5558973235200000000000",
+          "dF_order": 0,
+          "dH_order": 9,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 0,
+          "coefficient": "436821500834611200000000",
+          "dF_order": 1,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 1,
+          "coefficient": "146737273503744000000000",
+          "dF_order": 1,
+          "dH_order": 7,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 2,
+          "coefficient": "10594748989440000000000",
+          "dF_order": 1,
+          "dH_order": 8,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 0,
+          "coefficient": "46352026828800000000000",
+          "dF_order": 2,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 1,
+          "coefficient": "6886586843136000000000",
+          "dF_order": 2,
+          "dH_order": 7,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 10,
+          "H_multiplier": 0,
+          "coefficient": "1483264858521600000000",
+          "dF_order": 3,
+          "dH_order": 6,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 12,
+          "H_multiplier": 0,
+          "coefficient": "-70631659929600000000000",
+          "dF_order": 0,
+          "dH_order": 9,
+          "source": "g0",
+          "target": "g30"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 6,
+          "coefficient": "7065273600",
+          "dF_order": 8,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 7,
+          "coefficient": "1197504000",
+          "dF_order": 8,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 6,
+          "coefficient": "638668800",
+          "dF_order": 9,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 3,
+          "coefficient": "3892569580956672000",
+          "dF_order": 3,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 4,
+          "coefficient": "17792902327495680000",
+          "dF_order": 3,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 5,
+          "coefficient": "21352609519718400000",
+          "dF_order": 3,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 6,
+          "coefficient": "9812625596928000000",
+          "dF_order": 3,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 7,
+          "coefficient": "1960649349120000000",
+          "dF_order": 3,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 8,
+          "coefficient": "169374965760000000",
+          "dF_order": 3,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 0,
+          "H_multiplier": 9,
+          "coefficient": "5109350400000000",
+          "dF_order": 3,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 3,
+          "coefficient": "6026044738323456000",
+          "dF_order": 4,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 4,
+          "coefficient": "16696328131929600000",
+          "dF_order": 4,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 5,
+          "coefficient": "12676799378073600000",
+          "dF_order": 4,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 6,
+          "coefficient": "3629026291968000000",
+          "dF_order": 4,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 7,
+          "coefficient": "414623784960000000",
+          "dF_order": 4,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 1,
+          "H_multiplier": 8,
+          "coefficient": "15711252480000000",
+          "dF_order": 4,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 3,
+          "coefficient": "3159192399390720000",
+          "dF_order": 5,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 4,
+          "coefficient": "5375489845727232000",
+          "dF_order": 5,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 5,
+          "coefficient": "2497284421632000000",
+          "dF_order": 5,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 6,
+          "coefficient": "403963125350400000",
+          "dF_order": 5,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 7,
+          "coefficient": "20079747072000000",
+          "dF_order": 5,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 3,
+          "coefficient": "741938223882240000",
+          "dF_order": 6,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 4,
+          "coefficient": "756370580410368000",
+          "dF_order": 6,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 5,
+          "coefficient": "195851108597760000",
+          "dF_order": 6,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 6,
+          "coefficient": "13649629593600000",
+          "dF_order": 6,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 3,
+          "coefficient": "84327580237824000",
+          "dF_order": 7,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 4,
+          "coefficient": "47221127331840000",
+          "dF_order": 7,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 5,
+          "coefficient": "5214603018240000",
+          "dF_order": 7,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 3,
+          "coefficient": "4468832015155200",
+          "dF_order": 8,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 4,
+          "coefficient": "1057405612032000",
+          "dF_order": 8,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 3,
+          "coefficient": "87185955225600",
+          "dF_order": 9,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 0,
+          "coefficient": "-306821654518579200000",
+          "dF_order": 0,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 1,
+          "coefficient": "-24833803803784335360000",
+          "dF_order": 0,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 2,
+          "coefficient": "-219157927630177536000000",
+          "dF_order": 0,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 3,
+          "coefficient": "-584980886509189632000000",
+          "dF_order": 0,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 4,
+          "coefficient": "-620432510927201280000000",
+          "dF_order": 0,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 5,
+          "coefficient": "-301203462954240000000000",
+          "dF_order": 0,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 6,
+          "coefficient": "-72011782331596800000000",
+          "dF_order": 0,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 7,
+          "coefficient": "-8619729592320000000000",
+          "dF_order": 0,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 8,
+          "coefficient": "-487432028160000000000",
+          "dF_order": 0,
+          "dH_order": 8,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 2,
+          "H_multiplier": 9,
+          "coefficient": "-10218700800000000000",
+          "dF_order": 0,
+          "dH_order": 9,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 0,
+          "coefficient": "-6286879457200742400000",
+          "dF_order": 1,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 1,
+          "coefficient": "-140474166780224471040000",
+          "dF_order": 1,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 2,
+          "coefficient": "-568185341898321100800000",
+          "dF_order": 1,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 3,
+          "coefficient": "-847077490774867968000000",
+          "dF_order": 1,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 4,
+          "coefficient": "-560295837078405120000000",
+          "dF_order": 1,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 5,
+          "coefficient": "-177029242719436800000000",
+          "dF_order": 1,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 6,
+          "coefficient": "-27172588172083200000000",
+          "dF_order": 1,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 7,
+          "coefficient": "-1917845766144000000000",
+          "dF_order": 1,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 3,
+          "H_multiplier": 8,
+          "coefficient": "-49049763840000000000",
+          "dF_order": 1,
+          "dH_order": 8,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 0,
+          "coefficient": "-26215790011353169920000",
+          "dF_order": 2,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 1,
+          "coefficient": "-235879105751035084800000",
+          "dF_order": 2,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 2,
+          "coefficient": "-488157865814229811200000",
+          "dF_order": 2,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 3,
+          "coefficient": "-410801300843028480000000",
+          "dF_order": 2,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 4,
+          "coefficient": "-163852046655897600000000",
+          "dF_order": 2,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 5,
+          "coefficient": "-31654157797785600000000",
+          "dF_order": 2,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 6,
+          "coefficient": "-2780508487680000000000",
+          "dF_order": 2,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 4,
+          "H_multiplier": 7,
+          "coefficient": "-87063330816000000000",
+          "dF_order": 2,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 0,
+          "coefficient": "-40802453659972730880000",
+          "dF_order": 3,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 1,
+          "coefficient": "-184326060965705809920000",
+          "dF_order": 3,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 2,
+          "coefficient": "-213005668711101235200000",
+          "dF_order": 3,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 3,
+          "coefficient": "-101165811128008704000000",
+          "dF_order": 3,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 4,
+          "coefficient": "-22658912410337280000000",
+          "dF_order": 3,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 5,
+          "coefficient": "-2330624053739520000000",
+          "dF_order": 3,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 5,
+          "H_multiplier": 6,
+          "coefficient": "-86327584358400000000",
+          "dF_order": 3,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 0,
+          "coefficient": "-28708116393953525760000",
+          "dF_order": 4,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 1,
+          "coefficient": "-73980918883978444800000",
+          "dF_order": 4,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 2,
+          "coefficient": "-50932783262166220800000",
+          "dF_order": 4,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 3,
+          "coefficient": "-13775267804626944000000",
+          "dF_order": 4,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 4,
+          "coefficient": "-1585487631974400000000",
+          "dF_order": 4,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 6,
+          "H_multiplier": 5,
+          "coefficient": "-64727294607360000000",
+          "dF_order": 4,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 0,
+          "coefficient": "-10084794916104437760000",
+          "dF_order": 5,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 1,
+          "coefficient": "-15622086111129501696000",
+          "dF_order": 5,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 2,
+          "coefficient": "-6452698763427840000000",
+          "dF_order": 5,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 3,
+          "coefficient": "-946428927226675200000",
+          "dF_order": 5,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 4,
+          "coefficient": "-44365511393280000000",
+          "dF_order": 5,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 0,
+          "coefficient": "-1856366890246471680000",
+          "dF_order": 6,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 1,
+          "coefficient": "-1715982228236795904000",
+          "dF_order": 6,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 2,
+          "coefficient": "-394748428253921280000",
+          "dF_order": 6,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 3,
+          "coefficient": "-24646034836684800000",
+          "dF_order": 6,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 0,
+          "coefficient": "-179186870708600832000",
+          "dF_order": 7,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 1,
+          "coefficient": "-91252573046046720000",
+          "dF_order": 7,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 2,
+          "coefficient": "-9010834015518720000",
+          "dF_order": 7,
+          "dH_order": 2,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 10,
+          "H_multiplier": 0,
+          "coefficient": "-8467323392360448000",
+          "dF_order": 8,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 10,
+          "H_multiplier": 1,
+          "coefficient": "-1830772625375232000",
+          "dF_order": 8,
+          "dH_order": 1,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 11,
+          "H_multiplier": 0,
+          "coefficient": "-152564385447936000",
+          "dF_order": 9,
+          "dH_order": 0,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 0,
+          "coefficient": "195172181273164677120000000",
+          "dF_order": 0,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 1,
+          "coefficient": "428602282956484116480000000",
+          "dF_order": 0,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 2,
+          "coefficient": "296448733086105600000000000",
+          "dF_order": 0,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 3,
+          "coefficient": "85136044932307353600000000",
+          "dF_order": 0,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 4,
+          "coefficient": "11027257544540160000000000",
+          "dF_order": 0,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 5,
+          "coefficient": "623324398878720000000000",
+          "dF_order": 0,
+          "dH_order": 8,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 7,
+          "H_multiplier": 6,
+          "coefficient": "12098941747200000000000",
+          "dF_order": 0,
+          "dH_order": 9,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 0,
+          "coefficient": "262846278533625937920000000",
+          "dF_order": 1,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 1,
+          "coefficient": "391080263933739663360000000",
+          "dF_order": 1,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 2,
+          "coefficient": "184243585480025702400000000",
+          "dF_order": 1,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 3,
+          "coefficient": "35124612403455590400000000",
+          "dF_order": 1,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 4,
+          "coefficient": "2775294497783808000000000",
+          "dF_order": 1,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 8,
+          "H_multiplier": 5,
+          "coefficient": "74163242926080000000000",
+          "dF_order": 1,
+          "dH_order": 8,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 0,
+          "coefficient": "116673816395883479040000000",
+          "dF_order": 2,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 1,
+          "coefficient": "115890608847244492800000000",
+          "dF_order": 2,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 2,
+          "coefficient": "35378727457967308800000000",
+          "dF_order": 2,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 3,
+          "coefficient": "3996339318816768000000000",
+          "dF_order": 2,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 9,
+          "H_multiplier": 4,
+          "coefficient": "143558848806912000000000",
+          "dF_order": 2,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 10,
+          "H_multiplier": 0,
+          "coefficient": "23227864115954319360000000",
+          "dF_order": 3,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 10,
+          "H_multiplier": 1,
+          "coefficient": "14720651493648629760000000",
+          "dF_order": 3,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 10,
+          "H_multiplier": 2,
+          "coefficient": "2620484025550110720000000",
+          "dF_order": 3,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 10,
+          "H_multiplier": 3,
+          "coefficient": "132434362368000000000000",
+          "dF_order": 3,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 11,
+          "H_multiplier": 0,
+          "coefficient": "2263864774565560320000000",
+          "dF_order": 4,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 11,
+          "H_multiplier": 1,
+          "coefficient": "825850088977858560000000",
+          "dF_order": 4,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 11,
+          "H_multiplier": 2,
+          "coefficient": "64935216556277760000000",
+          "dF_order": 4,
+          "dH_order": 5,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 12,
+          "H_multiplier": 0,
+          "coefficient": "104811732802732032000000",
+          "dF_order": 5,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 12,
+          "H_multiplier": 1,
+          "coefficient": "16705800206548992000000",
+          "dF_order": 5,
+          "dH_order": 4,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 13,
+          "H_multiplier": 0,
+          "coefficient": "1830772625375232000000",
+          "dF_order": 6,
+          "dH_order": 3,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 12,
+          "H_multiplier": 0,
+          "coefficient": "4357674928261457510400000000",
+          "dF_order": 0,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 12,
+          "H_multiplier": 1,
+          "coefficient": "1928985948507340800000000000",
+          "dF_order": 0,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 12,
+          "H_multiplier": 2,
+          "coefficient": "249633475689185280000000000",
+          "dF_order": 0,
+          "dH_order": 8,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 12,
+          "H_multiplier": 3,
+          "coefficient": "9676537410355200000000000",
+          "dF_order": 0,
+          "dH_order": 9,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 13,
+          "H_multiplier": 0,
+          "coefficient": "1184143734092700057600000000",
+          "dF_order": 1,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 13,
+          "H_multiplier": 1,
+          "coefficient": "313062118939164672000000000",
+          "dF_order": 1,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 13,
+          "H_multiplier": 2,
+          "coefficient": "18307726253752320000000000",
+          "dF_order": 1,
+          "dH_order": 8,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 14,
+          "H_multiplier": 0,
+          "coefficient": "99319414926606336000000000",
+          "dF_order": 2,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 14,
+          "H_multiplier": 1,
+          "coefficient": "11900022064939008000000000",
+          "dF_order": 2,
+          "dH_order": 7,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 15,
+          "H_multiplier": 0,
+          "coefficient": "2563081675525324800000000",
+          "dF_order": 3,
+          "dH_order": 6,
+          "source": "g30",
+          "target": "g0"
+        },
+        {
+          "F_multiplier": 17,
+          "H_multiplier": 0,
+          "coefficient": "-122051508358348800000000000",
+          "dF_order": 0,
+          "dH_order": 9,
+          "source": "g30",
+          "target": "g0"
+        }
+      ],
+      "training_grid": "0..10",
+      "verification_grid": "0..11"
+    }
+  }
+}

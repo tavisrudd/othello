@@ -124,6 +124,16 @@ explicitly separated.
   plateau-entry type modulo \(20\) has one certified representative.
   Degree-\(20\) Hilbert translation is not transvectant linearity; the
   exact uncaptured modulo-\(60\) phase count is sixteen.
+- All sixteen formerly uncaptured modulo-\(60\) phase quotients are now
+  boundary-surjective for every integer \(q\ge1\).  Their exact determinant
+  degrees are \(47,81,113,118,120\), depending on module and phase.  The
+  resulting anchors propagate through all twenty-one eventual strict peak
+  families in the full graded path corner: the all-weight defect theorem
+  supplies spanning lower/upper images, while explicit global-Weyl
+  two-step compositions certify nonorthogonality.  Every peak witness is
+  a coefficientwise one-signed degree-four polynomial from \(q=1\).
+  The off-peak path-corner step and the separate three-local-return
+  identification remain open.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -152,14 +162,15 @@ explicitly separated.
 ## Active order
 
 The later McKay-corner classification is active.  The all-weight
-two-sided-defect gate and every first periodic plateau-entry family in the
-\(1,2,3,3'\) modules are closed.  The trivial family has its scalar
-signed/Hermite pencil; the \(2,3,3'\) families have signed block Wronskians
-and all-\(q\) boundary-quotient surjectivity.  Their global \((F,h)\)-Weyl
-operators now cover every periodic phase.  Bare multiplicity induction is
-retired.  The next gate is to evaluate the compressed boundary quotients in
-the sixteen uncaptured phases, propagate them through every eventual peak
-family, and prove the remaining off-peak full-corner step.
+two-sided-defect gate, every modulo-\(60\) plateau-entry phase, and all
+twenty-one eventual strict peak families in the full graded path corner
+are closed.  The trivial family has its scalar signed/Hermite pencil; the
+\(2,3,3'\) families have signed block Wronskians and all-\(q\)
+boundary-quotient surjectivity.  Their global \((F,h)\)-Weyl operators
+cover every periodic phase.  Bare multiplicity induction is retired.  The
+next gate is the off-peak full graded path-corner step; identifying that
+path corner with the algebra of the three local returns remains logically
+separate.
 C682 remains open.
 
 ## Parked branches
@@ -175,4 +186,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-signed-block-wronskian.md`.
+`notes/2026-07-29-c682-global-phase-propagation.md`.

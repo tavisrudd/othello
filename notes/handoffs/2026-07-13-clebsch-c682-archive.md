@@ -1080,3 +1080,18 @@ invalid shortcut: multiplication by the degree-\(20\) invariant does not
 intertwine the transvectant, leaving exactly sixteen modulo-\(60\) rays for
 the global Weyl Schur-complement pass.  The proof is
 `notes/2026-07-29-c682-remaining-plateau-wronskians.md`.
+
+The global phase pass is complete.  Exact denominator-cleared quotient
+connections prove boundary surjectivity for every integer \(q\ge1\) on
+all sixteen remaining modulo-\(60\) rays.  Their quotient dimensions are
+\(2,3,4,4\), and their exact determinant degrees are
+\(47,81,113,118,120\).  The twenty-one eventual strict peak families also
+have explicit global-Weyl two-step composition witnesses: every witness is
+a distinct degree-four polynomial whose coefficients have one sign after
+the shift \(q=1+s\).  With the all-weight two-sided-defect and
+supported-two-subspace theorems, these witnesses propagate the full graded
+path corner through every strict peak.  The exact certificate, independent
+two-prime replay, `ej`/`tt` closeout, and Mystery ledger are in
+`notes/2026-07-29-c682-global-phase-propagation.md`.  The off-peak
+path-corner step remains open, as does the logically separate
+three-local-return identification.
