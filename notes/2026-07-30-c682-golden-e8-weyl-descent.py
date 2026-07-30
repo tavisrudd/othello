@@ -214,6 +214,16 @@ def integer_matrix_multiply(
     ]
 
 
+def concatenation_sign(left: tuple[int, ...], right: tuple[int, ...]) -> int:
+    values = left + right
+    inversions = sum(
+        values[i] > values[j]
+        for i in range(len(values))
+        for j in range(i + 1, len(values))
+    )
+    return -1 if inversions % 2 else 1
+
+
 def subtract_identity_mod_two_rank(matrix: list[list[int]]) -> int:
     shifted = [
         [
@@ -391,6 +401,54 @@ def build_certificate() -> dict[str, object]:
             }
         )
 
+    triples = list(itertools.combinations(range(6), 3))
+    triple_index = {triple: index for index, triple in enumerate(triples)}
+    exterior_cube = [
+        [
+            determinant_integer(
+                [
+                    [conference[row][column] for column in source]
+                    for row in target
+                ]
+            )
+            for source in triples
+        ]
+        for target in triples
+    ]
+    hodge_star = [[0] * len(triples) for _ in triples]
+    for source in triples:
+        complement = tuple(index for index in range(6) if index not in source)
+        hodge_star[triple_index[complement]][triple_index[source]] = (
+            concatenation_sign(source, complement)
+        )
+    middle_operator = integer_matrix_multiply(hodge_star, exterior_cube)
+    middle_square = integer_matrix_multiply(middle_operator, middle_operator)
+    if middle_square != [
+        [125 * int(row == column) for column in range(20)]
+        for row in range(20)
+    ]:
+        raise AssertionError("middle exterior golden square failed")
+    middle_diagonal = [
+        middle_operator[index][index]
+        for index in range(20)
+    ]
+    cubic_signs = [
+        (
+            conference[triple[0]][triple[1]]
+            * conference[triple[1]][triple[2]]
+            * conference[triple[2]][triple[0]]
+        )
+        for triple in triples
+    ]
+    if middle_diagonal != [4 * sign for sign in cubic_signs]:
+        raise AssertionError("middle exterior diagonal/cubic identity failed")
+    nonzero_middle_entries = [
+        abs(entry)
+        for row in middle_operator
+        for entry in row
+        if entry
+    ]
+
     return {
         "schema": "c682-golden-e8-weyl-descent-v1",
         "inputs": {
@@ -483,6 +541,33 @@ def build_certificate() -> dict[str, object]:
                     "C_Clebsch(x)=-(1/4)*sum_S det(P_S)*prod_{i in S}x_i"
                 ),
             },
+            "middle_exterior_operator": {
+                "definition": "K=Hodge_star composed with exterior_cube(C)",
+                "dimension": 20,
+                "square": "K^2=125*I",
+                "eigenvalues": ["+5*sqrt(5)", "-5*sqrt(5)"],
+                "eigenvalue_multiplicities": [10, 10],
+                "trace": sum(middle_diagonal),
+                "nonzero_absolute_entry_values": sorted(
+                    set(nonzero_middle_entries)
+                ),
+                "primitive_integral": (
+                    min(nonzero_middle_entries) == 1
+                ),
+                "diagonal_identity": (
+                    "K_SS=4*C_ij*C_jk*C_ki for S={i,j,k}"
+                ),
+                "diagonal": middle_diagonal,
+                "cubic_recovery": (
+                    "C_Clebsch(x)=(1/4)*sum_S K_SS*prod_{i in S}x_i"
+                ),
+                "conceptual_square_proof": (
+                    "C/sqrt(5) is orientation-reversing orthogonal, so "
+                    "Hodge_star anticommutes with exterior_cube(C); together "
+                    "with Hodge_star^2=-I and exterior_cube(C)^2=125*I "
+                    "this gives K^2=125*I"
+                ),
+            },
         },
         "conclusion": {
             "all_degree_upgrade": (
@@ -504,6 +589,11 @@ def build_certificate() -> dict[str, object]:
                 "The Clebsch cubic is the normalized determinant tensor of "
                 "the three-seed Krylov lattices for the descended golden "
                 "E8 operator."
+            ),
+            "middle_exterior_upgrade": (
+                "The cubic coefficients are the diagonal of the primitive "
+                "integral operator Hodge_star*exterior_cube(C), whose square "
+                "is 125*I."
             ),
         },
     }

@@ -284,7 +284,15 @@ explicitly separated.
   Hence all twenty triples have index four, while their determinant signs
   are exactly the Clebsch cubic coefficients.  The orientation cubic is
   the normalized determinant tensor of the descended golden \(E_8\)
-  operator.
+  operator.  All twenty coefficients assemble into the primitive integral
+  middle-exterior operator
+  \[
+  K=*\Lambda^3C,\qquad K^2=125I_{20},
+  \]
+  whose diagonal is \(4\) times the cubic sign tensor.  Its two eigenvalues
+  \(\pm5\sqrt5\) each have multiplicity ten, so the orientation split is
+  the trace-zero balance of one canonical golden operator on the support
+  space.
 
 ## Active order
 

@@ -263,6 +263,7 @@
     "all_degree_upgrade": "The paired natural-2/natural-2p E8 towers have an explicit rational all-degree third-transvectant Weyl presentation commuting with multiplication by sqrt(5).",
     "comparison_quotient": "(Z/2)^2",
     "degree_ten_specialization": "On the first balanced 3+3p slice, the universal companion operator becomes the Clebsch conference matrix.",
+    "middle_exterior_upgrade": "The cubic coefficients are the diagonal of the primitive integral operator Hodge_star*exterior_cube(C), whose square is 125*I.",
     "orientation_upgrade": "The Clebsch cubic is the normalized determinant tensor of the three-seed Krylov lattices for the descended golden E8 operator.",
     "prime_two_meaning": "The comparison has index 4 and becomes invertible after inverting 2; its mod-2 rank mismatch is the integral conductor obstruction."
   },
@@ -631,6 +632,52 @@
     "induced_C_on_cokernel": "I_2",
     "integral_obstruction": "different mod-2 Jordan ranks forbid GL(6,Z) conjugacy",
     "lattice_quotient": "(Z/2)^2",
+    "middle_exterior_operator": {
+      "conceptual_square_proof": "C/sqrt(5) is orientation-reversing orthogonal, so Hodge_star anticommutes with exterior_cube(C); together with Hodge_star^2=-I and exterior_cube(C)^2=125*I this gives K^2=125*I",
+      "cubic_recovery": "C_Clebsch(x)=(1/4)*sum_S K_SS*prod_{i in S}x_i",
+      "definition": "K=Hodge_star composed with exterior_cube(C)",
+      "diagonal": [
+        -4,
+        -4,
+        4,
+        4,
+        4,
+        -4,
+        4,
+        4,
+        -4,
+        -4,
+        4,
+        4,
+        -4,
+        -4,
+        4,
+        -4,
+        -4,
+        -4,
+        4,
+        4
+      ],
+      "diagonal_identity": "K_SS=4*C_ij*C_jk*C_ki for S={i,j,k}",
+      "dimension": 20,
+      "eigenvalue_multiplicities": [
+        10,
+        10
+      ],
+      "eigenvalues": [
+        "+5*sqrt(5)",
+        "-5*sqrt(5)"
+      ],
+      "nonzero_absolute_entry_values": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "primitive_integral": true,
+      "square": "K^2=125*I",
+      "trace": 0
+    },
     "over_Z_invertible_conjugacy": false,
     "over_Z_one_half_conjugacy": true,
     "prime_five_boundary": "C and J both have rank 3 and square zero mod 5, while P remains invertible; prime 5 is ramification of the golden algebra, not a comparison-lattice defect",

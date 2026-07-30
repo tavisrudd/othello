@@ -106,6 +106,15 @@ def determinant(matrix):
     return answer
 
 
+def concatenation_sign(left, right):
+    values = left + right
+    return (-1) ** sum(
+        values[i] > values[j]
+        for i in range(len(values))
+        for j in range(i + 1, len(values))
+    )
+
+
 def main() -> None:
     certificate = json.loads(CERTIFICATE.read_text(encoding="utf-8"))
     base = load_base()
@@ -175,6 +184,44 @@ def main() -> None:
         determinant_signs.append(triple_determinant)
     if determinant_signs.count(4) != 10 or determinant_signs.count(-4) != 10:
         raise AssertionError("replay determinant orientation split failed")
+
+    triples = list(itertools.combinations(range(6), 3))
+    triple_index = {triple: index for index, triple in enumerate(triples)}
+    exterior_cube = [
+        [
+            determinant(
+                [
+                    [conference[row][column] for column in source]
+                    for row in target
+                ]
+            )
+            for source in triples
+        ]
+        for target in triples
+    ]
+    hodge_star = [[0] * 20 for _ in range(20)]
+    for source in triples:
+        complement = tuple(index for index in range(6) if index not in source)
+        hodge_star[triple_index[complement]][triple_index[source]] = (
+            concatenation_sign(source, complement)
+        )
+    middle = multiply(hodge_star, exterior_cube)
+    if multiply(middle, middle) != [
+        [125 * int(row == column) for column in range(20)]
+        for row in range(20)
+    ]:
+        raise AssertionError("replay middle exterior square failed")
+    middle_diagonal = [middle[index][index] for index in range(20)]
+    cubic_signs = [
+        (
+            conference[triple[0]][triple[1]]
+            * conference[triple[1]][triple[2]]
+            * conference[triple[2]][triple[0]]
+        )
+        for triple in triples
+    ]
+    if middle_diagonal != [4 * sign for sign in cubic_signs]:
+        raise AssertionError("replay middle exterior diagonal failed")
     shifted_conference = [
         [entry - int(row == column) for column, entry in enumerate(values)]
         for row, values in enumerate(conference)
@@ -192,7 +239,8 @@ def main() -> None:
         "PASS: independent degrees 0,10,22,60 satisfy golden Weyl "
         "intertwining; CP=PJ with determinant 4 and quotient (Z/2)^2; "
         "mod-2 Jordan ranks are 1 and 3; C acts trivially on the quotient; "
-        "all 20 Krylov determinants recover the cubic signs"
+        "all 20 Krylov determinants recover the cubic signs; "
+        "the middle exterior operator squares to 125"
     )
 
 

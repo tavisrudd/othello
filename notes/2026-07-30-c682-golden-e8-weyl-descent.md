@@ -207,6 +207,45 @@ the all-degree descended \(E_8\) golden operator.  Changing the ambient
 orientation changes every determinant sign simultaneously, exactly as
 required for the cubic orientation torsor.
 
+## A middle-exterior golden operator
+
+There is a canonical \(20\)-dimensional package containing all twenty
+coefficients simultaneously.  On
+\(\Lambda^3\mathbf Q^6\), use the standard orientation and Hodge operator
+\(*\), and define
+\[
+K=*\circ\Lambda^3C.
+\]
+Then
+\[
+\boxed{\quad K^2=125I_{20}.\quad}
+\]
+Indeed, \(C/\sqrt5\) is orientation-reversing orthogonal.  Hence \(*\)
+anticommutes with \(\Lambda^3C\); together with
+\(*^2=-I\) and \((\Lambda^3C)^2=125I\), this gives the displayed square.
+Thus \(K\) has eigenvalues \(+5\sqrt5\) and \(-5\sqrt5\), each with
+multiplicity ten.
+
+The operator is primitive integral: its nonzero entries have absolute
+values \(1,2,3,4\).  In the coordinate basis indexed by triples,
+\[
+\boxed{
+K_{SS}=4\,C_{ij}C_{jk}C_{ki}
+\qquad(S=\{i,j,k\}).
+}
+\]
+Consequently
+\[
+\boxed{
+C_{\rm Cl}(x)
+=\frac14\sum_{|S|=3}K_{SS}\prod_{i\in S}x_i.
+}
+\]
+The Clebsch cubic is therefore the diagonal symbol of a canonical primitive
+integral golden operator on the twenty-dimensional support space.  The
+ten-plus/ten-minus orientation split is its trace-zero spectral balance,
+not an isolated enumeration of triangle signs.
+
 ## Interpretation
 
 The complete bridge is now
@@ -251,6 +290,10 @@ descended golden operator is visible as the six-axis conference matrix.
   Every one of the twenty triples gives index \(4\), and its determinant
   sign is minus the corresponding Clebsch triangle sign.  The complete
   cubic is recovered by the normalized Krylov-determinant formula.
+- **Do the twenty determinant coefficients form one operator-level
+  object?** Settled.  They are the diagonal entries of
+  \(K=*\Lambda^3C\), a primitive integral operator satisfying
+  \(K^2=125I\) with two ten-dimensional golden eigenspaces.
 - **Are the local Gram returns a standard preprojective/spherical
   affine-\(E_8\) corner presentation?** Still open and independent of the
   golden descent.  The present result supplies the missing Galois/Weyl
