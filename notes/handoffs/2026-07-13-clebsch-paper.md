@@ -27,7 +27,7 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on bounded cold-read revision, then external publication authority | correct the rational module sentence, trust boundary, closest literature, and opening hierarchy; rerun gates |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; every graded path corner propagates | identify the path corner with the algebra of the three local returns |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay-corner classification complete | user decision: close exploration or select a parked branch |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -278,8 +278,7 @@ degree-four polynomials on all twenty-one eventual strict peak families;
   triangular \(d_1/d_{11}\) chain minors prove the exact kernel series.
   Consequently all off-peak full graded path corners in \(1,2,3,3'\) now
   propagate.  The subsequent monotone analysis closes all sixty-three
-  modulo-\(60\) plateau entrances in \(2',4,4_s,5,6\); the
-  three-local-return identification remains logically separate.
+  modulo-\(60\) plateau entrances in \(2',4,4_s,5,6\).
 The four exceptional modulo-\(20\) block Schur recurrences are now explicit.
 The global level \(\lfloor b/3\rfloor\) makes all twelve phases block
 tridiagonal, their backward blocks factor only at
@@ -292,9 +291,14 @@ show that \(D_n^\dagger D_n\) never preserves the incoming hyperplane in
 \(4_6,4_{s,3},5_4,6_5\).  Their rational obstructions are strictly negative
 on the full real ray \(r\ge6\), and the canonical Fischer endpoint has
 positive Schur contraction.  Hence all sixty-three monotone entrance phases
-and every graded path corner now propagate.  The only remaining
-McKay-corner gate is the logically separate identification with the algebra
-of the three local returns.
+and every graded path corner now propagate.  The local-return gate is also
+closed, in a stronger form: the nearest lower and upper Gram returns already
+generate every McKay block corner except the exact
+\((\mathbf3,22)\) failure.  The two-step upward return is redundant.  The
+signed Wronskian and complete boundary quotients give the cyclic-kernel
+proof, while the rectangular endpoint system separates distinct blocks.
+Thus the requested three-return algebra is the full graded path corner in
+every nonexceptional degree.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

@@ -1,0 +1,78 @@
+{
+  "blocks": {
+    "1": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 46
+    },
+    "2": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 68
+    },
+    "2p": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 68
+    },
+    "3": {
+      "failures": [
+        {
+          "common_commutant_dimension": 2,
+          "degree": 22,
+          "multiplicity": 2
+        }
+      ],
+      "tested_multiplicity_gt_one_degrees": 76
+    },
+    "3p": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 76
+    },
+    "4": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 80
+    },
+    "4s": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 79
+    },
+    "5": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 82
+    },
+    "6": {
+      "failures": [],
+      "tested_multiplicity_gt_one_degrees": 83
+    }
+  },
+  "classification": {
+    "all_other_tested_blocks": "scalar common commutant",
+    "claim_boundary": "Finite corroboration only. The all-weight theorem uses the block-Jacobi/Wronskian proof in the report.",
+    "unique_failure": {
+      "common_commutant_dimension": 2,
+      "degree": 22,
+      "module": "3",
+      "multiplicity": 2
+    }
+  },
+  "criterion": "The common commutant of the two self-adjoint Gram returns is scalar on each multiplicity block.",
+  "degree_domain": "0..180",
+  "field": "F_1000000007",
+  "inputs": {
+    "2026-07-29-c682-global-phase-trivial-operators.json": {
+      "bytes": 49556,
+      "sha256": "44195e5e1d66a1a84ad3e092f59173d5fdced4fefa29233df62e648889a6012c"
+    },
+    "2026-07-29-c682-global-weyl-operators.json": {
+      "bytes": 986894,
+      "sha256": "41605b911180716539888c85a78b48746008335d386787489e54fdad6e8f2b3e"
+    },
+    "2026-07-29-c682-monotone-weyl-operators.json": {
+      "bytes": 3695023,
+      "sha256": "070a85a9a9b98db69b0baf00ebcfc4d6a865715b8ab983ff3cd45342910b7e83"
+    }
+  },
+  "operators": {
+    "lower": "D_(n-6) D_(n-6)^dagger",
+    "upper": "D_n^dagger D_n"
+  },
+  "schema": "c682-local-return-algebra-v1"
+}

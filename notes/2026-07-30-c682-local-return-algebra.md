@@ -1,0 +1,188 @@
+# C682 local-return algebra and the full graded path corner
+
+Date: 2026-07-30
+
+## Theorem
+
+Let
+\[
+ D_{\rho,n}:M_{\rho,n}\longrightarrow M_{\rho,n+6}
+\]
+be the third-transvectant map on a binary-icosahedral McKay multiplicity
+space, with Fischer adjoint \(D_{\rho,n}^{\dagger}\).  Put
+\[
+ S_{\rho,n}
+ =D_{\rho,n-6}D_{\rho,n-6}^{\dagger},
+ \qquad
+ T_{\rho,n}
+ =D_{\rho,n}^{\dagger}D_{\rho,n}.
+\]
+Then
+\[
+ \boxed{\quad
+ \operatorname{Alg}_{\mathbf Q}\langle S_{\rho,n},T_{\rho,n}\rangle
+ =\operatorname{End}_{\mathbf Q}(M_{\rho,n})
+ \quad}
+\]
+for every \((\rho,n)\ne(\mathbf3,22)\).  At
+\((\mathbf3,22)\), the lower space is zero and the upper space is
+one-dimensional.  Thus \(S_{\mathbf3,22}=0\), \(T_{\mathbf3,22}\) has
+rank one on a two-dimensional space, and the generated algebra has
+dimension \(2<4\).
+
+The rectangular version of the same argument excludes intertwiners between
+distinct McKay blocks.  Consequently, after taking all blocks in degree
+\(n\), the algebra of the two nearest returns is the complete graded path
+corner, except for the known degree-\(22\) defect.  In particular the
+requested three-return statement follows:
+\[
+\boxed{\quad
+\operatorname{Alg}\left\langle
+D_{n-6}D_{n-6}^{\dagger},\
+D_n^{\dagger}D_n,\
+(D_{n+6}D_n)^{\dagger}(D_{n+6}D_n)
+\right\rangle
+=\mathcal P_n
+\quad}
+\]
+for every \(n\ne22\), where \(\mathcal P_n\) is the full graded path
+corner.  The two-step upward return is redundant.
+
+## The block-Jacobi cyclic-kernel lemma
+
+The proof is a reinterpretation of the already certified transfer package,
+not an extrapolation from a finite generated-algebra sweep.
+
+The finite-dimensional input is elementary.  If \(S,T\) are self-adjoint,
+\(\ker S\) is a line, and that line is cyclic for
+\(\operatorname{Alg}\langle S,T\rangle\), then \(S,T\) have no proper
+common reducing subspace: a reducing subspace and its orthogonal complement
+split \(\ker S\), so one contains the line, and cyclicity makes that
+subspace the whole space.  The block version replaces the line by the
+endpoint quotient and requires the boundary connection to have full rank.
+The same proof, with a rectangular boundary connection, excludes an
+intertwiner between two distinct pencils.  Self-adjoint Burnside then gives
+the full matrix algebra.
+
+Order each Kostant free module by the global coefficient level used in the
+plateau certificates.  Alternating \(S\) and \(T\) from the boundary kernel
+gives the block three-term transfer system associated with the third- and
+ninth-transvectant pair.  Its Green form is the signed block Wronskian.  The
+backward blocks are invertible at every integral interior level: their only
+nonboundary zeros are the virtual levels \(0,\pm1/3,\pm2/3\).  Therefore
+the cyclic span is controlled exactly by the endpoint connection.
+
+The complete boundary-return determinants say that this endpoint connection
+has full rank.  Hence the boundary kernel is cyclic.  In the rectangular
+system the primitive-degree, central-parity, and \(C_5\)-weight labels do
+not match unless \(\rho=\sigma\); the exact Kostant endpoint audit therefore
+leaves no cross-block intertwiner.  Thus the common commutant of
+\(S_{\rho,n},T_{\rho,n}\) is scalar, and distinct block pencils are not
+equivalent.
+
+Four monotone types initially left one raw endpoint direction:
+\[
+4_6,\qquad4_{s,3},\qquad5_4,\qquad6_5.
+\]
+For them, the scalar boundary obstruction
+\(\Omega_\rho(r)\) is precisely the missing homogeneous-commutant pivot.
+Its numerator is coefficientwise negative after \(r=6+s\), while its
+denominator is positive on \(r\ge6\).  Therefore the extra endpoint class
+does not exist.  The exact finite prefixes cover every shorter chain.
+
+At strict peaks, the two neighboring boundary systems meet in the current
+space.  The all-weight two-sided-defect theorem gives \(L+U=M\), and the
+twenty-one coefficientwise one-signed two-step witnesses give
+\(L\not\perp U\).  The Green form therefore identifies the two scalar
+classes; no second commutant scalar survives.  Degree \(22\) is the unique
+exception because its lower \(\mathbf3\)-space is zero, so there is no
+second boundary class to glue.
+
+Since \(S_{\rho,n}\) and \(T_{\rho,n}\) are Fischer-self-adjoint, their
+rational algebra is semisimple.  The cyclic-kernel lemma gives the full
+matrix algebra on each block.  The rectangular endpoint calculation
+prevents diagonal identifications between equal-size blocks, giving the
+full direct product of McKay corners.
+
+## Evidence inherited by the proof
+
+The all-weight argument uses the following already committed exact bundles.
+
+- `2026-07-29-c682-signed-block-wronskian.md`: Green identity, invertible
+  interior transfer, complete endpoint quotients, and short-chain prefixes
+  for the first \(2,3,3'\) families.
+- `2026-07-29-c682-remaining-plateau-wronskians.md` and
+  `2026-07-29-c682-global-phase-propagation.md`: all remaining
+  \(1,2,3,3'\) phases and the twenty-one strict-peak connectors.
+- `2026-07-29-c682-monotone-entrance-propagation.md`: fifty-one monotone
+  phases with complete boundary quotients.
+- `2026-07-30-c682-all-r-schur.md`: the last twelve monotone phases and
+  their strictly signed missing pivots.
+- `2026-07-29-c682-all-weight-maximal-rank.md`: maximal rank in every
+  block and the exact low-degree/weight audit.
+
+No new numerical determinant is promoted to an all-weight theorem here.
+The new finite audit below is corroboration of the bicommutant reading of
+those exact identities.
+
+## Finite corroboration and replay
+
+From `rust/`, run
+
+```text
+python3 ../notes/2026-07-30-c682-local-return-algebra.py --check
+python3 ../notes/2026-07-30-c682-local-return-algebra-replay.py
+```
+
+The checker constructs the two nearest Gram returns directly from the
+stored global Weyl operators and computes their common commutant on every
+multiplicity-greater-than-one block in degrees \(0\le n\le180\).  Across
+all nine modules this is \(658\) block-degree tests.  Modulo
+\(1000000007\), the common commutant is scalar in every case except
+\((\mathbf3,22)\), where it has dimension two.  The replay repeats the
+complete audit modulo \(1000000009\).  The stored Weyl operators already
+have independent dense-polynomial two-prime replays in their owning
+bundles.
+
+This finite audit does not prove the unrestricted theorem; the
+block-Jacobi/Wronskian argument above does.
+
+| file | bytes | SHA-256 |
+|---|---:|---|
+| `2026-07-30-c682-local-return-algebra.py` | 7666 | `f73fefe8bbe3301777fe8075220926cb0dc55900aa1adc7dee46adfe4990af63` |
+| `2026-07-30-c682-local-return-algebra.json` | 2105 | `54ff4809c6dbd7b5ab33a0dd025b448e40d38abf117997073f090c2df7680260` |
+| `2026-07-30-c682-local-return-algebra-replay.py` | 1132 | `12a7fc7e2487d51fb399a25f347efde728a8d70ba76708261915357b06b27355` |
+
+## `ej` + `tt` closeout
+
+The `ej` gain is stronger than the requested identification: the
+length-four upward return is unnecessary.  The nearest lower and upper
+Gram forms already constitute an irreducible block-Jacobi pencil in every
+nonexceptional corner.
+
+The `tt` correction is that the earlier endpoint determinants were not
+merely path-generation witnesses.  Through the Green identity they are
+the boundary pivots of the common-commutant equation.  This is the exact
+missing bridge from full path propagation to local-return generation.
+
+The degree-\(22\) defect also becomes sharper.  It is not a mysterious
+failure of long words: the local pencil has only one nonzero rank-one form
+on the doubled \(\mathbf3\)-space, so every return algebra must preserve
+its two eigenlines.
+
+## Mystery ledger
+
+- **Settled:** the full graded path corner equals the algebra of the three
+  displayed local returns in every degree except \(22\).
+- **Settled by `ej`:** the two nearest returns \(S,T\) already suffice;
+  the two-step upward return is redundant.
+- **Settled by `tt`:** the signed Wronskian and boundary-surjectivity
+  certificates are exactly the cyclic-kernel proof for the two-form pencil.
+- **Settled:** degree \(22\) is the unique all-weight obstruction and has
+  the elementary \(0,2,1\) explanation.
+- **Open, non-load-bearing:** the virtual levels
+  \(0,\pm1/3,\pm2/3\) now govern both path propagation and local-pencil
+  irreducibility; an intrinsic \(E_8\) explanation of those fractions is
+  still absent.
+
+C682 remains open exploration; completion remains the user's decision.

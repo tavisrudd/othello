@@ -176,6 +176,23 @@ explicitly separated.
   Consequently all sixty-three monotone entrances, and hence every graded
   path corner, now propagate.  The old arbitrary coordinate endpoints are
   no longer load-bearing.
+- The local-return gate is closed, in a stronger two-form version.  On
+  every McKay multiplicity block except \((\mathbf3,22)\), the nearest
+  lower and upper Gram returns
+  \[
+    D_{n-6}D_{n-6}^{\dagger},\qquad D_n^\dagger D_n
+  \]
+  already generate the full matrix corner.  The signed block Wronskian,
+  complete endpoint quotients, strict-peak connectors, and the four
+  exceptional scalar obstructions form the cyclic-kernel proof; the
+  rectangular endpoint system separates distinct McKay blocks.  Thus the
+  full graded path corner equals the requested three-return algebra for
+  every \(n\ne22\), and the two-step upward return is redundant.  At
+  degree \(22\), the lower \(\mathbf3\)-space is zero and the sole upper
+  Gram has rank one on the doubled block, giving the exact \(2<4\)
+  obstruction.  A two-prime audit of all \(658\)
+  multiplicity-greater-than-one blocks through degree \(180\) corroborates
+  the unrestricted Wronskian proof.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -203,16 +220,14 @@ explicitly separated.
 
 ## Active order
 
-The later McKay-corner classification is active.  The all-weight
+The McKay-corner classification is complete.  The all-weight
 two-sided-defect gate, every modulo-\(60\) plateau-entry phase, all
 twenty-one eventual strict peak families, every off-peak propagation step,
-and all sixty-three monotone entrance phases are closed.  The last twelve
-entrances are controlled by exact scalar \(C_5\)-chain boundary
-obstructions on the full real ray \(r\ge6\).  Thus the full graded path
-corner propagates in every McKay block and every weight, apart from the
-already isolated degree-\(22\) full-corner failure.  The exact next gate is
-the logically separate identification of this path corner with the algebra
-of the three local returns.  C682 remains open.
+all sixty-three monotone entrance phases, and the local-return
+identification are closed.  The nearest lower and upper Gram forms already
+generate every full block corner; degree \(22\) is the unique exact
+failure.  C682 remains open exploration, with completion or selection of a
+parked branch left to the user.
 
 ## Parked branches
 
@@ -232,3 +247,5 @@ Latest exceptional-transfer bundle:
 `notes/2026-07-30-c682-exceptional-monotone-schur.md`.
 All-\(r\) exceptional transversality bundle:
 `notes/2026-07-30-c682-all-r-schur.md`.
+Local-return algebra bundle:
+`notes/2026-07-30-c682-local-return-algebra.md`.

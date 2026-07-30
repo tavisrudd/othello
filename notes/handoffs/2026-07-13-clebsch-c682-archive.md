@@ -1149,3 +1149,21 @@ sixty-three monotone phases and every graded path corner propagate.  The
 exact proof, dense-polynomial replay, `ej`/`tt` closeout, and Mystery ledger
 are in `notes/2026-07-30-c682-all-r-schur.md`.  Identifying the full path
 corner with the algebra of the three local returns remains separate.
+
+That last McKay-corner gate is now closed, in a stronger two-form form.
+For every block except \((\mathbf3,22)\), the nearest lower and upper Gram
+returns
+\[
+ D_{n-6}D_{n-6}^{\dagger},\qquad D_n^\dagger D_n
+\]
+already generate the full matrix corner.  Reordering the Kostant free
+modules by global coefficient level turns the existing signed Wronskian,
+complete endpoint-quotient, strict-peak, and exceptional scalar
+certificates into the cyclic-kernel criterion for this self-adjoint pencil.
+The rectangular endpoint system has no cross-module solution, so distinct
+McKay blocks are separated.  At degree \(22\), the lower \(\mathbf3\)-space
+is zero and the upper Gram has rank one on a doubled block, giving the exact
+\(2<4\) obstruction.  A two-prime audit of all \(658\)
+multiplicity-greater-than-one block-degrees through \(180\) finds exactly
+that failure.  The proof and corroborating evidence bundle are in
+`notes/2026-07-30-c682-local-return-algebra.md`.
