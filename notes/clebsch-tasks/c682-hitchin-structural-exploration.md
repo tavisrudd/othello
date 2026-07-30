@@ -74,7 +74,10 @@ explicitly separated.
   infinite family to a reduced degree-\(15\)-over-degree-\(3\) rational
   function.  Exact Sturm arithmetic places all eighteen zeros and poles at
   \(q<1\), proving controllability on the full real ray \(q\ge1\); one
-  numerator root in \((0,1)\) makes that continuous wall sharp.
+  numerator root in \((0,1)\) makes that continuous wall sharp.  The
+  denominator is
+  \((10q+17)(10q+22)(10q+27)/2\); alternating pole residues identify a
+  signed off-diagonal transfer pencil rather than a positive Weyl function.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the

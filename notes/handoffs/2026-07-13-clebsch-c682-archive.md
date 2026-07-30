@@ -996,3 +996,13 @@ reduced numerator has one root in \(0<q<1\), thirteen in
 root-free nonnegative ray.  The \(1|13|1\) zero clustering points more
 specifically toward a finite Jacobi-matrix or orthogonal-polynomial model
 for the boundary transfer.
+
+The `tt` pass sharpens and limits that interpretation.  The reduced
+denominator is exactly
+\((10q+17)(10q+22)(10q+27)/2\), so the witness is a degree-\(12\)
+polynomial bulk term plus a proper three-pole boundary correction.  The
+three exact residue signs are \(-,+,-\), ruling out a positive
+Stieltjes or diagonal-Weyl model.  The correct target is the
+symmetrizable three-term transfer pencil already present in the boundary
+annihilator, with the witness as an off-diagonal Green function.  Its
+block-Jacobi analog is the proposed uniform route for \(2,3,3'\).

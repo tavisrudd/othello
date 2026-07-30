@@ -734,6 +734,29 @@ def certificate():
         "(-2,-1)": 1,
         "(0,1)": 0,
     }
+    expected_denominator = poly_scale(
+        poly_multiply(
+            poly_multiply([17, 10], [22, 10]),
+            [27, 10],
+        ),
+        Fraction(1, 2),
+    )
+    assert [Fraction(value) for value in denominator] == expected_denominator
+    poles = [
+        Fraction(-27, 10),
+        Fraction(-11, 5),
+        Fraction(-17, 10),
+    ]
+    denominator_derivative = poly_derivative(denominator)
+    residue_signs = [
+        sign(
+            poly_evaluate(numerator, pole)
+            / poly_evaluate(denominator_derivative, pole)
+        )
+        for pole in poles
+    ]
+    assert residue_signs == [-1, 1, -1]
+    proper_remainder = poly_remainder(numerator, denominator)
     low_rows = []
     for q in range(1, 6):
         degree, _, incoming, _, _, scalars = exact_witness(q)
@@ -796,6 +819,15 @@ def certificate():
             "continuous_stability_wall": (
                 "q>=1 is root-free, but the numerator has one root in (0,1)"
             ),
+            "denominator_factorization": (
+                "(10q+17)(10q+22)(10q+27)/2"
+            ),
+            "poles": ["-27/10", "-11/5", "-17/10"],
+            "residue_signs_in_pole_order": residue_signs,
+            "euclidean_polynomial_part_degree": (
+                len(numerator) - len(denominator)
+            ),
+            "proper_remainder_degree": len(proper_remainder) - 1,
             "sign_conclusion": (
                 "all shifted numerator coefficients are negative and all "
                 "shifted denominator coefficients are positive"
