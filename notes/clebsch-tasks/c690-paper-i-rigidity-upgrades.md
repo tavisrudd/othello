@@ -80,6 +80,10 @@ orientation-torsor and double-six decisions.
   is \(2(A_5/D_5)\); their involution characters and incidence graphs differ.
   Both map to the common six-axis carrier \(A_5/D_5\): Paper I gives its
   twisted transitive two-cover and the double-six gives its split two-cover.
+  On the twisted cover the fibre-odd module is \(3\oplus3'\), and the two
+  five-orbital operators satisfy \((A-A')^2=10(I-R)\); hence
+  \(T=(A-A')/2\) intrinsically reconstructs \(T^2=5\) and golden
+  conjugation from the continuation locus.
 - The first open E3 case is exactly \(k=9\) over \(q=23,25\), with compact
   cover-moment falsifier ledgers. No larger project is allocated.
 

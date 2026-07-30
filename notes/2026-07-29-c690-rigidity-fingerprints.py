@@ -106,9 +106,9 @@ def stabilizer_subdegrees(
     return orbit_sizes(stabilizer, len(next(iter(action.values()))))
 
 
-def orbital_graph(
+def stabilizer_orbits(
     action: dict[tuple[int, ...], tuple[int, ...]], point: int
-) -> list[set[int]]:
+) -> list[list[int]]:
     stabilizer = [permutation for permutation in action.values() if permutation[point] == point]
     orbits = []
     unseen = set(range(len(next(iter(action.values())))))
@@ -117,8 +117,12 @@ def orbital_graph(
         orbit = {permutation[start] for permutation in stabilizer}
         orbits.append(sorted(orbit))
         unseen -= orbit
-    seed_orbit = min(orbit for orbit in orbits if len(orbit) == 5)
-    seed = seed_orbit[0]
+    return sorted(orbits, key=lambda orbit: (len(orbit), orbit))
+
+
+def orbital_graph(
+    action: dict[tuple[int, ...], tuple[int, ...]], point: int, seed: int
+) -> list[set[int]]:
     adjacency = [set() for _ in range(len(next(iter(action.values()))))]
     for permutation in action.values():
         a, b = permutation[point], permutation[seed]
@@ -162,6 +166,23 @@ def is_bipartite(adjacency: list[set[int]]) -> bool:
                 elif colors[neighbor] == colors[vertex]:
                     return False
     return True
+
+
+def adjacency_matrix(adjacency: list[set[int]]) -> list[list[int]]:
+    return [
+        [int(j in adjacency[i]) for j in range(len(adjacency))]
+        for i in range(len(adjacency))
+    ]
+
+
+def matrix_product(a: list[list[int]], b: list[list[int]]) -> list[list[int]]:
+    return [
+        [
+            sum(a[i][k] * b[k][j] for k in range(len(b)))
+            for j in range(len(b[0]))
+        ]
+        for i in range(len(a))
+    ]
 
 
 def canonical_projective_triples(q: int) -> list[tuple[int, int, int]]:
@@ -292,7 +313,25 @@ def a5_fingerprints() -> dict[str, object]:
     }
     double_character = {label: 2 * value for label, value in six_character.items()}
 
-    paper_graph = orbital_graph(paper_action, 0)
+    paper_orbits = stabilizer_orbits(paper_action, 0)
+    antipode = next(orbit[0] for orbit in paper_orbits if len(orbit) == 1 and orbit != [0])
+    five_orbits = [orbit for orbit in paper_orbits if len(orbit) == 5]
+    paper_graph = orbital_graph(paper_action, 0, five_orbits[0][0])
+    conjugate_graph = orbital_graph(paper_action, 0, five_orbits[1][0])
+    antipodal_graph = orbital_graph(paper_action, 0, antipode)
+    a = adjacency_matrix(paper_graph)
+    a_conjugate = adjacency_matrix(conjugate_graph)
+    r = adjacency_matrix(antipodal_graph)
+    difference = [
+        [a[i][j] - a_conjugate[i][j] for j in range(12)]
+        for i in range(12)
+    ]
+    difference_square = matrix_product(difference, difference)
+    golden_identity = all(
+        difference_square[i][j] == 10 * (int(i == j) - r[i][j])
+        for i in range(12)
+        for j in range(12)
+    )
     double_graph = [set() for _ in range(12)]
     for i in range(6):
         for j in range(6):
@@ -308,12 +347,25 @@ def a5_fingerprints() -> dict[str, object]:
             "character": paper_character,
             "stabilizer_subdegrees": stabilizer_subdegrees(paper_action, 0),
             "icosahedral_five_orbital": graph_fingerprint(paper_graph),
+            "conjugate_five_orbital": graph_fingerprint(conjugate_graph),
+            "antipodal_quotient": "A5/D5",
+            "fiber_even_character": six_character,
+            "fiber_odd_character": {
+                label: paper_character[label] - six_character[label]
+                for label, _ in representatives
+            },
+            "fiber_odd_module": "3+3'",
+            "integral_golden_identity": "(A-A')^2 = 10(I-R)",
+            "integral_golden_identity_verified": golden_identity,
+            "golden_operator_after_inverting_2": "T=(A-A')/2; T^2=5 on R=-1",
         },
         "schlafli_double_six": {
             "a5_set": "(A5/D5) disjoint_union (A5/D5)",
             "orbit_sizes": [6, 6],
             "character": double_character,
             "one_row_character": six_character,
+            "row_even_module": "1+5",
+            "row_odd_module": "1+5",
             "stabilizer_subdegrees_on_twelve_lines": [1, 1, 5, 5],
             "intersection_graph": graph_fingerprint(double_graph),
         },

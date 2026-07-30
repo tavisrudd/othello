@@ -14,7 +14,8 @@ sharpens, and two proposed crowns close negatively.
    simultaneously support complementation, six-point Gale duality, and golden
    conjugation. Its signed moments vanish through degree two and first separate
    in degree three, so the intrinsic oriented datum is a cubic line rather than
-   a chosen cubic.
+   a chosen cubic. Independently, the twelve continuation directions recover
+   the golden quadratic algebra on their fibre-odd \(3\oplus3'\) module.
 2. At \(q=13\), the terminal eight-arc exists exactly when the binary
    passant/internal incidence code has a word of weight eight. The code has
    length \(78\), dimension \(36\), and even weights. Thus the desired
@@ -215,6 +216,55 @@ directions above an axis. Hence the support-orientation torsor is not
 realized by pairing the twelve continuation directions, even though both
 are reconstructed from the same syndrome data.
 
+### Golden algebra from the twisted cover
+
+The representation discarded by passage to the six-axis quotient is
+exactly the golden pair. Over characteristic zero,
+\[
+\begin{aligned}
+ \mathbf Q[A_5/C_5]&\cong
+ \mathbf1\oplus\mathbf3\oplus\mathbf3'\oplus\mathbf5,\\
+ \mathbf Q[A_5/D_5]&\cong\mathbf1\oplus\mathbf5.
+\end{aligned}
+\]
+Therefore the fibre-even part of the twelve-point permutation module is
+\(\mathbf1\oplus\mathbf5\), while its fibre-odd part is
+\[
+ W^-=\mathbf3\oplus\mathbf3'.
+\]
+For the split double-six, both the row-even and row-odd modules are instead
+\(\mathbf1\oplus\mathbf5\). This module fingerprint explains the geometric
+failure more precisely than the total permutation character.
+
+There is also an intrinsic operator form. Let \(R\) be the antipodal deck
+involution on the twelve continuation directions, and let \(A,A'\) be the
+adjacency matrices of the two five-valent \(A_5\)-orbitals. The unordered
+pair \(\{A,A'\}\) is intrinsic, and exact association-algebra multiplication
+gives
+\[
+ (A-A')^2=10(I-R).
+\]
+On \(W^-\), where \(R=-I\), the operator
+\[
+ T=\frac{A-A'}2
+\]
+satisfies
+\[
+ T^2=5.
+\]
+Thus the continuation locus reconstructs the quadratic algebra
+\(\mathbf Q[T]\cong\mathbf Q(\sqrt5)\) on \(W^-\). Exchanging the two
+five-orbitals sends \(T\) to \(-T\), which is golden conjugation; choosing
+one orbital chooses one of the two ternary summands
+\(\mathbf3,\mathbf3'\). Modulo \(11\), the two eigenvalues are
+\(\pm4\), the two values of \(2t-1\) for the golden roots \(t=4,8\).
+
+This upgrade needs no characteristic-zero golden marking. The integral
+twelve-point association scheme reconstructed by Paper I already contains
+the golden algebra and its conjugation. The marked support/Gale calculation
+then identifies its two embeddings with the previously certified support
+sheets.
+
 ## 4. Full-conic crown gate
 
 Let \(A\) be a conic-filling \(k\)-arc and put
@@ -298,7 +348,9 @@ The C690 checker independently constructs the \(q=13\) point-line
 incidence matrix, verifies its polarity symmetry, and computes its exact
 binary rank. It also enumerates \(A_5\), constructs the two coset actions,
 computes their characters and subdegrees, and checks the two graph
-fingerprints. The rank agrees with the independent published dimension
+fingerprints. It also constructs both five-orbitals and the antipodal
+relation and verifies \((A-A')^2=10(I-R)\) entrywise. The rank agrees with
+the independent published dimension
 formula; the character values also have the closed coset-fixed-point
 derivation given above. No independent program is needed for the
 load-bearing claims because each is proved in the report; the checker is a
@@ -309,8 +361,8 @@ support/Gale calculation and the exact cyclotomic double-six construction.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c690-rigidity-fingerprints.py` | 11249 | `5c21c3fed4038f5dadca80624434bad670ff001ac486d2140f0123975d916cfa` |
-| `2026-07-29-c690-rigidity-fingerprints.json` | 1738 | `7c6063f321f6a5c96746d99f21ecd1243d0c1b45074e371f100c25fdac4ec392` |
+| `2026-07-29-c690-rigidity-fingerprints.py` | 13266 | `1dca0c81ba6cfcc35bf83052ae9c45a91d0ca05bd9a270a07e7a3dd5d15fa520` |
+| `2026-07-29-c690-rigidity-fingerprints.json` | 2483 | `2e235ef509b1ca691563646d5c8cd5da445c4d0afc42d6c28fbc25e15acf7b83` |
 
 ## Extra-juice and Tao closeout
 
@@ -325,7 +377,11 @@ classical double-six. The fixed-point character shows that involutions
 distinguish the sets before coordinates, while the triangle count explains
 why their equal valency and edge count were misleading. The `ej` follow-up
 then recovered their common quotient: they are respectively the twisted
-and split two-covers of the same six-axis carrier. The pass also exposed
+and split two-covers of the same six-axis carrier. The `ej2` pass decomposed
+the two covers and recovered the golden algebra intrinsically from
+\((A-A')^2=10(I-R)\): the twisted cover's odd part is
+\(\mathbf3\oplus\mathbf3'\), while the split cover's odd part is
+\(\mathbf1\oplus\mathbf5\). The pass also exposed
 the obstruction to the obvious all-size induction: deleting a vertex
 necessarily enlarges the extension port off the conic.
 
@@ -336,6 +392,7 @@ necessarily enlarges the extension port off the conic.
 | q=13 one-unit Delsarte miss | reduced to \(d(\ker M)\ge10\), not settled | C611: exclude binary weight-eight words using triple/tangent or support information |
 | C665 transfer | settled negatively | none; a new cross-characteristic support mechanism would be a different method |
 | support/Gale/golden exchange | settled on the frozen marked fibre | novelty audit and concise Paper I v2 integration only |
+| intrinsic source of \(\sqrt5\) | settled by `ej2` | the continuation association scheme gives \(T^2=5\) on \(\mathbf3\oplus\mathbf3'\) |
 | preferred orientation sign | settled negatively | the syndrome locus reconstructs only the torsor and cubic line |
 | twelve-point double-six | settled negatively as an identification; common quotient recovered | Paper I gives the twisted \(A_5/C_5\to A_5/D_5\) cover, while the double-six gives the split cover |
 | two Paper I orientation structures | settled as distinct | the support/Petersen cover is split under \(A_5\); the continuation/axis cover is twisted |

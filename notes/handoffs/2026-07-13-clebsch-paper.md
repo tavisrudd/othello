@@ -56,8 +56,12 @@ the binary minimum-distance gate \(d\ge10\), which remains C611-owned and is
 not reached by C665's defining-characteristic trade machinery. The
 twelve-point Schläfli identification fails equivariantly, but both objects
 map to the same six-axis \(A_5/D_5\) carrier: Paper I is its twisted
-transitive two-cover and the double-six is its split two-cover. The first
-open all-size full-conic gate is \(k=9\) over \(q=23,25\).
+transitive two-cover and the double-six is its split two-cover. On the
+twisted cover, the fibre-odd module is \(3\oplus3'\), and the difference
+of the two five-orbital operators squares to \(5\) after normalization.
+Thus the continuation locus intrinsically reconstructs the golden quadratic
+algebra and its conjugation. The first open all-size full-conic gate is
+\(k=9\) over \(q=23,25\).
 
 Local aggregate replay:
 

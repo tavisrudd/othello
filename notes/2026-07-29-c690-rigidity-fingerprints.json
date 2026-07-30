@@ -28,6 +28,7 @@
     "first_character_mismatch": "2A",
     "paper_I": {
       "a5_set": "A5/C5",
+      "antipodal_quotient": "A5/D5",
       "character": {
         "1A": 12,
         "2A": 0,
@@ -35,6 +36,31 @@
         "5A": 2,
         "5B": 2
       },
+      "conjugate_five_orbital": {
+        "bipartite": false,
+        "degrees": [
+          5
+        ],
+        "edges": 30,
+        "triangles": 20,
+        "vertices": 12
+      },
+      "fiber_even_character": {
+        "1A": 6,
+        "2A": 2,
+        "3A": 0,
+        "5A": 1,
+        "5B": 1
+      },
+      "fiber_odd_character": {
+        "1A": 6,
+        "2A": -2,
+        "3A": 0,
+        "5A": 1,
+        "5B": 1
+      },
+      "fiber_odd_module": "3+3'",
+      "golden_operator_after_inverting_2": "T=(A-A')/2; T^2=5 on R=-1",
       "icosahedral_five_orbital": {
         "bipartite": false,
         "degrees": [
@@ -44,6 +70,8 @@
         "triangles": 20,
         "vertices": 12
       },
+      "integral_golden_identity": "(A-A')^2 = 10(I-R)",
+      "integral_golden_identity_verified": true,
       "orbit_sizes": [
         12
       ],
@@ -83,6 +111,8 @@
         6,
         6
       ],
+      "row_even_module": "1+5",
+      "row_odd_module": "1+5",
       "stabilizer_subdegrees_on_twelve_lines": [
         1,
         1,
