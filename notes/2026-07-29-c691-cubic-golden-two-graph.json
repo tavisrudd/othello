@@ -1,0 +1,345 @@
+{
+  "coordinate_replay": {
+    "all_twenty_coefficients_match": true,
+    "axis_permutation_zero_based": [
+      0,
+      1,
+      4,
+      5,
+      3,
+      2
+    ],
+    "axis_switching_signs": [
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1
+    ],
+    "complement_negates": true,
+    "continuation_signed_operator": [
+      [
+        0,
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        0,
+        1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        0
+      ]
+    ],
+    "continuation_square": "B^2=5I",
+    "four_point_two_graph_products": [
+      1
+    ],
+    "support_triangle_signs": [
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          1,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          1,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "triangle_product_identity": "c_ijk=B_ij*B_jk*B_ki after the displayed axis permutation"
+  },
+  "inputs": [
+    {
+      "bytes": 6076,
+      "path": "notes/2026-07-29-c690-rigidity-fingerprints.json",
+      "sha256": "dc973a8751ece1207b1a1a84d336b31284e4cf8cbea69830236343663b45f4d6"
+    },
+    {
+      "bytes": 19904,
+      "path": "notes/2026-07-26-c682-transvectant-bridge.json",
+      "sha256": "e4704b1de4c042a8ed4b1876edebefa919ab562ebe0417c2d835e0e9cc403161"
+    }
+  ],
+  "inverse_reconstruction": {
+    "gauge": "B_0i=1; B_ij=c_0ij for 0<i<j",
+    "gauge_matrix": [
+      [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        1,
+        0,
+        -1,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        -1,
+        0,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        0,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        0
+      ]
+    ],
+    "reconstructed_up_to_axis_switching": true,
+    "switching_from_continuation_matrix": [
+      1,
+      1,
+      1,
+      -1,
+      1,
+      1
+    ]
+  },
+  "mod_2_closeout": {
+    "cubic_automorphism_group_order": 720,
+    "interpretation": "orientation collapse is the cubic shadow of the Z[sqrt(5)] conductor-two defect",
+    "nilpotent": "N=B-I=B+I in characteristic 2",
+    "nilpotent_rank": 1,
+    "nilpotent_square_zero": true,
+    "symmetry_jump": "A5 to S6",
+    "triangle_coefficients": [
+      1
+    ]
+  },
+  "representation_comparison": {
+    "cubic_line_automorphism_group_order": 120,
+    "interpretation": "A5 kernel inside the outer S5 normalizer",
+    "oriented_cubic_automorphism_group_order": 60,
+    "oriented_triple_orbit_sizes": [
+      10,
+      10
+    ],
+    "outer_sign_fibre_sizes": {
+      "+1": 60,
+      "-1": 60
+    }
+  },
+  "schema": "c691-cubic-golden-two-graph-v1",
+  "torsor_compatibility": {
+    "cubic_exchange": "c maps to -c",
+    "inverse": "the two-graph signs reconstruct the switching class of B",
+    "map": "B maps to (B_ij*B_jk*B_ki)_{i<j<k}",
+    "orbital_exchange": "B maps to -B",
+    "verdict": "canonical compatibility"
+  }
+}

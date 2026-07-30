@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued; bounded Paper I v2 research.
+**Status:** complete; positive compatibility theorem.
 
 ## Objective
 
@@ -23,6 +23,26 @@ A negative result must identify the exact missing map or representation
 obstruction and justify presenting the two structures as adjacent Paper I
 v2 propositions.
 
+## Result
+
+The positive gate is closed in
+`notes/2026-07-29-c691-cubic-golden-two-graph.md`.  On the common six-axis
+carrier, choose one continuation orbital and write its fibre-odd signed
+matrix as \(B\).  Then
+\[
+ c_{ijk}=B_{ij}B_{jk}B_{ki}
+\]
+is switching-invariant and gives exactly the support-orientation cubic.
+Orbital exchange negates both sides.  Conversely the four-point two-graph
+identity reconstructs the switching class of \(B\) from the twenty cubic
+signs.  Thus the cubic line and the golden operator with \(B^2=5I\) are
+mutually recoverable from one orientation torsor.
+
+The compatibility is integral.  Modulo \(2\), all cubic signs merge, the
+symmetry jumps from \(A_5\) to \(S_6\), and \(B-I\) is rank-one
+square-zero, matching the conductor-two degeneration of
+\(\mathbf Z[\sqrt5]\).
+
 ## Boundaries
 
 - Run this as a kill test before manuscript integration.
@@ -37,4 +57,3 @@ v2 propositions.
 - `notes/2026-07-29-c690-paper-i-rigidity-upgrades.md`
 - `notes/2026-07-29-c690-rigidity-fingerprints.py`
 - the current Paper I reconstruction interfaces
-

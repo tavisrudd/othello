@@ -26,9 +26,8 @@
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C691 — cubic/golden compatibility](../clebsch-tasks/c691-paper-i-cubic-golden-compatibility.md) | queued; bounded Paper I v2 kill test | find one intrinsic map or close on the representation obstruction |
 | [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
-| [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | queued after C691 | integrate C611/C690 without importing Paper III's reveal |
+| [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | ready after C691 | integrate C611/C690/C691 without importing Paper III's reveal |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
 | [C697 — Schläfli--Hodge \(E_6\) model](../clebsch-tasks/c697-schlafli-hodge-e6-variation.md) | queued and unblocked; bounded extension kill test | recover the signed Cartan tensor and match the graded \(6|15|6\) carrier, or close on the first invariant mismatch |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
@@ -92,6 +91,18 @@ defects at \(11,23\) are the same order
 \(\mathbf Z_p+p\mathcal O_p\), with inert, split, and inert normalized
 fibres respectively.
 The first open all-size full-conic gate is \(k=9\) over \(q=23,25\).
+C691 is complete with a positive bridge.  If \(B\) is either signed
+continuation orbital on the fibre-odd six-axis lattice, then
+\[
+ c_{ijk}=B_{ij}B_{jk}B_{ki}
+\]
+is exactly the support-orientation cubic.  Switching axis representatives
+does not change the triangle products, orbital exchange negates them, and
+the four-point two-graph identity reconstructs \(B\) up to switching.
+Thus the cubic line and the golden operator \(B^2=5I\) are two
+presentations of one integral orientation torsor.  Modulo \(2\), all signs
+coalesce and \(B-I\) becomes rank-one square-zero, matching the
+conductor-two degeneration.  C693 owns integration.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19
