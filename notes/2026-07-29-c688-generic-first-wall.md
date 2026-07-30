@@ -65,6 +65,23 @@ map has exactly \((s+1)(r+1)\) nonzero entries.  The primary recurrence and
 independent closed-form replay both verify (T); this gives a formula-level
 compression stronger than retaining only the sparse-map hash.
 
+There is a second compression inside (T).  Its seed polynomial is
+\[
+ C_r(z)=(1-z)^r=C_1(z)^{\,r}.                 \tag{G}
+\]
+Thus every generic first-wall seed is the \(r\)-fold convolution power of
+the primitive two-term difference seed \((1,-1)\).  More importantly, the
+two apparent wall calculations are consecutive coordinates of this one
+polynomial:
+\[
+ [z^0]C_r=1\quad\text{is the normalized spill coordinate},\qquad
+ -[z^1]C_r=r\quad\text{is the trace coordinate}.           \tag{H}
+\]
+The checker now certifies (G)--(H) independently.  This explains why the
+same unique row both has nonzero trace and spills: they are not unrelated
+matrix phenomena but the constant and linear coefficients of one bracket
+power.
+
 The adjacent-wall theorem remains a human representation-theoretic input:
 it identifies the normalized row.  Conditional on that theorem, the
 checker verifies the local map, trace, unique spill, Borel gap, and target
@@ -146,9 +163,9 @@ finite sweep.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c688-generic-first-wall.py` | 12743 | `3a8061ccea65733eec77bdca2ab55b74df388ef9b4ae05afdcbae9c80c816d23` |
-| `notes/2026-07-29-c688-generic-first-wall-independent.py` | 3850 | `01fc26915f45105744209d6f4135290af5e65fe34a7c5caf2b2c9c9577153052` |
-| `notes/2026-07-29-c688-generic-first-wall.json` | 20546 | `21f703a224c0c3b1cdcba87f3718412306980601434482215eeaf744515cc372` |
+| `notes/2026-07-29-c688-generic-first-wall.py` | 13601 | `babf0483d9d47fc97a7b41a8e7338d05a92240871e79346dd6291a6ac9dab23b` |
+| `notes/2026-07-29-c688-generic-first-wall-independent.py` | 4454 | `f8f59797927cd85f10c762d3fa6eb16e4a783aaec432807be690b591bd15d130` |
+| `notes/2026-07-29-c688-generic-first-wall.json` | 22828 | `111aa07f08568bfb8d832f7c94c13d29c93426a063f166106e9cda32ddf7fd77` |
 
 The independent replay regenerates the Clebsch--Gordan maps from the
 closed binomial formula rather than the recurrence, reevaluates occurrence,
@@ -178,6 +195,14 @@ digit map is one nonvanishing binomial band, shifted \(s+1\) times.  This
 is cheap reusable structure for any later first-wall head and explains the
 certificate's unexpectedly rigid sparsity.
 
+At second order, (G)--(H) show that \(r=1\) is universal: every other local
+wall seed is its convolution power, while spill and trace are its first
+two coefficient functionals.  This suggests a disciplined C689 attack:
+seek one radial generating polynomial for the \(B_3\) and \(H_3\)
+configurations whose first surviving coefficient specializes to both
+finite witnesses.  That is a method proposal only; no C689
+radial-nonvanishing claim is imported into C688.
+
 The boundary audit found and closed the only small-parameter wrinkle:
 integer interval separation alone does not survive reduction modulo
 \(q-1\) at \((3,0,2)\).  The two-coordinate root-group calculation repairs
@@ -194,6 +219,8 @@ C665, all of which have \(s\ge6\).
 | field-sized replay | settled away by the \(S,T,R,Y\) interface | none |
 | extremal \(s=p-3\) | settled with \(R=L(1,1)\) and spill dimension \(12\) | none |
 | constant Clebsch--Gordan column sparsity | settled by the Toeplitz band (T), with exactly \((s+1)(r+1)\) entries | none |
+| trace and spill appearing as separate phenomena | settled by (H): they are the linear and constant coordinates of \(C_r(z)\) | none |
+| variation with \(r\) | settled by (G): every seed is the \(r\)-fold convolution power of \((1,-1)\) | none |
 | \((3,0,2)\) torus wrap | settled by the two root-group coefficients | none |
 | occurrence versus spill versus outer parity | kept as three separate logical gates | none |
 

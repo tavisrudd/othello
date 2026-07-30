@@ -149,6 +149,14 @@ def occurrence(p, s, e):
     }
 
 
+def convolution(left, right, p):
+    answer = [0] * (len(left) + len(right) - 1)
+    for i, left_value in enumerate(left):
+        for j, right_value in enumerate(right):
+            answer[i + j] = (answer[i + j] + left_value * right_value) % p
+    return answer
+
+
 def torus_gap(p, s, e, r):
     positive = [p - r, p + r]
     negative = [-p - r, -p + r]
@@ -205,12 +213,19 @@ def wall_record(p, s, r):
         if left == p - 2 and right == 1
     ]
     assert candidates == [[p - 2, 1]]
+    seed = [(-1) ** j * math.comb(r, j) % p for j in range(r + 1)]
+    iterated_seed = [1]
+    for _ in range(r):
+        iterated_seed = convolution(iterated_seed, [1, p - 1], p)
+    assert seed == iterated_seed
+    assert seed[0] == 1 and -seed[1] % p == r
     trace_terms = [[index, 1] for index in range(r)]
     trace_scalar = sum(value for _, value in trace_terms) % p
     assert trace_scalar == r and trace_scalar
     normalized_row = {
         "source_row": [p - 2, 1],
         "cofactor": [r, 1],
+        "seed_polynomial": seed,
         "trace_terms": trace_terms,
         "spill_coordinate": {
             "target": [[0, 2], [r, 1]],
@@ -222,6 +237,14 @@ def wall_record(p, s, r):
         "normalization": "top divided-power wall coefficient = 1",
         "unique_adjacent_candidates": candidates,
         "unique_row": True,
+        "seed_polynomial": {
+            "variable": "z",
+            "formula": "(1-z)^r",
+            "coefficients_mod_p": seed,
+            "primitive_difference_convolution_power": r,
+            "constant_coordinate": seed[0],
+            "negative_linear_coordinate": -seed[1] % p,
+        },
         "trace_terms": trace_terms,
         "trace_scalar": trace_scalar,
         "trace_scalar_integer": r,

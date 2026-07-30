@@ -75,6 +75,18 @@ def replay_case(case):
     )
     wall = case["first_wall"]
     assert wall["unique_adjacent_candidates"] == [[p - 2, 1]]
+    seed = [(-1) ** j * math.comb(r, j) % p for j in range(r + 1)]
+    assert wall["seed_polynomial"]["coefficients_mod_p"] == seed
+    assert wall["seed_polynomial"]["constant_coordinate"] == 1
+    assert wall["seed_polynomial"]["negative_linear_coordinate"] == r
+    product = [1]
+    for _ in range(r):
+        next_product = [0] * (len(product) + 1)
+        for index, value in enumerate(product):
+            next_product[index] = (next_product[index] + value) % p
+            next_product[index + 1] = (next_product[index + 1] - value) % p
+        product = next_product
+    assert product == seed
     assert wall["trace_scalar"] == sum(range(r + 1)) - sum(range(r))
     assert wall["trace_scalar"] == r
     assert wall["spill_coordinate"]["coefficient"] == 1

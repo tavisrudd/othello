@@ -3,8 +3,19 @@
     {
       "e": 2,
       "first_wall": {
-        "map_sha256": "695327c29f4002e1d85a481b18bbd387492b7ab77353b6a58916b6f40298fbf5",
+        "map_sha256": "b1257833a38ebf9810b8dcfb8dc57ca2632c3f3f0ea2773ddf0ee1c140549ce1",
         "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            2
+          ],
+          "constant_coordinate": 1,
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
         "spill_coordinate": {
           "coefficient": 1,
           "coordinate": [
@@ -145,8 +156,19 @@
     {
       "e": 2,
       "first_wall": {
-        "map_sha256": "2ff38e37f49c00f30338e6eb873cf12d116e5026473c7f8843c494020e1863e9",
+        "map_sha256": "1180fba36df4ca346cb168b12aede6da83e43d3ffbdd8c600cee860155ac722d",
         "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            4
+          ],
+          "constant_coordinate": 1,
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
         "spill_coordinate": {
           "coefficient": 1,
           "coordinate": [
@@ -259,8 +281,19 @@
     {
       "e": 3,
       "first_wall": {
-        "map_sha256": "4a36665774c7c23e41d523167d059379c943e9461d9f3cf7473c21304885fd9f",
+        "map_sha256": "f82678acc006f666159af5630f691388bef432cb5a7ffbb145544daa142b72ad",
         "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            6
+          ],
+          "constant_coordinate": 1,
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
         "spill_coordinate": {
           "coefficient": 1,
           "coordinate": [
@@ -373,8 +406,21 @@
     {
       "e": 2,
       "first_wall": {
-        "map_sha256": "f6f79137caab3cbeb1112e94c8db11045011395b0492ca3b2f078680cba9b05d",
+        "map_sha256": "45e2a2d9943ef07267c9495df6c5b2bf4389e405ba787e916a4ab3514f21a351",
         "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            8,
+            3,
+            10
+          ],
+          "constant_coordinate": 1,
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 3,
+          "primitive_difference_convolution_power": 3,
+          "variable": "z"
+        },
         "spill_coordinate": {
           "coefficient": 1,
           "coordinate": [
@@ -495,8 +541,19 @@
     {
       "e": 3,
       "first_wall": {
-        "map_sha256": "95635ee1a91decbe000dd4d2ec4b60c75cbfd28109a0bc2387b93190a223a326",
+        "map_sha256": "31ac38a377d81ae2d4f806504065b521b5f41c340317289ee8551154a3aaee99",
         "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            10
+          ],
+          "constant_coordinate": 1,
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
         "spill_coordinate": {
           "coefficient": 1,
           "coordinate": [
@@ -609,8 +666,23 @@
     {
       "e": 2,
       "first_wall": {
-        "map_sha256": "df6bc1b8ea8af7053d7e6ce5e0491b9f7f7f6dbe2221259a8c28899acd3a0e7d",
+        "map_sha256": "93c34a87894c09e6e17d8ddc41cf9fb3f7b4ef3f11d87a12db79f5692cc74954",
         "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            8,
+            10,
+            3,
+            5,
+            12
+          ],
+          "constant_coordinate": 1,
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 5,
+          "primitive_difference_convolution_power": 5,
+          "variable": "z"
+        },
         "spill_coordinate": {
           "coefficient": 1,
           "coordinate": [
@@ -739,8 +811,21 @@
     {
       "e": 2,
       "first_wall": {
-        "map_sha256": "5fd96188a81ff32e5b3f04c1609bdacb6a087bc6293964c78a421f1e9f64ef04",
+        "map_sha256": "52850668c43093bf0a853670b82e334ec1ea6f7fbe951a9226657a67c482da84",
         "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            10,
+            3,
+            12
+          ],
+          "constant_coordinate": 1,
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 3,
+          "primitive_difference_convolution_power": 3,
+          "variable": "z"
+        },
         "spill_coordinate": {
           "coefficient": 1,
           "coordinate": [

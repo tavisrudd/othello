@@ -103,5 +103,7 @@ the Borel gap, and both linear dimensions, and matches the committed q=121
 and q=169 certificates.  The `--case P S E` interface supplies the same
 local certificate for arbitrary admissible inputs.  Its zeroth-digit
 Clebsch--Gordan map is the exact \(r+1\)-wide Toeplitz binomial band, with
-\((s+1)(r+1)\) nonzero entries.  The sole q=9 torus-wrap seam at the
-trivial head is closed by an explicit two-coordinate root-group check.
+\((s+1)(r+1)\) nonzero entries.  Its seed is \((1-z)^r\): the normalized
+spill and trace are respectively its constant coefficient and the negative
+of its linear coefficient.  The sole q=9 torus-wrap seam at the trivial
+head is closed by an explicit two-coordinate root-group check.
