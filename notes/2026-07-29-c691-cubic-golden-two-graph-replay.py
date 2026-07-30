@@ -14,6 +14,17 @@ C690 = ROOT / "notes" / "2026-07-29-c690-rigidity-fingerprints.json"
 C682 = ROOT / "notes" / "2026-07-26-c682-transvectant-bridge.json"
 
 
+def determinant(matrix: list[list[int]]) -> int:
+    if not matrix:
+        return 1
+    return sum(
+        (-1) ** j
+        * matrix[0][j]
+        * determinant([row[:j] + row[j + 1 :] for row in matrix[1:]])
+        for j in range(len(matrix))
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("certificate", nargs="?", type=Path, default=CERTIFICATE)
@@ -61,12 +72,27 @@ def main() -> None:
             raise AssertionError("inverse gauge reconstruction failed")
     if gauge != data["inverse_reconstruction"]["gauge_matrix"]:
         raise AssertionError("stored gauge matrix mismatch")
+    distributions = {}
+    for size in range(7):
+        values = [
+            determinant([[matrix[i][j] for j in subset] for i in subset])
+            for subset in combinations(range(6), size)
+        ]
+        distributions[str(size)] = {
+            str(value): values.count(value) for value in sorted(set(values))
+        }
+    if (
+        distributions
+        != data["determinantal_upgrade"]["principal_minor_distributions_by_size"]
+    ):
+        raise AssertionError("principal-minor distribution mismatch")
     print(
         json.dumps(
             {
                 "triangle_coefficients_checked": len(actual),
                 "forward_identity": True,
                 "inverse_gauge_identity": True,
+                "principal_minor_sizes_checked": 7,
                 "orbital_negation_degree": 3,
             },
             sort_keys=True,

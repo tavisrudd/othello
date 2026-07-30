@@ -101,7 +101,13 @@ the four-point two-graph identity reconstructs \(B\) up to switching.
 Thus the cubic line and the golden operator \(B^2=5I\) are two
 presentations of one integral orientation torsor.  Modulo \(2\), all signs
 coalesce and \(B-I\) becomes rank-one square-zero, matching the
-conductor-two degeneration.  C693 owns integration.
+conductor-two degeneration.  More strongly,
+\[
+ \det(B+\operatorname{diag}x)=e_6-e_4+5e_2-125-2C_B,
+\]
+so the cubic is the sole nonsymmetric layer of the golden diagonal
+determinant pencil, and complementary minors derive support complementation
+from \(B^2=5I\).  C693 owns integration.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19

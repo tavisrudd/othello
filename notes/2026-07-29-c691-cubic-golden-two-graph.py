@@ -29,6 +29,22 @@ def matrix_product(left: list[list[int]], right: list[list[int]]) -> list[list[i
     ]
 
 
+def determinant(matrix: list[list[int]]) -> int:
+    if not matrix:
+        return 1
+    return sum(
+        (-1) ** column
+        * matrix[0][column]
+        * determinant(
+            [
+                row[:column] + row[column + 1 :]
+                for row in matrix[1:]
+            ]
+        )
+        for column in range(len(matrix))
+    )
+
+
 def triangle_signs(matrix: list[list[int]]) -> dict[tuple[int, int, int], int]:
     return {
         triple: matrix[triple[0]][triple[1]]
@@ -175,6 +191,34 @@ def build() -> dict[str, object]:
         triple: -sign for triple, sign in continuation_triangle.items()
     }
 
+    principal_minor_distributions = {}
+    for size in range(n + 1):
+        values = [
+            determinant(
+                [[continuation[i][j] for j in subset] for i in subset]
+            )
+            for subset in itertools.combinations(range(n), size)
+        ]
+        principal_minor_distributions[str(size)] = {
+            str(value): values.count(value) for value in sorted(set(values))
+        }
+    assert principal_minor_distributions == {
+        "0": {"1": 1},
+        "1": {"0": 6},
+        "2": {"-1": 15},
+        "3": {"-2": 10, "2": 10},
+        "4": {"5": 15},
+        "5": {"0": 6},
+        "6": {"-125": 1},
+    }
+    assert all(
+        determinant(
+            [[continuation[i][j] for j in triple] for i in triple]
+        )
+        == 2 * continuation_triangle[triple]
+        for triple in itertools.combinations(range(n), 3)
+    )
+
     reduction = [[entry % 2 for entry in row] for row in continuation]
     nilpotent = [
         [(reduction[i][j] + int(i == j)) % 2 for j in range(n)]
@@ -240,6 +284,17 @@ def build() -> dict[str, object]:
             "inverse": "the two-graph signs reconstruct the switching class of B",
             "verdict": "canonical compatibility",
         },
+        "determinantal_upgrade": {
+            "principal_minor_distributions_by_size": principal_minor_distributions,
+            "three_by_three_minor": "det(B_{ijk})=2*c_ijk",
+            "diagonal_pencil_identity": (
+                "det(B+diag(x))=e6(x)-e4(x)+5*e2(x)-125-2*C_B(x)"
+            ),
+            "complementary_minor_mechanism": (
+                "Jacobi identity with det(B)=-125 and B^{-1}=B/5"
+            ),
+            "sole_nonsymmetric_term": "-2*C_B(x)",
+        },
         "mod_2_closeout": {
             "triangle_coefficients": [1],
             "cubic_automorphism_group_order": mod_two_cubic_automorphisms,
@@ -248,6 +303,7 @@ def build() -> dict[str, object]:
             "nilpotent_rank": rank_mod_two(nilpotent),
             "nilpotent_square_zero": True,
             "interpretation": (
+                "the cubic term -2*C_B vanishes in the diagonal determinant; "
                 "orientation collapse is the cubic shadow of the "
                 "Z[sqrt(5)] conductor-two defect"
             ),

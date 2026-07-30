@@ -102,6 +102,39 @@ gauge reconstruction gives
 which is switching-equivalent to the continuation matrix and again squares
 to \(5I\).
 
+## Determinantal form
+
+The triangle identity is the cubic part of one canonical determinant.  For a
+three-element set \(S=\{i,j,k\}\),
+\[
+ \det B_S=2B_{ij}B_{jk}B_{ki}=2c_{ijk}.
+\]
+All principal minors of \(B\) have the distributions
+\[
+\begin{array}{c|rrrrrrr}
+\text{size}&0&1&2&3&4&5&6\\ \hline
+\text{values}&1&0&-1&\pm2&5&0&-125.
+\end{array}
+\]
+The size-three values occur ten times with each sign.  Therefore, writing
+\(e_d(x)\) for the elementary symmetric polynomial,
+\[
+\boxed{\;
+\det\!\bigl(B+\operatorname{diag}(x_0,\ldots,x_5)\bigr)
+=e_6(x)-e_4(x)+5e_2(x)-125-2C_B(x).
+\;}
+\]
+The support cubic is the sole nonsymmetric term in the diagonal determinant
+pencil of the golden operator.
+
+The even coefficients do not require an additional enumeration.  From
+\(B^2=5I\), one has \(B^{-1}=B/5\) and \(\det B=-125\).
+Jacobi's complementary-minor identity pairs principal minors of sizes
+\(r\) and \(6-r\).  It forces the size-four minors to equal \(5\), the
+size-five minors to vanish, and complementary size-three minors to have
+opposite signs.  This recovers support complementation directly from the
+golden quadratic identity.
+
 ## Integral closeout
 
 The compatibility is integral and lives on the coarse order
@@ -117,6 +150,8 @@ conductor-two degeneration
  \mathbf Z[\sqrt5]\otimes\mathbf F_2
  \cong\mathbf F_2[u]/(u-1)^2.
 \]
+Equivalently, the term \(-2C_B\) disappears from the diagonal determinant
+pencil modulo \(2\), leaving only its symmetric even part.
 The normalized golden coordinate \(t=(1+B)/2\) is still unavailable
 integrally at \(2\).  The two-graph identity therefore explains the shared
 orientation collapse but does not erase the normalization boundary.
@@ -159,9 +194,9 @@ marking and coefficients.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 10,157 | `09e2fc9bab8db3f0824c4c6cab0d2dada2b3eeda92a42ec86aa7471e0fbee131` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 2,798 | `f927cca7c8103df6bf77c23b65f3bda9e4d891ad3feda45babe6865a36a871c6` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 5,481 | `4cc78793c4a7e651f2151a284a41f02412ccaf75e19f732a9be8d2883fc13a29` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 11,944 | `8162c3b3a6ebcbf741ef1175af0f2f4ac7ce31732bf46b48489f2443b63a5221` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 3,627 | `a357cc26f4ba02076da360396ee3945a4b45893273cfbc255a5e12cd842e05a5` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 6,177 | `11e8683820a880cf6ab631d976faf20a84d2149b4b29157efa703b54f976fcc8` |
 
 ## Disposition
 
@@ -175,10 +210,12 @@ marking and coefficients.
 
 ## Extra-juice and Tao-style closeout
 
-The triangle-product identity upgrades the result twice.  First, the support
+The triangle-product identity upgrades the result three times.  First, the support
 cubic is not merely compatible with the golden operator: it reconstructs its
 switching class, while the operator reconstructs every cubic coefficient.
-Second, reduction modulo \(2\) makes the conductor defect visible without
+Second, the full determinant pencil shows that the cubic is its unique
+nonsymmetric coefficient layer; Jacobi duality derives complementation from
+\(B^2=5I\).  Third, reduction modulo \(2\) makes the conductor defect visible without
 the normalized golden coordinate: all cubic signs merge, the symmetry jumps
 to \(S_6\), and \(B-I\) becomes rank-one square-zero.
 
@@ -195,6 +232,9 @@ Paper III question and is outside this kill test.
 - **Why the same outer sign occurs twice:** settled; both are the orientation
   character of the same six-axis two-graph, whose oriented and line
   automorphism groups have orders 60 and 120.
+- **Determinantal source of the cubic:** settled; it is the size-three
+  principal-minor layer, equivalently the sole nonsymmetric term
+  \(-2C_B\) in the diagonal determinant pencil.
 - **Prime \(2\):** settled on this package; the cubic orientation collapses
   exactly when \(B-I\) becomes square-zero.  Normalization to
   \(\mathbf F_4\) remains unavailable without adjoining \((1+B)/2\).

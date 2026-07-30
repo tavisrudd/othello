@@ -38,6 +38,15 @@ identity reconstructs the switching class of \(B\) from the twenty cubic
 signs.  Thus the cubic line and the golden operator with \(B^2=5I\) are
 mutually recoverable from one orientation torsor.
 
+The stronger determinant identity
+\[
+ \det(B+\operatorname{diag}x)
+ =e_6-e_4+5e_2-125-2C_B
+\]
+makes the support cubic the sole nonsymmetric term of the golden
+operator's diagonal pencil.  Jacobi complementary minors derive support
+complementation from \(B^2=5I\).
+
 The compatibility is integral.  Modulo \(2\), all cubic signs merge, the
 symmetry jumps from \(A_5\) to \(S_6\), and \(B-I\) is rank-one
 square-zero, matching the conductor-two degeneration of
