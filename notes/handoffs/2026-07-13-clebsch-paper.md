@@ -71,8 +71,10 @@ L(p-2-s,1)\otimes L(p-2,1)
 \]
 The affine-socle criterion
 \(e(p-1)/2\equiv1+s/2\pmod2\), together with the spill scalar
-\(p-2-s\ne0\), closes every extension-field exceptional C1 row.  The result
-is recorded in
+\(p-2-s\ne0\), closes every extension-field exceptional C1 row.  It also
+shows that the \(A_4\) occurrence and the \(S_4/A_5\) occurrences occupy
+opposite values of one parity bit and never coexist.  The result is
+recorded in
 `notes/2026-07-29-c665-frobenius-digit-spill.md`; the retired
 non-equivariant Hasse pairing remains non-evidence.  This does not change
 or hold frozen v1. C682 characteristic-zero work is inventory unless

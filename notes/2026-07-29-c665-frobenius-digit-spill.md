@@ -47,6 +47,21 @@ the square-socle recurrence, and the sole all-even exception,
 square.  This includes and explains the earlier \(q=25,49\) zero-Hom
 calculations.
 
+There is a useful dichotomy hidden in the table.  Since the right side of
+(D) is even for \(s=6\) and odd for \(s=8,12\), the \(A_4\) occurrence and
+the \(S_4/A_5\) occurrences are complementary:
+\[
+ \operatorname{Hom}_H(L(6),F)\ne0
+ \quad\Longleftrightarrow\quad
+ \operatorname{Hom}_H(L(8),F)
+ =\operatorname{Hom}_H(L(12),F)=0
+                                                        \tag{E}
+\]
+whenever the displayed large-characteristic heads are available, with the
+reverse pattern for the other parity bit.  Thus no extension field ever
+requires simultaneous pullback calculations for the \(A_4\) head and an
+\(S_4\) or \(A_5\) head.
+
 Thus C665's uniform extension-field C1 gate is closed.  This is a Paper II
 v2 result and does not alter or hold the frozen v1 release.
 
@@ -126,7 +141,10 @@ trace gives
  \operatorname{tr}_S(d_1|_{R\otimes T})=p-2-s. \tag{C}
 \]
 This is nonzero because \(p>s+1\).  Formula (C) is the general version of
-the scalar \(3\) in the \(q=121,\ s=6\) calculation.
+the scalar \(3\) in the \(q=121,\ s=6\) calculation.  More intrinsically,
+it is the zeroth Frobenius digit of \(R\).  It cannot vanish in any
+admissible row: \(p\) is odd and \(s\) is even, so
+\(p-2-s\) is a positive odd integer strictly below \(p\).
 
 The same row has a second component in
 \[
@@ -209,6 +227,9 @@ The useful upgrade is that the spill theorem also computes the entire
 exceptional affine-socle occurrence table.  The previous decision tree no
 longer needs a field-by-field Hom gate: one parity bit decides absence,
 and every surviving bit is closed by the same first-wall obstruction.
+The same bit partitions the exceptional types as in (E), so at most one
+of the \(A_4\) route and the \(S_4/A_5\) route ever reaches the pullback
+gate.
 
 The fragile seam is not a high-order contraction.  It is the incompatibility
 between one required adjacent-wall coefficient and a lower component with
@@ -222,6 +243,7 @@ Borel-blind while the original pullback remained nonsplit.
 | q=121 row-34 spill | settled uniformly as \(R\otimes T\to Y\otimes R\) | none |
 | scalar \(3\) | settled as the specialization \(p-2-s\); q=169 separates it from \(s/2\) | none |
 | exceptional affine-socle occurrences | settled by \(eb\equiv1+s/2\pmod2\) and the small-digit sign rule | none |
+| apparent coexistence of exceptional heads | settled negatively: \(A_4\) and \(S_4/A_5\) occupy opposite values of the same parity bit | none |
 | higher Frobenius digits | settled: they contribute the unique tail sign word and cannot alter the first-wall torus gap | none |
 | uniform extension-field C1 | settled | Paper II v2 integration only; v1 remains frozen |
 

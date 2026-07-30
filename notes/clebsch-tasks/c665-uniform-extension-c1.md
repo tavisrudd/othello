@@ -62,6 +62,9 @@ eb\equiv1+s/2\pmod2.
 All other such rows have zero affine Hom.  The small-characteristic digit
 heads are also absent, including the exceptional all-even \(p=5\)
 \(L(2,2)\) row, whose unique digit sign word is alternating globally.
+The \(A_4\) condition is the opposite parity from the \(S_4/A_5\)
+condition, so those two routes never require simultaneous pullback
+calculations.
 
 Every surviving occurrence has the same first-wall obstruction.  With
 \[
