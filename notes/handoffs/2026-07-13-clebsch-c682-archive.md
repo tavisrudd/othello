@@ -1166,4 +1166,8 @@ is zero and the upper Gram has rank one on a doubled block, giving the exact
 \(2<4\) obstruction.  A two-prime audit of all \(658\)
 multiplicity-greater-than-one block-degrees through \(180\) finds exactly
 that failure.  The proof and corroborating evidence bundle are in
-`notes/2026-07-30-c682-local-return-algebra.md`.
+`notes/2026-07-30-c682-local-return-algebra.md`.  A follow-up `ej` pass
+observes that the pair is generator-minimal on every nontrivial full block:
+one operator generates only a commutative polynomial algebra.  Hence the
+corner is optimally reconstructed from its two canonical positive Fischer
+energy forms.

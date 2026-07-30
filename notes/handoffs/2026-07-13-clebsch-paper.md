@@ -298,7 +298,9 @@ generate every McKay block corner except the exact
 signed Wronskian and complete boundary quotients give the cyclic-kernel
 proof, while the rectangular endpoint system separates distinct blocks.
 Thus the requested three-return algebra is the full graded path corner in
-every nonexceptional degree.
+every nonexceptional degree.  On every nontrivial block this two-return
+presentation is generator-minimal, and both generators are canonical
+positive Fischer energy forms.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

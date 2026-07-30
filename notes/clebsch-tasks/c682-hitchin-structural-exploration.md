@@ -192,7 +192,11 @@ explicitly separated.
   Gram has rank one on the doubled block, giving the exact \(2<4\)
   obstruction.  A two-prime audit of all \(658\)
   multiplicity-greater-than-one blocks through degree \(180\) corroborates
-  the unrestricted Wronskian proof.
+  the unrestricted Wronskian proof.  This pair is generator-minimal on
+  every nontrivial full block: one operator generates a commutative
+  polynomial algebra, while the block corner is a noncommutative matrix
+  algebra.  Thus the corner is intrinsically the algebra of its two
+  canonical positive local energy forms.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
