@@ -52,6 +52,10 @@ actual owning paper.
   exact finite compression, not a uniform theorem.  Pair-only coherence
   loses the ternary arc condition, and the natural root-edge rational LP
   has exact feasible values 7--8 and 8--9, far above the required bound 4.
+  Uniformly, its candidate set is the Cartesian product of the endpoints'
+  residual passant pencils, so the feasible objective is the smaller pencil
+  size.  Hence this entire first-order dual route fails for every odd
+  \(q\ge13\), not only the two tested fields.
 
 ## Work package
 

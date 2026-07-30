@@ -2221,12 +2221,20 @@
       "rational_root_lp_obstructions": [
         {
           "candidate_points": 49,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            7
+          ],
           "root": [
             [
               1,
@@ -2246,12 +2254,20 @@
         },
         {
           "candidate_points": 49,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            7
+          ],
           "root": [
             [
               1,
@@ -2271,12 +2287,20 @@
         },
         {
           "candidate_points": 56,
+          "endpoint_types": [
+            "external",
+            "internal"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            8
+          ],
           "root": [
             [
               1,
@@ -2296,12 +2320,20 @@
         },
         {
           "candidate_points": 56,
+          "endpoint_types": [
+            "external",
+            "internal"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            8
+          ],
           "root": [
             [
               1,
@@ -2321,12 +2353,20 @@
         },
         {
           "candidate_points": 49,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            7
+          ],
           "root": [
             [
               1,
@@ -2346,12 +2386,20 @@
         },
         {
           "candidate_points": 56,
+          "endpoint_types": [
+            "external",
+            "internal"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            8
+          ],
           "root": [
             [
               1,
@@ -2371,12 +2419,20 @@
         },
         {
           "candidate_points": 56,
+          "endpoint_types": [
+            "external",
+            "internal"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            8
+          ],
           "root": [
             [
               1,
@@ -2396,12 +2452,20 @@
         },
         {
           "candidate_points": 49,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            7
+          ],
           "root": [
             [
               1,
@@ -2421,12 +2485,20 @@
         },
         {
           "candidate_points": 56,
+          "endpoint_types": [
+            "external",
+            "internal"
+          ],
           "feasible_objective": [
             7,
             1
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            7,
+            8
+          ],
           "root": [
             [
               1,
@@ -2446,12 +2518,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -2471,12 +2551,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -2496,12 +2584,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -2521,12 +2617,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -14066,12 +14170,20 @@
       "rational_root_lp_obstructions": [
         {
           "candidate_points": 72,
+          "endpoint_types": [
+            "internal",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            8
+          ],
           "root": [
             [
               1,
@@ -14091,12 +14203,20 @@
         },
         {
           "candidate_points": 72,
+          "endpoint_types": [
+            "internal",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            8
+          ],
           "root": [
             [
               1,
@@ -14116,12 +14236,20 @@
         },
         {
           "candidate_points": 81,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             9,
             1
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            9
+          ],
           "root": [
             [
               1,
@@ -14141,12 +14269,20 @@
         },
         {
           "candidate_points": 81,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             9,
             1
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            9
+          ],
           "root": [
             [
               1,
@@ -14166,12 +14302,20 @@
         },
         {
           "candidate_points": 72,
+          "endpoint_types": [
+            "internal",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            8
+          ],
           "root": [
             [
               1,
@@ -14191,12 +14335,20 @@
         },
         {
           "candidate_points": 81,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             9,
             1
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            9
+          ],
           "root": [
             [
               1,
@@ -14216,12 +14368,20 @@
         },
         {
           "candidate_points": 72,
+          "endpoint_types": [
+            "internal",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            8
+          ],
           "root": [
             [
               1,
@@ -14241,12 +14401,20 @@
         },
         {
           "candidate_points": 81,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             9,
             1
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            9
+          ],
           "root": [
             [
               1,
@@ -14266,12 +14434,20 @@
         },
         {
           "candidate_points": 72,
+          "endpoint_types": [
+            "internal",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            8
+          ],
           "root": [
             [
               1,
@@ -14291,12 +14467,20 @@
         },
         {
           "candidate_points": 81,
+          "endpoint_types": [
+            "internal",
+            "internal"
+          ],
           "feasible_objective": [
             9,
             1
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
+          "passant_pencil_sizes_excluding_root": [
+            9,
+            9
+          ],
           "root": [
             [
               1,
@@ -14316,12 +14500,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -14341,12 +14533,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -14366,12 +14566,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -14391,12 +14599,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,
@@ -14416,12 +14632,20 @@
         },
         {
           "candidate_points": 64,
+          "endpoint_types": [
+            "external",
+            "external"
+          ],
           "feasible_objective": [
             8,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
           "max_candidates_on_line_through_one_root": 8,
+          "passant_pencil_sizes_excluding_root": [
+            8,
+            8
+          ],
           "root": [
             [
               1,

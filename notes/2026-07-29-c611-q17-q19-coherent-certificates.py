@@ -284,6 +284,14 @@ def field_certificate(q: int) -> dict[str, object]:
 
     rational_records = []
     for root, old_record in zip(roots, old["roots"]):
+        endpoint_types = []
+        pencil_sizes = []
+        for vertex in root:
+            x, y, z = off[vertex]
+            value = (x * z - y * y) % q
+            external = pow(-value % q, (q - 1) // 2, q) == 1
+            endpoint_types.append("external" if external else "internal")
+            pencil_sizes.append((q - 3) // 2 if external else (q - 1) // 2)
         candidates = [
             vertex
             for vertex in range(len(off))
@@ -292,6 +300,8 @@ def field_certificate(q: int) -> dict[str, object]:
             and passant(off[root[1]], off[vertex], q)
             and dot(cross(off[root[0]], off[root[1]], q), off[vertex], q) != 0
         ]
+        if len(candidates) != pencil_sizes[0] * pencil_sizes[1]:
+            raise AssertionError("candidate set is not the product of the two passant pencils")
         max_one_root = 0
         max_zero_root = 0
         for line in all_points:
@@ -302,6 +312,8 @@ def field_certificate(q: int) -> dict[str, object]:
             elif root_count == 0:
                 max_zero_root = max(max_zero_root, candidate_count)
         denominator = max(2, max_one_root, (max_zero_root + 1) // 2)
+        if denominator != max(pencil_sizes):
+            raise AssertionError("uniform denominator is not the larger pencil size")
         weight = Fraction(1, denominator)
 
         for line in all_points:
@@ -313,9 +325,13 @@ def field_certificate(q: int) -> dict[str, object]:
             raise AssertionError("uniform point weight violates a forbidden-pair constraint")
 
         objective = len(candidates) * weight
+        if objective != min(pencil_sizes):
+            raise AssertionError("uniform objective is not the smaller pencil size")
         rational_records.append(
             {
                 "root": old_record["representative"],
+                "endpoint_types": endpoint_types,
+                "passant_pencil_sizes_excluding_root": pencil_sizes,
                 "candidate_points": len(candidates),
                 "max_candidates_on_line_through_one_root": max_one_root,
                 "max_candidates_on_line_through_no_root": max_zero_root,

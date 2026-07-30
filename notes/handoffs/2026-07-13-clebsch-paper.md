@@ -100,6 +100,11 @@ orbits; triple distributions separate the remaining two pairs.  This is a
 finite coherent compression, not a uniform theorem.  Pair-only coherence
 cannot see the ternary arc condition, and the natural root-edge rational LP
 has exact feasible objectives 7--8 and 8--9 against the required bound 4.
+Its uniform failure is the residual-pencil product: after fixing a passant
+edge, the candidate set is the Cartesian product of the two endpoints'
+remaining passant-line pencils.  The resulting feasible objective is at
+least \((q-3)/2\), so this first-order dual route fails for every odd
+\(q\ge13\).
 
 Local aggregate replay:
 

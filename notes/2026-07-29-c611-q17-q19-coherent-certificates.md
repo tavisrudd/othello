@@ -62,6 +62,37 @@ To exclude a seven-arc after fixing \(B\), its dual would have to prove
 \(\sum x_v\le4\).
 
 It cannot.  Every root type has an exact uniform rational primal witness.
+In fact the shape has a uniform explanation.  Through an external
+off-conic point there are \((q-1)/2\) passant lines, and through an internal
+point there are \((q+1)/2\).  Removing the fixed passant root line leaves
+\[
+ r(P)=
+ \begin{cases}
+ (q-3)/2,&P\text{ external},\\
+ (q-1)/2,&P\text{ internal}.
+ \end{cases}
+\]
+For \(B=\{a,b\}\), intersection gives a bijection
+\[
+ V_B\cong
+ \bigl(\text{remaining passant pencil at }a\bigr)
+ \times
+ \bigl(\text{remaining passant pencil at }b\bigr).
+\]
+Indeed two selected passant lines meet off the conic, and their intersection
+joins \(a,b\) by precisely those lines.  Hence
+\(|V_B|=r(a)r(b)\).  A line through one root contains at most the other
+pencil size, while a line through neither root meets each pencil line once.
+Consequently the uniform assignment
+\[
+ x_v=\frac1{\max(r(a),r(b))}
+\]
+is feasible and has objective \(\min(r(a),r(b))\).  This gives a uniform
+obstruction to the root-edge first-order dual, not merely the following
+finite table.  In particular, for every odd \(q\ge13\) and every passant
+root edge, the relaxation has value at least \((q-3)/2\ge5\), so no dual of
+this form can prove the required upper bound four.
+
 The complete shapes are
 
 | \(q\) | \(|V_B|\) | maximum on a line through one root | maximum on a line through no root | uniform \(x_v\) | objective | root orbits |
@@ -114,9 +145,9 @@ The load-bearing inputs are the already tracked C605 certificates:
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c611-q17-q19-coherent-certificates.py` | 15,585 | `4d46b515f0a8e63bbe27ab6398c5f972996edc73e97b1888cd714da3d58067b5` |
+| `notes/2026-07-29-c611-q17-q19-coherent-certificates.py` | 16,491 | `385616a11e02a17cf66b9a2c858bc1b920512a329eb3a9b65dbf57bbb91b857f` |
 | `notes/2026-07-29-c611-q17-q19-coherent-certificates-replay.py` | 5,146 | `49858ca427a6cf79fcd73fc41e134af5ce54e41fd92d2b45497dc6ffa5a21868` |
-| `notes/2026-07-29-c611-q17-q19-coherent-certificates.json` | 278,042 | `e33cb0b9c8e1b9057250c0f4d77ebbf772a220f4592d093f97422fe18c183daa` |
+| `notes/2026-07-29-c611-q17-q19-coherent-certificates.json` | 283,166 | `bdbcf2488c4b0be154f40b8c01ad4d3fd136e18c332bb04465ff61b132b39e38` |
 
 The certificate proves only the two displayed prime fields.  It neither
 proves a formula for the orbit counts nor promotes the finite patterns into a
@@ -140,19 +171,22 @@ two doubled fibres at \(q=19\); one triple orbital resolves each.  This is the
 smallest structural layer visible in the computation and is more informative
 than another extension-search transcript.
 
-The Tao-style question is whether the three rational-LP shapes and the two
-\(q=19\) pair-signature collisions have a field-uniform explanation.  The
-present evidence says not to claim one: the orbit count grows from 22 to 94,
-the pair layer ceases to separate, and the triple layer uses 151 field-specific
-types.  A genuine theorem would have to compress those types symbolically,
-not merely enumerate them.
+The Tao-style pass settles the three rational-LP shapes uniformly: they are
+the external/external, external/internal, and internal/internal products of
+the two residual passant pencils.  The analogous question for the two
+\(q=19\) pair-signature collisions remains open.  The orbit count grows from
+22 to 94, the pair layer ceases to separate, and the triple layer uses 151
+field-specific types.  A genuine maximum-six theorem would have to compress
+those types symbolically, not merely enumerate them.
 
 ## Mystery ledger
 
-- **Why do only three root-LP shapes occur in each field?** Computationally
-  settled and exactly certified; structurally unexplained.  The evidence gap
-  is a symbolic root-orbit calculation yielding the \(49,56,64\) and
-  \(64,72,81\) candidate counts and their line capacities.
+- **Why do only three root-LP shapes occur in each field?** Settled uniformly
+  by the residual-pencil product:
+  \(V_B\cong\mathcal P_a^\circ\times\mathcal P_b^\circ\), with pencil sizes
+  \((q-3)/2\) or \((q-1)/2\) according as the endpoint is external or
+  internal.  This yields the candidate counts, capacities, weights, and
+  objectives in one calculation.
 - **Why are there exactly two doubled pair-signature fibres at \(q=19\)?**
   The triple separators settle their distinction but not the source of the
   collision.  No paper-facing claim depends on explaining it.
