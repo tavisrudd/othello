@@ -1,0 +1,385 @@
+#!/usr/bin/env python3
+"""Exact replay for the C689 shared alternating-cycle radial mechanism."""
+
+import argparse
+import hashlib
+import itertools
+import json
+import math
+import runpy
+from pathlib import Path
+
+
+HERE = Path(__file__).resolve().parent
+CERTIFICATE = HERE / "2026-07-29-c689-shared-radial.json"
+BALANCED_PATH = HERE / "2026-07-26-c665-balanced-matching-completeness.py"
+C406_PATH = HERE / "2026-07-20-c406-matching-module.py"
+H3_PATH = HERE / "2026-07-25-c616-h3-equivariant-rank.json"
+INPUT_HASHES = {
+    BALANCED_PATH.name: "30428d78291930c00a1dc9ed7146f7714eaa86b438110535dd4dbc985b782b04",
+    C406_PATH.name: "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51",
+    H3_PATH.name: "cd1ecd1e5f467269d2b05bd109800aa8f48c11b7a178668a5555e951c049baa0",
+}
+REPRESENTATIVES = {
+    7: ((0, 1), (2, 4), (3, 6), (5, 7)),
+    11: ((0, 1), (2, 5), (3, 7), (4, 9), (6, 8), (10, 11)),
+}
+OLD_WITNESSES = {
+    7: {
+        "base": ((0, 2), (1, 4), (3, 7), (5, 6)),
+        "outer": ((0, 2), (1, 5), (3, 4), (6, 7)),
+        "radial_scalar": 4,
+    },
+    11: {
+        "base": ((0, 1), (2, 5), (3, 7), (4, 9), (6, 8), (10, 11)),
+        "outer": ((0, 1), (2, 11), (3, 8), (4, 6), (5, 9), (7, 10)),
+        "radial_scalar": 10,
+    },
+}
+
+
+def sha256(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def verify_inputs():
+    for name, expected in INPUT_HASHES.items():
+        assert sha256(HERE / name) == expected
+
+
+def cycle_lengths(edges):
+    adjacency = {}
+    for left, right in edges:
+        adjacency.setdefault(left, []).append(right)
+        adjacency.setdefault(right, []).append(left)
+    assert all(len(neighbors) == 2 for neighbors in adjacency.values())
+    unseen = set(adjacency)
+    lengths = []
+    while unseen:
+        start = next(iter(unseen))
+        previous = None
+        current = start
+        length = 0
+        while current in unseen:
+            unseen.remove(current)
+            length += 1
+            following = next(
+                neighbor
+                for neighbor in adjacency[current]
+                if neighbor != previous
+            )
+            previous, current = current, following
+        assert current == start
+        lengths.append(length)
+    return sorted(lengths)
+
+
+def radial_scalar(balanced, c406, left, right, q):
+    degree = (q - 3) // 2
+    left_product = balanced["matching_product"](left, q)
+    right_product = balanced["matching_product"](right, q)
+    difference = {
+        exponent: (
+            right_product.get(exponent, 0)
+            - left_product.get(exponent, 0)
+        )
+        % q
+        for exponent in set(left_product) | set(right_product)
+    }
+    value = balanced["quotient_by_conic"](difference, degree, q)
+    for current_degree in range(degree, 1, -2):
+        value = c406["matrix_vector"](
+            c406["laplacian_matrix"](current_degree, q), value, q
+        )
+    assert len(value) == 1
+    return value[0]
+
+
+def torus_product(balanced, parameter, q):
+    squares = sorted({value * value % q for value in range(1, q)})
+    answer = {(0, 0, 0): 1}
+    for value in squares:
+        factor = {
+            (1, 0, 0): parameter * value * value % q,
+            (0, 1, 0): -(1 + parameter) * value % q,
+            (0, 0, 1): 1,
+        }
+        answer = balanced["multiply"](answer, factor, q)
+    return answer
+
+
+def dickson_weight_coefficients(parameter, q):
+    n = (q - 1) // 2
+    coefficients = []
+    for index in range((n - 1) // 2 + 1):
+        lucas = n * math.comb(n - index, index) // (n - index)
+        coefficient = (
+            -(-1) ** index
+            * lucas
+            * pow(parameter, index, q)
+            * pow(1 + parameter, n - 2 * index, q)
+        ) % q
+        coefficients.append(coefficient)
+    return coefficients
+
+
+def torus_record(balanced, c406, q):
+    n = (q - 1) // 2
+    squares = {value * value % q for value in range(1, q)}
+    parameter = next(
+        value
+        for value in range(1, q)
+        if 4 * value * value % q == 1 and value not in squares
+    )
+    inverse_parameter = pow(parameter, -1, q)
+    assert inverse_parameter * pow(parameter, -1, q) % q == 4
+    order_four = next(
+        exponent for exponent in range(1, q) if pow(4, exponent, q) == 1
+    )
+    assert order_four == n
+    assert pow(parameter, n, q) == q - 1
+
+    products = {
+        parameter: torus_product(balanced, parameter, q),
+        inverse_parameter: torus_product(balanced, inverse_parameter, q),
+    }
+    actual_coefficients = {}
+    for value, product in products.items():
+        actual = [
+            product.get((index, n - 2 * index, index), 0)
+            for index in range((n - 1) // 2 + 1)
+        ]
+        formula = dickson_weight_coefficients(value, q)
+        assert actual == formula
+        assert product.get((n, 0, 0), 0) == q - 1
+        assert product.get((0, 0, n), 0) == 1
+        actual_coefficients[value] = actual
+
+    difference = {
+        exponent: (
+            products[inverse_parameter].get(exponent, 0)
+            - products[parameter].get(exponent, 0)
+        )
+        % q
+        for exponent in set(products[parameter]) | set(products[inverse_parameter])
+    }
+    cofactor_degree = n - 2
+    cofactor = balanced["quotient_by_conic"](
+        difference, cofactor_degree, q
+    )
+    traced = cofactor
+    for degree in range(cofactor_degree, 1, -2):
+        traced = c406["matrix_vector"](
+            c406["laplacian_matrix"](degree, q), traced, q
+        )
+    assert len(traced) == 3
+    assert traced[0] == traced[2] == 0 and traced[1]
+
+    difference_formula = []
+    for index in range((n - 1) // 2 + 1):
+        lucas = n * math.comb(n - index, index) // (n - index)
+        difference_formula.append(
+            (
+                2
+                * (-1) ** index
+                * lucas
+                * pow(parameter, index, q)
+                * pow(1 + parameter, n - 2 * index, q)
+            )
+            % q
+        )
+    actual_difference = [
+        (
+            actual_coefficients[inverse_parameter][index]
+            - actual_coefficients[parameter][index]
+        )
+        % q
+        for index in range(len(difference_formula))
+    ]
+    assert actual_difference == difference_formula
+
+    return {
+        "n": n,
+        "parameter": parameter,
+        "inverse_parameter": inverse_parameter,
+        "parameter_squared": parameter * parameter % q,
+        "inverse_ratio": inverse_parameter * pow(parameter, -1, q) % q,
+        "order_of_4": order_four,
+        "alternating_cycle_length": 2 * order_four,
+        "dickson_weight_coefficients": {
+            str(parameter): actual_coefficients[parameter],
+            str(inverse_parameter): actual_coefficients[inverse_parameter],
+        },
+        "difference_coefficients": actual_difference,
+        "deepest_cofactor_trace": traced,
+        "deepest_cofactor_trace_nonzero": True,
+    }
+
+
+def field_record(balanced, c406, q):
+    pgl, psl = balanced["projective_groups"](q)
+    full_orbit = sorted(balanced["orbit"](pgl, REPRESENTATIVES[q]))
+    sheets = sorted(
+        (
+            sorted(part)
+            for part in balanced["subgroup_orbits"](psl, full_orbit)
+        ),
+        key=lambda part: part[0],
+    )
+    assert [len(sheet) for sheet in sheets] == [q, q]
+
+    all_edges = list(itertools.combinations(range(q + 1), 2))
+    for sheet in sheets:
+        counts = {
+            edge: sum(edge in matching for matching in sheet)
+            for edge in all_edges
+        }
+        assert set(counts.values()) == {1}
+
+    incidence = [
+        [len(set(left) & set(right)) for right in sheets[1]]
+        for left in sheets[0]
+    ]
+    assert {value for row in incidence for value in row} == {0, 1}
+    block_size = (q + 1) // 2
+    design_lambda = (q + 1) // 4
+    assert {sum(row) for row in incidence} == {block_size}
+    gram = [
+        [
+            sum(incidence[i][column] * incidence[j][column] for column in range(q))
+            for j in range(q)
+        ]
+        for i in range(q)
+    ]
+    assert all(
+        gram[i][j] == (block_size if i == j else design_lambda)
+        for i in range(q)
+        for j in range(q)
+    )
+    # Since J^2=qJ=0 in characteristic q and
+    # lambda=(q+1)/4=1/4, the inverse is 4 A^T (I-J).
+    inverse = [
+        [
+            4
+            * (
+                incidence[column][row]
+                - sum(incidence[index][row] for index in range(q))
+            )
+            % q
+            for column in range(q)
+        ]
+        for row in range(q)
+    ]
+    assert all(
+        sum(incidence[i][k] * inverse[k][j] for k in range(q)) % q
+        == int(i == j)
+        for i in range(q)
+        for j in range(q)
+    )
+
+    incident_cycle_lengths = set()
+    incident_radial_scalars = set()
+    for edge in all_edges:
+        left = next(matching for matching in sheets[0] if edge in matching)
+        right = next(matching for matching in sheets[1] if edge in matching)
+        assert set(left) & set(right) == {edge}
+        remaining = (set(left) | set(right)) - {edge}
+        incident_cycle_lengths.add(tuple(cycle_lengths(remaining)))
+        incident_radial_scalars.add(
+            radial_scalar(balanced, c406, left, right, q)
+        )
+    assert incident_cycle_lengths == {(q - 1,)}
+    assert len(incident_radial_scalars) == 1
+    assert next(iter(incident_radial_scalars))
+
+    old = OLD_WITNESSES[q]
+    assert old["base"] in full_orbit and old["outer"] in full_orbit
+    assert set(old["base"]) & set(old["outer"]) == {
+        next(iter(set(old["base"]) & set(old["outer"])))
+    }
+    old_scalar = radial_scalar(
+        balanced, c406, old["base"], old["outer"], q
+    )
+    assert old_scalar == old["radial_scalar"]
+
+    return {
+        "q": q,
+        "sheet_sizes": [q, q],
+        "one_factorizations": True,
+        "cross_incidence_design": {
+            "v": q,
+            "k": block_size,
+            "lambda": design_lambda,
+            "intersection_values": [0, 1],
+            "gram_diagonal": block_size,
+            "gram_off_diagonal": design_lambda,
+            "invertible_in_characteristic_q": True,
+            "inverse_formula": "4*A^T*(I-J)",
+        },
+        "incident_edge_count": len(all_edges),
+        "incident_pair_common_edges": 1,
+        "incident_pair_cycle_lengths": [q - 1],
+        "incident_radial_scalars": sorted(incident_radial_scalars),
+        "torus_normal_form": torus_record(balanced, c406, q),
+        "old_witness": {
+            "base": [list(edge) for edge in old["base"]],
+            "outer": [list(edge) for edge in old["outer"]],
+            "common_edge": list(next(iter(set(old["base"]) & set(old["outer"])))),
+            "radial_scalar": old_scalar,
+        },
+    }
+
+
+def calculate():
+    verify_inputs()
+    balanced = runpy.run_path(str(BALANCED_PATH))
+    c406 = runpy.run_path(str(C406_PATH))
+    h3 = json.loads(H3_PATH.read_text())
+    fields = [field_record(balanced, c406, q) for q in (7, 11)]
+    assert fields[1]["old_witness"]["base"] == h3["witnesses"]["base_matching"]
+    assert fields[1]["old_witness"]["outer"] == h3["witnesses"]["outer_sheet_matching"]
+    assert (
+        fields[1]["old_witness"]["radial_scalar"]
+        == h3["witnesses"]["outer_sheet_delta_squared"]
+    )
+    return {
+        "schema": 1,
+        "construction": (
+            "the unique opposite-sheet matchings through an edge; after "
+            "edge normalization their complements are the c versus c^-1 "
+            "alternating Hamilton-cycle exchange"
+        ),
+        "human_formula": (
+            "the square-root resultant gives the Dickson weight coefficients; "
+            "c^2=1/4 and c^n=-1 give one closed difference recurrence"
+        ),
+        "fields": fields,
+        "inputs": {
+            name: {"sha256": digest, "bytes": (HERE / name).stat().st_size}
+            for name, digest in INPUT_HASHES.items()
+        },
+        "evidence_boundary": (
+            "exact corroboration of the shared alternating-cycle/Dickson "
+            "proof; the human proof supplies the invariant quotient and "
+            "resultant identity"
+        ),
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--write", action="store_true")
+    mode.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    rendered = json.dumps(calculate(), indent=2, sort_keys=True) + "\n"
+    if args.write:
+        CERTIFICATE.write_text(rendered)
+        print(f"wrote {CERTIFICATE.name}")
+    else:
+        assert CERTIFICATE.read_text() == rendered
+        print("C689 shared radial certificate OK")
+
+
+if __name__ == "__main__":
+    main()

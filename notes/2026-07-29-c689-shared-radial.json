@@ -1,0 +1,243 @@
+{
+  "construction": "the unique opposite-sheet matchings through an edge; after edge normalization their complements are the c versus c^-1 alternating Hamilton-cycle exchange",
+  "evidence_boundary": "exact corroboration of the shared alternating-cycle/Dickson proof; the human proof supplies the invariant quotient and resultant identity",
+  "fields": [
+    {
+      "cross_incidence_design": {
+        "gram_diagonal": 4,
+        "gram_off_diagonal": 2,
+        "intersection_values": [
+          0,
+          1
+        ],
+        "inverse_formula": "4*A^T*(I-J)",
+        "invertible_in_characteristic_q": true,
+        "k": 4,
+        "lambda": 2,
+        "v": 7
+      },
+      "incident_edge_count": 28,
+      "incident_pair_common_edges": 1,
+      "incident_pair_cycle_lengths": [
+        6
+      ],
+      "incident_radial_scalars": [
+        4
+      ],
+      "old_witness": {
+        "base": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "common_edge": [
+          0,
+          2
+        ],
+        "outer": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "radial_scalar": 4
+      },
+      "one_factorizations": true,
+      "q": 7,
+      "sheet_sizes": [
+        7,
+        7
+      ],
+      "torus_normal_form": {
+        "alternating_cycle_length": 6,
+        "deepest_cofactor_trace": [
+          0,
+          5,
+          0
+        ],
+        "deepest_cofactor_trace_nonzero": true,
+        "dickson_weight_coefficients": {
+          "3": [
+            6,
+            1
+          ],
+          "5": [
+            1,
+            6
+          ]
+        },
+        "difference_coefficients": [
+          2,
+          5
+        ],
+        "inverse_parameter": 5,
+        "inverse_ratio": 4,
+        "n": 3,
+        "order_of_4": 3,
+        "parameter": 3,
+        "parameter_squared": 2
+      }
+    },
+    {
+      "cross_incidence_design": {
+        "gram_diagonal": 6,
+        "gram_off_diagonal": 3,
+        "intersection_values": [
+          0,
+          1
+        ],
+        "inverse_formula": "4*A^T*(I-J)",
+        "invertible_in_characteristic_q": true,
+        "k": 6,
+        "lambda": 3,
+        "v": 11
+      },
+      "incident_edge_count": 66,
+      "incident_pair_common_edges": 1,
+      "incident_pair_cycle_lengths": [
+        10
+      ],
+      "incident_radial_scalars": [
+        10
+      ],
+      "old_witness": {
+        "base": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "common_edge": [
+          0,
+          1
+        ],
+        "outer": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        "radial_scalar": 10
+      },
+      "one_factorizations": true,
+      "q": 11,
+      "sheet_sizes": [
+        11,
+        11
+      ],
+      "torus_normal_form": {
+        "alternating_cycle_length": 10,
+        "deepest_cofactor_trace": [
+          0,
+          3,
+          0
+        ],
+        "deepest_cofactor_trace_nonzero": true,
+        "dickson_weight_coefficients": {
+          "2": [
+            10,
+            6,
+            6
+          ],
+          "6": [
+            1,
+            5,
+            5
+          ]
+        },
+        "difference_coefficients": [
+          9,
+          1,
+          1
+        ],
+        "inverse_parameter": 2,
+        "inverse_ratio": 4,
+        "n": 5,
+        "order_of_4": 5,
+        "parameter": 6,
+        "parameter_squared": 3
+      }
+    }
+  ],
+  "human_formula": "the square-root resultant gives the Dickson weight coefficients; c^2=1/4 and c^n=-1 give one closed difference recurrence",
+  "inputs": {
+    "2026-07-20-c406-matching-module.py": {
+      "bytes": 48589,
+      "sha256": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51"
+    },
+    "2026-07-25-c616-h3-equivariant-rank.json": {
+      "bytes": 4381,
+      "sha256": "cd1ecd1e5f467269d2b05bd109800aa8f48c11b7a178668a5555e951c049baa0"
+    },
+    "2026-07-26-c665-balanced-matching-completeness.py": {
+      "bytes": 12821,
+      "sha256": "30428d78291930c00a1dc9ed7146f7714eaa86b438110535dd4dbc985b782b04"
+    }
+  },
+  "schema": 1
+}

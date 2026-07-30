@@ -27,7 +27,6 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
-| [C689 — shared radial nonvanishing](../clebsch-tasks/c689-shared-radial-nonvanishing.md) | ready; C665 conceptual successor; v2 only | replace the \(B_3/H_3\) scalar witnesses by one geometric radial-nonvanishing mechanism or a sharp obstruction |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
 
@@ -63,6 +62,11 @@ Thus the continuation locus intrinsically reconstructs the golden quadratic
 algebra and its conjugation. Its natural fibre-odd integral commutant is
 the conductor-two order \(\mathbf Z[\sqrt5]\), whose mod-\(2\) fibre is a
 dual-number point and whose normalization has fibre \(\mathbf F_4\).
+The signed continuation operator is exactly C682's golden Gram conference
+matrix up to a signed permutation. Hence this is the same conductor defect
+on the golden six-axis algebra. It is not the whole reason \(2\) is bad for
+C682: the boundary operator, apolar form, and Mukai--Umemura geometry remain
+bad after normalization.
 The first open all-size full-conic gate is \(k=9\) over \(q=23,25\).
 
 Local aggregate replay:
@@ -97,8 +101,12 @@ recorded in
 non-equivariant Hasse pairing remains non-evidence.  This does not change
 or hold frozen v1.  C688 has replaced its q=169 field-sized replay by a
 generic local \(S,T,R,Y\) checker with an independent closed-form replay;
-the historical q=169 certificate remains corroboration only.  C682
-characteristic-zero work is inventory unless
+the historical q=169 certificate remains corroboration only.  C689 has
+also unified the residual \(B_3/H_3\) radial witnesses: the unique
+cross-sheet pair through an edge is one alternating-cycle
+\(c\leftrightarrow c^{-1}\) exchange, and a single Dickson recurrence
+forces its deepest radial trace to be nonzero.  The old q=7/q=11 scalars
+remain corroboration only.  C682 characteristic-zero work is inventory unless
 explicitly promoted.
 
 Local aggregate replay:

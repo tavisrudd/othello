@@ -4,8 +4,10 @@
 
 **Opened:** 2026-07-29
 
-**Status:** ready as the C665 conceptual successor after completed C688;
-Paper II v2 only.
+**Status:** completed 2026-07-29; the shared alternating-cycle/Dickson
+mechanism and two independent replays are green.  Paper II v2 only.
+
+**Report:** `notes/2026-07-29-c689-shared-radial.md`.
 
 ## Objective
 
@@ -71,3 +73,15 @@ geometric nonvanishing.  The highest-EV first attacks are:
 
 Source record:
 `notes/2026-07-26-c665-balanced-matching-completeness.md`.
+
+## Completion
+
+Every endpoint edge selects a unique cross-sheet matching pair.  In both
+\(B_3\) and \(H_3\), deleting the common edge leaves one alternating
+Hamilton cycle; after edge normalization it is the same
+\(c\leftrightarrow c^{-1}\) exchange with \(c^{-2}=4\).  One
+square-root resultant/Dickson recurrence proves that its deepest radial
+trace is nonzero.  The former q=7 and q=11 scalars are recovered as
+corollaries.  The cross-incidence tensors are moreover the symmetric
+designs \(2\!-\!(7,4,2)\) and \(2\!-\!(11,6,3)\), with perfect defining-
+characteristic pairing \(A^{-1}=4A^{\mathsf T}(I-J)\).
