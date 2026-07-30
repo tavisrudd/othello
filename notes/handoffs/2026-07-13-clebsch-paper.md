@@ -28,7 +28,7 @@
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued and unblocked | synthesize C665/C688/C689/C692 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; 51/63 monotone entrances controlled | evaluate four exceptional transfer types / twelve phases |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; exceptional Schur recurrences derived | prove all-\(r\) endpoint transversality in four modulo-\(20\) types |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -307,6 +307,14 @@ degree-four polynomials on all twenty-one eventual strict peak families;
   modulo-\(60\) plateau entrances in the monotone
   \(2',4,4_s,5,6\) modules; the three-local-return identification remains
   logically separate.
+The four exceptional modulo-\(20\) block Schur recurrences are now explicit.
+The global level \(\lfloor b/3\rfloor\) makes all twelve phases block
+tridiagonal, their backward blocks factor only at
+\(0,\pm1/3,\pm2/3\), and exact elimination leaves complements of sizes
+\(5|6|7\), \(5|6|7\), \(6|7|9\), and \(7|9|11\).  The selected endpoint
+determinants are nonzero on the exact finite audit \(6\le r\le35\).
+The remaining gate is an all-\(r\) signed-cone, Wronskian, or equivalent
+transversality proof; no unrestricted endpoint claim is yet made.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

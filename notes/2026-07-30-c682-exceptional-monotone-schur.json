@@ -1,0 +1,1145 @@
+{
+  "derived_statement": "For every exceptional modulo-20 entrance, ordering by floor(h/3) makes the incoming third-transvectant block tridiagonal. Its backward blocks are invertible at every integral interior level. Eliminating them leaves the recorded fixed signed block Schur complement.",
+  "finite_claim": "All 120 selected endpoint Schur determinants for 6<=r<=35 are exactly nonzero.",
+  "not_claimed": "No all-r endpoint nonvanishing theorem is claimed; a signed invariant cone or equivalent global transfer argument remains necessary.",
+  "schema": "c682-exceptional-monotone-schur-v1",
+  "trusted_boundary": "The checker imports the previously verified exact global Weyl operators. The backward determinant identity is proved within its formal bivariate degree bound; the Schur audit has the explicit finite stop r=35.",
+  "types": {
+    "4_6": {
+      "backward_block": {
+        "block_size": 4,
+        "identity_grid_reason": "in each phase the determinant has degree at most 3b separately in (q,j), so the exact rectangular grid proves the displayed bivariate identity",
+        "integer_interior_conclusion": "nonzero for every integer level j>=1",
+        "phases_by_r_mod_3": {
+          "0": {
+            "constant": "-3946646253475088666984448000000000000000/17",
+            "identity_grid": {
+              "level": [
+                1,
+                13
+              ],
+              "q": [
+                15,
+                27
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 1,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "0"
+              },
+              {
+                "multiplicity": 3,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "2/3"
+              }
+            ]
+          },
+          "1": {
+            "constant": "-3946646253475088666984448000000000000000/17",
+            "identity_grid": {
+              "level": [
+                1,
+                13
+              ],
+              "q": [
+                15,
+                27
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 1,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 3,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "0"
+              },
+              {
+                "multiplicity": 3,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 1,
+                "root": "2/3"
+              }
+            ]
+          },
+          "2": {
+            "constant": "-3946646253475088666984448000000000000000/17",
+            "identity_grid": {
+              "level": [
+                1,
+                13
+              ],
+              "q": [
+                15,
+                27
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 2,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 3,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "0"
+              },
+              {
+                "multiplicity": 2,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 1,
+                "root": "2/3"
+              }
+            ]
+          }
+        },
+        "polynomial_degree_bound": 12
+      },
+      "entrance_degrees": "n=6+20r, r>=6",
+      "finite_exact_audit": {
+        "conclusion": "the selected endpoint Schur determinant is nonzero through r=35",
+        "count": 30,
+        "exact_fraction_stream_sha256": "380b6a575774bbf25935bf84b8881e006a0091035dfbc4c43a9174752afbabe5",
+        "r_range": [
+          6,
+          35
+        ],
+        "rows": [
+          {
+            "r": 6,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 7,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 8,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 9,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 10,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 11,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 12,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 13,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 14,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 15,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 16,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 17,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 18,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 19,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 20,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 21,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 22,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 23,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 24,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 25,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 26,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 27,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 28,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 29,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 30,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 31,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 32,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 33,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 34,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 35,
+            "schur_size": 7,
+            "sign": 1
+          }
+        ]
+      },
+      "global_level": "floor(h_exponent/3)",
+      "module": "4",
+      "schur_sizes_by_r_mod_3": {
+        "0": 5,
+        "1": 6,
+        "2": 7
+      }
+    },
+    "4s_3": {
+      "backward_block": {
+        "block_size": 4,
+        "identity_grid_reason": "in each phase the determinant has degree at most 3b separately in (q,j), so the exact rectangular grid proves the displayed bivariate identity",
+        "integer_interior_conclusion": "nonzero for every integer level j>=1",
+        "phases_by_r_mod_3": {
+          "0": {
+            "constant": "98666156336877216674611200000000000000000/7",
+            "identity_grid": {
+              "level": [
+                1,
+                13
+              ],
+              "q": [
+                15,
+                27
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 1,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "0"
+              },
+              {
+                "multiplicity": 3,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "2/3"
+              }
+            ]
+          },
+          "1": {
+            "constant": "98666156336877216674611200000000000000000/7",
+            "identity_grid": {
+              "level": [
+                1,
+                13
+              ],
+              "q": [
+                15,
+                27
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 1,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 3,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "0"
+              },
+              {
+                "multiplicity": 3,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 1,
+                "root": "2/3"
+              }
+            ]
+          },
+          "2": {
+            "constant": "98666156336877216674611200000000000000000/7",
+            "identity_grid": {
+              "level": [
+                1,
+                13
+              ],
+              "q": [
+                15,
+                27
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 2,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 3,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "0"
+              },
+              {
+                "multiplicity": 2,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 1,
+                "root": "2/3"
+              }
+            ]
+          }
+        },
+        "polynomial_degree_bound": 12
+      },
+      "entrance_degrees": "n=3+20r, r>=6",
+      "finite_exact_audit": {
+        "conclusion": "the selected endpoint Schur determinant is nonzero through r=35",
+        "count": 30,
+        "exact_fraction_stream_sha256": "2c0d2990437b65e84c25750646c76a10ae6b63a35f04e9e83e08cb7eaf69e27c",
+        "r_range": [
+          6,
+          35
+        ],
+        "rows": [
+          {
+            "r": 6,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 7,
+            "schur_size": 6,
+            "sign": 1
+          },
+          {
+            "r": 8,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 9,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 10,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 11,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 12,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 13,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 14,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 15,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 16,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 17,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 18,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 19,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 20,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 21,
+            "schur_size": 5,
+            "sign": -1
+          },
+          {
+            "r": 22,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 23,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 24,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 25,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 26,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 27,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 28,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 29,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 30,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 31,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 32,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 33,
+            "schur_size": 5,
+            "sign": 1
+          },
+          {
+            "r": 34,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 35,
+            "schur_size": 7,
+            "sign": -1
+          }
+        ]
+      },
+      "global_level": "floor(h_exponent/3)",
+      "module": "4s",
+      "schur_sizes_by_r_mod_3": {
+        "0": 5,
+        "1": 6,
+        "2": 7
+      }
+    },
+    "5_4": {
+      "backward_block": {
+        "block_size": 5,
+        "identity_grid_reason": "in each phase the determinant has degree at most 3b separately in (q,j), so the exact rectangular grid proves the displayed bivariate identity",
+        "integer_interior_conclusion": "nonzero for every integer level j>=1",
+        "phases_by_r_mod_3": {
+          "0": {
+            "constant": "-1020842929826229437078805594243072000000000000000000000/17",
+            "identity_grid": {
+              "level": [
+                1,
+                16
+              ],
+              "q": [
+                18,
+                33
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 1,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 3,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 5,
+                "root": "0"
+              },
+              {
+                "multiplicity": 4,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "2/3"
+              }
+            ]
+          },
+          "1": {
+            "constant": "-1020842929826229437078805594243072000000000000000000000/17",
+            "identity_grid": {
+              "level": [
+                1,
+                16
+              ],
+              "q": [
+                18,
+                33
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 2,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 5,
+                "root": "0"
+              },
+              {
+                "multiplicity": 3,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 1,
+                "root": "2/3"
+              }
+            ]
+          },
+          "2": {
+            "constant": "-1020842929826229437078805594243072000000000000000000000/17",
+            "identity_grid": {
+              "level": [
+                1,
+                16
+              ],
+              "q": [
+                18,
+                33
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 2,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 3,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 5,
+                "root": "0"
+              },
+              {
+                "multiplicity": 3,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "2/3"
+              }
+            ]
+          }
+        },
+        "polynomial_degree_bound": 15
+      },
+      "entrance_degrees": "n=4+20r, r>=6",
+      "finite_exact_audit": {
+        "conclusion": "the selected endpoint Schur determinant is nonzero through r=35",
+        "count": 30,
+        "exact_fraction_stream_sha256": "53e1f782fc68c66c699f58bd6650dc1f8fb6abf25b150a0b8579e7538691578a",
+        "r_range": [
+          6,
+          35
+        ],
+        "rows": [
+          {
+            "r": 6,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 7,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 8,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 9,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 10,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 11,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 12,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 13,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 14,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 15,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 16,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 17,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 18,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 19,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 20,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 21,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 22,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 23,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 24,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 25,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 26,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 27,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 28,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 29,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 30,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 31,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 32,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 33,
+            "schur_size": 6,
+            "sign": -1
+          },
+          {
+            "r": 34,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 35,
+            "schur_size": 9,
+            "sign": -1
+          }
+        ]
+      },
+      "global_level": "floor(h_exponent/3)",
+      "module": "5",
+      "schur_sizes_by_r_mod_3": {
+        "0": 6,
+        "1": 7,
+        "2": 9
+      }
+    },
+    "6_5": {
+      "backward_block": {
+        "block_size": 6,
+        "identity_grid_reason": "in each phase the determinant has degree at most 3b separately in (q,j), so the exact rectangular grid proves the displayed bivariate identity",
+        "integer_interior_conclusion": "nonzero for every integer level j>=1",
+        "phases_by_r_mod_3": {
+          "0": {
+            "constant": "-92400868619699853047590174930344345600000000000000000000000000/91",
+            "identity_grid": {
+              "level": [
+                1,
+                19
+              ],
+              "q": [
+                21,
+                39
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 2,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 6,
+                "root": "0"
+              },
+              {
+                "multiplicity": 4,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "2/3"
+              }
+            ]
+          },
+          "1": {
+            "constant": "-92400868619699853047590174930344345600000000000000000000000000/91",
+            "identity_grid": {
+              "level": [
+                1,
+                19
+              ],
+              "q": [
+                21,
+                39
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 2,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 6,
+                "root": "0"
+              },
+              {
+                "multiplicity": 4,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "2/3"
+              }
+            ]
+          },
+          "2": {
+            "constant": "-92400868619699853047590174930344345600000000000000000000000000/91",
+            "identity_grid": {
+              "level": [
+                1,
+                19
+              ],
+              "q": [
+                21,
+                39
+              ]
+            },
+            "roots": [
+              {
+                "multiplicity": 2,
+                "root": "-2/3"
+              },
+              {
+                "multiplicity": 4,
+                "root": "-1/3"
+              },
+              {
+                "multiplicity": 6,
+                "root": "0"
+              },
+              {
+                "multiplicity": 4,
+                "root": "1/3"
+              },
+              {
+                "multiplicity": 2,
+                "root": "2/3"
+              }
+            ]
+          }
+        },
+        "polynomial_degree_bound": 18
+      },
+      "entrance_degrees": "n=5+20r, r>=6",
+      "finite_exact_audit": {
+        "conclusion": "the selected endpoint Schur determinant is nonzero through r=35",
+        "count": 30,
+        "exact_fraction_stream_sha256": "436293b31312c53c469a8a2e5a35310e5ca43ac5d43b86be5a47b1cff9a81ec3",
+        "r_range": [
+          6,
+          35
+        ],
+        "rows": [
+          {
+            "r": 6,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 7,
+            "schur_size": 9,
+            "sign": -1
+          },
+          {
+            "r": 8,
+            "schur_size": 11,
+            "sign": -1
+          },
+          {
+            "r": 9,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 10,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 11,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 12,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 13,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 14,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 15,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 16,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 17,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 18,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 19,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 20,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 21,
+            "schur_size": 7,
+            "sign": 1
+          },
+          {
+            "r": 22,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 23,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 24,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 25,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 26,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 27,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 28,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 29,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 30,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 31,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 32,
+            "schur_size": 11,
+            "sign": 1
+          },
+          {
+            "r": 33,
+            "schur_size": 7,
+            "sign": -1
+          },
+          {
+            "r": 34,
+            "schur_size": 9,
+            "sign": 1
+          },
+          {
+            "r": 35,
+            "schur_size": 11,
+            "sign": 1
+          }
+        ]
+      },
+      "global_level": "floor(h_exponent/3)",
+      "module": "6",
+      "schur_sizes_by_r_mod_3": {
+        "0": 7,
+        "1": 9,
+        "2": 11
+      }
+    }
+  }
+}
