@@ -88,6 +88,8 @@ def replay(field):
     assert normalized_support == squares | {0}
     assert design["paley_complement"]
     assert design["nonzero_paley_multiplier"] == 4
+    assert design["bordered_paley_hadamard_order"] == q + 1
+    assert design["bordered_paley_hadamard"]
     assert pow(4, (q - 1) // 2, q) == 1
     assert all(
         pow(4, exponent, q) != 1

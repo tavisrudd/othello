@@ -51,10 +51,13 @@ C690 is complete as v2 exploration. The syndrome locus reconstructs the
 unordered support-orientation torsor; on the frozen common marking its
 exchange is support complementation, Gale duality, and golden conjugation,
 and its first signed moment is cubic. C611 now closes the q=13 binary
-minimum-distance gate \(d\ge10\) by Segre tangent triples: after one point
-is fixed, a cyclic 42-vertex compatibility graph has clique number five,
+minimum-distance gate by proving the exact value \(d=12\). Segre tangent
+triples exclude weight eight: after one point is fixed, a cyclic 42-vertex
+compatibility graph has clique number five,
 while a weight-eight word would require a seven-clique. The proof is a
 six-difference-set, five-row unique-closure lemma, not a support search. It
+then excludes the two forced weight-ten pencil profiles and constructs a
+dihedral weight-twelve word. It
 does not prove the unsaturated \((7,13)\) case or the stronger maximum-six
 claim, and it is not reached by C665's defining-characteristic trade
 machinery. The
@@ -115,7 +118,8 @@ cross-sheet pair through an edge is one alternating-cycle
 \(c\leftrightarrow c^{-1}\) exchange, and a single Dickson recurrence
 forces its deepest radial trace to be nonzero.  Its cross-incidence design
 is the circulant Paley complement, with \(4\) generating the nonzero
-quadratic-residue orbit.  The old q=7/q=11 scalars remain corroboration
+quadratic-residue orbit; its bordered sign matrix is the Paley Hadamard
+carrier of order \(q+1\).  The old q=7/q=11 scalars remain corroboration
 only.  C682 characteristic-zero work is inventory unless
 explicitly promoted.
 

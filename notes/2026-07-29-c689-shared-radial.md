@@ -78,6 +78,29 @@ at q=11 it is the complement of the Paley \(2\!-\!(11,5,2)\) biplane.
 The design parameters and inverse (I) now follow from the quadratic-
 residue difference identity.
 
+Writing
+\[
+ H=2A-J
+\]
+gives row sum \(1\) and
+\[
+ HH^{\mathsf T}=(q+1)I-J.
+\]
+Consequently the bordered sign matrix
+\[
+ \widehat H=
+ \begin{pmatrix}
+ -1&\mathbf1^{\mathsf T}\\
+ \mathbf1&H
+ \end{pmatrix}
+ \quad\text{satisfies}\quad
+ \widehat H\widehat H^{\mathsf T}=(q+1)I.       \tag{H}
+\]
+Thus C689's two cross-incidence tensors canonically complete to the Paley
+Hadamard matrices of orders eight and twelve.  This is the direct
+incidence-level bridge to the signed Hadamard/Gale self-duality already
+present in Paper II.
+
 Fix an edge \(e\).  The unique incident pair is invariant under its
 construction, and its complementary alternating cycle is the geometric
 object whose radial projection is being tested.  The two types first
@@ -239,9 +262,9 @@ traces and checks the symmetric-design identities.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c689-shared-radial.py` | 14635 | `49f8533542330e550d5754238612f3366575859db0044252123b7c37047044ba` |
-| `notes/2026-07-29-c689-shared-radial-independent.py` | 3703 | `caea31f84eead9f4c6739b8ed663c03084f12ff2482652c4babf6fbf4bf82b5a` |
-| `notes/2026-07-29-c689-shared-radial.json` | 5775 | `4890553d32996e1ab5c6d07f037069d814a12303a8f4b81c7f84481a24137565` |
+| `notes/2026-07-29-c689-shared-radial.py` | 15277 | `2cd1884c09b19564b406ff70b6cdd8b80f916eab8eae362e2b5dc73d40a6261d` |
+| `notes/2026-07-29-c689-shared-radial-independent.py` | 3808 | `ea891ec30dd75f273bf6f2603d13960c8e5c27668cf9987a7fb9ae6bad8366d3` |
+| `notes/2026-07-29-c689-shared-radial.json` | 5946 | `dfe0e7ca958f0ce749d2833ee2fb830a2b01bf88639f911feaaeba1a2e4194f5` |
 
 Pinned load-bearing inputs:
 
@@ -282,7 +305,9 @@ The further free identification is Paley: translation coordinates turn
 the tensor into the circulant complement of the quadratic-residue
 difference set.  This removes the last unexplained appearance of \(4\):
 it is the square multiplier generating the nonzero Paley orbit in both
-fields.
+fields.  The bordered completion (H) additionally identifies the exact
+Hadamard carrier behind the signed sheet geometry; no coordinate quotient
+calculation is needed for that consequence.
 
 The Tao boundary is the parameter relation \(c^{-2}=4\).  It is a property
 of the two classified exceptional configurations, not a consequence of
@@ -304,6 +329,7 @@ incidence geometry to the Fischer projection.
 | old scalars \(4,10\) | recovered as coordinate specializations | none |
 | cross-sheet incidence | settled as the two symmetric designs with explicit perfect pairing (I) | none |
 | Paley structure | settled: the translation-circulant support is affinely \(\{0\}\cup Q_0\) | none |
+| signed Hadamard carrier | settled by the bordered Paley matrix (H), of orders eight and twelve | none |
 | parameter \(4\) | settled as the generator of the nonzero Paley orbit in both classified configurations; not abstractly universal | no C689 gap |
 
 No genuine C689 mystery remains.  Extending the alternating-cycle

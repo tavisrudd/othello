@@ -4,6 +4,8 @@
   "fields": [
     {
       "cross_incidence_design": {
+        "bordered_paley_hadamard": true,
+        "bordered_paley_hadamard_order": 8,
         "gram_diagonal": 4,
         "gram_off_diagonal": 2,
         "intersection_values": [
@@ -123,6 +125,8 @@
     },
     {
       "cross_incidence_design": {
+        "bordered_paley_hadamard": true,
+        "bordered_paley_hadamard_order": 12,
         "gram_diagonal": 6,
         "gram_off_diagonal": 3,
         "intersection_values": [

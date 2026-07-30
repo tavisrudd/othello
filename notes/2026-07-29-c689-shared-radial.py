@@ -326,6 +326,24 @@ def field_record(balanced, c406, q):
     }
     assert difference_counts[0] == block_size
     assert set(difference_counts.values()) == {block_size, design_lambda}
+    signed_incidence = [
+        [2 * value - 1 for value in row] for row in paley_incidence
+    ]
+    assert {sum(row) for row in signed_incidence} == {1}
+    bordered_hadamard = [[-1] + [1] * q]
+    bordered_hadamard.extend(
+        [1] + row for row in signed_incidence
+    )
+    assert all(
+        sum(
+            bordered_hadamard[i][column]
+            * bordered_hadamard[j][column]
+            for column in range(q + 1)
+        )
+        == ((q + 1) if i == j else 0)
+        for i in range(q + 1)
+        for j in range(q + 1)
+    )
 
     incident_cycle_lengths = set()
     incident_radial_scalars = set()
@@ -373,6 +391,8 @@ def field_record(balanced, c406, q):
             },
             "paley_complement": True,
             "nonzero_paley_multiplier": 4,
+            "bordered_paley_hadamard_order": q + 1,
+            "bordered_paley_hadamard": True,
         },
         "incident_edge_count": len(all_edges),
         "incident_pair_common_edges": 1,
