@@ -4,7 +4,9 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued; Paper III v2 research.
+**Status:** complete; full operator-derived \(27\), minuscule dictionary, and
+row-swap classification proved in
+`notes/2026-07-29-c695-e6-minuscule-27.md`.
 
 ## Objective
 
@@ -65,4 +67,3 @@ Mukai--Umemura/Clebsch model.
 - `notes/2026-07-29-c690-paper-i-rigidity-upgrades.md`
 - Krämer--Litt--Maculan, arXiv:2604.20970, especially the
   \(A_1\times A_5\) branching \(27=12+15\)
-

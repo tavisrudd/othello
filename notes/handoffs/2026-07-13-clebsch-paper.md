@@ -30,8 +30,7 @@
 | [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
 | [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | queued after C691 | integrate C611/C690 without importing Paper III's reveal |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
-| [C695 — \(E_6\) minuscule 27](../clebsch-tasks/c695-paper-iii-e6-minuscule-27.md) | queued; Paper III v2 research | construct the fifteen complementary lines and prove the \(12+15\) branching dictionary |
-| [C697 — Schläfli--Hodge \(E_6\) model](../clebsch-tasks/c697-schlafli-hodge-e6-variation.md) | queued after C695; bounded extension kill test | match the graded \(6|15|6\) carrier and Cartan cubic or close on an invariant mismatch |
+| [C697 — Schläfli--Hodge \(E_6\) model](../clebsch-tasks/c697-schlafli-hodge-e6-variation.md) | queued and unblocked; bounded extension kill test | recover the signed Cartan tensor and match the graded \(6|15|6\) carrier, or close on the first invariant mismatch |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; all first plateau families controlled | propagate boundary anchors and close off-peak mixing |
 
@@ -252,13 +251,20 @@ Paper III automatically.
 
 C696 is complete as a Paper III v2 outreach audit. Its strongest connection
 is the \(A_1\times A_5\) minuscule branching \(27=12+15\): C682 supplies the
-double-six, while C695 owns the complementary fifteen lines and the
-row-swap involution test. Krämer--Litt--Maculan's generic-monodromy theorem
+double-six, and C695 now canonically recovers the complementary fifteen
+lines from the unique cubic through those twelve embedded lines.  The full
+operator-derived configuration has the exact minuscule
+\((2\otimes6^\vee)\oplus\bigwedge^2 6\) weight dictionary, all \(45\)
+tritangent planes, and the Cartan cubic's mixed-plus-Pfaffian monomial
+support.  Row exchange is the \(A_1\) Weyl reflection, not Galois conjugation
+or the outer automorphism exchanging \(27\) and \(27^\vee\).  C697 owns the
+remaining signed-tensor and Hodge-grading gate.
+Krämer--Litt--Maculan's generic-monodromy theorem
 is context rather than an imported result; the golden field is not their
-invariant trace field, though C695 may test the exact real-subfield tower
-\(\mathbf Q(\sqrt5)\subset\mathbf Q(\zeta_5)\) if it constructs the full
-twenty-seven-line Galois action. A bounded invitation is drafted but must not
-be sent before C695 closes or sharply obstructs the construction.
+invariant trace field.  The exact full-\(27\) Galois action preserves both
+rows and realizes the definition-field tower
+\(\mathbf Q(\sqrt5)\subset\mathbf Q(\zeta_5)\); it is not a monodromy
+trace-field statement. A bounded invitation is drafted but remains unsent.
 
 Local aggregate replay:
 
