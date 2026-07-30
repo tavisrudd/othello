@@ -275,7 +275,16 @@ explicitly separated.
   is invertible modulo \(5\); this isolates the comparison defect at \(2\)
   from golden ramification at \(5\).  The quotient coordinates can be
   chosen as \(x_3+x_4,x_3+x_5\), and \(C\) acts trivially on them; the
-  index-four defect is exactly two scalar parity directions.
+  index-four defect is exactly two scalar parity directions.  More
+  intrinsically, every triple \(S=\{i,j,k\}\) gives a Krylov lattice
+  \(P_S=(e_i,e_j,e_k,Ce_i,Ce_j,Ce_k)\) with
+  \[
+  \det P_S=-4C_{ij}C_{jk}C_{ki}.
+  \]
+  Hence all twenty triples have index four, while their determinant signs
+  are exactly the Clebsch cubic coefficients.  The orientation cubic is
+  the normalized determinant tensor of the descended golden \(E_8\)
+  operator.
 
 ## Active order
 

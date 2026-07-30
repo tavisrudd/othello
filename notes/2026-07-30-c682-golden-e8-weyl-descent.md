@@ -172,6 +172,41 @@ Prime \(5\) behaves differently.  There \(C\) and \(J_3\) both have rank
 ramification prime of the golden quadratic algebra itself; only \(2\) is a
 defect of the comparison lattice.
 
+## The cubic as a Krylov determinant
+
+The initial choice \(e_0,e_1,e_2\) is not special.  For every triple
+\(S=\{i,j,k\}\), form the golden Krylov comparison
+\[
+P_S=(e_i,e_j,e_k,Ce_i,Ce_j,Ce_k).
+\]
+Exact calculation gives the uniform identity
+\[
+\boxed{
+\det P_S=-4\,C_{ij}C_{jk}C_{ki}.
+}
+\]
+Thus every triple generates an index-four companion sublattice.  The
+twenty determinants split ten with value \(4\) and ten with value \(-4\);
+their signs are precisely the triangle signs of the golden two-graph.
+
+If
+\[
+C_{\rm Cl}(x)=\sum_{i<j<k}
+C_{ij}C_{jk}C_{ki}\,x_ix_jx_k
+\]
+is the Clebsch orientation cubic, then
+\[
+\boxed{
+C_{\rm Cl}(x)
+=-\frac14\sum_{|S|=3}\det(P_S)\prod_{i\in S}x_i.
+}
+\]
+This bypasses the intermediate triangle-product description: the cubic is
+the normalized determinant tensor of the three-seed Krylov lattices for
+the all-degree descended \(E_8\) golden operator.  Changing the ambient
+orientation changes every determinant sign simultaneously, exactly as
+required for the cubic orientation torsor.
+
 ## Interpretation
 
 The complete bridge is now
@@ -212,6 +247,10 @@ descended golden operator is visible as the six-axis conference matrix.
 - **Does prime \(5\) create another lattice mismatch?** Settled negatively.
   The comparison is invertible modulo \(5\); both golden operators simply
   specialize to the same rank-three square-zero endomorphism.
+- **Was the seed triple \(e_0,e_1,e_2\) an arbitrary marking?** Settled.
+  Every one of the twenty triples gives index \(4\), and its determinant
+  sign is minus the corresponding Clebsch triangle sign.  The complete
+  cubic is recovered by the normalized Krylov-determinant formula.
 - **Are the local Gram returns a standard preprojective/spherical
   affine-\(E_8\) corner presentation?** Still open and independent of the
   golden descent.  The present result supplies the missing Galois/Weyl

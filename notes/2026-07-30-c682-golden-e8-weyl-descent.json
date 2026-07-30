@@ -263,9 +263,199 @@
     "all_degree_upgrade": "The paired natural-2/natural-2p E8 towers have an explicit rational all-degree third-transvectant Weyl presentation commuting with multiplication by sqrt(5).",
     "comparison_quotient": "(Z/2)^2",
     "degree_ten_specialization": "On the first balanced 3+3p slice, the universal companion operator becomes the Clebsch conference matrix.",
+    "orientation_upgrade": "The Clebsch cubic is the normalized determinant tensor of the three-seed Krylov lattices for the descended golden E8 operator.",
     "prime_two_meaning": "The comparison has index 4 and becomes invertible after inverting 2; its mod-2 rank mismatch is the integral conductor obstruction."
   },
   "degree_ten_integral_comparison": {
+    "all_twenty_triples": {
+      "absolute_determinant": 4,
+      "cubic_recovery": "C_Clebsch(x)=-(1/4)*sum_S det(P_S)*prod_{i in S}x_i",
+      "identity": "det(e_i,e_j,e_k,C*e_i,C*e_j,C*e_k)=-4*C_ij*C_jk*C_ki",
+      "negative_determinants": 10,
+      "positive_determinants": 10,
+      "rows": [
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            0,
+            1,
+            4
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            0,
+            1,
+            5
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            0,
+            2,
+            4
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            0,
+            2,
+            5
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            0,
+            3,
+            4
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            0,
+            3,
+            5
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            0,
+            4,
+            5
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            1,
+            2,
+            5
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            1,
+            3,
+            4
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            1,
+            3,
+            5
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            1,
+            4,
+            5
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "determinant": 4,
+          "triangle_sign": -1,
+          "triple": [
+            2,
+            3,
+            5
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            2,
+            4,
+            5
+          ]
+        },
+        {
+          "determinant": -4,
+          "triangle_sign": 1,
+          "triple": [
+            3,
+            4,
+            5
+          ]
+        }
+      ]
+    },
     "cokernel_coordinates_mod_2": [
       [
         0,

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.util
+import itertools
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -359,6 +360,37 @@ def build_certificate() -> dict[str, object]:
     ) != (3, 3, 6):
         raise AssertionError("unexpected mod-five comparison")
 
+    triple_determinants = []
+    for triple in itertools.combinations(range(6), 3):
+        triple_seed_columns = [
+            [int(row == column) for row in range(6)]
+            for column in triple
+        ]
+        triple_image_columns = [
+            [conference[row][column] for row in range(6)]
+            for column in triple
+        ]
+        triple_columns = triple_seed_columns + triple_image_columns
+        triple_comparison = [
+            [triple_columns[column][row] for column in range(6)]
+            for row in range(6)
+        ]
+        determinant = determinant_integer(triple_comparison)
+        triangle_sign = (
+            conference[triple[0]][triple[1]]
+            * conference[triple[1]][triple[2]]
+            * conference[triple[2]][triple[0]]
+        )
+        if determinant != -4 * triangle_sign:
+            raise AssertionError("Krylov determinant/cubic identity failed")
+        triple_determinants.append(
+            {
+                "triple": list(triple),
+                "determinant": determinant,
+                "triangle_sign": triangle_sign,
+            }
+        )
+
     return {
         "schema": "c682-golden-e8-weyl-descent-v1",
         "inputs": {
@@ -434,6 +466,23 @@ def build_certificate() -> dict[str, object]:
                 "remains invertible; prime 5 is ramification of the golden "
                 "algebra, not a comparison-lattice defect"
             ),
+            "all_twenty_triples": {
+                "identity": (
+                    "det(e_i,e_j,e_k,C*e_i,C*e_j,C*e_k)="
+                    "-4*C_ij*C_jk*C_ki"
+                ),
+                "absolute_determinant": 4,
+                "positive_determinants": sum(
+                    row["determinant"] == 4 for row in triple_determinants
+                ),
+                "negative_determinants": sum(
+                    row["determinant"] == -4 for row in triple_determinants
+                ),
+                "rows": triple_determinants,
+                "cubic_recovery": (
+                    "C_Clebsch(x)=-(1/4)*sum_S det(P_S)*prod_{i in S}x_i"
+                ),
+            },
         },
         "conclusion": {
             "all_degree_upgrade": (
@@ -451,6 +500,11 @@ def build_certificate() -> dict[str, object]:
                 "conductor obstruction."
             ),
             "comparison_quotient": "(Z/2)^2",
+            "orientation_upgrade": (
+                "The Clebsch cubic is the normalized determinant tensor of "
+                "the three-seed Krylov lattices for the descended golden "
+                "E8 operator."
+            ),
         },
     }
 

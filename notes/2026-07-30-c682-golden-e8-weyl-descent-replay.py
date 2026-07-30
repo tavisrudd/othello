@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import itertools
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -150,6 +151,30 @@ def main() -> None:
     ]
     if quotient_after_conference != quotient:
         raise AssertionError("replay quotient action is not identity")
+    determinant_signs = []
+    for triple in itertools.combinations(range(6), 3):
+        columns = [
+            [int(row == column) for row in range(6)]
+            for column in triple
+        ] + [
+            [conference[row][column] for row in range(6)]
+            for column in triple
+        ]
+        triple_comparison = [
+            [columns[column][row] for column in range(6)]
+            for row in range(6)
+        ]
+        triple_determinant = determinant(triple_comparison)
+        triangle_sign = (
+            conference[triple[0]][triple[1]]
+            * conference[triple[1]][triple[2]]
+            * conference[triple[2]][triple[0]]
+        )
+        if triple_determinant != -4 * triangle_sign:
+            raise AssertionError("replay Krylov/cubic determinant failed")
+        determinant_signs.append(triple_determinant)
+    if determinant_signs.count(4) != 10 or determinant_signs.count(-4) != 10:
+        raise AssertionError("replay determinant orientation split failed")
     shifted_conference = [
         [entry - int(row == column) for column, entry in enumerate(values)]
         for row, values in enumerate(conference)
@@ -166,7 +191,8 @@ def main() -> None:
     print(
         "PASS: independent degrees 0,10,22,60 satisfy golden Weyl "
         "intertwining; CP=PJ with determinant 4 and quotient (Z/2)^2; "
-        "mod-2 Jordan ranks are 1 and 3; C acts trivially on the quotient"
+        "mod-2 Jordan ranks are 1 and 3; C acts trivially on the quotient; "
+        "all 20 Krylov determinants recover the cubic signs"
     )
 
 
