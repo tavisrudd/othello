@@ -4,7 +4,9 @@
 
 **Opened:** 2026-07-29
 
-**Status:** unblocked by C695; bounded extension kill test.
+**Status:** complete; graded Cartan carrier passes, while arithmetic descent
+and non-self-dual Hodge conjugation sharply bound the comparison, in
+`notes/2026-07-29-c697-schlafli-hodge-e6.md`.
 
 ## C695 entry reduction
 

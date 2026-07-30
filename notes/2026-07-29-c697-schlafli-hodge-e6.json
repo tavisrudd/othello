@@ -1,0 +1,135 @@
+{
+  "cartan_support": {
+    "mixed_terms": 30,
+    "pfaffian_terms": 15,
+    "total_tritangent_terms": 45
+  },
+  "conjugation_classification": {
+    "A1_Weyl": "internal complex-linear signed action on one 27",
+    "E6_outer_automorphism": "exchanges 27 with 27^dual",
+    "Hodge_complex_conjugation": "maps V_L to V_(L^dual)",
+    "cyclotomic_Galois": "preserves rows and permutes axes"
+  },
+  "cyclotomic_galois_actions": {
+    "1": {
+      "axis_orientation_sign": 1,
+      "axis_permutation_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "compensated_cartan_multiplier": 1,
+      "determinant_compensated_row_multiplier": 1,
+      "raw_cartan_line_preserved": true,
+      "raw_mixed_multiplier": 1,
+      "raw_pfaffian_multiplier": 1,
+      "zeta_image": "zeta^1"
+    },
+    "2": {
+      "axis_orientation_sign": -1,
+      "axis_permutation_one_based": [
+        1,
+        2,
+        4,
+        6,
+        3,
+        5
+      ],
+      "compensated_cartan_multiplier": -1,
+      "determinant_compensated_row_multiplier": -1,
+      "raw_cartan_line_preserved": false,
+      "raw_mixed_multiplier": 1,
+      "raw_pfaffian_multiplier": -1,
+      "zeta_image": "zeta^2"
+    },
+    "3": {
+      "axis_orientation_sign": -1,
+      "axis_permutation_one_based": [
+        1,
+        2,
+        5,
+        3,
+        6,
+        4
+      ],
+      "compensated_cartan_multiplier": -1,
+      "determinant_compensated_row_multiplier": -1,
+      "raw_cartan_line_preserved": false,
+      "raw_mixed_multiplier": 1,
+      "raw_pfaffian_multiplier": -1,
+      "zeta_image": "zeta^3"
+    },
+    "4": {
+      "axis_orientation_sign": 1,
+      "axis_permutation_one_based": [
+        1,
+        2,
+        6,
+        5,
+        4,
+        3
+      ],
+      "compensated_cartan_multiplier": 1,
+      "determinant_compensated_row_multiplier": 1,
+      "raw_cartan_line_preserved": true,
+      "raw_mixed_multiplier": 1,
+      "raw_pfaffian_multiplier": 1,
+      "zeta_image": "zeta^4"
+    }
+  },
+  "graded_carrier": {
+    "centered_grading_weights": [
+      1,
+      0,
+      -1
+    ],
+    "dimensions": [
+      6,
+      15,
+      6
+    ],
+    "formula": "(A tensor U^dual) direct_sum exterior^2 U",
+    "hodge_labels": [
+      "(2,0)",
+      "(1,1)",
+      "(0,2)"
+    ]
+  },
+  "orientation_field": {
+    "even_subgroup_exponents": [
+      1,
+      4
+    ],
+    "fixed_field": "Q(sqrt(5))",
+    "full_Q_descent_requires": "twist one row by the determinant character of the six-axis permutation",
+    "splitting_field": "Q(zeta_5)"
+  },
+  "row_actions": {
+    "signed_A1_weyl_lift": {
+      "action": "x_i -> y_i; y_i -> -x_i; w_ij -> w_ij",
+      "cartan_preserved": true,
+      "linear_order": 4,
+      "mixed_multiplier": 1,
+      "pfaffian_multiplier": 1,
+      "weight_permutation_order": 2
+    },
+    "unsigned_exchange": {
+      "cartan_line_preserved": false,
+      "mixed_multiplier": -1,
+      "pfaffian_multiplier": 1
+    }
+  },
+  "schema": "c697-schlafli-hodge-e6-v1",
+  "tritangent_rescaling_gauge": {
+    "coefficient_invariant_dimension": 24,
+    "kernel_dimension": 6,
+    "matrix_shape": [
+      45,
+      27
+    ],
+    "rank_over_Q": 21
+  }
+}

@@ -29,7 +29,6 @@
 | [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
 | [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | ready after C691 | integrate C611/C690/C691 without importing Paper III's reveal |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
-| [C697 — Schläfli--Hodge \(E_6\) model](../clebsch-tasks/c697-schlafli-hodge-e6-variation.md) | queued and unblocked; bounded extension kill test | recover the signed Cartan tensor and match the graded \(6|15|6\) carrier, or close on the first invariant mismatch |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; all first plateau families controlled | propagate boundary anchors and close off-peak mixing |
 
@@ -268,8 +267,16 @@ operator-derived configuration has the exact minuscule
 \((2\otimes6^\vee)\oplus\bigwedge^2 6\) weight dictionary, all \(45\)
 tritangent planes, and the Cartan cubic's mixed-plus-Pfaffian monomial
 support.  Row exchange is the \(A_1\) Weyl reflection, not Galois conjugation
-or the outer automorphism exchanging \(27\) and \(27^\vee\).  C697 owns the
-remaining signed-tensor and Hodge-grading gate.
+or the outer automorphism exchanging \(27\) and \(27^\vee\).  C697 now
+constructs the abstract graded Cartan carrier with its exact \(6|15|6\)
+cocharacter and signed mixed-plus-Pfaffian cubic.  The row permutation
+requires an order-four linear Weyl lift.  The raw Cartan tensor descends
+exactly to the six-axis orientation field \(\mathbf Q(\sqrt5)\); rational
+descent needs a determinant twist on one row.  KLM Hodge conjugation instead
+relates \(V_L\) to \(V_{L^\vee}\), hence belongs to the outer
+\(27\leftrightarrow27^\vee\) side.  With no cohomological or Higgs
+realization, the operator construction is a graded Cartan model but not a
+model of the KLM variation.
 Krämer--Litt--Maculan's generic-monodromy theorem
 is context rather than an imported result; the golden field is not their
 invariant trace field.  The exact full-\(27\) Galois action preserves both
