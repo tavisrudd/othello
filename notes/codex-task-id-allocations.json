@@ -1646,8 +1646,17 @@
       "last": 694,
       "purpose": "Paper I and II v2 integration plus bounded cubic-golden and cross-sheet pairing tests",
       "sequence": 183
+    },
+    {
+      "count": 2,
+      "first": 695,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 696,
+      "purpose": "Complete Paper III Schlaefli geometry to the E6 minuscule 27 and audit Daniel Litt crossover",
+      "sequence": 184
     }
   ],
-  "next_id": 695,
+  "next_id": 697,
   "schema": "codex-task-id-allocations-v1"
 }
