@@ -292,7 +292,13 @@ explicitly separated.
   whose diagonal is \(4\) times the cubic sign tensor.  Its two eigenvalues
   \(\pm5\sqrt5\) each have multiplicity ten, so the orientation split is
   the trace-zero balance of one canonical golden operator on the support
-  space.
+  space.  Modulo \(2\), \(K_{ST}\) is odd exactly when two triples meet in
+  one axis.  This degree-nine parity graph recovers complementary triples
+  as the unique distinct pairs with no common odd neighbors, and hence
+  recovers the full Johnson support scheme and the six-axis carrier up to
+  complement duality.  Thus reading the cubic from the diagonal is
+  intrinsic on the distinguished integral support lattice, though not from
+  the bare rational conjugacy class of \(K\).
 
 ## Active order
 

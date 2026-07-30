@@ -265,7 +265,8 @@
     "degree_ten_specialization": "On the first balanced 3+3p slice, the universal companion operator becomes the Clebsch conference matrix.",
     "middle_exterior_upgrade": "The cubic coefficients are the diagonal of the primitive integral operator Hodge_star*exterior_cube(C), whose square is 125*I.",
     "orientation_upgrade": "The Clebsch cubic is the normalized determinant tensor of the three-seed Krylov lattices for the descended golden E8 operator.",
-    "prime_two_meaning": "The comparison has index 4 and becomes invertible after inverting 2; its mod-2 rank mismatch is the integral conductor obstruction."
+    "prime_two_meaning": "The comparison has index 4 and becomes invertible after inverting 2; its mod-2 rank mismatch is the integral conductor obstruction.",
+    "support_scheme_upgrade": "The parity pattern of the middle exterior operator recovers the full twenty-triple Johnson support scheme and its complement involution."
   },
   "degree_ten_integral_comparison": {
     "all_twenty_triples": {
@@ -674,6 +675,34 @@
         3,
         4
       ],
+      "parity_reconstruction": {
+        "complement_rule": "the complementary triple is the unique distinct vertex with no common odd neighbors",
+        "odd_entry_rule": "K_ST is odd iff |S intersect T|=1",
+        "odd_graph_degree": 9,
+        "recovered_complement_indices": [
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          0
+        ],
+        "scheme_recovery": "diagonal, intersection-one adjacency, complement, and the remaining intersection-two relation are all recovered from K mod 2"
+      },
       "primitive_integral": true,
       "square": "K^2=125*I",
       "trace": 0

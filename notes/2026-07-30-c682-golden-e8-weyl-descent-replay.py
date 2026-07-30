@@ -222,6 +222,35 @@ def main() -> None:
     ]
     if middle_diagonal != [4 * sign for sign in cubic_signs]:
         raise AssertionError("replay middle exterior diagonal failed")
+    odd_adjacency = [
+        [
+            int(row != column and middle[row][column] % 2 != 0)
+            for column in range(20)
+        ]
+        for row in range(20)
+    ]
+    for row, left in enumerate(triples):
+        if sum(odd_adjacency[row]) != 9:
+            raise AssertionError("replay odd graph degree failed")
+        for column, right in enumerate(triples):
+            if odd_adjacency[row][column] != int(
+                row != column and len(set(left) & set(right)) == 1
+            ):
+                raise AssertionError("replay odd graph relation failed")
+        zero_common = [
+            column
+            for column in range(20)
+            if column != row
+            and sum(
+                odd_adjacency[row][middle_index]
+                * odd_adjacency[column][middle_index]
+                for middle_index in range(20)
+            )
+            == 0
+        ]
+        complement = tuple(index for index in range(6) if index not in left)
+        if zero_common != [triples.index(complement)]:
+            raise AssertionError("replay complement recovery failed")
     shifted_conference = [
         [entry - int(row == column) for column, entry in enumerate(values)]
         for row, values in enumerate(conference)
@@ -240,7 +269,8 @@ def main() -> None:
         "intertwining; CP=PJ with determinant 4 and quotient (Z/2)^2; "
         "mod-2 Jordan ranks are 1 and 3; C acts trivially on the quotient; "
         "all 20 Krylov determinants recover the cubic signs; "
-        "the middle exterior operator squares to 125"
+        "the middle exterior operator squares to 125 and its parity "
+        "recovers the full triple-intersection scheme"
     )
 
 

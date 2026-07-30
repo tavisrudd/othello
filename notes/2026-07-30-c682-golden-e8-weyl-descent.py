@@ -442,6 +442,43 @@ def build_certificate() -> dict[str, object]:
     ]
     if middle_diagonal != [4 * sign for sign in cubic_signs]:
         raise AssertionError("middle exterior diagonal/cubic identity failed")
+    odd_adjacency = [
+        [
+            int(row != column and middle_operator[row][column] % 2 != 0)
+            for column in range(20)
+        ]
+        for row in range(20)
+    ]
+    expected_odd_adjacency = [
+        [
+            int(row != column and len(set(left) & set(right)) == 1)
+            for column, right in enumerate(triples)
+        ]
+        for row, left in enumerate(triples)
+    ]
+    if odd_adjacency != expected_odd_adjacency:
+        raise AssertionError("middle exterior parity graph changed")
+    odd_degrees = [sum(row) for row in odd_adjacency]
+    if odd_degrees != [9] * 20:
+        raise AssertionError("unexpected odd-graph degrees")
+    recovered_complements = []
+    for row, triple in enumerate(triples):
+        zero_common_neighbors = [
+            column
+            for column in range(20)
+            if column != row
+            and sum(
+                odd_adjacency[row][middle] * odd_adjacency[column][middle]
+                for middle in range(20)
+            )
+            == 0
+        ]
+        if len(zero_common_neighbors) != 1:
+            raise AssertionError("complement was not recovered uniquely")
+        complement = tuple(index for index in range(6) if index not in triple)
+        if zero_common_neighbors[0] != triple_index[complement]:
+            raise AssertionError("recovered complement is incorrect")
+        recovered_complements.append(zero_common_neighbors[0])
     nonzero_middle_entries = [
         abs(entry)
         for row in middle_operator
@@ -567,6 +604,20 @@ def build_certificate() -> dict[str, object]:
                     "with Hodge_star^2=-I and exterior_cube(C)^2=125*I "
                     "this gives K^2=125*I"
                 ),
+                "parity_reconstruction": {
+                    "odd_entry_rule": "K_ST is odd iff |S intersect T|=1",
+                    "odd_graph_degree": 9,
+                    "complement_rule": (
+                        "the complementary triple is the unique distinct "
+                        "vertex with no common odd neighbors"
+                    ),
+                    "recovered_complement_indices": recovered_complements,
+                    "scheme_recovery": (
+                        "diagonal, intersection-one adjacency, complement, "
+                        "and the remaining intersection-two relation are "
+                        "all recovered from K mod 2"
+                    ),
+                },
             },
         },
         "conclusion": {
@@ -594,6 +645,11 @@ def build_certificate() -> dict[str, object]:
                 "The cubic coefficients are the diagonal of the primitive "
                 "integral operator Hodge_star*exterior_cube(C), whose square "
                 "is 125*I."
+            ),
+            "support_scheme_upgrade": (
+                "The parity pattern of the middle exterior operator "
+                "recovers the full twenty-triple Johnson support scheme "
+                "and its complement involution."
             ),
         },
     }

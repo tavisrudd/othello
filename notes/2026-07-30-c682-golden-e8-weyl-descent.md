@@ -246,6 +246,36 @@ integral golden operator on the twenty-dimensional support space.  The
 ten-plus/ten-minus orientation split is its trace-zero spectral balance,
 not an isolated enumeration of triangle signs.
 
+### Parity reconstructs the support scheme
+
+The full operator resolves the apparent dependence on a preassigned triple
+labeling.  For two basis triples \(S,T\),
+\[
+\boxed{\quad
+K_{ST}\equiv1\pmod2
+\quad\Longleftrightarrow\quad
+|S\cap T|=1.
+\quad}
+\]
+Thus the odd-entry graph of \(K\) is the degree-nine
+intersection-one graph on the twenty three-subsets.  For each vertex,
+its complementary triple is the unique distinct vertex with no common odd
+neighbors.  The remaining nonadjacent, noncomplementary pairs are exactly
+the intersection-two relation.
+
+Consequently \(K\bmod2\) reconstructs the complete Johnson support scheme:
+equality, intersection one, intersection two, and complementation.  The
+underlying six-axis carrier is recovered up to its expected complement
+duality.  The diagonal of the integral lift then supplies the oriented
+cubic signs.
+
+There is still a precise trust boundary.  This reconstruction treats \(K\)
+as an operator on its distinguished integral support lattice and recovers
+the coordinate atoms up to permutation/duality.  An arbitrary
+\(\operatorname{GL}_{20}(\mathbf Q)\)-conjugate of \(K\), stripped of that
+lattice, retains only its two eigenvalues and cannot recover the support
+scheme.
+
 ## Interpretation
 
 The complete bridge is now
@@ -294,6 +324,11 @@ descended golden operator is visible as the six-axis conference matrix.
   object?** Settled.  They are the diagonal entries of
   \(K=*\Lambda^3C\), a primitive integral operator satisfying
   \(K^2=125I\) with two ten-dimensional golden eigenspaces.
+- **Is extracting the diagonal of \(K\) merely a coordinate trick?**
+  Settled on the integral support lattice.  The parity of \(K\) recovers
+  the intersection-one graph, its unique complement pairs, and hence the
+  full Johnson scheme before the diagonal signs are read.  Without the
+  integral lattice, a rational conjugacy class alone is insufficient.
 - **Are the local Gram returns a standard preprojective/spherical
   affine-\(E_8\) corner presentation?** Still open and independent of the
   golden descent.  The present result supplies the missing Galois/Weyl
