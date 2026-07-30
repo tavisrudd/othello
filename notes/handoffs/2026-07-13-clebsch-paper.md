@@ -27,6 +27,10 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | active by explicit user selection; v2 only; q=13 gate closed | test q=17,19 coherent/rational certificates |
+| [C691 — cubic/golden compatibility](../clebsch-tasks/c691-paper-i-cubic-golden-compatibility.md) | queued; bounded Paper I v2 kill test | find one intrinsic map or close on the representation obstruction |
+| [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
+| [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | queued after C691 | integrate C611/C690 without importing Paper III's reveal |
+| [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
 
