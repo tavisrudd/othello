@@ -15,7 +15,7 @@
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | v2 integration and replay gates green; approved v1 baseline frozen | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | six-nodal attribution repaired; v2 referee cold read requires bounded revision before release; approved v1 baseline frozen | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic recovery and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v1 theorem, editorial, cold-read, and replay gates green; public packaging remains; C665 uniform C1 is closed for v2 | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics* | `papers/clebsch-covers/` | pre-release `GO`; immutable locator and author metadata remain | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -24,7 +24,7 @@
 
 | task | state | next gate |
 |---|---|---|
-| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
+| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on bounded cold-read revision, then external publication authority | correct the rational module sentence, trust boundary, closest literature, and opening hierarchy; rerun gates |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued and unblocked | synthesize C665/C688/C689/C692 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
@@ -41,6 +41,15 @@ rigidity* form one warning-free, nineteen-row release surface with eighteen
 checks. C320 is complete with final `GO`; C693 completed the accepted v2
 integration without changing the frozen v1 baseline. C182 owns every
 remaining release action.
+
+The 2026-07-30 v2 referee cold read supersedes the earlier release verdict
+for the revised paper.  The Cheltsov--Tschinkel--Zhang attribution and exact
+six-nodal coordinate boundary are now integrated.  Before release, correct
+the field-of-definition wording for the rational \(A_5\)-module, state the
+orientation theorem's computer/formal boundary accurately, add the closest
+q13 and standard two-graph sources, and integrate the orientation result
+into the novelty paragraph and conclusion.  Report:
+[`../2026-07-30-paper-i-v2-referee-cold-read.md`](../2026-07-30-paper-i-v2-referee-cold-read.md).
 
 The load-bearing theorem package reconstructs the Clebsch code from the
 weight-six deep-hole syndrome locus and closes the terminal fields

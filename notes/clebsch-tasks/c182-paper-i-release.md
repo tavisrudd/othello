@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-15
 
-**Status:** queued; local Paper I gates are complete, external publication
-authority and credentials are unavailable in this workspace.
+**Status:** queued; the 2026-07-30 referee cold read requires a bounded
+revision before the external publication gate.
 
 ## Objective
 
@@ -15,7 +15,13 @@ insert its stable identifier into the manuscript.
 
 ## Current state
 
-- Paper I has final independent `GO`.
+- The prior independent `GO` is superseded by the 2026-07-30 v2 cold read.
+- The six-nodal cubic attribution is repaired in authoritative commit
+  `67a5a249` and standalone commit `cddeb19`.
+- Before release, correct the rational \(A_5\)-module field-of-definition
+  sentence, align the orientation theorem's computational/formal boundary,
+  add the closest q13/two-graph literature, and integrate the v2 theorem
+  into the novelty paragraph and conclusion.
 - The focused human paper and computational companion are the release target;
   the mega-paper fallback is not.
 - The manuscript already pins the shared formal repository and names the
@@ -23,9 +29,13 @@ insert its stable identifier into the manuscript.
 - No paper-code remote, immutable deposit, DOI, or Software Heritage
   identifier exists yet.
 
+Cold-read report:
+`notes/2026-07-30-paper-i-v2-referee-cold-read.md`.
+
 ## Next action
 
-With explicit user authority and publication credentials:
+First close the bounded cold-read revisions and rerun the paper/companion
+gates.  Then, with explicit user authority and publication credentials:
 
 1. create the public paper repository/release package;
 2. freeze the exact approved source, PDF, manifest, pins, licences, and
