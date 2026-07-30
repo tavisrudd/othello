@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-25
 
-**Status:** queued after C182; no Paper I v1 blocker.
+**Status:** active by explicit user selection; no Paper I v1 blocker.
 
 ## Objective
 
@@ -23,10 +23,17 @@ actual owning paper.
   weight-eight nullword. All nullwords have even weight, so the exclusion
   is exactly \(d\ge10\). C665's defining-characteristic transitive-sheet
   machinery does not reach this cross-characteristic support gate.
+- The q=13 gate is now closed by the tangent-triple theorem in
+  `notes/2026-07-29-c611-q13-tangent-triples.md`. Fixing one internal point
+  gives a 42-vertex compatibility graph of clique number five, certified by
+  six cyclic difference sets and a five-row unique-closure lemma. Hence a
+  weight-eight nullword, which would require a local seven-clique, cannot
+  exist and \(d\ge10\).
 
 ## Work package
 
-1. analyze the \(q=13\) incidence-code obstruction;
+1. retain the closed \(q=13\) tangent-triple certificate and its exact
+   Paper I v2/companion boundary;
 2. test coherent-configuration or rational-dual certificates at
    \(q=17,19\);
 3. distinguish a uniform human theorem from a reformulation of the existing

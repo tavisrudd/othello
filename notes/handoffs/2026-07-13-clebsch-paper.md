@@ -26,7 +26,7 @@
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
+| [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | active by explicit user selection; v2 only; q=13 gate closed | test q=17,19 coherent/rational certificates |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
 
@@ -50,9 +50,14 @@ the paper does not inherit trust from the fallback mega-paper gate.
 C690 is complete as v2 exploration. The syndrome locus reconstructs the
 unordered support-orientation torsor; on the frozen common marking its
 exchange is support complementation, Gale duality, and golden conjugation,
-and its first signed moment is cubic. The q=13 terminal problem is exactly
-the binary minimum-distance gate \(d\ge10\), which remains C611-owned and is
-not reached by C665's defining-characteristic trade machinery. The
+and its first signed moment is cubic. C611 now closes the q=13 binary
+minimum-distance gate \(d\ge10\) by Segre tangent triples: after one point
+is fixed, a cyclic 42-vertex compatibility graph has clique number five,
+while a weight-eight word would require a seven-clique. The proof is a
+six-difference-set, five-row unique-closure lemma, not a support search. It
+does not prove the unsaturated \((7,13)\) case or the stronger maximum-six
+claim, and it is not reached by C665's defining-characteristic trade
+machinery. The
 twelve-point Schläfli identification fails equivariantly, but both objects
 map to the same six-axis \(A_5/D_5\) carrier: Paper I is its twisted
 transitive two-cover and the double-six is its split two-cover. On the
