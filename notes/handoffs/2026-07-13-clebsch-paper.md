@@ -34,7 +34,7 @@ same progression without administrative cross-promotion.  Full report:
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on bounded cold-read revision, then external publication authority | correct the rational module sentence, trust boundary, closest literature, and opening hierarchy; rerun gates |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay-corner classification complete | user decision: close exploration or select a parked branch |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay-corner and golden/\(E_8\) descent classifications complete | user decision: close exploration or select an optional successor |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace

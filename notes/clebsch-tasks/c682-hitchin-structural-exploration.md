@@ -234,6 +234,25 @@ explicitly separated.
   \(2\). Locally it joins the cross-Gram defects at \(11,23\) in the
   universal template \(\mathbf Z_p+p\mathcal O_p\), with normalized fibres
   inert at \(2,23\) and split at \(11\).
+- The golden/Clebsch and affine-\(E_8\) branches now meet by an exact
+  operator identity.  The Cartan null-cone map sends the six oriented
+  icosahedral axes to a rank-six decimic space
+  \(\mathbf3\oplus\mathbf3'\).  For the axis Klein dodecic, the degree-ten
+  return restricts there as
+  \[
+  \Delta^\dagger\Delta
+  =211625906798592000(11+18t)(\sqrt5I-C),
+  \]
+  where \(C\) is exactly C690/C691's integral conference matrix,
+  \(C^2=5I\).  Thus the return reconstructs the golden operator and hence,
+  through \(c_{ijk}=C_{ij}C_{jk}C_{ki}\), the Clebsch orientation cubic.
+  Golden conjugation exchanges the two return kernels.  A same-tower
+  graded descent is impossible because the \(3,3'\) Kostant degrees differ
+  first in degree \(2\); the correct categorical lift pairs the
+  Galois-conjugate natural-\(2\) and natural-\(2'\) McKay towers.  Their
+  recurrences agree under node conjugation through degree \(180\), while
+  the equality for all degrees follows formally by conjugating the
+  recurrence.
 
 ## Active order
 
@@ -243,8 +262,12 @@ twenty-one eventual strict peak families, every off-peak propagation step,
 all sixty-three monotone entrance phases, and the local-return
 identification are closed.  The nearest lower and upper Gram forms already
 generate every full block corner; degree \(22\) is the unique exact
-failure.  C682 remains open exploration, with completion or selection of a
-parked branch left to the user.
+failure.  The direct golden/Clebsch-to-\(E_8\) gap is closed at the first
+balanced harmonic slice and has the correct bi-McKay graded descent
+formulation; an explicit all-degree coupled Weyl presentation and a
+preprojective-corner identification remain optional successors.  C682
+remains open exploration, with completion or selection of a parked branch
+left to the user.
 
 ## Parked branches
 
@@ -268,3 +291,5 @@ Local-return algebra bundle:
 `notes/2026-07-30-c682-local-return-algebra.md`.
 \(E_8\) indicial virtual-level bundle:
 `notes/2026-07-30-c682-virtual-levels.md`.
+Golden/\(E_8\) descent bundle:
+`notes/2026-07-30-c682-golden-e8-descent.md`.
