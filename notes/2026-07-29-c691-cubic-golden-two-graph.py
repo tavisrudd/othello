@@ -219,6 +219,28 @@ def build() -> dict[str, object]:
         for triple in itertools.combinations(range(n), 3)
     )
 
+    pair_sums = {
+        (i, j): sum(
+            support_sign[tuple(sorted((i, j, k)))]
+            for k in range(n)
+            if k not in (i, j)
+        )
+        for i, j in itertools.combinations(range(n), 2)
+    }
+    vertex_sums = {
+        i: sum(
+            support_sign[tuple(sorted((i, j, k)))]
+            for j, k in itertools.combinations(
+                [vertex for vertex in range(n) if vertex != i], 2
+            )
+        )
+        for i in range(n)
+    }
+    total_sum = sum(support_sign.values())
+    assert set(pair_sums.values()) == {0}
+    assert set(vertex_sums.values()) == {0}
+    assert total_sum == 0
+
     reduction = [[entry % 2 for entry in row] for row in continuation]
     nilpotent = [
         [(reduction[i][j] + int(i == j)) % 2 for j in range(n)]
@@ -290,10 +312,29 @@ def build() -> dict[str, object]:
             "diagonal_pencil_identity": (
                 "det(B+diag(x))=e6(x)-e4(x)+5*e2(x)-125-2*C_B(x)"
             ),
+            "homogenized_identity": (
+                "F_B(x,z)=det(z*B+diag(x))="
+                "e6-z^2*e4+5*z^4*e2-125*z^6-2*z^3*C_B"
+            ),
+            "golden_conjugation_odd_part": (
+                "F_B(x,z)-F_B(x,-z)=-4*z^3*C_B(x)"
+            ),
             "complementary_minor_mechanism": (
                 "Jacobi identity with det(B)=-125 and B^{-1}=B/5"
             ),
             "sole_nonsymmetric_term": "-2*C_B(x)",
+        },
+        "moment_upgrade": {
+            "pair_sums": sorted(set(pair_sums.values())),
+            "vertex_sums": sorted(set(vertex_sums.values())),
+            "total_sum": total_sum,
+            "derivation": (
+                "sum_k c_ijk=B_ij*(B^2)_ij=0 for i!=j; "
+                "lower sums follow"
+            ),
+            "translation_identity": "C_B(x+t*1)=C_B(x)",
+            "natural_module": "Q^6/Q*1, equivalently the augmentation five-space",
+            "first_nonzero_signed_moment_degree": 3,
         },
         "mod_2_closeout": {
             "triangle_coefficients": [1],

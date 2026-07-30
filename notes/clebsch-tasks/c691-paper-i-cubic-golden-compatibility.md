@@ -45,7 +45,14 @@ The stronger determinant identity
 \]
 makes the support cubic the sole nonsymmetric term of the golden
 operator's diagonal pencil.  Jacobi complementary minors derive support
-complementation from \(B^2=5I\).
+complementation from \(B^2=5I\).  After homogenization its
+golden-conjugation odd part is
+\[
+ F_B(x,z)-F_B(x,-z)=-4z^3C_B(x).
+\]
+Moreover
+\(\sum_kc_{ijk}=B_{ij}(B^2)_{ij}=0\), so every lower signed moment
+vanishes structurally and \(C_B\) descends to the augmentation five-space.
 
 The compatibility is integral.  Modulo \(2\), all cubic signs merge, the
 symmetry jumps from \(A_5\) to \(S_6\), and \(B-I\) is rank-one

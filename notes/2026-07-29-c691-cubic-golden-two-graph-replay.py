@@ -86,6 +86,16 @@ def main() -> None:
         != data["determinantal_upgrade"]["principal_minor_distributions_by_size"]
     ):
         raise AssertionError("principal-minor distribution mismatch")
+    pair_sums = {
+        sum(
+            expected[tuple(sorted((i, j, k)))]
+            for k in range(6)
+            if k not in (i, j)
+        )
+        for i, j in combinations(range(6), 2)
+    }
+    if pair_sums != {0}:
+        raise AssertionError("signed pair moments do not vanish")
     print(
         json.dumps(
             {
@@ -93,6 +103,7 @@ def main() -> None:
                 "forward_identity": True,
                 "inverse_gauge_identity": True,
                 "principal_minor_sizes_checked": 7,
+                "signed_pair_moments": sorted(pair_sums),
                 "orbital_negation_degree": 3,
             },
             sort_keys=True,

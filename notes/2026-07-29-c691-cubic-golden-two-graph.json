@@ -239,6 +239,8 @@
   "determinantal_upgrade": {
     "complementary_minor_mechanism": "Jacobi identity with det(B)=-125 and B^{-1}=B/5",
     "diagonal_pencil_identity": "det(B+diag(x))=e6(x)-e4(x)+5*e2(x)-125-2*C_B(x)",
+    "golden_conjugation_odd_part": "F_B(x,z)-F_B(x,-z)=-4*z^3*C_B(x)",
+    "homogenized_identity": "F_B(x,z)=det(z*B+diag(x))=e6-z^2*e4+5*z^4*e2-125*z^6-2*z^3*C_B",
     "principal_minor_distributions_by_size": {
       "0": {
         "1": 1
@@ -349,6 +351,19 @@
     "symmetry_jump": "A5 to S6",
     "triangle_coefficients": [
       1
+    ]
+  },
+  "moment_upgrade": {
+    "derivation": "sum_k c_ijk=B_ij*(B^2)_ij=0 for i!=j; lower sums follow",
+    "first_nonzero_signed_moment_degree": 3,
+    "natural_module": "Q^6/Q*1, equivalently the augmentation five-space",
+    "pair_sums": [
+      0
+    ],
+    "total_sum": 0,
+    "translation_identity": "C_B(x+t*1)=C_B(x)",
+    "vertex_sums": [
+      0
     ]
   },
   "representation_comparison": {

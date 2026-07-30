@@ -127,6 +127,23 @@ The size-three values occur ten times with each sign.  Therefore, writing
 The support cubic is the sole nonsymmetric term in the diagonal determinant
 pencil of the golden operator.
 
+Homogenizing makes the orientation character explicit.  Put
+\[
+ F_B(x,z)=\det\!\bigl(zB+\operatorname{diag}(x)\bigr).
+\]
+Then
+\[
+ F_B(x,z)
+ =e_6-z^2e_4+5z^4e_2-125z^6-2z^3C_B(x),
+\]
+and golden/orbital conjugation \(B\mapsto-B\), equivalently \(z\mapsto-z\),
+has odd part
+\[
+\boxed{\quad F_B(x,z)-F_B(x,-z)=-4z^3C_B(x).\quad}
+\]
+Thus the support cubic is the normalized conjugation-odd determinant
+coefficient of the golden operator.
+
 The even coefficients do not require an additional enumeration.  From
 \(B^2=5I\), one has \(B^{-1}=B/5\) and \(\det B=-125\).
 Jacobi's complementary-minor identity pairs principal minors of sizes
@@ -134,6 +151,23 @@ Jacobi's complementary-minor identity pairs principal minors of sizes
 size-five minors to vanish, and complementary size-three minors to have
 opposite signs.  This recovers support complementation directly from the
 golden quadratic identity.
+
+The same identity also gives a conceptual proof of C690's moment
+vanishing.  For \(i\ne j\),
+\[
+ \sum_{k\ne i,j}c_{ijk}
+ =B_{ij}\sum_k B_{ik}B_{kj}
+ =B_{ij}(B^2)_{ij}=0.
+\]
+Summing these equations gives the signed one-index and total sums as zero.
+Consequently
+\[
+ C_B(x+t\mathbf1)=C_B(x),
+\]
+so the cubic descends naturally from \(\mathbf Q^6\) to
+\(\mathbf Q^6/\mathbf Q\mathbf1\), the five-dimensional augmentation
+module.  Its first nonzero signed moment is forced to occur in degree three
+by \(B^2=5I\), rather than established by twenty-term enumeration.
 
 ## Integral closeout
 
@@ -194,9 +228,9 @@ marking and coefficients.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 11,944 | `8162c3b3a6ebcbf741ef1175af0f2f4ac7ce31732bf46b48489f2443b63a5221` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 3,627 | `a357cc26f4ba02076da360396ee3945a4b45893273cfbc255a5e12cd842e05a5` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 6,177 | `11e8683820a880cf6ab631d976faf20a84d2149b4b29157efa703b54f976fcc8` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 13,368 | `7a2c9e8cd0e8485c9d190e0918a909666f928d93d6fc7c52c6130f8edcc7f91a` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 3,977 | `6ba687fa809a871455cf7afd7f032ee7c489dbeb85ddd4cb227dc456424c763c` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 6,704 | `de18cc3eab014a4a828c10f9d8d03b26d2bc1a5cad0bb5ed767e55d7ba2f04a3` |
 
 ## Disposition
 
@@ -210,12 +244,14 @@ marking and coefficients.
 
 ## Extra-juice and Tao-style closeout
 
-The triangle-product identity upgrades the result three times.  First, the support
+The triangle-product identity upgrades the result four times.  First, the support
 cubic is not merely compatible with the golden operator: it reconstructs its
 switching class, while the operator reconstructs every cubic coefficient.
 Second, the full determinant pencil shows that the cubic is its unique
 nonsymmetric coefficient layer; Jacobi duality derives complementation from
-\(B^2=5I\).  Third, reduction modulo \(2\) makes the conductor defect visible without
+\(B^2=5I\).  Third, its conjugation-odd part recovers the cubic and the
+off-diagonal equations of \(B^2=5I\) force the lower signed moments to
+vanish.  Fourth, reduction modulo \(2\) makes the conductor defect visible without
 the normalized golden coordinate: all cubic signs merge, the symmetry jumps
 to \(S_6\), and \(B-I\) becomes rank-one square-zero.
 
@@ -235,6 +271,9 @@ Paper III question and is outside this kill test.
 - **Determinantal source of the cubic:** settled; it is the size-three
   principal-minor layer, equivalently the sole nonsymmetric term
   \(-2C_B\) in the diagonal determinant pencil.
+- **Vanishing below degree three:** settled conceptually;
+  \(\sum_kc_{ijk}=B_{ij}(B^2)_{ij}=0\), and the lower sums follow.
+  Hence the cubic descends to the augmentation five-space.
 - **Prime \(2\):** settled on this package; the cubic orientation collapses
   exactly when \(B-I\) becomes square-zero.  Normalization to
   \(\mathbf F_4\) remains unavailable without adjoining \((1+B)/2\).
