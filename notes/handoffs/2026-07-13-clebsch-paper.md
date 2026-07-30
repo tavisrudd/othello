@@ -301,6 +301,15 @@ Thus the requested three-return algebra is the full graded path corner in
 every nonexceptional degree.  On every nontrivial block this two-return
 presentation is generator-minimal, and both generators are canonical
 positive Fischer energy forms.
+The previously unexplained virtual levels
+\(0,\pm1/3,\pm2/3\) are the order-three \(h=0\) indicial roots in the
+degree-\(60\) \(h^3/F^5\) level of
+\(t^2=1728F^5-h^3\).  Source-chain residue counts give the exact formula
+\[
+\det K_-(j)=C\prod_{s=0}^2((3j+s)_3)^{c_s}.
+\]
+It explains every factor multiplicity, the identical normalized
+\(3,3'\) determinants, and the phase-independent \(6\)-profile.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

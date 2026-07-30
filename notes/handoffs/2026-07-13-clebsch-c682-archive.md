@@ -1171,3 +1171,17 @@ observes that the pair is generator-minimal on every nontrivial full block:
 one operator generates only a commutative polynomial algebra.  Hence the
 corner is optimally reconstructed from its two canonical positive Fischer
 energy forms.
+
+The virtual-level mystery is also closed.  In the \(E_8\) invariant
+relation \(t^2=1728F^5-h^3\), a degree-\(60\) level step trades \(h^3\)
+against \(F^5\).  Writing a source-chain \(h\)-exponent as \(b=3j+s\),
+the third transvectant has indicial factor
+\((b)_3=(3j+s)_3\).  If \(c_s\) counts the chains in residue \(s\), then
+\[
+ \det K_-(j)=C\prod_{s=0}^2((3j+s)_3)^{c_s}.
+\]
+This derives the universal roots \(0,\pm1/3,\pm2/3\) and every stored
+multiplicity.  The \(3,3'\) determinants coincide because both residue
+multisets are \((1,1,1)\); the \(6\)-profile is phase-independent because
+all three phases have \((2,2,2)\).  The exact audit and basis-level replay
+are in `notes/2026-07-30-c682-virtual-levels.md`.

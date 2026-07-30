@@ -212,8 +212,12 @@ symmetrizer, or cone—not positivity of one scalar coefficient sequence.
   block transfer.
 - **Open:** prove that its endpoint return contraction is nonzero for every
   integer \(q\ge1\).
-- **Open:** determine why the normalized rank-three backward determinants
-  coincide.
+- **Settled by the successor indicial analysis:** the normalized
+  rank-three backward determinants coincide because both source blocks
+  contain one chain in each \(h\bmod3\) residue.  Their determinant is the
+  common indicial product
+  \(\prod_{s=0}^2(3j+s)_3\); see
+  `2026-07-30-c682-virtual-levels.md`.
 
 No all-\(q\) nontrivial-module controllability or all-weight full-corner
 theorem is claimed.

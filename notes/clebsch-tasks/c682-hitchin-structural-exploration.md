@@ -197,6 +197,19 @@ explicitly separated.
   polynomial algebra, while the block corner is a noncommutative matrix
   algebra.  Thus the corner is intrinsically the algebra of its two
   canonical positive local energy forms.
+- The universal transfer levels
+  \(0,\pm1/3,\pm2/3\) now have an intrinsic \(E_8\) explanation.  The
+  degree-\(60\) relation \(t^2=1728F^5-h^3\) makes a level step exchange
+  \(h^3\) with \(F^5\), so a generator chain has \(h\)-exponent
+  \(b=3j+s\).  The third transvectant contributes the indicial factor
+  \((b)_3=(3j+s)_3\).  If \(c_s\) counts source chains in residue \(s\),
+  the backward determinant is
+  \[
+    C\prod_{s=0}^2((3j+s)_3)^{c_s}.
+  \]
+  This gives every recorded root multiplicity, explains the identical
+  \(3,3'\) normalized determinants by counts \((1,1,1)\), and explains
+  the phase-independent \(6\)-profile by counts \((2,2,2)\).
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -253,3 +266,5 @@ All-\(r\) exceptional transversality bundle:
 `notes/2026-07-30-c682-all-r-schur.md`.
 Local-return algebra bundle:
 `notes/2026-07-30-c682-local-return-algebra.md`.
+\(E_8\) indicial virtual-level bundle:
+`notes/2026-07-30-c682-virtual-levels.md`.

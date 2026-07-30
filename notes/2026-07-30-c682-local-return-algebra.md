@@ -209,9 +209,9 @@ its two eigenlines.
   certificates are exactly the cyclic-kernel proof for the two-form pencil.
 - **Settled:** degree \(22\) is the unique all-weight obstruction and has
   the elementary \(0,2,1\) explanation.
-- **Open, non-load-bearing:** the virtual levels
-  \(0,\pm1/3,\pm2/3\) now govern both path propagation and local-pencil
-  irreducibility; an intrinsic \(E_8\) explanation of those fractions is
-  still absent.
+- **Settled by the successor indicial analysis:** the virtual levels
+  \(0,\pm1/3,\pm2/3\) are the order-three \(h=0\) indicial roots after
+  rescaling by the degree-\(60\) \(h^3/F^5\) level.  See
+  `2026-07-30-c682-virtual-levels.md`.
 
 C682 remains open exploration; completion remains the user's decision.

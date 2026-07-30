@@ -182,10 +182,12 @@ logical gate.
 - **Open:** prove signed Schur endpoint transversality for every \(r\ge6\).
   The exact missing evidence is an invariant cone, Wronskian boundary
   comparison, or equivalent all-length transfer theorem.
-- **Open and surprising:** the \(6_5\) backward profile is completely
-  phase-independent, while \(4,4_s,5\) redistribute the same virtual-root
-  multiplicities across phases.  No representation-theoretic explanation
-  is yet supplied.
+- **Settled by the successor indicial analysis:** the \(6_5\) profile is
+  phase-independent because every phase has two source chains in each
+  \(h\bmod3\) residue.  The \(4,4_s,5\) phases cyclically permute
+  unbalanced residue counts.  The formula
+  \(\det K_-=C\prod_s(3j+s)_3^{c_s}\) gives every stored multiplicity; see
+  `2026-07-30-c682-virtual-levels.md`.
 
 Vibe: the obstruction is now sharply localized and structurally clean, but
 the final all-length sign/transversality theorem has not yet landed.
