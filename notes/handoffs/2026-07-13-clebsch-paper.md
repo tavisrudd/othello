@@ -27,8 +27,7 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
-| [C688 — generic local first-wall checker](../clebsch-tasks/c688-generic-first-wall-checker.md) | queued C665 replay compression; v2 only | replace the q=169 field-sized wall replay by the parameterized local \(S,T,R,Y\) certificate |
-| [C689 — shared radial nonvanishing](../clebsch-tasks/c689-shared-radial-nonvanishing.md) | queued after C688; C665 conceptual successor; v2 only | replace the \(B_3/H_3\) scalar witnesses by one geometric radial-nonvanishing mechanism or a sharp obstruction |
+| [C689 — shared radial nonvanishing](../clebsch-tasks/c689-shared-radial-nonvanishing.md) | ready; C665 conceptual successor; v2 only | replace the \(B_3/H_3\) scalar witnesses by one geometric radial-nonvanishing mechanism or a sharp obstruction |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
 
@@ -79,7 +78,10 @@ opposite values of one parity bit and never coexist.  The result is
 recorded in
 `notes/2026-07-29-c665-frobenius-digit-spill.md`; the retired
 non-equivariant Hasse pairing remains non-evidence.  This does not change
-or hold frozen v1. C682 characteristic-zero work is inventory unless
+or hold frozen v1.  C688 has replaced its q=169 field-sized replay by a
+generic local \(S,T,R,Y\) checker with an independent closed-form replay;
+the historical q=169 certificate remains corroboration only.  C682
+characteristic-zero work is inventory unless
 explicitly promoted.
 
 Local aggregate replay:

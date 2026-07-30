@@ -1,0 +1,888 @@
+{
+  "cases": [
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "695327c29f4002e1d85a481b18bbd387492b7ab77353b6a58916b6f40298fbf5",
+        "normalization": "top divided-power wall coefficient = 1",
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            1,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "e2f6ddf81afe6be943e16c1f5372e32c4e1b518523219e352fc4405f31983c12",
+        "zeroth_digit_nonzero_entries": 2,
+        "zeroth_digit_sha256": "e2f6ddf81afe6be943e16c1f5372e32c4e1b518523219e352fc4405f31983c12"
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            0
+          ],
+          "dimension": 1,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": false,
+        "parity_bit": 0,
+        "required_bit": 1
+      },
+      "p": 3,
+      "r": 1,
+      "s": 0,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -4,
+          -2
+        ],
+        "coefficient_plus_one_interval": [
+          2,
+          4
+        ],
+        "degenerate_root_group_repair": {
+          "coefficient_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "conclusion": "both torus-fixed coefficients vanish",
+          "root_coefficients": [
+            "t",
+            "t^3"
+          ],
+          "separating_output_coordinates": [
+            "Y_0 tensor R_(0,0)",
+            "Y_2 tensor R_(0,0)"
+          ],
+          "torus_fixed_basis": [
+            "Y_0 tensor R_(1,0)",
+            "Y_2 tensor R_(0,1)"
+          ],
+          "wrapped_torus_weights": [
+            -8,
+            8
+          ]
+        },
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 10,
+        "no_modular_wrap": false,
+        "source_interval": [
+          0,
+          0
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 8
+      },
+      "trace_target_dimension": 4
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "2ff38e37f49c00f30338e6eb873cf12d116e5026473c7f8843c494020e1863e9",
+        "normalization": "top divided-power wall coefficient = 1",
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            3,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "598a918532b36d3de9b79290fe9921eafd1075d9fe674b15817ab631407a1d78",
+        "zeroth_digit_nonzero_entries": 6,
+        "zeroth_digit_sha256": "a21941e4b1a94ad2dede120c0f10e8996a537ca76b3b6aba7cefa13b52e79644"
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            2
+          ],
+          "dimension": 3,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            3,
+            1
+          ],
+          "dimension": 8,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": true,
+        "parity_bit": 0,
+        "required_bit": 0
+      },
+      "p": 5,
+      "r": 1,
+      "s": 2,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -6,
+          -4
+        ],
+        "coefficient_plus_one_interval": [
+          4,
+          6
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 18,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -2,
+          2
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 24
+      },
+      "trace_target_dimension": 24
+    },
+    {
+      "e": 3,
+      "first_wall": {
+        "map_sha256": "4a36665774c7c23e41d523167d059379c943e9461d9f3cf7473c21304885fd9f",
+        "normalization": "top divided-power wall coefficient = 1",
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            5,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "466ab76e1b37b779eb0ce7c6269dd27e90a3ff72807bb7a0c311e217857ce81e",
+        "zeroth_digit_nonzero_entries": 10,
+        "zeroth_digit_sha256": "b6c8a6e64ebdb4e16c137371ad963f9fb08467d58cfc1093bbb199fe7c11b005"
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            4
+          ],
+          "dimension": 5,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            5,
+            1
+          ],
+          "dimension": 12,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 3,
+        "occurs": true,
+        "parity_bit": 1,
+        "required_bit": 1
+      },
+      "p": 7,
+      "r": 1,
+      "s": 4,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -8,
+          -6
+        ],
+        "coefficient_plus_one_interval": [
+          6,
+          8
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 26,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -4,
+          4
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 342
+      },
+      "trace_target_dimension": 60
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "f6f79137caab3cbeb1112e94c8db11045011395b0492ca3b2f078680cba9b05d",
+        "normalization": "top divided-power wall coefficient = 1",
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              3,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 3,
+        "trace_scalar_integer": 3,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            9,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "9261d8feb8fc9d8998783f955818e759063ce96c9f6ea4e14164bdd8491a0d45",
+        "zeroth_digit_nonzero_entries": 28,
+        "zeroth_digit_sha256": "d9e81d1ef4504d21b014af2d67c0972f7ee8a44feb031b6015653680ec7a3511"
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            3,
+            1
+          ],
+          "dimension": 8,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            6
+          ],
+          "dimension": 7,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            9,
+            1
+          ],
+          "dimension": 20,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": true,
+        "parity_bit": 0,
+        "required_bit": 0
+      },
+      "p": 11,
+      "r": 3,
+      "s": 6,
+      "spill_target_dimension": 24,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -14,
+          -8
+        ],
+        "coefficient_plus_one_interval": [
+          8,
+          14
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 42,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -6,
+          6
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 120
+      },
+      "trace_target_dimension": 140
+    },
+    {
+      "e": 3,
+      "first_wall": {
+        "map_sha256": "95635ee1a91decbe000dd4d2ec4b60c75cbfd28109a0bc2387b93190a223a326",
+        "normalization": "top divided-power wall coefficient = 1",
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            9,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "9261d8feb8fc9d8998783f955818e759063ce96c9f6ea4e14164bdd8491a0d45",
+        "zeroth_digit_nonzero_entries": 18,
+        "zeroth_digit_sha256": "a21479994d1fed45503d65465e8e81eaea2a31cc7af9be42e8c45af52a353bc5"
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            8
+          ],
+          "dimension": 9,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            9,
+            1
+          ],
+          "dimension": 20,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 3,
+        "occurs": true,
+        "parity_bit": 1,
+        "required_bit": 1
+      },
+      "p": 11,
+      "r": 1,
+      "s": 8,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -12,
+          -10
+        ],
+        "coefficient_plus_one_interval": [
+          10,
+          12
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 42,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -8,
+          8
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 1330
+      },
+      "trace_target_dimension": 180
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "df6bc1b8ea8af7053d7e6ce5e0491b9f7f7f6dbe2221259a8c28899acd3a0e7d",
+        "normalization": "top divided-power wall coefficient = 1",
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 5,
+        "trace_scalar_integer": 5,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            11,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "8efbcbf1bd5b53aa74adcacc6e3f20610af72f43c13900c3376ac80fd061bc6e",
+        "zeroth_digit_nonzero_entries": 42,
+        "zeroth_digit_sha256": "860aca0a82227c8ea3f78237930f64ee05d9944aa2843b878591a5ce4edd6279"
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            5,
+            1
+          ],
+          "dimension": 12,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            6
+          ],
+          "dimension": 7,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            11,
+            1
+          ],
+          "dimension": 24,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": true,
+        "parity_bit": 0,
+        "required_bit": 0
+      },
+      "p": 13,
+      "r": 5,
+      "s": 6,
+      "spill_target_dimension": 36,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -18,
+          -8
+        ],
+        "coefficient_plus_one_interval": [
+          8,
+          18
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 50,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -6,
+          6
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 168
+      },
+      "trace_target_dimension": 168
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "5fd96188a81ff32e5b3f04c1609bdacb6a087bc6293964c78a421f1e9f64ef04",
+        "normalization": "top divided-power wall coefficient = 1",
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              3,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 3,
+        "trace_scalar_integer": 3,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            11,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "8efbcbf1bd5b53aa74adcacc6e3f20610af72f43c13900c3376ac80fd061bc6e",
+        "zeroth_digit_nonzero_entries": 36,
+        "zeroth_digit_sha256": "2709f60ad9f698685ed832be1c2799a4fb172456715a5ce5309924ccfa0f3561"
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            3,
+            1
+          ],
+          "dimension": 8,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            8
+          ],
+          "dimension": 9,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            11,
+            1
+          ],
+          "dimension": 24,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": false,
+        "parity_bit": 0,
+        "required_bit": 1
+      },
+      "p": 13,
+      "r": 3,
+      "s": 8,
+      "spill_target_dimension": 24,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -16,
+          -10
+        ],
+        "coefficient_plus_one_interval": [
+          10,
+          16
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 50,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -8,
+          8
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 168
+      },
+      "trace_target_dimension": 216
+    }
+  ],
+  "committed_cross_checks": {
+    "q121": {
+      "R": [
+        3,
+        1
+      ],
+      "T": [
+        9,
+        1
+      ],
+      "row": 34,
+      "trace_scalar": 3,
+      "unique_nonzero_connecting_row": true
+    },
+    "q169": {
+      "R": [
+        5,
+        1
+      ],
+      "T": [
+        11,
+        1
+      ],
+      "spill_nonzero": true,
+      "torus_fixed_cochains": 0,
+      "trace_scalar": 5
+    }
+  },
+  "evidence_boundary": "the human Lucas-socle theorem decides occurrence and the human adjacent-wall theorem supplies the normalized row; this local replay checks the row's divided-power maps and consequences",
+  "occurrence_packets": {
+    "derivation": "e*(p-1)/2 == 1+s/2 (mod 2), so s mod 4 = 2 requires bit 0 and s mod 4 = 0 requires bit 1",
+    "s_mod_4_equals_0": "e*(p-1)/2 is odd",
+    "s_mod_4_equals_2": "e*(p-1)/2 is even"
+  },
+  "schema": 1,
+  "theorem_scope": {
+    "constructed_modules": [
+      "S",
+      "T",
+      "R",
+      "Y"
+    ],
+    "e": "integer > 1",
+    "extension_field_constructed": false,
+    "p": "odd prime",
+    "s": "even integer with 0 <= s < p-1"
+  }
+}

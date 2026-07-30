@@ -4,8 +4,11 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued as the replay-compression successor to completed C665;
-Paper II v2 only.
+**Status:** completed 2026-07-29; the generic local replay, independent
+closed-form check, and q=121/q=169 cross-checks are green.  Paper II v2
+only.
+
+**Report:** `notes/2026-07-29-c688-generic-first-wall.md`.
 
 ## Objective
 
@@ -91,3 +94,13 @@ dimension may grow with \(q\) or \(e\).
 The extra reusable value is a small first-wall checker interface for
 future even restricted heads.  Extract that interface only if it falls
 out naturally; do not expand C688 into a general modular-plethysm library.
+
+## Completion
+
+The canonical `--check` bundle constructs only \(S,T,R,Y\), hashes the
+normalized divided-power maps, certifies \(r=p-2-s\), the unique spill,
+the Borel gap, and both linear dimensions, and matches the committed q=121
+and q=169 certificates.  The `--case P S E` interface supplies the same
+local certificate for arbitrary admissible inputs.  The sole q=9 torus-wrap
+seam at the trivial head is closed by an explicit two-coordinate root-group
+check.

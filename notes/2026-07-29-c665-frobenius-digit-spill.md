@@ -176,8 +176,14 @@ where \(0\le j\le2\), \(0\le k\le p-2-s\), and \(0\le\ell\le1\).
 When the coefficient of \(p\) is \(1\), the smallest weight is \(s+2\);
 when it is \(-1\), the largest is \(-s-2\); the coefficients \(3,-3\)
 are farther away.  Thus none is a weight of \(S\).  Their differences
-have absolute value below \(p^2-1\), and hence below \(q-1\), so equality
-cannot reappear modulo the split-torus order.
+have absolute value at most \(4p-2\), which is below \(p^2-1\), and hence
+below \(q-1\), except at the degenerate triple \((p,s,e)=(3,0,2)\).
+There the two torus-fixed coordinates have weights \(8,-8\), but
+\(u(t)-1\) separates them with respective coefficients \(t,t^3\);
+root-group fixity kills both.  Thus equality cannot produce a Borel
+cochain in any admissible case.  (All exceptional-subgroup heads used
+above have \(s\ge6\), so the original C1 disposition never reaches this
+degenerate seam.)
 
 A putative Borel coboundary would therefore have to use the unique
 \(R\otimes T\) coefficient forced nonzero by (C), while (P) forces that

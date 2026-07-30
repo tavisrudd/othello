@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued after C688 as a C665 conceptual successor; Paper II v2
-only.
+**Status:** ready as the C665 conceptual successor after completed C688;
+Paper II v2 only.
 
 ## Objective
 
