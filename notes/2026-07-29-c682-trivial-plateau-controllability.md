@@ -167,6 +167,14 @@ mixing witness sees only four boundary coordinates, and differential order
 turns the infinite family into one degree-\(33\) sign certificate.  This is
 the template to test on the \(2,3,3'\) free modules.
 
+There is also a useful consistency check: the denominator has degree \(21\),
+so the mixing scalar has asymptotic degree \(33-21=12\), exactly the total
+differential order of the third-then-ninth return.  The unexplained residue
+is stronger than mere nonvanishing: after the semigroup-stability shift
+\(q=r+6\), every numerator coefficient has the same sign.  A conceptual
+total-positivity or hypergeometric explanation could make the extension to
+the other Kostant modules much shorter than repeating interpolation.
+
 ## Mystery ledger
 
 - **Settled:** the recurring trivial-module plateau has a noncircular
@@ -179,6 +187,12 @@ the template to test on the \(2,3,3'\) free modules.
   from the structural bad-prime set.
 - **Settled by `tt`:** the growing matrix problem collapses to a
   fixed-width boundary covector and one rational function.
+- **Settled by `ej`:** the degree gap \(33-21=12\) matches the return
+  operator's differential order.
+- **Open structural explanation:** why the shifted numerator is
+  coefficientwise one-signed, rather than merely root-free.  The present
+  proof is the exact coefficient certificate; a total-positivity or
+  hypergeometric mechanism would belong to the \(2,3,3'\) extension.
 - **Still open:** construct the corresponding boundary witnesses for the
   \(2,3,3'\) Kostant modules.
 - **Still open:** prove all-weight maximal rank away from the explicitly
