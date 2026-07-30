@@ -239,6 +239,12 @@ def case_record(p, s, e):
     r = p - 2 - s
     assert 1 <= r < p
     source_cg = clebsch_gordan_map(r, p - 2, r, p)
+    toeplitz_entries = [
+        [j, r - j + source, source, (-1) ** j * math.comb(r, j) % p]
+        for source in range(s + 1)
+        for j in range(r + 1)
+    ]
+    assert source_cg["entries"] == toeplitz_entries
     frobenius_cg = clebsch_gordan_map(1, 1, 1, p)
     modules = {
         "S": module_record("S", (s,)),
@@ -257,6 +263,9 @@ def case_record(p, s, e):
             "zeroth_digit_sha256": canonical_hash(source_cg),
             "frobenius_digit_sha256": canonical_hash(frobenius_cg),
             "zeroth_digit_nonzero_entries": len(source_cg["entries"]),
+            "zeroth_digit_exact_entries": (s + 1) * (r + 1),
+            "zeroth_digit_toeplitz_band_width": r + 1,
+            "zeroth_digit_toeplitz": True,
             "frobenius_digit_nonzero_entries": len(frobenius_cg["entries"]),
         },
         "first_wall": wall_record(p, s, r),

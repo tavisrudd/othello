@@ -43,8 +43,11 @@
       "local_clebsch_gordan": {
         "frobenius_digit_nonzero_entries": 2,
         "frobenius_digit_sha256": "e2f6ddf81afe6be943e16c1f5372e32c4e1b518523219e352fc4405f31983c12",
+        "zeroth_digit_exact_entries": 2,
         "zeroth_digit_nonzero_entries": 2,
-        "zeroth_digit_sha256": "e2f6ddf81afe6be943e16c1f5372e32c4e1b518523219e352fc4405f31983c12"
+        "zeroth_digit_sha256": "e2f6ddf81afe6be943e16c1f5372e32c4e1b518523219e352fc4405f31983c12",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
       },
       "modules": {
         "R": {
@@ -182,8 +185,11 @@
       "local_clebsch_gordan": {
         "frobenius_digit_nonzero_entries": 2,
         "frobenius_digit_sha256": "598a918532b36d3de9b79290fe9921eafd1075d9fe674b15817ab631407a1d78",
+        "zeroth_digit_exact_entries": 6,
         "zeroth_digit_nonzero_entries": 6,
-        "zeroth_digit_sha256": "a21941e4b1a94ad2dede120c0f10e8996a537ca76b3b6aba7cefa13b52e79644"
+        "zeroth_digit_sha256": "a21941e4b1a94ad2dede120c0f10e8996a537ca76b3b6aba7cefa13b52e79644",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
       },
       "modules": {
         "R": {
@@ -293,8 +299,11 @@
       "local_clebsch_gordan": {
         "frobenius_digit_nonzero_entries": 2,
         "frobenius_digit_sha256": "466ab76e1b37b779eb0ce7c6269dd27e90a3ff72807bb7a0c311e217857ce81e",
+        "zeroth_digit_exact_entries": 10,
         "zeroth_digit_nonzero_entries": 10,
-        "zeroth_digit_sha256": "b6c8a6e64ebdb4e16c137371ad963f9fb08467d58cfc1093bbb199fe7c11b005"
+        "zeroth_digit_sha256": "b6c8a6e64ebdb4e16c137371ad963f9fb08467d58cfc1093bbb199fe7c11b005",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
       },
       "modules": {
         "R": {
@@ -412,8 +421,11 @@
       "local_clebsch_gordan": {
         "frobenius_digit_nonzero_entries": 2,
         "frobenius_digit_sha256": "9261d8feb8fc9d8998783f955818e759063ce96c9f6ea4e14164bdd8491a0d45",
+        "zeroth_digit_exact_entries": 28,
         "zeroth_digit_nonzero_entries": 28,
-        "zeroth_digit_sha256": "d9e81d1ef4504d21b014af2d67c0972f7ee8a44feb031b6015653680ec7a3511"
+        "zeroth_digit_sha256": "d9e81d1ef4504d21b014af2d67c0972f7ee8a44feb031b6015653680ec7a3511",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 4
       },
       "modules": {
         "R": {
@@ -523,8 +535,11 @@
       "local_clebsch_gordan": {
         "frobenius_digit_nonzero_entries": 2,
         "frobenius_digit_sha256": "9261d8feb8fc9d8998783f955818e759063ce96c9f6ea4e14164bdd8491a0d45",
+        "zeroth_digit_exact_entries": 18,
         "zeroth_digit_nonzero_entries": 18,
-        "zeroth_digit_sha256": "a21479994d1fed45503d65465e8e81eaea2a31cc7af9be42e8c45af52a353bc5"
+        "zeroth_digit_sha256": "a21479994d1fed45503d65465e8e81eaea2a31cc7af9be42e8c45af52a353bc5",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
       },
       "modules": {
         "R": {
@@ -650,8 +665,11 @@
       "local_clebsch_gordan": {
         "frobenius_digit_nonzero_entries": 2,
         "frobenius_digit_sha256": "8efbcbf1bd5b53aa74adcacc6e3f20610af72f43c13900c3376ac80fd061bc6e",
+        "zeroth_digit_exact_entries": 42,
         "zeroth_digit_nonzero_entries": 42,
-        "zeroth_digit_sha256": "860aca0a82227c8ea3f78237930f64ee05d9944aa2843b878591a5ce4edd6279"
+        "zeroth_digit_sha256": "860aca0a82227c8ea3f78237930f64ee05d9944aa2843b878591a5ce4edd6279",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 6
       },
       "modules": {
         "R": {
@@ -769,8 +787,11 @@
       "local_clebsch_gordan": {
         "frobenius_digit_nonzero_entries": 2,
         "frobenius_digit_sha256": "8efbcbf1bd5b53aa74adcacc6e3f20610af72f43c13900c3376ac80fd061bc6e",
+        "zeroth_digit_exact_entries": 36,
         "zeroth_digit_nonzero_entries": 36,
-        "zeroth_digit_sha256": "2709f60ad9f698685ed832be1c2799a4fb172456715a5ce5309924ccfa0f3561"
+        "zeroth_digit_sha256": "2709f60ad9f698685ed832be1c2799a4fb172456715a5ce5309924ccfa0f3561",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 4
       },
       "modules": {
         "R": {

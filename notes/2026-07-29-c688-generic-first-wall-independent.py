@@ -56,8 +56,19 @@ def replay_case(case):
     assert case["occurrence"]["occurs"] == (
         e * ((p - 1) // 2) % 2 == (1 + s // 2) % 2
     )
-    assert case["local_clebsch_gordan"]["zeroth_digit_sha256"] == digest(
-        closed_cg(r, p - 2, r, p)
+    zeroth = closed_cg(r, p - 2, r, p)
+    assert case["local_clebsch_gordan"]["zeroth_digit_sha256"] == digest(zeroth)
+    toeplitz = [
+        [j, r - j + m, m, (-1) ** j * math.comb(r, j) % p]
+        for m in range(s + 1)
+        for j in range(r + 1)
+    ]
+    assert zeroth["entries"] == toeplitz
+    assert case["local_clebsch_gordan"]["zeroth_digit_exact_entries"] == (
+        (s + 1) * (r + 1)
+    )
+    assert case["local_clebsch_gordan"]["zeroth_digit_toeplitz_band_width"] == (
+        r + 1
     )
     assert case["local_clebsch_gordan"]["frobenius_digit_sha256"] == digest(
         closed_cg(1, 1, 1, p)

@@ -52,6 +52,19 @@ sparse map.  C688 uses \((a,b,k)=(r,p-2,r)\) in the zeroth digit and
 but the only module records are \(S,T,R,Y\), whose dimensions are linear
 in \(p\).
 
+The first specialization collapses further than required.  Vandermonde
+cancellation makes it the exact Toeplitz band
+\[
+ v_m\longmapsto
+ \sum_{j=0}^{r}(-1)^j\binom rj\,
+ v_j\otimes w_{r-j+m}.                       \tag{T}
+\]
+Because \(r<p\), every displayed binomial coefficient is nonzero modulo
+\(p\).  Thus every source column has exactly \(r+1\) entries and the full
+map has exactly \((s+1)(r+1)\) nonzero entries.  The primary recurrence and
+independent closed-form replay both verify (T); this gives a formula-level
+compression stronger than retaining only the sparse-map hash.
+
 The adjacent-wall theorem remains a human representation-theoretic input:
 it identifies the normalized row.  Conditional on that theorem, the
 checker verifies the local map, trace, unique spill, Borel gap, and target
@@ -133,9 +146,9 @@ finite sweep.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c688-generic-first-wall.py` | 12367 | `1413b0b950e13dbdf34687b285870b4e2a4c40768e35cad144b9705716f27884` |
-| `notes/2026-07-29-c688-generic-first-wall-independent.py` | 3453 | `7668d2563d51faf7a46f7b910c83b5ec133a9ca35007cb342d4868f6ba7c9796` |
-| `notes/2026-07-29-c688-generic-first-wall.json` | 19652 | `7efd1806f38d2df0e81e9bc4b476d8bc10e0bf31ea2377a3d9d5d84e062d37ac` |
+| `notes/2026-07-29-c688-generic-first-wall.py` | 12743 | `3a8061ccea65733eec77bdca2ab55b74df388ef9b4ae05afdcbae9c80c816d23` |
+| `notes/2026-07-29-c688-generic-first-wall-independent.py` | 3850 | `01fc26915f45105744209d6f4135290af5e65fe34a7c5caf2b2c9c9577153052` |
+| `notes/2026-07-29-c688-generic-first-wall.json` | 20546 | `21f703a224c0c3b1cdcba87f3718412306980601434482215eeaf744515cc372` |
 
 The independent replay regenerates the Clebsch--Gordan maps from the
 closed binomial formula rather than the recurrence, reevaluates occurrence,
@@ -159,6 +172,12 @@ spill data, torus separation, and dimensions without any extension-field
 construction.  The q=169 replay has become historical corroboration rather
 than a load-bearing field-sized gate.
 
+The closeout also exposes the exact Toeplitz formula (T).  It removes even
+the apparent variation among Clebsch--Gordan columns: the entire zeroth
+digit map is one nonvanishing binomial band, shifted \(s+1\) times.  This
+is cheap reusable structure for any later first-wall head and explains the
+certificate's unexpectedly rigid sparsity.
+
 The boundary audit found and closed the only small-parameter wrinkle:
 integer interval separation alone does not survive reduction modulo
 \(q-1\) at \((3,0,2)\).  The two-coordinate root-group calculation repairs
@@ -174,6 +193,7 @@ C665, all of which have \(s\ge6\).
 | unique spill row | settled by local middle-factor support | none |
 | field-sized replay | settled away by the \(S,T,R,Y\) interface | none |
 | extremal \(s=p-3\) | settled with \(R=L(1,1)\) and spill dimension \(12\) | none |
+| constant Clebsch--Gordan column sparsity | settled by the Toeplitz band (T), with exactly \((s+1)(r+1)\) entries | none |
 | \((3,0,2)\) torus wrap | settled by the two root-group coefficients | none |
 | occurrence versus spill versus outer parity | kept as three separate logical gates | none |
 

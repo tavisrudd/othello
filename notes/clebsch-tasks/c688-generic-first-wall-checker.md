@@ -101,6 +101,7 @@ The canonical `--check` bundle constructs only \(S,T,R,Y\), hashes the
 normalized divided-power maps, certifies \(r=p-2-s\), the unique spill,
 the Borel gap, and both linear dimensions, and matches the committed q=121
 and q=169 certificates.  The `--case P S E` interface supplies the same
-local certificate for arbitrary admissible inputs.  The sole q=9 torus-wrap
-seam at the trivial head is closed by an explicit two-coordinate root-group
-check.
+local certificate for arbitrary admissible inputs.  Its zeroth-digit
+Clebsch--Gordan map is the exact \(r+1\)-wide Toeplitz binomial band, with
+\((s+1)(r+1)\) nonzero entries.  The sole q=9 torus-wrap seam at the
+trivial head is closed by an explicit two-coordinate root-group check.
