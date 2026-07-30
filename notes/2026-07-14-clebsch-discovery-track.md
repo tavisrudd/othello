@@ -1159,3 +1159,54 @@ comparison failure at \(11\) or \(23\) would also refute the exact triad.
 mod-\(2\) two-graph degeneration, and C697's checked orientation character;
 no integral operator-to-Cartan morphism currently exists.
 **Status:** open structural-sibling lead; not a manuscript claim.
+
+### 2026-07-29 — the mod-\(2\) bridge must match dual-number extension classes
+
+**Provenance:** fourth-order `ej` pass on the common C691/C697 orientation
+character.
+**Was I looking for this?:** no — the preceding leads only compared the
+quadratic character and its three bad-prime mechanisms.
+**Observed / musing:** the characteristic-two collision retains a finer
+nilpotent invariant.  C691 proves that its golden conference operator has
+\[
+N_B=B-I,\qquad N_B^2=0,\qquad \operatorname{rank}N_B=1
+\]
+modulo \(2\).  C697's signed row lift
+\[
+w=\begin{pmatrix}0&1\\-1&0\end{pmatrix},\qquad w^2=-I,
+\]
+reduces to the swap matrix, so
+\[
+N_w=w-I,\qquad N_w^2=0,\qquad \operatorname{rank}N_w=1.
+\]
+Thus both are nontrivial modules over
+\(\mathbf F_2[\epsilon]/(\epsilon^2)\), not merely trivial reductions of
+the same sign character.
+
+On the full Cartan carrier, \(N_w\) has six size-two Jordan blocks on the
+\(12\)-dimensional row summand and fixes \(\bigwedge^2U\).  Hence
+\[
+\operatorname{rank}N_w=6,\qquad
+\dim\ker N_w=21,\qquad
+\dim(\ker N_w/\operatorname{im}N_w)=15.
+\]
+The characteristic-zero grading \(6|15|6\) therefore degenerates to a
+square-zero complex whose homology is exactly the middle \(15\).
+**Why it may matter / strongest question:** a genuine integral
+C691-to-C697 orientation map should be linear over the dual-number
+orientation algebra and compare the nilpotent extension classes
+\(N_B\) and \(N_w\).  This is strictly stronger than matching the
+\(S_5/A_5\) character and gives a cheap falsifier for the proposed rational
+Cartan descent.
+**Structural mechanism:** a quadratic involution with eigenvalues
+\(\pm1\) specializes at \(2\) to one repeated eigenvalue plus a
+square-zero extension direction; the extension class remembers information
+lost by semisimplification.
+**Discriminator / falsifier:** construct the proposed row-twist map modulo
+\(2\) and test dual-number linearity.  If it kills either nilpotent direction
+or yields a semisimple trivial action, the shared-character bridge does not
+lift integrally.
+**Evidence:** CHECKED algebraically from \(B^2=5I\), C691's certified
+rank-one statement, and the displayed \(2\times2\) Weyl matrix; no
+cross-paper comparison map is asserted.
+**Status:** open structural-sibling lead; not allocated.
