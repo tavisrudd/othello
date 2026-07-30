@@ -354,6 +354,7 @@
     ]
   },
   "moment_upgrade": {
+    "conference_equivalence": "pair-sum vanishing iff B^2=5I after two-graph gauge reconstruction",
     "derivation": "sum_k c_ijk=B_ij*(B^2)_ij=0 for i!=j; lower sums follow",
     "first_nonzero_signed_moment_degree": 3,
     "natural_module": "Q^6/Q*1, equivalently the augmentation five-space",
@@ -386,5 +387,14 @@
     "map": "B maps to (B_ij*B_jk*B_ki)_{i<j<k}",
     "orbital_exchange": "B maps to -B",
     "verdict": "canonical compatibility"
+  },
+  "uniqueness_upgrade": {
+    "balanced_conference_solutions": 12,
+    "conclusion": "the balanced oriented cubic forces the unique six-vertex conference two-graph and its golden operator",
+    "free_edge_sign_assignments_checked": 1024,
+    "gauge": "B_0i=1",
+    "labelled_five_cycles": 12,
+    "positive_graph_on_remaining_five_vertices": "a 5-cycle",
+    "switching_isomorphism_classes": 1
   }
 }

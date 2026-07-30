@@ -110,7 +110,11 @@ determinant pencil, and complementary minors derive support complementation
 from \(B^2=5I\).  Its homogenized conjugation-odd part is
 \(F_B(x,z)-F_B(x,-z)=-4z^3C_B(x)\), while the off-diagonal equations in
 \(B^2=5I\) force all signed moments below degree three to vanish and make
-the cubic descend to the augmentation five-space.  C693 owns integration.
+the cubic descend to the augmentation five-space.  Conversely, the
+two-graph identities reconstruct \(B\), pair balance is equivalent to
+\(B^2=5I\), and a gauge-fixed balance argument makes the positive graph on
+the other five vertices a pentagon.  Hence the cubic alone forces the
+unique golden conference switching class.  C693 owns integration.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19

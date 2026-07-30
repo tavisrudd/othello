@@ -53,6 +53,11 @@ golden-conjugation odd part is
 Moreover
 \(\sum_kc_{ijk}=B_{ij}(B^2)_{ij}=0\), so every lower signed moment
 vanishes structurally and \(C_B\) descends to the augmentation five-space.
+Conversely, the two-graph identities reconstruct \(B\) from the cubic and
+pair balance is equivalent to \(B^2=5I\).  In the gauge \(B_{0i}=1\), the
+positive edges on the other five vertices must form a pentagon.  Thus there
+is one balanced switching class, and the cubic data alone force the golden
+operator.
 
 The compatibility is integral.  Modulo \(2\), all cubic signs merge, the
 symmetry jumps from \(A_5\) to \(S_6\), and \(B-I\) is rank-one

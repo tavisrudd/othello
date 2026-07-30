@@ -96,6 +96,27 @@ def main() -> None:
     }
     if pair_sums != {0}:
         raise AssertionError("signed pair moments do not vanish")
+    free_edges = list(combinations(range(1, 6), 2))
+    balanced = 0
+    for bits in range(1 << len(free_edges)):
+        candidate = [[0] * 6 for _ in range(6)]
+        for i in range(1, 6):
+            candidate[0][i] = candidate[i][0] = 1
+        for bit, (i, j) in enumerate(free_edges):
+            value = 1 if (bits >> bit) & 1 else -1
+            candidate[i][j] = candidate[j][i] = value
+        square = [
+            [
+                sum(candidate[i][k] * candidate[k][j] for k in range(6))
+                for j in range(6)
+            ]
+            for i in range(6)
+        ]
+        balanced += square == [
+            [5 * int(i == j) for j in range(6)] for i in range(6)
+        ]
+    if balanced != 12:
+        raise AssertionError("balanced gauge census mismatch")
     print(
         json.dumps(
             {
@@ -104,6 +125,7 @@ def main() -> None:
                 "inverse_gauge_identity": True,
                 "principal_minor_sizes_checked": 7,
                 "signed_pair_moments": sorted(pair_sums),
+                "balanced_gauge_solutions": balanced,
                 "orbital_negation_degree": 3,
             },
             sort_keys=True,

@@ -78,6 +78,31 @@ def rank_mod_two(matrix: list[list[int]]) -> int:
     return rank
 
 
+def gauge_key(matrix: list[list[int]]) -> tuple[int, ...]:
+    return tuple(
+        matrix[i][j]
+        for i in range(len(matrix))
+        for j in range(i + 1, len(matrix))
+    )
+
+
+def canonical_switching_key(matrix: list[list[int]]) -> tuple[int, ...]:
+    n = len(matrix)
+    keys = []
+    for permutation in itertools.permutations(range(n)):
+        permuted = [
+            [matrix[permutation[i]][permutation[j]] for j in range(n)]
+            for i in range(n)
+        ]
+        signs = [1] + [permuted[0][i] for i in range(1, n)]
+        switched = [
+            [signs[i] * signs[j] * permuted[i][j] for j in range(n)]
+            for i in range(n)
+        ]
+        keys.append(gauge_key(switched))
+    return min(keys)
+
+
 def build() -> dict[str, object]:
     c690 = json.loads(C690.read_text())
     c682 = json.loads(C682.read_text())
@@ -241,6 +266,28 @@ def build() -> dict[str, object]:
     assert set(vertex_sums.values()) == {0}
     assert total_sum == 0
 
+    gauge_solutions = []
+    free_edges = list(itertools.combinations(range(1, n), 2))
+    for bits in range(1 << len(free_edges)):
+        candidate = [[0] * n for _ in range(n)]
+        for i in range(1, n):
+            candidate[0][i] = candidate[i][0] = 1
+        for bit, (i, j) in enumerate(free_edges):
+            value = 1 if (bits >> bit) & 1 else -1
+            candidate[i][j] = candidate[j][i] = value
+        if matrix_product(candidate, candidate) == [
+            [5 * int(i == j) for j in range(n)] for i in range(n)
+        ]:
+            gauge_solutions.append(candidate)
+    assert len(gauge_solutions) == 12
+    assert len({canonical_switching_key(matrix) for matrix in gauge_solutions}) == 1
+    for candidate in gauge_solutions:
+        positive_degrees = [
+            sum(candidate[i][j] == 1 for j in range(1, n) if j != i)
+            for i in range(1, n)
+        ]
+        assert positive_degrees == [2] * 5
+
     reduction = [[entry % 2 for entry in row] for row in continuation]
     nilpotent = [
         [(reduction[i][j] + int(i == j)) % 2 for j in range(n)]
@@ -335,6 +382,21 @@ def build() -> dict[str, object]:
             "translation_identity": "C_B(x+t*1)=C_B(x)",
             "natural_module": "Q^6/Q*1, equivalently the augmentation five-space",
             "first_nonzero_signed_moment_degree": 3,
+            "conference_equivalence": (
+                "pair-sum vanishing iff B^2=5I after two-graph gauge reconstruction"
+            ),
+        },
+        "uniqueness_upgrade": {
+            "gauge": "B_0i=1",
+            "free_edge_sign_assignments_checked": 1 << len(free_edges),
+            "balanced_conference_solutions": len(gauge_solutions),
+            "positive_graph_on_remaining_five_vertices": "a 5-cycle",
+            "labelled_five_cycles": 12,
+            "switching_isomorphism_classes": 1,
+            "conclusion": (
+                "the balanced oriented cubic forces the unique six-vertex "
+                "conference two-graph and its golden operator"
+            ),
         },
         "mod_2_closeout": {
             "triangle_coefficients": [1],

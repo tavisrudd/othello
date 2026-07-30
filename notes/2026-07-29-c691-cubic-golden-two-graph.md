@@ -169,6 +169,32 @@ so the cubic descends naturally from \(\mathbf Q^6\) to
 module.  Its first nonzero signed moment is forced to occur in degree three
 by \(B^2=5I\), rather than established by twenty-term enumeration.
 
+The implication reverses.  Start from the oriented support cubic.  Its
+four-point identities reconstruct a switching class \(B\), and for
+\(i\ne j\)
+\[
+ (B^2)_{ij}=B_{ij}\sum_{k\ne i,j}c_{ijk}.
+\]
+The diagonal entries of \(B^2\) are automatically five.  Therefore
+\[
+\boxed{\quad
+\text{all signed pair moments vanish}
+\ \Longleftrightarrow\ B^2=5I.
+\quad}
+\]
+The cubic and its lower-moment balance alone recover the golden quadratic
+relation; it need not be supplied separately by the continuation scheme.
+
+There is only one balanced switching class.  Fix the gauge \(B_{0i}=1\).
+The five equations \((B^2)_{0i}=0\) say that each of the remaining five
+vertices has two positive and two negative incident edges.  The positive
+edges therefore form a 2-regular simple graph on five vertices, necessarily
+a pentagon.  Conversely a pentagon satisfies every remaining off-diagonal
+equation.  The twelve labeled pentagons give twelve gauge matrices and one
+class up to relabeling.  Hence the balanced support cubic forces the unique
+six-vertex conference two-graph, whose oriented automorphism group is the
+reconstructed \(A_5\).
+
 ## Integral closeout
 
 The compatibility is integral and lives on the coarse order
@@ -228,9 +254,9 @@ marking and coefficients.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 13,368 | `7a2c9e8cd0e8485c9d190e0918a909666f928d93d6fc7c52c6130f8edcc7f91a` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 3,977 | `6ba687fa809a871455cf7afd7f032ee7c489dbeb85ddd4cb227dc456424c763c` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 6,704 | `de18cc3eab014a4a828c10f9d8d03b26d2bc1a5cad0bb5ed767e55d7ba2f04a3` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 15,733 | `b2e4a95672e00a95a4f9002bbb354a71416b5c54bcccf47c06d59692a38e8c88` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 4,816 | `14abdbda673c8b0a155db459d6f09dae3a1867052737cd773fd5fa50ad976a30` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 7,203 | `7faf7c560afafb4d6335831b95a097a24fcbcb265f47668b5a68cf64fd305cef` |
 
 ## Disposition
 
@@ -244,16 +270,19 @@ marking and coefficients.
 
 ## Extra-juice and Tao-style closeout
 
-The triangle-product identity upgrades the result four times.  First, the support
-cubic is not merely compatible with the golden operator: it reconstructs its
-switching class, while the operator reconstructs every cubic coefficient.
+The triangle-product identity upgrades the result five times.  First, the
+support cubic is not merely compatible with the golden operator: it
+reconstructs its switching class, while the operator reconstructs every
+cubic coefficient.
 Second, the full determinant pencil shows that the cubic is its unique
 nonsymmetric coefficient layer; Jacobi duality derives complementation from
 \(B^2=5I\).  Third, its conjugation-odd part recovers the cubic and the
 off-diagonal equations of \(B^2=5I\) force the lower signed moments to
-vanish.  Fourth, reduction modulo \(2\) makes the conductor defect visible without
-the normalized golden coordinate: all cubic signs merge, the symmetry jumps
-to \(S_6\), and \(B-I\) becomes rank-one square-zero.
+vanish.  Fourth, the converse balance equations force the unique pentagonal
+switching class and recover \(B^2=5I\) from the cubic alone.  Fifth,
+reduction modulo \(2\) makes the conductor defect visible without the
+normalized golden coordinate: all cubic signs merge, the symmetry jumps to
+\(S_6\), and \(B-I\) becomes rank-one square-zero.
 
 The structural boundary is equally sharp.  The construction is inevitable
 on the six-axis carrier because triangle holonomy is exactly the
@@ -274,6 +303,10 @@ Paper III question and is outside this kill test.
 - **Vanishing below degree three:** settled conceptually;
   \(\sum_kc_{ijk}=B_{ij}(B^2)_{ij}=0\), and the lower sums follow.
   Hence the cubic descends to the augmentation five-space.
+- **Does the cubic itself force the golden operator?** Settled.  The
+  two-graph identities reconstruct \(B\) up to switching, pair balance is
+  equivalent to \(B^2=5I\), and the gauge-fixed positive graph is a
+  pentagon.  There is one switching class.
 - **Prime \(2\):** settled on this package; the cubic orientation collapses
   exactly when \(B-I\) becomes square-zero.  Normalization to
   \(\mathbf F_4\) remains unavailable without adjoining \((1+B)/2\).
