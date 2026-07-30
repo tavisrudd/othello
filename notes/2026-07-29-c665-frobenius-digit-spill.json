@@ -1,0 +1,353 @@
+{
+  "digit_formula": "e*(p-1)/2 == 1+s/2 (mod 2)",
+  "evidence_boundary": "bookkeeping audit only; the report proves the Lucas-socle and adjacent-wall lemmas",
+  "occurrence_parity_classes": [
+    {
+      "exponent_parity": 0,
+      "occurs": true,
+      "p_mod_4": 1,
+      "sign_word": [
+        "sym",
+        "sym"
+      ],
+      "source": 6
+    },
+    {
+      "exponent_parity": 1,
+      "occurs": true,
+      "p_mod_4": 1,
+      "sign_word": [
+        "sym",
+        "sym",
+        "sym"
+      ],
+      "source": 6
+    },
+    {
+      "exponent_parity": 0,
+      "occurs": true,
+      "p_mod_4": 3,
+      "sign_word": [
+        "alt",
+        "alt"
+      ],
+      "source": 6
+    },
+    {
+      "exponent_parity": 1,
+      "occurs": false,
+      "p_mod_4": 3,
+      "sign_word": [
+        "alt",
+        "alt",
+        "alt"
+      ],
+      "source": 6
+    },
+    {
+      "exponent_parity": 0,
+      "occurs": false,
+      "p_mod_4": 1,
+      "sign_word": [
+        "alt",
+        "sym"
+      ],
+      "source": 8
+    },
+    {
+      "exponent_parity": 1,
+      "occurs": false,
+      "p_mod_4": 1,
+      "sign_word": [
+        "alt",
+        "sym",
+        "sym"
+      ],
+      "source": 8
+    },
+    {
+      "exponent_parity": 0,
+      "occurs": false,
+      "p_mod_4": 3,
+      "sign_word": [
+        "sym",
+        "alt"
+      ],
+      "source": 8
+    },
+    {
+      "exponent_parity": 1,
+      "occurs": true,
+      "p_mod_4": 3,
+      "sign_word": [
+        "sym",
+        "alt",
+        "alt"
+      ],
+      "source": 8
+    },
+    {
+      "exponent_parity": 0,
+      "occurs": false,
+      "p_mod_4": 1,
+      "sign_word": [
+        "alt",
+        "sym"
+      ],
+      "source": 12
+    },
+    {
+      "exponent_parity": 1,
+      "occurs": false,
+      "p_mod_4": 1,
+      "sign_word": [
+        "alt",
+        "sym",
+        "sym"
+      ],
+      "source": 12
+    },
+    {
+      "exponent_parity": 0,
+      "occurs": false,
+      "p_mod_4": 3,
+      "sign_word": [
+        "sym",
+        "alt"
+      ],
+      "source": 12
+    },
+    {
+      "exponent_parity": 1,
+      "occurs": true,
+      "p_mod_4": 3,
+      "sign_word": [
+        "sym",
+        "alt",
+        "alt"
+      ],
+      "source": 12
+    }
+  ],
+  "schema": 1,
+  "small_characteristic_rule": "a candidate with an odd Frobenius digit has no square-socle word",
+  "spill_samples": [
+    {
+      "R": [
+        3,
+        1
+      ],
+      "T": [
+        9,
+        1
+      ],
+      "Y": [
+        0,
+        2
+      ],
+      "Y_signs": [
+        "sym",
+        "sym"
+      ],
+      "adjacent_block_candidates": [
+        [
+          9,
+          1
+        ]
+      ],
+      "max_weight_difference": 42,
+      "p": 11,
+      "source": 6,
+      "torus_modulus": 120,
+      "torus_weight_intersection": [],
+      "trace_scalar": 3,
+      "trace_scalar_nonzero": true
+    },
+    {
+      "R": [
+        1,
+        1
+      ],
+      "T": [
+        9,
+        1
+      ],
+      "Y": [
+        0,
+        2
+      ],
+      "Y_signs": [
+        "sym",
+        "sym"
+      ],
+      "adjacent_block_candidates": [
+        [
+          9,
+          1
+        ]
+      ],
+      "max_weight_difference": 42,
+      "p": 11,
+      "source": 8,
+      "torus_modulus": 120,
+      "torus_weight_intersection": [],
+      "trace_scalar": 1,
+      "trace_scalar_nonzero": true
+    },
+    {
+      "R": [
+        5,
+        1
+      ],
+      "T": [
+        11,
+        1
+      ],
+      "Y": [
+        0,
+        2
+      ],
+      "Y_signs": [
+        "alt",
+        "alt"
+      ],
+      "adjacent_block_candidates": [
+        [
+          11,
+          1
+        ]
+      ],
+      "max_weight_difference": 50,
+      "p": 13,
+      "source": 6,
+      "torus_modulus": 168,
+      "torus_weight_intersection": [],
+      "trace_scalar": 5,
+      "trace_scalar_nonzero": true
+    },
+    {
+      "R": [
+        3,
+        1
+      ],
+      "T": [
+        15,
+        1
+      ],
+      "Y": [
+        0,
+        2
+      ],
+      "Y_signs": [
+        "alt",
+        "alt"
+      ],
+      "adjacent_block_candidates": [
+        [
+          15,
+          1
+        ]
+      ],
+      "max_weight_difference": 66,
+      "p": 17,
+      "source": 12,
+      "torus_modulus": 288,
+      "torus_weight_intersection": [],
+      "trace_scalar": 3,
+      "trace_scalar_nonzero": true
+    },
+    {
+      "R": [
+        11,
+        1
+      ],
+      "T": [
+        17,
+        1
+      ],
+      "Y": [
+        0,
+        2
+      ],
+      "Y_signs": [
+        "sym",
+        "sym"
+      ],
+      "adjacent_block_candidates": [
+        [
+          17,
+          1
+        ]
+      ],
+      "max_weight_difference": 74,
+      "p": 19,
+      "source": 6,
+      "torus_modulus": 360,
+      "torus_weight_intersection": [],
+      "trace_scalar": 11,
+      "trace_scalar_nonzero": true
+    },
+    {
+      "R": [
+        9,
+        1
+      ],
+      "T": [
+        17,
+        1
+      ],
+      "Y": [
+        0,
+        2
+      ],
+      "Y_signs": [
+        "sym",
+        "sym"
+      ],
+      "adjacent_block_candidates": [
+        [
+          17,
+          1
+        ]
+      ],
+      "max_weight_difference": 74,
+      "p": 19,
+      "source": 8,
+      "torus_modulus": 360,
+      "torus_weight_intersection": [],
+      "trace_scalar": 9,
+      "trace_scalar_nonzero": true
+    },
+    {
+      "R": [
+        5,
+        1
+      ],
+      "T": [
+        17,
+        1
+      ],
+      "Y": [
+        0,
+        2
+      ],
+      "Y_signs": [
+        "sym",
+        "sym"
+      ],
+      "adjacent_block_candidates": [
+        [
+          17,
+          1
+        ]
+      ],
+      "max_weight_difference": 74,
+      "p": 19,
+      "source": 12,
+      "torus_modulus": 360,
+      "torus_weight_intersection": [],
+      "trace_scalar": 5,
+      "trace_scalar_nonzero": true
+    }
+  ]
+}

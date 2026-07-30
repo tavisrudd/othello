@@ -16,7 +16,7 @@
 | surface | root | current state | owning task |
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | final independent `GO`; local release surface green | [C182](../clebsch-tasks/c182-paper-i-release.md) |
-| Paper II — *Quadratic recovery and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | theorem, editorial, cold-read, and replay gates green; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
+| Paper II — *Quadratic recovery and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v1 theorem, editorial, cold-read, and replay gates green; public packaging remains; C665 uniform C1 is closed for v2 | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics* | `papers/clebsch-covers/` | pre-release `GO`; immutable locator and author metadata remain | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
@@ -27,7 +27,6 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
-| [C665 — uniform extension-field C1](../clebsch-tasks/c665-uniform-extension-c1.md) | active Paper II v2 research; q=121 closed | extract the q=121 two-component Borel spill as a uniform Frobenius-digit criterion |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active open exploration; integral frontier closed | user selects the next frontier |
 
@@ -63,12 +62,20 @@ quadratic balanced-sheet recovery, cubic-first orientation,
 self-association/Schur/Gorenstein structure, and the paper-owned trust
 surface. C577 owns packaging and release.
 
-C665 is a strictly v2 frontier. The q=121
-`L(6) in Sym^59 L(2)` embedded nonretract now has a direct nonsplit Borel
-pullback with a two-component rank-\(1\)-to-\(2\) witness; the retired
-non-equivariant Hasse pairing is not evidence. The remaining gate is a
-uniform Frobenius-digit spill criterion. No C665 result enters v1 before a
-uniform theorem exists. C682 characteristic-zero work is inventory unless
+C665 is complete as a strictly v2 theorem.  The q=121
+`L(6) in Sym^59 L(2)` rank-\(1\)-to-\(2\) witness is the first instance of
+the uniform first-wall spill
+\[
+L(p-2-s,1)\otimes L(p-2,1)
+\longrightarrow L(0,2)\otimes L(p-2-s,1).
+\]
+The affine-socle criterion
+\(e(p-1)/2\equiv1+s/2\pmod2\), together with the spill scalar
+\(p-2-s\ne0\), closes every extension-field exceptional C1 row.  The result
+is recorded in
+`notes/2026-07-29-c665-frobenius-digit-spill.md`; the retired
+non-equivariant Hasse pairing remains non-evidence.  This does not change
+or hold frozen v1. C682 characteristic-zero work is inventory unless
 explicitly promoted.
 
 Local aggregate replay:

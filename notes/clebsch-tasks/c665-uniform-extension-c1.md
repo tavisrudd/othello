@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-26
 
-**Status:** active Paper II v2 research; T3 and the \(q=121\)
-embedded-nonretract C1 gate are closed.
+**Status:** complete; uniform extension-field C1 is closed.  This is a
+Paper II v2 result and does not alter or hold v1.
 
 ## Objective
 
@@ -48,7 +48,34 @@ For each outer-parity head \(i:S^\chi\hookrightarrow E\):
 4. only for an embedded nonretract compute the pullback class or give an
    injective Borel obstruction.
 
-## Immediate gate
+## Uniform closure
+
+Write \(q=p^e\), \(e>1\),
+\[
+a=(p-3)/2,\qquad b=(p-1)/2.
+\]
+For an even restricted exceptional head \(L(s)\), with higher digits zero,
+the affine Hom is a line exactly when
+\[
+eb\equiv1+s/2\pmod2.
+\]
+All other such rows have zero affine Hom.  The small-characteristic digit
+heads are also absent, including the exceptional all-even \(p=5\)
+\(L(2,2)\) row, whose unique digit sign word is alternating globally.
+
+Every surviving occurrence has the same first-wall obstruction.  With
+\[
+T=L(p-2,1),\quad R=L(p-2-s,1),\quad Y=L(0,2),
+\]
+the unique \(R\otimes T\) correction has trace scalar \(p-2-s\ne0\) and
+also spills into \(Y\otimes R\).  No other row reaches that component and
+it has no torus-fixed cochain.  Hence the Borel pullback, and therefore the
+\(H\)-pullback, is nonsplit.
+
+The complete proof and replay are
+`notes/2026-07-29-c665-frobenius-digit-spill.md`.
+
+## q=121 specialization
 
 For \(L(6)\subset\operatorname{Sym}^{59}L(2)\) at \(q=121\), all genuine
 ordinary contractions of orders \(1,\ldots,10\) are now certified
@@ -77,8 +104,11 @@ C1.  The full direct calculation repairs it: row \(34\) supplies the
 needed \(L(6)\otimes T_+\) correction but also survives in
 \(L(0,2)\otimes L(3,1)\), where no torus-fixed coboundary exists.  Since
 \([H:B]=122\) is invertible in characteristic eleven, q=121 C1 is closed.
-Extract this spill as a uniform Frobenius-digit criterion for the
-remaining exceptional families.
+The uniform theorem identifies this as
+\[
+T=L(9,1),\qquad R=L(3,1),\qquad Y=L(0,2),
+\]
+with scalar \(p-2-s=3\).
 
 ## Guardrails
 
@@ -88,8 +118,9 @@ field-sized symmetric square before the affine Hom gate.
 
 ## Acceptance and records
 
-Acceptance is a uniform theorem or a sharp obstruction covering every
-remaining family, with exact replay and Paper II v2 disposition.
+Acceptance passed: the Frobenius-digit theorem covers every remaining
+family, its bookkeeping replay and the full q=121 specialization are
+green, and the result is disposed to Paper II v2 without changing v1.
 
 Baseline:
 `notes/2026-07-26-c665-balanced-matching-completeness.md`.
@@ -97,3 +128,5 @@ Current correction:
 `notes/2026-07-29-c665-uniform-c1-correction.md`.
 Direct q=121 closure:
 `notes/2026-07-29-c665-q121-direct-borel.md`.
+Uniform closure:
+`notes/2026-07-29-c665-frobenius-digit-spill.md`.
