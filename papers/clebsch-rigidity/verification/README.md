@@ -28,8 +28,10 @@ the manifest directly; the aggregate release runner supplies it automatically.
 
 The aggregate formal gate is
 `RelativeConicArcs/Gates/ClebschRigidityTrust.lean` in the pinned
-`https://github.com/tavisrudd/finitegeom` repository. Its tracked axiom output is
-`verification/clebsch_rigidity_trust/axiom-audit.txt` in that repository.
+`https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates`
+repository, whose manifest pins the reusable
+`https://github.com/tavisrudd/finitegeom` dependency. Its tracked axiom
+output is `verification/clebsch_rigidity_trust/axiom-audit.txt`.
 The gate records the exact two classical Dye assumptions used by the
 rigidity implication; the other printed axioms are part of Lean's ordinary
 logical trust boundary or are shown absent.
@@ -44,12 +46,12 @@ counts. The release runner checks every fresh replay against that certificate.
 The manifest records the coverage and residual semantic trust for every use.
 
 From the paper root, with a clean worktree and a checkout of the pinned
-`https://github.com/tavisrudd/finitegeom` repository supplied as
+q11 certificate package supplied as
 `--lean-root`, run:
 
 ```text
 nix develop --command python3 verification/verify_release.py \
-  --lean-root /absolute/path/to/finitegeom
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
 ```
 
 The runner validates the paper root and the exact Paper I formal source

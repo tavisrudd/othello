@@ -7,6 +7,10 @@
 - `finitegeom` owns the human-scale reusable mathematics.
 - `finitegeom-clebsch-q11-certificates` owns the generated q11 tables,
   Dye seam, and the complete Paper I aggregate gate.
+- The downstream-safe base is the extension branch at `8122735`, not
+  `finitegeom/main`: main still exports q11 modules that collide with the
+  certificate package.  The corrected aggregate build passed in 35:47 with
+  a 9.94 GB peak.
 - The Paper I release scripts still assume the former monorepo layout:
   one commit, one root, and base-library files beside the q11 generated
   files.  They must be taught the two-root layout before the clean release

@@ -31,18 +31,19 @@ nineteen-row statement identity, trust manifest, validator, clean release
 runner, unit tests, and deterministic successful output. The thirteen selected
 exact checkers and pinned Nix environment are release-local; the aggregate formal gate is
 `RelativeConicArcs/Gates/ClebschRigidityTrust.lean` in the shared formal
-repository.
+certificate package.
 
-The formal source is distributed separately at
-`https://github.com/tavisrudd/finitegeom` and pinned to the commit recorded
-in the manuscript. Its version-independent archival locator is the Zenodo
-concept DOI
+The reusable formal source is distributed in
+`https://github.com/tavisrudd/finitegeom`; the aggregate q11 gate is in
+`https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates`.  Both
+revisions are recorded in the manuscript.  The base library's
+version-independent archival locator is the Zenodo concept DOI
 [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
-From this directory, supply a checkout of that repository
+From this directory, supply a checkout of the q11 certificate package
 as `--lean-root`:
 
 ```text
 nix develop --command \
   python3 verification/verify_release.py \
-  --lean-root /absolute/path/to/finitegeom
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
 ```

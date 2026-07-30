@@ -12,7 +12,9 @@ from typing import NoReturn
 
 
 SCHEMA = "clebsch-rigidity-trust-manifest-v1"
-LEAN_REPOSITORY_URL = "https://github.com/tavisrudd/finitegeom"
+LEAN_REPOSITORY_URL = (
+    "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
+)
 REQUIRED_CITATION_FRAGMENTS = {
     17: ("Dye 1991",),
     25: ("Dye 1991", "Brouwer--Cohen--Neumaier", "Abiad--Jabal Ameli--Reijnders"),

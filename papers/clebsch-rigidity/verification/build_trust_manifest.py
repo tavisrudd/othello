@@ -21,7 +21,8 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_LEAN_COMMIT = "6d4766d1ea5e9a36f1a507e549c223416a6b506f"
+PINNED_LEAN_COMMIT = "c5e2d8997ed86dcbcd431b0d4a546983f7baf812"
+PINNED_BASE_COMMIT = "81227352974bf7d28f84cb6866936f842fb4de02"
 
 
 TERMINALS = {
@@ -57,6 +58,16 @@ TERMINALS = {
     ],
     "clebsch_formula": [
         "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula",
+    ],
+    "orientation": [
+        "RelativeConicArcs.ClebschOrientationTwoGraph.triangleProduct_switch",
+        "RelativeConicArcs.ClebschOrientationTwoGraph.goldenMatrix_sq",
+        "RelativeConicArcs.ClebschOrientationTwoGraph.goldenMatrix_pairBalance",
+        "RelativeConicArcs.ClebschOrientationTwoGraph.principalBlock_mulVec_deletedRow",
+        "RelativeConicArcs.ClebschOrientationTwoGraph.principalBlock_sq",
+        "RelativeConicArcs.ClebschOrientationTwoGraph.supportCubic_add_const",
+        "RelativeConicArcs.ClebschOrientationTwoGraph.supportCubic_eq_triangle_sum",
+        "RelativeConicArcs.ClebschOrientationTwoGraph.supportGradient_node",
     ],
     "field_order": [
         "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -449,6 +460,7 @@ def components_by_row(
             "The support bipartition is proved by incidence. The intrinsic orientation theorem is a self-contained A5 coset-action and signed-two-graph calculation; it imports no later-paper geometry.",
             [
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
+                lean("switching, conference, Hessian-block, cubic-descent, and node identities", ["orientation"], axioms),
                 replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
                 replay("support cubic, continuation operator, and diagonal determinant pencil", ["check_orientation_two_graph.py"], orientation_coverage, "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction.", direct_coordinates),
             ],
@@ -630,9 +642,10 @@ def build_manifest() -> dict[str, object]:
         ],
         "lean_repository": {
             "distribution": "separate shared Git repository",
-            "url": "https://github.com/tavisrudd/finitegeom",
+            "url": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
             "path": ".",
             "commit": PINNED_LEAN_COMMIT,
+            "finitegeom_commit": PINNED_BASE_COMMIT,
         },
         "reproducibility_environment": {
             "platform": "x86_64-linux",

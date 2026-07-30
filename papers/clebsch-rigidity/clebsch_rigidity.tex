@@ -1144,8 +1144,10 @@ The six points form a projective frame.  Every projective automorphism of
 the cubic permutes this complete frame, and each frame permutation has a
 unique projective extension.  The recovered switching class is the
 six-point regular two-graph.  In the gauge $B_{0i}=1$ it is equivalently a
-pentagon on the other five vertices, so its permutation group is the
-degree-six action of $S_5$, of order $120$.  The sign on the two
+pentagon on the other five vertices.  Normalizing in turn at each vertex
+identifies the six axes with the six Sylow-$5$ subgroups of $A_5$.
+Consequently its permutation group is
+$N_{S_6}(A_5)\cong S_5$, of order $120$.  The sign on the two
 complementary triple orbits is its nontrivial quotient character; its
 kernel is the already constructed $A_5$.  Hence the cubic line has
 stabilizer $S_5$ and the oriented cubic has stabilizer $A_5$, without a
@@ -1307,22 +1309,25 @@ The human-scale formal gate additionally checks switching invariance,
 $B^2=5I$, pair balance, the two principal-block identities used in the
 rank-four argument, translation descent of the cubic, its triangle-product
 formula, and vanishing of all six displayed node gradients.  The formal
-cross-check is deliberately partial: Dye's Brianchon bound and equality
-classification remain cited mathematical inputs, not declarations in this
-human-scale gate.  It does not certify the exhaustive searches in the
-computational companion. The Lean development is
-distributed in the
-\href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}
-repository}; its version-independent archival locator is the Zenodo concept
+cross-check treats Dye's Brianchon bound and equality classification as two
+explicit axioms.  It does not certify the exhaustive searches in the
+computational companion.  The reusable Lean development is distributed in
+\href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}}, while
+the generated q11 tables and aggregate Paper I gate are in
+\href{https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates}
+{\texttt{the q11 package}}.  The base library's
+version-independent archival locator is the Zenodo concept
 DOI \href{https://doi.org/10.5281/zenodo.21650878}
 {\texttt{10.5281/zenodo.21650878}}. The formalization uses Lean 4.32.0-rc1.
 Its pinned artifacts are
 \begin{center}
 \small
-source commit:
-\path{d3cee9167e14b714c0e2a59db1fdeebe25180fb7}\\
-human-scale gate:
-\path{RelativeConicArcs/Gates/ClebschRigidityHuman.lean}\\
+certificate-package commit:
+\path{c5e2d8997ed86dcbcd431b0d4a546983f7baf812}\\
+base-library commit:
+\path{81227352974bf7d28f84cb6866936f842fb4de02}\\
+aggregate gate:
+\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}\\
 Mathlib commit:
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
 \end{center}
@@ -1331,14 +1336,15 @@ The SHA-256 digest of \path{verification/checker_outputs.json} is
 \small\path{a9ff62ca02ff94d38760cbde395d25cbc30bb080ff4fc25a403a5b8b682674f3}.
 \end{center}
 The SHA-256 digest of
-\path{RelativeConicArcs/Gates/ClebschRigidityHuman.lean} is
+\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is
 \begin{center}
-\small\path{6f72d1c3d7ff502210766d3d6d1f2af91fb3cf166c13b6b70c67e2a87dc64648}.
+\small\path{c2d63478d429f808a3d64f44e7bec798db283ae110f7b385a18b8742a63d745a}.
 \end{center}
 This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its
-recorded axiom audit lists only standard logical axioms; the gate uses
-neither admitted declarations nor native execution.
+recorded axiom audit lists the standard logical axioms and exactly the two
+Dye axioms above for the rigidity implication; the gate uses neither
+admitted declarations nor native execution.
 
 \section{Conclusion}
 
