@@ -84,6 +84,36 @@ smaller exact degrees
 83,\qquad121,\qquad120.
 \]
 
+The drops from the formal bounds are not accidental determinant
+cancellations.  Normalize each incoming column by its formal degree \(3\),
+each returned column by its formal degree \(15\), and put \(t=q^{-1}\).
+Exact valuation-pivot elimination over \(\mathbf Q[[t]]\) gives the
+Smith-at-infinity profiles
+\[
+\begin{array}{c|l|c}
+\rho&\text{valuations}&\text{sum}\\ \hline
+2&0^{17},3,4,6&13\\
+3&0^{26},3,4,4,6&17\\
+3'&0^{26},3,3,4,8&18.
+\end{array}
+\]
+These sums are exactly \(96-83,138-121,138-120\).  Thus the degree
+drops are forced by the filtered boundary symbol at infinity.  The principal
+symbol has ranks \(17,26,26\); the positive valuations measure the successive
+orders at which the \(3,4,4\) quotient directions appear.
+
+These profiles belong to the selected fixed endpoint tuples, not to the
+quotient alone.  A bounded exact endpoint-choice audit found alternative
+profiles \((3,4,4,8)\) for \(3\) and \((3,3,6,8)\) for \(3'\), lowering
+the corresponding determinant degrees to \(119,118\).  They are worse
+all-\(q\) witnesses: on the audited range \(10\leq q\leq40\), the first
+changes sign after \(q=36\), while the second changes sign across
+\(17/18\) and \(23/24\).  The stored tuples are retained because their
+determinants have one sign on the complete certified ray, not because they
+maximize symbol vanishing.  No claim is made about the alternative tuples
+outside the stated audit range; this endpoint-choice comparison is
+exploratory and is not part of the certificate.
+
 Put \(x=q-10\).  Exact division removes only linear roots below the stable
 ray:
 
@@ -140,22 +170,24 @@ The primary checker reconstructs the exact degree-\(3,3,9\) operator
 coefficients, checks the signed Green identity, regenerates the three stable
 boundary determinant polynomials within their formal degree bounds, factors
 their below-ray linear roots, proves the shifted residual sign certificates,
-and directly reconstructs every shorter boundary quotient at
-\(q=1,\ldots,9\).  It uses only Python's standard library and the previously
-committed exact covariant engine.
+computes the exact Smith-at-infinity profiles, and directly reconstructs
+every shorter boundary quotient at \(q=1,\ldots,9\).  It uses only Python's
+standard library and the previously committed exact covariant engine.
 
 The independent replay uses the separate dense modular transvectant engine.
 At \(q=13\) and the two primes \(1000000007,1000000009\), it reconstructs all
 three operators out of sample, compares every coefficient with the stored
-universal formulas, and independently obtains nonzero boundary determinants.
+universal formulas, independently obtains nonzero boundary determinants, and
+recomputes all three Smith-at-infinity profiles by separate modular series
+elimination.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c682-signed-block-wronskian.py` | 27450 | `9b1899b7965e6942055ea5d0846f0459b7c66f9282c6536c5e00adfe503ea350` |
+| `2026-07-29-c682-signed-block-wronskian.py` | 32086 | `68e6957372b94b42816748d8acdb0bb93409bcac5255e1d6248047e6792ceb3f` |
 | `2026-07-29-c682-signed-block-wronskian-operators.json` | 200893 | `0c58a67eca5186263d14a3a24741590c9a664078b74308c8cf05cffe2b30447b` |
 | `2026-07-29-c682-signed-block-wronskian-boundary.json` | 177584 | `ff4103a66166bd37f2772e3737ef98c8572c9418e1e09a0d14da8d19870320d5` |
-| `2026-07-29-c682-signed-block-wronskian.json` | 6379 | `e03731d3d66c82a3707557bf7596a25aa389db6f31124972870397c548f3157e` |
-| `2026-07-29-c682-signed-block-wronskian-replay.py` | 7534 | `a6513d1de8d303bc5434646f0980f37bef5fb67d9e1a92cd5df31d20a2bdc51f` |
+| `2026-07-29-c682-signed-block-wronskian.json` | 7403 | `54b5f4b6c02a8c9f8bcf539eba86c3e96221ed48df616b16a0aca082ae53f9a4` |
+| `2026-07-29-c682-signed-block-wronskian-replay.py` | 16573 | `edc68289e993d8802509a5517d02fee607a7524dbc93e60e723946e733fff777` |
 
 The hashes above are refreshed after the final validation pass.
 
@@ -166,6 +198,16 @@ boundary quotient, not merely one nonzero return contraction.  The follow-up
 `ej` pass removes the remaining asymmetry: direct exact low-\(q\) boundary
 determinants are nonzero too.  Full boundary-quotient surjectivity, rather
 than just scalar endpoint mixing, now holds for every integer \(q\geq1\).
+A second follow-up `ej` pass resolves the apparent degree-loss mystery:
+Smith-at-infinity valuations account exactly for all \(13,17,18\) missing
+degrees.
+
+The useful successor object is consequently smaller than the displayed
+\(20\times20\) and \(30\times30\) determinants.  Eliminating the
+\(17,26,26\) zero-valuation incoming pivots leaves \(3\times3\),
+\(4\times4\), and \(4\times4\) \(t\)-adic Schur complements carrying all
+boundary mixing.  That is the natural compressed input for propagation to
+the remaining periodic peak families.
 
 The `tt` correction is structural.  A scalar hypergeometric fit is not merely
 unnecessary; exact data rule out that proof shape at low order.  The invariant
@@ -187,14 +229,23 @@ plateau before any root argument is attempted.
   stronger than one chosen scalar witness.
 - **Settled by `tt`:** the scalar continued-fraction fit is replaced by the
   signed block connection determinant.
-- **Open:** the exact degree drops \(96\to83\), \(138\to121\), and
-  \(138\to120\) suggest a principal-symbol or Darboux cancellation not yet
-  identified.
+- **Settled by second follow-up `ej`:** the exact degree drops
+  \(96\to83\), \(138\to121\), and \(138\to120\) are precisely the sums of
+  the Smith-at-infinity valuations
+  \((3,4,6)\), \((3,4,4,6)\), and \((3,3,4,8)\).
+- **Exploratory endpoint-choice audit:** those valuation profiles are
+  tuple-dependent.  More vanishing can lower the determinant degree but
+  destroys the observed one-sign certificate, so the stored tuple is the
+  proof-efficient choice among the compared tuples.  The alternative sign
+  audit is exact only on \(10\leq q\leq40\) and remains unpromoted.
 - **Settled operationally:** the repeated below-ray roots belong to the
   polynomial continuation of the stable boundary matrix across changes in
-  quotient dimension.  They are not low-\(q\) mixing failures.
-- **Open:** the finer representation-theoretic explanation of their rigid
-  module-dependent multiplicities.
+  quotient dimension.  Throughout the bulk truncated range, their
+  multiplicities equal the number of stable quotient directions still
+  absent from the short chain.  They are not low-\(q\) mixing failures.
+- **Open:** the representation-theoretic explanation of the positive
+  Smith valuations and the exceptional chain-edge root multiplicities at
+  \(q=1,8\) (plus the virtual \(q=0\) factor for \(3\)).
 - **Open:** propagate the boundary theorem through every eventual peak family
   and close the remaining off-peak full-corner gate.
 

@@ -106,7 +106,9 @@ explicitly separated.
   chain \(q=1,\ldots,9\).  The stable exact
   boundary determinants have degrees \(83,121,120\); after removing only
   roots below \(q=10\), coefficientwise sign certificates prove their
-  nonvanishing on the stable ray.
+  nonvanishing on the stable ray.  Exact Smith-at-infinity profiles
+  \((0^{17},3,4,6)\), \((0^{26},3,4,4,6)\), and
+  \((0^{26},3,3,4,8)\) account for every degree lost from the formal bounds.
   Thus at least one endpoint return mixes in every \(2,3,3'\) family.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes

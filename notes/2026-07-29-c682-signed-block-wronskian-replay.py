@@ -12,6 +12,30 @@ BASE = HERE / "2026-07-29-c682-nontrivial-plateau-controllability-replay.py"
 OPERATORS = HERE / "2026-07-29-c682-signed-block-wronskian-operators.json"
 PRIMES = (1_000_000_007, 1_000_000_009)
 FAMILIES = {"2": 63, "3": 72, "3p": 70}
+GENERATORS = {
+    "2": (("g1", 1), ("g11", 11), ("g19", 19), ("g29", 29)),
+    "3": (
+        ("g2", 2),
+        ("g10", 10),
+        ("g12", 12),
+        ("g18", 18),
+        ("g20", 20),
+        ("g28", 28),
+    ),
+    "3p": (
+        ("g6", 6),
+        ("g10", 10),
+        ("g14", 14),
+        ("g16", 16),
+        ("g20", 20),
+        ("g24", 24),
+    ),
+}
+EXPECTED_SMITH_VALUATIONS = {
+    "2": [0] * 17 + [3, 4, 6],
+    "3": [0] * 26 + [3, 4, 4, 6],
+    "3p": [0] * 26 + [3, 3, 4, 8],
+}
 SPECS = {
     "incoming": ("lower", "current", 3),
     "outgoing": ("current", "upper", 3),
@@ -166,6 +190,258 @@ def determinant(columns, prime):
     return out % prime
 
 
+def descriptors(label, degree):
+    out = []
+    for name, generator_degree in GENERATORS[label]:
+        remainder = degree - generator_degree
+        for h_power in range(max(-1, remainder // 20) + 1):
+            residual = remainder - 20 * h_power
+            if residual >= 0 and residual % 12 == 0:
+                out.append((name, residual // 12, h_power))
+    return out
+
+
+def levels(rows):
+    counts = {}
+    out = []
+    for name, *_ in rows:
+        out.append(counts.get(name, 0))
+        counts[name] = counts.get(name, 0) + 1
+    return out
+
+
+def formula_operators(label, q, prime, operators):
+    degree = FAMILIES[label] + 60 * q
+    spaces = {
+        "lower": descriptors(label, degree - 6),
+        "current": descriptors(label, degree),
+        "upper": descriptors(label, degree + 6),
+    }
+    matrices = {}
+    for operator, (source_kind, target_kind, _) in SPECS.items():
+        source = spaces[source_kind]
+        target = spaces[target_kind]
+        target_lookup = {
+            (name, level): index
+            for index, ((name, _, _), level) in enumerate(
+                zip(target, levels(target))
+            )
+        }
+        universal = operators[label][operator]
+        columns = []
+        for (source_name, _, _), level in zip(source, levels(source)):
+            column = [0] * len(target)
+            prefix = f"{source_name}->"
+            for key, coefficients in universal["couplings"].items():
+                if not key.startswith(prefix):
+                    continue
+                rest = key.split("->", 1)[1]
+                target_name, offset_text = rest.split("@")
+                target_index = target_lookup.get(
+                    (target_name, level + int(offset_text))
+                )
+                if target_index is not None:
+                    column[target_index] = evaluate(
+                        coefficients,
+                        universal["degree_bound"],
+                        q,
+                        level,
+                        prime,
+                    )
+            columns.append(column)
+        matrices[operator] = columns
+    return spaces, matrices
+
+
+def boundary_columns(label, spaces, matrices, prime):
+    lower = spaces["lower"]
+    current = spaces["current"]
+    incoming = matrices["incoming"]
+    current_levels = levels(current)
+    lower_levels = levels(lower)
+    current_maxima = {}
+    lower_maxima = {}
+    for (name, _, _), level in zip(current, current_levels):
+        current_maxima[name] = max(current_maxima.get(name, -1), level)
+    for (name, _, _), level in zip(lower, lower_levels):
+        lower_maxima[name] = max(lower_maxima.get(name, -1), level)
+    tail = [
+        index
+        for index, ((name, _, _), level) in enumerate(
+            zip(current, current_levels)
+        )
+        if level >= current_maxima[name] - 9
+    ]
+    tail_set = set(tail)
+    local_incoming = [
+        column
+        for column in incoming
+        if (
+            (support := {
+                index for index, value in enumerate(column) if value
+            })
+            and support <= tail_set
+        )
+    ]
+    depth = {"2": 2, "3": 2, "3p": 3}[label]
+    candidates = [
+        index
+        for index, ((name, _, _), level) in enumerate(
+            zip(lower, lower_levels)
+        )
+        if level >= lower_maxima[name] - depth + 1
+    ]
+    endpoint_indices = candidates[: len(tail) - len(local_incoming)]
+    returned = [
+        matvec(
+            matrices["ninth"],
+            matvec(matrices["outgoing"], incoming[index], prime),
+            prime,
+        )
+        for index in endpoint_indices
+    ]
+    return [
+        [column[index] for index in tail]
+        for column in local_incoming + returned
+    ], len(local_incoming)
+
+
+def polynomial_coefficients(values, prime):
+    differences = values
+    newton = []
+    while differences:
+        newton.append(differences[0])
+        differences = [
+            (right - left) % prime
+            for left, right in zip(differences, differences[1:])
+        ]
+    out = [0] * len(values)
+    basis = [1]
+    for degree, coefficient in enumerate(newton):
+        for index, value in enumerate(basis):
+            out[index] = (out[index] + coefficient * value) % prime
+        inverse = pow(degree + 1, -1, prime)
+        factor = [(-degree * inverse) % prime, inverse]
+        product = [0] * (len(basis) + 1)
+        for left_degree, left_value in enumerate(basis):
+            for right_degree, right_value in enumerate(factor):
+                product[left_degree + right_degree] = (
+                    product[left_degree + right_degree]
+                    + left_value * right_value
+                ) % prime
+        basis = product
+    return out
+
+
+def smith_valuations_at_infinity(label, prime, operators):
+    samples = []
+    local_count = None
+    for q in range(10, 26):
+        spaces, matrices = formula_operators(
+            label, q, prime, operators
+        )
+        columns, local_count = boundary_columns(
+            label, spaces, matrices, prime
+        )
+        samples.append(columns)
+    size = len(samples[0])
+    degrees = [3] * local_count + [15] * (size - local_count)
+    precision = 24
+    matrix = []
+    for row in range(size):
+        series_row = []
+        for column, degree in enumerate(degrees):
+            polynomial = polynomial_coefficients(
+                [
+                    samples[sample][column][row]
+                    for sample in range(degree + 1)
+                ],
+                prime,
+            )
+            polynomial += [0] * (degree + 1 - len(polynomial))
+            series_row.append(
+                list(reversed(polynomial))
+                + [0] * (precision - degree)
+            )
+        matrix.append(series_row)
+
+    def valuation(series):
+        return next(
+            (index for index, value in enumerate(series) if value),
+            len(series),
+        )
+
+    def multiply(left, right):
+        out = [0] * len(left)
+        for left_degree, left_value in enumerate(left):
+            for right_degree, right_value in enumerate(
+                right[: len(out) - left_degree]
+            ):
+                out[left_degree + right_degree] = (
+                    out[left_degree + right_degree]
+                    + left_value * right_value
+                ) % prime
+        return out
+
+    def quotient(numerator, denominator):
+        shift = valuation(denominator)
+        assert valuation(numerator) >= shift
+        numerator = numerator[shift:] + [0] * shift
+        denominator = denominator[shift:] + [0] * shift
+        out = [0] * len(numerator)
+        inverse = pow(denominator[0], -1, prime)
+        for degree in range(len(out)):
+            value = numerator[degree]
+            for lower_degree in range(1, degree + 1):
+                value -= (
+                    denominator[lower_degree]
+                    * out[degree - lower_degree]
+                )
+            out[degree] = value * inverse % prime
+        return out
+
+    valuations = []
+    for pivot_index in range(size):
+        value, pivot_row, pivot_column = min(
+            (
+                valuation(matrix[row][column]),
+                row,
+                column,
+            )
+            for row in range(pivot_index, size)
+            for column in range(pivot_index, size)
+        )
+        assert value <= precision
+        matrix[pivot_index], matrix[pivot_row] = (
+            matrix[pivot_row],
+            matrix[pivot_index],
+        )
+        for row in matrix:
+            row[pivot_index], row[pivot_column] = (
+                row[pivot_column],
+                row[pivot_index],
+            )
+        valuations.append(value)
+        for row in range(pivot_index + 1, size):
+            if valuation(matrix[row][pivot_index]) > precision:
+                continue
+            multiplier = quotient(
+                matrix[row][pivot_index],
+                matrix[pivot_index][pivot_index],
+            )
+            for column in range(pivot_index, size):
+                product = multiply(
+                    multiplier, matrix[pivot_index][column]
+                )
+                matrix[row][column] = [
+                    (left - right) % prime
+                    for left, right in zip(
+                        matrix[row][column], product
+                    )
+                ]
+    return valuations
+
+
 def boundary_determinant(label, spaces, matrices, prime):
     replay = load_base()
     lower = spaces["lower"]
@@ -238,6 +514,9 @@ def main():
             assert boundary_determinant(
                 label, spaces, matrices, prime
             )
+            assert smith_valuations_at_infinity(
+                label, prime, operators
+            ) == EXPECTED_SMITH_VALUATIONS[label]
     print("PASS: independent modular C682 signed-Wronskian replay")
 
 

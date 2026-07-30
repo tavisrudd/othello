@@ -1053,6 +1053,11 @@ integers.  Direct determinants for the actual shorter chains show that their
 local boundary quotients have dimensions \(1\) (and jump to \(4\) at \(q=9\)
 for \(3,3'\)) and are also fully spanned.  Hence boundary-quotient
 surjectivity, not merely endpoint mixing, holds for every \(q\ge1\) in the
-\(2,3,3'\) families.  The exact operator and boundary certificates,
+\(2,3,3'\) families.  A further `ej` pass computes the exact
+Smith-at-infinity profiles
+\((0^{17},3,4,6)\), \((0^{26},3,4,4,6)\), and
+\((0^{26},3,3,4,8)\); their positive sums \(13,17,18\) explain all degree
+loss from the formal determinant bounds.  The exact operator and boundary
+certificates,
 independent two-prime replay, proof, `ej`/`tt` closeout, and Mystery ledger
 are in `notes/2026-07-29-c682-signed-block-wronskian.md`.

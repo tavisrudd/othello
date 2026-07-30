@@ -400,7 +400,7 @@ def determinant_columns(columns):
     return determinant
 
 
-def boundary_wronskian(label, q, operators):
+def boundary_matrix(label, q, operators):
     lower, current, incoming = operator_matrix(
         label, q, "incoming", operators[label]["incoming"]
     )
@@ -461,10 +461,18 @@ def boundary_wronskian(label, q, operators):
     ]
     assert len(square_columns) == len(tail)
     return {
-        "determinant": determinant_columns(square_columns),
+        "columns": square_columns,
         "tail_dimension": len(tail),
         "quotient_dimension": quotient_dimension,
         "endpoint_indices": endpoint_indices,
+    }
+
+
+def boundary_wronskian(label, q, operators):
+    result = boundary_matrix(label, q, operators)
+    return {
+        **result,
+        "determinant": determinant_columns(result["columns"]),
     }
 
 
@@ -650,6 +658,133 @@ def newton_to_monomial(coefficients):
     return out
 
 
+def series_valuation(series):
+    return next(
+        (index for index, value in enumerate(series) if value),
+        len(series),
+    )
+
+
+def series_multiply(left, right):
+    out = [Fraction(0)] * len(left)
+    for left_degree, left_value in enumerate(left):
+        if not left_value:
+            continue
+        for right_degree, right_value in enumerate(
+            right[: len(out) - left_degree]
+        ):
+            out[left_degree + right_degree] += (
+                left_value * right_value
+            )
+    return out
+
+
+def series_quotient(numerator, denominator):
+    denominator_valuation = series_valuation(denominator)
+    numerator_valuation = series_valuation(numerator)
+    assert denominator_valuation < len(denominator)
+    assert numerator_valuation >= denominator_valuation
+    shifted_numerator = (
+        numerator[denominator_valuation:]
+        + [Fraction(0)] * denominator_valuation
+    )
+    shifted_denominator = (
+        denominator[denominator_valuation:]
+        + [Fraction(0)] * denominator_valuation
+    )
+    quotient = [Fraction(0)] * len(numerator)
+    for degree in range(len(quotient)):
+        value = shifted_numerator[degree]
+        for lower_degree in range(1, degree + 1):
+            value -= (
+                shifted_denominator[lower_degree]
+                * quotient[degree - lower_degree]
+            )
+        quotient[degree] = value / shifted_denominator[0]
+    return quotient
+
+
+def boundary_symbol_valuations(label, operators):
+    """Smith valuations at q=infinity after formal column normalization."""
+    first = boundary_matrix(label, 10, operators)
+    size = first["tail_dimension"]
+    quotient = first["quotient_dimension"]
+    column_degrees = [3] * (size - quotient) + [15] * quotient
+    samples = [
+        boundary_matrix(label, q, operators)["columns"]
+        for q in range(10, 26)
+    ]
+    precision = 24
+    matrix = []
+    for row in range(size):
+        series_row = []
+        for column, degree in enumerate(column_degrees):
+            values = [
+                sample[column][row]
+                for sample in samples[: degree + 1]
+            ]
+            differences = values
+            newton_coefficients = []
+            while differences:
+                newton_coefficients.append(differences[0])
+                differences = [
+                    right - left
+                    for left, right in zip(
+                        differences, differences[1:]
+                    )
+                ]
+            polynomial = newton_to_monomial(newton_coefficients)
+            polynomial += [Fraction(0)] * (
+                degree + 1 - len(polynomial)
+            )
+            series_row.append(
+                list(reversed(polynomial))
+                + [Fraction(0)] * (precision - degree)
+            )
+        matrix.append(series_row)
+
+    valuations = []
+    for pivot_index in range(size):
+        valuation, pivot_row, pivot_column = min(
+            (
+                series_valuation(matrix[row][column]),
+                row,
+                column,
+            )
+            for row in range(pivot_index, size)
+            for column in range(pivot_index, size)
+        )
+        assert valuation <= precision
+        matrix[pivot_index], matrix[pivot_row] = (
+            matrix[pivot_row],
+            matrix[pivot_index],
+        )
+        for row in matrix:
+            row[pivot_index], row[pivot_column] = (
+                row[pivot_column],
+                row[pivot_index],
+            )
+        valuations.append(valuation)
+        for row in range(pivot_index + 1, size):
+            if series_valuation(matrix[row][pivot_index]) > precision:
+                continue
+            multiplier = series_quotient(
+                matrix[row][pivot_index],
+                matrix[pivot_index][pivot_index],
+            )
+            for column in range(pivot_index, size):
+                product = series_multiply(
+                    multiplier, matrix[pivot_index][column]
+                )
+                matrix[row][column] = [
+                    left - right
+                    for left, right in zip(
+                        matrix[row][column], product
+                    )
+                ]
+    return valuations
+
+
 def divide_linear(polynomial, root):
     quotient = [Fraction(0)] * (len(polynomial) - 1)
     carry = polynomial[-1]
@@ -698,15 +833,18 @@ def certificate(operators, boundary_data):
             endpoint_pairing(label, q, operators)["pairing"]
             for q in range(1, base_q)
         ]
+        symbol_valuations = boundary_symbol_valuations(label, operators)
         assert all(finite_boundary)
         assert all(entry["determinant"] for entry in low_boundary)
         assert all(low_pairings)
+        assert sum(symbol_valuations) == row["degree_bound"] - row["degree"]
         results[label] = {
             "family": f"n={FAMILIES[label]}+60q",
             "tail_dimension": row["tail_dimension"],
             "quotient_dimension": row["quotient_dimension"],
             "degree_bound": row["degree_bound"],
             "exact_degree": row["degree"],
+            "smith_valuations_at_infinity": symbol_valuations,
             "linear_roots_in_x_equals_q_minus_10": roots,
             "residual_degree": len(residual) - 1,
             "positivity_threshold_q": threshold,
