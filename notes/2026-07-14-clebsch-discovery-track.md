@@ -1117,3 +1117,45 @@ three mod-\(2\) collapses are immediate identities, but no integral
 cross-paper map or fibre has been constructed.
 **Status:** open structural-sibling lead; keep outside C693's Paper I v2
 integration unless separately promoted.
+
+### 2026-07-29 — \(2,3,5\) obstruct three different inputs to the Cartan bridge
+
+**Provenance:** third-order `ej` pass comparing C697 with C682's proved
+minimal base \(\mathbf Z[1/30]\).
+**Was I looking for this?:** no — C682 determined the integral base of the
+operator/polar/incidence package, while C697 worked over characteristic zero
+and classified the graded Cartan carrier.
+**Observed / musing:** the three structural bad primes attach naturally to
+three logically separate inputs of the operator-to-Cartan construction:
+\[
+2=\text{six-axis orientation/sign lift},\qquad
+3=\text{apolar row duality},\qquad
+5=\text{six-axis geometry and cyclotomic ramification}.
+\]
+At \(2\), the unique normalizer sign character vanishes.  At \(3\), C682's
+primitive apolar form has rank \(4\), and the orthogonal of
+\((XY)^2\operatorname{Sym}^2\) has dimension \(5\), so the polar companion
+is no longer a line.  At \(5\), the five roots of \(b^5=1\) coalesce
+scheme-theoretically and the golden orientation field ramifies; independently,
+the required Mukai--Umemura geometry has no characteristic-five model.
+**Why it may matter / strongest question:** this suggests a conceptual
+minimal-base theorem for the *comparison morphism*: orientation, polarity,
+and axis étaleness force exactly \(\mathbf Z[1/30]\).  It must not be phrased
+as bad reduction of \(E_6\) itself; split Chevalley \(E_6\) and its abstract
+minuscule carrier are integral objects.  The bad primes diagnose failure of
+the operator realization of that carrier.
+**Structural mechanism:** the Cartan dictionary needs (i) a signed lift of
+the two rows, (ii) a perfect polarity producing the second row, and (iii) a
+six-point axis module on which exterior powers have the expected ranks.
+**Predicted siblings:** any integral construction of the actual
+operator-to-Cartan tensor should fail for a visibly different reason at each
+of \(2,3,5\), while remaining structurally sound at \(7,11,23\) after the
+known lattice corrections.
+**Discriminator / falsifier:** construct the comparison tensor over
+\(\mathbf Z\) and test whether one of its three inputs extends across its
+assigned prime without rank, étaleness, or character loss.  A forced
+comparison failure at \(11\) or \(23\) would also refute the exact triad.
+**Evidence:** REASONED synthesis of C682's exact integral theorem, C691's
+mod-\(2\) two-graph degeneration, and C697's checked orientation character;
+no integral operator-to-Cartan morphism currently exists.
+**Status:** open structural-sibling lead; not a manuscript claim.
