@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import itertools
 import json
+from fractions import Fraction
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +44,160 @@ def determinant(matrix: list[list[int]]) -> int:
         )
         for column in range(len(matrix))
     )
+
+
+Polynomial = dict[tuple[int, ...], Fraction]
+
+
+def polynomial_add(left: Polynomial, right: Polynomial) -> Polynomial:
+    result = dict(left)
+    for monomial, coefficient in right.items():
+        result[monomial] = result.get(monomial, Fraction(0)) + coefficient
+        if result[monomial] == 0:
+            del result[monomial]
+    return result
+
+
+def polynomial_scale(polynomial: Polynomial, scalar: Fraction) -> Polynomial:
+    return {
+        monomial: scalar * coefficient
+        for monomial, coefficient in polynomial.items()
+        if scalar * coefficient
+    }
+
+
+def polynomial_monomial_multiply(
+    polynomial: Polynomial, exponent: tuple[int, ...], scalar: Fraction
+) -> Polynomial:
+    return {
+        tuple(a + b for a, b in zip(monomial, exponent)): scalar * coefficient
+        for monomial, coefficient in polynomial.items()
+        if scalar * coefficient
+    }
+
+
+def polynomial_reduce(polynomial: Polynomial, basis: list[Polynomial]) -> Polynomial:
+    remainder: Polynomial = {}
+    work = dict(polynomial)
+    while work:
+        leading = max(work)
+        coefficient = work[leading]
+        divisor = next(
+            (
+                candidate
+                for candidate in basis
+                if all(a <= b for a, b in zip(max(candidate), leading))
+            ),
+            None,
+        )
+        if divisor is None:
+            remainder[leading] = coefficient
+            del work[leading]
+            continue
+        divisor_leading = max(divisor)
+        exponent = tuple(a - b for a, b in zip(leading, divisor_leading))
+        scalar = coefficient / divisor[divisor_leading]
+        work = polynomial_add(
+            work, polynomial_scale(polynomial_monomial_multiply(divisor, exponent, 1), -scalar)
+        )
+    return remainder
+
+
+def reduced_groebner_basis(generators: list[Polynomial]) -> list[Polynomial]:
+    basis = [polynomial_scale(g, 1 / g[max(g)]) for g in generators if g]
+    basis = list({tuple(sorted(polynomial.items())): polynomial for polynomial in basis}.values())
+    pairs = list(itertools.combinations(range(len(basis)), 2))
+    while pairs:
+        i, j = pairs.pop(0)
+        left_leading = max(basis[i])
+        right_leading = max(basis[j])
+        lcm = tuple(max(a, b) for a, b in zip(left_leading, right_leading))
+        left_multiplier = tuple(a - b for a, b in zip(lcm, left_leading))
+        right_multiplier = tuple(a - b for a, b in zip(lcm, right_leading))
+        s_polynomial = polynomial_add(
+            polynomial_monomial_multiply(basis[i], left_multiplier, 1),
+            polynomial_monomial_multiply(basis[j], right_multiplier, -1),
+        )
+        remainder = polynomial_reduce(s_polynomial, basis)
+        if remainder:
+            remainder = polynomial_scale(remainder, 1 / remainder[max(remainder)])
+            if tuple(sorted(remainder.items())) in {
+                tuple(sorted(polynomial.items())) for polynomial in basis
+            }:
+                continue
+            new_index = len(basis)
+            pairs.extend((old_index, new_index) for old_index in range(new_index))
+            basis.append(remainder)
+    reduced = []
+    for i, polynomial in enumerate(basis):
+        remainder = polynomial_reduce(
+            polynomial, [candidate for j, candidate in enumerate(basis) if i != j]
+        )
+        if remainder:
+            reduced.append(polynomial_scale(remainder, 1 / remainder[max(remainder)]))
+    unique = {tuple(sorted(polynomial.items())): polynomial for polynomial in reduced}
+    return sorted(unique.values(), key=lambda polynomial: max(polynomial), reverse=True)
+
+
+def chart_gradient_polynomials(
+    signs: dict[tuple[int, int, int], int], chart: int
+) -> list[Polynomial]:
+    """Gradient after x_0=0, later y's=0, and y_chart=1."""
+    variables = chart
+    result = []
+    for derivative in range(1, 6):
+        polynomial: Polynomial = {}
+        for triple, sign in signs.items():
+            if derivative not in triple or 0 in triple:
+                continue
+            factors = [vertex - 1 for vertex in triple if vertex != derivative]
+            if any(factor > chart for factor in factors):
+                continue
+            exponent = [0] * variables
+            for factor in factors:
+                if factor < chart:
+                    exponent[factor] += 1
+            monomial = tuple(exponent)
+            polynomial[monomial] = polynomial.get(monomial, Fraction(0)) + sign
+        result.append({monomial: value for monomial, value in polynomial.items() if value})
+    return result
+
+
+def rational_rank(matrix: list[list[int]]) -> int:
+    rows = [[Fraction(value) for value in row] for row in matrix]
+    rank = 0
+    for column in range(len(rows[0])):
+        pivot = next(
+            (row for row in range(rank, len(rows)) if rows[row][column]), None
+        )
+        if pivot is None:
+            continue
+        rows[rank], rows[pivot] = rows[pivot], rows[rank]
+        scale = rows[rank][column]
+        rows[rank] = [value / scale for value in rows[rank]]
+        for row in range(len(rows)):
+            if row != rank and rows[row][column]:
+                scale = rows[row][column]
+                rows[row] = [
+                    value - scale * pivot_value
+                    for value, pivot_value in zip(rows[row], rows[rank])
+                ]
+        rank += 1
+    return rank
+
+
+def serialize_polynomial(polynomial: Polynomial) -> list[dict[str, object]]:
+    return [
+        {
+            "exponents": list(monomial),
+            "coefficient": (
+                int(coefficient)
+                if coefficient.denominator == 1
+                else f"{coefficient.numerator}/{coefficient.denominator}"
+            ),
+        }
+        for monomial, coefficient in sorted(polynomial.items(), reverse=True)
+    ]
 
 
 def triangle_signs(matrix: list[list[int]]) -> dict[tuple[int, int, int], int]:
@@ -288,6 +443,55 @@ def build() -> dict[str, object]:
         ]
         assert positive_degrees == [2] * 5
 
+    # Intrinsic projective geometry of the cubic on Q^6/Q*1.  The six
+    # displayed representatives are the vertices of its projective frame.
+    nodes = [
+        [-5 if coordinate == vertex else 1 for coordinate in range(n)]
+        for vertex in range(n)
+    ]
+
+    def cubic_value(point: list[int]) -> int:
+        return sum(
+            sign * point[i] * point[j] * point[k]
+            for (i, j, k), sign in continuation_triangle.items()
+        )
+
+    def cubic_gradient(point: list[int]) -> list[int]:
+        gradient = [0] * n
+        for (i, j, k), sign in continuation_triangle.items():
+            gradient[i] += sign * point[j] * point[k]
+            gradient[j] += sign * point[i] * point[k]
+            gradient[k] += sign * point[i] * point[j]
+        return gradient
+
+    def cubic_hessian(point: list[int]) -> list[list[int]]:
+        hessian = [[0] * n for _ in range(n)]
+        for (i, j, k), sign in continuation_triangle.items():
+            hessian[i][j] += sign * point[k]
+            hessian[j][i] += sign * point[k]
+            hessian[i][k] += sign * point[j]
+            hessian[k][i] += sign * point[j]
+            hessian[j][k] += sign * point[i]
+            hessian[k][j] += sign * point[i]
+        return hessian
+
+    assert all(sum(point) == 0 for point in nodes)
+    assert all(cubic_value(point) == 0 for point in nodes)
+    assert all(cubic_gradient(point) == [0] * n for point in nodes)
+    hessian_ranks = [rational_rank(cubic_hessian(point)) for point in nodes]
+    assert hessian_ranks == [4] * n
+
+    # Cover projective four-space after translation gauge x_0=0 by the five
+    # charts in which the last nonzero y-coordinate is one.  Exact Buchberger
+    # reduction gives one coordinate point in each chart and, in the last
+    # chart, the additional all-ones point.
+    chart_bases = [
+        reduced_groebner_basis(
+            chart_gradient_polynomials(continuation_triangle, chart)
+        )
+        for chart in range(5)
+    ]
+
     reduction = [[entry % 2 for entry in row] for row in continuation]
     nilpotent = [
         [(reduction[i][j] + int(i == j)) % 2 for j in range(n)]
@@ -300,7 +504,7 @@ def build() -> dict[str, object]:
     mod_two_cubic_automorphisms = len(permutations)
 
     return {
-        "schema": "c691-cubic-golden-two-graph-v1",
+        "schema": "c691-cubic-golden-two-graph-v2",
         "inputs": [
             {
                 "path": str(path.relative_to(ROOT)),
@@ -396,6 +600,27 @@ def build() -> dict[str, object]:
             "conclusion": (
                 "the balanced oriented cubic forces the unique six-vertex "
                 "conference two-graph and its golden operator"
+            ),
+        },
+        "projective_geometry_upgrade": {
+            "ambient": "P(Q^6/Q*1)=P^4",
+            "singular_points_sum_zero_representatives": nodes,
+            "singular_point_count": len(nodes),
+            "singular_chart_reduced_groebner_bases": [
+                [serialize_polynomial(polynomial) for polynomial in basis]
+                for basis in chart_bases
+            ],
+            "chart_order": (
+                "x_0=0; in chart r, y_r=1 and y_s=0 for s>r, "
+                "with y_r=x_{r+1}"
+            ),
+            "hessian_ranks_on_Q6": hessian_ranks,
+            "projective_singularity_type": "six ordinary double points",
+            "full_projective_automorphism_group_order": len(line_automorphisms),
+            "automorphism_argument": (
+                "the complete singular locus is a projective frame, so every "
+                "projective automorphism permutes it; the cubic-line "
+                "stabilizer among those permutations has order 120"
             ),
         },
         "mod_2_closeout": {

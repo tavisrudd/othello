@@ -367,6 +367,219 @@
       0
     ]
   },
+  "projective_geometry_upgrade": {
+    "ambient": "P(Q^6/Q*1)=P^4",
+    "automorphism_argument": "the complete singular locus is a projective frame, so every projective automorphism permutes it; the cubic-line stabilizer among those permutations has order 120",
+    "chart_order": "x_0=0; in chart r, y_r=1 and y_s=0 for s>r, with y_r=x_{r+1}",
+    "full_projective_automorphism_group_order": 120,
+    "hessian_ranks_on_Q6": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "projective_singularity_type": "six ordinary double points",
+    "singular_chart_reduced_groebner_bases": [
+      [],
+      [
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              1
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              1,
+              0
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              0,
+              1
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              1,
+              0,
+              0
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              0,
+              1,
+              0
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": -1,
+            "exponents": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": -1,
+            "exponents": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "coefficient": -1,
+            "exponents": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": 1,
+            "exponents": [
+              0,
+              0,
+              0,
+              2
+            ]
+          },
+          {
+            "coefficient": -1,
+            "exponents": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      ]
+    ],
+    "singular_point_count": 6,
+    "singular_points_sum_zero_representatives": [
+      [
+        -5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        -5,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -5,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        -5,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        -5,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        -5
+      ]
+    ]
+  },
   "representation_comparison": {
     "cubic_line_automorphism_group_order": 120,
     "interpretation": "A5 kernel inside the outer S5 normalizer",
@@ -380,7 +593,7 @@
       "-1": 60
     }
   },
-  "schema": "c691-cubic-golden-two-graph-v1",
+  "schema": "c691-cubic-golden-two-graph-v2",
   "torsor_compatibility": {
     "cubic_exchange": "c maps to -c",
     "inverse": "the two-graph signs reconstruct the switching class of B",

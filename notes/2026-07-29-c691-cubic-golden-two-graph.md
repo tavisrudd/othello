@@ -195,6 +195,63 @@ class up to relabeling.  Hence the balanced support cubic forces the unique
 six-vertex conference two-graph, whose oriented automorphism group is the
 reconstructed \(A_5\).
 
+## Intrinsic projective frame
+
+The cubic also recovers the six-axis carrier without being handed its
+coordinate labels.  Regard \(C_B=0\) as a cubic threefold in
+\[
+ \mathbf P(\mathbf Q^6/\mathbf Q\mathbf1)=\mathbf P^4.
+\]
+Its singular locus consists of exactly the six points
+\[
+ p_a=[\,\mathbf1-6e_a\,]\qquad(0\leq a<6).
+\]
+These points form a projective frame.
+
+There is a short exact elimination proof.  Use translation invariance to put
+\(x_0=0\), write \(y_i=x_i-x_0\), and cover projective space by the five
+charts in which the last nonzero \(y_r\) is \(1\).  The reduced lexicographic
+Gröbner bases of the five gradient ideals are
+\[
+\begin{array}{c|l}
+r&\text{basis}\\ \hline
+1&\varnothing\\
+2&y_1\\
+3&y_1,y_2\\
+4&y_1,y_2,y_3\\
+5&y_1-y_4,\ y_2-y_4,\ y_3-y_4,\ y_4(y_4-1).
+\end{array}
+\]
+Thus the first four charts contribute one coordinate point each, and the
+last contributes the fifth coordinate point and \((1,1,1,1,1)\).  There are
+no other geometric singular points.
+
+The nodes are ordinary for a structural reason.  At \(p_a\), pair balance
+gives
+\[
+ \operatorname{Hess}(C_B)_{ij}(p_a)=
+ \begin{cases}
+ -6c_{aij},&a\notin\{i,j\},\\
+ 0,&a\in\{i,j\}.
+ \end{cases}
+\]
+The nonzero block is switching-equivalent to the five-by-five principal
+minor of \(B\), whose characteristic polynomial is
+\(\lambda(\lambda^2-5)^2\).  Hence every Hessian has rank four on
+\(\mathbf Q^6\); after removing the translation and radial kernels, each
+singularity is an ordinary double point.
+
+This also closes the automorphism calculation intrinsically.  Every
+projective automorphism of the cubic permutes its complete six-node frame,
+and a permutation of a projective frame has a unique projective extension.
+The earlier permutation census therefore computes the full projective
+automorphism group, not merely a coordinate subgroup:
+\[
+ \operatorname{Aut}_{\mathrm{proj}}(C_B=0)\cong S_5,\qquad
+ |\operatorname{Aut}_{\mathrm{proj}}|=120.
+\]
+Its index-two subgroup preserving the oriented cubic form is \(A_5\).
+
 ## Integral closeout
 
 The compatibility is integral and lives on the coarse order
@@ -240,12 +297,15 @@ python3 notes/2026-07-29-c691-cubic-golden-two-graph-replay.py
 
 The standard-library generator reads the two prior exact certificates,
 checks \(B^2=5I\), verifies the twenty triangle coefficients, reconstructs
-the switching gauge, enumerates the 60/120 automorphism groups, and checks
-the mod-\(2\) degeneration.  The replay reads the two upstream certificates
-directly and independently recomputes the forward triangle identity and
-inverse gauge identity.  The human two-graph argument proves switching
-invariance and inverse reconstruction; the programs fix the task-specific
-marking and coefficients.
+the switching gauge, enumerates the 60/120 automorphism groups, performs
+exact chartwise Buchberger elimination of the gradient ideal, checks the six
+Hessian ranks, and checks the mod-\(2\) degeneration.  The replay reads the
+two upstream certificates directly, independently recomputes the forward
+triangle identity and inverse gauge identity, verifies the nodes and Hessian
+ranks, and exhausts the projective singular loci over \(\mathbf F_7\) and
+\(\mathbf F_{11}\) as an independent invariant check.  The human two-graph
+and projective-frame arguments prove the intrinsic reconstruction; the
+programs fix the task-specific marking and coefficients.
 
 | input | bytes | SHA-256 |
 |---|---:|---|
@@ -254,9 +314,9 @@ marking and coefficients.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 15,733 | `b2e4a95672e00a95a4f9002bbb354a71416b5c54bcccf47c06d59692a38e8c88` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 4,816 | `14abdbda673c8b0a155db459d6f09dae3a1867052737cd773fd5fa50ad976a30` |
-| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 7,203 | `7faf7c560afafb4d6335831b95a097a24fcbcb265f47668b5a68cf64fd305cef` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.py` | 24,559 | `11be0efe9d6c9bca4ad7bb7ab0827ce5cb302bcad92644989d0140785de1dc1e` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph-replay.py` | 7,918 | `04c95b4d53c276171245f2185ac1a21099d34052a8948438e394bf9cd3f372f4` |
+| `notes/2026-07-29-c691-cubic-golden-two-graph.json` | 10,787 | `3d140e589fcbd3f3256ceebbbb22229460ed9e100abdf275c9f67b53b48e969a` |
 
 ## Disposition
 
@@ -270,7 +330,7 @@ marking and coefficients.
 
 ## Extra-juice and Tao-style closeout
 
-The triangle-product identity upgrades the result five times.  First, the
+The triangle-product identity upgrades the result six times.  First, the
 support cubic is not merely compatible with the golden operator: it
 reconstructs its switching class, while the operator reconstructs every
 cubic coefficient.
@@ -282,7 +342,10 @@ vanish.  Fourth, the converse balance equations force the unique pentagonal
 switching class and recover \(B^2=5I\) from the cubic alone.  Fifth,
 reduction modulo \(2\) makes the conductor defect visible without the
 normalized golden coordinate: all cubic signs merge, the symmetry jumps to
-\(S_6\), and \(B-I\) becomes rank-one square-zero.
+\(S_6\), and \(B-I\) becomes rank-one square-zero.  Sixth, the cubic
+threefold's six ordinary nodes intrinsically recover the projective
+six-axis frame, so the order-\(120\) permutation stabilizer is its full
+projective automorphism group.
 
 The structural boundary is equally sharp.  The construction is inevitable
 on the six-axis carrier because triangle holonomy is exactly the
@@ -307,6 +370,10 @@ Paper III question and is outside this kill test.
   two-graph identities reconstruct \(B\) up to switching, pair balance is
   equivalent to \(B^2=5I\), and the gauge-fixed positive graph is a
   pentagon.  There is one switching class.
+- **Is the six-axis coordinate carrier extra marking?** Settled
+  projectively.  The cubic threefold has exactly six singular points, all
+  ordinary nodes, and they form the coordinate projective frame.  Its full
+  projective automorphism group is therefore the computed outer \(S_5\).
 - **Prime \(2\):** settled on this package; the cubic orientation collapses
   exactly when \(B-I\) becomes square-zero.  Normalization to
   \(\mathbf F_4\) remains unavailable without adjoining \((1+B)/2\).
@@ -314,6 +381,6 @@ Paper III question and is outside this kill test.
   The exact evidence gap is an equivariant covariant between the ambient
   harmonic representations, which this six-axis identity does not address.
 
-Vibe check: the bounded kill test lands positively and cleanly.  The two
-Paper I v2 propositions are not adjacent coincidences; they are mutually
-recoverable presentations of one integral two-graph.
+Vibe check: the bounded kill test now lands more strongly than expected.
+The cubic not only recovers the golden operator; its own nodal geometry
+recovers the six-axis stage on which that operator acts.

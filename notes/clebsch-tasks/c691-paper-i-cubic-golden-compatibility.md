@@ -59,6 +59,13 @@ positive edges on the other five vertices must form a pentagon.  Thus there
 is one balanced switching class, and the cubic data alone force the golden
 operator.
 
+Projectively, the cubic threefold in
+\(\mathbf P(\mathbf Q^6/\mathbf Q\mathbf1)\) has exactly six singular
+points \(p_a=[\mathbf1-6e_a]\), all ordinary nodes.  They form a projective
+frame, so the cubic itself recovers the unlabelled six-axis carrier.
+Consequently the previously computed order-\(120\) cubic-line stabilizer is
+the full projective automorphism group, isomorphic to the outer \(S_5\).
+
 The compatibility is integral.  Modulo \(2\), all cubic signs merge, the
 symmetry jumps from \(A_5\) to \(S_6\), and \(B-I\) is rank-one
 square-zero, matching the conductor-two degeneration of

@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 import json
+from fractions import Fraction
 from itertools import combinations
+from itertools import product as cartesian_product
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,12 +27,35 @@ def determinant(matrix: list[list[int]]) -> int:
     )
 
 
+def rational_rank(matrix: list[list[int]]) -> int:
+    rows = [[Fraction(value) for value in row] for row in matrix]
+    rank = 0
+    for column in range(len(rows[0])):
+        pivot = next(
+            (row for row in range(rank, len(rows)) if rows[row][column]), None
+        )
+        if pivot is None:
+            continue
+        rows[rank], rows[pivot] = rows[pivot], rows[rank]
+        pivot_value = rows[rank][column]
+        rows[rank] = [value / pivot_value for value in rows[rank]]
+        for row in range(len(rows)):
+            if row != rank and rows[row][column]:
+                multiplier = rows[row][column]
+                rows[row] = [
+                    value - multiplier * reduced
+                    for value, reduced in zip(rows[row], rows[rank])
+                ]
+        rank += 1
+    return rank
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("certificate", nargs="?", type=Path, default=CERTIFICATE)
     args = parser.parse_args()
     data = json.loads(args.certificate.read_text())
-    if data["schema"] != "c691-cubic-golden-two-graph-v1":
+    if data["schema"] != "c691-cubic-golden-two-graph-v2":
         raise AssertionError("unexpected schema")
     c690 = json.loads(C690.read_text())
     c682 = json.loads(C682.read_text())
@@ -117,6 +142,56 @@ def main() -> None:
         ]
     if balanced != 12:
         raise AssertionError("balanced gauge census mismatch")
+
+    gauge_signs = {
+        triple: gauge[triple[0]][triple[1]]
+        * gauge[triple[1]][triple[2]]
+        * gauge[triple[2]][triple[0]]
+        for triple in combinations(range(6), 3)
+    }
+
+    def gradient(point: list[int]) -> list[int]:
+        result = [0] * 6
+        for (i, j, k), sign in gauge_signs.items():
+            result[i] += sign * point[j] * point[k]
+            result[j] += sign * point[i] * point[k]
+            result[k] += sign * point[i] * point[j]
+        return result
+
+    def hessian(point: list[int]) -> list[list[int]]:
+        result = [[0] * 6 for _ in range(6)]
+        for (i, j, k), sign in gauge_signs.items():
+            for a, b, c in (
+                (i, j, k),
+                (j, i, k),
+                (i, k, j),
+                (k, i, j),
+                (j, k, i),
+                (k, j, i),
+            ):
+                result[a][b] += sign * point[c]
+        return result
+
+    nodes = [
+        [-5 if coordinate == vertex else 1 for coordinate in range(6)]
+        for vertex in range(6)
+    ]
+    if any(gradient(point) != [0] * 6 for point in nodes):
+        raise AssertionError("displayed projective frame is not singular")
+    if [rational_rank(hessian(point)) for point in nodes] != [4] * 6:
+        raise AssertionError("a displayed singularity is not an ordinary node")
+
+    finite_field_singular_counts = {}
+    for prime in (7, 11):
+        singular = 0
+        for last_nonzero in range(5):
+            for prefix in cartesian_product(range(prime), repeat=last_nonzero):
+                point = [0, *prefix, 1, *([0] * (4 - last_nonzero))]
+                singular += all(value % prime == 0 for value in gradient(point)[1:])
+        finite_field_singular_counts[str(prime)] = singular
+    if set(finite_field_singular_counts.values()) != {6}:
+        raise AssertionError("finite-field singular-locus replay mismatch")
+
     print(
         json.dumps(
             {
@@ -126,6 +201,11 @@ def main() -> None:
                 "principal_minor_sizes_checked": 7,
                 "signed_pair_moments": sorted(pair_sums),
                 "balanced_gauge_solutions": balanced,
+                "ordinary_nodes": len(nodes),
+                "finite_field_singular_counts": finite_field_singular_counts,
+                "full_projective_automorphism_group_order": data[
+                    "projective_geometry_upgrade"
+                ]["full_projective_automorphism_group_order"],
                 "orbital_negation_degree": 3,
             },
             sort_keys=True,

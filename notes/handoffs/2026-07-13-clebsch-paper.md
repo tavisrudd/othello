@@ -115,6 +115,11 @@ two-graph identities reconstruct \(B\), pair balance is equivalent to
 \(B^2=5I\), and a gauge-fixed balance argument makes the positive graph on
 the other five vertices a pentagon.  Hence the cubic alone forces the
 unique golden conference switching class.  C693 owns integration.
+As a final intrinsic upgrade, the cubic threefold on the augmentation
+projective four-space has exactly six singular points
+\([\mathbf1-6e_a]\), all ordinary nodes.  They form a projective frame, so
+the cubic itself reconstructs the six-axis carrier and its full projective
+automorphism group is the computed outer \(S_5\) of order \(120\).
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19
