@@ -61,8 +61,8 @@ are now uniform, while the disclaimer has been removed from the manuscripts.
 The conclusions follow the same discipline.  Paper I ends with the
 quadratic-operator/cubic bridge; Paper II states the cross-characteristic
 continuation as mathematics rather than promotion of a companion paper; and
-Paper III ends on the general possibility that one module and one cubic
-govern distinct ambient geometries.
+Paper III reverses the opening image: the cubic that stood fixed is itself
+the common invariant cast as a shadow from two different ambient geometries.
 
 ## Trust boundary
 
@@ -112,9 +112,10 @@ does not yet ship the required axiom-audit file, and the q13 release surface
 is not yet final.  C703 neither fabricates that audit nor expands into the
 queued release task.
 
-The final commits are `91f294b4` in the authoritative repository,
+The main integration commits are `91f294b4` in the authoritative repository,
 `87b9284` in the Paper I mirror, `388e0bf` in the Paper II mirror, and
-`2fc8cb8` in the Paper III mirror.
+`2fc8cb8` in the Paper III mirror.  The final Paper III shadow reversal is
+`780cc5b2` authoritatively and `a06a0ef` in its standalone mirror.
 
 ## Extra-juice and Tao closeout
 
