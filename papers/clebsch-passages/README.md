@@ -2,6 +2,9 @@
 
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- III*
 
+The shared progression is expository; this manuscript is logically
+independent of the other two.
+
 This directory contains the `clebsch-passages` manuscript and artifact.  Its
 main theorem has two legs:
 

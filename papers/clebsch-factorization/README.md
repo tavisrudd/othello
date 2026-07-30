@@ -2,6 +2,9 @@
 
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- II*
 
+The shared progression is expository; this manuscript is logically
+independent of the other two.
+
 This directory contains the manuscript
 *Quadratic trade rigidity and cubic orientation in conic matching quotients*.
 
