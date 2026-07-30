@@ -2,7 +2,8 @@
 set -euo pipefail
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-lean_root=$(cd -- "$script_dir/.." && pwd)
+default_lean_root=$(cd -- "$script_dir/.." && pwd)
+lean_root=$default_lean_root
 
 agent_session_id=${CODEX_THREAD_ID:-${CLAUDE_SESSION_ID:-${CLAUDE_CODE_SESSION_ID:-${AGENT_SESSION_ID:-}}}}
 if [[ -n ${LEAN_GUARD_SESSION_ENV:-} ]]; then
@@ -132,9 +133,26 @@ run_quiet=${LEAN_GUARD_RUN_QUIET:-$HOME/.claude/bin/run-quiet}
 profile=${LEAN_GUARD_PROFILE:-single}
 export RUN_QUIET_LOGDIR=${RUN_QUIET_LOGDIR:-$HOME/.cache/othello-lean-build/guarded-lean}
 
+if [[ ${1:-} == --root ]]; then
+  (( $# >= 2 )) || {
+    printf '%s\n' 'guarded-lean: --root needs an absolute Lean package directory' >&2
+    exit 2
+  }
+  [[ $2 == /* ]] || {
+    printf '%s\n' 'guarded-lean: --root must be absolute' >&2
+    exit 2
+  }
+  [[ -d $2 && ( -f $2/lakefile.toml || -f $2/lakefile.lean ) ]] || {
+    printf '%s\n' 'guarded-lean: --root must contain lakefile.toml or lakefile.lean' >&2
+    exit 2
+  }
+  lean_root=$(cd -- "$2" && pwd)
+  shift 2
+fi
+
 if [[ ${1:-} == --help ]]; then
   cat <<'EOF'
-usage: guarded-lean [LEAN-ARGS...]
+usage: guarded-lean [--root /absolute/lean/package] [LEAN-ARGS...]
 
 Persist exceptional overrides for this Codex/Claude session:
   guarded-lean --session-set LEAN_GUARD_CPUSET=20-21 LEAN_GUARD_THREADS=2
@@ -147,6 +165,9 @@ Run one Lean elaboration with bounded resources and bounded output. Overrides:
   LEAN_GUARD_OOM_SCORE_ADJ   choom adjustment (default 1000)
   LEAN_GUARD_RUN_QUIET       output wrapper (default ~/.claude/bin/run-quiet)
   LEAN_GUARD_PROFILE         resource profile (default single)
+
+`--root` selects an existing Lean package while retaining this wrapper's
+resource preflight, CPU/thread bounds, and bounded logging.
 
 Session settings live under ~/.cache/othello-lean-build/guarded-lean-sessions/<agent-id>.env.
 An explicit environment variable on one invocation overrides the saved session value.

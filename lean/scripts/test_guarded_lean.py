@@ -72,6 +72,19 @@ class GuardedLeanSessionTests(unittest.TestCase):
             )
             self.assertTrue(expected.exists())
 
+    def test_root_must_be_absolute(self) -> None:
+        result = self.run_guard("--root", "relative", "Example.lean", env=os.environ.copy())
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("--root must be absolute", result.stderr)
+
+    def test_root_must_be_a_lean_package(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            result = self.run_guard(
+                "--root", directory, "Example.lean", env=os.environ.copy()
+            )
+            self.assertEqual(result.returncode, 2)
+            self.assertIn("must contain lakefile", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
