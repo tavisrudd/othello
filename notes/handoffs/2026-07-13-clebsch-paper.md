@@ -119,8 +119,9 @@ cross-sheet pair through an edge is one alternating-cycle
 forces its deepest radial trace to be nonzero.  Its cross-incidence design
 is the circulant Paley complement, with \(4\) generating the nonzero
 quadratic-residue orbit; its bordered sign matrix is the Paley Hadamard
-carrier of order \(q+1\).  The old q=7/q=11 scalars remain corroboration
-only.  C682 characteristic-zero work is inventory unless
+carrier of order \(q+1\), and its skew core squares to \(-q\) on the
+augmentation module.  The old q=7/q=11 scalars remain corroboration only.
+C682 characteristic-zero work is inventory unless
 explicitly promoted.
 
 Local aggregate replay:

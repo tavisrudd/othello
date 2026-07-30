@@ -101,6 +101,30 @@ Hadamard matrices of orders eight and twelve.  This is the direct
 incidence-level bridge to the signed Hadamard/Gale self-duality already
 present in Paper II.
 
+The unbordered core contains still more structure.  In the Paley
+normalization, \(-1\) is nonsquare, so exactly one of \(j-i\) and \(i-j\)
+is a nonzero square.  Hence
+\[
+ H+H^{\mathsf T}=2I.
+\]
+Putting \(S=H-I\) gives the exact skew operator
+\[
+ S^{\mathsf T}=-S,\qquad S^2=-qI+J.            \tag{C}
+\]
+On the augmentation hyperplane \(J=0\), this becomes
+\[
+ S^2=-qI.
+\]
+Equivalently, the two nontrivial Fourier eigenvalues of the incidence
+operator are
+\[
+ \frac{1+\sqrt{-q}}2,\qquad
+ \frac{1-\sqrt{-q}}2.                         \tag{F}
+\]
+Thus the cross-sheet incidence tensor carries a canonical quadratic
+orientation operator—a square root of \(-q\)—before any matching quotient
+or cubic is formed.
+
 Fix an edge \(e\).  The unique incident pair is invariant under its
 construction, and its complementary alternating cycle is the geometric
 object whose radial projection is being tested.  The two types first
@@ -262,9 +286,9 @@ traces and checks the symmetric-design identities.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c689-shared-radial.py` | 15277 | `2cd1884c09b19564b406ff70b6cdd8b80f916eab8eae362e2b5dc73d40a6261d` |
-| `notes/2026-07-29-c689-shared-radial-independent.py` | 3808 | `ea891ec30dd75f273bf6f2603d13960c8e5c27668cf9987a7fb9ae6bad8366d3` |
-| `notes/2026-07-29-c689-shared-radial.json` | 5946 | `dfe0e7ca958f0ce749d2833ee2fb830a2b01bf88639f911feaaeba1a2e4194f5` |
+| `notes/2026-07-29-c689-shared-radial.py` | 16347 | `c24e1396d18753f846fdd6cbf5c897e370758a95887542f929ae0f2280db947d` |
+| `notes/2026-07-29-c689-shared-radial-independent.py` | 3959 | `9984c8245ab076ea4504e0b24def98ddb99b05ec291542ef73ca6f70fb1a698e` |
+| `notes/2026-07-29-c689-shared-radial.json` | 6354 | `be9663e34429ee4f9cea815e838be671f7de734f14168fdd074b92e81d9af494` |
 
 Pinned load-bearing inputs:
 
@@ -309,6 +333,15 @@ fields.  The bordered completion (H) additionally identifies the exact
 Hadamard carrier behind the signed sheet geometry; no coordinate quotient
 calculation is needed for that consequence.
 
+At second order, the skew core (C) shows that the same carrier already
+contains an orientation operator on the augmentation module.  This is a
+precise possible bridge to Paper II's cubic-first orientation: the
+quadratic sheet incidence supplies the conjugate eigenspaces (F), while
+the cubic may choose their ordering.  C689 does not claim that this alone
+derives the orientation cubic; establishing that identification would
+require comparing \(S\)'s eigenspace choice with the paper's signed cubic
+tensor.
+
 The Tao boundary is the parameter relation \(c^{-2}=4\).  It is a property
 of the two classified exceptional configurations, not a consequence of
 abstract one-factorization axioms.  Formula (E) is uniform after that
@@ -330,6 +363,7 @@ incidence geometry to the Fischer projection.
 | cross-sheet incidence | settled as the two symmetric designs with explicit perfect pairing (I) | none |
 | Paley structure | settled: the translation-circulant support is affinely \(\{0\}\cup Q_0\) | none |
 | signed Hadamard carrier | settled by the bordered Paley matrix (H), of orders eight and twelve | none |
+| quadratic orientation operator | settled by the skew core \(S^2=-qI\) on augmentation | comparison with the cubic orientation is a possible later v2 bridge, not a C689 obligation |
 | parameter \(4\) | settled as the generator of the nonzero Paley orbit in both classified configurations; not abstractly universal | no C689 gap |
 
 No genuine C689 mystery remains.  Extending the alternating-cycle

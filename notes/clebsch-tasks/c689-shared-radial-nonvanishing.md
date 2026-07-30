@@ -88,4 +88,6 @@ characteristic pairing \(A^{-1}=4A^{\mathsf T}(I-J)\).  In translation
 coordinates they are the circulant complements of the Paley difference
 sets, \(4\) is the generator of the nonzero quadratic-residue orbit, and
 their bordered sign matrices are the Paley Hadamard matrices of orders
-eight and twelve.
+eight and twelve.  The unbordered skew cores satisfy
+\(S^2=-qI+J\), giving a canonical square root of \(-q\) on the
+augmentation module.

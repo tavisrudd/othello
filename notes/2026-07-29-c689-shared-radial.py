@@ -326,6 +326,37 @@ def field_record(balanced, c406, q):
     }
     assert difference_counts[0] == block_size
     assert set(difference_counts.values()) == {block_size, design_lambda}
+    normalized_paley = [
+        [
+            int((column - row) % q in paley_support)
+            for column in range(q)
+        ]
+        for row in range(q)
+    ]
+    normalized_signed = [
+        [2 * value - 1 for value in row] for row in normalized_paley
+    ]
+    skew_core = [
+        [
+            normalized_signed[row][column] - int(row == column)
+            for column in range(q)
+        ]
+        for row in range(q)
+    ]
+    assert all(
+        skew_core[row][column] == -skew_core[column][row]
+        for row in range(q)
+        for column in range(q)
+    )
+    assert all(
+        sum(
+            skew_core[row][index] * skew_core[index][column]
+            for index in range(q)
+        )
+        == (-q * int(row == column) + 1)
+        for row in range(q)
+        for column in range(q)
+    )
     signed_incidence = [
         [2 * value - 1 for value in row] for row in paley_incidence
     ]
@@ -393,6 +424,12 @@ def field_record(balanced, c406, q):
             "nonzero_paley_multiplier": 4,
             "bordered_paley_hadamard_order": q + 1,
             "bordered_paley_hadamard": True,
+            "skew_paley_core": True,
+            "skew_core_square": "-q*I+J",
+            "augmentation_minimal_polynomial": "x^2+q",
+            "nontrivial_incidence_eigenvalues": (
+                "(1+sqrt(-q))/2 and (1-sqrt(-q))/2"
+            ),
         },
         "incident_edge_count": len(all_edges),
         "incident_pair_common_edges": 1,

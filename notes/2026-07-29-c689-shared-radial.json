@@ -4,6 +4,7 @@
   "fields": [
     {
       "cross_incidence_design": {
+        "augmentation_minimal_polynomial": "x^2+q",
         "bordered_paley_hadamard": true,
         "bordered_paley_hadamard_order": 8,
         "gram_diagonal": 4,
@@ -16,6 +17,7 @@
         "invertible_in_characteristic_q": true,
         "k": 4,
         "lambda": 2,
+        "nontrivial_incidence_eigenvalues": "(1+sqrt(-q))/2 and (1-sqrt(-q))/2",
         "nonzero_paley_multiplier": 4,
         "paley_affine_normalization": {
           "multiplier": 3,
@@ -28,6 +30,8 @@
           "shift": 1
         },
         "paley_complement": true,
+        "skew_core_square": "-q*I+J",
+        "skew_paley_core": true,
         "translation_circulant_support": [
           0,
           1,
@@ -125,6 +129,7 @@
     },
     {
       "cross_incidence_design": {
+        "augmentation_minimal_polynomial": "x^2+q",
         "bordered_paley_hadamard": true,
         "bordered_paley_hadamard_order": 12,
         "gram_diagonal": 6,
@@ -137,6 +142,7 @@
         "invertible_in_characteristic_q": true,
         "k": 6,
         "lambda": 3,
+        "nontrivial_incidence_eigenvalues": "(1+sqrt(-q))/2 and (1-sqrt(-q))/2",
         "nonzero_paley_multiplier": 4,
         "paley_affine_normalization": {
           "multiplier": 1,
@@ -151,6 +157,8 @@
           "shift": 3
         },
         "paley_complement": true,
+        "skew_core_square": "-q*I+J",
+        "skew_paley_core": true,
         "translation_circulant_support": [
           0,
           1,
