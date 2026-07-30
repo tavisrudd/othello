@@ -1655,8 +1655,17 @@
       "last": 696,
       "purpose": "Complete Paper III Schlaefli geometry to the E6 minuscule 27 and audit Daniel Litt crossover",
       "sequence": 184
+    },
+    {
+      "count": 1,
+      "first": 697,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 697,
+      "purpose": "Schlafli-Hodge model for the Litt E6 variation",
+      "sequence": 185
     }
   ],
-  "next_id": 697,
+  "next_id": 698,
   "schema": "codex-task-id-allocations-v1"
 }
