@@ -54,10 +54,16 @@ with \(\ell_q(U_na)\ne0\).
 
 ## Fixed-width boundary witness
 
-With the Fischer pairing, \(\Delta_n^\dagger\) is a nonzero
-degree-dependent scalar multiple of the ninth transvectant
-\((\,\cdot\,,F)_9\).  The scalar is irrelevant to mixing.  Take the last
-incoming vector \(a_q=Dw_{q-1}\) and define
+With the Fischer pairing, monomial duality gives the degree-independent
+identity
+\[
+\boxed{\qquad
+\Delta_n^\dagger=-\frac1{60480}(\,\cdot\,,F)_9.
+\qquad}
+\]
+For example, comparing the \(x^{n-2}y^8\to x^n\) entry fixes the scalar;
+the general identity follows entrywise from the transvectant formula.
+Take the last incoming vector \(a_q=Dw_{q-1}\) and define
 \[
 W(q)=
 \ell_q\!\left(((w_{q-1},F)_3,F)_3,F)_9\right).
@@ -113,13 +119,15 @@ python3 ../notes/2026-07-29-c682-plateau-controllability-replay.py
 The primary checker uses exact integer and rational transvectants.  It
 constructs the invariant bases, verifies the five low-\(q\) witnesses,
 interpolates within the proved degree bounds, and checks the shifted
-coefficient signs.
+coefficient signs.  It also checks the exact Fischer-adjoint identity at
+degrees \(64\) and \(124\).
 
 The replay independently reconstructs \(F,h,t\) from dense modular
 transvectants.  At both \(\mathbf F_{1000000007}\) and
 \(\mathbf F_{1000000009}\), it checks the five low-\(q\) witnesses and
 verifies the recorded rational function at the out-of-sample values
-\(q=22,23\).
+\(q=22,23\).  It separately reconstructs and checks
+\(\Delta_n^\dagger=-(\,\cdot\,,F)_9/60480\) at degrees \(64,124\).
 
 The load-bearing exact engines are
 `2026-07-28-c682-klein-e8-free-covariant.py` and
@@ -127,9 +135,9 @@ The load-bearing exact engines are
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c682-plateau-controllability.py` | 20812 | `3f0c7cf4995dc520adda789d73073fb757ef6d0f9d49ebe7aa357a17cb826958` |
-| `2026-07-29-c682-plateau-controllability.json` | 8790 | `20cbf5b2cc1dcaf5d55e3f58832ab40226f5cdb6e2ab5914860e50631dc19777` |
-| `2026-07-29-c682-plateau-controllability-replay.py` | 7786 | `5a958f068af7eff40a272c41e9d0e258ff2b968490860da4bcdbcaa9e3a5a5b5` |
+| `2026-07-29-c682-plateau-controllability.py` | 22447 | `99ac7a39d43ee8dc8bbde15d263f30a7d6c16cf054e823f8e3d5ed54b464a304` |
+| `2026-07-29-c682-plateau-controllability.json` | 8928 | `14a719c07b8ffb67a17e368f2ded21e8633c5a1ca3c88d1df62fa46ea4c238b7` |
+| `2026-07-29-c682-plateau-controllability-replay.py` | 8754 | `a2270c3e27eb9054829dcfc9de0e8b70b2943a229dd3b48f00cfe087288c0bf0` |
 | `2026-07-28-c682-klein-e8-free-covariant.py` | 26315 | `df6d46f2969270814fe9e552da2238bd6de9ff36ebaddb3081c0143014ec8103` |
 | `2026-07-28-c682-klein-e8-first-failure-replay.py` | 15046 | `67e08902c944aeaca6eef458107bd6022eb7e3b2cfcaffc1381e5884d516669c` |
 
@@ -138,6 +146,20 @@ The load-bearing exact engines are
 The cheap strengthening is that the first upward return alone supplies the
 missing matrix unit; the second upward return and the full collection of
 twenty-one peak minors are unnecessary for this family.
+
+The normalization ambiguity also disappears for free:
+\(\Delta_n^\dagger=-(\,\cdot\,,F)_9/60480\) with one scalar in every
+degree.  Thus the boundary rational function is an exact normalization of
+the actual Fischer return, not merely a nonzero surrogate.
+Moreover
+\[
+60480=2^6\,3^3\,5\,7.
+\]
+The extra prime \(7\) enters only when the integral ninth transvectant is
+converted to the Fischer adjoint.  This gives a concrete normalization
+source for the previously apparent prime-\(7\) operator issue; it does not
+add \(7\) to the structural bad-prime set of the normalized integral
+package.
 
 The structural object is a fixed-width boundary control problem on the
 Kostant free module.  Although the plateau dimension grows with \(q\), the
@@ -150,6 +172,11 @@ the template to test on the \(2,3,3'\) free modules.
 - **Settled:** the recurring trivial-module plateau has a noncircular
   entrance anchor for every \(q\ge1\).
 - **Settled by `ej`:** \(U_n\) alone mixes the incoming hyperplane.
+- **Settled by `ej`:** the ninth-transvectant model of the Fischer adjoint
+  has the exact degree-independent scalar \(-1/60480\).
+- **Settled by `ej`:** the prime \(7\) in that scalar is a
+  Fischer-normalization denominator, consistent with its earlier removal
+  from the structural bad-prime set.
 - **Settled by `tt`:** the growing matrix problem collapses to a
   fixed-width boundary covector and one rational function.
 - **Still open:** construct the corresponding boundary witnesses for the

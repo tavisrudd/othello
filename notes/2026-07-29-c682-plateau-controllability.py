@@ -7,7 +7,7 @@ import argparse
 import importlib.util
 import json
 from fractions import Fraction
-from math import comb, gcd
+from math import comb, factorial, gcd
 from pathlib import Path
 
 
@@ -235,6 +235,48 @@ def exact_monomial(f_power, h_power, tools, klein, hessian, jacobian=None):
         exact_power(hessian, h_power, tools),
     )
     return tools.multiply(jacobian, out) if jacobian is not None else out
+
+
+def verify_adjoint_ninth_identity(degree, tools, klein):
+    third_columns = [
+        tools.transvectant(
+            {(degree - index, index): 1},
+            klein,
+            3,
+        )
+        for index in range(degree + 1)
+    ]
+    ninth_columns = [
+        tools.transvectant(
+            {(degree + 6 - index, index): 1},
+            klein,
+            9,
+        )
+        for index in range(degree + 7)
+    ]
+    for source_index, third_column in enumerate(third_columns):
+        source_weight = (
+            factorial(degree - source_index)
+            * factorial(source_index)
+        )
+        for target_index, ninth_column in enumerate(ninth_columns):
+            target_weight = (
+                factorial(degree + 6 - target_index)
+                * factorial(target_index)
+            )
+            adjoint_entry = Fraction(
+                third_column.get(
+                    (degree + 6 - target_index, target_index),
+                    0,
+                )
+                * target_weight,
+                source_weight,
+            )
+            ninth_entry = ninth_column.get(
+                (degree - source_index, source_index),
+                0,
+            )
+            assert adjoint_entry == Fraction(-ninth_entry, 60_480)
 
 
 def exact_witness(q):
@@ -497,6 +539,10 @@ def symbolic_boundary_witness():
 
 
 def certificate():
+    exact = load(EXACT, "plateau_adjoint_identity")
+    tools, klein, _, _, _ = exact.build_data()
+    for degree in (64, 124):
+        verify_adjoint_ninth_identity(degree, tools, klein)
     numerator, denominator = symbolic_boundary_witness()
     shifted_numerator = [
         int(value)
@@ -537,6 +583,10 @@ def certificate():
             "return_operator": "((.,F)_3,F)_9",
         },
         "symbolic_reduction": {
+            "fischer_adjoint_identity": (
+                "Delta_n^dagger=-(.,F)_9/60480"
+            ),
+            "adjoint_identity_exact_check_degrees": [64, 124],
             "incoming_coefficient_degree_bound": 3,
             "boundary_return_coefficient_degree_bound": 15,
             "interpolation_q_values": list(range(6, 22)),

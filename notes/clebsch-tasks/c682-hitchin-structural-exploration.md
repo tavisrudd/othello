@@ -78,7 +78,9 @@ explicitly separated.
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
   apparent operator failures at \(7,11\); the cross-Gram scalar alone has
-  nonstructural collision primes \(11,23\).
+  nonstructural collision primes \(11,23\).  The exact identity
+  \(\Delta_n^\dagger=-(\,\cdot\,,F)_9/60480\) now isolates the prime \(7\)
+  in the Fischer-adjoint normalization itself.
 - At \(23\), the cross-Gram scalar generates the conductor-\(23\) suborder
   \(\mathbf Z_{23}+23\mathbf Z_{23}\sqrt5\).  Its coarse special fibre is a
   dual-number point, while normalization gives the inert étale algebra

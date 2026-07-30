@@ -48,8 +48,13 @@
   ],
   "schema": "c682-trivial-plateau-controllability-v1",
   "symbolic_reduction": {
+    "adjoint_identity_exact_check_degrees": [
+      64,
+      124
+    ],
     "boundary_return_coefficient_degree_bound": 15,
     "boundary_support_width": 4,
+    "fischer_adjoint_identity": "Delta_n^dagger=-(.,F)_9/60480",
     "incoming_coefficient_degree_bound": 3,
     "interpolation_q_values": [
       6,

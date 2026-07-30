@@ -236,6 +236,28 @@ def evaluate(coefficients, value, prime):
     return out
 
 
+def verify_adjoint_ninth_identity(degree, prime, engine, klein):
+    third = engine.delta_matrix(degree, prime)
+    adjoint = engine.adjoint(third, degree, prime)
+    ninth_columns = [
+        engine.transvectant(
+            {(degree + 6 - index, index): 1},
+            {monomial: value % prime for monomial, value in klein.items()},
+            9,
+            prime,
+        )
+        for index in range(degree + 7)
+    ]
+    scalar = -pow(60_480, -1, prime) % prime
+    for source_index, row in enumerate(adjoint):
+        for target_index, entry in enumerate(row):
+            ninth_entry = ninth_columns[target_index].get(
+                (degree - source_index, source_index),
+                0,
+            )
+            assert entry == scalar * ninth_entry % prime
+
+
 def main():
     certificate = json.loads(CERTIFICATE.read_text(encoding="utf-8"))
     symbolic = certificate["symbolic_reduction"]
@@ -244,6 +266,13 @@ def main():
     engine = load_engine()
     invariants = primitive_invariants(engine)
     for prime in PRIMES:
+        for degree in (64, 124):
+            verify_adjoint_ninth_identity(
+                degree,
+                prime,
+                engine,
+                invariants[0],
+            )
         for q in range(1, 6):
             assert boundary_scalar(q, prime, engine, invariants)
         for q in (22, 23):
