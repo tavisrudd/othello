@@ -1134,7 +1134,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1135",
+      "paper_location": "source line 1137",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1398,9 +1398,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "6eea946b302875f64adccd043cf4e9f88d7dd9887fbe260c7db4d873e116b903"
+    "sha256": "1c6be513610de80be8e41ab2575d711b1432a5ef714a1fb2fa780482f65c6a52"
   },
-  "manuscript_sha256": "2c357deef71fdc3b046689d6cfef882ce8829818ef224004e59cd15631624674",
+  "manuscript_sha256": "4f9602894b754bde83a7287d9431456be9fecf3cca815bdea9134c8a55c89f41",
   "public_documents": [
     {
       "path": "README.md",
@@ -1440,7 +1440,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "3f0a26bdc93431a84ed8496f7c1d101717359f8304f16bc3a09a6f3c6847d3d8"
+    "sha256": "965e1b23328fb405f2fcd7e294718ff7ec324b405da607e175a56980ee9d5445"
   },
   "verify_all": {
     "checker_output_certificate": {

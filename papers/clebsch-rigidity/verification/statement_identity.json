@@ -181,7 +181,7 @@
       "row": 26,
       "sha256": "4c80b78f56a7acb84cafc60cbbd7b2995489098be1c2304ddad496e25ebed5dc",
       "source": "clebsch_rigidity.tex",
-      "source_line": 1135,
+      "source_line": 1137,
       "tex": "\\begin{proposition}[The Clebsch-family uncovered formula]\n\\label{prop:clebsch-family-uncovered}\nLet $K$ be a Clebsch hexagon over $\\F_q$; equivalently, $K$ is a six-arc\nwith ten Brianchon points. By Dye's existence theorem, the characteristic\nis not two and $5$ has a square root in $\\F_q$, possibly zero in\ncharacteristic five. Then\n\\[\n |\\cU(K)|=q^2-14q+45.\n\\]\nIf $q\\equiv3\\pmod4$ and $\\cC$ is Dye's associated conic, then\n$\\cC(\\F_q)\\subseteq\\cU(K)$ and\n\\[\n |\\cU(K)\\setminus\\cC(\\F_q)|=(q-4)(q-11).\n\\]\nIn particular, among Clebsch hexagons in this congruence class, the\nassociated conic is the complete projective deep-hole syndrome locus if and\nonly if $q=11$.\n\\end{proposition}",
       "title": "The Clebsch-family uncovered formula"
     },
@@ -210,5 +210,5 @@
   "companion_source_sha256": "5c2343f4bcd1322a12a16cdf3e859ae076ed31874a49ba3dd1bc0a56a46fd1b1",
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "2c357deef71fdc3b046689d6cfef882ce8829818ef224004e59cd15631624674"
+  "source_sha256": "4f9602894b754bde83a7287d9431456be9fecf3cca815bdea9134c8a55c89f41"
 }
