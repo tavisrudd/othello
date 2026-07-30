@@ -210,5 +210,5 @@
   "companion_source_sha256": "2a28b6eeb38c8d2fa8dd62a842ca41cc9d618e3ecd5cd18b79e343de2f7aafa4",
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "2318ed979dcf3dd7df1355093d7a343c1ec9c1dbb4ca7f9d2ac81090d7ba065e"
+  "source_sha256": "ca4e6e45ea75870a61bfa06376fd5ee74c1d07d77b79f81972e2b5326af25bec"
 }
