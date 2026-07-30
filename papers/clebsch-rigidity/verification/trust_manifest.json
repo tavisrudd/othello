@@ -93,7 +93,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 80",
+      "paper_location": "source line 82",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 394",
+      "paper_location": "source line 396",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 461",
+      "paper_location": "source line 463",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 478",
+      "paper_location": "source line 480",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 517",
+      "paper_location": "source line 519",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 569",
+      "paper_location": "source line 571",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 645",
+      "paper_location": "source line 647",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -575,7 +575,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 127",
+      "paper_location": "source line 129",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -685,7 +685,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 804",
+      "paper_location": "source line 806",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -766,7 +766,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 854",
+      "paper_location": "source line 856",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -829,7 +829,7 @@
               {
                 "path": "check_orientation_two_graph.py",
                 "repository": "paper",
-                "sha256": "a280d0bf75aa31c0cc99cbf8956a163af067a744436212a01cf888b77b6c9810"
+                "sha256": "9bbb797186631d9b2259d66b68cd622c54f151e4d7fb79aed001cd6efbb083fb"
               }
             ],
             "checker_commands": [
@@ -840,7 +840,7 @@
                 ]
               }
             ],
-            "coverage": "The checker constructs A5 as the even permutations of five letters, its A5/C5 and A5/D5 actions, both five-valent orbitals, the fibre-odd signed matrix, all twenty triangle products, the inverse switching gauge, signed moment balance, all twelve balanced gauges, every principal minor, and the mod-two degeneration.",
+            "coverage": "The checker constructs A5 as the even permutations of five letters, its A5/C5 and A5/D5 actions, both five-valent orbitals, the fibre-odd signed matrix, all twenty triangle products, the inverse switching gauge, signed moment balance, all twelve balanced gauges, every principal minor, the five chartwise gradient Groebner bases, the six Hessian ranks, both automorphism groups, and the mod-two degeneration.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction."
@@ -850,13 +850,13 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph",
-      "paper_location": "source line 870",
+      "paper_location": "source line 872",
       "route": "mixed",
       "row": 23,
       "source": {
         "id": "prop:invariant-support-bipartition+thm:orientation-two-graph",
         "kind": "theorem-environment",
-        "sha256": "c7538f23ab58c2095515cba58ab0f871a63354c4ec0097c945c1041d28d1b174"
+        "sha256": "8ebb96d27940f3a1241ae69647ee44aac83cbb53a04af0dd631c965a98aad732"
       },
       "trust_boundary": "The support bipartition is proved by incidence. The intrinsic orientation theorem is a self-contained A5 coset-action and signed-two-graph calculation; it imports no later-paper geometry."
     },
@@ -1134,7 +1134,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1086",
+      "paper_location": "source line 1135",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1398,14 +1398,14 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "f38f78083ceb61bc04d25ac69a2e7aac33e2c24f25486f92a9ff3e6a03722914"
+    "sha256": "6eea946b302875f64adccd043cf4e9f88d7dd9887fbe260c7db4d873e116b903"
   },
-  "manuscript_sha256": "3e98795b34655e8f8f1a3ea95f7e0a1458c4d0d16a77efddf23fccf9bb9c23ca",
+  "manuscript_sha256": "2c357deef71fdc3b046689d6cfef882ce8829818ef224004e59cd15631624674",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "a3726b275fb3b04a31ffc8e7c612716591d27121b49ceea35e9b7f308bff39d3"
+      "sha256": "7055f73b671390795f7a261fd26317df620e54e8aa8a9626b2ef0451c49730ba"
     },
     {
       "path": "verification/README.md",
@@ -1440,7 +1440,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "ba635ac2eea571e6af61931cac0cd06e175e1f2794c65a215654220879f12731"
+    "sha256": "3f0a26bdc93431a84ed8496f7c1d101717359f8304f16bc3a09a6f3c6847d3d8"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1452,7 +1452,7 @@
       "output": {
         "path": "verification/checker_outputs.json",
         "repository": "paper",
-        "sha256": "d48746f26d65e6e2bfc27e52cec8cf4d47a9f6aa290534c22a9e8b690650a9cf"
+        "sha256": "a9ff62ca02ff94d38760cbde395d25cbc30bb080ff4fc25a403a5b8b682674f3"
       }
     },
     "checks": [
@@ -1651,9 +1651,9 @@
         "cwd": ".",
         "id": "check-orientation-two-graph",
         "repository": "paper",
-        "stdout_bytes": 271,
-        "stdout_lines": 5,
-        "stdout_sha256": "c5396e3e82b915f22ca373a8187743f0043cd4be5986725692bcc342bec1231e",
+        "stdout_bytes": 335,
+        "stdout_lines": 6,
+        "stdout_sha256": "1e39fe568a3f20583d9e65f4d2ca63bf9e1cbadbce6ec50e8d7ac303186f63a4",
         "timeout_seconds": 900
       },
       {
@@ -1700,7 +1700,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "78e6d9c183da6a05cd846c9cee5eaa91078fda91700a3ba5c5979dd5fe5f5bac"
+        "sha256": "f802bebe33e40b9357772f00412c88b8f2f53f4b86e6644d056530783b7681a0"
       },
       {
         "path": "verification/verify_trust_manifest.py",
@@ -1710,12 +1710,12 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "b429a462a0aa7f100d0c56b7651f581cbe75c91870a6bbb62fd5cbffe7a574be"
+        "sha256": "cb7daba93a65c9c5722145cfdd615d510b17dac0266911f577721ce7aa7528d1"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "0d175fdb76e6ccb5585c562532eab682cda086ca4bf928a98f9af827d58517f7"
+        "sha256": "c01b0613a999da17a3a7dd5de1d79452791368c58d5d715cd6ff9896a5858b3a"
       }
     ]
   }

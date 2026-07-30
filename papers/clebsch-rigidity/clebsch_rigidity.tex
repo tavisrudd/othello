@@ -57,6 +57,8 @@ products are exactly the coefficients of the support-orientation cubic.
 Thus the support cubic and the golden continuation algebra are two
 presentations of the same intrinsic signed two-graph; the cubic is the
 sole nonsymmetric term in the operator's diagonal determinant pencil.
+Its six ordinary nodes form a projective frame, so the cubic also recovers
+the unlabelled axis carrier.
 The conceptual tools are a universal chord-defect identity and a
 partial-cover bound.  Together with passant counts, they show that any
 $k$-arc whose uncovered locus is a nonsingular conic has $q$ odd and
@@ -969,6 +971,17 @@ The cubic descends to the augmentation space
 $\mathbf Q^6/\mathbf Q\mathbf1$.  Conversely, its two-graph identities
 and vanishing signed pair moments reconstruct $B$ and force $B^2=5I$;
 there is a unique balanced switching class up to relabeling.
+The cubic also recovers the unlabelled axis carrier: in
+\[
+ \mathbf P(\mathbf Q^6/\mathbf Q\mathbf1)
+\]
+its zero locus has exactly six singular points
+$p_a=[\mathbf1-6e_a]$, all ordinary nodes.  They form a projective frame,
+and
+\[
+ \operatorname{Aut}_{\mathrm{proj}}(C=0)\cong S_5,
+\]
+with the oriented-cubic stabilizer $A_5$ as its index-two subgroup.
 Consequently the continuation algebra and its integral commutant are
 \[
  \mathbf Q[B]\cong\mathbf Q(\sqrt5),\qquad
@@ -1037,6 +1050,42 @@ equivalent to $B^2=5I$.  In the gauge $B_{0i}=1$, the five equations
 $(B^2)_{0i}=0$ say that the positive edges on the remaining five vertices
 form a $2$-regular graph, hence a pentagon.  The twelve labeled pentagons
 form one class up to relabeling, proving uniqueness.
+
+It remains to see that the cubic itself recovers the six axes.  Use
+translation invariance to set $x_0=0$, write $y_i=x_i-x_0$, and cover
+projective space by the five charts in which the last nonzero $y_r$ is
+$1$.  Exact Buchberger reduction of the five gradient ideals gives
+\[
+\begin{array}{c|l}
+r&\text{reduced lexicographic basis}\\ \hline
+1&\varnothing\\
+2&y_1\\
+3&y_1,y_2\\
+4&y_1,y_2,y_3\\
+5&y_1-y_4,\ y_2-y_4,\ y_3-y_4,\ y_4(y_4-1).
+\end{array}
+\]
+Thus the first four charts contribute one coordinate point each, and the
+last contributes the fifth coordinate point and $(1,1,1,1,1)$.  These are
+exactly the six classes $p_a=[\mathbf1-6e_a]$.
+
+At $p_a$, pair balance gives
+\[
+ \operatorname{Hess}(C)_{ij}(p_a)=
+ \begin{cases}
+ -6c_{aij},&a\notin\{i,j\},\\
+ 0,&a\in\{i,j\}.
+ \end{cases}
+\]
+The nonzero block is switching-equivalent to a five-by-five principal
+minor of $B$, with characteristic polynomial
+$\lambda(\lambda^2-5)^2$.  The Hessian therefore has rank four after the
+translation and radial directions are removed, so every singularity is an
+ordinary double point.  The six points form a projective frame.  Every
+projective automorphism of the cubic permutes this complete frame, and
+each frame permutation has a unique projective extension.  The signed
+permutation calculation gives stabilizers of orders $120$ for the cubic
+line and $60$ for its orientation, proving the automorphism statement.
 
 For a triple $S=\{i,j,k\}$, its principal minor is
 \[
@@ -1164,7 +1213,8 @@ The line bound, chord-defect identity, partial-cover deduction, decoder
 reconstruction, support bipartition, and orientation two-graph theorem are
 proved in the text.  The paper-owned exact replay independently constructs the
 $A_5/C_5$ and $A_5/D_5$ actions, the signed operator, its triangle products
-and diagonal pencil, and the balanced switching class.  It reads no
+and diagonal pencil, the balanced switching class, the five gradient
+ideals, and the six Hessian ranks.  It reads no
 later-paper artifact:
 \begin{center}
 \small\path{check_orientation_two_graph.py}.
@@ -1190,7 +1240,7 @@ Mathlib commit:
 \end{center}
 The SHA-256 digest of \path{verification/checker_outputs.json} is
 \begin{center}
-\small\path{d48746f26d65e6e2bfc27e52cec8cf4d47a9f6aa290534c22a9e8b690650a9cf}.
+\small\path{a9ff62ca02ff94d38760cbde395d25cbc30bb080ff4fc25a403a5b8b682674f3}.
 \end{center}
 The SHA-256 digest of
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is

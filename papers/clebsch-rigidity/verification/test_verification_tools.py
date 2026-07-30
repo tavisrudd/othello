@@ -81,10 +81,10 @@ class ReleaseRunnerTests(unittest.TestCase):
         self.assertIsNone(manuscript.WARNING_RE.search("Package hyperref Info"))
         self.assertIsNotNone(manuscript.WARNING_RE.search("LaTeX Warning"))
         match = manuscript.PAGES_RE.search(
-            "Output written on clebsch_rigidity.xdv (17 pages, 1 byte)."
+            "Output written on clebsch_rigidity.xdv (18 pages, 1 byte)."
         )
         self.assertIsNotNone(match)
-        self.assertEqual(match.group(1), "17")
+        self.assertEqual(match.group(1), "18")
 
 
 class ManifestSemanticTests(unittest.TestCase):

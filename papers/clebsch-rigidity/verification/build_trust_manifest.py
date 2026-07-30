@@ -357,7 +357,9 @@ def components_by_row(
         "letters, its A5/C5 and A5/D5 actions, both five-valent orbitals, "
         "the fibre-odd signed matrix, all twenty triangle products, the "
         "inverse switching gauge, signed moment balance, all twelve "
-        "balanced gauges, every principal minor, and the mod-two degeneration."
+        "balanced gauges, every principal minor, the five chartwise gradient "
+        "Groebner bases, the six Hessian ranks, both automorphism groups, and "
+        "the mod-two degeneration."
     )
     direct_coordinates = (
         "The replay reconstructs its domain from explicit coordinates and "

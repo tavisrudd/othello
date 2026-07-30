@@ -9,8 +9,9 @@ deep-hole syndrome locus*.
   `7d258dcd6cda9f54c330d4b705d553a975749014`.
 - Scope: rigidity, quantitative gaps, decoding, automorphisms, support
   orientation, the intrinsic golden two-graph, Brianchon reconstruction,
-  `q=11` uniqueness, the `q=13` tangent code, the `4 <= k <= 8`
-  classification, and their verification architecture.
+  the cubic's six-node projective frame, `q=11` uniqueness, the `q=13`
+  tangent code, the `4 <= k <= 8` classification, and their verification
+  architecture.
 - Boundary: no factorization-memory, reflection-arrangement, or later-passage
   theorem or verification dependency.
 
