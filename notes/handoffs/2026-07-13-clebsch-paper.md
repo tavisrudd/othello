@@ -27,6 +27,19 @@ paper-owned proof surfaces remain unchanged.  The conclusions continue the
 same progression without administrative cross-promotion.  Full report:
 [`../2026-07-30-c703-clebsch-trilogy-identity.md`](../2026-07-30-c703-clebsch-trilogy-identity.md).
 
+C704 is complete with a positive functorial bridge.  The six outer
+conjugates of C682's degree-ten middle-exterior operator are the signed
+Joubert coordinates; they land on the Segre cubic and centered squaring is
+the Segre--Igusa polar map.  The five-syntheme/Clebsch formula completes
+the intrinsic commuting diagram.  The same conference operator gives the
+literal Cartan restriction
+\(\operatorname{Pf}(C_{ij}(x_i-x_j))=4Z_T(x)\).  Later balanced slices
+stop at the missing-support-lattice obstruction in the bounded census
+through degree \(50\), while binary tetrahedral and octahedral sisters
+pass only their first exact feasibility gates.  No split paper is
+reopened.  Full report:
+[`../2026-07-30-c704-functorial-operator-shadows.md`](../2026-07-30-c704-functorial-operator-shadows.md).
+
 ## Active and queued task cards
 
 | task | state | next gate |
@@ -35,7 +48,6 @@ same progression without administrative cross-promotion.  Full report:
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
-| [C704 — functorial operator shadows](../clebsch-tasks/c704-functorial-operator-shadows.md) | queued successor exploration | test the Segre--Igusa polar diagram before opening Cartan, later-slice, or Platonic branches |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace

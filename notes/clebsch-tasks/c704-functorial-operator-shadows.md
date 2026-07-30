@@ -4,7 +4,10 @@
 
 **Opened:** 2026-07-30
 
-**Status:** queued as a bounded successor exploration to C682.
+**Status:** complete; positive Segre--Igusa and Cartan gates, bounded
+later-slice obstruction, and positive tetrahedral/octahedral feasibility
+gates.  Full report:
+[`../2026-07-30-c704-functorial-operator-shadows.md`](../2026-07-30-c704-functorial-operator-shadows.md).
 
 ## Objective
 
@@ -82,6 +85,24 @@ A positive primary result requires:
 A negative result requires an exact obstruction identifying which map,
 equivariance, degree, or polarization fails, followed by the bounded
 adjacent-crown extraction required by the lane conventions.
+
+## Closeout
+
+The six outer conjugates of the degree-ten middle-exterior operator are
+the signed Joubert coordinates.  They satisfy the Segre equations, and
+centered squaring is exactly the Segre--Igusa polar map.  The
+five-syntheme/Clebsch expression supplies the other face of a
+coordinate-free commuting diagram.
+
+The same conference operator gives the literal Cartan restriction
+\[
+\operatorname{Pf}\bigl(C_{ij}(x_i-x_j)\bigr)=4Z_T(x).
+\]
+Later balanced \(E_8\) slices lack the degree-ten distinguished support
+lattice; the bounded census through degree \(50\) therefore stops at an
+exact functoriality obstruction.  Binary tetrahedral \(E_6\) and binary
+octahedral \(E_7\) pass feasibility through their first exact conjugate
+transvectant separators, but no sister classification is promoted.
 
 ## Boundaries
 
