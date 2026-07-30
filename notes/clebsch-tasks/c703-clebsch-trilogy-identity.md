@@ -4,7 +4,8 @@
 
 **Opened:** 2026-07-30
 
-**Status:** in progress; user-approved three-paper expository integration.
+**Status:** complete; shared identity, first/last-page exposition, trust
+refresh, and standalone synchronization accepted 2026-07-30.
 
 ## Objective
 
@@ -24,6 +25,25 @@ II's principal title and mathematics visibly general.
    surfaces as required.
 6. Run each paper's aggregate gate and synchronize all three standalone
    mirrors by ordinary forward commits.
+
+## Acceptance
+
+- All three papers carry the shared banner *The Clebsch cubic: recovering,
+  orienting, and realizing*, numbered I--III, without changing their
+  canonical titles.
+- All three introductions open with the same image of the cubic taking
+  shape, finding its bearings, and standing fixed while its shadows move.
+  Logical independence is stated in the READMEs rather than on the first
+  pages.
+- Paper II retains its general title, abstract, main theorem, hypotheses,
+  and proof surface.
+- The conclusions now extend the mathematics without administrative
+  cross-promotion.
+- Authoritative and standalone Paper II and III release gates pass.
+  Paper I's builds, statement identity, and warning scans pass in both
+  repositories; its aggregate formal-release audit remains owned by C702.
+- Full report:
+  [C703 trilogy identity](../2026-07-30-c703-clebsch-trilogy-identity.md).
 
 ## Boundaries
 

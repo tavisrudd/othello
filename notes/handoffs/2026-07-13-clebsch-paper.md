@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Date:** 2026-07-29
+**Date:** 2026-07-30
 
 > **LIVE MAP ONLY.** This is the routing and state surface for the active
 > three-paper program. Detailed live task internals belong in C-task cards;
@@ -19,6 +19,13 @@
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics* | `papers/clebsch-covers/` | pre-release `GO`; immutable locator and author metadata remain | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
+
+C703 is complete: all three split papers now share the title-page identity
+*The Clebsch cubic: recovering, orienting, and realizing* and a restrained
+opening image, while their canonical titles, logical independence, and
+paper-owned proof surfaces remain unchanged.  The conclusions continue the
+same progression without administrative cross-promotion.  Full report:
+[`../2026-07-30-c703-clebsch-trilogy-identity.md`](../2026-07-30-c703-clebsch-trilogy-identity.md).
 
 ## Active and queued task cards
 
