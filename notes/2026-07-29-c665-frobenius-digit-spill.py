@@ -120,6 +120,8 @@ def spill_record(p, source):
         "torus_modulus": p * p - 1,
         "trace_scalar": p - 2 - source,
         "trace_scalar_nonzero": (p - 2 - source) % p != 0,
+        "trace_target_dimension": 2 * (source + 1) * (p - 1),
+        "spill_target_dimension": 6 * (p - 1 - source),
     }
 
 
@@ -150,6 +152,10 @@ def calculate():
         "small_characteristic_rule": (
             "a candidate with an odd Frobenius digit has no square-socle word"
         ),
+        "even_head_packets": {
+            "s_mod_4_equals_2": "e*(p-1)/2 is even",
+            "s_mod_4_equals_0": "e*(p-1)/2 is odd",
+        },
         "evidence_boundary": (
             "bookkeeping audit only; the report proves the Lucas-socle "
             "and adjacent-wall lemmas"

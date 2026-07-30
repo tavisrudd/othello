@@ -65,6 +65,8 @@ heads are also absent, including the exceptional all-even \(p=5\)
 The \(A_4\) condition is the opposite parity from the \(S_4/A_5\)
 condition, so those two routes never require simultaneous pullback
 calculations.
+More generally, all even restricted heads with \(s\equiv2\pmod4\) occupy
+one parity packet and those with \(s\equiv0\pmod4\) occupy the other.
 
 Every surviving occurrence has the same first-wall obstruction.  With
 \[
@@ -74,6 +76,8 @@ the unique \(R\otimes T\) correction has trace scalar \(p-2-s\ne0\) and
 also spills into \(Y\otimes R\).  No other row reaches that component and
 it has no torus-fixed cochain.  Hence the Borel pullback, and therefore the
 \(H\)-pullback, is nonsplit.
+The two witness targets have dimensions \(2(s+1)(p-1)\) and
+\(6(p-1-s)\), independent of the extension degree.
 
 The complete proof and replay are
 `notes/2026-07-29-c665-frobenius-digit-spill.md`.

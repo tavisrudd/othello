@@ -1,5 +1,9 @@
 {
   "digit_formula": "e*(p-1)/2 == 1+s/2 (mod 2)",
+  "even_head_packets": {
+    "s_mod_4_equals_0": "e*(p-1)/2 is odd",
+    "s_mod_4_equals_2": "e*(p-1)/2 is even"
+  },
   "evidence_boundary": "bookkeeping audit only; the report proves the Lucas-socle and adjacent-wall lemmas",
   "occurrence_parity_classes": [
     {
@@ -158,10 +162,12 @@
       "max_weight_difference": 42,
       "p": 11,
       "source": 6,
+      "spill_target_dimension": 24,
       "torus_modulus": 120,
       "torus_weight_intersection": [],
       "trace_scalar": 3,
-      "trace_scalar_nonzero": true
+      "trace_scalar_nonzero": true,
+      "trace_target_dimension": 140
     },
     {
       "R": [
@@ -189,10 +195,12 @@
       "max_weight_difference": 42,
       "p": 11,
       "source": 8,
+      "spill_target_dimension": 12,
       "torus_modulus": 120,
       "torus_weight_intersection": [],
       "trace_scalar": 1,
-      "trace_scalar_nonzero": true
+      "trace_scalar_nonzero": true,
+      "trace_target_dimension": 180
     },
     {
       "R": [
@@ -220,10 +228,12 @@
       "max_weight_difference": 50,
       "p": 13,
       "source": 6,
+      "spill_target_dimension": 36,
       "torus_modulus": 168,
       "torus_weight_intersection": [],
       "trace_scalar": 5,
-      "trace_scalar_nonzero": true
+      "trace_scalar_nonzero": true,
+      "trace_target_dimension": 168
     },
     {
       "R": [
@@ -251,10 +261,12 @@
       "max_weight_difference": 66,
       "p": 17,
       "source": 12,
+      "spill_target_dimension": 24,
       "torus_modulus": 288,
       "torus_weight_intersection": [],
       "trace_scalar": 3,
-      "trace_scalar_nonzero": true
+      "trace_scalar_nonzero": true,
+      "trace_target_dimension": 416
     },
     {
       "R": [
@@ -282,10 +294,12 @@
       "max_weight_difference": 74,
       "p": 19,
       "source": 6,
+      "spill_target_dimension": 72,
       "torus_modulus": 360,
       "torus_weight_intersection": [],
       "trace_scalar": 11,
-      "trace_scalar_nonzero": true
+      "trace_scalar_nonzero": true,
+      "trace_target_dimension": 252
     },
     {
       "R": [
@@ -313,10 +327,12 @@
       "max_weight_difference": 74,
       "p": 19,
       "source": 8,
+      "spill_target_dimension": 60,
       "torus_modulus": 360,
       "torus_weight_intersection": [],
       "trace_scalar": 9,
-      "trace_scalar_nonzero": true
+      "trace_scalar_nonzero": true,
+      "trace_target_dimension": 324
     },
     {
       "R": [
@@ -344,10 +360,12 @@
       "max_weight_difference": 74,
       "p": 19,
       "source": 12,
+      "spill_target_dimension": 36,
       "torus_modulus": 360,
       "torus_weight_intersection": [],
       "trace_scalar": 5,
-      "trace_scalar_nonzero": true
+      "trace_scalar_nonzero": true,
+      "trace_target_dimension": 468
     }
   ]
 }

@@ -62,6 +62,18 @@ reverse pattern for the other parity bit.  Thus no extension field ever
 requires simultaneous pullback calculations for the \(A_4\) head and an
 \(S_4\) or \(A_5\) head.
 
+More generally, (D) partitions every admissible even restricted head into
+two packets:
+\[
+\begin{array}{c|c}
+s\bmod4&\text{occurrence condition}\\ \hline
+2&eb\equiv0\pmod2,\\
+0&eb\equiv1\pmod2.
+\end{array}                                      \tag{F}
+\]
+The spill proof therefore gives a reusable C1 lemma for any future
+subgroup head \(L(s)\) in this range, not just \(s=6,8,12\).
+
 Thus C665's uniform extension-field C1 gate is closed.  This is a Paper II
 v2 result and does not alter or hold the frozen v1 release.
 
@@ -176,6 +188,15 @@ same coefficient to vanish.  The coefficient and augmented ranks are
 \]
 restriction on \(H^1\) is injective.  The pullback is nonsplit over \(H\).
 
+The certificate is uniformly small.  Its trace and spill targets have
+dimensions
+\[
+\dim(S\otimes T)=2(s+1)(p-1),\qquad
+\dim(Y\otimes R)=6(p-1-s),                     \tag{Z}
+\]
+respectively.  These are linear in \(p\) and independent of \(e\), even
+though the original field-sized symmetric square grows with \(q=p^e\).
+
 At \(p=11,s=6,e=2\), (W) is exactly
 \[
  T=L(9,1),\quad R=L(3,1),\quad Y=L(0,2),
@@ -202,8 +223,8 @@ search standing in for the Lucas-socle or adjacent-wall proofs above.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c665-frobenius-digit-spill.py` | 5505 | `fc4fb0c154e7222fbb32cd5cb152b8cf0061b6b37f8b11f4082020dab89e5c92` |
-| `notes/2026-07-29-c665-frobenius-digit-spill.json` | 5774 | `26053e9151e4ad5e25a956473c93e61169844ebaaa68a7fc741d99686f374368` |
+| `notes/2026-07-29-c665-frobenius-digit-spill.py` | 5770 | `c3a86a05979f84a70da911c5f9c541299b28a45c91ce0f63fbf9a4d28bde4e97` |
+| `notes/2026-07-29-c665-frobenius-digit-spill.json` | 6403 | `7f3f32d8a8aefe96c78afb3079730be6d8be69b04aa8c7bad3309a00f28efc4c` |
 | `notes/2026-07-29-c665-q169-wall-check.sage` | 7491 | `b6d645f2ff67f19bd59220f57946f2e9c0bfac08212986a662dc218a3d356ee0` |
 | `notes/2026-07-29-c665-q169-wall-check.json` | 702 | `3f2cb54900c15976968f6244157aa54dd61e7aa55976bde58a00d8a3e134ba62` |
 
@@ -230,6 +251,10 @@ and every surviving bit is closed by the same first-wall obstruction.
 The same bit partitions the exceptional types as in (E), so at most one
 of the \(A_4\) route and the \(S_4/A_5\) route ever reaches the pullback
 gate.
+Equations (F) and (Z) are the broader residue: every even restricted head
+belongs to one of two parity packets, and every surviving pullback has a
+two-component certificate whose dimensions do not grow with the extension
+degree.
 
 The fragile seam is not a high-order contraction.  It is the incompatibility
 between one required adjacent-wall coefficient and a lower component with
@@ -244,6 +269,7 @@ Borel-blind while the original pullback remained nonsplit.
 | scalar \(3\) | settled as the specialization \(p-2-s\); q=169 separates it from \(s/2\) | none |
 | exceptional affine-socle occurrences | settled by \(eb\equiv1+s/2\pmod2\) and the small-digit sign rule | none |
 | apparent coexistence of exceptional heads | settled negatively: \(A_4\) and \(S_4/A_5\) occupy opposite values of the same parity bit | none |
+| field-sized growth of the original pullback | settled away: the two witness targets have dimensions \(2(s+1)(p-1)\) and \(6(p-1-s)\), independent of \(e\) | none |
 | higher Frobenius digits | settled: they contribute the unique tail sign word and cannot alter the first-wall torus gap | none |
 | uniform extension-field C1 | settled | Paper II v2 integration only; v1 remains frozen |
 
