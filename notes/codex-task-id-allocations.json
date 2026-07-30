@@ -1682,8 +1682,17 @@
       "last": 703,
       "purpose": "install shared Clebsch trilogy identity across Papers I-II-III",
       "sequence": 187
+    },
+    {
+      "count": 1,
+      "first": 704,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 704,
+      "purpose": "test Segre-Igusa and exceptional sisters as functorial shadows of the golden E8 return",
+      "sequence": 188
     }
   ],
-  "next_id": 704,
+  "next_id": 705,
   "schema": "codex-task-id-allocations-v1"
 }
