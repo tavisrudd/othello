@@ -1628,8 +1628,17 @@
       "last": 689,
       "purpose": "close the shared B3 H3 radial-nonvanishing mechanism after C688",
       "sequence": 181
+    },
+    {
+      "count": 1,
+      "first": 690,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 690,
+      "purpose": "Paper I rigidity v2 mathematical upgrades: terminal-field proof, orientation-Gale torsor, double-six test, and full-conic classification gate",
+      "sequence": 182
     }
   ],
-  "next_id": 690,
+  "next_id": 691,
   "schema": "codex-task-id-allocations-v1"
 }
