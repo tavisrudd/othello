@@ -66,7 +66,10 @@ The signed continuation operator is exactly C682's golden Gram conference
 matrix up to a signed permutation. Hence this is the same conductor defect
 on the golden six-axis algebra. It is not the whole reason \(2\) is bad for
 C682: the boundary operator, apolar form, and Mukai--Umemura geometry remain
-bad after normalization.
+bad after normalization. Locally, the \(2\)-defect and the cross-Gram
+defects at \(11,23\) are the same order
+\(\mathbf Z_p+p\mathcal O_p\), with inert, split, and inert normalized
+fibres respectively.
 The first open all-size full-conic gate is \(k=9\) over \(q=23,25\).
 
 Local aggregate replay:

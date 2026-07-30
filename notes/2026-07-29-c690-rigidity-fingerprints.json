@@ -57,6 +57,133 @@
         "triangles": 20,
         "vertices": 12
       },
+      "direct_c682_axis_lattice_comparison": {
+        "axis_gram_diagonal": "t+2",
+        "axis_gram_off_diagonal": "+/-t",
+        "axis_signs": [
+          1,
+          1,
+          -1,
+          1,
+          1,
+          1
+        ],
+        "c682_conference_matrix": [
+          [
+            0,
+            1,
+            1,
+            1,
+            -1,
+            -1
+          ],
+          [
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            1,
+            -1,
+            0,
+            1,
+            1,
+            -1
+          ],
+          [
+            1,
+            -1,
+            1,
+            0,
+            -1,
+            1
+          ],
+          [
+            -1,
+            -1,
+            1,
+            -1,
+            0,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1,
+            1,
+            -1,
+            0
+          ]
+        ],
+        "coarse_order_map": "sqrt(5) maps to C (equivalently B)",
+        "common_base_after_inverting_2": "Z[1/2,sqrt(5)]=Z[1/2,t]",
+        "conference_square": "C^2=5I",
+        "continuation_signed_operator": [
+          [
+            0,
+            1,
+            1,
+            -1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            1,
+            1,
+            0,
+            1,
+            1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            1,
+            0,
+            1,
+            -1
+          ],
+          [
+            1,
+            -1,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            -1,
+            -1,
+            -1,
+            1,
+            0
+          ]
+        ],
+        "full_operator_prime_2_verdict": "not the same: C682 has additional geometric/operator failure",
+        "gram_identity": "G=t*(sqrt(5)*I+C), sqrt(5)=2t-1",
+        "normalization_generator": "t=(1+sqrt(5))/2",
+        "permutation_zero_based": [
+          0,
+          1,
+          4,
+          5,
+          3,
+          2
+        ],
+        "prime_2_verdict": "same conductor defect for the golden six-axis algebra"
+      },
       "fiber_even_character": {
         "1A": 6,
         "2A": 2,

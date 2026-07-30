@@ -211,6 +211,72 @@ def signed_axis_operator(
     return operator
 
 
+def golden_product(x: tuple[int, int], y: tuple[int, int]) -> tuple[int, int]:
+    """Multiply a+b*t with t^2=t+1."""
+    a, b = x
+    c, d = y
+    return a * c + b * d, a * d + b * c + b * d
+
+
+def golden_sum(*values: tuple[int, int]) -> tuple[int, int]:
+    return sum(value[0] for value in values), sum(value[1] for value in values)
+
+
+def c682_axis_conference_matrix() -> tuple[list[list[int]], dict[str, object]]:
+    zero, one, minus_one, t, minus_t = (0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)
+    axes = [
+        [zero, t, one],
+        [zero, t, minus_one],
+        [one, zero, t],
+        [minus_one, zero, t],
+        [t, minus_one, zero],
+        [minus_t, minus_one, zero],
+    ]
+    gram = [
+        [
+            golden_sum(*(golden_product(axes[i][k], axes[j][k]) for k in range(3)))
+            for j in range(6)
+        ]
+        for i in range(6)
+    ]
+    assert all(gram[i][i] == (2, 1) for i in range(6))
+    conference = [[0] * 6 for _ in range(6)]
+    for i in range(6):
+        for j in range(6):
+            if i == j:
+                continue
+            assert gram[i][j] in {t, minus_t}
+            conference[i][j] = 1 if gram[i][j] == t else -1
+    square = matrix_product(conference, conference)
+    assert all(square[i][j] == 5 * int(i == j) for i in range(6) for j in range(6))
+    return conference, {
+        "axis_gram_diagonal": "t+2",
+        "axis_gram_off_diagonal": "+/-t",
+        "gram_identity": "G=t*(sqrt(5)*I+C), sqrt(5)=2t-1",
+        "conference_square": "C^2=5I",
+    }
+
+
+def signed_permutation_equivalence(
+    source: list[list[int]], target: list[list[int]]
+) -> dict[str, object]:
+    n = len(source)
+    for permutation in itertools.permutations(range(n)):
+        for tail in itertools.product((-1, 1), repeat=n - 1):
+            signs = (1,) + tail
+            if all(
+                target[i][j]
+                == signs[i] * signs[j] * source[permutation[i]][permutation[j]]
+                for i in range(n)
+                for j in range(n)
+            ):
+                return {
+                    "permutation_zero_based": list(permutation),
+                    "axis_signs": list(signs),
+                }
+    raise AssertionError("conference matrices are not switching equivalent")
+
+
 def canonical_projective_triples(q: int) -> list[tuple[int, int, int]]:
     ans = []
     for triple in itertools.product(range(q), repeat=3):
@@ -371,6 +437,20 @@ def a5_fingerprints() -> dict[str, object]:
         "operator_diagonal": sorted({signed_operator[i][i] for i in range(6)}),
         "operator_entries": sorted({entry for row in signed_operator for entry in row}),
     }
+    c682_conference, c682_gram_data = c682_axis_conference_matrix()
+    direct_axis_comparison = signed_permutation_equivalence(c682_conference, signed_operator)
+    direct_axis_comparison.update(c682_gram_data)
+    direct_axis_comparison.update(
+        {
+            "c682_conference_matrix": c682_conference,
+            "continuation_signed_operator": signed_operator,
+            "coarse_order_map": "sqrt(5) maps to C (equivalently B)",
+            "normalization_generator": "t=(1+sqrt(5))/2",
+            "common_base_after_inverting_2": "Z[1/2,sqrt(5)]=Z[1/2,t]",
+            "prime_2_verdict": "same conductor defect for the golden six-axis algebra",
+            "full_operator_prime_2_verdict": "not the same: C682 has additional geometric/operator failure",
+        }
+    )
     double_graph = [set() for _ in range(12)]
     for i in range(6):
         for j in range(6):
@@ -406,6 +486,7 @@ def a5_fingerprints() -> dict[str, object]:
             "coefficient_integrality_witnesses": coefficient_integrality_witnesses,
             "mod_2_special_fiber": "F2[u]/((u-1)^2)",
             "normalized_mod_2_special_fiber": "F4",
+            "direct_c682_axis_lattice_comparison": direct_axis_comparison,
         },
         "schlafli_double_six": {
             "a5_set": "(A5/D5) disjoint_union (A5/D5)",

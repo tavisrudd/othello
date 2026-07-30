@@ -101,6 +101,16 @@ explicitly separated.
   Frobenius-odd normalization generator.  Globally over
   \(\mathbf Z[1/30]\), the scalar image is the conductor-\(253\) order, with
   local defects exactly at the split prime \(11\) and inert prime \(23\).
+- C690's continuation-lattice comparison identifies the signed
+  six-axis orbital operator with the conference matrix extracted from the
+  golden axis Gram matrix, up to one exact signed permutation. The coarse
+  order is \(\mathbf Z[\sqrt5]\), while the \(t\)-coordinate golden lattice
+  is its conductor-two normalization. This is the same prime-\(2\)
+  conductor defect on the golden subpackage, but it does not explain away
+  C682's additional boundary-rank, apolar, or Mukai--Umemura failures at
+  \(2\). Locally it joins the cross-Gram defects at \(11,23\) in the
+  universal template \(\mathbf Z_p+p\mathcal O_p\), with normalized fibres
+  inert at \(2,23\) and split at \(11\).
 
 ## Active order
 

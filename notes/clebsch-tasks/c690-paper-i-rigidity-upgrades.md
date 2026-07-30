@@ -88,6 +88,12 @@ orientation-torsor and double-six decisions.
   \(\mathbf Z[\sqrt5]\), the conductor-two order in the maximal golden
   ring; its mod-\(2\) fibre is a dual-number point and normalizes to
   \(\mathbf F_4\).
+  Direct comparison with C682's golden axis matrix gives the same conference
+  operator up to the permutation \((0,1,4,5,3,2)\) and one axis sign.
+  Thus the two prime-\(2\) defects are the same conductor phenomenon on the
+  golden six-axis algebra. They are not the same full-package defect:
+  C682's boundary operator ranks, apolar polarity, and Mukai--Umemura
+  geometry remain bad after the coefficient order is normalized.
 - The first open E3 case is exactly \(k=9\) over \(q=23,25\), with compact
   cover-moment falsifier ledgers. No larger project is allocated.
 

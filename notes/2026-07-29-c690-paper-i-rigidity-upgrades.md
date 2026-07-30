@@ -308,9 +308,117 @@ is the inert étale normalization.
 
 Thus prime \(2\) is not merely a denominator introduced by the projector
 \((I-R)/2\): it is the exact conductor prime of the integral continuation
-commutant. This is compatible with C682's independently proved structural
-bad prime \(2\), but identifying the two integral lattices requires a
-separate integral comparison and is not asserted here.
+commutant. The next comparison determines exactly which part of C682's
+independently proved structural bad prime \(2\) has this source.
+
+### Direct comparison with C682
+
+The comparison is exact on the golden six-axis surface and negative for the
+full operator package.
+
+Let \(A_t\) be C682's ordered golden \(3\times6\) axis matrix, with
+\(t^2=t+1\), and put \(G_t=A_t^{\mathsf T}A_t\). Its diagonal entries are
+\(t+2\), and every off-diagonal entry is \(\pm t\). Hence
+\[
+ G_t=t(\sqrt5\,I+C),\qquad \sqrt5=2t-1,
+\]
+where \(C\) is a symmetric integral conference matrix with
+\[
+ C^2=5I.
+\]
+The exact comparison finds
+\[
+ B=S\,P C P^{\mathsf T}S,
+\]
+where, in zero-based notation,
+\[
+ P=(0,1,4,5,3,2),\qquad
+ S=\operatorname{diag}(1,1,-1,1,1,1).
+\]
+Thus C682's golden Gram operator and Paper I's continuation operator are
+the same signed six-axis lattice after the unique equivariant relabeling
+and a harmless choice of axis representatives.
+
+This identifies the orders, not only their fraction fields. Under
+\(\sqrt5\mapsto B\),
+\[
+ \mathbf Z[\sqrt5]\subset
+ \mathbf Z[t]=\mathbf Z\!\left[\frac{1+\sqrt5}{2}\right]
+\]
+is precisely
+\[
+\text{continuation adjacency/Gram order}
+\subset
+\text{C682 golden coefficient order}.
+\]
+After inverting \(2\), the two are equal. At \(2\), the former has the
+dual-number fibre and the latter has the normalized \(\mathbf F_4\) fibre.
+Therefore the prime-\(2\) defects are the **same conductor phenomenon for
+the golden six-axis algebra**. C682's use of \(t\)-coordinates is exactly
+the normalization missing from the coarse continuation/Gram operator.
+
+They are not the same defect for C682's full geometry. The continuation
+lattice has rank six; C682's corrected dodecic operator lattice
+\(\mathcal L_{12}^{(11)}\) has rank thirteen and carries the
+third-transvectant family. At \(2\), C682's certified forward ranks at the
+open, divisor-boundary, and closed-boundary orbits are respectively
+\[
+ 4,\ 2,\ 1,
+\]
+and its primitive apolar form has rank \(1\) rather than \(7\).
+Extending scalars from \(\mathbf F_2\) to the normalized
+\(\mathbf F_4\) does not change these ranks. Moreover the
+\(PGL_2\)-type Mukai--Umemura threefold itself does not exist in
+characteristic \(2\). Normalizing the golden coefficient order therefore
+cannot repair the boundary operator or apolar-polar failures.
+
+The exact verdict is consequently:
+
+\[
+\boxed{\begin{array}{l}
+\text{same universal conductor defect on the golden six-axis subpackage;}\\
+\text{additional, independent structural failure on the full C682 package.}
+\end{array}}
+\]
+
+This separates the shared arithmetic mechanism from the stronger geometric
+bad-prime statement. Prime \(2\) enters C682 twice: first as normalization
+of the golden conference order, and again through the integral
+Mukai--Umemura/operator/polar geometry.
+
+There is a common local-algebra template with C682's other conductor
+defects. If \(\mathcal O_p\) is the maximal local golden order, put
+\[
+ \mathcal A_p=\mathbf Z_p+p\mathcal O_p.
+\]
+Then \(\mathcal A_p\) has conductor \(p\mathcal O_p\), a dual-number coarse
+special fibre, and normalized special fibre
+\(\mathcal O_p/p\mathcal O_p\). The three exact occurrences are
+\[
+\begin{array}{c|c|c|c}
+p&\text{coarse observable}&\mathcal A_p&
+\text{normalized fibre}\\ \hline
+2&\text{continuation/Gram operator }\sqrt5&
+\mathbf Z_2[\sqrt5]=\mathbf Z_2+2\mathcal O_2&
+\mathbf F_4\\
+11&\text{cross-Gram scalar }\chi&
+\mathbf Z_{11}+11\mathcal O_{11}&
+\mathbf F_{11}\times\mathbf F_{11}\\
+23&\text{cross-Gram scalar }\chi&
+\mathbf Z_{23}+23\mathcal O_{23}&
+\mathbf F_{529}.
+\end{array}
+\]
+At \(2\), the missing divided normalization coordinate is
+\[
+ t=\frac{1+\sqrt5}{2},\qquad t^2-t-1=0.
+\]
+Its reduction generates \(\mathbf F_4\), and Frobenius sends
+\(t\) to \(t^2=1-t\), exactly the golden conjugation. Thus the
+prime-\(2\) continuation defect and the prime-\(11,23\) scalar collisions
+are instances of one universal quadratic-conductor phenomenon, although
+they occur on different observables. Only the additional C682
+operator/polar/geometric failure lies outside that template.
 
 ## 4. Full-conic crown gate
 
@@ -388,6 +496,8 @@ From the repository root:
 python3 notes/2026-07-29-c690-rigidity-fingerprints.py --check
 python3 notes/2026-07-26-c682-transvectant-bridge.py --check
 python3 notes/2026-07-28-c682-operator-schlafli.py --check
+python3 notes/2026-07-29-c682-minimal-integral-base.py --check
+python3 notes/2026-07-29-c682-minimal-integral-base-replay.py
 sha256sum -c notes/2026-07-29-c690-rigidity-fingerprints.sha256
 ```
 
@@ -397,7 +507,9 @@ binary rank. It also enumerates \(A_5\), constructs the two coset actions,
 computes their characters and subdegrees, and checks the two graph
 fingerprints. It also constructs both five-orbitals and the antipodal
 relation, verifies \((A-A')^2=10(I-R)\) entrywise, and recovers the signed
-six-axis matrix \(B\) with \(B^2=5I\). The rank agrees with
+six-axis matrix \(B\) with \(B^2=5I\). It reconstructs C682's golden Gram
+conference matrix directly from \(A_t\) and certifies the displayed signed
+permutation equivalence. The rank agrees with
 the independent published dimension
 formula; the character values also have the closed coset-fixed-point
 derivation given above. No independent program is needed for the
@@ -409,8 +521,8 @@ support/Gale calculation and the exact cyclotomic double-six construction.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c690-rigidity-fingerprints.py` | 15279 | `bb84fe9a320a816f2c518464229dfb57d35848fd1422304784da6f0354eefd8c` |
-| `2026-07-29-c690-rigidity-fingerprints.json` | 3733 | `a7e7fc29cd3126285998121ca0039c8aedc7c491312adf5a4da1966b9fc31eaa` |
+| `2026-07-29-c690-rigidity-fingerprints.py` | 18390 | `19b95ede224f52ac15c546d93911725a9e64ceb76d92801bdc991cf7727e77be` |
+| `2026-07-29-c690-rigidity-fingerprints.json` | 6076 | `dc973a8751ece1207b1a1a84d336b31284e4cf8cbea69830236343663b45f4d6` |
 
 ## Extra-juice and Tao closeout
 
@@ -432,7 +544,12 @@ the two covers and recovered the golden algebra intrinsically from
 \(\mathbf1\oplus\mathbf5\). The `ej3` integral pass then identified the
 full continuation-lattice commutant as the conductor-two order
 \(\mathbf Z[\sqrt5]\), with dual-number special fibre at \(2\) and
-\(\mathbf F_4\) after normalization. The pass also exposed
+\(\mathbf F_4\) after normalization. The direct comparison identifies
+the C682 golden Gram conference matrix with the same signed operator and
+places \(2,11,23\) in the single local template
+\(\mathbf Z_p+p\mathcal O_p\). The `tt` boundary check uses the surviving
+mod-\(2\) rank drops and apolar radical to prove that this conductor does
+not account for C682's full structural failure. The pass also exposed
 the obstruction to the obvious all-size induction: deleting a vertex
 necessarily enlarges the extension port off the conic.
 
@@ -445,7 +562,8 @@ necessarily enlarges the extension port off the conic.
 | support/Gale/golden exchange | settled on the frozen marked fibre | novelty audit and concise Paper I v2 integration only |
 | intrinsic source of \(\sqrt5\) | settled by `ej2` | the continuation association scheme gives \(T^2=5\) on \(\mathbf3\oplus\mathbf3'\) |
 | integral golden order | settled by `ej3` | \(\operatorname{End}_{\mathbf Z A_5}(L^-)=\mathbf Z[\sqrt5]\), of conductor \(2\) in \(\mathcal O_5\) |
-| relation to C682's bad prime \(2\) | compatible but not identified | compare the continuation lattice with C682's integral golden/operator lattice |
+| relation to C682's bad prime \(2\) | settled with a split verdict | same conductor defect on the signed six-axis/Gram algebra; additional independent boundary, apolar, and geometric failures in the full C682 package |
+| universal conductor template | settled | \(p=2,11,23\) all give \(\mathbf Z_p+p\mathcal O_p\); their normalized fibres are respectively inert, split, inert |
 | preferred orientation sign | settled negatively | the syndrome locus reconstructs only the torsor and cubic line |
 | twelve-point double-six | settled negatively as an identification; common quotient recovered | Paper I gives the twisted \(A_5/C_5\to A_5/D_5\) cover, while the double-six gives the split cover |
 | two Paper I orientation structures | settled as distinct | the support/Petersen cover is split under \(A_5\); the continuation/axis cover is twisted |
