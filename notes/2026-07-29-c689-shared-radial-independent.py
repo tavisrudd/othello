@@ -132,6 +132,51 @@ def replay(field):
         [signed[row][column] - int(row == column) for column in range(q)]
         for row in range(q)
     ]
+    half = (q - 1) // 2
+    taylor_coefficients = [
+        sum(
+            skew[0][value] * math.comb(value, degree)
+            for value in range(q)
+        )
+        % q
+        for degree in range(q)
+    ]
+    leading_coefficient = -pow(math.factorial(half), -1, q) % q
+    assert taylor_coefficients[:half] == [0] * half
+    assert taylor_coefficients[half] == leading_coefficient
+    assert design["translation_group_algebra"] == "F_q[t]/(t^q), t=T-1"
+    assert design["quadratic_character_t_adic_order"] == half
+    assert (
+        design["quadratic_character_leading_coefficient"]
+        == leading_coefficient
+    )
+    assert (
+        design["quadratic_character_leading_formula"]
+        == "-1/(((q-1)/2)!)"
+    )
+    assert design["full_image_augmentation_ideal_power"] == half
+    assert design["full_kernel_augmentation_ideal_power"] == half + 1
+    assert design["augmentation_image_kernel_ideal_power"] == half + 1
+    assert (
+        design["middle_quotient_isomorphism"]
+        == "I/I^((q+1)/2) ~= I^((q+1)/2)"
+    )
+    assert all(
+        skew[
+            (multiplier * row) % q
+        ][
+            (multiplier * column) % q
+        ]
+        == (
+            (1 if multiplier in squares else -1)
+            * skew[row][column]
+        )
+        for multiplier in range(1, q)
+        for row in range(q)
+        for column in range(q)
+    )
+    assert design["dilation_conjugation_character"] == "quadratic"
+    assert design["middle_quotient_twist"] == "quadratic orientation character"
     augmentation_basis = [
         [int(column == index) - int(column == q - 1) for column in range(q)]
         for index in range(q - 1)

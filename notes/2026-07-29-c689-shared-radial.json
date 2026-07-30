@@ -4,6 +4,7 @@
   "fields": [
     {
       "cross_incidence_design": {
+        "augmentation_image_kernel_ideal_power": 4,
         "bordered_paley_hadamard": true,
         "bordered_paley_hadamard_order": 8,
         "characteristic_zero_augmentation_polynomial": "x^2+q",
@@ -18,6 +19,9 @@
         "defining_characteristic_full_rank": 4,
         "defining_characteristic_image_equals_kernel": true,
         "defining_characteristic_square_zero": true,
+        "dilation_conjugation_character": "quadratic",
+        "full_image_augmentation_ideal_power": 3,
+        "full_kernel_augmentation_ideal_power": 4,
         "gram_diagonal": 4,
         "gram_off_diagonal": 2,
         "intersection_values": [
@@ -28,6 +32,8 @@
         "invertible_in_characteristic_q": true,
         "k": 4,
         "lambda": 2,
+        "middle_quotient_isomorphism": "I/I^((q+1)/2) ~= I^((q+1)/2)",
+        "middle_quotient_twist": "quadratic orientation character",
         "nontrivial_incidence_eigenvalues": "(1+sqrt(-q))/2 and (1-sqrt(-q))/2",
         "nonzero_paley_multiplier": 4,
         "paley_affine_normalization": {
@@ -41,6 +47,9 @@
           "shift": 1
         },
         "paley_complement": true,
+        "quadratic_character_leading_coefficient": 1,
+        "quadratic_character_leading_formula": "-1/(((q-1)/2)!)",
+        "quadratic_character_t_adic_order": 3,
         "skew_core_square": "-q*I+J",
         "skew_paley_core": true,
         "translation_circulant_support": [
@@ -49,6 +58,7 @@
           2,
           5
         ],
+        "translation_group_algebra": "F_q[t]/(t^q), t=T-1",
         "v": 7
       },
       "incident_edge_count": 28,
@@ -140,6 +150,7 @@
     },
     {
       "cross_incidence_design": {
+        "augmentation_image_kernel_ideal_power": 6,
         "bordered_paley_hadamard": true,
         "bordered_paley_hadamard_order": 12,
         "characteristic_zero_augmentation_polynomial": "x^2+q",
@@ -156,6 +167,9 @@
         "defining_characteristic_full_rank": 6,
         "defining_characteristic_image_equals_kernel": true,
         "defining_characteristic_square_zero": true,
+        "dilation_conjugation_character": "quadratic",
+        "full_image_augmentation_ideal_power": 5,
+        "full_kernel_augmentation_ideal_power": 6,
         "gram_diagonal": 6,
         "gram_off_diagonal": 3,
         "intersection_values": [
@@ -166,6 +180,8 @@
         "invertible_in_characteristic_q": true,
         "k": 6,
         "lambda": 3,
+        "middle_quotient_isomorphism": "I/I^((q+1)/2) ~= I^((q+1)/2)",
+        "middle_quotient_twist": "quadratic orientation character",
         "nontrivial_incidence_eigenvalues": "(1+sqrt(-q))/2 and (1-sqrt(-q))/2",
         "nonzero_paley_multiplier": 4,
         "paley_affine_normalization": {
@@ -181,6 +197,9 @@
           "shift": 3
         },
         "paley_complement": true,
+        "quadratic_character_leading_coefficient": 1,
+        "quadratic_character_leading_formula": "-1/(((q-1)/2)!)",
+        "quadratic_character_t_adic_order": 5,
         "skew_core_square": "-q*I+J",
         "skew_paley_core": true,
         "translation_circulant_support": [
@@ -191,6 +210,7 @@
           8,
           9
         ],
+        "translation_group_algebra": "F_q[t]/(t^q), t=T-1",
         "v": 11
       },
       "incident_edge_count": 66,

@@ -93,4 +93,10 @@ eight and twelve.  The unbordered skew cores satisfy
 characteristic-zero augmentation module.  In defining characteristic,
 the augmentation restriction is instead a maximal square-zero
 differential with \(\operatorname{im}S=\ker S\); on the full permutation
-module its Jordan type is \((3,2^{(q-3)/2})\).
+module its Jordan type is \((3,2^{(q-3)/2})\).  More precisely, in the
+translation group algebra \(R=\mathbb F_q[t]/(t^q)\), \(t=T-1\), the core
+is a unit times \(t^{(q-1)/2}\).  Hence its full image and kernel are the
+two middle augmentation powers, and its augmentation restriction induces
+\(I/I^{(q+1)/2}\simeq I^{(q+1)/2}\).  Dilation conjugates this
+isomorphism by the quadratic character, so nonsquare coordinate changes
+reverse its canonical orientation sign.

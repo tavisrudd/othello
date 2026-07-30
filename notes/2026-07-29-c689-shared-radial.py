@@ -383,6 +383,38 @@ def field_record(balanced, c406, q):
         sum(skew_core[row][column] for row in range(q)) == 0
         for column in range(q)
     )
+    half = (q - 1) // 2
+    character_taylor_coefficients = [
+        sum(
+            skew_core[0][value] * math.comb(value, degree)
+            for value in range(q)
+        )
+        % q
+        for degree in range(q)
+    ]
+    character_leading_coefficient = (
+        -pow(math.factorial(half), -1, q)
+    ) % q
+    assert character_taylor_coefficients[:half] == [0] * half
+    assert (
+        character_taylor_coefficients[half]
+        == character_leading_coefficient
+    )
+    assert character_leading_coefficient
+    assert all(
+        skew_core[
+            (multiplier * row) % q
+        ][
+            (multiplier * column) % q
+        ]
+        == (
+            (1 if multiplier in squares else -1)
+            * skew_core[row][column]
+        )
+        for multiplier in range(1, q)
+        for row in range(q)
+        for column in range(q)
+    )
     assert all(sum(vector) % q == 0 for vector in augmentation_images)
     assert all(
         sum(
@@ -476,6 +508,20 @@ def field_record(balanced, c406, q):
             "defining_characteristic_full_jordan_blocks": (
                 [3] + [2] * ((q - 3) // 2)
             ),
+            "translation_group_algebra": "F_q[t]/(t^q), t=T-1",
+            "quadratic_character_t_adic_order": half,
+            "quadratic_character_leading_coefficient": (
+                character_leading_coefficient
+            ),
+            "quadratic_character_leading_formula": "-1/(((q-1)/2)!)",
+            "full_image_augmentation_ideal_power": half,
+            "full_kernel_augmentation_ideal_power": half + 1,
+            "augmentation_image_kernel_ideal_power": half + 1,
+            "middle_quotient_isomorphism": (
+                "I/I^((q+1)/2) ~= I^((q+1)/2)"
+            ),
+            "dilation_conjugation_character": "quadratic",
+            "middle_quotient_twist": "quadratic orientation character",
         },
         "incident_edge_count": len(all_edges),
         "incident_pair_common_edges": 1,

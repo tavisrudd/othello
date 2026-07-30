@@ -159,6 +159,57 @@ This is the defining-characteristic shadow of the two conjugate
 characteristic-zero eigenspaces: they coalesce into a canonical maximal
 square-zero differential.
 
+The differential is not an arbitrary nilpotent of that Jordan type.  For
+the two prime fields at hand, use the row-vector convention and identify
+the translation permutation module with
+\[
+ R=\mathbb F_q[C_q]
+   =\mathbb F_q[T]/(T^q-1)
+   =\mathbb F_q[t]/(t^q),\qquad t=T-1.
+\]
+If \(I=(t)\) and \(\chi\) is the quadratic character, then \(S\) is
+convolution by
+\[
+ s(T)=\sum_{a\in\mathbb F_q^\times}\chi(a)T^a.
+\]
+Writing \(n=(q-1)/2\), its \(t\)-expansion is
+\[
+ s(1+t)=
+ \sum_{k=0}^{q-1}
+ \left(\sum_a\chi(a)\binom ak\right)t^k
+ =-\frac1{n!}t^n+O(t^{n+1}).                 \tag{L}
+\]
+Indeed \(\chi(a)=a^n\).  For \(k<n\), every power in
+\(a^n\binom ak\) has exponent strictly between \(0\) and \(q-1\), so its
+sum vanishes.  At \(k=n\), only the leading term reaches exponent \(q-1\),
+and its sum is \(-1/n!\).  Thus \(s=t^nu\) for a unit \(u\in R^\times\).
+Consequently
+\[
+ \operatorname{im}_R S=I^n,\qquad
+ \ker_R S=I^{n+1},                            \tag{M}
+\]
+and restriction to augmentation gives
+\[
+ S:I/I^{n+1}\buildrel\sim\over\longrightarrow I^{n+1}.
+                                                        \tag{Q}
+\]
+So (X) is exactly the middle of the uniserial augmentation filtration,
+not merely a rank coincidence.  Formula (L) also identifies the Paley
+core, up to a unit, with the middle convolution power of the primitive
+difference seed \((1-T)\) that appeared independently in C688's generic
+first-wall checker.
+
+There is also an exact orientation character.  If \(D_a\) relabels the
+translation coordinate by \(x\mapsto ax\), then
+\[
+ D_a^{-1}SD_a=\chi(a)S.                       \tag{O}
+\]
+Thus square dilations preserve the differential and nonsquare dilations
+reverse it.  The isomorphism (Q) is equivariant only after twisting one
+middle layer by the quadratic character.  This is a concrete
+incidence-level orientation torsor, rather than an analogy inferred from
+the two characteristic-zero eigenvalues.
+
 Fix an edge \(e\).  The unique incident pair is invariant under its
 construction, and its complementary alternating cycle is the geometric
 object whose radial projection is being tested.  The two types first
@@ -320,9 +371,9 @@ traces and checks the symmetric-design identities.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c689-shared-radial.py` | 17994 | `6c56f6d68471ee77e96bbf0cb0f1cb8cd8967fd58db9549ccc3dcc45637f49a5` |
-| `notes/2026-07-29-c689-shared-radial-independent.py` | 6985 | `b569204c3d47140fa593f3442d16ea13b1e939de14f4da50eb0cc4699444552f` |
-| `notes/2026-07-29-c689-shared-radial.json` | 7293 | `60b2b95bd027b2e5fa80c09bf101bdf19b05d1a6d95b73fc18dc92336a1385be` |
+| `notes/2026-07-29-c689-shared-radial.py` | 19585 | `b50057ac094ba78d5e78888c78d9408d12efc3c5d90a5fbb6f5e2fc3bb9ce7f1` |
+| `notes/2026-07-29-c689-shared-radial-independent.py` | 8508 | `25ffe8ced06d8a75e4fd54995603120120c27bd4591dd0336d657097f9a9c0be` |
+| `notes/2026-07-29-c689-shared-radial.json` | 8441 | `cfb44bbe7283bc657090c24cfa5d4eb8b43bc10fe0832887d8aa59a8c66e840b` |
 
 Pinned load-bearing inputs:
 
@@ -371,9 +422,12 @@ At second order, the skew core (C) shows that the same carrier already
 contains an orientation operator on the augmentation module.  In
 characteristic zero it supplies the conjugate eigenspaces (F).  In the
 defining characteristic those eigenspaces collide into the exact
-square-zero differential (X).  This sharpens the possible bridge to Paper
-II's cubic-first orientation: the cubic could select a lift or splitting
-of this canonical null foliation.  C689 does not claim that it does.
+square-zero differential (X), now identified by (M) with the midpoint of
+the translation module's augmentation filtration.  This sharpens the
+possible bridge to Paper II's cubic-first orientation: the cubic could
+select a lift or splitting of this canonical null foliation.  C689 does
+not claim that it does.  Formula (O) now fixes the exact sign character
+that any such comparison would have to reproduce.
 Establishing that identification would require comparing the cubic tensor
 with the filtration \(0\subset\operatorname{im}S=\ker S\subset
 \operatorname{Aug}\), not merely matching dimensions.
@@ -401,6 +455,8 @@ incidence geometry to the Fischer projection.
 | signed Hadamard carrier | settled by the bordered Paley matrix (H), of orders eight and twelve | none |
 | quadratic orientation operator | settled in characteristic zero by \(S^2=-qI\) on augmentation | comparison with the cubic orientation is a possible later v2 bridge, not a C689 obligation |
 | defining-characteristic degeneration | settled: \(S|_{\operatorname{Aug}}^2=0\), has half rank, and \(\operatorname{im}S=\ker S\); full Jordan type is \((3,2^{(q-3)/2})\) | whether the cubic canonically splits or lifts this filtration remains open |
+| location of the null filtration | settled by the character-sum valuation: \(\operatorname{im}_R S=I^{(q-1)/2}\), \(\ker_R S=I^{(q+1)/2}\), and the augmentation restriction identifies the two middle halves | none |
+| orientation sign on the middle layers | settled by \(D_a^{-1}SD_a=\chi(a)S\): nonsquare dilations reverse the canonical middle-layer isomorphism | comparison of this exact quadratic twist with the cubic orientation tensor remains open |
 | parameter \(4\) | settled as the generator of the nonzero Paley orbit in both classified configurations; not abstractly universal | no C689 gap |
 
 No genuine C689 mystery remains.  Extending the alternating-cycle
