@@ -139,10 +139,187 @@ def permutation_order(
             return order
 
 
+def matrix_product(
+    first: tuple[int, int, int, int], second: tuple[int, int, int, int]
+) -> tuple[int, int, int, int]:
+    a, b, c, d = first
+    e, f, g, h = second
+    return canonical(
+        (
+            (a * e + b * g) % Q,
+            (a * f + b * h) % Q,
+            (c * e + d * g) % Q,
+            (c * f + d * h) % Q,
+        )
+    )
+
+
+def matrix_power(
+    matrix: tuple[int, int, int, int], exponent: int
+) -> tuple[int, int, int, int]:
+    value = (1, 0, 0, 1)
+    for _ in range(exponent):
+        value = matrix_product(value, matrix)
+    return value
+
+
 def translate(
     clique: frozenset[tuple[int, int]], shift: int
 ) -> frozenset[tuple[int, int]]:
     return frozenset((orbit, (index + shift) % 14) for orbit, index in clique)
+
+
+def incidence_distance_certificate() -> dict[str, object]:
+    columns = [
+        sum(1 << row for row, line in enumerate(PASSANTS) if dot(line, point) == 0)
+        for point in INTERNAL
+    ]
+    assert {column.bit_count() for column in columns} == {7}
+
+    base = 0
+    through_base = [
+        row for row, line in enumerate(PASSANTS) if dot(line, INTERNAL[base]) == 0
+    ]
+    fibres = [
+        [
+            index
+            for index, point in enumerate(INTERNAL)
+            if index != base and dot(PASSANTS[row], point) == 0
+        ]
+        for row in through_base
+    ]
+    assert len(fibres) == 7 and {len(fibre) for fibre in fibres} == {6}
+    passant_neighbors = set().union(*(set(fibre) for fibre in fibres))
+    secant_neighbors = [
+        index
+        for index in range(len(INTERNAL))
+        if index != base and index not in passant_neighbors
+    ]
+    assert len(secant_neighbors) == 35
+
+    def xor_columns(indices: tuple[int, ...] | list[int]) -> int:
+        value = 0
+        for index in indices:
+            value ^= columns[index]
+        return value
+
+    # A weight-ten support through the base has one of exactly two pencil
+    # profiles: 3+1+...+1 on the seven passant lines, or 1+...+1 there
+    # together with two points on secant joins from the base.
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left = {
+            xor_columns(choice)
+            for choice in itertools.product(*(fibres[index] for index in remaining[:3]))
+        }
+        for triple in itertools.combinations(fibres[special], 3):
+            target = columns[base] ^ xor_columns(triple)
+            for choice in itertools.product(
+                *(fibres[index] for index in remaining[3:])
+            ):
+                assert target ^ xor_columns(choice) not in left
+
+    left = {
+        xor_columns(choice)
+        for choice in itertools.product(*(fibres[index] for index in range(3)))
+    }
+    for choice in itertools.product(*(fibres[index] for index in range(3, 7))):
+        target = columns[base] ^ xor_columns(choice)
+        for pair in itertools.combinations(secant_neighbors, 2):
+            assert target ^ xor_columns(pair) not in left
+
+    witness_points = [
+        (1, 0, 2),
+        (1, 3, 2),
+        (1, 4, 5),
+        (1, 1, 8),
+        (1, 4, 8),
+        (1, 1, 7),
+        (1, 7, 12),
+        (1, 3, 3),
+        (1, 9, 11),
+        (1, 10, 11),
+        (1, 0, 5),
+        (1, 8, 7),
+    ]
+    witness = tuple(INTERNAL.index(point) for point in witness_points)
+    assert len(set(witness)) == 12
+    assert xor_columns(witness) == 0
+    intersection_spectrum = sorted(
+        {
+            sum(dot(line, INTERNAL[index]) == 0 for index in witness)
+            for line in PASSANTS
+        }
+    )
+    assert intersection_spectrum == [0, 2]
+
+    projective_linear_group = [
+        matrix
+        for matrix in projective_vectors(4)
+        if (matrix[0] * matrix[3] - matrix[1] * matrix[2]) % Q
+    ]
+    witness_set = set(witness_points)
+    stabilizer = [
+        matrix
+        for matrix in projective_linear_group
+        if {
+            symmetric_square_action(matrix, point) for point in witness_set
+        }
+        == witness_set
+    ]
+    assert len(stabilizer) == 24
+    stabilizer_orders = Counter(
+        permutation_order(matrix, witness_points) for matrix in stabilizer
+    )
+    assert stabilizer_orders == Counter({1: 1, 2: 13, 3: 2, 4: 2, 6: 2, 12: 4})
+    rotation = (0, 1, 6, 4)
+    reflection = (0, 1, 7, 0)
+    assert permutation_order(rotation, witness_points) == 12
+    assert matrix_power(reflection, 2) == (1, 0, 0, 1)
+    assert (
+        matrix_product(matrix_product(reflection, rotation), reflection)
+        == matrix_power(rotation, 11)
+    )
+    cyclic_witness = []
+    point = witness_points[0]
+    while point not in cyclic_witness:
+        cyclic_witness.append(point)
+        point = symmetric_square_action(rotation, point)
+    assert len(cyclic_witness) == 12 and set(cyclic_witness) == witness_set
+    secant_differences = [
+        index
+        for index in range(1, 12)
+        if not is_passant_join(cyclic_witness[0], cyclic_witness[index])
+    ]
+    assert secant_differences == [4, 5, 7, 8]
+
+    return {
+        "fixed_base_point": list(INTERNAL[base]),
+        "passant_pencil_fibre_sizes": [len(fibre) for fibre in fibres],
+        "secant_join_neighbors": len(secant_neighbors),
+        "weight_10_profiles_checked": {
+            "three_on_one_passant_then_singles": (
+                7 * len(list(itertools.combinations(range(6), 3))) * 6**6
+            ),
+            "passant_singles_plus_two_secant_neighbors": (
+                6**7 * len(list(itertools.combinations(range(35), 2)))
+            ),
+        },
+        "weight_10_word_exists": False,
+        "weight_12_witness_indices": list(witness),
+        "weight_12_witness_points": [list(point) for point in witness_points],
+        "weight_12_passant_intersection_sizes": intersection_spectrum,
+        "weight_12_stabilizer": {
+            "order": len(stabilizer),
+            "element_order_distribution": {
+                str(order): count for order, count in sorted(stabilizer_orders.items())
+            },
+            "dihedral_rotation": list(rotation),
+            "dihedral_reflection": list(reflection),
+            "secant_differences_mod_12": secant_differences,
+        },
+        "minimum_distance": 12,
+    }
 
 
 def build_certificate() -> dict[str, object]:
@@ -317,7 +494,8 @@ def build_certificate() -> dict[str, object]:
             "segre_sign": 1,
             "required_local_clique_for_weight_8_word": 7,
             "weight_8_word_exists": False,
-            "binary_nullspace_minimum_distance_lower_bound": 10,
+            "distance_certificate": incidence_distance_certificate(),
+            "binary_nullspace_minimum_distance": 12,
         },
     }
 

@@ -29,6 +29,91 @@ def adjacent(first: tuple[int, int], second: tuple[int, int]) -> bool:
     )
 
 
+def verify_distance() -> None:
+    q = 13
+    squares = {value * value % q for value in range(1, q)}
+    projective = (
+        [(1, y, z) for y in range(q) for z in range(q)]
+        + [(0, 1, z) for z in range(q)]
+        + [(0, 0, 1)]
+    )
+    internal = [
+        point
+        for point in projective
+        if (point[1] * point[1] - point[0] * point[2]) % q
+        not in squares | {0}
+    ]
+    passants = [
+        line
+        for line in projective
+        if (line[1] * line[1] - 4 * line[0] * line[2]) % q
+        not in squares | {0}
+    ]
+
+    def incident(line: tuple[int, int, int], point: tuple[int, int, int]) -> bool:
+        return sum(a * b for a, b in zip(line, point)) % q == 0
+
+    columns = [
+        sum(1 << row for row, line in enumerate(passants) if incident(line, point))
+        for point in internal
+    ]
+    base = internal.index((1, 0, 2))
+    through = [row for row, line in enumerate(passants) if incident(line, internal[base])]
+    fibres = [
+        [
+            index
+            for index, point in enumerate(internal)
+            if index != base and incident(passants[row], point)
+        ]
+        for row in through
+    ]
+    passant_neighbors = set().union(*(set(fibre) for fibre in fibres))
+    secant_neighbors = [
+        index
+        for index in range(78)
+        if index != base and index not in passant_neighbors
+    ]
+
+    def xor_columns(indices: tuple[int, ...]) -> int:
+        value = 0
+        for index in indices:
+            value ^= columns[index]
+        return value
+
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left = {
+            xor_columns(choice)
+            for choice in itertools.product(*(fibres[index] for index in remaining[:3]))
+        }
+        for triple in itertools.combinations(fibres[special], 3):
+            target = columns[base] ^ xor_columns(triple)
+            assert all(
+                target ^ xor_columns(choice) not in left
+                for choice in itertools.product(
+                    *(fibres[index] for index in remaining[3:])
+                )
+            )
+
+    left = {
+        xor_columns(choice)
+        for choice in itertools.product(*(fibres[index] for index in range(3)))
+    }
+    assert all(
+        columns[base] ^ xor_columns(choice) ^ xor_columns(pair) not in left
+        for choice in itertools.product(*(fibres[index] for index in range(3, 7)))
+        for pair in itertools.combinations(secant_neighbors, 2)
+    )
+
+    witness_points = (
+        (1, 0, 2), (1, 3, 2), (1, 4, 5), (1, 1, 8),
+        (1, 4, 8), (1, 1, 7), (1, 7, 12), (1, 3, 3),
+        (1, 9, 11), (1, 10, 11), (1, 0, 5), (1, 8, 7),
+    )
+    witness = tuple(internal.index(point) for point in witness_points)
+    assert xor_columns(witness) == 0
+
+
 def main() -> None:
     four_cliques = [
         clique
@@ -64,7 +149,8 @@ def main() -> None:
         )
         for clique in five_cliques
     )
-    print("C611 independent cyclic replay: PASS (omega = 5)")
+    verify_distance()
+    print("C611 independent replay: PASS (omega = 5, d = 12)")
 
 
 if __name__ == "__main__":

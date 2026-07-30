@@ -28,7 +28,9 @@ actual owning paper.
   gives a 42-vertex compatibility graph of clique number five, certified by
   six cyclic difference sets and a five-row unique-closure lemma. Hence a
   weight-eight nullword, which would require a local seven-clique, cannot
-  exist and \(d\ge10\).
+  exist. The extra-juice follow-up exhausts the two forced weight-ten
+  passant-pencil profiles and constructs a dihedral weight-twelve word, so
+  the exact distance is \(d=12\).
 
 ## Work package
 
