@@ -1040,3 +1040,18 @@ published open problems and questions newly posed by this project.
   `22 -> 6 -> 2 -> 1` instance is proved, but mixed-Hecke coordinates need not separate double
   cosets and may acquire further modular kernels.  No general theorem is claimed until hypotheses
   controlling both failures are identified.
+
+### 2026-07-29 — Paper III live-map root drift
+
+**Provenance:** C696 manuscript-surface lookup.
+**Was I looking for this?:** no — C696 was comparing Daniel Litt's work with
+the Paper III v2 research surface.
+**Observed / musing:** the live Clebsch handoff names
+`papers/clebsch-covers/` as the Paper III root, but the C680 closure brief and
+tracked manuscript use `papers/clebsch-passages/`.
+**Why it may matter / strongest question:** a later release or review session
+could route to a nonexistent root; normalize the live map when an owning
+administrative edit is selected.
+**Evidence:** CHECKED against the C680 closure brief and bounded tracked-file
+lookup.
+**Status:** open lead.

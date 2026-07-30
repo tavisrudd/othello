@@ -4,7 +4,10 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued; bounded literature and expert-outreach preparation.
+**Status:** completed 2026-07-29; one technically specific Paper III v2
+review angle identified; invitation drafted but not sent.
+
+**Report:** `notes/2026-07-29-c696-daniel-litt-crossover-audit.md`
 
 ## Objective
 
@@ -57,3 +60,12 @@ review.
 - Krämer--Litt--Maculan, *\(E_6\)-local systems from cubic threefolds*,
   arXiv:2604.20970
 
+## Closure
+
+The exact crossover is the \(A_1\times A_5\) branching
+\(27=12+15\): C682 supplies the Schläfli double-six and C695 owns the
+remaining fifteen lines and involution tests. The generic-monodromy theorem
+does not transfer directly, the trace-field resemblance is a false friend,
+and Paper III v1 remains unchanged. The bounded review invitation should be
+used only after C695 reaches a positive construction or a precise
+obstruction.

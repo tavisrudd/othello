@@ -32,7 +32,6 @@
 | [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | queued after C691 | integrate C611/C690 without importing Paper III's reveal |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
 | [C695 — \(E_6\) minuscule 27](../clebsch-tasks/c695-paper-iii-e6-minuscule-27.md) | queued; Paper III v2 research | construct the fifteen complementary lines and prove the \(12+15\) branching dictionary |
-| [C696 — Daniel Litt crossover](../clebsch-tasks/c696-daniel-litt-crossover-audit.md) | queued; bounded literature audit | rank exact connections and prepare a specific review invitation |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
 
@@ -229,6 +228,16 @@ discrete Wronskian controlling the endpoint return contraction.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.
+
+C696 is complete as a Paper III v2 outreach audit. Its strongest connection
+is the \(A_1\times A_5\) minuscule branching \(27=12+15\): C682 supplies the
+double-six, while C695 owns the complementary fifteen lines and the
+row-swap involution test. Krämer--Litt--Maculan's generic-monodromy theorem
+is context rather than an imported result; the golden field is not their
+invariant trace field, though C695 may test the exact real-subfield tower
+\(\mathbf Q(\sqrt5)\subset\mathbf Q(\zeta_5)\) if it constructs the full
+twenty-seven-line Galois action. A bounded invitation is drafted but must not
+be sent before C695 closes or sharply obstructs the construction.
 
 Local aggregate replay:
 
