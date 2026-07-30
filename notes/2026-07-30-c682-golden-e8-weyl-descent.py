@@ -319,6 +319,36 @@ def build_certificate() -> dict[str, object]:
     if comparison_mod_two_rank != 4:
         raise AssertionError("unexpected mod-two comparison rank")
     smith_invariants = [1, 1, 1, 1, 2, 2]
+    quotient_coordinates = [
+        [0, 0, 0, 1, 1, 0],
+        [0, 0, 0, 1, 0, 1],
+    ]
+    quotient_on_comparison = [
+        [
+            sum(
+                quotient_coordinates[row][middle] * comparison[middle][column]
+                for middle in range(6)
+            )
+            % 2
+            for column in range(6)
+        ]
+        for row in range(2)
+    ]
+    quotient_after_conference = [
+        [
+            sum(
+                quotient_coordinates[row][middle] * conference[middle][column]
+                for middle in range(6)
+            )
+            % 2
+            for column in range(6)
+        ]
+        for row in range(2)
+    ]
+    if quotient_on_comparison != [[0] * 6 for _ in range(2)]:
+        raise AssertionError("quotient coordinates do not kill the sublattice")
+    if quotient_after_conference != quotient_coordinates:
+        raise AssertionError("conference action on the quotient is not scalar")
     conference_mod_five_rank = matrix_rank_mod_prime(conference, 5)
     companion_mod_five_rank = matrix_rank_mod_prime(companion, 5)
     comparison_mod_five_rank = matrix_rank_mod_prime(comparison, 5)
@@ -383,6 +413,12 @@ def build_certificate() -> dict[str, object]:
             "rank_mod_2_P": comparison_mod_two_rank,
             "smith_invariants_P": smith_invariants,
             "lattice_quotient": "(Z/2)^2",
+            "cokernel_coordinates_mod_2": quotient_coordinates,
+            "induced_C_on_cokernel": "I_2",
+            "cokernel_interpretation": (
+                "two independent parity directions; golden multiplication "
+                "collapses to the scalar sqrt(5)=1 mod 2"
+            ),
             "over_Z_invertible_conjugacy": False,
             "over_Z_one_half_conjugacy": True,
             "rank_mod_2_C_minus_I": conference_mod_two_rank,

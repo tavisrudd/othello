@@ -138,6 +138,20 @@ and
 \[
 \boxed{\quad\operatorname{coker}P\cong(\mathbf Z/2)^2.\quad}
 \]
+Two quotient coordinates are
+\[
+x_3+x_4,\qquad x_3+x_5.
+\]
+They annihilate the comparison sublattice modulo \(2\), and direct
+calculation gives
+\[
+C|_{\operatorname{coker}P}=I_2.
+\]
+Thus the index-four defect is two independent parity directions, not one
+\(\mathbf Z/4\) direction or a residual nonsemisimple golden module.
+Golden multiplication has collapsed to the scalar
+\(\sqrt5=1\) on the quotient.
+
 Thus the universal paired-tower companion and the Clebsch conference
 operator are conjugate over \(\mathbf Z[1/2]\), and the displayed comparison
 embeds an index-four companion sublattice in the signed-axis lattice.
@@ -193,8 +207,8 @@ descended golden operator is visible as the six-axis conference matrix.
 - **Why is the comparison index exactly \(4\), rather than only a power of
   \(2\)?** Settled arithmetically: \(P\) has mod-\(2\) nullity \(2\), so
   together with \(\det P=4\) its Smith quotient is exactly
-  \((\mathbf Z/2)^2\).  A conceptual name for the two quotient directions
-  remains optional.
+  \((\mathbf Z/2)^2\).  The quotient coordinates are two axis-parity
+  differences, and \(C\) acts trivially on them.
 - **Does prime \(5\) create another lattice mismatch?** Settled negatively.
   The comparison is invertible modulo \(5\); both golden operators simply
   specialize to the same rank-three square-zero endomorphism.

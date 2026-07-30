@@ -273,7 +273,9 @@ explicitly separated.
   \(\operatorname{rank}(C-I)=1\) and
   \(\operatorname{rank}(J_3-I)=3\) forbid integral conjugacy, while \(P\)
   is invertible modulo \(5\); this isolates the comparison defect at \(2\)
-  from golden ramification at \(5\).
+  from golden ramification at \(5\).  The quotient coordinates can be
+  chosen as \(x_3+x_4,x_3+x_5\), and \(C\) acts trivially on them; the
+  index-four defect is exactly two scalar parity directions.
 
 ## Active order
 

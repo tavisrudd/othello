@@ -137,6 +137,19 @@ def main() -> None:
         raise AssertionError("replay comparison determinant failed")
     if rank_mod_two(comparison) != 4:
         raise AssertionError("replay comparison Smith nullity failed")
+    quotient = comparison_data["cokernel_coordinates_mod_2"]
+    quotient_on_comparison = [
+        [entry % 2 for entry in row]
+        for row in multiply(quotient, comparison)
+    ]
+    if quotient_on_comparison != [[0] * 6 for _ in range(2)]:
+        raise AssertionError("replay quotient does not kill comparison lattice")
+    quotient_after_conference = [
+        [entry % 2 for entry in row]
+        for row in multiply(quotient, conference)
+    ]
+    if quotient_after_conference != quotient:
+        raise AssertionError("replay quotient action is not identity")
     shifted_conference = [
         [entry - int(row == column) for column, entry in enumerate(values)]
         for row, values in enumerate(conference)
@@ -153,7 +166,7 @@ def main() -> None:
     print(
         "PASS: independent degrees 0,10,22,60 satisfy golden Weyl "
         "intertwining; CP=PJ with determinant 4 and quotient (Z/2)^2; "
-        "mod-2 Jordan ranks are 1 and 3"
+        "mod-2 Jordan ranks are 1 and 3; C acts trivially on the quotient"
     )
 
 

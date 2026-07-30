@@ -266,6 +266,25 @@
     "prime_two_meaning": "The comparison has index 4 and becomes invertible after inverting 2; its mod-2 rank mismatch is the integral conductor obstruction."
   },
   "degree_ten_integral_comparison": {
+    "cokernel_coordinates_mod_2": [
+      [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    ],
+    "cokernel_interpretation": "two independent parity directions; golden multiplication collapses to the scalar sqrt(5)=1 mod 2",
     "companion_matrix": [
       [
         0,
@@ -419,6 +438,7 @@
     ],
     "determinant_P": 4,
     "identity": "C*P=P*J",
+    "induced_C_on_cokernel": "I_2",
     "integral_obstruction": "different mod-2 Jordan ranks forbid GL(6,Z) conjugacy",
     "lattice_quotient": "(Z/2)^2",
     "over_Z_invertible_conjugacy": false,
