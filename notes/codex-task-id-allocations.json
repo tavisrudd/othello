@@ -1610,8 +1610,17 @@
       "last": 687,
       "purpose": "Correct Clebsch Passages formal extraction and complete one-way certificate-package splits for Q16 and remaining Q11/Q13/Q25 families",
       "sequence": 179
+    },
+    {
+      "count": 1,
+      "first": 688,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 688,
+      "purpose": "generic local first-wall checker replacing the C665 q=169 specialization",
+      "sequence": 180
     }
   ],
-  "next_id": 688,
+  "next_id": 689,
   "schema": "codex-task-id-allocations-v1"
 }
