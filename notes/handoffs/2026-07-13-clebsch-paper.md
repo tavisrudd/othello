@@ -54,8 +54,10 @@ exchange is support complementation, Gale duality, and golden conjugation,
 and its first signed moment is cubic. The q=13 terminal problem is exactly
 the binary minimum-distance gate \(d\ge10\), which remains C611-owned and is
 not reached by C665's defining-characteristic trade machinery. The
-twelve-point Schläfli identification fails equivariantly, and the first open
-all-size full-conic gate is \(k=9\) over \(q=23,25\).
+twelve-point Schläfli identification fails equivariantly, but both objects
+map to the same six-axis \(A_5/D_5\) carrier: Paper I is its twisted
+transitive two-cover and the double-six is its split two-cover. The first
+open all-size full-conic gate is \(k=9\) over \(q=23,25\).
 
 Local aggregate replay:
 

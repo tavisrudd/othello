@@ -78,6 +78,8 @@ orientation-torsor and double-six decisions.
   Gale duality, and golden conjugation, with first signed moment cubic.
 - The twelve continuation directions are \(A_5/C_5\), while the double-six
   is \(2(A_5/D_5)\); their involution characters and incidence graphs differ.
+  Both map to the common six-axis carrier \(A_5/D_5\): Paper I gives its
+  twisted transitive two-cover and the double-six gives its split two-cover.
 - The first open E3 case is exactly \(k=9\) over \(q=23,25\), with compact
   cover-moment falsifier ledgers. No larger project is allocated.
 

@@ -183,6 +183,38 @@ valency five, but it is bipartite and has no triangles. The equality of
 the coarse counts was therefore a genuine temptation; the character and
 triangle fingerprints kill it exactly.
 
+The failed identification nevertheless has a canonical common quotient.
+The normalizer inclusion \(C_5\triangleleft D_5\) gives
+\[
+ A_5/C_5\longrightarrow A_5/D_5.
+\]
+Its six fibres are the opposite pairs of Paper I continuation directions,
+and the nontrivial element of \(D_5/C_5\) exchanges the two points in each
+fibre. The Paper I twelve-set is therefore the connected, transitive
+two-cover of the six-axis carrier. Each row of the double-six is itself
+\(A_5/D_5\), so projection to the common axis label gives
+\[
+ (A_5/D_5)\sqcup(A_5/D_5)\longrightarrow A_5/D_5,
+\]
+the split two-cover. The involution-character difference \(0\) versus
+\(4\) is exactly the distinction between fibre exchange in the twisted
+cover and fibre fixation in the split cover.
+
+Thus the correct relationship is stronger than “different twelve-sets”:
+Paper I supplies the nontrivial axis-orientation cover, while the
+double-six supplies two globally separated rows over the same six axes.
+No choice of marking can turn one cover into the other.
+
+This also separates two orientation structures that could otherwise be
+conflated. The twenty leader supports form a split \(A_5\)-cover of the
+ten-point Petersen carrier: its two sheets are separately \(A_5\)-stable,
+and complementation/Gale conjugation is an external exchange. The twelve
+continuation directions form the twisted cover of the six-axis carrier:
+\(A_5\) is transitive and the stabilizer involution exchanges the two
+directions above an axis. Hence the support-orientation torsor is not
+realized by pairing the twelve continuation directions, even though both
+are reconstructed from the same syndrome data.
+
 ## 4. Full-conic crown gate
 
 Let \(A\) be a conic-filling \(k\)-arc and put
@@ -291,7 +323,9 @@ intersection ledgers for the first open E3 fields.
 The `tt` pass tested whether the shared cardinality twelve concealed a
 classical double-six. The fixed-point character shows that involutions
 distinguish the sets before coordinates, while the triangle count explains
-why their equal valency and edge count were misleading. It also exposed
+why their equal valency and edge count were misleading. The `ej` follow-up
+then recovered their common quotient: they are respectively the twisted
+and split two-covers of the same six-axis carrier. The pass also exposed
 the obstruction to the obvious all-size induction: deleting a vertex
 necessarily enlarges the extension port off the conic.
 
@@ -303,7 +337,8 @@ necessarily enlarges the extension port off the conic.
 | C665 transfer | settled negatively | none; a new cross-characteristic support mechanism would be a different method |
 | support/Gale/golden exchange | settled on the frozen marked fibre | novelty audit and concise Paper I v2 integration only |
 | preferred orientation sign | settled negatively | the syndrome locus reconstructs only the torsor and cubic line |
-| twelve-point double-six | settled negatively | none |
+| twelve-point double-six | settled negatively as an identification; common quotient recovered | Paper I gives the twisted \(A_5/C_5\to A_5/D_5\) cover, while the double-six gives the split cover |
+| two Paper I orientation structures | settled as distinct | the support/Petersen cover is split under \(A_5\); the continuation/axis cover is twisted |
 | E3 first new size | sharply reduced, not settled | exclude or construct the \(q=23,25\) nine-point certificates |
 | all-size induction | naive deletion settled negatively | find a genuine replacement/contraction operation only after the first-size gate |
 
