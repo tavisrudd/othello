@@ -357,6 +357,43 @@ def field_record(balanced, c406, q):
         for row in range(q)
         for column in range(q)
     )
+    augmentation_basis = [
+        [int(column == index) - int(column == q - 1) for column in range(q)]
+        for index in range(q - 1)
+    ]
+    augmentation_images = [
+        [
+            sum(
+                skew_core[row][column] * vector[column]
+                for column in range(q)
+            )
+            % q
+            for row in range(q)
+        ]
+        for vector in augmentation_basis
+    ]
+    full_rank = balanced["rank"](
+        [[entry % q for entry in row] for row in skew_core], q
+    )
+    augmentation_rank = balanced["rank"](augmentation_images, q)
+    assert full_rank == (q + 1) // 2
+    assert augmentation_rank == (q - 1) // 2
+    assert all(sum(row) == 0 for row in skew_core)
+    assert all(
+        sum(skew_core[row][column] for row in range(q)) == 0
+        for column in range(q)
+    )
+    assert all(sum(vector) % q == 0 for vector in augmentation_images)
+    assert all(
+        sum(
+            skew_core[row][column] * vector[column]
+            for column in range(q)
+        )
+        % q
+        == 0
+        for vector in augmentation_images
+        for row in range(q)
+    )
     signed_incidence = [
         [2 * value - 1 for value in row] for row in paley_incidence
     ]
@@ -426,9 +463,18 @@ def field_record(balanced, c406, q):
             "bordered_paley_hadamard": True,
             "skew_paley_core": True,
             "skew_core_square": "-q*I+J",
-            "augmentation_minimal_polynomial": "x^2+q",
+            "characteristic_zero_augmentation_polynomial": "x^2+q",
             "nontrivial_incidence_eigenvalues": (
                 "(1+sqrt(-q))/2 and (1-sqrt(-q))/2"
+            ),
+            "defining_characteristic_full_rank": full_rank,
+            "defining_characteristic_augmentation_dimension": q - 1,
+            "defining_characteristic_augmentation_rank": augmentation_rank,
+            "defining_characteristic_square_zero": True,
+            "defining_characteristic_image_equals_kernel": True,
+            "defining_characteristic_full_nilpotency_index": 3,
+            "defining_characteristic_full_jordan_blocks": (
+                [3] + [2] * ((q - 3) // 2)
             ),
         },
         "incident_edge_count": len(all_edges),

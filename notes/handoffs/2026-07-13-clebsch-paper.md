@@ -120,7 +120,10 @@ forces its deepest radial trace to be nonzero.  Its cross-incidence design
 is the circulant Paley complement, with \(4\) generating the nonzero
 quadratic-residue orbit; its bordered sign matrix is the Paley Hadamard
 carrier of order \(q+1\), and its skew core squares to \(-q\) on the
-augmentation module.  The old q=7/q=11 scalars remain corroboration only.
+characteristic-zero augmentation module.  In defining characteristic the
+same core is a maximal square-zero differential on augmentation, with
+image equal to kernel and full Jordan type
+\((3,2^{(q-3)/2})\).  The old q=7/q=11 scalars remain corroboration only.
 C682 characteristic-zero work is inventory unless
 explicitly promoted.
 

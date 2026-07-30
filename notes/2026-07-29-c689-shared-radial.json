@@ -4,9 +4,20 @@
   "fields": [
     {
       "cross_incidence_design": {
-        "augmentation_minimal_polynomial": "x^2+q",
         "bordered_paley_hadamard": true,
         "bordered_paley_hadamard_order": 8,
+        "characteristic_zero_augmentation_polynomial": "x^2+q",
+        "defining_characteristic_augmentation_dimension": 6,
+        "defining_characteristic_augmentation_rank": 3,
+        "defining_characteristic_full_jordan_blocks": [
+          3,
+          2,
+          2
+        ],
+        "defining_characteristic_full_nilpotency_index": 3,
+        "defining_characteristic_full_rank": 4,
+        "defining_characteristic_image_equals_kernel": true,
+        "defining_characteristic_square_zero": true,
         "gram_diagonal": 4,
         "gram_off_diagonal": 2,
         "intersection_values": [
@@ -129,9 +140,22 @@
     },
     {
       "cross_incidence_design": {
-        "augmentation_minimal_polynomial": "x^2+q",
         "bordered_paley_hadamard": true,
         "bordered_paley_hadamard_order": 12,
+        "characteristic_zero_augmentation_polynomial": "x^2+q",
+        "defining_characteristic_augmentation_dimension": 10,
+        "defining_characteristic_augmentation_rank": 5,
+        "defining_characteristic_full_jordan_blocks": [
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "defining_characteristic_full_nilpotency_index": 3,
+        "defining_characteristic_full_rank": 6,
+        "defining_characteristic_image_equals_kernel": true,
+        "defining_characteristic_square_zero": true,
         "gram_diagonal": 6,
         "gram_off_diagonal": 3,
         "intersection_values": [

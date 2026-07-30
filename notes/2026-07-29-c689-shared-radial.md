@@ -111,7 +111,8 @@ Putting \(S=H-I\) gives the exact skew operator
 \[
  S^{\mathsf T}=-S,\qquad S^2=-qI+J.            \tag{C}
 \]
-On the augmentation hyperplane \(J=0\), this becomes
+On the augmentation hyperplane \(J=0\), this becomes, over characteristic
+zero,
 \[
  S^2=-qI.
 \]
@@ -124,6 +125,39 @@ operator are
 Thus the cross-sheet incidence tensor carries a canonical quadratic
 orientation operator—a square root of \(-q\)—before any matching quotient
 or cubic is formed.
+
+In the defining characteristic the same identity has a different and
+more arithmetic meaning.  Now \(q=0\), so \(S^2=J\) on the full
+permutation module and
+\[
+ S^2=0\quad\hbox{on }\operatorname{Aug}(\mathbb F_q^q).
+                                                        \tag{N}
+\]
+Exact row reduction gives
+\[
+\begin{array}{c|cc}
+q&\operatorname{rank}_{\mathbb F_q}S&
+\operatorname{rank}_{\mathbb F_q}(S|_{\operatorname{Aug}})\\ \hline
+7&4&3,\\
+11&6&5.
+\end{array}
+\]
+The augmentation module has dimension \(q-1\).  Thus (N) has the largest
+possible rank and
+\[
+ \operatorname{im}S=\ker S
+ \quad\text{on }\operatorname{Aug}(\mathbb F_q^q).       \tag{X}
+\]
+Equivalently, \(S\) makes the augmentation module an exact two-periodic
+complex.  On the full module, \(S^3=0\), \(S^2=J\ne0\), and its Jordan
+blocks are
+\[
+ (3,2^{(q-3)/2}).
+                                                        \tag{J}
+\]
+This is the defining-characteristic shadow of the two conjugate
+characteristic-zero eigenspaces: they coalesce into a canonical maximal
+square-zero differential.
 
 Fix an edge \(e\).  The unique incident pair is invariant under its
 construction, and its complementary alternating cycle is the geometric
@@ -286,9 +320,9 @@ traces and checks the symmetric-design identities.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c689-shared-radial.py` | 16347 | `c24e1396d18753f846fdd6cbf5c897e370758a95887542f929ae0f2280db947d` |
-| `notes/2026-07-29-c689-shared-radial-independent.py` | 3959 | `9984c8245ab076ea4504e0b24def98ddb99b05ec291542ef73ca6f70fb1a698e` |
-| `notes/2026-07-29-c689-shared-radial.json` | 6354 | `be9663e34429ee4f9cea815e838be671f7de734f14168fdd074b92e81d9af494` |
+| `notes/2026-07-29-c689-shared-radial.py` | 17994 | `6c56f6d68471ee77e96bbf0cb0f1cb8cd8967fd58db9549ccc3dcc45637f49a5` |
+| `notes/2026-07-29-c689-shared-radial-independent.py` | 6985 | `b569204c3d47140fa593f3442d16ea13b1e939de14f4da50eb0cc4699444552f` |
+| `notes/2026-07-29-c689-shared-radial.json` | 7293 | `60b2b95bd027b2e5fa80c09bf101bdf19b05d1a6d95b73fc18dc92336a1385be` |
 
 Pinned load-bearing inputs:
 
@@ -334,13 +368,15 @@ Hadamard carrier behind the signed sheet geometry; no coordinate quotient
 calculation is needed for that consequence.
 
 At second order, the skew core (C) shows that the same carrier already
-contains an orientation operator on the augmentation module.  This is a
-precise possible bridge to Paper II's cubic-first orientation: the
-quadratic sheet incidence supplies the conjugate eigenspaces (F), while
-the cubic may choose their ordering.  C689 does not claim that this alone
-derives the orientation cubic; establishing that identification would
-require comparing \(S\)'s eigenspace choice with the paper's signed cubic
-tensor.
+contains an orientation operator on the augmentation module.  In
+characteristic zero it supplies the conjugate eigenspaces (F).  In the
+defining characteristic those eigenspaces collide into the exact
+square-zero differential (X).  This sharpens the possible bridge to Paper
+II's cubic-first orientation: the cubic could select a lift or splitting
+of this canonical null foliation.  C689 does not claim that it does.
+Establishing that identification would require comparing the cubic tensor
+with the filtration \(0\subset\operatorname{im}S=\ker S\subset
+\operatorname{Aug}\), not merely matching dimensions.
 
 The Tao boundary is the parameter relation \(c^{-2}=4\).  It is a property
 of the two classified exceptional configurations, not a consequence of
@@ -363,7 +399,8 @@ incidence geometry to the Fischer projection.
 | cross-sheet incidence | settled as the two symmetric designs with explicit perfect pairing (I) | none |
 | Paley structure | settled: the translation-circulant support is affinely \(\{0\}\cup Q_0\) | none |
 | signed Hadamard carrier | settled by the bordered Paley matrix (H), of orders eight and twelve | none |
-| quadratic orientation operator | settled by the skew core \(S^2=-qI\) on augmentation | comparison with the cubic orientation is a possible later v2 bridge, not a C689 obligation |
+| quadratic orientation operator | settled in characteristic zero by \(S^2=-qI\) on augmentation | comparison with the cubic orientation is a possible later v2 bridge, not a C689 obligation |
+| defining-characteristic degeneration | settled: \(S|_{\operatorname{Aug}}^2=0\), has half rank, and \(\operatorname{im}S=\ker S\); full Jordan type is \((3,2^{(q-3)/2})\) | whether the cubic canonically splits or lifts this filtration remains open |
 | parameter \(4\) | settled as the generator of the nonzero Paley orbit in both classified configurations; not abstractly universal | no C689 gap |
 
 No genuine C689 mystery remains.  Extending the alternating-cycle

@@ -90,4 +90,7 @@ sets, \(4\) is the generator of the nonzero quadratic-residue orbit, and
 their bordered sign matrices are the Paley Hadamard matrices of orders
 eight and twelve.  The unbordered skew cores satisfy
 \(S^2=-qI+J\), giving a canonical square root of \(-q\) on the
-augmentation module.
+characteristic-zero augmentation module.  In defining characteristic,
+the augmentation restriction is instead a maximal square-zero
+differential with \(\operatorname{im}S=\ker S\); on the full permutation
+module its Jordan type is \((3,2^{(q-3)/2})\).

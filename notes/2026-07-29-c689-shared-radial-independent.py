@@ -11,6 +11,34 @@ HERE = Path(__file__).resolve().parent
 CERTIFICATE = HERE / "2026-07-29-c689-shared-radial.json"
 
 
+def rank_mod(matrix, prime):
+    rows = [[entry % prime for entry in row] for row in matrix]
+    rank = 0
+    for column in range(len(rows[0])):
+        pivot = next(
+            (
+                row
+                for row in range(rank, len(rows))
+                if rows[row][column]
+            ),
+            None,
+        )
+        if pivot is None:
+            continue
+        rows[rank], rows[pivot] = rows[pivot], rows[rank]
+        inverse = pow(rows[rank][column], -1, prime)
+        rows[rank] = [entry * inverse % prime for entry in rows[rank]]
+        for row in range(len(rows)):
+            if row != rank and rows[row][column]:
+                factor = rows[row][column]
+                rows[row] = [
+                    (left - factor * right) % prime
+                    for left, right in zip(rows[row], rows[rank])
+                ]
+        rank += 1
+    return rank
+
+
 def dickson_difference(q, parameter):
     n = (q - 1) // 2
     coefficients = []
@@ -92,7 +120,71 @@ def replay(field):
     assert design["bordered_paley_hadamard"]
     assert design["skew_paley_core"]
     assert design["skew_core_square"] == "-q*I+J"
-    assert design["augmentation_minimal_polynomial"] == "x^2+q"
+    assert design["characteristic_zero_augmentation_polynomial"] == "x^2+q"
+    signed = [
+        [
+            2 * int((column - row) % q in normalized_support) - 1
+            for column in range(q)
+        ]
+        for row in range(q)
+    ]
+    skew = [
+        [signed[row][column] - int(row == column) for column in range(q)]
+        for row in range(q)
+    ]
+    augmentation_basis = [
+        [int(column == index) - int(column == q - 1) for column in range(q)]
+        for index in range(q - 1)
+    ]
+    images = [
+        [
+            sum(skew[row][column] * vector[column] for column in range(q))
+            % q
+            for row in range(q)
+        ]
+        for vector in augmentation_basis
+    ]
+    assert rank_mod(skew, q) == design["defining_characteristic_full_rank"]
+    assert design["defining_characteristic_full_rank"] == (q + 1) // 2
+    skew_square = [
+        [
+            sum(skew[row][index] * skew[index][column] for index in range(q))
+            % q
+            for column in range(q)
+        ]
+        for row in range(q)
+    ]
+    skew_cube = [
+        [
+            sum(
+                skew_square[row][index] * skew[index][column]
+                for index in range(q)
+            )
+            % q
+            for column in range(q)
+        ]
+        for row in range(q)
+    ]
+    assert rank_mod(skew_square, q) == 1
+    assert not any(any(row) for row in skew_cube)
+    assert design["defining_characteristic_full_nilpotency_index"] == 3
+    assert design["defining_characteristic_full_jordan_blocks"] == (
+        [3] + [2] * ((q - 3) // 2)
+    )
+    assert design["defining_characteristic_augmentation_dimension"] == q - 1
+    assert rank_mod(images, q) == (
+        design["defining_characteristic_augmentation_rank"]
+    )
+    assert design["defining_characteristic_augmentation_rank"] == (q - 1) // 2
+    assert all(sum(vector) % q == 0 for vector in images)
+    assert all(
+        sum(skew[row][column] * vector[column] for column in range(q)) % q
+        == 0
+        for vector in images
+        for row in range(q)
+    )
+    assert design["defining_characteristic_square_zero"]
+    assert design["defining_characteristic_image_equals_kernel"]
     assert pow(4, (q - 1) // 2, q) == 1
     assert all(
         pow(4, exponent, q) != 1
