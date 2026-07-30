@@ -63,7 +63,10 @@ six-difference-set, five-row unique-closure lemma, not a support search. It
 then excludes the two forced weight-ten pencil profiles and constructs a
 dihedral weight-twelve word. All \(364\) minimum words split into one
 \(S_4\) and three \(D_{24}\) projective orbits, and their pair concurrence
-reconstructs passant versus secant join type. It
+reconstructs passant versus secant join type. Triple-concurrence profiles
+recover all six elliptic orbitals, and the \(78\) all-zero-triple
+seven-cliques are exactly the passant incidence rows. Hence the minimum
+layer self-reconstructs \(M\). It
 does not prove the unsaturated \((7,13)\) case or the stronger maximum-six
 claim, and it is not reached by C665's defining-characteristic trade
 machinery. The

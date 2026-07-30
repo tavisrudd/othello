@@ -33,7 +33,12 @@ actual owning paper.
   the exact distance is \(d=12\). The `ej2` pass classifies all \(364\)
   minimum words into one \(S_4\) and three \(D_{24}\) projective orbits.
   Pair concurrence in the minimum supports intrinsically reconstructs join
-  type: \(7,9,12\) means passant and \(6,8\) means secant.
+  type: \(7,9,12\) means passant and \(6,8\) means secant. The `ej3` pass
+  uses triple-concurrence histograms to recover all six elliptic orbitals.
+  Among the resulting \(1716\) passant seven-cliques, exactly \(78\) have
+  zero concurrence on every triple; these are precisely the row supports
+  of \(M\). Thus the minimum-weight layer self-reconstructs the parity-check
+  geometry.
 
 ## Work package
 

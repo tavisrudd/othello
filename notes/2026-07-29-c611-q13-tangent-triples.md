@@ -29,7 +29,10 @@ dihedral twelve-point orbit supplies a weight-twelve word.
 
 The full minimum layer is also classified.  There are exactly \(364\)
 weight-twelve words in four projective orbits.  Their support-incidence
-numbers recover whether the join of two coordinates is passant or secant.
+numbers recover the full six-class elliptic association scheme.  Pair and
+triple concurrence then recover all \(78\) passant-line incidence rows, so
+the minimum-weight layer reconstructs the parity-check matrix \(M\) up to
+row order.
 
 This is a conceptual reduction followed by a five-row finite-field lemma,
 not a uniform all-\(q\) theorem.  It removes the binary-code mystery at
@@ -243,8 +246,57 @@ Most importantly,
 while secant pairs have concurrence \(6\) or \(8\).  Hence the family of
 minimum-weight supports intrinsically reconstructs the passant graph, and
 therefore recovers the exact geometric relation used to define the parity
-checks.  It does not yet separate the two elliptic-scheme secant orbitals
-which both have concurrence six.
+checks.
+
+Triple concurrence supplies the missing bit.  For a pair \(\{P,Q\}\), let
+\[
+ h_{P,Q}(j)=
+ \#\{R\ne P,Q:\text{ exactly }j\text{ minimum supports contain }P,Q,R\}.
+\]
+The six pair classes have the following distinct fingerprints.  The
+coordinate invariant
+\[
+\rho(P,Q)=
+ \frac{\langle P,Q\rangle^2}{Q(P)Q(Q)}
+\]
+where \(\langle-,-\rangle\) is the polar form of \(Y^2-XZ\), is included
+only to identify the reconstructed classes with the standard
+elliptic-scheme labels:
+\[
+\begin{array}{c|c|c|l}
+\rho&\#\text{ pairs}&\lambda(P,Q)&
+\{j:h_{P,Q}(j)\}\\ \hline
+0&273&8&0:16,\ 1:40,\ 2:20\\
+1&546&6&0:26,\ 1:42,\ 2:6,\ 3:2\\
+3&546&6&0:32,\ 1:28,\ 2:16\\
+9&546&12&0:7,\ 1:34,\ 2:27,\ 3:4,\ 5:4\\
+10&546&7&0:25,\ 1:36,\ 2:13,\ 4:2\\
+12&546&9&0:18,\ 1:32,\ 2:24,\ 5:2.
+\end{array}
+\]
+Thus the minimum-support hypergraph intrinsically partitions all coordinate
+pairs into the six \(\operatorname{PGL}(2,13)\)-orbitals.  In particular it
+recovers the full Hollmann--Xiang elliptic association scheme, not merely
+the passant/secant fusion.
+
+There is a final self-reconstruction step.  In the reconstructed passant
+graph there are \(1716\) seven-cliques.  Exactly \(78\) of them have triple
+concurrence zero on all of their \(\binom73=35\) triples.  These \(78\)
+seven-sets are exactly
+\[
+ \{\{P:P\in\ell\}:\ell\text{ passant to }\mathcal C\}.
+\]
+They are therefore the row supports of \(M\).  Starting only from the
+coordinate set and the family of minimum codeword supports, one recovers
+\[
+ \text{minimum hypergraph}
+ \longrightarrow
+ \text{six-class elliptic scheme}
+ \longrightarrow
+ \text{passant incidence rows}
+ \longrightarrow M
+\]
+up to coordinate and row permutation.
 
 ## Evidence and trust boundary
 
@@ -264,6 +316,9 @@ number five.  Across all pairwise-passant triples of internal points the
 holonomy counts are \(6188\) with value \(1\) and \(5642\) with value
 \(-1\).  It also exhausts all weight-twelve pencil profiles, constructs the
 four projective orbits, and verifies the complete pair-concurrence ledger.
+It then verifies the six distinct triple-concurrence fingerprints and
+reconstructs all \(78\) incidence rows from the \(1716\) seven-cliques in
+the recovered passant graph.
 
 The independent replay starts from the six displayed difference sets for
 the tangent graph and independently reconstructs the projective incidence
@@ -276,8 +331,9 @@ four-clique profiles
 checks unique closure, independently excludes both forced weight-ten
 profiles, independently enumerates the \(56\) minimum words through the
 base, verifies that four explicit projective orbits partition them, and
-replays the join-type reconstruction from all \(364\) words.  It obtains
-\(\omega=5\) and \(d=12\).
+replays the full six-class scheme and parity-check-row reconstruction from
+all \(364\) words.  It obtains \(\omega=5\), \(d=12\), and the original
+\(78\) row supports.
 The pre-existing C605 C++/Python bundle is an independent end-to-end
 cross-check: its larger domain finds no seven-point passant-join arc over
 \(\mathbf F_{13}\).
@@ -285,23 +341,24 @@ cross-check: its larger domain finds no seven-point passant-join arc over
 The mathematical trust boundary is exact prime-field arithmetic, the
 coordinate realization of the conic stabilizer, the displayed
 finite-difference lemma, the exhaustive two-profile weight-ten split,
-C662's saturation/tangent reconstruction, and Segre's lemma of tangents.
+C662's saturation/tangent reconstruction, Segre's lemma of tangents, the
+four-orbit minimum-word exhaustion, and the exact seven-clique selector.
 The result determines the \(q=13\) incidence-code distance exactly, but
 does not supply a uniform conic-code distance theorem.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c611-q13-tangent-triples.py` | 26,926 | `22f6a03a4c398a5afd340feb8fed55f4fbb14453c784bfa377c0b402d7a4d047` |
-| `2026-07-29-c611-q13-tangent-triples-replay.py` | 11,606 | `2d334a47805e1a3ea5bae8898819c72e5caa693209fc308ffef5b93e096af73c` |
-| `2026-07-29-c611-q13-tangent-triples.json` | 11,776 | `8113512a8411aa4253abe109a98569c92aefc1cdfcb8a972ae013e5ad62102ee` |
+| `2026-07-29-c611-q13-tangent-triples.py` | 31,859 | `031a65abce1ab59fd3a4c0851937ae873c09c36b67d2975faa2f72b0a2a4e050` |
+| `2026-07-29-c611-q13-tangent-triples-replay.py` | 14,490 | `2a581e528e1a3cd40b7291551188e0882d1a98f1cce8518cc85cc4c96b0f4f8b` |
+| `2026-07-29-c611-q13-tangent-triples.json` | 13,577 | `1641cf22244cae216d2b59ef16537353da61f2b6e3361516e5b4201d4256a381` |
 
 ## Disposition
 
 | surface | disposition |
 |---|---|
 | Paper I v1 | closed; no change and no release delay |
-| Paper I human core v2 | candidate one-field proposition only if the five-row cyclic lemma fits the eventual v2 narrative |
-| computational companion v2 | natural immediate owner for the exact \(d=12\), four-orbit minimum-word classification, and join-reconstruction theorem; these replace the \(q=13,k=8\) support exclusion, but not the stronger maximum-six claim or \((7,13)\) |
+| Paper I human core v2 | the intrinsic minimum-layer-to-\(M\) reconstruction is thematically strong, but admission requires a concise presentation with the finite certificate kept in the companion |
+| computational companion v2 | immediate owner for exact \(d=12\), four minimum-word orbits, full elliptic-scheme recovery, and parity-check self-reconstruction; these replace the \(q=13,k=8\) support exclusion, but not the stronger maximum-six claim or \((7,13)\) |
 | Papers II and III | no logical ownership |
 | C611 | \(q=13\) binary gate closed; \(q=17,19\) coherent/rational mechanisms remain |
 
@@ -335,6 +392,14 @@ intrinsic upgrade: minimum supports alone recover the passant/secant join
 type.  The only information loss visible at this level is that two secant
 orbitals share concurrence six.
 
+The `ej3` pass resolves that loss.  The histogram of triple concurrence
+over a fixed pair has six distinct values, one for each elliptic orbital.
+The recovered passant graph still has \(1716\) seven-cliques, but the
+minimum hypergraph selects exactly \(78\): those on which every triple has
+concurrence zero.  They are precisely the passant-line row supports.
+Thus the third-order pass upgrades geometric join recovery to complete
+elliptic-scheme and parity-check-matrix self-reconstruction.
+
 The `tt` pass asked whether the cyclic table concealed a uniform theorem.
 The answer is not yet justified.  The order-\(14\) torus and unique closure
 are structural, but the six difference sets still use \(q=13\) arithmetic.
@@ -351,13 +416,14 @@ rational dual certificates.
 | local clique number five | settled with unique closure | six difference sets and five representatives are the exact proof boundary |
 | actual code distance | settled exactly | \(d(\ker M)=12\); both weight-ten profiles fail and a dihedral weight-twelve word exists |
 | classification of minimum words | settled | \(364\) words in four size-\(91\) orbits: one \(S_4\), three \(D_{24}\) |
-| geometry from minimum words | passant/secant type settled | pair concurrence is \(7,9,12\) exactly for passant joins and \(6,8\) for secant joins |
-| full elliptic scheme from minimum words | not settled | separate the two secant orbitals which both have pair concurrence six, perhaps by triple concurrence |
+| geometry from minimum words | settled through the full pair scheme | triple-concurrence histograms separate all six elliptic orbitals |
+| parity-check rows from minimum words | settled exactly | among \(1716\) passant seven-cliques, the \(78\) all-zero-triple cliques are precisely the rows of \(M\) |
+| conceptual proof of the 78-clique selector | computationally exact, structurally unexplained | replace the seven-clique enumeration by a uniform intersection-number argument |
 | uniform source of unique closure | unexplained | derive the local graph from a general torus/two-graph identity rather than \(q=13\) substitution |
 | \((7,13)\) unsaturated terminal case | untouched | its tangent polynomial has one additional factor at each vertex |
 | \(q=17,19\) terminal exclusions | untouched by this certificate | C611 coherent-configuration or rational-dual step |
 
-Vibe check: `ej2` found a second theorem, not just a refinement—the minimum
-layer reconstructs the geometric join type.  The limitation is still
-honest: this is a sharp one-field theorem, not yet the uniform exterior-set
-explanation C611 ultimately wants.
+Vibe check: `ej3` lands the strongest result in the chain—the minimum layer
+self-reconstructs the full parity-check geometry.  The limitation is still
+honest: the 78-row selector is an exact one-field certificate, not yet a
+uniform exterior-set explanation.

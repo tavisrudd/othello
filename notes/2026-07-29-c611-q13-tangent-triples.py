@@ -477,6 +477,138 @@ def incidence_distance_certificate() -> dict[str, object]:
         for (first, second), concurrence in pair_concurrences.items()
     )
 
+    triple_concurrences: Counter[tuple[int, int, int]] = Counter()
+    for support in all_minimum_words:
+        triple_concurrences.update(itertools.combinations(sorted(support), 3))
+
+    def quadratic(point: tuple[int, int, int]) -> int:
+        return (point[1] * point[1] - point[0] * point[2]) % Q
+
+    def polar(
+        first: tuple[int, int, int], second: tuple[int, int, int]
+    ) -> int:
+        return (
+            2 * first[1] * second[1]
+            - first[0] * second[2]
+            - first[2] * second[0]
+        ) % Q
+
+    pair_profiles: dict[int, dict[str, object]] = {}
+    for (first, second), concurrence in pair_concurrences.items():
+        histogram = Counter(
+            triple_concurrences[
+                tuple(sorted((first, second, third)))
+            ]
+            for third in range(len(INTERNAL))
+            if third not in (first, second)
+        )
+        first_point = INTERNAL[first]
+        second_point = INTERNAL[second]
+        rho = (
+            polar(first_point, second_point) ** 2
+            * pow(quadratic(first_point) * quadratic(second_point), -1, Q)
+            % Q
+        )
+        profile = {
+            "pairs": 0,
+            "pair_concurrence": concurrence,
+            "triple_concurrence_histogram": {
+                str(value): count for value, count in sorted(histogram.items())
+            },
+        }
+        if rho in pair_profiles:
+            assert pair_profiles[rho]["pair_concurrence"] == concurrence
+            assert (
+                pair_profiles[rho]["triple_concurrence_histogram"]
+                == profile["triple_concurrence_histogram"]
+            )
+        else:
+            pair_profiles[rho] = profile
+        pair_profiles[rho]["pairs"] = int(pair_profiles[rho]["pairs"]) + 1
+
+    expected_profiles = {
+        0: (273, 8, {0: 16, 1: 40, 2: 20}),
+        1: (546, 6, {0: 26, 1: 42, 2: 6, 3: 2}),
+        3: (546, 6, {0: 32, 1: 28, 2: 16}),
+        9: (546, 12, {0: 7, 1: 34, 2: 27, 3: 4, 5: 4}),
+        10: (546, 7, {0: 25, 1: 36, 2: 13, 4: 2}),
+        12: (546, 9, {0: 18, 1: 32, 2: 24, 5: 2}),
+    }
+    assert {
+        rho: (
+            profile["pairs"],
+            profile["pair_concurrence"],
+            {
+                int(value): count
+                for value, count in profile[
+                    "triple_concurrence_histogram"
+                ].items()
+            },
+        )
+        for rho, profile in pair_profiles.items()
+    } == expected_profiles
+
+    reconstructed_adjacency = [
+        sum(
+            1 << second
+            for second in range(len(INTERNAL))
+            if first != second
+            and pair_concurrences[tuple(sorted((first, second)))] in {7, 9, 12}
+        )
+        for first in range(len(INTERNAL))
+    ]
+    seven_cliques: list[frozenset[int]] = []
+
+    def bron_kerbosch(
+        clique: list[int], candidates: int, excluded: int
+    ) -> None:
+        if not candidates and not excluded:
+            if len(clique) >= 7:
+                seven_cliques.append(frozenset(clique))
+            return
+        if len(clique) + candidates.bit_count() < 7:
+            return
+        union = candidates | excluded
+        pivot = max(
+            (index for index in range(len(INTERNAL)) if union >> index & 1),
+            key=lambda index: (candidates & reconstructed_adjacency[index]).bit_count(),
+            default=0,
+        )
+        extensions = candidates & ~reconstructed_adjacency[pivot]
+        while extensions:
+            bit = extensions & -extensions
+            vertex = bit.bit_length() - 1
+            bron_kerbosch(
+                clique + [vertex],
+                candidates & reconstructed_adjacency[vertex],
+                excluded & reconstructed_adjacency[vertex],
+            )
+            candidates &= ~bit
+            excluded |= bit
+            extensions &= ~bit
+
+    bron_kerbosch([], (1 << len(INTERNAL)) - 1, 0)
+    assert len(seven_cliques) == 1716
+    assert {len(clique) for clique in seven_cliques} == {7}
+    reconstructed_rows = {
+        clique
+        for clique in seven_cliques
+        if all(
+            triple_concurrences[triple] == 0
+            for triple in itertools.combinations(sorted(clique), 3)
+        )
+    }
+    actual_rows = {
+        frozenset(
+            index
+            for index, point in enumerate(INTERNAL)
+            if dot(line, point) == 0
+        )
+        for line in PASSANTS
+    }
+    assert len(reconstructed_rows) == 78
+    assert reconstructed_rows == actual_rows
+
     witness_set = set(witness_points)
     stabilizer = [
         matrix
@@ -542,6 +674,14 @@ def incidence_distance_certificate() -> dict[str, object]:
                 "passant_pair_concurrences": [7, 9, 12],
                 "secant_pair_concurrences": [6, 8],
                 "join_type_reconstructed": True,
+                "elliptic_pair_profiles_by_rho": {
+                    str(rho): profile
+                    for rho, profile in sorted(pair_profiles.items())
+                },
+                "full_six_class_scheme_reconstructed": True,
+                "passant_graph_seven_cliques": len(seven_cliques),
+                "zero_triple_seven_cliques": len(reconstructed_rows),
+                "passant_incidence_rows_reconstructed": True,
             },
         },
         "weight_12_stabilizer": {

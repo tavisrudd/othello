@@ -288,6 +288,91 @@ def verify_distance() -> None:
         for (first, second), concurrence in pair_concurrences.items()
     )
 
+    triple_concurrences: Counter[tuple[int, int, int]] = Counter()
+    for support in all_words:
+        triple_concurrences.update(itertools.combinations(sorted(support), 3))
+    profile_counts = Counter()
+    for (first, second), concurrence in pair_concurrences.items():
+        histogram = Counter(
+            triple_concurrences[tuple(sorted((first, second, third)))]
+            for third in range(78)
+            if third not in (first, second)
+        )
+        profile_counts[
+            concurrence,
+            tuple(sorted(histogram.items())),
+        ] += 1
+    assert profile_counts == Counter(
+        {
+            (6, ((0, 26), (1, 42), (2, 6), (3, 2))): 546,
+            (6, ((0, 32), (1, 28), (2, 16))): 546,
+            (7, ((0, 25), (1, 36), (2, 13), (4, 2))): 546,
+            (8, ((0, 16), (1, 40), (2, 20))): 273,
+            (9, ((0, 18), (1, 32), (2, 24), (5, 2))): 546,
+            (12, ((0, 7), (1, 34), (2, 27), (3, 4), (5, 4))): 546,
+        }
+    )
+
+    adjacency = [
+        sum(
+            1 << second
+            for second in range(78)
+            if first != second
+            and pair_concurrences[tuple(sorted((first, second)))] in {7, 9, 12}
+        )
+        for first in range(78)
+    ]
+    seven_cliques: list[frozenset[int]] = []
+
+    def maximal_cliques(
+        clique: list[int], candidates: int, excluded: int
+    ) -> None:
+        if not candidates and not excluded:
+            if len(clique) >= 7:
+                seven_cliques.append(frozenset(clique))
+            return
+        if len(clique) + candidates.bit_count() < 7:
+            return
+        union = candidates | excluded
+        pivot = max(
+            (index for index in range(78) if union >> index & 1),
+            key=lambda index: (candidates & adjacency[index]).bit_count(),
+            default=0,
+        )
+        extensions = candidates & ~adjacency[pivot]
+        while extensions:
+            bit = extensions & -extensions
+            vertex = bit.bit_length() - 1
+            maximal_cliques(
+                clique + [vertex],
+                candidates & adjacency[vertex],
+                excluded & adjacency[vertex],
+            )
+            candidates &= ~bit
+            excluded |= bit
+            extensions &= ~bit
+
+    maximal_cliques([], (1 << 78) - 1, 0)
+    assert len(seven_cliques) == 1716
+    reconstructed_rows = {
+        clique
+        for clique in seven_cliques
+        if all(
+            triple_concurrences[triple] == 0
+            for triple in itertools.combinations(sorted(clique), 3)
+        )
+    }
+    actual_rows = {
+        frozenset(
+            index
+            for index, point in enumerate(internal)
+            if incident(line, point)
+        )
+        for line in passants
+    }
+    assert len(reconstructed_rows) == 78
+    assert reconstructed_rows == actual_rows
+
 
 def main() -> None:
     four_cliques = [
@@ -325,7 +410,10 @@ def main() -> None:
         for clique in five_cliques
     )
     verify_distance()
-    print("C611 independent replay: PASS (omega = 5, d = 12, 364 minimum words)")
+    print(
+        "C611 independent replay: PASS "
+        "(omega = 5, d = 12, 364 minimum words, 78 rows recovered)"
+    )
 
 
 if __name__ == "__main__":
