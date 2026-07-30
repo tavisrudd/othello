@@ -161,8 +161,21 @@ explicitly separated.
   interior step is singular.  Exact elimination leaves phasewise Schur
   complements of sizes \(5|6|7\), \(5|6|7\), \(6|7|9\), and
   \(7|9|11\).  Their selected endpoint determinants are nonzero on the
-  exact finite audit \(6\le r\le35\), but all-\(r\) transversality remains
-  open.
+  exact finite audit \(6\le r\le35\); the following scalar-chain theorem
+  supersedes that finite evidence as the load-bearing transversality proof.
+- All-\(r\) transversality is now proved for the four exceptional types.
+  On coefficient-chain residues \(4,2,2,0\), the growing block problems
+  collapse to scalar codimension-one \(C_5\) chains.  A two-coordinate
+  boundary minor detects whether \(D_n^\dagger D_n\) preserves the incoming
+  hyperplane.  Its exact rational obstruction has numerator degree
+  \(17,18,17,18\), respectively; after \(r=6+s\), every numerator
+  coefficient is negative and every denominator is positive.  Thus the
+  obstruction is strictly negative on the full real ray \(r\ge6\).
+  The canonical Fischer endpoint
+  \(x=D_{n-6}^\dagger D_n^\dagger D_ny\) has positive Schur contraction.
+  Consequently all sixty-three monotone entrances, and hence every graded
+  path corner, now propagate.  The old arbitrary coordinate endpoints are
+  no longer load-bearing.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -191,22 +204,15 @@ explicitly separated.
 ## Active order
 
 The later McKay-corner classification is active.  The all-weight
-two-sided-defect gate, every modulo-\(60\) plateau-entry phase, and all
-twenty-one eventual strict peak families in the full graded path corner
-are closed.  The trivial family has its scalar signed/Hermite pencil; the
-\(2,3,3'\) families have signed block Wronskians and all-\(q\)
-boundary-quotient surjectivity.  Their global \((F,h)\)-Weyl operators
-cover every periodic phase.  Bare multiplicity induction is retired.  The
-next gate is the off-peak full graded path-corner step; identifying that
-path corner with the algebra of the three local returns remains logically
-separate.  Maximal rank is now proved, and fifty-one of the sixty-three
-monotone entrance quotients are controlled.  The signed global block Schur
-complements for the four exceptional types
-\(4_6,4_{s,3},5_4,6_5\) modulo \(20\) are now derived, and all their
-interior backward blocks are nonsingular.  The exact next gate is an
-invariant-cone, Wronskian, or equivalent proof that their endpoint
-contractions are nonzero for every \(r\ge6\).
-C682 remains open.
+two-sided-defect gate, every modulo-\(60\) plateau-entry phase, all
+twenty-one eventual strict peak families, every off-peak propagation step,
+and all sixty-three monotone entrance phases are closed.  The last twelve
+entrances are controlled by exact scalar \(C_5\)-chain boundary
+obstructions on the full real ray \(r\ge6\).  Thus the full graded path
+corner propagates in every McKay block and every weight, apart from the
+already isolated degree-\(22\) full-corner failure.  The exact next gate is
+the logically separate identification of this path corner with the algebra
+of the three local returns.  C682 remains open.
 
 ## Parked branches
 
@@ -224,3 +230,5 @@ Latest proof bundle:
 `notes/2026-07-29-c682-monotone-entrance-propagation.md`.
 Latest exceptional-transfer bundle:
 `notes/2026-07-30-c682-exceptional-monotone-schur.md`.
+All-\(r\) exceptional transversality bundle:
+`notes/2026-07-30-c682-all-r-schur.md`.

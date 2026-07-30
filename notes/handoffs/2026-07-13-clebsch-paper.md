@@ -27,7 +27,7 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on bounded cold-read revision, then external publication authority | correct the rational module sentence, trust boundary, closest literature, and opening hierarchy; rerun gates |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; exceptional Schur recurrences derived | prove all-\(r\) endpoint transversality in four modulo-\(20\) types |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; every graded path corner propagates | identify the path corner with the algebra of the three local returns |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -277,18 +277,24 @@ degree-four polynomials on all twenty-one eventual strict peak families;
   weight.  The order-three ODE bound, central parity, \(C_5\)-weights, and
   triangular \(d_1/d_{11}\) chain minors prove the exact kernel series.
   Consequently all off-peak full graded path corners in \(1,2,3,3'\) now
-  propagate.  The remaining path-corner gate is exactly sixty-three
-  modulo-\(60\) plateau entrances in the monotone
-  \(2',4,4_s,5,6\) modules; the three-local-return identification remains
-  logically separate.
+  propagate.  The subsequent monotone analysis closes all sixty-three
+  modulo-\(60\) plateau entrances in \(2',4,4_s,5,6\); the
+  three-local-return identification remains logically separate.
 The four exceptional modulo-\(20\) block Schur recurrences are now explicit.
 The global level \(\lfloor b/3\rfloor\) makes all twelve phases block
 tridiagonal, their backward blocks factor only at
 \(0,\pm1/3,\pm2/3\), and exact elimination leaves complements of sizes
 \(5|6|7\), \(5|6|7\), \(6|7|9\), and \(7|9|11\).  The selected endpoint
 determinants are nonzero on the exact finite audit \(6\le r\le35\).
-The remaining gate is an all-\(r\) signed-cone, Wronskian, or equivalent
-transversality proof; no unrestricted endpoint claim is yet made.
+The all-\(r\) gate is now closed by scalar \(C_5\)-chain boundary
+obstructions.  On chain residues \(4,2,2,0\), exact two-coordinate minors
+show that \(D_n^\dagger D_n\) never preserves the incoming hyperplane in
+\(4_6,4_{s,3},5_4,6_5\).  Their rational obstructions are strictly negative
+on the full real ray \(r\ge6\), and the canonical Fischer endpoint has
+positive Schur contraction.  Hence all sixty-three monotone entrance phases
+and every graded path corner now propagate.  The only remaining
+McKay-corner gate is the logically separate identification with the algebra
+of the three local returns.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

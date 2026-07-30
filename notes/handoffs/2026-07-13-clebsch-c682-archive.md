@@ -1114,3 +1114,38 @@ sixty-three modulo-\(60\) plateau entrances, twenty-one types modulo
 \(20\), in the monotone \(2',4,4_s,5,6\) modules.  The proof,
 independent two-prime replay, `ej`/`tt` closeout, and Mystery ledger are in
 `notes/2026-07-29-c682-all-weight-maximal-rank.md`.
+
+The monotone global-Weyl pass closes fifty-one of those sixty-three phases.
+The twelve residual phases are four modulo-\(20\) types
+\(4_6,4_{s,3},5_4,6_5\).  Ordering by
+\(\lfloor b/3\rfloor\) makes their incoming maps block tridiagonal, with
+interior sizes \(4,4,5,6\); every backward determinant factors only at
+the boundary and virtual levels \(0,\pm1/3,\pm2/3\).  Exact elimination
+leaves fixed Schur complements of sizes
+\(5|6|7\), \(5|6|7\), \(6|7|9\), and \(7|9|11\), whose selected coordinate
+determinants are nonzero for \(6\le r\le35\).  This finite structural
+reduction and replay are in
+`notes/2026-07-30-c682-exceptional-monotone-schur.md`.
+
+The unrestricted transversality gate is now closed without extrapolating
+those coordinate determinants.  On coefficient-chain residues \(4,2,2,0\),
+each exceptional entrance has a scalar codimension-one \(C_5\) chain.  If
+\(\lambda\) spans its cokernel and \(T=D_n^\dagger D_n\), a
+two-coordinate boundary minor detects whether
+\(\lambda^{\mathsf T}T\) is proportional to \(\lambda^{\mathsf T}\).
+The four exact obstructions have numerator degrees \(17,18,17,18\);
+after \(r=6+s\), every numerator coefficient is negative, while their
+denominators
+\[
+r-\tfrac56,\quad
+(r-\tfrac{11}{12})(r-\tfrac7{12}),\quad
+r-\tfrac{14}{15},\quad
+(r-\tfrac{49}{60})(r-\tfrac{29}{60})
+\]
+are positive.  Thus every obstruction is strictly negative on the whole
+real ray \(r\ge6\).  The canonical Fischer endpoint
+\(x=D_{n-6}^\dagger T y\) has positive Schur contraction, so all
+sixty-three monotone phases and every graded path corner propagate.  The
+exact proof, dense-polynomial replay, `ej`/`tt` closeout, and Mystery ledger
+are in `notes/2026-07-30-c682-all-r-schur.md`.  Identifying the full path
+corner with the algebra of the three local returns remains separate.

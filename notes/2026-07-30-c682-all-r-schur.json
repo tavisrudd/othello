@@ -1,0 +1,352 @@
+{
+  "canonical_positive_endpoint": "For a Fischer-unit cokernel vector y, take x=D_{n-6}^dagger T y. The certified obstruction makes x nonzero, and <y,T D_{n-6}x>=<x,x>>0.",
+  "schema": "c682-all-r-signed-schur-v1",
+  "theorem": "At every exceptional entrance 4_6, 4s_3, 5_4, and 6_5 with r>=6, T=D_n^dagger D_n does not preserve the incoming hyperplane im(D_{n-6}). Hence an endpoint x has a nonzero signed Schur contraction, and all twelve modulo-60 entrances are transverse.",
+  "trusted_boundary": "The primary proof uses the closed monomial transvectant formula, the already proved all-weight maximal-rank theorem, and the exact Kostant generator degrees. The 105-point identity grids are proofs within the recorded formal rational degree bounds, not finite nonvanishing samples.",
+  "types": {
+    "4_6": {
+      "boundary_eigen_obstruction": {
+        "boundary_side": "right",
+        "denominator_roots": [
+          "5/6"
+        ],
+        "fitted_degrees": {
+          "denominator": 1,
+          "numerator": 17
+        },
+        "formal_true_degree_bounds": {
+          "cleared_difference_against_formula": 37,
+          "denominator": 18,
+          "numerator": 36
+        },
+        "identity_grid": [
+          6,
+          110
+        ],
+        "identity_grid_count": 105,
+        "shifted_numerator_positive_scale": "408032722944000000000000",
+        "shifted_numerator_primitive_coefficients": [
+          -3106168253642665880672397341220,
+          -9381584230984873305581029602147,
+          -13331465131545205353827277029766,
+          -11837747965227231215188402636653,
+          -7356443075008888650002172739374,
+          -3395326544775604473237054953720,
+          -1205206503969980443626905853200,
+          -336059088699899067804348358000,
+          -74523767667412535865122180000,
+          -13218237446703592577111200000,
+          -1875218430925440207872000000,
+          -211570492219375129320000000,
+          -18751347996115759600000000,
+          -1278132880557992000000000,
+          -64704463476160000000000,
+          -2292449984000000000000,
+          -50752192000000000000,
+          -528640000000000000
+        ],
+        "sign_conclusion": "strictly negative for every real r>=6"
+      },
+      "entrance_degrees": "n=6+20r, r>=6",
+      "module": "4",
+      "selected_chain": {
+        "C5_weight": 2,
+        "conclusion": "the selected coefficient chain has a unique new 4-weight line",
+        "current_chain_residue": 2,
+        "periodicity_reason": "after r>=6, translation r->r+3 adds degree 60; every compatible 12a+20b generator ray gains one term on both sides, so the displayed multiplicity deltas repeat",
+        "source_chain_residue": 4,
+        "three_phase_audit": {
+          "0": {
+            "nonzero_multiplicity_deltas": {
+              "1": -1,
+              "3p": 1,
+              "4": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "4"
+            ],
+            "r": 6
+          },
+          "1": {
+            "nonzero_multiplicity_deltas": {
+              "1": -1,
+              "3p": 1,
+              "4": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "4"
+            ],
+            "r": 7
+          },
+          "2": {
+            "nonzero_multiplicity_deltas": {
+              "1": -1,
+              "3p": 1,
+              "4": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "4"
+            ],
+            "r": 8
+          }
+        }
+      }
+    },
+    "4s_3": {
+      "boundary_eigen_obstruction": {
+        "boundary_side": "right",
+        "denominator_roots": [
+          "11/12",
+          "7/12"
+        ],
+        "fitted_degrees": {
+          "denominator": 2,
+          "numerator": 18
+        },
+        "formal_true_degree_bounds": {
+          "cleared_difference_against_formula": 38,
+          "denominator": 18,
+          "numerator": 36
+        },
+        "identity_grid": [
+          6,
+          110
+        ],
+        "identity_grid_count": 105,
+        "shifted_numerator_positive_scale": "318775564800000000000",
+        "shifted_numerator_primitive_coefficients": [
+          -18111225867749648357979579854068539,
+          -58573681231120567375496015028893715,
+          -89443903106822313584659471320329253,
+          -85689129533770110167682821258488425,
+          -57713849651596980605606176729355064,
+          -29020688622900230009154730836822060,
+          -11290569424345538344428298536822800,
+          -3475051631662060045639949858544000,
+          -857772519473755046691105005760000,
+          -171073805670561818074521590400000,
+          -27632833133356915948592832000000,
+          -3606345655266903408506880000000,
+          -377462464143810842931200000000,
+          -31254750069113909760000000000,
+          -2002335426971719680000000000,
+          -95769803736268800000000000,
+          -3220303699968000000000000,
+          -67934208000000000000000,
+          -676659200000000000000
+        ],
+        "sign_conclusion": "strictly negative for every real r>=6"
+      },
+      "entrance_degrees": "n=3+20r, r>=6",
+      "module": "4s",
+      "selected_chain": {
+        "C5_weight": -2,
+        "conclusion": "the selected coefficient chain has a unique new 4s-weight line",
+        "current_chain_residue": 0,
+        "periodicity_reason": "after r>=6, translation r->r+3 adds degree 60; every compatible 12a+20b generator ray gains one term on both sides, so the displayed multiplicity deltas repeat",
+        "source_chain_residue": 2,
+        "three_phase_audit": {
+          "0": {
+            "nonzero_multiplicity_deltas": {
+              "2": 1,
+              "4s": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "4s"
+            ],
+            "r": 6
+          },
+          "1": {
+            "nonzero_multiplicity_deltas": {
+              "2": 1,
+              "4s": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "4s"
+            ],
+            "r": 7
+          },
+          "2": {
+            "nonzero_multiplicity_deltas": {
+              "2": 1,
+              "4s": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "4s"
+            ],
+            "r": 8
+          }
+        }
+      }
+    },
+    "5_4": {
+      "boundary_eigen_obstruction": {
+        "boundary_side": "right",
+        "denominator_roots": [
+          "14/15"
+        ],
+        "fitted_degrees": {
+          "denominator": 1,
+          "numerator": 17
+        },
+        "formal_true_degree_bounds": {
+          "cleared_difference_against_formula": 37,
+          "denominator": 18,
+          "numerator": 36
+        },
+        "identity_grid": [
+          6,
+          110
+        ],
+        "identity_grid_count": 105,
+        "shifted_numerator_positive_scale": "326426178355200000000000",
+        "shifted_numerator_primitive_coefficients": [
+          -2862736996586570586547443779400,
+          -8803281895225612081554874248954,
+          -12736641672861644774349243396855,
+          -11514668526620898971339515336569,
+          -7285380135515665072712838661935,
+          -3423454550686729755691893577225,
+          -1237199855152035591463809001250,
+          -351225561652318475636883357500,
+          -79296506328842524877182925000,
+          -14319184490591305627017500000,
+          -2068134552047050974755000000,
+          -237553220694094559250000000,
+          -21434528065747070500000000,
+          -1487406760954210000000000,
+          -76657914569200000000000,
+          -2764956784000000000000,
+          -62316880000000000000,
+          -660800000000000000
+        ],
+        "sign_conclusion": "strictly negative for every real r>=6"
+      },
+      "entrance_degrees": "n=4+20r, r>=6",
+      "module": "5",
+      "selected_chain": {
+        "C5_weight": -1,
+        "conclusion": "the selected coefficient chain has a unique new 5-weight line",
+        "current_chain_residue": 0,
+        "periodicity_reason": "after r>=6, translation r->r+3 adds degree 60; every compatible 12a+20b generator ray gains one term on both sides, so the displayed multiplicity deltas repeat",
+        "source_chain_residue": 2,
+        "three_phase_audit": {
+          "0": {
+            "nonzero_multiplicity_deltas": {
+              "1": 1,
+              "5": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "5"
+            ],
+            "r": 6
+          },
+          "1": {
+            "nonzero_multiplicity_deltas": {
+              "1": 1,
+              "5": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "5"
+            ],
+            "r": 7
+          },
+          "2": {
+            "nonzero_multiplicity_deltas": {
+              "1": 1,
+              "5": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "5"
+            ],
+            "r": 8
+          }
+        }
+      }
+    },
+    "6_5": {
+      "boundary_eigen_obstruction": {
+        "boundary_side": "left",
+        "denominator_roots": [
+          "49/60",
+          "29/60"
+        ],
+        "fitted_degrees": {
+          "denominator": 2,
+          "numerator": 18
+        },
+        "formal_true_degree_bounds": {
+          "cleared_difference_against_formula": 38,
+          "denominator": 18,
+          "numerator": 36
+        },
+        "identity_grid": [
+          6,
+          110
+        ],
+        "identity_grid_count": 105,
+        "shifted_numerator_positive_scale": "1275102259200000000",
+        "shifted_numerator_primitive_coefficients": [
+          -6238698847535318320358629822953777492,
+          -19819800985709463226785119944502370171,
+          -29730342523347305131480747549687195065,
+          -27978801846583911477400486886803406550,
+          -18511408017058478094036360314804686500,
+          -9143763310592766787379025471019455000,
+          -3494562344162482709804207243172500000,
+          -1056573552623590347705639283356000000,
+          -256196964809014026439564853280000000,
+          -50193861485210200434884436000000000,
+          -7964520193667311017840816000000000,
+          -1021105345368196437335040000000000,
+          -104989982511126719859200000000000,
+          -8540099389296761472000000000000,
+          -537475224833809920000000000000,
+          -25253808083251200000000000000,
+          -834206785536000000000000000,
+          -17288048640000000000000000,
+          -169164800000000000000000
+        ],
+        "sign_conclusion": "strictly negative for every real r>=6"
+      },
+      "entrance_degrees": "n=5+20r, r>=6",
+      "module": "6",
+      "selected_chain": {
+        "C5_weight": -1,
+        "conclusion": "the selected coefficient chain has a unique new 6-weight line",
+        "current_chain_residue": 3,
+        "periodicity_reason": "after r>=6, translation r->r+3 adds degree 60; every compatible 12a+20b generator ray gains one term on both sides, so the displayed multiplicity deltas repeat",
+        "source_chain_residue": 0,
+        "three_phase_audit": {
+          "0": {
+            "nonzero_multiplicity_deltas": {
+              "6": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "6"
+            ],
+            "r": 6
+          },
+          "1": {
+            "nonzero_multiplicity_deltas": {
+              "6": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "6"
+            ],
+            "r": 7
+          },
+          "2": {
+            "nonzero_multiplicity_deltas": {
+              "6": 1
+            },
+            "positive_delta_modules_at_selected_weight": [
+              "6"
+            ],
+            "r": 8
+          }
+        }
+      }
+    }
+  }
+}
