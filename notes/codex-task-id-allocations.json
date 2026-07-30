@@ -1619,8 +1619,17 @@
       "last": 688,
       "purpose": "generic local first-wall checker replacing the C665 q=169 specialization",
       "sequence": 180
+    },
+    {
+      "count": 1,
+      "first": 689,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 689,
+      "purpose": "close the shared B3 H3 radial-nonvanishing mechanism after C688",
+      "sequence": 181
     }
   ],
-  "next_id": 689,
+  "next_id": 690,
   "schema": "codex-task-id-allocations-v1"
 }
