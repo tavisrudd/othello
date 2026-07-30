@@ -1055,3 +1055,32 @@ administrative edit is selected.
 **Evidence:** CHECKED against the C680 closure brief and bounded tracked-file
 lookup.
 **Status:** open lead.
+
+### 2026-07-29 — one six-axis determinant character behind C691 and C697
+
+**Provenance:** C697 `ej` comparison with the already completed C691
+two-graph theorem.
+**Was I looking for this?:** no — C697 classified the Cartan carrier's
+arithmetic and Hodge conjugations, while C691 separately identified the
+Paper I support cubic with the golden continuation two-graph.
+**Observed / musing:** the two orientation characters are the same character
+of the common six-axis normalizer.  In C691, the outer
+\(S_5/A_5\) coset negates both the two-graph cubic and its conference
+operator.  In C697, the determinant of the six-axis permutation module
+is trivial on \(A_5\simeq\operatorname{PSL}_2(5)\) and nontrivial on the
+outer coset in
+\(\operatorname{PGL}_2(5)\simeq S_5\); for example
+\(x\mapsto2x\) acts on \(\mathbf P^1(\mathbf F_5)\) by one four-cycle and
+has determinant \(-1\).  Thus C691's cubic orientation torsor is a
+candidate source of the determinant-row twist needed to descend C697's
+Cartan cubic from \(\mathbf Q(\sqrt5)\) to \(\mathbf Q\).
+**Why it may matter / strongest question:** does the two-graph orientation
+line canonically tensor one Cartan row so that the mixed and Pfaffian
+summands acquire the same full-normalizer character?  A positive answer
+would give an intrinsic rational descent of the abstract \(27\) without
+claiming a Hodge realization; a negative answer should identify the
+missing linearization rather than another sign coincidence.
+**Evidence:** REASONED from C691's proved \(S_5/A_5\) character and C697's
+checked six-point determinant signs; no cross-paper tensor map has been
+constructed.
+**Status:** open lead.
