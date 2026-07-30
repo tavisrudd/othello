@@ -140,3 +140,5 @@ Uniform closure:
 
 Replay-compression successor:
 `notes/clebsch-tasks/c688-generic-first-wall-checker.md`.
+Conceptual radial-mechanism successor after C688:
+`notes/clebsch-tasks/c689-shared-radial-nonvanishing.md`.
