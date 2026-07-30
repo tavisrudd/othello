@@ -181,7 +181,7 @@
       "row": 26,
       "sha256": "4c80b78f56a7acb84cafc60cbbd7b2995489098be1c2304ddad496e25ebed5dc",
       "source": "clebsch_rigidity.tex",
-      "source_line": 1207,
+      "source_line": 1211,
       "tex": "\\begin{proposition}[The Clebsch-family uncovered formula]\n\\label{prop:clebsch-family-uncovered}\nLet $K$ be a Clebsch hexagon over $\\F_q$; equivalently, $K$ is a six-arc\nwith ten Brianchon points. By Dye's existence theorem, the characteristic\nis not two and $5$ has a square root in $\\F_q$, possibly zero in\ncharacteristic five. Then\n\\[\n |\\cU(K)|=q^2-14q+45.\n\\]\nIf $q\\equiv3\\pmod4$ and $\\cC$ is Dye's associated conic, then\n$\\cC(\\F_q)\\subseteq\\cU(K)$ and\n\\[\n |\\cU(K)\\setminus\\cC(\\F_q)|=(q-4)(q-11).\n\\]\nIn particular, among Clebsch hexagons in this congruence class, the\nassociated conic is the complete projective deep-hole syndrome locus if and\nonly if $q=11$.\n\\end{proposition}",
       "title": "The Clebsch-family uncovered formula"
     },
@@ -190,11 +190,11 @@
       "id": "thm:q13-tangent-code+thm:small-k-conic-filling",
       "kind": "theorem-environment",
       "row": 29,
-      "sha256": "a0a37515ca86dc00793eb3ac0ff079c2bc5538076ab0177c83ecf9bb38eff62c",
+      "sha256": "1445ccbd969d521672b167d475a9bf135ef30d3ada5b61ed10cb1e627ddceb8d",
       "source": "clebsch_rigidity_computational_companion.tex",
-      "source_line": 373,
-      "tex": "\\begin{theorem}[Tangent-code theorem]\n\\label{thm:q13-tangent-code}\nThe binary code $K=\\ker M$ has parameters\n\\[\n [78,36,12]_2.\n\\]\nThere are exactly $364$ minimum words.  Under\n$\\operatorname{PGL}(2,13)$ they form four orbits of size $91$, one with\nstabilizer $S_4$ and three with stabilizer $D_{24}$.  Each orbit spans\n$K$.\n\nThe minimum supports intrinsically reconstruct the full six-class\nelliptic association scheme on the $78$ internal points.  Pair concurrence\nrecovers passant versus secant join type, triple concurrence separates the\nsix orbitals, and the $78$ all-zero-triple seven-cliques are exactly the\npassant incidence rows.  Consequently the minimum layer reconstructs $M$\nup to row order, and its automorphism group is\n$\\operatorname{PGL}(2,13)$.\n\\end{theorem}\n\n\\begin{theorem}[Conic-filling loci through eight points]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le8$, and suppose that $\\cU(A)$ is the full set of\n$\\F_q$-rational points of a nonsingular conic. Then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur.\n\nMoreover, for each $q\\in\\{13,17,19\\}$, an arc all of whose chords are\npassant to a fixed nonsingular conic has at most six points, and this bound\nis attained.\n\\end{theorem}",
-      "title": "Tangent-code theorem; Conic-filling loci through eight points"
+      "source_line": 374,
+      "tex": "\\begin{theorem}[Passant-code theorem]\n\\label{thm:q13-tangent-code}\nThe binary code $K=\\ker M$ has parameters\n\\[\n [78,36,12]_2.\n\\]\nThere are exactly $364$ minimum words.  Under\n$\\operatorname{PGL}(2,13)$ they form four orbits of size $91$, one with\nstabilizer $S_4$ and three with stabilizer $D_{24}$.  Each orbit spans\n$K$.\n\nThe minimum supports intrinsically reconstruct the full six-class\nelliptic association scheme on the $78$ internal points.  Pair concurrence\nrecovers passant versus secant join type, triple concurrence separates the\nsix orbitals, and the $78$ all-zero-triple seven-cliques are exactly the\npassant incidence rows.  Consequently the minimum layer reconstructs $M$\nup to row order, and its automorphism group is\n$\\operatorname{PGL}(2,13)$.\n\\end{theorem}\n\n\\begin{theorem}[Conic-filling loci through eight points]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le8$, and suppose that $\\cU(A)$ is the full set of\n$\\F_q$-rational points of a nonsingular conic. Then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur.\n\nMoreover, for each $q\\in\\{13,17,19\\}$, an arc all of whose chords are\npassant to a fixed nonsingular conic has at most six points, and this bound\nis attained.\n\\end{theorem}",
+      "title": "Passant-code theorem; Conic-filling loci through eight points"
     },
     {
       "id": "fifteen-class-census-table",
@@ -207,8 +207,8 @@
     }
   ],
   "companion_source": "clebsch_rigidity_computational_companion.tex",
-  "companion_source_sha256": "2a28b6eeb38c8d2fa8dd62a842ca41cc9d618e3ecd5cd18b79e343de2f7aafa4",
+  "companion_source_sha256": "d8c129f256f99b5083e1b6bd0c61b0def26f11c501e3f1b9c2d4da16c46e8c98",
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "ca4e6e45ea75870a61bfa06376fd5ee74c1d07d77b79f81972e2b5326af25bec"
+  "source_sha256": "24ed766c2f66ab591fb657bdc1c826e416c17b6948de5cc0549f7becd15b6025"
 }

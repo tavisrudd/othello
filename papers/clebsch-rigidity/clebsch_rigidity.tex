@@ -1096,7 +1096,8 @@ form one class up to relabeling, proving uniqueness.
 It remains to see that the cubic itself recovers the six axes.  Use
 translation invariance to set $x_0=0$, write $y_i=x_i-x_0$, and cover
 projective space by the five charts in which the last nonzero $y_r$ is
-$1$.  Exact Buchberger reduction of the five gradient ideals gives
+$1$.  These gradient ideals are taken over $\mathbf Q$ in the remaining
+chart variables.  Exact Buchberger reduction gives
 \[
 \begin{array}{c|l}
 r&\text{reduced lexicographic basis}\\ \hline
@@ -1107,6 +1108,9 @@ r&\text{reduced lexicographic basis}\\ \hline
 5&y_1-y_4,\ y_2-y_4,\ y_3-y_4,\ y_4(y_4-1).
 \end{array}
 \]
+For $r=1$ there are no remaining variables; the empty list denotes the
+zero ideal in the zero-variable ring $\mathbf Q$, hence one affine chart
+point.
 Thus the first four charts contribute one coordinate point each, and the
 last contributes the fifth coordinate point and $(1,1,1,1,1)$.  These are
 exactly the six classes $p_a=[\mathbf1-6e_a]$.
@@ -1319,7 +1323,7 @@ Its pinned artifacts are
 \begin{center}
 \small
 certificate-package commit:
-\path{c5e2d8997ed86dcbcd431b0d4a546983f7baf812}\\
+\path{35808ac74c71df5ad5e88556092c56d78d71b345}\\
 base-library commit:
 \path{81227352974bf7d28f84cb6866936f842fb4de02}\\
 aggregate gate:
@@ -1386,6 +1390,21 @@ material, and assumes responsibility for all content.
 \raggedright
 \begin{thebibliography}{99}
 
+\bibitem{BallLavrauw2019}
+S.~Ball and M.~Lavrauw,
+\newblock Arcs in finite projective spaces,
+\newblock \emph{EMS Surveys in Mathematical Sciences} \textbf{6} (2019),
+133--172.
+\newblock arXiv:1908.10772.
+
+\bibitem{BicharaKorchmaros1982}
+A.~Bichara and G.~Korchm\'aros,
+\newblock Note on $(q+2)$-sets in a Galois plane of order $q$,
+\newblock in \emph{Combinatorial and Geometric Structures and Their
+Applications}, Annals of Discrete Mathematics \textbf{14}, North-Holland,
+1982, 117--121.
+\newblock doi:10.1016/S0304-0208(08)73588-6.
+
 \bibitem{BBS2010}
 A.~Blokhuis, A.~E.~Brouwer, and T.~Sz\H{o}nyi,
 \newblock Covering all points except one,
@@ -1399,45 +1418,11 @@ A.~Blokhuis, Á.~Seress, and H.~A.~Wilbrink,
 \newblock \emph{Combinatorica} \textbf{12}(2) (1992), 143--147.
 \newblock doi:10.1007/BF01204717.
 
-\bibitem{BicharaKorchmaros1982}
-A.~Bichara and G.~Korchm\'aros,
-\newblock Note on $(q+2)$-sets in a Galois plane of order $q$,
-\newblock in \emph{Combinatorial and Geometric Structures and Their
-Applications}, Annals of Discrete Mathematics \textbf{14}, North-Holland,
-1982, 117--121.
-\newblock doi:10.1016/S0304-0208(08)73588-6.
-
-\bibitem{Clebsch1871}
-A.~Clebsch,
-\newblock Ueber die Anwendung der quadratischen Substitution auf die
-Gleichungen 5-ten Grades und die geometrische Theorie des ebenen Fünfseits,
-\newblock \emph{Mathematische Annalen} \textbf{4} (1871), 284--345.
-
 \bibitem{CTZ2025}
 I.~Cheltsov, Y.~Tschinkel, and Z.~Zhang,
 \newblock Equivariant geometry of singular cubic threefolds,
 \newblock \emph{Forum of Mathematics, Sigma} \textbf{13} (2025), e9.
 \newblock doi:10.1017/fms.2024.148; arXiv:2401.10974v2.
-
-\bibitem{DuncanHoffmanSolazzo2011}
-D.~M.~Duncan, T.~R.~Hoffman, and J.~P.~Solazzo,
-\newblock Numerical measures for two-graphs,
-\newblock \emph{Rocky Mountain Journal of Mathematics} \textbf{41}(1)
-(2011), 133--154.
-\newblock doi:10.1216/RMJ-2011-41-1-133; arXiv:0810.3189.
-
-\bibitem{Edge1956}
-W.~L.~Edge,
-\newblock Conics and orthogonal projectivities in a finite plane,
-\newblock \emph{Canadian Journal of Mathematics} \textbf{8} (1956), 362--382.
-
-\bibitem{DrakeKeating2004}
-D.~A.~Drake and K.~Keating,
-\newblock Ovals and hyperovals in Desarguesian nets,
-\newblock \emph{Designs, Codes and Cryptography} \textbf{31} (2004),
-195--212.
-\newblock \url{https://doi.org/10.1023/B:DESI.0000015883.89954.80};
-arXiv:math/0202115.
 
 \bibitem{ChengMurray2007}
 Q.~Cheng and E.~Murray,
@@ -1445,6 +1430,12 @@ Q.~Cheng and E.~Murray,
 \newblock in \emph{Theory and Applications of Models of Computation (TAMC
 2007)}, Lecture Notes in Computer Science \textbf{4484}, Springer, 2007,
 296--305.
+
+\bibitem{Clebsch1871}
+A.~Clebsch,
+\newblock Ueber die Anwendung der quadratischen Substitution auf die
+Gleichungen 5-ten Grades und die geometrische Theorie des ebenen Fünfseits,
+\newblock \emph{Mathematische Annalen} \textbf{4} (1871), 284--345.
 
 \bibitem{DMP2021}
 A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
@@ -1454,12 +1445,20 @@ A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
 \newblock arXiv:2101.12722v2.
 \newblock (Numbered results are cited by their arXiv~v2 numbering.)
 
-\bibitem{BallLavrauw2019}
-S.~Ball and M.~Lavrauw,
-\newblock Arcs in finite projective spaces,
-\newblock \emph{EMS Surveys in Mathematical Sciences} \textbf{6} (2019),
-33--45.
-\newblock arXiv:1908.10772.
+\bibitem{DrakeKeating2004}
+D.~A.~Drake and K.~Keating,
+\newblock Ovals and hyperovals in Desarguesian nets,
+\newblock \emph{Designs, Codes and Cryptography} \textbf{31} (2004),
+195--212.
+\newblock \url{https://doi.org/10.1023/B:DESI.0000015883.89954.80};
+arXiv:math/0202115.
+
+\bibitem{DuncanHoffmanSolazzo2011}
+D.~M.~Duncan, T.~R.~Hoffman, and J.~P.~Solazzo,
+\newblock Numerical measures for two-graphs,
+\newblock \emph{Rocky Mountain Journal of Mathematics} \textbf{41}(1)
+(2011), 133--154.
+\newblock doi:10.1216/RMJ-2011-41-1-133; arXiv:0810.3189.
 
 \bibitem{Dye1991}
 R.~H.~Dye,
@@ -1467,6 +1466,11 @@ R.~H.~Dye,
 \newblock \emph{Journal of the London Mathematical Society} (2) \textbf{44}
 (1991), 270--286.
 \newblock doi:10.1112/jlms/s2-44.2.270.
+
+\bibitem{Edge1956}
+W.~L.~Edge,
+\newblock Conics and orthogonal projectivities in a finite plane,
+\newblock \emph{Canadian Journal of Mathematics} \textbf{8} (1956), 362--382.
 
 \bibitem{GuruswamiVardy2005}
 V.~Guruswami and A.~Vardy,

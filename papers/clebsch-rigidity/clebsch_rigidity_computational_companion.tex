@@ -354,7 +354,8 @@ Theorem~\ref{thm:rigidity}, which puts every conic-filling six-arc over
 $\F_{11}$ in the single Clebsch orbit.
 \end{proof}
 
-\section{The binary passant code at \texorpdfstring{$q=13$}{q=13}}
+\section{The binary passant/internal incidence code at
+\texorpdfstring{$q=13$}{q=13}}
 \label{sec:q13-tangent-code}
 
 Fix the conic $\cC:XZ-Y^2=0$ in $\PG(2,13)$.  Let $M$ be the
@@ -370,7 +371,7 @@ scheme used below are known.  The assertions here are the exact minimum
 distance and the intrinsic reconstruction of the incidence matrix and
 scheme from the minimum words.
 
-\begin{theorem}[Tangent-code theorem]
+\begin{theorem}[Passant-code theorem]
 \label{thm:q13-tangent-code}
 The binary code $K=\ker M$ has parameters
 \[
@@ -455,8 +456,12 @@ extends.  The local clique number is therefore five, not seven.  This
 excludes weight eight.
 
 For weight ten, fix one support point.  Parity leaves only two passant-pencil
-profiles: three points on one passant and one on each of the other six, or
-one on each passant together with two secant-join neighbors.  Exact
+profiles.  If $s$ of the other nine support points are joined to the fixed
+point by secants, the remaining $9-s$ points are distributed in positive
+odd numbers among its seven passants.  Hence $s$ is even and
+$9-s\ge7$, so $s=0$ or $2$.  These give, respectively, three points on one
+passant and one on each of the other six, or one on every passant together
+with two secant-join neighbors.  Exact
 meet-in-the-middle syndrome checks exhaust respectively
 \[
  7\binom63 6^6=6{,}531{,}840,\qquad
@@ -642,7 +647,7 @@ $q=9$ exclusion and uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py} \\
 Seven-arc exclusions at $q=11,13$
 & \path{check_small_k_conic_filling.py} \\
-$q=13$ tangent code and minimum layer
+$q=13$ passant/internal incidence code and minimum layer
 & \path{check_q13_tangent_code.py} \\
 Passant-arc bound for $q=13,17,19$
 & \path{verification/conic_filling_verify.py} \\
@@ -667,7 +672,7 @@ and uncovered-set size has a four-point gap above it.  Across fields, the
 Sylvester obstruction makes $q=11$ unique for conic-filling six-arcs.
 Together with the terminal searches, this leaves exactly two
 conic-filling projective codes through length eight.  At the first
-terminal field, the tangent-code argument also identifies the exact binary
+terminal field, the passant-code argument also identifies the exact binary
 distance and shows that the complete minimum layer reconstructs its
 passant geometry.
 
@@ -697,17 +702,17 @@ S.~Ball and M.~Lavrauw,
 133--172.
 \newblock arXiv:1908.10772.
 
-\bibitem{BrouwerCohenNeumaier1989}
-A.~E.~Brouwer, A.~M.~Cohen, and A.~Neumaier,
-\newblock \emph{Distance-Regular Graphs},
-\newblock Ergebnisse der Mathematik und ihrer Grenzgebiete, vol.~18,
-Springer-Verlag, Berlin, 1989.
-
 \bibitem{BSW1992}
 A.~Blokhuis, Á.~Seress, and H.~A.~Wilbrink,
 \newblock Characterization of complete exterior sets of conics,
 \newblock \emph{Combinatorica} \textbf{12}(2) (1992), 143--147.
 \newblock doi:10.1007/BF01204717.
+
+\bibitem{BrouwerCohenNeumaier1989}
+A.~E.~Brouwer, A.~M.~Cohen, and A.~Neumaier,
+\newblock \emph{Distance-Regular Graphs},
+\newblock Ergebnisse der Mathematik und ihrer Grenzgebiete, vol.~18,
+Springer-Verlag, Berlin, 1989.
 
 \bibitem{Dye1991}
 R.~H.~Dye,
