@@ -1084,3 +1084,36 @@ missing linearization rather than another sign coincidence.
 checked six-point determinant signs; no cross-paper tensor map has been
 constructed.
 **Status:** open lead.
+
+### 2026-07-29 — characteristic two collapses all three six-axis sign lifts
+
+**Provenance:** second-order `ej` pass after comparing C691's two-graph
+orientation with C697's Cartan determinant character.
+**Was I looking for this?:** no — the completed tasks separately classified
+the Paper I two-graph and the Paper III graded Cartan carrier.
+**Observed / musing:** modulo \(2\), three distinctions disappear at once:
+C691's coefficients \(c_{ijk}=\pm1\) merge; C697's determinant character
+\(\det(U)\in\{\pm1\}\) becomes trivial, so raw odd six-axis permutations no
+longer distinguish the mixed and Pfaffian summands; and the signed Weyl lift
+\(x_i\mapsto y_i,\ y_i\mapsto-x_i\) becomes the unsigned order-two row
+exchange.  Thus the same orientation line predicts the symmetry jump to
+\(S_6\), the loss of the rational-descent twist, and the collapse of the
+linear-versus-label row involution at the same prime.
+**Structural mechanism:** every refinement is carried by the unique
+nontrivial \(S_5/A_5\) sign character of the six-axis normalizer, which is
+annihilated in characteristic two.
+**Predicted siblings:** any integral bridge from the C691 orientation torsor
+to the C697 Cartan row twist should have a conductor-two or non-étale special
+fibre; an integral Cartan linearization should acquire extra six-axis
+symmetry mod \(2\); primes \(11\) and \(23\) should not follow from this
+mechanism, since they are unramified lattice/conductor defects rather than
+orientation-character collapse.
+**Discriminator / falsifier:** construct the proposed integral row-twist map
+and compute its mod-\(2\) fibre.  A reduced fibre retaining the oriented
+\(A_5\) distinction, or a forced defect at \(11\) or \(23\) from the same
+determinant character, would falsify the prediction.
+**Evidence:** REASONED from the displayed C691 and C697 formulas; the first
+three mod-\(2\) collapses are immediate identities, but no integral
+cross-paper map or fibre has been constructed.
+**Status:** open structural-sibling lead; keep outside C693's Paper I v2
+integration unless separately promoted.
