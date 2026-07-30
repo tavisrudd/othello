@@ -26,7 +26,6 @@
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | active by explicit user selection; v2 only; q=13 gate closed | test q=17,19 coherent/rational certificates |
 | [C691 — cubic/golden compatibility](../clebsch-tasks/c691-paper-i-cubic-golden-compatibility.md) | queued; bounded Paper I v2 kill test | find one intrinsic map or close on the representation obstruction |
 | [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
 | [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | queued after C691 | integrate C611/C690 without importing Paper III's reveal |
@@ -94,6 +93,13 @@ defects at \(11,23\) are the same order
 \(\mathbf Z_p+p\mathcal O_p\), with inert, split, and inert normalized
 fibres respectively.
 The first open all-size full-conic gate is \(k=9\) over \(q=23,25\).
+C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
+respectively 22 and 94 projective orbits, all with empty extension sets.
+Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19
+orbits; triple distributions separate the remaining two pairs.  This is a
+finite coherent compression, not a uniform theorem.  Pair-only coherence
+cannot see the ternary arc condition, and the natural root-edge rational LP
+has exact feasible objectives 7--8 and 8--9 against the required bound 4.
 
 Local aggregate replay:
 

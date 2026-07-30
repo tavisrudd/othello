@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-25
 
-**Status:** active by explicit user selection; no Paper I v1 blocker.
+**Status:** complete; no Paper I v1 change.
 
 ## Objective
 
@@ -44,16 +44,21 @@ actual owning paper.
   \(2184\). Orbitwise generation is conceptual: the four orbit-Gram
   matrices are \(A_9,A_9,A_{12},A_{10}\), and the mod-two association
   algebra forces each passant orbital to have rank \(36\).
+- The q=17,19 coherent/rational gate is closed in
+  `notes/2026-07-29-c611-q17-q19-coherent-certificates.md`.  All maximal
+  six-arcs form 22 and 94 projective orbits.  Pair inner distributions
+  distinguish all 22 at q=17 and 92 of 94 at q=19; triple distributions
+  distinguish all 94.  Every orbit has zero valid extension.  This is an
+  exact finite compression, not a uniform theorem.  Pair-only coherence
+  loses the ternary arc condition, and the natural root-edge rational LP
+  has exact feasible values 7--8 and 8--9, far above the required bound 4.
 
 ## Work package
 
-1. retain the closed \(q=13\) tangent-triple certificate and its exact
-   Paper I v2/companion boundary;
-2. test coherent-configuration or rational-dual certificates at
-   \(q=17,19\);
-3. distinguish a uniform human theorem from a reformulation of the existing
-   searches; and
-4. assign every result to v2 or the correct neighboring paper.
+Completed.  The q=13 result and q=17,19 finite coherent compression belong
+to Paper I v2 or its computational companion.  No Paper II or III result was
+earned.  The rational and pair-coherent routes have explicit negative
+certificates, and no uniform human theorem is claimed.
 
 ## Acceptance
 
