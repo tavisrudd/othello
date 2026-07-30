@@ -87,6 +87,15 @@ explicitly separated.
   numerator and denominator chamber counts \(1|13|0|1\) and \(2|1|0|0\)
   intrinsically.  The signed form alone carries oriented Cauchy data and
   cannot supply unsigned counts.
+- The first \(2,3,3'\) plateau families now have exact block three-term
+  annihilator recurrences.  Their block sizes are \(2,3,3\), and every
+  coefficient is polynomial of total degree at most three in the family
+  parameter \(q\) and level \(j\).  The backward block determinants factor
+  completely and are nonzero for every integral \(j\ge1\); their only
+  nonboundary zeros are the virtual levels
+  \(j=\pm1/3,\pm2/3\).  The scalar Jacobi fit is superseded for the trivial
+  theorem, but its block continued-fraction analog is exactly the remaining
+  nontrivial transfer problem.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -117,10 +126,12 @@ explicitly separated.
 The later McKay-corner classification is active.  The all-weight
 two-sided-defect gate and the trivial-module plateau-entry family are
 closed, its scalar signed/Hermite pencil is constructed, and bare
-multiplicity induction is retired.  The next gate is to construct the
-corresponding fixed-width boundary witnesses and block Bezout/Hermite
-pencils for the \(2,3,3'\) Kostant modules.  The former twenty-one family
-minors remain the fallback.  C682 remains open.
+multiplicity induction is retired.  The \(2,3,3'\) fixed-width block
+recurrences are constructed and have no integral interior singularity.
+The next gate is to construct their signed block symmetrizer or discrete
+Wronskian and prove the endpoint return contraction nonzero for all
+\(q\ge1\).  The former twenty-one family minors remain the fallback.
+C682 remains open.
 
 ## Parked branches
 
@@ -135,4 +146,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-signed-boundary-pencil.md`.
+`notes/2026-07-29-c682-nontrivial-plateau-block-recurrence.md`.

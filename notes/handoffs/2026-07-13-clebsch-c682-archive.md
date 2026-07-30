@@ -1021,3 +1021,17 @@ Mystery ledger are in
 `notes/2026-07-29-c682-signed-boundary-pencil.md`.  The \(2,3,3'\) target
 is correspondingly sharpened to block boundary Bezout symmetrizers plus
 positive block Hermite forms.
+
+The nontrivial block input is now constructed.  On the first periodic
+plateau families \(n=63+60q,72+60q,70+60q\) for \(2,3,3'\), respectively,
+the annihilator is an exact block three-term recurrence of sizes \(2,3,3\);
+all entries have total degree at most three in \((q,j)\).  The backward
+block determinants factor completely and never vanish at an integral
+interior level.  Their only nonboundary zeros are the virtual levels
+\(\pm1/3,\pm2/3\), and the two rank-three modules have the same normalized
+determinant.  This resolves the status of the old Jacobi goal: a literal
+scalar Jacobi fit is superseded by the Bezout/Hermite theorem, while the
+block continued fraction is the actual remaining mechanism for the
+nontrivial modules.  The exact certificate, out-of-sample two-prime replay,
+`ej`/`tt` closeout, and Mystery ledger are in
+`notes/2026-07-29-c682-nontrivial-plateau-block-recurrence.md`.

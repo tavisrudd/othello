@@ -187,6 +187,12 @@ inertia \((8,7,0)\), while separate positive Hermite pencils derive the
 numerator and pole chamber counts \(1|13|0|1\) and \(2|1|0|0\) by exact
 spectral flow.  The next structural target is the block version of this
 two-form package for the three remaining modules.
+That block input is now explicit: the first \(2,3,3'\) plateau families
+have block three-term recurrences of sizes \(2,3,3\), with degree-three
+coefficients in \((q,j)\).  Their backward determinants have no integral
+interior zero; the only virtual singular levels are
+\(\pm1/3,\pm2/3\).  The remaining gate is a signed block symmetrizer or
+discrete Wronskian controlling the endpoint return contraction.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.
