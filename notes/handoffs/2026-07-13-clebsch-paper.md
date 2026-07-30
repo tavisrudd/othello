@@ -15,7 +15,7 @@
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | six-nodal attribution repaired; v2 referee cold read requires bounded revision before release; approved v1 baseline frozen | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | bounded v2 revision complete; authoritative and standalone eighteen-check release gates green; external publication authority remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics* | `papers/clebsch-covers/` | pre-release `GO`; immutable locator and author metadata remain | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -31,7 +31,7 @@ same progression without administrative cross-promotion.  Full report:
 
 | task | state | next gate |
 |---|---|---|
-| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on bounded cold-read revision, then external publication authority | correct the rational module sentence, trust boundary, closest literature, and opening hierarchy; rerun gates |
+| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | local release surface complete; queued on external publication authority | publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
@@ -48,14 +48,13 @@ checks. C320 is complete with final `GO`; C693 completed the accepted v2
 integration without changing the frozen v1 baseline. C182 owns every
 remaining release action.
 
-The 2026-07-30 v2 referee cold read supersedes the earlier release verdict
-for the revised paper.  The Cheltsov--Tschinkel--Zhang attribution and exact
-six-nodal coordinate boundary are now integrated.  Before release, correct
-the field-of-definition wording for the rational \(A_5\)-module, state the
-orientation theorem's computer/formal boundary accurately, add the closest
-q13 and standard two-graph sources, and integrate the orientation result
-into the novelty paragraph and conclusion.  Report:
-[`../2026-07-30-paper-i-v2-referee-cold-read.md`](../2026-07-30-paper-i-v2-referee-cold-read.md).
+The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
+\(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
+q13 and two-graph literature, opening, conclusion, and minor editorial
+points are repaired.  The extracted q11 package now ships the aggregate
+orientation axiom audit, and both authoritative and standalone trees pass
+all eighteen release checks.  Full closeout:
+[`../2026-07-30-c182-paper-i-bounded-revision.md`](../2026-07-30-c182-paper-i-bounded-revision.md).
 
 The load-bearing theorem package reconstructs the Clebsch code from the
 weight-six deep-hole syndrome locus and closes the terminal fields
@@ -156,7 +155,8 @@ Local aggregate replay:
 
 ```sh
 cd papers/clebsch-rigidity
-./scripts/verify-all.sh
+nix develop --command python3 verification/verify_release.py \
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
 ```
 
 ## Paper II

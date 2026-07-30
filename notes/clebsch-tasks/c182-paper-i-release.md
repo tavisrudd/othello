@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-15
 
-**Status:** queued; the 2026-07-30 referee cold read requires a bounded
-revision before the external publication gate.
+**Status:** bounded revision and local release gates complete; queued on
+explicit authority for the external publication gate.
 
 ## Objective
 
@@ -15,13 +15,12 @@ insert its stable identifier into the manuscript.
 
 ## Current state
 
-- The prior independent `GO` is superseded by the 2026-07-30 v2 cold read.
-- The six-nodal cubic attribution is repaired in authoritative commit
-  `67a5a249` and standalone commit `cddeb19`.
-- Before release, correct the rational \(A_5\)-module field-of-definition
-  sentence, align the orientation theorem's computational/formal boundary,
-  add the closest q13/two-graph literature, and integrate the v2 theorem
-  into the novelty paragraph and conclusion.
+- Every bounded issue from the 2026-07-30 v2 cold read is closed.
+- The authoritative source and receipt are frozen at `b765022d`; the
+  standalone paper is forward-synced at `24fdfad`.
+- Both paper trees independently pass all eighteen release checks.
+- The aggregate q11 formal package now ships its axiom audit at `35808ac7`,
+  and the manifest pins that exact commit.
 - The focused human paper and computational companion are the release target;
   the mega-paper fallback is not.
 - The manuscript already pins the shared formal repository and names the
@@ -34,8 +33,7 @@ Cold-read report:
 
 ## Next action
 
-First close the bounded cold-read revisions and rerun the paper/companion
-gates.  Then, with explicit user authority and publication credentials:
+With explicit user authority and publication credentials:
 
 1. create the public paper repository/release package;
 2. freeze the exact approved source, PDF, manifest, pins, licences, and
@@ -57,3 +55,6 @@ records, or fallback-only evidence.
 
 Full specification and final-report surface:
 `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
+
+Bounded-revision and local-gate report:
+`notes/2026-07-30-c182-paper-i-bounded-revision.md`.
