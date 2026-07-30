@@ -253,6 +253,27 @@ explicitly separated.
   recurrences agree under node conjugation through degree \(180\), while
   the equality for all degrees follows formally by conjugating the
   recurrence.
+- The bi-McKay lift now has an explicit all-degree rational Weyl
+  presentation.  Splitting the axis Klein form as
+  \(F_{\rm ax}=F_0+\sqrt5F_1\) gives
+  \[
+  \widehat\Delta=
+  \begin{pmatrix}\Delta_0&5\Delta_1\\
+  \Delta_1&\Delta_0\end{pmatrix},
+  \qquad
+  J=\begin{pmatrix}0&5I\\I&0\end{pmatrix}.
+  \]
+  Coefficientwise block multiplication proves
+  \(J\widehat\Delta=\widehat\Delta J\) in every degree.  The Fischer
+  pairing tensored with \(\operatorname{diag}(1,5)\) preserves this form
+  under adjoints, so every Gram return commutes with \(J\).  On the first
+  balanced degree-ten pair, an explicit integral matrix \(P\) satisfies
+  \(CP=PJ_3\), has determinant \(4\), and has Smith quotient
+  \((\mathbf Z/2)^2\).  The mod-\(2\) ranks
+  \(\operatorname{rank}(C-I)=1\) and
+  \(\operatorname{rank}(J_3-I)=3\) forbid integral conjugacy, while \(P\)
+  is invertible modulo \(5\); this isolates the comparison defect at \(2\)
+  from golden ramification at \(5\).
 
 ## Active order
 
@@ -264,10 +285,11 @@ identification are closed.  The nearest lower and upper Gram forms already
 generate every full block corner; degree \(22\) is the unique exact
 failure.  The direct golden/Clebsch-to-\(E_8\) gap is closed at the first
 balanced harmonic slice and has the correct bi-McKay graded descent
-formulation; an explicit all-degree coupled Weyl presentation and a
-preprojective-corner identification remain optional successors.  C682
-remains open exploration, with completion or selection of a parked branch
-left to the user.
+formulation.  Its explicit all-degree coupled Weyl presentation is also
+closed, including the exact integral index-four comparison at degree ten.
+A preprojective-corner identification remains the only nearby optional
+successor.  C682 remains open exploration, with completion or selection of
+a parked branch left to the user.
 
 ## Parked branches
 
@@ -293,3 +315,5 @@ Local-return algebra bundle:
 `notes/2026-07-30-c682-virtual-levels.md`.
 Golden/\(E_8\) descent bundle:
 `notes/2026-07-30-c682-golden-e8-descent.md`.
+All-degree golden Weyl descent bundle:
+`notes/2026-07-30-c682-golden-e8-weyl-descent.md`.
