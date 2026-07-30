@@ -36,6 +36,18 @@
         "5A": 2,
         "5B": 2
       },
+      "coefficient_integrality_witnesses": {
+        "identity_coefficient": "diagonal entry",
+        "operator_diagonal": [
+          0
+        ],
+        "operator_entries": [
+          -1,
+          0,
+          1
+        ],
+        "sqrt5_coefficient": "off-diagonal unit entry"
+      },
       "conjugate_five_orbital": {
         "bipartite": false,
         "degrees": [
@@ -70,11 +82,68 @@
         "triangles": 20,
         "vertices": 12
       },
+      "integral_commutant_discriminant": 20,
+      "integral_commutant_order": "Z[sqrt(5)]",
       "integral_golden_identity": "(A-A')^2 = 10(I-R)",
       "integral_golden_identity_verified": true,
+      "mod_2_special_fiber": "F2[u]/((u-1)^2)",
+      "normalization": "Z[(1+sqrt(5))/2]",
+      "normalization_conductor": 2,
+      "normalized_mod_2_special_fiber": "F4",
       "orbit_sizes": [
         12
       ],
+      "signed_axis_operator": [
+        [
+          0,
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          0,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1,
+          0
+        ]
+      ],
+      "signed_axis_operator_square_is_five": true,
       "stabilizer_subdegrees": [
         1,
         1,

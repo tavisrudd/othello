@@ -60,8 +60,10 @@ transitive two-cover and the double-six is its split two-cover. On the
 twisted cover, the fibre-odd module is \(3\oplus3'\), and the difference
 of the two five-orbital operators squares to \(5\) after normalization.
 Thus the continuation locus intrinsically reconstructs the golden quadratic
-algebra and its conjugation. The first open all-size full-conic gate is
-\(k=9\) over \(q=23,25\).
+algebra and its conjugation. Its natural fibre-odd integral commutant is
+the conductor-two order \(\mathbf Z[\sqrt5]\), whose mod-\(2\) fibre is a
+dual-number point and whose normalization has fibre \(\mathbf F_4\).
+The first open all-size full-conic gate is \(k=9\) over \(q=23,25\).
 
 Local aggregate replay:
 

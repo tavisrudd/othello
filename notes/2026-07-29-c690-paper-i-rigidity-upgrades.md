@@ -265,6 +265,53 @@ the golden algebra and its conjugation. The marked support/Gale calculation
 then identifies its two embeddings with the previously certified support
 sheets.
 
+### Integral refinement and the forced prime \(2\)
+
+Let
+\[
+ L^-=\{f\in\mathbf Z^{12}:f(Rx)=-f(x)\}
+\]
+be the natural fibre-odd continuation lattice. Choosing one point from
+each antipodal pair identifies \(L^-\) with \(\mathbf Z^6\). On this basis
+either five-orbital adjacency operator restricts to a signed matrix \(B\)
+with entries in \(\{0,\pm1\}\), zero diagonal, an off-diagonal unit, and
+\[
+ B^2=5I.
+\]
+Character theory gives
+\(\operatorname{End}_{\mathbf Q A_5}(L^-\otimes\mathbf Q)=\mathbf Q[B]\).
+If \(aI+bB\) preserves \(L^-\), its diagonal entries force
+\(a\in\mathbf Z\), while an off-diagonal unit entry forces
+\(b\in\mathbf Z\). Therefore
+\[
+ \boxed{\operatorname{End}_{\mathbf Z A_5}(L^-)
+ =\mathbf Z[B]\cong\mathbf Z[\sqrt5].}
+\]
+
+This is the conductor-two order of discriminant \(20\), not the maximal
+golden order
+\[
+ \mathcal O_5=\mathbf Z\!\left[\frac{1+\sqrt5}{2}\right]
+\]
+of discriminant \(5\). Normalization adjoins
+\((I+B)/2\). Consequently the association order and its normalization
+agree away from \(2\), while at \(2\)
+\[
+ \mathbf Z[\sqrt5]\otimes\mathbf F_2
+ \cong \mathbf F_2[u]/(u-1)^2
+\]
+is a dual-number point and
+\[
+ \mathcal O_5\otimes\mathbf F_2\cong\mathbf F_4
+\]
+is the inert étale normalization.
+
+Thus prime \(2\) is not merely a denominator introduced by the projector
+\((I-R)/2\): it is the exact conductor prime of the integral continuation
+commutant. This is compatible with C682's independently proved structural
+bad prime \(2\), but identifying the two integral lattices requires a
+separate integral comparison and is not asserted here.
+
 ## 4. Full-conic crown gate
 
 Let \(A\) be a conic-filling \(k\)-arc and put
@@ -349,7 +396,8 @@ incidence matrix, verifies its polarity symmetry, and computes its exact
 binary rank. It also enumerates \(A_5\), constructs the two coset actions,
 computes their characters and subdegrees, and checks the two graph
 fingerprints. It also constructs both five-orbitals and the antipodal
-relation and verifies \((A-A')^2=10(I-R)\) entrywise. The rank agrees with
+relation, verifies \((A-A')^2=10(I-R)\) entrywise, and recovers the signed
+six-axis matrix \(B\) with \(B^2=5I\). The rank agrees with
 the independent published dimension
 formula; the character values also have the closed coset-fixed-point
 derivation given above. No independent program is needed for the
@@ -361,8 +409,8 @@ support/Gale calculation and the exact cyclotomic double-six construction.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c690-rigidity-fingerprints.py` | 13266 | `1dca0c81ba6cfcc35bf83052ae9c45a91d0ca05bd9a270a07e7a3dd5d15fa520` |
-| `2026-07-29-c690-rigidity-fingerprints.json` | 2483 | `2e235ef509b1ca691563646d5c8cd5da445c4d0afc42d6c28fbc25e15acf7b83` |
+| `2026-07-29-c690-rigidity-fingerprints.py` | 15279 | `bb84fe9a320a816f2c518464229dfb57d35848fd1422304784da6f0354eefd8c` |
+| `2026-07-29-c690-rigidity-fingerprints.json` | 3733 | `a7e7fc29cd3126285998121ca0039c8aedc7c491312adf5a4da1966b9fc31eaa` |
 
 ## Extra-juice and Tao closeout
 
@@ -381,7 +429,10 @@ and split two-covers of the same six-axis carrier. The `ej2` pass decomposed
 the two covers and recovered the golden algebra intrinsically from
 \((A-A')^2=10(I-R)\): the twisted cover's odd part is
 \(\mathbf3\oplus\mathbf3'\), while the split cover's odd part is
-\(\mathbf1\oplus\mathbf5\). The pass also exposed
+\(\mathbf1\oplus\mathbf5\). The `ej3` integral pass then identified the
+full continuation-lattice commutant as the conductor-two order
+\(\mathbf Z[\sqrt5]\), with dual-number special fibre at \(2\) and
+\(\mathbf F_4\) after normalization. The pass also exposed
 the obstruction to the obvious all-size induction: deleting a vertex
 necessarily enlarges the extension port off the conic.
 
@@ -393,6 +444,8 @@ necessarily enlarges the extension port off the conic.
 | C665 transfer | settled negatively | none; a new cross-characteristic support mechanism would be a different method |
 | support/Gale/golden exchange | settled on the frozen marked fibre | novelty audit and concise Paper I v2 integration only |
 | intrinsic source of \(\sqrt5\) | settled by `ej2` | the continuation association scheme gives \(T^2=5\) on \(\mathbf3\oplus\mathbf3'\) |
+| integral golden order | settled by `ej3` | \(\operatorname{End}_{\mathbf Z A_5}(L^-)=\mathbf Z[\sqrt5]\), of conductor \(2\) in \(\mathcal O_5\) |
+| relation to C682's bad prime \(2\) | compatible but not identified | compare the continuation lattice with C682's integral golden/operator lattice |
 | preferred orientation sign | settled negatively | the syndrome locus reconstructs only the torsor and cubic line |
 | twelve-point double-six | settled negatively as an identification; common quotient recovered | Paper I gives the twisted \(A_5/C_5\to A_5/D_5\) cover, while the double-six gives the split cover |
 | two Paper I orientation structures | settled as distinct | the support/Petersen cover is split under \(A_5\); the continuation/axis cover is twisted |

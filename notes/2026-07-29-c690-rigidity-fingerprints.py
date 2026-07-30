@@ -185,6 +185,32 @@ def matrix_product(a: list[list[int]], b: list[list[int]]) -> list[list[int]]:
     ]
 
 
+def signed_axis_operator(
+    adjacency: list[list[int]], antipodal: list[list[int]]
+) -> list[list[int]]:
+    antipode = [row.index(1) for row in antipodal]
+    unseen = set(range(len(adjacency)))
+    pairs = []
+    while unseen:
+        first = min(unseen)
+        second = antipode[first]
+        pairs.append((first, second))
+        unseen -= {first, second}
+    operator = [[0] * len(pairs) for _ in pairs]
+    for j, (positive, negative) in enumerate(pairs):
+        vector = [0] * len(adjacency)
+        vector[positive] = 1
+        vector[negative] = -1
+        image = [
+            sum(adjacency[i][k] * vector[k] for k in range(len(vector)))
+            for i in range(len(vector))
+        ]
+        assert all(image[negative_i] == -image[positive_i] for positive_i, negative_i in pairs)
+        for i, (positive_i, _) in enumerate(pairs):
+            operator[i][j] = image[positive_i]
+    return operator
+
+
 def canonical_projective_triples(q: int) -> list[tuple[int, int, int]]:
     ans = []
     for triple in itertools.product(range(q), repeat=3):
@@ -332,6 +358,19 @@ def a5_fingerprints() -> dict[str, object]:
         for i in range(12)
         for j in range(12)
     )
+    signed_operator = signed_axis_operator(a, r)
+    signed_square = matrix_product(signed_operator, signed_operator)
+    signed_square_is_five = all(
+        signed_square[i][j] == 5 * int(i == j)
+        for i in range(6)
+        for j in range(6)
+    )
+    coefficient_integrality_witnesses = {
+        "identity_coefficient": "diagonal entry",
+        "sqrt5_coefficient": "off-diagonal unit entry",
+        "operator_diagonal": sorted({signed_operator[i][i] for i in range(6)}),
+        "operator_entries": sorted({entry for row in signed_operator for entry in row}),
+    }
     double_graph = [set() for _ in range(12)]
     for i in range(6):
         for j in range(6):
@@ -358,6 +397,15 @@ def a5_fingerprints() -> dict[str, object]:
             "integral_golden_identity": "(A-A')^2 = 10(I-R)",
             "integral_golden_identity_verified": golden_identity,
             "golden_operator_after_inverting_2": "T=(A-A')/2; T^2=5 on R=-1",
+            "signed_axis_operator": signed_operator,
+            "signed_axis_operator_square_is_five": signed_square_is_five,
+            "integral_commutant_order": "Z[sqrt(5)]",
+            "integral_commutant_discriminant": 20,
+            "normalization": "Z[(1+sqrt(5))/2]",
+            "normalization_conductor": 2,
+            "coefficient_integrality_witnesses": coefficient_integrality_witnesses,
+            "mod_2_special_fiber": "F2[u]/((u-1)^2)",
+            "normalized_mod_2_special_fiber": "F4",
         },
         "schlafli_double_six": {
             "a5_set": "(A5/D5) disjoint_union (A5/D5)",

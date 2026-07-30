@@ -84,6 +84,10 @@ orientation-torsor and double-six decisions.
   five-orbital operators satisfy \((A-A')^2=10(I-R)\); hence
   \(T=(A-A')/2\) intrinsically reconstructs \(T^2=5\) and golden
   conjugation from the continuation locus.
+  On the natural fibre-odd integral lattice the full \(A_5\)-commutant is
+  \(\mathbf Z[\sqrt5]\), the conductor-two order in the maximal golden
+  ring; its mod-\(2\) fibre is a dual-number point and normalizes to
+  \(\mathbf F_4\).
 - The first open E3 case is exactly \(k=9\) over \(q=23,25\), with compact
   cover-moment falsifier ledgers. No larger project is allocated.
 
