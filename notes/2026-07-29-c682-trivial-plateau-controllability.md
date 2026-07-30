@@ -82,17 +82,23 @@ coefficients uniquely, and the three-term boundary recurrence for
 W(q)=\frac{N(q)}{D(q)}.
 \]
 
-The certificate records all coefficients.  After writing \(q=r+6\),
+The raw recurrence expression has numerator degree \(33\) and denominator
+degree \(21\), but they share an exact degree-\(18\) factor.  After
+cancellation, \(N\) has degree \(15\) and \(D\) degree \(3\).  The
+certificate records all reduced coefficients.
+
+After writing \(q=r+6\), \(N(r+6)\) has \(16\) strictly negative
+coefficients and \(D(r+6)\) has \(4\) strictly positive coefficients.
+Both absolute coefficient sequences are strictly ultra-log-concave.
+More strongly, exact Sturm arithmetic proves that the reduced numerator
+has \(15\) distinct negative real roots and the denominator has \(3\);
+none lies in \((-5,0)\).  Thus every zero and pole occurs at \(q<1\), and
 \[
-N(r+6)
+W(q)\ne0
+\qquad\text{for every real }q\ge1.
 \]
-has \(34\) strictly negative coefficients and
-\[
-D(r+6)
-\]
-has \(22\) strictly positive coefficients.  Hence \(W(q)\ne0\) for every
-integer \(q\ge6\).  Direct exact calculations give \(W(q)\ne0\) for
-\(q=1,\ldots,5\).  This proves the theorem for every \(q\ge1\).
+The five direct exact checks at \(q=1,\ldots,5\) remain independent
+low-parameter witnesses but are no longer needed to bridge the proof.
 
 The algebra step is elementary.  The full supported algebra
 \(\operatorname{End}(L_q)\), together with a self-adjoint operator having a
@@ -119,7 +125,8 @@ python3 ../notes/2026-07-29-c682-plateau-controllability-replay.py
 The primary checker uses exact integer and rational transvectants.  It
 constructs the invariant bases, verifies the five low-\(q\) witnesses,
 interpolates within the proved degree bounds, and checks the shifted
-coefficient signs.  It also checks the exact Fischer-adjoint identity at
+coefficient signs, exact gcd cancellation, strict ultra-log-concavity, and
+Sturm root counts.  It also checks the exact Fischer-adjoint identity at
 degrees \(64\) and \(124\).
 
 The replay independently reconstructs \(F,h,t\) from dense modular
@@ -135,8 +142,8 @@ The load-bearing exact engines are
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c682-plateau-controllability.py` | 22447 | `99ac7a39d43ee8dc8bbde15d263f30a7d6c16cf054e823f8e3d5ed54b464a304` |
-| `2026-07-29-c682-plateau-controllability.json` | 8928 | `14a719c07b8ffb67a17e368f2ded21e8633c5a1ca3c88d1df62fa46ea4c238b7` |
+| `2026-07-29-c682-plateau-controllability.py` | 27351 | `b1295e62b70d36502e88b5e23104f8d6bdec0b6e136d0a6d18be8558f06b2bd8` |
+| `2026-07-29-c682-plateau-controllability.json` | 4734 | `940d75716830839c464cf9ccdf96d25281876dbd53e4de0b0151e8a277afadfe` |
 | `2026-07-29-c682-plateau-controllability-replay.py` | 8754 | `a2270c3e27eb9054829dcfc9de0e8b70b2943a229dd3b48f00cfe087288c0bf0` |
 | `2026-07-28-c682-klein-e8-free-covariant.py` | 26315 | `df6d46f2969270814fe9e552da2238bd6de9ff36ebaddb3081c0143014ec8103` |
 | `2026-07-28-c682-klein-e8-first-failure-replay.py` | 15046 | `67e08902c944aeaca6eef458107bd6022eb7e3b2cfcaffc1381e5884d516669c` |
@@ -164,16 +171,19 @@ package.
 The structural object is a fixed-width boundary control problem on the
 Kostant free module.  Although the plateau dimension grows with \(q\), the
 mixing witness sees only four boundary coordinates, and differential order
-turns the infinite family into one degree-\(33\) sign certificate.  This is
-the template to test on the \(2,3,3'\) free modules.
+turns the infinite family into one reduced degree-\(15\)-over-degree-\(3\)
+certificate.  This is the template to test on the \(2,3,3'\) free modules.
 
-There is also a useful consistency check: the denominator has degree \(21\),
-so the mixing scalar has asymptotic degree \(33-21=12\), exactly the total
-differential order of the third-then-ninth return.  The unexplained residue
-is stronger than mere nonvanishing: after the semigroup-stability shift
-\(q=r+6\), every numerator coefficient has the same sign.  A conceptual
-total-positivity or hypergeometric explanation could make the extension to
-the other Kostant modules much shorter than repeating interpolation.
+There is also a useful consistency check.  Before cancellation the degree
+gap is \(33-21=12\); after cancellation it is \(15-3=12\), exactly the
+total differential order of the third-then-ninth return.
+
+The stronger second-order pattern is now certified rather than guessed:
+the reduced shifted numerator and denominator are real-rooted with all
+roots strictly left of \(r=-5\), and their coefficient sequences are
+strictly ultra-log-concave.  A conceptual Pólya-frequency,
+total-positivity, or hypergeometric explanation could make the extension
+to the other Kostant modules much shorter than repeating interpolation.
 
 ## Mystery ledger
 
@@ -188,11 +198,17 @@ the other Kostant modules much shorter than repeating interpolation.
 - **Settled by `tt`:** the growing matrix problem collapses to a
   fixed-width boundary covector and one rational function.
 - **Settled by `ej`:** the degree gap \(33-21=12\) matches the return
-  operator's differential order.
-- **Open structural explanation:** why the shifted numerator is
-  coefficientwise one-signed, rather than merely root-free.  The present
-  proof is the exact coefficient certificate; a total-positivity or
-  hypergeometric mechanism would belong to the \(2,3,3'\) extension.
+  operator's differential order and survives the degree-\(18\)
+  cancellation as \(15-3=12\).
+- **Settled by `ej2`:** the apparent high degrees contained a common
+  degree-\(18\) recurrence factor.
+- **Settled by `ej2`:** the reduced numerator and denominator have,
+  respectively, \(15\) and \(3\) distinct real roots, all at \(q<1\).
+  Hence the witness is nonzero on the full real ray \(q\ge1\).
+- **Open structural explanation:** why the reduced polynomials form strict
+  ultra-log-concave, negative-real-rooted coefficient sequences.  The
+  present proof is exact Sturm arithmetic; a Pólya-frequency or
+  hypergeometric mechanism belongs to the \(2,3,3'\) extension.
 - **Still open:** construct the corresponding boundary witnesses for the
   \(2,3,3'\) Kostant modules.
 - **Still open:** prove all-weight maximal rank away from the explicitly

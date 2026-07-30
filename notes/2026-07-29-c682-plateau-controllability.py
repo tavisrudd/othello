@@ -475,6 +475,122 @@ def poly_shift(polynomial, shift):
     return poly_trim(out)
 
 
+def strict_ultra_log_concave(polynomial):
+    coefficients = [abs(Fraction(value)) for value in polynomial]
+    degree = len(coefficients) - 1
+    return all(
+        coefficients[index] ** 2
+        * comb(degree, index - 1)
+        * comb(degree, index + 1)
+        > coefficients[index - 1]
+        * coefficients[index + 1]
+        * comb(degree, index) ** 2
+        for index in range(1, degree)
+    )
+
+
+def poly_derivative(polynomial):
+    return poly_trim(
+        [
+            degree * coefficient
+            for degree, coefficient in enumerate(polynomial)
+            if degree
+        ]
+        or [0]
+    )
+
+
+def poly_remainder(dividend, divisor):
+    work = poly_trim(dividend)
+    divisor = poly_trim(divisor)
+    while len(work) >= len(divisor) and any(work):
+        degree_shift = len(work) - len(divisor)
+        scalar = work[-1] / divisor[-1]
+        subtraction = [Fraction(0)] * degree_shift + poly_scale(
+            divisor,
+            scalar,
+        )
+        work = poly_add(work, poly_scale(subtraction, -1))
+    return work
+
+
+def poly_divide_exact(dividend, divisor):
+    work = poly_trim(dividend)
+    divisor = poly_trim(divisor)
+    quotient = [Fraction(0)] * (len(work) - len(divisor) + 1)
+    while len(work) >= len(divisor) and any(work):
+        degree_shift = len(work) - len(divisor)
+        scalar = work[-1] / divisor[-1]
+        quotient[degree_shift] = scalar
+        subtraction = [Fraction(0)] * degree_shift + poly_scale(
+            divisor,
+            scalar,
+        )
+        work = poly_add(work, poly_scale(subtraction, -1))
+    assert not any(work)
+    return poly_trim(quotient)
+
+
+def poly_gcd(left, right):
+    left = poly_trim(left)
+    right = poly_trim(right)
+    while any(right):
+        left, right = right, poly_remainder(left, right)
+    return poly_scale(left, 1 / left[-1])
+
+
+def sign(value):
+    return (value > 0) - (value < 0)
+
+
+def sign_variations(signs):
+    filtered = [value for value in signs if value]
+    return sum(
+        left != right
+        for left, right in zip(filtered, filtered[1:])
+    )
+
+
+def sturm_sequence(polynomial):
+    sequence = [poly_trim(polynomial), poly_derivative(polynomial)]
+    while len(sequence[-1]) > 1:
+        remainder = poly_remainder(sequence[-2], sequence[-1])
+        if not any(remainder):
+            break
+        sequence.append(poly_scale(remainder, -1))
+    return sequence
+
+
+def poly_evaluate(polynomial, value):
+    out = Fraction(0)
+    for coefficient in reversed(polynomial):
+        out = out * value + coefficient
+    return out
+
+
+def negative_real_root_count(polynomial):
+    sequence = sturm_sequence(polynomial)
+    at_zero = sign_variations([sign(row[0]) for row in sequence])
+    at_negative_infinity = sign_variations(
+        [
+            sign(row[-1]) * (-1 if (len(row) - 1) % 2 else 1)
+            for row in sequence
+        ]
+    )
+    return at_negative_infinity - at_zero
+
+
+def interval_real_root_count(polynomial, left, right):
+    sequence = sturm_sequence(polynomial)
+    at_left = sign_variations(
+        [sign(poly_evaluate(row, left)) for row in sequence]
+    )
+    at_right = sign_variations(
+        [sign(poly_evaluate(row, right)) for row in sequence]
+    )
+    return at_left - at_right
+
+
 def symbolic_boundary_witness():
     qs = list(range(6, 22))
     rows = {q: exact_witness(q) for q in qs}
@@ -531,11 +647,15 @@ def symbolic_boundary_witness():
                 (returned[-1 - distance], [Fraction(1)]),
             ),
         )
+    common = poly_gcd(scalar[0], scalar[1])
+    common_degree = len(common) - 1
+    reduced_numerator = poly_divide_exact(scalar[0], common)
+    reduced_denominator = poly_divide_exact(scalar[1], common)
     numerator, denominator = primitive_rational_coefficients(
-        scalar[0],
-        scalar[1],
+        reduced_numerator,
+        reduced_denominator,
     )
-    return numerator, denominator
+    return numerator, denominator, common_degree
 
 
 def certificate():
@@ -543,7 +663,7 @@ def certificate():
     tools, klein, _, _, _ = exact.build_data()
     for degree in (64, 124):
         verify_adjoint_ninth_identity(degree, tools, klein)
-    numerator, denominator = symbolic_boundary_witness()
+    numerator, denominator, common_degree = symbolic_boundary_witness()
     shifted_numerator = [
         int(value)
         for value in poly_shift(numerator, 6)
@@ -554,6 +674,22 @@ def certificate():
     ]
     assert all(value < 0 for value in shifted_numerator)
     assert all(value > 0 for value in shifted_denominator)
+    assert strict_ultra_log_concave(shifted_numerator)
+    assert strict_ultra_log_concave(shifted_denominator)
+    numerator_negative_roots = negative_real_root_count(shifted_numerator)
+    denominator_negative_roots = negative_real_root_count(shifted_denominator)
+    assert numerator_negative_roots == len(shifted_numerator) - 1
+    assert denominator_negative_roots == len(shifted_denominator) - 1
+    numerator_critical_roots = interval_real_root_count(
+        shifted_numerator,
+        -5,
+        0,
+    )
+    denominator_critical_roots = interval_real_root_count(
+        shifted_denominator,
+        -5,
+        0,
+    )
     low_rows = []
     for q in range(1, 6):
         degree, _, incoming, _, _, scalars = exact_witness(q)
@@ -591,11 +727,26 @@ def certificate():
             "boundary_return_coefficient_degree_bound": 15,
             "interpolation_q_values": list(range(6, 22)),
             "boundary_support_width": 4,
+            "cancelled_common_factor_degree": common_degree,
             "mixing_numerator_coefficients_ascending": numerator,
             "mixing_denominator_coefficients_ascending": denominator,
             "shift": "q=r+6",
             "shifted_numerator_coefficients_ascending": shifted_numerator,
             "shifted_denominator_coefficients_ascending": shifted_denominator,
+            "shifted_numerator_strict_ultra_log_concavity": True,
+            "shifted_denominator_strict_ultra_log_concavity": True,
+            "shifted_numerator_distinct_negative_real_roots": (
+                numerator_negative_roots
+            ),
+            "shifted_denominator_distinct_negative_real_roots": (
+                denominator_negative_roots
+            ),
+            "shifted_numerator_roots_in_open_interval_minus5_to_0": (
+                numerator_critical_roots
+            ),
+            "shifted_denominator_roots_in_open_interval_minus5_to_0": (
+                denominator_critical_roots
+            ),
             "sign_conclusion": (
                 "all shifted numerator coefficients are negative and all "
                 "shifted denominator coefficients are positive"
@@ -639,7 +790,8 @@ def main():
             print("PASS: C682 trivial plateau controllability")
         return
     if arguments.symbolic:
-        numerator, denominator = symbolic_boundary_witness()
+        numerator, denominator, common_degree = symbolic_boundary_witness()
+        print(f"cancelled_common_factor_degree={common_degree}")
         print(f"numerator_degree={len(numerator) - 1}")
         print(f"numerator_signs={sorted(set((value > 0) - (value < 0) for value in numerator))}")
         print(f"numerator={numerator}")

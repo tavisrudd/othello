@@ -71,9 +71,9 @@ explicitly separated.
   \(q\ge1\).  In the basis
   \(F^{2+5j}h^{2+3(q-j)}\), the first upward return alone mixes the
   incoming hyperplane.  A fixed-width boundary covector reduces the
-  infinite family to a rational function whose numerator is
-  coefficientwise negative and denominator coefficientwise positive after
-  the shift \(q=r+6\); the five smaller parameters are exact witnesses.
+  infinite family to a reduced degree-\(15\)-over-degree-\(3\) rational
+  function.  Exact Sturm arithmetic places all eighteen zeros and poles at
+  \(q<1\), proving controllability on the full real ray \(q\ge1\).
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the

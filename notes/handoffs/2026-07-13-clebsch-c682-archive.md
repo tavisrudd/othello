@@ -978,3 +978,13 @@ report, exact certificate, independent two-prime out-of-sample replay,
 `ej`/`tt` closeout, and Mystery ledger are in
 `notes/2026-07-29-c682-trivial-plateau-controllability.md`.  The next
 controllability gate is the \(2,3,3'\) Kostant modules.
+
+The `ej2` pass removes a large artificial recurrence factor from that
+witness.  The raw degree-\(33\)-over-degree-\(21\) expression has a common
+degree-\(18\) factor; the reduced scalar has degrees \(15\) and \(3\).
+After \(q=r+6\), both reduced polynomials are strictly
+ultra-log-concave and exactly real-rooted.  Sturm arithmetic places all
+fifteen numerator roots and all three denominator roots strictly at
+\(q<1\), upgrading the integer-family proof to nonvanishing on the full
+real ray \(q\ge1\).  The remaining mystery is the module-uniform
+Pólya-frequency or total-positivity mechanism suggested by this pattern.
