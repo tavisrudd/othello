@@ -73,6 +73,11 @@ The terminal line was:
 clebsch factorization release: CHECK OK
 ```
 
+The authoritative integration is commit `cac1fddf`.  The identical public
+paper subtree was applied to the existing standalone history as forward
+commit `c4230f3`, where the standalone aggregate gate also ended with the
+same `CHECK OK` line.
+
 The fresh cold read checked the title, abstract, main theorem, proof-mode
 paragraphs, conclusion, verification table, and trust boundary against v1.
 It found and removed the old open question about deriving
