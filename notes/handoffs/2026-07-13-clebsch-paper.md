@@ -29,7 +29,7 @@
 | [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; maximal rank and four-module path corners controlled | evaluate 63 monotone-module entrance quotients |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; 51/63 monotone entrances controlled | evaluate four exceptional transfer types / twelve phases |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace

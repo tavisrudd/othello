@@ -143,6 +143,17 @@ explicitly separated.
   graded path corners in \(1,2,3,3'\).  The exact remaining frontier is
   sixty-three modulo-\(60\) plateau entrances in the monotone
   \(2',4,4_s,5,6\) modules, or twenty-one types modulo \(20\).
+- The monotone global-Weyl package is now constructed on all five remaining
+  modules.  Exact order-three/order-nine falling-factorial operators are
+  verified beyond their fit grids and independently replayed at two
+  primes.  Complete last-seven-level boundary quotients close fifty-one of
+  the sixty-three entrance phases for every \(q\ge1\), with quotient
+  dimensions \(3,5,5,6,7\) and determinant degrees
+  \(67,126,126,156,185\).  The exact residual frontier is twelve phases:
+  \(4:\{6,26,46\}\), \(4_s:\{3,23,43\}\),
+  \(5:\{4,24,44\}\), and \(6:\{5,25,45\}\).  These are four types modulo
+  \(20\); each requires the global signed block Schur complement because
+  first returns miss one direction in the raw local quotient.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -179,9 +190,10 @@ boundary-quotient surjectivity.  Their global \((F,h)\)-Weyl operators
 cover every periodic phase.  Bare multiplicity induction is retired.  The
 next gate is the off-peak full graded path-corner step; identifying that
 path corner with the algebra of the three local returns remains logically
-separate.  Maximal rank is now proved; the exact next gate is evaluation of
-the sixty-three remaining entrance-mixing quotients in
-\(2',4,4_s,5,6\).
+separate.  Maximal rank is now proved, and fifty-one of the sixty-three
+monotone entrance quotients are controlled.  The exact next gate is the
+signed global block Schur complement for the four exceptional types
+\(4_6,4_{s,3},5_4,6_5\) modulo \(20\), representing twelve phases.
 C682 remains open.
 
 ## Parked branches
@@ -197,4 +209,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-all-weight-maximal-rank.md`.
+`notes/2026-07-29-c682-monotone-entrance-propagation.md`.

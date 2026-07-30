@@ -1,0 +1,4567 @@
+{
+  "claim": "All 51 nonexceptional multiplicity-increase entrances in the monotone 2',4,4s,5,6 modules are boundary-surjective for every integer q>=1. With all-weight maximal rank, their full graded path corners propagate in every weight.",
+  "exceptional_phases": {
+    "4": [
+      6,
+      26,
+      46
+    ],
+    "4s": [
+      3,
+      23,
+      43
+    ],
+    "5": [
+      4,
+      24,
+      44
+    ],
+    "6": [
+      5,
+      25,
+      45
+    ]
+  },
+  "modulo_20_types": {
+    "2p": [
+      7,
+      17
+    ],
+    "4": [
+      6,
+      8,
+      16,
+      18
+    ],
+    "4s": [
+      1,
+      3,
+      11,
+      13
+    ],
+    "5": [
+      0,
+      4,
+      8,
+      12,
+      16
+    ],
+    "6": [
+      5,
+      7,
+      9,
+      15,
+      17,
+      19
+    ]
+  },
+  "phase_count": 51,
+  "phases": {
+    "2p_17": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 78,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g7",
+          0
+        ],
+        [
+          "g7",
+          1
+        ]
+      ],
+      "exact_degree": 67,
+      "family": "n=77+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3
+      ],
+      "module": "2p",
+      "phase_mod_60": 17,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 3,
+      "residual_degree": 57,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 14
+    },
+    "2p_27": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 78,
+      "endpoint_keys": [
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ]
+      ],
+      "exact_degree": 67,
+      "family": "n=87+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3
+      ],
+      "module": "2p",
+      "phase_mod_60": 27,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 3,
+      "residual_degree": 57,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 14
+    },
+    "2p_37": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 78,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g7",
+          0
+        ],
+        [
+          "g7",
+          1
+        ]
+      ],
+      "exact_degree": 67,
+      "family": "n=97+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -10,
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3
+      ],
+      "module": "2p",
+      "phase_mod_60": 37,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 3,
+      "residual_degree": 55,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 14
+    },
+    "2p_47": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 78,
+      "endpoint_keys": [
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ]
+      ],
+      "exact_degree": 67,
+      "family": "n=107+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -10,
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3
+      ],
+      "module": "2p",
+      "phase_mod_60": 47,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 3,
+      "residual_degree": 55,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 14
+    },
+    "2p_57": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 78,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g7",
+          0
+        ],
+        [
+          "g7",
+          1
+        ]
+      ],
+      "exact_degree": 67,
+      "family": "n=117+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -10,
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3
+      ],
+      "module": "2p",
+      "phase_mod_60": 57,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 3,
+      "residual_degree": 55,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 14
+    },
+    "2p_7": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 78,
+      "endpoint_keys": [
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ]
+      ],
+      "exact_degree": 67,
+      "family": "n=67+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3
+      ],
+      "module": "2p",
+      "phase_mod_60": 7,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 3,
+      "residual_degree": 57,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 14
+    },
+    "4_16": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g22",
+          0
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ],
+        [
+          "g14",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=76+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 16,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4_18": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g16",
+          0
+        ],
+        [
+          "g16",
+          1
+        ],
+        [
+          "g12",
+          0
+        ],
+        [
+          "g12",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=78+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 18,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 5,
+      "residual_degree": 103,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 28
+    },
+    "4_28": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=88+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 28,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4_36": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g22",
+          0
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ],
+        [
+          "g14",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=96+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 36,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 102,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4_38": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g16",
+          0
+        ],
+        [
+          "g16",
+          1
+        ],
+        [
+          "g12",
+          0
+        ],
+        [
+          "g12",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=98+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 38,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 104,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 28
+    },
+    "4_48": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=108+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 48,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 101,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4_56": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g22",
+          0
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ],
+        [
+          "g14",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=116+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 56,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 101,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4_58": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g24",
+          0
+        ],
+        [
+          "g16",
+          0
+        ],
+        [
+          "g16",
+          1
+        ],
+        [
+          "g12",
+          0
+        ],
+        [
+          "g12",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=118+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 58,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 103,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 28
+    },
+    "4_8": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=68+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4",
+      "phase_mod_60": 8,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4s_1": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g27",
+          0
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g11",
+          0
+        ],
+        [
+          "g11",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=61+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 1,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 28
+    },
+    "4s_11": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=71+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 11,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4s_13": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g27",
+          0
+        ],
+        [
+          "g27",
+          1
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g11",
+          0
+        ],
+        [
+          "g11",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=73+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 13,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4s_21": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g27",
+          0
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g11",
+          0
+        ],
+        [
+          "g11",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=81+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 21,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 106,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 28
+    },
+    "4s_31": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=91+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 31,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4s_33": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g27",
+          0
+        ],
+        [
+          "g27",
+          1
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g11",
+          0
+        ],
+        [
+          "g11",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=93+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 33,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 106,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4s_41": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g27",
+          0
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g11",
+          0
+        ],
+        [
+          "g11",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=101+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 41,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 106,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 28
+    },
+    "4s_51": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=111+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 51,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "4s_53": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 144,
+      "endpoint_keys": [
+        [
+          "g27",
+          0
+        ],
+        [
+          "g27",
+          1
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g11",
+          0
+        ],
+        [
+          "g11",
+          1
+        ]
+      ],
+      "exact_degree": 126,
+      "family": "n=113+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "module": "4s",
+      "phase_mod_60": 53,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 5,
+      "residual_degree": 105,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 28
+    },
+    "5_0": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=60+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 0,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 6,
+      "residual_degree": 129,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_12": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g26",
+          1
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=72+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 12,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 6,
+      "residual_degree": 129,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 35
+    },
+    "5_16": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g26",
+          1
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=76+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 16,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 6,
+      "residual_degree": 130,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_20": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=80+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 20,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 6,
+      "residual_degree": 130,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_28": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=88+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 28,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 6,
+      "residual_degree": 130,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_32": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g26",
+          1
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=92+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 32,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 6,
+      "residual_degree": 129,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 35
+    },
+    "5_36": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g26",
+          1
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=96+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -12,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 36,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 6,
+      "residual_degree": 125,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_40": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=100+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 40,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 6,
+      "residual_degree": 130,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_48": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=108+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 48,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 6,
+      "residual_degree": 124,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_52": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g26",
+          1
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=112+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 52,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 6,
+      "residual_degree": 124,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 35
+    },
+    "5_56": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g26",
+          1
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=116+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 56,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 6,
+      "residual_degree": 124,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "5_8": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 177,
+      "endpoint_keys": [
+        [
+          "g26",
+          0
+        ],
+        [
+          "g22",
+          0
+        ],
+        [
+          "g22",
+          1
+        ],
+        [
+          "g18",
+          0
+        ],
+        [
+          "g18",
+          1
+        ],
+        [
+          "g14",
+          0
+        ]
+      ],
+      "exact_degree": 156,
+      "family": "n=68+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        6,
+        6,
+        6
+      ],
+      "module": "5",
+      "phase_mod_60": 8,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 6,
+      "residual_degree": 129,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 35
+    },
+    "6_15": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g25",
+          1
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=75+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 15,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 154,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_17": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g15b",
+          0
+        ],
+        [
+          "g15b",
+          1
+        ],
+        [
+          "g15a",
+          0
+        ],
+        [
+          "g15a",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=77+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 17,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 154,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_19": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=79+60q",
+      "finite_boundary_signs": [
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 19,
+      "positivity_threshold_q": 11,
+      "quotient_dimension": 7,
+      "residual_degree": 153,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_27": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=87+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 27,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 154,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_29": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g23",
+          1
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g15b",
+          0
+        ],
+        [
+          "g15a",
+          0
+        ],
+        [
+          "g15a",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=89+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 29,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 154,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 42
+    },
+    "6_35": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g25",
+          1
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=95+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 35,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 155,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_37": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g15b",
+          0
+        ],
+        [
+          "g15b",
+          1
+        ],
+        [
+          "g15a",
+          0
+        ],
+        [
+          "g15a",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=97+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 37,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 151,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_39": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=99+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 39,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 153,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_47": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=107+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 47,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 150,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_49": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g23",
+          1
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g15b",
+          0
+        ],
+        [
+          "g15a",
+          0
+        ],
+        [
+          "g15a",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=109+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 49,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 154,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 42
+    },
+    "6_55": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g25",
+          1
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=115+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -11,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 55,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 153,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_57": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g15b",
+          0
+        ],
+        [
+          "g15b",
+          1
+        ],
+        [
+          "g15a",
+          0
+        ],
+        [
+          "g15a",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=117+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 57,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 149,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_59": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=119+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -12,
+        -12,
+        -12,
+        -12,
+        -12,
+        -12,
+        -11,
+        -11,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 59,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 146,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_7": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g25",
+          0
+        ],
+        [
+          "g21",
+          0
+        ],
+        [
+          "g21",
+          1
+        ],
+        [
+          "g17",
+          0
+        ],
+        [
+          "g17",
+          1
+        ],
+        [
+          "g13",
+          0
+        ],
+        [
+          "g13",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=67+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 7,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 153,
+      "shifted_residual_sign": 1,
+      "tail_dimension": 42
+    },
+    "6_9": {
+      "conclusion": "the complete local entrance quotient is spanned for every integer q>=1",
+      "degree_bound": 210,
+      "endpoint_keys": [
+        [
+          "g23",
+          0
+        ],
+        [
+          "g23",
+          1
+        ],
+        [
+          "g19",
+          0
+        ],
+        [
+          "g19",
+          1
+        ],
+        [
+          "g15b",
+          0
+        ],
+        [
+          "g15a",
+          0
+        ],
+        [
+          "g15a",
+          1
+        ]
+      ],
+      "exact_degree": 185,
+      "family": "n=69+60q",
+      "finite_boundary_signs": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -10,
+        -10,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "low_q_determinant_signs": [
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "low_q_quotient_dimensions": [
+        1,
+        1,
+        1,
+        1,
+        6,
+        6,
+        7,
+        7,
+        7
+      ],
+      "module": "6",
+      "phase_mod_60": 9,
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 7,
+      "residual_degree": 153,
+      "shifted_residual_sign": -1,
+      "tail_dimension": 42
+    }
+  },
+  "remaining_frontier": {
+    "4": [
+      6,
+      26,
+      46
+    ],
+    "4s": [
+      3,
+      23,
+      43
+    ],
+    "5": [
+      4,
+      24,
+      44
+    ],
+    "6": [
+      5,
+      25,
+      45
+    ],
+    "reason": "In these four modulo-20 types the first-return columns span codimension one in the complete raw local quotient. The missing direction is removed only by the global block Schur complement, so a signed block-transfer argument remains necessary."
+  },
+  "schema": "c682-monotone-entrance-propagation-v1",
+  "trusted_boundary": "Exact global falling-factorial Weyl operators are verified beyond their training grids. Denominator-cleared boundary determinants are certified within formal differential-order degree bounds by exact Newton data, one-sign residuals, and finite prefixes."
+}
