@@ -1664,8 +1664,17 @@
       "last": 697,
       "purpose": "Schlafli-Hodge model for the Litt E6 variation",
       "sequence": 185
+    },
+    {
+      "count": 5,
+      "first": 698,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 702,
+      "purpose": "Paper I v2 Lean formalization: orientation core, q11 bridge, q13 foundation and certificates, aggregate trust release",
+      "sequence": 186
     }
   ],
-  "next_id": 698,
+  "next_id": 703,
   "schema": "codex-task-id-allocations-v1"
 }
