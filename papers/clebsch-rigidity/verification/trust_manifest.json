@@ -1705,7 +1705,7 @@
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "f41b051a7597f97122e42403ba14ac5a2584717ed63dc7dd8b9e29fa9b965bc1"
+        "sha256": "5d1fef70d643c6bb2cb8001c7e5374beb4d608ec9513a2d076664585c1587964"
       },
       {
         "path": "verification/test_verification_tools.py",
