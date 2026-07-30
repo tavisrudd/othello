@@ -965,3 +965,16 @@ mixing in the trivial family \(n=64+60q\), followed by the \(2,3,3'\)
 families.  The exact frontier certificate, independent replay, proof,
 `ej`/`tt` closeout, and Mystery ledger are in
 `notes/2026-07-29-c682-full-corner-induction-audit.md`.
+
+The first unanchored plateau family is now closed.  At every trivial-module
+entrance \(n=64+60q\), \(q\ge1\), the first upward return alone mixes the
+incoming hyperplane with its missing line.  In the invariant basis
+\(F^{2+5j}h^{2+3(q-j)}\), a boundary covector sees only four return
+coordinates.  Their degree-\(15\) dependence and the degree-\(3\) incoming
+recurrence give one rational mixing scalar; after \(q=r+6\), its numerator
+has only negative coefficients and its denominator only positive
+coefficients, while \(q=1,\ldots,5\) are exact nonzero witnesses.  The
+report, exact certificate, independent two-prime out-of-sample replay,
+`ej`/`tt` closeout, and Mystery ledger are in
+`notes/2026-07-29-c682-trivial-plateau-controllability.md`.  The next
+controllability gate is the \(2,3,3'\) Kostant modules.

@@ -30,7 +30,7 @@
 | [C688 — generic local first-wall checker](../clebsch-tasks/c688-generic-first-wall-checker.md) | queued C665 replay compression; v2 only | replace the q=169 field-sized wall replay by the parameterized local \(S,T,R,Y\) certificate |
 | [C689 — shared radial nonvanishing](../clebsch-tasks/c689-shared-radial-nonvanishing.md) | queued after C688; C665 conceptual successor; v2 only | replace the \(B_3/H_3\) scalar witnesses by one geometric radial-nonvanishing mechanism or a sharp obstruction |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active open exploration; integral frontier closed | user selects the next frontier |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -146,8 +146,12 @@ one replay prime, and full supported algebras on spanning nonorthogonal
 subspaces generate the full matrix corner.  However the trivial module has
 a recurring unanchored plateau \(1\to2^6\to3\), first in degrees
 \(118,\ldots,160\); equal-rank edges only transport the unknown corner, so
-bare induction is circular.  The first exact remaining family is
-trivial-module plateau-entry mixing at \(n=64+60q\).
+bare induction is circular.  That first obstruction is now repaired:
+for every \(q\ge1\), the first upward return at the trivial-module entrance
+\(n=64+60q\) mixes the incoming hyperplane with its missing direction.
+The fixed-width boundary witness reduces the family to one exact rational
+function with a coefficientwise sign proof.  The remaining controllability
+gate belongs to the \(2,3,3'\) Kostant modules.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

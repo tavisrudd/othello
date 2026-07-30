@@ -67,6 +67,13 @@ explicitly separated.
   \(1\to2^6\to3\), first in degrees \(118,\ldots,160\), so bare
   multiplicity induction is circular.  The first exact remaining family is
   plateau-entry mixing at \(n=64+60q\).
+- The trivial-module plateau-entry family is now controlled for every
+  \(q\ge1\).  In the basis
+  \(F^{2+5j}h^{2+3(q-j)}\), the first upward return alone mixes the
+  incoming hyperplane.  A fixed-width boundary covector reduces the
+  infinite family to a rational function whose numerator is
+  coefficientwise negative and denominator coefficientwise positive after
+  the shift \(q=r+6\); the five smaller parameters are exact witnesses.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -83,12 +90,11 @@ explicitly separated.
 ## Active order
 
 The later McKay-corner classification is active.  The all-weight
-two-sided-defect gate is closed, and bare multiplicity induction is
-retired.  Its next gate is the trivial-module plateau-entry family
-\(n=64+60q\): prove that the local returns mix the incoming hyperplane with
-its missing direction.  Then extend that controllability lemma to the
-\(2,3,3'\) modules.  The former twenty-one family minors remain the
-fallback.  C682 remains open.
+two-sided-defect gate and the trivial-module plateau-entry family are
+closed, and bare multiplicity induction is retired.  The next gate is to
+construct the corresponding fixed-width boundary witnesses for the
+\(2,3,3'\) Kostant modules.  The former twenty-one family minors remain
+the fallback.  C682 remains open.
 
 ## Parked branches
 
@@ -103,4 +109,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-full-corner-induction-audit.md`.
+`notes/2026-07-29-c682-trivial-plateau-controllability.md`.
