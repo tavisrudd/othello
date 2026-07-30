@@ -167,9 +167,8 @@ def field_certificate(q: int) -> dict[str, object]:
     if set(edge_orbit) != passant_edges:
         raise AssertionError("input edge roots do not cover the passant edges")
 
-    raw_rooted: set[tuple[int, ...]] = set()
-    for root in roots:
-        raw_rooted |= rooted_arcs(root, off, neighbors, q, 6)
+    rooted_by_root = [rooted_arcs(root, off, neighbors, q, 6) for root in roots]
+    raw_rooted: set[tuple[int, ...]] = set().union(*rooted_by_root)
     canonical = sorted(
         {
             min(tuple(sorted(permutation[x] for x in arc)) for permutation in permutations)
@@ -283,7 +282,7 @@ def field_certificate(q: int) -> dict[str, object]:
         )
 
     rational_records = []
-    for root, old_record in zip(roots, old["roots"]):
+    for root_index, (root, old_record) in enumerate(zip(roots, old["roots"])):
         endpoint_types = []
         pencil_sizes = []
         for vertex in root:
@@ -327,6 +326,10 @@ def field_certificate(q: int) -> dict[str, object]:
         objective = len(candidates) * weight
         if objective != min(pencil_sizes):
             raise AssertionError("uniform objective is not the smaller pencil size")
+        if not rooted_by_root[root_index]:
+            raise AssertionError("root type has no six-arc attaining four extensions")
+        integer_optimum = 4
+        integrality_gap = objective / integer_optimum
         rational_records.append(
             {
                 "root": old_record["representative"],
@@ -337,6 +340,12 @@ def field_certificate(q: int) -> dict[str, object]:
                 "max_candidates_on_line_through_no_root": max_zero_root,
                 "uniform_weight": [weight.numerator, weight.denominator],
                 "feasible_objective": [objective.numerator, objective.denominator],
+                "exact_lp_optimum": [objective.numerator, objective.denominator],
+                "dual_smaller_pencil_endpoint": pencil_sizes.index(min(pencil_sizes)),
+                "dual_line_constraints_summed": min(pencil_sizes),
+                "integer_extension_optimum": integer_optimum,
+                "rooted_six_arcs": len(rooted_by_root[root_index]),
+                "integrality_gap": [integrality_gap.numerator, integrality_gap.denominator],
             }
         )
     rational_shapes = Counter(

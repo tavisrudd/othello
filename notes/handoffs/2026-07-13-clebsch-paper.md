@@ -104,7 +104,8 @@ Its uniform failure is the residual-pencil product: after fixing a passant
 edge, the candidate set is the Cartesian product of the two endpoints'
 remaining passant-line pencils.  The resulting feasible objective is at
 least \((q-3)/2\), so this first-order dual route fails for every odd
-\(q\ge13\).
+\(q\ge13\).  Summing the line constraints in the smaller pencil gives the
+matching dual bound, so the LP optimum is exactly the smaller pencil size.
 
 Local aggregate replay:
 
@@ -240,7 +241,9 @@ quotients of dimensions \(3,4,4\); degree-\(83,121,120\) determinant
 certificates prove stable-ray surjectivity, and direct exact boundary
 determinants prove surjectivity on every shorter initial chain.  Thus full
 boundary-quotient surjectivity holds for every \(q\ge1\), and all first
-plateau-entry families in \(1,2,3,3'\) are controlled.  The remaining
+plateau-entry families in \(1,2,3,3'\) are controlled.  Smith-at-infinity
+profiles account exactly for the apparent \(13,17,18\) determinant-degree
+drops.  The remaining
 full-corner gate is propagation through all eventual peaks plus the off-peak
 step.
 Its detailed, reorganizable lookup surface is the

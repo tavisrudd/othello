@@ -89,9 +89,21 @@ Consequently the uniform assignment
 \]
 is feasible and has objective \(\min(r(a),r(b))\).  This gives a uniform
 obstruction to the root-edge first-order dual, not merely the following
-finite table.  In particular, for every odd \(q\ge13\) and every passant
-root edge, the relaxation has value at least \((q-3)/2\ge5\), so no dual of
-this form can prove the required upper bound four.
+finite table.
+
+It is also the exact optimum.  If \(r(a)\le r(b)\), sum the \(r(a)\)
+capacity-one constraints on the remaining passant lines through \(a\).
+Those fibres partition \(V_B\), giving the matching dual bound
+\(\sum x_v\le r(a)\); interchange \(a,b\) otherwise.  Thus
+\[
+ \operatorname{LP}(B)=\min(r(a),r(b)).
+\]
+Every root type in both tested fields extends to a six-arc, so its integral
+extension optimum is exactly four.  The exact integrality gaps are therefore
+\(7/4,2\) at \(q=17\) and \(2,9/4\) at \(q=19\).  More generally, for every
+odd \(q\ge13\) and every passant root edge, the relaxation has value at least
+\((q-3)/2\ge5\), so no dual of this form can prove the required upper bound
+four.
 
 The complete shapes are
 
@@ -145,9 +157,9 @@ The load-bearing inputs are the already tracked C605 certificates:
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c611-q17-q19-coherent-certificates.py` | 16,491 | `385616a11e02a17cf66b9a2c858bc1b920512a329eb3a9b65dbf57bbb91b857f` |
+| `notes/2026-07-29-c611-q17-q19-coherent-certificates.py` | 17,206 | `0f5298402b2150f77b9d30ddb317365999bd99e8e99cc097b7310ed0cb9f9389` |
 | `notes/2026-07-29-c611-q17-q19-coherent-certificates-replay.py` | 5,146 | `49858ca427a6cf79fcd73fc41e134af5ce54e41fd92d2b45497dc6ffa5a21868` |
-| `notes/2026-07-29-c611-q17-q19-coherent-certificates.json` | 283,166 | `bdbcf2488c4b0be154f40b8c01ad4d3fd136e18c332bb04465ff61b132b39e38` |
+| `notes/2026-07-29-c611-q17-q19-coherent-certificates.json` | 291,914 | `3b0429b6c136cce819a2da9f44669c4e474e366d2926ff5b757b5335ec98f53d` |
 
 The certificate proves only the two displayed prime fields.  It neither
 proves a formula for the orbit counts nor promotes the finite patterns into a
@@ -171,9 +183,11 @@ two doubled fibres at \(q=19\); one triple orbital resolves each.  This is the
 smallest structural layer visible in the computation and is more informative
 than another extension-search transcript.
 
-The Tao-style pass settles the three rational-LP shapes uniformly: they are
+The Tao-style pass settles the three rational-LP shapes and their exact
+optima uniformly: they are
 the external/external, external/internal, and internal/internal products of
-the two residual passant pencils.  The analogous question for the two
+the two residual passant pencils, with matching duals obtained by summing
+one pencil's line constraints.  The analogous question for the two
 \(q=19\) pair-signature collisions remains open.  The orbit count grows from
 22 to 94, the pair layer ceases to separate, and the triple layer uses 151
 field-specific types.  A genuine maximum-six theorem would have to compress
@@ -185,8 +199,8 @@ those types symbolically, not merely enumerate them.
   by the residual-pencil product:
   \(V_B\cong\mathcal P_a^\circ\times\mathcal P_b^\circ\), with pencil sizes
   \((q-3)/2\) or \((q-1)/2\) according as the endpoint is external or
-  internal.  This yields the candidate counts, capacities, weights, and
-  objectives in one calculation.
+  internal.  This yields the candidate counts, capacities, weights, exact
+  primal/dual optima, and integrality gaps in one calculation.
 - **Why are there exactly two doubled pair-signature fibres at \(q=19\)?**
   The triple separators settle their distinction but not the source of the
   collision.  No paper-facing claim depends on explaining it.

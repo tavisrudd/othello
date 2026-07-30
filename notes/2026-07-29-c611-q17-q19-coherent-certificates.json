@@ -2221,13 +2221,24 @@
       "rational_root_lp_obstructions": [
         {
           "candidate_points": 49,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
@@ -2247,6 +2258,7 @@
               0
             ]
           ],
+          "rooted_six_arcs": 8,
           "uniform_weight": [
             1,
             7
@@ -2254,13 +2266,24 @@
         },
         {
           "candidate_points": 49,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
@@ -2280,6 +2303,7 @@
               2
             ]
           ],
+          "rooted_six_arcs": 16,
           "uniform_weight": [
             1,
             7
@@ -2287,13 +2311,24 @@
         },
         {
           "candidate_points": 56,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "internal"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
@@ -2313,6 +2348,7 @@
               6
             ]
           ],
+          "rooted_six_arcs": 52,
           "uniform_weight": [
             1,
             8
@@ -2320,13 +2356,24 @@
         },
         {
           "candidate_points": 56,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "internal"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
@@ -2346,6 +2393,7 @@
               7
             ]
           ],
+          "rooted_six_arcs": 43,
           "uniform_weight": [
             1,
             8
@@ -2353,13 +2401,24 @@
         },
         {
           "candidate_points": 49,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
@@ -2379,6 +2438,7 @@
               3
             ]
           ],
+          "rooted_six_arcs": 22,
           "uniform_weight": [
             1,
             7
@@ -2386,13 +2446,24 @@
         },
         {
           "candidate_points": 56,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "internal"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
@@ -2412,6 +2483,7 @@
               10
             ]
           ],
+          "rooted_six_arcs": 25,
           "uniform_weight": [
             1,
             8
@@ -2419,13 +2491,24 @@
         },
         {
           "candidate_points": 56,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "internal"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
@@ -2445,6 +2528,7 @@
               16
             ]
           ],
+          "rooted_six_arcs": 16,
           "uniform_weight": [
             1,
             8
@@ -2452,13 +2536,24 @@
         },
         {
           "candidate_points": 49,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 7,
           "max_candidates_on_line_through_one_root": 7,
@@ -2478,6 +2573,7 @@
               0
             ]
           ],
+          "rooted_six_arcs": 8,
           "uniform_weight": [
             1,
             7
@@ -2485,13 +2581,24 @@
         },
         {
           "candidate_points": 56,
+          "dual_line_constraints_summed": 7,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "internal"
           ],
+          "exact_lp_optimum": [
+            7,
+            1
+          ],
           "feasible_objective": [
             7,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            7,
+            4
           ],
           "max_candidates_on_line_through_no_root": 5,
           "max_candidates_on_line_through_one_root": 8,
@@ -2511,6 +2618,7 @@
               4
             ]
           ],
+          "rooted_six_arcs": 23,
           "uniform_weight": [
             1,
             8
@@ -2518,12 +2626,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -2544,6 +2663,7 @@
               7
             ]
           ],
+          "rooted_six_arcs": 65,
           "uniform_weight": [
             1,
             8
@@ -2551,12 +2671,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -2577,6 +2708,7 @@
               8
             ]
           ],
+          "rooted_six_arcs": 68,
           "uniform_weight": [
             1,
             8
@@ -2584,12 +2716,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -2610,6 +2753,7 @@
               10
             ]
           ],
+          "rooted_six_arcs": 67,
           "uniform_weight": [
             1,
             8
@@ -2617,12 +2761,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -2643,6 +2798,7 @@
               15
             ]
           ],
+          "rooted_six_arcs": 59,
           "uniform_weight": [
             1,
             8
@@ -14170,12 +14326,23 @@
       "rational_root_lp_obstructions": [
         {
           "candidate_points": 72,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 1,
           "endpoint_types": [
             "internal",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
@@ -14196,6 +14363,7 @@
               3
             ]
           ],
+          "rooted_six_arcs": 146,
           "uniform_weight": [
             1,
             9
@@ -14203,12 +14371,23 @@
         },
         {
           "candidate_points": 72,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 1,
           "endpoint_types": [
             "internal",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
@@ -14229,6 +14408,7 @@
               4
             ]
           ],
+          "rooted_six_arcs": 169,
           "uniform_weight": [
             1,
             9
@@ -14236,13 +14416,24 @@
         },
         {
           "candidate_points": 81,
+          "dual_line_constraints_summed": 9,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            9,
+            1
+          ],
           "feasible_objective": [
             9,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            9,
+            4
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
@@ -14262,6 +14453,7 @@
               6
             ]
           ],
+          "rooted_six_arcs": 310,
           "uniform_weight": [
             1,
             9
@@ -14269,13 +14461,24 @@
         },
         {
           "candidate_points": 81,
+          "dual_line_constraints_summed": 9,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            9,
+            1
+          ],
           "feasible_objective": [
             9,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            9,
+            4
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
@@ -14295,6 +14498,7 @@
               7
             ]
           ],
+          "rooted_six_arcs": 243,
           "uniform_weight": [
             1,
             9
@@ -14302,12 +14506,23 @@
         },
         {
           "candidate_points": 72,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 1,
           "endpoint_types": [
             "internal",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
@@ -14328,6 +14543,7 @@
               13
             ]
           ],
+          "rooted_six_arcs": 157,
           "uniform_weight": [
             1,
             9
@@ -14335,13 +14551,24 @@
         },
         {
           "candidate_points": 81,
+          "dual_line_constraints_summed": 9,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            9,
+            1
+          ],
           "feasible_objective": [
             9,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            9,
+            4
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
@@ -14361,6 +14588,7 @@
               18
             ]
           ],
+          "rooted_six_arcs": 222,
           "uniform_weight": [
             1,
             9
@@ -14368,12 +14596,23 @@
         },
         {
           "candidate_points": 72,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 1,
           "endpoint_types": [
             "internal",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
@@ -14394,6 +14633,7 @@
               6
             ]
           ],
+          "rooted_six_arcs": 184,
           "uniform_weight": [
             1,
             9
@@ -14401,13 +14641,24 @@
         },
         {
           "candidate_points": 81,
+          "dual_line_constraints_summed": 9,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            9,
+            1
+          ],
           "feasible_objective": [
             9,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            9,
+            4
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
@@ -14427,6 +14678,7 @@
               11
             ]
           ],
+          "rooted_six_arcs": 198,
           "uniform_weight": [
             1,
             9
@@ -14434,12 +14686,23 @@
         },
         {
           "candidate_points": 72,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 1,
           "endpoint_types": [
             "internal",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 6,
@@ -14460,6 +14723,7 @@
               14
             ]
           ],
+          "rooted_six_arcs": 184,
           "uniform_weight": [
             1,
             9
@@ -14467,13 +14731,24 @@
         },
         {
           "candidate_points": 81,
+          "dual_line_constraints_summed": 9,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "internal",
             "internal"
           ],
+          "exact_lp_optimum": [
+            9,
+            1
+          ],
           "feasible_objective": [
             9,
             1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            9,
+            4
           ],
           "max_candidates_on_line_through_no_root": 9,
           "max_candidates_on_line_through_one_root": 9,
@@ -14493,6 +14768,7 @@
               6
             ]
           ],
+          "rooted_six_arcs": 339,
           "uniform_weight": [
             1,
             9
@@ -14500,12 +14776,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -14526,6 +14813,7 @@
               0
             ]
           ],
+          "rooted_six_arcs": 180,
           "uniform_weight": [
             1,
             8
@@ -14533,12 +14821,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -14559,6 +14858,7 @@
               4
             ]
           ],
+          "rooted_six_arcs": 90,
           "uniform_weight": [
             1,
             8
@@ -14566,12 +14866,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -14592,6 +14903,7 @@
               13
             ]
           ],
+          "rooted_six_arcs": 113,
           "uniform_weight": [
             1,
             8
@@ -14599,12 +14911,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -14625,6 +14948,7 @@
               3
             ]
           ],
+          "rooted_six_arcs": 138,
           "uniform_weight": [
             1,
             8
@@ -14632,12 +14956,23 @@
         },
         {
           "candidate_points": 64,
+          "dual_line_constraints_summed": 8,
+          "dual_smaller_pencil_endpoint": 0,
           "endpoint_types": [
             "external",
             "external"
           ],
+          "exact_lp_optimum": [
+            8,
+            1
+          ],
           "feasible_objective": [
             8,
+            1
+          ],
+          "integer_extension_optimum": 4,
+          "integrality_gap": [
+            2,
             1
           ],
           "max_candidates_on_line_through_no_root": 8,
@@ -14658,6 +14993,7 @@
               17
             ]
           ],
+          "rooted_six_arcs": 128,
           "uniform_weight": [
             1,
             8

@@ -55,7 +55,9 @@ actual owning paper.
   Uniformly, its candidate set is the Cartesian product of the endpoints'
   residual passant pencils, so the feasible objective is the smaller pencil
   size.  Hence this entire first-order dual route fails for every odd
-  \(q\ge13\), not only the two tested fields.
+  \(q\ge13\), not only the two tested fields.  Summing the line constraints
+  in the smaller pencil gives a matching dual, so this is the exact LP
+  optimum; the q=17 gaps are \(7/4,2\), and the q=19 gaps are \(2,9/4\).
 
 ## Work package
 
