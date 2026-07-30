@@ -1,14 +1,16 @@
 # Clebsch rigidity paper
 
 Working root for the focused rigidity/decoder manuscript titled
-*Reconstructing the Clebsch code from its deep-hole syndrome locus*.
+*Reconstructing the Clebsch code and its golden orientation from its
+deep-hole syndrome locus*.
 
 - Scope owner: the focused Clebsch rigidity paper and its release surface.
 - Base: the focused manuscript snapshot at
   `7d258dcd6cda9f54c330d4b705d553a975749014`.
-- Scope: rigidity, quantitative gaps, decoding, automorphisms, support bipartition,
-  Brianchon reconstruction, `q=11` uniqueness, the `4 <= k <= 8` classification,
-  and their verification architecture.
+- Scope: rigidity, quantitative gaps, decoding, automorphisms, support
+  orientation, the intrinsic golden two-graph, Brianchon reconstruction,
+  `q=11` uniqueness, the `q=13` tangent code, the `4 <= k <= 8`
+  classification, and their verification architecture.
 - Boundary: no factorization-memory, reflection-arrangement, or later-passage
   theorem or verification dependency.
 
@@ -23,7 +25,7 @@ mega-paper fallback.
 
 The Paper I verification surface is under `verification/`. It contains the
 nineteen-row statement identity, trust manifest, validator, clean release
-runner, unit tests, and deterministic successful output. The eleven selected
+runner, unit tests, and deterministic successful output. The thirteen selected
 exact checkers and pinned Nix environment are release-local; the aggregate formal gate is
 `RelativeConicArcs/Gates/ClebschRigidityTrust.lean` in the shared formal
 repository.

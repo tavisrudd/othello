@@ -25,10 +25,20 @@
       "lines": 28,
       "sha256": "2f88bb38942425b9cdb3d1f0d9e2293ac4d6202d5fb004602e29649560bd2719"
     },
+    "check_orientation_two_graph.py": {
+      "bytes": 271,
+      "lines": 5,
+      "sha256": "c5396e3e82b915f22ca373a8187743f0043cd4be5986725692bcc342bec1231e"
+    },
     "check_perturbation_gap.py": {
       "bytes": 2824,
       "lines": 24,
       "sha256": "c30bc8247f1015b4f5077499345d25fb307a585f64f1aceced7b0bfdcc69e198"
+    },
+    "check_q13_tangent_code.py": {
+      "bytes": 106,
+      "lines": 1,
+      "sha256": "dd69f17370e31c2cdec22b3145b4192d915b61651f8c442643c7d7b9469bc252"
     },
     "check_q19_nonexample.py": {
       "bytes": 915,

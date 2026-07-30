@@ -36,7 +36,10 @@ ROW_LABELS = {
     20: "thm:gap",
     21: "prop:brianchon-support",
     22: "cor:decoder-brianchon",
-    23: "prop:invariant-support-bipartition",
+    23: (
+        "prop:invariant-support-bipartition",
+        "thm:orientation-two-graph",
+    ),
     24: (
         "lem:chord-defect",
         "cor:conic-filling-window",
@@ -44,7 +47,10 @@ ROW_LABELS = {
     ),
     25: "thm:why11",
     26: "prop:clebsch-family-uncovered",
-    29: "thm:small-k-conic-filling",
+    29: (
+        "thm:q13-tangent-code",
+        "thm:small-k-conic-filling",
+    ),
 }
 
 HEADLINE = (

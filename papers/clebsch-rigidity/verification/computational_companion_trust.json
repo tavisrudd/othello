@@ -41,6 +41,13 @@
       ]
     },
     {
+      "id": "q13-tangent-code-and-minimum-layer",
+      "mode": "segre-tangent-reduction-plus-exhaustive-exact-replay",
+      "checks": [
+        "check_q13_tangent_code.py"
+      ]
+    },
+    {
       "id": "passant-arc-bound-q13-q17-q19",
       "mode": "exhaustive-orbit-search-with-independent-certificate-check",
       "checks": [

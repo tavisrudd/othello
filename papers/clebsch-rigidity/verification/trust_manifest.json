@@ -93,7 +93,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 74",
+      "paper_location": "source line 80",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 385",
+      "paper_location": "source line 394",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 452",
+      "paper_location": "source line 461",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 469",
+      "paper_location": "source line 478",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 508",
+      "paper_location": "source line 517",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 560",
+      "paper_location": "source line 569",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 636",
+      "paper_location": "source line 645",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -575,7 +575,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 121",
+      "paper_location": "source line 127",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -619,7 +619,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 196",
+      "paper_location": "source line 201",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -635,7 +635,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 221",
+      "paper_location": "source line 226",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -669,7 +669,7 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 253",
+      "paper_location": "source line 258",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -685,7 +685,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 795",
+      "paper_location": "source line 804",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -766,7 +766,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 845",
+      "paper_location": "source line 854",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -822,18 +822,43 @@
           },
           "route": "exact-replay",
           "subclaim": "support and automorphism replay"
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_orientation_two_graph.py",
+                "repository": "paper",
+                "sha256": "a280d0bf75aa31c0cc99cbf8956a163af067a744436212a01cf888b77b6c9810"
+              }
+            ],
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_orientation_two_graph.py"
+                ]
+              }
+            ],
+            "coverage": "The checker constructs A5 as the even permutations of five letters, its A5/C5 and A5/D5 actions, both five-valent orbitals, the fibre-odd signed matrix, all twenty triangle products, the inverse switching gauge, signed moment balance, all twelve balanced gauges, every principal minor, and the mod-two degeneration.",
+            "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
+            "soundness_bridge": "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction."
+          },
+          "route": "exact-replay",
+          "subclaim": "support cubic, continuation operator, and diagonal determinant pencil"
         }
       ],
-      "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 861",
+      "id": "prop-invariant-support-bipartition+thm-orientation-two-graph",
+      "paper_location": "source line 870",
       "route": "mixed",
       "row": 23,
       "source": {
-        "id": "prop:invariant-support-bipartition",
+        "id": "prop:invariant-support-bipartition+thm:orientation-two-graph",
         "kind": "theorem-environment",
-        "sha256": "f534538de1f14366d6b1e78599ee85520590e9c17123f46e3dec2182e550a3c6"
+        "sha256": "c7538f23ab58c2095515cba58ab0f871a63354c4ec0097c945c1041d28d1b174"
       },
-      "trust_boundary": "The unordered support bipartition is proved by incidence and independently replayed; no orientation or sign is claimed."
+      "trust_boundary": "The support bipartition is proved by incidence. The intrinsic orientation theorem is a self-contained A5 coset-action and signed-two-graph calculation; it imports no later-paper geometry."
     },
     {
       "components": [
@@ -943,7 +968,7 @@
         }
       ],
       "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
-      "paper_location": "source line 78",
+      "paper_location": "source line 83",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -1031,7 +1056,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 325",
+      "paper_location": "source line 330",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1109,7 +1134,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 911",
+      "paper_location": "source line 1086",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1131,6 +1156,14 @@
           "route": "conceptual-cited-inputs",
           "subclaim": "small-arc reductions, k=6 dependency, and k=8 field sieve",
           "unconditional_remainder": "The manuscript derives the moment equations, applies the partial-cover window, and proves the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."
+        },
+        {
+          "cited_inputs": [
+            "Ball--Lavrauw 2019, Section 7, for Segre's lemma of tangents"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "q=13 tangent reduction",
+          "unconditional_remainder": "The manuscript reduces a weight-eight word to a seven-clique and displays the complete six-difference-set, five-row unique-closure certificate."
         },
         {
           "cited_inputs": [
@@ -1191,6 +1224,31 @@
           },
           "route": "kernel-checked-lean",
           "subclaim": "four-, five-, and seven-arc moment consequences"
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_q13_tangent_code.py",
+                "repository": "paper",
+                "sha256": "9acaa414b291aa69d7e0d9173583c04c4c16528afb4117dddb95968b7993ef30"
+              }
+            ],
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_q13_tangent_code.py"
+                ]
+              }
+            ],
+            "coverage": "Over F_13, the checker constructs all 78 internal points and 78 passants, verifies the cyclic 42-vertex tangent graph and its five-row unique-closure certificate, exhausts both forced weight-ten pencil profiles by exact syndrome meet-in-the-middle, generates all 364 minimum words in four PGL(2,13)-orbits, and reconstructs the six elliptic orbitals and 78 incidence rows.",
+            "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
+            "soundness_bridge": "The replay checks the displayed cyclic certificate and independently rebuilds the binary incidence code, its minimum layer, concurrence profiles, incidence rows, and automorphism group."
+          },
+          "route": "exact-replay",
+          "subclaim": "q=13 exact distance and minimum-layer reconstruction"
         },
         {
           "computation": {
@@ -1275,16 +1333,16 @@
           "subclaim": "terminal eight-point exclusions"
         }
       ],
-      "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 358",
+      "id": "thm-q13-tangent-code+thm-small-k-conic-filling",
+      "paper_location": "source line 364",
       "route": "mixed",
       "row": 29,
       "source": {
-        "id": "thm:small-k-conic-filling",
+        "id": "thm:q13-tangent-code+thm:small-k-conic-filling",
         "kind": "theorem-environment",
-        "sha256": "23c3ad48c78a33f8da0cd94f1f902de4996cecb8c0eb61937273e596cac7ea80"
+        "sha256": "a0a37515ca86dc00793eb3ac0ff079c2bc5538076ab0177c83ecf9bb38eff62c"
       },
-      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 and k=8 exclusions and sharp maximum-six result are exact-replayed, and the MDS statement is the projective arc--syndrome translation."
+      "trust_boundary": "Lean proves the small-arc moment reductions; the q=13 saturated eight-point exclusion uses Segre's tangent identity plus a five-row cyclic certificate, while the exact distance, minimum-layer reconstruction, terminal k=7 exclusions, and sharp maximum-six result are exact-replayed."
     },
     {
       "computation": {
@@ -1320,7 +1378,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 136",
+      "paper_location": "source line 141",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1340,19 +1398,19 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "2790be40452d1e23ebd22ea4052e159189689711b88c2c98c47b9cda94a4e1a6"
+    "sha256": "f38f78083ceb61bc04d25ac69a2e7aac33e2c24f25486f92a9ff3e6a03722914"
   },
-  "manuscript_sha256": "f204c218b92973e2203f84b0b5323dc0e54f2900157c486051a33123fc389ee4",
+  "manuscript_sha256": "3e98795b34655e8f8f1a3ea95f7e0a1458c4d0d16a77efddf23fccf9bb9c23ca",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "984dae6befe65976f968fc184299ed4ae4a6cedc86d9ae003a71ad6d797165a6"
+      "sha256": "a3726b275fb3b04a31ffc8e7c612716591d27121b49ceea35e9b7f308bff39d3"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "ed4dd64862e7c8decc33276ae0c16345679a1c201c830dae90b98568d4d4de3d"
+      "sha256": "e1ab5ba1f459afe04e0c744bfea0468a9d73c4b32025a98dd23cc0652ff3a50a"
     }
   ],
   "reproducibility_environment": {
@@ -1382,19 +1440,19 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "b9c7cd287635542e891e929eae7a3728b09ae48daa24b0d8506e23b1ce3d01c3"
+    "sha256": "ba635ac2eea571e6af61931cac0cd06e175e1f2794c65a215654220879f12731"
   },
   "verify_all": {
     "checker_output_certificate": {
       "generator": {
         "path": "verification/capture_checker_outputs.py",
         "repository": "paper",
-        "sha256": "bc9fa7f25d4dc9619a6a4caad284a2917e52d56e5644967ca0ef77b5e58b13cb"
+        "sha256": "11d95bdffc8b04f505df357d085b47e7812e06006d0c29022b3f31c16adbd08b"
       },
       "output": {
         "path": "verification/checker_outputs.json",
         "repository": "paper",
-        "sha256": "1de288625f72f7cb6b32ecd6d60bf37e4a40d43c797157926dc75a5877eaca15"
+        "sha256": "d48746f26d65e6e2bfc27e52cec8cf4d47a9f6aa290534c22a9e8b690650a9cf"
       }
     },
     "checks": [
@@ -1575,6 +1633,32 @@
       {
         "argv": [
           "python3",
+          "check_q13_tangent_code.py"
+        ],
+        "cwd": ".",
+        "id": "check-q13-tangent-code",
+        "repository": "paper",
+        "stdout_bytes": 106,
+        "stdout_lines": 1,
+        "stdout_sha256": "dd69f17370e31c2cdec22b3145b4192d915b61651f8c442643c7d7b9469bc252",
+        "timeout_seconds": 900
+      },
+      {
+        "argv": [
+          "python3",
+          "check_orientation_two_graph.py"
+        ],
+        "cwd": ".",
+        "id": "check-orientation-two-graph",
+        "repository": "paper",
+        "stdout_bytes": 271,
+        "stdout_lines": 5,
+        "stdout_sha256": "c5396e3e82b915f22ca373a8187743f0043cd4be5986725692bcc342bec1231e",
+        "timeout_seconds": 900
+      },
+      {
+        "argv": [
+          "python3",
           "verification/conic_filling_verify.py"
         ],
         "cwd": ".",
@@ -1611,27 +1695,27 @@
       {
         "path": "verification/extract_statement_identity.py",
         "repository": "paper",
-        "sha256": "7e0fff5c1c72f56ec0fac62c637f232d61cef1f4ad9ab19684aea452071a812f"
+        "sha256": "25a6c8d72f5531af53500206fd671b8c34af4c2c0fc0b482e36f2195008c4f31"
       },
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "fc40be06b7b86ce278f6a6a30813c6882b1151385382d664ff2426fc865b34bc"
+        "sha256": "78e6d9c183da6a05cd846c9cee5eaa91078fda91700a3ba5c5979dd5fe5f5bac"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "af9f4c9aed9879ab818bccb5d9241e9734c56372245f5863909109ca8b143d53"
+        "sha256": "f41b051a7597f97122e42403ba14ac5a2584717ed63dc7dd8b9e29fa9b965bc1"
       },
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "fb6f638f1e7df13c695f1c6693a69e5540e76c82771dcbb8cf16fe8d83086d93"
+        "sha256": "b429a462a0aa7f100d0c56b7651f581cbe75c91870a6bbb62fd5cbffe7a574be"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "bddce493896dac2c2c703e45071336b03ff36ec6f91d8cf57f4e77c1c1a99f26"
+        "sha256": "0d175fdb76e6ccb5585c562532eab682cda086ca4bf928a98f9af827d58517f7"
       }
     ]
   }

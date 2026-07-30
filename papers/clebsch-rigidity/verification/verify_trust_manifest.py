@@ -355,8 +355,8 @@ def validate_checks(
                     or field_value < 1
                 ):
                     fail(f"{item}.{field} must be a positive integer")
-    if len(value) != 16:
-        fail(f"{where} must contain exactly sixteen admitted checks")
+    if len(value) != 18:
+        fail(f"{where} must contain exactly eighteen admitted checks")
 
 
 def main() -> int:
@@ -538,7 +538,7 @@ def main() -> int:
     if path != ".":
         fail("manifest.lean_repository.path must be relative to the checkout root")
     require_string(lean_repository.get("commit"), "manifest.lean_repository.commit")
-    print("Clebsch rigidity trust manifest: valid (19 claims, 16 checks)")
+    print("Clebsch rigidity trust manifest: valid (19 claims, 18 checks)")
     return 0
 
 

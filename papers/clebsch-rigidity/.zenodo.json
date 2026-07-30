@@ -1,6 +1,6 @@
 {
-  "title": "Reconstructing the Clebsch code from its deep-hole syndrome locus",
-  "description": "This preprint proves that the projective deep-hole syndrome locus characterizes the Clebsch code and reconstructs its conic, polarity, and symmetry. The repository also contains a computational companion with exact finite-field censuses, decoding checks, and independently replayable terminal exclusions.",
+  "title": "Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus",
+  "description": "This preprint proves that the projective deep-hole syndrome locus characterizes the Clebsch code and reconstructs its conic, polarity, symmetry, and intrinsic golden orientation two-graph. The repository also contains a computational companion with exact finite-field censuses, a q=13 tangent-code theorem, decoding checks, and independently replayable terminal exclusions.",
   "creators": [
     {
       "name": "Rudd, Tavis",
@@ -19,6 +19,8 @@
     "finite geometry",
     "coding theory",
     "decoding",
+    "signed two-graphs",
+    "golden ratio",
     "formalized mathematics"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",

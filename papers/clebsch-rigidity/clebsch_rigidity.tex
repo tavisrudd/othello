@@ -29,7 +29,7 @@
 \newcommand{\cU}{\mathcal{U}}
 \newcommand{\A}{A_5}
 
-\title{Reconstructing the Clebsch code\\
+\title{Reconstructing the Clebsch code and its golden orientation\\
 from its deep-hole syndrome locus}
 \author{Tavis Rudd}
 \date{July 2026}
@@ -50,7 +50,13 @@ is assumed.
 
 For the resulting code, the reconstructed conic equation is an exact
 syndrome-distance oracle, while decoder ambiguity recovers the Brianchon
-geometry and an invariant bipartition of the three-coordinate supports.
+geometry and an orientation torsor on the three-coordinate supports.
+The twelve deep-hole directions also form a twisted two-cover of six axes.
+Its signed orbital operator $B$ satisfies $B^2=5I$, and its triangle
+products are exactly the coefficients of the support-orientation cubic.
+Thus the support cubic and the golden continuation algebra are two
+presentations of the same intrinsic signed two-graph; the cubic is the
+sole nonsymmetric term in the operator's diagonal determinant pencil.
 The conceptual tools are a universal chord-defect identity and a
 partial-cover bound.  Together with passant counts, they show that any
 $k$-arc whose uncovered locus is a nonsingular conic has $q$ odd and
@@ -143,7 +149,10 @@ A line bound, a chord-defect identity, and Dye's Brianchon theorem give the
 conceptual implication.  The same geometry then gives an exact distance
 oracle and all nearest-codeword multiplicities; the resulting ambiguity
 strata reconstruct the Brianchon points, the self-polar triangles, and the
-invariant support bipartition.
+invariant support bipartition.  On the reconstructed twelve-point syndrome
+locus, the two five-valent orbitals recover a signed operator on the six
+antipodal axes.  Triangle holonomy identifies its switching class with the
+support bipartition and recovers the integral order $\mathbf Z[\sqrt5]$.
 
 The main general theorem is a uniform field window for conic-filling arcs.
 For an arbitrary conic-filling $k$-arc, the chord moments and a
@@ -178,8 +187,8 @@ the decoder reconstruction and support bipartition, and the uniform
 conic-filling window.  A separate computational companion
 \cite{RuddComputational2026} proves sharper finite consequences: a
 degree-three characterization and numerical gap at $q=11$, uniqueness of
-$q=11$ among conic-filling six-arcs, and classification through eight
-points.
+$q=11$ among conic-filling six-arcs, classification through eight points,
+and an exact $q=13$ binary incidence-code theorem.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -897,6 +906,172 @@ after coordinate rescaling, because its support permutations lie outside
 that quotient $A_5$.
 \end{proof}
 
+\section{The intrinsic orientation two-graph}
+\label{sec:orientation-two-graph}
+
+The support bipartition and the twelve deep-hole directions carry two
+apparently different orientation choices.  We now show that they are the
+same datum.  This comparison uses only the reconstructed $A_5$-sets in this
+paper.
+
+Let $\Omega=\cC(\F_{11})$.  Its points have stabilizer $C_5$.  The two
+points fixed by each Sylow $5$-subgroup form an antipodal pair, giving an
+$A_5$-equivariant quotient
+\[
+ \Omega=A_5/C_5\longrightarrow A_5/D_5=\Xi
+\]
+onto six axes.  Write $R$ for its deck involution.  The stabilizer of a
+point of $\Omega$ has suborbits of lengths $1,1,5,5$; let $A$ and $A'$
+be the adjacency matrices of the two five-valent orbitals.
+
+\begin{theorem}[Support cubic and golden continuation]
+\label{thm:orientation-two-graph}
+The syndrome locus reconstructs an unordered orientation torsor with the
+following equivalent presentations.
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+\item Give the two $A_5$-orbits of three-coordinate supports opposite
+signs.  Their signed moments in degrees zero, one, and two vanish, while
+the first nonzero moment is the cubic line spanned by
+\[
+ C(x)=\sum_{i<j<k}c_{ijk}x_ix_jx_k,\qquad c_{ijk}\in\{\pm1\}.
+\]
+\item On the fibre-odd lattice
+\[
+ L^-=\{f\in\mathbf Z^\Omega:f(R\omega)=-f(\omega)\},
+\]
+either five-valent orbital induces, after choosing one representative over
+each axis, a symmetric signed matrix $B$ with
+\[
+ B_{ii}=0,\qquad B_{ij}\in\{\pm1\},\qquad B^2=5I.
+\]
+Changing the six representatives switches $B$ to $DBD$, and exchanging
+the orbitals negates it.
+\end{enumerate}
+The two presentations determine one another.  Under the unique
+$A_5$-equivariant identification of the coordinate positions with $\Xi$,
+\[
+ \boxed{c_{ijk}=B_{ij}B_{jk}B_{ki}.}
+\]
+Equivalently, if $e_d(x)$ denotes the elementary symmetric polynomial,
+then
+\[
+ \boxed{\det\!\bigl(B+\operatorname{diag}(x_0,\ldots,x_5)\bigr)
+ =e_6(x)-e_4(x)+5e_2(x)-125-2C(x).}
+\]
+Thus the support cubic is the sole nonsymmetric term in the diagonal
+determinant pencil of the golden operator.
+In homogeneous form, with
+$F_B(x,z)=\det(zB+\operatorname{diag}(x))$, this becomes
+\[
+ F_B(x,z)-F_B(x,-z)=-4z^3C(x).
+\]
+The cubic descends to the augmentation space
+$\mathbf Q^6/\mathbf Q\mathbf1$.  Conversely, its two-graph identities
+and vanishing signed pair moments reconstruct $B$ and force $B^2=5I$;
+there is a unique balanced switching class up to relabeling.
+Consequently the continuation algebra and its integral commutant are
+\[
+ \mathbf Q[B]\cong\mathbf Q(\sqrt5),\qquad
+ \operatorname{End}_{\mathbf Z A_5}(L^-)=
+ \mathbf Z[B]\cong\mathbf Z[\sqrt5].
+\]
+\end{theorem}
+
+\begin{proof}
+The degree-six action has point stabilizer $D_5$.  Its two orbits on
+three-subsets have size ten, are exchanged by complementation, and produce
+a nonzero signed cubic determined up to its overall sign.
+
+Antipodal exchange carries one five-suborbit of $\Omega$ to the other, so
+$A'=AR$.  Counting common neighbors in the four suborbits
+$1,1,5,5$ gives the integral association-algebra identity
+\[
+ (A-A')^2=10(I-R).
+\]
+On $L^-$, where $R=-I$, the two orbitals act oppositely.  Hence the
+restriction of $A$ is $(A-A')/2$ and squares to $5I$.  In a basis obtained
+by choosing one point above each axis, it is a symmetric zero-diagonal
+matrix $B$ with off-diagonal entries $\pm1$.  A different choice of lifts
+changes the corresponding basis signs and hence switches $B$.
+
+For concreteness, one such gauge is
+\[
+B=\begin{pmatrix}
+0&1&1&1&1&1\\
+1&0&1&1&-1&-1\\
+1&1&0&-1&1&-1\\
+1&1&-1&0&-1&1\\
+1&-1&1&-1&0&1\\
+1&-1&-1&1&1&0
+\end{pmatrix}.
+\]
+Its triangle products are switching-invariant.  They are constant on the
+two $A_5$-orbits of three-subsets, take opposite values on complementary
+triples, and are not constant; after choosing the overall sign of $C$ they
+are exactly the coefficients $c_{ijk}$.  Conversely, they satisfy
+\[
+ c_{ijk}c_{ij\ell}c_{ik\ell}c_{jk\ell}=1
+ \qquad(i<j<k<\ell).
+\]
+Choose a temporary gauge with $B_{0i}=1$.  Then
+$B_{ij}=c_{0ij}$, and the four-point identity recovers all remaining
+triangle products.  Thus the cubic recovers the switching class of $B$.
+Moreover, for $i\ne j$,
+\[
+ \sum_{k\ne i,j}c_{ijk}
+ =B_{ij}\sum_k B_{ik}B_{kj}
+ =B_{ij}(B^2)_{ij}=0.
+\]
+Summing these equations gives the signed one-index and total sums as zero.
+These are exactly the signed moments below degree three, and they imply
+$C(x+t\mathbf1)=C(x)$.
+
+The implication reverses.  Once the four-point identities have
+reconstructed the switching class,
+\[
+ (B^2)_{ij}=B_{ij}\sum_{k\ne i,j}c_{ijk}
+ \qquad(i\ne j),
+\]
+while every diagonal entry of $B^2$ is five.  Thus signed pair balance is
+equivalent to $B^2=5I$.  In the gauge $B_{0i}=1$, the five equations
+$(B^2)_{0i}=0$ say that the positive edges on the remaining five vertices
+form a $2$-regular graph, hence a pentagon.  The twelve labeled pentagons
+form one class up to relabeling, proving uniqueness.
+
+For a triple $S=\{i,j,k\}$, its principal minor is
+\[
+ \det B_S=2B_{ij}B_{jk}B_{ki}=2c_{ijk}.
+\]
+The identity $B^2=5I$ gives $B^{-1}=B/5$ and $\det B=-125$.
+Jacobi's complementary-minor identity then gives principal-minor values
+$5$ in size four and $0$ in size five, while complementary size-three
+minors have opposite signs.  Expanding along the diagonal variables gives
+the displayed determinant formula and its homogeneous odd-part identity.
+In particular, the same quadratic
+identity that defines the golden operator also recovers support
+complementation.
+
+Finally,
+\[
+ L^-\otimes\mathbf Q\cong\mathbf3\oplus\mathbf3',
+\]
+so its rational $A_5$-commutant is $\mathbf Q[B]$.  If $aI+bB$ preserves
+$L^-$, its diagonal entries force $a\in\mathbf Z$, while any off-diagonal
+unit forces $b\in\mathbf Z$.  This proves the integral commutant statement.
+\end{proof}
+
+\begin{remark}[The conductor at two]
+The order $\mathbf Z[\sqrt5]$ has conductor two in
+$\mathbf Z[(1+\sqrt5)/2]$.  The orientation collapse is already visible
+without normalizing: modulo $2$, all $c_{ijk}$ become $1$, while
+$B-I$ has rank one and square zero.  This is precisely the degeneration
+\[
+ \mathbf Z[\sqrt5]\otimes\F_2
+ \cong\F_2[u]/(u-1)^2.
+\]
+No ambient characteristic-zero geometry is used here.
+\end{remark}
+
 \section{The Clebsch family across fields}
 \label{sec:clebsch-family}
 
@@ -986,7 +1161,15 @@ obstruction uses the standard nucleus theorem
 Proposition~1.5 of Blokhuis, Brouwer, and Sz\H{o}nyi~\cite{BBS2010}.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
-reconstruction, and support bipartition are proved in the text. The formal
+reconstruction, support bipartition, and orientation two-graph theorem are
+proved in the text.  The paper-owned exact replay independently constructs the
+$A_5/C_5$ and $A_5/D_5$ actions, the signed operator, its triangle products
+and diagonal pencil, and the balanced switching class.  It reads no
+later-paper artifact:
+\begin{center}
+\small\path{check_orientation_two_graph.py}.
+\end{center}
+The formal
 cross-check is conditional: it treats Dye's Brianchon bound and equality
 classification as explicit axioms. It does not certify the exhaustive
 searches in the computational companion. The Lean development is
@@ -1007,7 +1190,7 @@ Mathlib commit:
 \end{center}
 The SHA-256 digest of \path{verification/checker_outputs.json} is
 \begin{center}
-\small\path{1de288625f72f7cb6b32ecd6d60bf37e4a40d43c797157926dc75a5877eaca15}.
+\small\path{d48746f26d65e6e2bfc27e52cec8cf4d47a9f6aa290534c22a9e8b690650a9cf}.
 \end{center}
 The SHA-256 digest of
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is
@@ -1042,7 +1225,9 @@ produced it.
 The same questions have useful algebraic and spectral forms.  Passant
 conditions become clique problems in conic association schemes, while the
 decoder results ask when coset-leader support data alone reconstruct a
-projective code.
+projective code.  For the Clebsch code, that support data also reconstructs
+the switching class of the golden continuation operator: the support cubic
+and the twelve-point syndrome locus retain the same orientation two-graph.
 
 \section*{AI assistance disclosure}
 

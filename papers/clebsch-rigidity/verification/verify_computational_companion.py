@@ -17,6 +17,7 @@ CLAIM_IDS = {
     "low-degree-rigidity",
     "q9-sylvester-obstruction",
     "seven-arc-exclusion",
+    "q13-tangent-code-and-minimum-layer",
     "passant-arc-bound-q13-q17-q19",
 }
 

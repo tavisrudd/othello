@@ -103,6 +103,9 @@ CLASSICAL_SYLVESTER = [
     "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two "
     "clique number five; independently formalized from the explicit finite model",
 ]
+CLASSICAL_SEGRE_TANGENTS = [
+    "Ball--Lavrauw 2019, Section 7, for Segre's lemma of tangents",
+]
 
 
 def sha256(path: Path) -> str:
@@ -341,6 +344,21 @@ def components_by_row(
         "deduplication reaches 10,232 and 53,960 distinct seven-arcs, "
         "respectively."
     )
+    q13_tangent_coverage = (
+        "Over F_13, the checker constructs all 78 internal points and "
+        "78 passants, verifies the cyclic 42-vertex tangent graph and its "
+        "five-row unique-closure certificate, exhausts both forced "
+        "weight-ten pencil profiles by exact syndrome meet-in-the-middle, "
+        "generates all 364 minimum words in four PGL(2,13)-orbits, and "
+        "reconstructs the six elliptic orbitals and 78 incidence rows."
+    )
+    orientation_coverage = (
+        "The checker constructs A5 as the even permutations of five "
+        "letters, its A5/C5 and A5/D5 actions, both five-valent orbitals, "
+        "the fibre-odd signed matrix, all twenty triangle products, the "
+        "inverse switching gauge, signed moment balance, all twelve "
+        "balanced gauges, every principal minor, and the mod-two degeneration."
+    )
     direct_coordinates = (
         "The replay reconstructs its domain from explicit coordinates and "
         "does not import Lean output."
@@ -426,10 +444,11 @@ def components_by_row(
             ],
         ),
         23: (
-            "The unordered support bipartition is proved by incidence and independently replayed; no orientation or sign is claimed.",
+            "The support bipartition is proved by incidence. The intrinsic orientation theorem is a self-contained A5 coset-action and signed-two-graph calculation; it imports no later-paper geometry.",
             [
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
                 replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
+                replay("support cubic, continuation operator, and diagonal determinant pencil", ["check_orientation_two_graph.py"], orientation_coverage, "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction.", direct_coordinates),
             ],
         ),
         24: (
@@ -459,11 +478,13 @@ def components_by_row(
             ],
         ),
         29: (
-            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 and k=8 exclusions and sharp maximum-six result are exact-replayed, and the MDS statement is the projective arc--syndrome translation.",
+            "Lean proves the small-arc moment reductions; the q=13 saturated eight-point exclusion uses Segre's tangent identity plus a five-row cyclic certificate, while the exact distance, minimum-layer reconstruction, terminal k=7 exclusions, and sharp maximum-six result are exact-replayed.",
             [
                 conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE + CLASSICAL_PARTIAL_COVER, "The manuscript derives the moment equations, applies the partial-cover window, and proves the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."),
+                conceptual("q=13 tangent reduction", CLASSICAL_SEGRE_TANGENTS, "The manuscript reduces a weight-eight word to a seven-clique and displays the complete six-difference-set, five-row unique-closure certificate."),
                 conceptual("projective MDS translation", CLASSICAL_CODE, "The length-at-most-eight code classification is the preceding arc classification transported through the standard projective parity-check-column and distance-three syndrome dictionary."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
+                replay("q=13 exact distance and minimum-layer reconstruction", ["check_q13_tangent_code.py"], q13_tangent_coverage, "The replay checks the displayed cyclic certificate and independently rebuilds the binary incidence code, its minimum layer, concurrence profiles, incidence rows, and automorphism group.", direct_coordinates),
                 replay("terminal exclusions through seven points", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes through k=7 after the moment reduction; it is not evidence for an eight-arc classification.", direct_coordinates),
                 conic_filling_replay(),
             ],
@@ -531,6 +552,8 @@ def checks() -> list[dict[str, object]]:
         "check_small_q_uniqueness.py",
         "check_q19_nonexample.py",
         "check_small_k_conic_filling.py",
+        "check_q13_tangent_code.py",
+        "check_orientation_two_graph.py",
     ):
         output = output_checks.get(script)
         if not isinstance(output, dict):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture canonical stdout identities for the eleven exact Paper I replays."""
+"""Capture canonical stdout identities for the thirteen exact Paper I replays."""
 
 from __future__ import annotations
 
@@ -22,6 +22,8 @@ CHECKERS = (
     "check_small_q_uniqueness.py",
     "check_q19_nonexample.py",
     "check_small_k_conic_filling.py",
+    "check_q13_tangent_code.py",
+    "check_orientation_two_graph.py",
     "verification/conic_filling_verify.py",
 )
 
@@ -62,11 +64,20 @@ def main() -> int:
         type=Path,
         help="compare the fresh canonical identities with this tracked JSON file",
     )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        help="write the fresh canonical identities to this JSON file",
+    )
     args = parser.parse_args()
+    if args.check is not None and args.output is not None:
+        parser.error("--check and --output are mutually exclusive")
     rendered = json.dumps(capture(paper_root), indent=2, sort_keys=True) + "\n"
     if args.check is not None:
         if args.check.read_text(encoding="utf-8") != rendered:
             raise RuntimeError(f"stale checker-output certificate: {args.check}")
+    elif args.output is not None:
+        args.output.write_text(rendered, encoding="utf-8")
     else:
         print(rendered, end="")
     return 0

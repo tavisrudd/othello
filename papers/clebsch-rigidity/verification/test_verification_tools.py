@@ -74,17 +74,17 @@ class ReleaseRunnerTests(unittest.TestCase):
                 release.safe_cwd(roots, "paper", "../outside", "test")
 
     def test_exact_checker_set_is_unique(self) -> None:
-        self.assertEqual(len(capture.CHECKERS), 11)
-        self.assertEqual(len(set(capture.CHECKERS)), 11)
+        self.assertEqual(len(capture.CHECKERS), 13)
+        self.assertEqual(len(set(capture.CHECKERS)), 13)
 
     def test_manuscript_log_patterns(self) -> None:
         self.assertIsNone(manuscript.WARNING_RE.search("Package hyperref Info"))
         self.assertIsNotNone(manuscript.WARNING_RE.search("LaTeX Warning"))
         match = manuscript.PAGES_RE.search(
-            "Output written on clebsch_rigidity.xdv (15 pages, 1 byte)."
+            "Output written on clebsch_rigidity.xdv (17 pages, 1 byte)."
         )
         self.assertIsNotNone(match)
-        self.assertEqual(match.group(1), "15")
+        self.assertEqual(match.group(1), "17")
 
 
 class ManifestSemanticTests(unittest.TestCase):
