@@ -988,3 +988,11 @@ fifteen numerator roots and all three denominator roots strictly at
 \(q<1\), upgrading the integer-family proof to nonvanishing on the full
 real ray \(q\ge1\).  The remaining mystery is the module-uniform
 Pólya-frequency or total-positivity mechanism suggested by this pattern.
+
+The `ej3` Sturm refinement shows that the continuous wall is sharp.  The
+reduced numerator has one root in \(0<q<1\), thirteen in
+\(-2<q<-1\), and one in \(-3<q<-2\); the denominator has one pole in
+\(-2<q<-1\) and two in \(-3<q<-2\).  Thus \(q\ge1\) is the maximal
+root-free nonnegative ray.  The \(1|13|1\) zero clustering points more
+specifically toward a finite Jacobi-matrix or orthogonal-polynomial model
+for the boundary transfer.

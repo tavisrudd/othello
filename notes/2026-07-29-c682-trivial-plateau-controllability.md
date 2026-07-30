@@ -100,6 +100,19 @@ W(q)\ne0
 The five direct exact checks at \(q=1,\ldots,5\) remain independent
 low-parameter witnesses but are no longer needed to bridge the proof.
 
+The exact chamber counts make the real threshold sharp.  The numerator
+roots in the \(q\)-coordinate are distributed as
+\[
+\begin{array}{c|ccc}
+\text{interval}&(-3,-2)&(-2,-1)&(0,1)\\ \hline
+\#\text{ numerator roots}&1&13&1,
+\end{array}
+\]
+while the denominator has \(2,1,0\) roots in the same intervals.  In
+particular, the analytic continuation has one zero in \(0<q<1\)
+(numerically \(q\approx0.3911251864\)).  Hence the root-free ray
+\(q\ge1\) cannot be enlarged to \(q\ge0\).
+
 The algebra step is elementary.  The full supported algebra
 \(\operatorname{End}(L_q)\), together with a self-adjoint operator having a
 nonzero \(L_q\)-to-\(L_q^\perp\) block, generates
@@ -142,8 +155,8 @@ The load-bearing exact engines are
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c682-plateau-controllability.py` | 27351 | `b1295e62b70d36502e88b5e23104f8d6bdec0b6e136d0a6d18be8558f06b2bd8` |
-| `2026-07-29-c682-plateau-controllability.json` | 4734 | `940d75716830839c464cf9ccdf96d25281876dbd53e4de0b0151e8a277afadfe` |
+| `2026-07-29-c682-plateau-controllability.py` | 28637 | `b70a7d99d806505e97eadd6ff2f0e18578283133f23d1066c7e9ce2d173d215a` |
+| `2026-07-29-c682-plateau-controllability.json` | 5046 | `683fdf9e5d354cd31b6ac0855fbeeab9c6f09031955ca13dd8dd2616432f9f42` |
 | `2026-07-29-c682-plateau-controllability-replay.py` | 8754 | `a2270c3e27eb9054829dcfc9de0e8b70b2943a229dd3b48f00cfe087288c0bf0` |
 | `2026-07-28-c682-klein-e8-free-covariant.py` | 26315 | `df6d46f2969270814fe9e552da2238bd6de9ff36ebaddb3081c0143014ec8103` |
 | `2026-07-28-c682-klein-e8-first-failure-replay.py` | 15046 | `67e08902c944aeaca6eef458107bd6022eb7e3b2cfcaffc1381e5884d516669c` |
@@ -185,6 +198,13 @@ strictly ultra-log-concave.  A conceptual Pólya-frequency,
 total-positivity, or hypergeometric explanation could make the extension
 to the other Kostant modules much shorter than repeating interpolation.
 
+The third-order clue is the highly constrained \(1|13|1\) numerator-root
+distribution across the three virtual-multiplicity chambers.  Together
+with the \(2|1|0\) pole distribution, this resembles the spectrum of a
+finite Jacobi matrix more than a generic real-rooted polynomial.  An
+orthogonal-polynomial or continued-fraction realization would explain the
+root wall, ultra-log-concavity, and rational transfer denominator at once.
+
 ## Mystery ledger
 
 - **Settled:** the recurring trivial-module plateau has a noncircular
@@ -205,10 +225,15 @@ to the other Kostant modules much shorter than repeating interpolation.
 - **Settled by `ej2`:** the reduced numerator and denominator have,
   respectively, \(15\) and \(3\) distinct real roots, all at \(q<1\).
   Hence the witness is nonzero on the full real ray \(q\ge1\).
+- **Settled by `ej3`:** the wall \(q\ge1\) is sharp for the real
+  continuation: there is exactly one numerator root in \((0,1)\).
+- **Settled by `ej3`:** the remaining roots have exact chamber counts
+  \(1|13|1\) for the numerator and \(2|1|0\) for the denominator.
 - **Open structural explanation:** why the reduced polynomials form strict
   ultra-log-concave, negative-real-rooted coefficient sequences.  The
-  present proof is exact Sturm arithmetic; a Pólya-frequency or
-  hypergeometric mechanism belongs to the \(2,3,3'\) extension.
+  present proof is exact Sturm arithmetic; a Jacobi-matrix,
+  Pólya-frequency, or hypergeometric mechanism belongs to the \(2,3,3'\)
+  extension.
 - **Still open:** construct the corresponding boundary witnesses for the
   \(2,3,3'\) Kostant modules.
 - **Still open:** prove all-weight maximal rank away from the explicitly

@@ -690,6 +690,50 @@ def certificate():
         -5,
         0,
     )
+    numerator_q_chambers = {
+        "(-3,-2)": interval_real_root_count(
+            shifted_numerator,
+            -9,
+            -8,
+        ),
+        "(-2,-1)": interval_real_root_count(
+            shifted_numerator,
+            -8,
+            -7,
+        ),
+        "(0,1)": interval_real_root_count(
+            shifted_numerator,
+            -6,
+            -5,
+        ),
+    }
+    denominator_q_chambers = {
+        "(-3,-2)": interval_real_root_count(
+            shifted_denominator,
+            -9,
+            -8,
+        ),
+        "(-2,-1)": interval_real_root_count(
+            shifted_denominator,
+            -8,
+            -7,
+        ),
+        "(0,1)": interval_real_root_count(
+            shifted_denominator,
+            -6,
+            -5,
+        ),
+    }
+    assert numerator_q_chambers == {
+        "(-3,-2)": 1,
+        "(-2,-1)": 13,
+        "(0,1)": 1,
+    }
+    assert denominator_q_chambers == {
+        "(-3,-2)": 2,
+        "(-2,-1)": 1,
+        "(0,1)": 0,
+    }
     low_rows = []
     for q in range(1, 6):
         degree, _, incoming, _, _, scalars = exact_witness(q)
@@ -746,6 +790,11 @@ def certificate():
             ),
             "shifted_denominator_roots_in_open_interval_minus5_to_0": (
                 denominator_critical_roots
+            ),
+            "numerator_real_root_chambers_in_q": numerator_q_chambers,
+            "denominator_real_root_chambers_in_q": denominator_q_chambers,
+            "continuous_stability_wall": (
+                "q>=1 is root-free, but the numerator has one root in (0,1)"
             ),
             "sign_conclusion": (
                 "all shifted numerator coefficients are negative and all "
