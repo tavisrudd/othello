@@ -252,9 +252,12 @@ determinants prove surjectivity on every shorter initial chain.  Thus full
 boundary-quotient surjectivity holds for every \(q\ge1\), and all first
 plateau-entry families in \(1,2,3,3'\) are controlled.  Smith-at-infinity
 profiles account exactly for the apparent \(13,17,18\) determinant-degree
-drops.  The remaining
-full-corner gate is propagation through all eventual peaks plus the off-peak
-step.
+drops.  Exact global falling-factorial Weyl operators in the invariant
+exponents \((F,h)\) now realize the third- and ninth-transvectants on the
+complete \(2,3,3'\) free modules, eliminating phase-specific operator
+construction.  The remaining full-corner gate is evaluation of sixteen
+compressed phase quotients, propagation through all eventual peaks, and the
+off-peak step.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

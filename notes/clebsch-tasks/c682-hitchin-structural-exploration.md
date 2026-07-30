@@ -110,6 +110,14 @@ explicitly separated.
   \((0^{17},3,4,6)\), \((0^{26},3,4,4,6)\), and
   \((0^{26},3,3,4,8)\) account for every degree lost from the formal bounds.
   Thus at least one endpoint return mixes in every \(2,3,3'\) family.
+- The phase-specific operators now lift to finite global Weyl operators in
+  the actual invariant exponents \((a,b)\) of \(F^ah^b\).  On the complete
+  \(2,3,3'\) Kostant free modules, both the third- and ninth-transvectants
+  are exact falling-factorial differential operators of orders \(3,9\).
+  Exact larger-grid verification and an independent two-prime replay close
+  the operator-construction gate for every modulo-\(60\) phase.  The
+  remaining gate is nonvanishing of the compressed quotient determinants,
+  not construction of further phase-specific matrices.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -141,9 +149,11 @@ The later McKay-corner classification is active.  The all-weight
 two-sided-defect gate and every first periodic plateau-entry family in the
 \(1,2,3,3'\) modules are closed.  The trivial family has its scalar
 signed/Hermite pencil; the \(2,3,3'\) families have signed block Wronskians
-and all-\(q\) boundary-quotient surjectivity.  Bare multiplicity induction is
-retired.  The next gate is to propagate these boundary anchors through every
-eventual peak family and prove the remaining off-peak full-corner step.
+and all-\(q\) boundary-quotient surjectivity.  Their global \((F,h)\)-Weyl
+operators now cover every periodic phase.  Bare multiplicity induction is
+retired.  The next gate is to evaluate the compressed boundary quotients in
+the sixteen uncaptured phases, propagate them through every eventual peak
+family, and prove the remaining off-peak full-corner step.
 C682 remains open.
 
 ## Parked branches

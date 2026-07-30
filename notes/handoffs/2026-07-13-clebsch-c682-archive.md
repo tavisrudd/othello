@@ -1061,3 +1061,12 @@ loss from the formal determinant bounds.  The exact operator and boundary
 certificates,
 independent two-prime replay, proof, `ej`/`tt` closeout, and Mystery ledger
 are in `notes/2026-07-29-c682-signed-block-wronskian.md`.
+
+The next propagation pass replaces the phase parameter by the actual
+invariant exponents.  On the complete \(2,3,3'\) Kostant modules, both the
+third- and ninth-transvectants are finite falling-factorial Weyl operators
+in \(F,h\), with respectively \(50/708\), \(103/1485\), and \(107/1498\)
+terms.  Exact verification beyond the training grids and an independent
+two-prime replay close the operator-construction gate in every modulo-\(60\)
+phase.  The proof bundle is
+`notes/2026-07-29-c682-global-weyl-operators.md`.
