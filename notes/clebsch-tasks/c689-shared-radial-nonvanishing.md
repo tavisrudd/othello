@@ -84,4 +84,6 @@ square-root resultant/Dickson recurrence proves that its deepest radial
 trace is nonzero.  The former q=7 and q=11 scalars are recovered as
 corollaries.  The cross-incidence tensors are moreover the symmetric
 designs \(2\!-\!(7,4,2)\) and \(2\!-\!(11,6,3)\), with perfect defining-
-characteristic pairing \(A^{-1}=4A^{\mathsf T}(I-J)\).
+characteristic pairing \(A^{-1}=4A^{\mathsf T}(I-J)\).  In translation
+coordinates they are the circulant complements of the Paley difference
+sets, and \(4\) is the generator of the nonzero quadratic-residue orbit.

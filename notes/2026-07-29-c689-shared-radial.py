@@ -277,6 +277,56 @@ def field_record(balanced, c406, q):
         for j in range(q)
     )
 
+    translation = tuple(list(range(1, q)) + [0, q])
+
+    def translation_labels(sheet):
+        labels = []
+        current = sheet[0]
+        for _ in range(q):
+            labels.append(current)
+            current = balanced["image"](translation, current)
+        assert current == sheet[0] and set(labels) == set(sheet)
+        return labels
+
+    labeled_sheets = [translation_labels(sheet) for sheet in sheets]
+    paley_incidence = [
+        [
+            int(bool(set(left) & set(right)))
+            for right in labeled_sheets[1]
+        ]
+        for left in labeled_sheets[0]
+    ]
+    support = {
+        column for column, value in enumerate(paley_incidence[0]) if value
+    }
+    assert all(
+        paley_incidence[row][column]
+        == int((column - row) % q in support)
+        for row in range(q)
+        for column in range(q)
+    )
+    squares = {value * value % q for value in range(1, q)}
+    paley_support = squares | {0}
+    affine_normalizations = [
+        (multiplier, shift)
+        for multiplier in range(1, q)
+        for shift in range(q)
+        if {(multiplier * value + shift) % q for value in support}
+        == paley_support
+    ]
+    assert affine_normalizations
+    multiplier, shift = affine_normalizations[0]
+    difference_counts = {
+        difference: sum(
+            (left - right) % q == difference
+            for left in paley_support
+            for right in paley_support
+        )
+        for difference in range(q)
+    }
+    assert difference_counts[0] == block_size
+    assert set(difference_counts.values()) == {block_size, design_lambda}
+
     incident_cycle_lengths = set()
     incident_radial_scalars = set()
     for edge in all_edges:
@@ -315,6 +365,14 @@ def field_record(balanced, c406, q):
             "gram_off_diagonal": design_lambda,
             "invertible_in_characteristic_q": True,
             "inverse_formula": "4*A^T*(I-J)",
+            "translation_circulant_support": sorted(support),
+            "paley_affine_normalization": {
+                "multiplier": multiplier,
+                "shift": shift,
+                "normalized_support": sorted(paley_support),
+            },
+            "paley_complement": True,
+            "nonzero_paley_multiplier": 4,
         },
         "incident_edge_count": len(all_edges),
         "incident_pair_common_edges": 1,

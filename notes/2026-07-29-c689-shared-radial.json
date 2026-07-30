@@ -14,6 +14,24 @@
         "invertible_in_characteristic_q": true,
         "k": 4,
         "lambda": 2,
+        "nonzero_paley_multiplier": 4,
+        "paley_affine_normalization": {
+          "multiplier": 3,
+          "normalized_support": [
+            0,
+            1,
+            2,
+            4
+          ],
+          "shift": 1
+        },
+        "paley_complement": true,
+        "translation_circulant_support": [
+          0,
+          1,
+          2,
+          5
+        ],
         "v": 7
       },
       "incident_edge_count": 28,
@@ -115,6 +133,28 @@
         "invertible_in_characteristic_q": true,
         "k": 6,
         "lambda": 3,
+        "nonzero_paley_multiplier": 4,
+        "paley_affine_normalization": {
+          "multiplier": 1,
+          "normalized_support": [
+            0,
+            1,
+            3,
+            4,
+            5,
+            9
+          ],
+          "shift": 3
+        },
+        "paley_complement": true,
+        "translation_circulant_support": [
+          0,
+          1,
+          2,
+          6,
+          8,
+          9
+        ],
         "v": 11
       },
       "incident_edge_count": 66,

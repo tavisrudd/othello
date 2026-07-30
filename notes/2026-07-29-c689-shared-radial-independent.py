@@ -81,6 +81,18 @@ def replay(field):
     assert 4 * design["lambda"] % q == 1
     assert design["invertible_in_characteristic_q"]
     assert design["inverse_formula"] == "4*A^T*(I-J)"
+    normalized_support = set(
+        design["paley_affine_normalization"]["normalized_support"]
+    )
+    squares = {value * value % q for value in range(1, q)}
+    assert normalized_support == squares | {0}
+    assert design["paley_complement"]
+    assert design["nonzero_paley_multiplier"] == 4
+    assert pow(4, (q - 1) // 2, q) == 1
+    assert all(
+        pow(4, exponent, q) != 1
+        for exponent in range(1, (q - 1) // 2)
+    )
     assert field["incident_pair_cycle_lengths"] == [q - 1]
     assert field["old_witness"]["radial_scalar"] in (4, 10)
 

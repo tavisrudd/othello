@@ -62,6 +62,22 @@ Thus the canonical cross-sheet incidence tensor loses no sheet direction.
 Formula (I) is a structural consequence of the common design, not another
 finite scalar witness.
 
+There is a sharper identification.  Label both sheets by the regular
+translation subgroup \(C_q\).  Then \(A\) is circulant:
+\[
+ A_{ij}=1_D(j-i)
+\]
+for a difference set \(D\subset\mathbb F_q\).  After an affine relabeling,
+\[
+ D=\{0\}\cup Q_0.
+                                                        \tag{P}
+\]
+Thus the cross-incidence design is precisely the complement of the Paley
+difference-set design.  At q=7 this is the complement of the Fano plane;
+at q=11 it is the complement of the Paley \(2\!-\!(11,5,2)\) biplane.
+The design parameters and inverse (I) now follow from the quadratic-
+residue difference identity.
+
 Fix an edge \(e\).  The unique incident pair is invariant under its
 construction, and its complementary alternating cycle is the geometric
 object whose radial projection is being tested.  The two types first
@@ -81,6 +97,13 @@ The two complementary matchings are
 Their ratio is \(c^{-2}=4\).  Since \(4\) has order \(n\), their union is
 one alternating \(2n=q-1\) cycle rather than a disjoint union of shorter
 cycles.
+
+In the Paley normalization (P), this is no coincidence: multiplication by
+\(4\) preserves \(Q_0\), and for q=7 and q=11 it is transitive on the
+nonzero squares.  The complementary cycle alternates between \(Q_0\) and
+\(cQ_0\) while advancing by this Paley multiplier.  Hence the parameter
+\(4\), the Hamilton-cycle property, and the cross-incidence design are
+three faces of the same quadratic-residue geometry.
 
 Write the complementary matching product as
 \[
@@ -216,9 +239,9 @@ traces and checks the symmetric-design identities.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c689-shared-radial.py` | 12700 | `8f39271625c33f2e44f3a72a1cef0c879cbe090926505220ff3197e0f93b41be` |
-| `notes/2026-07-29-c689-shared-radial-independent.py` | 3263 | `ef63cb38e36e390435f25dad1258f08ed53966b3786a3304062fde3e304e1b15` |
-| `notes/2026-07-29-c689-shared-radial.json` | 4953 | `f5bf86bdbd7ea3ef3b324949adfcc11b694ba226b271f6039ce08bf4d61e65d6` |
+| `notes/2026-07-29-c689-shared-radial.py` | 14635 | `49f8533542330e550d5754238612f3366575859db0044252123b7c37047044ba` |
+| `notes/2026-07-29-c689-shared-radial-independent.py` | 3703 | `caea31f84eead9f4c6739b8ed663c03084f12ff2482652c4babf6fbf4bf82b5a` |
+| `notes/2026-07-29-c689-shared-radial.json` | 5775 | `4890553d32996e1ab5c6d07f037069d814a12303a8f4b81c7f84481a24137565` |
 
 Pinned load-bearing inputs:
 
@@ -255,6 +278,12 @@ one complementary cycle orbit in each type.  Its explicit inverse (I)
 also gives a reusable perfect sheet-to-sheet pairing for any later
 Gorenstein formulation.
 
+The further free identification is Paley: translation coordinates turn
+the tensor into the circulant complement of the quadratic-residue
+difference set.  This removes the last unexplained appearance of \(4\):
+it is the square multiplier generating the nonzero Paley orbit in both
+fields.
+
 The Tao boundary is the parameter relation \(c^{-2}=4\).  It is a property
 of the two classified exceptional configurations, not a consequence of
 abstract one-factorization axioms.  Formula (E) is uniform after that
@@ -274,7 +303,8 @@ incidence geometry to the Fischer projection.
 | shared nonvanishing mechanism | settled by the square-root resultant and deepest apolar trace | none |
 | old scalars \(4,10\) | recovered as coordinate specializations | none |
 | cross-sheet incidence | settled as the two symmetric designs with explicit perfect pairing (I) | none |
-| parameter \(4\) | settled for the classified \(B_3,H_3\) configurations; not abstractly universal | no C689 gap |
+| Paley structure | settled: the translation-circulant support is affinely \(\{0\}\cup Q_0\) | none |
+| parameter \(4\) | settled as the generator of the nonzero Paley orbit in both classified configurations; not abstractly universal | no C689 gap |
 
 No genuine C689 mystery remains.  Extending the alternating-cycle
 recurrence beyond the two classified balanced orbits would be a different

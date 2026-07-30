@@ -113,8 +113,10 @@ the historical q=169 certificate remains corroboration only.  C689 has
 also unified the residual \(B_3/H_3\) radial witnesses: the unique
 cross-sheet pair through an edge is one alternating-cycle
 \(c\leftrightarrow c^{-1}\) exchange, and a single Dickson recurrence
-forces its deepest radial trace to be nonzero.  The old q=7/q=11 scalars
-remain corroboration only.  C682 characteristic-zero work is inventory unless
+forces its deepest radial trace to be nonzero.  Its cross-incidence design
+is the circulant Paley complement, with \(4\) generating the nonzero
+quadratic-residue orbit.  The old q=7/q=11 scalars remain corroboration
+only.  C682 characteristic-zero work is inventory unless
 explicitly promoted.
 
 Local aggregate replay:
