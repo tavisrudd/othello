@@ -1049,7 +1049,10 @@ functional cannot kill every endpoint return.  The three boundary
 determinants have exact degrees \(83,121,120\).  Their only extracted linear
 roots lie below the stable ray \(q\ge10\); after fixed shifts their residual
 coefficients have one sign, while exact finite prefixes close the remaining
-integers.  Hence endpoint mixing holds for every \(q\ge1\) in the
+integers.  Direct determinants for the actual shorter chains show that their
+local boundary quotients have dimensions \(1\) (and jump to \(4\) at \(q=9\)
+for \(3,3'\)) and are also fully spanned.  Hence boundary-quotient
+surjectivity, not merely endpoint mixing, holds for every \(q\ge1\) in the
 \(2,3,3'\) families.  The exact operator and boundary certificates,
 independent two-prime replay, proof, `ej`/`tt` closeout, and Mystery ledger
 are in `notes/2026-07-29-c682-signed-block-wronskian.md`.

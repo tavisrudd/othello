@@ -226,7 +226,9 @@ degree-three coefficients in \((q,j)\), and their backward determinants have
 no integral interior zero.  The signed block Wronskian satisfies the exact
 Green identity.  Fixed endpoint-return tuples surject onto local boundary
 quotients of dimensions \(3,4,4\); degree-\(83,121,120\) determinant
-certificates prove endpoint mixing for every \(q\ge1\).  Thus all first
+certificates prove stable-ray surjectivity, and direct exact boundary
+determinants prove surjectivity on every shorter initial chain.  Thus full
+boundary-quotient surjectivity holds for every \(q\ge1\), and all first
 plateau-entry families in \(1,2,3,3'\) are controlled.  The remaining
 full-corner gate is propagation through all eventual peaks plus the off-peak
 step.

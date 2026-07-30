@@ -690,11 +690,16 @@ def certificate(operators, boundary_data):
             boundary_wronskian(label, q, operators)["determinant"]
             for q in range(base_q, threshold)
         ]
+        low_boundary = [
+            boundary_wronskian(label, q, operators)
+            for q in range(1, base_q)
+        ]
         low_pairings = [
             endpoint_pairing(label, q, operators)["pairing"]
             for q in range(1, base_q)
         ]
         assert all(finite_boundary)
+        assert all(entry["determinant"] for entry in low_boundary)
         assert all(low_pairings)
         results[label] = {
             "family": f"n={FAMILIES[label]}+60q",
@@ -715,12 +720,20 @@ def certificate(operators, boundary_data):
                 (value > 0) - (value < 0)
                 for value in finite_boundary
             ],
+            "low_boundary_quotient_dimensions_q1_to_9": [
+                entry["quotient_dimension"] for entry in low_boundary
+            ],
+            "low_boundary_determinant_signs_q1_to_9": [
+                (entry["determinant"] > 0)
+                - (entry["determinant"] < 0)
+                for entry in low_boundary
+            ],
             "low_endpoint_pairing_signs_q1_to_9": [
                 (value > 0) - (value < 0) for value in low_pairings
             ],
             "conclusion": (
                 "the boundary return map is onto the local quotient for "
-                "every q>=10, and an endpoint return mixes for every q>=1"
+                "every integer q>=1"
             ),
         }
     incoming = {
@@ -744,8 +757,9 @@ def certificate(operators, boundary_data):
         },
         "boundary_quotient_wronskians": results,
         "claim": (
-            "At least one fixed endpoint return has nonzero contraction "
-            "for every integer q>=1 in each first 2, 3, and 3' plateau."
+            "Fixed endpoint-return tuples surject onto the complete local "
+            "boundary quotient for every integer q>=1 in each first 2, 3, "
+            "and 3' plateau."
         ),
         "trusted_boundary": (
             "The operator coefficients are interpolated only within formal "

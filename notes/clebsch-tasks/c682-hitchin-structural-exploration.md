@@ -101,10 +101,12 @@ explicitly separated.
   \(W_j=y_j^{\mathsf T}C_jx_{j+1}
   -y_{j+1}^{\mathsf T}A_{j+1}x_j\) satisfies the discrete Green identity.
   On the last ten levels, the local boundary quotients have dimensions
-  \(3,4,4\), and fixed endpoint-return tuples map onto them.  Their exact
+  \(3,4,4\), and fixed endpoint-return tuples map onto them.  Direct exact
+  determinants also give full quotient surjectivity on every shorter initial
+  chain \(q=1,\ldots,9\).  The stable exact
   boundary determinants have degrees \(83,121,120\); after removing only
-  roots below \(q=10\), coefficientwise sign certificates prove
-  nonvanishing for every \(q\ge1\), including an exact finite prefix.
+  roots below \(q=10\), coefficientwise sign certificates prove their
+  nonvanishing on the stable ray.
   Thus at least one endpoint return mixes in every \(2,3,3'\) family.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes

@@ -5,11 +5,12 @@ Date: 2026-07-29
 ## Outcome
 
 The first periodic plateau families in the \(2,3,3'\) Kostant modules are
-controllable for every integer \(q\geq1\).  More precisely, a fixed tuple of
-right-boundary returns spans the complete local boundary quotient modulo the
-incoming image.  Therefore the global cokernel functional cannot annihilate
-all endpoint returns, so at least one endpoint return mixes the incoming
-hyperplane with its missing line.
+controllable for every integer \(q\geq1\).  More precisely, fixed tuples of
+right-boundary returns span the complete local boundary quotient modulo the
+incoming image at every \(q\), including the short initial chains.  Therefore
+the global cokernel functional cannot annihilate all endpoint returns, so at
+least one endpoint return mixes the incoming hyperplane with its missing
+line.
 
 This closes the all-\(q\) endpoint-mixing gate left open by the block
 three-term recurrence report.  It does not yet prove the off-peak propagation
@@ -95,19 +96,36 @@ ray:
 \end{array}
 \]
 
-All these factors are strictly positive for \(x\geq0\).  After shifting the
-residual polynomials, every nonzero coefficient has one sign at
+These are roots of the stable \(q\geq10\) boundary matrix continued
+polynomially to shorter, different-dimensional chains; they are not zeros of
+the exact low-\(q\) boundary problem.  All these factors are strictly positive
+for \(x\geq0\).  After shifting the residual polynomials, every nonzero
+coefficient has one sign at
 \[
 q\geq21,\qquad q\geq31,\qquad q\geq27
 \]
 for \(2,3,3'\), respectively.  Exact evaluation gives one constant nonzero
-sign on the intervening integer ranges starting at \(q=10\).  Finally, the
-stored endpoint scalar is exactly nonzero for \(q=1,\ldots,9\).  Consequently
+sign on the intervening integer ranges starting at \(q=10\).
+
+For \(q=1,\ldots,9\), the checker reconstructs the actual shorter chains and
+their boundary quotients.  Their dimensions are
+\[
+\begin{array}{c|c}
+\rho&\dim(T_\rho/H_\rho)\text{ for }q=1,\ldots,9\\ \hline
+2&1,1,1,1,1,1,1,1,1\\
+3&1,1,1,1,1,1,1,1,4\\
+3'&1,1,1,1,1,1,1,1,4.
+\end{array}
+\]
+Every corresponding exact boundary determinant is nonzero.  Thus the fixed
+endpoint tuples surject onto the complete local quotient for all low \(q\)
+as well; the separately stored endpoint scalar is now only a redundant
+cross-check.  Consequently
 \[
 \Omega_\rho(q)\ne0
 \qquad(\rho=2,3,3',\ q\geq10),
 \]
-and endpoint mixing holds for all integer \(q\geq1\).
+and full boundary-quotient surjectivity holds for all integer \(q\geq1\).
 
 ## Reproducibility
 
@@ -119,10 +137,11 @@ python3 ../notes/2026-07-29-c682-signed-block-wronskian-replay.py
 ```
 
 The primary checker reconstructs the exact degree-\(3,3,9\) operator
-coefficients, checks the signed Green identity, regenerates the three fixed
+coefficients, checks the signed Green identity, regenerates the three stable
 boundary determinant polynomials within their formal degree bounds, factors
-their below-ray linear roots, and proves the shifted residual sign
-certificates.  It uses only Python's standard library and the previously
+their below-ray linear roots, proves the shifted residual sign certificates,
+and directly reconstructs every shorter boundary quotient at
+\(q=1,\ldots,9\).  It uses only Python's standard library and the previously
 committed exact covariant engine.
 
 The independent replay uses the separate dense modular transvectant engine.
@@ -132,20 +151,21 @@ universal formulas, and independently obtains nonzero boundary determinants.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c682-signed-block-wronskian.py` | 26917 | `293ce530fef57ff6c4ccc3551984b618e2830a051270da1ec0511a70ca1dc8ac` |
+| `2026-07-29-c682-signed-block-wronskian.py` | 27450 | `9b1899b7965e6942055ea5d0846f0459b7c66f9282c6536c5e00adfe503ea350` |
 | `2026-07-29-c682-signed-block-wronskian-operators.json` | 200893 | `0c58a67eca5186263d14a3a24741590c9a664078b74308c8cf05cffe2b30447b` |
 | `2026-07-29-c682-signed-block-wronskian-boundary.json` | 177584 | `ff4103a66166bd37f2772e3737ef98c8572c9418e1e09a0d14da8d19870320d5` |
-| `2026-07-29-c682-signed-block-wronskian.json` | 5503 | `afc4476153f433fea1f9884a1cd37b220adac899c4dce58dda09446e4a065dad` |
+| `2026-07-29-c682-signed-block-wronskian.json` | 6379 | `e03731d3d66c82a3707557bf7596a25aa389db6f31124972870397c548f3157e` |
 | `2026-07-29-c682-signed-block-wronskian-replay.py` | 7534 | `a6513d1de8d303bc5434646f0980f37bef5fb67d9e1a92cd5df31d20a2bdc51f` |
 
 The hashes above are refreshed after the final validation pass.
 
 ## `ej` + `tt` closeout
 
-The cheap strengthening is that the computation proves surjectivity onto the
-entire local boundary quotient, not merely one nonzero return contraction.
-This makes the result independent of which scalar endpoint coordinate happens
-to change sign.
+The first cheap strengthening was surjectivity onto the entire stable local
+boundary quotient, not merely one nonzero return contraction.  The follow-up
+`ej` pass removes the remaining asymmetry: direct exact low-\(q\) boundary
+determinants are nonzero too.  Full boundary-quotient surjectivity, rather
+than just scalar endpoint mixing, now holds for every integer \(q\geq1\).
 
 The `tt` correction is structural.  A scalar hypergeometric fit is not merely
 unnecessary; exact data rule out that proof shape at low order.  The invariant
@@ -157,10 +177,12 @@ plateau before any root argument is attempted.
 
 - **Settled:** the exact signed block Wronskian and its Green identity.
 - **Settled:** the right boundary quotients have dimensions \(3,4,4\).
-- **Settled:** fixed endpoint-return tuples surject onto those quotients for
-  every \(q\geq10\).
-- **Settled:** exact endpoint mixing for every integer \(q\geq1\) in all
-  three nontrivial plateau families.
+- **Settled:** fixed endpoint-return tuples surject onto the stable quotients
+  for every \(q\geq10\).
+- **Settled by follow-up `ej`:** direct low-\(q\) determinants prove
+  surjectivity onto the actual shorter-chain quotients at \(q=1,\ldots,9\).
+  Hence full boundary-quotient surjectivity holds for every integer
+  \(q\geq1\), not only endpoint mixing.
 - **Settled by `ej`:** the theorem is full boundary-quotient surjectivity,
   stronger than one chosen scalar witness.
 - **Settled by `tt`:** the scalar continued-fraction fit is replaced by the
@@ -168,9 +190,11 @@ plateau before any root argument is attempted.
 - **Open:** the exact degree drops \(96\to83\), \(138\to121\), and
   \(138\to120\) suggest a principal-symbol or Darboux cancellation not yet
   identified.
-- **Open:** the repeated below-ray roots have a rigid module-dependent
-  multiplicity pattern; their representation-theoretic meaning is not yet
-  explained.
+- **Settled operationally:** the repeated below-ray roots belong to the
+  polynomial continuation of the stable boundary matrix across changes in
+  quotient dimension.  They are not low-\(q\) mixing failures.
+- **Open:** the finer representation-theoretic explanation of their rigid
+  module-dependent multiplicities.
 - **Open:** propagate the boundary theorem through every eventual peak family
   and close the remaining off-peak full-corner gate.
 

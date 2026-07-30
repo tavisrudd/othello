@@ -1,7 +1,7 @@
 {
   "boundary_quotient_wronskians": {
     "2": {
-      "conclusion": "the boundary return map is onto the local quotient for every q>=10, and an endpoint return mixes for every q>=1",
+      "conclusion": "the boundary return map is onto the local quotient for every integer q>=1",
       "degree_bound": 96,
       "exact_degree": 83,
       "family": "n=63+60q",
@@ -35,6 +35,28 @@
         -2,
         -2
       ],
+      "low_boundary_determinant_signs_q1_to_9": [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "low_boundary_quotient_dimensions_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
       "low_endpoint_pairing_signs_q1_to_9": [
         -1,
         -1,
@@ -54,7 +76,7 @@
       "tail_dimension": 20
     },
     "3": {
-      "conclusion": "the boundary return map is onto the local quotient for every q>=10, and an endpoint return mixes for every q>=1",
+      "conclusion": "the boundary return map is onto the local quotient for every integer q>=1",
       "degree_bound": 138,
       "exact_degree": 121,
       "family": "n=72+60q",
@@ -107,6 +129,28 @@
         -2,
         -2
       ],
+      "low_boundary_determinant_signs_q1_to_9": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "low_boundary_quotient_dimensions_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
       "low_endpoint_pairing_signs_q1_to_9": [
         1,
         1,
@@ -126,7 +170,7 @@
       "tail_dimension": 30
     },
     "3p": {
-      "conclusion": "the boundary return map is onto the local quotient for every q>=10, and an endpoint return mixes for every q>=1",
+      "conclusion": "the boundary return map is onto the local quotient for every integer q>=1",
       "degree_bound": 138,
       "exact_degree": 120,
       "family": "n=70+60q",
@@ -172,6 +216,28 @@
         -2,
         -2
       ],
+      "low_boundary_determinant_signs_q1_to_9": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "low_boundary_quotient_dimensions_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
       "low_endpoint_pairing_signs_q1_to_9": [
         -1,
         -1,
@@ -191,7 +257,7 @@
       "tail_dimension": 30
     }
   },
-  "claim": "At least one fixed endpoint return has nonzero contraction for every integer q>=1 in each first 2, 3, and 3' plateau.",
+  "claim": "Fixed endpoint-return tuples surject onto the complete local boundary quotient for every integer q>=1 in each first 2, 3, and 3' plateau.",
   "operator_summary": {
     "2": {
       "incoming": {
