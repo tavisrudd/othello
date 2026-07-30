@@ -157,6 +157,78 @@ def convolution(left, right, p):
     return answer
 
 
+def degenerate_root_group_repair():
+    p, modulus = 3, 8
+    basis = [
+        (y_index, r_zero_index, r_one_index)
+        for y_index in range(3)
+        for r_zero_index in range(2)
+        for r_one_index in range(2)
+    ]
+
+    def weight(item):
+        y_index, r_zero_index, r_one_index = item
+        return (
+            p * (2 - 2 * y_index)
+            + (1 - 2 * r_zero_index)
+            + p * (1 - 2 * r_one_index)
+        )
+
+    torus_fixed = [item for item in basis if weight(item) % modulus == 0]
+    assert torus_fixed == [(0, 1, 0), (2, 0, 1)]
+
+    def moved_terms(item):
+        y_index, r_zero_index, r_one_index = item
+        terms = {}
+        for new_y in range(y_index + 1):
+            for new_zero in range(r_zero_index + 1):
+                for new_one in range(r_one_index + 1):
+                    output = (new_y, new_zero, new_one)
+                    exponent = (
+                        p * (y_index - new_y)
+                        + (r_zero_index - new_zero)
+                        + p * (r_one_index - new_one)
+                    )
+                    coefficient = (
+                        math.comb(y_index, new_y)
+                        * math.comb(r_zero_index, new_zero)
+                        * math.comb(r_one_index, new_one)
+                    ) % p
+                    if output == item and exponent == 0:
+                        continue
+                    key = (output, exponent)
+                    terms[key] = (terms.get(key, 0) + coefficient) % p
+        return {key: value for key, value in terms.items() if value}
+
+    actions = [moved_terms(item) for item in torus_fixed]
+    separators = [((0, 0, 0), 1), ((2, 0, 0), 3)]
+    coefficient_matrix = [
+        [actions[column].get(row, 0) for column in range(2)]
+        for row in separators
+    ]
+    assert coefficient_matrix == [[1, 0], [0, 1]]
+    serialized_actions = [
+        [
+            [list(output), exponent, coefficient]
+            for (output, exponent), coefficient in sorted(action.items())
+        ]
+        for action in actions
+    ]
+    return {
+        "ambient_basis_dimension": len(basis),
+        "wrapped_torus_weights": [weight(item) for item in torus_fixed],
+        "torus_fixed_basis_indices": [list(item) for item in torus_fixed],
+        "root_action_supports": serialized_actions,
+        "root_action_supports_sha256": canonical_hash(serialized_actions),
+        "separating_output_monomials": [
+            {"basis_index": list(output), "t_exponent": exponent}
+            for output, exponent in separators
+        ],
+        "coefficient_matrix": coefficient_matrix,
+        "conclusion": "both torus-fixed coefficients vanish",
+    }
+
+
 def torus_gap(p, s, e, r):
     positive = [p - r, p + r]
     negative = [-p - r, -p + r]
@@ -168,29 +240,7 @@ def torus_gap(p, s, e, r):
     degenerate_repair = None
     if not ordinary_gap:
         assert (p, s, e) == (3, 0, 2)
-        # The torus-fixed basis consists of
-        # A=Y_0 tensor R_(1,0) and B=Y_2 tensor R_(0,1).
-        # In the two displayed, distinct output coordinates, u(t)-1 has
-        # coefficients t*A and t^p*B.  Hence U(F_9)-fixity kills A and B.
-        coefficient_matrix = [
-            [math.comb(1, 1) % p, 0],
-            [0, math.comb(1, 1) % p],
-        ]
-        assert coefficient_matrix == [[1, 0], [0, 1]]
-        degenerate_repair = {
-            "wrapped_torus_weights": [-8, 8],
-            "torus_fixed_basis": [
-                "Y_0 tensor R_(1,0)",
-                "Y_2 tensor R_(0,1)",
-            ],
-            "root_coefficients": ["t", "t^3"],
-            "separating_output_coordinates": [
-                "Y_0 tensor R_(0,0)",
-                "Y_2 tensor R_(0,0)",
-            ],
-            "coefficient_matrix": coefficient_matrix,
-            "conclusion": "both torus-fixed coefficients vanish",
-        }
+        degenerate_repair = degenerate_root_group_repair()
     return {
         "source_interval": [-s, s],
         "coefficient_plus_one_interval": positive,
@@ -219,6 +269,12 @@ def wall_record(p, s, r):
         iterated_seed = convolution(iterated_seed, [1, p - 1], p)
     assert seed == iterated_seed
     assert seed[0] == 1 and -seed[1] % p == r
+    derivative = [index * seed[index] % p for index in range(1, r + 1)]
+    derivative_formula = [
+        -r * (-1) ** index * math.comb(r - 1, index) % p
+        for index in range(r)
+    ]
+    assert derivative == derivative_formula
     trace_terms = [[index, 1] for index in range(r)]
     trace_scalar = sum(value for _, value in trace_terms) % p
     assert trace_scalar == r and trace_scalar
@@ -244,6 +300,8 @@ def wall_record(p, s, r):
             "primitive_difference_convolution_power": r,
             "constant_coordinate": seed[0],
             "negative_linear_coordinate": -seed[1] % p,
+            "formal_derivative_coefficients_mod_p": derivative,
+            "formal_derivative_formula": "-r*(1-z)^(r-1)",
         },
         "trace_terms": trace_terms,
         "trace_scalar": trace_scalar,

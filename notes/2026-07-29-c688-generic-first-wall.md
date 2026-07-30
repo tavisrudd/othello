@@ -82,6 +82,18 @@ same unique row both has nonzero trace and spills: they are not unrelated
 matrix phenomena but the constant and linear coefficients of one bracket
 power.
 
+There is an important evidence seam.  The human adjacent-wall theorem
+identifies its normalized row with this bracket-power coordinate system;
+the checker does not independently derive that representation-theoretic
+identification.  What it certifies independently is the exact polynomial
+calculus after that identification:
+\[
+ C_r'(z)=-r(1-z)^{r-1},
+\]
+together with the constant and linear coordinates in (H).  Thus (G)--(H)
+compress and explain the normalized human row, but cannot serve as a
+standalone proof that the adjacent-wall differential is that row.
+
 The adjacent-wall theorem remains a human representation-theoretic input:
 it identifies the normalized row.  Conditional on that theorem, the
 checker verifies the local map, trace, unique spill, Borel gap, and target
@@ -108,13 +120,17 @@ source--target difference \(4p-2\) is strictly below \(p^e-1\), so no
 equality reappears modulo the split-torus order.
 
 The sole wrap seam is harmless but was absent from C665's compressed
-torus paragraph.  At \((3,0,2)\), the torus-fixed subspace has two basis
-coordinates of weights \(8\) and \(-8\).  In distinct output coordinates,
-\(u(t)-1\) has coefficients \(t\) and \(t^3\), so root-group fixity kills
-both coefficients.  Thus
+torus paragraph.  At \((3,0,2)\), the checker now enumerates all twelve
+basis vectors of \(Y\otimes R\), finds exactly two torus-fixed coordinates
+of weights \(8\) and \(-8\), and expands their root-group actions.  In
+distinct output monomials, \(u(t)-1\) has coefficients \(t\) and \(t^3\);
+the resulting \(2\times2\) coefficient matrix is the identity, so
+root-group fixity kills both coefficients.  Thus
 \(\operatorname{Hom}_B(S,Y\otimes R)=0\) uniformly, including the
-degenerate trivial head.  Every nontrivial head uses the advertised strict
-torus-gap proof without this repair.
+degenerate trivial head.  This triple's occurrence bit is false, so the
+repair is not load-bearing for C665's pullback theorem; it closes only the
+broader uniform Borel statement.  Every nontrivial head uses the advertised
+strict torus-gap proof without this repair.
 
 ## Mandatory specializations
 
@@ -163,15 +179,17 @@ finite sweep.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-29-c688-generic-first-wall.py` | 13601 | `babf0483d9d47fc97a7b41a8e7338d05a92240871e79346dd6291a6ac9dab23b` |
-| `notes/2026-07-29-c688-generic-first-wall-independent.py` | 4454 | `f8f59797927cd85f10c762d3fa6eb16e4a783aaec432807be690b591bd15d130` |
-| `notes/2026-07-29-c688-generic-first-wall.json` | 22828 | `111aa07f08568bfb8d832f7c94c13d29c93426a063f166106e9cda32ddf7fd77` |
+| `notes/2026-07-29-c688-generic-first-wall.py` | 15771 | `1743ff995dd9ef21d6869a79a22db5dc160e35d71cf05485b58d9bf54f21fbcd` |
+| `notes/2026-07-29-c688-generic-first-wall-independent.py` | 5925 | `b34c6915b963dc8d8d1eeb0089f05d0721e6446faecc9dc6123a1171765ce5eb` |
+| `notes/2026-07-29-c688-generic-first-wall.json` | 25444 | `082f0d329ca9cc6b4db1c4879e74f8fc9759b9796a5115ce9d4f4674a62acc84` |
 
 The independent replay regenerates the Clebsch--Gordan maps from the
 closed binomial formula rather than the recurrence, reevaluates occurrence,
 trace, spill, dimensions, and the degenerate root-group seam, and checks
-the committed certificate.  The q=121 and q=169 field-sized calculations
-are a second, structurally different cross-check.
+the committed certificate.  For q=9 it independently enumerates the
+torus-fixed basis and separating root-action coefficients rather than
+accepting a hard-coded matrix.  The q=121 and q=169 field-sized
+calculations are a second, structurally different cross-check.
 
 ## Evidence boundary
 
@@ -180,6 +198,10 @@ local row.  It is not a finite prime sweep and does not prove the human
 Lucas-socle or adjacent-wall theorems.  It also does not decide which PGL
 outer extension an exceptional subgroup supplies.  These are deliberately
 separate inputs, exactly as required by C688.
+
+The generating-polynomial proposal for C689 is likewise heuristic until
+one constructs a type-independent radial polynomial and proves that its
+specializations are the existing \(B_3\) and \(H_3\) witnesses.
 
 ## Extra juice and Tao closeout
 
@@ -221,7 +243,8 @@ C665, all of which have \(s\ge6\).
 | constant Clebsch--Gordan column sparsity | settled by the Toeplitz band (T), with exactly \((s+1)(r+1)\) entries | none |
 | trace and spill appearing as separate phenomena | settled by (H): they are the linear and constant coordinates of \(C_r(z)\) | none |
 | variation with \(r\) | settled by (G): every seed is the \(r\)-fold convolution power of \((1,-1)\) | none |
-| \((3,0,2)\) torus wrap | settled by the two root-group coefficients | none |
+| adjacent-wall/bracket identification | retained explicitly as the human theorem input; polynomial consequences are independently checked | no C688 gap; a standalone derivation would be a different proof task |
+| \((3,0,2)\) torus wrap | settled by a full 12-basis local root-action enumeration; occurrence is false there | none |
 | occurrence versus spill versus outer parity | kept as three separate logical gates | none |
 
 No genuine C688 mystery remains.  The conceptual radial-nonvanishing

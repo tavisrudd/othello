@@ -79,6 +79,16 @@ def replay_case(case):
     assert wall["seed_polynomial"]["coefficients_mod_p"] == seed
     assert wall["seed_polynomial"]["constant_coordinate"] == 1
     assert wall["seed_polynomial"]["negative_linear_coordinate"] == r
+    derivative = [index * seed[index] % p for index in range(1, r + 1)]
+    derivative_formula = [
+        -r * (-1) ** index * math.comb(r - 1, index) % p
+        for index in range(r)
+    ]
+    assert derivative == derivative_formula
+    assert (
+        wall["seed_polynomial"]["formal_derivative_coefficients_mod_p"]
+        == derivative
+    )
     product = [1]
     for _ in range(r):
         next_product = [0] * (len(product) + 1)
@@ -98,11 +108,48 @@ def replay_case(case):
     if gap["degenerate_root_group_repair"] is not None:
         assert (p, s, e) == (3, 0, 2)
         repair = gap["degenerate_root_group_repair"]
-        # Independently expand the two degree-one factors which separate
-        # the wrapped torus-fixed basis under u(t)-1.
-        matrix = [[math.comb(1, 1) % p, 0], [0, math.comb(1, 1) % p]]
-        assert repair["coefficient_matrix"] == matrix
-        assert repair["root_coefficients"] == ["t", f"t^{p}"]
+        basis = [
+            (j, k, ell)
+            for j in range(3)
+            for k in range(2)
+            for ell in range(2)
+        ]
+        weight = lambda item: (
+            p * (2 - 2 * item[0])
+            + (1 - 2 * item[1])
+            + p * (1 - 2 * item[2])
+        )
+        fixed = [item for item in basis if weight(item) % (p**e - 1) == 0]
+        assert fixed == [(0, 1, 0), (2, 0, 1)]
+
+        def coefficient(source, target, exponent):
+            j, k, ell = source
+            new_j, new_k, new_ell = target
+            if not (
+                new_j <= j and new_k <= k and new_ell <= ell
+            ):
+                return 0
+            actual_exponent = (
+                p * (j - new_j) + (k - new_k) + p * (ell - new_ell)
+            )
+            if actual_exponent != exponent:
+                return 0
+            return (
+                math.comb(j, new_j)
+                * math.comb(k, new_k)
+                * math.comb(ell, new_ell)
+            ) % p
+
+        separators = [((0, 0, 0), 1), ((2, 0, 0), 3)]
+        matrix = [
+            [coefficient(source, target, exponent) for source in fixed]
+            for target, exponent in separators
+        ]
+        assert repair["ambient_basis_dimension"] == 12
+        assert repair["torus_fixed_basis_indices"] == [
+            list(item) for item in fixed
+        ]
+        assert repair["coefficient_matrix"] == matrix == [[1, 0], [0, 1]]
     assert gap["hom_B_dimension"] == 0
 
 
