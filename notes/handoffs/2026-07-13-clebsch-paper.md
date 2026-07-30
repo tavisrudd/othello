@@ -38,9 +38,10 @@ the split-paper route without an explicit user decision.
 ## Paper I
 
 Paper I and its companion *Computational strengthenings of Clebsch syndrome
-rigidity* form one warning-free, nineteen-row release surface with sixteen
-checks. C320 is complete with final `GO`. C182 owns every remaining release
-action; C611 cannot reopen or delay v1.
+rigidity* form one warning-free, nineteen-row release surface with eighteen
+checks. C320 is complete with final `GO`; C693 completed the accepted v2
+integration without changing the frozen v1 baseline. C182 owns every
+remaining release action.
 
 The load-bearing theorem package reconstructs the Clebsch code from the
 weight-six deep-hole syndrome locus and closes the terminal fields

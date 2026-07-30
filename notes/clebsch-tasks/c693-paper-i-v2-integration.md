@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued after C691; manuscript integration.
+**Status:** complete; Paper I v2 integrated, replayed, and cold-read.
 
 ## Objective
 
@@ -43,3 +43,16 @@ characteristic-zero geometry.
 - C690 report: `notes/2026-07-29-c690-paper-i-rigidity-upgrades.md`
 - C691 disposition
 
+## Result
+
+The accepted v2 is recorded in
+`notes/2026-07-29-c693-paper-i-v2-integration.md`.
+
+The human paper integrates the intrinsic cubic/golden two-graph theorem,
+its determinant and augmentation formulations, the unique balanced
+conference class, and the cubic's six-node projective frame.  The
+computational companion integrates the \(q=13\) tangent-code theorem and
+minimum-layer reconstruction.  Both additions have paper-owned,
+standalone replays and no Paper III dependency.
+
+The approved v1 baseline remains frozen and is not held by v2.
