@@ -666,6 +666,14 @@
         "lower_dimension": 7,
         "nonzero_mixing_coordinates": 7,
         "q": 3
+      },
+      {
+        "current_dimension": 10,
+        "degree": 303,
+        "last_mixing_sign": -1,
+        "lower_dimension": 9,
+        "nonzero_mixing_coordinates": 9,
+        "q": 4
       }
     ],
     "3": [
@@ -692,6 +700,14 @@
         "lower_dimension": 12,
         "nonzero_mixing_coordinates": 12,
         "q": 3
+      },
+      {
+        "current_dimension": 16,
+        "degree": 312,
+        "last_mixing_sign": 1,
+        "lower_dimension": 15,
+        "nonzero_mixing_coordinates": 15,
+        "q": 4
       }
     ],
     "3p": [
@@ -718,6 +734,14 @@
         "lower_dimension": 12,
         "nonzero_mixing_coordinates": 12,
         "q": 3
+      },
+      {
+        "current_dimension": 16,
+        "degree": 310,
+        "last_mixing_sign": 1,
+        "lower_dimension": 15,
+        "nonzero_mixing_coordinates": 15,
+        "q": 4
       }
     ]
   },

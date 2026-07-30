@@ -448,7 +448,7 @@ def certificate():
     low_checks = {}
     for label in FAMILIES:
         rows = []
-        for q in range(1, 4):
+        for q in range(1, 5):
             witness = exact_witness(label, q)
             rows.append(
                 {

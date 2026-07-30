@@ -125,15 +125,15 @@ the return boundary functional.
 
 ## Exact low-parameter evidence
 
-At \(q=1,2,3\), exact rational arithmetic finds that every incoming basis
+At \(q=1,2,3,4\), exact rational arithmetic finds that every incoming basis
 vector has nonzero first-return mixing in all three families.  In
 particular, the last-boundary witness signs are
 \[
-\begin{array}{c|ccc}
-\rho&q=1&q=2&q=3\\ \hline
-2&-&-&-\\
-3&+&+&+\\
-3'&-&-&-
+\begin{array}{c|cccc}
+\rho&q=1&q=2&q=3&q=4\\ \hline
+2&-&-&-&-\\
+3&+&+&+&+\\
+3'&-&-&-&+
 \end{array}
 \]
 The sign change observed later in the \(3'\) family means that a global
@@ -158,7 +158,7 @@ python3 ../notes/2026-07-29-c682-nontrivial-plateau-controllability-replay.py
 The primary checker constructs the primitive rational free modules,
 interpolates every block coupling within the formal degree-three bound,
 verifies the formulas at \(q=1,\ldots,6\), factors the three backward
-block determinants, and checks exact mixing at \(q=1,2,3\).
+block determinants, and checks exact mixing at \(q=1,2,3,4\).
 
 The independent replay reconstructs \(F,h,t\) and every primitive generator
 using the separate dense integer/modular transvectant engine.  At both
@@ -167,8 +167,8 @@ recorded block coefficients at the out-of-sample value \(q=7\).
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c682-nontrivial-plateau-controllability.py` | 17231 | `62c45288a0b329a8fb579a72f8b0beb4924be89370216a2727fe41e6171d8c34` |
-| `2026-07-29-c682-nontrivial-plateau-controllability.json` | 14066 | `1e9bd1c3dbebc59fd1acc2cbaa7edd52ab17adb7a8943dde68f148b611142873` |
+| `2026-07-29-c682-nontrivial-plateau-controllability.py` | 17231 | `4c8489ac6cacf6dae2d842c3d5ba45c55a1b1dc50a1b3097e3e2388c3d2e4076` |
+| `2026-07-29-c682-nontrivial-plateau-controllability.json` | 14641 | `e1c25f6751126699d73bac4c9a5fbbf561e76f693bd22bc3f98304361a70555b` |
 | `2026-07-29-c682-nontrivial-plateau-controllability-replay.py` | 8709 | `24ed87ef60aa5663f6f24318ff4372ad4245526e9d13aa5a2d6e4b69989a0d4e` |
 
 The load-bearing exact and replay engines remain the previously committed
