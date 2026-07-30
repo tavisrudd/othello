@@ -1,0 +1,94 @@
+{
+  "q13_passant_internal_incidence": {
+    "binary_nullity": 36,
+    "binary_rank": 42,
+    "column_weights": [
+      7
+    ],
+    "conic": "XZ-Y^2=0",
+    "field": 13,
+    "internal_points": 78,
+    "passant_lines": 78,
+    "polarity_reindexing_is_symmetric": true,
+    "row_weights": [
+      7
+    ],
+    "terminal_support_weight": 8
+  },
+  "schema": "c690-rigidity-fingerprints-v1",
+  "twelve_point_kill_test": {
+    "class_sizes": {
+      "1A": 1,
+      "2A": 15,
+      "3A": 20,
+      "5A": 12,
+      "5B": 12
+    },
+    "equivariant_identification": false,
+    "first_character_mismatch": "2A",
+    "paper_I": {
+      "a5_set": "A5/C5",
+      "character": {
+        "1A": 12,
+        "2A": 0,
+        "3A": 0,
+        "5A": 2,
+        "5B": 2
+      },
+      "icosahedral_five_orbital": {
+        "bipartite": false,
+        "degrees": [
+          5
+        ],
+        "edges": 30,
+        "triangles": 20,
+        "vertices": 12
+      },
+      "orbit_sizes": [
+        12
+      ],
+      "stabilizer_subdegrees": [
+        1,
+        1,
+        5,
+        5
+      ]
+    },
+    "schlafli_double_six": {
+      "a5_set": "(A5/D5) disjoint_union (A5/D5)",
+      "character": {
+        "1A": 12,
+        "2A": 4,
+        "3A": 0,
+        "5A": 2,
+        "5B": 2
+      },
+      "intersection_graph": {
+        "bipartite": true,
+        "degrees": [
+          5
+        ],
+        "edges": 30,
+        "triangles": 0,
+        "vertices": 12
+      },
+      "one_row_character": {
+        "1A": 6,
+        "2A": 2,
+        "3A": 0,
+        "5A": 1,
+        "5B": 1
+      },
+      "orbit_sizes": [
+        6,
+        6
+      ],
+      "stabilizer_subdegrees_on_twelve_lines": [
+        1,
+        1,
+        5,
+        5
+      ]
+    }
+  }
+}

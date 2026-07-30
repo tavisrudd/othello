@@ -27,7 +27,6 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
-| [C690 — Paper I rigidity upgrades](../clebsch-tasks/c690-paper-i-rigidity-upgrades.md) | queued after C182; v2 only | terminal-field trade test, orientation/Gale reconstruction, double-six kill test, then full-conic crown gate |
 | [C689 — shared radial nonvanishing](../clebsch-tasks/c689-shared-radial-nonvanishing.md) | ready; C665 conceptual successor; v2 only | replace the \(B_3/H_3\) scalar witnesses by one geometric radial-nonvanishing mechanism or a sharp obstruction |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
@@ -48,6 +47,15 @@ weight-six deep-hole syndrome locus and closes the terminal fields
 q=13,17,19 by exact passant-edge-orbit searches. The shared
 `deep_holes = conic` fact remains pinned to the standalone Lean repository;
 the paper does not inherit trust from the fallback mega-paper gate.
+
+C690 is complete as v2 exploration. The syndrome locus reconstructs the
+unordered support-orientation torsor; on the frozen common marking its
+exchange is support complementation, Gale duality, and golden conjugation,
+and its first signed moment is cubic. The q=13 terminal problem is exactly
+the binary minimum-distance gate \(d\ge10\), which remains C611-owned and is
+not reached by C665's defining-characteristic trade machinery. The
+twelve-point Schläfli identification fails equivariantly, and the first open
+all-size full-conic gate is \(k=9\) over \(q=23,25\).
 
 Local aggregate replay:
 

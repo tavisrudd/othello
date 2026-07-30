@@ -18,6 +18,11 @@ actual owning paper.
 - C662 supplies the human partial-cover and saturation mechanism but stops
   one unit short at \(q=13\).
 - C605 remains load-bearing for the terminal exclusions.
+- C690 sharpens the q=13 endpoint: a terminal eight-arc exists if and only
+  if the \(78\times78\) binary passant/internal incidence matrix has a
+  weight-eight nullword. All nullwords have even weight, so the exclusion
+  is exactly \(d\ge10\). C665's defining-characteristic transitive-sheet
+  machinery does not reach this cross-characteristic support gate.
 
 ## Work package
 
@@ -39,3 +44,5 @@ Do not reopen, delay, or silently strengthen Paper I v1.
 
 Full task specification:
 `notes/2026-07-25-c611-exterior-set-mechanism-v2-disposition.md`.
+The C690 transfer and its exact incidence replay are in
+`notes/2026-07-29-c690-paper-i-rigidity-upgrades.md`.

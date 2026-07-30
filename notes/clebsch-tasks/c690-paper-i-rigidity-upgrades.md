@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued after C182; Paper I v2 research only.
+**Status:** complete; Paper I v2 research only.
 
 ## Objective
 
@@ -67,3 +67,19 @@ or projective-head exclusions apply. In parallel on the same frozen
 Paper I marking, compute the two \(A_5\)-fingerprints needed for the
 orientation-torsor and double-six decisions.
 
+## Disposition
+
+- The q=13 endpoint is exactly the minimum-distance gate \(d\ge10\) for
+  the binary passant/internal incidence code. C665's
+  defining-characteristic, transitive-sheet machinery does not apply; C611
+  owns the remaining support classification.
+- The syndrome locus reconstructs the unordered support-orientation torsor.
+  On the frozen common marking its exchange is support complementation,
+  Gale duality, and golden conjugation, with first signed moment cubic.
+- The twelve continuation directions are \(A_5/C_5\), while the double-six
+  is \(2(A_5/D_5)\); their involution characters and incidence graphs differ.
+- The first open E3 case is exactly \(k=9\) over \(q=23,25\), with compact
+  cover-moment falsifier ledgers. No larger project is allocated.
+
+Full report and exact replay:
+`notes/2026-07-29-c690-paper-i-rigidity-upgrades.md`.
