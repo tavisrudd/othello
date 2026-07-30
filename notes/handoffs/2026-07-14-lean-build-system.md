@@ -5,7 +5,8 @@
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated; C287's current paper
 boundaries are synchronized; C685 corrects the Passages formal-companion omission and C686--C687
 own the complete field-certificate split; extraction waits for a commit-clean immutable input
-checkpoint, while C162's remaining real-build checks also need a quiet window
+checkpoint, while C162's remaining real-build checks also need a quiet window; C698--C702 now own
+the Paper I v2 formalization and downstream q13 certificate release
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -117,6 +118,15 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    moves its final aggregate out of the human Arcs gate. C687 completes the same exact,
    content-addressed, one-way split for the remaining declared q11/q13/q25 generated families.
    Contracts: [`../2026-07-28-c685-c687-extraction-corrections.md`](../2026-07-28-c685-c687-extraction-corrections.md).
+10. **C698--C702 Paper I v2 formalization:** the user explicitly placed the extracted
+    `finitegeom` and downstream Paper I companion work in `build-sys` scope.  The audit found that
+    the current human gate covers only the v1 chord-defect/q9/small-\(k\) surface, while the revised
+    paper also needs the signed two-graph/cubic/golden core and the q13
+    \([78,36,12]_2\) minimum-layer theorem.  Keep human-scale reusable results in `finitegeom`;
+    update the existing q11 leaf; create a separate q13 leaf; preserve v1; and compose a new v2
+    aggregate only after exact pins, manifests, axiom audits, regeneration, and clean replay agree.
+    Audit and implementation plan:
+    [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md).
 
 ### C685--C687 operator progression
 
@@ -142,6 +152,28 @@ Passages `finitegeom` state; C686 yields the reusable certificate-package patter
 C687 applies that pattern to the remaining families. C684 consumes those identities to finalize
 paper-local pins and never becomes an upstream dependency of a Lean repository.
 
+### C698--C702 operator progression
+
+1. **Run C698 first.** Land the reusable signed-two-graph API and the six-vertex human Paper I
+   theorems in `finitegeom`.  Full projective automorphisms require the singular-locus/frame bridge;
+   the integral order requires an actual integral centralizer theorem.
+2. **Run C699 on the existing q11 package.** Replace its stale `finitegeom` pin and prove that the
+   certified q11 syndrome/support data recover C698's switching class and golden operator.
+3. **Run C700 for the reusable q13 foundation.** Formalize the Lemma of Tangents and finite-code
+   reductions in `finitegeom`; keep all exhaustive q13 catalogues out.  C700 is logically
+   independent of C698 and may move before C699 if useful, but the release must converge on one
+   final `finitegeom` revision.
+4. **Run C701 in a new q13 package.** Use sharded meet-in-the-middle certificates for distance and
+   certify the entire minimum layer, reconstruction, and automorphism group.  Do not elaborate the
+   raw multi-million profile spaces.
+5. **Run C702 last.** Add a new v2 aggregate gate, align q11/q13 on one upstream commit, freeze the
+   trust surface, and refresh the standalone paper pin.  Preserve the v1 aggregate unchanged.
+
+The targeted literature audit found that the paper's cubic is exactly the
+Cheltsov--Tschinkel--Zhang six-nodal \(S_5\)-symmetric model after a coordinate swap.  The
+`clebsch` lane owns adding that attribution to the manuscript; `build-sys` owns recording it in
+formal provenance and does not make a novelty claim.
+
 ## Gates and non-goals
 
 - Never start a real build while ownership of the shared tree is uncertain.
@@ -161,6 +193,8 @@ paper-local pins and never becomes an upstream dependency of a Lean repository.
 - C326 exporter: [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
 - C287 current paper intake: [`../2026-07-26-c287-paper-intake-refresh.md`](../2026-07-26-c287-paper-intake-refresh.md).
 - C684 paper-repository extraction: [`../2026-07-26-c684-paper-repository-extraction.md`](../2026-07-26-c684-paper-repository-extraction.md).
+- Paper I v2 Lean/literature audit and C698--C702 plan:
+  [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md).
 - C365 literature-audit conventions (reported): [`../literature-audit-conventions.md`](../literature-audit-conventions.md),
   reviewed in [`../2026-07-19-c365-literature-audit-conventions-fable-review.md`](../2026-07-19-c365-literature-audit-conventions-fable-review.md).
   Repo-wide recording standard for novelty/priority work, pointed to from `CLAUDE.md`. Its read-depth
