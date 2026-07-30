@@ -1,7 +1,7 @@
 # Verification of the conic matching quotient paper
 
-This directory is the aggregate verification surface for *Quadratic recovery
-and cubic orientation in conic matching quotients*. It
+This directory is the aggregate verification surface for *Quadratic trade
+rigidity and cubic orientation in conic matching quotients*. It
 separates four kinds of support:
 
 - proofs given in the manuscript;
@@ -10,8 +10,8 @@ separates four kinds of support:
 - the kernel-checked arithmetic-gluing theorem, whose largest `H_3` leaves
   are certificate-backed.
 
-`statement_identity.json` contains the exact twenty-four theorem-like statements
-in the manuscript. `extract_statement_identity.py --check` rejects any
+`statement_identity.json` contains the exact theorem-like statements in the
+manuscript. `extract_statement_identity.py --check` rejects any
 unrecorded change to those statements.
 
 `trust_manifest.json` maps every statement to its proof modes and evidence
@@ -19,7 +19,8 @@ bundles. `verify_release.py` checks the statement identity, the manifest
 partition, the exact command and evidence-path allowlist, safe checksum
 targets, every recorded digest, and the primary and independent replays. It
 then elaborates the arithmetic-gluing, Hilbert-symmetry, and
-hyperplane-square Lean gates, builds the paper through
+hyperplane-square Lean gates, runs the generic first-wall and shared-radial
+replays, and builds the paper through
 the repository Makefile, enforces the gate's axiom allowlist, and rejects
 manuscript warnings.
 

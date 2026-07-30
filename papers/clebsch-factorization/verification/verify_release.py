@@ -152,21 +152,79 @@ EXPECTED_EVIDENCE = {
             "verification/hyperplane_square.sha256",
         "commands": [],
     },
+    "generic-first-wall": {
+        "checksum_manifest":
+            "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
+        "commands": [
+            [
+                "python3",
+                "verification/evidence/generic_first_wall.py",
+                "--check",
+            ],
+            [
+                "python3",
+                "verification/evidence/generic_first_wall_replay.py",
+                "--check",
+            ],
+        ],
+    },
+    "shared-radial": {
+        "checksum_manifest":
+            "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
+        "commands": [
+            [
+                "python3",
+                "verification/evidence/shared_radial.py",
+                "--check",
+            ],
+            [
+                "python3",
+                "verification/evidence/shared_radial_replay.py",
+                "--check",
+            ],
+        ],
+    },
+    "small-field-trade": {
+        "checksum_manifest":
+            "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
+        "commands": [
+            [
+                "python3",
+                "verification/evidence/trade_only_small_field.py",
+            ],
+            [
+                "python3",
+                "verification/evidence/trade_only_small_field_replay.py",
+            ],
+        ],
+    },
 }
 EXPECTED_CLAIMS = {
     "thm:factorization-recovery": (
         {"conceptual", "classical-input", "certificate"},
         {"matching-module", "h3-equivariant-rank", "balanced-sheet",
-         "gorenstein-gate", "profile-incidence", "decorated-parent"},
+         "gorenstein-gate", "generic-first-wall", "shared-radial",
+         "small-field-trade", "profile-incidence", "decorated-parent"},
     ),
     "prop:matching-secant-quotient": ({"conceptual"}, set()),
+    "lem:uniform-sheet-exclusion": (
+        {"conceptual", "classical-input", "certificate"},
+        {"generic-first-wall", "small-field-trade"},
+    ),
     "thm:balanced-orbit-completeness": (
-        {"conceptual", "classical-input"},
-        set(),
+        {"conceptual", "classical-input", "certificate"},
+        {"generic-first-wall", "small-field-trade"},
+    ),
+    "lem:shared-radial-cycle": (
+        {"conceptual", "certificate"},
+        {"shared-radial"},
     ),
     "thm:rank-three-quotients": (
         {"conceptual", "classical-input", "certificate"},
-        {"matching-module", "h3-equivariant-rank"},
+        {"matching-module", "h3-equivariant-rank", "shared-radial"},
     ),
     "cor:h3-affine-origin": (
         {"conceptual", "classical-input", "certificate"},
@@ -179,7 +237,8 @@ EXPECTED_CLAIMS = {
     "prop:radical-hadamard": ({"conceptual"}, set()),
     "prop:modular-sheet-mechanism": (
         {"conceptual", "classical-input", "certificate"},
-        {"matching-module", "h3-equivariant-rank", "balanced-sheet"},
+        {"matching-module", "h3-equivariant-rank", "balanced-sheet",
+         "shared-radial"},
     ),
     "lem:hyperplane-square": (
         {"conceptual", "lean"},
@@ -187,18 +246,16 @@ EXPECTED_CLAIMS = {
     ),
     "thm:balanced-cubic": (
         {"conceptual", "certificate", "lean"},
-        {"matching-module", "balanced-sheet", "hilbert-symmetry",
+        {"matching-module", "balanced-sheet", "shared-radial",
          "hyperplane-square"},
     ),
     "cor:graded-evaluation": (
         {"conceptual", "certificate", "lean"},
-        {"matching-module", "balanced-sheet", "hilbert-symmetry",
-         "hyperplane-square"},
+        {"matching-module", "balanced-sheet", "hyperplane-square"},
     ),
     "cor:self-associated-gorenstein": (
-        {"conceptual", "classical-input", "certificate", "lean"},
-        {"matching-module", "balanced-sheet", "gorenstein-gate",
-         "hilbert-symmetry"},
+        {"conceptual", "certificate"},
+        {"matching-module", "balanced-sheet", "gorenstein-gate"},
     ),
     "cor:secant-product-syzygies": (
         {"conceptual", "certificate"},
@@ -314,6 +371,14 @@ def run(command: list[str], cwd: Path) -> str:
     summary = completed.stdout.strip().splitlines()
     tail = summary[-1] if summary else "OK"
     print(f"{' '.join(command)}: {tail}")
+    if command and command[0] == "lean/scripts/guarded-lean":
+        match = re.search(r"^stdout: \d+ lines -> (.+)$", completed.stdout, re.MULTILINE)
+        if match is None:
+            raise ValueError("guarded Lean output did not identify its raw log")
+        raw_log = Path(match.group(1)).resolve()
+        if raw_log.name != "stdout.log" or "guarded-lean" not in raw_log.parts:
+            raise ValueError("guarded Lean returned an unsafe raw-log path")
+        return raw_log.read_text(encoding="utf-8")
     return completed.stdout
 
 
@@ -332,11 +397,7 @@ def check_latex_warnings(log_path: Path) -> None:
 
 
 def check_lean_axiom_audit(wrapper_output: str) -> None:
-    match = re.search(r"^stdout: \d+ lines -> (.+)$", wrapper_output, re.MULTILINE)
-    if match is None:
-        raise ValueError("guarded Lean output did not identify its stdout audit log")
-    audit_path = Path(match.group(1))
-    audit = audit_path.read_text(encoding="utf-8")
+    audit = wrapper_output
     dependency_blocks = re.findall(
         r"'[^']+' depends on axioms: \[(.*?)\]", audit, re.DOTALL
     )
@@ -671,7 +732,10 @@ def main() -> int:
         if name in EXTERNAL_FORMAL_EVIDENCE and not formal_available:
             continue
         for command in item["commands"]:
-            run(command, paper_root)
+            run(
+                command,
+                repo_root if name in EXTERNAL_FORMAL_EVIDENCE else paper_root,
+            )
     if formal_available:
         lean_output = "\n".join(
             run(command, repo_root) for command in LEAN_GATE_COMMANDS

@@ -18,7 +18,9 @@ LABEL_RE = re.compile(r"^\s*\\label\{([^}]+)\}\s*$")
 EXPECTED_LABELS = (
     "thm:factorization-recovery",
     "prop:matching-secant-quotient",
+    "lem:uniform-sheet-exclusion",
     "thm:balanced-orbit-completeness",
+    "lem:shared-radial-cycle",
     "thm:rank-three-quotients",
     "cor:h3-affine-origin",
     "cor:h3-middle-layer",

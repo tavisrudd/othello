@@ -4,7 +4,10 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued and unblocked; manuscript integration.
+**Status:** completed 2026-07-30; authoritative manuscript, trust surface,
+aggregate replay, and cold read green.  Standalone synchronization complete.
+
+**Report:** `notes/2026-07-30-c694-paper-ii-v2-integration.md`.
 
 ## Objective
 
@@ -45,3 +48,13 @@ and canonical alternating-cycle radial nonvanishing.
 - C688 generic replay record
 - C689: `notes/2026-07-29-c689-shared-radial.md`
 - C692: `notes/2026-07-30-c692-cross-sheet-gorenstein.md`
+
+## Completion
+
+Paper II v2 now derives the balanced one-factorization sheets from the
+two-valued one-dimensional trade hypothesis, uses the generic local
+first-wall replay as the canonical extension-field check, proves both
+radial projections from one edge-selected alternating-cycle recurrence,
+and proves the Artinian Gorenstein pairing by maximal-isotropic quotient
+duality.  The paper-owned thirteen-bundle release gate passes with
+twenty-six statement identities and a warning-free PDF.

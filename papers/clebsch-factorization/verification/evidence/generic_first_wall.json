@@ -1,0 +1,1110 @@
+{
+  "cases": [
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "b1257833a38ebf9810b8dcfb8dc57ca2632c3f3f0ea2773ddf0ee1c140549ce1",
+        "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            2
+          ],
+          "constant_coordinate": 1,
+          "formal_derivative_coefficients_mod_p": [
+            2
+          ],
+          "formal_derivative_formula": "-r*(1-z)^(r-1)",
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            1,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "e2f6ddf81afe6be943e16c1f5372e32c4e1b518523219e352fc4405f31983c12",
+        "zeroth_digit_exact_entries": 2,
+        "zeroth_digit_nonzero_entries": 2,
+        "zeroth_digit_sha256": "e2f6ddf81afe6be943e16c1f5372e32c4e1b518523219e352fc4405f31983c12",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            0
+          ],
+          "dimension": 1,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": false,
+        "parity_bit": 0,
+        "required_bit": 1
+      },
+      "p": 3,
+      "r": 1,
+      "s": 0,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -4,
+          -2
+        ],
+        "coefficient_plus_one_interval": [
+          2,
+          4
+        ],
+        "degenerate_root_group_repair": {
+          "ambient_basis_dimension": 12,
+          "coefficient_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "conclusion": "both torus-fixed coefficients vanish",
+          "root_action_supports": [
+            [
+              [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                1,
+                1
+              ]
+            ],
+            [
+              [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                9,
+                1
+              ],
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                6,
+                1
+              ],
+              [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                6,
+                2
+              ],
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                3,
+                2
+              ],
+              [
+                [
+                  2,
+                  0,
+                  0
+                ],
+                3,
+                1
+              ]
+            ]
+          ],
+          "root_action_supports_sha256": "85dacd774850ab82a665ad91c870abb999bd54a4be0cbb2bafe038c9e7699b63",
+          "separating_output_monomials": [
+            {
+              "basis_index": [
+                0,
+                0,
+                0
+              ],
+              "t_exponent": 1
+            },
+            {
+              "basis_index": [
+                2,
+                0,
+                0
+              ],
+              "t_exponent": 3
+            }
+          ],
+          "torus_fixed_basis_indices": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "wrapped_torus_weights": [
+            8,
+            -8
+          ]
+        },
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 10,
+        "no_modular_wrap": false,
+        "source_interval": [
+          0,
+          0
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 8
+      },
+      "trace_target_dimension": 4
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "1180fba36df4ca346cb168b12aede6da83e43d3ffbdd8c600cee860155ac722d",
+        "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            4
+          ],
+          "constant_coordinate": 1,
+          "formal_derivative_coefficients_mod_p": [
+            4
+          ],
+          "formal_derivative_formula": "-r*(1-z)^(r-1)",
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            3,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "598a918532b36d3de9b79290fe9921eafd1075d9fe674b15817ab631407a1d78",
+        "zeroth_digit_exact_entries": 6,
+        "zeroth_digit_nonzero_entries": 6,
+        "zeroth_digit_sha256": "a21941e4b1a94ad2dede120c0f10e8996a537ca76b3b6aba7cefa13b52e79644",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            2
+          ],
+          "dimension": 3,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            3,
+            1
+          ],
+          "dimension": 8,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": true,
+        "parity_bit": 0,
+        "required_bit": 0
+      },
+      "p": 5,
+      "r": 1,
+      "s": 2,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -6,
+          -4
+        ],
+        "coefficient_plus_one_interval": [
+          4,
+          6
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 18,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -2,
+          2
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 24
+      },
+      "trace_target_dimension": 24
+    },
+    {
+      "e": 3,
+      "first_wall": {
+        "map_sha256": "f82678acc006f666159af5630f691388bef432cb5a7ffbb145544daa142b72ad",
+        "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            6
+          ],
+          "constant_coordinate": 1,
+          "formal_derivative_coefficients_mod_p": [
+            6
+          ],
+          "formal_derivative_formula": "-r*(1-z)^(r-1)",
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            5,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "466ab76e1b37b779eb0ce7c6269dd27e90a3ff72807bb7a0c311e217857ce81e",
+        "zeroth_digit_exact_entries": 10,
+        "zeroth_digit_nonzero_entries": 10,
+        "zeroth_digit_sha256": "b6c8a6e64ebdb4e16c137371ad963f9fb08467d58cfc1093bbb199fe7c11b005",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            4
+          ],
+          "dimension": 5,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            5,
+            1
+          ],
+          "dimension": 12,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 3,
+        "occurs": true,
+        "parity_bit": 1,
+        "required_bit": 1
+      },
+      "p": 7,
+      "r": 1,
+      "s": 4,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -8,
+          -6
+        ],
+        "coefficient_plus_one_interval": [
+          6,
+          8
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 26,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -4,
+          4
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 342
+      },
+      "trace_target_dimension": 60
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "45e2a2d9943ef07267c9495df6c5b2bf4389e405ba787e916a4ab3514f21a351",
+        "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            8,
+            3,
+            10
+          ],
+          "constant_coordinate": 1,
+          "formal_derivative_coefficients_mod_p": [
+            8,
+            6,
+            8
+          ],
+          "formal_derivative_formula": "-r*(1-z)^(r-1)",
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 3,
+          "primitive_difference_convolution_power": 3,
+          "variable": "z"
+        },
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              3,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 3,
+        "trace_scalar_integer": 3,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            9,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "9261d8feb8fc9d8998783f955818e759063ce96c9f6ea4e14164bdd8491a0d45",
+        "zeroth_digit_exact_entries": 28,
+        "zeroth_digit_nonzero_entries": 28,
+        "zeroth_digit_sha256": "d9e81d1ef4504d21b014af2d67c0972f7ee8a44feb031b6015653680ec7a3511",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 4
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            3,
+            1
+          ],
+          "dimension": 8,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            6
+          ],
+          "dimension": 7,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            9,
+            1
+          ],
+          "dimension": 20,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": true,
+        "parity_bit": 0,
+        "required_bit": 0
+      },
+      "p": 11,
+      "r": 3,
+      "s": 6,
+      "spill_target_dimension": 24,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -14,
+          -8
+        ],
+        "coefficient_plus_one_interval": [
+          8,
+          14
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 42,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -6,
+          6
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 120
+      },
+      "trace_target_dimension": 140
+    },
+    {
+      "e": 3,
+      "first_wall": {
+        "map_sha256": "31ac38a377d81ae2d4f806504065b521b5f41c340317289ee8551154a3aaee99",
+        "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            10
+          ],
+          "constant_coordinate": 1,
+          "formal_derivative_coefficients_mod_p": [
+            10
+          ],
+          "formal_derivative_formula": "-r*(1-z)^(r-1)",
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 1,
+          "primitive_difference_convolution_power": 1,
+          "variable": "z"
+        },
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 1,
+        "trace_scalar_integer": 1,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            9,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "9261d8feb8fc9d8998783f955818e759063ce96c9f6ea4e14164bdd8491a0d45",
+        "zeroth_digit_exact_entries": 18,
+        "zeroth_digit_nonzero_entries": 18,
+        "zeroth_digit_sha256": "a21479994d1fed45503d65465e8e81eaea2a31cc7af9be42e8c45af52a353bc5",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 2
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            1,
+            1
+          ],
+          "dimension": 4,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            8
+          ],
+          "dimension": 9,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            9,
+            1
+          ],
+          "dimension": 20,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 3,
+        "occurs": true,
+        "parity_bit": 1,
+        "required_bit": 1
+      },
+      "p": 11,
+      "r": 1,
+      "s": 8,
+      "spill_target_dimension": 12,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -12,
+          -10
+        ],
+        "coefficient_plus_one_interval": [
+          10,
+          12
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 42,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -8,
+          8
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 1330
+      },
+      "trace_target_dimension": 180
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "93c34a87894c09e6e17d8ddc41cf9fb3f7b4ef3f11d87a12db79f5692cc74954",
+        "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            8,
+            10,
+            3,
+            5,
+            12
+          ],
+          "constant_coordinate": 1,
+          "formal_derivative_coefficients_mod_p": [
+            8,
+            7,
+            9,
+            7,
+            8
+          ],
+          "formal_derivative_formula": "-r*(1-z)^(r-1)",
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 5,
+          "primitive_difference_convolution_power": 5,
+          "variable": "z"
+        },
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 5,
+        "trace_scalar_integer": 5,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            11,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "8efbcbf1bd5b53aa74adcacc6e3f20610af72f43c13900c3376ac80fd061bc6e",
+        "zeroth_digit_exact_entries": 42,
+        "zeroth_digit_nonzero_entries": 42,
+        "zeroth_digit_sha256": "860aca0a82227c8ea3f78237930f64ee05d9944aa2843b878591a5ce4edd6279",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 6
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            5,
+            1
+          ],
+          "dimension": 12,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            6
+          ],
+          "dimension": 7,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            11,
+            1
+          ],
+          "dimension": 24,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": true,
+        "parity_bit": 0,
+        "required_bit": 0
+      },
+      "p": 13,
+      "r": 5,
+      "s": 6,
+      "spill_target_dimension": 36,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -18,
+          -8
+        ],
+        "coefficient_plus_one_interval": [
+          8,
+          18
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 50,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -6,
+          6
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 168
+      },
+      "trace_target_dimension": 168
+    },
+    {
+      "e": 2,
+      "first_wall": {
+        "map_sha256": "52850668c43093bf0a853670b82e334ec1ea6f7fbe951a9226657a67c482da84",
+        "normalization": "top divided-power wall coefficient = 1",
+        "seed_polynomial": {
+          "coefficients_mod_p": [
+            1,
+            10,
+            3,
+            12
+          ],
+          "constant_coordinate": 1,
+          "formal_derivative_coefficients_mod_p": [
+            10,
+            6,
+            10
+          ],
+          "formal_derivative_formula": "-r*(1-z)^(r-1)",
+          "formula": "(1-z)^r",
+          "negative_linear_coordinate": 3,
+          "primitive_difference_convolution_power": 3,
+          "variable": "z"
+        },
+        "spill_coordinate": {
+          "coefficient": 1,
+          "coordinate": [
+            "highest_Y",
+            "highest_R"
+          ],
+          "target": [
+            [
+              0,
+              2
+            ],
+            [
+              3,
+              1
+            ]
+          ]
+        },
+        "spill_nonzero": true,
+        "trace_scalar": 3,
+        "trace_scalar_integer": 3,
+        "trace_scalar_nonzero": true,
+        "trace_terms": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "unique_adjacent_candidates": [
+          [
+            11,
+            1
+          ]
+        ],
+        "unique_row": true
+      },
+      "local_clebsch_gordan": {
+        "frobenius_digit_nonzero_entries": 2,
+        "frobenius_digit_sha256": "8efbcbf1bd5b53aa74adcacc6e3f20610af72f43c13900c3376ac80fd061bc6e",
+        "zeroth_digit_exact_entries": 36,
+        "zeroth_digit_nonzero_entries": 36,
+        "zeroth_digit_sha256": "2709f60ad9f698685ed832be1c2799a4fb172456715a5ce5309924ccfa0f3561",
+        "zeroth_digit_toeplitz": true,
+        "zeroth_digit_toeplitz_band_width": 4
+      },
+      "modules": {
+        "R": {
+          "digits": [
+            3,
+            1
+          ],
+          "dimension": 8,
+          "name": "R"
+        },
+        "S": {
+          "digits": [
+            8
+          ],
+          "dimension": 9,
+          "name": "S"
+        },
+        "T": {
+          "digits": [
+            11,
+            1
+          ],
+          "dimension": 24,
+          "name": "T"
+        },
+        "Y": {
+          "digits": [
+            0,
+            2
+          ],
+          "dimension": 3,
+          "name": "Y"
+        }
+      },
+      "occurrence": {
+        "exponent": 2,
+        "occurs": false,
+        "parity_bit": 0,
+        "required_bit": 1
+      },
+      "p": 13,
+      "r": 3,
+      "s": 8,
+      "spill_target_dimension": 24,
+      "torus_gap": {
+        "coefficient_minus_one_interval": [
+          -16,
+          -10
+        ],
+        "coefficient_plus_one_interval": [
+          10,
+          16
+        ],
+        "degenerate_root_group_repair": null,
+        "hom_B_dimension": 0,
+        "maximum_weight_difference": 50,
+        "no_modular_wrap": true,
+        "source_interval": [
+          -8,
+          8
+        ],
+        "strict_integer_gap": true,
+        "torus_modulus": 168
+      },
+      "trace_target_dimension": 216
+    }
+  ],
+  "committed_cross_checks": {
+    "q121": {
+      "R": [
+        3,
+        1
+      ],
+      "T": [
+        9,
+        1
+      ],
+      "row": 34,
+      "trace_scalar": 3,
+      "unique_nonzero_connecting_row": true
+    },
+    "q169": {
+      "R": [
+        5,
+        1
+      ],
+      "T": [
+        11,
+        1
+      ],
+      "spill_nonzero": true,
+      "torus_fixed_cochains": 0,
+      "trace_scalar": 5
+    }
+  },
+  "evidence_boundary": "the human Lucas-socle theorem decides occurrence and the human adjacent-wall theorem supplies the normalized row; this local replay checks the row's divided-power maps and consequences",
+  "occurrence_packets": {
+    "derivation": "e*(p-1)/2 == 1+s/2 (mod 2), so s mod 4 = 2 requires bit 0 and s mod 4 = 0 requires bit 1",
+    "s_mod_4_equals_0": "e*(p-1)/2 is odd",
+    "s_mod_4_equals_2": "e*(p-1)/2 is even"
+  },
+  "schema": 1,
+  "theorem_scope": {
+    "constructed_modules": [
+      "S",
+      "T",
+      "R",
+      "Y"
+    ],
+    "e": "integer > 1",
+    "extension_field_constructed": false,
+    "p": "odd prime",
+    "s": "even integer with 0 <= s < p-1"
+  }
+}

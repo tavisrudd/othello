@@ -8,14 +8,14 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "6c99f5c02419d4caf3536b88464327c780d6776f6a32ff398d5a758fb1c6e8b1",
-  "runner_sha256": "98f1ed27a9b53bc02c0cc08a5afb654a1373b14126d7b800bb249a5684a12521",
+  "trust_manifest_sha256": "29ac796f534f74f17562058fd4367fe91a9a20249749ccc009f68f79cc117873",
+  "runner_sha256": "40c2a50975f3935bee8d8ffa28c985b0a205e7340da5de9fd8b835fdd59f8299",
   "review_sources_sha256": {
-    "normalized_manuscript": "e29968f71061dda5cec28ab9d429cf06bf30faade8af112c61b5a4e0454b181d",
-    "normalized_statement_identity": "278d0d8d92519ba7b4cb4c7bb2356b34a5e20427b72821862d0f01eaa77b989f",
-    "statement_extractor": "98f3a0b7a346160835c9bc500938f08ca52bd1713d57ccf9760aab22f650b8ce",
-    "paper_readme": "2ea38b3a6a8ab866c501ecdada03851892137cbc6dc194cfd97a5da73b276f60",
-    "verification_readme": "5ec85bbb9f6dd0a359a8e5b505144f0c28063db99c6640f187a1290410ea0e01",
+    "normalized_manuscript": "39a78a9bc353c15f7f448e742cbbb655a3814002c0677c21a7674398bad7006a",
+    "normalized_statement_identity": "af40d101c6592e4e435cbc50db4f7daa19fdeb750e76c9760ded6e8795b82246",
+    "statement_extractor": "d5a3dd036c6e9270253e8f43a3bd22a6926a87adfa647396f4d872555c8b9004",
+    "paper_readme": "a81814a4f914e96fdbfd762192c97caf7eb64ad68fdff8ae5e7ede7c6eb8c5fe",
+    "verification_readme": "8e5e9804fd4fe1f5ca9185f714a14972c6860a054da5d07eeb82726abde4e705",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
@@ -87,7 +87,7 @@
   "evidence": {
     "matching-module": {
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
       "checksum_root": "verification/evidence",
       "commands": [
         [
@@ -103,7 +103,7 @@
     },
     "h3-equivariant-rank": {
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
       "checksum_root": "verification/evidence",
       "commands": [
         [
@@ -119,7 +119,7 @@
     },
     "balanced-sheet": {
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
       "checksum_root": "verification/evidence",
       "commands": [
         [
@@ -136,7 +136,7 @@
     },
     "gorenstein-gate": {
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
       "checksum_root": "verification/evidence",
       "commands": [
         [
@@ -162,9 +162,58 @@
       "checksum_root": ".",
       "commands": []
     },
+    "generic-first-wall": {
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
+      "checksum_root": "verification/evidence",
+      "commands": [
+        [
+          "python3",
+          "verification/evidence/generic_first_wall.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "verification/evidence/generic_first_wall_replay.py",
+          "--check"
+        ]
+      ]
+    },
+    "shared-radial": {
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
+      "checksum_root": "verification/evidence",
+      "commands": [
+        [
+          "python3",
+          "verification/evidence/shared_radial.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "verification/evidence/shared_radial_replay.py",
+          "--check"
+        ]
+      ]
+    },
+    "small-field-trade": {
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
+      "checksum_root": "verification/evidence",
+      "commands": [
+        [
+          "python3",
+          "verification/evidence/trade_only_small_field.py"
+        ],
+        [
+          "python3",
+          "verification/evidence/trade_only_small_field_replay.py"
+        ]
+      ]
+    },
     "profile-incidence": {
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
       "checksum_root": "verification/evidence",
       "commands": [
         [
@@ -180,7 +229,7 @@
     },
     "decorated-parent": {
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
       "checksum_root": "verification/evidence",
       "commands": [
         [
@@ -196,7 +245,7 @@
     },
     "relative-cubic-depth": {
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_manifest_sha256": "e780bca1c21f66b3e6901c696cce8828fdfcafe743e9eddc813af55b2033b94d",
       "checksum_root": "verification/evidence",
       "commands": [
         [

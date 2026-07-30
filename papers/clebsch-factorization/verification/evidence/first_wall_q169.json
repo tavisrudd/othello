@@ -1,0 +1,49 @@
+{
+  "R": [
+    5,
+    1
+  ],
+  "T": [
+    11,
+    1
+  ],
+  "Y": [
+    0,
+    2
+  ],
+  "conclusion": "the q=169 first wall has nonzero scalar 5 and a nonzero spill into a component with no torus-fixed cochain",
+  "p": 13,
+  "p_minus_2_minus_s": 5,
+  "q": 169,
+  "s_over_2": 3,
+  "schema": 1,
+  "source": [
+    6,
+    0
+  ],
+  "spill_block_ranks": [
+    2,
+    2
+  ],
+  "spill_hom": {
+    "dimension": 1,
+    "equations": 1554,
+    "rank": 83,
+    "torus_block_variables": 84
+  },
+  "spill_supports": [
+    84,
+    84
+  ],
+  "torus_fixed_cochains": 0,
+  "trace_hom": {
+    "dimension": 1,
+    "equations": 1554,
+    "rank": 83,
+    "torus_block_variables": 84
+  },
+  "trace_scalar": [
+    5,
+    0
+  ]
+}

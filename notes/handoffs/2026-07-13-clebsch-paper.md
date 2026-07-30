@@ -16,7 +16,7 @@
 | surface | root | current state | owning task |
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | six-nodal attribution repaired; v2 referee cold read requires bounded revision before release; approved v1 baseline frozen | [C182](../clebsch-tasks/c182-paper-i-release.md) |
-| Paper II — *Quadratic recovery and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v1 theorem, editorial, cold-read, and replay gates green; public packaging remains; C665 uniform C1 is closed for v2 | [C577](../clebsch-tasks/c577-factorization-paper.md) |
+| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics* | `papers/clebsch-covers/` | pre-release `GO`; immutable locator and author metadata remain | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
@@ -26,7 +26,6 @@
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on bounded cold-read revision, then external publication authority | correct the rational module sentence, trust boundary, closest literature, and opening hierarchy; rerun gates |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued and unblocked | synthesize C665/C688/C689/C692 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; exceptional Schur recurrences derived | prove all-\(r\) endpoint transversality in four modulo-\(20\) types |
 
@@ -155,57 +154,23 @@ cd papers/clebsch-rigidity
 
 ## Paper II
 
-Paper II is standalone: no proof dependency on Papers I or III. Its frozen
-v1 spine is the matching-secant quotient, the A3/B3/H3 configurations,
-quadratic balanced-sheet recovery, cubic-first orientation,
-self-association/Schur/Gorenstein structure, and the paper-owned trust
-surface. C577 owns packaging and release.
+Paper II is standalone: no proof dependency on Papers I or III.  Its frozen
+v1 baseline remains unchanged, while C694 has integrated the accepted v2
+arc.  A two-valued one-dimensional strength-two trade now derives the
+balanced \(q+q\) one-factorization sheets; the uniform Frobenius-digit
+criterion and local first-wall spill close the extension-field cases.  The
+canonical replay constructs only \(S,T,R,Y\), with q=121 and q=169 retained
+as corroboration.  One edge-selected alternating cycle and Dickson
+recurrence prove radial nonvanishing for both \(B_3\) and \(H_3\).  The
+Paley carrier explains the cross-sheet orientation but is not used as the
+Gorenstein pairing: it misses the radial/common-sum pair by one dimension.
+Maximal-isotropic quotient duality gives that pairing directly.
 
-C665 is complete as a strictly v2 theorem.  The q=121
-`L(6) in Sym^59 L(2)` rank-\(1\)-to-\(2\) witness is the first instance of
-the uniform first-wall spill
-\[
-L(p-2-s,1)\otimes L(p-2,1)
-\longrightarrow L(0,2)\otimes L(p-2-s,1).
-\]
-The affine-socle criterion
-\(e(p-1)/2\equiv1+s/2\pmod2\), together with the spill scalar
-\(p-2-s\ne0\), closes every extension-field exceptional C1 row.  It also
-shows that the \(A_4\) occurrence and the \(S_4/A_5\) occurrences occupy
-opposite values of one parity bit and never coexist.  The result is
-recorded in
-`notes/2026-07-29-c665-frobenius-digit-spill.md`; the retired
-non-equivariant Hasse pairing remains non-evidence.  This does not change
-or hold frozen v1.  C688 has replaced its q=169 field-sized replay by a
-generic local \(S,T,R,Y\) checker with an independent closed-form replay;
-the historical q=169 certificate remains corroboration only.  C689 has
-also unified the residual \(B_3/H_3\) radial witnesses: the unique
-cross-sheet pair through an edge is one alternating-cycle
-\(c\leftrightarrow c^{-1}\) exchange, and a single Dickson recurrence
-forces its deepest radial trace to be nonzero.  Its cross-incidence design
-is the circulant Paley complement, with \(4\) generating the nonzero
-quadratic-residue orbit; its bordered sign matrix is the Paley Hadamard
-carrier of order \(q+1\), and its skew core squares to \(-q\) on the
-characteristic-zero augmentation module.  In defining characteristic the
-same core is a maximal square-zero differential on augmentation, with
-image equal to kernel and full Jordan type
-\((3,2^{(q-3)/2})\).  In the translation group algebra it is a unit times
-\((T-1)^{(q-1)/2}\), so its image and kernel are exactly the two middle
-augmentation powers; nonsquare dilations negate the induced middle-layer
-isomorphism.  The old q=7/q=11 scalars remain corroboration only.
-C692 is complete with a sharp negative on using this cross-incidence
-matrix as the Gorenstein pairing.  It identifies the two simple top sheet
-quotients by
-\(\bar\rho_-=2A^{\mathsf T}\bar\rho_+\), but its ranks \(5,9\) are one
-below the Artinian ranks \(6,10\): the missing line is the radial
-degree-one class paired with the common-sheet-sum degree-two class.
-Neither the Paley--Hadamard border nor the middle-layer differential
-supplies that graded multiplication map.  A shorter v2 proof is still
-available directly from \(L^{\circ2}=\langle\mathbf1\rangle^\perp\):
-\(L\) is maximal isotropic, so quotient duality makes
-\((L/\langle\mathbf1\rangle)\times(L^{\circ2}/L)\) perfect.  C694 should
-use this simplification while retaining C689 only for radial
-nonvanishing.
+The paper-owned trust surface has twenty-six statements and thirteen
+evidence bundles, including independent generic-wall, shared-radial, and
+q=9 small-field replays.  The aggregate gate and warning-free thirty-page
+PDF are green in the authoritative and standalone repositories.  C577
+owns the remaining public packaging and release work.
 C682 characteristic-zero work is inventory unless
 explicitly promoted.
 

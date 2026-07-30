@@ -48,6 +48,33 @@
       "checksum_manifest": "verification/hyperplane_square.sha256",
       "commands": []
     },
+    "generic-first-wall": {
+      "role": "local Frobenius-digit occurrence packets, normalized first-wall trace and spill, Borel gap, and historical q=121/q=169 specializations",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
+      "commands": [
+        ["python3", "verification/evidence/generic_first_wall.py", "--check"],
+        ["python3", "verification/evidence/generic_first_wall_replay.py", "--check"]
+      ]
+    },
+    "shared-radial": {
+      "role": "cross-sheet incidence, every edge-selected alternating cycle, Dickson recurrence, and deepest radial traces",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
+      "commands": [
+        ["python3", "verification/evidence/shared_radial.py", "--check"],
+        ["python3", "verification/evidence/shared_radial_replay.py", "--check"]
+      ]
+    },
+    "small-field-trade": {
+      "role": "exhaustive q=9 exclusion and bounded q=13,17,19 trade-only cross-checks",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
+      "commands": [
+        ["python3", "verification/evidence/trade_only_small_field.py"],
+        ["python3", "verification/evidence/trade_only_small_field_replay.py"]
+      ]
+    },
     "profile-incidence": {
       "role": "double cosets, six profiles, profile plane, weights, and cubic witness",
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
@@ -86,18 +113,20 @@
     }
   },
   "claims": [
-    {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "profile-incidence", "decorated-parent"]},
+    {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "generic-first-wall", "small-field-trade", "shared-radial", "profile-incidence", "decorated-parent"]},
     {"label": "prop:matching-secant-quotient", "modes": ["conceptual"], "evidence": []},
-    {"label": "thm:balanced-orbit-completeness", "modes": ["conceptual", "classical-input"], "evidence": []},
-    {"label": "thm:rank-three-quotients", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
+    {"label": "lem:uniform-sheet-exclusion", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["generic-first-wall", "small-field-trade"]},
+    {"label": "thm:balanced-orbit-completeness", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["generic-first-wall", "small-field-trade"]},
+    {"label": "lem:shared-radial-cycle", "modes": ["conceptual", "certificate"], "evidence": ["shared-radial"]},
+    {"label": "thm:rank-three-quotients", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "shared-radial"]},
     {"label": "cor:h3-affine-origin", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "cor:h3-middle-layer", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "prop:radical-hadamard", "modes": ["conceptual"], "evidence": []},
-    {"label": "prop:modular-sheet-mechanism", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet"]},
+    {"label": "prop:modular-sheet-mechanism", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "shared-radial"]},
     {"label": "lem:hyperplane-square", "modes": ["conceptual", "lean"], "evidence": ["hyperplane-square"]},
-    {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry", "hyperplane-square"]},
-    {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry", "hyperplane-square"]},
-    {"label": "cor:self-associated-gorenstein", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "gorenstein-gate", "hilbert-symmetry"]},
+    {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "shared-radial", "hyperplane-square"]},
+    {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hyperplane-square"]},
+    {"label": "cor:self-associated-gorenstein", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet", "gorenstein-gate"]},
     {"label": "cor:secant-product-syzygies", "modes": ["conceptual", "certificate"], "evidence": ["matching-module"]},
     {"label": "thm:six-profile-reconstruction", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
     {"label": "cor:decorated-sheet-classifier", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
@@ -112,7 +141,9 @@
     {"label": "prop:relative-cubic-tate-plane", "modes": ["conceptual", "certificate"], "evidence": ["relative-cubic-depth"]}
   ],
   "boundaries": [
-    "The six profile rows and all frozen rank and orbit calculations use exact prime-field arithmetic; the all-q balanced-orbit classification is instead the cited maximal-subgroup and block-system argument in the text.",
+    "The generic first-wall checker verifies local formulas conditional on the human Lucas-socle and adjacent-wall theorems; it does not replace either theorem or the outer-parity subgroup calculation.",
+    "The small-field trade bundle is exhaustive only at q=9; its q=13,17,19 rows are bounded cross-checks and are not used for the all-q classification.",
+    "The shared-radial replay checks the two classified configurations and every edge-selected pair; the human resultant identity proves the common nonvanishing mechanism.",
     "Lean checks the arithmetic-gluing implication and its small finite leaves; H3 coset completeness and bounded-word evaluation remain generator/replay obligations.",
     "The names A4, S4, A5, and PSL_2(11) are classical cited inputs, not consequences of group orders alone.",
     "No all-characteristic construction, canonical source-to-depth map, passage theorem, holonomy theorem, or priority claim is certified here."
