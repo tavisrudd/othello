@@ -2,6 +2,9 @@
 
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- I*
 
+The shared progression is expository; this manuscript is logically
+independent of the other two.
+
 Working root for the focused rigidity/decoder manuscript titled
 *Reconstructing the Clebsch code and its golden orientation from its
 deep-hole syndrome locus*.
