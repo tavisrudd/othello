@@ -134,6 +134,15 @@ explicitly separated.
   a coefficientwise one-signed degree-four polynomial from \(q=1\).
   The off-peak path-corner step and the separate three-local-return
   identification remain open.
+- Every McKay block of the third transvectant now has maximal rank in
+  every weight.  Dehomogenization bounds the total kernel by three;
+  central parity and \(C_5\)-weights reduce the unforced cases to
+  triangular coefficient-chain minors with diagonals \(d_1\) or
+  \(d_{11}\).  This proves the exact one-sided kernel series and removes
+  the former finite maximal-rank hypothesis.  It closes all off-peak full
+  graded path corners in \(1,2,3,3'\).  The exact remaining frontier is
+  sixty-three modulo-\(60\) plateau entrances in the monotone
+  \(2',4,4_s,5,6\) modules, or twenty-one types modulo \(20\).
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -170,7 +179,9 @@ boundary-quotient surjectivity.  Their global \((F,h)\)-Weyl operators
 cover every periodic phase.  Bare multiplicity induction is retired.  The
 next gate is the off-peak full graded path-corner step; identifying that
 path corner with the algebra of the three local returns remains logically
-separate.
+separate.  Maximal rank is now proved; the exact next gate is evaluation of
+the sixty-three remaining entrance-mixing quotients in
+\(2',4,4_s,5,6\).
 C682 remains open.
 
 ## Parked branches
@@ -186,4 +197,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-global-phase-propagation.md`.
+`notes/2026-07-29-c682-all-weight-maximal-rank.md`.

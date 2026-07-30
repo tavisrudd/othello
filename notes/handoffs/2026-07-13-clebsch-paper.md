@@ -15,7 +15,7 @@
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | final independent `GO`; local release surface green | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | v2 integration and replay gates green; approved v1 baseline frozen | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic recovery and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v1 theorem, editorial, cold-read, and replay gates green; public packaging remains; C665 uniform C1 is closed for v2 | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics* | `papers/clebsch-covers/` | pre-release `GO`; immutable locator and author metadata remain | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -27,10 +27,9 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
-| [C693 — Paper I v2 integration](../clebsch-tasks/c693-paper-i-v2-integration.md) | ready after C691 | integrate C611/C690/C691 without importing Paper III's reveal |
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; all periodic phase quotients and strict peaks controlled | close off-peak path-corner mixing |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; maximal rank and four-module path corners controlled | evaluate 63 monotone-module entrance quotients |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -114,12 +113,16 @@ the cubic descend to the augmentation five-space.  Conversely, the
 two-graph identities reconstruct \(B\), pair balance is equivalent to
 \(B^2=5I\), and a gauge-fixed balance argument makes the positive graph on
 the other five vertices a pentagon.  Hence the cubic alone forces the
-unique golden conference switching class.  C693 owns integration.
+unique golden conference switching class.
 As a final intrinsic upgrade, the cubic threefold on the augmentation
 projective four-space has exactly six singular points
 \([\mathbf1-6e_a]\), all ordinary nodes.  They form a projective frame, so
 the cubic itself reconstructs the six-axis carrier and its full projective
 automorphism group is the computed outer \(S_5\) of order \(120\).
+C693 integrates this complete package in the human paper and integrates
+C611's \(q=13\) tangent-code theorem in the computational companion.  The
+nineteen-row, eighteen-check Paper I trust surface is paper-owned and has no
+Paper III dependency; the approved v1 baseline remains frozen.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19
@@ -281,10 +284,16 @@ boundary-surjective for every integer \(q\ge1\).  Together with the prior
 eight rays, they anchor every periodic plateau-entry phase.  Exact
 global-Weyl two-step compositions are coefficientwise one-signed
 degree-four polynomials on all twenty-one eventual strict peak families;
-combined with the all-weight defect and supported-two-subspace theorems,
-this propagates the full graded path corner through every peak.  The
-remaining full-corner gate is the off-peak path-corner step; the
-three-local-return identification remains logically separate.
+  combined with the all-weight defect and supported-two-subspace theorems,
+  this propagates the full graded path corner through every peak.  The
+  one-sided operator is now maximal-rank on every McKay block in every
+  weight.  The order-three ODE bound, central parity, \(C_5\)-weights, and
+  triangular \(d_1/d_{11}\) chain minors prove the exact kernel series.
+  Consequently all off-peak full graded path corners in \(1,2,3,3'\) now
+  propagate.  The remaining path-corner gate is exactly sixty-three
+  modulo-\(60\) plateau entrances in the monotone
+  \(2',4,4_s,5,6\) modules; the three-local-return identification remains
+  logically separate.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

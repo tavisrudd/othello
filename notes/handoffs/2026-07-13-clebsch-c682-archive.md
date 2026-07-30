@@ -1095,3 +1095,20 @@ two-prime replay, `ej`/`tt` closeout, and Mystery ledger are in
 `notes/2026-07-29-c682-global-phase-propagation.md`.  The off-peak
 path-corner step remains open, as does the logically separate
 three-local-return identification.
+
+The one-sided maximal-rank gate is now closed in every weight.  After
+dehomogenization, the kernel equation is third order with leading
+coefficient \(-1320(z+11z^6-z^{11})\), so its total solution space has
+dimension at most three.  Central parity and \(C_5\)-weights reduce every
+unforced residue to one weight-zero chain or one chain in each of the two
+odd absolute weight classes.  The selected maximal minors are triangular:
+their diagonals use only
+\(d_1=330(j)_2(n-4j+6)\) or
+\(d_{11}=-330(n-j)_2(3n-4j-6)\), and exact modulo-\(20\) arithmetic proves
+all factors nonzero.  This yields the exact one-sided kernel series and
+maximal rank on every McKay block.  It also propagates every off-peak full
+graded path corner in \(1,2,3,3'\).  The exact residual frontier is
+sixty-three modulo-\(60\) plateau entrances, twenty-one types modulo
+\(20\), in the monotone \(2',4,4_s,5,6\) modules.  The proof,
+independent two-prime replay, `ej`/`tt` closeout, and Mystery ledger are in
+`notes/2026-07-29-c682-all-weight-maximal-rank.md`.

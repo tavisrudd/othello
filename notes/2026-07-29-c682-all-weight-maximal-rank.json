@@ -1,0 +1,548 @@
+{
+  "claim": "For every n and every binary-icosahedral irreducible rho, the rho-block of Delta_n has rank min(m_rho(n),m_rho(n+6)).",
+  "forced_dimension": {
+    "balanced_generator_classes": "for every irreducible, the numbers of generators compatible with n and n+6 modulo 4 agree",
+    "checked_degrees": "53..172",
+    "eventual_multiplicity_translation": "each degree-compatible free generator contributes one new solution under n -> n+60",
+    "forced_kernel_series": "(1+2t+3t^2+3t^6+3t^10+2t^11+t^12)/(1-t^20)",
+    "one_period_values_from_degree_53": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      3,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      3,
+      2,
+      1
+    ],
+    "semigroup_identity": "c(k+60)=c(k)+1 for every k>=0 divisible by 4, where c(k)=#{(a,b)>=0:12a+20b=k}; divide by 4 and use the unique new residue-class solution to 3a+5b"
+  },
+  "forced_dimension_one_residues": {
+    "0": {
+      "boundary_factors_nonzero": true,
+      "conclusion": "the weight-zero chain has nullity at most one",
+      "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+      "forced_kernel_dimension": 1,
+      "linear_factor_constant_mod_20": 14,
+      "linear_factor_nonzero": true,
+      "minimum_n_minus_j": 5,
+      "selection": "target rows 1..|source|-1 and source columns 0..|source|-2",
+      "source_residue_mod_5": 0,
+      "weight_class_mod_5": 0
+    },
+    "12": {
+      "boundary_factors_nonzero": true,
+      "conclusion": "the weight-zero chain has nullity at most one",
+      "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+      "forced_kernel_dimension": 1,
+      "linear_factor_constant_mod_20": 6,
+      "linear_factor_nonzero": true,
+      "minimum_n_minus_j": 6,
+      "selection": "target rows 1..|source|-1 and source columns 0..|source|-2",
+      "source_residue_mod_5": 1,
+      "weight_class_mod_5": 0
+    }
+  },
+  "low_degrees": {
+    "exact_kernel_dimensions": [
+      1,
+      2,
+      3,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      3,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      3,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      3,
+      2,
+      1
+    ],
+    "range": "0..52"
+  },
+  "operator": {
+    "dehomogenized_order": 3,
+    "kernel_dimension_upper_bound": 3,
+    "leading_coefficient": "-1320(z+11z^6-z^11)",
+    "map": "Delta_n=(.,Phi_12)_3: Sym^n -> Sym^(n+6)"
+  },
+  "propagation_frontier": {
+    "certified_entrance_phases": {
+      "1": [
+        4,
+        24,
+        44
+      ],
+      "2": [
+        3,
+        13,
+        23,
+        33,
+        43,
+        53
+      ],
+      "3": [
+        12,
+        14,
+        32,
+        34,
+        52,
+        54
+      ],
+      "3p": [
+        10,
+        14,
+        18,
+        30,
+        34,
+        38,
+        50,
+        54,
+        58
+      ]
+    },
+    "certified_modules": [
+      "1",
+      "2",
+      "3",
+      "3p"
+    ],
+    "claim_boundary": "The maximal-rank theorem closes off-peak propagation in 1,2,3,3' but does not itself mix the 63 plateau entrances in 2',4,4s,5,6.",
+    "consequence": "With maximal rank, the certified entrances anchor every plateau in 1,2,3,3'; square edges transport fullness and the already controlled strict peaks close the remaining vertices.",
+    "remaining_entrance_phases": {
+      "2p": [
+        7,
+        17,
+        27,
+        37,
+        47,
+        57
+      ],
+      "4": [
+        6,
+        8,
+        16,
+        18,
+        26,
+        28,
+        36,
+        38,
+        46,
+        48,
+        56,
+        58
+      ],
+      "4s": [
+        1,
+        3,
+        11,
+        13,
+        21,
+        23,
+        31,
+        33,
+        41,
+        43,
+        51,
+        53
+      ],
+      "5": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        52,
+        56
+      ],
+      "6": [
+        5,
+        7,
+        9,
+        15,
+        17,
+        19,
+        25,
+        27,
+        29,
+        35,
+        37,
+        39,
+        45,
+        47,
+        49,
+        55,
+        57,
+        59
+      ]
+    },
+    "remaining_modulo_20_types": {
+      "2p": [
+        7,
+        17
+      ],
+      "4": [
+        6,
+        8,
+        16,
+        18
+      ],
+      "4s": [
+        1,
+        3,
+        11,
+        13
+      ],
+      "5": [
+        0,
+        4,
+        8,
+        12,
+        16
+      ],
+      "6": [
+        5,
+        7,
+        9,
+        15,
+        17,
+        19
+      ]
+    },
+    "remaining_monotone_modules": [
+      "2p",
+      "4",
+      "4s",
+      "5",
+      "6"
+    ],
+    "remaining_phase_count": 63
+  },
+  "representation_argument": {
+    "C5_restrictions": {
+      "1": [
+        0
+      ],
+      "2": [
+        "plus/minus 1"
+      ],
+      "2p": [
+        "plus/minus 2"
+      ],
+      "3_or_3p": [
+        0,
+        "plus/minus 1 or plus/minus 2"
+      ]
+    },
+    "even_small_irreducibles": [
+      "1",
+      "3",
+      "3p"
+    ],
+    "logic": "At unforced even degrees, injectivity on the weight-zero chain excludes 1,3,3'. At unforced odd degrees, one injective chain in each absolute weight class excludes 2 and 2'. Forced dimensions two and three fill the order-three solution bound after central parity. At forced dimension one, the weight-zero chain has nullity at most one, while any additional nontrivial even irreducible would exceed the order-three bound.",
+    "odd_small_irreducibles": [
+      "2",
+      "2p"
+    ]
+  },
+  "schema": "c682-all-weight-maximal-rank-v1",
+  "trusted_boundary": "The proof combines the order-three ODE bound, the exact Kostant forced-defect series, central parity and C5 weights, and triangular chain minors whose diagonal factors are proved nonzero by boundary and residue arithmetic.",
+  "unforced_even_residues": {
+    "14": {
+      "boundary_factors_nonzero": true,
+      "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+      "linear_factor_constant_mod_20": 12,
+      "linear_factor_nonzero": true,
+      "selection": "first |source| target rows",
+      "source_residue_mod_5": 2,
+      "weight_class_mod_5": 0
+    },
+    "16": {
+      "boundary_factors_nonzero": true,
+      "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+      "linear_factor_constant_mod_20": 10,
+      "linear_factor_nonzero": true,
+      "selection": "first |source| target rows",
+      "source_residue_mod_5": 3,
+      "weight_class_mod_5": 0
+    },
+    "18": {
+      "boundary_factors_nonzero": true,
+      "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+      "linear_factor_constant_mod_20": 8,
+      "linear_factor_nonzero": true,
+      "selection": "first |source| target rows",
+      "source_residue_mod_5": 4,
+      "weight_class_mod_5": 0
+    },
+    "4": {
+      "boundary_factors_nonzero": true,
+      "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+      "linear_factor_constant_mod_20": 2,
+      "linear_factor_nonzero": true,
+      "selection": "first |source| target rows",
+      "source_residue_mod_5": 2,
+      "weight_class_mod_5": 0
+    },
+    "8": {
+      "boundary_factors_nonzero": true,
+      "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+      "linear_factor_constant_mod_20": 18,
+      "linear_factor_nonzero": true,
+      "selection": "first |source| target rows",
+      "source_residue_mod_5": 4,
+      "weight_class_mod_5": 0
+    }
+  },
+  "unforced_odd_residues": {
+    "13": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 1,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 9,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 2,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 1
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 3,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 13,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 3,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 0
+      }
+    ],
+    "15": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 1,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+        "linear_factor_constant_mod_20": 13,
+        "linear_factor_nonzero": true,
+        "selection": "first |source| target rows",
+        "source_residue_mod_5": 2
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 3,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 15,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 4,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 1
+      }
+    ],
+    "17": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 1,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+        "linear_factor_constant_mod_20": 11,
+        "linear_factor_nonzero": true,
+        "selection": "first |source| target rows",
+        "source_residue_mod_5": 3
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 2,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 5,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 2,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 0
+      }
+    ],
+    "19": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 4,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 11,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 4,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 0
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 2,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 7,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 3,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 1
+      }
+    ],
+    "3": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 1,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 19,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 2,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 1
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 3,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 3,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 3,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 0
+      }
+    ],
+    "5": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 1,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+        "linear_factor_constant_mod_20": 3,
+        "linear_factor_nonzero": true,
+        "selection": "first |source| target rows",
+        "source_residue_mod_5": 2
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 3,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 5,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 4,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 1
+      }
+    ],
+    "7": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 1,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d1(n,j)=330(j)_2(n-4j+6)",
+        "linear_factor_constant_mod_20": 1,
+        "linear_factor_nonzero": true,
+        "selection": "first |source| target rows",
+        "source_residue_mod_5": 3
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 2,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 15,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 2,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 0
+      }
+    ],
+    "9": [
+      {
+        "absolute_weight_class": 1,
+        "actual_weight_mod_5": 4,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 1,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 4,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 0
+      },
+      {
+        "absolute_weight_class": 2,
+        "actual_weight_mod_5": 2,
+        "boundary_factors_nonzero": true,
+        "diagonal": "d11(n,j)=-330(n-j)_2(3n-4j-6)",
+        "linear_factor_constant_mod_20": 17,
+        "linear_factor_nonzero": true,
+        "minimum_n_minus_j": 3,
+        "selection": "target rows 1..|source|",
+        "source_residue_mod_5": 1
+      }
+    ]
+  }
+}
