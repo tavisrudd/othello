@@ -1070,3 +1070,13 @@ terms.  Exact verification beyond the training grids and an independent
 two-prime replay close the operator-construction gate in every modulo-\(60\)
 phase.  The proof bundle is
 `notes/2026-07-29-c682-global-weyl-operators.md`.
+
+Four further signed boundary Wronskians close the rays
+\(2_{13},3_{14},3'_{14},3'_{18}\) modulo \(20\), for every integer
+\(q\ge1\).  Their exact determinant degrees are \(83,124,122,122\).
+Together with the preceding bundle, this gives one certified representative
+of every plateau type modulo \(20\).  The phase audit also catches the
+invalid shortcut: multiplication by the degree-\(20\) invariant does not
+intertwine the transvectant, leaving exactly sixteen modulo-\(60\) rays for
+the global Weyl Schur-complement pass.  The proof is
+`notes/2026-07-29-c682-remaining-plateau-wronskians.md`.

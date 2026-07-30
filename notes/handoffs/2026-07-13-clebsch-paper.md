@@ -255,9 +255,12 @@ profiles account exactly for the apparent \(13,17,18\) determinant-degree
 drops.  Exact global falling-factorial Weyl operators in the invariant
 exponents \((F,h)\) now realize the third- and ninth-transvectants on the
 complete \(2,3,3'\) free modules, eliminating phase-specific operator
-construction.  The remaining full-corner gate is evaluation of sixteen
-compressed phase quotients, propagation through all eventual peaks, and the
-off-peak step.
+construction.  Four further all-\(q\) Wronskians give one certified
+representative of every plateau type modulo \(20\); an exact audit shows
+that sixteen modulo-\(60\) phases remain because Hilbert translation by
+degree \(20\) is not transvectant linearity.  The remaining full-corner gate
+is evaluation of those compressed phase quotients, propagation through all
+eventual peaks, and the off-peak step.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

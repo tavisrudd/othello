@@ -1,0 +1,528 @@
+{
+  "claim": "One representative of each of the four previously missing modulo-20 plateau-entry types is boundary-controllable for every integer q>=1.",
+  "families": {
+    "2_13": {
+      "base_degree": 73,
+      "conclusion": "the selected endpoint returns surject onto the complete local boundary quotient for every integer q>=1",
+      "degree_bound": 96,
+      "exact_degree": 83,
+      "family": "n=73+60q",
+      "finite_boundary_signs_q10_to_threshold_minus_1": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -9,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -6,
+        -5,
+        -5,
+        -4,
+        -4,
+        -3,
+        -3,
+        -2
+      ],
+      "low_boundary_determinant_signs_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "low_boundary_quotient_dimensions_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3
+      ],
+      "module": "2",
+      "positivity_threshold_q": 20,
+      "quotient_dimension": 3,
+      "residual_degree": 68,
+      "shifted_residual_coefficient_sign": 1,
+      "shifted_residual_nonzero_coefficients": 69,
+      "smith_valuations_at_infinity": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        4,
+        6
+      ],
+      "tail_dimension": 20
+    },
+    "3_14": {
+      "base_degree": 74,
+      "conclusion": "the selected endpoint returns surject onto the complete local boundary quotient for every integer q>=1",
+      "degree_bound": 138,
+      "exact_degree": 124,
+      "family": "n=74+60q",
+      "finite_boundary_signs_q10_to_threshold_minus_1": [],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -10,
+        -9,
+        -9,
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2,
+        -2
+      ],
+      "low_boundary_determinant_signs_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "low_boundary_quotient_dimensions_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3",
+      "positivity_threshold_q": 10,
+      "quotient_dimension": 4,
+      "residual_degree": 100,
+      "shifted_residual_coefficient_sign": -1,
+      "shifted_residual_nonzero_coefficients": 101,
+      "smith_valuations_at_infinity": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        4,
+        4
+      ],
+      "tail_dimension": 30
+    },
+    "3p_14": {
+      "base_degree": 74,
+      "conclusion": "the selected endpoint returns surject onto the complete local boundary quotient for every integer q>=1",
+      "degree_bound": 138,
+      "exact_degree": 122,
+      "family": "n=74+60q",
+      "finite_boundary_signs_q10_to_threshold_minus_1": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2,
+        -2
+      ],
+      "low_boundary_determinant_signs_q1_to_9": [
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "low_boundary_quotient_dimensions_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "positivity_threshold_q": 21,
+      "quotient_dimension": 4,
+      "residual_degree": 101,
+      "shifted_residual_coefficient_sign": 1,
+      "shifted_residual_nonzero_coefficients": 102,
+      "smith_valuations_at_infinity": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        4,
+        6
+      ],
+      "tail_dimension": 30
+    },
+    "3p_18": {
+      "base_degree": 78,
+      "conclusion": "the selected endpoint returns surject onto the complete local boundary quotient for every integer q>=1",
+      "degree_bound": 138,
+      "exact_degree": 122,
+      "family": "n=78+60q",
+      "finite_boundary_signs_q10_to_threshold_minus_1": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "linear_roots_in_x_equals_q_minus_10": [
+        -12,
+        -9,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -7,
+        -6,
+        -6,
+        -6,
+        -5,
+        -5,
+        -5,
+        -4,
+        -4,
+        -4,
+        -3,
+        -3,
+        -3,
+        -2,
+        -2
+      ],
+      "low_boundary_determinant_signs_q1_to_9": [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "low_boundary_quotient_dimensions_q1_to_9": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "module": "3p",
+      "positivity_threshold_q": 22,
+      "quotient_dimension": 4,
+      "residual_degree": 100,
+      "shifted_residual_coefficient_sign": -1,
+      "shifted_residual_nonzero_coefficients": 101,
+      "smith_valuations_at_infinity": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        4,
+        6
+      ],
+      "tail_dimension": 30
+    }
+  },
+  "hilbert_plateau_types_mod_20": {
+    "claim_boundary": "This classifies multiplicity patterns only. The third-order transvectant is not asserted to be linear over multiplication by the degree-20 invariant, so the other modulo-60 phases remain a separate gate.",
+    "invariant_degree": 20,
+    "newly_certified": {
+      "2": [
+        13
+      ],
+      "3": [
+        14
+      ],
+      "3p": [
+        14,
+        18
+      ]
+    },
+    "plateau_entrances": {
+      "1": [
+        4
+      ],
+      "2": [
+        3,
+        13
+      ],
+      "3": [
+        12,
+        14
+      ],
+      "3p": [
+        10,
+        14,
+        18
+      ]
+    },
+    "previously_certified": {
+      "1": [
+        4
+      ],
+      "2": [
+        3
+      ],
+      "3": [
+        12
+      ],
+      "3p": [
+        10
+      ]
+    }
+  },
+  "phase_audit_mod_60": {
+    "all_plateau_entrances": {
+      "1": [
+        4,
+        24,
+        44
+      ],
+      "2": [
+        3,
+        13,
+        23,
+        33,
+        43,
+        53
+      ],
+      "3": [
+        12,
+        14,
+        32,
+        34,
+        52,
+        54
+      ],
+      "3p": [
+        10,
+        14,
+        18,
+        30,
+        34,
+        38,
+        50,
+        54,
+        58
+      ]
+    },
+    "certified_phases": {
+      "1": [
+        4
+      ],
+      "2": [
+        3,
+        13
+      ],
+      "3": [
+        12,
+        14
+      ],
+      "3p": [
+        10,
+        14,
+        18
+      ]
+    },
+    "remaining_count": 16,
+    "remaining_phases": {
+      "1": [
+        24,
+        44
+      ],
+      "2": [
+        23,
+        33,
+        43,
+        53
+      ],
+      "3": [
+        32,
+        34,
+        52,
+        54
+      ],
+      "3p": [
+        30,
+        34,
+        38,
+        50,
+        54,
+        58
+      ]
+    }
+  },
+  "schema": "c682-remaining-plateau-wronskians-v1",
+  "trusted_boundary": "The exact operator formulas are interpolated only within formal differential-order bounds 3,3,9. Fixed boundary determinants are certified by their formal degree bounds, stored Newton coefficients, exact finite prefixes, and coefficientwise one-sign residuals."
+}

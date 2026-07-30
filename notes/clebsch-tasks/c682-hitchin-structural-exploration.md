@@ -118,6 +118,12 @@ explicitly separated.
   the operator-construction gate for every modulo-\(60\) phase.  The
   remaining gate is nonvanishing of the compressed quotient determinants,
   not construction of further phase-specific matrices.
+- Four additional rays are now all-\(q\) boundary-surjective:
+  \(2_{13},3_{14},3'_{14},3'_{18}\) modulo \(20\), with determinant
+  degrees \(83,124,122,122\).  Together with the preceding rays, every
+  plateau-entry type modulo \(20\) has one certified representative.
+  Degree-\(20\) Hilbert translation is not transvectant linearity; the
+  exact uncaptured modulo-\(60\) phase count is sixteen.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
