@@ -80,6 +80,19 @@ def verify_distance() -> None:
             value ^= columns[index]
         return value
 
+    def binary_rank(words: list[int]) -> int:
+        basis: dict[int, int] = {}
+        for word in words:
+            value = word
+            while value:
+                pivot = value.bit_length() - 1
+                if pivot in basis:
+                    value ^= basis[pivot]
+                else:
+                    basis[pivot] = value
+                    break
+        return len(basis)
+
     for special in range(7):
         remaining = [index for index in range(7) if index != special]
         left = {
@@ -245,6 +258,7 @@ def verify_distance() -> None:
     covered = set()
     all_words = set()
     stabilizer_sizes = []
+    orbit_span_dimensions = []
     for representative in representatives:
         orbit = {
             frozenset(internal.index(act(matrix, point)) for point in representative)
@@ -260,14 +274,23 @@ def verify_distance() -> None:
             )
         )
         assert len(orbit) == 91
+        orbit_span_dimensions.append(
+            binary_rank(
+                [sum(1 << index for index in support) for support in orbit]
+            )
+        )
         all_words |= orbit
         base_slice = {support for support in orbit if base in support}
         assert len(base_slice) == 14
         assert covered.isdisjoint(base_slice)
         covered |= base_slice
     assert stabilizer_sizes == [24, 24, 24, 24]
+    assert orbit_span_dimensions == [36, 36, 36, 36]
     assert covered == solutions
     assert len(all_words) == 364
+    assert binary_rank(
+        [sum(1 << index for index in support) for support in all_words]
+    ) == 36
 
     pair_concurrences: Counter[tuple[int, int]] = Counter()
     for support in all_words:
@@ -292,16 +315,16 @@ def verify_distance() -> None:
     for support in all_words:
         triple_concurrences.update(itertools.combinations(sorted(support), 3))
     profile_counts = Counter()
+    pair_colors = {}
     for (first, second), concurrence in pair_concurrences.items():
         histogram = Counter(
             triple_concurrences[tuple(sorted((first, second, third)))]
             for third in range(78)
             if third not in (first, second)
         )
-        profile_counts[
-            concurrence,
-            tuple(sorted(histogram.items())),
-        ] += 1
+        color = concurrence, tuple(sorted(histogram.items()))
+        pair_colors[first, second] = color
+        profile_counts[color] += 1
     assert profile_counts == Counter(
         {
             (6, ((0, 26), (1, 42), (2, 6), (3, 2))): 546,
@@ -373,6 +396,68 @@ def verify_distance() -> None:
     assert len(reconstructed_rows) == 78
     assert reconstructed_rows == actual_rows
 
+    def relation_color(first: int, second: int) -> object:
+        if first == second:
+            return -1
+        return pair_colors[tuple(sorted((first, second)))]
+
+    source_base = [0, 8, 3, 6]
+    source_signatures = {
+        tuple(relation_color(vertex, base_vertex) for base_vertex in source_base):
+        vertex
+        for vertex in range(78)
+    }
+    assert len(source_signatures) == 78
+    target_base: list[int] = []
+    search_nodes: Counter[int] = Counter()
+    automorphisms = 0
+
+    def enumerate_automorphisms(depth: int) -> None:
+        nonlocal automorphisms
+        search_nodes[depth] += 1
+        if depth == len(source_base):
+            target_signatures = {
+                tuple(
+                    relation_color(vertex, base_vertex)
+                    for base_vertex in target_base
+                ): vertex
+                for vertex in range(78)
+            }
+            if len(target_signatures) != 78:
+                return
+            permutation = [
+                target_signatures[
+                    tuple(
+                        relation_color(vertex, base_vertex)
+                        for base_vertex in source_base
+                    )
+                ]
+                for vertex in range(78)
+            ]
+            assert all(
+                relation_color(permutation[first], permutation[second])
+                == relation_color(first, second)
+                for first in range(78)
+                for second in range(first)
+            )
+            automorphisms += 1
+            return
+        for image_vertex in range(78):
+            if image_vertex in target_base:
+                continue
+            if all(
+                relation_color(image_vertex, target_base[index])
+                == relation_color(source_base[depth], source_base[index])
+                for index in range(depth)
+            ):
+                target_base.append(image_vertex)
+                enumerate_automorphisms(depth + 1)
+                target_base.pop()
+
+    enumerate_automorphisms(0)
+    assert search_nodes == Counter({0: 1, 1: 78, 2: 1092, 3: 2184, 4: 2184})
+    assert automorphisms == len(matrices) == 2184
+
 
 def main() -> None:
     four_cliques = [
@@ -412,7 +497,8 @@ def main() -> None:
     verify_distance()
     print(
         "C611 independent replay: PASS "
-        "(omega = 5, d = 12, 364 minimum words, 78 rows recovered)"
+        "(omega = 5, d = 12, 364 minimum words, "
+        "78 rows recovered, Aut = PGL(2,13))"
     )
 
 

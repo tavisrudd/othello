@@ -38,7 +38,10 @@ actual owning paper.
   Among the resulting \(1716\) passant seven-cliques, exactly \(78\) have
   zero concurrence on every triple; these are precisely the row supports
   of \(M\). Thus the minimum-weight layer self-reconstructs the parity-check
-  geometry.
+  geometry. Each of the four minimum-word orbits independently spans the
+  full 36-dimensional code, and the code, minimum hypergraph, and elliptic
+  scheme all have automorphism group \(\operatorname{PGL}(2,13)\) of order
+  \(2184\).
 
 ## Work package
 

@@ -32,7 +32,10 @@ weight-twelve words in four projective orbits.  Their support-incidence
 numbers recover the full six-class elliptic association scheme.  Pair and
 triple concurrence then recover all \(78\) passant-line incidence rows, so
 the minimum-weight layer reconstructs the parity-check matrix \(M\) up to
-row order.
+row order.  Each of the four minimum-word orbits independently spans the
+entire \(36\)-dimensional code, and the common automorphism group of the
+code, minimum hypergraph, and reconstructed scheme is exactly
+\(\operatorname{PGL}(2,13)\).
 
 This is a conceptual reduction followed by a five-row finite-field lemma,
 not a uniform all-\(q\) theorem.  It removes the binary-code mystery at
@@ -298,6 +301,51 @@ coordinate set and the family of minimum codeword supports, one recovers
 \]
 up to coordinate and row permutation.
 
+### Generation and automorphisms
+
+The minimum words also generate everything they reconstruct.  Regard a
+support as its binary incidence vector in \(\mathbf F_2^{78}\).  The span
+of all \(364\) minimum words has dimension \(36\), equal to
+\(\dim\ker M\).  More strongly, each of the four size-\(91\) projective
+orbits separately has binary rank \(36\).  Hence every minimum word is a
+cyclic generator after taking its \(\operatorname{PGL}(2,13)\)-orbit:
+\[
+ \langle \operatorname{PGL}(2,13)\cdot w\rangle_{\mathbf F_2}
+ =\ker M
+ \qquad(\operatorname{wt}(w)=12).
+\]
+
+There are no hidden coordinate symmetries.  In the six-colored pair
+scheme, the four coordinates
+\[
+ (1:0:2),\ (1:1:7),\ (1:0:7),\ (1:1:3)
+\]
+form a distinguishing base: their relation-color signatures separate all
+\(78\) coordinates.  The exact extension tree for possible images of this
+ordered base has
+\[
+ 1,\ 78,\ 1092,\ 2184,\ 2184
+\]
+nodes at depths \(0,\ldots,4\), and all \(2184\) terminal maps preserve
+every pair color.  Therefore the colored scheme has automorphism group of
+order \(2184\).  Since the symmetric-square
+\(\operatorname{PGL}(2,13)\) action already supplies a subgroup of that
+order,
+\[
+ \operatorname{Aut}(\text{scheme})=\operatorname{PGL}(2,13).
+\]
+Every code automorphism preserves minimum supports, and every
+minimum-hypergraph automorphism preserves pair and triple concurrence.
+Conversely \(\operatorname{PGL}(2,13)\) preserves the code and all minimum
+words.  Consequently
+\[
+ \boxed{
+ \operatorname{Aut}(\ker M)
+ =\operatorname{Aut}(\text{minimum hypergraph})
+ =\operatorname{Aut}(\text{elliptic scheme})
+ =\operatorname{PGL}(2,13).}
+\]
+
 ## Evidence and trust boundary
 
 From the repository root:
@@ -318,7 +366,9 @@ holonomy counts are \(6188\) with value \(1\) and \(5642\) with value
 four projective orbits, and verifies the complete pair-concurrence ledger.
 It then verifies the six distinct triple-concurrence fingerprints and
 reconstructs all \(78\) incidence rows from the \(1716\) seven-cliques in
-the recovered passant graph.
+the recovered passant graph.  Finally it verifies rank \(36\) for each
+minimum-word orbit and exhausts the four-point distinguishing-base tree for
+the \(2184\)-element automorphism group.
 
 The independent replay starts from the six displayed difference sets for
 the tangent graph and independently reconstructs the projective incidence
@@ -333,7 +383,9 @@ profiles, independently enumerates the \(56\) minimum words through the
 base, verifies that four explicit projective orbits partition them, and
 replays the full six-class scheme and parity-check-row reconstruction from
 all \(364\) words.  It obtains \(\omega=5\), \(d=12\), and the original
-\(78\) row supports.
+\(78\) row supports.  It independently verifies that every minimum orbit
+spans the code and that the intrinsic colored scheme has exactly \(2184\)
+automorphisms.
 The pre-existing C605 C++/Python bundle is an independent end-to-end
 cross-check: its larger domain finds no seven-point passant-join arc over
 \(\mathbf F_{13}\).
@@ -342,15 +394,16 @@ The mathematical trust boundary is exact prime-field arithmetic, the
 coordinate realization of the conic stabilizer, the displayed
 finite-difference lemma, the exhaustive two-profile weight-ten split,
 C662's saturation/tangent reconstruction, Segre's lemma of tangents, the
-four-orbit minimum-word exhaustion, and the exact seven-clique selector.
+four-orbit minimum-word exhaustion, the exact seven-clique selector, binary
+Gaussian elimination, and the distinguishing-base automorphism exhaustion.
 The result determines the \(q=13\) incidence-code distance exactly, but
 does not supply a uniform conic-code distance theorem.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c611-q13-tangent-triples.py` | 31,859 | `031a65abce1ab59fd3a4c0851937ae873c09c36b67d2975faa2f72b0a2a4e050` |
-| `2026-07-29-c611-q13-tangent-triples-replay.py` | 14,490 | `2a581e528e1a3cd40b7291551188e0882d1a98f1cce8518cc85cc4c96b0f4f8b` |
-| `2026-07-29-c611-q13-tangent-triples.json` | 13,577 | `1641cf22244cae216d2b59ef16537353da61f2b6e3361516e5b4201d4256a381` |
+| `2026-07-29-c611-q13-tangent-triples.py` | 36,073 | `f66854117e45e7b0c895f0766855a8427e2116bb3bfafae0514110133782c338` |
+| `2026-07-29-c611-q13-tangent-triples-replay.py` | 17,497 | `184cade1cd443876efe67526f585fb8f9d1bd13159bfd310beef43187614c7e7` |
+| `2026-07-29-c611-q13-tangent-triples.json` | 14,756 | `a0c3b6a2a7648c5dc5fbcce2af5c35d7b6e0ec1147c189b94930ac314eda2b1b` |
 
 ## Disposition
 
@@ -358,7 +411,7 @@ does not supply a uniform conic-code distance theorem.
 |---|---|
 | Paper I v1 | closed; no change and no release delay |
 | Paper I human core v2 | the intrinsic minimum-layer-to-\(M\) reconstruction is thematically strong, but admission requires a concise presentation with the finite certificate kept in the companion |
-| computational companion v2 | immediate owner for exact \(d=12\), four minimum-word orbits, full elliptic-scheme recovery, and parity-check self-reconstruction; these replace the \(q=13,k=8\) support exclusion, but not the stronger maximum-six claim or \((7,13)\) |
+| computational companion v2 | immediate owner for exact \(d=12\), four cyclic generating orbits, full elliptic-scheme recovery, parity-check self-reconstruction, and exact automorphism group; these replace the \(q=13,k=8\) support exclusion, but not the stronger maximum-six claim or \((7,13)\) |
 | Papers II and III | no logical ownership |
 | C611 | \(q=13\) binary gate closed; \(q=17,19\) coherent/rational mechanisms remain |
 
@@ -400,6 +453,15 @@ concurrence zero.  They are precisely the passant-line row supports.
 Thus the third-order pass upgrades geometric join recovery to complete
 elliptic-scheme and parity-check-matrix self-reconstruction.
 
+The `ej5` pass closes the algebraic and symmetry loop.  Each of the four
+minimum-word orbits has binary rank \(36\), so any minimum word is a cyclic
+\(\mathbf F_2[\operatorname{PGL}(2,13)]\)-generator of the code.  A
+four-coordinate distinguishing base then exhausts exactly \(2184\)
+scheme automorphisms.  Since code automorphisms preserve minimum words and
+minimum-word automorphisms preserve the reconstructed scheme, the code,
+minimum hypergraph, elliptic scheme, and geometric
+\(\operatorname{PGL}(2,13)\) action all have the same automorphism group.
+
 The `tt` pass asked whether the cyclic table concealed a uniform theorem.
 The answer is not yet justified.  The order-\(14\) torus and unique closure
 are structural, but the six difference sets still use \(q=13\) arithmetic.
@@ -418,12 +480,14 @@ rational dual certificates.
 | classification of minimum words | settled | \(364\) words in four size-\(91\) orbits: one \(S_4\), three \(D_{24}\) |
 | geometry from minimum words | settled through the full pair scheme | triple-concurrence histograms separate all six elliptic orbitals |
 | parity-check rows from minimum words | settled exactly | among \(1716\) passant seven-cliques, the \(78\) all-zero-triple cliques are precisely the rows of \(M\) |
+| generation by minimum words | settled orbit by orbit | every one of the four size-\(91\) orbits has binary rank \(36\) and spans \(\ker M\) |
+| hidden coordinate symmetries | settled negatively | code, minimum hypergraph, and elliptic scheme all have automorphism group \(\operatorname{PGL}(2,13)\) of order \(2184\) |
 | conceptual proof of the 78-clique selector | computationally exact, structurally unexplained | replace the seven-clique enumeration by a uniform intersection-number argument |
 | uniform source of unique closure | unexplained | derive the local graph from a general torus/two-graph identity rather than \(q=13\) substitution |
 | \((7,13)\) unsaturated terminal case | untouched | its tangent polynomial has one additional factor at each vertex |
 | \(q=17,19\) terminal exclusions | untouched by this certificate | C611 coherent-configuration or rational-dual step |
 
-Vibe check: `ej3` lands the strongest result in the chain—the minimum layer
-self-reconstructs the full parity-check geometry.  The limitation is still
-honest: the 78-row selector is an exact one-field certificate, not yet a
-uniform exterior-set explanation.
+Vibe check: `ej5` closes the loop completely at \(q=13\): minimum words
+generate the code, reconstruct its checks, and recover exactly its geometric
+symmetry group.  The limitation is now sharply isolated to uniformity—the
+78-row selector remains an exact one-field certificate.

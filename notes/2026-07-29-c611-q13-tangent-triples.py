@@ -139,6 +139,20 @@ def permutation_order(
             return order
 
 
+def gf2_rank(rows: list[int]) -> int:
+    basis: dict[int, int] = {}
+    for row in rows:
+        value = row
+        while value:
+            pivot = value.bit_length() - 1
+            if pivot in basis:
+                value ^= basis[pivot]
+            else:
+                basis[pivot] = value
+                break
+    return len(basis)
+
+
 def matrix_product(
     first: tuple[int, int, int, int], second: tuple[int, int, int, int]
 ) -> tuple[int, int, int, int]:
@@ -175,6 +189,10 @@ def incidence_distance_certificate() -> dict[str, object]:
         for point in INTERNAL
     ]
     assert {column.bit_count() for column in columns} == {7}
+    incidence_rank = gf2_rank(columns)
+    assert incidence_rank == 42
+    code_dimension = len(INTERNAL) - incidence_rank
+    assert code_dimension == 36
 
     base = 0
     through_base = [
@@ -399,7 +417,11 @@ def incidence_distance_certificate() -> dict[str, object]:
             "words_through_fixed_base": len(base_slice),
             "stabilizer_order": len(stabilizer),
             "secant_graph_triangles": secant_triangles,
+            "binary_span_dimension": gf2_rank(
+                [sum(1 << index for index in support) for support in global_orbit]
+            ),
         }
+        assert entry["binary_span_dimension"] == code_dimension
         if stabilizer_orders == Counter({1: 1, 2: 9, 3: 8, 4: 6}):
             entry["stabilizer_type"] = "S4"
             point_involution = next(
@@ -494,6 +516,7 @@ def incidence_distance_certificate() -> dict[str, object]:
         ) % Q
 
     pair_profiles: dict[int, dict[str, object]] = {}
+    pair_relations: dict[tuple[int, int], int] = {}
     for (first, second), concurrence in pair_concurrences.items():
         histogram = Counter(
             triple_concurrences[
@@ -509,6 +532,7 @@ def incidence_distance_certificate() -> dict[str, object]:
             * pow(quadratic(first_point) * quadratic(second_point), -1, Q)
             % Q
         )
+        pair_relations[first, second] = rho
         profile = {
             "pairs": 0,
             "pair_concurrence": concurrence,
@@ -609,6 +633,76 @@ def incidence_distance_certificate() -> dict[str, object]:
     assert len(reconstructed_rows) == 78
     assert reconstructed_rows == actual_rows
 
+    minimum_word_span_dimension = gf2_rank(
+        [sum(1 << index for index in support) for support in all_minimum_words]
+    )
+    assert minimum_word_span_dimension == code_dimension
+
+    def relation_color(first: int, second: int) -> int:
+        if first == second:
+            return -1
+        return pair_relations[tuple(sorted((first, second)))]
+
+    automorphism_base = [0, 8, 3, 6]
+    source_signatures = {
+        tuple(relation_color(vertex, base_vertex) for base_vertex in automorphism_base):
+        vertex
+        for vertex in range(len(INTERNAL))
+    }
+    assert len(source_signatures) == len(INTERNAL)
+    target_base: list[int] = []
+    search_nodes: Counter[int] = Counter()
+    scheme_automorphisms = 0
+
+    def enumerate_scheme_automorphisms(depth: int) -> None:
+        nonlocal scheme_automorphisms
+        search_nodes[depth] += 1
+        if depth == len(automorphism_base):
+            target_signatures = {
+                tuple(
+                    relation_color(vertex, base_vertex)
+                    for base_vertex in target_base
+                ): vertex
+                for vertex in range(len(INTERNAL))
+            }
+            if len(target_signatures) != len(INTERNAL):
+                return
+            permutation = [
+                target_signatures[
+                    tuple(
+                        relation_color(vertex, base_vertex)
+                        for base_vertex in automorphism_base
+                    )
+                ]
+                for vertex in range(len(INTERNAL))
+            ]
+            assert all(
+                relation_color(permutation[first], permutation[second])
+                == relation_color(first, second)
+                for first in range(len(INTERNAL))
+                for second in range(first)
+            )
+            scheme_automorphisms += 1
+            return
+        for image_vertex in range(len(INTERNAL)):
+            if image_vertex in target_base:
+                continue
+            if all(
+                relation_color(image_vertex, target_base[index])
+                == relation_color(
+                    automorphism_base[depth], automorphism_base[index]
+                )
+                for index in range(depth)
+            ):
+                target_base.append(image_vertex)
+                enumerate_scheme_automorphisms(depth + 1)
+                target_base.pop()
+
+    enumerate_scheme_automorphisms(0)
+    assert search_nodes == Counter({0: 1, 1: 78, 2: 1092, 3: 2184, 4: 2184})
+    assert scheme_automorphisms == 2184
+    assert len(projective_linear_group) == 2184
+
     witness_set = set(witness_points)
     stabilizer = [
         matrix
@@ -666,6 +760,9 @@ def incidence_distance_certificate() -> dict[str, object]:
             "global_words": 364,
             "projective_orbits": minimum_word_orbits,
             "minimum_word_incidence": {
+                "code_dimension": code_dimension,
+                "minimum_word_span_dimension": minimum_word_span_dimension,
+                "each_projective_orbit_spans_code": True,
                 "point_replication": 56,
                 "pair_concurrence_spectrum": {
                     str(value): count
@@ -682,6 +779,19 @@ def incidence_distance_certificate() -> dict[str, object]:
                 "passant_graph_seven_cliques": len(seven_cliques),
                 "zero_triple_seven_cliques": len(reconstructed_rows),
                 "passant_incidence_rows_reconstructed": True,
+                "automorphism_group": {
+                    "name": "PGL(2,13)",
+                    "order": scheme_automorphisms,
+                    "distinguishing_base_indices": automorphism_base,
+                    "distinguishing_base_points": [
+                        list(INTERNAL[index]) for index in automorphism_base
+                    ],
+                    "search_nodes_by_depth": {
+                        str(depth): count
+                        for depth, count in sorted(search_nodes.items())
+                    },
+                    "minimum_hypergraph_equals_scheme_equals_code": True,
+                },
             },
         },
         "weight_12_stabilizer": {
