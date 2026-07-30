@@ -78,6 +78,15 @@ explicitly separated.
   denominator is
   \((10q+17)(10q+22)(10q+27)/2\); alternating pole residues identify a
   signed off-diagonal transfer pencil rather than a positive Weyl function.
+- The reduced scalar witness now has an intrinsic signed symmetrization.
+  The boundary Bezout form \(\operatorname{Bez}(N,D)\) symmetrizes the
+  degree-\(15\) numerator companion and has exact inertia \((8,7,0)\).
+  The separate positive Hermite forms
+  \(\operatorname{Bez}(N,N')\) and \(\operatorname{Bez}(D,D')\) turn the
+  scalar Sturm calculation into spectral flow, deriving the consecutive
+  numerator and denominator chamber counts \(1|13|0|1\) and \(2|1|0|0\)
+  intrinsically.  The signed form alone carries oriented Cauchy data and
+  cannot supply unsigned counts.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -97,10 +106,11 @@ explicitly separated.
 
 The later McKay-corner classification is active.  The all-weight
 two-sided-defect gate and the trivial-module plateau-entry family are
-closed, and bare multiplicity induction is retired.  The next gate is to
-construct the corresponding fixed-width boundary witnesses for the
-\(2,3,3'\) Kostant modules.  The former twenty-one family minors remain
-the fallback.  C682 remains open.
+closed, its scalar signed/Hermite pencil is constructed, and bare
+multiplicity induction is retired.  The next gate is to construct the
+corresponding fixed-width boundary witnesses and block Bezout/Hermite
+pencils for the \(2,3,3'\) Kostant modules.  The former twenty-one family
+minors remain the fallback.  C682 remains open.
 
 ## Parked branches
 
@@ -115,4 +125,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-trivial-plateau-controllability.md`.
+`notes/2026-07-29-c682-signed-boundary-pencil.md`.

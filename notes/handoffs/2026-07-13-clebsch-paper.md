@@ -168,7 +168,12 @@ for every \(q\ge1\), the first upward return at the trivial-module entrance
 \(n=64+60q\) mixes the incoming hyperplane with its missing direction.
 The fixed-width boundary witness reduces the family to one exact rational
 function with a coefficientwise sign proof.  The remaining controllability
-gate belongs to the \(2,3,3'\) Kostant modules.
+gate belongs to the \(2,3,3'\) Kostant modules.  The scalar boundary
+function now has a canonical signed Bezout pencil: its boundary metric has
+inertia \((8,7,0)\), while separate positive Hermite pencils derive the
+numerator and pole chamber counts \(1|13|0|1\) and \(2|1|0|0\) by exact
+spectral flow.  The next structural target is the block version of this
+two-form package for the three remaining modules.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

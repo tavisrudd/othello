@@ -1006,3 +1006,18 @@ Stieltjes or diagonal-Weyl model.  The correct target is the
 symmetrizable three-term transfer pencil already present in the boundary
 annihilator, with the witness as an off-diagonal Green function.  Its
 block-Jacobi analog is the proposed uniform route for \(2,3,3'\).
+
+The scalar pencil is now constructed canonically, with one correction to
+that preliminary interpretation.  For the reduced pair \(W=N/D\), the
+Bezout form \(\operatorname{Bez}(N,D)\) symmetrizes the numerator companion
+and has exact inertia \((8,7,0)\); this is the intrinsic signed boundary
+structure.  Unsigned wall counts do not follow from that indefinite form
+alone, which retains only oriented Cauchy data.  The positive Hermite forms
+\(\operatorname{Bez}(N,N')\) and \(\operatorname{Bez}(D,D')\) supply the
+missing half: exact endpoint inertias derive the consecutive zero and pole
+counts \(1|13|0|1\) and \(2|1|0|0\), independently of the scalar polynomial
+Sturm chain.  The exact construction, replay, `ej`/`tt` closeout, and
+Mystery ledger are in
+`notes/2026-07-29-c682-signed-boundary-pencil.md`.  The \(2,3,3'\) target
+is correspondingly sharpened to block boundary Bezout symmetrizers plus
+positive block Hermite forms.

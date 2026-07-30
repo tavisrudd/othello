@@ -1,0 +1,113 @@
+{
+  "claim_boundary": "This constructs the scalar trivial-module boundary pencil. It does not yet construct the block pencils for 2,3,3'.",
+  "conclusion": "The signed boundary symmetrizer has inertia (8,7), while positive Hermite pencils derive the exact numerator counts 1|13|0|1 and denominator counts 2|1|0|0 on the chambers cut by -3,-2,-1,0,1.",
+  "input": {
+    "path": "2026-07-29-c682-plateau-controllability.json",
+    "sha256": "59c395f29b20ede03b389f99e85b6933dafe4da923eaa091f4a0f81c0188e540"
+  },
+  "intrinsic_sturm_pencils": {
+    "counting_rule": "For the positive Hermite metric Bez(P,P'), n_+(L_P(b))-n_+(L_P(a)) counts roots of P in (a,b).",
+    "denominator": {
+      "chamber_counts": {
+        "(-1,0)": 0,
+        "(-2,-1)": 1,
+        "(-3,-2)": 2,
+        "(0,1)": 0
+      },
+      "constant_matrix_sha256": "e79100d8a1299f66b18e72e7360d0ac3edb9a51c273824f2651b3da23aab0d82",
+      "definition": "L_D0(s)=s Bez(D,D')-C_D Bez(D,D')",
+      "endpoint_inertias": {
+        "-1": [
+          3,
+          0,
+          0
+        ],
+        "-2": [
+          2,
+          1,
+          0
+        ],
+        "-3": [
+          0,
+          3,
+          0
+        ],
+        "0": [
+          3,
+          0,
+          0
+        ],
+        "1": [
+          3,
+          0,
+          0
+        ]
+      },
+      "metric_inertia": [
+        3,
+        0,
+        0
+      ],
+      "metric_sha256": "7b6989f8d24dc4eb52e521aaf8e185a41fc49f550756370cdafb69c5d36ab205"
+    },
+    "numerator": {
+      "chamber_counts": {
+        "(-1,0)": 0,
+        "(-2,-1)": 13,
+        "(-3,-2)": 1,
+        "(0,1)": 1
+      },
+      "constant_matrix_sha256": "00df5cb846193fd49f977275c621c841b902ba36a4b9b3d642ae66d252471c46",
+      "definition": "L_N(s)=s Bez(N,N')-C_N Bez(N,N')",
+      "endpoint_inertias": {
+        "-1": [
+          14,
+          1,
+          0
+        ],
+        "-2": [
+          1,
+          14,
+          0
+        ],
+        "-3": [
+          0,
+          15,
+          0
+        ],
+        "0": [
+          14,
+          1,
+          0
+        ],
+        "1": [
+          15,
+          0,
+          0
+        ]
+      },
+      "metric_inertia": [
+        15,
+        0,
+        0
+      ],
+      "metric_sha256": "dad41db8510992cc492de9f53535024a985c8967e4b2701102c99b9057483b03"
+    }
+  },
+  "schema": "c682-signed-boundary-pencil-v1",
+  "signed_boundary_pencil": {
+    "constant_matrix_sha256": "ae3de1dcf1e3b22b996a0e7a3fc79f4653e412fb3648a4255f6a667cfbbf7897",
+    "constant_matrix_symmetric": true,
+    "coprime_pair": true,
+    "definition": "L_D(s)=s Bez(N,D)-C_N Bez(N,D), with C_N the monomial companion of N",
+    "determinant_identity": "det(L_D(s))/det(Bez(N,D))=N(s)/lc(N)",
+    "dimension": 15,
+    "interpretation": "The reduced boundary denominator D canonically symmetrizes the numerator companion; the 8+7 signature is the intrinsic signed structure.",
+    "metric_inertia": [
+      8,
+      7,
+      0
+    ],
+    "metric_sha256": "bcf3ea787ba29dc553f281a464f117e1fa4876ac07eeff8a7d05d83682d61eeb"
+  }
+}
