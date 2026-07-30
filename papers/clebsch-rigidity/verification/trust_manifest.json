@@ -56,7 +56,7 @@
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -154,7 +154,7 @@
               "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -223,7 +223,7 @@
               "RelativeConicArcs.Examples.Q11Coding.witness_code_coveringRadius_three"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -392,7 +392,7 @@
               "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -563,7 +563,7 @@
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -754,7 +754,7 @@
               "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -848,7 +848,7 @@
               "RelativeConicArcs.ClebschOrientationTwoGraph.supportGradient_node"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -979,7 +979,7 @@
               "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1027,7 +1027,7 @@
               "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1090,7 +1090,7 @@
               "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1168,7 +1168,7 @@
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1286,7 +1286,7 @@
               "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "command": "nix develop --command lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1743,8 +1743,12 @@
       },
       {
         "argv": [
-          "scripts/guarded-lean",
-          "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
+          "nix",
+          "develop",
+          "--command",
+          "lake",
+          "build",
+          "RelativeConicArcs.Gates.ClebschRigidityTrust"
         ],
         "cwd": ".",
         "id": "lean-rigidity-trust-gate",
@@ -1772,12 +1776,12 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "f8465063a5959a2780300ad29d9211cfeceb9d512bbecfefa12e981a3d4ba178"
+        "sha256": "3273ff36a859be295617cc2a5d62170e1378ca4017560f6194eb60db650dadb4"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "6f82d4246c10efbee5316875b2265465480d9879777b344daf4d81b83a84425d"
+        "sha256": "9bbc86f244cb7dcd65a45854b8e34b89d665ccde4871b1e97aa65269c5b8400f"
       },
       {
         "path": "verification/test_verification_tools.py",

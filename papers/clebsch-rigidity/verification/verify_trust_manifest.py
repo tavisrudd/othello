@@ -159,7 +159,10 @@ def validate_lean(
     if not isinstance(validation, dict):
         fail(f"{where}.validation must be an object")
     command = require_string(validation.get("command"), f"{where}.validation.command")
-    if "guarded-lean" not in command or "ClebschRigidityTrust.lean" not in command:
+    if command != (
+        "nix develop --command lake build "
+        "RelativeConicArcs.Gates.ClebschRigidityTrust"
+    ):
         fail(f"{where}.validation.command does not run the Paper I gate")
 
 

@@ -267,8 +267,8 @@ def lean(
             "axioms": {terminal: axioms[terminal] for terminal in terminals},
             "validation": {
                 "command": (
-                    "scripts/guarded-lean "
-                    "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
+                    "nix develop --command lake build "
+                    "RelativeConicArcs.Gates.ClebschRigidityTrust"
                 ),
                 "toolchain": {
                     "lean": "4.32.0-rc1",
@@ -607,8 +607,12 @@ def checks() -> list[dict[str, object]]:
             "repository": "lean",
             "cwd": ".",
             "argv": [
-                "scripts/guarded-lean",
-                "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+                "nix",
+                "develop",
+                "--command",
+                "lake",
+                "build",
+                "RelativeConicArcs.Gates.ClebschRigidityTrust",
             ],
             "timeout_seconds": 1800,
         }
