@@ -4,7 +4,48 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued after C695; bounded extension kill test.
+**Status:** unblocked by C695; bounded extension kill test.
+
+## C695 entry reduction
+
+C695 recovers the full weight configuration and the \(45=30+15\)
+mixed-plus-Pfaffian tritangent support.  Its `ej` closeout gives two sharp
+first tests.
+
+First, the order-two permutation of line labels is not itself the linear
+Weyl action on the Cartan carrier.  For
+\[
+\mathcal C=
+\sum_{i<j}(x_i y_j-x_j y_i)\omega_{ij}
++\operatorname{Pf}(\omega),
+\]
+the unsigned exchange \(x_i\leftrightarrow y_i\) negates the mixed summand
+and fixes the Pfaffian, so it does not preserve \(\mathcal C\) even up to one
+global scalar.  The \(A_1\) Weyl lift instead has
+\[
+x_i\longmapsto y_i,\qquad y_i\longmapsto-x_i,\qquad
+\omega_{ij}\longmapsto\omega_{ij},
+\]
+and preserves \(\mathcal C\).  Thus the first obstruction is whether the
+operator/apolar row exchange has a canonical signed lift; the unoriented
+line permutation alone cannot pass the Cartan-tensor gate.
+
+Second, extracting one nonzero coefficient from each of the \(45\)
+tritangent factorizations reduces tensor matching to a finite torus-gauge
+problem.  Rescaling the \(27\) weight vectors acts through the
+\(45\times27\) tritangent-incidence exponent matrix.  This matrix has rank
+\(21\) over characteristic zero, hence the coefficient system has \(24\)
+independent multiplicative gauge invariants.  Indeed, a kernel vector
+\((a_i,b_i,c_{ij})\) satisfies
+\[
+a_i+b_j+c_{ij}=0\quad(i\ne j),\qquad
+c_{ij}+c_{k\ell}+c_{mn}=0
+\]
+for every perfect matching.  The cross equations give
+\(a_i-b_i=d\) and \(c_{ij}=-a_i-a_j+d\); every matching then gives the
+single relation \(\sum_i a_i=3d\).  The kernel therefore has dimension
+\(6\), proving rank \(27-6=21\).  C697 should compare these \(24\) invariants
+with the standard Cartan signs before attempting any Hodge interpretation.
 
 ## Objective
 
