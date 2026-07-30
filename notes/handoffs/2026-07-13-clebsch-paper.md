@@ -26,8 +26,7 @@
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C692 — cross-sheet pairing](../clebsch-tasks/c692-paper-ii-cross-sheet-pairing.md) | queued; bounded Paper II v2 test | replace the Gorenstein pairing proof or identify the exact mismatch |
-| [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
+| [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued and unblocked | synthesize C665/C688/C689/C692 and cold-read against v1 |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; 51/63 monotone entrances controlled | evaluate four exceptional transfer types / twelve phases |
 
@@ -185,6 +184,19 @@ image equal to kernel and full Jordan type
 \((T-1)^{(q-1)/2}\), so its image and kernel are exactly the two middle
 augmentation powers; nonsquare dilations negate the induced middle-layer
 isomorphism.  The old q=7/q=11 scalars remain corroboration only.
+C692 is complete with a sharp negative on using this cross-incidence
+matrix as the Gorenstein pairing.  It identifies the two simple top sheet
+quotients by
+\(\bar\rho_-=2A^{\mathsf T}\bar\rho_+\), but its ranks \(5,9\) are one
+below the Artinian ranks \(6,10\): the missing line is the radial
+degree-one class paired with the common-sheet-sum degree-two class.
+Neither the Paley--Hadamard border nor the middle-layer differential
+supplies that graded multiplication map.  A shorter v2 proof is still
+available directly from \(L^{\circ2}=\langle\mathbf1\rangle^\perp\):
+\(L\) is maximal isotropic, so quotient duality makes
+\((L/\langle\mathbf1\rangle)\times(L^{\circ2}/L)\) perfect.  C694 should
+use this simplification while retaining C689 only for radial
+nonvanishing.
 C682 characteristic-zero work is inventory unless
 explicitly promoted.
 

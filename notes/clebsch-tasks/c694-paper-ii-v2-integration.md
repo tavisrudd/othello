@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-29
 
-**Status:** queued after C692; manuscript integration.
+**Status:** queued and unblocked; manuscript integration.
 
 ## Objective
 
@@ -19,8 +19,10 @@ and canonical alternating-cycle radial nonvanishing.
 2. Present the Paley design/Hadamard carrier only where it explains the
    construction or orientation; do not let the extra structure bury the
    theorem spine.
-3. Consume C692 only if the cross-sheet pairing genuinely shortens the
-   existing Gorenstein argument.
+3. Apply C692's maximal-isotropic quotient proof to shorten the
+   Gorenstein argument.  Do not present the cross-sheet design as the
+   Gorenstein pairing: it misses the radial/common-sum pair by one
+   dimension.  Retain C689 only for radial nonvanishing.
 4. Retire field-sized replay from the load-bearing path in favor of C688's
    generic local checker, retaining historical cases as corroboration.
 5. Rework title/abstract/introduction/headlines and theorem dependencies,
@@ -42,5 +44,4 @@ and canonical alternating-cycle radial nonvanishing.
 - C665: `notes/2026-07-29-c665-frobenius-digit-spill.md`
 - C688 generic replay record
 - C689: `notes/2026-07-29-c689-shared-radial.md`
-- C692 disposition
-
+- C692: `notes/2026-07-30-c692-cross-sheet-gorenstein.md`
