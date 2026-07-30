@@ -1787,7 +1787,7 @@
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "c01b0613a999da17a3a7dd5de1d79452791368c58d5d715cd6ff9896a5858b3a"
+        "sha256": "0975df360399bf02bdedc27ba7989d556c8328d2420a3ea6d931abff7e17c361"
       }
     ]
   }

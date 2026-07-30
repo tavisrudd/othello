@@ -15,7 +15,7 @@ WARNING_RE = re.compile(
     re.IGNORECASE,
 )
 PAGES_RE = re.compile(r"Output written on .+ \((\d+) pages?,")
-EXPECTED_PAGES = 18
+EXPECTED_PAGES = 19
 
 
 def main() -> int:
