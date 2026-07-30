@@ -376,6 +376,27 @@ def incidence_distance_certificate() -> dict[str, object]:
         if (matrix[0] * matrix[3] - matrix[1] * matrix[2]) % Q
     ]
 
+    def quadratic(point: tuple[int, int, int]) -> int:
+        return (point[1] * point[1] - point[0] * point[2]) % Q
+
+    def polar(
+        first: tuple[int, int, int], second: tuple[int, int, int]
+    ) -> int:
+        return (
+            2 * first[1] * second[1]
+            - first[0] * second[2]
+            - first[2] * second[0]
+        ) % Q
+
+    def orthogonal_rho(first: int, second: int) -> int:
+        first_point = INTERNAL[first]
+        second_point = INTERNAL[second]
+        return (
+            polar(first_point, second_point) ** 2
+            * pow(quadratic(first_point) * quadratic(second_point), -1, Q)
+            % Q
+        )
+
     minimum_word_orbits = []
     all_minimum_words: set[frozenset[int]] = set()
     unclassified = set(solutions)
@@ -401,6 +422,18 @@ def incidence_distance_certificate() -> dict[str, object]:
         stabilizer_orders = Counter(
             permutation_order(matrix, representative_points) for matrix in stabilizer
         )
+        orbit_pair_concurrences: Counter[tuple[int, int]] = Counter()
+        for support in global_orbit:
+            orbit_pair_concurrences.update(
+                itertools.combinations(sorted(support), 2)
+            )
+        odd_gram_relations = {
+            orthogonal_rho(first, second)
+            for (first, second), concurrence in orbit_pair_concurrences.items()
+            if concurrence % 2
+        }
+        assert len(odd_gram_relations) == 1
+        gram_relation = next(iter(odd_gram_relations))
 
         secant_triangles = sum(
             1
@@ -420,6 +453,7 @@ def incidence_distance_certificate() -> dict[str, object]:
             "binary_span_dimension": gf2_rank(
                 [sum(1 << index for index in support) for support in global_orbit]
             ),
+            "binary_gram_relation_rho": gram_relation,
         }
         assert entry["binary_span_dimension"] == code_dimension
         if stabilizer_orders == Counter({1: 1, 2: 9, 3: 8, 4: 6}):
@@ -469,6 +503,9 @@ def incidence_distance_certificate() -> dict[str, object]:
     assert Counter(
         entry["stabilizer_type"] for entry in minimum_word_orbits
     ) == Counter({"D24": 3, "S4": 1})
+    assert Counter(
+        entry["binary_gram_relation_rho"] for entry in minimum_word_orbits
+    ) == Counter({9: 2, 10: 1, 12: 1})
     assert sorted(
         tuple(entry["secant_differences_mod_12"])
         for entry in minimum_word_orbits
@@ -503,18 +540,6 @@ def incidence_distance_certificate() -> dict[str, object]:
     for support in all_minimum_words:
         triple_concurrences.update(itertools.combinations(sorted(support), 3))
 
-    def quadratic(point: tuple[int, int, int]) -> int:
-        return (point[1] * point[1] - point[0] * point[2]) % Q
-
-    def polar(
-        first: tuple[int, int, int], second: tuple[int, int, int]
-    ) -> int:
-        return (
-            2 * first[1] * second[1]
-            - first[0] * second[2]
-            - first[2] * second[0]
-        ) % Q
-
     pair_profiles: dict[int, dict[str, object]] = {}
     pair_relations: dict[tuple[int, int], int] = {}
     for (first, second), concurrence in pair_concurrences.items():
@@ -525,13 +550,7 @@ def incidence_distance_certificate() -> dict[str, object]:
             for third in range(len(INTERNAL))
             if third not in (first, second)
         )
-        first_point = INTERNAL[first]
-        second_point = INTERNAL[second]
-        rho = (
-            polar(first_point, second_point) ** 2
-            * pow(quadratic(first_point) * quadratic(second_point), -1, Q)
-            % Q
-        )
+        rho = orthogonal_rho(first, second)
         pair_relations[first, second] = rho
         profile = {
             "pairs": 0,
@@ -632,6 +651,80 @@ def incidence_distance_certificate() -> dict[str, object]:
     }
     assert len(reconstructed_rows) == 78
     assert reconstructed_rows == actual_rows
+
+    relation_matrices = {
+        rho: [
+            sum(
+                1 << second
+                for second in range(len(INTERNAL))
+                if first != second
+                and pair_relations[tuple(sorted((first, second)))] == rho
+            )
+            for first in range(len(INTERNAL))
+        ]
+        for rho in (0, 1, 3, 9, 10, 12)
+    }
+    assert {
+        frozenset(
+            index for index in range(len(INTERNAL)) if row >> index & 1
+        )
+        for row in relation_matrices[0]
+    } == actual_rows
+
+    def matrix_product_mod_two(
+        first: list[int], second: list[int]
+    ) -> list[int]:
+        return [
+            sum(
+                1 << column
+                for column in range(len(INTERNAL))
+                if (first[row] & second[column]).bit_count() % 2
+            )
+            for row in range(len(INTERNAL))
+        ]
+
+    zero_matrix = [0] * len(INTERNAL)
+    identity_matrix = [1 << index for index in range(len(INTERNAL))]
+
+    def matrix_xor(*matrices: list[int]) -> list[int]:
+        result = [0] * len(INTERNAL)
+        for matrix in matrices:
+            result = [
+                first ^ second for first, second in zip(result, matrix)
+            ]
+        return result
+
+    assert matrix_product_mod_two(
+        relation_matrices[0], relation_matrices[0]
+    ) == matrix_xor(
+        identity_matrix,
+        relation_matrices[9],
+        relation_matrices[10],
+        relation_matrices[12],
+    )
+    assert all(
+        matrix_product_mod_two(
+            relation_matrices[0], relation_matrices[rho]
+        )
+        == zero_matrix
+        for rho in (9, 10, 12)
+    )
+    assert matrix_product_mod_two(
+        relation_matrices[9], relation_matrices[9]
+    ) == relation_matrices[10]
+    assert matrix_product_mod_two(
+        relation_matrices[10], relation_matrices[10]
+    ) == relation_matrices[12]
+    assert matrix_product_mod_two(
+        relation_matrices[12], relation_matrices[12]
+    ) == relation_matrices[9]
+    relation_ranks = {
+        rho: gf2_rank(matrix) for rho, matrix in relation_matrices.items()
+    }
+    assert relation_ranks[0] == 42
+    assert {
+        rho: relation_ranks[rho] for rho in (9, 10, 12)
+    } == {9: 36, 10: 36, 12: 36}
 
     minimum_word_span_dimension = gf2_rank(
         [sum(1 << index for index in support) for support in all_minimum_words]
@@ -776,6 +869,26 @@ def incidence_distance_certificate() -> dict[str, object]:
                     for rho, profile in sorted(pair_profiles.items())
                 },
                 "full_six_class_scheme_reconstructed": True,
+                "mod2_association_algebra": {
+                    "incidence_relation_rho": 0,
+                    "incidence_rank": relation_ranks[0],
+                    "passant_relation_ranks": {
+                        str(rho): relation_ranks[rho]
+                        for rho in (9, 10, 12)
+                    },
+                    "A0_squared": "I+A9+A10+A12",
+                    "A0_times_passant_relations": "0",
+                    "passant_squares": {
+                        "A9^2": "A10",
+                        "A10^2": "A12",
+                        "A12^2": "A9",
+                    },
+                    "orbit_gram_relations": [
+                        entry["binary_gram_relation_rho"]
+                        for entry in minimum_word_orbits
+                    ],
+                    "rank_36_forced_from_rank_A0_42": True,
+                },
                 "passant_graph_seven_cliques": len(seven_cliques),
                 "zero_triple_seven_cliques": len(reconstructed_rows),
                 "passant_incidence_rows_reconstructed": True,

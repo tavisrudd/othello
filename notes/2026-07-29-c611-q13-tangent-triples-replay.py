@@ -259,6 +259,7 @@ def verify_distance() -> None:
     all_words = set()
     stabilizer_sizes = []
     orbit_span_dimensions = []
+    orbit_gram_dimensions = []
     for representative in representatives:
         orbit = {
             frozenset(internal.index(act(matrix, point)) for point in representative)
@@ -279,6 +280,19 @@ def verify_distance() -> None:
                 [sum(1 << index for index in support) for support in orbit]
             )
         )
+        orbit_pair_counts: Counter[tuple[int, int]] = Counter()
+        for support in orbit:
+            orbit_pair_counts.update(itertools.combinations(sorted(support), 2))
+        gram_rows = [
+            sum(
+                1 << second
+                for second in range(78)
+                if first != second
+                and orbit_pair_counts[tuple(sorted((first, second)))] % 2
+            )
+            for first in range(78)
+        ]
+        orbit_gram_dimensions.append(binary_rank(gram_rows))
         all_words |= orbit
         base_slice = {support for support in orbit if base in support}
         assert len(base_slice) == 14
@@ -286,6 +300,7 @@ def verify_distance() -> None:
         covered |= base_slice
     assert stabilizer_sizes == [24, 24, 24, 24]
     assert orbit_span_dimensions == [36, 36, 36, 36]
+    assert orbit_gram_dimensions == [36, 36, 36, 36]
     assert covered == solutions
     assert len(all_words) == 364
     assert binary_rank(
@@ -395,6 +410,65 @@ def verify_distance() -> None:
     }
     assert len(reconstructed_rows) == 78
     assert reconstructed_rows == actual_rows
+
+    def quadratic(point: tuple[int, int, int]) -> int:
+        return (point[1] * point[1] - point[0] * point[2]) % q
+
+    def rho(first: int, second: int) -> int:
+        first_point = internal[first]
+        second_point = internal[second]
+        polar = (
+            2 * first_point[1] * second_point[1]
+            - first_point[0] * second_point[2]
+            - first_point[2] * second_point[0]
+        ) % q
+        return (
+            polar * polar
+            * pow(quadratic(first_point) * quadratic(second_point), -1, q)
+            % q
+        )
+
+    relation_matrices = {
+        value: [
+            sum(
+                1 << second
+                for second in range(78)
+                if first != second and rho(first, second) == value
+            )
+            for first in range(78)
+        ]
+        for value in (0, 1, 3, 9, 10, 12)
+    }
+
+    def multiply(first: list[int], second: list[int]) -> list[int]:
+        return [
+            sum(
+                1 << column
+                for column in range(78)
+                if (first[row] & second[column]).bit_count() % 2
+            )
+            for row in range(78)
+        ]
+
+    identity = [1 << index for index in range(78)]
+    assert multiply(relation_matrices[0], relation_matrices[0]) == [
+        identity[index]
+        ^ relation_matrices[9][index]
+        ^ relation_matrices[10][index]
+        ^ relation_matrices[12][index]
+        for index in range(78)
+    ]
+    assert all(
+        multiply(relation_matrices[0], relation_matrices[value]) == [0] * 78
+        for value in (9, 10, 12)
+    )
+    assert multiply(relation_matrices[9], relation_matrices[9]) == relation_matrices[10]
+    assert multiply(relation_matrices[10], relation_matrices[10]) == relation_matrices[12]
+    assert multiply(relation_matrices[12], relation_matrices[12]) == relation_matrices[9]
+    assert {
+        value: binary_rank(relation_matrices[value])
+        for value in (0, 9, 10, 12)
+    } == {0: 42, 9: 36, 10: 36, 12: 36}
 
     def relation_color(first: int, second: int) -> object:
         if first == second:

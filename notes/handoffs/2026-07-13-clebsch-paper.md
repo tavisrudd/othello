@@ -70,7 +70,9 @@ recover all six elliptic orbitals, and the \(78\) all-zero-triple
 seven-cliques are exactly the passant incidence rows. Hence the minimum
 layer self-reconstructs \(M\). Every minimum-word orbit independently spans
 the full code, and the common code/hypergraph/scheme automorphism group is
-exactly \(\operatorname{PGL}(2,13)\). It
+exactly \(\operatorname{PGL}(2,13)\). The mod-two association algebra
+identifies the four orbit Grams with \(A_9,A_9,A_{12},A_{10}\) and
+conceptually forces their rank \(36\). It
 does not prove the unsaturated \((7,13)\) case or the stronger maximum-six
 claim, and it is not reached by C665's defining-characteristic trade
 machinery. The

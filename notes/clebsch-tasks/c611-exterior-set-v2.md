@@ -41,7 +41,9 @@ actual owning paper.
   geometry. Each of the four minimum-word orbits independently spans the
   full 36-dimensional code, and the code, minimum hypergraph, and elliptic
   scheme all have automorphism group \(\operatorname{PGL}(2,13)\) of order
-  \(2184\).
+  \(2184\). Orbitwise generation is conceptual: the four orbit-Gram
+  matrices are \(A_9,A_9,A_{12},A_{10}\), and the mod-two association
+  algebra forces each passant orbital to have rank \(36\).
 
 ## Work package
 

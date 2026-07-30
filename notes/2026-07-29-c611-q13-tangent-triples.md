@@ -315,6 +315,45 @@ cyclic generator after taking its \(\operatorname{PGL}(2,13)\)-orbit:
  \qquad(\operatorname{wt}(w)=12).
 \]
 
+This rank statement has a short association-algebra proof.  Let
+\(A_\rho\) be the adjacency matrix of the reconstructed \(\rho\)-relation.
+Under conic polarity, \(A_0\) is \(M\) with its rows reindexed by internal
+points.  Exact intersection-number reduction modulo two gives
+\[
+\begin{aligned}
+A_0^2&=I+A_9+A_{10}+A_{12},\\
+A_0A_9=A_0A_{10}=A_0A_{12}&=0,\\
+A_9^2=A_{10},\qquad A_{10}^2&=A_{12},\qquad A_{12}^2=A_9.
+\end{aligned}
+\]
+If \(\mathcal O\) is one of the four minimum-word orbits and \(B_{\mathcal
+O}\) is its \(91\times78\) support-incidence matrix, its mod-two Gram
+matrix is
+\[
+\begin{array}{c|c}
+\mathcal O&B_{\mathcal O}^{\mathsf T}B_{\mathcal O}\\ \hline
+S_4&A_9\\
+D_{24},\ \{2,3,9,10\}&A_9\\
+D_{24},\ \{1,4,8,11\}&A_{12}\\
+D_{24},\ \{1,3,9,11\}&A_{10}.
+\end{array}
+\]
+The equations \(A_0A_\rho=0\) put
+\(\operatorname{im}A_\rho\) inside \(\ker A_0\), so
+\(\operatorname{rank}A_\rho\le36\).  Conversely, the square cycle makes
+the kernels of \(A_9,A_{10},A_{12}\) equal.  On that common kernel the
+first identity becomes \(A_0^2=I\); hence \(A_0\) injects it into its
+42-dimensional image.  Its dimension is therefore at most \(42\), giving
+\(\operatorname{rank}A_\rho\ge36\).  Thus all three passant orbital
+matrices have rank \(36\).  Finally
+\[
+ 36=\operatorname{rank}(B_{\mathcal O}^{\mathsf T}B_{\mathcal O})
+ \le\operatorname{rank}B_{\mathcal O}
+ \le\dim\ker A_0=36,
+\]
+which proves orbitwise cyclic generation without four separate Gaussian
+eliminations.
+
 There are no hidden coordinate symmetries.  In the six-colored pair
 scheme, the four coordinates
 \[
@@ -368,7 +407,8 @@ It then verifies the six distinct triple-concurrence fingerprints and
 reconstructs all \(78\) incidence rows from the \(1716\) seven-cliques in
 the recovered passant graph.  Finally it verifies rank \(36\) for each
 minimum-word orbit and exhausts the four-point distinguishing-base tree for
-the \(2184\)-element automorphism group.
+the \(2184\)-element automorphism group.  It also verifies the displayed
+mod-two association-algebra identities and the four orbit-Gram formulas.
 
 The independent replay starts from the six displayed difference sets for
 the tangent graph and independently reconstructs the projective incidence
@@ -395,15 +435,16 @@ coordinate realization of the conic stabilizer, the displayed
 finite-difference lemma, the exhaustive two-profile weight-ten split,
 C662's saturation/tangent reconstruction, Segre's lemma of tangents, the
 four-orbit minimum-word exhaustion, the exact seven-clique selector, binary
-Gaussian elimination, and the distinguishing-base automorphism exhaustion.
+Gaussian elimination, the mod-two association-algebra multiplication, and
+the distinguishing-base automorphism exhaustion.
 The result determines the \(q=13\) incidence-code distance exactly, but
 does not supply a uniform conic-code distance theorem.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c611-q13-tangent-triples.py` | 36,073 | `f66854117e45e7b0c895f0766855a8427e2116bb3bfafae0514110133782c338` |
-| `2026-07-29-c611-q13-tangent-triples-replay.py` | 17,497 | `184cade1cd443876efe67526f585fb8f9d1bd13159bfd310beef43187614c7e7` |
-| `2026-07-29-c611-q13-tangent-triples.json` | 14,756 | `a0c3b6a2a7648c5dc5fbcce2af5c35d7b6e0ec1147c189b94930ac314eda2b1b` |
+| `2026-07-29-c611-q13-tangent-triples.py` | 40,001 | `6b8a2b584d4323bb52c0767a04a62235e7a930a88023bb5896efe743b329c427` |
+| `2026-07-29-c611-q13-tangent-triples-replay.py` | 20,092 | `770013f675df868da3b99923d518892da1cbe27b8edff457fbbf1d24c8057a28` |
+| `2026-07-29-c611-q13-tangent-triples.json` | 15,580 | `120addd026e4e0c0d247b7053b589b98f3e0edbdbff6397a27e1dad8ae2da886` |
 
 ## Disposition
 
@@ -462,6 +503,14 @@ minimum-word automorphisms preserve the reconstructed scheme, the code,
 minimum hypergraph, elliptic scheme, and geometric
 \(\operatorname{PGL}(2,13)\) action all have the same automorphism group.
 
+The `ej6` pass replaces the four orbit-rank computations by one
+association-algebra proof.  Polarity identifies \(M\) with \(A_0\); the
+three passant orbitals annihilate \(A_0\), cycle under squaring, and have
+rank \(36\).  The four minimum-orbit Gram matrices are exactly
+\(A_9,A_9,A_{12},A_{10}\).  Orbitwise cyclic generation is therefore
+forced by the mod-two intersection algebra rather than observed by four
+independent eliminations.
+
 The `tt` pass asked whether the cyclic table concealed a uniform theorem.
 The answer is not yet justified.  The order-\(14\) torus and unique closure
 are structural, but the six difference sets still use \(q=13\) arithmetic.
@@ -481,13 +530,13 @@ rational dual certificates.
 | geometry from minimum words | settled through the full pair scheme | triple-concurrence histograms separate all six elliptic orbitals |
 | parity-check rows from minimum words | settled exactly | among \(1716\) passant seven-cliques, the \(78\) all-zero-triple cliques are precisely the rows of \(M\) |
 | generation by minimum words | settled orbit by orbit | every one of the four size-\(91\) orbits has binary rank \(36\) and spans \(\ker M\) |
+| conceptual source of orbitwise generation | settled | orbit Grams are \(A_9,A_9,A_{12},A_{10}\); the mod-two association algebra forces each to have rank \(36\) |
 | hidden coordinate symmetries | settled negatively | code, minimum hypergraph, and elliptic scheme all have automorphism group \(\operatorname{PGL}(2,13)\) of order \(2184\) |
 | conceptual proof of the 78-clique selector | computationally exact, structurally unexplained | replace the seven-clique enumeration by a uniform intersection-number argument |
 | uniform source of unique closure | unexplained | derive the local graph from a general torus/two-graph identity rather than \(q=13\) substitution |
 | \((7,13)\) unsaturated terminal case | untouched | its tangent polynomial has one additional factor at each vertex |
 | \(q=17,19\) terminal exclusions | untouched by this certificate | C611 coherent-configuration or rational-dual step |
 
-Vibe check: `ej5` closes the loop completely at \(q=13\): minimum words
-generate the code, reconstruct its checks, and recover exactly its geometric
-symmetry group.  The limitation is now sharply isolated to uniformity—the
-78-row selector remains an exact one-field certificate.
+Vibe check: `ej6` converts the last raw rank phenomenon into a short
+structural proof.  The \(q=13\) loop is now conceptually closed except for
+the 78-row clique selector, which remains an exact one-field certificate.
