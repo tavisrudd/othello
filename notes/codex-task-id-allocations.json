@@ -1637,8 +1637,17 @@
       "last": 690,
       "purpose": "Paper I rigidity v2 mathematical upgrades: terminal-field proof, orientation-Gale torsor, double-six test, and full-conic classification gate",
       "sequence": 182
+    },
+    {
+      "count": 4,
+      "first": 691,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 694,
+      "purpose": "Paper I and II v2 integration plus bounded cubic-golden and cross-sheet pairing tests",
+      "sequence": 183
     }
   ],
-  "next_id": 691,
+  "next_id": 695,
   "schema": "codex-task-id-allocations-v1"
 }
