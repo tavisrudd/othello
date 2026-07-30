@@ -360,6 +360,15 @@ $\F_{11}$ in the single Clebsch orbit.
 Fix the conic $\cC:XZ-Y^2=0$ in $\PG(2,13)$.  Let $M$ be the
 $78$-by-$78$ incidence matrix over $\F_2$, with rows indexed by the
 passant lines to $\cC$ and columns indexed by its internal points.
+Madison and Wu determine the nullity of this matrix for every odd
+$q$~\cite[Corollary~6.3]{MadisonWu2012}; their formula
+$(q-1)^2/4$ gives $36$ at $q=13$.  Hollmann and Xiang construct the
+elliptic association scheme afforded by the
+$\operatorname{PGL}(2,q)$-action on the passant carrier
+\cite[\S3]{HollmannXiang2006}.  Thus the dimension and the association
+scheme used below are known.  The assertions here are the exact minimum
+distance and the intrinsic reconstruction of the incidence matrix and
+scheme from the minimum words.
 
 \begin{theorem}[Tangent-code theorem]
 \label{thm:q13-tangent-code}
@@ -383,7 +392,9 @@ $\operatorname{PGL}(2,13)$.
 
 \begin{proof}
 Every row and column of $M$ has weight seven, and conic polarity identifies
-the two index sets.  Exact elimination gives $\operatorname{rank}M=42$.
+the two index sets.  Madison and Wu's dimension formula gives
+$\dim K=36$, equivalently $\operatorname{rank}M=42$; exact elimination
+independently checks this specialization.
 Summing the row equations gives the all-one functional, so every word of
 $K$ has even weight.  Moreover, if a nonzero word contains an internal
 point $P$, each of the seven passants through $P$ must contain another
@@ -705,12 +716,27 @@ R.~H.~Dye,
 (1991), 270--286.
 \newblock doi:10.1112/jlms/s2-44.2.270.
 
+\bibitem{HollmannXiang2006}
+H.~D.~L.~Hollmann and Q.~Xiang,
+\newblock Association schemes from the action of
+$\mathrm{PGL}(2,q)$ fixing a nonsingular conic in $\PG(2,q)$,
+\newblock \emph{Journal of Algebraic Combinatorics} \textbf{24}(2)
+(2006), 157--193.
+\newblock doi:10.1007/s10801-006-0005-8; arXiv:math/0503573.
+
 \bibitem{JurisicVidali2019}
 A.~Juri\v{s}i\'c and J.~Vidali,
 \newblock The Sylvester graph and Moore graphs,
 \newblock \emph{European Journal of Combinatorics} \textbf{80} (2019),
 184--193.
 \newblock doi:10.1016/j.ejc.2018.02.018.
+
+\bibitem{MadisonWu2012}
+A.~L.~Madison and J.~Wu,
+\newblock On binary codes from conics in $\PG(2,q)$,
+\newblock \emph{European Journal of Combinatorics} \textbf{33}(1)
+(2012), 33--48.
+\newblock doi:10.1016/j.ejc.2011.08.001; arXiv:1104.0324.
 
 \bibitem{RuddRigidity2026}
 T.~Rudd,

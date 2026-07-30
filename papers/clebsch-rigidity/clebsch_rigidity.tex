@@ -186,7 +186,13 @@ stabilizer, and its complete-exterior-set interpretation are classical
 conic-locus identification of Proposition~\ref{prop:deep-holes-conic}
 directly here. The new contribution is the symmetry-free coding criterion,
 the decoder reconstruction and support bipartition, and the uniform
-conic-filling window.  A separate computational companion
+conic-filling window.  The reconstructed support bipartition and syndrome
+cover also determine a balanced signed two-graph and its golden operator;
+their triangle products recover a cubic determinant line.  The underlying
+six-nodal $S_5$-symmetric cubic is known
+\cite{CTZ2025}; what is proved here is its intrinsic recovery from the
+code's syndrome and support data, together with the integral continuation
+order.  A separate computational companion
 \cite{RuddComputational2026} proves sharper finite consequences: a
 degree-three characterization and numerical gap at $q=11$, uniqueness of
 $q=11$ among conic-filling six-arcs, classification through eight points,
@@ -914,7 +920,9 @@ that quotient $A_5$.
 The support bipartition and the twelve deep-hole directions carry two
 apparently different orientation choices.  We now show that they are the
 same datum.  This comparison uses only the reconstructed $A_5$-sets in this
-paper.
+paper.  We use the standard correspondence between two-graphs, switching
+classes, and Seidel matrices; see
+\cite[\S2]{DuncanHoffmanSolazzo2011}.
 
 The cubic threefold that appears below is a known six-nodal model.
 Cheltsov, Tschinkel, and Zhang study the cubic with six nodes in general
@@ -923,6 +931,12 @@ linear position and give an $S_5$-symmetric equation
 Choosing $x_0=0$ as a representative of
 $\mathbf Q^6/\mathbf Q\mathbf1$ and interchanging their coordinates
 $y_3$ and $y_5$ identifies their equation~(7.5) with $C=0$ below.
+More explicitly, if $G(y_1,\ldots,y_5)$ denotes the left-hand side of
+their equation~(7.5), then
+\[
+ C(0,y_1,y_2,y_3,y_4,y_5)
+ =G(y_1,y_2,y_5,y_4,y_3).
+\]
 The result here is not a new construction of that cubic or its abstract
 $S_5$-action.  It recovers the cubic intrinsically from the syndrome
 locus: the support-orbit signs give its equation, and the diagonal
@@ -983,6 +997,10 @@ The cubic descends to the augmentation space
 $\mathbf Q^6/\mathbf Q\mathbf1$.  Conversely, its two-graph identities
 and vanishing signed pair moments reconstruct $B$ and force $B^2=5I$;
 there is a unique balanced switching class up to relabeling.
+\end{theorem}
+
+\begin{corollary}[Nodes, symmetry, and integral commutant]
+\label{cor:orientation-cubic-geometry}
 The cubic also recovers the unlabelled axis carrier: in
 \[
  \mathbf P(\mathbf Q^6/\mathbf Q\mathbf1)
@@ -1000,9 +1018,10 @@ Consequently the continuation algebra and its integral commutant are
  \operatorname{End}_{\mathbf Z A_5}(L^-)=
  \mathbf Z[B]\cong\mathbf Z[\sqrt5].
 \]
-\end{theorem}
+\end{corollary}
 
-\begin{proof}
+\begin{proof}[Proof of Theorem~\ref{thm:orientation-two-graph} and
+Corollary~\ref{cor:orientation-cubic-geometry}]
 The degree-six action has point stabilizer $D_5$.  Its two orbits on
 three-subsets have size ten, are exchanged by complementation, and produce
 a nonzero signed cubic determined up to its overall sign.
@@ -1114,13 +1133,23 @@ In particular, the same quadratic
 identity that defines the golden operator also recovers support
 complementation.
 
-Finally,
+Finally, after extension from $\mathbf Q$ to
+$E=\mathbf Q(\sqrt5)$, the odd module splits as the two nonisomorphic
+three-dimensional icosahedral representations:
 \[
- L^-\otimes\mathbf Q\cong\mathbf3\oplus\mathbf3',
+ L^-\otimes_{\mathbf Z}E\cong V_3\oplus V_{3'}.
 \]
-so its rational $A_5$-commutant is $\mathbf Q[B]$.  If $aI+bB$ preserves
-$L^-$, its diagonal entries force $a\in\mathbf Z$, while any off-diagonal
-unit forces $b\in\mathbf Z$.  This proves the integral commutant statement.
+They are exchanged by the nontrivial element of
+$\operatorname{Gal}(E/\mathbf Q)$, and $B$ acts on them by the conjugate
+scalars $\sqrt5$ and $-\sqrt5$.  Schur's lemma followed by Galois descent
+therefore gives
+\[
+ \operatorname{End}_{\mathbf Q A_5}(L^-\otimes\mathbf Q)
+ =\mathbf Q[B]\cong E.
+\]
+If $aI+bB$ preserves $L^-$, its diagonal entries force
+$a\in\mathbf Z$, while any off-diagonal unit forces $b\in\mathbf Z$.
+This proves the integral commutant statement.
 \end{proof}
 
 \begin{remark}[The conductor at two]
@@ -1229,8 +1258,10 @@ its reconstruction from syndrome data are given in
 Section~\ref{sec:orientation-two-graph}.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
-reconstruction, support bipartition, and orientation two-graph theorem are
-proved in the text.  The paper-owned exact replay independently constructs the
+reconstruction, support bipartition, and the conceptual part of the
+orientation two-graph theorem are proved in the text.  Singular-locus
+completeness, Hessian ranks, and the signed-permutation stabilizers are
+load-bearing exact finite-algebra steps.  The paper-owned replay constructs the
 $A_5/C_5$ and $A_5/D_5$ actions, the signed operator, its triangle products
 and diagonal pencil, the balanced switching class, the five gradient
 ideals, and the six Hessian ranks.  It reads no
@@ -1297,6 +1328,9 @@ decoder results ask when coset-leader support data alone reconstruct a
 projective code.  For the Clebsch code, that support data also reconstructs
 the switching class of the golden continuation operator: the support cubic
 and the twelve-point syndrome locus retain the same orientation two-graph.
+The determinant pencil explains the bridge: its quadratic identity
+$B^2=5I$ controls every symmetric layer, while triangle holonomy is exactly
+the remaining cubic term.
 
 \section*{AI assistance disclosure}
 
@@ -1345,6 +1379,13 @@ I.~Cheltsov, Y.~Tschinkel, and Z.~Zhang,
 \newblock Equivariant geometry of singular cubic threefolds,
 \newblock \emph{Forum of Mathematics, Sigma} \textbf{13} (2025), e9.
 \newblock doi:10.1017/fms.2024.148; arXiv:2401.10974v2.
+
+\bibitem{DuncanHoffmanSolazzo2011}
+D.~M.~Duncan, T.~R.~Hoffman, and J.~P.~Solazzo,
+\newblock Numerical measures for two-graphs,
+\newblock \emph{Rocky Mountain Journal of Mathematics} \textbf{41}(1)
+(2011), 133--154.
+\newblock doi:10.1216/RMJ-2011-41-1-133; arXiv:0810.3189.
 
 \bibitem{Edge1956}
 W.~L.~Edge,
