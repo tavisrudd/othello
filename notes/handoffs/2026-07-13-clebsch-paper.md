@@ -33,7 +33,7 @@
 | [C694 — Paper II v2 integration](../clebsch-tasks/c694-paper-ii-v2-integration.md) | queued after C692 | synthesize C665/C688/C689 and cold-read against v1 |
 | [C695 — \(E_6\) minuscule 27](../clebsch-tasks/c695-paper-iii-e6-minuscule-27.md) | queued; Paper III v2 research | construct the fifteen complementary lines and prove the \(12+15\) branching dictionary |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; trivial plateau controlled | extend controllability to the \(2,3,3'\) modules |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; all first plateau families controlled | propagate boundary anchors and close off-peak mixing |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -219,12 +219,16 @@ inertia \((8,7,0)\), while separate positive Hermite pencils derive the
 numerator and pole chamber counts \(1|13|0|1\) and \(2|1|0|0\) by exact
 spectral flow.  The next structural target is the block version of this
 two-form package for the three remaining modules.
-That block input is now explicit: the first \(2,3,3'\) plateau families
-have block three-term recurrences of sizes \(2,3,3\), with degree-three
-coefficients in \((q,j)\).  Their backward determinants have no integral
-interior zero; the only virtual singular levels are
-\(\pm1/3,\pm2/3\).  The remaining gate is a signed block symmetrizer or
-discrete Wronskian controlling the endpoint return contraction.
+That block input is now complete on the first \(2,3,3'\) periodic plateau
+families.  Their block three-term recurrences have sizes \(2,3,3\), with
+degree-three coefficients in \((q,j)\), and their backward determinants have
+no integral interior zero.  The signed block Wronskian satisfies the exact
+Green identity.  Fixed endpoint-return tuples surject onto local boundary
+quotients of dimensions \(3,4,4\); degree-\(83,121,120\) determinant
+certificates prove endpoint mixing for every \(q\ge1\).  Thus all first
+plateau-entry families in \(1,2,3,3'\) are controlled.  The remaining
+full-corner gate is propagation through all eventual peaks plus the off-peak
+step.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

@@ -1035,3 +1035,21 @@ block continued fraction is the actual remaining mechanism for the
 nontrivial modules.  The exact certificate, out-of-sample two-prime replay,
 `ej`/`tt` closeout, and Mystery ledger are in
 `notes/2026-07-29-c682-nontrivial-plateau-block-recurrence.md`.
+
+The endpoint transfer gate is now closed on those three families.  The
+signed block Wronskian
+\[
+W_j(y,x)=y_j^{\mathsf T}C_jx_{j+1}
+-y_{j+1}^{\mathsf T}A_{j+1}x_j
+\]
+satisfies the exact discrete Green identity.  On the last ten coefficient
+levels, the local boundary quotients have dimensions \(3,4,4\).  Fixed
+endpoint-return tuples map onto those quotients, so the global cokernel
+functional cannot kill every endpoint return.  The three boundary
+determinants have exact degrees \(83,121,120\).  Their only extracted linear
+roots lie below the stable ray \(q\ge10\); after fixed shifts their residual
+coefficients have one sign, while exact finite prefixes close the remaining
+integers.  Hence endpoint mixing holds for every \(q\ge1\) in the
+\(2,3,3'\) families.  The exact operator and boundary certificates,
+independent two-prime replay, proof, `ej`/`tt` closeout, and Mystery ledger
+are in `notes/2026-07-29-c682-signed-block-wronskian.md`.
