@@ -13,8 +13,8 @@ II's principal title and mathematics visibly general.
 
 ## Work package
 
-1. Add the shared series banner *The Clebsch code and its orientation*,
-   numbered I, II, and III, to the three title pages.
+1. Add the shared series banner *The Clebsch cubic: recovering, orienting,
+   and realizing*, numbered I, II, and III, to the three title pages.
 2. Add a concise first-page trilogy map explaining reconstruction,
    structural recovery/orientation, and arithmetic/harmonic lift.
 3. State that the papers are logically independent; do not import a

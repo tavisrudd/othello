@@ -28,7 +28,15 @@ in conic matching quotients}
 \date{}
 
 \begin{document}
+\begingroup
+\makeatletter
+\let\clebschmaintitle\@title
+\def\@title{\large\textsc{The Clebsch cubic}\\[0.15em]
+  \normalsize\textsc{Recovering, orienting, and realizing --- II}\\[0.7em]
+  \LARGE\clebschmaintitle}
+\makeatother
 \maketitle
+\endgroup
 
 \begin{abstract}
 Restriction to a conic forgets how its marked points were paired into
@@ -61,12 +69,16 @@ cubic inverse system; modular representation.
 
 \section{Introduction}
 
-The companion rigidity paper isolates the Clebsch hexagon through its
-uncovered syndrome locus and reconstructs its projective geometry from
-decoding data \cite{RuddRigidity2026}.  Here we begin with marked secant
-geometry and ask a complementary reconstruction question: what does
-common restriction to a conic forget, and what does the conic-ideal
-quotient remember?
+The series follows the Clebsch cubic through three changes of viewpoint.
+Paper I recovers its hexagon and projective geometry from decoding data
+\cite{RuddRigidity2026}.  Here we isolate the general conic-matching
+mechanism that separates recovery from orientation.  Paper III realizes the
+resulting cubic arithmetically and harmonically.  The arc is expository
+rather than deductive: each paper is logically independent.
+
+We begin with marked secant geometry and ask a complementary reconstruction
+question: what does common restriction to a conic forget, and what does the
+conic-ideal quotient remember?
 
 The answer is governed by a short chain of mechanisms.  A four-endpoint switch shows
 that competing secant products differ by the conic equation, so their
@@ -2298,8 +2310,8 @@ The enumerated review closure accompanying this candidate is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{f467316b4b7c352e0521b47e04d37fb6a090a5}\\[-2pt]
-\texttt{b08abf214259d0f755637ed03e}.
+\small\texttt{f55296c2dc20c87352613318921be4c9a2c06a}\\[-2pt]
+\texttt{58c6f53822c0f203ea420b8cb3}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Makefile, verification documentation, the admitted evidence

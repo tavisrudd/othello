@@ -1,5 +1,7 @@
 # Arithmetic and harmonic realizations of the Clebsch cubic
 
+**Series:** *The Clebsch cubic: recovering, orienting, and realizing --- III*
+
 This directory contains the `clebsch-passages` manuscript and artifact.  Its
 main theorem has two legs:
 

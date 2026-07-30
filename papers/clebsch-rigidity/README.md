@@ -1,5 +1,7 @@
 # Clebsch rigidity paper
 
+**Series:** *The Clebsch cubic: recovering, orienting, and realizing --- I*
+
 Working root for the focused rigidity/decoder manuscript titled
 *Reconstructing the Clebsch code and its golden orientation from its
 deep-hole syndrome locus*.

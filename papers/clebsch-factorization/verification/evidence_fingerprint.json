@@ -11,10 +11,10 @@
   "trust_manifest_sha256": "29ac796f534f74f17562058fd4367fe91a9a20249749ccc009f68f79cc117873",
   "runner_sha256": "40c2a50975f3935bee8d8ffa28c985b0a205e7340da5de9fd8b835fdd59f8299",
   "review_sources_sha256": {
-    "normalized_manuscript": "39a78a9bc353c15f7f448e742cbbb655a3814002c0677c21a7674398bad7006a",
-    "normalized_statement_identity": "af40d101c6592e4e435cbc50db4f7daa19fdeb750e76c9760ded6e8795b82246",
+    "normalized_manuscript": "b8fb7f234dcf56b5d0fdd3caa1a82558236374ec3b5407e9d44be31a87125623",
+    "normalized_statement_identity": "9f22a4d4ed7376149c3802a7c7ca9e2d1e1c1c713c964ee51e4ac65658aa43e9",
     "statement_extractor": "d5a3dd036c6e9270253e8f43a3bd22a6926a87adfa647396f4d872555c8b9004",
-    "paper_readme": "a81814a4f914e96fdbfd762192c97caf7eb64ad68fdff8ae5e7ede7c6eb8c5fe",
+    "paper_readme": "dbe30a6a892cbdece4852c0ace9970f4b4c023ef0902b79fd8d2ba85b21f408a",
     "verification_readme": "8e5e9804fd4fe1f5ca9185f714a14972c6860a054da5d07eeb82726abde4e705",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
@@ -22,7 +22,7 @@
       "ClebschHilbertSymmetry.lean": "0be6e0b36ede1ee9ebc7ade0abaa84694e8b45059a38b191d2074b943cedd620",
       "ClebschHyperplaneSquare.lean": "8b76e121f657f454c1727fc2018e0b535ff7125a08e381de1cecd259018fe450"
     },
-    "guarded_lean": "d8e2a4642519aed0290aecf3ff39eab802be45da6323a18aa2bbc2ad07125189"
+    "guarded_lean": "4967378822df0f357f0bd3cba9a80fcceae1a8d5d5d45b1d4977c159c4515249"
   },
   "project_lean_import_closure_sha256": {
     "ClebschArithmeticGluing.lean": {

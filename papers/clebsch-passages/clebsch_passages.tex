@@ -21,7 +21,15 @@
 \date{July 2026}
 
 \begin{document}
+\begingroup
+\makeatletter
+\let\clebschmaintitle\@title
+\def\@title{\large\textsc{The Clebsch cubic}\\[0.15em]
+  \normalsize\textsc{Recovering, orienting, and realizing --- III}\\[0.7em]
+  \LARGE\clebschmaintitle}
+\makeatother
 \maketitle
+\endgroup
 
 \begin{abstract}
 We determine the rational square class of Hitchin's degree-two incidence

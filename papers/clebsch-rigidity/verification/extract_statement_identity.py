@@ -39,6 +39,7 @@ ROW_LABELS = {
     23: (
         "prop:invariant-support-bipartition",
         "thm:orientation-two-graph",
+        "cor:orientation-cubic-geometry",
     ),
     24: (
         "lem:chord-defect",
