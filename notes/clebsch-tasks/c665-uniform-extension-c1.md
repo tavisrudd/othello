@@ -137,3 +137,6 @@ Direct q=121 closure:
 `notes/2026-07-29-c665-q121-direct-borel.md`.
 Uniform closure:
 `notes/2026-07-29-c665-frobenius-digit-spill.md`.
+
+Replay-compression successor:
+`notes/clebsch-tasks/c688-generic-first-wall-checker.md`.
