@@ -68,8 +68,12 @@ Vinberg marking first exists over degree \(6\), while the ordered Joubert
 marking lives on the degree-\(720\) splitting torsor.  Over the one-point
 field the remaining five points have full \(S_5\) monodromy, which closes
 intrinsic ordered recovery negatively; full level-\(2\) marking is the
-exact optional repair.  Exact report:
-`notes/2026-07-30-c705-burkhardt-e8-marking.md`.  The
+exact repair.  That repair is now computed on all \(720\) sheets, and the
+Vinberg principal-Pfaffian cubic is identified with the frozen Jacobian
+Coble orbit by the Rains--Sam inverse theorem and its kernel-reconstruction
+mechanism.  Exact reports:
+`notes/2026-07-30-c705-burkhardt-e8-marking.md` and
+`notes/2026-07-30-c705-lie-e8-completion.md`.  The
 marked-double-six package remains unallocated pending an explicit
 promotion decision.
 
@@ -81,7 +85,7 @@ promotion decision.
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
-| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, and common affine-\(E_8\) mixed potential proved; genuine Lie-\(E_8\) parent positive, intrinsic ordered marking obstructed by the residual \(S_5\)-torsor | none; full level-\(2\) marking is the exact optional sheetwise repair |
+| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | queued after C705 ordinary-gauge comparison | compute the Clifford multiplier and equivariant gauge obstruction |
 | [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | queued | compute exact code parameters and compare the \(2,3,5\) rank jumps |

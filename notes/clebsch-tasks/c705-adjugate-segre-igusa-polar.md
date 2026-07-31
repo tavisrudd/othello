@@ -198,7 +198,14 @@ five retain full \(S_5\) monodromy, so no canonical ordering can be
 recovered.  Full level-\(2\) marking, equivalently the residual
 degree-\(120\) splitting cover, is the minimal positive repair.  A
 sheetwise equality there is choice-dependent and is not an intrinsic
-C705 assertion.
+C705 assertion.  The optional repair has nevertheless now been carried
+out: all \(720\) ordered sheets in the completely split \(p=1447\) fiber
+satisfy the frozen Joubert and Segre--Igusa identities; the six marked
+Vinberg normal forms recover the other five branch points; and the
+principal-Pfaffian construction produces the Coble cubic.  Rains--Sam's
+inverse-orbit theorem and kernel reconstruction identify this orbit with
+the frozen Jacobian Coble model.  Full completion report:
+`notes/2026-07-30-c705-lie-e8-completion.md`.
 
 ## Mining subtask — Pauli-doily shadow
 

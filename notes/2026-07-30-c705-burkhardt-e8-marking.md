@@ -167,6 +167,12 @@ them to an intrinsic ordered parent: changing the sheet acts by the full
 residual \(S_5\).  No new Lie-theoretic ambient is needed, and a purported
 \(\mathbf Q\)-valued ordered equality would be incorrectly posed.
 
+The chosen-sheet repair and the Lie-\(E_8\)-to-frozen-Coble orbit mechanism
+have subsequently been completed in
+`notes/2026-07-30-c705-lie-e8-completion.md`.  This does not alter the
+intrinsic obstruction: it verifies every sheet and proves the common
+projective orbit while retaining the necessary level-\(2\) choice.
+
 ## `ej` + `tt` closeout
 
 The cheap extra-juice gain is that the marked Vinberg representative needs

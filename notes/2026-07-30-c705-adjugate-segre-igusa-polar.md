@@ -240,9 +240,18 @@ adjoining one root the remaining monodromy is the full point stabilizer
 degree-six marked trivector canonically orders the remaining five points.
 The nearest positive repair is exact: add full level-\(2\) marking, or
 base-change a further degree \(120\) to the ordered splitting torsor.
-There the sheetwise comparison is possible but choice-dependent.  Thus
-the genuine Lie-\(E_8\) parent exists, while the stronger *intrinsic*
-ordered-parent claim is false.
+That repair has now also been executed.  In the completely split good
+fiber \(p=1447\), all \(720\) ordered sheets give distinct Joubert vectors,
+all satisfy the Segre--Igusa equations, and all six root-to-infinity
+choices give the expected marked Vinberg quintics.  The principal
+Pfaffians of the first marked trivector produce one Coble cubic.  The
+Rains--Sam inverse-orbit theorem then identifies this marked normal-form
+trivector with the frozen Jacobian Coble orbit; Lemma 5.3 supplies the
+constructive theta-basis recovery mechanism.  Thus the genuine
+Lie-\(E_8\) parent and every chosen ordered sheet are complete, while the
+stronger *intrinsic* ordered-parent claim remains correctly false.
+Full report:
+`notes/2026-07-30-c705-lie-e8-completion.md`.
 
 The genus-two Coble cubic/sextic gives a second, classically known
 ambient parent, but its operator taxonomy differs.  Nguyen's
@@ -520,7 +529,7 @@ placed in the mystery ledger below.
 | Whether the third-compound presentation is already classical | open: no formula match was found in the proportional audit, but originals and a formula-level modern sweep remain incomplete | WP11 before any priority claim |
 | Whether the sister diagram has a common exceptional parent | settled globally at operator level: the surviving and \(Q\)-normal halves of Yoshida's ten-dimensional \(W(E_6)\) system are the Segre and Igusa polar spaces, with \(M\nabla S=-2f\); the raw jet's canonical \(B_3\) factor accounts for the compactification twist | none |
 | Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | settled for the specific affine-\(E_8\) paired-McKay package: the degree-ten return reconstructs the cubic tensor \(Z\), whose universal potential has mixed Hessian \(A\) and null projections \(q,W\) | no Lie-\(E_8\) root-representation claim is made |
-| Whether the same package has a genuine Lie-\(E_8\) parent | settled sharply: the ambient Vinberg \(\bigwedge^3 9\) parent exists over the degree-six one-Weierstrass field, but intrinsic ordered Joubert recovery is impossible because the remaining marking is a full \(S_5\)-torsor | full level-\(2\) marking / the residual degree-\(120\) cover is the exact positive repair; no C705 gap remains |
+| Whether the same package has a genuine Lie-\(E_8\) parent | fully settled: the Vinberg \(\bigwedge^3 9\) parent, its Pfaffian Coble cubic, the inverse \(\operatorname{PGL}_9\)-orbit mechanism, and all \(720\) chosen ordered Joubert sheets are computed/proved; intrinsic ordering remains impossible because the residual marking is a full \(S_5\)-torsor | none |
 | Marked equality with C695's double-six | untouched by design | future WP2 |
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
 | Whether the \(15/10/6\) geometry is the two-qubit Pauli doily | settled exactly: duads, synthemes, \(3+3\) partitions, and stars give points, contexts, ten grids, and six ovoids | none |

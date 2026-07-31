@@ -1,0 +1,596 @@
+{
+  "branch_roots": [
+    449,
+    773,
+    775,
+    878,
+    1238,
+    1321
+  ],
+  "c704_generator_sha256": "061af86005c67cf44f2e92a68e02cc81f2c17b081f7715b52ab54f45ec0461c0",
+  "distinct_ordered_joubert_images": 720,
+  "first_marked_coble_cubic_term_types": {
+    "(1, 1, 1, 0, 0, 0, 0, 0, 0)": 12,
+    "(2, 1, 0, 0, 0, 0, 0, 0, 0)": 16,
+    "(3, 0, 0, 0, 0, 0, 0, 0, 0)": 3
+  },
+  "first_marked_coble_cubic_terms": [
+    {
+      "coefficient": 359,
+      "exponents": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1088,
+      "exponents": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1088,
+      "exponents": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1088,
+      "exponents": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": 1149,
+      "exponents": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 416,
+      "exponents": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1088,
+      "exponents": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 359,
+      "exponents": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": 359,
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 359,
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": 1088,
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": 213,
+      "exponents": [
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 46,
+      "exponents": [
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 359,
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "coefficient": 1088,
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": 1149,
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 416,
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 213,
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1031,
+      "exponents": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": 1234,
+      "exponents": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 107,
+      "exponents": [
+        1,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 46,
+      "exponents": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1401,
+      "exponents": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1434,
+      "exponents": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 503,
+      "exponents": [
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1401,
+      "exponents": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": 1,
+      "exponents": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 809,
+      "exponents": [
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": 1238,
+      "exponents": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "first_sheet": {
+    "centered": [
+      508,
+      832,
+      834,
+      937,
+      1297,
+      1380
+    ],
+    "joubert": [
+      386,
+      250,
+      745,
+      1361,
+      891,
+      708
+    ],
+    "ordering": [
+      449,
+      773,
+      775,
+      878,
+      1238,
+      1321
+    ],
+    "polar_times_6": [
+      1325,
+      375,
+      751,
+      1114,
+      1357,
+      866
+    ]
+  },
+  "mechanism": "Rains--Sam Theorem 5.5 identifies the stable PGL9 orbit with (C,P,psi); for the Jacobian Coble cubic psi=0, and Proposition 5.4 plus Lemma 5.3 reconstruct the projective orbit equivalence",
+  "ordered_weierstrass_sheets_checked": 720,
+  "pfaffian_identity": "the nine signed principal 8x8 Pfaffians equal x_i times one cubic",
+  "prime": 1447,
+  "schema": "c705-lie-e8-sheet-v1",
+  "six_marked_vinberg_forms": [
+    {
+      "coefficients": {
+        "c12": 809,
+        "c18": 1238,
+        "c24": 806,
+        "c30": 1052,
+        "c6": 503
+      },
+      "marked_root": 449,
+      "other_five_after_root_to_infinity": [
+        93,
+        847,
+        50,
+        935,
+        466
+      ]
+    },
+    {
+      "coefficients": {
+        "c12": 830,
+        "c18": 87,
+        "c24": 1212,
+        "c30": 125,
+        "c6": 216
+      },
+      "marked_root": 773,
+      "other_five_after_root_to_infinity": [
+        283,
+        458,
+        243,
+        615,
+        1079
+      ]
+    },
+    {
+      "coefficients": {
+        "c12": 399,
+        "c18": 46,
+        "c24": 41,
+        "c30": 1419,
+        "c6": 860
+      },
+      "marked_root": 775,
+      "other_five_after_root_to_infinity": [
+        1383,
+        1144,
+        329,
+        767,
+        1305
+      ]
+    },
+    {
+      "coefficients": {
+        "c12": 794,
+        "c18": 282,
+        "c24": 101,
+        "c30": 719,
+        "c6": 168
+      },
+      "marked_root": 878,
+      "other_five_after_root_to_infinity": [
+        170,
+        1108,
+        1270,
+        1365,
+        260
+      ]
+    },
+    {
+      "coefficients": {
+        "c12": 999,
+        "c18": 990,
+        "c24": 902,
+        "c30": 793,
+        "c6": 11
+      },
+      "marked_root": 1238,
+      "other_five_after_root_to_infinity": [
+        381,
+        49,
+        493,
+        3,
+        510
+      ]
+    },
+    {
+      "coefficients": {
+        "c12": 1263,
+        "c18": 1039,
+        "c24": 689,
+        "c30": 949,
+        "c6": 159
+      },
+      "marked_root": 1321,
+      "other_five_after_root_to_infinity": [
+        686,
+        310,
+        1244,
+        488,
+        7
+      ]
+    }
+  ]
+}
