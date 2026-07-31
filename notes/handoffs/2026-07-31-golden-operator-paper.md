@@ -48,11 +48,20 @@ Paper III remains unchanged and ends before it.  In particular:
 No manuscript root has yet been created.  C720 owns the architecture and
 the go/no-go gate for `papers/golden-operator/`.
 
+The cross-paper framing is now fixed provisionally in
+`notes/2026-07-31-golden-cross-paper-framing.md`: Paper I supplies inverse
+recovery from coarse syndrome data to the golden conference switching class,
+and the Golden paper supplies forward functorial propagation to its shadows.
+C727 will determine whether this composition descends to the unlabelled
+syndrome locus or requires an additional marking; no Clebsch manuscript edit
+is authorized by that investigation.
+
 ## Active and queued tasks
 
 | task | state | next gate |
 |---|---|---|
 | [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | active; connection discriminators complete | freeze the central commuting theorem, section plan, novelty boundary, and strict independence from review-facing Paper III |
+| [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | queued after C720 | audit every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
@@ -62,10 +71,11 @@ the go/no-go gate for `papers/golden-operator/`.
 ## Recommended order
 
 1. C720 paper architecture.
-2. C715 anomaly inverse.
-3. C717 and C718, chosen by theorem yield after C715's first gate.
-4. C716 only after the inverse interface freezes.
-5. C719 after the mathematical paper spine is secure.
+2. C727 cross-paper recovery--propagation audit.
+3. C715 anomaly inverse.
+4. C717 and C718, chosen by theorem yield after C715's first gate.
+5. C716 only after the inverse interface freezes.
+6. C719 after the mathematical paper spine is secure.
 
 ## Ownership and allowed paths
 
