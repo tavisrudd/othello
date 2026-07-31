@@ -51,6 +51,12 @@ Signed-moment cancellation from \(C^2=5I\) gives the sharp physical bound
  \quad(\|x\|_\infty\le1),
 \]
 with equality exactly at the twenty balanced \(3+3\) phase vertices.
+Every optimal transfer has squared singular spectrum
+\(\{4/5,4/5,1/5\}\).  The three-filter exterior-cube protocol is
+query-optimal among coherent circuits with \(x\)-independent gates and
+ancillas.  The operational structure belongs to the coherently signed
+Naimark instruments; the POVM effects alone forget the signs needed to
+define the cross transfer.
 
 Full report:
 notes/2026-07-31-c707-golden-etf-quantum-measurements.md.

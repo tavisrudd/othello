@@ -78,19 +78,19 @@ def projector(sign: int) -> list[list[Q5]]:
     ]
 
 
-def transition_volume_square(x: tuple[int, ...]) -> Fraction:
+def transition_elementary(x: tuple[int, ...], degree: int) -> Fraction:
     p_minus, p_plus = projector(-1), projector(1)
     diagonal = [[(Fraction(x[i]) if i == j else Fraction(0), Fraction(0))
                  for j in range(6)] for i in range(6)]
     block = matmul(matmul(p_minus, diagonal), p_plus)
     transpose = [list(row) for row in zip(*block)]
     gram = matmul(transpose, block)
-    elementary_three = total(
+    elementary = total(
         determinant([[gram[i][j] for j in support] for i in support])
-        for support in TRIPLES
+        for support in itertools.combinations(range(6), degree)
     )
-    assert elementary_three[1] == 0
-    return elementary_three[0]
+    assert elementary[1] == 0
+    return elementary[0]
 
 
 p_minus, p_plus = projector(-1), projector(1)
@@ -111,9 +111,17 @@ for x in itertools.product((-1, 0, 1), repeat=6):
         C[i][j] * C[j][k] * C[k][i] * x[i] * x[j] * x[k]
         for i, j, k in TRIPLES
     )
-    assert transition_volume_square(x) == Fraction(z * z, 500)
+    assert transition_elementary(x, 3) == Fraction(z * z, 500)
+
+for support in itertools.combinations(range(6), 3):
+    x = tuple(-1 if i in support else 1 for i in range(6))
+    assert tuple(transition_elementary(x, degree) for degree in (1, 2, 3)) == (
+        Fraction(9, 5),
+        Fraction(24, 25),
+        Fraction(16, 125),
+    )
 
 print(
     "independent replay passed: two exact Q(sqrt(5)) projectors; "
-    "729 diagonal filters; det(K^T K)=Z^2/500"
+    "729 diagonal filters; optimal spectrum (4/5,4/5,1/5)"
 )

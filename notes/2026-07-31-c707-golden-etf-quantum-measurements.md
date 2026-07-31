@@ -38,6 +38,12 @@ There is also a sharp structural physical bound:
  \quad(\|x\|_\infty\le1),
 \]
 with equality exactly at the twenty balanced \(3+3\) phase vertices.
+At every optimum,
+\[
+ \operatorname{spec}(K_T^{\mathsf T}K_T)=\{4/5,4/5,1/5\}.
+\]
+The three-filter realization is query-optimal among coherent circuits with
+\(x\)-independent gates and ancillas.
 
 ## Literature finding first
 
@@ -139,6 +145,18 @@ handles the remaining cases.  Multilinearity moves the maximum on the
 cube to a vertex and shows that equality occurs only at those twenty
 balanced vertices.
 
+At a balanced sign filter, cyclic trace expansion gives
+\[
+ \operatorname{tr}(K_T^{\mathsf T}K_T)=\frac95,\quad
+ \operatorname{tr}((K_T^{\mathsf T}K_T)^2)=\frac{33}{25},\quad
+ \det(K_T^{\mathsf T}K_T)=\frac{16}{125}.
+\]
+Newton's identity factors the characteristic polynomial as
+\((\lambda-1/5)(\lambda-4/5)^2\).  Finally, an \(r\)-query coherent
+circuit has acceptance probability of degree at most \(2r\) in \(x\).
+Since \(Z_T^2\) has degree six, exact realization on the physical cube
+requires \(r\ge3\); the antisymmetric protocol is therefore query-optimal.
+
 The complete certificate-independent argument, including inverse polarity
 and all boundary distinctions, is in
 notes/2026-07-31-c707-golden-etf-quantum-measurements-human-proofs.md.
@@ -161,7 +179,10 @@ The golden-operator layer is:
 - the transfer ranks \(3,2,1\) reproduce the cubic, its smooth wall, and
   its six nodes; and
 - the sharp physical optimum is the \(3+3\) phase orbit, with success
-  probability \(16/125\).
+  probability \(16/125\) and squared singular spectrum
+  \(\{4/5,4/5,1/5\}\); and
+- the exterior-cube implementation uses the minimum possible three
+  controlled-filter queries.
 
 The first list is classical and cited.  The second list is proved from the
 C704/C705 operator tower and is not implied by ordinary ETF theory.
@@ -169,6 +190,9 @@ C704/C705 operator tower and is not implied by ordinary ETF theory.
 ## Operational boundary
 
 - The two objects are real-qutrit measurements, not complex qutrit SICs.
+- The cross-transfer protocol requires coherently signed Naimark
+  instruments.  The POVM effects alone forget the frame-vector signs and
+  do not determine \(K_T\).
 - The six \(T\)'s are six outer-conjugate protocols, not six outcomes of
   one additional POVM.
 - \(x\) is a coherent path-control vector, not a quantum state.
@@ -201,7 +225,8 @@ outer response-kernel identities at two integral witnesses, and the sharp
 replay constructs the two projectors directly over
 \(\mathbf Q(\sqrt5)\) and checks
 \(\det(K^{\mathsf T}K)=Z^2/500\) for all \(729\) filters in
-\(\{-1,0,1\}^6\).
+\(\{-1,0,1\}^6\), together with the three elementary symmetric functions
+of the optimal squared singular values.
 
 The computation does not prove the determinant theorem or the cube bound;
 the human exterior-algebra and signed-moment arguments do.  The computation
@@ -215,6 +240,13 @@ check then asked for the physical domain, coordinate independence, the
 sharp success bound, and the distinction between tomography rank and
 transfer rank.  This produced the structural \(3+3\) phase theorem and
 removed the loose contraction estimate \(p\le1\).
+
+A second Tao pass asked which data the POVM effects forget, whether three
+copies are necessary, and what the optimal transfer actually does in its
+three singular directions.  It isolated the coherently signed instrument
+as the true operational object, proved three-query optimality by the
+polynomial method, and fixed the optimum spectrum
+\(\{4/5,4/5,1/5\}\).
 
 The Milnor/Serre proof review reduced the package to four reusable
 mechanisms: projector Gram matrices, one Naimark dilation, top exterior
@@ -239,15 +271,21 @@ table or finite enumeration is load-bearing.
   success probability is \(16/125\), attained on the twenty balanced
   \(3+3\) phase controls; lower signed moments vanish because
   \(C^2=5I\).
+- **Settled — the shape of the optimum:** every maximizing transfer has
+  squared singular spectrum \(\{4/5,4/5,1/5\}\), forced by two cyclic
+  traces and the determinant.
+- **Settled — resource minimality in the coherent-filter model:** an
+  \(r\)-query acceptance probability has degree at most \(2r\), so the
+  degree-six probability \(Z_T^2/500\) requires \(r\ge3\); the parallel
+  exterior-cube protocol is optimal even with \(x\)-independent ancillas.
 - **Open — the operational geometry of \(e_5=0\):** the algebra proves
   precisely where inverse recovery fails, but does not classify which
   experimentally distinct transfer families share the same probability
   contrasts there.  This is optional successor work and has no allocated
   C-ID.
-- **Open — resource minimality:** three copies give a canonical determinant
-  protocol, but no lower bound here excludes a different ancilla-assisted
-  estimator using fewer copies.  Such a lower bound is outside C707 and
-  would require a separately promoted quantum-information task.
+- **Boundary — resources outside the oracle model:** hardware that exposes
+  nonlinear functions of \(x\) as primitive controls is a different
+  resource theory; C707 makes no minimality claim there.
 - **Coverage gap:** the 2025 complete qutrit equioverlapping-measurement
   classification was not accessible at full text.  Therefore no novelty
   sentence about the underlying six-outcome POVM, or about the

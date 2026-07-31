@@ -185,6 +185,29 @@ def build() -> dict[str, object]:
                 for i in range(6)] == [Fraction(4, 5) * value for value in vector]
 
     cubics = outer_cubics()
+    for four_set in itertools.combinations(range(6), 4):
+        a, b, c, d = four_set
+        cycle_sum = (
+            BASE_C[a][b] * BASE_C[b][c] * BASE_C[c][d] * BASE_C[d][a]
+            + BASE_C[a][b] * BASE_C[b][d] * BASE_C[d][c] * BASE_C[c][a]
+            + BASE_C[a][c] * BASE_C[c][b] * BASE_C[b][d] * BASE_C[d][a]
+        )
+        assert cycle_sum == -1
+    balanced_phase_traces = set()
+    for support in itertools.combinations(range(6), 3):
+        signs = [-1 if i in support else 1 for i in range(6)]
+        assert sum(
+            signs[i] * signs[j] * signs[k] * signs[l]
+            for i, j, k, l in itertools.combinations(range(6), 4)
+        ) == 3
+        diagonal = [[signs[i] * int(i == j) for j in range(6)] for i in range(6)]
+        cd = matmul([list(row) for row in BASE_C], diagonal)
+        cd2 = matmul(cd, cd)
+        cd4 = matmul(cd2, cd2)
+        traces = (sum(cd2[i][i] for i in range(6)), sum(cd4[i][i] for i in range(6)))
+        assert traces == (-6, -42)
+        balanced_phase_traces.add(traces)
+    assert balanced_phase_traces == {(-6, -42)}
     for cubic in cubics:
         counts = {0: 0, 8: 0}
         for signs in itertools.product((-1, 1), repeat=6):
@@ -246,6 +269,9 @@ def build() -> dict[str, object]:
             "sharp_physical_cube_bound": "|Z_T(x)|<=8 and p_T^(3)(x)<=16/125 for max_i|x_i|<=1",
             "sharp_phase_patterns": "equality exactly at the 20 vertices with three +1 and three -1 entries",
             "vertex_absolute_value_counts_per_protocol": {"0": 44, "8": 20},
+            "optimal_squared_singular_values": ["4/5", "4/5", "1/5"],
+            "optimal_filter_trace_witnesses": {"trace((CD)^2)": -6, "trace((CD)^4)": -42},
+            "query_optimality": "three uses are necessary: an r-query acceptance probability has degree at most 2r, while Z_T^2 has degree 6",
             "polar_probability_contrast": "center_T(Z_T^2)=500 center_T(p_T^(3))",
             "c705_polar_scaling": "W_T=6Z_T^2-sum_U Z_U^2=3000 center_T(p_T^(3))",
             "response": "A=dZ is the first variation of oriented three-copy transition amplitude",

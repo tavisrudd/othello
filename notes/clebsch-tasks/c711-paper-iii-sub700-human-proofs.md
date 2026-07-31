@@ -25,6 +25,11 @@ primitive-return quaternion orders: their indices in \(M_2(\mathbf Z)\) are
 giving the exact staircase \(500\to20\to5\to1\).  The fifth pass identifies
 the residual order as the level-\(5\) Iwahori preserving the unique ramified
 golden eigenline; its quotient is the one-dimensional opposite-root space.
+The DOF pass identifies the ten-dimensional Morita factor with
+\(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the module on complementary support
+pairs, and isolates the remaining three scalar linearizations, the two
+Iwahori endpoints, the general-base \(\mu_3\) ambiguity, and the raw
+differential scale.
 C712 is unblocked.
 
 ## Objective

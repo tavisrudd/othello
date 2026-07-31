@@ -3,8 +3,18 @@
     "c705_polar_scaling": "W_T=6Z_T^2-sum_U Z_U^2=3000 center_T(p_T^(3))",
     "kraus_operator": "K_T(x)=Q_{T,-}^T diag(x) Q_{T,+}=(1/2)sum_i x_i |u_{T,i}^-><u_{T,i}^+|",
     "not_an_ic_locus": "the fixed POVMs are real-IC everywhere; rank drops concern the controlled transfer map",
+    "optimal_filter_trace_witnesses": {
+      "trace((CD)^2)": -6,
+      "trace((CD)^4)": -42
+    },
+    "optimal_squared_singular_values": [
+      "4/5",
+      "4/5",
+      "1/5"
+    ],
     "physical_domain": "max_i |x_i| <= 1",
     "polar_probability_contrast": "center_T(Z_T^2)=500 center_T(p_T^(3))",
+    "query_optimality": "three uses are necessary: an r-query acceptance probability has degree at most 2r, while Z_T^2 has degree 6",
     "response": "A=dZ is the first variation of oriented three-copy transition amplitude",
     "sharp_phase_patterns": "equality exactly at the 20 vertices with three +1 and three -1 entries",
     "sharp_physical_cube_bound": "|Z_T(x)|<=8 and p_T^(3)(x)<=16/125 for max_i|x_i|<=1",

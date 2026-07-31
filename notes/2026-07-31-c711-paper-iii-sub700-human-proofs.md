@@ -592,6 +592,52 @@ Bruhat--Tits tree and has two adjacent maximal overorders.  The abstract order
 does not select one endpoint; the displayed \(M_2(\mathbf Z)\) is the endpoint
 chosen by the split model.
 
+**Corollary 5.4 (the Morita multiplicity space).**  The \(A_5\)-action
+commutes with the split quaternion algebra, and the resulting ten-dimensional
+Morita factor is
+\[
+ M\cong\mathbf1\oplus\mathbf4\oplus\mathbf5.
+\]
+This is the rational \(A_5\)-module on the ten complementary support pairs.
+
+**Proof.**  The signed six-axis module is
+\(V_E=\mathbf3\oplus\mathbf3'\).  Both three-dimensional summands are
+oriented orthogonal modules, so
+\[
+ \Lambda^3\mathbf3=\Lambda^3\mathbf3'=\mathbf1,
+ \qquad
+ \Lambda^2\mathbf3\cong\mathbf3,
+ \qquad
+ \Lambda^2\mathbf3'\cong\mathbf3'.
+\]
+Using \(\mathbf3\otimes\mathbf3'=\mathbf4\oplus\mathbf5\),
+\[
+\begin{aligned}
+ \Lambda^3(\mathbf3\oplus\mathbf3')
+ &=
+ \Lambda^3\mathbf3
+ \oplus(\Lambda^2\mathbf3\otimes\mathbf3')
+ \oplus(\mathbf3\otimes\Lambda^2\mathbf3')
+ \oplus\Lambda^3\mathbf3'\\
+ &=2(\mathbf1\oplus\mathbf4\oplus\mathbf5).
+\end{aligned}
+\]
+The \(A_5\)-action has determinant one, preserves \(C\), and therefore
+commutes with \(H\) and \(J\).  Under
+\(W\cong\mathbf Q^2\otimes M\), it acts on \(M\), so the displayed
+decomposition forces \(M=\mathbf1\oplus\mathbf4\oplus\mathbf5\).
+
+The permutation module on the ten two-subsets of a five-set has the same
+multiplicity-free decomposition.  C690 identifies those two-subsets with the
+ten complementary support pairs, giving the final assertion.  \(\square\)
+
+**Tao-style check after Corollary 5.4.**  The mysterious dimension ten is
+now the Petersen/two-subset carrier, not an anonymous multiplicity.  Its
+rational isomorphism class is forced.  A literal isomorphism is still
+noncanonical by one scalar on each of
+\(\mathbf1,\mathbf4,\mathbf5\); choosing a primitive quaternion idempotent
+and an integral support linearization would fix those three scalars.
+
 ## 6. Human derivation of the degree-ten return
 
 Let \(L=E(i)\), with \(i^2=-1\), and for \(a=(a,b,c)\) define
@@ -905,6 +951,7 @@ Theorem statements:
 | `middleExterior_splitQuaternion` | \(H=*\), \(J=K/5\) over \(\mathbf Q\) | generated algebra is \(M_2(\mathbf Q)\) and \(HJH^{-1}=-J\) |
 | `middleExterior_orderSmith` | displayed \(2\times2\) split model | indices \(20,5,500\) for the normalized, golden, and return orders |
 | `middleExterior_goldIwahori` | reduction of \(H,t\) modulo \(5\) | golden order is the Borel preimage stabilizing \(L\) |
+| `middleExterior_moritaFactor` | commuting \(A_5\) and split-quaternion actions | multiplicity module is \(\mathbf1\oplus\mathbf4\oplus\mathbf5\) |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
 The large transvectant scalar should enter C712 as a proved interface constant
@@ -933,6 +980,7 @@ no additional finite search.
 | split quaternion and inner golden conjugation | Corollary 5.1 | C682 audits \(K^2\); split model is displayed |
 | normalized and primitive quaternion orders | Corollary 5.2 | displayed determinantal divisors and trace Grams |
 | residual level-5 Iwahori | Corollary 5.3 | displayed common eigenline and quotient functional |
+| Morita multiplicity module | Corollary 5.4 | character decomposition; no machine input |
 | degree-ten return and exact scalar | Lemma 6 | C682 primary and independent replay |
 | golden conjugation and paired rational descent | Lemmas 6–7 | both C682 replays |
 | C680/C712 rings, signs, and bad-prime boundary | exported interfaces | not computational |
@@ -959,7 +1007,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces nine cheap upgrades beyond certificate removal.
+The proof pass produces ten cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -981,7 +1029,36 @@ The staircase \(500\to20\to5\to1\) isolates raw scale, conductor two, and
 golden ramification, and excludes prime \(3\) from this layer.  Ninth, the
 residual index \(5\) is the Iwahori quotient
 \(\operatorname{Hom}(L,\mathbf F_5^2/L)\) for the unique ramified golden
-eigenline, so the final saturation is one opposite-root direction.
+eigenline, so the final saturation is one opposite-root direction.  Tenth,
+the Morita factor is forced to be
+\(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the module on the ten complementary
+support pairs.
+
+## Degrees of freedom after the DOF pass
+
+The proof package now fixes the rational algebra, its normalizer, its
+multiplicity module, and its three natural integral orders.  The remaining
+choices are narrower:
+
+- **Morita linearization:** the isomorphism
+  \(M\cong\mathbf Q[\{\text{complementary pairs}\}]\) is unique up to one
+  scalar on each of \(\mathbf1,\mathbf4,\mathbf5\).  A primitive idempotent
+  and an integral support normalization would fix them.
+- **Iwahori endpoint:** \(\mathcal O_{\rm gold}\) determines an edge with two
+  adjacent maximal orders.  The abstract order does not choose an endpoint;
+  the displayed split model chooses one.
+- **General-base exterior recovery:** over \(\mathbf Q\), \(\Lambda^3C\)
+  determines \(C\); over a base with nontrivial \(\mu_3\), a cube-scalar
+  ambiguity remains.
+- **Raw differential scale:** the factor
+  \(211625906798592000\) is completely derived from the chosen raw
+  transvectant and Fischer conventions but has not been repackaged as a
+  canonical divided-power normalization.  This does not affect any operator
+  or cubic line.
+
+None is a gap in the C680 interface.  The first two concern an optional
+integral Morita refinement; the third is a coefficient-ring boundary; the
+fourth is normalization bookkeeping.
 
 The strongest invariant formulation is now clear.  The actual object is the
 oriented integral pair \((\Lambda^3V,K)\), not the spectrum of \(K\).  Its
@@ -1026,6 +1103,11 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   \(L=\langle(1,2)\rangle\) modulo \(5\); its quotient is the opposite-root
   line.  The order determines an Iwahori edge, but not one of its two maximal
   endpoints.
+- **What the ten-dimensional Morita multiplicity is:** settled at the
+  rational module level.  It is
+  \(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the complementary-pair
+  permutation module.  Three irreducible scaling choices remain before a
+  literal integral identification.
 - **Why the return scalar has its form:** settled by a single Fischer norm.
   The rational factor comes from the raw derivative normalization and the
   golden factor is \(st^6\).

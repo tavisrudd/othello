@@ -195,6 +195,57 @@ exactly at the twenty balanced \(3+3\) phase vertices.
 Thus even the optimal coherent filter succeeds with probability only
 \(16/125\); the generic contraction bound \(p\le1\) is far from sharp.
 
+The optimum has a rigid singular spectrum.  For a balanced sign filter
+\(D\), put \(M=K_T(D)^{\mathsf T}K_T(D)\).  Cyclic trace expansion of the
+two golden projectors reduces to
+\[
+ \operatorname{tr}(CDCD)=-6,\qquad
+ \operatorname{tr}((CD)^4)=-42.
+\]
+The first identity is
+\(\sum_{i\ne j}d_id_j=(\sum_i d_i)^2-6\).  For the second, classify a
+four-step closed walk by whether its opposite vertices coincide.  The
+walks with both pairs equal contribute \(30\).  Those with exactly one
+opposite pair equal contribute
+\[
+ 2\sum_i\left(\left(\sum_{j\ne i}d_j\right)^2-5\right)
+ =2\sum_i(1-5)=-48.
+\]
+For each four-set the three unoriented cycle products sum to \(-1\), the
+four-point two-graph identity forced by the off-diagonal equations in
+\(C^2=5I\).  Each cycle has eight orientations, while
+\(e_4(d)=3\) for three plus and three minus signs, so the four-distinct
+walks contribute \(-8e_4(d)=-24\).  The total is \(30-48-24=-42\).
+Substitution in \(P_\pm=(I\pm C/\sqrt5)/2\) gives
+\[
+ \operatorname{tr}M=\frac95,\qquad
+ \operatorname{tr}(M^2)=\frac{33}{25},\qquad
+ \det M=\frac{16}{125}.
+\]
+Newton's identity gives the middle coefficient \(24/25\), and hence
+\[
+ \chi_{M|V_+}(\lambda)
+ =\lambda^3-\frac95\lambda^2+\frac{24}{25}\lambda-\frac{16}{125}
+ =\left(\lambda-\frac15\right)
+  \left(\lambda-\frac45\right)^2.
+\]
+Thus every optimal transfer has squared singular values
+\[
+ \boxed{\quad\{4/5,4/5,1/5\}.\quad}
+\]
+The full outer \(S_5\) is transitive on the twenty \(3+3\) phase patterns,
+so the calculation is independent of the chosen optimum.
+
+Three uses of the controlled filter are also necessary, not just
+sufficient.  In any coherent circuit whose other gates and ancillas are
+independent of \(x\), an amplitude after \(r\) uses of \(D_x\) is a
+polynomial of degree at most \(r\), and an acceptance probability has
+degree at most \(2r\).  The target \(Z_T(x)^2/500\) is a nonzero homogeneous
+polynomial of degree six.  Equality on the physical cube, which has
+interior, is polynomial equality; therefore \(2r\ge6\).  The exterior-cube
+protocol uses three parallel filters, so it is query-optimal in this
+coherent black-box model, even with arbitrary \(x\)-independent ancillas.
+
 ## 4. The operator tower as response and probability contrast
 
 Let \(Z=(Z_T)_T\) run over the six outer protocols.  The C704 polar
@@ -272,7 +323,7 @@ frame rescales to a rank-one POVM; and the six icosahedral axes realize the
 same real ETF.
 
 The operator-specific content begins only after the two complements are
-kept together with the marked diagonal controls:
+kept together with their coherent signs and the marked diagonal controls:
 \[
  \det(P_-D_xP_+)\longleftrightarrow Z_T,
  \qquad
@@ -284,4 +335,6 @@ Neither ordinary ETF theory nor the definition of a POVM supplies the
 Joubert cubic, the Segre relation among six outer protocols, the
 Segre--Igusa inverse polarity, the sharp \(3+3\) phase optimum, or the
 small-resolution rank strata.  Those come from the golden conference
-operator and its outer marking.
+operator and its outer marking.  In particular, the POVM effects alone
+forget the signs of the frame vectors and do not determine \(K_T\); the
+operational claim belongs to the coherently signed Naimark instrument.

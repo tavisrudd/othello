@@ -15,7 +15,7 @@
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | bounded v2 revision complete; authoritative and standalone eighteen-check release gates green; external publication authority remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | shared title-page refinement synchronized; C713 proof-architecture and C714 companion-structuralization passes queued before the final release refresh | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | major shadow-theorem expansion active; sub-700 human proofs complete and C712 Lean formalization unblocked; former pre-release surface is the green baseline | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -87,7 +87,9 @@ Thus \(A=dZ\) is amplitude response, \(W\) is centered success-probability
 contrast, and inverse polarity recovers the projective signed amplitudes
 off \(e_5=0\).  Signed-moment cancellation from \(C^2=5I\) gives the sharp
 physical bound \(|Z_T|\le8\), with maximum success \(16/125\) exactly on
-the twenty balanced \(3+3\) phase vertices.  Full report:
+the twenty balanced \(3+3\) phase vertices.  At every optimum the squared
+singular spectrum is \(\{4/5,4/5,1/5\}\), and the three-filter protocol is
+query-optimal in the coherent black-box model.  Full report:
 `notes/2026-07-31-c707-golden-etf-quantum-measurements.md`.
 
 C708 is complete.  The Segre--Igusa mixed differential realizes the
@@ -165,14 +167,19 @@ in \(M_2(\mathbf Z)\); adjoining the integral golden coordinate leaves index
 conductor two, golden ramification, and maximal saturation, and excludes prime
 \(3\) from the middle-exterior quaternion layer.  The residual index-\(5\)
 order is exactly the Iwahori preserving the unique ramified golden eigenline,
-with quotient the opposite-root direction.  Full report:
+with quotient the opposite-root direction.  The rational Morita factor is
+\(\mathbf1\oplus\mathbf4\oplus\mathbf5\), exactly the module on the ten
+complementary support pairs; only its three irreducible scalars and the two
+Iwahori endpoints remain optional integral choices.  Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
 ## Active and queued task cards
 
 | task | state | next gate |
 |---|---|---|
-| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | local release surface complete; queued on external publication authority | publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
+| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | external publication deferred behind C713--C714 | after both revisions pass the synchronized release gates, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
+| [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | queued by explicit review request | reorder the proof spine, expose the orientation mechanism, and test structural transfer of node completeness with exact Lean/trust synchronization |
+| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | queued by explicit review request | promote the q13 orbit-span and automorphism arguments, test bounded q9/q13 replacements, and retain honest finite boundaries |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | major shadow-theorem expansion active; C711 sub-700 human proofs complete | complete novelty audit, remaining post-700 human proofs, manuscript integration, Lean coverage, and fresh release gates |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
