@@ -321,6 +321,98 @@ So the optimal experiment does more than label the Segre nodes: its input
 signs, oriented output amplitudes, and their correlations furnish all four
 harmonic channels of the twenty-point middle layer.
 
+### Cubic inversion and second-order invisibility
+
+Choose a balanced control uniformly at random and regard the path signs
+\(X_i\) and amplitude signs \(H_T=Z_T/8\) as random variables.  The mixed
+moment identities sharpen \(XH^{\mathsf T}=0\) to
+\[
+ \mathbb E\left[H_T\prod_{i\in I}X_i\right]=0
+ \quad(|I|\le2),
+ \qquad
+ \mathbb E[H_TX_iX_jX_k]=\pm\frac25.
+\]
+The sign in the last formula is the triangle flux of the marked outer
+conference form.  Since the characters on any one or two input bits span
+all functions of those bits, the first vanishing statement says more than
+zero covariance: a single output amplitude sign is statistically independent
+of any chosen pair of input phase signs.  By outer duality the converse also
+holds.  The deterministic transform is therefore correlation-immune through
+order two, and its first visible correlation is genuinely cubic.  This is
+the statistical shadow of both the three-query lower bound and the
+three-fermion determinant protocol.
+
+The map also has an exact inverse of the same degree.  For a target triple
+\(U\), let \(S=F^{-1}(U)\), and define six inverse coefficient systems by
+\[
+ \widetilde c_i(U)=-x(S)_i,
+ \qquad
+ \widetilde Z_i(y)=\sum_{|U|=3}\widetilde c_i(U)\prod_{T\in U}y_T.
+\]
+At a balanced target sign vector \(y=h(S)\), the same middle-layer detector
+identity leaves only its negative support, giving
+\[
+ \boxed{\qquad \frac18\widetilde Z_i(h(S))=x(S)_i.\qquad}
+\]
+Thus the outer transform is not merely a finite bijection: both directions
+are cubic phase transducers.  This inversion statement is restricted to the
+balanced slice; it does not assert a polynomial inverse on all of
+\(\mathbf R^6\).
+
+### Two literal fermionic realizations
+
+The exterior-cube protocol is already standard many-fermion scattering in
+second-quantized language.  Prepare the three-fermion Slater determinant
+occupying the one-particle space \(V_{T,+}\), apply the one-particle operator
+\(D_x\), and ask for the event that all three fermions occupy
+\(V_{T,-}\).  Fermionic anticommutation gives the transition amplitude as
+the determinant of the one-particle block:
+\[
+ \langle\Omega_{T,-}|\widehat D_x|\Omega_{T,+}\rangle
+ =\det(Q_{T,-}^{\mathsf T}D_xQ_{T,+})
+ =\pm\frac{Z_T(x)}{10\sqrt5}.
+\]
+For a balanced phase mask \(D_x\), all diagonal entries are \(\pm1\), so
+this is a lossless six-mode interferometer, not a lossy Kraus filter.  A
+concrete run consists of three occupied input modes, a fixed mode mixer into
+\(V_{T,+}\), three programmable \(\pi\)-phase shifts among the six paths, a
+fixed output mixer resolving \(V_{T,-}\), and number detection.  The event
+that its three designated output modes are occupied has probability
+\(16/125\).  Ordinary indistinguishable fermions supply the antisymmetry;
+one does not have to synthesize three distinguishable qutrit copies.
+
+The same balanced control also gives a zero-dimensional class-D Majorana
+system.  Set
+\[
+ A_T(x)=[D_x,C_T],\qquad
+ \widehat H_T(x)=\frac i4\sum_{a,b}A_{T,ab}(x)\gamma_a\gamma_b.
+\]
+When \(x\) has three plus and three minus signs,
+\((A_T)_{ij}=(x_i-x_j)C_{T,ij}\) vanishes inside the two parts and has
+magnitude two across them.  Hence it is a signed \(K_{3,3}\) Majorana
+coupling network.  In the golden splitting,
+\[
+ Q_{T,-}^{\mathsf T}A_TQ_{T,+}=2\sqrt5\,K_T.
+\]
+The optimal squared singular spectrum of \(K_T\) therefore gives the exact
+positive Majorana energies
+\[
+ \boxed{\qquad \{2,4,4\},\qquad
+ \operatorname{Pf}A_T=4Z_T=\pm32.\qquad}
+\]
+After fixing the Majorana orientation, the Pfaffian sign is the ground-state
+fermion parity.  Thus the six outer amplitude signs are literally a balanced
+six-bit parity syndrome for six conjugate gapped Majorana networks.  The
+success probabilities forget this syndrome, while a parity measurement or
+phase-referenced Slater amplitude retains it.
+
+These are implementable finite free-fermion models, but no claim is made
+that the specific golden six-mode mixer or fully signed \(K_{3,3}\) coupling
+network has already been built.  A programmable fermionic mode simulator is
+the direct route.  Ordinary photons without an antisymmetric internal-state
+encoding produce permanents rather than determinants and do not implement
+this protocol unchanged.
+
 The optimum has a rigid singular spectrum.  For a balanced sign filter
 \(D\), put \(M=K_T(D)^{\mathsf T}K_T(D)\).  Cyclic trace expansion of the
 two golden projectors reduces to

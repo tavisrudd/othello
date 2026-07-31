@@ -74,6 +74,21 @@ def rational_rank(matrix: list[list[int | Fraction]]) -> int:
     return row
 
 
+def pfaffian(matrix: list[list[int]]) -> int:
+    if not matrix:
+        return 1
+    return sum(
+        (-1) ** (j + 1)
+        * matrix[0][j]
+        * pfaffian([
+            [matrix[row][column] for column in range(len(matrix))
+             if column not in (0, j)]
+            for row in range(len(matrix)) if row not in (0, j)
+        ])
+        for j in range(1, len(matrix))
+    )
+
+
 def parity(permutation: tuple[int, ...]) -> int:
     inversions = sum(
         permutation[i] > permutation[j]
@@ -199,6 +214,8 @@ def build() -> dict[str, object]:
         )
         assert cycle_sum == -1
     balanced_phase_traces = set()
+    balanced_majorana_witnesses = set()
+    base_cubic = triangle_cubic(BASE_C)
     for support in itertools.combinations(range(6), 3):
         signs = [-1 if i in support else 1 for i in range(6)]
         assert sum(
@@ -212,7 +229,24 @@ def build() -> dict[str, object]:
         traces = (sum(cd2[i][i] for i in range(6)), sum(cd4[i][i] for i in range(6)))
         assert traces == (-6, -42)
         balanced_phase_traces.add(traces)
+        majorana = [
+            [(signs[i] - signs[j]) * BASE_C[i][j] for j in range(6)]
+            for i in range(6)
+        ]
+        assert sum(majorana[i][j] != 0 for i in range(6) for j in range(i + 1, 6)) == 9
+        assert all(abs(majorana[i][j]) in (0, 2) for i in range(6) for j in range(6))
+        minus_a2 = [[-value for value in row] for row in matmul(majorana, majorana)]
+        minus_a2_squared = matmul(minus_a2, minus_a2)
+        majorana_witness = (
+            sum(minus_a2[i][i] for i in range(6)),
+            sum(minus_a2_squared[i][i] for i in range(6)),
+            pfaffian(majorana),
+        )
+        assert pfaffian(majorana) == 4 * evaluate(base_cubic, tuple(signs))
+        assert rational_rank(majorana) == 6
+        balanced_majorana_witnesses.add(majorana_witness)
     assert balanced_phase_traces == {(-6, -42)}
+    assert balanced_majorana_witnesses == {(72, 1056, 32), (72, 1056, -32)}
     optimal_node_signs = set()
     optimal_amplitude_sign_counts = [{8: 0, -8: 0} for _ in cubics]
     middle_layer_inputs = []
@@ -271,6 +305,50 @@ def build() -> dict[str, object]:
     ]
     assert rational_rank(product_rows) == 9
     assert rational_rank([[1] * 20] + input_rows + output_rows + product_rows) == 20
+    for output_row in output_rows:
+        for degree in range(3):
+            assert all(
+                sum(
+                    output_row[column]
+                    * math.prod(input_rows[i][column] for i in support)
+                    for column in range(20)
+                ) == 0
+                for support in itertools.combinations(range(6), degree)
+            )
+        assert {
+            sum(
+                output_row[column]
+                * math.prod(input_rows[i][column] for i in support)
+                for column in range(20)
+            )
+            for support in itertools.combinations(range(6), 3)
+        } == {-8, 8}
+    for input_row in input_rows:
+        for degree in range(3):
+            assert all(
+                sum(
+                    input_row[column]
+                    * math.prod(output_rows[t][column] for t in support)
+                    for column in range(20)
+                ) == 0
+                for support in itertools.combinations(range(6), degree)
+            )
+    output_support_to_column = {
+        tuple(i for i, value in enumerate(output) if value == -1): column
+        for column, output in enumerate(middle_layer_outputs)
+    }
+    assert len(output_support_to_column) == 20
+    inverse_cubics = [
+        tuple(
+            -middle_layer_inputs[output_support_to_column[support]][i]
+            for support in TRIPLES
+        )
+        for i in range(6)
+    ]
+    assert all(
+        tuple(evaluate(cubic, output) // 8 for cubic in inverse_cubics) == source
+        for source, output in zip(middle_layer_inputs, middle_layer_outputs)
+    )
     for cubic in cubics:
         counts = {0: 0, 8: 0}
         for signs in itertools.product((-1, 1), repeat=6):
@@ -341,6 +419,10 @@ def build() -> dict[str, object]:
             "middle_layer_pair_transport": pair_transport,
             "middle_layer_simplex_grams": "XX^T=HH^T=24I-4J and XH^T=0",
             "middle_layer_harmonic_decomposition": "R^20 = 1 + 5_input + 5_outer + 9_product",
+            "middle_layer_inverse": "the inverse outer transform is again cubic on the balanced slice",
+            "middle_layer_correlation_immunity": "each output amplitude sign is independent of every chosen pair of input phase signs, and conversely; the first nonzero correlations are cubic and equal +/-2/5",
+            "lossless_three_fermion_protocol": "at balanced x, D_x is a six-mode phase unitary and Z_T^2/500 is the probability that the V_+ Slater determinant scatters to the V_- Slater determinant",
+            "balanced_majorana_network": "[D_x,C_T] is a signed K_3,3 Majorana Hamiltonian with positive one-particle energies {2,4,4}, Pfaffian +/-32, and class-D parity sign sign(Z_T)",
             "optimal_squared_singular_values": ["4/5", "4/5", "1/5"],
             "optimal_filter_trace_witnesses": {"trace((CD)^2)": -6, "trace((CD)^4)": -42},
             "query_optimality": "three uses are necessary: an r-query acceptance probability has degree at most 2r, while Z_T^2 has degree 6",

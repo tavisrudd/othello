@@ -61,6 +61,13 @@ exceptional outer transform: it preserves complements, exchanges triple
 intersection sizes one and two, and identifies the path and protocol sign
 spaces with the two orthogonal five-dimensional Johnson constituents.  Their
 pointwise products complete the \(1+5+5+9\) harmonic decomposition.
+The transform and its inverse are cubic on the balanced layer.  Each output
+amplitude sign is statistically independent of any chosen pair of input
+phase signs, with the first nonzero mixed moments equal to \(\pm2/5\).
+Physically, the optimum is a lossless three-fermion Slater-determinant
+interferometer.  The same control gives a signed \(K_{3,3}\) six-Majorana
+Hamiltonian with positive energies \(\{2,4,4\}\), Pfaffian \(\pm32\), and
+ground-parity sign \(\operatorname{sign}Z_T\).
 Every optimal transfer has squared singular spectrum
 \(\{4/5,4/5,1/5\}\).  The three-filter exterior-cube protocol is
 query-optimal among coherent circuits with \(x\)-independent gates and

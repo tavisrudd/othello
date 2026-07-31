@@ -95,6 +95,10 @@ simultaneously, but all optimal probability contrasts vanish: \(W=e_5=0\).
 On this optimal middle layer the signed cubic map is the exceptional outer
 transform: it preserves complements, exchanges intersection sizes one and
 two, and realizes the two orthogonal five-dimensional Johnson constituents.
+It is cubic in both directions and correlation-immune through order two.
+At balanced controls it is also a lossless three-fermion interferometer and
+a signed \(K_{3,3}\) Majorana family with energies \(\{2,4,4\}\) and
+Pfaffian \(\pm32\).
 Full report:
 `notes/2026-07-31-c707-golden-etf-quantum-measurements.md`.
 
@@ -203,7 +207,7 @@ Full report:
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
 | [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
-| [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | complete; real-qutrit transition volume, polar-blind Segre optimum, and physical middle-layer outer transform proved | none |
+| [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | complete; cubic outer phase code, lossless three-fermion scattering, and signed \(K_{3,3}\) Majorana optimum proved | none |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | complete; outer exchange positive at representation level, no canonical involutory polarity, exact code tables closed | none |
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | complete; two-graph flux and chiral commutator family survive, quadratic refinement and intrinsic spin structure do not | none |
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |

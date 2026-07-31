@@ -1,8 +1,12 @@
 {
   "cross_measurement_protocol": {
+    "balanced_majorana_network": "[D_x,C_T] is a signed K_3,3 Majorana Hamiltonian with positive one-particle energies {2,4,4}, Pfaffian +/-32, and class-D parity sign sign(Z_T)",
     "c705_polar_scaling": "W_T=6Z_T^2-sum_U Z_U^2=3000 center_T(p_T^(3))",
     "kraus_operator": "K_T(x)=Q_{T,-}^T diag(x) Q_{T,+}=(1/2)sum_i x_i |u_{T,i}^-><u_{T,i}^+|",
+    "lossless_three_fermion_protocol": "at balanced x, D_x is a six-mode phase unitary and Z_T^2/500 is the probability that the V_+ Slater determinant scatters to the V_- Slater determinant",
+    "middle_layer_correlation_immunity": "each output amplitude sign is independent of every chosen pair of input phase signs, and conversely; the first nonzero correlations are cubic and equal +/-2/5",
     "middle_layer_harmonic_decomposition": "R^20 = 1 + 5_input + 5_outer + 9_product",
+    "middle_layer_inverse": "the inverse outer transform is again cubic on the balanced slice",
     "middle_layer_outer_transform": "S maps to the negative support of (Z_T(x_S)/8)_T, a complement-preserving bijection on 3-subsets",
     "middle_layer_pair_transport": {
       "0->0": 10,

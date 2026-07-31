@@ -50,6 +50,18 @@ Johnson relations \(|S\cap R|=1\) and \(|S\cap R|=2\).  Its input and output
 sign matrices are orthogonal simplex frames, and together with their
 pointwise products they realize the full \(1+5+5+9\) harmonic decomposition
 of functions on the twenty triples.
+The transform is cubic in both directions and correlation-immune through
+order two: one amplitude sign is independent of every chosen pair of path
+signs, while the first nonzero mixed moments are cubic and equal
+\(\pm2/5\).
+
+At the optimum this is also literal free-fermion physics.  The balanced
+mask is a lossless six-mode phase unitary, and \(16/125\) is a three-fermion
+Slater-determinant scattering probability.  The commutator
+\([D_x,C_T]\) is simultaneously a signed \(K_{3,3}\) six-Majorana
+Hamiltonian with positive energies \(\{2,4,4\}\) and Pfaffian
+\(4Z_T=\pm32\); its class-D ground-state-parity signs are precisely the six
+outer amplitude signs.
 At every optimum,
 \[
  \operatorname{spec}(K_T^{\mathsf T}K_T)=\{4/5,4/5,1/5\}.
@@ -60,9 +72,9 @@ The three-filter realization is query-optimal among coherent circuits with
 ## Literature finding first
 
 This was a bounded positioning sweep, not a novelty audit, and makes no
-priority or absence claim.  Zero sources were read at full text; three
-primary sources were read partially at the sections stated below, and one
-recent primary source was available only at abstract/metadata depth.
+priority or absence claim.  Zero sources were read at full text; six primary
+sources were read partially at the sections stated below, and one recent
+primary source was available only at abstract/metadata depth.
 
 1. Marcus Appleby, Ingemar Bengtsson, Steven Flammia, and Dardo Goyeneche,
    *Tight Frames, Hadamard Matrices and Zauner's Conjecture*.
@@ -115,6 +127,27 @@ recent primary source was available only at abstract/metadata depth.
    arXiv:1507.02713, SHA-256
    05e249d4ef881fb30d21d88eca85e61c2fd2b9207cbd7c320cc8af2ffd3c6586.
    Source: https://arxiv.org/abs/1507.02713.
+
+6. Barbara M. Terhal and David P. DiVincenzo, *Classical simulation of
+   noninteracting-fermion quantum circuits*.  **Read depth:** partial,
+   arXiv version, the number-preserving transition-amplitude derivation in
+   Section II.  Equation (18) derives a many-fermion transition amplitude as
+   the determinant of the selected one-particle block; this is the standard
+   physical mechanism used by the C707 Slater protocol.  Cache key
+   arXiv:quant-ph/0108010, SHA-256
+   71a6c85976f3697a24eb6c32219e6322915f4e2684cd772b25f4f67c3edb271a.
+   Source: https://arxiv.org/abs/quant-ph/0108010.
+
+7. A. Grabsch, Y. Cheipesh, and C. W. J. Beenakker, *Pfaffian formula for
+   fermion parity fluctuations in a superconductor and application to
+   Majorana fusion detection*.  **Read depth:** partial, arXiv version,
+   Section 2.2.  It states Kitaev's formula equating the ground-state parity
+   of a closed quadratic Majorana system with the Hamiltonian Pfaffian sign.
+   This supplies the standard class-D interpretation; C707 supplies the
+   golden signed-\(K_{3,3}\) family and its exact spectrum.  Cache key
+   arXiv:1903.11498, SHA-256
+   5a437fbe55049c7c65c8b528dbc9a75bd92da64320da0d543f35300029631a13.
+   Source: https://arxiv.org/abs/1903.11498.
 
 The exact orientation queries were:
 
@@ -195,6 +228,32 @@ middle-layer Johnson module; their pointwise products fill the remaining
 nine-space.  Thus the physical optimum carries the complete
 \(1+5+5+9\) harmonic splitting.
 
+The vanishing mixed moments continue through bidegrees \((1,0),(1,1)\),
+and \((1,2)\): for uniform balanced \(x\),
+\[
+ \mathbb E\left[(Z_T/8)\prod_{i\in I}x_i\right]=0
+ \quad(|I|\le2),
+ \qquad
+ \mathbb E[(Z_T/8)x_ix_jx_k]=\pm2/5.
+\]
+Hence each amplitude sign is independent of any selected pair of phase
+bits, and cubic coherence is the first carrier of information.  If the
+negative support of an output sign vector is \(U\), assigning inverse cubic
+coefficient \(-x_i(F^{-1}U)\) gives
+\(\widetilde Z_i(Z(x)/8)/8=x_i\) on the balanced slice.  The transform and
+its inverse are therefore both cubic.
+
+There are two direct fermionic readings.  In passive number-preserving
+fermionic linear optics, the amplitude between the Slater determinants
+occupying \(V_{T,+}\) and \(V_{T,-}\) is \(\det K_T\).  Balanced \(D_x\) is
+unitary, so the optimal experiment requires only fixed mode mixers,
+programmable \(0/\pi\) path phases, and occupation detection.  Independently,
+\(A_T=[D_x,C_T]\) is supported on the crossing edges of the \(3+3\) cut,
+so it is a signed \(K_{3,3}\) Majorana Hamiltonian.  Since its off-diagonal
+golden block is \(2\sqrt5K_T\), its positive energies are \(\{2,4,4\}\),
+and \(\operatorname{Pf}A_T=4Z_T=\pm32\).  Thus the oriented output is a
+class-D fermion-parity syndrome, not merely an algebraic sign convention.
+
 At a balanced sign filter, cyclic trace expansion gives
 \[
  \operatorname{tr}(K_T^{\mathsf T}K_T)=\frac95,\quad
@@ -236,6 +295,10 @@ The golden-operator layer is:
 - on the optimal layer the cubic amplitude signs realize the exceptional
   outer transform, exchanging the two nontrivial Johnson relations and the
   two five-dimensional harmonic constituents; and
+- this transform is a two-sided cubic, order-two correlation-immune phase
+  code, whose first mixed information is third-order; and
+- the optimum is both a lossless three-fermion interferometer and a signed
+  \(K_{3,3}\) Majorana family with energy spectrum \(\{2,4,4\}\); and
 - the exterior-cube implementation uses the minimum possible three
   controlled-filter queries.
 
@@ -255,6 +318,11 @@ C704/C705 operator tower and is not implied by ordinary ETF theory.
   Its square is operational only after the specified coherent
   three-copy protocol.
 - \(W\) is a signed probability contrast, not a positive effect.
+- At balanced controls the Slater protocol is lossless passive fermionic
+  linear optics.  Ordinary photons implement permanents, not this determinant,
+  unless an antisymmetric internal-state encoding is added.
+- The signed \(K_{3,3}\) Majorana network is an exact finite Hamiltonian
+  proposal, not a claim of an existing golden-network experiment.
 - Rank drops of \(A\) and \(K_T\) concern the controlled transfer family;
   the underlying fixed POVMs remain real-informationally-complete.
 
@@ -281,7 +349,11 @@ each balanced control maximizes all six protocols, that the twenty signed
 amplitude patterns pair into ten projective Segre nodes, and that \(W=e_5=0\)
 on this locus.  It further checks the \(0\mapsto0,1\mapsto2,2\mapsto1\)
 intersection transport, the orthogonal simplex identities, and the complete
-\(1+5+5+9\) middle-layer decomposition.  The independent
+\(1+5+5+9\) middle-layer decomposition.  It also checks the two-sided cubic
+inverse, vanishing mixed moments through order two, the first cubic moments
+\(\pm2/5\), and the signed-\(K_{3,3}\) Majorana invariants
+\(\operatorname{tr}(-A^2)=72\), \(\operatorname{tr}((-A^2)^2)=1056\), and
+\(\operatorname{Pf}A=\pm32\).  The independent
 replay constructs the two projectors directly over
 \(\mathbf Q(\sqrt5)\) and checks
 \(\det(K^{\mathsf T}K)=Z^2/500\) for all \(729\) filters in
@@ -324,6 +396,17 @@ frames explain why: they are the two five-dimensional Johnson constituents,
 and their pointwise correlations supply the remaining nine-dimensional
 channel.
 
+The third extra-juice pass asked whether that transform is reversible and
+whether its ``quantum'' interpretation survives contact with standard
+many-body physics.  Both answers are positive.  The inverse is again cubic
+on the balanced slice; every individual output parity is blind to any pair
+of input phases, with information first appearing in cubic moments.  At the
+same time the protocol becomes ordinary lossless Slater-determinant
+scattering, while the C709 commutator becomes a universal-spectrum signed
+\(K_{3,3}\) Majorana network.  The two readings share the same determinant
+and retain complementary operational data: occupation probability sees
+\(Z^2\), ground-state parity sees \(\operatorname{sign}Z\).
+
 The Milnor/Serre proof review reduced the package to four reusable
 mechanisms: projector Gram matrices, one Naimark dilation, top exterior
 power, and vanishing signed moments from \(C^2=5I\).  No classification
@@ -360,6 +443,14 @@ table or finite enumeration is load-bearing.
   orthogonal five-dimensional constituents of the twenty-triple permutation
   module.  The cubic map is the exceptional outer transform, detected by its
   exchange of intersection sizes one and two.
+- **Settled — where the hidden input information first appears:** every one
+  or two path phases are statistically independent of one chosen output
+  amplitude sign; the first nonzero mixed moments are cubic, equal to
+  \(\pm2/5\).  The inverse map is itself cubic on the balanced slice.
+- **Settled — whether the optimum has literal many-body physics:** yes.  It
+  is a lossless three-fermion Slater transition with probability \(16/125\),
+  and simultaneously a signed \(K_{3,3}\) class-D Majorana Hamiltonian with
+  energies \(\{2,4,4\}\) and parity Pfaffian \(\pm32\).
 - **Settled — resource minimality in the coherent-filter model:** an
   \(r\)-query acceptance probability has degree at most \(2r\), so the
   degree-six probability \(Z_T^2/500\) requires \(r\ge3\); the parallel
@@ -368,6 +459,10 @@ table or finite enumeration is load-bearing.
   stratum is now classified, but experimentally distinct transfer families
   sharing probability contrasts on the full locus \(e_5=0\) remain
   unclassified.  This optional question has no allocated C-ID.
+- **Not audited — hardware realization:** this pass proves an implementable
+  finite free-fermion model but did not run the experimental-literature audit
+  needed to say whether the exact golden mixer or signed \(K_{3,3}\) network
+  has been built.  That is not a missing mathematical gate for C707.
 - **Boundary — resources outside the oracle model:** hardware that exposes
   nonlinear functions of \(x\) as primitive controls is a different
   resource theory; C707 makes no minimality claim there.
