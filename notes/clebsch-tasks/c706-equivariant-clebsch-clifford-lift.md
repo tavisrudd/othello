@@ -50,6 +50,11 @@ in two Pauli-conjugacy classes, but the distinguished conference
 orientation-reversing coset.  Thus the phase boundary is
 \(A_5\subset S_5\), whereas the Clifford-extension obstruction occurs only
 at \(S_5\subset S_6\).
+The conference \(S_5\) has six conjugates with all fifteen pairwise
+intersections isomorphic to \(S_4\).  The global nonsplit class restricts
+trivially to every chart but their complements cannot glue.  This exact
+six-chart pattern is handed to C708 for comparison with the six actual
+Segre--Igusa polarities.
 
 Full report and certificate:
 `notes/2026-07-30-c706-equivariant-clifford-lift.md`.

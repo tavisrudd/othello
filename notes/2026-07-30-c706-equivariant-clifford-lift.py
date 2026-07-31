@@ -100,6 +100,20 @@ def permutation_order(permutation):
     raise AssertionError
 
 
+def inverse_permutation(permutation):
+    result = [0] * 6
+    for source, target in enumerate(permutation):
+        result[target] = source
+    return tuple(result)
+
+
+def conjugate_permutation(permutation, element):
+    return compose_permutations(
+        permutation,
+        compose_permutations(element, inverse_permutation(permutation)),
+    )
+
+
 def induced_vector_map(permutation):
     result = {0: 0}
     for left, right in DUADS:
@@ -619,6 +633,34 @@ def build_certificate():
     assert orbit_index[base_assignment] in extendable_golden_classes
     assert orbit_index[golden_twist] not in extendable_golden_classes
 
+    # The order-120 conference subgroup has six conjugates.  The global
+    # H2 obstruction restricts trivially to every one by conjugacy, while
+    # distinct local charts meet in an S4 of order 24.
+    switching_conjugates = {
+        frozenset(
+            conjugate_permutation(permutation, element)
+            for element in switching_group
+        )
+        for permutation in itertools.permutations(range(6))
+    }
+    assert len(switching_conjugates) == 6
+    switching_conjugates = tuple(switching_conjugates)
+    intersection_orders = sorted(
+        len(switching_conjugates[left] & switching_conjugates[right])
+        for left in range(6)
+        for right in range(left + 1, 6)
+    )
+    assert intersection_orders == [24] * 15
+    normalizer_order = sum(
+        frozenset(
+            conjugate_permutation(permutation, element)
+            for element in switching_group
+        )
+        == switching_group
+        for permutation in itertools.permutations(range(6))
+    )
+    assert normalizer_order == 120
+
     # Exact Schrödinger intertwiners for the base A5 splitting.  Both have
     # denominator 2.  Their raw scalar relations are a^5=i, b^2=1,
     # (ab)^3=i.  Rephasing a by -i and b by -1 makes all three relations 1,
@@ -702,6 +744,22 @@ def build_certificate():
             "H1_dimension": 1,
             "extendable_A5_conjugacy_classes": extendable_golden_classes,
             "golden_conference_class_extends": False,
+        },
+        "six_local_S5_charts": {
+            "conjugate_conference_S5_subgroups": len(switching_conjugates),
+            "normalizer_order": normalizer_order,
+            "pairwise_intersection_orders": {
+                "24": intersection_orders.count(24)
+            },
+            "intersection_type": "S4",
+            "H2_restriction": (
+                "the global nonsplit Clifford class restricts to zero on "
+                "all six conjugate S5 subgroups"
+            ),
+            "global_gluing": (
+                "no choices of the six local complements glue to an S6 "
+                "complement, by the full Coxeter contradiction"
+            ),
         },
         "verdict": (
             "The full S6 Clifford extension is nonsplit. Its golden A5 "

@@ -105,6 +105,16 @@
   "ground_field": "F2",
   "schema": "c706-equivariant-clifford-lift-v1",
   "scope": "The class controls the integral conference marking and its triangle coboundary K, not the full-S6 Joubert tensor or the sqrt(5) eigenfield.",
+  "six_local_S5_charts": {
+    "H2_restriction": "the global nonsplit Clifford class restricts to zero on all six conjugate S5 subgroups",
+    "conjugate_conference_S5_subgroups": 6,
+    "global_gluing": "no choices of the six local complements glue to an S6 complement, by the full Coxeter contradiction",
+    "intersection_type": "S4",
+    "normalizer_order": 120,
+    "pairwise_intersection_orders": {
+      "24": 15
+    }
+  },
   "symplectic_action_size": 720,
   "symplectic_group": "Sp4(F2) ~= S6",
   "verdict": "The full S6 Clifford extension is nonsplit. Its golden A5 restriction splits in 64 ways forming four Pauli-conjugacy classes; conference rephasing selects a nonzero H1 class."

@@ -215,6 +215,34 @@ The full-\(S_6\) obstruction therefore appears only after leaving the
 maximal conference \(S_5\), while the golden phase is lost one step
 earlier, on crossing \(A_5\subset S_5\).
 
+### Six local Clifford charts
+
+The conference \(S_5\) is self-normalizing in \(S_6\), so it has exactly
+six conjugates.  Exact enumeration gives
+\[
+\#\{S_5^{(i)}\}=6,\qquad
+|S_5^{(i)}\cap S_5^{(j)}|=24\quad(i\ne j);
+\]
+every pairwise overlap is an \(S_4\).
+
+Because the Clifford extension splits on one conference \(S_5\), conjugacy
+shows that its \(H^2\)-class restricts to zero on all six.  Nevertheless
+the six local complements cannot be chosen compatibly: a compatible
+choice would generate a global \(S_6\) complement, contradicting the
+five-row Coxeter certificate.
+
+This gives a useful local-to-global form of the obstruction:
+\[
+\left.[\omega]\right|_{S_5^{(i)}}=0\quad(1\le i\le6),
+\qquad
+[\omega]\ne0\in H^2(S_6,V).
+\]
+The six conjugate charts have exactly the same \(6\)-object and pairwise
+\(S_4\)-overlap pattern as the six conference axes/shadow sisters in
+C705.  This is a precise candidate bridge for C708's operator-versus-code
+comparison.  C706 does not identify a particular local complement with a
+Segre--Igusa polarity.
+
 ## Scalar phase
 
 For completeness, the certificate records exact Gaussian-rational
@@ -269,6 +297,12 @@ the conference phase class exists only on the first.  This locates both
 failures minimally and prevents “orientation reversal” from being blamed
 for the full Clifford nonsplitting.
 
+The third gain is the six-chart local-to-global description.  The global
+\(H^2\) class is invisible on every conjugate conference \(S_5\), and is
+detected only by their incompatible gluing.  This puts the six-axis
+phenomenon and the Clifford obstruction in the same exact incidence
+framework without prematurely identifying their operators.
+
 The structural closeout separates three extension layers:
 
 1. ordinary context gauge, trivial by C705;
@@ -311,6 +345,10 @@ Checksums are recorded in
 - **Settled:** the conference \(S_5\) has \(32\) Clifford splittings in two
   Pauli-conjugacy classes, but the golden conference class is
   nonextendable across \(A_5\subset S_5\).
+- **Settled:** the global \(S_6\) obstruction is locally trivial on six
+  self-normalizing conference \(S_5\) charts with fifteen pairwise
+  \(S_4\) overlaps; C708 owns comparison of these charts with the actual
+  six polarities.
 - **Settled:** the scalar projective class on \(A_5\) is trivial.
 - **Settled:** the class controls the conference marking and \(K\), not
   Joubert or the golden eigenfield.
