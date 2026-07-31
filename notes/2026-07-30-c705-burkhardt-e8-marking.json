@@ -1,0 +1,65 @@
+{
+  "affine_G_ascending": [
+    "-228327182531/5038848",
+    "290630599/93312",
+    "-694731583/559872",
+    "-78226463/93312"
+  ],
+  "affine_H_ascending": [
+    "323/36",
+    "7/6",
+    "1/6"
+  ],
+  "burkhardt_equation_value": 0,
+  "burkhardt_point": [
+    6,
+    17,
+    1,
+    -7,
+    -19
+  ],
+  "frobenius_factor_degrees": {
+    "1303": [
+      1,
+      1,
+      1,
+      1,
+      2
+    ],
+    "17": [
+      6
+    ],
+    "7": [
+      1,
+      5
+    ]
+  },
+  "galois_argument": [
+    "mod 17 irreducibility gives transitivity and a 6-cycle",
+    "mod 7 gives a 5-cycle",
+    "mod 1303 gives a transposition",
+    "the 5-cycle excludes block systems of sizes 2 or 3",
+    "a primitive subgroup of S6 containing a transposition is S6"
+  ],
+  "galois_group": "S6",
+  "ground_field": "Q",
+  "lambda": "-1543199529524471/2176782336",
+  "one_weierstrass_point_degree": 6,
+  "ordered_weierstrass_torsor_degree": 720,
+  "primitive_branch_sextic_ascending": [
+    295130390826722844,
+    -62251283304984120046,
+    -5519843141820561948,
+    1960910801972693616,
+    -445189061771697891,
+    103910980411175652,
+    39706983135965148
+  ],
+  "rational_weierstrass_point": false,
+  "schema": "c705-burkhardt-e8-marking-v1",
+  "sources": {
+    "Bruin--Nasserden_arXiv_1705.09006_sha256": "e4d84263b04294adea81aecce0232e359c4a0ed03855c00e57315c5a4224bc3a",
+    "Rains--Sam_arXiv_1702.04840_sha256": "4c46b1edef9252cae1917d9d4fbc91607ae792aafa895ccfae47d5b39dc56296"
+  },
+  "strict_lie_e8_verdict": "possible after base change to the S6 ordered-Weierstrass torsor; not defined over Q for this frozen Burkhardt point"
+}

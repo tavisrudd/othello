@@ -181,8 +181,14 @@ Full report and certificate:
 A genuine Lie-\(E_8\) route is feasible through the Vinberg grading
 \(\mathfrak{sl}_9\oplus\bigwedge^3 9\oplus\bigwedge^6 9\): a stable
 trivector constructs the Coble dual pair, whose fixed section is already
-the Segre--Igusa pair.  The remaining strict gate is to match that
-trivector's ordered Weierstrass marking to C704's frozen Joubert tensor.
+the Segre--Igusa pair.  For the frozen Burkhardt point the universal
+genus-two branch sextic has Galois group \(S_6\).  Hence the Rains--Sam
+one-Weierstrass marking lives first over degree \(6\), and C704's ordered
+Joubert marking lives on the degree-\(720\) splitting torsor.  The strict
+comparison is possible there, but an ordered equality over \(\mathbf Q\)
+is not defined.  The remaining gate is the explicit \(S_6\)-equivariant
+splitting-algebra comparison.  Exact arithmetic report:
+`notes/2026-07-30-c705-burkhardt-e8-marking.md`.
 Alternative attacks:
 `notes/2026-07-30-c705-lie-e8-alt-attacks.md`.
 

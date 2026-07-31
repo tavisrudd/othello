@@ -216,9 +216,18 @@ grading
 \]
 constructs the genus-two Coble cubic/sextic from a stable trivector, and
 the already-proved \(\tau^+\) section then gives Segre--Igusa.  The exact
-remaining gate is to recover C704's frozen marked Joubert tensor from the
-same trivector; after that, \(A,q,W\) follow by differentiation and the
-two null-line identities.  Alternative attacks and sources:
+arithmetic base of the remaining gate is now known.  At the frozen
+Burkhardt point, the universal genus-two branch sextic has Galois group
+\(S_6\): its factor patterns modulo \(7,17,1303\) supply a five-cycle,
+six-cycle, and transposition.  Thus the Rains--Sam one-Weierstrass marking
+first exists over degree \(6\), while C704's ordered Joubert marking lives
+on the degree-\(720\) splitting torsor.  The strict comparison is possible
+there, but cannot be posed as an ordered equality over \(\mathbf Q\).
+After the explicit \(S_6\)-equivariant splitting-algebra comparison,
+\(A,q,W\) follow by differentiation and the two null-line identities.
+Exact report:
+`notes/2026-07-30-c705-burkhardt-e8-marking.md`.
+Alternative attacks and sources:
 `notes/2026-07-30-c705-lie-e8-alt-attacks.md`.
 
 The genus-two Coble cubic/sextic gives a second, classically known
