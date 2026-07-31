@@ -43,6 +43,14 @@ commuting theorem rather than a list of formula coincidences.
 5. Run a claim-family novelty audit before fixing title/abstract language;
    distinguish classical Segre/Igusa and outer-automorphism geometry from
    the new golden operator synthesis.
+   Before freezing the explanatory hierarchy, run the two bounded
+   mechanism tests in
+   [the unexpected-connection frontier](../2026-07-31-c720-unexpected-connection-frontier.md):
+   determine whether the six Joubert outputs are a projection/elimination of
+   pure-spinor Wick relations, and whether the signed \(K_{3,3}\)
+   matching-frustration class is the golden two-graph class.  Treat the
+   genus-two theta lift as the next discriminator and keep weaker ambient
+   analogies out of the theorem spine.
 6. Specify Lean and exact-computation boundaries.  No finite certificate may
    carry the conceptual theorem spine.
 7. Produce a section-level manuscript plan, target length, provisional
