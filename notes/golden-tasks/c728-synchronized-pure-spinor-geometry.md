@@ -29,6 +29,9 @@ Wick identities alone force it.
 4. Seek a homogeneous-space, vector-bundle, Clifford, or universal-isotropic
    interpretation that produces all six cells functorially from the marked
    golden operator.
+   Compare it with the C720 partial isometry
+   \(R^{\mathsf T}/\sqrt{12}:V_5\to E_{+3}(S_{10})\) and determine whether both maps are
+   manifestations of one equivariant universal construction.
 5. Run a focused pure-spinor/matchgate literature audit and separate the
    classical Wick geometry from any new golden synchronization theorem.
 6. Give a human structural proof; exact elimination may verify conventions

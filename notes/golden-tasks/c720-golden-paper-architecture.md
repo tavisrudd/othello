@@ -89,8 +89,11 @@ objects; C727 owns that covariance and minimal-marking audit.
    anomaly charges.  Include the distance-six regular-simplex syndrome and
    prove its Gram matrix from the Segre/anomaly zero-centroid identity plus
    outer two-transitivity; this is the conceptual bridge to robust sister
-   decoding.  State explicitly that the all-cut formulation is an order-six
-   rigidity phenomenon, not a general conference-matrix law.
+   decoding.  Include its transpose Naimark--Gram shadow
+   \(R^{\mathsf T}R=6I+2S_{10}\), which constructs the Petersen/Paley
+   order-ten conference operator and identifies the \(5\) versus \(1+4\)
+   eigenspace split.  State explicitly that the all-cut formulation is an
+   order-six rigidity phenomenon, not a general conference-matrix law.
 5. **Lattice boundary and repair:** the E8--Hamming noncompatibility theorem
    and the exact \(II_{10,10}\) hyperbolic replacement.
 6. **Strengthenings:** C715--C719 results admitted only after their theorem

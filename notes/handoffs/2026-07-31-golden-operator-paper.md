@@ -48,6 +48,11 @@ Paper III remains unchanged and ends before it.  In particular:
   the outer augmentation module.  Five-cycle magnitudes certify golden
   membership, three optimal signs identify a sister after certification,
   and the full syndrome corrects two sign-readout errors.
+- Transposing the same syndrome gives the ten-vector
+  \(\operatorname{ETF}(5,10)\), and
+  \(S_{10}=(R^{\mathsf T}R-6I)/2\) is the Petersen/Paley order-ten conference
+  operator.  Thus the order-ten boundary example is itself a Naimark--Gram
+  shadow of the order-six golden system.
 - C720's fully marked forward operator theorem is frozen in
   `notes/2026-07-31-c720-c727-operator-interface.md`.  It fixes the source
   object, formulas, covariance facts, and primary output inventory that C727
@@ -72,7 +77,7 @@ is authorized by that investigation.
 | [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | active; central C727 interface frozen | freeze the section plan, novelty boundary, proof/trust plan, and strict independence from review-facing Paper III |
 | [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | queued after C720; marked source frozen | descend the frozen operator interface through every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
 | [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
-| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | queued after C720; sequel direction | classify extremal higher-order cuts and explain the order-six exception without expanding the present paper unless a short theorem returns |
+| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | queued after C720; sequel direction | intrinsicize the \(6\to10\) conference lift, classify the 36 extremal order-ten cuts, and test for a functorial tower |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |

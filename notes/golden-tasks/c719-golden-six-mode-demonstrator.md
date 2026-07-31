@@ -28,7 +28,10 @@ boson--fermion identity with a complete resource and error budget.
    three-sign sister classifier, the five-cycle protocol whose magnitudes
    certify golden membership and signs identify the projective sister, and
    the full ten-sign distance-six readout correcting two sign errors.  Keep
-   the residual \(c\) versus \(-c\) orientation requirement explicit.
+   the residual \(c\) versus \(-c\) orientation requirement explicit.  Use
+   the regular-simplex matched-filter decoder
+   \(T=\arg\max_U\langle y,r_U\rangle\), and exploit the transpose
+   \(\operatorname{ETF}(5,10)\) for conditioning and noise analysis.
 7. Refresh the hardware literature at design time and distinguish a proposed
    circuit from any already demonstrated component or complete device.
 

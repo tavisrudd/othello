@@ -348,6 +348,40 @@ def dimer_test(matrices: tuple[tuple[tuple[int, ...], ...], ...]) -> dict[str, o
     assert all(sign_gram[i][j] == (10 if i == j else -2) for i in range(6) for j in range(6))
     assert all(sum(word[position] for word in sign_words) == 0 for position in range(10))
 
+    columns = [tuple(word[position] for word in sign_words) for position in range(10)]
+    canonical_columns = {
+        min(column, tuple(-entry for entry in column))
+        for column in columns
+    }
+    all_balanced_lines = {
+        min(vector, tuple(-entry for entry in vector))
+        for support in itertools.combinations(range(6), 3)
+        for vector in [tuple(1 if i in support else -1 for i in range(6))]
+    }
+    assert canonical_columns == all_balanced_lines
+    column_gram = [
+        [sum(columns[i][row] * columns[j][row] for row in range(6)) for j in range(10)]
+        for i in range(10)
+    ]
+    assert all(column_gram[i][i] == 6 for i in range(10))
+    assert all(abs(column_gram[i][j]) == 2 for i in range(10) for j in range(10) if i != j)
+    derived_conference = [
+        [(column_gram[i][j] - 6 * int(i == j)) // 2 for j in range(10)]
+        for i in range(10)
+    ]
+    assert all(
+        sum(derived_conference[i][k] * derived_conference[k][j] for k in range(10))
+        == 9 * int(i == j)
+        for i in range(10) for j in range(10)
+    )
+    paley_permutation = (0, 1, 5, 9, 6, 7, 2, 4, 3, 8)
+    paley_switching = (1,) + tuple(derived_conference[0][i] for i in range(1, 10))
+    assert all(
+        paley_switching[i] * paley_switching[j] * derived_conference[i][j]
+        == PALEY_C10[paley_permutation[i]][paley_permutation[j]]
+        for i in range(10) for j in range(10)
+    )
+
     signed_classifiers = []
     minimum_signed_classifier = None
     for size in range(1, 11):
@@ -387,6 +421,15 @@ def dimer_test(matrices: tuple[tuple[tuple[int, ...], ...], ...]) -> dict[str, o
         "minimum_signed_cuts_to_identify_sister_after_certification": minimum_signed_classifier,
         "minimum_signed_classifiers": len(signed_classifiers),
         "every_five_cycle_sign_readout_identifies_sister": True,
+        "cut_columns": "all ten projective balanced 3+3 sign vectors in dimension 6",
+        "cut_column_frame": "real equiangular tight frame ETF(5,10), squared norm 6, coherence 1/3",
+        "syndrome_partial_isometry": (
+            "R R^T = 12(I-J/6), R^T R = 6I+2S_10 = 12 P_+(S_10)"
+        ),
+        "derived_order_10_conference": "S_10=(R^T R-6I)/2, S_10^2=9I_10",
+        "derived_order_10_paley_permutation": list(paley_permutation),
+        "derived_order_10_paley_switching": list(paley_switching),
+        "derived_order_10_representation_split": "+3 eigenspace is the A5 irreducible 5; -3 eigenspace is 1+4",
         "unoriented_golden_fingerprints": len(good_fingerprints),
         "sylow_5_subgroups_of_A5": 6,
         "outer_golden_family_exhausts_them": True,
