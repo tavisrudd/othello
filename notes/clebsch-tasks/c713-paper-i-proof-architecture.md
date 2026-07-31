@@ -4,7 +4,8 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued.
+**Status:** complete.  Report:
+[`../2026-07-31-c713-paper-i-proof-architecture.md`](../2026-07-31-c713-paper-i-proof-architecture.md).
 
 ## Objective
 
@@ -50,3 +51,23 @@ PDF, and standalone mirror agree exactly and pass their release checks.
 Do not alter the frozen mathematical scope, import Paper II or III proof
 dependencies, weaken the two declared Dye axioms, or publish external artifacts.
 The shared trilogy title-page refinement is already complete.
+
+## Closeout
+
+The proof spine now runs continuously from chord defect through the line
+bound, rigidity, and the across-fields consequence before the coding and
+orientation developments.  The orientation proof exposes orbital balance,
+triangle holonomy, the determinant pencil, the node frame, symmetry, and the
+integral commutant as separate causal stages; the common-neighbor count behind
+`(A-A')^2=10(I-R)` is explicit.
+
+The six-node proof is structural and gap-free.  The cross-golden block has
+determinant `-C`; its trace-orthogonal four-space cuts out the smooth Clebsch
+diagonal cubic surface; and Hassett--Tschinkel Proposition 10 gives exactly six
+ordinary nodes on the dual cubic threefold.  CTZ Proposition 7.3 remains model
+identification only because it assumes the six-node hypothesis.  The former
+five-chart Gröbner exhaustion remains as an independent exact replay.
+
+All nineteen statements, the trust manifest, tracked twenty-one-page PDF,
+pinned q11 gate and two-axiom audit, authoritative release certificate, and
+standalone mirror pass their clean aggregate gates.  No Lean terminal changed.

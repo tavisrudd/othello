@@ -4,9 +4,9 @@
 
 **Opened:** 2026-07-15
 
-**Status:** external publication deferred behind queued C713--C714; the shared
-trilogy title-page refinement is synchronized locally, while the new proof and
-companion passes must refresh the final release surface before publication.
+**Status:** external publication deferred behind queued C714; C713's structural
+proof pass and the shared trilogy title-page refinement are synchronized, while
+the companion pass must refresh the final release surface before publication.
 
 ## Objective
 
@@ -17,8 +17,8 @@ insert its stable identifier into the manuscript.
 ## Current state
 
 - Every bounded issue from the 2026-07-30 v2 cold read is closed.
-- The authoritative source and receipt are frozen at `b765022d`; the
-  standalone paper is forward-synced at `24fdfad`.
+- The C713 authoritative source and receipt are frozen at `6e2446bd`; the
+  standalone paper is forward-synced at `ea792bd`.
 - Both paper trees independently pass all eighteen release checks.
 - The aggregate q11 formal package now ships its axiom audit at `35808ac7`,
   and the manifest pins that exact commit.
@@ -34,8 +34,8 @@ Cold-read report:
 
 ## Next action
 
-Complete C713 and C714 and freeze their synchronized human, computational, and
-Lean trust surfaces. Then, with explicit user authority and publication
+Complete C714 and freeze its synchronized human, computational, and Lean trust
+surfaces. Then, with explicit user authority and publication
 credentials:
 
 1. create the public paper repository/release package;

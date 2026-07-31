@@ -15,7 +15,7 @@
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | shared title-page refinement synchronized; C713 proof-architecture and C714 companion-structuralization passes queued before the final release refresh | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C713 proof architecture and structural six-node proof complete; C714 companion structuralization remains before the final release refresh | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | major shadow-theorem expansion active; sub-700 human proofs complete and C712 Lean formalization unblocked; former pre-release surface is the green baseline | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -216,8 +216,8 @@ Full report:
 
 | task | state | next gate |
 |---|---|---|
-| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | external publication deferred behind C713--C714 | after both revisions pass the synchronized release gates, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
-| [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | queued by explicit review request | reorder the proof spine, expose the orientation mechanism, and test structural transfer of node completeness with exact Lean/trust synchronization |
+| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | external publication deferred behind C714 | after C714 passes the synchronized release gates, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
+| [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | queued by explicit review request | promote the q13 orbit-span and automorphism arguments, test bounded q9/q13 replacements, and retain honest finite boundaries |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | major shadow-theorem expansion active; C711 sub-700 human proofs complete | complete novelty audit, remaining post-700 human proofs, manuscript integration, Lean coverage, and fresh release gates |
@@ -332,6 +332,18 @@ C693 integrates this complete package in the human paper and integrates
 C611's \(q=13\) tangent-code theorem in the computational companion.  The
 nineteen-row, eighteen-check Paper I trust surface is paper-owned and has no
 Paper III dependency; the approved v1 baseline remains frozen.
+C713 is complete.  Chord defect, the line bound, rigidity, and the
+across-fields consequence now form one uninterrupted proof before the decoder
+and orbit ledger.  The orientation proof exposes its six causal stages and
+derives the orbital square from the exact (10,-10,0,0) common-neighbor
+count.  Singular-locus completeness is no longer a Gröbner dependency: the
+cross-golden determinant is ( -C), its trace dual is the smooth Clebsch
+diagonal cubic surface, and Hassett--Tschinkel's determinantal converse gives
+exactly six ordinary nodes.  CTZ remains exact model identification only.  The
+old five-chart exhaustion is an independent replay, all q11 terminals and the
+two Dye axioms are unchanged, and both authoritative and standalone
+twenty-one-page release surfaces pass all eighteen checks.  Full report:
+`notes/2026-07-31-c713-paper-i-proof-architecture.md`.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19

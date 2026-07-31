@@ -73,13 +73,40 @@ axioms; only the manuscript proof and paper-owned replay changed.
 - statement identity regeneration/check: green, nineteen rows;
 - trust-manifest regeneration/check against the pinned q11 checkout: green;
 - all thirteen deterministic checker-output identities: green;
-- warning-free XeLaTeX build: green, twenty-one pages.
-
-The clean aggregate release gate, standalone synchronization, and final
-closeout are pending the clean-source commits required by the release
-protocol.
+- warning-free XeLaTeX build: green, twenty-one pages;
+- authoritative eighteen-check aggregate gate: green in update and final
+  clean-source modes;
+- authoritative source, tracked PDF, statement identity, trust manifest, and
+  release certificate: synchronized and committed through `6e2446bd`;
+- standalone mirror: byte-identical forward synchronization committed as
+  `ea792bd`, with the eighteen-check aggregate clean-source replay green.
 
 ## Mystery ledger
 
-The required `ej`+`tt` closeout pass has not yet run.  This section will be
-replaced at final closeout.
+The explicit `ej`+`tt` closeout pass settled every task-owned mystery.
+
+- **CTZ directionality — settled.** Proposition 7.3 is tight only after the
+  six-node hypothesis; the manuscript no longer asks it to prove its own
+  hypothesis.
+- **Structural completeness — settled.** The cross-golden determinant and its
+  smooth trace-dual Clebsch surface put the cubic exactly under the converse in
+  Hassett--Tschinkel Proposition 10.  The five Gröbner charts are now an
+  independent replay rather than hidden proof structure.
+- **Invariant-cubic identification — settled.** The explicit trace complement
+  proves nonvanishing, while the symmetric-cube character
+  `(20,0,2,0,0)` gives the unique `A_5`-invariant cubic on `V_4`; smoothness is
+  the elementary five-sign argument.
+- **Formal boundary — settled.** No statement changed, so the pinned q11
+  terminals and the two Dye axioms remain exact.  The new determinant identity
+  is checked by the paper-owned exact replay and the published theorem supplies
+  singular-locus completeness.
+
+No genuine task-owned mystery remains.  The `ej` pass exposed the dual Clebsch
+surface as the conceptual replacement for chart exhaustion; the `tt` pass
+forced the symmetric-cube multiplicity and the citation direction to be stated
+explicitly, closing the two places where a referee could otherwise suspect a
+gap.
+
+The discovery-track review found no incidental observation: the determinantal
+dual and the citation-direction audit were requested deliverables, not new
+frontiers.
