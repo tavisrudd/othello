@@ -59,8 +59,10 @@ distinct `ej1`, `tt1`, `ej2`, and `tt2` passes before closeout.  Negative
 outcomes are first-class mining objects and require a structural
 obstruction theorem plus their nearest positive locus and adjacent crown.
 C705 now executes the first tranche's adjugate-polar package under those
-rules; the marked-double-six package remains unallocated pending its
-verdict.
+rules.  Its Coble conormal scalar is lifted exactly to characteristic zero:
+in determinant-valued normalization the inverse-polar scalar is the source
+Hessian determinant.  The common golden/\(E_8\) parent is next; the
+marked-double-six package remains unallocated pending the C705 verdict.
 
 ## Active and queued task cards
 
@@ -70,7 +72,7 @@ verdict.
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
-| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress; adjugate factorization and global \(E_6\) first-normal-jet lift proved; the genus-two Coble pair is an elder dual parent with invertible mixed tangent differential, while its fixed-minus Weddle--Kummer section is an inherited ramification shadow; a 100-pair finite-field certificate finds \(\lambda\propto\det\operatorname{Hess}(C_3)\) on the Coble conormal graph; ordinary contextuality cocycle negative | lift the Coble conormal proportionality to characteristic zero, then test the stronger common golden/\(E_8\) parent |
+| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress; adjugate factorization and global \(E_6\) first-normal-jet lift proved; the genus-two Coble pair is an elder dual parent, and its determinant-valued dual equation has inverse-polar scalar exactly \(\det\operatorname{Hess}(C_3)\); its fixed-minus Weddle--Kummer section is an inherited ramification shadow; ordinary contextuality cocycle negative | test the stronger common golden/\(E_8\) parent |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | queued after C705 ordinary-gauge comparison | compute the Clifford multiplier and equivariant gauge obstruction |
 | [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | queued | compute exact code parameters and compare the \(2,3,5\) rank jumps |

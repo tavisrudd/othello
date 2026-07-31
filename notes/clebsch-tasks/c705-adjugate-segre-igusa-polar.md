@@ -156,9 +156,19 @@ conormal pairs satisfy
 \]
 and at all ninety-seven samples with nonzero source Hessian,
 \(\lambda/\det\operatorname{Hess}(C_3)\) is one constant.  The exact
-next gate is to lift this proportionality to characteristic zero and
-identify its normalization intrinsically; only then resume the stronger
-golden/\(E_8\) parent test.
+characteristic-zero lift is now complete for the fixed rational Burkhardt
+parameter.  If \(F=3G_\alpha\) and \(H\) is normalized by its first
+Heisenberg-orbit coefficient, then
+\[
+ 69984\,\nabla H(\nabla F)
+ +\det\operatorname{Hess}(F)\,x=0\pmod F.
+\]
+Equivalently, the determinant-valued dual equation
+\(\widehat H=-69984H\) has inverse-polar scalar exactly
+\(\det\operatorname{Hess}(F)\).  Its scalar reduces to \(45\) modulo \(101\).
+Full report and exact certificate:
+`notes/2026-07-30-c705-coble-hessian-charzero.md`.
+The next gate is the stronger common golden/\(E_8\) parent test.
 
 ## Mining subtask — Pauli-doily shadow
 
