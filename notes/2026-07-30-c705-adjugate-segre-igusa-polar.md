@@ -5,8 +5,10 @@
 **Lane:** `clebsch`
 
 **Status:** main gates complete; negative raw-adjugate gate, positive
-compound/Jacobian adjugate theorem, exact boundary and inverse geometry;
-common-\(E_6/E_8\) shadow-source mining active.
+compound/Jacobian adjugate theorem, exact boundary and inverse geometry,
+and common \(E_6\) and affine-\(E_8\) operator parents proved; a genuine
+Lie-\(E_8\) ambient route is feasible, with its marked operator comparison
+open.
 
 ## Outcome
 
@@ -192,9 +194,32 @@ exactly one.  By the transitive \(S_6\)-action, the canonical \(B_3\)
 section is therefore their common fixed factor on all ten \(B_3\)
 components.  Dividing it leaves precisely \(L_{\rm Igu}|_D\), and dense
 equality extends to the global Igusa contraction.  The ambient \(E_6\)
-first-jet gate is closed positively.  A lift onward through C682's
-specific golden/\(E_8\) operator descent remains stronger and is no longer
-needed to explain the two polar systems themselves.
+first-jet gate is closed positively.  The stronger lift through C682's
+specific golden/\(E_8\) operator descent is also positive.  The paired
+degree-ten return reconstructs the cubic tensor \(Z\), and its universal
+potential
+\[
+ \mathscr P(x,\eta)=\langle\eta,Z(x)\rangle
+\]
+has mixed Hessian \(A=dZ\) and generic null projections
+\(q=\operatorname{center}(x^2)\) and
+\(W=\operatorname{center}(Z^2)\).  Thus the same affine-\(E_8\) operator
+parent gives \(q,W,A\) and
+\(\operatorname{adj}(A)=6Wq^{\mathsf T}\).  This is a paired-McKay
+statement, not a Lie-\(E_8\) root-representation claim.  Exact report:
+`notes/2026-07-30-c705-common-e8-parent.md`.
+
+There is nevertheless a genuine Lie-\(E_8\) ambient route.  The Vinberg
+grading
+\[
+ \mathfrak e_8=\mathfrak{sl}_9\oplus\bigwedge^3 9\oplus\bigwedge^6 9
+\]
+constructs the genus-two Coble cubic/sextic from a stable trivector, and
+the already-proved \(\tau^+\) section then gives Segre--Igusa.  The exact
+remaining gate is to recover C704's frozen marked Joubert tensor from the
+same trivector; after that, \(A,q,W\) follow by differentiation and the
+two null-line identities.  Alternative attacks and sources:
+`notes/2026-07-30-c705-lie-e8-alt-attacks.md`.
 
 The genus-two Coble cubic/sextic gives a second, classically known
 ambient parent, but its operator taxonomy differs.  Nguyen's
@@ -217,15 +242,18 @@ fold direction.  It is therefore an **inherited ramification shadow**,
 not an independent sister.  Exact report and certificates:
 `notes/2026-07-30-c705-coble-mixed-jacobian.md`.
 
-The extra-juice pass found a sharper candidate on the ambient conormal
-graph.  For all one hundred certified pairs over \(\mathbf F_{101}\),
-\(\nabla C_6(\nabla C_3(x))=\lambda(x)x\); on all ninety-seven samples
-with nonzero source Hessian,
-\(\lambda/\det\operatorname{Hess}(C_3)\) is constant.  This suggests a
-characteristic-zero scalar-plus-rank-one identity stronger than the bare
-invertibility statement.  The off-cubic analogue is false, so the next
-gate is specifically a conormal identity, not a global polynomial
-composition formula.
+The extra-juice conormal candidate also lifts exactly to characteristic
+zero.  For the fixed rational Burkhardt parameter, \(F=3G_\alpha\), and the
+orbit-normalized dual sextic \(H\),
+\[
+ 69984\,\nabla H(\nabla F)
+ +\det\operatorname{Hess}(F)\,x=0\pmod F.
+\]
+Equivalently, the determinant-valued normalization
+\(\widehat H=-69984H\) has inverse-polar scalar exactly
+\(\det\operatorname{Hess}(F)\).  Its scalar reduces to \(45\) modulo \(101\).
+The off-cubic analogue remains false.  Exact report:
+`notes/2026-07-30-c705-coble-hessian-charzero.md`.
 
 ## The raw obstruction and the successful repair
 
@@ -468,7 +496,8 @@ placed in the mystery ledger below.
 | Meaning of the factor \(6\) | settled integrally; it is the normalization coupling the two centered-square maps and causes the \(2,3\) rank collapse | a refined integral moduli model belongs to future WP5 |
 | Whether the third-compound presentation is already classical | open: no formula match was found in the proportional audit, but originals and a formula-level modern sweep remain incomplete | WP11 before any priority claim |
 | Whether the sister diagram has a common exceptional parent | settled globally at operator level: the surviving and \(Q\)-normal halves of Yoshida's ten-dimensional \(W(E_6)\) system are the Segre and Igusa polar spaces, with \(M\nabla S=-2f\); the raw jet's canonical \(B_3\) factor accounts for the compactification twist | none |
-| Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | open: the common outer-\(S_6\) descent and rank-one adjugate are strong internal evidence, while the checked Segre/Igusa automorphic models use \(A_2\)- and type-IV lattices rather than an explicit common \(E_8\) lift | C705 common-\(E_8\) shadow-source mining subtask; require a simultaneous branching and parent contraction, or record the first obstruction and nearest \(E_6/A_2/S_6\) repair |
+| Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | settled for the specific affine-\(E_8\) paired-McKay package: the degree-ten return reconstructs the cubic tensor \(Z\), whose universal potential has mixed Hessian \(A\) and null projections \(q,W\) | no Lie-\(E_8\) root-representation claim is made |
+| Whether the same package has a genuine Lie-\(E_8\) parent | ambient feasibility is positive through the Vinberg \(\bigwedge^3 9\) trivector and Coble fixed section | match the trivector's ordered Weierstrass marking to C704's frozen Joubert tensor |
 | Marked equality with C695's double-six | untouched by design | future WP2 |
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
 | Whether the \(15/10/6\) geometry is the two-qubit Pauli doily | settled exactly: duads, synthemes, \(3+3\) partitions, and stars give points, contexts, ten grids, and six ovoids | none |

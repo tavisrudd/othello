@@ -143,17 +143,25 @@ first-normal jet.  It also supports
 separate \(A_2\)-lattice, type-IV, genus-two/Coble, and homological
 projective-duality lifts.
 
-No consulted source places both polar five-spaces and their mixed
-Jacobian inside one explicit \(E_8\) representation or lattice.  This is
-not an absence claim: the search was situational and did not close
-forward citations, books, or classical originals.
+The subsequent Lie-\(E_8\) alternative-attack pass found a genuine ambient
+route that this first sweep missed.  Rains--Sam use the Vinberg grading
+\[
+ \mathfrak e_8=\mathfrak{sl}_9\oplus\bigwedge^3 9\oplus\bigwedge^6 9
+\]
+and construct the genus-two Coble sextic and dual cubic from a stable
+trivector.  Nguyen's fixed section then supplies Segre--Igusa.  Thus an
+ambient Lie-\(E_8\) parent is literature-backed.  No consulted source
+performs the stricter marked comparison from that trivector to C704's
+Joubert tensor and C705's mixed Jacobian.  Exact alternative attacks:
+`notes/2026-07-30-c705-lie-e8-alt-attacks.md`.
 
-The exact task-owned \(E_8\) entry point is C682, not a generic inclusion
-\(E_6\subset E_8\): its degree-ten Klein return reconstructs the same
-six-axis conference matrix \(C\), and hence the Clebsch orientation
-cubic.  The next test is to branch the \(q,W,A\) carriers through that
-specific bi-McKay/golden descent.  A bare Weyl-group inclusion would be
-too weak.
+The exact task-owned affine-\(E_8\) entry point remains C682: its degree-ten
+Klein return reconstructs the same six-axis conference matrix \(C\), and
+hence the Clebsch orientation cubic.  That gate is now positive: the
+universal potential of the returned Joubert tensor has mixed Hessian \(A\)
+and null projections \(q,W\).  The stronger Lie-\(E_8\) gate is to identify
+the Vinberg trivector's ordered Weierstrass marking with this frozen tensor.
+A bare Weyl-group inclusion remains too weak.
 
 ## Nearest mining consequences
 
@@ -221,6 +229,20 @@ too weak.
 - Rainelly Cunha, Zaqueu Ramos, Aron Simis, *Degenerations of the generic
   square matrix. Polar map and determinantal structure*,
   arXiv:1610.07681 — `abstract/metadata`.
+- Eric M. Rains and Steven V. Sam, *Vector bundles on genus 2 curves and
+  trivectors*, arXiv:1605.04459 — `targeted full text`, introduction,
+  Theorem 5.4, and Remarks 5.5--5.8 for the stable-trivector Coble
+  construction and the explicit Lie-\(E_8\) Vinberg grading.
+- Eric M. Rains and Steven V. Sam, *Invariant theory of
+  \(\bigwedge^3(9)\) and genus 2 curves*, arXiv:1702.04840 —
+  `abstract/metadata` for the arithmetic trivector reconstruction.
+- Laurent Gruson, Steven V. Sam, and Jerzy Weyman, *Moduli of Abelian
+  varieties, Vinberg theta-groups, and free resolutions*,
+  arXiv:1203.2575 — `abstract/metadata` for the Vinberg representation
+  source.
+- Vladimiro Benedetti, Laurent Manivel, and Fabio Tanturri, *The geometry
+  of the Coble cubic and orbital degeneracy loci*, arXiv:1904.10848 —
+  `introduction/metadata` for the Lie-theoretic Coble placement.
 - Yairon Cid-Ruiz et al. and related Jacobian-dual/Rees-algebra papers
   surfaced only at `abstract/metadata`; none was used for a mathematical
   claim here.

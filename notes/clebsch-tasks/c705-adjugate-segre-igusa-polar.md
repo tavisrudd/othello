@@ -168,7 +168,23 @@ Equivalently, the determinant-valued dual equation
 \(\det\operatorname{Hess}(F)\).  Its scalar reduces to \(45\) modulo \(101\).
 Full report and exact certificate:
 `notes/2026-07-30-c705-coble-hessian-charzero.md`.
-The next gate is the stronger common golden/\(E_8\) parent test.
+
+The common affine-\(E_8\) operator parent is now exact.  C682's paired
+degree-ten return reconstructs the cubic Joubert tensor \(Z\), and
+\[
+ \mathscr P(x,\eta)=\langle\eta,Z(x)\rangle
+\]
+has mixed Hessian \(A\) with the two null projections \(q,W\).
+Full report and certificate:
+`notes/2026-07-30-c705-common-e8-parent.md`.
+
+A genuine Lie-\(E_8\) route is feasible through the Vinberg grading
+\(\mathfrak{sl}_9\oplus\bigwedge^3 9\oplus\bigwedge^6 9\): a stable
+trivector constructs the Coble dual pair, whose fixed section is already
+the Segre--Igusa pair.  The remaining strict gate is to match that
+trivector's ordered Weierstrass marking to C704's frozen Joubert tensor.
+Alternative attacks:
+`notes/2026-07-30-c705-lie-e8-alt-attacks.md`.
 
 ## Mining subtask — Pauli-doily shadow
 

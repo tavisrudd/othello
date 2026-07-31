@@ -1,0 +1,88 @@
+{
+  "adjugate_factorization": "adj(A)=6*W*q^T",
+  "arithmetic_boundary": {
+    "2": {
+      "difference_rank": 0,
+      "jacobian_rank": 1,
+      "witness": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "3": {
+      "difference_rank": 3,
+      "jacobian_rank": 3,
+      "witness": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2
+      ]
+    },
+    "5": {
+      "difference_rank": 4,
+      "jacobian_rank": 4,
+      "witness": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        4
+      ]
+    },
+    "7": {
+      "difference_rank": 4,
+      "jacobian_rank": 4,
+      "witness": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "generic_rank": 4,
+  "mixed_hessian_entries_checked": 25,
+  "mixed_hessian_shape": [
+    5,
+    5
+  ],
+  "paired_e8_input": "the degree-ten paired-McKay return reconstructs C and its six-axis integral support lattice",
+  "parent": "P(x,eta)=sum_{T<5} eta_T (Z_T(x)-Z_5(x)), with Z_T the diagonal of the six outer conjugates of *Lambda^3(C)",
+  "potential_bidegree": [
+    3,
+    1
+  ],
+  "potential_term_count_after_augmentation_quotients": 90,
+  "schema": "c705-common-e8-parent-v1",
+  "scope": "affine-E8 paired-McKay/operator parent; no identification with the Lie-E8 root lattice or Weyl representation is asserted",
+  "source_carrier": "A_X=Z^6/Z*1, rank 5",
+  "source_null_section": "q=center_X(x^2)",
+  "source_quadratic_null_checks": 5,
+  "strata_dictionary": {
+    "bad_characteristic_2": "support survives mod 2 but signs coalesce",
+    "bad_characteristic_3": "the scalar 6 kills the fourth-compound extraction",
+    "bad_characteristic_5": "golden projectors ramify while the descended mixed potential remains rank 4",
+    "fifteen_planes_and_lines": "the fifteen matchings/synthemes of the recovered six-axis set",
+    "ten_segre_nodes": "complementary pairs of triples in the recovered J(6,3) support; the mixed Hessian has rank 1 at their ten 3+3 preimages"
+  },
+  "target_carrier": "outer augmentation on six synthematic totals, rank 5",
+  "target_null_section": "W=center_T(Z^2)",
+  "target_quadratic_null_checks": 5,
+  "upstairs_support_recovery": {
+    "middle_exterior_diagonal": "K_SS=4 C_ij C_jk C_ki",
+    "middle_exterior_mod2_relation": "|S intersection T|=1",
+    "middle_exterior_square": "(* Lambda^3 C)^2=125I_20",
+    "outer_action_size": 720,
+    "synthematic_totals": 6
+  }
+}

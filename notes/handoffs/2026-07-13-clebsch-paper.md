@@ -61,7 +61,9 @@ obstruction theorem plus their nearest positive locus and adjacent crown.
 C705 now executes the first tranche's adjugate-polar package under those
 rules.  Its Coble conormal scalar is lifted exactly to characteristic zero:
 in determinant-valued normalization the inverse-polar scalar is the source
-Hessian determinant.  The common golden/\(E_8\) parent is next; the
+Hessian determinant.  Its common affine-\(E_8\) parent is also exact.
+A genuine Lie-\(E_8\) ambient Coble route is feasible; matching its stable
+trivector marking to the frozen Joubert tensor is next.  The
 marked-double-six package remains unallocated pending the C705 verdict.
 
 ## Active and queued task cards
@@ -72,7 +74,7 @@ marked-double-six package remains unallocated pending the C705 verdict.
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
-| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress; adjugate factorization and global \(E_6\) first-normal-jet lift proved; the genus-two Coble pair is an elder dual parent, and its determinant-valued dual equation has inverse-polar scalar exactly \(\det\operatorname{Hess}(C_3)\); its fixed-minus Weddle--Kummer section is an inherited ramification shadow; ordinary contextuality cocycle negative | test the stronger common golden/\(E_8\) parent |
+| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, and common affine-\(E_8\) mixed potential proved; the Lie-\(E_8\) Vinberg trivector gives an ambient Coble parent; ordinary contextuality cocycle negative | match the stable trivector's ordered Weierstrass marking to the frozen Joubert tensor |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | queued after C705 ordinary-gauge comparison | compute the Clifford multiplier and equivariant gauge obstruction |
 | [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | queued | compute exact code parameters and compare the \(2,3,5\) rank jumps |
