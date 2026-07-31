@@ -1745,8 +1745,17 @@
       "last": 720,
       "purpose": "Golden operator and shadow sisters paper architecture",
       "sequence": 194
+    },
+    {
+      "count": 6,
+      "first": 721,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 726,
+      "purpose": "C714 Paper I companion structuralization dependency chain",
+      "sequence": 195
     }
   ],
-  "next_id": 721,
+  "next_id": 727,
   "schema": "codex-task-id-allocations-v1"
 }
