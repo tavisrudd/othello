@@ -128,6 +128,12 @@ descriptive wording and make no first/unique/novel claim.
 No admitted headline may rest on a certificate alone.  Write one proof
 companion, later absorbed into the manuscript, with the following lemmas.
 
+C711 owns the sub-700 inputs in items 1--2 together with the C682
+return-to-conference and paired-descent interface that precedes item 3.  C712
+is its Lean successor.  Human proofs and formalization for items 3--7 and other
+C704/C709-and-later identities are separately owned and must not be duplicated
+by C711/C712.
+
 1. **Golden operator.**  Construct (C) from the signed golden Gram matrix;
    prove symmetry, switching covariance, (C^2=5I), and the effect of golden
    conjugation.

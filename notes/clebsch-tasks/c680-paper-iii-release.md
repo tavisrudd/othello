@@ -34,10 +34,11 @@ paper-owned trust surface.
 Complete, in order:
 
 1. the formula-level novelty audit for the conference-operator shadows;
-2. human proofs for every admitted operator, Segre--Igusa, Cartan, and bridge
-   identity;
+2. C711's human proofs for the sub-700 golden-return inputs, coordinated with
+   the separately owned C704/C709-and-later human-proof package;
 3. the expanded theorem architecture and manuscript revision;
-4. Lean coverage of the admitted new theorem surface; and
+4. C712's Lean formalization of C711, plus the separately owned Lean coverage
+   of admitted C704/C709-and-later identities; and
 5. the updated exact-arithmetic, isolated-replay, and cold-read gates.
 
 Only then obtain and insert the immutable locator and author metadata.
