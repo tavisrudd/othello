@@ -376,6 +376,8 @@ placed in the mystery ledger below.
 | Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | open: the common outer-\(S_6\) descent and rank-one adjugate are strong internal evidence, while the checked Segre/Igusa automorphic models use \(A_2\)- and type-IV lattices rather than an explicit common \(E_8\) lift | C705 common-\(E_8\) shadow-source mining subtask; require a simultaneous branching and parent contraction, or record the first obstruction and nearest \(E_6/A_2/S_6\) repair |
 | Marked equality with C695's double-six | untouched by design | future WP2 |
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
+| Whether the \(15/10/6\) geometry is the two-qubit Pauli doily | settled exactly: duads, synthemes, \(3+3\) partitions, and stars give points, contexts, ten grids, and six ovoids | none |
+| Whether the Clebsch/\(K\) signs define a new Mermin cocycle | settled negatively: all ten grid parities are \(-1\), but the conference factor is point gauge and the \(K\)-triangle tensor is a simplex coboundary | C706 tests only the sharper equivariant Clifford-lift question |
 
 ## Literature boundary
 

@@ -70,7 +70,12 @@ verdict.
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
-| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress; adjugate factorization proved, common-source and extended-sister mining active | test the ambient \(E_6\) first-jet lift, then the Coble cubic/sextic restriction before higher \(E_8\) candidates |
+| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress; adjugate factorization proved; exact Pauli-doily dictionary positive but Clebsch-specific ordinary contextuality cocycle negative; common-source and extended-sister mining active | test the ambient \(E_6\) first-jet lift, then the Coble cubic/sextic restriction before higher \(E_8\) candidates |
+| [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | queued after C705 ordinary-gauge comparison | compute the Clifford multiplier and equivariant gauge obstruction |
+| [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
+| [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | queued | compute exact code parameters and compare the \(2,3,5\) rank jumps |
+| [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | queued | decide which conference/two-graph data survive fermionic gauge |
+| [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | queued after C708/common-source gate | seek or obstruct one explicit integral lattice marking |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace

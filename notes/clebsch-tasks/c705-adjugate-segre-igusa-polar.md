@@ -110,6 +110,24 @@ restriction, and the nearest positive relative.  The deliverable is a
 rigid taxonomy—new sister, inherited shadow, elder parent, cousin, or
 false analogy—not an unbounded catalogue of exceptional varieties.
 
+## Mining subtask — Pauli-doily shadow
+
+The \(S_6\cong\operatorname{Sp}_4(\mathbf F_2)\) dictionary is now exact:
+the fifteen duads are the fifteen two-qubit Pauli points, synthemes are
+commuting contexts, the ten \(3+3\) partitions are Mermin grids, and the six
+stars are ovoids.  All ten Clebsch/Pfaffian grid parities equal \(-1\).
+
+The first sign crown is negative and closed.  The Clebsch conference factor
+in each context sign is point rephasing, and the \(K\)-diagonal triangle
+tensor is an edge-cochain coboundary.  Thus unrestricted contextuality
+cohomology does not see \(C\) or \(K\).  Full report and certificate:
+`notes/2026-07-30-c705-clebsch-pauli-doily.md`.
+
+The nearest positive repair is C706's equivariant Clifford-lift gate.
+Separate queued packages C707--C710 own the ETF/POVM, incidence-code,
+Majorana, and \(E_8\)--Hamming questions; they do not enlarge C705's
+acceptance gate.
+
 ## Required closeout
 
 No first-gate closure is allowed.  Run distinct `ej1`, `tt1`, `ej2`, and
