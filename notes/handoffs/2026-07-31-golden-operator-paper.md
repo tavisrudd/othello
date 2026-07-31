@@ -95,7 +95,10 @@ particular:
   cuts form the single \(S_6/F_{20}\) orbit, canonically the same \(S_6\)-set
   as the C708 involutory polarities.  Their halves form a
   \(2\text{-}(10,5,16)\) design and their sign lines a biangular tight frame
-  in dimension nine, so the direct Gram-to-conference iteration stops.
+  in dimension nine, so the direct Gram-to-conference iteration stops.  The
+  large-angle relation is the Sylvester graph; its \(-3\)-eigenspace is the
+  integral cut frame, and the resulting weighted operator satisfies
+  \(K^2=10K+75I\) with off-diagonal weights \(1,3\).
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
@@ -116,7 +119,7 @@ manuscript edit is authorized by C727.
 | task | state | next gate |
 |---|---|---|
 | [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
-| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | active; factorization and 36-cut design proved | determine whether a derived relation/eigenspace of the polarity design restores an integral simplex factor |
+| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | active; Sylvester eigenspace replacement proved | derive higher-order cut moments and audit the weighted multi-angle operator against the literature |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
@@ -125,8 +128,8 @@ manuscript edit is authorized by C727.
 
 ## Recommended order
 
-1. Complete C729's bounded derived-association gate now that the direct
-   \(36\)-line Gram iteration is proved biangular rather than conference.
+1. Complete C729's higher-order moment and focused literature gate now that
+   the derived Sylvester operator is frozen.
 2. C728 intrinsic synchronized-spinor audit.
 3. C715 anomaly inverse.
 4. C717 and C718, chosen by theorem yield after C715's first gate.

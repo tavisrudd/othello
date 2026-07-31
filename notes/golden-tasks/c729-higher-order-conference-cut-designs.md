@@ -2,8 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** active; intrinsic factorization and 36-cut design proved;
-derived-association gate next
+**Status:** active; intrinsic factorization, 36-cut design, and Sylvester
+eigenspace replacement proved; moment/literature gate next
 
 **Opening report:**
 `notes/2026-07-31-c729-simplex-conference-factorization.md`

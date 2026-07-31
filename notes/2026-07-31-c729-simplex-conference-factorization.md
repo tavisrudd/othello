@@ -2,8 +2,8 @@
 
 **Date:** 2026-07-31
 **Lane:** `golden`
-**Status:** opening factorization and order-ten cut-orbit gates proved;
-derived-association gate next
+**Status:** opening factorization, order-ten cut-orbit, and derived-association
+gates proved; higher-order moment/literature gate next
 
 ## Result
 
@@ -171,8 +171,6 @@ that cut simplex uniquely up to the unavoidable gauge actions.  What remains
 for a genuine tower is therefore not the first Gram step but a new canonical
 rule producing the next integral simplex factor.
 
-## Next gate
-
 ## The 36-cut orbit and its design
 
 The next gate also has an intrinsic answer.  Let \(\Omega\) be the ten
@@ -258,13 +256,105 @@ equiangular frame.  This gives the precise first obstruction to iterating the
 conference construction: no affine rescaling of this two-angle Gram matrix
 is a conference sign matrix.
 
+## `ej`: the Sylvester eigenspace and weighted conference replacement
+
+Join two of the \(36\) projective extremal cuts when their normalized line
+inner product has absolute value \(3/5\), equivalently when suitable halves
+meet in one point.  Direct intersection counting in the
+\(S_6/F_{20}\) model gives
+
+\[
+\begin{array}{c|c|c}
+d&|\Gamma_d(v)|&(c_d,a_d,b_d)\\ \hline
+0&1 &(0,0,5)\\
+1&5 &(1,0,4)\\
+2&20&(1,2,2)\\
+3&10&(4,1,0).
+\end{array}
+\]
+
+Thus the large-angle graph is the Sylvester distance-regular graph, with
+intersection array
+
+\[
+\{5,4,2;1,1,4\}
+\]
+
+and spectrum
+
+\[
+5^{(1)},\qquad 2^{(16)},\qquad (-1)^{(10)},\qquad (-3)^{(9)}.
+\]
+
+The multiplicities follow from the four intersection-matrix eigenvalues,
+the vertex count, \(\operatorname{tr}A=0\), and
+\(\operatorname{tr}A^2=36\cdot5\).
+
+The dimension-nine coincidence is structural.  The primitive idempotent for
+the \(-3\)-eigenspace is
+
+\[
+E_{-3}
+=-\frac1{80}(A-5I)(A-2I)(A+I).
+\]
+
+Consequently \(40E_{-3}\) has diagonal entries \(10\), entry \(-6\) at
+distance one, \(+2\) at distance two, and \(-2\) at distance three.  Orient
+the extremal-cut sign lines relative to one base cut: choose intersection
+sizes \(1,3,2\) in distance layers \(1,2,3\), respectively.  The cut
+intersection table above shows that this is coherent and gives
+
+\[
+X^{\mathsf T}X=40E_{-3},
+\qquad
+XX^{\mathsf T}=40\left(I_{10}-\frac1{10}J_{10}\right),
+\]
+
+where \(X\in\{\pm1\}^{10\times36}\) is the oriented extremal-cut matrix.
+Thus the 36-line configuration is exactly the integral spherical embedding
+of the Sylvester graph in its \(-3\)-eigenspace, not merely a frame with the
+same parameters.
+
+There is a precise replacement for the failed next conference operator.  Put
+
+\[
+K=\frac{X^{\mathsf T}X-10I_{36}}2.
+\]
+
+Then \(K\) is integral, has zero diagonal and off-diagonal entries
+\(\pm1,\pm3\), and the tight-frame identity gives
+
+\[
+\boxed{K^2=10K+75I_{36}}.
+\]
+
+Its eigenvalues are \(15\) with multiplicity nine and \(-5\) with
+multiplicity twenty-seven.  The ordinary conference law fails exactly
+because the two off-diagonal magnitudes survive, but the quadratic spectral
+law does not.  This weighted operator is the cheapest viable notion of a
+second-stage shadow; any proposed tower should propagate multi-angle
+integral Gram operators rather than insist on sign conference matrices.
+
+### Literature checkpoint
+
+The graph name and classical parameters were checked against
+M. R. Alfuraidan and J. I. Hall, *Imprimitive distance-transitive graphs
+with primitive core of diameter at least 3*, Michigan Math. J. 58 (2009),
+31--77, doi:10.1307/mmj/1242071683, Section 5.8.2.  That section records the
+Sylvester graph as a 36-vertex distance-transitive
+\(\operatorname{P\Gamma L}(2,9)\)-graph with intersection array
+\(\{5,4,2;1,1,4\}\).  It does not supply the extremal-cut realization,
+the integral \(-3\)-eigenspace factor, or the weighted quadratic identity
+above.  This is a terminology checkpoint, not the focused novelty audit
+required before any priority claim.
+
 ## Next gate
 
-Determine whether the \(36\)-line biangular frame has a canonical derived
-incidence or eigenspace factor that restores equiangularity, and compare its
-two relations with the C708 polarity association scheme.  If neither
-relation supplies an integral simplex factor, extend the cut-moment analysis
-to the next feasible conference order rather than forcing a tower.
+Derive representation-theoretic or Cauchy--Binet moment constraints for
+higher conference orders and run the focused ETF/Naimark, Sylvester-graph,
+maximal-minor, and weighted-conference literature audit.  The next
+computational order should be attempted only after these identities specify
+which distributional data can carry theorem-level content.
 
 ## `ej` + `tt` closeout and mystery ledger
 
@@ -285,5 +375,11 @@ to the next feasible conference order rather than forcing a tower.
 - **Settled by `tt`:** the extremal cut lines form a \(36\)-vector biangular tight
   frame in dimension nine with angle multiplicities \(5\) and \(30\), so
   the direct Gram-to-conference iteration stops at the next step.
-- **Open:** decide whether that design supplies the next integral simplex
-  factor after passing to a derived relation or eigenspace.
+- **Settled by `ej`:** the large-angle relation is the Sylvester graph, and
+  its \(-3\)-eigenspace is exactly the coherently oriented integral cut
+  frame.  The derived operator has weights \(1,3\) and satisfies
+  \(K^2=10K+75I\); it is a weighted quadratic replacement, not another
+  conference matrix.
+- **Open:** determine whether the weighted quadratic operator belongs to a
+  known multi-angle or roux-type tower; no priority language is licensed
+  before the focused literature gate.
