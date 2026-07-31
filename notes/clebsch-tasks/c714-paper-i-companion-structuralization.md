@@ -4,9 +4,9 @@
 
 **Opened:** 2026-07-31
 
-**Status:** active umbrella; C721 and C722 complete, with C723 and C724 ready
-through the dependency graph below. C713 is complete, so the Paper I statement
-surface is fixed.
+**Status:** active umbrella; C721--C723 complete, with C724 ready through the
+dependency graph below. C713 is complete, so the Paper I statement surface is
+fixed.
 
 ## Objective
 
@@ -64,6 +64,10 @@ C723 q13 weight-ten profiles --------------------------> C725 terminal orbit DAG
 - C722 is complete with neither bounded clique argument promoted: q9
   Delsarte equality remains scheme-feasible, and q13 Fourier/inertia stops at
   an exact six-color bound.  Its exact q13 character blocks pass to C723.
+- C723 is complete with no common structural weight-ten exclusion promoted.
+  The two exhaustive profiles are compressed to canonical XOR-disjointness
+  certificates with an independent dynamic-programming replay and pass to
+  C725 as the frozen q13 finite boundary.
 - C723 consumes any useful C721/C722 identities but is successful even if it
   proves that the two-profile meet-in-the-middle certificate is irreducible.
 - C724 may begin after C721 and does not wait for C722 or C723.

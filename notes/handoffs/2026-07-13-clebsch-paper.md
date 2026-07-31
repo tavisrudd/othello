@@ -227,7 +227,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | external publication deferred behind C714 | after C714 passes the synchronized release gates, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
-| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | active; C721 scheme spine complete and C722 clique routes closed exactly at six | run C723 and C724, then freeze the finite boundary through C725 and integrate through C726 |
+| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | active; C721--C723 complete with the q13 finite boundary minimized | run C724, then freeze the full finite boundary through C725 and integrate through C726 |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | focused revision waits on C730; C711/C712 source package complete | integrate the C730 source theorem, align the paper-owned trust surface, and run fresh release gates |
 | [C730 — Paper III orientation source](../clebsch-tasks/c730-paper-iii-orientation-source-theorem.md) | queued; precedes C680 integration | identify the incidence, golden-orientation, cubic-line, and harmonic realizations with exact involutions and integral boundary |
@@ -363,6 +363,17 @@ diagonalized exactly; adjacency/complement inertias are ((19,23,0)) and
 published q9 value and q13 five-row unique-closure proof remain load-bearing.
 The exact Fourier bundle passes to C723.  Full report:
 `notes/2026-07-31-c722-q9-q13-clique-structure.md`.
+C723 is complete with a precise finite boundary.  Pencil parity forces only
+the profiles (3,1^6) with no secant neighbor or (1^7) with two secant
+neighbors; globally the induced secant graph has degrees zero or two.  This
+first association layer is feasible, while the two profiles respectively
+lose the arc and local-clique hypotheses needed for the Segre tangent route;
+binary parity also supplies no characteristic-(13) root-multiplicity bridge.
+The raw (6{,}531{,}840)- and (166{,}561{,}920)-support domains are now two
+canonical XOR-disjointness certificates with a separate full-fibre dynamic-
+programming replay.  C725 inherits these as the frozen q13 weight-ten proof
+objects; C726 alone owns trust integration.  Full report:
+`notes/2026-07-31-c723-q13-weight-ten-profiles.md`.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19

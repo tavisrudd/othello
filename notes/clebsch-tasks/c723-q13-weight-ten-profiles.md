@@ -4,7 +4,10 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued after C722; C714 phase 3/6.
+**Status:** complete and reported 2026-07-31; finite boundary frozen for C725.
+
+**Report:**
+[`2026-07-31-c723-q13-weight-ten-profiles.md`](../2026-07-31-c723-q13-weight-ten-profiles.md)
 
 ## Objective
 
@@ -38,3 +41,7 @@ may silently discharge the untouched profile.
 Freeze the exact surviving q13 finite boundary for C725. Do not edit the final
 trust classification; C726 owns integration.
 
+The two parity profiles survive the bounded structural tests.  They are now
+certified by canonical XOR-disjointness objects with a separate full-fibre
+dynamic-programming replay.  No manuscript or final trust classification was
+changed.
