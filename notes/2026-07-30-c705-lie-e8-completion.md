@@ -176,6 +176,111 @@ Full ordering is an external level-\(2\) trivialization of this diagram,
 and its \(S_6\)-equivariance is exactly what permits the unordered diagram
 to descend.
 
+## Human proof
+
+Here is a proof that does not use enumeration of the \(720\) sheets.
+
+**Theorem.**  After adjoining an ordered set of Weierstrass points of the
+frozen Burkhardt curve, the frozen Coble/Segre--Igusa operator diagram is
+the fixed-section shadow of a stable vector in the degree-one piece
+\(\Lambda^3 9\) of the order-three \(E_8\) grading.  Changing the ordering
+acts through C704's signed outer \(S_6\)-action.  The unordered diagram
+descends to \(\mathbf Q\), but no ordering does.
+
+**Proof.**
+
+1. Let \(r\) be one branch point and \(D=f_\alpha'(r)\).  Taylor's formula
+   gives
+   \[
+   \frac{t^6}{D^2}
+   f_\alpha\!\left(r-\frac D t\right)
+   =
+   -t^5-c_6t^4-c_{12}t^3-c_{18}t^2-c_{24}t-c_{30},
+   \]
+   with the five derivative formulas displayed above.  This proves
+   directly that the root-to-infinity change of variables gives the
+   Rains--Sam marked genus-two normal form.  Substitution in Proposition
+   2.1 gives \(\gamma_r\in\Lambda^3K^9\).  The curve is smooth, so
+   Proposition 2.13 makes \(\gamma_r\) stable.
+
+2. Contract \(\gamma_r\) with the variable covector \(x\).  This gives an
+   odd alternating matrix \(\Phi_\gamma(x)\), and alternating contraction
+   gives
+   \[
+   \Phi_\gamma(x)x=0.
+   \]
+   For any odd alternating matrix, the vector of its signed maximal
+   Pfaffians lies in its kernel.  On the dense rank-eight locus the kernel
+   here is the line \(Kx\).  Hence
+   \[
+   (-1)^i\operatorname{Pf}
+   \Phi_\gamma(x)_{\widehat i}=x_iF_\gamma(x)
+   \]
+   for one common polynomial.  The left side has degree four, so
+   \(F_\gamma\) is cubic.  Equality on the dense locus is a polynomial
+   identity and therefore holds everywhere.  This proves the common-Coble
+   Pfaffian assertion without calculating its \(31\) coefficients.
+
+3. Gruson--Sam--Weyman identify \(F_\gamma=0\) as the Coble cubic and its
+   rank-four locus as the associated \((3,3)\)-polarized abelian surface.
+   Rains--Sam Theorem 5.5 classifies the stable projective trivector orbit
+   by \((C,P,\psi)\).  Both the normal-form construction and the Jacobian
+   Coble model have the same marked curve \((C_\alpha,r)\) and trivial
+   covering class \(\psi=0\).  Proposition 5.4 therefore places them in
+   the same \(\operatorname{PGL}_9\)-orbit.  Lemma 5.3 reconstructs a
+   representative change of basis from the kernels of generic rank-eight
+   forms, so this is an effective orbit identification rather than an
+   appeal to matching numerical invariants.  The frozen Burkhardt point
+   also supplies the symplectic level-\(3\) structure.  Under the
+   Rains--Sam identification the stabilizer contains the corresponding
+   \(J(C)[3]\).  The two theta groups are therefore the same finite
+   Heisenberg extension after this level-\(3\) identification, and their
+   irreducible nine-dimensional Schrödinger representations have a unique
+   intertwiner up to scalar.  We may consequently choose the reconstructed
+   projective change of basis to align the frozen Heisenberg action, not
+   just the abstract Coble cubic.
+
+4. An ordering \((r_1,\ldots,r_6)\) is precisely the additional full
+   level-\(2\) marking.  C704's Joubert tensor is an integral polynomial
+   covariant of six ordered entries.  Its already-proved identities
+   \[
+   \sum_TZ_T=\sum_TZ_T^3=0
+   \]
+   put \(Z\) on the Segre cubic, and its centered-square identity puts
+   \(W\) on the Igusa quartic.  These are polynomial identities, so they
+   hold for the six branch points over the splitting algebra.  C704 also
+   proves
+   \[
+   g\cdot Z_T=\operatorname{sgn}(g)Z_{gT}
+   \qquad(g\in S_6).
+   \]
+   Consequently a comparison on one ordered sheet determines the
+   comparison on every sheet; squaring removes the sign in the Igusa
+   coordinates.  No \(720\)-case enumeration is needed.
+
+5. Nguyen's \(\tau^+\) restriction of the Heisenberg Coble cubic is the
+   Segre cubic, and projective duality gives the Igusa quartic.  The
+   Heisenberg-equivariant choice in Step 3 carries the relevant involution
+   and hence its \(\tau^+\) eigenspace to the frozen one.  Step 4 then
+   fixes the ordered outer coordinates, so this is the same Segre--Igusa
+   pair as C704's.  Differentiating
+   \(\mathscr P(x,\eta)=\langle\eta,Z(x)\rangle\) gives \(A=dZ\).
+   C705's two kernel identities then force
+   \[
+   \operatorname{adj}(A)=6Wq^{\mathsf T}.
+   \]
+
+6. Finally, \(\operatorname{Gal}(f_\alpha/\mathbf Q)=S_6\).  After
+   adjoining \(r_1\), the remaining Galois group is its point stabilizer
+   \(S_5\), which acts faithfully on \(r_2,\ldots,r_6\).  Thus no ordering
+   is defined over the one-point field.  Nevertheless the equations in
+   Steps 4--5 are \(S_6\)-equivariant, so their unordered projective
+   diagram descends to \(\mathbf Q\).
+
+This proves the theorem.  The \(p=1447\) run independently checks all
+coordinate conventions, signs, and normalizations; it is not a substitute
+for the proof.
+
 ## Scope of the result
 
 The completion proves existence and projective-orbit identity, including a
