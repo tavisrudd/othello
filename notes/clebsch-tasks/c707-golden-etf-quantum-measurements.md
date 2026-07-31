@@ -56,6 +56,11 @@ their amplitude sign vectors are the oriented lifts of the ten Segre nodes.
 All six optimal probabilities coincide, so \(W=e_5(Z)=0\): the optimum is
 exactly the probability-polar blind locus, while coherent amplitude signs
 retain the node orientation.
+On the twenty-point optimal layer the cubic amplitude map also realizes the
+exceptional outer transform: it preserves complements, exchanges triple
+intersection sizes one and two, and identifies the path and protocol sign
+spaces with the two orthogonal five-dimensional Johnson constituents.  Their
+pointwise products complete the \(1+5+5+9\) harmonic decomposition.
 Every optimal transfer has squared singular spectrum
 \(\{4/5,4/5,1/5\}\).  The three-filter exterior-cube protocol is
 query-optimal among coherent circuits with \(x\)-independent gates and

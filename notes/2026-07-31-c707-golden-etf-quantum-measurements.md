@@ -44,6 +44,12 @@ Segre nodes, paired by complementary controls; after squaring, every
 optimal probability vector is constant.  Thus \(W=0\) and \(e_5(Z)=0\) at
 every optimum: maximum success is exactly where probability contrast and
 inverse polarity lose the orientation data.
+On this same twenty-point layer, the signed amplitude map is the exceptional
+outer transform: it preserves complementary triples and exchanges the two
+Johnson relations \(|S\cap R|=1\) and \(|S\cap R|=2\).  Its input and output
+sign matrices are orthogonal simplex frames, and together with their
+pointwise products they realize the full \(1+5+5+9\) harmonic decomposition
+of functions on the twenty triples.
 At every optimum,
 \[
  \operatorname{spec}(K_T^{\mathsf T}K_T)=\{4/5,4/5,1/5\}.
@@ -160,6 +166,23 @@ are then \(64\), whence \(W=0\); the same balanced sign pattern gives
 \(e_5(Z)=0\).  The amplitudes retain the node and orientation, but their
 success probabilities erase both.
 
+This node map contains the exceptional outer automorphism itself.  If
+\(F(S)\) is the negative support of \((Z_T(x_S)/8)_T\), then
+\[
+ F(S^c)=F(S)^c,\qquad
+ |S\cap R|=1,2\Longrightarrow |F(S)\cap F(R)|=2,1.
+\]
+Indeed the path-sign and amplitude-sign matrices \(X,H\) satisfy
+\[
+ XX^{\mathsf T}=HH^{\mathsf T}=24I-4J,\qquad XH^{\mathsf T}=0.
+\]
+The tight-frame identity forces the relevant output inner products to be
+\(2,-2\), so the intersection exchange follows without a pair census.
+The two row spaces are the two five-dimensional constituents of the
+middle-layer Johnson module; their pointwise products fill the remaining
+nine-space.  Thus the physical optimum carries the complete
+\(1+5+5+9\) harmonic splitting.
+
 At a balanced sign filter, cyclic trace expansion gives
 \[
  \operatorname{tr}(K_T^{\mathsf T}K_T)=\frac95,\quad
@@ -198,6 +221,9 @@ The golden-operator layer is:
   \(\{4/5,4/5,1/5\}\);
 - the twenty optimal controls are the oriented lifts of the ten Segre
   nodes, while all six probability contrasts vanish there; and
+- on the optimal layer the cubic amplitude signs realize the exceptional
+  outer transform, exchanging the two nontrivial Johnson relations and the
+  two five-dimensional harmonic constituents; and
 - the exterior-cube implementation uses the minimum possible three
   controlled-filter queries.
 
@@ -241,7 +267,9 @@ outer response-kernel identities at two integral witnesses, and the sharp
 \(44+20\) cube-vertex distribution for every protocol.  It also checks that
 each balanced control maximizes all six protocols, that the twenty signed
 amplitude patterns pair into ten projective Segre nodes, and that \(W=e_5=0\)
-on this locus.  The independent
+on this locus.  It further checks the \(0\mapsto0,1\mapsto2,2\mapsto1\)
+intersection transport, the orthogonal simplex identities, and the complete
+\(1+5+5+9\) middle-layer decomposition.  The independent
 replay constructs the two projectors directly over
 \(\mathbf Q(\sqrt5)\) and checks
 \(\det(K^{\mathsf T}K)=Z^2/500\) for all \(729\) filters in
@@ -276,6 +304,14 @@ polar is therefore maximally blind precisely where each individual
 protocol is maximally successful.  Coherent relative phase retains the
 lost signed-node data; success statistics alone do not.
 
+The second extra-juice pass compared pairs of optimal controls.  The cubic
+map exchanges intersection one with intersection two and preserves
+complements, giving a direct operational realization of the exceptional
+outer automorphism on the middle layer.  The orthogonal input/output simplex
+frames explain why: they are the two five-dimensional Johnson constituents,
+and their pointwise correlations supply the remaining nine-dimensional
+channel.
+
 The Milnor/Serre proof review reduced the package to four reusable
 mechanisms: projector Gram matrices, one Naimark dilation, top exterior
 power, and vanishing signed moments from \(C^2=5I\).  No classification
@@ -307,6 +343,11 @@ table or finite enumeration is load-bearing.
   Segre nodes.  All six probabilities equal \(16/125\), so \(W=0\) and
   inverse polarity is necessarily blind there; only coherent relative
   amplitude retains the node and orientation signs.
+- **Settled — why there are two natural six-coordinate descriptions of the
+  optimum:** the path signs and outer-protocol amplitude signs span the two
+  orthogonal five-dimensional constituents of the twenty-triple permutation
+  module.  The cubic map is the exceptional outer transform, detected by its
+  exchange of intersection sizes one and two.
 - **Settled — resource minimality in the coherent-filter model:** an
   \(r\)-query acceptance probability has degree at most \(2r\), so the
   degree-six probability \(Z_T^2/500\) requires \(r\ge3\); the parallel

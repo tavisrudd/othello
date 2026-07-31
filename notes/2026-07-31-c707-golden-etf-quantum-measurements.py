@@ -49,6 +49,10 @@ def matmul(left: list[list[int]], right: list[list[int]]) -> list[list[int]]:
     ]
 
 
+def transpose(matrix: list[list[int]]) -> list[list[int]]:
+    return [list(column) for column in zip(*matrix)]
+
+
 def rational_rank(matrix: list[list[int | Fraction]]) -> int:
     work = [[Fraction(value) for value in row] for row in matrix]
     row = 0
@@ -211,6 +215,8 @@ def build() -> dict[str, object]:
     assert balanced_phase_traces == {(-6, -42)}
     optimal_node_signs = set()
     optimal_amplitude_sign_counts = [{8: 0, -8: 0} for _ in cubics]
+    middle_layer_inputs = []
+    middle_layer_outputs = []
     for support in itertools.combinations(range(6), 3):
         signs = tuple(-1 if i in support else 1 for i in range(6))
         z = tuple(evaluate(cubic, signs) for cubic in cubics)
@@ -225,11 +231,46 @@ def build() -> dict[str, object]:
         if node[0] < 0:
             node = tuple(-value for value in node)
         optimal_node_signs.add(node)
+        middle_layer_inputs.append(signs)
+        middle_layer_outputs.append(tuple(value // 8 for value in z))
         for protocol, value in enumerate(z):
             optimal_amplitude_sign_counts[protocol][value] += 1
     assert len(optimal_node_signs) == 10
     assert all(sum(node) == 0 for node in optimal_node_signs)
     assert optimal_amplitude_sign_counts == [{8: 10, -8: 10}] * 6
+    pair_transport = {"0->0": 0, "1->2": 0, "2->1": 0}
+    for left, right in itertools.combinations(range(20), 2):
+        input_intersection = sum(
+            middle_layer_inputs[left][i] == middle_layer_inputs[right][i] == -1
+            for i in range(6)
+        )
+        output_intersection = sum(
+            middle_layer_outputs[left][i] == middle_layer_outputs[right][i] == -1
+            for i in range(6)
+        )
+        key = f"{input_intersection}->{output_intersection}"
+        assert key in pair_transport
+        pair_transport[key] += 1
+    assert pair_transport == {"0->0": 10, "1->2": 90, "2->1": 90}
+    input_rows = [
+        [middle_layer_inputs[column][row] for column in range(20)]
+        for row in range(6)
+    ]
+    output_rows = [
+        [middle_layer_outputs[column][row] for column in range(20)]
+        for row in range(6)
+    ]
+    simplex_gram = [[24 * int(i == j) - 4 for j in range(6)] for i in range(6)]
+    assert matmul(input_rows, transpose(input_rows)) == simplex_gram
+    assert matmul(output_rows, transpose(output_rows)) == simplex_gram
+    assert matmul(input_rows, transpose(output_rows)) == [[0] * 6 for _ in range(6)]
+    product_rows = [
+        [input_rows[i][column] * output_rows[t][column] for column in range(20)]
+        for i in range(6)
+        for t in range(6)
+    ]
+    assert rational_rank(product_rows) == 9
+    assert rational_rank([[1] * 20] + input_rows + output_rows + product_rows) == 20
     for cubic in cubics:
         counts = {0: 0, 8: 0}
         for signs in itertools.product((-1, 1), repeat=6):
@@ -296,6 +337,10 @@ def build() -> dict[str, object]:
             "optimal_node_carrier": "the 20 oriented amplitude sign vectors pair by global sign over the 10 Segre nodes",
             "optimal_inverse_polarity": "e_5(Z)=0, so every optimum lies on the inverse-polarity exceptional divisor",
             "uniform_boolean_phase_average_success": "1/25 for every protocol",
+            "middle_layer_outer_transform": "S maps to the negative support of (Z_T(x_S)/8)_T, a complement-preserving bijection on 3-subsets",
+            "middle_layer_pair_transport": pair_transport,
+            "middle_layer_simplex_grams": "XX^T=HH^T=24I-4J and XH^T=0",
+            "middle_layer_harmonic_decomposition": "R^20 = 1 + 5_input + 5_outer + 9_product",
             "optimal_squared_singular_values": ["4/5", "4/5", "1/5"],
             "optimal_filter_trace_witnesses": {"trace((CD)^2)": -6, "trace((CD)^4)": -42},
             "query_optimality": "three uses are necessary: an r-query acceptance probability has degree at most 2r, while Z_T^2 has degree 6",

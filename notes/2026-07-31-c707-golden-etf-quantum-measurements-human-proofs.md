@@ -243,6 +243,83 @@ hits the balanced layer with probability \(20/64\); its mean three-copy
 success probability is therefore
 \((20/64)(16/125)=1/25\).
 
+### The middle layer realizes the exceptional outer transform
+
+Write
+\[
+ x(S)_i=1-2\,1_{i\in S},\qquad
+ h(S)_T=Z_T(x(S))/8,
+ \qquad |S|=3.
+\]
+Both vectors have three plus and three minus entries.  Let \(F(S)\) be the
+negative support of \(h(S)\).  The preceding node identification says that
+\(F\) is a bijection on the twenty triples, and oddness gives
+\[
+ F(S^c)=F(S)^c.
+\]
+The source six-set is the path set, while the target six-set is the set of
+outer protocols.  Equivariance of the six Joubert cubics therefore makes
+\(F\) the exceptional outer identification on their middle layers.
+
+Here is a structural way to see what ``outer'' means.  Form the two
+\(6\times20\) sign matrices
+\[
+ X_{iS}=x(S)_i,qquad H_{TS}=h(S)_T.
+\]
+Counting triples, and using the same vanishing signed moments for the mixed
+term, gives
+\[
+ XX^{\mathsf T}=HH^{\mathsf T}=24I-4J,
+ \qquad XH^{\mathsf T}=0.
+\]
+Thus the two matrices are orthogonal regular-simplex realizations of the two
+five-dimensional constituents in the middle-layer permutation module.
+
+For two triples put \(r=|S\cap R|\) and
+\(q_r=\langle h(S),h(R)\rangle\).  Outer equivariance makes \(q_r\) depend
+only on \(r\).  We have \(q_3=6\), \(q_0=-6\), and complementation gives
+\(q_2=-q_1\).  Since \(HH^{\mathsf T}\) acts by \(24\) on the augmentation
+space,
+\[
+ \sum_R\langle h(S),h(R)\rangle^2=24\langle h(S),h(S)\rangle=144.
+\]
+There are \(1,9,9,1\) triples meeting \(S\) in \(0,1,2,3\) points, so
+\(72+18q_1^2=144\), whence \(|q_1|=2\).  One base triangle fixes the marked
+orientation as \(q_1=2\), hence \(q_2=-2\).  Two balanced sign vectors whose
+negative supports meet in \(k\) positions have inner product \(4k-6\).
+Consequently
+\[
+ \boxed{
+ |S\cap R|=0,1,2
+ \quad\Longrightarrow\quad
+ |F(S)\cap F(R)|=0,2,1.
+ }
+\]
+Complements are preserved, while the two nontrivial Johnson relations are
+exchanged.  This is the standard combinatorial signature of the exceptional
+outer automorphism of \(S_6\), now realized by the coherent cubic-amplitude
+map on the physically optimal phase layer.
+
+The same calculation completes the whole middle-layer harmonic picture.
+The classical multiplicity-free Johnson decomposition is
+\[
+ \mathbf R^{\binom63}=\mathbf1\oplus\mathbf5\oplus\mathbf9\oplus\mathbf5'.
+\]
+The rows of \(X\) and \(H\) are the two orthogonal five-spaces.  The
+pointwise products \(X_{iS}H_{TS}\) are orthogonal to the constant and both
+five-spaces by the signed-moment identities; their nonzero invariant span is
+therefore the remaining nine-space.  Hence
+\[
+ \boxed{
+ \mathbf R^{20}=\mathbf1\oplus V_{\mathrm{path}}
+ \oplus V_{\mathrm{outer}}\oplus V_{\mathrm{path}\times\mathrm{outer}},
+ \qquad \dim=(1,5,5,9).
+ }
+\]
+So the optimal experiment does more than label the Segre nodes: its input
+signs, oriented output amplitudes, and their correlations furnish all four
+harmonic channels of the twenty-point middle layer.
+
 The optimum has a rigid singular spectrum.  For a balanced sign filter
 \(D\), put \(M=K_T(D)^{\mathsf T}K_T(D)\).  Cyclic trace expansion of the
 two golden projectors reduces to
