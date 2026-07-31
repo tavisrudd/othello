@@ -79,9 +79,17 @@ def compoundThree (C : Matrix (Fin 6) (Fin 6) ℤ) :
     Matrix (Fin 20) (Fin 20) ℤ :=
   fun S T => detThree (minorThree C S T)
 
-/-- The middle-exterior return `* Λ³C` for the golden conference matrix. -/
+/-- The middle-exterior return `* Λ³C` for the golden conference matrix.  The
+sparse Hodge factor is evaluated directly. -/
 def middleExterior : Matrix (Fin 20) (Fin 20) ℤ :=
-  hodgeMatrix * compoundThree conferenceMatrix
+  fun S T => hodgeSign S * compoundThree conferenceMatrix (complementIndex S) T
+
+/-- The direct sparse formula for the return equals Hodge multiplication by
+the third compound matrix. -/
+theorem middleExterior_eq_hodge_mul :
+    middleExterior = hodgeMatrix * compoundThree conferenceMatrix := by
+  ext S T
+  simp [middleExterior, hodgeMatrix, Matrix.mul_apply]
 
 end ClebschMiddleExterior
 end RelativeConicArcs
