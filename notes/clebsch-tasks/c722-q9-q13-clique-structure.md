@@ -4,7 +4,10 @@
 
 **Opened:** 2026-07-31
 
-**Status:** ready; C721 complete; C714 phase 2/6.
+**Status:** complete and reported 2026-07-31; neither branch promoted.
+
+**Report:**
+[`2026-07-31-c722-q9-q13-clique-structure.md`](../2026-07-31-c722-q9-q13-clique-structure.md)
 
 ## Objective
 
@@ -37,3 +40,8 @@ For any method that yields only six, record its exact spectrum, dual bound,
 and failed equality condition, then stop that branch and retain the existing
 published or finite certificate. Pass all exact tangent/Fourier identities to
 C723 even if the q13 bound remains finite.
+
+Both branches reached this stop boundary.  The q9 Delsarte equality data are
+association-scheme feasible; the q13 Fourier and inertia data do not improve
+the exact six-color dual bound.  C723 receives the complete exact Fourier
+artifact and the existing q9/q13 upper-bound-five proofs remain unchanged.

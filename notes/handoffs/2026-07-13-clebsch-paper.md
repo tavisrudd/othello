@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Date:** 2026-07-30
+**Date:** 2026-07-31
 
 > **LIVE MAP ONLY.** This is the routing and state surface for the active
 > three-paper program. Detailed live task internals belong in C-task cards;
@@ -227,7 +227,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | external publication deferred behind C714 | after C714 passes the synchronized release gates, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
-| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | queued by explicit review request | promote the q13 orbit-span and automorphism arguments, test bounded q9/q13 replacements, and retain honest finite boundaries |
+| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | active; C721 scheme spine complete and C722 clique routes closed exactly at six | run C723 and C724, then freeze the finite boundary through C725 and integrate through C726 |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | major shadow-theorem expansion active; C711/C712 sub-700 human and Lean packages complete | complete novelty audit, remaining post-700 human proofs, manuscript integration, above-700 Lean coverage, and fresh release gates |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
@@ -352,6 +352,16 @@ old five-chart exhaustion is an independent replay, all q11 terminals and the
 two Dye axioms are unchanged, and both authoritative and standalone
 twenty-one-page release surfaces pass all eighteen checks.  Full report:
 `notes/2026-07-31-c713-paper-i-proof-architecture.md`.
+C722 is complete with neither bounded clique branch promoted.  For q9 the
+Sylvester distance-two graph has spectrum
+(20^1,4^9,(-1)^{16},(-4)^{10}); Delsarte gives six, while equality forces
+(A_3\chi=2(1-\chi)) and remains feasible in the intersection algebra.  For
+q13 all fourteen character blocks of the three-orbit circulant graph are
+diagonalized exactly; adjacency/complement inertias are ((19,23,0)) and
+((22,20,0)), and the strongest exact dual found is a six-coloring.  The
+published q9 value and q13 five-row unique-closure proof remain load-bearing.
+The exact Fourier bundle passes to C723.  Full report:
+`notes/2026-07-31-c722-q9-q13-clique-structure.md`.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19

@@ -1,0 +1,855 @@
+{
+  "boundary": {
+    "q13": "exact Fourier/inertia analysis does not improve the six-color dual bound; exact upper bound five remains the five-row unique-closure proof",
+    "q9": "Delsarte equality remains feasible in the Sylvester association scheme; exact upper bound five is not promoted"
+  },
+  "q13": {
+    "adjacency_charpoly": [
+      1,
+      0,
+      -238,
+      -532,
+      22729,
+      85848,
+      -1165780,
+      -6085036,
+      35311612,
+      252308868,
+      -614562970,
+      -6836235588,
+      3861125940,
+      127398552932,
+      87544793772,
+      -1663275169528,
+      -2833379452162,
+      15030907392536,
+      41677383178158,
+      -87851940111852,
+      -390821011002065,
+      243641432106852,
+      2492015963425310,
+      730194324613208,
+      -10796303411707373,
+      -10850570022279176,
+      30189147048926642,
+      53290392006165748,
+      -45877756744907021,
+      -148573376983665620,
+      5372822454556970,
+      246235593166991876,
+      110630786203824530,
+      -230675851526382444,
+      -189948228523262524,
+      108335257095145928,
+      140852227284216833,
+      -17814472909666804,
+      -50941413565250908,
+      -1284989845633200,
+      9028909825709984,
+      448862540716800,
+      -645058213697216
+    ],
+    "adjacency_inertia": [
+      19,
+      23,
+      0
+    ],
+    "character_blocks": [
+      {
+        "basis": "1,z,...,z^0",
+        "character": 0,
+        "charpoly_coefficients": [
+          [
+            1
+          ],
+          [
+            -10
+          ],
+          [
+            -24
+          ],
+          [
+            88
+          ]
+        ],
+        "cyclotomic_order": 1
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 1,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            1,
+            0,
+            0,
+            -1
+          ],
+          [
+            -12,
+            0,
+            1,
+            -3,
+            3,
+            -1
+          ],
+          [
+            -25,
+            0,
+            -10,
+            -1,
+            1,
+            10
+          ]
+        ],
+        "cyclotomic_order": 14
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 2,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            -4,
+            0,
+            1,
+            3,
+            3,
+            1
+          ],
+          [
+            -9,
+            0,
+            -2,
+            5,
+            5,
+            -2
+          ]
+        ],
+        "cyclotomic_order": 7
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 3,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            -1,
+            1,
+            -1,
+            1
+          ],
+          [
+            -13,
+            0,
+            2,
+            1,
+            -1,
+            -2
+          ],
+          [
+            -15,
+            0,
+            11,
+            -10,
+            10,
+            -11
+          ]
+        ],
+        "cyclotomic_order": 14
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 4,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            -7,
+            0,
+            -3,
+            -2,
+            -2,
+            -3
+          ],
+          [
+            -14,
+            0,
+            -5,
+            -7,
+            -7,
+            -5
+          ]
+        ],
+        "cyclotomic_order": 7
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 5,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            -1,
+            1,
+            0
+          ],
+          [
+            -15,
+            0,
+            -3,
+            2,
+            -2,
+            3
+          ],
+          [
+            -26,
+            0,
+            -1,
+            11,
+            -11,
+            1
+          ]
+        ],
+        "cyclotomic_order": 14
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 6,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -5,
+            0,
+            2,
+            -1,
+            -1,
+            2
+          ],
+          [
+            -7,
+            0,
+            7,
+            2,
+            2,
+            7
+          ]
+        ],
+        "cyclotomic_order": 7
+      },
+      {
+        "basis": "1,z,...,z^0",
+        "character": 7,
+        "charpoly_coefficients": [
+          [
+            1
+          ],
+          [
+            -10
+          ],
+          [
+            24
+          ],
+          [
+            -8
+          ]
+        ],
+        "cyclotomic_order": 2
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 8,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -5,
+            0,
+            2,
+            -1,
+            -1,
+            2
+          ],
+          [
+            -7,
+            0,
+            7,
+            2,
+            2,
+            7
+          ]
+        ],
+        "cyclotomic_order": 7
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 9,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            -1,
+            1,
+            0
+          ],
+          [
+            -15,
+            0,
+            -3,
+            2,
+            -2,
+            3
+          ],
+          [
+            -26,
+            0,
+            -1,
+            11,
+            -11,
+            1
+          ]
+        ],
+        "cyclotomic_order": 14
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 10,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            -7,
+            0,
+            -3,
+            -2,
+            -2,
+            -3
+          ],
+          [
+            -14,
+            0,
+            -5,
+            -7,
+            -7,
+            -5
+          ]
+        ],
+        "cyclotomic_order": 7
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 11,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            -1,
+            1,
+            -1,
+            1
+          ],
+          [
+            -13,
+            0,
+            2,
+            1,
+            -1,
+            -2
+          ],
+          [
+            -15,
+            0,
+            11,
+            -10,
+            10,
+            -11
+          ]
+        ],
+        "cyclotomic_order": 14
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 12,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            -4,
+            0,
+            1,
+            3,
+            3,
+            1
+          ],
+          [
+            -9,
+            0,
+            -2,
+            5,
+            5,
+            -2
+          ]
+        ],
+        "cyclotomic_order": 7
+      },
+      {
+        "basis": "1,z,...,z^5",
+        "character": 13,
+        "charpoly_coefficients": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            1,
+            0,
+            0,
+            -1
+          ],
+          [
+            -12,
+            0,
+            1,
+            -3,
+            3,
+            -1
+          ],
+          [
+            -25,
+            0,
+            -10,
+            -1,
+            1,
+            10
+          ]
+        ],
+        "cyclotomic_order": 14
+      }
+    ],
+    "coloring_dual_bound": 6,
+    "complement_charpoly": [
+      1,
+      0,
+      -623,
+      -8344,
+      -2261,
+      589036,
+      2520511,
+      -17391628,
+      -129806124,
+      254767268,
+      3544660434,
+      -1061396616,
+      -64300382216,
+      -30010953420,
+      850140917064,
+      687607570608,
+      -8606492510504,
+      -7568528053436,
+      68420240933002,
+      51660008562680,
+      -429957308802287,
+      -214536282937556,
+      2114873135458055,
+      360881469201596,
+      -7943613523332242,
+      1465516601054520,
+      21876389832121286,
+      -11977729263075352,
+      -41357148032376291,
+      38991067409771484,
+      47037494433398427,
+      -71413268110355752,
+      -19544975849847000,
+      72780609195149408,
+      -18002688809030800,
+      -34027172687291520,
+      22245981967640704,
+      2100916467686400,
+      -5475664355521024,
+      1114048033452032,
+      315197474729984,
+      -134021474263040,
+      12458970820608
+    ],
+    "complement_inertia": [
+      22,
+      20,
+      0
+    ],
+    "complement_inertia_bound": 20,
+    "degrees_by_orbit": [
+      10,
+      12,
+      12
+    ],
+    "difference_sets": {
+      "00": [
+        4,
+        6,
+        8,
+        10
+      ],
+      "01": [
+        6,
+        7,
+        11,
+        12
+      ],
+      "02": [
+        1,
+        3
+      ],
+      "11": [
+        6,
+        8
+      ],
+      "12": [
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ],
+      "22": [
+        2,
+        4,
+        10,
+        12
+      ]
+    },
+    "direct_adjacency_interlacing_bound": 24,
+    "failed_equality_condition": "a six-clique would be a rainbow transversal of the six independent color classes",
+    "five_clique_witness": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        6
+      ],
+      [
+        1,
+        12
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "fourier_block": "B_k=(sum_{d in D_ab} zeta_14^(kd))_{a<=b}, with B_ba the conjugate entry",
+    "orbit_sizes": [
+      14,
+      14,
+      14
+    ],
+    "quotient_charpoly": [
+      1,
+      -10,
+      -24,
+      88
+    ],
+    "rayleigh_clique_bound": 12,
+    "six_coloring_class_sizes": [
+      8,
+      7,
+      7,
+      8,
+      7,
+      5
+    ],
+    "spectral_radius_interval": [
+      11,
+      12
+    ],
+    "universal_fourier_charpoly_group_ring": {
+      "lambda0": [
+        -8,
+        4,
+        3,
+        6,
+        12,
+        8,
+        9,
+        12,
+        9,
+        8,
+        12,
+        6,
+        3,
+        4
+      ],
+      "lambda1": [
+        -8,
+        -4,
+        1,
+        -4,
+        3,
+        -4,
+        0,
+        0,
+        0,
+        -4,
+        3,
+        -4,
+        1,
+        -4
+      ],
+      "lambda2": [
+        0,
+        0,
+        -1,
+        0,
+        -2,
+        0,
+        -2,
+        0,
+        -2,
+        0,
+        -2,
+        0,
+        -1,
+        0
+      ],
+      "lambda3": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ring": "Z[z]/(z^14-1)"
+    },
+    "vertices": 42
+  },
+  "q9": {
+    "bound_row": {
+      "inequality": "1-(c-1)/5 >= 0",
+      "normalized_distance_two_cosine": "-1/5",
+      "sylvester_eigenvalue": -1
+    },
+    "delsarte_clique_bound": 6,
+    "distance_layer_sizes": [
+      1,
+      5,
+      20,
+      10
+    ],
+    "distance_two_spectrum": [
+      [
+        20,
+        1
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        -1,
+        16
+      ],
+      [
+        -4,
+        10
+      ]
+    ],
+    "equality_condition": {
+      "consequence": "A3 chi_C=2(1-chi_C)",
+      "local_multigraph": "for each clique vertex, the five Gamma_1 vertices define a 2-regular five-edge multigraph on the other five clique vertices: C5 or C3 plus a doubled edge",
+      "pointwise": "5 n0-n1-n2+2 n3=0",
+      "primitive_idempotent_projection": "E_{-1} chi_C = 0",
+      "scheme_feasibility": "not contradictory",
+      "simplified_for_c=6": "2 n0+n3=2",
+      "supporting_intersection_numbers": {
+        "p_13^2": 2,
+        "p_33^2": 2
+      }
+    },
+    "equality_delsarte_transform": [
+      "6",
+      "3/4",
+      "0",
+      "2"
+    ],
+    "five_clique_witness": [
+      0,
+      4,
+      9,
+      18,
+      21
+    ],
+    "intersection_array": {
+      "b": [
+        5,
+        4,
+        2
+      ],
+      "c": [
+        1,
+        1,
+        4
+      ]
+    },
+    "six_coloring_class_sizes": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "vertices": 36
+  },
+  "schema": "c722-clique-structure-v1"
+}

@@ -4,8 +4,9 @@
 
 **Opened:** 2026-07-31
 
-**Status:** ready umbrella; execute C721--C726 through the dependency graph
-below. C713 is complete, so the Paper I statement surface is fixed.
+**Status:** active umbrella; C721 and C722 complete, with C723 and C724 ready
+through the dependency graph below. C713 is complete, so the Paper I statement
+surface is fixed.
 
 ## Objective
 
@@ -60,8 +61,9 @@ C723 q13 weight-ten profiles --------------------------> C725 terminal orbit DAG
 ```
 
 - C721 is the common vocabulary and must land first.
-- C722 may promote either, both, or neither bounded clique argument; each
-  branch has its own exact stop condition.
+- C722 is complete with neither bounded clique argument promoted: q9
+  Delsarte equality remains scheme-feasible, and q13 Fourier/inertia stops at
+  an exact six-color bound.  Its exact q13 character blocks pass to C723.
 - C723 consumes any useful C721/C722 identities but is successful even if it
   proves that the two-profile meet-in-the-middle certificate is irreducible.
 - C724 may begin after C721 and does not wait for C722 or C723.
