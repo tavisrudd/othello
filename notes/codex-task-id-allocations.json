@@ -1727,8 +1727,17 @@
       "last": 714,
       "purpose": "Paper I proof architecture and companion structuralization with Lean/trust synchronization",
       "sequence": 192
+    },
+    {
+      "count": 5,
+      "first": 715,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 719,
+      "purpose": "C707 anomaly inversion, U(1)^2 lift, Majorana chambers, bosonic complement, and six-mode demonstrator",
+      "sequence": 193
     }
   ],
-  "next_id": 715,
+  "next_id": 720,
   "schema": "codex-task-id-allocations-v1"
 }
