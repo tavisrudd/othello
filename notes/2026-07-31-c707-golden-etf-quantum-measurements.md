@@ -69,6 +69,20 @@ At every optimum,
 The three-filter realization is query-optimal among coherent circuits with
 \(x\)-independent gates and ancillas.
 
+The same amplitude vector has a direct gauge-theory reading:
+\(\sum_TZ_T=\sum_TZ_T^3=0\) are the two local anomaly equations for six
+left-handed Weyl charges under one \(U(1)\).  All 44 nonbalanced real phase
+masks have \(Z=0\), while the 20 balanced masks give the vectorlike Segre
+nodes.  Thus the lossless real boundary contains no chiral charge vector.
+Attenuation crosses that boundary sharply: the physical filter
+\[
+ x=\tfrac13(-3,-2,-1,0,1,3)
+\]
+has projective amplitude vector
+\((11,-10,-8,5,4,-2)\), a standard primitive chiral anomaly-free six-Weyl
+assignment.  This does not turn interferometer modes into gauge charges; it
+identifies an exact dynamical parametrization of the same anomaly variety.
+
 ## Literature finding first
 
 This was a bounded positioning sweep, not a novelty audit, and makes no
@@ -162,6 +176,22 @@ MathSciNet, zbMATH forward screening, and citation-graph closure were not
 performed.  Accordingly the present report attributes the classical frame
 facts and proves the operator-specific statements without saying they are
 first.
+
+### Physics novelty follow-up
+
+The dedicated follow-up
+`notes/2026-07-31-c707-physics-novelty-and-directions-audit.md` expands the
+search to the Segre anomaly variety, outer-\(S_6\) matrix constructions,
+fermionic interferometry, Majorana parity, and experimental emulation.  Its
+safe conclusion is narrower than a priority claim.  The cubic Segre map and
+its outer \(S_6\) action are classical, the anomaly interpretation of the
+Segre equations is explicit prior art, determinant scattering and Pfaffian
+parity are standard mechanisms, and a complex-Hadamard realization of the
+outer automorphism is known.  The bounded search did not locate the exact
+combination of the real golden conference pair, sharp Boolean phase optimum,
+three-fermion determinant, signed-\(K_{3,3}\) Majorana spectrum, and physical
+middle-layer outer transform.  The companion audit records every query,
+read depth, cache key, checksum, and coverage gap.
 
 ## Structural proof spine
 
@@ -451,6 +481,12 @@ table or finite enumeration is load-bearing.
   is a lossless three-fermion Slater transition with probability \(16/125\),
   and simultaneously a signed \(K_{3,3}\) class-D Majorana Hamiltonian with
   energies \(\{2,4,4\}\) and parity Pfaffian \(\pm32\).
+- **Settled — the anomaly meaning of the amplitude cubic:** the two Segre
+  identities are exactly the linear mixed-gravitational and cubic \(U(1)\)
+  anomaly equations for six Weyl charges.  The 44 nonbalanced Boolean masks
+  give zero and the 20 balanced masks give vectorlike nodes; the contractive
+  filter \((-3,-2,-1,0,1,3)/3\) instead gives the primitive chiral vector
+  \((11,-10,-8,5,4,-2)\) projectively.
 - **Settled — resource minimality in the coherent-filter model:** an
   \(r\)-query acceptance probability has degree at most \(2r\), so the
   degree-six probability \(Z_T^2/500\) requires \(r\ge3\); the parallel
@@ -459,10 +495,11 @@ table or finite enumeration is load-bearing.
   stratum is now classified, but experimentally distinct transfer families
   sharing probability contrasts on the full locus \(e_5=0\) remain
   unclassified.  This optional question has no allocated C-ID.
-- **Not audited — hardware realization:** this pass proves an implementable
-  finite free-fermion model but did not run the experimental-literature audit
-  needed to say whether the exact golden mixer or signed \(K_{3,3}\) network
-  has been built.  That is not a missing mathematical gate for C707.
+- **Audited, bounded — hardware realization:** arbitrary-process fermionic
+  statistics have an established photonic-emulation route, but the follow-up
+  sweep did not locate an implementation of this exact golden six-mode mixer
+  or signed \(K_{3,3}\) network.  No exhaustive proceedings or patent search
+  was performed.
 - **Boundary — resources outside the oracle model:** hardware that exposes
   nonlinear functions of \(x\) as primitive controls is a different
   resource theory; C707 makes no minimality claim there.

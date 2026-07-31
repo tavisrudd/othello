@@ -1,7 +1,36 @@
 {
   "cross_measurement_protocol": {
+    "anomaly_charge_interpretation": "sum_T Z_T=sum_T Z_T^3=0 are the mixed gravitational-U(1) and U(1)^3 anomaly equations for six Weyl charges",
     "balanced_majorana_network": "[D_x,C_T] is a signed K_3,3 Majorana Hamiltonian with positive one-particle energies {2,4,4}, Pfaffian +/-32, and class-D parity sign sign(Z_T)",
     "c705_polar_scaling": "W_T=6Z_T^2-sum_U Z_U^2=3000 center_T(p_T^(3))",
+    "chiral_anomaly_witness": {
+      "chiral": true,
+      "integer_lift": [
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        3
+      ],
+      "physical_filter": [
+        "-1",
+        "-2/3",
+        "-1/3",
+        "0",
+        "1/3",
+        "1"
+      ],
+      "projective_amplitude_charges": [
+        11,
+        -10,
+        -8,
+        5,
+        4,
+        -2
+      ]
+    },
+    "collective_boolean_image": "the 44 nonbalanced phase masks map to 0, while the 20 balanced masks map to the 20 oriented Segre-node representatives",
     "kraus_operator": "K_T(x)=Q_{T,-}^T diag(x) Q_{T,+}=(1/2)sum_i x_i |u_{T,i}^-><u_{T,i}^+|",
     "lossless_three_fermion_protocol": "at balanced x, D_x is a six-mode phase unitary and Z_T^2/500 is the probability that the V_+ Slater determinant scatters to the V_- Slater determinant",
     "middle_layer_correlation_immunity": "each output amplitude sign is independent of every chosen pair of input phase signs, and conversely; the first nonzero correlations are cubic and equal +/-2/5",

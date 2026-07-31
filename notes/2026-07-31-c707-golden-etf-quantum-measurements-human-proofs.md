@@ -533,7 +533,59 @@ six-outcome POVMs remain real-informationally-complete throughout: these
 are degeneracies of the controlled cross-measurement transfer family, not
 of state reconstruction.
 
-## 6. Classical boundary and operator-specific content
+## 6. Anomaly charges and the lossless/chiral boundary
+
+The six outer cubics satisfy the two Segre identities
+\[
+ \sum_T Z_T(x)=0,
+ \qquad
+ \sum_T Z_T(x)^3=0.
+\]
+Read projectively over the rationals, these are exactly the mixed
+gravitational--\(U(1)\) and \(U(1)^3\) local-anomaly cancellation equations
+for the charges of six left-handed Weyl fermions.  Thus every rational
+filter produces an anomaly-free projective charge vector whenever its
+amplitude vector is nonzero.  This is an interpretation of the same cubic
+identities, not a claim that the six interferometer modes literally acquire
+gauge charge.
+
+The real lossless boundary is exceptionally rigid.  Write a phase vertex as
+\(x=1-2y\), with negative support \(S\).  Expanding a triangle cubic gives
+\[
+ Z_T(1-2y)=-8\sum_{\{i,j,k\}\subset S}c^T_{ijk},
+\]
+because the constant, linear, and quadratic signed moments vanish.  Hence
+\(Z(x)=0\) when \(|S|<3\).  Odd homogeneity gives the same conclusion when
+\(|S|>3\), by replacing \(x\) with \(-x\).  When \(|S|=3\), exactly one
+term survives for each outer cubic and
+\[
+ Z(x)\in\{\text{permutations of }(-8,-8,-8,8,8,8)\}.
+\]
+Therefore the 64 real lossless phase masks split into 44 null controls and
+20 oriented Segre nodes.  Every nonzero lossless output is vectorlike: its
+charges pair as \(q,-q\).  No chiral anomaly assignment occurs on this
+Boolean unitary boundary.
+
+Chirality appears immediately for a contractive, postselected filter.  For
+the admissible path amplitudes
+\[
+ x=\frac13(-3,-2,-1,0,1,3)
+\]
+direct substitution into the six cubics gives, up to a common nonzero scale
+(including the cubic rescaling \(3^{-3}\)),
+\[
+ \boxed{\quad Z(x)\sim(11,-10,-8,5,4,-2).\quad}
+\]
+The entries sum to zero, their cubes sum to zero, none vanishes, and no two
+are opposite.  This is therefore a primitive chiral six-Weyl anomaly-free
+charge assignment.  Operationally, the same six integers are the oriented
+three-fermion transition amplitudes of the golden filter, up to the fixed
+normalization and common projective scale.  The mechanism is clear:
+lossless real phases land on the singular vectorlike nodes, whereas unequal
+attenuation moves the postselected amplitudes onto the smooth chiral part of
+the Segre cubic.
+
+## 7. Classical boundary and operator-specific content
 
 The following facts are standard frame theory: a symmetric conference
 matrix produces a \((6,3)\) ETF; \(2I-G\) is its Naimark complement; a tight

@@ -75,7 +75,19 @@ ancillas.  The operational structure belongs to the coherently signed
 Naimark instruments; the POVM effects alone forget the signs needed to
 define the cross transfer.
 
+The physics novelty audit identifies a further exact bridge.  The Segre
+identities for the six amplitudes are precisely the local \(U(1)\) anomaly
+equations for six Weyl charges.  Every nonbalanced real phase mask has
+\(Z=0\), while the balanced masks give the vectorlike Segre nodes.  The
+contractive filter \((-3,-2,-1,0,1,3)/3\) instead gives the standard
+primitive chiral charge vector \((11,-10,-8,5,4,-2)\) projectively.  Prior
+work contains the ambient Segre/outer geometry, anomaly interpretation,
+determinant rule, and Pfaffian-parity rule separately; the bounded sweep did
+not locate their exact real-golden operator synthesis.
+
 Full report:
 notes/2026-07-31-c707-golden-etf-quantum-measurements.md.
 Certificate-independent proof:
 notes/2026-07-31-c707-golden-etf-quantum-measurements-human-proofs.md.
+Physics novelty and directions audit:
+notes/2026-07-31-c707-physics-novelty-and-directions-audit.md.

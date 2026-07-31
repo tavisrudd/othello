@@ -35,6 +35,8 @@ WITNESSES = (
     (1, 2, 3, 4, 5, -15),
     (1, 0, 2, -1, 3, -5),
 )
+ANOMALY_WITNESS = (-3, -2, -1, 0, 1, 3)
+ANOMALY_CHARGES = (11, -10, -8, 5, 4, -2)
 
 
 def sha256(path: Path) -> str:
@@ -356,6 +358,26 @@ def build() -> dict[str, object]:
             assert absolute_value in counts
             counts[absolute_value] += 1
         assert counts == {0: 44, 8: 20}
+    boolean_images = {}
+    for signs in itertools.product((-1, 1), repeat=6):
+        z = tuple(evaluate(cubic, signs) for cubic in cubics)
+        boolean_images[signs] = z
+        if sum(value == -1 for value in signs) == 3:
+            assert sorted(z) == [-8, -8, -8, 8, 8, 8]
+        else:
+            assert z == (0,) * 6
+    assert len(set(boolean_images.values())) == 21
+
+    anomaly_z = tuple(evaluate(cubic, ANOMALY_WITNESS) for cubic in cubics)
+    assert anomaly_z == tuple(4 * value for value in ANOMALY_CHARGES)
+    assert sum(anomaly_z) == 0
+    assert sum(value**3 for value in anomaly_z) == 0
+    assert all(value != 0 for value in anomaly_z)
+    assert all(
+        anomaly_z[i] != -anomaly_z[j]
+        for i in range(6)
+        for j in range(i + 1, 6)
+    )
     witness_data = []
     for x in WITNESSES:
         z = tuple(evaluate(cubic, x) for cubic in cubics)
@@ -410,6 +432,7 @@ def build() -> dict[str, object]:
             "sharp_physical_cube_bound": "|Z_T(x)|<=8 and p_T^(3)(x)<=16/125 for max_i|x_i|<=1",
             "sharp_phase_patterns": "equality exactly at the 20 vertices with three +1 and three -1 entries",
             "vertex_absolute_value_counts_per_protocol": {"0": 44, "8": 20},
+            "collective_boolean_image": "the 44 nonbalanced phase masks map to 0, while the 20 balanced masks map to the 20 oriented Segre-node representatives",
             "simultaneous_optimum": "each balanced phase vertex has |Z_T|=8 and p_T^(3)=16/125 for all six protocols",
             "optimal_polar_contrast": "all six probabilities coincide, so W=0",
             "optimal_node_carrier": "the 20 oriented amplitude sign vectors pair by global sign over the 10 Segre nodes",
@@ -423,6 +446,13 @@ def build() -> dict[str, object]:
             "middle_layer_correlation_immunity": "each output amplitude sign is independent of every chosen pair of input phase signs, and conversely; the first nonzero correlations are cubic and equal +/-2/5",
             "lossless_three_fermion_protocol": "at balanced x, D_x is a six-mode phase unitary and Z_T^2/500 is the probability that the V_+ Slater determinant scatters to the V_- Slater determinant",
             "balanced_majorana_network": "[D_x,C_T] is a signed K_3,3 Majorana Hamiltonian with positive one-particle energies {2,4,4}, Pfaffian +/-32, and class-D parity sign sign(Z_T)",
+            "anomaly_charge_interpretation": "sum_T Z_T=sum_T Z_T^3=0 are the mixed gravitational-U(1) and U(1)^3 anomaly equations for six Weyl charges",
+            "chiral_anomaly_witness": {
+                "physical_filter": ["-1", "-2/3", "-1/3", "0", "1/3", "1"],
+                "integer_lift": list(ANOMALY_WITNESS),
+                "projective_amplitude_charges": list(ANOMALY_CHARGES),
+                "chiral": True,
+            },
             "optimal_squared_singular_values": ["4/5", "4/5", "1/5"],
             "optimal_filter_trace_witnesses": {"trace((CD)^2)": -6, "trace((CD)^4)": -42},
             "query_optimality": "three uses are necessary: an r-query acceptance probability has degree at most 2r, while Z_T^2 has degree 6",
