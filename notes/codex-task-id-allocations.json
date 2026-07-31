@@ -1754,8 +1754,17 @@
       "last": 726,
       "purpose": "C714 Paper I companion structuralization dependency chain",
       "sequence": 195
+    },
+    {
+      "count": 1,
+      "first": 727,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 727,
+      "purpose": "audit composite recovery theorem from deep-hole data through the golden operator to downstream shadows",
+      "sequence": 196
     }
   ],
-  "next_id": 727,
+  "next_id": 728,
   "schema": "codex-task-id-allocations-v1"
 }
