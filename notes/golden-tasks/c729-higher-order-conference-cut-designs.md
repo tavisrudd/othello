@@ -11,6 +11,9 @@ universal moment theorem, higher Paley census, and literature audit proved
 **Closing report:**
 `notes/2026-07-31-c729-conference-cut-moments.md`
 
+**Post-closeout internal-minor refinement:**
+`notes/2026-07-31-c729-cut-moments-reflection-audit.md`
+
 ## Objective
 
 Start from the exact Naimark--Gram lift from the order-six syndrome matrix to

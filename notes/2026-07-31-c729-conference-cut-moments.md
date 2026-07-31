@@ -325,3 +325,16 @@ does not prove a general third-moment formula.
 
 The task has no remaining acceptance blocker.  The open items are sequel
 directions, not gaps in the (6\to10\to36) reflection theorem.
+
+## Post-closeout internal-minor refinement
+
+`notes/2026-07-31-c729-cut-moments-reflection-audit.md` supplies a compatible
+local Cauchy--Binet refinement.  For every balanced half \(A\), it expands the
+cross-determinant square as an alternating sum of the squared internal minor
+energies of \(S[A,A]\), then resolves their global sums by the overlap size of
+the row and column index sets.  At order ten the 90 singular and 36 extremal
+projective cuts lift to exactly two full internal-energy profiles.  Its
+independent certificate also records the exact antipodal pair-moment
+sequences: both Golden cut frames have spherical design strength exactly
+three and fail the spherical fourth moment.  This strengthens the stopping
+criterion without changing the completed-task boundary.

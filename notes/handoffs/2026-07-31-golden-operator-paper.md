@@ -112,6 +112,9 @@ particular:
   \(K=-3A_1+A_2-A_3\) in the Sylvester Bose--Mesner algebra, so its quadratic
   identity is primitive-idempotent machinery rather than a roux continuation;
   the integral extremal-cut factor and outer bridge remain Golden-specific.
+  A post-closeout Cauchy--Binet refinement lifts the order-ten determinant
+  split to exactly two full internal squared-minor energy profiles and proves
+  that both antipodal cut frames have spherical design strength exactly three.
 - C728 constructs the six Majorana principal-Pfaffian systems intrinsically
   as an outer-equivariant product of Cartan big cells.  The synchronized
   tangent map and top cubic covariant each have multiplicity one; the exact

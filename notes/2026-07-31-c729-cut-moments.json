@@ -1,0 +1,170 @@
+{
+  "antipodal_spherical_moments": {
+    "10_to_36": {
+      "1": "0",
+      "2": "1/9",
+      "3": "0",
+      "4": "53/1125",
+      "5": "0",
+      "6": "193/5625",
+      "7": "0",
+      "8": "21173/703125"
+    },
+    "6_to_10": {
+      "1": "0",
+      "2": "1/5",
+      "3": "0",
+      "4": "1/9",
+      "5": "0",
+      "6": "41/405",
+      "7": "0",
+      "8": "73/729"
+    }
+  },
+  "cauchy_binet_cut_checks": {
+    "10": {
+      "local_minor_energy_profiles": {
+        "1,20,134,356,385,144": 180,
+        "1,20,150,500,625,0": 72
+      },
+      "ordered_balanced_halves": 252,
+      "ordered_cut_second_moment": 165888,
+      "overlap_formula_value": 165888
+    },
+    "6": {
+      "local_minor_energy_profiles": {
+        "1,6,9,4": 20
+      },
+      "ordered_balanced_halves": 20,
+      "ordered_cut_second_moment": 320,
+      "overlap_formula_value": 320
+    }
+  },
+  "conference_orders": [
+    6,
+    10
+  ],
+  "minor_overlap_energies": {
+    "10": {
+      "0": {
+        "0": 1
+      },
+      "1": {
+        "0": 90,
+        "1": 0
+      },
+      "2": {
+        "0": 2880,
+        "1": 720,
+        "2": 45
+      },
+      "3": {
+        "0": 38400,
+        "1": 40320,
+        "2": 8280,
+        "3": 480
+      },
+      "4": {
+        "0": 184320,
+        "1": 645120,
+        "2": 457920,
+        "3": 85680,
+        "4": 4770
+      },
+      "5": {
+        "0": 165888,
+        "1": 2488320,
+        "2": 7050240,
+        "3": 4250880,
+        "4": 899100,
+        "5": 25920
+      }
+    },
+    "6": {
+      "0": {
+        "0": 1
+      },
+      "1": {
+        "0": 30,
+        "1": 0
+      },
+      "2": {
+        "0": 240,
+        "1": 120,
+        "2": 15
+      },
+      "3": {
+        "0": 320,
+        "1": 1440,
+        "2": 660,
+        "3": 80
+      }
+    }
+  },
+  "projective_cut_determinant_distributions": {
+    "10": {
+      "0": 90,
+      "48": 36
+    },
+    "6": {
+      "4": 10
+    }
+  },
+  "projective_cut_even_moment_sums": {
+    "10": {
+      "2": 82944,
+      "4": 191102976,
+      "6": 440301256704,
+      "8": 1014454095446016
+    },
+    "6": {
+      "2": 160,
+      "4": 2560,
+      "6": 40960,
+      "8": 655360
+    }
+  },
+  "reflection_stages": {
+    "10_to_36": {
+      "absolute_inner_product_multiplicities": {
+        "2": 30,
+        "6": 5
+      },
+      "ambient_coordinates": 10,
+      "dimension": 9,
+      "frame_bound": 40,
+      "norm_squared": 10,
+      "primitive_reflection_diagonal": [
+        -5
+      ],
+      "primitive_reflection_off_diagonal_magnitudes": [
+        1,
+        3
+      ],
+      "primitive_reflection_scale": 10,
+      "vectors": 36
+    },
+    "6_to_10": {
+      "absolute_inner_product_multiplicities": {
+        "2": 9
+      },
+      "ambient_coordinates": 6,
+      "dimension": 5,
+      "frame_bound": 12,
+      "norm_squared": 6,
+      "primitive_reflection_diagonal": [
+        0
+      ],
+      "primitive_reflection_off_diagonal_magnitudes": [
+        1
+      ],
+      "primitive_reflection_scale": 3,
+      "vectors": 10
+    }
+  },
+  "schema": "c729-cut-moments-v1",
+  "spherical_fourth_moment_targets": {
+    "dimension_5": "3/35",
+    "dimension_9": "1/33"
+  }
+}
