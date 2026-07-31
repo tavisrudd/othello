@@ -172,6 +172,75 @@ Fifteen of the sixteen order-eighteen projective orbits are complement-closed
 after orientation; one determinant-2048 orbit of 2448 projective cuts splits
 into two complementary oriented 3-designs, each with $\lambda_3=252$.
 
+### `ej2` + `tt`: the first nonautomatic cross-ratio moment
+
+Three-transitivity explains every incidence moment through triples, so those
+moments cannot distinguish the Paley strata.  The first informative layer is
+degree four.  The $\operatorname{PGL}_2(q)$-orbits on four-subsets are the
+finite cross-ratio classes, and block containment is constant on each class.
+
+At order fourteen the three four-subset orbits have sizes $273,546,182$,
+represented canonically by
+
+\[
+ \{\infty,0,1,2\},\qquad
+ \{\infty,0,1,3\},\qquad
+ \{0,1,2,3\}.
+\]
+
+The maximum-cut $3\text{-}(14,7,35)$ design contains a representative of
+these classes in respectively
+
+\[
+ \boxed{16,\ 12,\ 10}
+\]
+
+blocks.  At order eighteen the corresponding four-subset orbit sizes are
+$612,1224,1224$.  The two maximum-cut designs have cross-ratio signatures
+
+\[
+ \boxed{(22,28,24)\quad\text{and}\quad(32,30,38),}
+\]
+
+so their union has the three-level signature $(54,58,62)$.  Thus neither the
+individual maximum strata nor their union is a 4-design.
+
+The same invariant gives the minimal incidence explanation of the exceptional
+determinant-2048 orientation behavior.  Taking both complementary halves, the
+non-complement-closed projective orbit has signature
+
+\[
+ (208,208,192),
+\]
+
+whereas the complement-closed determinant-2048 orbit has signature
+
+\[
+ (208,192,208).
+\]
+
+The two determinant-equal strata differ only in which nontrivial cross-ratio
+class carries the incidence deficit.  In Johnson-scheme language, their
+incidence vectors have no nonconstant components in degrees at most three;
+this three-coordinate degree-four signature is the first possible harmonic
+witness.  It is therefore the right compressed input for a future character-
+sum formula, and a stronger discriminator than another raw determinant moment.
+
+In fact the compression is complete at the two audited higher orders.  The
+projective both-halves four-point signatures are pairwise distinct across all
+five $\operatorname{PGL}_2(13)$-orbits and across all sixteen
+$\operatorname{PGL}_2(17)$-orbits.  Thus, on the exact order-fourteen and
+order-eighteen domains,
+
+\[
+ \boxed{\text{the three cross-ratio incidence counts recover the full
+ projective-linear cut orbit}.}
+\]
+
+The determinant is redundant once this signature is known.  This is a bounded
+completeness theorem for the enumerated orders, not a claim for every Paley
+order.
+
 All determinants obey the elementary divisibility
 $2^{m-1}\mid\det B$ for odd-order sign matrices $B$.  Order fourteen still
 contains global $7\times7$ D-optimal cuts (value $576$); order eighteen does
@@ -332,6 +401,14 @@ does not prove a general third-moment formula.
   maximum orbit is a $3\text{-}(14,7,35)$ design, while the two
   order-eighteen maximum orbits give $3\text{-}(18,9,63)$ and
   $3\text{-}(18,9,84)$ designs.
+- **Settled by `ej2` + `tt`:** the first nonautomatic invariant is the
+  four-point cross-ratio signature.  It distinguishes the two maximum
+  order-eighteen designs and locates the determinant-2048 orientation defect
+  by the placement of one incidence deficit among the two size-1224
+  cross-ratio classes.
+- **Settled by `ej2`:** the three-coordinate four-point signature is a complete
+  orbit invariant on all five order-fourteen and all sixteen order-eighteen
+  projective-linear cut orbits.  Determinant value is strictly coarser.
 - **Settled by `tt`:** $K=-3A_1+A_2-A_3$ is a primitive-idempotent element of
   the Sylvester Bose--Mesner algebra.  The quadratic law is contextualized,
   while the integral cut realization remains the Golden-specific theorem.
@@ -345,8 +422,9 @@ does not prove a general third-moment formula.
 - **Open:** one order-eighteen determinant-2048 projective orbit has two
   complementary oriented $3\text{-}(18,9,252)$ lifts, whereas the other
   determinant-2048 orbit is complement-closed.  Evidence gap: the current
-  certificate detects the split but does not identify its character-theoretic
-  invariant.
+  certificate detects the split, and the `ej2` pass gives its minimal
+  degree-four incidence witness.  What remains open is the character-sum
+  formula explaining why the determinant selects that cross-ratio class.
 - **Open:** a true inverse/stability theorem from an arbitrary signing to a
   nearby conference switching class.  Gate: express the second-moment defect
   for a general Seidel matrix in terms of the conference residual
@@ -371,3 +449,11 @@ independent certificate also records the exact antipodal pair-moment
 sequences: both Golden cut frames have spherical design strength exactly
 three and fail the spherical fourth moment.  This strengthens the stopping
 criterion without changing the completed-task boundary.
+
+An `ej3` factorization sharpens the refinement further.  The extremal profile
+has \(\chi_{P_A^2}(t)=t(t-5)^4\), forcing a sign kernel vector \(v\) and
+\(P_A^2=5I-vv^{\mathsf T}\).  Consequently every extremal five-vertex
+principal half borders to a symmetric order-six conference matrix, and the
+converse border identity forces cross determinant \(48\).  The 36 Sylvester
+vertices therefore carry marked local \(10\to6\) retractions; identifying
+their marking quotient with the six Golden sisters remains a sequel question.

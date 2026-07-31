@@ -160,9 +160,31 @@ def pgl_generators(q: int) -> list[tuple[int, ...]]:
     return [translation, inversion, dilation]
 
 
+def oriented_subset_orbits(
+    n: int, size: int, generators: list[tuple[int, ...]]
+) -> list[tuple[int, set[int]]]:
+    unseen = {sum(1 << i for i in subset) for subset in combinations(range(n), size)}
+    answer = []
+    while unseen:
+        representative = min(unseen)
+        orbit = {representative}
+        frontier = [representative]
+        while frontier:
+            mask = frontier.pop()
+            for generator in generators:
+                image = apply_permutation_oriented(mask, generator)
+                if image not in orbit:
+                    orbit.add(image)
+                    frontier.append(image)
+        unseen.difference_update(orbit)
+        answer.append((representative, orbit))
+    return answer
+
+
 def pgl_orbits(q: int, determinant_by_mask: dict[int, int]) -> list[dict[str, object]]:
     unseen = set(determinant_by_mask)
     generators = pgl_generators(q)
+    four_orbits = oriented_subset_orbits(q + 1, 4, generators)
     answer = []
     while unseen:
         representative = min(unseen)
@@ -193,12 +215,48 @@ def pgl_orbits(q: int, determinant_by_mask: dict[int, int]) -> list[dict[str, ob
         assert projected_orbit == orbit
         lambda_three = len(oriented_orbit) * comb((q + 1) // 2, 3) // comb(q + 1, 3)
         assert lambda_three * comb(q + 1, 3) == len(oriented_orbit) * comb((q + 1) // 2, 3)
+        triple_counts: Counter[tuple[int, ...]] = Counter()
+        for block in oriented_orbit:
+            points = [i for i in range(q + 1) if block >> i & 1]
+            triple_counts.update(combinations(points, 3))
+        assert len(triple_counts) == comb(q + 1, 3)
+        assert set(triple_counts.values()) == {lambda_three}
+
+        four_signature = []
+        projective_blocks = oriented_orbit | {
+            ((1 << (q + 1)) - 1) ^ block for block in oriented_orbit
+        }
+        projective_four_signature = []
+        for four_representative, four_orbit in four_orbits:
+            four_half = [
+                i - 1 if i else "infinity"
+                for i in range(q + 1)
+                if four_representative >> i & 1
+            ]
+            four_signature.append(
+                {
+                    "blocks_through_representative": sum(
+                        (block & four_representative) == four_representative
+                        for block in oriented_orbit
+                    ),
+                    "four_subset_orbit_size": len(four_orbit),
+                    "representative_four_subset": four_half,
+                }
+            )
+            projective_four_signature.append(
+                sum(
+                    (block & four_representative) == four_representative
+                    for block in projective_blocks
+                )
+            )
         half = [i - 1 if i else "infinity" for i in range(q + 1) if representative >> i & 1]
         answer.append(
             {
                 "absolute_determinant": values.pop(),
                 "complement_closed_oriented_orbit": (((1 << (q + 1)) - 1) ^ representative) in oriented_orbit,
+                "four_subset_incidence_signature": four_signature,
                 "oriented_block_count": len(oriented_orbit),
+                "projective_both_halves_four_subset_signature": projective_four_signature,
                 "representative_half": half,
                 "size": len(orbit),
                 "three_design_lambda": lambda_three,
@@ -255,7 +313,13 @@ def audit_order(matrix: list[list[int]], pgl_q: int | None = None) -> dict[str, 
         },
     }
     if pgl_q is not None:
-        result["pgl2_orbits"] = pgl_orbits(pgl_q, determinant_by_mask)
+        orbits = pgl_orbits(pgl_q, determinant_by_mask)
+        signatures = {
+            tuple(orbit["projective_both_halves_four_subset_signature"]) for orbit in orbits
+        }
+        assert len(signatures) == len(orbits)
+        result["four_subset_signature_is_complete_pgl2_orbit_invariant"] = True
+        result["pgl2_orbits"] = orbits
     return result
 
 
@@ -362,7 +426,7 @@ def build_certificate() -> dict[str, object]:
             "primes": list(PRIMES),
         },
         "orders": orders,
-        "schema": "c729-conference-cut-moments-v2",
+        "schema": "c729-conference-cut-moments-v3",
         "weighted_order_36": weighted_reflection_audit(order_ten),
     }
 

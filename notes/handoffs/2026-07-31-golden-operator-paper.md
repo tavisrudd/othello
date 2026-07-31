@@ -111,13 +111,23 @@ particular:
   already coarsen projective-linear orbits; sharp three-transitivity upgrades
   their oriented strata to 3-designs, including the maximum-cut designs
   \(3\text{-}(14,7,35)\), \(3\text{-}(18,9,63)\), and
-  \(3\text{-}(18,9,84)\).  The weighted operator is exactly
+  \(3\text{-}(18,9,84)\).  Their first nonautomatic incidence invariant is
+  the degree-four cross-ratio signature; it separates the two order-eighteen
+  maximum designs and the two determinant-2048 orientation behaviors, and is
+  a complete orbit invariant on all audited order-fourteen and order-eighteen
+  cuts.  The weighted operator is exactly
   \(K=-3A_1+A_2-A_3\) in the Sylvester Bose--Mesner algebra, so its quadratic
   identity is primitive-idempotent machinery rather than a roux continuation;
   the integral extremal-cut factor and outer bridge remain Golden-specific.
   A post-closeout Cauchy--Binet refinement lifts the order-ten determinant
   split to exactly two full internal squared-minor energy profiles and proves
   that both antipodal cut frames have spherical design strength exactly three.
+  The extremal profile factors as \(t(t-5)^4\): every extremal principal half
+  has a sign kernel vector and borders, uniquely up to switching the added
+  vertex, to a symmetric order-six conference matrix, while the converse
+  border forces determinant \(48\).
+  Thus the 36 Sylvester vertices carry local \(10\to6\) retractions; their
+  marking quotient to the six Golden sisters remains open.
 - C728 constructs the six Majorana principal-Pfaffian systems intrinsically
   as an outer-equivariant product of Cartan big cells.  The synchronized
   tangent map and top cubic covariant each have multiplicity one; the exact
