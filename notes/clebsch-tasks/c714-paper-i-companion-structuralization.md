@@ -4,9 +4,9 @@
 
 **Opened:** 2026-07-31
 
-**Status:** active umbrella; C721--C723 complete, with C724 ready through the
-dependency graph below. C713 is complete, so the Paper I statement surface is
-fixed.
+**Status:** active umbrella; C721--C724 complete, with the surviving finite
+boundary frozen for C725. C713 is complete, so the Paper I statement surface
+is fixed.
 
 ## Objective
 
@@ -70,7 +70,9 @@ C723 q13 weight-ten profiles --------------------------> C725 terminal orbit DAG
   C725 as the frozen q13 finite boundary.
 - C723 consumes any useful C721/C722 identities but is successful even if it
   proves that the two-profile meet-in-the-middle certificate is irreducible.
-- C724 may begin after C721 and does not wait for C722 or C723.
+- C724 is complete: the q11 census and q11/q13 seven-arc leaves are compressed
+  to orbit masses, concurrence data, and local determinant witnesses, with the
+  full normalized enumerations retained as audits.
 - C725 begins only after C723 and C724 have frozen the surviving finite
   boundary.
 - C726 is the only closeout card: it integrates adopted arguments, formalizes

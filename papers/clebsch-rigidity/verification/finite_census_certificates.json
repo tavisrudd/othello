@@ -1,0 +1,2008 @@
+{
+  "q11_six_arc_census": {
+    "normalized_domain_mass": 1548,
+    "ordered_frames_per_arc": 360,
+    "records": [
+      {
+        "conic_gap": {
+          "delta": 12,
+          "intersection_histogram": {
+            "0": 20749,
+            "1": 48572,
+            "10": 1,
+            "2": 49919,
+            "3": 28302,
+            "4": 10413,
+            "5": 2468,
+            "6": 466,
+            "7": 34,
+            "8": 6
+          },
+          "nearest_conics": 1,
+          "witness": [
+            1,
+            1,
+            1,
+            7,
+            0,
+            7
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 3,
+          "points": [
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              1,
+              4,
+              9
+            ],
+            [
+              1,
+              5,
+              4
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              6,
+              7
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              7,
+              6
+            ]
+          ]
+        },
+        "id": "C01",
+        "normalized_orbit_mass": 180,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            2
+          ]
+        ],
+        "stabilizer_order": 2,
+        "triple_concurrences": 2,
+        "uncovered_size_from_chord_defect": 20
+      },
+      {
+        "conic_gap": {
+          "delta": 14,
+          "intersection_histogram": {
+            "0": 25816,
+            "1": 53712,
+            "2": 48264,
+            "3": 23448,
+            "4": 7974,
+            "5": 1428,
+            "6": 282,
+            "8": 6
+          },
+          "nearest_conics": 6,
+          "witness": [
+            1,
+            0,
+            6,
+            1,
+            3,
+            9
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 10,
+          "points": [
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              6,
+              10
+            ],
+            [
+              1,
+              7,
+              6
+            ],
+            [
+              1,
+              8,
+              2
+            ]
+          ]
+        },
+        "id": "C02",
+        "normalized_orbit_mass": 60,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "stabilizer_order": 6,
+        "triple_concurrences": 4,
+        "uncovered_size_from_chord_defect": 18
+      },
+      {
+        "conic_gap": {
+          "delta": 13,
+          "intersection_histogram": {
+            "0": 22660,
+            "1": 52041,
+            "2": 49164,
+            "3": 25767,
+            "4": 8787,
+            "5": 2070,
+            "6": 384,
+            "7": 51,
+            "8": 3,
+            "9": 3
+          },
+          "nearest_conics": 3,
+          "witness": [
+            1,
+            2,
+            1,
+            1,
+            2,
+            6
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 9,
+          "points": [
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              5,
+              4
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              6,
+              7
+            ],
+            [
+              1,
+              7,
+              4
+            ]
+          ]
+        },
+        "id": "C03",
+        "normalized_orbit_mass": 120,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            6
+          ]
+        ],
+        "stabilizer_order": 3,
+        "triple_concurrences": 3,
+        "uncovered_size_from_chord_defect": 19
+      },
+      {
+        "conic_gap": {
+          "delta": 17,
+          "intersection_histogram": {
+            "0": 22880,
+            "1": 51753,
+            "2": 48996,
+            "3": 25886,
+            "4": 9036,
+            "5": 2001,
+            "6": 318,
+            "7": 60
+          },
+          "nearest_conics": 60,
+          "witness": [
+            1,
+            0,
+            3,
+            4,
+            8,
+            5
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 4,
+          "points": [
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              4,
+              9
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              6,
+              10
+            ],
+            [
+              1,
+              7,
+              4
+            ],
+            [
+              1,
+              7,
+              6
+            ]
+          ]
+        },
+        "id": "C04",
+        "normalized_orbit_mass": 120,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            7
+          ]
+        ],
+        "stabilizer_order": 3,
+        "triple_concurrences": 3,
+        "uncovered_size_from_chord_defect": 19
+      },
+      {
+        "conic_gap": {
+          "delta": 16,
+          "intersection_histogram": {
+            "0": 20281,
+            "1": 49212,
+            "2": 50431,
+            "3": 27480,
+            "4": 10368,
+            "5": 2632,
+            "6": 451,
+            "7": 52,
+            "8": 23
+          },
+          "nearest_conics": 23,
+          "witness": [
+            1,
+            0,
+            2,
+            1,
+            7,
+            2
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 8,
+          "points": [
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              7,
+              4
+            ],
+            [
+              1,
+              7,
+              6
+            ]
+          ]
+        },
+        "id": "C05",
+        "normalized_orbit_mass": 90,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            9
+          ]
+        ],
+        "stabilizer_order": 4,
+        "triple_concurrences": 2,
+        "uncovered_size_from_chord_defect": 20
+      },
+      {
+        "conic_gap": {
+          "delta": 16,
+          "intersection_histogram": {
+            "0": 20445,
+            "1": 49132,
+            "2": 49851,
+            "3": 28074,
+            "4": 10437,
+            "5": 2432,
+            "6": 485,
+            "7": 66,
+            "8": 8
+          },
+          "nearest_conics": 8,
+          "witness": [
+            1,
+            2,
+            3,
+            3,
+            7,
+            3
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 2,
+          "points": [
+            [
+              1,
+              3,
+              4
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              5,
+              4
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              6,
+              7
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              7,
+              4
+            ],
+            [
+              1,
+              7,
+              8
+            ]
+          ]
+        },
+        "id": "C06",
+        "normalized_orbit_mass": 180,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            4,
+            2
+          ]
+        ],
+        "stabilizer_order": 2,
+        "triple_concurrences": 2,
+        "uncovered_size_from_chord_defect": 20
+      },
+      {
+        "conic_gap": {
+          "delta": 17,
+          "intersection_histogram": {
+            "0": 18192,
+            "1": 46717,
+            "2": 50047,
+            "3": 30432,
+            "4": 11703,
+            "5": 3141,
+            "6": 601,
+            "7": 86,
+            "8": 11
+          },
+          "nearest_conics": 11,
+          "witness": [
+            1,
+            0,
+            3,
+            6,
+            9,
+            4
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 7,
+          "points": [
+            [
+              1,
+              3,
+              4
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              3,
+              9
+            ],
+            [
+              1,
+              5,
+              4
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              6,
+              7
+            ],
+            [
+              1,
+              7,
+              6
+            ]
+          ]
+        },
+        "id": "C07",
+        "normalized_orbit_mass": 360,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            4,
+            8
+          ]
+        ],
+        "stabilizer_order": 1,
+        "triple_concurrences": 1,
+        "uncovered_size_from_chord_defect": 21
+      },
+      {
+        "conic_gap": {
+          "delta": 16,
+          "intersection_histogram": {
+            "0": 20205,
+            "1": 49496,
+            "2": 49922,
+            "3": 27992,
+            "4": 10183,
+            "5": 2548,
+            "6": 492,
+            "7": 76,
+            "8": 16
+          },
+          "nearest_conics": 16,
+          "witness": [
+            1,
+            1,
+            0,
+            1,
+            5,
+            9
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 9,
+          "points": [
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              3,
+              8
+            ],
+            [
+              1,
+              5,
+              4
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              7,
+              4
+            ]
+          ]
+        },
+        "id": "C08",
+        "normalized_orbit_mass": 90,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            4,
+            9
+          ]
+        ],
+        "stabilizer_order": 4,
+        "triple_concurrences": 2,
+        "uncovered_size_from_chord_defect": 20
+      },
+      {
+        "conic_gap": {
+          "delta": 16,
+          "intersection_histogram": {
+            "0": 20353,
+            "1": 49336,
+            "2": 49734,
+            "3": 28136,
+            "4": 10299,
+            "5": 2516,
+            "6": 488,
+            "7": 60,
+            "8": 8
+          },
+          "nearest_conics": 8,
+          "witness": [
+            1,
+            0,
+            8,
+            1,
+            1,
+            3
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 7,
+          "points": [
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              4,
+              9
+            ],
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              7,
+              9
+            ],
+            [
+              1,
+              7,
+              10
+            ]
+          ]
+        },
+        "id": "C09",
+        "normalized_orbit_mass": 90,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            5,
+            6
+          ]
+        ],
+        "stabilizer_order": 4,
+        "triple_concurrences": 2,
+        "uncovered_size_from_chord_defect": 20
+      },
+      {
+        "conic_gap": {
+          "delta": 15,
+          "intersection_histogram": {
+            "0": 22885,
+            "1": 51786,
+            "2": 48843,
+            "3": 26059,
+            "4": 9042,
+            "5": 1872,
+            "6": 401,
+            "7": 39,
+            "8": 3
+          },
+          "nearest_conics": 3,
+          "witness": [
+            1,
+            1,
+            8,
+            7,
+            10,
+            9
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 7,
+          "points": [
+            [
+              1,
+              3,
+              4
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              3,
+              9
+            ],
+            [
+              1,
+              4,
+              9
+            ],
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              7,
+              4
+            ]
+          ]
+        },
+        "id": "C10",
+        "normalized_orbit_mass": 60,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            6,
+            2
+          ]
+        ],
+        "stabilizer_order": 6,
+        "triple_concurrences": 3,
+        "uncovered_size_from_chord_defect": 19
+      },
+      {
+        "conic_gap": {
+          "delta": 12,
+          "intersection_histogram": {
+            "0": 31967,
+            "1": 58440,
+            "2": 45330,
+            "3": 18776,
+            "4": 5310,
+            "5": 1008,
+            "6": 90,
+            "8": 9
+          },
+          "nearest_conics": 9,
+          "witness": [
+            1,
+            0,
+            2,
+            1,
+            7,
+            2
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 3,
+          "points": [
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              3,
+              8
+            ],
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              7,
+              4
+            ],
+            [
+              1,
+              7,
+              9
+            ],
+            [
+              1,
+              10,
+              2
+            ]
+          ]
+        },
+        "id": "C11",
+        "normalized_orbit_mass": 30,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            6,
+            7
+          ]
+        ],
+        "stabilizer_order": 12,
+        "triple_concurrences": 6,
+        "uncovered_size_from_chord_defect": 16
+      },
+      {
+        "conic_gap": {
+          "delta": 18,
+          "intersection_histogram": {
+            "0": 16325,
+            "1": 43842,
+            "2": 50480,
+            "3": 32110,
+            "4": 13570,
+            "5": 3750,
+            "6": 718,
+            "7": 110,
+            "8": 25
+          },
+          "nearest_conics": 25,
+          "witness": [
+            1,
+            0,
+            3,
+            4,
+            1,
+            6
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 10,
+          "points": [
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              3,
+              9
+            ],
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              1,
+              4,
+              9
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              8
+            ]
+          ]
+        },
+        "id": "C12",
+        "normalized_orbit_mass": 72,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            7,
+            4
+          ]
+        ],
+        "stabilizer_order": 5,
+        "triple_concurrences": 0,
+        "uncovered_size_from_chord_defect": 22
+      },
+      {
+        "conic_gap": {
+          "delta": 14,
+          "intersection_histogram": {
+            "0": 25483,
+            "1": 54282,
+            "2": 48240,
+            "3": 23328,
+            "4": 7752,
+            "5": 1494,
+            "6": 330,
+            "7": 12,
+            "8": 9
+          },
+          "nearest_conics": 9,
+          "witness": [
+            1,
+            0,
+            2,
+            1,
+            7,
+            2
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 9,
+          "points": [
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              5,
+              10
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              6,
+              10
+            ],
+            [
+              1,
+              7,
+              4
+            ]
+          ]
+        },
+        "id": "C13",
+        "normalized_orbit_mass": 60,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            8,
+            9
+          ]
+        ],
+        "stabilizer_order": 6,
+        "triple_concurrences": 4,
+        "uncovered_size_from_chord_defect": 18
+      },
+      {
+        "conic_gap": {
+          "delta": 14,
+          "intersection_histogram": {
+            "0": 25829,
+            "1": 53436,
+            "2": 48912,
+            "3": 22992,
+            "4": 7986,
+            "5": 1512,
+            "6": 230,
+            "7": 24,
+            "8": 9
+          },
+          "nearest_conics": 9,
+          "witness": [
+            1,
+            1,
+            0,
+            1,
+            8,
+            1
+          ]
+        },
+        "cubic_rank_witness": {
+          "determinant_mod_11": 1,
+          "points": [
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              3,
+              8
+            ],
+            [
+              1,
+              3,
+              9
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              4,
+              9
+            ],
+            [
+              1,
+              5,
+              4
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              6,
+              5
+            ]
+          ]
+        },
+        "id": "C14",
+        "normalized_orbit_mass": 30,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            9,
+            10
+          ]
+        ],
+        "stabilizer_order": 12,
+        "triple_concurrences": 4,
+        "uncovered_size_from_chord_defect": 18
+      },
+      {
+        "clebsch_kernel": {
+          "cubic_generators_q_times_x_y_z": [
+            [
+              1,
+              2,
+              5,
+              0,
+              2,
+              8,
+              0,
+              5,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              2,
+              5,
+              0,
+              2,
+              8,
+              0,
+              5,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              5,
+              2,
+              8,
+              5
+            ]
+          ],
+          "cubic_nullity": 3,
+          "quadratic_generator": [
+            1,
+            2,
+            5,
+            2,
+            8,
+            5
+          ],
+          "quadratic_nullity": 1
+        },
+        "conic_gap": {
+          "delta": 0,
+          "intersection_histogram": {
+            "0": 48675,
+            "1": 64140,
+            "12": 1,
+            "2": 38214,
+            "3": 5940,
+            "4": 3960
+          },
+          "nearest_conics": 1,
+          "witness": [
+            1,
+            6,
+            7,
+            1,
+            7,
+            9
+          ]
+        },
+        "id": "C15",
+        "normalized_orbit_mass": 6,
+        "representative": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            1,
+            4,
+            5
+          ]
+        ],
+        "stabilizer_order": 60,
+        "triple_concurrences": 10,
+        "uncovered_size_from_chord_defect": 12
+      }
+    ]
+  },
+  "schema": "clebsch-finite-census-certificates-v1",
+  "seven_arc_exclusions": [
+    {
+      "normalized_domain_mass": 140,
+      "ordered_frames_per_arc": 840,
+      "q": 11,
+      "records": [
+        {
+          "id": "q11-O01",
+          "normalized_orbit_mass": 140,
+          "quadratic_rank_witness": {
+            "determinant_mod_q": 1,
+            "points": [
+              [
+                1,
+                3,
+                4
+              ],
+              [
+                1,
+                3,
+                7
+              ],
+              [
+                1,
+                3,
+                9
+              ],
+              [
+                1,
+                5,
+                4
+              ],
+              [
+                1,
+                6,
+                4
+              ],
+              [
+                1,
+                6,
+                5
+              ]
+            ]
+          },
+          "representative": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              7,
+              6
+            ]
+          ],
+          "stabilizer_order": 6,
+          "triple_concurrences": 9,
+          "uncovered_size_from_chord_defect": 12
+        }
+      ]
+    },
+    {
+      "normalized_domain_mass": 1680,
+      "ordered_frames_per_arc": 840,
+      "q": 13,
+      "records": [
+        {
+          "id": "q13-O01",
+          "normalized_orbit_mass": 840,
+          "quadratic_rank_witness": {
+            "determinant_mod_q": 7,
+            "points": [
+              [
+                1,
+                4,
+                5
+              ],
+              [
+                1,
+                6,
+                5
+              ],
+              [
+                1,
+                6,
+                7
+              ],
+              [
+                1,
+                7,
+                12
+              ],
+              [
+                1,
+                8,
+                5
+              ],
+              [
+                1,
+                8,
+                6
+              ]
+            ]
+          },
+          "representative": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              5,
+              10
+            ]
+          ],
+          "stabilizer_order": 1,
+          "triple_concurrences": 15,
+          "uncovered_size_from_chord_defect": 14
+        },
+        {
+          "id": "q13-O02",
+          "normalized_orbit_mass": 840,
+          "quadratic_rank_witness": {
+            "determinant_mod_q": 5,
+            "points": [
+              [
+                1,
+                5,
+                4
+              ],
+              [
+                1,
+                5,
+                7
+              ],
+              [
+                1,
+                5,
+                11
+              ],
+              [
+                1,
+                8,
+                4
+              ],
+              [
+                1,
+                8,
+                5
+              ],
+              [
+                1,
+                9,
+                12
+              ]
+            ]
+          },
+          "representative": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              7,
+              8
+            ]
+          ],
+          "stabilizer_order": 1,
+          "triple_concurrences": 15,
+          "uncovered_size_from_chord_defect": 14
+        }
+      ]
+    }
+  ]
+}

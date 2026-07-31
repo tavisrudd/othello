@@ -4,8 +4,11 @@
 
 **Opened:** 2026-07-31
 
-**Status:** ready; C721 complete; may run independently of C722--C723; C714
-phase 4/6.
+**Status:** complete and reported 2026-07-31; finite proof objects frozen for
+C725 and C726.
+
+**Report:**
+[`2026-07-31-c724-paper-i-finite-census-compression.md`](../2026-07-31-c724-paper-i-finite-census-compression.md)
 
 ## Objective
 
