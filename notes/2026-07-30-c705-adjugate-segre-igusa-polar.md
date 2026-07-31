@@ -4,8 +4,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete; negative raw-adjugate gate, positive compound/Jacobian
-adjugate theorem, exact boundary and inverse geometry.
+**Status:** main gates complete; negative raw-adjugate gate, positive
+compound/Jacobian adjugate theorem, exact boundary and inverse geometry;
+common-\(E_6/E_8\) shadow-source mining active.
 
 ## Outcome
 
@@ -119,6 +120,50 @@ rank-one fourth compound of
 \]
 the displayed adjugate is its expression after fixing the frozen
 augmentation and determinant-line orientations.
+
+## The two Mori contractions are the sisters
+
+Moon's symmetric Mori program gives a global interpretation of the two
+factors.  The common resolution \(\overline M_{0,6}\) has two distinguished
+symmetric contractions
+\[
+ \rho:\overline M_{0,6}\longrightarrow \mathsf S_3,\qquad
+ \phi:\overline M_{0,6}\longrightarrow \mathsf I_4.
+\]
+The first contracts the \(B_3\) boundary to the ten Segre nodes; the second
+contracts the \(B_2\) boundary to the fifteen Igusa singular lines.  On the
+open six-point moduli space, HMSV's centered-square formula identifies
+\(\phi\) with the Segre Gauss map composed with \(\rho\):
+\[
+ \phi=\nabla\mathsf S_3\circ\rho.
+\]
+
+In the centered six-point slice, \(A\) is the Jacobian of \(\rho\).  Its
+right kernel \(q\) is the residual special-conformal
+\(\operatorname{PGL}_2\) direction before quotienting, while its left
+kernel \(W\) is the conormal of the Segre hypersurface and hence the
+coordinate vector of the dual contraction.  Thus
+\[
+ \operatorname{adj}(A)=6Wq^{\mathsf T}
+\]
+is the local differential certificate for the global pair of Mori
+contractions.  It supplies a concrete operator form of the projective-dual
+map that Moon singled out as desirable to describe through
+\(\overline M_{0,6}\).
+
+The C705 boundary calculation is compatible with this resolution picture:
+the twenty labeled triple-collision planes pair by complementary triples
+over the ten \(B_3\) contractions, and the fifteen Segre planes map to the
+fifteen \(B_2\)-type singular lines on the Igusa side.
+
+Schock places both sisters inside one exceptional parent.  Each \(A_1\)
+boundary divisor in Naruki's \(W(E_6)\)-equivariant compactification of
+marked cubic-surface moduli is an \(\overline M_{0,6}\), and two
+\(W(E_6)\)-equivariant contractions restrict to \(\rho\) and \(\phi\).
+Hence a common \(E_6\) parent is now established at the level of birational
+models.  Whether the actual first-jet tensor \(A\) lifts to the ambient
+\(E_6\) contractions, and then through C682's specific golden/\(E_8\)
+operator descent, remains the active shadow-source gate.
 
 ## The raw obstruction and the successful repair
 
@@ -327,6 +372,7 @@ placed in the mystery ledger below.
 | Meaning of the twenty pulled-back base planes | settled: triple-collision GIT boundary, paired over ten nodes | none |
 | Meaning of the factor \(6\) | settled integrally; it is the normalization coupling the two centered-square maps and causes the \(2,3\) rank collapse | a refined integral moduli model belongs to future WP5 |
 | Whether the third-compound presentation is already classical | open: no formula match was found in the proportional audit, but originals and a formula-level modern sweep remain incomplete | WP11 before any priority claim |
+| Whether the sister diagram has a common exceptional parent | settled at the birational-model level: both contractions are restrictions of \(W(E_6)\)-equivariant contractions to an \(A_1\cong\overline M_{0,6}\) divisor | lift their first-jet pairing and identify its restriction with \(A\) |
 | Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | open: the common outer-\(S_6\) descent and rank-one adjugate are strong internal evidence, while the checked Segre/Igusa automorphic models use \(A_2\)- and type-IV lattices rather than an explicit common \(E_8\) lift | C705 common-\(E_8\) shadow-source mining subtask; require a simultaneous branching and parent contraction, or record the first obstruction and nearest \(E_6/A_2/S_6\) repair |
 | Marked equality with C695's double-six | untouched by design | future WP2 |
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
@@ -358,6 +404,25 @@ novelty or priority claim.
   `0595df2ed7631ba366b1603aca9a924ef08cb93cdc84b906f2877b68c777e9be`;
   §§2, 3.10, and 6.8 were read.  It records the ten nodes, fifteen planes,
   birational dual map, and automorphic realization.
+- Han-Bom Moon, *Mori's program for \(\overline M_{0,6}\) with symmetric
+  divisors*, arXiv:1403.7224 — `targeted full text`, introduction,
+  Theorem 5.2, and Remarks 5.3--5.5.  It identifies the Segre and Igusa
+  varieties as the two symmetric Mori models, specifies their complementary
+  contracted boundaries, and asks for a concrete description of the dual
+  map through \(\overline M_{0,6}\).
+- Nolan Schock, *The \(W(E_6)\)-invariant birational geometry of the
+  moduli space of marked cubic surfaces*, arXiv:2309.15264v2 —
+  `targeted full text`, introduction, Theorem 3.6, and Remark 3.7; cached
+  PDF SHA-256
+  `67c1f52c6df71abfb0a537aa55111929d05f812180070e891121d37440c896e5`.
+  It realizes both contractions as restrictions of two
+  \(W(E_6)\)-equivariant contractions to an
+  \(A_1\cong\overline M_{0,6}\) boundary divisor.
+
+The wider situational sweep, including the Coble,
+homological-projective-duality, Jacobian-dual, and \(E_8\) search
+branches, is recorded in
+`notes/2026-07-30-c705-shadow-sisters-literature-map.md`.
 
 Four exact web searches screened titles and snippets for
 `"Segre cubic" Jacobian adjugate Igusa quartic`,
