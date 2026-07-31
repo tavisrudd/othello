@@ -1,7 +1,9 @@
 # C729 — conference-cut moments and weighted-operator audit
 
-**Date:** 2026-07-31  
-**Lane:** `golden`  
+**Date:** 2026-07-31
+
+**Lane:** `golden`
+
 **Status:** higher-order moment, next-order census, stability, and focused
 literature gates passed
 
