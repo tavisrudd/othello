@@ -74,7 +74,8 @@ particular:
   orbit-incidence descent proof, and proves that the \(A_6\)-orbit completes
   one recovered class to the coherent outer six-family.
 - The cross-paper theorem descends every projective/even Golden shadow from
-  the monomial Clebsch code class.  One support-half bit is minimal for
+  the unordered support two-graph, the exact minimal quotient of the
+  monomial Clebsch code class.  One support-half bit is then minimal for
   signed odd shadows, while golden conjugation independently exchanges the
   paired cross-golden resolutions and rank-one MCM summands.
 - The unlabelled deep-hole conic is sharply insufficient: its
@@ -83,8 +84,9 @@ particular:
   determinant sextic and dimer fingerprint close the reverse cycle exactly
   at the unoriented two-graph level.
 - Centered squaring is projectively birational away from the Igusa singular
-  locus; over its fifteen singular lines the nonzero fibres are smooth
-  conics, degenerating to six-line fibres at the fifteen triple-line points.
+  locus.  On the resolved Gauss map, its fifteen singular lines have fibres
+  given by strict transforms of conics through four Segre base nodes; these
+  degenerate to six-line fibre closures at the fifteen triple-line points.
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is

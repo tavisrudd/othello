@@ -9,9 +9,12 @@
 The Paper I composite is true after one exact correction to the provisional
 framing.  The unlabelled projective deep-hole locus is the twelve-point conic
 and does not canonically remember a Clebsch parent.  The coarsest Paper I
-object that does remember the Golden source is the **monomial Clebsch code
-class**, equivalently the conic together with a selected geometric Clebsch
-parent, or \(A_5\)-reduction.  Its unordered (10+10) split of the
+object that does remember the Golden source in Paper I's frozen hierarchy is
+the **monomial Clebsch code class**, equivalently the conic together with a
+selected geometric Clebsch parent, or \(A_5\)-reduction.  The exact minimal
+object consumed by the Golden theorem is its quotient: the unordered
+\(10+10\) support two-graph.  Either operational marking supplies that
+quotient.  Its split of the
 three-coordinate supports is already a regular two-graph.  Either half
 recovers a symmetric conference matrix \(C\), uniquely up to diagonal
 switching, and the other half recovers \(-C\).  Thus the code class canonically
@@ -54,7 +57,7 @@ different markings.
 | unlabelled projective deep-hole locus | the full rational conic | insufficient: no preferred parent, secant matching, coordinate six-set, or orientation |
 | conic with scalar decoder multiplicities | the ten Brianchon directions are distinguished | insufficient under the frozen theorem: scalar counts do not identify the six support labels or an \(A_5\)-reduction |
 | decoder with its nearest-error supports | the ten outside matchings and the unique synthematic total | sufficient because retaining the six support labels is the monomial code marking in operational form |
-| monomial Clebsch code class | the coordinate six-set, \(A_5\) stabilizer, and unordered (10+10) support split | coarsest proved sufficient source |
+| monomial Clebsch code class | the coordinate six-set, \(A_5\) stabilizer, and unordered (10+10) support split | coarsest Paper I hierarchy level proved sufficient; its support two-graph is the exact minimal Golden input |
 | marked twelve-point factorization cover | unordered (11+11) sheets; a signed cubic chooses a sheet; a singleton chooses a decorated row | transverse, not sufficient by itself: Paper I explicitly proves no row-to-geometric-parent bridge |
 | chosen half of the support split | an oriented regular two-graph | recovers \(C\) rather than only \(\{C,-C\}\) |
 | chosen switching gauges and determinant-line/golden marks | literal matrices and signed cross blocks | fully marked C720 input |
@@ -244,19 +247,21 @@ and let
 \]
 
 The base locus consists of the ten Segre nodes, represented by the \(3+3\)
-sign vectors.  Away from them, the fibres are as follows.
+sign vectors.  Let \(\widetilde\pi:\widetilde S\to I\) be the closure of
+the graph of the rational polar map.  Away from the base locus, and on this
+resolved map when stated explicitly, the fibres are as follows.
 
 ### Theorem 2 (polar-fibre classification)
 
-1. If \(w\) is a smooth point of the Igusa quartic, \(\pi^{-1}(w)\) is one
-   reduced projective point.
+1. If \(w\) is a smooth point of the Igusa quartic,
+   \(\widetilde\pi^{-1}(w)\) is one reduced projective point.
 2. The singular locus of the Igusa quartic is the union of fifteen lines
    \(L_M\), indexed by perfect matchings
    \(M=ij|kl|mn\).  A point of \(L_M\) has coordinates
    \((\alpha,\alpha,\beta,\beta,\gamma,\gamma)\), after reordering, with
    \(\alpha+\beta+\gamma=0\).
-3. If \(w\in L_M\) lies on no other singular line, its fibre is the smooth
-   conic in the Segre plane
+3. If \(w\in L_M\) lies on no other singular line, its resolved fibre is
+   the strict transform of the smooth conic in the Segre plane
    \(\Pi_M=\{z_i+z_j=z_k+z_l=z_m+z_n=0\}\) given, in coordinates
    \((a,-a,b,-b,c,-c)\), by
 
@@ -264,11 +269,15 @@ sign vectors.  Away from them, the fibres are as follows.
    (\beta-\gamma)a^2-(\alpha-\gamma)b^2
       +(\alpha-\beta)c^2=0.
    \]
+   The conic contains the four Segre nodes in that plane.  Thus the fibre
+   in the original rational domain is this conic with its four base points
+   removed.
 4. The fifteen intersection points of the singular lines have four equal
    coordinates and two equal coordinates.  Three singular lines pass
-   through each.  The fibre there is the union of six projective lines; it
-   is the union of the two components of the three degenerate conics from
-   (3).
+   through each.  The fibre closure there is the union of six projective
+   lines; it is the union of the two components of the three degenerate
+   conics from (3).  The resolved fibre is the union of their strict
+   transforms.
 
 #### Proof
 
@@ -285,6 +294,9 @@ opposite.  Thus \(z=(a,-a,b,-b,c,-c)\).  The condition
 \([\operatorname{center}(a^2,b^2,c^2)]=[\alpha,\beta,\gamma]\) is exactly the
 displayed conic.  Its three diagonal coefficients are nonzero away from
 \(\alpha=\beta\), \(\beta=\gamma\), or \(\gamma=\alpha\), so it is smooth.
+The equality \(a^2=b^2=c^2\) gives its four \(3+3\)-sign points.  They are
+exactly the four Segre nodes in \(\Pi_M\), where the original rational map
+is undefined; graph closure replaces them by points on the strict transform.
 
 At, say, \(w=(1,1,1,1,-2,-2)\), the first four \(z_i\) have a common square
 and the last two have a common square.  The linear and cubic equations force
@@ -299,7 +311,8 @@ already been quotiented.  On a signed affine lift, centered squaring has the
 unavoidable pair \(z,-z\).  At \(W=0\), twenty oriented \(3+3\) sign vectors
 pair into the ten projective base points.  Thus the polar output is generically
 faithful only after passing to projective orientation classes, and its exact
-exceptional loss is the fifteen-plane contraction above.
+exceptional loss is the contraction of the strict transforms of the fifteen
+Segre planes.
 
 ## Minimal-marking obstruction
 
@@ -323,8 +336,9 @@ This proves sharpness in the frozen cross-paper category:
   produce the six-axis augmentation space on which the Golden operator acts;
 - a factorization-sheet orientation is not a substitute for a support-half
   orientation;
-- selecting a geometric Clebsch parent, equivalently retaining the monomial
-  code class/support-labelled decoder, is sufficient;
+- the exact minimal source is the unordered support two-graph; selecting a
+  geometric Clebsch parent, retaining the monomial code class, or retaining
+  a support-labelled decoder is sufficient because each supplies it;
 - after that selection, the only further bit needed for signed odd shadows is
   a choice of one support half, and even/projective shadows need no such bit.
 
@@ -399,8 +413,9 @@ covered; this licenses no global negative priority verdict.
 The Golden paper may state the following corollary after its abstract marked
 propagation theorem.
 
-> **Recovery--propagation and minimal-marking corollary.**  A monomial
-> Clebsch code class canonically determines the unoriented switching line of
+> **Recovery--propagation and minimal-marking corollary.**  The unordered
+> support two-graph of a monomial Clebsch code class is the exact minimal
+> source and canonically determines the unoriented switching line of
 > a golden conference operator and its coherent outer six-family modulo
 > common reversal and diagonal gauge.  Hence every projective or even shadow
 > in the Golden propagation theorem descends to that code class.  Choosing
@@ -409,8 +424,8 @@ propagation theorem.
 > bit selecting one cross-golden resolution or rank-one MCM summand.  The
 > determinant sextic and relative dimer fingerprint each recover the
 > unoriented switching line.  The unlabelled deep-hole conic alone does not
-> determine this input-relative family: a geometric Clebsch parent, or
-> equivalent monomial marking, is necessary.
+> determine this input-relative family: an \(A_5\)-reduction supplying the
+> support two-graph is necessary.
 
 No Clebsch manuscript edit is authorized.  After a stable Golden preprint,
 Paper I may receive a separate conclusion-level pointer to the identity
@@ -427,11 +442,14 @@ Paper I may receive a separate conclusion-level pointer to the identity
 - **Settled by the reverse audit:** determinant and dimer shadows split the
   recovery map exactly at the unoriented two-graph level, not at the full
   conic-code level.
-- **Settled by the polar audit:** the nonzero information loss is precisely
-  the contraction of fifteen Segre planes to fifteen Igusa singular lines;
-  generic exceptional fibres are conics and the fifteen triple-line points
-  have six-line fibres.
-- **Settled by the minimality audit:** the factorization orientation and the
+- **Settled by the polar audit and sharpened by tt:** the nonzero
+  information loss is precisely the contraction of the strict transforms of
+  fifteen Segre planes to fifteen Igusa singular lines.  Generic exceptional
+  fibres are strict transforms of conics through four base nodes, and the
+  fifteen triple-line points have six-line fibre closures.
+- **Settled by the minimality audit and sharpened by tt:** the exact
+  minimal source is the unordered support two-graph, a quotient of the
+  monomial code class.  The factorization orientation and the
   support-two-graph orientation are distinct torsors.  The former does not
   instantiate the Golden theorem without a row-to-parent bridge.
 - **Open outside C727:** construct, or prove impossible, a canonical bridge

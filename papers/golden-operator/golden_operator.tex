@@ -52,8 +52,9 @@ For the Clebsch code, the invariant (10+10) split of coordinate triples
 is a regular two-graph and recovers the conference switching line.  This
 gives a recovery--propagation theorem from the monomial code class and a
 sharp marking boundary: the bare twelve-point deep-hole conic does not
-select a Clebsch parent, while a choice of one support half is the minimal
-extra bit for signed odd shadows.
+select the support two-graph.  That unordered two-graph is the exact
+minimal source, while a choice of one half is the extra bit for signed odd
+shadows.
 We also identify the precise Clifford, exceptional-group, bad-prime, and
 \(E_8\)-lattice boundaries of the construction.
 \end{abstract}
@@ -236,8 +237,13 @@ diagonal switching, and permutation.  Consequently:
   two-graph level.
 \end{enumerate}
 The unlabelled projective deep-hole conic alone does not canonically
-determine this input-relative family.  A geometric Clebsch parent, or the
-equivalent monomial code marking, is necessary.
+determine this input-relative family.  The exact minimal source is the
+unordered support two-graph
+\[
+ (X,\{\mathcal O_+,\mathcal O_-\}).
+\]
+A geometric Clebsch parent, a monomial code marking, or a support-labelled
+decoder is sufficient because each supplies that quotient object.
 \end{theorem}
 
 \begin{proof}
@@ -263,10 +269,10 @@ For minimality, the bare locus is the full rational conic.  Its
 \(\mathrm{PGL}_2(11)\)-action is transitive on the
 \([\mathrm{PGL}_2(11):A_5]=22\) Clebsch matching rows, so no equivariant
 rule selects a parent.  A factorization-sheet orientation does not repair
-this: it selects a decorated row, whereas identifying that row with a
-geometric parent is additional data.  Once the monomial parent is retained,
-the \(S_5/A_5\cong C_2\) support-half choice is both sufficient and, for a
-signed odd shadow, unavoidable.
+this: it selects a decorated row, whereas identifying that row with the
+support two-graph is an additional bridge.  Once the unordered support
+two-graph is retained, the \(S_5/A_5\cong C_2\) support-half choice is both
+sufficient and, for a signed odd shadow, unavoidable.
 \end{proof}
 
 The centered-square shadow has one further, geometric information-loss
@@ -279,20 +285,25 @@ stratum.  Over an algebraically closed field of characteristic zero, let
 
 \begin{proposition}[Fibres of centered squaring]
 \label{prop:polar-fibres}
-The base locus of \(\pi\) is the set of ten nodes of \(S\).  Over a smooth
-point of the Igusa quartic the fibre is one reduced point.  Its singular
-locus is the union of fifteen lines \(L_M\), indexed by matchings
+The base locus of \(\pi\) is the set of ten nodes of \(S\).  Let
+\(\widetilde\pi:\widetilde S\to I\) be the closure of its graph, equivalently
+the resolved Gauss map to the Igusa quartic.  Over a smooth point of \(I\)
+the fibre is one reduced point.  The singular locus of \(I\) is the union
+of fifteen lines \(L_M\), indexed by matchings
 \(M=ij|kl|mn\).  Write a point of \(L_M\), after reordering, as
 \((\alpha,\alpha,\beta,\beta,\gamma,\gamma)\) with
 \(\alpha+\beta+\gamma=0\).  Away from the intersections of the singular
-lines, its fibre is the smooth conic
+lines, the resolved fibre is the strict transform of the smooth conic
 \[
  (\beta-\gamma)a^2-(\alpha-\gamma)b^2
       +(\alpha-\beta)c^2=0
 \]
 in the Segre plane
-\((a,-a,b,-b,c,-c)\).  At each of the fifteen points where three singular
-lines meet, the fibre is a union of six projective lines.
+\((a,-a,b,-b,c,-c)\).  This conic passes through the four Segre nodes in
+that plane; the fibre in the original rational domain is the conic with
+those four base points removed.  At each of the fifteen points where three
+singular lines meet, the fibre closure is a union of six projective lines,
+and the resolved fibre is the union of their strict transforms.
 \end{proposition}
 
 \begin{proof}
@@ -308,6 +319,10 @@ cubic Segre equations force opposite signs in every pair, so
 \(z=(a,-a,b,-b,c,-c)\).  Equality of the centered-square projective
 coordinates is exactly the displayed conic.  Its three coefficients are
 nonzero precisely away from the three intersection points on \(L_M\).
+Putting \(a^2=b^2=c^2\) shows that it contains exactly the four
+\(3+3\)-sign nodes of the Segre plane.  These are base points of \(\pi\),
+so resolution replaces them by the corresponding points of the strict
+transform.
 At, for example, \(w=(1,1,1,1,-2,-2)\), the first four \(z_i\) have one
 common square and the last two another.  The Segre equations force two
 plus and two minus signs among the first four and opposite signs in the
@@ -318,8 +333,8 @@ first four indices give the three reducible conics through them.
 
 Thus centered squaring is generically faithful on projective orientation
 classes.  Its nonzero information loss is exactly the contraction of the
-fifteen Segre planes.  On a signed affine lift it also forgets the unavoidable
-common sign \(z\leftrightarrow-z\).
+strict transforms of the fifteen Segre planes.  On a signed affine lift it
+also forgets the unavoidable common sign \(z\leftrightarrow-z\).
 
 \section{Organization}
 
