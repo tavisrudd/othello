@@ -1781,8 +1781,17 @@
       "last": 730,
       "purpose": "strengthen Paper III around the canonical arithmetic-harmonic golden orientation source theorem",
       "sequence": 198
+    },
+    {
+      "count": 2,
+      "first": 731,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 732,
+      "purpose": "red-team Clebsch AME syndrome bridge and queue publication adoption",
+      "sequence": 199
     }
   ],
-  "next_id": 731,
+  "next_id": 733,
   "schema": "codex-task-id-allocations-v1"
 }
