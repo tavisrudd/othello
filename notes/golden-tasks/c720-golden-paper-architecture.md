@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued; lane entry task
+**Status:** active; lane entry task; leading connection discriminators complete
 
 ## Objective
 
@@ -43,14 +43,14 @@ commuting theorem rather than a list of formula coincidences.
 5. Run a claim-family novelty audit before fixing title/abstract language;
    distinguish classical Segre/Igusa and outer-automorphism geometry from
    the new golden operator synthesis.
-   Before freezing the explanatory hierarchy, run the two bounded
-   mechanism tests in
-   [the unexpected-connection frontier](../2026-07-31-c720-unexpected-connection-frontier.md):
-   determine whether the six Joubert outputs are a projection/elimination of
-   pure-spinor Wick relations, and whether the signed \(K_{3,3}\)
-   matching-frustration class is the golden two-graph class.  Treat the
-   genus-two theta lift as the next discriminator and keep weaker ambient
-   analogies out of the theorem spine.
+   The two leading mechanism tests are complete in
+   [the spinor/dimer report](../2026-07-31-c720-spinor-dimer-tests.md).
+   Wick identities alone do not force the Segre equations; retain only the
+   exact synchronized-product statement.  Promote the positive theorem that
+   universal \(5{:}1\) matching frustration on the ten signed \(K_{3,3}\)
+   cuts is equivalent to \(B^2=5I\), with its six projective fingerprints,
+   into the fermionic spine.  Treat the genus-two theta lift as the next
+   discriminator and keep weaker ambient analogies out of the theorem spine.
 6. Specify Lean and exact-computation boundaries.  No finite certificate may
    carry the conceptual theorem spine.
 7. Produce a section-level manuscript plan, target length, provisional
@@ -76,7 +76,9 @@ commuting theorem rather than a list of formula coincidences.
    splitting boundaries, doily exchange, and bad-prime separation.
 4. **Fermionic shadows:** real ETFs and Naimark instruments,
    Slater-determinant amplitudes, Majorana Pfaffians, balanced-layer outer
-   transform, and anomaly charges.
+   transform, the all-cut \(K_{3,3}\) frustration characterization and its
+   six projective fingerprints, the synchronized pure-spinor product, and
+   anomaly charges.
 5. **Lattice boundary and repair:** the E8--Hamming noncompatibility theorem
    and the exact \(II_{10,10}\) hyperbolic replacement.
 6. **Strengthenings:** C715--C719 results admitted only after their theorem

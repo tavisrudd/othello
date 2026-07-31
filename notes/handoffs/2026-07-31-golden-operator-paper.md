@@ -39,6 +39,11 @@ Paper III remains unchanged and ends before it.  In particular:
   bad-prime refinements;
 - the E8--Hamming compatibility fails exactly and is repaired by the
   hyperbolic \(II_{10,10}\) lattice.
+- C720's leading connection tests are resolved: the six Majorana matrices
+  form a synchronized product of pure-spinor cells rather than one Wick
+  parent, while universal maximum-determinant \(K_{3,3}\) frustration is
+  equivalent to \(B^2=5I\) and yields exactly the six
+  \(A_5/D_5\) shadow fingerprints.
 
 No manuscript root has yet been created.  C720 owns the architecture and
 the go/no-go gate for `papers/golden-operator/`.
@@ -47,7 +52,7 @@ the go/no-go gate for `papers/golden-operator/`.
 
 | task | state | next gate |
 |---|---|---|
-| [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | queued; lane entry task | freeze the central commuting theorem, section plan, novelty boundary, and strict independence from review-facing Paper III |
+| [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | active; connection discriminators complete | freeze the central commuting theorem, section plan, novelty boundary, and strict independence from review-facing Paper III |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |

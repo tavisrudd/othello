@@ -4,33 +4,25 @@
 
 **Search date:** 2026-07-31
 
-**Status:** bounded literature sweep and discriminator plan; no novelty claim
+**Status:** bounded literature sweep; leading discriminators completed
 
 ## Verdict
 
-The strongest untested connection is not another isolated appearance of the
-Segre cubic.  It is a possible **pure-spinor / matchgate parent** for the whole
-fermionic side of the golden operator.  The C709 skew matrices already give
-Pfaffians; adjoining all principal Pfaffians turns each one into the standard
-coordinate package of a fermionic Gaussian tensor.  Its quadratic identities
-are simultaneously Wick relations, matchgate identities, and the equations of
-a spinor variety.  If the six Joubert Pfaffians and their Segre relation arise
-as a distinguished golden linear or nonlinear projection of this package,
-then the Slater and Majorana shadows would acquire one conceptual parent rather
-than two parallel physical interpretations.
+The leading tests are now resolved in
+`notes/2026-07-31-c720-spinor-dimer-tests.md`.  The naive pure-spinor parent
+fails: Wick identities alone do not constrain six independent top Pfaffians.
+The correct positive object is a synchronized five-parameter slice of a
+product of six pure-spinor/matchgate cells.
 
-The second connection is more elementary and potentially just as explanatory.
-The balanced C709 commutator has support on a signed \(K_{3,3}\), while
-\(K_{3,3}\) is the minimal bipartite graph with no Pfaffian orientation.
-Consequently its six perfect-matching monomials cannot all be made to carry the
-same Pfaffian sign by edge switching.  The surviving golden two-graph may be
-exactly the gauge-invariant frustration class left by this obstruction.  This
-would explain why the cubic sign is physical in the Majorana model rather than
-a removable matrix convention.
+The \(K_{3,3}\) connection passes in a stronger form.  On all ten balanced
+cuts, a \(5{:}1\) matching-sign split is equivalent to \(B^2=5I\).  Relative
+matching signs recover exactly the unoriented two-graph line, and the twelve
+normalized oriented conference signings pair into the six golden shadow
+classes.
 
-These are mechanism-level conjectures.  The sweep found the surrounding
-theories but no source identifying either one with the real golden conference
-family.
+The bounded sweep found the surrounding theories but no source identifying
+this all-cut frustration characterization with the real golden conference
+family.  This remains a novelty-audit boundary, not a priority claim.
 
 ## Ranked frontier
 

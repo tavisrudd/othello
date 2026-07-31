@@ -82,7 +82,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C720 `[golden]` [QUEUED; LANE ENTRY TASK]** — integrate the complete C704--C710 post-700 portfolio into the standalone *Golden conference operator and its shadow sisters* paper architecture, with a central commuting theorem, complete result-placement map, novelty boundary, proof/trust plan, and strict independence from review-facing Clebsch Paper III → `notes/golden-tasks/c720-golden-paper-architecture.md`.
+- **C720 `[golden]` [ACTIVE; LANE ENTRY TASK]** — integrate the complete C704--C710 post-700 portfolio into the standalone *Golden conference operator and its shadow sisters* paper architecture, with a central commuting theorem, complete result-placement map, novelty boundary, proof/trust plan, and strict independence from review-facing Clebsch Paper III → `notes/golden-tasks/c720-golden-paper-architecture.md`.
 - **C715 `[golden]` [QUEUED AFTER C720]** — invert the golden anomaly transducer on rational Segre points, classify exceptional/chiral/vectorlike loci, and optimize physical normalization and postselection cost → `notes/golden-tasks/c715-golden-anomaly-inverse.md`.
 - **C716 `[golden]` [QUEUED AFTER C715]** — synthesize the 15 nonchiral and six chiral Fano components of two-\(U(1)\), six-Weyl anomaly lines as golden control families and identify the mixed Pfaffian identities → `notes/golden-tasks/c716-golden-two-u1-lines.md`.
 - **C717 `[golden]` [QUEUED AFTER C720; INDEPENDENT OF C715]** — classify the six golden Majorana Pfaffian walls, real parity chambers, simultaneous gap closings, and any genuine monodromy or parity-pump obstruction → `notes/golden-tasks/c717-golden-majorana-parity-chambers.md`.

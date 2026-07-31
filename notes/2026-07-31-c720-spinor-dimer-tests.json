@@ -1,0 +1,59 @@
+{
+  "K3_3_frustration_test": {
+    "all_cut_5_to_1_signings": 12,
+    "conditions_equivalent_on_complete_domain": true,
+    "conference_signings_B2_eq_5I": 12,
+    "gauge_normalized_K6_signings_checked": 1024,
+    "maximum_absolute_3_by_3_sign_determinant": 4,
+    "orientation_loss": "C and -C have the same relative matching fingerprint",
+    "outer_golden_family_exhausts_them": true,
+    "recovered_object": "the switching class of the unoriented two-graph line {+c,-c}",
+    "relative_matching_fingerprints": 512,
+    "signings_per_unoriented_fingerprint": [
+      2
+    ],
+    "sylow_5_subgroups_of_A5": 6,
+    "unoriented_golden_fingerprints": 6
+  },
+  "conventions": {
+    "cuts": "the ten 3|3 cuts represented by left sets containing vertex 0",
+    "gauge": "B_0i=1 for i=1,...,5",
+    "matching_sign": "permutation parity times the three cross-edge signs",
+    "orientation_quotient": "relative signs normalized by the first matching term",
+    "vertices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "pure_spinor_test": {
+    "counterexample_top_coordinates": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "number_of_synchronized_pure_spinors": 6,
+    "positive_replacement": "the golden family is a synchronized 5-parameter linear slice of a product of six pure-spinor/matchgate big cells",
+    "principal_pfaffian_coordinates_each": [
+      32
+    ],
+    "segre_cubic_relation_exact": true,
+    "segre_linear_relation_exact": true,
+    "top_pfaffian_normalization": "Pf([D_x,C_T]) = 4 Z_T(x)",
+    "top_pfaffian_polynomial_rank": 5,
+    "wick_alone_implies_segre": false
+  },
+  "schema": "c720-spinor-dimer-tests-v1",
+  "verdict": {
+    "dimer_characterization": "every balanced cross block is maximum-determinant iff B is a golden conference signing",
+    "naive_single_spinor_parent": "fails",
+    "six_shadow_explanation": "the 12 oriented conference signings pair under B -> -B into exactly six relative-matching fingerprints",
+    "synchronized_product_of_six_spinors": "passes exactly"
+  }
+}
