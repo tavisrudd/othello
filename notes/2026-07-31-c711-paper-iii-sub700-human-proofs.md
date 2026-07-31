@@ -294,6 +294,9 @@ not a fitted coefficient.
 The reduction \(K\bmod2\) reconstructs equality, intersection one,
 intersection two, and complementation on the twenty triples.  It therefore
 recovers the six-axis carrier up to permutation and complement duality.
+After choosing one of the two dual atom reconstructions and an orientation,
+the full integral operator \(K\) recovers \(C\), with orientation reversal
+corresponding to \(C\mapsto-C\).
 
 **Proof.**  Modulo \(2\), the conference matrix has zero diagonal and every
 off-diagonal entry equal to one.  From the compound-matrix definition and the
@@ -335,14 +338,30 @@ The two families have fifteen members and complementation exchanges them.
 Choose either family and join two of its four-cliques when they share a
 triple.  This is the intersection graph of the two-subsets of a six-set; its
 six maximum five-cliques recover the points.  Choosing the other family
-applies complement duality.  \(\square\)
+applies complement duality.
+
+Choose one recovered atom family and orient its six-dimensional permutation
+lattice.  The complement involution and the orientation recover the Hodge
+operator, including its signs.  The defining equation for \(K\) then gives
+\[
+ \Lambda^3C=-*K.
+\]
+The kernel of the exterior-cube representation
+\(\Lambda^3:\operatorname{GL}_6\to\operatorname{GL}_{20}\) is the scalar
+group \(\mu_3\).  Over \(\mathbf Q\), its only rational point is \(1\);
+hence \(\Lambda^3C\) determines \(C\) uniquely.  Reversing the recovered
+orientation negates \(*\), and therefore negates \(\Lambda^3C\); this is
+exactly the replacement \(C\mapsto-C\).  The other atom family is the
+expected complement duality.  \(\square\)
 
 **Tao-style check after Lemma 5.**  The theorem is lattice-theoretic.  The
 rational conjugacy class of \(K\) records only two ten-dimensional eigenspaces
 and cannot distinguish twenty support vectors.  Modulo \(2\), however, signs
 disappear while the zero pattern of compound minors becomes the Johnson
-scheme.  Prime \(2\) is therefore both the reconstruction device and the place
-where cubic orientation itself collapses.
+scheme.  Once that lattice data restores the Hodge operator, the full return
+restores \(C\), not only its cubic diagonal.  Prime \(2\) is therefore both
+the reconstruction device and the place where cubic orientation itself
+collapses.
 
 ## 6. Human derivation of the degree-ten return
 
@@ -593,7 +612,9 @@ qualification.
 > \qquad K_{SS}=4C_{ij}C_{jk}C_{ki}.
 > \]
 > The parity of \(K\) reconstructs the Johnson support scheme and hence makes
-> its diagonal intrinsic on the distinguished integral support lattice.  The
+> its diagonal intrinsic on the distinguished integral support lattice.
+> Choosing one of the two dual atom reconstructions and an orientation then
+> recovers \(C\) itself from \(\Lambda^3C=-*K\).  The
 > degree-ten Klein return is
 > \[
 > 211625906798592000(11+18t)(\sqrt5I-C),
@@ -651,12 +672,16 @@ Theorem statements:
 | `middleExterior_diag` | explicit normalization | \(K_{SS}=4c_S\) |
 | `middleExterior_parity` | distinguished triple lattice | odd iff intersection one |
 | `support_reconstruct` | the parity relation | Johnson scheme up to complement |
+| `middleExterior_recovers_conference` | recovered atoms and orientation over \(\mathbf Q\) | \(-*K=\Lambda^3C\) determines \(C\) |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
 The large transvectant scalar should enter C712 as a proved interface constant
 only if C712 formalizes binary forms and the Fischer adjoint.  Otherwise C712
 should formalize the operator-shadow package from the explicit \(C\) and state
 the degree-ten return theorem as paper-proved, outside its trust claim.
+Likewise, `middleExterior_recovers_conference` is a cheap optional corollary:
+C712 may prove the general \(\mu_3\)-kernel lemma, or retain only the explicit
+identity \(-*K=\Lambda^3C\) and leave rational faithfulness paper-proved.
 
 ## Claim-to-lemma map
 
@@ -693,13 +718,15 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces three cheap upgrades beyond certificate removal.
+The proof pass produces four cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
 sign that a formal proof must carry.  Third, equivariance plus one eigenvector
 norm derives the degree-ten scalar, replacing a restricted-matrix comparison
-by a one-dimensional calculation.
+by a one-dimensional calculation.  Fourth, parity reconstruction restores the
+Hodge operator, so the full middle-exterior return recovers the conference
+operator through the faithful rational exterior cube.
 
 The strongest invariant formulation is now clear.  The actual object is the
 oriented integral pair \((\Lambda^3V,K)\), not the spectrum of \(K\).  Its
@@ -721,7 +748,8 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   dihedral transitivity, and complementation.
 - **Whether the diagonal is intrinsic:** settled precisely on the distinguished
   integral support lattice via \(K\bmod2\); a bare rational conjugacy class is
-  insufficient.
+  insufficient.  With a dual atom choice and orientation, the full \(K\)
+  recovers \(C\) itself through the faithful rational exterior cube.
 - **Why the return scalar has its form:** settled by a single Fischer norm.
   The rational factor comes from the raw derivative normalization and the
   golden factor is \(st^6\).

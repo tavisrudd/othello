@@ -136,7 +136,9 @@ Johnson support lattice; and one Fischer eigenvector norm derives the exact
 degree-ten return scalar.  Restriction of scalars gives the rational paired-
 tower descent and its index-four integral comparison.  The C680 normalization,
 bad-prime boundary, claim map, and formalization-ready C712 interface are
-frozen.  Full report:
+frozen.  The closeout further shows that, after the expected duality and
+orientation choices, the full middle-exterior return reconstructs the
+conference operator through the faithful rational exterior cube.  Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
 ## Active and queued task cards
