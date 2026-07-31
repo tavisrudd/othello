@@ -104,6 +104,84 @@ This is an operational distinction, not a classical automorphism count.
 The fixed-party non-GRS group has order \(q^2(q-1)\), while the GRS
 group has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\).
 
+\begin{proposition}[Clebsch extremal \(X\)-syndrome conic]
+\label{prop:clebsch-x-syndrome}
+Let \(H\) be a parity-check matrix whose columns are the Clebsch six-arc
+in \(\PP^2(\F_{11})\), put \(C=\ker H\), and write
+\[
+ |\Psi_e\rangle=X(e)|\Psi_C\rangle,
+ \qquad
+ |\Psi_C\rangle=11^{-3/2}\sum_{c\in C}|c\rangle .
+\]
+Then \(|\Psi_e\rangle=|\Psi_f\rangle\) exactly when \(e-f\in C\), and
+states from distinct cosets are orthogonal.  The \(Z(C^\perp)\)-stabilizer
+syndrome of \(|\Psi_e\rangle\), in the row basis of \(H\), is
+\(He^{\mathsf T}\).
+
+The syndromes whose cosets have minimum \(X\)-support three are the 120
+nonzero vectors on twelve projective rays forming a nonsingular conic in
+\(\PP^2(\F_{11})\).  Each such syndrome has exactly one weight-three
+representative on each of the \(\binom63=20\) three-party supports.  The
+monomial automorphism group
+\(C_{10}\times A_5\) is transitive on the 120 syndromes: \(A_5\) is
+transitive on the twelve rays with point stabilizer \(C_5\), and
+\(C_{10}\) is transitive on the ten nonzero vectors of each ray.
+Nevertheless, the defining six-arc is nonconic, so the fixed-party
+logical symplectic image of every encoder view is the split torus \(T\),
+not \(\mathrm{SL}_2(11)\).
+\end{proposition}
+
+\begin{proof}
+Translation of the computational support gives
+\[
+ |\Psi_e\rangle=11^{-3/2}\sum_{x\in e+C}|x\rangle .
+\]
+Two such supports are equal or disjoint according as the cosets agree or
+differ, proving the first assertion.  Since
+\(C^\perp=\operatorname{row}(H)\), commutation with the three chosen
+\(Z\)-checks records the three coordinates of \(He^{\mathsf T}\).
+Consequently the least support of an \(X\)-operator producing
+\(|\Psi_e\rangle\) is the coset-leader weight of \(e+C\).  For every
+three-set \(I\) of parties, the arc condition makes the \(3\)-by-\(3\)
+submatrix \(H_I\) invertible.  Hence each syndrome has a unique
+representative supported in \(I\); for a covering-radius syndrome all three
+coordinates are nonzero.  This proves the one-per-support assertion.
+
+The Clebsch deep-hole theorem identifies the covering radius as three and
+the twelve projective maximum-distance syndromes with a nonsingular conic;
+it also gives the transitive \(C_{10}\times A_5\) action
+\cite[Proposition~6.2, Corollary~6.3, and Proposition~6.4]{RuddClebsch2026}.
+Finally, the Clebsch arc is non-GRS and
+hence nonconic.  The last assertion is therefore
+Theorem~\ref{thm:logical-phase} at \(q=11\).
+\end{proof}
+
+\begin{remark}[Error symmetry without fixed-party duality]
+\label{rem:clebsch-x-syndrome-boundary}
+The one-per-support statement means that the same extremal translated state
+can be created by a minimum \(X\)-operator on either side of every balanced
+\(3\mid3\) cut.
+The conic belongs to the \(X\)-error syndrome plane; it does not put the
+six parity-check columns on a conic.  Thus the extremal \(X\)-error shell
+has icosahedral covariance while the fixed-party transversal group has no
+Fourier block exchanging \(X\) and \(Z\).  This is a fixed-party statement,
+not an obstruction to every electric--magnetic exchange.  In the computed
+Clebsch row of Corollary~\ref{cor:computed-party-splitting}, the projective
+monomial quotient \(A_5\) sits inside the full party image \(S_5\); odd
+party motion inverts \(T\) and supplies the nontrivial class of
+\(N(T)/T\).
+
+Changing the row basis of \(H\) changes the displayed conic by a projective
+coordinate transformation.  Moreover, the covering radius here concerns
+only generalized-\(X\) translates of the six-leg AME state; it is not a
+claim that the associated \([[5,1,3]]_{11}\) output code corrects arbitrary
+weight-three errors.  The unlabelled conic also carries neither a chosen
+coordinate six-set nor the support orientation used by finer Clebsch
+constructions.  Theorem~\ref{thm:lu-lc-rigidity} supplies the separate exact
+rigidity statement: every product-unitary intertwiner from this tensor to a
+stabilizer AME tensor is Clifford factor by factor.
+\end{remark}
+
 The MDS property also makes minimum operator pushing uniform.  For any
 input party and nonidentity Pauli label, each of the ten four-sets
 containing that party gives a unique stabilizer representative supported

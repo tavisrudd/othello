@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 242214,
+        "bytes": 248207,
         "path": "ame-lu.pdf",
-        "sha256": "8537b1a2abc74f1cafc90c68aa89081b6fcc4b511b3d9d83c874043b96d93b23"
+        "sha256": "c857b9289dc43aa133284038cc9fa12a60315b826425176a05b135da19ed3d56"
       },
       {
         "bytes": 4104,
@@ -21,9 +21,9 @@
         "sha256": "d915ad48999029d97dfd1c551c61ac40af0c41ae17da2973911c9bcd9b62fe41"
       },
       {
-        "bytes": 12611,
+        "bytes": 12877,
         "path": "refs.bib",
-        "sha256": "70090e5aa9e9d84335bb10bfc5cc2a0b7061410f8febb849d64fd983fe0fe0cb"
+        "sha256": "5289cccf05fb3587a2c605a63e000eb9c554259d7d7268b77f1cdc9bfc8edf2e"
       },
       {
         "bytes": 7488,
@@ -51,9 +51,9 @@
         "sha256": "468d483de1b8f8a6d56c30baf4f3b2a90f9fcb5db4afe5de8c7802f36f15691d"
       },
       {
-        "bytes": 5557,
+        "bytes": 9532,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "8135627a5d8ec3c6cf64742b62be06d85206e4bd9e4e1ca40a67cb0b3ddbaa82"
+        "sha256": "a4a49bab608478493b463cbd9f499dad43d7ca2ce9e609c9294d30003f8cda4c"
       },
       {
         "bytes": 3359,
@@ -76,9 +76,9 @@
         "sha256": "a851e8f1a238d45f47b2e10c880df1795af3f611d21dadc8caf41bfc24c24bdb"
       },
       {
-        "bytes": 3936,
+        "bytes": 3990,
         "path": "sections/09-party-extensions.tex",
-        "sha256": "67f6a60d0902bf2de19fdf1a4d6147917a7f5d77e06a2f38ba8083a387d3c344"
+        "sha256": "73f18581b7fc3027f74c503f82fc368c6824bd32354606a305d8f76e8f768087"
       },
       {
         "bytes": 9171,
@@ -191,7 +191,7 @@
         "sha256": "b91ba7b352527fe5659a8f045ca22048eaa5f51e48fe04e7cf80465c91d97c4d"
       }
     ],
-    "tree_sha256": "d515799a51b3e2a3202155835d9468fc9f11eed1b5e9c9f8e8e9225838649b61"
+    "tree_sha256": "4fa7b49cdc982ae724eb2b4787c8e786c2d37d82bd3e289d938dde6f4c0482e9"
   },
   "formal_companion": {
     "artifacts": [

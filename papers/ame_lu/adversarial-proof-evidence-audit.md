@@ -17,6 +17,7 @@ specific proof location or evidence record.
 | Four-copy rank drop is mistaken for a complete coordinate | closed after Theorem A.1 | generic-constancy proposition and closing warning distinguish divisor from coordinate |
 | Computational evidence lacks a public replay | closed by C563 | `supplement/EVIDENCE.md`, manifest, exact generators/certificates, and `verify.py --replay` |
 | Classical six-point invariant theory, QMDS weights, operator pushing, or the axis mechanism is presented as new | closed by C562/C649 and Sections 1--4 | Rains--Van den Nest, Tan, Huber--Grassl, Ketkar et al., and Pastawski et al. are credited at theorem level; the contribution is the exact all-prime-power, all-\(m\), arbitrary-additive intertwiner scope, with no “first” claim |
+| The Clebsch syndrome conic is confused with a conic defining arc, full quantum decoding radius, full party symmetry, or a Golden/colloidal physical realization | closed in `prop:clebsch-x-syndrome` and its boundary remark | the manuscript separates the twelve-ray \(X\)-syndrome conic from the nonconic six-arc, restricts the radius statement to generalized-\(X\) translates, distinguishes the \(A_5\) monomial quotient from the computed \(S_5\) party image, and imports no Hamiltonian or marked-support operator claim |
 | The manuscript inherits report terminology without defining conventions | closed in Section 2 | projective, monomial, Weyl, Clifford, stabilizer, GRS, and party actions defined |
 
 ## C571 independent cold-read closures
