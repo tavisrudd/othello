@@ -6,6 +6,15 @@
 
 **Companion to:** notes/2026-07-30-c708-doily-codes-and-outer-exchange.md
 
+## Strategy
+
+Three notions of exchange must be separated.  The mixed operator gives an
+outer-twisted intertwiner between the two six-point actions.  An involutory
+polarity requires an inner normalization, governed by one twisted norm
+equation.  Signed incidence lifts belong to the Clifford problem of C706.
+The code tables are downstream invariants of the unsigned incidence
+geometry.
+
 ## 1. Why the operator is an outer exchange
 
 The six Clifford charts are indexed by synthematic totals, so their
@@ -160,24 +169,6 @@ zero hull and the descended operator remains rank four; only the golden
 eigenspace/sign lift ramifies.  The numerical comparison therefore proves
 three distinct mechanisms, not merely a failure to find a common code.
 
-This proves every C708 conclusion.  The finite enumeration supplies
-normal forms and weight tables after the outer-action, twisted-norm, and
-support arguments have reduced the problem to explicit finite objects.
-
-## Terry-Tao pass
-
-The order-eight exchange should not be treated as a failed involution.
-Its square is the datum \(h\) of a nonabelian descent problem, and equation
-\(k\alpha(k)=h^{-1}\) is the correct organizing object.  The counts
-\(36\) and \(6\) then come from the same stabilizer before and after
-restriction, rather than from two enumerations.
-
-The proof also separates three categories that numerical tables can blur:
-outer-twisted intertwiners, involutory polarities, and signed incidence
-lifts.  The operator proves the first, self-adjoint normalization gives the
-second, and C706 controls the third.  The code tables are downstream
-invariants and cannot explain a rank collapse much larger than their own.
-The nearest stronger result would identify the twisted norm fibre as a
-standard nonabelian cohomology set and derive the \(F_{20}\) stabilizer
-without enumeration; the present orbit--stabilizer proof already captures
-the structural content needed here.
+Finite enumeration supplies normal forms and weight tables only after the
+outer action, twisted norm, and support geometry reduce the problem to
+explicit finite objects.

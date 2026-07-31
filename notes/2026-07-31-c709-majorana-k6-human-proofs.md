@@ -6,6 +6,16 @@
 
 **Companion to:** notes/2026-07-30-c709-majorana-k6-lift.md
 
+## Strategy
+
+There are two different constructions.  A static signing of \(K_6\)
+reduces, by a spanning tree, to cycle flux; it carries no intrinsic
+intersection pairing.  The dynamic commutator \([D_x,C]\) is canonical:
+exterior algebra identifies its Pfaffian with the Joubert cubic, and its
+rank stratification identifies the six nodes with minimally coupled
+Hamiltonians.  Keeping these constructions separate explains the split
+verdict.
+
 ## 1. Pauli phases are forced
 
 Let \(M_{ij}=i\gamma_i\gamma_j\), with \(M_{ji}=-M_{ij}\).  Under the
@@ -93,7 +103,10 @@ the sixteen quadratic refinements.  Direct substitution in
  q_a(x,z)=x\cdot z+\langle a,(x,z)\rangle
 \]
 gives Hamming distance five for six \(a\)'s and distance nine for the
-other ten, as recorded in the report.
+other ten.  The six nearest refinements are
+\[
+ a\in\{1,3,5,6,10,11\}.
+\]
 
 More fundamentally, a Kasteleyn spin structure refines the intersection
 pairing supplied by an oriented surface embedding.  An abstract \(K_6\)
@@ -217,23 +230,6 @@ The identity \(C^2=5I\) makes this another Majorana frame, and
 \]
 Hence each node is one cross-golden dimer with four Majorana zero modes.
 
-## Terry-Tao pass
-
-The proof is governed by two canonical constructions: spanning-tree
-gauge reduction for the static signing and exterior algebra for the
-dynamic commutator.  This makes the split verdict inevitable.  Static
-cycle flux survives, but it has no intersection pairing; the commutator
-has the correct symmetry and its Pfaffian is automatically cubic.
-
-The pass replaces brute-force Pfaffian expansion by the complementary-
-triple wedge identity and keeps the \(720\)-order spectrum census honest
-by reducing it first to six stabilizer orbits.  It also exposes the
-stronger rank theorem: the six classical nodes are exactly the minimal
-rank Hamiltonians, not merely six checked degeneracies.  A possible next
-question is whether the rank-four kernel bundle over the smooth cubic has
-a direct fermionic topological interpretation; that requires additional
-geometry and is not implied by the present gauge data.
-
-Every C709 conclusion is now human-proved.  Exact computation remains only
-for the small phase table, six order representatives, and normalization
-checks after the structural reductions above.
+Exact computation remains only for the small phase table, six order
+representatives, and normalization checks after the structural reductions
+above.

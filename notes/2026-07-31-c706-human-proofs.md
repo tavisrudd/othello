@@ -6,6 +6,17 @@
 
 **Companion to:** notes/2026-07-30-c706-equivariant-clifford-lift.md
 
+## Strategy
+
+One cochain equation models every lift.  We solve it along
+\[
+ A_5\subset S_5\subset S_6
+\]
+and keep three questions separate: whether the Pauli-valued extension
+splits, whether the conference marking changes the splitting class, and
+whether a scalar projective multiplier remains.  The answers occur at
+three different levels of this chain.
+
 ## One finite model
 
 Let \(V=\mathbf F_2^4\) label Hermitian two-qubit Paulis.  A symplectic
@@ -140,28 +151,6 @@ is Pauli-valued and belongs to the conference marking; it is neither a
 Mermin contextuality class nor a Schur multiplier nor the field
 \(\mathbf Q(\sqrt5)\).
 
-This proves every C706 result.  The reported enumerations merely exhaust
-the affine solution spaces already reduced by (1)--(2); the obstruction,
-cocycle, subgroup boundary, and local-to-global mechanism are the human
-proof.
-
-## Terry-Tao pass
-
-The economical viewpoint is obstruction theory on the subgroup chain
-\[
- A_5\subset S_5\subset S_6,
-\]
-with equation (1) providing a concrete cochain model.  The full obstruction
-is detected by a five-row unsatisfiable core, while the finer conference
-invariant is a nonzero \(H^1\)-class.  Keeping \(H^2\), \(H^1\), and scalar
-phase separate prevents three superficially similar “sign obstructions”
-from being conflated.
-
-The pass exposed one hidden step in the local-chart argument: compatible
-splittings glue because every Coxeter relation is supported on at most four
-letters and hence is already visible in a chart overlap.  It also suggests
-an alternative derivation via restriction/inflation sequences, but that
-would obscure rather than shorten the explicit contradiction and the
-conference cocycle.  The remaining opportunity is a conceptual
-cohomological identification of the two nonextendable \(A_5\) classes;
-it is not needed for the exact boundary proved here.
+The finite enumerations exhaust affine solution spaces already reduced by
+(1)--(2); the five-row contradiction, conference cocycle, and subgroup
+chain carry the proof.

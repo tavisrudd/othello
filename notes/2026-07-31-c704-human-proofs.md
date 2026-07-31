@@ -6,16 +6,19 @@
 
 **Companion to:** notes/2026-07-30-c704-functorial-operator-shadows.md
 
-## Proof boundary
+## Strategy and classical inputs
 
 The outer \(S_6\) model of the Joubert coordinates, the Segre and Igusa
 equations, their projective duality, and the standard geometry of a
-\(3\times3\) determinantal cubic are classical inputs.  What is proved
-below is that the frozen conference return gives those objects with the
-claimed integral constants and that all later geometric and arithmetic
-conclusions follow from that presentation.  The finite lists in the
-report are certificates for explicitly bounded enumerations; they are not
-used as substitutes for the structural reductions.
+\(3\times3\) determinantal cubic are classical inputs.  The proof has
+three steps.  Exterior algebra extracts the triangle cubic and its
+Pfaffian from the conference matrix.  The classical Joubert line supplies
+the Segre relation after one normalization.  The golden eigenspace
+decomposition turns the same skew form into a determinant and matrix
+factorization; the small resolutions, MCM descent, and double-six then
+follow from that single presentation.  Finite certificates enter only for
+the six-axis MDS lemma, the bounded later-slice table, and the two Platonic
+transvectant ranks.
 
 ## 1. The conference return is the Joubert cubic
 
@@ -110,10 +113,11 @@ Let \(D_x=\operatorname{diag}(x_1,\dots,x_6)\).  Entrywise,
  [D_x,C]_{ij}=C_{ij}(x_i-x_j),
 \]
 so the commutator is precisely the skew form used in the report.  Its
-Pfaffian is a sum over the fifteen perfect matchings of \(K_6\).  Expand
-each product of three differences.  Terms with repeated variables cancel
-in pairs after reversing the alternating cycle; the surviving squarefree
-triple coefficient is \(K_{SS}\).  Therefore
+Pfaffian is the coefficient of the volume form in the third wedge power
+of the associated two-form.  Polarize this coefficient in the six
+diagonal entries of \(D_x\).  The coefficient of
+\(x_S=\prod_{i\in S}x_i\) is the signed complementary minor of \(C\),
+hence the diagonal Hodge coefficient \(K_{SS}\).  Therefore
 \[
  \operatorname{Pf}[D_x,C]
  =\sum_{|S|=3}K_{SS}x_S=4Z_T(x).
@@ -296,28 +300,5 @@ integrally.  At \(11\) and \(23\), none of these integral operator
 identities degenerates.  Their known defects lie in a different
 cross-Gram scalar map, so they do not create new Segre--Igusa fibres here.
 
-This proves every closed mathematical assertion in the C704 report.  The
-marked comparison with C695 and any classification of Platonic sisters
-remain explicitly outside the theorem.
-
-## Terry-Tao pass
-
-The proof becomes shorter once three layers are kept distinct:
-
-1. the exterior-algebra identity produces the triangle coefficients and
-   Pfaffian;
-2. the classical Joubert line supplies the Segre relation after one
-   normalization; and
-3. the golden eigenspace decomposition turns the same skew form into a
-   determinant and matrix factorization.
-
-This pass removed a weak attempted “coefficient transitivity” proof of the
-Segre relation and replaced it by the precise classical interface.  It
-also shows that the small resolutions, MCM descent, and double-six are not
-separate miracles: all are standard consequences of the one
-\(3\times3\) determinant presentation.  The genuinely irreducible finite
-inputs are only the six-axis MDS lemma, the later-slice multiplicity table,
-and the two Platonic transvectant ranks.  A stronger future theorem would
-seek a basis-free construction of the six-axis support lattice; without
-that, extending the shadow to later McKay slices is not a well-posed
-functorial problem.
+The marked comparison with C695 and the classification of Platonic
+sisters require additional data and are not asserted here.

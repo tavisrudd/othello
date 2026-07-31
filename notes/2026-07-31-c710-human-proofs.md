@@ -6,6 +6,15 @@
 
 **Companion to:** notes/2026-07-30-c710-e8-hamming-marking.md
 
+## Strategy
+
+The organizing distinction is self-duality versus isoduality.  Hamming
+self-duality puts an even unimodular form on one positive-definite lattice.
+The \(R_{10}\) isoduality instead pairs two dual halves; its natural
+integral home is hyperbolic.  Three independent arguments exclude a
+simultaneous positive-definite marking: one marked-code obstruction, one
+equivariant representation obstruction, and one unmarked root obstruction.
+
 ## 1. The bare \(E_8\) identification
 
 For the binary icosahedral group, tensoring irreducibles with its natural
@@ -35,7 +44,7 @@ The affine relation in the McKay quotient forces
  \alpha_0=-\sum_{\rho\ne1}\dim(\rho)\alpha_\rho.
 \]
 Substitution gives
-\((-1,0,0,-1,0,1,1,0)/\sqrt2\), the root printed in the report.  This
+\((-1,0,0,-1,0,1,1,0)/\sqrt2\), the displayed affine root.  This
 proves the complete affine marking and the bare isometry.
 
 ## 2. Why no two-coordinate \(R_{10}\) minor is Hamming
@@ -168,27 +177,6 @@ The conference marking restricts the self-adjoint locus to the six
 \(F_{20}\)-stabilized members.  Thus the finite polarity theorem is
 recovered intrinsically from adjointness of lattice exchange.
 
-The three negative attacks close different escape routes—marked minors,
+The three negative arguments close different escape routes—marked minors,
 equivariant linear projection, and arbitrary root embedding—while the
-hyperbolic construction supplies the exact positive replacement.  This
-proves every C710 result without conflating the bare McKay--Hamming
-isometry with a nonexistent simultaneous Clebsch marking.
-
-## Terry-Tao pass
-
-The right dichotomy is self-duality versus isoduality, not “two ways to
-obtain \(E_8\).”  Self-duality puts the form on one positive-definite
-Construction-A lattice; isoduality naturally produces a pair of dual
-isotropic halves.  Once this is recognized, \(II_{10,10}\) and the
-self-adjointness condition on exchanges are forced.
-
-The three negative arguments are logically independent and should remain
-so: regular matroid minors obstruct the marked code route, rational
-representation theory obstructs every equivariant rank-eight route, and
-the root search obstructs even an unmarked lattice embedding.  The TT pass
-therefore resists compressing them into one “no \(E_8\)” computation.
-The finite root search is complete because any embedding contains a simple
-system and the automorphism group reduces its first root to two orbits.
-A possible stronger theorem would replace that last search by a conceptual
-discriminant or root-configuration obstruction, but no such invariant is
-currently sharper than the complete two-orbit backtracking proof.
+hyperbolic construction supplies the positive replacement.

@@ -13,10 +13,16 @@ Almost every C705 conclusion comes from one mechanism.  The six Joubert
 cubics form a map between two five-dimensional augmentation spaces.  Its
 differential has one source null direction coming from residual
 \(\mathrm{PGL}_2\) motion and one target null direction coming from the
-Segre equation.  Generic rank four then forces a rank-one adjugate.  The
-exceptional parents explain where this map comes from; the boundary,
-arithmetic, Coble, and doily calculations explain what survives under
-restriction or reduction.
+Segre equation.  We use the elementary rank-\(n-1\) fact that
+\[
+ u^{\mathsf T}A=0,\quad Av=0,\quad \operatorname{rank}A=n-1
+ \quad\Longrightarrow\quad
+ \operatorname{adj}A=c\,vu^{\mathsf T}.
+\]
+Thus two intrinsic syzygies and one nonzero maximal minor force the
+adjugate; one coefficient fixes \(c\).  The exceptional parents explain
+the source of this matrix, while the boundary, arithmetic, Coble, and
+doily calculations describe its restrictions.
 
 ## 1. Why raw block adjugates cannot work
 
@@ -158,7 +164,8 @@ After centering, the even terms cancel and leave
  y_i=-4e_5(z)z_i.
 \]
 Thus inverse polarity recovers \(z\) off \(e_5=0\).  Pairing the six
-coordinates into three opposite pairs can itself be derived cleanly.
+coordinates into three opposite pairs follows from the same identities.
+
 Newton's identities turn \(e_1=e_3=e_5=0\) into vanishing of the first
 three odd power sums, so
 \[
@@ -374,7 +381,7 @@ conference \(S_5\) splits them as \(6+30\), with the six indexed by axes.
 This is the finite outer-automorphism seam inherited by C708; it is not an
 \(E_8\) conclusion.
 
-For completeness, row reduction of \(H\) gives the five-dimensional
+Row reduction of \(H\) gives the five-dimensional
 grid-parity image.  Enumerating its \(32\) words gives
 \[
  1+15y^4+15y^6+y^{10}.
@@ -406,30 +413,6 @@ point gauge, it proves only failure of the naive frozen-sign selector.
 The invariant statement is the \(6+30\) conference orbit split proved
 above.
 
-These arguments prove all closed claims across the C705 reports.  The
-deliberately false statements remain false: raw minors do not yield the
-polar carrier, the ambient Coble mixed differential is not corank one,
-and one marked Weierstrass point does not canonically order the other five.
-
-## Terry-Tao pass
-
-The central proof is the reusable rank-\(n-1\) lemma:
-
-> two intrinsic syzygies on opposite sides, plus one nonzero maximal
-> minor, force the adjugate to be their outer product.
-
-Everything specific to C705 is then concentrated in deriving the two
-syzygies and one scalar.  This pass caught and corrected a genuine
-transpose error in the draft: \(q^{\mathsf T}A=0\) is the left relation
-and \(AW=0\) the right relation, exactly as required by
-\(\operatorname{adj}A=6Wq^{\mathsf T}\).
-
-The best classical extension of the proof boundary is the even-polynomial
-argument for the fifteen exceptional planes; it makes the inverse polar
-geometry immediate from Newton identities.  By contrast, the Coble
-coefficient \(69984\), code weight tables, and split-fibre conventions are
-properly left as exact finite certificates after invariant theory reduces
-them to finite-dimensional problems.  The main opportunity left is to
-formulate the mixed potential and its two syzygies over the moduli stack,
-where the residual \(\mathfrak{sl}_2\) direction and Segre conormal would
-be tautological bundles rather than chart vectors.
+Three tempting stronger statements are false: raw minors do not yield the
+polar carrier, the ambient Coble mixed differential is not corank one, and
+one marked Weierstrass point does not canonically order the other five.
