@@ -112,6 +112,7 @@ assert sum(value < 0 for value in pauli_sign.values()) == 3
 assert sum(value < 0 for value in clebsch_sign.values()) == 12
 
 grid_rows = []
+node_partitions = []
 for triple in combinations(range(6), 3):
     if 0 not in triple:
         continue
@@ -121,6 +122,7 @@ for triple in combinations(range(6), 3):
     )
     assert len(grid) == 6
     grid_rows.append(sum(1 << line_index[line] for line in grid))
+    node_partitions.append(frozenset(left))
     assert prod(pauli_sign[line] for line in grid) == -1
     assert prod(clebsch_sign[line] for line in grid) == -1
     assert prod(pfaffian_sign[line] for line in grid) == -1
@@ -166,6 +168,14 @@ assert {
     if any(word.bit_count() == weight for word in dual_code)
 } == weight_enumerator
 dual_weight_four = {word for word in dual_code if word.bit_count() == 4}
+duad_blocks = {
+    point: sum(
+        ((point[0] in partition) == (point[1] in partition)) << index
+        for index, partition in enumerate(node_partitions)
+    )
+    for point in points
+}
+assert set(duad_blocks.values()) == dual_weight_four
 all_weight_four = weight_four | dual_weight_four
 assert len(all_weight_four) == 30
 assert all(
@@ -203,6 +213,7 @@ isodual_maps = 0
 witt_automorphisms = 0
 isodual_cycle_types = Counter()
 automorphism_permutations = []
+witt_automorphism_permutations = []
 involutory_isodualities = []
 for permutation in permutations(range(10)):
     is_automorphism = True
@@ -224,6 +235,8 @@ for permutation in permutations(range(10)):
     witt_automorphisms += is_witt_automorphism
     if is_automorphism:
         automorphism_permutations.append(permutation)
+    if is_witt_automorphism:
+        witt_automorphism_permutations.append(permutation)
     if is_isodual:
         kind = cycle_type(permutation)
         isodual_cycle_types[kind] += 1
@@ -262,6 +275,113 @@ assert {
     for automorphism in automorphism_permutations
 } == set(involutory_isodualities)
 
+
+def induced_node_permutation(permutation):
+    result = []
+    for partition in node_partitions:
+        image = frozenset(permutation[index] for index in partition)
+        if 0 not in image:
+            image = frozenset(set(range(6)) - image)
+        result.append(node_partitions.index(image))
+    return tuple(result)
+
+
+assert {
+    induced_node_permutation(permutation)
+    for permutation in permutations(range(6))
+} == set(automorphism_permutations)
+assert [
+    permutation
+    for permutation in witt_automorphism_permutations
+    if all(
+        compose(permutation, inner) == compose(inner, permutation)
+        for inner in automorphism_permutations
+    )
+] == [tuple(range(10))]
+
+line_by_block = dict(zip(parity_generators, lines))
+polarity_duad_syntheme_maps = {
+    polarity: {
+        point: line_by_block[permute_word(block, polarity)]
+        for point, block in duad_blocks.items()
+    }
+    for polarity in involutory_isodualities
+}
+assert all(
+    set(mapping.values()) == set(lines)
+    for mapping in polarity_duad_syntheme_maps.values()
+)
+
+
+def conference_switch_data(permutation):
+    for global_factor in (1, -1):
+        switches = (1,) + tuple(
+            global_factor * C[permutation[0]][permutation[index]] * C[0][index]
+            for index in range(1, 6)
+        )
+        if all(
+            C[permutation[i]][permutation[j]]
+            == global_factor * switches[i] * switches[j] * C[i][j]
+            for i, j in points
+        ):
+            return global_factor, switches
+    return None
+
+
+conference_group = tuple(
+    (
+        permutation,
+        conference_switch_data(permutation),
+        induced_node_permutation(permutation),
+    )
+    for permutation in permutations(range(6))
+    if conference_switch_data(permutation) is not None
+)
+assert len(conference_group) == 120
+assert Counter(data[0] for _, data, _ in conference_group) == {1: 60, -1: 60}
+conference_a5 = tuple(item for item in conference_group if item[1][0] == 1)
+
+remaining_polarities = set(involutory_isodualities)
+conference_polarity_orbits = []
+while remaining_polarities:
+    representative = next(iter(remaining_polarities))
+    orbit = {
+        compose(compose(node_map, representative), inverse(node_map))
+        for _, _, node_map in conference_group
+    }
+    conference_polarity_orbits.append(orbit)
+    remaining_polarities -= orbit
+assert sorted(map(len, conference_polarity_orbits)) == [6, 30]
+special_polarities = next(
+    orbit for orbit in conference_polarity_orbits if len(orbit) == 6
+)
+
+special_polarity_axes = {}
+for special_polarity in special_polarities:
+    stabilizer = tuple(
+        permutation
+        for permutation, _, node_map in conference_a5
+        if compose(compose(node_map, special_polarity), inverse(node_map))
+        == special_polarity
+    )
+    assert len(stabilizer) == 10
+    fixed_axes = tuple(
+        axis
+        for axis in range(6)
+        if all(permutation[axis] == axis for permutation in stabilizer)
+    )
+    assert len(fixed_axes) == 1
+    special_polarity_axes[fixed_axes[0]] = special_polarity
+assert set(special_polarity_axes) == set(range(6))
+
+assert Counter(
+    sum(
+        C[point[0]][point[1]] != clebsch_sign[line]
+        for point, line in mapping.items()
+    )
+    for mapping in polarity_duad_syntheme_maps.values()
+) == {3: 2, 5: 10, 7: 16, 9: 8}
+
 r10_checks = (
     0b0000110011,
     0b0001000111,
@@ -289,5 +409,5 @@ assert all(
 
 print(
     "PASS independent 4x4 Pauli replay: all 10 grid parities are -1; "
-    "their R10 quotient and dual halve W10 with 36 involutory polarities"
+    "R10/W10 realizes outer S6, and the conference marking selects six polarities"
 )

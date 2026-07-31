@@ -226,6 +226,7 @@ def build_certificate() -> dict:
     )
 
     grids = []
+    node_partitions = []
     grid_context_rows = []
     matching_index = {matching: index for index, matching in enumerate(matchings)}
     for left_tuple in combinations(range(6), 3):
@@ -248,6 +249,7 @@ def build_certificate() -> dict:
         grid_context_rows.append(
             sum(1 << matching_index[matching] for matching in lines)
         )
+        node_partitions.append(left)
         grids.append(
             {
                 "partition": [sorted(left), sorted(right)],
@@ -310,6 +312,14 @@ def build_certificate() -> dict:
     assert dual_weight_enumerator == parity_weight_enumerator
     assert dual_code != parity_code
     dual_weight_four_words = {word for word in dual_code if word.bit_count() == 4}
+    duad_blocks = {
+        pair: sum(
+            ((pair[0] in partition) == (pair[1] in partition)) << index
+            for index, partition in enumerate(node_partitions)
+        )
+        for pair in duads
+    }
+    assert set(duad_blocks.values()) == dual_weight_four_words
     all_weight_four_words = weight_four_words | dual_weight_four_words
     assert len(all_weight_four_words) == 30
     assert all(
@@ -355,6 +365,7 @@ def build_certificate() -> dict:
     witt_automorphism_count = 0
     isodual_cycle_types: Counter[tuple[int, ...]] = Counter()
     automorphisms = []
+    witt_automorphism_permutations = []
     involutory_isodualities = []
     first_isodual_permutation = None
     for permutation in permutations(range(len(grids))):
@@ -385,6 +396,7 @@ def build_certificate() -> dict:
                 first_isodual_permutation = permutation
         if is_witt_automorphism:
             witt_automorphism_count += 1
+            witt_automorphism_permutations.append(permutation)
     assert automorphism_count == isodual_count == 720
     assert witt_automorphism_count == 1440
     assert isodual_cycle_types == {
@@ -416,6 +428,130 @@ def build_certificate() -> dict:
         compose(compose(automorphism, polarity), inverse(automorphism))
         for automorphism in automorphisms
     } == set(involutory_isodualities)
+
+    def induced_node_permutation(permutation):
+        result = []
+        for partition in node_partitions:
+            image = frozenset(permutation[index] for index in partition)
+            if 0 not in image:
+                image = frozenset(set(range(6)) - image)
+            result.append(node_partitions.index(image))
+        return tuple(result)
+
+    inner_node_group = {
+        induced_node_permutation(permutation)
+        for permutation in permutations(range(6))
+    }
+    assert inner_node_group == set(automorphisms)
+    identity_node_permutation = tuple(range(len(grids)))
+    assert [
+        permutation
+        for permutation in witt_automorphism_permutations
+        if all(
+            compose(permutation, inner) == compose(inner, permutation)
+            for inner in inner_node_group
+        )
+    ] == [identity_node_permutation]
+
+    # A dual block is a duad, a primal block a syntheme.  Every polarity
+    # therefore realizes an exceptional duad--syntheme outer automorphism.
+    matching_by_block = {
+        generator: matching
+        for generator, matching in zip(parity_code_generators, matchings)
+    }
+    polarity_duad_syntheme_maps = {
+        polarity: {
+            pair: matching_by_block[permute_word(block, polarity)]
+            for pair, block in duad_blocks.items()
+        }
+        for polarity in involutory_isodualities
+    }
+    assert all(
+        set(mapping.values()) == set(matchings)
+        for mapping in polarity_duad_syntheme_maps.values()
+    )
+
+    # The golden conference marking has a 120-element switching stabilizer.
+    # Its sign-preserving half is the A5 action already visible in C705.
+    def conference_switch_data(permutation):
+        for global_factor in (1, -1):
+            switches = (1,) + tuple(
+                global_factor
+                * C[permutation[0]][permutation[index]]
+                * C[0][index]
+                for index in range(1, 6)
+            )
+            if all(
+                C[permutation[i]][permutation[j]]
+                == global_factor * switches[i] * switches[j] * C[i][j]
+                for i, j in duads
+            ):
+                return global_factor, switches
+        return None
+
+    conference_group = tuple(
+        (
+            permutation,
+            conference_switch_data(permutation),
+            induced_node_permutation(permutation),
+        )
+        for permutation in permutations(range(6))
+        if conference_switch_data(permutation) is not None
+    )
+    assert len(conference_group) == 120
+    assert Counter(data[0] for _, data, _ in conference_group) == {1: 60, -1: 60}
+    conference_a5 = tuple(
+        item for item in conference_group if item[1][0] == 1
+    )
+
+    remaining_polarities = set(involutory_isodualities)
+    conference_polarity_orbits = []
+    while remaining_polarities:
+        representative = next(iter(remaining_polarities))
+        orbit = {
+            compose(compose(node_map, representative), inverse(node_map))
+            for _, _, node_map in conference_group
+        }
+        conference_polarity_orbits.append(orbit)
+        remaining_polarities -= orbit
+    assert sorted(map(len, conference_polarity_orbits)) == [6, 30]
+    special_polarities = next(
+        orbit for orbit in conference_polarity_orbits if len(orbit) == 6
+    )
+
+    special_polarity_axes = {}
+    for special_polarity in special_polarities:
+        stabilizer = tuple(
+            permutation
+            for permutation, _, node_map in conference_a5
+            if compose(
+                compose(node_map, special_polarity),
+                inverse(node_map),
+            )
+            == special_polarity
+        )
+        assert len(stabilizer) == 10
+        fixed_axes = tuple(
+            axis
+            for axis in range(6)
+            if all(permutation[axis] == axis for permutation in stabilizer)
+        )
+        assert len(fixed_axes) == 1
+        special_polarity_axes[fixed_axes[0]] = special_polarity
+    assert set(special_polarity_axes) == set(range(6))
+
+    # A tempting frozen-sign selector fails: no polarity directly matches
+    # the conference duad signs with the induced Clebsch syntheme signs.
+    clebsch_sign_by_matching = dict(zip(matchings, clebsch_signs))
+    frozen_sign_mismatch_distribution = Counter(
+        sum(
+            C[pair[0]][pair[1]]
+            != clebsch_sign_by_matching[matching]
+            for pair, matching in mapping.items()
+        )
+        for mapping in polarity_duad_syntheme_maps.values()
+    )
+    assert frozen_sign_mismatch_distribution == {3: 2, 5: 10, 7: 16, 9: 8}
 
     # Explicit equivalence with Seymour's exceptional regular-matroid code R10.
     r10_parity_check_rows = (
@@ -478,7 +614,7 @@ def build_certificate() -> dict:
             assert switched == global_factor * clebsch_context_sign(matching)
 
     return {
-        "schema": "c705-clebsch-pauli-doily-v2",
+        "schema": "c705-clebsch-pauli-doily-v3",
         "odd_theta_characteristics": [list(pair) for pair in ODD_CHARACTERISTICS],
         "duads": [
             {
@@ -503,6 +639,8 @@ def build_certificate() -> dict:
             "parity_code_isodual_maps": isodual_count,
             "witt_design_automorphism_order": witt_automorphism_count,
             "involutory_isodual_maps": isodual_cycle_types[(2, 2, 2, 2, 2)],
+            "conference_switching_group_order": len(conference_group),
+            "conference_selected_polarities": len(special_polarities),
         },
         "contexts": [
             {
@@ -551,6 +689,22 @@ def build_certificate() -> dict:
             },
             "involutory_isodual_maps_are_fixed_point_free": True,
             "involutory_isodual_maps_form_one_automorphism_conjugacy_class": True,
+            "dual_minimum_blocks_are_duad_same_side_blocks": True,
+            "witt_halves_are_synthemes_and_duads": True,
+            "witt_group_realizes_Aut_S6_outer_extension": True,
+            "conference_polarity_orbit_sizes": sorted(
+                map(len, conference_polarity_orbits)
+            ),
+            "special_polarities_are_equivariantly_indexed_by_six_axes": True,
+            "special_polarity_by_axis": {
+                str(axis): list(permutation)
+                for axis, permutation in sorted(special_polarity_axes.items())
+            },
+            "direct_conference_to_clebsch_sign_mismatch_distribution": {
+                str(distance): multiplicity
+                for distance, multiplicity
+                in sorted(frozen_sign_mismatch_distribution.items())
+            },
             "r10_parity_check_rows": [
                 f"{row:010b}"[::-1] for row in r10_parity_check_rows
             ],
@@ -570,6 +724,8 @@ def build_certificate() -> dict:
             "code_dual_minimum_blocks_complete_to_Witt_W10": True,
             "isoduality_torsor_contains_one_36_element_involution_class": True,
             "ordinary_gauge_quotient_is_equivalent_to_Seymour_R10": True,
+            "conference_marking_selects_six_axis_indexed_outer_involutions": True,
+            "conference_signs_do_not_select_one_by_direct_equality": True,
         },
     }
 

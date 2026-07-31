@@ -356,6 +356,24 @@ shortened-hexacode/quadratic-residue model and Construction-A \(Q_{10}\).
 What remains is not code identification but selection: does the actual
 Segre--Igusa polar operator pick one of those 36 involutions canonically?
 
+### `ej4`
+
+The two \(W_{10}\) halves are now explicit: the primal blocks are
+synthemes, while the dual blocks are duads supported on the four \(3+3\)
+partitions that keep their endpoints together.  The \(1440\)-group is the
+classical \(\operatorname{Aut}(S_6)\), and its 36 involutory exchanges are
+the exceptional outer involutions.  The golden conference switching group
+of order \(120\) splits them into orbits \(6+30\).  The small orbit is
+canonically indexed by the six conference axes; the \(A_5\)-stabilizer of
+each polarity has order \(10\) and fixes its associated axis uniquely.
+Thus the marking selects six exceptional shadow sisters, not one.
+
+The naive frozen-sign selector is negative: direct transport of conference
+duad signs to Clebsch syntheme signs has mismatch distribution
+\(3^2 5^{10} 7^{16} 9^8\), with no exact match.  A unique sister, if the
+actual polar operator provides one, must come from operator incidence or an
+equivariant phase lift rather than bare signs.
+
 ### `tt2`
 
 The final structural pass tested minimality, converse content, and
@@ -394,7 +412,8 @@ placed in the mystery ledger below.
 | Whether the \(15/10/6\) geometry is the two-qubit Pauli doily | settled exactly: duads, synthemes, \(3+3\) partitions, and stars give points, contexts, ten grids, and six ovoids | none |
 | Whether the Clebsch/\(K\) signs define a new Mermin cocycle | settled negatively: all ten grid parities are \(-1\), but the conference factor is point gauge and the \(K\)-triangle tensor is a simplex coboundary | C706 tests only the sharper equivariant Clifford-lift question |
 | Whether another unrestricted Pauli context-sign invariant could still distinguish Clebsch from Pauli gauge | settled negatively: the ten grid checks have rank \(5\) and span the full left kernel of the rank-\(10\) point--context incidence map | none; C706 must use equivariance |
-| Whether the complete sign quotient retains a sister shadow | positive and structurally identified: \(R_{10}\) and its dual halve \(W_{10}\); the 720-element exchange coset contains one 36-element class of fixed-point-free involutions; Construction A gives \(Q_{10}\) | C708 must test whether the Segre--Igusa operator selects one of the 36 polarities |
+| Whether the complete sign quotient retains a sister shadow | positive and structurally identified: \(R_{10}\) and its dual are the duad/syntheme halves of \(W_{10}\); the exchange coset is the exceptional outer coset of \(\operatorname{Aut}(S_6)\); Construction A gives \(Q_{10}\) | none |
+| Whether the golden marking selects one finite polarity | it selects a canonical six-pack, equivariantly indexed by the six axes, but direct sign equality selects none | C708 tests the actual Segre--Igusa operator against the six; C706 tests phase lifts |
 
 ## Literature boundary
 

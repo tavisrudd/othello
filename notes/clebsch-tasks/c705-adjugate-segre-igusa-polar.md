@@ -123,6 +123,15 @@ tensor is an edge-cochain coboundary.  Thus unrestricted contextuality
 cohomology does not see \(C\) or \(K\).  Full report and certificate:
 `notes/2026-07-30-c705-clebsch-pauli-doily.md`.
 
+The quotient nevertheless retains a finite exceptional sister structure.
+It is Seymour's \(R_{10}\); its dual minimum blocks are duads while its
+minimum blocks are synthemes, and together they form \(W_{10}\).  The
+36 involutory exchanges are the exceptional outer involutions of \(S_6\).
+The golden conference marking splits them into orbits \(6+30\), with the
+small orbit canonically indexed by the six axes.  Direct frozen-sign
+matching selects none; C708 now owns comparison with the actual polar
+operator.
+
 The nearest positive repair is C706's equivariant Clifford-lift gate.
 Separate queued packages C707--C710 own the ETF/POVM, incidence-code,
 Majorana, and \(E_8\)--Hamming questions; they do not enlarge C705's

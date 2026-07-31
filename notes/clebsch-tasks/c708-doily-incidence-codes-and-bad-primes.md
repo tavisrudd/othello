@@ -31,7 +31,12 @@ one half-preserving-group conjugacy class of 36 fixed-point-free
 involutions.  An explicit coordinate permutation identifies the code with
 Seymour's exceptional regular-matroid code \(R_{10}\); standard uniqueness
 then identifies the shortened-hexacode/quadratic-residue model and its
-Construction-A lattice \(Q_{10}\).
+Construction-A lattice \(Q_{10}\).  More precisely, the primal blocks are
+synthemes and the dual blocks are duads, so the \(1440\)-group realizes
+\(\operatorname{Aut}(S_6)\) and the 36 involutions are the exceptional
+outer involutions.  The golden conference switching group cuts them into
+orbits \(6+30\); the small orbit is equivariantly indexed by the six axes.
+Direct frozen-sign matching selects none of them.
 C708 should extend this calculation; it must not recompute the C705 sign
 comparison or the standard-code identification as if still open.
 
@@ -39,9 +44,10 @@ comparison or the standard-code identification as if still open.
 
 1. Determine dimensions, duals, hulls, minimum distances, weight
    enumerators, and automorphism groups over the relevant fields.
-   Use the frozen \(R_{10}\)--\(W_{10}\)--\(Q_{10}\) identification and
-   determine whether the Segre--Igusa polar operator selects one of the 36
-   involutory dualities, or only the full exchange torsor.
+   Use the frozen \(R_{10}\)--\(W_{10}\)--\(Q_{10}\) and duad--syntheme
+   identifications.  Determine whether the Segre--Igusa polar operator
+   selects one of the six conference polarities, the six-pack only, or no
+   finite polarity at all.
 2. Test CSS and symplectic self-orthogonality conditions without assuming a
    useful quantum code exists.
 3. Compare code rank jumps with the exact ranks of \(G,A\), and their

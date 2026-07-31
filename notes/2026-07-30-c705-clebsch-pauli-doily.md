@@ -236,8 +236,7 @@ the half-preserving automorphism group is transitive on them.  They
 therefore form one distinguished 36-element class of combinatorial
 polarities exchanging \(\mathcal C\) with \(\mathcal C^\perp\).  Whether
 the specific C705 Segre--Igusa polar operator canonically selects one member
-of this class remains an operator-level question; the finite target is now
-sharp.
+is refined below.
 
 There is also an explicit standard-code identification.  In the frozen node
 order, the coordinate permutation
@@ -251,6 +250,53 @@ the ambiguity left by the existence of four inequivalent binary
 the shortened-hexacode/binary quadratic-residue model used to construct the
 isodual lattice \(Q_{10}\); consequently the natural Construction-A lift of
 this seam is indeed \(Q_{10}\), not automatically \(E_8\).
+
+### Fourth-order extra juice: the outer automorphism and six golden polarities
+
+The dual minimum blocks have a direct \(S_6\)-description.  For a duad
+\(\{i,j\}\), take the four \(3+3\) partitions in which \(i\) and \(j\) lie
+on the same side.  These fifteen four-subsets are exactly the minimum words
+of \(\mathcal C^\perp\).  The primal minimum blocks remain the four
+partitions crossed by a syntheme.  Thus the two halves of \(W_{10}\) are
+literally
+\[
+ \{\text{duads}\}\quad\sqcup\quad\{\text{synthemes}\}.
+\]
+The half-preserving \(720\)-group is exactly the node action induced by
+the natural \(S_6\), and it has trivial centralizer in the full
+\(1440\)-group.  Conjugation therefore realizes the latter as
+\(\operatorname{Aut}(S_6)\); its exchange half is the exceptional outer
+coset.  Each of the 36 involutory polarities gives an involutive outer
+automorphism exchanging duads and synthemes.  This identifies the mechanism
+behind the code sisterhood: it is the exceptional outer automorphism of
+\(S_6\), not an \(E_8\) linkage intrinsic to the binary code.
+
+The conference marking does reduce the ambiguity, but not to one.  Exact
+switching stabilizer enumeration gives an order-\(120\) outer \(S_5\), with
+the sign-preserving \(A_5\) as its index-two subgroup.  On the 36
+polarities it has two conjugacy orbits,
+\[
+ 36=6+30.
+\]
+The exceptional six-pack is canonically indexed by the six conference
+axes.  For each axis \(a\), exactly one polarity has an \(A_5\)-stabilizer
+fixing \(a\); that stabilizer has order \(10\) and the full
+order-\(120\) stabilizer has order \(20\).  Hence the finite answer is six
+golden shadow sisters, one per axis, sitting inside the classical
+36-element outer-involution class.
+
+A tempting stronger selector fails.  On the frozen marking, transport the
+conference duad signs through each duad--syntheme bijection and compare
+them directly with the Clebsch context signs.  The mismatch distribution
+over the 36 polarities is
+\[
+ 3^2\,5^{10}\,7^{16}\,9^8
+\]
+in multiplicity notation; no polarity gives equality.  This comparison is
+gauge-dependent, so it is only a clean negative for the naive frozen-sign
+rule.  Any unique operator-selected sister must use the actual
+Segre--Igusa polar map, an equivariant phase lift, or additional geometric
+marking—not direct sign equality.
 
 The negative is exact only for unrestricted point gauge.  It does not
 settle whether an equivariant gauge exists, whether the signed outer action
@@ -276,6 +322,14 @@ is a composition of known identifications, not a new quantum geometry.
 The counts \(15/10/6\), their \(S_6\cong\operatorname{Sp}_4(\mathbf F_2)\)
 symmetry, and the interpretation of grids as Mermin squares and ovoids as
 five mutually noncommuting observables are likewise standard.
+The duad--syntheme construction of the exceptional outer automorphism of
+\(S_6\) is also classical, so neither the \(W_{10}\) completion nor the
+existence of outer polarities is itself a novelty claim.  The bounded
+screen did not locate the more specific synthesis in which the golden
+conference switching class cuts the 36 outer involutions into \(6+30\) and
+equivariantly pairs the small orbit with the six Clebsch axes.  That exact
+marked refinement is the strongest current novelty candidate in this
+finite seam, pending a formula-level prior-art audit.
 
 What appears less standard in the bounded screen is the route from C704's
 specific golden conference operator and
@@ -309,7 +363,9 @@ the operator/compound theorem, not to the bare doily dictionary.
 | Are the ten Mermin parities sufficient to compare all ordinary sign systems? | settled: their five independent checks span the full left kernel of the point--context incidence map | none |
 | Does any unrestricted contextual sign invariant see \(C\) or \(K\)? | settled negatively: the complete quotient identifies the Clebsch and Pauli systems | none |
 | Why the parity quotient is the \([10,5,4]\) code with enumerator \(1+15y^4+15y^6+y^{10}\) | settled more sharply: it is explicitly coordinate-equivalent to Seymour's exceptional \(R_{10}\) code | none |
-| Why the code is isodual but not self-dual | finite structure settled: the two minimum layers halve \(W_{10}\), meet through the common repetition line, and are exchanged by a 720-element coset containing one 36-element involution class | operator identification remains in C708 |
+| Why the code is isodual but not self-dual | settled: its minimum layers are the duad and syntheme halves of \(W_{10}\), and the exchange coset is the exceptional outer coset of \(\operatorname{Aut}(S_6)\) | none |
+| Does the conference marking select a polarity? | partially settled: it canonically selects a six-axis-indexed orbit from the 36 outer involutions, while the other orbit has size 30 | C708 must compare the actual Segre--Igusa operator with this six-pack |
+| Can frozen Clebsch signs select one of the six? | settled negatively for direct equality: no one of all 36 matches, with mismatch distribution \(3^2 5^{10} 7^{16} 9^8\) | C706 owns equivariant phase refinements |
 | Whether this is the classical binary quadratic-residue \([10,5,4]\) code and Construction-A \(Q_{10}\) lattice | settled up to the standard literature equivalences: explicit \(R_{10}\) coordinates plus uniqueness of the isodual class identify the QR/shortened-hexacode model and hence \(Q_{10}\) | C710 owns any bridge onward to \(E_8\) |
 | Does the gauge trivialization respect outer \(S_6\), the Clifford lift, or golden \(A_5\)? | open and now the only surviving sign crown | C706 |
 | Does the operator tower have an operational POVM meaning despite sign triviality? | open and logically independent of contextual signs | C707 |
@@ -372,6 +428,12 @@ text for this bounded positioning pass.
   records uniqueness of the Steiner system \(S(3,4,10)=W_{10}\).  The
   occurrence and the order-\(1440\) marked automorphism calculation here
   are independently exact.
+- Cameron, *MTHM024/MTH714U Group Theory*, §5.6 — `partial`,
+  author-hosted lecture notes read on 2026-07-30.  It gives the classical
+  duad--syntheme--synthematic-total construction, proves that the resulting
+  automorphism of \(S_6\) is outer and involutive, and records
+  \(|\operatorname{Out}(S_6)|=2\).  This pre-empts the unmarked outer
+  mechanism, but not the conference-selected \(6+30\) refinement.
 
 Eight metadata searches screened titles and abstracts for
 `two-qubit Pauli doily duads synthemes Mermin grids ovoids S6 Sp(4,2)`,

@@ -5,6 +5,8 @@
     "clebsch_and_pauli_context_signs_are_point_gauge_equivalent": true,
     "clebsch_conference_factor_is_point_gauge": true,
     "code_dual_minimum_blocks_complete_to_Witt_W10": true,
+    "conference_marking_selects_six_axis_indexed_outer_involutions": true,
+    "conference_signs_do_not_select_one_by_direct_equality": true,
     "incidence_dictionary": true,
     "isoduality_torsor_contains_one_36_element_involution_class": true,
     "no_further_unrestricted_context_sign_invariant_remains": true,
@@ -302,6 +304,8 @@
   ],
   "counts": {
     "S6_induced_symplectic_maps": 720,
+    "conference_selected_polarities": 6,
+    "conference_switching_group_order": 120,
     "contexts": 15,
     "grid_checker_rank_F2": 5,
     "grids": 10,
@@ -1144,6 +1148,10 @@
     "code_is_isodual": true,
     "code_is_self_dual": false,
     "code_plus_dual_is_even_weight_code": true,
+    "conference_polarity_orbit_sizes": [
+      6,
+      30
+    ],
     "coordinate_equivalence_to_R10": [
       0,
       1,
@@ -1156,6 +1164,13 @@
       8,
       5
     ],
+    "direct_conference_to_clebsch_sign_mismatch_distribution": {
+      "3": 2,
+      "5": 10,
+      "7": 16,
+      "9": 8
+    },
+    "dual_minimum_blocks_are_duad_same_side_blocks": true,
     "dual_weight_enumerator": {
       "0": 1,
       "10": 1,
@@ -1216,13 +1231,90 @@
       "0011100010",
       "1001100001"
     ],
+    "special_polarities_are_equivariantly_indexed_by_six_axes": true,
+    "special_polarity_by_axis": {
+      "0": [
+        7,
+        6,
+        8,
+        5,
+        9,
+        3,
+        1,
+        0,
+        2,
+        4
+      ],
+      "1": [
+        5,
+        8,
+        7,
+        6,
+        9,
+        0,
+        3,
+        2,
+        1,
+        4
+      ],
+      "2": [
+        1,
+        0,
+        8,
+        6,
+        7,
+        9,
+        3,
+        4,
+        2,
+        5
+      ],
+      "3": [
+        1,
+        0,
+        7,
+        5,
+        6,
+        3,
+        4,
+        2,
+        9,
+        8
+      ],
+      "4": [
+        5,
+        6,
+        3,
+        2,
+        7,
+        0,
+        1,
+        4,
+        9,
+        8
+      ],
+      "5": [
+        7,
+        8,
+        3,
+        2,
+        6,
+        9,
+        4,
+        0,
+        1,
+        5
+      ]
+    },
     "weight_four_design_parameters": [
       2,
       10,
       4,
       2
     ],
-    "weight_four_words_are_context_blocks": true
+    "weight_four_words_are_context_blocks": true,
+    "witt_group_realizes_Aut_S6_outer_extension": true,
+    "witt_halves_are_synthemes_and_duads": true
   },
   "ovoids": [
     [
@@ -1268,7 +1360,7 @@
       "45"
     ]
   ],
-  "schema": "c705-clebsch-pauli-doily-v2",
+  "schema": "c705-clebsch-pauli-doily-v3",
   "triangles": [
     {
       "K_diagonal_over_4": -1,
