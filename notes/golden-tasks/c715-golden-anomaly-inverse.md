@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C720
+**Status:** complete; reported in
+`notes/2026-07-31-c715-golden-anomaly-inverse.md`
 
 ## Objective
 
@@ -51,3 +52,16 @@ field theory.
 
 C720 freezes the paper interface; C707 is complete.  C716 and C719 consume this task's frozen inverse and
 normalization interface.
+
+## Frozen output
+
+The rational inverse is the classical
+\((\mathbf P^1)^6/\!/\operatorname{PGL}_2\) quotient in the marked C707
+coordinates.  Its stable fibres are projective-linear orbits.  The
+vectorlike planes and inverse-polar exceptional divisor pull back to the
+Vandermonde collision divisor; the nodes are the \(3+3\) closed orbits.
+For a normalized preimage with \(Z=\lambda q\), the exact interface consumed
+by C716/C719 is
+\[
+ p_T^{(3)}=\lambda^2q_T^2/500.
+\]

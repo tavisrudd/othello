@@ -1,0 +1,740 @@
+{
+  "charge_witness": {
+    "expected_trials": [
+      "91125/484",
+      "3645/16",
+      "91125/256",
+      "3645/4",
+      "91125/64",
+      "91125/16"
+    ],
+    "integral_filter": [
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      3
+    ],
+    "physical_charge_scale": "4/27",
+    "physical_filter": [
+      "-1",
+      "-2/3",
+      "-1/3",
+      "0",
+      "1/3",
+      "1"
+    ],
+    "primitive_charges": [
+      11,
+      -10,
+      -8,
+      5,
+      4,
+      -2
+    ],
+    "success_probabilities": [
+      "484/91125",
+      "16/3645",
+      "256/91125",
+      "4/3645",
+      "64/91125",
+      "16/91125"
+    ]
+  },
+  "collision_discriminant": {
+    "identity": "e5(Z(x))=32*product_{i<j}(x_j-x_i)",
+    "normalization_tests": [
+      {
+        "filter": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "value": 1105920
+      },
+      {
+        "filter": [
+          -3,
+          -2,
+          -1,
+          0,
+          1,
+          3
+        ],
+        "value": 6635520
+      },
+      {
+        "filter": [
+          1,
+          2,
+          4,
+          7,
+          11,
+          16
+        ],
+        "value": 4938071040000
+      }
+    ]
+  },
+  "finite_height": {
+    "height_3_checked": 5040,
+    "height_3_search_domain": "ordered distinct sextuples in [-3,3]^6",
+    "height_below_3_impossible": "six distinct integers do not fit in [-2,2]",
+    "height_definition": "max absolute entry of a centered integral representative",
+    "hits": [
+      {
+        "charge_scale": 4,
+        "filter": [
+          -3,
+          -2,
+          -1,
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "charge_scale": -4,
+        "filter": [
+          3,
+          2,
+          1,
+          0,
+          -1,
+          -3
+        ]
+      }
+    ]
+  },
+  "frozen_marking": {
+    "outer_cubics": [
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ]
+    ],
+    "triple_order": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        0,
+        1,
+        5
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        4
+      ],
+      [
+        0,
+        2,
+        5
+      ],
+      [
+        0,
+        3,
+        4
+      ],
+      [
+        0,
+        3,
+        5
+      ],
+      [
+        0,
+        4,
+        5
+      ],
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        1,
+        2,
+        4
+      ],
+      [
+        1,
+        2,
+        5
+      ],
+      [
+        1,
+        3,
+        4
+      ],
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        4,
+        5
+      ],
+      [
+        2,
+        3,
+        4
+      ],
+      [
+        2,
+        3,
+        5
+      ],
+      [
+        2,
+        4,
+        5
+      ],
+      [
+        3,
+        4,
+        5
+      ]
+    ]
+  },
+  "inverse_chart": {
+    "matching_names": {
+      "A0": "01|23|45",
+      "A1": "02|13|45",
+      "Ad": "03|12|45",
+      "B0": "01|24|35",
+      "B1": "02|14|35",
+      "Bd": "04|12|35",
+      "C0": "01|25|34",
+      "C1": "02|15|34",
+      "Cd": "05|12|34"
+    },
+    "matching_values_at_charge_witness": {
+      "A0": "-1/2",
+      "A1": "-2",
+      "Ad": "-3/2",
+      "B0": "-3/2",
+      "B1": "-9/2",
+      "Bd": "-3",
+      "C0": "-1",
+      "C1": "-5/2",
+      "Cd": "-3/2"
+    },
+    "normalization": [
+      "infinity",
+      "0",
+      "1",
+      "a",
+      "b",
+      "c"
+    ],
+    "reconstructed_points": [
+      "infinity",
+      "0",
+      "1",
+      "4/3",
+      "3/2",
+      "5/3"
+    ]
+  },
+  "matching_dictionary": {
+    "01|23|45": {
+      "outer_pair": [
+        0,
+        1
+      ],
+      "sign": -1
+    },
+    "01|24|35": {
+      "outer_pair": [
+        2,
+        3
+      ],
+      "sign": 1
+    },
+    "01|25|34": {
+      "outer_pair": [
+        4,
+        5
+      ],
+      "sign": -1
+    },
+    "02|13|45": {
+      "outer_pair": [
+        2,
+        4
+      ],
+      "sign": 1
+    },
+    "02|14|35": {
+      "outer_pair": [
+        0,
+        5
+      ],
+      "sign": -1
+    },
+    "02|15|34": {
+      "outer_pair": [
+        1,
+        3
+      ],
+      "sign": 1
+    },
+    "03|12|45": {
+      "outer_pair": [
+        3,
+        5
+      ],
+      "sign": -1
+    },
+    "03|14|25": {
+      "outer_pair": [
+        1,
+        2
+      ],
+      "sign": 1
+    },
+    "03|15|24": {
+      "outer_pair": [
+        0,
+        4
+      ],
+      "sign": -1
+    },
+    "04|12|35": {
+      "outer_pair": [
+        1,
+        4
+      ],
+      "sign": 1
+    },
+    "04|13|25": {
+      "outer_pair": [
+        0,
+        3
+      ],
+      "sign": -1
+    },
+    "04|15|23": {
+      "outer_pair": [
+        2,
+        5
+      ],
+      "sign": 1
+    },
+    "05|12|34": {
+      "outer_pair": [
+        0,
+        2
+      ],
+      "sign": -1
+    },
+    "05|13|24": {
+      "outer_pair": [
+        1,
+        5
+      ],
+      "sign": 1
+    },
+    "05|14|23": {
+      "outer_pair": [
+        3,
+        4
+      ],
+      "sign": -1
+    }
+  },
+  "schema": "c715-golden-anomaly-inverse-v1",
+  "success_optimization": {
+    "base_charge_scale": 4,
+    "base_filter": [
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      3
+    ],
+    "compact_parameterization": {
+      "critical_polynomial_ascending": [
+        -9,
+        51,
+        -24,
+        -3,
+        1
+      ],
+      "explicit_amplitude_gain": "486/455",
+      "explicit_filter": [
+        "-1",
+        "-7/13",
+        "-1/7",
+        "1/5",
+        "1/2",
+        "1"
+      ],
+      "explicit_rational_parameter": "1/5",
+      "map": "h_u(v)=(v+u)/(u*v+1), with pole t=-3/u in the raw-pole parameter",
+      "maximizer_decimal": 0.194719332570311
+    },
+    "domains": [
+      {
+        "critical_polynomial_ascending": [
+          -9,
+          -9,
+          24,
+          17,
+          1
+        ],
+        "critical_root_count": 1,
+        "domain": [
+          "-infinity",
+          "-3"
+        ],
+        "multiplier_bounds": [
+          "255755072687781427723051195695840893633774194857438578966045/6464588087796918937013734196972171763006871905251511482184432",
+          "1278775363439206281680644681752501700470899234592821212677904/32322940438977033401232791071324608922179621162457843578405195"
+        ],
+        "multiplier_midpoint_decimal": 0.039562470062187764,
+        "range_pair": [
+          -3,
+          3
+        ],
+        "root_isolation": [
+          "-542078256294277/35184372088832",
+          "-1084156512588493/70368744177664"
+        ],
+        "root_midpoint_decimal": -15.40679068893558
+      },
+      {
+        "critical_polynomial_ascending": [
+          18,
+          -27,
+          -63,
+          11,
+          13
+        ],
+        "critical_root_count": 1,
+        "domain": [
+          "-3",
+          "-2"
+        ],
+        "multiplier_bounds": [
+          "677089628113276693656210816263170020854531445248/90636991117172312966871861283836197222262650414625",
+          "440813559972913193715559147146832595928552675/59008457758489447113864287833500328504028140504"
+        ],
+        "multiplier_midpoint_decimal": 0.0074703453829464955,
+        "range_pair": [
+          -3,
+          -2
+        ],
+        "root_isolation": [
+          "-2642437943849/1099511627776",
+          "-330304742981/137438953472"
+        ],
+        "root_midpoint_decimal": -2.403283309693961
+      },
+      {
+        "critical_polynomial_ascending": [
+          18,
+          -63,
+          -33,
+          23,
+          7
+        ],
+        "critical_root_count": 1,
+        "domain": [
+          "-2",
+          "-1"
+        ],
+        "multiplier_bounds": [
+          "120122941696564540708644213940716764075433964848/6003013366383637963433166113731830684583654621769",
+          "18018441254616690072240118625883649992673100180/900452004955936129025934286925868710308838345159"
+        ],
+        "multiplier_midpoint_decimal": 0.020010440484738906,
+        "range_pair": [
+          -2,
+          -1
+        ],
+        "root_isolation": [
+          "-1603684362311/1099511627776",
+          "-801842181155/549755813888"
+        ],
+        "root_midpoint_decimal": -1.4585424308374968
+      },
+      {
+        "critical_polynomial_ascending": [
+          -36,
+          -63,
+          27,
+          23,
+          1
+        ],
+        "critical_root_count": 1,
+        "domain": [
+          "-1",
+          "0"
+        ],
+        "multiplier_bounds": [
+          "1630369811181783203541965429256612704481411896/64167626139353832023045174700111734424857833575",
+          "3804196226118513184363552658077156898426772696/149724460991550579592788507632562400845660380059"
+        ],
+        "multiplier_midpoint_decimal": 0.025407980772866892,
+        "range_pair": [
+          -1,
+          0
+        ],
+        "root_isolation": [
+          "-558204623369/1099511627776",
+          "-69775577921/137438953472"
+        ],
+        "root_midpoint_decimal": -0.5076841474588036
+      },
+      {
+        "critical_polynomial_ascending": [
+          36,
+          -45,
+          -81,
+          -11,
+          5
+        ],
+        "critical_root_count": 1,
+        "domain": [
+          "0",
+          "1"
+        ],
+        "multiplier_bounds": [
+          "5405523337531699940368649045353408941210169/344353472849391168180728554700300112361558320",
+          "108534429366144356605350782826506098936089600/6914077572494187213834370875393370136946845353"
+        ],
+        "multiplier_midpoint_decimal": 0.015697600761297566,
+        "range_pair": [
+          0,
+          1
+        ],
+        "root_isolation": [
+          "481680463231/1099511627776",
+          "3763128619/8589934592"
+        ],
+        "root_midpoint_decimal": 0.438085829256579
+      },
+      {
+        "critical_polynomial_ascending": [
+          -9,
+          -45,
+          -18,
+          17,
+          7
+        ],
+        "critical_root_count": 1,
+        "domain": [
+          "1",
+          "3"
+        ],
+        "multiplier_bounds": [
+          "40272858543874090676263445654496833224343216336/3875700605867522990808752349465286569326587558725",
+          "15448583303929915334734597559204406678349941/1486710549867846555807997847887484410677865424"
+        ],
+        "multiplier_midpoint_decimal": 0.010391117023593775,
+        "range_pair": [
+          1,
+          3
+        ],
+        "root_isolation": [
+          "460234297287/274877906944",
+          "1840937189149/1099511627776"
+        ],
+        "root_midpoint_decimal": 1.6743226198273078
+      },
+      {
+        "critical_polynomial_ascending": [
+          -9,
+          -9,
+          24,
+          17,
+          1
+        ],
+        "critical_root_count": 0,
+        "domain": [
+          "3",
+          "infinity"
+        ],
+        "range_pair": [
+          -3,
+          3
+        ],
+        "supremum_at_infinity": "1/27"
+      }
+    ],
+    "explicit_better_filter": [
+      "1",
+      "7/13",
+      "1/7",
+      "-1/5",
+      "-1/2",
+      "-1"
+    ],
+    "explicit_better_rational_pole": "-15",
+    "explicit_charge_scale": "72/455",
+    "explicit_multiplier": "18/455",
+    "global_maximizer_is_irrational": true,
+    "global_maximum_domain": [
+      "-infinity",
+      "-3"
+    ],
+    "multiplier_definition": "Z(normalize(1/(r-t))) = 4*m(t)*q",
+    "parameterization": "y_i=1/(r_i-t), followed by the unique affine normalization with range [-1,1]",
+    "probability_gain_over_integral_witness": "236196/207025",
+    "rational_filters_have_supremum_not_maximum": true
+  }
+}

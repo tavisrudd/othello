@@ -467,6 +467,144 @@ classes.  Its nonzero information loss is exactly the contraction of the
 strict transforms of the fifteen Segre planes.  On a signed affine lift it
 also forgets the unavoidable common sign \(z\leftrightarrow-z\).
 
+\section{Rational anomaly synthesis and physical cost}
+
+The anomaly interpretation admits an inverse at the same marked level as
+the forward operator theorem.  The inverse is classical invariant theory;
+the operator adds the physical normalization and postselection cost.
+
+Write the six path points as \(p_i=(u_i:v_i)\in\mathbf P^1\), and
+homogenize a squarefree monomial by
+\[
+ x_S\longmapsto
+ \prod_{i\in S}u_i\prod_{i\notin S}v_i.
+\]
+The six cubics \(Z_T\) are then multihomogeneous of degree one in every
+point.  Their projective class is invariant under the diagonal
+\(\operatorname{PGL}_2\)-action.
+
+\begin{theorem}[Golden anomaly inverse]
+\label{thm:anomaly-inverse}
+Let \(q\in\mathbf P^5(\mathbb Q)\) satisfy
+\(\sum_Tq_T=\sum_Tq_T^3=0\).
+Then \(q\) has a rational Golden-filter preimage.  On the stable locus its
+fibre is one \(\operatorname{PGL}_2\)-orbit, with trivial stabilizer for the
+labelled configuration.  Moreover:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item the fifteen vectorlike planes pull back to the fifteen pair-collision
+  divisors, and
+  \[
+    e_5(Z(x))=32\prod_{i<j}(x_j-x_i);
+  \]
+\item the ten nodes are the closed \(3+3\) collision orbits, while six
+  distinct path points map to the smooth nonvectorlike locus; strict
+  chirality further removes the six walls \(Z_T=0\);
+\item if a normalized rational filter \(y\),
+  \(\lVert y\rVert_\infty\leq1\), satisfies \(Z(y)=\lambda q\), then
+  \[
+    p_T^{(3)}(y)=\frac{\lambda^2q_T^2}{500};
+  \]
+\item for \(q=(11,-10,-8,5,4,-2)\), the filter
+  \[
+    (-1,-2/3,-1/3,0,1/3,1)
+  \]
+  has
+  \(p_T^{(3)}=4q_T^2/91125\).  Its primitive integral lift is minimal at
+  common-affine height three, but its success is not maximal in the real
+  projective fibre.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The quotient
+\((\mathbf P^1)^6/\!/\operatorname{PGL}_2\) is the Segre cubic, and the
+colored-triangle cubics are its Joubert coordinates
+\cite{HMSVOuter,HMSV}.  We record the inverse because its normalization is
+needed below.  Fix
+\[
+ (p_0,p_1,p_2,p_3,p_4,p_5)=(0,1,\infty,a,b,c)
+\]
+and, for a Segre point \(z\), put
+\[
+ \alpha=\frac{z_1-z_3}{2},\quad
+ \beta=\frac{z_1+z_5}{2},\quad
+ \gamma=-\frac{z_3+z_4}{2},\quad
+ \delta=-\frac{z_2+z_3}{2},\quad
+ \epsilon=\frac{z_0+z_1}{2}.
+\]
+On the chart \(\delta\ne\epsilon\), \(\delta c\ne\beta\), set
+\[
+ c=\frac{\beta-\gamma}{\delta-\epsilon},\qquad
+ \lambda=\frac{c(1-c)}{\delta c-\beta},\qquad
+ a=c+\lambda\delta,\qquad b=c+\lambda\epsilon.
+\]
+Then
+\[
+ ab=c+\lambda\alpha,\qquad
+ ac=c+\lambda\beta,\qquad
+ bc=c+\lambda\gamma.
+\]
+Substitution in the six marked cubics gives
+\(Z(0,1,\infty,a,b,c)=\lambda z\); the remaining identity is the Segre
+equation.  Permuting labels gives the other stable charts.  This also shows
+that each stable fibre is one projective-linear orbit.  Three distinct
+labelled points kill its stabilizer.  At a node the unique closed orbit has
+three points at each of two locations and a one-dimensional torus
+stabilizer.
+
+The polynomial \(e_5(Z(x))\) is alternating of degree fifteen.  It is
+therefore a scalar multiple of the Vandermonde.  Evaluation at
+\((0,1,2,3,4,5)\) gives the scalar 32.  The zero divisor of \(e_5\) on the
+Segre cubic is the union of its fifteen planes, each consisting of three
+opposite charge pairs.  This proves (i), and GIT stability gives (ii).
+It also explains the Boolean boundary: a sign mask with unequal
+multiplicities has at least four coincident points and maps to zero, while
+a balanced mask is a \(3+3\) node.
+
+Part (iii) is the Slater determinant identity in
+Theorem~\ref{thm:propagation}.  Direct evaluation gives
+\(Z=(-4/27)(-q)=(4/27)q\) for the displayed filter, proving its probability
+formula.  The height statement is an exact finite census of primitive
+integer vectors through height three; the verification supplement records
+the search domain and independent replay.
+\end{proof}
+
+The last clause hides a useful distinction.  The pole of a projectivity
+cuts the real fibre into seven intervals.  On the interval giving the global
+maximum, the two endpoint paths remain extreme; after fixing them at
+\(\pm1\), the representative has the form
+\[
+ h_t(u)=\frac{u+t}{tu+1},\qquad -1<t<1.
+\]
+For the filter in Theorem~\ref{thm:anomaly-inverse}, the common amplitude
+gain is
+\[
+ \kappa(t)=\frac{27(1-t^2)^2}{(3-2t)(9-t^2)}.
+\]
+Exact Sturm counts on all seven intervals show that the global maximum is
+the unique critical point in this chart.  It is the root in \((-1,1)\) of
+\[
+ t^4-3t^3-24t^2+51t-9=0,
+\]
+namely \(t=0.194719332570311\ldots\).  The success gain is
+\(\kappa(t)^2=1.141022808280276\ldots\).  The maximizing parameter is
+irrational, so rational filters have only a supremum.  The rational choice
+\(t=1/5\) already gives the filter
+\((-1,-7/13,-1/7,1/5,1/2,1)\) and amplitude gain \(486/455\).
+Its exact success gain over the integral witness is
+\(236196/207025\).
+Because the fibre changes only the common amplitude scale, the same
+algebraic point simultaneously maximizes every nonzero branch probability
+and every fixed positive weighted sum of them.  In particular, a uniformly
+chosen protocol succeeds with probability
+\(\lambda^2\lVert q\rVert_2^2/3000\).
+
+The quotient, its cross-ratio inverse, and rational parametrization of the
+six-charge anomaly equations are classical or explicit prior art
+\cite{HMSVOuter,CostaDobrescuFox,GripaiosNguyen}.  The assertion here is
+the compatibility of that inverse with the marked Golden filter and its
+exact Slater cost.  It does not construct gauge fields or a Lagrangian.
+
 \section{Organization}
 
 Sections 3--5 develop the cubic, polar, and determinantal branches.
@@ -487,6 +625,22 @@ arXiv:1110.1126.
 B.~Howard, J.~Millson, A.~Snowden, and R.~Vakil,
 \emph{The relations among invariants of points on the projective line},
 arXiv:0906.2437.
+
+\bibitem{HMSVOuter}
+B.~Howard, J.~Millson, A.~Snowden, and R.~Vakil,
+\emph{A description of the outer automorphism of \(S_6\), and the
+invariants of six points in projective space},
+J. Combin. Theory Ser. A 115 (2008), 1296--1303.
+
+\bibitem{CostaDobrescuFox}
+D.~B. Costa, B.~A. Dobrescu, and P.~J. Fox,
+\emph{General solution to the \(U(1)\) anomaly equations},
+Phys. Rev. Lett. 123 (2019), 151601.
+
+\bibitem{GripaiosNguyen}
+B.~Gripaios and K.~Le Nguyen Nguyen,
+\emph{Anomaly cancellation for a \(U(1)\) factor},
+arXiv:2508.11583.
 
 \bibitem{ChiriviMaffei}
 R.~Chiriv\`i and A.~Maffei,

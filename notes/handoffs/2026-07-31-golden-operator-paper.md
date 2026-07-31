@@ -135,6 +135,21 @@ particular:
   unstable base scheme and ten \(3+3\) nodal images.  Wick identities govern
   each factor, while golden synchronization and the six-point quotient
   produce the Segre equation.
+- C715 is complete.  The Golden amplitude map is the classical
+  \((\mathbf P^1)^6/\!/\operatorname{PGL}_2\) quotient with an explicit
+  rational inverse in the frozen path marking.  Its pair-collision divisor
+  is simultaneously the pullback of the fifteen vectorlike planes and the
+  inverse-polar exceptional divisor, with
+  \(e_5(Z)=32\prod_{i<j}(x_j-x_i)\); the ten nodes are the \(3+3\) closed
+  orbits, while six distinct paths give the smooth nonvectorlike locus and
+  strict chirality also excludes \(Z_T=0\).  A normalized
+  preimage \(Z=\lambda q\) has exact success
+  \(p_T^{(3)}=\lambda^2q_T^2/500\).  The standard primitive path is uniquely
+  minimal up to sign at common-affine height three but is not
+  success-optimal; the real orbit optimum improves success by
+  \(1.141022808280276\ldots\) and is only a supremum over rational filters.
+  The report and exact evidence bundle are
+  `notes/2026-07-31-c715-golden-anomaly-inverse.md`.
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
