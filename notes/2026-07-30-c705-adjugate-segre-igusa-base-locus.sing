@@ -1,0 +1,218 @@
+// Scheme-theoretic base locus of the six Joubert cubics.
+ring r=0,(x0,x1,x2,x3,x4,x5),dp;
+poly s=x0+x1+x2+x3+x4+x5;
+ideal J=s,
+ (x1-x0)*(x3-x2)*(x5-x4),
+ (x1-x0)*(x4-x2)*(x5-x3),
+ (x1-x0)*(x5-x2)*(x4-x3),
+ (x2-x0)*(x3-x1)*(x5-x4),
+ (x2-x0)*(x4-x1)*(x5-x3),
+ (x2-x0)*(x5-x1)*(x4-x3),
+ (x3-x0)*(x2-x1)*(x5-x4),
+ (x3-x0)*(x4-x1)*(x5-x2),
+ (x3-x0)*(x5-x1)*(x4-x2),
+ (x4-x0)*(x2-x1)*(x5-x3),
+ (x4-x0)*(x3-x1)*(x5-x2),
+ (x4-x0)*(x5-x1)*(x3-x2),
+ (x5-x0)*(x2-x1)*(x4-x3),
+ (x5-x0)*(x3-x1)*(x4-x2),
+ (x5-x0)*(x4-x1)*(x3-x2);
+
+ideal L0=s,x1-x0,x2-x0,x3-x0;
+ideal L1=s,x1-x0,x2-x0,x4-x0;
+ideal L2=s,x1-x0,x2-x0,x5-x0;
+ideal L3=s,x1-x0,x3-x0,x4-x0;
+ideal L4=s,x1-x0,x3-x0,x5-x0;
+ideal L5=s,x1-x0,x4-x0,x5-x0;
+ideal L6=s,x2-x0,x3-x0,x4-x0;
+ideal L7=s,x2-x0,x3-x0,x5-x0;
+ideal L8=s,x2-x0,x4-x0,x5-x0;
+ideal L9=s,x3-x0,x4-x0,x5-x0;
+ideal L10=s,x2-x1,x3-x1,x4-x1;
+ideal L11=s,x2-x1,x3-x1,x5-x1;
+ideal L12=s,x2-x1,x4-x1,x5-x1;
+ideal L13=s,x3-x1,x4-x1,x5-x1;
+ideal L14=s,x3-x2,x4-x2,x5-x2;
+
+ideal K=intersect(L0,L1);
+K=intersect(K,L2);
+K=intersect(K,L3);
+K=intersect(K,L4);
+K=intersect(K,L5);
+K=intersect(K,L6);
+K=intersect(K,L7);
+K=intersect(K,L8);
+K=intersect(K,L9);
+K=intersect(K,L10);
+K=intersect(K,L11);
+K=intersect(K,L12);
+K=intersect(K,L13);
+K=intersect(K,L14);
+
+poly z0=-x0*x1*x2-x0*x1*x3+x0*x1*x4+x0*x1*x5+x0*x2*x3-x0*x2*x4+x0*x2*x5+x0*x3*x4-x0*x3*x5-x0*x4*x5+x1*x2*x3+x1*x2*x4-x1*x2*x5-x1*x3*x4+x1*x3*x5-x1*x4*x5-x2*x3*x4-x2*x3*x5+x2*x4*x5+x3*x4*x5;
+poly z1=x0*x1*x2+x0*x1*x3-x0*x1*x4-x0*x1*x5-x0*x2*x3-x0*x2*x4+x0*x2*x5+x0*x3*x4-x0*x3*x5+x0*x4*x5-x1*x2*x3+x1*x2*x4-x1*x2*x5-x1*x3*x4+x1*x3*x5+x1*x4*x5+x2*x3*x4+x2*x3*x5-x2*x4*x5-x3*x4*x5;
+poly z2=x0*x1*x2-x0*x1*x3+x0*x1*x4-x0*x1*x5+x0*x2*x3-x0*x2*x4-x0*x2*x5-x0*x3*x4+x0*x3*x5+x0*x4*x5-x1*x2*x3-x1*x2*x4+x1*x2*x5+x1*x3*x4+x1*x3*x5-x1*x4*x5+x2*x3*x4-x2*x3*x5+x2*x4*x5-x3*x4*x5;
+poly z3=-x0*x1*x2+x0*x1*x3-x0*x1*x4+x0*x1*x5+x0*x2*x3+x0*x2*x4-x0*x2*x5-x0*x3*x4-x0*x3*x5+x0*x4*x5-x1*x2*x3+x1*x2*x4+x1*x2*x5+x1*x3*x4-x1*x3*x5-x1*x4*x5-x2*x3*x4+x2*x3*x5-x2*x4*x5+x3*x4*x5;
+poly z4=-x0*x1*x2+x0*x1*x3+x0*x1*x4-x0*x1*x5-x0*x2*x3+x0*x2*x4+x0*x2*x5-x0*x3*x4+x0*x3*x5-x0*x4*x5+x1*x2*x3-x1*x2*x4+x1*x2*x5-x1*x3*x4-x1*x3*x5+x1*x4*x5+x2*x3*x4-x2*x3*x5-x2*x4*x5+x3*x4*x5;
+poly z5=x0*x1*x2-x0*x1*x3-x0*x1*x4+x0*x1*x5-x0*x2*x3+x0*x2*x4-x0*x2*x5+x0*x3*x4+x0*x3*x5-x0*x4*x5+x1*x2*x3-x1*x2*x4-x1*x2*x5+x1*x3*x4-x1*x3*x5+x1*x4*x5-x2*x3*x4+x2*x3*x5+x2*x4*x5-x3*x4*x5;
+poly zsquare=z0^2+z1^2+z2^2+z3^2+z4^2+z5^2;
+ideal P=s,
+ 6*z0^2-zsquare,6*z1^2-zsquare,6*z2^2-zsquare,
+ 6*z3^2-zsquare,6*z4^2-zsquare,6*z5^2-zsquare;
+
+ideal T0=s,x1-x0,x2-x0;
+ideal T1=s,x1-x0,x3-x0;
+ideal T2=s,x1-x0,x4-x0;
+ideal T3=s,x1-x0,x5-x0;
+ideal T4=s,x2-x0,x3-x0;
+ideal T5=s,x2-x0,x4-x0;
+ideal T6=s,x2-x0,x5-x0;
+ideal T7=s,x3-x0,x4-x0;
+ideal T8=s,x3-x0,x5-x0;
+ideal T9=s,x4-x0,x5-x0;
+ideal T10=s,x2-x1,x3-x1;
+ideal T11=s,x2-x1,x4-x1;
+ideal T12=s,x2-x1,x5-x1;
+ideal T13=s,x3-x1,x4-x1;
+ideal T14=s,x3-x1,x5-x1;
+ideal T15=s,x4-x1,x5-x1;
+ideal T16=s,x3-x2,x4-x2;
+ideal T17=s,x3-x2,x5-x2;
+ideal T18=s,x4-x2,x5-x2;
+ideal T19=s,x4-x3,x5-x3;
+ideal V=intersect(T0,T1);
+V=intersect(V,T2);
+V=intersect(V,T3);
+V=intersect(V,T4);
+V=intersect(V,T5);
+V=intersect(V,T6);
+V=intersect(V,T7);
+V=intersect(V,T8);
+V=intersect(V,T9);
+V=intersect(V,T10);
+V=intersect(V,T11);
+V=intersect(V,T12);
+V=intersect(V,T13);
+V=intersect(V,T14);
+V=intersect(V,T15);
+V=intersect(V,T16);
+V=intersect(V,T17);
+V=intersect(V,T18);
+V=intersect(V,T19);
+
+ideal GJ=std(J);
+ideal GK=std(K);
+LIB "primdec.lib";
+ideal R=radical(J);
+ideal GR=std(R);
+int failures=0;
+if (size(reduce(GJ,GK))!=0) { print("failure=J is not contained in K"); failures++; }
+if (size(reduce(GR,GK))!=0) { print("failure=radical(J) is not contained in K"); failures++; }
+if (size(reduce(GK,GR))!=0) { print("failure=K is not contained in radical(J)"); failures++; }
+
+print("reduced_support=intersection of 15 four-equal lines");
+print("scheme_is_reduced="+string(size(reduce(GK,GJ))==0));
+print("minimal_components="+string(size(minAssGTZ(J))));
+print("primary_components="+string(size(primdecGTZ(J))));
+print("affine_dimension="+string(dim(GJ)));
+print("degree_data="+string(degree(GJ)));
+print("joubert_matching_span_generators="+string(size(minbase(GJ))));
+ideal GP=std(P);
+ideal RP=radical(P);
+ideal GRP=std(RP);
+ideal GV=std(V);
+if (size(reduce(GRP,GV))!=0) { print("failure=radical(P) is not contained in V"); failures++; }
+if (size(reduce(GV,GRP))!=0) { print("failure=V is not contained in radical(P)"); failures++; }
+print("polar_base_reduced_support=20 triple-equal planes");
+print("polar_base_scheme_is_reduced="+string(size(reduce(GV,GP))==0));
+print("polar_base_minimal_components="+string(size(minAssGTZ(P))));
+print("polar_base_primary_components="+string(size(primdecGTZ(P))));
+print("polar_base_degree_data="+string(degree(GP)));
+
+poly segre=x0^3+x1^3+x2^3+x3^3+x4^3+x5^3;
+poly e5=x1*x2*x3*x4*x5+x0*x2*x3*x4*x5+x0*x1*x3*x4*x5
+ +x0*x1*x2*x4*x5+x0*x1*x2*x3*x5+x0*x1*x2*x3*x4;
+ideal E=s,segre,e5;
+ideal M0=s,x1+x0,x3+x2,x5+x4;
+ideal M1=s,x1+x0,x4+x2,x5+x3;
+ideal M2=s,x1+x0,x5+x2,x4+x3;
+ideal M3=s,x2+x0,x3+x1,x5+x4;
+ideal M4=s,x2+x0,x4+x1,x5+x3;
+ideal M5=s,x2+x0,x5+x1,x4+x3;
+ideal M6=s,x3+x0,x2+x1,x5+x4;
+ideal M7=s,x3+x0,x4+x1,x5+x2;
+ideal M8=s,x3+x0,x5+x1,x4+x2;
+ideal M9=s,x4+x0,x2+x1,x5+x3;
+ideal M10=s,x4+x0,x3+x1,x5+x2;
+ideal M11=s,x4+x0,x5+x1,x3+x2;
+ideal M12=s,x5+x0,x2+x1,x4+x3;
+ideal M13=s,x5+x0,x3+x1,x4+x2;
+ideal M14=s,x5+x0,x4+x1,x3+x2;
+ideal H=intersect(M0,M1);
+H=intersect(H,M2);
+H=intersect(H,M3);
+H=intersect(H,M4);
+H=intersect(H,M5);
+H=intersect(H,M6);
+H=intersect(H,M7);
+H=intersect(H,M8);
+H=intersect(H,M9);
+H=intersect(H,M10);
+H=intersect(H,M11);
+H=intersect(H,M12);
+H=intersect(H,M13);
+H=intersect(H,M14);
+ideal GE=std(E);
+ideal GH=std(H);
+if (size(reduce(GE,GH))!=0) { print("failure=E is not contained in 15 Segre planes"); failures++; }
+if (size(reduce(GH,GE))!=0) { print("failure=15 Segre planes are not contained in E"); failures++; }
+print("inverse_exceptional_divisor=e5=0 is the reduced union of 15 Segre planes");
+print("inverse_exceptional_degree_data="+string(degree(GE)));
+
+poly p2=x0^2+x1^2+x2^2+x3^2+x4^2+x5^2;
+poly igusa=p2^2-4*(x0^4+x1^4+x2^4+x3^4+x4^4+x5^4);
+poly g0=4*x0*p2-16*x0^3;
+poly g1=4*x1*p2-16*x1^3;
+poly g2=4*x2*p2-16*x2^3;
+poly g3=4*x3*p2-16*x3^3;
+poly g4=4*x4*p2-16*x4^3;
+poly g5=4*x5*p2-16*x5^3;
+poly gs=g0+g1+g2+g3+g4+g5;
+ideal IS=s,igusa,6*g0-gs,6*g1-gs,6*g2-gs,6*g3-gs,6*g4-gs,6*g5-gs;
+ideal R0=s,x1-x0,x3-x2,x5-x4;
+ideal R1=s,x1-x0,x4-x2,x5-x3;
+ideal R2=s,x1-x0,x5-x2,x4-x3;
+ideal R3=s,x2-x0,x3-x1,x5-x4;
+ideal R4=s,x2-x0,x4-x1,x5-x3;
+ideal R5=s,x2-x0,x5-x1,x4-x3;
+ideal R6=s,x3-x0,x2-x1,x5-x4;
+ideal R7=s,x3-x0,x4-x1,x5-x2;
+ideal R8=s,x3-x0,x5-x1,x4-x2;
+ideal R9=s,x4-x0,x2-x1,x5-x3;
+ideal R10=s,x4-x0,x3-x1,x5-x2;
+ideal R11=s,x4-x0,x5-x1,x3-x2;
+ideal R12=s,x5-x0,x2-x1,x4-x3;
+ideal R13=s,x5-x0,x3-x1,x4-x2;
+ideal R14=s,x5-x0,x4-x1,x3-x2;
+ideal IL=intersect(R0,R1);
+IL=intersect(IL,R2);
+IL=intersect(IL,R3);
+IL=intersect(IL,R4);
+IL=intersect(IL,R5);
+IL=intersect(IL,R6);
+IL=intersect(IL,R7);
+IL=intersect(IL,R8);
+IL=intersect(IL,R9);
+IL=intersect(IL,R10);
+IL=intersect(IL,R11);
+IL=intersect(IL,R12);
+IL=intersect(IL,R13);
+IL=intersect(IL,R14);
+ideal GIS=std(IS);
+ideal GIL=std(IL);
+if (size(reduce(GIS,GIL))!=0) { print("failure=Igusa singular ideal is not contained in 15 lines"); failures++; }
+if (size(reduce(GIL,GIS))!=0) { print("failure=15 lines are not contained in Igusa singular ideal"); failures++; }
+print("igusa_singular_scheme=reduced union of 15 matching lines");
+print("igusa_singular_degree_data="+string(degree(GIS)));
+if (failures==0) { print("status=verified"); } else { print("status=failed"); }
+quit;

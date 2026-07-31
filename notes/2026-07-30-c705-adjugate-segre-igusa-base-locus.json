@@ -1,0 +1,32 @@
+{
+  "computer_algebra_system": "Singular 4.4.1 via nixpkgs#singular",
+  "igusa_singular_scheme": {
+    "component_type": "matching line",
+    "components": 15,
+    "degree": 15,
+    "reduced": true
+  },
+  "inverse_polar_exceptional_divisor": {
+    "component_type": "Segre plane",
+    "components": 15,
+    "degree": 15,
+    "equation_on_segre": "e5(z)=0",
+    "reduced": true
+  },
+  "joubert_base_scheme": {
+    "component_type": "projective line",
+    "components": 15,
+    "degree": 15,
+    "description": "four specified axis coordinates coincide",
+    "reduced": true
+  },
+  "method": "exact ideal equality with intersections of linear prime ideals; radical and primary-decomposition cross-checks",
+  "pulled_back_polar_base_scheme": {
+    "component_type": "projective plane",
+    "components": 20,
+    "degree": 20,
+    "description": "three specified axis coordinates coincide",
+    "reduced": true
+  },
+  "schema": "c705-adjugate-segre-igusa-base-locus-v1"
+}
