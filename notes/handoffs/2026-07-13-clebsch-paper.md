@@ -223,6 +223,11 @@ Full report:
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 | [C711 — Paper III sub-700 human proofs](../clebsch-tasks/c711-paper-iii-sub700-human-proofs.md) | complete; seven certificate-independent proofs, per-proof Tao checks, and frozen interfaces | none |
 | [C712 — Paper III sub-700 Lean](../clebsch-tasks/c712-paper-iii-sub700-lean.md) | active; C711 interfaces frozen | formalize the accepted C711 theorem package and produce the paper-facing trust map |
+| [C715 — golden anomaly inverse](../clebsch-tasks/c715-golden-anomaly-inverse.md) | queued; highest-EV C707 successor | prove the rational inverse, exceptional strata, physical normalization, and postselection cost |
+| [C716 — golden two-\(U(1)\) lines](../clebsch-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and derive the mixed Pfaffian identities |
+| [C717 — golden Majorana parity chambers](../clebsch-tasks/c717-golden-majorana-parity-chambers.md) | queued; independent of C715 | classify real Pfaffian walls, parity chambers, simultaneous switches, and any monodromy obstruction |
+| [C718 — golden boson--fermion complement](../clebsch-tasks/c718-golden-boson-fermion-complement.md) | queued; independent of C715 | compute permanent-side identities, balanced-mask signatures, and an experimental discriminator |
+| [C719 — golden six-mode demonstrator](../clebsch-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and quantitative feasibility budget |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
