@@ -1,7 +1,9 @@
 # C707 physics novelty and directions audit
 
-**Lane:** clebsch  
-**Search date:** 2026-07-31  
+**Lane:** clebsch
+
+**Search date:** 2026-07-31
+
 **Scope:** novelty positioning and physics consequences of the C707 golden
 three-fermion / six-Majorana realization
 
