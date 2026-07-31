@@ -61,3 +61,5 @@ the chart six-set and the conference-axis six-set.
 
 Full report and certificate:
 `notes/2026-07-30-c706-equivariant-clifford-lift.md`.
+Mechanism-first human proof companion:
+`notes/2026-07-31-c706-human-proofs.md`.

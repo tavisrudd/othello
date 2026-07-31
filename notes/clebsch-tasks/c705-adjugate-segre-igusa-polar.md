@@ -6,6 +6,9 @@
 
 **Status:** complete
 
+Consolidated mechanism-first human proof companion for all C705 reports:
+`notes/2026-07-31-c705-human-proofs.md`.
+
 ## Objective
 
 Determine whether the six adjugates

@@ -66,3 +66,5 @@ nearer code-lattice parent of the \(W_{10}\) sister seam.
 
 Full report and certificate:
 `notes/2026-07-30-c710-e8-hamming-marking.md`.
+Mechanism-first human proof companion:
+`notes/2026-07-31-c710-human-proofs.md`.

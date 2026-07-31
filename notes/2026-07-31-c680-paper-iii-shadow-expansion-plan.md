@@ -164,6 +164,16 @@ by C711/C712.
 9. **Boundaries.**  Keep the rational/integral comparison, bad-prime scope,
    sign/orientation choices, and absence of a global determinant-cover claim
    explicit.
+10. **Existing-proof Tao pass.**  After inserting the operator lemmas, reread
+    every pre-existing proof by the same standard.  Cite classical provenance
+    but include a classical lemma when it shortens or clarifies the mechanism.
+    In particular, replace the twenty-determinant six-arc sentence by the two
+    \(A_5\)-orbit calculation, prove uniqueness of the harmonic invariant cubic
+    from the absence of an alternating polynomial below Vandermonde degree,
+    preserve the square-class/Picard and local-conductor arguments, and remove
+    any duplicated calculation now implied by the commutator Pfaffian or golden
+    block lemmas.  This is a proof-quality pass after integration, not a change
+    to the theorem scope.
 
 The C709 human-proof companion already supplies a clean proof of the
 commutator Pfaffian, determinant, covariance, and rank stratification.  C680

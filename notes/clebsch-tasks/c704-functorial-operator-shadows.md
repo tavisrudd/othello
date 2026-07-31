@@ -8,6 +8,8 @@
 later-slice obstruction, and positive tetrahedral/octahedral feasibility
 gates.  Full report:
 [`../2026-07-30-c704-functorial-operator-shadows.md`](../2026-07-30-c704-functorial-operator-shadows.md).
+Mechanism-first human proof companion:
+[`../2026-07-31-c704-human-proofs.md`](../2026-07-31-c704-human-proofs.md).
 The unallocated successor portfolio is recorded in
 [`../2026-07-30-c704-follow-up-mining-plan.md`](../2026-07-30-c704-follow-up-mining-plan.md);
 its recommended first tranche is the adjugate-polar and marked-double-six

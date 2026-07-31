@@ -103,3 +103,5 @@ golden sign/eigenspace lift.  The only CSS member is the standard binary
 
 Full report and certificate:
 `notes/2026-07-30-c708-doily-codes-and-outer-exchange.md`.
+Mechanism-first human proof companion:
+`notes/2026-07-31-c708-human-proofs.md`.
