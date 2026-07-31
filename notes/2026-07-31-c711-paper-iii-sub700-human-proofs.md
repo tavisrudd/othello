@@ -354,6 +354,37 @@ orientation negates \(*\), and therefore negates \(\Lambda^3C\); this is
 exactly the replacement \(C\mapsto-C\).  The other atom family is the
 expected complement duality.  \(\square\)
 
+There is also no new family-preserving projective symmetry in dimension
+twenty.  The oriented and unoriented conference normalizers are \(A_5\) and
+\(S_5\).  Every element has two central signed lifts to the axis lattice.
+The \(A_5\)-lifts have determinant one.  For the outer coset it is enough to
+use the generator
+\[
+ \pi=(0,1,4,5,3,2),\qquad
+ D=\operatorname{diag}(1,-1,1,1,1,1):
+\]
+both \(\pi\) and \(D\) have determinant \(-1\), so \(D\pi\) has determinant
+one and conjugates \(C\) to \(-C\).  Therefore its exterior cube conjugates
+\(K=*\Lambda^3C\) to \(-K\).  The family-preserving projective stabilizer of
+\(K\) is exactly \(A_5\), while the stabilizer of its line is exactly \(S_5\).
+
+The dual atom family supplies the missing second half.  Lemma 4 gives
+\(*K=-K*\), so conjugation by the Hodge operator sends \(K\) to \(-K\).
+Every signed \(S_5\)-lift above has determinant one, hence its exterior cube
+commutes with \(*\).  Since axis lifts preserve an atom family and \(*\)
+exchanges the two families, their projective groups meet trivially and
+commute.  The full projective line normalizer is therefore
+\[
+ S_5\times C_2.
+\]
+If \(\chi:S_5\to\{\pm1\}\) is the conference orientation character and
+\(\delta\in C_2\) records Hodge complementation, then
+\((g,\delta)\) acts on \(K\) by \(\chi(g)(-1)^\delta\).  The exact projective
+stabilizer of \(K\) is the kernel of this character, the graph of \(\chi\),
+and is therefore another copy of \(S_5\).  Thus \(K\) couples outer
+orientation reversal to complement duality instead of choosing either one
+separately.
+
 **Tao-style check after Lemma 5.**  The theorem is lattice-theoretic.  The
 rational conjugacy class of \(K\) records only two ten-dimensional eigenspaces
 and cannot distinguish twenty support vectors.  Modulo \(2\), however, signs
@@ -361,7 +392,9 @@ disappear while the zero pattern of compound minors becomes the Johnson
 scheme.  Once that lattice data restores the Hodge operator, the full return
 restores \(C\), not only its cubic diagonal.  Prime \(2\) is therefore both
 the reconstruction device and the place where cubic orientation itself
-collapses.
+collapses.  Over a field containing nontrivial cube roots of unity, exterior
+faithfulness leaves the exact \(\mu_3\) scalar ambiguity; over \(\mathbf Q\)
+that ambiguity disappears.
 
 ## 6. Human derivation of the degree-ten return
 
@@ -718,7 +751,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces four cheap upgrades beyond certificate removal.
+The proof pass produces six cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -726,7 +759,12 @@ sign that a formal proof must carry.  Third, equivariance plus one eigenvector
 norm derives the degree-ten scalar, replacing a restricted-matrix comparison
 by a one-dimensional calculation.  Fourth, parity reconstruction restores the
 Hodge operator, so the full middle-exterior return recovers the conference
-operator through the faithful rational exterior cube.
+operator through the faithful rational exterior cube.  Fifth, the same
+reconstruction collapses the family-preserving 20-dimensional normalizer to
+the known conference normalizer: \(A_5\) for \(K\), \(S_5\) for its line.
+Sixth, Hodge complementation closes the dual-family half: the full line
+normalizer is \(S_5\times C_2\), and the exact stabilizer is the diagonal
+\(S_5\) coupling the two orientation reversals.
 
 The strongest invariant formulation is now clear.  The actual object is the
 oriented integral pair \((\Lambda^3V,K)\), not the spectrum of \(K\).  Its
@@ -750,6 +788,11 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   integral support lattice via \(K\bmod2\); a bare rational conjugacy class is
   insufficient.  With a dual atom choice and orientation, the full \(K\)
   recovers \(C\) itself through the faithful rational exterior cube.
+- **Whether \(K\) acquires hidden symmetries in dimension twenty:** settled.
+  Family-preserving stabilizer and line stabilizer are \(A_5\) and \(S_5\).
+  Hodge complementation doubles the full line normalizer to
+  \(S_5\times C_2\); the exact stabilizer is the diagonal \(S_5\) coupling the
+  outer and complement characters.
 - **Why the return scalar has its form:** settled by a single Fischer norm.
   The rational factor comes from the raw derivative normalization and the
   golden factor is \(st^6\).

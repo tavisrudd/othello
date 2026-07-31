@@ -9,7 +9,11 @@ seven certificate-independent proofs, a claim-to-lemma map, the frozen C680
 interface, and formalization-ready C712 statements.  All C691/C682 primary
 checks and independent replays pass.  The extra-juice closeout strengthens
 support recovery: after choosing complement duality and orientation, the full
-middle-exterior return reconstructs the conference operator itself.  C712 is
+middle-exterior return reconstructs the conference operator itself.  The
+second extra-juice pass further proves that its family-preserving projective
+stabilizer and line stabilizer are exactly \(A_5\) and \(S_5\), while Hodge
+complementation enlarges the full line normalizer to \(S_5\times C_2\) and
+couples with the outer character to give exact stabilizer \(S_5\).  C712 is
 unblocked.
 
 ## Objective
