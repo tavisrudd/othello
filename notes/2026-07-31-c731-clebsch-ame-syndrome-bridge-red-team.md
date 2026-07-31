@@ -183,6 +183,42 @@ realization, colloidal mode model, or fermionic laboratory model should first
 pass a separate pre-allocation theorem gate rather than enter either
 manuscript as interpretation.
 
+## Extra-juice and Tao closeout
+
+The cheap strengthening is to identify the common carrier exactly rather
+than say only that both systems are “icosahedral.”  The syndrome rays and
+the colloidal vertices are both the unique transitive (A_5/C_5) set, and
+their antipodal quotients are the six fivefold axes.  This removes accidental
+geometric language from the comparison.
+
+The next question is not whether another occurrence of the number twenty can
+be matched.  It is whether a symmetry-reduced fluctuation operator of the
+confined cluster acts on a signed six-axis mode space and has a component in
+the Golden conference-operator line.  A positive result would connect the
+Golden (3+3) eigenspace split to a measurable colloidal normal-mode or
+response split.  A negative result would close the most plausible direct
+physical realization without affecting either mathematics paper.  The
+published free-energy and morphology data do not determine this operator, so
+no task is allocated before a concrete Hessian or trajectory dataset is
+identified.
+
+## Mystery ledger
+
+- **Settled — why twelve and six coincide.**  Both are the (A_5/C_5)
+  vertex carrier and its antipodal six-axis quotient; no dynamical inference
+  is needed.
+- **Settled — the two occurrences of twenty.**  Colloidal tetrahedral domains
+  are the twenty icosahedral faces, whereas the code count is the number of
+  minimum (X)-representatives after fixing a syndrome.  No equivariant map
+  or physical identification is supplied, so the numerical match is inert.
+- **Open — Golden operator in the entropic response.**  The evidence gap is
+  an explicit symmetry-reduced Hessian, covariance matrix, or response
+  operator on the six fivefold axes.  Dataset availability and construction
+  of that operator are the pre-allocation gate.
+- **Open — exact q=11 party extension attached to the Clebsch row.**  C732
+  must reconcile the (A_5) monomial quotient with the larger AME
+  party-moving table before public wording is frozen.
+
 ## Vibe check
 
 Good bridge, low proof risk, moderate wording risk.  Its value comes from the
