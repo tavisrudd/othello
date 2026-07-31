@@ -1,0 +1,115 @@
+{
+  "cross_measurement_protocol": {
+    "c705_polar_scaling": "W_T=6Z_T^2-sum_U Z_U^2=3000 center_T(p_T^(3))",
+    "kraus_operator": "K_T(x)=Q_{T,-}^T diag(x) Q_{T,+}=(1/2)sum_i x_i |u_{T,i}^-><u_{T,i}^+|",
+    "not_an_ic_locus": "the fixed POVMs are real-IC everywhere; rank drops concern the controlled transfer map",
+    "physical_domain": "max_i |x_i| <= 1",
+    "polar_probability_contrast": "center_T(Z_T^2)=500 center_T(p_T^(3))",
+    "response": "A=dZ is the first variation of oriented three-copy transition amplitude",
+    "sharp_phase_patterns": "equality exactly at the 20 vertices with three +1 and three -1 entries",
+    "sharp_physical_cube_bound": "|Z_T(x)|<=8 and p_T^(3)(x)<=16/125 for max_i|x_i|<=1",
+    "three_copy_amplitude": "det K_T(x)=+/- Z_T(x)/(10 sqrt(5))",
+    "three_copy_success_probability": "det(K_T^T K_T)=Z_T(x)^2/500",
+    "vertex_absolute_value_counts_per_protocol": {
+      "0": 44,
+      "8": 20
+    }
+  },
+  "golden_frames": {
+    "coherence_squared": "1/5",
+    "complex_qutrit_informationally_complete": false,
+    "effect_gram_spectrum": {
+      "2": 1,
+      "4/5": 5
+    },
+    "frame_bound": 2,
+    "frame_dimension": 3,
+    "naimark_relation": "G_- = 2I-G_+",
+    "normalized_gram_matrices": "G_+=I+C/sqrt(5), G_-=I-C/sqrt(5)",
+    "outcomes": 6,
+    "povm_effects": "E_i=(1/2)|u_i><u_i|",
+    "real_tomography": "rho=(5/2)sum_i p_i |u_i><u_i|-(1/2)I"
+  },
+  "input": {
+    "bytes": 4419,
+    "path": "notes/2026-07-30-c704-segre-igusa-operator-shadow.json",
+    "sha256": "644c1f7a51f9d46897a466347c6e11c5bbc2835d8550932dbaeeb41405dcc2f3"
+  },
+  "schema": "c707-golden-etf-quantum-measurements-v1",
+  "symmetry": {
+    "exchange_the_pair": 60,
+    "preserve_one_measurement": 60
+  },
+  "witnesses": [
+    {
+      "joubert_numerators_at_integer_lift": [
+        -198,
+        158,
+        166,
+        -90,
+        -6,
+        -30
+      ],
+      "path_amplitudes": [
+        "1/15",
+        "2/15",
+        "1/5",
+        "4/15",
+        "1/3",
+        "-1"
+      ],
+      "response_rank_before_augmentation_quotients": 4,
+      "source_kernel": [
+        "constant",
+        "center(x^2)"
+      ],
+      "target_kernel": [
+        "constant",
+        "6Z^2-sum(Z^2)"
+      ],
+      "three_copy_success_probabilities": [
+        "121/17578125",
+        "6241/1423828125",
+        "6889/1423828125",
+        "1/703125",
+        "1/158203125",
+        "1/6328125"
+      ]
+    },
+    {
+      "joubert_numerators_at_integer_lift": [
+        -30,
+        -18,
+        -66,
+        58,
+        50,
+        6
+      ],
+      "path_amplitudes": [
+        "1/5",
+        "0",
+        "2/5",
+        "-1/5",
+        "3/5",
+        "-1"
+      ],
+      "response_rank_before_augmentation_quotients": 4,
+      "source_kernel": [
+        "constant",
+        "center(x^2)"
+      ],
+      "target_kernel": [
+        "constant",
+        "6Z^2-sum(Z^2)"
+      ],
+      "three_copy_success_probabilities": [
+        "9/78125",
+        "81/1953125",
+        "1089/1953125",
+        "841/1953125",
+        "1/3125",
+        "9/1953125"
+      ]
+    }
+  ]
+}
