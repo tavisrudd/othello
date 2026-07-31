@@ -182,7 +182,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `ame-lu`
 
-- **C581 `[ame-lu]` [QUEUED; after C623; optional quantitative-rigidity upgrade]** — after C623 fixes the exact basis-free phase-space boundary, test whether C560's rank-one contraction locus admits a quantitative approximate-rigidity theorem with explicit conditioning; keep robust claims separate from exact reconstruction and audit them before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
 
 ### `rp-next`
 

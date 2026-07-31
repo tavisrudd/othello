@@ -10,6 +10,21 @@ Discovery companion:
 
 ## Current status
 
+**C581 closed (2026-07-31): quantitative ambient-Clifford rigidity is
+positive, semilinear reconstruction is false.**  Phase-optimized global
+vector error `\(\varepsilon\)` between product-unitarily related
+equal-phase `[6,3,4]_q` MDS--CSS states forces every local factor within
+normalized Hilbert--Schmidt distance `\(2\sqrt2q^2\varepsilon\)` of an
+additive Clifford below an explicit prime-field commutator threshold.  The
+four-party marginal form is `\(\sqrt2q^2\eta\)`.  Weyl products,
+commutators, and character averaging close the gap from approximate axes to
+an implementing Clifford.  The result is uniform across C623's enlarged
+kernels only for the full prime-field Clifford target: exact q=9
+nonsemilinear and q=25 GRS symplectic elements rule out every uniform
+semilinear, split-torus, or Desarguesian-spread upgrade at zero error.  No
+manuscript wording was adopted.  See
+`2026-07-24-c581-phase-space-robust-rigidity.md`.
+
 **C731--C732 closed (2026-07-31): Clebsch extremal-\(X\)-syndrome bridge
 red-teamed and adopted.**  Section 5 now proves the coset-state and
 \(Z(C^\perp)\)-syndrome dictionary for the Clebsch \([6,3,4]_{11}\) state,
@@ -594,7 +609,7 @@ off-diagonal `k`-twist appears exactly on
 the `q=9,k=1` divisor gives the extra Frobenius--Gale sector.  The diagonal
 `k`-twist appears exactly on
 `(t^(p^k)-t)(1-t^(p^k+1))=0`; together the two divisors account for every
-fixed-party additive intertwiner degree of freedom.  C581 should treat these
+fixed-party additive intertwiner degree of freedom.  C581 treats these
 enlarged-kernel strata separately.  The exact standard-library replay,
 witnesses, kernel invariants, and mystery ledger are in
 `2026-07-25-c623-ame-lu-extension-field-clifford.md`.  No manuscript source
@@ -632,14 +647,14 @@ eight evidence replays, visual inspection, and 37-public/80-formal release
 checks pass.  See
 `2026-07-25-c640-ame-lu-extension-field-adoption.md`.
 
-**Post-C619 two-reader frontier (2026-07-25): exact frontiers closed;
-quantitative successor remains queued.**
+**Post-C619 two-reader frontier (2026-07-25): exact and quantitative
+frontiers closed.**
 Two independent manuscript-only cold reads converged on the same research
 frontiers.  C622 has proved the length-generic diagonal-isoduality
 dichotomy, C624 has computed the first party-moving extensions, and C623 has
-closed the extension-field reconstruction route negatively.  C581 remains
-the separately queued quantitative approximate-rigidity problem and must
-not reuse the failed exact spread-reconstruction premise.  The complete
+closed the extension-field reconstruction route negatively.  C581 has now
+proved quantitative ambient-Clifford rigidity while ruling out the failed
+exact spread-reconstruction target even at zero error.  The complete
 synthesis, secondary questions, underdeveloped
 connections, and EV rationale are in
 `2026-07-25-ame-lu-two-cold-read-frontier.md`.
@@ -716,9 +731,10 @@ C619 is closed.  Dependency order is authoritative:
     (complete).
 
 The revision has cleared the independent re-review findings and is complete
-locally.  Public release waits on the author gates listed above. C581 remains
-a separately queued optional manuscript upgrade in quantitative approximate
-rigidity; C623 has disproved the exact spread-reconstruction premise.
+locally.  Public release waits on the author gates listed above. C581 has
+closed the optional quantitative gate without manuscript adoption: ambient
+additive-Clifford rigidity is stable, while C623's exact witnesses disprove
+semilinear spread reconstruction.
 
 C601--C615 close the paper's principal formalization gap in four acceptance
 gates.  The full \(m=3\) prototype and pencil composition are already
@@ -749,8 +765,8 @@ affine one-qudit extension is non-split by the Heisenberg commutator.
 completion program is closed through C619.  The post-Version-1 diagonal
 isoduality, party-extension, and extension-field frontiers C622/C624/C623
 are complete, and C629 formalizes the reusable split-extension consequences.
-C581 is now unblocked as a separate quantitative-rigidity upgrade, without
-an exact spread-reconstruction assumption.  The next
+C581 is complete as a separate quantitative-rigidity result, without an
+exact spread-reconstruction assumption.  The next
 cross-lane route remains C553 and then the coordinated build-system
 extraction.  The authoritative three-session protocol is
 `notes/2026-07-25-c287-token-efficient-execution.md`.
