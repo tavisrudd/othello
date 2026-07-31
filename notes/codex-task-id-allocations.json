@@ -1790,8 +1790,17 @@
       "last": 732,
       "purpose": "red-team Clebsch AME syndrome bridge and queue publication adoption",
       "sequence": 199
+    },
+    {
+      "count": 1,
+      "first": 733,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 733,
+      "purpose": "prove marking-independent orientation bridge or weaken Paper III to a relative marked theorem",
+      "sequence": 200
     }
   ],
-  "next_id": 733,
+  "next_id": 734,
   "schema": "codex-task-id-allocations-v1"
 }
