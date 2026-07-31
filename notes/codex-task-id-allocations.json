@@ -1700,8 +1700,17 @@
       "last": 705,
       "purpose": "C704 WP1 intrinsic adjugate realization of the Segre-Igusa polar map",
       "sequence": 189
+    },
+    {
+      "count": 5,
+      "first": 706,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 710,
+      "purpose": "C705 quantum/code follow-ups: equivariant Clifford phase, golden ETF POVM, doily incidence codes, Majorana K6 lift, E8-Hamming comparison",
+      "sequence": 190
     }
   ],
-  "next_id": 706,
+  "next_id": 711,
   "schema": "codex-task-id-allocations-v1"
 }
