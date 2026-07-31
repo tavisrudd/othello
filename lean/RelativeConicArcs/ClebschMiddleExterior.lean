@@ -62,11 +62,22 @@ def minorThree (C : Matrix (Fin 6) (Fin 6) ℤ) (S T : Fin 20) :
     Matrix (Fin 3) (Fin 3) ℤ :=
   fun i j => C (triple S i) (triple T j)
 
+/-- Closed determinant formula in dimension three. -/
+def detThree (A : Matrix (Fin 3) (Fin 3) ℤ) : ℤ :=
+  A 0 0 * A 1 1 * A 2 2 - A 0 0 * A 1 2 * A 2 1
+    - A 0 1 * A 1 0 * A 2 2 + A 0 1 * A 1 2 * A 2 0
+    + A 0 2 * A 1 0 * A 2 1 - A 0 2 * A 1 1 * A 2 0
+
+/-- The closed formula is the ordinary matrix determinant. -/
+theorem detThree_eq_det (A : Matrix (Fin 3) (Fin 3) ℤ) :
+    detThree A = Matrix.det A := by
+  simpa [detThree] using (Matrix.det_fin_three A).symm
+
 /-- The third compound matrix, representing the third exterior power in the
 increasing-triple bases. -/
 def compoundThree (C : Matrix (Fin 6) (Fin 6) ℤ) :
     Matrix (Fin 20) (Fin 20) ℤ :=
-  fun S T => Matrix.det (minorThree C S T)
+  fun S T => detThree (minorThree C S T)
 
 /-- The middle-exterior return `* Λ³C` for the golden conference matrix. -/
 def middleExterior : Matrix (Fin 20) (Fin 20) ℤ :=
