@@ -27,6 +27,11 @@ The marked forward theorem and its exact C727 output inventory are frozen in
 [the C720--C727 operator interface](../2026-07-31-c720-c727-operator-interface.md).
 It deliberately makes no descent claim from Paper I's coarser syndrome
 objects; C727 owns that covariance and minimal-marking audit.
+The post-freeze ej2 theorem in
+notes/2026-07-31-c720-ej2-sextic-dimer-equivalence.md proves that selected
+determinant-sextic coefficients are exactly the four-cycle holonomies in the
+relative \(K_{3,3}\) matching fingerprint, making those two reverse shadows
+canonically equivalent.
 
 ## Gates
 

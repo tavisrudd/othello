@@ -17,16 +17,16 @@ or canonically removes those marks.
 
 ## Marked input
 
-Work over a characteristic-zero field (k), and put
-(k_5=k(\sqrt5)).  A **fully marked golden presentation** consists of:
+Work over a characteristic-zero field \(k\), and put
+\(k_5=k(\sqrt5)\).  A **fully marked golden presentation** consists of:
 
-1. a labelled six-set (X), an orientation of (k^X), and its augmentation
-   space (A_X=k^X/k\mathbf1);
+1. a labelled six-set \(X\), an orientation of \(k^X\), and its augmentation
+   space \(A_X=k^X/k\mathbf1\);
 2. the outer six-set \(\mathcal T\), with its coherent signed outer
-   (S_6)-action;
+   \(S_6\)-action;
 3. the coherently oriented family of symmetric zero-diagonal sign matrices
-   \((C_T)_{T\in\mathcal T}\) satisfying (C_T^2=5I);
-4. a choice of (\sqrt5) and compatible orientations of the two golden
+   \((C_T)_{T\in\mathcal T}\) satisfying \(C_T^2=5I\);
+4. a choice of \(\sqrt5\) and compatible orientations of the two golden
    determinant lines when a signed cross-golden determinant is required.
 
 The orientation in item 3 is the common sign of the Joubert/Pfaffian
@@ -42,8 +42,8 @@ record the additional marking needed to do so.
 
 ## Frozen theorem: marked golden operator propagation
 
-For (x\in A_X), let (D_x=\operatorname{diag}(x)), and for each
-(T\in\mathcal T) put
+For \(x\in A_X\), let \(D_x=\operatorname{diag}(x)\), and for each
+\(T\in\mathcal T\) put
 
 \[
  K_T=*\!\bigwedge^3 C_T,
@@ -65,7 +65,7 @@ The six cubics form the signed outer-standard Joubert vector and satisfy
  \sum_TZ_T=0,\qquad \sum_TZ_T^3=0.
 \]
 
-Thus (Z=(Z_T)_T) lands on the Segre cubic.  Its projective polar is
+Thus \(Z=(Z_T)_T\) lands on the Segre cubic.  Its projective polar is
 represented by
 
 \[
@@ -81,7 +81,7 @@ and satisfies
 \]
 
 Hence centered squaring sends the signed Segre family to the ordinary
-outer-standard Igusa quartic family and forgets the common sign of (Z).
+outer-standard Igusa quartic family and forgets the common sign of \(Z\).
 
 ### 2. Pfaffian, determinant, and Cartan shadows
 
@@ -93,14 +93,14 @@ The same cubic and polar coordinates are operator invariants:
  W_T=\frac1{16}\operatorname{center}_T\det A_T(x).
 \]
 
-The restriction of the Cartan (E_6) cubic to
-((0,0,A_T(x))) is precisely this Pfaffian.  This is a literal linear
+The restriction of the Cartan \(E_6\) cubic to
+\((0,0,A_T(x))\) is precisely this Pfaffian.  This is a literal linear
 Pfaffian section, not an identification of the binary-polyhedral and Lie
 exceptional parents.
 
 ### 3. Golden determinant, adjugate, and categorical shadows
 
-Over (k_5), set
+Over \(k_5\), set
 
 \[
  P_{T,\pm}=\frac12\left(I\pm\frac{C_T}{\sqrt5}\right),
@@ -124,13 +124,13 @@ and
 
 This linear--quadratic matrix factorization gives the two kernel-incidence
 small resolutions, the conjugate rank-one Ulrich/MCM sheaves, and their
-rational rank-two descent with an endomorphism squaring to (5I).  Golden
-conjugation exchanges (V_+) and (V_-), transposes (B_T), and exchanges
+rational rank-two descent with an endomorphism squaring to \(5I\).  Golden
+conjugation exchanges \(V_+\) and \(V_-\), transposes \(B_T\), and exchanges
 the two resolutions and rank-one sheaves.
 
 The assembled differential adjugate is part of the same frozen interface.
-Let (G_x(e_T)=dZ_T|_x), pass to the two augmentation quotients, and write
-the resulting (5\times5) quadratic matrix as (\mathsf A(x)).  With
+Let \(G_x(e_T)=dZ_T|_x\), pass to the two augmentation quotients, and write
+the resulting \(5\times5\) quadratic matrix as \(\mathsf A(x)\).  With
 
 \[
  \widehat W_T=6Z_T^2-\sum_UZ_U^2,
@@ -149,7 +149,7 @@ cross-golden adjugate construction.
 
 ### 4. Slater, Majorana, pure-spinor, and anomaly shadows
 
-For orthonormal golden frames (Q_{T,\pm}), the postselected transfer block
+For orthonormal golden frames \(Q_{T,\pm}\), the postselected transfer block
 
 \[
  \mathcal K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}
@@ -162,7 +162,7 @@ satisfies
  =\frac{Z_T(x)^2}{500}.
 \]
 
-It is the three-fermion Slater success probability.  Meanwhile (A_T(x))
+It is the three-fermion Slater success probability.  Meanwhile \(A_T(x)\)
 is the coefficient matrix of the canonical six-Majorana family,
 
 \[
@@ -170,14 +170,14 @@ is the coefficient matrix of the canonical six-Majorana family,
  \qquad \{C_T,A_T(x)\}=0.
 \]
 
-Its gap-closing and parity wall is (Z_T=0); after a Majorana-frame
+Its gap-closing and parity wall is \(Z_T=0\); after a Majorana-frame
 orientation is chosen, its class-D parity is \(\operatorname{sgn}Z_T\).
-The principal Pfaffians of each (A_T(x)) give one pure-spinor big cell.
+The principal Pfaffians of each \(A_T(x)\) give one pure-spinor big cell.
 The six cells form a synchronized five-parameter product with top
-coordinates (4Z_T).  The Segre equations come from golden
+coordinates \(4Z_T\).  The Segre equations come from golden
 synchronization, not from Wick identities alone.
 
-The same vector (Z(x)) obeys the six-charge (U(1)) anomaly equations
+The same vector \(Z(x)\) obeys the six-charge \(U(1)\) anomaly equations
 
 \[
  \sum_TZ_T=\sum_TZ_T^3=0.
@@ -189,19 +189,19 @@ modes with Weyl fields.
 
 ### 5. Order-six rigidity and the six-sister syndrome
 
-For any symmetric zero-diagonal (6\times6) sign matrix (B), the following
+For any symmetric zero-diagonal \(6\times6\) sign matrix \(B\), the following
 are equivalent:
 
 1. every (3|3) cut has determinant-matching signs split (5{:}1);
-2. every (3\times3) cross determinant has absolute value (4);
-3. (B^2=5I);
-4. after switching (B_{0i}=1), the negative internal edges form a
+2. every \(3\times3\) cross determinant has absolute value \(4\);
+3. \(B^2=5I\);
+4. after switching \(B_{0i}=1\), the negative internal edges form a
    five-cycle.
 
 The twelve oriented normalized solutions pair under global negation into
 six projective frustration fingerprints, canonically
-(\operatorname{Syl}_5(A_5)\cong A_5/D_5).  Their ten-cut sign words
-(r_T\in\{\pm1\}^{10}) satisfy
+\(\operatorname{Syl}_5(A_5)\cong A_5/D_5\).  Their ten-cut sign words
+\(r_T\in\{\pm1\}^{10}\) satisfy
 
 \[
  \langle r_T,r_U\rangle=
@@ -220,12 +220,12 @@ These are formula-level covariance facts, not descent verdicts.
 
 | change of marked presentation | frozen effect |
 |---|---|
-| axis permutation | transports all matrices and variables; the (Z)-family carries the signed outer action |
-| diagonal vertex switching | conjugates (A_T(x)); its Pfaffian changes by the frame-orientation character and its determinant is fixed |
-| common orientation reversal (C_T\mapsto-C_T) | negates (Z) and every Pfaffian, fixes (Z^2), (W), determinants, and probabilities |
-| (x\mapsto x+c\mathbf1) | fixes every commutator and all downstream operator shadows |
-| (x\mapsto\lambda x) | scales (Z) by (\lambda^3) and (W) and determinant shadows by (\lambda^6) |
-| golden conjugation | exchanges (P_+\leftrightarrow P_-), transposes the cross block, and exchanges the paired resolutions/MCM summands |
+| axis permutation | transports all matrices and variables; the \(Z\)-family carries the signed outer action |
+| diagonal vertex switching | conjugates \(A_T(x)\); its Pfaffian changes by the frame-orientation character and its determinant is fixed |
+| common orientation reversal \(C_T\mapsto-C_T\) | negates \(Z\) and every Pfaffian, fixes \(Z^2\), \(W\), determinants, and probabilities |
+| \(x\mapsto x+c\mathbf1\) | fixes every commutator and all downstream operator shadows |
+| \(x\mapsto\lambda x\) | scales \(Z\) by \(\lambda^3\) and \(W\) and determinant shadows by \(\lambda^6\) |
+| golden conjugation | exchanges \(P_+\leftrightarrow P_-\), transposes the cross block, and exchanges the paired resolutions/MCM summands |
 
 C727 must turn this table into an action-and-stabilizer proof on the exact
 Paper I recovery classes.  In particular, this note does not decide whether
@@ -236,15 +236,15 @@ recovers the source switching class.
 
 | output family | object supplied on marked input | source package | C727 question |
 |---|---|---|---|
-| middle exterior/Joubert | signed six-vector of cubic forms (Z) and its projective cubic line | C704 | orientation cover and reverse recovery |
-| Segre--Igusa | Segre point and centered-square polar (W) | C704/C705 | precise information loss, especially (W=0) |
+| middle exterior/Joubert | signed six-vector of cubic forms \(Z\) and its projective cubic line | C704 | orientation cover and reverse recovery |
+| Segre--Igusa | Segre point and centered-square polar \(W\) | C704/C705 | precise information loss, especially \(W=0\) |
 | commutator | Pfaffian cubic and determinant sextic | C704/C709 | oriented line versus unmarked square; reverse faithfulness |
 | cross-golden | determinant, adjugate factorization, paired resolutions and MCM objects | C704/C705 | golden-conjugate pair versus selected summand |
 | Cartan | literal Pfaffian linear section | C704 | descent of the section, not of an ambient exceptional marking |
 | Slater | oriented amplitude and squared success probability | C707 | phase/gauge class versus probability invariant |
 | Majorana | labelled Hamiltonian family and parity wall | C709 | Majorana gauge and frame orientation |
 | synchronized spinors | six-cell synchronized product | C720 | descent of synchronization data; no single-spinor parent claim |
-| anomaly | projective six-charge solution (Z) | C707 | permutation, scale, and overall-sign quotient |
+| anomaly | projective six-charge solution \(Z\) | C707 | permutation, scale, and overall-sign quotient |
 | dimer/syndrome | unoriented switching line and six distance-six fingerprints | C720 | whether this supplies a split recovery map from Paper I data |
 
 The C705 exceptional parents, C706 Clifford lift, C708 doily/bad-prime
@@ -268,40 +268,40 @@ Let
 \]
 
 The squaring map on polynomial lines is the second Veronese embedding, so
-([\Delta_C]) determines the cubic line ([Z_C]) in characteristic zero.
+\([\Delta_C]\) determines the cubic line \([Z_C]\) in characteristic zero.
 More elementarily, unique factorization shows that two nonzero polynomial
 squares spanning the same line have square roots spanning the same line
-after scalar extension, hence the same (k)-rational projective line.
+after scalar extension, hence the same \(k\)-rational projective line.
 
-The squarefree coefficient of (x_ix_jx_k) in (Z_C) is the triangle
+The squarefree coefficient of \(x_ix_jx_k\) in \(Z_C\) is the triangle
 holonomy
 
 \[
  t_{ijk}=C_{ij}C_{jk}C_{ki}\in\{\pm1\}.
 \]
 
-Consequently ([Z_C]) recovers the full triangle table up to common
+Consequently \([Z_C]\) recovers the full triangle table up to common
 negation.  Triangle holonomies recover an edge signing up to vertex
-switching, while common negation is exactly (C\mapsto-C).  Therefore
+switching, while common negation is exactly \(C\mapsto-C\).  Therefore
 
-> the projective determinant sextic ([\Delta_C]) is reverse-faithful on
+> the projective determinant sextic \([\Delta_C]\) is reverse-faithful on
 > golden conference matrices for the **unoriented switching line**
-> ({[C],[-C]}).
+> \(\{[C],[-C]\}\).
 
-It cannot recover the missing Pfaffian orientation, since (C) and (-C)
+It cannot recover the missing Pfaffian orientation, since \(C\) and \(-C\)
 have the same determinant square.  The finite dimer fingerprint gives a
-second, independent reverse witness: its relative matching signs recover the
-same unoriented switching line through four-cycle holonomies.  The sextic
-and ten-cut syndrome are therefore two retractions to the same marked
-reconstruction class, one polynomial and one finite combinatorial.
+second, independently defined reverse witness: its relative matching signs
+recover the same unoriented switching line through four-cycle holonomies.
+The ej2 coefficient identity below strengthens this: the two witnesses are
+canonically equivalent presentations, not merely parallel retractions.
 
 ### Exact vanishing locus of the centered square
 
-Suppose (Z\ne0) lies on the Segre cubic and (W=0).  Then all six squares
-(Z_T^2) are equal.  After projective rescaling, every (Z_T\) is (+1) or
-(-1); the equation \(\sum_TZ_T=0\) forces three signs of each kind.  The
-cubic equation is then automatic.  Conversely every such (3+3) sign
-vector has (W=0).  Modulo common sign there are
+Suppose \(Z\ne0\) lies on the Segre cubic and \(W=0\).  Then all six squares
+\(Z_T^2\) are equal.  After projective rescaling, every \(Z_T\) is \(+1\) or
+\(-1\); the equation \(\sum_TZ_T=0\) forces three signs of each kind.  The
+cubic equation is then automatic.  Conversely every such \(3+3\) sign
+vector has \(W=0\).  Modulo common sign there are
 
 \[
  \frac12\binom63=10
@@ -313,6 +313,29 @@ the proposed balanced-layer test exactly: the twenty oriented balanced
 amplitude signs pair into the ten projective base points of the polar map.
 It does not prove generic injectivity of the polar map or classify all of
 its nonzero fibres; those remain C727 descent questions.
+
+## Post-freeze ej2 corollary: sextic/dimer equivalence
+
+The complete proof is recorded in
+notes/2026-07-31-c720-ej2-sextic-dimer-equivalence.md.  For distinct
+\(i,j,k,l\), its central identity is
+
+\[
+ \boxed{\quad
+ [x_i^2x_j^2x_kx_l]\,\Delta_C
+ =32\,t_{ijk}t_{ijl}.
+ \quad}
+\]
+
+The product on the right is the four-cycle holonomy, while the ratio of two
+\(K_{3,3}\) matching terms differing by the corresponding transposition is
+its negative.  Therefore the determinant sextic, triangle two-graph,
+four-cycle holonomies, full relative dimer fingerprint, and conference
+switching class modulo \(C\mapsto-C\) are canonically equivalent
+orientation-free reconstruction data.  The selected sextic coefficients
+expose the dimer readout without first choosing a square root.  Their common
+projective sign is fixed by requiring product \(+1\) around the triangles of
+the Johnson graph on triples.
 
 ## Novelty and trust boundary
 
@@ -345,12 +368,12 @@ Golden write surface.
 - **Settled by `ej`:** the determinant square is reverse-faithful for the
   unoriented conference switching line.  The Veronese square recovers the
   cubic line, its coefficients recover triangle holonomies up to common
-  sign, and those holonomies recover the switching class up to (C\mapsto-C).
-- **Settled by `ej`:** the determinant sextic and the ten-cut dimer syndrome
-  are independent polynomial and combinatorial retractions to the same
-  unoriented reconstruction class.
-- **Settled by `ej`:** (W=0) on the projective Segre cubic is exactly its
-  ten-node singular locus, represented by the twenty oriented (3+3) sign
+  sign, and those holonomies recover the switching class up to \(C\mapsto-C\).
+- **Settled by `ej2`:** the determinant sextic and relative dimer fingerprint
+  are canonically equivalent polynomial and combinatorial presentations.
+  Their explicit bridge is the normalized \((2,2,1,1)\)-coefficient formula.
+- **Settled by `ej`:** \(W=0\) on the projective Segre cubic is exactly its
+  ten-node singular locus, represented by the twenty oriented \(3+3\) sign
   vectors.  This is the exact polar base locus, not merely an observed
   balanced family.
 - **Settled by `tt`:** the source of the forward theorem must be the coherent

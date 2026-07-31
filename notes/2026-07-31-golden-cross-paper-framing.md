@@ -89,10 +89,13 @@ characteristic zero, the full determinant polynomial
 \(\det[D_x,C]=16Z_C(x)^2\) determines the cubic line \([Z_C]\), because a
 square in the polynomial ring has only the expected scalar/sign ambiguity.
 Its squarefree coefficients recover the triangle two-graph up to common
-negation and hence recover the unoriented switching line.  Independently,
-the ten-cut dimer syndrome recovers the same line through four-cycle
-holonomies.  By contrast, centered squaring vanishes exactly at the ten Segre
-nodes: the twenty balanced (3+3) amplitude signs pair into those ten
+negation and hence recover the unoriented switching line.  More strongly,
+the normalized \((2,2,1,1)\)-coefficients of the sextic are exactly the
+four-cycle holonomies measured by relative \(K_{3,3}\) matching signs.
+Thus the determinant and dimer shadows are canonically equivalent
+orientation-free presentations.  By contrast, centered squaring vanishes
+exactly at the ten Segre nodes: the twenty balanced \(3+3\) amplitude signs
+pair into those ten
 projective base points.  C727 still owns descent of these reverse maps from
 Paper I's input hierarchy and the classification of nonzero polar fibres.
 
@@ -125,7 +128,7 @@ every Golden output:
 |---|---|---|
 | relabelling of the six axes | permutation conjugacy | which outputs descend as unlabelled objects? |
 | switching of axis representatives | diagonal sign conjugacy | which cubic, Pfaffian, and physical systems descend only up to gauge? |
-| exchange of the two orientation classes | (C\mapsto-C) or the corresponding outer exchange | which outputs change sign, exchange sheets, or remain fixed? |
+| exchange of the two orientation classes | \(C\mapsto-C\) or the corresponding outer exchange | which outputs change sign, exchange sheets, or remain fixed? |
 | golden conjugation | exchange of the two golden eigenspaces | which determinant, resolution, and MCM objects form a conjugate pair? |
 | projective scaling of the cubic | scalar change in an invariant line | which claims concern a cubic line and which require a normalization? |
 
@@ -148,7 +151,7 @@ The primary audit should cover only exact Golden-paper constructions:
 - the anomaly-amplitude family, with no claim that the finite model
   constructs a gauge theory.
 
-The (E_8)--Hamming obstruction, Clifford/doily refinements, and hyperbolic
+The \(E_8\)--Hamming obstruction, Clifford/doily refinements, and hyperbolic
 lattice repair belong in a secondary audit.  Their inclusion in a final
 composite theorem depends on whether they are genuinely functorial outputs of
 the recovered equivalence class rather than contextual relatives.

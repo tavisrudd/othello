@@ -59,10 +59,16 @@ Paper III remains unchanged and ends before it.  In particular:
   must descend, without prejudging any unlabelled or minimally marked
   recovery claim.
 - C720's post-freeze `ej` corollaries settle two marked reverse tests needed
-  by C727: the determinant sextic and the independent ten-cut syndrome both
-  recover the unoriented switching line, and (W=0) is exactly the ten-node
-  Segre polar base locus.  Descent from Paper I's coarsest input and the
-  nonzero polar fibres remain C727's work.
+  by C727: the determinant sextic and the independently defined ten-cut
+  syndrome both recover the unoriented switching line, and \(W=0\) is
+  exactly the ten-node Segre polar base locus.  Descent from Paper I's
+  coarsest input and the nonzero polar fibres remain C727's work.
+- C720's ej2 coefficient theorem strengthens the reverse result: the
+  \((2,2,1,1)\)-coefficients of the determinant sextic are exactly the
+  four-cycle holonomies read by relative \(K_{3,3}\) matching signs.  The
+  algebraic sextic and dimer fingerprint are canonically equivalent
+  orientation-free presentations, documented in
+  notes/2026-07-31-c720-ej2-sextic-dimer-equivalence.md.
 
 No manuscript root has yet been created.  C720 owns the architecture and
 the go/no-go gate for `papers/golden-operator/`.

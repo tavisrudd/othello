@@ -42,9 +42,10 @@ six-family used by the forward theorem; that completion is not assumed.
    anomaly constructions separately.
 5. Test faithfulness in the reverse direction.  The marked source-side tests
    are now passed: the determinant square recovers the cubic line and its
-   unoriented switching class, independently corroborated by the ten-cut
-   dimer syndrome, while (W=0) is exactly the ten-node Segre singular
-   locus.  Determine whether these reverse maps descend from Paper I's
+   unoriented switching class, and its normalized \((2,2,1,1)\)-coefficients
+   are exactly the four-cycle holonomies of the relative dimer fingerprint;
+   meanwhile \(W=0\) is exactly the ten-node Segre singular locus.  Determine
+   whether these equivalent reverse maps descend from Paper I's
    coarsest sufficient input, classify the nonzero centered-square fibres at
    each marking level, and decide whether the composite is a split injection
    or an equivalence of reconstruction classes.
