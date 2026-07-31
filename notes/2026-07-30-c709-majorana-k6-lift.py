@@ -7,7 +7,6 @@ import argparse
 import hashlib
 import itertools
 import json
-import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -533,18 +532,27 @@ def canonical_bytes(data: dict[str, object]) -> bytes:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--write", action="store_true")
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
+    if args.write == args.check:
+        parser.error("choose exactly one of --write or --check")
     rendered = canonical_bytes(build())
-    if args.check:
-        with tempfile.TemporaryDirectory() as directory:
-            candidate = Path(directory) / OUTPUT.name
-            candidate.write_bytes(rendered)
-            assert candidate.read_bytes() == OUTPUT.read_bytes()
-        print(f"ok: {OUTPUT.name} is canonical")
-    else:
+    if args.write:
         OUTPUT.write_bytes(rendered)
-        print(f"wrote {OUTPUT}")
+    else:
+        assert OUTPUT.read_bytes() == rendered
+    print(
+        json.dumps(
+            {
+                "certificate": OUTPUT.name,
+                "bytes": len(rendered),
+                "sha256": hashlib.sha256(rendered).hexdigest(),
+                "status": "written" if args.write else "verified",
+            },
+            sort_keys=True,
+        )
+    )
 
 
 if __name__ == "__main__":
