@@ -10,6 +10,21 @@ Discovery companion:
 
 ## Current status
 
+**C731 closed and C732 queued (2026-07-31): Clebsch extremal-(X)-syndrome
+bridge passed a bounded referee and publication red team.**  For the Clebsch
+([6,3,4]_{11}) code, the equal-phase AME state has 120 covering-radius
+(X)-syndromes on twelve conic rays, each with twenty minimum-support
+weight-three representatives, in one (C_{10}\times A_5) monomial orbit.
+The defining six-arc is nevertheless nonconic, so the fixed-party logical
+symplectic image is (T), not (\mathrm{SL}_2(11)).  The publishable unit is
+one proposition and one boundary remark, not a new headline: it must retain
+the (X)-only, fixed-party, projective-coordinate, and monomial-versus-party
+qualifications.  Golden's C727 already proves that the bare conic is
+insufficient without the support two-graph, so no duplicate Golden task was
+allocated.  C732 owns citation, manuscript, trust-ledger, build, release, and
+standalone-mirror adoption.  See
+`2026-07-31-c731-clebsch-ame-syndrome-bridge-red-team.md`.
+
 **C649 adopted pending its final Lean composition and aggregate gate
 (2026-07-25): general stabilizer-AME full-Weyl rigidity.**  For every stabilizer
 \(\operatorname{AME}(2m,q)\) state with \(m\ge2\), the stabilizer labels
