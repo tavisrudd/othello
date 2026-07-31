@@ -82,7 +82,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C729 `[golden]` [QUEUED AFTER C720; SEQUEL DIRECTION]** — intrinsicize the syndrome Naimark--Gram lift from the golden order-six operator to the Petersen/Paley order-ten conference operator, classify its 36 extremal balanced cuts, and test for a higher conference tower and stability principle → `notes/golden-tasks/c729-higher-order-conference-cut-designs.md`.
 - **C715 `[golden]` [QUEUED AFTER C720]** — invert the golden anomaly transducer on rational Segre points, classify exceptional/chiral/vectorlike loci, and optimize physical normalization and postselection cost → `notes/golden-tasks/c715-golden-anomaly-inverse.md`.
 - **C716 `[golden]` [QUEUED AFTER C715]** — synthesize the 15 nonchiral and six chiral Fano components of two-\(U(1)\), six-Weyl anomaly lines as golden control families and identify the mixed Pfaffian identities → `notes/golden-tasks/c716-golden-two-u1-lines.md`.
 - **C717 `[golden]` [QUEUED AFTER C720; INDEPENDENT OF C715]** — classify the six golden Majorana Pfaffian walls, real parity chambers, simultaneous gap closings, and any genuine monodromy or parity-pump obstruction → `notes/golden-tasks/c717-golden-majorana-parity-chambers.md`.

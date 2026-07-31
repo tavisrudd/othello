@@ -87,7 +87,7 @@ particular:
   locus.  On the resolved Gauss map, its fifteen singular lines have fibres
   given by strict transforms of conics through four Segre base nodes; these
   degenerate to six-line fibre closures at the fifteen triple-line points.
-- C729 is active.  Its opening theorem separates the \(6\to10\) construction
+- C729 is complete.  Its opening theorem separates the \(6\to10\) construction
   into simplex linear algebra, golden sign rigidity, and functorial descent.
   Sign integrality forces the columns to be all ten balanced cuts, and every
   order-ten sign Gram factor is equivalent to this universal factor under
@@ -104,7 +104,14 @@ particular:
   commuting relation on C708's 36 outer involutions, closing the full
   outer-action bridge.  C708's explicit order-eight exchange preserves the
   integral cut factor by row and column permutation with one common minus
-  sign, so no independent column-orientation torsor survives.
+  sign, so no independent column-orientation torsor survives.  Its closing
+  theorem proves universal first and second balanced-cut singular-value
+  moments for every symmetric order-\(2m\) conference matrix.  Exact Paley
+  order-fourteen and order-eighteen censuses show that determinant strata
+  already coarsen projective-linear orbits.  The weighted operator is exactly
+  \(K=-3A_1+A_2-A_3\) in the Sylvester Bose--Mesner algebra, so its quadratic
+  identity is primitive-idempotent machinery rather than a roux continuation;
+  the integral extremal-cut factor and outer bridge remain Golden-specific.
 - C728 constructs the six Majorana principal-Pfaffian systems intrinsically
   as an outer-equivariant product of Cartan big cells.  The synchronized
   tangent map and top cubic covariant each have multiplicity one; the exact
@@ -131,7 +138,6 @@ manuscript edit is authorized by C727.
 
 | task | state | next gate |
 |---|---|---|
-| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | active; integral outer bridge proved | derive higher-order moments and audit the reflection hierarchy |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
@@ -140,12 +146,10 @@ manuscript edit is authorized by C727.
 
 ## Recommended order
 
-1. Complete C729's higher-order moment and focused literature gates now that
-   the integral Sylvester reflection and outer action are frozen.
-2. C715 anomaly inverse.
-3. C717 and C718, chosen by theorem yield after C715's first gate.
-4. C716 only after the inverse interface freezes.
-5. C719 after the mathematical paper spine is secure.
+1. C715 anomaly inverse.
+2. C717 and C718, chosen by theorem yield after C715's first gate.
+3. C716 only after the inverse interface freezes.
+4. C719 after the mathematical paper spine is secure.
 
 ## Ownership and allowed paths
 

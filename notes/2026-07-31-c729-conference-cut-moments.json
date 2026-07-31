@@ -1,0 +1,456 @@
+{
+  "independent_replay": {
+    "method": "every Bareiss determinant checked by modular Gaussian elimination",
+    "primes": [
+      1000000007,
+      1000000009
+    ]
+  },
+  "orders": [
+    {
+      "absolute_determinant_distribution": {
+        "4": 10
+      },
+      "cut_count_mod_complement": 10,
+      "determinant_fourth_moment": 2560,
+      "determinant_second_moment": 160,
+      "matrix_sha256": "8c5716744679ab471825f6888b60fd9549f19c72a7c085788c5b819913a52bd7",
+      "order": 6,
+      "pgl2_orbits": [
+        {
+          "absolute_determinant": 4,
+          "representative_half": [
+            "infinity",
+            0,
+            1
+          ],
+          "size": 10
+        }
+      ],
+      "spectral_moment_averages": {
+        "trace_BBt": "9",
+        "trace_BBt_cubed": "129",
+        "trace_BBt_squared": "33"
+      }
+    },
+    {
+      "absolute_determinant_distribution": {
+        "0": 90,
+        "48": 36
+      },
+      "cut_count_mod_complement": 126,
+      "determinant_fourth_moment": 191102976,
+      "determinant_second_moment": 82944,
+      "matrix_sha256": "dd3569737cbe97a041915c35c9da1c97647e62102c59267dbff5a45f199c736b",
+      "order": 10,
+      "spectral_moment_averages": {
+        "trace_BBt": "25",
+        "trace_BBt_cubed": "1225",
+        "trace_BBt_squared": "1175/7"
+      }
+    },
+    {
+      "absolute_determinant_distribution": {
+        "192": 624,
+        "256": 364,
+        "576": 182,
+        "64": 546
+      },
+      "cut_count_mod_complement": 1716,
+      "determinant_fourth_moment": 22454223241216,
+      "determinant_second_moment": 109477888,
+      "matrix_sha256": "81ad9d323286e0e7d075075f903c001b6d35da130d3cf0ec907a9e3b9bd6dd3f",
+      "order": 14,
+      "pgl2_orbits": [
+        {
+          "absolute_determinant": 64,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "size": 546
+        },
+        {
+          "absolute_determinant": 192,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          "size": 78
+        },
+        {
+          "absolute_determinant": 192,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            6
+          ],
+          "size": 546
+        },
+        {
+          "absolute_determinant": 256,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            5,
+            6
+          ],
+          "size": 364
+        },
+        {
+          "absolute_determinant": 576,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            5,
+            8
+          ],
+          "size": 182
+        }
+      ],
+      "spectral_moment_averages": {
+        "trace_BBt": "49",
+        "trace_BBt_cubed": "55811/11",
+        "trace_BBt_squared": "5243/11"
+      }
+    },
+    {
+      "absolute_determinant_distribution": {
+        "1024": 5032,
+        "2048": 4896,
+        "2304": 612,
+        "256": 3672,
+        "3328": 1224,
+        "4096": 1224,
+        "4608": 2448,
+        "4864": 1224,
+        "512": 2448,
+        "6656": 816,
+        "8192": 714
+      },
+      "cut_count_mod_complement": 24310,
+      "determinant_fourth_moment": 7209725118895882240,
+      "determinant_second_moment": 229039144960,
+      "matrix_sha256": "f38a26a0ca989b37571c1774cb49cdea533b62f6af918432bdc713ad41d78252",
+      "order": 18,
+      "pgl2_orbits": [
+        {
+          "absolute_determinant": 256,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "size": 1224
+        },
+        {
+          "absolute_determinant": 256,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            6,
+            7,
+            9
+          ],
+          "size": 2448
+        },
+        {
+          "absolute_determinant": 512,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8
+          ],
+          "size": 2448
+        },
+        {
+          "absolute_determinant": 1024,
+          "representative_half": [
+            "infinity",
+            0,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            11
+          ],
+          "size": 136
+        },
+        {
+          "absolute_determinant": 1024,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8
+          ],
+          "size": 2448
+        },
+        {
+          "absolute_determinant": 1024,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            9
+          ],
+          "size": 2448
+        },
+        {
+          "absolute_determinant": 2048,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            6,
+            7,
+            8
+          ],
+          "size": 2448
+        },
+        {
+          "absolute_determinant": 2048,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            3,
+            4,
+            5,
+            6,
+            7,
+            9
+          ],
+          "size": 2448
+        },
+        {
+          "absolute_determinant": 2304,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            7,
+            8,
+            9
+          ],
+          "size": 612
+        },
+        {
+          "absolute_determinant": 3328,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+            8
+          ],
+          "size": 1224
+        },
+        {
+          "absolute_determinant": 4096,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            8,
+            9
+          ],
+          "size": 1224
+        },
+        {
+          "absolute_determinant": 4608,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            5,
+            6,
+            8,
+            9
+          ],
+          "size": 2448
+        },
+        {
+          "absolute_determinant": 4864,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+            9
+          ],
+          "size": 1224
+        },
+        {
+          "absolute_determinant": 6656,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            4,
+            5,
+            6,
+            7,
+            9
+          ],
+          "size": 816
+        },
+        {
+          "absolute_determinant": 8192,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            2,
+            3,
+            5,
+            7,
+            8,
+            9
+          ],
+          "size": 306
+        },
+        {
+          "absolute_determinant": 8192,
+          "representative_half": [
+            "infinity",
+            0,
+            1,
+            3,
+            4,
+            5,
+            6,
+            8,
+            9
+          ],
+          "size": 408
+        }
+      ],
+      "spectral_moment_averages": {
+        "trace_BBt": "81",
+        "trace_BBt_cubed": "72117/5",
+        "trace_BBt_squared": "5157/5"
+      }
+    }
+  ],
+  "schema": "c729-conference-cut-moments-v1",
+  "weighted_order_36": {
+    "distance_intersection_triples": [
+      [
+        0,
+        0,
+        5
+      ],
+      [
+        1,
+        0,
+        4
+      ],
+      [
+        1,
+        2,
+        2
+      ],
+      [
+        4,
+        1,
+        0
+      ]
+    ],
+    "frame_sha256": "510d5f6a022740f7a7ae44227f9a6aea92d7ed39df4048b856d4bdd7b736b611",
+    "large_angle_edges": 90,
+    "operator_eigenvalues": {
+      "-5": 27,
+      "15": 9
+    },
+    "reflection_eigenvalues": {
+      "-10": 27,
+      "10": 9
+    },
+    "sylvester_spectrum": {
+      "-1": 10,
+      "-3": 9,
+      "2": 16,
+      "5": 1
+    },
+    "trace_K_powers_1_to_4": [
+      0,
+      2700,
+      27000,
+      472500
+    ],
+    "unordered_absolute_weight_counts": {
+      "1": 540,
+      "3": 90
+    }
+  }
+}

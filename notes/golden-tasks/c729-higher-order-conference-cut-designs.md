@@ -2,11 +2,14 @@
 
 **Lane:** `golden`
 
-**Status:** active; Naimark reflection and full integral outer-action bridge
-proved; moment/literature gates next
+**Status:** complete; Naimark reflection, full integral outer-action bridge,
+universal moment theorem, higher Paley census, and literature audit proved
 
 **Opening report:**
 `notes/2026-07-31-c729-simplex-conference-factorization.md`
+
+**Closing report:**
+`notes/2026-07-31-c729-conference-cut-moments.md`
 
 ## Objective
 
@@ -91,6 +94,11 @@ redundancy-two specialization, rather than presupposing a conference tower.
   higher-order cut distribution or design, not merely tables.
 - A sharp statement of why order six is exceptional.
 - Exact scripts, compact certificates, independent replay, and human proof.
+
+All acceptance gates pass.  The conference-only tower stops at redundancy
+four, while the constant-diagonal Naimark-reflection hierarchy survives.  The
+first two balanced-cut spectral moments are universal; the order-fourteen and
+order-eighteen determinant/orbit censuses isolate the higher arithmetic data.
 
 ## Boundary
 

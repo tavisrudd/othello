@@ -3,7 +3,8 @@
 **Date:** 2026-07-31
 **Lane:** `golden`
 **Status:** opening factorization, order-ten cut-orbit, and derived-association
-gates proved; higher-order moment/literature gate next
+gates proved; continued and completed in
+`notes/2026-07-31-c729-conference-cut-moments.md`
 
 ## Result
 
@@ -442,13 +443,12 @@ the integral \(-3\)-eigenspace factor, or the weighted quadratic identity
 above.  This is a terminology checkpoint, not the focused novelty audit
 required before any priority claim.
 
-## Next gate
+## Continuation
 
-Derive representation-theoretic or Cauchy--Binet moment constraints for
-higher conference orders and run the focused ETF/Naimark, Sylvester-graph,
-maximal-minor, and weighted-reflection literature audit.  The next
-computational order should be attempted only after these identities specify
-which distributional data can carry theorem-level content.
+The universal first two balanced-cut spectral moments, exact Paley
+order-fourteen and order-eighteen censuses, stability boundary, and focused
+ETF/Naimark, Sylvester, maximal-minor, and weighted-reflection literature audit
+are proved in `notes/2026-07-31-c729-conference-cut-moments.md`.
 
 ## `ej` + `tt` closeout and mystery ledger
 
