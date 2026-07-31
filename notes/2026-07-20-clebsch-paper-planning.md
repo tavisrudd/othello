@@ -15,7 +15,12 @@ The former replacement-spine and mega-paper plan was superseded on
    charter and acceptance gates;
 3. `notes/2026-07-24-c575-clebsch-split-disposition.md` and
    `notes/2026-07-24-c575-clebsch-trust-disposition.csv` for exact content
-   and trust allocation.
+   and trust allocation;
+4. `notes/2026-07-31-golden-cross-paper-framing.md` for the provisional
+   recovery--propagation framing from Paper I's coarse syndrome data through
+   the Clebsch geometry and golden conference operator to the Golden shadow
+   family.  C727 owns the exact covariance and minimal-marking audit; the
+   framing does not authorize Clebsch manuscript edits.
 
 The complete superseded planning record is preserved unchanged apart from
 this archival title in
