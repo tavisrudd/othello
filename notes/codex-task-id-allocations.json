@@ -1709,8 +1709,17 @@
       "last": 710,
       "purpose": "C705 quantum/code follow-ups: equivariant Clifford phase, golden ETF POVM, doily incidence codes, Majorana K6 lift, E8-Hamming comparison",
       "sequence": 190
+    },
+    {
+      "count": 2,
+      "first": 711,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 712,
+      "purpose": "Paper III golden-return human proofs and Lean successor",
+      "sequence": 191
     }
   ],
-  "next_id": 711,
+  "next_id": 713,
   "schema": "codex-task-id-allocations-v1"
 }
