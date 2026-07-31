@@ -3,8 +3,18 @@
     "all_cut_5_to_1_signings": 12,
     "conditions_equivalent_on_complete_domain": true,
     "conference_signings_B2_eq_5I": 12,
+    "every_five_cycle_of_cuts_is_determining": true,
     "gauge_normalized_K6_signings_checked": 1024,
+    "good_cut_count_distribution": {
+      "0": 172,
+      "10": 12,
+      "4": 660,
+      "6": 180
+    },
     "maximum_absolute_3_by_3_sign_determinant": 4,
+    "maximum_good_cuts_for_nonconference_signing": 6,
+    "minimum_determining_cut_sets": 162,
+    "minimum_fixed_cuts_for_rigidity": 5,
     "orientation_loss": "C and -C have the same relative matching fingerprint",
     "outer_golden_family_exhausts_them": true,
     "recovered_object": "the switching class of the unoriented two-graph line {+c,-c}",
@@ -28,6 +38,15 @@
       4,
       5
     ]
+  },
+  "higher_order_boundary_test": {
+    "balanced_5_by_5_cross_determinants": {
+      "0": 90,
+      "48": 36
+    },
+    "conclusion": "the all-cut maximum-determinant theorem is exceptional to order 6",
+    "conference_identity": "C^2=9I_10",
+    "matrix": "normalized symmetric Paley conference matrix of order 10"
   },
   "pure_spinor_test": {
     "counterexample_top_coordinates": [

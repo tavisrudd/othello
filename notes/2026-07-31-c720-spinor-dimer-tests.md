@@ -163,6 +163,17 @@ precisely the unoriented two-graph line \(\{c,-c\}\), not its orientation.
 The Pfaffian sign still requires an oriented Majorana frame, exactly as in
 C709.
 
+There is also an operator-theoretic reformulation.  For the balanced sign
+vector \(x_L=\mathbf1_L-\mathbf1_R\), the commutator is supported on the
+crossing \(K_{3,3}\), and block Pfaffian expansion gives
+\[
+ \left|Z_B(x_L)\right|=2\left|\det B_{L,R}\right|.
+\]
+Hence the four equivalent conditions above are also equivalent to all twenty
+balanced Boolean masks attaining the sharp value \(|Z_B|=8\).  The golden
+conference class is therefore characterized by **universal Boolean
+extremality**, not merely shown to attain it.
+
 This turns the six-shadow count into a structural statement:
 
 > The six golden shadow sisters are the six complement-pairs of labeled
@@ -170,6 +181,37 @@ This turns the six-shadow count into a structural statement:
 > \(K_{3,3}\) frustration fingerprints for which every balanced cut has one
 > exceptional perfect matching, and equivalently the six Sylow-\(5\)
 > subgroups of \(A_5\).
+
+## `tt` rigidity and boundary tests
+
+The finite order-six space has a sharp gap.  Across all \(2^{10}\)
+gauge-normalized signings, the number of maximum-determinant balanced cuts is
+distributed as
+\[
+\begin{array}{c|rrrr}
+\text{maximum cuts}&0&4&6&10\\ \hline
+\text{signings}&172&660&180&12.
+\end{array}
+\]
+Thus a nonconference signing has at most six maximum cuts.  Requiring any
+seven of ten forces all ten and hence \(B^2=5I\).  A fixed determining family
+can be smaller: five cuts suffice, four never suffice, and every five cuts
+whose pair-labels form a five-cycle are determining.  The certificate finds
+162 determining five-subsets.  This is a finite rigidity strengthening; its
+best paper form should use a short five-vertex graph lemma rather than the
+enumeration.
+
+The all-cut theorem does not extend naively to higher conference orders.  For
+the normalized symmetric Paley conference matrix of order ten,
+\(C^2=9I_{10}\), the 126 balanced \(5\times5\) cross determinants have exact
+absolute-value distribution
+\[
+ 0^{(90)},\qquad 48^{(36)}.
+\]
+Here 48 is the maximum determinant of a \(5\times5\) sign matrix, but most
+balanced cuts are singular.  The universal local-maximality phenomenon is
+therefore genuinely order-six, while the broader higher-order question is to
+classify which cuts are extremal and what design they form.
 
 ## Reproducibility
 
@@ -189,7 +231,8 @@ six outer matrices exhaust the six projective fingerprints.
 
 The replay independently generates the twelve labeled five-cycles rather
 than enumerating arbitrary signings, checks the conference and \(5{:}1\)
-properties directly, and obtains six complement-paired fingerprints.  The
+properties directly, obtains six complement-paired fingerprints, and checks
+a singular balanced cut in an explicit order-ten conference matrix.  The
 human proof above independently supplies the converse classification and the
 cycle-holonomy recovery argument.  The certificate establishes these finite
 and symbolic claims over the displayed conventions; it does not establish a
@@ -225,6 +268,15 @@ Hashes and byte counts are recorded in
   every balanced \(3\times3\) determinant, and its six classes are
   canonically \(\operatorname{Syl}_5(A_5)=A_5/D_5\), recovering the original
   six-axis carrier.
+- **Settled by the explicit `tt` rigidity pass:** universal Boolean
+  extremality is equivalent to the conference identity; seven maximum cuts
+  already force all ten, and suitable fixed five-cut families suffice.
+- **Settled negatively beyond order six:** an order-ten Paley conference
+  matrix has 90 singular and only 36 maximum balanced cross blocks, so the
+  all-cut formulation is exceptional rather than a general conference law.
+- **New higher-order mystery:** characterize the extremal balanced cuts of a
+  general conference matrix and decide whether they carry a canonical block
+  design.  This lies beyond C720 unless it feeds back into the six-axis proof.
 - **Still open:** whether the synchronized product has an intrinsic
   homogeneous-space or moduli description rather than the displayed
   coordinate synchronization.  This is a directions question unless C720

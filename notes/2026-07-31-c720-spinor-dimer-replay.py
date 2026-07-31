@@ -52,4 +52,40 @@ for negative_edges in cycles:
     fingerprints.add(tuple(fingerprint))
 
 assert len(fingerprints) == 6
-print("ok: 12 normalized C5 signings, ten 5:1 cuts each, six complement-paired fingerprints")
+
+# Independent hard-coded order-ten boundary witness: this is conference, but
+# its first balanced 5-by-5 cross block is singular.
+C10 = (
+    (0, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+    (1, 0, 1, 1, 1, -1, -1, 1, -1, -1),
+    (1, 1, 0, 1, -1, 1, -1, -1, 1, -1),
+    (1, 1, 1, 0, -1, -1, 1, -1, -1, 1),
+    (1, 1, -1, -1, 0, 1, 1, 1, -1, -1),
+    (1, -1, 1, -1, 1, 0, 1, -1, 1, -1),
+    (1, -1, -1, 1, 1, 1, 0, -1, -1, 1),
+    (1, 1, -1, -1, 1, -1, -1, 0, 1, 1),
+    (1, -1, 1, -1, -1, 1, -1, 1, 0, 1),
+    (1, -1, -1, 1, -1, -1, 1, 1, 1, 0),
+)
+assert all(
+    sum(C10[i][k] * C10[k][j] for k in range(10)) == 9 * int(i == j)
+    for i in range(10) for j in range(10)
+)
+cross = [[C10[i][j] for j in range(5, 10)] for i in range(5)]
+from fractions import Fraction
+work = [[Fraction(value) for value in row] for row in cross]
+rank = 0
+for column in range(5):
+    pivot = next((row for row in range(rank, 5) if work[row][column]), None)
+    if pivot is None:
+        continue
+    work[rank], work[pivot] = work[pivot], work[rank]
+    value = work[rank][column]
+    for row in range(5):
+        if row != rank and work[row][column]:
+            factor = work[row][column] / value
+            work[row] = [work[row][j] - factor * work[rank][j] for j in range(5)]
+    rank += 1
+assert rank < 5
+
+print("ok: order-6 classification and singular balanced cut in an order-10 conference matrix")

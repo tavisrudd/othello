@@ -77,8 +77,10 @@ commuting theorem rather than a list of formula coincidences.
 4. **Fermionic shadows:** real ETFs and Naimark instruments,
    Slater-determinant amplitudes, Majorana Pfaffians, balanced-layer outer
    transform, the all-cut \(K_{3,3}\) frustration characterization and its
-   six projective fingerprints, the synchronized pure-spinor product, and
-   anomaly charges.
+   equivalent universal Boolean extremality, its six projective
+   \(A_5/D_5\) fingerprints, the synchronized pure-spinor product, and
+   anomaly charges.  State explicitly that the all-cut formulation is an
+   order-six rigidity phenomenon, not a general conference-matrix law.
 5. **Lattice boundary and repair:** the E8--Hamming noncompatibility theorem
    and the exact \(II_{10,10}\) hyperbolic replacement.
 6. **Strengthenings:** C715--C719 results admitted only after their theorem
