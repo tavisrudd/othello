@@ -72,8 +72,11 @@ particular:
   orientation-free presentations, documented in
   notes/2026-07-31-c720-ej2-sextic-dimer-equivalence.md.
 
-No manuscript root has yet been created.  C720 owns the architecture and
-the go/no-go gate for `papers/golden-operator/`.
+C720 is complete.  The frozen charter is
+notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
+positive.  The authoritative manuscript root is papers/golden-operator/;
+its title, abstract, principal theorem, proof roadmap, isolated build, and
+paper-owned verification policy are installed and build without warnings.
 
 The cross-paper framing is now fixed provisionally in
 `notes/2026-07-31-golden-cross-paper-framing.md`: Papers I and III supply two
@@ -87,8 +90,7 @@ no Clebsch manuscript edit is authorized by that investigation.
 
 | task | state | next gate |
 |---|---|---|
-| [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | active; central C727 interface frozen | freeze the section plan, novelty boundary, proof/trust plan, and strict independence from review-facing Paper III |
-| [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | queued after C720; marked source frozen | descend the frozen operator interface through every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
+| [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | ready; next; marked source and reverse tests frozen | descend the frozen operator interface through every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
 | [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
 | [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | queued after C720; sequel direction | intrinsicize the \(6\to10\) conference lift, classify the 36 extremal order-ten cuts, and test for a functorial tower |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
@@ -99,14 +101,14 @@ no Clebsch manuscript edit is authorized by that investigation.
 
 ## Recommended order
 
-1. C720 paper architecture.
-2. C727 cross-paper recovery--propagation audit.
-3. C728 intrinsic synchronized-spinor audit.
-4. C715 anomaly inverse.
-5. C717 and C718, chosen by theorem yield after C715's first gate.
-6. C716 only after the inverse interface freezes.
-7. C719 after the mathematical paper spine is secure.
-8. C729 only as a sequel unless its first theorem feeds back into C720.
+1. C727 cross-paper recovery--propagation audit.
+2. C728 intrinsic synchronized-spinor audit.
+3. C715 anomaly inverse.
+4. C717 and C718, chosen by theorem yield after C715's first gate.
+5. C716 only after the inverse interface freezes.
+6. C719 after the mathematical paper spine is secure.
+7. C729 only as a sequel unless its first theorem feeds back into the
+   present paper.
 
 ## Ownership and allowed paths
 

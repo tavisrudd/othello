@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** active; central C727 operator interface frozen; remaining paper architecture open
+**Status:** complete; charter frozen and manuscript root admitted
 
 ## Objective
 
@@ -12,6 +12,19 @@ its functorially related shadow sisters.  Give every result a core/body/
 appendix placement, with a precise theorem spine, strict noninterference
 boundary around the review-facing Clebsch Paper III, novelty matrix, and
 proof/formalization plan.
+
+## Completion
+
+All gates passed in
+notes/2026-07-31-c720-golden-paper-charter.md.  The charter freezes the
+central theorem, complete result-placement map, dependency graph, novelty
+matrix, human-proof and computation/Lean boundary, section plan, target
+length, provisional abstract, and cross-paper independence map.
+
+The go verdict is positive.  The authoritative manuscript and verification
+roots are papers/golden-operator/ and papers/golden-operator/verification/.
+The manuscript skeleton builds without warnings.  Paper III remains
+unchanged and outside the Golden write surface.
 
 ## Working identity
 

@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\cT}{\mathcal T}
+\newcommand{\Pf}{\operatorname{Pf}}
+
+\title{The golden conference operator and its shadow sisters}
+\author{Tavis Rudd}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let \(C\) be a marked symmetric conference operator on six axes with
+\(C^2=5I\), and let \(C_T\) run through its coherent outer six-family.
+We show that the diagonal of the middle exterior operator
+\(*\bigwedge^3C_T\) is the signed Joubert cubic vector.  Its image lies on
+the Segre cubic, while centered squaring is the Segre--Igusa polar map.
+The same cubics are Pfaffians
+\(\Pf[D_x,C_T]=4Z_T(x)\); over the golden splitting they are determinants
+of the cross-eigenspace blocks.  Their adjugates produce the two small
+resolutions, conjugate rank-one maximal Cohen--Macaulay sheaves, and the
+rank-one differential factorization of the polar map.  On the balanced
+Boolean layer, \(C^2=5I\) is equivalent to universal
+maximum-determinant \(K_{3,3}\) frustration.  The resulting six sign
+syndromes form a distance-six simplex code whose transpose constructs an
+order-ten conference operator.  Selected coefficients of the determinant
+sextic are exactly the four-cycle holonomies of the matching fingerprint,
+so this algebraic shadow recovers the same unoriented switching class
+without a Pfaffian sign.  The same operator family gives exact Slater
+amplitudes, Majorana parity walls, and six-charge anomaly solutions.
+We also identify the precise Clifford, exceptional-group, bad-prime, and
+\(E_8\)-lattice boundaries of the construction.
+\end{abstract}
+
+\section{Introduction}
+
+A symmetric conference matrix of order six is a small object with an
+exceptionally rigid sign system.  We study what happens when its natural
+operations are kept together: middle exterior power, commutator with the
+diagonal algebra, splitting over \(\mathbb Q(\sqrt5)\), adjugation, and
+centered squaring.  The resulting cubics, polar coordinates, determinantal
+resolutions, and fermionic amplitudes are images of one marked operator.
+
+The principal theorem is stated on an abstract marked presentation.  This
+separates propagation from provenance: a geometric or coding construction
+may supply the marked conference class, but the proof below needs only the
+operator and its coherent outer marking.
+
+\section{The marked propagation theorem}
+
+Let \(X\) be an oriented six-set, let \(\cT\) be its outer six-set, and let
+\((C_T)_{T\in\cT}\) be a coherent oriented family of symmetric
+zero-diagonal sign matrices satisfying \(C_T^2=5I\).  For
+\(x\in\mathbb Q^X/\mathbb Q\mathbf1\), put
+\[
+ D_x=\operatorname{diag}(x),\qquad
+ K_T=*\bigwedge\nolimits^3C_T,\qquad
+ Z_T(x)=\frac14\sum_{|S|=3}(K_T)_{SS}x_S.
+\]
+
+\begin{theorem}[Golden operator propagation]
+\label{thm:propagation}
+For a fully marked golden presentation:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item the vector \(Z=(Z_T)_{T\in\cT}\) carries the signed outer action and
+  satisfies
+  \[
+    \sum_T Z_T=0,\qquad \sum_T Z_T^3=0;
+  \]
+\item its centered square
+  \[
+    W_T=Z_T^2-\frac16\sum_U Z_U^2
+  \]
+  is the Segre--Igusa polar vector;
+\item
+  \[
+    \Pf[D_x,C_T]=4Z_T(x),\qquad
+    \det[D_x,C_T]=16Z_T(x)^2;
+  \]
+\item over \(\mathbb Q(\sqrt5)\), the cross-golden block
+  \(B_T(x)=P_{T,-}D_xP_{T,+}\) satisfies
+  \[
+    Z_T(x)=\pm10\sqrt5\det B_T(x),
+  \]
+  and its adjugate gives the two conjugate determinantal resolutions and
+  rank-one maximal Cohen--Macaulay objects;
+\item the assembled differential matrix \(\mathsf A=dZ\), on the two
+  augmentation quotients, satisfies
+  \[
+    \operatorname{adj}\mathsf A=6Wq^{\mathsf T},
+    \qquad q=\operatorname{center}(x_i^2);
+  \]
+\item on the balanced Boolean layer, universal \(5{:}1\)
+  determinant-matching frustration is equivalent to the conference
+  identity.  Its six projective sign fingerprints form a distance-six
+  regular simplex, and their transpose Gram matrix produces a symmetric
+  conference operator of order ten.
+\end{enumerate}
+\end{theorem}
+
+The proof has three stages.  Exterior algebra produces the triangle cubic
+and commutator Pfaffian.  The golden eigenspace splitting turns the same
+identity into a determinant and matrix factorization.  Finally, the
+rank-four differential and the balanced Boolean restriction expose the
+polar and frustration shadows.  Exceptional-group, Clifford, coding,
+physical, and lattice statements enter only after these identities are
+proved.
+
+\section{Organization}
+
+Sections 3--5 develop the cubic, polar, and determinantal branches.
+Sections 6--7 place their exceptional and outer-symmetry parents.
+Sections 8--9 give the exact fermionic and frustration consequences.
+Section 10 separates the arithmetic and lattice boundaries.  The appendices
+contain the Platonic feasibility results, finite classifications, and
+verification ledger.
+
+\end{document}

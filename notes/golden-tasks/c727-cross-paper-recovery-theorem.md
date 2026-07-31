@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C720; marked forward interface and reverse tests frozen
+**Status:** ready; next after completed C720; marked interface and reverse tests frozen
 
 ## Objective
 
