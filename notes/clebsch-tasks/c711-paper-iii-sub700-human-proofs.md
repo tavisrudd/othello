@@ -2,7 +2,12 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; first C680 proof task
+**Status:** complete; reported 2026-07-31
+
+**Result:** `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md` supplies
+seven certificate-independent proofs, a claim-to-lemma map, the frozen C680
+interface, and formalization-ready C712 statements.  All C691/C682 primary
+checks and independent replays pass.  C712 is unblocked.
 
 ## Objective
 
