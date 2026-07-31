@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; C711 interfaces frozen
+**Status:** complete 2026-07-31
 
 ## Objective
 
@@ -53,3 +53,13 @@ certificate-shaped surrogate while the human theorem surface is unsettled.
 C712 formalizes only the C711 sub-700 package.  Lean coverage of C704/C709 and
 later shadow identities belongs to the separate above-700 proof/formalization
 effort and must not be duplicated here.
+
+## Result
+
+The golden conference, triangle cubic, two-graph reconstruction, augmentation
+descent, fixed middle-exterior square and diagonal, mod-two support recovery,
+and rational/golden descent interfaces are formalized and gate-clean.  The
+paper-local replay pins all twelve source files, Lean 4.32.0-rc1, and the exact
+twenty-five-declaration axiom report.  The accepted exclusions and completed
+`ej`+`tt` mystery ledger are recorded in
+`notes/2026-07-31-c712-paper-iii-sub700-lean.md`.

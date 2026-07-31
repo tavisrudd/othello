@@ -17,7 +17,7 @@
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C713 proof architecture and structural six-node proof complete; C714 companion structuralization remains before the final release refresh | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | major shadow-theorem expansion active; sub-700 human proofs complete and C712 Lean formalization unblocked; former pre-release surface is the green baseline | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
+| Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | major shadow-theorem expansion active; sub-700 human and Lean packages complete with pinned replay; former pre-release surface is the green baseline | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
 C703 is complete: all three split papers now share the title-page identity
@@ -212,6 +212,15 @@ the intrinsic golden factor \(st^6\) is unchanged.
 Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
+C712 is complete.  The paper-oriented conference, triangle, two-graph,
+augmentation, middle-exterior, support-recovery, and golden-descent interfaces
+are formalized in Lean.  The serialized gate, exact twenty-five-declaration
+axiom report, twelve-file hash manifest, paper-local replay, and complete Paper
+III evidence/PDF gate are green.  Abstract classification, atom recovery,
+exterior-cube faithfulness, binary transvectants, and optional quaternion-order
+refinements remain explicit human-proof boundaries owned by C680 integration.
+Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
+
 ## Active and queued task cards
 
 | task | state | next gate |
@@ -220,7 +229,7 @@ Full report:
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | queued by explicit review request | promote the q13 orbit-span and automorphism arguments, test bounded q9/q13 replacements, and retain honest finite boundaries |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | major shadow-theorem expansion active; C711 sub-700 human proofs complete | complete novelty audit, remaining post-700 human proofs, manuscript integration, Lean coverage, and fresh release gates |
+| [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | major shadow-theorem expansion active; C711/C712 sub-700 human and Lean packages complete | complete novelty audit, remaining post-700 human proofs, manuscript integration, above-700 Lean coverage, and fresh release gates |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
 | [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
@@ -229,7 +238,6 @@ Full report:
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | complete; two-graph flux and chiral commutator family survive, quadratic refinement and intrinsic spin structure do not | none |
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 | [C711 — Paper III sub-700 human proofs](../clebsch-tasks/c711-paper-iii-sub700-human-proofs.md) | complete; seven certificate-independent proofs, per-proof Tao checks, and frozen interfaces | none |
-| [C712 — Paper III sub-700 Lean](../clebsch-tasks/c712-paper-iii-sub700-lean.md) | active; C711 interfaces frozen | formalize the accepted C711 theorem package and produce the paper-facing trust map |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
