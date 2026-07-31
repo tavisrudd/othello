@@ -1765,7 +1765,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "378df48ce52fd0e6d5839ab9bb1da4d63b5b263867a6c70043c199df0168cc92"
+      "sha256": "34abc332ab5e29f2745068b9e222a457df11b383d664310db0a30e880e6e83b0"
     },
     "verification_tools": [
       {
