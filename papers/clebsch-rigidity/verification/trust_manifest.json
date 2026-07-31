@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 416",
+      "paper_location": "source line 605",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 483",
+      "paper_location": "source line 672",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 500",
+      "paper_location": "source line 689",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 539",
+      "paper_location": "source line 728",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 591",
+      "paper_location": "source line 780",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 667",
+      "paper_location": "source line 396",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -685,7 +685,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 826",
+      "paper_location": "source line 904",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -766,7 +766,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 876",
+      "paper_location": "source line 954",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -900,7 +900,7 @@
               {
                 "path": "check_orientation_two_graph.py",
                 "repository": "paper",
-                "sha256": "9bbb797186631d9b2259d66b68cd622c54f151e4d7fb79aed001cd6efbb083fb"
+                "sha256": "fa6f415debda3fc5963b55933371ffcba8e1cd32a825581d6fe0b0d09a2b2c3b"
               }
             ],
             "checker_commands": [
@@ -921,7 +921,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 892",
+      "paper_location": "source line 970",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1205,7 +1205,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1214",
+      "paper_location": "source line 498",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1472,7 +1472,7 @@
     "repository": "paper",
     "sha256": "4a13dc5cb0a85c8fd10b446961a15928720abac6065acd5971478f81a03bec67"
   },
-  "manuscript_sha256": "378ed3aa67015d265ee6917d274f3650926952db8d548acdc11d210c7d6e03a8",
+  "manuscript_sha256": "b2c36568f3f58c815368feee323281e62d0368ac962b80f2ba7b54b6a1f9e085",
   "public_documents": [
     {
       "path": "README.md",
@@ -1512,7 +1512,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "3b0c142250a56ee3978e7a72fb7c0015e6309195663b3dadc542af71012efb77"
+    "sha256": "b94cae3f818cbd2726ab24a813b502af8d1198ae69e870e716c0035a3fa3dafb"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1524,7 +1524,7 @@
       "output": {
         "path": "verification/checker_outputs.json",
         "repository": "paper",
-        "sha256": "a9ff62ca02ff94d38760cbde395d25cbc30bb080ff4fc25a403a5b8b682674f3"
+        "sha256": "49dfee6970dc4c6630b010fd2e71d5083a0656fba0aca2ad72c8c47e7b523744"
       }
     },
     "checks": [
@@ -1723,9 +1723,9 @@
         "cwd": ".",
         "id": "check-orientation-two-graph",
         "repository": "paper",
-        "stdout_bytes": 335,
-        "stdout_lines": 6,
-        "stdout_sha256": "1e39fe568a3f20583d9e65f4d2ca63bf9e1cbadbce6ec50e8d7ac303186f63a4",
+        "stdout_bytes": 401,
+        "stdout_lines": 7,
+        "stdout_sha256": "bf7a9124573b47b3d00b3c8715053d0f95af014fb514dbef641baf1268e346bc",
         "timeout_seconds": 900
       },
       {
@@ -1791,7 +1791,7 @@
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "0975df360399bf02bdedc27ba7989d556c8328d2420a3ea6d931abff7e17c361"
+        "sha256": "59bd259f614e7b55f8df32bf36c0c752e3e9ee37e7709925bacd84426bc6dc57"
       }
     ]
   }

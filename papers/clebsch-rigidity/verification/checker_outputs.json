@@ -26,9 +26,9 @@
       "sha256": "2f88bb38942425b9cdb3d1f0d9e2293ac4d6202d5fb004602e29649560bd2719"
     },
     "check_orientation_two_graph.py": {
-      "bytes": 335,
-      "lines": 6,
-      "sha256": "1e39fe568a3f20583d9e65f4d2ca63bf9e1cbadbce6ec50e8d7ac303186f63a4"
+      "bytes": 401,
+      "lines": 7,
+      "sha256": "bf7a9124573b47b3d00b3c8715053d0f95af014fb514dbef641baf1268e346bc"
     },
     "check_perturbation_gap.py": {
       "bytes": 2824,

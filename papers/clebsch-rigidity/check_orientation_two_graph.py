@@ -120,6 +120,51 @@ def determinant(matrix: list[list[int]]) -> int:
 
 Polynomial = dict[tuple[int, ...], Fraction]
 
+Quadratic = tuple[Fraction, Fraction]
+
+
+def q(value: int | Fraction) -> Quadratic:
+    return (Fraction(value), Fraction(0))
+
+
+def q_add(left: Quadratic, right: Quadratic) -> Quadratic:
+    return (left[0] + right[0], left[1] + right[1])
+
+
+def q_neg(value: Quadratic) -> Quadratic:
+    return (-value[0], -value[1])
+
+
+def q_mul(left: Quadratic, right: Quadratic) -> Quadratic:
+    return (
+        left[0] * right[0] + 5 * left[1] * right[1],
+        left[0] * right[1] + left[1] * right[0],
+    )
+
+
+def q_sum(values: list[Quadratic]) -> Quadratic:
+    result = q(0)
+    for value in values:
+        result = q_add(result, value)
+    return result
+
+
+def determinant_of_linear_matrix(
+    matrix: list[list[list[Quadratic]]], variables: int
+) -> dict[tuple[int, ...], Quadratic]:
+    result: dict[tuple[int, ...], Quadratic] = {}
+    for permutation in itertools.permutations(range(3)):
+        permutation_sign = -1 if parity(permutation) else 1
+        for indices in itertools.product(range(variables), repeat=3):
+            coefficient = q(permutation_sign)
+            for row, variable in enumerate(indices):
+                coefficient = q_mul(
+                    coefficient, matrix[row][permutation[row]][variable]
+                )
+            exponent = tuple(indices.count(i) for i in range(variables))
+            result[exponent] = q_add(result.get(exponent, q(0)), coefficient)
+    return {exponent: coefficient for exponent, coefficient in result.items() if coefficient != q(0)}
+
 
 def polynomial_add(left: Polynomial, right: Polynomial) -> Polynomial:
     result = dict(left)
@@ -502,6 +547,96 @@ def main() -> None:
         for triple in triples
     )
 
+    root_five: Quadratic = (Fraction(0), Fraction(1))
+    t_plus: Quadratic = (Fraction(1, 2), Fraction(1, 2))
+    t_minus: Quadratic = (Fraction(1, 2), Fraction(-1, 2))
+
+    def golden_basis(t: Quadratic) -> list[list[Quadratic]]:
+        return [
+            [t, t, q(-1)],
+            [t, q(1), q_neg(t)],
+            [q(1), t, q_neg(t)],
+            [q(1), q(0), q(0)],
+            [q(0), q(1), q(0)],
+            [q(0), q(0), q(1)],
+        ]
+
+    basis_plus = golden_basis(t_plus)
+    basis_minus = golden_basis(t_minus)
+    for eigenvalue, basis in ((root_five, basis_plus), (q_neg(root_five), basis_minus)):
+        assert all(
+            q_sum([q_mul(q(gauge[i][k]), basis[k][j]) for k in range(6)])
+            == q_mul(eigenvalue, basis[i][j])
+            for i in range(6)
+            for j in range(3)
+        )
+    assert all(
+        q_sum([q_mul(basis_minus[i][a], basis_plus[i][b]) for i in range(6)])
+        == q(0)
+        for a in range(3)
+        for b in range(3)
+    )
+
+    cross_matrix = [
+        [
+            [q_mul(basis_minus[i][row], basis_plus[i][column]) for i in range(6)]
+            for column in range(3)
+        ]
+        for row in range(3)
+    ]
+    cross_determinant = determinant_of_linear_matrix(cross_matrix, 6)
+    expected_cross = {}
+    for triple in triples:
+        exponent = tuple(int(i in triple) for i in range(6))
+        expected_cross[exponent] = q(-signs[triple])
+    assert cross_determinant == expected_cross
+
+    a_coefficients: list[Quadratic] = [
+        (Fraction(-1), Fraction(1)),
+        (Fraction(3, 2), Fraction(-1, 2)),
+        (Fraction(-5, 2), Fraction(1, 2)),
+        (Fraction(-1), Fraction(1)),
+    ]
+    b_coefficients: list[Quadratic] = [
+        (Fraction(-5, 2), Fraction(1, 2)),
+        (Fraction(1), Fraction(-1)),
+        (Fraction(-1), Fraction(1)),
+        (Fraction(-3, 2), Fraction(1, 2)),
+    ]
+    dual_basis = []
+    for index in range(4):
+        matrix = [[q(0) for _ in range(3)] for _ in range(3)]
+        matrix[0][1] = a_coefficients[index]
+        matrix[0][2] = b_coefficients[index]
+        if index == 0:
+            matrix[1][0] = q(1)
+        elif index == 1:
+            matrix[1][2] = q(1)
+        elif index == 2:
+            matrix[2][0] = q(1)
+        else:
+            matrix[2][1] = q(1)
+        dual_basis.append(matrix)
+    assert all(
+        q_sum(
+            [
+                q_mul(cross_matrix[row][column][variable], dual[column][row])
+                for row in range(3)
+                for column in range(3)
+            ]
+        )
+        == q(0)
+        for variable in range(6)
+        for dual in dual_basis
+    )
+    dual_matrix = [
+        [[dual_basis[i][row][column] for i in range(4)] for column in range(3)]
+        for row in range(3)
+    ]
+    dual_determinant = determinant_of_linear_matrix(dual_matrix, 4)
+    assert dual_determinant
+    assert any(coefficient != q(0) for coefficient in dual_determinant.values())
+
     mod_two = [[entry % 2 for entry in row] for row in operator]
     nilpotent = [
         [mod_two[i][j] ^ int(i == j) for j in range(6)]
@@ -518,6 +653,7 @@ def main() -> None:
     print("support_orbits=10+10 triangle_products=20 four_point_identities=15")
     print("operator_square=5I inverse_switching_gauge=ok balanced_gauges=12")
     print("pair_moments=0 augmentation_descent=ok diagonal_pencil=ok")
+    print("cross_determinant=-support_cubic trace_dual=V4 dual_cubic=nonzero")
     print("projective_nodes=6 ordinary_nodes=6 frame=ok aut_projective=120")
     print("mod2_rank_one_square_zero=ok")
 

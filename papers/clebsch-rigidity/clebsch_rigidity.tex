@@ -370,6 +370,195 @@ computational companion~\cite{RuddComputational2026} shows that, through
 $k=8$, these are the only conic-filling examples.
 \end{remark}
 
+\section{The rigidity theorem}
+\label{sec:rigidity}
+
+Proposition~\ref{prop:deep-holes-conic} concerns a specific arc. We now prove
+the symmetry-free characterization stated in
+Theorem~\ref{thm:rigidity}. The uncovered conic determines the resulting
+Clebsch hexagon's polarity, and Dye's stabilizer theorem then identifies
+its projective stabilizer as $A_5$; neither is assumed.
+
+\paragraph{Conic containment.}
+The condition is that the uncovered locus $\cU(A)$ lies on a conic, not
+that the arc $A$ itself does.  The proof below uses only the former
+condition and imposes no hypothesis that the six vertices lie on a conic.
+
+We first isolate the geometric input needed to exclude degenerate
+containing conics.
+
+The exterior-line case is a six-point instance of the nonexistence in odd
+order of nontrivial \emph{hyperfocused arcs}, whose secants determine only
+$k-1$ points on an exterior line
+\cite{BicharaKorchmaros1982,DrakeKeating2004,NgWild2001}. We give a direct
+proof because the three possible line positions are then handled together.
+
+\begin{lemma}[Line bound]
+\label{lem:six-arc-line-bound}
+Let $A$ be a six-arc in $\PG(2,q)$, where $q$ is odd. Every line contains at
+most $q-5$ points of $\cU(A)$.
+\end{lemma}
+
+\begin{proof}
+A chord contains no point of $\cU(A)$. If a non-chord line $\ell$ contains
+one vertex, the ten chords on the other five vertices meet $\ell$ in at
+least five distinct points. Indeed, two of those chords sharing an endpoint
+meet only at that endpoint, which lies off $\ell$; their intersections with
+$\ell$ therefore give a proper edge-colouring of $K_5$, whose chromatic
+index is five. Together with the vertex, at least six of the $q+1$ points
+of $\ell$ are therefore outside $\cU(A)$.
+
+It remains to consider $\ell\cap A=\varnothing$. The fifteen chords meet
+$\ell$ in covered points, and at most three chords pass through any one of
+them: chords sharing an endpoint meet only at that arc vertex, not on
+$\ell$, so all chords through one point of $\ell$ have disjoint endpoint
+pairs. Hence there are at least five covered points. Equality would give a
+proper five-edge-colouring of
+$K_6$, necessarily a one-factorization. The one-factorization of $K_6$ is
+unique up to isomorphism~\cite{MendelsohnRosa1985}; after relabelling,
+three factors are
+\[
+  01|23|45,\qquad 02|14|35,\qquad 03|15|24.
+\]
+Send $\ell$ to infinity and normalize the first two directions to horizontal
+and vertical. Put $p_0=(0,0)$, $p_1=(x,0)$ and $p_2=(0,y)$, where
+$xy\ne0$. Writing $p_3=(a,y)$, the first two factors force
+$p_4=(x,b)$ and $p_5=(a,b)$. Parallelism of $03$ with $15$ and with $24$
+gives
+\[
+ ab-ay+xy=0,\qquad ab-ay-xy=0.
+\]
+Their difference is $2xy=0$, impossible for odd $q$. Thus a disjoint line
+has at least six covered points, and in all cases at most
+$(q+1)-6=q-5$ points of $\cU(A)$ remain.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:rigidity}]
+Suppose first that $\cU(A)$ lies on a conic $Q$. If $Q$ is nonsingular then
+$|\cU(A)|\le q+1=12$. If $Q$ is degenerate, its rational points lie on one
+or two rational lines when it splits; in the nonsplit rank-two case its
+only rational point is the singular point. Thus
+Lemma~\ref{lem:six-arc-line-bound} again gives $|\cU(A)|\le12$. On the
+other hand, the chord-defect identity
+of Theorem~\ref{lem:chord-defect} says
+\[
+ |\cU(A)|=22-c(A),
+\]
+where $c(A)$ is the number of nonvertex triple-edge concurrences. In Dye's
+terminology these are precisely the Brianchon points of the hexagon $A$.
+Over a field of characteristic different from two, Dye proves that every
+six-arc has at most ten Brianchon points and that the equality cases form a
+single $\mathrm{PGL}_3(K)$-orbit~\cite[\S2.2--2.3, Theorem~1,
+pp.~275--276]{Dye1991}. This bound has no symmetry, conic, or genericity
+hypothesis beyond the six-arc assumption. Hence $c(A)\le10$, so
+$|\cU(A)|\ge12$; equality holds throughout, $c(A)=10$, and $A$ is a
+Clebsch hexagon.
+
+The degenerate-conic branch is therefore vacuous. Indeed, every equality
+case is projectively equivalent to the displayed Clebsch hexagon. Its
+fifteen chords are exterior to Dye's associated conic, and
+Theorem~\ref{cor:conic-filling-window} gives $|\cU(A)|=12$; hence
+$\cU(A)$ is exactly the twelve rational points of that nonsingular conic.
+A
+degenerate conic cannot contain those same twelve points: it has no
+component in common with the nonsingular conic, so B\'ezout's theorem
+bounds their intersection by four. Thus the original containing conic is
+nonsingular. This proves (i)$\Rightarrow$(iii).
+The same exteriority and count give
+(iii)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
+stabilizer theorem also identifies the stabilizer in these equivalent
+cases with $A_5$.
+\end{proof}
+
+Projective equivalence of the unordered parity-check column sets is
+equivalent to monomial equivalence of the associated codes: choose column
+representatives after the projectivity, then absorb their nonzero scalar
+factors into coordinate scalings.  Thus Theorem~\ref{thm:rigidity} also
+proves the coding formulation in the abstract.
+
+\begin{remark}[Why this rigidity is not in the extension-locus literature]
+The set $\cU(A)$ is the classical extension locus, studied for sufficiently
+large arcs through Segre's tangent-envelope method; see Ball and
+Lavrauw~\cite[Thms.~39--41]{BallLavrauw2019}. Those results require
+arc-size hypotheses far from the six-point regime and do not record the
+conic rigidity detected here.
+\end{remark}
+
+\section{The Clebsch family across fields}
+\label{sec:clebsch-family}
+
+Recall that $A$ is conic-filling when
+$\cU(A)=\mathcal Q(\F_q)$ for some nonsingular conic $\mathcal Q$.
+Equivalently,
+$A\cap\mathcal Q(\F_q)=\varnothing$, its chords cover every point outside
+$A\cup\mathcal Q(\F_q)$, and no chord meets $\mathcal Q(\F_q)$.
+For the Clebsch family, the chord-defect identity gives a direct formula
+for the uncovered locus and isolates the conic-filling specialization.
+
+\begin{proposition}[The Clebsch-family uncovered formula]
+\label{prop:clebsch-family-uncovered}
+Let $K$ be a Clebsch hexagon over $\F_q$; equivalently, $K$ is a six-arc
+with ten Brianchon points. By Dye's existence theorem, the characteristic
+is not two and $5$ has a square root in $\F_q$, possibly zero in
+characteristic five. Then
+\[
+ |\cU(K)|=q^2-14q+45.
+\]
+If $q\equiv3\pmod4$ and $\cC$ is Dye's associated conic, then
+$\cC(\F_q)\subseteq\cU(K)$ and
+\[
+ |\cU(K)\setminus\cC(\F_q)|=(q-4)(q-11).
+\]
+In particular, among Clebsch hexagons in this congruence class, the
+associated conic is the complete projective deep-hole syndrome locus if and
+only if $q=11$.
+\end{proposition}
+
+\begin{proof}
+Dye defines a Clebsch hexagon by the occurrence of exactly ten Brianchon
+points, and his Theorem~1 classifies their existence and projective orbit
+\cite[p.~271; Theorem~1, pp.~275--276]{Dye1991}. These points are precisely
+the off-vertex
+triple-chord concurrences counted by $c(K)$. Thus $c(K)=10$, and
+Theorem~\ref{lem:chord-defect} gives
+\[
+ |\cU(K)|=q^2-14q+55-10=q^2-14q+45.
+\]
+Dye also shows that the edges of $K$ are non-secants of the associated conic
+when $q\equiv3\pmod4$~\cite[discussion preceding Theorem~6,
+pp.~281--282]{Dye1991}. Hence every rational point of $\cC$ is uncovered.
+Subtracting $|\cC(\F_q)|=q+1$ from the first formula gives
+\[
+ q^2-15q+44=(q-4)(q-11).
+\]
+The factor vanishes only at $q=4$ and $q=11$, and the stated congruence
+leaves only $q=11$. Conversely, Clebsch hexagons exist over $\F_{11}$ by
+Dye's Theorem~1, and the inclusion above is then an equality because both
+sets have twelve points.
+\end{proof}
+
+\begin{remark}[Three Clebsch-family regimes]
+The polynomial $q^2-14q+45=(q-5)(q-9)$ vanishes exactly at $q=5,9$.
+The root $q=5$ lies in characteristic five, where the
+associated-conic construction of Definition~\ref{def:hexagon} is
+not available. At $q=9$, however, Dye's construction applies:
+$5=-1$ is a square in $\F_9$, and the characteristic is three. Thus the
+formula gives an empty uncovered locus, so the Clebsch six-arc is complete
+and not conic-filling. At $q=11$ the
+uncovered locus is instead exactly the associated conic.
+
+At $q=19$, the same icosahedral construction still produces a Clebsch
+six-arc disjoint from its associated conic, but the covering fails. The
+twenty conic points remain uncovered~\cite[p.~281]{Dye1991}, while
+Proposition~\ref{prop:clebsch-family-uncovered} gives
+\[
+ |\cU(A)|=140=20+120.
+\]
+Thus $120=(19-4)(19-11)$ additional points escape all fifteen secants, and
+$\cU(A)$ lies on no conic. The configuration persists; exact conic filling
+is what the factorization isolates at $q=11$.
+\end{remark}
+
 \section{The code and its projective syndrome locus}
 \label{sec:code}
 
@@ -641,117 +830,6 @@ fifteen pairs into five perfect matchings of $K_6$.
 Section~\ref{sec:support-bipartition}
 turns its ten pairs of matchings into the Brianchon--support dictionary.
 
-\section{The rigidity theorem}
-\label{sec:rigidity}
-
-Proposition~\ref{prop:deep-holes-conic} concerns a specific arc. We now prove
-the symmetry-free characterization stated in
-Theorem~\ref{thm:rigidity}. The uncovered conic determines the resulting
-Clebsch hexagon's polarity, and Dye's stabilizer theorem then identifies
-its projective stabilizer as $A_5$; neither is assumed.
-
-\paragraph{Conic containment.}
-The condition is that the uncovered locus $\cU(A)$ lies on a conic, not
-that the arc $A$ itself does.  The proof below uses only the former
-condition and imposes no hypothesis that the six vertices lie on a conic.
-
-We first isolate the geometric input needed to exclude degenerate
-containing conics.
-
-The exterior-line case is a six-point instance of the nonexistence in odd
-order of nontrivial \emph{hyperfocused arcs}, whose secants determine only
-$k-1$ points on an exterior line
-\cite{BicharaKorchmaros1982,DrakeKeating2004,NgWild2001}. We give a direct
-proof because the three possible line positions are then handled together.
-
-\begin{lemma}[Line bound]
-\label{lem:six-arc-line-bound}
-Let $A$ be a six-arc in $\PG(2,q)$, where $q$ is odd. Every line contains at
-most $q-5$ points of $\cU(A)$.
-\end{lemma}
-
-\begin{proof}
-A chord contains no point of $\cU(A)$. If a non-chord line $\ell$ contains
-one vertex, the ten chords on the other five vertices meet $\ell$ in at
-least five distinct points. Indeed, two of those chords sharing an endpoint
-meet only at that endpoint, which lies off $\ell$; their intersections with
-$\ell$ therefore give a proper edge-colouring of $K_5$, whose chromatic
-index is five. Together with the vertex, at least six of the $q+1$ points
-of $\ell$ are therefore outside $\cU(A)$.
-
-It remains to consider $\ell\cap A=\varnothing$. The fifteen chords meet
-$\ell$ in covered points, and at most three chords pass through any one of
-them: chords sharing an endpoint meet only at that arc vertex, not on
-$\ell$, so all chords through one point of $\ell$ have disjoint endpoint
-pairs. Hence there are at least five covered points. Equality would give a
-proper five-edge-colouring of
-$K_6$, necessarily a one-factorization. The one-factorization of $K_6$ is
-unique up to isomorphism~\cite{MendelsohnRosa1985}; after relabelling,
-three factors are
-\[
-  01|23|45,\qquad 02|14|35,\qquad 03|15|24.
-\]
-Send $\ell$ to infinity and normalize the first two directions to horizontal
-and vertical. Put $p_0=(0,0)$, $p_1=(x,0)$ and $p_2=(0,y)$, where
-$xy\ne0$. Writing $p_3=(a,y)$, the first two factors force
-$p_4=(x,b)$ and $p_5=(a,b)$. Parallelism of $03$ with $15$ and with $24$
-gives
-\[
- ab-ay+xy=0,\qquad ab-ay-xy=0.
-\]
-Their difference is $2xy=0$, impossible for odd $q$. Thus a disjoint line
-has at least six covered points, and in all cases at most
-$(q+1)-6=q-5$ points of $\cU(A)$ remain.
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:rigidity}]
-Suppose first that $\cU(A)$ lies on a conic $Q$. If $Q$ is nonsingular then
-$|\cU(A)|\le q+1=12$. If $Q$ is degenerate, its rational points lie on one
-or two rational lines when it splits; in the nonsplit rank-two case its
-only rational point is the singular point. Thus
-Lemma~\ref{lem:six-arc-line-bound} again gives $|\cU(A)|\le12$. On the
-other hand, the chord-defect identity
-of Theorem~\ref{lem:chord-defect} says
-\[
- |\cU(A)|=22-c(A),
-\]
-where $c(A)$ is the number of nonvertex triple-edge concurrences. In Dye's
-terminology these are precisely the Brianchon points of the hexagon $A$.
-Over a field of characteristic different from two, Dye proves that every
-six-arc has at most ten Brianchon points and that the equality cases form a
-single $\mathrm{PGL}_3(K)$-orbit~\cite[\S2.2--2.3, Theorem~1,
-pp.~275--276]{Dye1991}. This bound has no symmetry, conic, or genericity
-hypothesis beyond the six-arc assumption. Hence $c(A)\le10$, so
-$|\cU(A)|\ge12$; equality holds throughout, $c(A)=10$, and $A$ is a
-Clebsch hexagon.
-
-The degenerate-conic branch is therefore vacuous. Indeed,
-Proposition~\ref{prop:deep-holes-conic} and projective equivariance identify
-$\cU(A)$ with the twelve rational points of a nonsingular conic. A
-degenerate conic cannot contain those same twelve points: it has no
-component in common with the nonsingular conic, so B\'ezout's theorem
-bounds their intersection by four. Thus the original containing conic is
-nonsingular. This proves (i)$\Rightarrow$(iii).
-Proposition~\ref{prop:deep-holes-conic} and projective equivariance give
-(iii)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
-stabilizer theorem also identifies the stabilizer in these equivalent
-cases with $A_5$.
-\end{proof}
-
-Projective equivalence of the unordered parity-check column sets is
-equivalent to monomial equivalence of the associated codes: choose column
-representatives after the projectivity, then absorb their nonzero scalar
-factors into coordinate scalings.  Thus Theorem~\ref{thm:rigidity} also
-proves the coding formulation in the abstract.
-
-\begin{remark}[Why this rigidity is not in the extension-locus literature]
-The set $\cU(A)$ is the classical extension locus, studied for sufficiently
-large arcs through Segre's tangent-envelope method; see Ball and
-Lavrauw~\cite[Thms.~39--41]{BallLavrauw2019}. Those results require
-arc-size hypotheses far from the six-point regime and do not record the
-conic rigidity detected here.
-\end{remark}
-
 \section{The invariant support bipartition}
 \label{sec:support-bipartition}
 
@@ -938,9 +1016,9 @@ paper.  We use the standard correspondence between two-graphs, switching
 classes, and Seidel matrices; see
 \cite[\S2]{DuncanHoffmanSolazzo2011}.
 
-The cubic threefold that appears below is a known six-nodal model.
-Cheltsov, Tschinkel, and Zhang study the cubic with six nodes in general
-linear position and give an $S_5$-symmetric equation
+The cubic threefold that appears below agrees with a known six-nodal model.
+Cheltsov, Tschinkel, and Zhang classify cubics already assumed to have six
+nodes in general linear position and, in the $S_5$ case, give the equation
 \cite[\S7, equations~(7.4)--(7.5), Proposition~7.3]{CTZ2025}.
 Choosing $x_0=0$ as a representative of
 $\mathbf Q^6/\mathbf Q\mathbf1$ and interchanging their coordinates
@@ -955,6 +1033,9 @@ The result here is not a new construction of that cubic or its abstract
 $S_5$-action.  It recovers the cubic intrinsically from the syndrome
 locus: the support-orbit signs give its equation, and the diagonal
 determinant identity identifies it with the golden continuation operator.
+Because the cited proposition assumes six nodes, we prove singular-locus
+completeness independently below; the coordinate match is not used in that
+step.
 
 Let $\Omega=\cC(\F_{11})$.  Its points have stabilizer $C_5$.  The two
 points fixed by each Sylow $5$-subgroup form an antipodal pair, giving an
@@ -1036,13 +1117,26 @@ Consequently the continuation algebra and its integral commutant are
 
 \begin{proof}[Proof of Theorem~\ref{thm:orientation-two-graph} and
 Corollary~\ref{cor:orientation-cubic-geometry}]
+The proof has four stages: orbital balance produces the golden operator,
+triangle holonomy identifies its switching class with the support cubic,
+principal minors give the determinant pencil, and the cubic then recovers
+the node frame, its symmetry, and the integral commutant.
+
+\paragraph{Orbital balance.}
 The degree-six action has point stabilizer $D_5$.  Its two orbits on
 three-subsets have size ten, are exchanged by complementation, and produce
 a nonzero signed cubic determined up to its overall sign.
 
 Antipodal exchange carries one five-suborbit of $\Omega$ to the other, so
-$A'=AR$.  Counting common neighbors in the four suborbits
-$1,1,5,5$ gives the integral association-algebra identity
+$A'=AR$. Put $M=A-A'$. For a fixed $\omega$, its row in $M$ has entries
+$0,0,1^5,(-1)^5$ on the four suborbits
+$\{\omega\},\{R\omega\},A(\omega),A'(\omega)$. If
+$\eta\notin\{\omega,R\omega\}$, the eight common neighbors outside the
+two antipodal fibres contribute four products $+1$ and four products
+$-1$. For $\eta=\omega$ all ten products are $+1$, while for
+$\eta=R\omega$ they are all $-1$ because $MR=-M$. Thus the four
+relations $I,R,A,A'$ give the values $10,-10,0,0$, respectively. This is
+the integral association-algebra identity
 \[
  (A-A')^2=10(I-R).
 \]
@@ -1052,6 +1146,7 @@ by choosing one point above each axis, it is a symmetric zero-diagonal
 matrix $B$ with off-diagonal entries $\pm1$.  A different choice of lifts
 changes the corresponding basis signs and hence switches $B$.
 
+\paragraph{Triangle holonomy.}
 For concreteness, one such gauge is
 \[
 B=\begin{pmatrix}
@@ -1096,29 +1191,84 @@ $(B^2)_{0i}=0$ say that the positive edges on the remaining five vertices
 form a $2$-regular graph, hence a pentagon.  The twelve labeled pentagons
 form one class up to relabeling, proving uniqueness.
 
-It remains to see that the cubic itself recovers the six axes.  Use
-translation invariance to set $x_0=0$, write $y_i=x_i-x_0$, and cover
-projective space by the five charts in which the last nonzero $y_r$ is
-$1$.  These gradient ideals are taken over $\mathbf Q$ in the remaining
-chart variables.  Exact Buchberger reduction gives
+\paragraph{The determinant pencil.}
+For a triple $S=\{i,j,k\}$, its principal minor is
 \[
-\begin{array}{c|l}
-r&\text{reduced lexicographic basis}\\ \hline
-1&\varnothing\\
-2&y_1\\
-3&y_1,y_2\\
-4&y_1,y_2,y_3\\
-5&y_1-y_4,\ y_2-y_4,\ y_3-y_4,\ y_4(y_4-1).
-\end{array}
+ \det B_S=2B_{ij}B_{jk}B_{ki}=2c_{ijk}.
 \]
-For $r=1$ there are no remaining variables; the empty list denotes the
-zero ideal in the zero-variable ring $\mathbf Q$, hence one affine chart
-point.
-Thus the first four charts contribute one coordinate point each, and the
-last contributes the fifth coordinate point and $(1,1,1,1,1)$.  These are
-exactly the six classes $p_a=[\mathbf1-6e_a]$.
+The identity $B^2=5I$ gives $B^{-1}=B/5$ and $\det B=-125$.
+Jacobi's complementary-minor identity then gives principal-minor values
+$5$ in size four and $0$ in size five, while complementary size-three
+minors have opposite signs. Expanding along the diagonal variables gives
+the displayed determinant formula and its homogeneous odd-part identity.
+In particular, the same quadratic identity that defines the golden
+operator also recovers support complementation.
 
-At $p_a$, pair balance gives
+\paragraph{The node frame.}
+It remains to see that the cubic itself recovers the six axes.  We use the
+determinantal duality behind the golden operator. Put
+$E=\mathbf Q(\sqrt5)$, $t_\pm=(1\pm\sqrt5)/2$, and
+\[
+ U(t)=
+ \begin{pmatrix}
+ t&t&-1\\ t&1&-t\\ 1&t&-t\\ 1&0&0\\0&1&0\\0&0&1
+ \end{pmatrix}.
+\]
+The displayed conference identity gives
+$BU(t_\pm)=\pm\sqrt5\,U(t_\pm)$ and
+$U(t_-)^{\mathsf T}U(t_+)=0$; write $V_\pm$ for the respective column
+spaces. Thus, for
+$D_x=\operatorname{diag}(x_0,\ldots,x_5)$,
+\[
+ \Phi_x=U(t_-)^{\mathsf T}D_xU(t_+)
+\]
+is a matrix for the cross-golden block and is unchanged by
+$x\mapsto x+t\mathbf1$. Direct expansion of this $3\times3$ determinant
+gives the exact identity
+\[
+ \det(\Phi_x)=-C(x).
+\]
+As an $A_5$-map, $x\mapsto\Phi_x$ identifies the augmentation module with
+the five-dimensional summand in
+\[
+ \operatorname{Hom}_E(V_+,V_-)\cong V_4\oplus V_5;
+\]
+this is the standard tensor-product rule $V_3\otimes V_{3'}=V_4\oplus V_5$.
+Let $\Lambda\cong V_4$ be its trace-orthogonal complement in the dual
+matrix space. A direct trace check gives the following explicit
+parametrization in the eigenbases above:
+\[
+ \Psi_z=\begin{pmatrix}0&a(z)&b(z)\\z_0&0&z_1\\z_2&z_3&0\end{pmatrix},
+\]
+where
+\[
+\begin{aligned}
+a(z)&=(\sqrt5-1)z_0+\frac{3-\sqrt5}{2}z_1
+      +\frac{\sqrt5-5}{2}z_2+(\sqrt5-1)z_3,\\
+b(z)&=\frac{\sqrt5-5}{2}z_0+(1-\sqrt5)z_1
+      +(\sqrt5-1)z_2+\frac{\sqrt5-3}{2}z_3.
+\end{aligned}
+\]
+Thus $\det(\Psi_z)=a(z)z_1z_2+b(z)z_0z_3$ is nonzero.  It is
+$A_5$-invariant, and the character
+$\chi_{V_4}=(4,0,1,-1,-1)$ on the classes
+$1,2,3,5A,5B$ gives
+\(\dim(\operatorname{Sym}^3V_4^*)^{A_5}=1\).  Hence this determinant is,
+up to scalar, the Clebsch diagonal cubic
+\[
+ z_1^3+\cdots+z_5^3=0,\qquad z_1+\cdots+z_5=0.
+\]
+This cubic surface is smooth: at a singular point the five squares
+$z_i^2$ would be equal, but a sum of five signs cannot vanish in
+characteristic zero.  Proposition~10 of Hassett and Tschinkel now applies
+to the trace-orthogonal pair of matrix spaces and shows that
+$\det(\Phi_x)=0$ has exactly six ordinary double points in general linear
+position~\cite[\S3, Proposition~10]{HassettTschinkel2010}.
+
+Pair balance makes each $p_a=[\mathbf1-6e_a]$ singular, and these six
+points already form a projective frame.  They are therefore the complete
+singular locus.  Their node type also follows directly from the same
+golden identity. At $p_a$, pair balance gives
 \[
  \operatorname{Hess}(C)_{ij}(p_a)=
  \begin{cases}
@@ -1143,6 +1293,7 @@ The Hessian therefore has precisely the translation and radial directions
 as its kernels.  Its induced form on the four-dimensional projective tangent
 space is nondegenerate, so every singularity is an ordinary double point.
 
+\paragraph{Frame symmetry.}
 The six points form a projective frame.  Every projective automorphism of
 the cubic permutes this complete frame, and each frame permutation has a
 unique projective extension.  The recovered switching class is the
@@ -1156,19 +1307,7 @@ kernel is the already constructed $A_5$.  Hence the cubic line has
 stabilizer $S_5$ and the oriented cubic has stabilizer $A_5$, without a
 separate signed-permutation enumeration.
 
-For a triple $S=\{i,j,k\}$, its principal minor is
-\[
- \det B_S=2B_{ij}B_{jk}B_{ki}=2c_{ijk}.
-\]
-The identity $B^2=5I$ gives $B^{-1}=B/5$ and $\det B=-125$.
-Jacobi's complementary-minor identity then gives principal-minor values
-$5$ in size four and $0$ in size five, while complementary size-three
-minors have opposite signs.  Expanding along the diagonal variables gives
-the displayed determinant formula and its homogeneous odd-part identity.
-In particular, the same quadratic
-identity that defines the golden operator also recovers support
-complementation.
-
+\paragraph{The integral commutant.}
 Finally, after extension from $\mathbf Q$ to
 $E=\mathbf Q(\sqrt5)$, the odd module splits as the two nonisomorphic
 three-dimensional icosahedral representations:
@@ -1200,87 +1339,12 @@ $B-I$ has rank one and square zero.  This is precisely the degeneration
 No ambient characteristic-zero geometry is used here.
 \end{remark}
 
-\section{The Clebsch family across fields}
-\label{sec:clebsch-family}
-
-Recall that $A$ is conic-filling when
-$\cU(A)=\mathcal Q(\F_q)$ for some nonsingular conic $\mathcal Q$.
-Equivalently,
-$A\cap\mathcal Q(\F_q)=\varnothing$, its chords cover every point outside
-$A\cup\mathcal Q(\F_q)$, and no chord meets $\mathcal Q(\F_q)$.
-For the Clebsch family, the chord-defect identity gives a direct formula
-for the uncovered locus and isolates the conic-filling specialization.
-
-\begin{proposition}[The Clebsch-family uncovered formula]
-\label{prop:clebsch-family-uncovered}
-Let $K$ be a Clebsch hexagon over $\F_q$; equivalently, $K$ is a six-arc
-with ten Brianchon points. By Dye's existence theorem, the characteristic
-is not two and $5$ has a square root in $\F_q$, possibly zero in
-characteristic five. Then
-\[
- |\cU(K)|=q^2-14q+45.
-\]
-If $q\equiv3\pmod4$ and $\cC$ is Dye's associated conic, then
-$\cC(\F_q)\subseteq\cU(K)$ and
-\[
- |\cU(K)\setminus\cC(\F_q)|=(q-4)(q-11).
-\]
-In particular, among Clebsch hexagons in this congruence class, the
-associated conic is the complete projective deep-hole syndrome locus if and
-only if $q=11$.
-\end{proposition}
-
-\begin{proof}
-Dye defines a Clebsch hexagon by the occurrence of exactly ten Brianchon
-points, and his Theorem~1 classifies their existence and projective orbit
-\cite[p.~271; Theorem~1, pp.~275--276]{Dye1991}. These points are precisely
-the off-vertex
-triple-chord concurrences counted by $c(K)$. Thus $c(K)=10$, and
-Theorem~\ref{lem:chord-defect} gives
-\[
- |\cU(K)|=q^2-14q+55-10=q^2-14q+45.
-\]
-Dye also shows that the edges of $K$ are non-secants of the associated conic
-when $q\equiv3\pmod4$~\cite[discussion preceding Theorem~6,
-pp.~281--282]{Dye1991}. Hence every rational point of $\cC$ is uncovered.
-Subtracting $|\cC(\F_q)|=q+1$ from the first formula gives
-\[
- q^2-15q+44=(q-4)(q-11).
-\]
-The factor vanishes only at $q=4$ and $q=11$, and the stated congruence
-leaves only $q=11$. Conversely, Clebsch hexagons exist over $\F_{11}$ by
-Dye's Theorem~1, and the inclusion above is then an equality because both
-sets have twelve points.
-\end{proof}
-
-\begin{remark}[Three Clebsch-family regimes]
-The polynomial $q^2-14q+45=(q-5)(q-9)$ vanishes exactly at $q=5,9$.
-The root $q=5$ lies in characteristic five, where the
-associated-conic construction of Definition~\ref{def:hexagon} is
-not available. At $q=9$, however, Dye's construction applies:
-$5=-1$ is a square in $\F_9$, and the characteristic is three. Thus the
-formula gives an empty uncovered locus, so the Clebsch six-arc is complete
-and not conic-filling. At $q=11$ the
-uncovered locus is instead exactly the associated conic.
-
-At $q=19$, the same icosahedral construction still produces a Clebsch
-six-arc disjoint from its associated conic, but the covering fails. The
-twenty conic points remain uncovered~\cite[p.~281]{Dye1991}, while
-Proposition~\ref{prop:clebsch-family-uncovered} gives
-\[
- |\cU(A)|=140=20+120.
-\]
-Thus $120=(19-4)(19-11)$ additional points escape all fifteen secants, and
-$\cU(A)$ lies on no conic. The configuration persists; exact conic filling
-is what the factorization isolates at $q=11$.
-\end{remark}
-
 \section{Proof sources and formal cross-check}
 \label{sec:verification}
 
 The rigidity and field-window arguments use three external mathematical
-inputs, while the orientation section uses one external model
-identification.  Dye's Brianchon bound and equality classification identify
+inputs, while the orientation section uses one external model identification
+and one determinantal-duality theorem. Dye's Brianchon bound and equality classification identify
 the Clebsch orbit
 \cite[\S2.2--2.3, Theorem~1, pp.~275--276]{Dye1991}; his stabilizer and
 associated-conic results supply the classical Clebsch geometry
@@ -1288,21 +1352,27 @@ associated-conic results supply the classical Clebsch geometry
 obstruction uses the standard nucleus theorem
 \cite[p.~177]{Hirschfeld1998}.  The upper conic-filling bound is
 Proposition~1.5 of Blokhuis, Brouwer, and Sz\H{o}nyi~\cite{BBS2010}.
-Cheltsov, Tschinkel, and Zhang supply the published six-nodal
-$S_5$-symmetric cubic model; the explicit coordinate identification and
-its reconstruction from syndrome data are given in
-Section~\ref{sec:orientation-two-graph}.
+Cheltsov, Tschinkel, and Zhang supply a published $S_5$-symmetric equation
+inside their classification of cubics already assumed to be six-nodal.
+Section~\ref{sec:orientation-two-graph} gives the explicit coordinate
+identification, but does not use that citation to transfer singular-locus
+completeness.  That transfer instead uses the exact converse in
+Hassett--Tschinkel: a trace-orthogonal determinantal cubic threefold has six
+ordinary nodes precisely when its dual cubic surface is smooth
+\cite[\S3, Proposition~10]{HassettTschinkel2010}.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
 reconstruction, support bipartition, and the orientation two-graph
 reconstruction are proved in the text.  In particular, the conference
 identity gives pair balance and the Hessian ranks, while the pentagon model
-gives the $S_5/A_5$ stabilizer distinction.  Singular-locus completeness is
-the remaining load-bearing exact finite-algebra step.  The paper-owned
-replay constructs the $A_5/C_5$ and $A_5/D_5$ actions, the signed operator,
-its triangle products and diagonal pencil, the balanced switching class,
-the five gradient ideals, and the six Hessian blocks; except for the
-gradient-ideal exhaustion, these are cross-checks of arguments in the text.
+gives the $S_5/A_5$ stabilizer distinction.  The golden cross block, its
+four-dimensional trace complement, and the smooth Clebsch dual surface put
+the cubic under the cited determinantal theorem, so singular-locus
+completeness is structural.  The paper-owned replay independently constructs
+the $A_5/C_5$ and $A_5/D_5$ actions, the signed operator, its triangle
+products and diagonal pencil, the balanced switching class, the five
+gradient ideals, and the six Hessian blocks.  The gradient-ideal exhaustion
+is now an independent exact check rather than the proof of completeness.
 It reads no
 later-paper artifact:
 \begin{center}
@@ -1485,6 +1555,14 @@ V.~Guruswami and A.~Vardy,
 J.~W.~P.~Hirschfeld,
 \newblock \emph{Projective Geometries over Finite Fields}, second edition,
 \newblock Oxford University Press, 1998.
+
+\bibitem{HassettTschinkel2010}
+B.~Hassett and Y.~Tschinkel,
+\newblock Flops on holomorphic symplectic fourfolds and determinantal cubic
+hypersurfaces,
+\newblock \emph{Journal of the Institute of Mathematics of Jussieu}
+\textbf{9}(1) (2010), 125--153.
+\newblock doi:10.1017/S1474748009000140; arXiv:0805.4162.
 
 \bibitem{Kaipa2017}
 K.~Kaipa,
