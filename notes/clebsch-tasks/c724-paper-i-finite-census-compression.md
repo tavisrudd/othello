@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued after C721; may run independently of C722--C723; C714 phase
-4/6.
+**Status:** ready; C721 complete; may run independently of C722--C723; C714
+phase 4/6.
 
 ## Objective
 
@@ -42,4 +42,3 @@ Do not force a conceptual classification of all fifteen classes. If orbitwise
 minors or mass identities are larger than the current transparent replay,
 retain the replay and document why compression loses clarity. Pass the frozen
 finite-classification boundary to C725.
-

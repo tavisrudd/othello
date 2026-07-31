@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued after C721; C714 phase 2/6.
+**Status:** ready; C721 complete; C714 phase 2/6.
 
 ## Objective
 
@@ -37,4 +37,3 @@ For any method that yields only six, record its exact spectrum, dual bound,
 and failed equality condition, then stop that branch and retain the existing
 published or finite certificate. Pass all exact tangent/Fourier identities to
 C723 even if the q13 bound remains finite.
-

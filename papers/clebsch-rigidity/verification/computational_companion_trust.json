@@ -41,8 +41,15 @@
       ]
     },
     {
-      "id": "q13-tangent-code-and-minimum-layer",
+      "id": "q13-tangent-code-distance-and-minimum-layer-classification",
       "mode": "segre-tangent-reduction-plus-exhaustive-exact-replay",
+      "checks": [
+        "check_q13_tangent_code.py"
+      ]
+    },
+    {
+      "id": "q13-minimum-orbit-spans-and-automorphism-group",
+      "mode": "elliptic-association-algebra-and-four-anchor-rigidity",
       "checks": [
         "check_q13_tangent_code.py"
       ]

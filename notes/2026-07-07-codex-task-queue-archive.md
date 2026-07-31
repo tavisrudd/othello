@@ -9,6 +9,8 @@ Archived blocks keep their **original relative link depth** — this archive sit
 directory as the live doc, so every relative link (`<file>.md`, `handoffs/…`, `data/…`, `../…`)
 resolves identically to how it did in the live doc. No links were rewritten.
 
+- **C721 `[clebsch]` [REPORTED 2026-07-31 — q13 ELLIPTIC-SCHEME SPINE; FOUR ORBIT SPANS AND FULL AUTOMORPHISM GROUP STRUCTURALIZED]** — identified the four minimum-orbit Grams as `(A9,A9,A12,A10)`; used `A0=M`, `A0 A9=0`, and `A0^2=I+A9+A9^2+A9^4` over `F2` to prove all four orbits span the 36-dimensional code without rank elimination; proved the minimum-layer automorphism group is exactly `PGL(2,13)` through a simply transitive `(10,3,9)` anchor-triple orbit and a resolving fourth anchor; retained exhaustive ranks and the order-2184 stabilizer chain only as independent checks → `notes/2026-07-31-c721-q13-elliptic-scheme-spine.md`.
+
 **Lane pegs.** Every *task entry* carries its lane alias after the ID — `## C12. `[cap]` …` for the
 C1–C74 write-ups, `- **C99 `[baer]` …` for the row-form entries — using the aliases in CLAUDE.md
 § Lane routing. The dated `## <date> C77 continuation — …` **session-log** sections are deliberately

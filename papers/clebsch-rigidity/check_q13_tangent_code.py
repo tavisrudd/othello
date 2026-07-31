@@ -260,6 +260,7 @@ def verify_distance() -> None:
     stabilizer_sizes = []
     orbit_span_dimensions = []
     orbit_gram_dimensions = []
+    orbit_gram_rows = []
     for representative in representatives:
         orbit = {
             frozenset(internal.index(act(matrix, point)) for point in representative)
@@ -292,6 +293,7 @@ def verify_distance() -> None:
             )
             for first in range(78)
         ]
+        orbit_gram_rows.append(gram_rows)
         orbit_gram_dimensions.append(binary_rank(gram_rows))
         all_words |= orbit
         base_slice = {support for support in orbit if base in support}
@@ -439,6 +441,81 @@ def verify_distance() -> None:
         ]
         for value in (0, 1, 3, 9, 10, 12)
     }
+    rho_to_concurrence_color = {
+        value: {
+            pair_colors[tuple(sorted((first, second)))]
+            for first in range(78)
+            for second in range(first)
+            if rho(first, second) == value
+        }
+        for value in (0, 1, 3, 9, 10, 12)
+    }
+    assert all(len(colors) == 1 for colors in rho_to_concurrence_color.values())
+    assert len(
+        {next(iter(colors)) for colors in rho_to_concurrence_color.values()}
+    ) == 6
+
+    relation_labels: tuple[int | None, ...] = (None, 0, 1, 3, 9, 10, 12)
+    relation_representatives = {
+        value: (
+            (0, 0)
+            if value is None
+            else next(
+                (first, second)
+                for first in range(78)
+                for second in range(78)
+                if first != second and rho(first, second) == value
+            )
+        )
+        for value in relation_labels
+    }
+
+    def has_relation(first: int, second: int, value: int) -> bool:
+        return first != second and rho(first, second) == value
+
+    def intersection_row(first_value: int, second_value: int) -> tuple[int, ...]:
+        return tuple(
+            sum(
+                has_relation(first, middle, first_value)
+                and has_relation(middle, second, second_value)
+                for middle in range(78)
+            )
+            for first, second in (
+                relation_representatives[value] for value in relation_labels
+            )
+        )
+
+    assert intersection_row(0, 0) == (7, 0, 0, 0, 1, 1, 1)
+    assert intersection_row(0, 9) == (0, 2, 2, 2, 0, 2, 0)
+    assert intersection_row(0, 10) == (0, 2, 2, 0, 2, 0, 2)
+    assert intersection_row(0, 12) == (0, 2, 0, 2, 0, 2, 2)
+    assert intersection_row(9, 9) == (14, 0, 4, 2, 2, 1, 4)
+    assert intersection_row(10, 10) == (14, 0, 2, 4, 2, 4, 1)
+    assert intersection_row(12, 12) == (14, 4, 2, 2, 3, 2, 2)
+    assert [
+        next(
+            value
+            for value, matrix in relation_matrices.items()
+            if gram_rows == matrix
+        )
+        for gram_rows in orbit_gram_rows
+    ] == [9, 9, 12, 10]
+
+    polar_row = {
+        point_index: passants.index(
+            canonical((-point[2] % q, 2 * point[1] % q, -point[0] % q))
+        )
+        for point_index, point in enumerate(internal)
+    }
+    assert all(
+        relation_matrices[0][point_index]
+        == sum(
+            1 << column_index
+            for column_index, column in enumerate(columns)
+            if column >> polar_row[point_index] & 1
+        )
+        for point_index in range(78)
+    )
 
     def multiply(first: list[int], second: list[int]) -> list[int]:
         return [
@@ -475,7 +552,52 @@ def verify_distance() -> None:
             return -1
         return pair_colors[tuple(sorted((first, second)))]
 
+    # A small geometric base replaces group enumeration in the upper bound for
+    # the scheme automorphism group.  Its first three rho-relations are
+    # (10,3,9); there are 78*14*2=2184 such ordered triples, PGL(2,13) acts
+    # freely on them, the fourth base point is forced, and the four rho-values
+    # resolve every internal point.
     source_base = [0, 8, 3, 6]
+    assert [internal[index] for index in source_base] == [
+        (1, 0, 2), (1, 1, 7), (1, 0, 7), (1, 1, 3)
+    ]
+    assert (
+        rho(source_base[0], source_base[1]),
+        rho(source_base[0], source_base[2]),
+        rho(source_base[1], source_base[2]),
+    ) == (10, 3, 9)
+    assert all(
+        sum(
+            rho(first, third) == 3 and rho(second, third) == 9
+            for third in range(78)
+            if third not in (first, second)
+        )
+        == 2
+        for first in range(78)
+        for second in range(78)
+        if first != second and rho(first, second) == 10
+    )
+    assert sum(
+        all(
+            act(matrix, internal[index]) == internal[index]
+            for index in source_base[:3]
+        )
+        for matrix in matrices
+    ) == 1
+    assert sum(
+        index not in source_base[:3]
+        and tuple(rho(index, anchor) for anchor in source_base[:3]) == (3, 1, 9)
+        for index in range(78)
+    ) == 1
+    rho_signatures = {
+        tuple(
+            -1 if vertex == anchor else rho(vertex, anchor)
+            for anchor in source_base
+        ): vertex
+        for vertex in range(78)
+    }
+    assert len(rho_signatures) == 78
+
     source_signatures = {
         tuple(relation_color(vertex, base_vertex) for base_vertex in source_base):
         vertex

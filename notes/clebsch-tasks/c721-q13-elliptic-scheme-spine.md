@@ -4,7 +4,10 @@
 
 **Opened:** 2026-07-31
 
-**Status:** ready; C714 phase 1/6.
+**Status:** complete and reported 2026-07-31; C722 and C724 unblocked.
+
+**Report:**
+[`2026-07-31-c721-q13-elliptic-scheme-spine.md`](../2026-07-31-c721-q13-elliptic-scheme-spine.md)
 
 ## Objective
 
@@ -43,4 +46,3 @@ leave rank elimination load-bearing. If conic-incidence rigidity does not
 determine the full automorphism group, retain the stabilizer-chain proof and
 state the residual ambiguity. In either case, pass the verified relation
 dictionary to C722 and C724.
-
