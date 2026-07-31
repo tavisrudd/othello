@@ -39,6 +39,9 @@ the \(1,4,5\) channels and locating prime \(3\) in their integral separation.
 The third pass proves by projective incidence that the exterior-cube kernel
 over every field is exactly \(\mu_3(F)\), distinguishing field-valued
 faithfulness in characteristic \(3\) from the nonreduced group-scheme kernel.
+The fourth pass converts the raw third transvectant and factorial Fischer form
+to the classical normalized transvectant and Bombieri--Fischer form, reducing
+the return scalar from \(211625906798592000\) to \(64/1575\).
 C712 is unblocked.
 
 ## Objective

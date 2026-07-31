@@ -926,6 +926,51 @@ identity by comparing thirty-six stored entries.  The large integer is forced
 by the unnormalized third transvectant and factorial Fischer form, while its
 golden factor \(st^6\) separates discriminant from unit normalization.
 
+**Corollary 6.1 (normalized return scalar).**  In degree \(d\), write
+\[
+ \langle u^{d-j}v^j,u^{d-k}v^k\rangle_{\rm B}
+ =\frac{\delta_{jk}}{\binom dj}
+\]
+for the Bombieri--Fischer form, and normalize the transvectant by
+\[
+ [f,g]_r=\frac{(m-r)!(n-r)!}{m!\,n!}(f,g)_r.
+\]
+Let \(\widehat\Delta(f)=[f,F_{\rm ax}]_3\), and take its adjoint with respect
+to the Bombieri--Fischer forms in degrees \(10\) and \(16\).  Then
+\[
+ \boxed{\widehat\Delta^\dagger\widehat\Delta
+ =\frac{64}{1575}(11+18t)(sI-C).}
+\]
+
+**Proof.**  Here \(m=10,n=12,r=3\), so
+\[
+ \widehat\Delta=\alpha\Delta,\qquad
+ \alpha=\frac{7!\,9!}{10!\,12!}=\frac1{950400}.
+\]
+The Bombieri--Fischer form in degree \(d\) is \(1/d!\) times the factorial
+Fischer form used in Lemma 6.  Therefore changing the forms in the source and
+target multiplies the adjoint of \(\Delta\) by \(10!/16!\).  It follows that
+\[
+ \widehat\Delta^\dagger\widehat\Delta
+ =\alpha^2\frac{10!}{16!}\,T_{10}.
+\]
+The rational factor reduces to
+\[
+ 211625906798592000
+ \left(\frac1{950400}\right)^2\frac{10!}{16!}
+ =\frac{64}{1575},
+\]
+which proves the formula.  \(\square\)
+
+**Tao-style check after Corollary 6.1.**  The large integer was not geometry;
+it was the product of two standard convention changes.  Normalizing the
+third transvectant removes the falling-factorial derivatives, while dividing
+the degree-\(d\) Fischer form by \(d!\) removes the scale change between source
+and target adjoints.  What remains is the small rational \(64/1575\) and the
+intrinsic golden factor \(st^6\).  The primes in \(1575=3^2\cdot5^2\cdot7\)
+belong to this normalized differential convention, not to the quaternion
+order.
+
 ## 7. Rational paired-tower descent
 
 **Lemma 7 (paired golden descent and integral comparison).**  Let \(N\) be
@@ -1093,12 +1138,15 @@ Theorem statements:
 | `middleExterior_moritaFactor` | commuting \(A_5\) and split-quaternion actions | multiplicity module is \(\mathbf1\oplus\mathbf4\oplus\mathbf5\) |
 | `middleExterior_IwahoriEdge` | index-five lattice pair | golden order is their endomorphism intersection; \(w^2=5I\) swaps the endpoints |
 | `middleExterior_moritaProjectors` | point--pair incidence factorization | Johnson eigenvalues \(6,1,-2\) and the three rational projectors |
+| `normalized_degreeTen_return` | normalized transvectant and Bombieri--Fischer adjoint | scalar is \(\frac{64}{1575}(11+18t)\) |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
-The large transvectant scalar should enter C712 as a proved interface constant
-only if C712 formalizes binary forms and the Fischer adjoint.  Otherwise C712
-should formalize the operator-shadow package from the explicit \(C\) and state
-the degree-ten return theorem as paper-proved, outside its trust claim.
+The normalized scalar \(64/1575\) should enter C712 as the proved interface
+constant if C712 formalizes binary forms and the Bombieri--Fischer adjoint;
+the large raw scalar should remain only as a conversion audit.  Otherwise
+C712 should formalize the operator-shadow package from the explicit \(C\)
+and state the degree-ten return theorem as paper-proved, outside its trust
+claim.
 Likewise, `middleExterior_recovers_conference` is a cheap optional corollary:
 C712 may formalize the projective-incidence proof of the general
 \(\mu_3\)-kernel lemma, or retain only the explicit identity
@@ -1127,6 +1175,7 @@ no additional finite search.
 | Iwahori lattice edge and endpoint symmetry | Corollary 5.5 | two lattice calculations; no machine input |
 | canonical Morita channels and prime \(3\) | Corollary 5.6 | incidence algebra; no machine input |
 | degree-ten return and exact scalar | Lemma 6 | C682 primary and independent replay |
+| normalized degree-ten return | Corollary 6.1 | convention conversion; exact arithmetic only |
 | golden conjugation and paired rational descent | Lemmas 6–7 | both C682 replays |
 | C680/C712 rings, signs, and bad-prime boundary | exported interfaces | not computational |
 
@@ -1152,7 +1201,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces thirteen cheap upgrades beyond certificate removal.
+The proof pass produces fourteen cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -1184,7 +1233,9 @@ incidence canonically separates the Morita factor into its \(1,4,5\) channels;
 the denominators show that prime \(3\) belongs to this icosahedral integral
 splitting, not to the quaternion order.  Thirteenth, projective incidence
 proves over every field that the exterior-cube kernel is exactly \(\mu_3\),
-with no hidden semisimplicity hypothesis.
+with no hidden semisimplicity hypothesis.  Fourteenth, the classical
+transvectant and Bombieri--Fischer normalizations reduce the raw degree-ten
+scalar to \(64/1575\), leaving the golden factor \(st^6\) untouched.
 
 ## Degrees of freedom after the DOF pass
 
@@ -1207,15 +1258,15 @@ choices are narrower:
   \(\mu_3(F)\), and nothing larger.  In characteristic \(3\) its field points
   are trivial but its group scheme is nonreduced; extending the statement to
   arbitrary rings requires choosing which of these two meanings C712 needs.
-- **Raw differential scale:** the factor
-  \(211625906798592000\) is completely derived from the chosen raw
-  transvectant and Fischer conventions but has not been repackaged as a
-  canonical divided-power normalization.  This does not affect any operator
-  or cubic line.
+The differential scale is no longer a freedom: the standard normalized
+transvectant and Bombieri--Fischer form give the canonical conversion
+\[
+ 211625906798592000\longmapsto\frac{64}{1575}.
+\]
 
-None is a gap in the C680 interface.  The first two concern an optional
-integral Morita refinement; the third is a coefficient-ring boundary; the
-fourth is normalization bookkeeping.
+None of the three remaining choices is a gap in the C680 interface.  The
+first two concern an optional integral Morita refinement; the third is a
+coefficient-ring boundary.
 
 The strongest invariant formulation is now clear.  The actual object is the
 oriented integral pair \((\Lambda^3V,K)\), not the spectrum of \(K\).  Its
@@ -1272,8 +1323,10 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   literal integral identification, and the projector denominators explain
   why this splitting is not integral at \(3\).
 - **Why the return scalar has its form:** settled by a single Fischer norm.
-  The rational factor comes from the raw derivative normalization and the
-  golden factor is \(st^6\).
+  The raw rational factor
+  \(211625906798592000\) becomes \(64/1575\) under the classical normalized
+  transvectant and Bombieri--Fischer form.  The invariant golden factor is
+  \(st^6\).
 - **Why two towers are necessary:** settled by semilinear descent and the
   unequal same-tower Kostant degrees.
 - **Remaining mystery inside C711:** none.  A categorical identification of the
@@ -1281,5 +1334,6 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   C682's optional successor, not an evidence gap in this theorem package.
 
 Vibe check: the proof surface is cleaner than the certificate-era statements.
-Every normalization now comes from a short structural reduction, and the only
-large arithmetic is confined to one reproducible Fischer norm.
+Every normalization now comes from a short structural reduction.  The one
+large Fischer norm is retained only to audit the raw convention; the normalized
+theorem has scalar \(64/1575\).

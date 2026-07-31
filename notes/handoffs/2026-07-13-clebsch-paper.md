@@ -182,6 +182,9 @@ icosahedral integral splitting rather than the quaternion order.
 Projective incidence proves that the exterior-cube kernel over every field is
 exactly \(\mu_3(F)\); over \(\mathbf Q\) it is trivial, while characteristic
 \(3\) requires distinguishing field points from the nonreduced group scheme.
+Under the classical normalized transvectant and Bombieri--Fischer form, the
+raw degree-ten scalar reduces from \(211625906798592000\) to \(64/1575\);
+the intrinsic golden factor \(st^6\) is unchanged.
 Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
