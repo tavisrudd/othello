@@ -163,7 +163,9 @@ normalized and primitive-return orders have exact indices \(20\) and \(500\)
 in \(M_2(\mathbf Z)\); adjoining the integral golden coordinate leaves index
 \(5\).  The staircase \(500\to20\to5\to1\) separates raw-return scaling,
 conductor two, golden ramification, and maximal saturation, and excludes prime
-\(3\) from the middle-exterior quaternion layer.  Full report:
+\(3\) from the middle-exterior quaternion layer.  The residual index-\(5\)
+order is exactly the Iwahori preserving the unique ramified golden eigenline,
+with quotient the opposite-root direction.  Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
 ## Active and queued task cards

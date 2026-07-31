@@ -22,7 +22,10 @@ primitive-return quaternion orders: their indices in \(M_2(\mathbf Z)\) are
 \(\mathbf Z/2\oplus\mathbf Z/10\) and
 \(\mathbf Z/10\oplus\mathbf Z/50\).  Adjoining
 \(t=(1+K/5)/2\) removes the \(2\)-primary defect and leaves index \(5\),
-giving the exact staircase \(500\to20\to5\to1\).  C712 is unblocked.
+giving the exact staircase \(500\to20\to5\to1\).  The fifth pass identifies
+the residual order as the level-\(5\) Iwahori preserving the unique ramified
+golden eigenline; its quotient is the one-dimensional opposite-root space.
+C712 is unblocked.
 
 ## Objective
 

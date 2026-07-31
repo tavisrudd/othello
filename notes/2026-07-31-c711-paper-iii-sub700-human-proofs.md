@@ -546,6 +546,52 @@ saturation.  Only \(2\) and \(5\) occur.  Thus
 prime \(3\) cannot come from the middle-exterior golden--Hodge algebra; it
 belongs to the transvectant, apolar, or icosahedral integral input.
 
+**Corollary 5.3 (the residual level-\(5\) Iwahori).**  Let
+\[
+ L=\langle(1,2)^{\mathsf T}\rangle\subset\mathbf F_5^2.
+\]
+Then
+\[
+ \mathcal O_{\rm gold}
+ =\{M\in M_2(\mathbf Z):\overline M(L)\subset L\}.
+\]
+Thus \(\mathcal O_{\rm gold}\otimes\mathbf Z_5\) is the level-\(5\)
+Iwahori order, and
+\[
+ M_2(\mathbf Z)/\mathcal O_{\rm gold}
+ \cong\operatorname{Hom}_{\mathbf F_5}
+ (L,\mathbf F_5^2/L).
+\]
+
+**Proof.**  In the split model,
+\[
+ H\binom12=3\binom12,\qquad
+ t\binom12=3\binom12\pmod5.
+\]
+The polynomial of \(t\) modulo \(5\) is \((X-3)^2\), and \(t\ne3I\), so
+\(L\) is its unique eigenline.  Hence the reduction of
+\(\mathcal O_{\rm gold}\) lies in the Borel stabilizer of \(L\).  Both have
+dimension three over \(\mathbf F_5\): the first because
+\([M_2(\mathbf Z):\mathcal O_{\rm gold}]=5\), the second by the elementary
+Borel count.  They are equal.
+
+If \(M=\begin{psmallmatrix}a&b\\c&d\end{psmallmatrix}\), the missing quotient
+coordinate can be written
+\[
+ a-d+2(b+c)\pmod5.
+\]
+Its vanishing is equivalent to preservation of \(L\), and it identifies the
+quotient with the opposite-root space
+\(\operatorname{Hom}(L,\mathbf F_5^2/L)\).  \(\square\)
+
+**Tao-style check after Corollary 5.3.**  The last index \(5\) is now a
+level structure, not unexplained torsion.  The golden order remembers one
+ramified eigenline; maximal saturation adds the one map crossing from that
+line to its quotient.  Intrinsically an Iwahori order is an edge in the
+Bruhat--Tits tree and has two adjacent maximal overorders.  The abstract order
+does not select one endpoint; the displayed \(M_2(\mathbf Z)\) is the endpoint
+chosen by the split model.
+
 ## 6. Human derivation of the degree-ten return
 
 Let \(L=E(i)\), with \(i^2=-1\), and for \(a=(a,b,c)\) define
@@ -858,6 +904,7 @@ Theorem statements:
 | `middleExterior_recovers_conference` | recovered atoms and orientation over \(\mathbf Q\) | \(-*K=\Lambda^3C\) determines \(C\) |
 | `middleExterior_splitQuaternion` | \(H=*\), \(J=K/5\) over \(\mathbf Q\) | generated algebra is \(M_2(\mathbf Q)\) and \(HJH^{-1}=-J\) |
 | `middleExterior_orderSmith` | displayed \(2\times2\) split model | indices \(20,5,500\) for the normalized, golden, and return orders |
+| `middleExterior_goldIwahori` | reduction of \(H,t\) modulo \(5\) | golden order is the Borel preimage stabilizing \(L\) |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
 The large transvectant scalar should enter C712 as a proved interface constant
@@ -871,6 +918,8 @@ The split-quaternion corollary is cheaper still: four matrix relations and the
 displayed \(2\times2\) model suffice.
 Its integral-order refinement needs only the two displayed \(4\times4\)
 Smith reductions and may remain paper-proved if C712 does not develop orders.
+The Iwahori corollary is a two-vector calculation modulo \(5\); it introduces
+no additional finite search.
 
 ## Claim-to-lemma map
 
@@ -883,6 +932,7 @@ Smith reductions and may remain paper-proved if C712 does not develop orders.
 | distinguished support lattice from \(K\bmod2\) | Lemma 5 | C682 Weyl replay |
 | split quaternion and inner golden conjugation | Corollary 5.1 | C682 audits \(K^2\); split model is displayed |
 | normalized and primitive quaternion orders | Corollary 5.2 | displayed determinantal divisors and trace Grams |
+| residual level-5 Iwahori | Corollary 5.3 | displayed common eigenline and quotient functional |
 | degree-ten return and exact scalar | Lemma 6 | C682 primary and independent replay |
 | golden conjugation and paired rational descent | Lemmas 6–7 | both C682 replays |
 | C680/C712 rings, signs, and bad-prime boundary | exported interfaces | not computational |
@@ -909,7 +959,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces eight cheap upgrades beyond certificate removal.
+The proof pass produces nine cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -928,7 +978,10 @@ Morita multiplicity explains the \(10+10\) split and makes golden conjugation
 inner.  Eighth, the two natural quaternion orders have exact indices \(20\)
 and \(500\), while adjoining \(t=(1+J)/2\) leaves index \(5\).
 The staircase \(500\to20\to5\to1\) isolates raw scale, conductor two, and
-golden ramification, and excludes prime \(3\) from this layer.
+golden ramification, and excludes prime \(3\) from this layer.  Ninth, the
+residual index \(5\) is the Iwahori quotient
+\(\operatorname{Hom}(L,\mathbf F_5^2/L)\) for the unique ramified golden
+eigenline, so the final saturation is one opposite-root direction.
 
 The strongest invariant formulation is now clear.  The actual object is the
 oriented integral pair \((\Lambda^3V,K)\), not the spectrum of \(K\).  Its
@@ -968,6 +1021,11 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   leaves index \(5\).  All are supported only at \(2,5\).  The prime \(3\)
   boundary belongs to the transvectant/apolar/icosahedral input, not to
   \((*,K)\).
+- **What the final index \(5\) measures:** settled.  The golden order is the
+  preimage of the Borel preserving the unique line
+  \(L=\langle(1,2)\rangle\) modulo \(5\); its quotient is the opposite-root
+  line.  The order determines an Iwahori edge, but not one of its two maximal
+  endpoints.
 - **Why the return scalar has its form:** settled by a single Fischer norm.
   The rational factor comes from the raw derivative normalization and the
   golden factor is \(st^6\).
