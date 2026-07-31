@@ -2,7 +2,18 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C720
+**Status:** complete — see
+`notes/2026-07-31-c728-synchronized-pure-spinor-geometry.md`
+
+## Resolution
+
+The six cells are the outer-equivariant Cartan graphs of
+\(\alpha_T(x)=[D_x,C_T]\).  Both the synchronized tangent map and its
+signed outer cubic covariant have multiplicity one.  The exact projected
+ideal is the reduced Segre ideal, the projective base scheme is a reduced
+union of fifteen four-coincidence lines, and the ten \(3+3\) strata map to
+the nodes.  Wick geometry is fibrewise; golden synchronization and the
+six-point GIT quotient produce the Segre relation.
 
 ## Objective
 

@@ -36,7 +36,10 @@ We show that the diagonal of the middle exterior operator
 the Segre cubic, while centered squaring is the Segre--Igusa polar map.
 The same cubics are Pfaffians
 \(\Pf[D_x,C_T]=4Z_T(x)\); over the golden splitting they are determinants
-of the cross-eigenspace blocks.  Their adjugates produce the two small
+of the cross-eigenspace blocks.  The six Pfaffian systems form the unique
+outer-equivariant synchronized product of pure-spinor big cells, and their
+top projection has the reduced Segre cubic as its exact scheme-theoretic
+image.  Their adjugates produce the two small
 resolutions, conjugate rank-one maximal Cohen--Macaulay sheaves, and the
 rank-one differential factorization of the polar map.  On the balanced
 Boolean layer, \(C^2=5I\) is equivalent to universal
@@ -164,6 +167,131 @@ balances every column, and the cut--edge incidence Gram matrix
 \(4I_{10}+5J_{10}\) forces the columns to exhaust the ten projective
 \(3{+}3\) cuts.  Exceptional-group, Clifford, coding, physical, and
 lattice statements enter only after these identities are proved.
+
+\subsection{The synchronized Cartan cells}
+
+Put \(U=\mathbb Q^X\) and \(A_X=U/\mathbb Q\mathbf1\).  For
+\(T\in\cT\) and \(x\in A_X\), the alternating form
+\[
+ \alpha_T(x)(e_i,e_j)=(x_i-x_j)(C_T)_{ij}
+\]
+defines the maximal isotropic graph
+\[
+ L_T(x)=\{u+\iota_u\alpha_T(x):u\in U\}
+ \subset U\oplus U^*.
+\]
+Its Cartan coordinates in the positive half-spin big cell are
+\[
+ s_T(x)=\sum_{|S|\ \mathrm{even}}
+       \Pf(\alpha_T(x)_S)e_S.
+\]
+
+\begin{proposition}[Synchronized pure-spinor quotient]
+\label{prop:synchronized-spinors}
+The map
+\[
+ \Phi_C:A_X\longrightarrow
+ \prod_{T\in\cT}\operatorname{OG}^+(6,12),
+ \qquad x\longmapsto(L_T(x))_T,
+\]
+is outer-\(S_6\)-equivariant.  Its linear big-cell map is unique up to
+common scale after the coherent golden marking is fixed.  The six top
+coordinates \(p_T=\Pf\alpha_T=4Z_T\) have scheme-theoretic image
+\[
+ \operatorname{Spec}\frac{\mathbb Q[z_T:T\in\cT]}
+ {(\sum_Tz_T,\sum_Tz_T^3)}.
+\]
+The projectivized top map has reduced base scheme
+\[
+ \bigcup_{Q\in\binom X4}
+ \{[x]:x_i=x_j\text{ for all }i,j\in Q\},
+\]
+a union of fifteen lines.  The ten strictly semistable \(3+3\)
+configurations map to the ten nodes of the Segre cubic.
+\end{proposition}
+
+\begin{proof}
+The graph of an alternating form is maximal isotropic, and the Cartan map
+on this big cell is the principal-Pfaffian expansion
+\cite{ChiriviMaffei}.  If \(g\in S_X\), coherence gives a switching
+isometry \(M_{g,T}\) with
+\[
+ C_{gT}=\operatorname{sgn}(g)M_{g,T}C_TM_{g,T}^{\mathsf T}.
+\]
+The diagonal algebra is switching-blind, so
+\[
+ \alpha_{gT}(gx)=\operatorname{sgn}(g)
+ M_{g,T}\alpha_T(x)M_{g,T}^{\mathsf T}.
+\]
+This proves equivariance, including the half-spin coordinate signs.
+
+Let
+\(
+ \mathcal W=\bigoplus_{T\in\cT}\bigwedge^2U_T^*
+\)
+with this signed monomial action.  On a conjugacy-class representative
+\(g\), its character is
+\[
+ \chi_{\mathcal W}(g)=\operatorname{sgn}(g)
+ \sum_{gT=T}\frac{\operatorname{tr}(M_{g,T})^2
+ -\operatorname{tr}(M_{g,T}^2)}2.
+\]
+Its inner product with the augmentation character
+\(\#\operatorname{Fix}_X(g)-1\), over the eleven classes of \(S_6\), is
+one.  Thus
+\[
+ \dim\operatorname{Hom}_{S_6}(A_X,\mathcal W)=1.
+\]
+The displayed map is nonzero and hence spans this Hom-space.  Set
+\[
+ E=\operatorname{sgn}\otimes\mathbb Q[\cT]_0.
+\]
+The corresponding cubic multiplicity is also one:
+\[
+ \dim\operatorname{Hom}_{S_6}(\operatorname{Sym}^3A_X,E)=1.
+\]
+The top Pfaffians are therefore the unique signed outer cubic covariant;
+they are the Joubert coordinates of six ordered points on
+\(\mathbf P^1\) \cite{HMSV}.
+
+It remains to identify the whole image ideal.  In the translation gauge
+\(x_5=0\), at \((x_0,\ldots,x_4)=(-2,-2,-1,-1,0)\), the target is
+\((16,-16,0,0,0,0)\).  A \(4\)-minor of the Jacobian, using target rows
+\((0,2,3,4)\) and source columns \((0,1,2,4)\), equals \(-24576\).
+Thus the image has affine dimension four.  The prime ideal
+\((\sum z_T,\sum z_T^3)\) has the same height as the image ideal.  It is
+prime because the projective Segre cubic is irreducible: a reducible cubic
+hypersurface would have a positive-dimensional singular intersection,
+whereas this cubic has only ten nodes.  Hence the two ideals agree.
+
+Finally, the top map is the equal-weight GIT quotient of six ordered
+points on \(\mathbf P^1\) \cite{HMSV}.  Its unstable locus consists of
+configurations in which at least four points coincide, giving the fifteen
+displayed lines.  Exact radical and minimal-prime computation shows that
+this base scheme is reduced.  The \(3+3\) polystable orbits are the ten
+nodes.
+\end{proof}
+
+The target has another Pfaffian description after a nonstandard
+\(S_5\subset S_6\) is chosen: a five-dimensional submodule of
+\(\bigwedge^2V^*\), for a six-dimensional representation of a Schur cover,
+cuts out the Segre cubic by one Pfaffian equation
+\cite{TschinkelZhang}.  That presentation is an equation on the target.
+It neither supplies a common Gaussian parent for the six cells above nor
+makes the Segre equation a Wick relation.  The quadratic Wick, or
+matchgate, identities govern each factor separately
+\cite{ChiriviMaffei,CaiGorenstein}; the Segre equation records their golden
+synchronization.
+
+The common outer augmentation module also locates the order-ten shadow:
+\[
+ A_X\xrightarrow{\Phi_C}\prod_T\operatorname{OG}^+(6,12)
+ \xrightarrow{\mathrm{top}}E
+ \xrightarrow{R^{\mathsf T}/\sqrt{12}}E_{+3}(S_{10}).
+\]
+The arrows are respectively linear in big-cell coordinates, cubic, and
+linear isometric.  They are consecutive functorial operations, not
+different coordinate expressions for one linear map.
 
 \section{Recovery and minimal marking}
 
@@ -354,6 +482,27 @@ verification ledger.
 S.~Kond\=o,
 \emph{The Segre cubic and Borcherds products},
 arXiv:1110.1126.
+
+\bibitem{HMSV}
+B.~Howard, J.~Millson, A.~Snowden, and R.~Vakil,
+\emph{The relations among invariants of points on the projective line},
+arXiv:0906.2437.
+
+\bibitem{ChiriviMaffei}
+R.~Chiriv\`i and A.~Maffei,
+\emph{Pfaffians and shuffling relations for the spin module},
+arXiv:1203.2943.
+
+\bibitem{CaiGorenstein}
+J.-Y.~Cai and A.~Gorenstein,
+\emph{Matchgates revisited},
+arXiv:1303.6729.
+
+\bibitem{TschinkelZhang}
+Y.~Tschinkel and Z.~Zhang,
+\emph{Stable equivariant birationalities of cubic and degree 14 Fano
+threefolds},
+arXiv:2409.08392.
 
 \end{thebibliography}
 

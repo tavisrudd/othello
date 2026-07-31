@@ -83,7 +83,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C728 `[golden]` [QUEUED AFTER C720]** — construct the six synchronized Majorana pure-spinor cells intrinsically, compute their equivariant uniqueness and projected ideal, and prove exactly how golden synchronization rather than Wick identities alone produces the Segre cubic → `notes/golden-tasks/c728-synchronized-pure-spinor-geometry.md`.
 - **C729 `[golden]` [QUEUED AFTER C720; SEQUEL DIRECTION]** — intrinsicize the syndrome Naimark--Gram lift from the golden order-six operator to the Petersen/Paley order-ten conference operator, classify its 36 extremal balanced cuts, and test for a higher conference tower and stability principle → `notes/golden-tasks/c729-higher-order-conference-cut-designs.md`.
 - **C715 `[golden]` [QUEUED AFTER C720]** — invert the golden anomaly transducer on rational Segre points, classify exceptional/chiral/vectorlike loci, and optimize physical normalization and postselection cost → `notes/golden-tasks/c715-golden-anomaly-inverse.md`.
 - **C716 `[golden]` [QUEUED AFTER C715]** — synthesize the 15 nonchiral and six chiral Fano components of two-\(U(1)\), six-Weyl anomaly lines as golden control families and identify the mixed Pfaffian identities → `notes/golden-tasks/c716-golden-two-u1-lines.md`.

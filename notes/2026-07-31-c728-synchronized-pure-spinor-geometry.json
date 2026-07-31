@@ -1,0 +1,168 @@
+{
+  "character_table": {
+    "1.1.1.1.1.1": {
+      "chi_augmentation": 5,
+      "chi_cell_tangent_product": 90,
+      "chi_signed_outer_augmentation": 5,
+      "chi_signed_outer_permutation": 6,
+      "chi_sym3_augmentation": 35,
+      "class_size": 1,
+      "fixed_outer_totals": 6,
+      "sign": 1
+    },
+    "2.1.1.1.1": {
+      "chi_augmentation": 3,
+      "chi_cell_tangent_product": 0,
+      "chi_signed_outer_augmentation": 1,
+      "chi_signed_outer_permutation": 0,
+      "chi_sym3_augmentation": 13,
+      "class_size": 15,
+      "fixed_outer_totals": 0,
+      "sign": -1
+    },
+    "2.2.1.1": {
+      "chi_augmentation": 1,
+      "chi_cell_tangent_product": -2,
+      "chi_signed_outer_augmentation": 1,
+      "chi_signed_outer_permutation": 2,
+      "chi_sym3_augmentation": 3,
+      "class_size": 45,
+      "fixed_outer_totals": 2,
+      "sign": 1
+    },
+    "2.2.2": {
+      "chi_augmentation": -1,
+      "chi_cell_tangent_product": -12,
+      "chi_signed_outer_augmentation": -3,
+      "chi_signed_outer_permutation": -4,
+      "chi_sym3_augmentation": -3,
+      "class_size": 15,
+      "fixed_outer_totals": 4,
+      "sign": -1
+    },
+    "3.1.1.1": {
+      "chi_augmentation": 2,
+      "chi_cell_tangent_product": 0,
+      "chi_signed_outer_augmentation": -1,
+      "chi_signed_outer_permutation": 0,
+      "chi_sym3_augmentation": 5,
+      "class_size": 40,
+      "fixed_outer_totals": 0,
+      "sign": 1
+    },
+    "3.2.1": {
+      "chi_augmentation": 0,
+      "chi_cell_tangent_product": 0,
+      "chi_signed_outer_augmentation": 1,
+      "chi_signed_outer_permutation": 0,
+      "chi_sym3_augmentation": 1,
+      "class_size": 120,
+      "fixed_outer_totals": 0,
+      "sign": -1
+    },
+    "3.3": {
+      "chi_augmentation": -1,
+      "chi_cell_tangent_product": 0,
+      "chi_signed_outer_augmentation": 2,
+      "chi_signed_outer_permutation": 3,
+      "chi_sym3_augmentation": 2,
+      "class_size": 40,
+      "fixed_outer_totals": 3,
+      "sign": 1
+    },
+    "4.1.1": {
+      "chi_augmentation": 1,
+      "chi_cell_tangent_product": 2,
+      "chi_signed_outer_augmentation": -1,
+      "chi_signed_outer_permutation": -2,
+      "chi_sym3_augmentation": 1,
+      "class_size": 90,
+      "fixed_outer_totals": 2,
+      "sign": -1
+    },
+    "4.2": {
+      "chi_augmentation": -1,
+      "chi_cell_tangent_product": 0,
+      "chi_signed_outer_augmentation": -1,
+      "chi_signed_outer_permutation": 0,
+      "chi_sym3_augmentation": -1,
+      "class_size": 90,
+      "fixed_outer_totals": 0,
+      "sign": 1
+    },
+    "5.1": {
+      "chi_augmentation": 0,
+      "chi_cell_tangent_product": 0,
+      "chi_signed_outer_augmentation": 0,
+      "chi_signed_outer_permutation": 1,
+      "chi_sym3_augmentation": 0,
+      "class_size": 144,
+      "fixed_outer_totals": 1,
+      "sign": 1
+    },
+    "6": {
+      "chi_augmentation": -1,
+      "chi_cell_tangent_product": 0,
+      "chi_signed_outer_augmentation": 0,
+      "chi_signed_outer_permutation": -1,
+      "chi_sym3_augmentation": 0,
+      "class_size": 120,
+      "fixed_outer_totals": 1,
+      "sign": -1
+    }
+  },
+  "conference_normalization": "C_T^2=5I and C_T[0,j]=1 for j>0",
+  "field": "Q (geometric conclusions after characteristic-zero base change)",
+  "hom_multiplicities": {
+    "Hom_S6(A_X, product_T Lambda2(U_T)^signed)": 1,
+    "Hom_S6(Sym3(A_X), signed_outer_augmentation)": 1,
+    "Hom_S6(Sym3(A_X), signed_outer_permutation)": 1
+  },
+  "jacobian_rank_witness": {
+    "columns": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "minor": -24576,
+    "point": [
+      -2,
+      -2,
+      -1,
+      -1,
+      0
+    ],
+    "rank": 4,
+    "rows": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "target_values": [
+      16,
+      -16,
+      0,
+      0,
+      0,
+      0
+    ],
+    "translation_gauge": "x5=0"
+  },
+  "outer_totals": 6,
+  "schema": "c728-synchronized-pure-spinor-geometry-v1",
+  "singular_elimination_companion": "notes/2026-07-31-c728-synchronized-pure-spinor-elimination.sing",
+  "singular_output": [
+    "C728_ELIMINATION_OK",
+    "projected_ideal_generators=linear_plus_cubic",
+    "base_scheme=reduced_union_of_15_projective_lines",
+    "base_projective_degree=15"
+  ],
+  "top_pfaffian_linear_rank": 5,
+  "top_pfaffian_normalization": "Pf([D_x,C_T])=4 Z_T(x)",
+  "top_relations": [
+    "sum_T pf_T=0",
+    "sum_T pf_T^3=0"
+  ]
+}
