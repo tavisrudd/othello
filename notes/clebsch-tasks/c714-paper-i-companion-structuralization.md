@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued; may proceed independently of C713, with final release
-integration after both statement surfaces are fixed.
+**Status:** ready umbrella; execute C721--C726 through the dependency graph
+below. C713 is complete, so the Paper I statement surface is fixed.
 
 ## Objective
 
@@ -42,6 +42,33 @@ the irreducibly finite classifications.
    prose, or state precisely why a finite certificate remains the proof surface.
    Refresh the companion trust ledger, q11 aggregate gate, axiom audit,
    statement identity, authoritative PDF, and standalone mirror.
+
+## Execution graph
+
+```text
+C721 q13 association-scheme spine
+  |\
+  | +--> C724 q11/finite-census certificate compression --+
+  v                                                       |
+C722 q9/q13 clique equality cases                         |
+  |                                                       |
+  v                                                       v
+C723 q13 weight-ten profiles --------------------------> C725 terminal orbit DAG
+                                                           |
+                                                           v
+                                              C726 integration and trust closure
+```
+
+- C721 is the common vocabulary and must land first.
+- C722 may promote either, both, or neither bounded clique argument; each
+  branch has its own exact stop condition.
+- C723 consumes any useful C721/C722 identities but is successful even if it
+  proves that the two-profile meet-in-the-middle certificate is irreducible.
+- C724 may begin after C721 and does not wait for C722 or C723.
+- C725 begins only after C723 and C724 have frozen the surviving finite
+  boundary.
+- C726 is the only closeout card: it integrates adopted arguments, formalizes
+  the claimed granularity, refreshes trust surfaces, and closes C714.
 
 ## Acceptance
 
