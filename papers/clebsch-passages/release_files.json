@@ -24,8 +24,11 @@
     "verification/evidence/harmonic_clebsch.sha256",
     "verification/evidence/harmonic_clebsch_replay.py",
     "verification/extract_statement_identity.py",
+    "verification/golden_return_axioms.txt",
+    "verification/golden_return_formal.json",
     "verification/statement_identity.json",
     "verification/trust_manifest.json",
+    "verification/verify_golden_return_lean.py",
     "verification/verify_release.py",
     "verification/verify_scaffold.py"
   ]

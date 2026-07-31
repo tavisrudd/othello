@@ -60,3 +60,18 @@ remains over an unspecified cofinite base.
 The manifest states `formal_coverage: none claimed`.  Existing formal
 proofs of abstract involutive and Petersen mechanisms are not release
 dependencies of this paper.
+
+The expanded golden-return theorem package has a separate pinned formal map.
+It is replayed against a checkout of the formal artifact with
+
+```text
+python3 verification/verify_golden_return_lean.py \
+  --lean-root /path/to/formal-artifact
+```
+
+`golden_return_formal.json` fixes the Lean toolchain, source hashes, audit
+gate, declarations, and exact exclusions.  `golden_return_axioms.txt` records
+the complete pinned `#print axioms` output, including each native-decision
+terminal; replay rejects any change to that report.  This supplemental gate
+does not alter the four-claim baseline manifest above; manuscript integration
+belongs to the expanded theorem surface that cites these declarations.

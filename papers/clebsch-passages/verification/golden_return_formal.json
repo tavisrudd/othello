@@ -1,0 +1,52 @@
+{
+  "schema": "clebsch-golden-return-formal-v1",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
+  "axiom_report_sha256": "2175e341892601da0c6aad2fc1658ba2b65b2b92f9f6d58c565a2569c0d78783",
+  "source_sha256": {
+    "RelativeConicArcs/ClebschGoldenConference.lean": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2",
+    "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
+    "RelativeConicArcs/ClebschMiddleExterior.lean": "bcf3a769432cb25cd4c6e1c005679243dfc90161781a9cd8350be772827db460",
+    "RelativeConicArcs/ClebschMiddleExteriorSquareRows012To023.lean": "9c4761a58af3cbc7b9405422adc010bf8232d958f46b0e6ee3413c08206c3a28",
+    "RelativeConicArcs/ClebschMiddleExteriorSquareRows024To045.lean": "0a2fbab400572940ff63ce7e37017360ace2db02649a205f092e75673d93346e",
+    "RelativeConicArcs/ClebschMiddleExteriorSquareRows123To135.lean": "ca30dc20ef6d87c424c830fbbef5506b704f1d48fd3874a8b3697555aa00fc37",
+    "RelativeConicArcs/ClebschMiddleExteriorSquareRows145To345.lean": "a2355c3675286b1b2b17051dcd2a9c21d8f3c6e0278db735cd8c5f89accad870",
+    "RelativeConicArcs/ClebschMiddleExteriorSquare.lean": "7db91fe353a65de171c7a9907ccd6eaeb40d3210be60fe947efec8246a13b7ee",
+    "RelativeConicArcs/ClebschMiddleExteriorDiagonal.lean": "fc5ff13994581026438b443c82e62798851f9f835e4b0df25dcbb50712e9583a",
+    "RelativeConicArcs/ClebschMiddleExteriorSupport.lean": "6673976d33f8c98b46182f78639314ccc11f2049d65db058f7a2316a0d99b4a0",
+    "RelativeConicArcs/ClebschGoldenDescent.lean": "0bd348a2e7054c4385f2a6fc0683f0e159996906647ad010156227e50e20a395",
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "b74488ae840f8cb651b15bb4060cf73215ad8092753ecaeadd814242642eb101"
+  },
+  "audited_declarations": [
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq",
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero",
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate",
+    "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot",
+    "RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq",
+    "RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_complement_entry",
+    "RelativeConicArcs.ClebschMiddleExterior.middleExterior_eq_hodge_mul",
+    "RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq",
+    "RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal",
+    "RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff",
+    "RelativeConicArcs.ClebschMiddleExterior.complementIndex_involutive",
+    "RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq",
+    "RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff",
+    "RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_sq",
+    "RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient",
+    "RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison",
+    "RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det",
+    "RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar"
+  ],
+  "trust_boundary": {
+    "symbolic": "Ring-general switching, four-point, balance, reconstruction, augmentation, and companion identities are kernel-checked symbolic proofs.",
+    "native": "Literal integral matrix, determinant-minor, and finite twenty-triple claims use native decision in the pinned Lean runtime.",
+    "excluded": "The manifest does not claim formal coverage of balanced-class classification, abstract atom recovery, the exterior-cube kernel, binary transvectants, or optional quaternion-order refinements."
+  }
+}
