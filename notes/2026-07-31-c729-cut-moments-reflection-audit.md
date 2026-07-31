@@ -116,6 +116,82 @@ For the order-ten shadow the projective determinant moments are, for every
 this contains no information beyond the already proved binary distribution.
 The internal-energy profiles above are the first useful refinement.
 
+## `ej3`: every extremal half borders back to order six
+
+The two order-ten energy profiles have a stronger spectral meaning.  Since
+\(E_j(A)=e_j(P_A^2)\), their characteristic polynomials factor as
+
+\[
+\begin{aligned}
+\chi_{P_A^2}(t)
+&=(t-9)(t-1)^2(t^2-9t+16)
+&&\text{for the 90 singular projective cuts},\\
+\chi_{P_A^2}(t)
+&=t(t-5)^4
+&&\text{for the 36 extremal projective cuts}.
+\end{aligned}
+\]
+
+For an extremal cut, let \(u\) be a unit kernel vector of \(P_A\).  The
+second factorization gives
+
+\[
+P_A^2=5(I-uu^{\mathsf T}).
+\]
+
+Every diagonal entry of \(P_A^2\) is four.  Hence \(u_i^2=1/5\) for all
+five coordinates, so \(v=\sqrt5u\) is a sign vector and
+
+\[
+P_Av=0,
+\qquad
+P_A^2=5I-vv^{\mathsf T}.
+\]
+
+It follows that the bordered matrix
+
+\[
+\widehat P_A=
+\begin{pmatrix}
+P_A&v\\v^{\mathsf T}&0
+\end{pmatrix}
+\]
+
+is a symmetric order-six conference matrix:
+
+\[
+\widehat P_A^2=5I_6.
+\]
+
+The kernel line fixes \(v\) up to sign; the two borders differ by switching
+the added vertex.  Thus the completion is canonical at the switching-class
+level.
+
+Conversely, if a five-vertex principal half \(P_A\) admits such a sign
+border, then
+
+\[
+Q_AQ_A^{\mathsf T}=9I-P_A^2=4I+vv^{\mathsf T},
+\]
+
+whose eigenvalues are \(9,4,4,4,4\).  Therefore
+\(|\det Q_A|=48\).  For the Golden order-ten shadow this proves the intrinsic
+equivalence
+
+\[
+\boxed{
+\text{extremal balanced cut}
+\iff
+\text{its principal half borders to an order-six conference matrix}.}
+\]
+
+Thus every one of the 36 Sylvester vertices carries a local order-six
+conference completion.  This is stronger than saying that the two stages
+share a Naimark-reflection mechanism: the second stage contains 36 marked
+local retractions back to the first conference order.  The theorem does not
+by itself identify which marking quotient, if any, recovers the six original
+Golden sisters.
+
 ## Exact higher moments of the two cut frames
 
 Let \(Y_1\) be the antipodal double of the ten normalized balanced
@@ -372,6 +448,11 @@ shows which profile coordinates are discriminating.
 - **Settled by `ej`:** both antipodal cut frames have exact spherical design
   strength three and fail at degree four; tightness survives without a gain in
   higher design strength.
+- **Settled by `ej3`:** every extremal order-ten principal half has spectrum
+  \(P_A^2\sim\{0,5,5,5,5\}\), a sign kernel vector, and a border to a
+  symmetric order-six conference matrix canonical up to switching the added
+  vertex.  Conversely such a border forces the D-optimal cross determinant
+  \(48\).
 - **Settled by the literature audit:** the general constant-diagonal reflection
   and conference/ETF normalization are classical, and Et-Taoui already has a
   different infinite conference/ETF iteration.
@@ -386,3 +467,7 @@ shows which profile coordinates are discriminating.
 - **Open:** unrestricted novelty of the exact integral Sylvester cut chain.
   Evidence gap: MathSciNet, Google Scholar, and citation-graph closure are not
   covered; no priority language is licensed.
+- **Open:** determine the marking quotient from the 36 bordered local
+  order-six completions to the six Golden sisters.  The present theorem gives
+  the completions and their common switching class, but not a canonical
+  six-fibre map.
