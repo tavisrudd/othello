@@ -183,6 +183,21 @@ def pfaffian_poly(matrix: list[list[Poly]], indices: tuple[int, ...]) -> Poly:
     return add(*terms)
 
 
+def determinant_poly(matrix: list[list[Poly]]) -> Poly:
+    if not matrix:
+        return {ZERO: 1}
+    terms = []
+    for column, entry in enumerate(matrix[0]):
+        minor = [
+            row[:column] + row[column + 1 :]
+            for row in matrix[1:]
+        ]
+        terms.append(
+            scale(mul(entry, determinant_poly(minor)), (-1) ** column)
+        )
+    return add(*terms)
+
+
 def evaluate(cubic: tuple[int, ...], vector: tuple[int, ...]) -> int:
     return sum(
         coefficient * vector[i] * vector[j] * vector[k]
@@ -393,6 +408,10 @@ def build_certificate() -> dict:
         pfaffian_poly(cartan_slice, tuple(range(6))),
         scale(cubic_poly(base_z), -4),
     ) == {}
+    assert add(
+        determinant_poly(cartan_slice),
+        scale(power(cubic_poly(base_z), 2), -16),
+    ) == {}
 
     oriented = {}
     stabilizer_consistency_checks = 0
@@ -462,6 +481,16 @@ def build_certificate() -> dict:
         "middle_exterior_mod2_relation": "|S intersection T|=1",
         "cartan_restriction": (
             "Pf((C_ij(x_i-x_j))_ij)=4 Z_base(x); the map kills constants"
+        ),
+        "commutator_branch_determinant": (
+            "det([diag(x),C])=16 Z_base(x)^2"
+        ),
+        "golden_block_determinant": (
+            "for P_+ and P_- over Q(sqrt(5)), "
+            "Z_base(x)^2=500 det(P_- diag(x) P_+)^2"
+        ),
+        "golden_block_matrix_factorization": (
+            "B_x and +/-10sqrt(5) adj(B_x) factor Z_base(x) I_3"
         ),
         "synthematic_totals": len(totals),
         "stabilizer_consistency_checks": stabilizer_consistency_checks,

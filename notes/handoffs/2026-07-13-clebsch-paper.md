@@ -33,11 +33,16 @@ Joubert coordinates; they land on the Segre cubic and centered squaring is
 the Segre--Igusa polar map.  The five-syntheme/Clebsch formula completes
 the intrinsic commuting diagram.  The same conference operator gives the
 literal Cartan restriction
-\(\operatorname{Pf}(C_{ij}(x_i-x_j))=4Z_T(x)\).  Later balanced slices
-stop at the missing-support-lattice obstruction in the bounded census
-through degree \(50\), while binary tetrahedral and octahedral sisters
-pass only their first exact feasibility gates.  No split paper is
-reopened.  Full report:
+\(\operatorname{Pf}[D_x,C]=4Z_T(x)\), whose square gives
+\(\det[D_x,C]=16Z_T(x)^2\); hence the Segre coordinate, restricted branch
+sextic, and Igusa polar coordinate are Pfaffian, determinant, and
+centered-determinant shadows of one return.  The cross-golden block and
+its adjugate further give a \(3\times3\) linear--quadratic matrix
+factorization whose two kernel incidences are the golden-conjugate small
+resolutions of the six-node cubic.  Later balanced slices stop at the
+missing-support-lattice obstruction in the bounded census through degree
+\(50\), while binary tetrahedral and octahedral sisters pass only their
+first exact feasibility gates.  No split paper is reopened.  Full report:
 [`../2026-07-30-c704-functorial-operator-shadows.md`](../2026-07-30-c704-functorial-operator-shadows.md).
 
 ## Active and queued task cards

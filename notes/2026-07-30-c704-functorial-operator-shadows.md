@@ -82,6 +82,103 @@ the diagonal Clebsch cubic surface.  This is the precise sense in which
 the Clebsch sister is a distinguished section of the operator-derived
 Segre system.
 
+There is a further operator-only form.  If \(D_x=\operatorname{diag}(x)\),
+then
+\[
+ \omega_C(x)=[D_x,C].
+\]
+Hence
+\[
+ \boxed{\quad
+ \operatorname{Pf}[D_x,C]=4Z_T(x),\qquad
+ \det[D_x,C]=16Z_T(x)^2.
+ \quad}
+\]
+The Igusa coordinates are therefore centered determinants:
+\[
+ W_T=\frac1{16}\operatorname{center}_T\det[D_x,C_T],
+\]
+and the syntheme identity becomes
+\[
+ 125\,\operatorname{center}_T\det[D_x,C_T]
+ =64\,\operatorname{center}_T\bigl(\sigma_3(q_T)\bigr).
+\]
+On the marked Clebsch chart where C682's normalization is
+\(J_0=16\sigma_3^2\) and \(Z_T=\sigma_3\), this identifies Hitchin's
+restricted branch sextic with \(\det[D_x,C_T]\).  It is an equality on
+that chart, not a claim that the global incidence cover is a determinant
+cover.
+
+The basis-free content appears after adjoining \(s=\sqrt5\).  Let
+\[
+ P_\pm=\frac12\left(I\pm\frac Cs\right),\qquad
+ V_\pm=P_\pm V.
+\]
+In the golden splitting \(V=V_+\oplus V_-\), write
+\(B_x=P_-D_xP_+:V_+\to V_-\).  The diagonal blocks of the commutator
+vanish and
+\[
+ [D_x,C]=
+ \begin{pmatrix}
+ 0&-2sB_x^{\mathsf T}\\
+ 2sB_x&0
+ \end{pmatrix}.
+\]
+Consequently
+\[
+ \det[D_x,C]=8000\det(B_x)^2,\qquad
+ Z_T(x)^2=500\det(B_x)^2.
+\]
+After choosing the determinant-line orientation,
+\[
+ \boxed{\quad Z_T(x)=\pm10\sqrt5\,\det(B_x).\quad}
+\]
+Thus the Clebsch orientation cubic is the determinant of the cross-golden
+block of the diagonal algebra.  It measures exactly where multiplication
+by \(D_x\) fails to identify the two golden summands.  Golden conjugation
+exchanges the summands and reverses the determinant-line orientation.
+
+This also reorganizes two earlier facts.  The six nodes
+\([\mathbf1-6e_a]\) are precisely the six rank-one cross-block points;
+their commutators have rank two.  And the normalization scalar
+\(500=2^2\cdot5^3\) contains only the lattice prime \(2\) and golden
+ramification prime \(5\), explaining directly why the cross-Gram primes
+\(11,23\) do not occur in this determinant shadow.
+
+The determinant description has a second-order consequence.  Choose the
+orientation sign \(\epsilon\) so that
+\[
+ Z_T=\epsilon\,10\sqrt5\,\det B_x
+\]
+and put
+\[
+ Q_x=\epsilon\,10\sqrt5\,\operatorname{adj}(B_x).
+\]
+Then
+\[
+ \boxed{\quad B_xQ_x=Q_xB_x=Z_T(x)I_3.\quad}
+\]
+Thus the paired-\(E_8\) return supplies a \(3\times3\) linear--quadratic
+matrix factorization of its six-node cubic threefold.  The cokernel is a
+rank-one maximal Cohen--Macaulay module on the cubic away from its
+expected nodal defect.
+
+There are correspondingly two kernel incidence varieties:
+\[
+\widetilde X_+=
+\{(x,[v_+]):B_xv_+=0\},\qquad
+\widetilde X_-=
+\{(x,[v_-]):B_x^{\mathsf T}v_-=0\}.
+\]
+Over a smooth rank-two point each kernel is one-dimensional.  At each of
+the six rank-one nodes the fibre is \(\mathbf P^1\).  Since those
+singularities are ordinary nodes, the two incidences are the two
+determinantal small resolutions.  Golden conjugation exchanges
+\(V_+\) and \(V_-\), transposes the cross block, and hence exchanges the
+two resolutions.  This is a categorical operator shadow beyond the
+polynomial Segre--Igusa diagram; it does not identify either resolution
+with a previously named global moduli space.
+
 ## Why the construction is functorial
 
 For the frozen conference matrix \(C\),
@@ -134,6 +231,9 @@ to \((0,0,\omega_C(x))\).  Exact expansion gives
  \operatorname{Pf}\bigl(C_{ij}(x_i-x_j)\bigr)=4Z_T(x).
  \quad}
 \]
+Equivalently, this is the Pfaffian of the infinitesimal diagonal-conjugacy
+direction \([D_x,C]\).  Squaring gives the determinant branch formula
+above.
 Thus the operator Clebsch cubic is a Pfaffian linear section of the Cartan
 \(E_6\) cubic.  Compatibility with the degree-ten return is built in:
 the embedding itself uses the conference operator reconstructed from that
@@ -297,8 +397,11 @@ The task-owned content beyond that package is:
    all-degree paired-\(E_8\) return;
 2. the intrinsic sign-twisted commuting diagram with the five-syntheme
    Clebsch expression; and
-3. the literal Cartan restriction
-   \(\operatorname{Pf}(C_{ij}(x_i-x_j))=4Z_T(x)\).
+3. the literal Cartan restriction and commutator branch determinant
+   \[
+   \operatorname{Pf}[D_x,C_T]=4Z_T(x),\qquad
+   \det[D_x,C_T]=16Z_T(x)^2.
+   \]
 
 These statements were not sought as publication-priority claims, and the
 audit does not license one.  The recommended disposition is to retain the
@@ -337,9 +440,9 @@ of the report and all three computational artifacts.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-30-c704-segre-igusa-operator-shadow.py` | 18132 | `65df13be350b33a04f831f91274756205343f68a44f8b73488fe48b1b2a3144f` |
+| `2026-07-30-c704-segre-igusa-operator-shadow.py` | 19020 | `f551fb63b4c34ccac88e81ee129ba429d670b6768a3b764ee34c1d9617cd0f66` |
 | `2026-07-30-c704-segre-igusa-operator-shadow-replay.py` | 6043 | `833ffc6c224f269ca6a31329656a6b23db58d976a7376a4c15d49dd79902db6f` |
-| `2026-07-30-c704-segre-igusa-operator-shadow.json` | 3733 | `985922a9ea9485576971eac5f0e26dda5fe147f83dc8ef7faa88f21ef65a96ab` |
+| `2026-07-30-c704-segre-igusa-operator-shadow.json` | 4001 | `540e5db96938d64aac597f19bd193b296453e575d264d9258a6e695b7e01774d` |
 
 ## `ej` + `tt` closeout and mystery ledger
 
@@ -353,6 +456,31 @@ of the report and all three computational artifacts.
 - **Settled by `ej`:** the Cartan comparison is a literal Pfaffian
   restriction using the same conference operator, not only equality of
   minuscule monomial support.
+- **Settled by the post-close `ej`:** the Pfaffian matrix is canonically
+  the commutator \([D_x,C]\).  Its determinant is the squared orientation
+  coordinate, so the Segre cubic, the restricted Hitchin branch sextic,
+  and the Igusa polar coordinates are respectively Pfaffian, determinant,
+  and centered-determinant shadows of the same golden return.
+- **Settled by the post-close `tt`:** over the golden field the
+  commutator is purely off-diagonal, and the cubic is the determinant of
+  \(P_-D_xP_+\) as a map between the two three-dimensional golden
+  eigenspaces.  The six nodes become rank-one cross-block degeneracies,
+  and the scalar \(500=2^2\cdot5^3\) isolates the exact arithmetic
+  normalization primes.
+- **Open, high-value but not allocated:** determine whether the adjugate
+  of \(P_-D_xP_+\), assembled over the six outer conjugates, gives the
+  Segre--Igusa polar map directly as a quadratic-minor construction.  The
+  present centered-determinant formula strongly suggests this, but no
+  commuting adjugate diagram has been proved.
+- **Settled by `ej2`:** the same adjugate already gives a
+  linear--quadratic matrix factorization of the six-node cubic.  Its left-
+  and right-kernel incidences are the two determinantal small resolutions,
+  and golden conjugation exchanges them.
+- **Open second-order bridge:** compare these two small resolutions with
+  the normalized two-parent incidence geometry and with the
+  operator-derived double-six.  Dimensions and involutions now match the
+  right pattern, but no map to either existing geometric construction has
+  been built.
 - **Settled negatively:** later balanced \(E_8\) slices do not inherit the
   degree-ten support lattice functorially.  The bounded census stops at
   degree \(50\); an added geometric lattice could change this verdict.

@@ -98,6 +98,22 @@ The same conference operator gives the literal Cartan restriction
 \[
 \operatorname{Pf}\bigl(C_{ij}(x_i-x_j)\bigr)=4Z_T(x).
 \]
+Writing \(D_x=\operatorname{diag}(x)\), the skew matrix is
+\([D_x,C]\), so
+\[
+\det[D_x,C]=16Z_T(x)^2.
+\]
+Thus the Segre coordinate, restricted Hitchin branch sextic, and Igusa
+polar coordinate are Pfaffian, determinant, and centered-determinant
+shadows of one return operator.  Over \(\mathbf Q(\sqrt5)\), the
+cross-eigenspace block \(B_x=P_-D_xP_+\) satisfies
+\[
+Z_T=\pm10\sqrt5\det B_x.
+\]
+It and its scaled adjugate form a \(3\times3\) linear--quadratic matrix
+factorization.  The right- and left-kernel incidences are the two
+determinantal small resolutions of the six-node cubic, exchanged by
+golden conjugation.
 Later balanced \(E_8\) slices lack the degree-ten distinguished support
 lattice; the bounded census through degree \(50\) therefore stops at an
 exact functoriality obstruction.  Binary tetrahedral \(E_6\) and binary
