@@ -103,8 +103,8 @@ The same review found two bounded defects, repaired in commit `2274d095`:
 the complete Hitchin-fibre assertion is now characteristic-zero only, with
 coordinate reduction explicitly separated from the unspecified spread-out
 range, and the finite-field fibre is defined as \(\mathcal Q_f\) rather than
-the undefined and conflicting \(X_f\).  The full release aggregate passes
-after this repair.
+the undefined and conflicting \(X_f\).  The full ordinary and isolated
+release aggregates pass after this repair.
 
 The integration commits are `53dd13b5` and `84c828df`.
 
