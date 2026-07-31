@@ -121,6 +121,45 @@ restriction, and the nearest positive relative.  The deliverable is a
 rigid taxonomy—new sister, inherited shadow, elder parent, cousin, or
 false analogy—not an unbounded catalogue of exceptional varieties.
 
+The Coble gate is now closed with a revealing mixed verdict.  The
+genus-two Coble cubic/sextic is the classical **elder dual parent**:
+Nguyen's invariant \(P^4\) restriction is literally the
+Segre-to-Igusa Gauss map, and the sextic restricts
+scheme-theoretically as \(L^2I_4\).  It is not itself another sister
+under the strict criterion.  At a general conormal pair its two Hessians
+induce inverse second fundamental forms on the seven-dimensional
+projective tangent spaces, so the canonical mixed differential has
+corank zero.  More exactly, on the affine tangent cone,
+\[
+ BA(v)=\lambda v+d\lambda(v)x;
+\]
+the departure from a scalar is rank one, but its second factor is
+\(d\lambda\), not the opposite polar line.  A smooth rational Burkhardt
+witness has nonzero \(9\times9\) Coble-cubic Hessian determinant, closing
+the ambient-corank escape.
+
+The fixed-minus restriction is the nearest positive descendant.  Its
+four quadrics give the classical double cover whose irreducible
+ramification quartic is Weddle and whose branch quartic is Kummer.  The
+homogeneous Jacobian has generic rank four and rank three on Weddle, so
+its third compound is pointwise rank one; only the Kummer conormal is an
+exceptional polar factor, while the other factor is the fold direction.
+It is therefore an **inherited ramification shadow**, not an independent
+sister.  Full report:
+`notes/2026-07-30-c705-coble-mixed-jacobian.md`.
+
+The final extra-juice pass exposed one higher-value local successor before
+returning to \(E_8\).  Over \(\mathbf F_{101}\), all one hundred certified
+conormal pairs satisfy
+\[
+ \nabla C_6(\nabla C_3(x))=\lambda(x)x,
+\]
+and at all ninety-seven samples with nonzero source Hessian,
+\(\lambda/\det\operatorname{Hess}(C_3)\) is one constant.  The exact
+next gate is to lift this proportionality to characteristic zero and
+identify its normalization intrinsically; only then resume the stronger
+golden/\(E_8\) parent test.
+
 ## Mining subtask — Pauli-doily shadow
 
 The \(S_6\cong\operatorname{Sp}_4(\mathbf F_2)\) dictionary is now exact:

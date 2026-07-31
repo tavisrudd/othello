@@ -86,13 +86,28 @@ factor and closes the global lift.
    of the marked-cubic-surface ball.
 2. Kondō realizes an \(S_6\)-equivariant degree-16 map in the reverse
    direction from Igusa to Segre using type-IV/Kummer automorphic data.
-3. Nguyen realizes Segre--Igusa duality as a special linear-section
-   shadow of the dual Coble cubic and Coble sextic associated with a
-   genus-two curve.
+3. Nguyen realizes Segre--Igusa duality as an exact invariant
+   linear-section shadow of the dual Coble cubic and Coble sextic
+   associated with a genus-two curve.  The cubic restricts to Segre, its
+   polar map restricts to the Segre Gauss map, and the sextic restricts
+   scheme-theoretically as \(L^2I_4\).  Thus the genus-two Coble pair is
+   an elder dual parent, not merely an analogous ambient variety.
 4. The common parent is therefore not unique at the level of moduli
    interpretations.  A genuine \(E_8\) claim must lift the actual
    operators, not merely embed the varieties into another exceptional
    geometry.
+
+The strict operator test separates this parent from a new sister.
+At a general conormal pair the Coble Hessians induce mutually inverse
+second fundamental forms on the projective tangent spaces, so their
+mixed differential has corank zero.  Its affine-tangent composition is
+scalar plus rank one, \(BA=\lambda I+x\otimes d\lambda\), rather than a
+corank-one matrix whose adjugate pairs the two polar lines.  The
+fixed-minus section instead gives the Weddle-to-Kummer double cover.
+Its Jacobian determinant is the Weddle quartic and its third compound is
+rank one on ramification, but only the Kummer conormal is a polar factor;
+the other is the fold direction.  This makes Weddle--Kummer an inherited
+ramification shadow, not an independent sister.
 
 ### Operator properties added by C705
 

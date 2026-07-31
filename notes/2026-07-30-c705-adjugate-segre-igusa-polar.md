@@ -196,6 +196,37 @@ first-jet gate is closed positively.  A lift onward through C682's
 specific golden/\(E_8\) operator descent remains stronger and is no longer
 needed to explain the two polar systems themselves.
 
+The genus-two Coble cubic/sextic gives a second, classically known
+ambient parent, but its operator taxonomy differs.  Nguyen's
+\(\tau^+\)-fixed \(P^4\) section restricts the cubic and its Gauss map
+literally to Segre and the Segre--Igusa polar map, while the sextic
+restricts as \(L^2I_4\).  At a general ambient conormal pair, however,
+the two Coble Hessians induce inverse second fundamental forms on the
+seven-dimensional projective tangent spaces; their mixed differential
+has corank zero.  A smooth rational Burkhardt witness even has nonzero
+\(9\times9\) Coble-cubic Hessian determinant.  Thus this is an
+**elder dual parent**, not another C705 sister, and the displayed
+corank-one adjugate is created only after the six-point parametrization
+introduces its residual-\(\mathfrak{sl}_2\) kernel.
+
+The \(\tau^-\) fixed section is the nearest smaller descendant.  Its
+four-quadrics map has irreducible Weddle ramification quartic and Kummer
+branch quartic.  Its Jacobian adjugate is rank one on Weddle, but only
+the cokernel factor is the Kummer conormal; the kernel factor is the
+fold direction.  It is therefore an **inherited ramification shadow**,
+not an independent sister.  Exact report and certificates:
+`notes/2026-07-30-c705-coble-mixed-jacobian.md`.
+
+The extra-juice pass found a sharper candidate on the ambient conormal
+graph.  For all one hundred certified pairs over \(\mathbf F_{101}\),
+\(\nabla C_6(\nabla C_3(x))=\lambda(x)x\); on all ninety-seven samples
+with nonzero source Hessian,
+\(\lambda/\det\operatorname{Hess}(C_3)\) is constant.  This suggests a
+characteristic-zero scalar-plus-rank-one identity stronger than the bare
+invertibility statement.  The off-cubic analogue is false, so the next
+gate is specifically a conormal identity, not a global polynomial
+composition formula.
+
 ## The raw obstruction and the successful repair
 
 The first falsifier is negative:
