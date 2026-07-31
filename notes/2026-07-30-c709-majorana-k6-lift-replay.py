@@ -62,6 +62,16 @@ for shift in range(16):
     distances.append(sum(a != b for a, b in zip(bits, q)))
 assert sorted(distances) == [5] * 6 + [9] * 10
 
+for axis in range(6):
+    x = [1 - 6 * (i == axis) for i in range(6)]
+    a = [[(x[i] - x[j]) * C[i][j] for j in range(6)] for i in range(6)]
+    assert sum(a[i][j] ** 2 for i in range(6) for j in range(i + 1, 6)) == 180
+    assert all(
+        pfaffian(a, subset) == 0
+        for subset in itertools.combinations(range(6), 4)
+    )
+    assert any(a[i][j] for i in range(6) for j in range(6))
+
 for x in itertools.product((-2, -1, 0, 1, 2), repeat=6):
     a = [
         [(x[i] - x[j]) * C[i][j] for j in range(6)] for i in range(6)
@@ -78,4 +88,7 @@ for x in itertools.product((-2, -1, 0, 1, 2), repeat=6):
             ac = sum(a[i][k] * C[k][j] for k in range(6))
             assert ca + ac == 0
 
-print("ok: 15,625 direct Pfaffian/anticommutator evaluations; 16 q refinements")
+print(
+    "ok: 15,625 direct Pfaffian/anticommutator evaluations; "
+    "16 q refinements; 6 rank-two nodes"
+)

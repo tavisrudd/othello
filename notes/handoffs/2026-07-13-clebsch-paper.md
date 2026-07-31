@@ -108,8 +108,10 @@ canonical positive replacement is the chiral free-fermion family
 three-spaces, and satisfies
 \(\operatorname{Pf}A_C(x)=4Z_C(x)\) and
 \(\det A_C(x)=16Z_C(x)^2\).  Hence the Joubert cubic is exactly its
-zero-mode and fermion-parity wall.  Full report:
-`notes/2026-07-30-c709-majorana-k6-lift.md`.
+zero-mode and fermion-parity wall; its six nodes are precisely the rank-two
+cross-golden dimers, each leaving four Majorana zero modes.  Full report:
+`notes/2026-07-30-c709-majorana-k6-lift.md`; complete human proof companion:
+`notes/2026-07-31-c709-majorana-k6-human-proofs.md`.
 
 C710 is complete with a split verdict.  The McKay affine-Cartan quotient
 and Hamming Construction-A \(E_8\) are explicitly isometric, including the

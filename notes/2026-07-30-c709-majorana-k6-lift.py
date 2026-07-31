@@ -350,6 +350,37 @@ def build() -> dict[str, object]:
         joubert[exponent] = sign
     assert pfaffian_polynomial == polynomial_scale(joubert, 4)
 
+    # The six nodes p_a=1-6e_a are rank-two cross-frame dimers.  Since
+    # C/sqrt(5) is orthogonal, \tilde gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j
+    # is a second Majorana frame orthogonal to gamma_a at the matching index.
+    node_hamiltonians = []
+    for axis in range(6):
+        x = [1 - 6 * int(i == axis) for i in range(6)]
+        skew = [
+            [(x[i] - x[j]) * conference[i][j] for j in range(6)]
+            for i in range(6)
+        ]
+        q2, q4, pf = skew_characteristic_data(skew)
+        assert (q2, q4, pf) == (180, 0, 0)
+        assert all(
+            pfaffian(skew, subset) == 0
+            for subset in itertools.combinations(range(6), 4)
+        )
+        node_hamiltonians.append(
+            {
+                "axis": axis,
+                "projective_point": x,
+                "rank": 2,
+                "characteristic_polynomial": "lambda^4(lambda^2+180)",
+                "nonzero_singular_value_squared": 180,
+                "dimer": (
+                    "H=-3 i sqrt(5) gamma_a tilde_gamma_a; "
+                    "tilde_gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j"
+                ),
+                "zero_majoranas": 4,
+            }
+        )
+
     # C A(x)+A(x) C=0 coefficientwise follows from C^2=5I; verify it
     # on each coordinate basis vector to avoid symbolic matrix machinery.
     anticommutator_checks = 0
@@ -470,6 +501,7 @@ def build() -> dict[str, object]:
                 "Q2=sum_{i<j}(x_i-x_j)^2; "
                 "Q4=sum_{|S|=4}Pf(A(x)_S)^2"
             ),
+            "node_rank_stratification": node_hamiltonians,
         },
         "ordered_constant_hamiltonian_negative": {
             "orders_tested": 720,

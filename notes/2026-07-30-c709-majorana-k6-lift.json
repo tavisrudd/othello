@@ -225,6 +225,104 @@
         ]
       }
     ],
+    "node_rank_stratification": [
+      {
+        "axis": 0,
+        "characteristic_polynomial": "lambda^4(lambda^2+180)",
+        "dimer": "H=-3 i sqrt(5) gamma_a tilde_gamma_a; tilde_gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j",
+        "nonzero_singular_value_squared": 180,
+        "projective_point": [
+          -5,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "rank": 2,
+        "zero_majoranas": 4
+      },
+      {
+        "axis": 1,
+        "characteristic_polynomial": "lambda^4(lambda^2+180)",
+        "dimer": "H=-3 i sqrt(5) gamma_a tilde_gamma_a; tilde_gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j",
+        "nonzero_singular_value_squared": 180,
+        "projective_point": [
+          1,
+          -5,
+          1,
+          1,
+          1,
+          1
+        ],
+        "rank": 2,
+        "zero_majoranas": 4
+      },
+      {
+        "axis": 2,
+        "characteristic_polynomial": "lambda^4(lambda^2+180)",
+        "dimer": "H=-3 i sqrt(5) gamma_a tilde_gamma_a; tilde_gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j",
+        "nonzero_singular_value_squared": 180,
+        "projective_point": [
+          1,
+          1,
+          -5,
+          1,
+          1,
+          1
+        ],
+        "rank": 2,
+        "zero_majoranas": 4
+      },
+      {
+        "axis": 3,
+        "characteristic_polynomial": "lambda^4(lambda^2+180)",
+        "dimer": "H=-3 i sqrt(5) gamma_a tilde_gamma_a; tilde_gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j",
+        "nonzero_singular_value_squared": 180,
+        "projective_point": [
+          1,
+          1,
+          1,
+          -5,
+          1,
+          1
+        ],
+        "rank": 2,
+        "zero_majoranas": 4
+      },
+      {
+        "axis": 4,
+        "characteristic_polynomial": "lambda^4(lambda^2+180)",
+        "dimer": "H=-3 i sqrt(5) gamma_a tilde_gamma_a; tilde_gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j",
+        "nonzero_singular_value_squared": 180,
+        "projective_point": [
+          1,
+          1,
+          1,
+          1,
+          -5,
+          1
+        ],
+        "rank": 2,
+        "zero_majoranas": 4
+      },
+      {
+        "axis": 5,
+        "characteristic_polynomial": "lambda^4(lambda^2+180)",
+        "dimer": "H=-3 i sqrt(5) gamma_a tilde_gamma_a; tilde_gamma_a=(1/sqrt(5)) sum_j C_aj gamma_j",
+        "nonzero_singular_value_squared": 180,
+        "projective_point": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          -5
+        ],
+        "rank": 2,
+        "zero_majoranas": 4
+      }
+    ],
     "pfaffian": [
       {
         "coefficient": 4,

@@ -41,5 +41,9 @@ satisfies
  \det A_C(x)=16Z_C(x)^2.
 \]
 Thus the Joubert cubic is the exact zero-mode and fermion-parity wall of a
-six-Majorana free-fermion family.  Full report and exact certificate:
-`notes/2026-07-30-c709-majorana-k6-lift.md`.
+six-Majorana free-fermion family.  Its smooth locus has rank four, while its
+six nodes are exactly the rank-two cross-golden dimers
+\(\gamma_a(C\gamma)_a/\sqrt5\), each with four Majorana zero modes.  Full
+report and exact certificate:
+`notes/2026-07-30-c709-majorana-k6-lift.md`.  Human proof companion:
+`notes/2026-07-31-c709-majorana-k6-human-proofs.md`.

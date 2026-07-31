@@ -233,14 +233,110 @@ energies are the singular values of the cross-golden block, and its
 determinant is \(\pm4Z_C\).  This is the fermionic form of C704's
 linear--quadratic cross-golden factorization.
 
+## Rank stratification and the six nodes
+
+The `ej` pass sharpens the zero-mode statement into the complete projective
+rank stratification.  Away from the cubic, (A_C(x)) has rank six.  On the
+smooth locus of (Z_C=0), it has rank four and hence two Majorana zero
+modes.  At the six ordinary nodes
+\[
+ p_a=[\mathbf1-6e_a],
+\]
+it has rank two and hence four Majorana zero modes.  There are no other
+projective rank-two members: rank at most two makes every principal
+four-Pfaffian vanish and therefore makes the restricted Pfaffian cubic
+singular; C691 proved that its singular locus consists exactly of these six
+points.
+
+This rank-two layer has a particularly clean golden meaning.  Because
+\(C^2=5I\),
+\[
+ \widetilde\gamma_a=\frac1{\sqrt5}\sum_jC_{aj}\gamma_j
+\]
+is a second orthonormal Majorana frame, and
+\(\{\gamma_a,\widetilde\gamma_a\}=0\).  Direct substitution gives
+\[
+ \widehat H_C(p_a)
+ =-3i\sqrt5\,\gamma_a\widetilde\gamma_a.
+\]
+Thus each node is a single cross-golden dimer: it pairs one original
+Majorana with the correspondingly indexed Majorana in the (C/\sqrt5)
+frame and leaves their four-dimensional orthogonal complement at zero
+energy.  Its characteristic polynomial is
+\[
+ \lambda^4(\lambda^2+180).
+\]
+The six nodal Hamiltonians therefore recover the same six-axis projective
+frame that the cubic recovers geometrically, now as the six minimally
+coupled cross-frame dimers.
+
+### Human proof
+
+Work on the augmentation quotient, so that (x) is considered modulo
+constants.  Since every off-diagonal entry of (C) is nonzero,
+\[
+ [D_x,C]=0\quad\Longleftrightarrow\quad x_i=x_j\text{ for every }i,j.
+\]
+Hence (x\mapsto A_C(x)) is injective on the five-dimensional quotient.
+
+For a (6\times6) alternating matrix, rank is (6,4,2), or (0), and
+\(\operatorname{Pf}A=0\) is equivalent to rank at most four.  Moreover, the
+differential of the ambient Pfaffian is the vector of signed
+(4\times4) Pfaffians.  Consequently
+\[
+ \operatorname{rank}A\le2
+ \quad\Longrightarrow\quad
+ d(\operatorname{Pf})_A=0.
+\]
+After restriction to the commutator five-space, every rank-two member is
+therefore a singular point of (Z_C).  C691's human six-node theorem says
+that the restricted cubic has exactly the six singular points
+\(p_a=[\mathbf1-6e_a]\).  It remains only to calculate their ranks.
+
+At (p_a), (D_{p_a}=I-6E_{aa}), so
+\[
+ A_C(p_a)=-6[E_{aa},C].
+\]
+This matrix has entries only in row and column (a).  Its nonzero row is
+(-6(C_{aj})_{j\ne a}), whose squared norm is
+\(36\sum_jC_{aj}^2=180\), because (C^2=5I\).  The row is nonzero, so the
+alternating matrix has rank exactly two.  Thus all six nodes have rank two;
+there can be no other rank-two projective member.  A point of the cubic away
+from them has rank at most four but not at most two, hence rank exactly four.
+Off the cubic the Pfaffian is nonzero, hence the rank is six.  This proves
+the complete stratification.
+
+Finally define
+\(widetilde\gamma_a=5^{-1/2}\sum_jC_{aj}\gamma_j\).  The identity
+\(C^2=5I\) gives
+\(\{\widetilde\gamma_a,\widetilde\gamma_b\}=2\delta_{ab}\), while
+\(C_{aa}=0\) gives
+\(\{\gamma_a,\widetilde\gamma_a\}=0\).  Substitution into the fixed
+Hamiltonian convention yields
+\[
+ \widehat H_C(p_a)
+ =\frac{i}{4}\gamma^{\mathsf T}(-6[E_{aa},C])\gamma
+ =-3i\sqrt5\,\gamma_a\widetilde\gamma_a.
+\]
+That is one nonzero Majorana dimer and four orthogonal zero Majoranas.  Its
+unique nonzero singular value is (6\sqrt5\), proving
+\(\chi(\lambda)=\lambda^4(\lambda^2+180)\).  The certificate merely checks
+these identities against the frozen signs.
+
 ## `ej` + `tt` closeout
 
-The cheap extra consequence is physical rather than another combinatorial
-labeling: the Joubert cubic is a fermion-parity wall.  For an oriented
+The first cheap extra consequence is physical rather than another
+combinatorial labeling: the Joubert cubic is a fermion-parity wall.  For an oriented
 Majorana frame and a gapped real skew matrix, the ground-state parity is
 the sign of its Pfaffian.  Hence the two signs of \(Z_C\) label the parity
 chambers of the commutator family, and \(Z_C=0\) is precisely its
 zero-mode locus.
+
+The second is the node stratification above.  The cubic does not merely say
+where a mode vanishes: its smooth points carry two Majorana zero modes, while
+its six nodes carry four and are exactly the six cross-golden dimers
+\(\gamma_a\widetilde\gamma_a\).  This supplies a fermionic reconstruction of
+the six-axis carrier at no additional choice.
 
 The naturality audit also explains why the commutator is forced.  An
 edge-local alternating coupling linear in \(x\), translation-invariant in
@@ -256,6 +352,17 @@ cycle-flux character, not a quadratic function on Pauli space; converting
 it to a spin structure needs new embedding data.  The positive Hamiltonian
 does not repair that missing datum—it uses the diagonal parameter \(x\) to
 create a canonical alternating matrix instead.
+
+## Human proofs
+
+A complete proof companion now derives every result in this report without
+using exhaustive computation as a premise:
+`notes/2026-07-31-c709-majorana-k6-human-proofs.md`.  It includes the phased
+Pauli dictionary, the graph-cohomological gauge quotient, the Hodge proof of
+\(K^2=125I\), an explicit two-vector obstruction to quadratic refinement,
+the six-orbit proof of the (120/240/360) spectral census, the complementary-
+minor proof of the Pfaffian cubic, the parity argument, and the full nodal
+rank stratification.
 
 ## Reproducibility
 
@@ -274,7 +381,9 @@ The replay hard-codes only the conference and odd-characteristic
 conventions and independently checks the commutation dictionary, all
 quadratic refinements, and \(15{,}625\) direct integer evaluations of the
 Pfaffian and golden anticommutator identities.  It does not assert a
-surface-dependent Kasteleyn classification.
+surface-dependent Kasteleyn classification.  These computations certify
+convention-dependent tables and independently replay the human proofs; they
+are not the sole evidence for any theorem.
 
 Hashes and byte counts are recorded in
 `notes/2026-07-30-c709-majorana-k6-lift.sha256`.
@@ -298,6 +407,9 @@ Hashes and byte counts are recorded in
 - **Settled by the `ej`+`tt` pass:** the Clebsch/Joubert cubic is exactly
   the gap-closing and fermion-parity wall of that family, and the family is
   unique up to scale in the edge-local linear ansatz.
+- **Settled by the explicit follow-up `ej` pass:** the smooth cubic has rank
+  four, its six nodes are exactly the rank-two members, and each node is one
+  cross-golden Majorana dimer with four zero modes.
 - **No genuine C709 mystery remains.**  A Kasteleyn/spin question after
   choosing a torus embedding would be a different, embedding-owned task,
   not unfinished C709 work.
