@@ -18,6 +18,7 @@ LABEL_RE = re.compile(r"\\label\{([^}]+)\}")
 INPUT_RE = re.compile(r"\\input\{([^}]+)\}")
 EXPECTED_LABELS = (
     "thm:arithmetic-main",
+    "thm:orientation-source",
     "thm:harmonic-main",
     "prop:golden-fibre",
     "prop:spinor-specialization",
@@ -110,7 +111,7 @@ def extract(main: Path) -> dict[str, object]:
     ]
     trust_text = json.dumps(trust_rows, sort_keys=True, separators=(",", ":"))
     return {
-        "schema": "clebsch-orientation-statement-identity-v2",
+        "schema": "clebsch-orientation-statement-identity-v3",
         "main_source": main.name,
         "main_source_sha256": hashlib.sha256(main.read_bytes()).hexdigest(),
         "section_sha256": source_hashes,

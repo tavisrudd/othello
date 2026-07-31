@@ -112,6 +112,7 @@ def main() -> int:
 
     for stem, label in (
         ("arithmetic_cover", "arithmetic cover"),
+        ("orientation_source", "orientation source"),
         ("harmonic_clebsch", "harmonic bridge"),
     ):
         evidence = PAPER / "verification" / "evidence"

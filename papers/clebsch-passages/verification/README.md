@@ -1,7 +1,7 @@
 # clebsch-passages verification
 
-`trust_manifest.json` is the four-row claim/evidence map.
-`statement_identity.json` freezes the four theorem-like statements in
+`trust_manifest.json` is the five-row claim/evidence map.
+`statement_identity.json` freezes the five theorem-like statements in
 manuscript order.
 
 Run from the repository root:
@@ -14,8 +14,8 @@ The aggregate gate verifies:
 
 - exact statement identity, label-level trust-row correspondence, and frozen
   row prose/proof modes/evidence routes;
-- primary, independent, and checksum gates for the arithmetic and harmonic
-  evidence bundles; and
+- primary, independent, and checksum gates for the arithmetic, orientation,
+  and harmonic evidence bundles; and
 - the public packaging allowlist and a manuscript build with no box,
   citation, or reference warning.
 
@@ -51,6 +51,20 @@ conjugating projectivity, its reduction modulo \(11\), and the reflection
 norm product.  It contains no Mathieu, Hadamard, matching, or external
 certificate branch.
 
+The orientation-source bundle is replayed with
+
+```text
+python3 papers/clebsch-passages/verification/evidence/orientation_source.py --check
+python3 papers/clebsch-passages/verification/evidence/orientation_source_replay.py
+sha256sum -c papers/clebsch-passages/verification/evidence/orientation_source.sha256
+```
+
+It checks the scalar factorization of the pulled-back cover, the conference
+square, the exact golden exchanger, the reversal of all triangle signs, and
+the primitive Petersen pair-sum identities.  Scheme normalization, extension
+across the branch divisor, and the complete geometric bad-prime set remain
+human boundaries.
+
 The aggregate gate does not compare either theorem with a finite matching
 tensor.  It also does not turn the abstract integral equation into a global
 incidence model at \(11\).  The mod-\(11\) claim is the exact reduction of
@@ -73,5 +87,5 @@ python3 verification/verify_golden_return_lean.py \
 gate, declarations, and exact exclusions.  `golden_return_axioms.txt` records
 the complete pinned `#print axioms` output, including each native-decision
 terminal; replay rejects any change to that report.  This supplemental gate
-does not alter the four-claim baseline manifest above; manuscript integration
-belongs to the expanded theorem surface that cites these declarations.
+does not alter the five-claim manifest above; no manuscript theorem takes
+Lean as a proof dependency.

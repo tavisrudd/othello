@@ -1,0 +1,106 @@
+\section{The common orientation source}
+\label{sec:orientation-source}
+
+This section keeps track of the sign lost by projectivizing the Clebsch
+chart.  It first normalizes the pulled-back incidence cover, then follows
+deck exchange through the golden six-axis data and the Petersen coefficient
+module.
+
+\subsection{Normalization over the Clebsch chart}
+
+Let \(\mathcal N\to\mathbf P(H)\) be the incidence normalization from
+Section~\ref{sec:cover}, and put \(B=\mathbf P(V_E)\).  On the chart,
+Theorem~\ref{thm:arithmetic-main} and Hitchin's restriction identity give
+\[
+ z^2=5\iota_t^*J_0=80\sigma_3^2
+   =(z-4\sqrt5\,\sigma_3)(z+4\sqrt5\,\sigma_3).
+\]
+Each factor has function field \(E(B)\), and \(B\) is normal.  The
+normalization of \(B\times_{\mathbf P(H)}\mathcal N_E\) is therefore two
+copies \(B_+\amalg B_-\).  The constant plane \(U_t\) supplies one
+component; deck exchange supplies the other.  On \(D(\sigma_3)\), the two
+linear factors differ by a unit, so the original pullback is already their
+product and is finite etale.  Hitchin's chart classification identifies
+this as exactly the locus of two distinct regular configurations.  Along
+\(\sigma_3=0\), the factors meet before normalization, but their normal
+components remain separate.
+
+This factorization is an equality of sections after the same local
+trivialization of \(\mathcal O(3)\) used in the square-class proof.  It does
+not strengthen the integral statement: comparison with the geometric
+incidence model still holds only over an unspecified \(\mathbf Z[1/N]\).
+
+\subsection{The golden involution}
+
+For the ordered representatives \(a_0,\ldots,a_5\) of \(I_t\), their Gram
+matrix has the form
+\[
+ G=(t+2)I+tC,
+\qquad
+C=\begin{pmatrix}
+0&1&1&1&-1&-1\\
+1&0&-1&-1&-1&-1\\
+1&-1&0&1&1&-1\\
+1&-1&1&0&-1&1\\
+-1&-1&1&-1&0&-1\\
+-1&-1&-1&1&-1&0
+\end{pmatrix}.
+\]
+The tight-frame identity gives \(C^2=5I\).  Changing signs of axis
+representatives switches \(C\) to \(DCD\), but every triangle product and
+hence \(Z_C\) is unchanged.
+
+Let \(a_i'\) denote the conjugate axes, obtained by \(t\mapsto1-t\), and
+let \(R\) be the exchanger of Section~\ref{sec:arithmetic}.  Direct
+substitution gives
+\[
+ Ra_i=t d_i a'_{p(i)},\qquad
+ p=(0,1,5,4,2,3),\qquad
+ (d_i)=(1,-1,1,1,1,1).
+\]
+Using \(t^2(1-t)=-t\), one obtains
+\[
+ d_id_jC_{p(i)p(j)}=-C_{ij}.
+\]
+Thus golden conjugation, transported by \(R\), changes \(C\) to \(-C\)
+and \(Z_C\) to \(-Z_C\).  The lone negative \(d_i\) is only a change of
+axis representatives and does not cause the reversal; switching alone
+leaves the triangle cubic fixed.
+
+The two oriented classes are locally constant on the irreducible open
+\(D(\sigma_3)\), so their identification at \([xyz]\) identifies them on
+the whole open.  Normality extends the labels to both components above
+\(\sigma_3=0\), where only the literal two-configuration interpretation
+fails.
+
+\subsection{Transport to degree six}
+
+Write Hitchin's chart as
+\(\iota_t(y)=\sum_i y_iq_i^{(t)}\), with \(q_1=xyz\).  Since
+\(R(xyz)=-xyz\), equivariance and irreducibility of the four-module give
+\[
+ Rq_i^{(t)}=-q_i^{(1-t)}
+\]
+after transporting the five plane-triple labels.  Deck exchange therefore
+fixes the projective chart but reverses its chosen linear lift.
+
+The primitive integral map
+\[
+ \beta(y)_{ij}=y_i+y_j
+\]
+lands in the Petersen \((-2)\)-eigenspace and satisfies
+\[
+ \sum_{i<j}(y_i+y_j)^2=3\sum_i y_i^2,
+ \qquad
+ y_i=\frac13\sum_{j\ne i}\beta(y)_{ij}.
+\]
+Multiplicity one makes this the canonical comparison after the five labels
+are fixed.  Reversing the chart lift reverses \(y\), the zonal harmonic
+\(F_y\), and its cubic integral.  The two signs in the normalized incidence
+cover therefore select the two signs of the exact Gaunt cubic.  This proves
+Theorem~\ref{thm:orientation-source}.
+
+There is no ambient linear comparison between harmonic degrees three and
+six: their irreducible rotation modules have dimensions seven and thirteen.
+The comparison exists only on the chosen Clebsch four-space, and it stops at
+the oriented source class \(([C],[Z_C])\).

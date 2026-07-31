@@ -6,11 +6,13 @@ The shared progression is expository; this manuscript is logically
 independent of the other two.
 
 This directory contains the `clebsch-passages` manuscript and artifact.  Its
-main theorem has two legs:
+main theorem has three parts:
 
 1. the rational square class of Hitchin's incidence cover, its exact local
    golden fibre, and the specialization of the fibre exchanger modulo `11`;
-2. the degree-six icosahedral Gaunt/Steinhardt cubic on the Petersen
+2. the normalized orientation source that carries a chosen incidence sheet
+   to the golden conference class and then to the Petersen four-space; and
+3. the degree-six icosahedral Gaunt/Steinhardt cubic on the Petersen
    four-space.
 
 The fixed-icosahedron Clebsch charts in the first theorem are conjugate

@@ -1,5 +1,5 @@
 {
-  "schema": "clebsch-passages-trust-v2",
+  "schema": "clebsch-passages-trust-v3",
   "local_release_ready": true,
   "submission_ready": false,
   "submission_blockers": [
@@ -8,7 +8,7 @@
   ],
   "formal_coverage": {
     "status": "none claimed",
-    "boundary": "No Lean result is a dependency of any statement in this manifest."
+    "boundary": "No Lean result is a dependency of any statement in this manifest; the supplemental conference and triangle formalization does not represent the global incidence normalization."
   },
   "claims": [
     {
@@ -61,6 +61,36 @@
         "verification/evidence/arithmetic_cover_replay.py",
         "verification/evidence/arithmetic_cover.json",
         "verification/evidence/arithmetic_cover.sha256"
+      ]
+    },
+    {
+      "id": "ORIENT-1",
+      "theorem_labels": [
+        "thm:orientation-source"
+      ],
+      "clauses": [
+        "normalization of the pulled-back incidence cover into two chart components",
+        "maximal distinct-configuration locus D(sigma3)",
+        "deck and golden conjugation transport of the conference and triangle-cubic orientations",
+        "primitive Petersen comparison and harmonic sign transport",
+        "unspecified geometric integral localization"
+      ],
+      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of the two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3); a chosen sheet determines ([C],[Z_C]), deck and golden conjugation negate this source, and the primitive Petersen pair-sum map transports its sign to the degree-six Gaunt cubic without identifying the two polynomial domains.",
+      "status": "certified",
+      "modes": [
+        "conceptual",
+        "classical-input",
+        "certificate",
+        "independent-replay"
+      ],
+      "proof_role": "human normalization and equivariance proof using Hitchin's branch and chart theorems, with exact audit of the scalar factorization, golden involution, conference signs, and Petersen identities",
+      "evidence": [
+        "sections/03-orientation-source.tex",
+        "verification/evidence/orientation_source.py",
+        "verification/evidence/orientation_source_replay.py",
+        "verification/evidence/orientation_source.json",
+        "verification/evidence/orientation_source.sha256",
+        "verification/evidence/harmonic_clebsch.json"
       ]
     },
     {

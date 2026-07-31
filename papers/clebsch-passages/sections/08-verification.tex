@@ -13,11 +13,22 @@ quadratic and cubic moments.  Its independent replay uses a separate dense
 polynomial representation and checks the Wigner \(3j\) conversion.  Neither
 calculation uses floating-point arithmetic.
 
+A third bundle checks the conference square, the golden exchanger and its
+transport of \(C\) and \(Z_C\), the scalar factorization of the pulled-back
+cover, and the primitive Petersen pair-sum identities.  It reuses the
+canonical harmonic certificate only through its pinned digest and exact
+witness values.  Normalization of the pulled-back incidence scheme and its
+extension across the branch divisor remain human arguments.
+
 The \texttt{verification} directory distributed with the paper contains
 the exact programs, canonical certificates, checksums, toolchain
 requirements, and aggregate replay command.  It also records the exact
-claim-to-evidence correspondence.  The manifest claims no Lean coverage:
-the incidence model, square class, local fibre comparison, spinor
+claim-to-evidence correspondence.  The manifest claims no Lean coverage.
+A supplemental formal package proves the displayed conference square,
+switching invariance, triangle reversal, and pair-sum mechanisms, but no
+manuscript theorem depends on it and no new formal surface is needed for the
+scheme-theoretic normalization.  The incidence model, square class, local
+fibre comparison, spinor
 specialization, face-axis geometry, and spherical moments are not formal
 dependencies.  These exact-arithmetic audits are independent checks rather
 than steps in the proofs.

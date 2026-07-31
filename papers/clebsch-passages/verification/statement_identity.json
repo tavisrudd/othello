@@ -1,17 +1,18 @@
 {
-  "schema": "clebsch-orientation-statement-identity-v2",
+  "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "01cbdb4c4dc472ad1b14222f3611f9f88690ab7b95d160dc1a6e5fb3806fc7d5",
+  "main_source_sha256": "84a9d18ea1fb1c7e8584a974587a5ab7f3842eb0a2bfcdb2bfe679b4ee87b3a8",
   "section_sha256": {
-    "sections/01-introduction.tex": "8930da0f48142f1d3ec9146ef274d3a325680782f44b48ceb7cfab3c78d08a8b",
+    "sections/01-introduction.tex": "2da83848536ede3cb38fb8b152aa47915037c418d791922ba55cf45be91d8a0f",
     "sections/02-orientation-cover.tex": "9cdf9341e605d047f3c98c11064cb53867d5c21844f768b7d99610e6f84fb172",
+    "sections/03-orientation-source.tex": "e5561aa179d5cb1f1c58fa724ab73c99be4dc8bc8e3ce876d2be2010ed13b034",
     "sections/04-arithmetic-specialization.tex": "6fe0b87257239de230393862cf2ec91adb4cd859eb74a8cb3ee4ba384c75d177",
-    "sections/05-harmonic-realization.tex": "f6c7fea92a5f3a26d7deeb88234036902547caaa6653527151adfa105264ac1f",
-    "sections/08-verification.tex": "8b0f511a006d74c0cfac4d51763c39bcbba6c2202ba18923ca5f1e2c1411b52b",
-    "sections/09-conclusion.tex": "071f16e497e049f8391ead5c743cead21c2fa54e264720ec4bca445d9656bc15",
+    "sections/05-harmonic-realization.tex": "f497818473e20c68485affe134dab25432875afe132b2eedd3ac7ee11ba123eb",
+    "sections/08-verification.tex": "337a73e9ef193388a5c61dac5ec686dcdf7c92b06462837577efcc9ad838adef",
+    "sections/09-conclusion.tex": "9ed5a9f95feb6de0b1601cfc01076c114981c08b5eacb7268f9a74d852a9b6ab",
     "sections/10-references.tex": "3b2b4c3d9cab7b2e461a3d1e89bb449f1608075cb5b3ce694e6816fd8cdc9a13"
   },
-  "statement_count": 4,
+  "statement_count": 5,
   "statements": [
     {
       "label": "thm:arithmetic-main",
@@ -23,11 +24,20 @@
       "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
     },
     {
+      "label": "thm:orientation-source",
+      "environment": "theorem",
+      "title": "Common orientation source",
+      "source": "sections/01-introduction.tex",
+      "source_line": 72,
+      "sha256": "8384c99ac950559834bc923a4e0dcba95d131e0f86f985063e5756fedc301956",
+      "tex": "\\begin{theorem}[Common orientation source]\n\\label{thm:orientation-source}\nLet \\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) they are the two distinct icosahedral configurations;\non the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nThe two components determine respectively the oriented source classes\n\\(([C],[Z_C])\\) and \\(([-C],[-Z_C])\\).  Under the primitive pair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same choice fixes the linear lift of the Petersen four-space and hence\nthe sign of the degree-six cubic in Theorem~\\ref{thm:harmonic-main}.\n\\end{theorem}"
+    },
+    {
       "label": "thm:harmonic-main",
       "environment": "theorem",
       "title": "Degree-six harmonic restriction",
       "source": "sections/01-introduction.tex",
-      "source_line": 64,
+      "source_line": 105,
       "sha256": "ad6670411252de4aadd61e626dfedbd2a0620932dfab1bf1811e8f68c3a985ba",
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega),\n \\qquad\n P_6(s)=\\frac{231s^6-315s^4+105s^2-5}{16}.\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nWith\n\\(\\langle f,g\\rangle=(4\\pi)^{-1}\\int_{S^2}fg\\), the spherical cubic on this\ncopy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     },
@@ -50,7 +60,7 @@
       "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\nThe spinor class of \\(R\\) is \\([2]\\in k^\\times/k^{\\times2}\\).  Under the\nstandard identifications\n\\[\n \\operatorname{SO}_3(k)/\\Omega_3(k)\n \\cong \\operatorname{PGL}_2(k)/\\operatorname{PSL}_2(k),\n\\]\nthe exchanger lies outside \\(\\operatorname{PSL}_2(k)\\) exactly when \\(2\\)\nis nonsquare.  In particular, over \\(\\F_{11}\\) it represents the\nnontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
     }
   ],
-  "trust_rows_sha256": "5ce50ee6c84498f37a0f9a6f91702df04e03d470788ed902da621267a4d5abbf",
+  "trust_rows_sha256": "26d1e0d6f682e0f05c8e30eb46a0e97d5965a9d8b99701ce3ad647b5a5f588c2",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -102,6 +112,36 @@
         "verification/evidence/arithmetic_cover_replay.py",
         "verification/evidence/arithmetic_cover.json",
         "verification/evidence/arithmetic_cover.sha256"
+      ]
+    },
+    {
+      "id": "ORIENT-1",
+      "theorem_labels": [
+        "thm:orientation-source"
+      ],
+      "clauses": [
+        "normalization of the pulled-back incidence cover into two chart components",
+        "maximal distinct-configuration locus D(sigma3)",
+        "deck and golden conjugation transport of the conference and triangle-cubic orientations",
+        "primitive Petersen comparison and harmonic sign transport",
+        "unspecified geometric integral localization"
+      ],
+      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of the two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3); a chosen sheet determines ([C],[Z_C]), deck and golden conjugation negate this source, and the primitive Petersen pair-sum map transports its sign to the degree-six Gaunt cubic without identifying the two polynomial domains.",
+      "status": "certified",
+      "modes": [
+        "conceptual",
+        "classical-input",
+        "certificate",
+        "independent-replay"
+      ],
+      "proof_role": "human normalization and equivariance proof using Hitchin's branch and chart theorems, with exact audit of the scalar factorization, golden involution, conference signs, and Petersen identities",
+      "evidence": [
+        "sections/03-orientation-source.tex",
+        "verification/evidence/orientation_source.py",
+        "verification/evidence/orientation_source_replay.py",
+        "verification/evidence/orientation_source.json",
+        "verification/evidence/orientation_source.sha256",
+        "verification/evidence/harmonic_clebsch.json"
       ]
     },
     {

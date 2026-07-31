@@ -61,6 +61,47 @@ its unordered geometric fibre are rational, but choosing either
 icosahedral configuration---equivalently, either conjugate Clebsch chart
 through that point---requires \(\Q(\sqrt5)\).
 
+The choice can be retained globally after normalizing the pullback to the
+Clebsch chart.  To state this precisely, orient the six displayed golden
+axes in their listed order and let \(C\) be their normalized conference
+matrix.  Its switching-invariant triangle cubic is
+\[
+ Z_C(x)=\sum_{i<j<k}C_{ij}C_{jk}C_{ki}x_ix_jx_k.
+\]
+
+\begin{theorem}[Common orientation source]
+\label{thm:orientation-source}
+Let \(B=\mathbf P(V_E)\), where \(E=\Q(\sqrt5)\), and pull Hitchin's
+incidence normalization back along \(\iota_t:B\to\mathbf P(H_E)\).
+The normalization of this pullback is a disjoint union
+\[
+ B_+\amalg B_-.
+\]
+The fixed isotropic plane selects \(B_+\), and incidence deck exchange
+interchanges the components.  For an odd generator normalized on \(B_+\),
+their equations are
+\[
+ z=4\sqrt5\,\sigma_3,
+ \qquad z=-4\sqrt5\,\sigma_3.
+\]
+On \(D(\sigma_3)\) they are the two distinct icosahedral configurations;
+on the Clebsch cubic the unnormalized branches meet, while the normalization
+remains disjoint.
+
+The two components determine respectively the oriented source classes
+\(([C],[Z_C])\) and \(([-C],[-Z_C])\).  Under the primitive pair-sum map
+\[
+ \beta:V\longrightarrow\Q^{\binom52},
+ \qquad \beta(y)_{ij}=y_i+y_j,
+\]
+the same choice fixes the linear lift of the Petersen four-space and hence
+the sign of the degree-six cubic in Theorem~\ref{thm:harmonic-main}.
+\end{theorem}
+
+Here \(Z_C\) and \(\sigma_3\) are different cubics on spaces of dimensions
+five and four.  The theorem identifies the source of their orientations; it
+does not identify their polynomial domains.
+
 \begin{theorem}[Degree-six harmonic restriction]
 \label{thm:harmonic-main}
 Let \(u_{ij}\), \(1\leq i<j\leq5\), be the explicitly labelled unit axes
@@ -90,6 +131,9 @@ orthogonal transformation between the two configurations yields spinor
 class \([2]\).  Independently, the harmonic proof identifies the pair-sum
 coefficients with the Petersen \((-2)\)-eigenspace and determines the
 invariant cubic from one exact spherical-moment calculation.
+Between these arguments, Theorem~\ref{thm:orientation-source} normalizes the
+chart pullback, follows its deck involution through the golden conference
+matrix, and transports the resulting sign through the Petersen pair-sum map.
 
 Hitchin proves the generic degree, identifies the branch sextic, constructs
 the Clebsch chart, computes its restriction, and classifies the fibre over
@@ -106,7 +150,9 @@ equation \(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), but its
 comparison with the geometric incidence variety is proved only after
 inverting an unspecified integer.
 
-The harmonic theorem is logically independent of the incidence cover.  It
+The numerical harmonic restriction is logically independent of the
+incidence cover.  The orientation-source theorem compares their signs only
+after choosing a sheet and a linear lift.  It
 places the classical degree-six bond-order observable---the rotationally
 invariant cubic formed from degree-six harmonic coefficients---
 \cite{SNR1981,SNR1983} on the same four-space and computes its exact
