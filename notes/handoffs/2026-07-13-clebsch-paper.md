@@ -98,6 +98,19 @@ scalar-\(6\)/compound boundary, and \(5\) belongs to the golden sign lift.
 The sole CSS output is the standard binary \([[15,5,3]]_2\) code.  Full
 report: `notes/2026-07-30-c708-doily-codes-and-outer-exchange.md`.
 
+C709 is complete with a split verdict.  The conference signing survives
+diagonal Majorana gauge as nontrivial \(\mathbf Z/2\) cycle flux on \(K_6\),
+but it is none of the sixteen Pauli quadratic refinements and supplies no
+spin structure without extra surface-embedding data.  Total-order
+antisymmetrization is noncanonical and gives three spectral classes.  The
+canonical positive replacement is the chiral free-fermion family
+\(A_C(x)=[D_x,C]\): it anticommutes with \(C\), exchanges the two golden
+three-spaces, and satisfies
+\(\operatorname{Pf}A_C(x)=4Z_C(x)\) and
+\(\det A_C(x)=16Z_C(x)^2\).  Hence the Joubert cubic is exactly its
+zero-mode and fermion-parity wall.  Full report:
+`notes/2026-07-30-c709-majorana-k6-lift.md`.
+
 C710 is complete with a split verdict.  The McKay affine-Cartan quotient
 and Hamming Construction-A \(E_8\) are explicitly isometric, including the
 affine root determined by the \(2.A_5\) dimension vector.  No simultaneous
@@ -123,7 +136,7 @@ Full report:
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
 | [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | complete; outer exchange positive at representation level, no canonical involutory polarity, exact code tables closed | none |
-| [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | queued | decide which conference/two-graph data survive fermionic gauge |
+| [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | complete; two-graph flux and chiral commutator family survive, quadratic refinement and intrinsic spin structure do not | none |
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 
 C321 remains conditional and is not triggered: the final Paper I review found
