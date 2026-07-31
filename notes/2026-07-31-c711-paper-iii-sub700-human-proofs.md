@@ -638,6 +638,57 @@ noncanonical by one scalar on each of
 \(\mathbf1,\mathbf4,\mathbf5\); choosing a primitive quaternion idempotent
 and an integral support linearization would fix those three scalars.
 
+**Corollary 5.5 (the lattice edge and its endpoint involution).**  Put
+\[
+ \Lambda _0=\mathbf Z^2,
+ \qquad u=\binom12,
+ \qquad z=\binom01,
+ \qquad \Lambda _1=\mathbf Zu\oplus5\mathbf Zz.
+\]
+Then
+\[
+ \mathcal O_{\rm gold}
+ =\operatorname{End}(\Lambda _0)\cap\operatorname{End}(\Lambda _1).
+\]
+These are its two maximal overorders.  Moreover
+\[
+ w=\begin{pmatrix}-2&1\\1&2\end{pmatrix},
+ \qquad w^2=5I,
+\]
+interchanges them by conjugation.  Thus the two Iwahori endpoints form one
+orbit under the rational normalizer of \(\mathcal O_{\rm gold}\).
+
+**Proof.**  The inverse image of
+\(L=\langle(1,2)^{\mathsf T}\rangle\) under reduction modulo \(5\) is
+exactly \(\Lambda _1\).  Corollary 5.3 therefore says that
+\(\mathcal O_{\rm gold}\) consists of the endomorphisms of \(\Lambda _0\)
+that also preserve \(\Lambda _1\), proving the intersection formula.
+
+The lattices \(\Lambda _1\subset\Lambda _0\) have index \(5\), so their
+homothety classes are adjacent vertices in the Bruhat--Tits tree at \(5\).
+The stabilizer of their edge is the displayed intersection; hence its maximal
+overorders are precisely the two vertex orders.  At every other prime the
+order is already maximal, so this local list is also the global list.
+
+In the basis \((u,z)\), the operator \(w\) has matrix
+\(\begin{psmallmatrix}0&1\\5&0\end{psmallmatrix}\).  Consequently
+\[
+ w\Lambda _0=\Lambda _1,
+ \qquad w\Lambda _1=5\Lambda _0,
+ \qquad w^2=5I.
+\]
+Conjugation by \(w\) therefore exchanges
+\(\operatorname{End}(\Lambda _0)\) and
+\(\operatorname{End}(\Lambda _1)\), while preserving their intersection.
+\(\square\)
+
+**Tao-style check after Corollary 5.5.**  The endpoint ambiguity is now a
+symmetry, not missing data.  The golden order remembers the unoriented edge
+\([\Lambda _0,\Lambda _1]\); choosing a split maximal order orients that
+edge.  The operator \(w\) reverses the orientation and its square is the
+central scalar \(5\).  This is the same ramified golden prime, seen in the
+one-dimensional geometry of Serre's tree.
+
 ## 6. Human derivation of the degree-ten return
 
 Let \(L=E(i)\), with \(i^2=-1\), and for \(a=(a,b,c)\) define
@@ -952,6 +1003,7 @@ Theorem statements:
 | `middleExterior_orderSmith` | displayed \(2\times2\) split model | indices \(20,5,500\) for the normalized, golden, and return orders |
 | `middleExterior_goldIwahori` | reduction of \(H,t\) modulo \(5\) | golden order is the Borel preimage stabilizing \(L\) |
 | `middleExterior_moritaFactor` | commuting \(A_5\) and split-quaternion actions | multiplicity module is \(\mathbf1\oplus\mathbf4\oplus\mathbf5\) |
+| `middleExterior_IwahoriEdge` | index-five lattice pair | golden order is their endomorphism intersection; \(w^2=5I\) swaps the endpoints |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
 The large transvectant scalar should enter C712 as a proved interface constant
@@ -981,6 +1033,7 @@ no additional finite search.
 | normalized and primitive quaternion orders | Corollary 5.2 | displayed determinantal divisors and trace Grams |
 | residual level-5 Iwahori | Corollary 5.3 | displayed common eigenline and quotient functional |
 | Morita multiplicity module | Corollary 5.4 | character decomposition; no machine input |
+| Iwahori lattice edge and endpoint symmetry | Corollary 5.5 | two lattice calculations; no machine input |
 | degree-ten return and exact scalar | Lemma 6 | C682 primary and independent replay |
 | golden conjugation and paired rational descent | Lemmas 6–7 | both C682 replays |
 | C680/C712 rings, signs, and bad-prime boundary | exported interfaces | not computational |
@@ -1007,7 +1060,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces ten cheap upgrades beyond certificate removal.
+The proof pass produces eleven cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -1032,7 +1085,9 @@ residual index \(5\) is the Iwahori quotient
 eigenline, so the final saturation is one opposite-root direction.  Tenth,
 the Morita factor is forced to be
 \(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the module on the ten complementary
-support pairs.
+support pairs.  Eleventh, the residual Iwahori is the endomorphism intersection
+of an index-five lattice edge, and the explicit operator \(w\), satisfying
+\(w^2=5I\), exchanges its two maximal endpoints.
 
 ## Degrees of freedom after the DOF pass
 
@@ -1044,9 +1099,10 @@ choices are narrower:
   \(M\cong\mathbf Q[\{\text{complementary pairs}\}]\) is unique up to one
   scalar on each of \(\mathbf1,\mathbf4,\mathbf5\).  A primitive idempotent
   and an integral support normalization would fix them.
-- **Iwahori endpoint:** \(\mathcal O_{\rm gold}\) determines an edge with two
-  adjacent maximal orders.  The abstract order does not choose an endpoint;
-  the displayed split model chooses one.
+- **Iwahori orientation:** \(\mathcal O_{\rm gold}\) determines an unoriented
+  edge with two adjacent maximal orders.  The operator \(w\), satisfying
+  \(w^2=5I\), exchanges them, so selecting the displayed split model is
+  exactly an orientation choice, not additional algebraic structure.
 - **General-base exterior recovery:** over \(\mathbf Q\), \(\Lambda^3C\)
   determines \(C\); over a base with nontrivial \(\mu_3\), a cube-scalar
   ambiguity remains.
@@ -1101,8 +1157,10 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
 - **What the final index \(5\) measures:** settled.  The golden order is the
   preimage of the Borel preserving the unique line
   \(L=\langle(1,2)\rangle\) modulo \(5\); its quotient is the opposite-root
-  line.  The order determines an Iwahori edge, but not one of its two maximal
-  endpoints.
+  line.  The order determines an Iwahori edge, and
+  \(w=\begin{psmallmatrix}-2&1\\1&2\end{psmallmatrix}\), with \(w^2=5I\),
+  exchanges its two maximal endpoints.  Choosing one endpoint merely orients
+  this edge.
 - **What the ten-dimensional Morita multiplicity is:** settled at the
   rational module level.  It is
   \(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the complementary-pair

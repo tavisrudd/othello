@@ -170,7 +170,10 @@ order is exactly the Iwahori preserving the unique ramified golden eigenline,
 with quotient the opposite-root direction.  The rational Morita factor is
 \(\mathbf1\oplus\mathbf4\oplus\mathbf5\), exactly the module on the ten
 complementary support pairs; only its three irreducible scalars and the two
-Iwahori endpoints remain optional integral choices.  Full report:
+Iwahori endpoints remain optional integral choices.  The latter form an
+index-five lattice edge: the explicit normalizer \(w\), satisfying \(w^2=5I\),
+exchanges its endpoints, so choosing one is precisely an orientation choice.
+Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
 ## Active and queued task cards

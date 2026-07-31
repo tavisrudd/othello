@@ -29,7 +29,10 @@ The DOF pass identifies the ten-dimensional Morita factor with
 \(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the module on complementary support
 pairs, and isolates the remaining three scalar linearizations, the two
 Iwahori endpoints, the general-base \(\mu_3\) ambiguity, and the raw
-differential scale.
+differential scale.  The Milnor--Serre pass realizes the Iwahori as the
+endomorphism intersection of an index-five lattice edge and exhibits
+an operator \(w\), satisfying \(w^2=5I\), that exchanges its endpoints; the
+endpoint freedom is therefore only an orientation choice.
 C712 is unblocked.
 
 ## Objective
