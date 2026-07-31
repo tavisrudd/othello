@@ -1,5 +1,5 @@
 {
-  "check_count": 18,
+  "check_count": 26,
   "checks": [
     {
       "id": "verification-tool-tests",
@@ -15,6 +15,10 @@
     },
     {
       "id": "trust-manifest-regeneration",
+      "status": "passed"
+    },
+    {
+      "id": "computational-companion-trust",
       "status": "passed"
     },
     {
@@ -70,17 +74,48 @@
       "status": "passed"
     },
     {
+      "id": "check-finite-census-direct",
+      "status": "passed"
+    },
+    {
+      "id": "check-finite-census-audit",
+      "status": "passed"
+    },
+    {
+      "id": "check-q13-weight-ten-certificate",
+      "status": "passed"
+    },
+    {
+      "id": "check-q13-weight-ten-independent",
+      "status": "passed"
+    },
+    {
+      "id": "check-terminal-orbit-dag-direct",
+      "status": "passed"
+    },
+    {
+      "id": "check-terminal-orbit-dag-regeneration",
+      "status": "passed"
+    },
+    {
+      "id": "check-terminal-orbit-dag-independent",
+      "status": "passed"
+    },
+    {
       "id": "lean-rigidity-trust-gate",
       "status": "passed"
     }
   ],
   "inputs": {
-    "checker_outputs_sha256": "49dfee6970dc4c6630b010fd2e71d5083a0656fba0aca2ad72c8c47e7b523744",
-    "manuscript_pdf_sha256": "02d37008cceb67c4a20b609969912b3a614da5a6ca6daaf8ce36111900e9e1d8",
-    "manuscript_sha256": "9544183db64f0517f90dbf187fd89c9f44c50803a3a45c2593f1e99709bc4da9",
-    "release_surface_sha256": "98428c8c17ef23f9a7653f5085795040e42a2615ea13bab43244e704abf905dd",
-    "statement_identity_sha256": "1278ebd55369d978c63b3fc49b2ec68ee3852bfa437cfaca672d547a6fcd6147"
+    "checker_outputs_sha256": "cd4386336e06e11c9e2aa3228c18e828ad216bc78fd05f7387502ab6a06d0e04",
+    "companion_manuscript_sha256": "60b0545248def284252fab2c809382af246aecd7333673cbfc3a1dc385ddad0d",
+    "companion_pdf_sha256": "74f1be487cce4afdca96e9e84df6c599b39f451e3aed55b9952296f75db6dc30",
+    "companion_trust_sha256": "0e602c27957fbad44a14d6471e74348937591f3a3ab75075305afdfc122160ff",
+    "manuscript_pdf_sha256": "b1dc1f2cd44966cb610220a2246fa3cbbe75118f9a3571793eac097a81abcbf4",
+    "manuscript_sha256": "7b38699b2e97a3d2162a747bf69cfd3a368560718e59db711fb5b23035fbf94a",
+    "release_surface_sha256": "f0fd9d8bf16193c3bab4d97aa0496d05035f42d2679afbbbaad03f0c9417282a",
+    "statement_identity_sha256": "a0aaee3c462ddaa4dca54b8db6244338c2f34dfe6f04d6334875b3c4640b35a8"
   },
-  "lean_commit": "35808ac74c71df5ad5e88556092c56d78d71b345",
+  "lean_commit": "42ab1a2db30178cf23aa8393d886c63ded24bfbd",
   "status": "passed"
 }
