@@ -42,7 +42,8 @@ rank-one differential factorization of the polar map.  On the balanced
 Boolean layer, \(C^2=5I\) is equivalent to universal
 maximum-determinant \(K_{3,3}\) frustration.  The resulting six sign
 syndromes form a distance-six simplex code whose transpose constructs an
-order-ten conference operator.  Selected coefficients of the determinant
+order-ten conference operator by a Naimark--Gram lift.  Selected
+coefficients of the determinant
 sextic are exactly the four-cycle holonomies of the matching fingerprint,
 so this algebraic shadow recovers the same unoriented switching class
 without a Pfaffian sign.  The same operator family gives exact Slater
@@ -64,6 +65,15 @@ The principal theorem is stated on an abstract marked presentation.  This
 separates propagation from provenance: a geometric or coding construction
 may supply the marked conference class, but the proof below needs only the
 operator and its coherent outer marking.
+
+The order-six system also generates its first higher-order conference
+shadow.  Its six balanced-cut fingerprints are the rows of a simplex
+matrix \(R\).  The row Gram identity makes the normalized transpose of
+\(R\) a Naimark isometry, while the column Gram matrix is an
+affine rescaling of a symmetric conference operator of order ten.  Thus the
+passage from six axes to ten cuts closes the main propagation chain; the
+failure of universal cut extremality at order ten is a later boundary, not
+the source of this operator.
 
 \section{The marked propagation theorem}
 
@@ -112,8 +122,21 @@ For a fully marked golden presentation:
 \item on the balanced Boolean layer, universal \(5{:}1\)
   determinant-matching frustration is equivalent to the conference
   identity.  Its six projective sign fingerprints form a distance-six
-  regular simplex, and their transpose Gram matrix produces a symmetric
-  conference operator of order ten.
+  regular simplex.  More precisely, if their sign words
+  \(r_T\in\{\pm1\}^{10}\) are the rows of \(R\), then
+  \[
+    RR^{\mathsf T}=12\left(I_6-\frac16J_6\right);
+  \]
+\item the same matrix gives the six-to-ten Naimark--Gram lift
+  \[
+    R^{\mathsf T}R=6I_{10}+2S_{10},\qquad S_{10}^2=9I_{10},
+  \]
+  where \(S_{10}\) is a symmetric zero-diagonal sign matrix.  Hence
+  \(S_{10}\) is a conference operator of order ten,
+  \(R^{\mathsf T}/\sqrt{12}\) is a partial isometry from the six-point
+  augmentation space onto its \(+3\)-eigenspace, and the ten normalized
+  columns \(R_{\bullet j}/\sqrt6\) form the real
+  \(\operatorname{ETF}(5,10)\).
 \end{enumerate}
 \end{theorem}
 
@@ -121,9 +144,10 @@ The proof has three stages.  Exterior algebra produces the triangle cubic
 and commutator Pfaffian.  The golden eigenspace splitting turns the same
 identity into a determinant and matrix factorization.  Finally, the
 rank-four differential and the balanced Boolean restriction expose the
-polar and frustration shadows.  Exceptional-group, Clifford, coding,
-physical, and lattice statements enter only after these identities are
-proved.
+polar and frustration shadows.  The zero-centroid simplex identity then
+fixes the row Gram matrix, and transposition gives the order-ten conference
+operator.  Exceptional-group, Clifford, coding, physical, and lattice
+statements enter only after these identities are proved.
 
 \section{Organization}
 
