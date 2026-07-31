@@ -58,6 +58,63 @@ outputs may be canonical objects; others may be unordered pairs, projective
 lines, signed six-sets, gauge classes, or conjugate families.  A theorem that
 forgets these residual torsors would be false or overstated.
 
+## Stronger possibility: a recovery cycle
+
+The current results suggest more than one-way propagation.  Paper I already
+identifies the support cubic and the conference switching class as two
+presentations of the same signed two-graph: triangle products recover the
+switching class, while the cubic's six nodes recover the unlabelled axis
+carrier.  The commutator Pfaffian in the Golden paper then returns that same
+cubic line.  C727 should therefore test the cycle
+
+\[
+ \text{coarse data}\longrightarrow[C]\longrightarrow[Z_C]
+ \longrightarrow[C],
+\]
+
+not merely the forward chain from \(C\) to its shadows.  If every arrow
+descends through the same natural equivalence relation, the result is an
+information-preservation theorem: a selected low-degree shadow retains the
+complete oriented switching class from which it arose.
+
+The strongest plausible statement is an equivalence of reconstruction
+classes among the syndrome datum, the oriented Clebsch cubic line, and the
+golden conference switching class.  The full shadow family would then be a
+functorial consequence of any one of these equivalent presentations.  This
+claim must fail cleanly if the syndrome locus needs decoder multiplicities or
+if the cubic retains only a quotient of the orientation torsor.
+
+Two existing identities make the reverse direction especially cheap to test.
+Over characteristic zero, the full determinant polynomial
+\(\det[D_x,C]=16Z_C(x)^2\) determines the cubic line \([Z_C]\), because a
+square in the polynomial ring has only the expected scalar/sign ambiguity.
+Thus even the orientation-insensitive determinant shadow may retain the
+entire switching class once the cubic-to-two-graph reconstruction is applied.
+By contrast, centered squaring is inverse-polar only on its stated open set
+and collapses the balanced optimum into \(W=0\).  The Segre--Igusa shadow may
+therefore give the first exact information-loss stratum rather than another
+globally faithful presentation.
+
+## Descent hierarchy
+
+C727 should organize outputs by the amount of recovered marking they retain:
+
+1. **Unmarked invariants:** objects fixed by switching, permutation,
+   orientation exchange, and golden conjugation, such as an appropriate
+   determinant square or unlabelled projective locus.
+2. **Orientation-cover objects:** cubic or Pfaffian lines and paired outputs
+   that descend only after retaining the orientation torsor.
+3. **Golden-marked objects:** cross-eigenspace determinants, resolutions, or
+   modules that require a choice of golden embedding or occur as a conjugate
+   pair.
+4. **Fully marked realizations:** indexed outer coordinates, mode-labelled
+   Hamiltonians, or anomaly vectors that descend only up to a stated gauge
+   and permutation action.
+
+This hierarchy is itself a possible theorem: it measures exactly how much of
+the original coarse datum survives in each shadow and where an additional
+choice first becomes unavoidable.
+
 ## Required ambiguity ledger
 
 The composite statement must follow each ambiguity from the Paper I input to

@@ -32,18 +32,29 @@ The framing hypothesis and proposed theorem are recorded in
    six-set, or torsor.  Audit the middle-exterior/Joubert, Segre--Igusa,
    Pfaffian/determinant, cross-golden adjugate, Cartan, Majorana, Slater, and
    anomaly constructions separately.
-5. Test whether the composite can be stated as one theorem on the unlabelled
+5. Test faithfulness in the reverse direction.  Determine which individual
+   shadows recover the conference switching class, using the cubic node frame
+   and triangle two-graph as the first candidate.  Check explicitly whether
+   the determinant square recovers the cubic line and whether the
+   centered-square Segre--Igusa map has the balanced \(W=0\) layer as its
+   first exact information-loss stratum.  Decide whether the result is a
+   one-way propagation theorem, a split injection, or an equivalence of
+   reconstruction classes.
+6. Stratify the targets into unmarked invariants, orientation-cover objects,
+   golden-marked pairs, and fully marked gauge/permutation classes.  Locate
+   the first unavoidable information loss or additional choice.
+7. Test whether the composite can be stated as one theorem on the unlabelled
    syndrome locus.  If not, state the minimal marked theorem and prove a
    sharp obstruction to stronger descent.
-6. Separate theorem-level consequences from secondary contextual relatives.
-   Admit the Clifford/doily, (E_8)--Hamming, and hyperbolic-lattice outputs
+8. Separate theorem-level consequences from secondary contextual relatives.
+   Admit the Clifford/doily, \(E_8\)--Hamming, and hyperbolic-lattice outputs
    only when an explicit functor from the recovered equivalence class is
    present.
-7. Run a bounded literature and priority audit for reconstruction followed by
+9. Run a bounded literature and priority audit for reconstruction followed by
    functorial propagation from a switching class.  Do not turn the
    composition of paper-owned theorems into an originality claim without
    this gate.
-8. Produce a paper-facing theorem/corollary interface for the Golden paper
+10. Produce a paper-facing theorem/corollary interface for the Golden paper
    and a non-mutating recommendation for a later Paper I introduction or
    conclusion pointer after a stable Golden preprint exists.
 
@@ -51,6 +62,10 @@ The framing hypothesis and proposed theorem are recorded in
 
 - A proved covariance diagram from the coarsest sufficient Paper I input to
   every admitted Golden output.
+- A reverse-faithfulness verdict identifying which smallest shadow, if any,
+  reconstructs the conference switching class and closes the recovery cycle.
+- A descent hierarchy locating the exact marking retained or forgotten by
+  every primary output.
 - A complete ambiguity ledger with no suppressed marking or sign choice.
 - Either a single recovery--propagation theorem or a sharp negative result
   identifying the minimal extra marking and the nearest true theorem.
