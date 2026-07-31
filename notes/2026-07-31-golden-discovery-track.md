@@ -8,4 +8,3 @@ proof obligations, novelty findings, and successor gates belong in their
 task reports and the live handoff, not here.
 
 No incidental entries have been recorded yet.
-
