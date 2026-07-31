@@ -65,6 +65,9 @@ The positive naming gate is an explicit common lift of \(q,W,A\); shared
 enough.  Until that gate passes, “\(E_8\) shadow sisters” remains a
 conjectural strengthening of the proved “Clebsch shadow sisters.”
 
+Situational source map:
+`notes/2026-07-30-c705-shadow-sisters-literature-map.md`.
+
 ## Required closeout
 
 No first-gate closure is allowed.  Run distinct `ej1`, `tt1`, `ej2`, and
