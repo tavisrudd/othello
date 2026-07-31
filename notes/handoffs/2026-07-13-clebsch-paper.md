@@ -142,7 +142,13 @@ conference operator through the faithful rational exterior cube; consequently
 its family-preserving projective stabilizer and line stabilizer are exactly
 \(A_5\) and \(S_5\).  Hodge complementation closes the dual-family half: the
 full line normalizer is \(S_5\times C_2\), and the exact stabilizer is the
-diagonal \(S_5\) coupling outer orientation with complement duality.  Full report:
+diagonal \(S_5\) coupling outer orientation with complement duality.  Finally,
+\((*,K/5)\) generates the split quaternion algebra
+\((-1,5)\cong M_2(\mathbf Q)\), so the \(10+10\) golden split is Morita
+multiplicity and Hodge complementation makes golden conjugation inner.  Its
+normalized and primitive-return orders have exact indices \(20\) and \(500\)
+in \(M_2(\mathbf Z)\), supported only at \(2,5\); this excludes prime \(3\)
+from the middle-exterior quaternion layer.  Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
 ## Active and queued task cards

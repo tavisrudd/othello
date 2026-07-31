@@ -396,6 +396,117 @@ collapses.  Over a field containing nontrivial cube roots of unity, exterior
 faithfulness leaves the exact \(\mu_3\) scalar ambiguity; over \(\mathbf Q\)
 that ambiguity disappears.
 
+**Corollary 5.1 (split-quaternion structure).**  On
+\(W=\Lambda^3\mathbf Q^6\), put
+\[
+ H=*,\qquad J=K/5.
+\]
+Then \(H,J\) generate a split quaternion algebra:
+\[
+ H^2=-I,\qquad J^2=5I,\qquad HJ=-JH,
+\qquad
+ \mathbf Q\langle H,J\rangle\cong M_2(\mathbf Q).
+\]
+Consequently
+\[
+ W\cong\mathbf Q^2\otimes\mathbf Q^{10}
+\]
+as a module for this matrix algebra, and \(H\) implements golden conjugation
+on \(\mathbf Q[J]\cong\mathbf Q(\sqrt5)\).
+
+**Proof.**  The three relations are Lemma 4 and its Hodge anticommutation.
+They present the quaternion algebra \((-1,5)_{\mathbf Q}\).  It is split
+because \(5=1^2+2^2\): explicitly,
+\[
+ H\longmapsto
+ \begin{pmatrix}0&-1\\1&0\end{pmatrix},
+ \qquad
+ J\longmapsto
+ \begin{pmatrix}1&2\\2&-1\end{pmatrix}
+\]
+satisfies the same relations, and the four matrices \(I,H,J,HJ\) are
+linearly independent.  Hence they span \(M_2(\mathbf Q)\).  The resulting
+unital action on \(W\) is faithful because \(M_2(\mathbf Q)\) is simple.
+Every finite module over \(M_2(\mathbf Q)\) is a sum of copies of its
+two-dimensional standard module; \(\dim W=20\) gives ten copies.  Finally,
+\[
+ HJH^{-1}=-J,
+\]
+so the nontrivial automorphism of the golden quadratic subalgebra is inner
+on \(W\).  \(\square\)
+
+**Tao-style check after Corollary 5.1.**  The \(10+10\) golden eigenspace
+split no longer needs a trace count: it is Morita multiplicity ten for a
+split quaternion algebra.  Hodge complementation is the Weyl reflection of
+its golden torus.  This is a rational statement only; \(J=K/5\) need not
+preserve the primitive integral support lattice, so no \(M_2(\mathbf Z)\)
+action is asserted.
+
+**Corollary 5.2 (integral quaternion orders).**  Under the split model of
+Corollary 5.1, let
+\[
+ \mathcal O_{\rm norm}=\mathbf Z[H,J],
+ \qquad
+ \mathcal O_{\rm ret}=\mathbf Z[H,K].
+\]
+Then, inside the maximal order \(M_2(\mathbf Z)\),
+\[
+ M_2(\mathbf Z)/\mathcal O_{\rm norm}
+ \cong\mathbf Z/2\oplus\mathbf Z/10,
+\]
+\[
+ M_2(\mathbf Z)/\mathcal O_{\rm ret}
+ \cong\mathbf Z/10\oplus\mathbf Z/50.
+\]
+Their indices are \(20\) and \(500\), and their trace discriminants are
+\(-400=-2^4 5^2\) and \(-250000=-2^4 5^6\).
+
+**Proof.**  In the ordered coordinate basis
+\((E_{11},E_{12},E_{21},E_{22})\), the columns
+\((I,H,J,HJ)\) form
+\[
+ A=
+ \begin{pmatrix}
+ 1&0&1&-2\\
+ 0&-1&2&1\\
+ 0&1&2&1\\
+ 1&0&-1&2
+ \end{pmatrix}.
+\]
+Its determinantal divisors are
+\[
+ 1,\ 1,\ 2,\ 20.
+\]
+Indeed, the first two are witnessed by the upper-left minors; reduction
+modulo \(2\) makes every \(3\times3\) minor even, one such minor is
+\(\pm2\), and \(\det A=20\).  Thus the Smith invariants are
+\((1,1,2,10)\).
+
+Replacing \(J,HJ\) by \(K=5J,HK=5HJ\) multiplies the last two columns by
+\(5\).  The determinantal divisors become
+\[
+ 1,\ 1,\ 10,\ 500:
+\]
+the first two minors are unchanged, every \(3\times3\) minor is divisible
+by \(10\), one has value \(\pm10\), and the determinant is \(25\det A=500\).
+Hence the Smith invariants are \((1,1,10,50)\).
+
+Finally, reduced matrix trace on the bases
+\((I,H,J,HJ)\) and \((I,H,K,HK)\) has Gram matrices
+\[
+ \operatorname{diag}(2,-2,10,10),
+ \qquad
+ \operatorname{diag}(2,-2,250,250).
+\]
+Their determinants give the asserted trace discriminants.  \(\square\)
+
+**Tao-style check after Corollary 5.2.**  The rational quaternion algebra is
+split, so these are order defects, not Brauer ramification.  Passing from the
+primitive return \(K\) to \(J=K/5\) removes an index \(25\), while the
+normalized order still has index \(20\).  Only \(2\) and \(5\) occur.  Thus
+prime \(3\) cannot come from the middle-exterior golden--Hodge algebra; it
+belongs to the transvectant, apolar, or icosahedral integral input.
+
 ## 6. Human derivation of the degree-ten return
 
 Let \(L=E(i)\), with \(i^2=-1\), and for \(a=(a,b,c)\) define
@@ -706,6 +817,8 @@ Theorem statements:
 | `middleExterior_parity` | distinguished triple lattice | odd iff intersection one |
 | `support_reconstruct` | the parity relation | Johnson scheme up to complement |
 | `middleExterior_recovers_conference` | recovered atoms and orientation over \(\mathbf Q\) | \(-*K=\Lambda^3C\) determines \(C\) |
+| `middleExterior_splitQuaternion` | \(H=*\), \(J=K/5\) over \(\mathbf Q\) | generated algebra is \(M_2(\mathbf Q)\) and \(HJH^{-1}=-J\) |
+| `middleExterior_orderSmith` | displayed \(2\times2\) split model | Smith invariants \((1,1,2,10)\) and \((1,1,10,50)\) |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
 The large transvectant scalar should enter C712 as a proved interface constant
@@ -715,6 +828,10 @@ the degree-ten return theorem as paper-proved, outside its trust claim.
 Likewise, `middleExterior_recovers_conference` is a cheap optional corollary:
 C712 may prove the general \(\mu_3\)-kernel lemma, or retain only the explicit
 identity \(-*K=\Lambda^3C\) and leave rational faithfulness paper-proved.
+The split-quaternion corollary is cheaper still: four matrix relations and the
+displayed \(2\times2\) model suffice.
+Its integral-order refinement needs only the two displayed \(4\times4\)
+Smith reductions and may remain paper-proved if C712 does not develop orders.
 
 ## Claim-to-lemma map
 
@@ -725,6 +842,8 @@ identity \(-*K=\Lambda^3C\) and leave rational faithfulness paper-proved.
 | converse reconstruction and unique class | Lemma 3 | C691 replay |
 | \(K^2=125I\), diagonal scalar \(4\), Hodge signs | Lemma 4 | C682 Weyl replay |
 | distinguished support lattice from \(K\bmod2\) | Lemma 5 | C682 Weyl replay |
+| split quaternion and inner golden conjugation | Corollary 5.1 | C682 audits \(K^2\); split model is displayed |
+| normalized and primitive quaternion orders | Corollary 5.2 | displayed determinantal divisors and trace Grams |
 | degree-ten return and exact scalar | Lemma 6 | C682 primary and independent replay |
 | golden conjugation and paired rational descent | Lemmas 6–7 | both C682 replays |
 | C680/C712 rings, signs, and bad-prime boundary | exported interfaces | not computational |
@@ -751,7 +870,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces six cheap upgrades beyond certificate removal.
+The proof pass produces eight cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -764,7 +883,12 @@ reconstruction collapses the family-preserving 20-dimensional normalizer to
 the known conference normalizer: \(A_5\) for \(K\), \(S_5\) for its line.
 Sixth, Hodge complementation closes the dual-family half: the full line
 normalizer is \(S_5\times C_2\), and the exact stabilizer is the diagonal
-\(S_5\) coupling the two orientation reversals.
+\(S_5\) coupling the two orientation reversals.  Seventh, the normalized pair
+\((*,K/5)\) generates the split quaternion algebra \(M_2(\mathbf Q)\);
+Morita multiplicity explains the \(10+10\) split and makes golden conjugation
+inner.  Eighth, the two natural quaternion orders have exact indices \(20\)
+and \(500\) in \(M_2(\mathbf Z)\), isolating their support at \(2,5\) and
+excluding prime \(3\) from this layer.
 
 The strongest invariant formulation is now clear.  The actual object is the
 oriented integral pair \((\Lambda^3V,K)\), not the spectrum of \(K\).  Its
@@ -793,6 +917,16 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   Hodge complementation doubles the full line normalizer to
   \(S_5\times C_2\); the exact stabilizer is the diagonal \(S_5\) coupling the
   outer and complement characters.
+- **Why the golden eigenspaces both have dimension ten, and whether their
+  exchange is external:** settled.  The support space is ten copies of the
+  standard module for \((-1,5)\cong M_2(\mathbf Q)\), and Hodge
+  complementation implements golden conjugation internally.  Integrally,
+  division by \(5\) remains a genuine boundary.
+- **Whether the quaternion bridge explains all three structural bad primes:**
+  settled negatively and sharply.  Its normalized and primitive-return orders
+  have indices \(20\) and \(500\), supported only at \(2,5\).  The prime \(3\)
+  boundary belongs to the transvectant/apolar/icosahedral input, not to
+  \((*,K)\).
 - **Why the return scalar has its form:** settled by a single Fischer norm.
   The rational factor comes from the raw derivative normalization and the
   golden factor is \(st^6\).

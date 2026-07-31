@@ -13,8 +13,14 @@ middle-exterior return reconstructs the conference operator itself.  The
 second extra-juice pass further proves that its family-preserving projective
 stabilizer and line stabilizer are exactly \(A_5\) and \(S_5\), while Hodge
 complementation enlarges the full line normalizer to \(S_5\times C_2\) and
-couples with the outer character to give exact stabilizer \(S_5\).  C712 is
-unblocked.
+couples with the outer character to give exact stabilizer \(S_5\).  The third
+pass identifies \((*,K/5)\) with the split quaternion algebra
+\((-1,5)\cong M_2(\mathbf Q)\), explaining the \(10+10\) golden split and
+making conjugation inner.  The fourth pass computes the normalized and
+primitive-return quaternion orders: their indices in \(M_2(\mathbf Z)\) are
+\(20\) and \(500\), with Smith quotients
+\(\mathbf Z/2\oplus\mathbf Z/10\) and
+\(\mathbf Z/10\oplus\mathbf Z/50\).  C712 is unblocked.
 
 ## Objective
 
