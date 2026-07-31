@@ -4,6 +4,8 @@
     "conditions_equivalent_on_complete_domain": true,
     "conference_signings_B2_eq_5I": 12,
     "every_five_cycle_of_cuts_is_determining": true,
+    "every_five_cycle_sign_readout_identifies_sister": true,
+    "full_fingerprint_corrects_sign_errors": 2,
     "gauge_normalized_K6_signings_checked": 1024,
     "good_cut_count_distribution": {
       "0": 172,
@@ -15,13 +17,17 @@
     "maximum_good_cuts_for_nonconference_signing": 6,
     "minimum_determining_cut_sets": 162,
     "minimum_fixed_cuts_for_rigidity": 5,
+    "minimum_signed_classifiers": 60,
+    "minimum_signed_cuts_to_identify_sister_after_certification": 3,
     "orientation_loss": "C and -C have the same relative matching fingerprint",
     "outer_golden_family_exhausts_them": true,
+    "pairwise_sign_fingerprint_hamming_distance": 6,
     "recovered_object": "the switching class of the unoriented two-graph line {+c,-c}",
     "relative_matching_fingerprints": 512,
     "signings_per_unoriented_fingerprint": [
       2
     ],
+    "six_sign_fingerprint_gram": "12 I_6 - 2 J_6",
     "sylow_5_subgroups_of_A5": 6,
     "unoriented_golden_fingerprints": 6
   },

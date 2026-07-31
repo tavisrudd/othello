@@ -174,6 +174,42 @@ balanced Boolean masks attaining the sharp value \(|Z_B|=8\).  The golden
 conference class is therefore characterized by **universal Boolean
 extremality**, not merely shown to attain it.
 
+### The six-sister simplex code
+
+For each of the six projective sisters, record the ten normalized determinant
+signs of the balanced cuts as a word
+\[
+ r_T\in\{\pm1\}^{10}.
+\]
+These six words form an exact regular simplex:
+\[
+ \langle r_T,r_U\rangle=
+ \begin{cases}
+ 10,&T=U,\\
+ -2,&T\ne U,
+ \end{cases}
+ \qquad
+ RR^{\mathsf T}=12I_6-2J_6.
+\]
+Equivalently, every pair has Hamming distance six.  This is not an additional
+finite coincidence.  For every balanced cut, the Segre/anomaly identity
+\(\sum_T Z_T=0\) forces three positive and three negative signs, so the six
+rows have zero centroid.  The outer \(A_5\) action is two-transitive on the
+six sisters, hence all distinct-row inner products are equal.  Since every
+row has squared norm ten, zero centroid forces the common inner product to be
+\(-10/5=-2\).
+
+Thus the same linear identity has three readings: anomaly cancellation,
+balanced Majorana parity, and the zero-centroid condition for an equidistant
+classical code.  Nearest-word decoding of the full ten-sign syndrome
+identifies the sister and corrects any two sign-readout errors.  After golden
+membership is certified, three suitably chosen cut signs already identify
+the sister; this is information-theoretically minimal, and exactly 60 of the
+120 cut triples work.  A five-cycle family performs both jobs at once: its
+five magnitudes certify conference membership and its five signs identify the
+projective sister.  Neither readout distinguishes \(c\) from \(-c\) without
+the oriented Majorana/phase convention already required in C709.
+
 This turns the six-shadow count into a structural statement:
 
 > The six golden shadow sisters are the six complement-pairs of labeled
@@ -228,6 +264,9 @@ polynomials, verifies the two Segre identities, and exhausts all \(2^{10}\)
 gauge-normalized edge signings.  It checks, signing by signing, that the
 all-cut \(5{:}1\) property is equivalent to \(B^2=5I\), and verifies that the
 six outer matrices exhaust the six projective fingerprints.
+It also verifies the regular-simplex Gram matrix, distance-six code,
+two-error correction radius, optimal three-sign classifiers, and combined
+five-cycle certification/readout families.
 
 The replay independently generates the twelve labeled five-cycles rather
 than enumerating arbitrary signings, checks the conference and \(5{:}1\)
@@ -253,6 +292,9 @@ Hashes and byte counts are recorded in
 - The result strengthens the paper's mechanism: the golden relation
   \(C^2=5I\), the six outer shadows, and irreducible nonplanar matching
   frustration are three equivalent manifestations of the same sign system.
+- Promote the regular-simplex syndrome as the bridge from the Segre/anomaly
+  linear relation to robust sister identification; leave detailed shot-noise
+  and hardware decoding to C719.
 
 ## Mystery ledger
 
@@ -271,6 +313,11 @@ Hashes and byte counts are recorded in
 - **Settled by the explicit `tt` rigidity pass:** universal Boolean
   extremality is equivalent to the conference identity; seven maximum cuts
   already force all ten, and suitable fixed five-cut families suffice.
+- **Settled by the `ej` pass:** the six ten-cut sign syndromes form a regular
+  distance-six simplex code.  The Segre/anomaly linear identity supplies its
+  zero centroid, outer two-transitivity forces its Gram matrix, five-cycle
+  measurements jointly certify and identify, and the full syndrome corrects
+  two sign errors.
 - **Settled negatively beyond order six:** an order-ten Paley conference
   matrix has 90 singular and only 36 maximum balanced cross blocks, so the
   all-cut formulation is exceptional rather than a general conference law.

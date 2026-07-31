@@ -24,7 +24,12 @@ boson--fermion identity with a complete resource and error budget.
    and calibration requirements.
 5. Prove which identities survive realistic coherent phase error and
    mode-dependent loss, and identify the first falsifiable signature.
-6. Refresh the hardware literature at design time and distinguish a proposed
+6. Implement the C720 simplex-syndrome decoder.  Compare the minimal
+   three-sign sister classifier, the five-cycle protocol whose magnitudes
+   certify golden membership and signs identify the projective sister, and
+   the full ten-sign distance-six readout correcting two sign errors.  Keep
+   the residual \(c\) versus \(-c\) orientation requirement explicit.
+7. Refresh the hardware literature at design time and distinguish a proposed
    circuit from any already demonstrated component or complete device.
 
 ## Acceptance
@@ -32,6 +37,8 @@ boson--fermion identity with a complete resource and error budget.
 - A platform-specific circuit/netlist and exact ideal predictions.
 - A quantitative error and sample-complexity budget sufficient to decide
   feasibility.
+- An optimal measurement schedule for certification, sister identification,
+  and noisy decoding, with the three-, five-, and ten-cut tradeoffs stated.
 - A clean go/no-go verdict and a list of claims the experiment could
   actually establish.
 

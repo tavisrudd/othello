@@ -44,6 +44,10 @@ Paper III remains unchanged and ends before it.  In particular:
   parent, while universal maximum-determinant \(K_{3,3}\) frustration is
   equivalent to \(B^2=5I\) and yields exactly the six
   \(A_5/D_5\) shadow fingerprints.
+- The six ten-cut sign fingerprints form a distance-six regular simplex in
+  the outer augmentation module.  Five-cycle magnitudes certify golden
+  membership, three optimal signs identify a sister after certification,
+  and the full syndrome corrects two sign-readout errors.
 
 No manuscript root has yet been created.  C720 owns the architecture and
 the go/no-go gate for `papers/golden-operator/`.
@@ -62,6 +66,8 @@ is authorized by that investigation.
 |---|---|---|
 | [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | active; connection discriminators complete | freeze the central commuting theorem, section plan, novelty boundary, and strict independence from review-facing Paper III |
 | [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | queued after C720 | audit every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
+| [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
+| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | queued after C720; sequel direction | classify extremal higher-order cuts and explain the order-six exception without expanding the present paper unless a short theorem returns |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
@@ -72,10 +78,12 @@ is authorized by that investigation.
 
 1. C720 paper architecture.
 2. C727 cross-paper recovery--propagation audit.
-3. C715 anomaly inverse.
-4. C717 and C718, chosen by theorem yield after C715's first gate.
-5. C716 only after the inverse interface freezes.
-6. C719 after the mathematical paper spine is secure.
+3. C728 intrinsic synchronized-spinor audit.
+4. C715 anomaly inverse.
+5. C717 and C718, chosen by theorem yield after C715's first gate.
+6. C716 only after the inverse interface freezes.
+7. C719 after the mathematical paper spine is secure.
+8. C729 only as a sequel unless its first theorem feeds back into C720.
 
 ## Ownership and allowed paths
 

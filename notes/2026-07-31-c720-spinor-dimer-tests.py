@@ -192,6 +192,15 @@ def good_cut_mask(matrix: tuple[tuple[int, ...], ...]) -> int:
     return result
 
 
+def cut_sign_word(matrix: tuple[tuple[int, ...], ...]) -> tuple[int, ...]:
+    result = []
+    for tail in itertools.combinations(range(1, N), 2):
+        determinant = sum(cut_terms(matrix, (0,) + tail))
+        assert abs(determinant) == 4
+        result.append(determinant // 4)
+    return tuple(result)
+
+
 def one_frustrated_every_cut(matrix: tuple[tuple[int, ...], ...]) -> bool:
     return good_cut_mask(matrix) == (1 << len(INTERNAL_EDGES)) - 1
 
@@ -330,6 +339,33 @@ def dimer_test(matrices: tuple[tuple[tuple[int, ...], ...], ...]) -> dict[str, o
     cycle_test_masks = {sum(1 << cut_index[edge] for edge in cycle) for cycle in five_cycles}
     assert cycle_test_masks <= set(determining_subsets)
 
+    sign_words = sorted({cut_sign_word(normalized_matrix(bits)) for bits in good})
+    assert len(sign_words) == 6
+    sign_gram = [
+        [sum(left[i] * right[i] for i in range(10)) for right in sign_words]
+        for left in sign_words
+    ]
+    assert all(sign_gram[i][j] == (10 if i == j else -2) for i in range(6) for j in range(6))
+    assert all(sum(word[position] for word in sign_words) == 0 for position in range(10))
+
+    signed_classifiers = []
+    minimum_signed_classifier = None
+    for size in range(1, 11):
+        for positions in itertools.combinations(range(10), size):
+            restricted = {tuple(word[position] for position in positions) for word in sign_words}
+            if len(restricted) == 6:
+                signed_classifiers.append(positions)
+        if signed_classifiers:
+            minimum_signed_classifier = size
+            break
+    assert minimum_signed_classifier == 3
+    assert len(signed_classifiers) == 60
+    assert all(
+        len({tuple(word[position] for position in range(10) if mask & (1 << position)) for word in sign_words})
+        == 6
+        for mask in cycle_test_masks
+    )
+
     return {
         "gauge_normalized_K6_signings_checked": equivalence_checks,
         "relative_matching_fingerprints": len(fingerprints),
@@ -345,6 +381,12 @@ def dimer_test(matrices: tuple[tuple[tuple[int, ...], ...], ...]) -> dict[str, o
         "minimum_fixed_cuts_for_rigidity": minimum_determining_cuts,
         "minimum_determining_cut_sets": len(determining_subsets),
         "every_five_cycle_of_cuts_is_determining": True,
+        "six_sign_fingerprint_gram": "12 I_6 - 2 J_6",
+        "pairwise_sign_fingerprint_hamming_distance": 6,
+        "full_fingerprint_corrects_sign_errors": 2,
+        "minimum_signed_cuts_to_identify_sister_after_certification": minimum_signed_classifier,
+        "minimum_signed_classifiers": len(signed_classifiers),
+        "every_five_cycle_sign_readout_identifies_sister": True,
         "unoriented_golden_fingerprints": len(good_fingerprints),
         "sylow_5_subgroups_of_A5": 6,
         "outer_golden_family_exhausts_them": True,
