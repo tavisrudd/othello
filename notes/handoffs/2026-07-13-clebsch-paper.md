@@ -58,6 +58,9 @@ Clebsch items.  Each promoted package is a no-early-bail exploration with
 distinct `ej1`, `tt1`, `ej2`, and `tt2` passes before closeout.  Negative
 outcomes are first-class mining objects and require a structural
 obstruction theorem plus their nearest positive locus and adjacent crown.
+C705 now executes the first tranche's adjugate-polar package under those
+rules; the marked-double-six package remains unallocated pending its
+verdict.
 
 ## Active and queued task cards
 
@@ -67,6 +70,7 @@ obstruction theorem plus their nearest positive locus and adjacent crown.
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
+| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress | decompose the quadratic-minor carrier and test the intrinsic polar contraction |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
