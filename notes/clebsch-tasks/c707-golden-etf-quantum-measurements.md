@@ -51,6 +51,11 @@ Signed-moment cancellation from \(C^2=5I\) gives the sharp physical bound
  \quad(\|x\|_\infty\le1),
 \]
 with equality exactly at the twenty balanced \(3+3\) phase vertices.
+Every balanced control maximizes all six outer protocols simultaneously;
+their amplitude sign vectors are the oriented lifts of the ten Segre nodes.
+All six optimal probabilities coincide, so \(W=e_5(Z)=0\): the optimum is
+exactly the probability-polar blind locus, while coherent amplitude signs
+retain the node orientation.
 Every optimal transfer has squared singular spectrum
 \(\{4/5,4/5,1/5\}\).  The three-filter exterior-cube protocol is
 query-optimal among coherent circuits with \(x\)-independent gates and

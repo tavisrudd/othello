@@ -38,6 +38,12 @@ There is also a sharp structural physical bound:
  \quad(\|x\|_\infty\le1),
 \]
 with equality exactly at the twenty balanced \(3+3\) phase vertices.
+These controls maximize all six outer protocols simultaneously.  Their six
+oriented amplitude signs are the twenty signed representatives of the ten
+Segre nodes, paired by complementary controls; after squaring, every
+optimal probability vector is constant.  Thus \(W=0\) and \(e_5(Z)=0\) at
+every optimum: maximum success is exactly where probability contrast and
+inverse polarity lose the orientation data.
 At every optimum,
 \[
  \operatorname{spec}(K_T^{\mathsf T}K_T)=\{4/5,4/5,1/5\}.
@@ -145,6 +151,15 @@ handles the remaining cases.  Multilinearity moves the maximum on the
 cube to a vertex and shows that equality occurs only at those twenty
 balanced vertices.
 
+For a balanced support the formula holds for every outer cubic, so
+\(Z_T=\pm8\) simultaneously for all six \(T\).  The normalized sign vector
+\((Z_T/8)_T\) has three plus and three minus entries.  Complementing the
+control negates it, and the twenty signed vectors therefore form the
+oriented double cover of the ten projective Segre nodes.  All six squares
+are then \(64\), whence \(W=0\); the same balanced sign pattern gives
+\(e_5(Z)=0\).  The amplitudes retain the node and orientation, but their
+success probabilities erase both.
+
 At a balanced sign filter, cyclic trace expansion gives
 \[
  \operatorname{tr}(K_T^{\mathsf T}K_T)=\frac95,\quad
@@ -180,7 +195,9 @@ The golden-operator layer is:
   its six nodes; and
 - the sharp physical optimum is the \(3+3\) phase orbit, with success
   probability \(16/125\) and squared singular spectrum
-  \(\{4/5,4/5,1/5\}\); and
+  \(\{4/5,4/5,1/5\}\);
+- the twenty optimal controls are the oriented lifts of the ten Segre
+  nodes, while all six probability contrasts vanish there; and
 - the exterior-cube implementation uses the minimum possible three
   controlled-filter queries.
 
@@ -221,7 +238,10 @@ From the repository root:
 The generator checks the two ETF normalizations, the projector-Gram
 spectrum and tomography formula, the \(60+60\) symmetry split, all six
 outer response-kernel identities at two integral witnesses, and the sharp
-\(44+20\) cube-vertex distribution for every protocol.  The independent
+\(44+20\) cube-vertex distribution for every protocol.  It also checks that
+each balanced control maximizes all six protocols, that the twenty signed
+amplitude patterns pair into ten projective Segre nodes, and that \(W=e_5=0\)
+on this locus.  The independent
 replay constructs the two projectors directly over
 \(\mathbf Q(\sqrt5)\) and checks
 \(\det(K^{\mathsf T}K)=Z^2/500\) for all \(729\) filters in
@@ -247,6 +267,14 @@ three singular directions.  It isolated the coherently signed instrument
 as the true operational object, proved three-query optimality by the
 polynomial method, and fixed the optimum spectrum
 \(\{4/5,4/5,1/5\}\).
+
+The final extra-juice pass compared the six outer protocols at the sharp
+optimum.  It found the cleanest geometric boundary in the package: the
+twenty maximizing controls are exactly the oriented lifts of the ten Segre
+nodes, yet their six success probabilities are all equal.  The probability
+polar is therefore maximally blind precisely where each individual
+protocol is maximally successful.  Coherent relative phase retains the
+lost signed-node data; success statistics alone do not.
 
 The Milnor/Serre proof review reduced the package to four reusable
 mechanisms: projector Gram matrices, one Naimark dilation, top exterior
@@ -274,15 +302,19 @@ table or finite enumeration is load-bearing.
 - **Settled — the shape of the optimum:** every maximizing transfer has
   squared singular spectrum \(\{4/5,4/5,1/5\}\), forced by two cyclic
   traces and the determinant.
+- **Settled — the operational geometry of \(e_5=0\) at the optimum:** the
+  twenty maximizing controls form the oriented double cover of the ten
+  Segre nodes.  All six probabilities equal \(16/125\), so \(W=0\) and
+  inverse polarity is necessarily blind there; only coherent relative
+  amplitude retains the node and orientation signs.
 - **Settled — resource minimality in the coherent-filter model:** an
   \(r\)-query acceptance probability has degree at most \(2r\), so the
   degree-six probability \(Z_T^2/500\) requires \(r\ge3\); the parallel
   exterior-cube protocol is optimal even with \(x\)-independent ancillas.
-- **Open — the operational geometry of \(e_5=0\):** the algebra proves
-  precisely where inverse recovery fails, but does not classify which
-  experimentally distinct transfer families share the same probability
-  contrasts there.  This is optional successor work and has no allocated
-  C-ID.
+- **Open — the rest of the exceptional divisor:** the maximum-success
+  stratum is now classified, but experimentally distinct transfer families
+  sharing probability contrasts on the full locus \(e_5=0\) remain
+  unclassified.  This optional question has no allocated C-ID.
 - **Boundary — resources outside the oracle model:** hardware that exposes
   nonlinear functions of \(x\) as primitive controls is a different
   resource theory; C707 makes no minimality claim there.

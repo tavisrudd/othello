@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import itertools
 import json
+import math
 from fractions import Fraction
 from pathlib import Path
 
@@ -208,6 +209,27 @@ def build() -> dict[str, object]:
         assert traces == (-6, -42)
         balanced_phase_traces.add(traces)
     assert balanced_phase_traces == {(-6, -42)}
+    optimal_node_signs = set()
+    optimal_amplitude_sign_counts = [{8: 0, -8: 0} for _ in cubics]
+    for support in itertools.combinations(range(6), 3):
+        signs = tuple(-1 if i in support else 1 for i in range(6))
+        z = tuple(evaluate(cubic, signs) for cubic in cubics)
+        assert all(abs(value) == 8 for value in z)
+        assert sum(z) == 0
+        assert centered_squares(z) == [0] * 6
+        assert sum(
+            math.prod(z[i] for i in five_set)
+            for five_set in itertools.combinations(range(6), 5)
+        ) == 0
+        node = tuple(value // 8 for value in z)
+        if node[0] < 0:
+            node = tuple(-value for value in node)
+        optimal_node_signs.add(node)
+        for protocol, value in enumerate(z):
+            optimal_amplitude_sign_counts[protocol][value] += 1
+    assert len(optimal_node_signs) == 10
+    assert all(sum(node) == 0 for node in optimal_node_signs)
+    assert optimal_amplitude_sign_counts == [{8: 10, -8: 10}] * 6
     for cubic in cubics:
         counts = {0: 0, 8: 0}
         for signs in itertools.product((-1, 1), repeat=6):
@@ -269,6 +291,11 @@ def build() -> dict[str, object]:
             "sharp_physical_cube_bound": "|Z_T(x)|<=8 and p_T^(3)(x)<=16/125 for max_i|x_i|<=1",
             "sharp_phase_patterns": "equality exactly at the 20 vertices with three +1 and three -1 entries",
             "vertex_absolute_value_counts_per_protocol": {"0": 44, "8": 20},
+            "simultaneous_optimum": "each balanced phase vertex has |Z_T|=8 and p_T^(3)=16/125 for all six protocols",
+            "optimal_polar_contrast": "all six probabilities coincide, so W=0",
+            "optimal_node_carrier": "the 20 oriented amplitude sign vectors pair by global sign over the 10 Segre nodes",
+            "optimal_inverse_polarity": "e_5(Z)=0, so every optimum lies on the inverse-polarity exceptional divisor",
+            "uniform_boolean_phase_average_success": "1/25 for every protocol",
             "optimal_squared_singular_values": ["4/5", "4/5", "1/5"],
             "optimal_filter_trace_witnesses": {"trace((CD)^2)": -6, "trace((CD)^4)": -42},
             "query_optimality": "three uses are necessary: an r-query acceptance probability has degree at most 2r, while Z_T^2 has degree 6",

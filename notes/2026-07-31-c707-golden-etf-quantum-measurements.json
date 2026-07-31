@@ -7,6 +7,9 @@
       "trace((CD)^2)": -6,
       "trace((CD)^4)": -42
     },
+    "optimal_inverse_polarity": "e_5(Z)=0, so every optimum lies on the inverse-polarity exceptional divisor",
+    "optimal_node_carrier": "the 20 oriented amplitude sign vectors pair by global sign over the 10 Segre nodes",
+    "optimal_polar_contrast": "all six probabilities coincide, so W=0",
     "optimal_squared_singular_values": [
       "4/5",
       "4/5",
@@ -18,8 +21,10 @@
     "response": "A=dZ is the first variation of oriented three-copy transition amplitude",
     "sharp_phase_patterns": "equality exactly at the 20 vertices with three +1 and three -1 entries",
     "sharp_physical_cube_bound": "|Z_T(x)|<=8 and p_T^(3)(x)<=16/125 for max_i|x_i|<=1",
+    "simultaneous_optimum": "each balanced phase vertex has |Z_T|=8 and p_T^(3)=16/125 for all six protocols",
     "three_copy_amplitude": "det K_T(x)=+/- Z_T(x)/(10 sqrt(5))",
     "three_copy_success_probability": "det(K_T^T K_T)=Z_T(x)^2/500",
+    "uniform_boolean_phase_average_success": "1/25 for every protocol",
     "vertex_absolute_value_counts_per_protocol": {
       "0": 44,
       "8": 20

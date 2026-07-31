@@ -36,6 +36,13 @@ and \(A=dZ\) is their amplitude response.  The inverse Segre--Igusa
 polarity recovers the projective signed amplitude vector from those
 probability contrasts away from its known exceptional divisor.
 
+The sharp optimum is simultaneous across all six outer protocols.  Its
+twenty balanced phase controls are the oriented lifts of the ten Segre
+nodes: complementation reverses the six amplitude signs, whereas squaring
+forgets this orientation.  In particular every optimal probability vector
+is constant, so \(W=0\), and every optimum lies on the exceptional divisor
+\(e_5(Z)=0\).
+
 ## 1. The two normalized frames
 
 Choose an isometry \(Q_\pm:\mathbf R^3\to\mathbf R^6\) with image
@@ -194,6 +201,47 @@ positive weight to have the same extremal value; but each extremal
 exactly at the twenty balanced \(3+3\) phase vertices.
 Thus even the optimal coherent filter succeeds with probability only
 \(16/125\); the generic contraction bound \(p\le1\) is far from sharp.
+
+There is more information in the same signed-moment calculation.  For a
+balanced support \(S\), there is exactly one surviving triple, so for each
+outer protocol
+\[
+ Z_T(x_S)=-8c_T(S)\in\{\pm8\}.
+\]
+Thus a single balanced control maximizes **all six** protocols
+simultaneously.  The Segre relation \(\sum_T Z_T=0\) says that the normalized
+amplitude vector
+\[
+ s(S)=\frac18(Z_T(x_S))_T
+\]
+has three plus and three minus entries.  Conversely these are exactly the
+twenty signed representatives of the ten projective Segre nodes.  Since
+\(x_{S^c}=-x_S\) and the cubics are odd,
+\(s(S^c)=-s(S)\): complementation is precisely the two-to-one orientation
+cover of the node set.
+
+Squaring erases that cover completely.  Every optimal probability vector
+is
+\[
+ (p_T^{(3)})_T=(16/125,\ldots,16/125),
+\]
+so every centered contrast vanishes: \(W=0\).  Moreover a balanced signed
+six-vector has \(e_5(Z)=0\), since
+\(e_5(Z)=(\prod_T Z_T)\sum_T Z_T^{-1}\).  Hence the entire maximum-success
+locus lies on the inverse-polarity exceptional divisor.  This is not an
+accident or a defect of the proof: probabilities are genuinely blind at
+the optimum to both the chosen Segre node and its oriented lift.  The
+relative determinant signs remain in the coherent amplitudes and can, in
+principle, be read by interference against a fixed marked reference branch;
+the six success probabilities alone cannot recover them.
+
+For a fixed \(T\), the twenty controls split into ten with \(Z_T=8\) and
+ten with \(Z_T=-8\).  These are the two \(A_5\)-orbits exchanged by the
+outer \(S_5\), giving the same orientation boundary group-theoretically.
+As a small normalization check, a uniformly random binary phase control
+hits the balanced layer with probability \(20/64\); its mean three-copy
+success probability is therefore
+\((20/64)(16/125)=1/25\).
 
 The optimum has a rigid singular spectrum.  For a balanced sign filter
 \(D\), put \(M=K_T(D)^{\mathsf T}K_T(D)\).  Cyclic trace expansion of the
