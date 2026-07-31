@@ -4,9 +4,10 @@
 
 **Opened:** 2026-07-26
 
-**Status:** C730 source-theorem strengthening queued; the former pre-release
-surface remains a green baseline, while publication metadata and the immutable
-artifact locator are deferred until the focused revision passes its gates.
+**Status:** C730 source theorem complete; focused manuscript integration and
+release replay are next, while the former pre-release surface remains a green
+baseline and publication metadata and the immutable artifact locator remain
+deferred.
 
 ## Objective
 
@@ -35,11 +36,12 @@ paper-owned trust surface.  The revision ends at the source class
 
 Complete, in order:
 
-1. C730's orientation-cover, involution, harmonic-comparison, and integral
-   boundary gates;
-2. the focused theorem architecture and manuscript revision;
-3. the Paper III claim map against C711/C712 and any C730 Lean additions; and
-4. the updated exact-arithmetic, isolated-replay, and cold-read gates.
+1. integrate C730's frozen normalized-cover, involution, harmonic-comparison,
+   and integral-boundary interface;
+2. complete the focused theorem architecture and manuscript revision;
+3. align the Paper III claim map with C711/C712 and C730's decision that no
+   additional Lean surface is warranted; and
+4. run the updated exact-arithmetic, isolated-replay, and cold-read gates.
 
 Only then obtain and insert the immutable locator and author metadata.
 

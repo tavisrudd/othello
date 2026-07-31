@@ -1,0 +1,259 @@
+{
+  "conference": [
+    [
+      0,
+      1,
+      1,
+      1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      0,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      0,
+      1,
+      1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      1,
+      0,
+      -1,
+      1
+    ],
+    [
+      -1,
+      -1,
+      1,
+      -1,
+      0,
+      -1
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      0
+    ]
+  ],
+  "golden_exchanger": {
+    "matrix": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "odd_switch_count": 1,
+    "old_axis_to_conjugate_axis": [
+      0,
+      1,
+      5,
+      4,
+      2,
+      3
+    ],
+    "representative_scalars": [
+      "t",
+      "-t",
+      "t",
+      "t",
+      "t",
+      "t"
+    ],
+    "representative_switches": [
+      1,
+      -1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "transported_conference": "-C",
+    "transported_triangle_cubic": "-Z_C"
+  },
+  "golden_field": {
+    "conjugation": "t -> 1-t",
+    "polynomial": "t^2-t-1",
+    "sqrt5": "2t-1"
+  },
+  "harmonic_input": {
+    "gaunt_scalar": "-784000/1247103",
+    "path": "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
+    "quadratic_scalar": "140/351",
+    "sha256": "ecdff5d58327b07e0a26f4bfdf83fd403c47bf5b34cdf856bfc3c9d053b9fa17",
+    "witness": {
+      "sigma3": "20",
+      "sphere_average_F2": "2800/351",
+      "sphere_average_F3": "-15680000/1247103",
+      "y": [
+        4,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    }
+  },
+  "incidence_pullback": {
+    "equation": "z^2=80*sigma3^2",
+    "factorization": "(z-4*sqrt5*sigma3)(z+4*sqrt5*sigma3)",
+    "normalization_claim_checked_only_at_scalar_level": true
+  },
+  "integral_boundaries": {
+    "conference_and_triangle": "Z",
+    "gaunt_scalar_denominator_primes": [
+      3,
+      11,
+      13,
+      17,
+      19
+    ],
+    "golden_algebra": "ramified in characteristic 5",
+    "orientation_distinction": "fails in characteristic 2",
+    "petersen_inverse": "requires 3 invertible"
+  },
+  "petersen_comparison": {
+    "adjacency_eigenvalue": -2,
+    "basis_pair_sum_vectors": [
+      [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        -1,
+        -1
+      ],
+      [
+        1,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        -1,
+        -1
+      ],
+      [
+        0,
+        1,
+        0,
+        -1,
+        1,
+        0,
+        -1,
+        1,
+        0,
+        -1
+      ],
+      [
+        0,
+        0,
+        1,
+        -1,
+        0,
+        1,
+        -1,
+        1,
+        -1,
+        0
+      ]
+    ],
+    "inverse": "y_i=(1/3)*sum_{j!=i}a_ij",
+    "labels": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "quadratic_similarity": "sum_pairs(y_i+y_j)^2=3*sum_i(y_i)^2"
+  },
+  "schema": "c730-orientation-source-v1",
+  "triangle_coefficients": {
+    "012": -1,
+    "013": -1,
+    "014": 1,
+    "015": 1,
+    "023": 1,
+    "024": -1,
+    "025": 1,
+    "034": 1,
+    "035": -1,
+    "045": -1,
+    "123": 1,
+    "124": 1,
+    "125": -1,
+    "134": -1,
+    "135": 1,
+    "145": -1,
+    "234": -1,
+    "235": -1,
+    "245": 1,
+    "345": 1
+  }
+}

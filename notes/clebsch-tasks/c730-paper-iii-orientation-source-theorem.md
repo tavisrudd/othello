@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; precedes C680 manuscript integration
+**Status:** complete; frozen source interface handed to C680
 
 ## Objective
 
@@ -64,3 +64,20 @@ operator theorem, while C727 owns completion/descent from a recovered source
 class to Golden outputs.  C730 may supply a second provenance corollary for
 C727's generic descent theorem, but it does not edit Golden documents or
 claim any propagated shadow.
+
+## Disposition
+
+The normalized pullback of Hitchin's cover is globally the disjoint union of
+the two Clebsch chart components; the unnormalized branches meet on
+\(\sigma_3=0\), so the literal two-distinct-icosahedron interpretation is
+exactly the open set \(D(\sigma_3)\).  The chosen component determines the
+oriented source \(([C],[Z_C])\), and the exact exchanger sends it to
+\(([-C],[-Z_C])\).  The primitive pair-sum map identifies the chart
+four-module with the Petersen four-space, with quadratic factor \(140/351\)
+after the zonal embedding and cubic factor
+\(-784000/1247103\).  The complete geometric integral localization remains
+unspecified; C680 must retain that boundary.
+
+Human proof, involution ledger, novelty audit, claim map, reproducibility
+bundle, and mystery ledger:
+`notes/2026-07-31-c730-paper-iii-orientation-source-theorem.md`.
