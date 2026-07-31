@@ -4,18 +4,19 @@
 
 **Opened:** 2026-07-26
 
-**Status:** C730 source theorem complete; focused manuscript integration and
-release replay are next, while the former pre-release surface remains a green
-baseline and publication metadata and the immutable artifact locator remain
-deferred.
+**Status:** C730 source theorem integrated; the five-statement/five-row
+paper-owned trust surface, ordinary and isolated aggregates, warning-free PDF,
+visual audit, and fresh context-free referee gate are green.  Submission
+remains blocked only by publication metadata and the immutable artifact
+locator.
 
 ## Objective
 
 Strengthen Paper III around the canonical arithmetic--harmonic orientation
 source theorem supplied by C730, while preserving the corrected rational
 descent, local golden-fibre comparison, harmonic normalization, and
-paper-owned trust surface.  The revision ends at the source class
-`([C], [Z_C])`; functorial propagation belongs to Paper IV.
+paper-owned trust surface.  The revision ends at the oriented source class
+`[C,Z_C]_or`; functorial propagation belongs to Paper IV.
 
 ## Current state
 
@@ -23,10 +24,13 @@ paper-owned trust surface.  The revision ends at the source class
   defined over \(\mathbf Q(\sqrt5)\).
 - The displayed golden configurations are the complete reduced local fibre.
 - The degree-six Gaunt/Steinhardt restriction is integrated.
+- The normalized pullback, deck-opposite source, golden-fibre involution, and
+  primitive Petersen sign comparison are integrated without globally marking
+  the varying second configuration.
 - Deleted Mathieu, Hadamard, matching, Klein, and speculative physical
   branches are absent from the paper package.
-- Ordinary and isolated replay, the warning-free PDF, and two direct-access
-  pre-release reviews are green.
+- Ordinary and isolated replay, the warning-free fourteen-page PDF, visual
+  inspection, and a fresh context-free pre-release review are green.
 - The former release surface is now the frozen comparison baseline, not the
   submission candidate.  C730 supersedes the broad operator-shadow expansion
   as the scope authority; the older expansion plan remains a historical map
@@ -34,16 +38,9 @@ paper-owned trust surface.  The revision ends at the source class
 
 ## Next action
 
-Complete, in order:
-
-1. integrate C730's frozen normalized-cover, involution, harmonic-comparison,
-   and integral-boundary interface;
-2. complete the focused theorem architecture and manuscript revision;
-3. align the Paper III claim map with C711/C712 and C730's decision that no
-   additional Lean surface is warranted; and
-4. run the updated exact-arithmetic, isolated-replay, and cold-read gates.
-
-Only then obtain and insert the immutable locator and author metadata.
+Obtain and insert the immutable artifact locator and the author's intended
+affiliation/contact metadata.  Until those user-controlled inputs exist, keep
+`submission_ready=false`; do not reopen the mathematical or trust surface.
 
 ## Boundaries and records
 
@@ -55,3 +52,5 @@ global Hitchin incidence theorem is not silently added to Lean's formal scope.
 
 Authoritative closure brief:
 `notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.
+Focused integration report:
+`notes/2026-07-31-c680-paper-iii-orientation-integration.md`.
