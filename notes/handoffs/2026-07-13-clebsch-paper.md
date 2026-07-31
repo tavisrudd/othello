@@ -50,6 +50,11 @@ missing-support-lattice obstruction in the bounded census through degree
 \(50\), while binary tetrahedral and octahedral sisters pass only their
 first exact feasibility gates.  No split paper is reopened.  Full report:
 [`../2026-07-30-c704-functorial-operator-shadows.md`](../2026-07-30-c704-functorial-operator-shadows.md).
+An exhaustive, dependency-gated follow-up portfolio is staged at
+[`../2026-07-30-c704-follow-up-mining-plan.md`](../2026-07-30-c704-follow-up-mining-plan.md).
+No successor C-IDs are allocated; the recommended first tranche is the
+adjugate-polar and marked-double-six packages as two separate future
+Clebsch items.
 
 ## Active and queued task cards
 
