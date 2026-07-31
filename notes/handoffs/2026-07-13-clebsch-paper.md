@@ -84,7 +84,14 @@ classes of \(S_5\) in \(S_6\), rather than directly identifying their
 elements.  Its frozen finite \(W_{10}\) exchange has order \(8\), so the
 operator alone selects no involutory polarity; all \(36\) inner
 normalizations remain, and the conference marking cuts them to the known
-axis-indexed six-pack.  Complete \(\mathbf F_2,\mathbf F_3,\mathbf F_5\)
+axis-indexed six-pack.  They form one twisted-conjugacy orbit with
+stabilizer \(F_{20}\), explaining both \(36=720/20\) and \(6=120/20\);
+the golden polarity and its indexed axis have the same stabilizer, so the
+two golden six-sets are canonically \(S_5/F_{20}\).
+The internal \(D_{10}\subset F_{20}\) orbit fusion
+\((5+5+5,5+5)\to(5+10,10)\) is the finite-incidence form of C706's
+\(A_5\subset S_5\) orientation-phase boundary.
+Complete \(\mathbf F_2,\mathbf F_3,\mathbf F_5\)
 incidence-code tables show that the doily ranks do not explain C705's bad
 primes: \(2\) has only an incidence overlap, \(3\) is the
 scalar-\(6\)/compound boundary, and \(5\) belongs to the golden sign lift.

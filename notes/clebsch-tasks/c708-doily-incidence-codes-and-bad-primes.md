@@ -82,7 +82,16 @@ the ordinary axis action, and its stabilizer transport exchanges the two
 classes of \(S_5\) in \(S_6\).  It does not canonically select an
 involutory \(W_{10}\) polarity: the frozen compatible exchange has order
 \(8\), all \(36\) involutory inner normalizations remain, and the golden
-conference marking cuts them to the axis-indexed orbit of six.
+conference marking cuts them to the axis-indexed orbit of six.  More
+intrinsically, if \(f^2=\rho(h)\) then the normalizations solve
+\(k\alpha(k)=h^{-1}\); they form one twisted-conjugacy orbit with
+stabilizer \(F_{20}\cong\operatorname{AGL}(1,5)\), explaining
+\(36=720/20\) and \(6=120/20\).  For each golden member this is literally
+the stabilizer of its indexed axis, so both six-sets are \(S_5/F_{20}\).
+Inside it, \(D_{10}=F_{20}\cap A_5\) has duad/syntheme/node orbit pattern
+\((5+5+5,5+5)\), while orientation reversal fuses this to
+\((5+10,10)\), recovering C706's \(A_5\subset S_5\) phase boundary from
+incidence.
 
 The exact incidence codes over \(\mathbf F_2,\mathbf F_3,\mathbf F_5\)
 have been classified through dimensions, duals, hulls, distances, full

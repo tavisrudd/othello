@@ -177,6 +177,33 @@ def permutation_order(permutation):
     raise AssertionError("unexpected order")
 
 
+def cycle_type(permutation):
+    seen = set()
+    lengths = []
+    for start in range(len(permutation)):
+        if start in seen:
+            continue
+        point = start
+        length = 0
+        while point not in seen:
+            seen.add(point)
+            length += 1
+            point = permutation[point]
+        lengths.append(length)
+    return tuple(sorted(lengths, reverse=True))
+
+
+def action_orbits(objects, group, action):
+    remaining = set(objects)
+    result = []
+    while remaining:
+        representative = next(iter(remaining))
+        orbit = {action(permutation, representative) for permutation in group}
+        result.append(orbit)
+        remaining -= orbit
+    return tuple(result)
+
+
 def permute_word(word, permutation):
     return sum(
         ((word >> index) & 1) << permutation[index]
@@ -289,6 +316,14 @@ def outer_exchange_record():
     assert len(operator_exchange) == 1
     operator_exchange = operator_exchange[0]
     assert permutation_order(operator_exchange) == 8
+    inner_node_actions = {
+        induced_node_permutation(permutation): permutation
+        for permutation in permutations(range(6))
+    }
+    exchange_square = compose(operator_exchange, operator_exchange)
+    square_preimage = inner_node_actions[exchange_square]
+    assert square_preimage == (1, 0, 5, 4, 2, 3)
+    assert cycle_type(square_preimage) == (4, 2)
 
     conference_group = tuple(
         (
@@ -314,6 +349,7 @@ def outer_exchange_record():
     assert sorted(map(len, orbits)) == [6, 30]
     golden = next(orbit for orbit in orbits if len(orbit) == 6)
     axis_stabilizers = []
+    golden_axis_index = {}
     for polarity in golden:
         stabilizer = tuple(
             permutation
@@ -327,7 +363,163 @@ def outer_exchange_record():
         )
         assert len(stabilizer) == 10 and len(fixed) == 1
         axis_stabilizers.append((fixed[0], len(stabilizer)))
+        golden_axis_index[polarity] = fixed[0]
+        full_stabilizer = {
+            permutation
+            for permutation, _, node_map in conference_group
+            if compose(compose(node_map, polarity), inverse(node_map))
+            == polarity
+        }
+        axis_stabilizer = {
+            permutation
+            for permutation, _, _ in conference_group
+            if permutation[fixed[0]] == fixed[0]
+        }
+        assert full_stabilizer == axis_stabilizer
+        assert len(full_stabilizer) == 20
     assert sorted(axis_stabilizers) == [(axis, 10) for axis in range(6)]
+    assert set(golden_axis_index.values()) == set(range(6))
+
+    corrections = {
+        polarity: inner_node_actions[
+            compose(polarity, inverse(operator_exchange))
+        ]
+        for polarity in involutions
+    }
+    identity_six = tuple(range(6))
+    for polarity, correction in corrections.items():
+        twisted_norm = compose(
+            compose(correction, total_action(correction)),
+            square_preimage,
+        )
+        assert twisted_norm == identity_six
+        assert compose(
+            induced_node_permutation(correction),
+            operator_exchange,
+        ) == polarity
+    correction_types = Counter(cycle_type(value) for value in corrections.values())
+    golden_correction_types = Counter(
+        cycle_type(corrections[polarity]) for polarity in golden
+    )
+    assert correction_types == {
+        (4, 2): 8,
+        (5, 1): 16,
+        (3, 3): 4,
+        (3, 1, 1, 1): 4,
+        (2, 2, 1, 1): 4,
+    }
+    assert golden_correction_types == {
+        (4, 2): 2,
+        (5, 1): 2,
+        (2, 2, 1, 1): 2,
+    }
+    base_polarity = involutions[0]
+    base_correction = corrections[base_polarity]
+    twisted_conjugacy_orbit = {
+        compose(
+            compose(permutation, base_correction),
+            inverse(total_action(permutation)),
+        )
+        for permutation in permutations(range(6))
+    }
+    assert twisted_conjugacy_orbit == set(corrections.values())
+    twisted_stabilizer = tuple(
+        permutation
+        for permutation in permutations(range(6))
+        if compose(
+            compose(permutation, base_correction),
+            inverse(total_action(permutation)),
+        )
+        == base_correction
+    )
+    assert len(twisted_stabilizer) == 20
+    stabilizer_order_distribution = Counter(
+        permutation_order(permutation) for permutation in twisted_stabilizer
+    )
+    assert stabilizer_order_distribution == {1: 1, 2: 5, 4: 10, 5: 4}
+    golden_base = next(iter(golden))
+    golden_stabilizer = tuple(
+        permutation
+        for permutation, _, node_map in conference_group
+        if compose(
+            compose(node_map, golden_base),
+            inverse(node_map),
+        )
+        == golden_base
+    )
+    assert len(golden_stabilizer) == 20
+    golden_axis = golden_axis_index[golden_base]
+    golden_d10 = tuple(
+        permutation
+        for permutation, _, node_map in a5
+        if compose(
+            compose(node_map, golden_base),
+            inverse(node_map),
+        )
+        == golden_base
+    )
+    assert len(golden_d10) == 10
+    f20_duad_orbits = action_orbits(
+        DUADS,
+        golden_stabilizer,
+        lambda permutation, duad: tuple(
+            sorted((permutation[duad[0]], permutation[duad[1]]))
+        ),
+    )
+    f20_matching_orbits = action_orbits(
+        MATCHINGS,
+        golden_stabilizer,
+        lambda permutation, matching: tuple(
+            sorted(
+                tuple(sorted((permutation[a], permutation[b])))
+                for a, b in matching
+            )
+        ),
+    )
+    node_orbits = action_orbits(
+        tuple(range(10)),
+        golden_stabilizer,
+        lambda permutation, node: induced_node_permutation(permutation)[node],
+    )
+    d10_duad_orbits = action_orbits(
+        DUADS,
+        golden_d10,
+        lambda permutation, duad: tuple(
+            sorted((permutation[duad[0]], permutation[duad[1]]))
+        ),
+    )
+    d10_matching_orbits = action_orbits(
+        MATCHINGS,
+        golden_d10,
+        lambda permutation, matching: tuple(
+            sorted(
+                tuple(sorted((permutation[a], permutation[b])))
+                for a, b in matching
+            )
+        ),
+    )
+    d10_node_orbits = action_orbits(
+        tuple(range(10)),
+        golden_d10,
+        lambda permutation, node: induced_node_permutation(permutation)[node],
+    )
+    assert sorted(map(len, f20_duad_orbits)) == [5, 10]
+    assert sum(
+        all(golden_axis in duad for duad in orbit) for orbit in f20_duad_orbits
+    ) == 1
+    assert sorted(map(len, f20_matching_orbits)) == [5, 10]
+    assert sorted(map(len, d10_duad_orbits)) == [5, 5, 5]
+    assert sorted(map(len, d10_matching_orbits)) == [5, 5, 5]
+    assert sorted(map(len, node_orbits)) == [10]
+    assert sorted(map(len, d10_node_orbits)) == [5, 5]
+    assert {
+        frozenset(golden_base[node] for node in orbit)
+        for orbit in d10_node_orbits
+    } == {frozenset(orbit) for orbit in d10_node_orbits}
+    assert all(
+        frozenset(golden_base[node] for node in orbit) != frozenset(orbit)
+        for orbit in d10_node_orbits
+    )
 
     base_index = totals.index(C704.total_key(C704.BASE_TOTAL))
     base_stabilizer = tuple(
@@ -353,9 +545,52 @@ def outer_exchange_record():
         "involutory_polarities": len(involutions),
         "frozen_operator_exchange_on_nodes": list(operator_exchange),
         "frozen_operator_exchange_order": permutation_order(operator_exchange),
+        "frozen_exchange_square_inner_preimage": list(square_preimage),
+        "frozen_exchange_square_cycle_type": list(cycle_type(square_preimage)),
         "involutory_normalization_count": len(involutions),
+        "involutory_normalization_equation": (
+            "k*alpha(k)=h^-1, where h=(0 1)(2 5 3 4) is the "
+            "inner preimage of the frozen exchange square"
+        ),
+        "normalizing_inner_correction_cycle_types": {
+            ",".join(map(str, kind)): count
+            for kind, count in sorted(correction_types.items())
+        },
+        "twisted_conjugacy_orbit_size": len(twisted_conjugacy_orbit),
+        "twisted_conjugacy_stabilizer_order": len(twisted_stabilizer),
+        "twisted_conjugacy_stabilizer": "F20=C5 semidirect C4=AGL(1,5)",
+        "twisted_stabilizer_element_orders": {
+            str(order): count
+            for order, count in sorted(stabilizer_order_distribution.items())
+        },
+        "polarity_count_orbit_stabilizer": "36=720/20",
         "conference_orbit_sizes_on_involutions": sorted(map(len, orbits)),
         "golden_normalizations": len(golden),
+        "golden_count_orbit_stabilizer": "6=120/20",
+        "golden_axis_indexing": (
+            "the conference-S5 stabilizer of each golden polarity equals "
+            "the stabilizer of its indexed axis; both are F20"
+        ),
+        "golden_f20_orbits": {
+            "duads": [5, 10],
+            "synthemes": [5, 10],
+            "nodes": [10],
+        },
+        "golden_d10_orbits": {
+            "subgroup": "D10=F20 intersection A5",
+            "duads": [5, 5, 5],
+            "duad_meaning": "axis star, pentagon sides, pentagram diagonals",
+            "synthemes": [5, 5, 5],
+            "nodes": [5, 5],
+            "polarity_on_node_orbits": "exchanges the two 5-orbits",
+            "orientation_reversal": (
+                "the F20 minus D10 coset merges sides and diagonals"
+            ),
+        },
+        "golden_inner_correction_cycle_types": {
+            ",".join(map(str, kind)): count
+            for kind, count in sorted(golden_correction_types.items())
+        },
         "verdict": (
             "positive outer exchange of the two degree-six representations; "
             "the operator alone does not select an involution.  Its frozen "

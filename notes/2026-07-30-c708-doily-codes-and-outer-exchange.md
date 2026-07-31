@@ -51,6 +51,84 @@ strongest exact conclusion is therefore:
 > six golden involutory normalizations, but neither structure canonically
 > selects one member of that six-pack.
 
+The order-\(8\) phenomenon has an exact cocycle form.  If \(f\) is the
+frozen exchange and \(\alpha\) is its outer automorphism, then
+\[
+ f^2=\rho(h),\qquad h=(0\,1)(2\,5\,3\,4).
+\]
+An inner correction \(k\in S_6\) makes \(\rho(k)f\) involutory exactly
+when
+\[
+ k\alpha(k)=h^{-1}.
+\]
+This twisted norm equation has exactly \(36\) solutions.  Their cycle-type
+distribution is
+\[
+ (4,2)^8(5,1)^{16}(3,3)^4(3,1,1,1)^4(2,2,1,1)^4.
+\]
+The golden six contain two corrections of each type
+\((4,2)\), \((5,1)\), and \((2,2,1,1)\).  Thus the finite polarity torsor
+is explained by one nonabelian normalization equation, not only by
+enumeration.
+
+The `tt` orbit audit removes the two remaining numerical coincidences.
+The \(36\) solutions form one orbit under twisted conjugation
+\[
+ k\longmapsto gk\alpha(g)^{-1}.
+\]
+The stabilizer of one solution has order \(20\), so
+\[
+ 36=\frac{|S_6|}{20}.
+\]
+Restricting ordinary conjugation to the conference \(S_5\) leaves the same
+order-\(20\) stabilizer on a golden solution, giving
+\[
+ 6=\frac{120}{20}.
+\]
+Thus both the full polarity class and the golden six-pack are forced by
+one stabilizer, viewed globally and inside the conference subgroup.
+
+The stabilizer is not an unnamed order-\(20\) group.  Its element-order
+distribution is
+\[
+ 1^1\,2^5\,4^{10}\,5^4,
+\]
+so it is the Frobenius group
+\[
+ F_{20}=C_5\rtimes C_4\cong\operatorname{AGL}(1,5).
+\]
+For every golden polarity, its stabilizer inside the conference \(S_5\)
+is literally equal—not merely conjugate—to the stabilizer of its indexed
+axis.  Consequently the golden polarity six-set and the axis six-set are
+the same homogeneous space
+\[
+ S_5/F_{20}.
+\]
+This supplies the canonical axis indexing by shared subgroup and explains
+why the order-\(20\) stabilizer appeared on both sides.
+
+The third-order orbit decomposition recovers the golden phase boundary
+inside this stabilizer.  Under \(F_{20}\), the duads and synthemes each
+split as \(5+10\), and the ten nodes are transitive.  Passing to
+\[
+ D_{10}=F_{20}\cap A_5
+\]
+refines both fifteen-sets to
+\[
+ 5+5+5:
+\quad
+\text{axis star}\ \sqcup\ \text{pentagon sides}\ \sqcup\
+\text{pentagram diagonals},
+\]
+and splits the nodes as \(5+5\).  The golden polarity exchanges those two
+node orbits.  The orientation-reversing coset
+\(F_{20}\setminus D_{10}\) merges sides with diagonals and makes the nodes
+transitive.  Thus C706's loss of the distinguished conference phase at
+\(A_5\subset S_5\) is visible here as the exact fusion
+\[
+ (5+5+5,\;5+5)\longrightarrow(5+10,\;10).
+\]
+
 ## Incidence-code table
 
 Let \(C_{cp}\), \(C_{gp}\), and \(C_{gc}\) be the row codes of the
@@ -155,6 +233,32 @@ conference \(S_5\) splits the latter as \(6+30\).  Thus the apparent
 failure to select one polarity is not a loose negative; the nearest
 positive locus is exactly the golden six-pack.
 
+The post-closeout extra-juice pass explains the count structurally:
+the frozen exchange squares to the inner element
+\((0\,1)(2\,5\,3\,4)\), and the \(36\) involutory normalizations are
+exactly the solutions of \(k\alpha(k)=h^{-1}\).  The golden six occupy
+three correction cycle types evenly, so they are not a hidden conjugacy
+class selected by ordinary cycle structure.
+
+The post-closeout `tt` pass then identifies those \(36\) solutions as one
+twisted-conjugacy orbit with stabilizer \(20\).  Restriction to the
+conference \(S_5\) preserves that stabilizer, explaining the small orbit
+by the paired formulas \(36=720/20\) and \(6=120/20\).
+
+The second-order extra-juice pass identifies the common stabilizer as
+\(F_{20}\cong\operatorname{AGL}(1,5)\) and verifies equality of the
+polarity and axis stabilizers for all six golden members.  Thus their
+indexing is canonical at the subgroup level:
+\(S_5/F_{20}\), not a cardinality-based label matching.
+
+The third-order pass then resolves the internal incidence orbits.
+The orientation-preserving \(D_{10}\) distinguishes the axis star,
+pentagon sides, and pentagram diagonals and gives two node pentagons
+exchanged by polarity.  Extending to \(F_{20}\) fuses the last two duad
+orbits and the two node orbits.  This is the same \(A_5\subset S_5\)
+boundary that C706 found cohomologically, now recovered from finite
+incidence alone.
+
 The final structural pass checked converse content.  Any map conjugating
 the chart action to the axis action lies in the exceptional exchange coset,
 and trivial centralizer of the natural \(S_6\) node action makes the
@@ -170,6 +274,10 @@ statement, not a missed second solution.
 | Does it directly identify chart and axis elements equivariantly? | settled negatively: fixed-\(S_5\) orbit structures are \(1+5\) and \(6\) | none |
 | Does it select a finite involutory polarity? | settled negatively without normalization: the frozen compatible exchange has order \(8\) | none |
 | What is the nearest positive polarity locus? | settled: all \(36\) inner normalizations, cut to the axis-indexed golden six-pack by the conference marking | none |
+| Why are there exactly \(36\) involutory normalizations? | settled structurally: the solutions of \(k\alpha(k)=h^{-1}\) form one twisted-conjugacy orbit with stabilizer \(20\), so \(36=720/20\) | none |
+| Why does the conference marking leave exactly six? | settled by restriction of the same order-\(20\) stabilizer: \(6=120/20\) | none |
+| Why are the golden polarities canonically indexed by axes? | settled: their stabilizers are literally the same \(F_{20}\) subgroups, so both six-sets are \(S_5/F_{20}\) | none |
+| Where is the C706 orientation-phase boundary in the finite incidence? | settled: \(D_{10}\) has orbit pattern \((5+5+5,5+5)\), while its \(F_{20}\) extension fuses this to \((5+10,10)\) | none |
 | Do the incidence codes explain primes \(2,3,5\)? | settled negatively with the exact classification above | none |
 | Is there a CSS or symplectic code hidden in the incidence family? | settled: only the standard binary \([[15,5,3]]_2\) construction | none |
 | Do equal field-\(3\) or field-\(5\) parameter tables imply equal codes? | settled by exact rowspace intersections | none |
@@ -201,5 +309,5 @@ split.  The replay uses a different syndrome dynamic program to count
 primal words directly over all three fields.
 
 The generator, replay, and JSON certificate contain respectively
-\(18354\), \(3664\), and \(10636\) bytes.  Their SHA-256 hashes are recorded
+\(26523\), \(3664\), and \(12330\) bytes.  Their SHA-256 hashes are recorded
 in `notes/2026-07-30-c708-doily-codes-and-outer-exchange.sha256`.

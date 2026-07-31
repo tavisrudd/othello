@@ -420,6 +420,18 @@
       6,
       30
     ],
+    "frozen_exchange_square_cycle_type": [
+      4,
+      2
+    ],
+    "frozen_exchange_square_inner_preimage": [
+      1,
+      0,
+      5,
+      4,
+      2,
+      3
+    ],
     "frozen_operator_exchange_on_nodes": [
       7,
       6,
@@ -433,11 +445,69 @@
       9
     ],
     "frozen_operator_exchange_order": 8,
+    "golden_axis_indexing": "the conference-S5 stabilizer of each golden polarity equals the stabilizer of its indexed axis; both are F20",
+    "golden_count_orbit_stabilizer": "6=120/20",
+    "golden_d10_orbits": {
+      "duad_meaning": "axis star, pentagon sides, pentagram diagonals",
+      "duads": [
+        5,
+        5,
+        5
+      ],
+      "nodes": [
+        5,
+        5
+      ],
+      "orientation_reversal": "the F20 minus D10 coset merges sides and diagonals",
+      "polarity_on_node_orbits": "exchanges the two 5-orbits",
+      "subgroup": "D10=F20 intersection A5",
+      "synthemes": [
+        5,
+        5,
+        5
+      ]
+    },
+    "golden_f20_orbits": {
+      "duads": [
+        5,
+        10
+      ],
+      "nodes": [
+        10
+      ],
+      "synthemes": [
+        5,
+        10
+      ]
+    },
+    "golden_inner_correction_cycle_types": {
+      "2,2,1,1": 2,
+      "4,2": 2,
+      "5,1": 2
+    },
     "golden_normalizations": 6,
     "involutory_normalization_count": 36,
+    "involutory_normalization_equation": "k*alpha(k)=h^-1, where h=(0 1)(2 5 3 4) is the inner preimage of the frozen exchange square",
     "involutory_polarities": 36,
+    "normalizing_inner_correction_cycle_types": {
+      "2,2,1,1": 4,
+      "3,1,1,1": 4,
+      "3,3": 4,
+      "4,2": 8,
+      "5,1": 16
+    },
     "ordinary_axis_action": "natural action on six labels; point stabilizer S5",
+    "polarity_count_orbit_stabilizer": "36=720/20",
     "stabilizer_compatibility": "the induced total-action automorphism sends the outer-S5 chart stabilizer class to the ordinary point-stabilizer class",
+    "twisted_conjugacy_orbit_size": 36,
+    "twisted_conjugacy_stabilizer": "F20=C5 semidirect C4=AGL(1,5)",
+    "twisted_conjugacy_stabilizer_order": 20,
+    "twisted_stabilizer_element_orders": {
+      "1": 1,
+      "2": 5,
+      "4": 10,
+      "5": 4
+    },
     "verdict": "positive outer exchange of the two degree-six representations; the operator alone does not select an involution.  Its frozen lexicographic marking is order 8, all 36 involutory normalizations remain possible, and the conference marking cuts these to the axis-indexed orbit of 6",
     "w10_exchange_coset_size": 720
   },
