@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C720
+**Status:** queued after C720; marked forward operator dependency frozen
 
 ## Objective
 
@@ -14,6 +14,14 @@ permutation, orientation, projective-scaling, and golden-conjugation torsors.
 
 The framing hypothesis and proposed theorem are recorded in
 `notes/2026-07-31-golden-cross-paper-framing.md`.
+
+The fully marked source theorem, covariance facts, and complete primary
+output inventory are frozen in
+`notes/2026-07-31-c720-c727-operator-interface.md`.  C727 must not strengthen
+that marked theorem silently: its new work begins by descending this exact
+interface through the Paper I recovery hierarchy.  Its first gate is the
+passage from one recovered conference switching class to the coherent outer
+six-family used by the forward theorem; that completion is not assumed.
 
 ## Work package
 

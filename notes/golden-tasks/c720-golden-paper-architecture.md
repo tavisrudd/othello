@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** active; lane entry task; leading connection discriminators complete
+**Status:** active; central C727 operator interface frozen; remaining paper architecture open
 
 ## Objective
 
@@ -23,15 +23,22 @@ determinant/Pfaffian, adjugation, and centered squaring.  The resulting
 Segre, Igusa, determinantal, fermionic, and anomaly shadows must form one
 commuting theorem rather than a list of formula coincidences.
 
+The marked forward theorem and its exact C727 output inventory are frozen in
+[the C720--C727 operator interface](../2026-07-31-c720-c727-operator-interface.md).
+It deliberately makes no descent claim from Paper I's coarser syndrome
+objects; C727 owns that covariance and minimal-marking audit.
+
 ## Gates
 
 1. Inventory every theorem, obstruction, computation, and physics
    consequence in C704--C710.  Assign each to the main spine, a subordinate
    body section, an appendix, or an explicitly non-theorem-facing evidence
    supplement.  Keep the source reports frozen.
-2. State the central commuting theorem from \(C\) to the six Joubert
+2. **Passed:** state the central commuting theorem from \(C\) to the six Joubert
    coordinates \(Z\), Segre cubic, centered-square Igusa polar \(W\),
-   cross-golden determinant/adjugate, and commutator Pfaffians.
+   cross-golden determinant/adjugate, and commutator Pfaffians.  The frozen
+   theorem also types the Cartan, Slater, Majorana, synchronized-spinor,
+   anomaly, and order-six dimer outputs needed by C727.
 3. Integrate the small resolutions and MCM/sheaf descent; the Coble,
    Burkhardt, \(E_6\), and \(E_8\) parentage; Clifford and doily outer
    refinements; the middle-layer outer transform; the Slater/Majorana and

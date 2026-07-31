@@ -48,6 +48,11 @@ Paper III remains unchanged and ends before it.  In particular:
   the outer augmentation module.  Five-cycle magnitudes certify golden
   membership, three optimal signs identify a sister after certification,
   and the full syndrome corrects two sign-readout errors.
+- C720's fully marked forward operator theorem is frozen in
+  `notes/2026-07-31-c720-c727-operator-interface.md`.  It fixes the source
+  object, formulas, covariance facts, and primary output inventory that C727
+  must descend, without prejudging any unlabelled or minimally marked
+  recovery claim.
 
 No manuscript root has yet been created.  C720 owns the architecture and
 the go/no-go gate for `papers/golden-operator/`.
@@ -64,8 +69,8 @@ is authorized by that investigation.
 
 | task | state | next gate |
 |---|---|---|
-| [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | active; connection discriminators complete | freeze the central commuting theorem, section plan, novelty boundary, and strict independence from review-facing Paper III |
-| [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | queued after C720 | audit every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
+| [C720 — paper architecture](../golden-tasks/c720-golden-paper-architecture.md) | active; central C727 interface frozen | freeze the section plan, novelty boundary, proof/trust plan, and strict independence from review-facing Paper III |
+| [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | queued after C720; marked source frozen | descend the frozen operator interface through every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
 | [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
 | [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | queued after C720; sequel direction | classify extremal higher-order cuts and explain the order-six exception without expanding the present paper unless a short theorem returns |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
