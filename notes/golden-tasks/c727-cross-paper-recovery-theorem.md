@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C720; marked forward operator dependency frozen
+**Status:** queued after C720; marked forward interface and reverse tests frozen
 
 ## Objective
 
@@ -40,14 +40,14 @@ six-family used by the forward theorem; that completion is not assumed.
    six-set, or torsor.  Audit the middle-exterior/Joubert, Segre--Igusa,
    Pfaffian/determinant, cross-golden adjugate, Cartan, Majorana, Slater, and
    anomaly constructions separately.
-5. Test faithfulness in the reverse direction.  Determine which individual
-   shadows recover the conference switching class, using the cubic node frame
-   and triangle two-graph as the first candidate.  Check explicitly whether
-   the determinant square recovers the cubic line and whether the
-   centered-square Segre--Igusa map has the balanced \(W=0\) layer as its
-   first exact information-loss stratum.  Decide whether the result is a
-   one-way propagation theorem, a split injection, or an equivalence of
-   reconstruction classes.
+5. Test faithfulness in the reverse direction.  The marked source-side tests
+   are now passed: the determinant square recovers the cubic line and its
+   unoriented switching class, independently corroborated by the ten-cut
+   dimer syndrome, while (W=0) is exactly the ten-node Segre singular
+   locus.  Determine whether these reverse maps descend from Paper I's
+   coarsest sufficient input, classify the nonzero centered-square fibres at
+   each marking level, and decide whether the composite is a split injection
+   or an equivalence of reconstruction classes.
 6. Stratify the targets into unmarked invariants, orientation-cover objects,
    golden-marked pairs, and fully marked gauge/permutation classes.  Locate
    the first unavoidable information loss or additional choice.

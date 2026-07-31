@@ -253,6 +253,67 @@ the Golden paper inventory but are not arrows of this central theorem.
 C727 may admit one only after exhibiting an explicit functor from the
 recovered equivalence class.  Contextual kinship is insufficient.
 
+## Post-freeze `ej` corollaries: two reverse witnesses
+
+Two reverse tests requested by C727 already follow formally from the frozen
+identities.  They are source-side corollaries and do not settle descent from
+Paper I's input hierarchy.
+
+### Determinant-square faithfulness
+
+Let
+
+\[
+ \Delta_C(x)=\det[D_x,C]=16Z_C(x)^2.
+\]
+
+The squaring map on polynomial lines is the second Veronese embedding, so
+([\Delta_C]) determines the cubic line ([Z_C]) in characteristic zero.
+More elementarily, unique factorization shows that two nonzero polynomial
+squares spanning the same line have square roots spanning the same line
+after scalar extension, hence the same (k)-rational projective line.
+
+The squarefree coefficient of (x_ix_jx_k) in (Z_C) is the triangle
+holonomy
+
+\[
+ t_{ijk}=C_{ij}C_{jk}C_{ki}\in\{\pm1\}.
+\]
+
+Consequently ([Z_C]) recovers the full triangle table up to common
+negation.  Triangle holonomies recover an edge signing up to vertex
+switching, while common negation is exactly (C\mapsto-C).  Therefore
+
+> the projective determinant sextic ([\Delta_C]) is reverse-faithful on
+> golden conference matrices for the **unoriented switching line**
+> ({[C],[-C]}).
+
+It cannot recover the missing Pfaffian orientation, since (C) and (-C)
+have the same determinant square.  The finite dimer fingerprint gives a
+second, independent reverse witness: its relative matching signs recover the
+same unoriented switching line through four-cycle holonomies.  The sextic
+and ten-cut syndrome are therefore two retractions to the same marked
+reconstruction class, one polynomial and one finite combinatorial.
+
+### Exact vanishing locus of the centered square
+
+Suppose (Z\ne0) lies on the Segre cubic and (W=0).  Then all six squares
+(Z_T^2) are equal.  After projective rescaling, every (Z_T\) is (+1) or
+(-1); the equation \(\sum_TZ_T=0\) forces three signs of each kind.  The
+cubic equation is then automatic.  Conversely every such (3+3) sign
+vector has (W=0).  Modulo common sign there are
+
+\[
+ \frac12\binom63=10
+\]
+
+points, exactly the ten nodes of the Segre cubic.  Hence the centered-square
+polar vector vanishes precisely at the Segre singular locus.  This proves
+the proposed balanced-layer test exactly: the twenty oriented balanced
+amplitude signs pair into the ten projective base points of the polar map.
+It does not prove generic injectivity of the polar map or classify all of
+its nonzero fibres; those remain C727 descent questions.
+
 ## Novelty and trust boundary
 
 Classical inputs are the Joubert covariant, Segre cubic, centered-square
@@ -281,11 +342,17 @@ Golden write surface.
 
 ## `ej` + `tt` closeout and mystery ledger
 
-- **Settled by `ej`:** the determinant square is not merely an
-  orientation-free byproduct; over a characteristic-zero polynomial ring it
-  is the cheapest candidate for a reverse-faithful shadow because its square
-  root recovers the cubic line up to scalar and sign.  C727 owns the exact
-  cubic-to-two-graph descent proof.
+- **Settled by `ej`:** the determinant square is reverse-faithful for the
+  unoriented conference switching line.  The Veronese square recovers the
+  cubic line, its coefficients recover triangle holonomies up to common
+  sign, and those holonomies recover the switching class up to (C\mapsto-C).
+- **Settled by `ej`:** the determinant sextic and the ten-cut dimer syndrome
+  are independent polynomial and combinatorial retractions to the same
+  unoriented reconstruction class.
+- **Settled by `ej`:** (W=0) on the projective Segre cubic is exactly its
+  ten-node singular locus, represented by the twenty oriented (3+3) sign
+  vectors.  This is the exact polar base locus, not merely an observed
+  balanced family.
 - **Settled by `tt`:** the source of the forward theorem must be the coherent
   outer six-family, not an ambiguously named single matrix.  The gap between
   Paper I's recovered conference class and this family is now an explicit
@@ -296,9 +363,10 @@ Golden write surface.
 - **Open, owned by C727:** determine whether the coherent outer family
   descends from Paper I's coarsest sufficient input and identify the exact
   residual orientation and golden torsors.
-- **Open, owned by C727:** prove reverse faithfulness of the cubic line or
-  determinant square, and locate the first exact loss of information for the
-  centered-square map, with the balanced (W=0) layer as the first test.
+- **Open, owned by C727:** decide whether either reverse witness descends from
+  Paper I's coarsest sufficient input, whether it retains the orientation
+  torsor there, and classify the nonzero fibres of the centered-square polar
+  output at the required marking level.
 - **No genuine mystery remains in the fully marked forward formulas.**  The
   remaining uncertainty is quotient descent and reverse recovery, exactly
   the successor's scope, plus C720's still-open editorial architecture.

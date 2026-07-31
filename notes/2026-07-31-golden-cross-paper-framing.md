@@ -84,16 +84,17 @@ functorial consequence of any one of these equivalent presentations.  This
 claim must fail cleanly if the syndrome locus needs decoder multiplicities or
 if the cubic retains only a quotient of the orientation torsor.
 
-Two existing identities make the reverse direction especially cheap to test.
-Over characteristic zero, the full determinant polynomial
+The C720 post-freeze corollaries now settle the marked reverse tests.  Over
+characteristic zero, the full determinant polynomial
 \(\det[D_x,C]=16Z_C(x)^2\) determines the cubic line \([Z_C]\), because a
 square in the polynomial ring has only the expected scalar/sign ambiguity.
-Thus even the orientation-insensitive determinant shadow may retain the
-entire switching class once the cubic-to-two-graph reconstruction is applied.
-By contrast, centered squaring is inverse-polar only on its stated open set
-and collapses the balanced optimum into \(W=0\).  The Segre--Igusa shadow may
-therefore give the first exact information-loss stratum rather than another
-globally faithful presentation.
+Its squarefree coefficients recover the triangle two-graph up to common
+negation and hence recover the unoriented switching line.  Independently,
+the ten-cut dimer syndrome recovers the same line through four-cycle
+holonomies.  By contrast, centered squaring vanishes exactly at the ten Segre
+nodes: the twenty balanced (3+3) amplitude signs pair into those ten
+projective base points.  C727 still owns descent of these reverse maps from
+Paper I's input hierarchy and the classification of nonzero polar fibres.
 
 ## Descent hierarchy
 

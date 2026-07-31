@@ -58,6 +58,11 @@ Paper III remains unchanged and ends before it.  In particular:
   object, formulas, covariance facts, and primary output inventory that C727
   must descend, without prejudging any unlabelled or minimally marked
   recovery claim.
+- C720's post-freeze `ej` corollaries settle two marked reverse tests needed
+  by C727: the determinant sextic and the independent ten-cut syndrome both
+  recover the unoriented switching line, and (W=0) is exactly the ten-node
+  Segre polar base locus.  Descent from Paper I's coarsest input and the
+  nonzero polar fibres remain C727's work.
 
 No manuscript root has yet been created.  C720 owns the architecture and
 the go/no-go gate for `papers/golden-operator/`.
