@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-31
 
-**Status:** active umbrella; C721--C725 complete and the full finite boundary
-is frozen. C726 is the remaining integration and trust-closeout phase.
+**Status:** complete 2026-07-31; C721--C726 integrated, both release roots
+green, and external publication remains exclusively under C182.
 
 ## Objective
 

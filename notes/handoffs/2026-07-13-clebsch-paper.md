@@ -15,7 +15,7 @@
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C713 proof architecture and structural six-node proof complete; C714 companion structuralization remains before the final release refresh | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C714 companion structuralization and trust closure complete; authoritative and standalone twenty-six-check releases green; external publication remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | relative marked orientation bridge and global Stein algebra complete; ordinary/isolated gates and fresh context-free `GO` green; metadata closure remains | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -225,9 +225,9 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 
 | task | state | next gate |
 |---|---|---|
-| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | external publication deferred behind C714 | after C714 passes the synchronized release gates, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
+| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | unblocked; C714 synchronized release gates complete | with explicit publication authority, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
-| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | active; C721--C725 complete and the final finite boundary frozen | integrate the structural and finite leaves, align trust modes, and close through C726 |
+| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | relative marked bridge, global Stein algebra, mechanical gates, and fresh cold-read `GO` green | obtain immutable artifact locator and author affiliation/contact metadata |
 | [C733 — Paper III canonical orientation bridge](../clebsch-tasks/c733-paper-iii-canonical-orientation-bridge.md) | complete; strongest theorem is explicitly relative to the full marked datum, with ambiguity ledger and final `GO` | none; C680 resumes metadata closure |
@@ -248,10 +248,11 @@ the split-paper route without an explicit user decision.
 ## Paper I
 
 Paper I and its companion *Computational strengthenings of Clebsch syndrome
-rigidity* form one warning-free, nineteen-row release surface with eighteen
-checks. C320 is complete with final `GO`; C693 completed the accepted v2
-integration without changing the frozen v1 baseline. C182 owns every
-remaining release action.
+rigidity* form one warning-free, nineteen-row release surface with twenty-six
+checks and page counts \(21+12\). C714 is complete: the companion now uses the
+five explicit modes human structural proof, published theorem, Lean theorem,
+finite certificate, and trusted execution. C182 owns every remaining release
+action.
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
@@ -397,6 +398,18 @@ actions or canonical keys, while the older C++/discriminant replay remains a
 third check.  The final C723/C724/C611 claim-to-proof-mode manifest is frozen
 for C726; no all-field theorem is claimed.  Full report:
 `notes/2026-07-31-c725-terminal-passant-orbit-dag.md`.
+C726 is complete and closes C714.  The C721--C725 structural proofs and finite
+leaves are integrated into the companion with a thirteen-claim five-mode
+ledger.  The q11 orbit ledger, local determinant witnesses, q13 XOR
+certificates, and q13/q17/q19 root-edge DAG are public paper-relative proof
+objects; exhaustive normalized, conic, minimum-layer, labelled, and legacy
+replays retain the trusted-execution boundary.  The q11 formal package is
+pinned at `42ab1a2db30178cf23aa8393d886c63ded24bfbd` with a tracked exact axiom
+audit; no finite classification or orientation theorem is mislabeled as Lean.
+Both authoritative and standalone roots pass all twenty-six checks with
+release-surface hash
+`1ce03fc22f0a9857f3b62fd070ea3e42ad64350c6d2c01b57eeaa17c1714b04f`.
+Full report: `notes/2026-07-31-c726-paper-i-companion-integration.md`.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19
