@@ -25,6 +25,7 @@ ROWS = [2, *range(11, 27), 29, 58]
 ROUTES = {
     "conceptual-cited-inputs",
     "exact-replay",
+    "finite-certificate",
     "kernel-checked-lean",
     "mixed",
 }
@@ -160,7 +161,7 @@ def validate_lean(
         fail(f"{where}.validation must be an object")
     command = require_string(validation.get("command"), f"{where}.validation.command")
     if command != (
-        "nix develop --command lake build "
+        "nix develop --command env LEAN_NUM_THREADS=1 lake build "
         "RelativeConicArcs.Gates.ClebschRigidityTrust"
     ):
         fail(f"{where}.validation.command does not run the Paper I gate")
@@ -211,14 +212,17 @@ def validate_computation(
         argv = command.get("argv")
         if (
             not isinstance(argv, list)
-            or len(argv) != 2
+            or len(argv) < 2
             or argv[0] != "python3"
-            or not isinstance(argv[1], str)
+            or any(not isinstance(item, str) or not item for item in argv)
         ):
-            fail(f"{where}.checker_commands[{index}].argv must be ['python3', path]")
+            fail(
+                f"{where}.checker_commands[{index}].argv must be a direct "
+                "Python command"
+            )
         command_paths.append(argv[1])
-    if command_paths != artifact_paths:
-        fail(f"{where}.checker_commands must correspond exactly to artifacts")
+    if set(command_paths) != set(artifact_paths):
+        fail(f"{where}.checker_commands must use exactly the checker artifacts")
 
 
 def validate_component(
@@ -234,10 +238,14 @@ def validate_component(
         fail(f"{where}.route is invalid")
     if route == "kernel-checked-lean":
         validate_lean(value.get("lean"), repositories, audit_cache, f"{where}.lean")
-    elif route == "exact-replay":
+    elif route in {"exact-replay", "finite-certificate"}:
         validate_computation(
             value.get("computation"), repositories, f"{where}.computation"
         )
+        if route == "finite-certificate" and not value["computation"].get(
+            "supporting_artifacts"
+        ):
+            fail(f"{where}.computation must pin a finite proof object")
     else:
         cited = value.get("cited_inputs")
         if (
@@ -360,8 +368,14 @@ def validate_checks(
                     or field_value < 1
                 ):
                     fail(f"{item}.{field} must be a positive integer")
-    if len(value) != 18:
-        fail(f"{where} must contain exactly eighteen admitted checks")
+        if "axiom_audit" in check:
+            validate_file(
+                check.get("axiom_audit"),
+                repositories,
+                f"{item}.axiom_audit",
+            )
+    if len(value) != 26:
+        fail(f"{where} must contain exactly twenty-six admitted checks")
 
 
 def main() -> int:
@@ -418,6 +432,24 @@ def main() -> int:
         repositories,
         "manifest.manuscript_pdf",
     )
+    companion_surface = manifest.get("computational_companion")
+    if not isinstance(companion_surface, dict):
+        fail("manifest.computational_companion must be an object")
+    for key in ("manuscript", "pdf", "trust_ledger", "finite_boundary_manifest"):
+        validate_file(
+            companion_surface.get(key),
+            repositories,
+            f"manifest.computational_companion.{key}",
+        )
+    companion_evidence = companion_surface.get("evidence")
+    if not isinstance(companion_evidence, list) or len(companion_evidence) != 11:
+        fail("manifest.computational_companion.evidence must contain eleven files")
+    for index, evidence in enumerate(companion_evidence):
+        validate_file(
+            evidence,
+            repositories,
+            f"manifest.computational_companion.evidence[{index}]",
+        )
     public_documents = manifest.get("public_documents")
     if not isinstance(public_documents, list) or len(public_documents) != 2:
         fail("manifest.public_documents must contain both public README files")
@@ -492,6 +524,9 @@ def main() -> int:
     release_output = json.loads(release_output_path.read_text(encoding="utf-8"))
     expected_inputs = {
         "checker_outputs_sha256": certificate["output"]["sha256"],
+        "companion_manuscript_sha256": companion_surface["manuscript"]["sha256"],
+        "companion_pdf_sha256": companion_surface["pdf"]["sha256"],
+        "companion_trust_sha256": companion_surface["trust_ledger"]["sha256"],
         "manuscript_pdf_sha256": manifest["manuscript_pdf"]["sha256"],
         "manuscript_sha256": manifest["manuscript_sha256"],
         "release_surface_sha256": release_surface_sha256(manifest),
@@ -503,8 +538,8 @@ def main() -> int:
     ):
         fail("release output does not attest the exact release inputs")
     tools = verify_all.get("verification_tools")
-    if not isinstance(tools, list) or len(tools) != 5:
-        fail("manifest.verify_all.verification_tools must contain five files")
+    if not isinstance(tools, list) or len(tools) != 6:
+        fail("manifest.verify_all.verification_tools must contain six files")
     for index, tool in enumerate(tools):
         validate_file(
             tool,
@@ -543,7 +578,7 @@ def main() -> int:
     if path != ".":
         fail("manifest.lean_repository.path must be relative to the checkout root")
     require_string(lean_repository.get("commit"), "manifest.lean_repository.commit")
-    print("Clebsch rigidity trust manifest: valid (19 claims, 18 checks)")
+    print("Clebsch rigidity trust manifest: valid (19 claims, 26 checks)")
     return 0
 
 

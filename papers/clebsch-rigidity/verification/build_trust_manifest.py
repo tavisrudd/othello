@@ -21,8 +21,8 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_LEAN_COMMIT = "35808ac74c71df5ad5e88556092c56d78d71b345"
-PINNED_BASE_COMMIT = "81227352974bf7d28f84cb6866936f842fb4de02"
+PINNED_LEAN_COMMIT = "42ab1a2db30178cf23aa8393d886c63ded24bfbd"
+PINNED_BASE_COMMIT = "ef6317c5e1a348a91a1928104f9c8e1831bfb03d"
 
 
 TERMINALS = {
@@ -58,16 +58,6 @@ TERMINALS = {
     ],
     "clebsch_formula": [
         "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula",
-    ],
-    "orientation": [
-        "RelativeConicArcs.ClebschOrientationTwoGraph.triangleProduct_switch",
-        "RelativeConicArcs.ClebschOrientationTwoGraph.goldenMatrix_sq",
-        "RelativeConicArcs.ClebschOrientationTwoGraph.goldenMatrix_pairBalance",
-        "RelativeConicArcs.ClebschOrientationTwoGraph.principalBlock_mulVec_deletedRow",
-        "RelativeConicArcs.ClebschOrientationTwoGraph.principalBlock_sq",
-        "RelativeConicArcs.ClebschOrientationTwoGraph.supportCubic_add_const",
-        "RelativeConicArcs.ClebschOrientationTwoGraph.supportCubic_eq_triangle_sum",
-        "RelativeConicArcs.ClebschOrientationTwoGraph.supportGradient_node",
     ],
     "field_order": [
         "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -198,6 +188,37 @@ def replay(
     }
 
 
+def finite_certificate(
+    subclaim: str,
+    commands: list[list[str]],
+    proof_objects: list[str],
+    coverage: str,
+    bridge: str,
+    independent: str,
+) -> dict[str, object]:
+    checker_paths = list(dict.fromkeys(command[1] for command in commands))
+    return {
+        "route": "finite-certificate",
+        "subclaim": subclaim,
+        "computation": {
+            "checker_commands": [{"argv": command} for command in commands],
+            "coverage": coverage,
+            "soundness_bridge": bridge,
+            "independent_replay": independent,
+            "residual_trust": (
+                "The small Python verifier and exact finite-field arithmetic, "
+                "plus the manuscript's interpretation of the certificate data."
+            ),
+            "artifacts": [
+                file_evidence("paper", path) for path in checker_paths
+            ],
+            "supporting_artifacts": [
+                file_evidence("paper", path) for path in proof_objects
+            ],
+        },
+    }
+
+
 def conic_filling_replay() -> dict[str, object]:
     supporting_artifacts = [
         "verification/conic_filling_search.cpp",
@@ -267,7 +288,7 @@ def lean(
             "axioms": {terminal: axioms[terminal] for terminal in terminals},
             "validation": {
                 "command": (
-                    "nix develop --command lake build "
+                    "nix develop --command env LEAN_NUM_THREADS=1 lake build "
                     "RelativeConicArcs.Gates.ClebschRigidityTrust"
                 ),
                 "toolchain": {
@@ -434,16 +455,36 @@ def components_by_row(
             ],
         ),
         18: (
-            "The statement is backed by complete exact evaluation-rank enumeration, not by a Lean theorem.",
-            [replay("degree-at-most-three loci", ["check_low_degree_loci.py", "check_global_conic_gap.py"], frame_coverage, "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it.", frame_shared)],
+            "Fourteen nonsingular cubic minors and the symbolic Clebsch kernel form the load-bearing finite certificate; the old complete evaluation-rank execution remains an independent audit. No Lean theorem is claimed.",
+            [
+                finite_certificate(
+                    "degree-at-most-three orbit certificate",
+                    [["python3", "verification/build_finite_census_certificates.py"]],
+                    ["verification/finite_census_certificates.json"],
+                    "Exactly the fifteen projective q=11 six-arc orbits: fourteen local 10-by-10 cubic minors and the Clebsch Q, QX, QY, QZ kernel record.",
+                    "The orbit masses sum to all 1,548 normalized arcs, so the local rank witnesses cover every projective class.",
+                    "check_low_degree_loci.py retains the complete evaluation-rank execution on every class.",
+                ),
+                replay("full evaluation-rank audit", ["check_low_degree_loci.py"], frame_coverage, "The replay evaluates homogeneous forms degree by degree on every uncovered locus.", frame_shared),
+            ],
         ),
         19: (
             "This is a conceptual corollary of the code--arc dictionary and the preceding replay-backed proposition.",
             [conceptual("monomial characterization", CLASSICAL_CODE, "The manuscript reduces monomial code equivalence to projective equivalence and invokes row 18.")],
         ),
         20: (
-            "The numerical gap is exact-replay-backed; the qualitative rigidity implication remains separately routed in row 17.",
-            [replay("global numerical gap", ["check_global_conic_gap.py"], frame_coverage, "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values.", complementary_replays)],
+            "Orbit masses, concurrence counts, and chord defect certify the fifteen uncovered sizes. The absence of a nearer conic remains a trusted exhaustive execution over all 160,930 nonsingular conics; qualitative rigidity is routed separately in row 17.",
+            [
+                finite_certificate(
+                    "fifteen-orbit uncovered-size ledger",
+                    [["python3", "verification/build_finite_census_certificates.py"]],
+                    ["verification/finite_census_certificates.json"],
+                    "All fifteen q=11 projective orbits, with stabilizers, masses, triple concurrence counts, and uncovered sizes.",
+                    "The checked identities |G_A|m_A=360, sum m_A=1,548, and |U(A)|=22-c(A) prove completeness and every displayed size.",
+                    "check_global_conic_gap.py reconstructs the full normalized and conic domains independently.",
+                ),
+                replay("global conic-distance audit", ["check_global_conic_gap.py"], frame_coverage, "The streaming exact program checks every normalized arc and all 160,930 nonsingular conics, regenerating every intersection histogram and nearest witness.", complementary_replays),
+            ],
         ),
         21: (
             "The incidence dictionary is a human consequence of the cited Edge--Dye geometry.",
@@ -457,10 +498,9 @@ def components_by_row(
             ],
         ),
         23: (
-            "The support bipartition is proved by incidence. The intrinsic orientation theorem is a self-contained A5 coset-action and signed-two-graph calculation; it imports no later-paper geometry.",
+            "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently; the Paper I Lean gate does not import or claim this orientation surface.",
             [
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
-                lean("switching, conference, Hessian-block, cubic-descent, and node identities", ["orientation"], axioms),
                 replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
                 replay("support cubic, continuation operator, and diagonal determinant pencil", ["check_orientation_two_graph.py"], orientation_coverage, "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction.", direct_coordinates),
             ],
@@ -492,20 +532,63 @@ def components_by_row(
             ],
         ),
         29: (
-            "Lean proves the small-arc moment reductions; the q=13 saturated eight-point exclusion uses Segre's tangent identity plus a five-row cyclic certificate, while the exact distance, minimum-layer reconstruction, terminal k=7 exclusions, and sharp maximum-six result are exact-replayed.",
+            "Lean proves only the small-arc moment reductions. The q=13 saturated weight-eight exclusion and the orbit-span/automorphism conclusions have human structural proofs. Weight ten, the q=11/q=13 seven-arc leaves, and the sharp q=13,17,19 maximum-six assertion retain finite certificates; the minimum-layer classification remains trusted execution.",
             [
                 conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE + CLASSICAL_PARTIAL_COVER, "The manuscript derives the moment equations, applies the partial-cover window, and proves the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."),
                 conceptual("q=13 tangent reduction", CLASSICAL_SEGRE_TANGENTS, "The manuscript reduces a weight-eight word to a seven-clique and displays the complete six-difference-set, five-row unique-closure certificate."),
                 conceptual("projective MDS translation", CLASSICAL_CODE, "The length-at-most-eight code classification is the preceding arc classification transported through the standard projective parity-check-column and distance-three syndrome dictionary."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
-                replay("q=13 exact distance and minimum-layer reconstruction", ["check_q13_tangent_code.py"], q13_tangent_coverage, "The replay checks the displayed cyclic certificate and independently rebuilds the binary incidence code, its minimum layer, concurrence profiles, incidence rows, and automorphism group.", direct_coordinates),
-                replay("terminal exclusions through seven points", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes through k=7 after the moment reduction; it is not evidence for an eight-arc classification.", direct_coordinates),
+                finite_certificate(
+                    "q=13 weight-ten profile exclusions",
+                    [
+                        ["python3", "verification/c723_q13_weight10_profiles.py", "--check"],
+                        ["python3", "verification/c723_q13_weight10_independent.py"],
+                    ],
+                    ["verification/c723_q13_weight10_profiles.json"],
+                    "The two exhaustive pencil-profile domains contain 6,531,840 and 166,561,920 supports.",
+                    "Canonical disjoint sets of partial 78-bit XOR syndromes exclude zero; a differently split full-fibre dynamic program checks the same domains.",
+                    "The old meet-in-the-middle branch in check_q13_tangent_code.py remains corroboration.",
+                ),
+                replay("q=13 minimum-layer classification and reconstruction", ["check_q13_tangent_code.py"], q13_tangent_coverage, "The replay checks the displayed cyclic certificate and independently rebuilds the binary incidence code, its 364-word minimum layer, concurrence profiles, and incidence rows. The orbit-span and automorphism conclusions are proved structurally in the companion.", direct_coordinates),
+                finite_certificate(
+                    "q=11 and q=13 seven-arc exclusions",
+                    [["python3", "verification/build_finite_census_certificates.py"]],
+                    ["verification/finite_census_certificates.json"],
+                    "The 1,820 seven-arcs surviving the field and size reduction form one q=11 and two q=13 projective orbits.",
+                    "Three orbit masses and three nonsingular quadratic evaluation minors cover the complete reduced domain.",
+                    "The --audit mode rebuilds the 10,232 and 53,960 normalized seven-arc domains.",
+                ),
+                finite_certificate(
+                    "q=13,17,19 maximum passant-arc size six",
+                    [
+                        ["python3", "verification/c725_terminal_orbit_dag.py"],
+                        ["python3", "verification/c725_terminal_orbit_dag.py", "--check"],
+                        ["python3", "verification/c725_terminal_orbit_dag_replay.py", "--check"],
+                    ],
+                    [
+                        "verification/c725_terminal_orbit_dag.json.gz",
+                        "verification/c725_terminal_orbit_dag_replay.json",
+                    ],
+                    "The complete 604, 4,442, and 11,260-node root-edge orbit DAGs over q=13,17,19, including every transition and terminal blocker assignment.",
+                    "Rooted transition masses and the global edge-coverage identity inductively cover every labelled arc; explicit six-point witnesses prove sharpness.",
+                    "Increasing-index backtracking uses no group action or canonical key, and the legacy C++/discriminant route is a third check.",
+                ),
                 conic_filling_replay(),
             ],
         ),
         58: (
-            "Two exact replays share canonical class keys and regenerate every printed census field used by the proofs.",
-            [replay("complete fifteen-class census", ["check_global_conic_gap.py", "check_low_degree_loci.py"], frame_coverage, "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees.", frame_shared)],
+            "The orbit ledger and local witnesses are the direct finite proof surface. The complete normalized enumerations and conic audit remain independent trusted executions.",
+            [
+                finite_certificate(
+                    "complete fifteen-class orbit ledger",
+                    [["python3", "verification/build_finite_census_certificates.py"]],
+                    ["verification/finite_census_certificates.json"],
+                    "All fifteen q=11 projective classes with canonical representatives, stabilizers, masses, concurrence counts, conic histograms, and local evaluation minors.",
+                    "The orbit-mass sum and local witnesses certify every printed table row.",
+                    "The full normalized-domain programs rebuild the same canonical keys and table fields.",
+                ),
+                replay("complete census audit", ["check_global_conic_gap.py", "check_low_degree_loci.py"], frame_coverage, "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees.", frame_shared),
+            ],
         ),
     }
 
@@ -552,6 +635,16 @@ def checks() -> list[dict[str, object]]:
             "repository": "paper",
             "cwd": ".",
             "argv": ["python3", "verification/build_trust_manifest.py", "--check"],
+            "timeout_seconds": 60,
+        },
+        {
+            "id": "computational-companion-trust",
+            "repository": "paper",
+            "cwd": ".",
+            "argv": [
+                "python3",
+                "verification/verify_computational_companion.py",
+            ],
             "timeout_seconds": 60,
         },
     ]
@@ -601,6 +694,58 @@ def checks() -> list[dict[str, object]]:
             "stdout_sha256": conic_filling_output["sha256"],
         }
     )
+    for check_id, argv, timeout in (
+        (
+            "finite-census-direct",
+            ["python3", "verification/build_finite_census_certificates.py"],
+            120,
+        ),
+        (
+            "finite-census-audit",
+            ["python3", "verification/build_finite_census_certificates.py", "--audit"],
+            900,
+        ),
+        (
+            "q13-weight-ten-certificate",
+            ["python3", "verification/c723_q13_weight10_profiles.py", "--check"],
+            900,
+        ),
+        (
+            "q13-weight-ten-independent",
+            ["python3", "verification/c723_q13_weight10_independent.py"],
+            900,
+        ),
+        (
+            "terminal-orbit-dag-direct",
+            ["python3", "verification/c725_terminal_orbit_dag.py"],
+            180,
+        ),
+        (
+            "terminal-orbit-dag-regeneration",
+            ["python3", "verification/c725_terminal_orbit_dag.py", "--check"],
+            900,
+        ),
+        (
+            "terminal-orbit-dag-independent",
+            ["python3", "verification/c725_terminal_orbit_dag_replay.py", "--check"],
+            900,
+        ),
+    ):
+        output = output_checks.get(check_id)
+        if not isinstance(output, dict):
+            raise ValueError(f"checker-output certificate omits {check_id}")
+        result.append(
+            {
+                "id": f"check-{check_id}",
+                "repository": "paper",
+                "cwd": ".",
+                "argv": argv,
+                "timeout_seconds": timeout,
+                "stdout_bytes": output["bytes"],
+                "stdout_lines": output["lines"],
+                "stdout_sha256": output["sha256"],
+            }
+        )
     result.append(
         {
             "id": "lean-rigidity-trust-gate",
@@ -610,11 +755,14 @@ def checks() -> list[dict[str, object]]:
                 "nix",
                 "develop",
                 "--command",
+                "env",
+                "LEAN_NUM_THREADS=1",
                 "lake",
                 "build",
                 "RelativeConicArcs.Gates.ClebschRigidityTrust",
             ],
             "timeout_seconds": 1800,
+            "axiom_audit": file_evidence("lean", AUDIT_PATH),
         }
     )
     return result
@@ -637,6 +785,36 @@ def build_manifest() -> dict[str, object]:
         "schema": "clebsch-rigidity-trust-manifest-v1",
         "manuscript_sha256": sha256(PAPER_ROOT / "clebsch_rigidity.tex"),
         "manuscript_pdf": file_evidence("paper", "clebsch_rigidity.pdf"),
+        "computational_companion": {
+            "manuscript": file_evidence(
+                "paper", "clebsch_rigidity_computational_companion.tex"
+            ),
+            "pdf": file_evidence(
+                "paper", "clebsch_rigidity_computational_companion.pdf"
+            ),
+            "trust_ledger": file_evidence(
+                "paper", "verification/computational_companion_trust.json"
+            ),
+            "finite_boundary_manifest": file_evidence(
+                "paper", "verification/c725_finite_boundary_manifest.json"
+            ),
+            "evidence": [
+                file_evidence("paper", f"verification/{name}")
+                for name in (
+                    "build_finite_census_certificates.py",
+                    "finite_census_certificates.json",
+                    "finite_census_certificates.sha256",
+                    "c723_q13_weight10_profiles.py",
+                    "c723_q13_weight10_profiles.json",
+                    "c723_q13_weight10_independent.py",
+                    "c725_terminal_orbit_dag.py",
+                    "c725_terminal_orbit_dag.json.gz",
+                    "c725_terminal_orbit_dag_replay.py",
+                    "c725_terminal_orbit_dag_replay.json",
+                    "c725_terminal_orbit_dag.sha256",
+                )
+            ],
+        },
         "statement_identity": file_evidence(
             "paper", "verification/statement_identity.json"
         ),
@@ -694,6 +872,7 @@ def build_manifest() -> dict[str, object]:
                     "verify_trust_manifest.py",
                     "test_verification_tools.py",
                     "check_manuscript_build.py",
+                    "verify_computational_companion.py",
                 )
             ],
             "checks": checks(),

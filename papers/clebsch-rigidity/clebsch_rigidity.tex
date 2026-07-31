@@ -1383,13 +1383,13 @@ later-paper artifact:
 \begin{center}
 \small\path{check_orientation_two_graph.py}.
 \end{center}
-The human-scale formal gate additionally checks switching invariance,
-$B^2=5I$, pair balance, the two principal-block identities used in the
-rank-four argument, translation descent of the cubic, its triangle-product
-formula, and vanishing of all six displayed node gradients.  The formal
-cross-check treats Dye's Brianchon bound and equality classification as two
-explicit axioms.  It does not certify the exhaustive searches in the
-computational companion.  The reusable Lean development is distributed in
+The formal gate checks the displayed q11 code and decoder tables, the
+symmetry-free rigidity implication, the chord-defect specialization, the
+$q=9$ distance-two obstruction, and the small-arc moment consequences.  It
+treats Dye's Brianchon bound and equality classification as two explicit
+axioms.  It does not claim the orientation theorem or certify any exhaustive
+search in the computational companion; those retain the human and finite
+proof modes stated there.  The reusable Lean development is distributed in
 \href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}}, while
 the generated q11 tables and aggregate Paper I gate are in
 \href{https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates}
@@ -1401,9 +1401,9 @@ Its pinned artifacts are
 \begin{center}
 \small
 certificate-package commit:
-\path{35808ac74c71df5ad5e88556092c56d78d71b345}\\
+\path{42ab1a2db30178cf23aa8393d886c63ded24bfbd}\\
 base-library commit:
-\path{81227352974bf7d28f84cb6866936f842fb4de02}\\
+\path{ef6317c5e1a348a91a1928104f9c8e1831bfb03d}\\
 aggregate gate:
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}\\
 Mathlib commit:
@@ -1411,12 +1411,12 @@ Mathlib commit:
 \end{center}
 The SHA-256 digest of \path{verification/checker_outputs.json} is
 \begin{center}
-\small\path{49dfee6970dc4c6630b010fd2e71d5083a0656fba0aca2ad72c8c47e7b523744}.
+\small\path{cd4386336e06e11c9e2aa3228c18e828ad216bc78fd05f7387502ab6a06d0e04}.
 \end{center}
 The SHA-256 digest of
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is
 \begin{center}
-\small\path{c2d63478d429f808a3d64f44e7bec798db283ae110f7b385a18b8742a63d745a}.
+\small\path{45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b}.
 \end{center}
 This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its

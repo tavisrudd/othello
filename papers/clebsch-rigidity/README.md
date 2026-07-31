@@ -30,9 +30,10 @@ This is the active Clebsch manuscript. Build it from `papers/` with
 mega-paper fallback.
 
 The Paper I verification surface is under `verification/`. It contains the
-nineteen-row statement identity, trust manifest, validator, clean release
-runner, unit tests, and deterministic successful output. The thirteen selected
-exact checkers and pinned Nix environment are release-local; the aggregate formal gate is
+nineteen-row statement identity, the companion's five-mode claim map, trust
+manifest, validators, clean release runner, unit tests, and deterministic
+successful output. The twenty selected exact checker invocations and pinned
+Nix environment are release-local; the aggregate formal gate is
 `RelativeConicArcs/Gates/ClebschRigidityTrust.lean` in the shared formal
 certificate package.
 

@@ -2,13 +2,22 @@
 
 This directory is the release-verification surface for *Reconstructing the
 Clebsch code and its golden orientation from its deep-hole syndrome locus*.
-It separates four trust
-routes:
+The paper and companion separate exactly five proof modes:
 
-- conceptual proofs and named cited inputs;
-- kernel-checked Lean terminals and their exact axiom closure;
-- exhaustive exact-arithmetic Python replays; and
-- mixed claims whose components use more than one route.
+- human structural proofs;
+- published theorems with matched hypotheses;
+- kernel-checked Lean theorems and their exact axiom closure;
+- finite certificates with checked coverage identities; and
+- trusted exact executions over stated exhaustive domains.
+
+`computational_companion_trust.json` is the thirteen-row atomic claim map.
+Its validator enforces the five-mode vocabulary, pins every proof object by
+SHA-256, checks every claim's reduction/invariant/finite-leaf/replay fields,
+and can execute all ten companion commands with `--run`.
+`c725_finite_boundary_manifest.json` is the lower-level finite-leaf map.  Its
+paths are paper-root-relative and its terminal classification is backed by
+the root-edge DAG and independent labelled replay, with no dependency on an
+internal task record.
 
 `statement_identity.json` contains the exact nineteen-row published claim
 map. Each theorem-like row includes the verbatim TeX environment and its
@@ -36,11 +45,11 @@ The gate records the exact two classical Dye assumptions used by the
 rigidity implication; the other printed axioms are part of Lean's ordinary
 logical trust boundary or are shown absent.
 
-The twelve Python programs at the paper root and the C++/Python eight-point
-search under `verification/` are deterministic exact replays. They enumerate
+The twelve Python programs at the paper root and the certificate and replay
+programs under `verification/` are deterministic exact checks. They enumerate
 the finite domains stated in the manuscript and print bounded summaries.
 They do not import generated Lean output. `capture_checker_outputs.py`
-regenerates the compact thirteen-entry
+regenerates the compact twenty-entry
 `checker_outputs.json` certificate of stdout hashes, byte counts, and line
 counts. The release runner checks every fresh replay against that certificate.
 The manifest records the coverage and residual semantic trust for every use.
@@ -56,8 +65,8 @@ nix develop --command python3 verification/verify_release.py \
 
 The runner validates the paper root and the exact Paper I formal source
 pathset against the pinned commit, while ignoring unrelated worktree paths.
-It builds the manuscript in an isolated temporary directory, executes exactly
-the eighteen admitted checks without a shell, and refuses any scholarly path
+It builds both manuscripts in isolated temporary directories, executes exactly
+the twenty-six admitted checks without a shell, and refuses any scholarly path
 change.
 Successful output is deterministic and must equal
 `verify-release-output.json`. That output attests the manuscript source and

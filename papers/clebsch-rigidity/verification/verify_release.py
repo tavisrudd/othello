@@ -10,6 +10,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+import re
 
 
 SHELLS = {"bash", "dash", "fish", "powershell", "pwsh", "sh", "zsh"}
@@ -107,6 +108,22 @@ def command_argv(value: object, where: str) -> list[str]:
 
 def bounded(text: str, line_limit: int = 20) -> str:
     return "\n".join(text.splitlines()[-line_limit:])
+
+
+def parse_axiom_output(text: str) -> dict[str, list[str]]:
+    pattern = re.compile(
+        r"'([^']+)' (does not depend on any axioms|depends on axioms: \[(.*?)\])",
+        re.DOTALL,
+    )
+    result: dict[str, list[str]] = {}
+    for match in pattern.finditer(text):
+        body = match.group(3)
+        result[match.group(1)] = (
+            []
+            if body is None
+            else [item.strip() for item in body.replace("\n", " ").split(",")]
+        )
+    return result
 
 
 def require_clean(snapshots: dict[str, str]) -> None:
@@ -262,6 +279,28 @@ def main() -> int:
                 f"exit {result.returncode}:\n"
                 + bounded(result.stderr or result.stdout)
             )
+        axiom_audit = check.get("axiom_audit")
+        if axiom_audit is not None:
+            if not isinstance(axiom_audit, dict):
+                raise ValueError(f"{where}.axiom_audit must be an object")
+            audit_repository = axiom_audit.get("repository")
+            audit_path_value = axiom_audit.get("path")
+            if (
+                not isinstance(audit_repository, str)
+                or audit_repository not in repositories
+                or not isinstance(audit_path_value, str)
+            ):
+                raise ValueError(f"{where}.axiom_audit is invalid")
+            audit_path = repositories[audit_repository] / audit_path_value
+            expected_axioms = parse_axiom_output(
+                audit_path.read_text(encoding="utf-8")
+            )
+            actual_axioms = parse_axiom_output(result.stdout + "\n" + result.stderr)
+            if not expected_axioms or actual_axioms != expected_axioms:
+                raise RuntimeError(
+                    f"verification check {check_id!r} axiom output differs "
+                    "from its tracked audit"
+                )
         expected_stdout = check.get("stdout_sha256")
         if expected_stdout is not None:
             actual_bytes = result.stdout.encode("utf-8")
@@ -298,6 +337,15 @@ def main() -> int:
             "checker_outputs_sha256": manifest["verify_all"][
                 "checker_output_certificate"
             ]["output"]["sha256"],
+            "companion_manuscript_sha256": manifest["computational_companion"][
+                "manuscript"
+            ]["sha256"],
+            "companion_pdf_sha256": manifest["computational_companion"]["pdf"][
+                "sha256"
+            ],
+            "companion_trust_sha256": manifest["computational_companion"][
+                "trust_ledger"
+            ]["sha256"],
             "manuscript_pdf_sha256": manifest["manuscript_pdf"]["sha256"],
             "manuscript_sha256": manifest["manuscript_sha256"],
             "release_surface_sha256": release_surface_sha256(manifest),

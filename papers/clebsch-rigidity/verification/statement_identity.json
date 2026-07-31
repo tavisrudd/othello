@@ -93,7 +93,7 @@
       "row": 18,
       "sha256": "11c7c9029cb3fd9111dfe68a465e69490da1195ee5cea6c04ead9420796e582b",
       "source": "clebsch_rigidity_computational_companion.tex",
-      "source_line": 201,
+      "source_line": 213,
       "tex": "\\begin{proposition}[Low-degree algebraic rigidity]\n\\label{prop:low-degree-rigidity}\nFor a six-arc $A\\subset\\PG(2,11)$, the uncovered locus $\\cU(A)$ is\ncontained in the zero set of a nonzero homogeneous form of degree at most\nthree if and only if $A$ is projectively equivalent to the Clebsch\nhexagon. In the Clebsch case the least such degree is two: the quadratic\nvanishing space is spanned by the defining nonsingular conic equation $Q$,\nand the cubic vanishing space is\n\\[\n Q\\cdot\\F_{11}[X,Y,Z]_1.\n\\]\n\\end{proposition}",
       "title": "Low-degree algebraic rigidity"
     },
@@ -104,7 +104,7 @@
       "row": 19,
       "sha256": "fcb21f7559ca31605008b8b55ae418ff5b0e5d29fe92646e9ebe7947c3ccb6fb",
       "source": "clebsch_rigidity_computational_companion.tex",
-      "source_line": 226,
+      "source_line": 239,
       "tex": "\\begin{corollary}[Monomial characterization]\n\\label{cor:monomial-characterization}\nUp to monomial equivalence, there is a unique linear $[6,3,4]_{11}$ code\nof covering radius three whose projective deep-hole syndrome locus is\ncontained in a plane curve of degree at most three. It is the Clebsch code,\nwhose projective stabilizer is $A_5$.\n\\end{corollary}",
       "title": "Monomial characterization"
     },
@@ -115,7 +115,7 @@
       "row": 20,
       "sha256": "c11a7fa262929336dc9123b35a669cae91360dd3baa3b0a8cd8e72b1623962d5",
       "source": "clebsch_rigidity_computational_companion.tex",
-      "source_line": 258,
+      "source_line": 271,
       "tex": "\\begin{theorem}[Numerical gap]\n\\label{thm:gap}\nThe Clebsch class has $|\\cU(A)|=12$, while every non-Clebsch\nsix-arc has $|\\cU(A)|\\ge16$. Equivalently, $|\\cU(A)|\\le15$\ncharacterizes the Clebsch class, for which $|\\cU(A)|=12$.\nIf $|\\cU(A)|\\ge16$, then $\\cU(A)$ lies on no conic.\n\\end{theorem}",
       "title": "Numerical gap"
     },
@@ -170,7 +170,7 @@
       "row": 25,
       "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933",
       "source": "clebsch_rigidity_computational_companion.tex",
-      "source_line": 330,
+      "source_line": 341,
       "tex": "\\begin{theorem}[Uniqueness of $q=11$]\n\\label{thm:why11}\nLet $q$ be a prime power. If a six-arc $A\\subset\\PG(2,q)$ satisfies\n$\\cU(A)=\\cC(\\F_q)$ for some nonsingular conic $\\cC$, then $q=11$.\nAt $q=11$ every such $A$ is projectively equivalent to the\nClebsch hexagon.\n\\end{theorem}",
       "title": "Uniqueness of $q=11$"
     },
@@ -192,7 +192,7 @@
       "row": 29,
       "sha256": "1445ccbd969d521672b167d475a9bf135ef30d3ada5b61ed10cb1e627ddceb8d",
       "source": "clebsch_rigidity_computational_companion.tex",
-      "source_line": 374,
+      "source_line": 385,
       "tex": "\\begin{theorem}[Passant-code theorem]\n\\label{thm:q13-tangent-code}\nThe binary code $K=\\ker M$ has parameters\n\\[\n [78,36,12]_2.\n\\]\nThere are exactly $364$ minimum words.  Under\n$\\operatorname{PGL}(2,13)$ they form four orbits of size $91$, one with\nstabilizer $S_4$ and three with stabilizer $D_{24}$.  Each orbit spans\n$K$.\n\nThe minimum supports intrinsically reconstruct the full six-class\nelliptic association scheme on the $78$ internal points.  Pair concurrence\nrecovers passant versus secant join type, triple concurrence separates the\nsix orbitals, and the $78$ all-zero-triple seven-cliques are exactly the\npassant incidence rows.  Consequently the minimum layer reconstructs $M$\nup to row order, and its automorphism group is\n$\\operatorname{PGL}(2,13)$.\n\\end{theorem}\n\n\\begin{theorem}[Conic-filling loci through eight points]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le8$, and suppose that $\\cU(A)$ is the full set of\n$\\F_q$-rational points of a nonsingular conic. Then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur.\n\nMoreover, for each $q\\in\\{13,17,19\\}$, an arc all of whose chords are\npassant to a fixed nonsingular conic has at most six points, and this bound\nis attained.\n\\end{theorem}",
       "title": "Passant-code theorem; Conic-filling loci through eight points"
     },
@@ -207,8 +207,8 @@
     }
   ],
   "companion_source": "clebsch_rigidity_computational_companion.tex",
-  "companion_source_sha256": "d8c129f256f99b5083e1b6bd0c61b0def26f11c501e3f1b9c2d4da16c46e8c98",
+  "companion_source_sha256": "60b0545248def284252fab2c809382af246aecd7333673cbfc3a1dc385ddad0d",
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "9544183db64f0517f90dbf187fd89c9f44c50803a3a45c2593f1e99709bc4da9"
+  "source_sha256": "7b38699b2e97a3d2162a747bf69cfd3a368560718e59db711fb5b23035fbf94a"
 }

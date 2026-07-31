@@ -67,6 +67,13 @@ class ReleaseRunnerTests(unittest.TestCase):
             ["python3", "checker.py"],
         )
 
+    def test_axiom_output_normalization(self) -> None:
+        text = "'Example.theorem' depends on axioms: [propext,\n Classical.choice]"
+        self.assertEqual(
+            release.parse_axiom_output(text),
+            {"Example.theorem": ["propext", "Classical.choice"]},
+        )
+
     def test_parent_cwd_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             roots = {"paper": Path(directory)}
@@ -74,8 +81,8 @@ class ReleaseRunnerTests(unittest.TestCase):
                 release.safe_cwd(roots, "paper", "../outside", "test")
 
     def test_exact_checker_set_is_unique(self) -> None:
-        self.assertEqual(len(capture.CHECKERS), 13)
-        self.assertEqual(len(set(capture.CHECKERS)), 13)
+        self.assertEqual(len(capture.CHECKERS), 20)
+        self.assertEqual(len({name for name, _ in capture.CHECKERS}), 20)
 
     def test_manuscript_log_patterns(self) -> None:
         self.assertIsNone(manuscript.WARNING_RE.search("Package hyperref Info"))
@@ -85,6 +92,13 @@ class ReleaseRunnerTests(unittest.TestCase):
         )
         self.assertIsNotNone(match)
         self.assertEqual(match.group(1), "18")
+        self.assertEqual(
+            manuscript.EXPECTED_PAGES,
+            {
+                "clebsch_rigidity.tex": 21,
+                "clebsch_rigidity_computational_companion.tex": 12,
+            },
+        )
 
 
 class ManifestSemanticTests(unittest.TestCase):

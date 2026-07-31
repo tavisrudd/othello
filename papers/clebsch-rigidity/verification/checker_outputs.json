@@ -60,11 +60,46 @@
       "lines": 16,
       "sha256": "380ca51dce260f0794de15bf0c3a710139c2fe2734b84475bd638b8413471979"
     },
+    "finite-census-audit": {
+      "bytes": 42,
+      "lines": 1,
+      "sha256": "1376c3cef257b561138a1bec9d940bc9819bef18cf6f7d6a2fc09aae09423169"
+    },
+    "finite-census-direct": {
+      "bytes": 103,
+      "lines": 1,
+      "sha256": "d6e4c25e99f431815d4744a37d16a753dd5e9f2e456a1d5f7a04afeceaa437df"
+    },
+    "q13-weight-ten-certificate": {
+      "bytes": 118,
+      "lines": 1,
+      "sha256": "5802c4f7be53ca807ff7ffa5252d8b902b2c6fdf85b02ed8279373c3510fced4"
+    },
+    "q13-weight-ten-independent": {
+      "bytes": 174,
+      "lines": 1,
+      "sha256": "616c031fc03b289fac302c8732e453704d5de55ded08a1041b8c0095181d64c6"
+    },
+    "terminal-orbit-dag-direct": {
+      "bytes": 289,
+      "lines": 1,
+      "sha256": "001af139a7671a9e23b3c3d81c07f58b2670da79ab5d4a71aa5afba17e33c11d"
+    },
+    "terminal-orbit-dag-independent": {
+      "bytes": 218,
+      "lines": 1,
+      "sha256": "e7a67317e0dcfda1973cf813b7577093ab6feb4d2532a6d3d1d31275af946814"
+    },
+    "terminal-orbit-dag-regeneration": {
+      "bytes": 42,
+      "lines": 1,
+      "sha256": "d831b031cd978306a1daa84dca61afdd14244045cedfd3c9f3b1f18c33aec262"
+    },
     "verification/conic_filling_verify.py": {
       "bytes": 228,
       "lines": 1,
       "sha256": "bbf3aed130b23a338637a90518ed823a6f7b7c37ee16d8e9a473fbb87908672d"
     }
   },
-  "schema": "clebsch-rigidity-checker-output-v1"
+  "schema": "clebsch-rigidity-checker-output-v2"
 }

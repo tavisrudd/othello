@@ -1,71 +1,185 @@
 {
-  "schema": "clebsch-computational-companion-trust-v1",
+  "schema": "clebsch-computational-companion-trust-v2",
   "manuscript": "clebsch_rigidity_computational_companion.tex",
+  "proof_modes": [
+    "human-structural-proof",
+    "published-theorem",
+    "lean-theorem",
+    "finite-certificate",
+    "trusted-execution"
+  ],
+  "artifacts": [
+    {
+      "path": "verification/finite_census_certificates.json",
+      "sha256": "7a50315cdf7a605d6d979bb2a070d1ddbf98b65cf53404e0e60da1fd47aaa041"
+    },
+    {
+      "path": "verification/c723_q13_weight10_profiles.json",
+      "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9"
+    },
+    {
+      "path": "verification/c725_terminal_orbit_dag.json.gz",
+      "sha256": "8e18a337ed6a0c60633e8c3df901201fa08d1e04b1ad6d4d7e3aef04a6a111bd"
+    },
+    {
+      "path": "verification/c725_terminal_orbit_dag_replay.json",
+      "sha256": "ba9d31b9b428cc8d2efc171293f4c9bf1d3d607371dabccc6049cba5f6bdbdc6"
+    }
+  ],
   "claims": [
     {
-      "id": "chord-defect-and-window",
-      "mode": "imported-proof",
+      "id": "chord-defect-window-and-q11-rigidity",
+      "mode": "human-structural-proof",
+      "statement": "The chord-defect identity, conic-filling window, and q=11 rigidity implication are proved in the geometric paper and restated with their hypotheses in the companion.",
+      "reduction": "Reduce conic filling to chord moments and the q=11 equality case.",
+      "invariant": "The chord-defect count t(A) and uncovered-cardinality identity.",
+      "residual_finite_leaf": "none",
+      "replay": "check_rigidity_degenerate_conic.py is corroboration only.",
       "source": "clebsch_rigidity.tex"
-    },
-    {
-      "id": "q11-geometric-rigidity",
-      "mode": "imported-proof",
-      "source": "clebsch_rigidity.tex"
-    },
-    {
-      "id": "fifteen-class-census-and-gap",
-      "mode": "exhaustive-exact-replay",
-      "checks": [
-        "check_global_conic_gap.py"
-      ]
-    },
-    {
-      "id": "low-degree-rigidity",
-      "mode": "exhaustive-exact-replay",
-      "checks": [
-        "check_low_degree_loci.py"
-      ]
     },
     {
       "id": "q9-sylvester-obstruction",
-      "mode": "literature-plus-exact-replay",
-      "checks": [
-        "check_small_q_uniqueness.py"
+      "mode": "published-theorem",
+      "statement": "The q=9 polarity graph is the Sylvester graph and its distance-two graph has clique number five.",
+      "reduction": "A conic-filling six-arc would be a six-clique in the distance-two graph.",
+      "invariant": "The intersection array {5,4,2;1,1,4} and distance-two relation.",
+      "residual_finite_leaf": "none",
+      "replay": "check_small_q_uniqueness.py checks the explicit finite specialization.",
+      "checks": ["q9-small-field-replay"]
+    },
+    {
+      "id": "formal-chord-q9-small-k-terminals",
+      "mode": "lean-theorem",
+      "statement": "The pinned gate checks the chord-defect algebra, explicit q=9 distance-two obstruction, and small-k moment consequences at the exact named declarations.",
+      "reduction": "Transport the paper definitions to the finite and moment interfaces formalized by the gate.",
+      "invariant": "The theorem types of the named Lean terminals.",
+      "residual_finite_leaf": "No census, q13 distance, or terminal orbit classification is claimed by Lean.",
+      "replay": "The release runner builds RelativeConicArcs.Gates.ClebschRigidityTrust and checks its tracked axiom audit.",
+      "lean_terminals": [
+        "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments",
+        "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five",
+        "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra"
       ]
     },
     {
-      "id": "seven-arc-exclusion",
-      "mode": "exhaustive-exact-replay",
-      "checks": [
-        "check_small_k_conic_filling.py"
-      ]
+      "id": "q11-six-arc-orbit-ledger",
+      "mode": "finite-certificate",
+      "statement": "The 1,548 normalized q11 six-arcs form fifteen projective orbits with the recorded stabilizers, masses, concurrence counts, and uncovered sizes.",
+      "reduction": "Normalize a four-frame and quotient by the projective action.",
+      "invariant": "For every orbit |G_A|m_A=360, the masses sum to 1,548, and |U(A)|=22-c(A).",
+      "residual_finite_leaf": "Fifteen canonical representatives and their local records.",
+      "replay": "The full normalized enumeration is an independent audit.",
+      "checks": ["finite-census-direct", "finite-census-audit"],
+      "artifacts": ["verification/finite_census_certificates.json"]
     },
     {
-      "id": "q13-tangent-code-distance-and-minimum-layer-classification",
-      "mode": "segre-tangent-reduction-plus-exhaustive-exact-replay",
-      "checks": [
-        "check_q13_tangent_code.py"
-      ]
+      "id": "q11-conic-distance-gap",
+      "mode": "trusted-execution",
+      "statement": "No non-Clebsch uncovered locus is contained in a conic closer than the recorded four-point gap.",
+      "reduction": "Use the fifteen certified orbit representatives.",
+      "invariant": "The complete conic-intersection histogram for each orbit.",
+      "residual_finite_leaf": "All 160,930 nonsingular conics over F_11.",
+      "replay": "The finite-census audit reconstructs every conic and compares the canonical JSON byte for byte.",
+      "checks": ["finite-census-audit"]
+    },
+    {
+      "id": "q11-low-degree-rigidity",
+      "mode": "finite-certificate",
+      "statement": "Only the Clebsch orbit has a nonzero cubic vanishing on its uncovered locus.",
+      "reduction": "Reduce each projective orbit to one evaluation matrix.",
+      "invariant": "Fourteen nonsingular cubic minors and the symbolic kernel (QX,QY,QZ) for the Clebsch orbit.",
+      "residual_finite_leaf": "Exactly the fifteen certified q11 orbits.",
+      "replay": "The normalized-domain audit retains the older full row reductions.",
+      "checks": ["finite-census-direct", "finite-census-audit"],
+      "artifacts": ["verification/finite_census_certificates.json"]
+    },
+    {
+      "id": "q13-weight-eight-exclusion",
+      "mode": "human-structural-proof",
+      "statement": "A q13 weight-eight word would give a seven-clique in the tangent-product graph, while the five-row unique-closure argument proves clique number five.",
+      "reduction": "Passant-pencil parity and Segre's lemma of tangents reduce the support to the cyclic local graph.",
+      "invariant": "The six difference sets and unique extension of every four-clique.",
+      "residual_finite_leaf": "none",
+      "replay": "check_q13_tangent_code.py checks every displayed difference and closure row.",
+      "checks": ["q13-tangent-code"]
+    },
+    {
+      "id": "q13-weight-ten-profile-exclusions",
+      "mode": "finite-certificate",
+      "statement": "Neither exhaustive q13 weight-ten pencil profile has zero binary syndrome.",
+      "reduction": "Pencil parity leaves only the (3,1^6) and (1^7) profiles.",
+      "invariant": "Canonical disjoint sets of partial 78-bit XOR syndromes.",
+      "residual_finite_leaf": "The exact domains of 6,531,840 and 166,561,920 supports.",
+      "replay": "A separately split full-fibre dynamic program reproduces both empty intersections.",
+      "checks": ["q13-weight-ten-certificate", "q13-weight-ten-independent"],
+      "artifacts": ["verification/c723_q13_weight10_profiles.json"]
+    },
+    {
+      "id": "q13-minimum-layer-classification",
+      "mode": "trusted-execution",
+      "statement": "The q13 code has 364 minimum words in four projective orbits, whose concurrence profiles reconstruct the incidence rows and elliptic relations.",
+      "reduction": "Generate the four explicit orbits after the distance bound.",
+      "invariant": "Pair and triple concurrence profiles and the 78 zero-triple seven-cliques.",
+      "residual_finite_leaf": "All 364 generated supports and their pair/triple profiles.",
+      "replay": "check_q13_tangent_code.py reconstructs the plane and all profiles exactly.",
+      "checks": ["q13-tangent-code"]
     },
     {
       "id": "q13-minimum-orbit-spans-and-automorphism-group",
-      "mode": "elliptic-association-algebra-and-four-anchor-rigidity",
-      "checks": [
-        "check_q13_tangent_code.py"
+      "mode": "human-structural-proof",
+      "statement": "Each minimum-word orbit spans the 36-dimensional code, and the minimum layer has automorphism group PGL(2,13).",
+      "reduction": "Identify orbit Grams with A_9,A_9,A_12,A_10 and normalize a scheme automorphism on a three-point base.",
+      "invariant": "The mod-two elliptic algebra and the four-anchor resolving signatures.",
+      "residual_finite_leaf": "none",
+      "replay": "The original rank elimination and stabilizer-chain execution remain independent checks.",
+      "checks": ["q13-tangent-code"]
+    },
+    {
+      "id": "q11-q13-seven-arc-exclusions",
+      "mode": "finite-certificate",
+      "statement": "No q11 or q13 seven-arc surviving the structural window has its uncovered locus on a conic.",
+      "reduction": "Quotient the 1,820 candidates by projective equivalence.",
+      "invariant": "One q11 and two q13 orbit masses, each with a nonsingular quadratic evaluation minor.",
+      "residual_finite_leaf": "Exactly three projective orbits after the field and size reduction.",
+      "replay": "The full 10,232 and 53,960 normalized seven-arc domains are audited independently.",
+      "checks": ["finite-census-direct", "finite-census-audit"],
+      "artifacts": ["verification/finite_census_certificates.json"]
+    },
+    {
+      "id": "q13-q17-q19-maximum-passant-arc-size-six",
+      "mode": "finite-certificate",
+      "statement": "Every pairwise-passant arc with no collinear triple over q=13,17,19 has at most six points, and six is attained.",
+      "reduction": "Root at a passant edge and quotient extensions by its setwise stabilizer.",
+      "invariant": "Every transition orbit, rooted and global mass identity, and terminal blocker assignment.",
+      "residual_finite_leaf": "The complete 604, 4,442, and 11,260-node root-edge DAGs.",
+      "replay": "Independent increasing-index backtracking and the legacy C++/discriminant replay reproduce the labelled levels.",
+      "checks": ["terminal-orbit-dag-direct", "terminal-orbit-dag-regeneration", "terminal-orbit-dag-independent", "terminal-orbit-legacy"],
+      "artifacts": [
+        "verification/c725_terminal_orbit_dag.json.gz",
+        "verification/c725_terminal_orbit_dag_replay.json"
       ]
     },
     {
-      "id": "passant-arc-bound-q13-q17-q19",
-      "mode": "exhaustive-orbit-search-with-independent-certificate-check",
-      "checks": [
-        "verification/conic_filling_verify.py"
-      ],
-      "certificates": [
-        "verification/conic_filling_q13.json",
-        "verification/conic_filling_q17.json",
-        "verification/conic_filling_q19.json",
-        "verification/conic_filling_independent.json"
-      ]
+      "id": "q17-q19-terminal-projective-classification",
+      "mode": "finite-certificate",
+      "statement": "The maximum q17 and q19 six-arcs form 22 and 94 projective orbits, all terminal.",
+      "reduction": "Globally quotient the maximum level of the root-edge DAGs.",
+      "invariant": "Orbit masses, pair fingerprints, and triple fingerprints for the two doubled q19 fibres.",
+      "residual_finite_leaf": "Exactly the q17 and q19 maximum levels; no all-field orbit formula is claimed.",
+      "replay": "The root-edge coverage identities and legacy coherent certificate agree.",
+      "checks": ["terminal-orbit-dag-direct", "terminal-orbit-dag-independent"]
     }
+  ],
+  "checks": [
+    {"id": "q9-small-field-replay", "argv": ["python3", "check_small_q_uniqueness.py"]},
+    {"id": "finite-census-direct", "argv": ["python3", "verification/build_finite_census_certificates.py"]},
+    {"id": "finite-census-audit", "argv": ["python3", "verification/build_finite_census_certificates.py", "--audit"]},
+    {"id": "q13-tangent-code", "argv": ["python3", "check_q13_tangent_code.py"]},
+    {"id": "q13-weight-ten-certificate", "argv": ["python3", "verification/c723_q13_weight10_profiles.py", "--check"]},
+    {"id": "q13-weight-ten-independent", "argv": ["python3", "verification/c723_q13_weight10_independent.py"]},
+    {"id": "terminal-orbit-dag-direct", "argv": ["python3", "verification/c725_terminal_orbit_dag.py"]},
+    {"id": "terminal-orbit-dag-regeneration", "argv": ["python3", "verification/c725_terminal_orbit_dag.py", "--check"]},
+    {"id": "terminal-orbit-dag-independent", "argv": ["python3", "verification/c725_terminal_orbit_dag_replay.py", "--check"]},
+    {"id": "terminal-orbit-legacy", "argv": ["python3", "verification/conic_filling_verify.py"]}
   ]
 }

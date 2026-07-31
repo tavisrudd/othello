@@ -249,11 +249,19 @@ def conic_mask(coefficients: tuple[int, ...]) -> int:
     return mask
 
 
-def nonsingular_conics() -> list[tuple[tuple[int, ...], int]]:
-    conics = []
+def nonsingular_conics():
+    """Yield every normalized nonsingular conic, with bounded memory.
+
+    The fixed-width mask set checks that normalized quadratic forms do not
+    duplicate a rational conic without retaining Python tuples and integers
+    for the complete 160,930-element domain.
+    """
     incidence = [0] * len(POINTS)
+    seen_masks: set[bytes] = set()
     projective_form_count = 0
     singular_form_count = 0
+    nonsingular_count = 0
+    mask_bytes = (len(POINTS) + 7) // 8
     for coefficients in projective_quadratic_forms():
         projective_form_count += 1
         if symmetric_conic_determinant(coefficients) == 0:
@@ -261,15 +269,21 @@ def nonsingular_conics() -> list[tuple[tuple[int, ...], int]]:
             continue
         mask = conic_mask(coefficients)
         assert mask.bit_count() == P + 1 == 12
-        conics.append((coefficients, mask))
-        for index in range(len(POINTS)):
-            incidence[index] += (mask >> index) & 1
+        encoded_mask = mask.to_bytes(mask_bytes, "little")
+        assert encoded_mask not in seen_masks
+        seen_masks.add(encoded_mask)
+        nonsingular_count += 1
+        remaining = mask
+        while remaining:
+            bit = remaining & -remaining
+            incidence[bit.bit_length() - 1] += 1
+            remaining ^= bit
+        yield coefficients, mask
     assert projective_form_count == 177156
-    assert len(conics) == P * P * (P**3 - 1) == 160930
+    assert nonsingular_count == P * P * (P**3 - 1) == 160930
     assert singular_form_count == 16226
-    assert len({mask for _, mask in conics}) == len(conics)
+    assert len(seen_masks) == nonsingular_count
     assert set(incidence) == {14520}
-    return conics
 
 
 def format_arc(arc: Arc) -> str:
@@ -302,34 +316,53 @@ def main() -> None:
         weighted_histogram[uncovered_mask(canonical_arc).bit_count()] += len(members)
     assert weighted_histogram == Counter(EXPECTED_U_HISTOGRAM)
 
-    conics = nonsingular_conics()
-    rows = []
-    for class_index, canonical_arc in enumerate(sorted(classes), start=1):
-        u_mask = uncovered_mask(canonical_arc)
-        u_size = u_mask.bit_count()
-        maximum_intersection = -1
-        nearest_count = 0
-        witness = None
-        direct_minimum = len(POINTS) + 1
-        direct_nearest_count = 0
-        for coefficients, mask in conics:
+    class_arcs = sorted(classes)
+    states = [
+        {
+            "u_mask": uncovered_mask(canonical_arc),
+            "maximum_intersection": -1,
+            "nearest_count": 0,
+            "witness": None,
+            "direct_minimum": len(POINTS) + 1,
+            "direct_nearest_count": 0,
+        }
+        for canonical_arc in class_arcs
+    ]
+    conic_count = 0
+    for coefficients, mask in nonsingular_conics():
+        conic_count += 1
+        for state in states:
+            u_mask = state["u_mask"]
+            u_size = u_mask.bit_count()
             intersection = (u_mask & mask).bit_count()
             direct_distance = (u_mask ^ mask).bit_count()
             formula_distance = u_size + (P + 1) - 2 * intersection
             assert direct_distance == formula_distance
-            if direct_distance < direct_minimum:
-                direct_minimum = direct_distance
-                direct_nearest_count = 1
-            elif direct_distance == direct_minimum:
-                direct_nearest_count += 1
-            if intersection > maximum_intersection:
-                maximum_intersection = intersection
-                nearest_count = 1
-                witness = coefficients
-            elif intersection == maximum_intersection:
-                nearest_count += 1
+            if direct_distance < state["direct_minimum"]:
+                state["direct_minimum"] = direct_distance
+                state["direct_nearest_count"] = 1
+            elif direct_distance == state["direct_minimum"]:
+                state["direct_nearest_count"] += 1
+            if intersection > state["maximum_intersection"]:
+                state["maximum_intersection"] = intersection
+                state["nearest_count"] = 1
+                state["witness"] = coefficients
+            elif intersection == state["maximum_intersection"]:
+                state["nearest_count"] += 1
+                witness = state["witness"]
                 if witness is None or coefficients < witness:
-                    witness = coefficients
+                    state["witness"] = coefficients
+
+    rows = []
+    for class_index, (canonical_arc, state) in enumerate(
+        zip(class_arcs, states), start=1
+    ):
+        u_size = state["u_mask"].bit_count()
+        maximum_intersection = state["maximum_intersection"]
+        nearest_count = state["nearest_count"]
+        witness = state["witness"]
+        direct_minimum = state["direct_minimum"]
+        direct_nearest_count = state["direct_nearest_count"]
         assert witness is not None
         delta = u_size + (P + 1) - 2 * maximum_intersection
         assert delta == direct_minimum
@@ -361,7 +394,7 @@ def main() -> None:
     print(f"class_multiplicities={multiplicities}")
     print(f"class_stabilizer_orders={stabilizer_orders}")
     print("projective_quadratic_forms=177156")
-    print(f"nonsingular_conics={len(conics)}")
+    print(f"nonsingular_conics={conic_count}")
     print("conic_points_each=12")
     print("conics_through_each_point=14520")
     print("class|normalized_reps|stabilizer|canonical_arc|U_size|delta|nearest_conics|intersection|witness")

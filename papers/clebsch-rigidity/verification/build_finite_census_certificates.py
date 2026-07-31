@@ -217,21 +217,36 @@ def q11_classes() -> tuple[list[Arc], dict[Arc, list[Arc]]]:
 
 
 def conic_metrics(arcs: Sequence[Arc]) -> list[dict[str, object]]:
-    conics = gap.nonsingular_conics()
+    uncovered_masks = [gap.uncovered_mask(arc) for arc in arcs]
+    histograms = [Counter() for _ in arcs]
+    maxima = [-1 for _ in arcs]
+    nearest_counts = [0 for _ in arcs]
+    witnesses: list[tuple[int, ...] | None] = [None for _ in arcs]
+    for coefficients, mask in gap.nonsingular_conics():
+        for index, uncovered in enumerate(uncovered_masks):
+            intersection = (uncovered & mask).bit_count()
+            histograms[index][intersection] += 1
+            if intersection > maxima[index]:
+                maxima[index] = intersection
+                nearest_counts[index] = 1
+                witnesses[index] = coefficients
+            elif intersection == maxima[index]:
+                nearest_counts[index] += 1
+                if witnesses[index] is None or coefficients < witnesses[index]:
+                    witnesses[index] = coefficients
     result = []
-    for arc in arcs:
-        uncovered = gap.uncovered_mask(arc)
-        intersections = Counter((uncovered & mask).bit_count() for _, mask in conics)
-        maximum = max(intersections)
-        witnesses = [coefficients for coefficients, mask in conics if (uncovered & mask).bit_count() == maximum]
+    for uncovered, intersections, maximum, nearest_count, witness in zip(
+        uncovered_masks, histograms, maxima, nearest_counts, witnesses
+    ):
+        assert witness is not None
         result.append(
             {
                 "delta": uncovered.bit_count() + 12 - 2 * maximum,
                 "intersection_histogram": {
                     str(key): value for key, value in sorted(intersections.items())
                 },
-                "nearest_conics": len(witnesses),
-                "witness": list(min(witnesses)),
+                "nearest_conics": nearest_count,
+                "witness": list(witness),
             }
         )
     return result
@@ -339,10 +354,17 @@ def seven_arc_candidates(q: int) -> tuple[list[Point], set[int]]:
 
 def build_seven_arc_orbits(q: int) -> dict[str, object]:
     points, masks = seven_arc_candidates(q)
-    classes: dict[Arc, list[Arc]] = defaultdict(list)
-    for mask in masks:
-        arc = tuple(sorted(points[index] for index in small.indices(mask)))
-        classes[projective_key(arc, q)].append(arc)
+    remaining = {
+        tuple(sorted(points[index] for index in small.indices(mask))) for mask in masks
+    }
+    classes: dict[Arc, list[Arc]] = {}
+    while remaining:
+        seed = min(remaining)
+        orbit = normalized_orbit(seed, q)
+        assert orbit <= remaining
+        representative = min(orbit)
+        classes[representative] = sorted(orbit)
+        remaining.difference_update(orbit)
     records = []
     for index, arc in enumerate(sorted(classes), start=1):
         orbit = normalized_orbit(arc, q)
