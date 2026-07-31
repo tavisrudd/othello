@@ -1772,8 +1772,17 @@
       "last": 729,
       "purpose": "TT follow-ups: intrinsic synchronized-spinor geometry and higher-order extremal conference cuts",
       "sequence": 197
+    },
+    {
+      "count": 1,
+      "first": 730,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 730,
+      "purpose": "strengthen Paper III around the canonical arithmetic-harmonic golden orientation source theorem",
+      "sequence": 198
     }
   ],
-  "next_id": 730,
+  "next_id": 731,
   "schema": "codex-task-id-allocations-v1"
 }
