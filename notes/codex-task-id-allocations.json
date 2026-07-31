@@ -1691,8 +1691,17 @@
       "last": 704,
       "purpose": "test Segre-Igusa and exceptional sisters as functorial shadows of the golden E8 return",
       "sequence": 188
+    },
+    {
+      "count": 1,
+      "first": 705,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 705,
+      "purpose": "C704 WP1 intrinsic adjugate realization of the Segre-Igusa polar map",
+      "sequence": 189
     }
   ],
-  "next_id": 705,
+  "next_id": 706,
   "schema": "codex-task-id-allocations-v1"
 }
