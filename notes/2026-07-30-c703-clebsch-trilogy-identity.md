@@ -4,6 +4,12 @@
 
 **Date:** 2026-07-30
 
+**2026-07-31 refinement:** The shared refrain now sits in small italics
+immediately below each complete title block rather than opening the
+Introduction.  The active Roman numeral and its corresponding clause---takes
+shape, finds its bearings, or stands fixed while its shadows move---are bold.
+No explanatory fine print was added.
+
 ## Verdict
 
 Papers I--III now read unmistakably as a trio under the shared series
