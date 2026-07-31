@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued behind C711
+**Status:** active; C711 interfaces frozen
 
 ## Objective
 

@@ -301,7 +301,8 @@ outer automorphism of \(S_6\), now realized by the coherent cubic-amplitude
 map on the physically optimal phase layer.
 
 The same calculation completes the whole middle-layer harmonic picture.
-The classical multiplicity-free Johnson decomposition is
+The classical harmonic decomposition of the Boolean slice (in the
+Filmus--Mossel normalization) is
 \[
  \mathbf R^{\binom63}=\mathbf1\oplus\mathbf5\oplus\mathbf9\oplus\mathbf5'.
 \]

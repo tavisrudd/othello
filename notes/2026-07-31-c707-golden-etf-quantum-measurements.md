@@ -104,6 +104,18 @@ recent primary source was available only at abstract/metadata depth.
    protocol.  DOI 10.1103/PhysRevA.111.012430.
    Source: https://journals.aps.org/pra/abstract/10.1103/PhysRevA.111.012430.
 
+5. Yuval Filmus and Elchanan Mossel, *Harmonicity and invariance on slices
+   of the Boolean cube*.  **Read depth:** partial, arXiv version, Sections
+   3.1--3.2 and 9.1.  The canonical harmonic representation, its orthogonal
+   homogeneous pieces, and
+   \(\dim H_d=\binom nd-\binom n{d-1}\) supply the classical
+   \(1+5+9+5\) decomposition of functions on the \((6,3)\) slice.  C707's
+   new input is not that decomposition, but the identification of its two
+   five-spaces with path signs and cubic outer-amplitude signs.  Cache key
+   arXiv:1507.02713, SHA-256
+   05e249d4ef881fb30d21d88eca85e61c2fd2b9207cbd7c320cc8af2ffd3c6586.
+   Source: https://arxiv.org/abs/1507.02713.
+
 The exact orientation queries were:
 
 - "Joubert cubic" "equiangular tight frame";

@@ -208,7 +208,7 @@ Full report:
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | complete; two-graph flux and chiral commutator family survive, quadratic refinement and intrinsic spin structure do not | none |
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 | [C711 — Paper III sub-700 human proofs](../clebsch-tasks/c711-paper-iii-sub700-human-proofs.md) | complete; seven certificate-independent proofs, per-proof Tao checks, and frozen interfaces | none |
-| [C712 — Paper III sub-700 Lean](../clebsch-tasks/c712-paper-iii-sub700-lean.md) | queued; unblocked by C711 | formalize the accepted C711 theorem package and produce the paper-facing trust map |
+| [C712 — Paper III sub-700 Lean](../clebsch-tasks/c712-paper-iii-sub700-lean.md) | active; C711 interfaces frozen | formalize the accepted C711 theorem package and produce the paper-facing trust map |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
