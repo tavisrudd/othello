@@ -87,6 +87,15 @@ particular:
   locus.  On the resolved Gauss map, its fifteen singular lines have fibres
   given by strict transforms of conics through four Segre base nodes; these
   degenerate to six-line fibre closures at the fifteen triple-line points.
+- C729 is active.  Its opening theorem separates the \(6\to10\) construction
+  into simplex linear algebra, golden sign rigidity, and functorial descent.
+  Sign integrality forces the columns to be all ten balanced cuts, and every
+  order-ten sign Gram factor is equivalent to this universal factor under
+  the natural row and column monomial actions.  The 36 extremal order-ten
+  cuts form the single \(S_6/F_{20}\) orbit, canonically the same \(S_6\)-set
+  as the C708 involutory polarities.  Their halves form a
+  \(2\text{-}(10,5,16)\) design and their sign lines a biangular tight frame
+  in dimension nine, so the direct Gram-to-conference iteration stops.
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
@@ -107,7 +116,7 @@ manuscript edit is authorized by C727.
 | task | state | next gate |
 |---|---|---|
 | [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
-| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | queued after C720; sequel direction | intrinsicize the \(6\to10\) conference lift, classify the 36 extremal order-ten cuts, and test for a functorial tower |
+| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | active; factorization and 36-cut design proved | determine whether a derived relation/eigenspace of the polarity design restores an integral simplex factor |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
@@ -116,13 +125,13 @@ manuscript edit is authorized by C727.
 
 ## Recommended order
 
-1. C728 intrinsic synchronized-spinor audit.
-2. C715 anomaly inverse.
-3. C717 and C718, chosen by theorem yield after C715's first gate.
-4. C716 only after the inverse interface freezes.
-5. C719 after the mathematical paper spine is secure.
-6. C729 only as a sequel unless its first theorem feeds back into the
-   present paper.
+1. Complete C729's bounded derived-association gate now that the direct
+   \(36\)-line Gram iteration is proved biangular rather than conference.
+2. C728 intrinsic synchronized-spinor audit.
+3. C715 anomaly inverse.
+4. C717 and C718, chosen by theorem yield after C715's first gate.
+5. C716 only after the inverse interface freezes.
+6. C719 after the mathematical paper spine is secure.
 
 ## Ownership and allowed paths
 
