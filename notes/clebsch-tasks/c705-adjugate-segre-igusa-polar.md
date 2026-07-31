@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-30
 
-**Status:** in progress
+**Status:** complete
 
 ## Objective
 
@@ -186,11 +186,19 @@ genus-two branch sextic has Galois group \(S_6\).  Hence the Rains--Sam
 one-Weierstrass marking lives first over degree \(6\), and C704's ordered
 Joubert marking lives on the degree-\(720\) splitting torsor.  The strict
 comparison is possible there, but an ordered equality over \(\mathbf Q\)
-is not defined.  The remaining gate is the explicit \(S_6\)-equivariant
-splitting-algebra comparison.  Exact arithmetic report:
+is not defined.  Exact arithmetic report:
 `notes/2026-07-30-c705-burkhardt-e8-marking.md`.
 Alternative attacks:
 `notes/2026-07-30-c705-lie-e8-alt-attacks.md`.
+
+The intrinsic version of that final gate is now closed negatively.  A
+stable Vinberg trivector marks one Weierstrass point, whereas the frozen
+Joubert tensor orders all six.  Over the degree-six root field the other
+five retain full \(S_5\) monodromy, so no canonical ordering can be
+recovered.  Full level-\(2\) marking, equivalently the residual
+degree-\(120\) splitting cover, is the minimal positive repair.  A
+sheetwise equality there is choice-dependent and is not an intrinsic
+C705 assertion.
 
 ## Mining subtask — Pauli-doily shadow
 

@@ -127,6 +127,126 @@ def primitive_integer_polynomial(poly):
     return [coefficient // content for coefficient in integers]
 
 
+def quotient_reduce(poly, modulus):
+    """Reduce a Q-polynomial modulo modulus, both in ascending order."""
+    work = list(poly)
+    modulus = list(map(Fraction, modulus))
+    while len(work) >= len(modulus):
+        scalar = work[-1] / modulus[-1]
+        shift = len(work) - len(modulus)
+        for i, value in enumerate(modulus):
+            work[i + shift] -= scalar * value
+        trim(work)
+    return work + [Fraction(0)] * (len(modulus) - 1 - len(work))
+
+
+def quotient_multiply(left, right, modulus):
+    return quotient_reduce(multiply(left, right), modulus)
+
+
+def quotient_power(base, exponent, modulus):
+    result = [Fraction(1)]
+    while exponent:
+        if exponent & 1:
+            result = quotient_multiply(result, base, modulus)
+        base = quotient_multiply(base, base, modulus)
+        exponent //= 2
+    return quotient_reduce(result, modulus)
+
+
+def derivative(poly, order=1):
+    result = list(map(Fraction, poly))
+    for _ in range(order):
+        result = [i * result[i] for i in range(1, len(result))]
+    return result
+
+
+def quotient_scale(poly, scalar, modulus):
+    return quotient_reduce([scalar * value for value in poly], modulus)
+
+
+def quotient_add(left, right, modulus):
+    return quotient_reduce(add(left, right), modulus)
+
+
+def marked_vinberg_coefficients(branch):
+    """Rains--Sam coefficients after choosing the root r and sending it to infinity."""
+    modulus = list(map(Fraction, branch))
+    r = [Fraction(0), Fraction(1)]
+    derivatives = {
+        order: quotient_reduce(derivative(modulus, order), modulus)
+        for order in range(1, 7)
+    }
+    d = derivatives[1]
+    coefficients = {
+        6: quotient_scale(derivatives[2], Fraction(-1, 2), modulus),
+        12: quotient_scale(
+            quotient_multiply(d, derivatives[3], modulus),
+            Fraction(1, 6),
+            modulus,
+        ),
+        18: quotient_scale(
+            quotient_multiply(quotient_power(d, 2, modulus), derivatives[4], modulus),
+            Fraction(-1, 24),
+            modulus,
+        ),
+        24: quotient_scale(
+            quotient_multiply(quotient_power(d, 3, modulus), derivatives[5], modulus),
+            Fraction(1, 120),
+            modulus,
+        ),
+        30: quotient_scale(
+            quotient_multiply(quotient_power(d, 4, modulus), derivatives[6], modulus),
+            Fraction(-1, 720),
+            modulus,
+        ),
+    }
+
+    # Verify t^6 f(r-f'(r)/t)/f'(r)^2 =
+    # -t^5-c6*t^4-c12*t^3-c18*t^2-c24*t-c30 in Q[r]/(f)[t].
+    transformed = [[Fraction(0)] * 6 for _ in range(7)]
+    for index, coefficient in enumerate(modulus):
+        for chosen in range(index + 1):
+            r_power = quotient_power(r, index - chosen, modulus)
+            d_power = quotient_power(
+                quotient_scale(d, -1, modulus), chosen, modulus
+            )
+            term = quotient_multiply(r_power, d_power, modulus)
+            term = quotient_scale(
+                term,
+                Fraction(coefficient * __import__("math").comb(index, chosen)),
+                modulus,
+            )
+            transformed[6 - chosen] = quotient_add(
+                transformed[6 - chosen], term, modulus
+            )
+    # Divide by f'(r)^2 using the predicted identity without field inversion:
+    # compare D^2 times the claimed RHS with the unscaled numerator.
+    d_squared = quotient_power(d, 2, modulus)
+    claimed = {
+        5: quotient_scale(d_squared, -1, modulus),
+        4: quotient_scale(
+            quotient_multiply(d_squared, coefficients[6], modulus), -1, modulus
+        ),
+        3: quotient_scale(
+            quotient_multiply(d_squared, coefficients[12], modulus), -1, modulus
+        ),
+        2: quotient_scale(
+            quotient_multiply(d_squared, coefficients[18], modulus), -1, modulus
+        ),
+        1: quotient_scale(
+            quotient_multiply(d_squared, coefficients[24], modulus), -1, modulus
+        ),
+        0: quotient_scale(
+            quotient_multiply(d_squared, coefficients[30], modulus), -1, modulus
+        ),
+    }
+    assert transformed[6] == [Fraction(0)] * 6
+    for degree in range(6):
+        assert transformed[degree] == claimed[degree]
+    return coefficients
+
+
 def compute():
     a0, *coordinates = map(Fraction, ALPHA)
     a1, a2, a3, a4 = [coordinate / a0 for coordinate in coordinates]
@@ -181,6 +301,7 @@ def compute():
         17: [6],
         1303: [1, 1, 1, 1, 2],
     }
+    vinberg = marked_vinberg_coefficients(primitive)
 
     return {
         "schema": "c705-burkhardt-e8-marking-v1",
@@ -205,6 +326,19 @@ def compute():
         "rational_weierstrass_point": False,
         "one_weierstrass_point_degree": 6,
         "ordered_weierstrass_torsor_degree": 720,
+        "marked_root_field": (
+            "K=Q[r]/(f_alpha(r)); use t=-f_alpha'(r)/(x-r) and "
+            "X=y*t^3/f_alpha'(r)"
+        ),
+        "rains_sam_coefficients_in_power_basis_1_r_through_r5": {
+            f"c{weight}": [str(value) for value in vinberg[weight]]
+            for weight in (6, 12, 18, 24, 30)
+        },
+        "stable_trivector": (
+            "[267]+[258]+[348]+[169]+[357]+[249]+[178]+[456]"
+            "-c6[247]-c12[147]+c18[145]+c24[134]+c30[123]"
+        ),
+        "stable_trivector_field": "K, degree 6 over Q",
         "strict_lie_e8_verdict": (
             "possible after base change to the S6 ordered-Weierstrass torsor; "
             "not defined over Q for this frozen Burkhardt point"

@@ -58,18 +58,20 @@ Clebsch items.  Each promoted package is a no-early-bail exploration with
 distinct `ej1`, `tt1`, `ej2`, and `tt2` passes before closeout.  Negative
 outcomes are first-class mining objects and require a structural
 obstruction theorem plus their nearest positive locus and adjacent crown.
-C705 now executes the first tranche's adjugate-polar package under those
+C705 has completed the first tranche's adjugate-polar package under those
 rules.  Its Coble conormal scalar is lifted exactly to characteristic zero:
 in determinant-valued normalization the inverse-polar scalar is the source
 Hessian determinant.  Its common affine-\(E_8\) parent is also exact.
 A genuine Lie-\(E_8\) ambient Coble route is feasible.  The frozen
 Burkhardt branch sextic has exact Galois group \(S_6\), so its one-point
 Vinberg marking first exists over degree \(6\), while the ordered Joubert
-marking lives on the degree-\(720\) splitting torsor.  The next gate is
-the explicit \(S_6\)-equivariant comparison there; a strict ordered
-equality over \(\mathbf Q\) is not defined.  Exact report:
+marking lives on the degree-\(720\) splitting torsor.  Over the one-point
+field the remaining five points have full \(S_5\) monodromy, which closes
+intrinsic ordered recovery negatively; full level-\(2\) marking is the
+exact optional repair.  Exact report:
 `notes/2026-07-30-c705-burkhardt-e8-marking.md`.  The
-marked-double-six package remains unallocated pending the C705 verdict.
+marked-double-six package remains unallocated pending an explicit
+promotion decision.
 
 ## Active and queued task cards
 
@@ -79,7 +81,7 @@ marked-double-six package remains unallocated pending the C705 verdict.
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
-| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | in progress; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, and common affine-\(E_8\) mixed potential proved; the frozen branch sextic has Galois group \(S_6\); ordinary contextuality cocycle negative | verify the sheetwise Joubert equality on the degree-\(720\) ordered-Weierstrass torsor and descend it \(S_6\)-equivariantly |
+| [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, and common affine-\(E_8\) mixed potential proved; genuine Lie-\(E_8\) parent positive, intrinsic ordered marking obstructed by the residual \(S_5\)-torsor | none; full level-\(2\) marking is the exact optional sheetwise repair |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | queued after C705 ordinary-gauge comparison | compute the Clifford multiplier and equivariant gauge obstruction |
 | [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | queued | compute exact code parameters and compare the \(2,3,5\) rank jumps |

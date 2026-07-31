@@ -90,25 +90,98 @@ This has three precise consequences.
    cannot be compared as an ordered tensor over \(\mathbf Q\); only its
    \(S_6\)-descent, such as the Segre--Igusa point, is rational.
 
+## Explicit marked Vinberg trivector
+
+The degree-six statement is constructive, not just existential.  Put
+\[
+ K=\mathbf Q[r]/(f_\alpha(r)),\qquad D=f_\alpha'(r).
+\]
+The change of variables
+\[
+ t=-\frac{D}{x-r},\qquad X=\frac{y\,t^3}{D}
+\]
+sends the chosen branch point \(r\) to infinity without adjoining a square
+root.  Direct expansion in \(K[t]\) gives
+\[
+ X^2+t^5+c_6t^4+c_{12}t^3+c_{18}t^2+c_{24}t+c_{30}=0,
+\]
+where
+\[
+\begin{aligned}
+c_6&=-\frac12f_\alpha''(r),&
+c_{12}&=\frac16D f_\alpha'''(r),\\
+c_{18}&=-\frac1{24}D^2f_\alpha^{(4)}(r),&
+c_{24}&=\frac1{120}D^3f_\alpha^{(5)}(r),\\
+c_{30}&=-\frac1{720}D^4f_\alpha^{(6)}(r).
+\end{aligned}
+\]
+These are exactly the coefficients in Rains--Sam's characteristic-zero
+normal form.  Consequently the frozen curve has the explicit stable
+trivector over \(K\)
+\[
+\begin{split}
+\gamma_r={}&[267]+[258]+[348]+[169]+[357]+[249]+[178]+[456]\\
+&-c_6[247]-c_{12}[147]+c_{18}[145]+c_{24}[134]+c_{30}[123].
+\end{split}
+\]
+The certificate records each \(c_i\) in the power basis
+\(1,r,\ldots,r^5\) and verifies the root-to-infinity identity
+coefficientwise in \(K[t]\).  Rains--Sam Proposition 2.13 makes
+\(\gamma_r\) stable because the branch sextic is square-free.
+
 This also explains why the ambient Coble construction and its rational
 \(\tau_+\) section can agree over \(\mathbf Q\) while a literal ordered
 Joubert-coordinate equality does not: the latter asks for strictly more
 marking data.
 
-## What remains
+## Intrinsic obstruction and positive repair
 
-The next exact gate is now finite and correctly based:
+The stable trivector does not itself supply the full ordering.  The
+forgetful map
+\[
+ \{\text{ordered six Weierstrass points}\}\longrightarrow
+ \{\text{one marked Weierstrass point}\}
+\]
+is an \(S_5\)-torsor.  Since the frozen sextic has Galois group \(S_6\),
+the normal closure over \(K=\mathbf Q(r)\) has Galois group
+\(\operatorname{Stab}_{S_6}(r)=S_5\).  Thus the remaining five points
+cannot be ordered over \(K\), and no functorial rule using the rational
+Burkhardt level-\(3\) data can produce C704's ordered Joubert marking.
+Indeed, that level-\(3\) data is already rational while the level-\(2\)
+ordering has the certified full \(S_6\) monodromy.
+
+This is the minimal obstruction.  The exact positive repair is to add full
+level-\(2\) structure, equivalently to pass from \(K\) to the residual
+degree-\(120\) ordered splitting torsor.  On a chosen sheet one may:
 
 - work in the splitting algebra of the displayed sextic;
 - choose an ordering \(r_1,\ldots,r_6\);
 - evaluate C704's six Joubert cubics \(Z_T(r_1,\ldots,r_6)\);
 - compare their centered squares with the Igusa coordinates obtained from
   the tangent/polar construction at \(\alpha\);
-- verify \(S_6\)-equivariance, so the result descends independently of the
-  chosen sheet.
+- verify \(S_6\)-equivariance, so the unordered polar diagram descends
+  independently of the chosen sheet.
 
-No new Lie-theoretic ambient is needed for this gate.  A purported
+That computation can compare chosen coordinates, but it cannot upgrade
+them to an intrinsic ordered parent: changing the sheet acts by the full
+residual \(S_5\).  No new Lie-theoretic ambient is needed, and a purported
 \(\mathbf Q\)-valued ordered equality would be incorrectly posed.
+
+## `ej` + `tt` closeout
+
+The cheap extra-juice gain is that the marked Vinberg representative needs
+no accidental quadratic extension: scaling the root-to-infinity
+coordinate by \(-f_\alpha'(r)\) makes the quintic leading coefficient
+exactly \(-1\).  Thus degree \(6\), rather than a loose degree-\(12\)
+bound, is sharp for the one-point normal form.
+
+The structural closeout separates two moduli problems that coordinates can
+blur.  Burkhardt supplies level-\(3\) data; ordered Weierstrass points are
+full level-\(2\) data.  The certified \(S_6\) monodromy proves that the
+former does not secretly trivialize the latter.  After one point is
+chosen, the exact defect is the stabilizer \(S_5\), not an unexplained
+normalization scalar or a missing \(E_8\) representation.  This settles
+the intrinsic claim and identifies its minimal positive locus.
 
 ## Literature boundary
 
@@ -141,11 +214,13 @@ python3 notes/2026-07-30-c705-burkhardt-e8-marking-replay.py
 ```
 
 The first script uses exact rational arithmetic to specialize the universal
-curve and Rabin/Frobenius gcd tests to recover the three modular
-factor-degree patterns.  The independent replay uses exhaustive trial
-division through half the degree at \(p=17\), a separate trial-division
-check at \(p=7\), and explicit linear divisions plus the quadratic
-discriminant at \(p=1303\).
+curve, Rabin/Frobenius gcd tests to recover the three modular factor-degree
+patterns, and arithmetic in \(\mathbf Q[r]/(f_\alpha)\) to construct and
+verify the marked Vinberg normal form.  The independent replay uses
+exhaustive trial division through half the degree at \(p=17\), a separate
+trial-division check at \(p=7\), explicit linear divisions plus the
+quadratic discriminant at \(p=1303\), and a separately coded normal-form
+identity in \(\mathbf F_{17}[r]/(f_\alpha)\).
 
 Checksums are recorded in
 `notes/2026-07-30-c705-burkhardt-e8-marking.sha256`.
@@ -157,9 +232,11 @@ Checksums are recorded in
   Weierstrass cover.
 - **Settled:** why the ordered tensor was not visible over \(\mathbf Q\).
   The branch polynomial has full \(S_6\) Galois group.
-- **Open:** the explicit sheetwise equality between the Vinberg-derived
-  marking and C704's Joubert tensor.  Its exact evidence gate is the
-  splitting-algebra computation above.
-- **Open:** whether that sheetwise calculation yields a shorter
-  coordinate-free descent statement.  This remains owned by C705 after
-  the finite comparison, not by a new ambient-Lie task.
+- **Settled:** whether the degree-six field merely proves existence.  No:
+  the displayed derivative formulas give the stable trivector explicitly.
+- **Settled negatively:** a Vinberg one-point marking cannot intrinsically
+  recover C704's ordered tensor; the residual torsor has full group
+  \(S_5\).
+- **Settled:** the nearest positive locus is full level-\(2\) marking, a
+  residual degree-\(120\) base change.  Any sheetwise coordinate equality
+  there is a chosen trivialization, not missing intrinsic C705 structure.

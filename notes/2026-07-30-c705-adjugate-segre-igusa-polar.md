@@ -4,11 +4,11 @@
 
 **Lane:** `clebsch`
 
-**Status:** main gates complete; negative raw-adjugate gate, positive
+**Status:** complete; negative raw-adjugate gate, positive
 compound/Jacobian adjugate theorem, exact boundary and inverse geometry,
-and common \(E_6\) and affine-\(E_8\) operator parents proved; a genuine
-Lie-\(E_8\) ambient route is feasible, with its marked operator comparison
-open.
+and common \(E_6\) and affine-\(E_8\) operator parents proved; the genuine
+Lie-\(E_8\) ambient route is feasible, while intrinsic recovery of its
+ordered Joubert marking is obstructed by the residual \(S_5\)-torsor.
 
 ## Outcome
 
@@ -229,6 +229,20 @@ Exact report:
 `notes/2026-07-30-c705-burkhardt-e8-marking.md`.
 Alternative attacks and sources:
 `notes/2026-07-30-c705-lie-e8-alt-attacks.md`.
+
+This also closes the intrinsic marking question.  Rains--Sam's stable
+trivector determines a curve with one marked Weierstrass point.  C704's
+frozen Joubert tensor requires an ordering of all six.  The forgetful map
+from an ordered marking to one marked point is an \(S_5\)-torsor.  For the
+frozen specialization the branch Galois group is \(S_6\), so after
+adjoining one root the remaining monodromy is the full point stabilizer
+\(S_5\).  Hence neither the rational level-\(3\) Burkhardt data nor the
+degree-six marked trivector canonically orders the remaining five points.
+The nearest positive repair is exact: add full level-\(2\) marking, or
+base-change a further degree \(120\) to the ordered splitting torsor.
+There the sheetwise comparison is possible but choice-dependent.  Thus
+the genuine Lie-\(E_8\) parent exists, while the stronger *intrinsic*
+ordered-parent claim is false.
 
 The genus-two Coble cubic/sextic gives a second, classically known
 ambient parent, but its operator taxonomy differs.  Nguyen's
@@ -506,7 +520,7 @@ placed in the mystery ledger below.
 | Whether the third-compound presentation is already classical | open: no formula match was found in the proportional audit, but originals and a formula-level modern sweep remain incomplete | WP11 before any priority claim |
 | Whether the sister diagram has a common exceptional parent | settled globally at operator level: the surviving and \(Q\)-normal halves of Yoshida's ten-dimensional \(W(E_6)\) system are the Segre and Igusa polar spaces, with \(M\nabla S=-2f\); the raw jet's canonical \(B_3\) factor accounts for the compactification twist | none |
 | Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | settled for the specific affine-\(E_8\) paired-McKay package: the degree-ten return reconstructs the cubic tensor \(Z\), whose universal potential has mixed Hessian \(A\) and null projections \(q,W\) | no Lie-\(E_8\) root-representation claim is made |
-| Whether the same package has a genuine Lie-\(E_8\) parent | ambient feasibility is positive through the Vinberg \(\bigwedge^3 9\) trivector and Coble fixed section | match the trivector's ordered Weierstrass marking to C704's frozen Joubert tensor |
+| Whether the same package has a genuine Lie-\(E_8\) parent | settled sharply: the ambient Vinberg \(\bigwedge^3 9\) parent exists over the degree-six one-Weierstrass field, but intrinsic ordered Joubert recovery is impossible because the remaining marking is a full \(S_5\)-torsor | full level-\(2\) marking / the residual degree-\(120\) cover is the exact positive repair; no C705 gap remains |
 | Marked equality with C695's double-six | untouched by design | future WP2 |
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
 | Whether the \(15/10/6\) geometry is the two-qubit Pauli doily | settled exactly: duads, synthemes, \(3+3\) partitions, and stars give points, contexts, ten grids, and six ovoids | none |
