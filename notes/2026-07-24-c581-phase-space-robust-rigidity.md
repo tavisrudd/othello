@@ -47,8 +47,8 @@ ambient prime-field phase-space rigidity, not robust exact reconstruction.
 
 ## 1. Quantitative diagonal-axis lemma
 
-Let \(E_1,\ldots,E_r\), \(r\geq3\), be complex Hilbert spaces with
-orthonormal \(N\)-frames \(e_{i1},\ldots,e_{iN}\), and put
+Let \(E_1,\ldots,E_r\), \(r\geq3\), be \(N\)-dimensional complex Hilbert
+spaces with orthonormal bases \(e_{i1},\ldots,e_{iN}\), and put
 
 \[
  T=a\sum_{j=1}^N\lambda_j e_{1j}\otimes\cdots\otimes e_{rj},
@@ -82,13 +82,18 @@ gives singular values
 \]
 
 Eckart--Young says that the sum of squares outside the largest coefficient
-is at most \(\delta^2\). Since \(1-\delta^2>1/2\), two orthogonal rows cannot
-choose the same dominant column, so the choices form a permutation. Applying
-the same argument to the inverse equivalence gives the columnwise estimate,
-and \(2(1-\sqrt{1-\delta^2})\leq2\delta^2\) gives (C581.5). This is C560's
+is at most \(\delta^2\). Completeness of the source basis and unitarity of
+\(A_1\) give total squared row mass one, so the dominant coefficient has
+square at least \(1-\delta^2>1/2\). Two orthogonal rows cannot choose the
+same dominant column; since the overlap matrix is square, the choices form a
+permutation. Every matched column contains that same coefficient of square
+at least \(1-\delta^2\), and its total squared mass is also one. Hence its
+off-axis mass is at most \(\delta^2\), and
+\(2(1-\sqrt{1-\delta^2})\leq2\delta^2\) gives (C581.5). This is C560's
 rank-one proof with its discarded singular values retained. With unequal
-nonzero coefficients, the same proof replaces \(a\) by the smallest
-magnitude; that is the exact conditioning parameter.
+nonzero coefficients in two complete decompositions, the same proof uses
+the smallest coefficient magnitude of either tensor as the conditioning
+parameter.
 
 ## 2. From approximate axes to an exact Clifford
 
@@ -97,16 +102,23 @@ Use normalized Hilbert--Schmidt distance
 every Weyl axis within \(\kappa=\sqrt2\delta\) of a uniquely matched Weyl
 axis.
 
-Applying conjugation to a Weyl product in two ways shows that distinct
-candidate labels would be at distance at most \(3\kappa\), whereas distinct
-Weyl axes have phase-minimized distance \(\sqrt2\). Thus \(\delta<1/3\)
-forces the label permutation to be additive. Conjugation preserves Weyl
-commutators exactly. Replacing the four factors of a commutator by their
-matched axes costs at most \(4\kappa\), while distinct \(p\)-th-root
+Extend the matched-label permutation by \(\pi(0)=0\), with the identity axis
+matched exactly. Applying conjugation to a Weyl product in two ways shows
+that the axes labelled by \(\pi(v+w)\) and \(\pi(v)+\pi(w)\) are at distance
+at most \(3\kappa\). This includes \(v+w=0\): the identity comparison then
+costs only \(2\kappa\). Distinct Weyl axes, including the identity versus a
+nonidentity Weyl, have phase-minimized distance \(\sqrt2\). Thus
+\(\delta<1/3\) forces
+\[
+ \pi(v+w)=\pi(v)+\pi(w)
+\]
+for all labels. The original nonzero-label matching was a permutation, so
+this additive bijection is \(\mathbb F_p\)-linear. Conjugation preserves
+Weyl commutators exactly. Replacing the four factors of a commutator by
+their matched axes costs at most \(4\kappa\), while distinct \(p\)-th-root
 commutator phases are separated by \(2\sin(\pi/p)\). Hence
-\(\delta<\sin(\pi/p)/(2\sqrt2)\) forces the additive label permutation to
-preserve the prime-field symplectic form. It is realized by an exact
-Clifford \(K\).
+\(\delta<\sin(\pi/p)/(2\sqrt2)\) forces \(\pi\) to preserve the prime-field
+symplectic form. It is therefore realized by an exact Clifford \(K\).
 
 It remains to control phases, not merely axes. Put \(V=K^\dagger U\) and
 expand \(V=\sum_xc_xW_x\), with \(\sum_x|c_x|^2=1\). Axis closeness implies
