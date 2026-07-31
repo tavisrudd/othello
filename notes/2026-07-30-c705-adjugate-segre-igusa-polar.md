@@ -327,6 +327,7 @@ placed in the mystery ledger below.
 | Meaning of the twenty pulled-back base planes | settled: triple-collision GIT boundary, paired over ten nodes | none |
 | Meaning of the factor \(6\) | settled integrally; it is the normalization coupling the two centered-square maps and causes the \(2,3\) rank collapse | a refined integral moduli model belongs to future WP5 |
 | Whether the third-compound presentation is already classical | open: no formula match was found in the proportional audit, but originals and a formula-level modern sweep remain incomplete | WP11 before any priority claim |
+| Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | open: the common outer-\(S_6\) descent and rank-one adjugate are strong internal evidence, while the checked Segre/Igusa automorphic models use \(A_2\)- and type-IV lattices rather than an explicit common \(E_8\) lift | C705 common-\(E_8\) shadow-source mining subtask; require a simultaneous branching and parent contraction, or record the first obstruction and nearest \(E_6/A_2/S_6\) repair |
 | Marked equality with C695's double-six | untouched by design | future WP2 |
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
 

@@ -41,6 +41,30 @@ Segre--Igusa diagram.  Do not recompute their discovery history.
   planes.
 - Express the inverse Igusa-to-Segre map in the same operator language.
 
+## Mining subtask — common \(E_8\) shadow source
+
+Test whether the two polar five-spaces and their intertwiner are projections
+of the same \(E_8\)-level object, rather than merely meeting after descent to
+the exceptional outer action of \(S_6\).
+
+1. Fix the exact \(E_8\) linkage already used for the Clebsch operator and
+   branch it far enough to locate both outer five-dimensional \(S_6\)
+   carriers simultaneously.
+2. Search for one parent invariant, tensor, or differential whose two
+   projections give \(q\) and \(W\), and whose mixed contraction gives
+   \(A\) (hence explains \(\operatorname{adj}(A)=6Wq^{\mathsf T}\)).
+3. Test whether the ten nodes, fifteen planes/lines, and bad-characteristic
+   behavior are images of root-subsystem or discriminant strata upstairs.
+4. Treat failure as evidence: identify the first incompatible branching or
+   Hom space, and determine whether the nearest common source is instead
+   \(E_6\), an \(A_2\)-lattice/Borcherds construction, or only outer
+   \(S_6\).
+
+The positive naming gate is an explicit common lift of \(q,W,A\); shared
+\(S_6\) symmetry or membership in the same automorphic ecosystem is not
+enough.  Until that gate passes, “\(E_8\) shadow sisters” remains a
+conjectural strengthening of the proved “Clebsch shadow sisters.”
+
 ## Required closeout
 
 No first-gate closure is allowed.  Run distinct `ej1`, `tt1`, `ej2`, and
