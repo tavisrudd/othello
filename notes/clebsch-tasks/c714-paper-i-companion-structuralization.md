@@ -4,9 +4,8 @@
 
 **Opened:** 2026-07-31
 
-**Status:** active umbrella; C721--C724 complete, with the surviving finite
-boundary frozen for C725. C713 is complete, so the Paper I statement surface
-is fixed.
+**Status:** active umbrella; C721--C725 complete and the full finite boundary
+is frozen. C726 is the remaining integration and trust-closeout phase.
 
 ## Objective
 
@@ -73,8 +72,9 @@ C723 q13 weight-ten profiles --------------------------> C725 terminal orbit DAG
 - C724 is complete: the q11 census and q11/q13 seven-arc leaves are compressed
   to orbit masses, concurrence data, and local determinant witnesses, with the
   full normalized enumerations retained as audits.
-- C725 begins only after C723 and C724 have frozen the surviving finite
-  boundary.
+- C725 is complete: the q13/q17/q19 terminal classifications are root-edge
+  orbit DAGs with independent ordered backtracking, and the final
+  claim-to-proof-mode manifest is frozen.
 - C726 is the only closeout card: it integrates adopted arguments, formalizes
   the claimed granularity, refreshes trust surfaces, and closes C714.
 

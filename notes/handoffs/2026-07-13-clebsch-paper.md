@@ -227,7 +227,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | external publication deferred behind C714 | after C714 passes the synchronized release gates, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
-| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | active; C721--C724 complete with the q11/q13 finite boundary minimized | freeze the terminal passant-orbit boundary through C725, then integrate through C726 |
+| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | active; C721--C725 complete and the final finite boundary frozen | integrate the structural and finite leaves, align trust modes, and close through C726 |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | focused revision waits on C730; C711/C712 source package complete | integrate the C730 source theorem, align the paper-owned trust surface, and run fresh release gates |
 | [C730 — Paper III orientation source](../clebsch-tasks/c730-paper-iii-orientation-source-theorem.md) | queued; precedes C680 integration | identify the incidence, golden-orientation, cubic-line, and harmonic realizations with exact involutions and integral boundary |
@@ -385,6 +385,17 @@ full normalized enumerations remain byte-identical audits, and the failed
 first-order LP is frozen at the exact smaller-pencil optimum.  C725 inherits
 these finite proof objects.  Full report:
 `notes/2026-07-31-c724-paper-i-finite-census-compression.md`.
+C725 is complete.  All q13/q17/q19 passant edges split into 10/13/15
+projective root orbits, and their complete root-stabilizer extension DAGs have
+604/4,442/11,260 nodes.  Every transition orbit, rooted/global mass identity,
+and per-point terminal blocker assignment is directly checked.  The maximum
+six-arcs form 2/22/94 projective orbits with 546/50,184/395,124 labelled
+representatives and explicit witnesses.  A separately specified
+increasing-index backtracker reproduces every labelled level without group
+actions or canonical keys, while the older C++/discriminant replay remains a
+third check.  The final C723/C724/C611 claim-to-proof-mode manifest is frozen
+for C726; no all-field theorem is claimed.  Full report:
+`notes/2026-07-31-c725-terminal-passant-orbit-dag.md`.
 C611 is complete.  At q=17 and q=19 the maximal passant six-arcs form
 respectively 22 and 94 projective orbits, all with empty extension sets.
 Pair inner distributions distinguish every q=17 orbit and 92 of 94 q=19

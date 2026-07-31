@@ -4,7 +4,11 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued after C723 and C724; C714 phase 5/6.
+**Status:** complete and reported 2026-07-31; final finite boundary frozen for
+C726.
+
+**Report:**
+[`2026-07-31-c725-terminal-passant-orbit-dag.md`](../2026-07-31-c725-terminal-passant-orbit-dag.md)
 
 ## Objective
 
@@ -37,4 +41,3 @@ of a search.
 Do not infer an all-q exterior-set theorem, enlarge the field range, or revive
 the failed first-order LP. Deliver the final claim-to-proof-mode ledger and
 certificate manifest to C726.
-

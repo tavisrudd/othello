@@ -1,0 +1,155 @@
+{
+  "fields": [
+    {
+      "independent_witness": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          9
+        ],
+        [
+          1,
+          5,
+          6
+        ],
+        [
+          1,
+          9,
+          4
+        ],
+        [
+          1,
+          12,
+          3
+        ]
+      ],
+      "labelled_arcs_by_size": [
+        7098,
+        71526,
+        123123,
+        15288,
+        546
+      ],
+      "labelled_terminal_arcs_by_size": [
+        0,
+        0,
+        65793,
+        12012,
+        546
+      ],
+      "maximum_passant_arc_size": 6,
+      "q": 13
+    },
+    {
+      "independent_witness": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          4,
+          2
+        ],
+        [
+          1,
+          6,
+          8
+        ],
+        [
+          1,
+          9,
+          4
+        ]
+      ],
+      "labelled_arcs_by_size": [
+        20808,
+        390048,
+        1555296,
+        913104,
+        50184
+      ],
+      "labelled_terminal_arcs_by_size": [
+        0,
+        0,
+        54468,
+        668304,
+        50184
+      ],
+      "maximum_passant_arc_size": 6,
+      "q": 17
+    },
+    {
+      "independent_witness": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          7
+        ],
+        [
+          1,
+          6,
+          3
+        ],
+        [
+          1,
+          7,
+          4
+        ],
+        [
+          1,
+          10,
+          9
+        ]
+      ],
+      "labelled_arcs_by_size": [
+        32490,
+        782325,
+        4301220,
+        3962412,
+        395124
+      ],
+      "labelled_terminal_arcs_by_size": [
+        0,
+        0,
+        56430,
+        2145708,
+        395124
+      ],
+      "maximum_passant_arc_size": 6,
+      "q": 19
+    }
+  ],
+  "schema": "clebsch-c725-ordered-backtracking-replay-v1"
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "clebsch-c725-final-finite-boundary-v1",
+  "claims": [
+    {
+      "id": "q11-six-arc-census-and-numerical-gap",
+      "mode": "orbit-mass-and-concurrence-certificate-plus-exhaustive-conic-audit",
+      "artifact": "papers/clebsch-rigidity/verification/finite_census_certificates.json",
+      "sha256": "7a50315cdf7a605d6d979bb2a070d1ddbf98b65cf53404e0e60da1fd47aaa041",
+      "boundary": "the orbit ledger is direct; absence of a nearer conic remains an exhaustive exact audit"
+    },
+    {
+      "id": "q11-low-degree-rigidity",
+      "mode": "local-determinant-and-symbolic-kernel-certificate",
+      "artifact": "papers/clebsch-rigidity/verification/finite_census_certificates.json",
+      "sha256": "7a50315cdf7a605d6d979bb2a070d1ddbf98b65cf53404e0e60da1fd47aaa041",
+      "boundary": "fourteen cubic minors and the Q, QX, QY, QZ kernel identity cover exactly the fifteen q11 projective classes"
+    },
+    {
+      "id": "q11-q13-seven-arc-exclusions",
+      "mode": "projective-orbit-mass-and-quadratic-rank-certificate-plus-normalized-domain-audit",
+      "artifact": "papers/clebsch-rigidity/verification/finite_census_certificates.json",
+      "sha256": "7a50315cdf7a605d6d979bb2a070d1ddbf98b65cf53404e0e60da1fd47aaa041",
+      "boundary": "one q11 and two q13 projective orbits after the structural field window; no all-field theorem"
+    },
+    {
+      "id": "q13-weight-eight-exclusion",
+      "mode": "structural-five-row-unique-closure-lemma",
+      "artifact": null,
+      "sha256": null,
+      "boundary": "the exact tangent-code replay is corroboration; the finite support search is not load-bearing"
+    },
+    {
+      "id": "q13-weight-ten-profile-exclusions",
+      "mode": "xor-disjointness-certificate-plus-independent-full-fibre-dynamic-programming",
+      "artifact": "papers/clebsch-rigidity/verification/c723_q13_weight10_profiles.json",
+      "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9",
+      "boundary": "the two exhaustive binary-incidence profiles remain irreducibly finite"
+    },
+    {
+      "id": "q13-q17-q19-maximum-passant-arc-size-six",
+      "mode": "root-edge-orbit-dag-plus-independent-ordered-backtracking-and-legacy-cross-language-replay",
+      "artifact": "papers/clebsch-rigidity/verification/c725_terminal_orbit_dag.json.gz",
+      "sha256": "8e18a337ed6a0c60633e8c3df901201fa08d1e04b1ad6d4d7e3aef04a6a111bd",
+      "independent_artifact": "papers/clebsch-rigidity/verification/c725_terminal_orbit_dag_replay.json",
+      "independent_sha256": "ba9d31b9b428cc8d2efc171293f4c9bf1d3d607371dabccc6049cba5f6bdbdc6",
+      "legacy_inputs": [
+        {
+          "path": "papers/clebsch-rigidity/verification/conic_filling_q13.json",
+          "sha256": "2758cb70b678cb9ac26cf9709c52b82ae1e2a35ed069da18e274e78980f00555"
+        },
+        {
+          "path": "papers/clebsch-rigidity/verification/conic_filling_q17.json",
+          "sha256": "8cabfef0bc2e33b221cb2ec5909993cc52398185277863c0f6be1c133cae077a"
+        },
+        {
+          "path": "papers/clebsch-rigidity/verification/conic_filling_q19.json",
+          "sha256": "f659ad5025816cb3a1b4886b21666d7b41e8fd9f3e6dc57a520ae101ab29ece2"
+        }
+      ],
+      "boundary": "complete only for q=13,17,19; the failed first-order LP remains excluded from the proof surface"
+    },
+    {
+      "id": "q17-q19-terminal-six-arc-projective-classification",
+      "mode": "coherent-projective-orbit-certificate-plus-rooted-coverage-replay",
+      "artifact": "notes/2026-07-29-c611-q17-q19-coherent-certificates.json",
+      "sha256": "3b0429b6c136cce819a2da9f44669c4e474e366d2926ff5b757b5335ec98f53d",
+      "boundary": "22 and 94 projective classes with empty extension sets; no uniform orbit formula"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued after C721--C725; C714 phase 6/6 and closeout.
+**Status:** ready; C721--C725 complete; C714 phase 6/6 and closeout.
 
 ## Objective
 
@@ -42,4 +42,3 @@ Do not cross C182's external-publication gate, reopen Papers II/III, or adopt a
 structural argument merely because it is shorter. Any unresolved equality
 case or unmatched theorem hypothesis leaves the exact certificate
 load-bearing.
-
