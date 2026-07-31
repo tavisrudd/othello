@@ -77,6 +77,19 @@ mechanism.  Exact reports:
 marked-double-six package remains unallocated pending an explicit
 promotion decision.
 
+C707 is complete with a positive operational verdict.  The two golden
+eigenspaces are Naimark-complementary \((6,3)\) real ETFs and minimally
+informationally complete real-qutrit POVMs, but are neither complex-qutrit
+informationally complete nor SICs.  In the common six-path dilation the
+cross-golden block is a postselected transfer Kraus operator, and its
+antisymmetric three-copy success probability is exactly \(Z_T^2/500\).
+Thus \(A=dZ\) is amplitude response, \(W\) is centered success-probability
+contrast, and inverse polarity recovers the projective signed amplitudes
+off \(e_5=0\).  Signed-moment cancellation from \(C^2=5I\) gives the sharp
+physical bound \(|Z_T|\le8\), with maximum success \(16/125\) exactly on
+the twenty balanced \(3+3\) phase vertices.  Full report:
+`notes/2026-07-31-c707-golden-etf-quantum-measurements.md`.
+
 C708 is complete.  The Segre--Igusa mixed differential realizes the
 exceptional outer exchange between C706's synthematic-total Clifford-chart
 action and the ordinary conference-axis action: it transports the two
@@ -163,7 +176,7 @@ conductor two, golden ramification, and maximal saturation, and excludes prime
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
 | [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
-| [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
+| [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | complete; complementary real-qutrit POVMs, three-copy transition volume, and sharp \(3+3\) phase optimum proved | none |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | complete; outer exchange positive at representation level, no canonical involutory polarity, exact code tables closed | none |
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | complete; two-graph flux and chiral commutator family survive, quadratic refinement and intrinsic spin structure do not | none |
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
