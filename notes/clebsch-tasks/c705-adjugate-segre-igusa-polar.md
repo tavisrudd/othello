@@ -68,6 +68,48 @@ conjectural strengthening of the proved “Clebsch shadow sisters.”
 Situational source map:
 `notes/2026-07-30-c705-shadow-sisters-literature-map.md`.
 
+## Mining subtask — extended sister census
+
+Determine whether the Segre--Igusa pair is the middle member of a larger
+exceptional operator family.  A candidate earns “sister” status only if it
+has:
+
+1. two canonically paired exceptional carriers or polar systems;
+2. one intrinsic parent tensor/operator producing both;
+3. a generically corank-one mixed differential whose highest nonzero
+   compound factors through the two polar directions;
+4. complementary boundary contractions or rank strata; and
+5. a restriction or degeneration compatible with the C705 identity.
+
+Run the census in this dependency order.
+
+1. **Ambient \(E_6\) lift.**  On Naruki's marked-cubic-surface space,
+   identify the first-jet pairing of the two \(W(E_6)\)-equivariant
+   contractions and test whether its restriction to every
+   \(A_1\cong\overline M_{0,6}\) divisor is \(A\), up to the frozen
+   determinant-line normalization.
+2. **Coble cubic/sextic.**  Construct the mixed Jacobian of the dual Coble
+   polar systems, determine its generic corank and minimal successful
+   compound, and test whether the C705 factorization is a linear-section
+   restriction.
+3. **Weddle/Kummer sections.**  Restrict any Coble identity to the known
+   genus-two special sections and decide whether this gives a new species
+   or only inherited smaller shadows.
+4. **Marked double-six.**  Compare its transpose-paired kernel systems
+   with the sister criterion.  Record it as a sister only if a canonical
+   mixed differential and compound factorization exist; otherwise classify
+   the exact cousin relation.
+5. **\(E_7/E_8\) extensions.**  Only after the preceding restriction maps
+   are explicit, test Del Pezzo and Klein--McKay descendants for the same
+   carrier/compound pattern.  Burkhardt and other modular varieties remain
+   candidates, not presumed family members, until a paired carrier and
+   parent operator are identified.
+
+At every negative gate, record the first failed condition, the surviving
+restriction, and the nearest positive relative.  The deliverable is a
+rigid taxonomy—new sister, inherited shadow, elder parent, cousin, or
+false analogy—not an unbounded catalogue of exceptional varieties.
+
 ## Required closeout
 
 No first-gate closure is allowed.  Run distinct `ej1`, `tt1`, `ej2`, and
