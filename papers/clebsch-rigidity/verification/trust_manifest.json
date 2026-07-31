@@ -1472,7 +1472,7 @@
     "repository": "paper",
     "sha256": "4a13dc5cb0a85c8fd10b446961a15928720abac6065acd5971478f81a03bec67"
   },
-  "manuscript_sha256": "b2c36568f3f58c815368feee323281e62d0368ac962b80f2ba7b54b6a1f9e085",
+  "manuscript_sha256": "e7e6c067c2b314d3d10e6694fde08b7bd11b098fae3a80f6afe19371e061ae5d",
   "public_documents": [
     {
       "path": "README.md",
@@ -1512,7 +1512,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "b94cae3f818cbd2726ab24a813b502af8d1198ae69e870e716c0035a3fa3dafb"
+    "sha256": "c17ae82167a6a9441097c3eb5fcff5a08109194b9d3e853b9ce4f1eb8ea502d8"
   },
   "verify_all": {
     "checker_output_certificate": {
