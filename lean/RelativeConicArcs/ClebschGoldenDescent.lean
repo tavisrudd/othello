@@ -1,5 +1,6 @@
 import RelativeConicArcs.ClebschGoldenConference
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.Tactic.NormNum.NatFactorial
 
 /-!
 # Restriction-of-scalars matrices for the golden operator

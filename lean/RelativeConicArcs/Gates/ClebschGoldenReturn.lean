@@ -1,0 +1,49 @@
+import RelativeConicArcs.ClebschTwoGraph
+import RelativeConicArcs.ClebschMiddleExteriorSquare
+import RelativeConicArcs.ClebschMiddleExteriorDiagonal
+import RelativeConicArcs.ClebschMiddleExteriorSupport
+import RelativeConicArcs.ClebschGoldenDescent
+
+/-!
+# Trust gate for the golden conference and middle-exterior return
+
+This gate imports the formal package for the order-six golden conference
+matrix, its triangle cubic and two-graph reconstruction, the fixed
+middle-exterior return, and the restriction-of-scalars comparison.
+
+Symbolic ring arguments prove switching, pair balance, augmentation descent,
+two-graph reconstruction, and the generic companion identities.  Native
+decision evaluates the explicit integral conference matrix, its twenty
+triangle signs, the determinant-defined middle-exterior operator, and the two
+displayed descent matrices.  No generated certificate or externally supplied
+matrix is imported.
+-/
+
+#print axioms RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq
+#print axioms RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose
+#print axioms RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq
+#print axioms RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns
+#print axioms RelativeConicArcs.ClebschGoldenConference.triangleSign_switch
+#print axioms RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point
+#print axioms RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero
+#print axioms RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate
+
+#print axioms RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign
+#print axioms RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root
+#print axioms RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot
+
+#print axioms RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq
+#print axioms RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_complement_entry
+#print axioms RelativeConicArcs.ClebschMiddleExterior.middleExterior_eq_hodge_mul
+#print axioms RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq
+#print axioms RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal
+#print axioms RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff
+#print axioms RelativeConicArcs.ClebschMiddleExterior.complementIndex_involutive
+#print axioms RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq
+#print axioms RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff
+
+#print axioms RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_sq
+#print axioms RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient
+#print axioms RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison
+#print axioms RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det
+#print axioms RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar

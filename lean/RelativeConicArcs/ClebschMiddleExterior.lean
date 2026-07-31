@@ -53,9 +53,11 @@ def hodgeSign : Fin 20 → ℤ :=
   ![1, -1, 1, -1, 1, -1, 1, 1, -1, 1,
     -1, 1, -1, -1, 1, -1, 1, -1, 1, -1]
 
-/-- Signed middle-degree Hodge complementation. -/
+/-- Signed middle-degree Hodge complementation.  In row `S` the coefficient
+is `ε(Sᶜ,S) = -ε(S,Sᶜ)`, so on column vectors this sends
+`e_S` to `ε(S,Sᶜ)e_{Sᶜ}`. -/
 def hodgeMatrix : Matrix (Fin 20) (Fin 20) ℤ :=
-  fun S T => if T = complementIndex S then hodgeSign S else 0
+  fun S T => if T = complementIndex S then -hodgeSign S else 0
 
 /-- The `3 × 3` minor selected by two increasing triples. -/
 def minorThree (C : Matrix (Fin 6) (Fin 6) ℤ) (S T : Fin 20) :
@@ -82,7 +84,8 @@ def compoundThree (C : Matrix (Fin 6) (Fin 6) ℤ) :
 /-- The middle-exterior return `* Λ³C` for the golden conference matrix.  The
 sparse Hodge factor is evaluated directly. -/
 def middleExterior : Matrix (Fin 20) (Fin 20) ℤ :=
-  fun S T => hodgeSign S * compoundThree conferenceMatrix (complementIndex S) T
+  fun S T =>
+    -hodgeSign S * compoundThree conferenceMatrix (complementIndex S) T
 
 /-- The direct sparse formula for the return equals Hodge multiplication by
 the third compound matrix. -/

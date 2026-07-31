@@ -1,5 +1,8 @@
 import Mathlib.Data.Matrix.Mul
-import Mathlib.Tactic
+import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Ring
 
 /-!
 # The order-six golden conference matrix
@@ -11,8 +14,8 @@ products of any symmetric signed matrix.
 
 The two explicit integer tables are checked by native decision in the pinned
 Lean runtime.  The structural switching, four-point, and base-change statements
-are symbolic proofs over a commutative ring.  No generated data or external
-axiom is used.
+are symbolic proofs over a commutative ring.  They use no generated data or
+external assumptions.
 -/
 
 namespace RelativeConicArcs
