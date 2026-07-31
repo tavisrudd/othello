@@ -10,20 +10,22 @@ Discovery companion:
 
 ## Current status
 
-**C731 closed and C732 queued (2026-07-31): Clebsch extremal-(X)-syndrome
-bridge passed a bounded referee and publication red team.**  For the Clebsch
-([6,3,4]_{11}) code, the equal-phase AME state has 120 covering-radius
-(X)-syndromes on twelve conic rays, each with twenty minimum-support
-weight-three representatives, in one (C_{10}\times A_5) monomial orbit.
-The defining six-arc is nevertheless nonconic, so the fixed-party logical
-symplectic image is (T), not (\mathrm{SL}_2(11)).  The publishable unit is
-one proposition and one boundary remark, not a new headline: it must retain
-the (X)-only, fixed-party, projective-coordinate, and monomial-versus-party
-qualifications.  Golden's C727 already proves that the bare conic is
-insufficient without the support two-graph, so no duplicate Golden task was
-allocated.  C732 owns citation, manuscript, trust-ledger, build, release, and
-standalone-mirror adoption.  See
-`2026-07-31-c731-clebsch-ame-syndrome-bridge-red-team.md`.
+**C731--C732 closed (2026-07-31): Clebsch extremal-\(X\)-syndrome bridge
+red-teamed and adopted.**  Section 5 now proves the coset-state and
+\(Z(C^\perp)\)-syndrome dictionary for the Clebsch \([6,3,4]_{11}\) state,
+imports the twelve conic rays, 120 syndromes, and transitive
+\(C_{10}\times A_5\) orbit with exact source credit, and strengthens the
+twentyfold count to one minimum \(X\)-representative on every three-party
+support.  Hence either side of every balanced \(3\mid3\) cut can create the
+same extremal translate.  The defining arc remains nonconic, so the
+fixed-party logical image is \(T\), not \(\mathrm{SL}_2(11)\); the adjacent
+remark separates this from the computed \(S_5\) party image, arbitrary
+weight-three correction, and every Hamiltonian or Golden-operator claim.
+All theorem, novelty, verification, formal, evidence, PDF, release, visual,
+and standalone-mirror gates passed.  Authoritative commit `68ee4664`;
+standalone forward commit `c1be0c8`, unpushed.  See
+`2026-07-31-c731-clebsch-ame-syndrome-bridge-red-team.md` and
+`2026-07-31-c732-clebsch-ame-bridge-adoption.md`.
 
 **C649 adopted pending its final Lean composition and aggregate gate
 (2026-07-25): general stabilizer-AME full-Weyl rigidity.**  For every stabilizer

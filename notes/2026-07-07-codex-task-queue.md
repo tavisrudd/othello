@@ -199,4 +199,3 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 All completed rows, original rankings, amendments, and detailed task bodies are preserved in
 `2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.
-- **C732 `[ame-lu]` [QUEUED; publication adoption after C731 red team]** — add the Clebsch \(X\)-syndrome bridge as one proposition and one scope remark after the six-arc logical-phase theorem; cite the stable Clebsch-rigidity source, prove the coset-state dictionary, distinguish \(A_5\) monomial covariance from party-moving extensions and fixed-party from global electric--magnetic duality, synchronize all trust ledgers and the standalone mirror, and leave Golden operator physics outside the manuscript → `notes/2026-07-31-c732-clebsch-ame-bridge-adoption.md`.
