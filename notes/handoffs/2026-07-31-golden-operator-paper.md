@@ -108,7 +108,10 @@ particular:
   theorem proves universal first and second balanced-cut singular-value
   moments for every symmetric order-\(2m\) conference matrix.  Exact Paley
   order-fourteen and order-eighteen censuses show that determinant strata
-  already coarsen projective-linear orbits.  The weighted operator is exactly
+  already coarsen projective-linear orbits; sharp three-transitivity upgrades
+  their oriented strata to 3-designs, including the maximum-cut designs
+  \(3\text{-}(14,7,35)\), \(3\text{-}(18,9,63)\), and
+  \(3\text{-}(18,9,84)\).  The weighted operator is exactly
   \(K=-3A_1+A_2-A_3\) in the Sylvester Bose--Mesner algebra, so its quadratic
   identity is primitive-idempotent machinery rather than a roux continuation;
   the integral extremal-cut factor and outer bridge remain Golden-specific.

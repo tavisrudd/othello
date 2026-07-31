@@ -14,6 +14,7 @@ import json
 from collections import Counter
 from fractions import Fraction
 from itertools import combinations
+from math import comb
 from pathlib import Path
 
 
@@ -145,6 +146,10 @@ def apply_permutation(mask: int, permutation: tuple[int, ...]) -> int:
     return image if image & 1 else complement
 
 
+def apply_permutation_oriented(mask: int, permutation: tuple[int, ...]) -> int:
+    return sum(1 << permutation[i] for i in range(len(permutation)) if mask >> i & 1)
+
+
 def pgl_generators(q: int) -> list[tuple[int, ...]]:
     translation = tuple([0] + [((x + 1) % q) + 1 for x in range(q)])
     inversion = tuple(
@@ -173,12 +178,30 @@ def pgl_orbits(q: int, determinant_by_mask: dict[int, int]) -> list[dict[str, ob
         unseen.difference_update(orbit)
         values = {determinant_by_mask[mask] for mask in orbit}
         assert len(values) == 1
+        oriented_orbit = {representative}
+        oriented_frontier = [representative]
+        while oriented_frontier:
+            mask = oriented_frontier.pop()
+            for generator in generators:
+                image = apply_permutation_oriented(mask, generator)
+                if image not in oriented_orbit:
+                    oriented_orbit.add(image)
+                    oriented_frontier.append(image)
+        projected_orbit = {
+            mask if mask & 1 else ((1 << (q + 1)) - 1) ^ mask for mask in oriented_orbit
+        }
+        assert projected_orbit == orbit
+        lambda_three = len(oriented_orbit) * comb((q + 1) // 2, 3) // comb(q + 1, 3)
+        assert lambda_three * comb(q + 1, 3) == len(oriented_orbit) * comb((q + 1) // 2, 3)
         half = [i - 1 if i else "infinity" for i in range(q + 1) if representative >> i & 1]
         answer.append(
             {
                 "absolute_determinant": values.pop(),
+                "complement_closed_oriented_orbit": (((1 << (q + 1)) - 1) ^ representative) in oriented_orbit,
+                "oriented_block_count": len(oriented_orbit),
                 "representative_half": half,
                 "size": len(orbit),
+                "three_design_lambda": lambda_three,
             }
         )
     return sorted(answer, key=lambda item: (item["absolute_determinant"], item["size"], str(item["representative_half"])))
@@ -339,7 +362,7 @@ def build_certificate() -> dict[str, object]:
             "primes": list(PRIMES),
         },
         "orders": orders,
-        "schema": "c729-conference-cut-moments-v1",
+        "schema": "c729-conference-cut-moments-v2",
         "weighted_order_36": weighted_reflection_audit(order_ten),
     }
 

@@ -14,8 +14,8 @@ matrices.  Its invariant continuation is the constant-diagonal Naimark
 reflection of an integral tight frame.  Two new facts make that statement
 sharp.
 
-First, every symmetric conference matrix of order (2m) satisfies universal
-balanced-cut spectral moment identities.  If (B_I=S[I,I^c]), with (I)
+First, every symmetric conference matrix of order $2m$ satisfies universal
+balanced-cut spectral moment identities.  If $B_I=S[I,I^c]$, with $I$
 uniform among the balanced cuts modulo complement, then
 
 \[
@@ -30,8 +30,8 @@ for every cut, and
  =\frac{m^2(3m^2-6m+2)}{2m-3}.}
 \]
 
-Equivalently, if (lambda_1(I),\ldots,lambda_m(I)) are the squared singular
-values of (B_I), then
+Equivalently, if $\lambda_1(I),\ldots,\lambda_m(I)$ are the squared singular
+values of $B_I$, then
 
 \[
  \boxed{\mathbb E_I\sum_{a=1}^m(\lambda_a(I)-m)^2
@@ -45,8 +45,8 @@ here: orthogonality controls mean spectral spread, while Paley orbit data
 records how that spread is distributed among cuts.
 
 Second, the order-36 operator from the extremal order-ten cuts is not a roux
-operator.  After the coherent base-cut orientation, if (A_i) is the distance-
-(i) matrix of the Sylvester graph, then its Gram matrix and weighted operator
+operator.  After the coherent base-cut orientation, if $A_i$ is the distance-
+$i$ matrix of the Sylvester graph, then its Gram matrix and weighted operator
 are exactly
 
 \[
@@ -55,8 +55,8 @@ are exactly
  K=-3A_1+A_2-A_3.
 \]
 
-Thus (K) is the integral coordinate form of the primitive idempotent
-(40E_{-3}), already inside the Sylvester Bose--Mesner algebra.  Its quadratic
+Thus $K$ is the integral coordinate form of the primitive idempotent
+$40E_{-3}$, already inside the Sylvester Bose--Mesner algebra.  Its quadratic
 law
 
 \[
@@ -65,38 +65,38 @@ law
 \]
 
 is standard primitive-idempotent/Naimark-reflection machinery.  What is special
-to the Golden construction is the ({\pm1})-valued cut factor (X), its
+to the Golden construction is the $\{\pm1\}$-valued cut factor $X$, its
 extremal-determinant origin, and its full outer-action meaning—not the existence
 of a quadratic polynomial for a spherical embedding by itself.
 
 ## Universal second-moment theorem
 
-Let (S=S^{\mathsf T}) be a symmetric conference matrix of order (n=2m), so
-(S^2=(2m-1)I).  For a balanced half (I), write
+Let $S=S^{\mathsf T}$ be a symmetric conference matrix of order $n=2m$, so
+$S^2=(2m-1)I$.  For a balanced half $I$, write
 
 \[
  S=\begin{pmatrix}A&B\\B^{\mathsf T}&D\end{pmatrix}.
 \]
 
-The (I\times I) block of the conference identity gives
+The $I\times I$ block of the conference identity gives
 
 \[
  BB^{\mathsf T}=(2m-1)I-A^2.
 \]
 
-Since (A) is a zero-diagonal sign matrix,
-(operatorname{tr}A^2=m(m-1)), and hence
-(operatorname{tr}(BB^{\mathsf T})=m^2).
+Since $A$ is a zero-diagonal sign matrix,
+$\operatorname{tr}A^2=m(m-1)$, and hence
+$\operatorname{tr}(BB^{\mathsf T})=m^2$.
 
 For the next moment, classify the closed four-walks contributing to
-(operatorname{tr}A^4) by their vertex support.  Supports of size two and
+$\operatorname{tr}A^4$ by their vertex support.  Supports of size two and
 three contribute respectively
 
 \[
  m(m-1),\qquad 12\binom m3.
 \]
 
-For the full order-(2m) matrix, the total four-support contribution is
+For the full order-$2m$ matrix, the total four-support contribution is
 
 \[
  \operatorname{tr}S^4-2m(2m-1)-12\binom{2m}{3}
@@ -104,7 +104,7 @@ For the full order-(2m) matrix, the total four-support contribution is
 \]
 
 A fixed four-set lies in a uniform balanced half with probability
-(inom m4/inom{2m}4).  Therefore
+$\binom m4/\binom{2m}4$.  Therefore
 
 \[
  \mathbb E_I\operatorname{tr}A^4
@@ -112,8 +112,8 @@ A fixed four-set lies in a uniform balanced half with probability
 \]
 
 Expanding
-(operatorname{tr}(((2m-1)I-A^2)^2)) gives the boxed second-moment
-formula.  Subtracting (m^3) gives the centered singular-value formula.
+$\operatorname{tr}(((2m-1)I-A^2)^2)$ gives the boxed second-moment
+formula.  Subtracting $m^3$ gives the centered singular-value formula.
 
 This proof also explains the stopping point.  At the next power, closed
 six-walks split into five- and six-vertex holonomy terms that are not separated
@@ -123,36 +123,59 @@ are consequently recorded as Paley data, not promoted to a universal formula.
 ## Exact higher-order census
 
 The deterministic census uses Paley symmetric conference matrices over the
-prime fields of orders (5,13,17), together with the universal balanced-cut
+prime fields of orders $5,13,17$, together with the universal balanced-cut
 Gram construction at order ten.  Cuts are counted modulo complement.  Every
 Bareiss determinant is independently replayed by modular Gaussian elimination
-at the primes (1000000007) and (1000000009).
+at the primes $1000000007$ and $1000000009$.
 
 | conference order | cuts | absolute cross-determinant distribution |
 |---:|---:|---|
-| 6 | 10 | (4^{(10)}) |
-| 10 | 126 | (0^{(90)},48^{(36)}) |
-| 14 | 1716 | (64^{(546)},192^{(624)},256^{(364)},576^{(182)}) |
-| 18 | 24310 | (256^{(3672)},512^{(2448)},1024^{(5032)},2048^{(4896)},2304^{(612)},3328^{(1224)},4096^{(1224)},4608^{(2448)},4864^{(1224)},6656^{(816)},8192^{(714)}) |
+| 6 | 10 | $4^{(10)}$ |
+| 10 | 126 | $0^{(90)},48^{(36)}$ |
+| 14 | 1716 | $64^{(546)},192^{(624)},256^{(364)},576^{(182)}$ |
+| 18 | 24310 | $256^{(3672)},512^{(2448)},1024^{(5032)},2048^{(4896)},2304^{(612)},3328^{(1224)},4096^{(1224)},4608^{(2448)},4864^{(1224)},6656^{(816)},8192^{(714)}$ |
 
-At order fourteen, the five (operatorname{PGL}_2(13))-orbits have
-((|\mathcal O|,|\det B|))
+At order fourteen, the five $\operatorname{PGL}_2(13)$-orbits have
+$(|\mathcal O|,|\det B|)$
 
 \[
  (546,64),\ (78,192),\ (546,192),\ (364,256),\ (182,576).
 \]
 
 Thus determinant value already coarsens the group orbit: the 624 cuts of value
-192 split as (78+546).  At order eighteen there are sixteen
-(operatorname{PGL}_2(17))-orbits but only eleven determinant values.  In
-particular the maximum value (8192) splits into orbits of sizes (306) and
-(408), and value (1024) splits into orbits of sizes (136,2448,2448).
+192 split as $78+546$.  At order eighteen there are sixteen
+$\operatorname{PGL}_2(17)$-orbits but only eleven determinant values.  In
+particular the maximum value $8192$ splits into orbits of sizes $306$ and
+$408$, and value $1024$ splits into orbits of sizes $136,2448,2448$.
 The JSON certificate gives a canonical representative half for every orbit.
 
+There is a free design upgrade.  The sharply three-transitive action of
+$\operatorname{PGL}_2(q)$ on the projective line makes every orbit of
+oriented half-sets a 3-design.  The order-fourteen maximum stratum contains
+364 oriented blocks and is a
+
+\[
+ \boxed{3\text{-}(14,7,35)\text{ design}.}
+\]
+
+The two order-eighteen maximum orbits lift respectively to 612 and 816
+oriented blocks, giving separate
+
+\[
+ \boxed{3\text{-}(18,9,63)\quad\text{and}\quad
+        3\text{-}(18,9,84)\text{ designs}.}
+\]
+
+The certificate records the oriented block count, $\lambda_3$, and whether
+the oriented orbit contains the complementary half for every projective orbit.
+Fifteen of the sixteen order-eighteen projective orbits are complement-closed
+after orientation; one determinant-2048 orbit of 2448 projective cuts splits
+into two complementary oriented 3-designs, each with $\lambda_3=252$.
+
 All determinants obey the elementary divisibility
-(2^{m-1}\mid\det B) for odd-order sign matrices (B).  Order fourteen still
-contains global (7\times7) D-optimal cuts (value (576)); order eighteen does
-not reach the (9\times9) maximum-determinant value.  The all-cut phenomenon at
+$2^{m-1}\mid\det B$ for odd-order sign matrices $B$.  Order fourteen still
+contains global $7\times7$ D-optimal cuts (value $576$); order eighteen does
+not reach the $9\times9$ maximum-determinant value.  The all-cut phenomenon at
 order six is therefore exceptional twice over: every cut is D-optimal there,
 whereas order ten has only 36 D-optimal cuts and the Paley order-fourteen and
 order-eighteen distributions have several arithmetic strata.
@@ -168,10 +191,10 @@ Put
 \]
 
 The moment theorem is an exact stability budget.  Since the nonnegative
-(lambda_a) sum to (m^2), one has
-(0\leq\Delta(I)\leq m^3(m-1)).  Hence, for (0\leq\varepsilon<\overline\Delta),
-the fraction (p_\varepsilon) of cuts satisfying
-(Delta(I)\leq\varepsilon) obeys
+$\lambda_a$ sum to $m^2$, one has
+$0\leq\Delta(I)\leq m^3(m-1)$.  Hence, for $0\leq\varepsilon<\overline\Delta$,
+the fraction $p_\varepsilon$ of cuts satisfying
+$\Delta(I)\leq\varepsilon$ obeys
 
 \[
  p_\varepsilon
@@ -180,8 +203,8 @@ the fraction (p_\varepsilon) of cuts satisfying
       {m^3(m-1)-\varepsilon}.
 \]
 
-Also (|\det B_I|^2\leq m^m) by AM--GM, with equality only when
-(Delta(I)=0).  These are genuine signing-independent constraints, but they
+Also $|\det B_I|^2\leq m^m$ by AM--GM, with equality only when
+$\Delta(I)=0$.  These are genuine signing-independent constraints, but they
 do not form an inverse theorem: every symmetric conference switching class has
 the same budget.  Proximity to a particular Paley or Golden signing must use
 third/higher holonomy data or orbit incidence, not merely the first two spectral
@@ -197,15 +220,15 @@ relative to one base cut, and verifies
  XX^{\mathsf T}=40\left(I-\frac1{10}J\right).
 \]
 
-There are 90 unordered entries of magnitude (3) in (K) and 540 of
-magnitude (1).  The large-angle graph has intersection triples
+There are 90 unordered entries of magnitude $3$ in $K$ and 540 of
+magnitude $1$.  The large-angle graph has intersection triples
 
 \[
  (0,0,5),\ (1,0,4),\ (1,2,2),\ (4,1,0),
 \]
 
-and spectrum (5^1,2^{16},(-1)^{10},(-3)^9).  The operator spectra are
-(15^9,(-5)^{27}) for (K) and (10^9,(-10)^{27}) for (K-5I).  As an
+and spectrum $5^1,2^{16},(-1)^{10},(-3)^9$.  The operator spectra are
+$15^9,(-5)^{27}$ for $K$ and $10^9,(-10)^{27}$ for $K-5I$.  As an
 additional arithmetic check,
 
 \[
@@ -214,7 +237,7 @@ additional arithmetic check,
 \]
 
 This catches the only plausible normalization ambiguity: confusing the
-zero-diagonal integral operator (K) with the centered reflection (K-5I).
+zero-diagonal integral operator $K$ with the centered reflection $K-5I$.
 
 ## Focused literature audit
 
@@ -248,7 +271,7 @@ claim.
   not a roux output in that sense.  Their discussion points instead to Higman's
   broader regular-weight framework.
 - G. Greaves and S. Suda, *Symmetric and skew-symmetric
-  ({0,\pm1})-matrices with large determinants*, arXiv:1601.02769,
+  ${0,\pm1}$-matrices with large determinants*, arXiv:1601.02769,
   published as DOI `10.1002/jcd.21567`.  **Read depth: partial**, arXiv v3,
   Section 4, especially Theorems 4.3 and 4.5.  Cache SHA-256
   `40cde5eff1bbd514c2952cb6ab36ad130116f7432ce6fb250cadb9c1eec093cf`.
@@ -298,13 +321,18 @@ does not prove a general third-moment formula.
 
 - **Settled by `tt`:** the correct universal quantity is the averaged spectral
   spread, not a conjecturally universal determinant distribution.
-- **Settled by `ej`:** the order-fourteen census reaches the (7\times7)
+- **Settled by `ej`:** the order-fourteen census reaches the $7\times7$
   maximum determinant but already splits one determinant stratum into two
   projective-linear orbits; determinant is not a complete orbit invariant.
 - **Settled by `ej`:** the order-eighteen maximum stratum itself splits into
-  two (operatorname{PGL}_2(17))-orbits.  Orbit incidence is the cheapest
+  two $\operatorname{PGL}_2(17)$-orbits.  Orbit incidence is the cheapest
   next discriminator beyond determinant moments.
-- **Settled by `tt`:** (K=-3A_1+A_2-A_3) is a primitive-idempotent element of
+- **Settled by the post-close `ej`:** sharp three-transitivity upgrades every
+  oriented Paley cut orbit to a 3-design.  In particular the order-fourteen
+  maximum orbit is a $3\text{-}(14,7,35)$ design, while the two
+  order-eighteen maximum orbits give $3\text{-}(18,9,63)$ and
+  $3\text{-}(18,9,84)$ designs.
+- **Settled by `tt`:** $K=-3A_1+A_2-A_3$ is a primitive-idempotent element of
   the Sylvester Bose--Mesner algebra.  The quadratic law is contextualized,
   while the integral cut realization remains the Golden-specific theorem.
 - **Settled by `ej`:** roux is too narrow: its character evaluations are ETF
@@ -314,24 +342,29 @@ does not prove a general third-moment formula.
   sum formula for every Paley order.  Evidence gap: the present proof isolates
   unsummed five- and six-vertex holonomies.  A successor must derive those
   sums before computing another order.
+- **Open:** one order-eighteen determinant-2048 projective orbit has two
+  complementary oriented $3\text{-}(18,9,252)$ lifts, whereas the other
+  determinant-2048 orbit is complement-closed.  Evidence gap: the current
+  certificate detects the split but does not identify its character-theoretic
+  invariant.
 - **Open:** a true inverse/stability theorem from an arbitrary signing to a
   nearby conference switching class.  Gate: express the second-moment defect
   for a general Seidel matrix in terms of the conference residual
-  (S^2-(n-1)I); the conference-only budget cannot distinguish switching
+  $S^2-(n-1)I$; the conference-only budget cannot distinguish switching
   classes.
 - **Open:** Higman's original regular-weight paper was not accessible in this
   audit.  It may sharpen the terminology for the signed distance relations,
   but cannot turn a two-angle frame into a roux ETF.
 
 The task has no remaining acceptance blocker.  The open items are sequel
-directions, not gaps in the (6\to10\to36) reflection theorem.
+directions, not gaps in the $6\to10\to36$ reflection theorem.
 
 ## Post-closeout internal-minor refinement
 
 `notes/2026-07-31-c729-cut-moments-reflection-audit.md` supplies a compatible
-local Cauchy--Binet refinement.  For every balanced half \(A\), it expands the
+local Cauchy--Binet refinement.  For every balanced half \$A\$, it expands the
 cross-determinant square as an alternating sum of the squared internal minor
-energies of \(S[A,A]\), then resolves their global sums by the overlap size of
+energies of \$S[A,A]\$, then resolves their global sums by the overlap size of
 the row and column index sets.  At order ten the 90 singular and 36 extremal
 projective cuts lift to exactly two full internal-energy profiles.  Its
 independent certificate also records the exact antipodal pair-moment
