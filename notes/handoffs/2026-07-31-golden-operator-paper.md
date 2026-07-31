@@ -148,6 +148,10 @@ particular:
   minimal up to sign at common-affine height three but is not
   success-optimal; the real orbit optimum improves success by
   \(1.141022808280276\ldots\) and is only a supremum over rational filters.
+  The second-order closeout gives
+  \(\prod_{T<U}(Z_T+Z_U)=-e_5(Z)^3\) and reduces exact physical optimization
+  on every smooth real fibre to seven pole chambers with critical equations
+  of degree at most four.
   The report and exact evidence bundle are
   `notes/2026-07-31-c715-golden-anomaly-inverse.md`.
 

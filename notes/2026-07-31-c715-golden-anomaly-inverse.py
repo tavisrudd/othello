@@ -280,12 +280,12 @@ def multiply(left, right):
     return trim(result)
 
 
-def critical_polynomial(range_pair):
-    coefficients = [2 if root in range_pair else -1 for root in RAW_FILTER]
+def critical_polynomial(range_pair, roots=RAW_FILTER):
+    coefficients = [2 if root in range_pair else -1 for root in roots]
     result = [Fraction(0)] * 6
-    for i, root in enumerate(RAW_FILTER):
+    for i, root in enumerate(roots):
         term = [Fraction(1)]
-        for j, other in enumerate(RAW_FILTER):
+        for j, other in enumerate(roots):
             if i != j:
                 term = multiply(term, [-other, 1])
         for degree, value in enumerate(term):
@@ -452,12 +452,26 @@ def generate():
         left = elementary_symmetric_five(z_sample)
         right = 32 * vandermonde(sample)
         assert left == right
-        discriminant_tests.append({"filter": list(sample), "value": left})
+        pair_product = math.prod(
+            z_sample[i] + z_sample[j]
+            for i, j in itertools.combinations(range(6), 2)
+        )
+        assert pair_product == -(left**3)
+        discriminant_tests.append(
+            {"filter": list(sample), "e5_value": left, "pair_sum_product": pair_product}
+        )
     dictionary = matching_dictionary(cubics)
     chart_names, chart_values, chart_points = inverse_chart(dictionary, CHARGES)
     assert chart_points == ("infinity", "0", "1", "4/3", "3/2", "5/3")
     height = finite_height(cubics)
     optimization = optimization_certificate()
+    general_roots = (0, 1, 2, 4, 7, 11)
+    general_pairs = ((0, 11),) + tuple(zip(general_roots, general_roots[1:]))
+    general_quartics = {
+        f"{a},{b}": critical_polynomial((a, b), general_roots)
+        for a, b in general_pairs
+    }
+    assert all(len(polynomial) <= 5 for polynomial in general_quartics.values())
     witness_scale = Fraction(4, 27)
     probabilities = [witness_scale**2 * value**2 / 500 for value in CHARGES]
     return {
@@ -469,6 +483,7 @@ def generate():
         "matching_dictionary": dictionary,
         "collision_discriminant": {
             "identity": "e5(Z(x))=32*product_{i<j}(x_j-x_i)",
+            "intrinsic_segre_identity": "product_{T<U}(z_T+z_U)=-e5(z)^3",
             "normalization_tests": discriminant_tests,
         },
         "inverse_chart": {
@@ -487,6 +502,14 @@ def generate():
         },
         "finite_height": height,
         "success_optimization": optimization,
+        "general_real_fibre_optimization": {
+            "sorted_distinct_source_points": list(general_roots),
+            "chambers": "the two exterior pole intervals and five intervals between consecutive source points",
+            "extreme_pair_formula": "mu_ab(t)=8*|t-a|^2*|t-b|^2/((b-a)^3*product_{r_i not in {a,b}}|t-r_i|)",
+            "critical_equation": "2/(t-a)+2/(t-b)-sum_{r_i not in {a,b}}1/(t-r_i)=0",
+            "degree_bound": 4,
+            "example_critical_polynomials_ascending": general_quartics,
+        },
     }
 
 

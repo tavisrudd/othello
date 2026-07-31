@@ -557,6 +557,13 @@ therefore a scalar multiple of the Vandermonde.  Evaluation at
 \((0,1,2,3,4,5)\) gives the scalar 32.  The zero divisor of \(e_5\) on the
 Segre cubic is the union of its fifteen planes, each consisting of three
 opposite charge pairs.  This proves (i), and GIT stability gives (ii).
+Multiplying the fifteen marked matching identities gives the intrinsic
+factorization
+\[
+ \prod_{T<U}(Z_T+Z_U)=-e_5(Z)^3.
+\]
+Thus each vectorlike plane occurs triply in the product of the fifteen
+opposite-pair tests and singly in the reduced \(e_5\)-divisor.
 It also explains the Boolean boundary: a sign mask with unequal
 multiplicities has at least four coincident points and maps to zero, while
 a balanced mask is a \(3+3\) node.
@@ -598,6 +605,26 @@ algebraic point simultaneously maximizes every nonzero branch probability
 and every fixed positive weighted sum of them.  In particular, a uniformly
 chosen protocol succeeds with probability
 \(\lambda^2\lVert q\rVert_2^2/3000\).
+
+The same optimization is exact for every smooth real nonvectorlike point.
+Choose an affine representative with distinct ordered path coordinates
+\(r_1<\cdots<r_6\).  In each of the seven pole chambers, let \(a,b\) be the
+two paths whose reciprocal images are extreme.  Up to the fixed initial
+amplitude scale, normalization to \([-1,1]\) gives
+\[
+ \mu_{a,b}(s)=
+ \frac{8|s-a|^2|s-b|^2}
+ {(b-a)^3\prod_{r_i\notin\{a,b\}}|s-r_i|}.
+\]
+Its interior critical points satisfy
+\[
+ \frac2{s-a}+\frac2{s-b}
+ -\sum_{r_i\notin\{a,b\}}\frac1{s-r_i}=0.
+\]
+Clearing denominators gives degree at most four: the degree-five term
+cancels as \(2+2-4=0\).  Hence the optimal real filter over any rational
+charge point is found by exact comparison of roots of at most seven rational
+quartics.
 
 The quotient, its cross-ratio inverse, and rational parametrization of the
 six-charge anomaly equations are classical or explicit prior art

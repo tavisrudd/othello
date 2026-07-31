@@ -115,6 +115,10 @@ def main():
     for sample in (tuple(range(6)), RAW_FILTER, (1, 2, 4, 7, 11, 16)):
         z_sample = tuple(evaluate(cubic, sample) for cubic in CUBICS)
         assert elementary_symmetric_five(z_sample) == 32 * vandermonde(sample)
+        assert math.prod(
+            z_sample[i] + z_sample[j]
+            for i, j in itertools.combinations(range(6), 2)
+        ) == -(elementary_symmetric_five(z_sample) ** 3)
 
     hits = []
     for x in itertools.permutations(range(-3, 4), 6):
@@ -158,6 +162,12 @@ def main():
     assert compact["critical_polynomial_ascending"] == [-9, 51, -24, -3, 1]
     assert parse(compact["explicit_amplitude_gain"]) == Fraction(486, 455)
     assert parse(compact["explicit_amplitude_gain"]) ** 2 == Fraction(236196, 207025)
+    general = data["general_real_fibre_optimization"]
+    assert general["degree_bound"] == 4
+    assert all(
+        len(polynomial) <= 5
+        for polynomial in general["example_critical_polynomials_ascending"].values()
+    )
     print("C715 independent replay OK: 15 matchings, 5040 height-three filters, 7 real pole domains")
 
 

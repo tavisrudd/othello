@@ -181,6 +181,25 @@ smooth nonvectorlike locus in one equation.  It does not detect strict
 chirality, because a single coordinate \(Z_T\) may vanish while \(e_5(Z)\)
 does not.
 
+Multiplying the fifteen matching identities gives the intrinsic Segre
+factorization
+
+\[
+ \boxed{\quad
+   \prod_{T<U}(z_T+z_U)=-e_5(z)^3
+   \quad\text{when}\quad \sum_Tz_T=\sum_Tz_T^3=0.
+ \quad}
+\]
+
+The fifteen frozen matching signs have product \(+1\), every path bracket
+occurs in exactly three perfect matchings, and
+\(\prod_{i<j}[ij]= -\prod_{i<j}(x_j-x_i)\).  The matching dictionary and the
+Vandermonde identity prove the formula on the dense six-distinct locus, hence
+on the whole Segre cubic.  At a generic point of a vectorlike plane, exactly
+three opposite-pair factors vanish.  Thus the product on the left cuts the
+fifteen-plane divisor with multiplicity three, whereas \(e_5\) cuts its
+reduced union.
+
 ### Nodes and unstable configurations
 
 A semistable sextuple with three points at \(u\) and three at \(v\ne u\)
@@ -369,6 +388,37 @@ so \(Z(x(-15))=(72/455)q\).  Its exact probability gain over \(r/3\) is
    =\frac{236196}{207025}>1.
 \]
 
+### Uniform optimizer for every real chiral point
+
+The seven-chamber reduction is not special to the displayed witness.  Let
+\(r_1<\cdots<r_6\) be any six distinct real path points reconstructed from a
+smooth nonvectorlike charge point.  In a pole chamber, let \(a,b\) be the two
+source points whose reciprocal images are the minimum and maximum: they are
+consecutive when the pole lies between source points, and are \(r_1,r_6\) on
+either exterior chamber.  After centering and scaling to \([-1,1]\), the
+common amplitude multiplier is, up to the fixed scale of \(Z(r)\),
+
+\[
+ \mu_{a,b}(t)=
+ \frac{8|t-a|^2|t-b|^2}
+ {(b-a)^3\prod_{r_i\notin\{a,b\}}|t-r_i|}.
+\]
+
+Its non-boundary critical points satisfy
+
+\[
+ \frac2{t-a}+\frac2{t-b}
+   -\sum_{r_i\notin\{a,b\}}\frac1{t-r_i}=0.
+\]
+
+After denominators are cleared, the degree-five term cancels because
+\(2+2-4=0\).  Each chamber is therefore optimized by a polynomial of degree
+at most four.  Exact real optimization for any rational anomaly point reduces
+uniformly to isolating the real roots of at most seven rational quartics and
+comparing their exact algebraic values.  This defines a piecewise-algebraic
+projective filter capacity; the witness calculation above is one fibre of
+that general construction.
+
 ## 5. Attribution and boundary
 
 The matching generators, the Segre quotient, the Joubert coordinates, and the
@@ -415,6 +465,10 @@ stratification; those are the structural arguments above.
   amplitudes is exactly \(32\) times the path Vandermonde.  This compresses
   the fifteen nonvectorlike tests to one marked scalar without confusing them
   with the six zero-charge walls.
+- **Settled by second-order `ej`:** multiplying all fifteen matching forms
+  gives \(\prod_{T<U}(z_T+z_U)=-e_5(z)^3\).  This explains why every
+  vectorlike plane occurs triply in the product of opposite-pair tests and
+  singly in the reduced \(e_5\)-divisor.
 - **Settled by `ej`:** the real pole optimum is universal across all nonzero
   protocol branches and every fixed positive aggregate, because the fibre
   changes only the common scale \(\kappa\).
@@ -425,6 +479,10 @@ stratification; those are the structural arguments above.
 - **Settled by `tt`:** the inverse must distinguish smooth nonvectorlike from
   strict chiral.  Six distinct path points exclude opposite charge pairs;
   strict chirality additionally excludes \(Z_T=0\).
+- **Settled by second-order `tt`:** physical optimization is uniformly finite
+  on every real chiral fibre: seven pole chambers, quartic critical equations,
+  and exact algebraic comparison.  The witness quartic is not an isolated
+  numerical accident.
 - **Open by design:** other arithmetic heights on rational filters may rank
   preimages differently.  The proved minimality uses centered primitive
   integral affine height; no broader height claim is made and no successor is
@@ -433,5 +491,10 @@ stratification; those are the structural arguments above.
   for two \(U(1)\) factors and separate chiral from plane components.
 - **Owned by C719:** translate the exact branch and aggregate costs into a
   platform-specific circuit and feasibility budget.
-- **No genuine mystery remains in the C715 rational inverse, exceptional
-  strata, or fibrewise normalization interface.**
+- **Open, currently unallocated:** stratify the resulting projective filter
+  capacity over the full real Segre cubic and determine its boundary behavior
+  near the vectorlike planes and nodes.  C719 needs only the fixed witness, so
+  this broader real-algebraic problem is not a gate for that task.
+- **No genuine mystery remains in the frozen C715 rational inverse,
+  exceptional strata, or pointwise normalization interface.**  The global
+  capacity stratification is a separate optional continuation.
