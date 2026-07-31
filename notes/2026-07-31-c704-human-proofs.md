@@ -204,6 +204,17 @@ ordinary quadratic node.  Thus each incidence is small and resolves all
 six nodes.  Golden conjugation exchanges \(V_+\) and \(V_-\), hence
 transposes \(B_x\) and exchanges the two resolutions.
 
+There is also a direct fermionic reading.  For the C709 Majorana
+Hamiltonian the golden block decomposition gives
+\[
+ \ker[D_x,C]=\ker B_x\oplus\ker B_x^{\mathsf T}.
+\]
+Thus \(\widetilde X_+\) and \(\widetilde X_-\) are exactly the two
+incidences of chiral zero-mode lines.  At a node the two chiral kernels
+both jump from dimension one to dimension two: the two \(\mathbf P^1\)
+exceptional fibres are the projectivized halves of the four-dimensional
+Majorana zero-mode space.
+
 The ambient resolution
 \[
  0\to\mathcal O(-1)^3\xrightarrow{B_x}\mathcal O^3

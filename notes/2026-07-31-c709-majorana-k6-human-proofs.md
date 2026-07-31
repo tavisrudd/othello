@@ -230,6 +230,28 @@ The identity \(C^2=5I\) makes this another Majorana frame, and
 \]
 Hence each node is one cross-golden dimer with four Majorana zero modes.
 
+## 9. Chiral zero modes and the two small resolutions
+
+Over \(\mathbf Q(\sqrt5)\), use the golden splitting
+\(V=V_+\oplus V_-\) from C704 and put \(B_x=P_-D_xP_+\).  Then
+\[
+ A_C(x)=[D_x,C]
+ =\begin{pmatrix}
+ 0&-2\sqrt5\,B_x^{\mathsf T}\\
+ 2\sqrt5\,B_x&0
+ \end{pmatrix},
+ \qquad
+ \ker A_C(x)=\ker B_x\oplus\ker B_x^{\mathsf T}.
+\]
+On the smooth part of the Pfaffian cubic, \(B_x\) has rank two, so the
+two summands are lines.  Their projectivized incidence varieties are
+precisely the right- and left-kernel small resolutions of C704.  At a
+node \(B_x\) has rank one; both chiral kernels become two-dimensional.
+Thus each resolution acquires its \(\mathbf P^1\) exceptional fibre at
+exactly the point where the Hamiltonian acquires four Majorana zero
+modes.  Golden conjugation exchanges the chiralities and the two small
+resolutions.
+
 Exact computation remains only for the small phase table, six order
 representatives, and normalization checks after the structural reductions
 above.

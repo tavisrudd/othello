@@ -106,6 +106,19 @@ equality proves
  \boxed{\operatorname{adj}A=6Wq^{\mathsf T}}.
 \]
 
+This matrix is also the normalized linear response of the six C709
+parity walls.  For the six conference representatives \(C_T\), put
+\(\Phi_T(x)=\operatorname{Pf}[D_x,C_T]\).  The Pfaffian identity
+\(\Phi_T=4Z_T\) implies, after passing to the source and target
+augmentation quotients,
+\[
+ A=\frac14\,d\Phi.
+\]
+Consequently the adjugate formula says that the top nonzero response
+compound factors into the special-conformal source direction \(q\) and
+the Segre--Igusa conormal direction \(W\).  This explains both kernel
+lines without introducing a second operator.
+
 Degree also explains why this repair is minimal.  The first matrix is
 quadratic, the second compound has degree four, the polar vector has
 degree six, and the third compound is the first one capable of containing
