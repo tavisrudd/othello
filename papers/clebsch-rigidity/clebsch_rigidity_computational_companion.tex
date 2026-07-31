@@ -788,9 +788,13 @@ The machine-readable version of this ledger is the file
 \small\path{verification/computational_companion_trust.json}.
 \end{center}
 Its paths are relative to the present directory.  Recorded outputs and
-source hashes are in \path{verification/checker_outputs.json}; the larger
-$k=8$ certificates are checked by
-\path{verification/conic_filling_verify.py}.  The clean companion entry point is
+source hashes are in \path{verification/checker_outputs.json}.  The terminal
+$k=8$ certificate is checked by
+\begin{center}
+\small\path{verification/c725_terminal_orbit_dag.py}.
+\end{center}
+The program \path{verification/conic_filling_verify.py} is instead a legacy
+independent replay.  The clean companion entry point is
 \begin{center}
 \small\path{verification/verify_computational_companion.py}.
 \end{center}

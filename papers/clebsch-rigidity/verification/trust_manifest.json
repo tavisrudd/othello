@@ -1665,12 +1665,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "60b0545248def284252fab2c809382af246aecd7333673cbfc3a1dc385ddad0d"
+      "sha256": "500b9e530146958c93a128f8352e12cbdec6bed5945e6e5c11d05d0f4ca757eb"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "74f1be487cce4afdca96e9e84df6c599b39f451e3aed55b9952296f75db6dc30"
+      "sha256": "f162ac23598a4e67ff657d539627848df3864a1452b9a2d9624470be128561e3"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -1730,7 +1730,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "a0aaee3c462ddaa4dca54b8db6244338c2f34dfe6f04d6334875b3c4640b35a8"
+    "sha256": "8bddb3a03af985db82b28b349a91b8eae73e0cad71f0f3d65307b7c81f546f7a"
   },
   "verify_all": {
     "checker_output_certificate": {
