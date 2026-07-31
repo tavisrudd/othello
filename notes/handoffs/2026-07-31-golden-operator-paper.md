@@ -169,18 +169,16 @@ manuscript edit is authorized by C727.
 
 | task | state | next gate |
 |---|---|---|
-| [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
-| [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
+| [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | ready; C715 inverse interface frozen | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
-1. C715 anomaly inverse.
-2. C717 and C718, chosen by theorem yield after C715's first gate.
-3. C716 only after the inverse interface freezes.
-4. C719 after the mathematical paper spine is secure.
+1. C716 two-\(U(1)\) lines, now that the pointwise inverse interface is frozen.
+2. C717 and C718, chosen by theorem yield.
+3. C719 after the mathematical paper spine is secure.
 
 ## Ownership and allowed paths
 

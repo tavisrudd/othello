@@ -11,10 +11,9 @@ The manuscript distinguishes:
 4. independent replays; and
 5. formal results, if a later Golden Lean package is added.
 
-The current manuscript skeleton contains no claim whose sole evidence is a
-new computation.  Before a computational statement enters the paper, this
-directory must record its exact source bundle, claim, replay command, hashes,
-search domain, symmetry reduction, stop condition, and trust mode.
+No manuscript theorem relies solely on a computation.  The finite clauses
+below have committed generators, certificates, and independent replays; the
+surrounding quotient and operator statements have human proofs in the paper.
 
 ## Frozen source bundles to import
 
@@ -29,6 +28,20 @@ search domain, symmetry reduction, stop condition, and trust mode.
 | \(E_8\)--Hamming obstruction and hyperbolic repair | notes/2026-07-30-c710-e8-hamming-marking.md | two conceptual obstructions, one exhaustive root certificate, and explicit construction |
 | pure-spinor boundary, frustration, decoder, and \(S_{10}\) | notes/2026-07-31-c720-spinor-dimer-tests.md | human classification plus exact checker and independent replay |
 | determinant/dimer coefficient equivalence | notes/2026-07-31-c720-ej2-sextic-dimer-equivalence.md | complete symbolic proof; no computation required |
+| rational anomaly inverse, height boundary, and success optimum | notes/2026-07-31-c715-golden-anomaly-inverse.md | GIT and alternating-polynomial proofs plus exact height/Sturm certificate and independent replay |
+
+For C715, from the repository root run
+
+```text
+python3 notes/2026-07-31-c715-golden-anomaly-inverse.py --check
+python3 notes/2026-07-31-c715-golden-anomaly-inverse-replay.py
+```
+
+Six distinct centered integers cannot have height below three.  The height
+search therefore checks all \(7P6=5040\) ordered distinct sextuples in
+\([-3,3]^6\).  It does not claim minimality for another arithmetic height.
+The Sturm check certifies and compares all seven real pole domains; the
+unique real optimum is only a supremum on the rational suborbit.
 
 The existing C712 Lean package covers only the sub-700 source interface.  The
 paper must not describe the post-700 propagation theorem as Lean-verified
