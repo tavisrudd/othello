@@ -1736,8 +1736,17 @@
       "last": 719,
       "purpose": "C707 anomaly inversion, U(1)^2 lift, Majorana chambers, bosonic complement, and six-mode demonstrator",
       "sequence": 193
+    },
+    {
+      "count": 1,
+      "first": 720,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 720,
+      "purpose": "Golden operator and shadow sisters paper architecture",
+      "sequence": 194
     }
   ],
-  "next_id": 720,
+  "next_id": 721,
   "schema": "codex-task-id-allocations-v1"
 }
