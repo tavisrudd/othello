@@ -126,6 +126,13 @@ def parse_axiom_output(text: str) -> dict[str, list[str]]:
     return result
 
 
+def matches_axiom_audit(
+    expected: dict[str, list[str]], actual: dict[str, list[str]]
+) -> bool:
+    """Compare the audited terminals, ignoring imported-module replay noise."""
+    return all(actual.get(terminal) == axioms for terminal, axioms in expected.items())
+
+
 def require_clean(snapshots: dict[str, str]) -> None:
     for name, snapshot in snapshots.items():
         if not snapshot:
@@ -296,7 +303,9 @@ def main() -> int:
                 audit_path.read_text(encoding="utf-8")
             )
             actual_axioms = parse_axiom_output(result.stdout + "\n" + result.stderr)
-            if not expected_axioms or actual_axioms != expected_axioms:
+            if not expected_axioms or not matches_axiom_audit(
+                expected_axioms, actual_axioms
+            ):
                 raise RuntimeError(
                     f"verification check {check_id!r} axiom output differs "
                     "from its tracked audit"

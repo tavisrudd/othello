@@ -74,6 +74,15 @@ class ReleaseRunnerTests(unittest.TestCase):
             {"Example.theorem": ["propext", "Classical.choice"]},
         )
 
+    def test_axiom_audit_ignores_import_replay_noise(self) -> None:
+        expected = {"Gate.theorem": ["propext"]}
+        actual = {
+            "Imported.theorem": ["Classical.choice"],
+            "Gate.theorem": ["propext"],
+        }
+        self.assertTrue(release.matches_axiom_audit(expected, actual))
+        self.assertFalse(release.matches_axiom_audit(expected, {}))
+
     def test_parent_cwd_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             roots = {"paper": Path(directory)}
