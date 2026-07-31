@@ -1,0 +1,474 @@
+{
+  "c705_characteristic_ranks": {
+    "2": {
+      "difference_rank": 0,
+      "jacobian_rank": 1,
+      "witness": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "3": {
+      "difference_rank": 3,
+      "jacobian_rank": 3,
+      "witness": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2
+      ]
+    },
+    "5": {
+      "difference_rank": 4,
+      "jacobian_rank": 4,
+      "witness": [
+        0,
+        1,
+        1,
+        2,
+        2,
+        4
+      ]
+    },
+    "7": {
+      "difference_rank": 4,
+      "jacobian_rank": 4,
+      "witness": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "codes": {
+    "2": {
+      "context_point": {
+        "dual_parameters": [
+          15,
+          5,
+          6
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 6,
+          "6": 10,
+          "8": 15
+        },
+        "hull_dimension": 5,
+        "parameters": [
+          15,
+          10,
+          3
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 96,
+          "11": 45,
+          "12": 15,
+          "15": 1,
+          "3": 15,
+          "4": 45,
+          "5": 96,
+          "6": 160,
+          "7": 195,
+          "8": 195,
+          "9": 160
+        }
+      },
+      "grid_context": {
+        "dual_parameters": [
+          15,
+          10,
+          3
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 96,
+          "11": 45,
+          "12": 15,
+          "15": 1,
+          "3": 15,
+          "4": 45,
+          "5": 96,
+          "6": 160,
+          "7": 195,
+          "8": 195,
+          "9": 160
+        },
+        "hull_dimension": 5,
+        "parameters": [
+          15,
+          5,
+          6
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 6,
+          "6": 10,
+          "8": 15
+        }
+      },
+      "grid_point": {
+        "dual_parameters": [
+          15,
+          10,
+          3
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 96,
+          "11": 60,
+          "12": 15,
+          "3": 20,
+          "4": 45,
+          "5": 72,
+          "6": 160,
+          "7": 240,
+          "8": 195,
+          "9": 120
+        },
+        "hull_dimension": 4,
+        "parameters": [
+          15,
+          5,
+          5
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "5": 6,
+          "8": 15,
+          "9": 10
+        }
+      }
+    },
+    "3": {
+      "context_point": {
+        "dual_parameters": [
+          15,
+          5,
+          6
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 90,
+          "11": 60,
+          "12": 40,
+          "15": 2,
+          "6": 20,
+          "8": 30
+        },
+        "hull_dimension": 1,
+        "parameters": [
+          15,
+          10,
+          3
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 12636,
+          "11": 11610,
+          "12": 7650,
+          "13": 3690,
+          "14": 810,
+          "15": 202,
+          "3": 30,
+          "4": 90,
+          "5": 270,
+          "6": 1430,
+          "7": 3510,
+          "8": 6750,
+          "9": 10370
+        }
+      },
+      "grid_context": {
+        "dual_parameters": [
+          15,
+          5,
+          6
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 90,
+          "11": 60,
+          "12": 40,
+          "15": 2,
+          "6": 20,
+          "8": 30
+        },
+        "hull_dimension": 1,
+        "parameters": [
+          15,
+          10,
+          3
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 12636,
+          "11": 11610,
+          "12": 7650,
+          "13": 3690,
+          "14": 810,
+          "15": 202,
+          "3": 30,
+          "4": 90,
+          "5": 270,
+          "6": 1430,
+          "7": 3510,
+          "8": 6750,
+          "9": 10370
+        }
+      },
+      "grid_point": {
+        "dual_parameters": [
+          15,
+          6,
+          5
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 222,
+          "11": 180,
+          "12": 40,
+          "14": 30,
+          "15": 14,
+          "5": 12,
+          "6": 20,
+          "7": 30,
+          "8": 30,
+          "9": 150
+        },
+        "hull_dimension": 0,
+        "parameters": [
+          15,
+          9,
+          4
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 4122,
+          "11": 3870,
+          "12": 2580,
+          "13": 1170,
+          "14": 360,
+          "15": 30,
+          "4": 90,
+          "6": 450,
+          "7": 1260,
+          "8": 2250,
+          "9": 3500
+        }
+      }
+    },
+    "5": {
+      "context_point": {
+        "dual_parameters": [
+          15,
+          5,
+          6
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 540,
+          "11": 120,
+          "12": 1080,
+          "13": 960,
+          "14": 240,
+          "15": 84,
+          "6": 40,
+          "8": 60
+        },
+        "hull_dimension": 0,
+        "parameters": [
+          15,
+          10,
+          3
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 994272,
+          "11": 1839780,
+          "12": 2428740,
+          "13": 2278620,
+          "14": 1272300,
+          "15": 347452,
+          "3": 60,
+          "4": 180,
+          "5": 900,
+          "6": 6820,
+          "7": 30660,
+          "8": 137220,
+          "9": 428620
+        }
+      },
+      "grid_context": {
+        "dual_parameters": [
+          15,
+          5,
+          6
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 540,
+          "11": 120,
+          "12": 1080,
+          "13": 960,
+          "14": 240,
+          "15": 84,
+          "6": 40,
+          "8": 60
+        },
+        "hull_dimension": 0,
+        "parameters": [
+          15,
+          10,
+          3
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 994272,
+          "11": 1839780,
+          "12": 2428740,
+          "13": 2278620,
+          "14": 1272300,
+          "15": 347452,
+          "3": 60,
+          "4": 180,
+          "5": 900,
+          "6": 6820,
+          "7": 30660,
+          "8": 137220,
+          "9": 428620
+        }
+      },
+      "grid_point": {
+        "dual_parameters": [
+          15,
+          5,
+          6
+        ],
+        "dual_weight_enumerator": {
+          "0": 1,
+          "10": 540,
+          "11": 120,
+          "12": 1080,
+          "13": 960,
+          "14": 240,
+          "15": 84,
+          "6": 40,
+          "8": 60
+        },
+        "hull_dimension": 0,
+        "parameters": [
+          15,
+          10,
+          3
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "10": 994272,
+          "11": 1839780,
+          "12": 2428740,
+          "13": 2278620,
+          "14": 1272300,
+          "15": 347452,
+          "3": 60,
+          "4": 180,
+          "5": 900,
+          "6": 6820,
+          "7": 30660,
+          "8": 137220,
+          "9": 428620
+        }
+      }
+    }
+  },
+  "coordinate_sets": {
+    "contexts": "15 synthemes",
+    "grids": "10 unordered 3+3 partitions",
+    "points": "15 duads"
+  },
+  "css": {
+    "distance_reason": "grid_context is [15,5,6] and its dual is an isodual copy of the binary context_point [15,10,3] code",
+    "novelty_boundary": "standard incidence-derived CSS code; no novelty claim",
+    "only_nonzero_family_pair": "binary grid_context is self-orthogonal",
+    "parameters": "[[15,5,3]]_2"
+  },
+  "orthogonal_rowspace_pairs": {
+    "2": [
+      [
+        "grid_context",
+        "grid_context"
+      ]
+    ],
+    "3": [],
+    "5": []
+  },
+  "outer_exchange": {
+    "base_chart_stabilizer_axis_orbit": 6,
+    "base_chart_stabilizer_order": 120,
+    "chart_action": "action on six synthematic totals; total stabilizer S5",
+    "conference_orbit_sizes_on_involutions": [
+      6,
+      30
+    ],
+    "frozen_operator_exchange_on_nodes": [
+      7,
+      6,
+      5,
+      8,
+      4,
+      0,
+      2,
+      3,
+      1,
+      9
+    ],
+    "frozen_operator_exchange_order": 8,
+    "golden_normalizations": 6,
+    "involutory_normalization_count": 36,
+    "involutory_polarities": 36,
+    "ordinary_axis_action": "natural action on six labels; point stabilizer S5",
+    "stabilizer_compatibility": "the induced total-action automorphism sends the outer-S5 chart stabilizer class to the ordinary point-stabilizer class",
+    "verdict": "positive outer exchange of the two degree-six representations; the operator alone does not select an involution.  Its frozen lexicographic marking is order 8, all 36 involutory normalizations remain possible, and the conference marking cuts these to the axis-indexed orbit of 6",
+    "w10_exchange_coset_size": 720
+  },
+  "permutation_automorphism_group": {
+    "abstract_group": "S6",
+    "justification": "minimum supports reconstruct respectively synthemes, six stars, 4-cycles of K6, or the ten-grid incidence; each has full coordinate automorphism group S6",
+    "order": 720
+  },
+  "rank_comparison": {
+    "2": "all incidence matrices drop, but only to ranks 10,5,5 while G,A drop to 1,0: incidence-only overlap, not an explanation",
+    "3": "grid_point alone drops to rank 9; context_point and grid_context stay rank 10 while G,A have rank 3: unrelated scalar/compound degeneration",
+    "5": "all three codes have rank 10 and zero hull (context_point equals grid_point, while grid_context meets it in dimension 5) and G,A retain rank 4: the bad prime is sign-lift/golden-splitting arithmetic, not incidence"
+  },
+  "rowspace_intersection_dimensions": {
+    "2": {
+      "context_point_and_grid_context": 0,
+      "context_point_and_grid_point": 5,
+      "grid_context_and_grid_point": 0
+    },
+    "3": {
+      "context_point_and_grid_context": 6,
+      "context_point_and_grid_point": 9,
+      "grid_context_and_grid_point": 5
+    },
+    "5": {
+      "context_point_and_grid_context": 5,
+      "context_point_and_grid_point": 10,
+      "grid_context_and_grid_point": 5
+    }
+  },
+  "schema": "c708-doily-codes-and-outer-exchange-v1",
+  "signed_lifts": "Pauli and Clebsch context signs are row scalings followed by the frozen point rephasing, hence give the same or monomially equivalent codes over every odd field; in characteristic 2 all signs coincide",
+  "symplectic": "the CSS check matrix diag(grid_context,grid_context) is symplectically self-orthogonal; no odd-characteristic member of this incidence family is self-orthogonal"
+}

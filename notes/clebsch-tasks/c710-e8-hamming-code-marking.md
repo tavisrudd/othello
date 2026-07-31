@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after C708 and the C705 common-source gate
+**Status:** queued; C708 and the C705 common-source gate are complete
 
 ## Objective
 
@@ -19,6 +19,11 @@ Construction-A partner is the ten-dimensional isodual lattice \(Q_{10}\).
 Confirm that identification in C708 first.  If it holds, C710 must explain
 an explicit bridge \(Q_{10}\rightsquigarrow E_8\) or accept \(Q_{10}\) as a
 nearer code-lattice parent; shared exceptional symmetry is not a bridge.
+
+C708 confirms that the doily incidence codes introduce no hidden
+characteristic-\(5\) degeneration and that the polar operator's finite
+exchange stops at the golden six-pack.  The \(Q_{10}\rightsquigarrow E_8\)
+marking gate is therefore open without any stronger finite-polarity input.
 
 ## Gates
 

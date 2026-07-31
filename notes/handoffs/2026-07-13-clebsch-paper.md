@@ -77,6 +77,20 @@ mechanism.  Exact reports:
 marked-double-six package remains unallocated pending an explicit
 promotion decision.
 
+C708 is complete.  The Segre--Igusa mixed differential realizes the
+exceptional outer exchange between C706's synthematic-total Clifford-chart
+action and the ordinary conference-axis action: it transports the two
+classes of \(S_5\) in \(S_6\), rather than directly identifying their
+elements.  Its frozen finite \(W_{10}\) exchange has order \(8\), so the
+operator alone selects no involutory polarity; all \(36\) inner
+normalizations remain, and the conference marking cuts them to the known
+axis-indexed six-pack.  Complete \(\mathbf F_2,\mathbf F_3,\mathbf F_5\)
+incidence-code tables show that the doily ranks do not explain C705's bad
+primes: \(2\) has only an incidence overlap, \(3\) is the
+scalar-\(6\)/compound boundary, and \(5\) belongs to the golden sign lift.
+The sole CSS output is the standard binary \([[15,5,3]]_2\) code.  Full
+report: `notes/2026-07-30-c708-doily-codes-and-outer-exchange.md`.
+
 ## Active and queued task cards
 
 | task | state | next gate |
@@ -88,9 +102,9 @@ promotion decision.
 | [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
 | [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
-| [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | queued | compute exact code parameters and compare the \(2,3,5\) rank jumps |
+| [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | complete; outer exchange positive at representation level, no canonical involutory polarity, exact code tables closed | none |
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | queued | decide which conference/two-graph data survive fermionic gauge |
-| [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | queued after C708/common-source gate | seek or obstruct one explicit integral lattice marking |
+| [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | queued; C708/common-source gate complete | seek or obstruct one explicit integral lattice marking |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace

@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued
+**Status:** complete
 
 ## Objective
 
@@ -72,3 +72,25 @@ comparison or the standard-code identification as if still open.
 
 The two-qubit stabilizer geometry alone is not a new error-correcting code.
 Finite parameter tables require exact certificates and independent replay.
+
+## Disposition
+
+The operator gate is positive at exactly the outer-twisted representation
+level.  C705's mixed differential
+\(\bar G_x:O_X\to A_X^\vee\) couples the synthematic-total chart action to
+the ordinary axis action, and its stabilizer transport exchanges the two
+classes of \(S_5\) in \(S_6\).  It does not canonically select an
+involutory \(W_{10}\) polarity: the frozen compatible exchange has order
+\(8\), all \(36\) involutory inner normalizations remain, and the golden
+conference marking cuts them to the axis-indexed orbit of six.
+
+The exact incidence codes over \(\mathbf F_2,\mathbf F_3,\mathbf F_5\)
+have been classified through dimensions, duals, hulls, distances, full
+weight enumerators, and \(S_6\) automorphism groups.  Their rank behavior
+does not explain C705's primes: \(2\) has only an incidence overlap, \(3\)
+is the scalar-\(6\)/compound degeneration, and \(5\) is confined to the
+golden sign/eigenspace lift.  The only CSS member is the standard binary
+\([[15,5,3]]_2\) code from the self-orthogonal grid--context rowspace.
+
+Full report and certificate:
+`notes/2026-07-30-c708-doily-codes-and-outer-exchange.md`.
