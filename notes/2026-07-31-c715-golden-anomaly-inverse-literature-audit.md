@@ -120,4 +120,3 @@ reliable.  No forward-citation closure was attempted, and zbMATH was not used
 to claim an absence.  Consequently the manuscript should attribute the
 Joubert inverse and anomaly geometry classically and avoid “first” or “to our
 knowledge” language for the operator-specific synthesis.
-
