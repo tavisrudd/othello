@@ -4,11 +4,11 @@
 
 **Opened:** 2026-07-26
 
-**Status:** C730 source theorem integrated; the five-statement/five-row
-paper-owned trust surface, ordinary and isolated aggregates, warning-free PDF,
-visual audit, and fresh context-free referee gate are green.  Submission
-remains blocked only by publication metadata and the immutable artifact
-locator.
+**Status:** the arithmetic/harmonic baseline, five-statement/five-row trust
+surface, ordinary and isolated aggregates, and warning-free PDF remain green,
+but a stricter second context-free review reopened the canonicality of the
+orientation bridge.  C733 owns that mathematical repair; publication metadata
+and the immutable locator remain later external blockers.
 
 ## Objective
 
@@ -30,7 +30,11 @@ paper-owned trust surface.  The revision ends at the oriented source class
 - Deleted Mathieu, Hadamard, matching, Klein, and speculative physical
   branches are absent from the paper package.
 - Ordinary and isolated replay, the warning-free fourteen-page PDF, visual
-  inspection, and a fresh context-free pre-release review are green.
+  inspection, and the first post-integration review are green.
+- A second context-free review accepted the arithmetic and harmonic theorems
+  and the layout, but found that the sheet-to-marked-source bridge does not yet
+  prove independence from axis ordering, lattice orientation, plane-triple
+  labels, and lift normalization.  C733 is the owning blocker.
 - The former release surface is now the frozen comparison baseline, not the
   submission candidate.  C730 supersedes the broad operator-shadow expansion
   as the scope authority; the older expansion plan remains a historical map
@@ -38,9 +42,10 @@ paper-owned trust surface.  The revision ends at the oriented source class
 
 ## Next action
 
-Obtain and insert the immutable artifact locator and the author's intended
-affiliation/contact metadata.  Until those user-controlled inputs exist, keep
-`submission_ready=false`; do not reopen the mathematical or trust surface.
+Complete C733, align the theorem and trust surface with its canonical or
+explicitly relative disposition, and obtain a fresh context-free `GO`.  Only
+then insert the immutable artifact locator and the author's intended
+affiliation/contact metadata.
 
 ## Boundaries and records
 
