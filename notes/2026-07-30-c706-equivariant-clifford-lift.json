@@ -1,0 +1,111 @@
+{
+  "clifford_mod_phase_extension": "1 -> F2^4 -> Clifford_2/phases -> Sp4(F2) -> 1",
+  "conference_S5_boundary": {
+    "H1_dimension": 1,
+    "candidate_lift_census": {
+      "full_preimages_of_order_1920": 480,
+      "split_complements_of_order_120": 32
+    },
+    "extendable_A5_conjugacy_classes": [
+      0,
+      3
+    ],
+    "golden_conference_class_extends": false,
+    "order": 120,
+    "orientation_reverser": [
+      0,
+      1,
+      4,
+      5,
+      3,
+      2
+    ],
+    "orientation_reverser_order": 4,
+    "pauli_conjugacy_orbits": 2,
+    "splittings": 32
+  },
+  "conference_phase": {
+    "base_conjugacy_class": 0,
+    "base_splitting_assignment": 48,
+    "class_nonzero_in_H1_A5_F2_4": true,
+    "equals_golden_A5": true,
+    "extends_to_conference_S5": false,
+    "generator_linear_corrections": [
+      1,
+      4
+    ],
+    "permutations_with_linear_phase_difference": 60,
+    "twisted_conjugacy_class": 2,
+    "twisted_splitting_assignment": 113
+  },
+  "full_S6_coxeter_system": {
+    "augmented_rank": 16,
+    "coefficient_rank": 15,
+    "five_equation_contradiction_rhs": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "five_equation_contradiction_rows": [
+      2,
+      256,
+      196608,
+      257,
+      196611
+    ],
+    "obstruction": "nonzero class in H^2(S6,F2^4)",
+    "splits": false,
+    "variables": 20
+  },
+  "golden_A5": {
+    "H1_dimension": 2,
+    "augmented_rank": 2,
+    "coefficient_rank": 2,
+    "generators": [
+      [
+        0,
+        2,
+        4,
+        1,
+        5,
+        3
+      ],
+      [
+        1,
+        0,
+        3,
+        2,
+        4,
+        5
+      ]
+    ],
+    "lift_variables": 8,
+    "orbit_sizes": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "order": 60,
+    "pauli_conjugacy_orbits": 4,
+    "presentation_orders": [
+      5,
+      2,
+      3
+    ],
+    "scalar_projective_multiplier": {
+      "class": "trivial in H^2(A5,U(1))",
+      "raw_relations": "U_a^5=iI, U_b^2=I, (U_a U_b)^3=iI",
+      "rephasing": "U_a -> -i U_a, U_b -> -U_b"
+    },
+    "splittings": 64
+  },
+  "ground_field": "F2",
+  "schema": "c706-equivariant-clifford-lift-v1",
+  "scope": "The class controls the integral conference marking and its triangle coboundary K, not the full-S6 Joubert tensor or the sqrt(5) eigenfield.",
+  "symplectic_action_size": 720,
+  "symplectic_group": "Sp4(F2) ~= S6",
+  "verdict": "The full S6 Clifford extension is nonsplit. Its golden A5 restriction splits in 64 ways forming four Pauli-conjugacy classes; conference rephasing selects a nonzero H1 class."
+}

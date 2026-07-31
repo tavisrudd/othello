@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after the C705 ordinary-gauge comparison
+**Status:** complete
 
 ## Objective
 
@@ -34,3 +34,22 @@ positive invariant here must genuinely use equivariance.  Its isodual
 \([10,5,4]\) quotient has an \(S_6\)-torsor of exactly \(720\) dualizing
 coordinate maps; compare that torsor with the Clifford lifts rather than
 choosing an arbitrary isoduality.
+
+## Disposition
+
+The full \(S_6\) Clifford extension modulo scalar phases is nonsplit, with
+nonzero obstruction in \(H^2(S_6,\mathbf F_2^4)\).  Its golden \(A_5\)
+restriction has \(64\) splittings in four Pauli-conjugacy classes, and the
+conference rephasing selects a nonzero class in
+\(H^1(A_5,\mathbf F_2^4)\).  The remaining scalar multiplier is trivial
+after exact rephasing.  The class controls the conference marking and its
+triangle coboundary \(K\), not Joubert or \(\mathbf Q(\sqrt5)\).
+The full conference switching \(S_5\) still has \(32\) Clifford splittings
+in two Pauli-conjugacy classes, but the distinguished conference
+\(H^1(A_5,\mathbf F_2^4)\) class does not extend across the
+orientation-reversing coset.  Thus the phase boundary is
+\(A_5\subset S_5\), whereas the Clifford-extension obstruction occurs only
+at \(S_5\subset S_6\).
+
+Full report and certificate:
+`notes/2026-07-30-c706-equivariant-clifford-lift.md`.
