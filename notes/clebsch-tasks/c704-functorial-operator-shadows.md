@@ -11,7 +11,10 @@ gates.  Full report:
 The unallocated successor portfolio is recorded in
 [`../2026-07-30-c704-follow-up-mining-plan.md`](../2026-07-30-c704-follow-up-mining-plan.md);
 its recommended first tranche is the adjugate-polar and marked-double-six
-packages as separate future C-items.
+packages as separate future C-items.  Every promoted package requires
+distinct `ej1`, `tt1`, `ej2`, and `tt2` passes and may not close on its
+first negative gate; obstructions must be mined for their minimal locus,
+nearest positive repair, converse, propagation law, and adjacent crown.
 
 ## Objective
 

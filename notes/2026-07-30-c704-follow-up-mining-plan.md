@@ -79,16 +79,84 @@ Each package follows the same loop:
 5. **Certify computation atomically.**  Report, exact generator,
    canonical certificate, checksum manifest, and independent replay move
    together.
-6. **Run `ej` + `tt`.**  Do cheap package-owned upgrades and refresh the
-   mystery ledger.
+6. **Run double `ej` + double `tt`.**  Every promoted package receives
+   four explicit closeout passes in the order `ej1`, `tt1`, `ej2`, `tt2`.
+   The second pair begins only after the first pair's cheap upgrades and
+   counterchecks have been incorporated; it is not a restatement of the
+   first pair.
 7. **Classify the result.**
    - `crown`: supports a successor theorem or paper-level synthesis;
    - `bridge`: exact and reusable but not independently publishable;
    - `inventory`: bounded data with a clear consumer;
-   - `negative`: exact obstruction plus one adjacent-crown extraction.
+   - `negative`: structural obstruction plus the full negative-yield
+     protocol and one adjacent-crown extraction.
 8. **Stop at the package boundary.**  Incidental observations go to the
    Clebsch discovery track only when they were not part of the package's
    named questions.
+
+### No-early-bail rule
+
+A failed first conjecture, zero Hom space, mismatched marking, bad fibre,
+or literature pre-emption is an intermediate verdict, never package
+closeout.  Before a promoted package may close, it must:
+
+1. execute every listed first falsifier or gate whose hypotheses remain
+   meaningful;
+2. run the explicitly named adjacent variants and cheap upgrades;
+3. complete `ej1` and `tt1`, implement or exactly obstruct every
+   package-owned lead they expose, and update the evidence;
+4. rerun the main acceptance tests against that strengthened object;
+5. complete `ej2` and `tt2` from the strengthened state, again resolving
+   every in-scope cheap lead; and
+6. record a final mystery ledger separating settled questions, exact
+   obstructions, and successors that genuinely exceed the package
+   boundary.
+
+The four passes must be substantively distinct:
+
+- `ej1` mines immediate formulas, degenerations, markings, and free
+  consequences;
+- `tt1` challenges definitions, functoriality, hidden hypotheses, and
+  alternative structural explanations;
+- `ej2` mines the repaired or negatively classified object for the next
+  layer of consequences; and
+- `tt2` attacks the final theorem level, tests uniformity and converse
+  directions, and looks for a stronger formulation or decisive
+  counterexample.
+
+Negative acceptance therefore means exhaustion of the package's stated
+route family, not failure of its preferred route.  “No early bailing” does
+not authorize unbounded parameter sweeps or silent scope growth: when the
+listed route family is exhausted, further work requires a separately
+allocated package.
+
+### Negative-yield protocol
+
+Negative results are first-class outputs, not consolation prizes.  When a
+candidate construction fails, the package must mine the failure through
+all four closeout passes and determine, as far as its bounded domain
+allows:
+
+1. the **minimal obstruction**: the first wrong rank, character, twist,
+   field, conductor, ramification index, Ext group, or singularity type;
+2. the **obstruction locus**: whether failure is generic, divisorial,
+   confined to special markings or fibres, or caused by one exceptional
+   isotypic summand;
+3. the **nearest positive locus**: the maximal subspace, localization,
+   normalization, cover, twist, or weakened functorial statement on which
+   the construction becomes exact;
+4. the **converse content**: whether vanishing of the obstruction
+   characterizes the classical object or selects a canonical sister;
+5. the **propagation law**: whether the obstruction repeats by degree,
+   McKay phase, prime splitting type, or categorical periodicity; and
+6. the **adjacent crown**: one exact theorem extracted from the failure,
+   with its consumer and novelty status stated.
+
+A negative package is complete only when it gives a structural explanation
+or proves that no sharper explanation exists within the enumerated route
+family.  Its final report must distinguish a computational nonexample, a
+representation-theoretic impossibility, a moduli-boundary theorem, and a
+literature pre-emption; these are not interchangeable verdicts.
 
 ## Dependency map
 
@@ -554,7 +622,9 @@ The C704 seam is exhausted when all promoted packages satisfy one of:
 - inventory delivered to a named consumer; or
 - external access/authority gate recorded.
 
-The portfolio stops without further allocation if:
+The portfolio stops without further allocation only after the relevant
+packages have completed their full gate families and both `ej` + `tt`
+pairs, and:
 
 - WP1 has no intrinsic quadratic-minor polar construction;
 - WP2 has no marked determinantal/C695 section;

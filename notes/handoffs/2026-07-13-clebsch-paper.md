@@ -54,7 +54,10 @@ An exhaustive, dependency-gated follow-up portfolio is staged at
 [`../2026-07-30-c704-follow-up-mining-plan.md`](../2026-07-30-c704-follow-up-mining-plan.md).
 No successor C-IDs are allocated; the recommended first tranche is the
 adjugate-polar and marked-double-six packages as two separate future
-Clebsch items.
+Clebsch items.  Each promoted package is a no-early-bail exploration with
+distinct `ej1`, `tt1`, `ej2`, and `tt2` passes before closeout.  Negative
+outcomes are first-class mining objects and require a structural
+obstruction theorem plus their nearest positive locus and adjacent crown.
 
 ## Active and queued task cards
 
