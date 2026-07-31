@@ -1,6 +1,6 @@
 # C716 — Golden synthesis of two-\(U(1)\) anomaly lines
 
-**Lane:** `clebsch`
+**Lane:** `golden`
 
 **Status:** queued after C715
 
@@ -48,4 +48,3 @@ from charge arithmetic alone.
 ## Dependencies
 
 C715's inverse and exceptional-set theorem.
-

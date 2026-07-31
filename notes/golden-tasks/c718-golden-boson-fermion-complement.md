@@ -1,8 +1,8 @@
 # C718 — Golden boson--fermion complement
 
-**Lane:** `clebsch`
+**Lane:** `golden`
 
-**Status:** queued; independent C707 successor
+**Status:** queued after C720; independent of C715
 
 ## Objective
 
@@ -41,5 +41,5 @@ observable without an explicit theorem supplying that structure.
 
 ## Dependencies
 
-C707 complete.  C719 consumes the accepted experimental discriminator.
-
+C720 freezes the paper interface; C707 is complete.  C719 consumes the
+accepted experimental discriminator.

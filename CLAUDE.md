@@ -70,6 +70,7 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 | `cubic` | `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md` |
 | `dihedral` | `notes/handoffs/2026-07-17-dihedral-paper.md` |
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
+| `golden` | `notes/handoffs/2026-07-31-golden-operator-paper.md` |
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
 | `nofil` | `notes/handoffs/2026-07-17-nofil-paper.md` |
 | `paper-frob-eq` | `notes/handoffs/2026-07-14-alternate-orbit-repair.md` |

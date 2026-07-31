@@ -1,6 +1,6 @@
 # C719 — Golden six-mode demonstrator design
 
-**Lane:** `clebsch`
+**Lane:** `golden`
 
 **Status:** queued after C715 and C718
 
@@ -43,4 +43,3 @@ that it realizes a dynamical gauge theory.
 ## Dependencies
 
 C715 and C718.  C717 is optional input if a Majorana platform is selected.
-

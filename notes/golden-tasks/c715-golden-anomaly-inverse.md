@@ -1,8 +1,8 @@
 # C715 — Golden anomaly inverse
 
-**Lane:** `clebsch`
+**Lane:** `golden`
 
-**Status:** queued; highest-EV C707 successor
+**Status:** queued after C720
 
 ## Objective
 
@@ -49,6 +49,5 @@ field theory.
 
 ## Dependencies
 
-C707 complete.  C716 and C719 consume this task's frozen inverse and
+C720 freezes the paper interface; C707 is complete.  C716 and C719 consume this task's frozen inverse and
 normalization interface.
-

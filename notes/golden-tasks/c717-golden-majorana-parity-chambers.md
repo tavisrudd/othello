@@ -1,8 +1,8 @@
 # C717 — Golden Majorana parity chambers
 
-**Lane:** `clebsch`
+**Lane:** `golden`
 
-**Status:** queued; independent C707 successor
+**Status:** queued after C720; independent of C715
 
 ## Objective
 
@@ -47,5 +47,5 @@ finite skew Hamiltonian and a Pfaffian sign.
 
 ## Dependencies
 
-C707 and C709 complete.  This task may run independently of C715.
-
+C720 freezes the paper interface; C707 and C709 are complete.  This task
+may run independently of C715.
