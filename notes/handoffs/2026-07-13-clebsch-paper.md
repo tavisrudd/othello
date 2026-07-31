@@ -173,6 +173,9 @@ complementary support pairs; only its three irreducible scalars and the two
 Iwahori endpoints remain optional integral choices.  The latter form an
 index-five lattice edge: the explicit normalizer \(w\), satisfying \(w^2=5I\),
 exchanges its endpoints, so choosing one is precisely an orientation choice.
+Point--pair incidence further gives canonical projectors onto the
+\(1,4,5\) Morita channels; their denominators locate prime \(3\) in the
+icosahedral integral splitting rather than the quaternion order.
 Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 

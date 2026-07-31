@@ -33,6 +33,9 @@ differential scale.  The Milnor--Serre pass realizes the Iwahori as the
 endomorphism intersection of an index-five lattice edge and exhibits
 an operator \(w\), satisfying \(w^2=5I\), that exchanges its endpoints; the
 endpoint freedom is therefore only an orientation choice.
+The second pass uses point--pair incidence to diagonalize the ten-point
+Morita carrier with eigenvalues \(6,1,-2\), giving canonical projectors onto
+the \(1,4,5\) channels and locating prime \(3\) in their integral separation.
 C712 is unblocked.
 
 ## Objective

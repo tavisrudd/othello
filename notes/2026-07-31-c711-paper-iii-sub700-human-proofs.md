@@ -689,6 +689,59 @@ edge.  The operator \(w\) reverses the orientation and its square is the
 central scalar \(5\).  This is the same ramified golden prime, seen in the
 one-dimensional geometry of Serre's tree.
 
+**Corollary 5.6 (canonical Morita channels).**  On the ten two-subsets of a
+five-set, let \(A\) join two subsets when they meet in one point.  Then \(A\)
+has eigenvalues
+\[
+ 6,quad1,quad-2
+\]
+with multiplicities \(1,4,5\).  The corresponding rational projectors are
+\[
+ P_1=\frac{(A-I)(A+2I)}{40},\qquad
+ P_4=-\frac{(A-6I)(A+2I)}{15},\qquad
+ P_5=\frac{(A-6I)(A-I)}{24}.
+\]
+Thus the three scalar freedoms in the Morita linearization are canonically
+separated.  The prime \(3\), absent from the quaternion order, occurs in the
+integral separation of the \(4\)- and \(5\)-dimensional channels.
+
+**Proof.**  Let \(R\) be the point--pair incidence matrix, with five rows and
+ten columns.  Two pairs share one point exactly when they are adjacent, so
+\[
+ R^{\mathsf T}R=A+2I.
+\]
+Each point lies on four pairs and each pair of points determines one pair;
+hence
+\[
+ RR^{\mathsf T}=3I+\mathbf1\mathbf1^{\mathsf T}.
+\]
+This operator has eigenvalue \(8\) on the constant line and eigenvalue \(3\)
+on the four-dimensional augmentation space.  Therefore \(A\) has eigenvalues
+\(6\) and \(1\) on their images under \(R^{\mathsf T}\).  The matrix
+\(RR^{\mathsf T}\) is invertible, so \(R\) has rank five; on its
+five-dimensional kernel, \(A=R^{\mathsf T}R-2I=-2I\).
+
+Lagrange interpolation at \(6,1,-2\) gives the three displayed projectors.
+For integrality, use the strongly regular identity
+\[
+ A^2=2I-A+4\mathbf1\mathbf1^{\mathsf T}.
+\]
+It reduces them to
+\[
+ P_1=\frac{\mathbf1\mathbf1^{\mathsf T}}{10},\qquad
+ P_4=\frac{10I+5A-4\mathbf1\mathbf1^{\mathsf T}}{15},\qquad
+ P_5=\frac{2I-2A+\mathbf1\mathbf1^{\mathsf T}}6.
+\]
+An adjacent off-diagonal entry of \(P_4\) is \(1/15\), and one of \(P_5\)
+is \(-1/6\).  Thus their denominators genuinely contain \(3\).  \(\square\)
+
+**Tao-style check after Corollary 5.6.**  The three Morita scalars no longer
+float in an unspecified commutant.  They belong to three visible spectral
+channels of one ten-vertex graph.  The incidence factorization explains the
+dimensions without a character table, while the projector denominators make
+the integral boundary honest: prime \(5\) comes from the golden edge, and
+prime \(3\) enters when the two nonconstant icosahedral channels are split.
+
 ## 6. Human derivation of the degree-ten return
 
 Let \(L=E(i)\), with \(i^2=-1\), and for \(a=(a,b,c)\) define
@@ -1004,6 +1057,7 @@ Theorem statements:
 | `middleExterior_goldIwahori` | reduction of \(H,t\) modulo \(5\) | golden order is the Borel preimage stabilizing \(L\) |
 | `middleExterior_moritaFactor` | commuting \(A_5\) and split-quaternion actions | multiplicity module is \(\mathbf1\oplus\mathbf4\oplus\mathbf5\) |
 | `middleExterior_IwahoriEdge` | index-five lattice pair | golden order is their endomorphism intersection; \(w^2=5I\) swaps the endpoints |
+| `middleExterior_moritaProjectors` | point--pair incidence factorization | Johnson eigenvalues \(6,1,-2\) and the three rational projectors |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
 The large transvectant scalar should enter C712 as a proved interface constant
@@ -1034,6 +1088,7 @@ no additional finite search.
 | residual level-5 Iwahori | Corollary 5.3 | displayed common eigenline and quotient functional |
 | Morita multiplicity module | Corollary 5.4 | character decomposition; no machine input |
 | Iwahori lattice edge and endpoint symmetry | Corollary 5.5 | two lattice calculations; no machine input |
+| canonical Morita channels and prime \(3\) | Corollary 5.6 | incidence algebra; no machine input |
 | degree-ten return and exact scalar | Lemma 6 | C682 primary and independent replay |
 | golden conjugation and paired rational descent | Lemmas 6–7 | both C682 replays |
 | C680/C712 rings, signs, and bad-prime boundary | exported interfaces | not computational |
@@ -1060,7 +1115,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces eleven cheap upgrades beyond certificate removal.
+The proof pass produces twelve cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -1087,7 +1142,10 @@ the Morita factor is forced to be
 \(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the module on the ten complementary
 support pairs.  Eleventh, the residual Iwahori is the endomorphism intersection
 of an index-five lattice edge, and the explicit operator \(w\), satisfying
-\(w^2=5I\), exchanges its two maximal endpoints.
+\(w^2=5I\), exchanges its two maximal endpoints.  Twelfth, point--pair
+incidence canonically separates the Morita factor into its \(1,4,5\) channels;
+the denominators show that prime \(3\) belongs to this icosahedral integral
+splitting, not to the quaternion order.
 
 ## Degrees of freedom after the DOF pass
 
@@ -1097,8 +1155,10 @@ choices are narrower:
 
 - **Morita linearization:** the isomorphism
   \(M\cong\mathbf Q[\{\text{complementary pairs}\}]\) is unique up to one
-  scalar on each of \(\mathbf1,\mathbf4,\mathbf5\).  A primitive idempotent
-  and an integral support normalization would fix them.
+  scalar on each of \(\mathbf1,\mathbf4,\mathbf5\).  The Johnson projectors
+  canonically isolate these channels; only their three relative
+  normalizations remain.  Their denominators also locate the integral
+  \(3\)-boundary.
 - **Iwahori orientation:** \(\mathcal O_{\rm gold}\) determines an unoriented
   edge with two adjacent maximal orders.  The operator \(w\), satisfying
   \(w^2=5I\), exchanges them, so selecting the displayed split model is
@@ -1152,8 +1212,9 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   settled negatively and sharply.  Its normalized and primitive-return orders
   have indices \(20\) and \(500\); adjoining the integral golden coordinate
   leaves index \(5\).  All are supported only at \(2,5\).  The prime \(3\)
-  boundary belongs to the transvectant/apolar/icosahedral input, not to
-  \((*,K)\).
+  boundary belongs to the icosahedral input, not to \((*,K)\): it already
+  appears in the rational projectors separating the \(4\)- and
+  \(5\)-dimensional Morita channels.
 - **What the final index \(5\) measures:** settled.  The golden order is the
   preimage of the Borel preserving the unique line
   \(L=\langle(1,2)\rangle\) modulo \(5\); its quotient is the opposite-root
@@ -1164,8 +1225,10 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
 - **What the ten-dimensional Morita multiplicity is:** settled at the
   rational module level.  It is
   \(\mathbf1\oplus\mathbf4\oplus\mathbf5\), the complementary-pair
-  permutation module.  Three irreducible scaling choices remain before a
-  literal integral identification.
+  permutation module.  Point--pair incidence gives canonical projectors onto
+  the three summands.  Three irreducible scaling choices remain before a
+  literal integral identification, and the projector denominators explain
+  why this splitting is not integral at \(3\).
 - **Why the return scalar has its form:** settled by a single Fischer norm.
   The rational factor comes from the raw derivative normalization and the
   golden factor is \(st^6\).
