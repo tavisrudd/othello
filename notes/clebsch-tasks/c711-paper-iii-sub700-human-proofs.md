@@ -36,6 +36,9 @@ endpoint freedom is therefore only an orientation choice.
 The second pass uses point--pair incidence to diagonalize the ten-point
 Morita carrier with eigenvalues \(6,1,-2\), giving canonical projectors onto
 the \(1,4,5\) channels and locating prime \(3\) in their integral separation.
+The third pass proves by projective incidence that the exterior-cube kernel
+over every field is exactly \(\mu_3(F)\), distinguishing field-valued
+faithfulness in characteristic \(3\) from the nonreduced group-scheme kernel.
 C712 is unblocked.
 
 ## Objective

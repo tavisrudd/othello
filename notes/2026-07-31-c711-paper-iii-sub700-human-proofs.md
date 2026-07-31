@@ -286,6 +286,41 @@ not a fitted coefficient.
 
 ## 5. Recovery of the distinguished support lattice
 
+**Exterior-cube kernel lemma.**  Let \(F\) be any field and let \(V\) have
+dimension six.  Then
+\[
+ \ker\bigl(\Lambda^3:\operatorname{GL}(V)
+       \longrightarrow\operatorname{GL}(\Lambda^3V)\bigr)
+ =\{\zeta I:\zeta^3=1\}=\mu_3(F).
+\]
+Consequently, if \(g,h\in\operatorname{GL}(V)\), then
+\(\Lambda^3g=\Lambda^3h\) exactly when \(g=\zeta h\) for some
+\(\zeta\in\mu_3(F)\).
+
+**Proof.**  Suppose \(\Lambda^3g=I\).  For every three-plane \(U\subset V\),
+the line \(\Lambda^3U\) is fixed.  A nonzero
+\(\omega\in\Lambda^3U\) recovers
+\(U=\{v\in V:v\wedge\omega=0\}\), so \(gU=U\).  Every line
+\(\ell\subset V\) is the intersection of the three-planes containing it:
+given \(x\notin\ell\), one can choose such a three-plane avoiding \(x\).
+Therefore \(g\ell=\ell\), and every line is invariant under \(g\).
+
+Choose a basis \(e_1,\ldots,e_6\).  Invariance of the coordinate lines gives
+\(ge_i=\lambda_i e_i\).  Invariance of the line through \(e_i+e_j\) gives
+\(\lambda_i=\lambda_j\).  Hence \(g=\zeta I\), and
+\(I=\Lambda^3g=\zeta^3I\).  Conversely, every scalar with \(\zeta^3=1\)
+lies in the kernel.  Applying this to \(gh^{-1}\) proves the last assertion.
+\(\square\)
+
+**Tao-style check after the exterior-cube kernel lemma.**  No
+diagonalization, algebraic closure, or characteristic restriction is needed.
+The exterior cube remembers every three-plane, and their incidence remembers
+every line.  The only information it can lose is a scalar cube root of unity.
+Over \(\mathbf Q\) there is none besides \(1\).  In characteristic \(3\), the
+set of field-valued kernel elements is still trivial, although the group
+scheme \(\mu_3\) is nonreduced; a formalization should keep those two claims
+distinct.
+
 **Lemma 5 (parity reconstruction).**  On the distinguished lattice
 \(\Lambda^3V\),
 \[
@@ -346,10 +381,9 @@ operator, including its signs.  The defining equation for \(K\) then gives
 \[
  \Lambda^3C=-*K.
 \]
-The kernel of the exterior-cube representation
-\(\Lambda^3:\operatorname{GL}_6\to\operatorname{GL}_{20}\) is the scalar
-group \(\mu_3\).  Over \(\mathbf Q\), its only rational point is \(1\);
-hence \(\Lambda^3C\) determines \(C\) uniquely.  Reversing the recovered
+The exterior-cube kernel lemma shows that the only ambiguity is a scalar in
+\(\mu_3\).  Over \(\mathbf Q\), its only rational point is \(1\); hence
+\(\Lambda^3C\) determines \(C\) uniquely.  Reversing the recovered
 orientation negates \(*\), and therefore negates \(\Lambda^3C\); this is
 exactly the replacement \(C\mapsto-C\).  The other atom family is the
 expected complement duality.  \(\square\)
@@ -1051,6 +1085,7 @@ Theorem statements:
 | `middleExterior_diag` | explicit normalization | \(K_{SS}=4c_S\) |
 | `middleExterior_parity` | distinguished triple lattice | odd iff intersection one |
 | `support_reconstruct` | the parity relation | Johnson scheme up to complement |
+| `exteriorCube_kernel` | six-dimensional vector space over a field | kernel on points is \(\mu_3\) |
 | `middleExterior_recovers_conference` | recovered atoms and orientation over \(\mathbf Q\) | \(-*K=\Lambda^3C\) determines \(C\) |
 | `middleExterior_splitQuaternion` | \(H=*\), \(J=K/5\) over \(\mathbf Q\) | generated algebra is \(M_2(\mathbf Q)\) and \(HJH^{-1}=-J\) |
 | `middleExterior_orderSmith` | displayed \(2\times2\) split model | indices \(20,5,500\) for the normalized, golden, and return orders |
@@ -1065,8 +1100,9 @@ only if C712 formalizes binary forms and the Fischer adjoint.  Otherwise C712
 should formalize the operator-shadow package from the explicit \(C\) and state
 the degree-ten return theorem as paper-proved, outside its trust claim.
 Likewise, `middleExterior_recovers_conference` is a cheap optional corollary:
-C712 may prove the general \(\mu_3\)-kernel lemma, or retain only the explicit
-identity \(-*K=\Lambda^3C\) and leave rational faithfulness paper-proved.
+C712 may formalize the projective-incidence proof of the general
+\(\mu_3\)-kernel lemma, or retain only the explicit identity
+\(-*K=\Lambda^3C\) and leave rational faithfulness paper-proved.
 The split-quaternion corollary is cheaper still: four matrix relations and the
 displayed \(2\times2\) model suffice.
 Its integral-order refinement needs only the two displayed \(4\times4\)
@@ -1083,6 +1119,7 @@ no additional finite search.
 | converse reconstruction and unique class | Lemma 3 | C691 replay |
 | \(K^2=125I\), diagonal scalar \(4\), Hodge signs | Lemma 4 | C682 Weyl replay |
 | distinguished support lattice from \(K\bmod2\) | Lemma 5 | C682 Weyl replay |
+| exact exterior-cube ambiguity | exterior-cube kernel lemma | projective incidence; no machine input |
 | split quaternion and inner golden conjugation | Corollary 5.1 | C682 audits \(K^2\); split model is displayed |
 | normalized and primitive quaternion orders | Corollary 5.2 | displayed determinantal divisors and trace Grams |
 | residual level-5 Iwahori | Corollary 5.3 | displayed common eigenline and quotient functional |
@@ -1115,7 +1152,7 @@ They do not supply any logical step in Lemmas 1–7.
 
 ## Extra-juice and Tao closeout
 
-The proof pass produces twelve cheap upgrades beyond certificate removal.
+The proof pass produces thirteen cheap upgrades beyond certificate removal.
 First, the tight-frame equation derives the conference square without a single
 six-by-six multiplication.  Second, the middle-exterior diagonal reduces to
 two dihedral minors and Hodge complementation; this isolates the orientation
@@ -1145,7 +1182,9 @@ of an index-five lattice edge, and the explicit operator \(w\), satisfying
 \(w^2=5I\), exchanges its two maximal endpoints.  Twelfth, point--pair
 incidence canonically separates the Morita factor into its \(1,4,5\) channels;
 the denominators show that prime \(3\) belongs to this icosahedral integral
-splitting, not to the quaternion order.
+splitting, not to the quaternion order.  Thirteenth, projective incidence
+proves over every field that the exterior-cube kernel is exactly \(\mu_3\),
+with no hidden semisimplicity hypothesis.
 
 ## Degrees of freedom after the DOF pass
 
@@ -1164,8 +1203,10 @@ choices are narrower:
   \(w^2=5I\), exchanges them, so selecting the displayed split model is
   exactly an orientation choice, not additional algebraic structure.
 - **General-base exterior recovery:** over \(\mathbf Q\), \(\Lambda^3C\)
-  determines \(C\); over a base with nontrivial \(\mu_3\), a cube-scalar
-  ambiguity remains.
+  determines \(C\).  Over every field the ambiguity is exactly
+  \(\mu_3(F)\), and nothing larger.  In characteristic \(3\) its field points
+  are trivial but its group scheme is nonreduced; extending the statement to
+  arbitrary rings requires choosing which of these two meanings C712 needs.
 - **Raw differential scale:** the factor
   \(211625906798592000\) is completely derived from the chosen raw
   transvectant and Fischer conventions but has not been repackaged as a
@@ -1197,7 +1238,8 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
 - **Whether the diagonal is intrinsic:** settled precisely on the distinguished
   integral support lattice via \(K\bmod2\); a bare rational conjugacy class is
   insufficient.  With a dual atom choice and orientation, the full \(K\)
-  recovers \(C\) itself through the faithful rational exterior cube.
+  recovers \(C\) itself.  Over any field, the exterior cube loses exactly the
+  scalar subgroup \(\mu_3(F)\); over \(\mathbf Q\) this subgroup is trivial.
 - **Whether \(K\) acquires hidden symmetries in dimension twenty:** settled.
   Family-preserving stabilizer and line stabilizer are \(A_5\) and \(S_5\).
   Hodge complementation doubles the full line normalizer to

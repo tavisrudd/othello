@@ -179,6 +179,9 @@ exchanges its endpoints, so choosing one is precisely an orientation choice.
 Point--pair incidence further gives canonical projectors onto the
 \(1,4,5\) Morita channels; their denominators locate prime \(3\) in the
 icosahedral integral splitting rather than the quaternion order.
+Projective incidence proves that the exterior-cube kernel over every field is
+exactly \(\mu_3(F)\); over \(\mathbf Q\) it is trivial, while characteristic
+\(3\) requires distinguishing field points from the nonreduced group scheme.
 Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
