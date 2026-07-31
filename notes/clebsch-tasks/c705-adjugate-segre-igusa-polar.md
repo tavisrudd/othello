@@ -47,6 +47,17 @@ Test whether the two polar five-spaces and their intertwiner are projections
 of the same \(E_8\)-level object, rather than merely meeting after descent to
 the exceptional outer action of \(S_6\).
 
+The nearer \(E_6\) gate is positive.  On an \(A_1\) boundary,
+the surviving and first-normal-jet halves of Yoshida's ten-dimensional
+\(W(E_6)\) Coble system are respectively the Segre and Igusa polar
+five-spaces, with an exact constant basis change
+\(M\nabla S=-2f\).  Globally the raw jet line bundle is
+\(L_{\rm Igu}+B_3\); exact generic valuation on one \(B_3\) component and
+\(S_6\)-transitivity show that the canonical \(B_3\) section is its common
+fixed factor.  After division the system is the global Igusa contraction.
+Full report:
+`notes/2026-07-30-c705-e6-first-jet.md`.
+
 1. Fix the exact \(E_8\) linkage already used for the Clebsch operator and
    branch it far enough to locate both outer five-dimensional \(S_6\)
    carriers simultaneously.

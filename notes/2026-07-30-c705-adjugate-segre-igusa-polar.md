@@ -160,10 +160,41 @@ Schock places both sisters inside one exceptional parent.  Each \(A_1\)
 boundary divisor in Naruki's \(W(E_6)\)-equivariant compactification of
 marked cubic-surface moduli is an \(\overline M_{0,6}\), and two
 \(W(E_6)\)-equivariant contractions restrict to \(\rho\) and \(\phi\).
-Hence a common \(E_6\) parent is now established at the level of birational
-models.  Whether the actual first-jet tensor \(A\) lifts to the ambient
-\(E_6\) contractions, and then through C682's specific golden/\(E_8\)
-operator descent, remains the active shadow-source gate.
+The operator lift is now also generically exact.  In Yoshida's
+ten-dimensional \(W(E_6)\)-equivariant Coble embedding, five coordinates
+survive on the conic boundary \(Q=0\) and give the Segre cubic, while five
+are divisible by \(Q\).  If \(s\) denotes the surviving five-vector and
+\(f\) the five first-normal coefficients, exact calculation gives
+\[
+ M\nabla S(s)=-2f,\qquad
+ M=
+\begin{pmatrix}
+0&0&0&0&-2\\
+0&2&2&0&0\\
+2&0&0&0&0\\
+2&0&0&2&-2\\
+2&2&0&0&-2
+\end{pmatrix},
+\qquad \det M=32.
+\]
+Thus the Segre and Igusa five-spaces are the value and normal-jet shadows
+of one ambient \(E_6\) system, and \(A\) is its boundary differential in
+the centered six-point coordinates.
+
+Schock's divisor classes give
+\[
+ L_{\rm Seg}|_D-N_{D/Y}
+ =L_{\rm Igu}|_D+B_3.
+\]
+At a generic \(D_{123|456}\), clustering
+\(z_i=a+t(u,v,w)_i\) makes all five normal coefficients vanish to order
+exactly one.  By the transitive \(S_6\)-action, the canonical \(B_3\)
+section is therefore their common fixed factor on all ten \(B_3\)
+components.  Dividing it leaves precisely \(L_{\rm Igu}|_D\), and dense
+equality extends to the global Igusa contraction.  The ambient \(E_6\)
+first-jet gate is closed positively.  A lift onward through C682's
+specific golden/\(E_8\) operator descent remains stronger and is no longer
+needed to explain the two polar systems themselves.
 
 ## The raw obstruction and the successful repair
 
@@ -405,7 +436,7 @@ placed in the mystery ledger below.
 | Meaning of the twenty pulled-back base planes | settled: triple-collision GIT boundary, paired over ten nodes | none |
 | Meaning of the factor \(6\) | settled integrally; it is the normalization coupling the two centered-square maps and causes the \(2,3\) rank collapse | a refined integral moduli model belongs to future WP5 |
 | Whether the third-compound presentation is already classical | open: no formula match was found in the proportional audit, but originals and a formula-level modern sweep remain incomplete | WP11 before any priority claim |
-| Whether the sister diagram has a common exceptional parent | settled at the birational-model level: both contractions are restrictions of \(W(E_6)\)-equivariant contractions to an \(A_1\cong\overline M_{0,6}\) divisor | lift their first-jet pairing and identify its restriction with \(A\) |
+| Whether the sister diagram has a common exceptional parent | settled globally at operator level: the surviving and \(Q\)-normal halves of Yoshida's ten-dimensional \(W(E_6)\) system are the Segre and Igusa polar spaces, with \(M\nabla S=-2f\); the raw jet's canonical \(B_3\) factor accounts for the compactification twist | none |
 | Whether \(q,W,A\) are shadows of one \(E_8\)-level tensor | open: the common outer-\(S_6\) descent and rank-one adjugate are strong internal evidence, while the checked Segre/Igusa automorphic models use \(A_2\)- and type-IV lattices rather than an explicit common \(E_8\) lift | C705 common-\(E_8\) shadow-source mining subtask; require a simultaneous branching and parent contraction, or record the first obstruction and nearest \(E_6/A_2/S_6\) repair |
 | Marked equality with C695's double-six | untouched by design | future WP2 |
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
@@ -450,12 +481,20 @@ novelty or priority claim.
   map through \(\overline M_{0,6}\).
 - Nolan Schock, *The \(W(E_6)\)-invariant birational geometry of the
   moduli space of marked cubic surfaces*, arXiv:2309.15264v2 —
-  `targeted full text`, introduction, Theorem 3.6, and Remark 3.7; cached
+  `targeted full text`, Proposition 2.2, Proposition 2.7, Theorem 3.6,
+  and Remark 3.7; cached
   PDF SHA-256
   `67c1f52c6df71abfb0a537aa55111929d05f812180070e891121d37440c896e5`.
   It realizes both contractions as restrictions of two
   \(W(E_6)\)-equivariant contractions to an
   \(A_1\cong\overline M_{0,6}\) boundary divisor.
+- Masaaki Yoshida, *A \(W(E_6)\)-equivariant projective embedding of the
+  moduli space of cubic surfaces*, arXiv:math/0002102 — `targeted full
+  text`, §§2.2, 2.5, and 3; cached PDF SHA-256
+  `1989e8d6349338045851d9d8428394ba7638689f903a1ebe1deffc78ab5485c5`.
+  It supplies the ambient ten-dimensional Coble coordinates and their
+  conic-boundary restriction.  The first-normal-jet/gradient identity is
+  the exact C705 calculation from those formulas.
 
 The wider situational sweep, including the Coble,
 homological-projective-duality, Jacobian-dual, and \(E_8\) search

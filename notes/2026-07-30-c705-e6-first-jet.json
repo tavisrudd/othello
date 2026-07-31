@@ -1,0 +1,130 @@
+{
+  "chart": {
+    "cubic_evaluation_rank": 34,
+    "cubic_monomials": 35,
+    "segre_coordinates": [
+      "-z1*(z2 - z3)",
+      "z1 - z2",
+      "z1 - z3",
+      "z3*(z1 - 1)",
+      "-z3*(z1 - z2)"
+    ],
+    "segre_cubic": "y0*y1*y3 + y0*y2*y4 - y1*y2*y4 + y1*y3*y4 + y2**2*y4 - y2*y3*y4",
+    "yoshida_coordinates_divisible_by_Q": [
+      "y1",
+      "y3",
+      "y4",
+      "y5",
+      "y7"
+    ],
+    "yoshida_coordinates_surviving": [
+      "y11",
+      "y12",
+      "y13",
+      "y15",
+      "y19"
+    ]
+  },
+  "conclusions": {
+    "ambient_W_E6_embedding_contains_both_five_spaces": true,
+    "common_B3_fixed_factor_certified_by_one_D3_and_S6": true,
+    "compactified_raw_jet_has_B3_line_bundle_twist": true,
+    "generic_A1_boundary_first_normal_jet_is_Igusa_polar": true,
+    "global_untwisted_first_jet_lift": true
+  },
+  "first_normal_jet": {
+    "identity": "target_change * grad(Segre) = -2 * normal_coefficients",
+    "normal_coefficients": [
+      "-z1*(z1 - 1)*(z2 - z3)",
+      "z2*z3*(z1 - 1)*(z2 - z3)",
+      "z3*(-z1 + z2)*(z3 - 1)",
+      "z2*(-z1 + z3)*(z2 - 1)",
+      "z2*(z1 - 1)*(z1 - z3)*(z3 - 1)"
+    ],
+    "target_change": [
+      [
+        0,
+        0,
+        0,
+        0,
+        -2
+      ],
+      [
+        0,
+        2,
+        2,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        2,
+        -2
+      ],
+      [
+        2,
+        2,
+        0,
+        0,
+        -2
+      ]
+    ],
+    "target_change_determinant": 32
+  },
+  "line_bundles_on_Mbar_0_6": {
+    "Igusa": [
+      2,
+      1
+    ],
+    "Segre": [
+      1,
+      3
+    ],
+    "basis": [
+      "B2",
+      "B3"
+    ],
+    "common_denominator": 5,
+    "gap_interpretation": "B3",
+    "generic_D3_leading_coefficients": [
+      "-a*(a - 1)*(v - w)",
+      "a**2*(a - 1)*(v - w)",
+      "-a*(a - 1)*(u - v)",
+      "-a*(a - 1)*(u - w)",
+      "a*(a - 1)**2*(u - w)"
+    ],
+    "generic_D3_vanishing_orders": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "normal_bundle_of_A1_divisor": [
+      -1,
+      -3
+    ],
+    "raw_jet_minus_Igusa": [
+      0,
+      5
+    ],
+    "raw_normal_jet": [
+      2,
+      6
+    ]
+  },
+  "schema": "c705-e6-first-jet-v1",
+  "sources": {
+    "Schock_arXiv_2309_15264_sha256": "67c1f52c6df71abfb0a537aa55111929d05f812180070e891121d37440c896e5",
+    "Yoshida_arXiv_math_0002102_sha256": "1989e8d6349338045851d9d8428394ba7638689f903a1ebe1deffc78ab5485c5"
+  }
+}

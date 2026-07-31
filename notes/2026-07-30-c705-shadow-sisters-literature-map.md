@@ -64,8 +64,19 @@ each of the 36 \(A_1\) boundary divisors is an
 \(\overline M_{0,6}\).  The two \(W(E_6)\)-equivariant contractions
 restrict on such a divisor to the Segre and Igusa contractions,
 respectively.  Therefore the sisters have a literature-backed common
-\(E_6\) birational parent.  This does not yet lift the C705 tensors
-\(q,W,A\).
+\(E_6\) birational parent.
+
+C705 now upgrades this to an operator statement.  In Yoshida's
+ten-dimensional \(W(E_6)\)-equivariant Coble system, the five coordinates
+surviving on an \(A_1\) boundary give the Segre cubic and the first normal
+coefficients of the five coordinates divisible by the conic equation give
+the Igusa polar vector:
+\[
+ M\nabla S=-2f,\qquad \det M=32.
+\]
+The raw jet has class \(L_{\rm Igu}+B_3\); simple vanishing on one generic
+\(B_3\), propagated by \(S_6\), supplies the canonical common \(B_3\)
+factor and closes the global lift.
 
 ### Multiple higher parents
 
@@ -106,13 +117,14 @@ These are the task's findings, not claims extracted from the literature.
 
 ## Common-\(E_8\) verdict after the sweep
 
-The literature found in this bounded pass supports the chain
+The literature and exact first-jet calculation support the chain
 \[
   \text{Segre/Igusa sisters}
   \subset \overline M_{0,6}
   \subset \overline Y(E_6)
 \]
-at the level of birational models and contractions.  It also supports
+at the level of birational models, contractions, and the boundary
+first-normal jet.  It also supports
 separate \(A_2\)-lattice, type-IV, genus-two/Coble, and homological
 projective-duality lifts.
 
@@ -130,11 +142,10 @@ too weak.
 
 ## Nearest mining consequences
 
-1. **\(E_6\) first.** Identify the two divisor classes on
-   \(\overline Y(E_6)\) whose restrictions give the Segre and Igusa
-   linear systems, then ask whether their first-jet pairing restricts to
-   \(A\).  A positive answer would explain the sisters before invoking
-   \(E_8\).
+1. **\(E_6\) first.** Settled positively: the value and normal-jet halves
+   of Yoshida's ten-dimensional system give the Segre and Igusa systems,
+   and the compactification discrepancy is exactly the canonical \(B_3\)
+   fixed factor.
 2. **Moon's concrete-duality prompt.** Reformulate \(q\) and \(W\) as the
    tangent directions killed by the two complementary contractions of
    \(\overline M_{0,6}\).  Then interpret
@@ -178,6 +189,10 @@ too weak.
   `targeted PDF full text`, introduction, Theorem 3.6 and Remark 3.7;
   cached SHA-256
   `67c1f52c6df71abfb0a537aa55111929d05f812180070e891121d37440c896e5`.
+- Masaaki Yoshida, *A \(W(E_6)\)-equivariant projective embedding of the
+  moduli space of cubic surfaces*, arXiv:math/0002102 — `targeted full
+  text`, §§2.2, 2.5, 3; cached SHA-256
+  `1989e8d6349338045851d9d8428394ba7638689f903a1ebe1deffc78ab5485c5`.
 - Igor Dolgachev, *Corrado Segre and nodal cubic threefolds*,
   arXiv:1501.06432 — `targeted web full text`, §§2--4.
 - Quang Minh Nguyen, *Vector bundles, dualities, and classical geometry
