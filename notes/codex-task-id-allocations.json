@@ -1763,8 +1763,17 @@
       "last": 727,
       "purpose": "audit composite recovery theorem from deep-hole data through the golden operator to downstream shadows",
       "sequence": 196
+    },
+    {
+      "count": 2,
+      "first": 728,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 729,
+      "purpose": "TT follow-ups: intrinsic synchronized-spinor geometry and higher-order extremal conference cuts",
+      "sequence": 197
     }
   ],
-  "next_id": 728,
+  "next_id": 730,
   "schema": "codex-task-id-allocations-v1"
 }
