@@ -1718,8 +1718,17 @@
       "last": 712,
       "purpose": "Paper III golden-return human proofs and Lean successor",
       "sequence": 191
+    },
+    {
+      "count": 2,
+      "first": 713,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 714,
+      "purpose": "Paper I proof architecture and companion structuralization with Lean/trust synchronization",
+      "sequence": 192
     }
   ],
-  "next_id": 713,
+  "next_id": 715,
   "schema": "codex-task-id-allocations-v1"
 }
