@@ -142,6 +142,50 @@ lifts to the two-qubit Clifford group with the same central extension, or
 whether the \(A_5\) stabilizer of \(C\) selects a distinguished metaplectic
 phase.  Those are the falsifiers in C706.
 
+## Preliminary novelty assessment
+
+The quantum-incidence crown is pre-empted.  The doily is already presented
+in the quantum-information literature as the Cremona--Richmond
+configuration, with duads as points and synthemes as lines.  Independently,
+the fifteen planes of the Segre cubic are already identified with its
+associated Cremona--Richmond configuration.  Consequently the chain
+\[
+ \text{Segre planes}
+ \longleftrightarrow
+ \text{synthemes}
+ \longleftrightarrow
+ \text{two-qubit commuting contexts}
+\]
+is a composition of known identifications, not a new quantum geometry.
+The counts \(15/10/6\), their \(S_6\cong\operatorname{Sp}_4(\mathbf F_2)\)
+symmetry, and the interpretation of grids as Mermin squares and ovoids as
+five mutually noncommuting observables are likewise standard.
+
+What appears less standard in the bounded screen is the route from C704's
+specific golden conference operator and
+\(K=*\Lambda^3C\) to a fully explicit Pauli labeling and sign comparison.
+That packaging is task-owned, but its first possible quantum invariant is
+negative:
+
+- the conference factor is ordinary point gauge;
+- the \(K\)-triangle tensor is a simplex coboundary; and
+- the ten Mermin parities are the standard Pfaffian/symplectic obstruction,
+  independent of the Clebsch switching class.
+
+This makes the calculation useful as a compatibility and obstruction
+lemma, but not presently a standalone quantum theorem.  The only plausible
+quantum crown left by this computation is C706's sharper question: whether
+the gauge trivialization fails after imposing the outer \(S_6\), Clifford,
+integral, or golden-\(A_5\) equivariance.  A positive equivariant
+central-extension comparison could be genuinely new; an unrestricted-gauge
+rephrasing cannot.
+
+The operator origin may still matter to the algebraic-geometry story:
+C704/C705 do not merely notice the abstract Cremona--Richmond incidence
+configuration; they derive its Segre coordinates, polar system, and signs
+from one conference/exterior-power tower.  That possible novelty belongs to
+the operator/compound theorem, not to the bare doily dictionary.
+
 ## Literature boundary
 
 No novelty or priority verdict is made.  Zero sources were read at full
@@ -158,18 +202,31 @@ text for this bounded positioning pass.
   parity distinction in the Mermin scenario.
 - Muller--Saniga--Giorgetti--De Boutray--Holweck, *Multi-qubit doilies:
   enumeration for all ranks and classification for ranks four and five*,
-  arXiv:2206.03599 — `abstract/metadata only`, arXiv abstract retrieved on
-  2026-07-30.  It confirms the established use of signed doilies in
-  operator contextuality.
+  arXiv:2206.03599 — `partial`, author-hosted text, introductory
+  duad--syntheme and Cremona--Richmond descriptions read on 2026-07-30.
+  It explicitly presents the doily as the Cremona--Richmond configuration,
+  generalized quadrangle \(GQ(2,2)\), and symplectic polar space
+  \(W(3,2)\), before studying signed higher-qubit doilies.
+- Pokora--Szemberg, *A Pascal-type construction of the Segre cubic and the
+  Cremona--Richmond configuration*, arXiv:2606.18387 —
+  `abstract/metadata only`, arXiv abstract retrieved on 2026-07-30.  It
+  explicitly couples the fifteen planes of the Segre cubic to the
+  associated Cremona--Richmond configuration.  No formula-level comparison
+  with the C704/C705 conference or compound operators was available at this
+  depth.
 
-Four metadata searches screened titles and abstracts for
+Eight metadata searches screened titles and abstracts for
 `two-qubit Pauli doily duads synthemes Mermin grids ovoids S6 Sp(4,2)`,
 `conference matrix Mermin square contextuality Pfaffian signs`,
 `Clebsch cubic Pauli contextuality doily`, and
-`Clebsch conference matrix contextuality`.  They located the standard
+`Clebsch conference matrix contextuality`, followed by the exact-phrase
+queries `Clebsch Pauli doily contextuality`,
+`Segre cubic Pauli contextuality`,
+`Cremona-Richmond Pauli`, and
+`synthemes Pauli Segre cubic`.  They located the standard
 doily/contextuality literature but no visible Clebsch, conference-matrix,
 or compound-operator comparison.  This is not a full-text absence audit;
-zbMATH, MathSciNet, citation graphs, and the full texts of the three sources
+zbMATH, MathSciNet, citation graphs, and the full texts of the named sources
 remain uncovered.
 
 ## Reproducibility

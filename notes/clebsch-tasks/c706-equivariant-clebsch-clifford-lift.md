@@ -25,4 +25,7 @@ the golden \(A_5\) stabilizer.
 ## Boundary
 
 Ordinary point-gauge contextuality is already negative in C705 and must not
-be repackaged as a new cocycle.
+be repackaged as a new cocycle.  The abstract Pauli-doily/Cremona--Richmond
+dictionary and its realization by the fifteen Segre planes are also
+pre-existing identifications.  Novelty requires a nontrivial equivariant
+lift, not another incidence relabeling.
