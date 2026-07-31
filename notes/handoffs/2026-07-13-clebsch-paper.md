@@ -39,10 +39,13 @@ sextic, and Igusa polar coordinate are Pfaffian, determinant, and
 centered-determinant shadows of one return.  The cross-golden block and
 its adjugate further give a \(3\times3\) linear--quadratic matrix
 factorization whose two kernel incidences are the golden-conjugate small
-resolutions of the six-node cubic.  Later balanced slices stop at the
-missing-support-lattice obstruction in the bounded census through degree
-\(50\), while binary tetrahedral and octahedral sisters pass only their
-first exact feasibility gates.  No split paper is reopened.  Full report:
+resolutions of the six-node cubic.  Its two conjugate rank-one Ulrich/MCM
+sheaves descend to a rational rank-two MCM object carrying \(J^2=5\), so
+the paired-tower descent persists in the cubic's singularity category.
+Later balanced slices stop at the missing-support-lattice obstruction in
+the bounded census through degree \(50\), while binary tetrahedral and
+octahedral sisters pass only their first exact feasibility gates.  No
+split paper is reopened.  Full report:
 [`../2026-07-30-c704-functorial-operator-shadows.md`](../2026-07-30-c704-functorial-operator-shadows.md).
 
 ## Active and queued task cards

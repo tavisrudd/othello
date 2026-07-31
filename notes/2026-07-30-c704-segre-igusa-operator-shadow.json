@@ -1,6 +1,7 @@
 {
   "base_conference_square": "C^2=5I_6",
   "cartan_restriction": "Pf((C_ij(x_i-x_j))_ij)=4 Z_base(x); the map kills constants",
+  "categorical_descent": "coker(B_x) and coker(B_x^T) are conjugate rank-one linear MCM sheaves; their restriction of scalars has rank two and an endomorphism J with J^2=5",
   "clebsch_syntheme_identity": "125 center_T(Z_T^2)=4 center_T(sigma_3(q_T))",
   "commutator_branch_determinant": "det([diag(x),C])=16 Z_base(x)^2",
   "eliminated_variable": "x_5=-(x_0+x_1+x_2+x_3+x_4)",

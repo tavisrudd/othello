@@ -492,6 +492,11 @@ def build_certificate() -> dict:
         "golden_block_matrix_factorization": (
             "B_x and +/-10sqrt(5) adj(B_x) factor Z_base(x) I_3"
         ),
+        "categorical_descent": (
+            "coker(B_x) and coker(B_x^T) are conjugate rank-one "
+            "linear MCM sheaves; their restriction of scalars has rank two "
+            "and an endomorphism J with J^2=5"
+        ),
         "synthematic_totals": len(totals),
         "stabilizer_consistency_checks": stabilizer_consistency_checks,
         "outer_action_size": len(induced_actions),

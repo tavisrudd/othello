@@ -179,6 +179,44 @@ two resolutions.  This is a categorical operator shadow beyond the
 polynomial Segre--Igusa diagram; it does not identify either resolution
 with a previously named global moduli space.
 
+The same factorization has a third-order descent consequence.  Over
+\(K=\mathbf Q(\sqrt5)\), let \(X_T=\{Z_T=0\}\subset\mathbf P(A_X)\) and
+define
+\[
+ 0\longrightarrow\mathcal O_{\mathbf P^4}(-1)^3
+ \xrightarrow{\,B_x\,}\mathcal O_{\mathbf P^4}^{\,3}
+ \longrightarrow i_*\mathcal F_+\longrightarrow0.
+\]
+Since \(B_x\) has generic rank two on \(X_T\), \(\mathcal F_+\) has rank
+one there.  Its linear ambient resolution gives
+\[
+ \chi(\mathcal F_+(m))=3\binom{m+3}{3},
+\]
+so it is the rank-one Ulrich maximal Cohen--Macaulay sheaf carried by
+this determinantal presentation.  The adjugate supplies its
+linear--quadratic periodic hypersurface resolution.
+
+Golden conjugation sends \(B_x\) to \(B_x^{\mathsf T}\) and produces the
+conjugate sheaf \(\mathcal F_-\).  The pair
+\(\mathcal F_+\oplus\mathcal F_-\), with semilinear exchange, descends to
+a rational rank-two maximal Cohen--Macaulay sheaf \(\mathcal E\).
+Multiplication by \(+\sqrt5\) and \(-\sqrt5\) on the two summands descends
+to
+\[
+ J_{\mathcal E}^2=5I.
+\]
+Thus C682's restriction-of-scalars construction reappears inside the
+singularity category of the operator cubic: the paired McKay towers
+descend to a paired rank-two MCM object, while choosing a golden
+orientation selects one rank-one Ulrich summand.
+
+Restricting this presentation to any smooth cubic-surface hyperplane
+section gives a \(3\times3\) linear determinantal representation and an
+Ulrich line bundle.  This is the correct third-order comparison surface
+for C695's operator double-six.  The present task does not identify a
+canonical hyperplane section or prove that its two divisor classes are
+C695's two rows.
+
 ## Why the construction is functorial
 
 For the frozen conference matrix \(C\),
@@ -440,9 +478,9 @@ of the report and all three computational artifacts.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-30-c704-segre-igusa-operator-shadow.py` | 19020 | `f551fb63b4c34ccac88e81ee129ba429d670b6768a3b764ee34c1d9617cd0f66` |
+| `2026-07-30-c704-segre-igusa-operator-shadow.py` | 19254 | `f0a0cc489fb034d089df561024dea0d15a5327f06ea9dd906f32248a305220f8` |
 | `2026-07-30-c704-segre-igusa-operator-shadow-replay.py` | 6043 | `833ffc6c224f269ca6a31329656a6b23db58d976a7376a4c15d49dd79902db6f` |
-| `2026-07-30-c704-segre-igusa-operator-shadow.json` | 4001 | `540e5db96938d64aac597f19bd193b296453e575d264d9258a6e695b7e01774d` |
+| `2026-07-30-c704-segre-igusa-operator-shadow.json` | 4175 | `95c80ac9bd36be7543bfe4fdb14451debcd868afa5e0c018e6e4b46433a6ce27` |
 
 ## `ej` + `tt` closeout and mystery ledger
 
@@ -476,11 +514,20 @@ of the report and all three computational artifacts.
   linear--quadratic matrix factorization of the six-node cubic.  Its left-
   and right-kernel incidences are the two determinantal small resolutions,
   and golden conjugation exchanges them.
+- **Settled by `ej3`:** the two matrix factorizations define conjugate
+  rank-one Ulrich/MCM sheaves.  Their restriction of scalars is a rational
+  rank-two MCM sheaf with \(J^2=5\), realizing the paired-tower golden
+  descent inside the cubic's singularity category.
 - **Open second-order bridge:** compare these two small resolutions with
   the normalized two-parent incidence geometry and with the
   operator-derived double-six.  Dimensions and involutions now match the
   right pattern, but no map to either existing geometric construction has
   been built.
+- **Open third-order bridge:** find a canonical smooth hyperplane section
+  whose restricted determinantal Ulrich classes recover C695's marked
+  double-six.  Without that section, the classical
+  determinantal-representation/double-six pattern is evidence, not an
+  identification.
 - **Settled negatively:** later balanced \(E_8\) slices do not inherit the
   degree-ten support lattice functorially.  The bounded census stops at
   degree \(50\); an added geometric lattice could change this verdict.

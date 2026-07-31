@@ -113,7 +113,10 @@ Z_T=\pm10\sqrt5\det B_x.
 It and its scaled adjugate form a \(3\times3\) linear--quadratic matrix
 factorization.  The right- and left-kernel incidences are the two
 determinantal small resolutions of the six-node cubic, exchanged by
-golden conjugation.
+golden conjugation.  Their conjugate rank-one Ulrich/MCM cokernel sheaves
+descend together to a rational rank-two MCM sheaf carrying \(J^2=5\).
+This realizes the paired-tower golden descent inside the singularity
+category of the operator cubic.
 Later balanced \(E_8\) slices lack the degree-ten distinguished support
 lattice; the bounded census through degree \(50\) therefore stops at an
 exact functoriality obstruction.  Binary tetrahedral \(E_6\) and binary
