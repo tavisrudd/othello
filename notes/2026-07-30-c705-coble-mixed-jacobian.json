@@ -1,0 +1,190 @@
+{
+  "alpha": [
+    6,
+    17,
+    1,
+    -7,
+    -19
+  ],
+  "burkhardt_gradient_over_Z": [
+    -17440,
+    48000,
+    108672,
+    -8448,
+    46272
+  ],
+  "burkhardt_value_over_Z": 0,
+  "coble_cubic_hessian_witness": {
+    "normalized_hessian_det_over_Z": -309382232474386432,
+    "scaled_hessian_det_mod_101": 30,
+    "x": [
+      2,
+      -2,
+      -2,
+      -4,
+      2,
+      2,
+      -3,
+      -1,
+      -3
+    ]
+  },
+  "coble_cubic_term_count": 21,
+  "dual_sextic_orbit_coefficients": [
+    1,
+    37,
+    43,
+    22,
+    39,
+    64,
+    61,
+    75,
+    54,
+    68,
+    35,
+    29,
+    45,
+    95,
+    61,
+    60,
+    33,
+    18,
+    94,
+    16,
+    18,
+    45,
+    98,
+    98,
+    39,
+    96,
+    58,
+    35,
+    1,
+    66,
+    35,
+    82,
+    6,
+    59,
+    100,
+    88,
+    15,
+    63,
+    5,
+    70,
+    58,
+    74,
+    24
+  ],
+  "dual_sextic_sha256": "51f1448e2d1955f50175025f99d463f3dcd4ccc60c83fbaae0041cca81d04085",
+  "dual_sextic_term_count": 339,
+  "field": 101,
+  "heisenberg_invariant_sextic_basis_dimension": 43,
+  "held_out_validation_samples": 40,
+  "hessian_witness": {
+    "det": 78,
+    "sample_index": 0,
+    "x": [
+      1,
+      45,
+      42,
+      12,
+      58,
+      7,
+      62,
+      61,
+      16
+    ],
+    "y": [
+      23,
+      30,
+      23,
+      31,
+      61,
+      50,
+      92,
+      54,
+      92
+    ]
+  },
+  "interpolation_rank": 42,
+  "interpolation_samples": 60,
+  "mixed_hessian_product_witness": {
+    "product_det": 61,
+    "rank": 9,
+    "source_hessian_det": 72,
+    "target_hessian_det": 78
+  },
+  "off_cubic_composition_ratios": [
+    72,
+    25,
+    99,
+    88,
+    54
+  ],
+  "paired_polar_composition": {
+    "checked_samples": 100,
+    "lambda_over_source_hessian_det": 45,
+    "nonzero_source_hessian_samples": 97,
+    "tangent_deviation_image": "span(x)",
+    "tangent_deviation_rank": 1,
+    "tangent_rank_one_sample_index": 0
+  },
+  "schema": "c705-coble-mixed-jacobian-v1",
+  "tau_minus_generic_witness": {
+    "det": 58,
+    "image": [
+      95,
+      1,
+      18,
+      18
+    ],
+    "v": [
+      0,
+      0,
+      1,
+      1
+    ]
+  },
+  "tau_minus_weddle_corank_one_witness": {
+    "adjugate": [
+      [
+        65,
+        87,
+        98,
+        0
+      ],
+      [
+        87,
+        17,
+        83,
+        0
+      ],
+      [
+        3,
+        18,
+        76,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "image": [
+      0,
+      0,
+      0,
+      18
+    ],
+    "rank": 3,
+    "v": [
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  "tau_plus_compressed_hessian_equals_hessian_of_restriction": true
+}
