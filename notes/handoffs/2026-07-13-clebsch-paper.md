@@ -98,6 +98,19 @@ scalar-\(6\)/compound boundary, and \(5\) belongs to the golden sign lift.
 The sole CSS output is the standard binary \([[15,5,3]]_2\) code.  Full
 report: `notes/2026-07-30-c708-doily-codes-and-outer-exchange.md`.
 
+C710 is complete with a split verdict.  The McKay affine-Cartan quotient
+and Hamming Construction-A \(E_8\) are explicitly isometric, including the
+affine root determined by the \(2.A_5\) dimension vector.  No simultaneous
+Clebsch marking exists: all \(180\) two-coordinate \(R_{10}\) minors miss
+\(H_8\), the ten-node module has no equivariant rank-eight carrier under
+\(S_6,S_5\), or \(A_5\), and \(Q_{10}\) contains no unmarked \(E_8\) root
+subsystem.  The exact positive replacement is
+\(L_{R_{10}}\oplus L_{R_{10}}^*\cong II_{10,10}\), where the exceptional
+isodualities exchange maximal isotropic halves; self-adjointness recovers
+exactly the \(36\) involutory polarities with \((5,5)\) graph eigenspaces.
+Full report:
+`notes/2026-07-30-c710-e8-hamming-marking.md`.
+
 ## Active and queued task cards
 
 | task | state | next gate |
@@ -111,7 +124,7 @@ report: `notes/2026-07-30-c708-doily-codes-and-outer-exchange.md`.
 | [C707 — golden ETF measurements](../clebsch-tasks/c707-golden-etf-quantum-measurements.md) | queued | normalize the complementary real-qutrit POVMs and test transition-volume meaning |
 | [C708 — doily incidence codes](../clebsch-tasks/c708-doily-incidence-codes-and-bad-primes.md) | complete; outer exchange positive at representation level, no canonical involutory polarity, exact code tables closed | none |
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | queued | decide which conference/two-graph data survive fermionic gauge |
-| [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | queued; C708/common-source gate complete | seek or obstruct one explicit integral lattice marking |
+| [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace

@@ -1,0 +1,352 @@
+{
+  "bad_prime_comparison": {
+    "2": "R10 is isodual but not self-orthogonal, so Q10 is nonintegral; H8 is doubly-even self-dual and gives integral E8",
+    "3": "both E8 Gram models remain unimodular; no lattice degeneration",
+    "5": "both E8 Gram models remain unimodular; the golden ramification belongs to the operator/eigenspace marking"
+  },
+  "equivariance": {
+    "S6_invariant_dimensions": [
+      0,
+      1,
+      9,
+      10
+    ],
+    "S6_node_module": "Q^10 = 1 + irreducible 9 (two-transitive action)",
+    "conference_S5_eigenspace_dimensions": {
+      "-2": 4,
+      "1": 5,
+      "3": 1
+    },
+    "conference_S5_invariant_dimensions": [
+      0,
+      1,
+      4,
+      5,
+      6,
+      9,
+      10
+    ],
+    "conference_S5_node_module": "Q^10 = 1 + 4 + 5",
+    "conference_S5_orbital_graph": "Petersen graph",
+    "rank8_verdict": "no S6-, conference-S5-, or golden-A5-equivariant rank-8 subspace or quotient exists"
+  },
+  "explicit_isometry": {
+    "affine_root_numerator": [
+      -1,
+      0,
+      0,
+      -1,
+      0,
+      1,
+      1,
+      0
+    ],
+    "affine_root_relation": "alpha_0=-sum_i dim(rho_i) alpha_i",
+    "basis_certificate": "common Gram determinant 1",
+    "gram_equality": "dot(root_i,root_j)/2 = finite McKay Cartan",
+    "map_from_mckay_finite_nodes_to_root_numerators": {
+      "2": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "2p": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "3": [
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "3p": [
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        -1,
+        1
+      ],
+      "4": [
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        1,
+        0,
+        0
+      ],
+      "4s": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "5": [
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        -1,
+        1,
+        0
+      ],
+      "6": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "hamming_construction_a": {
+    "coordinate_convention": "L={x/sqrt(2): x in Z^8, x mod 2 in H8}; root numerators have squared length 4",
+    "generator_rows_hex": [
+      "ff",
+      "f0",
+      "cc",
+      "aa"
+    ],
+    "root_count": 240,
+    "weight_enumerator": {
+      "0": 1,
+      "4": 14,
+      "8": 1
+    }
+  },
+  "mckay_lattice": {
+    "affine_cartan_rank": 8,
+    "basis": [
+      "1",
+      "2",
+      "3",
+      "4s",
+      "5",
+      "6",
+      "3p",
+      "4",
+      "2p"
+    ],
+    "determinant": 1,
+    "dimension_vector": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      3,
+      4,
+      2
+    ],
+    "finite_basis": [
+      "2",
+      "3",
+      "4s",
+      "5",
+      "6",
+      "3p",
+      "4",
+      "2p"
+    ],
+    "finite_gram": [
+      [
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        -1,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        -1,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1,
+        2,
+        -1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        -1,
+        2,
+        -1,
+        -1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        -1,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        2,
+        -1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        2
+      ]
+    ],
+    "radical": "dimension vector of the nine 2.A5 irreducibles"
+  },
+  "nearest_positive_repair": {
+    "construction": "for L=ConstructionA(R10), use L direct-sum L* with bilinear form <(x,f),(y,g)>=f(y)+g(x)",
+    "exchange": "an isoduality P:L->L* gives the exchange isometry J_P(x,f)=((P*)^-1 f,Px); it is involutive exactly when P=P*",
+    "lattice": "II_(10,10)",
+    "meaning": "Q10 and its dual, not positive-definite E8, are the natural lattice carrier of the W10 sister exchange",
+    "properties": "even unimodular of signature (10,10); its Gram matrix in dual bases is [[0,I10],[I10,0]]",
+    "self_adjoint_isodualities": 36,
+    "self_adjoint_meaning": "the 36 fixed-point-free W10 polarities; their coordinate cycle type 2^5 gives fixed and anti-fixed graph signatures (5,5), and the golden six retain F20 stabilizers"
+  },
+  "r10_q10": {
+    "all_two_coordinate_minors": [
+      {
+        "count": 45,
+        "operation": "puncture_puncture",
+        "parameters": [
+          8,
+          5,
+          2
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "2": 2,
+          "3": 8,
+          "4": 10,
+          "5": 8,
+          "6": 2,
+          "8": 1
+        }
+      },
+      {
+        "count": 90,
+        "operation": "shorten_puncture",
+        "parameters": [
+          8,
+          4,
+          3
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "3": 4,
+          "4": 5,
+          "5": 4,
+          "6": 2
+        }
+      },
+      {
+        "count": 45,
+        "operation": "shorten_shorten",
+        "parameters": [
+          8,
+          3,
+          4
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "4": 5,
+          "6": 2
+        }
+      }
+    ],
+    "construction_a": "covolume-one isodual Q10, but nonintegral because R10 is not self-orthogonal",
+    "e8_root_subsystem": "none; exhaustive simple-system search from representatives of both root orbits",
+    "hamming_minor_count": 0,
+    "nonintegral_codeword_witnesses": [
+      "1100000101",
+      "1110001011"
+    ],
+    "odd_support_intersection": 3,
+    "parameters": [
+      10,
+      5,
+      4
+    ],
+    "root_count": 260,
+    "root_orbits": {
+      "coordinate_type": 20,
+      "weight_four_type": 240
+    },
+    "structural_reason": "R10 is regular and all its minors are regular, whereas the extended Hamming matroid has a Fano minor",
+    "weight_enumerator": {
+      "0": 1,
+      "10": 1,
+      "4": 15,
+      "6": 15
+    }
+  },
+  "schema": "c710-e8-hamming-marking-v1",
+  "verdict": "the bare McKay and Hamming E8 lattices are explicitly isometric, but no simultaneous Clebsch marking exists: R10 has no H8 two-coordinate minor and its 10-node module has no equivariant rank-8 subspace or quotient; even without equivariance Q10 contains no E8 root subsystem"
+}
