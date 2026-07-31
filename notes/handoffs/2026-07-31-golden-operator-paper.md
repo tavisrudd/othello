@@ -57,20 +57,34 @@ particular:
   shadow of the order-six golden system.
 - C720's fully marked forward operator theorem is frozen in
   `notes/2026-07-31-c720-c727-operator-interface.md`.  It fixes the source
-  object, formulas, covariance facts, and primary output inventory that C727
-  must descend, without prejudging any unlabelled or minimally marked
-  recovery claim.
+  object, formulas, covariance facts, and primary output inventory descended
+  by C727.
 - C720's post-freeze `ej` corollaries settle two marked reverse tests needed
   by C727: the determinant sextic and the independently defined ten-cut
   syndrome both recover the unoriented switching line, and \(W=0\) is
-  exactly the ten-node Segre polar base locus.  Descent from Paper I's
-  coarsest input and the nonzero polar fibres remain C727's work.
+  exactly the ten-node Segre polar base locus.
 - C720's ej2 coefficient theorem strengthens the reverse result: the
   \((2,2,1,1)\)-coefficients of the determinant sextic are exactly the
   four-cycle holonomies read by relative \(K_{3,3}\) matching signs.  The
   algebraic sextic and dimer fingerprint are canonically equivalent
   orientation-free presentations, documented in
   notes/2026-07-31-c720-ej2-sextic-dimer-equivalence.md.
+- C727 imports C690/C691's theorem that Paper I's unordered \(10+10\)
+  support split is the regular continuation two-graph, gives a short
+  orbit-incidence descent proof, and proves that the \(A_6\)-orbit completes
+  one recovered class to the coherent outer six-family.
+- The cross-paper theorem descends every projective/even Golden shadow from
+  the monomial Clebsch code class.  One support-half bit is minimal for
+  signed odd shadows, while golden conjugation independently exchanges the
+  paired cross-golden resolutions and rank-one MCM summands.
+- The unlabelled deep-hole conic is sharply insufficient: its
+  \(\operatorname{PGL}_2(11)\)-action is transitive on 22 Clebsch matching
+  rows, and Paper I supplies no row-to-geometric-parent bridge.  The
+  determinant sextic and dimer fingerprint close the reverse cycle exactly
+  at the unoriented two-graph level.
+- Centered squaring is projectively birational away from the Igusa singular
+  locus; over its fifteen singular lines the nonzero fibres are smooth
+  conics, degenerating to six-line fibres at the fifteen triple-line points.
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
@@ -78,19 +92,18 @@ positive.  The authoritative manuscript root is papers/golden-operator/;
 its title, abstract, principal theorem, proof roadmap, isolated build, and
 paper-owned verification policy are installed and build without warnings.
 
-The cross-paper framing is now fixed provisionally in
-`notes/2026-07-31-golden-cross-paper-framing.md`: Papers I and III supply two
-independent provenance theorems for the source class, while Paper IV supplies
-forward functorial propagation to its shadows.  C727 first proves the generic
-completion/descent theorem and then determines whether the Paper I composite
-descends to the unlabelled syndrome locus or requires an additional marking;
-no Clebsch manuscript edit is authorized by that investigation.
+The cross-paper framing is resolved by
+`notes/2026-07-31-c727-cross-paper-recovery-propagation.md`: Paper I supplies
+the first provenance theorem only at the monomial code/support-two-graph
+level, while Paper IV supplies forward functorial propagation to its shadows.
+The bare conic requires a selected geometric Clebsch parent.  Paper III may
+later supply an independent provenance theorem through C730.  No Clebsch
+manuscript edit is authorized by C727.
 
 ## Active and queued tasks
 
 | task | state | next gate |
 |---|---|---|
-| [C727 — cross-paper recovery theorem](../golden-tasks/c727-cross-paper-recovery-theorem.md) | ready; next; marked source and reverse tests frozen | descend the frozen operator interface through every residual torsor and prove the strongest exact recovery--propagation theorem, or its sharp minimal-marking obstruction |
 | [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
 | [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | queued after C720; sequel direction | intrinsicize the \(6\to10\) conference lift, classify the 36 extremal order-ten cuts, and test for a functorial tower |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
@@ -101,13 +114,12 @@ no Clebsch manuscript edit is authorized by that investigation.
 
 ## Recommended order
 
-1. C727 cross-paper recovery--propagation audit.
-2. C728 intrinsic synchronized-spinor audit.
-3. C715 anomaly inverse.
-4. C717 and C718, chosen by theorem yield after C715's first gate.
-5. C716 only after the inverse interface freezes.
-6. C719 after the mathematical paper spine is secure.
-7. C729 only as a sequel unless its first theorem feeds back into the
+1. C728 intrinsic synchronized-spinor audit.
+2. C715 anomaly inverse.
+3. C717 and C718, chosen by theorem yield after C715's first gate.
+4. C716 only after the inverse interface freezes.
+5. C719 after the mathematical paper spine is secure.
+6. C729 only as a sequel unless its first theorem feeds back into the
    present paper.
 
 ## Ownership and allowed paths

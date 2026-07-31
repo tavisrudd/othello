@@ -2,7 +2,9 @@
 
 **Lane:** `golden`
 
-**Status:** ready; next after completed C720; marked interface and reverse tests frozen
+**Status:** complete; recovery--propagation and sharp minimal-marking theorem proved
+
+**Report:** `notes/2026-07-31-c727-cross-paper-recovery-propagation.md`
 
 ## Objective
 

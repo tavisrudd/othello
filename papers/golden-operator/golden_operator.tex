@@ -48,6 +48,12 @@ sextic are exactly the four-cycle holonomies of the matching fingerprint,
 so this algebraic shadow recovers the same unoriented switching class
 without a Pfaffian sign.  The same operator family gives exact Slater
 amplitudes, Majorana parity walls, and six-charge anomaly solutions.
+For the Clebsch code, the invariant (10+10) split of coordinate triples
+is a regular two-graph and recovers the conference switching line.  This
+gives a recovery--propagation theorem from the monomial code class and a
+sharp marking boundary: the bare twelve-point deep-hole conic does not
+select a Clebsch parent, while a choice of one support half is the minimal
+extra bit for signed odd shadows.
 We also identify the precise Clifford, exceptional-group, bad-prime, and
 \(E_8\)-lattice boundaries of the construction.
 \end{abstract}
@@ -65,6 +71,12 @@ The principal theorem is stated on an abstract marked presentation.  This
 separates propagation from provenance: a geometric or coding construction
 may supply the marked conference class, but the proof below needs only the
 operator and its coherent outer marking.
+
+The coding provenance has a precise boundary.  The projective deep-hole
+locus of the Clebsch code is a full rational conic, which forgets its
+parent.  The monomial code class retains an unordered split of the twenty
+coordinate triples into two \(A_5\)-orbits.  We prove below that this split
+is exactly the unoriented regular two-graph of the conference operator.
 
 The order-six system also generates its first higher-order conference
 shadow.  Its six balanced-cut fingerprints are the rows of a simplex
@@ -149,6 +161,166 @@ fixes the row Gram matrix, and transposition gives the order-ten conference
 operator.  Exceptional-group, Clifford, coding, physical, and lattice
 statements enter only after these identities are proved.
 
+\section{Recovery and minimal marking}
+
+Let \(X\) be the coordinate six-set of the Clebsch code and let
+\(H\cong A_5\) be its monomial permutation group.  The twenty triples in
+\(X\) form two complementary \(H\)-orbits
+\(\mathcal O_+\) and \(\mathcal O_-\), each of size ten.  The code
+canonically supplies the unordered pair
+\(\{\mathcal O_+,\mathcal O_-\}\), but does not name a positive half.
+
+\begin{proposition}[The support split is the conference two-graph]
+\label{prop:support-two-graph}
+Choose one half and put \(t_{ijk}=1\) on it and \(t_{ijk}=-1\) on the
+other.  Then there is a symmetric zero-diagonal sign matrix \(C\), unique
+up to diagonal switching, such that
+\[
+ C_{ij}C_{jk}C_{ki}=t_{ijk},\qquad C^2=5I.
+\]
+Interchanging the two halves replaces the switching class of \(C\) by
+that of \(-C\).  Hence the unordered support split determines exactly the
+unoriented switching line
+\[
+ \ell_C=\{[C],[-C]\}.
+\]
+\end{proposition}
+
+\begin{proof}
+The degree-six \(A_5\)-action is two-transitive, hence transitive on pairs
+and, by complementation, on four-subsets.  Count incidences between one
+ten-element triple orbit and the fifteen four-subsets.  Each triple lies
+in three four-subsets, so every four-subset contains two triples from
+each orbit.  This is the two-graph parity condition.
+
+Fix \(r\in X\), set \(C_{ri}=1\), and set \(C_{ij}=t_{rij}\) for
+\(i,j\ne r\).  The parity identity on \(\{r,i,j,k\}\) gives
+\(C_{ij}C_{jk}C_{ki}=t_{ijk}\).  Changing the normalized row changes
+only the diagonal switching gauge.  The same incidence count on pairs
+shows that two of the four values \(t_{ijk}\), \(k\ne i,j\), have each
+sign.  Thus
+\[
+ (C^2)_{ij}=C_{ij}\sum_{k\ne i,j}t_{ijk}=0
+ \quad(i\ne j),
+ \qquad (C^2)_{ii}=5.
+\]
+Finally, \(-C\) negates all triangle holonomies.
+\end{proof}
+
+The oriented two-graph has stabilizer \(A_5\).  Its unoriented line has
+stabilizer \(N_{S_6}(A_5)\cong S_5\).  Thus the twelve oriented
+\(S_6/A_5\)-translates pair under common negation into the outer six-set
+\(S_6/S_5\).  After choosing one support half, its \(A_6\)-orbit gives
+the coherent oriented six-family.  Different matrix lifts are diagonal
+switches, so the covariance in Theorem~\ref{thm:propagation} removes that
+gauge.
+
+\begin{theorem}[Recovery--propagation and minimal marking]
+\label{thm:recovery-propagation}
+A monomial Clebsch code class canonically determines the switching line
+\(\ell_C\) and the coherent outer six-family modulo common reversal,
+diagonal switching, and permutation.  Consequently:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item the projective Joubert map, Segre point, Segre--Igusa polar map,
+  Pfaffian cubic lines, determinant sextics, parity walls, squared Slater
+  probabilities, and projective anomaly solution descend to the code
+  class;
+\item the cross-golden resolutions and rank-one MCM objects descend as an
+  unordered conjugate pair, while their rational rank-two descent is
+  canonical;
+\item choosing one half of the support split is the minimal extra bit for
+  a signed odd shadow; choosing \(\sqrt5\) is the independent bit selecting
+  one cross-golden summand;
+\item the determinant sextic and the relative dimer fingerprint each
+  recover \(\ell_C\), so the recovery cycle splits at the unoriented
+  two-graph level.
+\end{enumerate}
+The unlabelled projective deep-hole conic alone does not canonically
+determine this input-relative family.  A geometric Clebsch parent, or the
+equivalent monomial code marking, is necessary.
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:support-two-graph} and the \(A_6\)-orbit construction
+give the coherent source required by Theorem~\ref{thm:propagation}.
+Common reversal negates \(Z\) and every Pfaffian but fixes \(Z^2\), the
+centered square, determinants, probabilities, and zero loci.  Golden
+conjugation exchanges the two eigenspaces, transposes the cross block, and
+exchanges the two resolutions and rank-one sheaves.  These are exactly the
+descent claims in (a)--(c).
+
+For (d), unique factorization recovers the cubic line from
+\(\det[D_x,C]=16Z_C^2\).  Its triangle coefficients recover \(t\) up to
+common negation.  Equivalently, for distinct \(i,j,k,l\),
+\[
+ [x_i^2x_j^2x_kx_l]\det[D_x,C]
+   =32\,t_{ijk}t_{ijl},
+\]
+so the determinant directly gives the four-cycle holonomies measured by
+relative matching signs.  Those holonomies recover the switching line.
+
+For minimality, the bare locus is the full rational conic.  Its
+\(\mathrm{PGL}_2(11)\)-action is transitive on the
+\([\mathrm{PGL}_2(11):A_5]=22\) Clebsch matching rows, so no equivariant
+rule selects a parent.  A factorization-sheet orientation does not repair
+this: it selects a decorated row, whereas identifying that row with a
+geometric parent is additional data.  Once the monomial parent is retained,
+the \(S_5/A_5\cong C_2\) support-half choice is both sufficient and, for a
+signed odd shadow, unavoidable.
+\end{proof}
+
+The centered-square shadow has one further, geometric information-loss
+stratum.  Over an algebraically closed field of characteristic zero, let
+\[
+ S=\{[z]\in\mathbf P^5:\textstyle\sum_i z_i=\sum_i z_i^3=0\},
+ \qquad
+ \pi([z])=[\operatorname{center}(z_i^2)].
+\]
+
+\begin{proposition}[Fibres of centered squaring]
+\label{prop:polar-fibres}
+The base locus of \(\pi\) is the set of ten nodes of \(S\).  Over a smooth
+point of the Igusa quartic the fibre is one reduced point.  Its singular
+locus is the union of fifteen lines \(L_M\), indexed by matchings
+\(M=ij|kl|mn\).  Write a point of \(L_M\), after reordering, as
+\((\alpha,\alpha,\beta,\beta,\gamma,\gamma)\) with
+\(\alpha+\beta+\gamma=0\).  Away from the intersections of the singular
+lines, its fibre is the smooth conic
+\[
+ (\beta-\gamma)a^2-(\alpha-\gamma)b^2
+      +(\alpha-\beta)c^2=0
+\]
+in the Segre plane
+\((a,-a,b,-b,c,-c)\).  At each of the fifteen points where three singular
+lines meet, the fibre is a union of six projective lines.
+\end{proposition}
+
+\begin{proof}
+Centered squaring is the Gauss map of the Segre cubic.  Segre--Igusa
+duality makes it birational, and the fifteen Segre planes are contracted
+to the fifteen singular lines of the Igusa quartic
+\cite{KondoSegre}.  This proves the smooth-fibre statement and locates the
+exceptional fibres.
+
+If the coordinates of \(w\) are paired as above, the corresponding
+\(z\)-squares are paired.  Away from an intersection point, the linear and
+cubic Segre equations force opposite signs in every pair, so
+\(z=(a,-a,b,-b,c,-c)\).  Equality of the centered-square projective
+coordinates is exactly the displayed conic.  Its three coefficients are
+nonzero precisely away from the three intersection points on \(L_M\).
+At, for example, \(w=(1,1,1,1,-2,-2)\), the first four \(z_i\) have one
+common square and the last two another.  The Segre equations force two
+plus and two minus signs among the first four and opposite signs in the
+last pair.  Modulo common sign there are six patterns, each with one free
+ratio of magnitudes; these are the six lines.  The three pairings of the
+first four indices give the three reducible conics through them.
+\end{proof}
+
+Thus centered squaring is generically faithful on projective orientation
+classes.  Its nonzero information loss is exactly the contraction of the
+fifteen Segre planes.  On a signed affine lift it also forgets the unavoidable
+common sign \(z\leftrightarrow-z\).
+
 \section{Organization}
 
 Sections 3--5 develop the cubic, polar, and determinantal branches.
@@ -157,5 +329,14 @@ Sections 8--9 give the exact fermionic and frustration consequences.
 Section 10 separates the arithmetic and lattice boundaries.  The appendices
 contain the Platonic feasibility results, finite classifications, and
 verification ledger.
+
+\begin{thebibliography}{9}
+
+\bibitem{KondoSegre}
+S.~Kond\=o,
+\emph{The Segre cubic and Borcherds products},
+arXiv:1110.1126.
+
+\end{thebibliography}
 
 \end{document}
