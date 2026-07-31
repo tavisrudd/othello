@@ -4,8 +4,9 @@
 
 **Opened:** 2026-07-15
 
-**Status:** bounded revision and local release gates complete; queued on
-explicit authority for the external publication gate.
+**Status:** external publication deferred behind queued C713--C714; the shared
+trilogy title-page refinement is synchronized locally, while the new proof and
+companion passes must refresh the final release surface before publication.
 
 ## Objective
 
@@ -33,7 +34,9 @@ Cold-read report:
 
 ## Next action
 
-With explicit user authority and publication credentials:
+Complete C713 and C714 and freeze their synchronized human, computational, and
+Lean trust surfaces. Then, with explicit user authority and publication
+credentials:
 
 1. create the public paper repository/release package;
 2. freeze the exact approved source, PDF, manifest, pins, licences, and
