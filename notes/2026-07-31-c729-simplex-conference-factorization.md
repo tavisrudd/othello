@@ -335,15 +335,109 @@ law does not.  This weighted operator is the cheapest viable notion of a
 second-stage shadow; any proposed tower should propagate multi-angle
 integral Gram operators rather than insist on sign conference matrices.
 
+The invariant normalization is even simpler.  Center the two eigenvalues:
+
+\[
+H=K-5I_{36}.
+\]
+
+Then
+
+\[
+\boxed{H^2=100I_{36}},
+\qquad
+\frac{H}{10}=2E_{-3}-I_{36}.
+\]
+
+Thus \(H/10\) is the canonical Naimark reflection across the Sylvester
+\(-3\)-eigenspace; \(K\) is its integral zero-diagonal coordinate form.  In
+general, if \(N\) equal-norm tight-frame lines span dimension \(d\), the
+reflection \(2P-I_N\) has constant diagonal \(2d/N-1\).  The first Golden
+lift has \((d,N)=(5,10)\), so this diagonal vanishes and the reflection is a
+conference operator after scaling.  The extremal-cut lift has
+\((d,N)=(9,36)\), so its diagonal is \(-1/2\).  The failure of an ordinary
+conference matrix is therefore forced by the change in redundancy from two
+to four, while the reflection law survives unchanged.
+
+This suggests the correct provisional hierarchy:
+
+\[
+\text{integral tight frame}
+\longmapsto
+\text{constant-diagonal Naimark reflection}.
+\]
+
+Conference matrices are its redundancy-two case.  Calling this a tower
+still requires a canonical rule producing the next integral frame; the two
+examples prove only the common reflection mechanism.
+
+## `ej`: closure of the C708 outer-action bridge
+
+The classical Sylvester model has a sharper consequence for the Golden
+architecture.  Its \(36\) vertices are the outer involutions in
+\(\operatorname{Aut}(S_6)\cong\operatorname{P\Gamma L}(2,9)\), with two
+vertices adjacent exactly when the involutions commute.  The visible
+\(S_6\) is the inner subgroup of index two.
+
+C708's \(36\) involutory polarities are the same outer-involution class.
+The identification through the unique normal \(C_5\) in each
+\(F_{20}\)-stabilizer is \(S_6\)-equivariant.  Moreover the point stabilizer
+has subdegrees
+
+\[
+1,5,20,10,
+\]
+
+so there is a unique invariant relation of valency five.  It follows that
+
+\[
+\boxed{\text{large cut angle }3/5
+\quad\Longleftrightarrow\quad
+\text{the corresponding C708 outer involutions commute}.}
+\]
+
+Thus the order-ten extremal cuts do not merely share a 36-element set with
+the polarity package: their two-angle geometry recovers its Sylvester
+commuting relation.  The full graph automorphism group supplies the unique
+outer coset of the visible \(S_6\), but it selects no preferred outer
+involution.  This matches C708's exact boundary: all 36 involutory
+normalizations exist, while the unnormalized operator chooses none.
+
+The reflection \(2E_{-3}-I\) is polynomial in the adjacency matrix and is
+therefore invariant under the full outer action.  The integral cut factor
+\(X\) is also preserved at the sharp projective level.  In C708's frozen
+ten-node convention the unnormalized outer exchange is
+
+\[
+f=(7,6,5,8,4,0,2,3,1,9).
+\]
+
+It permutes the \(36\) extremal block pairs.  If \(P_f\) is its permutation
+matrix on the ten node coordinates and \(\Pi_f\) its induced permutation on
+the \(36\) coherently oriented frame lines, then
+
+\[
+\boxed{P_fX=-X\Pi_f}.
+\]
+
+The sign is common to all \(36\) columns.  Thus the exceptional exchange
+preserves the integral \(\{\pm1\}\)-factor up to its unavoidable projective
+orientation; it does not require independent column signs or a general real
+change of frame.  Since the visible \(S_6\) together with \(f\) generates
+the full outer action, the integral factor carries the complete
+\(\operatorname{Aut}(S_6)\)-symmetry.  The order-eight value of \(f\) still
+selects no involutory normalization, exactly as in C708.
+
 ### Literature checkpoint
 
-The graph name and classical parameters were checked against
+The graph name, classical parameters, and outer-involution model were checked against
 M. R. Alfuraidan and J. I. Hall, *Imprimitive distance-transitive graphs
 with primitive core of diameter at least 3*, Michigan Math. J. 58 (2009),
 31--77, doi:10.1307/mmj/1242071683, Section 5.8.2.  That section records the
 Sylvester graph as a 36-vertex distance-transitive
-\(\operatorname{P\Gamma L}(2,9)\)-graph with intersection array
-\(\{5,4,2;1,1,4\}\).  It does not supply the extremal-cut realization,
+\(\operatorname{P\Gamma L}(2,9)\)-graph on outer involutions, with commuting
+adjacency and intersection array \(\{5,4,2;1,1,4\}\).  It does not supply
+the extremal-cut realization,
 the integral \(-3\)-eigenspace factor, or the weighted quadratic identity
 above.  This is a terminology checkpoint, not the focused novelty audit
 required before any priority claim.
@@ -352,7 +446,7 @@ required before any priority claim.
 
 Derive representation-theoretic or Cauchy--Binet moment constraints for
 higher conference orders and run the focused ETF/Naimark, Sylvester-graph,
-maximal-minor, and weighted-conference literature audit.  The next
+maximal-minor, and weighted-reflection literature audit.  The next
 computational order should be attempted only after these identities specify
 which distributional data can carry theorem-level content.
 
@@ -380,6 +474,17 @@ which distributional data can carry theorem-level content.
   frame.  The derived operator has weights \(1,3\) and satisfies
   \(K^2=10K+75I\); it is a weighted quadratic replacement, not another
   conference matrix.
+- **Settled by `ej`:** recentering gives the canonical reflection
+  \((K-5I)^2=100I\).  The diagonal formula \(2d/N-1\) explains exactly why
+  redundancy two gives the order-ten conference matrix and redundancy four
+  gives the weighted order-36 shadow.
+- **Settled by `ej`:** the large-angle relation is the commuting graph on
+  C708's 36 outer involutions.  The full Sylvester automorphism group closes
+  the exceptional outer-action bridge at the projective reflection level.
+- **Settled by `ej`:** C708's explicit order-eight exchange preserves the
+  integral factor by row and column permutation with one common minus sign.
+  Hence the full outer action lifts projectively to \(X\); no independent
+  column-orientation torsor remains.
 - **Open:** determine whether the weighted quadratic operator belongs to a
   known multi-angle or roux-type tower; no priority language is licensed
   before the focused literature gate.

@@ -2,8 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** active; intrinsic factorization, 36-cut design, and Sylvester
-eigenspace replacement proved; moment/literature gate next
+**Status:** active; Naimark reflection and full integral outer-action bridge
+proved; moment/literature gates next
 
 **Opening report:**
 `notes/2026-07-31-c729-simplex-conference-factorization.md`
@@ -42,6 +42,14 @@ golden sisters uniquely up to row reversal, row permutation, column
 switching, and column permutation.  This reverse-factorization problem is
 the prospective \(6\leftrightarrow10\) theorem; the forward Gram identity
 alone does not establish a conference tower.
+
+The first two stages now share a more general invariant than the conference
+identity: their tight-frame Gram projectors give constant-diagonal Naimark
+reflections.  The \((5,10)\) stage has diagonal zero and hence a conference
+operator; the \((9,36)\) extremal-cut stage has diagonal \(-1/2\) and an
+integral weighted form with off-diagonal magnitudes \(1,3\).  C729 therefore
+tests a reflection hierarchy, with conference matrices as the
+redundancy-two specialization, rather than presupposing a conference tower.
 
 ## Gates
 

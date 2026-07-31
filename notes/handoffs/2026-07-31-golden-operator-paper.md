@@ -98,7 +98,20 @@ particular:
   in dimension nine, so the direct Gram-to-conference iteration stops.  The
   large-angle relation is the Sylvester graph; its \(-3\)-eigenspace is the
   integral cut frame, and the resulting weighted operator satisfies
-  \(K^2=10K+75I\) with off-diagonal weights \(1,3\).
+  \(K^2=10K+75I\) with off-diagonal weights \(1,3\).  Recentring gives the
+  canonical reflection \((K-5I)^2=100I\), explaining the conference failure
+  by the redundancy change \(2\to4\).  The large-angle relation is also the
+  commuting relation on C708's 36 outer involutions, closing the full
+  outer-action bridge.  C708's explicit order-eight exchange preserves the
+  integral cut factor by row and column permutation with one common minus
+  sign, so no independent column-orientation torsor survives.
+- C728 constructs the six Majorana principal-Pfaffian systems intrinsically
+  as an outer-equivariant product of Cartan big cells.  The synchronized
+  tangent map and top cubic covariant each have multiplicity one; the exact
+  projected ideal is the reduced Segre ideal, with a reduced fifteen-line
+  unstable base scheme and ten \(3+3\) nodal images.  Wick identities govern
+  each factor, while golden synchronization and the six-point quotient
+  produce the Segre equation.
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
@@ -118,8 +131,7 @@ manuscript edit is authorized by C727.
 
 | task | state | next gate |
 |---|---|---|
-| [C728 — synchronized pure-spinor geometry](../golden-tasks/c728-synchronized-pure-spinor-geometry.md) | queued after C720 | replace the coordinate synchronization by an intrinsic equivariant construction and determine its projected ideal |
-| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | active; Sylvester eigenspace replacement proved | derive higher-order cut moments and audit the weighted multi-angle operator against the literature |
+| [C729 — higher-order conference-cut designs](../golden-tasks/c729-higher-order-conference-cut-designs.md) | active; integral outer bridge proved | derive higher-order moments and audit the reflection hierarchy |
 | [C715 — anomaly inverse](../golden-tasks/c715-golden-anomaly-inverse.md) | queued after C720 | prove the rational inverse, exceptional strata, normalization, and postselection cost |
 | [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | queued after C715 | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
@@ -128,13 +140,12 @@ manuscript edit is authorized by C727.
 
 ## Recommended order
 
-1. Complete C729's higher-order moment and focused literature gate now that
-   the derived Sylvester operator is frozen.
-2. C728 intrinsic synchronized-spinor audit.
-3. C715 anomaly inverse.
-4. C717 and C718, chosen by theorem yield after C715's first gate.
-5. C716 only after the inverse interface freezes.
-6. C719 after the mathematical paper spine is secure.
+1. Complete C729's higher-order moment and focused literature gates now that
+   the integral Sylvester reflection and outer action are frozen.
+2. C715 anomaly inverse.
+3. C717 and C718, chosen by theorem yield after C715's first gate.
+4. C716 only after the inverse interface freezes.
+5. C719 after the mathematical paper spine is secure.
 
 ## Ownership and allowed paths
 
