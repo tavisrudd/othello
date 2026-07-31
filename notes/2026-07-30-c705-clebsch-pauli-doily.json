@@ -4,8 +4,11 @@
     "all_ten_grid_parities_are_negative": true,
     "clebsch_and_pauli_context_signs_are_point_gauge_equivalent": true,
     "clebsch_conference_factor_is_point_gauge": true,
+    "code_dual_minimum_blocks_complete_to_Witt_W10": true,
     "incidence_dictionary": true,
+    "isoduality_torsor_contains_one_36_element_involution_class": true,
     "no_further_unrestricted_context_sign_invariant_remains": true,
+    "ordinary_gauge_quotient_is_equivalent_to_Seymour_R10": true,
     "ordinary_gauge_quotient_is_isodual_not_self_dual": true,
     "ordinary_gauge_quotient_recovers_S6_symmetric_node_plane_design": true,
     "usual_contextuality_class_depends_on_C_or_K": false
@@ -303,11 +306,13 @@
     "grid_checker_rank_F2": 5,
     "grids": 10,
     "incidence_rank_F2": 10,
+    "involutory_isodual_maps": 36,
     "ordinary_gauge_quotient_dimension": 5,
     "ovoids": 6,
     "parity_code_automorphism_order": 720,
     "parity_code_isodual_maps": 720,
-    "points": 15
+    "points": 15,
+    "witt_design_automorphism_order": 1440
   },
   "duads": [
     {
@@ -1138,6 +1143,19 @@
     "clebsch_and_pauli_parity_word": "1111111111",
     "code_is_isodual": true,
     "code_is_self_dual": false,
+    "code_plus_dual_is_even_weight_code": true,
+    "coordinate_equivalence_to_R10": [
+      0,
+      1,
+      2,
+      6,
+      4,
+      9,
+      3,
+      7,
+      8,
+      5
+    ],
     "dual_weight_enumerator": {
       "0": 1,
       "10": 1,
@@ -1159,7 +1177,27 @@
     "full_permutation_automorphism_group_order": 720,
     "grid_checks_span_full_left_kernel": true,
     "grid_parities_are_complete_gauge_invariants": true,
+    "hull_dimension": 1,
+    "hull_generator": "1111111111",
+    "involutory_isodual_maps_are_fixed_point_free": true,
+    "involutory_isodual_maps_form_one_automorphism_conjugacy_class": true,
+    "isodual_cycle_type_distribution": {
+      "10": 144,
+      "2,2,2,2,2": 36,
+      "4,4,1,1": 180,
+      "8,1,1": 180,
+      "8,2": 180
+    },
+    "isodual_order_distribution": {
+      "10": 144,
+      "2": 36,
+      "4": 180,
+      "8": 360
+    },
     "isodual_permutation_count": 720,
+    "minimum_block_union_automorphism_order": 1440,
+    "minimum_block_union_size": 30,
+    "minimum_blocks_with_dual_form_S_3_4_10": true,
     "parity_code_parameters": [
       10,
       5,
@@ -1171,6 +1209,13 @@
       "4": 15,
       "6": 15
     },
+    "r10_parity_check_rows": [
+      "1100110000",
+      "1110001000",
+      "0111000100",
+      "0011100010",
+      "1001100001"
+    ],
     "weight_four_design_parameters": [
       2,
       10,

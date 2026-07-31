@@ -341,6 +341,21 @@ planes, their complementary pairing over the ten nodes, the common
 boundary factor on each plane, and the exceptional equation
 \(e_5=0\) as the union of the fifteen Segre planes.
 
+### `ej3`
+
+The finite sister shadow sharpened from a bare isoduality torsor to a
+standard exceptional object.  The node--plane code and its dual intersect
+in the repetition line, sum to the even-weight code, and their thirty
+minimum words form \(S(3,4,10)=W_{10}\).  Its marked symmetry group has
+order \(1440\), with the outer \(S_6\) as the index-two half stabilizer.
+The exchange coset contains a single \(S_6\)-conjugacy class of 36
+fixed-point-free involutions, giving a precise finite set of polarity
+candidates.  An explicit coordinate permutation identifies the code with
+Seymour's exceptional \(R_{10}\), hence with the standard
+shortened-hexacode/quadratic-residue model and Construction-A \(Q_{10}\).
+What remains is not code identification but selection: does the actual
+Segre--Igusa polar operator pick one of those 36 involutions canonically?
+
 ### `tt2`
 
 The final structural pass tested minimality, converse content, and
@@ -379,7 +394,7 @@ placed in the mystery ledger below.
 | Whether the \(15/10/6\) geometry is the two-qubit Pauli doily | settled exactly: duads, synthemes, \(3+3\) partitions, and stars give points, contexts, ten grids, and six ovoids | none |
 | Whether the Clebsch/\(K\) signs define a new Mermin cocycle | settled negatively: all ten grid parities are \(-1\), but the conference factor is point gauge and the \(K\)-triangle tensor is a simplex coboundary | C706 tests only the sharper equivariant Clifford-lift question |
 | Whether another unrestricted Pauli context-sign invariant could still distinguish Clebsch from Pauli gauge | settled negatively: the ten grid checks have rank \(5\) and span the full left kernel of the rank-\(10\) point--context incidence map | none; C706 must use equivariance |
-| Whether the complete sign quotient retains a sister shadow | positive at the finite level: its \([10,5,4]\) node--plane code is isodual but not self-dual, with automorphism group and duality torsor both of size \(720\) | C708 must compare the duality torsor with Segre--Igusa polarity and the classical quadratic-residue/\(Q_{10}\) model |
+| Whether the complete sign quotient retains a sister shadow | positive and structurally identified: \(R_{10}\) and its dual halve \(W_{10}\); the 720-element exchange coset contains one 36-element class of fixed-point-free involutions; Construction A gives \(Q_{10}\) | C708 must test whether the Segre--Igusa operator selects one of the 36 polarities |
 
 ## Literature boundary
 

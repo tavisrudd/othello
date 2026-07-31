@@ -23,17 +23,25 @@ weight enumerator
 Its fifteen weight-four words are the node sets on the fifteen Segre
 planes, forming the \(2\)-\((10,4,2)\) design with full permutation
 automorphism group of order \(720\).  The code is not self-dual but isodual,
-with exactly \(720\) dualizing coordinate permutations.
-C708 should identify this code conceptually and extend the calculation; it
-must not recompute the C705 sign comparison as if still open.
+with exactly \(720\) dualizing coordinate permutations.  The code and dual
+meet in the repetition line and sum to the even-weight code.  Their disjoint
+weight-four layers unite to the Steiner system \(S(3,4,10)=W_{10}\), whose
+marked automorphism group has order \(1440\).  The exchange coset contains
+one half-preserving-group conjugacy class of 36 fixed-point-free
+involutions.  An explicit coordinate permutation identifies the code with
+Seymour's exceptional regular-matroid code \(R_{10}\); standard uniqueness
+then identifies the shortened-hexacode/quadratic-residue model and its
+Construction-A lattice \(Q_{10}\).
+C708 should extend this calculation; it must not recompute the C705 sign
+comparison or the standard-code identification as if still open.
 
 ## Gates
 
 1. Determine dimensions, duals, hulls, minimum distances, weight
    enumerators, and automorphism groups over the relevant fields.
-   First test an explicit equivalence with the binary quadratic-residue
-   \([10,5,4]\) code and identify whether a canonical isoduality is the
-   finite shadow of Segre--Igusa polarity.
+   Use the frozen \(R_{10}\)--\(W_{10}\)--\(Q_{10}\) identification and
+   determine whether the Segre--Igusa polar operator selects one of the 36
+   involutory dualities, or only the full exchange torsor.
 2. Test CSS and symplectic self-orthogonality conditions without assuming a
    useful quantum code exists.
 3. Compare code rank jumps with the exact ranks of \(G,A\), and their

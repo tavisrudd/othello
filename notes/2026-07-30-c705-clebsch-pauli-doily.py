@@ -8,7 +8,7 @@ import hashlib
 import json
 from collections import Counter
 from itertools import combinations, permutations, product
-from math import prod
+from math import lcm, prod
 from pathlib import Path
 
 
@@ -310,6 +310,24 @@ def build_certificate() -> dict:
     assert dual_weight_enumerator == parity_weight_enumerator
     assert dual_code != parity_code
     dual_weight_four_words = {word for word in dual_code if word.bit_count() == 4}
+    all_weight_four_words = weight_four_words | dual_weight_four_words
+    assert len(all_weight_four_words) == 30
+    assert all(
+        sum(
+            all((word >> point) & 1 for point in triple)
+            for word in all_weight_four_words
+        )
+        == 1
+        for triple in combinations(range(len(grids)), 3)
+    )
+    hull = parity_code & dual_code
+    assert hull == {0, (1 << len(grids)) - 1}
+    code_sum = {left ^ right for left in parity_code for right in dual_code}
+    assert code_sum == {
+        word
+        for word in range(1 << len(grids))
+        if word.bit_count() % 2 == 0
+    }
 
     def permute_word(word: int, permutation: tuple[int, ...]) -> int:
         return sum(
@@ -317,8 +335,27 @@ def build_certificate() -> dict:
             for index in range(len(permutation))
         )
 
+    def cycle_type(permutation: tuple[int, ...]) -> tuple[int, ...]:
+        seen = set()
+        lengths = []
+        for start in range(len(permutation)):
+            if start in seen:
+                continue
+            point = start
+            length = 0
+            while point not in seen:
+                seen.add(point)
+                length += 1
+                point = permutation[point]
+            lengths.append(length)
+        return tuple(sorted(lengths, reverse=True))
+
     automorphism_count = 0
     isodual_count = 0
+    witt_automorphism_count = 0
+    isodual_cycle_types: Counter[tuple[int, ...]] = Counter()
+    automorphisms = []
+    involutory_isodualities = []
     first_isodual_permutation = None
     for permutation in permutations(range(len(grids))):
         is_automorphism = True
@@ -329,14 +366,83 @@ def build_certificate() -> dict:
             is_isodual &= image in dual_weight_four_words
             if not is_automorphism and not is_isodual:
                 break
+        is_witt_automorphism = is_automorphism or is_isodual
+        if not is_witt_automorphism:
+            is_witt_automorphism = all(
+                permute_word(word, permutation) in all_weight_four_words
+                for word in all_weight_four_words
+            )
         if is_automorphism:
             automorphism_count += 1
+            automorphisms.append(permutation)
         if is_isodual:
             isodual_count += 1
+            kind = cycle_type(permutation)
+            isodual_cycle_types[kind] += 1
+            if kind == (2, 2, 2, 2, 2):
+                involutory_isodualities.append(permutation)
             if first_isodual_permutation is None:
                 first_isodual_permutation = permutation
+        if is_witt_automorphism:
+            witt_automorphism_count += 1
     assert automorphism_count == isodual_count == 720
+    assert witt_automorphism_count == 1440
+    assert isodual_cycle_types == {
+        (2, 2, 2, 2, 2): 36,
+        (4, 4, 1, 1): 180,
+        (8, 1, 1): 180,
+        (8, 2): 180,
+        (10,): 144,
+    }
     assert first_isodual_permutation is not None
+    isodual_order_distribution = Counter(
+        lcm(*kind)
+        for kind, multiplicity in isodual_cycle_types.items()
+        for _ in range(multiplicity)
+    )
+    assert isodual_order_distribution == {2: 36, 4: 180, 8: 360, 10: 144}
+
+    def compose(left, right):
+        return tuple(left[right[index]] for index in range(len(left)))
+
+    def inverse(permutation):
+        result = [0] * len(permutation)
+        for source, target in enumerate(permutation):
+            result[target] = source
+        return tuple(result)
+
+    polarity = involutory_isodualities[0]
+    assert {
+        compose(compose(automorphism, polarity), inverse(automorphism))
+        for automorphism in automorphisms
+    } == set(involutory_isodualities)
+
+    # Explicit equivalence with Seymour's exceptional regular-matroid code R10.
+    r10_parity_check_rows = (
+        0b0000110011,
+        0b0001000111,
+        0b0010001110,
+        0b0100011100,
+        0b1000011001,
+    )
+    r10 = {
+        word
+        for word in range(1 << len(grids))
+        if all(
+            (word & check).bit_count() % 2 == 0
+            for check in r10_parity_check_rows
+        )
+    }
+    r10_weight_four = {word for word in r10 if word.bit_count() == 4}
+    r10_equivalence = next(
+        permutation
+        for permutation in permutations(range(len(grids)))
+        if all(
+            permute_word(word, permutation) in r10_weight_four
+            for word in weight_four_words
+        )
+    )
+    assert r10_equivalence == (0, 1, 2, 6, 4, 9, 3, 7, 8, 5)
 
     ovoids = []
     for vertex in range(6):
@@ -395,6 +501,8 @@ def build_certificate() -> dict:
             "ordinary_gauge_quotient_dimension": len(matchings) - incidence_rank,
             "parity_code_automorphism_order": automorphism_count,
             "parity_code_isodual_maps": isodual_count,
+            "witt_design_automorphism_order": witt_automorphism_count,
+            "involutory_isodual_maps": isodual_cycle_types[(2, 2, 2, 2, 2)],
         },
         "contexts": [
             {
@@ -427,6 +535,26 @@ def build_certificate() -> dict:
             },
             "isodual_permutation_count": isodual_count,
             "first_isodual_permutation": list(first_isodual_permutation),
+            "hull_dimension": 1,
+            "hull_generator": "1111111111",
+            "code_plus_dual_is_even_weight_code": True,
+            "minimum_blocks_with_dual_form_S_3_4_10": True,
+            "minimum_block_union_size": len(all_weight_four_words),
+            "minimum_block_union_automorphism_order": witt_automorphism_count,
+            "isodual_cycle_type_distribution": {
+                ",".join(map(str, kind)): multiplicity
+                for kind, multiplicity in sorted(isodual_cycle_types.items())
+            },
+            "isodual_order_distribution": {
+                str(order): multiplicity
+                for order, multiplicity in sorted(isodual_order_distribution.items())
+            },
+            "involutory_isodual_maps_are_fixed_point_free": True,
+            "involutory_isodual_maps_form_one_automorphism_conjugacy_class": True,
+            "r10_parity_check_rows": [
+                f"{row:010b}"[::-1] for row in r10_parity_check_rows
+            ],
+            "coordinate_equivalence_to_R10": list(r10_equivalence),
             "clebsch_and_pauli_parity_word": "1111111111",
         },
         "conclusions": {
@@ -439,6 +567,9 @@ def build_certificate() -> dict:
             "no_further_unrestricted_context_sign_invariant_remains": True,
             "ordinary_gauge_quotient_recovers_S6_symmetric_node_plane_design": True,
             "ordinary_gauge_quotient_is_isodual_not_self_dual": True,
+            "code_dual_minimum_blocks_complete_to_Witt_W10": True,
+            "isoduality_torsor_contains_one_36_element_involution_class": True,
+            "ordinary_gauge_quotient_is_equivalent_to_Seymour_R10": True,
         },
     }
 

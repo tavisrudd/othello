@@ -201,13 +201,56 @@ equal, and the set of identifications has the correct outer-\(S_6\) size.
 It does not yet identify the isoduality permutation with the C705
 Segre--Igusa polar operator; that is now a sharp C708 comparison.
 
-The parameters, weight enumerator, isoduality, and \(S_6\) symmetry strongly
-suggest the classical binary quadratic-residue \([10,5,4]\) code and its
-Construction-A isodual lattice \(Q_{10}\).  This is recorded only as a
-literature-guided identification target: there are multiple inequivalent
-binary \([10,5,4]\) codes, and an explicit coordinate equivalence has not
-yet been supplied.  If confirmed, the first natural lattice lift of the
-Pauli/doily seam is ten-dimensional \(Q_{10}\), not automatically \(E_8\).
+### Third-order extra juice: \(R_{10}\), \(W_{10}\), and a polarity class
+
+The code and its dual meet as little as their common all-one word permits:
+\[
+ \mathcal C\cap\mathcal C^\perp=\langle{\bf1}\rangle,\qquad
+ \mathcal C+\mathcal C^\perp=E_{10},
+\]
+where \(E_{10}\) is the nine-dimensional even-weight code.  Thus the paired
+five-spaces share one radial line and fill the ambient even ten-space.  This
+is a particularly clean characteristic-two sister pattern.
+
+The fifteen minimum words of \(\mathcal C^\perp\) are disjoint from the
+fifteen minimum words of \(\mathcal C\).  Their union has thirty
+four-subsets, and exact enumeration shows that every three-subset of the ten
+coordinates lies in exactly one of them.  Hence the two minimum layers are
+the two \(15\)-block halves of the Steiner system
+\[
+ S(3,4,10)=W_{10}.
+\]
+Exhaustion of all \(10!\) coordinate permutations gives \(1440\)
+automorphisms of this union: \(720\) preserve the two halves and \(720\)
+exchange them.  There is no additional automorphism that mixes the halves
+block by block.
+
+The exchange coset is not merely an undifferentiated torsor.  Its order
+distribution is
+\[
+ 2^{36}\,4^{180}\,8^{360}\,10^{144}
+\]
+in multiplicity notation.  The 36 involutions all have cycle type
+\(2^5\), so they are fixed-point-free on the ten nodes, and conjugation by
+the half-preserving automorphism group is transitive on them.  They
+therefore form one distinguished 36-element class of combinatorial
+polarities exchanging \(\mathcal C\) with \(\mathcal C^\perp\).  Whether
+the specific C705 Segre--Igusa polar operator canonically selects one member
+of this class remains an operator-level question; the finite target is now
+sharp.
+
+There is also an explicit standard-code identification.  In the frozen node
+order, the coordinate permutation
+\[
+ (0,1,2,6,4,9,3,7,8,5)
+\]
+takes \(\mathcal C\) to the kernel of Seymour's displayed parity-check
+matrix for the exceptional regular-matroid code \(R_{10}\).  This removes
+the ambiguity left by the existence of four inequivalent binary
+\([10,5,4]\) codes.  Literature identifies the unique isodual member with
+the shortened-hexacode/binary quadratic-residue model used to construct the
+isodual lattice \(Q_{10}\); consequently the natural Construction-A lift of
+this seam is indeed \(Q_{10}\), not automatically \(E_8\).
 
 The negative is exact only for unrestricted point gauge.  It does not
 settle whether an equivariant gauge exists, whether the signed outer action
@@ -265,9 +308,9 @@ the operator/compound theorem, not to the bare doily dictionary.
 |---|---|---|
 | Are the ten Mermin parities sufficient to compare all ordinary sign systems? | settled: their five independent checks span the full left kernel of the point--context incidence map | none |
 | Does any unrestricted contextual sign invariant see \(C\) or \(K\)? | settled negatively: the complete quotient identifies the Clebsch and Pauli systems | none |
-| Why the parity quotient is the \([10,5,4]\) code with enumerator \(1+15y^4+15y^6+y^{10}\) | exact parameters settled; conceptual identification not attempted here | C708 |
-| Why the code is isodual but not self-dual | exact: both sides have the same enumerator and exactly \(720\) coordinate identifications; relation to Segre--Igusa polarity remains open | C708 |
-| Whether this is the classical binary quadratic-residue \([10,5,4]\) code and Construction-A \(Q_{10}\) lattice | strong parameter/symmetry match only; explicit coordinate equivalence absent | C708, then C710 |
+| Why the parity quotient is the \([10,5,4]\) code with enumerator \(1+15y^4+15y^6+y^{10}\) | settled more sharply: it is explicitly coordinate-equivalent to Seymour's exceptional \(R_{10}\) code | none |
+| Why the code is isodual but not self-dual | finite structure settled: the two minimum layers halve \(W_{10}\), meet through the common repetition line, and are exchanged by a 720-element coset containing one 36-element involution class | operator identification remains in C708 |
+| Whether this is the classical binary quadratic-residue \([10,5,4]\) code and Construction-A \(Q_{10}\) lattice | settled up to the standard literature equivalences: explicit \(R_{10}\) coordinates plus uniqueness of the isodual class identify the QR/shortened-hexacode model and hence \(Q_{10}\) | C710 owns any bridge onward to \(E_8\) |
 | Does the gauge trivialization respect outer \(S_6\), the Clifford lift, or golden \(A_5\)? | open and now the only surviving sign crown | C706 |
 | Does the operator tower have an operational POVM meaning despite sign triviality? | open and logically independent of contextual signs | C707 |
 
@@ -309,8 +352,26 @@ text for this bounded positioning pass.
   configurations* — `abstract/metadata only`, 2006 conference-program
   abstract retrieved on 2026-07-30.  It associates a binary
   quadratic-residue \([10,5,4]\) code to the Construction-A isodual lattice
-  \(Q_{10}\) with automorphism group \(2^{10}\!:\!S_6\).  This motivates but
-  does not prove the proposed identification with the C705 code.
+  \(Q_{10}\) with automorphism group \(2^{10}\!:\!S_6\).
+- Rains--Sloane, *Self-Dual Codes* — `partial`, author-hosted full text,
+  §2.6 read on 2026-07-30.  It records the shortened-hexacode construction
+  of an isodual binary \([10,5,4]\) code.
+- Kashyap, *A decomposition theory for binary linear codes* — `partial`,
+  author-hosted full text, Theorem 5.4 and its displayed matrix read on
+  2026-07-30.  It identifies Seymour's \(R_{10}\) as the exceptional
+  regular, neither graphic nor cographic, isodual \([10,5,4]\) code.  The
+  coordinate equivalence above is an exact C705 computation against that
+  displayed matrix.
+- Alber--Beth--Charnes--Delgado, *A new class of designs which protect
+  against quantum jumps* — `partial`, author-hosted full text, relevant
+  isodual-code example read on 2026-07-30.  It states uniqueness of the
+  isodual \([10,5,4]\) code and associates its two weight-four layers with
+  a \(2\)-SEED.
+- Bartoli--Marcugini--Pambianco, *Finite geometry and the Gale transform*
+  — `abstract/snippet only`, publisher record retrieved on 2026-07-30.  It
+  records uniqueness of the Steiner system \(S(3,4,10)=W_{10}\).  The
+  occurrence and the order-\(1440\) marked automorphism calculation here
+  are independently exact.
 
 Eight metadata searches screened titles and abstracts for
 `two-qubit Pauli doily duads synthemes Mermin grids ovoids S6 Sp(4,2)`,

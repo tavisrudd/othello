@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Independent direct-matrix replay of the C705 Pauli-doily sign comparison."""
 
+from collections import Counter
 from itertools import combinations, permutations
-from math import prod
+from math import lcm, prod
 
 
 C = (
@@ -165,14 +166,44 @@ assert {
     if any(word.bit_count() == weight for word in dual_code)
 } == weight_enumerator
 dual_weight_four = {word for word in dual_code if word.bit_count() == 4}
+all_weight_four = weight_four | dual_weight_four
+assert len(all_weight_four) == 30
+assert all(
+    sum(all((word >> point) & 1 for point in triple) for word in all_weight_four) == 1
+    for triple in combinations(range(10), 3)
+)
+assert parity_code & dual_code == {0, (1 << 10) - 1}
+assert {left ^ right for left in parity_code for right in dual_code} == {
+    word for word in range(1 << 10) if word.bit_count() % 2 == 0
+}
 
 
 def permute_word(word, permutation):
     return sum(((word >> index) & 1) << permutation[index] for index in range(10))
 
 
+def cycle_type(permutation):
+    seen = set()
+    lengths = []
+    for start in range(10):
+        if start in seen:
+            continue
+        point = start
+        length = 0
+        while point not in seen:
+            seen.add(point)
+            length += 1
+            point = permutation[point]
+        lengths.append(length)
+    return tuple(sorted(lengths, reverse=True))
+
+
 automorphisms = 0
 isodual_maps = 0
+witt_automorphisms = 0
+isodual_cycle_types = Counter()
+automorphism_permutations = []
+involutory_isodualities = []
 for permutation in permutations(range(10)):
     is_automorphism = True
     is_isodual = True
@@ -182,9 +213,74 @@ for permutation in permutations(range(10)):
         is_isodual &= image in dual_weight_four
         if not is_automorphism and not is_isodual:
             break
+    is_witt_automorphism = is_automorphism or is_isodual
+    if not is_witt_automorphism:
+        is_witt_automorphism = all(
+            permute_word(word, permutation) in all_weight_four
+            for word in all_weight_four
+        )
     automorphisms += is_automorphism
     isodual_maps += is_isodual
+    witt_automorphisms += is_witt_automorphism
+    if is_automorphism:
+        automorphism_permutations.append(permutation)
+    if is_isodual:
+        kind = cycle_type(permutation)
+        isodual_cycle_types[kind] += 1
+        if kind == (2, 2, 2, 2, 2):
+            involutory_isodualities.append(permutation)
 assert automorphisms == isodual_maps == 720
+assert witt_automorphisms == 1440
+assert isodual_cycle_types == {
+    (2, 2, 2, 2, 2): 36,
+    (4, 4, 1, 1): 180,
+    (8, 1, 1): 180,
+    (8, 2): 180,
+    (10,): 144,
+}
+assert Counter(
+    lcm(*kind)
+    for kind, multiplicity in isodual_cycle_types.items()
+    for _ in range(multiplicity)
+) == {2: 36, 4: 180, 8: 360, 10: 144}
+
+
+def compose(left, right):
+    return tuple(left[right[index]] for index in range(10))
+
+
+def inverse(permutation):
+    result = [0] * 10
+    for source, target in enumerate(permutation):
+        result[target] = source
+    return tuple(result)
+
+
+polarity = involutory_isodualities[0]
+assert {
+    compose(compose(automorphism, polarity), inverse(automorphism))
+    for automorphism in automorphism_permutations
+} == set(involutory_isodualities)
+
+r10_checks = (
+    0b0000110011,
+    0b0001000111,
+    0b0010001110,
+    0b0100011100,
+    0b1000011001,
+)
+r10 = {
+    word
+    for word in range(1 << 10)
+    if all((word & check).bit_count() % 2 == 0 for check in r10_checks)
+}
+r10_weight_four = {word for word in r10 if word.bit_count() == 4}
+r10_equivalence = next(
+    permutation
+    for permutation in permutations(range(10))
+    if all(permute_word(word, permutation) in r10_weight_four for word in weight_four)
+)
+assert r10_equivalence == (0, 1, 2, 6, 4, 9, 3, 7, 8, 5)
 
 assert all(
     clebsch_sign[line] == pfaffian_sign[line] * prod(C[i][j] for i, j in line)
@@ -193,5 +289,5 @@ assert all(
 
 print(
     "PASS independent 4x4 Pauli replay: all 10 grid parities are -1; "
-    "their [10,5,4] quotient is S6-symmetric and isodual"
+    "their R10 quotient and dual halve W10 with 36 involutory polarities"
 )
