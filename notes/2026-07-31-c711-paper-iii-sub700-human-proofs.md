@@ -447,6 +447,9 @@ Corollary 5.1, let
 \[
  \mathcal O_{\rm norm}=\mathbf Z[H,J],
  \qquad
+ \mathcal O_{\rm gold}=\mathbf Z[H,t],
+ \quad t=(I+J)/2,
+ \qquad
  \mathcal O_{\rm ret}=\mathbf Z[H,K].
 \]
 Then, inside the maximal order \(M_2(\mathbf Z)\),
@@ -455,11 +458,16 @@ Then, inside the maximal order \(M_2(\mathbf Z)\),
  \cong\mathbf Z/2\oplus\mathbf Z/10,
 \]
 \[
+ M_2(\mathbf Z)/\mathcal O_{\rm gold}
+ \cong\mathbf Z/5,
+\]
+\[
  M_2(\mathbf Z)/\mathcal O_{\rm ret}
  \cong\mathbf Z/10\oplus\mathbf Z/50.
 \]
-Their indices are \(20\) and \(500\), and their trace discriminants are
-\(-400=-2^4 5^2\) and \(-250000=-2^4 5^6\).
+Their indices are \(20,5,500\), respectively, and their trace discriminants
+are \(-400=-2^4 5^2\), \(-25=-5^2\), and
+\(-250000=-2^4 5^6\).
 
 **Proof.**  In the ordered coordinate basis
 \((E_{11},E_{12},E_{21},E_{22})\), the columns
@@ -491,10 +499,34 @@ the first two minors are unchanged, every \(3\times3\) minor is divisible
 by \(10\), one has value \(\pm10\), and the determinant is \(25\det A=500\).
 Hence the Smith invariants are \((1,1,10,50)\).
 
+The golden coordinate is integral in this split model:
+\[
+ t=(I+J)/2=
+ \begin{pmatrix}1&1\\1&0\end{pmatrix}.
+\]
+The columns \((I,H,t,Ht)\) form
+\[
+ \begin{pmatrix}
+ 1&0&1&-1\\
+ 0&-1&1&0\\
+ 0&1&1&1\\
+ 1&0&0&1
+ \end{pmatrix},
+\]
+whose determinantal divisors are \(1,1,1,5\).  Thus
+\(\mathcal O_{\rm gold}\) has index \(5\) and cyclic quotient.
+
 Finally, reduced matrix trace on the bases
-\((I,H,J,HJ)\) and \((I,H,K,HK)\) has Gram matrices
+\((I,H,J,HJ)\), \((I,H,t,Ht)\), and \((I,H,K,HK)\) has Gram matrices
 \[
  \operatorname{diag}(2,-2,10,10),
+ \qquad
+ \begin{pmatrix}
+ 2&0&1&0\\
+ 0&-2&0&-1\\
+ 1&0&3&0\\
+ 0&-1&0&2
+ \end{pmatrix},
  \qquad
  \operatorname{diag}(2,-2,250,250).
 \]
@@ -503,7 +535,14 @@ Their determinants give the asserted trace discriminants.  \(\square\)
 **Tao-style check after Corollary 5.2.**  The rational quaternion algebra is
 split, so these are order defects, not Brauer ramification.  Passing from the
 primitive return \(K\) to \(J=K/5\) removes an index \(25\), while the
-normalized order still has index \(20\).  Only \(2\) and \(5\) occur.  Thus
+normalized order still has index \(20\).  Adjoining
+\(t=(1+J)/2\) removes its full \(2\)-primary index and leaves the residual
+index \(5\).  The staircase
+\[
+ 500\longrightarrow20\longrightarrow5\longrightarrow1
+\]
+separates raw-return scaling, conductor two, and final maximal-order
+saturation.  Only \(2\) and \(5\) occur.  Thus
 prime \(3\) cannot come from the middle-exterior golden--Hodge algebra; it
 belongs to the transvectant, apolar, or icosahedral integral input.
 
@@ -818,7 +857,7 @@ Theorem statements:
 | `support_reconstruct` | the parity relation | Johnson scheme up to complement |
 | `middleExterior_recovers_conference` | recovered atoms and orientation over \(\mathbf Q\) | \(-*K=\Lambda^3C\) determines \(C\) |
 | `middleExterior_splitQuaternion` | \(H=*\), \(J=K/5\) over \(\mathbf Q\) | generated algebra is \(M_2(\mathbf Q)\) and \(HJH^{-1}=-J\) |
-| `middleExterior_orderSmith` | displayed \(2\times2\) split model | Smith invariants \((1,1,2,10)\) and \((1,1,10,50)\) |
+| `middleExterior_orderSmith` | displayed \(2\times2\) split model | indices \(20,5,500\) for the normalized, golden, and return orders |
 | `companion_intertwines` | displayed \(P,J_3,C\) | \(CP=PJ_3\), \(\det P=4\) |
 
 The large transvectant scalar should enter C712 as a proved interface constant
@@ -887,8 +926,9 @@ normalizer is \(S_5\times C_2\), and the exact stabilizer is the diagonal
 \((*,K/5)\) generates the split quaternion algebra \(M_2(\mathbf Q)\);
 Morita multiplicity explains the \(10+10\) split and makes golden conjugation
 inner.  Eighth, the two natural quaternion orders have exact indices \(20\)
-and \(500\) in \(M_2(\mathbf Z)\), isolating their support at \(2,5\) and
-excluding prime \(3\) from this layer.
+and \(500\), while adjoining \(t=(1+J)/2\) leaves index \(5\).
+The staircase \(500\to20\to5\to1\) isolates raw scale, conductor two, and
+golden ramification, and excludes prime \(3\) from this layer.
 
 The strongest invariant formulation is now clear.  The actual object is the
 oriented integral pair \((\Lambda^3V,K)\), not the spectrum of \(K\).  Its
@@ -924,7 +964,8 @@ the cubic orientation, and its golden eigenspaces remember the paired descent.
   division by \(5\) remains a genuine boundary.
 - **Whether the quaternion bridge explains all three structural bad primes:**
   settled negatively and sharply.  Its normalized and primitive-return orders
-  have indices \(20\) and \(500\), supported only at \(2,5\).  The prime \(3\)
+  have indices \(20\) and \(500\); adjoining the integral golden coordinate
+  leaves index \(5\).  All are supported only at \(2,5\).  The prime \(3\)
   boundary belongs to the transvectant/apolar/icosahedral input, not to
   \((*,K)\).
 - **Why the return scalar has its form:** settled by a single Fischer norm.

@@ -20,7 +20,9 @@ making conjugation inner.  The fourth pass computes the normalized and
 primitive-return quaternion orders: their indices in \(M_2(\mathbf Z)\) are
 \(20\) and \(500\), with Smith quotients
 \(\mathbf Z/2\oplus\mathbf Z/10\) and
-\(\mathbf Z/10\oplus\mathbf Z/50\).  C712 is unblocked.
+\(\mathbf Z/10\oplus\mathbf Z/50\).  Adjoining
+\(t=(1+K/5)/2\) removes the \(2\)-primary defect and leaves index \(5\),
+giving the exact staircase \(500\to20\to5\to1\).  C712 is unblocked.
 
 ## Objective
 

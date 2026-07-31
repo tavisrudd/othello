@@ -147,8 +147,10 @@ diagonal \(S_5\) coupling outer orientation with complement duality.  Finally,
 \((-1,5)\cong M_2(\mathbf Q)\), so the \(10+10\) golden split is Morita
 multiplicity and Hodge complementation makes golden conjugation inner.  Its
 normalized and primitive-return orders have exact indices \(20\) and \(500\)
-in \(M_2(\mathbf Z)\), supported only at \(2,5\); this excludes prime \(3\)
-from the middle-exterior quaternion layer.  Full report:
+in \(M_2(\mathbf Z)\); adjoining the integral golden coordinate leaves index
+\(5\).  The staircase \(500\to20\to5\to1\) separates raw-return scaling,
+conductor two, golden ramification, and maximal saturation, and excludes prime
+\(3\) from the middle-exterior quaternion layer.  Full report:
 `notes/2026-07-31-c711-paper-iii-sub700-human-proofs.md`.
 
 ## Active and queued task cards
