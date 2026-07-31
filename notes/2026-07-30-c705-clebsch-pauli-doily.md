@@ -136,6 +136,79 @@ three pairwise anticommuting Pauli observables are also a triangle
 coboundary: their product around every tetrahedron is \(+1\).  Ordinary
 cohomology consequently cannot distinguish them.
 
+## Extra-juice upgrade: complete ordinary-gauge classification
+
+The ten grid parities are not merely ten successful comparisons.  They are
+a complete system of invariants for context signs modulo arbitrary point
+rephasing.
+
+Let \(I\) be the binary \(15\times15\) context--point incidence matrix and
+let \(H\) be the binary \(10\times15\) grid--context matrix.  Every point of
+a grid lies on two of its six contexts, so
+\[
+ HI=0.
+\]
+Exact elimination gives
+\[
+ \operatorname{rank}_{\mathbf F_2}I=10,\qquad
+ \operatorname{rank}_{\mathbf F_2}H=5.
+\]
+The left kernel of \(I\) has dimension \(15-10=5\), hence the rows of \(H\)
+span the whole kernel.  Therefore two context-sign assignments are related
+by point rephasing if and only if all ten of their grid parities agree.
+There is no additional unrestricted sign invariant hidden beyond the grids.
+
+The possible ten-bit grid-parity words form a binary
+\([10,5,4]\) code with weight enumerator
+\[
+ 1+15y^4+15y^6+y^{10}.
+\]
+Both the Pauli and Clebsch/Pfaffian systems give the all-one word.  Thus the
+negative result is maximal in the ordinary gauge category: every ordinary
+contextual sign test factors through the same five-dimensional grid-parity
+quotient.  Identification and structural interpretation of this small code
+belong to C708; C705 uses only its complete-invariant consequence.
+
+### Second-order extra juice: the node--plane code is isodual
+
+The fifteen weight-four words of the parity code are exactly its fifteen
+context-column generators.  On the geometric side, a syntheme labels a
+Segre plane and the four nonzero coordinates of its word are precisely the
+four \(3+3\) partitions, hence the four Segre nodes, incident with that
+plane.  The weight-four layer therefore forms a
+\[
+ 2\text{-}(10,4,2)
+\]
+design on the ten nodes: every pair of nodes lies in exactly two of the
+fifteen planes.  Exhaustion of all \(10!\) coordinate permutations gives
+full permutation automorphism group of order \(720\), recovering the outer
+\(S_6\) action from the code alone.
+
+The code is not self-dual on the frozen node marking, but its dual has the
+same weight enumerator and is coordinate-equivalent to it.  Exactly \(720\)
+coordinate permutations take the code to its dual; they form a torsor under
+its \(720\)-element automorphism group.  Thus
+\[
+ \mathcal C_{\mathrm{node/plane}}\ne
+ \mathcal C_{\mathrm{node/plane}}^\perp,
+ \qquad
+ \mathcal C_{\mathrm{node/plane}}\simeq
+ \mathcal C_{\mathrm{node/plane}}^\perp .
+\]
+This is a finite combinatorial shadow of the sister pattern that survives
+the contextual-sign negative: the two five-spaces are paired rather than
+equal, and the set of identifications has the correct outer-\(S_6\) size.
+It does not yet identify the isoduality permutation with the C705
+Segre--Igusa polar operator; that is now a sharp C708 comparison.
+
+The parameters, weight enumerator, isoduality, and \(S_6\) symmetry strongly
+suggest the classical binary quadratic-residue \([10,5,4]\) code and its
+Construction-A isodual lattice \(Q_{10}\).  This is recorded only as a
+literature-guided identification target: there are multiple inequivalent
+binary \([10,5,4]\) codes, and an explicit coordinate equivalence has not
+yet been supplied.  If confirmed, the first natural lattice lift of the
+Pauli/doily seam is ten-dimensional \(Q_{10}\), not automatically \(E_8\).
+
 The negative is exact only for unrestricted point gauge.  It does not
 settle whether an equivariant gauge exists, whether the signed outer action
 lifts to the two-qubit Clifford group with the same central extension, or
@@ -186,6 +259,18 @@ configuration; they derive its Segre coordinates, polar system, and signs
 from one conference/exterior-power tower.  That possible novelty belongs to
 the operator/compound theorem, not to the bare doily dictionary.
 
+## Mystery ledger
+
+| feature | status | exact remaining gate or owner |
+|---|---|---|
+| Are the ten Mermin parities sufficient to compare all ordinary sign systems? | settled: their five independent checks span the full left kernel of the point--context incidence map | none |
+| Does any unrestricted contextual sign invariant see \(C\) or \(K\)? | settled negatively: the complete quotient identifies the Clebsch and Pauli systems | none |
+| Why the parity quotient is the \([10,5,4]\) code with enumerator \(1+15y^4+15y^6+y^{10}\) | exact parameters settled; conceptual identification not attempted here | C708 |
+| Why the code is isodual but not self-dual | exact: both sides have the same enumerator and exactly \(720\) coordinate identifications; relation to Segre--Igusa polarity remains open | C708 |
+| Whether this is the classical binary quadratic-residue \([10,5,4]\) code and Construction-A \(Q_{10}\) lattice | strong parameter/symmetry match only; explicit coordinate equivalence absent | C708, then C710 |
+| Does the gauge trivialization respect outer \(S_6\), the Clifford lift, or golden \(A_5\)? | open and now the only surviving sign crown | C706 |
+| Does the operator tower have an operational POVM meaning despite sign triviality? | open and logically independent of contextual signs | C707 |
+
 ## Literature boundary
 
 No novelty or priority verdict is made.  Zero sources were read at full
@@ -214,6 +299,18 @@ text for this bounded positioning pass.
   associated Cremona--Richmond configuration.  No formula-level comparison
   with the C704/C705 conference or compound operators was available at this
   depth.
+- Kramer, *Some small large sets of \(t\)-designs* — `partial`,
+  author-hosted PDF, §5 read on 2026-07-30.  It records the three
+  nonisomorphic \(2\)-\((10,4,2)\) designs and the distinguished class with
+  automorphism group of order \(720\).  The identification of the C705
+  weight-four design with that class is our exact inference from its
+  computed full automorphism order.
+- Abdukhalikov--Bannai, *Association schemes related to universally optimal
+  configurations* — `abstract/metadata only`, 2006 conference-program
+  abstract retrieved on 2026-07-30.  It associates a binary
+  quadratic-residue \([10,5,4]\) code to the Construction-A isodual lattice
+  \(Q_{10}\) with automorphism group \(2^{10}\!:\!S_6\).  This motivates but
+  does not prove the proposed identification with the C705 code.
 
 Eight metadata searches screened titles and abstracts for
 `two-qubit Pauli doily duads synthemes Mermin grids ovoids S6 Sp(4,2)`,
@@ -248,11 +345,18 @@ python3 notes/2026-07-30-c705-clebsch-pauli-doily-replay.py
 The primary generator uses only the Python standard library.  It checks the
 complete \(15\)-point/\(15\)-context incidence dictionary, all \(720\)
 induced symplectic maps, all ten grids, all six ovoids, both fifteen-entry
-context-sign vectors, one exact gauge solution, all twenty triangle phases,
-all fifteen tetrahedron relations, and all \(2^6\) conference switchings.
+context-sign vectors, one exact gauge solution, the ranks \(10\) and \(5\)
+of the incidence and grid-check matrices, completeness of the grid
+invariants, the \([10,5,4]\) parity code and its full weight enumerator, all
+fifteen weight-four design blocks, the full \(10!\)-permutation
+automorphism and isoduality counts, all twenty triangle phases, all fifteen
+tetrahedron relations, and all \(2^6\) conference switchings.
 The replay independently multiplies explicit \(4\times4\) complex Pauli
-matrices and rechecks the ten grid parities and conference rephasing
-identity.  It does not test the still-open equivariant Clifford lift.
+matrices and rechecks the ten grid parities, the two binary ranks, the full
+parity-code enumerator, the \(2\)-design, both exhaustive permutation
+counts, and the conference rephasing identity.  It does not test the
+still-open equivariant Clifford lift or identify the code with a classical
+quadratic-residue presentation.
 
 Hashes and byte counts are recorded in
 `notes/2026-07-30-c705-clebsch-pauli-doily.sha256`.

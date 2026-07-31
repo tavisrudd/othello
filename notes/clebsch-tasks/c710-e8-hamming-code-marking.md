@@ -11,6 +11,15 @@ Construction-A realization of \(E_8\) from the extended binary Hamming code
 admit one compatible marking that also carries the Clebsch conference
 operator and C705 sister geometry.
 
+## New steering from C705
+
+The first natural binary code extracted from the Pauli/doily comparison is
+an isodual \([10,5,4]\) code with outer \(S_6\), whose likely classical
+Construction-A partner is the ten-dimensional isodual lattice \(Q_{10}\).
+Confirm that identification in C708 first.  If it holds, C710 must explain
+an explicit bridge \(Q_{10}\rightsquigarrow E_8\) or accept \(Q_{10}\) as a
+nearer code-lattice parent; shared exceptional symmetry is not a bridge.
+
 ## Gates
 
 1. Fix both integral \(E_8\) models and an explicit lattice isometry.

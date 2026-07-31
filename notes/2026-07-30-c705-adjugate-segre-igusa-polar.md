@@ -378,6 +378,8 @@ placed in the mystery ledger below.
 | Uniform sister analogue | not implied by this proof | WP7--WP9 only after allocation |
 | Whether the \(15/10/6\) geometry is the two-qubit Pauli doily | settled exactly: duads, synthemes, \(3+3\) partitions, and stars give points, contexts, ten grids, and six ovoids | none |
 | Whether the Clebsch/\(K\) signs define a new Mermin cocycle | settled negatively: all ten grid parities are \(-1\), but the conference factor is point gauge and the \(K\)-triangle tensor is a simplex coboundary | C706 tests only the sharper equivariant Clifford-lift question |
+| Whether another unrestricted Pauli context-sign invariant could still distinguish Clebsch from Pauli gauge | settled negatively: the ten grid checks have rank \(5\) and span the full left kernel of the rank-\(10\) point--context incidence map | none; C706 must use equivariance |
+| Whether the complete sign quotient retains a sister shadow | positive at the finite level: its \([10,5,4]\) node--plane code is isodual but not self-dual, with automorphism group and duality torsor both of size \(720\) | C708 must compare the duality torsor with Segre--Igusa polarity and the classical quadratic-residue/\(Q_{10}\) model |
 
 ## Literature boundary
 

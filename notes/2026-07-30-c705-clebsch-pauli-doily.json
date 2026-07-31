@@ -5,6 +5,9 @@
     "clebsch_and_pauli_context_signs_are_point_gauge_equivalent": true,
     "clebsch_conference_factor_is_point_gauge": true,
     "incidence_dictionary": true,
+    "no_further_unrestricted_context_sign_invariant_remains": true,
+    "ordinary_gauge_quotient_is_isodual_not_self_dual": true,
+    "ordinary_gauge_quotient_recovers_S6_symmetric_node_plane_design": true,
     "usual_contextuality_class_depends_on_C_or_K": false
   },
   "contexts": [
@@ -297,9 +300,13 @@
   "counts": {
     "S6_induced_symplectic_maps": 720,
     "contexts": 15,
+    "grid_checker_rank_F2": 5,
     "grids": 10,
     "incidence_rank_F2": 10,
+    "ordinary_gauge_quotient_dimension": 5,
     "ovoids": 6,
+    "parity_code_automorphism_order": 720,
+    "parity_code_isodual_maps": 720,
     "points": 15
   },
   "duads": [
@@ -1127,6 +1134,51 @@
       2
     ]
   ],
+  "ordinary_gauge_classification": {
+    "clebsch_and_pauli_parity_word": "1111111111",
+    "code_is_isodual": true,
+    "code_is_self_dual": false,
+    "dual_weight_enumerator": {
+      "0": 1,
+      "10": 1,
+      "4": 15,
+      "6": 15
+    },
+    "first_isodual_permutation": [
+      0,
+      1,
+      5,
+      7,
+      6,
+      9,
+      2,
+      4,
+      3,
+      8
+    ],
+    "full_permutation_automorphism_group_order": 720,
+    "grid_checks_span_full_left_kernel": true,
+    "grid_parities_are_complete_gauge_invariants": true,
+    "isodual_permutation_count": 720,
+    "parity_code_parameters": [
+      10,
+      5,
+      4
+    ],
+    "parity_code_weight_enumerator": {
+      "0": 1,
+      "10": 1,
+      "4": 15,
+      "6": 15
+    },
+    "weight_four_design_parameters": [
+      2,
+      10,
+      4,
+      2
+    ],
+    "weight_four_words_are_context_blocks": true
+  },
   "ovoids": [
     [
       "01",
@@ -1171,7 +1223,7 @@
       "45"
     ]
   ],
-  "schema": "c705-clebsch-pauli-doily-v1",
+  "schema": "c705-clebsch-pauli-doily-v2",
   "triangles": [
     {
       "K_diagonal_over_4": -1,

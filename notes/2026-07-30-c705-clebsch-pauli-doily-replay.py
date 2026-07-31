@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent direct-matrix replay of the C705 Pauli-doily sign comparison."""
 
-from itertools import combinations
+from itertools import combinations, permutations
 from math import prod
 
 
@@ -71,7 +71,29 @@ def scalar(matrix):
     return value
 
 
+def rank(rows, width):
+    work = list(rows)
+    result = 0
+    for column in range(width):
+        pivot = next(
+            (row for row in range(result, len(work)) if (work[row] >> column) & 1),
+            None,
+        )
+        if pivot is None:
+            continue
+        work[result], work[pivot] = work[pivot], work[result]
+        for row in range(len(work)):
+            if row != result and ((work[row] >> column) & 1):
+                work[row] ^= work[result]
+        result += 1
+    return result
+
+
 lines = tuple(matchings())
+points = tuple(combinations(range(6), 2))
+point_index = {point: index for index, point in enumerate(points)}
+line_index = {line: index for index, line in enumerate(lines)}
+incidence_rows = [sum(1 << point_index[point] for point in line) for line in lines]
 pauli_sign = {}
 clebsch_sign = {}
 pfaffian_sign = {}
@@ -84,10 +106,11 @@ for line in lines:
     pfaffian_sign[line] = permutation_sign(word)
     clebsch_sign[line] = pfaffian_sign[line] * prod(C[i][j] for i, j in line)
 
-assert len(lines) == 15
+assert len(lines) == 15 and rank(incidence_rows, 15) == 10
 assert sum(value < 0 for value in pauli_sign.values()) == 3
 assert sum(value < 0 for value in clebsch_sign.values()) == 12
 
+grid_rows = []
 for triple in combinations(range(6), 3):
     if 0 not in triple:
         continue
@@ -96,9 +119,72 @@ for triple in combinations(range(6), 3):
         line for line in lines if all((i in left) != (j in left) for i, j in line)
     )
     assert len(grid) == 6
+    grid_rows.append(sum(1 << line_index[line] for line in grid))
     assert prod(pauli_sign[line] for line in grid) == -1
     assert prod(clebsch_sign[line] for line in grid) == -1
     assert prod(pfaffian_sign[line] for line in grid) == -1
+
+assert len(grid_rows) == 10 and rank(grid_rows, 15) == 5
+assert all(
+    not sum(
+        ((grid_row >> line) & 1) * ((incidence_rows[line] >> point) & 1)
+        for line in range(15)
+    )
+    % 2
+    for grid_row in grid_rows
+    for point in range(15)
+)
+parity_generators = [
+    sum(((grid_rows[grid] >> line) & 1) << grid for grid in range(10))
+    for line in range(15)
+]
+parity_code = {0}
+for generator in parity_generators:
+    parity_code |= {word ^ generator for word in tuple(parity_code)}
+weight_enumerator = {
+    weight: sum(word.bit_count() == weight for word in parity_code)
+    for weight in range(11)
+    if any(word.bit_count() == weight for word in parity_code)
+}
+assert weight_enumerator == {0: 1, 4: 15, 6: 15, 10: 1}
+weight_four = {word for word in parity_code if word.bit_count() == 4}
+assert weight_four == set(parity_generators)
+assert all(
+    sum(((word >> left) & 1) and ((word >> right) & 1) for word in weight_four) == 2
+    for left, right in combinations(range(10), 2)
+)
+dual_code = {
+    word
+    for word in range(1 << 10)
+    if all((word & codeword).bit_count() % 2 == 0 for codeword in parity_code)
+}
+assert dual_code != parity_code
+assert {
+    weight: sum(word.bit_count() == weight for word in dual_code)
+    for weight in range(11)
+    if any(word.bit_count() == weight for word in dual_code)
+} == weight_enumerator
+dual_weight_four = {word for word in dual_code if word.bit_count() == 4}
+
+
+def permute_word(word, permutation):
+    return sum(((word >> index) & 1) << permutation[index] for index in range(10))
+
+
+automorphisms = 0
+isodual_maps = 0
+for permutation in permutations(range(10)):
+    is_automorphism = True
+    is_isodual = True
+    for word in weight_four:
+        image = permute_word(word, permutation)
+        is_automorphism &= image in weight_four
+        is_isodual &= image in dual_weight_four
+        if not is_automorphism and not is_isodual:
+            break
+    automorphisms += is_automorphism
+    isodual_maps += is_isodual
+assert automorphisms == isodual_maps == 720
 
 assert all(
     clebsch_sign[line] == pfaffian_sign[line] * prod(C[i][j] for i, j in line)
@@ -107,5 +193,5 @@ assert all(
 
 print(
     "PASS independent 4x4 Pauli replay: all 10 grid parities are -1; "
-    "the conference contribution is point rephasing"
+    "their [10,5,4] quotient is S6-symmetric and isodual"
 )

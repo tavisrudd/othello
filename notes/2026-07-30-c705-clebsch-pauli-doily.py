@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from collections import Counter
 from itertools import combinations, permutations, product
 from math import prod
 from pathlib import Path
@@ -225,6 +226,8 @@ def build_certificate() -> dict:
     )
 
     grids = []
+    grid_context_rows = []
+    matching_index = {matching: index for index, matching in enumerate(matchings)}
     for left_tuple in combinations(range(6), 3):
         if 0 not in left_tuple:
             continue
@@ -242,6 +245,9 @@ def build_certificate() -> dict:
         p_parity = prod(context_pauli_sign(matching) for matching in lines)
         pf_parity = prod(pfaffian_sign(matching) for matching in lines)
         assert c_parity == p_parity == pf_parity == -1
+        grid_context_rows.append(
+            sum(1 << matching_index[matching] for matching in lines)
+        )
         grids.append(
             {
                 "partition": [sorted(left), sorted(right)],
@@ -255,6 +261,82 @@ def build_certificate() -> dict:
             }
         )
     assert len(grids) == 10
+    grid_checker_rank = gf2_rank(grid_context_rows, len(matchings))
+    assert grid_checker_rank == 5
+    assert all(
+        not sum(
+            ((grid_row >> context) & 1)
+            * ((incidence_rows[context] >> point) & 1)
+            for context in range(len(matchings))
+        )
+        % 2
+        for grid_row in grid_context_rows
+        for point in range(len(duads))
+    )
+
+    # Grid parities completely classify context signs modulo point rephasing.
+    parity_code_generators = tuple(
+        sum(
+            ((grid_context_rows[grid] >> context) & 1) << grid
+            for grid in range(len(grids))
+        )
+        for context in range(len(matchings))
+    )
+    parity_code = {0}
+    for generator in parity_code_generators:
+        parity_code |= {word ^ generator for word in tuple(parity_code)}
+    parity_weight_enumerator = dict(
+        sorted(Counter(word.bit_count() for word in parity_code).items())
+    )
+    assert len(parity_code) == 32
+    assert parity_weight_enumerator == {0: 1, 4: 15, 6: 15, 10: 1}
+    assert (1 << len(grids)) - 1 in parity_code
+    weight_four_words = {word for word in parity_code if word.bit_count() == 4}
+    assert weight_four_words == set(parity_code_generators)
+    assert all(
+        sum(((word >> left) & 1) and ((word >> right) & 1) for word in weight_four_words)
+        == 2
+        for left, right in combinations(range(len(grids)), 2)
+    )
+
+    dual_code = {
+        word
+        for word in range(1 << len(grids))
+        if all((word & codeword).bit_count() % 2 == 0 for codeword in parity_code)
+    }
+    dual_weight_enumerator = dict(
+        sorted(Counter(word.bit_count() for word in dual_code).items())
+    )
+    assert dual_weight_enumerator == parity_weight_enumerator
+    assert dual_code != parity_code
+    dual_weight_four_words = {word for word in dual_code if word.bit_count() == 4}
+
+    def permute_word(word: int, permutation: tuple[int, ...]) -> int:
+        return sum(
+            ((word >> index) & 1) << permutation[index]
+            for index in range(len(permutation))
+        )
+
+    automorphism_count = 0
+    isodual_count = 0
+    first_isodual_permutation = None
+    for permutation in permutations(range(len(grids))):
+        is_automorphism = True
+        is_isodual = True
+        for word in weight_four_words:
+            image = permute_word(word, permutation)
+            is_automorphism &= image in weight_four_words
+            is_isodual &= image in dual_weight_four_words
+            if not is_automorphism and not is_isodual:
+                break
+        if is_automorphism:
+            automorphism_count += 1
+        if is_isodual:
+            isodual_count += 1
+            if first_isodual_permutation is None:
+                first_isodual_permutation = permutation
+    assert automorphism_count == isodual_count == 720
+    assert first_isodual_permutation is not None
 
     ovoids = []
     for vertex in range(6):
@@ -290,7 +372,7 @@ def build_certificate() -> dict:
             assert switched == global_factor * clebsch_context_sign(matching)
 
     return {
-        "schema": "c705-clebsch-pauli-doily-v1",
+        "schema": "c705-clebsch-pauli-doily-v2",
         "odd_theta_characteristics": [list(pair) for pair in ODD_CHARACTERISTICS],
         "duads": [
             {
@@ -309,6 +391,10 @@ def build_certificate() -> dict:
             "ovoids": len(ovoids),
             "S6_induced_symplectic_maps": induced_symplectic_maps(duads, duad_index),
             "incidence_rank_F2": incidence_rank,
+            "grid_checker_rank_F2": grid_checker_rank,
+            "ordinary_gauge_quotient_dimension": len(matchings) - incidence_rank,
+            "parity_code_automorphism_order": automorphism_count,
+            "parity_code_isodual_maps": isodual_count,
         },
         "contexts": [
             {
@@ -322,6 +408,27 @@ def build_certificate() -> dict:
         "grids": grids,
         "ovoids": ovoids,
         "triangles": triangles,
+        "ordinary_gauge_classification": {
+            "grid_checks_span_full_left_kernel": True,
+            "grid_parities_are_complete_gauge_invariants": True,
+            "parity_code_parameters": [10, 5, 4],
+            "parity_code_weight_enumerator": {
+                str(weight): multiplicity
+                for weight, multiplicity in parity_weight_enumerator.items()
+            },
+            "weight_four_words_are_context_blocks": True,
+            "weight_four_design_parameters": [2, 10, 4, 2],
+            "full_permutation_automorphism_group_order": automorphism_count,
+            "code_is_self_dual": False,
+            "code_is_isodual": True,
+            "dual_weight_enumerator": {
+                str(weight): multiplicity
+                for weight, multiplicity in dual_weight_enumerator.items()
+            },
+            "isodual_permutation_count": isodual_count,
+            "first_isodual_permutation": list(first_isodual_permutation),
+            "clebsch_and_pauli_parity_word": "1111111111",
+        },
         "conclusions": {
             "incidence_dictionary": True,
             "all_ten_grid_parities_are_negative": True,
@@ -329,6 +436,9 @@ def build_certificate() -> dict:
             "clebsch_conference_factor_is_point_gauge": True,
             "usual_contextuality_class_depends_on_C_or_K": False,
             "K_triangle_and_pauli_triangle_signs_are_both_simplex_coboundaries": True,
+            "no_further_unrestricted_context_sign_invariant_remains": True,
+            "ordinary_gauge_quotient_recovers_S6_symmetric_node_plane_design": True,
+            "ordinary_gauge_quotient_is_isodual_not_self_dual": True,
         },
     }
 

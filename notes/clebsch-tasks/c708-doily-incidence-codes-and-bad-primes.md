@@ -11,10 +11,29 @@ point-context, point-grid, and signed Clebsch/Pauli incidence matrices, and
 test whether the characteristic \(2,3,5\) behavior of the C705 Jacobian has
 a code-theoretic explanation.
 
+## Frozen C705 input
+
+The context--point incidence matrix has binary rank \(10\).  The ten
+grid-check rows have rank \(5\), span its full left kernel, and identify the
+ordinary context-sign quotient with a binary \([10,5,4]\) parity code of
+weight enumerator
+\[
+1+15y^4+15y^6+y^{10}.
+\]
+Its fifteen weight-four words are the node sets on the fifteen Segre
+planes, forming the \(2\)-\((10,4,2)\) design with full permutation
+automorphism group of order \(720\).  The code is not self-dual but isodual,
+with exactly \(720\) dualizing coordinate permutations.
+C708 should identify this code conceptually and extend the calculation; it
+must not recompute the C705 sign comparison as if still open.
+
 ## Gates
 
 1. Determine dimensions, duals, hulls, minimum distances, weight
    enumerators, and automorphism groups over the relevant fields.
+   First test an explicit equivalence with the binary quadratic-residue
+   \([10,5,4]\) code and identify whether a canonical isoduality is the
+   finite shadow of Segre--Igusa polarity.
 2. Test CSS and symplectic self-orthogonality conditions without assuming a
    useful quantum code exists.
 3. Compare code rank jumps with the exact ranks of \(G,A\), and their

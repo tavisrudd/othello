@@ -28,4 +28,9 @@ Ordinary point-gauge contextuality is already negative in C705 and must not
 be repackaged as a new cocycle.  The abstract Pauli-doily/Cremona--Richmond
 dictionary and its realization by the fifteen Segre planes are also
 pre-existing identifications.  Novelty requires a nontrivial equivariant
-lift, not another incidence relabeling.
+lift, not another incidence relabeling.  C705 now proves that the five
+independent grid checks exhaust the entire ordinary gauge quotient, so any
+positive invariant here must genuinely use equivariance.  Its isodual
+\([10,5,4]\) quotient has an \(S_6\)-torsor of exactly \(720\) dualizing
+coordinate maps; compare that torsor with the Clifford lifts rather than
+choosing an arbitrary isoduality.
