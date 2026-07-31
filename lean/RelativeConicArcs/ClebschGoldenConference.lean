@@ -150,14 +150,12 @@ def pairTriangleSum {R : Type*} [CommRing R]
     (C : Matrix (Fin 6) (Fin 6) R) (i j : Fin 6) : R :=
   ∑ k, triangleSign C i j k
 
-/-- The off-diagonal conference equation is exactly pair balance for the
-triangle tensor. -/
-theorem pairTriangleSum_eq_zero {R : Type*} [CommRing R]
-    (C : Matrix (Fin 6) (Fin 6) R) (a : R)
-    (hsymm : C.transpose = C)
-    (hsq : C * C = a • (1 : Matrix (Fin 6) (Fin 6) R))
-    (i j : Fin 6) (hij : i ≠ j) :
-    pairTriangleSum C i j = 0 := by
+/-- Pair-triangle summation is an entry of the square, multiplied by the edge
+joining the fixed pair. -/
+theorem pairTriangleSum_eq_mul_mulApply {R : Type*} [CommRing R]
+    (C : Matrix (Fin 6) (Fin 6) R) (hsymm : C.transpose = C)
+    (i j : Fin 6) :
+    pairTriangleSum C i j = C i j * (C * C) i j := by
   have hki : ∀ k, C k i = C i k := by
     intro k
     simpa [Matrix.transpose_apply] using
@@ -174,8 +172,48 @@ theorem pairTriangleSum_eq_zero {R : Type*} [CommRing R]
       rw [hki k, hjk k]
       ring
     _ = C i j * (C * C) i j := by rw [Matrix.mul_apply]
+
+/-- The off-diagonal conference equation is exactly pair balance for the
+triangle tensor. -/
+theorem pairTriangleSum_eq_zero {R : Type*} [CommRing R]
+    (C : Matrix (Fin 6) (Fin 6) R) (a : R)
+    (hsymm : C.transpose = C)
+    (hsq : C * C = a • (1 : Matrix (Fin 6) (Fin 6) R))
+    (i j : Fin 6) (hij : i ≠ j) :
+    pairTriangleSum C i j = 0 := by
+  calc
+    pairTriangleSum C i j = C i j * (C * C) i j :=
+      pairTriangleSum_eq_mul_mulApply C hsymm i j
     _ = C i j * (a • (1 : Matrix (Fin 6) (Fin 6) R)) i j := by rw [hsq]
     _ = 0 := by simp [hij]
+
+/-- Conversely, pair balance together with the signed symmetric matrix axioms
+forces the conference square. -/
+theorem sq_eq_five_of_pairTriangleSum_eq_zero {R : Type*} [CommRing R]
+    (C : Matrix (Fin 6) (Fin 6) R)
+    (hsymm : C.transpose = C)
+    (hdiag : ∀ i, C i i = 0)
+    (hedge : ∀ i j, i ≠ j → C i j * C i j = 1)
+    (hbalance : ∀ i j, i ≠ j → pairTriangleSum C i j = 0) :
+    C * C = (5 : R) • (1 : Matrix (Fin 6) (Fin 6) R) := by
+  have hsymm_apply : ∀ i j, C i j = C j i := by
+    intro i j
+    simpa [Matrix.transpose_apply] using
+      congrArg (fun M => M j i) hsymm
+  ext i j
+  by_cases hij : i = j
+  · subst j
+    fin_cases i <;>
+      simp [Matrix.mul_apply, Fin.sum_univ_succ, hdiag, hsymm_apply, hedge] <;>
+      norm_num
+  · have hpair := pairTriangleSum_eq_mul_mulApply C hsymm i j
+    calc
+      (C * C) i j = (C i j * C i j) * (C * C) i j := by
+        rw [hedge i j hij, one_mul]
+      _ = C i j * (C i j * (C * C) i j) := by ring
+      _ = C i j * pairTriangleSum C i j := by rw [hpair]
+      _ = 0 := by rw [hbalance i j hij, mul_zero]
+      _ = ((5 : R) • (1 : Matrix (Fin 6) (Fin 6) R)) i j := by simp [hij]
 
 /-- Pair balance for the golden triangle tensor after arbitrary commutative
 base change. -/
