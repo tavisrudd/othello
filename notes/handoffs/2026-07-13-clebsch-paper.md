@@ -17,7 +17,7 @@
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | bounded v2 revision complete; authoritative and standalone eighteen-check release gates green; external publication authority remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III — *The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics* | `papers/clebsch-covers/` | pre-release `GO`; immutable locator and author metadata remain | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
+| Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | major shadow-theorem expansion active; former pre-release surface is the green baseline | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
 C703 is complete: all three split papers now share the title-page identity
@@ -132,7 +132,7 @@ Full report:
 |---|---|---|
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | local release surface complete; queued on external publication authority | publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
+| [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | major shadow-theorem expansion active | complete novelty audit, human-proof package, manuscript integration, Lean coverage, and fresh release gates |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
 | [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
@@ -299,7 +299,10 @@ Paper III's corrected arithmetic statement has global square class `5J_0`;
 the fixed Clebsch chart lives over `Q(sqrt(5))`, and the displayed golden
 configurations are the complete reduced local fibre. The degree-six
 Gaunt/Steinhardt comparison and paper-owned trust surface are integrated.
-C680 owns the frozen release surface.
+C680 now owns a major revision centered on the golden conference-operator
+shadow theorem.  Its exact inclusion and future-sister boundary are fixed in
+`notes/2026-07-31-c680-paper-iii-shadow-expansion-plan.md`; the former
+pre-release surface remains the green baseline.
 
 C682 is independent exploration. Its current crown includes the
 third-transvectant inverse descriptions, the corrected mod-11 operator and
@@ -467,8 +470,9 @@ repository. An immutable public locator and fresh isolated replay are release
 requirements, not substitutes for the paper's local gates.
 
 Paper I ships only as the C320-approved C182 surface. Paper II requires its
-own release pass. Paper III's local pass is complete; C680's two metadata
-items are the only remaining planned edits.
+own release pass. Paper III must pass the C680 novelty, human-proof, Lean,
+artifact, and fresh release gates before its locator and author metadata are
+inserted.
 
 ## Lane boundaries
 

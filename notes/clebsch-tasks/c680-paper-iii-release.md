@@ -4,14 +4,16 @@
 
 **Opened:** 2026-07-26
 
-**Status:** pre-release `GO`; only user-controlled publication metadata and
-an immutable artifact locator remain.
+**Status:** major shadow-theorem expansion active; the former pre-release
+surface remains a green baseline, while publication metadata and the immutable
+artifact locator are deferred until the new mathematics passes its gates.
 
 ## Objective
 
-Release *The Clebsch orientation cubic: arithmetic covers and icosahedral
-harmonics* with its corrected rational descent, local golden-fibre
-comparison, harmonic normalization, and paper-owned trust surface.
+Substantially strengthen Paper III around the operator-shadow theorem already
+anticipated by its conclusion, while preserving the corrected rational
+descent, local golden-fibre comparison, harmonic normalization, and
+paper-owned trust surface.
 
 ## Current state
 
@@ -23,21 +25,30 @@ comparison, harmonic normalization, and paper-owned trust surface.
   branches are absent from the paper package.
 - Ordinary and isolated replay, the warning-free PDF, and two direct-access
   pre-release reviews are green.
+- The former release surface is now the frozen comparison baseline, not the
+  submission candidate.  The expansion plan is
+  `notes/2026-07-31-c680-paper-iii-shadow-expansion-plan.md`.
 
 ## Next action
 
-Obtain:
+Complete, in order:
 
-1. an immutable public artifact locator; and
-2. the author's affiliation and contact metadata.
+1. the formula-level novelty audit for the conference-operator shadows;
+2. human proofs for every admitted operator, Segre--Igusa, Cartan, and bridge
+   identity;
+3. the expanded theorem architecture and manuscript revision;
+4. Lean coverage of the admitted new theorem surface; and
+5. the updated exact-arithmetic, isolated-replay, and cold-read gates.
 
-Insert both, rebuild the PDF, and run the final release replay.  Do not reopen
-the mathematics unless a fresh review finds a concrete defect.
+Only then obtain and insert the immutable locator and author metadata.
 
 ## Boundaries and records
 
-Lean is not release-critical and no formal coverage is claimed.  C682 is
-independent exploratory work and does not alter the frozen Paper III bytes.
+The broader C682-and-later sister program remains outside Paper III.  C680 now
+admits the immediate golden conference-operator shadow diagram, including its
+Segre--Igusa and Cartan faces, under the exact boundary in the expansion plan.
+Lean coverage of every newly admitted theorem is a revision gate; the global
+Hitchin incidence theorem is not silently added to that formal scope.
 
 Authoritative closure brief:
 `notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.
