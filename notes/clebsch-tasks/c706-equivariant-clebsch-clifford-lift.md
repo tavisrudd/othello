@@ -52,9 +52,12 @@ orientation-reversing coset.  Thus the phase boundary is
 at \(S_5\subset S_6\).
 The conference \(S_5\) has six conjugates with all fifteen pairwise
 intersections isomorphic to \(S_4\).  The global nonsplit class restricts
-trivially to every chart but their complements cannot glue.  This exact
-six-chart pattern is handed to C708 for comparison with the six actual
-Segre--Igusa polarities.
+trivially to every chart but their complements cannot glue.  Under the
+fixed conference \(S_5\), these charts have orbit structure \(1+5\), while
+C705's golden polarity six-pack is transitive.  Thus they are not directly
+equivariantly identifiable.  C708 owns the sharper question whether the
+actual polar operator implements the exceptional outer exchange between
+the chart six-set and the conference-axis six-set.
 
 Full report and certificate:
 `notes/2026-07-30-c706-equivariant-clifford-lift.md`.

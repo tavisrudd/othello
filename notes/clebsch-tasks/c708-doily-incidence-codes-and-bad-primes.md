@@ -37,6 +37,17 @@ synthemes and the dual blocks are duads, so the \(1440\)-group realizes
 outer involutions.  The golden conference switching group cuts them into
 orbits \(6+30\); the small orbit is equivariantly indexed by the six axes.
 Direct frozen-sign matching selects none of them.
+
+C706 adds a distinct six-set: the six conjugate conference-\(S_5\)
+subgroups on which the two-qubit Clifford extension splits locally.  They
+meet pairwise in \(S_4\), and their local complements do not glue over
+\(S_6\).  Under the fixed conference \(S_5\), this chart six-set has orbit
+structure \(1+5\), whereas the golden polarity/axis six-pack is transitive
+with point stabilizer of order \(20\).  Therefore no direct equivariant
+bijection exists.  The viable comparison is whether the actual polar
+operator realizes the exceptional outer exchange between these two
+inequivalent degree-six actions.
+
 C708 should extend this calculation; it must not recompute the C705 sign
 comparison or the standard-code identification as if still open.
 
@@ -46,8 +57,10 @@ comparison or the standard-code identification as if still open.
    enumerators, and automorphism groups over the relevant fields.
    Use the frozen \(R_{10}\)--\(W_{10}\)--\(Q_{10}\) and duad--syntheme
    identifications.  Determine whether the Segre--Igusa polar operator
-   selects one of the six conference polarities, the six-pack only, or no
-   finite polarity at all.
+   implements the outer exchange between the Clifford-chart six-set and
+   the transitive conference-axis/polarity six-set, selects only the
+   six-pack, or has no finite polarity realization at all.  Stabilizer
+   compatibility, not a label matching, is the first gate.
 2. Test CSS and symplectic self-orthogonality conditions without assuming a
    useful quantum code exists.
 3. Compare code rank jumps with the exact ranks of \(G,A\), and their

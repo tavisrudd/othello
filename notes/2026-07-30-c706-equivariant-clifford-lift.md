@@ -237,11 +237,20 @@ This gives a useful local-to-global form of the obstruction:
 \qquad
 [\omega]\ne0\in H^2(S_6,V).
 \]
-The six conjugate charts have exactly the same \(6\)-object and pairwise
-\(S_4\)-overlap pattern as the six conference axes/shadow sisters in
-C705.  This is a precise candidate bridge for C708's operator-versus-code
-comparison.  C706 does not identify a particular local complement with a
-Segre--Igusa polarity.
+These six charts must not be identified directly with C705's golden
+six-pack.  Under the fixed conference \(S_5\), conjugation on the charts
+has orbit decomposition \(1+5\): the subgroup fixes itself.  By contrast,
+C705's six polarities form a transitive orbit under that \(S_5\), with
+point stabilizer of order \(20\).  Hence there is no conference-\(S_5\)
+equivariant chart-to-polarity bijection.
+
+The correct candidate bridge for C708 is an *exchange*.  The two six-sets
+are the two inequivalent degree-six actions associated with the ordinary
+and exceptional \(S_5\) classes in \(S_6\).  An exceptional outer
+automorphism exchanges those classes, just as a \(W_{10}\) polarity
+exchanges the duad and syntheme halves.  The actual Segre--Igusa operator
+should therefore be tested as an outer exchange between the chart
+six-set and the axis six-set, not as one distinguished chart.
 
 ## Scalar phase
 
@@ -301,7 +310,19 @@ The third gain is the six-chart local-to-global description.  The global
 \(H^2\) class is invisible on every conjugate conference \(S_5\), and is
 detected only by their incompatible gluing.  This puts the six-axis
 phenomenon and the Clifford obstruction in the same exact incidence
-framework without prematurely identifying their operators.
+framework.
+
+### `tt` stabilizer audit
+
+The stabilizers rule out the naive identification: charts restrict as
+\(1+5\) under the fixed conference \(S_5\), whereas the golden polarity
+six-pack is transitive.  What remains viable is exactly the exceptional
+outer exchange between the two inequivalent six-point actions.  This
+turns C708's question from “which chart is the polar operator?” into “does
+the polar operator implement the outer exchange carrying local Clifford
+charts to conference axes, with compatible \(S_4\)/order-\(20\)
+incidence?”  That formulation has different input and cannot be answered
+by matching labels alone.
 
 The structural closeout separates three extension layers:
 
@@ -347,8 +368,13 @@ Checksums are recorded in
   nonextendable across \(A_5\subset S_5\).
 - **Settled:** the global \(S_6\) obstruction is locally trivial on six
   self-normalizing conference \(S_5\) charts with fifteen pairwise
-  \(S_4\) overlaps; C708 owns comparison of these charts with the actual
-  six polarities.
+  \(S_4\) overlaps.
+- **Settled negatively:** the chart six-set is not equivariantly the
+  golden polarity six-pack; their fixed-\(S_5\) orbit structures are
+  \(1+5\) and \(6\), respectively.
+- **Open in C708:** whether the actual polar operator realizes the
+  exceptional outer exchange between the chart six-set and the axis
+  six-set.
 - **Settled:** the scalar projective class on \(A_5\) is trivial.
 - **Settled:** the class controls the conference marking and \(K\), not
   Joubert or the golden eigenfield.

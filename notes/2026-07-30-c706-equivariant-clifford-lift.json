@@ -108,6 +108,10 @@
   "six_local_S5_charts": {
     "H2_restriction": "the global nonsplit Clifford class restricts to zero on all six conjugate S5 subgroups",
     "conjugate_conference_S5_subgroups": 6,
+    "fixed_conference_S5_orbit_sizes_on_charts": [
+      1,
+      5
+    ],
     "global_gluing": "no choices of the six local complements glue to an S6 complement, by the full Coxeter contradiction",
     "intersection_type": "S4",
     "normalizer_order": 120,

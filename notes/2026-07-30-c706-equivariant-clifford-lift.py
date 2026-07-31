@@ -651,6 +651,21 @@ def build_certificate():
         for right in range(left + 1, 6)
     )
     assert intersection_orders == [24] * 15
+    chart_orbits_under_fixed_switching_group = []
+    unvisited_charts = set(switching_conjugates)
+    while unvisited_charts:
+        chart = next(iter(unvisited_charts))
+        orbit = {
+            frozenset(
+                conjugate_permutation(element, member)
+                for member in chart
+            )
+            for element in switching_group
+        }
+        chart_orbits_under_fixed_switching_group.append(frozenset(orbit))
+        unvisited_charts -= orbit
+    chart_orbit_sizes = sorted(map(len, chart_orbits_under_fixed_switching_group))
+    assert chart_orbit_sizes == [1, 5]
     normalizer_order = sum(
         frozenset(
             conjugate_permutation(permutation, element)
@@ -752,6 +767,7 @@ def build_certificate():
                 "24": intersection_orders.count(24)
             },
             "intersection_type": "S4",
+            "fixed_conference_S5_orbit_sizes_on_charts": chart_orbit_sizes,
             "H2_restriction": (
                 "the global nonsplit Clifford class restricts to zero on "
                 "all six conjugate S5 subgroups"
