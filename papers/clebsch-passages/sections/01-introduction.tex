@@ -68,6 +68,17 @@ matrix.  Its switching-invariant triangle cubic is
 \[
  Z_C(x)=\sum_{i<j<k}C_{ij}C_{jk}C_{ki}x_ix_jx_k.
 \]
+It is translation-invariant and hence defines
+\[
+ Z_C\in\operatorname{Sym}^3
+ \bigl((\Q^6/\Q\mathbf1)^*\bigr).
+\]
+The datum \([C,Z_C]_{\rm or}\) consists of the ordered six-axis marking,
+the orientation of its representative lattice, and the pair \((C,Z_C)\),
+modulo simultaneous changes \(a_i\mapsto d_i a_i\).  Such a change sends
+\(C\) to \(DCD\) and fixes \(Z_C\).  The opposite source is represented by
+\((-C,-Z_C)\).  The sign of the cubic generator is retained, so the brackets
+are not projective notation.
 
 \begin{theorem}[Common orientation source]
 \label{thm:orientation-source}
@@ -88,8 +99,10 @@ On \(D(\sigma_3)\) they are the two distinct icosahedral configurations;
 on the Clebsch cubic the unnormalized branches meet, while the normalization
 remains disjoint.
 
-The two components determine respectively the oriented source classes
-\(([C],[Z_C])\) and \(([-C],[-Z_C])\).  Under the primitive pair-sum map
+Equip \(B_+\) with the source \([C,Z_C]_{\rm or}\) supplied by the fixed
+plane and equip \(B_-\) with its deck-opposite.  At \([xyz]\), the golden
+exchanger identifies this opposite with the conjugate configuration and
+the representative \((-C,-Z_C)\).  Under the primitive pair-sum map
 \[
  \beta:V\longrightarrow\Q^{\binom52},
  \qquad \beta(y)_{ij}=y_i+y_j,

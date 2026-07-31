@@ -71,11 +71,11 @@
       "clauses": [
         "normalization of the pulled-back incidence cover into two chart components",
         "maximal distinct-configuration locus D(sigma3)",
-        "deck and golden conjugation transport of the conference and triangle-cubic orientations",
+        "deck-opposite source convention and its golden-fibre identification with conference and triangle-cubic reversal",
         "primitive Petersen comparison and harmonic sign transport",
         "unspecified geometric integral localization"
       ],
-      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of the two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3); a chosen sheet determines ([C],[Z_C]), deck and golden conjugation negate this source, and the primitive Petersen pair-sum map transports its sign to the degree-six Gaunt cubic without identifying the two polynomial domains.",
+      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of the two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3); the fixed-plane sheet carries the oriented source [C,Z_C]_or, the other sheet carries its deck-opposite, the golden exchanger identifies that opposite with (-C,-Z_C) at xyz, and the primitive Petersen pair-sum map transports the source sign to the degree-six Gaunt cubic without identifying the two polynomial domains or globally marking the varying second configuration.",
       "status": "certified",
       "modes": [
         "conceptual",
@@ -83,7 +83,7 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "human normalization and equivariance proof using Hitchin's branch and chart theorems, with exact audit of the scalar factorization, golden involution, conference signs, and Petersen identities",
+      "proof_role": "human normalization and source-convention proof using Hitchin's branch and chart theorems, with a golden-fibre equivariance calculation and exact audit of the scalar factorization, conference signs, and Petersen identities",
       "evidence": [
         "sections/03-orientation-source.tex",
         "verification/evidence/orientation_source.py",
