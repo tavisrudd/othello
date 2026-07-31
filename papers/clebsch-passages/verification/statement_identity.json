@@ -1,15 +1,15 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "84a9d18ea1fb1c7e8584a974587a5ab7f3842eb0a2bfcdb2bfe679b4ee87b3a8",
+  "main_source_sha256": "fb8ec6182b70d5dc64d5521355d29bba4d4b6e8f8b07a206db869a275ce93251",
   "section_sha256": {
-    "sections/01-introduction.tex": "730fb7a079275ee86fd3606cb7790469d9f657b4ec2911bbe8d14219494b3a00",
-    "sections/02-orientation-cover.tex": "9cdf9341e605d047f3c98c11064cb53867d5c21844f768b7d99610e6f84fb172",
-    "sections/03-orientation-source.tex": "6b270b127993682568235aaf6820076980ab7d26cea9a9829334c2232687f6d3",
+    "sections/01-introduction.tex": "95b1b6bf1ec8ebcff512968764892ca01ba0265e571a0518746d965b01b530ca",
+    "sections/02-orientation-cover.tex": "cf29c51e1e3d1778cb219c2aac486b9e69a90b65082bb4e3877fc8f950473a91",
+    "sections/03-orientation-source.tex": "9bee3324bf71b159381defc8992f489e3a49d134eef5197d156785572cdecbd6",
     "sections/04-arithmetic-specialization.tex": "cdc3fb2a0bc1e150a9bbc82d9d3adff7f54844626dcfd7074b8c91a125523301",
-    "sections/05-harmonic-realization.tex": "f497818473e20c68485affe134dab25432875afe132b2eedd3ac7ee11ba123eb",
-    "sections/08-verification.tex": "337a73e9ef193388a5c61dac5ec686dcdf7c92b06462837577efcc9ad838adef",
-    "sections/09-conclusion.tex": "73030585e148ce481d3263e0d71de15f471f60c66c27971a1a5be1cdeef565b9",
+    "sections/05-harmonic-realization.tex": "63b3b66d09f433a3f7a384f6530570812df3c6b230a2a76ec8bddbac49a2592d",
+    "sections/08-verification.tex": "f9d6c596ed9aa0d3d39281f378b054690a86e84d9a345cee591fd9ef3a63a3ae",
+    "sections/09-conclusion.tex": "9f3da7ffa0b66eb287a1890b815caaf000ff6b6302c298e3a8ee9bd0f18a48c6",
     "sections/10-references.tex": "3b2b4c3d9cab7b2e461a3d1e89bb449f1608075cb5b3ce694e6816fd8cdc9a13"
   },
   "statement_count": 5,
@@ -20,24 +20,24 @@
       "title": "Arithmetic incidence cover",
       "source": "sections/01-introduction.tex",
       "source_line": 41,
-      "sha256": "df2ea3cfe8044c8497e18bfe1990f46384e5a27557ffc3acc8ece550ca7e05f4",
-      "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
+      "sha256": "6d903edd8afda2dfcabeca11638ed302f19edfb75d50fbb001e36983d4eac34a",
+      "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nIf \\(\\mathcal N\\to\\mathbf P(H)\\) is its finite Stein normalization, then,\nafter normalizing the anti-invariant summand, its algebra is\n\\[\n \\mathcal O\\oplus\\mathcal O(-3),\\qquad z^2=5J_0.\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
     },
     {
       "label": "thm:orientation-source",
       "environment": "theorem",
-      "title": "Common orientation source",
+      "title": "Relative marked orientation bridge",
       "source": "sections/01-introduction.tex",
-      "source_line": 83,
-      "sha256": "3a1dfbc702939126cfb039a10c80db055c861eb7d0f39b237132bf4aeeb630c1",
-      "tex": "\\begin{theorem}[Common orientation source]\n\\label{thm:orientation-source}\nLet \\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) they are the two distinct icosahedral configurations;\non the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nEquip \\(B_+\\) with the source \\([C,Z_C]_{\\rm or}\\) supplied by the fixed\nplane and equip \\(B_-\\) with its deck-opposite.  At \\([xyz]\\), the golden\nexchanger identifies this opposite with the conjugate configuration and\nthe representative \\((-C,-Z_C)\\).  Under the primitive pair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same choice fixes the linear lift of the Petersen four-space and hence\nthe sign of the degree-six cubic in Theorem~\\ref{thm:harmonic-main}.\n\\end{theorem}"
+      "source_line": 97,
+      "sha256": "ac76ad252fcc96f4c41c8612c99320b3edb12affff7db96bb72b4ff0f35b0b2d",
+      "tex": "\\begin{theorem}[Relative marked orientation bridge]\n\\label{thm:orientation-source}\nFix a marked bridge datum \\(\\mathfrak m\\).  Let\n\\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) they are the two distinct icosahedral configurations;\non the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nRelative to \\(\\mathfrak m\\), equip \\(B_+\\) with the source\n\\([C_{\\mathfrak m},Z_{\\mathfrak m}]_{\\rm or}\\) and equip \\(B_-\\) with its\ndeck-opposite.  At \\([xyz]\\), the golden\nexchanger identifies this opposite with the conjugate configuration and\nthe representative\n\\((-C_{\\mathfrak m},-Z_{\\mathfrak m})\\).  Under the marked primitive\npair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same relative convention fixes the sign of the degree-six cubic in\nTheorem~\\ref{thm:harmonic-main}.  The normalized component alone is not\nasserted to determine \\(\\mathfrak m\\).\n\\end{theorem}"
     },
     {
       "label": "thm:harmonic-main",
       "environment": "theorem",
       "title": "Degree-six harmonic restriction",
       "source": "sections/01-introduction.tex",
-      "source_line": 118,
+      "source_line": 137,
       "sha256": "ad6670411252de4aadd61e626dfedbd2a0620932dfab1bf1811e8f68c3a985ba",
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega),\n \\qquad\n P_6(s)=\\frac{231s^6-315s^4+105s^2-5}{16}.\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nWith\n\\(\\langle f,g\\rangle=(4\\pi)^{-1}\\int_{S^2}fg\\), the spherical cubic on this\ncopy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     },
@@ -60,7 +60,7 @@
       "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\nThe spinor class of \\(R\\) is \\([2]\\in k^\\times/k^{\\times2}\\).  Under the\nstandard identifications\n\\[\n \\operatorname{SO}_3(k)/\\Omega_3(k)\n \\cong \\operatorname{PGL}_2(k)/\\operatorname{PSL}_2(k),\n\\]\nthe exchanger lies outside \\(\\operatorname{PSL}_2(k)\\) exactly when \\(2\\)\nis nonsquare.  In particular, over \\(\\F_{11}\\) it represents the\nnontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
     }
   ],
-  "trust_rows_sha256": "86c48516e498b8286f917524e336200b3dad8fbc2e7ce0e31aa20a60db2ff9b7",
+  "trust_rows_sha256": "8f7f307d9fbaad2ad5cc019684df0065348cae1eada8742cf9f7055eaedcd1f5",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -68,17 +68,17 @@
         "thm:arithmetic-main"
       ],
       "clauses": [
-        "rational incidence model and quadratic function field",
+        "rational incidence model, quadratic function field, and global Stein double-cover algebra",
         "branch square class 5J0",
         "conjugate Clebsch charts, their completed conductor model and canonical map to the incidence normalization, and the identity iota_t^*J0=16 sigma3^2"
       ],
-      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose completed conductor and normalization recover Q(sqrt(5)), their fixed-parent sections map canonically to the incidence normalization, and each chart pulls J0 back to 16 sigma3^2.",
+      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)), and its Stein algebra is O plus O(-3) with anti-invariant multiplication z^2=5J0 after normalization of the generator; each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose completed conductor and normalization recover Q(sqrt(5)), their fixed-parent sections map canonically to the incidence normalization, and each chart pulls J0 back to 16 sigma3^2.",
       "status": "proven",
       "modes": [
         "conceptual",
         "classical-input"
       ],
-      "proof_role": "human proof using Hitchin's incidence degree, branch divisor, Clebsch chart, and invariant calculation",
+      "proof_role": "human proof using Hitchin's incidence degree, branch divisor, Clebsch chart, invariant calculation, and the trace-split rank-one reflexive Stein algebra on projective space",
       "evidence": [
         "sections/01-introduction.tex",
         "sections/02-orientation-cover.tex"
@@ -122,11 +122,11 @@
       "clauses": [
         "normalization of the pulled-back incidence cover into two chart components",
         "maximal distinct-configuration locus D(sigma3)",
-        "deck-opposite source convention and its golden-fibre identification with conference and triangle-cubic reversal",
-        "primitive Petersen comparison and harmonic sign transport",
+        "relative marked source convention and its golden-fibre identification with conference and triangle-cubic reversal",
+        "label-compatible primitive Petersen comparison and relative harmonic sign transport",
         "unspecified geometric integral localization"
       ],
-      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of the two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3); the fixed-plane sheet carries the oriented source [C,Z_C]_or, the other sheet carries its deck-opposite, the golden exchanger identifies that opposite with (-C,-Z_C) at xyz, and the primitive Petersen pair-sum map transports the source sign to the degree-six Gaunt cubic without identifying the two polynomial domains or globally marking the varying second configuration.",
+      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After an ordered golden realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the golden exchanger identifies the opposite with (-C_m,-Z_m) at xyz, and the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
       "status": "certified",
       "modes": [
         "conceptual",
@@ -134,7 +134,7 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "human normalization and source-convention proof using Hitchin's branch and chart theorems, with a golden-fibre equivariance calculation and exact audit of the scalar factorization, conference signs, and Petersen identities",
+      "proof_role": "human normalization and explicit relative-marking proof using Hitchin's branch and chart theorems, with a complete ambiguity ledger, a golden-fibre equivariance calculation, and exact audit of the scalar factorization, conference signs, and Petersen identities",
       "evidence": [
         "sections/03-orientation-source.tex",
         "verification/evidence/orientation_source.py",

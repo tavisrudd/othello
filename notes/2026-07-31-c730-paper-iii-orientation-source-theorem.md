@@ -4,6 +4,14 @@
 
 **Status:** complete; frozen source interface ready for C680
 
+> **C733 supersession.**  The normalized-cover calculation remains valid, but
+> the sheet-to-source comparison below is now read relative to the frozen axis,
+> plane-triple, Petersen, and chart-lift marking.  C733 proves that the sheet
+> alone does not determine those data, supplies the complete ambiguity ledger,
+> and proves the global Stein algebra needed for the unnormalized chart
+> factorization.  The submission-facing statement and claim map are in
+> `notes/2026-07-31-c733-paper-iii-relative-orientation-bridge.md`.
+
 ## Result
 
 Paper III's arithmetic and harmonic cubics are two realizations of one

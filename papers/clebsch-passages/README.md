@@ -10,8 +10,9 @@ main theorem has three parts:
 
 1. the rational square class of Hitchin's incidence cover, its exact local
    golden fibre, and the specialization of the fibre exchanger modulo `11`;
-2. the normalized orientation source that carries a chosen incidence sheet
-   to the golden conference class and then to the Petersen four-space; and
+2. the normalized incidence components and, relative to an explicit golden
+   marking and linear lift, their sign comparison with the conference class
+   and Petersen four-space; and
 3. the degree-six icosahedral Gaunt/Steinhardt cubic on the Petersen
    four-space.
 

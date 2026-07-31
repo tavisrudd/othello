@@ -4,8 +4,9 @@
 
 **Opened:** 2026-07-31
 
-**Status:** queued as the mathematical blocker exposed by the second
-context-free C680 cold read.
+**Status:** complete; relative marked theorem, global Stein-algebra repair,
+ordinary and isolated aggregates, visual inspection, and fresh context-free
+`GO` complete.
 
 ## Objective
 
@@ -47,6 +48,20 @@ In either route, distinguish the fixed (U_t)-component from the varying
 second incidence configuration and do not propagate a global marking from the
 golden fibre by connectedness or local constancy without a defined algebraic
 torsor and a monodromy proof.
+
+## Disposition
+
+Route 2 is complete.  The incidence sheet canonically selects only a
+normalized component.  The ordered axis representatives, lattice orientation,
+plane-triple labels, normalized chart lift, and compatible Petersen labels are
+explicit inputs to a relative theorem.  Switching and coordinated relabelling
+are equivariant, lattice-orientation reversal is proved irrelevant, and lift
+normalization and cross-labelling remain visible hypotheses.  A companion
+trace-splitting argument proves the global Stein algebra
+\(\mathcal O\oplus\mathcal O(-3)\), \(z^2=5J_0\), so the unnormalized chart
+factorization is also justified scheme-theoretically.
+
+Full report: `notes/2026-07-31-c733-paper-iii-relative-orientation-bridge.md`.
 
 ## Acceptance gates
 

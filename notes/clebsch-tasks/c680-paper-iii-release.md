@@ -4,16 +4,16 @@
 
 **Opened:** 2026-07-26
 
-**Status:** the arithmetic/harmonic baseline, five-statement/five-row trust
-surface, ordinary and isolated aggregates, and warning-free PDF remain green,
-but a stricter second context-free review reopened the canonicality of the
-orientation bridge.  C733 owns that mathematical repair; publication metadata
-and the immutable locator remain later external blockers.
+**Status:** the arithmetic/harmonic baseline, relative marked orientation
+bridge, global Stein algebra, five-statement/five-row trust surface, ordinary
+and isolated aggregates, warning-free PDF, and fresh context-free `GO` are
+green.  Publication metadata and the immutable locator remain the external
+blockers.
 
 ## Objective
 
-Strengthen Paper III around the canonical arithmetic--harmonic orientation
-source theorem supplied by C730, while preserving the corrected rational
+Strengthen Paper III around the arithmetic--harmonic orientation source
+interface supplied by C730 and repaired by C733, while preserving the corrected rational
 descent, local golden-fibre comparison, harmonic normalization, and
 paper-owned trust surface.  The revision ends at the oriented source class
 `[C,Z_C]_or`; functorial propagation belongs to Paper IV.
@@ -24,17 +24,17 @@ paper-owned trust surface.  The revision ends at the oriented source class
   defined over \(\mathbf Q(\sqrt5)\).
 - The displayed golden configurations are the complete reduced local fibre.
 - The degree-six Gaunt/Steinhardt restriction is integrated.
-- The normalized pullback, deck-opposite source, golden-fibre involution, and
-  primitive Petersen sign comparison are integrated without globally marking
-  the varying second configuration.
+- The normalized pullback and global Stein double-cover algebra are proved.
+  The deck-opposite source, golden-fibre involution, and primitive Petersen
+  sign comparison are explicitly relative to the complete marked bridge datum,
+  without globally marking the varying second configuration.
 - Deleted Mathieu, Hadamard, matching, Klein, and speculative physical
   branches are absent from the paper package.
 - Ordinary and isolated replay, the warning-free fourteen-page PDF, visual
   inspection, and the first post-integration review are green.
-- A second context-free review accepted the arithmetic and harmonic theorems
-  and the layout, but found that the sheet-to-marked-source bridge does not yet
-  prove independence from axis ordering, lattice orientation, plane-triple
-  labels, and lift normalization.  C733 is the owning blocker.
+- C733 closed the second-review blocker by retaining axis, chart, and Petersen
+  data as explicit hypotheses, proving the full ambiguity action, and obtaining
+  a fresh context-free `GO`.
 - The former release surface is now the frozen comparison baseline, not the
   submission candidate.  C730 supersedes the broad operator-shadow expansion
   as the scope authority; the older expansion plan remains a historical map
@@ -42,10 +42,8 @@ paper-owned trust surface.  The revision ends at the oriented source class
 
 ## Next action
 
-Complete C733, align the theorem and trust surface with its canonical or
-explicitly relative disposition, and obtain a fresh context-free `GO`.  Only
-then insert the immutable artifact locator and the author's intended
-affiliation/contact metadata.
+Insert the immutable artifact locator and the author's intended
+affiliation/contact metadata, then run the final release closure.
 
 ## Boundaries and records
 

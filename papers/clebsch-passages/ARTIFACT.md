@@ -24,8 +24,9 @@ The arithmetic programs audit only the displayed golden configurations,
 their exchanger, and the mod-\(11\) spinor representative. The incidence
 degree, branch divisor, local normalization comparison, and Clebsch-chart
 identity remain human arguments using the cited primary sources. The
-orientation-source bundle checks the cover's scalar factorization, golden
-involution, conference signs, and Petersen comparison; it does not prove
+orientation-source bundle checks, for the displayed marking, the cover's
+scalar factorization, golden involution, conference signs, and Petersen
+comparison; it does not prove
 normalization of the incidence scheme. No Lean coverage is claimed.
 
 An immutable public identifier and the author's affiliation/contact line

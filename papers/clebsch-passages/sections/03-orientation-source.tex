@@ -1,16 +1,19 @@
-\section{The common orientation source}
+\section{The relative marked orientation bridge}
 \label{sec:orientation-source}
 
 This section keeps track of the sign lost by projectivizing the Clebsch
-chart.  It first normalizes the pulled-back incidence cover, then follows
-deck exchange through the golden six-axis data and the Petersen coefficient
-module.
+chart.  The normalization is intrinsic to the pullback.  Its comparison with
+the golden six-axis data and the Petersen coefficient module is relative to
+the marked bridge datum \(\mathfrak m\) fixed in the introduction.
 
 \subsection{Normalization over the Clebsch chart}
 
 Let \(\mathcal N\to\mathbf P(H)\) be the incidence normalization from
-Section~\ref{sec:cover}, and put \(B=\mathbf P(V_E)\).  On the chart,
-Theorem~\ref{thm:arithmetic-main} and Hitchin's restriction identity give
+Section~\ref{sec:cover}, and put \(B=\mathbf P(V_E)\).  Choose the
+anti-invariant generator in Theorem~\ref{thm:arithmetic-main}; its pullback
+is the odd generator \(z\) below.  On the chart, the Stein-algebra theorem
+and Hitchin's restriction identity give the equality of finite
+\(\mathcal O_B\)-algebras
 \[
  z^2=5\iota_t^*J_0=80\sigma_3^2
    =(z-4\sqrt5\,\sigma_3)(z+4\sqrt5\,\sigma_3).
@@ -25,14 +28,16 @@ this as exactly the locus of two distinct regular configurations.  Along
 \(\sigma_3=0\), the factors meet before normalization, but their normal
 components remain separate.
 
-This factorization is an equality of sections after the same local
-trivialization of \(\mathcal O(3)\) used in the square-class proof.  It does
-not strengthen the integral statement: comparison with the geometric
-incidence model still holds only over an unspecified \(\mathbf Z[1/N]\).
+The sign of \(z\) is the remaining freedom in the chosen anti-invariant
+generator.  We normalize it by declaring the component supplied by \(U_t\)
+to have \(z=4\sqrt5\,\sigma_3\).  This does not strengthen the integral
+statement: comparison with the geometric incidence model still holds only
+over an unspecified \(\mathbf Z[1/N]\).
 
 \subsection{The golden involution}
 
-For the ordered representatives \(a_0,\ldots,a_5\) of \(I_t\), their Gram
+For the ordered representatives \(a_0,\ldots,a_5\) in \(\mathfrak m\), write
+\(C=C_{\mathfrak m}\) and \(Z_C=Z_{\mathfrak m}\).  Their Gram
 matrix has the form
 \[
  G=(t+2)I+tC,
@@ -77,13 +82,15 @@ axis representatives and does not cause the reversal; switching alone
 leaves the triangle cubic fixed.
 
 No global marking of the varying configurations on \(B_-\) is needed or
-asserted.  The fixed section \(U_t\) marks \(B_+\) by the constant source
-\([C,Z_C]_{\rm or}\).  We mark \(B_-\) by its deck-opposite, meaning that
-the normalized odd generator changes sign.  The calculation at \([xyz]\)
-proves that this algebraic convention agrees with the actual conjugate
-golden configuration there; it is not used to infer a pointwise conference
-labeling elsewhere.  Since the normalized components remain disjoint above
-\(\sigma_3=0\), the two source labels extend there even though the literal
+asserted.  The fixed section \(U_t\) selects \(B_+\), but does not by itself
+choose \(\mathfrak m\).  After \(\mathfrak m\) is fixed, we attach its
+constant source \([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}\) to \(B_+\)
+and attach the deck-opposite source to \(B_-\), meaning that the normalized
+odd generator changes sign.  The calculation at \([xyz]\) proves that this
+relative convention agrees with the actual conjugate golden configuration
+there; it is not used to infer a pointwise conference labeling elsewhere.
+Since the normalized components remain disjoint above \(\sigma_3=0\), the
+two relative source labels extend there even though the literal
 two-configuration interpretation fails.
 
 \subsection{Transport to degree six}
@@ -111,13 +118,57 @@ lands in the Petersen \((-2)\)-eigenspace and satisfies
  \qquad
  y_i=\frac13\sum_{j\ne i}\beta(y)_{ij}.
 \]
-Multiplicity one makes this the canonical comparison after the five labels
-are fixed.  Reversing the chart lift reverses \(y\), the zonal harmonic
+Multiplicity one makes this comparison unique after the five labels and the
+normalization are fixed.  Reversing the chart lift reverses \(y\), the zonal harmonic
 \(F_y\), and its cubic integral.  The two signs in the normalized incidence
-cover therefore select the two signs of the exact Gaunt cubic.  This proves
-Theorem~\ref{thm:orientation-source}.
+cover therefore select the two signs of the exact Gaunt cubic relative to
+\(\mathfrak m\).  This proves Theorem~\ref{thm:orientation-source}.
+
+\subsection{Ambiguity ledger}
+
+The relative formulation uses the following complete action of the auxiliary
+choices.
+
+\begin{center}
+\begin{tabular}{@{}l p{0.65\linewidth}@{}}
+\hline
+operation & effect \\
+\hline
+axis switching &
+\(C\mapsto DCD\), while every triangle product and \(Z\) is fixed; this is
+the equivalence already built into the marked source. \\
+axis relabelling &
+simultaneously permutes the rows and columns of \(C\) and the variables of
+\(Z\); the theorem transports equivariantly and does not choose an order. \\
+lattice-orientation reversal &
+fixes the Gram matrix, \(C\), \(Z\), the labelled chart lift, and \(\beta\);
+the theorem is independent of this otherwise unused orientation. \\
+five-label relabelling &
+simultaneously permutes the \(q_i\), the coordinates \(y_i\), and the
+two-subset labels; \(\sigma_3\) is fixed and \(\beta\) is equivariant.
+Relabelling only one side changes \(\mathfrak m\). \\
+chart scaling &
+rescales the linear identification and the transported cubic generator while
+leaving the projective chart fixed.  It is not quotiented: \(q_1=xyz\) fixes
+the normalization.  In particular, scaling by \(-1\) reverses the generator. \\
+golden Galois conjugation &
+after transport by \(R\), sends \(C\), \(Z\), and the normalized chart lift
+to their negatives at the golden fibre. \\
+incidence deck exchange &
+interchanges \(B_+\) and \(B_-\) and negates the odd generator; relative to
+\(\mathfrak m\), the attached source and harmonic generator are negated by
+definition. \\
+\hline
+\end{tabular}
+\end{center}
+
+Thus switching, coordinated relabelling, and reversal of the unused lattice
+orientation do not change the comparison.  Lift normalization and the
+cross-identification of the two five-labelled systems remain visible inputs.
+The theorem makes no descent claim for those inputs.
 
 There is no ambient linear comparison between harmonic degrees three and
 six: their irreducible rotation modules have dimensions seven and thirteen.
 The comparison exists only on the chosen Clebsch four-space, and it stops at
-the oriented source class \([C,Z_C]_{\rm or}\).
+the relative marked source class
+\([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}\).

@@ -17,17 +17,17 @@
         "thm:arithmetic-main"
       ],
       "clauses": [
-        "rational incidence model and quadratic function field",
+        "rational incidence model, quadratic function field, and global Stein double-cover algebra",
         "branch square class 5J0",
         "conjugate Clebsch charts, their completed conductor model and canonical map to the incidence normalization, and the identity iota_t^*J0=16 sigma3^2"
       ],
-      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose completed conductor and normalization recover Q(sqrt(5)), their fixed-parent sections map canonically to the incidence normalization, and each chart pulls J0 back to 16 sigma3^2.",
+      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)), and its Stein algebra is O plus O(-3) with anti-invariant multiplication z^2=5J0 after normalization of the generator; each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose completed conductor and normalization recover Q(sqrt(5)), their fixed-parent sections map canonically to the incidence normalization, and each chart pulls J0 back to 16 sigma3^2.",
       "status": "proven",
       "modes": [
         "conceptual",
         "classical-input"
       ],
-      "proof_role": "human proof using Hitchin's incidence degree, branch divisor, Clebsch chart, and invariant calculation",
+      "proof_role": "human proof using Hitchin's incidence degree, branch divisor, Clebsch chart, invariant calculation, and the trace-split rank-one reflexive Stein algebra on projective space",
       "evidence": [
         "sections/01-introduction.tex",
         "sections/02-orientation-cover.tex"
@@ -71,11 +71,11 @@
       "clauses": [
         "normalization of the pulled-back incidence cover into two chart components",
         "maximal distinct-configuration locus D(sigma3)",
-        "deck-opposite source convention and its golden-fibre identification with conference and triangle-cubic reversal",
-        "primitive Petersen comparison and harmonic sign transport",
+        "relative marked source convention and its golden-fibre identification with conference and triangle-cubic reversal",
+        "label-compatible primitive Petersen comparison and relative harmonic sign transport",
         "unspecified geometric integral localization"
       ],
-      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of the two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3); the fixed-plane sheet carries the oriented source [C,Z_C]_or, the other sheet carries its deck-opposite, the golden exchanger identifies that opposite with (-C,-Z_C) at xyz, and the primitive Petersen pair-sum map transports the source sign to the degree-six Gaunt cubic without identifying the two polynomial domains or globally marking the varying second configuration.",
+      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After an ordered golden realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the golden exchanger identifies the opposite with (-C_m,-Z_m) at xyz, and the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
       "status": "certified",
       "modes": [
         "conceptual",
@@ -83,7 +83,7 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "human normalization and source-convention proof using Hitchin's branch and chart theorems, with a golden-fibre equivariance calculation and exact audit of the scalar factorization, conference signs, and Petersen identities",
+      "proof_role": "human normalization and explicit relative-marking proof using Hitchin's branch and chart theorems, with a complete ambiguity ledger, a golden-fibre equivariance calculation, and exact audit of the scalar factorization, conference signs, and Petersen identities",
       "evidence": [
         "sections/03-orientation-source.tex",
         "verification/evidence/orientation_source.py",

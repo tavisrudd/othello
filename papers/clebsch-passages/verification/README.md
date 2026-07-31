@@ -59,9 +59,11 @@ python3 papers/clebsch-passages/verification/evidence/orientation_source_replay.
 sha256sum -c papers/clebsch-passages/verification/evidence/orientation_source.sha256
 ```
 
-It checks the scalar factorization of the pulled-back cover, the conference
-square, the exact golden exchanger, the reversal of all triangle signs, and
-the primitive Petersen pair-sum identities.  Scheme normalization, extension
+For the displayed marking, it checks the scalar factorization of the pulled-back
+cover, the conference square, the exact golden exchanger, the reversal of all
+triangle signs, and the primitive Petersen pair-sum identities.  It does not
+prove that the incidence sheet determines that marking or the chart lift.
+Scheme normalization, extension
 across the branch divisor, and the complete geometric bad-prime set remain
 human boundaries.
 
