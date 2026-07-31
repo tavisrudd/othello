@@ -33,7 +33,7 @@ EXPECTED_SUMMARY = {
 SCHEMA = "clebsch-c725-terminal-passant-orbit-dag-v1"
 CERTIFICATE = Path(__file__).with_name("c725_terminal_orbit_dag.json.gz")
 MANIFEST = Path(__file__).with_name("c725_finite_boundary_manifest.json")
-REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+PAPER_ROOT = Path(__file__).resolve().parent.parent
 
 
 def normalize(vector: Point, q: int) -> Point:
@@ -129,7 +129,7 @@ def verify_manifest() -> None:
             if key in checked:
                 continue
             checked.add(key)
-            path = REPOSITORY_ROOT / relative
+            path = PAPER_ROOT / relative
             assert path.is_file()
             assert hashlib.sha256(path.read_bytes()).hexdigest() == expected
 

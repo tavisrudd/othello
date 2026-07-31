@@ -1397,7 +1397,7 @@
               {
                 "path": "verification/c725_terminal_orbit_dag.py",
                 "repository": "paper",
-                "sha256": "a61ac489237ad5fc9571a7e435c401ff6d018584bf9ecc2d9943e4bae6cbf063"
+                "sha256": "1935033475798f8fd38a37213cf5821100f2a669b68e7678881ef53cd06ddc6d"
               },
               {
                 "path": "verification/c725_terminal_orbit_dag_replay.py",
@@ -1634,7 +1634,7 @@
       {
         "path": "verification/c725_terminal_orbit_dag.py",
         "repository": "paper",
-        "sha256": "a61ac489237ad5fc9571a7e435c401ff6d018584bf9ecc2d9943e4bae6cbf063"
+        "sha256": "1935033475798f8fd38a37213cf5821100f2a669b68e7678881ef53cd06ddc6d"
       },
       {
         "path": "verification/c725_terminal_orbit_dag.json.gz",
