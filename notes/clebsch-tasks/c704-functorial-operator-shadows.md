@@ -116,7 +116,15 @@ determinantal small resolutions of the six-node cubic, exchanged by
 golden conjugation.  Their conjugate rank-one Ulrich/MCM cokernel sheaves
 descend together to a rational rank-two MCM sheaf carrying \(J^2=5\).
 This realizes the paired-tower golden descent inside the singularity
-category of the operator cubic.
+category of the operator cubic.  Each small resolution is
+\(\mathbf P(\mathcal E_\pm)\) for
+\[
+0\to\mathcal E_\pm\to\mathcal O_{\mathbf P^2}^5
+\to\mathcal O_{\mathbf P^2}(1)^3\to0,
+\]
+with \(c_1=-3,c_2=6\).  Its smooth hyperplane sections are blow-ups of
+\(\mathbf P^2\) at six points, and the two conjugate blowdowns give the
+determinantal double-six.  Matching its marking to C695 remains open.
 Later balanced \(E_8\) slices lack the degree-ten distinguished support
 lattice; the bounded census through degree \(50\) therefore stops at an
 exact functoriality obstruction.  Binary tetrahedral \(E_6\) and binary

@@ -217,6 +217,71 @@ for C695's operator double-six.  The present task does not identify a
 canonical hyperplane section or prove that its two divisor classes are
 C695's two rows.
 
+The fourth-order geometry is nevertheless forced.  Over
+\(\mathbf P(V_+)\simeq\mathbf P^2\), evaluation of the bilinear cross
+block gives
+\[
+ A_X\otimes\mathcal O\longrightarrow
+ V_-\otimes\mathcal O(1).
+\]
+The six-axis MDS property makes this map surjective: every nonzero vector
+of \(V_+\) has at least four nonzero coordinates, while any three
+projected coordinate columns span \(V_-\).  Its kernel is therefore a
+rank-two bundle \(\mathcal E_+\) with exact sequence
+\[
+ 0\longrightarrow\mathcal E_+
+ \longrightarrow\mathcal O_{\mathbf P^2}^{\,5}
+ \longrightarrow\mathcal O_{\mathbf P^2}(1)^{\,3}
+ \longrightarrow0.
+\]
+Hence
+\[
+ c_1(\mathcal E_+)=-3H,\qquad
+ c_2(\mathcal E_+)=6H^2.
+\]
+
+The kernel incidence resolution is
+\[
+ \widetilde X_+\simeq\mathbf P_{\mathbf P^2}(\mathcal E_+).
+\]
+If \(\xi=c_1(\mathcal O_{\mathbf P(\mathcal E_+)}(1))\), its map to the
+cubic is given by \(\xi\), and
+\[
+ -K_{\widetilde X_+}=2\xi,\qquad \xi^3=3.
+\]
+Thus the nodal cubic is the crepant half-anticanonical model of this
+\(\mathbf P^1\)-bundle.
+
+A smooth hyperplane section pulls back to a smooth member
+\(S\in|\xi|\).  Such a member is defined by a section of
+\(\mathcal E_+^\vee\), whose zero scheme has length
+\[
+ c_2(\mathcal E_+^\vee)=6.
+\]
+The projection \(S\to\mathbf P^2\) is the blow-up of those six points.
+The transpose resolution gives the other blowdown of the same cubic
+surface.  Its six exceptional curves and the first six exceptional
+curves are the two rows of the determinantal double-six.  In the first
+blow-up basis \(h,e_1,\ldots,e_6\), the conjugate row has classes
+\[
+ e'_i=2h-\sum_{j\ne i}e_j.
+\]
+Consequently the \(e_i\) are mutually disjoint, the \(e'_i\) are mutually
+disjoint, and
+\[
+ e_i\cdot e'_j=
+ \begin{cases}
+ 0,&i=j,\\
+ 1,&i\ne j,
+ \end{cases}
+\]
+which is exactly the double-six incidence.
+
+This closes the structural double-six bridge: the paired golden
+eigenspaces force the two blowdown rows.  What remains unproved is only
+the marked comparison with C695's particular transvectant/apolar
+double-six and the selection of its particular hyperplane section.
+
 ## Why the construction is functorial
 
 For the frozen conference matrix \(C\),
@@ -478,9 +543,9 @@ of the report and all three computational artifacts.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-30-c704-segre-igusa-operator-shadow.py` | 19254 | `f0a0cc489fb034d089df561024dea0d15a5327f06ea9dd906f32248a305220f8` |
+| `2026-07-30-c704-segre-igusa-operator-shadow.py` | 19588 | `061af86005c67cf44f2e92a68e02cc81f2c17b081f7715b52ab54f45ec0461c0` |
 | `2026-07-30-c704-segre-igusa-operator-shadow-replay.py` | 6043 | `833ffc6c224f269ca6a31329656a6b23db58d976a7376a4c15d49dd79902db6f` |
-| `2026-07-30-c704-segre-igusa-operator-shadow.json` | 4175 | `95c80ac9bd36be7543bfe4fdb14451debcd868afa5e0c018e6e4b46433a6ce27` |
+| `2026-07-30-c704-segre-igusa-operator-shadow.json` | 4419 | `644c1f7a51f9d46897a466347c6e11c5bbc2835d8550932dbaeeb41405dcc2f3` |
 
 ## `ej` + `tt` closeout and mystery ledger
 
@@ -518,16 +583,21 @@ of the report and all three computational artifacts.
   rank-one Ulrich/MCM sheaves.  Their restriction of scalars is a rational
   rank-two MCM sheaf with \(J^2=5\), realizing the paired-tower golden
   descent inside the cubic's singularity category.
+- **Settled by `ej4`:** each small resolution is the projectivization of
+  the rank-two kernel bundle
+  \(0\to\mathcal E_\pm\to\mathcal O^5\to\mathcal O(1)^3\to0\), with
+  \(c_1=-3,c_2=6\), \(-K=2\xi\), and \(\xi^3=3\).  A smooth hyperplane
+  section is the blow-up of \(\mathbf P^2\) at six points, and the two
+  conjugate blowdowns produce the determinantal double-six.
 - **Open second-order bridge:** compare these two small resolutions with
   the normalized two-parent incidence geometry and with the
   operator-derived double-six.  Dimensions and involutions now match the
   right pattern, but no map to either existing geometric construction has
   been built.
-- **Open third-order bridge:** find a canonical smooth hyperplane section
-  whose restricted determinantal Ulrich classes recover C695's marked
-  double-six.  Without that section, the classical
-  determinantal-representation/double-six pattern is evidence, not an
-  identification.
+- **Open marked bridge:** identify the hyperplane and six-point marking
+  for which the determinantal double-six is exactly C695's
+  transvectant/apolar double-six.  The unmarked double-six mechanism is
+  now proved; only the task-specific marking remains.
 - **Settled negatively:** later balanced \(E_8\) slices do not inherit the
   degree-ten support lattice functorially.  The bounded census stops at
   degree \(50\); an added geometric lattice could change this verdict.

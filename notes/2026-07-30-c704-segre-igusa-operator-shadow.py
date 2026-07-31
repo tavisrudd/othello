@@ -497,6 +497,14 @@ def build_certificate() -> dict:
             "linear MCM sheaves; their restriction of scalars has rank two "
             "and an endomorphism J with J^2=5"
         ),
+        "small_resolution_bundle": (
+            "Y_+=P(E_+) over P(V_+), with "
+            "0->E_+->O^5->O(1)^3->0, c1=-3, c2=6, -K=2xi, xi^3=3"
+        ),
+        "hyperplane_double_six": (
+            "a smooth xi-section is Bl_6(P^2); the transpose resolution "
+            "gives the complementary determinantal six"
+        ),
         "synthematic_totals": len(totals),
         "stabilizer_consistency_checks": stabilizer_consistency_checks,
         "outer_action_size": len(induced_actions),

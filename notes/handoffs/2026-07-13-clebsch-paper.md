@@ -42,10 +42,13 @@ factorization whose two kernel incidences are the golden-conjugate small
 resolutions of the six-node cubic.  Its two conjugate rank-one Ulrich/MCM
 sheaves descend to a rational rank-two MCM object carrying \(J^2=5\), so
 the paired-tower descent persists in the cubic's singularity category.
-Later balanced slices stop at the missing-support-lattice obstruction in
-the bounded census through degree \(50\), while binary tetrahedral and
-octahedral sisters pass only their first exact feasibility gates.  No
-split paper is reopened.  Full report:
+Each small resolution is a \(\mathbf P^1\)-bundle over \(\mathbf P^2\);
+smooth hyperplane sections are six-point blow-ups, and the two conjugate
+blowdowns give the determinantal double-six.  Only its marked comparison
+with C695 remains.  Later balanced slices stop at the
+missing-support-lattice obstruction in the bounded census through degree
+\(50\), while binary tetrahedral and octahedral sisters pass only their
+first exact feasibility gates.  No split paper is reopened.  Full report:
 [`../2026-07-30-c704-functorial-operator-shadows.md`](../2026-07-30-c704-functorial-operator-shadows.md).
 
 ## Active and queued task cards
