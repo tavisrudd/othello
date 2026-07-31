@@ -20,8 +20,10 @@ formula matches.
 ## Current state
 
 The source mathematics is proved in the frozen C704--C710 reports.  This
-entire post-700 portfolio belongs to the Golden paper, while review-facing
-Paper III remains unchanged and ends before it.  In particular:
+entire propagated-shadow portfolio belongs to Paper IV.  C730 may strengthen
+Paper III only through the arithmetic--harmonic provenance of the source
+class `([C], [Z_C])`; Paper III still ends before every result below.  In
+particular:
 
 - the six outer middle-exterior coordinates are the Joubert coordinates and
   land on the Segre cubic;
@@ -74,12 +76,12 @@ No manuscript root has yet been created.  C720 owns the architecture and
 the go/no-go gate for `papers/golden-operator/`.
 
 The cross-paper framing is now fixed provisionally in
-`notes/2026-07-31-golden-cross-paper-framing.md`: Paper I supplies inverse
-recovery from coarse syndrome data to the golden conference switching class,
-and the Golden paper supplies forward functorial propagation to its shadows.
-C727 will determine whether this composition descends to the unlabelled
-syndrome locus or requires an additional marking; no Clebsch manuscript edit
-is authorized by that investigation.
+`notes/2026-07-31-golden-cross-paper-framing.md`: Papers I and III supply two
+independent provenance theorems for the source class, while Paper IV supplies
+forward functorial propagation to its shadows.  C727 first proves the generic
+completion/descent theorem and then determines whether the Paper I composite
+descends to the unlabelled syndrome locus or requires an additional marking;
+no Clebsch manuscript edit is authorized by that investigation.
 
 ## Active and queued tasks
 

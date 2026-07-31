@@ -17,7 +17,7 @@
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C713 proof architecture and structural six-node proof complete; C714 companion structuralization remains before the final release refresh | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | v2 theorem arc, cold read, standalone sync, and thirteen-bundle replay green; frozen v1 unchanged; public packaging remains | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | major shadow-theorem expansion active; sub-700 human and Lean packages complete with pinned replay; former pre-release surface is the green baseline | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
+| Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | C730 canonical orientation-source strengthening queued; sub-700 human and Lean packages complete; former pre-release surface is the green baseline | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
 C703 is complete: all three split papers now share the title-page identity
@@ -229,7 +229,8 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | active; C721 scheme spine complete and C722 clique routes closed exactly at six | run C723 and C724, then freeze the finite boundary through C725 and integrate through C726 |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
-| [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | major shadow-theorem expansion active; C711/C712 sub-700 human and Lean packages complete | complete novelty audit, remaining post-700 human proofs, manuscript integration, above-700 Lean coverage, and fresh release gates |
+| [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | focused revision waits on C730; C711/C712 source package complete | integrate the C730 source theorem, align the paper-owned trust surface, and run fresh release gates |
+| [C730 — Paper III orientation source](../clebsch-tasks/c730-paper-iii-orientation-source-theorem.md) | queued; precedes C680 integration | identify the incidence, golden-orientation, cubic-line, and harmonic realizations with exact involutions and integral boundary |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
 | [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
@@ -420,8 +421,10 @@ the fixed Clebsch chart lives over `Q(sqrt(5))`, and the displayed golden
 configurations are the complete reduced local fibre. The degree-six
 Gaunt/Steinhardt comparison and paper-owned trust surface are integrated.
 C680 now owns a major revision centered on the golden conference-operator
-shadow theorem.  Its exact inclusion and future-sister boundary are fixed in
-`notes/2026-07-31-c680-paper-iii-shadow-expansion-plan.md`; the former
+source theorem.  C730 must identify the Hitchin incidence sheet, golden
+orientation datum, signed cubic line, and Petersen harmonic realization with
+their exact involutions and integral boundary.  C680 then integrates only
+that source interface.  All functorial shadows belong to Paper IV; the former
 pre-release surface remains the green baseline.
 
 C682 is independent exploration. Its current crown includes the

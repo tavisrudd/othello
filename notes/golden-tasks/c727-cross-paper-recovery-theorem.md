@@ -6,10 +6,11 @@
 
 ## Objective
 
-Determine whether Paper I's coarse deep-hole syndrome data canonically
-recover enough of the golden conference switching class to make the entire
-Golden shadow family a functorial downstream consequence.  State and prove
-the strongest exact cross-paper theorem licensed by the residual switching,
+First prove the source-independent completion/descent theorem from a recovered
+class `([C], [Z_C])` to the exact quotient objects supplied by the Golden
+shadow family.  Then determine whether Paper I's coarse deep-hole syndrome
+data canonically recover enough of that source class to instantiate the
+theorem.  State the strongest result licensed by the residual switching,
 permutation, orientation, projective-scaling, and golden-conjugation torsors.
 
 The framing hypothesis and proposed theorem are recorded in
@@ -64,8 +65,11 @@ six-family used by the forward theorem; that completion is not assumed.
    composition of paper-owned theorems into an originality claim without
    this gate.
 10. Produce a paper-facing theorem/corollary interface for the Golden paper
-   and a non-mutating recommendation for a later Paper I introduction or
-   conclusion pointer after a stable Golden preprint exists.
+    and a non-mutating recommendation for a later Paper I introduction or
+    conclusion pointer after a stable Golden preprint exists.  If C730 has
+    frozen Paper III's arithmetic--harmonic source theorem, record its
+    instantiation as a second provenance corollary without making C727 depend
+    on C730 or editing Paper III.
 
 ## Acceptance
 
@@ -88,6 +92,7 @@ six-family used by the forward theorem; that completion is not assumed.
 
 C720 must first freeze the Golden paper's central operator theorem and output
 inventory.  Paper I and Paper III are read-only sources.  C727 belongs to the
-Golden lane because its new work is the descent and covariance of Golden
-outputs from an imported, frozen Paper I interface.  Any later Clebsch-paper
-edit requires a separate explicit decision in the Clebsch lane.
+Golden lane because its new work is source-independent completion plus the
+descent and covariance of Golden outputs from Paper I's frozen interface.
+C730 may later supply a second source corollary, but owns no Golden arrow.  Any
+Clebsch-paper edit remains a separate Clebsch-lane decision.

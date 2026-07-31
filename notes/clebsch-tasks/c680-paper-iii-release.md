@@ -4,16 +4,17 @@
 
 **Opened:** 2026-07-26
 
-**Status:** major shadow-theorem expansion active; the former pre-release
+**Status:** C730 source-theorem strengthening queued; the former pre-release
 surface remains a green baseline, while publication metadata and the immutable
-artifact locator are deferred until the new mathematics passes its gates.
+artifact locator are deferred until the focused revision passes its gates.
 
 ## Objective
 
-Substantially strengthen Paper III around the operator-shadow theorem already
-anticipated by its conclusion, while preserving the corrected rational
+Strengthen Paper III around the canonical arithmetic--harmonic orientation
+source theorem supplied by C730, while preserving the corrected rational
 descent, local golden-fibre comparison, harmonic normalization, and
-paper-owned trust surface.
+paper-owned trust surface.  The revision ends at the source class
+`([C], [Z_C])`; functorial propagation belongs to Paper IV.
 
 ## Current state
 
@@ -26,30 +27,29 @@ paper-owned trust surface.
 - Ordinary and isolated replay, the warning-free PDF, and two direct-access
   pre-release reviews are green.
 - The former release surface is now the frozen comparison baseline, not the
-  submission candidate.  The expansion plan is
-  `notes/2026-07-31-c680-paper-iii-shadow-expansion-plan.md`.
+  submission candidate.  C730 supersedes the broad operator-shadow expansion
+  as the scope authority; the older expansion plan remains a historical map
+  of results now owned by the Golden paper.
 
 ## Next action
 
 Complete, in order:
 
-1. the formula-level novelty audit for the conference-operator shadows;
-2. C711's human proofs for the sub-700 golden-return inputs, coordinated with
-   the separately owned C704/C709-and-later human-proof package;
-3. the expanded theorem architecture and manuscript revision;
-4. C712's Lean formalization of C711, plus the separately owned Lean coverage
-   of admitted C704/C709-and-later identities; and
-5. the updated exact-arithmetic, isolated-replay, and cold-read gates.
+1. C730's orientation-cover, involution, harmonic-comparison, and integral
+   boundary gates;
+2. the focused theorem architecture and manuscript revision;
+3. the Paper III claim map against C711/C712 and any C730 Lean additions; and
+4. the updated exact-arithmetic, isolated-replay, and cold-read gates.
 
 Only then obtain and insert the immutable locator and author metadata.
 
 ## Boundaries and records
 
-The broader C682-and-later sister program remains outside Paper III.  C680 now
-admits the immediate golden conference-operator shadow diagram, including its
-Segre--Igusa and Cartan faces, under the exact boundary in the expansion plan.
-Lean coverage of every newly admitted theorem is a revision gate; the global
-Hitchin incidence theorem is not silently added to that formal scope.
+The broader C682-and-later sister program remains outside Paper III.  C680
+admits only C730's source theorem and the finite golden interface needed to
+state it.  Outer-six, Pfaffian/determinant, cross-golden, Segre--Igusa, Cartan,
+physical, exceptional-parent, and lattice shadows belong to Paper IV.  The
+global Hitchin incidence theorem is not silently added to Lean's formal scope.
 
 Authoritative closure brief:
 `notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.

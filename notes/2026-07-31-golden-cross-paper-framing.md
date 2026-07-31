@@ -25,6 +25,27 @@ commutator, Pfaffian/determinant, adjugation, and centered squaring carry the
 operator to cubic, polar, determinantal, exceptional, fermionic, and anomaly
 shadows.
 
+Paper III supplies a second entrance, not an intermediate arrow in the Paper
+I chain.  Its strengthened target is to identify a chosen sheet of Hitchin's
+incidence cover with the golden orientation source and to realize the same
+oriented cubic line canonically in degree-six harmonics.  Thus the cross-paper
+shape is a fork followed by propagation:
+
+\[
+ \begin{array}{ccccc}
+ \text{Paper I: coarse syndrome data} & \longrightarrow &
+ \mathcal S=([C],[Z_C]) & \longleftarrow &
+ \text{Paper III: incidence and harmonic data} \\
+ && \downarrow && \\
+ && \text{Paper IV: functorial shadows} &&
+ \end{array}
+\]
+
+where the two horizontal arrows are distinct provenance theorems for the
+source class \(\mathcal S\).  C727 owns the completion of \(\mathcal S\) to
+the marked outer family required by the vertical arrow, including any sharp
+residual-torsor obstruction.
+
 The Clebsch configuration is therefore a recognition stage rather than an
 endpoint.  Its finite field is exceptional; the structure recovered there
 propagates outside the finite-geometric problem.
@@ -42,6 +63,33 @@ propagates outside the finite-geometric problem.
 This framing makes Paper I the entrance theorem to the broader program.  It
 does not enlarge Paper I's field-uniform theorem, import Golden proofs into
 Paper I, or make Paper I depend on later work for correctness.
+
+## Blind sequential reveal
+
+The papers should reward a reader who encounters them in numerical order.
+
+1. **Paper I starts at full strength.**  Coarse nearest-codeword data recover
+   the Clebsch geometry and its hidden golden conference class.  Its theorem
+   and proof remain complete without promising the later catalogue.
+2. **Paper II changes scale rather than advancing the reveal.**  Its uniform
+   trade-rigidity theorem is logically independent and should neither spoil
+   nor carry the operator story.
+3. **Paper III introduces the arithmetic surprise.**  The same hidden source
+   is the orientation torsor of Hitchin's incidence cover, and its signed
+   cubic has a canonical, exactly normalized degree-six harmonic realization.
+   The paper ends at the source class \(\mathcal S\).
+4. **Paper IV introduces the propagation surprise.**  Only there does the
+   reader learn that one marked completion of \(\mathcal S\) produces the
+   Segre--Igusa, Pfaffian/determinantal, cross-golden, exceptional, fermionic,
+   anomaly, and lattice shadows, together with the reverse-faithfulness and
+   information-loss stratification proved through C727.
+
+This order requires editorial restraint.  Paper I may name the recovered
+operator but should not preview its physical or exceptional outputs.  Paper
+III may export \(([C],[Z_C])\) but must not state the commutator, outer-six,
+Segre--Igusa, or Cartan theorems.  Paper IV may cite both provenance papers
+after stating its abstract marked-source theorem; its opening should not make
+either earlier paper a prerequisite for understanding the forward mechanism.
 
 ## Candidate composite theorem
 

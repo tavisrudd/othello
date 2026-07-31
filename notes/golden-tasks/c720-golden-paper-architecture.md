@@ -67,8 +67,10 @@ canonically equivalent.
    carry the conceptual theorem spine.
 7. Produce a section-level manuscript plan, target length, provisional
    abstract, and independence map showing that the new paper neither edits
-   nor extracts material from Paper III.  Shared background is cited; every
-   Golden theorem is paper-owned from its own source reports.
+   nor extracts material from Paper III.  C730 may strengthen Paper III only
+   through the arithmetic--harmonic source class `([C], [Z_C])`; shared
+   background is cited, and every propagated Golden theorem is paper-owned
+   from its own source reports.
    The plan must account for every C704--C710 result without silently
    exporting any of them to Paper III or an unallocated sibling paper.
    It may separately discuss whether any overlapping exposition should move
@@ -124,9 +126,9 @@ theory or topological qubit.
 ## Dependencies
 
 C704--C710 are complete source packages and collectively define the new
-paper's current result inventory.  Paper III is a frozen, review-facing
-predecessor ending before this post-700 development and is not an input to
-edit or reorganize.  C720 may record a non-mutating recommendation about
-future overlap, subject to an explicit post-review decision.  C715--C719 are
-Golden successors and may strengthen later sections only through frozen
-interfaces.
+paper's current result inventory.  Paper III ends at the source class even if
+C730 strengthens its arithmetic provenance and harmonic normalization; it is
+not an input for C720 to edit or reorganize.  C720 may cite that provenance
+after stating its abstract marked-source theorem, but does not wait on C730.
+C715--C719 are Golden successors and may strengthen later sections only
+through frozen interfaces.
