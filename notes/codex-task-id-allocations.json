@@ -1916,8 +1916,17 @@
       "last": 750,
       "purpose": "Paper II structural Lean after four human proof rounds",
       "sequence": 213
+    },
+    {
+      "count": 1,
+      "first": 751,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 751,
+      "purpose": "Paper I proof-spine tightening and blind referee comparison",
+      "sequence": 214
     }
   ],
-  "next_id": 751,
+  "next_id": 752,
   "schema": "codex-task-id-allocations-v1"
 }
