@@ -1889,8 +1889,17 @@
       "last": 743,
       "purpose": "relentless A+ mathematical unity and compression upgrades for the Golden operator paper",
       "sequence": 210
+    },
+    {
+      "count": 2,
+      "first": 744,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 745,
+      "purpose": "Paper III structural proof compression followed by Lean catch-up",
+      "sequence": 211
     }
   ],
-  "next_id": 744,
+  "next_id": 746,
   "schema": "codex-task-id-allocations-v1"
 }
