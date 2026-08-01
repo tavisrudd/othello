@@ -1383,3 +1383,95 @@ clebsch_factorization.tex:1390–1396). That is a bigger project than a bounded 
 If neither is pursued, say plainly: the program's realistic ceiling is a set of A−
 papers that are collectively memorable — which the §12.2/§12.5 amendments are designed
 to maximize — and no packaging decision changes that.
+
+---
+
+# Follow-up 4 (same date): staleness check against in-flight work
+
+## 13. What recent commits and the working tree change about §§1–12
+
+Checked: commit history scoped to `papers/golden-operator/`, `papers/clebsch-factorization/`,
+`lean/RelativeConicArcs/Golden*`, and the task notes; plus the current uncommitted diffs.
+Key events since (or concurrent with) my read: golden_operator.tex was committed at
+`595cc3ec` ("Complete Golden Lean proof spine", which also split the GoldenMatchingJacobian
+Lean files); clebsch_factorization.tex carries a large uncommitted diff (+399/−232 vs HEAD)
+that *grew* after my read; C756 (all-k conic-filling) was allocated per §12.6 and this
+report was committed (`b3068748`).
+
+### 13.1 Golden paper — all criticisms stand; line numbers shifted
+
+The committed HEAD version is the post-consolidation text I reviewed (the `674cebd1..HEAD`
+diff shows the abstract and intro I quoted are the *new* wording), with small subsequent
+additions that shift my §5 line anchors by +4 to +32. Re-verified against HEAD:
+
+- `,qquad` bug: **still present**, now golden_operator.tex:362 (was 358).
+- Task-ID leakage: **still present**, C715 at :1121, :1146, :1151, :1154 and C707 at
+  :1162 (was 1089–1119).
+- Missing self-citations: **still true** — the only `Rudd` in the file is the author line
+  (:25); the bibliography still contains no Papers I–III entries.
+- Abstract: unchanged from what I graded; §5.1.3 stands.
+- One genuine improvement: the C754 Lean spine completion (`595cc3ec`) sharded and closed
+  the Golden Jacobian/Pfaffian formal surface, so my §5.1 paraphrase of the Lean gate's
+  coverage ("does not formalize …") may now understate it; the *manuscript* sentence at the
+  verification section should be re-synced to the completed spine before release. This
+  nudges golden's readiness trajectory upward but changes no grade: the mandatory text
+  fixes (IDs, typo, citations, abstract) are untouched.
+
+### 13.2 Paper II — my read was mid-flight; criticisms stand and two got stronger
+
+The working tree gained ~116+ lines *after* my read, concentrated exactly in the
+Lucas-socle lemma: a new detecting-simple branch `L(q−7)` for q ≡ 3 (mod 4), e > 1
+(now :471–479, :701–704) and a new Frobenius-section apparatus with tags (3.2c₇)/(3.2c₈)
+(:632–674), matched by new untracked Lean files (`ClebschFirstFrobeniusSection.lean`,
+`ClebschOuterParityWeights.lean`, etc.) and the commits "prove Lucas first-wall
+obstruction" / "clarify first-wall parity gate". Consequences for §3:
+
+- **`,qquad` bug: worse, not fixed.** The instance I flagged moved (843 → :959) and the
+  in-flight edits introduced *four more* of the same typo — :624, :648, :649, :656, all in
+  the new (3.2c₇/₈) displays. Whatever template is generating these displays should be
+  fixed once; grep `,qquad` before any build gate.
+- **Lucas-lemma restructure recommendation (§3.1.2): strengthened.** The lemma is growing,
+  not shrinking — the new L(q−7)/Frobenius-section arm extends precisely the part I called
+  the referee bottleneck, and the tag ladder now runs to (3.2c₈) alongside the colliding
+  plain (3.2c) (§3.1.4 stands, larger). The mitigating news: the first-wall obstruction is
+  being formalized in Lean, which addresses referee *trust* but not referee *readability*;
+  the strategy-paragraph/appendix restructure is still needed and its target is now the
+  enlarged proof (~:455–740 in the current tree).
+- Comma splice in the main theorem statement: still present (:1028, was 912). Stale
+  Paper I title in the bibliography: still present (:3047, was 2929).
+- §3.1.8 (frozen evidence vs modified tree): still true and now larger — the verification
+  JSONs are themselves modified in the tree, so the re-freeze obligation is being tracked,
+  but the printed-fingerprint warning stands until the next freeze.
+- Grades unchanged: (a) A− (if anything firmer — the extension-field arm is being hardened
+  and formalized), (c) still B−.
+
+### 13.3 Already actioned by the repo
+
+- **C756 allocated** (`notes/clebsch-tasks/c756-all-k-conic-filling.md`, committed in
+  `b3068748`) with the §12.6 theorem statement verbatim as its goal. Nothing in §12.6 to
+  revise; the ~30% tools-sufficiency estimate now attaches to a live task, and the
+  "decisively fail to prove" framing in the task file is the right hedge.
+- This report is committed; the §11/§12 packaging recommendations are on record and
+  nothing in the in-flight work contradicts them.
+
+### 13.4 Packaging conclusions (§11/§12): unchanged, with one re-aim
+
+- **§12.2 (move the dual-cubic hook into Paper I): unaffected.** No recent commit touches
+  clebsch_rigidity.tex; the identity at rigidity:1077–1086 is stable and the
+  recommendation stands as written.
+- **§12.5 partition: unaffected — mildly reinforced.** Golden's formal surface maturing
+  independently (C754) and Paper II's proof arm hardening independently (C746/C750) is the
+  split working as designed; nothing suggests re-coupling.
+- **One re-aim:** my §3.2 suggestion to restructure the intro around the completeness
+  theorem should be executed *after* the in-flight Frobenius-section work lands, since the
+  abstract's "a Frobenius-digit criterion and two short socle tests replace
+  extension-field casework" now describes a proof still being edited; restructuring prose
+  around a moving proof wastes a pass.
+
+### 13.5 Net effect on the review
+
+No finding is invalidated. Line-number anchors in §§3 and 5 are stale as noted above
+(golden +4…+32; factorization +0…+116 with the map: 358→362, 1089→1121ff, 843→959,
+912→1028, 2929→3047, Lucas lemma 439–684→~455–740). Two criticisms strengthened
+(Paper II typo class, Lucas-lemma size); one softened (golden Lean-coverage sentence, now
+understating a completed spine); grades and all packaging recommendations unchanged.
