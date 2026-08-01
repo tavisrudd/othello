@@ -2,6 +2,7 @@ import RelativeConicArcs.ClebschGoldenConference
 import RelativeConicArcs.CorankOneAdjugate
 import RelativeConicArcs.GoldenCommutatorPfaffian
 import RelativeConicArcs.GoldenMatchingJacobian
+import RelativeConicArcs.WeightedMatchingEvaluation
 
 /-!
 # Trust gate for the algebraic Golden proof spine
@@ -20,6 +21,10 @@ slices to a geometric quotient.
 
 #print axioms RelativeConicArcs.GoldenMatchingCubics.matchingCubics_affine
 #print axioms RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_zero_of_threeThree
+
+#print axioms RelativeConicArcs.WeightedMatchingEvaluation.edgeProduct_bracketWeightedMatrix
+#print axioms RelativeConicArcs.WeightedMatchingEvaluation.weightedEdgeSum_bracketWeightedMatrix
+#print axioms RelativeConicArcs.WeightedMatchingEvaluation.bracketProduct_scale
 
 #print axioms RelativeConicArcs.GoldenMatchingJacobian.selectedMinor_eq_det
 #print axioms RelativeConicArcs.GoldenMatchingJacobian.fourOneOne_minor_identity

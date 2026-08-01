@@ -1,4 +1,5 @@
 import RelativeConicArcs.GoldenMatchingCubics
+import RelativeConicArcs.WeightedMatchingEvaluation
 import Mathlib.Tactic.Ring
 
 /-!
@@ -19,12 +20,20 @@ matrix.
 namespace RelativeConicArcs.GoldenCommutatorPfaffian
 
 open RelativeConicArcs.GoldenMatchingCubics
+open RelativeConicArcs.WeightedMatchingEvaluation
 
 /-- The entrywise bracket matrix associated with affine coordinates and a
 coefficient matrix. -/
 def bracketMatrix {R : Type*} [CommRing R] (C : Matrix (Fin 6) (Fin 6) R)
     (x : Fin 6 → R) : Matrix (Fin 6) (Fin 6) R :=
   fun i j => bracket x i j * C i j
+
+/-- The order-six bracket matrix is the specialization of the general
+bracket-weighted matrix to six labels. -/
+theorem bracketMatrix_eq_bracketWeightedMatrix {R : Type*} [CommRing R]
+    (C : Matrix (Fin 6) (Fin 6) R) (x : Fin 6 → R) :
+    bracketMatrix C x = bracketWeightedMatrix C x := by
+  rfl
 
 /-- A symmetric coefficient matrix produces a skew-symmetric bracket matrix. -/
 theorem bracketMatrix_transpose {R : Type*} [CommRing R]
