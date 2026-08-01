@@ -52,7 +52,8 @@ import RelativeConicArcs.Q11A5PointOrbitsBrianchon
 # The finite A5 point-orbit bridge for the Clebsch hexagon
 
 The arithmetic action checks are compiled in bounded row leaves.  This public module only dispatches
-to those opaque certificates and assembles the orbit, fixed-point, and Brianchon conclusions.
+to those bounded kernel-checked row certificates and assembles the orbit, fixed-point, and
+Brianchon conclusions.
 -/
 
 namespace RelativeConicArcs.Examples.Q11A5PointOrbits
@@ -60,7 +61,7 @@ namespace RelativeConicArcs.Examples.Q11A5PointOrbits
 set_option maxHeartbeats 100000000
 set_option maxRecDepth 100000
 
-/-- Every reflected lift is nonsingular. -/
+/-- Every normalized projective lift is nonsingular. -/
 theorem matrices_nonsingular : ∀ g : GroupIndex, matrixDet g ≠ 0 := by
   intro g
   fin_cases g
@@ -125,7 +126,7 @@ theorem matrices_nonsingular : ∀ g : GroupIndex, matrixDet g ≠ 0 := by
   · exact matrix_nonsingular_row_58
   · exact matrix_nonsingular_row_59
 
-/-- No reflected lift sends a canonical nonzero representative to zero. -/
+/-- No normalized projective lift sends a canonical nonzero representative to zero. -/
 theorem matrixVec_pointVec_ne_zero :
     ∀ g : GroupIndex, ∀ p : PointIndex, matrixVec g (pointVec p) ≠ 0 := by
   intro g
@@ -461,7 +462,7 @@ theorem action_on_witness :
   · exact action_on_witness_row_58
   · exact action_on_witness_row_59
 
-/-- Every reflected projectivity preserves the compact orbit-block label. -/
+/-- Every normalized projectivity preserves the compact orbit-block label. -/
 theorem orbitIndex_pointAction :
     ∀ g : GroupIndex, ∀ p : PointIndex,
       orbitIndex (pointAction g p) = orbitIndex p := by
@@ -528,7 +529,7 @@ theorem orbitIndex_pointAction :
   · exact orbitIndex_pointAction_row_58
   · exact orbitIndex_pointAction_row_59
 
-/-- Each explicit block is invariant under every reflected projectivity. -/
+/-- Each explicit block is invariant under every normalized projectivity. -/
 theorem orbitPoints_invariant (g : GroupIndex) (i : Fin 7) (p : PointIndex) :
     p ∈ orbitPoints i ↔ pointAction g p ∈ orbitPoints i := by
   rw [mem_orbitPoints_iff_orbitIndex i p,
@@ -676,7 +677,7 @@ theorem order_five_fixed_union :
     · exact orderFiveFixedUnion_mem_132
   exact ⟨hset, by rw [hset]; decide⟩
 
-/-- The full triple-point set is invariant under every reflected projectivity. -/
+/-- The full triple-point set is invariant under every normalized projectivity. -/
 theorem triplePointSet_invariant :
     ∀ g : GroupIndex, ∀ p : PointIndex,
       p ∈ triplePointSet ↔ pointAction g p ∈ triplePointSet := by
