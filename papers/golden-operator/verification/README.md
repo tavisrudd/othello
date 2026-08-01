@@ -34,6 +34,7 @@ surrounding quotient and operator statements have human proofs in the paper.
 | synchronized pure-spinor quotient | notes/2026-07-31-c728-synchronized-pure-spinor-geometry.md | human equivariant proof plus exact character/elimination checker and independent replay |
 | \(6\to10\) simplex--conference factorization | notes/2026-07-31-c729-simplex-conference-factorization.md | complete human Gram/incidence proof; finite normalization checked in the C729 bundles |
 | higher cut moments and reflection boundary | notes/2026-07-31-c729-conference-cut-moments.md and notes/2026-07-31-c729-cut-moments-reflection-audit.md | sequel material; exact generators, compact certificates, and an independent replay |
+| marked lift rigidity, collision filtration, and canonical return | notes/2026-07-31-c739-golden-cubic-lift-rigidity.md | human multiplicity-one, pole-descent, and subgroup-incidence proofs; exact character/cycle certificates; one-CAS boundary for the nilpotent Jacobian refinement |
 
 For the central exterior, commutator, golden-compression, and assembled-polar
 claims, run
@@ -105,6 +106,22 @@ proof.  These commands check its frozen sign tables and the sequel-only
 order-ten, order-fourteen, and order-eighteen cut data.  The replay starts
 from the displayed Paley order-ten matrix and uses an independent determinant
 path.
+
+For the C739 placement, run
+
+```text
+python3 notes/2026-07-31-c739-representation-audit.py --check
+python3 notes/2026-07-31-c739-representation-audit-replay.py
+nix shell nixpkgs#singular --command Singular -q notes/2026-07-31-c739-degeneracy-audit.sing
+python3 notes/2026-07-31-c739-cycle-audit.py --check
+```
+
+The marked rigidity and `36 -> 6` return have independent human proofs in
+the manuscript.  The representation multiplicities also have a separately
+implemented synthematic-total replay.  The reduced collision supports agree
+with the GIT argument and the inherited C728 replay.  The nilpotent defect at
+the ten `3+3` points still has only the exact Singular implementation, so the
+appendix states that trust boundary and no central theorem depends on it.
 
 The existing C712 Lean package covers only the sub-700 source interface.  The
 paper must not describe the post-700 propagation theorem as Lean-verified

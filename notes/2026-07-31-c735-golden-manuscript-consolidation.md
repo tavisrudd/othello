@@ -54,6 +54,12 @@ Every completed post-charter result has exactly one disposition below.
 | C729 | simplex-to-conference theorem and reverse sign factorization | main theorem | balanced-cut subsection |
 | C729 | order-ten cut split, 36-cut orbit, reflection mechanism, and local `10 -> 6` borders | sequel | useful continuation, but not needed to prove the headline mechanism |
 | C729 | Paley order-14/order-18 censuses, designs, cross-ratio signatures, and higher moments | sequel | no main-paper placement |
+| C739 | marked synchronized-lift rigidity | main-text corollary | immediately after the synchronized Cartan-cell theorem |
+| C739 | pole descent and the independent pole/support/golden ambiguities | main-text proposition-level discussion | six-point quotient/cross-block interface |
+| C739 | universal matching carrier and order-six hypersurface criterion | compressed classical context | after marked lift rigidity; HMSV/Kempe skeleton is not a novelty claim |
+| C739 | strict collision filtration and nonreduced Jacobian defect | body schematic plus appendix statement | single-CAS trust boundary remains explicit |
+| C739 | canonical `36 -> 6` return | main-text corollary | closes the balanced-cut/Naimark section by `S_6/F_20 = X x T` |
+| C739 | order-eight comparison and detailed multiplicity tables | sequel/evidence supplement | excluded from the Paper IV main line |
 
 C718 and C719 remain deferred.  Consolidation found no theorem-level gap that
 requires either task.
@@ -65,8 +71,8 @@ The target is 46 pages of main argument and 60 pages total.
 | part | target pages | job |
 |---|---:|---|
 | Abstract and introduction | 4 | source object, principal theorem, three mechanisms, novelty/trust boundary |
-| Marked operator and common propagation proof | 13 | covariance, exterior/Joubert/commutator, golden compression, polar adjugate |
-| Balanced cuts and `6 -> 10` | 5 | frustration characterization, simplex, ETF, Naimark conference lift |
+| Marked operator and common propagation proof | 15 | covariance, exterior/Joubert/commutator, golden compression, polar adjugate, marked rigidity, matching context, and pole descent |
+| Balanced cuts and `6 -> 10` | 6 | frustration characterization, simplex, ETF, Naimark conference lift, and canonical `36 -> 6` return |
 | Recovery and minimal marking | 7 | support two-graph, descent, reverse witnesses |
 | Spinor and determinantal geometry | 5 | synchronized cells, image, resolutions and MCM pair |
 | Fermionic and anomaly instruments | 8 | Slater/Majorana interface, inverse, one-moving-path theorem |
@@ -95,6 +101,8 @@ This ledger covers every numbered result currently in
 | `prop:polar-fibres` | algebraically closed characteristic-zero field; resolved Gauss map of the Segre cubic | classical Segre--Igusa duality plus paper-owned explicit fibre equations | complete reduction and degeneration proof in text | none | verify Kondo theorem/page pinpoint; move proposition to Appendix A |
 | `thm:anomaly-inverse` | rational Segre point; stable-locus fibre statement; normalized filter for probability and a named rational example | quotient/inverse classical or prior art; marked normalization and cost paper-owned | complete rational chart, divisor, and normalization proof; finite height clause explicitly isolated | C715 exact height/Sturm checker and independent replay | move height clause to appendix theorem; add stable archival citation for 2025 anomaly paper |
 | `thm:two-u1-lines` | rational two-charge line on Segre; all 21 Fano components under marked Golden inverse | Fano classification classical/imported; one-control marking and Pfaffian normalization paper-owned | complete multi-affinity, moduli, and coefficient proof in text | C716 exact family certificate and independent Pfaffian replay | verify theorem/page for the 21-component classification when final publication metadata exists |
+| `cor:marked-lift-rigidity` | characteristic zero; fixed outer target, coherent switching frames, and integral lattices; primitive synchronized lift with normalized Joubert top cubics | C739 marked multiplicity-one synthesis | short character-space proof after the synchronized-spinor proposition | C739 character audit and independent synthematic-total replay | theorem is deliberately marked; unmarked reconstruction belongs to C742 |
+| `app:collision-filtration` | translation gauge; Jacobian rank-drop, simultaneous-Pfaffian base, and pair-collision schemes | C739 bounded exact synthesis | reduced-support nesting explained geometrically; nilpotent refinement stated with explicit trust boundary | one Singular 4.4.1 implementation for the nilpotent defect | independent local-algebra or second-CAS closure required before promotion to an A+ central theorem |
 
 No post-700 theorem is Lean-verified.  The C712 formal package covers only the
 sub-700 source interface and is not cited as proof of any theorem above.
@@ -111,6 +119,7 @@ sub-700 source interface and is not cited as proof of any theorem above.
 | recovery from support split | Paper I supplies unordered support split; Paper IV proves two-graph descent and propagation | C727 human proof; C720 symbolic sextic/dimer equivalence |
 | anomaly inverse and physical cost | six-point quotient and rational anomaly parametrization classical/prior; Golden marking and Slater normalization paper-owned | C715 checker and independent replay |
 | two-Abelian lines | 21-component Fano classification imported; one-moving-path realization and exact marking paper-owned | C716 checker and independent replay |
+| marked rigidity, pole descent, collision filtration, and `36 -> 6` return | matching carrier classical; Golden synchronization, diagonal-congruence obstruction, and subgroup return are paper-owned syntheses | C739 representation, degeneracy, and cycle bundles; nilpotent structure has one CAS only |
 
 The synchronized verification surface is
 `papers/golden-operator/verification/README.md`.  It now names C727--C729,
@@ -127,8 +136,8 @@ checks from sequel-only finite censuses.
   theorem, three mechanisms, and application boundary.
 - **Trust:** passed.  C704, C705, C715, C716, C728, and C729 primary checks and
   every available independent replay passed from the repository root.
-- **Build:** passed.  `make check` in `papers/golden-operator/` is warning-free;
-  the central draft is 13 pages.
+- **Build:** passed after C739 placement.  `make check` in
+  `papers/golden-operator/` is warning-free; the central draft is 15 pages.
 
 ## `ej` + `tt` closeout and mystery ledger
 
