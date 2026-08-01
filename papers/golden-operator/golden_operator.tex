@@ -343,6 +343,46 @@ the Igusa quartic equation.  Thus the left kernel just found is precisely
 the Segre--Igusa polar direction.
 \end{proof}
 
+\begin{corollary}[Six-node Golden cubic walls]
+\label{cor:golden-cubic-wall-nodes}
+For every \(T\in\cT\), the determinantal cubic threefold
+\[
+ X_T=\{Z_T=0\}\subset\mathbf P(A_X)
+\]
+has singular locus
+\[
+ \operatorname{Sing}(X_T)
+ =\{[\mathbf1-6e_i]:i\in X\}.
+\]
+These six rational points are ordinary double points.  Thus every Golden
+cubic wall attains the isolated-singularity total six for a
+\(3\times3\) linear determinantal cubic threefold.  They are the centered
+\(5+1\) collision points and are common to all six walls.
+\end{corollary}
+
+\begin{proof}
+Outer covariance reduces the calculation to one sister and permutes the
+six displayed points.  At a \(5+1\) collision every perfect matching has
+at least two edges inside the five-point block, so every matching cubic
+vanishes to second order.  Thus all six points are singular before any
+elimination.  In the centered chart
+\(x_5=-(x_0+\cdots+x_4)\), exact saturation of the five partial derivatives
+has projective dimension zero and degree six.  The chart \(x_4=1\) contains
+the whole singular scheme: its coordinate algebra is reduced of dimension
+six and its six maximal ideals give the displayed points; setting \(x_4=0\)
+leaves only the irrelevant affine origin.  The determinants of the four-variable
+dehomogenized Hessians are \(6480\) at five chart representatives and
+\(1296/5\) at the sixth, hence every point is an ordinary double point.
+The exact generator and independent rational replay are recorded in the
+verification supplement.
+
+For comparison, the rank-one double locus of the ambient \(3\times3\)
+determinant has degree six.  Consequently an isolated singular locus of a
+linear determinantal cubic threefold has total Milnor number six
+\cite[Remark~3.6]{DolgachevSegre}.  The six Golden nodes each have Milnor
+number one, so they exhaust that total.
+\end{proof}
+
 \subsection{Quotient geometry and synchronized Cartan cells}
 
 The lower row of Theorem~\ref{thm:propagation} is the equal-weight quotient
@@ -1362,6 +1402,11 @@ DOI 10.1007/BFb0092256.
 M.~Fickus and D.~G. Mixon,
 \emph{Tables of the existence of equiangular tight frames},
 arXiv:1504.00253v2 (2016).
+
+\bibitem{DolgachevSegre}
+I.~Dolgachev,
+\emph{Corrado Segre and nodal cubic threefolds},
+arXiv:1501.06432.
 
 \bibitem{McDanielWatanabe}
 C.~McDaniel and J.~Watanabe,

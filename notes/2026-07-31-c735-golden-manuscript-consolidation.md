@@ -22,6 +22,7 @@ The refreshed principal ledger is:
 | label | proof role | trust boundary |
 |---|---|---|
 | `thm:propagation` | universal matching quotient, regular-simplex frame, unique normalized marked lift, matching/exterior/Pfaffian identity, spectral compounds, pole boundary, and quotient cofactor | matching/Specht carrier, outer frame, and multiplicity one imported or proved in prose; exact Golden scalars replayed; algebraic matching, Pfaffian, chart, and cofactor leaves kernel-checked in `RelativeConicArcs.Gates.GoldenProofSpine` |
+| `cor:golden-cubic-wall-nodes` | the six Golden determinant walls have the common six centered `5+1` vertices as rational ordinary double points and attain the isolated determinantal Milnor total | forced second-order matching vanishing is conceptual; global projective exhaustion and reducedness use the C757 exact Singular certificate, with a dependency-free rational replay of all witnesses and Hessians |
 | `thm:matching-quotient-geometry` | stability threshold, reduced matching base, rank-one critical slice, square-zero node defect, and node cotangent identification | Hilbert--Mumford, two-row Specht ideal, and strongly etale saturation remain human/classical inputs; tensor critical ideal has a spanning-tree proof and independent replay |
 | `prop:synchronized-spinors` | Cartan-cell consequence of the marked lift and quotient geometry | factorwise Cartan theory imported; no separate character or elimination proof remains load-bearing |
 | `app:collision-filtration` | global off-node exclusion by saturated slices and three generator-explicit unstable charts | three exact polynomial identities are kernel-checked and independently replayed; global saturation and orbit exhaustion remain reader-facing prose |
@@ -35,6 +36,10 @@ off-node proof.  This is deliberate reader-facing expansion inside a reduced
 proof graph, not a new shadow branch.  The final full-manuscript target remains
 56--57 pages under C743's revised budget.  The C704/C705, C728, and C743
 primary checks and independent replays pass, and `make check` is warning-free.
+
+C757 adds the six-node determinantal-wall corollary without changing the
+principal proof graph.  Its exact Jacobian certificate and independent local
+replay pass, and the warning-free central draft is now 19 pages.
 
 ## Architecture verdict
 
@@ -123,6 +128,7 @@ This ledger covers every numbered result currently in
 | label | exact hypotheses and statement scope | ownership | reader-facing proof | computation/formal dependency | remaining debt |
 |---|---|---|---|---|---|
 | `thm:propagation` | characteristic zero; fully marked coherent outer six-family; signed determinant-line choice only for a selected golden block; proves the matching square, Joubert/Segre covariance, commutator Pfaffian, spectral determinant/MCM pair, and normalized quotient cofactor | paper-owned synthesis; Joubert and Segre--Igusa identifications classical | complete proof immediately after theorem; HMSV citations mark classical quotient step | C704/C705 exact normalization checks; Golden Lean gate covers matching/Pfaffian algebra and general cofactor factorization but not frame multiplicity, saturation, or Golden scalars | display the exact cofactor witness in Appendix C before submission |
+| `cor:golden-cubic-wall-nodes` | characteristic zero; each Golden determinant cubic in projective axis-augmentation space; exact common singular scheme and ordinary-double-point type | paper-owned specialization of the classical determinantal Milnor-total statement | matching products vanish to second order at every centered `5+1` point; outer covariance gives the common six-set | C757 exact rational Singular exhaustion plus dependency-free reconstruction and Hessian replay | none |
 | `prop:synchronized-spinors` | same marked family; Cartan graphs of the six alternating commutators; equivariance, exact projected Segre ideal, reduced base scheme, ten nodal images | paper-owned synchronization; Cartan big cell and six-point GIT classical | short consequence of the principal matching square and quotient-geometry theorem | C728 generator and independent replay are corroborative; no elimination is load-bearing | add theorem/page-level HMSV citation |
 | `thm:frustration` | arbitrary symmetric zero-diagonal order-six sign matrix; equivalence of all-cut `5:1`, maximal cross determinant, conference identity, and five-cycle gauge; six simplex words | paper-owned order-six characterization | complete switching and graph proof in text | sign tables checked by C720/C729 bundles but not logically required | none |
 | `cor:naimark` | a `6 x 10` sign matrix with the proved row-simplex Gram identity; exhaustive balanced-column conclusion, ETF, order-ten conference operator, reverse sign-factor uniqueness | paper-owned consequence; ETF/Naimark terminology classical | complete cut-incidence and Gram proof in text | finite displayed matrix checked by C729 bundle; no classification dependency | cite a standard ETF/Naimark reference for terminology |
@@ -168,8 +174,8 @@ checks from sequel-only finite censuses.
   theorem, three mechanisms, and application boundary.
 - **Trust:** passed.  C704, C705, C715, C716, C728, and C729 primary checks and
   every available independent replay passed from the repository root.
-- **Build:** passed after proof-spine implementation.  `make check` in
-  `papers/golden-operator/` is warning-free; the central draft is 18 pages.
+- **Build:** passed after the C757 determinantal-wall refinement.  `make check`
+  in `papers/golden-operator/` is warning-free; the central draft is 19 pages.
 
 ## `ej` + `tt` closeout and mystery ledger
 

@@ -1,0 +1,474 @@
+{
+  "ambient": "sum(x_0,...,x_5)=0 with x_5=-(x_0+...+x_4)",
+  "base_conference_matrix": [
+    [
+      0,
+      1,
+      1,
+      1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      0,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      0,
+      1,
+      1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      1,
+      0,
+      -1,
+      1
+    ],
+    [
+      -1,
+      -1,
+      1,
+      -1,
+      0,
+      -1
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      0
+    ]
+  ],
+  "classical_comparison": {
+    "cache_key": "arXiv:1501.06432",
+    "golden_total_milnor_number": 6,
+    "pdf_sha256": "98a898303e06a395bad95888a826e677a955d4b8fc88914c6ede54e31406601e",
+    "source": "Igor Dolgachev, Corrado Segre and nodal cubic threefolds, arXiv:1501.06432, Remark 3.6",
+    "statement": "for an isolated singular locus of a 3x3 linear determinantal cubic threefold, the Milnor numbers sum to six"
+  },
+  "cubic_terms": [
+    {
+      "coefficient": "-1",
+      "exponents": [
+        0,
+        0,
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        0,
+        0,
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        0,
+        0,
+        1,
+        0,
+        2
+      ]
+    },
+    {
+      "coefficient": "-2",
+      "exponents": [
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        0,
+        0,
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        0,
+        0,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        0,
+        1,
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "coefficient": "-2",
+      "exponents": [
+        0,
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        0,
+        1,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "coefficient": "2",
+      "exponents": [
+        0,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": "2",
+      "exponents": [
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        0,
+        1,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        0,
+        2,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        0,
+        2,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        0,
+        2,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        1,
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "coefficient": "2",
+      "exponents": [
+        1,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        1,
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "coefficient": "-2",
+      "exponents": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": "2",
+      "exponents": [
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        1,
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": "2",
+      "exponents": [
+        1,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": "-2",
+      "exponents": [
+        1,
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": "-2",
+      "exponents": [
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        1,
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        2,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient": "1",
+      "exponents": [
+        2,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        2,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": "-1",
+      "exponents": [
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "dehomogenized_hessian_determinants": [
+    "6480",
+    "6480",
+    "6480",
+    "6480",
+    "1296/5",
+    "6480"
+  ],
+  "projective_nodes": [
+    [
+      -5,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      -5,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      -5,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      -5,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      -5,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      -5
+    ]
+  ],
+  "schema": "golden-determinantal-cubic-nodes-v1",
+  "singular_audit": {
+    "boundary_empty": 1,
+    "chart_quotient_dimension": 6,
+    "chart_radical": 1,
+    "minimal_primes": 6,
+    "projective_degree": 6,
+    "projective_dimension": 0
+  },
+  "singular_version": "Singular for x86_64-Linux version 4.4.1 (44100, 64 bit) Jan 2025",
+  "x4_equals_one_chart_points": [
+    [
+      "-5",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "1",
+      "-5",
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "1",
+      "1",
+      "-5",
+      "1",
+      "1"
+    ],
+    [
+      "1",
+      "1",
+      "1",
+      "-5",
+      "1"
+    ],
+    [
+      "-1/5",
+      "-1/5",
+      "-1/5",
+      "-1/5",
+      "1"
+    ],
+    [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    ]
+  ]
+}

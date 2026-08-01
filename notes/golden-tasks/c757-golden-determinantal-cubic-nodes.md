@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** in progress
+**Status:** complete
 
 ## Objective
 
@@ -22,4 +22,3 @@ the manuscript only after exact certification and an independent replay.
 - commit the report, generator, compact certificate, hashes, and independent
   replay as one reproducible bundle;
 - pass the paper-owned checks and warning-free manuscript build.
-

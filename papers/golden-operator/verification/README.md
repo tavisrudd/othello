@@ -38,6 +38,7 @@ surrounding quotient and operator statements have human proofs in the paper.
 | unmarked target and cross-block Fitting obstruction | notes/2026-07-31-c742-golden-reconstruction-degeneracy.md | human rank, stabilizer-orbit, descent, and Fitting proofs; exact full-permutation character certificate and independent class replay |
 | universal matching, quotient slice, and proof compression | notes/2026-07-31-c743-golden-a-plus-unity-compression.md | human matching, spanning-tree, Specht-ideal, saturated-slice, and cofactor proofs; exact chart and local-normal-form audits with independent replays |
 | Golden algebraic Lean spine | notes/2026-08-01-c754-golden-lean-proof-spine.md | kernel-checked affine covariance, collision evaluation, Jacobian-minor identities, matching/Pfaffian evaluation, and corank-one adjugate factorization; representation and slice boundary explicit |
+| six-node Golden determinantal cubic walls | notes/2026-08-01-c757-golden-determinantal-cubic-nodes.md | exact projective Jacobian elimination, reduced six-point decomposition, local Hessian test, and dependency-free rational replay |
 
 For the central exterior, commutator, golden-compression, and assembled-polar
 claims, run
@@ -142,6 +143,23 @@ ordinary product target and zero for its signed twist.  The rank-two
 Pfaffian-zero conclusion, exceptional-action reconstruction, and Fitting
 obstruction have human proofs in the manuscript; the certificate does not
 replace them.
+
+For the six-node determinantal cubic-wall corollary, run
+
+```text
+python3 notes/2026-08-01-c757-golden-determinantal-cubic-nodes.py --check
+python3 notes/2026-08-01-c757-golden-determinantal-cubic-nodes-replay.py
+```
+
+The primary checker reconstructs the frozen Golden cubic from the displayed
+conference matrix and uses exact rational Singular 4.4.1 elimination.  It
+proves that the projective Jacobian scheme is zero-dimensional of degree six,
+that the chart containing all its points is reduced, and that the complementary
+hyperplane contains no projective singular point.  The independent replay uses
+only Python rational arithmetic to reconstruct the cubic and verify the six
+centered simplex vertices and their nondegenerate dehomogenized Hessians.  The
+global scheme exhaustion rests on the tracked Singular calculation; the replay
+independently checks the witnesses and their local analytic type.
 
 The Golden formal surface exits through
 `RelativeConicArcs.Gates.GoldenProofSpine`.  Its source modules prove affine
