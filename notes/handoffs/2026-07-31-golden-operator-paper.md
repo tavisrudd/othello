@@ -190,7 +190,11 @@ particular:
   from the Golden coefficient field \(\mathbf Q(\sqrt5)\).  The scaling
   lifts to an integral intertwiner \(Q^-T=3TQ^+\); its complete
   two-parameter lattice has discriminant 52, and adjoining the odd dark line
-  has minimum index 26 with an exact mod-13 dependence.
+  has minimum index 26 with an exact mod-13 dependence.  Intrinsically,
+  \((Q^+-10I)/2\) is multiplication by \(\sqrt {13}\) on the norm-four ideal
+  \((4,1+\sqrt {13})\) of the conductor-two order
+  \(\mathbf Z[\sqrt {13}]\); the intertwiner form is the normalized norm on
+  \((3,1+\sqrt {13})\), and ramification at 13 explains the modular collapse.
   Simultaneous closing multiplicities are
   exactly one, two, four, or six; the common six-wall locus is the reduced
   fifteen-line unstable base scheme, with generic rank four and the six

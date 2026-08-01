@@ -717,6 +717,23 @@ def build():
     )
     antipode_even_matrix = ((8, 6), (8, 12))
     antipode_odd_matrix = ((16, -6, 8), (-8, 12, -4), (48, -24, 36))
+    sqrt13_operator = ((-1, 3), (4, 1))
+    assert antipode_even_matrix == tuple(
+        tuple(10 * int(row == column) + 2 * sqrt13_operator[row][column] for column in range(2))
+        for row in range(2)
+    )
+    assert tuple(
+        tuple(sum(sqrt13_operator[row][k] * sqrt13_operator[k][column] for k in range(2)) for column in range(2))
+        for row in range(2)
+    ) == ((13, 0), (0, 13))
+    sqrt13_ideal_basis = ((4, 0), (1, 1))
+    for column, (rational, radical) in enumerate(sqrt13_ideal_basis):
+        multiplied = (13 * radical, rational)
+        reconstructed = tuple(
+            sum(sqrt13_ideal_basis[row][coordinate] * sqrt13_operator[row][column] for row in range(2))
+            for coordinate in range(2)
+        )
+        assert reconstructed == multiplied
     odd_dark_vector = (5, 2, -6)
     assert tuple(
         sum(antipode_odd_matrix[row][column] * odd_dark_vector[column] for column in range(3))
@@ -895,6 +912,11 @@ def build():
             ],
             "standard_antipode_even_matrix": antipode_even_matrix,
             "standard_antipode_odd_matrix": antipode_odd_matrix,
+            "sqrt13_integral_operator": sqrt13_operator,
+            "sqrt13_integral_operator_identity": "R^2=13I and Q_even=10I+2R",
+            "sqrt13_order": "Z[sqrt(13)], discriminant 52, conductor 2 in the maximal order",
+            "sqrt13_even_ideal": "I=(4,1+sqrt(13)), index/norm 4; R is multiplication by sqrt(13) in this basis",
+            "sqrt13_intertwiner_ideal": "J=(3,1+sqrt(13)), index/norm 3; its normalized norm form is 3a^2+2ab-4b^2",
             "standard_antipode_odd_eigenvalue_4_vector": odd_dark_vector,
             "sqrt13_mechanism": "the odd block modulo its eigenvalue-4 line has spectrum exactly three times the even block spectrum",
             "even_to_odd_threefold_intertwiner": even_to_odd_intertwiner,

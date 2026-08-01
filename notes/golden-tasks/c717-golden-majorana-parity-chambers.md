@@ -82,6 +82,12 @@ All such intertwiners form a binary quadratic lattice of discriminant 52;
 adjoining the eigenvalue-four dark line has minimum index 26, with an exact
 mod-13 dependence.  Thus 13 is also the integral gluing obstruction between
 the antipode sectors.
+More intrinsically, \((Q^+-10I)/2\) is multiplication by \(\sqrt {13}\) on
+the norm-four ideal \((4,1+\sqrt {13})\subset\mathbf Z[\sqrt {13}]\), while
+the intertwiner norm form comes from the norm-three ideal
+\((3,1+\sqrt {13})\).  The order has discriminant 52 and conductor two;
+ramification at 13 explains the square-zero reduction and modular gluing
+failure.
 
 Exactly one, two, four, or six Hamiltonians can close simultaneously.  The
 common six-wall locus is the fifteen-line unstable base scheme; its generic

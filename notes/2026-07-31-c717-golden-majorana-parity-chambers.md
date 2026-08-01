@@ -557,6 +557,50 @@ at \(a=b=1\).  Modulo 13 the primitive columns obey
 So 13 is also the exact modular obstruction to gluing the antipode-even
 packet and the odd dark line into the full standard lattice.  This is a
 coset-incidence bad prime, not a bad prime of the original Majorana family.
+
+There is an even shorter arithmetic formulation.  Set
+
+\[
+ R=\frac{Q^+-10I}{2}
+   =\begin{pmatrix}-1&3\\4&1\end{pmatrix}.
+\]
+
+Then \(R^2=13I\).  Let \(\mathcal O=\mathbf Z[\sqrt {13}]\), the quadratic
+order of discriminant 52, and consider its ideal
+
+\[
+ I=(4,1+\sqrt {13}).
+\]
+
+In the displayed basis of \(I\), multiplication by \(\sqrt {13}\) is
+exactly \(R\):
+
+\[
+ \sqrt {13}\cdot4=-4+4(1+\sqrt {13}),\qquad
+ \sqrt {13}(1+\sqrt {13})=3\cdot4+(1+\sqrt {13}).
+\]
+
+Thus \(Q^+=10I+2[\sqrt {13}]_I\).  Likewise the parameter lattice for the
+intertwiners is the ideal
+
+\[
+ J=(3,1+\sqrt {13}),
+\]
+
+because its normalized ideal norm is
+
+\[
+ \frac{N(3a+(1+\sqrt {13})b)}{N(J)}
+ =3a^2+2ab-4b^2.
+\]
+
+This identifies the complete arithmetic mechanism.  The prime 13 is
+ramified, and reduction of \(R^2=13I\) makes \(R\) a nonzero square-zero
+operator modulo 13.  The factor two in discriminant 52 records that
+\(\mathcal O\) has conductor two in the maximal order of
+\(\mathbf Q(\sqrt {13})\).  Thus the two factors in the index
+\(26=2\cdot13\) are already visible as the conductor and ramified-prime
+features of the natural chamber-incidence order.
 In particular \(Q\) has rank 138.  If
 \({\bf1}_H,{\bf1}_{K_+},{\bf1}_{K_-}\) denote the three orbitwise constant
 vectors, then
@@ -699,7 +743,8 @@ moments and thereby labels the last two equal-dimensional Specht blocks.
 The generator then constructs the five centered block-membership functions,
 checks the displayed integer multiplicity and antipode matrices entry by
 entry, verifies the even/odd decomposition and the integral threefold
-intertwiner, and records its index-26 gluing obstruction.  The replay
+intertwiner, records its index-26 gluing obstruction, and checks the
+\(\mathbf Z[\sqrt {13}]\)-ideal realization of the even block.  The replay
 reconstructs the subgroup point orbits independently and repeats those
 checks.
 The irreducibility, intersection multiplicity rule, connectedness lemma, and
@@ -753,6 +798,14 @@ minimum index 26 and produces an exact mod-13 column relation.  Hence the
 prime 13 governs integral parity-sector gluing as well as eigenvalue
 splitting.
 
+The second-order follow-up identifies the governing order itself:
+\(R=(Q^+-10I)/2\) satisfies \(R^2=13I\) and is multiplication by
+\(\sqrt {13}\) on the norm-four ideal \((4,1+\sqrt {13})\) of
+\(\mathbf Z[\sqrt {13}]\).  The intertwiner norm form is the normalized norm
+on \((3,1+\sqrt {13})\).  Ramification at 13 and conductor two now explain
+the modular collapse and the two factors of 26 in a single arithmetic
+model.
+
 ## Mystery ledger
 
 - **Settled:** 860 connected real cube chambers, with 50 sign vectors and
@@ -785,6 +838,12 @@ splitting.
   form of discriminant 52, and its primitive gluing with the dark line has
   minimum index 26 and a mod-13 dependence.  This identifies the exact
   integral obstruction behind the spectral field.
+- **Settled by the subsequent `ej2` pass:** the even operator is
+  \(10I+2R\) with \(R^2=13I\), where \(R\) is multiplication by
+  \(\sqrt {13}\) on the ideal \((4,1+\sqrt {13})\) of the discriminant-52
+  order.  The intertwiner lattice is the norm-three ideal
+  \((3,1+\sqrt {13})\).  The conductor-two and ramified-13 structure account
+  for the index 26 and mod-13 degeneration.
 - **Generalized:** the exclusion of singleton signs holds for every real
   system with vanishing first and third moments, and every sign pattern with
   at least two entries of each sign is realizable.  Only the finer coset

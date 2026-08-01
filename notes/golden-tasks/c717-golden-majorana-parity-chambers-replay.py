@@ -438,6 +438,21 @@ def main():
     ]
     even_matrix = ((8, 6), (8, 12))
     odd_matrix = ((16, -6, 8), (-8, 12, -4), (48, -24, 36))
+    radical_operator = ((-1, 3), (4, 1))
+    assert even_matrix == tuple(
+        tuple(10 * int(row == column) + 2 * radical_operator[row][column] for column in range(2))
+        for row in range(2)
+    )
+    assert tuple(
+        tuple(sum(radical_operator[row][k] * radical_operator[k][column] for k in range(2)) for column in range(2))
+        for row in range(2)
+    ) == ((13, 0), (0, 13))
+    ideal_basis = ((4, 0), (1, 1))
+    for column, (rational, radical) in enumerate(ideal_basis):
+        assert tuple(
+            sum(ideal_basis[row][coordinate] * radical_operator[row][column] for row in range(2))
+            for coordinate in range(2)
+        ) == (13 * radical, rational)
     intertwiner = ((1, 1), (0, -1), (4, 4))
     dark = (5, 2, -6)
     assert tuple(
@@ -483,7 +498,7 @@ def main():
         assert sum(entry**3 for entry in amplitudes) == 0
         checked += 1
     assert checked == 3125
-    print("replayed 860 chambers, index-26 sqrt(13) intertwiner, 64 Boolean controls, and 3125 identity points")
+    print("replayed 860 chambers, Z[sqrt(13)] ideal mechanism, 64 Boolean controls, and 3125 identity points")
 
 
 if __name__ == "__main__":

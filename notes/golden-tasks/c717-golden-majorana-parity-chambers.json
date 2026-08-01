@@ -168,7 +168,21 @@
       "(5,1)": 5,
       "(6)": 3
     },
+    "sqrt13_even_ideal": "I=(4,1+sqrt(13)), index/norm 4; R is multiplication by sqrt(13) in this basis",
+    "sqrt13_integral_operator": [
+      [
+        -1,
+        3
+      ],
+      [
+        4,
+        1
+      ]
+    ],
+    "sqrt13_integral_operator_identity": "R^2=13I and Q_even=10I+2R",
+    "sqrt13_intertwiner_ideal": "J=(3,1+sqrt(13)), index/norm 3; its normalized norm form is 3a^2+2ab-4b^2",
     "sqrt13_mechanism": "the odd block modulo its eigenvalue-4 line has spectrum exactly three times the even block spectrum",
+    "sqrt13_order": "Z[sqrt(13)], discriminant 52, conductor 2 in the maximal order",
     "standard_antipode_even_matrix": [
       [
         8,
