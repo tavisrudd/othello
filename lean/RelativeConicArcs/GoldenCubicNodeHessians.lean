@@ -34,6 +34,24 @@ def chartHessian (x : Fin 4 → ℚ) : Matrix (Fin 4) (Fin 4) ℚ :=
       2*(x 0+x 1+x 2+x 3-1),
       2*(x 0-x 1+x 2-1)]
 
+/-- The \(i\)-th gradient component restricted to the \(j\)-th coordinate
+line, represented as a univariate polynomial. -/
+noncomputable def gradientCoordinatePolynomial
+    (i : Fin 5) (x : Fin 5 → ℚ) (j : Fin 5) : Polynomial ℚ :=
+  let y := Function.update (fun a => Polynomial.C (x a)) j Polynomial.X
+  gradient y i
+
+/-- The displayed chart matrix is the matrix of second coordinate
+derivatives of the centered Golden cubic. -/
+theorem derivative_gradientCoordinatePolynomial_chart
+    (x : Fin 4 → ℚ) (i j : Fin 4) :
+    (gradientCoordinatePolynomial i.castSucc ![x 0, x 1, x 2, x 3, 1]
+      j.castSucc).derivative.eval (x j) = chartHessian x i j := by
+  fin_cases i <;> fin_cases j <;>
+    simp [gradientCoordinatePolynomial, gradient, chartHessian,
+      Function.update, Polynomial.derivative_pow] <;>
+    ring
+
 /-- The first four coordinates of the \(i\)-th centered node, normalized so
 that its fifth displayed coordinate equals one. -/
 def chartNode (i : Fin 6) : Fin 4 → ℚ := fun j =>
