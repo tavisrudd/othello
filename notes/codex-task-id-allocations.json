@@ -1799,8 +1799,17 @@
       "last": 733,
       "purpose": "prove marking-independent orientation bridge or weaken Paper III to a relative marked theorem",
       "sequence": 200
+    },
+    {
+      "count": 1,
+      "first": 734,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 734,
+      "purpose": "formalize Clebsch extremal-syndrome bridge and restructure the manuscript proof spine",
+      "sequence": 201
     }
   ],
-  "next_id": 734,
+  "next_id": 735,
   "schema": "codex-task-id-allocations-v1"
 }
