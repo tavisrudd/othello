@@ -1,10 +1,10 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "fb8ec6182b70d5dc64d5521355d29bba4d4b6e8f8b07a206db869a275ce93251",
+  "main_source_sha256": "80cca6b22a952ada6d2c3f173cccb2092d3c470bdbb543c9e7dc6a3919645bfb",
   "section_sha256": {
-    "sections/01-introduction.tex": "172ce2d35df009bb6fe819a9731024445cba9369dd951708d7b7e08f3f7aa9e8",
-    "sections/02-orientation-cover.tex": "046071c37f7c29931242030cbb4b47432611a69dbc9f6417266c8d26c7b6497c",
+    "sections/01-introduction.tex": "d0075508ad9ea8e2a8fcf487cf0db23d17c303f521a2d68b30934deddee8cb0d",
+    "sections/02-orientation-cover.tex": "34328aed7d067a8f43efb7875769410e66fe02679fad391a23beb9996adb366b",
     "sections/03-orientation-source.tex": "0b71604c344fbaa9a8cbec2e6ff02b3a249e5c465529acc1b36305c9434cd714",
     "sections/04-arithmetic-specialization.tex": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455",
     "sections/05-harmonic-realization.tex": "c0078c3e003d28e8d7cc3bfb1c516feb3f724e47146b0f2599a02e16bcf20671",
@@ -19,7 +19,7 @@
       "environment": "theorem",
       "title": "Arithmetic incidence cover",
       "source": "sections/01-introduction.tex",
-      "source_line": 41,
+      "source_line": 44,
       "sha256": "6d903edd8afda2dfcabeca11638ed302f19edfb75d50fbb001e36983d4eac34a",
       "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nIf \\(\\mathcal N\\to\\mathbf P(H)\\) is its finite Stein normalization, then,\nafter normalizing the anti-invariant summand, its algebra is\n\\[\n \\mathcal O\\oplus\\mathcal O(-3),\\qquad z^2=5J_0.\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
     },
@@ -28,7 +28,7 @@
       "environment": "theorem",
       "title": "Relative marked orientation bridge",
       "source": "sections/01-introduction.tex",
-      "source_line": 101,
+      "source_line": 104,
       "sha256": "ac76ad252fcc96f4c41c8612c99320b3edb12affff7db96bb72b4ff0f35b0b2d",
       "tex": "\\begin{theorem}[Relative marked orientation bridge]\n\\label{thm:orientation-source}\nFix a marked bridge datum \\(\\mathfrak m\\).  Let\n\\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) they are the two distinct icosahedral configurations;\non the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nRelative to \\(\\mathfrak m\\), equip \\(B_+\\) with the source\n\\([C_{\\mathfrak m},Z_{\\mathfrak m}]_{\\rm or}\\) and equip \\(B_-\\) with its\ndeck-opposite.  At \\([xyz]\\), the golden\nexchanger identifies this opposite with the conjugate configuration and\nthe representative\n\\((-C_{\\mathfrak m},-Z_{\\mathfrak m})\\).  Under the marked primitive\npair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same relative convention fixes the sign of the degree-six cubic in\nTheorem~\\ref{thm:harmonic-main}.  The normalized component alone is not\nasserted to determine \\(\\mathfrak m\\).\n\\end{theorem}"
     },
@@ -37,7 +37,7 @@
       "environment": "theorem",
       "title": "Degree-six harmonic restriction",
       "source": "sections/01-introduction.tex",
-      "source_line": 141,
+      "source_line": 144,
       "sha256": "ad6670411252de4aadd61e626dfedbd2a0620932dfab1bf1811e8f68c3a985ba",
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega),\n \\qquad\n P_6(s)=\\frac{231s^6-315s^4+105s^2-5}{16}.\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nWith\n\\(\\langle f,g\\rangle=(4\\pi)^{-1}\\int_{S^2}fg\\), the spherical cubic on this\ncopy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     },
