@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C720; independent of C715
+**Status:** complete 2026-07-31; research only, no manuscript edit
 
 ## Objective
 
@@ -49,3 +49,26 @@ finite skew Hamiltonian and a Pfaffian sign.
 
 C720 freezes the paper interface; C707 and C709 are complete.  This task
 may run independently of C715.
+
+## Resolution
+
+The oriented real control sphere, equivalently the translation quotient of
+the physical cube, has exactly 860 connected gapped chambers.  The 50
+allowed parity vectors have weights two, three, or four.  Every unbalanced
+vector has 24 chambers; every balanced vector has seven, with the balanced
+Boolean optimum in its unique large chamber.  The generic adjacency graph
+is connected of diameter ten, has 2,160 edges, and has degree distribution
+\(3^{720},12^{120},36^{20}\).
+
+Exactly one, two, four, or six Hamiltonians can close simultaneously.  The
+common six-wall locus is the fifteen-line unstable base scheme; its generic
+points have rank four in every sister and its six vertices are the rank-two
+C709 dimers.  No protected monodromy or parity pump survives: each gapped
+six-Majorana class-D parity component is
+\(SO(6)/U(3)\cong\mathbf P^3(\mathbf C)\), hence simply connected.
+
+Full report and exact evidence bundle:
+`notes/2026-07-31-c717-golden-majorana-parity-chambers.md` and
+`notes/golden-tasks/c717-golden-majorana-parity-chambers.{py,json,sha256}`,
+with independent replay
+`notes/golden-tasks/c717-golden-majorana-parity-chambers-replay.py`.

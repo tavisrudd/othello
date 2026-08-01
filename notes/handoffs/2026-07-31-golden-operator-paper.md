@@ -167,6 +167,19 @@ particular:
   and nonchiral witnesses,
   all 21 marked families, the source-label dictionary, and the independent
   replay are in `notes/2026-07-31-c716-golden-two-u1-lines.md`.
+- C717 is complete, research-only, with no manuscript edit.  The oriented
+  real control sphere has exactly 860 gapped chambers: 720 unbalanced
+  chambers (24 for each of 30 sign vectors) and 140 balanced chambers
+  (seven for each of 20 sign vectors).  The generic adjacency graph is
+  connected of diameter ten, has 2,160 edges, and has degree distribution
+  \(3^{720},12^{120},36^{20}\).  Simultaneous closing multiplicities are
+  exactly one, two, four, or six; the common six-wall locus is the reduced
+  fifteen-line unstable base scheme, with generic rank four and the six
+  rank-two C709 dimer vertices.  Each gapped six-Majorana class-D parity
+  component is \(SO(6)/U(3)\cong\mathbf P^3(\mathbf C)\), so there is no
+  protected monodromy or parity pump without added spatial, boundary, or
+  defect structure.  Report and evidence:
+  `notes/2026-07-31-c717-golden-majorana-parity-chambers.md`.
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
@@ -187,14 +200,14 @@ manuscript edit is authorized by C727.
 | task | state | next gate |
 |---|---|---|
 | [C735 — manuscript consolidation](../golden-tasks/c735-golden-manuscript-consolidation.md) | ready; post-C716 consolidation pivot | freeze the placement delta and proof ledger, then complete the operator-first central draft before new exploration |
-| [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
 1. C735 manuscript consolidation and proof architecture.
-2. Reassess C717 only against a named gap in the consolidated manuscript.
+2. Adopt C717 only through C735's manuscript placement ledger; do not edit
+   the paper ad hoc.
 3. Defer C718 and C719 unless C735 identifies a precise theorem-level need.
 
 ## Ownership and allowed paths
