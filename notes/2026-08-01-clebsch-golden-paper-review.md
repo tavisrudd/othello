@@ -1489,3 +1489,146 @@ clause-(iv) banking take — acceptable, since both are our own work; α carries
 verification obligation *before* posting rather than around it — also our own work; and if
 C756 fails outright, α still ships as the §12.5-era strong paper, so the downside of
 building around the spine is only the time spent, which this objective prices at zero.
+
+---
+
+# Follow-up 6 (same date): the portfolio snapshot and the C756 first pass
+
+Sources: `notes/2026-07-31-results-summary-snapshot.md` (read in full) and
+`notes/2026-08-01-c756-all-k-conic-filling.md` with its task card. Everything below marked
+*snapshot-claimed* is material I could not verify against the reviewed manuscripts; the
+C756 note's Lemmas 1–3 and LP bound I did verify (details in §15.2).
+
+## 15. What changes
+
+### 15.1 The scope correction: my binding-constraint verdict was true of five
+manuscripts, not of the program
+
+§12.6's "one exceptional object, no infinite family, no transferable technique" was a
+statement about the reviewed Clebsch/golden group, and within those five texts it stands.
+The portfolio contradicts it as a program-level claim, in four places:
+
+- **Outside the group entirely** (different programs, noted for completeness only):
+  `beyond4_prs` carries complete all-field classifications at redundancies five through
+  seven *plus* a uniform arbitrary-redundancy high-field containment theorem
+  (q ≥ 6r−15+⌊2√(6r−17)⌋), and the AME-LU paper proves local-unitary rigidity for *every*
+  stabilizer AME state at every (m,q). Those are the portfolio's two strongest
+  already-assembled general theorems; if the objective is strongest preprints, they are
+  peers of anything in the Clebsch group and their own lanes should be treated with the
+  same urgency. Not my review scope; one sentence and no more.
+- **Inside the Clebsch orbit, unassigned:** the *Schur–Sarkisov spine* (snapshot-claimed,
+  no manuscript) contains an infinite family — the asymmetric CSS codes
+  [[q+1, 2, (q−5, 4)]]_q for every odd prime power q ≥ 7 — plus the identification of the
+  two Reid-pagoda flop components of the Mukai–Umemura conic link with the two
+  Singleton-defect jet directions of the conic evaluation code. If that identification
+  survives verification it is a headline-grade sentence ("the flop *is* the code defect")
+  and connects directly to Paper III's Hitchin/MU territory.
+- **Adjacent and shipped-ready:** the arcs paper carries the explicit √(2q) additive
+  lower bound for ρ_C(q) and the square-root-arc programme has a genuine infinite-family
+  positive-density construction (the s = 8^m conic-disjoint arcs) — asymptotic content in
+  the same geometric family as the conic-filling problem.
+- **Sitting outside the reviewed texts but belonging in them** (all snapshot-claimed,
+  unverified by me; each needs a check before adoption):
+  1. the decoder equivariant floor — list size five, attained by four decoders, *below*
+     the two size-ten support decoders (snapshot "chirality is not the coarsest
+     equivariant rule") — sharpens Paper I's support-bipartition story and is in neither
+     Paper I nor the companion;
+  2. the dual of the Clebsch code is again a Clebsch hexagon code (self-duality
+     phenomenon) — one sentence Paper I should carry;
+  3. the A₅-symmetric ten-arc with *empty* deep holes ("emptiness is the generic
+     behaviour under icosahedral symmetry; the hexagon is the exception") — exactly the
+     kind of contrast the style guide wants in Paper I's introduction;
+  4. the transversality of the two icosahedral hexads to S(5,6,12) — a scope remark
+     against a Golay/Mathieu misreading;
+  5. for golden: the two by-products the snapshot itself marks "general rather than
+     golden-specific" — universal balanced-cut singular-value moments for every symmetric
+     conference matrix, and the Paley 14/18 censuses with their 3-designs — are
+     transferable-technique content that would blunt my "expert reassembly" criticism of
+     golden if adopted (subject to the C735 placement charter).
+
+### 15.2 C756: the first pass is more than incremental, and it changes the plan's shape
+
+What I verified from the note directly: Lemma 1 (the (E)+(V) split) is immediate; Lemma 2
+(even q impossible, by the nucleus) is complete; Lemma 3's line-count dichotomy checks
+(external point: (q−1)/2 external lines; internal: (q+1)/2; saturation forces
+k = (q+1)/2 all-external or (q+3)/2 all-internal, mixed impossible); and the LP bound
+reproduces q ≤ 5 at k = 4 and q ≤ 11 at k = 6 from the two chord moments and the degree
+cap alone. The q ≤ 43 classification and m(q) values are exhaustive-search claims with a
+genuinely independent replay design (the replay never sees the character criterion or the
+LP), which is the right architecture.
+
+Three consequences, in decreasing order of importance:
+
+1. **The LP bound removes the BBS exposure.** The §2.1 derivation uses only the chord
+   moments and the degree cap — no partial-cover citation — and is at least as strong as
+   the published window at k = 4, 6. Paper I / α should adopt or cite this derivation for
+   its upper bound; §1.1 item 1 (verify BBS Prop 1.5) then downgrades from load-bearing
+   to optional scholarship. This is the single best de-risking event since the review
+   began, and it came from strengthening, not hedging.
+
+2. **The saturation dichotomy is a structural discovery, not bookkeeping.** Both known
+   examples are *exactly* the two saturated types, and the saturated-external family is
+   "a perfect matching of P¹(F_q) with all pairwise resultants non-residues, in general
+   position." That last object is literally Paper II's raw material: the Clebsch hexagon
+   *is* a perfect matching of P¹(F₁₁) (Paper I Def. 2.1 — poles of the six Sylow-fixed
+   chords), and its A₅ stabilizer identifies it with the base matching of Paper II's
+   Ω_{H₃} orbit. Neither the C756 note nor Paper II states this identification; it should
+   be stated in α and echoed in β — it upgrades the program's coherence from "same
+   object, three viewpoints" to "the classification problem *terminates in* the matching
+   orbit the factorization paper classifies."
+
+3. **The hard core is now correctly named, and it lowers the full-theorem odds.** The
+   note proves counting cannot finish (k_min and m(q) both √(2q)+O(1), alternating
+   winner) and identifies the remaining obstacle as m(q) < √(2q)+O(1) — a clique bound
+   in a Paley-type graph on q² vertices whose true clique number is q (attained by
+   external lines), so the general-position hypothesis must carry the whole argument, in
+   exactly the regime where Paley clique bounds are open. My §12.6/§14.2 estimate of
+   30–40% assumed the passant-code/second-moment routes were live; Lemma 3 achieves the
+   lower-edge idea more cleanly than my sketch, and the m(q) diagnosis shows the
+   remaining gap is harder than I priced. **Revised: full all-k theorem with current
+   tools ~20%; the *saturated-branch* classification alone ("every saturated
+   conic-filling arc has q = 5 or 11", i.e. the matching-character problem) is
+   meaningfully more tractable and is now the right named subgoal.**
+
+**Plan change this forces (amending §14.2):** stop treating C756 as
+land-the-theorem-or-nothing. The partials — split, even-q, resultant characterization,
+LP bound, dichotomy, q ≤ 43 classification with independent replay — are strong enough to
+ship *inside α now* as a "towards all k" section, with two named open problems: the
+saturated matching-character problem and the m(q) growth problem (stated with its Paley
+connection, which is a memorability asset — "the Clebsch hexagon is the extremal case of
+a Paley-type clique problem in general position" travels well). α no longer waits on
+anything mathematical; the full theorem, if it lands, is α's v2 or sequel. This resolves
+the §14.2 decision-rule tension in favor of shipping.
+
+### 15.3 Partition, sequencing, headlines, grades
+
+- **Grades: unchanged.** I graded the manuscripts as texts; the snapshot changes what is
+  *available*, not what is written.
+- **Partition: one amendment and one candidate.** α absorbs C756 §§1–3 (and drops the
+  BBS dependency). New candidate sixth unit: the Schur–Sarkisov spine as its own
+  manuscript once verified — its audience (birational geometry + quantum codes) overlaps
+  γ's but its content is distinct enough that folding it into γ would recreate the
+  mega-paper failure mode; it should cite Paper III (shared MU/Hitchin substrate) and the
+  repair-ports paper (the port E = R₂). This is an assignment recommendation, not a
+  review: I have not verified one line of it.
+- **Sequencing: unchanged** (§14.3's two waves), with α's wave-1 content now larger and
+  strictly stronger. The unassigned Paper I/companion items of §15.1 should be
+  adopted-or-rejected before wave 1, since they are one-sentence-to-one-paragraph
+  additions.
+- **Headlines: α's improves.** The abstract can now carry three legs: rigidity; the
+  two-cubics identity; and "both known conic-filling arcs are the two saturated types,
+  and here is the exact dichotomy" — with the all-k conjecture stated as the program's
+  named target rather than an absence.
+
+### 15.4 Is there a better spine than the all-k classification?
+
+No — with a reframing. Within the Clebsch program the all-k classification remains the
+spine, but the spine's *deliverable* is now the structure theory (dichotomy + matching
+characterization + named hard problem), with the full theorem as its summit rather than
+its entry fee. The one candidate that could compete — the Schur–Sarkisov spine, which
+already connects the code to Fano birational geometry and produces an infinite quantum
+family — is snapshot-claimed and unreviewed; until it is verified it is a candidate, not
+a spine. At portfolio level, beyond4_prs and AME-LU are arguably stronger single papers
+than anything here, but they are different programs with their own lanes; the only
+cross-program action this review recommends is that their readiness be weighed by the
+same strength-first standard before the Clebsch waves monopolize attention.
