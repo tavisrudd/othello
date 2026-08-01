@@ -8,15 +8,25 @@ split into O1--O8 and must remain packet-gated.
 
 ## Current implementation state
 
-The first source-owned prose repair has begun in
-`lean/RelativeConicArcs/Q11A5PointOrbits.lean` and
-`lean/RelativeConicArcs/Q11A5PointOrbitsData.lean`: the misleading
-“reflected” terminology and “opaque certificates” wording are corrected in
-the working tree.  These two paths remain deliberately uncommitted.  A guarded
-single-file elaboration of `Q11A5PointOrbitsData.lean` ended with exit 137
-before Lean emitted a diagnostic, so the unchanged invocation must not be
-repeated.  The generated-banner repair, regeneration, and standalone
-synchronization have not started in the authoritative tree.
+R1 is complete at `c9dd5421`.  The committed projective normalization,
+one-factorization extraction, and affine parallelism modules now feed the
+terminal theorem
+`RelativeConicArcs.OddSixArcPrismExtraction.sixArc_uncoveredOnLine_card_le_order_sub_five`.
+Its guarded elaboration is green, and its printed axiom set contains only
+`propext`, `Classical.choice`, and `Quot.sound`.
+
+The finite source-owned prose repairs are implemented in the authoritative
+working tree.  The q11 generator now emits the correct repository-relative
+banner, and regeneration changed exactly 55 arithmetic leaves and 11
+aggregators.  The misleading “reflected” terminology, “opaque certificates”
+wording, and the status-language sentence in `SmallKChordMoments.lean` are
+repaired.  `SmallKChordMoments.lean` elaborates cleanly; the q11 generated
+bundle remains uncommitted pending its serialized package gate.  The prior
+direct elaboration of `Q11A5PointOrbitsData.lean` ended with exit 137 before
+Lean emitted a diagnostic and must not be repeated unchanged.  The first
+serialized replacement run correctly refused because the Paper II structural
+gate already owned the shared build window; retry only after that foreign run
+releases the lock.
 
 ## Objective
 
