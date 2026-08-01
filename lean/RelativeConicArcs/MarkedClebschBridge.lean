@@ -42,7 +42,8 @@ def sheetConference (negativeSheet : Bool) : Matrix (Fin 6) (Fin 6) K :=
 
 /-- Deck exchange negates the sheet conference matrix. -/
 theorem sheetConference_not (negativeSheet : Bool) :
-    sheetConference (!negativeSheet) = -sheetConference negativeSheet := by
+    sheetConference (K := K) (!negativeSheet) =
+      -sheetConference (K := K) negativeSheet := by
   cases negativeSheet <;> simp [sheetConference]
 
 /-- The oriented triangle cubic attached to a normalized sheet. -/
