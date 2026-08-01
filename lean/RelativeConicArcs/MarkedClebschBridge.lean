@@ -92,4 +92,14 @@ theorem neg_neg_chartLift
     -(-m.chartLift) = m.chartLift := by
   simp
 
+/-- Scaling the sum-zero chart parameter scales the chosen normalized lift
+by the same scalar.  Thus chart scale remains an explicit input rather than
+an extra sign or normalization hidden in the bridge. -/
+theorem chartLift_smul
+    {Axis Plane Face H : Type*} [AddCommGroup H] [Module K H]
+    (m : MarkedBridgeDatum K Axis Plane Face H)
+    (c : K) (y : standardSubmodule (K := K)) :
+    m.chartLift (c • y) = c • m.chartLift y := by
+  exact map_smul m.chartLift c y
+
 end RelativeConicArcs.MarkedClebschBridge
