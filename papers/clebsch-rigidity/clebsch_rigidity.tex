@@ -379,8 +379,9 @@ Theorem~\ref{lem:chord-defect}, on the other hand, gives
  |\cU(A)|=22-c(A),
 \]
 where $c(A)$ counts the nonvertex triple-chord concurrences, namely Dye's
-Brianchon points.  Dye proves $c(A)\le10$, with equality precisely on one
-$\mathrm{PGL}_3(K)$-orbit~\cite[\S2.2--2.3, Theorem~1,
+Brianchon points.  Dye proves $c(A)\le10$, with the equality cases, when
+they occur, forming one $\mathrm{PGL}_3(K)$-orbit
+\cite[\S2.2--2.3, Theorem~1,
 pp.~275--276]{Dye1991}.  Thus $|\cU(A)|\ge12$.  Both bounds are equalities:
 $c(A)=10$, so $A$ is a Clebsch hexagon.
 
@@ -1159,11 +1160,22 @@ B=\begin{pmatrix}
 A two-distance calculation on the pentagon gives zero for every
 off-diagonal entry of $B^2$, while its diagonal entries are five. Hence
 $B^2=5I$.
+Since $A-A'$ vanishes on the fibre-even lattice and acts as $2B$ on
+$L^-$, this also gives the full orbital identity
+\[
+ (A-A')^2=10(I-R).
+\]
 
 Its triangle products are switching-invariant. They are constant on the
 two $A_5$-orbits of three-subsets, take opposite values on complementary
 triples, and are not constant; after choosing the overall sign of $C$ they
-are exactly the coefficients $c_{ijk}$.  Conversely, they satisfy
+are exactly the coefficients $c_{ijk}$. For example,
+\[
+ c_{012}=B_{01}B_{12}B_{20}=1,
+ \qquad c_{345}=B_{34}B_{45}B_{53}=-1.
+\]
+These triples are complementary, so $A_5$-invariance proves the sign rule
+on both orbits. Conversely, the coefficients satisfy
 \[
  c_{ijk}c_{ij\ell}c_{ik\ell}c_{jk\ell}=1
  \qquad(i<j<k<\ell).
@@ -1236,19 +1248,33 @@ the five-dimensional summand in
  \operatorname{Hom}_E(V_+,V_-)\cong V_4\oplus V_5;
 \]
 this is the standard tensor-product rule $V_3\otimes V_{3'}=V_4\oplus V_5$.
-Let $\Lambda\cong V_4$ be its trace-orthogonal complement in the dual
-matrix space. We only need to know that determinant does not vanish on
-$\Lambda$. In the eigenbases above, a direct trace check gives the witness
+Pair the two matrix spaces by
 \[
- \Psi=\begin{pmatrix}
- 0&2(\sqrt5-1)&\sqrt5-4\\
- 1&0&0\\
- 0&1&0
- \end{pmatrix}\in\Lambda,
- \qquad \det(\Psi)=\sqrt5-4\ne0.
+ \langle\Psi,\Phi\rangle=\operatorname{tr}(\Psi\Phi),
 \]
-Thus determinant does not vanish on $\Lambda$; its restriction is an
-$A_5$-invariant cubic. The character
+and let $\Lambda\cong V_4$ be the orthogonal complement of the image. In
+the displayed eigenbases, solving the six coefficient equations
+$\operatorname{tr}(\Psi\Phi_x)=0$ gives the four-dimensional solution
+space
+\[
+ \Psi_z=\begin{pmatrix}0&a(z)&b(z)\\z_0&0&z_1\\z_2&z_3&0\end{pmatrix},
+ \qquad z=(z_0,z_1,z_2,z_3),
+\]
+where
+\[
+\begin{aligned}
+a(z)&=(\sqrt5-1)z_0+\frac{3-\sqrt5}{2}z_1
+      +\frac{\sqrt5-5}{2}z_2+(\sqrt5-1)z_3,\\
+b(z)&=\frac{\sqrt5-5}{2}z_0+(1-\sqrt5)z_1
+      +(\sqrt5-1)z_2+\frac{\sqrt5-3}{2}z_3.
+\end{aligned}
+\]
+Thus this family is all of $\Lambda$, and
+\[
+ \det(\Psi_z)=a(z)z_1z_2+b(z)z_0z_3.
+\]
+At $z=(1,0,0,1)$ the determinant is $\sqrt5-4\ne0$. Hence determinant
+restricts to a nonzero $A_5$-invariant cubic on $\Lambda$. The character
 $\chi_{V_4}=(4,0,1,-1,-1)$ on the classes
 $1,2,3,5A,5B$ gives the symmetric-cube character $(20,0,2,0,0)$, hence
 \[
