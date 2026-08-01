@@ -38,40 +38,49 @@ conditional on this strengthening pass.
    record its exact mathematical output, where it enters the proof, and
    whether it is eliminable, reducible to a normalization witness, or genuinely
    irreducible.
-2. Reconstruct the incidence and descent argument from universal properties.
+2. Build a degrees-of-freedom and magic-number ledger.  Track every scalar,
+   sign, ordering, basis, representative, label, chart lift, field extension,
+   denominator, conductor, and exceptional prime.  Each must be forced by a
+   universal property or normalization, quotiented by a stated symmetry,
+   proved irrelevant, or retained as an explicit parameter with a precise
+   owning theorem.  Derive constants such as `5`, `2`, `16`, the Petersen
+   quadratic factor, and the Gaunt scalar from structural indices, norms,
+   characters, multiplicities, or one canonical test vector; distinguish
+   intrinsic numbers from artifacts of convention.
+3. Reconstruct the incidence and descent argument from universal properties.
    Seek one clean quadratic-cover/Stein-algebra theorem that forces the
    anti-invariant summand, multiplication by `5J_0`, chart pullback, branch
    behavior, and deck action without promoting a function-field identity to a
    scheme theorem.
-3. Replace the coordinate-heavy descended chart singularity by an intrinsic
+4. Replace the coordinate-heavy descended chart singularity by an intrinsic
    pinching or fibre-product lemma for two Galois-conjugate linear spaces.
    Derive its normalization, conductor, and defect module functorially.
-4. Package the golden fibre, deck exchange, Galois action, conference sign,
+5. Package the golden fibre, deck exchange, Galois action, conference sign,
    and spinor class as characters of the natural marked torsor or normalizer.
    Keep the C733 marking boundary exact: prove every asserted independence and
    display every surviving choice.
-5. Determine whether the Petersen four-space and degree-six harmonic cubic
+6. Determine whether the Petersen four-space and degree-six harmonic cubic
    arise from a natural covariant, transvectant, moment map, or geometric
    construction.  A representation-theoretic nonexistence theorem for an
    ambient bridge is an equally valid structural outcome.  Derive the Gram
    spectrum and cubic scalar from multiplicity one and the smallest possible
    normalization calculation.
-6. Press `ARITH-2` for a uniform quadratic-form or group-scheme statement that
+7. Press `ARITH-2` for a uniform quadratic-form or group-scheme statement that
    explains the separate `[5]` and `[2]` characters and their bad-prime
    boundaries.  Retain reflection matrices only as transparent witnesses.
-7. Rewrite the manuscript proofs around the resulting causal order.  Give
+8. Rewrite the manuscript proofs around the resulting causal order.  Give
    each definition one role, expose every change of field or quotient, and
    remove duplicated calculations, administrative trust prose, and notation
    that no longer carries mathematical work.
-8. Reconcile the proof ledger, verification README, evidence bundles, and
+9. Reconcile the proof ledger, verification README, evidence bundles, and
    trust manifest with the new proof spine.  Delete a computation from the
    paper-facing surface when a structural proof supersedes it; retain compact
    exact audits only where they still certify a real finite or normalization
    leaf.
-9. Run the ordinary and isolated paper gates, inspect the revised proof pages,
+10. Run the ordinary and isolated paper gates, inspect the revised proof pages,
    and obtain fresh independent reads from the Hitchin/Manivel/Dolgachev,
    Conrad/Auel/Eisenbud, and harmonic-analysis viewpoints.
-10. After the main acceptance gate passes, run distinct `ej` and Tao-style
+11. After the main acceptance gate passes, run distinct `ej` and Tao-style
     closeout passes, do every free task-owned strengthening they expose, and
     freeze the C745 declaration-level interface and mystery ledger.
 
@@ -79,6 +88,10 @@ conditional on this strengthening pass.
 
 - Every paper-facing computation or certificate has an explicit structural
   disposition; none remains merely because it already exists.
+- No loose degree of freedom or magic number remains implicit.  The final
+  ledger gives the structural origin and invariance status of every choice and
+  constant, and assigns any genuine residual mystery to an exact evidence gap
+  or successor rather than concealing it in notation.
 - The normalization, conductor, torsor, spinor, Petersen, and harmonic
   arguments use invariant or functorial mechanisms wherever one is available.
 - Any surviving coordinate calculation fixes a stated scalar, sign, or finite

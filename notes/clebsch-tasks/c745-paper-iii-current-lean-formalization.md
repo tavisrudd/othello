@@ -29,6 +29,9 @@ and validates the exact source closure.
 1. Freeze a five-row theorem map for `ARITH-1`, `ARITH-2`, `ORIENT-1`,
    `HARM-1`, and `HARM-2`, with an explicit correspondence theorem between
    manuscript definitions and Lean definitions before claiming coverage.
+   Import C744's degrees-of-freedom and magic-number ledger as a formalization
+   checklist: every choice and coefficient must appear as a parameter,
+   quotient, invariance theorem, or derived constant rather than hidden data.
 2. Build the reusable quadratic-cover layer required by C744's proof:
    involution/trace splitting, anti-invariant rank-one summand, multiplication
    law, branch section, and the normalization or Stein interface actually used
@@ -65,6 +68,9 @@ and validates the exact source closure.
   paper spillover.
 - Every claimed formal row matches the manuscript statement in hypotheses,
   field, marking, normalization, and scheme-theoretic strength.
+- Every scalar, sign, labeling choice, denominator, and exceptional prime in
+  the formal surface has a named derivation or invariance statement; Lean does
+  not merely verify unexplained literal constants inherited from a replay.
 - The proof terms expose the structural mechanisms frozen by C744; native
   decision or finite data do not replace a conceptual theorem.
 - The source build, exact-target freshness check, axiom audit, paper-local
