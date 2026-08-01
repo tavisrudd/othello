@@ -77,6 +77,11 @@ The even block has characteristic polynomial \(X^2-20X+48\); the odd block
 has an eigenvalue-four dark line, and its quotient spectrum is exactly three
 times the even spectrum.  This explains the shared splitting field
 \(\mathbf Q(\sqrt {13})\) by the marked coset-intersection operator.
+The threefold copy lifts to an integral intertwiner \(Q^-T=3TQ^+\).
+All such intertwiners form a binary quadratic lattice of discriminant 52;
+adjoining the eigenvalue-four dark line has minimum index 26, with an exact
+mod-13 dependence.  Thus 13 is also the integral gluing obstruction between
+the antipode sectors.
 
 Exactly one, two, four, or six Hamiltonians can close simultaneously.  The
 common six-wall locus is the fifteen-line unstable base scheme; its generic

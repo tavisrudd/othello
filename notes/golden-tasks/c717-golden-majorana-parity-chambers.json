@@ -98,9 +98,27 @@
         "exponent": 9
       }
     ],
+    "even_to_odd_threefold_intertwiner": [
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        4,
+        4
+      ]
+    ],
     "gram_size": 140,
+    "integral_intertwiner_family": "T(a,b)=((a,b),(4a-4b,-3a+2b),(4a,4b)); adjoining dark has determinant 26(3a^2+2ab-4b^2)",
+    "intertwiner_norm_form": "3(3a^2+2ab-4b^2)=Norm_{Q(sqrt(13))/Q}(3a+(1+sqrt(13))b)",
+    "intertwiner_plus_dark_line_index": 26,
     "kernel": "span of the two differences among the three orbitwise all-ones vectors",
     "minimal_polynomial_degree": 18,
+    "mod13_column_relation": "6*T_column_1 + 2*T_column_2 + dark = 0",
     "rank": 138,
     "specht_block_characteristic_polynomials_ascending": {
       "(3,2,1)": [

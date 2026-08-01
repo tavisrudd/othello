@@ -722,6 +722,37 @@ def build():
         sum(antipode_odd_matrix[row][column] * odd_dark_vector[column] for column in range(3))
         for row in range(3)
     ) == tuple(4 * value for value in odd_dark_vector)
+    even_to_odd_intertwiner = ((1, 1), (0, -1), (4, 4))
+    assert tuple(
+        tuple(
+            sum(antipode_odd_matrix[row][k] * even_to_odd_intertwiner[k][column] for k in range(3))
+            for column in range(2)
+        )
+        for row in range(3)
+    ) == tuple(
+        tuple(
+            3 * sum(even_to_odd_intertwiner[row][k] * antipode_even_matrix[k][column] for k in range(2))
+            for column in range(2)
+        )
+        for row in range(3)
+    )
+    gluing_matrix = tuple(
+        (even_to_odd_intertwiner[row][0], even_to_odd_intertwiner[row][1], odd_dark_vector[row])
+        for row in range(3)
+    )
+    gluing_determinant = (
+        gluing_matrix[0][0]
+        * (gluing_matrix[1][1] * gluing_matrix[2][2] - gluing_matrix[1][2] * gluing_matrix[2][1])
+        - gluing_matrix[0][1]
+        * (gluing_matrix[1][0] * gluing_matrix[2][2] - gluing_matrix[1][2] * gluing_matrix[2][0])
+        + gluing_matrix[0][2]
+        * (gluing_matrix[1][0] * gluing_matrix[2][1] - gluing_matrix[1][1] * gluing_matrix[2][0])
+    )
+    assert gluing_determinant == 26
+    assert all(
+        (6 * even_to_odd_intertwiner[row][0] + 2 * even_to_odd_intertwiner[row][1] + odd_dark_vector[row]) % 13 == 0
+        for row in range(3)
+    )
 
     boolean = Counter()
     boolean_examples = {}
@@ -866,6 +897,11 @@ def build():
             "standard_antipode_odd_matrix": antipode_odd_matrix,
             "standard_antipode_odd_eigenvalue_4_vector": odd_dark_vector,
             "sqrt13_mechanism": "the odd block modulo its eigenvalue-4 line has spectrum exactly three times the even block spectrum",
+            "even_to_odd_threefold_intertwiner": even_to_odd_intertwiner,
+            "intertwiner_plus_dark_line_index": gluing_determinant,
+            "mod13_column_relation": "6*T_column_1 + 2*T_column_2 + dark = 0",
+            "integral_intertwiner_family": "T(a,b)=((a,b),(4a-4b,-3a+2b),(4a,4b)); adjoining dark has determinant 26(3a^2+2ab-4b^2)",
+            "intertwiner_norm_form": "3(3a^2+2ab-4b^2)=Norm_{Q(sqrt(13))/Q}(3a+(1+sqrt(13))b)",
         },
         "boolean_census": [
             {

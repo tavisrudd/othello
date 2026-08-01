@@ -187,7 +187,10 @@ particular:
   \(16\cdot13\); its odd block has one eigenvalue-four dark line and a
   residual packet exactly three times the even packet.  Hence
   \(\mathbf Q(\sqrt {13})\) is an explained coset-spectral field, distinct
-  from the Golden coefficient field \(\mathbf Q(\sqrt5)\).
+  from the Golden coefficient field \(\mathbf Q(\sqrt5)\).  The scaling
+  lifts to an integral intertwiner \(Q^-T=3TQ^+\); its complete
+  two-parameter lattice has discriminant 52, and adjoining the odd dark line
+  has minimum index 26 with an exact mod-13 dependence.
   Simultaneous closing multiplicities are
   exactly one, two, four, or six; the common six-wall locus is the reduced
   fifteen-line unstable base scheme, with generic rank four and the six

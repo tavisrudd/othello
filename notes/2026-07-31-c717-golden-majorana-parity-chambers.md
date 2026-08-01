@@ -504,6 +504,59 @@ double-coset intersection operator.  The factor three is also the
 stabilizer-order ratio \(|H|/|K_\pm|=36/12\).  The field and its repeated
 packet are therefore consequences of the marked subgroup triple together
 with antipodal symmetry, rather than unexplained numerical coincidences.
+
+The threefold spectral copy lifts to an operator identity.  In the even and
+odd bases above, put
+
+\[
+ T=\begin{pmatrix}1&1\\0&-1\\4&4\end{pmatrix}.
+\]
+
+Then
+
+\[
+ Q^-T=3TQ^+.
+\]
+
+Solving this intertwining equation over \(\mathbf Q\) gives every solution
+as
+
+\[
+ T(a,b)=
+ \begin{pmatrix}
+ a&b\\4a-4b&-3a+2b\\4a&4b
+ \end{pmatrix}.
+\]
+
+Consequently an integral intertwiner has \(a,b\in\mathbf Z\).  If
+\(d=(5,2,-6)^{\mathsf T}\) is the dark vector, then
+
+\[
+ \det[\,T(a,b)\mid d\,]
+ =26(3a^2+2ab-4b^2).
+\]
+
+The primitive binary quadratic form on the right has discriminant 52 and
+satisfies
+
+\[
+ 3(3a^2+2ab-4b^2)
+ =N_{\mathbf Q(\sqrt {13})/\mathbf Q}
+   \bigl(3a+(1+\sqrt {13})b\bigr).
+\]
+
+Thus the rational even--odd correspondence cannot be made unimodular on
+the natural centered-membership lattices: every nonzero integral
+intertwiner, together with the dark line, has index at least 26, attained
+at \(a=b=1\).  Modulo 13 the primitive columns obey
+
+\[
+ 6T_1+2T_2+d=0.
+\]
+
+So 13 is also the exact modular obstruction to gluing the antipode-even
+packet and the odd dark line into the full standard lattice.  This is a
+coset-incidence bad prime, not a bad prime of the original Majorana family.
 In particular \(Q\) has rank 138.  If
 \({\bf1}_H,{\bf1}_{K_+},{\bf1}_{K_-}\) denote the three orbitwise constant
 vectors, then
@@ -645,8 +698,10 @@ central-idempotent computation using the standard character
 moments and thereby labels the last two equal-dimensional Specht blocks.
 The generator then constructs the five centered block-membership functions,
 checks the displayed integer multiplicity and antipode matrices entry by
-entry, and verifies the even/odd decomposition.  The replay reconstructs
-the subgroup point orbits independently and repeats those checks.
+entry, verifies the even/odd decomposition and the integral threefold
+intertwiner, and records its index-26 gluing obstruction.  The replay
+reconstructs the subgroup point orbits independently and repeats those
+checks.
 The irreducibility, intersection multiplicity rule, connectedness lemma, and
 topological obstruction are human arguments above; they are not inferred
 from finite sampling.
@@ -691,6 +746,13 @@ even packet.  This separates the original Golden coefficient field
 \(\mathbf Q(\sqrt5)\) from a new but fully explained spectral splitting
 field \(\mathbf Q(\sqrt {13})\).
 
+The final cheap upgrade lifts this spectral statement to the integral
+intertwiner \(Q^-T=3TQ^+\).  The complete rational intertwiner family is a
+binary quadratic lattice of discriminant 52; adjoining the dark line has
+minimum index 26 and produces an exact mod-13 column relation.  Hence the
+prime 13 governs integral parity-sector gluing as well as eigenvalue
+splitting.
+
 ## Mystery ledger
 
 - **Settled:** 860 connected real cube chambers, with 50 sign vectors and
@@ -718,6 +780,11 @@ field \(\mathbf Q(\sqrt {13})\).
   after removing the odd eigenvalue-four dark line, the odd packet is its
   exact threefold spectral copy.  The shared discriminant is therefore
   structural, not accidental.
+- **Settled by the final `ej` pass:** the threefold copy is realized by an
+  explicit integral intertwiner.  Its full two-parameter lattice has norm
+  form of discriminant 52, and its primitive gluing with the dark line has
+  minimum index 26 and a mod-13 dependence.  This identifies the exact
+  integral obstruction behind the spectral field.
 - **Generalized:** the exclusion of singleton signs holds for every real
   system with vanishing first and third moments, and every sign pattern with
   at least two entries of each sign is realizable.  Only the finer coset

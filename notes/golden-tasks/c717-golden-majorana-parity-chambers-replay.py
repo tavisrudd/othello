@@ -436,6 +436,25 @@ def main():
         [-8, 12, -4],
         [48, -24, 36],
     ]
+    even_matrix = ((8, 6), (8, 12))
+    odd_matrix = ((16, -6, 8), (-8, 12, -4), (48, -24, 36))
+    intertwiner = ((1, 1), (0, -1), (4, 4))
+    dark = (5, 2, -6)
+    assert tuple(
+        tuple(sum(odd_matrix[row][k] * intertwiner[k][column] for k in range(3)) for column in range(2))
+        for row in range(3)
+    ) == tuple(
+        tuple(3 * sum(intertwiner[row][k] * even_matrix[k][column] for k in range(2)) for column in range(2))
+        for row in range(3)
+    )
+    gluing = tuple((intertwiner[row][0], intertwiner[row][1], dark[row]) for row in range(3))
+    determinant = (
+        gluing[0][0] * (gluing[1][1] * gluing[2][2] - gluing[1][2] * gluing[2][1])
+        - gluing[0][1] * (gluing[1][0] * gluing[2][2] - gluing[1][2] * gluing[2][0])
+        + gluing[0][2] * (gluing[1][0] * gluing[2][1] - gluing[1][1] * gluing[2][0])
+    )
+    assert determinant == data["balanced_incidence_spectrum"]["intertwiner_plus_dark_line_index"] == 26
+    assert all((6 * intertwiner[row][0] + 2 * intertwiner[row][1] + dark[row]) % 13 == 0 for row in range(3))
 
     # A second direct implementation checks all 64 Boolean controls and ranks.
     boolean = Counter()
@@ -464,7 +483,7 @@ def main():
         assert sum(entry**3 for entry in amplitudes) == 0
         checked += 1
     assert checked == 3125
-    print("replayed 860 chambers, antipodal sqrt(13) mechanism, 64 Boolean controls, and 3125 identity points")
+    print("replayed 860 chambers, index-26 sqrt(13) intertwiner, 64 Boolean controls, and 3125 identity points")
 
 
 if __name__ == "__main__":
