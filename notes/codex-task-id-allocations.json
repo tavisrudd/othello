@@ -1817,8 +1817,26 @@
       "last": 735,
       "purpose": "post-charter manuscript consolidation, proof ledger, and revised placement architecture",
       "sequence": 202
+    },
+    {
+      "count": 1,
+      "first": 736,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 736,
+      "purpose": "Hadamard order 668 structured Legendre-pair attack",
+      "sequence": 203
+    },
+    {
+      "count": 1,
+      "first": 737,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 737,
+      "purpose": "Exact maximum equiangular lines in dimension 18",
+      "sequence": 204
     }
   ],
-  "next_id": 736,
+  "next_id": 738,
   "schema": "codex-task-id-allocations-v1"
 }
