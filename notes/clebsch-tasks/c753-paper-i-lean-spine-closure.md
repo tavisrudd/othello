@@ -47,6 +47,14 @@ shipped with the module.  The prism transitive closure also needs timeless
 line-bound wording and docstrings on the public cross-module helpers before R1
 is referee-ready; these are prose repairs, not theorem changes.
 
+The same no-grandfathering pass applies to the q11 row leaves.  The regenerated
+action rows and the pre-existing matrix, support, and fixed-point shards export
+cross-module certificate declarations without declaration-level mathematical
+docstrings.  Their module headers state the finite mechanism correctly, but the
+public row declarations still need concise domain, conclusion, and kernel-check
+descriptions in their owning sources before the transitive artifact prose gate
+can close.
+
 ## Objective
 
 Implement the frozen C752 interface so the Paper I Lean development follows
