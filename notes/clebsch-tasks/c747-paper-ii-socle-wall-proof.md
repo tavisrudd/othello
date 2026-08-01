@@ -19,6 +19,17 @@ connecting class in
 \(\operatorname{Ext}^1_G(S^\delta,\operatorname{Sym}^2F)\). This includes the formerly hidden
 principal-projective possibility.
 
+Prefer the pushout formula from C746:
+\[
+ \delta_{S^\delta}(i_\delta)
+ =i_\delta^*\pi_*(F\otimes\xi),
+\]
+where \(\xi\) is the affine-extension class and
+\(\pi:F\otimes F\twoheadrightarrow\operatorname{Sym}^2F\) is the canonical
+quotient \(\pi(f\otimes f')=ff'\). Test whether
+this symmetrized Yoneda product gives a uniform structural proof before
+retaining any correction-row scalar.
+
 ## Proof standard
 
 - Begin from standard highest-weight, Frobenius-twist, and

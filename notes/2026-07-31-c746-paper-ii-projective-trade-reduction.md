@@ -72,6 +72,21 @@ map
 \]
 and the second alternative says \(\delta_T(i)=0\).
 
+There is also a coordinate-free description of this connecting class. If
+\(\xi\in\operatorname{Ext}^1_G(k,F)\) is the original affine-extension
+class and
+\(\pi:F\otimes F\twoheadrightarrow\operatorname{Sym}^2F\) is the canonical
+quotient \(\pi(f\otimes f')=ff'\), then
+\[
+ \delta_T(i)=i^*\pi_*(F\otimes\xi).
+\]
+Indeed, over \(F\subset E\), the quadratic extension is the pushout of
+\[
+ 0\to F\otimes F\to F\otimes E\to F\to0
+\]
+along \(\pi\). Thus C747 may attack a symmetrized Yoneda product rather than
+the quadratic module in coordinates.
+
 Thus a sheet-sign kernel is impossible as soon as one parity \(S^\delta\)
 satisfies
 \[
@@ -147,6 +162,15 @@ The reader also caught three C746 presentation issues, now repaired:
   single connecting-map statement
   \(\delta_{S^\delta}(2a|_{S^\delta})\ne0\). This is the minimal
   representation-specific datum and the natural C747 theorem statement.
+- **Settled by the user-requested ej pass:** the connecting class is the
+  pullback \(i_\delta^*\pi_*(F\otimes\xi)\) of the symmetrized tensor of the
+  original affine class. This supplies C747 a functorial replacement for the
+  proposed correction-row computation; whether that product can be shown
+  nonzero uniformly is now C747's main structural opportunity.
+- **Cold-check GO on the ej addition:** the pushout and Ext variance are
+  correct. The final wording fixes \(\pi\) as the canonical quotient rather
+  than the ambiguously normalized “symmetrizer,” and fixes \(\delta\) to be
+  the Yoneda pullback convention, so no hidden factor or sign remains.
 - **Open, owned by C747:** prove that every \(\lambda>1\) matching sheet
   supplies the simple submodule required by the quadratic pullback
   obstruction, including any principal-cover and characteristic-three
