@@ -1979,8 +1979,17 @@
       "last": 757,
       "purpose": "settle the Golden determinantal cubic-wall node count and classical comparison",
       "sequence": 220
+    },
+    {
+      "count": 1,
+      "first": 758,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 758,
+      "purpose": "Formalize the Golden six-node cubic-wall and projective-frame consequences in Lean",
+      "sequence": 221
     }
   ],
-  "next_id": 758,
+  "next_id": 759,
   "schema": "codex-task-id-allocations-v1"
 }
