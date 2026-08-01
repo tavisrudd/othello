@@ -1808,8 +1808,17 @@
       "last": 734,
       "purpose": "formalize Clebsch extremal-syndrome bridge and restructure the manuscript proof spine",
       "sequence": 201
+    },
+    {
+      "count": 1,
+      "first": 735,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 735,
+      "purpose": "post-charter manuscript consolidation, proof ledger, and revised placement architecture",
+      "sequence": 202
     }
   ],
-  "next_id": 735,
+  "next_id": 736,
   "schema": "codex-task-id-allocations-v1"
 }
