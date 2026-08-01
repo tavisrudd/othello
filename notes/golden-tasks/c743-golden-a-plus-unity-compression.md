@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** ready; direct successor to C742 and higher priority than the deferred physical branches
+**Status:** complete; externally cold-read after the generator-explicit repair, with no mathematical blocker
 
 **Manuscript gate:** research-only.  Do not edit `papers/golden-operator/`,
 its verification surface, or C735's manuscript architecture/length ledger

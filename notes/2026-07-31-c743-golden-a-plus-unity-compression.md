@@ -1618,6 +1618,12 @@ task.
 | whether another current compression survives the simplicity review | settled by Rounds 5 and 6 | two consecutive post-Theorem-6.1 portfolios found no further arrow or deleted obligation |
 
 The local nilpotent-structure gap, global off-node exclusion, and required
-saturation review are closed.  The compactified-moduli branch is genuinely
-separate and requires a future allocation.  C743 remains active for external
-review before any closeout decision.
+saturation review are closed.  A blind cold read of the old and revised proof
+spines selected the revision, and a second read after the generator-explicit
+repair found no remaining mathematical blocker.  The remaining requests are
+implementation refinements: cite the exact saturated-slice result, state the
+precise equality used for the five-point generator module, make the density
+step in reverse containment explicit, and measure the eventual page reduction.
+The compactified-moduli branch is genuinely separate and requires a future
+allocation.  C743 is complete; manuscript implementation remains separately
+authorized work.
