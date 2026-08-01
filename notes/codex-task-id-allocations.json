@@ -1997,8 +1997,17 @@
       "last": 759,
       "purpose": "Generate external formalization manifest and headline theorem index from trust spine; pilot second-kernel replay only after toolchain gate",
       "sequence": 222
+    },
+    {
+      "count": 1,
+      "first": 760,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 760,
+      "purpose": "Spike reusable Ten Proofs methods against finite-geometry frontiers: moving-projection Gram bounds and algebraic moment reconstruction",
+      "sequence": 223
     }
   ],
-  "next_id": 760,
+  "next_id": 761,
   "schema": "codex-task-id-allocations-v1"
 }
