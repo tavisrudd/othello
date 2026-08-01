@@ -1988,8 +1988,17 @@
       "last": 758,
       "purpose": "Formalize the Golden six-node cubic-wall and projective-frame consequences in Lean",
       "sequence": 221
+    },
+    {
+      "count": 1,
+      "first": 759,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 759,
+      "purpose": "Generate external formalization manifest and headline theorem index from trust spine; pilot second-kernel replay only after toolchain gate",
+      "sequence": 222
     }
   ],
-  "next_id": 759,
+  "next_id": 760,
   "schema": "codex-task-id-allocations-v1"
 }
