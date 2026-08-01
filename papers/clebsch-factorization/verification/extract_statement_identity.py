@@ -19,6 +19,7 @@ EXPECTED_LABELS = (
     "thm:factorization-recovery",
     "prop:matching-secant-quotient",
     "lem:projective-trade-reduction",
+    "lem:lucas-socle-first-wall",
     "lem:uniform-sheet-exclusion",
     "thm:balanced-orbit-completeness",
     "lem:shared-radial-cycle",

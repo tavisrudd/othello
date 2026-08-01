@@ -426,6 +426,251 @@ More concretely, choose the same vector-space lift \(e\) and put
 Changing \(e\) changes \(z_i\) by a coboundary.
 \end{proof}
 
+The all-field exclusion now has three steps.  A \(p'\)-stabilizer supplies
+an actual simple socle of the self-dual sheet module.  The two outer
+extensions of that socle are forced into the quadratic moment module, but
+one parity is absent from \(\operatorname{Sym}^2F\).  If its image under
+\(\partial\) vanishes, this is already a contradiction; otherwise the
+affine cocycle contracts either to its original class or to the unique
+two-coordinate first-wall obstruction.  The next lemma proves the last two
+claims before we return to matching stabilizers.
+
+\begin{lemma}[Lucas socle, square parity, and the first wall]
+\label{lem:lucas-socle-first-wall}
+Let \(q=p^e\) be odd, let \(H=\operatorname{PSL}_2(q)\), and put
+
+\[
+ d=\frac{q-3}{2},\qquad
+ a=\frac{p-3}{2},\qquad b=\frac{p-1}{2}.
+\]
+
+Over \(k=\overline{\F}_q\), write \(L(c_0,\ldots,c_{e-1})\) for
+\(L(c_0)\otimes L(c_1)^{(1)}\otimes\cdots\), and put
+\(W=\nabla(d)\).  Under modular Hermite reciprocity,
+
+\[
+ F=\operatorname{Sym}^{d}L(2)\simeq\operatorname{Sym}^2W.
+\]
+
+The following statements hold.
+
+\begin{enumerate}
+\item A simple \(L(c_0,\ldots,c_{e-1})\) occurs in the socle of \(F\)
+if and only if, for every \(j\), there are \(r_j\geq0\) and
+\(\delta_j\in\{0,1\}\) such that
+\[
+ c_j=2n_j-2\delta_j-4r_j,\qquad
+ n_0=a,\quad n_j=b\ (j>0),
+\]
+and \(\sum_j\delta_j\) is even.  These data give a basis of the actual
+finite-group Hom space, not only a list of composition factors.
+
+\item Let \(S=L(c_0,\ldots,c_{e-1})\) be any \(q\)-restricted simple
+which descends to \(H\).  It is invariant under the diagonal outer
+automorphism and has two extensions to \(G=\operatorname{PGL}_2(q)\).
+There is a distinguished extension \(S^\square\), opposite to the
+determinant-normalized divided-power parity, for which
+\[
+ \operatorname{Hom}_G(S^\square,\operatorname{Sym}^2F)=0,
+\]
+and the other extension is \(S^\square\otimes\chi\), where \(\chi\) is
+the nontrivial character of \(G/H\).
+
+\item Let \(S=L(s)\), where \(s\) is even and \(0\leq s<p-1\).  Then
+\[
+ \dim\operatorname{Hom}_H(S,F)=
+ \begin{cases}
+ 1,& eb\equiv1+s/2\pmod2,\\
+ 0,& eb\not\equiv1+s/2\pmod2.
+ \end{cases}
+\]
+If the Hom line has the parity \(S^\square\), then the
+pullback along its inclusion \(i:S^\square\hookrightarrow F\) of
+\[
+ 0\longrightarrow\operatorname{Sym}^2F
+ \longrightarrow\operatorname{Sym}^2E
+ \mathrel{\mathop{\longrightarrow}^{\partial}}E
+ \longrightarrow0
+\]
+is nonsplit.  More generally, if \(i:S\hookrightarrow F\) has a
+retraction \(\rho:F\to S\), the class contracts to
+\[
+ (\dim S)[c]+i_*\rho_*[c]\in H^1(H,F).
+\]
+In particular the pullback is nonsplit whenever this class is nonzero.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Steinberg's tensor-product theorem gives the notation and the complete
+list of \(q\)-restricted simples
+\cite[Theorems~1.1 and~7.4]{Steinberg1963}.  McDowell and Wildon's
+modular Hermite reciprocity gives the displayed isomorphism
+\cite[Corollary~1.5]{McDowellWildon2022}; here the second symmetric
+power is unambiguous because \(p\) is odd.
+
+We record the finite-group seam in the coefficient argument.  In the
+divided-power basis, the equation saying that a highest vector is fixed by
+the positive root group is a polynomial in its parameter of degree at most
+\(2d=q-3\).  It vanishes on \(\F_q\) precisely when all its coefficients
+vanish.  Lucas's theorem separates those equations into the \(e\) base-\(p\)
+digits of
+
+\[
+ d=a+bp+\cdots+bp^{e-1}.
+\]
+
+In one digit, the symmetric and alternating Clebsch--Gordan lines have
+highest weights \(2n-4r\) and \(2n-2-4r\), respectively,
+and the tensor flip acts on the corresponding line by
+\((-1)^{\delta_j}\).  The product lies in \(\operatorname{Sym}^2W\)
+exactly when the product of these signs is \(+1\).  Conversely, tensoring
+the one-digit divided-power maps produces every displayed embedding.
+Thus the argument solves the root-group intertwining equations themselves
+and proves the first assertion about \(\operatorname{Hom}_H\).
+
+The same calculation with two copies of \(F\subset W\otimes W\) gives
+the outer assertion.  Normalize
+\(L(c_0,\ldots,c_{e-1})\) as the
+\(\operatorname{PGL}_2(q)\)-module
+
+\[
+ \bigotimes_j(\operatorname{Sym}^{c_j}k^2)^{(j)}
+ \otimes\det^{-\frac12\sum_jp^jc_j}.
+\]
+
+Conjugation by a nonsquare diagonal matrix acts on a Lucas product by
+the product of its local flip signs.  In
+\(\operatorname{Sym}^2(\operatorname{Sym}^2W)\) the two inner flips and
+the outer flip are all \(+1\).  Hence every \(H\)-map to
+\(\operatorname{Sym}^2F\) has one determinant-normalized parity, whereas
+twisting its source by \(\chi\) negates the conjugation equation.  We
+denote this opposite, absent extension by \(S^\square\).
+There is one extra point because the root polynomial for four tensor
+factors can cross \(q\).  Its degree is below \(2q\), so division by
+\(t^q-t\) leaves only the first wall.  Replacing a root exponent \(q\)
+by \(1\) changes the determinant-normalizing exponent by
+\((q-1)/2\); for a nonsquare \(\nu\), Euler's criterion gives
+\(\nu^{(q-1)/2}=-1\).  The corresponding dual-Weyl crossing reverses
+exactly one local tensor-flip sign.  The two sign changes cancel.  Thus
+the first-wall rows have the same outer parity as the ordinary Lucas
+rows.  This proves the asserted \(G\)-Hom vanishing for the full
+finite-group Hom space, not merely for its algebraic-group part.
+
+For \(S=L(s)\), the local signs are unique:
+
+\[
+ \delta_0\equiv a-s/2,\qquad
+ \delta_j\equiv b\quad(j>0)\pmod2.
+\]
+
+Their sum is even exactly under the displayed congruence, and uniqueness
+also proves that the Hom space is a line.
+
+For the contraction assertion, let
+\[
+ D_\rho:\operatorname{Sym}^2F\longrightarrow S\otimes F,\qquad
+ D_\rho(xy)=\rho(x)\otimes y+\rho(y)\otimes x.
+\]
+Compose \(D_\rho\) with a cochain
+\(S\to\operatorname{Sym}^2F\), then take the categorical trace over
+\(S\).  This is an \(H\)-map
+\[
+ C_{\rho,i}:\operatorname{Hom}(S,\operatorname{Sym}^2F)\longrightarrow F.
+\]
+On \(z_i(g)(t)=i(t)c(g)\), the first summand of \(D_\rho\) closes the
+\(S\)-loop and the second projects \(c(g)\).  Hence
+\[
+ C_{\rho,i}(z_i)(g)
+   =(\dim S)c(g)+i\rho(c(g)).
+\]
+The formula commutes with coboundaries and proves the asserted identity
+in \(H^1\).  This is the direct evaluation--coevaluation contraction; it
+uses a retraction of the selected copy inside \(F\), not a retraction
+\(E\to S\).
+
+It remains to handle a nonretracted occurrence.  Let
+\(B=U\rtimes T_0\) be the split Borel of \(H\).  Since
+\([H:B]=q+1\) is invertible in \(k\), restriction on \(H^1\) is
+injective.  Normalize the affine cocycle \(c(g)=ge-e\) to vanish on
+\(T_0\).
+
+Assume now \(e>1\) and put
+
+\[
+ T_1=L(p-2,1),\qquad R=L(p-2-s,1),\qquad Y=L(0,2),
+ \qquad r=p-2-s.
+\]
+
+The first dual-Weyl wall of \(W\), followed by the two symmetric-square
+filtrations above, gives a canonical two-coordinate quotient
+of the Borel coboundary equation for
+\(z_i(g)(t)=i(t)c(g)\).  We describe it explicitly, so no filtration
+claim is hidden; the underlying dual-Weyl short exact sequence is the one
+recorded in \cite[Lemma~2.3]{Martin2018}.  The affine class has one
+first-wall component, \(T_1\).
+Indeed the torus-normalized root cocycle has no ordinary Lucas component;
+its sole term divisible by \(t^q-t\) has digit weights
+\((p-2,1)\) and coefficient \(1\).  Equivalently,
+\(H^1(B,T_1)\) is a line and every other factor at this first wall has
+zero \(T_0\)-fixed \(U\)-cohomology.
+The only cochain row which can meet it is the map
+\(S\to R\otimes T_1\) whose zeroth-digit part is
+
+\[
+ v_m\longmapsto
+ \sum_{j=0}^{r}(-1)^j\binom rj\,
+ v_j\otimes w_{r-j+m},
+\]
+
+and whose first-digit part is the bracket
+\(L(0)\to L(1)\otimes L(1)\).  The formula follows directly by
+applying the positive-root operator: consecutive coefficients satisfy
+\(c_{j+1}=-(r-j)c_j/(j+1)\).  Thus its seed is
+\((1-z)^r\).  The row is forced: in the zeroth digit the
+Clebsch--Gordan equation
+\[
+ s=r+(p-2)-2k
+\]
+gives \(k=r\), and in the first digit the displayed bracket is unique.
+Conversely, solving the two digit equations for a row reaching
+\(Y\otimes R\) recovers these same values.  Hence no other first-wall
+row can meet the spill coordinate.  The first-wall trace and the adjacent
+spill are respectively
+
+\[
+ -[z](1-z)^r=r,\qquad [1](1-z)^r=1.
+\]
+
+All later Frobenius digits have their unique Lucas signs and tensor with
+this row; they create no further row meeting either coordinate.  Therefore,
+if a Borel cochain killed \(z_i\), the coefficient \(x\) of this row would
+have to satisfy simultaneously
+
+\[
+ rx=1,\qquad x=0.
+\]
+
+The second equation is the \(Y\otimes R\) component.  No other row reaches
+it, and it admits no Borel cochain from \(S\).  Indeed the weights of
+\(Y\otimes R\) are
+
+\[
+ p(2-2j)+(p-2-s-2k)+p(1-2\ell),
+\]
+
+with \(0\leq j\leq2\), \(0\leq k\leq p-2-s\), and
+\(0\leq\ell\leq1\).  The coefficient-\(1\) weights begin at \(s+2\),
+the coefficient-\((-1)\) weights end at \(-s-2\), and the
+coefficient-\(\pm3\) weights are farther away.  Their differences from
+the weights of \(S\) have absolute value below \(q-1\) in every case used
+here, so \(\operatorname{Hom}_B(S,Y\otimes R)=0\).  Finally
+\(1\leq r<p\), so the two equations are incompatible.  This
+two-coordinate contraction
+proves that the restriction of the pullback class is nonzero, and Borel
+injectivity proves the assertion over \(H\), hence over \(G\).
+\end{proof}
+
 \begin{lemma}[Uniform nonprincipal-sheet exclusion]
 \label{lem:uniform-sheet-exclusion}
 Let \(q=p^e\) be odd, let \(G=\operatorname{PGL}_2(q)\) and
@@ -474,106 +719,113 @@ Write \(\mu\) for this moment map and
 \(a:k[\Omega]\to E\) for the linear moment map
 \([M]\mapsto v_M\).
 
-We now isolate the sole representation-theoretic obligation.  If
-\(\lambda>1\), then \(P\) contains a nontrivial simple submodule \(S\)
-which is outer-invariant and extends to \(G\), and one of its two
-extensions \(S^\delta\) has the following two properties.  Write
-\(j_\delta=\mu|_{S^\delta}\) and
-\(i_\delta=\partial j_\delta=2a|_{S^\delta}\).  Then
-\begin{equation}
-\begin{gathered}
- \operatorname{Hom}_G(S^\delta,\operatorname{Sym}^2F)=0,\\
- i_\delta\ne0\quad\Longrightarrow\quad
- \delta_{S^\delta}(i_\delta)\ne0.
-\end{gathered}                                                  \tag{3.2e}
-\end{equation}
-Call (3.2e) the \emph{quadratic pullback obstruction}.
-Lemma~\ref{lem:projective-trade-reduction} shows at once that this
-obstruction is incompatible with a sheet-sign trade kernel: that kernel
-would force \(S^\delta\) to embed in \(\operatorname{Sym}^2E\), while
-the lemma's two alternatives are both excluded by (3.2e).  Thus proving
-the quadratic pullback obstruction for every \(\lambda>1\) forces
-\(\lambda=1\).
+We apply Lemma~\ref{lem:lucas-socle-first-wall}.  Its absent outer
+extension will be denoted \(S^\square\).  Write
+\[
+ j_\square=\mu|_{S^\square},\qquad
+ i_\square=\partial j_\square=2a|_{S^\square}.
+\]
+If \(i_\square=0\), then \(j_\square\) would embed \(S^\square\) in
+\(\operatorname{Sym}^2F\), contrary to the square-parity vanishing.  If
+\(i_\square\ne0\) and \(S=L(s)\) is one-digit, then \(j_\square\) would
+split its quadratic pullback, contrary to the first-wall conclusion.
+Thus it remains to produce the stated simple submodule for every
+stabilizer with \(\lambda>1\), and to check that every multi-digit choice
+below is absent from the affine socle.
 
-Dickson's \(p'\)-subgroup list reduces the stabilizer types to torus
-normalizers and the exceptional subgroups; compare the maximal-subgroup
-form in \cite[Theorem~2.2]{Giudici2007}.  The corresponding restricted
-heads are
-\[
- A_4:L(6),\qquad S_4:L(8),\qquad A_5:L(12).
-                                                               \tag{3.2f}
-\]
-Prime-field occurrences are nonsplit by the bottom-alcove trace
-calculation.  For \(e>1\), put \(b=(p-1)/2\).
-For an even restricted head \(S=L(s)\), with all higher digits zero, the
-Lucas equations for the affine socle give
-\[
- \operatorname{Hom}_{G^+}(S,F)\ne0
- \quad\Longleftrightarrow\quad
- eb\equiv1+\frac{s}{2}\pmod2,                              \tag{3.2g}
-\]
-and the nonzero Hom space is a line.  The small-characteristic digit
-heads are absent: an odd target digit cannot occur in the square-socle
-recurrence, and the sole all-even exception lies in the alternating
-square.  Thus (3.2g) decides every remaining occurrence.  The \(A_4\)
-head and the \(S_4/A_5\) heads occupy opposite values of the same parity
-bit.
+Dickson's \(p'\)-subgroup list reduces \(K\) to cyclic, dihedral, and
+exceptional types; compare the maximal-subgroup form in
+\cite[Theorem~2.2]{Giudici2007}.  For a cyclic torus subgroup take
+\(S=L(2)\).  If the Weyl involution is present, take
+\(S=L(4)\) for \(p\ge7\), and take \(S=L(2,2)\) when \(p=3,5\) and
+\(e>1\).  The zero-weight vector is fixed in each case: its Weyl sign is
+\(-1\) in \(L(2)\), \(+1\) in \(L(4)\), and \(+1\) in the two-digit
+tensor product.
+In characteristic three the zeroth digit of the affine socle is \(0\),
+so neither \(L(2)\) nor \(L(2,2)\) can occur in \(F\).  Thus
+\(i_\square=0\), including at \(q=9\).  This is the structural
+characteristic-three endpoint.
 
-It remains to rule out splitting when (3.2g) holds.  Retain only the
-first wall:
+For \(A_4,S_4,A_5\), averaging the Steinberg-digit character over the
+binary-polyhedral lift gives, respectively,
 \[
- T=L(p-2,1),\qquad R=L(p-2-s,1),\qquad Y=L(0,2).             \tag{3.2h}
+\begin{array}{c|c}
+\text{range}&S\\ \hline
+A_4,\ p\ge11&L(6)\\
+S_4,\ p\ge11&L(8)\\
+A_5,\ p\ge17&L(12)\\
+A_4,\ p=5,7,\ e>1&L(1,1)\\
+S_4,\ p=5,\ e>1&L(2,2)\\
+S_4,\ p=7,\ e>1&L(1,1)\\
+A_5,\ p=7,11,\ e>1&L(3,3),\,L(1,1)\ \text{respectively}\\
+A_5,\ p=13,\ e>1&L(1,7).
+\end{array}                                                \tag{3.2e}
 \]
-The unique correction row in \(R\otimes T\) has trace coefficient
+In every row \(\dim S^K=1\).  This follows directly from
 \[
- p-2-s\ne0,                                                \tag{3.2i}
+ \dim S^K=\frac1{|K|}\sum_C |C|
+ \prod_j\sum_{\ell=0}^{c_j}
+ \zeta_C^{\,p^j(c_j-2\ell)},
 \]
-and the same row has a nonzero component in \(Y\otimes R\).  No other
-row reaches that component.  Its torus weights are separated from the
-weights of \(S\); at the sole wrap seam \((p,s,e)=(3,0,2)\), the two
-torus-fixed coordinates are killed separately by the coefficients
-\(t\) and \(t^3\) of a root element.  Hence
-\(\operatorname{Hom}_B(S,Y\otimes R)=0\).  The coefficient required by
-(3.2i) must therefore be simultaneously nonzero and zero in any Borel
-coboundary.  Restriction on \(H^1\) is injective because
-\([G^+:B]\) is prime to \(p\), so the pullback is nonsplit.  This is a
-local calculation: its two target dimensions are
+where \(\zeta_C\) is the Teichmuller lift of an eigenvalue of a
+binary-polyhedral representative.  Use lift orders \(1,4,6\) for
+\(A_4\), \(1,4,6,8\) for \(S_4\), and
+\(1,4,5,6,10\) for \(A_5\).  More precisely, the
+\((\text{class size},\text{lift order})\) pairs are
 \[
- 2(s+1)(p-1),\qquad 6(p-1-s),                               \tag{3.2j}
+\begin{array}{c|l}
+A_4&(1,1),(3,4),(8,6)\\
+S_4&(1,1),(9,4),(8,6),(6,8)\\
+A_5&(1,1),(15,4),(20,6),(12,10),(12,5).
+\end{array}
 \]
-independent of \(e\).
+Thus the assertion concerns the simple module itself.
 
-The only family not disposed of by these heads is a
-characteristic-three torus normalizer.  A complete exact matching check
-shows that \(q=9\) has no split \(\lambda>1\) orbit.
-For \(q\ge27\), label the torus axes by unordered pairs \(A=\{x,y\}\),
-put \(w(A)=(x-y)^{-4}\) on finite axes and \(w(A)=0\) on the axis
-through infinity, and give the two sheets opposite weights.
-
-Here is the coefficient calculation.  Put \(n=(q-1)/2\).  In a split
-torus coordinate, the two sheet parameters are \(c,c^{-1}\), and
+Frobenius reciprocity makes \(S\) a quotient of \(P=k[G^+/K]\).
+The permutation form identifies \(P\) with \(P^*\), and every displayed
+\(S\) is self-dual, so dualizing embeds \(S\) in \(P\).  This proves
+simple-submodule existence even if the principal projective cover is a
+summand of \(P\).  The digit sum is even, and
 \[
- P_c=-Y\prod_{z\in(\F_q^\times)^2}
- \bigl(X-(1+c)zY+cz^2Z\bigr),\qquad
- P_c+P_{c^{-1}}=Y(X^n-Z^n).                              \tag{3.2k}
+ \bigotimes_j(\operatorname{Sym}^{c_j}k^2)^{(j)}
+ \otimes\det^{-\frac12\sum_jp^jc_j}
 \]
-After translating the axis by \(t\), every affine coefficient has
-\(t\)-degree at most \(q-3\).  Hence a quadratic moment sum extracts
-only the coefficient of \(t^{q-1}\).  The weight \(w\) then extracts
-the square-axis character of exponent two.  Its possible terms are the
-bottom four and complementary top four edge factors.  Every
-parameter-dependent term has total cyclic weight \(r\) with
-\(0<r\le8<n\), so scaling all selected \(z\)'s by a nonzero square makes
-its orbit sum vanish.  The weight-zero terms in (3.2k) are unchanged
-by \(c\leftrightarrow c^{-1}\).  Thus the two weighted first and second
-moments agree, giving a second trade.
+is an extension to \(G\); the other is its \(\chi\)-twist.
 
-The same calculation descends from the norm-one torus in the nonsplit
-case; the antipodal matching is fixed by an outer normalizer and does
-not split into two sheets.  The isolated \(q=5\) dihedral endpoint also
-has an outer full stabilizer.  Thus every case with \(\lambda>1\) has a
-trade independent of the sheet sign, a contradiction.  Hence
-\(\lambda=1\).
+For \(S=L(s)\), with \(s=2,4,6,8\), or \(12\), the Lucas criterion and
+the first-wall contraction in
+Lemma~\ref{lem:lucas-socle-first-wall} give the required obstruction.
+In a prime field the Fischer summands below the unique affine top are
+direct:
+\[
+ F=\bigoplus_{0\leq j\leq\lfloor(p-3)/4\rfloor}
+       L(p-3-4j).
+\]
+Indeed \(d<p\), so the symmetric-power idempotent makes \(F\) a tilting
+summand of \(L(2)^{\otimes d}\); every displayed highest weight is in the
+bottom alcove, where its tilting module is simple.
+The affine class is supported only on the top factor.  The contraction
+therefore gives \((\dim S)[c]\) on a lower factor and
+\((\dim S+1)[c]\) on the top factor.  Both scalars are nonzero in every
+selected row.  To see the support assertion directly, restrict to the
+prime-field Borel.  On \(L(m)\), \(U=C_p\) is one Jordan block, so
+\(H^1(U,L(m))\) is its coinvariant line; the torus acts on that line by
+\(a^{-(m+2)}\).  For even \(0\leq m\leq p-3\), it is fixed exactly when
+\(m=p-3\).  Restriction on \(H^1\) is injective because the Borel index
+is \(p+1\).  Every
+small-characteristic head in (3.2e) has an odd digit and is absent from
+the affine socle, except \(L(2,2)\); its unique sign word is alternating,
+so it too is absent.  Hence \(i_\square=0\) in those rows.  The
+\((q,K)=(5,A_4)\) and \((7,A_4)\) endpoint matchings are the unique
+two-point block systems of the endpoint actions and are preserved by the
+outer \(S_4\)-normalizer; their full orbits therefore do not give a split
+\(\lambda>1\) case.  The characteristic-three torus rows were disposed
+of above by \(L(2)\) and \(L(2,2)\), including \(q=9\); for \(q=3\), the
+three perfect matchings form one \(G^+\)-orbit, so the two-sheet premise
+is impossible.  The isolated \(q=5\) dihedral matching has an outer full
+stabilizer.  We have therefore produced the quadratic pullback obstruction
+for every possible split stabilizer with \(\lambda>1\), a contradiction.
+Hence \(\lambda=1\).
 \end{proof}
 
 \begin{theorem}[Uniform balanced-orbit classification]
@@ -2593,6 +2845,24 @@ M.~Giudici,
 \newblock Maximal subgroups of almost simple groups with socle
 $\mathrm{PSL}(2,q)$,
 \newblock arXiv:math/0703685, 2007.
+
+\bibitem{McDowellWildon2022}
+E.~J.~McDowell and M.~Wildon,
+\newblock Modular plethystic isomorphisms for two-dimensional linear groups,
+\newblock \emph{J. Algebra} \textbf{602} (2022), 441--483.
+\newblock doi:10.1016/j.jalgebra.2022.02.025.
+
+\bibitem{Martin2018}
+S.~Martin,
+\newblock On certain tilting modules for \(\operatorname{SL}_2\),
+\newblock \emph{J. Algebra} \textbf{506} (2018), 397--408.
+\newblock doi:10.1016/j.jalgebra.2018.03.034.
+
+\bibitem{Steinberg1963}
+R.~Steinberg,
+\newblock Representations of algebraic groups,
+\newblock \emph{Nagoya Mathematical Journal} \textbf{22} (1963), 33--56.
+\newblock doi:10.1017/S0027763000011016.
 
 \bibitem{RodriguezPajaresEtAl2025}
 G.~Rodr\'iguez-Pajares, D.~Ruano, and F.~Salizzoni,
