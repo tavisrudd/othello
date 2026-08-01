@@ -14,8 +14,8 @@ The chord-intersection construction below turns the five covered points into a p
 five-edge-colouring of `K₆`.  The one-factorization certificate extracts three prism factors,
 yielding `incidencePrismWitness_of_five`.  The theorem `projectivePrismWitness_of_incidence` then
 changes incidence collinearity to the projectivization predicate and proves that every labelled
-vertex is off the direction line.  Together these results close the internal equality-case seam;
-only the separately tracked historical comparison with Dye remains external to this development.
+vertex is off the direction line.  The resulting theorem excludes the equality case over every
+finite field of odd characteristic and supplies the complete six-arc line bound.
 -/
 
 open scoped LinearAlgebra.Projectivization
@@ -406,8 +406,7 @@ theorem projectivePrismWitness_of_incidence
     toProjective h203, toProjective h215, toProjective h224⟩
 
 /-- Once the equality-case fibers have been converted to an incidence prism, odd characteristic
-excludes the case immediately.  This theorem is the intended consumer of the remaining extraction
-lemma. -/
+excludes the case. -/
 theorem card_coveredOnLine_ne_five_of_incidence_extraction
     {A : Finset (Point K)} (hA : Arc (L := Point K) A) (hcard : A.card = 6)
     {l : Point K} (hdisj : Disjoint (pointsOnLine (P := Point K) l) A)
@@ -432,10 +431,33 @@ theorem card_coveredOnLine_ne_five
   apply card_coveredOnLine_ne_five_of_incidence_extraction hA hcard hdisj hodd
   exact incidencePrismWitness_of_five A hA hcard l hdisj
 
+/-- A line disjoint from a six-arc over a finite field of odd characteristic cannot contain
+exactly five covered points.  The proof extracts a one-factorization of the fifteen chords and
+excludes its triangular-prism normal form by affine parallelism. -/
+theorem disjointLine_fiveUncovered_impossible
+    {A : Finset (Point K)} (hA : Arc (L := Point K) A) (hcard : A.card = 6)
+    {l : Point K} (hdisj : Disjoint (pointsOnLine (P := Point K) l) A)
+    (hodd : (2 : K) ≠ 0) :
+    (OddSixArcLineBound.coveredOnLine (P := Point K) A l).card ≠ 5 :=
+  card_coveredOnLine_ne_five hA hcard hdisj hodd
+
+/-- Every projective line contains at most `q - 5` ordinary uncovered points of a six-arc in the
+Desarguesian plane over a finite field `K` of odd characteristic, where `q` is the plane order. -/
+theorem sixArc_uncoveredOnLine_card_le_order_sub_five
+    {A : Finset (Point K)} (hA : Arc (L := Point K) A) (hcard : A.card = 6)
+    (hodd : (2 : K) ≠ 0) (l : Point K) :
+    (OddSixArcLineBound.uncoveredOnLine (P := Point K) A l).card ≤
+      PlaneOrder (Point K) (Point K) - 5 := by
+  apply OddSixArcLineBound.uncoveredOnLine_card_le_order_sub_five hA hcard
+  intro m hdisj
+  exact disjointLine_fiveUncovered_impossible hA hcard hdisj hodd
+
 #print axioms incidencePrismWitness_of_five
 #print axioms projectivePrismWitness_of_incidence
 #print axioms card_coveredOnLine_ne_five_of_incidence_extraction
 #print axioms card_coveredOnLine_ne_five
+#print axioms disjointLine_fiveUncovered_impossible
+#print axioms sixArc_uncoveredOnLine_card_le_order_sub_five
 
 end OddSixArcPrismExtraction
 end RelativeConicArcs

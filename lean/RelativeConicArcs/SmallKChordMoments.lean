@@ -9,7 +9,8 @@ Clebsch chord-defect argument.  The geometric seam is explicit: `nᵢ` counts of
 exactly `i` chords, and the theorems consume the first moment, second moment, and off-arc
 partition as hypotheses.  `Moments.first_secant_moment`, `Moments.second_secant_moment`, and the
 maximum-index theorem supply the corresponding geometric ingredients; a later integration leaf
-can package the index fibers into the `nᵢ` hypotheses without changing any arithmetic below.
+allow the index fibers to be packaged into the `nᵢ` hypotheses without changing any arithmetic
+below.  This module proves only the resulting conditional integer identities.
 
 All equations use `ℤ`, so small field orders never encounter truncated natural subtraction.
 No classification or finite-field computation is hidden in the moment identities.  The only

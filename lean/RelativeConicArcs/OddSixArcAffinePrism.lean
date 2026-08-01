@@ -8,7 +8,7 @@ import ProjectiveCap.FrameGridBridge
 This is the coordinate half of the exceptional equality-case exclusion in the six-arc line bound.
 It proves that two affine lines through a common point of the line at infinity have parallel
 direction vectors, then applies that fact to the normalized triangular-prism pattern.  The only
-remaining C180 seam is projectively normalizing the geometric equality case into this interface.
+input to the final obstruction is the projective incidence pattern of the three prism matchings.
 -/
 
 open scoped LinearAlgebra.Projectivization
