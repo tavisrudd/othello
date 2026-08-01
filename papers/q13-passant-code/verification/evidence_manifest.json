@@ -8,47 +8,58 @@
     {
       "paper_iv_path": "verification/check_q13_tangent_code.py",
       "source_path": "check_q13_tangent_code.py",
-      "bytes": 24263,
-      "sha256": "c843d9e6dce7601620f52aeb1f223a8d98bd7dd0fc9eba208b99c3143973a198",
+      "source_bytes": 24263,
+      "source_sha256": "c843d9e6dce7601620f52aeb1f223a8d98bd7dd0fc9eba208b99c3143973a198",
+      "bytes": 24268,
+      "sha256": "c8c71bc5412731b29ad2d9d21a1efd5ad8dcfbe43e3078febe382adbdb5624e7",
       "role": "primary exact replay for distance, minimum words, reconstruction, spanning, and automorphisms"
     },
     {
-      "paper_iv_path": "verification/c723_q13_weight10_profiles.py",
+      "paper_iv_path": "verification/generate_weight_ten_profiles.py",
       "source_path": "verification/c723_q13_weight10_profiles.py",
-      "bytes": 7378,
-      "sha256": "96e95067a3ce8f0f69180c6d78049ddf94905091640a07dfe366234fd383dd78",
+      "source_bytes": 7378,
+      "source_sha256": "96e95067a3ce8f0f69180c6d78049ddf94905091640a07dfe366234fd383dd78",
+      "bytes": 7381,
+      "sha256": "aafa51e1d9c595c85de1855b23a341f6a7d1859c029ce0b2cddff6416d5548f1",
       "role": "canonical generator and checker for the two weight-ten profile certificates"
     },
     {
-      "paper_iv_path": "verification/c723_q13_weight10_profiles.json",
+      "paper_iv_path": "verification/weight_ten_profiles.json",
       "source_path": "verification/c723_q13_weight10_profiles.json",
-      "bytes": 4209,
-      "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9",
+      "source_bytes": 4209,
+      "source_sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9",
+      "bytes": 4219,
+      "sha256": "46d71b19e8ef20becb377743d91b13c5ecbdd75a28d413c7a7c189cfc62a4404",
       "role": "canonical weight-ten profile certificate"
     },
     {
-      "paper_iv_path": "verification/c723_q13_weight10_independent.py",
+      "paper_iv_path": "verification/replay_weight_ten_profiles.py",
       "source_path": "verification/c723_q13_weight10_independent.py",
-      "bytes": 3368,
-      "sha256": "6cafb6ec9fc18feda15a3e0d9ab324b8e00b19d2f6281c822d84d22980f701a5",
+      "source_bytes": 3368,
+      "source_sha256": "6cafb6ec9fc18feda15a3e0d9ab324b8e00b19d2f6281c822d84d22980f701a5",
+      "bytes": 3367,
+      "sha256": "c7add51ff18bd1b0109b16e0a1e2d5fa85ae94c34e4a245da241e57726277d2f",
       "role": "independent dynamic-programming replay of the weight-ten exclusions"
     }
   ],
   "commands": [
     {
       "cwd": "papers/q13-passant-code/verification",
-      "command": "python3 c723_q13_weight10_profiles.py --check",
-      "expected": "the tracked certificate is canonical and byte-identical to regeneration"
+      "command": "python3 generate_weight_ten_profiles.py --check",
+      "output_contains": "OK weight_ten_profiles.json 4219 bytes sha256=46d71b19e8ef20becb377743d91b13c5ecbdd75a28d413c7a7c189cfc62a4404",
+      "certifies": "the tracked certificate is canonical and byte-identical to regeneration"
     },
     {
       "cwd": "papers/q13-passant-code/verification",
-      "command": "python3 c723_q13_weight10_independent.py",
-      "expected": "both weight-ten syndrome intersections are empty by an independently reconstructed incidence matrix"
+      "command": "python3 replay_weight_ten_profiles.py",
+      "output_contains": "independent q=13 weight-ten replay: PASS",
+      "certifies": "both weight-ten syndrome intersections are empty by an independently reconstructed incidence matrix"
     },
     {
       "cwd": "papers/q13-passant-code/verification",
       "command": "python3 check_q13_tangent_code.py",
-      "expected": "omega=5, d=12, 364 minimum words, 78 recovered rows, and automorphism group PGL(2,13)"
+      "output_contains": "q=13 tangent-code replay: PASS",
+      "certifies": "omega=5, d=12, 364 minimum words, 78 recovered rows, and automorphism group PGL(2,13)"
     }
   ],
   "boundary": "The scripts are exact trusted executions. The JSON certificate is independently replayed, but this migration bundle does not yet provide the planned Lean coverage theorems or replace the manuscript's human reductions."

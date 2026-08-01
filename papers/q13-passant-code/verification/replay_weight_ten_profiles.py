@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent dynamic-programming replay of the C723 q=13 exclusions."""
+"""Independent dynamic-programming replay of the q=13 weight-ten exclusions."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 Q = 13
-ARTIFACT = Path(__file__).with_name("c723_q13_weight10_profiles.json")
+ARTIFACT = Path(__file__).with_name("weight_ten_profiles.json")
 
 
 def points() -> list[tuple[int, int, int]]:

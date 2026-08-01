@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Paper I replay of the q=13 tangent-code and minimum-layer certificate."""
+"""Exact replay of the q=13 passant code and its minimum-layer reconstruction."""
 
 from __future__ import annotations
 

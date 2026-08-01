@@ -133,6 +133,6 @@
     "right_sha256": "e09e4a9c4fff45f98dce3c15098751c1f9916563e8d876fa8bc6c72ab518e753",
     "right_unique": 771024
   },
-  "schema": "c723-q13-weight10-profiles-v1",
+  "schema": "q13-passant-code-weight-ten-profiles-v1",
   "symmetry_boundary": "PGL(2,13) is transitive on internal points, so the fixed-base exclusion is global"
 }

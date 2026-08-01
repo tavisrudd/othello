@@ -30,6 +30,15 @@ must use paper-local names and semantics, preserve the migration provenance,
 and refresh the current-file hashes. They must not depend on an internal task
 report.
 
+The current paper-local entry points are:
+
+- `generate_weight_ten_profiles.py --check` for the canonical certificate;
+- `replay_weight_ten_profiles.py` for the independent dynamic program; and
+- `check_q13_tangent_code.py` for the full exact replay.
+
+Run all three together, after checking the manifest hashes and byte counts,
+with `python3 verify_evidence.py`.
+
 ## Lean release layout
 
 The shared `finitegeom` repository should contain semantic, reusable modules:
