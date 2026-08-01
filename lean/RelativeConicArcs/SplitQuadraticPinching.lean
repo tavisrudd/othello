@@ -29,20 +29,17 @@ def splitPinching (a : S) : Subring (S × S) where
   add_mem' := by
     rintro x y ⟨p, hp⟩ ⟨q, hq⟩
     refine ⟨p + q, ?_⟩
-    dsimp only
-    rw [mul_add]
+    change x.1 + y.1 - (x.2 + y.2) = a * (p + q)
     linear_combination hp + hq
   neg_mem' := by
     rintro x ⟨p, hp⟩
     refine ⟨-p, ?_⟩
-    dsimp only
-    rw [mul_neg]
+    change -x.1 - -x.2 = a * -p
     linear_combination -hp
   mul_mem' := by
     rintro x y ⟨p, hp⟩ ⟨q, hq⟩
     refine ⟨x.1 * q + y.2 * p, ?_⟩
-    dsimp only
-    rw [mul_add]
+    change x.1 * y.1 - x.2 * y.2 = a * (x.1 * q + y.2 * p)
     calc
       x.1 * y.1 - x.2 * y.2 = x.1 * (y.1 - y.2) + y.2 * (x.1 - x.2) := by ring
       _ = x.1 * (a * q) + y.2 * (a * p) := by rw [hq, hp]
@@ -94,8 +91,7 @@ def subringConductor (R : Subring (S × S)) : Ideal (S × S) where
     exact R.add_mem (hx z) (hy z)
   smul_mem' c x hx y := by
     change (c * x) * y ∈ R
-    rw [mul_assoc, mul_comm c x, ← mul_assoc]
-    exact hx (c * y)
+    simpa [mul_assoc, mul_comm c x] using hx (c * y)
 
 /-- The product of the two principal branch ideals, written intrinsically as
 an ideal of `S × S`. -/
@@ -104,12 +100,20 @@ def branchIdeal (a : S) : Ideal (S × S) where
   zero_mem' := ⟨⟨0, by simp⟩, ⟨0, by simp⟩⟩
   add_mem' := by
     rintro x y ⟨⟨p, hp⟩, ⟨q, hq⟩⟩ ⟨⟨r, hr⟩, ⟨s, hs⟩⟩
-    exact ⟨⟨p + r, by simp only; rw [hp, hr, mul_add]⟩,
-      ⟨q + s, by simp only; rw [hq, hs, mul_add]⟩⟩
+    refine ⟨⟨p + r, ?_⟩, ⟨q + s, ?_⟩⟩
+    · change x.1 + y.1 = a * (p + r)
+      rw [hp, hr, mul_add]
+    · change x.2 + y.2 = a * (q + s)
+      rw [hq, hs, mul_add]
   smul_mem' := by
     rintro c x ⟨⟨p, hp⟩, ⟨q, hq⟩⟩
-    exact ⟨⟨c.1 * p, by simp only; rw [hp]; ring⟩,
-      ⟨c.2 * q, by simp only; rw [hq]; ring⟩⟩
+    refine ⟨⟨c.1 * p, ?_⟩, ⟨c.2 * q, ?_⟩⟩
+    · change c.1 * x.1 = a * (c.1 * p)
+      rw [hp]
+      ring
+    · change c.2 * x.2 = a * (c.2 * q)
+      rw [hq]
+      ring
 
 /-- The conductor of the split pinching algebra is exactly `(a) × (a)`. -/
 theorem conductor_eq_branchIdeal (a : S) :
@@ -121,13 +125,14 @@ theorem conductor_eq_branchIdeal (a : S) :
     obtain ⟨p, hp⟩ := hleft
     obtain ⟨q, hq⟩ := hright
     refine ⟨⟨p, ?_⟩, ⟨-q, ?_⟩⟩
-    · simpa using hp
-    · dsimp only at hq ⊢
+    · simp only [Prod.fst_mul, Prod.snd_mul, mul_one, mul_zero, sub_zero] at hp
+      simpa using hp
+    · simp only [Prod.fst_mul, Prod.snd_mul, mul_zero, mul_one, zero_sub] at hq
       rw [mul_neg]
       linear_combination -hq
   · rintro x ⟨⟨p, hp⟩, ⟨q, hq⟩⟩ y
     refine ⟨p * y.1 - q * y.2, ?_⟩
-    dsimp only
+    change x.1 * y.1 - x.2 * y.2 = a * (p * y.1 - q * y.2)
     rw [hp, hq]
     ring
 
@@ -141,18 +146,19 @@ algebra: `(X-u)(X-v)` annihilates the pair `(u,v)`, with both roots embedded
 diagonally as coefficients. -/
 theorem product_isIntegral (a : S) (x : S × S) :
     IsIntegral (splitPinching a) x := by
+  have halgebraMap (s : splitPinching a) :
+      algebraMap (splitPinching a) (S × S) s = s.1 := rfl
   let p : Polynomial (splitPinching a) :=
     (Polynomial.X - Polynomial.C (diagonalElement a x.1)) *
       (Polynomial.X - Polynomial.C (diagonalElement a x.2))
   refine ⟨p, (Polynomial.monic_X_sub_C _).mul (Polynomial.monic_X_sub_C _), ?_⟩
-  simp only [p, map_mul, map_sub, Polynomial.aeval_X, Polynomial.aeval_C]
-  apply Prod.ext <;> simp [diagonalElement]
+  apply Prod.ext <;> simp [p, diagonalElement, halgebraMap]
 
 /-- The inclusion of the split pinching algebra into `S × S` is an integral
 ring extension. -/
 theorem algebra_isIntegral (a : S) :
-    Algebra.IsIntegral (splitPinching a) (S × S) :=
-  product_isIntegral a
+    Algebra.IsIntegral (splitPinching a) (S × S) := by
+  exact ⟨product_isIntegral a⟩
 
 /-- If the branch parameter is a unit, the pinching algebra is the whole
 product ring. -/
