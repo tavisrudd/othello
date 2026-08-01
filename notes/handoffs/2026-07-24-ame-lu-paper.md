@@ -20,8 +20,9 @@ two-paragraph structural lemma `lem:coset-syndrome-charts`, then obtains the
 Clebsch result by composing the companion conic/count/orbit theorem with the
 nonconic logical-phase theorem.  The adjacent prose now separates the twenty
 syndrome charts from the ten fixed-input operator-pushing fibres.  All formal,
-axiom, manuscript, visual, evidence, release, ledger, and standalone-mirror
-gates passed.  See
+axiom, manuscript, visual, evidence, release, and ledger gates passed.  The
+paper-only standalone mirror passed its build, evidence replay, and public
+manifest gate with the formal companion recorded and correctly absent.  See
 `2026-07-31-c734-clebsch-syndrome-lean-structural-proof.md`.
 
 **C581 closed (2026-07-31): quantitative ambient-Clifford rigidity is

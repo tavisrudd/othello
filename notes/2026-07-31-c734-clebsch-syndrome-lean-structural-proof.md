@@ -67,7 +67,13 @@ row retain their previous external evidence boundaries.
   artifacts with tree
   `e79726f247417947e05cce97c3c9020bfe413dd3012abcc956971224c19f1216`
   and 84 formal-companion artifacts with tree
-  `271ac415cd5717fc5e4b791b695cbf3a25e0855683dd249a85c0df8898e0f44d`.
+  `271ac415cd5717fc5e4b791b695cbf3a25e0855683dd249a85c0df8898e0f44d`;
+  and
+- standalone forward commit `93e8651`, with a warning-free build, complete
+  eight-bundle replay, and the same 37-artifact public tree.  Its verifier
+  records the 84-artifact formal companion and correctly reports it absent
+  from the paper-only repository; the authoritative repository owns the
+  formal-required gate.
 
 ## Extra-juice and Tao closeout
 
