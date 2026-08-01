@@ -35,7 +35,13 @@ Igor Balla, *Equiangular lines via matrix projection*, Advances in Mathematics
 - Kind: recent state-of-frontier paper, not a list.
 - Scope: the Lemmens--Seidel maximum-number problem for real equiangular lines
   with fixed angle, matrix projection bounds and strongly regular graphs.
-- Read depth: `abstract/metadata only`, publisher abstract.
+- Read depth: `partial`, introduction, relative-bound discussion and the
+  angle-`1/3` case inspected in arXiv `2110.15842`.  Cached SHA-256
+  `04bc2cda09ed2e86128a1884006f83caedc7c91af8d15c7dbbd102fca8267389`.
+
+The local `ETF(5,10)` lies at the classical solved value `M(5)=10`; the live
+low-dimensional exact cases are 18--20.  The numerical 2026 snapshot is kept
+in `plausible-bridges/equiangular-lines.md` and must be refreshed before use.
 
 ## FD-2024-Hadamard-database
 
@@ -45,11 +51,42 @@ Igor Balla, *Equiangular lines via matrix projection*, Advances in Mathematics
 - Kind: recent status resource rather than a problem list.
 - Scope: existence constructions for Hadamard and skew-Hadamard matrices;
   SageMath coverage through order 1208.
-- Read depth: `abstract/metadata only`, arXiv abstract.
+- Read depth: `partial`, introduction and construction-status table inspected.
+  Cached SHA-256
+  `12b04b17459e088618af96b624bff0d83eb072626f7de706a94a4b10746c34d6`.
 
 It explicitly recalls the Hadamard existence conjecture and the analogous
 skew-Hadamard conjecture.  These are famous, but no bridge from an isolated
 order-six/order-ten conference factorization should be presumed.
+
+## FD-2026-Hadamard-668
+
+Arthur F. Ramos, David B. Hulak and Ruy J. G. B. de Queiroz, *Multiplier
+obstructions for Legendre pairs of length 333*, arXiv `2607.20765`.
+
+- Source: https://arxiv.org/abs/2607.20765
+- Kind: current targeted attack on the smallest unresolved Hadamard order.
+- Scope: common-multiplier Legendre pairs of length 333, sufficient to build a
+  Hadamard matrix of order 668.
+- Read depth: `partial`, abstract, introduction, subgroup count and certificate
+  methodology inspected.  Cached SHA-256
+  `de396e62dc6d1cf43b9fea51d753318464bc8ed773c6b3f6cf6cb5fa681a1c70`.
+
+The paper excludes 21 of 30 common-multiplier subgroups, including every one of
+order at least 9.  It does not decide the remaining structured cases or
+unrestricted existence at order 668.
+
+## FD-2026-Balla-status
+
+Chuanyuan Ge and Shiping Liu, *New bounds for equiangular lines and Balla's
+conjecture*, arXiv `2606.29392`.
+
+- Source: https://arxiv.org/abs/2606.29392
+- Kind: current status correction for the fixed-angle frontier.
+- Read depth: `abstract/metadata only`.
+
+The paper proves the proposed bound for two additional angles but gives
+infinitely many counterexamples to the unrestricted conjecture.
 
 ## GAME-2025-Nowakowski
 

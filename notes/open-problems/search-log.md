@@ -118,7 +118,44 @@ database `open` label are not enough for manuscript use.
 
 ### Result of local filtering
 
-`generalist-results-crosswalk.md` records one direct partial bridge to the MDS
-conjecture, a small number of finite-geometry/design or transversal-code
-candidates, and explicit negative fences around tempting Hodge, Yang--Mills,
-Jacobian/Dixmier, cubic-fourfold, SIC and MUB vocabulary matches.
+The first-pass version of `generalist-results-crosswalk.md` recorded one direct
+partial bridge to the MDS conjecture, a small number of finite-geometry/design
+or transversal-code candidates, and explicit negative fences around tempting
+Hodge, Yang--Mills, Jacobian/Dixmier, cubic-fourfold, SIC and MUB vocabulary
+matches.  The MDS label is superseded by the deep screen below.
+
+## 2026-07-31 five-bridge deep screen
+
+Purpose: test the five initially plausible comparisons theorem by theorem and
+identify attack routes that do not depend on repository results.
+
+### Corrections
+
+- The prior “direct partial bridge” label for MDS was retracted.  The local PRS
+  novelty is deep-hole classification in the covering-radius `r-1` regime,
+  precisely where the clean deep-hole/MDS-extension equivalence fails.
+- The broad transversal-code target was stale.  Asymptotically good
+  transversal-CCZ codes appeared in 2024 and addressable qubit codes in 2025;
+  the current clean target is fully good qLDPC plus transversal non-Clifford.
+- The arbitrary-plane continuation theorem is reconstructive, not an
+  existence obstruction.
+- The local conference and ETF objects realize classical orders/parameters and
+  have no current order- or dimension-growing implication.
+
+### Sources promoted or deepened
+
+- Kaipa, arXiv `1612.05447`, `partial`, cached.
+- Zhang--Wan, arXiv `1605.02423`, `partial`, cached.
+- Cati--Pasechnik, arXiv `2411.18897`, `partial`, cached.
+- Ramos--Hulak--de Queiroz, arXiv `2607.20765`, `partial`, cached.
+- Balla, arXiv `2110.15842`, `partial`, cached.
+- Golowich--Guruswami, arXiv `2408.09254`, `partial`, cached.
+- Bright et al. `2001.11974`, Greaves et al. `2002.08085`, Ge--Liu
+  `2606.29392`, He et al. `2507.05392`, and Li--Li--Liu `2604.01874` were read
+  at `abstract/metadata only` depth.
+
+### Output
+
+The detailed logical screens and ranked independent projects are in
+`plausible-bridges/`.  Numerical bounds and 2026 status claims there require a
+fresh primary-source check before manuscript publication.

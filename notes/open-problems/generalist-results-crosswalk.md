@@ -13,23 +13,24 @@ advances the famous problem.
 
 ## The short answer
 
-No current theorem should be advertised as solving a Millennium problem or a
-comparably famous generalist conjecture.  There is one direct partial bridge to
-a famous specialist conjecture (`BIG-413`, MDS), two structurally adjacent
-finite-geometry/design programmes worth precise checking, and several seductive
-but presently non-mathematical vocabulary overlaps that should be fenced off.
+No current theorem should be advertised as solving or partially solving a
+Millennium problem or comparably famous conjecture.  The five initially
+plausible comparisons have now been checked in depth.  MDS is the closest in
+mathematical objects, but the local novelty lies exactly outside the regime
+where deep holes are equivalent to MDS extensions.  The other four are context,
+no-go boundaries or independent research leads rather than consequences.
 
 ## Priority comparisons
 
 | External target | Local result family | Relation | Required next evidence | State |
 |---|---|---|---|---|
-| `BIG-413` MDS conjecture | PRS covering radii/deep-hole classifications at redundancies 3, 5, 6, 7; arbitrary-redundancy polar containment | Directly inside MDS/arc geometry, but the proved results classify deep holes in selected regimes rather than settle maximum MDS length | State exact parameter ranges and determine whether any result changes a known MDS case rather than using MDS hypotheses | **real partial bridge; audit first** |
-| `BIG-412` prime-power conjecture for finite projective planes | conic-relative arcs, continuation reconstruction, odd-plane cap game | Same ambient finite planes; no construction or obstruction for a non-prime-power plane | Translate which arguments use Desarguesian coordinates essentially and test whether any invariant survives for abstract planes | **conceptual candidate only** |
+| `BIG-413` MDS conjecture | PRS covering radii/deep-hole classifications at redundancies 3, 5, 6, 7; arbitrary-redundancy polar containment | Same RS/arc ecosystem, but the new deep-hole classifications are in the radius-`r-1` regime where the MDS-extension equivalence breaks | Find a puncturing/extension reduction that changes an unsettled MDS length, or keep this as PRS context only | **no current MDS-conjecture progress** |
+| `BIG-412` prime-power conjecture for finite projective planes | conic-relative arcs, continuation reconstruction, odd-plane cap game | Arbitrary-plane reconstruction assumes a plane exists; coordinate results are Desarguesian and neither route constructs nor obstructs a non-prime-power plane | Seek an intrinsic continuation-complex invariant forcing coordinatization; independently eliminate restricted order-12 classes | **no current bridge** |
 | `BIG-401` Hadamard conjecture | exact order-6/order-10 conference and cut factorizations | Strong finite structure at isolated orders, no scaling mechanism to all multiples of four | Produce an order-growing construction/obstruction before mentioning the conjecture in positioning | **no current progress** |
-| `BIG-414` maximum equiangular lines | Golden ETF and simplex/conference factorization | Exact small configuration, not a general dimensional bound | Compare parameters and equivalence notions with current exact-max tables | **small-instance context only** |
+| `BIG-414` maximum equiangular lines | Golden ETF and simplex/conference factorization | The local `ETF(5,10)` realizes the classical solved equality `M(5)=10`; novelty is its Golden origin and reverse factorization | A new construction or certified upper-bound improvement in dimensions 18--20 | **solved-instance context only** |
 | `BIG-705` SIC existence | Golden ETF/doily measurement geometry | Shared frame/measurement language without SIC dimension-family construction | Compute SIC defining equations and overlaps explicitly for any claimed instance | **no present bridge** |
 | `BIG-706` MUB dimension six | six-point/outer-`S_6` quantum structures | The number six and quantum vocabulary are not a bridge; no seven-MUB construction or impossibility bound | None until an actual MUB Gram system appears | **negative** |
-| `BIG-709` transversal-gate frontier | local-Clifford rigidity for stabilizer AME and MDS--CSS codes | Genuine specialist adjacency, but finite rigid families do not yield asymptotically good non-Clifford transversal codes | State length/rate/distance families and gate hierarchy exactly | **specialist candidate, not big-problem progress** |
+| `BIG-709` qLDPC/transversal-gate frontier | local-Clifford rigidity for stabilizer AME and MDS--CSS codes | Genuine specialist adjacency, but the local one-logical-qudit QMDS family is not asymptotically good; broad asymptotically-good/addressable milestones were reached in 2024--2025 | Compare against the live bounded-check-weight, linear-distance target and 2026 almost-good qLDPC construction | **useful no-go boundary, not frontier progress** |
 | `BIG-004` Hodge / `BIG-204` Tate | Clebsch, Segre, Igusa, Fano and cycle-rich geometry | Classical algebraic varieties occur locally, but no new algebraic-cycle class or realization theorem is proved | Identify a precise cycle and nontrivial cohomology/Galois statement | **no present bridge** |
 | `BIG-207` cubic-fourfold rationality | cubic-surface and Segre-cubic constructions | Different dimension and birational problem | None absent a fourfold construction | **negative** |
 | `BIG-205` abundance | Sarkisov/Rees/K-stability programme | Birational vocabulary overlap only; no minimal-model abundance statement | Finish the pointed degeneration and compute relevant positivity invariants first | **no present bridge** |
@@ -45,7 +46,7 @@ but presently non-mathematical vocabulary overlaps that should be fenced off.
 | Number theory/arithmetic | `BIG-101`--`BIG-117` | No direct theorem-level bridge.  Finite-field arithmetic and rational parametrizations do not address prime distribution, transcendence or global Galois conjectures. |
 | Algebra/AG/representation | `BIG-201`--`BIG-210` | Several shared objects and words, but no famous-conjecture consequence presently identified. |
 | Topology/geometry | `BIG-301`--`BIG-309` | No low-dimensional topology or dynamical-systems theorem in the portfolio. |
-| Combinatorics/finite geometry | `BIG-401`--`BIG-417` | The only dense overlap.  MDS is direct; Hadamard/equiangular/projective-plane questions are context or candidates, not claimed progress. |
+| Combinatorics/finite geometry | `BIG-401`--`BIG-417` | The only dense object-level overlap.  The five-case deep screen found no present famous-conjecture progress; see `plausible-bridges/`. |
 | Analysis/PDE/dynamics | `BIG-501`--`BIG-507` | No current bridge. |
 | Algorithms/complexity | `BIG-601`--`BIG-609` | Exact algorithms and finite classifications do not imply complexity-class separations or uniform polynomial-time bounds. |
 | Mathematical physics/QI | `BIG-701`--`BIG-709` | Quantum-code/transversal-gate adjacency is real but specialist; the famous physics conjectures remain untouched. |

@@ -148,7 +148,7 @@ problem, not listed here as open.
 | `BIG-706` | Complete MUBs in dimension six | seven mutually unbiased bases in `C^6`, or nonexistence | live-lead | quantum-information catalogue |
 | `BIG-707` | NPT bound entanglement | existence of nondistillable NPT states | live-lead | quantum-information catalogue |
 | `BIG-708` | Quantum PCP conjecture | constant-gap hardness for local Hamiltonians | live-lead | specialist audit required |
-| `BIG-709` | Fault-tolerant transversal/non-Clifford frontier | asymptotically good codes with strong transversal gates | mixed | quantum-information catalogue |
+| `BIG-709` | qLDPC transversal/non-Clifford frontier | fully good bounded-check-weight codes with useful transversal non-Clifford gates; practical finite-size realizations and exact gate classifications | mixed | quantum-information catalogue; broad asymptotically-good milestone reached in 2024 |
 
 ## Coverage boundary
 

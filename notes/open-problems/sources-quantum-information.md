@@ -45,6 +45,54 @@ PIRSA:25040104.
   especially algebraic-geometric constructions and transversal CCZ.
 - Read depth: `abstract/metadata only`; slides/problem statements pending.
 
+This entry's original broad framing is now stale: asymptotically good codes
+with transversal CCZ existed in 2024, and addressable asymptotically good qubit
+codes appeared in 2025.  The live asymptotic gap adds qLDPC and linear distance.
+
+## QI-2024-good-transversal
+
+Louis Golowich and Venkatesan Guruswami, *Asymptotically Good Quantum Codes
+with Transversal Non-Clifford Gates*, arXiv `2408.09254`.
+
+- Source: https://arxiv.org/abs/2408.09254
+- Kind: frontier-changing construction.
+- Read depth: `partial`, introduction, parameter statement and open-problem
+  discussion inspected.  Cached SHA-256
+  `8cdb9faa66eebce46087d7156bb8316feaf2e89f0fe818f0a421c445be31f08d`.
+
+The construction gives asymptotically good codes with transversal CCZ for
+every fixed prime-power alphabet, including qubits.  The paper leaves LDPC and
+finite-size/practical constructions as open directions.
+
+## QI-2025-addressable-transversal
+
+Zhiyang He, Vinod Vaikuntanathan, Adam Wills and Rachel Yun Zhang,
+*Asymptotically Good Quantum Codes with Addressable and Transversal
+Non-Clifford Gates*, arXiv `2507.05392`.
+
+- Source: https://arxiv.org/abs/2507.05392
+- Kind: frontier-changing construction.
+- Read depth: `abstract/metadata only`.
+
+The abstract reports the first asymptotically good qubit family with
+transversally addressable CCZ.  Addressability should therefore not be listed
+as broadly open without additional LDPC, decoder or implementation conditions.
+
+## QI-2026-almost-good-qLDPC-transversal
+
+Yiming Li, Zimu Li and Zi-Wen Liu, *Transversal non-Clifford gates on
+almost-good quantum LDPC and quantum locally testable codes*, arXiv
+`2604.01874`.
+
+- Source: https://arxiv.org/abs/2604.01874
+- Kind: current boundary construction.
+- Read depth: `abstract/metadata only`.
+
+The source reports bounded-check-weight families with linear rate,
+`tildeTheta(N)` distance and transversal multi-controlled `Z`.  The remaining
+clean asymptotic target is linear distance while preserving the gate and LDPC
+structure.
+
 ## QI-2025-QPIC
 
 IEEE ISIT 2025 workshop, *Quantum Information: Open Problems, Impact, and
@@ -67,4 +115,3 @@ Knowledge workshop, published 2025.
 - Read depth: `abstract/metadata only`, workshop report.
 - Status: lead only; the public report confirms an open-problem panel but does
   not enumerate its questions.
-

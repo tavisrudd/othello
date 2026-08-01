@@ -42,20 +42,52 @@ The survey numbers sixteen visible statements as Problems 1--14 and 16--17
 
 ## COD-PRS-deep-holes
 
-Kaipa, *Deep Holes of Projective Reed--Solomon Codes* (conference/preprint
-version available from UCI; arXiv lineage `1605.02423`).
+Jun Zhang and Daqing Wan, *On Deep Holes of Projective Reed--Solomon Codes*,
+arXiv `1605.02423`.
 
 - Source: https://arxiv.org/abs/1605.02423
 - Kind: canonical problem statement rather than a recent list.
 - Scope: covering radii and classification of deep holes of projective
   Reed--Solomon codes.
-- Read depth: `partial`, introduction and conclusion inspected via the UCI PDF.
+- Read depth: `partial`, introduction and conjecture discussion inspected.
+  Cached SHA-256
+  `52ae5e2b988f8845d39339eb95a8c853378b7d3e427b9c4e72eb35802def38c2`.
 
 The two stated frontiers are: determine the PRS covering radius (a special
 case of the MDS conjecture), and, where the radius is known, determine all deep
 holes.  The paper emphasizes that enumeration becomes difficult below
 `k=q-3`.  This source is retained because current 2024--2026 deep-hole papers
 continue to describe the classification problem as fundamental.
+
+## COD-MDS-extension-dictionary
+
+Krishna Kaipa, *Deep holes and MDS extensions of Reed--Solomon codes*, arXiv
+`1612.05447`.
+
+- Source: https://arxiv.org/abs/1612.05447
+- Kind: precise bridge between PRS covering radius, deep holes and the MDS
+  extension problem.
+- Read depth: `partial`, introduction and the equivalence statements inspected.
+  Cached SHA-256
+  `1fe8de83c0b8cd3938e1a450fd49f376de795d7a317f099a730c63ab968178a4`.
+
+The source makes the MDS-extension equivalence conditional on covering radius
+`n-k` and explicitly explains why it fails when the radius is `n-k-1`.  This
+distinction controls the negative MDS verdict in `plausible-bridges/mds.md`.
+
+## FG-order-ten-certificates
+
+Curtis Bright, Kevin K. H. Cheung, Brett Stevens, Ilias Kotsireas and Vijay
+Ganesh, *Nonexistence Certificates for Ovals in a Projective Plane of Order
+Ten*, arXiv `2001.11974`.
+
+- Source: https://arxiv.org/abs/2001.11974
+- Kind: proof-carrying computational precedent for finite-plane nonexistence.
+- Read depth: `abstract/metadata only`.
+
+The work combines cube-and-conquer, programmatic SAT and nauty symmetry
+reduction, producing independently checkable certificates.  It concerns ovals
+in the already excluded order-10 case, not order-12 nonexistence.
 
 ## COD-2025-twisted-deep-holes
 
@@ -95,4 +127,3 @@ to be extracted before crosswalk use.
 - Scope: broad contemporary coding theory.
 - Read depth: `abstract/metadata only`, report metadata and overview.
 - Status: lead only; individual problem extraction pending.
-

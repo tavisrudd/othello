@@ -35,6 +35,9 @@ Crosswalk judgments may change as the portfolio changes.
 - `results-crosswalk.md`: links external entries to our theorem inventory.
 - `generalist-results-crosswalk.md`: separately filters the famous/generalist
   index against our results and records the required evidence for any bridge.
+- `plausible-bridges/`: five detailed dossiers testing the MDS, projective
+  plane, Hadamard, equiangular-line and transversal-code comparisons, including
+  independent attack routes and promotion gates.
 - `search-log.md`: queries, screened sets, access failures and update dates.
 
 ## Entry schema
