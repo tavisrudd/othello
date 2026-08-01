@@ -12,6 +12,12 @@
       "verified_max_threads": 6,
       "worker_peak_mib": 1330
     },
+    "clebsch-passages": {
+      "description": "Paper III structural gate; measured peak 3.55 GiB, serialized with a 4 GiB envelope.",
+      "reserve_mib": 8192,
+      "verified_max_threads": 1,
+      "worker_peak_mib": 4096
+    },
     "q25-two-witness": {
       "concurrent_sibling_peak_mib": 1330,
       "description": "C143 Q25 two-witness leaves with the heavy shared checker serialized first.",
