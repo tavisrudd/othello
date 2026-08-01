@@ -1970,8 +1970,17 @@
       "last": 756,
       "purpose": "all-k conic-filling classification: remove the k<=8 boundary",
       "sequence": 219
+    },
+    {
+      "count": 1,
+      "first": 757,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 757,
+      "purpose": "settle the Golden determinantal cubic-wall node count and classical comparison",
+      "sequence": 220
     }
   ],
-  "next_id": 757,
+  "next_id": 758,
   "schema": "codex-task-id-allocations-v1"
 }
