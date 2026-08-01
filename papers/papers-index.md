@@ -7,11 +7,12 @@ Fable review (2026-07-12) supplied the original decomposition; later
 paper-specific rulings supersede its count where stated below. The
 provisional Baer + completion merge was superseded by the focused Baer/Q25
 ruling on 2026-07-14, dihedral bundles the D₂ₘ family, continuation is
-N1-only, and coding proceeded after its internal audit. **Clebsch is now an
-active three-paper program:** focused rigidity Paper I,
-factorization-memory Paper II, and a gated passages/holonomy Paper III. The
-former 37-page mega-paper is retained unchanged as a fallback. Paper I spun
-out of the `arcs` q=11 material and ships after `arcs`. See
+N1-only, and coding proceeded after its internal audit. **Clebsch is a
+four-paper program:** rigidity Paper I, factorization Paper II, `passages`
+Paper III, and the q13 passant-code Paper IV. Papers I--III have GitHub/DOI
+v1 and v2 releases; later changes are forward versions. The `golden` lane
+feeds future Paper-III versions and is not a fifth numbered paper. The former
+37-page mega-paper is retained unchanged as a fallback. See
 `notes/handoffs/2026-07-13-clebsch-paper.md` for the current order and
 `papers-planning.md` for the older decomposition rulings.
 

@@ -1,18 +1,24 @@
-# Golden operator and shadow sisters paper
+# Golden operator source program for Paper III
 
 **Lane:** `golden`
 
 **Date:** 2026-07-31
 
+> **NUMBERED-SERIES ROUTING.** By the 2026-08-01 four-paper decision,
+> `golden` is the source-development lane for a future forward version of
+> Paper III (`passages`), not a standalone fifth numbered paper. Released
+> Paper-III versions remain immutable. This lane continues to own its source
+> mathematics, evidence, and manuscript experiments; publication integration
+> is coordinated through the Clebsch handoff and the `passages` identity.
+
 ## Goal
 
-Build a standalone mathematics paper containing the complete C704--C710
-post-700 development around the golden conference operator and the
-functorial family of cubic, polar, determinantal, exceptional, symmetry,
-fermionic, anomaly, and lattice shadows it generates.
+Develop the Golden operator material for selective integration into a future
+forward version of Paper III, centered on the common operator theorem rather
+than the complete C704--C710 inventory.
 
-The working title is *The golden conference operator and its shadow
-sisters*.  The paper's conceptual claim is that the shadows arise from one
+The legacy working title is *The golden conference operator and its shadow
+sisters*.  The material's conceptual claim is that the shadows arise from one
 operator through exterior power, golden compression, commutator,
 determinant/Pfaffian, adjugation, and centered squaring—not from accidental
 formula matches.

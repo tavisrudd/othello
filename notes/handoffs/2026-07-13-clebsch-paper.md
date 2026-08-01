@@ -11,21 +11,43 @@
 > **ROUTING AUTHORITY.** No dated planning note, fallback-paper verdict, task
 > report, or archive overrides the order and boundaries stated here.
 
+## Numbered series decision
+
+The public series has exactly four numbered papers:
+
+1. Paper I — `clebsch-rigidity`;
+2. Paper II — `clebsch-factorization`;
+3. Paper III — alias `passages`, rooted at `clebsch-passages`;
+4. Paper IV — alias `q13-passant-code`, rooted at `q13-passant-code`.
+
+Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
+versions are immutable predecessors; later strengthening is by forward
+version. Paper IV is the active new-paper build under C761.
+
+`golden` is a source-development lane feeding a future forward version of
+Paper III, not a fifth numbered paper. The Paper-I computational companion is
+unnumbered and becomes a forward-pointing evidence companion once Paper IV is
+public. The mega-paper remains an unpublished fallback only.
+
+For fresh sessions, the immediate paper-building step is C761. C756 remains
+the independent high-upside research task for the all-\(k\) conic-filling
+theorem. Paper IV's general passant-code definitions and weight-eight method
+are reusable inputs to C756, but C761 does not own or block that theorem.
 ## Program state
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C752 audit complete; C753 implementing four rigidity and eight orientation packets; external publication remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
-| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | C748 complete with two independent `GO` verdicts and a warning-free authoritative release; C749 is unblocked, C750 has a partial structural spine, and standalone remains frozen | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | relative marked orientation bridge and global Stein algebra complete; current structural Lean mechanism gate and exact partial-coverage map green; metadata closure remains | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; C749/C750 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
+| Paper III (`passages`) — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released; Golden material feeds a future forward version rather than a fifth paper | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 infrastructure installed; extraction, proof compression, paper-owned evidence, and structural Lean formalization remain | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
-C703 is complete: all three split papers now share the title-page identity
+C703 records the title-page identity of the released I--III trilogy stage:
 *The Clebsch cubic: recovering, orienting, and realizing* and a restrained
 opening image, while their canonical titles, logical independence, and
-paper-owned proof surfaces remain unchanged.  The conclusions continue the
-same progression without administrative cross-promotion.  Full report:
+paper-owned proof surfaces remain unchanged. It is historical release context,
+not the current series count: Paper IV is now the fourth numbered paper. Full report:
 [`../2026-07-30-c703-clebsch-trilogy-identity.md`](../2026-07-30-c703-clebsch-trilogy-identity.md).
 
 C704 is complete with a positive functorial bridge.  The six outer
