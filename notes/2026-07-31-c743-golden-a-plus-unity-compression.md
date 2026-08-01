@@ -54,8 +54,10 @@ The organizing square turns six Golden cubics and six synchronized skew
 systems into coordinates and a lift of one universal quotient map.  The
 Pfaffian input replaces three independent coefficient or covariance
 arguments by one matching evaluation and one spectral specialization.  The
-quotient input replaces stability, rank-drop support, node thickening, and
-base-locus arguments and removes the two former Singular trust boundaries.
+quotient input replaces stability, local node-thickening, and base-locus
+arguments.  It removes the base-locus CAS boundary and reduces the remaining
+Jacobian computation to the global exclusion of defect away from the ten
+nodes.
 Its conormal corollary replaces separate source-kernel, target-polar, and
 cofactor arguments by one kernel calculation and one normalization witness.
 
@@ -618,9 +620,10 @@ recovers the same twelve monomial generators.  The computation corroborates
 the coordinate bridge; the displayed quotient proof is the mechanism.
 
 **Concrete effect.**  This goes beyond the C739 certificate: it identifies
-the complete local ideal, proves the defect is square-zero of length four at each node, computes
-total length forty, and removes the sole one-CAS boundary from the collision
-filtration.
+the complete local ideal and proves the defect is square-zero of length four
+at each node.  Combined with C739's certified global support calculation, it
+computes total length forty.  The certificate remains responsible only for
+excluding nilpotent defect away from the ten nodes.
 
 ### Lemma 4.3 (universal matching base is the equals arrangement)
 
@@ -680,7 +683,7 @@ multiplicity \(h\):
 | multiplicity | GIT and differential behavior |
 |---:|---|
 | \(h<m\) | stable; the quotient is smooth after dividing the three-dimensional \(\operatorname{PGL}_2\)-orbit |
-| \(h=m\) | strictly semistable and critical; every \(m\)-collision component contracts to the closed \(m+m\) orbit, whose slice is \((u,v)\mapsto u\otimes v\) with \(\dim u=\dim v=m-1\) |
+| \(h=m\) | strictly semistable and in the reduced critical support; every \(m\)-collision component contracts to the closed \(m+m\) orbit, whose slice is \((u,v)\mapsto u\otimes v\) with \(\dim u=\dim v=m-1\) |
 | \(h>m\) | unstable; scheme-theoretically this is the reduced \((m+1)\)-equals base arrangement of Theorem 4.3 |
 
 At a closed \(m+m\) orbit the critical ideal is
@@ -690,11 +693,14 @@ At a closed \(m+m\) orbit the critical ideal is
  \mathfrak u^{m-2}\mathfrak v^{m-2}.
 \]
 
-Thus the same threshold \(m\) controls stability, contraction, criticality,
-and the first base multiplicity.  Order six is the first nontrivial case:
-the critical support is the twenty-plane \(3\)-equals arrangement, paired
-into ten closed \(3+3\) orbits; the transverse critical components are
-reduced; and the base is the reduced fifteen-line \(4\)-equals arrangement.
+Thus the same threshold \(m\) controls stability, contraction, reduced
+critical support, and the first base multiplicity.  The displayed ideal is a
+completed-local statement at each closed \(m+m\) orbit; it is not asserted to
+describe the entire global critical scheme for arbitrary \(m\).  Order six
+is the first nontrivial case: the reduced critical support is the twenty-plane
+\(3\)-equals arrangement, paired into ten closed \(3+3\) orbits; the
+transverse critical components are reduced; and the base is the reduced
+fifteen-line \(4\)-equals arrangement.
 
 #### Proof
 
@@ -705,9 +711,10 @@ reduced matching base scheme.  If exactly \(m\) points coincide, the orbit
 closure has the complementary \(m\) points collide at a second point, so the
 component contracts to the closed \(m+m\) orbit.  Splitting the two clusters
 gives the balanced \(\mathbf G_m\)-slice of Corollary 4.2, and Theorem 4.1
-supplies its exact critical scheme.  On the stable locus the geometric
-quotient is smooth after removing orbit directions, so there are no other
-critical components.
+supplies its exact completed-local critical scheme at the closed orbit.  On
+the stable locus the geometric quotient is smooth after removing orbit
+directions, which identifies the reduced critical support.  No global
+nilpotent-structure claim follows from this argument alone.
 
 **Concrete effect.**  One threshold theorem replaces the separate stability,
 rank-drop-support, node, and base-locus stories and
@@ -715,7 +722,9 @@ predicts the higher-order scheme thickness explicitly.
 
 ### Corollary 4.5 (the Jacobian defect is the node cotangent sheaf)
 
-Let \(\mathcal R\) be the Golden Jacobian rank-drop scheme, let
+Assume the C739 global certificate that the defect of the Golden Jacobian
+rank-drop scheme is supported exactly at the ten closed \(3+3\) points.  Let
+\(\mathcal R\) be that scheme, let
 \(\mathcal R_{\mathrm{red}}\) be its twenty-plane reduction, and identify
 the ten closed \(3+3\) source points with the ten nodes of the Segre cubic
 \(\Sigma\).  Then there is a canonical \(S_6\)-equivariant isomorphism of
@@ -753,8 +762,11 @@ no linear term, so its cotangent space has basis the four classes of
 \]
 
 whose basis is the four classes of \(u_i v_j\).  Pullback gives the displayed
-isomorphism.  It is canonical because it is induced by the quotient map on
-cotangent spaces, and equivariance follows from equivariance of that map.
+local isomorphism.  The C739 support certificate implies that the global
+defect module is the direct sum of these ten localizations, so the local maps
+assemble to the displayed skyscraper-sheaf isomorphism.  It is canonical
+because it is induced by the quotient map on cotangent spaces, and
+equivariance follows from equivariance of that map.
 
 This is the exact surviving link among the previously unequal degeneracy
 objects.  The source critical scheme, target node scheme, and polar base are
@@ -790,8 +802,9 @@ four-variable local model.
   stabilizer route supplies the normal form; the twelve-minor calculation is
   then one line; the frozen-coordinate audit only checks the marking bridge.
 - **`ej`.**  The defect has an exact invariant not previously recorded: four
-  square-zero directions per node, total length forty.  This closes rather
-  than relabels the one-CAS trust gap.
+  square-zero directions per node, total length forty.  The human local model
+  replaces the CAS for its structure and multiplicity; the CAS remains only
+  for the global assertion that there is no defect elsewhere.
 
 ### Round 3 cycle 2: `tt + aa + ej`
 
@@ -926,7 +939,7 @@ where \(U\) is the signed outer augmentation module.  Then:
    \begin{CD}
     A @>{\alpha_C}>> \mathscr W\\
     @V{\mathcal J_3}VV @VV{(\operatorname{Pf}_T)_T}V\\
-    \mathcal I_3^* @>{4F_C}>> U
+    \mathcal I_3^* @>{F_C}>> U
    \end{CD}
    \]
    commute;
@@ -1315,9 +1328,9 @@ python3 notes/2026-07-31-c728-synchronized-pure-spinor-replay.py
 
 These checks certify existing exact normalizations, multiplicities, and
 finite incidence data.  They do not replace the human theorems.  Results
-4.1--4.5 close the former one-Singular nilpotent and base-reducedness
-boundaries; Singular now corroborates the marked coordinate bridge rather
-than supplying the mathematical mechanism.
+4.1--4.5 close the former base-reducedness boundary and determine the local
+nilpotent module.  Singular remains load-bearing only for the global support
+statement that the defect occurs nowhere outside the ten nodes.
 
 ## 13. Post-search unification specification
 
@@ -1396,10 +1409,12 @@ proof obligations.  Set the new target at 42--43 main-argument pages and
 56--57 total pages.  Do not spend the saving on C717, higher C729 censuses,
 the order-eight branch, derived pushforward, or a new physical shadow.
 
-The change replaces two CAS trust boundaries by the matching/equals theorem
-and the spanning-tree critical-ideal proof.  The central scalar checks remain
-exact and independently replayed, while more of the equality graph is proved
-by one human naturality argument.  No CAS claim is promoted, and no existing
+The change removes the base-locus CAS boundary by the matching/equals theorem
+and replaces the local nilpotent calculation by the spanning-tree
+critical-ideal proof.  One CAS boundary remains for global exclusion of
+off-node defect.  The central scalar checks remain exact and independently
+replayed, while more of the equality graph is proved by one human naturality
+argument.  No CAS claim is promoted, and no existing
 verification command or certificate needs to change unless theorem labels
 in the README are synchronized.
 
@@ -1456,7 +1471,9 @@ task.
 | whether the \(36\to6\) return is a linear adjunction | settled negatively | unsigned pull--push vanishes on augmentation; signed repair is circular |
 | whether another current compression survives the simplicity review | settled by Rounds 5 and 6 | two consecutive post-Theorem-6.1 portfolios found no further arrow or deleted obligation |
 
-The former nilpotent trust gap and the required saturation review are closed.
-The compactified-moduli branch is genuinely separate and requires a future
-allocation.  C743 remains active only so the review-neutral report can be
-handed to external review agents before any closeout decision.
+The local nilpotent-structure gap and the required saturation review are
+closed.  The global exclusion of off-node defect still uses the C739 Singular
+certificate; replacing that support calculation by a human proof remains a
+live C743 risk-reduction target.  The compactified-moduli branch is genuinely
+separate and requires a future allocation.  C743 remains active for external
+review before any closeout decision.
