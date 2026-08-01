@@ -55,6 +55,7 @@ produces a root of the golden quadratic. -/
 theorem goldenRoot_of_sqrtFive (h2 : (2 : K) ≠ 0) {s : K} (hs : s ^ 2 = 5) :
     ((1 + s) / 2) ^ 2 = (1 + s) / 2 + 1 := by
   field_simp [h2]
+  rw [show (1 + s) ^ 2 = 1 + 2 * s + s ^ 2 by ring]
   rw [hs]
   ring
 
