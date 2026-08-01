@@ -69,6 +69,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `clebsch`
 
+- **C751 `[clebsch]` [IN PROGRESS]** — tighten the focused Paper I rigidity and golden-orientation proof spine, validate both release roots, and obtain a blind before/after referee verdict → `notes/clebsch-tasks/c751-paper-i-proof-spine-tightening.md`.
 - **C321 `[clebsch]` [CONDITIONAL PAPER I SUBTASK; ONLY IF C320 TRIGGERS IT]** — replace any load-bearing Singular evidence retained by Paper I with independently specified exact certificates/checkers and canonical replay bundles; otherwise close it as not triggered → `notes/2026-07-20-c321-clebsch-singular-certificates.md`.
 - **C182 `[clebsch]` [QUEUED; LOCAL RELEASE GATES GREEN — EXTERNAL PUBLICATION AUTHORITY REQUIRED]** — the companion structuralization, standalone sync, aggregate q11 axiom audit, and both twenty-six-check release runs are complete; with explicit publication authority, archive the focused Paper I source, PDFs, exact verification surface, tracked pins, certificate packages, toolchain, and system dependencies under a stable DOI/release → `notes/clebsch-tasks/c182-paper-i-release.md`.
 - **C577 `[clebsch]` [IN PROGRESS; EV 5 — PERMITTED C182 EXTERNAL-WAIT EXCEPTION]** — build and referee-test a standalone factorization-memory Paper II around the conic quotient, ranks, balanced sheets, cubic orientation, profiles, modular depth, and arithmetic gluing, while inventorying rather than importing possible Paper III material → `notes/clebsch-tasks/c577-factorization-paper.md`.
