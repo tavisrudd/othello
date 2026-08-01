@@ -188,93 +188,67 @@ FFA (fit), Advances in Mathematics of Communications (safe), JCTA (reach).
 
 ### 3.1 Issues
 
-1. **LaTeX bug that will typeset garbage:** `m=r+1,qquad` — missing backslash on `\qquad`
-   inside displayed math (clebsch_factorization.tex:843). Will print "qquad" in math italic
-   mid-display in the balanced-orbit proof. Must fix.
+1. **The Lucas-socle lemma (Lemma 3.3, clebsch_factorization.tex:448–796) is still the
+   referee bottleneck of the series, but its proof is now well structured.** Outer-parity
+   vanishing goes through a torus-weight decomposition φ = φ₊+φ₋ at weights ±(q−1)
+   ((3.2c₄), :615), a root-defect factorization D(t) = (t^q−t)B(t) with B(t) = β₊u_S(t)
+   ((3.2c₅)–(3.2c₆), :625–636), and an explicit 𝐆-map Θ on S⊗L(1)⊗L(1)^{(e)}
+   ((3.2c₈)–(3.2c₁₀), :654–705) that reduces the finite-group parity question to
+   algebraic-group Homs; detecting modules are then excluded by tilting and highest-weight
+   arguments, with the branch S = L(q−7) handling the transitive-dihedral (full nonsplit
+   normalizer) stabilizers at q ≡ 3 (mod 4), e > 1 (:889–910). A proof-roadmap paragraph
+   (:508–516) and a case-tree table (:1024–1044) orient the reader. My spot-checks pass:
+   the weight bound 3q−7 < 3(q−1) forcing j ∈ {±1} for odd parity; the cocycle identity
+   for D(t) and the two-step degree argument giving B(t+a) = B(t)u_S(a); the Y₁ weights
+   (q+1, q−1, 1−q, −q−1) with Θ(C−B) = φ; and the tilting exclusion of the two-digit
+   candidates for the prime-field detectors. Residual asks: the L(q−7) exclusions
+   (:720–755, especially the p = 3 tilting-T(3) branch) are the hardest new paragraphs and
+   each deserves one displayed intermediate step; and the lemma at ~350 lines merits its
+   own subsection and a worked small-q example.
 
-2. **The Lucas-socle lemma (Lemma 3.3, lines 439–684) is the referee bottleneck of the
-   entire series.** It compresses: Steinberg tensor products, modular Hermite reciprocity,
-   a complete finite-group Hom-basis computation via Vandermonde/Lucas triangularization,
-   and a bespoke "one-carry row" elimination for the fourfold tensor square (574–661). The
-   one-carry argument in particular ((3.2c₄)–(3.2c₅) and the borrow-chain basis at 599–645)
-   is the kind of proof a modular-representation referee will spend a week on or bounce.
-   Nothing I checked is wrong, but three specific weak points need shoring up:
-   - the claim "a second use [of t^q = t] is impossible in this degree" (583–585) is
-     asserted from the degree bound `< 2q`; spell out why the matrix entries have degree
-     `< 2q` for the *fourfold* target (the twofold bound at 514–517 is argued; the fourfold
-     bound is not re-derived);
-   - "This also covers a chain ending at the last digit: its leading term still records the
-     edge before the cyclic Frobenius identification" (626–628) — one sentence for a genuinely
-     delicate cyclic-carry case; expand;
-   - the interface between `Z_fin/Z_rat` and the symmetrization operator (633–643) needs a
-     displayed statement of what exactly is being averaged over.
-   Recommendation: promote this lemma's proof to its own section with a strategy paragraph
-   (the style guide's "expand the point where understanding is won" rule points straight at
-   it), or move the one-carry elimination to an appendix with a worked p=3, e=2 example.
+2. **Typo in a displayed equation:** `\quad` missing its backslash, twice, inside
+   (3.2c₇) (clebsch_factorization.tex:650) — will typeset "quad" in math italic
+   mid-display. Whatever template produces these displays has generated this error class
+   before; grep for `,q?quad` at the build gate.
 
-3. **The endgame of the uniform sheet exclusion is patchwork.** The final paragraph of
-   Lemma 3.4's proof (886–895) disposes of `(q,K)=(5,A₄)`, `(7,A₄)`, `q=3`, and the q=13
-   A₅ non-case in six dense lines after 90 lines of machinery, and the sentence "We have
-   therefore produced the quadratic obstruction for every possible split stabilizer with
-   λ>1, a contradiction. Hence λ=1" forces the reader to reassemble the case tree alone.
-   A half-page case table (stabilizer type × field regime → which obstruction fires) would
-   fix this and double as the proof's roadmap.
+3. **Notation collision:** `L` is the affine evaluation space (:806 and throughout §4)
+   while `L(c₀,…)` denotes the restricted simple modules throughout the Lucas lemma
+   (:448–796). In a lemma whose content is Hom(L(…), Sym²F) versus trades on L, this is
+   unkind. Rename the evaluation space (e.g. `𝔏` or `E_Ω`).
 
-4. **Equation-tag scheme is internally colliding.** Tag `(3.2c)` names the order identity
-   `|G⁺/K| = qλ` (line 709) while `(3.2c₁)`–`(3.2c₆)` name six different displays in the
-   *previous* lemma (511–643). The 3.2-suffix ladder also skips letters (…3.2g, then 3.2l,
-   3.2m, 3.2n at 918–966). Renumber; as it stands, a citation to "(3.2c)" is ambiguous.
-
-5. **Notation collision:** `L` is the affine evaluation space (695, 1418 ff.) and `L(c₀,…)`
-   the restricted simple modules throughout Lemma 3.3. Context disambiguates, but in a
-   lemma whose whole content is Hom(L(…), Sym²F) versus trades on L, this is unkind. Rename
-   the evaluation space (e.g. `𝔏` or `E_Ω`).
-
-6. **Grammar in the main theorem statement:** "Suppose \((L^{\circ2})^\perp\) is
-   one-dimensional, its nonzero vectors have exactly two fibers" (912–913) is a comma
-   splice, and "fibers" here means "level sets/values" — earlier and later text says
-   "two-valued" and "two fibers" interchangeably. Fix the sentence and pick one term.
-
-7. **Stale bibliography entry:** the Paper I citation carries the old title
-   "Reconstructing the Clebsch code from its deep-hole syndrome locus"
-   (clebsch_factorization.tex:2929–2932); Paper I's actual title now includes "and its
-   golden orientation" (companion bib has it right). Sync before release, since the trust
-   ledger hashes the manuscript.
-
-8. **Uncommitted working-tree state.** This file is modified but uncommitted (git status at
-   review time), while its verification section pins an evidence fingerprint
-   (2792–2816). The frozen fingerprint necessarily predates the current text; the
-   statement-identity and fingerprint must be regenerated before any release claim is made
-   for the current wording.
+4. **Uncommitted working-tree state.** The manuscript and its verification JSONs are
+   modified but uncommitted, while the paper prints a pinned evidence fingerprint. The
+   statement identity and fingerprint must be regenerated, and the PDF rebuilt, before any
+   release claim is made for the current wording.
 
 ### 3.2 Suggestions
 
 - The **balanced-orbit completeness theorem (Theorem 3.5)** is the paper's real headline —
   an all-q classification, not a two-example study — and the abstract leads with it
-  correctly. But the introduction's mechanism paragraph (82–89) still narrates the paper as
-  "quotient → sheets → cubic", relegating completeness to a table. Restructure the intro
+  correctly. But the introduction's mechanism paragraph (§1) still narrates the paper as
+  "quotient → sheets → cubic", relegating completeness to its three-row table. Restructure the intro
   around: (1) completeness classification, (2) recovery/orientation for the two survivors,
   (3) Gorenstein duality. That is also the order of decreasing novelty.
 - The Gorenstein/self-association section (§4 end) is a self-contained gem: the
-  maximal-isotropy proof of the perfect pairing (1702–1749) is short and slick, and the
-  connection to the self-dual-code criterion of Rodríguez-Pajares et al. (1840–1847) is
+  maximal-isotropy proof of the perfect pairing is short and slick, and the
+  connection to the self-dual-code criterion of Rodríguez-Pajares et al. is
   well placed. Consider promoting Corollary 4.6 (`self-associated arithmetically
   Gorenstein, inverse system = cubic line`) to a named theorem; commutative algebraists are
   a real secondary audience and will search on those keywords.
-- Appendices A–E are honest about being decoration-relative (2022–2028 states the boundary
-  well). Appendix E (Tate plane, [2,9,1] vs [2,8,1] non-gluing) is the most likely cut if a
+- Appendices A–E are honest about being decoration-relative (the appendix preamble states the
+  boundary well). Appendix E (Tate plane, [2,9,1] vs [2,8,1] non-gluing) is the most likely cut if a
   journal asks for length: it defends a boundary rather than proving a headline.
 
 ### 3.3 Exposition
 
 The abstract violates the style guide's layering rule: "one-dimensional strength-two trade
 space with two-valued generator", "Frobenius-digit criterion", "the only missing Fischer
-layer is `Q𝓗₂`" (47–65) are all first uses with no gloss; a DCC/JCTA reader gets no
+layer is `Q𝓗₂`" (:48–66) are all first uses with no gloss; a DCC/JCTA reader gets no
 foothold until §2. Each needs a one-clause operational gloss or deletion from the abstract
 ("a five-dimensional radial layer" instead of "Fischer layer Q𝓗₂"). The body is better:
-the three-layer roadmap (103–120) is good, and proof-mode paragraphs before each theorem
+the three-layer roadmap in §1 is good, and proof-mode paragraphs before each theorem
 are a genuinely good pattern other computer-assisted papers should copy. The middle of the
-paper (Lemma 3.3 onward) reads as a wall; see item 2.
+paper remains its densest stretch; see item 1.
 
 ### 3.4 Grade
 
@@ -282,11 +256,11 @@ paper (Lemma 3.3 onward) reads as a wall; see item 2.
   theorem in the group after Paper I's rigidity theorem, and the machinery (defining-
   characteristic permutation modules replacing search) is the right proof. The Gorenstein
   chapter is a bonus with independent appeal.
-- (b) Writing/exposition: **B.** Dense center, colliding tags, abstract jargon, one
-  typesetting bug.
-- (c) Readiness: **B−.** Not submit-ready: items 1, 4, 6, 7, 8 are mechanical but
-  mandatory, and item 2 (Lucas lemma exposition) is a probable referee rejection risk in
-  current form.
+- (b) Writing/exposition: **B+.** The proof restructure, roadmap paragraph, and case-tree
+  table have removed the worst of the density; the abstract jargon and one typo class
+  remain.
+- (c) Readiness: **B.** Close: remaining blockers are the notation rename, the `\quad`
+  typo, the evidence re-freeze/commit, and the intro reordering of §3.2.
 
 ### 3.5 Venues
 
@@ -322,14 +296,14 @@ paper (Lemma 3.3 onward) reads as a wall; see item 2.
 
 2. **Heavy, load-bearing reliance on precise readings of Hitchin.** The square-class
    theorem needs, from the sources: the degree-2 generic cover (Chern number 2), branch
-   divisor = {J₀=0} irreducible, the chart restriction ι*J₀ = 16σ₃² *in a specific
-   normalization of J₀*, and the two-configuration classification over [xyz]
-   (02:169–231). The normalization dependence is acute: the constant `c=5` is exactly a
-   square-class statement, so any factor-of-square slip in "Hitchin's scale for J₀"
-   (02:259–260) is invisible — the paper handles this correctly by evaluating at the etale
-   point (02:222–231), which is the right argument, but the sentence "with the
-   normalization in his invariant calculation" (01:22–23) should cite the precise displayed
-   formula in Hitchin being normalized against.
+   divisor = {J₀=0} irreducible, the chart restriction ι*J₀ = 16σ₃² in the pinned
+   normalization of J₀, and the two-configuration classification over [xyz]
+   (02:169–231). The normalization dependence is acute — the constant `c=5` is exactly a
+   square-class statement, so any factor-of-square slip in the J₀ scale would be
+   invisible; the paper handles this correctly by evaluating at the etale point
+   (02:222–231), and the normalization citation is pinned to the exact displayed formulas
+   in Hitchin. What remains is verifying those pinned readings against the source, which
+   is the C680 closure.
 
 3. **The relative orientation theorem is hedged into near-unfalsifiability.** Theorem 1.2
    (`thm:orientation-source`) compares two orientation torsors "relative to" a marked
@@ -342,15 +316,7 @@ paper (Lemma 3.3 onward) reads as a wall; see item 2.
    theorems. Recommend demoting it to a proposition and re-centering the paper on Theorems
    1.1 and 1.3 (which is what the abstract's own README summary already does).
 
-4. **Integral boundary is described at length but unresolved** ("an unspecified cofinite
-   set of primes", 02:265–299 and 04:137–149). The text is admirably candid and even states
-   the missing assertion precisely (02:293–299). Fine as an open problem; but the abstract's
-   "specialization of the fibre exchanger modulo 11" phrasing risks a reader assuming an
-   integral incidence theorem at 11. The README's clarifying sentence (mod-11 concerns the
-   displayed fibre and exchanger only) should appear in the paper's abstract or
-   introduction, not only in the README.
-
-5. **Mathematical checks that pass:** the quadratic pinching lemma (02:74–97) is correct
+4. **Mathematical checks that pass:** the quadratic pinching lemma (02:74–97) is correct
    and nicely self-contained; the spinor computation θ(R)=2 via two reflections
    (04:102–123) is right (R = s_{e₂}s_{e₂−e₃} on the yz-plane, Q(e₂)Q(e₂−e₃)=1·2); the
    Gram-determinant six-arc proof (04:32–51) checks; the Petersen kernel matrix
@@ -412,63 +378,39 @@ classical degree-six bond-order observable restricts to the Clebsch invariant ex
 
 ### 5.1 Issues
 
-1. **Internal task IDs leak into the manuscript.** "On a C715 inverse chart the controls
-   are ratios of linear matching forms" (golden_operator.tex:1089); "The C715 matching
-   dictionary" (1102); "the C715 matching ratios" (1107); "The C715 inverse fibre" (1110–11);
-   "the C707 path marking" (1118–19). These are repo task IDs, meaningless to any reader
-   and a provenance leak. Must be replaced by mathematical names (e.g. "the cross-ratio
-   inverse chart of Theorem 5.1", "the path marking fixed in (…)"). This is the most
-   embarrassing defect in the group.
+1. **The new six-node cubic-wall corollary (uncommitted) restates Paper I's node theorem
+   without citing it.** The uncommitted `cor:golden-cubic-wall-nodes` proves, for each
+   sister, that Sing{Z_T = 0} is exactly the six ordinary double points [𝟏−6e_i], with an
+   exact-saturation/Hessian proof and a Milnor-total-saturation remark via Dolgachev.
+   That is the same six-node statement as Paper I's Corollary 8.3
+   (clebsch_rigidity.tex:1093–1112), reached by a third route. Cite the relation, as the
+   paper already does for the two-graph import (golden_operator.tex:748); the redundancy
+   is then a feature — three independent proofs of node completeness across the program,
+   further insulating the Hassett–Tschinkel exposure flagged in §1.1. The new Dolgachev
+   bibliography entry is also arXiv-number-only while the rest of the bibliography
+   carries journal data.
 
-2. **Same `\qquad` typo as Paper II:** `(u,v)\longmapsto u\otimes v,qquad`
-   (golden_operator.tex:358, inside Theorem `thm:matching-quotient-geometry`). Typesets
-   "qquad" in the displayed statement of a main theorem. Must fix.
+2. **Verification-surface sync.** The manuscript's description of the Lean gate's
+   coverage predates the completed Golden proof spine (the sharded
+   `GoldenMatchingJacobian*` files), so it now understates the formal surface; and the
+   verification supplement must be re-frozen for the uncommitted corollary before any
+   release claim.
 
-3. **The abstract fails the style guide comprehensively.** In 30 lines it uses, without
-   gloss: "coherent outer six-family", "Golden commutator system", "normalized marked skew
-   lift", "signed Joubert cubic vector", "Segre–Igusa polar map", "pure-spinor big cells",
-   "matching Specht ideal", "K₃,₃ frustration", "ETF(5,10)", "Slater amplitudes, Majorana
-   parity walls, Abelian anomaly equations" (31–61). No single community owns more than a
-   third of these. The four style-guide abstract questions are all answerable from the
-   content — object: a marked order-6 conference operator; theorem: all natural operations
-   are shadows of one universal matching quotient with a unique marked lift; mechanism: the
-   matching expansion of Pf[D_x,C]; boundary: what needs the support-half bit — but the
-   current text answers none of them for a cold reader. Rewrite from scratch at half the
-   jargon density.
+3. **Verified spot-checks that pass:** Z_T = ±10√5 det B_T from 16Z² = (2√5)⁶ det B²
+   (proof of Theorem 2.3(iii)); the frustration equivalences and the Gram identity
+   RRᵀ = 12(I − J/6) (Theorem 3.2); S₁₀² = 9I from G² = 12G (Corollary 3.3); the
+   e₅(Z) = 32·Vandermonde scalar and the product identity ∏(Z_T+Z_U) = −e₅(Z)³
+   (anomaly-inverse proof); the Hom-dimension characters in `thm:unmarked-boundary`; and
+   the primitive-kernel cofactor lemma. The collision-filtration appendix's chart
+   identities were not re-expanded but have plausible unit-prefactor structure and are
+   declared certificate-checked.
 
-4. **Overlap with Paper I is reproved instead of cited.** Proposition
-   `prop:support-two-graph` (660–695) rebuilds the support-split ⇒ conference-matrix
-   two-graph via parity counting; Paper I's Theorem 8.2 already constructs the same
-   switching class with `B²=5I` intrinsically, and the README declares Papers I/III
-   "independent provenance sources, not manuscript inputs". Independence is a legitimate
-   choice, but then the text should say in one sentence that this recovers
-   [Paper I, Thm 8.2] by a different route; at present the relationship is silent and a
-   referee who reads both will call it self-duplication.
-
-5. **Verified spot-checks that pass:** Z_T = ±10√5 det B_T from 16Z² = (2√5)⁶ det B²
-   (269–283); the frustration equivalences and the Gram identity RRᵀ = 12(I−J/6)
-   (570–595); S₁₀² = 9I from G² = 12G (626–630); the e₅(Z) = 32·Vandermonde scalar and the
-   product identity ∏(Z_T+Z_U) = −e₅(Z)³ (971–981); the Hom-dimension characters in
-   `thm:unmarked-boundary` (803–814). The primitive-kernel cofactor lemma (148–167) is
-   correct and a nice extraction. The collision-filtration appendix's chart identities
-   (1246–1257) I did not re-expand but their unit-prefactor structure is plausible and they
-   are declared certificate-checked.
-
-6. **Scope discipline is otherwise good.** The README's forbidden-claims list (no gauge
-   theory / topological qubit / positive dimer function) is respected in the text
-   (1186–1193), and physics material is consistently framed as "instruments" and
-   "transport", with the classical prior art (Costa–Dobrescu–Fox, Gripaios–Nguyen) cited
-   as owning the anomaly parametrization (1045–1049). The claimed contribution boundary —
-   marking compatibility, exact Slater cost, Pfaffian normalization — is stated correctly.
-
-7. **Bibliography is under-dressed:** several entries are arXiv-number-only with no year
-   (KondoSegre, HMSV, McDanielWatanabe, ChiriviMaffei, CaiGorenstein, TschinkelZhang;
-   1268–1330). Journal data exists for several (HMSV appeared; Chirivì–Maffei appeared).
-   Complete before submission.
-
-8. **Working tree modified / evidence freshness:** same caveat as Paper II — the file is
-   uncommitted relative to HEAD and its verification supplement references pinned witnesses;
-   re-freeze before any release statement.
+4. **Scope discipline is good.** The README's forbidden-claims list (no gauge theory /
+   topological qubit / positive dimer function) is respected in the text, physics
+   material is framed as "instruments" and "transport", and the classical prior art
+   (Costa–Dobrescu–Fox, Gripaios–Nguyen) is cited as owning the anomaly parametrization.
+   The claimed contribution boundary — marking compatibility, exact Slater cost, Pfaffian
+   normalization — is stated correctly.
 
 ### 5.2 Suggestions
 
@@ -484,18 +426,17 @@ classical degree-six bond-order observable restricts to the Clebsch invariant ex
   combined with the abstract's density it reads as inside-baseball. A subtitle naming the
   actual objects ("the order-six conference matrix, the Segre cubic, and marked matching
   quotients") would help editors triage it.
-- `thm:unmarked-boundary` (768–800) is an excellent negative result (Hom-dimension 0 for
-  the signed lift without the local system) and deserves mention in the introduction — it
-  is the cleanest evidence that the marking apparatus is necessary rather than decorative.
 
 ### 5.3 Exposition
 
-Introduction (63–103) is much better than the abstract — "separates propagation from
-provenance" is a good organizing sentence, and the theorem-by-theorem tour is clear.
-Section 2's definition of the fully marked presentation (106–115) is crisp. The middle
-sections assume increasing familiarity with the six-point yoga (duads/synthemes, outer S₆)
-without a single figure; one diagram of the X ↔ 𝒯 outer duality with the six sisters
-would pay for itself. The Verification and scope section (1169–1193) is well done.
+The abstract now names the object plainly, sequences the results, and points to the
+provenance papers; remaining gloss debt is modest ("coherent outer S₆-marking" and
+"Naimark–Gram construction" could each take a one-clause gloss). The introduction's
+"separates propagation from provenance" organization is good, and the marking-necessity
+paragraph now sits up front where it belongs. The middle sections still assume the
+six-point yoga (duads/synthemes, outer S₆) without a single figure; one diagram of the
+X ↔ 𝒯 outer duality with the six sisters would pay for itself. The Verification and
+scope section is well done.
 
 ### 5.4 Grade
 
@@ -504,9 +445,10 @@ would pay for itself. The Verification and scope section (1169–1193) is well d
   contribution; but a substantial fraction of the paper is expert reassembly of classical
   material (Joubert coordinates, Segre–Igusa duality, Fano components, Cayley two-graph
   facts) with the novelty living in the *coherence* of the assembly.
-- (b) Writing/exposition: **B−.** Abstract, task-ID leakage, missing figure, bibliography.
-- (c) Readiness: **C+.** Items 1–3 are mandatory; audience decision pending; verification
-  surface must be re-frozen against the current text.
+- (b) Writing/exposition: **B.** Remaining debts are the missing figure, modest abstract
+  glosses, and the whimsical title.
+- (c) Readiness: **B−.** Remaining: the audience/venue decision, the Paper I citation on
+  the new node corollary, and the verification re-freeze for the uncommitted text.
 
 ### 5.5 Venues
 
@@ -545,8 +487,8 @@ improved every inherited section (compare the census-dependent rigidity proof he
 
 ### 7.1 Issues spanning papers
 
-1. **Cross-reference and title drift between the papers.** Companion → Paper I theorem
-   number wrong (§2.1.1); Paper II bib → Paper I title stale (§3.1.7). With the series
+1. **Cross-reference drift between the papers.** Companion → Paper I theorem
+   number wrong (§2.1.1). With the series
    marketed as I/II/III, referees will read them together; a pre-submission pass that
    greps every `\cite{Rudd…}` against the current titles/numbering is cheap and necessary.
 2. **Shared-notation table absent.** Across the group: `C` = code (I) vs conference matrix
@@ -579,10 +521,9 @@ improved every inherited section (compare the census-dependent rigidity proof he
 
 - Companion §4 (q=13 passant code) → standalone short paper (§2.2). Highest-value move
   available in the group.
-- Golden §3 Prop `support-two-graph` → cite Paper I Thm 8.2 and shrink to a corollary
-  (§5.1.4).
 - Paper II Appendix E (Tate plane) → cut or compress to a remark if length pressure arises;
-  its content (a boundary non-identification) is also stated in prose at 2520–2526.
+  its content (a boundary non-identification) is also stated in prose at the end of
+  Appendix C.
 - Paper III's marked-bridge Theorem 1.2 → demote to proposition + appendix ledger (§4.1.3).
 
 ### 7.3 Ranking
@@ -600,32 +541,26 @@ improved every inherited section (compare the census-dependent rigidity proof he
 **By publication-readiness:**
 1. **Paper I** — submit after §1.1 items 1–4 and the repo's archive gates.
 2. **Companion** — one cross-reference fix; ships with Paper I.
-3. **Paper II** — mechanical fixes fast, but the Lucas-lemma exposition rework is real
-   work; two to four weeks of focused revision from submit-ready.
-4. **Golden** — mandatory cleanups small, but audience/venue decision and abstract rewrite
-   needed; also depends on Papers I/III stabilizing as provenance citations.
+3. **Paper II** — the Lucas-lemma restructure has landed; remaining work is the commit
+   and evidence re-freeze plus notation/gloss passes. Days, not weeks, from submit-ready.
+4. **Golden** — the mandatory text repairs have landed; the audience/venue decision and
+   supplement re-freeze remain, and it still ships best after Papers I–III are citable.
 5. **Paper III** — blocked (NO-GO) on citation-closure of the Hitchin inputs and a
    self-contained bundle; correct to hold.
 6. **Mega-paper** — not a candidate; keep frozen.
 
 ### 7.4 Nits (short list, no discussion)
 
-- clebsch_factorization.tex:843 — `qquad` missing backslash (also §3.1.1).
-- golden_operator.tex:358 — same bug (also §5.1.2).
-- golden_operator.tex:1089,1102,1107,1110–11,1118–19 — C715/C707 task-ID leakage.
+- clebsch_factorization.tex:650 — `,quad` (missing backslash), twice in one display.
 - clebsch_rigidity_computational_companion.tex:95 — "[Theorem 3.2]" → Theorem 4.3.
-- clebsch_factorization.tex:912–913 — comma splice + "fibers"/"values" terminology.
-- clebsch_factorization.tex:709 vs 511 — duplicate/ambiguous tag `(3.2c)`; letter-ladder
-  skips (3.2g → 3.2l).
-- clebsch_factorization.tex:2929–2932 — stale Paper I title in bibliography.
 - clebsch_rigidity.tex:1045–1046 — orbital matrices named `A`,`A'` while `A` is the arc.
 - Companion/mega census tables — C14 pair "23/(9,10)" breaks the two-digit `xy/uv`
   caption convention; document the parenthesization.
-- clebsch_hexagon_code.tex:594 (and Paper I 592) — "each supports one weight-three leader"
-  vs "each support one" subject agreement drift between the two copies (Paper I 594 reads
-  "supports", mega 673 reads "support"); harmonize whichever survives.
-- golden_operator.tex:1268–1330 — arXiv-only bibliography entries lack years/journal data.
-- Epigraph (I:48–52, II:41–45, III driver:34–38) — venue-dependent; decide once.
+- clebsch_hexagon_code.tex:673 vs clebsch_rigidity.tex:594 — "each support(s) one
+  weight-three leader" subject-agreement drift between the two copies; harmonize
+  whichever survives.
+- golden_operator.tex — the new Dolgachev bibliography entry is arXiv-number-only.
+- Epigraph (I:48–52, II, III driver) — venue-dependent; decide once.
 
 ### 7.5 Summary verdict
 
@@ -723,8 +658,7 @@ versus what the paper currently advertises.
   centered squaring — is a shadow of one universal matching quotient, and the unique extra
   bit needed to orient any signed shadow is a choice of support half."* That is
   Theorem 2.3 + Theorem 3.2(c–d) fused, and it is repeatable.
-- **The best cocktail-party fact is hidden mid-paper:** Theorem `thm:frustration`
-  (549–595) — *C² = 5I is equivalent to every balanced 3+3 cut having maximum-determinant
+- **The best cocktail-party fact is hidden mid-paper:** Theorem `thm:frustration` — *C² = 5I is equivalent to every balanced 3+3 cut having maximum-determinant
   frustration, and the ten cut-signs then force the order-ten conference matrix and the
   real ETF(5,10) with no classification input* — is the single most quotable equivalence in
   the group for a general combinatorial audience, and the abstract gives it one clause
@@ -815,8 +749,8 @@ justification against §8's headline and the venue's conventions.
 - Alternative (theorem-forward): *"One matching quotient: propagation and recovery for the
   golden conference operator C² = 5I."*
 - Flag: "shadow sisters" without an anchor actively misleads — an editor cannot tell the
-  field, and combined with the current abstract's density (§5.1.3) it maximizes desk-reject
-  risk. Of the five titles this is the one that most needs changing.
+  field from the title alone, and even with the now-plainer abstract it invites
+  desk-reject triage error. Of the five titles this is the one that most needs changing.
 
 ## 10. Optimal connection
 
@@ -836,15 +770,13 @@ Paper II ╌╌> Golden     (provenance: sheets/cubic as the finite shadow of th
 Paper III ──> Golden    (imports the golden fibre + exchanger as the characteristic-zero parent)
 ```
 
-**Complete duplication inventory** (beyond the two already flagged), with the canonical home
-for each:
+**Complete duplication inventory**, with the canonical home for each:
 
 1. *Support split ⇒ C with C²=5I (two-graph construction).* Paper I Thm 8.2
-   (clebsch_rigidity.tex:1049–1091) vs golden Prop `support-two-graph`
-   (golden_operator.tex:660–695). **Canonical home: Paper I** (there it is the intrinsic
-   *reconstruction* claim). Golden keeps a two-line corollary citing it; its parity-count
-   proof can survive as a remark ("a direct two-graph proof: …") if independence is wanted,
-   but must acknowledge the source.
+   (clebsch_rigidity.tex:1049–1091) and golden Prop `support-two-graph`. **Canonical
+   home: Paper I**; golden retains an independent orbit-parity proof and cites the
+   intrinsic construction at golden_operator.tex:748 — the right settlement. The same
+   pattern should be applied to the new node corollary (§5.1 item 1).
 2. *C²=5I from the tight-frame/Gram mechanism.* Paper III re-derives it a third way
    (G=(t+2)I+tC, frame operator scalar ⇒ C²=5I, plus translation-invariance of Z_C;
    sections/03-orientation-source.tex:43–72). **Keep the Gram derivation in III** — it is
@@ -873,13 +805,11 @@ for each:
    recurrence, not duplication; a shared sentence "we index by two-subsets of the five
    labels, as in [Paper I, Fig. 1]" in III and golden is enough.
 
-**Missing citations discovered while building this graph (must fix):** the golden paper's
-bibliography (golden_operator.tex:1268–1330) contains **no Rudd entries at all** — its
-Recovery section uses "the Clebsch code", its monomial group, and the support split
-(651–659) with zero citation; likewise Paper III cites Dye but not Paper I even where it
-names "Dye's finite theorem gives the complementary square-5 criterion"
-(01-introduction.tex:183–184) — acceptable for III (it can stand on Dye alone), mandatory
-to fix for golden.
+**Self-citation state:** golden's bibliography carries Papers I–III as "preprint, 2026"
+entries with the two-graph import cited inline; these become arXiv IDs at posting time
+(§10.2). Paper III cites Dye but not Paper I even where it names "Dye's finite theorem
+gives the complementary square-5 criterion" (01-introduction.tex:183–184) — acceptable:
+III can stand on Dye alone.
 
 **Is the split right?** Yes, with two amendments already argued: extract the q=13 code
 paper (fifth unit), and keep III as a two-theorem note rather than merging it into golden.
@@ -925,8 +855,7 @@ variants into I–III.
    credibility.
 5. **Golden last.** It is the synthesis paper: it needs I (two-graph import), II (sheet
    provenance), and III (characteristic-zero parent) to exist as citable objects so that
-   its provenance sections point at arXiv IDs instead of the current uncited prose and
-   internal task IDs (golden_operator.tex:1089–1119). Posting golden last also lets its
+   its provenance citations point at arXiv IDs. Posting golden last also lets its
    introduction legitimately tell the whole program story — which is where the group
    headline of §8.6 should appear in print.
 
@@ -945,9 +874,9 @@ submission time):
 - *Paper III:* one sentence stating its role as the characteristic-zero source of the
   finite sign torsor of Papers I–II (this replaces the current unexplained appearance of
   T11 at 04-arithmetic-specialization.tex:96–99).
-- *Golden:* its "propagation versus provenance" paragraph (golden_operator.tex:73–75,
-  96–102) is already the right shape — it just needs the three real citations installed
-  and the C-IDs purged.
+- *Golden:* its "propagation versus provenance" paragraph is already the right shape and
+  the three provenance citations are in place; at posting time the "preprint, 2026"
+  entries become the real arXiv IDs.
 
 **Why this order maximizes force:** I lands as a clean single-theorem paper with no
 dangling references; the companion and q13 papers convert its listing momentum into the
@@ -979,14 +908,15 @@ the odd part of a determinant pencil, one via commutator Pfaffians. Any reader c
 it in a minute of computer algebra; it is memorable at the blackboard; and it is currently
 *hidden* — the first identity sits mid-theorem in Paper I (clebsch_rigidity.tex:1077–1079,
 boxed but inside a two-part Theorem 8.2 whose statement runs 40+ lines), and the second is
-clause (ii) of a five-clause theorem in golden (golden_operator.tex:190–195). Neither
-abstract displays either formula.
+clause (ii) of a multi-clause theorem in golden. Paper I's abstract describes the
+operator in words; golden's abstract names the three equivalent cubic forms — but
+neither abstract displays the identity.
 
 Other surprises currently buried in routine machinery:
 
 - **The frustration equivalence** (C²=5I ⟺ every balanced 3+3 cut is maximum-determinant
-  frustrated ⟺ pentagon of negative edges), golden_operator.tex:549–595 — the most
-  repeatable fact for a pure combinatorialist, given one clause in the abstract (45–48).
+  frustrated ⟺ pentagon of negative edges), golden Theorem 3.2 — the most repeatable
+  fact for a pure combinatorialist, given one sentence in the abstract.
 - **The Sylvester-graph kill of q=9** (a six-clique would be needed in the distance-two
   graph of the Sylvester graph, whose clique number is 5), companion:341–366 — the
   cutest step in the whole "why 11" story, invisible from any abstract.
@@ -1022,7 +952,7 @@ the program behind it.
 **Coincidences stated as coincidences that are one structural fact:**
 
 - **The sign torsor.** The sheet-exchange character of Paper II (det character,
-  clebsch_factorization.tex:2513–2517), the spinor class [2] of Paper III's exchanger
+  Paper II Theorem C.3), the spinor class [2] of Paper III's exchanger
   (04-arithmetic-specialization.tex:87–123), and golden's support-half bit
   (golden_operator.tex:705–733) are three appearances of the single torsor
   T₁₁ = PGL₂(11)/PSL₂(11). The unifying statement was *written and then cut*: it is the
@@ -1082,8 +1012,8 @@ Ordering results by trust exposure:
   largest single point of failure.
 - **High exposure:** Paper III wholesale (Hitchin normalizations + C680 gaps) and, in a
   different way, golden's breadth (desk-reject risk from audience mismatch, not
-  correctness). Handled by sequencing (III gated, golden last) and by golden's abstract
-  rewrite (§5.1.3).
+  correctness). Handled by sequencing (III gated, golden last) and by keeping golden's abstract
+  plain (§5.3).
 
 **Split vs concentrate:** the existing split is already the de-risked configuration; every
 further concentration move (merging I+companion, folding III into golden, one program
@@ -1133,9 +1063,9 @@ Paper-by-paper headline slots:
 6. **Golden.** This is where all three axes are spent together. Open the paper with
    "Theorem A (program summary)" — the four-clause rosetta of §11.2, clause-cited to
    Papers I/II/III and to its own body, replacing nothing but sitting before the current
-   Definition 2.1 (golden_operator.tex:104–115). Rewrite the abstract to lead with the
-   two-cubics formula as the hook (§11.1), then the propagation theorem, then one full
-   sentence for the frustration/ETF chain (upgrading the clause at 45–48). Write the
+   Definition 2.1. Sharpen the abstract further to lead with the two-cubics formula as
+   the hook (§11.1), then the propagation theorem, then the frustration/ETF sentence.
+   Write the
    compressed T₁₁-torsor proposition from the mega-paper's raw material
    (clebsch_hexagon_code.tex:2295–2384 → half a page). *Give up:* golden's referee surface
    widens slightly (Theorem A references three other papers), accepted because by the
@@ -1266,7 +1196,7 @@ Verdict: cost is real, small, and worth it; now priced.
   equal-kernel implications and replayed carriers (clebsch_hexagon_code.tex:2295–2384,
   incl. the carrier/evidence table at 2329–2367). The golden version must merely
   *restrict* the carrier list to what the split papers actually construct: the sheet
-  character (II, clebsch_factorization.tex:2513–2517), the spinor class (III,
+  character (II, Theorem C.3), the spinor class (III,
   04-arithmetic-specialization.tex:87–123), the support-half bit (I §8 / golden §3), and
   the marker roots {4,8} (II Appendix C). The core argument — homomorphisms onto the
   symmetric group of a two-point set with the same index-two kernel coincide — is
@@ -1377,8 +1307,8 @@ right packaging is a *new* headline paper (rigidity + all-k classification + ope
 not an upgrade of Paper I after the fact.
 
 Runner-up (further away): an all-good-reduction version of Paper II's classification —
-the paper itself names the missing ingredients (integral models, degeneration analysis;
-clebsch_factorization.tex:1390–1396). That is a bigger project than a bounded push.
+the paper itself names the missing ingredients (integral models, degeneration
+analysis; the all-good-reductions paragraph after the rank theorem). That is a bigger project than a bounded push.
 
 If neither is pursued, say plainly: the program's realistic ceiling is a set of A−
 papers that are collectively memorable — which the §12.2/§12.5 amendments are designed
@@ -1386,92 +1316,29 @@ to maximize — and no packaging decision changes that.
 
 ---
 
-# Follow-up 4 (same date): staleness check against in-flight work
+# Provenance and review state
 
-## 13. What recent commits and the working tree change about §§1–12
+This review reflects the repository at commit `9f5e6f50` ("Close local Paper III review
+defects") plus the uncommitted working tree of 2026-08-01: clebsch_factorization.tex
+(+399/−232 vs HEAD, including its verification JSONs — the restructured Lucas-socle
+lemma and case-tree table reviewed in §3 are this in-flight text) and
+golden_operator.tex (+41 vs HEAD — the C757 six-node cubic-wall corollary reviewed in
+§5.1). Paper I, its companion, and the mega-paper are unchanged at this state; Paper III
+includes the repair commits `e5f14aa2` and `9f5e6f50`. C756 (all-k conic-filling, per
+§12.6) and C757 (Golden cubic wall census) are allocated and active.
 
-Checked: commit history scoped to `papers/golden-operator/`, `papers/clebsch-factorization/`,
-`lean/RelativeConicArcs/Golden*`, and the task notes; plus the current uncommitted diffs.
-Key events since (or concurrent with) my read: golden_operator.tex was committed at
-`595cc3ec` ("Complete Golden Lean proof spine", which also split the GoldenMatchingJacobian
-Lean files); clebsch_factorization.tex carries a large uncommitted diff (+399/−232 vs HEAD)
-that *grew* after my read; C756 (all-k conic-filling) was allocated per §12.6 and this
-report was committed (`b3068748`).
-
-### 13.1 Golden paper — all criticisms stand; line numbers shifted
-
-The committed HEAD version is the post-consolidation text I reviewed (the `674cebd1..HEAD`
-diff shows the abstract and intro I quoted are the *new* wording), with small subsequent
-additions that shift my §5 line anchors by +4 to +32. Re-verified against HEAD:
-
-- `,qquad` bug: **still present**, now golden_operator.tex:362 (was 358).
-- Task-ID leakage: **still present**, C715 at :1121, :1146, :1151, :1154 and C707 at
-  :1162 (was 1089–1119).
-- Missing self-citations: **still true** — the only `Rudd` in the file is the author line
-  (:25); the bibliography still contains no Papers I–III entries.
-- Abstract: unchanged from what I graded; §5.1.3 stands.
-- One genuine improvement: the C754 Lean spine completion (`595cc3ec`) sharded and closed
-  the Golden Jacobian/Pfaffian formal surface, so my §5.1 paraphrase of the Lean gate's
-  coverage ("does not formalize …") may now understate it; the *manuscript* sentence at the
-  verification section should be re-synced to the completed spine before release. This
-  nudges golden's readiness trajectory upward but changes no grade: the mandatory text
-  fixes (IDs, typo, citations, abstract) are untouched.
-
-### 13.2 Paper II — my read was mid-flight; criticisms stand and two got stronger
-
-The working tree gained ~116+ lines *after* my read, concentrated exactly in the
-Lucas-socle lemma: a new detecting-simple branch `L(q−7)` for q ≡ 3 (mod 4), e > 1
-(now :471–479, :701–704) and a new Frobenius-section apparatus with tags (3.2c₇)/(3.2c₈)
-(:632–674), matched by new untracked Lean files (`ClebschFirstFrobeniusSection.lean`,
-`ClebschOuterParityWeights.lean`, etc.) and the commits "prove Lucas first-wall
-obstruction" / "clarify first-wall parity gate". Consequences for §3:
-
-- **`,qquad` bug: worse, not fixed.** The instance I flagged moved (843 → :959) and the
-  in-flight edits introduced *four more* of the same typo — :624, :648, :649, :656, all in
-  the new (3.2c₇/₈) displays. Whatever template is generating these displays should be
-  fixed once; grep `,qquad` before any build gate.
-- **Lucas-lemma restructure recommendation (§3.1.2): strengthened.** The lemma is growing,
-  not shrinking — the new L(q−7)/Frobenius-section arm extends precisely the part I called
-  the referee bottleneck, and the tag ladder now runs to (3.2c₈) alongside the colliding
-  plain (3.2c) (§3.1.4 stands, larger). The mitigating news: the first-wall obstruction is
-  being formalized in Lean, which addresses referee *trust* but not referee *readability*;
-  the strategy-paragraph/appendix restructure is still needed and its target is now the
-  enlarged proof (~:455–740 in the current tree).
-- Comma splice in the main theorem statement: still present (:1028, was 912). Stale
-  Paper I title in the bibliography: still present (:3047, was 2929).
-- §3.1.8 (frozen evidence vs modified tree): still true and now larger — the verification
-  JSONs are themselves modified in the tree, so the re-freeze obligation is being tracked,
-  but the printed-fingerprint warning stands until the next freeze.
-- Grades unchanged: (a) A− (if anything firmer — the extension-field arm is being hardened
-  and formalized), (c) still B−.
-
-### 13.3 Already actioned by the repo
-
-- **C756 allocated** (`notes/clebsch-tasks/c756-all-k-conic-filling.md`, committed in
-  `b3068748`) with the §12.6 theorem statement verbatim as its goal. Nothing in §12.6 to
-  revise; the ~30% tools-sufficiency estimate now attaches to a live task, and the
-  "decisively fail to prove" framing in the task file is the right hedge.
-- This report is committed; the §11/§12 packaging recommendations are on record and
-  nothing in the in-flight work contradicts them.
-
-### 13.4 Packaging conclusions (§11/§12): unchanged, with one re-aim
-
-- **§12.2 (move the dual-cubic hook into Paper I): unaffected.** No recent commit touches
-  clebsch_rigidity.tex; the identity at rigidity:1077–1086 is stable and the
-  recommendation stands as written.
-- **§12.5 partition: unaffected — mildly reinforced.** Golden's formal surface maturing
-  independently (C754) and Paper II's proof arm hardening independently (C746/C750) is the
-  split working as designed; nothing suggests re-coupling.
-- **One re-aim:** my §3.2 suggestion to restructure the intro around the completeness
-  theorem should be executed *after* the in-flight Frobenius-section work lands, since the
-  abstract's "a Frobenius-digit criterion and two short socle tests replace
-  extension-field casework" now describes a proof still being edited; restructuring prose
-  around a moving proof wastes a pass.
-
-### 13.5 Net effect on the review
-
-No finding is invalidated. Line-number anchors in §§3 and 5 are stale as noted above
-(golden +4…+32; factorization +0…+116 with the map: 358→362, 1089→1121ff, 843→959,
-912→1028, 2929→3047, Lucas lemma 439–684→~455–740). Two criticisms strengthened
-(Paper II typo class, Lucas-lemma size); one softened (golden Lean-coverage sentence, now
-understating a completed spine); grades and all packaging recommendations unchanged.
+**Archive note.** Earlier committed revisions of this report (`b3068748`, `b866cb8f`)
+recorded defects that have since been fixed and are therefore no longer listed above: in
+golden, internal task-ID leakage (C715/C707), a `\qquad` typo, missing self-citations to
+Papers I–III, an undressed bibliography, and a jargon-dense abstract (all repaired in
+`f555998f`, which also promoted the unmarked-boundary result into the introduction); in
+Paper II, five `\qquad` typos, a duplicate/skipping equation-tag scheme, a comma splice
+in the main theorem statement, a stale Paper I title in the bibliography, and the missing
+case-tree summary (all repaired in the in-flight rework, which also replaced the former
+borrow-chain elimination that earlier revisions flagged as the primary referee risk); in
+Paper III, an unpinned J₀-normalization citation and a missing mod-11 scope note in the
+abstract (repaired in `9f5e6f50`). Grades were updated accordingly: Paper II writing
+B→B+ and readiness B−→B; golden writing B−→B and readiness C+→B−. Sections 8–12 are a
+Q&A record and retain their dialogue structure, including the §12.1 partial reversal of
+the earlier window-demotion recommendation; only their factual state references were
+updated. Superseded reasoning lives in this file's git history, not in the text above.
