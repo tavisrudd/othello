@@ -37,6 +37,12 @@ geometry of a regular \(S_6\)-orbit with balanced stabilizers
 \(S_3\times S_3,S_3\times S_2,S_3\times S_2\).  The two order-twelve
 coset orbits are exchanged by \(x\mapsto-x\).
 
+This compression is spectrally rigid.  The 140 balanced-chamber incidence
+vectors in the regular 720-dimensional orbit have rank 138.  Their only
+linear relations are the two differences among the three orbitwise sums;
+equivalently, incidence on the unbalanced chambers determines every
+centered balanced signal.
+
 The simultaneous-closing rule is sharp: away from the common unstable base
 locus, exactly one, two, or four of the six Hamiltonians can close, but not
 exactly three or five.  All six close on the fifteen-line unstable locus.
@@ -376,7 +382,71 @@ subgroups \(H_1,\ldots,H_r\), the graph with vertices
 \(H_i\) generate \(G\).  What is Golden-specific is the appearance of the
 three Young subgroups above from the outer duad--syntheme collision rule.
 
-## 7. Boolean controls, optima, and dimers
+## 7. Incidence operator and Specht spectrum
+
+Let \(B\) be the \(720\times140\) bipartite incidence matrix from the
+regular orbit \(G\) to
+
+\[
+ \mathcal B=G/H\sqcup G/K_+\sqcup G/K_-.
+\]
+
+The balanced permutation module has the Young-module description
+
+\[
+ \mathbf Q[\mathcal B]
+ \cong M^{(3,3)}\oplus2M^{(3,2,1)}.
+\]
+
+Young's rule therefore gives the Specht multiplicities
+
+\[
+ 3S^{(6)}\oplus5S^{(5,1)}\oplus5S^{(4,2)}
+ \oplus2S^{(4,1,1)}\oplus3S^{(3,3)}
+ \oplus2S^{(3,2,1)}.
+\]
+
+Exact integer computation factors the characteristic polynomial of the
+Gram operator \(Q=B^{\mathsf T}B\) as
+
+\[
+\begin{aligned}
+ \chi_Q(X)={}&X^2(X-60)(X-40)^5(X-16)^{10}(X-14)^{16}
+ (X-12)^5\\
+ &\cdot(X-10)^{16}(X-8)^{15}(X-4)^5
+ (X^2-60X+432)^5\\
+ &\cdot(X^2-20X+48)^5(X^2-20X+80)^9\\
+ &\cdot(X^3-64X^2+960X-4160)^9.
+\end{aligned}
+\]
+
+The exponents reflect the Specht dimensions: a \(G\)-equivariant operator
+acts only on the small multiplicity space inside each isotypic component.
+In particular \(Q\) has rank 138.  If
+\({\bf1}_H,{\bf1}_{K_+},{\bf1}_{K_-}\) denote the three orbitwise constant
+vectors, then
+
+\[
+ B{\bf1}_H=B{\bf1}_{K_+}=B{\bf1}_{K_-}={\bf1}_G.
+\]
+
+Their two differences already span a two-dimensional kernel, so the rank
+calculation proves that these are all the relations.  Thus the centered
+parts of the three coset signals embed directly into the regular orbit.
+This is an incidence-tomography statement: aside from redistributing an
+additive constant among the three orbits while preserving their total, a
+balanced chamber weighting can be reconstructed from its footprint on the
+720 unbalanced chambers.
+
+This operator compression also generalizes.  For arbitrary finite
+\(G\) and subgroups \(H_i\), the Gram matrix of the coset-incidence map is
+the matrix of intersections of translated subgroups, and its spectral
+problem reduces irrep by irrep to multiplicity spaces
+\(\bigoplus_i V^{H_i}\).  The exceptional feature here is that the three
+Golden Young subgroups make those spaces tiny enough to yield the displayed
+factorization and leave no hidden incidence relation.
+
+## 8. Boolean controls, optima, and dimers
 
 The exact Boolean census has a direct GIT explanation.
 
@@ -395,7 +465,7 @@ Thus the 44 null Boolean masks split as \(30+12+2\), with ranks four, two,
 and zero respectively; they should not be conflated as one kind of gap
 closing.
 
-## 8. Monodromy and parity-pump obstruction
+## 9. Monodromy and parity-pump obstruction
 
 Along a gapped loop, each continuous nonzero function
 \(\operatorname {Pf}A_T\) returns with the same sign.  The six parities are
@@ -426,7 +496,7 @@ marked Hamiltonians by hand.  Likewise, Berry phases of nondegenerate
 ground-state lines may occur geometrically, but no quantized value follows
 from the Pfaffian chamber data alone.
 
-## 9. Literature boundary
+## 10. Literature boundary
 
 No source in this C717 comparison was read cover-to-cover; four primary
 sources were used at targeted full-text depth.  The purpose was background
@@ -460,7 +530,7 @@ pump requires additional spatial, boundary, or defect structure.  This
 report makes no claim that parity chambers or Pfaffian crossings in generic
 finite Majorana systems are new.
 
-## 10. Reproducibility
+## 11. Reproducibility
 
 From `/home/tavis/src/othello` run
 
@@ -475,16 +545,19 @@ representatives, verifies the two Segre polynomial identities and all six
 Pfaffian identities, derives the 15 collision synthemes, transports four
 exact witnesses through all 720 strict orders, computes the balanced
 collision graph, identifies the three stabilizers and their coset orbits,
-checks subgroup generation and factor width, checks all 64 Boolean controls
-and exact matrix ranks, and writes the canonical JSON certificate.  The
+checks subgroup generation and factor width, certifies the exact
+140-dimensional incidence Gram spectrum, checks all 64 Boolean controls and
+exact matrix ranks, and writes the canonical JSON certificate.  The
 replay reads only the frozen coefficient data in that certificate and uses a
 separate evaluator, union-find and group-action implementations, rational
-rank routine, all 64 Boolean controls, and 3,125 further exact integer
-identity points.
+rank routine, an independent annihilator-and-moment spectral check, all 64
+Boolean controls, and 3,125 further exact integer identity points.
 
 The finite certificate proves the convention tables, order-incidence graph,
 component sizes, coset compression, adjacency degrees, Boolean ranks, and
-displayed witnesses.
+displayed witnesses.  For the Gram factorization it verifies the degree-18
+squarefree annihilator exactly and determines the thirteen irreducible
+factor multiplicities from thirteen full-rank trace moments.
 The irreducibility, intersection multiplicity rule, connectedness lemma, and
 topological obstruction are human arguments above; they are not inferred
 from finite sampling.
@@ -508,6 +581,15 @@ can access 36 generic one-wall exits, whereas the six outer pole chambers
 have only 12 and every unbalanced chamber only three.  This is algebraic
 connectivity, not topological protection.
 
+The second-order strengthening is operator-theoretic.  The balanced side is
+the small Young permutation module
+\(M^{(3,3)}\oplus2M^{(3,2,1)}\), and its incidence Gram operator has the
+exact factorization above.  Rank 138 closes the last possible combinatorial
+loophole: beyond the two forced equalities among orbitwise totals, the 140
+balanced chamber indicators have no relation.  This is the sharpest useful
+compression of the mechanism, because all further spectral data live on
+six small Specht multiplicity spaces rather than on an 860-vertex graph.
+
 ## Mystery ledger
 
 - **Settled:** 860 connected real cube chambers, with 50 sign vectors and
@@ -521,6 +603,11 @@ connectivity, not topological protection.
   \(S_3\times S_3,S_3\times S_2,S_3\times S_2\).  The two small 60-chamber
   orbits are exchanged by the antipodal control involution, and diameter ten
   is twice the exact subgroup-factor width five.
+- **Settled by the second-order `ej2` pass:** the balanced incidence module
+  is \(M^{(3,3)}\oplus2M^{(3,2,1)}\); its exact Gram spectrum has rank 138,
+  and the only two relations among all 140 indicators are the forced
+  differences among the three orbitwise constants.  No hidden incidence
+  degeneracy remains.
 - **Generalized:** the exclusion of singleton signs holds for every real
   system with vanishing first and third moments, and every sign pattern with
   at least two entries of each sign is realizable.  Only the finer coset

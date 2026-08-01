@@ -176,7 +176,11 @@ particular:
   regular \(S_6\)-orbit with balanced stabilizers
   \(S_3\times S_3,S_3\times S_2,S_3\times S_2\); subgroup-factor width five
   explains diameter ten, and the antipode exchanges the two 60-chamber pole
-  orbits.  Simultaneous closing multiplicities are
+  orbits.  The 140 balanced indicators form
+  \(M^{(3,3)}\oplus2M^{(3,2,1)}\); their exact incidence Gram operator has
+  rank 138, with only the two forced orbit-constant relations, and its full
+  Specht-factorized spectrum is frozen in the C717 certificate.
+  Simultaneous closing multiplicities are
   exactly one, two, four, or six; the common six-wall locus is the reduced
   fifteen-line unstable base scheme, with generic rank four and the six
   rank-two C709 dimer vertices.  Each gapped six-Majorana class-D parity

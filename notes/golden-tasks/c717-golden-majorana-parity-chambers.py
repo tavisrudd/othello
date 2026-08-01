@@ -37,6 +37,23 @@ STANDARD_WITNESSES = (
     (-6, -5, -3, -2, -1, 3),
 )
 
+# Ascending coefficients, followed by the characteristic-polynomial exponent.
+GRAM_FACTORS = (
+    ((0, 1), 2),
+    ((-60, 1), 1),
+    ((-40, 1), 5),
+    ((-16, 1), 10),
+    ((-14, 1), 16),
+    ((-12, 1), 5),
+    ((-10, 1), 16),
+    ((-8, 1), 15),
+    ((-4, 1), 5),
+    ((432, -60, 1), 5),
+    ((48, -20, 1), 5),
+    ((80, -20, 1), 9),
+    ((-4160, 960, -64, 1), 9),
+)
+
 # X_M = multiplier * (z_a + z_b)/2 in the frozen C707 orientation.
 MATCHING_TO_PAIR = {
     ((0, 1), (2, 3), (4, 5)): (-1, (0, 1)),
@@ -134,6 +151,30 @@ def polynomial_multiply(left, right):
             exponent = tuple(x + y for x, y in zip(a, b))
             result[exponent] = result.get(exponent, 0) + ca * cb
     return {key: value for key, value in result.items() if value}
+
+
+def coefficient_polynomial_multiply(left, right):
+    result = [0] * (len(left) + len(right) - 1)
+    for i, a in enumerate(left):
+        for j, b in enumerate(right):
+            result[i + j] += a * b
+    return tuple(result)
+
+
+def root_power_sums(monic_ascending, count):
+    degree = len(monic_ascending) - 1
+    descending = tuple(reversed(monic_ascending))
+    assert descending[0] == 1
+    result = [degree]
+    for power in range(1, count):
+        value = 0
+        upper = power - 1 if power <= degree else degree
+        for index in range(1, upper + 1):
+            value += descending[index] * result[power - index]
+        if power <= degree:
+            value += power * descending[power]
+        result.append(-value)
+    return tuple(result)
 
 
 def cubic_polynomial(cubic):
@@ -434,12 +475,14 @@ def build():
     assert len({act(unbalanced_base, permutation) for permutation in permutations}) == 720
     neighbor_seeds = sorted(neighbors[unbalanced_base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))
     coset_orbits = []
+    balanced_orbits = []
     stabilizers = []
     for seed in neighbor_seeds:
         stabilizer = tuple(
             permutation for permutation in permutations if act(seed, permutation) == seed
         )
         orbit = {act(seed, permutation) for permutation in permutations}
+        balanced_orbits.append(orbit)
         assert len(stabilizer) == len(neighbors[seed])
         assert {act(unbalanced_base, permutation) for permutation in stabilizer} == neighbors[seed]
         unused = set(range(6))
@@ -485,6 +528,55 @@ def build():
     assert max(word_length.values()) == 5
     farthest = sorted(permutation for permutation, length in word_length.items() if length == 5)
     assert len(farthest) == 7
+
+    balanced_vertices = sorted(
+        (vertex for vertex in neighbors if len(neighbors[vertex]) > 3), key=repr
+    )
+    gram = []
+    for left in balanced_vertices:
+        gram.append(
+            [
+                len(neighbors[left]) if left == right else len(neighbors[left] & neighbors[right])
+                for right in balanced_vertices
+            ]
+        )
+    sparse_gram = [tuple((column, value) for column, value in enumerate(row) if value) for row in gram]
+
+    def gram_multiply(vector):
+        return [sum(value * vector[column] for column, value in row) for row in sparse_gram]
+
+    orbit_indicators = [
+        [int(vertex in orbit) for vertex in balanced_vertices] for orbit in balanced_orbits
+    ]
+    orbit_images = [gram_multiply(indicator) for indicator in orbit_indicators]
+    assert orbit_images[0] == orbit_images[1] == orbit_images[2]
+
+    minimal_polynomial = (1,)
+    for factor, _ in GRAM_FACTORS:
+        minimal_polynomial = coefficient_polynomial_multiply(minimal_polynomial, factor)
+    assert len(minimal_polynomial) - 1 == 18
+    for basis in range(140):
+        vector = [int(index == basis) for index in range(140)]
+        for coefficient in reversed(minimal_polynomial[:-1]):
+            vector = gram_multiply(vector)
+            vector[basis] += coefficient
+        assert not any(vector)
+
+    moment_count = len(GRAM_FACTORS)
+    traces = [140] + [0] * (moment_count - 1)
+    for basis in range(140):
+        vector = [int(index == basis) for index in range(140)]
+        for power in range(1, moment_count):
+            vector = gram_multiply(vector)
+            traces[power] += vector[basis]
+    factor_moments = [root_power_sums(factor, moment_count) for factor, _ in GRAM_FACTORS]
+    assert matrix_rank([list(row) for row in zip(*factor_moments)]) == moment_count
+    expected_traces = tuple(
+        sum(exponent * moments[power] for moments, (_, exponent) in zip(factor_moments, GRAM_FACTORS))
+        for power in range(moment_count)
+    )
+    assert tuple(traces) == expected_traces
+    assert sum((len(factor) - 1) * exponent for factor, exponent in GRAM_FACTORS) == 140
 
     boolean = Counter()
     boolean_examples = {}
@@ -586,6 +678,25 @@ def build():
             "subgroup_factor_width": 5,
             "seven_width_five_permutations": farthest,
             "antipode_exchanges_the_two_K12_orbits": True,
+        },
+        "balanced_incidence_spectrum": {
+            "gram_size": 140,
+            "rank": 138,
+            "kernel": "span of the two differences among the three orbitwise all-ones vectors",
+            "characteristic_factors_ascending": [
+                {"coefficients": factor, "exponent": exponent} for factor, exponent in GRAM_FACTORS
+            ],
+            "minimal_polynomial_degree": 18,
+            "verification": "exact squarefree annihilator plus 13 full-rank trace moments",
+            "young_permutation_module": "M^(3,3) + 2 M^(3,2,1)",
+            "specht_multiplicities": {
+                "(6)": 3,
+                "(5,1)": 5,
+                "(4,2)": 5,
+                "(4,1,1)": 2,
+                "(3,3)": 3,
+                "(3,2,1)": 2,
+            },
         },
         "boolean_census": [
             {

@@ -19,6 +19,21 @@ WITNESSES = (
     (-6, -5, -4, -3, -2, -1),
     (-6, -5, -3, -2, -1, 3),
 )
+EXPECTED_GRAM_FACTORS = (
+    ((0, 1), 2),
+    ((-60, 1), 1),
+    ((-40, 1), 5),
+    ((-16, 1), 10),
+    ((-14, 1), 16),
+    ((-12, 1), 5),
+    ((-10, 1), 16),
+    ((-8, 1), 15),
+    ((-4, 1), 5),
+    ((432, -60, 1), 5),
+    ((48, -20, 1), 5),
+    ((80, -20, 1), 9),
+    ((-4160, 960, -64, 1), 9),
+)
 
 
 def values(cubics, point):
@@ -57,6 +72,51 @@ def rank(matrix):
                     work[row][j] -= scale * work[result][j]
         result += 1
     return result
+
+
+def rectangular_rank(matrix):
+    work = [[Fraction(entry) for entry in row] for row in matrix]
+    row_count = len(work)
+    column_count = len(work[0])
+    pivot_row = 0
+    for column in range(column_count):
+        pivot = next((row for row in range(pivot_row, row_count) if work[row][column]), None)
+        if pivot is None:
+            continue
+        work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+        pivot_value = work[pivot_row][column]
+        for j in range(column, column_count):
+            work[pivot_row][j] /= pivot_value
+        for row in range(row_count):
+            if row != pivot_row and work[row][column]:
+                scale = work[row][column]
+                for j in range(column, column_count):
+                    work[row][j] -= scale * work[pivot_row][j]
+        pivot_row += 1
+        if pivot_row == row_count:
+            break
+    return pivot_row
+
+
+def multiply_polynomials(left, right):
+    product = [0] * (len(left) + len(right) - 1)
+    for i, a in enumerate(left):
+        for j, b in enumerate(right):
+            product[i + j] += a * b
+    return tuple(product)
+
+
+def power_sums(factor, count):
+    degree = len(factor) - 1
+    coefficients = tuple(reversed(factor))
+    sums = [degree]
+    for power in range(1, count):
+        last = power - 1 if power <= degree else degree
+        recurrence = sum(coefficients[index] * sums[power - index] for index in range(1, last + 1))
+        if power <= degree:
+            recurrence += power * coefficients[power]
+        sums.append(-recurrence)
+    return tuple(sums)
 
 
 def commutator(conference, point):
@@ -213,12 +273,12 @@ def main():
         seed_data.append((len(orbit), len(stabilizer), tuple(sorted(point_orbit_sizes))))
         stabilizers.append(stabilizer)
     assert seed_data == [(60, 12, (1, 2, 3)), (60, 12, (1, 2, 3)), (20, 36, (3, 3))]
-    small_orbits = [
+    balanced_orbits = [
         {act(seed, permutation) for permutation in permutations}
-        for seed in sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))[:2]
+        for seed in sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))
     ]
-    assert not (small_orbits[0] & small_orbits[1])
-    assert antipode(sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))[0]) in small_orbits[1]
+    assert not (balanced_orbits[0] & balanced_orbits[1])
+    assert antipode(sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))[0]) in balanced_orbits[1]
 
     def compose(left, right):
         return tuple(left[right[index]] for index in range(6))
@@ -237,6 +297,55 @@ def main():
                 frontier.append(product)
     assert len(generated) == 720
     assert Counter(word_length.values()) == Counter({0: 1, 1: 50, 2: 180, 3: 334, 4: 148, 5: 7})
+
+    # Independently certify the exact 140-by-140 balanced-incidence Gram spectrum.
+    balanced = tuple(sorted((vertex for vertex in neighbors if len(neighbors[vertex]) > 3), key=repr))
+    assert len(balanced) == 140
+    gram = tuple(
+        tuple(len(neighbors[left] & neighbors[right]) for right in balanced)
+        for left in balanced
+    )
+
+    def gram_times(vector):
+        return tuple(sum(entry * value for entry, value in zip(row, vector)) for row in gram)
+
+    orbit_indicators = [
+        tuple(int(vertex in orbit) for vertex in balanced) for orbit in balanced_orbits
+    ]
+    orbit_images = [gram_times(indicator) for indicator in orbit_indicators]
+    assert orbit_images[0] == orbit_images[1] == orbit_images[2]
+
+    annihilator = (1,)
+    for factor, _ in EXPECTED_GRAM_FACTORS:
+        annihilator = multiply_polynomials(annihilator, factor)
+    assert len(annihilator) - 1 == 18
+    for basis in range(140):
+        vector = tuple(int(index == basis) for index in range(140))
+        for coefficient in reversed(annihilator[:-1]):
+            vector = list(gram_times(vector))
+            vector[basis] += coefficient
+            vector = tuple(vector)
+        assert not any(vector)
+
+    moment_count = len(EXPECTED_GRAM_FACTORS)
+    traces = [140]
+    columns = [[int(index == basis) for index in range(140)] for basis in range(140)]
+    for _ in range(1, moment_count):
+        columns = [gram_times(column) for column in columns]
+        traces.append(sum(columns[index][index] for index in range(140)))
+    factor_moments = [power_sums(factor, moment_count) for factor, _ in EXPECTED_GRAM_FACTORS]
+    assert rectangular_rank(tuple(zip(*factor_moments))) == moment_count
+    assert tuple(traces) == tuple(
+        sum(exponent * moments[power] for moments, (_, exponent) in zip(factor_moments, EXPECTED_GRAM_FACTORS))
+        for power in range(moment_count)
+    )
+    assert sum((len(factor) - 1) * exponent for factor, exponent in EXPECTED_GRAM_FACTORS) == 140
+    certificate_factors = tuple(
+        (tuple(item["coefficients"]), item["exponent"])
+        for item in data["balanced_incidence_spectrum"]["characteristic_factors_ascending"]
+    )
+    assert certificate_factors == EXPECTED_GRAM_FACTORS
+    assert data["balanced_incidence_spectrum"]["rank"] == 138
 
     # A second direct implementation checks all 64 Boolean controls and ranks.
     boolean = Counter()
@@ -265,7 +374,7 @@ def main():
         assert sum(entry**3 for entry in amplitudes) == 0
         checked += 1
     assert checked == 3125
-    print("replayed 860 chambers, S6 coset compression, diameter 10, 64 Boolean controls, and 3125 identity points")
+    print("replayed 860 chambers, S6 cosets, exact rank-138 Gram spectrum, 64 Boolean controls, and 3125 identity points")
 
 
 if __name__ == "__main__":

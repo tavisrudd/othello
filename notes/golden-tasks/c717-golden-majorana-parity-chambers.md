@@ -64,6 +64,12 @@ balanced stabilizers
 \(S_3\times S_3,S_3\times S_2,S_3\times S_2\); the two 60-vertex pole
 orbits are exchanged by the antipodal control involution.  The subgroup
 factor width is five, explaining the graph diameter ten.
+The 140 balanced incidence vectors form the Young permutation module
+\(M^{(3,3)}\oplus2M^{(3,2,1)}\).  Their exact incidence Gram operator has
+rank 138; its kernel consists only of the two differences among the three
+orbitwise constant vectors.  Thus there is no hidden balanced-incidence
+relation, and the full spectrum reduces to the six Specht multiplicity
+spaces recorded in the report and certificate.
 
 Exactly one, two, four, or six Hamiltonians can close simultaneously.  The
 common six-wall locus is the fifteen-line unstable base scheme; its generic

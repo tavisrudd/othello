@@ -1,4 +1,118 @@
 {
+  "balanced_incidence_spectrum": {
+    "characteristic_factors_ascending": [
+      {
+        "coefficients": [
+          0,
+          1
+        ],
+        "exponent": 2
+      },
+      {
+        "coefficients": [
+          -60,
+          1
+        ],
+        "exponent": 1
+      },
+      {
+        "coefficients": [
+          -40,
+          1
+        ],
+        "exponent": 5
+      },
+      {
+        "coefficients": [
+          -16,
+          1
+        ],
+        "exponent": 10
+      },
+      {
+        "coefficients": [
+          -14,
+          1
+        ],
+        "exponent": 16
+      },
+      {
+        "coefficients": [
+          -12,
+          1
+        ],
+        "exponent": 5
+      },
+      {
+        "coefficients": [
+          -10,
+          1
+        ],
+        "exponent": 16
+      },
+      {
+        "coefficients": [
+          -8,
+          1
+        ],
+        "exponent": 15
+      },
+      {
+        "coefficients": [
+          -4,
+          1
+        ],
+        "exponent": 5
+      },
+      {
+        "coefficients": [
+          432,
+          -60,
+          1
+        ],
+        "exponent": 5
+      },
+      {
+        "coefficients": [
+          48,
+          -20,
+          1
+        ],
+        "exponent": 5
+      },
+      {
+        "coefficients": [
+          80,
+          -20,
+          1
+        ],
+        "exponent": 9
+      },
+      {
+        "coefficients": [
+          -4160,
+          960,
+          -64,
+          1
+        ],
+        "exponent": 9
+      }
+    ],
+    "gram_size": 140,
+    "kernel": "span of the two differences among the three orbitwise all-ones vectors",
+    "minimal_polynomial_degree": 18,
+    "rank": 138,
+    "specht_multiplicities": {
+      "(3,2,1)": 2,
+      "(3,3)": 3,
+      "(4,1,1)": 2,
+      "(4,2)": 5,
+      "(5,1)": 5,
+      "(6)": 3
+    },
+    "verification": "exact squarefree annihilator plus 13 full-rank trace moments",
+    "young_permutation_module": "M^(3,3) + 2 M^(3,2,1)"
+  },
   "boolean_census": [
     {
       "count": 1,
