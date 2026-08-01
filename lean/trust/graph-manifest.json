@@ -1,21 +1,21 @@
 {
-  "canonical_bytes": 15785016,
-  "canonical_sha256": "7a3ef2742a38e50753224463d9f4ed298213915bc7ab74ae4986102caf7456ac",
+  "canonical_bytes": 18203626,
+  "canonical_sha256": "a0a213f7a6141dee662d8bbdbe6f4a7063afe5442814836ce15426e721a8d68a",
   "edge_kinds": {
-    "declares": 1668,
+    "declares": 3466,
     "depends_on_axiom": 129,
     "exports": 127,
     "has_data_tree": 15,
     "has_gate": 39,
     "has_member": 10353,
     "imports": 43031,
-    "uses": 6892
+    "uses": 16340
   },
   "lean_facts": "present",
   "node_kinds": {
     "area": 3,
     "data_tree": 15,
-    "declaration": 1664,
+    "declaration": 3459,
     "external_input": 3,
     "gate": 39,
     "module": 13517

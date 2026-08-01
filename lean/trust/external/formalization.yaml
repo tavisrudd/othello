@@ -964,7 +964,7 @@ othello_trust:
   lean_toolchain: "leanprover/lean4:v4.32.0-rc1"
   graph_manifest:
     path: "trust/graph-manifest.json"
-    canonical_sha256: "7a3ef2742a38e50753224463d9f4ed298213915bc7ab74ae4986102caf7456ac"
+    canonical_sha256: "a0a213f7a6141dee662d8bbdbe6f4a7063afe5442814836ce15426e721a8d68a"
     replay: "lean/scripts/lean-trust-spine.py graph --out <path>"
   inputs:
     - path: "lean-toolchain"
@@ -976,7 +976,7 @@ othello_trust:
     - path: "trust/areas/relconic.toml"
       sha256: "91a6c6ce49096600bea469f64c3e2f88467e12dc11a97fa92dee24ef563c319e"
     - path: "trust/graph-manifest.json"
-      sha256: "463b7ac46d64f103b520a296f10dc3ea752a05c4e6898a24eb69dcdcdc67ecaf"
+      sha256: "9d23cc3f80e74fec19a741638e970b1569a04eb6ce1c6ae18b70e206569f7d2a"
     - path: "trust/papers.toml"
       sha256: "a29c96a0c564b93072f2a785273537f94e58da7b217a0465a4e2912f3c8de2fd"
     - path: "trust/portfolio.toml"

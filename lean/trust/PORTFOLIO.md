@@ -35,8 +35,8 @@ Read [`../TRUST.md`](../TRUST.md) for the trust model itself and the per-paper m
 | `RelativeConicArcs.Gates.AlternateOrbitRepairProfileEnvelope`  | 0                  | **not extracted** |
 | `RelativeConicArcs.Gates.ClebschOrientationMechanisms`         | 12                 | **not extracted** |
 | `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` | 32                 | **not extracted** |
-| `RelativeConicArcs.Gates.AMELUAggregate`                       | 0                  | **not extracted** |
-| `RelativeConicArcs.Gates.AMELUAggregateAxioms`                 | 0                  | **not extracted** |
+| `RelativeConicArcs.Gates.AMELUAggregate`                       | 0                  | extracted         |
+| `RelativeConicArcs.Gates.AMELUAggregateAxioms`                 | 0                  | extracted         |
 | `RelativeConicArcs.Gates.AMELUDictionaryAxioms`                | 0                  | **not extracted** |
 | `RelativeConicArcs.Gates.AMELUExtensionFieldPencil`            | 0                  | **not extracted** |
 | `RelativeConicArcs.Gates.AMELUExtensionFieldPencilAxioms`      | 0                  | **not extracted** |
