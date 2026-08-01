@@ -4,7 +4,12 @@
 
 **Date:** 2026-07-25
 
-**Status:** `LOCAL GO; PUBLIC ARCHIVE LOCATOR REQUIRED BEFORE RELEASE`
+**Status:** superseded as the live verdict by
+`notes/2026-07-31-c577-paper-ii-new-math-audit.md`; the all-`q`
+human-proof gate is reopened.
+
+The development record below remains authoritative for the pre-C694 theorem
+and evidence history.  It must not be read as overriding the later audit.
 
 ## Queued structural follow-ons
 

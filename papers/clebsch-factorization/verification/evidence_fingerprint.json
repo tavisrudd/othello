@@ -11,11 +11,11 @@
   "trust_manifest_sha256": "29ac796f534f74f17562058fd4367fe91a9a20249749ccc009f68f79cc117873",
   "runner_sha256": "40c2a50975f3935bee8d8ffa28c985b0a205e7340da5de9fd8b835fdd59f8299",
   "review_sources_sha256": {
-    "normalized_manuscript": "dc6c75de061e52d69aa6da04d6e235c267afcd52738c0cba54cba1a6bb1c80fe",
-    "normalized_statement_identity": "5a4e7cc407e972c2fe88aefb2ff6bd71724f77bd06c47ebab9b6bad9ec317f28",
+    "normalized_manuscript": "6827444ce0120fd8977529b8a40769894e1b024bdb27ddcde30de17318e6f00a",
+    "normalized_statement_identity": "73c20dbd61c34d76ba1152d6ab18487b7e76e797961063884c75dfc50cb4265a",
     "statement_extractor": "d5a3dd036c6e9270253e8f43a3bd22a6926a87adfa647396f4d872555c8b9004",
     "paper_readme": "7cf272443df7732c1de94ff71e953ca09ccbf249c4f7d57984fb57026830e21a",
-    "verification_readme": "8e5e9804fd4fe1f5ca9185f714a14972c6860a054da5d07eeb82726abde4e705",
+    "verification_readme": "a62f9254e0734dc312dd8907bad2ad1ecfcf5915642f828de19507e20f09e46e",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",

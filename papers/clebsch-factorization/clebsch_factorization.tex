@@ -330,8 +330,10 @@ splits in the required outer parity.  The two sheet copies have opposite
 outer parities.  A sheet-sign kernel can therefore occur only if every
 relevant occurrence has the splitting parity.
 
-Dickson's \(p'\)-subgroup list reduces this condition to torus normalizers
-and the exceptional heads
+Dickson's \(p'\)-subgroup list reduces the stabilizer types to torus
+normalizers and the exceptional subgroups; compare the maximal-subgroup
+form in \cite[Theorem~2.2]{Giudici2007}.  The corresponding restricted
+heads are
 \[
  A_4:L(6),\qquad S_4:L(8),\qquad A_5:L(12).
                                                                \tag{3.2d}
@@ -397,7 +399,7 @@ the square-axis character of exponent two.  Its possible terms are the
 bottom four and complementary top four edge factors.  Every
 parameter-dependent term has total cyclic weight \(r\) with
 \(0<r\le8<n\), so scaling all selected \(z\)'s by a nonzero square makes
-its orbit sum vanish.  The weight-zero terms in (3.2l) are unchanged
+its orbit sum vanish.  The weight-zero terms in (3.2i) are unchanged
 by \(c\leftrightarrow c^{-1}\).  Thus the two weighted first and second
 moments agree, giving a second trade.
 
@@ -1228,7 +1230,7 @@ Proposition~\ref{prop:radical-hadamard} identifies
  =\langle\mathbf1\rangle^{\perp_B}.                          \tag{4.6b}
 \]
 For \(u,v\in L\), the product \(u\circ v\) lies in the right side of
-(4.8), so \(B(u,v)=0\).  Thus \(L\) is isotropic.  Since
+(4.6b), so \(B(u,v)=0\).  Thus \(L\) is isotropic.  Since
 \(\dim L=q=\frac12\dim V\), it is maximal isotropic:
 \[
  L=L^{\perp_B}.                                              \tag{4.6c}
@@ -1247,10 +1249,10 @@ The form \(B\) descends to
 \]
 Its left radical is
 \((L^{\circ2})^\perp_B/\langle\mathbf1\rangle=0\), and its
-right radical is \(L^\perp_B/L=0\).  Hence (4.10) is perfect.
+right radical is \(L^\perp_B/L=0\).  Hence (4.6d) is perfect.
 Lemma~\ref{lem:hyperplane-square} gives
 \(L^{\circ3}=V\), so \(\mathcal A_3\) is one-dimensional and
-multiplication realizes (4.10) as the degree-\(1\)-by-degree-\(2\)
+multiplication realizes (4.6d) as the degree-\(1\)-by-degree-\(2\)
 socle pairing.  Therefore \(\mathcal A\) is Artinian Gorenstein with
 Hilbert function
 \[
@@ -1354,7 +1356,7 @@ polarization identifies its Macaulay dual generator with \(\mu_3\).
 The implication above is the zero-defect case of the modern
 self-dual-code criterion: the Gorenstein defect is measured by the
 defect of the Schur square, or equivalently by decomposability
-\cite{RodriguezPajaresEtAl2025}.  Here
+\cite[Theorem~3.11 and Corollaries~3.12--3.13]{RodriguezPajaresEtAl2025}.  Here
 \(\dim L^{\circ2}=2q-1\) already places both configurations in the
 zero-defect case.  The ideal, deletion, socle, inverse-system, and
 minimal-resolution calculations are also checked directly in the
@@ -2246,7 +2248,7 @@ Table~\ref{tab:verification} separates the mathematical arguments from
 their exact finite inputs.  Here ``certificate'' means a deterministic
 calculation over a prime field, checked against a canonical JSON output
 and a SHA-256 manifest; an independent replay uses a separate
-implementation.  ``Lean'' means that the stated finite implication is
+implementation.  ``Lean'' means that the stated implication is
 checked by the Lean kernel.  Neither term replaces the cited
 identification of the classical groups or configurations.
 
@@ -2265,7 +2267,8 @@ Matching-secant quotient
 Balanced-orbit completeness
 & projective--trade bridge, Dickson--Giudici subgroups,
   Frobenius-digit socles, and the characteristic-three axis trade
-& generic local first-wall checker and independent closed-form replay \\
+& generic local first-wall checker and independent closed-form replay;
+  exhaustive \(q=9\) check and independent replay \\
 Ranks and the middle Fischer layer
 & affine cocycle, irreducible Fischer modules; Edge--Dye configurations
 & quotient matrices as cross-checks; all edge-selected alternating cycles
@@ -2274,7 +2277,8 @@ Balanced sheets and cubic orientation
 & Propositions~\ref{prop:radical-hadamard} and
   \ref{prop:modular-sheet-mechanism};
   Lemma~\ref{lem:hyperplane-square}; maximal-isotropic quotient duality
-& finite moments and ranks as cross-checks; Gorenstein replay \\
+& finite moments and ranks as cross-checks; kernel-checked
+  hyperplane-square implication; Gorenstein replay \\
 Six-profile reconstruction
 & subgroup marks, orbit--stabilizer, and the three-ray lemmas
 & profile rows and replay; decorated-parent bijection \\

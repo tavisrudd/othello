@@ -4,9 +4,10 @@
 
 **Opened:** 2026-07-24
 
-**Status:** active under the C182 external-wait exception; local theorem,
-editorial, and verification gates are complete, while public packaging
-remains external.
+**Status:** active under the C182 external-wait exception; the 2026-07-31
+newer-math audit reopened the local proof gate for the all-`q`
+classification.  Public packaging remains external and must not begin until
+that gate closes.
 
 ## Objective
 
@@ -27,18 +28,24 @@ Paper III.
 ## Current state
 
 - The manuscript, conclusion, proof/evidence map, and verification
-  architecture are complete locally.
-- Technical rereads and the post-spine staged cold read returned `GO`.
+  architecture are complete except for the reopened all-`q` human-proof
+  seam.
+- The prior technical rereads and post-spine staged cold read returned `GO`,
+  but the later audit found that the projective--trade, Lucas-socle, and
+  adjacent-wall identifications are stated below referee proof depth.
 - All paper-owned semantic evidence paths and the local aggregate replay are
   green.
-- The only load-bearing release blocker is an immutable public archive
-  locator controlled by the user.
+- Exact findings and completed trust/editorial repairs are recorded in
+  `notes/2026-07-31-c577-paper-ii-new-math-audit.md`.
 
 ## Next action
 
-After publication authority is available, freeze the current Paper II
-package, obtain its immutable locator, insert the final public citations,
-run the isolated release replay, and perform the separate release pass.
+First expand or precisely source the projective--trade, Lucas-socle, and
+adjacent-wall steps and obtain an independent cold-read `GO` on that proof.
+After that local gate and publication authority are both available, freeze
+the Paper II package, obtain its immutable locator, insert the final public
+citations, run the isolated release replay, and perform the separate release
+pass.
 
 ## Boundaries
 
@@ -49,7 +56,10 @@ run the isolated release replay, and perform the separate release pass.
 ## Acceptance and records
 
 Acceptance requires the immutable locator, isolated replay of the frozen
-package, and a final PDF/release review with no material objection.
+package, a final PDF/release review with no material objection, and closure
+of the 2026-07-31 all-`q` proof-depth finding.
 
 Current theorem, evidence boundary, and mystery ledger:
+`notes/2026-07-31-c577-paper-ii-new-math-audit.md`.  Earlier theorem
+development remains in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.

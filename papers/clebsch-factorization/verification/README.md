@@ -7,8 +7,9 @@ separates four kinds of support:
 - proofs given in the manuscript;
 - classical inputs attributed to Edge, Dye, the *Atlas*, and Giudici;
 - exact finite-field certificates with independent replays; and
-- the kernel-checked arithmetic-gluing theorem, whose largest `H_3` leaves
-  are certificate-backed.
+- kernel-checked arithmetic-gluing, Hilbert-symmetry, and
+  hyperplane-square implications; the largest arithmetic-gluing `H_3`
+  leaves are certificate-backed.
 
 `statement_identity.json` contains the exact theorem-like statements in the
 manuscript. `extract_statement_identity.py --check` rejects any
