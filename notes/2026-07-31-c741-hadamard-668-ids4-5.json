@@ -118,12 +118,17 @@
   "conclusion": "both separate quotient compressions are feasible; neither ID is decided",
   "exact_lift_status": "OPEN",
   "fixed_point_lemma": {
+    "global_108_geometry_counts": {
+      "different": 72,
+      "same": 36
+    },
     "minus_signs_per_positive_row_on_singletons": 1,
     "normalized_relative_cases": [
       "same",
       "different"
     ],
     "oriented_positive_compression_pairs": 1296,
+    "recovery_rule": "for r in {0,3,6}, compressed_value[r] == singleton_sign[r] (mod 6)",
     "singleton_positions": [
       0,
       111,

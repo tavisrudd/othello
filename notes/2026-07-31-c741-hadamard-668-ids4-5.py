@@ -163,6 +163,13 @@ def fixed_point_canonical_pair(
     raise ValueError(case)
 
 
+def marked_singleton_from_compression(sequence: tuple[int, ...]) -> int:
+    """Recover the unique minus singleton from residues 0,3,6 modulo 9."""
+    marked_residues = [r for r in (0, 3, 6) if sequence[r] % 6 == 5]
+    assert len(marked_residues) == 1
+    return 37 * marked_residues[0]
+
+
 def witness_record(sequence_pair: tuple[tuple[int, ...], tuple[int, ...]], target: int) -> dict:
     a, b = sequence_pair
     joint_paf = tuple(x + y for x, y in zip(paf(a), paf(b)))
@@ -214,6 +221,13 @@ def build_certificate() -> dict:
         for case in ("same", "different")
     }
     assert fixed_point_counts == {"same": 324, "different": 648}
+    compression_geometry = Counter(
+        "same"
+        if marked_singleton_from_compression(a) == marked_singleton_from_compression(b)
+        else "different"
+        for a, b in canonical
+    )
+    assert compression_geometry == {"same": 36, "different": 72}
 
     group37 = (1, 10, 26)
     orbits37 = orbits(range(37), group37, 37)
@@ -240,6 +254,8 @@ def build_certificate() -> dict:
             "normalized_relative_cases": ["same", "different"],
             "oriented_positive_compression_pairs": len(oriented_pairs),
             "stabilizer_representatives": fixed_point_counts,
+            "global_108_geometry_counts": dict(sorted(compression_geometry.items())),
+            "recovery_rule": "for r in {0,3,6}, compressed_value[r] == singleton_sign[r] (mod 6)",
         },
         "positive_control_9": witness_record(WITNESS_9, -74),
         "positive_control_37": witness_record(tuple(expanded37), -18),

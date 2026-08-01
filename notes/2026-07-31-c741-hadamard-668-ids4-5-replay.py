@@ -133,6 +133,19 @@ def fixed_canonical(pair: tuple[tuple[int, ...], tuple[int, ...]], case: str) ->
     return min(images)
 
 
+def compression_mark(sequence: tuple[int, ...]) -> int:
+    candidates = []
+    for residue in (0, 3, 6):
+        # The fibre is one singleton plus twelve orbits of size three.  The
+        # twelve orbit signs have even sum, so their contribution is 0 mod 6.
+        if sequence[residue] % 6 == (-1) % 6:
+            candidates.append(37 * residue)
+        else:
+            assert sequence[residue] % 6 == 1
+    assert len(candidates) == 1
+    return candidates[0]
+
+
 def check_witness(record: dict, target: int) -> None:
     a, b = map(tuple, record["sequences"])
     assert sum(a) == sum(b) == 1
@@ -188,6 +201,18 @@ def main() -> None:
     assert fixed_counts == lemma["stabilizer_representatives"] == {
         "same": 324,
         "different": 648,
+    }
+    assert lemma["recovery_rule"] == (
+        "for r in {0,3,6}, compressed_value[r] == singleton_sign[r] (mod 6)"
+    )
+    global_reps = {canonical(pair) for pair in pair_sets[0]}
+    geometry = Counter(
+        "same" if compression_mark(a) == compression_mark(b) else "different"
+        for a, b in global_reps
+    )
+    assert dict(geometry) == lemma["global_108_geometry_counts"] == {
+        "same": 36,
+        "different": 72,
     }
 
     check_witness(data["positive_control_9"], -74)
