@@ -401,6 +401,21 @@ def check_latex_warnings(log_path: Path) -> None:
     print("clebsch factorization warnings: CHECK OK")
 
 
+def check_manuscript_source_lint(source_path: Path) -> None:
+    source = source_path.read_text(encoding="utf-8")
+    malformed_spacing = re.compile(r",\s*q{1,2}uad\b")
+    findings = [
+        f"line {source.count(chr(10), 0, match.start()) + 1}: {match.group()!r}"
+        for match in malformed_spacing.finditer(source)
+    ]
+    if findings:
+        raise ValueError(
+            "manuscript source lint failed: missing TeX command escape:\n"
+            + "\n".join(findings)
+        )
+    print("clebsch factorization source lint: CHECK OK")
+
+
 def check_lean_axiom_audit(wrapper_output: str) -> None:
     audit = wrapper_output
     dependency_blocks = re.findall(
@@ -633,6 +648,7 @@ def main() -> int:
     parser.add_argument("--update-fingerprint", action="store_true")
     args = parser.parse_args()
 
+    check_manuscript_source_lint(paper_root / "clebsch_factorization.tex")
     run(
         [
             "python3",

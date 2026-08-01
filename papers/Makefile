@@ -15,11 +15,14 @@ SOURCES := \
 PDFS := $(SOURCES:.tex=.pdf)
 LOGS := $(SOURCES:.tex=.log)
 
-.PHONY: all check warnings clean distclean list \
+.PHONY: all check lint warnings clean distclean list \
 	arcs clebsch clebsch-rigidity clebsch-rigidity-companion clebsch-factorization clebsch-passages \
 	dihedral repair-hypergraphs equivariant-completion
 
-all: $(PDFS)
+all: lint $(PDFS)
+
+lint:
+	python3 scripts/lint_tex_spacing.py .
 
 check:
 	$(MAKE) -B all
@@ -44,6 +47,7 @@ repair-hypergraphs: coding-repair-hypergraphs/complete_repair_hypergraphs.pdf
 equivariant-completion: equivariant-robust-completion/frobenius_pair_extension.pdf
 
 %.pdf: %.tex
+	python3 scripts/lint_tex_spacing.py "$<"
 	$(LATEXMK) $(LATEXMK_FLAGS) -cd "$<"
 
 warnings: $(PDFS)

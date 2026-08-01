@@ -2,13 +2,17 @@ LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 SOURCE := golden_operator.tex
 
-.PHONY: all check warnings clean distclean
+.PHONY: all check lint warnings clean distclean
 
-all: golden_operator.pdf
+all: lint golden_operator.pdf
 
-check: golden_operator.pdf warnings
+check: lint golden_operator.pdf warnings
+
+lint:
+	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
 
 golden_operator.pdf: $(SOURCE)
+	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: golden_operator.pdf

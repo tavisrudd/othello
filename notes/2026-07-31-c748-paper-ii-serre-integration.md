@@ -373,3 +373,11 @@ The proof now has a clean, memorable spine: one projective-socle input, one
 Lucas parity calculation, one functorial contraction, and one adjacent-wall
 spill.  The two cold reads agree that this spine is referee-readable; the
 remaining risk is formal coverage, not a known human-proof defect.
+
+## Post-closeout source-lint repair
+
+A later source check found two bare `quad` tokens in the divided-power display,
+caused by dropped TeX command escapes.  Both are repaired.  The Paper II
+release verifier now rejects comma followed by bare `quad` or `qquad` before
+starting expensive checks, and the shared paper build lint applies the same
+rule to every TeX manuscript.  Its repository-wide scan covers 50 TeX files.

@@ -9,9 +9,9 @@
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
   "trust_manifest_sha256": "ecba2e99ce42765e6526f43a921bdc1077e0aa862320ea736bf58aeea28a08ac",
-  "runner_sha256": "dbaa0d6252b184901132f0d10465687fa8b4f5970002ceb25b4f7d974c68898d",
+  "runner_sha256": "25d1ce74f6cf90c68af9e9933b7269324d474cc2586c249199d6194ff74dec61",
   "review_sources_sha256": {
-    "normalized_manuscript": "50e30758d6cf3195a08647482be673c1258915a0720e8438a0200232cee36cf0",
+    "normalized_manuscript": "f03356b593d31dc7f85b665c2bb5e458ea7b2369992ef3308818b1e8ed6c5cbf",
     "normalized_statement_identity": "ccb021a83914ae10ea71b1f4473b8c4e62596cfedb0b31eb834dcdf401460ade",
     "statement_extractor": "3794c3e4bac4635f0cd70ab7037df39fe9d29b684e4a642cb1a01468d06b798b",
     "paper_readme": "7cf272443df7732c1de94ff71e953ca09ccbf249c4f7d57984fb57026830e21a",
