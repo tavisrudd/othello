@@ -160,8 +160,11 @@ particular:
   degree-five del Pezzo components are the six choices of one moving path
   control with the other five fixed.  Their five vectorlike crossings form
   a synthematic-total component syndrome, homogeneous control degree one is
-  minimal, and the two mixed anomalies are exactly the two mixed
-  determinant--Pfaffian sums.  Exact physical chiral and nonchiral witnesses,
+  minimal, and through a generic amplitude point the six chiral directions
+  are exactly the six columns of the Golden response matrix (dZ), each
+  itself anomaly-free and mixed-compatible.  The two mixed anomalies are
+  exactly the two mixed determinant--Pfaffian sums.  Exact physical chiral
+  and nonchiral witnesses,
   all 21 marked families, the source-label dictionary, and the independent
   replay are in `notes/2026-07-31-c716-golden-two-u1-lines.md`.
 
