@@ -51,6 +51,9 @@
 'RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector' depends on axioms: [propext,
  Classical.choice,

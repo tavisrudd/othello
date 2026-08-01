@@ -2,7 +2,7 @@
   "schema": "clebsch-passages-formal-v1",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
-  "axiom_report_sha256": "9fb2ba9504b41034b3a41bd38cfc738ac1b2c5d876289bfe4c6fed76bb4a8f41",
+  "axiom_report_sha256": "87faff61f0fbe1b39944e1d8506653244cc04dc790e2e2c3a6dcd0b34fc24b57",
   "source_sha256": {
     "RelativeConicArcs/QuadraticPinching.lean": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4",
     "RelativeConicArcs/SplitQuadraticPinching.lean": "d46ec97de2670ef0d34873843a8d2821d532d4a00c56e6ebb829fd8c44def6f2",
@@ -13,10 +13,10 @@
     "RelativeConicArcs/ClebschGoldenConference.lean": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2",
     "RelativeConicArcs/MarkedClebschBridge.lean": "30746ec72da8651bc8673b89d78f135632d37195b9c44ac5cca4f071808949ad",
     "RelativeConicArcs/KneserPairEigenspace.lean": "eb2c89c22be925a62345746d0d3bf6a639ccd6fe5562859365875bbe3c1c03e6",
-    "RelativeConicArcs/PetersenHarmonicKernel.lean": "d98ea2cafb9f0366677f5491cd9324ccbc320245a565208a3ea4736bf9c8112a",
+    "RelativeConicArcs/PetersenHarmonicKernel.lean": "77f2195247beccee65a548788c3c9c8efee01177a093ee6f468aa38f64272f2c",
     "RelativeConicArcs/ClebschInvariantCubic.lean": "1587594c3a63e4b866075c67cc5deac2e10bf00cd5708c9aaf39168bcd773bdd",
     "RelativeConicArcs/ClebschPassagesCorrespondence.lean": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28",
-    "RelativeConicArcs/Gates/ClebschPassages.lean": "09836172a7ad97a4d56bc7df359c49f41339165405b9d336364c7aeba7efdf2c"
+    "RelativeConicArcs/Gates/ClebschPassages.lean": "c05e2ff9b9261977f07329148b122f1ff7e674763480909d0a4d5db1251461e9"
   },
   "audited_declarations": [
     "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
@@ -41,6 +41,7 @@
     "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
     "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum",
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general",
     "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq",
     "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector",
     "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree",
@@ -89,6 +90,7 @@
       "declarations": [
         "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
         "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum",
+        "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general",
         "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq"
       ],
       "excluded": "face-axis geometry, spherical addition theorem, and abstract A5 comparison"
