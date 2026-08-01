@@ -892,11 +892,11 @@ transitive on the \(22\) Clebsch matching rows and no row-to-geometric-parent
 bridge is supplied. The determinant sextic and dimer fingerprint close the
 reverse cycle exactly at the unoriented two-graph level and no further.
 
-The manuscript root exists with title, abstract, principal theorem, proof
-roadmap, isolated build, and paper-owned verification policy installed;
-consolidation of the placement and proof ledger is the active gate. A
+The manuscript exists in draft with its title, abstract, principal theorem,
+proof roadmap, self-contained build, and verification policy in place;
+consolidating the placement and proof ledger is what remains. A
 boson--fermion permanent-side complement and a six-mode physical demonstrator
-are queued behind it and are not claimed.
+are possible successors and are not claimed.
 
 ## *Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity*
 
@@ -2411,8 +2411,10 @@ are vacuous because a natural number can encode the whole residual.
   maximal-rank in every weight, the two-return presentation is
   generator-minimal, and the virtual levels are explained as indicial
   roots.  Identifying the operator algebra and spectrum is the surviving
-  frontier there, separate from the marked-lattice comparison ruled out
-  by C382.  The \(E_6\) minuscule branching \(27=12+15\) supplies a graded
+  frontier there, and it is separate from the marked icosian comparison,
+  which is ruled out: no such comparison exists in the required
+  equivariant category.  The \(E_6\) minuscule branching \(27=12+15\)
+  supplies a graded
   Cartan model but no cohomological or Higgs realization.
 - **Unassigned adjacent results:** \(25\) of the \(30\) mod-\(3\)-compatible
   fixed common multiplier subgroups for Hadamard order \(668\) are impossible,
