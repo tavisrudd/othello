@@ -1,0 +1,1938 @@
+{
+  "authority": "lean/trust/portfolio.toml and its declared area spines",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "schema_version": 1,
+  "theorems": [
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "FiniteGeom.dualCode_dualCode",
+      "declaration_module": "FiniteGeom.CodeDuality",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:FiniteGeom.dualCode_dualCode",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "FiniteGeom.dualCode_injective",
+      "declaration_module": "FiniteGeom.CodeDuality",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:FiniteGeom.dualCode_injective",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action",
+      "declaration_module": "RepairCodes.WeightedStrictExample",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.HasMDSDualParameters.exists_normalized_word",
+      "declaration_module": "RepairPorts.MDSReconstruction",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.HasMDSDualParameters.exists_normalized_word",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.HasMDSDualParameters.reconstructionRadius_eq",
+      "declaration_module": "RepairPorts.MDSReconstruction",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.HasMDSDualParameters.reconstructionRadius_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.HasMDSDualParameters.reconstructsAt",
+      "declaration_module": "RepairPorts.MDSReconstruction",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.HasMDSDualParameters.reconstructsAt",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.HasMDSDualParameters.reconstructsAt_iff",
+      "declaration_module": "RepairPorts.MDSReconstruction",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.HasMDSDualParameters.reconstructsAt_iff",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.HasMDSDualParameters.repairHypergraph_eq_powersetCard",
+      "declaration_module": "RepairPorts.MDSReconstruction",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.HasMDSDualParameters.repairHypergraph_eq_powersetCard",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.PointedCoefficientPortIso.reconstructionRadius_eq",
+      "declaration_module": "RepairPorts.CoefficientPort",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.PointedCoefficientPortIso.reconstructionRadius_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.PointedCoefficientPortIso.reconstructsAt_iff",
+      "declaration_module": "RepairPorts.CoefficientPort",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.PointedCoefficientPortIso.reconstructsAt_iff",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.blockerCount_eq_minimalBlockerCount_at_minimum",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.blockerCount_eq_minimalBlockerCount_at_minimum",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.cheapestRepairRadiusProbability",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.cheapestRepairRadiusProbability",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.coeff_blockerFailurePolynomial_at_minimum",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.coeff_blockerFailurePolynomial_at_minimum",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.coefficientPort_concatenatedCode_eq_image_pointed",
+      "declaration_module": "RepairPorts.PointedTransfer",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.coefficientPort_concatenatedCode_eq_image_pointed",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.concatenatedRestrictedCode_parameters",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.concatenatedRestrictedCode_parameters",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator",
+      "observed_axioms": null,
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RepairPorts.disjointTripleRepairs_reliability",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.disjointTripleRepairs_reliability",
+      "observed_axioms": null,
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.disjointTripleRepairs_reliability_ne_overlapping",
+      "observed_axioms": null,
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte",
+      "observed_axioms": null,
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.erasureFailureProbability_delete_contract",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.erasureFailureProbability_delete_contract",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.eventually_mdsMinimumCoefficientFingerprints",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.eventually_mdsMinimumCoefficientFingerprints",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.eventually_pointedConfinement_iff_zeroCost",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.eventually_pointedConfinement_iff_zeroCost",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.eventually_prescribedPorts",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.eventually_prescribedPorts",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.exactFunctionalStrata",
+      "declaration_module": "RepairPorts.PointedTransfer",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.exactFunctionalStrata",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.exactPointedConfinementAndTransfer",
+      "declaration_module": "RepairPorts.PointedTransfer",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.exactPointedConfinementAndTransfer",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.hasDerivAt_homogeneous_portReliability",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.hasDerivAt_homogeneous_portReliability",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.hasDerivAt_portReliability_update",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.hasDerivAt_portReliability_update",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.noRepairProbability_eq_erasureFailure",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.noRepairProbability_eq_erasureFailure",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost",
+      "declaration_module": "RepairPorts.FunctionalCost",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RepairPorts.overlappingTripleRepairs_reliability",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.overlappingTripleRepairs_reliability",
+      "observed_axioms": null,
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.pointedFunctionalTupleRealizationCost_eq",
+      "declaration_module": "RepairPorts.FunctionalCost",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.pointedFunctionalTupleRealizationCost_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.portReliability_delete_contract",
+      "declaration_module": "RepairPorts.Reliability",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.portReliability_delete_contract",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RepairPorts.portReliability_pair_homogeneous",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.portReliability_pair_homogeneous",
+      "observed_axioms": null,
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.prescribedPorts_of_outerDualDistance",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.prescribedPorts_of_outerDualDistance",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.reconstructedCode_eq",
+      "declaration_module": "RepairPorts.CoefficientPort",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.reconstructedCode_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.representedTargets_density",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.representedTargets_density",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed",
+      "declaration_module": "RepairPorts.FunctionalCost",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "1f3f3eb5fbbcdc87f81a0fa60e5ee6e158758553d0f5e30ff543cac6a1cc9d15"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "CapGame.Affine.initialP_fin",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "CapGame.Affine"
+      ],
+      "id": "trust-spine:finitegeom_first_tag:terminal:CapGame.Affine.initialP_fin",
+      "observed_axioms": null,
+      "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "ProjectiveCap.PlaneOutcome"
+      ],
+      "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank",
+      "observed_axioms": null,
+      "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "ProjectiveCap.PlaneOutcome"
+      ],
+      "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank",
+      "observed_axioms": null,
+      "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "ProjectiveCap.Binary"
+      ],
+      "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one",
+      "observed_axioms": null,
+      "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "ProjectiveCap.EllipticMirror"
+      ],
+      "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution",
+      "observed_axioms": null,
+      "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "ProjectiveCap.EllipticMirror"
+      ],
+      "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul",
+      "observed_axioms": null,
+      "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "ProjectiveCap.initialPStatement_of_even_card_finrank",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "ProjectiveCap.PlaneOutcome"
+      ],
+      "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.initialPStatement_of_even_card_finrank",
+      "observed_axioms": null,
+      "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Certificate.check_sound",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.Relconic"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Certificate.check_sound",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.a3_characteristic_polynomial",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.a3_characteristic_polynomial",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.a3_conic_size_factorization",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.a3_conic_size_factorization",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.a3_frame_joins_are_braid_mirrors",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.a3_frame_joins_are_braid_mirrors",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.a3_intersection_spectrum",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.a3_intersection_spectrum",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.a3_join_directions_injective",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.a3_join_directions_injective",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.a3_root_directions_injective",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.a3_root_directions_injective",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_bijective",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_bijective",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_nearestLeaderCount",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_nearestLeaderCount",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_card",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_card",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_disjoint_of_ne",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_disjoint_of_ne",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_five_spectrum",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_five_spectrum",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_polynomial",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_polynomial",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_two_boundary",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_two_boundary",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_conic_size_factorization",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_conic_size_factorization",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_dual_projectivity_dot",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_dual_projectivity_dot",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_arc",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_arc",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_exact",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_exact",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_intersection_spectrum",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_intersection_spectrum",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_join_directions_injective",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_join_directions_injective",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_joins_are_root_directions",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_joins_are_root_directions",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_mobius_sum",
+      "declaration_module": null,
+      "expected_axioms": [
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_mobius_sum",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_multiplicity_eq_normalized_rawPointIndex",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_multiplicity_eq_normalized_rawPointIndex",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_card",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_card",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_eq_ambiguityOne",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_eq_ambiguityOne",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_sound",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_sound",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_projective_index_bijective",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_projective_index_bijective",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_apply_inverse",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_apply_inverse",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_det_ne_zero",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_det_ne_zero",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_inverse_apply",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_inverse_apply",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.h3_root_directions_injective",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.h3_root_directions_injective",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.tau11_relation",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.tau11_relation",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.tau5_relation",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.ReflectionArrangements.tau5_relation",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.InvolutiveOddUnit.invariant_eq_zero_of_antiInvariant",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.invariant_eq_zero_of_antiInvariant",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.InvolutiveOddUnit.localized_existsUnique_invariant_add_mul_invariant",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.localized_existsUnique_invariant_add_mul_invariant",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.InvolutiveOddUnit.map_evenPart",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.map_evenPart",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.InvolutiveOddUnit.map_oddPart",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.map_oddPart",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.Q25AllProfiles.pair_extension",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.AlternateOrbitRepairQ25",
+        "RelativeConicArcs.Gates.Baer"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Q25AllProfiles.pair_extension",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    }
+  ]
+}

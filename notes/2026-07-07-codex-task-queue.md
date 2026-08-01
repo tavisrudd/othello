@@ -44,7 +44,6 @@ ordering and detail.
 - **C700 `[build-sys]` [QUEUED AFTER C699; INDEPENDENT OF C698 MATHEMATICALLY]** — formalize Segre's Lemma of Tangents, the q13 conic/passant incidence definitions, the weight-eight reduction, and narrow certificate predicates in `finitegeom` without importing exhaustive q13 data → `notes/build-sys-tasks/c700-q13-segre-foundation.md`.
 - **C701 `[build-sys]` [QUEUED AFTER C700]** — create the one-way downstream Clebsch q13 certificate package and certify the `[78,36,12]` code, 364 minimum words in four orbits, reconstruction, and automorphism group with sharded proved checkers rather than raw exhaustive Lean enumeration → `notes/build-sys-tasks/c701-q13-tangent-code-certificates.md`.
 - **C702 `[build-sys]` [QUEUED AFTER C699 AND C701]** — assemble the new Paper I v2 trust gate from human, q11, and q13 terminals; align all dependency pins, manifests, axiom audits, regeneration and clean-replay evidence; then refresh the standalone paper's formal pin while preserving v1 → `notes/build-sys-tasks/c702-paper-i-v2-formal-release.md`.
-- **C759 `[build-sys]` [QUEUED; EXTERNAL TRUST EXPORTS, THEN GATED SECOND-KERNEL PILOT]** — generate external manifest and headline-theorem views from the existing trust spine, then disposition one disposable Nanoda pilot without weakening the no-`sorry` boundary → `notes/build-sys-tasks/c759-external-trust-exports.md`.
 ### `cap`
 
 Rows are ordered by expected value toward the odd-q all-P crown; the cap handoff's Near-Term Queue is

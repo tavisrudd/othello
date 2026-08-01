@@ -6,7 +6,8 @@
 boundaries are synchronized; C685 corrects the Passages formal-companion omission and C686--C687
 own the complete field-certificate split; extraction waits for a commit-clean immutable input
 checkpoint, while C162's remaining real-build checks also need a quiet window; C698--C702 now own
-the Paper I v2 formalization and downstream q13 certificate release
+the Paper I v2 formalization and downstream q13 certificate release; C759's deterministic external
+trust projections are complete, with its Nanoda pilot blocked at the Lean 4.32 final-version gate
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -131,12 +132,13 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
     Audit and implementation plan:
     [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md).
 
-11. **C759 generated external trust exports:** render a `formalization.yaml`-compatible manifest,
-    portfolio headline-results table, and machine-readable theorem list from C326/C681 facts rather
-    than introducing a second authority. Deterministic generation and stale-edit rejection are the
-    main gate. After the Lean 4.32 final-version gate, disposition one disposable Nanoda pilot;
-    do not commit sorried challenge modules or infer a portfolio Comparator rollout. Contract:
-    [`../build-sys-tasks/c759-external-trust-exports.md`](../build-sys-tasks/c759-external-trust-exports.md).
+11. **C759 external trust exports complete:** the v0.3-compatible manifest, portfolio headline
+    table, and exact 95-terminal JSON projection are generated from C326/C681 authorities;
+    deterministic regeneration and stale/manual-edit rejection are tested. Thirty-six terminal
+    axiom sets are extracted and matched, while 59 remain explicitly unextracted. The disposable
+    Nanoda pilot stopped at its precondition because the pinned toolchain is Lean 4.32.0-rc1 rather
+    than a final 4.32 release. Report:
+    [`../2026-08-01-c759-external-trust-exports.md`](../2026-08-01-c759-external-trust-exports.md).
 
 ### C685--C687 operator progression
 

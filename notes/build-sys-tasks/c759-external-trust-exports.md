@@ -2,7 +2,8 @@
 
 **Lane:** `build-sys`
 
-**Status:** QUEUED
+**Status:** COMPLETE — deterministic external views landed; Nanoda pilot blocked at the pinned
+Lean 4.32 release-candidate gate
 
 ## Goal
 
@@ -34,6 +35,22 @@ facts already owned by C326/C681.
    or manually edited exports.
 5. The second-kernel pilot has an explicit pass/fail/blocked disposition and measured setup cost;
    no broad adoption follows without a separate decision.
+
+## Disposition
+
+`lean/scripts/external-trust-exports.py` now generates and checks the v0.3-compatible manifest,
+the compact portfolio table, and the exact machine-readable terminal list under
+`lean/trust/external/`.  The 95 exported terminals are precisely the terminals adopted by the
+three declared area spines.  Thirty-six have extracted axiom sets that match their declarations;
+the other 59 are explicitly marked `declared-unextracted`.
+
+The second-kernel pilot is **blocked by its version gate**.  The pinned toolchain is
+`leanprover/lean4:v4.32.0-rc1`, not a final Lean 4.32 release.  No Nanoda checkout, download,
+challenge module, or build was started, so setup cost at the blocked gate was zero downloads,
+zero generated files, and no persistent pilot state.  Reconsidering the experiment after a final
+toolchain pin is a new execution decision, not an implicit portfolio rollout.
+
+Report: `notes/2026-08-01-c759-external-trust-exports.md`.
 
 ## Owned paths
 
