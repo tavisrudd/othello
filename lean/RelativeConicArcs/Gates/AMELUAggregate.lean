@@ -13,6 +13,7 @@ import RelativeConicArcs.AMELU.EncoderTransversal
 import RelativeConicArcs.AMELU.DiagonalIsoduality
 import RelativeConicArcs.Gates.AMELUDictionary
 import RelativeConicArcs.Gates.AMELUStabilizerDictionary
+import RelativeConicArcs.AMELU.SyndromeGeometry
 import RelativeConicArcs.Gates.AMELUPencilClassification
 import RelativeConicArcs.AMELU.LUPencilClassification
 import RelativeConicArcs.AMELU.ExtensionFieldPencil
@@ -45,7 +46,8 @@ fixed-party affine special-linear/split-torus carrier, and exact GRS
 transversal-group interface, the zero-or-one-dimensional diagonal
 code-to-dual multiplier space, its exact nullity test and projectively unique
 witness ratios, the shared six-party conventions, the
-arc--MDS--CSS--AME and stabilizer dictionaries, the admitted-pencil
+arc--MDS--CSS--AME and stabilizer dictionaries, the coset-state and
+three-party syndrome geometry, the admitted-pencil
 local-Clifford and local-unitary classifications, the six-party
 LU-to-LC rigidity theorem, the unconditional Frobenius-sector divisor,
 explicit Gale-multiplier, sector-disjointness, and field-automorphism

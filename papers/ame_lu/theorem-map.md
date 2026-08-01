@@ -30,6 +30,7 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:lc-pencil`: LC classification by `z`.
 - `thm:lu-h3-grs`: uniform H3/GRS LU separation.
 - `thm:logical-phase`: split-torus versus `SL_2(q)` logical phase.
+- `lem:coset-syndrome-charts`: coset-state orthogonality, dual-code syndrome characters, and one representative on each three-party support.
 - `prop:clebsch-x-syndrome`: Clebsch covering-radius \(X\)-syndrome conic and nonconic fixed-party phase.
 - `rem:clebsch-x-syndrome-boundary`: fixed-party, \(X\)-only, projective-coordinate, and monomial-versus-party boundaries.
 - `lem:six-arc-self-association`: fixed-label diagonal isoduality iff the six-arc lies on a conic.

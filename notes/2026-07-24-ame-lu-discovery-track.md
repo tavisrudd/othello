@@ -86,3 +86,27 @@ semidirect product.
 **Evidence:** CHECKED for the split-torus/no-non-Clifford consequences;
 OPEN for the global LU fingerprint and full automorphism group.
 **Status:** open lead.
+
+### 2026-07-31 — transition geometry of the twenty syndrome charts
+
+**Provenance:** the extra-juice/Tao closeout after formalizing the
+support-by-support syndrome theorem in C734.
+**Was I looking for this?:** no — C734 sought a structural proof and Lean
+formalization of the adopted Clebsch syndrome bridge.
+**Observed / musing:** every three-subset of the six parties is a linear
+coordinate chart from supported error labels to the three-dimensional
+syndrome space.  The twenty chart changes therefore form a marked transition
+atlas over the syndrome plane.  For an extremal syndrome, its coordinate
+vector lies in the dense torus of every chart.
+**Why it may matter / strongest question:** the unlabelled syndrome conic
+forgets these transitions.  A monomially invariant quantity extracted from
+the twenty change-of-chart matrices could retain the marked-support data that
+the bare conic loses and might distinguish error-shell geometry beyond its
+projective carrier.
+**Discriminator / falsifier:** define the transition matrices from the
+three-column minors and test whether their complete monomial orbit is already
+determined by the defining six-arc or by the known shortened-plane holonomy.
+If so, the atlas supplies no independent invariant.
+**Evidence:** OPEN; the chart isomorphisms are kernel checked, but no
+transition invariant has been proposed or computed.
+**Status:** open lead.

@@ -10,6 +10,20 @@ Discovery companion:
 
 ## Current status
 
+**C734 closed (2026-07-31): Clebsch syndrome bridge formalized and proof
+spine made structural.**  `SyndromeGeometry` now proves generically that
+translated equal-phase states are classified by code cosets, distinct cosets
+are orthogonal, dual-code phase stabilizers read the translation character,
+and every syndrome has one unique representative on each three-party support;
+minimum weight three forces full support.  Section 5 isolates this as the
+two-paragraph structural lemma `lem:coset-syndrome-charts`, then obtains the
+Clebsch result by composing the companion conic/count/orbit theorem with the
+nonconic logical-phase theorem.  The adjacent prose now separates the twenty
+syndrome charts from the ten fixed-input operator-pushing fibres.  All formal,
+axiom, manuscript, visual, evidence, release, ledger, and standalone-mirror
+gates passed.  See
+`2026-07-31-c734-clebsch-syndrome-lean-structural-proof.md`.
+
 **C581 closed (2026-07-31): quantitative ambient-Clifford rigidity is
 positive, semilinear reconstruction is false.**  Phase-optimized global
 vector error `\(\varepsilon\)` between product-unitarily related

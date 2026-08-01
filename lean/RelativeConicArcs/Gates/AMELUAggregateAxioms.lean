@@ -150,6 +150,13 @@ open RelativeConicArcs.AMELU
 #print axioms mem_cssSupportedLabelSpace_iff_support_subset
 #print axioms equalPhaseState_hasMinimalComputationalSupport
 #print axioms isAME_equalPhaseState_iff_isMDSCode634
+#print axioms tensorWeylAction_X_equalPhaseState_eq_translated
+#print axioms translatedEqualPhaseState_eq_iff
+#print axioms stateInnerProduct_translatedEqualPhaseState_eq_zero
+#print axioms tensorWeylAction_Z_translatedEqualPhaseState
+#print axioms supportedArcSyndrome_bijective_of_card_three
+#print axioms existsUnique_arcSyndrome_supported_on_three
+#print axioms existsUnique_arcSyndrome_weight_three_on_support
 
 #print axioms pencilZ_eq_iff_samePencilYOrbit
 #print axioms admitted_nonGRS_pencil_classified_by_z

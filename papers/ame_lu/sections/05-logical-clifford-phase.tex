@@ -104,6 +104,45 @@ This is an operational distinction, not a classical automorphism count.
 The fixed-party non-GRS group has order \(q^2(q-1)\), while the GRS
 group has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\).
 
+\begin{lemma}[Coset states and three-party syndrome charts]
+\label{lem:coset-syndrome-charts}
+Let \(H\) be a rank-three parity-check matrix whose six columns form an
+arc, put \(C=\ker H\), and set
+\[
+ |\Psi_e\rangle=X(e)|\Psi_C\rangle,
+ \qquad
+ |\Psi_C\rangle=q^{-3/2}\sum_{c\in C}|c\rangle .
+\]
+Then \(|\Psi_e\rangle=|\Psi_f\rangle\) if and only if \(e-f\in C\),
+and states from distinct cosets are orthogonal.  In the row basis of
+\(H\), the \(Z(C^\perp)\)-stabilizer syndrome of
+\(|\Psi_e\rangle\) is \(He^{\mathsf T}\).
+Consequently the least support of an \(X\)-operator producing
+\(|\Psi_e\rangle\) is the minimum Hamming weight in \(e+C\).
+
+For every syndrome \(s\in\F_q^3\) and every three-party set \(I\),
+there is a unique representative \(e\) supported in \(I\) with
+\(He^{\mathsf T}=s\).  If the coset with syndrome \(s\) has minimum
+weight three, this representative has support exactly \(I\).
+\end{lemma}
+
+\begin{proof}
+Translation replaces the computational support \(C\) by the affine coset
+\(e+C\).  Two such supports are equal precisely when \(e-f\in C\);
+otherwise they are disjoint, which also proves orthogonality.  If \(h\) is
+a row of \(H\), then \(h\in C^\perp\), and \(Z(h)\) acts on the entire
+coset \(e+C\) by the character \(\chi(h\mathbin\cdot e)\).  Reading this
+for the three rows of \(H\) gives \(He^{\mathsf T}\).
+
+Now fix \(I\).  The arc condition says exactly that the three columns in
+\(I\) form an invertible matrix \(H_I\).  Thus
+\(H_Ie_I^{\mathsf T}=s\) has one solution, and extension by zero gives
+the unique representative supported in \(I\).  If one of its three
+coordinates vanished, the same syndrome would have a representative of
+weight at most two.  A minimum weight-three syndrome therefore uses all
+three coordinates.
+\end{proof}
+
 \begin{proposition}[Clebsch extremal \(X\)-syndrome conic]
 \label{prop:clebsch-x-syndrome}
 Let \(H\) be a parity-check matrix whose columns are the Clebsch six-arc
@@ -113,11 +152,6 @@ in \(\PP^2(\F_{11})\), put \(C=\ker H\), and write
  \qquad
  |\Psi_C\rangle=11^{-3/2}\sum_{c\in C}|c\rangle .
 \]
-Then \(|\Psi_e\rangle=|\Psi_f\rangle\) exactly when \(e-f\in C\), and
-states from distinct cosets are orthogonal.  The \(Z(C^\perp)\)-stabilizer
-syndrome of \(|\Psi_e\rangle\), in the row basis of \(H\), is
-\(He^{\mathsf T}\).
-
 The syndromes whose cosets have minimum \(X\)-support three are the 120
 nonzero vectors on twelve projective rays forming a nonsingular conic in
 \(\PP^2(\F_{11})\).  Each such syndrome has exactly one weight-three
@@ -132,22 +166,10 @@ not \(\mathrm{SL}_2(11)\).
 \end{proposition}
 
 \begin{proof}
-Translation of the computational support gives
-\[
- |\Psi_e\rangle=11^{-3/2}\sum_{x\in e+C}|x\rangle .
-\]
-Two such supports are equal or disjoint according as the cosets agree or
-differ, proving the first assertion.  Since
-\(C^\perp=\operatorname{row}(H)\), commutation with the three chosen
-\(Z\)-checks records the three coordinates of \(He^{\mathsf T}\).
-Consequently the least support of an \(X\)-operator producing
-\(|\Psi_e\rangle\) is the coset-leader weight of \(e+C\).  For every
-three-set \(I\) of parties, the arc condition makes the \(3\)-by-\(3\)
-submatrix \(H_I\) invertible.  Hence each syndrome has a unique
-representative supported in \(I\); for a covering-radius syndrome all three
-coordinates are nonzero.  This proves the one-per-support assertion.
-
-The Clebsch deep-hole theorem identifies the covering radius as three and
+Lemma~\ref{lem:coset-syndrome-charts} identifies minimum \(X\)-support
+with coset-leader weight and gives one representative on every
+three-party support.  The Clebsch deep-hole theorem identifies the covering
+radius as three and
 the twelve projective maximum-distance syndromes with a nonsingular conic;
 it also gives the transitive \(C_{10}\times A_5\) action
 \cite[Proposition~6.2, Corollary~6.3, and Proposition~6.4]{RuddClebsch2026}.
@@ -182,11 +204,11 @@ rigidity statement: every product-unitary intertwiner from this tensor to a
 stabilizer AME tensor is Clifford factor by factor.
 \end{remark}
 
-The MDS property also makes minimum operator pushing uniform.  For any
-input party and nonidentity Pauli label, each of the ten four-sets
-containing that party gives a unique stabilizer representative supported
-there.  Removing the input leaves a weight-three output Pauli.  Thus each
-input Pauli has exactly ten minimum-support pushes, although the symmetry
-orbits of those pushes can distinguish finer projective classes.  This
-uses only the projection isomorphism for the shortened planes, not the
-finite group calculation.
+A different MDS uniformity governs operator pushing.  Fix an input party
+and a nonidentity Pauli label.  Each of the ten four-sets containing that
+party carries a unique stabilizer representative with that support; removing
+the input leaves a weight-three output Pauli.  Thus a fixed input Pauli has
+ten minimum-support pushes.  Lemma~\ref{lem:coset-syndrome-charts} instead
+fixes an \(X\)-syndrome and varies over all twenty three-party supports.
+Neither count uses the finite group calculation, although the symmetry
+orbits of the operator pushes can distinguish finer projective classes.
