@@ -228,6 +228,25 @@ def sign_vector(values):
     return tuple(1 if value > 0 else -1 for value in values)
 
 
+def cycle_type(permutation):
+    unseen = set(range(6))
+    cycles = []
+    while unseen:
+        start = min(unseen)
+        current = start
+        length = 0
+        while current in unseen:
+            unseen.remove(current)
+            length += 1
+            current = permutation[current]
+        cycles.append(length)
+    return tuple(sorted(cycles, reverse=True))
+
+
+def permutation_product(left, right):
+    return tuple(left[right[index]] for index in range(6))
+
+
 class DisjointSet:
     def __init__(self, elements):
         self.parent = {element: element for element in elements}
@@ -297,6 +316,7 @@ def build():
 
     collision = collision_synthemes(cubics)
     order_candidates = {}
+    order_witnesses = {}
     incidence = Counter()
     witnesses = {}
     for order in itertools.permutations(range(6)):
@@ -312,6 +332,7 @@ def build():
         for signs, point in realized.items():
             incidence[signs] += 1
             witnesses.setdefault(signs, point)
+            order_witnesses[(signs, order)] = point
 
     incidence_by_weight = Counter()
     for signs, count in incidence.items():
@@ -319,6 +340,7 @@ def build():
     assert incidence_by_weight == Counter({(2, 24): 15, (3, 108): 20, (4, 24): 15})
 
     chamber_of = {}
+    component_orders = {}
     chamber_sizes_by_weight = Counter()
     components_per_sign = {}
     for signs in sorted(incidence):
@@ -340,6 +362,7 @@ def build():
         chamber_sizes_by_weight[(sum(value > 0 for value in signs), tuple(sizes))] += 1
         ordered_groups = sorted((tuple(sorted(group)) for group in groups.values()), key=lambda group: group[0])
         for component, group in enumerate(ordered_groups):
+            component_orders[(signs, component)] = group
             for order in group:
                 chamber_of[(signs, order)] = (signs, component)
 
@@ -383,6 +406,85 @@ def build():
         for finish, distance in distances.items():
             if repr(start) < repr(finish):
                 distance_distribution[distance] += 1
+
+    permutations = tuple(itertools.permutations(range(6)))
+
+    def act(vertex, permutation):
+        order = component_orders[vertex][0]
+        point = order_witnesses[(vertex[0], order)]
+        transformed = [0] * 6
+        for old_label in range(6):
+            transformed[permutation[old_label]] = point[old_label]
+        transformed_order = tuple(permutation[label] for label in order)
+        transformed_signs = sign_vector(evaluate_cubics(cubics, transformed))
+        return chamber_of[(transformed_signs, transformed_order)]
+
+    def antipode(vertex):
+        order = component_orders[vertex][0]
+        return chamber_of[(tuple(-value for value in vertex[0]), tuple(reversed(order)))]
+
+    assert all(antipode(antipode(vertex)) == vertex for vertex in neighbors)
+    assert {
+        tuple(sorted((antipode(left), antipode(right)), key=repr)) for left, right in adjacency
+    } == {tuple(sorted(edge, key=repr)) for edge in adjacency}
+
+    unbalanced_base = min(
+        (vertex for vertex in neighbors if len(neighbors[vertex]) == 3), key=repr
+    )
+    assert len({act(unbalanced_base, permutation) for permutation in permutations}) == 720
+    neighbor_seeds = sorted(neighbors[unbalanced_base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))
+    coset_orbits = []
+    stabilizers = []
+    for seed in neighbor_seeds:
+        stabilizer = tuple(
+            permutation for permutation in permutations if act(seed, permutation) == seed
+        )
+        orbit = {act(seed, permutation) for permutation in permutations}
+        assert len(stabilizer) == len(neighbors[seed])
+        assert {act(unbalanced_base, permutation) for permutation in stabilizer} == neighbors[seed]
+        unused = set(range(6))
+        point_orbits = []
+        while unused:
+            start = min(unused)
+            point_orbit = {permutation[start] for permutation in stabilizer}
+            point_orbits.append(tuple(sorted(point_orbit)))
+            unused -= point_orbit
+        cycle_types = Counter(cycle_type(permutation) for permutation in stabilizer)
+        coset_orbits.append(
+            {
+                "chamber_degree": len(neighbors[seed]),
+                "orbit_size": len(orbit),
+                "stabilizer_order": len(stabilizer),
+                "point_orbits": point_orbits,
+                "cycle_types": {
+                    ".".join(map(str, key)): value for key, value in sorted(cycle_types.items())
+                },
+            }
+        )
+        stabilizers.append(stabilizer)
+    assert [(item["orbit_size"], item["stabilizer_order"]) for item in coset_orbits] == [
+        (60, 12),
+        (60, 12),
+        (20, 36),
+    ]
+    assert not ({act(neighbor_seeds[0], p) for p in permutations} & {act(neighbor_seeds[1], p) for p in permutations})
+    assert antipode(neighbor_seeds[0]) in {act(neighbor_seeds[1], p) for p in permutations}
+    generators = tuple({permutation for stabilizer in stabilizers for permutation in stabilizer})
+    identity = tuple(range(6))
+    generated = {identity}
+    word_length = {identity: 0}
+    frontier = [identity]
+    for current in frontier:
+        for generator in generators:
+            product = permutation_product(current, generator)
+            if product not in generated:
+                generated.add(product)
+                word_length[product] = word_length[current] + 1
+                frontier.append(product)
+    assert len(generated) == 720
+    assert max(word_length.values()) == 5
+    farthest = sorted(permutation for permutation, length in word_length.items() if length == 5)
+    assert len(farthest) == 7
 
     boolean = Counter()
     boolean_examples = {}
@@ -471,6 +573,19 @@ def build():
             "unordered_pair_distance_distribution": {
                 str(distance): count for distance, count in sorted(distance_distribution.items())
             },
+        },
+        "coset_compression": {
+            "group": "S6",
+            "unbalanced_orbit": {"size": 720, "stabilizer_order": 1},
+            "balanced_neighbor_orbits": coset_orbits,
+            "model": "S6 disjoint-union S6/H36 disjoint-union S6/K12+ disjoint-union S6/K12-, with g adjacent to its three containing left cosets",
+            "subgroups_generate_S6": True,
+            "subgroup_factor_length_distribution": {
+                str(length): count for length, count in sorted(Counter(word_length.values()).items())
+            },
+            "subgroup_factor_width": 5,
+            "seven_width_five_permutations": farthest,
+            "antipode_exchanges_the_two_K12_orbits": True,
         },
         "boolean_census": [
             {

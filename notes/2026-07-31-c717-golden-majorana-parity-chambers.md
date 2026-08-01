@@ -32,6 +32,11 @@ vector, the large chamber has degree 36 and the six small chambers have
 degree 12.  A generic edge crosses one and only one Pfaffian wall and flips
 that one ground-state parity.
 
+These numbers compress to one mechanism: the graph is the coset-incidence
+geometry of a regular \(S_6\)-orbit with balanced stabilizers
+\(S_3\times S_3,S_3\times S_2,S_3\times S_2\).  The two order-twelve
+coset orbits are exchanged by \(x\mapsto-x\).
+
 The simultaneous-closing rule is sharp: away from the common unstable base
 locus, exactly one, two, or four of the six Hamiltonians can close, but not
 exactly three or five.  All six close on the fifteen-line unstable locus.
@@ -172,11 +177,29 @@ the singleton magnitude as the sum of the other five.  Strict convexity gives
 contradicting the cubic identity.  Thus every nonzero syndrome has two,
 three, or four plus signs.  Conversely exact witnesses exist for all such
 syndromes, and outer \(S_6\) covariance is transitive at each weight.  The
-50 allowed vectors are therefore
+The 50 allowed vectors are therefore
 
 \[
  \binom62+\binom63+\binom64=50.
 \]
+
+This sign restriction is not Golden-specific.  More generally, let
+\(y_1,\ldots,y_n\) be nonzero real numbers with
+
+\[
+ \sum_i y_i=\sum_i y_i^3=0.
+\]
+
+Then each sign must occur at least twice, and every sign pattern with
+\(p,q\ge2\) does occur.  The obstruction to a singleton sign is the same
+strict-convexity argument above.  For the converse, normalize the positive
+and negative magnitudes separately to have sum one.  On the open
+\((k-1)\)-simplex the function \(f_k(u)=\sum u_i^3\) has image
+\([1/k^2,1)\).  The two images for \(k=p,q\) overlap whenever
+\(p,q\ge2\), and choosing the same value realizes the prescribed sign
+pattern.  Thus the 50-syndrome theorem is the \(n=6\) case of a universal
+first/third-moment cancellation lemma; the later chamber multiplicities are
+where the Golden outer action enters.
 
 The stronger chamber count uses the matching identity from C715.  For a
 perfect matching \(M\),
@@ -286,7 +309,74 @@ sequence of at most ten generic single-Pfaffian crossings; this is a
 connectivity statement about controlled gap closings, not a gapped
 homotopy.
 
-## 6. Boolean controls, optima, and dimers
+## 6. Coset compression
+
+The full census and all three degrees admit a shorter group-theoretic
+description.  Let \(G=S_6\) act on source labels and through the signed outer
+action on parity chambers.  The 720 unbalanced chambers form a free
+transitive \(G\)-orbit, so choose one of them as the identity chamber.
+Its three balanced neighbors lie in three \(G\)-orbits:
+
+\[
+ \begin{array}{c|c|c|c}
+ \text{orbit}&\text{stabilizer type}&\text{orbit size}&\text{degree}\\ \hline
+ B_0&S_3\times S_3&20&36\\
+ B_+&S_3\times S_2&60&12\\
+ B_-&S_3\times S_2&60&12.
+ \end{array}
+\]
+
+The first Young subgroup preserves the two source triples of the balanced
+Boolean optimum.  Each order-twelve Young subgroup preserves a
+\(3+2+1\) source partition.  The two order-twelve coset spaces are distinct
+\(S_6\)-orbits, and the antipodal control involution \(x\mapsto-x\) exchanges
+them.
+
+If these three stabilizers are denoted \(H,K_+,K_-\), the chamber graph is
+exactly the coset-incidence graph
+
+\[
+ \Gamma=G\ \sqcup\ G/H\ \sqcup\ G/K_+\ \sqcup\ G/K_-,
+\]
+
+where \(g\in G\) is adjacent to the three left cosets
+\(gH,gK_+,gK_-\).  Indeed a neighbor's stabilizer carries the identity
+chamber through its entire neighborhood, and its order equals that
+neighbor's degree, so there are no further neighbors.  This gives
+
+\[
+ |V(\Gamma)|=720+\frac{720}{36}+2\frac{720}{12}=860,
+ \qquad |E(\Gamma)|=3\cdot720=2160,
+\]
+
+and the degree distribution \(3^{720},12^{120},36^{20}\) without a chamber
+enumeration.  The three Young subgroups generate \(S_6\), so the coset graph
+is connected.  Their exact subgroup-factor width is five: relative to the
+frozen identity chamber, the 720 permutations occur at factor lengths
+
+\[
+ 1,50,180,334,148,7
+\]
+
+for lengths zero through five.  Alternating group and coset vertices doubles
+that width and explains diameter ten.  Thus the formerly unexplained
+numbers \(860,2160,20,60+60,36,12,3\), and ten all come from one
+\(S_6\)-coset mechanism.
+
+The earlier per-syndrome multiplicities are now immediate as well.  The
+regular orbit lies over 30 unbalanced syndromes, giving \(720/30=24\)
+chambers each.  The orbit \(B_0\) lies once over every balanced syndrome,
+while \(B_+\sqcup B_-\) lies six times over each, giving the sevenfold split
+\(1+6\) without referring back to pole-by-pole enumeration.
+
+The mechanism generalizes verbatim.  For any finite group \(G\) and
+subgroups \(H_1,\ldots,H_r\), the graph with vertices
+\(G\sqcup\bigsqcup_iG/H_i\) and edges \(g\sim gH_i\) has group-side degree
+\(r\), coset-side degrees \(|H_i|\), and is connected exactly when the
+\(H_i\) generate \(G\).  What is Golden-specific is the appearance of the
+three Young subgroups above from the outer duad--syntheme collision rule.
+
+## 7. Boolean controls, optima, and dimers
 
 The exact Boolean census has a direct GIT explanation.
 
@@ -305,7 +395,7 @@ Thus the 44 null Boolean masks split as \(30+12+2\), with ranks four, two,
 and zero respectively; they should not be conflated as one kind of gap
 closing.
 
-## 7. Monodromy and parity-pump obstruction
+## 8. Monodromy and parity-pump obstruction
 
 Along a gapped loop, each continuous nonzero function
 \(\operatorname {Pf}A_T\) returns with the same sign.  The six parities are
@@ -336,7 +426,7 @@ marked Hamiltonians by hand.  Likewise, Berry phases of nondegenerate
 ground-state lines may occur geometrically, but no quantized value follows
 from the Pfaffian chamber data alone.
 
-## 8. Literature boundary
+## 9. Literature boundary
 
 No source in this C717 comparison was read cover-to-cover; four primary
 sources were used at targeted full-text depth.  The purpose was background
@@ -370,7 +460,7 @@ pump requires additional spatial, boundary, or defect structure.  This
 report makes no claim that parity chambers or Pfaffian crossings in generic
 finite Majorana systems are new.
 
-## 9. Reproducibility
+## 10. Reproducibility
 
 From `/home/tavis/src/othello` run
 
@@ -384,14 +474,17 @@ The generator constructs the six frozen outer cubics and oriented conference
 representatives, verifies the two Segre polynomial identities and all six
 Pfaffian identities, derives the 15 collision synthemes, transports four
 exact witnesses through all 720 strict orders, computes the balanced
-collision graph, checks all 64 Boolean controls and exact matrix ranks, and
-writes the canonical JSON certificate.  The replay reads only the frozen
-coefficient data in that certificate and uses a separate evaluator,
-union-find implementation, rational rank routine, all 64 Boolean controls,
-and 3,125 further exact integer identity points.
+collision graph, identifies the three stabilizers and their coset orbits,
+checks subgroup generation and factor width, checks all 64 Boolean controls
+and exact matrix ranks, and writes the canonical JSON certificate.  The
+replay reads only the frozen coefficient data in that certificate and uses a
+separate evaluator, union-find and group-action implementations, rational
+rank routine, all 64 Boolean controls, and 3,125 further exact integer
+identity points.
 
 The finite certificate proves the convention tables, order-incidence graph,
-component sizes, adjacency degrees, Boolean ranks, and displayed witnesses.
+component sizes, coset compression, adjacency degrees, Boolean ranks, and
+displayed witnesses.
 The irreducibility, intersection multiplicity rule, connectedness lemma, and
 topological obstruction are human arguments above; they are not inferred
 from finite sampling.
@@ -405,8 +498,11 @@ chambers already visible in C715.  The balanced Boolean optimum selects the
 unique large component, so it is not merely an amplitude-space node; it is a
 canonical chamber selector in real control space.
 
-The other useful strengthening is the exact adjacency theorem: degrees
-\(3/12/36\), one connected component, and diameter ten.  It gives an
+The other useful strengthening is the coset compression.  The exact
+adjacency theorem is the incidence graph of one regular \(S_6\)-orbit and
+the three coset spaces for \(S_3\times S_3,S_3\times S_2,S_3\times S_2\).
+The degrees \(3/12/36\), one connected component, and diameter ten follow
+from subgroup orders, generation, and factor width.  This gives an
 immediate experimental discriminator: local parity sweeps near an optimum
 can access 36 generic one-wall exits, whereas the six outer pole chambers
 have only 12 and every unbalanced chamber only three.  This is algebraic
@@ -420,6 +516,15 @@ connectivity, not topological protection.
   2,160 edges, one connected component, diameter ten, and degree distribution
   \(3^{720},12^{120},36^{20}\); each balanced optimum selects the unique
   degree-36 chamber for its sign.
+- **Settled by the post-closeout `ej` pass:** the entire graph is the
+  \(S_6\) coset-incidence geometry for stabilizers
+  \(S_3\times S_3,S_3\times S_2,S_3\times S_2\).  The two small 60-chamber
+  orbits are exchanged by the antipodal control involution, and diameter ten
+  is twice the exact subgroup-factor width five.
+- **Generalized:** the exclusion of singleton signs holds for every real
+  system with vanishing first and third moments, and every sign pattern with
+  at least two entries of each sign is realizable.  Only the finer coset
+  multiplicities use the Golden \(S_6\) structure.
 - **Settled:** simultaneous closing multiplicities are exactly
   \(1,2,4,6\), with no exactly-three or exactly-five stratum.
 - **Settled:** the 44 null Boolean masks split by rank as

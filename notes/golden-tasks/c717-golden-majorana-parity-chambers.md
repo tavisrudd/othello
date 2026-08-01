@@ -59,6 +59,11 @@ vector has 24 chambers; every balanced vector has seven, with the balanced
 Boolean optimum in its unique large chamber.  The generic adjacency graph
 is connected of diameter ten, has 2,160 edges, and has degree distribution
 \(3^{720},12^{120},36^{20}\).
+It is exactly the coset-incidence graph of a regular \(S_6\)-orbit with
+balanced stabilizers
+\(S_3\times S_3,S_3\times S_2,S_3\times S_2\); the two 60-vertex pole
+orbits are exchanged by the antipodal control involution.  The subgroup
+factor width is five, explaining the graph diameter ten.
 
 Exactly one, two, four, or six Hamiltonians can close simultaneously.  The
 common six-wall locus is the fifteen-line unstable base scheme; its generic
@@ -66,6 +71,9 @@ points have rank four in every sister and its six vertices are the rank-two
 C709 dimers.  No protected monodromy or parity pump survives: each gapped
 six-Majorana class-D parity component is
 \(SO(6)/U(3)\cong\mathbf P^3(\mathbf C)\), hence simply connected.
+The sign-vector restriction also generalizes: for any nonzero real vector
+with vanishing first and third moments, each sign occurs at least twice, and
+every such sign pattern is realizable.
 
 Full report and exact evidence bundle:
 `notes/2026-07-31-c717-golden-majorana-parity-chambers.md` and

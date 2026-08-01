@@ -99,6 +99,7 @@ def main():
     # Directly evaluate transformed rational witnesses in all 720 strict orders.
     feasible = defaultdict(set)
     stars = {}
+    occurrence_point = {}
     for order in itertools.permutations(range(6)):
         patterns = {signs(values(cubics, assigned(order, witness))) for witness in WITNESSES}
         assert None not in patterns and len(patterns) == 4
@@ -110,11 +111,17 @@ def main():
         stars[order] = (center, leaves)
         for pattern in patterns:
             feasible[pattern].add(order)
+            occurrence_point[pattern, order] = next(
+                assigned(order, witness)
+                for witness in WITNESSES
+                if signs(values(cubics, assigned(order, witness))) == pattern
+            )
 
     incidence = Counter((sum(entry > 0 for entry in pattern), len(orders)) for pattern, orders in feasible.items())
     assert incidence == Counter({(2, 24): 15, (3, 108): 20, (4, 24): 15})
 
     chamber = {}
+    chamber_orders = {}
     sizes_by_weight = Counter()
     for pattern, orders in feasible.items():
         union = UnionFind(orders)
@@ -132,6 +139,7 @@ def main():
         sizes = tuple(sorted(len(group) for group in ordered_groups))
         sizes_by_weight[(sum(entry > 0 for entry in pattern), sizes)] += 1
         for number, group in enumerate(ordered_groups):
+            chamber_orders[(pattern, number)] = group
             for order in group:
                 chamber[pattern, order] = (pattern, number)
     assert sizes_by_weight == Counter(
@@ -166,6 +174,70 @@ def main():
         diameter = max(diameter, max(distances.values()))
     assert diameter == 10
 
+    permutations = tuple(itertools.permutations(range(6)))
+
+    def act(vertex, permutation):
+        order = chamber_orders[vertex][0]
+        point = occurrence_point[vertex[0], order]
+        transformed = [0] * 6
+        for old in range(6):
+            transformed[permutation[old]] = point[old]
+        new_order = tuple(permutation[label] for label in order)
+        new_pattern = signs(values(cubics, transformed))
+        return chamber[new_pattern, new_order]
+
+    def antipode(vertex):
+        order = chamber_orders[vertex][0]
+        return chamber[tuple(-entry for entry in vertex[0]), tuple(reversed(order))]
+
+    assert all(antipode(antipode(vertex)) == vertex for vertex in neighbors)
+    assert {
+        tuple(sorted((antipode(left), antipode(right)), key=repr)) for left, right in edges
+    } == {tuple(sorted(edge, key=repr)) for edge in edges}
+
+    base = min((vertex for vertex in neighbors if len(neighbors[vertex]) == 3), key=repr)
+    assert len({act(base, permutation) for permutation in permutations}) == 720
+    seed_data = []
+    stabilizers = []
+    for seed in sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex))):
+        stabilizer = tuple(permutation for permutation in permutations if act(seed, permutation) == seed)
+        orbit = {act(seed, permutation) for permutation in permutations}
+        assert {act(base, permutation) for permutation in stabilizer} == neighbors[seed]
+        unused = set(range(6))
+        point_orbit_sizes = []
+        while unused:
+            start = min(unused)
+            point_orbit = {permutation[start] for permutation in stabilizer}
+            point_orbit_sizes.append(len(point_orbit))
+            unused -= point_orbit
+        seed_data.append((len(orbit), len(stabilizer), tuple(sorted(point_orbit_sizes))))
+        stabilizers.append(stabilizer)
+    assert seed_data == [(60, 12, (1, 2, 3)), (60, 12, (1, 2, 3)), (20, 36, (3, 3))]
+    small_orbits = [
+        {act(seed, permutation) for permutation in permutations}
+        for seed in sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))[:2]
+    ]
+    assert not (small_orbits[0] & small_orbits[1])
+    assert antipode(sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))[0]) in small_orbits[1]
+
+    def compose(left, right):
+        return tuple(left[right[index]] for index in range(6))
+
+    subgroup_generators = tuple({permutation for group in stabilizers for permutation in group})
+    identity = tuple(range(6))
+    generated = {identity}
+    word_length = {identity: 0}
+    frontier = [identity]
+    for current in frontier:
+        for generator in subgroup_generators:
+            product = compose(current, generator)
+            if product not in generated:
+                generated.add(product)
+                word_length[product] = word_length[current] + 1
+                frontier.append(product)
+    assert len(generated) == 720
+    assert Counter(word_length.values()) == Counter({0: 1, 1: 50, 2: 180, 3: 334, 4: 148, 5: 7})
+
     # A second direct implementation checks all 64 Boolean controls and ranks.
     boolean = Counter()
     for point in itertools.product((-1, 1), repeat=6):
@@ -193,7 +265,7 @@ def main():
         assert sum(entry**3 for entry in amplitudes) == 0
         checked += 1
     assert checked == 3125
-    print("replayed 860 chambers, connected diameter-10 adjacency, 64 Boolean controls, and 3125 identity points")
+    print("replayed 860 chambers, S6 coset compression, diameter 10, 64 Boolean controls, and 3125 identity points")
 
 
 if __name__ == "__main__":

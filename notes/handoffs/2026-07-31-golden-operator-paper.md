@@ -172,7 +172,11 @@ particular:
   chambers (24 for each of 30 sign vectors) and 140 balanced chambers
   (seven for each of 20 sign vectors).  The generic adjacency graph is
   connected of diameter ten, has 2,160 edges, and has degree distribution
-  \(3^{720},12^{120},36^{20}\).  Simultaneous closing multiplicities are
+  \(3^{720},12^{120},36^{20}\).  It is the coset-incidence graph of a
+  regular \(S_6\)-orbit with balanced stabilizers
+  \(S_3\times S_3,S_3\times S_2,S_3\times S_2\); subgroup-factor width five
+  explains diameter ten, and the antipode exchanges the two 60-chamber pole
+  orbits.  Simultaneous closing multiplicities are
   exactly one, two, four, or six; the common six-wall locus is the reduced
   fifteen-line unstable base scheme, with generic rank four and the six
   rank-two C709 dimer vertices.  Each gapped six-Majorana class-D parity
