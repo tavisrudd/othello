@@ -303,7 +303,10 @@ particular:
   exact rational Jacobian elimination proves the projective singular scheme
   is reduced of degree six, and an independent replay checks all witnesses
   and Hessians.  The six nodes attain Dolgachev's isolated determinantal
-  Milnor total.  The placed corollary and verification surface pass the
+  Milnor total.  The placed corollary explicitly cites Paper I,
+  Corollary 8.3 for the same six-node theorem by its determinantal-duality
+  route, distinguishing C757's matching/Jacobian proof as independent.
+  The corollary and verification surface pass the
   warning-free 19-page paper build.  Report and evidence:
   `notes/2026-08-01-c757-golden-determinantal-cubic-nodes.md`.
   Its `ej` refinement identifies the full matching carrier with the complete

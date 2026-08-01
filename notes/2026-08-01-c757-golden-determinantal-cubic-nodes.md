@@ -48,6 +48,17 @@ The consulted cached PDF has key `arXiv:1501.06432` and SHA-256
 The comparison is a specialization of the classical determinantal statement;
 no novelty or priority claim is made for the six-node bound.
 
+## Cross-paper comparison
+
+The six-node conclusion is also Paper I, Corollary 8.3.  For one marked
+support-orientation cubic, that corollary obtains the same points
+\([\mathbf1-6e_i]\) and their ordinary-node type from the golden
+determinantal duality, while Paper I's exact gradient-ideal replay checks the
+singular-locus exhaustion independently.  Outer covariance transports that
+marked cubic among the six Golden sisters.  The present argument is therefore
+a third proof route---second-order matching vanishing followed by exact
+projective Jacobian elimination and Hessians---not a new six-node claim.
+
 ## Evidence bundle
 
 The primary generator is
@@ -82,8 +93,9 @@ it does not independently repeat the global Groebner calculation.
 
 Corollary `cor:golden-cubic-wall-nodes` now follows the principal propagation
 theorem.  It states the common six-node locus, the ordinary-double-point
-classification, and the saturated Milnor-total comparison.  The verification
-supplement records the two replay commands and distinguishes the global
+classification, cites Paper I, Corollary 8.3 for the same node theorem by a
+different route, and gives the saturated Milnor-total comparison.  The
+verification supplement records the two replay commands and distinguishes the global
 Singular check from the independent local replay.  The warning-free paper
 build passes at 19 pages.
 
