@@ -3,14 +3,14 @@
   "main_source": "clebsch_passages.tex",
   "main_source_sha256": "fb8ec6182b70d5dc64d5521355d29bba4d4b6e8f8b07a206db869a275ce93251",
   "section_sha256": {
-    "sections/01-introduction.tex": "f03338ea5369022705a6af361981bbfda2f9c26cbde1bd95a75190bbd9334c15",
+    "sections/01-introduction.tex": "172ce2d35df009bb6fe819a9731024445cba9369dd951708d7b7e08f3f7aa9e8",
     "sections/02-orientation-cover.tex": "046071c37f7c29931242030cbb4b47432611a69dbc9f6417266c8d26c7b6497c",
-    "sections/03-orientation-source.tex": "1de0c67aa68d95b1a5c75829afe2d522fe36bf9b8b41578117e72a94ccc9ae54",
+    "sections/03-orientation-source.tex": "0b71604c344fbaa9a8cbec2e6ff02b3a249e5c465529acc1b36305c9434cd714",
     "sections/04-arithmetic-specialization.tex": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455",
     "sections/05-harmonic-realization.tex": "c0078c3e003d28e8d7cc3bfb1c516feb3f724e47146b0f2599a02e16bcf20671",
     "sections/08-verification.tex": "4c2e0a6edcc8e7b96b7322999012abdcd8608cfe4a8672e57522d9f5dd331795",
     "sections/09-conclusion.tex": "fdcddd35b3eb9273e1725a89b23194db4be513b8aa5d3d6bf9b014f474d58b8b",
-    "sections/10-references.tex": "3b2b4c3d9cab7b2e461a3d1e89bb449f1608075cb5b3ce694e6816fd8cdc9a13"
+    "sections/10-references.tex": "366c4075a9bebf811b1ffe89d57e2ac4b65a528ee6934dc0e89682aae6c84c25"
   },
   "statement_count": 5,
   "statements": [

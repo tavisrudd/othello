@@ -25,6 +25,8 @@ the standard rational harmonic space.
 - `clebsch_passages.tex`: manuscript driver.
 - `sections/`: one file for each mathematical stage.
 - `ARTIFACT.md`: stable artifact description and trust boundary.
+- `claim-proof-novelty-ledger.md`: claim-level proof, precedence, and wording
+  boundary.
 - `release_files.json`: public packaging allowlist.
 - `verification/trust_manifest.json`: claim/evidence/status ledger.
 - `verification/statement_identity.json`: frozen theorem surface.
