@@ -1,6 +1,6 @@
 # C752 — Paper I Lean proof-spine correspondence audit
 
-**Status:** active read-only audit.
+**Status:** complete.  The reviewed C753 interface is frozen below.
 
 ## Frozen inputs
 
@@ -93,3 +93,204 @@ Early prose defects to route to the owning sources in C753:
 - the same module calls kernel-checked row theorems “opaque certificates.”
   This is not a trust error, but “bounded row certificates” would state the
   mechanism more accurately.
+
+## Final bidirectional correspondence map
+
+The final audit distinguishes a theorem about the displayed q11 witness from a
+theorem reconstructing an arbitrary six-arc.  The former is already strong;
+the latter is where the two geometric seams occur.
+
+| Paper object or inference | Exact formal object | Final status |
+|---|---|---|
+| projective point of `PG(2,11)` | `ProjectiveSpace.Point (ZMod 11) 2`; the finite package uses `PointIndex` and `pointVec` with `canonicalIndex` | Exact bridge for the 133 displayed representatives; a reusable equivalence theorem between the abstract point type and `PointIndex` is still required |
+| six-arc and chord index | `Arc A` and `pointIndex A x` | Same definitions; `SixArcDefectBridge.uncovered_eq_indexZero` is private and must become a reviewed public bridge |
+| uncovered locus | `uncovered A ∅`, equivalently the off-arc index-zero fibre | Same object after the preceding bridge |
+| Brianchon concurrence locus | `Q11DyeAxioms.brianchonPoints A`, the off-arc index-three fibre | Same object; the injection into six-vertex perfect matchings and the bound `c ≤ 15` are kernel-checked |
+| universal chord defect | `ClebschChordDefect.chordDefect_identity_of_moments` | Same algebraic elimination, but conditional on supplied moments and partition; the projective incidence assembly is not a terminal theorem |
+| q11 identity `|U|+c=22` | `SixArcDefectBridge.sixArc_uncovered_add_brianchon_card` | Same mechanism and exact specialization |
+| odd six-arc line bound | `OddSixArcLineBound.uncoveredOnLine_card_le_order_sub_five` | Partial: it assumes `hfiveImpossible`; the affine triangular-prism construction is absent |
+| arbitrary containing conic | only `Conic.NonsingularConic` occurs in `Q11DyeConsequences` | Missing degenerate-conic exclusion |
+| twelve-point equality trap | `sixArc_twelve_le_uncovered_card` and `sixArc_cards_of_uncovered_subset_conic` | Same mechanism once nonsingularity is available |
+| equality classification | `Q11DyeAxioms.dye1991_equality_classification` | Exact published conditional input, with theorem/page/DOI pinpoint |
+| Clebsch parity-check code | `Q11Coding.witnessCode`, the kernel of the six displayed columns | Exact displayed code; `witness_mds_columns`, dimension, distance, and covering radius are kernel-checked |
+| projective deep-hole locus | `projective_distanceThreeDirections_eq_standardConic` | Exact displayed-witness equality, not an abstract reconstruction theorem |
+| cosets and leaders | affine syndromes modulo the parity-check kernel; `syndromeDistance`, `leaderWords`, and the semantic leader-support tables | Exact code/coset dictionary and minimum-weight semantics |
+| decoder and ambiguity counts | `Q11DecodingSynthesis.totalSyndromeDistance_exact`, `ambiguity_strata_sound`, and `ambiguity_strata_counts` | Exact finite/kernel checks; the causal order is code → syndrome distance → leaders → counts |
+| associated conic and monomial equivalence | displayed standard conic plus projective equivalence of parity-check columns | The displayed witness is exact; the arbitrary-arc-to-code statement must use explicit projective-to-monomial and scalar-column bridges |
+| orientation cover through integral commutant | no Paper-I terminal; `Gates.ClebschOrientationMechanisms` exposes only generic involutive splitting and the Petersen pair-sum eigenspace | Human-only at Paper-I strength |
+
+No different-mechanism endpoint has been credited as correspondence.  In
+particular, the exact q11 orbit tables do not replace the affine-prism proof,
+and the generic orientation gate does not replace the paper's coset, pentagon,
+holonomy, determinant, trace-dual, or commutant arguments.
+
+## Completed referee-facing prose and naming audit
+
+The audited closure consists of the 118 content-addressed q11 modules at
+`42ab1a2d`, their sole generator, the gate/README/provenance/manifest/axiom
+surfaces, and the project-owned `finitegeom` modules imported by the gate or by
+the two proposed rigidity bridges.  Generated leaves were audited through the
+owning generator and byte identity, rather than treated as 66 independent
+prose sources.
+
+The trust prose in `Q11DyeAxioms`, `Q11DyeConsequences`,
+`SixArcDefectBridge`, `OddSixArcLineBound`, the import gate, README, manifest,
+and tracked axiom output is accurate.  The package makes no orientation claim,
+does not hide `native_decide`, and exposes the two Dye axioms.  The remaining
+repairs are finite and source-owned:
+
+1. In `scripts/generate-q11-a5-point-action.py`, repair the generated banner
+   from the nonexistent `lean/scripts/...` path to the repository-relative
+   `scripts/...` path.  Regenerate the 55 arithmetic leaves and 11 aggregators;
+   do not hand-edit them.
+2. In `Q11A5PointOrbits.lean`, replace “opaque certificates” by “bounded
+   kernel-checked row certificates.”
+3. In `Q11A5PointOrbits.lean` and `Q11A5PointOrbitsData.lean`, replace the nine
+   uses of “reflected lift/projectivity/action” by “normalized projective
+   lift/projectivity/action.”  The declarations prove normalization,
+   nonsingularity, and the action tables; they do not define a reflection.
+   Declaration names themselves are neutral and need not change.
+4. In `SmallKChordMoments.lean`, replace the forecast “a later integration
+   leaf can package ...” by a timeless statement of the exact conditional
+   boundary.  This is the only status-language defect found in the relevant
+   pinned dependency prose.
+5. Give the new C753 bridge and orientation declarations self-contained
+   docstrings and stable literature pinpoints.  The Hassett--Tschinkel input
+   must be a named conditional interface for Proposition 10, not prose hidden
+   behind a coordinate theorem.
+
+All repository-local artifact references in the audited gate, README,
+provenance file, manifest, and axiom audit resolve.  No internal note, task ID,
+agent/session label, private URL, machine-local path, `TODO`, or `FIXME` occurs
+in the reviewed closure.
+
+## Frozen C753 rigidity interface
+
+The rigidity work is dependency ordered and may not be replaced by the
+existing finite endpoint checks.
+
+1. **R1 — affine prism.**  In `OddSixArcLineBound.lean`, prove
+   `disjointLine_fiveUncovered_impossible` by constructing the three affine
+   connector directions and applying
+   `triangularPrism_parallelism_contradiction`.  Then expose
+   `sixArc_uncoveredOnLine_card_le_order_sub_five` without the
+   `hfiveImpossible` argument and specialize it to `Point (ZMod 11)`.
+2. **R2 — degenerate conics.**  In a new
+   `SixArcDegenerateConicExclusion.lean`, classify a nonzero degenerate ternary
+   quadratic over an odd field as a repeated line or two lines after scalar
+   extension, prove that containment of `uncovered A ∅` forces a forbidden
+   line intersection by R1, and export
+   `sixArc_uncovered_subset_conic_implies_nonsingular`.  If the algebraic
+   factorization cannot be kept within this file, freeze it as a separate
+   exact conditional interface; do not silently strengthen “conic” to
+   “nonsingular conic.”
+3. **R3 — q11 causal terminal.**  In
+   `Q11RigiditySpine.lean`, compose the public uncovered/index bridge, R1, R2,
+   `sixArc_uncovered_add_brianchon_card`, the two Dye assumptions, and the
+   twelve-point cardinality into
+   `isClebschHexagon_of_uncovered_subset_planeConic`.  The printed axioms must
+   be exactly the ordinary logical axioms plus the two named Dye inputs.
+4. **R4 — code-language bridge.**  In `Q11CodeRigidityBridge.lean`, expose the
+   equivalence from abstract projective points to canonical `PointIndex`, the
+   equality between uncovered points and projective distance-three syndrome
+   directions, projective column equivalence → monomial code equivalence,
+   and coset/leader semantics.  Terminal
+   `deepHoleLocus_rigidifies_witnessCode` must distinguish projective,
+   monomial, and literal equality.
+
+## Frozen C753 orientation packets
+
+Each packet is a separately reviewable module and gate target.  A packet may
+use earlier packets, mathlib, and the two generic mechanisms already printed
+by `Gates.ClebschOrientationMechanisms`; it may not use the exact Python replay
+as a substitute for the stated group/incidence argument.
+
+1. **O1 — cover and orbitals** (`PaperIOrientationCover.lean`): construct the
+   explicit `A5/C5 → A5/D5` quotient, deck involution, two self-paired
+   five-valent orbitals, and one-point-per-other-fibre incidence.  Export
+   `antipodalQuotient_fiber_card_two`, `fiveOrbitals_selfPaired`, and
+   `fiveOrbital_one_mem_each_other_fiber`.  Proof mechanism: cosets, the two
+   inverse-stable double cosets, and regular `C5` actions.
+2. **O2 — signed pentagon and golden square**
+   (`PaperIOrientationPentagon.lean`): define the fibre-odd orbital matrix,
+   prove lift changes are diagonal switching and orbital exchange is negation,
+   obtain opposite side/diagonal signs from connectivity and the absence of an
+   `A5 → C2` quotient, and prove `signedOrbitalMatrix_sq` and
+   `orbitalDifference_sq_eq_ten_one_sub_deck` by the paper's two cancellation
+   cases.
+3. **O3 — triangle holonomy and switching**
+   (`PaperIOrientationHolonomy.lean`): prove triangle-product invariance,
+   complementary sign exchange, the four-point identity, gauge reconstruction
+   of the switching class, pair balance ⇔ `B^2=5I`, uniqueness via the
+   two-regular graph on five vertices, and vanishing degree-zero/one/two signed
+   moments.  Export `supportSign_eq_triangleProduct`,
+   `fourPoint_twoGraph_identity`, `pairBalance_iff_sq_five`, and
+   `supportCubic_translation_invariant`.
+4. **O4 — principal minors and determinant pencil**
+   (`PaperIOrientationDeterminant.lean`): prove the size-three minor formula,
+   Jacobi complementary-minor values in sizes four and five, determinant
+   `-125`, the full diagonal expansion, and the homogeneous odd part.  Export
+   `det_signedOrbital_add_diagonal` and
+   `determinantPencil_oddPart_eq_supportCubic`.  Proof mechanism: multilinear
+   determinant expansion and `B⁻¹=B/5`, not a six-variable normalization check.
+5. **O5 — cross-golden trace dual** (`PaperIOrientationTraceDual.lean`): define
+   the two displayed golden eigenspaces and the cross block, prove translation
+   invariance and `det_crossGoldenBlock_eq_neg_supportCubic`, identify its
+   five-dimensional image and four-dimensional trace annihilator, and expose
+   `hassettTschinkel_six_nodes_of_traceDual` as the exact cited Proposition 10
+   conditional interface.  The coordinate basis calculation may be
+   kernel-checked, but the trace pairing and dimension bridge must be symbolic.
+6. **O6 — singular locus and node type** (`PaperIOrientationNodes.lean`): use
+   O5 only for completeness, then prove the six displayed frame points are
+   singular and the Hessian has projective rank four from the deleted
+   principal block of `B^2=5I`.  Export `supportCubic_singularLocus_eq_frame`
+   and `supportCubic_framePoints_ordinaryNodes`.
+7. **O7 — recovered symmetry** (`PaperIOrientationSymmetry.lean`): derive the
+   permutation action on the complete frame, identify the regular two-graph
+   automorphism group with `S5`, and its sign kernel with `A5`.  Export
+   `supportCubic_projectiveStabilizer_equiv_S5` and
+   `orientedSupportCubic_stabilizer_equiv_A5`.  Any group-order computation
+   must be connected to the normalizer theorem, not left as enumeration.
+8. **O8 — rational and integral commutants**
+   (`PaperIOrientationCommutant.lean`): formalize the conjugate `3+3'`
+   splitting, Schur/Galois descent, and the diagonal/off-diagonal integrality
+   test.  Export `oddModule_rationalCommutant_eq_adjoin_B` and
+   `oddLattice_integralCommutant_eq_ZsqrtFive`.  This packet may state a
+   reviewed conditional interface for the classical `A5` irreducible
+   decomposition, but must expose it in the axiom audit.
+
+`PaperIOrientationSpine.lean` may import O1–O8 only after each packet's own
+single-file elaboration, exact axiom audit, and prose review pass.  The Paper-I
+release gate is extended only after R1–R4 and O1–O8 all pass.
+
+## Validation and closeout decision
+
+C753 must validate in this order: owning-module elaboration; packet gate;
+reverse-import gates affected in `finitegeom`; exact Paper-I axiom audit;
+q11 generated-source check; q11 package build; paper trust-manifest and
+aggregate release; warning-free PDFs; authoritative-to-standalone forward
+synchronization; and a context-free cold comparison of the human and Lean
+dependency graphs.  The two Dye axioms, the exact Hassett--Tschinkel interface,
+and any admitted classical `A5` representation interface remain separately
+named in the final boundary.
+
+The `ej` + `tt` pass found no cheaper theorem that collapses orientation into
+the existing generic gate.  Its useful upgrade was the split of the former
+“cubic geometry and commutant” bundle into trace-dual, nodes, symmetry, and
+commutant packets; this removes the largest hidden implementation design
+choice.  No incidental result crossed the discovery-track discriminator.
+
+## Mystery ledger
+
+- **Settled:** why the q11 equality trap looked complete while the manuscript
+  theorem was not.  The gate begins after nonsingularity; R1 and R2 name the
+  two missing implications.
+- **Settled:** whether the orientation gap was merely naming.  It is not: O1–O8
+  identify eight absent paper-specific mechanisms.
+- **Open, owned by R2:** whether mathlib already supplies the exact odd-field
+  projective classification of degenerate ternary quadratics.  The evidence
+  gap is an import-level theorem with the repeated-line/two-line conclusion;
+  R2 must either locate it or expose a narrow conditional interface.
+- **Open, owned by O8:** the smallest existing formal interface for the
+  rational `A5` decomposition and Schur/Galois descent.  This affects only the
+  trust shape of O8, not O1–O7.

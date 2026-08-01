@@ -2,7 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after C752.
+**Status:** active; C752 is complete and its implementation interface is
+frozen.  Begin with the finite prose-source repairs and R1; orientation is
+split into O1--O8 and must remain packet-gated.
 
 ## Objective
 
@@ -11,6 +13,12 @@ the same causal spine as the final human proofs, with exact bridges at every
 definition and trust boundary.
 
 ## Work package
+
+The exact declaration names, files, mechanisms, and gate order are frozen in
+`notes/2026-07-31-c752-paper-i-lean-spine-audit.md`, under “Frozen C753
+rigidity interface” and “Frozen C753 orientation packets.”  The implementation
+order is prose-source repairs, R1--R4, O1--O8, aggregate gate, cold review, and
+release synchronization.
 
 1. Formalize the dependency-ordered same-mechanism lemmas frozen by C752;
    do not redesign the interface inside implementation.

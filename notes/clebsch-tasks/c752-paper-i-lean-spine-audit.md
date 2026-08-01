@@ -2,8 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; C751 is closed with both release roots green, and the
-read-only correspondence/prose audit is underway.
+**Status:** complete; the final bidirectional map, prose census, four rigidity
+interfaces, and eight dependency-sized orientation packets are frozen in
+`notes/2026-07-31-c752-paper-i-lean-spine-audit.md`.
 
 ## Objective
 
