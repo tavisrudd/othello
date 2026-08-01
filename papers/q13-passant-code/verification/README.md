@@ -10,23 +10,25 @@ release verifier must distinguish five modes:
 5. independent trusted exact execution.
 
 The current `claim_map.json` records the frozen source claims and their
-present trust modes. This infrastructure is not a release certificate.
+present trust modes. `evidence_manifest.json` records the first byte-for-byte
+migration from Paper I, including source commit, paths, byte counts, hashes,
+commands, and replay relationships. This infrastructure is not yet a release
+certificate.
 
 ## Evidence to extract
 
-The following files are currently owned by Paper I and must be copied into
-this root with paper-local paths, regenerated manifests, and preserved source
-provenance before Paper IV release:
+The following Paper-I files were copied byte-for-byte into this root at the
+source revision recorded by `evidence_manifest.json`:
 
 - `papers/clebsch-rigidity/check_q13_tangent_code.py`;
 - `papers/clebsch-rigidity/verification/c723_q13_weight10_profiles.py`;
 - `papers/clebsch-rigidity/verification/c723_q13_weight10_profiles.json`;
 - `papers/clebsch-rigidity/verification/c723_q13_weight10_independent.py`.
 
-The Paper-IV copies must be authoritative for this manuscript. They must not
-remain symlinks to Paper I or depend on an internal task report. A compact
-manifest will record their byte counts, SHA-256 hashes, exact commands, input
-conventions, and independent-replay relationship.
+The copies are regular files and are now owned by Paper IV. Subsequent changes
+must use paper-local names and semantics, preserve the migration provenance,
+and refresh the current-file hashes. They must not depend on an internal task
+report.
 
 ## Lean release layout
 

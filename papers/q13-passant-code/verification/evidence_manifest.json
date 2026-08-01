@@ -1,0 +1,55 @@
+{
+  "schema": "q13-passant-code-evidence-migration-v1",
+  "source": {
+    "commit": "1ff658b90bfa93092e31f178f9e610e02a10e695",
+    "root": "papers/clebsch-rigidity"
+  },
+  "files": [
+    {
+      "paper_iv_path": "verification/check_q13_tangent_code.py",
+      "source_path": "check_q13_tangent_code.py",
+      "bytes": 24263,
+      "sha256": "c843d9e6dce7601620f52aeb1f223a8d98bd7dd0fc9eba208b99c3143973a198",
+      "role": "primary exact replay for distance, minimum words, reconstruction, spanning, and automorphisms"
+    },
+    {
+      "paper_iv_path": "verification/c723_q13_weight10_profiles.py",
+      "source_path": "verification/c723_q13_weight10_profiles.py",
+      "bytes": 7378,
+      "sha256": "96e95067a3ce8f0f69180c6d78049ddf94905091640a07dfe366234fd383dd78",
+      "role": "canonical generator and checker for the two weight-ten profile certificates"
+    },
+    {
+      "paper_iv_path": "verification/c723_q13_weight10_profiles.json",
+      "source_path": "verification/c723_q13_weight10_profiles.json",
+      "bytes": 4209,
+      "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9",
+      "role": "canonical weight-ten profile certificate"
+    },
+    {
+      "paper_iv_path": "verification/c723_q13_weight10_independent.py",
+      "source_path": "verification/c723_q13_weight10_independent.py",
+      "bytes": 3368,
+      "sha256": "6cafb6ec9fc18feda15a3e0d9ab324b8e00b19d2f6281c822d84d22980f701a5",
+      "role": "independent dynamic-programming replay of the weight-ten exclusions"
+    }
+  ],
+  "commands": [
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 c723_q13_weight10_profiles.py --check",
+      "expected": "the tracked certificate is canonical and byte-identical to regeneration"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 c723_q13_weight10_independent.py",
+      "expected": "both weight-ten syndrome intersections are empty by an independently reconstructed incidence matrix"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 check_q13_tangent_code.py",
+      "expected": "omega=5, d=12, 364 minimum words, 78 recovered rows, and automorphism group PGL(2,13)"
+    }
+  ],
+  "boundary": "The scripts are exact trusted executions. The JSON certificate is independently replayed, but this migration bundle does not yet provide the planned Lean coverage theorems or replace the manuscript's human reductions."
+}
