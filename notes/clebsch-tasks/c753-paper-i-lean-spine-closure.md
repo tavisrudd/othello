@@ -28,6 +28,16 @@ serialized replacement run correctly refused because the Paper II structural
 gate already owned the shared build window; retry only after that foreign run
 releases the lock.
 
+The R2/R3 implementation must follow the manuscript's actual order.  A
+degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
+from a two-line rational cover and R1.  Dye's lower bound then forces equality
+and identifies the arc; only afterward does the associated nonsingular conic
+and the Bézout comparison exclude degeneracy of the original quadratic.  Thus
+R2 owns a reviewed classical conic-type interface and the degenerate upper
+bound, while R3 owns the two-branch rigidity terminal and the downstream
+nonsingularity corollary.  Do not encode the stronger nonsingularity conclusion
+before the Dye equality step.
+
 ## Objective
 
 Implement the frozen C752 interface so the Paper I Lean development follows
