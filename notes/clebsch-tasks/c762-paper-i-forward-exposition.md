@@ -2,7 +2,29 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; released versions 1 and 2 remain immutable.
+**Status:** active; the authoritative forward exposition pass and both PDF
+builds are green.  Released versions 1 and 2 remain immutable.  Formal
+correspondence, aggregate replay, and standalone synchronization wait for the
+active C753 extraction to reach a stable recorded state.
+
+## Current state
+
+The abstract and introduction now lead with rigidity and the normalized
+golden two-graph/determinant identity, with the uniform conic-filling window
+kept secondary.  The four-paper forgetting-and-recovery paragraph names
+released Papers II--III and forthcoming Paper IV.  The computational companion
+marks its q13 theorem as the historical computational source and points forward
+to Paper IV's standalone proof and evidence surface.
+
+The BBS interface now cites the exact conic-complement statement,
+Proposition 1.6, rather than deriving it through Proposition 1.5.  The
+Hassett--Tschinkel interface explicitly identifies the cross-golden four-space
+and its trace orthogonal with their paired determinantal hypersurfaces; the
+gradient-ideal exhaustion remains an independent check.  Both primary sources
+were checked from full text in the persistent literature cache (BBS SHA-256
+`c645a01905340e8100a5b9d46d806331bb0c21339e4c655aa6747d7e82c25fbe`;
+Hassett--Tschinkel SHA-256
+`89ca37f2a5908c3355fda20bda6e8e469d22ffcc5f93232de88a60a7f700f885`).
 
 ## Objective
 

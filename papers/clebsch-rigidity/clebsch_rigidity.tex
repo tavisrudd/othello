@@ -74,11 +74,9 @@ sole nonsymmetric term in the operator's diagonal determinant pencil.
 Its six ordinary nodes form a projective frame, so the cubic also recovers
 the unlabelled axis carrier.
 The conceptual tools are a universal chord-defect identity and a
-partial-cover bound.  Together with passant counts, they show that any
-$k$-arc whose uncovered locus is a nonsingular conic has $q$ odd and
-\[
- 2k-3\le q\le\frac{k(k-1)+3}{3}.
-\]
+partial-cover bound.  As a secondary uniform consequence, any $k$-arc
+whose uncovered locus is a nonsingular conic has $q$ odd and lies in the
+field window $2k-3\le q\le(k(k-1)+3)/3$.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -170,7 +168,17 @@ locus, the two five-valent orbitals recover a signed operator on the six
 antipodal axes.  Triangle holonomy identifies its switching class with the
 support bipartition and recovers the integral order $\mathbf Z[\sqrt5]$.
 
-The main general theorem is a uniform field window for conic-filling arcs.
+This orientation is the second structural pillar.  With the normalization
+of Theorem~\ref{thm:orientation-two-graph}, its signed operator and support
+cubic satisfy
+\[
+ B^2=5I,\qquad c_{ijk}=B_{ij}B_{jk}B_{ki},\qquad
+ \det(B+\operatorname{diag}x)=e_6-e_4+5e_2-125-2C(x).
+\]
+Thus triangle holonomy and the diagonal determinant pencil recover the same
+orientation torsor directly from nearest-codeword data.
+
+A secondary general theorem gives a uniform field window for conic-filling arcs.
 For an arbitrary conic-filling $k$-arc, the chord moments and a
 partial-cover theorem force $q$ odd and
 $2k-3\le q\le(k(k-1)+3)/3<\binom{k}{2}$.  For a Clebsch hexagon $K$, the
@@ -210,7 +218,17 @@ order.  A separate computational companion
 \cite{RuddComputational2026} proves sharper finite consequences: a
 degree-three characterization and numerical gap at $q=11$, uniqueness of
 $q=11$ among conic-filling six-arcs, classification through eight points,
-and an exact $q=13$ binary incidence-code theorem.
+and the original computational form of an exact $q=13$ binary incidence-code
+theorem.  The forthcoming Paper~IV extracts that theorem into its own
+structural and reproducible account~\cite{RuddPassant2026}.
+
+This is Paper~I of a four-paper sequence organized by what successive
+constructions forget and recover.  Paper~II studies what the conic matching
+quotient remembers~\cite{RuddFactorization2026}.  Paper~III, also called
+\emph{passages}, supplies and propagates the characteristic-zero golden
+source~\cite{RuddPassages2026}.  Paper~IV isolates the $q=13$ passant code
+and its reconstruction theorem.  Each paper retains its own statement and
+proof surface.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -454,9 +472,9 @@ In the conic case, $q$ is therefore odd and every chord is passant. An
 off-conic point lies on at most $(q+1)/2$ passants, so the $k-1$ chords
 through a vertex give $q\ge2k-3$.
 
-The $m$ chords form a partial line cover whose $q+1$ holes are the
-noncollinear points of the conic.  The partial-cover bound of Blokhuis,
-Brouwer, and Sz\H{o}nyi gives~\cite[Proposition~1.5]{BBS2010}
+The $m$ chords cover the complement of the conic by passant (elliptic)
+lines.  The exact conic-complement bound of Blokhuis, Brouwer, and
+Sz\H{o}nyi gives~\cite[Proposition~1.6]{BBS2010}
 \[
  m\ge 2q-1-\frac{q+1}{2}=\frac{3(q-1)}2.
 \]
@@ -1309,10 +1327,13 @@ up to scalar, the Clebsch diagonal cubic
 \]
 This cubic surface is smooth: at a singular point the five squares
 $z_i^2$ would be equal, but a sum of five signs cannot vanish in
-characteristic zero.  Proposition~10 of Hassett and Tschinkel now applies
-to the trace-orthogonal pair of matrix spaces and shows that
-$\det(\Phi_x)=0$ has exactly six ordinary double points in general linear
-position~\cite[\S3, Proposition~10]{HassettTschinkel2010}.
+characteristic zero.  Here the cross-golden four-space $\Lambda$ and its
+trace orthogonal $\Lambda^\perp$ define exactly the paired determinantal
+hypersurfaces of Hassett and Tschinkel.  Their Proposition~10 therefore
+applies: smoothness of the cubic surface $\mathbf P(\Lambda)\cap\Sigma_2$
+implies that $\det(\Phi_x)=0$ in $\mathbf P(\Lambda^\perp)$ has exactly six
+ordinary double points in linear general position
+\cite[\S3, Proposition~10]{HassettTschinkel2010}.
 
 Pair balance makes each $p_a=[\mathbf1-6e_a]$ singular, and these six
 points already form a projective frame.  They are therefore the complete
@@ -1400,14 +1421,16 @@ associated-conic results supply the classical Clebsch geometry
 \cite[Theorems~2--3, pp.~276--278]{Dye1991}.  The even-order oval
 obstruction uses the standard nucleus theorem
 \cite[p.~177]{Hirschfeld1998}.  The upper conic-filling bound is
-Proposition~1.5 of Blokhuis, Brouwer, and Sz\H{o}nyi~\cite{BBS2010}.
+Proposition~1.6 of Blokhuis, Brouwer, and Sz\H{o}nyi~\cite{BBS2010}.
 Cheltsov, Tschinkel, and Zhang supply a published $S_5$-symmetric equation
 inside their classification of cubics already assumed to be six-nodal.
 Section~\ref{sec:orientation-two-graph} gives the explicit coordinate
 identification, but does not use that citation to transfer singular-locus
-completeness.  That transfer instead uses the exact converse in
-Hassett--Tschinkel: a trace-orthogonal determinantal cubic threefold has six
-ordinary nodes precisely when its dual cubic surface is smooth
+completeness.  That transfer instead uses the equivalence in
+Hassett--Tschinkel for the determinantal hypersurfaces attached to a
+four-space in $\operatorname{End}(V)$ and its trace orthogonal: the cubic
+threefold has six ordinary nodes in linear general position precisely when
+the paired cubic surface is smooth
 \cite[\S3, Proposition~10]{HassettTschinkel2010}.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
@@ -1636,6 +1659,23 @@ S.-L.~Ng and P.~R.~Wild,
 T.~Rudd,
 \newblock Computational strengthenings of Clebsch syndrome rigidity,
 \newblock companion manuscript, 2026.
+
+\bibitem{RuddFactorization2026}
+T.~Rudd,
+\newblock Quadratic trade rigidity and cubic orientation in conic matching
+quotients,
+\newblock Paper~II, released manuscript, version 2, 2026.
+
+\bibitem{RuddPassages2026}
+T.~Rudd,
+\newblock Arithmetic and harmonic realizations of the Clebsch cubic,
+\newblock Paper~III (\emph{passages}), released manuscript, version 2, 2026.
+
+\bibitem{RuddPassant2026}
+T.~Rudd,
+\newblock A binary $[78,36,12]$ code from the passant lines of a conic over
+$\F_{13}$,
+\newblock Paper~IV, forthcoming, 2026.
 
 \bibitem{StormeThas1991}
 L.~Storme and J.~A.~Thas,
