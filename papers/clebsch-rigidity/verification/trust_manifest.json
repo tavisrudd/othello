@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 605",
+      "paper_location": "source line 632",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 672",
+      "paper_location": "source line 595",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 689",
+      "paper_location": "source line 612",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 728",
+      "paper_location": "source line 721",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 780",
+      "paper_location": "source line 773",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 396",
+      "paper_location": "source line 330",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -750,7 +750,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 904",
+      "paper_location": "source line 897",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -831,7 +831,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 954",
+      "paper_location": "source line 947",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -915,7 +915,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 970",
+      "paper_location": "source line 963",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1199,7 +1199,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 498",
+      "paper_location": "source line 490",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1730,7 +1730,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "8bddb3a03af985db82b28b349a91b8eae73e0cad71f0f3d65307b7c81f546f7a"
+    "sha256": "3b546630443ba8a445dc0d5e71d87a3826e34b73637c85add36cc7c551a1ba4f"
   },
   "verify_all": {
     "checker_output_certificate": {
