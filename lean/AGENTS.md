@@ -118,8 +118,15 @@ The runner automatically:
 - reads RAM, mount, and tmpfs usage silently—never print `ps`, `df`, or memory tables into context;
 - refuses memory-backed run state and unsafe RAM/tmpfs budgets;
 - builds `--serial-first` dependencies with one thread;
+- after the first stale probe, restores the Mathlib binary cache once through the same
+  `taskset`/`choom`/`run-quiet` envelope before falling back to a source build; use
+  `--cache-mode require` for a clean replay that must not silently skip cache restoration,
+  or `--cache-mode off` only when an explicit source build is intended;
 - sends every real Lake build through `run-quiet`, with logs under disk-backed run state;
 - probes each target with `lake build --no-build`, skips trace-current targets, and fails fast;
+- refreshes the atomic heartbeat while a child is live; `status` also walks only the recorded
+  owner's exact `/proc` descendants (including children spawned by nonleader threads) to report
+  the active Lean source and inherited `oom_score_adj` without searching the process table;
 - records atomic status, per-target GNU-time telemetry, source/toolchain state, and a final trace-only
   aggregate gate.
 

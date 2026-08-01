@@ -27,8 +27,10 @@ another lane's running build.
 - `lean/scripts/guarded-lean`: one bounded single-file elaboration through `run-quiet`.
 - `lean/scripts/lean-build-queue.py plan`: silent RAM/tmpfs/profile preflight; never runs Lake.
 - `lean-build-queue.py run`: locked explicit target queue, serial-first phase, `run-quiet` builds,
-  atomic status, telemetry, trace-current skipping, and final aggregate gate.
-- `lean-build-queue.py status`: bounded filesystem-backed progress; no process-table polling.
+  guarded one-shot Mathlib cache restoration, atomic live heartbeats, telemetry, trace-current
+  skipping, and final aggregate gate.
+- `lean-build-queue.py status`: bounded filesystem-backed progress plus an exact owner-descendant
+  view of the active Lean source and `oom_score_adj`; no process-table search or PID guessing.
 - `lean-build-queue.py pack`: locked, disk-backed, non-overwriting `lake pack` through `run-quiet`.
 - `lean/scripts/lean-restart-guard.py`: trace-validated checkpoint/verify/audit-log, with a hermetic
   failure suite in `test_lean_restart_guard.py`. Unexercised against real Lake output.

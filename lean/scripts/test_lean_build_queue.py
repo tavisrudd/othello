@@ -11,6 +11,7 @@ lane's build.  Run:
 from __future__ import annotations
 
 import fcntl
+import importlib.util
 import json
 import os
 import shutil
@@ -24,6 +25,10 @@ from pathlib import Path
 
 RUNNER = Path(__file__).resolve().parent / "lean-build-queue.py"
 TEST_ROOT = Path.home() / ".cache" / "othello-lean-build-tests"
+RUNNER_SPEC = importlib.util.spec_from_file_location("lean_build_queue", RUNNER)
+assert RUNNER_SPEC is not None and RUNNER_SPEC.loader is not None
+RUNNER_MODULE = importlib.util.module_from_spec(RUNNER_SPEC)
+RUNNER_SPEC.loader.exec_module(RUNNER_MODULE)
 
 STUBS = {
     # `nix develop --command bash -lc SCRIPT` -> run SCRIPT with the stub bin dir ahead of PATH, so
@@ -44,6 +49,14 @@ exec bash -lc "export PATH=__BIN__:\\$PATH; ${5:-}"
     "lake": """#!/usr/bin/env bash
 set -uo pipefail
 state="$FAKE_LAKE_STATE"
+[ "${1:-}" = exe ] && [ "${2:-}" = cache ] && [ "${3:-}" = get ] && {
+  echo "pwd=$PWD threads=${LEAN_NUM_THREADS:-unset} cache-get" >> "$state/lake-calls.log"
+  [ -f "$state/cache-fail" ] && { echo "fixture cache failure" >&2; exit 42; }
+  if [ -f "$state/cache-restores" ]; then
+    while read -r target; do [ -n "$target" ] && touch "$state/built/$target"; done < "$state/cache-restores"
+  fi
+  exit 0
+}
 [ "${1:-}" = build ] || { echo "unexpected lake argv: $*" >&2; exit 91; }
 shift
 nobuild=0
@@ -220,6 +233,8 @@ class QueueTest(unittest.TestCase):
             str(self.bin / "pgrep"),
             "--run-quiet-binary",
             str(self.bin / "run-quiet"),
+            "--heartbeat-seconds",
+            "1",
             *(extra or []),
         ]
 
@@ -316,19 +331,50 @@ class QueueTest(unittest.TestCase):
         self.assertIn("threads=2 nobuild=0 targets=Fix.Beta", calls)
 
         # Resource controls actually reached the tools.
-        self.assertEqual((self.state / "cores.log").read_text().split(), ["0-1"])
-        self.assertEqual((self.state / "choom.log").read_text().split(), ["1000"])
+        self.assertEqual((self.state / "cores.log").read_text().split(), ["0-1", "0-1"])
+        self.assertEqual((self.state / "choom.log").read_text().split(), ["1000", "1000"])
 
         manifest = json.loads((run_dir / "manifest.json").read_text())
         self.assertEqual(manifest["resources"]["cores"], "0-1")
         self.assertEqual(manifest["resources"]["lean_num_threads"], 2)
         self.assertEqual(manifest["resources"]["choom_adjust"], 1000)
+        self.assertEqual(manifest["resources"]["cache_mode"], "auto")
         plan = manifest["resources"]["plan"]
         self.assertEqual(plan["profile"], "fixture")
         self.assertEqual(plan["tmp_ram_mib"], 0)
         self.assertEqual(plan["workload_peak_mib"], 1024)
         self.assertEqual(manifest["source"]["lean_toolchain"], "leanprover/lean4:v4.99.0")
-        self.assertEqual(len((self.state / "run-quiet-calls.log").read_text().splitlines()), 1)
+        self.assertEqual(len((self.state / "run-quiet-calls.log").read_text().splitlines()), 2)
+
+    def test_cache_get_can_make_a_stale_target_current_without_source_build(self) -> None:
+        run_dir = self.tmp / "cache-restored"
+        (self.state / "cache-restores").write_text("Fix.Alpha\n")
+        result = self.run_queue(["Fix.Alpha"], run_dir)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+        outcomes = {entry["target"]: entry["outcome"] for entry in self.read_status(run_dir)["results"]}
+        self.assertEqual(outcomes["<mathlib cache get>"], "cache-restored")
+        self.assertEqual(outcomes["Fix.Alpha"], "cache-restored-current")
+        calls = (self.state / "lake-calls.log").read_text()
+        self.assertIn("cache-get", calls)
+        self.assertNotIn("nobuild=0 targets=Fix.Alpha", calls)
+
+    def test_auto_cache_failure_falls_back_to_guarded_source_build(self) -> None:
+        run_dir = self.tmp / "cache-fallback"
+        (self.state / "cache-fail").touch()
+        result = self.run_queue(["Fix.Alpha"], run_dir)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        outcomes = {entry["target"]: entry["outcome"] for entry in self.read_status(run_dir)["results"]}
+        self.assertEqual(outcomes["<mathlib cache get>"], "cache-failed-continuing")
+        self.assertEqual(outcomes["Fix.Alpha"], "built")
+
+    def test_required_cache_failure_stops_before_source_build(self) -> None:
+        run_dir = self.tmp / "cache-required"
+        (self.state / "cache-fail").touch()
+        result = self.run_queue(["Fix.Alpha"], run_dir, extra=["--cache-mode", "require"])
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(self.read_status(run_dir)["failed_target"], "<mathlib cache get>")
+        self.assertNotIn("nobuild=0 targets=Fix.Alpha", (self.state / "lake-calls.log").read_text())
 
     def test_run_from_foreign_cwd_forces_lean_root_pwd(self) -> None:
         run_dir = self.tmp / "foreign-cwd"
@@ -430,7 +476,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(status["state"], "failed")
         self.assertEqual(status["failed_target"], "Fix.Beta")
         attempted = [entry["target"] for entry in status["results"]]
-        self.assertEqual(attempted, ["Fix.Alpha", "Fix.Beta"])
+        self.assertEqual(attempted, ["<mathlib cache get>", "Fix.Alpha", "Fix.Beta"])
         self.assertNotIn("Fix.Gamma", attempted)
         self.assertNotIn("Fix.Gamma", (self.state / "lake-calls.log").read_text())
 
@@ -552,6 +598,59 @@ class QueueTest(unittest.TestCase):
         outcomes = {e["target"]: e["outcome"] for e in self.read_status(self.tmp / "run4b")["results"]}
         self.assertEqual(outcomes["Fix.Alpha"], "skipped-current")
         self.assertEqual(outcomes["Fix.Beta"], "built")
+
+    def test_running_child_refreshes_heartbeat_and_status_reports_activity(self) -> None:
+        run_dir = self.tmp / "heartbeat"
+        self.plan("Fix.Alpha", "hang")
+        process = self.launch(["Fix.Alpha"], run_dir)
+        try:
+            deadline = time.monotonic() + 10
+            initial = None
+            refreshed = None
+            while time.monotonic() < deadline:
+                try:
+                    current = self.read_status(run_dir)
+                    if current.get("current_target") == "Fix.Alpha":
+                        if initial is None:
+                            initial = current.get("heartbeat_utc")
+                        elif current.get("heartbeat_utc") != initial and current.get("active_child_pid"):
+                            refreshed = current
+                            break
+                except (OSError, json.JSONDecodeError):
+                    pass
+                time.sleep(0.1)
+            self.assertIsNotNone(refreshed, "heartbeat did not advance while the child was live")
+            reported = json.loads(self.status(run_dir).stdout)
+            self.assertIn("active_process", reported)
+        finally:
+            process.terminate()
+            process.communicate(timeout=60)
+
+    def test_activity_walk_finds_child_spawned_by_nonleader_thread(self) -> None:
+        proc = self.tmp / "proc"
+        lean_root = self.tmp / "lean-activity"
+        source = lean_root / "Mathlib" / "Fixture.lean"
+
+        def process(pid: int, command: str, argv: list[str], tasks: dict[int, str], oom: int) -> None:
+            root = proc / str(pid)
+            root.mkdir(parents=True)
+            (root / "comm").write_text(command + "\n")
+            (root / "cmdline").write_bytes(b"\0".join(x.encode() for x in argv) + b"\0")
+            (root / "oom_score_adj").write_text(str(oom) + "\n")
+            for tid, children in tasks.items():
+                task = root / "task" / str(tid)
+                task.mkdir(parents=True)
+                (task / "children").write_text(children)
+
+        process(100, "python3", ["queue"], {100: "200\n"}, 0)
+        process(200, "lake.orig", ["lake", "build"], {200: "", 201: "300\n"}, 1000)
+        process(300, "lean", ["lean", str(source), "-o", "Fixture.olean"], {300: ""}, 1000)
+        activity = RUNNER_MODULE.exact_descendant_activity(100, lean_root, proc)
+        self.assertIsNotNone(activity)
+        assert activity is not None
+        self.assertEqual(activity["pid"], 300)
+        self.assertEqual(activity["module_path"], "Mathlib/Fixture.lean")
+        self.assertEqual(activity["oom_score_adj"], 1000)
 
     # gate 5: atomic state, no false success ---------------------------------
 

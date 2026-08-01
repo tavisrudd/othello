@@ -27,7 +27,7 @@ import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, NoReturn
+from typing import Any, Callable, NoReturn
 
 LEAN_ROOT_DEFAULT = Path(__file__).resolve().parents[1]
 MODULE_RE = re.compile(r"[A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*\Z")
@@ -314,7 +314,14 @@ def _handle_signal(signum: int, _frame: object) -> None:
             pass
 
 
-def spawn_and_wait(argv: list[str], log_path: Path, env: dict[str, str], cwd: Path) -> int:
+def spawn_and_wait(
+    argv: list[str],
+    log_path: Path,
+    env: dict[str, str],
+    cwd: Path,
+    heartbeat: Callable[[int], None] | None = None,
+    heartbeat_seconds: int = 10,
+) -> int:
     """Run one child in its own session, capturing everything to `log_path`."""
     global _child
     if _interrupted:
@@ -329,7 +336,13 @@ def spawn_and_wait(argv: list[str], log_path: Path, env: dict[str, str], cwd: Pa
         except OSError as error:
             fail(f"cannot start {argv[0]}: {error}")
         try:
-            code = _child.wait()
+            while True:
+                try:
+                    code = _child.wait(timeout=heartbeat_seconds)
+                    break
+                except subprocess.TimeoutExpired:
+                    if heartbeat is not None:
+                        heartbeat(_child.pid)
         finally:
             _child = None
     if _interrupted:
@@ -362,6 +375,29 @@ def build_inner_argv(args: argparse.Namespace, target: str, threads: int) -> lis
 def build_argv(args: argparse.Namespace, target: str, threads: int) -> list[str]:
     """Every real Lake build is captured by the shared bounded-output wrapper."""
     return [args.run_quiet_binary, shlex.join(build_inner_argv(args, target, threads))]
+
+
+def cache_get_inner_argv(args: argparse.Namespace) -> list[str]:
+    """Guard Mathlib cache restoration with the same controls as a real build."""
+    argv: list[str] = []
+    if args.cores:
+        argv += [args.taskset_binary, "-c", args.cores]
+    argv += [args.choom_binary, "-n", str(args.choom_adjust), "--"]
+    argv += [args.time_binary, "-v"]
+    argv += [
+        args.nix_binary,
+        "develop",
+        "--command",
+        "bash",
+        "-lc",
+        "export LEAN_NUM_THREADS=1; exec lake exe cache get",
+    ]
+    return argv
+
+
+def cache_get_argv(args: argparse.Namespace) -> list[str]:
+    """Capture cache restoration through the shared bounded-output wrapper."""
+    return [args.run_quiet_binary, shlex.join(cache_get_inner_argv(args))]
 
 
 def probe_argv(args: argparse.Namespace, targets: list[str]) -> list[str]:
@@ -454,6 +490,7 @@ class Status:
             "targets": targets,
             "results": [],
             "current_target": None,
+            "active_child_pid": None,
             "finished_utc": None,
             "exit_code": None,
             "failed_target": None,
@@ -466,6 +503,11 @@ class Status:
 
     def start_target(self, target: str) -> None:
         self.data["current_target"] = target
+        self.data["active_child_pid"] = None
+        self.flush()
+
+    def heartbeat(self, child_pid: int) -> None:
+        self.data["active_child_pid"] = child_pid
         self.flush()
 
     def record(self, target: str, outcome: str, **extra: Any) -> None:
@@ -473,6 +515,7 @@ class Status:
         entry.update(extra)
         self.data["results"].append(entry)
         self.data["current_target"] = None
+        self.data["active_child_pid"] = None
         self.flush()
 
     def finish(self, state: str, exit_code: int, failed_target: str | None = None) -> None:
@@ -480,6 +523,7 @@ class Status:
         self.data["exit_code"] = exit_code
         self.data["failed_target"] = failed_target
         self.data["current_target"] = None
+        self.data["active_child_pid"] = None
         self.data["finished_utc"] = utc_now()
         self.flush()
 
@@ -551,6 +595,7 @@ def command_run(args: argparse.Namespace) -> int:
             "cores": args.cores,
             "lean_num_threads": args.threads,
             "choom_adjust": args.choom_adjust,
+            "cache_mode": args.cache_mode,
             "plan": plan,
         },
         "serial_first": serial_targets,
@@ -562,15 +607,83 @@ def command_run(args: argparse.Namespace) -> int:
     print(f"run dir: {run_dir}")
     print(f"status:  {sys.argv[0]} status {run_dir}")
 
+    cache_attempted = False
     try:
         for target in targets:
             wait_for_quiet(pgrep, args.wait_quiet_seconds, args.poll_seconds)
             status.start_target(target)
             probe_log = logs / f"{target}.nobuild.log"
-            if spawn_and_wait(probe_argv(args, [target]), probe_log, env, lean_root) == 0:
+            if spawn_and_wait(
+                probe_argv(args, [target]),
+                probe_log,
+                env,
+                lean_root,
+                status.heartbeat,
+                args.heartbeat_seconds,
+            ) == 0:
                 print(f"already current, skipping {target}", flush=True)
                 status.record(target, "skipped-current", log=str(probe_log))
                 continue
+
+            if args.cache_mode != "off" and not cache_attempted:
+                cache_attempted = True
+                status.start_target("<mathlib cache get>")
+                cache_log = logs / "mathlib-cache-get.log"
+                cache_quiet_root = logs / "mathlib-cache-get.quiet" / run_id
+                cache_env = env.copy()
+                cache_env["RUN_QUIET_LOGDIR"] = str(cache_quiet_root)
+                print("starting guarded Mathlib cache restoration", flush=True)
+                cache_code = spawn_and_wait(
+                    cache_get_argv(args),
+                    cache_log,
+                    cache_env,
+                    lean_root,
+                    status.heartbeat,
+                    args.heartbeat_seconds,
+                )
+                cache_quiet_dir, cache_stdout, cache_stderr = quiet_evidence(cache_quiet_root)
+                cache_measured = telemetry(cache_stderr)
+                if cache_code == 0:
+                    print(f"Mathlib cache restored {cache_measured}", flush=True)
+                    status.record(
+                        "<mathlib cache get>",
+                        "cache-restored",
+                        log=str(cache_log),
+                        quiet_dir=str(cache_quiet_dir),
+                        **cache_measured,
+                    )
+                else:
+                    outcome = "cache-failed" if args.cache_mode == "require" else "cache-failed-continuing"
+                    status.record(
+                        "<mathlib cache get>",
+                        outcome,
+                        log=str(cache_log),
+                        quiet_dir=str(cache_quiet_dir),
+                        exit_code=cache_code,
+                    )
+                    if args.cache_mode == "require":
+                        print("FAILED required Mathlib cache restoration", file=sys.stderr)
+                        print(
+                            diagnostic_tail(cache_stdout, cache_stderr, args.tail_lines),
+                            file=sys.stderr,
+                        )
+                        status.finish("failed", EXIT_BUILD_FAILED, failed_target="<mathlib cache get>")
+                        return EXIT_BUILD_FAILED
+                    print("Mathlib cache restoration failed; continuing with source build", flush=True)
+
+                status.start_target(target)
+                post_cache_probe = logs / f"{target}.post-cache.nobuild.log"
+                if cache_code == 0 and spawn_and_wait(
+                    probe_argv(args, [target]),
+                    post_cache_probe,
+                    env,
+                    lean_root,
+                    status.heartbeat,
+                    args.heartbeat_seconds,
+                ) == 0:
+                    print(f"cache made {target} current; skipping source build", flush=True)
+                    status.record(target, "cache-restored-current", log=str(post_cache_probe))
+                    continue
 
             log_path = logs / f"{target}.log"
             quiet_root = logs / f"{target}.quiet" / run_id
@@ -579,7 +692,12 @@ def command_run(args: argparse.Namespace) -> int:
             print(f"starting {target}", flush=True)
             target_threads = 1 if target in serial_targets else args.threads
             code = spawn_and_wait(
-                build_argv(args, target, target_threads), log_path, target_env, lean_root
+                build_argv(args, target, target_threads),
+                log_path,
+                target_env,
+                lean_root,
+                status.heartbeat,
+                args.heartbeat_seconds,
             )
             quiet_dir, stdout_log, stderr_log = quiet_evidence(quiet_root)
             if code != 0:
@@ -609,7 +727,14 @@ def command_run(args: argparse.Namespace) -> int:
         gate_log = logs / "aggregate-no-build.log"
         status.start_target("<aggregate --no-build gate>")
         print("starting trace-only aggregate gate", flush=True)
-        code = spawn_and_wait(probe_argv(args, aggregate), gate_log, env, lean_root)
+        code = spawn_and_wait(
+            probe_argv(args, aggregate),
+            gate_log,
+            env,
+            lean_root,
+            status.heartbeat,
+            args.heartbeat_seconds,
+        )
         if code != 0:
             print(f"FAILED aggregate gate; tail of {gate_log} follows", file=sys.stderr)
             print(tail(gate_log, args.tail_lines), file=sys.stderr)
@@ -782,6 +907,71 @@ def lock_holder(lock_file: Path) -> dict[str, Any] | None:
         return None
 
 
+def exact_descendant_activity(
+    root_pid: int, lean_root: Path, proc_root: Path = Path("/proc")
+) -> dict[str, Any] | None:
+    """Report the deepest live process below one recorded owner PID.
+
+    Linux records children against the thread that spawned them, so inspect every
+    `/proc/<pid>/task/<tid>/children` file rather than only the process leader.
+    This is an exact ancestry walk; it never searches the host process table.
+    """
+    pending = [(root_pid, 0)]
+    seen: set[int] = set()
+    candidates: list[dict[str, Any]] = []
+    while pending and len(seen) < 256:
+        pid, depth = pending.pop(0)
+        if pid in seen:
+            continue
+        seen.add(pid)
+        process_dir = proc_root / str(pid)
+        try:
+            command = process_dir.joinpath("comm").read_text().strip()
+            argv = [
+                part.decode(errors="replace")
+                for part in process_dir.joinpath("cmdline").read_bytes().split(b"\0")
+                if part
+            ]
+            child_ids: set[int] = set()
+            for task_dir in process_dir.joinpath("task").iterdir():
+                try:
+                    child_ids.update(
+                        int(value) for value in task_dir.joinpath("children").read_text().split()
+                    )
+                except (FileNotFoundError, ProcessLookupError, ValueError):
+                    continue
+        except (FileNotFoundError, ProcessLookupError, PermissionError):
+            continue
+
+        activity: dict[str, Any] = {
+            "pid": pid,
+            "depth": depth,
+            "command": command,
+            "argv": argv[:12],
+        }
+        try:
+            activity["oom_score_adj"] = int(
+                process_dir.joinpath("oom_score_adj").read_text().strip()
+            )
+        except (FileNotFoundError, ProcessLookupError, PermissionError, ValueError):
+            pass
+        if command == "lean":
+            source = next((value for value in argv[1:] if value.endswith(".lean")), None)
+            if source is not None:
+                source_path = Path(source)
+                try:
+                    activity["module_path"] = str(source_path.relative_to(lean_root))
+                except ValueError:
+                    activity["module_path"] = str(source_path)
+        candidates.append(activity)
+        pending.extend((child, depth + 1) for child in sorted(child_ids))
+
+    if not candidates:
+        return None
+    lean = [entry for entry in candidates if entry["command"] == "lean"]
+    return max(lean or candidates, key=lambda entry: (entry["depth"], entry["pid"]))
+
+
 def command_status(args: argparse.Namespace) -> int:
     run_dir = args.run_dir.expanduser().resolve()
     status = read_json(run_dir / "status.json")
@@ -798,6 +988,13 @@ def command_status(args: argparse.Namespace) -> int:
             state = "abandoned"
             status["state"] = state
             status["note"] = "no live owner holds the lock; the run died without a terminal status"
+        else:
+            pid = status.get("pid")
+            lean_root_value = manifest.get("lean_root")
+            if isinstance(pid, int) and isinstance(lean_root_value, str):
+                active = exact_descendant_activity(pid, Path(lean_root_value))
+                if active is not None:
+                    status["active_process"] = active
 
     if args.json:
         print(json.dumps(status, indent=2, sort_keys=True))
@@ -808,6 +1005,13 @@ def command_status(args: argparse.Namespace) -> int:
     print(f"started: {status.get('started_utc')}  heartbeat: {status.get('heartbeat_utc')}")
     if status.get("current_target"):
         print(f"current: {status['current_target']}")
+    active = status.get("active_process")
+    if isinstance(active, dict):
+        detail = active.get("module_path") or active.get("command")
+        suffix = ""
+        if "oom_score_adj" in active:
+            suffix = f"  choom={active['oom_score_adj']}"
+        print(f"active:  pid={active.get('pid')} {detail}{suffix}")
     for entry in status.get("results", []):
         extra = entry.get("wall_clock", "")
         rss = entry.get("max_rss_kbytes", "")
@@ -878,6 +1082,21 @@ def parser() -> argparse.ArgumentParser:
     run.add_argument("--cores", default=None, help="taskset CPU list, e.g. 20-23")
     add_resource_arguments(run)
     run.add_argument("--choom-adjust", type=oom_adjust, default=1000)
+    run.add_argument(
+        "--cache-mode",
+        choices=("auto", "require", "off"),
+        default="auto",
+        help=(
+            "restore the Mathlib binary cache once before the first stale source build; "
+            "auto continues from source on cache failure, require fails, off disables"
+        ),
+    )
+    run.add_argument(
+        "--heartbeat-seconds",
+        type=positive_int,
+        default=10,
+        help=argparse.SUPPRESS,
+    )
     run.add_argument(
         "--wait-quiet-seconds",
         type=nonnegative_int,
