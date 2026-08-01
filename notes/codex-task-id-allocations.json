@@ -1961,8 +1961,17 @@
       "last": 755,
       "purpose": "Golden operator paper literature and novelty audit",
       "sequence": 218
+    },
+    {
+      "count": 1,
+      "first": 756,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 756,
+      "purpose": "all-k conic-filling classification: remove the k<=8 boundary",
+      "sequence": 219
     }
   ],
-  "next_id": 756,
+  "next_id": 757,
   "schema": "codex-task-id-allocations-v1"
 }
