@@ -131,6 +131,29 @@ theorem conductor_eq_branchIdeal (a : S) :
     rw [hp, hq]
     ring
 
+/-- A scalar embedded diagonally in the product belongs to every split
+pinching algebra. -/
+def diagonalElement (a s : S) : splitPinching a :=
+  ⟨(s, s), ⟨0, by simp⟩⟩
+
+/-- Every element of the product ring is integral over the split pinching
+algebra: `(X-u)(X-v)` annihilates the pair `(u,v)`, with both roots embedded
+diagonally as coefficients. -/
+theorem product_isIntegral (a : S) (x : S × S) :
+    IsIntegral (splitPinching a) x := by
+  let p : Polynomial (splitPinching a) :=
+    (Polynomial.X - Polynomial.C (diagonalElement a x.1)) *
+      (Polynomial.X - Polynomial.C (diagonalElement a x.2))
+  refine ⟨p, (Polynomial.monic_X_sub_C _).mul (Polynomial.monic_X_sub_C _), ?_⟩
+  simp only [p, map_mul, map_sub, Polynomial.aeval_X, Polynomial.aeval_C]
+  apply Prod.ext <;> simp [diagonalElement]
+
+/-- The inclusion of the split pinching algebra into `S × S` is an integral
+ring extension. -/
+theorem algebra_isIntegral (a : S) :
+    Algebra.IsIntegral (splitPinching a) (S × S) :=
+  product_isIntegral a
+
 /-- If the branch parameter is a unit, the pinching algebra is the whole
 product ring. -/
 theorem splitPinching_eq_top_of_isUnit {a : S} (ha : IsUnit a) :
