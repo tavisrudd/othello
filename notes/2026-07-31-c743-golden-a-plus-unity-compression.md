@@ -55,9 +55,8 @@ systems into coordinates and a lift of one universal quotient map.  The
 Pfaffian input replaces three independent coefficient or covariance
 arguments by one matching evaluation and one spectral specialization.  The
 quotient input replaces stability, local node-thickening, and base-locus
-arguments.  It removes the base-locus CAS boundary and reduces the remaining
-Jacobian computation to the global exclusion of defect away from the ten
-nodes.
+arguments.  The saturated-slice and cross-discriminant localization of
+Proposition 4.6 also removes the remaining global Jacobian-support boundary.
 Its conormal corollary replaces separate source-kernel, target-polar, and
 cofactor arguments by one kernel calculation and one normalization witness.
 
@@ -626,9 +625,9 @@ the coordinate bridge; the displayed quotient proof is the mechanism.
 
 **Concrete effect.**  This goes beyond the C739 certificate: it identifies
 the complete local ideal and proves the defect is square-zero of length four
-at each node.  Combined with C739's certified global support calculation, it
-computes total length forty.  The certificate remains responsible only for
-excluding nilpotent defect away from the ten nodes.
+at each node.  Proposition 4.6 supplies the global support argument, so this
+computes total length forty.  C739's certificate independently corroborates
+the resulting global statement.
 
 ### Lemma 4.3 (universal matching base is the equals arrangement)
 
@@ -727,9 +726,7 @@ predicts the higher-order scheme thickness explicitly.
 
 ### Corollary 4.5 (the Jacobian defect is the node cotangent sheaf)
 
-Assume the C739 global certificate that the defect of the Golden Jacobian
-rank-drop scheme is supported exactly at the ten closed \(3+3\) points.  Let
-\(\mathcal R\) be that scheme, let
+Let \(\mathcal R\) be the Golden Jacobian rank-drop scheme, let
 \(\mathcal R_{\mathrm{red}}\) be its twenty-plane reduction, and identify
 the ten closed \(3+3\) source points with the ten nodes of the Segre cubic
 \(\Sigma\).  Then there is a canonical \(S_6\)-equivariant isomorphism of
@@ -767,8 +764,8 @@ no linear term, so its cotangent space has basis the four classes of
 \]
 
 whose basis is the four classes of \(u_i v_j\).  Pullback gives the displayed
-local isomorphism.  The C739 support certificate implies that the global
-defect module is the direct sum of these ten localizations, so the local maps
+local isomorphism.  Proposition 4.6 below shows that the global defect module
+is supported exactly at these ten points and hence is the direct sum of these localizations, so the local maps
 assemble to the displayed skyscraper-sheaf isomorphism.  It is canonical
 because it is induced by the quotient map on cotangent spaces, and
 equivariance follows from equivariance of that map.
@@ -781,6 +778,103 @@ reduction is the target cotangent sheaf.
 **Concrete effect.**  It identifies the defect module, not only its support
 or length, and gives the functorial bridge that
 the false master-complex proposal was trying to obtain.
+
+### Proposition 4.6 (the defect has no off-node support)
+
+In characteristic zero, the support hypothesis in Corollary 4.5 follows
+without computer algebra: the nilpotent defect of the six-point Jacobian
+scheme is supported exactly at the ten closed (3+3) points.
+
+#### Proof
+
+Work first on the semistable locus of ((\mathbf P^1)^6).  Every strictly
+semistable critical orbit has a unique closed (3+3) orbit in its closure.
+Luna's strongly étale slice at that closed orbit is saturated, so it contains
+the whole quotient fibre after shrinking on the target.  Removing the smooth
+orbit directions identifies the quotient map with
+
+\[
+ \mu:k^2\oplus k^2\longrightarrow k^2\otimes k^2,
+ \qquad (u,v)\longmapsto u\otimes v.
+\]
+
+Lemma 4.1 gives
+
+\[
+ I_3(d\mu)=\mathfrak m(\mathfrak u)(\mathfrak v),
+ \qquad
+ \sqrt{I_3(d\mu)}=(\mathfrak u)(\mathfrak v).
+\]
+
+Their quotient is supported only at (u=v=0).  Strongly étale pullback and
+the discarded smooth factors preserve Fitting ideals, radicals, and support.
+Thus on the semistable locus the defect occurs only at the ten closed orbits.
+
+It remains to check the unstable matching base.  Let (Q) be a maximal
+equal-coordinate block, of size (h=4) or (5), and put
+
+\[
+ E_Q=\bigcap_{\substack{R\subset Q\\|R|=3}}
+      (x_i-x_j:i,j\in R),
+ \qquad
+ \Delta_Q=\prod_{i\in Q,\,j\notin Q}(x_i-x_j).
+\]
+
+The ideal (E_Q) is the reduced union of the triple-collision planes through
+the stratum, and (Delta_Q) is a unit at the chosen point.  Expanding the
+four-row Jacobian cofactors of the matching formula and grouping terms by
+the cross edge of the matching gives the two containments
+
+\[
+ \boxed{\qquad
+   \Delta_Q E_Q\subset I_4(d\mathcal J_3)\subset E_Q,
+   \qquad h=4,5.
+ \qquad}
+\]
+
+Here the right containment says that the differential has rank at most three
+whenever a triple in (Q) remains equal.  For the left containment, after
+one cross edge is fixed, Laplace expansion leaves the alternating
+three-equals generator on (Q); summing over the possible cross edges gives
+the displayed factor (Delta_Q).  This is an ideal identity, so no generic
+point argument is used.
+
+Localizing at (Delta_Q) therefore gives
+
+\[
+ I_4(d\mathcal J_3)_{\Delta_Q}=(E_Q)_{\Delta_Q},
+\]
+
+which is reduced.  These are all unstable orbit types: up to (S_6) and
+(\operatorname{PGL}_2), their multiplicity partitions are (4+1+1),
+(4+2), and (5+1); the (6) partition is the zero vector in the
+projectivized translation quotient.  Hence there is no unstable off-node
+defect.  Together with the semistable slice calculation, this proves the
+claim and discharges the computational hypothesis in Corollary 4.5.
+
+For a direct hand check of the only unstable identity, set (x_5=0),
+(x_0=1).  Representatives are
+
+\[
+ (1,1,1,1,-1,0),\qquad
+ (1,1,1,1,0,0),\qquad
+ (1,1,1,1,1,0).
+\]
+
+For the first two, writing the four-cluster displacements as (a,b,c)
+reduces (E_Q) to
+
+\[
+ (a,b)\cap(a,c)\cap(b,c)\cap(a-b,a-c)
+ =\bigl(c(a-b),\ b(a-c),\ bc(b-c)\bigr).
+\]
+
+For the last, (E_Q) is the analogous intersection of the ten
+triple-diagonal ideals among five variables.  Substitution in the matching
+expansion gives (Delta_QE_Q\subset I_4(d\mathcal J_3)) term by term; all
+factors of (Delta_Q) specialize to nonzero cross-cluster differences.
+This three-line localization is the human counterpart of C739's global
+annihilator calculation.
 
 ### The collision filtration after Theorems 4.1 and 4.2
 
@@ -808,8 +902,8 @@ four-variable local model.
   then one line; the frozen-coordinate audit only checks the marking bridge.
 - **`ej`.**  The defect has an exact invariant not previously recorded: four
   square-zero directions per node, total length forty.  The human local model
-  replaces the CAS for its structure and multiplicity; the CAS remains only
-  for the global assertion that there is no defect elsewhere.
+  gives its structure and multiplicity; Proposition 4.6's saturated-slice and
+  cross-discriminant localization excludes defect elsewhere.
 
 ### Round 3 cycle 2: `tt + aa + ej`
 
@@ -1338,9 +1432,9 @@ python3 notes/2026-07-31-c728-synchronized-pure-spinor-replay.py
 
 These checks certify existing exact normalizations, multiplicities, and
 finite incidence data.  They do not replace the human theorems.  Results
-4.1--4.5 close the former base-reducedness boundary and determine the local
-nilpotent module.  Singular remains load-bearing only for the global support
-statement that the defect occurs nowhere outside the ten nodes.
+4.1--4.6 close the former base-reducedness and nilpotent-support boundaries.
+Singular corroborates both the marked coordinate bridge and the global
+annihilator support but is no longer the mathematical mechanism.
 
 ## 13. Post-search unification specification
 
@@ -1419,12 +1513,12 @@ proof obligations.  Set the new target at 42--43 main-argument pages and
 56--57 total pages.  Do not spend the saving on C717, higher C729 censuses,
 the order-eight branch, derived pushforward, or a new physical shadow.
 
-The change removes the base-locus CAS boundary by the matching/equals theorem
-and replaces the local nilpotent calculation by the spanning-tree
-critical-ideal proof.  One CAS boundary remains for global exclusion of
-off-node defect.  The central scalar checks remain exact and independently
-replayed, while more of the equality graph is proved by one human naturality
-argument.  No CAS claim is promoted, and no existing
+The change removes the base-locus CAS boundary by the matching/equals theorem,
+replaces the local nilpotent calculation by the spanning-tree critical-ideal
+proof, and replaces global support elimination by the saturated-slice and
+cross-discriminant argument.  The central scalar checks remain exact and
+independently replayed, while more of the equality graph is proved by human
+naturality and localization arguments.  No CAS claim is promoted, and no existing
 verification command or certificate needs to change unless theorem labels
 in the README are synchronized.
 
@@ -1481,9 +1575,7 @@ task.
 | whether the \(36\to6\) return is a linear adjunction | settled negatively | unsigned pull--push vanishes on augmentation; signed repair is circular |
 | whether another current compression survives the simplicity review | settled by Rounds 5 and 6 | two consecutive post-Theorem-6.1 portfolios found no further arrow or deleted obligation |
 
-The local nilpotent-structure gap and the required saturation review are
-closed.  The global exclusion of off-node defect still uses the C739 Singular
-certificate; replacing that support calculation by a human proof remains a
-live C743 risk-reduction target.  The compactified-moduli branch is genuinely
+The local nilpotent-structure gap, global off-node exclusion, and required
+saturation review are closed.  The compactified-moduli branch is genuinely
 separate and requires a future allocation.  C743 remains active for external
 review before any closeout decision.

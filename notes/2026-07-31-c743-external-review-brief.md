@@ -132,9 +132,28 @@ The proposed human proof indexes nonzero maximal minors by spanning trees of
 For \(m=3\), the local critical ideal is
 \(\mathfrak m(\mathfrak u)(\mathfrak v)\).  Its radical is the union of two
 transverse planes, and the quotient of the radical by the critical ideal is
-square-zero of length four.  C739's global certificate is retained for the
-statement that the defect is supported nowhere else.  Combining that support
-statement with the ten local models gives the intrinsic identification
+square-zero of length four.  The revised human global argument has two
+parts.  On the semistable locus, a saturated Luna slice identifies the map
+near each closed \(3+3\) orbit with the rank-one tensor quotient, whose defect
+is supported only at its origin.  On the unstable locus, for a maximal equal
+block \(Q\) of size four or five, put
+
+\[
+ E_Q=\bigcap_{\substack{R\subset Q\\|R|=3}}(x_i-x_j:i,j\in R),
+ \qquad
+ \Delta_Q=\prod_{i\in Q,\,j\notin Q}(x_i-x_j).
+\]
+
+The matching/cofactor expansion gives
+
+\[
+ \Delta_QE_Q\subset I_4(d\mathcal J_3)\subset E_Q.
+\]
+
+Because \(\Delta_Q\) is a unit on that collision stratum, the critical ideal
+is the reduced ideal \(E_Q\) there.  The partitions \(4+1+1\), \(4+2\), and
+\(5+1\) exhaust the unstable projective source.  Thus the defect is supported
+only at the ten nodes, and the local models give the intrinsic identification
 
 \[
  \sqrt{I_R}/I_R
@@ -188,8 +207,9 @@ research-only, and the manuscript has not yet been rewritten or rebuilt.
    hypothesis \(C^2=s^2I\) used for spectral compounds?
 5. Does the spanning-tree argument generate the full maximal-minor ideal,
    including coefficients and signs, in every stated pair of dimensions?
-6. Is the local \(m+m\) quotient slice sufficient to exclude additional
-   critical components away from the strictly semistable locus?
+6. Does the saturated-slice argument cover the complete semistable fibres,
+   and does the cross-edge Laplace expansion really prove
+   \(\Delta_QE_Q\subset I_4(d\mathcal J_3)\) for both \(|Q|=4,5\)?
 7. Is the matching-base/Specht-ideal citation used within its exact
    characteristic range, and does the Golden six-frame span the required
    ideal rather than only define the same support?
@@ -207,9 +227,8 @@ Its dependency-free replay reconstructs the tensor Jacobian and checks the
 spanning-tree formula in dimensions \((2,2),(2,3),(3,2),(3,3)\).  Existing
 C704, C705, C728, C739, and C742 bundles check the Golden scalars,
 representation multiplicities, incidence return, synchronized spinors, and
-source-free obstruction.  The C739 Singular certificate remains load-bearing
-only for excluding global Jacobian defect away from the ten nodes; the local
-module, its square-zero structure, and its length are human consequences of
-the tensor slice.  Other computations corroborate normalizations and finite
-identities; the general statements above rely on the human proofs in the full
-report.
+source-free obstruction.  The C739 Singular certificate independently checks
+the global Jacobian-defect support; Proposition 4.6 now supplies the human
+saturated-slice and cross-discriminant proof.  Other computations corroborate
+normalizations and finite identities; the general statements above rely on
+the human proofs in the full report.
