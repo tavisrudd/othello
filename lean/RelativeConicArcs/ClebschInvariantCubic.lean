@@ -26,6 +26,13 @@ def markedFixedVector : Fin 5 → ℚ := ![4, -1, -1, -1, -1]
 def sigmaThree (y : Fin 5 → ℚ) : ℚ :=
   (1 / 3 : ℚ) * ∑ i, y i ^ 3
 
+/-- The Clebsch cubic is homogeneous of degree three. -/
+theorem sigmaThree_smul (c : ℚ) (y : Fin 5 → ℚ) :
+    sigmaThree (c • y) = c ^ 3 * sigmaThree y := by
+  simp only [sigmaThree, Pi.smul_apply, smul_eq_mul, mul_pow]
+  rw [← Finset.mul_sum]
+  ring
+
 /-- The primitive marked vector lies in the standard sum-zero module. -/
 theorem markedFixedVector_sum : ∑ i, markedFixedVector i = 0 := by
   native_decide
@@ -44,7 +51,9 @@ by passing from the primitive marked vector to its sum-zero affine
 representative. -/
 theorem sigmaThree_normalizedMarkedVector :
     sigmaThree normalizedMarkedVector = 4 / 25 := by
-  native_decide
+  rw [normalizedMarkedVector, sigmaThree_smul,
+    sigmaThree_markedFixedVector]
+  norm_num
 
 /-- Hitchin's chart factor `16` converts the value `4/25` into the displayed
 branch value `(16/25)²`. -/
@@ -67,13 +76,15 @@ theorem exists_smul_markedFixedVector {y : Fin 5 → ℚ}
   have h31 : y 3 = y 1 := hfixed 3 1 (by decide) (by decide)
   have h41 : y 4 = y 1 := hfixed 4 1 (by decide) (by decide)
   have hy0 : y 0 = -4 * y 1 := by
-    simp only [Fin.sum_univ_succ] at hy
+    norm_num [Fin.sum_univ_succ] at hy
+    change y 0 + (y 1 + (y 2 + (y 3 + y 4))) = 0 at hy
     rw [h21, h31, h41] at hy
     linear_combination hy
   refine ⟨-y 1, ?_⟩
   funext i
   fin_cases i
   · simp [markedFixedVector, hy0]
+    ring
   · simp [markedFixedVector]
   · simp [markedFixedVector, h21]
   · simp [markedFixedVector, h31]
@@ -96,8 +107,8 @@ theorem sigmaThreeLine_coefficient_unique {F : (Fin 5 → ℚ) → ℚ}
     {c d : ℚ}
     (hc : ∀ y, (∑ i, y i = 0) → F y = c * sigmaThree y)
     (hd : ∀ y, (∑ i, y i = 0) → F y = d * sigmaThree y) : c = d := by
-  have h := (hc markedFixedVector markedFixedVector_sum).trans
-    (hd markedFixedVector markedFixedVector_sum).symm
+  have h := (hc markedFixedVector markedFixedVector_sum).symm.trans
+    (hd markedFixedVector markedFixedVector_sum)
   rw [sigmaThree_markedFixedVector] at h
   linarith
 
