@@ -106,31 +106,16 @@ Before any task that works directly on a manuscript under `papers/`, read
 
 ## Standalone paper mirrors
 
-### Related-repository scope
+### Related repositories
 
-The rules in this guide follow the work, not the current working directory or
-Git root.  They apply to every repository, worktree, extracted package,
-release tree, cache checkout, and temporary checkout used to develop, verify,
-review, synchronize, or publish an Othello paper or its formal artifacts.
-This includes the manuscript mirrors below; standalone Lean and certificate
-repositories such as `finitegeom` and
-`finitegeom-clebsch-q11-certificates`; their checked-out dependencies under
-`.lake/packages/`; and review/release worktrees under `~/src/`,
-`~/src/math-papers/`, `~/.cache/`, or `/tmp/persistent/`.
-
-Moving to a related repository never relaxes lane ownership, authoritative-
-source order, build safety, output bounds, reproducibility, commit cadence, or
-process-intervention rules.  A README, flake, Makefile, or replay snippet in a
-related repository may describe the underlying command, but it does not
-authorize bypassing this guide's guarded entry points.  If the documented
-guard cannot target that repository, stop and treat validation as blocked;
-do not improvise a direct build.
-
-Unless an owning handoff explicitly declares a different authority, sources
-extracted or synchronized from this monorepo are downstream mirrors: edit the
-monorepo authority first, validate it, then propagate by ordinary forward
-commits.  Never edit a downstream mirror first merely because its local replay
-is convenient.
+These rules follow the work, not the current directory or Git root. They apply
+to every repository, worktree, extracted package, dependency checkout, release
+tree, or cache used for an Othello paper or formal artifact, including the
+mirrors below, `finitegeom*`, `.lake/packages/`, and review/release checkouts.
+Changing roots relaxes nothing. Local READMEs and replay commands never override
+this guide; if its guarded entry point cannot target a root, stop. Unless the
+handoff says otherwise, extracted and synchronized copies are downstream:
+edit and validate the monorepo authority first, then forward-commit the copy.
 
 The authoritative manuscript sources remain under this repository's `papers/`. The following
 released papers also have standalone Git mirrors under `~/src/math-papers/`:
@@ -183,25 +168,14 @@ sibling `lean/CLAUDE.md` symlink to the same file. Discussion and document revie
 trigger it. Any future nested shared guide must likewise provide both names as one file plus a
 symlink; agent-specific guidance must say so explicitly instead.
 
-This trigger and the nested guide's rules apply to Lean work in every related
-repository, not only to paths beneath this checkout's `lean/` directory.
-Before operating on a standalone formal package, its `.lake` dependencies, a
-paper mirror's Lean artifact, or a review/release checkout, read this
-checkout's canonical `lean/AGENTS.md` and use its supported entry points.  In
-particular:
-
-- never run direct `lake`, `nix ... lake`, or an equivalent build command in a
-  related repository;
-- `run-quiet` bounds output and supplies default OOM preference, but it is not
-  a substitute for the Lean build-owner lock, quiet-state check, measured
-  profile, explicit worker limits, or guarded entry point;
-- the one-heavy-build rule and process-ownership checks are host-wide across
-  all related Git roots, build trees, harnesses, and agent sessions;
-- certificate regeneration in any related repository requires the owning
-  build window and the same atomic source/generator/certificate validation as
-  regeneration in this monorepo; and
-- if a supported wrapper lacks a needed `--lean-root` or equivalent targeting
-  mechanism, stop and ask rather than hand-compose a replacement.
+The trigger and nested rules apply to Lean work in every related root. Read this
+checkout's canonical `lean/AGENTS.md` before operating on standalone packages,
+dependencies, mirrors, or review/release trees. Never run direct `lake`,
+`nix ... lake`, or equivalents. `run-quiet` supplies output capture and default
+OOM preference, not the guarded entry point, build lock, quiet check, measured
+profile, or worker cap. Build ownership and the one-heavy-build rule are
+host-wide. Regeneration requires the owning build window and atomic validation.
+If a guard cannot target the root, stop; never hand-compose a replacement.
 
 The nested guide holds the always-on build-safety rules, the shared-library
 (`RelativeConicArcs.Gates`) validation and exit protocol, measured memory caps, the restart-sentinel
