@@ -88,6 +88,9 @@ theorem bracketProduct_scale {R ι κ : Type*}
     (edges : κ → ι × ι) :
     bracketProduct (fun i => s * x i) edges =
       s ^ Fintype.card κ * bracketProduct x edges := by
-  simp [bracketProduct, affineBracket, mul_sub, Finset.prod_mul_distrib]
+  simp only [bracketProduct, affineBracket]
+  simp_rw [← mul_sub]
+  rw [Finset.prod_mul_distrib]
+  simp
 
 end RelativeConicArcs.WeightedMatchingEvaluation

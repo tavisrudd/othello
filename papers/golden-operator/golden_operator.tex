@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{microtype}
-\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{amsmath,amssymb,amsthm,amscd,mathtools}
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
@@ -31,15 +31,17 @@
 \begin{abstract}
 Let \(C\) be a marked symmetric conference operator on six axes with
 \(C^2=5I\), and let \(C_T\) run through its coherent outer six-family.
-We prove that middle exterior power, diagonal commutator, golden
-eigenspace compression, adjugation, and centered squaring are five forms
-of one propagation mechanism.  The diagonal of
+We identify the six-point matching quotient and prove that its Golden
+commutator system is the unique normalized marked skew lift.  Middle
+exterior power, golden eigenspace compression, adjugation, and centered
+squaring are its operator shadows.  The diagonal of
 \(*\bigwedge^3C_T\) is the signed Joubert cubic vector \(Z\); the same
 cubics satisfy \(\Pf[D_x,C_T]=4Z_T(x)\), and over
 \(\mathbb Q(\sqrt5)\) they are determinants of the cross-eigenspace
 blocks.  The assembled block adjugates recover the Segre--Igusa polar map,
-while the six commutator forms give the unique outer-equivariant
-synchronized product of pure-spinor big cells.  On balanced Boolean
+while the six commutator forms give the synchronized product of pure-spinor
+big cells.  Rank-one tensor slices determine the critical scheme, and the
+matching Specht ideal determines the reduced base arrangement.  On balanced Boolean
 inputs, \(C^2=5I\) is equivalent to universal maximum-determinant
 \(K_{3,3}\) frustration.  Its six sign syndromes form a distance-six
 simplex whose transpose gives the order-ten conference operator and the
@@ -72,18 +74,22 @@ separates propagation from provenance: a geometric or coding construction
 may supply the marked conference class, but the proof below needs only the
 operator and its coherent outer marking.
 
-Theorem~\ref{thm:propagation} is the common proof.  Its three mechanisms
-are exterior--Pfaffian identification, golden compression, and the two
-kernel lines of the assembled differential.  The first turns triangle
-holonomy into the Joubert cubics.  The second turns the same Pfaffian into
-a \(3\times3\) determinant and its adjugate factorization.  The third
-identifies centered squaring as the conormal direction of the Segre cubic.
-No exceptional-group or physical interpretation is used in this proof.
+Theorem~\ref{thm:propagation} organizes the common proof as one universal
+matching quotient and its marked skew lift.  A matching expansion identifies
+the Joubert cubic with the commutator Pfaffian and the middle exterior
+coefficient.  Spectral splitting turns the same form into a
+\(3\times3\) determinant whose lower exterior grades include its adjugate.
+Downstairs, the residual source orbit and the Segre conormal are the two
+kernel lines of the quotient differential.  Their outer product forces its
+cofactor.  Theorem~\ref{thm:matching-quotient-geometry} then explains the
+critical and base schemes by the rank-one tensor slice and the matching
+equals arrangement.  No exceptional-group or physical interpretation is
+used in this proof.
 
 Theorem~\ref{thm:frustration} restricts the operator to balanced Boolean
 inputs.  Universal maximum determinant is equivalent to the conference
 identity, and the six resulting fingerprints form a simplex.  Transposition
-then gives the first higher-order conference shadow by a
+then gives an order-ten conference shadow by a
 classification-free Naimark--Gram argument.
 
 Only after propagation do we address provenance.  The projective
@@ -108,24 +114,81 @@ golden determinant lines.  The last choices are unnecessary for rational
 Pfaffians, determinants, and polar coordinates.
 \end{definition}
 
-For
-\(x\in\mathbb Q^X/\mathbb Q\mathbf1\), put
+Put \(A_X=\mathbb Q^X/\mathbb Q\mathbf1\).  Let
+\(\mathcal I_3\cong S^{(3,3)}\) be the five-dimensional space of
+six-point matching invariants.  Its universal cubic covariant is
+\[
+ \mathcal J_3:A_X\longrightarrow\mathcal I_3^*,\qquad
+ \langle[M],\mathcal J_3(x)\rangle
+   =\prod_{ij\in M}(x_i-x_j),
+\]
+where \(M\) runs through the perfect matchings of \(X\), modulo the
+Pl\"ucker relations.  For a symmetric zero-diagonal matrix \(C\), set
+\[
+ c_C=\sum_M\operatorname{sgn}(M)
+       \prod_{ij\in M}C_{ij}[M],\qquad
+ \alpha_C(x)_{ij}=C_{ij}(x_i-x_j).
+\]
+Thus \(\Pf\alpha_C(x)=\langle c_C,\mathcal J_3(x)\rangle\).
+For the Golden family write \(c_T=c_{C_T}\) and
+\[
+ F_C(y)=(\langle c_T,y\rangle)_{T\in\cT}.
+\]
+We also put
 \[
  D_x=\operatorname{diag}(x),\qquad
  K_T=*\bigwedge\nolimits^3C_T,\qquad
  Z_T(x)=\frac14\sum_{|S|=3}(K_T)_{SS}x_S.
 \]
 
-\begin{theorem}[Golden operator propagation]
+We shall use the following elementary cofactor principle.  It is stated
+separately because it explains the assembled adjugate without an entrywise
+calculation.
+
+\begin{lemma}[Primitive-kernel cofactor]
+\label{lem:primitive-cofactor}
+Let \(R\) be a graded UFD and let \(M\in\operatorname{Mat}_r(R)\) have
+generic rank \(r-1\).  Suppose that primitive homogeneous polynomial
+vectors \(q\) and \(w\) generate its right and left kernels over the
+fraction field.  Then
+\[
+ \operatorname{adj}M=h\,q w^{\mathsf T}
+\]
+for a homogeneous \(h\in R\).  If
+\(\deg\operatorname{adj}M=\deg q+\deg w\), then \(h\) is a scalar.
+\end{lemma}
+
+\begin{proof}
+Every column of \(\operatorname{adj}M\) lies in the right kernel.  Since
+\(q\) is primitive, unique factorization makes the coefficient of \(q\) in
+each column polynomial.  The resulting row lies in the left kernel, and
+primitivity of \(w\) makes its remaining common factor polynomial.
+Homogeneity gives the last assertion.
+\end{proof}
+
+\begin{theorem}[Universal matching quotient with Golden lift]
 \label{thm:propagation}
 For a fully marked golden presentation:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
-\item the vector \(Z=(Z_T)_{T\in\cT}\) carries the signed outer action and
-  satisfies
+\item the six \(c_T\) form a regular-simplex frame of \(\mathcal I_3\).
+  After the displayed normalization, \(F_C\) identifies
+  \(\mathcal I_3^*\) with the signed outer augmentation module, and
+  \[
+  \begin{CD}
+   A_X @>{x\mapsto(\alpha_{C_T}(x))_T}>>
+      \displaystyle\bigoplus_T\bigwedge^2(\mathbb Q^X)^*\\
+   @V{\mathcal J_3}VV @VV{(\Pf_T)_T}V\\
+   \mathcal I_3^* @>{F_C}>> \mathbb Q[\cT]_0\otimes\operatorname{sgn}
+  \end{CD}
+  \]
+  commutes.  The upper arrow is the unique primitive normalized marked
+  equivariant lift of the lower map.
+\item \(F_C\mathcal J_3=4Z\); the vector \(Z\) carries the signed outer
+  action and satisfies
   \[
     \sum_T Z_T=0,\qquad \sum_T Z_T^3=0;
   \]
-\item
+  moreover
   \[
     \Pf[D_x,C_T]=4Z_T(x),\qquad
     \det[D_x,C_T]=16Z_T(x)^2;
@@ -135,8 +198,15 @@ For a fully marked golden presentation:
   \[
     Z_T(x)=\pm10\sqrt5\det B_T(x),
   \]
-  and its adjugate gives the two conjugate determinantal resolutions and
-  rank-one maximal Cohen--Macaulay objects;
+  while the principal Pfaffians of \(\exp(\alpha_{C_T})\), in a spectral
+  basis, have compound grades
+  \[
+    1,\quad B_T,\quad\operatorname{adj}B_T,\quad\det B_T.
+  \]
+  Thus the adjugate gives the two conjugate determinantal resolutions and
+  rank-one maximal Cohen--Macaulay objects.  The Pfaffian is intrinsic on
+  the six-point quotient; a chosen spectral block also requires an affine
+  pole.
 \item the centered square
   \[
     W_T=Z_T^2-\frac16\sum_U Z_U^2
@@ -151,40 +221,49 @@ For a fully marked golden presentation:
 \end{enumerate}
 \end{theorem}
 
-The proof first identifies one cubic in three languages.  The polar map is
-then forced by the two generic kernel lines of its differential.  A single
-exact cofactor fixes the integral normalization in the last identity; the
-proof does not infer the identity from numerical interpolation.
+The centered square in part (iv) is the classical Segre--Igusa duality
+map: the displayed formula and the symmetric Igusa equation occur in
+\cite[Section~2.2]{HMSVOuter}, following van der Geer.  The operator
+statement here is the normalized adjugate identity, which identifies that
+classical polar direction with the left kernel of the Joubert Jacobian.
+
+The proof has an upper and a lower part.  Upstairs, one matching expansion
+simultaneously explains the Pfaffian, middle exterior coefficients, spectral
+determinant, and spinor compounds.  Downstairs, the Segre quotient supplies
+the two kernel lines of its differential.  Lemma~\ref{lem:primitive-cofactor}
+then reduces the global adjugate identity to one exact normalization witness.
 
 \begin{proof}
-For a triple \(S=\{i,j,k\}\), expansion of the middle exterior operator
-in the oriented triple basis gives
+Expanding \(\Pf\alpha_C\) over perfect matchings gives its pairing with
+\(c_C\).  On the affine chart \([v_i,v_j]=x_i-x_j\), so
+\(\alpha_C=[D_x,C]\).  In the coefficient of \(x_S\), every surviving
+matching pairs \(S\) bijectively with \(S^c\); its signed sum is
+\(\det C_{S,S^c}\).  With the compatible Hodge orientation this says
 \[
-  (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}.
+ \Pf[D_x,C]=\sum_{|S|=3}(*\!\bigwedge^3C)_{SS}x_S.
 \]
-Consequently \(Z_T\) is the triangle-holonomy cubic of the oriented
-two-graph defined by \(C_T\).  Coherence of the outer family gives
-\(C_{gT}=\operatorname{sgn}(g)M_{g,T}C_TM_{g,T}^{\mathsf T}\), with
-\(M_{g,T}\) monomial.  The diagonal algebra is switching-blind, so the
-triangle cubics transform by
-\[
-  gZ_T=\operatorname{sgn}(g)Z_{gT}.
-\]
-These are the marked Joubert coordinates of six ordered points on
-\(\mathbf P^1\) \cite{HMSVOuter,HMSV}; in this normalization their two
-relations are \(\sum_TZ_T=\sum_TZ_T^3=0\).  This proves (i), including
-the hypotheses under which the classical identification is used.
+For \(C=C_T\), this is \(4Z_T\).  Equivalently, for
+\(S=\{i,j,k\}\), the diagonal middle-exterior coefficient is
+\(4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\).  Thus the matching, exterior, and
+triangle-holonomy descriptions are the same calculation.
 
-Put \(A_T=[D_x,C_T]\).  It is alternating, with entries
-\((x_i-x_j)(C_T)_{ij}\).  Expanding its Pfaffian over the fifteen perfect
-matchings and collecting squarefree cubic coefficients gives
+The explicit six-point matching dictionary identifies the invariant space
+with \(S^{(3,3)}\) \cite[Section~2.4]{HMSVOuter}; its occurrence in cubic
+degree has multiplicity one by the Young-rule argument below.  The six
+Golden functionals form the
+regular-simplex orbit in this five-space.  Hence \(F_C\) is the asserted
+frame isomorphism.  The marked character calculation gives
 \[
-  \Pf A_T=4Z_T.
+ \dim\operatorname{Hom}_{S_6}
+   \left(A_X,\bigoplus_T\bigwedge^2(\mathbb Q^X)^*\right)=1.
 \]
-Squaring the Pfaffian gives \(\det A_T=16Z_T^2\), proving (ii).
-This coefficient calculation is also the bridge between the exterior and
-commutator descriptions: both read the same triangle holonomies, rather
-than merely producing cubics in isomorphic representations.
+Primitive integrality reduces its scalar to a common sign, and the
+Pfaffian orientation selects the displayed sign.  This proves the square
+and its uniqueness.  Coherence gives
+\(gZ_T=\operatorname{sgn}(g)Z_{gT}\); the classical six-point quotient
+identifies these frame coordinates with the Joubert coordinates and gives
+\(\sum_TZ_T=\sum_TZ_T^3=0\) \cite{HMSVOuter,HMSV}.  Squaring the
+Pfaffian gives the determinant identity.
 
 Now work over \(k(\sqrt5)\).  The projectors
 \(P_{T,\pm}=(I\pm C_T/\sqrt5)/2\) split the axis space into two
@@ -196,10 +275,12 @@ three-spaces.  Relative to this splitting,
  2\sqrt5\,B_T(x)&0
  \end{pmatrix}.
 \]
-Taking determinants yields
-\(16Z_T^2=8000\det(B_T)^2\).  The chosen determinant-line orientation
-therefore gives \(Z_T=\pm10\sqrt5\det B_T\).  Multiplication by the
-scaled adjugate gives
+The exterior exponential of this alternating block form has bidegree
+\((r,r)\) equal, up to the same orientation, to
+\((2\sqrt5)^r\bigwedge^rB_T\).  In rank three its four grades are
+\(1,B_T,\operatorname{adj}B_T,\det B_T\).  At the top,
+\(16Z_T^2=8000\det(B_T)^2\), and the determinant-line orientation gives
+\(Z_T=\pm10\sqrt5\det B_T\).  Multiplication by the scaled adjugate gives
 \[
  B_T(\pm10\sqrt5\operatorname{adj}B_T)
  =Z_TI_3.
@@ -208,9 +289,21 @@ On \(Z_T=0\), the two kernels of \(B_T\) and \(B_T^{\mathsf T}\) give
 the two determinantal small resolutions; conjugating \(\sqrt5\) exchanges
 them.  The standard linear resolution of a \(3\times3\) determinant
 cokernel gives the conjugate rank-one MCM objects and their rational
-rank-two descent.  This proves (iii).
+rank-two descent.
 
-It remains to identify the assembled polar map.  Let \(G_x\) have columns
+The bracket construction is \(\operatorname{GL}_2\)-natural, with its
+determinant-line twist.  A general projectivity instead sends the affine
+commutator to
+\[
+ [D_y,C_T]=(ad-bc)\Lambda[D_x,C_T]\Lambda,
+ \qquad \Lambda_{ii}=(cx_i+d)^{-1}.
+\]
+Because every off-diagonal entry of \(C_T\) is nonzero, a nonconstant
+\(\Lambda\) does not preserve its fixed golden eigenspaces.  The Pfaffian
+therefore descends without a pole, whereas a selected block and its
+rank-one factorization live on the pole-marked cover.
+
+For the lower part, let \(G_x\) have columns
 \(dZ_T|_x\), and pass to the source and target augmentation quotients to
 obtain \(\mathsf A(x)\).  The first kernel line comes from congruence.
 Writing \(\omega_x=[D_x,C_T]\),
@@ -227,10 +320,12 @@ the Segre equation:
  \widehat W(x)^{\mathsf T}\mathsf A(x)
  =6\sum_TZ_T(x)^2dZ_T|_x=0.
 \]
-A nonzero fourth minor shows that the generic rank is four.  Hence the
-adjugate has rank one and is a scalar multiple of
-\(\widehat Wq^{\mathsf T}\).  Degree and outer equivariance make the
-scalar constant.  In the quotient bases
+A nonzero fourth minor shows that the generic rank is four.  The two kernel
+vectors are primitive; their degrees are two and six, while a cofactor of
+the quadratic \(5\times5\) matrix has degree eight.  Lemma~\ref{lem:primitive-cofactor}
+therefore gives
+\(\operatorname{adj}\mathsf A=c\widehat Wq^{\mathsf T}\) with \(c\)
+constant.  In the quotient bases
 \(e_i-e_5\) and \(e_T-e_{T_5}\), comparison of one integral cofactor
 with the corresponding product gives the scalar \(6\); this exact
 normalization check is reproduced in the verification supplement.
@@ -244,10 +339,92 @@ identities applied to \(\sum z_T=\sum z_T^3=0\) give
  \qquad \left(\sum_TW_T^2\right)^2=4\sum_TW_T^4,
 \]
 the Igusa quartic equation.  Thus the left kernel just found is precisely
-the Segre--Igusa polar direction, completing (iv).
+the Segre--Igusa polar direction.
 \end{proof}
 
-\subsection{The synchronized Cartan cells}
+\subsection{Quotient geometry and synchronized Cartan cells}
+
+The lower row of Theorem~\ref{thm:propagation} is the equal-weight quotient
+of six ordered points on \(\mathbf P^1\).  Its collision strata are governed
+by the same matching covariant in every even order.
+
+\begin{theorem}[Stability, criticality, and matching base]
+\label{thm:matching-quotient-geometry}
+For the equal-weight quotient of \(2m\) labelled points, let \(h\) be the
+largest point multiplicity.  Then \(h<m\) is the stable locus; \(h=m\) is
+the strictly semistable critical locus; and \(h>m\) is the
+scheme-theoretic base of the universal matching covariant.  This base is
+the reduced \((m+1)\)-equals arrangement.
+
+At a closed \(m+m\) orbit, the completed transverse quotient map is
+\[
+ \mu:U\oplus V\longrightarrow U\otimes V,\qquad
+ (u,v)\longmapsto u\otimes v,qquad
+ \dim U=\dim V=m-1,
+\]
+and its critical ideal is
+\[
+ I_{2m-3}(d\mu)
+  =(\mathfrak u+\mathfrak v)
+    \mathfrak u^{m-2}\mathfrak v^{m-2}.
+\]
+For \(m=3\), the reduced critical support is the twenty-plane
+three-equals arrangement.  At each of the ten \(3+3\) points its
+nilpotent defect is square-zero of length four, canonically the cotangent
+space of the corresponding Segre node.  The base is the reduced union of
+the fifteen four-equals lines.
+\end{theorem}
+
+The stability trichotomy is the classical Hilbert--Mumford criterion for
+equal-weight points on the line \cite[Section~1]{HMSV}.  The additional
+content here is the critical-ideal formula, its square-zero defect at the
+closed balanced orbits, and the reduced matching-base identification.
+
+\begin{proof}
+The Hilbert--Mumford criterion gives stability for \(h<m\), strict
+semistability for \(h=m\), and instability for \(h>m\).  A matching product
+is nonzero precisely when the complete multipartite graph defined by the
+equal-coordinate blocks has a perfect matching.  Such a matching exists
+exactly when no block has more than \(m\) vertices.  Thus the base has the
+claimed support.  The matching products are the Specht polynomials of shape
+\((m,m)\); the two-row Specht-ideal theorem upgrades this support equality
+to the reduced scheme equality in every characteristic
+\cite{McDanielWatanabe}.
+
+For the standard six-point \(3+3\) configuration
+\((u,u,u,v,v,v)\), the five noncrossing matching coordinates are
+\[
+ (0,0,0,0,(u-v)^3).
+\]
+Thus a \(3+3\) orbit is critical but not in the matching base when
+\(u\ne v\); its nonzero rainbow coordinate is the elementary reason it maps
+to a Segre node rather than to the origin.
+
+At an \(m+m\) orbit, move the two clusters to \(0\) and \(\infty\).  Their
+independent splittings have stabilizer weights \(+1\) and \(-1\), so the
+invariant transverse coordinates are \(u_iv_j\) and the quotient map is
+\(\mu\).  More generally, if \(\dim U=r\) and \(\dim V=s\), index the rows
+of \(d\mu\) by the edges and its columns by the vertices of \(K_{r,s}\).
+A maximal minor is nonzero exactly when its edges form a spanning tree.
+Deleting a root in \(U\) gives every monomial of bidegree \((s,r-1)\), and
+deleting one in \(V\) gives every monomial of bidegree \((s-1,r)\).  Hence
+\[
+ I_{r+s-1}(d\mu)
+ =\mathfrak u^s\mathfrak v^{r-1}
+  +\mathfrak u^{s-1}\mathfrak v^r,
+\]
+which specializes to the displayed balanced formula.
+
+For \(r=s=2\), this ideal is
+\(\mathfrak m(\mathfrak u)(\mathfrak v)\), with radical
+\((\mathfrak u)(\mathfrak v)\).  Their quotient has basis the four classes
+of \(u_iv_j\), is killed by \(\mathfrak m\), and therefore is square-zero
+of length four.  The target node has completed local equation
+\(z_{11}z_{22}-z_{12}z_{21}=0\), with \(z_{ij}=u_iv_j\); its four cotangent
+directions give the asserted canonical identification.  The ten partitions
+form one \(S_6\)-orbit.  Appendix~\ref{app:collision-filtration} proves that
+no nilpotent defect remains away from these closed orbits.
+\end{proof}
 
 Put \(U=\mathbb Q^X\) and \(A_X=U/\mathbb Q\mathbf1\).  For
 \(T\in\cT\) and \(x\in A_X\), the alternating form
@@ -273,9 +450,8 @@ The map
  \prod_{T\in\cT}\operatorname{OG}^+(6,12),
  \qquad x\longmapsto(L_T(x))_T,
 \]
-is outer-\(S_6\)-equivariant.  Its linear big-cell map is unique up to
-common scale after the coherent golden marking is fixed.  The six top
-coordinates \(p_T=\Pf\alpha_T=4Z_T\) have scheme-theoretic image
+is outer-\(S_6\)-equivariant.  The six top coordinates
+\(p_T=\Pf\alpha_T=4Z_T\) have scheme-theoretic image
 \[
  \operatorname{Spec}\frac{\mathbb Q[z_T:T\in\cT]}
  {(\sum_Tz_T,\sum_Tz_T^3)}.
@@ -303,52 +479,12 @@ The diagonal algebra is switching-blind, so
  M_{g,T}\alpha_T(x)M_{g,T}^{\mathsf T}.
 \]
 This proves equivariance, including the half-spin coordinate signs.
-
-Let
-\(
- \mathcal W=\bigoplus_{T\in\cT}\bigwedge^2U_T^*
-\)
-with this signed monomial action.  On a conjugacy-class representative
-\(g\), its character is
-\[
- \chi_{\mathcal W}(g)=\operatorname{sgn}(g)
- \sum_{gT=T}\frac{\operatorname{tr}(M_{g,T})^2
- -\operatorname{tr}(M_{g,T}^2)}2.
-\]
-Its inner product with the augmentation character
-\(\#\operatorname{Fix}_X(g)-1\), over the eleven classes of \(S_6\), is
-one.  Thus
-\[
- \dim\operatorname{Hom}_{S_6}(A_X,\mathcal W)=1.
-\]
-The displayed map is nonzero and hence spans this Hom-space.  Set
-\[
- E=\operatorname{sgn}\otimes\mathbb Q[\cT]_0.
-\]
-The corresponding cubic multiplicity is also one:
-\[
- \dim\operatorname{Hom}_{S_6}(\operatorname{Sym}^3A_X,E)=1.
-\]
-The top Pfaffians are therefore the unique signed outer cubic covariant;
-they are the Joubert coordinates of six ordered points on
-\(\mathbf P^1\) \cite{HMSV}.
-
-It remains to identify the whole image ideal.  In the translation gauge
-\(x_5=0\), at \((x_0,\ldots,x_4)=(-2,-2,-1,-1,0)\), the target is
-\((16,-16,0,0,0,0)\).  A \(4\)-minor of the Jacobian, using target rows
-\((0,2,3,4)\) and source columns \((0,1,2,4)\), equals \(-24576\).
-Thus the image has affine dimension four.  The prime ideal
-\((\sum z_T,\sum z_T^3)\) has the same height as the image ideal.  It is
-prime because the projective Segre cubic is irreducible: a reducible cubic
-hypersurface would have a positive-dimensional singular intersection,
-whereas this cubic has only ten nodes.  Hence the two ideals agree.
-
-Finally, the top map is the equal-weight GIT quotient of six ordered
-points on \(\mathbf P^1\) \cite{HMSV}.  Its unstable locus consists of
-configurations in which at least four points coincide, giving the fifteen
-displayed lines.  Exact radical and minimal-prime computation shows that
-this base scheme is reduced.  The \(3+3\) polystable orbits are the ten
-nodes.
+Theorem~\ref{thm:propagation} identifies the top coordinates with the
+regular-simplex frame of the universal matching quotient.  Hence their
+image ideal is \((\sum z_T,\sum z_T^3)\), and the same theorem supplies
+the marked uniqueness of the linear big-cell map.  The reduced base and
+the ten nodal images are the (m=3) case of
+Theorem~\ref{thm:matching-quotient-geometry}.
 \end{proof}
 
 The target has another Pfaffian description after a nonstandard
@@ -372,39 +508,17 @@ The arrows are respectively linear in big-cell coordinates, cubic, and
 linear isometric.  They are consecutive functorial operations, not
 different coordinate expressions for one linear map.
 
-The uniqueness in Proposition~\ref{prop:synchronized-spinors} is a marked
-statement, but it has no hidden deformation parameter.
+The marked rigidity is already the upper-arrow uniqueness in
+Theorem~\ref{thm:propagation}: the one-dimensional Hom-space fixes the map
+up to scale, primitive integrality fixes the scale up to sign, and the
+Pfaffian orientation fixes that sign.  Golden conjugation then exchanges
+the two spectral transpose presentations.
 
-\begin{corollary}[Rigidity of the marked synchronized lift]
-\label{cor:marked-lift-rigidity}
-Fix the two six-sets, their outer action, the coherent switching frames, and
-the integral axis and skew-coordinate lattices.  Every outer-equivariant
-linear map
-\[
- A_X\longrightarrow\bigoplus_{T\in\cT}\bigwedge^2U_T^*
-\]
-whose top Pfaffians are the Joubert cubic vector is a common scalar multiple
-of \(x\mapsto([D_x,C_T])_T\).  Primitive integrality leaves only the two
-common signs, and the normalization
-\(\Pf[D_x,C_T]=4Z_T\) selects one.  Over
-\(\mathbb Q(\sqrt5)\), the cross-golden blocks and their adjugates are then
-forced; golden conjugation exchanges the two transpose presentations.
-\end{corollary}
-
-\begin{proof}
-The character calculation in the proof of
-Proposition~\ref{prop:synchronized-spinors} makes the relevant Hom-space
-one-dimensional.  Primitivity fixes the scalar up to sign, and the displayed
-Pfaffian normalization fixes that sign.  The block decomposition in the
-proof of Theorem~\ref{thm:propagation} then forces the determinant and
-adjugate data.
-\end{proof}
-
-This multiplicity-one statement is the order-six member of a classical
-matching construction.  For \(2m\) labelled points, the multilinear
-\(\operatorname{SL}_2\)-invariants form the Specht module \(S^{(m,m)}\),
-generated by bracket monomials modulo the Pl\"ucker relations
-\cite{HMSV}.  It first occurs in degree \(m\) in the symmetric algebra of
+This is the order-six member of a classical matching construction.  For
+\(2m\) labelled points, the degree-one multilinear
+\(\operatorname{SL}_2\)-invariants form the Specht module \(S^{(m,m)}\)
+\cite[Section~1]{HMSV}, with the standard bracket presentation modulo the
+Pl\"ucker relations.  It first occurs in degree \(m\) in the symmetric algebra of
 the axis augmentation module, with multiplicity one: the squarefree
 monomials contain \(S^{(m,m)}\) once by Young's rule, while the
 nonsquarefree orbit modules are excluded by dominance.  Order six is the
@@ -416,38 +530,29 @@ since
 equals one only for \(m=3\).  The Golden input does not create this carrier;
 it selects the six-vector simplex of conference functionals on it.
 
-There is also a sharp difference between the intrinsic Pfaffian system and
-one chosen cross-golden block.  On \((\mathbf P^1)^6\), with tautological
-lines \(L_i\subset V\) and \(E=\bigoplus_iL_i\), the entries
-\(C_{T,ij}[ij]\) define an alternating bundle map
+The pole boundary in Theorem~\ref{thm:propagation} has a bundle-theoretic
+form.  On \((\mathbf P^1)^6\), with tautological lines
+\(L_i\subset V\) and \(E=\bigoplus_iL_i\), the entries
+\(C_{T,ij}[ij]\) define the intrinsic alternating map
 \[
  E\longrightarrow E^*\otimes\det V.
 \]
-Its Pfaffian is therefore intrinsic on the six-point quotient.  After a
-seventh point \(p_\infty\) is chosen, it selects an affine coordinate and the
-projective cross block \(P_{T,-}D_xP_{T,+}\) is intrinsic on
-\(M_{0,7}\to M_{0,6}\).  Under a general projectivity
-\(y_i=(ax_i+b)/(cx_i+d)\), however,
-\[
- [D_y,C_T]=(ad-bc)\Lambda[D_x,C_T]\Lambda,
- \qquad \Lambda_{ii}=(cx_i+d)^{-1}.
-\]
-The diagonal matrix \(\Lambda\) preserves a fixed golden eigenspace only
-when it is scalar, because every off-diagonal entry of \(C_T\) is nonzero.
-Thus forgetting the pole preserves the determinant cubic but not the fixed
-golden \(3+3\) splitting or a selected rank-one matrix factorization.  The
-continuous pole, support orientation, and golden conjugation are independent
-ambiguities.
+Its Pfaffian descends to the six-point quotient.  Choosing a seventh point
+selects an affine coordinate, so the cross block is intrinsic only on
+\(M_{0,7}\to M_{0,6}\).  Forgetting that pole preserves the determinant
+cubic but not the fixed golden \(3+3\) splitting.  The pole, support
+orientation, and golden conjugation remain independent ambiguities.
 
 The collision geometry likewise forms a filtration rather than one master
 discriminant.  In the source, pair collisions give fifteen hyperplanes,
 the rank-drop scheme of the Joubert Jacobian has twenty triple-collision
 planes as its reduced support, and the simultaneous top-Pfaffian base has
 fifteen four-collision lines.  The ten \(3+3\) closed orbits map to the ten
-Segre nodes.  Appendix~\ref{app:collision-filtration} records the exact
-scheme statement and its computational trust boundary.
+Segre nodes.  Theorem~\ref{thm:matching-quotient-geometry} gives their
+universal local model; Appendix~\ref{app:collision-filtration} proves the
+global off-node exclusion.
 
-\subsection{Balanced cuts and the first Naimark shadow}
+\subsection{Balanced cuts and the order-ten Naimark shadow}
 
 Let \(B\) be any symmetric zero-diagonal \(6\times6\) sign matrix.  For a
 balanced partition \(L\sqcup R=X\), expand \(\det B_{L,R}\) as the six
@@ -474,6 +579,13 @@ six projective fingerprints.  Their ten-cut sign words \(r_T\) satisfy
  RR^{\mathsf T}=12\left(I_6-\frac16J_6\right).
 \]
 \end{theorem}
+
+Conditions (iii) and (iv), the twelve labelled five-cycles, and their
+pairing into six classes are classical.  The six classes are the mystic
+pentagons of \cite[Sections~1.1 and~1.6]{HMSVOuter}; the order-six
+conference two-graph is unique and has automorphism group \(A_5\)
+\cite[Chapters~5--6]{BMS}.  The theorem identifies conditions (i) and (ii)
+with this classical switching class.
 
 \begin{proof}
 Switch to \(B_{0i}=1\).  Every balanced cut has a representative
@@ -515,6 +627,14 @@ space isometrically onto the \(+3\)-eigenspace of \(S_{10}\).  Up to row
 and column monomial actions, this is the unique sign Gram factorization of
 the resulting order-ten switching class.
 \end{corollary}
+
+Symmetric conference matrices give the sign Gram matrices of real
+\(\operatorname{ETF}(N/2,N)\)'s \cite[Section~2]{FickusMixon}.  The
+order-ten conference two-graph is the classical unique switching class
+with automorphism group \(\operatorname{Sp}(4,2)\cong S_6\), containing
+the Petersen graph \cite[Chapters~5--6]{BMS}.  The corollary identifies
+this object directly from the balanced-cut sign words of the six Golden
+sisters.
 
 \begin{proof}
 The row Gram identity annihilates \(\mathbf1\), so
@@ -580,6 +700,13 @@ unoriented switching line
  \ell_C=\{[C],[-C]\}.
 \]
 \end{proposition}
+
+The two-graph--switching-class correspondence through triangle products
+and the conference regularity criterion are classical
+\cite[Chapters~5--6]{BMS}; the six complementary splits of the twenty
+triples are described in \cite[Section~1.2]{HMSVOuter}.  The proposition
+proves that the two \(A_5\)-orbits of coordinate triples carried by the
+monomial Clebsch code class give precisely that two-graph.
 
 \begin{proof}
 The degree-six \(A_5\)-action is two-transitive, hence transitive on pairs
@@ -999,6 +1126,15 @@ lines on the Segre cubic as follows.
 \end{enumerate}
 \end{theorem}
 
+The decomposition into fifteen plane components and six split
+degree-five del Pezzo components, the transitive \(S_6\)-action, the
+syntheme labels of the planes, and the count of six lines through a
+generic point are due to Gripaios and Nguyen
+\cite[Sections~1 and~4]{GripaiosNguyenTwo}.  The theorem supplies the
+marked realization by fixed collisions and moving paths, the
+synthematic-total boundary labels, the minimal control degree, and the six
+explicit response directions.
+
 \begin{proof}
 Each marked cubic is multihomogeneous of degree one in each path point.
 Varying one point therefore traces a line.  Five general fixed points give
@@ -1079,12 +1215,18 @@ operator transport.
 The proofs above separate conceptual arguments from exact finite checks.
 The exterior, commutator, golden-compression, frustration, Naimark, recovery,
 and anomaly-line mechanisms have human proofs in the text.  Exact arithmetic
-fixes normalizations, checks finite orbit tables, proves reducedness of the
-fifteen-line spinor base scheme, and certifies the height and real-optimization
-clauses of Theorem~\ref{thm:anomaly-inverse}.  The paper-owned verification
-supplement records the search domains, hashes, commands, and independent
-replays for those claims.  No post-700 theorem in this paper is presently
-Lean-verified.
+fixes normalizations, checks finite orbit tables, independently reproduces
+the collision-chart and rank-one-slice calculations, and certifies the height
+and real-optimization clauses of Theorem~\ref{thm:anomaly-inverse}.  The
+paper-owned verification supplement records the search domains, hashes,
+commands, and independent replays for those claims.
+
+A Golden Lean gate kernel-checks the affine matching laws, the three exact
+Jacobian-minor identities displayed in the appendix, finite matching
+evaluation of the order-six Pfaffian, and a general corank-one adjugate
+factorization.  It does not formalize the Specht-module identification,
+the regular-simplex and multiplicity-one inputs, global saturation, the
+strongly etale slice passage, or the exact Golden normalization witnesses.
 
 The exceptional-group, Clifford, bad-prime, and lattice constructions are
 parents or boundary tests, not additional steps in
@@ -1101,27 +1243,71 @@ does not break the operator proof.
 Work in the translation gauge on the projective axis augmentation space,
 and let \(J_Z\) be the \(6\times5\) Jacobian of the six Joubert cubics.
 The reduced pair-collision divisor is the union of the fifteen hyperplanes
-\(x_i=x_j\).  The scheme \(V(I_4(J_Z))\) has degree \(20\); its radical is
-the union of the twenty planes on which a chosen triple of coordinates
-coincides.  It is nonreduced, and the annihilator of its nilradical has
-radical supported at the ten points indexed by complementary \(3+3\)
-partitions.  Finally, the simultaneous-Pfaffian base scheme is the reduced
-union of the fifteen lines on which a chosen four coordinates coincide.
-Thus their reduced supports form the strict chain
+\(x_i=x_j\).  Theorem~\ref{thm:matching-quotient-geometry} identifies the
+radical of \(I_4(J_Z)\) with the twenty planes on which a chosen triple
+coincides.  At the ten complementary \(3+3\) intersections its exact local
+ideal is
+\[
+ \mathfrak m(u_1,u_2)(v_1,v_2),
+\]
+so the defect over the reduced plane crossing is square-zero of length
+four.  Finally, the simultaneous-Pfaffian base is the reduced union of the
+fifteen lines on which four coordinates coincide.  The reduced supports
+therefore form the strict chain
 \[
  \{\text{four coincide}\}\subset
  \{\text{three coincide}\}\subset
  \{\text{two coincide}\},
 \]
-while the Jacobian scheme has an additional lower-dimensional nilpotent
-defect at the \(3+3\) points.
+and the Jacobian scheme differs from its reduction only by those forty
+cotangent directions.  We now prove the last assertion globally.
 
-The reduced support statements follow from the six-point GIT collision
-strata and the radical calculation used in
-Proposition~\ref{prop:synchronized-spinors}.  The nilpotent refinement is
-currently certified by one exact Singular computation.  It is not used in
-the proof of the propagation, rigidity, recovery, or Naimark theorems and is
-retained here with that single-CAS trust boundary.
+On the semistable locus, every critical orbit specializes to a unique closed
+\(3+3\) orbit.  Luna's saturated strongly \(\acute{e}\)tale slice theorem
+\cite[Section~III.1, pp.~95--100]{LunaSlices} identifies the quotient map,
+after removing smooth orbit factors, with
+\((u,v)\mapsto u\otimes v\).  Its critical ideal and radical are
+\[
+ \mathfrak m(\mathfrak u)(\mathfrak v)
+ \quad\text{and}\quad
+ (\mathfrak u)(\mathfrak v),
+\]
+so their quotient is supported only at \(u=v=0\).  Strongly \(\acute{e}\)tale
+pullback preserves the relevant Fitting ideals and their support.  Hence no
+semistable off-node defect remains.
+
+It remains to inspect the unstable matching base.  Put \(x_5=0\), take the
+five noncrossing matching products as coordinates, and order the \(25\)
+four-by-four Jacobian minors first by column subset and then by row subset;
+write them \(M_1,\ldots,M_{25}\).  Up to \(S_6\) and projectivity, the
+unstable types are \(4+1+1\), \(4+2\), and \(5+1\).  In their respective
+charts set
+\[
+ (x_0,x_1,x_2,x_3)=(1,1+a,1+b,1+c),\qquad
+ x_4=-1+d, d, 1+d.
+\]
+Direct Laplace expansion gives
+\[
+\begin{aligned}
+ \tfrac12M_5+\tfrac16(M_{16}+M_{17}+M_{21})
+ &+\tfrac{2c-2d+4}{3}M_{20}+\tfrac{-2d+2}{3}M_{25}\\
+ & =-(1+c)(d-2)(d-1)(d-c-2)(c+d-1)c(a-b),\\
+ M_{20}+M_{25}
+ &=(1+c)(d-a-1)(d-b-1)(a+b+c+d+1)c(a-b),\\
+ \tfrac12M_5+\tfrac16(M_{16}+M_{17}+M_{21})
+ &+\tfrac{2c-2d}{3}M_{20}+\tfrac{-2d-2}{3}M_{25}\\
+ &=(1+c)(1+d)(1+c+d)cd(a-b)(c-d).
+\end{aligned}
+\]
+The prefactors are units at the three chart origins.  For the first two
+types, the \(S_4\)-orbit of \(c(a-b)\) generates the reduced local
+three-equals ideal; for the last, the \(S_5\)-orbit of
+\(cd(a-b)(c-d)\) does so.  Equivariance gives one containment in every
+localized Jacobian-minor ideal.  The reverse containment follows because
+each triple plane is critical.  These charts exhaust the unstable
+projective source, proving reducedness there.  Together with the saturated
+slice calculation, this proves that the nilpotent defect is supported
+exactly at the ten \(3+3\) points.
 
 \begin{thebibliography}{9}
 
@@ -1140,6 +1326,30 @@ B.~Howard, J.~Millson, A.~Snowden, and R.~Vakil,
 \emph{A description of the outer automorphism of \(S_6\), and the
 invariants of six points in projective space},
 J. Combin. Theory Ser. A 115 (2008), 1296--1303.
+
+\bibitem{BMS}
+F.~C. Bussemaker, R.~A. Mathon, and J.~J. Seidel,
+\emph{Tables of two-graphs},
+EUT Report 79-WSK-05, Technische Hogeschool Eindhoven, 1979,
+DOI 10.1007/BFb0092256.
+
+\bibitem{FickusMixon}
+M.~Fickus and D.~G. Mixon,
+\emph{Tables of the existence of equiangular tight frames},
+arXiv:1504.00253v2.
+
+\bibitem{McDanielWatanabe}
+C.~McDaniel and J.~Watanabe,
+\emph{Principal radical systems, Lefschetz properties, and perfection of
+Specht ideals of two-rowed partitions},
+arXiv:2103.00759v2.
+
+\bibitem{LunaSlices}
+D.~Luna,
+\emph{Slices \(\acute{e}\)tales},
+in \emph{Sur les groupes alg\'ebriques},
+Bull. Soc. Math. France, M\'emoire 33 (1973), 81--105,
+DOI 10.24033/msmf.110.
 
 \bibitem{CostaDobrescuFox}
 D.~B. Costa, B.~A. Dobrescu, and P.~J. Fox,

@@ -107,7 +107,6 @@ theorem matchingEvaluation_translate {R : Type*} [CommRing R]
     (C : Matrix (Fin 6) (Fin 6) R) (x : Fin 6 → R) (t : R) :
     matchingEvaluation C (fun i => x i + t) = matchingEvaluation C x := by
   simp [matchingEvaluation, bracket]
-  ring
 
 /-- Common scaling gives the matching evaluation affine weight three. -/
 theorem matchingEvaluation_scale {R : Type*} [CommRing R]

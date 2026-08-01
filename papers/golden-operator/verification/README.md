@@ -9,7 +9,7 @@ The manuscript distinguishes:
 2. classical theorems imported by citation;
 3. exact finite computations with committed generators and certificates;
 4. independent replays; and
-5. formal results, if a later Golden Lean package is added.
+5. kernel-checked algebraic results in the Golden Lean package.
 
 No manuscript theorem relies solely on a computation.  The finite clauses
 below have committed generators, certificates, and independent replays; the
@@ -36,6 +36,8 @@ surrounding quotient and operator statements have human proofs in the paper.
 | higher cut moments and reflection boundary | notes/2026-07-31-c729-conference-cut-moments.md and notes/2026-07-31-c729-cut-moments-reflection-audit.md | sequel material; exact generators, compact certificates, and an independent replay |
 | marked lift rigidity, collision filtration, and canonical return | notes/2026-07-31-c739-golden-cubic-lift-rigidity.md | human multiplicity-one, pole-descent, and subgroup-incidence proofs; exact character/cycle certificates; one-CAS boundary for the nilpotent Jacobian refinement |
 | unmarked target and cross-block Fitting obstruction | notes/2026-07-31-c742-golden-reconstruction-degeneracy.md | human rank, stabilizer-orbit, descent, and Fitting proofs; exact full-permutation character certificate and independent class replay |
+| universal matching, quotient slice, and proof compression | notes/2026-07-31-c743-golden-a-plus-unity-compression.md | human matching, spanning-tree, Specht-ideal, saturated-slice, and cofactor proofs; exact chart and local-normal-form audits with independent replays |
+| Golden algebraic Lean spine | notes/2026-08-01-c754-golden-lean-proof-spine.md | kernel-checked affine covariance, collision evaluation, Jacobian-minor identities, matching/Pfaffian evaluation, and corank-one adjugate factorization; representation and slice boundary explicit |
 
 For the central exterior, commutator, golden-compression, and assembled-polar
 claims, run
@@ -91,8 +93,9 @@ python3 notes/2026-07-31-c728-synchronized-pure-spinor-replay.py
 
 The first command invokes Singular for the sharpened radical and
 minimal-prime statement.  The representation-theoretic uniqueness and the
-identification of the top cubics are proved in the text; Singular is
-load-bearing only for reducedness of the fifteen-line base scheme.
+identification of the top cubics are proved in the text.  The matching
+Specht-ideal theorem now proves reducedness of the fifteen-line base scheme;
+the Singular result remains an independent coordinate check.
 
 For the order-ten factorization and the outward higher-cut boundary, run
 
@@ -120,9 +123,10 @@ python3 notes/2026-07-31-c739-cycle-audit.py --check
 The marked rigidity and `36 -> 6` return have independent human proofs in
 the manuscript.  The representation multiplicities also have a separately
 implemented synthematic-total replay.  The reduced collision supports agree
-with the GIT argument and the inherited C728 replay.  The nilpotent defect at
-the ten `3+3` points still has only the exact Singular implementation, so the
-appendix states that trust boundary and no central theorem depends on it.
+with the GIT argument and the inherited C728 replay.  The rank-one tensor
+slice proves the square-zero length-four defect at every `3+3` point, and
+the three generator-explicit chart identities exclude off-node nilpotence;
+the Singular implementation is now an independent coordinate check.
 
 For the unmarked target obstruction, run
 
@@ -139,6 +143,16 @@ Pfaffian-zero conclusion, exceptional-action reconstruction, and Fitting
 obstruction have human proofs in the manuscript; the certificate does not
 replace them.
 
-The existing C712 Lean package covers only the sub-700 source interface.  The
-paper must not describe the post-700 propagation theorem as Lean-verified
-unless a separate Golden formalization and axiom report are added here.
+The Golden formal surface exits through
+`RelativeConicArcs.Gates.GoldenProofSpine`.  Its source modules prove affine
+weight three and the exact `3+3` collision value of the five noncrossing
+matching products, the three displayed Jacobian-minor identities, finite
+matching evaluation of the order-six Pfaffian, and the outer-product form of
+an adjugate with generated one-dimensional left and right kernels.  The gate
+audits the named terminal declarations with `#print axioms`.
+
+This formal surface does not prove the Specht-module identification, the
+regular-simplex frame or multiplicity-one statements, global scheme
+saturation, the strongly etale slice passage, or the manuscript's exact
+Golden normalization witnesses.  Those steps remain human proofs, imported
+classical theorems, or exact replayed calculations as identified above.

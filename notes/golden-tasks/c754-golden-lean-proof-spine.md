@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** in progress
+**Status:** complete
 
 ## Objective
 
@@ -14,8 +14,9 @@ representation theory, invariant theory, and Luna-slice geometry.
 ## Work packages
 
 1. Define the five noncrossing matching cubics on six labelled coordinates.
-   Prove translation invariance, cubic scaling, affine covariance, and
-   vanishing on the representative three-plus-three collision plane.
+   Prove translation invariance, cubic scaling, affine covariance, and the
+   exact representative three-plus-three collision value: four zero
+   coordinates and the rainbow cube.
 2. Define their explicit Jacobian and ordered four-by-four minors.  Prove the
    three generator-level off-node identities used for collision types
    `4+1+1`, `4+2`, and `5+1`, using symbolic kernel proofs rather than imported

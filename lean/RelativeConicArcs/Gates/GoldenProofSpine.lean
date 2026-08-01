@@ -8,7 +8,8 @@ import RelativeConicArcs.WeightedMatchingEvaluation
 # Trust gate for the algebraic Golden proof spine
 
 This gate imports the order-six conference matrix together with four reusable
-algebraic mechanisms: affine covariance of noncrossing matching cubics,
+algebraic mechanisms: affine covariance and `3+3` collision evaluation of
+noncrossing matching cubics,
 symbolic Jacobian-minor identities on three collision charts, Pfaffian
 evaluation as a signed sum over perfect matchings, and the outer-product form
 of an adjugate with generated one-dimensional left and right kernels.
@@ -20,7 +21,7 @@ slices to a geometric quotient.
 -/
 
 #print axioms RelativeConicArcs.GoldenMatchingCubics.matchingCubics_affine
-#print axioms RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_zero_of_threeThree
+#print axioms RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_rainbow_of_threeThree
 
 #print axioms RelativeConicArcs.WeightedMatchingEvaluation.edgeProduct_bracketWeightedMatrix
 #print axioms RelativeConicArcs.WeightedMatchingEvaluation.weightedEdgeSum_bracketWeightedMatrix

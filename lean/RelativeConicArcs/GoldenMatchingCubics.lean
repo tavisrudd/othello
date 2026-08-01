@@ -1,4 +1,5 @@
 import Mathlib.Data.Fin.VecNotation
+import Mathlib.Data.Fintype.Card
 import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.Ring
 
@@ -10,10 +11,11 @@ of its three pairwise differences.  This module fixes the five noncrossing
 matchings in the standard cyclic order.  Their cubic evaluations are unchanged
 by common translation and have weight three under common scaling.
 
-The final theorem checks the representative `3+3` collision plane: when the
-first three coordinates coincide and the last three coordinates coincide,
-every noncrossing matching contains an equal pair, so all five cubics vanish.
-All statements are symbolic kernel proofs over an arbitrary commutative ring.
+The final theorems evaluate the representative `3+3` collision plane.  When
+the first three coordinates coincide and the last three coordinates coincide,
+four matching products vanish and the rainbow matching is the cube of the
+difference between the two block values.  All statements are symbolic kernel
+proofs over an arbitrary commutative ring.
 -/
 
 namespace RelativeConicArcs.GoldenMatchingCubics
@@ -40,7 +42,7 @@ theorem matchingCubics_translate {R : Type*} [CommRing R]
     (x : Fin 6 → R) (t : R) :
     matchingCubics (fun i => x i + t) = matchingCubics x := by
   funext k
-  fin_cases k <;> simp [matchingCubics, bracket] <;> ring
+  fin_cases k <;> simp [matchingCubics, bracket]
 
 /-- Common scaling of the six coordinates scales every matching cubic by the
 third power of the scalar. -/
@@ -64,21 +66,24 @@ theorem matchingCubics_affine {R : Type*} [CommRing R]
 def threeThreePoint {R : Type*} (u v : R) : Fin 6 → R :=
   ![u, u, u, v, v, v]
 
-/-- Every noncrossing matching cubic vanishes on the standard `3+3`
-collision plane. -/
+/-- On the standard `3+3` collision plane, only the rainbow matching can be
+nonzero. -/
 theorem matchingCubics_threeThreePoint {R : Type*} [CommRing R] (u v : R) :
-    matchingCubics (threeThreePoint u v) = 0 := by
-  funext k
+    matchingCubics (threeThreePoint u v) =
+      ![0, 0, 0, 0, (u - v) ^ 3] := by
+  ext k
   fin_cases k <;> simp [matchingCubics, bracket, threeThreePoint]
+  ring
 
-/-- Coordinate-free hypothesis form of vanishing on the same labelled
-`3+3` collision plane. -/
-theorem matchingCubics_eq_zero_of_threeThree {R : Type*} [CommRing R]
+/-- Coordinate-equality hypothesis form of the same labelled `3+3`
+collision evaluation. -/
+theorem matchingCubics_eq_rainbow_of_threeThree {R : Type*} [CommRing R]
     (x : Fin 6 → R) (h01 : x 0 = x 1) (h12 : x 1 = x 2)
     (h34 : x 3 = x 4) (h45 : x 4 = x 5) :
-    matchingCubics x = 0 := by
-  funext k
+    matchingCubics x = ![0, 0, 0, 0, (x 2 - x 5) ^ 3] := by
+  ext k
   fin_cases k <;>
     simp [matchingCubics, bracket, h01, h12, h34, h45]
+  ring
 
 end RelativeConicArcs.GoldenMatchingCubics

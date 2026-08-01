@@ -287,6 +287,16 @@ particular:
   mathematical blocker.  The manuscript remains frozen until the separately
   authorized implementation pass.  Report:
   `notes/2026-07-31-c743-golden-a-plus-unity-compression.md`.
+- C754 is complete.  The reusable algebraic proof spine now exits through
+  `RelativeConicArcs.Gates.GoldenProofSpine`: affine matching laws and the
+  exact `3+3` rainbow value, three sharded Jacobian-minor identities,
+  universal weighted matching/Pfaffian evaluation, and corank-one adjugate
+  factorization are kernel-checked.  The exact-target and trace-only aggregate
+  gates pass with only `propext`, `Classical.choice`, and `Quot.sound`; Specht
+  multiplicity, global saturation, Luna slices, and Golden normalization stay
+  outside the formal boundary.  The compressed 18-page manuscript proof
+  incorporates C755's mandatory attribution repairs and passes `make check`.
+  Report: `notes/2026-08-01-c754-golden-lean-proof-spine.md`.
 
 C735 is complete.  The post-charter architecture delta, exact
 keep/compress/appendix/sequel map, theorem--proof--trust ledger, attribution
@@ -339,22 +349,17 @@ from this manuscript, and they must be audited before any sequel.  Full report:
 
 | task | state | next gate |
 |---|---|---|
-| [C754 — Lean formalization of the Golden proof spine](../golden-tasks/c754-golden-lean-proof-spine.md) | algebraic layers and import gate landed; manuscript frozen | run the exact-target queued gate when the foreign build owner releases the tree; then close the formal boundary before manuscript implementation |
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
-1. C754 Lean formalization of the Golden proof spine.  Formalize reusable
-   algebra first, keep the scheme-theoretic and representation-theoretic
-   boundary explicit, and leave the manuscript unchanged while the formal
-   interfaces stabilize.
-2. C718 boson--fermion complement only if C743 finds a precise unifying need;
+1. C718 boson--fermion complement only if a precise unifying need is selected;
    otherwise it remains deferred physical/combinatorial work.
-3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
-4. Keep C719 deferred until C718 supplies a literal permanent-side theorem.
+3. Keep C719 deferred until C718 supplies a literal permanent-side theorem.
 
 ## Ownership and allowed paths
 
