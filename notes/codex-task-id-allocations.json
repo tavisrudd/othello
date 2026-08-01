@@ -1943,8 +1943,17 @@
       "last": 753,
       "purpose": "Paper I Lean proof-spine correspondence implementation and release closure",
       "sequence": 216
+    },
+    {
+      "count": 1,
+      "first": 754,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 754,
+      "purpose": "Lean formalization of the Golden proof spine and exact order-six certificate layer",
+      "sequence": 217
     }
   ],
-  "next_id": 754,
+  "next_id": 755,
   "schema": "codex-task-id-allocations-v1"
 }
