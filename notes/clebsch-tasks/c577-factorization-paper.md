@@ -40,8 +40,15 @@ Paper III.
 
 ## Next action
 
-First expand or precisely source the projective--trade, Lucas-socle, and
-adjacent-wall steps and obtain an independent cold-read `GO` on that proof.
+Execute four human-proof rounds in order:
+
+1. C746 proves the intrinsic projective--trade reduction;
+2. C747 proves the Lucas-socle and first-wall non-splitting theorem;
+3. C748 integrates the Serre-style proof and obtains two cold reads; and
+4. C749 attacks, compresses, and freezes the final human proof.
+
+Only then may C750 close the Lean gap.
+
 After that local gate and publication authority are both available, freeze
 the Paper II package, obtain its immutable locator, insert the final public
 citations, run the isolated release replay, and perform the separate release

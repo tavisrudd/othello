@@ -141,11 +141,11 @@ all-\(q\) proof-depth blocker.
 
 | feature | status | exact gap or gate |
 |---|---|---|
-| all-\(q\) first-wall formulas | computationally settled conditional on the human identifications | expand the projective--trade, Lucas-socle, and adjacent-wall proofs, then cold-read them independently |
+| all-\(q\) first-wall formulas | computationally settled conditional on the human identifications | C746 owns projective--trade; C747 owns Lucas-socle and first-wall non-splitting; C748 integrates and cold-reads; C749 attacks and freezes the final human proof |
 | q=9 endpoint | settled | exhaustive primary and independent generator replay |
 | common \(B_3/H_3\) radial mechanism | settled at the paper's claimed two configurations | human Dickson recurrence plus independent exact replay |
 | maximal-isotropic Gorenstein pairing | no defect found | complete human proof in the manuscript; finite ideal/socle replay is independent support |
-| hyperplane-square implication | settled | exact Lean theorem and short human proof agree |
+| hyperplane-square implication | settled | exact Lean theorem and short human proof agree; C750 owns the remaining all-\(q\) formal closure after all four human rounds |
 | historical priority of the v2 classification | deliberately unresolved | no priority wording and no absence verdict |
 
 Vibe check: the evidence engineering is strong and unusually candid, but the

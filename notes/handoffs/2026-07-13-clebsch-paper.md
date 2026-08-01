@@ -229,6 +229,11 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; all-`q` human-proof gate reopened | expand or precisely source the projective--trade, Lucas-socle, and adjacent-wall steps, then obtain an independent cold-read `GO` |
+| [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | queued; human proof 1/4 | isolate and prove the intrinsic homological reduction |
+| [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | queued after C746; human proof 2/4 | discharge the actual Hom-space and non-splitting obligations structurally |
+| [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | queued after C746--C747; human proof 3/4 | integrate, polish, and obtain two independent cold-read `GO` verdicts |
+| [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | queued after C748; human proof 4/4 | attack and compress the complete proof, then freeze it |
+| [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | queued after C749; Lean last | formalize the frozen human architecture and close the exact paper-facing gap |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | relative marked bridge, global Stein algebra, mechanical gates, and fresh cold-read `GO` green | obtain immutable artifact locator and author affiliation/contact metadata |
 | [C744 — Paper III proof-spine structuralization](../clebsch-tasks/c744-paper-iii-proof-spine-structuralization.md) | queued; computation/certificate pressure pass and Serre-level human proof compression precede Lean | freeze the five-claim structural proof spine and C745 interface |
 | [C745 — Paper III current-theorem Lean formalization](../clebsch-tasks/c745-paper-iii-current-lean-formalization.md) | queued after C744 | formalize the frozen current-paper theorem surface and hand its reviewed closure to C287 |
@@ -457,7 +462,9 @@ correctly conditional on the human projective--trade, Lucas-socle, and
 adjacent-wall identifications, but those identifications are not yet written
 at referee proof depth.  The same audit repaired stale equation references,
 the Gorenstein literature pinpoint, and Lean/trust-table wording.  C577 owns
-this proof closure before public packaging.  Full findings:
+this proof closure before public packaging.  C746--C749 are four ordered
+human-proof rounds; C750 begins only after their proof is polished and
+frozen.  Full findings:
 `notes/2026-07-31-c577-paper-ii-new-math-audit.md`.
 C682 characteristic-zero work is inventory unless
 explicitly promoted.
