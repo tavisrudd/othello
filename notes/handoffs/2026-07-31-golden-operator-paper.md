@@ -186,14 +186,16 @@ manuscript edit is authorized by C727.
 
 | task | state | next gate |
 |---|---|---|
+| [C735 — manuscript consolidation](../golden-tasks/c735-golden-manuscript-consolidation.md) | ready; post-C716 consolidation pivot | freeze the placement delta and proof ledger, then complete the operator-first central draft before new exploration |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
-1. C717 and C718, chosen by theorem yield.
-2. C719 after C718 and the mathematical paper spine are secure.
+1. C735 manuscript consolidation and proof architecture.
+2. Reassess C717 only against a named gap in the consolidated manuscript.
+3. Defer C718 and C719 unless C735 identifies a precise theorem-level need.
 
 ## Ownership and allowed paths
 
