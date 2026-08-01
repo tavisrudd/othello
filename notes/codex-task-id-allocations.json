@@ -1952,8 +1952,17 @@
       "last": 754,
       "purpose": "Lean formalization of the Golden proof spine and exact order-six certificate layer",
       "sequence": 217
+    },
+    {
+      "count": 1,
+      "first": 755,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 755,
+      "purpose": "Golden operator paper literature and novelty audit",
+      "sequence": 218
     }
   ],
-  "next_id": 755,
+  "next_id": 756,
   "schema": "codex-task-id-allocations-v1"
 }

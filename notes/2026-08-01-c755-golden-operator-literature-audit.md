@@ -16,7 +16,7 @@ where a manuscript claim needed pinning down.
 
 Three sources were read at **full text**: Goethals–Seidel (1967), Howard–Millson–Snowden–Vakil
 (JCTA 2008), and Howard–Millson–Snowden–Vakil (arXiv:0906.2437). Eight further sources were read
-at **partial** depth with the sections recorded, four at **abstract/metadata only**, and six
+at **partial** depth with the sections recorded, six at **abstract/metadata only**, and six
 intended sources could **not be accessed**. Every source named below — including those named only
 to be dismissed — carries a read-depth field in § Sources.
 
@@ -253,7 +253,7 @@ the replay command.
 | M. Fickus, D. G. Mixon, *Tables of the existence of equiangular tight frames*, arXiv:1504.00253 | arXiv preprint | cache key `arXiv:1504.00253` | § 1 introduction; § 2 (real ETF ↔ strongly regular graph correspondence, Naimark complements); the conference-matrix subsection identifying symmetric conference matrices of order \(N\) with the sign Gram matrices of real \(\mathrm{ETF}(N/2,N)\) |
 | N. I. Gillespie, P. Ó Catháin, C. E. Praeger, *Construction of the outer automorphism of \(S_6\) via a complex Hadamard matrix*, arXiv:1805.01273 (DOI 10.1007/s11786-018-0382-0) | arXiv v1 preprint; the published version was NOT read | cache key `arXiv:1805.01273` | § 1 introduction and § 2 (the order-six complex Hadamard matrix over third roots of unity), plus a keyword sweep of the full text for conference/two-graph/switching/Segre/Pfaffian, all absent. **Named to be dismissed: it is an adjacent construction of the same outer automorphism from a different order-six matrix, and pre-empts nothing here.** |
 
-### Abstract / metadata only (5)
+### Abstract / metadata only (6 — five tabulated, one named after the table)
 
 | Source | Retrieved | From |
 |---|---|---|

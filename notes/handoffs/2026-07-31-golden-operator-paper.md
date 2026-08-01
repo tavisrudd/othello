@@ -312,6 +312,29 @@ The bare conic requires a selected geometric Clebsch parent.  Paper III may
 later supply an independent provenance theorem through C730.  No Clebsch
 manuscript edit is authorized by C727.
 
+## Literature position
+
+C755 audited the manuscript and its frozen sources against the conference-matrix, two-graph,
+equiangular-line, Segre/Igusa and anomaly literatures.  Five clean pre-emptions were found, two of
+them close to verbatim, and they land on the classical-geometry layer rather than the operator
+layer.  Howard--Millson--Snowden--Vakil own the centered-square Segre-to-Igusa map, the six mystic
+pentagons with their twelve-to-six five-cycle count, and the six complementary ten-set splits of the
+twenty triangles with the outer \(S_6\)-action; Gripaios--Nguyen own most of the Fano-component
+realization; Bussemaker--Mathon--Seidel own uniqueness of the order-six and order-ten conference
+two-graphs; Fickus--Mixon own the conference-matrix/real-ETF dictionary behind the order-ten shadow.
+
+What survives: the commutator-Pfaffian and middle-exterior presentations, the golden eigenspace
+compression with its MCM/small-resolution package, the adjugate identity, the balanced-cut
+maximum-determinant characterization of \(C^2=5I\), the synchronized pure-spinor product, the
+unmarked-reconstruction boundary, and the exact anomaly-cost clauses.
+
+The audit's ten recommendations are attribution surgery and two cheap strengthenings, not
+retractions.  MathSciNet is NOT COVERED, so every "no predecessor located" verdict keeps "to our
+knowledge" and never "first".  The Clifford/doily, \(E_8\)--Hamming, McKay, Sylvester-graph,
+Bose--Mesner, class-D and Kasteleyn seeds are **not audited** — they are sequel-only material absent
+from this manuscript, and they must be audited before any sequel.  Full report:
+`notes/2026-08-01-c755-golden-operator-literature-audit.md`.
+
 ## Active and queued tasks
 
 | task | state | next gate |
