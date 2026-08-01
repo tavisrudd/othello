@@ -69,7 +69,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `clebsch`
 
-- **C751 `[clebsch]` [IN PROGRESS]** — tighten the focused Paper I rigidity and golden-orientation proof spine, validate both release roots, and obtain a blind before/after referee verdict → `notes/clebsch-tasks/c751-paper-i-proof-spine-tightening.md`.
 - **C752 `[clebsch]` [IN PROGRESS; READ-ONLY AUDIT]** — audit claim-by-claim whether the pinned Paper I Lean surface follows the final human proof spine, freeze exact definition bridges and trust boundaries, and hand a reviewed implementation interface to C753 → `notes/clebsch-tasks/c752-paper-i-lean-spine-audit.md`.
 - **C753 `[clebsch]` [QUEUED AFTER C752]** — formalize the frozen same-mechanism Paper I proof spine, close every audited definition bridge or conditional interface, and replay the q11, paper, and standalone gates → `notes/clebsch-tasks/c753-paper-i-lean-spine-closure.md`.
 - **C321 `[clebsch]` [CONDITIONAL PAPER I SUBTASK; ONLY IF C320 TRIGGERS IT]** — replace any load-bearing Singular evidence retained by Paper I with independently specified exact certificates/checkers and canonical replay bundles; otherwise close it as not triggered → `notes/2026-07-20-c321-clebsch-singular-certificates.md`.

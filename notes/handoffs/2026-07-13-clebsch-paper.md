@@ -15,7 +15,7 @@
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C714 companion structuralization and trust closure complete; authoritative and standalone twenty-six-check releases green; external publication remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C751 referee-approved proof spine and synchronized releases green; C752 Lean-spine/prose audit active; external publication remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | C746 reduction and C747 structural proof integrated; authoritative thirteen-bundle release green; C748 independent-reader gate open and standalone still frozen | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | relative marked orientation bridge and global Stein algebra complete; ordinary/isolated gates and fresh context-free `GO` green; metadata closure remains | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -228,6 +228,9 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | unblocked; C714 synchronized release gates complete | with explicit publication authority, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
+| [C751 — Paper I proof-spine tightening](../clebsch-tasks/c751-paper-i-proof-spine-tightening.md) | complete; pentagon-first hybrid won the blind A/B 96--91, final referee GO, both release roots green | none |
+| [C752 — Paper I Lean spine audit](../clebsch-tasks/c752-paper-i-lean-spine-audit.md) | active read-only audit; q11 equality trap corresponds, line/degenerate-conic and paper-specific orientation spines do not yet | finish the transitive prose/definition audit and freeze dependency-sized C753 interfaces |
+| [C753 — Paper I Lean spine closure](../clebsch-tasks/c753-paper-i-lean-spine-closure.md) | queued after C752 | implement only the frozen same-mechanism interfaces and repair prose at owning sources |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; all-`q` human-proof gate reopened | expand or precisely source the projective--trade, Lucas-socle, and adjacent-wall steps, then obtain an independent cold-read `GO` |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |
 | [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | structural proof integrated and internally red-teamed; human proof 2/4 acceptance awaits the independent modular read owned by C748 | no known proof defect; obtain the independent modular verdict |
@@ -362,6 +365,20 @@ old five-chart exhaustion is an independent replay, all q11 terminals and the
 two Dye axioms are unchanged, and both authoritative and standalone
 twenty-one-page release surfaces pass all eighteen checks.  Full report:
 `notes/2026-07-31-c713-paper-i-proof-architecture.md`.
+C751 is complete.  Its first blind comparison rejected an overcompressed
+trace-dual revision 91--88; the resulting pentagon-first hybrid restored the
+full trace complement, proved orbital self-pairing and fibre incidence,
+expanded both golden-square cancellations, qualified Dye locally, and then
+won the second blind comparison 96--91.  The same referee returned final GO,
+and both authoritative and standalone twenty-six-check releases are green.
+C752 has started immediately afterward.  Its first audit finds exact
+same-mechanism correspondence for the q11 chord-moment/equality trap, but the
+formal line bound still assumes the affine equality-case exclusion, the gate
+does not bridge possibly degenerate conic containment, and Paper I's
+orientation spine remains human proof plus exact replay rather than a
+paper-specific Lean theorem.  Full reports:
+`notes/2026-07-31-c751-paper-i-proof-spine-tightening.md` and
+`notes/2026-07-31-c752-paper-i-lean-spine-audit.md`.
 C722 is complete with neither bounded clique branch promoted.  For q9 the
 Sylvester distance-two graph has spectrum
 (20^1,4^9,(-1)^{16},(-4)^{10}); Delsarte gives six, while equality forces

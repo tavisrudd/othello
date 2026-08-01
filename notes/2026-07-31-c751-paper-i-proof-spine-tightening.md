@@ -67,8 +67,11 @@ history as commits `66484219` and `283e3509`.
   tracked record (SHA-256 `cd4386...`);
 - final authoritative PDF, statement identity, and trust manifest refreshed
   in commit `d9d515cf` against q11 pin `42ab1a2`;
-- full authoritative release gate and final standalone synchronization:
-  running.
+- authoritative update and clean release gates: green against q11 pin
+  `42ab1a2`; release evidence commits `67e4c412` and `f0632386`;
+- standalone orientation replay, warning-free 21-page build, update release,
+  and final clean release: green; forward mirror commits `0b8a2ac`,
+  `f5de137`, and `0b1bf3b`.
 
 ## Mystery ledger
 

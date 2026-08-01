@@ -4,7 +4,9 @@
 
 **Opened:** 2026-07-31
 
-**Status:** active.
+**Status:** complete; final blind referee GO, synchronized release roots, and
+closeout are recorded in
+[`../2026-07-31-c751-paper-i-proof-spine-tightening.md`](../2026-07-31-c751-paper-i-proof-spine-tightening.md).
 
 ## Objective
 
