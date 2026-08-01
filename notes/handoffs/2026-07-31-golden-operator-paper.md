@@ -349,6 +349,7 @@ from this manuscript, and they must be audited before any sequel.  Full report:
 
 | task | state | next gate |
 |---|---|---|
+| [C757 — Golden determinantal cubic-wall nodes](../golden-tasks/c757-golden-determinantal-cubic-nodes.md) | in progress | certify the projective singular scheme and local node types, compare with the classical determinantal bound, then place the strengthening |
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
