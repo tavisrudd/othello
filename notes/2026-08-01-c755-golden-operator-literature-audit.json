@@ -1,0 +1,120 @@
+{
+  "schema": "c755-literature-audit/1",
+  "task": "C755",
+  "lane": "golden",
+  "date": "2026-08-01",
+  "report": "notes/2026-08-01-c755-golden-operator-literature-audit.md",
+  "audited": "papers/golden-operator/golden_operator.tex",
+  "cache_root": "/tmp/persistent/tavis/lit-search",
+  "sources": [
+    {"key": "10.4153/CJM-1967-091-8", "sha256": "68c0ef0b8fda6d44325382a047a873d2075ed2ad3cf9d0e6ec27ba7ace60b734", "bytes": 830115, "pages": 10, "read_depth": "full text", "title": "Orthogonal matrices with zero diagonal"},
+    {"key": "10.1016/j.jcta.2008.01.004", "sha256": "a875f0bccccc42db97703e9cadf52648a3f4e41b429abd0b05ef84bf6725043c", "bytes": 140939, "pages": 8, "read_depth": "full text", "title": "A description of the outer automorphism of S6, and the invariants of six points in projective space"},
+    {"key": "arXiv:0906.2437", "sha256": "dfbdb89c3061b5987f59602a55d5eb40c7c29eab18f9203c0e43c6f765d37508", "bytes": 116102, "pages": 6, "read_depth": "full text", "title": "The relations among invariants of points on the projective line"},
+    {"key": "10.1007/BFb0092256", "sha256": "ac9d300a4a0e5f46d4d4b36b66d5f620f616ffad3197ae93fad50b8ff224748a", "bytes": 7026018, "pages": 102, "read_depth": "partial", "title": "Tables of two-graphs"},
+    {"key": "arXiv:2607.09879", "sha256": "d9e4e7905e270e31a01c6c3a05e11388650cfd40579b2bf98d2bd9820d2493b3", "bytes": 500070, "pages": 39, "read_depth": "partial", "title": "Anomaly cancellation for two U(1) factors"},
+    {"key": "arXiv:2508.11583", "sha256": "8e9db79edfc38f338ff29875d7b7d5d671af0dfdd2892639b0eaed2f5d5e3b82", "bytes": 8568632, "pages": 32, "read_depth": "partial", "title": "Anomaly cancellation for a U(1) factor"},
+    {"key": "arXiv:1905.13729", "sha256": "90140fc4392c6ad0c64e17c91f1a20c7797208065e55e8f70fcb0c5b8901037f", "bytes": 130125, "pages": 5, "read_depth": "partial", "title": "General solution to the U(1) anomaly equations"},
+    {"key": "arXiv:1501.06432", "sha256": "98a898303e06a395bad95888a826e677a955d4b8fc88914c6ede54e31406601e", "bytes": 397020, "pages": 18, "read_depth": "partial", "title": "Corrado Segre and nodal cubic threefolds"},
+    {"key": "arXiv:1110.1126", "sha256": "0595df2ed7631ba366b1603aca9a924ef08cb93cdc84b906f2877b68c777e9be", "bytes": 165690, "pages": 14, "read_depth": "partial", "title": "The Segre cubic and Borcherds products"},
+    {"key": "arXiv:1504.00253", "sha256": "b9ea8a8669cacd224f736d3af2e3038f314068b91397866327a2feebb5b1896c", "bytes": 250959, "pages": 21, "read_depth": "partial", "title": "Tables of the existence of equiangular tight frames"},
+    {"key": "arXiv:1805.01273", "sha256": "f5e7ecefeb2f3528b0099644d60486314c4b045e7d2e79657f4ccd7c73ad86d0", "bytes": 120258, "pages": 7, "read_depth": "partial", "title": "Construction of the outer automorphism of S6 via a complex Hadamard matrix"},
+    {"key": "arXiv:1203.2943", "sha256": "69c7b479c12de24d2a71677a6e049b6ed577f359ce720478003219df0cf731ad", "bytes": 266136, "pages": 19, "read_depth": "abstract/metadata only", "title": "Pfaffians and shuffling relations for the spin module"},
+    {"key": "arXiv:2103.00759", "sha256": "4545853783cb75ce5e006b9d091e5df09d8592139039bbdd7d0d184f37ff35a0", "bytes": 447172, "pages": 42, "read_depth": "abstract/metadata only", "title": "Principal radical systems, Lefschetz properties and perfection of Specht ideals of two-rowed partitions"},
+    {"key": "arXiv:2409.08392", "sha256": "f8a72383325e8e6e9ab3113f5b9a0e2b7ea3cc5edf5d8e2f35ae2fe07b8557ab", "bytes": 237863, "pages": 22, "read_depth": "abstract/metadata only", "title": "Stable equivariant birationalities of cubic and degree 14 Fano threefolds"},
+    {"key": "arXiv:1303.6729", "sha256": "3a0b58ae7252720ae6beaa58b27b9a5db6d1bb3cf2312d23bbb504a39bc412a6", "bytes": 313080, "pages": 28, "read_depth": "abstract/metadata only", "title": "Matchgates revisited"},
+    {"key": "arXiv:1709.03686", "sha256": "efb3bc06ae889273b8183633cdc00556d299452c897e72bdd4700d1c15e5fdd9", "bytes": 696865, "pages": 16, "read_depth": "abstract/metadata only", "title": "Generalized permutohedra, scattering amplitudes, and a cubic three-fold"}
+  ],
+  "metadata_only_no_blob": [
+    {"doi": "10.1016/s0024-3795(96)00412-0", "read_depth": "abstract/metadata only", "metadata_from": "Crossref", "title": "Determinants of matrices of the conference type", "authors": ["Bussemaker", "Kaplansky", "McKay", "Seidel"], "container": "Linear Algebra and its Applications", "volume": "261", "page": "275-292", "year": 1997}
+  ],
+  "not_accessed": [
+    {"source": "B. Hunt, The Geometry of Some Special Arithmetic Quotients, LNM 1637, Ch. 3", "reason": "book unavailable in session"},
+    {"source": "J. J. Seidel, A survey of two-graphs", "identifier": "10.1016/b978-0-12-189420-7.50018-9", "reason": "not obtainable; substituted by 10.1007/BFb0092256 at partial depth"},
+    {"source": "van Lint & Seidel, Equilateral point sets in elliptic geometry (1966)", "reason": "not obtainable"},
+    {"source": "Lemmens & Seidel, Equiangular lines, J. Algebra 24 (1973)", "reason": "not obtainable; bibliographic detail from a search-engine summary and unverified"},
+    {"source": "Dolgachev, Classical Algebraic Geometry, sec. 9.4", "reason": "book unavailable in session"},
+    {"source": "D. Luna, Slices etales", "reason": "not resolved; the manuscript's Appendix A use is unverified against the source"}
+  ],
+  "coverage": {
+    "covered": ["arXiv API and full-text PDF", "OpenAlex API", "Crossref API", "Semantic Scholar Graph API", "zbMATH Open API", "general web search", "shared lit-search cache"],
+    "not_covered": [
+      {"service": "MathSciNet", "reason": "institutional authentication required", "consequence": "every 'no predecessor located' verdict remains gated; keep 'to our knowledge'"},
+      {"service": "Google Scholar", "reason": "blocks automated access"}
+    ],
+    "empty_vs_error": {
+      "zbmath": "HTTP 200 with a populated 'result' array on a match; HTTP 404 on zero matches (verified both directions: 'Seidel two-graph switching class' -> 200, 'zzqxvnonsensetoken' -> 404); network failure surfaces as URLError and did not occur",
+      "openalex_crossref_s2": "JSON payload parsed; a missing or unparseable payload would raise and was treated as an error, not as a zero"
+    }
+  },
+  "citation_counts_2026_08_01": [
+    {"seed_doi": "10.1016/j.jcta.2008.01.004", "openalex_id": "https://openalex.org/W2089103008", "openalex": 28, "crossref": 9, "semantic_scholar": 40, "largest_screened": "semantic_scholar"},
+    {"seed_doi": "10.4153/CJM-1967-091-8", "openalex_id": "https://openalex.org/W2042826512", "openalex": 213, "crossref": 117, "semantic_scholar": 146, "largest_screened": "openalex"}
+  ],
+  "screened_sets": [
+    {
+      "id": "set1-hmsv-forward",
+      "provenance": "Semantic Scholar Graph API: /graph/v1/paper/DOI:10.1016/j.jcta.2008.01.004/citations?fields=title,year,externalIds&limit=100",
+      "size_retrieved": 40,
+      "service_reported_total": 40,
+      "fields_screened": ["title", "year"],
+      "discriminator": "manual title read for any of {conference matrix, Hadamard, two-graph, equiangular, Segre cubic, Igusa, Pfaffian, determinantal, anomaly}",
+      "promoted": ["arXiv:1805.01273", "arXiv:1709.03686"],
+      "complete": true
+    },
+    {
+      "id": "set2-goethals-seidel-forward",
+      "provenance": "OpenAlex: /works?filter=cites:W2042826512&per-page=200&select=id,doi,title,publication_year",
+      "size_retrieved": 200,
+      "service_reported_total": 213,
+      "fields_screened": ["title"],
+      "discriminator_verbatim_regex": "segre|igusa|joubert|two-graph|two graph|equiangular|frame|pfaffian|determinant|frustrat|matching|dimer|spinor|anomal|switching|outer automorphism|cubic",
+      "discriminator_flags": "re.I",
+      "hits": 21,
+      "promoted": ["10.1007/BFb0092256", "10.1016/s0024-3795(96)00412-0", "10.1016/b978-0-12-189420-7.50018-9"],
+      "complete": false,
+      "incompleteness": "13 of 213 records not retrieved (single-page fetch); supports 'no predecessor located', not exhaustion"
+    }
+  ],
+  "arxiv_identifier_resolution": {
+    "endpoint": "https://export.arxiv.org/api/query?id_list=<ids>",
+    "note": "every bibliography entry in golden_operator.tex was resolved to a record with a matching title",
+    "ids": {
+      "2607.09879": "Anomaly cancellation for two $U(1)$ factors",
+      "2508.11583": "Anomaly cancellation for a $U(1)$ factor",
+      "1110.1126": "The Segre cubic and Borcherds products",
+      "0906.2437": "The relations among invariants of points on the projective line",
+      "2103.00759": "Principal Radical Systems, Lefschetz Properties and Perfection of Specht Ideals of Two-Rowed Partitions",
+      "1203.2943": "Pfaffians and Shuffling Relations for the Spin Module",
+      "1303.6729": "Matchgates Revisited",
+      "2409.08392": "Stable equivariant birationalities of cubic and degree 14 Fano threefolds",
+      "1905.13729": "General solution to the U(1) anomaly equations",
+      "1501.06432": "Corrado Segre and nodal cubic threefolds",
+      "1504.00253": "Tables of the existence of equiangular tight frames",
+      "1805.01273": "Construction of the outer automorphism of S6 via a complex Hadamard matrix",
+      "1709.03686": "Generalized Permutohedra, Scattering Amplitudes, and a Cubic Three-Fold"
+    }
+  },
+  "zbmath_queries": [
+    {"search_string": "conference matrix maximum determinant balanced cut", "http": 200, "documents": 1, "outcome": "one irrelevant conference-proceedings record"},
+    {"search_string": "Pfaffian commutator diagonal conference matrix", "http": 404, "documents": 0, "outcome": "zero documents"},
+    {"search_string": "Segre cubic Joubert conference matrix", "http": 404, "documents": 0, "outcome": "zero documents"},
+    {"search_string": "two-graph Segre cubic", "http": 404, "documents": 0, "outcome": "zero documents"},
+    {"search_string": "conference matrix equiangular tight frame Naimark", "http": 404, "documents": 0, "outcome": "zero documents"},
+    {"search_string": "regular two-graph six vertices pentagon switching class", "http": 404, "documents": 0, "outcome": "zero documents"},
+    {"search_string": "Seidel two-graph switching class", "http": 200, "documents": null, "outcome": "control query, confirms 200-on-match"},
+    {"search_string": "zzqxvnonsensetoken", "http": 404, "documents": 0, "outcome": "control query, confirms 404-on-zero"}
+  ],
+  "web_queries_verbatim": [
+    "van Lint Seidel equilateral point sets elliptic geometry equiangular lines conference matrix",
+    "real equiangular tight frame ETF(5,10) ten equiangular lines R^5 conference matrix Naimark complement",
+    "Segre cubic Igusa quartic projectively dual Gauss map fifteen planes contracted fifteen singular lines",
+    "Pfaffian of commutator diagonal matrix skew-symmetric \"Pf([D,C])\" triangle products sign matrix identity",
+    "conference matrix characterization maximal determinant 3x3 submatrices bipartite K_{3,3} frustration signed graph",
+    "\"Segre cubic\" Joubert coordinates Jacobian adjugate polar map Igusa quartic explicit identity",
+    "Sylow 5-subgroups of S6 bijection 36 = 6 x 6 outer automorphism F20 normalizer duads",
+    "\"Determinants of matrices of the conference type\" Linear Algebra Applications 1997",
+    "Segre cubic Joubert coordinates as Pfaffian of skew matrix \"x_i - x_j\" times conference matrix entries exterior power",
+    "Seidel matrix third exterior power principal minors triangle products two-graph invariant cubic form"
+  ],
+  "verdict_counts_by_row": {"pre_empted": 8, "partially_pre_empted": 10, "no_predecessor_located": 10, "not_audited": 1}
+}
