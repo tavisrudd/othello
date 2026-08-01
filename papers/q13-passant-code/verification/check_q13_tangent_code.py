@@ -255,9 +255,34 @@ def verify_distance() -> None:
             )
         )
 
+    def multiply(
+        first: tuple[int, int, int, int],
+        second: tuple[int, int, int, int],
+    ) -> tuple[int, int, int, int]:
+        a, b, c, d = first
+        e, f, g, h = second
+        return canonical(
+            (
+                (a * e + b * g) % q,
+                (a * f + b * h) % q,
+                (c * e + d * g) % q,
+                (c * f + d * h) % q,
+            )
+        )
+
+    def projective_order(matrix: tuple[int, int, int, int]) -> int:
+        identity = (1, 0, 0, 1)
+        power = identity
+        for order in range(1, 25):
+            power = multiply(power, matrix)
+            if power == identity:
+                return order
+        raise AssertionError(matrix)
+
     covered = set()
     all_words = set()
     stabilizer_sizes = []
+    stabilizer_order_profiles = []
     orbit_span_dimensions = []
     orbit_gram_dimensions = []
     orbit_gram_rows = []
@@ -266,14 +291,15 @@ def verify_distance() -> None:
             frozenset(internal.index(act(matrix, point)) for point in representative)
             for matrix in matrices
         }
-        stabilizer_sizes.append(
-            sum(
-                {
-                    act(matrix, point) for point in representative
-                }
-                == set(representative)
-                for matrix in matrices
-            )
+        stabilizer = [
+            matrix
+            for matrix in matrices
+            if {act(matrix, point) for point in representative}
+            == set(representative)
+        ]
+        stabilizer_sizes.append(len(stabilizer))
+        stabilizer_order_profiles.append(
+            Counter(projective_order(matrix) for matrix in stabilizer)
         )
         assert len(orbit) == 91
         orbit_span_dimensions.append(
@@ -301,6 +327,12 @@ def verify_distance() -> None:
         assert covered.isdisjoint(base_slice)
         covered |= base_slice
     assert stabilizer_sizes == [24, 24, 24, 24]
+    assert stabilizer_order_profiles == [
+        Counter({2: 9, 3: 8, 4: 6, 1: 1}),
+        Counter({2: 13, 12: 4, 3: 2, 4: 2, 6: 2, 1: 1}),
+        Counter({2: 13, 12: 4, 3: 2, 4: 2, 6: 2, 1: 1}),
+        Counter({2: 13, 12: 4, 3: 2, 4: 2, 6: 2, 1: 1}),
+    ]
     assert orbit_span_dimensions == [36, 36, 36, 36]
     assert orbit_gram_dimensions == [36, 36, 36, 36]
     assert covered == solutions

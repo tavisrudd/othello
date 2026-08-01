@@ -9,6 +9,7 @@
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 
+
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -20,7 +21,9 @@
 \newcommand{\F}{\mathbb F}
 \newcommand{\PG}{\operatorname{PG}}
 \newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\cC}{\mathcal C}
+\newcommand{\supp}{\operatorname{supp}}
 
 \title{A binary $[78,36,12]$ code from the passant lines\\
 of a conic over $\F_{13}$}
@@ -54,7 +57,25 @@ spanning and reconstruction.
 \noindent\textbf{Keywords.} binary incidence code; finite conic; passant
 line; minimum word; association scheme; reconstruction.
 
-\section{The passant incidence code}
+\section{Introduction and statement}
+
+Incidence codes often retain less geometry than the incidence structures
+that define them.  Row operations erase the choice of parity checks, and a
+minimum-distance computation need not reveal why the first codewords occur.
+Here the minimum words recover both the parity checks and the association
+scheme on the coordinates.
+
+The code belongs to the fixed-conic LDPC family introduced by
+Droms--Mellinger--Meyer~\cite{DromsMellingerMeyer2006}.  Their general bounds,
+as recorded in the later comparison table of Ma--Liu--Tian
+\cite[Table~1]{MaLiuTian2024}, specialize here to \(8\le d\le12\).
+Madison and Wu proved the general nullity formula
+\((q-1)^2/4\)~\cite[Corollary~6.3]{MadisonWu2012}.  Hollmann and Xiang
+constructed the elliptic association scheme afforded by the same conic
+action~\cite[Sections~3--5]{HollmannXiang2006}.  We determine the upper
+endpoint of the distance interval at \(q=13\), classify its minimum words,
+and recover the incidence and relation structures from their unlabeled
+support hypergraph.
 
 Fix a nonsingular conic \(\cC\subset\PG(2,13)\).  A line is
 \emph{passant} when it is disjoint from \(\cC(\F_{13})\).  Conic polarity
@@ -67,6 +88,12 @@ The coordinate set is the set of internal points.  Automorphisms below are
 coordinate permutations preserving the indicated code or minimum-support
 system.
 
+Let
+\[
+ \mathcal H=\{\supp(c):c\in K,\ \operatorname{wt}(c)=12\}
+\]
+be the minimum-support hypergraph on the unlabeled coordinate set of \(K\).
+
 \begin{theorem}[Minimum-layer reconstruction]
 \label{thm:main}
 The code \(K\) has parameters \([78,36,12]_2\) and exactly \(364\)
@@ -75,49 +102,254 @@ size \(91\): one has stabilizer isomorphic to \(S_4\), and three have
 dihedral stabilizer of order \(24\).  Every one of the four orbits spans
 \(K\).
 
-Pair and triple concurrence in the minimum supports reconstruct the six
-relations of the elliptic association scheme on the internal points.
-Among the passant seven-cliques, the \(78\) with zero triple concurrence
-are exactly the rows of \(M\).  Consequently the minimum-support system
-reconstructs \(M\) up to row order, and its coordinate-permutation
-automorphism group is exactly \(\PGL(2,13)\).
+From the abstract hypergraph \(\mathcal H\), pair and triple concurrence
+reconstruct the six relations of the elliptic association scheme on the
+coordinate set.  Among the passant seven-cliques, the \(78\) with zero
+triple concurrence are exactly the supports of the rows of \(M\).
+Consequently \(\mathcal H\) reconstructs \(M\) up to independent coordinate
+and row permutation, and
+\[
+ \Aut(K)=\Aut(\mathcal H)=\PGL(2,13)
+\]
+in its symmetric-square action on the \(78\) internal points.
 \end{theorem}
+
+Reconstruction here is a permutation statement.  It does not choose an
+equation for the conic, label the projective points, or order the parity
+checks.  The proof has three finite leaves: a five-row clique closure in
+weight eight, two syndrome-disjointness certificates in weight ten, and an
+exact orbit/concurrence replay for the minimum layer.  The reductions to
+those leaves and the association-algebra argument are mathematical proofs in
+the text.
 
 \section{Distance twelve}
 
-Row parity gives the elementary lower bound eight.  A hypothetical
-weight-eight word would be an eight-arc saturating every passant pencil.
-Segre's tangent identity reduces it to a seven-clique in a cyclic
-\(42\)-vertex compatibility graph; a five-row closure proves that graph has
-clique number five.  In weight ten, pencil parity leaves exactly two local
-profiles.  Separate syndrome-disjointness certificates exhaust both profiles,
-and an independent dynamic program checks the same empty intersections.
-An explicit dihedral support supplies a word of weight twelve.
+We use the model \(\cC:XZ-Y^2=0\).  Every row and column of \(M\) has
+weight seven, and conic polarity identifies the two index sets.  The
+Madison--Wu formula gives \(\dim K=36\); direct binary elimination is an
+independent check of rank \(42\).
+
+Summing all row equations gives the all-one functional, so every word of
+\(K\) has even weight.  If a nonzero word contains an internal point \(P\),
+each of the seven passants through \(P\) contains a second support point.
+Those seven points are distinct.  Thus every nonzero word has weight at
+least eight.
+
+\subsection{The tangent obstruction in weight eight}
+
+Suppose that a word has weight eight.  The preceding parity argument forces
+its support to be an eight-arc: every join of two support points is passant,
+and every passant pencil at a support point is saturated.  The seven
+remaining lines through each support point are therefore both the
+combinatorial tangents to the arc and the conic secants through that point.
+
+For an internal point \(P\), put
+\[
+ T_P(X)=\prod_{\substack{\ell\ni P\\
+                    \ell\text{ secant to }\cC}}\ell(X).
+\]
+For a pairwise-passant triple define
+\[
+ h(P,Q,R)=
+ \frac{T_P(Q)T_Q(R)T_R(P)}
+      {T_P(R)T_R(Q)T_Q(P)}.
+\]
+Segre's lemma of tangents in the coordinate-free form of
+Ball--Lavrauw~\cite[Lemma~27]{BallLavrauw2019} gives
+\(h(P,Q,R)=1\) for every triple in the hypothetical support.  Fix
+\(P=(1:0:2)\).  Its other seven points would form a clique in the graph on
+the \(42\) passant-join neighbors of \(P\), where \(Q\) and \(R\) are
+adjacent when \(QR\) is passant and \(h(P,Q,R)=1\).
+
+An order-\(14\) element of the stabilizer of \(P\) splits the vertices into
+three cyclic orbits \(A_i,B_i,C_i\), indexed by \(\mathbf Z/14\).  Direct
+substitution in the product above gives
+\[
+\begin{array}{c|c}
+\text{orbit pair}&j-i\pmod {14}\\ \hline
+AA&4,6,8,10\\
+AB&6,7,11,12\\
+AC&1,3\\
+BB&6,8\\
+BC&3,5,6,8,9,11\\
+CC&2,4,10,12.
+\end{array}
+\]
+Up to simultaneous translation, every four-clique is represented by one
+of the following five rows; the right column gives its unique extension:
+\[
+\begin{array}{c|c}
+\text{four-clique}&\text{unique extension}\\ \hline
+A_0,B_6,B_{12},C_1&C_3\\
+A_0,B_6,B_{12},C_3&C_1\\
+A_0,B_6,C_1,C_3&B_{12}\\
+A_0,B_{12},C_1,C_3&B_6\\
+B_0,B_6,C_9,C_{11}&A_8.
+\end{array}
+\]
+They close to fourteen translates of one five-clique, and none extends.
+The local clique number is five, so a seven-clique cannot occur.  This
+excludes weight eight.
+
+\subsection{The two weight-ten profiles}
+
+Fix one point in a hypothetical weight-ten support.  Let \(s\) of the other
+nine points be joined to it by secants.  The remaining \(9-s\) points occur
+in positive odd numbers in its seven passant fibres.  Hence \(s\) is even
+and \(9-s\ge7\), so \(s=0\) or \(s=2\).  The profiles are
+\[
+ (3,1,1,1,1,1,1;0),\qquad (1,1,1,1,1,1,1;2),
+\]
+where the last entry is the number of secant neighbors.
+
+Write \(m_Q\) for the \(78\)-bit incidence column at \(Q\).  For the first
+profile and each choice of exceptional fibre, the certificate forms two
+canonically sorted partial-XOR sets of sizes \(216\) and \(4320\).  For the
+second profile the sizes are \(216\) and \(771024\).  In every case the two
+sets are disjoint.  The raw domains have sizes
+\[
+ 7\binom63 6^6=6{,}531{,}840,
+ \qquad
+ 6^7\binom{35}{2}=166{,}561{,}920.
+\]
+Thus the split covers every support in each profile and proves that no
+candidate has zero syndrome.  An independent dynamic program reconstructs
+the conic and incidence columns, builds the full-fibre XOR sets with a
+different partition, and obtains the same two empty intersections.
+
+Finally, the twelve internal points
+\[
+\begin{gathered}
+(1:0:2),(1:3:2),(1:4:5),(1:1:8),
+(1:4:8),(1:1:7),\\
+(1:7:12),(1:3:3),(1:9:11),(1:10:11),
+(1:0:5),(1:8:7)
+\end{gathered}
+\]
+have zero syndrome.  Their stabilizer is dihedral of order \(24\).
+Therefore \(d(K)=12\).
 
 \section{Minimum words and the elliptic scheme}
 
-Exact orbit representatives generate the four minimum-word orbits and their
-\(364\) supports.  Pair concurrence distinguishes passant from secant joins,
-while triple-concurrence profiles distinguish all six elliptic relations.
-This reduces incidence reconstruction to the intrinsic selection of the
-\(78\) zero-triple-concurrence seven-cliques.
+The exact replay first fixes one support point.  Pencil parity leaves
+\(s=0,2,4\) secant neighbors, and a meet-in-the-middle enumeration of all
+three profile families finds exactly \(56\) weight-twelve words through the
+fixed point.  The four proposed projective orbits have disjoint fixed-point
+slices of sizes \(14\), and those slices equal the 56-word exhaustive list.
+Transitivity, or equivalently the count \(56\cdot78/12=364\), proves global
+exhaustion.
+
+The same replay generates each orbit from a projective representative and
+checks every support against \(M\).  The stabilizers have order \(24\), so
+each orbit has size \(2184/24=91\).  Their element-order profiles identify
+one stabilizer with \(S_4\) and the other three with dihedral groups of order
+\(24\).
+
+For a pair or triple of coordinates, its concurrence is the number of the
+364 minimum supports containing it.  Pair concurrences are \(7,9,12\) when
+the joining line is passant and \(6,8\) when it is secant.  The full triple-
+concurrence histograms are distinct on the six \(\PGL(2,13)\)-orbitals.
+Hence these intrinsic counts recover all six colors of the elliptic
+association scheme.
+
+After recovering the passant color, form its seven-cliques.  Exactly \(78\)
+have zero triple concurrence, and direct incidence comparison identifies
+them with the supports of the \(78\) rows of \(M\).  Both tests use only the
+minimum-support hypergraph after its coordinate set is supplied.  They
+therefore define a reconstruction map independent of the original
+projective labels.
 
 \section{Spanning and automorphisms}
 
-The binary reduction of the elliptic association algebra supplies a short
-spanning argument: one relation matrix maps into \(K\) and is injective on
-\(K\), while the four orbit Gram matrices are powers of that relation.
-For automorphisms, three anchors form a regular \(\PGL(2,13)\)-orbit and a
-fourth anchor separates all \(78\) points by its relation signature.
+For internal points \(P=(x_P:y_P:z_P)\) and \(Q\), set
+\[
+ \Delta(P)=y_P^2-x_Pz_P,\qquad
+ \beta(P,Q)=2y_Py_Q-x_Pz_Q-z_Px_Q,
+\]
+and
+\[
+ \rho(P,Q)=\frac{\beta(P,Q)^2}{\Delta(P)\Delta(Q)}.
+\]
+On distinct internal points, \(\rho\) takes the six values
+\(0,1,3,9,10,12\).  Its level relations are the elliptic scheme; write
+\(A_r\) for their adjacency matrices.  Polarity identifies \(A_0\) with
+\(M\), up to row order.
+
+The needed part of the integral intersection table reduces modulo two to
+\begin{equation}
+\label{eq:scheme}
+\begin{split}
+ A_0^2&=I+A_9+A_{10}+A_{12},\\
+ A_0A_r&=0\quad(r=9,10,12),\\
+ A_9^2&=A_{10},\qquad A_{10}^2=A_{12},\qquad A_{12}^2=A_9.
+\end{split}
+\end{equation}
+These are parity reductions of intersection numbers, checked by fixing one
+point and substituting one representative of each relation.
+
+Put \(B=A_9\).  Since \(A_0B=0\), the image of \(B\) lies in \(K\).  If
+\(x\in K\) and \(Bx=0\), then \eqref{eq:scheme} gives
+\[
+ 0=A_0^2x=(I+B+B^2+B^4)x=x.
+\]
+Thus \(B\) is injective on the 36-dimensional space \(K\), so
+\(\operatorname{im}B=K\), and \(B,B^2,B^4\) all have rank 36.  If \(N_i\)
+is the 91-by-78 support matrix of the \(i\)-th minimum-word orbit, direct
+pair counting in one representative gives
+\[
+ (N_1^{\mathsf T}N_1,N_2^{\mathsf T}N_2,
+   N_3^{\mathsf T}N_3,N_4^{\mathsf T}N_4)
+ =(A_9,A_9,A_{12},A_{10}).
+\]
+Every \(N_i\) therefore has rank at least 36.  Its rows lie in \(K\), so
+each orbit spans \(K\).
+
+It remains to determine the scheme automorphisms.  Use the four anchors
+\[
+ P_0=(1:0:2),\quad P_1=(1:1:7),\quad
+ P_2=(1:0:7),\quad P_3=(1:1:3).
+\]
+The first three have pair-relation pattern \((10,3,9)\).  There are
+\(78\cdot14\cdot2=2184\) ordered triples with this pattern: \(A_{10}\)
+has valency 14 and \(p_{3,9}^{10}=2\).  Substitution in the symmetric-square
+action shows that the stabilizer of \((P_0,P_1,P_2)\) in
+\(\PGL(2,13)\) is trivial.  Since the group also has order 2184, it acts
+simply transitively on these triples.
+
+For a fixed triple, \(P_3\) is the unique point with relation signature
+\((3,1,9)\).  The four values
+\[
+ \bigl(\rho(P,P_0),\rho(P,P_1),\rho(P,P_2),\rho(P,P_3)\bigr),
+\]
+with equality to an anchor recorded on the diagonal, distinguish all 78
+points.  Consequently a scheme automorphism can be composed with a unique
+element of \(\PGL(2,13)\) to fix the first three anchors; it then fixes the
+fourth and every point.  Thus the reconstructed scheme has automorphism
+group \(\PGL(2,13)\).
+
+An automorphism of \(K\) permutes its minimum supports.  Conversely an
+automorphism of \(\mathcal H\) preserves \(K\), because any one of the four
+minimum orbits spans it.  The two coordinate-permutation groups therefore
+coincide.  This completes the proof of Theorem~\ref{thm:main}.
 
 \section{Formalization and exact evidence}
 
-The formal development separates general conic/passant-code definitions
-from the finite \(q=13\) instance.  Structural reductions, coverage of the
-two weight-ten profiles, orbit exhaustion, and the reconstruction interfaces
-are assigned explicit terminal theorems.  The paper's verification manifest
-distinguishes human arguments, kernel-checked results, compact certificates,
-and independent trusted replays.
+The public evidence directory contains four paper-owned objects.  A profile
+generator checks the canonical weight-ten certificate.  An independent
+dynamic program reconstructs the incidence matrix and repeats both
+exclusions.  The main exact replay checks the clique closure, rank, minimum
+layer, concurrence reconstruction, spanning identities, and automorphism
+anchors.  The aggregate entry point \nolinkurl{verify_evidence.py} first
+checks all recorded byte counts and SHA-256 hashes and then runs the three
+replays.  Its adjacent README gives the individual filenames and commands.
+
+The trusted boundary is explicit.  The parity and pencil-profile reductions,
+the tangent-product implication, the association-algebra proof, and the
+anchor argument are human proofs.  The two large weight-ten leaves and the
+364-word exhaustion are exact trusted executions with independent checks.
+The planned Lean development will formalize the structural reductions and
+coverage maps, but the present manuscript does not describe the complete
+theorem as Lean-proved.
 
 \section{Conclusion}
 
@@ -126,6 +358,45 @@ recovers the finite geometry that defined the parity checks.  The result
 therefore gives a concrete reconstruction theorem for a binary incidence
 code, with the irreducibly finite exclusions isolated from the association-
 algebra mechanism that explains spanning and symmetry.
+
+\begin{thebibliography}{9}
+
+\bibitem{BallLavrauw2019}
+S.~Ball and M.~Lavrauw,
+\newblock Arcs in finite projective spaces,
+\newblock \emph{EMS Surveys in Mathematical Sciences} \textbf{6} (2019),
+133--172.
+\newblock arXiv:1908.10772.
+
+\bibitem{DromsMellingerMeyer2006}
+S.~V.~Droms, K.~E.~Mellinger, and C.~Meyer,
+\newblock LDPC codes generated by conics in the classical projective plane,
+\newblock \emph{Designs, Codes and Cryptography} \textbf{40} (2006),
+343--356.
+\newblock doi:10.1007/s10623-006-0022-6.
+
+\bibitem{HollmannXiang2006}
+H.~D.~L.~Hollmann and Q.~Xiang,
+\newblock Association schemes from the action of
+\(\PGL(2,q)\) fixing a nonsingular conic in \(\PG(2,q)\),
+\newblock \emph{Journal of Algebraic Combinatorics} \textbf{24} (2006),
+157--193.
+\newblock doi:10.1007/s10801-006-0005-8; arXiv:math/0503573.
+
+\bibitem{MadisonWu2012}
+A.~L.~Madison and J.~Wu,
+\newblock On binary codes from conics in \(\PG(2,q)\),
+\newblock \emph{European Journal of Combinatorics} \textbf{33} (2012),
+33--48.
+\newblock doi:10.1016/j.ejc.2011.08.001; arXiv:1104.0324.
+
+\bibitem{MaLiuTian2024}
+L.~Ma, S.~Liu, and Z.~Tian,
+\newblock The binary codes generated from quadrics in projective spaces,
+\newblock \emph{AIMS Mathematics} \textbf{9} (2024), 29333--29345.
+\newblock doi:10.3934/math.20241421.
+
+\end{thebibliography}
 
 \section*{AI assistance disclosure}
 

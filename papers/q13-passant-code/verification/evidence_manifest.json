@@ -10,9 +10,9 @@
       "source_path": "check_q13_tangent_code.py",
       "source_bytes": 24263,
       "source_sha256": "c843d9e6dce7601620f52aeb1f223a8d98bd7dd0fc9eba208b99c3143973a198",
-      "bytes": 24268,
-      "sha256": "c8c71bc5412731b29ad2d9d21a1efd5ad8dcfbe43e3078febe382adbdb5624e7",
-      "role": "primary exact replay for distance, minimum words, reconstruction, spanning, and automorphisms"
+      "bytes": 25380,
+      "sha256": "a60e5ac80216ecdb3b4cdf05ba65a5137afef318d778246fcd33b02df5fd562c",
+      "role": "primary exact replay for distance, minimum words, stabilizer types, reconstruction, spanning, and automorphisms"
     },
     {
       "paper_iv_path": "verification/generate_weight_ten_profiles.py",
