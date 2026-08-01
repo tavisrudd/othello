@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued and unblocked by C744
+**Status:** in progress; existing formal closure audited, structural modules next
 
 ## Objective
 
