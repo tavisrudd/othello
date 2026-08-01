@@ -1,0 +1,64 @@
+{
+  "group_order": 720,
+  "multiplicities": {
+    "Hom_S6(Sym^d(axis_augmentation),signed_outer_augmentation)": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 2,
+      "6": 2
+    },
+    "Hom_S6(Sym^d(signed_outer_augmentation),outer_augmentation)": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 3,
+      "5": 0,
+      "6": 6
+    },
+    "Hom_S6(Sym^d(signed_outer_augmentation),sign)": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 0,
+      "5": 2,
+      "6": 0
+    },
+    "Hom_S6(Sym^d(signed_outer_augmentation),signed_outer_augmentation)": {
+      "0": 0,
+      "1": 1,
+      "2": 0,
+      "3": 2,
+      "4": 0,
+      "5": 5,
+      "6": 0
+    },
+    "Hom_S6(Sym^d(signed_outer_augmentation),trivial)": {
+      "0": 1,
+      "1": 0,
+      "2": 1,
+      "3": 0,
+      "4": 2,
+      "5": 0,
+      "6": 4
+    }
+  },
+  "outer_class_map": {
+    "1.1.1.1.1.1": "1.1.1.1.1.1",
+    "2.1.1.1.1": "2.2.2",
+    "2.2.1.1": "2.2.1.1",
+    "2.2.2": "2.1.1.1.1",
+    "3.1.1.1": "3.3",
+    "3.2.1": "6",
+    "3.3": "3.1.1.1",
+    "4.1.1": "4.1.1",
+    "4.2": "4.2",
+    "5.1": "5.1",
+    "6": "3.2.1"
+  },
+  "schema": "c739-representation-audit-v1"
+}

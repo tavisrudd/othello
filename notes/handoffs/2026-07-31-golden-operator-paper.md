@@ -127,7 +127,7 @@ particular:
   vertex, to a symmetric order-six conference matrix, while the converse
   border forces determinant \(48\).
   Thus the 36 Sylvester vertices carry local \(10\to6\) retractions; their
-  marking quotient to the six Golden sisters remains open.
+  marking quotient to the six Golden sisters is closed by C739 below.
 - C728 constructs the six Majorana principal-Pfaffian systems intrinsically
   as an outer-equivariant product of Cartan big cells.  The synchronized
   tangent map and top cubic covariant each have multiplicity one; the exact
@@ -135,6 +135,21 @@ particular:
   unstable base scheme and ten \(3+3\) nodal images.  Wick identities govern
   each factor, while golden synchronization and the six-point quotient
   produce the Segre equation.
+- C739's research programme is complete by explicit user override of its
+  sequencing gate; the manuscript remains untouched.  The fully marked
+  synchronized lift is rigid because the tangent, cubic, and polar arrows are
+  multiplicity-one maps in the Golden tensor diagram.  The
+  middle-exterior/commutator-Pfaffian identity is universal in every even
+  order, while the cubic degree, outer automorphism, and nontrivial golden
+  (3+3) splitting are order-six-specific.  The proposed master degeneracy
+  scheme fails cleanly: pair collisions, the nonreduced Jacobian rank-drop
+  scheme, and the reduced simultaneous-Pfaffian base form a strict
+  (15/20/15)-component filtration, with the Jacobian nilpotent defect at the
+  ten (3+3) points.  Finally
+  (S_6/F_{20}\cong X\times\mathcal T), so the 36 extremal order-ten cuts
+  have a canonical unmarked quotient back to the six Golden sisters.  The
+  exact report and evidence bundle are
+  `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 - C715 is complete.  The Golden amplitude map is the classical
   \((\mathbf P^1)^6/\!/\operatorname{PGL}_2\) quotient with an explicit
   rational inverse in the frozen path marking.  Its pair-collision divisor
@@ -223,15 +238,16 @@ manuscript edit is authorized by C727.
 | task | state | next gate |
 |---|---|---|
 | [C735 — manuscript consolidation](../golden-tasks/c735-golden-manuscript-consolidation.md) | ready; post-C716 consolidation pivot | freeze the placement delta and proof ledger, then complete the operator-first central draft before new exploration |
-| [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | queued after C735 | classify or obstruct the universal Golden lift, then test recovery, degeneracy, the (6\to10\to36\to6) cycle, and bounded transfer uses |
+| [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement remains after C735 | after C735, place the marked tensor-diagram theorem, degeneracy filtration, and canonical (36\to6) return without reopening research |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
 1. C735 manuscript consolidation and proof architecture.
-2. C739 cubic lift rigidity and transfer predictions, after C735 freezes the
-   paper architecture; keep it research-first until its placement gate.
+2. After C735 freezes the paper architecture, apply C739's already completed
+   placement recommendation; do not reopen its research programme merely to
+   perform manuscript consolidation.
 3. Adopt C717 only through C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 4. Defer C718 and C719 unless C735 identifies a precise theorem-level need.

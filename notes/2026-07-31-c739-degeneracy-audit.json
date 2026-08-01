@@ -1,0 +1,21 @@
+{
+  "rank_drop": {
+    "ideal": "4-by-4 minors of the 6-by-5 Jacobian",
+    "is_reduced": false,
+    "nilpotent_defect_support_components": 10,
+    "nilpotent_defect_support_type": "projective points",
+    "projective_degree": 20,
+    "radical_component_type": "projective planes",
+    "radical_components": 20
+  },
+  "schema": "c739-degeneracy-audit-v1",
+  "simultaneous_pfaffian_base": {
+    "component_type": "projective lines",
+    "components": 15,
+    "is_reduced": true,
+    "projective_degree": 15
+  },
+  "singular_version": "4.4.1",
+  "top_coordinates": "Pf([D_x,C_T])=4*Z_T",
+  "translation_gauge": "x5=0"
+}

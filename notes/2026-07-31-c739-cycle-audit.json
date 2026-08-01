@@ -1,0 +1,26 @@
+{
+  "axis_projection_fibre_sizes": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+  ],
+  "group_order": 720,
+  "incidence_is_full_6_by_6_product": true,
+  "incidence_pairs": 36,
+  "normalizer_order": 20,
+  "outer_projection_fibre_sizes": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+  ],
+  "schema": "c739-cycle-audit-v1",
+  "sylow_5_subgroups": 36,
+  "synthematic_totals": 6,
+  "synthemes": 15
+}

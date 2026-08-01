@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C735
+**Status:** research verdict complete by explicit sequencing override;
+manuscript placement remains after C735
 
 **Originating Codex session:** `019fbb23-ea9f-74d0-85ca-32ca2a9f52e6`
 

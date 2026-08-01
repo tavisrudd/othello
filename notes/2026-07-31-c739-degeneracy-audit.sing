@@ -1,0 +1,121 @@
+// Exact scheme audit for the C739 master degeneracy dictionary.
+// Translation gauge x5=0; fT=Pf([D_x,C_T])=4 Z_T(x).
+
+ring r=0,(x0,x1,x2,x3,x4),dp;
+LIB "primdec.lib";
+
+poly f0=-4*x2*x3*x4-4*x1*x3*x4+4*x1*x2*x4+4*x1*x2*x3+4*x0*x3*x4-4*x0*x2*x4+4*x0*x2*x3+4*x0*x1*x4-4*x0*x1*x3-4*x0*x1*x2;
+poly f1=4*x2*x3*x4-4*x1*x3*x4+4*x1*x2*x4-4*x1*x2*x3+4*x0*x3*x4-4*x0*x2*x4-4*x0*x2*x3-4*x0*x1*x4+4*x0*x1*x3+4*x0*x1*x2;
+poly f2=4*x2*x3*x4+4*x1*x3*x4-4*x1*x2*x4-4*x1*x2*x3-4*x0*x3*x4-4*x0*x2*x4+4*x0*x2*x3+4*x0*x1*x4-4*x0*x1*x3+4*x0*x1*x2;
+poly f3=-4*x2*x3*x4+4*x1*x3*x4+4*x1*x2*x4-4*x1*x2*x3-4*x0*x3*x4+4*x0*x2*x4+4*x0*x2*x3-4*x0*x1*x4+4*x0*x1*x3-4*x0*x1*x2;
+poly f4=4*x2*x3*x4-4*x1*x3*x4-4*x1*x2*x4+4*x1*x2*x3-4*x0*x3*x4+4*x0*x2*x4-4*x0*x2*x3+4*x0*x1*x4+4*x0*x1*x3-4*x0*x1*x2;
+poly f5=-4*x2*x3*x4+4*x1*x3*x4-4*x1*x2*x4+4*x1*x2*x3+4*x0*x3*x4+4*x0*x2*x4-4*x0*x2*x3-4*x0*x1*x4-4*x0*x1*x3+4*x0*x1*x2;
+
+ideal top=f0,f1,f2,f3,f4,f5;
+matrix derivative=jacob(top);
+ideal rank_drop=minor(derivative,4);
+ideal rank_drop_std=std(rank_drop);
+ideal rank_drop_radical=radical(rank_drop);
+ideal rank_drop_radical_std=std(rank_drop_radical);
+ideal rank_drop_mod_radical=simplify(reduce(rank_drop_std,rank_drop_radical_std),2);
+ideal radical_mod_rank_drop=simplify(reduce(rank_drop_radical_std,rank_drop_std),2);
+ideal defect_ann=quotient(rank_drop_std,rank_drop_radical_std);
+ideal defect_support=radical(defect_ann);
+ideal defect_support_std=std(defect_support);
+list defect_components=minAssGTZ(defect_support);
+ideal base_std=std(top);
+ideal base_radical=radical(top);
+ideal base_radical_std=std(base_radical);
+ideal base_mod_radical=simplify(reduce(base_std,base_radical_std),2);
+ideal radical_mod_base=simplify(reduce(base_radical_std,base_std),2);
+list base_components=minAssGTZ(base_radical);
+ideal defect_mod_base=simplify(reduce(defect_support_std,base_std),2);
+ideal base_mod_defect=simplify(reduce(base_std,defect_support_std),2);
+list components=minAssGTZ(rank_drop_radical);
+ideal component_std;
+ideal component_intersection=components[1];
+for (int j=2;j<=size(components);j++)
+{
+  component_intersection=intersect(component_intersection,components[j]);
+}
+ideal component_intersection_std=std(component_intersection);
+ideal rank_mod_components=simplify(reduce(rank_drop_radical_std,component_intersection_std),2);
+ideal components_mod_rank=simplify(reduce(component_intersection_std,rank_drop_radical_std),2);
+int duplicate_pairs=0;
+int b;
+ideal left_std;
+ideal right_std;
+ideal left_mod_right;
+ideal right_mod_left;
+for (int a=1;a<=size(components);a++)
+{
+  left_std=std(components[a]);
+  for (b=a+1;b<=size(components);b++)
+  {
+    right_std=std(components[b]);
+    left_mod_right=simplify(reduce(left_std,right_std),2);
+    right_mod_left=simplify(reduce(right_std,left_std),2);
+    if (size(left_mod_right)==0 && size(right_mod_left)==0)
+    {
+      duplicate_pairs++;
+    }
+  }
+}
+
+if (dim(rank_drop_std)!=3 || mult(rank_drop_std)!=20)
+{
+  ERROR("unexpected rank-drop dimension or degree");
+}
+if (size(rank_drop_mod_radical)==0 && size(radical_mod_rank_drop)==0)
+{
+  ERROR("rank-drop scheme unexpectedly reduced");
+}
+if (size(components)!=20 || mult(rank_drop_radical_std)!=20 || duplicate_pairs!=0)
+{
+  ERROR("unexpected reduced rank-drop decomposition");
+}
+if (size(rank_mod_components)!=0 || size(components_mod_rank)!=0)
+{
+  ERROR("minimal components do not reconstruct the radical");
+}
+for (int k=1;k<=size(components);k++)
+{
+  component_std=std(components[k]);
+  if (dim(component_std)!=3 || mult(component_std)!=1 || size(component_std)!=2)
+  {
+    ERROR("a rank-drop component is not a codimension-two linear space");
+  }
+}
+if (dim(defect_support_std)!=1 || mult(defect_support_std)!=10
+    || size(defect_components)!=10)
+{
+  ERROR("unexpected nonreduced-defect support");
+}
+for (k=1;k<=size(defect_components);k++)
+{
+  component_std=std(defect_components[k]);
+  if (dim(component_std)!=1 || mult(component_std)!=1)
+  {
+    ERROR("a defect-support component is not a projective point");
+  }
+}
+if (size(base_mod_radical)!=0 || size(radical_mod_base)!=0
+    || size(base_components)!=15 || dim(base_std)!=2 || mult(base_std)!=15)
+{
+  ERROR("unexpected simultaneous-Pfaffian base scheme");
+}
+for (k=1;k<=size(base_components);k++)
+{
+  component_std=std(base_components[k]);
+  if (dim(component_std)!=2 || mult(component_std)!=1)
+  {
+    ERROR("a simultaneous-Pfaffian component is not a projective line");
+  }
+}
+print("C739_DEGENERACY_AUDIT_OK");
+print("rank_drop_scheme=reduced_top_components_plus_lower_dimensional_nilpotents");
+print("rank_drop_radical=20_codimension_two_linear_spaces");
+print("rank_drop_projective_degree=20");
+print("nilpotent_defect_support=10_projective_points");
+print("simultaneous_pfaffian_base=distinct_reduced_15_projective_lines");
+quit;
