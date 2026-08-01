@@ -25,8 +25,12 @@ bundle remains uncommitted pending its serialized package gate.  The prior
 direct elaboration of `Q11A5PointOrbitsData.lean` ended with exit 137 before
 Lean emitted a diagnostic and must not be repeated unchanged.  The first
 serialized replacement run correctly refused because the Paper II structural
-gate already owned the shared build window; retry only after that foreign run
-releases the lock.
+gate already owned the shared build window.  The replacement run at
+`~/.cache/othello-lean-build/run-20260801-211243-49eee223` subsequently acquired
+the lock, built `Q11A5PointOrbitsData.lean` in 42 seconds with a measured
+3,456,068 KiB peak, and is serially rebuilding the generated row closure before
+the trace-only aggregate gate.  Keep the source bundle unchanged until its
+terminal status is recorded.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
