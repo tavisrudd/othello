@@ -91,46 +91,55 @@ theorem gramOperator_pairSum (y : Fin 5 → ℚ) (hy : ∑ i, y i = 0)
   norm_num
   ring
 
-/-- The pair-sum map multiplies the standard quadratic norm by three. -/
-theorem pairSum_norm_sq (y : Fin 5 → ℚ) (hy : ∑ i, y i = 0) :
-    ∑ p : Pair 5, pairSum y p ^ 2 = 3 * ∑ i, y i ^ 2 := by
+/-- On the sum-zero module for `K(n,2)`, the pair-sum map multiplies the
+standard quadratic norm by `n-2`.  The Petersen factor three is the case
+`n=5`, not an independent normalization. -/
+theorem pairSum_norm_sq_general {n : ℕ} (hn : 2 ≤ n)
+    (y : Fin n → ℚ) (hy : ∑ i, y i = 0) :
+    ∑ p : Pair n, pairSum y p ^ 2 = (n - 2 : ℕ) • ∑ i, y i ^ 2 := by
   classical
   calc
-    ∑ p : Pair 5, pairSum y p ^ 2 =
+    ∑ p : Pair n, pairSum y p ^ 2 =
         ∑ i, y i * incidenceSum (pairSum y) i := by
       symm
       calc
         ∑ i, y i * incidenceSum (pairSum y) i =
-            ∑ i : Fin 5, ∑ p : Pair 5,
+            ∑ i : Fin n, ∑ p : Pair n,
               if i ∈ p.vertices then y i * pairSum y p else 0 := by
           apply Finset.sum_congr rfl
           intro i _
           simp only [incidenceSum, incidentPairs]
           rw [Finset.mul_sum]
           rw [← Finset.sum_filter]
-        _ = ∑ p : Pair 5, ∑ i : Fin 5,
+        _ = ∑ p : Pair n, ∑ i : Fin n,
               if i ∈ p.vertices then y i * pairSum y p else 0 := by
           rw [Finset.sum_comm]
-        _ = ∑ p : Pair 5, ∑ i ∈ p.vertices, y i * pairSum y p := by
+        _ = ∑ p : Pair n, ∑ i ∈ p.vertices, y i * pairSum y p := by
           apply Finset.sum_congr rfl
           intro p _
           rw [← Finset.sum_filter]
           simp
-        _ = ∑ p : Pair 5, pairSum y p ^ 2 := by
+        _ = ∑ p : Pair n, pairSum y p ^ 2 := by
           apply Finset.sum_congr rfl
           intro p _
           rw [← Finset.sum_mul]
           simp only [pairSum, pow_two]
-    _ = ∑ i, y i * (3 * y i) := by
+    _ = ∑ i, y i * ((n - 2 : ℕ) • y i) := by
       apply Finset.sum_congr rfl
       intro i _
-      rw [incidenceSum_pairSum (by omega : 2 ≤ 5), hy, add_zero]
-      norm_num
-    _ = 3 * ∑ i, y i ^ 2 := by
-      rw [Finset.mul_sum]
+      rw [incidenceSum_pairSum hn, hy, add_zero]
+    _ = (n - 2 : ℕ) • ∑ i, y i ^ 2 := by
+      rw [Finset.smul_sum]
       apply Finset.sum_congr rfl
       intro i _
+      simp only [nsmul_eq_mul]
       ring
+
+/-- The Petersen pair-sum map multiplies the standard quadratic norm by
+three. -/
+theorem pairSum_norm_sq (y : Fin 5 → ℚ) (hy : ∑ i, y i = 0) :
+    ∑ p : Pair 5, pairSum y p ^ 2 = 3 * ∑ i, y i ^ 2 := by
+  simpa using pairSum_norm_sq_general (by omega : 2 ≤ 5) y hy
 
 /-- The Gram scalar on the pair-sum four-space is nonzero. -/
 theorem gramScalar_ne_zero : (140 / 1053 : ℚ) ≠ 0 := by

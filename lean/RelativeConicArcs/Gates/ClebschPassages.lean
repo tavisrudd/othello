@@ -48,6 +48,7 @@ claim.
 #print axioms RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen
 #print axioms RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace
 #print axioms RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum
+#print axioms RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general
 #print axioms RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq
 #print axioms RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector
 #print axioms RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree
