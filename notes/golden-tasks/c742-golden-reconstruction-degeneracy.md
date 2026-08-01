@@ -2,7 +2,33 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C739 manuscript placement
+**Status:** ready; direct successor to C735, with C739 placement as phase 0
+
+## Phase 0 — C739 placement and framing
+
+Begin from C735's operator-first manuscript, not from a blank architecture.
+Absorb the completed C739 results before opening the deeper reconstruction
+gate:
+
+- place marked lift rigidity as a corollary sharpening, not duplicating, the
+  synchronized-spinor theorem;
+- place the pole-descent theorem where the six-point quotient meets C715's
+  inverse fibre, and state plainly that the fixed cross-golden splitting lives
+  on the pole-marked cover;
+- place \(S_6/F_{20}\cong X\times\mathcal T\) as the canonical \(36\to6\)
+  return in the balanced-cut section;
+- present the classical \(S^{(m,m)}\) matching carrier and order-six
+  hypersurface criterion as compact HMSV/Kempe context, not the paper's
+  novelty crown;
+- keep the strict collision filtration in one body schematic and an appendix
+  theorem, with the nonreduced Jacobian refinement marked as single-CAS
+  evidence until independently closed; and
+- exclude the order-eight comparison, higher transfer demonstrations, and
+  detailed multiplicity tables from the main line.
+
+After this placement, refresh C735's architecture, proof/trust, attribution,
+and length ledgers.  The resulting framing is the frozen Paper IV interface
+for the reconstruction work below.
 
 ## Objective
 
