@@ -101,4 +101,54 @@ theorem sub_eq_mem_conductor_iff (residue : A →ₐ[k] E)
     x - y ∈ subalgebraConductor (residuePinching residue) ↔ residue x = residue y := by
   rw [conductor_eq_ker residue hsurj hproper, RingHom.mem_ker, map_sub, sub_eq_zero]
 
+section SplitResidueField
+
+variable [Algebra E A] [IsScalarTower k E A]
+
+/-- A ground-field scalar, regarded as an element of the pinched algebra. -/
+def groundElement (residue : A →ₐ[k] E) (c : k) : residuePinching residue :=
+  ⟨algebraMap k A c, by
+    change residue (algebraMap k A c) ∈ (⊥ : Subalgebra k E)
+    rw [map_algebraMap]
+    exact (⊥ : Subalgebra k E).algebraMap_mem c⟩
+
+/-- An element with zero residue, regarded as an element of the pinched
+algebra. -/
+def kernelElement (residue : A →ₐ[k] E) (x : A) (hx : residue x = 0) :
+    residuePinching residue :=
+  ⟨x, by
+    change residue x ∈ (⊥ : Subalgebra k E)
+    rw [hx]
+    exact (⊥ : Subalgebra k E).zero_mem⟩
+
+/-- If `1,α` span the residue field over `k` and the residue map retracts the
+constant embedding, every element of `A` is a pinched element plus `α` times
+a pinched element.  This is the presentation-free identity `A=R+Rα`. -/
+theorem exists_pinching_add_alpha_mul
+    (residue : A →ₐ[k] E)
+    (hsection : ∀ e : E, residue (algebraMap E A e) = e)
+    (α : E)
+    (hspan : ∀ e : E, ∃ u v : k,
+      e = algebraMap k E u + algebraMap k E v * α)
+    (x : A) :
+    ∃ r s : residuePinching residue,
+      x = r.1 + algebraMap E A α * s.1 := by
+  obtain ⟨u, v, huv⟩ := hspan (residue x)
+  have hx0 : residue (x - algebraMap E A (residue x)) = 0 := by
+    rw [map_sub, hsection, sub_self]
+  let x0 : residuePinching residue :=
+    kernelElement residue (x - algebraMap E A (residue x)) hx0
+  let r : residuePinching residue := x0 + groundElement residue u
+  let s : residuePinching residue := groundElement residue v
+  refine ⟨r, s, ?_⟩
+  change x =
+    (x - algebraMap E A (residue x)) + algebraMap k A u +
+      algebraMap E A α * algebraMap k A v
+  rw [huv, map_add, map_mul]
+  rw [IsScalarTower.algebraMap_apply k E A u,
+    IsScalarTower.algebraMap_apply k E A v]
+  ring
+
+end SplitResidueField
+
 end RelativeConicArcs.QuadraticPinching
