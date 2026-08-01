@@ -1898,8 +1898,17 @@
       "last": 745,
       "purpose": "Paper III structural proof compression followed by Lean catch-up",
       "sequence": 211
+    },
+    {
+      "count": 4,
+      "first": 746,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 749,
+      "purpose": "Paper II Serre-style all-q proof closure",
+      "sequence": 212
     }
   ],
-  "next_id": 746,
+  "next_id": 750,
   "schema": "codex-task-id-allocations-v1"
 }
