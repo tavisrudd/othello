@@ -25,9 +25,16 @@ Crosswalk judgments may change as the portfolio changes.
   anomaly cancellation and related arithmetic geometry.
 - `sources-frames-designs-games.md`: equiangular frames, Hadamard/conference
   matrices, discrete designs and combinatorial games.
+- `sources-generalist-major.md`: authoritative spine of the major broad
+  collections--Clay, Hilbert, Landau, Smale, Arnold, Yau, Thurston, Erdos,
+  Kourovka, AIM, TOPP, K3, Simon and others.
+- `sources-generalist-named-problems.md`: compact cross-field index of the
+  prize-level and household-name conjectures, with status-confidence labels.
 - `local-results-index.md`: compact portfolio-side index used for matching;
   it is not an external-problem source.
 - `results-crosswalk.md`: links external entries to our theorem inventory.
+- `generalist-results-crosswalk.md`: separately filters the famous/generalist
+  index against our results and records the required evidence for any bridge.
 - `search-log.md`: queries, screened sets, access failures and update dates.
 
 ## Entry schema

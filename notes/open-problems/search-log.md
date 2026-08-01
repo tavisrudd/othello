@@ -63,3 +63,62 @@ unrelated graph/computability problem collections were not promoted.
 5. Refresh the repository result index beyond the current routing summary,
    then expand the
    crosswalk without altering the raw source entries.
+
+## 2026-07-31 generalist major-name pass
+
+Purpose: add the canonical broad lists and famous named problems without
+mixing their collection with judgments about repository relevance.
+
+### Search families
+
+- current official Millennium Prize status;
+- 2026 status of Hilbert's problems;
+- Smale, Arnold and Yau problem collections;
+- maintained Erdos, Kourovka, AIM and TOPP databases;
+- 2024--2026 AMS problem compendia in algebraic combinatorics and
+  low-dimensional topology;
+- Simon's mathematical-physics list and the DARPA 23 challenges;
+- broad expert compilations and major standalone conjectures by field.
+
+Searches used exact-title web queries and institutional/publisher records.
+Promoted sources are recorded in `sources-generalist-major.md`; discovered
+problem names are normalized in `sources-generalist-named-problems.md`.
+
+### Coverage
+
+- Sixteen major source sets were promoted.
+- Full-text count: **0**.
+- `partial`: Clay official page, 2026 Simons Hilbert review, the Landau IMU
+  proceedings OCR, Thurston's AMS primary text, Springer Nash--Rassias
+  contents, Erdos lists/FAQ, Kourovka current site, AIM index, TOPP index, AMS
+  K3 description, AMS algebraic-combinatorics contents.
+- `abstract/metadata only`: Hilbert primary AMS record, Smale, Arnold and Simon
+  records.
+- `secondary only`: Yau lists and the DARPA transcription, with their primary
+  or institutional supporting records noted.
+
+The 2024 Yau article, original 1982 Yau list, full Smale 18, full Arnold 861,
+full Simon list, K3 chapters, Kourovka 21st-edition problem text and individual
+AIM lists are **NOT COVERED**.  Their presence licenses discovery only.
+
+Direct URL validation on 2026-07-31 found the University of Tennessee DARPA
+transcription returning HTTP 404; its indexed text was used secondarily and the
+live SAM.gov federal record returned HTTP 200.  AMS book/PDF and Eureka pages
+returned HTTP 403 to command-line retrieval but remained visible through the
+search index.  The Caltech Simon endpoints timed out in command-line validation
+but were indexed by the web search.  These are recorded as access limitations,
+not negative search results.
+
+### Status policy
+
+The named index distinguishes `official-open`, `live-lead`, `mixed`,
+`disputed` and `refresh`.  Only the first is intended as a current status
+assertion.  In particular, historical membership in Hilbert/Smale/Arnold and a
+database `open` label are not enough for manuscript use.
+
+### Result of local filtering
+
+`generalist-results-crosswalk.md` records one direct partial bridge to the MDS
+conjecture, a small number of finite-geometry/design or transversal-code
+candidates, and explicit negative fences around tempting Hodge, Yang--Mills,
+Jacobian/Dixmier, cubic-fourfold, SIC and MUB vocabulary matches.
