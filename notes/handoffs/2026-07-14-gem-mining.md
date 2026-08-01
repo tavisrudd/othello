@@ -9,7 +9,8 @@ manifest, and submission remains gated on C156/C157/C169. C159 is seeded by Cleb
 q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch C187 and only its q5
 folklore/priority check remains. The Hadamard-668 multiplier census is now 25/30 impossible: C738's
 shift-111 orbit lock excludes ID 7, and C740's complete residual screen shows the same lock excludes
-ID 2 while exhausting that mechanism for IDs 0, 1, 3, 4, and 5.
+ID 2 while exhausting that mechanism for IDs 0, 1, 3, 4, and 5. C741 is attacking paired IDs 4
+and 5 through their exact 37-compressions or a joint orbit lift.
 
 **Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191/C192/C193/C736/C737/C738
 reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
@@ -97,6 +98,7 @@ Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsc
 | **C737** | queued, independent | decide `M(18) in {57,58,59}` through a complete Seidel-spectrum census and certified elimination/construction of residual cases → future report `notes/2026-07-31-c737-equiangular-lines-r18.md` |
 | **C738** | reported | excluded ID 7 `<73,112>` analytically: at shift 111, invariance forces equality on all 222 nonmultiples of 3, but a Legendre pair requires joint Hamming distance 334 while at most 222 is possible; independently replayed the exact orbit certificate and preserved C736's feasible 9-compression witness as a positive control; all order-6 cases are closed and 24/30 subgroups are impossible → [report](../2026-07-31-c738-hadamard-668-id7.md) |
 | **C740** | reported | exact six-case orbit-lock census excludes ID 2 `<112>` at shifts 111 and 222; full spectra prove the criterion does not exclude IDs `0,1,3,4,5`; C736's feasible 9-compression witnesses for IDs 2, 4, and 5 remain positive controls; the census is 25/30 impossible and paired IDs 4/5 are the next exact target → [report](../2026-07-31-c740-hadamard-668-residual-orbit-locks.md) |
+| **C741** | in progress, C740 follow-on | decide paired residual IDs 4 and 5 through exact 37-compression or joint orbit-lift constraints while retaining their common feasible 9-compression witness as a positive control → future report `notes/2026-07-31-c741-hadamard-668-ids4-5.md` |
 | **C174** | reported, folds into C155 | stronger six-arc identity in every finite projective plane; exact q=5,7,11,13 tables tracked → [report](../2026-07-14-c174-general-six-subset-identity.md) |
 | **C175** | queued, independent | classify concurrency-free conic six-sets across small q; not a C155 gate |
 | **C177** | queued, independent | test whether local Mathieu systems on the point-regulus conics of `D_Hex(11)` glue to a `2-(1332,6,240)` or oriented `2-(1332,6,120)` design; not a C155 gate |
@@ -261,7 +263,7 @@ the two BSW originals remain unread.
 
 ## Queued work
 
-C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736, C737, C738, and C740 are this lane's; C178, C190, C736, C738, and C740 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
+C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736, C737, C738, C740, and C741 are this lane's; C178, C190, C736, C738, and C740 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
 of the same sweep. Rationale, search directions, and what was deliberately left unqueued:
 [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md). **Only C153 and the running
 external-source gates can cost the current novelty posture; the rigidity/gap checks are complete.
