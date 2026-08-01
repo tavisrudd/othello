@@ -308,7 +308,7 @@ manuscript edit is authorized by C727.
 
 | task | state | next gate |
 |---|---|---|
-| [C743 — relentless A+ unity and compression programme](../golden-tasks/c743-golden-a-plus-unity-compression.md) | ready; direct successor to C742 and highest-EV paper task | iterate across at least five attack portfolios; run `(tt + aa + ej) x 2` on every successful or failed round; adopt all proved A/A+ compressions; require two distinct saturation rounds before stopping |
+| [C743 — relentless A+ unity and compression programme](../golden-tasks/c743-golden-a-plus-unity-compression.md) | ready; research-only direct successor to C742 and highest-EV paper task; manuscript frozen | iterate across at least five attack portfolios; run `(tt + aa + ej) x 2` on every successful or failed round; freeze all proved A/A+ upgrades and exact later placement verdicts in the report; require two distinct saturation rounds before stopping |
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
@@ -318,7 +318,9 @@ manuscript edit is authorized by C727.
 1. C743 relentless A+ unity and compression programme.  It owns the next
    operator-paper move and must search for stronger mechanisms before any new
    shadow branch is opened.  Every round, success or failure, receives two
-   complete `tt + aa + ej` cycles.
+   complete `tt + aa + ej` cycles.  The manuscript, verification surface, and
+   C735 manuscript ledgers remain unchanged; unification follows only in a
+   separately authorized post-search task.
 2. C718 boson--fermion complement only if C743 finds a precise unifying need;
    otherwise it remains deferred physical/combinatorial work.
 3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit

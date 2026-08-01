@@ -4,6 +4,14 @@
 
 **Status:** ready; direct successor to C742 and higher priority than the deferred physical branches
 
+**Manuscript gate:** research-only.  Do not edit `papers/golden-operator/`,
+its verification surface, or C735's manuscript architecture/length ledger
+during C743.  Freeze proved upgrades, proposed deletions, dependency-graph
+changes, and exact placement recommendations in the C743 report and evidence.
+The user will authorize unification in a separate post-search task.
+Record the manuscript and verification-surface hashes at entry and require
+the same hashes at closeout.
+
 ## Objective
 
 Search relentlessly for mathematical upgrades that move Paper IV from a
@@ -16,7 +24,7 @@ This is deliberately open-ended within the Golden paper's existing objects.
 Do not stop after the first improvement.  Iterate through representation,
 operator, moduli, groupoid, invariant-theoretic, determinantal, and expository
 attacks until the saturation gate below is met.  The output is not a brainstorm:
-prove, place, and validate every adopted upgrade, and record exact reasons for
+prove and validate every adopted upgrade at report/evidence level, and record exact reasons for
 rejecting attractive false unifications.
 
 ## Mandatory double closeout on every round
@@ -84,7 +92,8 @@ Maintain a candidate ledger.  For each round:
 4. attack the strongest candidate by a human route and one independent route;
 5. red-team it against C739/C742's counterexamples, special strata, scale,
    descent, and integrality;
-6. run the first `tt + aa + ej` cycle and adopt every validated A/A+ upgrade;
+6. run the first `tt + aa + ej` cycle and freeze every validated A/A+ upgrade
+   in the research report without editing the manuscript;
 7. rebuild the theorem/dependency graph from that compressed state or exact
    obstruction, then run the second `tt + aa + ej` cycle; and
 8. retain rejected candidates with a precise obstruction, so later rounds do
@@ -147,11 +156,12 @@ projective return and the failure of direct Gram iteration.
 
 ### 7. Proof and exposition compression attack
 
-After each mathematical upgrade, read only theorem statements, definitions,
-and section openings.  Remove duplicated source definitions, repeated
-covariance proofs, parallel normalization calculations, and consequences
-that can become corollaries.  Track page count and proof obligations, not word
-count alone.  Preserve the severe operator-first hierarchy and keep physical,
+After each mathematical upgrade, use the frozen manuscript only as a
+read-only dependency and placement map.  Specify which duplicated source
+definitions, repeated covariance proofs, parallel normalization calculations,
+or consequences a later unification pass should remove or turn into
+corollaries.  Estimate page and proof-obligation changes without applying
+them.  Preserve the severe operator-first hierarchy and keep physical,
 exceptional, and verification branches subordinate.
 
 ### 8. Hostile-referee attack
@@ -192,8 +202,10 @@ than replaces the two mandatory `tt + aa + ej` cycles.
 - Do not trade one calculation for opaque category language.
 - Do not force unequal schemes into one object, confuse projective recovery
   with signed recovery, or call source-equivalent target data “unmarked”.
-- Prefer deleting a weak theorem or branch when a stronger mechanism makes it
-  redundant.
+- Recommend deletion of a weak theorem or branch when a stronger mechanism
+  makes it redundant, but defer the edit to the post-search unification task.
+- Do not edit the manuscript, its verification README, or C735's manuscript
+  ledgers during C743, even after a candidate passes every research gate.
 
 ## Literature and trust
 
@@ -213,7 +225,8 @@ computer dependencies.
 
 The task completes only when all of the following hold:
 
-1. at least one A+ mathematical or unity upgrade is proved and placed, or a
+1. at least one A+ mathematical or unity upgrade is proved and assigned an
+   exact later placement verdict, or a
    sharp saturation theorem explains why every remaining apparent upgrade
    crosses a named C739/C742 obstruction;
 2. at least five required attack portfolios have been carried through far
@@ -228,11 +241,17 @@ The task completes only when all of the following hold:
    untested surviving A/A+ candidate after both double closeouts;
 7. a hostile-referee pass identifies every remaining independent mechanism
    and explains why merging it would be false, circular, or longer;
-8. the manuscript, verification surface, C735 ledger, handoff, and exact
-   evidence all pass; and
+8. the frozen manuscript remains byte-unchanged throughout C743; the research
+   report, handoff, and exact evidence all pass; and
 9. the final task-level `ej` + `tt` pass includes a Mystery ledger
    distinguishing genuine open structure from settled non-unifications.
 
 ## Expected report
 
 `notes/2026-07-31-c743-golden-a-plus-unity-compression.md`
+
+The report must end with a complete post-search unification specification:
+the proved theorem replacements, exact manuscript locations, deletions,
+dependency-DAG delta, projected page delta, trust changes, and a recommendation
+for the separately allocated implementation task.  It must not apply those
+changes.
