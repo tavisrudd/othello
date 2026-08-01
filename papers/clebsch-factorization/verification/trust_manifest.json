@@ -115,6 +115,7 @@
   "claims": [
     {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "generic-first-wall", "small-field-trade", "shared-radial", "profile-incidence", "decorated-parent"]},
     {"label": "prop:matching-secant-quotient", "modes": ["conceptual"], "evidence": []},
+    {"label": "lem:projective-trade-reduction", "modes": ["conceptual"], "evidence": []},
     {"label": "lem:uniform-sheet-exclusion", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["generic-first-wall", "small-field-trade"]},
     {"label": "thm:balanced-orbit-completeness", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["generic-first-wall", "small-field-trade"]},
     {"label": "lem:shared-radial-cycle", "modes": ["conceptual", "certificate"], "evidence": ["shared-radial"]},

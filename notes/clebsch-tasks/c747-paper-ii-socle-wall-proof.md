@@ -2,13 +2,22 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after C746
+**Status:** queued next; C746 complete
 
 ## Objective
 
 Give a rigorous, coordinate-light proof of the Lucas-socle criterion and the
 adjacent-wall non-splitting theorem needed by Paper II's all-`q`
 classification, including the characteristic-three endpoint.
+
+Use C746's exact quadratic pullback obstruction: for every
+\(\lambda>1\), produce an outer-invariant nontrivial simple submodule of the
+sheet permutation module, prove the required \(G\)-parity vanishing in
+\(\operatorname{Sym}^2F\), and prove that the canonical pullback along the
+specific linear moment map \(i_\delta=2a|_{S^\delta}\) has nonzero
+connecting class in
+\(\operatorname{Ext}^1_G(S^\delta,\operatorname{Sym}^2F)\). This includes the formerly hidden
+principal-projective possibility.
 
 ## Proof standard
 
@@ -37,4 +46,3 @@ parity step, exceptional case, or hidden computation.
 
 Do not generalize beyond the theorem's classified matching-orbit problem.
 Do not edit Lean; C749 begins only after C748 freezes the human surface.
-

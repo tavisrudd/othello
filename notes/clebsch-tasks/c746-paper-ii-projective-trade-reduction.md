@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; first Paper II proof-closure task
+**Status:** complete; human proof round 1/4
 
 ## Objective
 
@@ -35,4 +35,3 @@ report, or coordinates.  No executable evidence is load-bearing.
 C746 does not prove the Lucas-socle or first-wall theorem; C747 owns that
 obligation.  It may simplify or delete obsolete computational scaffolding but
 must not weaken the all-`q` theorem.
-

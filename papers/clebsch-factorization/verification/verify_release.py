@@ -210,6 +210,7 @@ EXPECTED_CLAIMS = {
          "small-field-trade", "profile-incidence", "decorated-parent"},
     ),
     "prop:matching-secant-quotient": ({"conceptual"}, set()),
+    "lem:projective-trade-reduction": ({"conceptual"}, set()),
     "lem:uniform-sheet-exclusion": (
         {"conceptual", "classical-input", "certificate"},
         {"generic-first-wall", "small-field-trade"},
