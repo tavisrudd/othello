@@ -4,16 +4,16 @@
 
 **Lane:** `golden`
 
-**Status:** active; three A+ unity/compression mechanisms proved; strict A+
-mathematics gate remains open
+**Status:** active; theorem candidates proved and under simplicity red-team;
+external review will grade them
 
 ## Executive verdict
 
-The search has found three theorem-level compressions.  Together they replace the
-central collection of exterior, Pfaffian, cross-golden, pole-descent, polar,
-and assembled-adjugate calculations by two structural mechanisms.
+After the simplicity red-team, the current results reduce to three mechanisms.
+They replace the central collection of exterior, Pfaffian, cross-golden,
+pole-descent, polar, assembled-adjugate, and degeneracy calculations.
 
-1. **Universal matching--norm theorem.**  For every even labelled set, the
+1. **One Pfaffian/exterior law.**  For every even labelled set, the
    bracket matrix
    \[
      \alpha_C(v)_{ij}=C_{ij}[v_i,v_j]
@@ -21,36 +21,35 @@ and assembled-adjugate calculations by two structural mechanisms.
    is the universal alternating carrier of a matching functional.  Its
    Pfaffian, its affine commutator form, the diagonal of the middle exterior
    power, and, when \(C^2=qI\), its cross-eigenspace determinant are one
-   natural transformation evaluated in four presentations.  The bracket
+   natural transformation evaluated in four presentations.  Its full pure
+   spinor has compound grades
+   \(1,B,\bigwedge^2B,\ldots,\det B\) in a spectral basis, so the
+   synchronized-spinor coordinates and block adjugates are lower grades of
+   the same law.  The bracket
    presentation is intrinsic on the six-point quotient; the eigenspace block
    requires a pole.  Thus the successful identities and the pole-descent
    obstruction are two sides of the same theorem.
-2. **Quotient--conormal cofactor theorem.**  The right kernel of the Golden
+2. **Quotient--conormal cofactor law.**  The right kernel of the Golden
    differential is the residual infinitesimal \(\operatorname{PGL}_2\)-orbit
    after translation and scaling, while its left kernel is the conormal of
    the Segre hypersurface.  A general primitive-kernel cofactor lemma then
    forces the assembled adjugate to be their outer product.  The ordinary
-   adjugate of each cross-golden block is the preceding, coordinate-level
-   conormal in the same chain-rule diagram.
-3. **Exterior-exponential compound theorem.**  In a golden eigenbasis, the
-   synchronized pure spinor of the commutator has graded coordinates
-   \(1,B_T,\bigwedge^2B_T,\det B_T\).  For rank three,
-   \(\bigwedge^2B_T\) is the Hodge form of \(\operatorname{adj}B_T\).
-   The tangent block, quadratic MCM map, determinant cubic, and all
-   principal-Pfaffian Cartan coordinates are therefore the graded pieces of
-   one exterior exponential, with the usual pole and golden choices retained.
+3. **Even-point quotient theorem.**  For the equal-weight quotient of
+   \(2m\) points, one multiplicity threshold gives the stable locus, the
+   critical \(m\)-equals locus, and the \((m+1)\)-equals matching base.  At a
+   closed \(m+m\) orbit the slice is the rank-one tensor map.  Its critical
+   ideal follows from spanning trees of \(K_{m-1,m-1}\).  For six points this
+   gives the square-zero length-four node defect and identifies it with the
+   target node cotangent space.
 
-The first result is A+ unity and A+ compression: one construction explains
-the exterior, commutator, determinant, matching, and descent outputs and
-removes three independent coefficient or covariance arguments.  The second
-is A+ unity and A compression: it explains the source kernel, target polar,
-local adjugates, and global adjugate by one quotient/conormal principle and
-reduces the normalized global identity to one cofactor witness.
-The third is A+ unity and A compression: it joins the synchronized-spinor and
-cross-golden branches and replaces their parallel minor calculations by the
-standard compound-matrix grading of one pure spinor.
+The first mechanism replaces three independent coefficient or covariance
+arguments by one matching evaluation and one spectral specialization.  The
+second replaces separate source-kernel, target-polar, and cofactor arguments
+by a quotient/conormal calculation and one normalization witness.  The third
+replaces the stability, rank-drop support, node thickening, and base-locus
+arguments, and removes the two former Singular trust boundaries.
 
-Two provisional saturation rounds, rebuilt before the strict A+ mathematics
+Two provisional saturation rounds, run before the later local-quotient work,
 override, found no further unity/compression candidate.  They do not close
 C743.  The moduli round showed that a single descended complex
 would contradict C742's pole and first-Fitting obstructions; compactified
@@ -135,7 +134,7 @@ not global on \(M_{0,6}\) and does not explain the matching carrier.  The
 second candidate contains both as specializations without hiding the pole
 boundary.
 
-### Theorem 2.1 (universal matching--norm transformation)
+### Theorem 2.1 (one Pfaffian/exterior law)
 
 Let \(k\) have characteristic zero, let \(X\) be an oriented set of size
 \(2m\), and let \(V\) be a two-dimensional vector space with determinant
@@ -172,13 +171,18 @@ Then:
       =\epsilon_C(2s)^m\det B,
    \]
    where \(\epsilon_C\) is exactly the determinant-line orientation.
-4. The bracket/Pfaffian side is \(\operatorname{GL}_2\)-natural and descends
+4. The pure spinor \(\exp(\alpha_C)\) has principal Pfaffians as its graded
+   coordinates.  In the eigenspace basis of part 3, its bidegree-\((r,r)\)
+   coordinates are, up to the same orientation convention,
+   \((2s)^r\bigwedge^rB\).  In rank three these grades are
+   \(1,B,\operatorname{adj}B,\det B\).
+5. The bracket/Pfaffian side is \(\operatorname{GL}_2\)-natural and descends
    to the point-configuration quotient with its determinant-line twist.  The
    displayed eigenspace block is natural only after a pole reduces coordinate
    changes to the affine subgroup.  For a general projectivity the diagonal
    congruence preserves the Pfaffian line but does not preserve a fixed
    eigenspace unless the change is affine.
-5. The matching carrier first occurs in degree \(m\) with multiplicity one.
+6. The matching carrier first occurs in degree \(m\) with multiplicity one.
    Hence \(\mathcal J_m\) is the minimal universal covariant; a structured
    matrix \(C\) selects a functional or orbit of functionals on it rather than
    creating another carrier.
@@ -203,7 +207,10 @@ When \(C^2=s^2I\), the eigenspace splitting gives
 
 The Pfaffian of this alternating block matrix is
 \(\epsilon_C(2s)^m\det B\).  The sign is precisely the chosen orientation
-of the two determinant lines.  Brackets scale by \(\det g\) under
+of the two determinant lines.  Expanding \(\exp(\alpha_C)\) in the spectral
+basis gives the compound matrices \(\bigwedge^rB\); for \(m=3\), Hodge
+duality identifies \(\bigwedge^2B\) with \(\operatorname{adj}B\).  Brackets
+scale by \(\det g\) under
 \(g\in\operatorname{GL}_2\), proving the intrinsic determinant-line
 covariance.  Under
 \(x_i\mapsto (ax_i+b)/(cx_i+d)\), the commutator instead transforms by
@@ -222,7 +229,7 @@ linear algebra.  Their intersection fixes the same scalar
 \((2s)^m\), while the C704 exact checker and replay fix the Golden Hodge and
 outer-action conventions.
 
-### Golden specialization and grade
+### Golden specialization and proof-graph effect
 
 For \(m=3\), \(s=\sqrt5\), and the frozen orientations,
 
@@ -242,8 +249,8 @@ is
 with the coherent switching transport retained.  Exterior, commutator, and
 cross-golden formulas are evaluations, not primitive arrows.
 
-**Grade:** A+ unity, A+ compression, A mathematics.  The theorem is more
-general than order six, explains five current outputs, and deletes the
+**Concrete effect.**  The theorem applies beyond order six, explains five
+current outputs, and deletes the
 separate exterior/Pfaffian coefficient comparison, the separate block
 determinant derivation, and a repeated pole-covariance discussion.  It does
 not falsely remove the marked source.
@@ -395,8 +402,8 @@ UFD factorization proof of Lemma 3.1.
 - The integral scalar is inherited from the frozen C705 witness.  No new
   modular claim is made at \(2,3,5\).
 
-**Grade:** A+ unity, A compression, A mathematics.  Four previously separate
-features become the source orbit, target conormal, and two cofactor stages of
+**Concrete effect.**  Four previously separate features become the source
+orbit, target conormal, and two cofactor stages of
 one quotient diagram.  It eliminates two kernel calculations as independent
 ideas and turns the 25-entry adjugate identity into one general lemma plus one
 normalization witness.
@@ -435,14 +442,14 @@ This cycle starts from the quotient--conormal theorem.
   unification pass can shorten the central proof without promoting the
   unclosed local algebra.
 
-## 4. Round 3 — strict A+ mathematics: quotient nodes and matching base
+## 4. Round 3 — quotient nodes and matching base
 
 The user sharpened the gate after the unity/compression mechanisms: C743 is
 not allowed to close on a more elaborate description.  The mathematics must
 be clearer, more general, and more explanatory.  This round therefore attacked
 the two remaining CAS boundaries as geometry of familiar universal objects.
 
-### Theorem 4.1 (rank-one tensor critical ideal)
+### Lemma 4.1 (rank-one tensor critical ideal)
 
 Let \(U\) and \(V\) have dimensions \(r,s\ge2\), write
 \(\mathfrak u=(u_1,\ldots,u_r)\) and
@@ -493,8 +500,8 @@ reduced.  The order-six nilpotence is concentrated at their intersection;
 at every higher even order the universal balanced quotient is already
 thickened along the generic components.
 
-**Grade:** A+ mathematics.  This is a general critical-scheme theorem with a
-short combinatorial proof, and it gives a new structural order-six
+**Concrete effect.**  This is a general critical-scheme theorem with a short
+combinatorial proof.  It gives a structural order-six
 exceptionalism criterion independent of the outer automorphism and
 hypersurface coincidence.
 
@@ -600,13 +607,12 @@ An independent dependency-free replay computes the minors of \(d\mu\) and
 recovers the same twelve monomial generators.  The computation corroborates
 the coordinate bridge; the displayed quotient proof is the mechanism.
 
-**Grade:** A+ mathematics and A+ explanation.  This is a stronger local and
-global theorem than the C739 certificate: it identifies the complete local
-ideal, proves the defect is square-zero of length four at each node, computes
+**Concrete effect.**  This goes beyond the C739 certificate: it identifies
+the complete local ideal, proves the defect is square-zero of length four at each node, computes
 total length forty, and removes the sole one-CAS boundary from the collision
 filtration.
 
-### Theorem 4.3 (universal matching base is the equals arrangement)
+### Lemma 4.3 (universal matching base is the equals arrangement)
 
 Let \(n=2m\), let \(R=k[x_1,\ldots,x_{2m}]\) over an arbitrary field, and
 let \(I_{\mathrm{match}}\) be generated by the perfect-matching products
@@ -650,8 +656,8 @@ the reduced four-equals arrangement: the fifteen projective lines indexed by
 four-subsets of \(X\).  The C728 Singular calculation is no longer
 load-bearing for reducedness or minimal primes.
 
-**Grade:** A+ mathematics, A+ unity, and A+ compression.  It proves a natural
-all-even-order theorem, identifies the Golden base scheme as a classical
+**Concrete effect.**  This gives an all-even-order theorem, identifies the
+Golden base scheme as a classical
 Specht/equals arrangement, and removes the second CAS dependency by joining
 the matching carrier directly to its geometric null locus.
 
@@ -693,9 +699,61 @@ supplies its exact critical scheme.  On the stable locus the geometric
 quotient is smooth after removing orbit directions, so there are no other
 critical components.
 
-**Grade:** A+ mathematics and A+ explanation.  One threshold theorem replaces
-the separate stability, rank-drop-support, node, and base-locus stories and
+**Concrete effect.**  One threshold theorem replaces the separate stability,
+rank-drop-support, node, and base-locus stories and
 predicts the higher-order scheme thickness explicitly.
+
+### Corollary 4.5 (the Jacobian defect is the node cotangent sheaf)
+
+Let \(\mathcal R\) be the Golden Jacobian rank-drop scheme, let
+\(\mathcal R_{\mathrm{red}}\) be its twenty-plane reduction, and identify
+the ten closed \(3+3\) source points with the ten nodes of the Segre cubic
+\(\Sigma\).  Then there is a canonical \(S_6\)-equivariant isomorphism of
+skyscraper sheaves
+
+\[
+ \boxed{\quad
+ \sqrt{I_{\mathcal R}}/I_{\mathcal R}
+ \cong
+ \bigoplus_{y\in\operatorname{Sing}\Sigma}
+ \mathfrak m_y/\mathfrak m_y^2.
+ \quad}
+\]
+
+Equivalently, the nilpotent defect is the pullback of the cotangent sheaf of
+the Segre cubic restricted to its reduced singular scheme.  Each fibre has
+dimension four, so the total length is forty.
+
+#### Proof
+
+In the local quotient normal form, the target node has completed local ring
+
+\[
+ k[[z_{11},z_{12},z_{21},z_{22}]]/
+ (z_{11}z_{22}-z_{12}z_{21}),
+\]
+
+and the quotient map sends \(z_{ij}\) to \(u_i v_j\).  The node equation has
+no linear term, so its cotangent space has basis the four classes of
+\(z_{ij}\).  Corollary 4.2 identifies the source defect with
+
+\[
+ \frac{(u_1,u_2)(v_1,v_2)}
+ {\mathfrak m(u_1,u_2)(v_1,v_2)},
+\]
+
+whose basis is the four classes of \(u_i v_j\).  Pullback gives the displayed
+isomorphism.  It is canonical because it is induced by the quotient map on
+cotangent spaces, and equivariance follows from equivariance of that map.
+
+This is the exact surviving link among the previously unequal degeneracy
+objects.  The source critical scheme, target node scheme, and polar base are
+not equal; the nilpotent difference between the source scheme and its
+reduction is the target cotangent sheaf.
+
+**Concrete effect.**  It identifies the defect module, not only its support
+or length, and gives the functorial bridge that
+the false master-complex proposal was trying to obtain.
 
 ### The collision filtration after Theorems 4.1 and 4.2
 
@@ -745,7 +803,82 @@ This cycle starts from the tensor-quotient normal form.
   order six is the only nontrivial balanced order whose critical planes are
   generically reduced.
 
-## 5. Round 4 — moduli, descent, groupoid, and differential saturation
+## 5. Simplicity red-team of the theorem candidates
+
+This pass removes self-grading and tests whether each claimed mechanism has a
+shorter form.  The questions are: what is the least datum in the statement,
+which clauses share one proof, what can be demoted to a corollary, and whether
+the proposed language deletes more than it adds.
+
+### One Pfaffian/exterior law
+
+- **Attempted simplification:** state only the top Pfaffian identity and leave
+  the pure-spinor and cross-block statements separate.
+- **Failure of the simplification:** in a spectral basis, the lower principal
+  Pfaffians are literally the compound matrices of \(B\).  Omitting that one
+  clause would force the synchronized-spinor proposition and block-adjugate
+  calculation to repeat the same exterior expansion.
+- **Attempted over-unification:** make \(C^2=qI\) a hypothesis of the whole
+  theorem.
+- **Failure of the over-unification:** the matching, affine commutator, and
+  middle-exterior identities hold for arbitrary symmetric zero-diagonal
+  \(C\).  The conference equation belongs only to the spectral specialization.
+- **Simplest retained form:** one alternating bracket matrix \(\alpha_C\), one
+  exterior exponential, and one optional spectral clause.  Pole descent is a
+  naturality boundary, not a second construction.
+- **Observable test:** the later manuscript proof should delete the separate
+  exterior/Pfaffian coefficient comparison, block determinant derivation,
+  block-adjugate minor explanation, and repeated pole covariance.  If those
+  paragraphs remain, the formulation has not compressed the proof.
+
+### Quotient--conormal cofactor law
+
+- **Attempted simplification:** derive the assembled adjugate directly by
+  differentiating Theorem 2.1.
+- **Obstruction:** differentiation supplies the source map but not the Segre
+  equation or its conormal.  The target hypersurface is independent input.
+- **Attempted over-unification:** call \(\operatorname{adj}B_T\) and
+  \(\operatorname{adj}(dZ)\) instances of one matrix theorem.
+- **Correction:** they are consecutive but different operations.  Jacobi's
+  formula interprets the block adjugate; the primitive-kernel lemma determines
+  the cofactor of the quotient differential.  The principal statement should
+  mention only the residual source orbit, the target conormal, and their outer
+  product.  The block adjugate is a one-sentence corollary of Theorem 2.1.
+- **Simplest retained form:** “the cofactor of the quotient differential is
+  source-fibre direction times target conormal,” followed by the one scalar
+  witness.  No category language is needed.
+
+### Even-point quotient theorem
+
+- **Attempted simplification:** present the tensor critical ideal, Golden node
+  normal form, equals arrangement, stability trichotomy, and cotangent defect
+  as five coequal theorems.
+- **Reason to reject it:** this repeats the same multiplicity threshold and
+  makes corollaries look independent.
+- **Simplest retained form:** Theorem 4.4 is the principal statement.  Lemma
+  4.3 identifies the unstable base scheme; Lemma 4.1 computes the strictly
+  semistable slice; Corollaries 4.2 and 4.5 give the six-point local ideal and
+  cotangent defect.  They should remain proof steps and consequences, not
+  additional headline claims.
+- **Generality test:** the \((r,s)\) tensor formula costs one displayed line
+  beyond the balanced case, and its spanning-tree proof is not longer than a
+  balanced-only proof.  It is
+  retained because it reveals why the balanced order-six slice is the unique
+  nontrivial generically reduced case.
+- **Jargon test:** “Specht ideal” is needed only for scheme-theoretic
+  radicality.  The support is explained first by the complete multipartite
+  matching criterion.  “Luna slice” is unnecessary in the proof; the two
+  cluster-splitting weights give the local quotient directly.
+
+### Result of this red-team
+
+The current principal list has three entries: Theorem 2.1, Theorem 3.2, and
+Theorem 4.4.  Lemmas 3.1, 4.1, and 4.3 carry the general algebra; Corollaries
+4.2 and 4.5 carry the exact six-point consequences.  No grade is assigned in
+this report.  Review should judge the results from their hypotheses, proof
+length, deleted obligations, trust changes, and counterexamples.
+
+## 6. Round 4 — moduli, descent, groupoid, and differential saturation
 
 This was the first saturation round.  Its portfolio differs from Round 4.
 
@@ -761,8 +894,8 @@ This was the first saturation round.  Its portfolio differs from Round 4.
 
 The compactified pushforward remains mathematically legitimate, but it is a
 new geometric branch with new boundary choices and proof obligations.  It
-does not satisfy C743's anti-bloat condition and is not a surviving A/A+
-compression candidate.
+does not satisfy C743's anti-bloat condition and is not a surviving
+proof-compression candidate.
 
 ### Round 4 cycle 1: `tt + aa + ej`
 
@@ -798,10 +931,10 @@ This cycle starts from the exact two-base obstruction.
   complexes adjacent rather than nested.  No further current theorem or
   proof obligation is deleted.
 
-**Provisional Round 4 verdict:** no surviving A/A+ candidate under the
+**Provisional Round 4 verdict:** no additional theorem candidate survived under the
 pre-Theorem-4.1 graph; this round must be rerun before final saturation.
 
-## 6. Round 5 — balanced return, exposition, and hostile-referee saturation
+## 7. Round 5 — balanced return, exposition, and hostile-referee saturation
 
 This was the second consecutive saturation round and used a different
 portfolio.
@@ -860,7 +993,7 @@ subgroup-incidence quotient, not another norm evaluation.
 
 This cycle starts from the set/linear separation.
 
-- **`tt`.**  Could aggressive exposition cuts create an A+ result without
+- **`tt`.**  Could aggressive exposition cuts create a theorem-level result without
   more mathematics?  Only the two proved mechanisms support deletions.
   Removing the recovery, spinor, or anomaly statements would change the
   paper's validated scope rather than its proof graph; C735 already keeps
@@ -874,28 +1007,31 @@ This cycle starts from the set/linear separation.
   a new shadow.  The recommended cap becomes 57--58 total pages, with the
   same four-page exceptional/boundary ceiling and C717/C729 sequel boundary.
 
-**Provisional Round 5 verdict:** no surviving A/A+ candidate under the
+**Provisional Round 5 verdict:** no additional theorem candidate survived under the
 pre-Theorem-4.1 graph; this round must be rerun before final saturation.
 
-## 6. Candidate ledger
+## 8. Candidate ledger
 
-| candidate | grade | final verdict or exact obstruction |
+| candidate | observable change to the proof graph | current status or exact obstruction |
 |---|---|---|
-| universal matching--norm transformation | A+ unity, A+ compression, A mathematics | adopt; exact theorem and placement below |
-| quotient--conormal cofactor theorem | A+ unity, A compression, A mathematics | adopt; exact theorem and placement below |
-| conference relation as sole generator | B | not minimal; matching/Pfaffian law holds without \(C^2=5I\) |
-| one quadratic-algebra norm for every shadow | B | does not produce the matching carrier, polar relation, or quotient differential |
-| one stack/groupoid for four torsors | B | bookkeeping only; incompatible fibre types and actions remain independent |
-| cross-block master Fitting complex | refuted | no descent to \(M_{0,6}\); first support is \(Z_T=0\), not collision |
-| compactified derived pushforward | deferred branch, below B for compression | needs a new boundary-twisted object and cannot replace the intrinsic Pfaffian theorem |
-| one master degeneracy scheme | refuted | strict \(15/20/15\) component filtration with unequal dimensions and a nonreduced middle |
-| human ten-node local normal form | B | would close one appendix trust gap but does not change two proof clusters |
-| unsigned Hecke unit/counit for \(36\to6\) | refuted | complete-product pull--push is rank one and zero on augmentation |
-| signed Hecke unit/counit | circular | nonzero signs reinsert the coherent switching/support source |
-| direct Gram continuation | refuted as unification | redundancy four and reflection identity replace the conference square |
-| merge physical or exceptional branches into the principal theorem | B or worse | changes scope and hierarchy; does not delete a proof obligation |
+| universal matching--norm transformation | replaces the exterior/Pfaffian coefficient comparison, block determinant derivation, and repeated pole covariance | proved; undergoing merger with the exterior-exponential form |
+| quotient--conormal cofactor theorem | replaces two kernel arguments and 25 cofactor identities by one kernel lemma and one scalar witness | proved; kept separate because it uses the quotient differential rather than the matching carrier |
+| rank-one tensor critical ideal | gives the critical ideal in every pair of dimensions by a spanning-tree proof | proved |
+| Golden ten-node normal form | identifies the exact local ideal and square-zero length-four defect at all ten nodes | proved as a corollary of the tensor theorem |
+| matching base equals the \((m+1)\)-equals arrangement | replaces base-locus elimination by the two-row Specht ideal theorem | proved/imported at its classical boundary |
+| stability--criticality--base trichotomy | combines stability, contraction, criticality, and the base scheme at one multiplicity threshold | proved from the preceding results; simplicity review will decide whether it is the principal statement or only a summary theorem |
+| node cotangent identification | identifies the defect module with the cotangent spaces of the target nodes | proved as a functorial corollary, not counted as a separate principal mechanism |
+| conference relation as sole generator | would remove the matching carrier | rejected: matching/Pfaffian law holds without \(C^2=5I\) |
+| one quadratic-algebra norm for every shadow | would merge matching, polar, and spectral outputs | rejected: it does not produce the matching carrier, polar relation, or quotient differential |
+| one stack/groupoid for four torsors | would replace four marking layers by one descent object | rejected: incompatible discrete, gauge, one-dimensional, and quadratic fibres remain independent |
+| cross-block master Fitting complex | would merge collision, Jacobian, and Pfaffian schemes | refuted: no descent to \(M_{0,6}\), and first support is \(Z_T=0\) |
+| compactified derived pushforward | could organize pole-marked MCM data | deferred branch: it needs a new boundary-twisted object and replaces no current proof |
+| unsigned Hecke unit/counit for \(36\to6\) | would linearize the return cycle | refuted: complete-product pull--push is rank one and zero on augmentation |
+| signed Hecke unit/counit | would repair that linearization | circular: nonzero signs reinsert the coherent switching/support source |
+| direct Gram continuation | would make the return another conference step | refuted: redundancy four and the reflection identity replace the conference square |
+| merge physical or exceptional branches into the principal theorem | would reduce the number of section-level branches | rejected: it changes scope and hierarchy without deleting a proof obligation |
 
-## 7. After graph and quantitative delta
+## 9. After graph and quantitative delta
 
 ### After dependency DAG
 
@@ -937,7 +1073,7 @@ bracket naturality, spectral norm and pole boundary, classical Segre relation,
 generic differential rank plus one cofactor witness, and the C742 boundary
 theorem.  Existing application proofs are unchanged.
 
-## 8. Literature and attribution audit
+## 10. Literature and attribution audit
 
 This focused attribution audit names four sources, two read at full text.
 The report makes no novelty or priority claim, and its validity does not
@@ -978,7 +1114,7 @@ proved directly here or in C739.  No “new,” “first,” or “unique in the
 literature” wording is authorized.  MathSciNet, Google Scholar, and
 forward-citation closure were not needed and were not covered.
 
-## 9. Validation and trust
+## 11. Validation and trust
 
 No new computation is load-bearing.  The upgrades are human theorems whose
 exact Golden scalars, ranks, and coordinate bridges are checked by frozen or
@@ -1047,7 +1183,7 @@ finite incidence data.  They do not replace the human theorems.  Theorems
 boundaries; Singular now corroborates the marked coordinate bridge rather
 than supplying the mathematical mechanism.
 
-## 10. Post-search unification specification
+## 12. Post-search unification specification
 
 This section specifies a later, separately authorized manuscript task.  It
 does not apply the edits.
@@ -1130,13 +1266,14 @@ central replays, build warning-free, and compare the rendered before/after
 page count.  Do not reopen C743 research or add a shadow branch during that
 task.
 
-## 11. Final task-level `ej` + `tt` and Mystery ledger
+## 13. Current task-level `ej` + `tt` and Mystery ledger
 
 ### `ej`
 
 - The universal matching theorem supplies a clean explanation of both success
   and failure: projective brackets descend; a selected spectral factor needs
-  a pole.  This is stronger than merely shortening formulas.
+  a pole.  The same statement supplies both the identity and its descent
+  boundary.
 - The quotient--conormal theorem identifies the special-conformal vector as
   geometry of the source quotient and the Igusa vector as geometry of the
   target hypersurface.  The assembled adjugate becomes the cofactor joining
@@ -1168,16 +1305,11 @@ task.
 | why exterior, commutator Pfaffian, and cross determinant agree | settled by Theorem 2.1 | one universal matching evaluation plus spectral norm |
 | why Pfaffian descends but a selected cross block needs a pole | settled by Theorem 2.1 | projective bracket naturality versus fixed-eigenspace obstruction |
 | why the assembled adjugate factors as polar times special-conformal direction | settled by Theorem 3.2 | target conormal times residual source orbit, with one scalar witness |
-| whether the ten-point nilpotent defect has a human local normal form | open evidence gap, not an A-level C743 candidate | no allocated owner; remains appendix-level one-CAS evidence |
+| whether the ten-point nilpotent defect has a human local normal form | settled by the rank-one tensor quotient | local ideal \(\mathfrak m(u)(v)\), square-zero length four per node, with independent replay |
 | whether a boundary-twisted pole-marked MCM pair has a useful derived pushforward | genuine open branch, not current compression | requires a separately allocated compactification task before any \(R\pi_*\) claim |
 | whether the \(36\to6\) return is a linear adjunction | settled negatively | unsigned pull--push vanishes on augmentation; signed repair is circular |
-| whether another current A/A+ compression survives | settled by two saturation rounds | none after the moduli and balanced-return double closeouts |
+| whether another current compression survives the simplicity review | open while C743 remains active | rerun the moduli and balanced-return rounds from the new quotient theorem before closing |
 
-No genuine mystery remains in the central unity mechanism.  The two open
-items are a bounded appendix trust gap and a separate compactified-moduli
-branch; neither blocks the post-search unification task.
-
-**Vibe check:** excellent.  C743 found a real conceptual spine rather than a
-new branch: two theorems make the existing operator story shorter and more
-inevitable, while the saturation rounds sharply delimit where unity would
-be false or circular.
+The former nilpotent trust gap is closed.  The compactified-moduli branch and
+the rerun simplicity/saturation review remain open, so this is not a task
+closeout.
