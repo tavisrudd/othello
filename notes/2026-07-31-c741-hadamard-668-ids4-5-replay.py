@@ -116,6 +116,23 @@ def canonical(pair: tuple[tuple[int, ...], tuple[int, ...]]) -> tuple:
     return min(images)
 
 
+def fixed_canonical(pair: tuple[tuple[int, ...], tuple[int, ...]], case: str) -> tuple:
+    a, b = pair
+    if case == "same":
+        images = []
+        for unit in (1, 2, 4, 5, 7, 8):
+            x, y = transformed(a, unit, 0), transformed(b, unit, 0)
+            images.extend(((x, y), (y, x)))
+        return min(images)
+    images = [
+        (transformed(a, unit, 0), transformed(b, unit, 0)) for unit in (1, 4, 7)
+    ]
+    images.extend(
+        (transformed(b, unit, 3), transformed(a, unit, 3)) for unit in (2, 5, 8)
+    )
+    return min(images)
+
+
 def check_witness(record: dict, target: int) -> None:
     a, b = map(tuple, record["sequences"])
     assert sum(a) == sum(b) == 1
@@ -130,7 +147,7 @@ def main() -> None:
     if len(sys.argv) != 2:
         raise SystemExit(f"usage: {Path(sys.argv[0]).name} CERTIFICATE.json")
     data = json.loads(Path(sys.argv[1]).read_text())
-    assert data["schema"] == "c741-lp333-ids4-5-compression-checkpoint-v1"
+    assert data["schema"] == "c741-lp333-ids4-5-compression-checkpoint-v2"
 
     ledgers = []
     pair_sets = []
@@ -142,6 +159,7 @@ def main() -> None:
         assert {str(k): v for k, v in sorted(Counter(map(len, full_orbits)).items())} == case[
             "full_orbit_size_counts"
         ]
+        assert sorted(orbit[0] for orbit in full_orbits if len(orbit) == 1) == [0, 111, 222]
         assert sorted({g % 9 for g in group}) == case["image_mod_9"] == [1, 4, 7]
         assert sorted({g % 37 for g in group}) == case["image_mod_37"] == [1, 10, 26]
         ledger, pairs = enumerate_compressions(group)
@@ -154,6 +172,23 @@ def main() -> None:
         "affine_decimation_translation_swap_representatives"
     ] == 108
     assert data["signed_zero_normalized_branch_count_before_affine_reduction"] == 2592
+
+    lemma = data["fixed_point_lemma"]
+    assert lemma["singleton_positions"] == [0, 111, 222]
+    # A positive row has 166 minus signs.  Every other orbit has size three,
+    # so its singleton contribution is 166 mod 3, hence exactly one of 0..3.
+    assert 166 % 3 == lemma["minus_signs_per_positive_row_on_singletons"] == 1
+    assert lemma["normalized_relative_cases"] == ["same", "different"]
+    oriented = set(pair_sets[0]) | {(b, a) for a, b in pair_sets[0]}
+    assert len(oriented) == lemma["oriented_positive_compression_pairs"] == 1296
+    fixed_counts = {
+        case: len({fixed_canonical(pair, case) for pair in oriented})
+        for case in ("same", "different")
+    }
+    assert fixed_counts == lemma["stabilizer_representatives"] == {
+        "same": 324,
+        "different": 648,
+    }
 
     check_witness(data["positive_control_9"], -74)
     check_witness(data["positive_control_37"], -18)

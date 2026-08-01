@@ -141,6 +141,28 @@ def canonical_pair(pair: tuple[tuple[int, ...], tuple[int, ...]]) -> tuple:
     )
 
 
+def fixed_point_canonical_pair(
+    pair: tuple[tuple[int, ...], tuple[int, ...]], case: str
+) -> tuple:
+    """Canonicalize under the stabilizer of a normalized fixed-point pattern."""
+    a, b = pair
+    if case == "same":
+        return min(
+            candidate
+            for unit in (1, 2, 4, 5, 7, 8)
+            for candidate in (
+                (transform(a, unit, 0), transform(b, unit, 0)),
+                (transform(b, unit, 0), transform(a, unit, 0)),
+            )
+        )
+    if case == "different":
+        return min(
+            [(transform(a, unit, 0), transform(b, unit, 0)) for unit in (1, 4, 7)]
+            + [(transform(b, unit, 3), transform(a, unit, 3)) for unit in (2, 5, 8)]
+        )
+    raise ValueError(case)
+
+
 def witness_record(sequence_pair: tuple[tuple[int, ...], tuple[int, ...]], target: int) -> dict:
     a, b = sequence_pair
     joint_paf = tuple(x + y for x, y in zip(paf(a), paf(b)))
@@ -185,6 +207,13 @@ def build_certificate() -> dict:
     assert len(pair_sets[0]) == 648
     canonical = {canonical_pair(pair) for pair in pair_sets[0]}
     assert len(canonical) == 108
+    oriented_pairs = set(pair_sets[0]) | {(b, a) for a, b in pair_sets[0]}
+    assert len(oriented_pairs) == 1296
+    fixed_point_counts = {
+        case: len({fixed_point_canonical_pair(pair, case) for pair in oriented_pairs})
+        for case in ("same", "different")
+    }
+    assert fixed_point_counts == {"same": 324, "different": 648}
 
     group37 = (1, 10, 26)
     orbits37 = orbits(range(37), group37, 37)
@@ -197,7 +226,7 @@ def build_certificate() -> dict:
         expanded37.append(tuple(sequence))
 
     return {
-        "schema": "c741-lp333-ids4-5-compression-checkpoint-v1",
+        "schema": "c741-lp333-ids4-5-compression-checkpoint-v2",
         "length": LENGTH,
         "scope": "fixed untranslated common multipliers IDs 4 and 5",
         "cases": cases,
@@ -205,6 +234,13 @@ def build_certificate() -> dict:
         "row_sum_positive_pair_count": 648,
         "affine_decimation_translation_swap_representatives": len(canonical),
         "signed_zero_normalized_branch_count_before_affine_reduction": 2592,
+        "fixed_point_lemma": {
+            "singleton_positions": [0, 111, 222],
+            "minus_signs_per_positive_row_on_singletons": 1,
+            "normalized_relative_cases": ["same", "different"],
+            "oriented_positive_compression_pairs": len(oriented_pairs),
+            "stabilizer_representatives": fixed_point_counts,
+        },
         "positive_control_9": witness_record(WITNESS_9, -74),
         "positive_control_37": witness_record(tuple(expanded37), -18),
         "exact_lift_status": "OPEN",

@@ -117,6 +117,23 @@
   },
   "conclusion": "both separate quotient compressions are feasible; neither ID is decided",
   "exact_lift_status": "OPEN",
+  "fixed_point_lemma": {
+    "minus_signs_per_positive_row_on_singletons": 1,
+    "normalized_relative_cases": [
+      "same",
+      "different"
+    ],
+    "oriented_positive_compression_pairs": 1296,
+    "singleton_positions": [
+      0,
+      111,
+      222
+    ],
+    "stabilizer_representatives": {
+      "different": 648,
+      "same": 324
+    }
+  },
   "length": 333,
   "positive_control_37": {
     "joint_paf_nonzero_shifts": [
@@ -287,7 +304,7 @@
     "status": "FEASIBLE_COMPRESSION_ONLY"
   },
   "row_sum_positive_pair_count": 648,
-  "schema": "c741-lp333-ids4-5-compression-checkpoint-v1",
+  "schema": "c741-lp333-ids4-5-compression-checkpoint-v2",
   "scope": "fixed untranslated common multipliers IDs 4 and 5",
   "signed_zero_normalized_branch_count_before_affine_reduction": 2592
 }

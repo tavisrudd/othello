@@ -150,7 +150,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C177 `[gem-mining]` [QUEUED FOLLOW-ON]** — generalized-hexagon connection.
 - **C193 `[gem-mining]` [OPEN ILL GATE]** — obtain/read the remaining BSW source.
 - **C737 `[gem-mining]` [QUEUED; INDEPENDENT]** — attack the exact equiangular-line maximum `M(18) in {57,58,59}` through a complete feasible Seidel-spectrum census, Jacobi/interlacing and lattice filters, and independently checkable certificates for terminal graph nonexistence claims → `notes/2026-07-31-c737-equiangular-lines-r18.md`.
-- **C741 `[gem-mining]` [IN PROGRESS; 108 EXACT LIFT REPRESENTATIVES REMAIN]** — decide residual fixed common-multiplier LP(333) IDs 4 and 5; both separate 9- and 37-compressions are exactly feasible, while the complete 9-compression lift frontier is 648 normalized pairs and 108 affine/decimation/swap representatives; finish with selector-aware proof-carrying exact lifts or a mixed-character obstruction, without overclaiming unrestricted Hadamard order 668 → `notes/2026-07-31-c741-hadamard-668-ids4-5.md`.
+- **C741 `[gem-mining]` [IN PROGRESS; 108 EXACT LIFT REPRESENTATIVES REMAIN]** — decide residual fixed common-multiplier LP(333) IDs 4 and 5; both separate 9- and 37-compressions are exactly feasible, the complete 9-compression lift frontier is 648 normalized pairs and 108 affine/decimation/swap representatives, and each positive row has exactly one minus among the fixed positions `{0,111,222}` (same/different pair geometry); finish with selector-aware proof-carrying exact lifts or a mixed-character obstruction, without overclaiming unrestricted Hadamard order 668 → `notes/2026-07-31-c741-hadamard-668-ids4-5.md`.
 
 ### `gateway`
 
