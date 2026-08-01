@@ -1853,8 +1853,17 @@
       "last": 739,
       "purpose": "classify the Golden cubic lift and test its second-order transfer predictions",
       "sequence": 206
+    },
+    {
+      "count": 1,
+      "first": 740,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 740,
+      "purpose": "screen residual LP(333) multiplier IDs 0-5 for exact orbit-lock obstructions",
+      "sequence": 207
     }
   ],
-  "next_id": 740,
+  "next_id": 741,
   "schema": "codex-task-id-allocations-v1"
 }
