@@ -1907,8 +1907,17 @@
       "last": 749,
       "purpose": "Paper II Serre-style all-q proof closure",
       "sequence": 212
+    },
+    {
+      "count": 1,
+      "first": 750,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 750,
+      "purpose": "Paper II structural Lean after four human proof rounds",
+      "sequence": 213
     }
   ],
-  "next_id": 750,
+  "next_id": 751,
   "schema": "codex-task-id-allocations-v1"
 }
