@@ -1342,3 +1342,150 @@ B→B+ and readiness B−→B; golden writing B−→B and readiness C+→B−. 
 Q&A record and retain their dialogue structure, including the §12.1 partial reversal of
 the earlier window-demotion recommendation; only their factual state references were
 updated. Superseded reasoning lives in this file's git history, not in the text above.
+
+---
+
+# Follow-up 5 (same date): re-argument under strength-over-schedule
+
+## 14. Recommendations re-derived when delay, referee convenience, and our own effort cost ~nothing
+
+**C680's category, first, since it gates everything downstream:** C680 is *internal*. Its
+content is (a) verifying our pinned readings of Hitchin against sources that exist and are
+fetchable into the lit cache — the degree-2 cover, the branch sextic, the chart
+restriction ι*J₀ = 16σ₃², the two-configuration fibre, V_t = U_t^⊥ — and (b) making the
+release bundle self-contained. No third party, no unproven external input, no waiting on
+anyone. The same holds for the BBS and Hassett–Tschinkel checks in Paper I. **None of the
+three citation exposures is a scheduling argument under the new objective; they are
+mandatory correctness gates that we close ourselves, in days.** The only residual risk they
+carry is mathematical (a verification could *fail*), and that risk exists under any
+packaging.
+
+### 14.1 Consolidation (§12.5 re-argued): I reverse on γ and take α in full
+
+My §12.5 refusal decomposed into three reasons: referee wholesale-rejection risk, venue
+length bands, and γ chained behind C680. The first two are referee-process costs — gone
+under preprint primacy. The third is now an internal gate — gone as a scheduling argument.
+What survives of my refusal is only the mega-paper precedent, and re-examined, that
+precedent is about **strength, not schedule — but it constrains writing, not partition.**
+The 37-page paper failed because it merged *heterogeneous* threads (rigidity +
+factorization + passages + survival ledgers) and let ledger-prose compete with its
+headline; that is a hierarchy failure the style guide diagnoses, and it would sink a
+consolidated paper under any objective. It does not argue against merging *homogeneous*
+threads around one narrative.
+
+**Revised partition (recommended):**
+
+- **α — the headline paper:** Paper I + the one-matrix dual-cubic identity (§12.2) + the
+  census/companion material as an appendix or ancillary + the k≤8 classification stated
+  in the body. One object, one narrative ("deep holes reconstruct the code, its golden
+  operator, and — through length eight — nothing else ever does this"). This is the full
+  consolidation of the α I designed and previously took only half of.
+- **β — Paper II**, unchanged as a unit (irreducible), now with the all-good-reduction
+  extension queued as its strength upgrade (§14.2).
+- **γ — golden + Paper III merged, after C680 closes.** I reverse my earlier refusal.
+  Under strength-primacy the decisive fact is that III standalone is the group's weakest
+  preprint (B− content, seven hedged pages) — exactly the kind of thin note that gets
+  pre-empted or ignored — while its two results are *strong* as the source clauses of the
+  synthesis: the √5 square class becomes clause (iv) of Theorem A sitting beside its
+  proof, and the bond-order restriction becomes the program's cross-field exit. Golden
+  and III are homogeneous (both are about the orientation torsor and its
+  characteristic-zero source), so the mega precedent's surviving lesson (no ledger-prose,
+  one headline) is satisfiable. Condition: clause (iv) must pass the §12.4 check and C680
+  must verify — both internal.
+- **q13 extraction: unchanged, and strengthened.** It was never schedule-motivated
+  (audience fit + visibility), and under §14.2 it acquires a new role: the passant-code
+  argument is the *method pilot* for C756. A standalone methods-bearing paper is stronger
+  than a buried companion section under any objective.
+
+Net: four preprints (α, β, γ, q13), each individually strong, no B− paper in the set.
+
+### 14.2 Strongest reachable paper (§12.6 re-argued): C756 becomes the spine, not a side bet
+
+Under the old objective C756 was a 30% side bet because months of work with a 70% failure
+mode was expensive. Under the new objective the expected value flips: 30–40% × (an A+
+classification paper) with the failure branch still yielding partial results (extended
+k-ranges, new uniform lemmas, a conceptual k=7 proof) dominates every packaging move on
+the table. **Build around it.** Concretely, the attack has more structure than my §12.6
+suggested, using tools already in the repo:
+
+- *Lower window edge (q near 2k−3):* there the passant pencils saturate — at q = 2k−3
+  every vertex's k−1 chords exhaust its (q+1)/2 passants — so a conic-filling arc's
+  vertices give low-weight words of the binary passant/internal incidence code, whose
+  dimension is known for **all** odd q (Madison–Wu). The q=13 weight-eight exclusion is
+  precisely this argument at one field; generalizing its Segre-lemma/clique step to a
+  uniform minimum-distance or clique bound is the natural first campaign. This is why the
+  q13 paper should ship as the pilot.
+- *Upper window edge (q near k²/3):* the chord-moment system plus n_i ≥ 0 feasibility,
+  which already kills k=5 outright and pinned the k=7 spectra; push for an infeasibility
+  band uniform in k.
+- *Middle range:* Hollmann–Xiang's association scheme exists for all q; the Sylvester
+  trick at q=9 is its smallest instance. Clique/eigenvalue bounds in that scheme are the
+  third lever.
+
+If C756 lands, the A+ paper is **α⁺ = α + the all-k classification** ("deep-hole loci are
+conics exactly twice, ever"), and it should be assembled as one paper. Decision rule for
+the tension between shipping α and waiting: do not hold α hostage — post α when its own
+internal gates (BBS/HT verification, hook merge) close; if C756 resolves within that
+assembly window, merge before first posting; otherwise the classification lands as α's
+v2 or a sequel. arXiv versioning makes this costless, and posting α early *protects*
+priority on rigidity while C756 runs.
+
+**The runner-up is back on the table:** the all-good-reduction upgrade of Paper II
+(integral models + degeneration analysis of the harmonic decomposition, orbit structure,
+and marker algebra — the ingredients the paper itself names). It attacks my stated
+binding constraint on II's ceiling (no transferable technique / no uniformity) directly.
+Queue it as a C-task; it is the second-highest-EV mathematics after C756.
+
+**Other strength moves I filtered out earlier for effort, now recommended:**
+1. Formalize Dye's Theorem 1 (the Brianchon bound and equality classification) in Lean,
+   eliminating the last two axioms from Paper I's formal surface — a genuine
+   trust-strength upgrade, bounded synthetic-geometry work.
+2. Replace the brute-force k=7 exclusion with a conceptual proof (a C756 stepping stone;
+   the companion's note that spectral/LP attempts failed marks where the difficulty is).
+3. Bank the §12.4 items now (eigenspace↔sheet lemma against mega (E5); compressed
+   T₁₁-torsor proposition) — they were always cheap; under the new objective there is no
+   reason they are still unwritten.
+4. Solve Paper III's integral-boundary problem (identify the exact prime set N via an
+   integral Mukai–Umemura model, flatness, Stein base change) — makes γ's arithmetic
+   clause characteristic-complete; larger, queue behind C756 and the good-reduction task.
+
+### 14.3 Sequencing (§10.2 re-argued): waves, not a chain
+
+The old order optimized backward-pointing citations and listing momentum — partly
+schedule-flavored reasoning. Under strength-primacy the answer is **two simultaneous
+waves**: wave 1 = α and the q13 paper together (the q13 paper is α's method pilot; each
+cites the other's fresh arXiv ID); wave 2 = β and γ together once their internal gates
+close (β: commit/re-freeze + gloss passes; γ: C680 + clause-(iv) banking + merge). A
+simultaneous program launch lands with more force than a drip: each abstract carries one
+program sentence and the γ introduction tells the whole story with four live citations.
+III never ships as a thin standalone; golden-last survives only in the weak form
+"γ is in wave 2." If C756 lands early, wave 1 becomes α⁺ + q13 and is the strongest
+single arXiv day this program can produce.
+
+### 14.4 Audit of §§8–12 for schedule/effort/referee-risk load-bearing
+
+- **Collapses:** most of §11.3's positioning logic ("bill the window as secondary so an
+  objection can't sink the paper", "keep HT-dependent material off headline surfaces") —
+  replaced by *verify, then bill on merit*; §11.4's "spend memorability sparingly in
+  I–III to keep them safe" — put the flash where it is strongest, including unmuting the
+  bond-order hook in γ once C680 verifies; §12.3's extraction pricing (the referee-lottery
+  cost is no longer a cost).
+- **Survives unchanged (never schedule-based):** §8 headlines; §9 titles for β and q13
+  (α and γ need new titles — proposal for α: *"Deep holes remember the icosahedron:
+  reconstruction, rigidity, and the golden operator of the Clebsch code"*; γ keeps a
+  sharpened golden title with the program-summary Theorem A); §12.2 hook-forward (pure
+  memorability logic — now lands in α); the HT dual-route flip (strength: two proofs
+  beat one); §12.1's verify-first (now mandatory under both objectives); the q13
+  extraction; the Paper II Lucas-lemma readability work — reader comprehension is not
+  referee appeasement, an unreadable proof is a weaker preprint, so this survives as a
+  strength requirement.
+- **Reversed by the new objective:** §12.5's refusal of γ (now: merge III into golden
+  after C680); §12.5's hedge of keeping companion material half-out of α (now: full α);
+  §12.6's treatment of C756 as optional upside (now: the spine) and of the
+  all-good-reduction extension as out of scope (now: queued second).
+
+**What we give up, stated plainly:** wave 2 may trail wave 1 by however long C680 plus the
+clause-(iv) banking take — acceptable, since both are our own work; α carries the BBS/HT
+verification obligation *before* posting rather than around it — also our own work; and if
+C756 fails outright, α still ships as the §12.5-era strong paper, so the downside of
+building around the spine is only the time spent, which this objective prices at zero.
