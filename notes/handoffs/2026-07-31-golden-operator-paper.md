@@ -174,8 +174,12 @@ particular:
   gives the adjacent-order parity twin: the order-eight Paley skew-conference
   matrix produces a Hafnian quartic with a 120-line
   \(S_8/PGL_2(7)\) orbit spanning \(S^{(4,4)}\).  This is a coordinate
-  functional, not yet an identification with HMSV's skew cubic or C718's
-  physical permanent.  The next geometric gate
+  functional, not C718's physical permanent.  C739's `ej5` attack identifies
+  the 120 lines with the unordered disjoint pairs among the thirty labelled
+  \(SQS(8)\)'s and proves that they are nondegenerate self-polar critical
+  lines of HMSV's skew cubic, lying outside that cubic, with tangent signature
+  \((1,12)\).  The remaining order-eight gate is the arrangement cut by
+  their 120 polar hyperplanes on \(M_8\).  The next pole-marked geometric gate
   is to compactify the pole-marked MCM pair over
   \(\overline M_{0,7}\to\overline M_{0,6}\) with its boundary twist before
   computing any derived pushforward.  The exact report and evidence bundle are

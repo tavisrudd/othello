@@ -909,6 +909,119 @@ three-boson permanent of C718.  It should be handed to C718 as a possible
 parity-organizing invariant; no physical bosonic amplitude claim is made in
 C739.
 
+### Post-closeout `ej5`: the 120 self-polar Steiner pairs
+
+The open order-eight incidence question has an exact answer.  Use the
+coefficient inner product on squarefree degree-four polynomials to identify
+\(S^{(4,4)}\) with its dual.  If \(\Gamma_M\) is the bracket polynomial of
+a perfect matching and \(\epsilon(M)\) its Pfaffian crossing sign, normalize
+HMSV's unique skew cubic as
+
+\[
+ F(y)=\sum_M\epsilon(M)\langle y,\Gamma_M\rangle^3.
+\]
+
+This differs from the literal antisymmetrization of one matching cube only by
+the common stabilizer factor \(2^4 4!=384\).  It is therefore the same
+projective cubic with a convenient integral scale.
+
+Let \(h\) be the Paley--Hafnian coefficient vector from `ej4`.  Exact
+evaluation gives
+
+\[
+ F(h)=2,408,448,
+ \qquad
+ \nabla F(h)=4032h.
+\]
+
+Thus \([h]\) is **not** on the skew cubic and certainly not on its singular
+locus \(M_8\).  Instead, under the invariant self-duality it is a fixed point
+of the projective polar map defined by the fourteen HMSV quadrics.  Equivalently,
+the hyperplane \(h=0\) is the polar hyperplane of the point \([h]\).  By
+projective \(S_8\)-equivariance, every line in the 120-element Paley orbit is
+self-polar in the same sense.
+
+The coefficients reveal the finite geometry behind that orbit.  Define
+
+\[
+ \mathcal B_+=\{S:a_S=8\},\qquad
+ \mathcal B_-=\{S:a_S=-8\}.
+\]
+
+Each set has fourteen four-subsets; every three-subset lies in exactly one
+member of each.  Hence \(\mathcal B_+\) and \(\mathcal B_-\) are disjoint
+Steiner quadruple systems \(S(3,4,8)\).  There are thirty labelled
+\(SQS(8)\)'s.  Their disjointness graph is regular of degree eight and has
+
+\[
+ 30\cdot8/2=120
+\]
+
+edges.  Exact orbit comparison identifies
+
+\[
+ S_8/PGL_2(7)
+ \cong
+ \{\text{unordered disjoint pairs of labelled }SQS(8)\}.
+\]
+
+The signed 240-vector orbit consists of the two orientations of each edge:
+\(h/8\) is the difference of the two Steiner incidence vectors.  The second
+one-dimensional line fixed by the pair stabilizer is the centered support
+vector
+
+\[
+ h'_S=
+ \begin{cases}
+  -3,&S\in\mathcal B_+\cup\mathcal B_-,\\
+   2,&S\notin\mathcal B_+\cup\mathcal B_-.
+ \end{cases}
+\]
+
+It satisfies \(\langle h,h'\rangle=0\).  The exact Hessian calculation is
+
+\[
+ \operatorname{Hess}_h(F)h=8064h,
+ \qquad
+ \operatorname{Hess}_h(F)h'=5760h',
+\]
+
+and on the remaining twelve dimensions its minimal factor is
+
+\[
+ t^2+2304t-4,644,864,
+\]
+
+so the two eigenvalues are
+
+\[
+ -1152\pm1728\sqrt2,
+\]
+
+each with multiplicity six.  The radial eigenvalue \(8064=2\cdot4032\) is
+Euler's identity for a cubic.  On the tangent space to the invariant sphere,
+the constrained Hessian subtracts the multiplier 4032.  It therefore has one
+positive eigenvalue \(1728\) and twelve negative eigenvalues
+\(-5184\pm1728\sqrt2\).  Every Paley line is a nondegenerate projective
+critical point of Morse signature \((1,12)\), up to reversing the sign
+convention for the objective.
+
+This supplies the missing relation to HMSV without collapsing the objects:
+
+\[
+ \boxed{\text{disjoint Steiner pair}}
+ \longleftrightarrow
+ \boxed{\text{Paley--Hafnian line}}
+ \longleftrightarrow
+ \boxed{\text{self-polar critical line of the skew cubic}}.
+\]
+
+It also explains why the order-eight orbit is large rather than simplex-like:
+it is the edge set of a thirty-vertex design graph.  The next geometric
+question is whether its 120 polar hyperplanes cut a distinguished divisor or
+arrangement on \(M_8\), not whether their pole points lie on \(M_8\); the
+latter is now ruled out.
+
 This gives the deeper general-versus-exceptional split:
 
 | mechanism | every (2m) | only the Golden (m=3) resonance |
@@ -945,7 +1058,9 @@ searched the web and zbMATH Open with these families:
 - `Mbar 0 6 GIT Segre cubic boundary divisors 3+3 contracted nodes`;
 - the HMSV title family for equations and relations of points on a line; and
 - zbMATH-restricted versions of the invariant, conference-Pfaffian, Segre,
-  and symmetric-power queries.
+  and symmetric-power queries; and
+- post-`ej5` exact combinations of `skew cubic`, `PGL(2,7)`, `120 points`,
+  and `disjoint Steiner quadruple systems order 8`.
 
 The web interface did not expose stable total-result counts, so this audit
 does not turn the displayed result pages into an enumerated negative set.
@@ -1004,6 +1119,13 @@ audit, not a priority proof.
    `d2da258cd8513a9b782a8270baa82acc51bc8d552e18db104967c2a08bffebfc`.
    Used here only for the classical outer action and Joubert matching
    coordinates already frozen by C715.
+6. Rudolf Mathon and Anne Penfold Street, *Partitions of sets of designs on
+   seven, eight and nine points*, DOI
+   `10.1016/S0378-3758(96)00066-3` --- **metadata and publisher abstract
+   only**.  The abstract confirms that labelled \(SQS(8)\)'s, their
+   partitions, and associated design graphs are classical subjects.  It was
+   not used to prove the `ej5` orbit or polar calculation, and the full text
+   was not accessible in this sweep.
 
 ### Verdict
 
@@ -1023,9 +1145,11 @@ conference functional, identifies its six-sister orbit with the Joubert/
 syndrome/ETF simplex, proves the Möbius diagonal-congruence pole-descent
 obstruction, connects the nonreduced Jacobian scheme to the two boundary
 types, or places the order-eight Paley Hafnian orbit beside the HMSV skew
-cubic.  Those are the defensible task-owned *syntheses*.  Manuscript-safe
-wording should say “in the marked Golden construction” and “the bounded
-search did not locate,” never “new” or “first.”
+cubic as its 120 self-polar critical lines.  Those are the defensible
+task-owned *syntheses*.  The design sweep does show that disjoint
+\(SQS(8)\)'s themselves are classical.  Manuscript-safe wording should say
+“in the marked Golden construction” and “the bounded search did not locate,”
+never “new” or “first.”
 
 ## 12. Placement recommendation
 
@@ -1037,6 +1161,7 @@ disposition is:
 | marked lift-rigidity theorem and universal even-order identity | theorem body, immediately after the operator propagation theorem |
 | universal (S^{(m,m)}) matching-covariant theorem and order-six hypersurface criterion | conceptual theorem body or a short standalone appendix; this is the deepest general explanation |
 | Pfaffian--Hafnian parity twin and 120-line order-eight Paley orbit | research sequel or C718 interface; do not place as a physical bosonic claim |
+| disjoint-SQS interpretation and skew-cubic self-polar theorem | order-eight research sequel; it closes the `ej4` incidence question |
 | invariant/covariant multiplicity table | compact proof subsection or appendix |
 | pole-descent theorem and \(\overline M_{0,6}\) boundary unification | theorem body after the six-point quotient; it explains the C715 inverse fibre |
 | reconstruction table and portability criterion | main-text corollary |
@@ -1056,7 +1181,10 @@ The task-owned exact evidence is:
 - `notes/2026-07-31-c739-degeneracy-audit.sing` for the Jacobian and base
   schemes;
 - `notes/2026-07-31-c739-order8-hafnian-audit.py` for the Paley matrix,
-  Hafnian quartic, stabilizer, orbit, and carrier-rank calculation; and
+  Hafnian quartic, stabilizer, orbit, and carrier-rank calculation;
+- `notes/2026-07-31-c739-order8-skew-cubic-audit.py` for the two Steiner
+  systems, their 120-edge disjointness orbit, the normalized HMSV cubic,
+  polar fixed-point identity, and exact Hessian spectrum; and
 - `notes/2026-07-31-c739-cycle-audit.py` and JSON certificate for the two
   six-set projections.
 
@@ -1070,6 +1198,7 @@ python3 notes/2026-07-31-c739-representation-audit.py --check
 python3 notes/2026-07-31-c739-representation-audit-replay.py
 nix shell nixpkgs#singular --command Singular -q notes/2026-07-31-c739-degeneracy-audit.sing
 python3 notes/2026-07-31-c739-order8-hafnian-audit.py
+python3 notes/2026-07-31-c739-order8-skew-cubic-audit.py
 python3 notes/2026-07-31-c739-cycle-audit.py --check
 ```
 
@@ -1134,6 +1263,15 @@ claim and does not enlarge their literature audits.
 - **Bounded by `ej4`:** the order-eight Hafnian is a coordinate functional,
   not HMSV's skew cubic and not yet C718's physical three-boson permanent.
   Their incidence is the next research question, not a proved identification.
+- **Settled by post-closeout `ej5`:** each of the 120 Paley lines is the
+  difference, up to sign, of one of the 120 unordered disjoint pairs among
+  the thirty labelled \(SQS(8)\)'s; the 240 signed vectors orient those
+  pairs.  Under invariant self-duality the lines are self-polar fixed points
+  of HMSV's cubic polar map, lie outside the cubic, and are nondegenerate
+  critical points with tangent signature \((1,12)\).
+- **Refined by `ej5`:** the remaining order-eight problem is the arrangement
+  cut by the 120 polar hyperplanes on \(M_8\), not incidence of their pole
+  points with the singular locus; that incidence is exactly false.
 - **Settled by `tt`:** the uniqueness statement must name its target
   representation and equivalence relation.  In that category it is a
   multiplicity-one theorem; without them it is false or undefined.
@@ -1158,4 +1296,5 @@ category, the apparently Golden-only matching mechanism becomes a clean
 Pfaffian--Hafnian parity pair, and the previously open 36-to-six return closes
 canonically.  The main caution is equally useful: the degeneracies do not
 collapse to one scheme, the Jacobian carries subtle nilpotent structure, and
-the order-eight Hafnian/skew-cubic incidence remains a genuine next problem.
+the arrangement induced by the 120 order-eight polar hyperplanes remains a
+genuine next problem.
