@@ -113,3 +113,13 @@ Strong closure.  The example no longer rests on an informal dictionary step:
 its reusable mechanism is both a two-paragraph human proof and a
 kernel-checked theorem family, while the genuinely Clebsch-specific data keep
 their honest external boundary.
+
+## Post-closeout cold read
+
+An independent manuscript-only reader returned `GO WITH FIXES` with no
+correctness or scope blocker.  The two local findings are now repaired:
+Section 8 names the companion Clebsch theorem as the source of the conic,
+120-count, and monomial orbit, and Section 5 explicitly distinguishes the
+syndrome-scaling `C_10`, its projective `A_5` quotient, and the larger realized
+`S_5` party image.  The warning-free build, visual inspection of pages 19 and
+22, and authoritative 37-public/84-formal manifest verification passed.
