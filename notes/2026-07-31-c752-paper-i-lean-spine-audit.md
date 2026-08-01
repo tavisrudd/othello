@@ -145,7 +145,7 @@ repairs are finite and source-owned:
    do not hand-edit them.
 2. In `Q11A5PointOrbits.lean`, replace “opaque certificates” by “bounded
    kernel-checked row certificates.”
-3. In `Q11A5PointOrbits.lean` and `Q11A5PointOrbitsData.lean`, replace the nine
+3. In `Q11A5PointOrbits.lean` and `Q11A5PointOrbitsData.lean`, replace the ten
    uses of “reflected lift/projectivity/action” by “normalized projective
    lift/projectivity/action.”  The declarations prove normalization,
    nonsingularity, and the action tables; they do not define a reflection.
