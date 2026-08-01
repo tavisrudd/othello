@@ -1,0 +1,18 @@
+{
+  "basis": "five noncrossing perfect-matching cubics",
+  "charts": {
+    "4+1+1": "(1,1+a,1+b,1+c,-1+d,0)",
+    "4+2": "(1,1+a,1+b,1+c,d,0)",
+    "5+1": "(1,1+a,1+b,1+c,1+d,0)"
+  },
+  "claim": "named Jacobian-cofactor combinations are unit multiples of generators whose symmetric orbits generate the reduced local three-equals ideals",
+  "field": "Q",
+  "independent_replay": {
+    "degree_bound_per_variable": 9,
+    "grid": "{-2,-1,0,1,2,3,4,5,6,7}^4",
+    "method": "dependency-free automatic differentiation and exact integer interpolation grid"
+  },
+  "minor_order": "four-column subsets then four-row subsets, lexicographic",
+  "schema": "c743-off-node-identities-v1",
+  "singular_version": "4.4.1"
+}

@@ -783,12 +783,12 @@ the false master-complex proposal was trying to obtain.
 
 In characteristic zero, the support hypothesis in Corollary 4.5 follows
 without computer algebra: the nilpotent defect of the six-point Jacobian
-scheme is supported exactly at the ten closed (3+3) points.
+scheme is supported exactly at the ten closed \(3+3\) points.
 
 #### Proof
 
-Work first on the semistable locus of ((\mathbf P^1)^6).  Every strictly
-semistable critical orbit has a unique closed (3+3) orbit in its closure.
+Work first on the semistable locus of \((\mathbf P^1)^6\).  Every strictly
+semistable critical orbit has a unique closed \(3+3\) orbit in its closure.
 Luna's strongly étale slice at that closed orbit is saturated, so it contains
 the whole quotient fibre after shrinking on the target.  Removing the smooth
 orbit directions identifies the quotient map with
@@ -806,75 +806,95 @@ Lemma 4.1 gives
  \sqrt{I_3(d\mu)}=(\mathfrak u)(\mathfrak v).
 \]
 
-Their quotient is supported only at (u=v=0).  Strongly étale pullback and
+Their quotient is supported only at \(u=v=0\).  Strongly étale pullback and
 the discarded smooth factors preserve Fitting ideals, radicals, and support.
 Thus on the semistable locus the defect occurs only at the ten closed orbits.
 
-It remains to check the unstable matching base.  Let (Q) be a maximal
-equal-coordinate block, of size (h=4) or (5), and put
+It remains to check the unstable matching base.  This can be done with three
+explicit cofactor identities, rather than a primary decomposition.  In the
+translation chart \(x_5=0\), use the noncrossing matching basis
 
 \[
- E_Q=\bigcap_{\substack{R\subset Q\\|R|=3}}
-      (x_i-x_j:i,j\in R),
- \qquad
- \Delta_Q=\prod_{i\in Q,\,j\notin Q}(x_i-x_j).
+\begin{aligned}
+ p_1&=(x_0-x_1)(x_2-x_3)x_4,&
+ p_2&=(x_0-x_1)x_2(x_3-x_4),\\
+ p_3&=(x_0-x_3)(x_1-x_2)x_4,&
+ p_4&=x_0(x_1-x_2)(x_3-x_4),\\
+ p_5&=x_0(x_1-x_4)(x_2-x_3).
+\end{aligned}
 \]
 
-The ideal (E_Q) is the reduced union of the triple-collision planes through
-the stratum, and (Delta_Q) is a unit at the chosen point.  Expanding the
-four-row Jacobian cofactors of the matching formula and grouping terms by
-the cross edge of the matching gives the two containments
+These form a basis of \(\mathcal I_3\), so target change of basis does not
+alter \(I_4(d\mathcal J_3)\).  Let \(M_1,\ldots,M_{25}\) be the \(4\times4\)
+minors of the \(5\times5\) Jacobian of \((p_1,\ldots,p_5)\), ordered first by
+the lexicographic four-column subset and then by the lexicographic four-row
+subset.
+
+Up to \(S_6\) and \(\operatorname{PGL}_2\), the unstable multiplicity types
+and representatives are
 
 \[
- \boxed{\qquad
-   \Delta_Q E_Q\subset I_4(d\mathcal J_3)\subset E_Q,
-   \qquad h=4,5.
- \qquad}
+ 4+1+1:(1,1,1,1,-1,0),\qquad
+ 4+2:(1,1,1,1,0,0),\qquad
+ 5+1:(1,1,1,1,1,0).
 \]
 
-Here the right containment says that the differential has rank at most three
-whenever a triple in (Q) remains equal.  For the left containment, after
-one cross edge is fixed, Laplace expansion leaves the alternating
-three-equals generator on (Q); summing over the possible cross edges gives
-the displayed factor (Delta_Q).  This is an ideal identity, so no generic
-point argument is used.
-
-Localizing at (Delta_Q) therefore gives
+In each chart put
 
 \[
- I_4(d\mathcal J_3)_{\Delta_Q}=(E_Q)_{\Delta_Q},
+ (x_0,x_1,x_2,x_3)=(1,1+a,1+b,1+c)
 \]
 
-which is reduced.  These are all unstable orbit types: up to (S_6) and
-(\operatorname{PGL}_2), their multiplicity partitions are (4+1+1),
-(4+2), and (5+1); the (6) partition is the zero vector in the
-projectivized translation quotient.  Hence there is no unstable off-node
-defect.  Together with the semistable slice calculation, this proves the
+and write \(x_4=-1+d,d,1+d\), respectively.  For the two four-point
+clusters, the reduced local three-equals ideal is the complete intersection
+
+\[
+ E_4=(a,b)\cap(a,c)\cap(b,c)\cap(a-b,a-c)
+     =\bigl(c(a-b),\ b(a-c)\bigr).
+\]
+
+The \(S_4\)-orbit of either displayed quadric generates \(E_4\).  Direct
+Laplace expansion of the named minors gives
+
+\[
+\begin{aligned}
+G_{411}:={}&\tfrac12M_5+\tfrac16(M_{16}+M_{17}+M_{21})
+ +\tfrac{2c-2d+4}{3}M_{20}+\tfrac{-2d+2}{3}M_{25}\\
+={}&-(1+c)(d-2)(d-1)(d-c-2)(c+d-1)c(a-b),\\[2mm]
+G_{42}:={}&M_{20}+M_{25}\\
+={}&(1+c)(d-a-1)(d-b-1)(a+b+c+d+1)c(a-b).
+\end{aligned}
+\]
+
+Every factor multiplying \(c(a-b)\) is a unit at the corresponding origin.
+Equivariance therefore puts all generators of \(E_4\) in the localized
+Jacobian-minor ideal.  The reverse containment holds because each triple
+plane is critical, so the two localized ideals are equal and reduced.
+
+For the \(5+1\) chart, the reduced ideal \(E_5\) is the intersection of the
+ten triple-diagonal ideals among the five clustered labels.  It is generated
+by the \(S_5\)-orbit of the Specht polynomial
+
+\[
+ g_5=cd(a-b)(c-d).
+\]
+
+The corresponding cofactor identity is
+
+\[
+\begin{aligned}
+G_{51}:={}&\tfrac12M_5+\tfrac16(M_{16}+M_{17}+M_{21})
+ +\tfrac{2c-2d}{3}M_{20}+\tfrac{-2d-2}{3}M_{25}\\
+={}&(1+c)(1+d)(1+c+d)\,cd(a-b)(c-d).
+\end{aligned}
+\]
+
+Again the prefactor is a unit, and \(S_5\)-equivariance gives the whole
+localized ideal \(E_5\).  These three identities exhaust the unstable
+projective source; the \(6\) partition is the zero vector in the
+projectivized translation quotient.  Hence the unstable critical scheme is
+reduced.  Together with the semistable slice calculation, this proves the
 claim and discharges the computational hypothesis in Corollary 4.5.
-
-For a direct hand check of the only unstable identity, set (x_5=0),
-(x_0=1).  Representatives are
-
-\[
- (1,1,1,1,-1,0),\qquad
- (1,1,1,1,0,0),\qquad
- (1,1,1,1,1,0).
-\]
-
-For the first two, writing the four-cluster displacements as (a,b,c)
-reduces (E_Q) to
-
-\[
- (a,b)\cap(a,c)\cap(b,c)\cap(a-b,a-c)
- =\bigl(c(a-b),\ b(a-c),\ bc(b-c)\bigr).
-\]
-
-For the last, (E_Q) is the analogous intersection of the ten
-triple-diagonal ideals among five variables.  Substitution in the matching
-expansion gives (Delta_QE_Q\subset I_4(d\mathcal J_3)) term by term; all
-factors of (Delta_Q) specialize to nonzero cross-cluster differences.
-This three-line localization is the human counterpart of C739's global
-annihilator calculation.
 
 ### The collision filtration after Theorems 4.1 and 4.2
 
@@ -1371,6 +1391,28 @@ forward-citation closure were not needed and were not covered.
 No new computation is load-bearing.  The upgrades are human theorems whose
 exact Golden scalars, ranks, and coordinate bridges are checked by frozen or
 C743-owned evidence bundles.
+
+The off-node identities in Proposition 4.6 pass from the repository root:
+
+```text
+python3 notes/2026-07-31-c743-off-node-identities.py --check
+python3 notes/2026-07-31-c743-off-node-identities-replay.py
+```
+
+| artifact | bytes | SHA-256 |
+|---|---:|---|
+| `2026-07-31-c743-off-node-identities.sing` | 1310 | `37f2a4326ce11362cc09c3f86156ec2885c9ba41b9a7afc6f568b68f234921e2` |
+| `2026-07-31-c743-off-node-identities.py` | 3042 | `b53dc2d9955bbdd82dd133ea8a0321bb0dbd79a434fbf1a65b168f62d3d68282` |
+| `2026-07-31-c743-off-node-identities.json` | 709 | `e11bba86b79ed8213dd1c6f1695cdcfa5772df7345c1c57570c864e5b75c3521` |
+| `2026-07-31-c743-off-node-identities-replay.py` | 3799 | `044bddc7afae6793fd15503eb5039ada6e27ccc7ccd400f210ed68f2dfcf3010` |
+
+The Singular audit checks the three displayed polynomial identities
+symbolically.  The dependency-free replay constructs the noncrossing
+matching Jacobian by automatic differentiation and checks the identities on
+a (10^4) exact integer grid.  Each difference has degree at most nine in
+each variable, so ten distinct values per variable prove the polynomial
+identity by iterated univariate interpolation.  The human proof uses the
+unit factors and symmetric Specht orbits, not either execution.
 
 The new node-normal-form bundle passes from the repository root:
 

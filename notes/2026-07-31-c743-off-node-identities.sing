@@ -1,0 +1,47 @@
+// Exact cofactor identities for the human off-node support proof in C743.
+// The five p_i are the noncrossing-matching basis in the chart x5=0.
+
+ring r=0,(x0,x1,x2,x3,x4),dp;
+poly p1=(x0-x1)*(x2-x3)*x4;
+poly p2=(x0-x1)*x2*(x3-x4);
+poly p3=(x0-x3)*(x1-x2)*x4;
+poly p4=x0*(x1-x2)*(x3-x4);
+poly p5=x0*(x1-x4)*(x2-x3);
+ideal critical=minor(jacob(ideal(p1,p2,p3,p4,p5)),4);
+
+ring s=0,(a,b,c,d),dp;
+
+map chart411=r,1,1+a,1+b,1+c,-1+d;
+ideal m411=chart411(critical);
+poly lhs411=1/2*m411[5]+1/6*(m411[16]+m411[17]+m411[21])
+  +(2*c-2*d+4)/3*m411[20]+(-2*d+2)/3*m411[25];
+poly rhs411=-(1+c)*(d-2)*(d-1)*(d-c-2)*(c+d-1)*c*(a-b);
+if (lhs411-rhs411!=0)
+{
+  ERROR("4+1+1 identity failed");
+}
+
+map chart42=r,1,1+a,1+b,1+c,d;
+ideal m42=chart42(critical);
+poly lhs42=m42[20]+m42[25];
+poly rhs42=(1+c)*(d-a-1)*(d-b-1)*(a+b+c+d+1)*c*(a-b);
+if (lhs42-rhs42!=0)
+{
+  ERROR("4+2 identity failed");
+}
+
+map chart51=r,1,1+a,1+b,1+c,1+d;
+ideal m51=chart51(critical);
+poly lhs51=1/2*m51[5]+1/6*(m51[16]+m51[17]+m51[21])
+  +(2*c-2*d)/3*m51[20]+(-2*d-2)/3*m51[25];
+poly rhs51=(1+c)*(1+d)*(1+c+d)*c*d*(a-b)*(c-d);
+if (lhs51-rhs51!=0)
+{
+  ERROR("5+1 identity failed");
+}
+
+print("C743_OFF_NODE_IDENTITIES_OK");
+print("basis=5_noncrossing_matchings");
+print("charts=4+1+1,4+2,5+1");
+print("local_generators=unit_times_Specht_orbits");
+quit;

@@ -135,24 +135,21 @@ transverse planes, and the quotient of the radical by the critical ideal is
 square-zero of length four.  The revised human global argument has two
 parts.  On the semistable locus, a saturated Luna slice identifies the map
 near each closed \(3+3\) orbit with the rank-one tensor quotient, whose defect
-is supported only at its origin.  On the unstable locus, for a maximal equal
-block \(Q\) of size four or five, put
+is supported only at its origin.  On the unstable locus, the proof uses five
+noncrossing matching coordinates and names all (25) Jacobian cofactors.  At
+the \(4+1+1\) and \(4+2\) representatives it gives explicit cofactor
+combinations equal to a unit times \(c(a-b)\); its \(S_4\)-orbit generates the
+reduced four-point three-equals ideal.  At the \(5+1\) representative it gives
+an explicit combination equal to
 
 \[
- E_Q=\bigcap_{\substack{R\subset Q\\|R|=3}}(x_i-x_j:i,j\in R),
- \qquad
- \Delta_Q=\prod_{i\in Q,\,j\notin Q}(x_i-x_j).
+ (1+c)(1+d)(1+c+d)\,cd(a-b)(c-d),
 \]
 
-The matching/cofactor expansion gives
-
-\[
- \Delta_QE_Q\subset I_4(d\mathcal J_3)\subset E_Q.
-\]
-
-Because \(\Delta_Q\) is a unit on that collision stratum, the critical ideal
-is the reduced ideal \(E_Q\) there.  The partitions \(4+1+1\), \(4+2\), and
-\(5+1\) exhaust the unstable projective source.  Thus the defect is supported
+whose \(S_5\)-orbit generates the reduced five-point three-equals ideal.
+The full identities and minor ordering are displayed in Proposition 4.6 and
+checked by both symbolic and dependency-free exact replays.  The partitions
+\(4+1+1\), \(4+2\), and \(5+1\) exhaust the unstable projective source.  Thus the defect is supported
 only at the ten nodes, and the local models give the intrinsic identification
 
 \[
@@ -208,8 +205,8 @@ research-only, and the manuscript has not yet been rewritten or rebuilt.
 5. Does the spanning-tree argument generate the full maximal-minor ideal,
    including coefficients and signs, in every stated pair of dimensions?
 6. Does the saturated-slice argument cover the complete semistable fibres,
-   and does the cross-edge Laplace expansion really prove
-   \(\Delta_QE_Q\subset I_4(d\mathcal J_3)\) for both \(|Q|=4,5\)?
+   and do the three displayed unit-multiple cofactor identities, together
+   with \(S_4/S_5\)-equivariance, generate the full unstable local ideals?
 7. Is the matching-base/Specht-ideal citation used within its exact
    characteristic range, and does the Golden six-frame span the required
    ideal rather than only define the same support?
@@ -229,6 +226,6 @@ C704, C705, C728, C739, and C742 bundles check the Golden scalars,
 representation multiplicities, incidence return, synchronized spinors, and
 source-free obstruction.  The C739 Singular certificate independently checks
 the global Jacobian-defect support; Proposition 4.6 now supplies the human
-saturated-slice and cross-discriminant proof.  Other computations corroborate
+saturated-slice and generator-level cofactor proof.  Other computations corroborate
 normalizations and finite identities; the general statements above rely on
 the human proofs in the full report.
