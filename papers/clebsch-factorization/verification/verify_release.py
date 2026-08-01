@@ -211,7 +211,7 @@ EXPECTED_CLAIMS = {
     ),
     "prop:matching-secant-quotient": ({"conceptual"}, set()),
     "lem:projective-trade-reduction": ({"conceptual"}, set()),
-    "lem:lucas-socle-first-wall": (
+    "lem:lucas-socle-square-parity": (
         {"conceptual", "classical-input", "certificate"},
         {"generic-first-wall"},
     ),

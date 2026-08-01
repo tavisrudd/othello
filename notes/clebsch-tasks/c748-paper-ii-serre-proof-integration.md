@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after C746 and C747
+**Status:** complete — two independent post-repair cold reads returned `GO`;
+the OOM-guarded Lean-first release aggregate is green
 
 ## Objective
 
@@ -32,10 +33,13 @@ Two independent cold reads are required:
    only survivors.
 
 Both must return `GO` with no material proof or architecture objection.
-Then pass the proof, reviews, and unresolved-friction ledger to C749.  The
-human theorem surface is not frozen until C749 also passes.
+The finite-group/modular-representation and context-free readers both returned
+`GO` on the parity-specific proof.  The proof, review response, and explicit
+formalization gap pass to C749 and C750.  The human theorem surface is not
+frozen until C749 also passes.
 
 ## Boundaries
 
-No Lean additions or redesign occur here.  A green checker cannot substitute
-for either cold read, and C750 remains blocked.
+A green checker did not substitute for either cold read.  The user subsequently
+unblocked C750 in parallel; its partial structural spine remains a separate
+formal-coverage task and does not strengthen this human-proof verdict.
