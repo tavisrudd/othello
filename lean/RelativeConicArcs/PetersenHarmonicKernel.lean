@@ -98,13 +98,29 @@ theorem pairSum_norm_sq (y : Fin 5 → ℚ) (hy : ∑ i, y i = 0) :
   calc
     ∑ p : Pair 5, pairSum y p ^ 2 =
         ∑ i, y i * incidenceSum (pairSum y) i := by
-      simp only [incidenceSum, pairSum]
-      rw [Finset.sum_comm]
-      apply Finset.sum_congr rfl
-      intro p _
-      rw [← Finset.sum_mul]
-      change (∑ i ∈ p.vertices, y i) * (∑ j ∈ p.vertices, y j) = _
-      rw [pow_two]
+      symm
+      calc
+        ∑ i, y i * incidenceSum (pairSum y) i =
+            ∑ i : Fin 5, ∑ p : Pair 5,
+              if i ∈ p.vertices then y i * pairSum y p else 0 := by
+          apply Finset.sum_congr rfl
+          intro i _
+          simp only [incidenceSum, incidentPairs]
+          rw [Finset.mul_sum]
+          rw [← Finset.sum_filter]
+        _ = ∑ p : Pair 5, ∑ i : Fin 5,
+              if i ∈ p.vertices then y i * pairSum y p else 0 := by
+          rw [Finset.sum_comm]
+        _ = ∑ p : Pair 5, ∑ i ∈ p.vertices, y i * pairSum y p := by
+          apply Finset.sum_congr rfl
+          intro p _
+          rw [← Finset.sum_filter]
+          simp
+        _ = ∑ p : Pair 5, pairSum y p ^ 2 := by
+          apply Finset.sum_congr rfl
+          intro p _
+          rw [← Finset.sum_mul]
+          simp only [pairSum, pow_two]
     _ = ∑ i, y i * (3 * y i) := by
       apply Finset.sum_congr rfl
       intro i _
