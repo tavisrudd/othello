@@ -278,6 +278,7 @@ manuscript edit is authorized by C727.
 | task | state | next gate |
 |---|---|---|
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement remains after C735 | after C735, place the marked tensor-diagram theorem, degeneracy filtration, and canonical (36\to6) return without reopening research |
+| [C742 — unmarked reconstruction and global degeneracy complex](../golden-tasks/c742-golden-reconstruction-degeneracy.md) | queued after C739 placement; `tt`/red-team/`aa` gated | classify or obstruct reconstruction from the observable tensor diagram, then globalize the pole-marked degeneracy filtration with independent trust closure |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
@@ -286,9 +287,11 @@ manuscript edit is authorized by C727.
 1. Apply C739's already completed
    placement recommendation; do not reopen its research programme merely to
    perform manuscript consolidation.
-2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+2. C742 unmarked reconstruction and global degeneracy complex, after C739's
+   placement freezes the exact observable theorem interface.
+3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
-3. Defer C718 and C719; C735 found no precise theorem-level need.
+4. Defer C718 and C719; C735 found no precise theorem-level need.
 
 ## Ownership and allowed paths
 
