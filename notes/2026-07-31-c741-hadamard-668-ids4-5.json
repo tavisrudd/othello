@@ -311,5 +311,42 @@
   "row_sum_positive_pair_count": 648,
   "schema": "c741-lp333-ids4-5-compression-checkpoint-v2",
   "scope": "fixed untranslated common multipliers IDs 4 and 5",
+  "shift_111_compression_screen": {
+    "conclusion": "NO_EXCLUSION",
+    "feasible_representatives": 108,
+    "required_joint_mixed_triples": 167,
+    "summary": [
+      {
+        "feasible": true,
+        "representatives": 24,
+        "row_a_possible_count_size": 31,
+        "row_b_possible_count_size": 35
+      },
+      {
+        "feasible": true,
+        "representatives": 48,
+        "row_a_possible_count_size": 32,
+        "row_b_possible_count_size": 34
+      },
+      {
+        "feasible": true,
+        "representatives": 12,
+        "row_a_possible_count_size": 32,
+        "row_b_possible_count_size": 36
+      },
+      {
+        "feasible": true,
+        "representatives": 12,
+        "row_a_possible_count_size": 33,
+        "row_b_possible_count_size": 35
+      },
+      {
+        "feasible": true,
+        "representatives": 12,
+        "row_a_possible_count_size": 35,
+        "row_b_possible_count_size": 33
+      }
+    ]
+  },
   "signed_zero_normalized_branch_count_before_affine_reduction": 2592
 }

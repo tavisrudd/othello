@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import itertools
+import functools
 import json
 import sys
 from collections import Counter, defaultdict
@@ -146,6 +147,41 @@ def compression_mark(sequence: tuple[int, ...]) -> int:
     return candidates[0]
 
 
+@functools.lru_cache(None)
+def replay_shift_111_counts(sequence: tuple[int, ...]) -> set[int]:
+    minus = [(37 - value) // 2 for value in sequence]
+    singleton = [1 if sequence[r] % 6 == 5 else 0 for r in (0, 3, 6)]
+    scaled_target = tuple((minus[r] - singleton[i]) // 3 for i, r in enumerate((0, 3, 6)))
+    # Count mixed nonzero K37-orbits after scaling their common weight from 3 to 1.
+    fixed_states = {(0, 0, 0, 0)}
+    for _ in range(12):
+        fixed_states = {
+            (a+x, b+y, c+z, m + (1 if 0 < x+y+z < 3 else 0))
+            for a,b,c,m in fixed_states
+            for x,y,z in itertools.product((0,1), repeat=3)
+            if a+x <= scaled_target[0]
+            and b+y <= scaled_target[1]
+            and c+z <= scaled_target[2]
+        }
+    possible = {
+        1 + 3*m for a,b,c,m in fixed_states if (a,b,c) == scaled_target
+    }
+    for residues in ((1,4,7),(2,5,8)):
+        target = minus[residues[0]]
+        rotating = set()
+        # Independent stars-and-bars enumeration of counts of orbit patterns
+        # having 0,1,2,3 ones, rather than the generator's orbit-by-orbit DP.
+        for zero_bit in (0,1):
+            for n0 in range(13):
+                for n1 in range(13-n0):
+                    for n2 in range(13-n0-n1):
+                        n3 = 12-n0-n1-n2
+                        if zero_bit+n1+2*n2+3*n3 == target:
+                            rotating.add(3*(n1+n2))
+        possible = {a+b for a in possible for b in rotating}
+    return possible
+
+
 def check_witness(record: dict, target: int) -> None:
     a, b = map(tuple, record["sequences"])
     assert sum(a) == sum(b) == 1
@@ -215,11 +251,34 @@ def main() -> None:
         "different": 72,
     }
 
+    screen = data["shift_111_compression_screen"]
+    assert screen["required_joint_mixed_triples"] == 167
+    summary = Counter()
+    feasible_count = 0
+    for a,b in global_reps:
+        possible_a = replay_shift_111_counts(a)
+        possible_b = replay_shift_111_counts(b)
+        feasible = any(167-x in possible_b for x in possible_a)
+        summary[(len(possible_a),len(possible_b),feasible)] += 1
+        feasible_count += feasible
+    replay_summary = [
+        {
+            "row_a_possible_count_size": key[0],
+            "row_b_possible_count_size": key[1],
+            "feasible": key[2],
+            "representatives": count,
+        }
+        for key,count in sorted(summary.items())
+    ]
+    assert replay_summary == screen["summary"]
+    assert feasible_count == screen["feasible_representatives"] == 108
+    assert screen["conclusion"] == "NO_EXCLUSION"
+
     check_witness(data["positive_control_9"], -74)
     check_witness(data["positive_control_37"], -18)
     assert data["exact_lift_status"] == "OPEN"
     assert data["conclusion"] == "both separate quotient compressions are feasible; neither ID is decided"
-    print("PASS: independent quotient census, symmetry reduction, and positive controls")
+    print("PASS: independent quotient census, fixed geometry, shift-111 screen, and controls")
 
 
 if __name__ == "__main__":

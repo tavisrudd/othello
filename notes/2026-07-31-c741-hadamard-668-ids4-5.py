@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import functools
 import hashlib
 import itertools
 import json
@@ -170,6 +171,54 @@ def marked_singleton_from_compression(sequence: tuple[int, ...]) -> int:
     return 37 * marked_residues[0]
 
 
+@functools.lru_cache(None)
+def fixed_cycle_mixed_counts(
+    margins: tuple[int, int, int], singletons: tuple[int, int, int]
+) -> set[int]:
+    states = {(*singletons, 1)}
+    for _ in range(12):
+        following = set()
+        for a, b, c, mixed in states:
+            for x, y, z in itertools.product((0, 1), repeat=3):
+                candidate = (a + 3 * x, b + 3 * y, c + 3 * z)
+                if all(candidate[i] <= margins[i] for i in range(3)):
+                    following.add(
+                        (*candidate, mixed + (3 if 0 < x + y + z < 3 else 0))
+                    )
+        states = following
+    return {mixed for a, b, c, mixed in states if (a, b, c) == margins}
+
+
+@functools.lru_cache(None)
+def rotating_cycle_mixed_counts(target: int) -> set[int]:
+    answer = set()
+    for zero_bit in (0, 1):
+        states = {(zero_bit, 0)}
+        for _ in range(12):
+            states = {
+                (ones + orbit_ones, mixed + (3 if orbit_ones in (1, 2) else 0))
+                for ones, mixed in states
+                for orbit_ones in range(4)
+                if ones + orbit_ones <= target
+            }
+        answer.update(mixed for ones, mixed in states if ones == target)
+    return answer
+
+
+@functools.lru_cache(None)
+def shift_111_mixed_counts(sequence: tuple[int, ...]) -> set[int]:
+    minus = tuple((37 - value) // 2 for value in sequence)
+    singleton_bits = tuple(1 if sequence[r] % 6 == 5 else 0 for r in (0, 3, 6))
+    possible = fixed_cycle_mixed_counts(
+        tuple(minus[r] for r in (0, 3, 6)), singleton_bits
+    )
+    for residues in ((1, 4, 7), (2, 5, 8)):
+        assert len({minus[r] for r in residues}) == 1
+        rotating = rotating_cycle_mixed_counts(minus[residues[0]])
+        possible = {left + right for left in possible for right in rotating}
+    return possible
+
+
 def witness_record(sequence_pair: tuple[tuple[int, ...], tuple[int, ...]], target: int) -> dict:
     a, b = sequence_pair
     joint_paf = tuple(x + y for x, y in zip(paf(a), paf(b)))
@@ -228,6 +277,15 @@ def build_certificate() -> dict:
         for a, b in canonical
     )
     assert compression_geometry == {"same": 36, "different": 72}
+    shift_111_summary = Counter()
+    shift_111_feasible = 0
+    for a, b in canonical:
+        possible_a = shift_111_mixed_counts(a)
+        possible_b = shift_111_mixed_counts(b)
+        feasible = any(167 - value in possible_b for value in possible_a)
+        shift_111_summary[(len(possible_a), len(possible_b), feasible)] += 1
+        shift_111_feasible += feasible
+    assert shift_111_feasible == 108
 
     group37 = (1, 10, 26)
     orbits37 = orbits(range(37), group37, 37)
@@ -256,6 +314,20 @@ def build_certificate() -> dict:
             "stabilizer_representatives": fixed_point_counts,
             "global_108_geometry_counts": dict(sorted(compression_geometry.items())),
             "recovery_rule": "for r in {0,3,6}, compressed_value[r] == singleton_sign[r] (mod 6)",
+        },
+        "shift_111_compression_screen": {
+            "required_joint_mixed_triples": 167,
+            "feasible_representatives": shift_111_feasible,
+            "summary": [
+                {
+                    "row_a_possible_count_size": key[0],
+                    "row_b_possible_count_size": key[1],
+                    "feasible": key[2],
+                    "representatives": count,
+                }
+                for key, count in sorted(shift_111_summary.items())
+            ],
+            "conclusion": "NO_EXCLUSION",
         },
         "positive_control_9": witness_record(WITNESS_9, -74),
         "positive_control_37": witness_record(tuple(expanded37), -18),
