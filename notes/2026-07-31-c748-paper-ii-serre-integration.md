@@ -41,6 +41,17 @@ module.  It rejected and repaired three points:
   wall, with the two compensating sign changes written explicitly; and
 - one-digit nonsplitting was separated from multi-digit Lucas absence.
 
+A later theorem-only hostile pass challenged the one-digit application once
+more: the lemma states nonsplitting conditionally on the outer parity of the
+unique \(S\to F\) line.  The apparent gap is resolved by the same dichotomy.
+If the forbidden extension does not occur in \(F\), then \(i_\square=0\) and
+the quadratic moment embeds in the absent square parity.  If
+\(i_\square\ne0\), it itself spans the unique Hom line, so that line has
+parity \(S^\square\) and the first-wall clause applies.  This implication is
+now explicit in the manuscript.  The pass also isolated the only numerical
+exception to the Borel weight-gap estimate, \((p,s,e)=(3,0,2)\); the Lucas
+congruence makes its Hom line absent, so the spill branch never uses it.
+
 The generic-wall programs remain conditional corroboration and are not used
 as proof of the adjacent-wall identification.
 

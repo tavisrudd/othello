@@ -64,6 +64,12 @@ The hostile pass rejected two shortcuts.
   the exceptional table has an odd digit and is absent from the affine
   socle, except \(L(2,2)\); its unique Lucas sign word is alternating, so it
   is absent as well.
+- A theorem-only replay challenged the remaining conditional parity step.
+  It closes without a new calculation: if \(i_\square=0\), square-parity
+  absence already contradicts the quadratic moment; if
+  \(i_\square\ne0\), that map spans the unique \(S\to F\) Hom line and
+  therefore supplies exactly the \(S^\square\)-parity hypothesis of the
+  first-wall clause.  The manuscript now says this explicitly.
 
 The first-wall row is now identified rather than named. Its zeroth-digit
 map is

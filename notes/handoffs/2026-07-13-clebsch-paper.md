@@ -16,7 +16,7 @@
 | surface | root | current state | owning task |
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C714 companion structuralization and trust closure complete; authoritative and standalone twenty-six-check releases green; external publication remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
-| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | thirteen-bundle replay green, but the 2026-07-31 audit reopened the all-`q` human-proof gate; frozen v1 unchanged | [C577](../clebsch-tasks/c577-factorization-paper.md) |
+| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | C746 reduction and C747 structural proof integrated; authoritative thirteen-bundle release green; C748 independent-reader gate open and standalone still frozen | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | relative marked orientation bridge and global Stein algebra complete; ordinary/isolated gates and fresh context-free `GO` green; metadata closure remains | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
@@ -230,8 +230,8 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; all-`q` human-proof gate reopened | expand or precisely source the projective--trade, Lucas-socle, and adjacent-wall steps, then obtain an independent cold-read `GO` |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |
-| [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | queued next; human proof 2/4 | prove simple-submodule existence, actual parity Hom vanishing, and non-splitting structurally |
-| [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | queued after C746--C747; human proof 3/4 | integrate, polish, and obtain two independent cold-read `GO` verdicts |
+| [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | structural proof integrated and internally red-teamed; human proof 2/4 acceptance awaits the independent modular read owned by C748 | no known proof defect; obtain the independent modular verdict |
+| [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | active; severe proof integrated and two internal cold passes green; human proof 3/4 | obtain independent modular-representation and context-free `GO` verdicts |
 | [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | queued after C748; human proof 4/4 | attack and compress the complete proof, then freeze it |
 | [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | queued after C749; Lean last | formalize the frozen human architecture and close the exact paper-facing gap |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | relative marked bridge, global Stein algebra, mechanical gates, and fresh cold-read `GO` green | obtain immutable artifact locator and author affiliation/contact metadata |
@@ -453,19 +453,22 @@ Paley carrier explains the cross-sheet orientation but is not used as the
 Gorenstein pairing: it misses the radial/common-sum pair by one dimension.
 Maximal-isotropic quotient duality gives that pairing directly.
 
-The paper-owned trust surface has twenty-six statements and thirteen
+The paper-owned trust surface now has twenty-eight statements and thirteen
 evidence bundles, including independent generic-wall, shared-radial, and
-q=9 small-field replays.  The aggregate gate and warning-free thirty-page
-PDF were green in the authoritative and standalone repositories.  A
+q=9 small-field replays.  The authoritative aggregate gate and warning-free
+thirty-six-page PDF are green; the standalone repository remains at the
+previous frozen release pending the human-proof freeze.  A
 2026-07-31 audit nevertheless reopened the local proof gate: the checker is
 correctly conditional on the human projective--trade, Lucas-socle, and
 adjacent-wall identifications, but those identifications are not yet written
-at referee proof depth.  The same audit repaired stale equation references,
-the Gorenstein literature pinpoint, and Lean/trust-table wording.  C577 owns
-this proof closure before public packaging.  C746--C749 are four ordered
-human-proof rounds; C750 begins only after their proof is polished and
-frozen.  Full findings:
-`notes/2026-07-31-c577-paper-ii-new-math-audit.md`.
+at referee proof depth.  C746 and C747 now supply the exact quadratic
+pullback, actual Lucas Hom space, outer-parity seam, first-wall spill, and
+structural characteristic-three endpoint.  C748 owns two independent cold
+reads before C749 can freeze the human surface; C750 begins only after that
+freeze.  Audit and current proof reports:
+`notes/2026-07-31-c577-paper-ii-new-math-audit.md`,
+`notes/2026-07-31-c747-paper-ii-socle-wall-proof.md`, and
+`notes/2026-07-31-c748-paper-ii-serre-integration.md`.
 C682 characteristic-zero work is inventory unless
 explicitly promoted.
 
