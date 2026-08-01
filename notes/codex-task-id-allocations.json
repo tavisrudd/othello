@@ -1862,8 +1862,17 @@
       "last": 740,
       "purpose": "screen residual LP(333) multiplier IDs 0-5 for exact orbit-lock obstructions",
       "sequence": 207
+    },
+    {
+      "count": 1,
+      "first": 741,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 741,
+      "purpose": "decide residual LP(333) multiplier IDs 4 and 5 by paired exact 37-compression or joint-lift analysis",
+      "sequence": 208
     }
   ],
-  "next_id": 741,
+  "next_id": 742,
   "schema": "codex-task-id-allocations-v1"
 }
