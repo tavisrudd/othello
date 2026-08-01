@@ -38,8 +38,7 @@ def subalgebraConductor (R : Subalgebra k A) : Ideal A where
     exact R.add_mem (hx z) (hy z)
   smul_mem' c x hx y := by
     change (c * x) * y ∈ R
-    rw [mul_assoc, mul_comm c x, ← mul_assoc]
-    exact hx (c * y)
+    simpa [mul_assoc, mul_comm c x] using hx (c * y)
 
 @[simp]
 theorem mem_subalgebraConductor_iff (R : Subalgebra k A) (x : A) :
@@ -57,6 +56,7 @@ pinching. -/
 theorem ker_le_conductor (residue : A →ₐ[k] E) :
     RingHom.ker residue.toRingHom ≤ subalgebraConductor (residuePinching residue) := by
   intro x hx y
+  change residue x = 0 at hx
   change residue (x * y) ∈ (⊥ : Subalgebra k E)
   rw [map_mul, hx, zero_mul]
   exact (⊥ : Subalgebra k E).zero_mem
@@ -70,8 +70,10 @@ theorem eq_zero_of_mul_mem_ground
   obtain ⟨u, hu⟩ := hproper
   have hc_ground : c ∈ (⊥ : Subalgebra k E) := by
     simpa using hcmul 1
-  have hc_inv_ground : c⁻¹ ∈ (⊥ : Subalgebra k E) :=
-    (⊥ : Subalgebra k E).inv_mem hc_ground
+  have hc_inv_ground : c⁻¹ ∈ (⊥ : Subalgebra k E) := by
+    rw [Algebra.mem_bot] at hc_ground ⊢
+    obtain ⟨d, rfl⟩ := hc_ground
+    exact ⟨d⁻¹, by simp⟩
   have hcu_ground : c * u ∈ (⊥ : Subalgebra k E) := hcmul u
   have : u ∈ (⊥ : Subalgebra k E) := by
     have hprod := (⊥ : Subalgebra k E).mul_mem hc_inv_ground hcu_ground
@@ -90,7 +92,9 @@ theorem conductor_eq_ker (residue : A →ₐ[k] E)
     apply eq_zero_of_mul_mem_ground hproper
     intro u
     obtain ⟨y, rfl⟩ := hsurj u
-    exact hx y
+    have hxy := hx y
+    change residue (x * y) ∈ (⊥ : Subalgebra k E) at hxy
+    simpa [map_mul] using hxy
   · exact ker_le_conductor residue
 
 /-- The quotient by the conductor has the same residue as `E`: equality
@@ -99,7 +103,9 @@ theorem sub_eq_mem_conductor_iff (residue : A →ₐ[k] E)
     (hsurj : Function.Surjective residue)
     (hproper : ∃ u : E, u ∉ (⊥ : Subalgebra k E)) (x y : A) :
     x - y ∈ subalgebraConductor (residuePinching residue) ↔ residue x = residue y := by
-  rw [conductor_eq_ker residue hsurj hproper, RingHom.mem_ker, map_sub, sub_eq_zero]
+  rw [conductor_eq_ker residue hsurj hproper]
+  change residue (x - y) = 0 ↔ residue x = residue y
+  rw [map_sub, sub_eq_zero]
 
 section SplitResidueField
 
@@ -109,7 +115,7 @@ variable [Algebra E A] [IsScalarTower k E A]
 def groundElement (residue : A →ₐ[k] E) (c : k) : residuePinching residue :=
   ⟨algebraMap k A c, by
     change residue (algebraMap k A c) ∈ (⊥ : Subalgebra k E)
-    rw [map_algebraMap]
+    rw [residue.commutes c]
     exact (⊥ : Subalgebra k E).algebraMap_mem c⟩
 
 /-- An element with zero residue, regarded as an element of the pinched
