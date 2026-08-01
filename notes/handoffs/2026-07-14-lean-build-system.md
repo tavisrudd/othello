@@ -30,7 +30,8 @@ another lane's running build.
   guarded one-shot Mathlib cache restoration, atomic live heartbeats, telemetry, trace-current
   skipping, and final aggregate gate.
 - `lean-build-queue.py status`: bounded filesystem-backed progress plus an exact owner-descendant
-  view of the active Lean source and `oom_score_adj`; no process-table search or PID guessing.
+  view of the active phase, Lean source, and `oom_score_adj`; no process-table search or PID
+  guessing.
 - `lean-build-queue.py pack`: locked, disk-backed, non-overwriting `lake pack` through `run-quiet`.
 - `lean/scripts/lean-restart-guard.py`: trace-validated checkpoint/verify/audit-log, with a hermetic
   failure suite in `test_lean_restart_guard.py`. Unexercised against real Lake output.

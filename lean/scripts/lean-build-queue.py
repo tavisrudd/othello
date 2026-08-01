@@ -490,6 +490,7 @@ class Status:
             "targets": targets,
             "results": [],
             "current_target": None,
+            "phase": None,
             "active_child_pid": None,
             "finished_utc": None,
             "exit_code": None,
@@ -501,8 +502,9 @@ class Status:
         self.data["heartbeat_utc"] = utc_now()
         atomic_write_json(self.path, self.data)
 
-    def start_target(self, target: str) -> None:
+    def start_target(self, target: str, phase: str) -> None:
         self.data["current_target"] = target
+        self.data["phase"] = phase
         self.data["active_child_pid"] = None
         self.flush()
 
@@ -515,6 +517,7 @@ class Status:
         entry.update(extra)
         self.data["results"].append(entry)
         self.data["current_target"] = None
+        self.data["phase"] = None
         self.data["active_child_pid"] = None
         self.flush()
 
@@ -523,6 +526,7 @@ class Status:
         self.data["exit_code"] = exit_code
         self.data["failed_target"] = failed_target
         self.data["current_target"] = None
+        self.data["phase"] = None
         self.data["active_child_pid"] = None
         self.data["finished_utc"] = utc_now()
         self.flush()
@@ -611,7 +615,7 @@ def command_run(args: argparse.Namespace) -> int:
     try:
         for target in targets:
             wait_for_quiet(pgrep, args.wait_quiet_seconds, args.poll_seconds)
-            status.start_target(target)
+            status.start_target(target, "trace-probe")
             probe_log = logs / f"{target}.nobuild.log"
             if spawn_and_wait(
                 probe_argv(args, [target]),
@@ -627,7 +631,7 @@ def command_run(args: argparse.Namespace) -> int:
 
             if args.cache_mode != "off" and not cache_attempted:
                 cache_attempted = True
-                status.start_target("<mathlib cache get>")
+                status.start_target("<mathlib cache get>", "cache-restore")
                 cache_log = logs / "mathlib-cache-get.log"
                 cache_quiet_root = logs / "mathlib-cache-get.quiet" / run_id
                 cache_env = env.copy()
@@ -671,7 +675,7 @@ def command_run(args: argparse.Namespace) -> int:
                         return EXIT_BUILD_FAILED
                     print("Mathlib cache restoration failed; continuing with source build", flush=True)
 
-                status.start_target(target)
+                status.start_target(target, "post-cache-trace-probe")
                 post_cache_probe = logs / f"{target}.post-cache.nobuild.log"
                 if cache_code == 0 and spawn_and_wait(
                     probe_argv(args, [target]),
@@ -691,6 +695,7 @@ def command_run(args: argparse.Namespace) -> int:
             target_env["RUN_QUIET_LOGDIR"] = str(quiet_root)
             print(f"starting {target}", flush=True)
             target_threads = 1 if target in serial_targets else args.threads
+            status.start_target(target, "source-build")
             code = spawn_and_wait(
                 build_argv(args, target, target_threads),
                 log_path,
@@ -725,7 +730,7 @@ def command_run(args: argparse.Namespace) -> int:
 
         wait_for_quiet(pgrep, args.wait_quiet_seconds, args.poll_seconds)
         gate_log = logs / "aggregate-no-build.log"
-        status.start_target("<aggregate --no-build gate>")
+        status.start_target("<aggregate --no-build gate>", "aggregate-trace-probe")
         print("starting trace-only aggregate gate", flush=True)
         code = spawn_and_wait(
             probe_argv(args, aggregate),
@@ -1005,6 +1010,8 @@ def command_status(args: argparse.Namespace) -> int:
     print(f"started: {status.get('started_utc')}  heartbeat: {status.get('heartbeat_utc')}")
     if status.get("current_target"):
         print(f"current: {status['current_target']}")
+    if status.get("phase"):
+        print(f"phase:   {status['phase']}")
     active = status.get("active_process")
     if isinstance(active, dict):
         detail = active.get("module_path") or active.get("command")

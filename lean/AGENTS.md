@@ -126,7 +126,8 @@ The runner automatically:
 - probes each target with `lake build --no-build`, skips trace-current targets, and fails fast;
 - refreshes the atomic heartbeat while a child is live; `status` also walks only the recorded
   owner's exact `/proc` descendants (including children spawned by nonleader threads) to report
-  the active Lean source and inherited `oom_score_adj` without searching the process table;
+  the current probe/cache/build phase, active Lean source, and inherited `oom_score_adj` without
+  searching the process table;
 - records atomic status, per-target GNU-time telemetry, source/toolchain state, and a final trace-only
   aggregate gate.
 
