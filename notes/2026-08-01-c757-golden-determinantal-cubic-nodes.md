@@ -97,13 +97,26 @@ curve, no further isolated singularity can occur.  This is the natural stopping
 point: the result strengthens the Golden determinantal package without opening
 a classification of arbitrary linear sections of the determinant cubic.
 
+The user-requested `ej` pass adds one further structural compression.  The six
+vertices form a projective frame, and the five-dimensional matching carrier is
+exactly the complete linear system of cubics double at that frame.  In frame
+coordinates, double vanishing at five coordinate points leaves the ten
+squarefree cubic monomials; the five conditions at the sixth point are
+independent because their incidence Gram matrix is \(3I_5+3J_5\), leaving a
+five-dimensional vector space.  The fifteen
+four-equals base lines are therefore the fifteen frame edges: every cubic in
+the system restricts to a degree-three polynomial with double zeros at both
+endpoints and hence vanishes on the edge.  This identifies the C757 common-node
+theorem and the pre-existing matching-base theorem as local and global aspects
+of one projective-frame linear system.
+
 | feature | status | exact boundary |
 |---|---|---|
 | why all six walls have the same nodes | settled | matching products vanish to second order at the six \(5+1\) vertices; outer covariance permutes them |
 | whether the six witnesses exhaust the projective singular scheme | settled | exact Jacobian elimination gives a reduced degree-six chart and no boundary point |
 | whether the nodes attain the classical determinantal bound | settled | six nondegenerate Hessians give total Milnor number six, equal to Dolgachev's isolated determinantal total |
+| why the common nodes and fifteen matching-base lines occur together | settled by the `ej` pass | the matching carrier is the complete linear system of cubics double at the six-point projective frame, whose edges are forced base lines |
 | whether a representation-free construction canonically identifies the rank-one block at each node | outside scope | not needed for the singular-scheme theorem; would require a separately selected refinement of the pole-marked block geometry |
 
 No genuine mystery remains in the node-count theorem.  The final row is a
 different marked-block question and does not obstruct the paper strengthening.
-

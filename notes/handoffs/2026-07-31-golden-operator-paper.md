@@ -306,6 +306,9 @@ particular:
   Milnor total.  The placed corollary and verification surface pass the
   warning-free 19-page paper build.  Report and evidence:
   `notes/2026-08-01-c757-golden-determinantal-cubic-nodes.md`.
+  Its `ej` refinement identifies the full matching carrier with the complete
+  linear system of cubics double at the six-node projective frame; the fifteen
+  four-equals base lines are exactly the frame edges.
 
 C735 is complete.  The post-charter architecture delta, exact
 keep/compress/appendix/sequel map, theorem--proof--trust ledger, attribution
