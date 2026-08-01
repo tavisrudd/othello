@@ -80,8 +80,8 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT AFTER C735]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; complete manuscript placement only after C735 → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
-- **C742 `[golden]` [QUEUED AFTER C739 PLACEMENT; TT/RED-TEAM/AA GATED]** — classify or sharply obstruct reconstruction of the Golden conference two-graph and coherent six-family from the normalized observable tensor diagram; globalize the pole-marked cross block and explain the strict collision/Jacobian/Pfaffian filtration through one intrinsic degeneracy complex, with explicit torsors, counterexamples, alternative attacks, and independent trust closure → `notes/golden-tasks/c742-golden-reconstruction-degeneracy.md`.
+- **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
+- **C742 `[golden]` [READY; DIRECT SUCCESSOR TO C735; TT/RED-TEAM/AA GATED]** — first place C739's rigidity, pole-descent, and canonical-return results inside C735's operator-first architecture with the classical carrier compressed and collision schemes outward; then classify or sharply obstruct reconstruction of the Golden two-graph and coherent six-family from the normalized observable tensor diagram and seek one intrinsic global degeneracy complex with explicit torsors and independent trust closure → `notes/golden-tasks/c742-golden-reconstruction-degeneracy.md`.
 - **C718 `[golden]` [QUEUED AFTER C720; INDEPENDENT OF C715]** — compute the permanent side of the golden transfer blocks, specialize boson--fermion complementarity, and seek a bosonic invariant or experimental discriminator → `notes/golden-tasks/c718-golden-boson-fermion-complement.md`.
 - **C719 `[golden]` [QUEUED AFTER C715 AND C718]** — design a platform-specific six-mode demonstration with coherent sign readout, anomaly witness, bosonic control, optimal three/five/ten-cut simplex decoding, and quantitative loss/shot budget → `notes/golden-tasks/c719-golden-six-mode-demonstrator.md`.
 
@@ -150,7 +150,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C177 `[gem-mining]` [QUEUED FOLLOW-ON]** — generalized-hexagon connection.
 - **C193 `[gem-mining]` [OPEN ILL GATE]** — obtain/read the remaining BSW source.
 - **C737 `[gem-mining]` [QUEUED; INDEPENDENT]** — attack the exact equiangular-line maximum `M(18) in {57,58,59}` through a complete feasible Seidel-spectrum census, Jacobi/interlacing and lattice filters, and independently checkable certificates for terminal graph nonexistence claims → `notes/2026-07-31-c737-equiangular-lines-r18.md`.
-- **C741 `[gem-mining]` [IN PROGRESS; C740 FOLLOW-ON]** — decide residual fixed common-multiplier LP(333) IDs 4 and 5 by a paired exact 37-compression or joint orbit-lift analysis, preserve their common feasible 9-compression witness as a positive control, and do not overclaim unrestricted Hadamard order 668 → `notes/2026-07-31-c741-hadamard-668-ids4-5.md`.
+- **C741 `[gem-mining]` [IN PROGRESS; 108 EXACT LIFT REPRESENTATIVES REMAIN]** — decide residual fixed common-multiplier LP(333) IDs 4 and 5; both separate 9- and 37-compressions are exactly feasible, while the complete 9-compression lift frontier is 648 normalized pairs and 108 affine/decimation/swap representatives; finish with selector-aware proof-carrying exact lifts or a mixed-character obstruction, without overclaiming unrestricted Hadamard order 668 → `notes/2026-07-31-c741-hadamard-668-ids4-5.md`.
 
 ### `gateway`
 
