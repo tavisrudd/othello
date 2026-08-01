@@ -1844,8 +1844,17 @@
       "last": 738,
       "purpose": "close the sole residual order-6 LP(333) multiplier case ID 7 with a proof-carrying exact model",
       "sequence": 205
+    },
+    {
+      "count": 1,
+      "first": 739,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 739,
+      "purpose": "classify the Golden cubic lift and test its second-order transfer predictions",
+      "sequence": 206
     }
   ],
-  "next_id": 739,
+  "next_id": 740,
   "schema": "codex-task-id-allocations-v1"
 }
