@@ -1042,122 +1042,185 @@
       "trust_area": "complete_ports"
     },
     {
-      "axiom_status": "declared-unextracted",
+      "axiom_status": "extracted-and-matched",
       "declaration": "CapGame.Affine.initialP_fin",
-      "declaration_module": null,
+      "declaration_module": "CapGame.Affine",
       "expected_axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "facts_artifacts": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/CapGame.Affine.json",
+          "sha256": "201bbc00e73269c2cd2dffd8e926a36f7f4d80dbb31473cbcda07e791dd8ec83"
+        }
+      ],
       "gates": [
         "CapGame.Affine"
       ],
       "id": "trust-spine:finitegeom_first_tag:terminal:CapGame.Affine.initialP_fin",
-      "observed_axioms": null,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "trust_area": "finitegeom_first_tag"
     },
     {
-      "axiom_status": "declared-unextracted",
+      "axiom_status": "extracted-and-matched",
       "declaration": "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank",
-      "declaration_module": null,
+      "declaration_module": "ProjectiveCap.PlaneOutcome",
       "expected_axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "facts_artifacts": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/ProjectiveCap.PlaneOutcome.json",
+          "sha256": "220965ccb967bce22e983be34c12b01c2b06aeb7e3d620c3a55927fff5fb4c12"
+        }
+      ],
       "gates": [
         "ProjectiveCap.PlaneOutcome"
       ],
       "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank",
-      "observed_axioms": null,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "trust_area": "finitegeom_first_tag"
     },
     {
-      "axiom_status": "declared-unextracted",
+      "axiom_status": "extracted-and-matched",
       "declaration": "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank",
-      "declaration_module": null,
+      "declaration_module": "ProjectiveCap.PlaneOutcome",
       "expected_axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "facts_artifacts": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/ProjectiveCap.PlaneOutcome.json",
+          "sha256": "220965ccb967bce22e983be34c12b01c2b06aeb7e3d620c3a55927fff5fb4c12"
+        }
+      ],
       "gates": [
         "ProjectiveCap.PlaneOutcome"
       ],
       "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank",
-      "observed_axioms": null,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "trust_area": "finitegeom_first_tag"
     },
     {
-      "axiom_status": "declared-unextracted",
+      "axiom_status": "extracted-and-matched",
       "declaration": "ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one",
-      "declaration_module": null,
+      "declaration_module": "ProjectiveCap.Binary",
       "expected_axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "facts_artifacts": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/ProjectiveCap.Binary.json",
+          "sha256": "94c032513887764f880339ad954ebba74218df07bbdb3d11fbb84cfd766a898e"
+        }
+      ],
       "gates": [
         "ProjectiveCap.Binary"
       ],
       "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one",
-      "observed_axioms": null,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "trust_area": "finitegeom_first_tag"
     },
     {
-      "axiom_status": "declared-unextracted",
+      "axiom_status": "extracted-and-matched",
       "declaration": "ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution",
-      "declaration_module": null,
+      "declaration_module": "ProjectiveCap.Mirror",
       "expected_axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "facts_artifacts": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/ProjectiveCap.EllipticMirror.json",
+          "sha256": "55b70730254b0bdfa9146704cc7f3ed2e6a2552017b5c0e07fda843ec66dae5f"
+        }
+      ],
       "gates": [
         "ProjectiveCap.EllipticMirror"
       ],
       "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution",
-      "observed_axioms": null,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "trust_area": "finitegeom_first_tag"
     },
     {
-      "axiom_status": "declared-unextracted",
+      "axiom_status": "extracted-and-matched",
       "declaration": "ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul",
-      "declaration_module": null,
+      "declaration_module": "ProjectiveCap.EllipticMirror",
       "expected_axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "facts_artifacts": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/ProjectiveCap.EllipticMirror.json",
+          "sha256": "55b70730254b0bdfa9146704cc7f3ed2e6a2552017b5c0e07fda843ec66dae5f"
+        }
+      ],
       "gates": [
         "ProjectiveCap.EllipticMirror"
       ],
       "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul",
-      "observed_axioms": null,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "trust_area": "finitegeom_first_tag"
     },
     {
-      "axiom_status": "declared-unextracted",
+      "axiom_status": "extracted-and-matched",
       "declaration": "ProjectiveCap.initialPStatement_of_even_card_finrank",
-      "declaration_module": null,
+      "declaration_module": "ProjectiveCap.PlaneOutcome",
       "expected_axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "facts_artifacts": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/ProjectiveCap.PlaneOutcome.json",
+          "sha256": "220965ccb967bce22e983be34c12b01c2b06aeb7e3d620c3a55927fff5fb4c12"
+        }
+      ],
       "gates": [
         "ProjectiveCap.PlaneOutcome"
       ],
       "id": "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.initialPStatement_of_even_card_finrank",
-      "observed_axioms": null,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "trust_area": "finitegeom_first_tag"
     },
     {

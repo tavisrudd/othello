@@ -1,0 +1,1058 @@
+{
+  "closure": [
+    "CapGame.Affine",
+    "CapGame.BuildGame"
+  ],
+  "declaration_module": {
+    "AffineEquiv.constVAdd.eq_1": "CapGame.Affine",
+    "CapGame.Affine.Cap": "CapGame.Affine",
+    "CapGame.Affine.Collinear": "CapGame.Affine",
+    "CapGame.Affine.Collinear.eq_1": "CapGame.Affine",
+    "CapGame.Affine.InitialPStatement": "CapGame.Affine",
+    "CapGame.Affine.LegalExtensions": "CapGame.Affine",
+    "CapGame.Affine.MirrorGood": "CapGame.Affine",
+    "CapGame.Affine.Win": "CapGame.Affine",
+    "CapGame.Affine.cap_empty": "CapGame.Affine",
+    "CapGame.Affine.cap_image_affineEquiv": "CapGame.Affine",
+    "CapGame.Affine.cap_insert_of_cap": "CapGame.Affine",
+    "CapGame.Affine.cap_mono": "CapGame.Affine",
+    "CapGame.Affine.cap_of_card_le_two": "CapGame.Affine",
+    "CapGame.Affine.cap_pair": "CapGame.Affine",
+    "CapGame.Affine.cap_singleton": "CapGame.Affine",
+    "CapGame.Affine.collinear_affineEquiv": "CapGame.Affine",
+    "CapGame.Affine.collinear_midpoint_left": "CapGame.Affine",
+    "CapGame.Affine.collinear_rotate_right": "CapGame.Affine",
+    "CapGame.Affine.collinear_swap_left": "CapGame.Affine",
+    "CapGame.Affine.initialP_fin": "CapGame.Affine",
+    "CapGame.Affine.initialP_of_fixedPointFreeInvolution": "CapGame.Affine",
+    "CapGame.Affine.initialP_of_nontrivial": "CapGame.Affine",
+    "CapGame.Affine.initialP_of_opening_mirrorGood": "CapGame.Affine",
+    "CapGame.Affine.initialP_of_orderTwoTranslation": "CapGame.Affine",
+    "CapGame.Affine.initialP_of_pointReflection": "CapGame.Affine",
+    "CapGame.Affine.initialP_pi": "CapGame.Affine",
+    "CapGame.Affine.isP_of_mirrorGood": "CapGame.Affine",
+    "CapGame.Affine.mem_iff_of_image_eq_self": "CapGame.Affine",
+    "CapGame.Affine.mem_legalExtensions": "CapGame.Affine",
+    "CapGame.Affine.mem_of_image_eq_self": "CapGame.Affine",
+    "CapGame.Affine.mirrorGood_step": "CapGame.Affine",
+    "CapGame.Affine.mirror_move_legal": "CapGame.Affine",
+    "CapGame.Affine.no_old_point_on_mirror_line": "CapGame.Affine",
+    "FiniteBuildGame.Grundy": "CapGame.BuildGame",
+    "FiniteBuildGame.Grundy.congr_simp": "CapGame.BuildGame",
+    "FiniteBuildGame.Grundy.eq_def": "CapGame.BuildGame",
+    "FiniteBuildGame.IsP": "CapGame.BuildGame",
+    "FiniteBuildGame.IsP.eq_1": "CapGame.BuildGame",
+    "FiniteBuildGame.LegalExtensions": "CapGame.BuildGame",
+    "FiniteBuildGame.LegalExtensions.eq_1": "CapGame.BuildGame",
+    "FiniteBuildGame.Move": "CapGame.BuildGame",
+    "FiniteBuildGame.Move.congr_simp": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.casesOn": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.childP": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.ctorIdx": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.legal": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.mk": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.mk.inj": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.mk.injEq": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.mk.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.mk.sizeOf_spec": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.move": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.noConfusionType": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.rec": "CapGame.BuildGame",
+    "FiniteBuildGame.NCert.recOn": "CapGame.BuildGame",
+    "FiniteBuildGame.PCert": "CapGame.BuildGame",
+    "FiniteBuildGame.PCert.casesOn": "CapGame.BuildGame",
+    "FiniteBuildGame.PCert.mk": "CapGame.BuildGame",
+    "FiniteBuildGame.PCert.rec": "CapGame.BuildGame",
+    "FiniteBuildGame.PCert.recOn": "CapGame.BuildGame",
+    "FiniteBuildGame.PCert.reply": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.book": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.casesOn": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.ctorIdx": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.mk": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.mk.inj": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.mk.injEq": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.mk.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.mk.sizeOf_spec": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.noConfusionType": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.rec": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.recOn": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.root_eq": "CapGame.BuildGame",
+    "FiniteBuildGame.PCertDAG.valid": "CapGame.BuildGame",
+    "FiniteBuildGame.PairReplyBook": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.Node": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.Row": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.ValidFor": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.casesOn": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.ctorIdx": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.isP_root": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.mk": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.mk.inj": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.mk.injEq": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.mk.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.mk.sizeOf_spec": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.noConfusionType": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.rec": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.recOn": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.root": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.casesOn": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.child": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.ctorIdx": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.mk": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.mk.inj": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.mk.injEq": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.mk.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.mk.sizeOf_spec": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.mover": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.noConfusion": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.noConfusionType": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.rec": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.recOn": "CapGame.BuildGame",
+    "FiniteBuildGame.ReplyBookRow.reply": "CapGame.BuildGame",
+    "FiniteBuildGame.SizeValueConstant": "CapGame.BuildGame",
+    "FiniteBuildGame.Win": "CapGame.BuildGame",
+    "FiniteBuildGame.Win.congr_simp": "CapGame.BuildGame",
+    "FiniteBuildGame.Win.eq_def": "CapGame.BuildGame",
+    "FiniteBuildGame.instDecidableEqReplyBookRow": "CapGame.BuildGame",
+    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq": "CapGame.BuildGame",
+    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_empty_iff_isP_of_frame_chain": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_equiv": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_iff_all_children_win": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_iff_grundy_eq_zero": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_map": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_of_no_moves": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_of_pairReplyBook": "CapGame.BuildGame",
+    "FiniteBuildGame.isP_of_replyStrategy": "CapGame.BuildGame",
+    "FiniteBuildGame.lt_mex_mem": "CapGame.BuildGame",
+    "FiniteBuildGame.mem_legalExtensions": "CapGame.BuildGame",
+    "FiniteBuildGame.mex": "CapGame.BuildGame",
+    "FiniteBuildGame.mex_eq_of": "CapGame.BuildGame",
+    "FiniteBuildGame.mex_eq_zero_iff": "CapGame.BuildGame",
+    "FiniteBuildGame.mex_ne_zero_iff": "CapGame.BuildGame",
+    "FiniteBuildGame.mex_not_mem": "CapGame.BuildGame",
+    "FiniteBuildGame.mex_singleton_zero": "CapGame.BuildGame",
+    "FiniteBuildGame.move_equiv": "CapGame.BuildGame",
+    "FiniteBuildGame.move_map": "CapGame.BuildGame",
+    "FiniteBuildGame.ncert_sound": "CapGame.BuildGame",
+    "FiniteBuildGame.pcertDAG_sound": "CapGame.BuildGame",
+    "FiniteBuildGame.pcert_sound": "CapGame.BuildGame",
+    "FiniteBuildGame.sizeValueConstant_of_transitive": "CapGame.BuildGame",
+    "FiniteBuildGame.win_equiv": "CapGame.BuildGame",
+    "FiniteBuildGame.win_iff_exists_isP_child": "CapGame.BuildGame",
+    "FiniteBuildGame.win_iff_exists_move": "CapGame.BuildGame",
+    "FiniteBuildGame.win_iff_grundy_ne_zero": "CapGame.BuildGame",
+    "FiniteBuildGame.win_iff_not_win_succ": "CapGame.BuildGame",
+    "FiniteBuildGame.win_map": "CapGame.BuildGame",
+    "FiniteBuildGame.win_of_move_to_isP": "CapGame.BuildGame"
+  },
+  "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "lean_version": "4.32.0-rc1",
+  "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "opaque": [],
+  "project_axioms": [],
+  "project_declarations": [
+    "AffineEquiv.constVAdd.eq_1",
+    "CapGame.Affine.Cap",
+    "CapGame.Affine.Collinear",
+    "CapGame.Affine.Collinear.eq_1",
+    "CapGame.Affine.InitialPStatement",
+    "CapGame.Affine.LegalExtensions",
+    "CapGame.Affine.MirrorGood",
+    "CapGame.Affine.Win",
+    "CapGame.Affine.cap_empty",
+    "CapGame.Affine.cap_image_affineEquiv",
+    "CapGame.Affine.cap_insert_of_cap",
+    "CapGame.Affine.cap_mono",
+    "CapGame.Affine.cap_of_card_le_two",
+    "CapGame.Affine.cap_pair",
+    "CapGame.Affine.cap_singleton",
+    "CapGame.Affine.collinear_affineEquiv",
+    "CapGame.Affine.collinear_midpoint_left",
+    "CapGame.Affine.collinear_rotate_right",
+    "CapGame.Affine.collinear_swap_left",
+    "CapGame.Affine.initialP_fin",
+    "CapGame.Affine.initialP_of_fixedPointFreeInvolution",
+    "CapGame.Affine.initialP_of_nontrivial",
+    "CapGame.Affine.initialP_of_opening_mirrorGood",
+    "CapGame.Affine.initialP_of_orderTwoTranslation",
+    "CapGame.Affine.initialP_of_pointReflection",
+    "CapGame.Affine.initialP_pi",
+    "CapGame.Affine.isP_of_mirrorGood",
+    "CapGame.Affine.mem_iff_of_image_eq_self",
+    "CapGame.Affine.mem_legalExtensions",
+    "CapGame.Affine.mem_of_image_eq_self",
+    "CapGame.Affine.mirrorGood_step",
+    "CapGame.Affine.mirror_move_legal",
+    "CapGame.Affine.no_old_point_on_mirror_line",
+    "FiniteBuildGame.Grundy",
+    "FiniteBuildGame.Grundy.congr_simp",
+    "FiniteBuildGame.Grundy.eq_def",
+    "FiniteBuildGame.IsP",
+    "FiniteBuildGame.IsP.eq_1",
+    "FiniteBuildGame.LegalExtensions",
+    "FiniteBuildGame.LegalExtensions.eq_1",
+    "FiniteBuildGame.Move",
+    "FiniteBuildGame.Move.congr_simp",
+    "FiniteBuildGame.NCert",
+    "FiniteBuildGame.NCert.casesOn",
+    "FiniteBuildGame.NCert.childP",
+    "FiniteBuildGame.NCert.ctorIdx",
+    "FiniteBuildGame.NCert.legal",
+    "FiniteBuildGame.NCert.mk",
+    "FiniteBuildGame.NCert.mk.inj",
+    "FiniteBuildGame.NCert.mk.injEq",
+    "FiniteBuildGame.NCert.mk.noConfusion",
+    "FiniteBuildGame.NCert.mk.sizeOf_spec",
+    "FiniteBuildGame.NCert.move",
+    "FiniteBuildGame.NCert.noConfusion",
+    "FiniteBuildGame.NCert.noConfusionType",
+    "FiniteBuildGame.NCert.rec",
+    "FiniteBuildGame.NCert.recOn",
+    "FiniteBuildGame.PCert",
+    "FiniteBuildGame.PCert.casesOn",
+    "FiniteBuildGame.PCert.mk",
+    "FiniteBuildGame.PCert.rec",
+    "FiniteBuildGame.PCert.recOn",
+    "FiniteBuildGame.PCert.reply",
+    "FiniteBuildGame.PCertDAG",
+    "FiniteBuildGame.PCertDAG.book",
+    "FiniteBuildGame.PCertDAG.casesOn",
+    "FiniteBuildGame.PCertDAG.ctorIdx",
+    "FiniteBuildGame.PCertDAG.mk",
+    "FiniteBuildGame.PCertDAG.mk.inj",
+    "FiniteBuildGame.PCertDAG.mk.injEq",
+    "FiniteBuildGame.PCertDAG.mk.noConfusion",
+    "FiniteBuildGame.PCertDAG.mk.sizeOf_spec",
+    "FiniteBuildGame.PCertDAG.noConfusion",
+    "FiniteBuildGame.PCertDAG.noConfusionType",
+    "FiniteBuildGame.PCertDAG.rec",
+    "FiniteBuildGame.PCertDAG.recOn",
+    "FiniteBuildGame.PCertDAG.root_eq",
+    "FiniteBuildGame.PCertDAG.valid",
+    "FiniteBuildGame.PairReplyBook",
+    "FiniteBuildGame.ReplyBookDAG",
+    "FiniteBuildGame.ReplyBookDAG.Node",
+    "FiniteBuildGame.ReplyBookDAG.Row",
+    "FiniteBuildGame.ReplyBookDAG.ValidFor",
+    "FiniteBuildGame.ReplyBookDAG.casesOn",
+    "FiniteBuildGame.ReplyBookDAG.ctorIdx",
+    "FiniteBuildGame.ReplyBookDAG.isP_root",
+    "FiniteBuildGame.ReplyBookDAG.mk",
+    "FiniteBuildGame.ReplyBookDAG.mk.inj",
+    "FiniteBuildGame.ReplyBookDAG.mk.injEq",
+    "FiniteBuildGame.ReplyBookDAG.mk.noConfusion",
+    "FiniteBuildGame.ReplyBookDAG.mk.sizeOf_spec",
+    "FiniteBuildGame.ReplyBookDAG.noConfusion",
+    "FiniteBuildGame.ReplyBookDAG.noConfusionType",
+    "FiniteBuildGame.ReplyBookDAG.rec",
+    "FiniteBuildGame.ReplyBookDAG.recOn",
+    "FiniteBuildGame.ReplyBookDAG.root",
+    "FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows",
+    "FiniteBuildGame.ReplyBookRow",
+    "FiniteBuildGame.ReplyBookRow.casesOn",
+    "FiniteBuildGame.ReplyBookRow.child",
+    "FiniteBuildGame.ReplyBookRow.ctorIdx",
+    "FiniteBuildGame.ReplyBookRow.mk",
+    "FiniteBuildGame.ReplyBookRow.mk.inj",
+    "FiniteBuildGame.ReplyBookRow.mk.injEq",
+    "FiniteBuildGame.ReplyBookRow.mk.noConfusion",
+    "FiniteBuildGame.ReplyBookRow.mk.sizeOf_spec",
+    "FiniteBuildGame.ReplyBookRow.mover",
+    "FiniteBuildGame.ReplyBookRow.noConfusion",
+    "FiniteBuildGame.ReplyBookRow.noConfusionType",
+    "FiniteBuildGame.ReplyBookRow.rec",
+    "FiniteBuildGame.ReplyBookRow.recOn",
+    "FiniteBuildGame.ReplyBookRow.reply",
+    "FiniteBuildGame.SizeValueConstant",
+    "FiniteBuildGame.Win",
+    "FiniteBuildGame.Win.congr_simp",
+    "FiniteBuildGame.Win.eq_def",
+    "FiniteBuildGame.instDecidableEqReplyBookRow",
+    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq",
+    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1",
+    "FiniteBuildGame.isP_empty_iff_isP_of_frame_chain",
+    "FiniteBuildGame.isP_equiv",
+    "FiniteBuildGame.isP_iff_all_children_win",
+    "FiniteBuildGame.isP_iff_grundy_eq_zero",
+    "FiniteBuildGame.isP_map",
+    "FiniteBuildGame.isP_of_no_moves",
+    "FiniteBuildGame.isP_of_pairReplyBook",
+    "FiniteBuildGame.isP_of_replyStrategy",
+    "FiniteBuildGame.lt_mex_mem",
+    "FiniteBuildGame.mem_legalExtensions",
+    "FiniteBuildGame.mex",
+    "FiniteBuildGame.mex_eq_of",
+    "FiniteBuildGame.mex_eq_zero_iff",
+    "FiniteBuildGame.mex_ne_zero_iff",
+    "FiniteBuildGame.mex_not_mem",
+    "FiniteBuildGame.mex_singleton_zero",
+    "FiniteBuildGame.move_equiv",
+    "FiniteBuildGame.move_map",
+    "FiniteBuildGame.ncert_sound",
+    "FiniteBuildGame.pcertDAG_sound",
+    "FiniteBuildGame.pcert_sound",
+    "FiniteBuildGame.sizeValueConstant_of_transitive",
+    "FiniteBuildGame.win_equiv",
+    "FiniteBuildGame.win_iff_exists_isP_child",
+    "FiniteBuildGame.win_iff_exists_move",
+    "FiniteBuildGame.win_iff_grundy_ne_zero",
+    "FiniteBuildGame.win_iff_not_win_succ",
+    "FiniteBuildGame.win_map",
+    "FiniteBuildGame.win_of_move_to_isP"
+  ],
+  "schema_version": 1,
+  "terminal_axioms": {
+    "CapGame.Affine.initialP_fin": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "unit": "CapGame.Affine",
+  "uses": {
+    "CapGame.Affine.Cap": [
+      "CapGame.Affine.Collinear"
+    ],
+    "CapGame.Affine.Collinear.eq_1": [
+      "CapGame.Affine.Collinear"
+    ],
+    "CapGame.Affine.InitialPStatement": [
+      "CapGame.Affine.Cap",
+      "FiniteBuildGame.IsP"
+    ],
+    "CapGame.Affine.LegalExtensions": [
+      "CapGame.Affine.Cap",
+      "FiniteBuildGame.LegalExtensions"
+    ],
+    "CapGame.Affine.MirrorGood": [
+      "CapGame.Affine.Cap",
+      "FiniteBuildGame.Move"
+    ],
+    "CapGame.Affine.Win": [
+      "CapGame.Affine.Cap",
+      "FiniteBuildGame.Win"
+    ],
+    "CapGame.Affine.cap_empty": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.cap_of_card_le_two"
+    ],
+    "CapGame.Affine.cap_image_affineEquiv": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.collinear_affineEquiv"
+    ],
+    "CapGame.Affine.cap_insert_of_cap": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.collinear_rotate_right",
+      "CapGame.Affine.collinear_swap_left"
+    ],
+    "CapGame.Affine.cap_mono": [
+      "CapGame.Affine.Cap"
+    ],
+    "CapGame.Affine.cap_of_card_le_two": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.Collinear"
+    ],
+    "CapGame.Affine.cap_pair": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.cap_of_card_le_two"
+    ],
+    "CapGame.Affine.cap_singleton": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.cap_of_card_le_two"
+    ],
+    "CapGame.Affine.collinear_affineEquiv": [
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.Collinear.eq_1"
+    ],
+    "CapGame.Affine.collinear_midpoint_left": [
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.Collinear.eq_1"
+    ],
+    "CapGame.Affine.collinear_rotate_right": [
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.Collinear.eq_1"
+    ],
+    "CapGame.Affine.collinear_swap_left": [
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.Collinear.eq_1"
+    ],
+    "CapGame.Affine.initialP_fin": [
+      "CapGame.Affine.InitialPStatement",
+      "CapGame.Affine.initialP_pi"
+    ],
+    "CapGame.Affine.initialP_of_fixedPointFreeInvolution": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.InitialPStatement",
+      "CapGame.Affine.MirrorGood",
+      "CapGame.Affine.cap_empty",
+      "CapGame.Affine.isP_of_mirrorGood",
+      "FiniteBuildGame.Move"
+    ],
+    "CapGame.Affine.initialP_of_nontrivial": [
+      "CapGame.Affine.InitialPStatement",
+      "CapGame.Affine.initialP_of_orderTwoTranslation",
+      "CapGame.Affine.initialP_of_pointReflection"
+    ],
+    "CapGame.Affine.initialP_of_opening_mirrorGood": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.InitialPStatement",
+      "CapGame.Affine.MirrorGood",
+      "CapGame.Affine.mirrorGood_step",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.isP_of_replyStrategy"
+    ],
+    "CapGame.Affine.initialP_of_orderTwoTranslation": [
+      "AffineEquiv.constVAdd.eq_1",
+      "CapGame.Affine.InitialPStatement",
+      "CapGame.Affine.initialP_of_fixedPointFreeInvolution"
+    ],
+    "CapGame.Affine.initialP_of_pointReflection": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.InitialPStatement",
+      "CapGame.Affine.MirrorGood",
+      "CapGame.Affine.cap_pair",
+      "CapGame.Affine.collinear_midpoint_left",
+      "CapGame.Affine.initialP_of_opening_mirrorGood",
+      "FiniteBuildGame.Move"
+    ],
+    "CapGame.Affine.initialP_pi": [
+      "CapGame.Affine.InitialPStatement",
+      "CapGame.Affine.initialP_of_nontrivial"
+    ],
+    "CapGame.Affine.isP_of_mirrorGood": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.MirrorGood",
+      "CapGame.Affine.mirrorGood_step",
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.isP_of_replyStrategy"
+    ],
+    "CapGame.Affine.mem_iff_of_image_eq_self": [
+      "CapGame.Affine.mem_of_image_eq_self"
+    ],
+    "CapGame.Affine.mem_legalExtensions": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.LegalExtensions",
+      "FiniteBuildGame.mem_legalExtensions"
+    ],
+    "CapGame.Affine.mirrorGood_step": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.MirrorGood",
+      "CapGame.Affine.cap_mono",
+      "CapGame.Affine.mirror_move_legal",
+      "FiniteBuildGame.Move"
+    ],
+    "CapGame.Affine.mirror_move_legal": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.cap_insert_of_cap",
+      "CapGame.Affine.collinear_affineEquiv",
+      "CapGame.Affine.collinear_rotate_right",
+      "CapGame.Affine.collinear_swap_left",
+      "CapGame.Affine.mem_iff_of_image_eq_self",
+      "CapGame.Affine.mem_of_image_eq_self",
+      "CapGame.Affine.no_old_point_on_mirror_line",
+      "FiniteBuildGame.Move"
+    ],
+    "CapGame.Affine.no_old_point_on_mirror_line": [
+      "CapGame.Affine.Cap",
+      "CapGame.Affine.Collinear",
+      "CapGame.Affine.collinear_affineEquiv",
+      "CapGame.Affine.mem_of_image_eq_self",
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.Grundy": [
+      "FiniteBuildGame.LegalExtensions",
+      "FiniteBuildGame.mex"
+    ],
+    "FiniteBuildGame.Grundy.congr_simp": [
+      "FiniteBuildGame.Grundy"
+    ],
+    "FiniteBuildGame.Grundy.eq_def": [
+      "FiniteBuildGame.Grundy",
+      "FiniteBuildGame.LegalExtensions",
+      "FiniteBuildGame.mex"
+    ],
+    "FiniteBuildGame.IsP": [
+      "FiniteBuildGame.Win"
+    ],
+    "FiniteBuildGame.IsP.eq_1": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Win"
+    ],
+    "FiniteBuildGame.LegalExtensions": [
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.LegalExtensions.eq_1": [
+      "FiniteBuildGame.LegalExtensions",
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.Move.congr_simp": [
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.NCert.casesOn": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.mk",
+      "FiniteBuildGame.NCert.rec"
+    ],
+    "FiniteBuildGame.NCert.childP": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.move"
+    ],
+    "FiniteBuildGame.NCert.ctorIdx": [
+      "FiniteBuildGame.NCert"
+    ],
+    "FiniteBuildGame.NCert.legal": [
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.move"
+    ],
+    "FiniteBuildGame.NCert.mk": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert"
+    ],
+    "FiniteBuildGame.NCert.mk.inj": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.mk",
+      "FiniteBuildGame.NCert.mk.noConfusion"
+    ],
+    "FiniteBuildGame.NCert.mk.injEq": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.mk",
+      "FiniteBuildGame.NCert.mk.inj"
+    ],
+    "FiniteBuildGame.NCert.mk.noConfusion": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.mk",
+      "FiniteBuildGame.NCert.noConfusion"
+    ],
+    "FiniteBuildGame.NCert.mk.sizeOf_spec": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.mk"
+    ],
+    "FiniteBuildGame.NCert.move": [
+      "FiniteBuildGame.NCert"
+    ],
+    "FiniteBuildGame.NCert.noConfusion": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.casesOn",
+      "FiniteBuildGame.NCert.noConfusionType"
+    ],
+    "FiniteBuildGame.NCert.noConfusionType": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.casesOn"
+    ],
+    "FiniteBuildGame.NCert.rec": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.mk"
+    ],
+    "FiniteBuildGame.NCert.recOn": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.mk",
+      "FiniteBuildGame.NCert.rec"
+    ],
+    "FiniteBuildGame.PCert.casesOn": [
+      "FiniteBuildGame.PCert",
+      "FiniteBuildGame.PCert.mk",
+      "FiniteBuildGame.PCert.rec",
+      "FiniteBuildGame.PairReplyBook"
+    ],
+    "FiniteBuildGame.PCert.mk": [
+      "FiniteBuildGame.PCert",
+      "FiniteBuildGame.PairReplyBook"
+    ],
+    "FiniteBuildGame.PCert.rec": [
+      "FiniteBuildGame.PCert",
+      "FiniteBuildGame.PCert.mk",
+      "FiniteBuildGame.PairReplyBook"
+    ],
+    "FiniteBuildGame.PCert.recOn": [
+      "FiniteBuildGame.PCert",
+      "FiniteBuildGame.PCert.mk",
+      "FiniteBuildGame.PCert.rec",
+      "FiniteBuildGame.PairReplyBook"
+    ],
+    "FiniteBuildGame.PCert.reply": [
+      "FiniteBuildGame.PCert",
+      "FiniteBuildGame.PairReplyBook"
+    ],
+    "FiniteBuildGame.PCertDAG.book": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.ReplyBookDAG"
+    ],
+    "FiniteBuildGame.PCertDAG.casesOn": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.mk",
+      "FiniteBuildGame.PCertDAG.rec",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.ctorIdx": [
+      "FiniteBuildGame.PCertDAG"
+    ],
+    "FiniteBuildGame.PCertDAG.mk": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.mk.inj": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.mk",
+      "FiniteBuildGame.PCertDAG.mk.noConfusion",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.mk.injEq": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.mk",
+      "FiniteBuildGame.PCertDAG.mk.inj",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.mk.noConfusion": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.mk",
+      "FiniteBuildGame.PCertDAG.noConfusion",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.mk.sizeOf_spec": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.noConfusion": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.casesOn",
+      "FiniteBuildGame.PCertDAG.noConfusionType",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.noConfusionType": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.casesOn",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.rec": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.recOn": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.mk",
+      "FiniteBuildGame.PCertDAG.rec",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.root_eq": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.book",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.PCertDAG.valid": [
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.book",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor"
+    ],
+    "FiniteBuildGame.PairReplyBook": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.Node": [
+      "FiniteBuildGame.ReplyBookDAG"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.Row": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.ValidFor": [
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.Node",
+      "FiniteBuildGame.ReplyBookDAG.Row",
+      "FiniteBuildGame.ReplyBookDAG.root",
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.child",
+      "FiniteBuildGame.ReplyBookRow.mover",
+      "FiniteBuildGame.ReplyBookRow.reply"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.casesOn": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG.rec",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.ctorIdx": [
+      "FiniteBuildGame.ReplyBookDAG"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.isP_root": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.Node",
+      "FiniteBuildGame.ReplyBookDAG.Row",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.root",
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.child",
+      "FiniteBuildGame.ReplyBookRow.mover",
+      "FiniteBuildGame.ReplyBookRow.reply",
+      "FiniteBuildGame.isP_of_replyStrategy"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.mk": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.mk.inj": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG.mk.noConfusion",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.mk.injEq": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG.mk.inj",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.mk.noConfusion": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG.noConfusion",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.mk.sizeOf_spec": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.noConfusion": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.casesOn",
+      "FiniteBuildGame.ReplyBookDAG.noConfusionType",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.noConfusionType": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.casesOn",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.rec": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.recOn": [
+      "FiniteBuildGame.ReplyBookDAG",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG.rec",
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.root": [
+      "FiniteBuildGame.ReplyBookDAG"
+    ],
+    "FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows": [
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.ReplyBookDAG.Node",
+      "FiniteBuildGame.ReplyBookDAG.Row",
+      "FiniteBuildGame.ReplyBookDAG.ValidFor",
+      "FiniteBuildGame.ReplyBookDAG.mk",
+      "FiniteBuildGame.ReplyBookDAG.root",
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.child",
+      "FiniteBuildGame.ReplyBookRow.mover",
+      "FiniteBuildGame.ReplyBookRow.reply"
+    ],
+    "FiniteBuildGame.ReplyBookRow.casesOn": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk",
+      "FiniteBuildGame.ReplyBookRow.rec"
+    ],
+    "FiniteBuildGame.ReplyBookRow.child": [
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookRow.ctorIdx": [
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookRow.mk": [
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookRow.mk.inj": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk",
+      "FiniteBuildGame.ReplyBookRow.mk.noConfusion"
+    ],
+    "FiniteBuildGame.ReplyBookRow.mk.injEq": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk",
+      "FiniteBuildGame.ReplyBookRow.mk.inj"
+    ],
+    "FiniteBuildGame.ReplyBookRow.mk.noConfusion": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk",
+      "FiniteBuildGame.ReplyBookRow.noConfusion"
+    ],
+    "FiniteBuildGame.ReplyBookRow.mk.sizeOf_spec": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk"
+    ],
+    "FiniteBuildGame.ReplyBookRow.mover": [
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.ReplyBookRow.noConfusion": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.casesOn",
+      "FiniteBuildGame.ReplyBookRow.noConfusionType"
+    ],
+    "FiniteBuildGame.ReplyBookRow.noConfusionType": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.casesOn"
+    ],
+    "FiniteBuildGame.ReplyBookRow.rec": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk"
+    ],
+    "FiniteBuildGame.ReplyBookRow.recOn": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk",
+      "FiniteBuildGame.ReplyBookRow.rec"
+    ],
+    "FiniteBuildGame.ReplyBookRow.reply": [
+      "FiniteBuildGame.ReplyBookRow"
+    ],
+    "FiniteBuildGame.SizeValueConstant": [
+      "FiniteBuildGame.Win"
+    ],
+    "FiniteBuildGame.Win": [
+      "FiniteBuildGame.LegalExtensions"
+    ],
+    "FiniteBuildGame.Win.congr_simp": [
+      "FiniteBuildGame.Win"
+    ],
+    "FiniteBuildGame.Win.eq_def": [
+      "FiniteBuildGame.LegalExtensions",
+      "FiniteBuildGame.Win"
+    ],
+    "FiniteBuildGame.instDecidableEqReplyBookRow": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.instDecidableEqReplyBookRow.decEq"
+    ],
+    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.mk",
+      "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1"
+    ],
+    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1": [
+      "FiniteBuildGame.ReplyBookRow",
+      "FiniteBuildGame.ReplyBookRow.casesOn",
+      "FiniteBuildGame.ReplyBookRow.mk"
+    ],
+    "FiniteBuildGame.isP_empty_iff_isP_of_frame_chain": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.SizeValueConstant",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_iff_not_win_succ"
+    ],
+    "FiniteBuildGame.isP_equiv": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_equiv"
+    ],
+    "FiniteBuildGame.isP_iff_all_children_win": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_iff_exists_isP_child",
+      "FiniteBuildGame.win_of_move_to_isP"
+    ],
+    "FiniteBuildGame.isP_iff_grundy_eq_zero": [
+      "FiniteBuildGame.Grundy",
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.IsP.eq_1",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_iff_grundy_ne_zero"
+    ],
+    "FiniteBuildGame.isP_map": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_map"
+    ],
+    "FiniteBuildGame.isP_of_no_moves": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.IsP.eq_1",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_iff_exists_move"
+    ],
+    "FiniteBuildGame.isP_of_pairReplyBook": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.PairReplyBook",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.isP_iff_all_children_win",
+      "FiniteBuildGame.win_of_move_to_isP"
+    ],
+    "FiniteBuildGame.isP_of_replyStrategy": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.lt_mex_mem": [
+      "FiniteBuildGame.mex"
+    ],
+    "FiniteBuildGame.mem_legalExtensions": [
+      "FiniteBuildGame.LegalExtensions",
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.mex_eq_of": [
+      "FiniteBuildGame.mex",
+      "FiniteBuildGame.mex_not_mem"
+    ],
+    "FiniteBuildGame.mex_eq_zero_iff": [
+      "FiniteBuildGame.lt_mex_mem",
+      "FiniteBuildGame.mex",
+      "FiniteBuildGame.mex_not_mem"
+    ],
+    "FiniteBuildGame.mex_ne_zero_iff": [
+      "FiniteBuildGame.mex",
+      "FiniteBuildGame.mex_eq_zero_iff"
+    ],
+    "FiniteBuildGame.mex_not_mem": [
+      "FiniteBuildGame.mex"
+    ],
+    "FiniteBuildGame.mex_singleton_zero": [
+      "FiniteBuildGame.mex",
+      "FiniteBuildGame.mex_eq_of"
+    ],
+    "FiniteBuildGame.move_equiv": [
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.move_map": [
+      "FiniteBuildGame.Move"
+    ],
+    "FiniteBuildGame.ncert_sound": [
+      "FiniteBuildGame.NCert",
+      "FiniteBuildGame.NCert.childP",
+      "FiniteBuildGame.NCert.legal",
+      "FiniteBuildGame.NCert.move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_of_move_to_isP"
+    ],
+    "FiniteBuildGame.pcertDAG_sound": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.PCertDAG",
+      "FiniteBuildGame.PCertDAG.book",
+      "FiniteBuildGame.PCertDAG.root_eq",
+      "FiniteBuildGame.PCertDAG.valid",
+      "FiniteBuildGame.ReplyBookDAG.isP_root",
+      "FiniteBuildGame.ReplyBookDAG.root"
+    ],
+    "FiniteBuildGame.pcert_sound": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.PCert",
+      "FiniteBuildGame.PCert.reply",
+      "FiniteBuildGame.isP_of_pairReplyBook"
+    ],
+    "FiniteBuildGame.sizeValueConstant_of_transitive": [
+      "FiniteBuildGame.SizeValueConstant",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_map"
+    ],
+    "FiniteBuildGame.win_equiv": [
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.move_equiv",
+      "FiniteBuildGame.win_iff_exists_move"
+    ],
+    "FiniteBuildGame.win_iff_exists_isP_child": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_iff_exists_move"
+    ],
+    "FiniteBuildGame.win_iff_exists_move": [
+      "FiniteBuildGame.LegalExtensions",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.Win.eq_def",
+      "FiniteBuildGame.mem_legalExtensions"
+    ],
+    "FiniteBuildGame.win_iff_grundy_ne_zero": [
+      "FiniteBuildGame.Grundy",
+      "FiniteBuildGame.Grundy.eq_def",
+      "FiniteBuildGame.LegalExtensions",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.Win.eq_def",
+      "FiniteBuildGame.mem_legalExtensions",
+      "FiniteBuildGame.mex",
+      "FiniteBuildGame.mex_ne_zero_iff"
+    ],
+    "FiniteBuildGame.win_iff_not_win_succ": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.SizeValueConstant",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_iff_exists_isP_child",
+      "FiniteBuildGame.win_of_move_to_isP"
+    ],
+    "FiniteBuildGame.win_map": [
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.move_map",
+      "FiniteBuildGame.win_iff_exists_move"
+    ],
+    "FiniteBuildGame.win_of_move_to_isP": [
+      "FiniteBuildGame.IsP",
+      "FiniteBuildGame.Move",
+      "FiniteBuildGame.Win",
+      "FiniteBuildGame.win_iff_exists_move"
+    ]
+  },
+  "uses_included": true
+}

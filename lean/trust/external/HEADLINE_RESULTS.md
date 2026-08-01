@@ -9,10 +9,10 @@ manual edit or stale generation.
 | Stable trust identifier | Gate | Terminals | Axioms extracted | Review status |
 |---|---|---:|---:|---|
 | `trust-spine:complete_ports:gate:RepairPorts.Gates.CompletePorts` | `RepairPorts.Gates.CompletePorts` | 42 | 36 | 6 await extraction |
-| `trust-spine:finitegeom_first_tag:gate:CapGame.Affine` | `CapGame.Affine` | 1 | 0 | 1 await extraction |
-| `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.Binary` | `ProjectiveCap.Binary` | 1 | 0 | 1 await extraction |
-| `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.EllipticMirror` | `ProjectiveCap.EllipticMirror` | 2 | 0 | 2 await extraction |
-| `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.PlaneOutcome` | `ProjectiveCap.PlaneOutcome` | 3 | 0 | 3 await extraction |
+| `trust-spine:finitegeom_first_tag:gate:CapGame.Affine` | `CapGame.Affine` | 1 | 1 | extracted and matched |
+| `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.Binary` | `ProjectiveCap.Binary` | 1 | 1 | extracted and matched |
+| `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.EllipticMirror` | `ProjectiveCap.EllipticMirror` | 2 | 2 | extracted and matched |
+| `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.PlaneOutcome` | `ProjectiveCap.PlaneOutcome` | 3 | 3 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.AlternateOrbitRepairQ25` | `RelativeConicArcs.Gates.AlternateOrbitRepairQ25` | 1 | 0 | 1 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.Baer` | `RelativeConicArcs.Gates.Baer` | 1 | 0 | 1 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ClebschOrientationMechanisms` | `RelativeConicArcs.Gates.ClebschOrientationMechanisms` | 12 | 0 | 12 await extraction |
@@ -24,7 +24,7 @@ manual edit or stale generation.
 | Stable trust identifier | Adopted terminals | Axioms extracted | Review status |
 |---|---:|---:|---|
 | `trust-spine:complete_ports` | 42 | 36 | 6 terminal axiom sets await extraction |
-| `trust-spine:finitegeom_first_tag` | 7 | 0 | 7 terminal axiom sets await extraction |
+| `trust-spine:finitegeom_first_tag` | 7 | 7 | all terminal axioms extracted and matched |
 | `trust-spine:relconic` | 46 | 0 | 46 terminal axiom sets await extraction |
 
 The machine-readable list contains exactly 95 adopted public terminals.

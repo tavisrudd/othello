@@ -120,6 +120,13 @@ status:
     - "Quot.sound"
     - "propext"
   main_results:
+    - declaration: "CapGame.Affine.initialP_fin"
+      file: "CapGame/Affine.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
     - declaration: "FiniteGeom.dualCode_dualCode"
       file: "FiniteGeom/CodeDuality.lean"
       sorry_count: 0
@@ -129,6 +136,48 @@ status:
         - "propext"
     - declaration: "FiniteGeom.dualCode_injective"
       file: "FiniteGeom/CodeDuality.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank"
+      file: "ProjectiveCap/PlaneOutcome.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank"
+      file: "ProjectiveCap/PlaneOutcome.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one"
+      file: "ProjectiveCap/Binary.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution"
+      file: "ProjectiveCap/Mirror.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul"
+      file: "ProjectiveCap/EllipticMirror.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "ProjectiveCap.initialPStatement_of_even_card_finrank"
+      file: "ProjectiveCap/PlaneOutcome.lean"
       sorry_count: 0
       axioms:
         - "Classical.choice"
@@ -565,31 +614,31 @@ alignment:
     - source: "trust-spine:finitegeom_first_tag:terminal:CapGame.Affine.initialP_fin"
       lean: "CapGame.Affine.initialP_fin"
       module: "CapGame.Affine"
-      status: "declared; extraction pending"
+      status: "proved"
     - source: "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank"
       lean: "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank"
       module: "ProjectiveCap.PlaneOutcome"
-      status: "declared; extraction pending"
+      status: "proved"
     - source: "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank"
       lean: "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank"
       module: "ProjectiveCap.PlaneOutcome"
-      status: "declared; extraction pending"
+      status: "proved"
     - source: "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one"
       lean: "ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one"
       module: "ProjectiveCap.Binary"
-      status: "declared; extraction pending"
+      status: "proved"
     - source: "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution"
       lean: "ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution"
-      module: "ProjectiveCap.EllipticMirror"
-      status: "declared; extraction pending"
+      module: "ProjectiveCap.Mirror"
+      status: "proved"
     - source: "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul"
       lean: "ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul"
       module: "ProjectiveCap.EllipticMirror"
-      status: "declared; extraction pending"
+      status: "proved"
     - source: "trust-spine:finitegeom_first_tag:terminal:ProjectiveCap.initialPStatement_of_even_card_finrank"
       lean: "ProjectiveCap.initialPStatement_of_even_card_finrank"
       module: "ProjectiveCap.PlaneOutcome"
-      status: "declared; extraction pending"
+      status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.Certificate.check_sound"
       lean: "RelativeConicArcs.Certificate.check_sound"
       module: "RelativeConicArcs.Gates.Relconic"
@@ -783,7 +832,7 @@ othello_trust:
   lean_toolchain: "leanprover/lean4:v4.32.0-rc1"
   graph_manifest:
     path: "trust/graph-manifest.json"
-    canonical_sha256: "5a54e4eb040ba9b8f969cc5e225ae550e6f792a873d308bf8defb10dc7e66d6c"
+    canonical_sha256: "94cd22ff25102e461fc350e90b056c788647ac26089cdee3147fc2f34a902db1"
     replay: "lean/scripts/lean-trust-spine.py graph --out <path>"
   inputs:
     - path: "lean-toolchain"
@@ -795,7 +844,7 @@ othello_trust:
     - path: "trust/areas/relconic.toml"
       sha256: "4210033b565b71f1107dd06fe2696995e4972c2365a3485dae6136cff474e419"
     - path: "trust/graph-manifest.json"
-      sha256: "1e3bc0b584fd2a6bc80932219453686a38c9baddcc77df2d9f9197aff465468a"
+      sha256: "2743471eba86c6bd388043c618bafb24159796b8d15f99e443402ff0f1c7172b"
     - path: "trust/papers.toml"
       sha256: "8011db50e7b5f0e4d28055eaa5929193e24b2efc561a7de729753c7a0e9bc153"
     - path: "trust/portfolio.toml"
@@ -993,8 +1042,8 @@ othello_trust:
       manifest: "trust/FIRST_TAG.md"
       spine: "trust/areas/finitegeom_first_tag.toml"
       terminals: 7
-      axioms_extracted: 0
-      review_status: "7 terminal axiom sets await extraction"
+      axioms_extracted: 7
+      review_status: "all terminal axioms extracted and matched"
       replay: "lean/scripts/lean-trust-extract.py run --area finitegeom_first_tag"
       data_trees: []
     - id: "trust-spine:relconic"
