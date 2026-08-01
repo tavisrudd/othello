@@ -1934,8 +1934,17 @@
       "last": 752,
       "purpose": "Paper I Lean proof-spine correspondence audit and closure",
       "sequence": 215
+    },
+    {
+      "count": 1,
+      "first": 753,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 753,
+      "purpose": "Paper I Lean proof-spine correspondence implementation and release closure",
+      "sequence": 216
     }
   ],
-  "next_id": 753,
+  "next_id": 754,
   "schema": "codex-task-id-allocations-v1"
 }
