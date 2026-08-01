@@ -1468,8 +1468,10 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
   finite exact residual signature (sealed conic subsets already give unboundedly many P-valued
   heights), every scalar extremal selector tested, and unrestricted coordinate encodings, which are
   vacuous because a natural number can encode the whole residual.
-- Prize: eventual uniform proof ~35–45%. The q=25 unblind the upper half was contingent on is now
-  **resolved all-P**, leaving the proof resting on the amortized-ledger / packet-absorption lever, the
+- Prize: eventual uniform proof ~35–45%. **This is a subjective prior, not a measurement, and it
+  should carry no weight in a resourcing decision** — it is a considered guess about an open problem,
+  written in the same register as the exact results above it, which is exactly the confusion to
+  avoid. The q=25 unblind the upper half was contingent on is **resolved all-P**, leaving the proof resting on the amortized-ledger / packet-absorption lever, the
   abundance route, and the value-blind smallest-orbit anchor; the next empirical dial is the gated
   q=29 census. The prize is no longer the portfolio's load-bearing bet — the publication track (§8)
   is independent of it, and the kernel would land there as the flagship's open-frontier section
@@ -1585,7 +1587,9 @@ engine), `s4potential`/`s4potentialprobe` (Ψ obligation extraction/replay), `s4
 (2→3-intruder transition miner). Plus `escape`/`esc`/`feat`/`cert`/`certcheck`/`mir`/`resym`.
 A companion analysis-script layer covers the Ψ LP fit, reply-automaton quotients, `f_q`
 spectral decomposition, line-pencil/fan-orbit/concurrence verifiers, off-conic margins, and kill-set
-top-k replay.
+top-k replay. **The binary count overstates this**: these are entry points over one shared solver
+core and one canonical-key implementation, not independent programs, and the list is long because
+the mining surface is wide rather than because the engineering is.
 
 **Sum-free solvers:** Rust (`sumfree.rs` cyclic Grundy; `capset2/5.rs` u128/256-bit AGL-canonical),
 Go (`sumfree.go` full-`Aut(G)` negamax; `sumfree_par.go` sharded-parallel + pairing verifier;
@@ -1618,8 +1622,10 @@ checker in the closure must be built serially first because the budget is
 `checker_peak + (N−1) × heaviest_sibling`, not an average. Staleness is probed by content traces
 (`lake build --no-build`), never mtimes; restarts are gated by a trace-validated sentinel guard,
 since an existing olean may belong to an older import closure. The forcing case is real: one
-alternate-orbit certificate is sharded into 1,036 transport modules, 1,071 dispatch leaves, and 7,044
-canonical class links **because a combined elaboration exceeded the safe memory envelope**.
+alternate-orbit certificate is sharded into transport modules, dispatch leaves, and canonical class
+links — thousands of each — **because a combined elaboration exceeded the safe memory envelope**.
+That single certificate is why the tracked module count says nothing about how much mathematics is
+formalized.
 
 What exists now: a guarded single-file elaborator; an **unattended build queue** over explicit
 targets with a `flock`-based ownership lock acquired *before* the quiet check (the seed script
@@ -1650,10 +1656,15 @@ other path is pinned by hermetic tests with stubbed `nix`/`lake`/`choom`/`pgrep`
 codes, trace semantics and interrupted-build residue are still unestablished, and a quiet `pgrep` is
 not proof of an idle tree.
 
-**Two analysis tools now measure what was previously guessed.** An import-graph analyzer over 10,878
-tracked modules and 30,270 project-local import edges shows the dependency tree is **depth-driven, not
+**Two analysis tools measure what was previously guessed.** An import-graph analyzer over every
+tracked module and project-local import edge shows the dependency tree is **depth-driven, not
 fan-out-driven**: about ten hub modules each invalidate ~95% of the tree while carrying only 2–11
-direct importers. The companion cost ranking is **not delivered, and its premise failed** — the
+direct importers. **The module count is not a measure of the development's size and must not be read
+as one.** The overwhelming majority of tracked Lean files are generated certificate rows — the `Q16`
+and `Q25` data trees alone account for well over nine tenths of them — and the handwritten library is
+smaller than that total by more than an order of magnitude. Anyone sizing this development by
+counting modules will overstate it enormously; the sharding exists because a combined elaboration
+exceeded the memory envelope, not because there is that much mathematics. The companion cost ranking is **not delivered, and its premise failed** — the
 available build telemetry is closure-level and cache-state dependent rather than per-module, so
 summing it over a reverse closure double-counts (two trees differ by more than 2× in implied
 per-module rate). An early rank correlation between olean size and measured seconds is explicitly
@@ -1821,6 +1832,15 @@ each `\title{}`, page counts from the compiled PDF, statement counts and label c
 Do not edit it by hand; run `lean/scripts/paper-facts.py generate`. Its counts are what the sources
 contain, not a judgement about what is ready: the ship-order table after it carries that, and stays
 hand-written.
+
+**Read the row count with two corrections, or it overstates the portfolio by two papers.**
+`beyond4_prs` and `beyond4_prs_submission` are one manuscript in two typesettings, not two results;
+and `clebsch_hexagon_code` is the superseded integrated manuscript, preserved only as a fallback for
+material the rigidity paper, its companion, and the trade-rigidity paper now carry. So the rows
+describe **eleven live manuscripts**, not thirteen. The statement and label columns need the same
+care: labels count anything labelled, and corollary-heavy papers inflate against theorem-heavy ones —
+the arcs manuscript alone carries 21 corollaries against 8 theorems, so its 77 labels are not 77
+independent results. Neither column measures depth, and none of them should be summed across rows.
 
 <!-- trust-spine:begin area=papers section=manuscripts version=1 -->
 | Manuscript                      | Title                                                                                                                         | Lane             | Pages | Thm | Lem | Prop | Cor | Labels |

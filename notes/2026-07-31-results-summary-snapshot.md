@@ -14,6 +14,15 @@ a human proof, a machine-checked proof, and an exhaustive finite verification
 is stated rather than blurred. Nothing here has been published or externally
 refereed.
 
+**How to read the length.** Sections are not sized in proportion to the
+mathematics they contain. Each one carries its scope boundaries, its priority
+concessions, its refuted predecessors and its explicitly unclaimed
+strengthenings alongside the results themselves, because those are the parts a
+reader cannot reconstruct and most easily assumes away. A long section
+therefore signals how much delimiting a result needed, not how much was proved,
+and the density of theorem-grade content is well below what the volume of prose
+suggests.
+
 The results are grouped as follows.
 
 1. *Reconstructing the Clebsch code and its golden orientation from its
