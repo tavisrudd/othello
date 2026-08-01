@@ -416,6 +416,14 @@ vector-space splitting \(E=ke\oplus F\) used above.  Thus the lower
 row represents \(\pi_*(F\otimes\xi)\).  Since
 \(\epsilon i:T\to k\) is zero for nontrivial simple \(T\), the map \(i\)
 lands in \(F\); pulling back the lower row gives (3.2a).
+More concretely, choose the same vector-space lift \(e\) and put
+\(c(g)=ge-e\in F\).  With the connecting-cocycle convention
+\(g\mapsto gsg^{-1}-s\), the class in (3.2a) is represented by
+\[
+ z_i(g):T\longrightarrow\operatorname{Sym}^2F,\qquad
+ z_i(g)(t)=i(t)c(g).                                           \tag{3.2b}
+\]
+Changing \(e\) changes \(z_i\) by a coboundary.
 \end{proof}
 
 \begin{lemma}[Uniform nonprincipal-sheet exclusion]
@@ -441,7 +449,7 @@ orbit of length \(p\).  Thus \(K\) is a \(p'\)-group and
 is projective.  Its restriction to a translation Sylow subgroup is a
 sum of regular modules, and
 \[
- |G^+/K|=q\lambda                                      \tag{3.2b}
+ |G^+/K|=q\lambda                                      \tag{3.2c}
 \]
 for some positive integer \(\lambda\).  Extend scalars to
 \(k=\overline{\F}_q\) and put \(P=k\otimes_{\F_q}P_0\).
@@ -454,7 +462,7 @@ the point-vector extension
  \mathrel{\mathop{\longrightarrow}^{\epsilon}}k
  \longrightarrow0,\qquad
  F=\operatorname{Sym}^{(q-3)/2}L(2),
-                                                               \tag{3.2c}
+                                                               \tag{3.2d}
 \]
 and evaluation at a matching \(M\) is a vector \(v_M\in E\) with
 \(\epsilon(v_M)=1\).  The transpose of the multiplication--evaluation
@@ -477,13 +485,13 @@ extensions \(S^\delta\) has the following two properties.  Write
  \operatorname{Hom}_G(S^\delta,\operatorname{Sym}^2F)=0,\\
  i_\delta\ne0\quad\Longrightarrow\quad
  \delta_{S^\delta}(i_\delta)\ne0.
-\end{gathered}                                                  \tag{3.2d}
+\end{gathered}                                                  \tag{3.2e}
 \end{equation}
-Call (3.2d) the \emph{quadratic pullback obstruction}.
+Call (3.2e) the \emph{quadratic pullback obstruction}.
 Lemma~\ref{lem:projective-trade-reduction} shows at once that this
 obstruction is incompatible with a sheet-sign trade kernel: that kernel
 would force \(S^\delta\) to embed in \(\operatorname{Sym}^2E\), while
-the lemma's two alternatives are both excluded by (3.2d).  Thus proving
+the lemma's two alternatives are both excluded by (3.2e).  Thus proving
 the quadratic pullback obstruction for every \(\lambda>1\) forces
 \(\lambda=1\).
 
@@ -493,7 +501,7 @@ form in \cite[Theorem~2.2]{Giudici2007}.  The corresponding restricted
 heads are
 \[
  A_4:L(6),\qquad S_4:L(8),\qquad A_5:L(12).
-                                                               \tag{3.2e}
+                                                               \tag{3.2f}
 \]
 Prime-field occurrences are nonsplit by the bottom-alcove trace
 calculation.  For \(e>1\), put \(b=(p-1)/2\).
@@ -502,23 +510,23 @@ Lucas equations for the affine socle give
 \[
  \operatorname{Hom}_{G^+}(S,F)\ne0
  \quad\Longleftrightarrow\quad
- eb\equiv1+\frac{s}{2}\pmod2,                              \tag{3.2f}
+ eb\equiv1+\frac{s}{2}\pmod2,                              \tag{3.2g}
 \]
 and the nonzero Hom space is a line.  The small-characteristic digit
 heads are absent: an odd target digit cannot occur in the square-socle
 recurrence, and the sole all-even exception lies in the alternating
-square.  Thus (3.2f) decides every remaining occurrence.  The \(A_4\)
+square.  Thus (3.2g) decides every remaining occurrence.  The \(A_4\)
 head and the \(S_4/A_5\) heads occupy opposite values of the same parity
 bit.
 
-It remains to rule out splitting when (3.2f) holds.  Retain only the
+It remains to rule out splitting when (3.2g) holds.  Retain only the
 first wall:
 \[
- T=L(p-2,1),\qquad R=L(p-2-s,1),\qquad Y=L(0,2).             \tag{3.2g}
+ T=L(p-2,1),\qquad R=L(p-2-s,1),\qquad Y=L(0,2).             \tag{3.2h}
 \]
 The unique correction row in \(R\otimes T\) has trace coefficient
 \[
- p-2-s\ne0,                                                \tag{3.2h}
+ p-2-s\ne0,                                                \tag{3.2i}
 \]
 and the same row has a nonzero component in \(Y\otimes R\).  No other
 row reaches that component.  Its torus weights are separated from the
@@ -526,12 +534,12 @@ weights of \(S\); at the sole wrap seam \((p,s,e)=(3,0,2)\), the two
 torus-fixed coordinates are killed separately by the coefficients
 \(t\) and \(t^3\) of a root element.  Hence
 \(\operatorname{Hom}_B(S,Y\otimes R)=0\).  The coefficient required by
-(3.2h) must therefore be simultaneously nonzero and zero in any Borel
+(3.2i) must therefore be simultaneously nonzero and zero in any Borel
 coboundary.  Restriction on \(H^1\) is injective because
 \([G^+:B]\) is prime to \(p\), so the pullback is nonsplit.  This is a
 local calculation: its two target dimensions are
 \[
- 2(s+1)(p-1),\qquad 6(p-1-s),                               \tag{3.2i}
+ 2(s+1)(p-1),\qquad 6(p-1-s),                               \tag{3.2j}
 \]
 independent of \(e\).
 
@@ -547,7 +555,7 @@ torus coordinate, the two sheet parameters are \(c,c^{-1}\), and
 \[
  P_c=-Y\prod_{z\in(\F_q^\times)^2}
  \bigl(X-(1+c)zY+cz^2Z\bigr),\qquad
- P_c+P_{c^{-1}}=Y(X^n-Z^n).                              \tag{3.2j}
+ P_c+P_{c^{-1}}=Y(X^n-Z^n).                              \tag{3.2k}
 \]
 After translating the axis by \(t\), every affine coefficient has
 \(t\)-degree at most \(q-3\).  Hence a quadratic moment sum extracts
@@ -556,7 +564,7 @@ the square-axis character of exponent two.  Its possible terms are the
 bottom four and complementary top four edge factors.  Every
 parameter-dependent term has total cyclic weight \(r\) with
 \(0<r\le8<n\), so scaling all selected \(z\)'s by a nonzero square makes
-its orbit sum vanish.  The weight-zero terms in (3.2j) are unchanged
+its orbit sum vanish.  The weight-zero terms in (3.2k) are unchanged
 by \(c\leftrightarrow c^{-1}\).  Thus the two weighted first and second
 moments agree, giving a second trade.
 
@@ -588,7 +596,7 @@ exactly two fibers.  Then
  (q,\Omega)=(7,\Omega_{B_3})
  \quad\text{or}\quad
  (q,\Omega)=(11,\Omega_{H_3}).
-                                                        \tag{3.2k}
+                                                        \tag{3.2l}
 \]
 Conversely, both displayed orbits satisfy these intrinsic hypotheses.
 For either orbit, the two fibers are its two one-factorization sheets.
@@ -619,7 +627,7 @@ three perfect matchings altogether, so such an orbit cannot occur.
 Now fix \(M\in\Omega\) and let \(K=\operatorname{Stab}_G(M)\).
 Orbit--stabilizer and the derived two-sheet conclusion give
 \[
- |K|=\frac{q^2-1}{2},\qquad K\leq G^+,\qquad [G^+:K]=q.    \tag{3.2l}
+ |K|=\frac{q^2-1}{2},\qquad K\leq G^+,\qquad [G^+:K]=q.    \tag{3.2m}
 \]
 
 Assume \(q\geq5\), and place \(K\) in a maximal subgroup of \(G^+\).
@@ -632,11 +640,11 @@ than \((q^2-1)/2\).  A proper subfield subgroup is no larger than
  r(r^2-1)<\frac{r^{2e}-1}{2}.
 \]
 Thus it too is too small.  An exceptional maximal subgroup has order at
-most \(60\), so (3.2l) leaves \(q=5,7,9,11\).  For \(q=9\), the required
+most \(60\), so (3.2m) leaves \(q=5,7,9,11\).  For \(q=9\), the required
 order \(40\) divides none of \(12,24,60\).  In the other three cases,
 order and divisibility force
 \[
- (q,K)=(5,A_4),\ (7,S_4),\ (11,A_5).                    \tag{3.2m}
+ (q,K)=(5,A_4),\ (7,S_4),\ (11,A_5).                    \tag{3.2n}
 \]
 
 It remains to ask which of these subgroup actions preserves a matching.

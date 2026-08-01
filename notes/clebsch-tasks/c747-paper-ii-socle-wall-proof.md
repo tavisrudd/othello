@@ -30,6 +30,17 @@ quotient \(\pi(f\otimes f')=ff'\). Test whether
 this symmetrized Yoneda product gives a uniform structural proof before
 retaining any correction-row scalar.
 
+With a lift \(e\) and affine cocycle \(c(g)=ge-e\), the exact class is
+represented by
+\[
+ z_{i_\delta}(g)(t)=i_\delta(t)c(g).
+\]
+First test whether evaluation/coevaluation or a canonical first-wall
+subquotient contracts this cocycle to a nonzero scalar multiple of \(c\).
+For \(p\nmid\dim S^\delta\), such a contraction would prove nonvanishing
+without coordinates. State explicitly what supplies the required
+subquotient; do not assume a retraction \(F\to S^\delta\).
+
 ## Proof standard
 
 - Begin from standard highest-weight, Frobenius-twist, and

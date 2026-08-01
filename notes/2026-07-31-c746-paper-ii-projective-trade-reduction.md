@@ -87,6 +87,17 @@ Indeed, over \(F\subset E\), the quadratic extension is the pushout of
 along \(\pi\). Thus C747 may attack a symmetrized Yoneda product rather than
 the quadratic module in coordinates.
 
+Choosing a vector-space lift \(e\) of \(1\) and writing
+\(c(g)=ge-e\in F\), this class has the representative
+\[
+ z_i(g)(t)=i(t)c(g)
+ \quad\text{in}\quad
+ Z^1\!\left(G,\operatorname{Hom}(T,\operatorname{Sym}^2F)\right).
+\]
+Changing \(e\) changes \(z_i\) only by a coboundary. Thus the remaining
+non-splitting theorem is exactly the assertion that this bilinear cocycle is
+not a coboundary.
+
 Thus a sheet-sign kernel is impossible as soon as one parity \(S^\delta\)
 satisfies
 \[
@@ -171,6 +182,16 @@ The reader also caught three C746 presentation issues, now repaired:
   correct. The final wording fixes \(\pi\) as the canonical quotient rather
   than the ambiguously normalized “symmetrizer,” and fixes \(\delta\) to be
   the Yoneda pullback convention, so no hidden factor or sign remains.
+- **Settled by ej2:** the obstruction now has the invariant cocycle
+  representative \(z_i(g)(t)=i(t)c(g)\). This removes the last ambiguity
+  about which first-wall cocycle C747 must test.
+- **Open, high-value C747 route:** seek a \(G\)-equivariant contraction from
+  \(\operatorname{Hom}(T,\operatorname{Sym}^2F)\) to a module detecting
+  \([c]\), carrying \([z_i]\) to a nonzero scalar multiple of \([c]\). For
+  \(p\nmid\dim T\), evaluation/coevaluation suggests a categorical-trace
+  construction. The exact missing datum is a canonical subquotient or
+  contraction involving the selected copy \(i(T)\subseteq F\); without it,
+  the trace argument is not yet a proof.
 - **Open, owned by C747:** prove that every \(\lambda>1\) matching sheet
   supplies the simple submodule required by the quadratic pullback
   obstruction, including any principal-cover and characteristic-three
