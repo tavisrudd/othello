@@ -2015,8 +2015,17 @@
       "last": 761,
       "purpose": "Paper IV q13 passant-code manuscript infrastructure and release plan",
       "sequence": 224
+    },
+    {
+      "count": 2,
+      "first": 762,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 763,
+      "purpose": "Paper I forward exposition pass; Paper III Golden-core consolidation",
+      "sequence": 225
     }
   ],
-  "next_id": 762,
+  "next_id": 764,
   "schema": "codex-task-id-allocations-v1"
 }
