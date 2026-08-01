@@ -1,0 +1,189 @@
+{
+  "bibliography": [
+    {
+      "key": "BMS",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "CaiGorenstein",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "ChiriviMaffei",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "CostaDobrescuFox",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "DolgachevSegre",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "FickusMixon",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "GripaiosNguyen",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "GripaiosNguyenTwo",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "HMSV",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "HMSVOuter",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "KondoSegre",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "LunaSlices",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "McDanielWatanabe",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    },
+    {
+      "key": "RuddFactorization",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/golden-operator/golden_operator.tex",
+      "text": "T.~Rudd, \\emph{Quadratic trade rigidity and cubic orientation in conic matching quotients}, preprint, 2026."
+    },
+    {
+      "key": "RuddPassages",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/golden-operator/golden_operator.tex",
+      "text": "T.~Rudd, \\emph{Arithmetic and harmonic realizations of the Clebsch cubic}, preprint, 2026."
+    },
+    {
+      "key": "RuddRigidity",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/golden-operator/golden_operator.tex",
+      "text": "T.~Rudd, \\emph{Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus}, preprint, 2026."
+    },
+    {
+      "key": "TschinkelZhang",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-operator/golden_operator.tex"
+    }
+  ],
+  "dir": "papers/golden-operator",
+  "environment_counts": {
+    "corollary": 2,
+    "definition": 1,
+    "lemma": 1,
+    "proposition": 3,
+    "theorem": 7
+  },
+  "labels": [
+    {
+      "environment": "document",
+      "label": "app:collision-filtration"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:golden-cubic-wall-nodes"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:naimark"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:primitive-cofactor"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:polar-fibres"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:support-two-graph"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:synchronized-spinors"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:anomaly-inverse"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:frustration"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:matching-quotient-geometry"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:propagation"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:recovery-propagation"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:two-u1-lines"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:unmarked-boundary"
+    }
+  ],
+  "main": "papers/golden-operator/golden_operator.tex",
+  "manifest_labels": null,
+  "paper": "golden_operator",
+  "pdfs": [],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/golden-operator/golden_operator.tex",
+      "sha256": "d701eb571f4987bd5fff24a3784e12b441f8efc023b24d879c185b393a6e9a50"
+    }
+  ],
+  "title": "The golden conference operator and its shadow sisters",
+  "title_normalized": "the golden conference operator and its shadow sisters",
+  "untracked_bibliography": []
+}

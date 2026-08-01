@@ -576,6 +576,26 @@ class PaperFactsTest(unittest.TestCase):
         stale = [f for f in doc["findings"] if f["code"] == "paper-facts-stale"]
         self.assertEqual([f["severity"] for f in stale], ["warn"])
 
+    def test_extract_can_refresh_one_registered_paper_without_touching_another(self):
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                "--lean-root",
+                str(self.fx.lean_root),
+                "extract",
+                "--paper",
+                "beta",
+            ],
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        facts = self.fx.lean_root / "trust" / "paper-facts"
+        self.assertEqual(result.stdout.strip(), "wrote beta.json")
+        self.assertFalse((facts / "alpha.json").exists())
+        self.assertTrue((facts / "beta.json").is_file())
+
     def test_two_extract_runs_are_byte_identical(self):
         facts = self.fx.lean_root / "trust" / "paper-facts" / "alpha.json"
         for _ in range(2):

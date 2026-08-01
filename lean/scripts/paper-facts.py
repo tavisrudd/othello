@@ -1287,8 +1287,13 @@ def cmd_extract(args: argparse.Namespace) -> int:
     ctx = build_context(args.lean_root, args.registry)
     out_dir = Path(args.out) if args.out else ctx.trust_dir / FACTS_DIR_NAME
     out_dir.mkdir(parents=True, exist_ok=True)
+    selected = ctx.facts
+    if args.paper:
+        if args.paper not in selected:
+            raise Refused(f"unknown paper {args.paper!r}")
+        selected = {args.paper: selected[args.paper]}
     changed = []
-    for ident, paper in sorted(ctx.facts.items()):
+    for ident, paper in sorted(selected.items()):
         target = out_dir / f"{ident}.json"
         text = facts_text(paper, ctx.spine)
         if not target.is_file() or target.read_text(encoding="utf-8") != text:
@@ -1388,6 +1393,7 @@ def main(argv: list[str] | None = None) -> int:
 
     extract = sub.add_parser("extract", help="write one facts artifact per declared paper")
     extract.add_argument("--out")
+    extract.add_argument("--paper", help="write only this registered paper's facts artifact")
     extract.set_defaults(func=cmd_extract)
 
     audit_cmd = sub.add_parser("audit", help="read-only comparison of declarations with facts")

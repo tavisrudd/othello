@@ -1242,6 +1242,23 @@
     },
     {
       "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.CorankOneAdjugate.adjugate_eq_smul_outerProduct_of_generated_kernels",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.CorankOneAdjugate.adjugate_eq_smul_outerProduct_of_generated_kernels",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
       "declaration": "RelativeConicArcs.Examples.ReflectionArrangements.a3_characteristic_polynomial",
       "declaration_module": null,
       "expected_axioms": [
@@ -1780,6 +1797,465 @@
     },
     {
       "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCommutatorPfaffian.bracketMatrix_transpose",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCommutatorPfaffian.bracketMatrix_transpose",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_scale",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_scale",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicFrameCarrier.centeredNode_castSucc_linearIndependent",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicFrameCarrier.centeredNode_castSucc_linearIndependent",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicFrameCarrier.eval_line_standardFramePoint_eq_zero",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicFrameCarrier.eval_line_standardFramePoint_eq_zero",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicFrameCarrier.finrank_frameDoubleCarrier",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicFrameCarrier.finrank_frameDoubleCarrier",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicFrameCarrier.incidence_incidenceRightInverse",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicFrameCarrier.incidence_incidenceRightInverse",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicFrameCarrier.sum_centeredNode_eq_zero",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicFrameCarrier.sum_centeredNode_eq_zero",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodeHessians.derivative_gradientCoordinatePolynomial_chart",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodeHessians.derivative_gradientCoordinatePolynomial_chart",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode_ne_zero",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode_ne_zero",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodes.gradient_eq_zero_iff_smul_centeredNode",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodes.gradient_eq_zero_iff_smul_centeredNode",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodes.gradient_smul",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodes.gradient_smul",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodes.nonzero_gradient_zero_iff_projective_centeredNode",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodes.nonzero_gradient_zero_iff_projective_centeredNode",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodes.smul_centeredNode_injective",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodes.smul_centeredNode_injective",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodesBase.cubic_eq_conference_triangleCubic",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodesBase.cubic_eq_conference_triangleCubic",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenCubicNodesBase.derivative_coordinatePolynomial_eval",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCubicNodesBase.derivative_coordinatePolynomial_eval",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingCarrier.derivative_matchingCoordinatePolynomial_centeredNode",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingCarrier.derivative_matchingCoordinatePolynomial_centeredNode",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingCarrier.matchingForm_centeredNode",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingCarrier.matchingForm_centeredNode",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingCarrier.matchingForm_linearIndependent",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingCarrier.matchingForm_linearIndependent",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingCubics.matchingCubics_affine",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingCubics.matchingCubics_affine",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_rainbow_of_threeThree",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_rainbow_of_threeThree",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingJacobian.fiveOne_minor_identity",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingJacobian.fiveOne_minor_identity",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingJacobian.fourOneOne_minor_identity",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingJacobian.fourOneOne_minor_identity",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingJacobian.fourTwo_minor_identity",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingJacobian.fourTwo_minor_identity",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.GoldenMatchingJacobian.selectedMinor_eq_det",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenMatchingJacobian.selectedMinor_eq_det",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
       "declaration": "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart",
       "declaration_module": null,
       "expected_axioms": [
@@ -1994,6 +2470,57 @@
         "RelativeConicArcs.Gates.Baer"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.Q25AllProfiles.pair_extension",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.WeightedMatchingEvaluation.bracketProduct_scale",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.WeightedMatchingEvaluation.bracketProduct_scale",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.WeightedMatchingEvaluation.edgeProduct_bracketWeightedMatrix",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.WeightedMatchingEvaluation.edgeProduct_bracketWeightedMatrix",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.WeightedMatchingEvaluation.weightedEdgeSum_bracketWeightedMatrix",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenProofSpine"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.WeightedMatchingEvaluation.weightedEdgeSum_bracketWeightedMatrix",
       "observed_axioms": null,
       "trust_area": "relconic"
     }

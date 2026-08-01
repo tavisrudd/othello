@@ -234,6 +234,49 @@ module = "RelativeConicArcs.Gates.AMELUTransportDivisorAxioms"
 terminals = []
 coverage_rule = "closure"
 
+[[gate]]
+module = "RelativeConicArcs.Gates.GoldenProofSpine"
+terminals = [
+  "RelativeConicArcs.GoldenMatchingCubics.matchingCubics_affine",
+  "RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_rainbow_of_threeThree",
+  "RelativeConicArcs.WeightedMatchingEvaluation.edgeProduct_bracketWeightedMatrix",
+  "RelativeConicArcs.WeightedMatchingEvaluation.weightedEdgeSum_bracketWeightedMatrix",
+  "RelativeConicArcs.WeightedMatchingEvaluation.bracketProduct_scale",
+  "RelativeConicArcs.GoldenMatchingJacobian.selectedMinor_eq_det",
+  "RelativeConicArcs.GoldenMatchingJacobian.fourOneOne_minor_identity",
+  "RelativeConicArcs.GoldenMatchingJacobian.fourTwo_minor_identity",
+  "RelativeConicArcs.GoldenMatchingJacobian.fiveOne_minor_identity",
+  "RelativeConicArcs.GoldenCommutatorPfaffian.bracketMatrix_transpose",
+  "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation",
+  "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate",
+  "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_scale",
+  "RelativeConicArcs.CorankOneAdjugate.adjugate_eq_smul_outerProduct_of_generated_kernels",
+]
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.GoldenCubicNodes"
+terminals = [
+  "RelativeConicArcs.GoldenCubicNodesBase.cubic_eq_conference_triangleCubic",
+  "RelativeConicArcs.GoldenCubicNodesBase.derivative_coordinatePolynomial_eval",
+  "RelativeConicArcs.GoldenCubicNodes.gradient_smul",
+  "RelativeConicArcs.GoldenCubicNodes.gradient_eq_zero_iff_smul_centeredNode",
+  "RelativeConicArcs.GoldenCubicNodes.nonzero_gradient_zero_iff_projective_centeredNode",
+  "RelativeConicArcs.GoldenCubicNodes.smul_centeredNode_injective",
+  "RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode",
+  "RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode_ne_zero",
+  "RelativeConicArcs.GoldenCubicNodeHessians.derivative_gradientCoordinatePolynomial_chart",
+  "RelativeConicArcs.GoldenCubicFrameCarrier.centeredNode_castSucc_linearIndependent",
+  "RelativeConicArcs.GoldenCubicFrameCarrier.sum_centeredNode_eq_zero",
+  "RelativeConicArcs.GoldenCubicFrameCarrier.incidence_incidenceRightInverse",
+  "RelativeConicArcs.GoldenCubicFrameCarrier.finrank_frameDoubleCarrier",
+  "RelativeConicArcs.GoldenCubicFrameCarrier.eval_line_standardFramePoint_eq_zero",
+  "RelativeConicArcs.GoldenMatchingCarrier.matchingForm_linearIndependent",
+  "RelativeConicArcs.GoldenMatchingCarrier.matchingForm_centeredNode",
+  "RelativeConicArcs.GoldenMatchingCarrier.derivative_matchingCoordinatePolynomial_centeredNode",
+]
+coverage_rule = "closure"
+
 # ---------------------------------------------------------------------------------------------
 # Terminals.
 #
@@ -477,6 +520,161 @@ expected_axioms = ["Quot.sound", "propext"]
 declaration = "RelativeConicArcs.Examples.ReflectionArrangements.a3_conic_size_factorization"
 gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
 expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingCubics.matchingCubics_affine"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_rainbow_of_threeThree"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.WeightedMatchingEvaluation.edgeProduct_bracketWeightedMatrix"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.WeightedMatchingEvaluation.weightedEdgeSum_bracketWeightedMatrix"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.WeightedMatchingEvaluation.bracketProduct_scale"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingJacobian.selectedMinor_eq_det"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingJacobian.fourOneOne_minor_identity"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingJacobian.fourTwo_minor_identity"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingJacobian.fiveOne_minor_identity"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCommutatorPfaffian.bracketMatrix_transpose"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_scale"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.CorankOneAdjugate.adjugate_eq_smul_outerProduct_of_generated_kernels"
+gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodesBase.cubic_eq_conference_triangleCubic"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodesBase.derivative_coordinatePolynomial_eval"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodes.gradient_smul"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodes.gradient_eq_zero_iff_smul_centeredNode"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodes.nonzero_gradient_zero_iff_projective_centeredNode"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodes.smul_centeredNode_injective"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode_ne_zero"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicNodeHessians.derivative_gradientCoordinatePolynomial_chart"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicFrameCarrier.centeredNode_castSucc_linearIndependent"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicFrameCarrier.sum_centeredNode_eq_zero"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicFrameCarrier.incidence_incidenceRightInverse"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicFrameCarrier.finrank_frameDoubleCarrier"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenCubicFrameCarrier.eval_line_standardFramePoint_eq_zero"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingCarrier.matchingForm_linearIndependent"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingCarrier.matchingForm_centeredNode"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenMatchingCarrier.derivative_matchingCoordinatePolynomial_centeredNode"
+gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 # ---------------------------------------------------------------------------------------------
 # Owned modules that no declared extraction unit reaches.

@@ -17,6 +17,8 @@ manual edit or stale generation.
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.Baer` | `RelativeConicArcs.Gates.Baer` | 1 | 0 | 1 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ClebschOrientationMechanisms` | `RelativeConicArcs.Gates.ClebschOrientationMechanisms` | 12 | 0 | 12 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` | `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` | 32 | 0 | 32 await extraction |
+| `trust-spine:relconic:gate:RelativeConicArcs.Gates.GoldenCubicNodes` | `RelativeConicArcs.Gates.GoldenCubicNodes` | 17 | 0 | 17 await extraction |
+| `trust-spine:relconic:gate:RelativeConicArcs.Gates.GoldenProofSpine` | `RelativeConicArcs.Gates.GoldenProofSpine` | 14 | 0 | 14 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.Relconic` | `RelativeConicArcs.Gates.Relconic` | 1 | 0 | 1 await extraction |
 
 ## Area coverage
@@ -25,6 +27,6 @@ manual edit or stale generation.
 |---|---:|---:|---|
 | `trust-spine:complete_ports` | 42 | 36 | 6 terminal axiom sets await extraction |
 | `trust-spine:finitegeom_first_tag` | 7 | 7 | all terminal axioms extracted and matched |
-| `trust-spine:relconic` | 46 | 0 | 46 terminal axiom sets await extraction |
+| `trust-spine:relconic` | 77 | 0 | 77 terminal axiom sets await extraction |
 
-The machine-readable list contains exactly 95 adopted public terminals.
+The machine-readable list contains exactly 126 adopted public terminals.

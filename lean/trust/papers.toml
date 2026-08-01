@@ -186,3 +186,9 @@ id = "equivariant_robust_completion"
 dir = "papers/equivariant-robust-completion"
 main = "frobenius_pair_extension.tex"
 lane = "paper-frob-eq"
+
+[[paper]]
+id = "golden_operator"
+dir = "papers/golden-operator"
+main = "golden_operator.tex"
+lane = "golden"
