@@ -111,6 +111,57 @@ spinor-norm witness is exactly two. -/
 theorem reflection_norm_product : (1 : ℤ) * 2 = 2 := by
   norm_num
 
+/-! ## Reflection formula and the spinor witness -/
+
+/-- The standard quadratic norm on the rational three-space. -/
+def standardNormSq (v : Fin 3 → ℚ) : ℚ :=
+  ∑ i, v i ^ 2
+
+/-- Reflection in a nonisotropic vector for the standard quadratic form.
+The formula is retained even when the displayed denominator vanishes; the
+paper uses it only for the two nonisotropic vectors below. -/
+def standardReflection (v : Fin 3 → ℚ) : Matrix (Fin 3) (Fin 3) ℚ :=
+  1 - (2 / standardNormSq v) • Matrix.vecMulVec v v
+
+/-- The first reflecting vector in the rational exchanger factorization. -/
+def exchangerReflectionVector : Fin 3 → ℚ := ![0, 1, 0]
+
+/-- The second reflecting vector in the rational exchanger factorization. -/
+def swapReflectionVector : Fin 3 → ℚ := ![0, 1, -1]
+
+/-- The reflection vectors have norms one and two. -/
+theorem exchanger_reflection_norms :
+    standardNormSq exchangerReflectionVector = 1 ∧
+      standardNormSq swapReflectionVector = 2 := by
+  native_decide
+
+/-- The first displayed integral matrix is the standard reflection formula. -/
+theorem reflectionE2_is_standardReflection :
+    reflectionE2.map (Int.castRingHom ℚ) =
+      standardReflection exchangerReflectionVector := by
+  native_decide
+
+/-- The second displayed integral matrix is the standard reflection formula. -/
+theorem reflectionE2SubE3_is_standardReflection :
+    reflectionE2SubE3.map (Int.castRingHom ℚ) =
+      standardReflection swapReflectionVector := by
+  native_decide
+
+/-- The exchanger is therefore a product of honest rational reflections,
+with spinor witness equal to the product of their derived norms. -/
+theorem exchanger_reflection_factorization :
+    exchangerMatrix.map (Int.castRingHom ℚ) =
+      standardReflection exchangerReflectionVector *
+        standardReflection swapReflectionVector ∧
+      standardNormSq exchangerReflectionVector *
+        standardNormSq swapReflectionVector = 2 := by
+  constructor
+  · rw [exchanger_eq_reflection_mul, Matrix.map_mul,
+      reflectionE2_is_standardReflection,
+      reflectionE2SubE3_is_standardReflection]
+  · rw [exchanger_reflection_norms.1, exchanger_reflection_norms.2]
+    norm_num
+
 instance : Fact (Nat.Prime 11) := ⟨by norm_num⟩
 
 /-- The spinor witness `2` is nonsquare in `𝔽₁₁`. -/
