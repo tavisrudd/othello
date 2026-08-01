@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after C744
+**Status:** queued and unblocked by C744
 
 ## Objective
 
@@ -13,8 +13,8 @@ produce one exact current-paper gate with a declaration-level claim map.
 
 ## Dependency and boundary
 
-C744 must first freeze the proof architecture, definitions, normalizations,
-marking datum, and statement correspondence.  Before any Lean operation, read
+C744 has frozen the proof architecture, definitions, normalizations, marking
+datum, and statement correspondence.  Before any Lean operation, read
 and follow `lean/AGENTS.md` and use its serialized build, resource, validation,
 and exit protocols.
 
@@ -41,8 +41,8 @@ and validates the exact source closure.
    factorization, deck action, fibre and conductor interfaces, and the exact
    characteristic hypotheses retained by C744.
 4. Define the complete marked bridge datum.  Prove switching and relabelling
-   covariance, orientation-reversal invariance, chart-scaling behavior, and
-   the Galois/deck sign actions.  Formalize the fibrewise exchanger comparison
+   covariance, chart-scaling behavior, and the Galois/deck sign actions.
+   Formalize the fibrewise exchanger comparison
    without claiming that a sheet reconstructs the auxiliary marking.
 5. Formalize the structural `[5]`/`[2]` torsor or normalizer theorem and derive
    the displayed spinor specialization as a corollary.  Literal matrices may

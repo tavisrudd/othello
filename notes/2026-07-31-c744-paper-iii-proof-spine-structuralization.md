@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** in progress; structural rewrite complete, independent closeout pending
+**Status:** complete; structural rewrite, independent A/B, EJ/EJ2, release,
+and standalone synchronization green
 
 ## Result so far
 
@@ -187,3 +188,17 @@ There is no remaining unexplained numerical coincidence or loose degree of
 freedom in the claimed rational proof spine.  The sole open item is a
 geometric integral-model theorem, not a hidden computation in the present
 argument.
+
+## Validation and synchronization
+
+- Fresh blind A/B rerun: B chosen 96 to 73; no rational mathematical gap or
+  unexplained constant.
+- Authoritative aggregate: `clebsch-passages release: ALL CHECKS PASS`, with
+  warning-free manuscript build.
+- Deterministic export planner/auditor/materializer: green after refreshing
+  the stale standalone README rewrite count from 8 to 11.
+- Standalone aggregate: `clebsch-passages release: ALL CHECKS PASS`, with
+  warning-free manuscript build.
+- Authoritative proof commit: `1975ed42`.
+- Export-guard refresh commit: `1634301a`.
+- Standalone forward synchronization commit: `b85e20d`.

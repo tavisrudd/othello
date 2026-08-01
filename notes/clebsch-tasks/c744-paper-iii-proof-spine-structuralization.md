@@ -2,7 +2,26 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; precedes C745
+**Status:** complete; structural rewrite, A/B, EJ/EJ2, authoritative release,
+and standalone synchronization green
+
+## Result
+
+C744 replaced the coordinate-shaped normalization, conductor, conference,
+six-arc, and harmonic-kernel arguments by quadratic pinching, split pinching,
+irreducible tight frames, a triangle-sign Gram formula, and the two-orbit
+Petersen spectrum.  It removed the unused orientation and representative
+choices, closed the surviving marking and deck freedoms, separated the
+discriminant and spinor characters, and reduced the harmonic cubic to its
+unique marked normalization leaf.  The complete claim, computation, degree
+of freedom, magic-number, integral-boundary, and mystery ledgers are in
+`notes/2026-07-31-c744-paper-iii-proof-spine-structuralization.md`.
+
+A fresh blind A/B reviewer chose the final spine 96 to 73 and found no
+mathematical gap or unexplained constant in the rational argument.  The
+authoritative and standalone release gates both ended `ALL CHECKS PASS` with
+warning-free manuscript builds.  Authoritative proof commit: `1975ed42`;
+export-guard refresh: `1634301a`; standalone forward sync: `b85e20d`.
 
 ## Objective
 
