@@ -40,8 +40,7 @@ theorem centeredNode_castSucc_linearIndependent :
   · exact hc3
   · exact hc4
 
-/-- The unique normalized relation among the six centered frame vectors has
-all coefficients equal to one. -/
+/-- The six centered frame vectors have the all-ones linear relation. -/
 theorem sum_centeredNode_eq_zero :
     ∑ i : Fin 6, centeredNode i = 0 := by
   funext j
@@ -108,12 +107,36 @@ theorem finrank_frameDoubleCarrier :
   norm_num at hrankNullity
   omega
 
+/-- A five-dimensional subspace contained in the frame-double carrier equals
+the complete carrier. -/
+theorem eq_frameDoubleCarrier_of_le_of_finrank
+    (W : Submodule ℚ (Fin 10 → ℚ))
+    (hle : W ≤ frameDoubleCarrier)
+    (hdim : Module.finrank ℚ W = 5) :
+    W = frameDoubleCarrier := by
+  apply Submodule.eq_of_le_of_finrank_eq hle
+  rw [hdim, finrank_frameDoubleCarrier]
+
 /-- Evaluation of a squarefree cubic in the fixed monomial order. -/
 def evalSquarefreeCubic (c : Fin 10 → ℚ) (x : Fin 5 → ℚ) : ℚ :=
   c 0*x 0*x 1*x 2 + c 1*x 0*x 1*x 3 + c 2*x 0*x 1*x 4 +
   c 3*x 0*x 2*x 3 + c 4*x 0*x 2*x 4 + c 5*x 0*x 3*x 4 +
   c 6*x 1*x 2*x 3 + c 7*x 1*x 2*x 4 + c 8*x 1*x 3*x 4 +
   c 9*x 2*x 3*x 4
+
+/-- The formal coordinate gradient of a squarefree cubic in the fixed
+monomial order. -/
+def gradientSquarefreeCubic (c : Fin 10 → ℚ) (x : Fin 5 → ℚ) : Fin 5 → ℚ :=
+  ![c 0*x 1*x 2 + c 1*x 1*x 3 + c 2*x 1*x 4 +
+      c 3*x 2*x 3 + c 4*x 2*x 4 + c 5*x 3*x 4,
+    c 0*x 0*x 2 + c 1*x 0*x 3 + c 2*x 0*x 4 +
+      c 6*x 2*x 3 + c 7*x 2*x 4 + c 8*x 3*x 4,
+    c 0*x 0*x 1 + c 3*x 0*x 3 + c 4*x 0*x 4 +
+      c 6*x 1*x 3 + c 7*x 1*x 4 + c 9*x 3*x 4,
+    c 1*x 0*x 1 + c 3*x 0*x 2 + c 5*x 0*x 4 +
+      c 6*x 1*x 2 + c 8*x 1*x 4 + c 9*x 2*x 4,
+    c 2*x 0*x 1 + c 4*x 0*x 2 + c 5*x 0*x 3 +
+      c 7*x 1*x 2 + c 8*x 1*x 3 + c 9*x 2*x 3]
 
 /-- The standard six-point projective frame: five coordinate points followed
 by the all-ones point. -/
@@ -133,6 +156,43 @@ theorem mem_frameDoubleCarrier_iff (c : Fin 10 → ℚ) :
   · intro h
     funext i
     exact h i
+
+/-- The incidence-kernel definition is equivalent to value and first-order
+vanishing at all six standard frame points. -/
+theorem mem_frameDoubleCarrier_iff_double_standardFramePoint
+    (c : Fin 10 → ℚ) :
+    c ∈ frameDoubleCarrier ↔
+      ∀ i : Fin 6,
+        evalSquarefreeCubic c (standardFramePoint i) = 0 ∧
+        ∀ j, gradientSquarefreeCubic c (standardFramePoint i) j = 0 := by
+  rw [mem_frameDoubleCarrier_iff]
+  constructor
+  · intro h
+    have h0 := h 0
+    have h1 := h 1
+    have h2 := h 2
+    have h3 := h 3
+    have h4 := h 4
+    simp [incidence, incidenceMatrix, Matrix.toLin'_apply, Matrix.mulVec,
+      dotProduct, Fin.sum_univ_succ] at h0 h1 h2 h3 h4
+    have htotal : c 0+c 1+c 2+c 3+c 4+c 5+c 6+c 7+c 8+c 9 = 0 := by
+      linear_combination (h0 + h1 + h2 + h3 + h4) / 3
+    intro i
+    constructor
+    · fin_cases i
+      all_goals simp [evalSquarefreeCubic, standardFramePoint] <;> linarith
+    · intro j
+      fin_cases i <;> fin_cases j <;>
+        simp [gradientSquarefreeCubic, standardFramePoint] <;>
+        linarith
+  · intro h j
+    have hj := (h 5).2 j
+    fin_cases j <;>
+      simp [gradientSquarefreeCubic, standardFramePoint, incidence,
+        incidenceMatrix, Matrix.toLin'_apply, Matrix.mulVec, dotProduct,
+        Fin.sum_univ_succ] at hj ⊢ <;>
+      ring_nf at hj ⊢ <;>
+      exact hj
 
 /-- Every carrier cubic vanishes identically on each of the fifteen lines
 joining two distinct standard frame points. -/
