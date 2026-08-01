@@ -1,7 +1,9 @@
 # Crosswalk: major named problems versus repository results
 
-**Comparison date:** 2026-07-31  
-**External index:** `sources-generalist-named-problems.md`  
+**Comparison date:** 2026-07-31
+
+**External index:** `sources-generalist-named-problems.md`
+
 **Local index:** `local-results-index.md`
 
 This file contains the filtering judgment.  The two source catalogues remain
