@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after C751.
+**Status:** active; referee GO received for C751 and the read-only audit has
+started while C751's independent cold release build completes.
 
 ## Objective
 
