@@ -31,38 +31,28 @@
 \begin{abstract}
 Let \(C\) be a marked symmetric conference operator on six axes with
 \(C^2=5I\), and let \(C_T\) run through its coherent outer six-family.
-We show that the diagonal of the middle exterior operator
-\(*\bigwedge^3C_T\) is the signed Joubert cubic vector.  Its image lies on
-the Segre cubic, while centered squaring is the Segre--Igusa polar map.
-The same cubics are Pfaffians
-\(\Pf[D_x,C_T]=4Z_T(x)\); over the golden splitting they are determinants
-of the cross-eigenspace blocks.  The six Pfaffian systems form the unique
-outer-equivariant synchronized product of pure-spinor big cells, and their
-top projection has the reduced Segre cubic as its exact scheme-theoretic
-image.  Their adjugates produce the two small
-resolutions, conjugate rank-one maximal Cohen--Macaulay sheaves, and the
-rank-one differential factorization of the polar map.  On the balanced
-Boolean layer, \(C^2=5I\) is equivalent to universal
-maximum-determinant \(K_{3,3}\) frustration.  The resulting six sign
-syndromes form a distance-six simplex code whose transpose constructs an
-order-ten conference operator by a Naimark--Gram lift.  Selected
-coefficients of the determinant
-sextic are exactly the four-cycle holonomies of the matching fingerprint,
-so this algebraic shadow recovers the same unoriented switching class
-without a Pfaffian sign.  The same operator family gives exact Slater
-amplitudes, Majorana parity walls, and six-charge anomaly solutions.  For
-two Abelian factors, its anomaly lines split into fifteen fixed-collision
-plane components and six one-moving-path del Pezzo components; the mixed
-anomalies become determinant--Pfaffian identities.
-For the Clebsch code, the invariant (10+10) split of coordinate triples
-is a regular two-graph and recovers the conference switching line.  This
-gives a recovery--propagation theorem from the monomial code class and a
-sharp marking boundary: the bare twelve-point deep-hole conic does not
-select the support two-graph.  That unordered two-graph is the exact
-minimal source, while a choice of one half is the extra bit for signed odd
-shadows.
-We also identify the precise Clifford, exceptional-group, bad-prime, and
-\(E_8\)-lattice boundaries of the construction.
+We prove that middle exterior power, diagonal commutator, golden
+eigenspace compression, adjugation, and centered squaring are five forms
+of one propagation mechanism.  The diagonal of
+\(*\bigwedge^3C_T\) is the signed Joubert cubic vector \(Z\); the same
+cubics satisfy \(\Pf[D_x,C_T]=4Z_T(x)\), and over
+\(\mathbb Q(\sqrt5)\) they are determinants of the cross-eigenspace
+blocks.  The assembled block adjugates recover the Segre--Igusa polar map,
+while the six commutator forms give the unique outer-equivariant
+synchronized product of pure-spinor big cells.  On balanced Boolean
+inputs, \(C^2=5I\) is equivalent to universal maximum-determinant
+\(K_{3,3}\) frustration.  Its six sign syndromes form a distance-six
+simplex whose transpose gives the order-ten conference operator and the
+real \(\operatorname{ETF}(5,10)\).
+
+The construction is reversible at a precise quotient.  The determinant
+sextic and the dimer signs both recover the unoriented conference
+two-graph; for the Clebsch code this is exactly the invariant unordered
+\(10+10\) support split.  A support-half choice is the additional datum
+needed for signed odd shadows.  We also transport the construction to
+Slater amplitudes, Majorana parity walls, and one- and two-factor Abelian
+anomaly equations, while keeping these consequences separate from the
+operator theorem.
 \end{abstract}
 
 \section{Introduction}
@@ -79,26 +69,43 @@ separates propagation from provenance: a geometric or coding construction
 may supply the marked conference class, but the proof below needs only the
 operator and its coherent outer marking.
 
-The coding provenance has a precise boundary.  The projective deep-hole
-locus of the Clebsch code is a full rational conic, which forgets its
-parent.  The monomial code class retains an unordered split of the twenty
-coordinate triples into two \(A_5\)-orbits.  We prove below that this split
-is exactly the unoriented regular two-graph of the conference operator.
+Theorem~\ref{thm:propagation} is the common proof.  Its three mechanisms
+are exterior--Pfaffian identification, golden compression, and the two
+kernel lines of the assembled differential.  The first turns triangle
+holonomy into the Joubert cubics.  The second turns the same Pfaffian into
+a \(3\times3\) determinant and its adjugate factorization.  The third
+identifies centered squaring as the conormal direction of the Segre cubic.
+No exceptional-group or physical interpretation is used in this proof.
 
-The order-six system also generates its first higher-order conference
-shadow.  Its six balanced-cut fingerprints are the rows of a simplex
-matrix \(R\).  The row Gram identity makes the normalized transpose of
-\(R\) a Naimark isometry, while the column Gram matrix is an
-affine rescaling of a symmetric conference operator of order ten.  Thus the
-passage from six axes to ten cuts closes the main propagation chain; the
-failure of universal cut extremality at order ten is a later boundary, not
-the source of this operator.
+Theorem~\ref{thm:frustration} restricts the operator to balanced Boolean
+inputs.  Universal maximum determinant is equivalent to the conference
+identity, and the six resulting fingerprints form a simplex.  Transposition
+then gives the first higher-order conference shadow by a
+classification-free Naimark--Gram argument.
+
+Only after propagation do we address provenance.  The projective
+deep-hole locus of the Clebsch code is a full rational conic, which forgets
+its parent.  The monomial code class retains an unordered split of the
+twenty coordinate triples into two \(A_5\)-orbits.  We prove that this split
+is exactly the unoriented regular two-graph required by the operator
+theorem.  The final section transports the marked cubics to anomaly and
+fermionic instruments.  Exceptional, Clifford, code, and lattice parents
+are secondary branches and are not needed to follow the main argument.
 
 \section{The marked propagation theorem}
 
-Let \(X\) be an oriented six-set, let \(\cT\) be its outer six-set, and let
-\((C_T)_{T\in\cT}\) be a coherent oriented family of symmetric
-zero-diagonal sign matrices satisfying \(C_T^2=5I\).  For
+\begin{definition}
+A \emph{fully marked golden presentation} consists of an oriented labelled
+six-set \(X\); its outer six-set \(\cT\) with the coherent signed outer
+\(S_6\)-action; and a coherently oriented family
+\((C_T)_{T\in\cT}\) of symmetric zero-diagonal sign matrices satisfying
+\(C_T^2=5I\).  When one cross-golden determinant is named, the presentation
+also includes a choice of \(\sqrt5\) and compatible orientations of the two
+golden determinant lines.  The last choices are unnecessary for rational
+Pfaffians, determinants, and polar coordinates.
+\end{definition}
+
+For
 \(x\in\mathbb Q^X/\mathbb Q\mathbf1\), put
 \[
  D_x=\operatorname{diag}(x),\qquad
@@ -115,11 +122,6 @@ For a fully marked golden presentation:
   \[
     \sum_T Z_T=0,\qquad \sum_T Z_T^3=0;
   \]
-\item its centered square
-  \[
-    W_T=Z_T^2-\frac16\sum_U Z_U^2
-  \]
-  is the Segre--Igusa polar vector;
 \item
   \[
     \Pf[D_x,C_T]=4Z_T(x),\qquad
@@ -132,44 +134,115 @@ For a fully marked golden presentation:
   \]
   and its adjugate gives the two conjugate determinantal resolutions and
   rank-one maximal Cohen--Macaulay objects;
-\item the assembled differential matrix \(\mathsf A=dZ\), on the two
-  augmentation quotients, satisfies
+\item the centered square
   \[
-    \operatorname{adj}\mathsf A=6Wq^{\mathsf T},
-    \qquad q=\operatorname{center}(x_i^2);
+    W_T=Z_T^2-\frac16\sum_U Z_U^2
   \]
-\item on the balanced Boolean layer, universal \(5{:}1\)
-  determinant-matching frustration is equivalent to the conference
-  identity.  Its six projective sign fingerprints form a distance-six
-  regular simplex.  More precisely, if their sign words
-  \(r_T\in\{\pm1\}^{10}\) are the rows of \(R\), then
+  is the Segre--Igusa polar vector.  If
+  \(\widehat W_T=6W_T\),
+  \(q_i=6x_i^2-\sum_jx_j^2\), and \(\mathsf A=dZ\) is written on the
+  two augmentation quotients in the bases fixed below, then
   \[
-    RR^{\mathsf T}=12\left(I_6-\frac16J_6\right);
+    \operatorname{adj}\mathsf A=6\widehat Wq^{\mathsf T}.
   \]
-\item the same matrix gives the six-to-ten Naimark--Gram lift
-  \[
-    R^{\mathsf T}R=6I_{10}+2S_{10},\qquad S_{10}^2=9I_{10},
-  \]
-  where \(S_{10}\) is a symmetric zero-diagonal sign matrix.  Hence
-  \(S_{10}\) is a conference operator of order ten,
-  \(R^{\mathsf T}/\sqrt{12}\) is a partial isometry from the six-point
-  augmentation space onto its \(+3\)-eigenspace, and the ten normalized
-  columns \(R_{\bullet j}/\sqrt6\) form the real
-  \(\operatorname{ETF}(5,10)\).
 \end{enumerate}
 \end{theorem}
 
-The proof has three stages.  Exterior algebra produces the triangle cubic
-and commutator Pfaffian.  The golden eigenspace splitting turns the same
-identity into a determinant and matrix factorization.  Finally, the
-rank-four differential and the balanced Boolean restriction expose the
-polar and frustration shadows.  The zero-centroid simplex identity then
-fixes the row Gram matrix, and transposition gives the order-ten conference
-operator.  This last step hides no classification: the row Gram identity
-balances every column, and the cut--edge incidence Gram matrix
-\(4I_{10}+5J_{10}\) forces the columns to exhaust the ten projective
-\(3{+}3\) cuts.  Exceptional-group, Clifford, coding, physical, and
-lattice statements enter only after these identities are proved.
+The proof first identifies one cubic in three languages.  The polar map is
+then forced by the two generic kernel lines of its differential.  A single
+exact cofactor fixes the integral normalization in the last identity; the
+proof does not infer the identity from numerical interpolation.
+
+\begin{proof}
+For a triple \(S=\{i,j,k\}\), expansion of the middle exterior operator
+in the oriented triple basis gives
+\[
+  (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}.
+\]
+Consequently \(Z_T\) is the triangle-holonomy cubic of the oriented
+two-graph defined by \(C_T\).  Coherence of the outer family gives
+\(C_{gT}=\operatorname{sgn}(g)M_{g,T}C_TM_{g,T}^{\mathsf T}\), with
+\(M_{g,T}\) monomial.  The diagonal algebra is switching-blind, so the
+triangle cubics transform by
+\[
+  gZ_T=\operatorname{sgn}(g)Z_{gT}.
+\]
+These are the marked Joubert coordinates of six ordered points on
+\(\mathbf P^1\) \cite{HMSVOuter,HMSV}; in this normalization their two
+relations are \(\sum_TZ_T=\sum_TZ_T^3=0\).  This proves (i), including
+the hypotheses under which the classical identification is used.
+
+Put \(A_T=[D_x,C_T]\).  It is alternating, with entries
+\((x_i-x_j)(C_T)_{ij}\).  Expanding its Pfaffian over the fifteen perfect
+matchings and collecting squarefree cubic coefficients gives
+\[
+  \Pf A_T=4Z_T.
+\]
+Squaring the Pfaffian gives \(\det A_T=16Z_T^2\), proving (ii).
+This coefficient calculation is also the bridge between the exterior and
+commutator descriptions: both read the same triangle holonomies, rather
+than merely producing cubics in isomorphic representations.
+
+Now work over \(k(\sqrt5)\).  The projectors
+\(P_{T,\pm}=(I\pm C_T/\sqrt5)/2\) split the axis space into two
+three-spaces.  Relative to this splitting,
+\[
+ [D_x,C_T]=
+ \begin{pmatrix}
+ 0&-2\sqrt5\,B_T(x)^{\mathsf T}\\
+ 2\sqrt5\,B_T(x)&0
+ \end{pmatrix}.
+\]
+Taking determinants yields
+\(16Z_T^2=8000\det(B_T)^2\).  The chosen determinant-line orientation
+therefore gives \(Z_T=\pm10\sqrt5\det B_T\).  Multiplication by the
+scaled adjugate gives
+\[
+ B_T(\pm10\sqrt5\operatorname{adj}B_T)
+ =Z_TI_3.
+\]
+On \(Z_T=0\), the two kernels of \(B_T\) and \(B_T^{\mathsf T}\) give
+the two determinantal small resolutions; conjugating \(\sqrt5\) exchanges
+them.  The standard linear resolution of a \(3\times3\) determinant
+cokernel gives the conjugate rank-one MCM objects and their rational
+rank-two descent.  This proves (iii).
+
+It remains to identify the assembled polar map.  Let \(G_x\) have columns
+\(dZ_T|_x\), and pass to the source and target augmentation quotients to
+obtain \(\mathsf A(x)\).  The first kernel line comes from congruence.
+Writing \(\omega_x=[D_x,C_T]\),
+\[
+ [D_{x^2},C_T]=D_x\omega_x+\omega_xD_x
+ =\left.\frac d{dt}\right|_{0}
+ (I+tD_x)\omega_x(I+tD_x).
+\]
+Pfaffians transform under congruence by the determinant.  On the centered
+slice \(\operatorname{tr}D_x=0\), differentiation therefore gives
+\(\mathsf A(x)q(x)=0\).  The second kernel line is the differential of
+the Segre equation:
+\[
+ \widehat W(x)^{\mathsf T}\mathsf A(x)
+ =6\sum_TZ_T(x)^2dZ_T|_x=0.
+\]
+A nonzero fourth minor shows that the generic rank is four.  Hence the
+adjugate has rank one and is a scalar multiple of
+\(\widehat Wq^{\mathsf T}\).  Degree and outer equivariance make the
+scalar constant.  In the quotient bases
+\(e_i-e_5\) and \(e_T-e_{T_5}\), comparison of one integral cofactor
+with the corresponding product gives the scalar \(6\); this exact
+normalization check is reproduced in the verification supplement.
+Polynomial continuation proves the identity everywhere.
+
+Finally, centered squaring is the projective gradient of
+\(\sum_Tz_T^3\) modulo the linear relation \(\sum_Tz_T=0\).  Newton's
+identities applied to \(\sum z_T=\sum z_T^3=0\) give
+\[
+ \sum_TW_T=0,
+ \qquad \left(\sum_TW_T^2\right)^2=4\sum_TW_T^4,
+\]
+the Igusa quartic equation.  Thus the left kernel just found is precisely
+the Segre--Igusa polar direction, completing (iv).
+\end{proof}
 
 \subsection{The synchronized Cartan cells}
 
@@ -295,6 +368,103 @@ The common outer augmentation module also locates the order-ten shadow:
 The arrows are respectively linear in big-cell coordinates, cubic, and
 linear isometric.  They are consecutive functorial operations, not
 different coordinate expressions for one linear map.
+
+\subsection{Balanced cuts and the first Naimark shadow}
+
+Let \(B\) be any symmetric zero-diagonal \(6\times6\) sign matrix.  For a
+balanced partition \(L\sqcup R=X\), expand \(\det B_{L,R}\) as the six
+signed perfect matchings of the crossing \(K_{3,3}\).
+
+\begin{theorem}[Conference rigidity from balanced frustration]
+\label{thm:frustration}
+The following conditions are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item on every balanced cut the six matching terms split \(5{:}1\) by
+sign;
+\item every cross determinant has absolute value four;
+\item \(B^2=5I_6\);
+\item after switching so that \(B_{0i}=1\), the negative edges on the
+other five vertices form a five-cycle.
+\end{enumerate}
+The twelve oriented normalized solutions pair under global negation into
+six projective fingerprints.  Their ten-cut sign words \(r_T\) satisfy
+\[
+ \langle r_T,r_U\rangle=
+ \begin{cases}10,&T=U,\\-2,&T\ne U,
+ \end{cases}
+ \qquad
+ RR^{\mathsf T}=12\left(I_6-\frac16J_6\right).
+\]
+\end{theorem}
+
+\begin{proof}
+Switch to \(B_{0i}=1\).  Every balanced cut has a representative
+\(L=\{0,i,j\}\), so its cross block has first row \((1,1,1)\).  A
+\(3\times3\) sign determinant is zero or has absolute value four; it is
+nonzero exactly when its six determinant terms have a \(5{:}1\) sign
+split.  Thus (i) and (ii) are equivalent.
+
+Fix an internal vertex \(i\).  For every removed vertex \(j\ne i\),
+nonvanishing says that the three remaining signs incident with \(i\) are
+not constant.  This holds for every \(j\) exactly when two of the four
+internal edges at \(i\) are negative.  The negative graph is therefore
+two-regular on five vertices, hence a five-cycle.  Conversely, the
+one-neighborhoods in a five-cycle give
+\((B^2)_{ij}=0\) for \(i\ne j\), while the diagonal entries are five.
+The implication (iii) to (iv) already follows from
+\((B^2)_{0i}=0\), which forces two signs of each kind at every internal
+vertex.  This proves the equivalence.
+
+There are \((5-1)!/2=12\) labelled five-cycles, and complementation pairs
+them without fixed points.  On each balanced cut the identity
+\(\sum_TZ_T=0\) gives three positive and three negative determinant signs,
+so the six row words have zero centroid.  The outer action is
+two-transitive on the six sisters, hence all off-diagonal row inner
+products are equal.  Since every row has norm squared ten, the common
+inner product is \(-10/5=-2\), proving the Gram identity.
+\end{proof}
+
+\begin{corollary}[The \(6\to10\) Naimark--Gram lift]
+\label{cor:naimark}
+The columns of \(R\), modulo sign, are exactly the ten balanced cuts of
+the row six-set.  They form the real \(\operatorname{ETF}(5,10)\), and
+\[
+ S_{10}=\frac{R^{\mathsf T}R-6I_{10}}2
+\]
+is a symmetric zero-diagonal sign matrix satisfying \(S_{10}^2=9I_{10}\).
+Moreover \(R^{\mathsf T}/\sqrt{12}\) maps the six-point augmentation
+space isometrically onto the \(+3\)-eigenspace of \(S_{10}\).  Up to row
+and column monomial actions, this is the unique sign Gram factorization of
+the resulting order-ten switching class.
+\end{corollary}
+
+\begin{proof}
+The row Gram identity annihilates \(\mathbf1\), so
+\(R^{\mathsf T}\mathbf1=0\) and every column is balanced.  Let \(n_C\)
+be the multiplicity of the projective cut \(C\), and let \(M\) be the
+cut--edge incidence matrix.  Every edge crosses six columns, hence
+\(Mn=6\mathbf1\).  A cut has nine edges and two distinct balanced cuts
+share five; therefore
+\[
+ M^{\mathsf T}M=4I_{10}+5J_{10}.
+\]
+It is nonsingular, so \(n_C=1\) for all ten cuts.  Distinct normalized
+cut vectors have inner product of absolute value \(1/3\), and the row
+Gram identity gives tightness on the augmentation five-space.  This proves
+the ETF statement and shows that \(S_{10}\) is a zero-diagonal sign matrix.
+
+Writing \(G=R^{\mathsf T}R\), one has
+\(G^2=R^{\mathsf T}(RR^{\mathsf T})R=12G\).  Hence
+\[
+ S_{10}^2=\frac{G^2-12G+36I}{4}=9I.
+\]
+The same calculation identifies the image of
+\(R^{\mathsf T}/\sqrt{12}\) with the \(+3\)-eigenspace.  Conversely, any
+sign factor of \(6I+2S_{10}\) has row Gram spectrum \(12^5,0\); row
+reversal makes its kernel vector \(\mathbf1\), after which the incidence
+argument forces the same universal ten-cut matrix.  This proves uniqueness
+up to the stated monomial actions.
+\end{proof}
 
 \section{Recovery and minimal marking}
 
@@ -753,14 +923,25 @@ sweep they are the middle coefficients of
 one-control realization, exact marking, and Pfaffian normalization are the
 operator transport.
 
-\section{Organization}
+\section{Verification and scope}
 
-Sections 3--5 develop the cubic, polar, and determinantal branches.
-Sections 6--7 place their exceptional and outer-symmetry parents.
-Sections 8--9 give the exact fermionic and frustration consequences.
-Section 10 separates the arithmetic and lattice boundaries.  The appendices
-contain the Platonic feasibility results, finite classifications, and
-verification ledger.
+The proofs above separate conceptual arguments from exact finite checks.
+The exterior, commutator, golden-compression, frustration, Naimark, recovery,
+and anomaly-line mechanisms have human proofs in the text.  Exact arithmetic
+fixes normalizations, checks finite orbit tables, proves reducedness of the
+fifteen-line spinor base scheme, and certifies the height and real-optimization
+clauses of Theorem~\ref{thm:anomaly-inverse}.  The paper-owned verification
+supplement records the search domains, hashes, commands, and independent
+replays for those claims.  No post-700 theorem in this paper is presently
+Lean-verified.
+
+The exceptional-group, Clifford, bad-prime, and lattice constructions are
+parents or boundary tests, not additional steps in
+Theorem~\ref{thm:propagation}.  Likewise, the finite Majorana family proves
+Pfaffian parity walls but does not construct a gauge theory, an interacting
+fermionic phase, a protected parity pump, or a topological qubit.  These
+boundaries are part of the theorem hierarchy: omitting any optional parent
+does not break the operator proof.
 
 \begin{thebibliography}{9}
 

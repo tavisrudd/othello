@@ -8,13 +8,15 @@ independent provenance sources, not manuscript inputs to edit or reorganize.
 
 Current state:
 
-- the title, abstract, principal theorem, and proof roadmap are in
-  golden_operator.tex;
-- the frozen architecture and complete placement map are in
+- the operator-first central proof, balanced-cut rigidity theorem, recovery
+  theorem, and compact instrument sections are in golden_operator.tex;
+- the frozen admission charter is
   notes/2026-07-31-c720-golden-paper-charter.md;
-- the marked theorem imported by C727 is in
-  notes/2026-07-31-c720-c727-operator-interface.md;
-- verification policy and source-bundle imports are under verification/.
+- the post-charter placement delta, proof/trust ledger, revised contents, and
+  length budget are in
+  notes/2026-07-31-c735-golden-manuscript-consolidation.md;
+- verification policy, replay commands, and source-bundle imports are under
+  verification/.
 
 Build from this directory with:
 

@@ -30,6 +30,28 @@ surrounding quotient and operator statements have human proofs in the paper.
 | determinant/dimer coefficient equivalence | notes/2026-07-31-c720-ej2-sextic-dimer-equivalence.md | complete symbolic proof; no computation required |
 | rational anomaly inverse, height boundary, and success optimum | notes/2026-07-31-c715-golden-anomaly-inverse.md | GIT and alternating-polynomial proofs plus exact height/Sturm certificate and independent replay |
 | two-\(U(1)\) anomaly lines and Fano-component marking | notes/2026-07-31-c716-golden-two-u1-lines.md | imported Fano classification plus exact 21-family certificate and independent Pfaffian replay |
+| recovery, minimal marking, and centered-square fibres | notes/2026-07-31-c727-cross-paper-recovery-propagation.md | human orbit-incidence, invariant-theory, and fibre proofs; exact coefficient identity imported from the C720 ej2 proof |
+| synchronized pure-spinor quotient | notes/2026-07-31-c728-synchronized-pure-spinor-geometry.md | human equivariant proof plus exact character/elimination checker and independent replay |
+| \(6\to10\) simplex--conference factorization | notes/2026-07-31-c729-simplex-conference-factorization.md | complete human Gram/incidence proof; finite normalization checked in the C729 bundles |
+| higher cut moments and reflection boundary | notes/2026-07-31-c729-conference-cut-moments.md and notes/2026-07-31-c729-cut-moments-reflection-audit.md | sequel material; exact generators, compact certificates, and an independent replay |
+
+For the central exterior, commutator, golden-compression, and assembled-polar
+claims, run
+
+```text
+python3 notes/2026-07-30-c704-segre-igusa-operator-shadow.py --check
+python3 notes/2026-07-30-c704-segre-igusa-operator-shadow-replay.py
+python3 notes/2026-07-30-c705-adjugate-segre-igusa-polar.py --check
+python3 notes/2026-07-30-c705-adjugate-segre-igusa-base-locus.py --check
+python3 notes/2026-07-30-c705-adjugate-segre-igusa-polar-replay.py
+```
+
+The C704 replay checks the polynomial identities independently over a grid
+larger than the individual degree bound.  The C705 replay checks all 25
+entries of the normalized identity
+\(\operatorname{adj}A=6\widehat Wq^{\mathsf T}\) over 59,049 points.  These
+finite-field replays corroborate the characteristic-zero human proofs; they
+do not replace the marked-covariance or two-kernel arguments.
 
 For C715, from the repository root run
 
@@ -57,6 +79,32 @@ the six source-to-path component labels.  The replay hard-codes the cubic
 tables and independently checks the anomaly, chirality, marking, and base
 Pfaffian identities.  The classical 21-component Fano classification is
 imported by citation rather than certified computationally.
+
+For the synchronized-spinor claims, run
+
+```text
+python3 notes/2026-07-31-c728-synchronized-pure-spinor-geometry.py --check
+python3 notes/2026-07-31-c728-synchronized-pure-spinor-replay.py
+```
+
+The first command invokes Singular for the sharpened radical and
+minimal-prime statement.  The representation-theoretic uniqueness and the
+identification of the top cubics are proved in the text; Singular is
+load-bearing only for reducedness of the fifteen-line base scheme.
+
+For the order-ten factorization and the outward higher-cut boundary, run
+
+```text
+python3 notes/2026-07-31-c729-cut-moments.py --check
+python3 notes/2026-07-31-c729-cut-moments-replay.py
+python3 notes/2026-07-31-c729-conference-cut-moments.py --check
+```
+
+The manuscript's \(6\to10\) theorem has a complete Gram and cut-incidence
+proof.  These commands check its frozen sign tables and the sequel-only
+order-ten, order-fourteen, and order-eighteen cut data.  The replay starts
+from the displayed Paley order-ten matrix and uses an independent determinant
+path.
 
 The existing C712 Lean package covers only the sub-700 source interface.  The
 paper must not describe the post-700 propagation theorem as Lean-verified

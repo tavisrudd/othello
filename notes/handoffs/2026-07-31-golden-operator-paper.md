@@ -141,12 +141,19 @@ particular:
   multiplicity-one maps in the Golden tensor diagram.  The
   middle-exterior/commutator-Pfaffian identity is universal in every even
   order, while the cubic degree, outer automorphism, and nontrivial golden
-  (3+3) splitting are order-six-specific.  The proposed master degeneracy
+  \(3+3\) splitting are order-six-specific.  The proposed master degeneracy
   scheme fails cleanly: pair collisions, the nonreduced Jacobian rank-drop
   scheme, and the reduced simultaneous-Pfaffian base form a strict
-  (15/20/15)-component filtration, with the Jacobian nilpotent defect at the
-  ten (3+3) points.  Finally
-  (S_6/F_{20}\cong X\times\mathcal T), so the 36 extremal order-ten cuts
+  \(15/20/15\)-component filtration, with the Jacobian nilpotent defect at the
+  ten \(3+3\) points.  Moreover the bracket-Pfaffian skew bundle descends on
+  the six-point quotient, while the fixed cross-golden block descends on the
+  universal pole-marked cover \(M_{0,7}\to M_{0,6}\).  Non-affine pole
+  changes give the exact diagonal-congruence obstruction; the forgotten pole
+  is C715's one-parameter inverse fibre.  The 25 boundary divisors of
+  \(\overline M_{0,6}\), split as
+  \(15\Delta_{2|4}+10\Delta_{3|3}\), are the common compactified parent of
+  the unequal collision schemes.  Finally
+  \(S_6/F_{20}\cong X\times\mathcal T\), so the 36 extremal order-ten cuts
   have a canonical unmarked quotient back to the six Golden sisters.  The
   exact report and evidence bundle are
   `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
@@ -219,6 +226,16 @@ particular:
   defect structure.  Report and evidence:
   `notes/2026-07-31-c717-golden-majorana-parity-chambers.md`.
 
+C735 is complete.  The post-charter architecture delta, exact
+keep/compress/appendix/sequel map, theorem--proof--trust ledger, attribution
+map, revised contents, and 60-page budget are frozen in
+`notes/2026-07-31-c735-golden-manuscript-consolidation.md`.  The manuscript
+now defines the fully marked source, proves the operator propagation theorem,
+splits out balanced frustration and the `6 -> 10` Naimark theorem, and keeps
+recovery and anomaly instruments subordinate.  C717 is explicitly sequel-only.
+All paper-facing C704/C705/C715/C716/C728/C729 replays and the warning-free
+isolated build pass.
+
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
 positive.  The authoritative manuscript root is papers/golden-operator/;
@@ -237,20 +254,18 @@ manuscript edit is authorized by C727.
 
 | task | state | next gate |
 |---|---|---|
-| [C735 — manuscript consolidation](../golden-tasks/c735-golden-manuscript-consolidation.md) | ready; post-C716 consolidation pivot | freeze the placement delta and proof ledger, then complete the operator-first central draft before new exploration |
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement remains after C735 | after C735, place the marked tensor-diagram theorem, degeneracy filtration, and canonical (36\to6) return without reopening research |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
-1. C735 manuscript consolidation and proof architecture.
-2. After C735 freezes the paper architecture, apply C739's already completed
+1. Apply C739's already completed
    placement recommendation; do not reopen its research programme merely to
    perform manuscript consolidation.
-3. Adopt C717 only through C735's manuscript placement ledger; do not edit
+2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
-4. Defer C718 and C719 unless C735 identifies a precise theorem-level need.
+3. Defer C718 and C719; C735 found no precise theorem-level need.
 
 ## Ownership and allowed paths
 
