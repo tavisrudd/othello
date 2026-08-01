@@ -2006,8 +2006,17 @@
       "last": 760,
       "purpose": "Spike reusable Ten Proofs methods against finite-geometry frontiers: moving-projection Gram bounds and algebraic moment reconstruction",
       "sequence": 223
+    },
+    {
+      "count": 1,
+      "first": 761,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 761,
+      "purpose": "Paper IV q13 passant-code manuscript infrastructure and release plan",
+      "sequence": 224
     }
   ],
-  "next_id": 761,
+  "next_id": 762,
   "schema": "codex-task-id-allocations-v1"
 }
