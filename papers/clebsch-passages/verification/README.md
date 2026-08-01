@@ -73,9 +73,20 @@ incidence model at \(11\).  The mod-\(11\) claim is the exact reduction of
 the displayed golden fibre and exchanger; the geometric incidence comparison
 remains over an unspecified cofinite base.
 
-The manifest states `formal_coverage: none claimed`.  Existing formal
-proofs of abstract involutive and Petersen mechanisms are not release
-dependencies of this paper.
+The manifest states `formal_coverage: partial mechanisms; no complete
+manuscript row claimed`.  The current-paper gate is replayed with
+
+```text
+python3 verification/verify_passages_lean.py \
+  --lean-root /path/to/formal-artifact
+```
+
+`passages_formal.json` maps each of the five manuscript rows to exact Lean
+declarations and records the missing geometric hypotheses.  Its gate proves
+the abstract pinching, conductor, involution, golden-character, tight-frame,
+switching, Petersen, and fixed-line mechanisms without claiming the global
+Hitchin correspondences, face-axis addition theorem, or raw spherical
+moment.
 
 The expanded golden-return theorem package has a separate pinned formal map.
 It is replayed against a checkout of the formal artifact with

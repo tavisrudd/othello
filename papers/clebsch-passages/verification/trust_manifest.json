@@ -7,8 +7,10 @@
     "author affiliation and contact metadata"
   ],
   "formal_coverage": {
-    "status": "none claimed",
-    "boundary": "No Lean result is a dependency of any statement in this manifest; the supplemental conference and triangle formalization does not represent the global incidence normalization."
+    "status": "partial mechanisms; no complete manuscript row claimed",
+    "gate": "RelativeConicArcs.Gates.ClebschPassages",
+    "map": "verification/passages_formal.json",
+    "boundary": "Lean proves the abstract pinching, involution, conductor, golden-character, tight-frame, switching, Petersen-eigenspace, fixed-line, and scalar-normalization mechanisms. It does not prove the global Hitchin incidence and Stein identifications, the scheme-theoretic chart correspondence, the geometric golden-fibre identification, face-axis geometry and the spherical addition theorem, or the raw degree-six moment. Therefore none of ARITH-1, ARITH-2, ORIENT-1, HARM-1, or HARM-2 is claimed at full manuscript strength."
   },
   "claims": [
     {

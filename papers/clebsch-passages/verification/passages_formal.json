@@ -1,0 +1,111 @@
+{
+  "schema": "clebsch-passages-formal-v1",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
+  "axiom_report_sha256": "9fb2ba9504b41034b3a41bd38cfc738ac1b2c5d876289bfe4c6fed76bb4a8f41",
+  "source_sha256": {
+    "RelativeConicArcs/QuadraticPinching.lean": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4",
+    "RelativeConicArcs/SplitQuadraticPinching.lean": "d46ec97de2670ef0d34873843a8d2821d532d4a00c56e6ebb829fd8c44def6f2",
+    "RelativeConicArcs/InvolutiveOddUnit.lean": "4c89dc3c2619fc4cd52e53d8c421f6f4cc234a026265d65c00ef2dbb6509f3b6",
+    "RelativeConicArcs/GoldenQuadraticCharacters.lean": "347c060643bd582d2776c18c0108b04731950278779b9d54807209dc5c7f0008",
+    "RelativeConicArcs/TightFrameConference.lean": "923582e8230cda462e0a7f42bbf323b6469b5f058ea0f0274e41c7e663993791",
+    "RelativeConicArcs/SignedEquiangularGram.lean": "477ff26912f2d63b999ec761ca5417707856914300f5bb156473751bb14df6ad",
+    "RelativeConicArcs/ClebschGoldenConference.lean": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2",
+    "RelativeConicArcs/MarkedClebschBridge.lean": "30746ec72da8651bc8673b89d78f135632d37195b9c44ac5cca4f071808949ad",
+    "RelativeConicArcs/KneserPairEigenspace.lean": "eb2c89c22be925a62345746d0d3bf6a639ccd6fe5562859365875bbe3c1c03e6",
+    "RelativeConicArcs/PetersenHarmonicKernel.lean": "d98ea2cafb9f0366677f5491cd9324ccbc320245a565208a3ea4736bf9c8112a",
+    "RelativeConicArcs/ClebschInvariantCubic.lean": "1587594c3a63e4b866075c67cc5deac2e10bf00cd5708c9aaf39168bcd773bdd",
+    "RelativeConicArcs/ClebschPassagesCorrespondence.lean": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28",
+    "RelativeConicArcs/Gates/ClebschPassages.lean": "09836172a7ad97a4d56bc7df359c49f41339165405b9d336364c7aeba7efdf2c"
+  },
+  "audited_declarations": [
+    "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
+    "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul",
+    "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal",
+    "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral",
+    "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant",
+    "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization",
+    "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11",
+    "RelativeConicArcs.TightFrameConference.conference_sq_of_gram",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_positive",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_negative",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not",
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not",
+    "RelativeConicArcs.MarkedClebschBridge.chartLift_smul",
+    "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+    "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum",
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq",
+    "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector",
+    "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree",
+    "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors"
+  ],
+  "claim_map": {
+    "ARITH-1": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
+        "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul",
+        "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant"
+      ],
+      "excluded": "Hitchin incidence geometry, global Stein algebra, branch divisor, and the geometric Clebsch-chart correspondence"
+    },
+    "ARITH-2": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive",
+        "RelativeConicArcs.SignedEquiangularGram.golden_det_positive",
+        "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization",
+        "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11"
+      ],
+      "excluded": "geometric identification of the complete Hitchin fibre and a general spinor-norm API"
+    },
+    "ORIENT-1": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal",
+        "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral",
+        "RelativeConicArcs.TightFrameConference.conference_sq_of_gram",
+        "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not",
+        "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not"
+      ],
+      "excluded": "scheme normalization of the incidence pullback and its geometric marked identification"
+    },
+    "HARM-1": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
+        "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum",
+        "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq"
+      ],
+      "excluded": "face-axis geometry, spherical addition theorem, and abstract A5 comparison"
+    },
+    "HARM-2": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector",
+        "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree",
+        "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization"
+      ],
+      "excluded": "the invariant-line input for the geometric spherical cubic and the raw spherical moment"
+    }
+  },
+  "trust_boundary": {
+    "symbolic": "Pinching, conductor, involutive splitting, tight-frame, signed-Gram, switching, Petersen-eigenspace, fixed-line, and scalar identities are kernel-checked symbolic proofs.",
+    "native": "Native decision is confined to displayed finite conference/reflection matrices, explicit finite vectors, finite conference signs, and the F_11 nonsquare leaf.",
+    "excluded": "No full manuscript row is claimed: the global geometric correspondences, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
+  }
+}

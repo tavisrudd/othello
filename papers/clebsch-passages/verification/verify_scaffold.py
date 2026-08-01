@@ -108,8 +108,33 @@ def main() -> None:
     require("\\claimid" not in source + section_text,
             "internal claim identifier appears in manuscript source")
 
-    require(manifest.get("formal_coverage", {}).get("status") == "none claimed",
-            "formal coverage boundary is missing or changed")
+    formal_coverage = manifest.get("formal_coverage", {})
+    require(
+        formal_coverage.get("status") ==
+        "partial mechanisms; no complete manuscript row claimed",
+        "formal coverage boundary is missing or changed",
+    )
+    require(
+        formal_coverage.get("gate") ==
+        "RelativeConicArcs.Gates.ClebschPassages",
+        "current-paper formal gate is missing or changed",
+    )
+    formal_map_path = PAPER / formal_coverage.get("map", "")
+    require(formal_map_path.is_file(), "formal declaration map is missing")
+    formal_map = json.loads(formal_map_path.read_text(encoding="utf-8"))
+    require(
+        set(formal_map.get("claim_map", {})) == {claim["id"] for claim in claims},
+        "formal declaration map does not cover exactly the manuscript rows",
+    )
+    require(
+        all(
+            row.get("coverage") == "partial mechanism; no full row claim"
+            and bool(row.get("declarations"))
+            and bool(row.get("excluded"))
+            for row in formal_map["claim_map"].values()
+        ),
+        "formal row boundary is incomplete",
+    )
     require(bool(manifest.get("local_release_ready")),
             "local release gate is not ready")
     require(manifest.get("submission_ready") is False,
