@@ -1,0 +1,1943 @@
+{
+  "chiral_components": [
+    {
+      "amplitude_direction": [
+        "5/14",
+        "23/70",
+        "1/14",
+        "-29/70",
+        "-11/70",
+        "-13/70"
+      ],
+      "amplitude_intercept": [
+        "3/14",
+        "9/70",
+        "3/70",
+        "-3/14",
+        "-9/70",
+        "-3/70"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "component": "D_path_0",
+      "control_direction": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "control_intercept": [
+        "0",
+        "-1/2",
+        "-1",
+        "-3/7",
+        "0",
+        "-3/5"
+      ],
+      "lambda_half_primitive_charge": [
+        55,
+        41,
+        11,
+        -59,
+        -29,
+        -19
+      ],
+      "moving_path": 0
+    },
+    {
+      "amplitude_direction": [
+        "1/14",
+        "-13/70",
+        "-11/70",
+        "23/70",
+        "5/14",
+        "-29/70"
+      ],
+      "amplitude_intercept": [
+        "3/70",
+        "-3/70",
+        "-9/70",
+        "9/70",
+        "3/14",
+        "-3/14"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "component": "D_path_1",
+      "control_direction": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "control_intercept": [
+        "0",
+        "0",
+        "-1",
+        "-3/7",
+        "-1/2",
+        "-3/5"
+      ],
+      "lambda_half_primitive_charge": [
+        11,
+        -19,
+        -29,
+        41,
+        55,
+        -59
+      ],
+      "moving_path": 1
+    },
+    {
+      "amplitude_direction": [
+        "23/70",
+        "1/14",
+        "5/14",
+        "-13/70",
+        "-29/70",
+        "-11/70"
+      ],
+      "amplitude_intercept": [
+        "9/70",
+        "3/70",
+        "3/14",
+        "-3/70",
+        "-3/14",
+        "-9/70"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "component": "D_path_2",
+      "control_direction": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "control_intercept": [
+        "0",
+        "-1/2",
+        "0",
+        "-3/7",
+        "-1",
+        "-3/5"
+      ],
+      "lambda_half_primitive_charge": [
+        41,
+        11,
+        55,
+        -19,
+        -59,
+        -29
+      ],
+      "moving_path": 2
+    },
+    {
+      "amplitude_direction": [
+        "-13/70",
+        "5/14",
+        "-29/70",
+        "-11/70",
+        "1/14",
+        "23/70"
+      ],
+      "amplitude_intercept": [
+        "-3/70",
+        "3/14",
+        "-3/14",
+        "-9/70",
+        "3/70",
+        "9/70"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "component": "D_path_3",
+      "control_direction": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "control_intercept": [
+        "0",
+        "-1/2",
+        "-1",
+        "0",
+        "-3/7",
+        "-3/5"
+      ],
+      "lambda_half_primitive_charge": [
+        19,
+        -55,
+        59,
+        29,
+        -11,
+        -41
+      ],
+      "moving_path": 3
+    },
+    {
+      "amplitude_direction": [
+        "29/70",
+        "11/70",
+        "13/70",
+        "-5/14",
+        "-23/70",
+        "-1/14"
+      ],
+      "amplitude_intercept": [
+        "3/14",
+        "9/70",
+        "3/70",
+        "-3/14",
+        "-9/70",
+        "-3/70"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "component": "D_path_4",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "control_intercept": [
+        "0",
+        "-1/2",
+        "-1",
+        "-3/7",
+        "0",
+        "-3/5"
+      ],
+      "lambda_half_primitive_charge": [
+        59,
+        29,
+        19,
+        -55,
+        -41,
+        -11
+      ],
+      "moving_path": 4
+    },
+    {
+      "amplitude_direction": [
+        "-11/70",
+        "-29/70",
+        "23/70",
+        "1/14",
+        "-13/70",
+        "5/14"
+      ],
+      "amplitude_intercept": [
+        "-9/70",
+        "-3/14",
+        "9/70",
+        "3/70",
+        "-3/70",
+        "3/14"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "component": "D_path_5",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "0",
+        "-1/2",
+        "-1",
+        "-3/7",
+        "-3/5",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        29,
+        59,
+        -41,
+        -11,
+        19,
+        -55
+      ],
+      "moving_path": 5
+    }
+  ],
+  "collision_pair_to_charge_syntheme": {
+    "01": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "02": [
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "03": [
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        5
+      ]
+    ],
+    "04": [
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "05": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "12": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        3,
+        5
+      ]
+    ],
+    "13": [
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "14": [
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "15": [
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "23": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "24": [
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "25": [
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "34": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "35": [
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "45": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        5
+      ]
+    ]
+  },
+  "counts": {
+    "chiral_del_pezzo_components": 6,
+    "exact_line_families": 21,
+    "nonchiral_plane_components": 15
+  },
+  "frozen_c707_marking": {
+    "outer_cubics": [
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ]
+    ],
+    "triple_order": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        0,
+        1,
+        5
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        4
+      ],
+      [
+        0,
+        2,
+        5
+      ],
+      [
+        0,
+        3,
+        4
+      ],
+      [
+        0,
+        3,
+        5
+      ],
+      [
+        0,
+        4,
+        5
+      ],
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        1,
+        2,
+        4
+      ],
+      [
+        1,
+        2,
+        5
+      ],
+      [
+        1,
+        3,
+        4
+      ],
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        4,
+        5
+      ],
+      [
+        2,
+        3,
+        4
+      ],
+      [
+        2,
+        3,
+        5
+      ],
+      [
+        2,
+        4,
+        5
+      ],
+      [
+        3,
+        4,
+        5
+      ]
+    ]
+  },
+  "line_criterion_coefficient_order": [
+    "sum(q)",
+    "sum(r)",
+    "sum(q^3)",
+    "sum(q^2*r)",
+    "sum(q*r^2)",
+    "sum(r^3)"
+  ],
+  "operator_normalization": {
+    "determinant": "det([D_x,C_T])=16*Z_T(x)^2",
+    "mixed_identity_1": "sum_T det(A_T(x))*Pf(A_T(y))=0",
+    "mixed_identity_2": "sum_T Pf(A_T(x))*det(A_T(y))=0",
+    "pfaffian": "Pf([D_x,C_T])=4*Z_T(x)"
+  },
+  "outer_s6_coxeter_generators": {
+    "path_transposition_01": {
+      "charge_coordinate_image": [
+        1,
+        0,
+        3,
+        2,
+        5,
+        4
+      ],
+      "chiral_component_image": [
+        1,
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "common_oriented_sign": -1
+    },
+    "path_transposition_12": {
+      "charge_coordinate_image": [
+        2,
+        4,
+        0,
+        5,
+        1,
+        3
+      ],
+      "chiral_component_image": [
+        0,
+        2,
+        1,
+        3,
+        4,
+        5
+      ],
+      "common_oriented_sign": -1
+    },
+    "path_transposition_23": {
+      "charge_coordinate_image": [
+        1,
+        0,
+        5,
+        4,
+        3,
+        2
+      ],
+      "chiral_component_image": [
+        0,
+        1,
+        3,
+        2,
+        4,
+        5
+      ],
+      "common_oriented_sign": -1
+    },
+    "path_transposition_34": {
+      "charge_coordinate_image": [
+        2,
+        3,
+        0,
+        1,
+        5,
+        4
+      ],
+      "chiral_component_image": [
+        0,
+        1,
+        2,
+        4,
+        3,
+        5
+      ],
+      "common_oriented_sign": -1
+    },
+    "path_transposition_45": {
+      "charge_coordinate_image": [
+        1,
+        0,
+        4,
+        5,
+        2,
+        3
+      ],
+      "chiral_component_image": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        4
+      ],
+      "common_oriented_sign": -1
+    }
+  },
+  "plane_components": [
+    {
+      "amplitude_direction": [
+        "-5/4",
+        "5/4",
+        "-3/4",
+        "3/4",
+        "-1/4",
+        "1/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4",
+        "1/4",
+        "-1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "collision_pair": [
+        0,
+        1
+      ],
+      "component": "P_collision_01",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "0",
+        "0",
+        "-1",
+        "-1/2",
+        "1/2",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        7,
+        -7,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "3/4",
+        "1/4",
+        "5/4",
+        "-1/4",
+        "-5/4",
+        "-3/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "collision_pair": [
+        0,
+        2
+      ],
+      "component": "P_collision_02",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "0",
+        "-1",
+        "0",
+        "-1/2",
+        "1/2",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        -1,
+        7,
+        1,
+        -7,
+        -1
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "-1/4",
+        "-3/4",
+        "3/4",
+        "5/4",
+        "1/4",
+        "-5/4"
+      ],
+      "amplitude_intercept": [
+        "1/4",
+        "1/4",
+        "-1/4",
+        "1/4",
+        "-1/4",
+        "-1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "collision_pair": [
+        0,
+        3
+      ],
+      "component": "P_collision_03",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "0",
+        "-1",
+        "-1/2",
+        "0",
+        "1/2",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        -1,
+        1,
+        7,
+        -1,
+        -7
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "-3/4",
+        "-5/4",
+        "1/4",
+        "3/4",
+        "5/4",
+        "-1/4"
+      ],
+      "amplitude_intercept": [
+        "1/4",
+        "-1/4",
+        "-1/4",
+        "-1/4",
+        "1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "collision_pair": [
+        0,
+        4
+      ],
+      "component": "P_collision_04",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "0",
+        "-1",
+        "-1/2",
+        "1/2",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        7,
+        1,
+        -1,
+        -7,
+        -1
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "5/4",
+        "3/4",
+        "-5/4",
+        "1/4",
+        "-1/4",
+        "-3/4"
+      ],
+      "amplitude_intercept": [
+        "1/4",
+        "-1/4",
+        "-1/4",
+        "-1/4",
+        "1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "collision_pair": [
+        0,
+        5
+      ],
+      "component": "P_collision_05",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "control_intercept": [
+        "0",
+        "-1",
+        "-1/2",
+        "1/2",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        7,
+        1,
+        -7,
+        -1,
+        1,
+        -1
+      ],
+      "moving_path": 4
+    },
+    {
+      "amplitude_direction": [
+        "-1/4",
+        "-3/4",
+        "1/4",
+        "-5/4",
+        "3/4",
+        "5/4"
+      ],
+      "amplitude_intercept": [
+        "1/4",
+        "1/4",
+        "-1/4",
+        "-1/4",
+        "-1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "collision_pair": [
+        1,
+        2
+      ],
+      "component": "P_collision_12",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "-1",
+        "0",
+        "0",
+        "-1/2",
+        "1/2",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        -1,
+        -1,
+        -7,
+        1,
+        7
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "3/4",
+        "1/4",
+        "-5/4",
+        "-3/4",
+        "5/4",
+        "-1/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "-1/4",
+        "-1/4",
+        "1/4",
+        "1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "collision_pair": [
+        1,
+        3
+      ],
+      "component": "P_collision_13",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "-1",
+        "0",
+        "-1/2",
+        "0",
+        "1/2",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        -1,
+        -7,
+        -1,
+        7,
+        1
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "5/4",
+        "3/4",
+        "-3/4",
+        "-1/4",
+        "1/4",
+        "-5/4"
+      ],
+      "amplitude_intercept": [
+        "1/4",
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4",
+        "-1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "collision_pair": [
+        1,
+        4
+      ],
+      "component": "P_collision_14",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "-1",
+        "0",
+        "-1/2",
+        "1/2",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        7,
+        1,
+        -1,
+        1,
+        -1,
+        -7
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "-3/4",
+        "-5/4",
+        "-1/4",
+        "5/4",
+        "3/4",
+        "1/4"
+      ],
+      "amplitude_intercept": [
+        "1/4",
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4",
+        "-1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "collision_pair": [
+        1,
+        5
+      ],
+      "component": "P_collision_15",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "control_intercept": [
+        "-1",
+        "0",
+        "-1/2",
+        "1/2",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        7,
+        -1,
+        -7,
+        -1,
+        1
+      ],
+      "moving_path": 4
+    },
+    {
+      "amplitude_direction": [
+        "5/4",
+        "-5/4",
+        "-3/4",
+        "1/4",
+        "-1/4",
+        "3/4"
+      ],
+      "amplitude_intercept": [
+        "1/4",
+        "-1/4",
+        "1/4",
+        "-1/4",
+        "1/4",
+        "-1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "collision_pair": [
+        2,
+        3
+      ],
+      "component": "P_collision_23",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "-1",
+        "-1/2",
+        "0",
+        "0",
+        "1/2",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        7,
+        -7,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "3/4",
+        "-1/4",
+        "-5/4",
+        "5/4",
+        "-3/4",
+        "1/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "1/4",
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "collision_pair": [
+        2,
+        4
+      ],
+      "component": "P_collision_24",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "-1",
+        "-1/2",
+        "0",
+        "1/2",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        1,
+        -7,
+        7,
+        -1,
+        -1
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "1/4",
+        "-3/4",
+        "3/4",
+        "-1/4",
+        "5/4",
+        "-5/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "1/4",
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "collision_pair": [
+        2,
+        5
+      ],
+      "component": "P_collision_25",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "control_intercept": [
+        "-1",
+        "-1/2",
+        "0",
+        "1/2",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        1,
+        -1,
+        -1,
+        -7,
+        7
+      ],
+      "moving_path": 4
+    },
+    {
+      "amplitude_direction": [
+        "1/4",
+        "-3/4",
+        "-1/4",
+        "3/4",
+        "-5/4",
+        "5/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4",
+        "-1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "collision_pair": [
+        3,
+        4
+      ],
+      "component": "P_collision_34",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "control_intercept": [
+        "-1",
+        "-1/2",
+        "1/2",
+        "0",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        1,
+        -1,
+        -1,
+        7,
+        -7
+      ],
+      "moving_path": 5
+    },
+    {
+      "amplitude_direction": [
+        "3/4",
+        "-1/4",
+        "5/4",
+        "-5/4",
+        "1/4",
+        "-3/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4",
+        "-1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "collision_pair": [
+        3,
+        5
+      ],
+      "component": "P_collision_35",
+      "control_direction": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "control_intercept": [
+        "-1",
+        "-1/2",
+        "1/2",
+        "0",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        1,
+        1,
+        7,
+        -7,
+        -1,
+        -1
+      ],
+      "moving_path": 4
+    },
+    {
+      "amplitude_direction": [
+        "-5/4",
+        "5/4",
+        "-3/4",
+        "1/4",
+        "3/4",
+        "-1/4"
+      ],
+      "amplitude_intercept": [
+        "-1/4",
+        "1/4",
+        "1/4",
+        "-1/4",
+        "-1/4",
+        "1/4"
+      ],
+      "anomaly_coefficients": {
+        "cubic_q": 0,
+        "cubic_r": 0,
+        "linear_q": 0,
+        "linear_r": 0,
+        "q_r_squared": 0,
+        "q_squared_r": 0
+      },
+      "charge_syntheme": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "collision_pair": [
+        4,
+        5
+      ],
+      "component": "P_collision_45",
+      "control_direction": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "control_intercept": [
+        "-1",
+        "-1/2",
+        "1/2",
+        "0",
+        "0",
+        "0"
+      ],
+      "lambda_half_primitive_charge": [
+        7,
+        -7,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "moving_path": 3
+    }
+  ],
+  "schema": "c716-golden-two-u1-lines-v1",
+  "source_2607_09879_to_c707_component": {
+    "D0": 4,
+    "D1": 1,
+    "D2": 0,
+    "D3": 2,
+    "D4": 3,
+    "D5": 5
+  }
+}

@@ -50,7 +50,10 @@ coefficients of the determinant
 sextic are exactly the four-cycle holonomies of the matching fingerprint,
 so this algebraic shadow recovers the same unoriented switching class
 without a Pfaffian sign.  The same operator family gives exact Slater
-amplitudes, Majorana parity walls, and six-charge anomaly solutions.
+amplitudes, Majorana parity walls, and six-charge anomaly solutions.  For
+two Abelian factors, its anomaly lines split into fifteen fixed-collision
+plane components and six one-moving-path del Pezzo components; the mixed
+anomalies become determinant--Pfaffian identities.
 For the Clebsch code, the invariant (10+10) split of coordinate triples
 is a regular two-graph and recovers the conference switching line.  This
 gives a recovery--propagation theorem from the monomial code class and a
@@ -632,6 +635,114 @@ six-charge anomaly equations are classical or explicit prior art
 the compatibility of that inverse with the marked Golden filter and its
 exact Slater cost.  It does not construct gauge fields or a Lagrangian.
 
+\section{Two-Abelian anomaly lines}
+
+Let \(q,r\in\mathbb Q^6\) be the charge vectors of two Abelian factors.
+The cubic along their projective line is
+\[
+ \sum_i(q_i+tr_i)^3
+ =\sum_iq_i^3+3t\sum_iq_i^2r_i
+  +3t^2\sum_iq_ir_i^2+t^3\sum_ir_i^3.
+\]
+Thus the six individual and mixed anomaly equations say exactly that
+\(\mathbf P\langle q,r\rangle\) is a line on the Segre cubic.  We now
+transport the classical Fano scheme of these lines through the marked
+Golden inverse.
+
+\begin{theorem}[Golden realization of the Fano components]
+\label{thm:two-u1-lines}
+The Golden control model realizes all 21 components of the Fano scheme of
+lines on the Segre cubic as follows.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item The fifteen plane components are the fixed pair-collision divisors
+  \(p_i=p_j\).  The frozen duad--syntheme correspondence identifies each
+  collision with its three opposite charge pairs.
+\item The six remaining components are the six choices of a moving path:
+  for fixed \(p_j\), \(j\ne i\),
+  \[
+    L_i(p_{\widehat\imath})
+    =\{Z(p_0,\ldots,p_{i-1},u,p_{i+1},\ldots,p_5):u\in\mathbf P^1\}.
+  \]
+  Their parameter surfaces are
+  \(\overline M_{0,5}\), hence split del Pezzo surfaces of degree five.
+\item The five values \(u=p_j\), \(j\ne i\), give the five vectorlike
+  crossings of a general chiral line.  Their five charge synthemes form a
+  synthematic total and recover the moving-path component.
+\item Homogeneous path controls of degree one suffice for every rational
+  anomaly line and this degree is minimal for a nonconstant line.  On a
+  C715 inverse chart the controls are ratios of linear matching forms.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Each marked cubic is multihomogeneous of degree one in each path point.
+Varying one point therefore traces a line.  Five general fixed points give
+a line outside the fifteen planes, and their moduli form \(M_{0,5}\).
+The classical Fano classification gives exactly six nonplane components,
+each a split degree-five del Pezzo surface \cite{GripaiosNguyenTwo}; their
+closures are therefore the six one-moving-path families.  Collision of the
+moving point with each fixed point gives the five boundary planes.  The
+C715 matching dictionary turns those collisions into the five synthemes
+of one total and distinguishes the six families.
+
+A fixed collision maps onto its marked Segre plane, whose lines form the
+dual plane.  This gives the other fifteen components.  Finally, restricting
+the C715 matching ratios to \(q+tr\) makes every numerator and denominator
+linear in \(t\).  A degree-zero control has constant image, proving the
+minimality statement.
+\end{proof}
+
+The source notation for the six nonplane components translates to the C707
+path marking as
+\[
+ (D_0,D_1,D_2,D_3,D_4,D_5)
+ \longleftrightarrow
+ (D^{\rm path}_4,D^{\rm path}_1,D^{\rm path}_0,
+  D^{\rm path}_2,D^{\rm path}_3,D^{\rm path}_5).
+\]
+For example, moving path 5 has collision total
+\[
+ \{01|24|35,02|15|34,03|12|45,04|13|25,05|14|23\}.
+\]
+
+The control family
+\[
+ x(s)=\left(0,-\frac12,-1,-\frac37,s,-\frac35\right)
+\]
+lies in the physical cube for the parameters used below and gives
+\[
+ Z(x(1/2))=\frac1{140}(59,29,19,-55,-41,-11),
+\]
+\[
+ Z(x(3/4))=\frac3{280}(49,23,17,-45,-35,-9).
+\]
+Both primitive vectors are strictly chiral, their mixed anomaly sums
+vanish, and their ordered charge pairs contain no opposite pair.  A
+nonchiral witness is
+\[
+ y(s)=\left(0,0,-1,-\frac12,\frac12,s\right),
+\]
+with
+\[
+ Z(y(2/3))=\frac1{12}(-13,13,-3,3,1,-1),\qquad
+ Z(y(3/4))=\frac1{16}(-19,19,-5,5,1,-1).
+\]
+Here the charge pairs \(01,23,45\) are opposite for both factors.
+
+There is also a direct Majorana form of the two mixed equations.  Put
+\(A_T(x)=[D_x,C_T]\).  Theorem~\ref{thm:propagation} gives
+\(\Pf A_T(x)=4Z_T(x)\) and
+\(\det A_T(x)=16Z_T(x)^2\).  Hence
+\[
+ \boxed{\sum_T\det A_T(x)\Pf A_T(y)=0},\qquad
+ \boxed{\sum_T\Pf A_T(x)\det A_T(y)=0}.
+\]
+The two left sides are 64 times the mixed charge sums.  Along a one-path
+sweep they are the middle coefficients of
+\(\sum_T\Pf A_T(x(s))^3=0\).  The line decomposition is classical; the
+one-control realization, exact marking, and Pfaffian normalization are the
+operator transport.
+
 \section{Organization}
 
 Sections 3--5 develop the cubic, polar, and determinantal branches.
@@ -668,6 +779,11 @@ Phys. Rev. Lett. 123 (2019), 151601.
 B.~Gripaios and K.~Le Nguyen Nguyen,
 \emph{Anomaly cancellation for a \(U(1)\) factor},
 arXiv:2508.11583.
+
+\bibitem{GripaiosNguyenTwo}
+B.~Gripaios and K.~Le Nguyen Nguyen,
+\emph{Anomaly cancellation for two \(U(1)\) factors},
+arXiv:2607.09879.
 
 \bibitem{ChiriviMaffei}
 R.~Chiriv\`i and A.~Maffei,
