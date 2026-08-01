@@ -179,6 +179,8 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `ame-lu`
 
+- **C734 `[ame-lu]` [ACTIVE]** — formalize the Clebsch extremal-syndrome bridge adopted today and revise the manuscript so its mathematical spine is carried by structural human proofs under a Milnor/Serre exposition pass → `notes/2026-07-31-c734-clebsch-syndrome-lean-structural-proof.md`.
+
 
 ### `rp-next`
 
