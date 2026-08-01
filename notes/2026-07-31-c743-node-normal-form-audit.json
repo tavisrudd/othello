@@ -1,0 +1,23 @@
+{
+  "critical_ideal": "(a,b,c,d)*(a,b)*(c,d)",
+  "defect": {
+    "is_square_zero": true,
+    "length_per_node": 4,
+    "module": "((a,b)*(c,d))/((a,b,c,d)*(a,b)*(c,d))",
+    "nodes": 10
+  },
+  "field": "Q",
+  "interpretation": "critical scheme of (u,v) -> u tensor v",
+  "local_coordinates": {
+    "x0": "1",
+    "x1": "1+a",
+    "x2": "1+b",
+    "x3": "c",
+    "x4": "d",
+    "x5": "0"
+  },
+  "radical": "(a,b) intersect (c,d)",
+  "representative": "[1:1:1:0:0:0]",
+  "schema": "c743-node-normal-form-v1",
+  "singular_version": "4.4.1"
+}

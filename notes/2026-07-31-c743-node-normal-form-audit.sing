@@ -1,0 +1,54 @@
+// Exact local check for the C743 3+3-node normal form.
+// The human proof identifies this with the standard G_m quotient
+// (u,v) |-> u tensor v.  This audit checks the frozen Golden coordinates.
+
+ring source=0,(x0,x1,x2,x3,x4),dp;
+LIB "primdec.lib";
+poly f0=-4*x2*x3*x4-4*x1*x3*x4+4*x1*x2*x4+4*x1*x2*x3+4*x0*x3*x4-4*x0*x2*x4+4*x0*x2*x3+4*x0*x1*x4-4*x0*x1*x3-4*x0*x1*x2;
+poly f1=4*x2*x3*x4-4*x1*x3*x4+4*x1*x2*x4-4*x1*x2*x3+4*x0*x3*x4-4*x0*x2*x4-4*x0*x2*x3-4*x0*x1*x4+4*x0*x1*x3+4*x0*x1*x2;
+poly f2=4*x2*x3*x4+4*x1*x3*x4-4*x1*x2*x4-4*x1*x2*x3-4*x0*x3*x4-4*x0*x2*x4+4*x0*x2*x3+4*x0*x1*x4-4*x0*x1*x3+4*x0*x1*x2;
+poly f3=-4*x2*x3*x4+4*x1*x3*x4+4*x1*x2*x4-4*x1*x2*x3-4*x0*x3*x4+4*x0*x2*x4+4*x0*x2*x3-4*x0*x1*x4+4*x0*x1*x3-4*x0*x1*x2;
+poly f4=4*x2*x3*x4-4*x1*x3*x4-4*x1*x2*x4+4*x1*x2*x3-4*x0*x3*x4+4*x0*x2*x4-4*x0*x2*x3+4*x0*x1*x4+4*x0*x1*x3-4*x0*x1*x2;
+poly f5=-4*x2*x3*x4+4*x1*x3*x4-4*x1*x2*x4+4*x1*x2*x3+4*x0*x3*x4+4*x0*x2*x4-4*x0*x2*x3-4*x0*x1*x4-4*x0*x1*x3+4*x0*x1*x2;
+ideal top=f0,f1,f2,f3,f4,f5;
+matrix derivative=jacob(top);
+ideal rankdrop=minor(derivative,4);
+
+// At [1:1:1:0:0:0], use x0=1, x1=1+a, x2=1+b, x3=c,
+// x4=d, x5=0.  The two reduced triple-collision planes are
+// (a,b)=0 and (c,d)=0.
+ring localr=0,(a,b,c,d),ds;
+map atnode=source,1,1+a,1+b,c,d;
+ideal actual=std(atnode(rankdrop));
+ideal maximal=a,b,c,d;
+ideal crossing=ac,ad,bc,bd;
+ideal model=std(maximal*crossing);
+
+ideal actual_mod_model=simplify(reduce(actual,model),2);
+ideal model_mod_actual=simplify(reduce(model,actual),2);
+if (size(actual_mod_model)!=0 || size(model_mod_actual)!=0)
+{
+  ERROR("Golden local rank-drop ideal does not equal the tensor-quotient model");
+}
+
+ideal actual_radical=std(radical(actual));
+ideal crossing_std=std(crossing);
+ideal radical_mod_crossing=simplify(reduce(actual_radical,crossing_std),2);
+ideal crossing_mod_radical=simplify(reduce(crossing_std,actual_radical),2);
+if (size(radical_mod_crossing)!=0 || size(crossing_mod_radical)!=0)
+{
+  ERROR("unexpected local radical");
+}
+
+if (dim(actual)!=2 || mult(actual)!=2)
+{
+  ERROR("unexpected local dimension or multiplicity");
+}
+
+print("C743_NODE_NORMAL_FORM_OK");
+print("representative=[1:1:1:0:0:0]");
+print("critical_ideal=maximal_times_plane_crossing");
+print("radical=two_transverse_planes");
+print("defect=square_zero_length_4");
+print("all_nodes=10_by_S6_symmetry");
+quit;
