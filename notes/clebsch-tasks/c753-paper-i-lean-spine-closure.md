@@ -6,6 +6,18 @@
 frozen.  Begin with the finite prose-source repairs and R1; orientation is
 split into O1--O8 and must remain packet-gated.
 
+## Current implementation state
+
+The first source-owned prose repair has begun in
+`lean/RelativeConicArcs/Q11A5PointOrbits.lean` and
+`lean/RelativeConicArcs/Q11A5PointOrbitsData.lean`: the misleading
+“reflected” terminology and “opaque certificates” wording are corrected in
+the working tree.  These two paths remain deliberately uncommitted.  A guarded
+single-file elaboration of `Q11A5PointOrbitsData.lean` ended with exit 137
+before Lean emitted a diagnostic, so the unchanged invocation must not be
+repeated.  The generated-banner repair, regeneration, and standalone
+synchronization have not started in the authoritative tree.
+
 ## Objective
 
 Implement the frozen C752 interface so the Paper I Lean development follows
