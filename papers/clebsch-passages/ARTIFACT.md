@@ -27,7 +27,11 @@ identity remain human arguments using the cited primary sources. The
 orientation-source bundle checks, for the displayed marking, the cover's
 scalar factorization, golden involution, conference signs, and Petersen
 comparison; it does not prove
-normalization of the incidence scheme. No Lean coverage is claimed.
+normalization of the incidence scheme. The separately released Lean artifact
+supplies partial structural coverage only: its pinned source map and axiom
+report are included in `verification/passages_formal.json` and
+`verification/passages_axioms.txt`, while no complete manuscript claim uses
+Lean as a proof premise.
 
 An immutable public identifier and the author's affiliation/contact line
 are external submission metadata and are not represented by placeholders

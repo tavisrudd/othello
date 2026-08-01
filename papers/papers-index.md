@@ -89,9 +89,11 @@ conic matching quotients*
 Clebsch cubic*
 - *Status:* cut to a seven-page two-theorem note — the rational square class
   `5J₀` with its constant golden torsor, and the degree-six face-axis Petersen
-  eigenspace. C680 owns closure: the Clebsch inclusion and the local fibre
-  comparison are open proof gaps, the release bundle is not self-contained, and
-  the verdict is `NO-GO for submission`.
+  eigenspace. The five manuscript rows are proved or independently certified,
+  the public release bundle is self-contained, and the structural Lean companion
+  records exact partial-mechanism coverage without serving as a manuscript
+  premise. Local release gates are closed; submission still requires an immutable
+  public artifact locator and author affiliation/contact metadata.
 
 **Preserved fallback · `clebsch-hexagon-code`** — *Deep-hole rigidity and factorization memory in
 the Clebsch hexagon code*, the 37-page integrated mega-paper at `5a82e80d`, with its matched 58-row manifest and deterministic
