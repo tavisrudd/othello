@@ -148,7 +148,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C175 `[gem-mining]` [QUEUED FOLLOW-ON]** — separate higher-field follow-on.
 - **C177 `[gem-mining]` [QUEUED FOLLOW-ON]** — generalized-hexagon connection.
 - **C193 `[gem-mining]` [OPEN ILL GATE]** — obtain/read the remaining BSW source.
-- **C736 `[gem-mining]` [QUEUED; INDEPENDENT]** — attack Hadamard order 668 by reproducing the length-333 Legendre-pair compression, resolving the nine surviving common-multiplier subgroup cases where feasible, and requiring replayable arithmetic or proof-system certificates for every exclusion → `notes/2026-07-31-c736-hadamard-668.md`.
 - **C737 `[gem-mining]` [QUEUED; INDEPENDENT]** — attack the exact equiangular-line maximum `M(18) in {57,58,59}` through a complete feasible Seidel-spectrum census, Jacobi/interlacing and lattice filters, and independently checkable certificates for terminal graph nonexistence claims → `notes/2026-07-31-c737-equiangular-lines-r18.md`.
 
 ### `gateway`

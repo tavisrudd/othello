@@ -2,12 +2,13 @@
 
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-14
-**Status**: C147 and C174 are reported. The hexad theorem is fully machine-checked and
+**Status**: C147, C174, and C736 are reported. The hexad theorem is fully machine-checked and
 proof-structured; its q=23 octad analogue is closed-negative; the chord--extension identity now
 holds for every six-arc in every finite projective plane. C155 is drafted with an exact computation
 manifest, and submission remains gated on C156/C157/C169. C159 is seeded by Clebsch C184's complete
 q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch C187 and only its q5
-folklore/priority check remains.
+folklore/priority check remains. The Hadamard-668 multiplier census is now 23/30 impossible, with ID
+7 the sole surviving order-6 subgroup and seven total residual cases.
 
 **Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191/C192/C193/C736/C737
 reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
@@ -91,7 +92,7 @@ Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsc
 | **C191** | reported, **provisional — verdict contested, vet gate open (user-launched)** | gap-mining backfill → [report](../2026-07-15-c191-gap-mining-backfill.md); its verdict is now contested by its own two follow-ups. **Calibration** → [report](../2026-07-15-c191-instrument-calibration.md): three indexes disagree (7/3/7, union 8) so object-level closure stays a lead not a reading; three of Edge 1956's seven citers are self-citations (four independent in thirty-two years, none after 1988); the instrument's error mode biases toward the emptiness it was used to confirm. **Completeness hunt** → [report](../2026-07-15-c191-completeness-hunt.md): **found a falsifier** — C179's 2006–2016 conic/LDPC coding lineage refutes cell 1's "empty seam", cell 4's object is itself from one of those coding papers, and C179 sat in the same commit as the C178 the backfill did score. The founding cell's seam factor and cause class both need re-scoring; the vet rules. Remaining find-work: C177 as the first prospective cell |
 | **C192** | **closed — not a find** | first cell mined off the C179 coding far side. The 22 hexagons are 1-factors of K₁₂ on the conic's 12 points and each system of 11 is a 1-factorization (verified, both conics; **not** perfect — 0/55, so not GK₁₂). The two systems' 11×11 incidence is the Paley-biplane complement, \|Aut\|=660. **Killed by its own gate**: Edge 1956 §32 states the same structure as a symmetrical (6,6)/(5,5) correspondence and points at Klein 1879; we added λ and a modern name. The K₁₂ phrasing is absent from Edge but absent≠novel. Cost: one cached read → [report](../2026-07-15-c192-hexagon-biplane.md) |
 | **C193** | reported — **the six-sweep ILL gate is open** | BSW 1992 read at full text. Its §3 is a **published complete census** of the exceptional complete exterior sets (Brouwer, up to isomorphism, q=7,11,19,23,27,31; none for q=43..131). Four consequences: the q=11 6-arc is **Korchmáros 1981** (chains of circles on an elliptic quadric) — a third prior name, not in the lane's record; there is a **second q=11 configuration, a Pasch**, invisible to an arc-only census; the q<131 check is **Brouwer's inside BSW**, not Van de Voorde's; and Giessen 1991 is confirmed as the sets-without-tangents paper, now the only unread BSW original. Strongest lead: BSW's **q=31 6-arc + Petersen graph** against this lane's q=11 Brianchon–Petersen — null declared, uncomputed → [report](../2026-07-15-c193-bsw-exceptional-census.md) |
-| **C736** | queued, independent | Hadamard order 668 through the nine surviving common-multiplier Legendre-pair cases; reproduce the July 2026 baseline first and require proof-carrying exclusions → future report `notes/2026-07-31-c736-hadamard-668.md` |
+| **C736** | reported | reproduced the proof-carrying 21/30 baseline and excluded residual IDs 9 and 10 by an exact mod-8 9-compression argument with independent replay; 23/30 are now impossible, ID 7 is the sole surviving order-6 case, and unrestricted order 668 remains open → [report](../2026-07-31-c736-hadamard-668.md) |
 | **C737** | queued, independent | decide `M(18) in {57,58,59}` through a complete Seidel-spectrum census and certified elimination/construction of residual cases → future report `notes/2026-07-31-c737-equiangular-lines-r18.md` |
 | **C174** | reported, folds into C155 | stronger six-arc identity in every finite projective plane; exact q=5,7,11,13 tables tracked → [report](../2026-07-14-c174-general-six-subset-identity.md) |
 | **C175** | queued, independent | classify concurrency-free conic six-sets across small q; not a C155 gate |
@@ -257,7 +258,7 @@ the two BSW originals remain unread.
 
 ## Queued work
 
-C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736 and C737 are this lane's; C178 and C190 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
+C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736 and C737 are this lane's; C178, C190, and C736 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
 of the same sweep. Rationale, search directions, and what was deliberately left unqueued:
 [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md). **Only C153 and the running
 external-source gates can cost the current novelty posture; the rigidity/gap checks are complete.
