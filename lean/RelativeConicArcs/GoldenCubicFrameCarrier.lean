@@ -18,7 +18,8 @@ open GoldenCubicNodesBase
 
 /-- The first five centered node vectors are linearly independent. -/
 theorem centeredNode_castSucc_linearIndependent :
-    LinearIndependent ℚ (fun i : Fin 5 => centeredNode i.castSucc) := by
+    LinearIndependent ℚ
+      (fun i : Fin 5 => (centeredNode i.castSucc : Fin 5 → ℚ)) := by
   classical
   rw [Fintype.linearIndependent_iff]
   intro c hsum j
@@ -42,7 +43,7 @@ theorem centeredNode_castSucc_linearIndependent :
 
 /-- The six centered frame vectors have the all-ones linear relation. -/
 theorem sum_centeredNode_eq_zero :
-    ∑ i : Fin 6, centeredNode i = 0 := by
+    ∑ i : Fin 6, (centeredNode i : Fin 5 → ℚ) = 0 := by
   funext j
   fin_cases j <;> norm_num [centeredNode, Fin.sum_univ_succ]
 
