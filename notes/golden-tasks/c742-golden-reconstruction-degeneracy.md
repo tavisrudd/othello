@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** ready; direct successor to C735, with C739 placement as phase 0
+**Status:** complete with a sharp obstruction crown; report at
+`notes/2026-07-31-c742-golden-reconstruction-degeneracy.md`
 
 ## Phase 0 — C739 placement and framing
 

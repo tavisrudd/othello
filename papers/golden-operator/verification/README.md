@@ -35,6 +35,7 @@ surrounding quotient and operator statements have human proofs in the paper.
 | \(6\to10\) simplex--conference factorization | notes/2026-07-31-c729-simplex-conference-factorization.md | complete human Gram/incidence proof; finite normalization checked in the C729 bundles |
 | higher cut moments and reflection boundary | notes/2026-07-31-c729-conference-cut-moments.md and notes/2026-07-31-c729-cut-moments-reflection-audit.md | sequel material; exact generators, compact certificates, and an independent replay |
 | marked lift rigidity, collision filtration, and canonical return | notes/2026-07-31-c739-golden-cubic-lift-rigidity.md | human multiplicity-one, pole-descent, and subgroup-incidence proofs; exact character/cycle certificates; one-CAS boundary for the nilpotent Jacobian refinement |
+| unmarked target and cross-block Fitting obstruction | notes/2026-07-31-c742-golden-reconstruction-degeneracy.md | human rank, stabilizer-orbit, descent, and Fitting proofs; exact full-permutation character certificate and independent class replay |
 
 For the central exterior, commutator, golden-compression, and assembled-polar
 claims, run
@@ -122,6 +123,21 @@ implemented synthematic-total replay.  The reduced collision supports agree
 with the GIT argument and the inherited C728 replay.  The nilpotent defect at
 the ten `3+3` points still has only the exact Singular implementation, so the
 appendix states that trust boundary and no central theorem depends on it.
+
+For the unmarked target obstruction, run
+
+```text
+python3 notes/2026-07-31-c742-unmarked-target-audit.py --check
+python3 notes/2026-07-31-c742-unmarked-target-audit-replay.py
+```
+
+The primary audit constructs the outer six-set as the six synthematic totals
+and enumerates all 720 permutations.  The replay uses conjugacy classes and
+the hard-coded outer class map.  Both give multiplicities one for the
+ordinary product target and zero for its signed twist.  The rank-two
+Pfaffian-zero conclusion, exceptional-action reconstruction, and Fitting
+obstruction have human proofs in the manuscript; the certificate does not
+replace them.
 
 The existing C712 Lean package covers only the sub-700 source interface.  The
 paper must not describe the post-700 propagation theorem as Lean-verified

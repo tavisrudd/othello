@@ -103,6 +103,7 @@ This ledger covers every numbered result currently in
 | `thm:two-u1-lines` | rational two-charge line on Segre; all 21 Fano components under marked Golden inverse | Fano classification classical/imported; one-control marking and Pfaffian normalization paper-owned | complete multi-affinity, moduli, and coefficient proof in text | C716 exact family certificate and independent Pfaffian replay | verify theorem/page for the 21-component classification when final publication metadata exists |
 | `cor:marked-lift-rigidity` | characteristic zero; fixed outer target, coherent switching frames, and integral lattices; primitive synchronized lift with normalized Joubert top cubics | C739 marked multiplicity-one synthesis | short character-space proof after the synchronized-spinor proposition | C739 character audit and independent synthematic-total replay | theorem is deliberately marked; unmarked reconstruction belongs to C742 |
 | `app:collision-filtration` | translation gauge; Jacobian rank-drop, simultaneous-Pfaffian base, and pair-collision schemes | C739 bounded exact synthesis | reduced-support nesting explained geometrically; nilpotent refinement stated with explicit trust boundary | one Singular 4.4.1 implementation for the nilpotent defect | independent local-algebra or second-CAS closure required before promotion to an A+ central theorem |
+| `thm:unmarked-boundary` | source-free product target on the paired natural/outer six-sets; characteristic zero; selected pole-marked cross block | C742 sharp obstruction synthesis | complete character, rank-two, stabilizer-orbit, descent, and first-Fitting proof in text | C742 full-permutation certificate and independent conjugacy-class replay | no debt; theorem deliberately stops before the one-CAS nilpotent refinement |
 
 No post-700 theorem is Lean-verified.  The C712 formal package covers only the
 sub-700 source interface and is not cited as proof of any theorem above.
@@ -136,8 +137,8 @@ checks from sequel-only finite censuses.
   theorem, three mechanisms, and application boundary.
 - **Trust:** passed.  C704, C705, C715, C716, C728, and C729 primary checks and
   every available independent replay passed from the repository root.
-- **Build:** passed after C739 placement.  `make check` in
-  `papers/golden-operator/` is warning-free; the central draft is 15 pages.
+- **Build:** passed after C742 placement.  `make check` in
+  `papers/golden-operator/` is warning-free; the central draft is 16 pages.
 
 ## `ej` + `tt` closeout and mystery ledger
 

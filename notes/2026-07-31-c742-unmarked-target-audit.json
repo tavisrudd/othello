@@ -1,0 +1,16 @@
+{
+  "group_order": 720,
+  "interpretation": "The source-free signed product target admits no synchronized linear lift.  The untwisted product target admits one, but its top Pfaffian vanishes.",
+  "multiplicities": {
+    "Hom_S6(axis_augmentation,product_target)": 1,
+    "Hom_S6(axis_augmentation,signed_product_target)": 0
+  },
+  "outer_cells": 6,
+  "schema": "c742-unmarked-target-audit-v1",
+  "skew_coordinates_per_cell": 15,
+  "unique_untwisted_lift": {
+    "formula": "alpha_ij(x)=x_i-x_j, repeated in every outer cell",
+    "matrix_rank_upper_bound": 2,
+    "order_six_pfaffian": 0
+  }
+}
