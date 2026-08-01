@@ -35,6 +35,24 @@ fixed vector. -/
 theorem sigmaThree_markedFixedVector : sigmaThree markedFixedVector = 20 := by
   native_decide
 
+/-- The sum-zero parameter of the normalized chart point `xyz`. -/
+def normalizedMarkedVector : Fin 5 → ℚ :=
+  (1 / 5 : ℚ) • markedFixedVector
+
+/-- The chart point has Clebsch cubic value `4/25`; the denominator is forced
+by passing from the primitive marked vector to its sum-zero affine
+representative. -/
+theorem sigmaThree_normalizedMarkedVector :
+    sigmaThree normalizedMarkedVector = 4 / 25 := by
+  native_decide
+
+/-- Hitchin's chart factor `16` converts the value `4/25` into the displayed
+branch value `(16/25)²`. -/
+theorem chartFactor_at_normalizedMarkedVector :
+    (16 : ℚ) * sigmaThree normalizedMarkedVector ^ 2 = (16 / 25) ^ 2 := by
+  rw [sigmaThree_normalizedMarkedVector]
+  norm_num
+
 /-- A coordinate vector is fixed by the stabilizer of label zero when its
 four remaining coordinates agree. -/
 def IsMarkedStabilizerFixed (y : Fin 5 → ℚ) : Prop :=
