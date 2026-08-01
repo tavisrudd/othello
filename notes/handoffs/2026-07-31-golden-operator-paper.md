@@ -154,6 +154,16 @@ particular:
   of degree at most four.
   The report and exact evidence bundle are
   `notes/2026-07-31-c715-golden-anomaly-inverse.md`.
+- C716 is complete.  Two-\(U(1)\) anomaly cancellation is exactly line
+  containment on the Segre cubic.  In the frozen Golden marking the fifteen
+  plane components are the fixed path collisions, while the six split
+  degree-five del Pezzo components are the six choices of one moving path
+  control with the other five fixed.  Their five vectorlike crossings form
+  a synthematic-total component syndrome, homogeneous control degree one is
+  minimal, and the two mixed anomalies are exactly the two mixed
+  determinant--Pfaffian sums.  Exact physical chiral and nonchiral witnesses,
+  all 21 marked families, the source-label dictionary, and the independent
+  replay are in `notes/2026-07-31-c716-golden-two-u1-lines.md`.
 
 C720 is complete.  The frozen charter is
 notes/2026-07-31-c720-golden-paper-charter.md, and the go verdict is
@@ -173,16 +183,14 @@ manuscript edit is authorized by C727.
 
 | task | state | next gate |
 |---|---|---|
-| [C716 — two-\(U(1)\) lines](../golden-tasks/c716-golden-two-u1-lines.md) | ready; C715 inverse interface frozen | synthesize nonchiral and chiral Fano components and mixed Pfaffian identities |
 | [C717 — Majorana parity chambers](../golden-tasks/c717-golden-majorana-parity-chambers.md) | queued after C720; independent of C715 | classify Pfaffian walls, real chambers, simultaneous switches, and monodromy obstruction |
 | [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
-1. C716 two-\(U(1)\) lines, now that the pointwise inverse interface is frozen.
-2. C717 and C718, chosen by theorem yield.
-3. C719 after the mathematical paper spine is secure.
+1. C717 and C718, chosen by theorem yield.
+2. C719 after C718 and the mathematical paper spine are secure.
 
 ## Ownership and allowed paths
 
