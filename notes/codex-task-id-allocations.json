@@ -1925,8 +1925,17 @@
       "last": 751,
       "purpose": "Paper I proof-spine tightening and blind referee comparison",
       "sequence": 214
+    },
+    {
+      "count": 1,
+      "first": 752,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 752,
+      "purpose": "Paper I Lean proof-spine correspondence audit and closure",
+      "sequence": 215
     }
   ],
-  "next_id": 752,
+  "next_id": 753,
   "schema": "codex-task-id-allocations-v1"
 }
