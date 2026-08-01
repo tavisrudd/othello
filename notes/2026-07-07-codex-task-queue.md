@@ -81,6 +81,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `golden`
 
 - **C735 `[golden]` [READY; POST-C716 CONSOLIDATION PIVOT]** — consolidate the Golden paper around its operator-first proof spine; freeze the post-charter placement delta, theorem--proof--trust ledger, revised contents and length budget, complete central proof draft, and keep/compress/defer verdicts before opening another shadow branch → `notes/golden-tasks/c735-golden-manuscript-consolidation.md`.
+- **C739 `[golden]` [QUEUED AFTER C735]** — test whether the Golden portfolio is the unique outer-equivariant Pfaffian/determinantal lift of the (S_6)-invariant Segre cubic; resolve reconstruction data, the master degeneracy scheme, the (6\to10\to36\to6) cycle, bounded even-order analogues, and transfer uses → `notes/golden-tasks/c739-golden-cubic-lift-rigidity.md`.
 - **C718 `[golden]` [QUEUED AFTER C720; INDEPENDENT OF C715]** — compute the permanent side of the golden transfer blocks, specialize boson--fermion complementarity, and seek a bosonic invariant or experimental discriminator → `notes/golden-tasks/c718-golden-boson-fermion-complement.md`.
 - **C719 `[golden]` [QUEUED AFTER C715 AND C718]** — design a platform-specific six-mode demonstration with coherent sign readout, anomaly witness, bosonic control, optimal three/five/ten-cut simplex decoding, and quantitative loss/shot budget → `notes/golden-tasks/c719-golden-six-mode-demonstrator.md`.
 
