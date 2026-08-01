@@ -1022,6 +1022,97 @@ question is whether its 120 polar hyperplanes cut a distinguished divisor or
 arrangement on \(M_8\), not whether their pole points lie on \(M_8\); the
 latter is now ruled out.
 
+### Post-closeout `ej6`: the (PG(3,2)) anti-flag arrangement
+
+The thirty-design graph from `ej5` has a canonical higher description.  Join
+two labelled (SQS(8))'s when their block sets are disjoint.  Exact
+enumeration shows that this graph is bipartite, with two parts of size fifteen,
+and is distance-regular with intersection array
+
+\[
+ \{8,7,4;1,4,8\}.
+\]
+
+Equivalently, from a fixed vertex its distance layers have sizes
+
+\[
+ 1, 8, 14, 7.
+\]
+
+The two halves and the disjointness relation form the symmetric
+(2)-((15,8,4)) design: every row has eight neighbors and two rows have four
+common neighbors.  Its complement is the point--hyperplane incidence design
+of (PG(3,2)).
+
+This is forced by the next exceptional isomorphism.  The even relabelling
+group satisfies
+
+\[
+ A_8\cong PSL_4(2)=GL_4(2).
+\]
+
+Its two fifteen-element orbits of labelled (SQS(8))'s are the point and
+hyperplane actions of (PG(3,2)); an odd relabelling exchanges the two by
+duality.  There are (15cdot8=120) nonincident point--hyperplane pairs.
+Their stabilizer in (A_8) has order (168), while adjoining the duality
+gives the order-336 projective stabilizer (PGL_2(7)) found in `ej4`.
+Consequently the `ej5` correspondence sharpens to
+
+\[
+ \boxed{
+ S_8/PGL_2(7)
+ \cong
+ \{(p,H):p\notin H\text{ in }PG(3,2)}
+ \cong
+ \{\text{Paley self-polar lines}}.
+ }
+\]
+
+Thus the 120 objects are anti-flags of the smallest projective three-space.
+This gives an intrinsic association scheme for their hyperplanes.  Normalize
+the Paley vectors by
+(langle h,hangle=1792).  For a fixed projective line, the absolute inner
+products, normalized by 1792, are
+
+| relation between anti-flags ((p,H)), ((q,K)) | absolute cosine | valency |
+|---|---:|---:|
+| exactly one common endpoint | (4/7) | 14 |
+| no common endpoint; both cross-pairs nonincident | (1/7) | 21 |
+| no common endpoint; both cross-pairs incident | (2/7) | 28 |
+| no common endpoint; exactly one cross-pair incident | (1/14) | 56 |
+
+The valencies sum to 119.  Hence the apparently multi-angle Paley frame from
+`ej4` is precisely the four-class anti-flag scheme of (PG(3,2)).  Schur
+averaging gives unit-norm frame bound (120/14=60/7); with the integral
+normalization the frame constant is 15,360.
+
+The arrangement itself now has a canonical equation.  If one representative
+linear form is chosen for each projective Paley line, set
+
+\[
+ \Delta_{120}=\prod_{[h]\in S_8/PGL_2(7)}h.
+\]
+
+Changing representatives alters only the overall scalar.  Exact orientation
+tracking for a generating transposition shows that the product character is
+trivial, so (Delta_{120}) is an (S_8)-invariant degree-120 form, not a
+skew invariant.  Its restriction to (M_8) is the union of the 120
+Paley--Hafnian hyperplane sections.  This is the natural master arrangement
+left open by `ej5`.
+
+The conceptual ladder is therefore not merely “six, then eight”:
+
+| order | exceptional finite symmetry | carrier shadow |
+|---:|---|---|
+| 6 | outer automorphism of (S_6) | six-line simplex and Segre hypersurface |
+| 8 | (A_8\cong PSL_4(2)) plus point--hyperplane duality | 120 anti-flags, four-angle tight frame, skew-cubic polar fixed points |
+
+The next genuinely geometric calculation is the divisor
+(M_8\cap V(Delta_{120})): its irreducible orbit types, boundary
+multiplicities, and relation, if any, to the Hessian/secant divisor.  The
+anti-flag theorem supplies the correct finite indexing before that
+scheme-theoretic attack.
+
 This gives the deeper general-versus-exceptional split:
 
 | mechanism | every (2m) | only the Golden (m=3) resonance |
@@ -1060,7 +1151,13 @@ searched the web and zbMATH Open with these families:
 - zbMATH-restricted versions of the invariant, conference-Pfaffian, Segre,
   and symmetric-power queries; and
 - post-`ej5` exact combinations of `skew cubic`, `PGL(2,7)`, `120 points`,
-  and `disjoint Steiner quadruple systems order 8`.
+  `self-polar`, `critical point`, `eigenvector`, `S^(4,4)`, and
+  `disjoint Steiner quadruple systems order 8`; and
+- title-plus-discriminator searches around HMSV's *The geometry of eight
+  points in projective space*, including its combinations with `Paley`,
+  `Steiner quadruple`, and `PGL(2,7)`; and
+- post-`ej6` combinations of `SQS(8)`, `PG(3,2)`, `A8`, the intersection
+  array `{8,7,4;1,4,8}`, and symmetric `2-(15,8,4)` designs.
 
 The web interface did not expose stable total-result counts, so this audit
 does not turn the displayed result pages into an enumerated negative set.
@@ -1126,6 +1223,24 @@ audit, not a priority proof.
    partitions, and associated design graphs are classical subjects.  It was
    not used to prove the `ej5` orbit or polar calculation, and the full text
    was not accessible in this sweep.
+7. Benjamin Howard, John Millson, Andrew Snowden, and Ravi Vakil,
+   *The geometry of eight points in projective space: Representation theory,
+   Lie theory, dualities*, arXiv:1103.5255v1 --- **partial**, abstract,
+   Sections 1.1--1.4 and 3.1--3.2, together with an exact full-text keyword
+   sweep over all 31 extracted pages.  Cache key `arXiv:1103.5255`, SHA-256
+   `f2d40f4e75e9726ec57c7ff24f8a34e488bfd191a51a6370fc84d78e36f9f227`.
+   This is the primary source for the 14-dimensional \(V_{4,4}\) embedding,
+   the unique skew cubic, its signed sum over 105 matching cubes, its Hessian
+   divisor, the fourteen-quadratic polar map, and
+   \(M_8=\operatorname{Sing}(C)\).  The extracted text has no occurrence of
+   `Paley`, `Steiner`, `PGL`, `critical`, `fixed point`, or `eigen`, and the
+   relevant geometric sections do not state the 120-line construction.
+8. Rudolf Mathon, *On Identifying \(PG(3,2)\) and the Complete 3-Design on
+   Seven Points*, DOI `10.1016/S0167-5060(08)70177-8` --- **metadata and
+   publisher summary only**.  Used to position the (PG(3,2))/small-design
+   identification as classical background.  It does not supply the
+   Paley--Hafnian vectors, skew-cubic polarity, or the 120-hyperplane
+   arrangement.
 
 ### Verdict
 
@@ -1151,6 +1266,45 @@ task-owned *syntheses*.  The design sweep does show that disjoint
 “in the marked Golden construction” and “the bounded search did not locate,”
 never “new” or “first.”
 
+### Novelty disposition for the `ej5` bridge
+
+The bridge should be separated into classical inputs and candidate-new
+outputs:
+
+| statement | disposition after bounded sweep |
+|---|---|
+| thirty labelled \(SQS(8)\)'s and their disjoint-design combinatorics | classical design theory; no novelty claim |
+| Paley skew-conference matrix and its \(PGL_2(7)\) symmetry | classical finite-field/conference input; no novelty claim |
+| \(V_{4,4}\), the skew cubic, its 105-matching formula, Hessian, polar map, and \(M_8=\operatorname{Sing}(C)\) | HMSV; no novelty claim |
+| the Paley--Hafnian signs split into two disjoint \(SQS(8)\)'s | not located in the bounded search; candidate-new identification |
+| the 120 projective Paley lines are exactly the unordered disjoint \(SQS(8)\) pairs | not located; candidate-new equivariant bridge |
+| those 120 lines are exterior fixed points of the skew-cubic polar map | not located; strongest candidate-new geometric theorem |
+| exact value, polar multiplier, Hessian spectrum, and tangent signature \((1,12)\) | task-owned derivation and replay; not located |
+| the thirty-design disjointness graph is the (PG(3,2)) point--hyperplane nonincidence graph | classical finite-design backbone; no standalone novelty claim |
+| the four Paley Gram angles are exactly the four anti-flag relations | not located; candidate-new representation/design bridge |
+| the invariant degree-120 polar-hyperplane arrangement \(\Delta_{120}\) | not located; candidate-new geometric package |
+
+The novelty signal for the *combined bridge* is strong: the primary HMSV
+paper contains all cubic-side ingredients but none of the finite-design or
+Paley vocabulary, while the promoted design source treats the design side but
+does not expose the cubic, matching carrier, or polar map.  Exact cross-family
+queries found no paper joining them.  This is still not a priority proof:
+MathSciNet and Google Scholar were unavailable, the full Mathon--Street text
+was not read, and no forward-citation closure around HMSV or the design papers
+was performed.
+
+The publication-safe sentence is:
+
+> We identify a 120-element Paley orbit of self-polar critical lines of the
+> eight-point skew cubic, naturally indexed by disjoint pairs of labelled
+> Steiner quadruple systems.  We have not located this identification in the
+> literature.
+
+Do not replace “we identify” by “we are the first to identify,” and do not call
+the ingredients themselves new.  Before any explicit priority language, close
+the three stated database/citation gaps and obtain a subject-expert check from
+the eight-point invariant-theory or finite-design community.
+
 ## 12. Placement recommendation
 
 No manuscript file was edited.  After C735 reopens placement, the recommended
@@ -1161,7 +1315,7 @@ disposition is:
 | marked lift-rigidity theorem and universal even-order identity | theorem body, immediately after the operator propagation theorem |
 | universal (S^{(m,m)}) matching-covariant theorem and order-six hypersurface criterion | conceptual theorem body or a short standalone appendix; this is the deepest general explanation |
 | Pfaffian--Hafnian parity twin and 120-line order-eight Paley orbit | research sequel or C718 interface; do not place as a physical bosonic claim |
-| disjoint-SQS interpretation and skew-cubic self-polar theorem | order-eight research sequel; it closes the `ej4` incidence question |
+| disjoint-SQS/self-polar theorem and \(PG(3,2)\) anti-flag arrangement | order-eight research sequel; it closes the `ej4` incidence question and defines the next divisor problem |
 | invariant/covariant multiplicity table | compact proof subsection or appendix |
 | pole-descent theorem and \(\overline M_{0,6}\) boundary unification | theorem body after the six-point quotient; it explains the C715 inverse fibre |
 | reconstruction table and portability criterion | main-text corollary |
@@ -1184,7 +1338,8 @@ The task-owned exact evidence is:
   Hafnian quartic, stabilizer, orbit, and carrier-rank calculation;
 - `notes/2026-07-31-c739-order8-skew-cubic-audit.py` for the two Steiner
   systems, their 120-edge disjointness orbit, the normalized HMSV cubic,
-  polar fixed-point identity, and exact Hessian spectrum; and
+  polar fixed-point identity, exact Hessian spectrum, distance-regular
+  \(PG(3,2)\) graph, and four-class anti-flag Gram scheme; and
 - `notes/2026-07-31-c739-cycle-audit.py` and JSON certificate for the two
   six-set projections.
 
@@ -1272,6 +1427,19 @@ claim and does not enlarge their literature audits.
 - **Refined by `ej5`:** the remaining order-eight problem is the arrangement
   cut by the 120 polar hyperplanes on \(M_8\), not incidence of their pole
   points with the singular locus; that incidence is exactly false.
+- **Positioned by the post-`ej5` novelty audit:** the combined
+  disjoint-\(SQS(8)\)/Paley--Hafnian/self-polar theorem is a strong candidate
+  for novelty, but the ingredients are classical and the database/citation
+  gaps forbid “first” or an unqualified priority claim.
+- **Settled by post-closeout `ej6`:** the thirty labelled Steiner systems are
+  the point and hyperplane halves of \(PG(3,2)\) under
+  \(A_8\cong PSL_4(2)\); disjoint pairs are its 120 anti-flags.  Their four
+  absolute Gram angles \(1/14,1/7,2/7,4/7\) are exactly the four anti-flag
+  relations, with valencies \(56,21,28,14\).
+- **Opened precisely by `ej6`:** the product of the 120 polar forms is an
+  \(S_8\)-invariant degree-120 arrangement equation \(\Delta_{120}\).  Its
+  scheme-theoretic intersection with \(M_8\), especially its relation to the
+  Hessian/secant divisor, is the next level rather than a vague iteration.
 - **Settled by `tt`:** the uniqueness statement must name its target
   representation and equivalence relation.  In that category it is a
   multiplicity-one theorem; without them it is false or undefined.

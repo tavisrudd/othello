@@ -178,8 +178,19 @@ particular:
   the 120 lines with the unordered disjoint pairs among the thirty labelled
   \(SQS(8)\)'s and proves that they are nondegenerate self-polar critical
   lines of HMSV's skew cubic, lying outside that cubic, with tangent signature
-  \((1,12)\).  The remaining order-eight gate is the arrangement cut by
-  their 120 polar hyperplanes on \(M_8\).  The next pole-marked geometric gate
+  \((1,12)\).  A targeted novelty audit finds the combined
+  disjoint-\(SQS(8)\)/Paley--Hafnian/self-polar bridge to be a strong candidate
+  for novelty, while every ingredient separately is classical.  Safe wording
+  is “we identify” plus “we have not located this identification”; do not use
+  “first” until MathSciNet, Google Scholar, forward citations, and a subject-
+  expert check close the recorded gaps.  C739's `ej6` continuation identifies
+  the thirty Steiner systems with the point and hyperplane halves of
+  \(PG(3,2)\) under \(A_8\cong PSL_4(2)\); the 120 polar lines are its
+  anti-flags, and their four Gram angles are exactly the four anti-flag
+  relations.  Their product is an \(S_8\)-invariant degree-120 arrangement
+  form \(\Delta_{120}\).  The remaining order-eight gate is the
+  scheme-theoretic divisor \(M_8\cap V(\Delta_{120})\), especially its
+  relation to the Hessian/secant divisor.  The next pole-marked geometric gate
   is to compactify the pole-marked MCM pair over
   \(\overline M_{0,7}\to\overline M_{0,6}\) with its boundary twist before
   computing any derived pushforward.  The exact report and evidence bundle are

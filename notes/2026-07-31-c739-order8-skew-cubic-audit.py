@@ -184,7 +184,126 @@ def verify_steiner_pair(hafnian):
         for permutation in permutations(range(N))
     }
     assert paley_edges == disjoint_edges
-    return positive, negative
+
+    adjacency = [set() for _ in systems]
+    for left, right in disjoint_edges:
+        adjacency[left].add(right)
+        adjacency[right].add(left)
+
+    colors = [-1] * len(systems)
+    colors[0] = 0
+    queue = [0]
+    for vertex in queue:
+        for neighbor in adjacency[vertex]:
+            if colors[neighbor] == -1:
+                colors[neighbor] = 1 - colors[vertex]
+                queue.append(neighbor)
+            assert colors[neighbor] != colors[vertex]
+    assert Counter(colors) == Counter({0: 15, 1: 15})
+
+    distance_patterns = Counter()
+    for root in range(len(systems)):
+        distance = [-1] * len(systems)
+        distance[root] = 0
+        queue = [root]
+        for vertex in queue:
+            for neighbor in adjacency[vertex]:
+                if distance[neighbor] == -1:
+                    distance[neighbor] = distance[vertex] + 1
+                    queue.append(neighbor)
+        assert Counter(distance) == Counter({2: 14, 1: 8, 3: 7, 0: 1})
+        for vertex in range(len(systems)):
+            layer_counts = tuple(
+                sum(distance[neighbor] == layer for neighbor in adjacency[vertex])
+                for layer in range(4)
+            )
+            distance_patterns[(distance[vertex], layer_counts)] += 1
+    assert distance_patterns == Counter(
+        {
+            (0, (0, 8, 0, 0)): 30,
+            (1, (1, 0, 7, 0)): 240,
+            (2, (0, 4, 0, 4)): 420,
+            (3, (0, 0, 8, 0)): 210,
+        }
+    )
+
+    # The two color classes, with disjointness as cross-incidence, form the
+    # symmetric 2-(15,8,4) complement of point-hyperplane incidence in PG(3,2).
+    left_part = tuple(i for i, color in enumerate(colors) if color == 0)
+    right_part = tuple(i for i, color in enumerate(colors) if color == 1)
+    rows = [tuple(int(right in adjacency[left]) for right in right_part) for left in left_part]
+    assert all(sum(row) == 8 for row in rows)
+    assert all(dot(rows[i], rows[j]) == 4 for i, j in combinations(range(15), 2))
+
+    return positive, negative, tuple(sorted(systems)), system_index, disjoint_edges, tuple(colors)
+
+
+def verify_antiflag_gram(hafnian, positive, negative, systems, system_index, colors):
+    h_vector = tuple(hafnian[subset] for subset in SUBSETS)
+    line_to_edge = {}
+    for permutation in permutations(range(N)):
+        image = BASE.permute_vector(h_vector, SUBSETS, SUBSET_INDEX, permutation)
+        first_nonzero = next(entry for entry in image if entry)
+        if first_nonzero < 0:
+            image = tuple(-entry for entry in image)
+
+        endpoints = (
+            system_index[permute_blocks(positive, permutation)],
+            system_index[permute_blocks(negative, permutation)],
+        )
+        if colors[endpoints[0]] == 1:
+            endpoints = endpoints[::-1]
+        line_to_edge[image] = endpoints
+
+    assert len(line_to_edge) == 120
+    assert len(set(line_to_edge.values())) == 120
+    lines = tuple(line_to_edge)
+    assert all(dot(line, line) == 1792 for line in lines)
+
+    absolute_distribution = Counter()
+    antiflag_distribution = Counter()
+    for left_index, right_index in combinations(range(len(lines)), 2):
+        left = lines[left_index]
+        right = lines[right_index]
+        absolute_inner_product = abs(dot(left, right))
+        absolute_distribution[absolute_inner_product] += 1
+
+        point, hyperplane = line_to_edge[left]
+        other_point, other_hyperplane = line_to_edge[right]
+        shared_endpoint = int(point == other_point) + int(hyperplane == other_hyperplane)
+        # Disjoint SQS pairs are the nonincident point-hyperplane pairs.
+        first_cross = not set(systems[point]) & set(systems[other_hyperplane])
+        second_cross = not set(systems[other_point]) & set(systems[hyperplane])
+        antiflag_distribution[
+            (shared_endpoint, tuple(sorted((first_cross, second_cross))), absolute_inner_product)
+        ] += 1
+
+    assert absolute_distribution == Counter({128: 3360, 512: 1680, 256: 1260, 1024: 840})
+    assert antiflag_distribution == Counter(
+        {
+            (0, (False, True), 128): 3360,
+            (0, (False, False), 512): 1680,
+            (0, (True, True), 256): 1260,
+            (1, (True, True), 1024): 840,
+        }
+    )
+    expected_valencies = Counter({128: 56, 512: 28, 256: 21, 1024: 14})
+    for line in lines:
+        assert Counter(abs(dot(line, other)) for other in lines if other != line) == expected_valencies
+
+    # A transposition generates the abelianization of S_8.  Its accumulated
+    # orientation on the 120 canonical line representatives is positive, so
+    # the degree-120 product of their linear forms is S_8-invariant, not skew.
+    transposition = (1, 0, 2, 3, 4, 5, 6, 7)
+    product_sign = 1
+    for line in lines:
+        image = BASE.permute_vector(line, SUBSETS, SUBSET_INDEX, transposition)
+        first_nonzero = next(entry for entry in image if entry)
+        if first_nonzero < 0:
+            image = tuple(-entry for entry in image)
+            product_sign = -product_sign
+        assert image in line_to_edge
+    assert product_sign == 1
 
 
 def verify_skew_cubic(hafnian):
@@ -286,13 +405,16 @@ def verify_skew_cubic(hafnian):
 def main():
     matrix = BASE.paley_skew_conference()
     hafnian = BASE.hafnian_difference_coefficients(matrix)
-    verify_steiner_pair(hafnian)
+    positive, negative, systems, system_index, _, colors = verify_steiner_pair(hafnian)
+    verify_antiflag_gram(hafnian, positive, negative, systems, system_index, colors)
     evaluation_distribution = verify_skew_cubic(hafnian)
     assert evaluation_distribution == Counter(
         {-16: 22, 16: 20, 32: 14, -32: 14, -64: 11, 64: 10, -80: 8, 80: 6}
     )
     print("order-eight Paley/skew-cubic audit: OK")
     print("designs: 30 SQS(8), disjointness degree 8, 120 edges")
+    print("geometry: PG(3,2) nonincidence graph, array {8,7,4;1,4,8}")
+    print("Gram cosines: 1/14, 1/7, 2/7, 4/7 with valencies 56,21,28,14")
     print("polar fixed point: F(h)=2408448, gradient F(h)=4032 h")
     print("Hessian: 8064, 5760, (-1152 +/- 1728 sqrt(2)) each x6")
     print("projective tangent signature: (1 positive, 12 negative)")
