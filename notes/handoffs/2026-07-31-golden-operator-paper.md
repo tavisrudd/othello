@@ -152,10 +152,33 @@ particular:
   is C715's one-parameter inverse fibre.  The 25 boundary divisors of
   \(\overline M_{0,6}\), split as
   \(15\Delta_{2|4}+10\Delta_{3|3}\), are the common compactified parent of
-  the unequal collision schemes.  Finally
+  the unequal collision schemes.  More generally, for every \(n=2m\) the
+  perfect-matching brackets form the universal carrier \(S^{(m,m)}\), and
+  the unique first degree-\(m\) covariant pairs with every commutator
+  Pfaffian.  Order six is the unique nontrivial hypersurface case and the
+  unique case where this carrier is the signed outer augmentation module;
+  it is not the only exceptional invariant-theory order, since HMSV's
+  eight-point skew cubic and inherited quadratic relations give the proper
+  next comparison.
+  At order ten the carrier has dimension 42, so the 36 extremal cuts cannot
+  be a complete next matching-coordinate frame.  Schur averaging makes every
+  full matching-functional orbit a tight frame; the Golden orbit is the
+  regular six-vector simplex because it has size six in dimension five and
+  is two-transitive.  Finally
   \(S_6/F_{20}\cong X\times\mathcal T\), so the 36 extremal order-ten cuts
   have a canonical unmarked quotient back to the six Golden sisters.  The
-  exact report and evidence bundle are
+  post-closeout literature sweep positions the matching/Specht/Catalan
+  skeleton as classical and retains the conference-functional
+  synchronization, pole-descent obstruction, and boundary/Fitting link only
+  as bounded task syntheses with no priority claim.  C739's `ej4` continuation
+  gives the adjacent-order parity twin: the order-eight Paley skew-conference
+  matrix produces a Hafnian quartic with a 120-line
+  \(S_8/PGL_2(7)\) orbit spanning \(S^{(4,4)}\).  This is a coordinate
+  functional, not yet an identification with HMSV's skew cubic or C718's
+  physical permanent.  The next geometric gate
+  is to compactify the pole-marked MCM pair over
+  \(\overline M_{0,7}\to\overline M_{0,6}\) with its boundary twist before
+  computing any derived pushforward.  The exact report and evidence bundle are
   `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 - C715 is complete.  The Golden amplitude map is the classical
   \((\mathbf P^1)^6/\!/\operatorname{PGL}_2\) quotient with an explicit

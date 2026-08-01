@@ -533,7 +533,501 @@ would identify the precise golden/orientation gerbe obstructing a global
 unification.  Either outcome is theorem-shaped and does not require a broad
 new census.
 
-## 11. Placement recommendation
+### Post-closeout `ej2`: pole-marked moduli unification
+
+The proposed gate can be resolved more sharply.  Let
+
+\[
+ \mathcal C_6=(\mathbf P^1)^6
+\]
+
+with tautological lines (L_i\subset V\otimes\mathcal O),
+(dim V=2), and put
+
+\[
+ E=\bigoplus_iL_i,\qquad \delta=\det V.
+\]
+
+For every Golden sister define a skew bundle map
+
+\[
+ \boldsymbol\alpha_T:E\longrightarrow E^*\otimes\delta,
+ \qquad (\boldsymbol\alpha_T)_{ij}=C_{T,ij}[ij].
+\]
+
+This is well-defined because
+([ij]\in L_i^{-1}L_j^{-1}\delta).  Its Pfaffian is a section of
+
+\[
+ (\det E)^{-1}\delta^3
+ \cong\mathcal O(1,1,1,1,1,1)\otimes\delta^3.
+\]
+
+On the affine chart (v_i=(x_i,1)), it becomes exactly
+
+\[
+ \boldsymbol\alpha_T=(C_{T,ij}(x_i-x_j))=[D_x,C_T].
+\]
+
+Thus the Pfaffian/Joubert and weighted pure-spinor presentations globalize
+canonically on the six-point quotient stack; their projectivized top system
+is the Segre GIT quotient.  No choice of affine pole is required at this
+level.
+
+The cross-golden determinant lives naturally one level higher.  Add a
+seventh labelled point (p_\infty) disjoint from the six paths.  On
+
+\[
+ M_{0,7}\longrightarrow M_{0,6}
+\]
+
+it selects an affine chart on (mathbf P^1\setminus\{p_\infty\}), unique up
+to (y=ax+b).  Under such a change,
+
+\[
+ [D_y,C_T]=a[D_x,C_T],\qquad
+ P_-D_yP_+=aP_-D_xP_+,
+\]
+
+because (P_-P_+=0).  Hence the projective cross block, determinant,
+adjugate, matrix factorization, and its two small resolutions descend over
+the pole-marked moduli space.  The forgotten seventh point is exactly the
+one-parameter pole in C715's inverse fibre.
+
+This structure does not descend by the same formula to (M_{0,6}).  For a
+general projectivity
+
+\[
+ y_i=\frac{ax_i+b}{cx_i+d}
+\]
+
+one has
+
+\[
+ [D_y,C_T]
+ =(ad-bc)\Lambda[D_x,C_T]\Lambda,
+ \qquad
+ \Lambda=\operatorname{diag}\bigl((cx_i+d)^{-1}\bigr).
+\]
+
+The Pfaffian changes only by the correct determinant-line scalar and therefore
+descends.  But (Lambda) preserves the fixed golden eigenspaces only if it
+commutes with (C_T).  Since every off-diagonal entry of (C_T) is nonzero,
+([\Lambda,C_T]=0) forces all diagonal entries of (Lambda) to be equal.
+For six distinct points this is exactly the affine case (c=0).  Therefore:
+
+> **Pole-descent theorem.**  The Pfaffian/Joubert presentation is intrinsic on
+> the six-point quotient, while the displayed cross-golden determinant and
+> selected matrix factorization are intrinsic on the universal pole-marked
+> cover.  Forgetting the pole preserves their determinant cubic but not their
+> fixed (3+3) golden splitting.
+
+This is the exact geometric reason that charge ratios are fixed on a C715
+inverse fibre while the common Slater success scale varies with its pole.  It
+also separates three independent choices: the continuous pole lift, the
+support-orientation bit, and the golden-conjugation bit.
+
+The degeneracy schemes acquire a common compactified parent as well.  The
+boundary of (overline M_{0,6}) has exactly
+
+\[
+ 15\ \Delta_{2|4}+10\ \Delta_{3|3}
+\]
+
+irreducible divisors.  Under the equal-weight GIT contraction to the Segre
+cubic, the fifteen (2|4) divisors give the pair-collision/vectorlike-plane
+boundary, while the ten (3|3) divisors contract to the ten nodes.  The
+twenty prequotient triple-collision planes occur in complementary pairs above
+those ten (3|3) partitions, and the Jacobian's lower-dimensional nilpotent
+defect is supported at their contracted images.  Consequently the best
+master object is not one discriminant subscheme: it is the normal-crossing
+boundary of (overline M_{0,6}) together with its GIT contraction and
+critical Fitting scheme.
+
+This resolves the highest-EV part of the moduli/Fitting attack.  A remaining
+upgrade would identify the exact sheaf-theoretic pushforward of the two
+pole-marked MCM summands.  The correct setting is first to extend the
+projective cross block, with its boundary or logarithmic twist, over the
+proper universal stable curve
+
+\[
+ \overline M_{0,7}\longrightarrow\overline M_{0,6},
+\]
+
+and only then compute its derived pushforward.  On the open forgetful map the
+fibres are punctured curves and a bare pushforward need not even be coherent;
+on either map the relative dimension rules out a finite-norm shortcut.  Thus
+the next theorem must specify the compactified sheaf and its boundary
+filtration before writing \(R\pi_*\).
+
+### Post-closeout `ej3`: the universal Temperley--Lieb carrier
+
+The pole-marked theorem is the (m=3) member of a general construction.
+Let (n=2m), let
+
+\[
+ A_n=k^n/k\mathbf1,
+\]
+
+and let (mathcal I_m) be the multilinear (operatorname{SL}_2)-invariant
+space of (2m) labelled vectors.  Schur--Weyl duality and the first
+fundamental theorem identify
+
+\[
+ \mathcal I_m\cong S^{(m,m)},\qquad
+ \dim\mathcal I_m=\operatorname{Cat}_m
+ =\frac1{m+1}\binom{2m}{m}.
+\]
+
+It is generated by the perfect-matching brackets
+
+\[
+ [i_1j_1]\cdots[i_mj_m]
+\]
+
+modulo the Plücker, equivalently Temperley--Lieb, relations.  On the affine
+chart (v_i=(x_i,1)), these are the degree-(m) translation-invariant
+matching products (prod_r(x_{i_r}-x_{j_r})).  They assemble into a
+canonical (S_{2m})-covariant
+
+\[
+ \mathcal J_m:A_n\longrightarrow\mathcal I_m^*
+\]
+
+of degree (m).
+
+### Theorem (universal matching covariant)
+
+Over characteristic zero,
+
+\[
+ \dim\operatorname{Hom}_{S_{2m}}
+ \left(\operatorname{Sym}^mA_n,S^{(m,m)}\right)=1,
+\]
+
+and (S^{(m,m)}) does not occur in
+(operatorname{Sym}^dA_n) for (d<m).  Hence (mathcal J_m) is the unique
+minimal-degree covariant to the matching-invariant carrier.
+
+#### Proof
+
+In degree (m), the squarefree monomials form the permutation module
+(M^{(m,m)}).  Young's rule contains (S^{(m,m)}) there with multiplicity
+one.  Every nonsquarefree monomial uses (r<m) variables, so its orbit
+module has an unused block of size (2m-r>m); the dominance criterion in
+Young's rule excludes (S^{(m,m)}).  The same exclusion holds in every
+degree below (m).  Since
+
+\[
+ k^n=k\mathbf1\oplus A_n,
+\]
+
+the first occurrence inside (operatorname{Sym}^m(k^n)) must occur in the
+(operatorname{Sym}^mA_n) summand, with the same multiplicity one.
+(square)
+
+For any symmetric zero-diagonal matrix (C), its bracket-Pfaffian is the
+pairing of this universal covariant with one matching-weight functional:
+
+\[
+ \operatorname{Pf}\bigl(C_{ij}[ij]\bigr)
+ =\left\langle c_C,\mathcal J_m(x)\right\rangle,
+ \qquad
+ c_C(M)=\operatorname{sgn}(M)\prod_{ij\in M}C_{ij}.
+\]
+
+The middle-exterior identity in P6 is the same equality in the affine chart.
+If this functional is nonzero, its full (S_{2m})-orbit spans
+(S^{(m,m)*}) by irreducibility.  Thus conference matrices do not create the
+universal carrier; they select unusually structured frames of linear
+functionals on it.
+
+Schur averaging strengthens this observation.  For every nonzero
+(c\in S^{(m,m)*}), its distinct group orbit is a tight frame: the sum of
+the rank-one projectors onto the orbit commutes with (S_{2m}), hence is
+scalar.  If the orbit has (N) elements in dimension
+(d=\operatorname{Cat}_m), its frame constant is
+(N\lVert c\rVert^2/d).  In the Golden case (N=6) and (d=5); the orbit
+has zero centroid and its outer action is two-transitive, so the one possible
+off-diagonal inner product is forced and the frame is the regular simplex.
+The Joubert cubic forms, ten-sign syndrome rows, and real
+(operatorname{ETF}(5,6)) presentation are therefore three models of the
+same minimal-redundancy group frame.  In higher order the full orbit remains
+tight, but multiple stabilizer double cosets generally produce several
+angles, so tightness alone does not continue the conference/simplex tower.
+
+The equal-weight quotient of (2m) points has dimension (2m-3) and is
+embedded by (mathcal I_m) in
+(mathbf P^{\operatorname{Cat}_m-1}).  Its codimension is
+
+\[
+ \operatorname{Cat}_m-2m+2.
+\]
+
+For (m=2) this is zero.  For (m=3) it is one, while for (m=4,5) it is
+respectively (8,34) and then grows strictly.  Therefore order six is the
+unique nontrivial even order in which the universal matching quotient is a
+hypersurface.  At precisely that order,
+
+\[
+ S^{(3,3)}\cong
+ \operatorname{sgn}\otimes k[\mathcal T]_0
+\]
+
+through the exceptional outer automorphism, and the hypersurface is the
+Segre cubic.  The six Golden sisters are consequently a six-vector simplex
+frame on the five-dimensional universal invariant carrier.
+
+### `tt` correction: hypersurface-unique does not mean geometry-unique
+
+The preceding conclusion is deliberately narrower than "order six is the
+only exceptional order."  HMSV prove that for every even \(n\ne6\) the
+equal-weight ideal is generated, up to symmetry, by a simple quadratic
+relation inherited from the eight-point case; they also isolate a skew cubic
+at eight points whose singular locus recovers the quotient.  Thus \(n=8\)
+has a second exceptional invariant-theory geometry even though its quotient
+has codimension eight and is not a hypersurface.
+
+The clean separation is therefore:
+
+- \(n=6\) is uniquely the nontrivial *hypersurface* case and uniquely admits
+  the outer-\(S_6\), six-vector simplex resonance;
+- \(n=8\) is the first source of the stable quadratic relations and carries
+  its own skew-cubic singular-locus construction;
+- the conference-weighted Pfaffian functional exists on the matching carrier
+  in every even order, but neither the HMSV relations nor tightness of a group
+  orbit by themselves produce a Golden-style eigenspace splitting.
+
+This correction improves the proposed generalization: the next comparison is
+not a forced Golden iteration at order ten, but an order-eight comparison
+between the matching-relation geometry and functionals selected by whatever
+structured symmetric zero-diagonal matrices exist there.  A concrete test is
+to restrict the HMSV quadratic relation module to the orbit frame of
+\(c_C\), and ask whether its Gram association scheme detects extra design
+strength.  That is a well-posed follow-on; no such theorem is asserted here.
+
+### Post-closeout `ej4`: the Pfaffian--Hafnian parity twin
+
+There is a sharper bridge between the six- and eight-point exceptions.  Let
+\(Q\) be a zero-diagonal sign matrix and put
+
+\[
+ B_Q(v)_{ij}=Q_{ij}[ij].
+\]
+
+Because both matrix transposition and the bracket reverse the indices,
+
+\[
+ Q^T=\varepsilon Q\quad\Longrightarrow\quad
+ B_Q^T=-\varepsilon B_Q.
+\]
+
+Thus two adjacent conference orders land in different matching statistics:
+
+\[
+ \begin{array}{c|c|c}
+ Q^T=Q & B_Q^T=-B_Q & \operatorname{Pf}(B_Q),\\
+ Q^T=-Q & B_Q^T=B_Q & \operatorname{Hf}(B_Q).
+ \end{array}
+\]
+
+Here the Hafnian is the unsigned perfect-matching sum.  Both outputs pair
+the same bracket covariant \(\mathcal J_m\) with a coefficient functional;
+the difference is whether the crossing sign comes from the Pfaffian or is
+cancelled by the skew edge orientation.
+
+The familiar congruence obstruction now has structural meaning.  A symmetric
+conference sign matrix of order \(n>2\) can exist only for
+\(n\equiv2\pmod4\).  Indeed, switch signs so that its first row is all ones
+and delete that row and column.  Every row of the remaining symmetric
+\((n-1)\)-vertex sign graph has \((n-2)/2\) positive edges.  The handshake
+lemma makes
+
+\[
+ (n-1)(n-2)/2
+\]
+
+even; since \(n\) is even and \(n-1\) is odd, \((n-2)/2\) is even.  Hence
+the order-six Golden Pfaffian cannot have a symmetric-conference continuation
+at order eight.  The Paley matrix at order eight instead satisfies
+
+\[
+ K^T=-K,\qquad KK^T=7I,
+\]
+
+and supplies the parity-twin quartic
+
+\[
+ H_K(v)=\operatorname{Hf}\bigl(K_{ij}[ij]\bigr)
+       \in \mathcal I_4^*.
+\]
+
+The Paley construction labels the vertices by
+\(\mathbf P^1(\mathbf F_7)\), takes \(K_{\infty,a}=1\), and takes
+\(K_{a,b}=\chi(b-a)\).  The standard quadratic-character sum proves
+\(KK^T=7I\).  On an affine chart, exact expansion gives
+
+\[
+ H_K(x)=\sum_{|S|=4}a_Sx_S,
+ \qquad a_S\in\{0,\pm8\},
+\]
+
+with fourteen coefficients \(+8\), fourteen coefficients \(-8\), and
+forty-two zeros.  The coefficientwise translation derivative vanishes.
+The projective Paley group \(PGL_2(7)\) stabilizes the line \([H_K]\): a
+fractional linear change transforms the quadratic character on every edge by
+one global character and one switching factor at each endpoint, and the
+endpoint factors multiply to a matching-independent scalar.  Its order is
+336.  Exact enumeration shows that this is the full projective stabilizer,
+with a sign-preserving subgroup of order 168.  Consequently
+
+\[
+ S_8/PGL_2(7)
+\]
+
+is a 120-line orbit in the fourteen-dimensional carrier \(S^{(4,4)}\);
+the signed orbit has 240 vectors and exact rank fourteen.  Schur averaging
+again makes it tight, but the redundancy \(120/14\) precludes the Golden
+simplex mechanism.
+
+This is the deeper adjacent-order unification:
+
+| order | conference parity | matching statistic | carrier geometry |
+|---:|---|---|---|
+| 6 | symmetric, \(C^2=5I\) | Pfaffian cubic | Segre cubic hypersurface; six-line simplex |
+| 8 | skew, \(K^2=-7I\) | Hafnian quartic | 14-coordinate quotient; 120-line Paley orbit |
+
+The last column must not be conflated.  \(H_K\) is one linear coordinate
+functional on the fourteen-dimensional Joubert/Kempe embedding, whereas the
+HMSV skew cubic is cubic in those fourteen coordinates and has the
+eight-point quotient as its singular locus.  Testing the 120 Paley
+hyperplanes against that skew cubic is now the highest-EV order-eight
+question.
+
+The Hafnian here is a mathematical matching functional, not yet the
+three-boson permanent of C718.  It should be handed to C718 as a possible
+parity-organizing invariant; no physical bosonic amplitude claim is made in
+C739.
+
+This gives the deeper general-versus-exceptional split:
+
+| mechanism | every (2m) | only the Golden (m=3) resonance |
+|---|---:|---:|
+| matching-bracket carrier (S^{(m,m)}) | yes | no |
+| unique first degree-(m) covariant | yes | no |
+| commutator Pfaffian equals a carrier functional | yes | no |
+| pole-marked cross-eigenspace determinant when (C^2=qI) | yes | no |
+| quotient is a nontrivial hypersurface | no | yes |
+| carrier is a signed outer augmentation module | no | yes |
+| six coherent functionals form a simplex frame | no | yes |
+| one cubic equation supplies polarity and anomaly arithmetic | no | yes |
+
+For order ten, the natural carrier has dimension
+(operatorname{Cat}_5=42).  The 36 Sylow-(5) extremal cuts therefore
+cannot be the complete next matching-coordinate frame: they are an
+(S_6)-restricted shadow, not the full (S_{10}) invariant carrier.  This
+representation-dimension mismatch independently explains the failure of a
+direct (10\to36) Joubert/Gram iteration, complementing C729's redundancy-
+four obstruction.
+
+## 11. Formula-level literature sweep
+
+### Search and coverage
+
+On 2026-07-31 the sweep queried the local persistent arXiv cache first, then
+searched the web and zbMATH Open with these families:
+
+- `S^(m,m) invariants points projective line perfect matchings Specht module`;
+- `symmetric power standard representation Specht (m,m) multiplicity one`;
+- `Pfaffian weighted Plucker bracket matrix points P1` and the exact
+  combinations `[D_x,C] Pfaffian conference matrix` and
+  `C_ij [ij] Pfaffian invariant`;
+- `Mbar 0 6 GIT Segre cubic boundary divisors 3+3 contracted nodes`;
+- the HMSV title family for equations and relations of points on a line; and
+- zbMATH-restricted versions of the invariant, conference-Pfaffian, Segre,
+  and symmetric-power queries.
+
+The web interface did not expose stable total-result counts, so this audit
+does not turn the displayed result pages into an enumerated negative set.
+The mechanical promotion rule was: retain a result if its displayed fields
+joined at least two of matching brackets, the \(S^{(m,m)}\) carrier,
+symmetric powers of the standard representation, conference-weighted
+Pfaffians, the Segre quotient, or the \(\overline M_{0,6}\) GIT contraction.
+The exact-formula searches returned generic conference, commutator, and
+Pfaffian literature but no displayed record for the combined construction.
+MathSciNet and Google Scholar are **NOT COVERED**, and no forward-citation
+closure was attempted.  Consequently this is a formula-level positioning
+audit, not a priority proof.
+
+### Sources and read depth
+
+1. Benjamin Howard, John Millson, Andrew Snowden, and Ravi Vakil,
+   *The relations among invariants of points on the projective line*,
+   arXiv:0906.2437v1 --- **full text**, all six pages.  Cache key
+   `arXiv:0906.2437`, SHA-256
+   `dfbdb89c3061b5987f59602a55d5eb40c7c29eab18f9203c0e43c6f765d37508`.
+   This is the decisive predecessor for the degree-one irreducible
+   \(S^{(m,m)}\) carrier, matching/noncrossing bracket bases, Catalan
+   dimension, and the unique Segre cubic relation at six points.  It also
+   warns that eight points have a skew-cubic singular-locus construction.
+2. Ben Howard, John Millson, Andrew Snowden, and Ravi Vakil,
+   *The ideal of relations for the ring of invariants of n points on the
+   line*, arXiv:0909.3230v1 --- **partial**, abstract, Introduction, and
+   Sections 1.2--1.5.  Cache key `arXiv:0909.3230`, SHA-256
+   `b9f4cf848b1f2add30cae35fc626cfea1581bb5ad76c608d76317905362f03a0`.
+   Used for Kempe generation, the graphical matching formalism, the
+   \(S^{(m,m)}\) description of degree one, and the theorem that the
+   non-six-point ideals are generated by simple quadrics inherited from
+   eight points.
+3. Valery Alexeev and David Swinarski, *Nef divisors on
+   \(\overline M_{0,n}\) from GIT*, arXiv:0812.0778v2 --- **partial**,
+   Introduction and Section 2 through the setup of Lemma 2.2.  Cache key
+   `arXiv:0812.0778`, SHA-256
+   `4cd66727a1d98c8361c40d977aa45bc14b17a224554f56eafe34a92c4b205f29`.
+   Used only for the general morphism from \(\overline M_{0,n}\) to point-
+   configuration GIT quotients and its contraction framework.  The exact
+   identification of C739's nonreduced Jacobian defect with the ten
+   contracted \(3|3\) images is not supplied there.
+4. Pavel Turek and Jialin Wang, *Symmetric powers of
+   \(S^{(n-1,1)}\) and \(D^{(n-1,1)}\)*, arXiv:2507.15505v1 ---
+   **partial**, abstract and Introduction through Theorem 1.3.  Cache key
+   `arXiv:2507.15505`, SHA-256
+   `7db1e118adb9b86f6823e9638cb204485a67f9af648e8ea24d4d153e51c9c456`.
+   This concerns modular symmetric powers and supplies a useful
+   characteristic-\(p\) caution, but it is not a predecessor for the exact
+   characteristic-zero first-occurrence corollary proved above.
+5. Ben Howard, John Millson, Andrew Snowden, and Ravi Vakil,
+   *A description of the outer automorphism of \(S_6\), and the invariants
+   of six points in projective space*, arXiv:0710.5916v1 --- **full text in
+   the inherited C715 audit**, especially Sections 1 and 2.1--2.4.  Cache key
+   `arXiv:0710.5916`, SHA-256
+   `d2da258cd8513a9b782a8270baa82acc51bc8d552e18db104967c2a08bffebfc`.
+   Used here only for the classical outer action and Joubert matching
+   coordinates already frozen by C715.
+
+### Verdict
+
+The general matching carrier is classical, not a C739 novelty: Kempe/HMSV
+already give bracket generators, the \(S^{(m,m)}\) degree-one module, its
+Catalan dimension, and the exceptional Segre cubic at six points.  The
+codimension calculation and the general Pfaffian expansion are elementary
+repackagings of that skeleton.  Schur averaging of a finite group orbit is
+also standard frame theory.
+
+The exact multiplicity-one statement
+\(\operatorname{Hom}_{S_{2m}}(\operatorname{Sym}^m A,S^{(m,m)})=k\) is a
+short Young-rule corollary in the task's affine formulation; this bounded
+sweep did not locate it stated verbatim, but no priority claim is licensed.
+Likewise, no consulted source combines the matching carrier with the Golden
+conference functional, identifies its six-sister orbit with the Joubert/
+syndrome/ETF simplex, proves the Möbius diagonal-congruence pole-descent
+obstruction, connects the nonreduced Jacobian scheme to the two boundary
+types, or places the order-eight Paley Hafnian orbit beside the HMSV skew
+cubic.  Those are the defensible task-owned *syntheses*.  Manuscript-safe
+wording should say “in the marked Golden construction” and “the bounded
+search did not locate,” never “new” or “first.”
+
+## 12. Placement recommendation
 
 No manuscript file was edited.  After C735 reopens placement, the recommended
 disposition is:
@@ -541,7 +1035,10 @@ disposition is:
 | result | placement |
 |---|---|
 | marked lift-rigidity theorem and universal even-order identity | theorem body, immediately after the operator propagation theorem |
+| universal (S^{(m,m)}) matching-covariant theorem and order-six hypersurface criterion | conceptual theorem body or a short standalone appendix; this is the deepest general explanation |
+| Pfaffian--Hafnian parity twin and 120-line order-eight Paley orbit | research sequel or C718 interface; do not place as a physical bosonic claim |
 | invariant/covariant multiplicity table | compact proof subsection or appendix |
+| pole-descent theorem and \(\overline M_{0,6}\) boundary unification | theorem body after the six-point quotient; it explains the C715 inverse fibre |
 | reconstruction table and portability criterion | main-text corollary |
 | collision filtration and nonreduced Jacobian scheme | appendix theorem; one schematic summary in the body |
 | canonical (S_6/F_{20}\cong X\times\mathcal T) return | main-text corollary in the (6\to10) section |
@@ -549,7 +1046,7 @@ disposition is:
 | detailed character, Singular, and finite-incidence certificates | evidence supplement |
 | chamber field, lattice repair, and categorical obstruction table | compressed discussion or deferred synthesis |
 
-## 12. Reproducibility and trust boundary
+## 13. Reproducibility and trust boundary
 
 The task-owned exact evidence is:
 
@@ -557,7 +1054,9 @@ The task-owned exact evidence is:
 - `notes/2026-07-31-c739-representation-audit-replay.py`, which independently
   constructs the six synthematic totals and enumerates all 720 permutations;
 - `notes/2026-07-31-c739-degeneracy-audit.sing` for the Jacobian and base
-  schemes; and
+  schemes;
+- `notes/2026-07-31-c739-order8-hafnian-audit.py` for the Paley matrix,
+  Hafnian quartic, stabilizer, orbit, and carrier-rank calculation; and
 - `notes/2026-07-31-c739-cycle-audit.py` and JSON certificate for the two
   six-set projections.
 
@@ -570,6 +1069,7 @@ From the repository root, replay with
 python3 notes/2026-07-31-c739-representation-audit.py --check
 python3 notes/2026-07-31-c739-representation-audit-replay.py
 nix shell nixpkgs#singular --command Singular -q notes/2026-07-31-c739-degeneracy-audit.sing
+python3 notes/2026-07-31-c739-order8-hafnian-audit.py
 python3 notes/2026-07-31-c739-cycle-audit.py --check
 ```
 
@@ -586,7 +1086,7 @@ The inherited C704, C715, C716, C720, C727, C728, and C729 reports remain the
 proof sources for their frozen identities.  This task makes no new priority
 claim and does not enlarge their literature audits.
 
-## 13. `ej` + `tt` closeout and Mystery ledger
+## 14. `ej` + `tt` closeout and Mystery ledger
 
 - **Settled by `ej`:** the middle-exterior and commutator-Pfaffian formulas
   are one universal even-order coefficient identity.  This sharply isolates
@@ -594,6 +1094,46 @@ claim and does not enlarge their literature audits.
 - **Settled by `ej`:** the 36 extremal cuts are not merely the same orbit as
   the outer involutions.  Their Sylow-(5) stabilizer gives a canonical
   product (X\times\mathcal T), closing the projective (36\to6) return.
+- **Settled by post-closeout `ej2`:** the Pfaffian/Joubert skew bundle
+  globalizes on the six-point quotient, whereas the fixed cross-golden
+  (3+3) block globalizes on the universal pole-marked
+  (M_{0,7}\to M_{0,6}).  The non-affine diagonal-congruence formula gives
+  the exact descent obstruction and identifies C715's free pole as structural
+  moduli data.
+- **Settled by post-closeout `ej2`:** the common parent of the unequal
+  degeneracy schemes is the 25-divisor boundary of
+  (overline M_{0,6}), split as (15\Delta_{2|4}+10\Delta_{3|3}), together
+  with its GIT contraction and critical Fitting structure.
+- **Settled by post-closeout `ej3`:** for every (2m), the unique first
+  degree-(m) covariant lands in the Temperley--Lieb/Schur--Weyl carrier
+  (S^{(m,m)}), and every commutator Pfaffian is a linear functional on this
+  universal matching covariant.  Order six is the unique nontrivial
+  hypersurface case and the unique case where the carrier becomes the signed
+  outer augmentation module.
+- **Settled by post-closeout `ej3`:** the order-ten universal carrier has
+  dimension 42, so the 36 extremal cuts cannot constitute a full next
+  matching-coordinate frame.  This gives a representation-theoretic
+  iteration obstruction independent of the redundancy-four calculation.
+- **Settled by the `tt` refinement of `ej3`:** every nonzero matching
+  functional has a tight full (S_{2m})-orbit.  The Golden orbit is a regular
+  simplex because it has the minimal size (d+1=6) in dimension five and is
+  two-transitive; higher-order orbit frames generally have multiple angles.
+- **Corrected by `tt` plus the literature sweep:** order six is uniquely the
+  nontrivial hypersurface and outer-simplex case, not the only exceptional
+  invariant-theory order.  HMSV's order-eight skew cubic and stable quadratic
+  relations are the proper next general comparison.
+- **Positioned by the literature sweep:** the matching/Specht/Catalan
+  skeleton is classical.  The conference-functional synchronization,
+  pole-descent obstruction, and boundary/Fitting identification are bounded
+  task syntheses with no priority claim.
+- **Settled by post-closeout `ej4`:** conference parity exchanges the
+  matching statistic.  The symmetric order-six conference matrix produces
+  the Pfaffian cubic, while the skew Paley matrix of order eight produces a
+  Hafnian quartic whose projective \(S_8\)-orbit is
+  \(S_8/PGL_2(7)\), with 120 lines spanning \(S^{(4,4)}\).
+- **Bounded by `ej4`:** the order-eight Hafnian is a coordinate functional,
+  not HMSV's skew cubic and not yet C718's physical three-boson permanent.
+  Their incidence is the next research question, not a proved identification.
 - **Settled by `tt`:** the uniqueness statement must name its target
   representation and equivalence relation.  In that category it is a
   multiplicity-one theorem; without them it is false or undefined.
@@ -608,11 +1148,14 @@ claim and does not enlarge their literature audits.
   implementation would improve trust, but the bounded result and stop
   condition are explicit.
 - **No genuine mathematical mystery remains in P1, P2, P3, P5, P6, P7, or
-  P8.**  P4's only open item is independent replication of its nonreduced
-  scheme structure, not identification of its support or components.
+  P8.**  P4's only evidence gap is independent replication of its nonreduced
+  scheme structure.  The geometric frontier is to extend the pole-marked MCM
+  pair over the proper universal stable curve with the correct boundary
+  twist and only then compute \(R\pi_*\); no finite-norm shortcut exists.
 
 **Vibe check:** strong positive.  The broad slogan survives in a precise
-category, the apparently Golden-only Pfaffian mechanism becomes a clean
-even-order theorem, and the previously open 36-to-six return closes
+category, the apparently Golden-only matching mechanism becomes a clean
+Pfaffian--Hafnian parity pair, and the previously open 36-to-six return closes
 canonically.  The main caution is equally useful: the degeneracies do not
-collapse to one scheme, and the Jacobian carries subtle nilpotent structure.
+collapse to one scheme, the Jacobian carries subtle nilpotent structure, and
+the order-eight Hafnian/skew-cubic incidence remains a genuine next problem.
