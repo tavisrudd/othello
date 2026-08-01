@@ -1107,11 +1107,93 @@ The conceptual ladder is therefore not merely “six, then eight”:
 | 6 | outer automorphism of (S_6) | six-line simplex and Segre hypersurface |
 | 8 | (A_8\cong PSL_4(2)) plus point--hyperplane duality | 120 anti-flags, four-angle tight frame, skew-cubic polar fixed points |
 
-The next genuinely geometric calculation is the divisor
-(M_8\cap V(Delta_{120})): its irreducible orbit types, boundary
-multiplicities, and relation, if any, to the Hessian/secant divisor.  The
-anti-flag theorem supplies the correct finite indexing before that
-scheme-theoretic attack.
+### Post-closeout `ej7`: the reduced divisor and its boundary excess
+
+The scheme-theoretic arrangement problem opened by `ej6` also has an exact
+answer.  For a Paley line \([h]\), put
+
+\[
+ D_h=M_8\cap V(h).
+\]
+
+The bracket pullback of a primitive representative is a multilinear quartic
+with twenty-eight nonzero coefficients, fourteen \(+1\) and fourteen
+\(-1\).  It is geometrically irreducible.  One conceptual proof uses the
+multigrading on \((\mathbf P^1)^8\): any factorization partitions the eight
+variable pairs among the factors.  Unique factorization then makes those
+supports a block system for the projective stabilizer \(PGL_2(7)\), contrary
+to its primitive (indeed sharply three-transitive) action.  An independent
+exact factorization over \(\mathbf Q\) confirms the conclusion.
+
+After fixing three ordered points to \(0,1,-1\), the quotient-chart equation
+is
+
+\[
+\begin{aligned}
+f={}&-x_3x_4x_5x_7+x_3x_5x_6x_7+x_3x_4x_5+x_3x_4x_6
+-2x_4x_5x_6\\
+&-x_3x_4x_7-x_3x_6x_7+x_4x_6x_7+x_5x_6x_7
++x_3x_5-x_3x_6+x_4x_7-x_5x_7.
+\end{aligned}
+\]
+
+Its Jacobian scheme has length six in the affine closure, but saturation by
+the full collision discriminant is the unit ideal.  Thus \(D_h\) is smooth
+over \(M_{0,8}\).  Since the Kempe embedding is nondegenerate and the Paley
+forms are 120 distinct projective lines, the restricted product is
+square-free:
+
+\[
+ \boxed{M_8\cap V(\Delta_{120})=\bigcup_{[h]}D_h}
+\]
+
+is a reduced Cartier divisor of class \(120H\), with exactly 120 geometrically
+prime components in one \(S_8\)-orbit, each occurring with multiplicity one.
+
+The compactified boundary calculation is especially rigid.  Let
+\(\rho:\overline M_{0,8}\to M_8\) be the equal-weight GIT contraction.  A
+single Paley form is nonzero generically on every \(2|6\) and \(3|5\)
+boundary divisor.  On the thirty-five \(4|4\) divisors, its values have
+distribution
+
+\[
+ 7\text{ positive},\qquad 7\text{ negative},\qquad 21\text{ zero}.
+\]
+
+Every zero is simple in a transverse stable degeneration.  Equivalently,
+each Paley hyperplane contains 21 of the thirty-five contracted \(4|4\) GIT
+points, while each such point lies on exactly 72 of the 120 hyperplanes (and
+misses 48).  Therefore
+
+\[
+ \rho^*\operatorname{div}(\Delta_{120}|_{M_8})
+ =\sum_{[h]}\widetilde D_h
+  +72\sum_{A|A^c,\ |A|=4}\delta_{A|A^c},
+\]
+
+with no \(2|6\) or \(3|5\) boundary component.  The coefficient 72 is both
+an exact orbit count \(120\cdot21/35\) and a direct transverse-order
+calculation.  There is finer structure one stratum down: for the representative
+triple collision \(x_0=x_1=x_2\), the restriction factors as
+
+\[
+ -(x_3-x_0)(x_5-x_0)(x_6-x_4)(x_7-x_0).
+\]
+
+Thus a fixed \(3|5\) stratum meets one component along three four-collision
+conditions and one outsider-pair collision, even though the \(3|5\) divisor
+itself is not a component.
+
+Finally, the proposed Hessian/secant comparison is a category mismatch at
+the divisor level.  Since \(M_8=\operatorname{Sing}(F)\), Euler's identity
+puts every point of \(M_8\) on the ambient Hessian determinant hypersurface;
+and tautologically \(M_8\subset\operatorname{Sec}(M_8)\).  Both ambient loci
+therefore restrict set-theoretically to all of \(M_8\), not to the Paley
+divisor.  Conversely the exact nonzero Hessian spectrum at every pole \([h]\)
+puts the 120 poles outside the Hessian hypersurface.  The arrangement is a
+polar-hyperplane construction, not a Hessian or secant restriction.  Any
+deeper comparison must use ambient incidence or normal-cone data rather than
+equality of divisor classes.
 
 This gives the deeper general-versus-exceptional split:
 
@@ -1339,7 +1421,10 @@ The task-owned exact evidence is:
 - `notes/2026-07-31-c739-order8-skew-cubic-audit.py` for the two Steiner
   systems, their 120-edge disjointness orbit, the normalized HMSV cubic,
   polar fixed-point identity, exact Hessian spectrum, distance-regular
-  \(PG(3,2)\) graph, and four-class anti-flag Gram scheme; and
+  \(PG(3,2)\) graph, and four-class anti-flag Gram scheme;
+- `notes/2026-07-31-c739-order8-arrangement-audit.py` and its Singular
+  companion for the 120-component divisor, boundary incidences and
+  multiplicities, irreducibility, and interior smoothness; and
 - `notes/2026-07-31-c739-cycle-audit.py` and JSON certificate for the two
   six-set projections.
 
@@ -1354,6 +1439,8 @@ python3 notes/2026-07-31-c739-representation-audit-replay.py
 nix shell nixpkgs#singular --command Singular -q notes/2026-07-31-c739-degeneracy-audit.sing
 python3 notes/2026-07-31-c739-order8-hafnian-audit.py
 python3 notes/2026-07-31-c739-order8-skew-cubic-audit.py
+python3 notes/2026-07-31-c739-order8-arrangement-audit.py
+nix shell nixpkgs#singular --command Singular -q notes/2026-07-31-c739-order8-arrangement-audit.sing
 python3 notes/2026-07-31-c739-cycle-audit.py --check
 ```
 
@@ -1436,10 +1523,16 @@ claim and does not enlarge their literature audits.
   \(A_8\cong PSL_4(2)\); disjoint pairs are its 120 anti-flags.  Their four
   absolute Gram angles \(1/14,1/7,2/7,4/7\) are exactly the four anti-flag
   relations, with valencies \(56,21,28,14\).
-- **Opened precisely by `ej6`:** the product of the 120 polar forms is an
-  \(S_8\)-invariant degree-120 arrangement equation \(\Delta_{120}\).  Its
-  scheme-theoretic intersection with \(M_8\), especially its relation to the
-  Hessian/secant divisor, is the next level rather than a vague iteration.
+- **Settled by post-closeout `ej7`:** the restriction of \(\Delta_{120}\) to
+  \(M_8\) is a reduced class-\(120H\) divisor with 120 geometrically prime
+  components in one \(S_8\)-orbit, and each component is smooth over
+  \(M_{0,8}\).  On \(\overline M_{0,8}\) it acquires no \(2|6\) or \(3|5\)
+  boundary component and multiplicity 72 on every one of the thirty-five
+  contracted \(4|4\) divisors.
+- **Corrected by `ej7`:** the Hessian and secant loci already contain all of
+  \(M_8\), while the Paley poles have nonsingular Hessian.  Hence the
+  arrangement is not their divisor restriction; a further comparison must
+  be ambient or normal-conical.
 - **Settled by `tt`:** the uniqueness statement must name its target
   representation and equivalence relation.  In that category it is a
   multiplicity-one theorem; without them it is false or undefined.

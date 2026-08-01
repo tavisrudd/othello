@@ -188,9 +188,14 @@ particular:
   \(PG(3,2)\) under \(A_8\cong PSL_4(2)\); the 120 polar lines are its
   anti-flags, and their four Gram angles are exactly the four anti-flag
   relations.  Their product is an \(S_8\)-invariant degree-120 arrangement
-  form \(\Delta_{120}\).  The remaining order-eight gate is the
-  scheme-theoretic divisor \(M_8\cap V(\Delta_{120})\), especially its
-  relation to the Hessian/secant divisor.  The next pole-marked geometric gate
+  form \(\Delta_{120}\).  C739's `ej7` continuation closes that divisor gate:
+  its restriction to \(M_8\) is reduced of class \(120H\), with 120
+  geometrically prime components in one orbit, each smooth on \(M_{0,8}\).
+  Pullback to \(\overline M_{0,8}\) has boundary multiplicity zero on
+  \(2|6\) and \(3|5\) and multiplicity 72 on every contracted \(4|4\)
+  divisor.  This is not a Hessian/secant restriction: both ambient loci
+  already contain all of \(M_8\), whereas the Paley poles have nonsingular
+  Hessian.  The next pole-marked geometric gate
   is to compactify the pole-marked MCM pair over
   \(\overline M_{0,7}\to\overline M_{0,6}\) with its boundary twist before
   computing any derived pushforward.  The exact report and evidence bundle are
