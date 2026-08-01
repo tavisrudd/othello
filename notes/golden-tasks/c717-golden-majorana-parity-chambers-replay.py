@@ -259,26 +259,31 @@ def main():
     assert len({act(base, permutation) for permutation in permutations}) == 720
     seed_data = []
     stabilizers = []
-    for seed in sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex))):
+    seed_point_orbits = []
+    neighbor_seeds = sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))
+    for seed in neighbor_seeds:
         stabilizer = tuple(permutation for permutation in permutations if act(seed, permutation) == seed)
         orbit = {act(seed, permutation) for permutation in permutations}
         assert {act(base, permutation) for permutation in stabilizer} == neighbors[seed]
         unused = set(range(6))
         point_orbit_sizes = []
+        point_orbits = []
         while unused:
             start = min(unused)
             point_orbit = {permutation[start] for permutation in stabilizer}
             point_orbit_sizes.append(len(point_orbit))
+            point_orbits.append(tuple(sorted(point_orbit)))
             unused -= point_orbit
         seed_data.append((len(orbit), len(stabilizer), tuple(sorted(point_orbit_sizes))))
         stabilizers.append(stabilizer)
+        seed_point_orbits.append(tuple(point_orbits))
     assert seed_data == [(60, 12, (1, 2, 3)), (60, 12, (1, 2, 3)), (20, 36, (3, 3))]
     balanced_orbits = [
         {act(seed, permutation) for permutation in permutations}
-        for seed in sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))
+        for seed in neighbor_seeds
     ]
     assert not (balanced_orbits[0] & balanced_orbits[1])
-    assert antipode(sorted(neighbors[base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))[0]) in balanced_orbits[1]
+    assert antipode(neighbor_seeds[0]) in balanced_orbits[1]
 
     def compose(left, right):
         return tuple(left[right[index]] for index in range(6))
@@ -363,6 +368,59 @@ def main():
     for factor in ((-4, 1), (432, -60, 1), (48, -20, 1)):
         standard_block = multiply_polynomials(standard_block, factor)
     assert tuple(standard_moments) == power_sums(standard_block, 6)
+
+    partition_maps = []
+    for seed, base_blocks in zip(neighbor_seeds, seed_point_orbits):
+        partition_map = {}
+        for permutation in permutations:
+            vertex = act(seed, permutation)
+            blocks = tuple(
+                tuple(sorted(permutation[label] for label in block)) for block in base_blocks
+            )
+            assert vertex not in partition_map or partition_map[vertex] == blocks
+            partition_map[vertex] = blocks
+        partition_maps.append(partition_map)
+    standard_features = []
+    for orbit, blocks, partition_map in zip(balanced_orbits, seed_point_orbits, partition_maps):
+        chosen = (
+            tuple(index for index, block in enumerate(blocks) if len(block) in (1, 2))
+            if len(orbit) == 60
+            else (0,)
+        )
+        for block_index in chosen:
+            block_size = len(blocks[block_index])
+            standard_features.append(
+                tuple(
+                    6 * int(0 in partition_map[vertex][block_index]) - block_size
+                    if vertex in orbit
+                    else 0
+                    for vertex in balanced
+                )
+            )
+    expected_standard_matrix = (
+        (12, 0, 6, -4, 8),
+        (0, 12, 0, 8, -4),
+        (8, 0, 12, 0, 4),
+        (-4, 6, 0, 12, -8),
+        (24, -12, 12, -24, 36),
+    )
+    expected_antipode_matrix = (
+        (0, 0, 0, 1, 0),
+        (0, 0, 1, 0, 0),
+        (0, 1, 0, 0, 0),
+        (1, 0, 0, 0, 0),
+        (0, 0, 0, 0, -1),
+    )
+    for column, feature in enumerate(standard_features):
+        assert gram_times(feature) == tuple(
+            sum(standard_features[row][entry] * expected_standard_matrix[row][column] for row in range(5))
+            for entry in range(140)
+        )
+        antipode_feature = tuple(feature[balanced_index[antipode(vertex)]] for vertex in balanced)
+        assert antipode_feature == tuple(
+            sum(standard_features[row][entry] * expected_antipode_matrix[row][column] for row in range(5))
+            for entry in range(140)
+        )
     certificate_factors = tuple(
         (tuple(item["coefficients"]), item["exponent"])
         for item in data["balanced_incidence_spectrum"]["characteristic_factors_ascending"]
@@ -372,6 +430,12 @@ def main():
     assert tuple(
         data["balanced_incidence_spectrum"]["specht_block_characteristic_polynomials_ascending"]["(5,1)"]
     ) == standard_block
+    assert data["balanced_incidence_spectrum"]["standard_antipode_even_matrix"] == [[8, 6], [8, 12]]
+    assert data["balanced_incidence_spectrum"]["standard_antipode_odd_matrix"] == [
+        [16, -6, 8],
+        [-8, 12, -4],
+        [48, -24, 36],
+    ]
 
     # A second direct implementation checks all 64 Boolean controls and ranks.
     boolean = Counter()
@@ -400,7 +464,7 @@ def main():
         assert sum(entry**3 for entry in amplitudes) == 0
         checked += 1
     assert checked == 3125
-    print("replayed 860 chambers, exact labeled Specht spectrum, 64 Boolean controls, and 3125 identity points")
+    print("replayed 860 chambers, antipodal sqrt(13) mechanism, 64 Boolean controls, and 3125 identity points")
 
 
 if __name__ == "__main__":

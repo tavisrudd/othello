@@ -223,6 +223,29 @@ def matrix_rank(matrix):
     return rank
 
 
+def solve_square(left, right):
+    size = len(left)
+    columns = len(right[0])
+    work = [
+        [Fraction(value) for value in left[row]]
+        + [Fraction(value) for value in right[row]]
+        for row in range(size)
+    ]
+    for column in range(size):
+        pivot = next(row for row in range(column, size) if work[row][column])
+        work[column], work[pivot] = work[pivot], work[column]
+        scale = work[column][column]
+        work[column] = [value / scale for value in work[column]]
+        for row in range(size):
+            if row != column and work[row][column]:
+                scale = work[row][column]
+                work[row] = [
+                    value - scale * pivot_value
+                    for value, pivot_value in zip(work[row], work[column])
+                ]
+    return tuple(tuple(work[row][size + column] for column in range(columns)) for row in range(size))
+
+
 def commutator(matrix, point):
     return tuple(
         tuple((point[i] - point[j]) * matrix[i][j] for j in range(6))
@@ -476,6 +499,7 @@ def build():
     neighbor_seeds = sorted(neighbors[unbalanced_base], key=lambda vertex: (len(neighbors[vertex]), repr(vertex)))
     coset_orbits = []
     balanced_orbits = []
+    seed_point_orbits = []
     stabilizers = []
     for seed in neighbor_seeds:
         stabilizer = tuple(
@@ -492,6 +516,7 @@ def build():
             point_orbit = {permutation[start] for permutation in stabilizer}
             point_orbits.append(tuple(sorted(point_orbit)))
             unused -= point_orbit
+        seed_point_orbits.append(tuple(point_orbits))
         cycle_types = Counter(cycle_type(permutation) for permutation in stabilizer)
         coset_orbits.append(
             {
@@ -605,6 +630,98 @@ def build():
         standard_moments,
         root_power_sums(standard_block, 6),
     )
+
+    partition_maps = []
+    for seed, base_blocks in zip(neighbor_seeds, seed_point_orbits):
+        partition_map = {}
+        for permutation in permutations:
+            vertex = act(seed, permutation)
+            blocks = tuple(
+                tuple(sorted(permutation[label] for label in block)) for block in base_blocks
+            )
+            assert vertex not in partition_map or partition_map[vertex] == blocks
+            partition_map[vertex] = blocks
+        partition_maps.append(partition_map)
+    standard_feature_labels = []
+    standard_features = []
+    for orbit_index, (orbit, blocks, partition_map) in enumerate(
+        zip(balanced_orbits, seed_point_orbits, partition_maps)
+    ):
+        chosen_blocks = (
+            tuple(index for index, block in enumerate(blocks) if len(block) in (1, 2))
+            if len(orbit) == 60
+            else (0,)
+        )
+        for block_index in chosen_blocks:
+            block_size = len(blocks[block_index])
+            standard_feature_labels.append(f"orbit_{orbit_index}_block_{block_size}")
+            standard_features.append(
+                [
+                    6 * int(0 in partition_map[vertex][block_index]) - block_size
+                    if vertex in orbit
+                    else 0
+                    for vertex in balanced_vertices
+                ]
+            )
+    assert len(standard_features) == 5
+    feature_gram = [
+        [sum(a * b for a, b in zip(left, right)) for right in standard_features]
+        for left in standard_features
+    ]
+    image_features = [gram_multiply(feature) for feature in standard_features]
+    compressed_pairing = [
+        [sum(a * b for a, b in zip(left, right)) for right in image_features]
+        for left in standard_features
+    ]
+    standard_multiplicity_matrix = solve_square(feature_gram, compressed_pairing)
+    for column, image_feature in enumerate(image_features):
+        reconstructed = [
+            sum(standard_features[row][entry] * standard_multiplicity_matrix[row][column] for row in range(5))
+            for entry in range(140)
+        ]
+        assert reconstructed == image_feature
+    antipode_features = [
+        [feature[balanced_index[antipode(vertex)]] for vertex in balanced_vertices]
+        for feature in standard_features
+    ]
+    antipode_pairing = [
+        [sum(a * b for a, b in zip(left, right)) for right in antipode_features]
+        for left in standard_features
+    ]
+    standard_antipode_matrix = solve_square(feature_gram, antipode_pairing)
+    def small_product(left, right):
+        return tuple(
+            tuple(sum(left[i][k] * right[k][j] for k in range(5)) for j in range(5))
+            for i in range(5)
+        )
+
+    assert small_product(standard_antipode_matrix, standard_antipode_matrix) == tuple(
+        tuple(int(i == j) for j in range(5)) for i in range(5)
+    )
+    assert small_product(standard_antipode_matrix, standard_multiplicity_matrix) == small_product(
+        standard_multiplicity_matrix, standard_antipode_matrix
+    )
+    assert standard_multiplicity_matrix == (
+        (12, 0, 6, -4, 8),
+        (0, 12, 0, 8, -4),
+        (8, 0, 12, 0, 4),
+        (-4, 6, 0, 12, -8),
+        (24, -12, 12, -24, 36),
+    )
+    assert standard_antipode_matrix == (
+        (0, 0, 0, 1, 0),
+        (0, 0, 1, 0, 0),
+        (0, 1, 0, 0, 0),
+        (1, 0, 0, 0, 0),
+        (0, 0, 0, 0, -1),
+    )
+    antipode_even_matrix = ((8, 6), (8, 12))
+    antipode_odd_matrix = ((16, -6, 8), (-8, 12, -4), (48, -24, 36))
+    odd_dark_vector = (5, 2, -6)
+    assert tuple(
+        sum(antipode_odd_matrix[row][column] * odd_dark_vector[column] for column in range(3))
+        for row in range(3)
+    ) == tuple(4 * value for value in odd_dark_vector)
 
     boolean = Counter()
     boolean_examples = {}
@@ -738,6 +855,17 @@ def build():
                 "(3,2,1)": coefficient_polynomial_multiply((-14, 1), (-10, 1)),
             },
             "standard_block_verification": "exact S^(5,1) central-character moments through degree five",
+            "standard_multiplicity_basis": standard_feature_labels,
+            "standard_multiplicity_matrix": [
+                [str(value) for value in row] for row in standard_multiplicity_matrix
+            ],
+            "standard_antipode_matrix": [
+                [str(value) for value in row] for row in standard_antipode_matrix
+            ],
+            "standard_antipode_even_matrix": antipode_even_matrix,
+            "standard_antipode_odd_matrix": antipode_odd_matrix,
+            "standard_antipode_odd_eigenvalue_4_vector": odd_dark_vector,
+            "sqrt13_mechanism": "the odd block modulo its eigenvalue-4 line has spectrum exactly three times the even block spectrum",
         },
         "boolean_census": [
             {

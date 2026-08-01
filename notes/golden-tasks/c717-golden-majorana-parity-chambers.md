@@ -72,6 +72,11 @@ relation, and the full spectrum reduces to the six Specht multiplicity
 spaces recorded in the report and certificate.  Exact central-character
 moments label every block, including the otherwise ambiguous
 \(S^{(5,1)}\) and \(S^{(3,3)}\) factors.
+On the standard block, the antipode gives a canonical \(2+3\) splitting.
+The even block has characteristic polynomial \(X^2-20X+48\); the odd block
+has an eigenvalue-four dark line, and its quotient spectrum is exactly three
+times the even spectrum.  This explains the shared splitting field
+\(\mathbf Q(\sqrt {13})\) by the marked coset-intersection operator.
 
 Exactly one, two, four, or six Hamiltonians can close simultaneously.  The
 common six-wall locus is the fifteen-line unstable base scheme; its generic

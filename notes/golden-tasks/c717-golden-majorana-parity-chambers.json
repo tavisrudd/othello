@@ -150,7 +150,121 @@
       "(5,1)": 5,
       "(6)": 3
     },
+    "sqrt13_mechanism": "the odd block modulo its eigenvalue-4 line has spectrum exactly three times the even block spectrum",
+    "standard_antipode_even_matrix": [
+      [
+        8,
+        6
+      ],
+      [
+        8,
+        12
+      ]
+    ],
+    "standard_antipode_matrix": [
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "-1"
+      ]
+    ],
+    "standard_antipode_odd_eigenvalue_4_vector": [
+      5,
+      2,
+      -6
+    ],
+    "standard_antipode_odd_matrix": [
+      [
+        16,
+        -6,
+        8
+      ],
+      [
+        -8,
+        12,
+        -4
+      ],
+      [
+        48,
+        -24,
+        36
+      ]
+    ],
     "standard_block_verification": "exact S^(5,1) central-character moments through degree five",
+    "standard_multiplicity_basis": [
+      "orbit_0_block_2",
+      "orbit_0_block_1",
+      "orbit_1_block_1",
+      "orbit_1_block_2",
+      "orbit_2_block_3"
+    ],
+    "standard_multiplicity_matrix": [
+      [
+        "12",
+        "0",
+        "6",
+        "-4",
+        "8"
+      ],
+      [
+        "0",
+        "12",
+        "0",
+        "8",
+        "-4"
+      ],
+      [
+        "8",
+        "0",
+        "12",
+        "0",
+        "4"
+      ],
+      [
+        "-4",
+        "6",
+        "0",
+        "12",
+        "-8"
+      ],
+      [
+        "24",
+        "-12",
+        "12",
+        "-24",
+        "36"
+      ]
+    ],
     "verification": "exact squarefree annihilator plus 13 full-rank trace moments",
     "young_permutation_module": "M^(3,3) + 2 M^(3,2,1)"
   },

@@ -182,7 +182,12 @@ particular:
   Specht-factorized spectrum is frozen in the C717 certificate.  An exact
   standard-character projection labels the last equal-dimensional
   ambiguity: \(S^{(5,1)}\) carries the eigenvalue four and both quadratic
-  packets, while \(S^{(3,3)}\) carries \(40,12,8\).
+  packets, while \(S^{(3,3)}\) carries \(40,12,8\).  The standard block's
+  antipode-even \(2\times2\) intersection operator has discriminant
+  \(16\cdot13\); its odd block has one eigenvalue-four dark line and a
+  residual packet exactly three times the even packet.  Hence
+  \(\mathbf Q(\sqrt {13})\) is an explained coset-spectral field, distinct
+  from the Golden coefficient field \(\mathbf Q(\sqrt5)\).
   Simultaneous closing multiplicities are
   exactly one, two, four, or six; the common six-wall locus is the reduced
   fifteen-line unstable base scheme, with generic rank four and the six

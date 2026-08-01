@@ -442,6 +442,68 @@ The assignment is not recoverable from eigenvalue size: unexpectedly the
 standard block \(S^{(5,1)}\) contains the eigenvalue four and both quadratic
 Galois packets, whereas the three-dimensional multiplicity block for
 \(S^{(3,3)}\) contains the three integral eigenvalues \(40,12,8\).
+
+The quadratic field has a direct coset-intersection explanation.  Fix one
+source label.  On each \(3+2+1\) orbit let \(e_{j,s}\) be the centered
+membership function \(6{\bf1}_{\{0\in B_s\}}-s\) for its block of size
+\(s=1,2\), extended by zero to the other orbits; let \(e_H\) be the analogous
+function for one distinguished block of the \(3+3\) orbit.  In the basis
+
+\[
+ (e_{0,2},e_{0,1},e_{1,1},e_{1,2},e_H)
+\]
+
+the standard multiplicity operator is the exact integer matrix
+
+\[
+ Q_{(5,1)}=
+ \begin{pmatrix}
+ 12&0&6&-4&8\\
+ 0&12&0&8&-4\\
+ 8&0&12&0&4\\
+ -4&6&0&12&-8\\
+ 24&-12&12&-24&36
+ \end{pmatrix}.
+\]
+
+The antipode exchanges \(e_{0,2}\leftrightarrow e_{1,2}\) and
+\(e_{0,1}\leftrightarrow e_{1,1}\), while sending \(e_H\mapsto-e_H\).
+Since it commutes with \(Q\), the standard multiplicity space splits
+canonically into even and odd parts.  In the corresponding bases the two
+blocks are
+
+\[
+ Q^+=\begin{pmatrix}8&6\\8&12\end{pmatrix},\qquad
+ Q^-=\begin{pmatrix}16&-6&8\\-8&12&-4\\48&-24&36\end{pmatrix}.
+\]
+
+Now
+
+\[
+ \chi_{Q^+}(X)=X^2-20X+48,
+ \qquad \operatorname {disc}\chi_{Q^+}=16\cdot13.
+\]
+
+The odd block has the rational eigenline
+\(5(e_{0,2}-e_{1,2})+2(e_{0,1}-e_{1,1})-6e_H\), with eigenvalue four, and
+
+\[
+ \chi_{Q^-}(X)=(X-4)(X^2-60X+432).
+\]
+
+After quotienting by that dark line, the odd spectrum is exactly three
+times the even spectrum:
+
+\[
+ 30\pm6\sqrt {13}=3(10\pm2\sqrt {13}).
+\]
+
+Thus \(\sqrt {13}\) is not a second coefficient field of the Golden
+Hamiltonians.  It is the splitting field of the antipode-even
+double-coset intersection operator.  The factor three is also the
+stabilizer-order ratio \(|H|/|K_\pm|=36/12\).  The field and its repeated
+packet are therefore consequences of the marked subgroup triple together
+with antipodal symmetry, rather than unexplained numerical coincidences.
 In particular \(Q\) has rank 138.  If
 \({\bf1}_H,{\bf1}_{K_+},{\bf1}_{K_-}\) denote the three orbitwise constant
 vectors, then
@@ -581,6 +643,10 @@ factor multiplicities from thirteen full-rank trace moments.  A separate
 central-idempotent computation using the standard character
 \(\chi^{(5,1)}(g)=|\operatorname {Fix}(g)|-1\) verifies its five power
 moments and thereby labels the last two equal-dimensional Specht blocks.
+The generator then constructs the five centered block-membership functions,
+checks the displayed integer multiplicity and antipode matrices entry by
+entry, and verifies the even/odd decomposition.  The replay reconstructs
+the subgroup point orbits independently and repeats those checks.
 The irreducibility, intersection multiplicity rule, connectedness lemma, and
 topological obstruction are human arguments above; they are not inferred
 from finite sampling.
@@ -617,6 +683,14 @@ rules out the tempting but false assignment of the largest integral
 eigenvalue to the standard representation; central characters, not spectral
 size, provide the canonical labels.
 
+The deeper follow-up explains the shared \(\sqrt {13}\).  Antipodal parity
+reduces the standard block to a two-dimensional even intersection operator
+with discriminant \(16\cdot13\), plus a three-dimensional odd operator with
+one rational dark line.  The residual odd packet is exactly three times the
+even packet.  This separates the original Golden coefficient field
+\(\mathbf Q(\sqrt5)\) from a new but fully explained spectral splitting
+field \(\mathbf Q(\sqrt {13})\).
+
 ## Mystery ledger
 
 - **Settled:** 860 connected real cube chambers, with 50 sign vectors and
@@ -639,6 +713,11 @@ size, provide the canonical labels.
   Gram spectrum is assigned to its exact Specht multiplicity block.  The
   only dimension-based ambiguity, between \(S^{(5,1)}\) and \(S^{(3,3)}\),
   is resolved by five exact standard-character moments.
+- **Settled by the deeper arithmetic pass:** the two \(\sqrt {13}\) packets
+  come from the antipode-even \(2\times2\) double-coset intersection block;
+  after removing the odd eigenvalue-four dark line, the odd packet is its
+  exact threefold spectral copy.  The shared discriminant is therefore
+  structural, not accidental.
 - **Generalized:** the exclusion of singleton signs holds for every real
   system with vanishing first and third moments, and every sign pattern with
   at least two entries of each sign is realizable.  Only the finer coset
