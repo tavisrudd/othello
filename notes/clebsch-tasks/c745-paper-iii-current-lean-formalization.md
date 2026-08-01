@@ -2,7 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** in progress; existing formal closure audited, structural modules next
+**Status:** complete; Paper-III-only structural gate, exact axiom audit,
+five-row partial-coverage map, paper-local replay, clean-worktree validation,
+and standalone synchronization green
 
 ## Objective
 
