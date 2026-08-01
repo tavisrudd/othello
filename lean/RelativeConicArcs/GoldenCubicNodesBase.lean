@@ -1,4 +1,5 @@
 import Mathlib.Tactic
+import RelativeConicArcs.ClebschGoldenConference
 
 /-!
 # Centered Golden cubic gradient
@@ -10,6 +11,8 @@ five displayed coordinates.
 -/
 
 namespace RelativeConicArcs.GoldenCubicNodesBase
+
+open ClebschGoldenConference
 
 /-- The five-coordinate representative of the centered vector \(1 - 6 e_i\).
 For \(i = 5\), the omitted sixth coordinate is \(-5\), so all five displayed
@@ -40,6 +43,19 @@ def gradient {R : Type*} [CommRing R] (x : Fin 5 → R) : Fin 5 → R :=
 gradient by Euler's degree-three identity. -/
 def cubic {K : Type*} [Field K] (x : Fin 5 → K) : K :=
   (1 / 3) * ∑ i, x i * gradient x i
+
+/-- The six-coordinate centered lift whose coordinates sum to zero. -/
+def centeredLift {R : Type*} [CommRing R] (x : Fin 5 → R) : Fin 6 → R :=
+  ![x 0, x 1, x 2, x 3, x 4, -(x 0+x 1+x 2+x 3+x 4)]
+
+/-- The Euler-reconstructed cubic is exactly the oriented triangle cubic of
+the fixed Golden conference matrix on the centered lift. -/
+theorem cubic_eq_conference_triangleCubic (x : Fin 5 → ℚ) :
+    cubic x =
+      triangleCubic (conferenceMatrixOver ℚ) (centeredLift x) := by
+  simp [cubic, gradient, centeredLift, triangleCubic, cubicTerm, triangleSign,
+    conferenceMatrixOver, conferenceMatrix, Fin.sum_univ_succ]
+  ring
 
 /-- The Golden cubic restricted to one coordinate line, as a univariate
 polynomial over the rationals. -/
