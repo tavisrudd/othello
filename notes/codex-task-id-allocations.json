@@ -1871,8 +1871,17 @@
       "last": 741,
       "purpose": "decide residual LP(333) multiplier IDs 4 and 5 by paired exact 37-compression or joint-lift analysis",
       "sequence": 208
+    },
+    {
+      "count": 1,
+      "first": 742,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 742,
+      "purpose": "unmarked Golden reconstruction and global degeneracy complex",
+      "sequence": 209
     }
   ],
-  "next_id": 742,
+  "next_id": 743,
   "schema": "codex-task-id-allocations-v1"
 }
