@@ -24,6 +24,20 @@ def Invariant (κ : R ≃+* R) := {x : R // κ x = x}
 /-- The elements negated by a ring automorphism. -/
 def AntiInvariant (κ : R ≃+* R) := {x : R // κ x = -x}
 
+/-- The product of two anti-invariant elements is invariant.  This is the
+intrinsic multiplication law behind a quadratic cover. -/
+theorem mul_invariant_of_antiInvariant (κ : R ≃+* R) {x y : R}
+    (hx : κ x = -x) (hy : κ y = -y) :
+    κ (x * y) = x * y := by
+  rw [map_mul, hx, hy]
+  ring
+
+/-- In particular, the square of an odd generator is the invariant branch
+parameter. -/
+theorem square_invariant_of_antiInvariant (κ : R ≃+* R) {c : R}
+    (hc : κ c = -c) : κ (c ^ 2) = c ^ 2 := by
+  simpa [pow_two] using mul_invariant_of_antiInvariant κ hc hc
+
 variable (κ : R ≃+* R) (hκ : Function.Involutive κ)
 
 /-- Averaging an element with its image under the involution gives its even
