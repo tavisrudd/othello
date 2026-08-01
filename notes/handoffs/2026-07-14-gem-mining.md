@@ -21,6 +21,11 @@ reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
 of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167), even when they
 cite a gem result.
 
+**C760 additionally owns** `notes/2026-08-01-c760-ten-proofs-method-spike.md` and any narrowly
+named replay/certificate files created by that spike. It is a provisional method-transplant task;
+successful mathematics still promotes through the owning manuscript lane after the user-launched
+independent vet.
+
 **Gap-mining output is contained to this lane.** Everything the gap mine produces — cells, causes,
 ledger rows, discovery-track entries, method findings — lives in this lane's docs and nowhere else.
 Do not route it into another lane's handoff, and keep it out of the global queue beyond the bare
@@ -266,7 +271,7 @@ the two BSW originals remain unread.
 
 ## Queued work
 
-C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736, C737, C738, C740, and C741 are this lane's; C178, C190, C736, C738, and C740 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
+C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736, C737, C738, C740, C741, and C760 are this lane's; C178, C190, C736, C738, and C740 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
 of the same sweep. Rationale, search directions, and what was deliberately left unqueued:
 [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md). **Only C153 and the running
 external-source gates can cost the current novelty posture; the rigidity/gap checks are complete.

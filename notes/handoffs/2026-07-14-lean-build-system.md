@@ -131,6 +131,13 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
     Audit and implementation plan:
     [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md).
 
+11. **C759 generated external trust exports:** render a `formalization.yaml`-compatible manifest,
+    portfolio headline-results table, and machine-readable theorem list from C326/C681 facts rather
+    than introducing a second authority. Deterministic generation and stale-edit rejection are the
+    main gate. After the Lean 4.32 final-version gate, disposition one disposable Nanoda pilot;
+    do not commit sorried challenge modules or infer a portfolio Comparator rollout. Contract:
+    [`../build-sys-tasks/c759-external-trust-exports.md`](../build-sys-tasks/c759-external-trust-exports.md).
+
 ### C685--C687 operator progression
 
 1. **C685 complete.** The statement map is settled:

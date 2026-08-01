@@ -44,6 +44,7 @@ ordering and detail.
 - **C700 `[build-sys]` [QUEUED AFTER C699; INDEPENDENT OF C698 MATHEMATICALLY]** — formalize Segre's Lemma of Tangents, the q13 conic/passant incidence definitions, the weight-eight reduction, and narrow certificate predicates in `finitegeom` without importing exhaustive q13 data → `notes/build-sys-tasks/c700-q13-segre-foundation.md`.
 - **C701 `[build-sys]` [QUEUED AFTER C700]** — create the one-way downstream Clebsch q13 certificate package and certify the `[78,36,12]` code, 364 minimum words in four orbits, reconstruction, and automorphism group with sharded proved checkers rather than raw exhaustive Lean enumeration → `notes/build-sys-tasks/c701-q13-tangent-code-certificates.md`.
 - **C702 `[build-sys]` [QUEUED AFTER C699 AND C701]** — assemble the new Paper I v2 trust gate from human, q11, and q13 terminals; align all dependency pins, manifests, axiom audits, regeneration and clean-replay evidence; then refresh the standalone paper's formal pin while preserving v1 → `notes/build-sys-tasks/c702-paper-i-v2-formal-release.md`.
+- **C759 `[build-sys]` [QUEUED; EXTERNAL TRUST EXPORTS, THEN GATED SECOND-KERNEL PILOT]** — generate external manifest and headline-theorem views from the existing trust spine, then disposition one disposable Nanoda pilot without weakening the no-`sorry` boundary → `notes/build-sys-tasks/c759-external-trust-exports.md`.
 ### `cap`
 
 Rows are ordered by expected value toward the odd-q all-P crown; the cap handoff's Near-Term Queue is
@@ -157,6 +158,8 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C193 `[gem-mining]` [OPEN ILL GATE]** — obtain/read the remaining BSW source.
 - **C737 `[gem-mining]` [QUEUED; INDEPENDENT]** — attack the exact equiangular-line maximum `M(18) in {57,58,59}` through a complete feasible Seidel-spectrum census, Jacobi/interlacing and lattice filters, and independently checkable certificates for terminal graph nonexistence claims → `notes/2026-07-31-c737-equiangular-lines-r18.md`.
 - **C741 `[gem-mining]` [IN PROGRESS; 108 EXACT LIFT REPRESENTATIVES REMAIN]** — decide residual fixed common-multiplier LP(333) IDs 4 and 5; both separate 9- and 37-compressions are exactly feasible, the complete 9-compression lift frontier is 648 normalized pairs and 108 affine/decimation/swap representatives, and the compression recovers the unique minus among fixed positions `{0,111,222}` modulo 6, splitting the frontier into 36 same-point and 72 different-point cases; finish with selector-aware proof-carrying exact lifts or a mixed-character obstruction, without overclaiming unrestricted Hadamard order 668 → `notes/2026-07-31-c741-hadamard-668-ids4-5.md`.
+
+- **C760 `[gem-mining]` [QUEUED]** — bounded transplant spike for Ten Proofs moving-projection/Gram bounds, polynomial-moment reconstruction, and any other hypothesis-level method that maps to a named current frontier → `notes/2026-08-01-c760-ten-proofs-method-spike.md`.
 
 ### `gateway`
 
