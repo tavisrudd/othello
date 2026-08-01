@@ -578,6 +578,34 @@ def build():
     assert tuple(traces) == expected_traces
     assert sum((len(factor) - 1) * exponent for factor, exponent in GRAM_FACTORS) == 140
 
+    balanced_index = {vertex: index for index, vertex in enumerate(balanced_vertices)}
+    action_maps = [
+        tuple(balanced_index[act(vertex, permutation)] for vertex in balanced_vertices)
+        for permutation in permutations
+    ]
+    standard_moments = []
+    power_columns = [
+        [int(row == column) for row in range(140)] for column in range(140)
+    ]
+    for power in range(6):
+        character_sum = 0
+        for permutation, action_map in zip(permutations, action_maps):
+            standard_character = sum(permutation[index] == index for index in range(6)) - 1
+            character_sum += standard_character * sum(
+                power_columns[column][action_map[column]] for column in range(140)
+            )
+        assert character_sum % 720 == 0
+        standard_moments.append(character_sum // 720)
+        if power < 5:
+            power_columns = [gram_multiply(column) for column in power_columns]
+    standard_block = (1,)
+    for factor in ((-4, 1), (432, -60, 1), (48, -20, 1)):
+        standard_block = coefficient_polynomial_multiply(standard_block, factor)
+    assert tuple(standard_moments) == root_power_sums(standard_block, 6), (
+        standard_moments,
+        root_power_sums(standard_block, 6),
+    )
+
     boolean = Counter()
     boolean_examples = {}
     for point in itertools.product((-1, 1), repeat=6):
@@ -697,6 +725,19 @@ def build():
                 "(3,3)": 3,
                 "(3,2,1)": 2,
             },
+            "specht_block_characteristic_polynomials_ascending": {
+                "(6)": [0, 0, -60, 1],
+                "(5,1)": standard_block,
+                "(4,2)": coefficient_polynomial_multiply(
+                    (80, -20, 1), (-4160, 960, -64, 1)
+                ),
+                "(4,1,1)": coefficient_polynomial_multiply((-16, 1), (-8, 1)),
+                "(3,3)": coefficient_polynomial_multiply(
+                    coefficient_polynomial_multiply((-40, 1), (-12, 1)), (-8, 1)
+                ),
+                "(3,2,1)": coefficient_polynomial_multiply((-14, 1), (-10, 1)),
+            },
+            "standard_block_verification": "exact S^(5,1) central-character moments through degree five",
         },
         "boolean_census": [
             {

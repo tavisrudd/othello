@@ -69,7 +69,9 @@ The 140 balanced incidence vectors form the Young permutation module
 rank 138; its kernel consists only of the two differences among the three
 orbitwise constant vectors.  Thus there is no hidden balanced-incidence
 relation, and the full spectrum reduces to the six Specht multiplicity
-spaces recorded in the report and certificate.
+spaces recorded in the report and certificate.  Exact central-character
+moments label every block, including the otherwise ambiguous
+\(S^{(5,1)}\) and \(S^{(3,3)}\) factors.
 
 Exactly one, two, four, or six Hamiltonians can close simultaneously.  The
 common six-wall locus is the fifteen-line unstable base scheme; its generic

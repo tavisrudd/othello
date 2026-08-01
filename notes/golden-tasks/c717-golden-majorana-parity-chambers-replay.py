@@ -340,12 +340,38 @@ def main():
         for power in range(moment_count)
     )
     assert sum((len(factor) - 1) * exponent for factor, exponent in EXPECTED_GRAM_FACTORS) == 140
+
+    balanced_index = {vertex: index for index, vertex in enumerate(balanced)}
+    action_maps = [
+        tuple(balanced_index[act(vertex, permutation)] for vertex in balanced)
+        for permutation in permutations
+    ]
+    standard_moments = []
+    power_columns = [tuple(int(row == column) for row in range(140)) for column in range(140)]
+    for power in range(6):
+        weighted_trace = 0
+        for permutation, action_map in zip(permutations, action_maps):
+            character = sum(permutation[index] == index for index in range(6)) - 1
+            weighted_trace += character * sum(
+                power_columns[column][action_map[column]] for column in range(140)
+            )
+        assert weighted_trace % 720 == 0
+        standard_moments.append(weighted_trace // 720)
+        if power < 5:
+            power_columns = [gram_times(column) for column in power_columns]
+    standard_block = (1,)
+    for factor in ((-4, 1), (432, -60, 1), (48, -20, 1)):
+        standard_block = multiply_polynomials(standard_block, factor)
+    assert tuple(standard_moments) == power_sums(standard_block, 6)
     certificate_factors = tuple(
         (tuple(item["coefficients"]), item["exponent"])
         for item in data["balanced_incidence_spectrum"]["characteristic_factors_ascending"]
     )
     assert certificate_factors == EXPECTED_GRAM_FACTORS
     assert data["balanced_incidence_spectrum"]["rank"] == 138
+    assert tuple(
+        data["balanced_incidence_spectrum"]["specht_block_characteristic_polynomials_ascending"]["(5,1)"]
+    ) == standard_block
 
     # A second direct implementation checks all 64 Boolean controls and ranks.
     boolean = Counter()
@@ -374,7 +400,7 @@ def main():
         assert sum(entry**3 for entry in amplitudes) == 0
         checked += 1
     assert checked == 3125
-    print("replayed 860 chambers, S6 cosets, exact rank-138 Gram spectrum, 64 Boolean controls, and 3125 identity points")
+    print("replayed 860 chambers, exact labeled Specht spectrum, 64 Boolean controls, and 3125 identity points")
 
 
 if __name__ == "__main__":

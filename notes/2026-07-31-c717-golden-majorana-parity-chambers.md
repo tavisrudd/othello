@@ -422,6 +422,26 @@ Gram operator \(Q=B^{\mathsf T}B\) as
 
 The exponents reflect the Specht dimensions: a \(G\)-equivariant operator
 acts only on the small multiplicity space inside each isotypic component.
+An exact central-character projection removes the only ambiguity left by
+those dimensions and assigns the multiplicity-space polynomials as follows:
+
+\[
+\begin{array}{c|c}
+ \lambda&\chi_{Q,\lambda}(X)\\ \hline
+ (6)&X^2(X-60)\\
+ (5,1)&(X-4)(X^2-60X+432)(X^2-20X+48)\\
+ (4,2)&(X^2-20X+80)(X^3-64X^2+960X-4160)\\
+ (4,1,1)&(X-16)(X-8)\\
+ (3,3)&(X-40)(X-12)(X-8)\\
+ (3,2,1)&(X-14)(X-10).
+\end{array}
+\]
+
+Thus \(\chi_Q=\prod_\lambda\chi_{Q,\lambda}^{\dim S^\lambda}\).
+The assignment is not recoverable from eigenvalue size: unexpectedly the
+standard block \(S^{(5,1)}\) contains the eigenvalue four and both quadratic
+Galois packets, whereas the three-dimensional multiplicity block for
+\(S^{(3,3)}\) contains the three integral eigenvalues \(40,12,8\).
 In particular \(Q\) has rank 138.  If
 \({\bf1}_H,{\bf1}_{K_+},{\bf1}_{K_-}\) denote the three orbitwise constant
 vectors, then
@@ -557,7 +577,10 @@ The finite certificate proves the convention tables, order-incidence graph,
 component sizes, coset compression, adjacency degrees, Boolean ranks, and
 displayed witnesses.  For the Gram factorization it verifies the degree-18
 squarefree annihilator exactly and determines the thirteen irreducible
-factor multiplicities from thirteen full-rank trace moments.
+factor multiplicities from thirteen full-rank trace moments.  A separate
+central-idempotent computation using the standard character
+\(\chi^{(5,1)}(g)=|\operatorname {Fix}(g)|-1\) verifies its five power
+moments and thereby labels the last two equal-dimensional Specht blocks.
 The irreducibility, intersection multiplicity rule, connectedness lemma, and
 topological obstruction are human arguments above; they are not inferred
 from finite sampling.
@@ -589,6 +612,10 @@ loophole: beyond the two forced equalities among orbitwise totals, the 140
 balanced chamber indicators have no relation.  This is the sharpest useful
 compression of the mechanism, because all further spectral data live on
 six small Specht multiplicity spaces rather than on an 860-vertex graph.
+The third-order pass labels those spaces completely.  In particular, it
+rules out the tempting but false assignment of the largest integral
+eigenvalue to the standard representation; central characters, not spectral
+size, provide the canonical labels.
 
 ## Mystery ledger
 
@@ -608,6 +635,10 @@ six small Specht multiplicity spaces rather than on an 860-vertex graph.
   and the only two relations among all 140 indicators are the forced
   differences among the three orbitwise constants.  No hidden incidence
   degeneracy remains.
+- **Settled by the third-order `ej3` pass:** every irreducible factor of the
+  Gram spectrum is assigned to its exact Specht multiplicity block.  The
+  only dimension-based ambiguity, between \(S^{(5,1)}\) and \(S^{(3,3)}\),
+  is resolved by five exact standard-character moments.
 - **Generalized:** the exclusion of singleton signs holds for every real
   system with vanishing first and third moments, and every sign pattern with
   at least two entries of each sign is realizable.  Only the finer coset

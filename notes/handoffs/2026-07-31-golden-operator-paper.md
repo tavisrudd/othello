@@ -179,7 +179,10 @@ particular:
   orbits.  The 140 balanced indicators form
   \(M^{(3,3)}\oplus2M^{(3,2,1)}\); their exact incidence Gram operator has
   rank 138, with only the two forced orbit-constant relations, and its full
-  Specht-factorized spectrum is frozen in the C717 certificate.
+  Specht-factorized spectrum is frozen in the C717 certificate.  An exact
+  standard-character projection labels the last equal-dimensional
+  ambiguity: \(S^{(5,1)}\) carries the eigenvalue four and both quadratic
+  packets, while \(S^{(3,3)}\) carries \(40,12,8\).
   Simultaneous closing multiplicities are
   exactly one, two, four, or six; the common six-wall locus is the reduced
   fifteen-line unstable base scheme, with generic rank four and the six
