@@ -162,15 +162,29 @@ global scheme exhaustion rests on the tracked Singular calculation; the replay
 independently checks the witnesses and their local analytic type.
 
 The Golden formal surface exits through
-`RelativeConicArcs.Gates.GoldenProofSpine`.  Its source modules prove affine
+`RelativeConicArcs.Gates.GoldenProofSpine` and
+`RelativeConicArcs.Gates.GoldenCubicNodes`.  The first gate proves affine
 weight three and the exact `3+3` collision value of the five noncrossing
 matching products, the three displayed Jacobian-minor identities, finite
 matching evaluation of the order-six Pfaffian, and the outer-product form of
 an adjugate with generated one-dimensional left and right kernels.  The gate
 audits the named terminal declarations with `#print axioms`.
 
-This formal surface does not prove the Specht-module identification, the
-regular-simplex frame or multiplicity-one statements, global scheme
-saturation, the strongly etale slice passage, or the manuscript's exact
-Golden normalization witnesses.  Those steps remain human proofs, imported
-classical theorems, or exact replayed calculations as identified above.
+The second gate identifies the centered cubic with the conference triangle
+cubic and proves, over every characteristic-zero field, that its nonzero
+gradient-zero vectors are exactly the six centered node lines.  It proves the
+six chart Hessians nondegenerate, the node vectors a projective frame, the
+complete frame-double cubic system five-dimensional, and all fifteen frame
+edges base lines.  It also checks that the five centered noncrossing matching
+forms are independent and double at the six nodes.  Its generated elimination
+identities are reproduced by
+
+    python3 lean/scripts/generate_golden_cubic_elimination.py --check
+
+and are independently checked in Lean by polynomial normalization.
+
+This formal surface does not construct a primary decomposition or Milnor
+algebra, formalize the Specht-module multiplicity-one theorem, justify the
+strongly etale slice passage, or check the manuscript's exact Golden
+normalization witnesses.  Those steps remain human proofs, imported classical
+theorems, or exact replayed calculations as identified above.

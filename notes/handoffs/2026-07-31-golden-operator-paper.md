@@ -312,6 +312,17 @@ particular:
   Its `ej` refinement identifies the full matching carrier with the complete
   linear system of cubics double at the six-node projective frame; the fifteen
   four-equals base lines are exactly the frame edges.
+- C758 is complete.  The guarded gate
+  `RelativeConicArcs.Gates.GoldenCubicNodes` identifies the centered cubic with
+  the Golden conference triangle cubic, classifies its singular cone over
+  every characteristic-zero field as exactly six centered node lines, proves
+  their normalized chart Hessians nondegenerate, formalizes the five-dimensional
+  frame-double cubic carrier and all fifteen frame edges, and proves the five
+  centered matching forms independent and double at the nodes.  The exact
+  target and trace-only aggregate pass with only `propext`,
+  `Classical.choice`, and `Quot.sound`; the warning-free manuscript remains 19
+  pages.  Report and hashes:
+  `notes/2026-08-01-c758-golden-six-node-lean.md`.
 
 C735 is complete.  The post-charter architecture delta, exact
 keep/compress/appendix/sequel map, theorem--proof--trust ledger, attribution

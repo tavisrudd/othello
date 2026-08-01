@@ -90,7 +90,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 - **C718 `[golden]` [QUEUED AFTER C720; INDEPENDENT OF C715]** — compute the permanent side of the golden transfer blocks, specialize boson--fermion complementarity, and seek a bosonic invariant or experimental discriminator → `notes/golden-tasks/c718-golden-boson-fermion-complement.md`.
 - **C719 `[golden]` [QUEUED AFTER C715 AND C718]** — design a platform-specific six-mode demonstration with coherent sign readout, anomaly witness, bosonic control, optimal three/five/ten-cut simplex decoding, and quantitative loss/shot budget → `notes/golden-tasks/c719-golden-six-mode-demonstrator.md`.
-- **C758 `[golden]` [IN PROGRESS]** — formalize the Golden six-node cubic-wall theorem, ordinary-node Hessians, and projective-frame matching-carrier consequences in Lean → `notes/2026-08-01-c758-golden-six-node-lean.md`.
 
 ### `complete-ports`
 
