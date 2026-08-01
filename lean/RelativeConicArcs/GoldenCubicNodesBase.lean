@@ -17,7 +17,7 @@ open ClebschGoldenConference
 /-- The five-coordinate representative of the centered vector \(1 - 6 e_i\).
 For \(i = 5\), the omitted sixth coordinate is \(-5\), so all five displayed
 coordinates equal one. -/
-def centeredNode (i : Fin 6) : Fin 5 → ℚ := fun j =>
+def centeredNode {R : Type*} [Ring R] (i : Fin 6) : Fin 5 → R := fun j =>
   if (i : ℕ) = (j : ℕ) then -5 else 1
 
 /-- The coordinate gradient of the Golden cubic after substituting

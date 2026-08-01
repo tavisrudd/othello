@@ -177,7 +177,7 @@ def product(*polys: Poly) -> Poly:
 def lean_fraction(value: Fraction) -> str:
     if value.denominator == 1:
         return str(value.numerator)
-    return f"({value.numerator} / {value.denominator} : ℚ)"
+    return f"({value.numerator} / {value.denominator} : K)"
 
 
 def lean_poly(poly: Poly) -> str:
@@ -221,7 +221,7 @@ def render_theorem(
                + " ".join(gradient_names))
     return f"""/-- Exact ideal-membership identity for one branch of the
 centered Golden gradient scheme. -/
-theorem {name} (x0 x1 x2 x3 : ℚ)
+theorem {name} {{K : Type*}} [Field K] [CharZero K] (x0 x1 x2 x3 : K)
     ({gradient_names[0]} : chartGradient x0 x1 x2 x3 0 = 0)
     ({gradient_names[1]} : chartGradient x0 x1 x2 x3 1 = 0)
     ({gradient_names[2]} : chartGradient x0 x1 x2 x3 2 = 0)
@@ -276,19 +276,33 @@ def generated_source() -> str:
           add(x1, scale(one, 5))]),
     ])
     boundary_gradient = [substitute_last(polynomial, 0) for polynomial in gradient]
-    square_sum = add(*(mul(variable(4, i), variable(4, i)) for i in range(4)))
-    boundary_target = mul(square_sum, square_sum)
-    boundary_multipliers = solve_membership(boundary_gradient, boundary_target)
-    boundary_names = [
-        f"{'' if multiplier else '_'}h{index}"
-        for index, multiplier in enumerate(boundary_multipliers)
-    ]
-    boundary_combination = " +\n      ".join(
-        f"({lean_poly(multiplier)}) * {boundary_names[index]}"
-        for index, multiplier in enumerate(boundary_multipliers)
-        if multiplier
-    )
-    boundary_changes = "  simp [gradient] at " + " ".join(boundary_names)
+    boundary_theorems = []
+    for coordinate in range(4):
+        target = product(*([variable(4, coordinate)] * 3))
+        multipliers = solve_membership(boundary_gradient, target)
+        names = [
+            f"{'' if multiplier else '_'}h{index}"
+            for index, multiplier in enumerate(multipliers)
+        ]
+        combination = " +\n      ".join(
+            f"({lean_poly(multiplier)}) * {names[index]}"
+            for index, multiplier in enumerate(multipliers)
+            if multiplier
+        )
+        boundary_theorems.append(f"""/-- On the boundary chart, the cube of
+coordinate {coordinate} belongs to the Golden gradient ideal. -/
+theorem boundary_x{coordinate}_cube {{K : Type*}} [Field K] [CharZero K]
+    (x0 x1 x2 x3 : K)
+    ({names[0]} : gradient ![x0, x1, x2, x3, 0] 0 = 0)
+    ({names[1]} : gradient ![x0, x1, x2, x3, 0] 1 = 0)
+    ({names[2]} : gradient ![x0, x1, x2, x3, 0] 2 = 0)
+    ({names[3]} : gradient ![x0, x1, x2, x3, 0] 3 = 0)
+    ({names[4]} : gradient ![x0, x1, x2, x3, 0] 4 = 0) :
+    x{coordinate}^3 = 0 := by
+  simp [gradient] at {" ".join(names)}
+  linear_combination
+      {combination}
+""")
     theorems = "\n".join(
         render_theorem(name, target, branches, chart_gradient)
         for name, target, branches in specs
@@ -312,23 +326,12 @@ set_option maxRecDepth 100000
 
 /-- The five gradient quadrics on the affine chart whose last centered
 coordinate equals one. -/
-def chartGradient (x0 x1 x2 x3 : ℚ) : Fin 5 → ℚ :=
+def chartGradient {{K : Type*}} [CommRing K] (x0 x1 x2 x3 : K) : Fin 5 → K :=
   gradient ![x0, x1, x2, x3, 1]
 
 {theorems}
 
-/-- If the last centered coordinate vanishes, the square of the sum of the
-other four coordinate squares belongs to the gradient ideal. -/
-theorem boundary_sum_sq_sq (x0 x1 x2 x3 : ℚ)
-    ({boundary_names[0]} : gradient ![x0, x1, x2, x3, 0] 0 = 0)
-    ({boundary_names[1]} : gradient ![x0, x1, x2, x3, 0] 1 = 0)
-    ({boundary_names[2]} : gradient ![x0, x1, x2, x3, 0] 2 = 0)
-    ({boundary_names[3]} : gradient ![x0, x1, x2, x3, 0] 3 = 0)
-    ({boundary_names[4]} : gradient ![x0, x1, x2, x3, 0] 4 = 0) :
-    (x0^2 + x1^2 + x2^2 + x3^2)^2 = 0 := by
-{boundary_changes}
-  linear_combination
-      {boundary_combination}
+{"".join(boundary_theorems)}
 
 end RelativeConicArcs.GoldenCubicNodeElimination
 """
