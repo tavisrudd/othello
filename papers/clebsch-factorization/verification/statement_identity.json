@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-factorization-statement-identity-v1",
   "source": "clebsch_factorization.tex",
-  "source_sha256": "f3d01c56e87c3b3860b6bde6e58a6bfb637d49fd455ca09ccc113c3e785a50b1",
+  "source_sha256": "ad98dafc7a8d126dc7119c9951a972719b19e0cfbacd1ee9c104c43d4905d70c",
   "statement_count": 28,
   "statements": [
     {

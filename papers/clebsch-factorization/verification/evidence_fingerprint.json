@@ -8,19 +8,20 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "ecba2e99ce42765e6526f43a921bdc1077e0aa862320ea736bf58aeea28a08ac",
-  "runner_sha256": "25d1ce74f6cf90c68af9e9933b7269324d474cc2586c249199d6194ff74dec61",
+  "trust_manifest_sha256": "ea30bed80a847ddd6fee134c1e1933dbebfaccb6f18e51e984e6a4227ba05857",
+  "runner_sha256": "2850067e29c2c4105973ee0a7bef91296fb9e74a5ffc5e0020cb275c21bbe8cc",
   "review_sources_sha256": {
-    "normalized_manuscript": "f03356b593d31dc7f85b665c2bb5e458ea7b2369992ef3308818b1e8ed6c5cbf",
+    "normalized_manuscript": "68724abc3815a24718b93761b753e0defd43be78a58c256161bd64c92e83b710",
     "normalized_statement_identity": "ccb021a83914ae10ea71b1f4473b8c4e62596cfedb0b31eb834dcdf401460ade",
     "statement_extractor": "3794c3e4bac4635f0cd70ab7037df39fe9d29b684e4a642cb1a01468d06b798b",
     "paper_readme": "7cf272443df7732c1de94ff71e953ca09ccbf249c4f7d57984fb57026830e21a",
-    "verification_readme": "a62f9254e0734dc312dd8907bad2ad1ecfcf5915642f828de19507e20f09e46e",
+    "verification_readme": "f76c62eba7edeb2c79ce39d449e25fe72fefea70afe7b9040c1247cddfd4b31a",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
       "ClebschHilbertSymmetry.lean": "0be6e0b36ede1ee9ebc7ade0abaa84694e8b45059a38b191d2074b943cedd620",
-      "ClebschHyperplaneSquare.lean": "8b76e121f657f454c1727fc2018e0b535ff7125a08e381de1cecd259018fe450"
+      "ClebschHyperplaneSquare.lean": "8b76e121f657f454c1727fc2018e0b535ff7125a08e381de1cecd259018fe450",
+      "ClebschPaperIIStructural.lean": "893df605dd815ca040a73d36fd0d3750ce7196b55f5bd8ea75b32ea207db9a10"
     },
     "guarded_lean": "4967378822df0f357f0bd3cba9a80fcceae1a8d5d5d45b1d4977c159c4515249"
   },
@@ -59,6 +60,58 @@
     "ClebschHyperplaneSquare.lean": {
       "lean/RelativeConicArcs/ClebschHyperplaneSquare.lean": "887f4e4f8fc32d44beacf1882fd73274563c5b02e474a9c5ce038e5e88a4c534",
       "lean/RelativeConicArcs/Gates/ClebschHyperplaneSquare.lean": "8b76e121f657f454c1727fc2018e0b535ff7125a08e381de1cecd259018fe450"
+    },
+    "ClebschPaperIIStructural.lean": {
+      "lean/RelativeConicArcs/Arc.lean": "f683f6fe80891ea7f4da389fbef14890d34ee660e1e9b3b8f62a3ee60256a240",
+      "lean/RelativeConicArcs/Certificate.lean": "1cbcf52f50e453269ce405a0cf6d9dbb3e8071db7d00d4ebbb55ca6c94f03292",
+      "lean/RelativeConicArcs/ClebschA3InvariantMatching.lean": "75fe31a8741de165edc43f6eb27db3209078725c5d0a19300fe79ab9f8ad4904",
+      "lean/RelativeConicArcs/ClebschAffineContractionCohomology.lean": "ba24b8cbb37356b9c7bddce8b6c6219e3436609c36059292a6fab68ef8e97e9b",
+      "lean/RelativeConicArcs/ClebschAffineExtensionContraction.lean": "cfb7a7d180b1f7c38db714ca5fc1d8d9e73d522d9b87c7df64501fa73711221c",
+      "lean/RelativeConicArcs/ClebschArithmeticGluing.lean": "85fb3094631b25be50c3e9b680d82fdf4e6650f82bca302a92574c0a32228c27",
+      "lean/RelativeConicArcs/ClebschArithmeticGluingData.lean": "2ca60d94d0bab6238751dafd67f5b7088e93ae63683a3875bbfb804f88d98077",
+      "lean/RelativeConicArcs/ClebschB3InvariantMatchings.lean": "3c240bd52e5a6c56f7d6925359bad08c7c9cf0a4959b6da835a2f6dcdf52868f",
+      "lean/RelativeConicArcs/ClebschBalancedOrbitEndgame.lean": "d75e36642fef24c574ea1d1e9ffeb0a5efb13a3d408d92077f4bb1ff49bcf5c7",
+      "lean/RelativeConicArcs/ClebschBalancedSheets.lean": "9f2f7958519ca4f7397e0895094fb96dab7d92c3737435ae640169d794f100b3",
+      "lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean": "87963ebc12637ae2b5b5e709135cc32267aa06712f77e96d169d4c687403d14f",
+      "lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean": "6d0a47c14dc35b7b648279252c6310256ddcf57a566f58d30d534141d0957aae",
+      "lean/RelativeConicArcs/ClebschConicMatchingQuotient.lean": "444e033a0e0e81ecf30cc6f2957eea406cd121ff371918bd96ba963a3d179450",
+      "lean/RelativeConicArcs/ClebschDetectingIntertwiners.lean": "683d9c64e65736068b19fec62c7f82c25607f18f47fc3cd437ea986f6afc74d3",
+      "lean/RelativeConicArcs/ClebschDetectingModuleVanishings.lean": "ee25ba168fcb20b0322d4df46ea75083b42b8f6ced34dd12496f5d37daa266e3",
+      "lean/RelativeConicArcs/ClebschDihedralReflectionParity.lean": "430ee9b913e251f70fa787835fb161eca464038d6d21490d1647bcc37ac917da",
+      "lean/RelativeConicArcs/ClebschDividedPowerTopSlices.lean": "b2817c34992e65989dd8440fff08295ba94cdb93c4338227982bcfa66c813299",
+      "lean/RelativeConicArcs/ClebschFactorizationB3.lean": "cb86c5bf109d7c1527e89fb240ab056309f122bc1a382236954d8cbf33717c6c",
+      "lean/RelativeConicArcs/ClebschFactorizationData.lean": "36dd8ad78d23f0e5dbc5b94b8b08b66ec88d6f529b36bdcfbb9e72d7423f834d",
+      "lean/RelativeConicArcs/ClebschFactorizationH3.lean": "a2e125505a0e42be799cb256005257e38a68ebc0b9c147bb65c36be7e226dd2c",
+      "lean/RelativeConicArcs/ClebschFiniteRootRecurrenceBridge.lean": "a3de554d8e6119a902b1bd9c100c96bb594b9df313af4118f663beaca435f94e",
+      "lean/RelativeConicArcs/ClebschFiniteRootWeightSlice.lean": "b27cee7e69cc7993ec902456515a963f05bc10711299f1e40a67487c0fefdff0",
+      "lean/RelativeConicArcs/ClebschFirstFrobeniusSection.lean": "1acd9a639efd03d8fc20f448f22a027cc217270b32d59b6fa18c954ddd0df06d",
+      "lean/RelativeConicArcs/ClebschGateway.lean": "24e786a37ad2dab7d91651e51d5dbb5427fc26bd9e22c6a54fddda97abc66fd8",
+      "lean/RelativeConicArcs/ClebschH3InvariantMatchings.lean": "4f30b97b4d8e62b451a8fc23c99f5872baf1e0f11ebb8b2fd7f1bb1893c919e6",
+      "lean/RelativeConicArcs/ClebschHarmonicQuotient.lean": "2cdedcfa1115120f317b124fde3109081e703173f783b5d10795d91b30a1448f",
+      "lean/RelativeConicArcs/ClebschInvariantMatchingCriterion.lean": "9b9fd3ea47cb15f17916e5fc06d2bdc4b9259ebb3cd05ac8e8a6eaaab7fd3c43",
+      "lean/RelativeConicArcs/ClebschLucasCoefficientBasis.lean": "e215a5d6522efdeb19db6d27156634b031b51ad9d97215620f4ef9a87897942d",
+      "lean/RelativeConicArcs/ClebschLucasPolynomialFactorization.lean": "7c26e12060a8d66c6a1549f4d02e512431969af2549667e221f16a477dc52c4f",
+      "lean/RelativeConicArcs/ClebschMomentTrade.lean": "aa15ed2a8cf84116792e3024ab96c1a674979d41f533fe617d98ac5571b32cf8",
+      "lean/RelativeConicArcs/ClebschOrbitOrderReduction.lean": "1bfeb0dceec96283f5fc717fde88dae3af86ed4824a15aefda47821e3573f6a8",
+      "lean/RelativeConicArcs/ClebschOuterParityInjection.lean": "5955306ca8add65504c004eb379f68783109c4831d48ce37199661427ada0cdd",
+      "lean/RelativeConicArcs/ClebschOuterParityWeights.lean": "3c3aeeb079d57054c41e0463a830bae9612d38bcd588b59432324ca86d8a4da5",
+      "lean/RelativeConicArcs/ClebschPolyhedralInvariantAverages.lean": "b813fd843b61b131a35eb52609b55a84aa5a0e5cfc7ac713afa6abc5310af697",
+      "lean/RelativeConicArcs/ClebschPolynomialTopSliceDetection.lean": "69e7c01b3be98f3b72e22fa96f1e8b1baa24382c701934d53adbdcab1b46babc",
+      "lean/RelativeConicArcs/ClebschProjectiveTradeReduction.lean": "7aae4c67a06a02f659ea725b83f12f5d357a99e43094735f80979e79982b0ee6",
+      "lean/RelativeConicArcs/ClebschRankThreeBalancedEndgame.lean": "a56e3d4faad68c96197e8e68a6c82f4c5eb845ed2a2c70a5c6c00ebd23c59c75",
+      "lean/RelativeConicArcs/ClebschRegularMatching.lean": "5ca27dae16a2a571893c7db0a5df0b3672b2293f1b3db90296c9618f6007cb46",
+      "lean/RelativeConicArcs/ClebschRootDefect.lean": "3bc15a5c6a81b9fa73d65ab9ec3f697a49a710b31dcd14796d56a77e32314176",
+      "lean/RelativeConicArcs/ClebschSchemeChirality.lean": "7deb3f0ce0cbfe7a56c71de5a9a0635adc157eb7b2fa5409cc6a88d72f07921c",
+      "lean/RelativeConicArcs/ClebschSchemeChiralityData.lean": "b56b3d7b18428517da497b464c48791587300d31a6a808004ee64f9a2c1c3803",
+      "lean/RelativeConicArcs/CodingBridge.lean": "bf6ac29f91dce5425653494542b5e156302ff2be5914d5310379d5b97d960ed3",
+      "lean/RelativeConicArcs/Conic.lean": "7e5cc2823c925d418660ab88e8753b76673cb35966e03cf86d7b4b1e33c7b6e4",
+      "lean/RelativeConicArcs/Defect.lean": "5caae34f785b5c37df05ed42c8c278dbf88e0ef98b6adf2d514716122f31ee2d",
+      "lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean": "9ea2ba12de452fb6eef09f34d4c204c6e3bc9573f4b317108dea7fe3b714d5c8",
+      "lean/RelativeConicArcs/Gates/ClebschPaperIIStructural.lean": "893df605dd815ca040a73d36fd0d3750ce7196b55f5bd8ea75b32ea207db9a10",
+      "lean/RelativeConicArcs/Moments.lean": "5892d6448b919dffe5988502b014948831294247657b49a68e0aa228517305e8",
+      "lean/RelativeConicArcs/Plane.lean": "4884204d8c0a1c219e969b72c6fa394abc28be3097c7eed6bed97e8f63c21ff5",
+      "lean/RelativeConicArcs/ProjectiveBridge.lean": "423405930931867f62730ba3d2013012026f8a64db0af81d7b0ace6a43524a3f",
+      "lean/RelativeConicArcs/SyndromeGeometry.lean": "0c49ee1527b10ec15ed84d07d0e0780d0f27df7776d048c04dd9d25d49e331b3"
     }
   },
   "lean_gates": [
@@ -80,6 +133,13 @@
       "command": [
         "lean/scripts/guarded-lean",
         "RelativeConicArcs/Gates/ClebschHyperplaneSquare.lean"
+      ],
+      "cwd": "."
+    },
+    {
+      "command": [
+        "lean/scripts/guarded-lean",
+        "RelativeConicArcs/Gates/ClebschPaperIIStructural.lean"
       ],
       "cwd": "."
     }
@@ -159,6 +219,12 @@
     "hyperplane-square": {
       "checksum_manifest": "verification/hyperplane_square.sha256",
       "checksum_manifest_sha256": "f706caad68f8ad0e83309f07e5ceeb303c3a155a259cf2c0a73f014c32c74adf",
+      "checksum_root": ".",
+      "commands": []
+    },
+    "paper-ii-structural": {
+      "checksum_manifest": "verification/paper_ii_structural.sha256",
+      "checksum_manifest_sha256": "b0d373ffc20427db37b9a3d18349f72edfea85f1f4a83a49d6ea316814650847",
       "checksum_root": ".",
       "commands": []
     },
@@ -277,7 +343,7 @@
     }
   },
   "expected_success": {
-    "metadata": "metadata: 24 statements, 10 evidence bundles: CHECK OK",
+    "metadata": "metadata: 28 statements, 14 evidence bundles: CHECK OK",
     "release": "clebsch factorization release: CHECK OK"
   }
 }

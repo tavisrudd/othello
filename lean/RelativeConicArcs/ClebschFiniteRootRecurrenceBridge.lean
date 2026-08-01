@@ -27,6 +27,23 @@ theorem finiteRootInvariant_satisfiesOneDigitRecurrence
     SatisfiesWeightSliceRecurrence] using
     finiteRootInvariant_satisfiesWeightSliceRecurrence h hh alpha hinvariant
 
+/-- Below the characteristic, the concrete finite-root fixed vectors are
+exactly the solutions of the one-digit Lucas recurrence. -/
+theorem finiteRootInvariant_iff_satisfiesOneDigitRecurrence
+    {p h : ℕ} [CharP K p] (hp : h < p) (hh : h < Fintype.card K)
+    (alpha : Fin (h + 1) → K) :
+    FiniteRootInvariant h alpha ↔
+      ClebschLucasCoefficientBasis.SatisfiesOneDigitRecurrence h alpha := by
+  constructor
+  · exact finiteRootInvariant_satisfiesOneDigitRecurrence h hh alpha
+  · intro hrecurrence
+    apply (finiteRootInvariant_iff_exists_scalar_alternatingBinomial h hh alpha).2
+    refine ⟨alpha 0, funext fun m ↦ ?_⟩
+    simpa [ClebschLucasCoefficientBasis.alternatingBinomialCoefficient,
+      weightSliceAlternatingCoefficient] using
+      ClebschLucasCoefficientBasis.oneDigitRecurrence_eq_scalar_alternatingBinomial
+        hp alpha hrecurrence m
+
 end
 
 end RelativeConicArcs.ClebschFiniteRootRecurrenceBridge

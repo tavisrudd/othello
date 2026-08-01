@@ -48,6 +48,11 @@
       "checksum_manifest": "verification/hyperplane_square.sha256",
       "commands": []
     },
+    "paper-ii-structural": {
+      "role": "kernel-checked projective pullback, Lucas coefficient and finite-root calculations, outer-parity and detector implications, affine contraction, and rank-three endpoint composition",
+      "checksum_manifest": "verification/paper_ii_structural.sha256",
+      "commands": []
+    },
     "generic-first-wall": {
       "role": "local Frobenius-digit occurrence packets, normalized first-wall trace and spill, Borel gap, and historical q=121/q=169 specializations",
       "checksum_manifest": "verification/evidence/source_manifest.sha256",
@@ -115,10 +120,10 @@
   "claims": [
     {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "generic-first-wall", "small-field-trade", "shared-radial", "profile-incidence", "decorated-parent"]},
     {"label": "prop:matching-secant-quotient", "modes": ["conceptual"], "evidence": []},
-    {"label": "lem:projective-trade-reduction", "modes": ["conceptual"], "evidence": []},
-    {"label": "lem:lucas-socle-square-parity", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["generic-first-wall"]},
-    {"label": "lem:uniform-sheet-exclusion", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["generic-first-wall", "small-field-trade"]},
-    {"label": "thm:balanced-orbit-completeness", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["generic-first-wall", "small-field-trade"]},
+    {"label": "lem:projective-trade-reduction", "modes": ["conceptual", "lean"], "evidence": ["paper-ii-structural"]},
+    {"label": "lem:lucas-socle-square-parity", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["generic-first-wall", "paper-ii-structural"]},
+    {"label": "lem:uniform-sheet-exclusion", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["generic-first-wall", "small-field-trade", "paper-ii-structural"]},
+    {"label": "thm:balanced-orbit-completeness", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["generic-first-wall", "small-field-trade", "paper-ii-structural"]},
     {"label": "lem:shared-radial-cycle", "modes": ["conceptual", "certificate"], "evidence": ["shared-radial"]},
     {"label": "thm:rank-three-quotients", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "shared-radial"]},
     {"label": "cor:h3-affine-origin", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
@@ -143,6 +148,7 @@
     {"label": "prop:relative-cubic-tate-plane", "modes": ["conceptual", "certificate"], "evidence": ["relative-cubic-depth"]}
   ],
   "boundaries": [
+    "The Paper II structural Lean gate verifies the paper-specific coefficient, finite-root, defect, detector, contraction, and endpoint implications. Steinberg and modular Hermite reciprocity identify the concrete coefficient blocks with finite-group Hom spaces; tilting and socle theory identify the ambient symmetric-square slices and validate the root/Weyl intertwiner; Dickson--Giudici identifies the abstract subgroup candidates. Those cited identifications remain classical inputs, so the all-q claims retain classical-input alongside lean.",
     "The generic first-wall checker verifies local formulas conditional on the human Lucas-socle and adjacent-wall theorems; it does not replace either theorem or the outer-parity subgroup calculation.",
     "The small-field trade bundle is exhaustive only at q=9; its q=13,17,19 rows are bounded cross-checks and are not used for the all-q classification.",
     "The shared-radial replay checks the two classified configurations and every edge-selected pair; the human resultant identity proves the common nonvanishing mechanism.",

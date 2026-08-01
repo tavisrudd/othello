@@ -2922,7 +2922,7 @@ Matching-secant quotient
 Balanced-orbit completeness
 & projective--trade bridge, Dickson--Giudici subgroups,
   Frobenius-digit socles, the two-digit torus test, and the Steinberg test
-& exhaustive \(q=9\) check and independent replay \\
+& structural Lean gate; exhaustive \(q=9\) check and independent replay \\
 Ranks and the middle Fischer layer
 & affine cocycle, irreducible Fischer modules; Edge--Dye configurations
 & quotient matrices as cross-checks; all edge-selected alternating cycles
@@ -2957,8 +2957,9 @@ python3 verification/verify_release.py
 \end{verbatim}
 It checks the statement identity and all admitted checksum manifests, runs
 the admitted primary checks and independent replays, elaborates the
-arithmetic-gluing, Hilbert-symmetry, and hyperplane-square Lean gates, and rebuilds this
-manuscript through the repository Makefile.
+Paper-II-structural, arithmetic-gluing, Hilbert-symmetry, and
+hyperplane-square Lean gates, and rebuilds this manuscript through the
+repository Makefile.
 
 The enumerated review closure accompanying this candidate is pinned by
 \begin{center}
@@ -2966,8 +2967,8 @@ The enumerated review closure accompanying this candidate is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{1009fe58e6deff0c614525e751f6fc765c1942}\\[-2pt]
-\texttt{41061b13b15c40039ffac9b730}.
+\small\texttt{b6c8f171d9da8849fd1628371a23c2604a15fd}\\[-2pt]
+\texttt{104ed555e0e7fd4508bee79998}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Makefile, verification documentation, the admitted evidence
@@ -2986,6 +2987,26 @@ the statement identity's derived full-source hash, avoiding a circular
 self-hash.  This is an explicit review-source allowlist, not a claim to
 hash every file in the repository or every transitive tool dependency.
 An immutable public archive locator must be added before release.
+
+The Paper-II structural gate
+\begin{center}
+\small\texttt{RelativeConicArcs.Gates.}\\[-2pt]
+\texttt{ClebschPaperIIStructural}
+\end{center}
+follows the proof spine from the projective pullback through the concrete
+finite-root fixed line and Lucas recurrence, the outer-parity defect and
+divided-power detectors, and the affine contraction, to the rank-three
+endpoint.  Its twenty-two audited terminals include the derived fused
+\(q=5\) exclusion and point-stabilizer uniqueness certificates for the
+\(B_3/\F_7\) and \(H_3/\F_{11}\) matchings.  The \(H_3\) uniqueness check
+uses twelve explicit point-stabilizer witnesses per sheet, not a matching
+census.  Steinberg and modular Hermite reciprocity still identify the
+concrete coefficient blocks with the finite-group Hom spaces; tilting and
+socle theory identify the ambient symmetric-square slices and validate the
+root/Weyl intertwiner; Dickson--Giudici identifies the abstract subgroup
+candidates.  These cited representation-theoretic and subgroup
+identifications remain classical inputs, so the affected claims retain both
+``Lean'' and ``classical input'' in the trust manifest.
 
 The largest formal component is the gate
 \begin{center}
