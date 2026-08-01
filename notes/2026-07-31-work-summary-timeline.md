@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
-Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-26**, with a quiet stretch Jun 28–30.
+Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
+Activity spans **2026-06-14 → 2026-07-31**, with quiet stretches Jun 28–30 and Jul 27.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -732,6 +732,117 @@ five, six, and seven.
   geometry. `ame-lu` ran two cheap kill batteries, one of which **killed a proposed reduction on its
   first in-scope extension field**. `cap` continued C80 on q=23 replacement lineage and ancestral
   charge, with the obligation-deletion sweep returning the day's other decisive negative.
+
+## Week 9 — Jul 28–31 · The portfolio reframes, and a fourth Clebsch paper is carved out
+
+Jul 27 is empty. The four working days that follow are the densest of the whole record, and their
+shape is different from week 8's: less subtraction, more *ownership* — where the repository sits
+relative to the papers, which lane owns a runaway body of results, and which claims are relative to a
+marking rather than absolute.
+
+- **Jul 28 — the repository is reframed around the portfolio, and five standalone mirrors are cut.**
+  The framing commit is exactly that: the monorepo is no longer described as a game programme with a
+  publication annex. Five released papers were exported to standalone repositories under
+  `~/src/math-papers/` — `ame-lu`, `beyond4-prs`, `clebsch-factorization`, `clebsch-rigidity`,
+  `arcs-complete-outside-conic` — under a convention written down at the same time: synchronization
+  is **one-way** from the monorepo, edits land in the mirrors as **ordinary forward commits**, and
+  destructive history replacement needs explicit authorization. The exports are release mirrors, not
+  a second source of truth. **None has a remote**, and repository creation, pushes, releases,
+  affiliation/contact metadata and DOIs are all explicitly out of scope until the user authorizes
+  them — so the shared public-URL blocker is now one authorized action away rather than an
+  engineering task. A `finitegeom` **concept DOI** is cited paper-side, and deliberately only as the
+  version-independent identifier of the separately distributed formal companion, never as a paper
+  DOI. The extraction found and fixed the class of leak the convention exists to prevent: internal
+  C-task routing presented as public dependency, task markers inside evidence filenames, a private
+  monorepo `--build` mode in a public bundle tool, and a release verifier that only passed because it
+  reached outside the package. **C685–C687** split the Passages extraction and its certificate
+  corrections; the Dye pinpoint citations were corrected across the affected papers. Underneath,
+  `clebsch` C682 ran the mod-11 Bockstein bridge repair to a certified corrected form modulo `11³`
+  with its Frobenius gauge identified, proved the `U₂₂` linear section and Bockstein pencil
+  globalization, the rank-four resolvent and the transvectant deformation map, and opened the Klein
+  `E₈` operator algebra with a **literature audit run before, not after** the result was framed.
+  `clebsch` C665 closed the q=121 extension pullback, the characteristic-three intersection trade and
+  the q=27 invariant-trade excess. On `cap`, **C80 falsified its own two-mechanism update** and
+  exhausted the q=23 replacement orbits.
+
+- **Jul 29 — Paper I acquires the golden orientation; C682 goes all-weight.**
+  C690/C691 turned the orientation material into theorems and **C693** integrated them: the syndrome
+  locus reconstructs the unordered support two-graph, either signed continuation orbital `B` gives
+  the support-orientation cubic as its triangle product, pair balance is equivalent to `B² = 5I`, and
+  the cubic threefold's six ordinary nodes form a projective frame that reconstructs the six-axis
+  carrier. **C611** closed the q=13 binary minimum-distance gate at `d = 12` by a six-difference-set
+  five-row unique-closure lemma rather than a support search, and it went into the computational
+  companion. On the exploration side C682 proved **all-weight maximal rank** and global phase
+  propagation, certified four further plateau rays, constructed global Kostant Weyl operators, and
+  explained the Wronskian degree drops by Smith-at-infinity profiles. **C695–C697** ran the `E₆`
+  minuscule branch `27 = 12 + 15` to a graded Cartan model and stopped there deliberately: with no
+  cohomological or Higgs realization it is **not** a model of the Krämer–Litt–Maculan variation, and
+  the drafted outreach invitation was left unsent. Four incidental leads went to the discovery track
+  rather than into any task. On `cap`, C80 proved the conditional causal-label injectivity statement
+  and then **extracted the q=11 one-to-many replacement witness that kills its uniformity** — the
+  lane's live proof object moved from causal-local to global in one day.
+
+- **Jul 30 — the trilogy gets an identity, Papers I and II take their v2 arcs, and the shadow
+  portfolio opens.**
+  **C703** gave all three split papers one title-page identity, *The Clebsch cubic: recovering,
+  orienting, and realizing*, with canonical titles, logical independence and paper-owned proof
+  surfaces unchanged — framing, not cross-promotion. **C182**'s v2 referee cold read was applied as a
+  bounded revision (rational `A₅`-module wording, theorem hierarchy, computational/formal boundary,
+  q13 and two-graph literature, opening and conclusion), and **C713** rebuilt the proof architecture
+  so chord defect → line bound → rigidity → across-fields runs uninterrupted before the decoder;
+  singular-locus completeness stopped being a Gröbner dependency once the cross-golden determinant
+  was identified as `−C` with the Hassett–Tschinkel determinantal converse supplying six ordinary
+  nodes. **C694** integrated Paper II's v2 arc and, in doing so, **removed a hypothesis from its own
+  main theorem**: the two quadratic-trade fibres are no longer assumed to be one-factorizations, and
+  the `q+q` split is derived. C682 closed the local-return algebra gate in a stronger form than asked
+  (nearest lower and upper Gram returns suffice; the two-step upward return is redundant) and
+  **explained the virtual levels `0, ±1/3, ±2/3` as order-three indicial roots**. Then **C704** —
+  the functorial operator-shadow exploration — landed positive and immediately spawned a mining
+  portfolio whose rules are the interesting part: each promoted package is a no-early-bail
+  exploration with distinct `ej1`/`tt1`/`ej2`/`tt2` passes, and **negative outcomes are first-class
+  objects requiring a structural obstruction theorem plus their nearest positive locus and adjacent
+  crown**. **C705** ran the first tranche (adjugate–polar, Coble/Burkhardt, affine- and Lie-`E₈`),
+  and **C706–C710** were reserved for the Clifford, ETF, doily, Majorana and `E₈`–Hamming follow-ups.
+
+- **Jul 31 — a fourth paper and a new lane; three "relative, not absolute" rulings; two adjacent
+  problems opened.**
+  The day's governing decision is a **paper-ownership ruling**: the whole C704–C710 post-700
+  development, plus C715–C719 and C727–C729, is assigned to a new **`golden` lane** and a standalone
+  fourth manuscript, *The golden conference operator and its shadow sisters*, with review-facing
+  Paper III ending before all of it. The lane may cite Paper III but may **not** edit, extract from,
+  or reorganize it; a future post-review relocation of overlapping exposition is explicitly deferred
+  to a later decision. C720 froze the charter and installed the manuscript root; C735 is queued for
+  consolidation, with C718/C719 deferred unless it identifies a theorem-level need.
+
+  Three results were **weakened to what is actually proved, and are stronger documents for it**.
+  **C733**: a fresh referee found the Paper III draft had promoted a quadratic *function-field*
+  equation to an equation of the unnormalized pullback; the repair proves the global Stein algebra
+  `O ⊕ O(−3)` with `z² = 5J₀`, and the orientation bridge is restated as explicitly relative to a
+  marked datum with a complete ambiguity ledger — the sheet alone is not claimed to recover it.
+  **C727**: the cross-paper recovery theorem descends every projective/even golden shadow from the
+  unordered support two-graph, and states the matching negative — the bare unlabelled deep-hole conic
+  is transitive on the 22 Clebsch matching rows and therefore insufficient. **C581**: quantitative
+  ambient-Clifford rigidity is positive with explicit constants, while exact q=9 nonsemilinear and
+  q=25 GRS symplectic elements kill every uniform semilinear or spread upgrade **even at zero
+  error**; no manuscript wording was adopted.
+
+  The rest of the day closed gates. **C714** finished Paper I's companion structuralization by
+  integrating **C721–C726** — the q11 orbit ledger, q9/q13 clique audits, q13 weight-ten XOR
+  certificates, the q13/17/19 root-edge DAG — under a thirteen-claim, five-mode ledger (human
+  structural proof, published theorem, Lean theorem, finite certificate, trusted execution), with
+  both authoritative and standalone roots passing all twenty-six checks and the q11 formal package
+  pinned by commit. **C711/C712** removed certificate dependence from Paper III's sub-700 inputs and
+  formalized the resulting interfaces in Lean. On `ame-lu`, **C731/C732** red-teamed and adopted the
+  Clebsch extremal-`X`-syndrome bridge and **C734** generalized it into a formal coset/syndrome
+  dictionary, reducing the paper's Clebsch result to a two-paragraph structural lemma composed with
+  two named theorems. Finally `gem-mining` opened two **adjacent problem attacks**: C736 reproduced
+  the published proof-carrying 21/30 multiplier baseline for Hadamard order 668 and extended it to
+  23/30 by an exact mod-8 argument, with C738/C740/C741 opened on the residual cases and C737 queued
+  on `M(18) ∈ {57,58,59}`. C738 and C740 then closed inside the same day by a second, unrelated
+  mechanism — a shift-111 orbit lock — taking the census to 25/30, closing every order-six subgroup,
+  and **exhausting that criterion on the five survivors** rather than leaving it untried; C741 is
+  live on the paired residual cases. Both closures kept C736's feasible nine-compression witnesses as
+  **positive controls**, so the screens are known not to be vacuous.
 
 ---
 

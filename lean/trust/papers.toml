@@ -68,7 +68,7 @@ drift_scan_roots = ["papers", "notes", "lean"]
 # manifests; checking that a file states current titles edits nothing and needs no such agreement.
 
 [[title_restating_doc]]
-path = "notes/2026-07-09-work-summary.md"
+path = "notes/2026-07-31-work-summary.md"
 
 [[title_restating_doc]]
 path = "papers/papers-index.md"
@@ -77,7 +77,7 @@ path = "papers/papers-index.md"
 # the integrated Clebsch manuscript is preserved only as a fallback and the Node Kayles paper sits
 # outside its scope, so neither is named there.
 [[title_restating_doc]]
-path = "notes/2026-07-26-results-summary-snapshot.md"
+path = "notes/2026-07-31-results-summary-snapshot.md"
 papers = [
   "ame_lu",
   "arcs_complete_outside_conic",
@@ -101,7 +101,7 @@ papers = [
 # because drift is visible and generated argument is not.
 
 [[generated_doc]]
-path = "notes/2026-07-09-work-summary.md"
+path = "notes/2026-07-31-work-summary.md"
 section = "manuscripts"
 
 # ---------------------------------------------------------------------------------------------

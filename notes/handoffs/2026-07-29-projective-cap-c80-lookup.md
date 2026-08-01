@@ -1194,7 +1194,7 @@ legal strict replies in `<H>.x` gives only 14 projected q17 edges, covers
 (`6 P + 8 N`); only eight isolates touch a P edge. The q19 control covers
 `20/51` moves with `2 P + 9 N`. Generator conjugacy, projected relations,
 and direct determinant legality all commute with transport. The review of
-`../2026-07-26-results-summary-snapshot.md` identifies the useful successor:
+`../2026-07-31-results-summary-snapshot.md` identifies the useful successor:
 the terminal-reply graph is exactly the graph of maximal two-element faces
 of the **full continuation complex**, so tangent-code pair conflicts alone
 are insufficient because collinear-triple minimal nonfaces are essential.

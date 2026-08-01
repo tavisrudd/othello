@@ -81,5 +81,5 @@ reconstruction of a hypothetical plane is not progress on the conjecture.
 - Máté Matolcsi and Máté Weiner, character-table approach to projective-plane
   nonexistence, arXiv `1709.06149`; `abstract/metadata only`:
   https://arxiv.org/abs/1709.06149.
-- Local theorem inventory: `notes/2026-07-26-results-summary-snapshot.md`,
+- Local theorem inventory: `notes/2026-07-31-results-summary-snapshot.md`,
   continuation reconstruction and four-frame rigidity sections.

@@ -25,7 +25,7 @@ families; dated reports supply the subsequent Golden/operator layer.
    strong coverage obstructions and exceptional `q=64` three-layer examples;
    the infinite-family `O(sqrt(q))` problem remains open.
 
-Primary baseline: `notes/2026-07-26-results-summary-snapshot.md`.
+Primary baseline: `notes/2026-07-31-results-summary-snapshot.md`.
 
 ## Repair, reliability and code products
 
@@ -105,7 +105,7 @@ Primary supplements:
     frame-to-grid reduction, Node-Kayles boundary law and extensive exact
     obstruction data.
 
-Primary baseline: `notes/2026-07-26-results-summary-snapshot.md`, section
+Primary baseline: `notes/2026-07-31-results-summary-snapshot.md`, section
 “The cap game on odd projective planes.”
 
 ## Matching cautions

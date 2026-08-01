@@ -1,6 +1,6 @@
 # Crosswalk: external problems versus repository results
 
-**Baseline result inventory:** `notes/2026-07-26-results-summary-snapshot.md`,
+**Baseline result inventory:** `notes/2026-07-31-results-summary-snapshot.md`,
 supplemented by dated reports through 2026-07-31.  The baseline is known to be
 stale and will be replaced by a refreshed result index before strong verdicts.
 
