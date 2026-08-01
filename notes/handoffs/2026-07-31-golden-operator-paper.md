@@ -9,7 +9,8 @@
 > Paper III (`passages`), not a standalone fifth numbered paper. Released
 > Paper-III versions remain immutable. This lane continues to own its source
 > mathematics, evidence, and manuscript experiments; publication integration
-> is coordinated through the Clebsch handoff and the `passages` identity.
+> is coordinated through C763 in the Clebsch handoff and the `passages`
+> identity. C680 is retired as the released v1/v2 closure surface.
 
 ## Goal
 
@@ -25,11 +26,11 @@ formula matches.
 
 ## Current state
 
-The source mathematics is proved in the frozen C704--C710 reports.  This
-entire propagated-shadow portfolio belongs to Paper IV.  C730 may strengthen
-Paper III only through the arithmetic--harmonic provenance of the source
-class `([C], [Z_C])`; Paper III still ends before every result below.  In
-particular:
+The source mathematics is proved in the frozen C704--C710 reports.  C763 may
+select only the structural source--operator--cubics--harmonic core for the
+next forward version of Paper III; the broader applications below remain
+source-program inventory.  The q13 passant-code Paper IV does not own this
+portfolio.  In particular:
 
 - the six outer middle-exterior coordinates are the Joubert coordinates and
   land on the Segre cubic;
@@ -349,7 +350,7 @@ paper-owned verification policy are installed and build without warnings.
 The cross-paper framing is resolved by
 `notes/2026-07-31-c727-cross-paper-recovery-propagation.md`: Paper I supplies
 the first provenance theorem only at the monomial code/support-two-graph
-level, while Paper IV supplies forward functorial propagation to its shadows.
+level, while C763 owns any selective forward integration of its shadows.
 The bare conic requires a selected geometric Clebsch parent.  Paper III may
 later supply an independent provenance theorem through C730.  No Clebsch
 manuscript edit is authorized by C727.

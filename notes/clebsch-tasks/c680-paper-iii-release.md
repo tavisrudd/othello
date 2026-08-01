@@ -4,11 +4,10 @@
 
 **Opened:** 2026-07-26
 
-**Status:** the arithmetic/harmonic baseline, relative marked orientation
-bridge, global Stein algebra, five-statement/five-row trust surface, ordinary
-and isolated aggregates, warning-free PDF, and fresh context-free `GO` are
-green.  Publication metadata and the immutable locator remain the external
-blockers.
+**Status:** retired 2026-08-01.  The arithmetic/harmonic baseline, relative
+marked orientation bridge, global Stein algebra, trust surface, and review
+gates shipped in Paper III versions 1 and 2.  C763 supersedes this task for the
+future Golden-core forward version.
 
 ## Objective
 
@@ -42,8 +41,8 @@ paper-owned trust surface.  The revision ends at the oriented source class
 
 ## Next action
 
-Insert the immutable artifact locator and the author's intended
-affiliation/contact metadata, then run the final release closure.
+None.  Preserve this card as the historical closure surface for versions 1
+and 2; route all new Paper III work through C763.
 
 ## Boundaries and records
 

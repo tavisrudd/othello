@@ -37,9 +37,9 @@ are reusable inputs to C756, but C761 does not own or block that theorem.
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening | [C182](../clebsch-tasks/c182-paper-i-release.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening and C762 owns the forward exposition pass | [C762](../clebsch-tasks/c762-paper-i-forward-exposition.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; C749/C750 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III (`passages`) — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released; Golden material feeds a future forward version rather than a fifth paper | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
+| Paper III (`passages`) — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released; C763 selectively consolidates the Golden structural core into the next forward version | [C763](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) |
 | Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 infrastructure installed; extraction, proof compression, paper-owned evidence, and structural Lean formalization remain | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
@@ -261,11 +261,12 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | complete; parity-specific proof has independent modular and context-free `GO` verdicts; human proof 3/4 | none; C749 owns final adversarial freeze |
 | [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | unblocked; human proof 4/4 | attack and compress the complete proof, then freeze it |
 | [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | active by explicit user override; six individually elaborated spine modules, full theorem still open | formalize the actual Lucas Hom basis, detecting-module vanishings, contraction, and classification composition |
-| [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | relative marked bridge, global Stein algebra, mechanical gates, and fresh cold-read `GO` green | obtain immutable artifact locator and author affiliation/contact metadata |
+| [C762 — Paper I forward exposition](../clebsch-tasks/c762-paper-i-forward-exposition.md) | queued; released versions remain immutable | revise the headline order, series spine, Paper-IV pointer, and citation/trust presentation after reconciling with C753 |
+| [C763 — Paper III Golden consolidation](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) | queued; supersedes retired C680 for forward work | freeze the selective source--operator--cubics--harmonic theorem map before manuscript integration |
 | [C744 — Paper III proof-spine structuralization](../clebsch-tasks/c744-paper-iii-proof-spine-structuralization.md) | complete; pinching, Gram, torsor, harmonic-scalar, A/B 96/100, EJ/EJ2, and synchronized release gates green | none |
 | [C745 — Paper III current-theorem Lean formalization](../clebsch-tasks/c745-paper-iii-current-lean-formalization.md) | complete; Paper-III-only structural gate, 34-declaration audit, five-row honest boundary, clean replay, and standalone synchronization green | none; C287 owns later reviewed extraction/tagging only |
-| [C733 — Paper III canonical orientation bridge](../clebsch-tasks/c733-paper-iii-canonical-orientation-bridge.md) | complete; strongest theorem is explicitly relative to the full marked datum, with ambiguity ledger and final `GO` | none; C680 resumes metadata closure |
-| [C730 — Paper III orientation source](../clebsch-tasks/c730-paper-iii-orientation-source-theorem.md) | complete; normalized-cover theorem, involution ledger, harmonic comparison, and integral boundary frozen | none; C680 owns manuscript integration |
+| [C733 — Paper III canonical orientation bridge](../clebsch-tasks/c733-paper-iii-canonical-orientation-bridge.md) | complete; strongest theorem is explicitly relative to the full marked datum, with ambiguity ledger and final `GO` | none; C763 owns any forward integration |
+| [C730 — Paper III orientation source](../clebsch-tasks/c730-paper-iii-orientation-source-theorem.md) | complete; normalized-cover theorem, involution ledger, harmonic comparison, and integral boundary frozen | none; C763 owns forward manuscript integration |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active; McKay corner plus degree-ten and all-degree golden/\(E_8\) Weyl descents complete | user decision: close exploration or select the optional preprojective successor |
 | [C705 — adjugate Segre--Igusa polar](../clebsch-tasks/c705-adjugate-segre-igusa-polar.md) | complete; adjugate factorization, global \(E_6\) first-normal jet, characteristic-zero Coble Hessian normalization, affine-\(E_8\) mixed potential, Lie-\(E_8\) Pfaffian parent, frozen orbit mechanism, and all \(720\) ordered sheets proved/computed | none; the residual \(S_5\)-torsor records unavoidable noncanonicity, not unfinished work |
 | [C706 — equivariant Clebsch--Clifford lift](../clebsch-tasks/c706-equivariant-clebsch-clifford-lift.md) | complete; full \(S_6\) Clifford extension nonsplit, conference \(S_5\) split with two classes, golden \(A_5\) split with four classes, distinguished conference twist nonzero and nonextendable \(A_5\to S_5\), scalar multiplier trivial; six conjugate local \(S_5\) charts meet pairwise in \(S_4\) but do not glue | C708 tests the outer exchange between the chart \(1+5\) action and the transitive axis/polarity six-action; no direct bijection exists |
@@ -532,9 +533,10 @@ explicitly relative to the ordered golden representatives, plane-triple and
 Petersen labels, and normalized chart lift.  The full ambiguity ledger is
 integrated, and the sheet alone is not claimed to recover those inputs.
 Ordinary, isolated, visual, and fresh context-free gates are green.  The full
-geometric integral localization remains unspecified; immutable artifact and
-author metadata are the remaining C680 blockers.  All functorial shadows
-belong to Paper IV.  Full repair report:
+geometric integral localization remains unspecified; versions 1 and 2 are
+released.  C680 is retired; C763 owns the selective Golden-core forward
+version, while the broader applications remain outside the numbered series.
+Full repair report:
 `notes/2026-07-31-c733-paper-iii-relative-orientation-bridge.md`.
 
 C682 is independent exploration. Its current crown includes the
