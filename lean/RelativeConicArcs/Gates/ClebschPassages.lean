@@ -1,0 +1,61 @@
+import RelativeConicArcs.QuadraticPinching
+import RelativeConicArcs.SplitQuadraticPinching
+import RelativeConicArcs.InvolutiveOddUnit
+import RelativeConicArcs.GoldenQuadraticCharacters
+import RelativeConicArcs.TightFrameConference
+import RelativeConicArcs.SignedEquiangularGram
+import RelativeConicArcs.ClebschGoldenConference
+import RelativeConicArcs.MarkedClebschBridge
+import RelativeConicArcs.KneserPairEigenspace
+import RelativeConicArcs.PetersenHarmonicKernel
+import RelativeConicArcs.ClebschInvariantCubic
+import RelativeConicArcs.ClebschPassagesCorrespondence
+
+/-!
+# Gate: structural Clebsch passages
+
+This is the public replay surface for the algebraic mechanisms used in the
+current Clebsch paper.  The pinching, eigenspace, tight-frame, switching, and
+scalar-factor arguments are symbolic.  Native decision is confined to the
+displayed finite conference/reflection matrices, one finite-field nonsquare
+check, and values of explicitly displayed finite vectors.
+
+The gate deliberately does not assert the geometric correspondence between
+Hitchin's spaces and these algebraic models, nor the integral
+Mukai--Umemura comparison.  Those inputs remain outside the formal trust
+claim.
+-/
+
+#print axioms RelativeConicArcs.QuadraticPinching.conductor_eq_ker
+#print axioms RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul
+#print axioms RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal
+#print axioms RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral
+#print axioms RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit
+#print axioms RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant
+#print axioms RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant
+#print axioms RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive
+#print axioms RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul
+#print axioms RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization
+#print axioms RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11
+#print axioms RelativeConicArcs.TightFrameConference.conference_sq_of_gram
+#print axioms RelativeConicArcs.SignedEquiangularGram.golden_det_positive
+#print axioms RelativeConicArcs.SignedEquiangularGram.golden_det_negative
+#print axioms RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq
+#print axioms RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch
+#print axioms RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not
+#print axioms RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not
+#print axioms RelativeConicArcs.MarkedClebschBridge.chartLift_smul
+#print axioms RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen
+#print axioms RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace
+#print axioms RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum
+#print axioms RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq
+#print axioms RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector
+#print axioms RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree
+#print axioms RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization
+#print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square
+#print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal
+#print axioms RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package
+#print axioms RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar
+#print axioms RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value
+#print axioms RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient
+#print axioms RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors
