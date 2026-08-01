@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C715
+**Status:** complete; reported in
+`notes/2026-07-31-c716-golden-two-u1-lines.md`
 
 ## Objective
 
