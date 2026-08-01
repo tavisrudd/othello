@@ -1,11 +1,11 @@
-# Clebsch three-paper program
+# Clebsch four-paper program
 
 **Lane:** `clebsch`
 
 **Date:** 2026-07-31
 
 > **LIVE MAP ONLY.** This is the routing and state surface for the active
-> three-paper program. Detailed live task internals belong in C-task cards;
+> four-paper program. Detailed live task internals belong in C-task cards;
 > completed and superseded detail belongs in the archives linked below.
 >
 > **ROUTING AUTHORITY.** No dated planning note, fallback-paper verdict, task
@@ -18,6 +18,7 @@
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | C752 audit complete; C753 implementing four rigidity and eight orientation packets; external publication remains | [C182](../clebsch-tasks/c182-paper-i-release.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | C748 complete with two independent `GO` verdicts and a warning-free authoritative release; C749 is unblocked, C750 has a partial structural spine, and standalone remains frozen | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | relative marked orientation bridge and global Stein algebra complete; current structural Lean mechanism gate and exact partial-coverage map green; metadata closure remains | [C680](../clebsch-tasks/c680-paper-iii-release.md) |
+| Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 infrastructure installed; extraction, proof compression, paper-owned evidence, and structural Lean formalization remain | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
 C703 is complete: all three split papers now share the title-page identity
@@ -230,6 +231,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
 | [C751 — Paper I proof-spine tightening](../clebsch-tasks/c751-paper-i-proof-spine-tightening.md) | complete; pentagon-first hybrid won the blind A/B 96--91, final referee GO, both release roots green | none |
 | [C752 — Paper I Lean spine audit](../clebsch-tasks/c752-paper-i-lean-spine-audit.md) | complete; transitive prose/definition audit and exact C753 packet interfaces frozen | none |
+| [C761 — Paper IV q13 passant code](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) | active; manuscript, verification, and plan infrastructure installed | freeze theorem language, extract paper-owned evidence, write the structural proof, and implement the semantic Lean gate |
 | [C753 — Paper I Lean spine closure](../clebsch-tasks/c753-paper-i-lean-spine-closure.md) | active; prose-source repairs and R1 first, then R2--R4 and O1--O8 | implement only the frozen same-mechanism interfaces and preserve packet gates |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; C748's two-reader gate and authoritative release are green | complete C749 adversarial closure and C750 same-spine formal coverage before repackaging |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |

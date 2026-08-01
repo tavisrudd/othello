@@ -1,0 +1,140 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\PG}{\operatorname{PG}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\cC}{\mathcal C}
+
+\title{A binary $[78,36,12]$ code from the passant lines\\
+of a conic over $\F_{13}$}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\begingroup
+\makeatletter
+\let\clebschmaintitle\@title
+\def\@title{\large\textsc{The Clebsch cubic program --- IV}\\[0.7em]
+  \LARGE\clebschmaintitle}
+\makeatother
+\maketitle
+\endgroup
+
+\begin{abstract}
+Let \(\cC\) be a nonsingular conic in \(\PG(2,13)\), and form the binary
+incidence code on its \(78\) internal points using the \(78\) passant lines.
+We prove that this code has parameters \([78,36,12]_2\).  It has exactly
+\(364\) minimum words, in four \(\PGL(2,13)\)-orbits of size \(91\), and
+each orbit spans the code.  More strongly, the minimum supports reconstruct
+the passant incidence matrix and the six-class elliptic association scheme;
+their coordinate-permutation automorphism group is exactly
+\(\PGL(2,13)\).  The proof combines a tangent-product exclusion in weight
+eight, two exhaustive but compact syndrome-disjointness certificates in
+weight ten, and structural arguments in the binary association algebra for
+spanning and reconstruction.
+\end{abstract}
+
+\noindent\textbf{Keywords.} binary incidence code; finite conic; passant
+line; minimum word; association scheme; reconstruction.
+
+\section{The passant incidence code}
+
+Fix a nonsingular conic \(\cC\subset\PG(2,13)\).  A line is
+\emph{passant} when it is disjoint from \(\cC(\F_{13})\).  Conic polarity
+identifies the \(78\) internal points with the \(78\) passant lines.  Let
+\(M\) be their binary incidence matrix and put
+\[
+ K=\ker_{\F_2}M\subseteq\F_2^{78}.
+\]
+The coordinate set is the set of internal points.  Automorphisms below are
+coordinate permutations preserving the indicated code or minimum-support
+system.
+
+\begin{theorem}[Minimum-layer reconstruction]
+\label{thm:main}
+The code \(K\) has parameters \([78,36,12]_2\) and exactly \(364\)
+minimum words.  Under \(\PGL(2,13)\), those words form four orbits of
+size \(91\): one has stabilizer isomorphic to \(S_4\), and three have
+dihedral stabilizer of order \(24\).  Every one of the four orbits spans
+\(K\).
+
+Pair and triple concurrence in the minimum supports reconstruct the six
+relations of the elliptic association scheme on the internal points.
+Among the passant seven-cliques, the \(78\) with zero triple concurrence
+are exactly the rows of \(M\).  Consequently the minimum-support system
+reconstructs \(M\) up to row order, and its coordinate-permutation
+automorphism group is exactly \(\PGL(2,13)\).
+\end{theorem}
+
+\section{Distance twelve}
+
+Row parity gives the elementary lower bound eight.  A hypothetical
+weight-eight word would be an eight-arc saturating every passant pencil.
+Segre's tangent identity reduces it to a seven-clique in a cyclic
+\(42\)-vertex compatibility graph; a five-row closure proves that graph has
+clique number five.  In weight ten, pencil parity leaves exactly two local
+profiles.  Separate syndrome-disjointness certificates exhaust both profiles,
+and an independent dynamic program checks the same empty intersections.
+An explicit dihedral support supplies a word of weight twelve.
+
+\section{Minimum words and the elliptic scheme}
+
+Exact orbit representatives generate the four minimum-word orbits and their
+\(364\) supports.  Pair concurrence distinguishes passant from secant joins,
+while triple-concurrence profiles distinguish all six elliptic relations.
+This reduces incidence reconstruction to the intrinsic selection of the
+\(78\) zero-triple-concurrence seven-cliques.
+
+\section{Spanning and automorphisms}
+
+The binary reduction of the elliptic association algebra supplies a short
+spanning argument: one relation matrix maps into \(K\) and is injective on
+\(K\), while the four orbit Gram matrices are powers of that relation.
+For automorphisms, three anchors form a regular \(\PGL(2,13)\)-orbit and a
+fourth anchor separates all \(78\) points by its relation signature.
+
+\section{Formalization and exact evidence}
+
+The formal development separates general conic/passant-code definitions
+from the finite \(q=13\) instance.  Structural reductions, coverage of the
+two weight-ten profiles, orbit exhaustion, and the reconstruction interfaces
+are assigned explicit terminal theorems.  The paper's verification manifest
+distinguishes human arguments, kernel-checked results, compact certificates,
+and independent trusted replays.
+
+\section{Conclusion}
+
+The minimum layer determines more than the parameters of the code: it
+recovers the finite geometry that defined the parity checks.  The result
+therefore gives a concrete reconstruction theorem for a binary incidence
+code, with the irreducibly finite exclusions isolated from the association-
+algebra mechanism that explains spanning and symmetry.
+
+\section*{AI assistance disclosure}
+
+This project was developed with extensive assistance from OpenAI Codex and
+Anthropic Claude. Under the author's direction, the systems assisted with
+proof exploration, literature research, symbolic and finite computation,
+code and formal-proof development, verification, and manuscript drafting and
+revision. The author checked the resulting arguments, computations, code,
+and cited sources, reviewed and edited all AI-assisted material, and assumes
+responsibility for all content.
+
+\end{document}

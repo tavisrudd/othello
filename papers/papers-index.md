@@ -95,6 +95,18 @@ Clebsch cubic*
   premise. Local release gates are closed; submission still requires an immutable
   public artifact locator and author affiliation/contact metadata.
 
+**Clebsch fourth paper · `q13-passant-code`** — *A binary [78,36,12] code from the passant
+lines of a conic over F13*
+- *Status:* C761 has installed the standalone manuscript, verification, and release-planning
+  infrastructure. The human proof, paper-owned evidence extraction, semantic Lean gate, novelty
+  audit, isolated replay, and public artifact remain active work.
+- *Scope:* exact dimension and minimum distance, 364 minimum words in four projective orbits,
+  spanning by every orbit, reconstruction of the elliptic association scheme and passant incidence
+  matrix from the minimum layer, and exact coordinate-permutation automorphism group
+  `PGL(2,13)`.
+- *Boundary:* Paper IV does not own the through-eight or all-`k` conic-filling classification.
+  It cites Paper I for motivation and becomes the canonical home of the full q13 code proof.
+
 **Preserved fallback · `clebsch-hexagon-code`** — *Deep-hole rigidity and factorization memory in
 the Clebsch hexagon code*, the 37-page integrated mega-paper at `5a82e80d`, with its matched 58-row manifest and deterministic
 18-check release surface. It remains immutable as a fallback and is not the

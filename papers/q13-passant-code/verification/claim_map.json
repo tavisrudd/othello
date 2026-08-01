@@ -1,0 +1,43 @@
+{
+  "paper": "A binary [78,36,12] code from the passant lines of a conic over F13",
+  "schema": "paper-iv-claim-map-v1",
+  "status": "infrastructure-only",
+  "claims": [
+    {
+      "id": "dimension",
+      "statement": "The binary passant incidence code has length 78 and dimension 36.",
+      "current_modes": ["published dimension formula", "independent exact elimination"],
+      "lean_target": "kernel-checked exact rank theorem"
+    },
+    {
+      "id": "minimum-distance",
+      "statement": "The code has minimum distance 12.",
+      "current_modes": ["human parity reduction", "human tangent-product reduction", "finite clique closure", "two compact weight-ten certificates", "explicit weight-twelve witness", "independent replay"],
+      "lean_target": "structural reductions plus kernel-checked finite certificates"
+    },
+    {
+      "id": "minimum-layer",
+      "statement": "There are 364 minimum words in four PGL(2,13)-orbits of size 91.",
+      "current_modes": ["exact orbit execution", "independent replay"],
+      "lean_target": "kernel-checked orbit coverage and disjointness"
+    },
+    {
+      "id": "orbit-spanning",
+      "statement": "Each minimum-word orbit spans the 36-dimensional code.",
+      "current_modes": ["human association-algebra proof", "exact relation tables"],
+      "lean_target": "kernel-checked association-algebra proof"
+    },
+    {
+      "id": "reconstruction",
+      "statement": "The minimum supports reconstruct the elliptic scheme and the 78 passant incidence rows.",
+      "current_modes": ["human concurrence reduction", "exact pair and triple profiles", "independent replay"],
+      "lean_target": "formal reconstruction interface with kernel-checked finite profiles"
+    },
+    {
+      "id": "automorphisms",
+      "statement": "The coordinate-permutation automorphism group of the minimum-support system is PGL(2,13).",
+      "current_modes": ["human anchor argument", "exact stabilizer-chain replay"],
+      "lean_target": "formal anchor theorem plus kernel-checked finite uniqueness"
+    }
+  ]
+}
