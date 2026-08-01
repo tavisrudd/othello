@@ -7,8 +7,9 @@ proof-structured; its q=23 octad analogue is closed-negative; the chord--extensi
 holds for every six-arc in every finite projective plane. C155 is drafted with an exact computation
 manifest, and submission remains gated on C156/C157/C169. C159 is seeded by Clebsch C184's complete
 q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch C187 and only its q5
-folklore/priority check remains. The Hadamard-668 multiplier census is now 23/30 impossible, with ID
-7 the sole surviving order-6 subgroup and seven total residual cases.
+folklore/priority check remains. The Hadamard-668 multiplier census is now 24/30 impossible: C738's
+shift-111 orbit lock excludes ID 7, so every order-6 subgroup is closed and six lower-order cases
+remain.
 
 **Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191/C192/C193/C736/C737/C738
 reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
@@ -94,7 +95,7 @@ Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsc
 | **C193** | reported — **the six-sweep ILL gate is open** | BSW 1992 read at full text. Its §3 is a **published complete census** of the exceptional complete exterior sets (Brouwer, up to isomorphism, q=7,11,19,23,27,31; none for q=43..131). Four consequences: the q=11 6-arc is **Korchmáros 1981** (chains of circles on an elliptic quadric) — a third prior name, not in the lane's record; there is a **second q=11 configuration, a Pasch**, invisible to an arc-only census; the q<131 check is **Brouwer's inside BSW**, not Van de Voorde's; and Giessen 1991 is confirmed as the sets-without-tangents paper, now the only unread BSW original. Strongest lead: BSW's **q=31 6-arc + Petersen graph** against this lane's q=11 Brianchon–Petersen — null declared, uncomputed → [report](../2026-07-15-c193-bsw-exceptional-census.md) |
 | **C736** | reported | reproduced the proof-carrying 21/30 baseline and excluded residual IDs 9 and 10 by an exact mod-8 9-compression argument with independent replay; 23/30 are now impossible, ID 7 is the sole surviving order-6 case, and unrestricted order 668 remains open → [report](../2026-07-31-c736-hadamard-668.md) |
 | **C737** | queued, independent | decide `M(18) in {57,58,59}` through a complete Seidel-spectrum census and certified elimination/construction of residual cases → future report `notes/2026-07-31-c737-equiangular-lines-r18.md` |
-| **C738** | queued, C736 follow-on | attack ID 7 `<73,112>`, the sole residual order-6 fixed common multiplier, with a proof-carrying orbit model or analytic obstruction; preserve C736's feasible 9-compression witness as a positive control → future report `notes/2026-07-31-c738-hadamard-668-id7.md` |
+| **C738** | reported | excluded ID 7 `<73,112>` analytically: at shift 111, invariance forces equality on all 222 nonmultiples of 3, but a Legendre pair requires joint Hamming distance 334 while at most 222 is possible; independently replayed the exact orbit certificate and preserved C736's feasible 9-compression witness as a positive control; all order-6 cases are closed and 24/30 subgroups are impossible → [report](../2026-07-31-c738-hadamard-668-id7.md) |
 | **C174** | reported, folds into C155 | stronger six-arc identity in every finite projective plane; exact q=5,7,11,13 tables tracked → [report](../2026-07-14-c174-general-six-subset-identity.md) |
 | **C175** | queued, independent | classify concurrency-free conic six-sets across small q; not a C155 gate |
 | **C177** | queued, independent | test whether local Mathieu systems on the point-regulus conics of `D_Hex(11)` glue to a `2-(1332,6,240)` or oriented `2-(1332,6,120)` design; not a C155 gate |
@@ -259,7 +260,7 @@ the two BSW originals remain unread.
 
 ## Queued work
 
-C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736, C737 and C738 are this lane's; C178, C190, and C736 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
+C155–C157, C159, C160, C169, C174, C175, C177, C178, C190, C736, C737 and C738 are this lane's; C178, C190, C736, and C738 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
 of the same sweep. Rationale, search directions, and what was deliberately left unqueued:
 [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md). **Only C153 and the running
 external-source gates can cost the current novelty posture; the rigidity/gap checks are complete.

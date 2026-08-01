@@ -150,7 +150,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C177 `[gem-mining]` [QUEUED FOLLOW-ON]** — generalized-hexagon connection.
 - **C193 `[gem-mining]` [OPEN ILL GATE]** — obtain/read the remaining BSW source.
 - **C737 `[gem-mining]` [QUEUED; INDEPENDENT]** — attack the exact equiangular-line maximum `M(18) in {57,58,59}` through a complete feasible Seidel-spectrum census, Jacobi/interlacing and lattice filters, and independently checkable certificates for terminal graph nonexistence claims → `notes/2026-07-31-c737-equiangular-lines-r18.md`.
-- **C738 `[gem-mining]` [QUEUED; C736 FOLLOW-ON]** — close the sole residual order-6 fixed common-multiplier LP(333) case, ID 7 `<73,112>`, by a proof-carrying exact orbit model or a new analytic obstruction; treat its feasible 9-compression witness as the mandatory positive control and do not overclaim unrestricted Hadamard order 668 → `notes/2026-07-31-c738-hadamard-668-id7.md`.
 
 ### `gateway`
 

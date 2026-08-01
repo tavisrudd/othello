@@ -1,0 +1,83 @@
+{
+  "conclusion": "ID 7 admits no fixed common-multiplier Legendre pair of length 333",
+  "generators": [
+    73,
+    112
+  ],
+  "group": [
+    1,
+    73,
+    112,
+    184,
+    223,
+    295
+  ],
+  "length": 333,
+  "obstruction": {
+    "equivalent_joint_paf_lower_bound": 222,
+    "forced_equal_positions": 222,
+    "forced_equal_residue_classes_mod_3": [
+      1,
+      2
+    ],
+    "free_positions_per_sequence": 111,
+    "joint_hamming_upper_bound": 222,
+    "legendre_required_joint_hamming": 334,
+    "legendre_required_joint_paf": -2,
+    "per_sequence_hamming_upper_bound": 111,
+    "shift": 111
+  },
+  "orbit_count": 95,
+  "orbit_size_counts": {
+    "1": 3,
+    "2": 54,
+    "3": 2,
+    "6": 36
+  },
+  "positive_control_9_compression": {
+    "joint_paf_nonzero_shifts": [
+      -74,
+      -74,
+      -74,
+      -74,
+      -74,
+      -74,
+      -74,
+      -74
+    ],
+    "joint_squared_norm": 594,
+    "required_joint_paf": -74,
+    "row_sums": [
+      1,
+      1
+    ],
+    "sequences": [
+      [
+        17,
+        -5,
+        1,
+        -11,
+        -5,
+        1,
+        7,
+        -5,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        -7,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "source": "C736 committed feasible witness",
+    "status": "FEASIBLE"
+  },
+  "schema": "c738-lp333-id7-orbit-obstruction-v1",
+  "stable_id": 7
+}
