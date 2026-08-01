@@ -1835,8 +1835,17 @@
       "last": 737,
       "purpose": "Exact maximum equiangular lines in dimension 18",
       "sequence": 204
+    },
+    {
+      "count": 1,
+      "first": 738,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 738,
+      "purpose": "close the sole residual order-6 LP(333) multiplier case ID 7 with a proof-carrying exact model",
+      "sequence": 205
     }
   ],
-  "next_id": 738,
+  "next_id": 739,
   "schema": "codex-task-id-allocations-v1"
 }
