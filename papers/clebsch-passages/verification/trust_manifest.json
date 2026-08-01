@@ -53,7 +53,7 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "local normalization proof plus exact audit of displayed coordinates",
+      "proof_role": "quadratic pinching and signed Gram-determinant proof, with the displayed coordinates retained as an independent regression audit",
       "evidence": [
         "sections/02-orientation-cover.tex",
         "sections/04-arithmetic-specialization.tex",
@@ -83,7 +83,7 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "human normalization and explicit relative-marking proof using Hitchin's branch and chart theorems, with a complete ambiguity ledger, a golden-fibre equivariance calculation, and exact audit of the scalar factorization, conference signs, and Petersen identities",
+      "proof_role": "split-quadratic pinching, tight-frame conference identities, and an explicit relative-marking proof using Hitchin's branch and chart theorems, with a golden-fibre equivariance witness and exact regression audit",
       "evidence": [
         "sections/03-orientation-source.tex",
         "verification/evidence/orientation_source.py",
@@ -111,7 +111,7 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "human representation-theoretic proof with exact matrix audit",
+      "proof_role": "two-orbit Petersen kernel calculation, representation-theoretic eigenspace proof, and exact regression audit",
       "evidence": [
         "sections/05-harmonic-realization.tex",
         "verification/evidence/harmonic_clebsch.py",
@@ -136,7 +136,7 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "Gaunt identity and invariant-line argument with two exact evaluations",
+      "proof_role": "invariant-cubic-line argument normalized on the marked primitive point-stabilizer-fixed vector, with the universal Wigner factor separated from the marked Petersen restriction scalar",
       "evidence": [
         "sections/05-harmonic-realization.tex",
         "verification/evidence/harmonic_clebsch.py",

@@ -32,20 +32,28 @@ over \([xyz]\).
 \begin{proof}
 Every displayed vector has one zero coordinate.  Since \(t^2=t+1\), its
 squared norm is \(t^2+1=t+2\).  The inner product of two distinct
-representatives is \(\pm t\), while
+representatives is \(\pm t\): the \(A_5\)-action is transitive on pairs of
+distinct projective axes, so one squared inner-product check suffices.  Moreover
 \[
  (t+2)^2=5(t+1)=5t^2.
 \]
 This gives the normalized squared inner product \(1/5\).  The twenty
-three-point determinants are
-\(\pm2t\) or \(\pm2t^2\), so none vanishes under the stated hypotheses.
+three-point checks reduce to one signed Gram determinant.  For any triple,
+let \(\epsilon=\pm1\) be the product of its three inner-product signs.  Its
+Gram determinant is
+\[
+ (t+2)^3-3(t+2)t^2+2\epsilon t^3
+ =\begin{cases}4t^4,&\epsilon=1,\\4t^2,&\epsilon=-1.\end{cases}
+\]
+It is nonzero, so every triple is independent.
 The final assertion uses Hitchin's classification of the two
 icosahedral sets on the orthogonal-plane cubic.
 \end{proof}
 
-The coordinate conclusions in the proposition remain valid after reduction
-to any field of characteristic different from \(2\) and \(5\), once a root
-of \(t^2-t-1\) is chosen.  This does not extend the complete-fibre assertion:
+The six-arc conclusion remains valid after reduction in every characteristic
+other than \(2\).  The metric interpretation additionally excludes
+characteristic \(5\), where \(t^2-t-1\) is inseparable and the common norm
+\(t+2\) vanishes.  This does not extend the complete-fibre assertion:
 the comparison with Hitchin's geometric incidence cover is available in
 characteristic zero and, after spreading out, only away from an unspecified
 finite set of primes.
@@ -114,10 +122,16 @@ roots modulo \(11\) are \(4\) and \(8\), and \(2\) is nonsquare modulo
 \(11\), proving the specialization.
 \end{proof}
 
-Thus two independent square classes govern the finite specialization:
-\([5]\) determines whether the two displayed configurations are rational, while
-\([2]\) determines whether their exchanger lies in the special projective
-subgroup.  Dye's existence criterion for Clebsch hexagons has the same
+The class \([2]\) is forced by the orthogonal conjugacy class of this
+quarter-turn on the \(yz\)-plane; the two reflections merely evaluate its
+spinor norm.
+
+Thus one equivariant quadratic datum carries two independent characters.
+The degree-two parameter algebra \(k[t]/(t^2-t-1)\), with deck involution
+\(t\mapsto1-t\), has discriminant class \([5]\); its two configurations are
+rational exactly when that torsor splits.  The rational orthogonal element
+\(R\) realizes the deck involution on the configurations and has spinor
+character \([2]\).  Dye's existence criterion for Clebsch hexagons has the same
 \([5]\) boundary \cite[Theorem~1]{DyeClebsch}.
 
 \paragraph{Integral boundary.}

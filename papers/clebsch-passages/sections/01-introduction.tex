@@ -69,13 +69,17 @@ through that point---requires \(\Q(\sqrt5)\).
 The choice can be retained globally after normalizing the pullback to the
 Clebsch chart, but its comparison with the conference and harmonic signs is
 relative to a marking.  A \emph{marked bridge datum} \(\mathfrak m\) consists
-of the six displayed golden axes in an order and with chosen representatives,
-a volume orientation of their representative lattice, the five plane triples
-labelled so that \(q_1=xyz\) and \(\sum q_i=0\), the resulting normalized
-linear lift \(\iota_t(y)=\sum y_iq_i\), and an identification of the ten face
-axes with the two-subsets of those same five labels.  Let \(C_{\mathfrak m}\)
-be the normalized conference matrix.  Its switching-invariant triangle cubic
-is
+of an ordering of the six golden projective axes, the five plane triples
+labelled so that \(q_1=xyz\) and \(\sum q_i=0\), and the resulting normalized
+linear lift
+\[
+ \iota_t(y)=\sum_i y_iq_i.
+\]
+The datum also identifies the ten face axes with the two-subsets of those
+five labels.  Choose normalized representatives of the six projective axes.
+They give a conference matrix
+\(C_{\mathfrak m}\).  A different choice switches it by a diagonal sign
+matrix.  The resulting switching-invariant triangle cubic is
 \[
  Z_{\mathfrak m}(x)=\sum_{i<j<k}(C_{\mathfrak m})_{ij}
  (C_{\mathfrak m})_{jk}(C_{\mathfrak m})_{ki}x_ix_jx_k.
@@ -86,7 +90,7 @@ It is translation-invariant and hence defines
  \bigl((\Q^6/\Q\mathbf1)^*\bigr).
 \]
 Write \([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}\) for this marked
-source modulo simultaneous changes \(a_i\mapsto d_i a_i\).  Such a change
+source.  Changing the auxiliary representatives by \(a_i\mapsto d_i a_i\)
 sends \(C_{\mathfrak m}\) to \(DC_{\mathfrak m}D\) and fixes
 \(Z_{\mathfrak m}\).  The opposite source is represented by
 \((-C_{\mathfrak m},-Z_{\mathfrak m})\).  The sign of the cubic generator
@@ -188,8 +192,16 @@ after choosing a sheet and the complete marked bridge datum.  It
 places the classical degree-six bond-order observable---the rotationally
 invariant cubic formed from degree-six harmonic coefficients---
 \cite{SNR1981,SNR1983} on the same four-space and computes its exact
-restriction.  The coefficient
-\(-784000/1247103\) has denominator divisible by \(11\), and this paper
+restriction.  The coefficient factors as
+\[
+ -\frac{784000}{1247103}
+ =-\frac{400}{46189}\frac{1960}{27}.
+\]
+The first factor is the universal \((6,6,6)\) Gaunt coupling
+\(\bigl(\begin{smallmatrix}6&6&6\\0&0&0\end{smallmatrix}\bigr)^2\);
+the second is the restriction scalar of the marked Petersen embedding.
+Thus the prime \(11\) in the denominator belongs to the universal angular
+momentum normalization, not to the golden descent.  This paper
 relates the two constructions through their four-dimensional
 \(A_5\)-module and invariant polynomial \(\sigma_3\), rather than by a
 rational map between their ambient harmonic spaces.

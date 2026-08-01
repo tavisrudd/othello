@@ -18,15 +18,19 @@ and Hitchin's restriction identity give the equality of finite
  z^2=5\iota_t^*J_0=80\sigma_3^2
    =(z-4\sqrt5\,\sigma_3)(z+4\sqrt5\,\sigma_3).
 \]
-Each factor has function field \(E(B)\), and \(B\) is normal.  The
-normalization of \(B\times_{\mathbf P(H)}\mathcal N_E\) is therefore two
-copies \(B_+\amalg B_-\).  The constant plane \(U_t\) supplies one
-component; deck exchange supplies the other.  On \(D(\sigma_3)\), the two
-linear factors differ by a unit, so the original pullback is already their
-product and is finite etale.  Hitchin's chart classification identifies
-this as exactly the locus of two distinct regular configurations.  Along
-\(\sigma_3=0\), the factors meet before normalization, but their normal
-components remain separate.
+For a normal domain \(S\), with \(2\) invertible and \(0\ne a\in S\), the algebra
+\(S[z]/(z^2-a^2)\) maps to \(S\times S\) by \(z\mapsto(a,-a)\).  Its image
+consists of pairs congruent modulo \(a\); hence its normalization is
+\(S\times S\), its conductor is \((a)\times(a)\), and it is already split
+etale where \(a\) is a unit.  Applying this elementary pinching lemma with
+\(a=4\sqrt5\,\sigma_3\) gives the normalization
+\(B_+\amalg B_-\) and locates the entire failure of normality on the
+Clebsch cubic.  The constant plane \(U_t\) supplies one component; deck
+exchange supplies the other.  Hitchin's chart classification identifies
+\(D(\sigma_3)\) as exactly the locus of two distinct regular configurations.
+The magnitude \(4\sqrt5\) is forced by the product of the descent class
+\(5\) and the chart factor \(16\); choosing its sign is precisely choosing
+one normalized component.
 
 The sign of \(z\) is the remaining freedom in the chosen anti-invariant
 generator.  We normalize it by declaring the component supplied by \(U_t\)
@@ -36,8 +40,9 @@ over an unspecified \(\mathbf Z[1/N]\).
 
 \subsection{The golden involution}
 
-For the ordered representatives \(a_0,\ldots,a_5\) in \(\mathfrak m\), write
-\(C=C_{\mathfrak m}\) and \(Z_C=Z_{\mathfrak m}\).  Their Gram
+Choose the displayed normalized representatives
+\(a_0,\ldots,a_5\) of the ordered projective axes in \(\mathfrak m\), and
+write \(C=C_{\mathfrak m}\) and \(Z_C=Z_{\mathfrak m}\).  Their Gram
 matrix has the form
 \[
  G=(t+2)I+tC,
@@ -51,8 +56,10 @@ C=\begin{pmatrix}
 -1&-1&-1&1&-1&0
 \end{pmatrix}.
 \]
-Direct summation of the six rank-one matrices gives
-\(\sum_i a_ia_i^{\mathsf T}=2(t+2)I_3\), hence
+The frame operator \(\sum_i a_ia_i^{\mathsf T}\) commutes with the
+irreducible three-dimensional \(A_5\)-action, so it is scalar.  Its trace is
+\(6(t+2)\); division by the dimension gives
+\(\sum_i a_ia_i^{\mathsf T}=2(t+2)I_3\).  Hence
 \(G^2=2(t+2)G\).  Substituting \(G=(t+2)I+tC\) and using
 \((t+2)^2=5t^2\) gives \(C^2=5I\).  Changing signs of axis
 representatives switches \(C\) to \(DCD\), but every triangle product and
@@ -140,9 +147,6 @@ the equivalence already built into the marked source. \\
 axis relabelling &
 simultaneously permutes the rows and columns of \(C\) and the variables of
 \(Z\); the theorem transports equivariantly and does not choose an order. \\
-lattice-orientation reversal &
-fixes the Gram matrix, \(C\), \(Z\), the labelled chart lift, and \(\beta\);
-the theorem is independent of this otherwise unused orientation. \\
 five-label relabelling &
 simultaneously permutes the \(q_i\), the coordinates \(y_i\), and the
 two-subset labels; \(\sigma_3\) is fixed and \(\beta\) is equivariant.
@@ -162,13 +166,14 @@ definition. \\
 \end{tabular}
 \end{center}
 
-Thus switching, coordinated relabelling, and reversal of the unused lattice
-orientation do not change the comparison.  Lift normalization and the
-cross-identification of the two five-labelled systems remain visible inputs.
+Thus switching and coordinated relabelling do not change the comparison.
+Lift normalization and the cross-identification of the two five-labelled
+systems remain visible inputs.
 The theorem makes no descent claim for those inputs.
 
-There is no ambient linear comparison between harmonic degrees three and
-six: their irreducible rotation modules have dimensions seven and thirteen.
-The comparison exists only on the chosen Clebsch four-space, and it stops at
+There is no nonzero rotation-equivariant linear comparison between harmonic
+degrees three and six: they are nonisomorphic irreducible rotation modules of
+dimensions seven and thirteen.  The linear comparison used here is the unique
+marked \(A_5\)-intertwiner on the chosen Clebsch four-space, and it stops at
 the relative marked source class
 \([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}\).
