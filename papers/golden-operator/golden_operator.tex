@@ -29,34 +29,27 @@
 \maketitle
 
 \begin{abstract}
-Let \(C\) be a marked symmetric conference operator on six axes with
-\(C^2=5I\), and let \(C_T\) run through its coherent outer six-family.
-We identify the six-point matching quotient and prove that its Golden
-commutator system is the unique normalized marked skew lift.  Middle
-exterior power, golden eigenspace compression, adjugation, and centered
-squaring are its operator shadows.  The diagonal of
-\(*\bigwedge^3C_T\) is the signed Joubert cubic vector \(Z\); the same
-cubics satisfy \(\Pf[D_x,C_T]=4Z_T(x)\), and over
-\(\mathbb Q(\sqrt5)\) they are determinants of the cross-eigenspace
-blocks.  The assembled block adjugates recover the Segre--Igusa polar map,
-while the six commutator forms give the synchronized product of pure-spinor
-big cells.  Rank-one tensor slices determine the critical scheme, and the
-matching Specht ideal determines the reduced base arrangement.  On balanced Boolean
-inputs, \(C^2=5I\) is equivalent to universal maximum-determinant
-\(K_{3,3}\) frustration.  Its six sign syndromes form a distance-six
-simplex whose transpose gives the order-ten conference operator and the
-real \(\operatorname{ETF}(5,10)\).
+Let \(C\) be a symmetric zero-diagonal sign matrix of order six satisfying
+\(C^2=5I\), equipped with a coherent outer \(S_6\)-marking.  We prove that
+the natural constructions from the resulting six matrices factor through
+one five-dimensional invariant quotient of six labelled points on
+\(\mathbf P^1\), and that the normalized marked lift from this quotient is
+unique.  Its six cubic coordinates have three equivalent forms: diagonal
+coefficients of the middle exterior power, commutator Pfaffians
+\(\Pf[D_x,C_T]\), and determinants between the two golden eigenspaces.
+The matching expansion of the Pfaffian identifies these forms; their
+adjugates then give the classical polar map from the Segre cubic to the
+Igusa quartic.
 
-The construction is reversible at a precise quotient.  The determinant
-sextic and the dimer signs both recover the unoriented conference
-two-graph; for the Clebsch code this is exactly the invariant unordered
-\(10+10\) support split.  A support-half choice is the additional datum
-needed for signed odd shadows.  A genuinely source-free product of six
-skew-coordinate cells admits no signed synchronized linear lift; the
-switching local system in the marked theorem is therefore essential.
-We also transport the construction to
-Slater amplitudes, Majorana parity walls, and one- and two-factor Abelian
-anomaly equations, while keeping these consequences separate from the
+The same operator controls two further structures.  On balanced sign
+vectors, \(C^2=5I\) is equivalent to a universal maximum-determinant
+condition, and the six resulting fingerprints yield the order-ten
+conference matrix by a Naimark--Gram construction.  Conversely, either a
+determinant sextic or the matching signs recovers the unoriented conference
+two-graph.  Signed odd constructions require one additional choice of a
+support half, and without the corresponding switching local system no
+synchronized signed linear lift exists.  We conclude with applications to
+fermionic amplitudes and Abelian anomaly equations, separate from the
 operator theorem.
 \end{abstract}
 
@@ -97,9 +90,17 @@ deep-hole locus of the Clebsch code is a full rational conic, which forgets
 its parent.  The monomial code class retains an unordered split of the
 twenty coordinate triples into two \(A_5\)-orbits.  We prove that this split
 is exactly the unoriented regular two-graph required by the operator
-theorem.  The final section transports the marked cubics to anomaly and
+theorem.  The code, factorization-sheet, and arithmetic--harmonic sources
+of the marked construction are developed independently in
+\cite{RuddRigidity,RuddFactorization,RuddPassages}.  The final section
+transports the marked cubics to anomaly and
 fermionic instruments.  Exceptional, Clifford, code, and lattice parents
 are secondary branches and are not needed to follow the main argument.
+
+The marking is necessary: Theorem~\ref{thm:unmarked-boundary} proves that a
+source-free product of six signed skew-coordinate cells has no synchronized
+linear lift.  Thus the local system in the propagation theorem records a
+genuine obstruction rather than auxiliary notation.
 
 \section{The marked propagation theorem}
 
@@ -359,7 +360,7 @@ the reduced \((m+1)\)-equals arrangement.
 At a closed \(m+m\) orbit, the completed transverse quotient map is
 \[
  \mu:U\oplus V\longrightarrow U\otimes V,\qquad
- (u,v)\longmapsto u\otimes v,qquad
+ (u,v)\longmapsto u\otimes v,\qquad
  \dim U=\dim V=m-1,
 \]
 and its critical ideal is
@@ -707,6 +708,8 @@ and the conference regularity criterion are classical
 triples are described in \cite[Section~1.2]{HMSVOuter}.  The proposition
 proves that the two \(A_5\)-orbits of coordinate triples carried by the
 monomial Clebsch code class give precisely that two-graph.
+It recovers, by an independent orbit-parity argument, the switching class
+constructed intrinsically in \cite[Theorem~8.2]{RuddRigidity}.
 
 \begin{proof}
 The degree-six \(A_5\)-action is two-transitive, hence transitive on pairs
@@ -1118,7 +1121,8 @@ lines on the Segre cubic as follows.
   synthematic total and recover the moving-path component.
 \item Homogeneous path controls of degree one suffice for every rational
   anomaly line and this degree is minimal for a nonconstant line.  On a
-  C715 inverse chart the controls are ratios of linear matching forms.
+  cross-ratio inverse chart of Theorem~\ref{thm:anomaly-inverse}, the
+  controls are ratios of linear matching forms.
 \item Through a generic smooth nonvectorlike amplitude point pass exactly
   six chiral lines, with directions \(\partial_iZ(x)\), one for each path
   control.  Each direction is itself anomaly-free and satisfies both mixed
@@ -1143,15 +1147,16 @@ The classical Fano classification gives exactly six nonplane components,
 each a split degree-five del Pezzo surface \cite{GripaiosNguyenTwo}; their
 closures are therefore the six one-moving-path families.  Collision of the
 moving point with each fixed point gives the five boundary planes.  The
-C715 matching dictionary turns those collisions into the five synthemes
+The cross-ratio matching dictionary turns those collisions into the five synthemes
 of one total and distinguishes the six families.
 
 A fixed collision maps onto its marked Segre plane, whose lines form the
 dual plane.  This gives the other fifteen components.  Finally, restricting
-the C715 matching ratios to \(q+tr\) makes every numerator and denominator
+the cross-ratio matching formulas to \(q+tr\) makes every numerator and denominator
 linear in \(t\).  A degree-zero control has constant image, proving the
 minimality statement.  Multi-affinity gives the six displayed response
-directions through \(Z(x)\).  The C715 inverse fibre is one labelled
+directions through \(Z(x)\).  The inverse fibre in
+Theorem~\ref{thm:anomaly-inverse} is one labelled
 \(\operatorname{PGL}_2\)-orbit, so a line in the component indexed by \(i\)
 through a generic point must fix the same other five path points.  Hence
 these six lines are all of them.  Coefficient comparison in the Segre cubic
@@ -1159,8 +1164,8 @@ identity proves the individual and mixed anomaly assertions for each
 response direction.
 \end{proof}
 
-The source notation for the six nonplane components translates to the C707
-path marking as
+The component notation of \cite{GripaiosNguyenTwo} translates to the path
+marking used here as
 \[
  (D_0,D_1,D_2,D_3,D_4,D_5)
  \longleftrightarrow
@@ -1311,15 +1316,35 @@ exactly at the ten \(3+3\) points.
 
 \begin{thebibliography}{9}
 
+\bibitem{RuddRigidity}
+T.~Rudd,
+\emph{Reconstructing the Clebsch code and its golden orientation from its
+deep-hole syndrome locus},
+preprint, 2026.
+
+\bibitem{RuddFactorization}
+T.~Rudd,
+\emph{Quadratic trade rigidity and cubic orientation in conic matching
+quotients},
+preprint, 2026.
+
+\bibitem{RuddPassages}
+T.~Rudd,
+\emph{Arithmetic and harmonic realizations of the Clebsch cubic},
+preprint, 2026.
+
 \bibitem{KondoSegre}
 S.~Kond\=o,
 \emph{The Segre cubic and Borcherds products},
-arXiv:1110.1126.
+in \emph{Arithmetic and Geometry of K3 Surfaces and Calabi--Yau
+Threefolds}, Fields Inst. Commun. 67 (2013), 549--565,
+DOI 10.1007/978-1-4614-6403-7\_22.
 
 \bibitem{HMSV}
 B.~Howard, J.~Millson, A.~Snowden, and R.~Vakil,
 \emph{The relations among invariants of points on the projective line},
-arXiv:0906.2437.
+C. R. Math. Acad. Sci. Paris 347 (2009), 1177--1182,
+DOI 10.1016/j.crma.2009.07.013.
 
 \bibitem{HMSVOuter}
 B.~Howard, J.~Millson, A.~Snowden, and R.~Vakil,
@@ -1336,13 +1361,14 @@ DOI 10.1007/BFb0092256.
 \bibitem{FickusMixon}
 M.~Fickus and D.~G. Mixon,
 \emph{Tables of the existence of equiangular tight frames},
-arXiv:1504.00253v2.
+arXiv:1504.00253v2 (2016).
 
 \bibitem{McDanielWatanabe}
 C.~McDaniel and J.~Watanabe,
 \emph{Principal radical systems, Lefschetz properties, and perfection of
 Specht ideals of two-rowed partitions},
-arXiv:2103.00759v2.
+Nagoya Math. J. 247 (2022), 690--730,
+DOI 10.1017/nmj.2021.17.
 
 \bibitem{LunaSlices}
 D.~Luna,
@@ -1359,28 +1385,31 @@ Phys. Rev. Lett. 123 (2019), 151601.
 \bibitem{GripaiosNguyen}
 B.~Gripaios and K.~Le Nguyen Nguyen,
 \emph{Anomaly cancellation for a \(U(1)\) factor},
-arXiv:2508.11583.
+arXiv:2508.11583 (2025).
 
 \bibitem{GripaiosNguyenTwo}
 B.~Gripaios and K.~Le Nguyen Nguyen,
 \emph{Anomaly cancellation for two \(U(1)\) factors},
-arXiv:2607.09879.
+arXiv:2607.09879 (2026).
 
 \bibitem{ChiriviMaffei}
 R.~Chiriv\`i and A.~Maffei,
 \emph{Pfaffians and shuffling relations for the spin module},
-arXiv:1203.2943.
+Algebr. Represent. Theory 16 (2013), 955--978,
+DOI 10.1007/s10468-012-9341-7.
 
 \bibitem{CaiGorenstein}
 J.-Y.~Cai and A.~Gorenstein,
 \emph{Matchgates revisited},
-arXiv:1303.6729.
+Theory Comput. 10 (2014), 167--197,
+DOI 10.4086/toc.2014.v010a007.
 
 \bibitem{TschinkelZhang}
 Y.~Tschinkel and Z.~Zhang,
 \emph{Stable equivariant birationalities of cubic and degree 14 Fano
 threefolds},
-arXiv:2409.08392.
+to appear in \emph{Algebraic Geometry and Physics},
+arXiv:2409.08392 (2024).
 
 \end{thebibliography}
 
