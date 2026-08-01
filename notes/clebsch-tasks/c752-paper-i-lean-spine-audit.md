@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; referee GO received for C751 and the read-only audit has
-started while C751's independent cold release build completes.
+**Status:** active; C751 is closed with both release roots green, and the
+read-only correspondence/prose audit is underway.
 
 ## Objective
 
