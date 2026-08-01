@@ -1,19 +1,28 @@
-# C743 — Golden A+ unity and compression programme
+# C743 — Golden unity and compression programme
 
 **Date:** 2026-07-31
 
 **Lane:** `golden`
 
-**Status:** active; theorem candidates proved and under simplicity red-team;
-external review will grade them
+**Status:** active; research and two post-result saturation rounds complete;
+prepared for external mathematical review
 
 ## Executive verdict
 
-After the simplicity red-team, the current results reduce to three mechanisms.
-They replace the central collection of exterior, Pfaffian, cross-golden,
-pole-descent, polar, assembled-adjugate, and degeneracy calculations.
+After the simplicity red-team, the result is one organizing square with two
+general human inputs.  It replaces the central collection of exterior,
+Pfaffian, cross-golden, pole-descent, polar, assembled-adjugate, and
+degeneracy calculations.
 
-1. **One Pfaffian/exterior law.**  For every even labelled set, the
+1. **Universal quotient with a unique marked lift.**  The universal cubic
+   matching covariant \(\mathcal J_3\) is the equal-weight six-point quotient.
+   A Golden presentation chooses a regular-simplex frame of its five
+   coordinates, and the synchronized commutator system is the unique
+   normalized marked Pfaffian lift of those coordinates.  Downstairs live
+   stability, base, critical, and cofactor geometry; upstairs live the
+   exterior exponential and spectral compounds.  C742 says exactly why the
+   upper arrow cannot be made source-free.
+2. **Pfaffian/exterior input.**  For every even labelled set, the
    bracket matrix
    \[
      \alpha_C(v)_{ij}=C_{ij}[v_i,v_j]
@@ -29,29 +38,29 @@ pole-descent, polar, assembled-adjugate, and degeneracy calculations.
    presentation is intrinsic on the six-point quotient; the eigenspace block
    requires a pole.  Thus the successful identities and the pole-descent
    obstruction are two sides of the same theorem.
-2. **Quotient--conormal cofactor law.**  The right kernel of the Golden
+3. **Quotient geometry input.**  For the equal-weight quotient of
+   \(2m\) points, one multiplicity threshold gives the stable locus, the
+   critical \(m\)-equals locus, and the \((m+1)\)-equals matching base.  At a
+   closed \(m+m\) orbit the slice is the rank-one tensor map, whose critical
+   ideal follows from spanning trees of \(K_{m-1,m-1}\).  For six points this
+   gives the square-zero length-four node defect and identifies it with the
+   target node cotangent space.  The right kernel of the Golden
    differential is the residual infinitesimal \(\operatorname{PGL}_2\)-orbit
    after translation and scaling, while its left kernel is the conormal of
    the Segre hypersurface.  A general primitive-kernel cofactor lemma then
-   forces the assembled adjugate to be their outer product.  The ordinary
-3. **Even-point quotient theorem.**  For the equal-weight quotient of
-   \(2m\) points, one multiplicity threshold gives the stable locus, the
-   critical \(m\)-equals locus, and the \((m+1)\)-equals matching base.  At a
-   closed \(m+m\) orbit the slice is the rank-one tensor map.  Its critical
-   ideal follows from spanning trees of \(K_{m-1,m-1}\).  For six points this
-   gives the square-zero length-four node defect and identifies it with the
-   target node cotangent space.
+   forces the assembled adjugate to be their outer product.
 
-The first mechanism replaces three independent coefficient or covariance
+The organizing square turns six Golden cubics and six synchronized skew
+systems into coordinates and a lift of one universal quotient map.  The
+Pfaffian input replaces three independent coefficient or covariance
 arguments by one matching evaluation and one spectral specialization.  The
-second replaces separate source-kernel, target-polar, and cofactor arguments
-by a quotient/conormal calculation and one normalization witness.  The third
-replaces the stability, rank-drop support, node thickening, and base-locus
-arguments, and removes the two former Singular trust boundaries.
+quotient input replaces stability, rank-drop support, node thickening, and
+base-locus arguments and removes the two former Singular trust boundaries.
+Its conormal corollary replaces separate source-kernel, target-polar, and
+cofactor arguments by one kernel calculation and one normalization witness.
 
-Two provisional saturation rounds, run before the later local-quotient work,
-override, found no further unity/compression candidate.  They do not close
-C743.  The moduli round showed that a single descended complex
+Two post-result saturation rounds, each with two `tt + aa + ej` cycles,
+found no further compression candidate.  They do not close C743.  The moduli round showed that a single descended complex
 would contradict C742's pole and first-Fitting obstructions; compactified
 derived pushforward adds a new branch rather than compressing the paper.  The
 balanced-return round showed that the unsigned double-\(S_5\) incidence is
@@ -395,8 +404,9 @@ UFD factorization proof of Lemma 3.1.
 - At deeper rank drop the adjugate may vanish; the theorem does not claim
   that either displayed vector generates the full scheme-theoretic kernel
   there.
-- It does not identify the nonreduced Jacobian rank-drop scheme.  The
-  ten-point nilpotent defect retains its one-Singular trust boundary.
+- It does not by itself identify the nonreduced Jacobian rank-drop scheme.
+  Section 4 closes that separate issue by a rank-one tensor slice and a
+  spanning-tree proof of its critical ideal.
 - The local block remains pole-marked.  The global differential and Segre
   conormal descend without selecting a golden summand.
 - The integral scalar is inherited from the frozen C705 witness.  No new
@@ -872,15 +882,136 @@ the proposed language deletes more than it adds.
 
 ### Result of this red-team
 
-The current principal list has three entries: Theorem 2.1, Theorem 3.2, and
-Theorem 4.4.  Lemmas 3.1, 4.1, and 4.3 carry the general algebra; Corollaries
-4.2 and 4.5 carry the exact six-point consequences.  No grade is assigned in
-this report.  Review should judge the results from their hypotheses, proof
-length, deleted obligations, trust changes, and counterexamples.
+At this stage of the search the principal list had three entries: Theorem
+2.1, Theorem 3.2, and Theorem 4.4.  Lemmas 3.1, 4.1, and 4.3 carry the general
+algebra; Corollaries 4.2 and 4.5 carry the exact six-point consequences.
+Round 4 next tests whether even these three entries are the right organizing
+form.
 
-## 6. Round 4 — moduli, descent, groupoid, and differential saturation
+## 6. Round 4 — one universal map and one marked lift
 
-This was the first saturation round.  Its portfolio differs from Round 4.
+The preceding simplicity review still listed three mechanisms.  This round
+tested whether their type-correct parts fit in one smaller diagram.
+
+### Theorem 6.1 (universal matching quotient with Golden lift)
+
+Let \(\mathcal I_3\cong S^{(3,3)}\) be the five-dimensional space of
+six-point matching invariants, let
+
+\[
+ \mathcal J_3:A\longrightarrow\mathcal I_3^*
+\]
+
+be the universal cubic matching covariant, and let a fully marked Golden
+presentation supply its six matching functionals \(c_T\).  Define the frame
+map
+
+\[
+ F_C:\mathcal I_3^*\longrightarrow U,
+ \qquad y\longmapsto (\langle c_T,y\rangle)_T,
+\]
+
+where \(U\) is the signed outer augmentation module.  Then:
+
+1. the six \(c_T\) form a regular simplex frame, so \(F_C\) is an
+   isomorphism onto \(U\) after the frozen normalization;
+2. the marked commutator map
+   \[
+     \alpha_C:A\longrightarrow
+       \mathscr W=\bigoplus_T\bigwedge^2(k^X)^*,
+     \qquad x\longmapsto([D_x,C_T])_T,
+   \]
+   is the unique primitive normalized lift making the square
+   \[
+   \begin{CD}
+    A @>{\alpha_C}>> \mathscr W\\
+    @V{\mathcal J_3}VV @VV{(\operatorname{Pf}_T)_T}V\\
+    \mathcal I_3^* @>{4F_C}>> U
+   \end{CD}
+   \]
+   commute;
+3. downstairs, \(\mathbf P(\mathcal J_3)\) is the equal-weight six-point
+   quotient.  Theorem 4.4 gives its stability threshold, critical scheme,
+   matching base, and node cotangent defect; because its image is the Segre
+   hypersurface, Theorem 3.2 gives the quotient cofactor;
+4. upstairs, \(\exp(\alpha_C)\) gives all six synchronized principal-
+   Pfaffian systems.  After choosing a pole and golden embedding, spectral
+   splitting gives the compound grades
+   \(1,B_T,\operatorname{adj}B_T,\det B_T\);
+5. deleting the marked target or replacing its monomial transport by the
+   source-free product action destroys the upper lift exactly as in C742.
+   Thus the lower universal map is source-free, while its nonzero synchronized
+   skew lift necessarily retains source-equivalent switching transport.
+
+#### Proof
+
+The matching-functionals theorem identifies \(\mathcal J_3\) as the unique
+minimal cubic matching covariant.  C739's simplex calculation says the six
+Golden functionals span its five-dimensional dual with one constant
+relation, proving part 1.  The marked multiplicity-one calculation
+
+\[
+ \dim\operatorname{Hom}_{S_6}(A,\mathscr W)=1
+\]
+
+and the Pfaffian normalization prove the unique commuting lift in part 2.
+Theorems 4.4 and 3.2 apply directly to the lower map, while Theorem 2.1
+applies to the upper map, proving parts 3 and 4.  C742's signed product-target
+Hom-space is zero and its untwisted lift has rank two, proving part 5.
+
+### What this formulation changes
+
+- The universal matching quotient is no longer introduced separately as
+  invariant theory, a cubic formula, and a GIT map.
+- The six Golden cubics are frame coordinates on that quotient, not six new
+  primitive invariants.
+- The synchronized Cartan cells are the unique normalized marked lift of the
+  quotient coordinates, not a parallel construction.
+- The base, critical, polar, and cofactor geometry stays downstairs.
+- The lower principal Pfaffians, spectral compounds, MCM pair, and pole
+  obstruction stay upstairs.
+- C742 becomes the sharp statement that the vertical lift cannot be made
+  source-free; it is no longer an apparently separate negative theorem.
+
+### Round 4 cycle 1: `tt + aa + ej`
+
+- **`tt`.**  The smallest object is not the conference matrix alone and not
+  the target Segre cubic alone.  It is the universal matching quotient plus a
+  selected coherent simplex frame of functionals.  The skew system is the
+  unique normalized lift of that framed map.
+- **`aa`.**  A Tannakian tensor diagram, a pure-spinor master object, and the
+  displayed evaluation square were compared.  The tensor diagram carries
+  unused category language; the pure-spinor object cannot explain the GIT
+  base or critical scheme by itself; the square records exactly the two
+  constructions and their shared cubic coordinate.
+- **`ej`.**  The regular-simplex identity means \(F_C\) is not merely a list
+  of six evaluations.  It is the exact coordinate isomorphism between the
+  universal invariant carrier and the signed outer module.  This makes the
+  operator theorem a framed quotient theorem.
+
+### Round 4 cycle 2: `tt + aa + ej`
+
+This cycle starts from the one-map/one-lift square.
+
+- **`tt`.**  Can the upper lift be reconstructed from the lower map without
+  a marked switching local system?  No.  C742 proves zero signed Hom-space in
+  the product target; inserting the monomial cocycle restores the lift but
+  also restores source-equivalent data.
+- **`aa`.**  Reconstruction from the determinant sextic, from the exceptional
+  paired action, and from the pure-spinor top coordinates were tested.  The
+  sextic and top coordinates recover only the unoriented switching line; the
+  exceptional paired action already supplies the projective family; neither
+  produces literal skew frames or a selected golden block.
+- **`ej`.**  The later manuscript can use one principal square, followed by a
+  downstairs geometry corollary, an upstairs compound corollary, and C742's
+  boundary.  This is shorter than presenting matching, spinor, differential,
+  and obstruction results as four coequal mechanisms.
+
+## 7. Round 5 — moduli, descent, groupoid, and differential saturation
+
+This is the first post-Theorem-6.1 saturation round.  Every candidate was
+tested against the one-map/one-lift square rather than against the earlier
+list of mechanisms.
 
 ### Candidates and central tests
 
@@ -890,30 +1021,31 @@ This was the first saturation round.  Its portfolio differs from Round 4.
 | one cross-block derived complex on \(M_{0,6}\) | does the selected block descend and have collision as first Fitting support? | no by C742: descent fails and the first support is \(Z_T=0\) |
 | derived pushforward from \(\overline M_{0,7}\) | would it replace current proofs on \(M_{0,6}\)? | no present compression: a boundary-twisted compactification must first be chosen and the result cannot replace the intrinsic Pfaffian bundle |
 | one master degeneracy scheme | do collision, Jacobian, and simultaneous Pfaffian loci have compatible dimensions and components? | no: their reduced components are \(15/20/15\) of different dimensions |
-| human local normal form at the ten nodes | would it subsume two central results? | no: it would close one appendix trust gap, an important B-level improvement under the C743 rubric |
+| compactified pushforward of the upper lift | does it recover the lower quotient square without extra boundary choices? | no: extending the pole-marked eigenspaces introduces a boundary twist not determined by \(\mathcal J_3\) |
+| one framed stack for all marking data | can the Golden frame absorb support, switching, pole, and quadratic choice? | no: the frame fixes quotient coordinates but does not identify these four inequivalent fibres |
 
 The compactified pushforward remains mathematically legitimate, but it is a
 new geometric branch with new boundary choices and proof obligations.  It
 does not satisfy C743's anti-bloat condition and is not a surviving
 proof-compression candidate.
 
-### Round 4 cycle 1: `tt + aa + ej`
+### Round 5 cycle 1: `tt + aa + ej`
 
-- **`tt`.**  A hostile algebraic geometer would ask for the base stack and
-  determinant-line twists before accepting a global MCM slogan.  Once stated,
-  the Pfaffian and cross-block objects live on different bases; that
-  difference is theorem content, not missing notation.
+- **`tt`.**  A hostile algebraic geometer would ask whether the square itself
+  descends.  Its lower row does, but its upper row contains the marked
+  switching transport and its spectral refinement contains a pole.  The
+  different bases are therefore theorem content, not missing notation.
 - **`aa`.**  Product groupoids, gerbes, logarithmic boundary complexes, and
   compactified derived pushforward were compared.  The first merely lists
   independent torsors; the second cannot absorb the continuous pole; the
   third organizes unequal schemes but does not identify them; the fourth
   starts a new paper-sized calculation.
-- **`ej`.**  Theorem 2.1 already gives the maximal cheap moduli unification:
-  one bracket object on \(M_{0,6}\), with a spectral refinement on the
-  universal pole-marked curve.  State this as a boundary inside the principal
-  theorem and do not create a speculative global complex.
+- **`ej`.**  Theorem 6.1 already gives the maximal cheap moduli statement:
+  the quotient row is intrinsic, the skew lift is marked, and only its
+  spectral factorization is pole-marked.  These three levels fit in one
+  square with one boundary clause; no speculative global complex is needed.
 
-### Round 4 cycle 2: `tt + aa + ej`
+### Round 5 cycle 2: `tt + aa + ej`
 
 This cycle starts from the exact two-base obstruction.
 
@@ -931,13 +1063,15 @@ This cycle starts from the exact two-base obstruction.
   complexes adjacent rather than nested.  No further current theorem or
   proof obligation is deleted.
 
-**Provisional Round 4 verdict:** no additional theorem candidate survived under the
-pre-Theorem-4.1 graph; this round must be rerun before final saturation.
+**Round 5 result:** no further compression candidate survives.  A stack or
+derived pushforward would add choices without identifying another arrow of
+the square or deleting a proof obligation.
 
-## 7. Round 5 — balanced return, exposition, and hostile-referee saturation
+## 8. Round 6 — balanced return, exposition, and hostile-referee saturation
 
-This was the second consecutive saturation round and used a different
-portfolio.
+This is the second consecutive post-Theorem-6.1 saturation round and uses a
+disjoint portfolio: incidence return, signed linearization, theorem layout,
+and hostile-referee deletion tests.
 
 ### Hecke/unit--counit test
 
@@ -973,7 +1107,7 @@ subgroup-incidence quotient, not another norm evaluation.
 | representation theorist | the \(36\to6\) return is being conflated with a linear intertwiner | the unsigned pull--push vanishes on augmentation; a signed replacement is source-dependent |
 | hostile general referee | the new language lengthens rather than shortens the proof | the placement specification deletes three calculations and one standalone rigidity result; no categorical terminology is needed beyond brackets, eigenspaces, and conormals |
 
-### Round 5 cycle 1: `tt + aa + ej`
+### Round 6 cycle 1: `tt + aa + ej`
 
 - **`tt`.**  The complete product \(X\times\mathcal T\) is too uniform to
   carry a nontrivial augmentation correspondence.  The genuinely interesting
@@ -989,7 +1123,7 @@ subgroup-incidence quotient, not another norm evaluation.
   the return closes the projective set-level cycle but not the tensor diagram.
   It prevents a later unification edit from overstating the word “canonical.”
 
-### Round 5 cycle 2: `tt + aa + ej`
+### Round 6 cycle 2: `tt + aa + ej`
 
 This cycle starts from the set/linear separation.
 
@@ -998,28 +1132,32 @@ This cycle starts from the set/linear separation.
   Removing the recovery, spinor, or anomaly statements would change the
   paper's validated scope rather than its proof graph; C735 already keeps
   them subordinate.
-- **`aa`.**  One principal theorem, a theorem plus two structural
-  corollaries, and a categorical master diagram were compared.  The second
-  is shortest while preserving trust boundaries: matching--norm as the
-  principal mechanism, quotient--conormal as its differential corollary, and
-  C742 as the boundary theorem.
+- **`aa`.**  A single omnibus theorem, the one-map/one-lift theorem with
+  structural corollaries, and a categorical master diagram were compared.
+  The middle form is shortest while preserving type boundaries: Theorem 6.1
+  is the organizing result; matching--norm and quotient--conormal are the two
+  human inputs; C742 is its sharp boundary.
 - **`ej`.**  The saved pages should reduce the final target rather than admit
-  a new shadow.  The recommended cap becomes 57--58 total pages, with the
+  a new shadow.  The recommended cap becomes 56--57 total pages, with the
   same four-page exceptional/boundary ceiling and C717/C729 sequel boundary.
 
-**Provisional Round 5 verdict:** no additional theorem candidate survived under the
-pre-Theorem-4.1 graph; this round must be rerun before final saturation.
+**Round 6 result:** no additional theorem candidate survives.  The set-level
+return cannot become a linear arrow without reintroducing the marked source,
+and every more elaborate exposition shape lengthens the one-map/one-lift
+argument.  Together with Round 5, this supplies two consecutive saturation
+rounds after the last new result.
 
-## 8. Candidate ledger
+## 9. Candidate ledger
 
 | candidate | observable change to the proof graph | current status or exact obstruction |
 |---|---|---|
-| universal matching--norm transformation | replaces the exterior/Pfaffian coefficient comparison, block determinant derivation, and repeated pole covariance | proved; undergoing merger with the exterior-exponential form |
+| universal quotient with unique marked lift | replaces separate matching, Golden-coordinate, synchronized-skew, and source-free-obstruction narratives by one commuting square | proved as Theorem 6.1; organizing result |
+| universal matching--norm transformation | replaces the exterior/Pfaffian coefficient comparison, block determinant derivation, and repeated pole covariance | proved as the upper-arrow input to Theorem 6.1 |
 | quotient--conormal cofactor theorem | replaces two kernel arguments and 25 cofactor identities by one kernel lemma and one scalar witness | proved; kept separate because it uses the quotient differential rather than the matching carrier |
 | rank-one tensor critical ideal | gives the critical ideal in every pair of dimensions by a spanning-tree proof | proved |
 | Golden ten-node normal form | identifies the exact local ideal and square-zero length-four defect at all ten nodes | proved as a corollary of the tensor theorem |
 | matching base equals the \((m+1)\)-equals arrangement | replaces base-locus elimination by the two-row Specht ideal theorem | proved/imported at its classical boundary |
-| stability--criticality--base trichotomy | combines stability, contraction, criticality, and the base scheme at one multiplicity threshold | proved from the preceding results; simplicity review will decide whether it is the principal statement or only a summary theorem |
+| stability--criticality--base trichotomy | combines stability, contraction, criticality, and the base scheme at one multiplicity threshold | proved from the preceding results; retained as the downstairs geometry theorem under Theorem 6.1 |
 | node cotangent identification | identifies the defect module with the cotangent spaces of the target nodes | proved as a functorial corollary, not counted as a separate principal mechanism |
 | conference relation as sole generator | would remove the matching carrier | rejected: matching/Pfaffian law holds without \(C^2=5I\) |
 | one quadratic-algebra norm for every shadow | would merge matching, polar, and spectral outputs | rejected: it does not produce the matching carrier, polar relation, or quotient differential |
@@ -1031,29 +1169,25 @@ pre-Theorem-4.1 graph; this round must be rerun before final saturation.
 | direct Gram continuation | would make the return another conference step | refuted: redundancy four and the reflection identity replace the conference square |
 | merge physical or exceptional branches into the principal theorem | would reduce the number of section-level branches | rejected: it changes scope and hierarchy without deleting a proof obligation |
 
-## 9. After graph and quantitative delta
+## 10. After graph and quantitative delta
 
 ### After dependency DAG
 
 ```text
-fully marked conference local system
-             |
-             v
-universal matching covariant J_3 + simplex orbit {c_T}
- |-- bracket evaluation -------------------> Pfaffian/Joubert Z
- |-- affine chart --------------------------> commutator [D_x,C_T]
- |-- coefficient functor -------------------> middle exterior diagonal
- \-- spectral norm (pole-marked) -----------> det B_T and local adj B_T
-                                               |
-                         Segre relation -------+-- dZ
-                         PGL2 quotient --------+   |
-                                                   v
-                                    quotient--conormal cofactor
-                                    adj(dZ)=6 W q^t
+                    universal quotient J_3
+                    /                    \
+       downstairs /                      \ unique marked lift alpha_C
+                 v                        v
+  equal-weight six-point GIT        synchronized skew forms
+   |-- stability/base                    |-- Pfaffian evaluation
+   |-- rank-one node slice               |-- exterior exponential
+   \-- quotient differential             \-- spectral compounds (pole-marked)
+                 |                        |
+                 v                        v
+       conormal cofactor          C742: no source-free upper lift
 
-separate boundary nodes:
-  C742 source-free obstruction; strict collision filtration;
-  set-level 6 -> 10 -> 36 -> 6 return
+adjacent, not arrows of this square:
+  physical/exceptional applications; set-level 6 -> 10 -> 36 -> 6 return
 ```
 
 ### Counts
@@ -1061,19 +1195,21 @@ separate boundary nodes:
 | measure | before | after | delta |
 |---|---:|---:|---:|
 | irreducible source marking layers | 4 | 4 | 0; sharp by C742 |
-| constructed primitives in the central propagation proof | 7 | 3: \(\mathcal J_3\), functional orbit, quotient differential | -4 |
-| independent proof obligations in the scoped spine | 11 | 7 | -4 |
-| numbered results in C735 theorem ledger | 11 | 10 projected | -1; marked rigidity becomes part of the principal theorem |
-| planned main-argument pages | 46 | 43--44 | -2 to -3 |
-| planned total pages | 60 | 57--58 | -2 to -3 |
+| constructed primitives in the central propagation proof | 7 | 2: \(\mathcal J_3\) and its normalized marked lift \(\alpha_C\) | -5 |
+| independent proof obligations in the scoped spine | 11 | 6 | -5 |
+| numbered results in C735 theorem ledger | 11 | 9 projected | -2; propagation, synchronized spinors, and marked rigidity become one theorem |
+| planned main-argument pages | 46 | 42--43 | -3 to -4 |
+| planned total pages | 60 | 56--57 | -3 to -4 |
 
-The seven after-obligations are: construction/first occurrence of
-\(\mathcal J_3\), the Golden simplex functional orbit and normalization,
-bracket naturality, spectral norm and pole boundary, classical Segre relation,
-generic differential rank plus one cofactor witness, and the C742 boundary
-theorem.  Existing application proofs are unchanged.
+The six after-obligations are: construction/first occurrence of
+\(\mathcal J_3\); Golden simplex normalization and uniqueness of its marked
+lift; bracket/exterior naturality; spectral norm with its pole boundary;
+rank-one quotient slice plus the classical matching/equals theorem; and the
+primitive-kernel cofactor lemma with one scalar witness.  C742 is now the
+nonexistence clause of the marked-lift theorem rather than an independent
+construction.  Existing application proofs are unchanged.
 
-## 10. Literature and attribution audit
+## 11. Literature and attribution audit
 
 This focused attribution audit names four sources, two read at full text.
 The report makes no novelty or priority claim, and its validity does not
@@ -1114,7 +1250,7 @@ proved directly here or in C739.  No “new,” “first,” or “unique in the
 literature” wording is authorized.  MathSciNet, Google Scholar, and
 forward-citation closure were not needed and were not covered.
 
-## 11. Validation and trust
+## 12. Validation and trust
 
 No new computation is load-bearing.  The upgrades are human theorems whose
 exact Golden scalars, ranks, and coordinate bridges are checked by frozen or
@@ -1178,30 +1314,34 @@ python3 notes/2026-07-31-c728-synchronized-pure-spinor-replay.py
 ```
 
 These checks certify existing exact normalizations, multiplicities, and
-finite incidence data.  They do not replace the human theorems.  Theorems
-4.1--4.4 close the former one-Singular nilpotent and base-reducedness
+finite incidence data.  They do not replace the human theorems.  Results
+4.1--4.5 close the former one-Singular nilpotent and base-reducedness
 boundaries; Singular now corroborates the marked coordinate bridge rather
 than supplying the mathematical mechanism.
 
-## 12. Post-search unification specification
+## 13. Post-search unification specification
 
 This section specifies a later, separately authorized manuscript task.  It
 does not apply the edits.
 
 ### Theorem replacements
 
-1. Replace `thm:propagation` by **Golden matching--norm propagation**, whose
-   first clause states Theorem 2.1 at \(m=3\), then states the six-functional
-   simplex/Joubert specialization, the spectral norm, and the exact pole
-   boundary.
-2. Turn `cor:marked-lift-rigidity` into the minimality clause of that theorem:
-   multiplicity one identifies the unique normalized marked evaluation, while
-   C742 states why “marked” cannot be deleted.
+1. Replace `thm:propagation`, `prop:synchronized-spinors`, and
+   `cor:marked-lift-rigidity` by **Universal matching quotient with Golden
+   lift**, the commuting square of Theorem 6.1.
+2. Prove its upper arrow by Theorem 2.1 at \(m=3\): matching evaluation,
+   exterior exponential, spectral compounds, and the exact pole boundary.
+   Make C742's source-free impossibility the final clause, not a separate
+   construction.
 3. Replace the assembled-adjugate portion of the propagation proof by the
    **quotient--conormal cofactor corollary**, with Lemma 3.1 proved once.
-4. Keep `prop:synchronized-spinors`, `thm:frustration`, `cor:naimark`, and
-   `thm:unmarked-boundary` as separate results.  Their codomains and trust
-   boundaries are genuinely independent.
+4. Keep `thm:frustration` and `cor:naimark` as separate results.  Retain the
+   substance of `thm:unmarked-boundary` as the boundary clause of the
+   principal square.  Their codomains and trust boundaries remain explicit.
+5. Insert the **stability--criticality--base trichotomy** as the downstairs
+   geometry theorem: the general rank-one tensor critical ideal and
+   matching/equals identity are its two lemmas; the six-point node defect and
+   cotangent identification are corollaries.
 
 ### Exact manuscript locations
 
@@ -1214,6 +1354,10 @@ does not apply the edits.
   determinantal consequences.
 - After the Segre relation, insert Lemma 3.1 and the quotient--conormal proof;
   retain one sentence naming the C705 scalar witness.
+- Immediately after the six-point quotient is identified, insert the
+  stability--criticality--base theorem.  Move the ten-node and fifteen-line
+  statements there, replacing the appendix elimination argument by the
+  rank-one slice and matching/equals proofs.
 - In `The synchronized Cartan cells`, delete the standalone marked-rigidity
   result and cite the minimality clause of the principal theorem.
 - In `Recovery and minimal marking`, retain C742's boundary theorem but
@@ -1241,20 +1385,21 @@ Retain:
 - one matching expansion or the minor-summation citation as the human proof;
 - one exact Golden normalization witness;
 - one generic rank-four witness;
-- the one-CAS boundary for the nilpotent defect;
+- the human rank-one slice proof and its independent computational check;
 - every C742 counterexample and all four torsors;
 - separate application and recovery proofs.
 
 ### Page and trust delta
 
-The projected saving is two to three main-text pages and four independent
-proof obligations.  Set the new target at 43--44 main-argument pages and
-57--58 total pages.  Do not spend the saving on C717, higher C729 censuses,
+The projected saving is three to four main-text pages and five independent
+proof obligations.  Set the new target at 42--43 main-argument pages and
+56--57 total pages.  Do not spend the saving on C717, higher C729 censuses,
 the order-eight branch, derived pushforward, or a new physical shadow.
 
-Trust improves modestly: the central scalar checks remain exact and
-independently replayed, while more of the equality graph is now proved by
-one human naturality argument.  No CAS claim is promoted, and no existing
+The change replaces two CAS trust boundaries by the matching/equals theorem
+and the spanning-tree critical-ideal proof.  The central scalar checks remain
+exact and independently replayed, while more of the equality graph is proved
+by one human naturality argument.  No CAS claim is promoted, and no existing
 verification command or certificate needs to change unless theorem labels
 in the README are synchronized.
 
@@ -1266,14 +1411,14 @@ central replays, build warning-free, and compare the rendered before/after
 page count.  Do not reopen C743 research or add a shadow branch during that
 task.
 
-## 13. Current task-level `ej` + `tt` and Mystery ledger
+## 14. Current task-level `ej` + `tt` and Mystery ledger
 
 ### `ej`
 
-- The universal matching theorem supplies a clean explanation of both success
-  and failure: projective brackets descend; a selected spectral factor needs
-  a pole.  The same statement supplies both the identity and its descent
-  boundary.
+- The one-map/one-lift square supplies a clean explanation of both success
+  and failure: quotient coordinates descend, the synchronized skew lift is
+  marked, and a selected spectral factor additionally needs a pole.  The same
+  statement supplies the construction and its two descent boundaries.
 - The quotient--conormal theorem identifies the special-conformal vector as
   geometry of the source quotient and the Igusa vector as geometry of the
   target hypersurface.  The assembled adjugate becomes the cofactor joining
@@ -1285,18 +1430,19 @@ task.
 
 ### `tt`
 
-- The paper's memorable theorem should say that the Golden operator selects
-  an exceptional simplex of functionals on a universal matching covariant,
-  then that the quotient map's cofactor joins the residual source orbit to
-  the Segre conormal.  This is a stricter and more accurate unity claim than
-  “all shadows are the same invariant.”
+- The paper's memorable theorem should be the commuting square: the Golden
+  operator selects an exceptional simplex frame on the universal matching
+  quotient, and the synchronized skew system is its unique marked lift.
+  The quotient's rank-one slices and conormal cofactor explain the singular
+  geometry below; exterior compounds explain the operator geometry above.
 - The four torsors and the unequal degeneracy schemes are not blemishes to be
   categorized away.  They mark the exact limits of the two universal
   mechanisms.
-- A referee can now test every claimed compression locally: remove the
-  matching carrier and the three algebraic presentations separate; remove
-  the conormal lemma and the two kernel lines separate; remove the C742
-  boundary and the statement becomes circular.
+- A referee can test every claimed compression locally: remove the commuting
+  square and quotient coordinates and skew systems become parallel stories;
+  remove the matching carrier and the algebraic presentations separate;
+  remove the conormal lemma and the two kernel lines separate; remove the
+  C742 boundary and the lift statement becomes circular.
 
 ### Mystery ledger
 
@@ -1308,8 +1454,9 @@ task.
 | whether the ten-point nilpotent defect has a human local normal form | settled by the rank-one tensor quotient | local ideal \(\mathfrak m(u)(v)\), square-zero length four per node, with independent replay |
 | whether a boundary-twisted pole-marked MCM pair has a useful derived pushforward | genuine open branch, not current compression | requires a separately allocated compactification task before any \(R\pi_*\) claim |
 | whether the \(36\to6\) return is a linear adjunction | settled negatively | unsigned pull--push vanishes on augmentation; signed repair is circular |
-| whether another current compression survives the simplicity review | open while C743 remains active | rerun the moduli and balanced-return rounds from the new quotient theorem before closing |
+| whether another current compression survives the simplicity review | settled by Rounds 5 and 6 | two consecutive post-Theorem-6.1 portfolios found no further arrow or deleted obligation |
 
-The former nilpotent trust gap is closed.  The compactified-moduli branch and
-the rerun simplicity/saturation review remain open, so this is not a task
-closeout.
+The former nilpotent trust gap and the required saturation review are closed.
+The compactified-moduli branch is genuinely separate and requires a future
+allocation.  C743 remains active only so the review-neutral report can be
+handed to external review agents before any closeout decision.
