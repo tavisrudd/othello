@@ -238,14 +238,33 @@ The cheap upgrade is a representation-independent no-go statement: **every scala
 certificate for pairwise passancy is bounded below by the `q+1`-point passant-line control**.  This
 is stronger and cleaner than reporting a failed finite transition calculation.  The Tao-style
 question is then not “which representation was missed?” but “what is the smallest change of state
-that makes collinearity pairwise?”  Rooted pairs or flags do so, but force a three-point or
-matrix-valued kernel and exact compatibility/coverage transitions.  C725 already identifies the
-finite data that any such analytic compression must reproduce.
+that exposes the collinear-triple orbit?”  Rooted pairs or flags are plausible state lifts, but they
+do not automatically make every cross-state triple pairwise; a valid construction still needs a
+three-point or matrix-valued kernel and exact compatibility/coverage transitions.  C725 already
+identifies the finite data that any such analytic compression must reproduce.
 
 For moments, the cheap upgrade is the explicit anti-checklist: a future proposal is not a Lemma 10
 transplant unless it names `P`, the fibres `S(p)`, `K0,d,T`, all moment polynomials through `T`, and
 verifies all three inequalities.  This prevents another low-moment vocabulary match from being
 mistaken for reconstruction.
+
+### `ej2` — adjacent C756 payoff
+
+C756 names an association-scheme or clique bound as one of two candidate routes to the all-`k`
+conic-filling classification.  If that route remains a scalar pairwise scheme, C760 now kills it
+uniformly: a passant/external line supplies `q+1` mutually admissible points, while the target is an
+arc and therefore uses general position.  Reweighting orbitals, adding more scalar constituents, or
+optimizing the Perron vector cannot repair a predicate that the pairwise relation omits.  The route
+survives only if “association scheme” is upgraded to a triple/flag coherent configuration that
+detects collinearity; that is a different proof object and should be costed against C756's live
+type-aware spare-line and character-sum routes.  This conclusion is provisional C760 output and is
+not routed into the `clebsch` lane before the independent vet.
+
+Lemma 10 also does not repair C756's chord-moment stall.  C756 records free concurrence parameters
+for `r>=4`; that is a truncated aggregate moment system, not a family of field-valued fibres with
+all moments through `2K0-1` and degree-controlled interpolation across `P`.  The reconstruction
+lemma consumes the missing coherent moments—it does not extrapolate them from the low moments that
+leave concurrence free.
 
 ## Mystery ledger
 
@@ -253,6 +272,10 @@ mistaken for reconstruction.
   matrix-valued three-point projection identity?  Evidence gap: no candidate kernel, transition
   graph, or Perron/PSD certificate has been constructed.  Gate: the user-launched independent vet,
   then a separately allocated task in `clebsch` if the vet finds the route substantive.
+- **Settled provisionally for C756:** its scalar association-scheme/clique route cannot prove the
+  arc bound, and Lemma 10 cannot close its truncated chord moments.  The only unresolved version is
+  an explicitly triple/flag-valued scheme, which is the preceding open item rather than a repair of
+  the scalar route.
 - **Open, low priority:** can the finite Chapter 2 transition construction at `(18,1/5)` enter
   C737's `57--59` window?  Evidence gap: no finite bound was evaluated, and the one-sided spherical
   relaxation discards the signed Seidel constraints.  Gate: independent vet before any promotion.
