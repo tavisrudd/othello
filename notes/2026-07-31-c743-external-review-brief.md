@@ -25,7 +25,7 @@ space, and let
 \]
 
 be the universal cubic matching covariant.  A fully marked Golden
-presentation gives six matching functionals \(c_T\), hence a frame map
+presentation gives six matching vectors \(c_T\in\mathcal I_3\), hence a frame map
 
 \[
  F_C:\mathcal I_3^*\longrightarrow U,
@@ -50,8 +50,9 @@ The organizing claim is the normalized commuting square
 
 The six \(c_T\) are claimed to be a regular-simplex frame, so \(F_C\) is an
 isomorphism after the frozen normalization.  The marked multiplicity-one
-calculation is claimed to make \(\alpha_C\) the unique primitive normalized
-lift.  C742 supplies the boundary: the corresponding source-free signed
+calculation, together with C739's fixed integral axis/skew lattices and
+coherent determinant-line orientation, is claimed to make \(\alpha_C\) the
+unique primitive normalized lift.  C742 supplies the boundary: the corresponding source-free signed
 product target has zero Hom-space, while the untwisted lift has rank two.
 
 This form separates three levels of structure:
@@ -148,12 +149,13 @@ characteristic at least \(m\).
 
 ## Cofactor consequence
 
-For the Golden quotient differential, the right kernel is claimed to be the
-residual special-conformal infinitesimal orbit \(q\), while the left kernel is
-the Segre conormal \(W\).  The general corank-one lemma then gives
+Write \(A_x=(dZ_x)^{\mathsf T}\) in source-by-target augmentation bases.  Its
+left kernel is the residual special-conformal infinitesimal orbit \(q\), and
+its right kernel is the Segre conormal \(W\).  The general corank-one lemma
+then gives
 
 \[
- \operatorname{adj}(dZ)=\lambda Wq^{\mathsf T}.
+ \operatorname{adj}(A_x)=\lambda Wq^{\mathsf T}.
 \]
 
 One frozen witness fixes \(\lambda=6\).  The issue for review is whether the

@@ -44,9 +44,9 @@ degeneracy calculations.
    closed \(m+m\) orbit the slice is the rank-one tensor map, whose critical
    ideal follows from spanning trees of \(K_{m-1,m-1}\).  For six points this
    gives the square-zero length-four node defect and identifies it with the
-   target node cotangent space.  The right kernel of the Golden
+   target node cotangent space.  The source kernel of the Golden
    differential is the residual infinitesimal \(\operatorname{PGL}_2\)-orbit
-   after translation and scaling, while its left kernel is the conormal of
+   after translation and scaling, while its target cokernel is the conormal of
    the Segre hypersurface.  A general primitive-kernel cofactor lemma then
    forces the assembled adjugate to be their outer product.
 
@@ -115,9 +115,9 @@ fully marked conference family C_T
  |-- golden projectors -----> B_T -- det --> Z_T
  |                                  \adj --> MCM/resolution pair
  Z=(Z_T) -- d ----------------------------> dZ
- |                                          |-- right kernel q
- \-- Segre relation --> polar W ------------|-- left kernel W
-                                            \-- adj(dZ)=6 W q^t
+ |                                          |-- source kernel q
+ \-- Segre relation --> polar W ------------|-- target conormal W
+                                            \-- adj((dZ)^t)=6 W q^t
 ```
 
 On the explicit accounting used here this graph has seven constructed
@@ -160,11 +160,14 @@ define
 
 Then:
 
-1. \(\operatorname{Pf}\alpha_C\) is the evaluation of the universal
-   degree-\(m\) matching covariant
-   \(\mathcal J_m:A_{2m}\to S^{(m,m)*}\) at the matching functional
+1. Let \(\mathcal I_m\cong S^{(m,m)}\) be the matching-invariant space.
+   Then \(\operatorname{Pf}\alpha_C\) is the pairing of the universal
+   evaluation covariant
+   \(\mathcal J_m:A_{2m}\to\mathcal I_m^*\) with the matching vector
    \[
-      c_C(M)=\operatorname{sgn}(M)\prod_{ij\in M}C_{ij}.
+      c_C=\sum_M\operatorname{sgn}(M)
+             \Bigl(\prod_{ij\in M}C_{ij}\Bigr)[M]
+      \in\mathcal I_m.
    \]
 2. On the affine chart \(v_i=(x_i,1)\),
    \[
@@ -249,8 +252,8 @@ For \(m=3\), \(s=\sqrt5\), and the frozen orientations,
    =\epsilon_T40\sqrt5\det B_T.
 \]
 
-The six functionals \(c_{C_T}\) form the regular simplex orbit in the
-five-dimensional carrier \(S^{(3,3)*}\).  Thus the smallest valid generator
+The six matching vectors \(c_{C_T}\) form the regular simplex orbit in the
+five-dimensional carrier \(\mathcal I_3\cong S^{(3,3)}\).  Thus the smallest valid generator
 is
 
 \[
@@ -307,8 +310,8 @@ This cycle starts from the compressed matching--norm theorem.
 
 | language | mechanism | predicted deletion |
 |---|---|---|
-| moduli differential | residual \(\mathfrak{pgl}_2\)-orbit is the right kernel | special-conformal congruence calculation |
-| hypersurface geometry | Segre conormal is the left kernel | separate polar-kernel calculation |
+| moduli differential | residual \(\mathfrak{pgl}_2\)-orbit is the source kernel | special-conformal congruence calculation |
+| hypersurface geometry | Segre conormal is the target cokernel | separate polar-kernel calculation |
 | commutative algebra | primitive kernel generators force a rank-one cofactor | entrywise assembled-adjugate proof |
 | determinant calculus | \(d(\det B)=\operatorname{tr}(\operatorname{adj}B\,dB)\) | separate interpretation of the local adjugates |
 
@@ -344,20 +347,22 @@ vectors and changes only the convention for displaying the outer product.
 
 Let \(Z:A\to U\) be the marked Joubert map on the five-dimensional
 translation quotient, and let \(F(z)=\sum_Tz_T^3\) on
-\(\sum_Tz_T=0\).  Then:
+\(\sum_Tz_T=0\).  Write
+\(A_x=(\partial Z_T/\partial x_i)\) for the source-by-target matrix of the
+transpose differential after choosing augmentation bases.  Then:
 
-1. the right kernel of \(dZ_x\) is the residual infinitesimal special-
+1. the left kernel of \(A_x\) is the residual infinitesimal special-
    conformal orbit.  In the centered coordinate slice it is represented by
    \[
      q_i=6x_i^2-\sum_jx_j^2;
    \]
-2. the left kernel is the Segre conormal
+2. the right kernel of \(A_x\) is the Segre conormal
    \[
      \widehat W_T=6Z_T^2-\sum_UZ_U^2;
    \]
 3. on the generic rank-four locus the primitive-kernel lemma forces
    \[
-      \operatorname{adj}(dZ)=c\,\widehat Wq^{\mathsf T};
+      \operatorname{adj}(A_x)=c\,\widehat Wq^{\mathsf T};
    \]
 4. one integral cofactor witness gives \(c=6\), and polynomial continuation
    proves the identity on every stratum;
@@ -378,11 +383,11 @@ translation quotient, and let \(F(z)=\sum_Tz_T^3\) on
 The bracket presentation of Theorem 2.1 is \(\operatorname{PGL}_2\)-natural.
 After quotienting translation and projective scale, the remaining Lie
 algebra direction is \(x_i\mapsto x_i+t x_i^2\).  Centering gives \(q\), so
-\(dZ_x(q)=0\) on the augmentation quotients.  Differentiating
-\(F(Z(x))=0\) gives \(\widehat W^{\mathsf T}dZ=0\).  The known nonzero
+\(q^{\mathsf T}A_x=0\) on the augmentation quotients.  Differentiating
+\(F(Z(x))=0\) gives \(A_x\widehat W=0\).  The known nonzero
 fourth minor gives generic rank four.  The two kernel vectors are primitive,
 and their degrees are two and six, while a cofactor of the quadratic
-\(5\times5\) matrix \(dZ\) has degree eight.  Lemma 3.1 therefore leaves one
+\(5\times5\) matrix \(A_x\) has degree eight.  Lemma 3.1 therefore leaves one
 constant.  The frozen exact cofactor fixes it as six.
 
 For a linear matrix \(B_T(x)\), Jacobi's formula gives
@@ -393,9 +398,9 @@ local and global matrix sizes.
 
 #### Independent route
 
-The manuscript's direct congruence derivative proves the right-kernel
+The manuscript's direct congruence derivative proves the source-kernel
 formula without quotient language; direct differentiation of the Segre
-equation proves the left kernel; and the C705 replay checks all 25 normalized
+equation proves the target conormal; and the C705 replay checks all 25 normalized
 cofactor entries over 59,049 points.  These inputs are independent of the
 UFD factorization proof of Lemma 3.1.
 
@@ -934,7 +939,9 @@ where \(U\) is the signed outer augmentation module.  Then:
        \mathscr W=\bigoplus_T\bigwedge^2(k^X)^*,
      \qquad x\longmapsto([D_x,C_T])_T,
    \]
-   is the unique primitive normalized lift making the square
+   is the unique primitive normalized lift in the marked integral axis and
+   skew-coordinate lattices, with the coherent determinant-line orientation,
+   making the square
    \[
    \begin{CD}
     A @>{\alpha_C}>> \mathscr W\\
@@ -967,7 +974,9 @@ relation, proving part 1.  The marked multiplicity-one calculation
  \dim\operatorname{Hom}_{S_6}(A,\mathscr W)=1
 \]
 
-and the Pfaffian normalization prove the unique commuting lift in part 2.
+and C739's primitive-lattice argument reduce the scalar to \(\pm1\); the
+coherent Pfaffian orientation and normalization select the displayed sign,
+proving the unique commuting lift in part 2.
 Theorems 4.4 and 3.2 apply directly to the lower map, while Theorem 2.1
 applies to the upper map, proving parts 3 and 4.  C742's signed product-target
 Hom-space is zero and its untwisted lift has rank two, proving part 5.
@@ -1302,7 +1311,8 @@ python3 notes/2026-07-30-c705-adjugate-segre-igusa-polar-replay.py
 
 The C704 replay checked all six shadows on a \(7^5\) grid over
 \(\mathbf F_{101}\).  The C705 replay checked all 25 entries of
-\(\operatorname{adj}(dZ)=6\widehat Wq^{\mathsf T}\) on 59,049 points.  The
+\(\operatorname{adj}(A_x)=6\widehat Wq^{\mathsf T}\), with
+\(A_x=(dZ_x)^{\mathsf T}\), on 59,049 points.  The
 tracked certificate hashes remained
 `644c1f7a51f9d46897a466347c6e11c5bbc2835d8550932dbaeeb41405dcc2f3`,
 `bb40b5877b487c904f330dc7f91827900433d20b9c610f286b37e210b6bf2d36`,
