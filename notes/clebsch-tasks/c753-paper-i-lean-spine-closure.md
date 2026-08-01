@@ -38,6 +38,15 @@ bound, while R3 owns the two-branch rigidity terminal and the downstream
 nonsingularity corollary.  Do not encode the stronger nonsingularity conclusion
 before the Dye equality step.
 
+The full-module prose pass found one additional source-owned defect in
+`Q11A5PointOrbitsData.lean`: its two references to
+`check_code_automorphisms.py` resolve only in the paper tree, not in the
+standalone Lean artifact.  Remove those reverse provenance references and
+describe the normalized matrix data by the kernel-checked semantics actually
+shipped with the module.  The prism transitive closure also needs timeless
+line-bound wording and docstrings on the public cross-module helpers before R1
+is referee-ready; these are prose repairs, not theorem changes.
+
 ## Objective
 
 Implement the frozen C752 interface so the Paper I Lean development follows
