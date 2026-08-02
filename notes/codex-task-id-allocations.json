@@ -2087,8 +2087,17 @@
       "last": 777,
       "purpose": "red-team, literature audit, manuscript integration, and Lean update for the 2-uniform discreteness/stability/Fisher-isotropy upgrade",
       "sequence": 232
+    },
+    {
+      "count": 3,
+      "first": 778,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 780,
+      "purpose": "triply-even plateau certificate bundle, structural mechanism attempt, and diagonal-programme novelty audit",
+      "sequence": 233
     }
   ],
-  "next_id": 778,
+  "next_id": 781,
   "schema": "codex-task-id-allocations-v1"
 }

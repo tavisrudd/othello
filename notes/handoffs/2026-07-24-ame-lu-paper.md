@@ -21,8 +21,18 @@ regenerates the numerics, C775 audits the literature, C776 integrates on a
 double pass, C777 updates the Lean aggregate.  Source catalogue:
 `2026-08-01-external-chat-artifact-gap-review.md`.  The same
 external material also carries a diagonal-symmetry classification and
-rigidity phase boundary for binary CSS coset states; that is a separate
-prospective paper and is not pegged here.
+rigidity phase boundary for binary CSS coset states, queued as C778--C780.
+
+**C778--C780 queued (2026-08-01): diagonal rigidity boundary.**  Pegged here
+as the nearest owner of quantum rigidity results, not because the paper
+belongs to this manuscript.  C778 turns the recovered exact-simplex decision
+procedure into a replayable certificate bundle for the triply-even plateau;
+C779 attempts the Walsh-moment structural proof that would replace the finite
+sweep and settle the open window; C780 is the novelty audit that gates any
+manuscript work.  The load-bearing script was recovered and spot-validated
+against the source note's plateau boundary on 2026-08-01; see
+`2026-08-01-c778-strip-certificates/PROVENANCE.md`.  If this
+becomes its own manuscript it needs its own lane, which requires approval.
 
 **C734 closed (2026-07-31): Clebsch syndrome bridge formalized and proof
 spine made structural.**  `SyndromeGeometry` now proves generically that
