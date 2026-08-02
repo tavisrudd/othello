@@ -734,16 +734,174 @@ Theorem~\ref{thm:two-uniform-discrete} excludes; an enhanced direction, of
 the kind a GHZ state supplies, would need the pair correlations that
 \(2\)-uniformity forbids.  The stability constant is the inverse of that
 flat metric.
+
+The Fisher form is quadratic data, so it governs the constant and says
+nothing about how large a neighbourhood the quadratic estimate covers.
+That size is fixed by the higher moments of \(M\), and
+Theorem~\ref{thm:k-uniform-stability} and
+Proposition~\ref{prop:stability-region} below determine it.
 \end{remark}
 
-The constant is independent of the party count.  The region on which the
-theorem says anything is not, and the following family shows that the
-shrinkage is real rather than an artifact of the cubic cutoff.
+The size of the certified region is controlled by the state's uniformity
+order, not by the number of parties.  Call
+\(\lvert\psi\rangle\) \emph{\(k\)-uniform} if every reduced operator on at
+most \(k\) parties is maximally mixed; \(2\)-uniformity is the case
+\(k=2\), and an \(\AME(2m,q)\) state is \(m\)-uniform.  The hypothesis
+\(t\leq\frac12\) in Theorem~\ref{thm:two-uniform-stability} pays for a
+cubic Taylor remainder.  Each additional order of uniformity removes one
+order from that remainder, because the state and the tracial state assign
+the same value to every power of \(M\) below the uniformity order.
 
-\begin{proposition}[The certified region shrinks with the party count]
+\begin{lemma}[Tracial agreement below the uniformity order]
+\label{lem:tracial-agreement}
+Let \(\lvert\psi\rangle\) be \(k\)-uniform on \(n\) qudits.  Then
+\(\langle\psi\rvert O\lvert\psi\rangle=q^{-n}\Tr O\) for every operator
+\(O\) supported on at most \(k\) parties.  In particular, with
+\(M=\sum_jh_j^{(j)}\) as above,
+\(\langle\psi\rvert M^r\lvert\psi\rangle=q^{-n}\Tr(M^r)\) for every
+\(r\leq k\).
+\end{lemma}
+
+\begin{proof}
+If \(O=O_S\otimes I\) with \(\lvert S\rvert\leq k\) then
+\(\langle O\rangle=\Tr(\rho^\psi_SO_S)=q^{-\lvert S\rvert}\Tr O_S
+=q^{-n}\Tr O\).  Expanding \(M^r\) gives a sum of products of one-site
+operators touching at most \(r\leq k\) sites, so every term is of that
+shape.
+\end{proof}
+
+The tracial state \(q^{-n}\Tr\) is the product of the one-site tracial
+states, and the site summands of \(M\) commute, so
+\(q^{-n}\Tr f(M)=\mathbb E\,f(X_1+\cdots+X_n)\) with the \(X_j\)
+independent and \(X_j\) uniform on the spectrum of \(h_j\).  The tracial
+main term is therefore a product of one-site characteristic functions, and
+the following contraction estimate controls each factor.
+
+\begin{lemma}[Per-site contraction]\label{lem:site-contraction}
+Let \(h\) be traceless Hermitian on \(\mathbb C^q\) with spectral spread
+\(s=\lambda_{\max}(h)-\lambda_{\min}(h)\).  Then
+\[
+ \bigl\lvert q^{-1}\Tr e^{ih}\bigr\rvert^2
+   \leq1-c(s)\lVert h\rVert_F^2/q,
+ \qquad
+ c(s)=\max\Bigl\{1-\tfrac{s^2}{12},\ \tfrac4{\pi^2}\,[s\leq\pi]\Bigr\}.
+\]
+\end{lemma}
+
+\begin{proof}
+Write \(q^{-1}\Tr e^{ih}=\mathbb E\,e^{iX}\) with \(X\) uniform on the
+spectrum.  For an independent copy \(X'\),
+\(\lvert\mathbb E\,e^{iX}\rvert^2=\mathbb E\cos(X-X')\) and
+\(\lvert X-X'\rvert\leq s\).  From
+\(\cos u\leq1-u^2/2+u^4/24=1-(u^2/2)(1-u^2/12)\) and \(u^2\leq s^2\),
+\(\mathbb E\cos(X-X')\leq1-(1-s^2/12)\operatorname{Var}X\); from
+\(\cos u\leq1-2u^2/\pi^2\) for \(\lvert u\rvert\leq\pi\),
+\(\mathbb E\cos(X-X')\leq1-(4/\pi^2)\operatorname{Var}X\).  Tracelessness
+gives \(\operatorname{Var}X=\Tr(h^2)/q=\lVert h\rVert_F^2/q\).
+\end{proof}
+
+\begin{theorem}[Stability at uniformity order \(k\)]
+\label{thm:k-uniform-stability}
+Let \(\lvert\psi\rangle\) be \(k\)-uniform with \(k\geq2\), let each
+\(h_j\) be traceless Hermitian with spectral spread at most \(s\), and keep
+\(t\), \(D\), \(U\) as in Theorem~\ref{thm:two-uniform-stability}.  Put
+\[
+ c=c(s),\qquad
+ \lambda=\frac{2t^{\,k-1}}{(k+1)!},\qquad
+ \rho=c-\frac{c^2D^2}{4q}-2\lambda .
+\]
+Then \(\varepsilon(U)^2\geq\rho D^2/q\); in particular \(\rho>0\) gives
+\(D\leq\sqrt{q/\rho}\;\varepsilon(U)\).
+\end{theorem}
+
+\begin{proof}
+Write \(e^{ix}=\sum_{r\leq k}(ix)^r/r!+\varrho(x)\) with
+\(\lvert\varrho(x)\rvert\leq\lvert x\rvert^{k+1}/(k+1)!\).  By
+Lemma~\ref{lem:tracial-agreement} the state and the tracial state agree on
+every \(M^r\) with \(r\leq k\), so
+\(\langle e^{iM}\rangle-q^{-n}\Tr e^{iM}
+=\langle\varrho(M)\rangle-q^{-n}\Tr\varrho(M)\).  For any spectral weight
+vector \(p_i\geq0\) with \(\sum_ip_i=1\),
+\[
+ \Bigl\lvert\sum_ip_i\varrho(\lambda_i)\Bigr\rvert
+ \leq\frac{\lVert M\rVert_{\mathrm{op}}^{\,k-1}}{(k+1)!}\sum_ip_i\lambda_i^2 ,
+\]
+and both states give \(M^2\) the value \(D^2/q\), by
+Lemma~\ref{lem:tracial-agreement} with \(r=2\) on one side and by
+tracelessness on the other.  Since
+\(\lVert M\rVert_{\mathrm{op}}\leq t\), each term is at most
+\(t^{k-1}D^2/(q(k+1)!)\), so the two expectations differ by at most
+\(\lambda D^2/q\).  The sites commute, so
+\(q^{-n}\Tr e^{iM}=\prod_jq^{-1}\Tr e^{ih_j}\), and
+Lemma~\ref{lem:site-contraction} with \(1-y\leq e^{-y}\) gives
+\[
+ \bigl\lvert\langle e^{iM}\rangle\bigr\rvert
+  \leq\prod_j\bigl(1-c\lVert h_j\rVert_F^2/q\bigr)^{1/2}
+      +\lambda D^2/q
+  \leq e^{-cD^2/(2q)}+\lambda D^2/q .
+\]
+With \(x=cD^2/(2q)\) and \(1-e^{-x}\geq x-x^2/2\),
+\(\varepsilon(U)^2=2-2\lvert\langle e^{iM}\rangle\rvert
+\geq2x-x^2-2\lambda D^2/q=\rho D^2/q\).
+\end{proof}
+
+\begin{corollary}[The certified radius grows with the uniformity order]
+\label{cor:k-uniform-region}
+Let \(\lvert\psi\rangle\) be \(k\)-uniform with \(k\geq2\).  If every
+\(h_j\) has spectral spread at most \(\frac12\), if \(D\leq\sqrt q/2\), and
+if
+\[
+ t\leq R_k:=\Bigl(\frac{(k+1)!}{48}\Bigr)^{1/(k-1)},
+\]
+then \(D\leq\sqrt{6q/5}\,\varepsilon(U)\).  One has
+\(\log R_k=\log k-1+O(\log k/k)\), so \(R_k\sim k/e\).
+\end{corollary}
+
+\begin{proof}
+Spread at most \(\frac12\) gives \(c\geq1-\frac1{48}=0.97917\); with
+\(D^2\leq q/4\), \(c^2D^2/(4q)\leq c^2/16\), so
+\(c-c^2D^2/(4q)\geq0.91924\); and \(t^{k-1}\leq(k+1)!/48\) gives
+\(2\lambda\leq\frac1{12}\).  Hence \(\rho\geq0.83591>\frac56\) and
+\(\sqrt{q/\rho}\leq\sqrt{6q/5}\).  The asymptotics are Stirling's formula
+applied to \(\log R_k=(\log(k+1)!-\log48)/(k-1)\).
+\end{proof}
+
+At \(k=2\) this is weaker than Theorem~\ref{thm:two-uniform-stability},
+which reaches \(t\leq\frac12\) while \(R_2=\frac18\); the loss is the
+passage through the tracial main term, which the direct argument avoids.
+The gain begins at \(k=3\), where \(R_3=1/\sqrt2\), and grows from there:
+\(R_4=1.357\), \(R_{10}=4.548\), \(R_{30}=12.93\).  For a stabilizer
+\(\AME(2m,q)\) state \(k=m\), so the certified radius grows linearly in the
+party count.  It cannot grow faster.
+
+\begin{proposition}[Ceiling on the certified radius]
+\label{prop:region-ceiling}
+For every \(q\geq2\) and every \(n\) there are traceless Hermitian \(h_j\)
+on \(\mathbb C^q\) with
+\(\sum_j\lVert h_j\rVert_{\mathrm{op}}=2\pi(1-1/q)n\) and \(D>0\) for which
+\(\bigotimes_je^{ih_j}\) is a scalar, hence \(\varepsilon=0\).  No estimate
+\(\varepsilon(U)^2\geq\rho D^2/q\) with \(\rho>0\) can therefore hold on a
+region of radius exceeding \(2\pi(1-1/q)n\).
+\end{proposition}
+
+\begin{proof}
+Take \(h_j=(2\pi/q)\diag(q-1,-1,\ldots,-1)\) at every site.  It is
+traceless, and both eigenvalues of \(e^{ih_j}\) equal \(e^{-2\pi i/q}\), so
+\(e^{ih_j}=e^{-2\pi i/q}I\) and the product of \(n\) of them is a global
+phase.  Here \(\lVert h_j\rVert_{\mathrm{op}}=2\pi(q-1)/q\) and
+\(\lVert h_j\rVert_F^2=(2\pi/q)^2q(q-1)>0\).
+\end{proof}
+
+Linear growth in the party count is therefore the maximal possible order,
+and Corollary~\ref{cor:k-uniform-region} attains it for AME states, within
+a factor \(4\pi e(1-1/q)\) of the ceiling.  Bounded uniformity order is a
+different regime, and the following family measures it exactly.
+
+\begin{proposition}[The certified radius at uniformity order three]
 \label{prop:stability-region}
-Let \(m\geq3\), \(N=2^m\), and let \(\lvert C\rangle\) be the equal-phase
-CSS state of \(C=\mathrm{RM}(1,m)\leq\F_2^N\); it is \(2\)-uniform.  Take
+Let \(\ell\geq3\), \(N=2^\ell\), and let \(\lvert C\rangle\) be the
+equal-phase CSS state of \(C=\mathrm{RM}(1,\ell)\leq\F_2^N\).  Its
+uniformity order is \(3\), for every \(\ell\).  Take
 \(h_j=cZ(1)\) at every site and put \(\theta=Nc\in(0,2\pi)\).  Then
 \[
  \sum_j\lVert h_j\rVert_{\mathrm{op}}=\theta,\qquad
@@ -752,18 +910,20 @@ CSS state of \(C=\mathrm{RM}(1,m)\leq\F_2^N\); it is \(2\)-uniform.  Take
  \frac D{\sqrt2\,\varepsilon}=\frac\theta{2\sin(\theta/2)} .
 \]
 The last ratio does not depend on \(N\) and increases on \((0,2\pi)\); it
-passes \(\sqrt{6/5}\) at the unique \(\theta^*=1.46562\ldots\), where the
-defect is \(1.3379\ldots N^{-1/2}\).  Hence the conclusion of
-Theorem~\ref{thm:two-uniform-stability} fails at defects tending to zero
-with \(N\): no threshold below which it holds can be uniform in the party
-count, and every valid threshold is \(O(n^{-1/2})\).
+passes \(\sqrt{6/5}\) at the unique \(\theta^*=1.46562\ldots\).  Hence the
+conclusion of Theorem~\ref{thm:two-uniform-stability} fails at
+\(t=\theta^*\), for every length.  At uniformity order three the exact
+radius for the constant \(\sqrt{6q/5}\) therefore lies between
+\(R_3=1/\sqrt2\) and \(\theta^*\).
 \end{proposition}
 
 \begin{proof}
-The nonzero weights of \(\mathrm{RM}(1,m)\) are \(N/2\) and \(N\), and
-\(C^\perp=\mathrm{RM}(m-2,m)\) has minimum distance \(4\); both exceed
-\(2\), so \((2.2)\) makes the state \(2\)-uniform as in
-Remark~\ref{rem:two-uniform-not-clifford}.  Since
+The nonzero weights of \(\mathrm{RM}(1,\ell)\) are \(N/2\) and \(N\), and
+\(C^\perp=\mathrm{RM}(\ell-2,\ell)\) has minimum distance \(4\).  A
+marginal of the equal-phase CSS state fails to be maximally mixed only when
+a nonzero word of \(C\) or of \(C^\perp\) is supported inside it, so by
+\((2.2)\) the uniformity order is
+\(\min(N/2,4)-1=3\) whenever \(N\geq8\).  Since
 \(Z(1)\lvert x\rangle=(-1)^x\lvert x\rangle\) at a single site,
 \(U\lvert x\rangle=e^{ic(N-2\operatorname{wt}(x))}\lvert x\rangle\), and
 the weight distribution \(1,\,2N-2,\,1\) on weights \(0,\,N/2,\,N\) gives
@@ -778,15 +938,165 @@ Theorem~\ref{thm:two-uniform-stability} while the defect is
 \(2\sin(\theta^*/2)N^{-1/2}\).
 \end{proof}
 
-Two consequences.  The smallness hypothesis is load-bearing, and its
-constant \(\frac12\) is within a factor of about three of sharp, since the
-family leaves the hypothesis at \(\theta=\frac12\) and violates the
-conclusion at \(\theta^*\).  And the correct summary of the party count is
-two separate statements in one breath: the ratio constant
-\(\sqrt{6q/5}\) is independent of \(n\), while the certified neighbourhood
-shrinks like \(n^{-1/2}\) in defect, at a rate this family attains.  Both
-statements concern a known state acted on by product unitaries of bounded
-generator norm; neither certifies an unknown device.
+Two consequences.  The smallness hypothesis of
+Theorem~\ref{thm:two-uniform-stability} is load-bearing, and its constant
+\(\frac12\) is within a factor of about three of sharp, since the family
+leaves the hypothesis at \(\theta=\frac12\) and violates the conclusion at
+\(\theta^*\).  And the party count is not what governs the region.  The
+family has \(N\) parties and uniformity order three at every length, so
+what it bounds is the radius at order three; the defect at which it breaks
+the conclusion is \(1.3379\ldots N^{-1/2}\) only because a bounded
+\(\ell^1\) radius spread evenly over \(N\) sites has defect image of order
+\(N^{-1/2}\).  When the uniformity order grows with the party count, as it
+does for an \(\AME(2m,q)\) state, the radius grows with it and the
+certified neighbourhood, measured in defect, does not shrink: the
+constraint \(D\leq\sqrt q/2\) then binds before
+\(t\leq R_m\sim m/e\) does, and it is a bound on the defect by a constant.
+Both statements concern a known state acted on by product unitaries of
+bounded generator norm; neither certifies an unknown device.
+
+For stabilizer AME states there is a second route to a stability estimate,
+which buys the same conclusion with a different hypothesis set.  It gives
+up the global \(\ell^1\) budget on \(\sum_j\lVert h_j\rVert_{\mathrm{op}}\)
+entirely, keeps a per-site condition and the global \(\ell^2\) condition,
+and pays only in the constant.  The mechanism is a bipartition bound in
+which the Weyl amplitudes of the two halves are compared directly, so no
+Taylor remainder appears and no budget is needed to control one.
+
+\begin{proposition}[Half-splitting bound]\label{prop:half-splitting}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with label
+group \(L\) and character \(\chi\), let \(U=\bigotimes_jU_j\) be a product
+unitary, and put \(a_j(v)=q^{-1}\Tr(W_v^\dagger U_j)\), so that
+\(p_j=\lvert a_j\rvert^2\) is a probability distribution on \(\F_q^2\) for
+each \(j\).  For a set \(A\) of \(m\) parties define \(u,v\in\mathbb R^L\)
+by
+\[
+ u(\ell)=\prod_{j\in A}\lvert a_j(\ell_j)\rvert,\qquad
+ v(\ell)=\prod_{j\notin A}\lvert a_j(\ell_j)\rvert .
+\]
+Then \(\lVert u\rVert=\lVert v\rVert=1\) and
+\(\lvert\langle\psi\rvert U\lvert\psi\rangle\rvert\leq\langle u,v\rangle\),
+so \(\varepsilon(U)^2\geq\lVert u-v\rVert^2\).
+\end{proposition}
+
+\begin{proof}
+The coordinate restriction \(\pi_A:L\to(\F_q^2)^A\) has kernel the labels
+supported on the complementary \(m\)-set, which by \((3.4)\) is trivial;
+both sides have \(q^{2m}\) elements, so \(\pi_A\) is a bijection, and
+likewise for \(\pi_{A^c}\).  Hence
+\(\lVert u\rVert^2=\sum_{x\in(\F_q^2)^A}\prod_{j\in A}p_j(x_j)=1\), and the
+same for \(v\).  From \((2.2)\) and
+\(\Tr(W_\ell U)=\prod_j\Tr(W_{\ell_j}U_j)\), taking moduli termwise gives
+\(\lvert\langle\psi\rvert U\lvert\psi\rangle\rvert
+\leq\sum_{\ell\in L}\prod_j\lvert a_j(\ell_j)\rvert=\langle u,v\rangle\),
+the relabelling \(\ell\mapsto-\ell\) being a bijection of \(L\).  For unit
+vectors \(\langle u,v\rangle=1-\frac12\lVert u-v\rVert^2\).
+\end{proof}
+
+The AME condition supplies more than the two bijections: it pins down a
+family of labels of minimum weight that straddles the cut, and those are
+the labels on which \(u\) and \(v\) are forced apart.
+
+\begin{lemma}[Cut-transversal labels]\label{lem:cut-transversal}
+With \(A\) as above and \(j\notin A\), let
+\(L_j=\{\ell\in L:\supp\ell\subseteq A\cup\{j\}\}\).  Then
+\(\lvert L_j\rvert=q^2\), every nonzero \(\ell\in L_j\) has support exactly
+\(A\cup\{j\}\), and for every \(i\in A\cup\{j\}\) the evaluation
+\(\ell\mapsto\ell_i\) is a bijection \(L_j\to\F_q^2\).
+\end{lemma}
+
+\begin{proof}
+\(L_j\) is the kernel of the projection of \(L\) to the coordinates
+\(A^c\setminus\{j\}\), which is surjective because it factors the bijection
+\(\pi_{A^c}\); so \(\lvert L_j\rvert=q^{2m}/q^{2(m-1)}=q^2\).  A nonzero
+\(\ell\in L_j\) has weight at least \(m+1\) by \((3.4)\) and support inside
+a set of that size.  For \(i\in A\cup\{j\}\) the kernel of
+\(\ell\mapsto\ell_i\) on \(L_j\) consists of labels supported on \(m\)
+parties, hence is trivial, and the two sets have the same cardinality.
+\end{proof}
+
+\begin{theorem}[Stability without a generator budget]
+\label{thm:budget-free-stability}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
+\(m\geq3\), let \(U=\bigotimes_jU_j\) be a product unitary, and put
+\(\eta_j=1-\lvert q^{-1}\Tr U_j\rvert^2\) and \(H=\sum_j\eta_j\).  If
+\(H\leq\frac14\) then \(\varepsilon(U)^2\geq H/4\).  Consequently, if
+\(U=\bigotimes_je^{ih_j}\) with each \(h_j\) traceless Hermitian of
+spectral spread at most \(\pi\) and \(D\leq\sqrt q/2\), then
+\[
+ \varepsilon(U)^2\geq\frac{c\,D^2}{4q},
+ \qquad\text{that is}\qquad
+ D\leq2\sqrt{q/c}\;\varepsilon(U),
+\]
+with \(c=c(s)\) as in Lemma~\ref{lem:site-contraction}.  No bound on
+\(\sum_j\lVert h_j\rVert_{\mathrm{op}}\) is assumed.
+\end{theorem}
+
+\begin{proof}
+Fix an \(m\)-set \(A\) and write \(\eta=\max_j\eta_j\leq H\).  For
+\(j\notin A\) and \(w\in\F_q^2\) let \(\ell^{j,w}\) be the label of
+Lemma~\ref{lem:cut-transversal} with \(j\)-coordinate \(w\).  Since
+\(\ell^{j,w}\) vanishes off \(A\cup\{j\}\),
+\[
+ \sum_{w\ne0}v(\ell^{j,w})^2
+  =\eta_j\prod_{i\notin A\cup\{j\}}(1-\eta_i)\geq\eta_j(1-H).
+\]
+Every \(A\)-coordinate of \(\ell^{j,w}\) is nonzero, so
+\(p_i(\ell_i^{j,w})\leq\eta_i\) for \(i\in A\); fixing one \(i_0\in A\) and
+using injectivity of \(w\mapsto\ell_{i_0}^{j,w}\),
+\(\sum_{w\ne0}u(\ell^{j,w})^2\leq\prod_{i\in A}\eta_i\).  Summing over the
+\(m\) choices of \(j\) and using
+\(\prod_{i\in A}\eta_i\leq\eta^{m-1}m^{-1}\sum_{i\in A}\eta_i\) bounds the
+total by \(\eta^{m-1}\sum_{i\in A}\eta_i\).  All terms of
+\(\lVert u-v\rVert^2\) are nonnegative, and \((x-y)^2\geq x^2/2-y^2\), so
+this family contributes at least
+\(\frac12(1-H)\sum_{j\notin A}\eta_j-\eta^{m-1}\sum_{i\in A}\eta_i\).  The
+mirror family, supported on \(A^c\cup\{i\}\) for \(i\in A\), is disjoint
+from it for \(m\geq2\) and contributes the reflected bound.  Adding,
+\[
+ \varepsilon(U)^2\geq\lVert u-v\rVert^2
+   \geq\Bigl(\tfrac12(1-H)-\eta^{m-1}\Bigr)H .
+\]
+At \(H\leq\frac14\) and \(m\geq3\) one has
+\(\eta^{m-1}\leq H^2\leq\frac1{16}\), so the bracket is at least
+\(\frac5{16}\geq\frac14\).  For the second statement,
+Lemma~\ref{lem:site-contraction} gives
+\(\eta_j\geq c\lVert h_j\rVert_F^2/q\), hence \(H\geq cD^2/q\); and
+\(1-\lvert\mathbb E\,e^{iX}\rvert^2\leq\frac12\mathbb E(X-X')^2
+=\lVert h_j\rVert_F^2/q\) gives \(H\leq D^2/q\leq\frac14\).
+\end{proof}
+
+The two routes are a choice of hypothesis set.
+Corollary~\ref{cor:k-uniform-region} assumes per-site spread \(\frac12\),
+\(D\leq\sqrt q/2\), and the \(\ell^1\) budget \(t\leq R_k\), and delivers
+the constant \(\sqrt{6q/5}\).  Theorem~\ref{thm:budget-free-stability}
+keeps \(D\leq\sqrt q/2\), relaxes the spread hypothesis to \(\pi\), deletes
+the budget, and pays \(2\sqrt{q/c}\), which is \(\pi\sqrt q\) at spread
+\(\pi\) and \(2.02\sqrt q\) at spread \(\frac12\).  Its per-site spread
+condition is not decorative: the family of
+Proposition~\ref{prop:region-ceiling} has \(e^{ih_j}\) scalar, so every
+\(\eta_j\) vanishes and the first bound is empty, and those \(h_j\) have
+spread \(2\pi\), exactly where \(c(s)\leq0\) and the second bound is empty
+too.  The spread condition is the residue of the ceiling.
+
+One configuration is worth recording, because it is the natural candidate
+for a product unitary that Proposition~\ref{prop:half-splitting} might fail
+to see.  At \(q=2\) take \(U_j=H\) at every site, so that each \(p_j\) is
+uniform on \(\{X,Z\}\); then \(u(\ell)v(\ell)=2^{-m}\) when every
+\(\ell_j\in\{X,Z\}\) and vanishes otherwise, so
+\(\langle u,v\rangle=2^{-m}\lvert L\cap\{X,Z\}^{2m}\rvert\).  Writing
+\(\{X,Z\}=X+\{0,Y\}\), the set \(L\cap\{X,Z\}^{2m}\) is empty or a coset of
+\(L\cap\{0,Y\}^{2m}\), and the latter is a binary linear code of length
+\(2m\) whose nonzero words have weight at least \(m+1\).  Singleton bounds
+its dimension by \(m\), with equality only for a binary
+\([2m,m,m+1]\) MDS code; the binary MDS codes are the trivial ones, which
+forces \(m\leq1\).  Hence \(\langle u,v\rangle\leq\frac12\) and
+\(\varepsilon(H^{\otimes2m})^2\geq1\) for every stabilizer
+\(\AME(2m,2)\) state with \(m\geq2\).  The bound is not merely nonvacuous
+there; it is within \(\sqrt2\) of the largest possible defect.  What the
+half-splitting bound discards is phase information, but the mechanism that
+detects this configuration is a count of codewords in a structured subset
+of \(L\), and the MDS constraints force that count down.
 
 \begin{corollary}[Approximate symmetries decompose]
 \label{cor:approximate-decomposition}
