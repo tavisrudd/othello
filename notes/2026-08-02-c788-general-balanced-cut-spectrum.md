@@ -81,6 +81,92 @@ order-four symmetric conference case.  Order two is the trivial one-mode
 case.  Thus the six-mode theorem is an exceptional endpoint, not the first
 member of a higher-order uniform family.
 
+## `tt` + `ej2` addendum: the hidden three-design
+
+The local obstruction has more structure than the original classification
+needed.  For (d\geq3), the aligned four-sets of every symmetric conference
+matrix of order (2d) form a
+
+\[
+ \boxed{3\text{-}(2d,4,(d-3)/2)\text{ design}.}
+\]
+
+In particular their number and density among all four-sets are
+
+\[
+ b=\frac{(2d)(2d-1)(2d-2)(2d-6)}{96},\qquad
+ \rho=\frac{d-3}{2(2d-3)}.
+\]
+
+This design theorem determines not only the mean but also the exact variance
+of the aligned-block count on a uniformly chosen balanced half.  The same
+formulas hold on projective cuts because (c_T=c_{T^c}):
+
+\[
+ \boxed{\mathbb E c_T=\rho\binom d4,}
+\]
+
+and, for (d\geq4),
+
+\[
+ \boxed{
+ \operatorname{Var}(c_T)=
+ \frac{\binom{2d}{4}\binom{2d-8}{d-4}}{\binom{2d}{d}}
+ \rho(1-\rho).}
+\]
+
+Consequently the balanced-cut ensemble has universal first two purity
+statistics, independent of the switching class:
+
+\[
+ \mathbb E\operatorname{tr}(H_T^2)
+ =\frac{F_d+32\rho\binom d4}{(2d-1)^2},
+\quad
+ \operatorname{Var}(\operatorname{tr}(H_T^2))
+ =\frac{1024}{(2d-1)^4}\operatorname{Var}(c_T).
+\]
+
+The variance is strictly positive for every higher admissible half-size.  It
+therefore gives a quantitative, matrix-independent strengthening of the
+nonuniformity theorem.
+
+For the first higher order, the design is a Steiner system
+(S(3,4,10)).  Here (\mathbb E c_T=5/7) and
+(\operatorname{Var}(c_T)=10/49), so
+(\mathbb E[c_T(c_T-1)]=0).  Since (c_T) is a nonnegative integer, the 126
+projective cuts split structurally into exactly 36 cuts with (c_T=0) and 90
+with (c_T=1).  Thus the order-ten purity split, previously only certified by
+enumeration, is forced without enumerating cuts.  The checker remains the
+evidence for the stronger statement that each purity class has one complete
+Gram polynomial.
+
+To prove the design theorem, fix a triple ({a,b,c}) and switch so that
+(C_{ab}=C_{ac}=1); put (\tau=C_{bc}).  For every outside vertex (x), write
+(u,v,z)=(C_{ax},C_{bx},C_{cx}).  Its four-set is aligned exactly when
+
+\[
+ (uv,uz,vz)=(\tau,\tau,1).
+\]
+
+The indicator of this condition is
+
+\[
+ \frac{1+\tau uv+\tau uz+vz}{4}.
+\]
+
+The three row-orthogonality equations give
+(\sum uv=-\tau), (\sum uz=-\tau), and (\sum vz=-1), where the sums run over
+the (2d-3) outside vertices.  Summing the indicator therefore gives exactly
+((2d-6)/4=(d-3)/2), independently of the triple.
+
+There is also a useful Johnson-scheme reading.  If (f) is the aligned-block
+indicator minus its density on four-sets, the 3-design equations say that
+(f) is a pure degree-four harmonic.  The four-to-(d) inclusion operator sends
+it to (c_T-\mathbb E c_T), and its squared singular value on this harmonic
+space is (\binom{2d-8}{d-4}).  Taking norms gives the variance formula above.
+This identifies precisely what C788's injectivity argument was detecting:
+not an arbitrary local defect, but the surviving top Johnson harmonic.
+
 ## Structural proof
 
 ### 1. The commutator is the exchange map
@@ -199,7 +285,10 @@ The deterministic standard-library checker enumerates balanced cuts modulo
 complement for symmetric conference matrices of orders 6, 10, and 14.  It
 checks (C^2=(n-1)I), verifies (RR^{\mathsf T}=qI-A^2) independently on
 every cut, computes exact Gram characteristic polynomials by Newton
-identities, and checks the closed-four-walk formula separately.
+identities, and checks the closed-four-walk formula separately.  The refreshed
+certificate also enumerates the global aligned blocks, verifies the asserted
+3-design degree at every triple, and independently compares the empirical cut
+mean and variance with the Johnson-harmonic formulas.
 
 The order-six matrix has one profile on all ten cuts:
 
@@ -274,11 +363,17 @@ audit also exposed a terminology collision: two-graph literature reserves
 - **Settled by `ej`:** only the fourth spectral moment is needed for the global
   obstruction.  Inclusion-matrix injectivity converts its cutwise constancy to
   a four-vertex condition, avoiding any classification of conference matrices.
-- **Settled by `ej2`:** the obstruction is stronger than nonuniform complete
+- **Settled by the original `ej2`:** the obstruction is stronger than nonuniform complete
   spectra.  The first exchange moment is universal in every order, whereas the
   second moment is an exact affine count of aligned four-sets and is uniform
   only for (d\leq3).  Its nonzero gaps are quantized in units of
   (32/(2d-1)^2).
+- **Settled by the reopened `tt` pass:** the aligned four-sets form the
+  universal (3\text{-}(2d,4,(d-3)/2)) design.  The original inclusion proof
+  was detecting its pure degree-four Johnson harmonic.
+- **Settled by the reopened `ej2` pass:** the full cut ensemble has exact,
+  switching-class-independent purity mean and variance.  At order ten this
+  forces the (36/90) purity split structurally, without cut enumeration.
 - **Settled by `ej`:** the two possible four-cycle sums have distinct endings:
   value (3) contradicts row orthogonality, while value (-1) is exactly a
   triangle-free two-coloring and stops at six vertices by (R(3,3)=6).
@@ -289,10 +384,17 @@ audit also exposed a terminology collision: two-graph literature reserves
   spectra within higher Paley cut orbits.  The C729 cross-ratio signatures are
   the natural input, but this would be a new arithmetic successor rather than
   a gap in the rigidity theorem.
+- **Open, newly isolated:** determine which
+  (3\text{-}(2d,4,(d-3)/2)) designs arise as aligned-block designs of symmetric
+  conference matrices, and which higher cut-count moments distinguish their
+  switching classes.  The present theorem fixes the first two moments exactly
+  but does not classify the full histogram beyond order ten.
 - **Partially settled publication gate:** the focused audit found no exact
   predecessor for the singular-spectral classification and identified spectral
   monomorphy as the correct neighboring framework.  MathSciNet, Google Scholar,
   two published full texts, and a subject-expert check remain open, so C788
   licenses no “first” claim.
 
-No unexplained feature remains in the cut-independence classification.
+No unexplained feature remains in the cut-independence classification.  The
+real residual mystery is now sharply separated: realization and higher-moment
+classification of the associated aligned-block 3-designs.

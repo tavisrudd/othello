@@ -8,6 +8,25 @@
           "multiplicity": 10
         }
       ],
+      "aligned_four_set_cut_moments": {
+        "density": {
+          "denominator": 1,
+          "numerator": 0
+        },
+        "mean": {
+          "denominator": 1,
+          "numerator": 0
+        },
+        "variance": {
+          "denominator": 1,
+          "numerator": 0
+        }
+      },
+      "aligned_four_set_design": {
+        "blocks": 0,
+        "lambda_3": 0,
+        "parameters": "3-(6,4,0)"
+      },
       "balanced_projective_cuts": 10,
       "cross_gram_characteristic_polynomials": [
         {
@@ -39,6 +58,25 @@
           "multiplicity": 90
         }
       ],
+      "aligned_four_set_cut_moments": {
+        "density": {
+          "denominator": 7,
+          "numerator": 1
+        },
+        "mean": {
+          "denominator": 7,
+          "numerator": 5
+        },
+        "variance": {
+          "denominator": 49,
+          "numerator": 10
+        }
+      },
+      "aligned_four_set_design": {
+        "blocks": 30,
+        "lambda_3": 1,
+        "parameters": "3-(10,4,1)"
+      },
       "balanced_projective_cuts": 126,
       "cross_gram_characteristic_polynomials": [
         {
@@ -87,6 +125,25 @@
           "multiplicity": 1170
         }
       ],
+      "aligned_four_set_cut_moments": {
+        "density": {
+          "denominator": 11,
+          "numerator": 2
+        },
+        "mean": {
+          "denominator": 11,
+          "numerator": 70
+        },
+        "variance": {
+          "denominator": 121,
+          "numerator": 105
+        }
+      },
+      "aligned_four_set_design": {
+        "blocks": 182,
+        "lambda_3": 2,
+        "parameters": "3-(14,4,2)"
+      },
       "balanced_projective_cuts": 1716,
       "cross_gram_characteristic_polynomials": [
         {
@@ -168,5 +225,5 @@
       ]
     }
   ],
-  "schema": "c788-balanced-cut-spectrum-v1"
+  "schema": "c788-balanced-cut-spectrum-v2"
 }

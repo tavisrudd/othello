@@ -12,7 +12,9 @@ from __future__ import annotations
 import argparse
 import json
 from collections import Counter
+from fractions import Fraction
 from itertools import combinations
+from math import comb
 from pathlib import Path
 
 
@@ -113,6 +115,10 @@ def four_cycle_sum(matrix: list[list[int]], vertices: tuple[int, ...]) -> int:
     )
 
 
+def fraction_record(value: Fraction) -> dict[str, int]:
+    return {"numerator": value.numerator, "denominator": value.denominator}
+
+
 def audit(matrix: list[list[int]]) -> dict[str, object]:
     n = len(matrix)
     d = n // 2
@@ -123,6 +129,26 @@ def audit(matrix: list[list[int]]) -> dict[str, object]:
     gram_profiles: Counter[tuple[int, ...]] = Counter()
     trace4_profiles: Counter[int] = Counter()
     aligned_four_set_profiles: Counter[int] = Counter()
+    aligned_counts = []
+    aligned_blocks = {
+        vertices
+        for vertices in combinations(range(n), 4)
+        if four_cycle_sum(matrix, vertices) == 3
+    }
+    if n >= 6:
+        triple_degrees = Counter(
+            triple
+            for block in aligned_blocks
+            for triple in combinations(block, 3)
+        )
+        design_lambda = (n - 6) // 4
+        assert all(
+            triple_degrees[triple] == design_lambda
+            for triple in combinations(range(n), 3)
+        )
+        assert len(aligned_blocks) == n * (n - 1) * (n - 2) * (n - 6) // 96
+    else:
+        design_lambda = 0
     for left in balanced_halves(n):
         a = principal(matrix, left)
         r = cross_block(matrix, left)
@@ -136,6 +162,12 @@ def audit(matrix: list[list[int]]) -> dict[str, object]:
         cycle_sums = [four_cycle_sum(a, vertices) for vertices in combinations(range(d), 4)]
         assert all(value in (-1, 3) for value in cycle_sums)
         aligned_four_sets = sum(value == 3 for value in cycle_sums)
+        right = tuple(i for i in range(n) if i not in set(left))
+        assert aligned_four_sets == sum(
+            four_cycle_sum(matrix, vertices) == 3
+            for vertices in combinations(right, 4)
+        )
+        aligned_counts.append(aligned_four_sets)
         aligned_four_set_profiles[aligned_four_sets] += 1
         cycle_formula = d * (d - 1) + 12 * len(list(combinations(range(d), 3)))
         cycle_formula += 8 * sum(cycle_sums)
@@ -148,9 +180,39 @@ def audit(matrix: list[list[int]]) -> dict[str, object]:
         )
         trace4_profiles[trace4] += 1
 
+    cut_count = len(aligned_counts)
+    aligned_mean = Fraction(sum(aligned_counts), cut_count)
+    aligned_variance = sum(
+        (Fraction(value) - aligned_mean) ** 2 for value in aligned_counts
+    ) / cut_count
+    if d >= 4:
+        density = Fraction(d - 3, 2 * (2 * d - 3))
+        theoretical_mean = density * comb(d, 4)
+        theoretical_variance = (
+            Fraction(comb(2 * d, 4) * comb(2 * d - 8, d - 4), comb(2 * d, d))
+            * density
+            * (1 - density)
+        )
+    else:
+        density = Fraction(0)
+        theoretical_mean = Fraction(0)
+        theoretical_variance = Fraction(0)
+    assert aligned_mean == theoretical_mean
+    assert aligned_variance == theoretical_variance
+
     return {
         "order": n,
         "balanced_projective_cuts": len(balanced_halves(n)),
+        "aligned_four_set_design": {
+            "blocks": len(aligned_blocks),
+            "lambda_3": design_lambda,
+            "parameters": f"3-({n},4,{design_lambda})",
+        },
+        "aligned_four_set_cut_moments": {
+            "density": fraction_record(density),
+            "mean": fraction_record(aligned_mean),
+            "variance": fraction_record(aligned_variance),
+        },
         "cross_gram_characteristic_polynomials": [
             {"coefficients": list(coefficients), "multiplicity": multiplicity}
             for coefficients, multiplicity in sorted(gram_profiles.items())
@@ -168,7 +230,7 @@ def audit(matrix: list[list[int]]) -> dict[str, object]:
 
 def generate() -> dict[str, object]:
     return {
-        "schema": "c788-balanced-cut-spectrum-v1",
+        "schema": "c788-balanced-cut-spectrum-v2",
         "normalization": "polynomial is det(t I - R R^T); cuts contain vertex 0",
         "orders": [
             audit(paley_conference(5)),

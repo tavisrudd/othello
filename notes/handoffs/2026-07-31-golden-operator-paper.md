@@ -492,7 +492,12 @@ The first exchange moment is universal; the second is an exact affine count of
 aligned four-sets.  Inclusion-matrix injectivity and (R(3,3)=6) prove that
 cut-independent purity, hence cut-independent full spectrum, occurs exactly for
 (d\leq3).  Thus order six is the unique nontrivial realized uniform case, not
-the start of a higher-order family.  The exact order-6/10/14 falsifier passes.
+the start of a higher-order family.  Its reopened `tt`+`ej2` closeout proves
+that the aligned four-sets form a universal
+(3\text{-}(2d,4,(d-3)/2)) design and derives exact switching-class-independent
+mean and variance formulas for balanced-cut purity.  At order ten the Steiner
+design forces the exact (36/90) purity split without enumeration.  The refreshed
+exact order-6/10/14 falsifier passes.
 A five-source audit found spectral monomorphy as the closest framework but no
 exact singular-spectral predecessor; MathSciNet, Google Scholar, two published
 full texts, and a subject-expert check remain open, so no “first” claim is
