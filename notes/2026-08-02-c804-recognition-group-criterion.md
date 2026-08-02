@@ -59,6 +59,16 @@ phase, define the **recognition group at party `i`**
 
 ## Lemma R (the recognition group is a group, and recognizing everything is Cliffordness)
 
+**Status after the C807 audit: a definition plus an elementary observation, not
+a new theorem, and it must be presented that way.** At local dimension two the
+group property has no content, because every subset of `F_2²` containing `0`
+and one further element is already a subgroup and the intermediate size cannot
+occur. Gross and Van den Nest prove that this group is nontrivial at every
+party for fully entangled qubit stabilizer states, and that credit belongs with
+any statement of it. The lemma becomes non-vacuous only above local dimension
+two. Do not name the object "semi-Clifford": that term is taken by the Clifford
+hierarchy literature.
+
 `Λ_i` is a subgroup of `F_q²`, the induced map `a ↦ b` is an injective additive
 homomorphism `Λ_i → F_q²`, and `U_i` is Clifford if and only if `Λ_i = F_q²`.
 
@@ -173,6 +183,14 @@ arguments and so are covered as well; case (iv) is the sub-case where a single
 support suffices at each party. So the whole of their Corollary 1, and the
 theorem behind it, is now a specialization rather than a finer neighbour.
 
+**Wording constraint from the C807 audit.** At local dimension two this is a
+*unification* of their own two arguments plus Rains, not a strengthening: their
+four-element branch is Rains's Theorem 13, their two-element branch is the
+`N = 2` case of Theorem P, and their concluding step is Corollary G with two
+recovered labels. Say "unifies" there. "Generalizes" is earned only by the move
+to arbitrary local dimension and intermediate index size, which is where the
+audit found the territory unoccupied.
+
 ## What is genuinely new, beyond the local dimension
 
 The intermediate sizes `2 < N < q²` do not occur at `q = 2` and are the generic
@@ -263,6 +281,13 @@ this framework was built to avoid.
 
 ### Finiteness of the symmetry group, for every stabilizer state with full recognition groups
 
+**Scoped after the C807 audit: claim this only above local dimension two.**
+Englbrecht and Kraus characterise all local symmetries of every qubit
+stabilizer state and pin where continuous symmetries occur, which is strictly
+stronger than finiteness on that domain. The corollary below is new content
+only at larger local dimension, and their work must be cited wherever it is
+stated.
+
 This one is free and does not need the atlas. If `Λ_i = F_q²` at every party,
 every product-unitary symmetry of `|ψ⟩` has Clifford factors, so it induces an
 `F_p`-linear symplectic similitude of the label group at each party. The kernel
@@ -322,19 +347,24 @@ generic expectation rather than an anomaly. The manuscript's own exact sequence
 but it does supply the reason the census found what it found, which the C623
 mystery ledger left unexplained.
 
-### The cheapest falsifier available: the known counterexamples
+### The cheapest falsifier available: the qudit counterexample
 
-Local unitary equivalence and local Clifford equivalence are known not to
-coincide for all qubit stabilizer states. By the ceiling proposition above,
-every such counterexample state must have a qubit at which the minimal-element
-label projection is a proper subgroup of `F_2²` — otherwise Corollary G would
-apply and force Cliffordness. That is a hard, cheap, falsifiable prediction
-about published states, it can be checked from their stabilizer generators with
-no new theory, and it tests the framework much more directly than any
-manuscript wording does. It also measures how much room the criterion leaves:
-if the counterexamples fail the condition only barely, the criterion is close to
-necessary; if they fail it at many parties, there is a wide gap where new
-mechanisms could live.
+**Rewritten after the C807 audit; the qubit version of this paragraph was
+worthless.** It said that every qubit state witnessing the failure of the two
+equivalence relations must have a party with a proper label projection. That is
+the contrapositive of Van den Nest, Dehaene and De Moor's published Theorem 1,
+so it is known unconditionally and predicts nothing about this framework.
+
+Above local dimension two it is a real test, and the audit located the state to
+run it on: Wong and Jiang exhibit a three-party state at local dimension nine
+that is local-unitarily but not local-Cliffordly equivalent to the
+Greenberger–Horne–Zeilinger state (arXiv:2507.09416, recorded at
+abstract/metadata depth in the audit, so its details must be read before
+anything is concluded). Their Theorem 1 does not reach it. Corollary G says its
+recognition group must be a proper subgroup at some party, and that is
+checkable from the state's stabilizer data with no new theory. A pass makes the
+criterion near-necessary in the only regime where necessity is currently
+testable; a failure kills Corollary G outright.
 
 ### Operational reading
 
