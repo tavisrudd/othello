@@ -1,9 +1,8 @@
 # C817 — Paper IV structural mathematics upgrade
 
 **Lane:** `clebsch`  
-**Status:** active; all six subitems positive and frozen; task-wide closeout remains;
-mathematics research only;
-manuscript integration requires later user discussion
+**Status:** complete 2026-08-02; all six subitems positive and frozen;
+mathematics research only; manuscript integration requires later user discussion
 
 ## Current state
 
@@ -79,9 +78,10 @@ meet-in-the-middle enumeration.  Exact rank gaps also close linear and
 quadratic syndrome separators negatively.  Report and exact evidence bundle:
 `notes/2026-08-02-c817-weight-ten-moment-certificate.md`.
 
-All six research subitems are now frozen.  The remaining C817 gate is the
-task-wide novelty boundary, ranked integration-options memo, final
-`ej`+`tt` closeout, and explicit stop before any manuscript change.
+All six research subitems are frozen.  The task-wide bounded novelty boundary,
+ranked integration-options memo, final `ej`+`tt`+`ej2`, mystery ledger, and
+explicit stop before any manuscript change are complete in
+`notes/2026-08-02-c817-structural-math-upgrade-closeout.md`.
 
 ## Objective
 
