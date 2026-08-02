@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Nine research passes complete; the theorem is **not** proved. Reports:
+Eleven research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -37,17 +37,22 @@ Nine research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-primitive-jacobi-collisions.md`, and
 `notes/2026-08-01-c756-nonsaturated-direction-reduction.md`, and
 `notes/2026-08-01-c756-segre-discriminant-comparison.md`, and
-`notes/2026-08-01-c756-subresultant-moment-obstruction.md`.
+`notes/2026-08-01-c756-subresultant-moment-obstruction.md`, and
+`notes/2026-08-01-c756-saturated-internal-branch.md`, and
+`notes/2026-08-01-c756-intercept-subresultant-probe.md`.
 
 Branch ledger:
 
 - **saturated-external — closed:** the Clebsch hexagon over \(\mathbb F_{11}\) is the
   only covering example;
-- **saturated-internal — open:** the four-frame over \(\mathbb F_5\) is the known
-  example, but no uniform obstruction beyond the certified \(q\le43\) range is on
-  record; the saturated-external mod-4 and matching arguments do not transfer;
+- **saturated-internal — sharply reduced but open:** canonical tangent polynomials and
+  Segre's lemma force a coherent Paley double-clique-plus-matching at tight spectral
+  interlacing; the four-frame over \(\mathbb F_5\) is the known example, the exact audit
+  through \(q\le43\) finds no other coherent candidate, and the remaining uniform gate
+  is to prove that no coherent system exists for \(q>5\);
 - **nonsaturated — open for \(\delta\ge2\):** \(\delta=0,1\) are closed, while the
-  direct Segre, raw-subresultant, and global-moment defect-two repairs fail.
+  direct Segre, global-moment, raw-subresultant, and dual-pencil low-degree norm repairs
+  fail; the all-internal near-transversal classification itself remains open.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -91,6 +96,22 @@ What the saturated-external attack adds:
   close the saturated-external branch completely;
 - polarity turns covering into the assertion that the complete node set of \((q+1)/2\) secants,
   consisting entirely of internal points, blocks every non-tangent line.
+
+What the saturated-internal pass adds:
+
+- after fixing one internal point, the other \((q+1)/2\) points map bijectively to the
+  odd coset of the norm-one circle via their relative angles; the external branch's
+  complete-mapping parity obstruction has no internal analogue;
+- the secants of the conic through an internal arc point give a canonical scale-free
+  tangent polynomial, so Segre's triangle identity forces unconditional sign coherence;
+- coherent representatives form two Paley cliques joined by conjugation matching at
+  exactly tight spectral interlacing; the resulting balance theorem and Parseval identity
+  characterize the saturated size \(k=(q+3)/2\);
+- a master polynomial \(G=\prod_i f_i\) satisfies the necessary Frobenius divisibility
+  \(G\mid G'^q-(-1)^{(q+3)/2}G'\), furnishing a concrete lacunary-polynomial gate;
+- the exact audit over every odd prime power \(q\le43\), independently replayed on five
+  prime fields, finds only the two normalized \(q=5\) four-frames as coherent covering
+  arcs; no coherent candidate survives for any audited \(q>5\).
 
 What the first nonsaturated pass adds:
 
@@ -142,6 +163,22 @@ What the subresultant and Tao-moment pass adds:
   form a defect-two near-transversal of the pencil through \(\ell^\perp\), retaining both
   direction and intercept.
 
+What the bounded dual-pencil/intercept pass adds:
+
+- the chord pole's coordinate along its line of the pencil through \(\ell^\perp\) is the
+  repeated-chord intercept \(U^*=N/G\);
+- the exact root formula is
+  \(S_1=\pm E_P^2(GU-N)\), with
+  \(G=\sum_m\Phi_m^2\), \(N=\sum_m r_m\Phi_m^2\), and
+  \(\Phi_m=(T^q-T)/w_m\);
+- the Moore mass fragments among the point pencils: after the only uniform forced factor
+  \(E_P^2\), the residual degrees are \(2(q-n+1)\) and \(2(q-n+1)+1\), not
+  \(O(\delta)\); six exact covering instances attain this scale, including degrees
+  \(16\) and \(26\) at fixed \(\delta=2\);
+- hence the proposed low-degree conic norm/Weil route fails.  This does not classify the
+  all-internal near-transversals themselves; it closes only their last identified
+  small-degree algebraic compression.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -151,17 +188,17 @@ conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternat
 \(q\)).  The sixth pass proves the primitive Jacobi collision lemma and closes the entire
 saturated-external branch.  The seventh pass gives the strict nonsaturated bound, divides
 the direction polynomial by its forced Moore factor, localizes the defect, and closes
-\(\delta=0,1\).  The saturated-internal branch remains independently open beyond the
-known \(q=5\) four-frame; none of the saturated-external closure proves its uniqueness.
+\(\delta=0,1\).  The saturated-internal branch is now reduced to proving that no coherent
+double-clique system exists for \(q>5\); the exact audit closes it only through \(q=43\).
 At nonsaturated defect \(\delta=2\), both the direct Segre discriminant comparison and the
 unweighted subresultant/moment repairs are closed negatively: the former loses the spare
 factor, the subresultant remains degree \(\Theta(q)\) after its exact \(E_P^2\) division,
-and both residual fibre shapes satisfy all global slope moments.  The next and last
-identified bounded nonsaturated gate is the dual conic-weighted pencil through \(\ell^\perp\): derive
-a degree-\(O(\delta)\) norm or classify its all-internal defect-two near-transversals.
-If that fails, no current small-degree nonsaturated route remains.  Residual slack
-\(\delta\ge3\) stays open behind the defect-two gate, while saturated-internal needs a
-separate torus/Segre or literature classification.
+and both residual fibre shapes satisfy all global slope moments.  The dual-pencil
+intercept calculation now proves that its natural conic-weighted norm also remains at
+degree \(\Theta(q)\).  No current small-degree nonsaturated route remains.  The
+all-internal defect-two near-transversal classification, genuinely pair-coupled carriers,
+and second-order covering counts remain structural possibilities; residual slack
+\(\delta\ge3\) stays open behind the defect-two gate.
 
 ## Current boundary
 
@@ -179,18 +216,19 @@ Two independent uniform obstructions are still required:
    defect-two boundary \((q,k)=(53,12)\).
 
 The old secant-pencil and association-scheme candidates are superseded.  The active
-nonsaturated gate is the dual internal-node near-transversal through \(\ell^\perp\); the
-saturated-internal branch requires a separate torus/Segre normal form or a literature
-classification.
+saturated-internal gate is the coherent Paley double-clique classification (equivalently,
+exploit balance, simultaneous angle bijections, or the master-polynomial divisibility).
+The nonsaturated branch has no bounded algebraic-compression gate left; only a structural
+classification of the dual internal-node near-transversal, a pair-coupled carrier, or a
+uniform second-order covering count remains identified.
 
 ## Prior estimate
 
-The review prior was ~30% provable with current tools (§12.6).  After the direct Segre,
-subresultant, and global-moment repairs failed and the saturated-internal omission was
-identified, the working estimate is ~5--10%.  A bounded dual conic-weighted-pencil route
-and a separate saturated-internal audit remain.  Record the actual obstruction if either
-fails — a sharp statement of *why* the chord-moment system cannot close is itself
-publishable material for the existing papers.
+The review prior was ~30% provable with current tools (§12.6).  The saturated-internal
+audit produced a strong normal form but not its final classification, while the bounded
+dual conic-weighted-pencil norm fails at degree \(\Theta(q)\).  The working estimate stays
+~5--10%, read at its low end for the current toolkit.  The two remaining gates require
+new structural input and no present route joins them.
 
 ## Scope
 
