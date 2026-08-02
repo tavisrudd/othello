@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Twelve research passes complete; the theorem is **not** proved. Reports:
+Thirteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -40,7 +40,8 @@ Twelve research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-subresultant-moment-obstruction.md`, and
 `notes/2026-08-01-c756-saturated-internal-branch.md`, and
 `notes/2026-08-01-c756-intercept-subresultant-probe.md`, and
-`notes/2026-08-01-c756-information-probability-structure-lottery.md`.
+`notes/2026-08-01-c756-information-probability-structure-lottery.md`, and
+`notes/2026-08-01-c756-masked-rs-collision-audit.md`.
 
 Branch ledger:
 
@@ -202,6 +203,25 @@ What the information/probability pass adds:
   to record \((\delta,R,R_{\rm cover})\) in the existing conic-external enumeration
   through \(q\le43\).
 
+What the exhaustive masked-direction audit adds:
+
+- every direction-cover-feasible conic-external arc, deleted point, and spare external
+  line through \(q\le43\) is audited: 234,188 instances, with independently recomputed
+  \(m(q)\) agreeing with the original certificate at all twelve fields;
+- the only feasible fields are \(q=27,29,31,41,43\), and their minimum missing-direction
+  counts are respectively \(6,2,4,6,8\): no instance has \(h=0\) or \(h=1\);
+- the clean surviving nonsaturated target is therefore a masked Rédei direction theorem:
+  a conic-external point set never determines all \(q\) directions on a spare external
+  line.  This statement alone would close the nonsaturated branch;
+- the bare inequality \(R>R_{\rm cover}\) is not the empirical law and becomes a
+  fourth-moment fallback.  The exact identity
+  \(\sum_{\mu_t>0}(\mu_t-1)=\delta+h\) holds throughout, while the occurrence of its
+  all-doubled equality case \(R=\delta+h\) has unexplained residue-dependent texture;
+- the threshold-unification hypothesis closes negative: except for the saturated
+  \(q=11\) hexagon, extremal conic-external cliques cover only 64--94% of the off-conic
+  plane.  Equalities \(m(q)=k_{\min}(q)\) are not evidence that every extremizer is a
+  near-cover.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -241,22 +261,25 @@ Two independent uniform obstructions are still required:
 The old secant-pencil and association-scheme candidates are superseded.  The active
 saturated-internal gate is the coherent Paley double-clique classification (equivalently,
 exploit balance, simultaneous angle bijections, or the master-polynomial divisibility).
-The nonsaturated branch has no bounded algebraic-compression gate left.  Its pair-coupled
-and second-order possibilities now have one exact common target: use the conic-character
-mask to force the parallel-chord collision count \(R\) above the sharp covering threshold.
-This is a falsifiable carrier, not yet a mechanism; the structural classification of the
-dual internal-node near-transversal remains the other identified possibility.
+The nonsaturated branch has no bounded algebraic-compression gate left.  Its clean active
+target is now to prove \(h\ge1\): after deleting any arc point, a conic-external set cannot
+determine every direction on a spare external line.  This is a masked Rédei--Szőnyi-style
+direction theorem whose natural global carrier is the completely split chord polynomial;
+the weighted collision statistic \(R\), projective Reed--Muller support rigidity,
+Lloyd/Delsarte multiplicity integrality, prefix entropy, and local character cumulants are
+recorded as fallback or diagnostic routes in the information/probability report.
 
 Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
 now has the same theorem-shaped status the saturated-external branch had two passes before
 closure, but the tight balance theorem proves that another spectral bound cannot finish it.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot
-close.  The masked Reed--Solomon collision formulation gives the 10--15% nonsaturated
-lottery ticket a precise fourth-moment threshold, but does not yet raise its odds.  Cheap
+close.  The exhaustive masked-direction audit kills threshold unification but promotes
+the simpler \(h\ge1\) theorem, supported without exception in the certified range; this
+sharpens but does not yet raise the 10--15% full-theorem odds.  Cheap
 hygiene still owed before a later end-to-end handoff is one explicit
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
-read of the full twelve-pass argument; neither item reopens a closed mathematical branch.
+read of the full thirteen-pass argument; neither item reopens a closed mathematical branch.
 
 Decision split: do not price the saturated crown and the full theorem as one outcome.
 The realistic publishable narrowing is the **complete saturated classification** — over

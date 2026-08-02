@@ -1,0 +1,127 @@
+{
+  "claim": "Exact RS agreement-column statistics for the six committed direction-covering controls; these controls do not impose conic externality.",
+  "identities_checked": [
+    "sum(mu_t)=binom(n,2)",
+    "sum(mu_t^2)=binom(n,2)+2R",
+    "collision cells have occupancy one",
+    "direction fibres are matchings"
+  ],
+  "rows": [
+    {
+      "b": 10,
+      "conditional_entropy_exact": "log(64)/10",
+      "cover_max_R": 3,
+      "delta": 3,
+      "fibre_profile": {
+        "1": 4,
+        "2": 3
+      },
+      "max_cell_occupancy": 1,
+      "n": 5,
+      "parallel_chord_pair_count_R": 3,
+      "q": 7,
+      "renyi_collision_probability": {
+        "denominator": 25,
+        "numerator": 4
+      },
+      "sum_mu_squared": 16
+    },
+    {
+      "b": 15,
+      "conditional_entropy_exact": "log(16)/15",
+      "cover_max_R": 3,
+      "delta": 2,
+      "fibre_profile": {
+        "1": 11,
+        "2": 2
+      },
+      "max_cell_occupancy": 1,
+      "n": 6,
+      "parallel_chord_pair_count_R": 2,
+      "q": 13,
+      "renyi_collision_probability": {
+        "denominator": 225,
+        "numerator": 19
+      },
+      "sum_mu_squared": 19
+    },
+    {
+      "b": 21,
+      "conditional_entropy_exact": "log(16)/21",
+      "cover_max_R": 3,
+      "delta": 2,
+      "fibre_profile": {
+        "1": 17,
+        "2": 2
+      },
+      "max_cell_occupancy": 1,
+      "n": 7,
+      "parallel_chord_pair_count_R": 2,
+      "q": 19,
+      "renyi_collision_probability": {
+        "denominator": 441,
+        "numerator": 25
+      },
+      "sum_mu_squared": 25
+    },
+    {
+      "b": 21,
+      "conditional_entropy_exact": "log(256)/21",
+      "cover_max_R": 6,
+      "delta": 4,
+      "fibre_profile": {
+        "1": 13,
+        "2": 4
+      },
+      "max_cell_occupancy": 1,
+      "n": 7,
+      "parallel_chord_pair_count_R": 4,
+      "q": 17,
+      "renyi_collision_probability": {
+        "denominator": 441,
+        "numerator": 29
+      },
+      "sum_mu_squared": 29
+    },
+    {
+      "b": 36,
+      "conditional_entropy_exact": "log(1024)/36",
+      "cover_max_R": 9,
+      "delta": 5,
+      "fibre_profile": {
+        "1": 26,
+        "2": 5
+      },
+      "max_cell_occupancy": 1,
+      "n": 9,
+      "parallel_chord_pair_count_R": 5,
+      "q": 31,
+      "renyi_collision_probability": {
+        "denominator": 648,
+        "numerator": 23
+      },
+      "sum_mu_squared": 46
+    },
+    {
+      "b": 45,
+      "conditional_entropy_exact": "log(256)/45",
+      "cover_max_R": 10,
+      "delta": 4,
+      "fibre_profile": {
+        "1": 37,
+        "2": 4
+      },
+      "max_cell_occupancy": 1,
+      "n": 10,
+      "parallel_chord_pair_count_R": 4,
+      "q": 41,
+      "renyi_collision_probability": {
+        "denominator": 2025,
+        "numerator": 53
+      },
+      "sum_mu_squared": 53
+    }
+  ],
+  "source": "2026-08-01-c756-intercept-subresultant-cover.json",
+  "source_sha256": "fdc54d4465892e4010717e30d9986a88a8a0eef8b679e8c1c0b839cc0e67c335"
+}

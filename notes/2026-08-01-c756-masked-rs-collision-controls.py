@@ -10,7 +10,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SOURCE = HERE / "2026-08-01-c756-intercept-subresultant-cover.json"
-OUTPUT = HERE / "2026-08-01-c756-masked-rs-collision-audit.json"
+OUTPUT = HERE / "2026-08-01-c756-masked-rs-collision-controls.json"
 
 
 def cover_max_r(n, delta):

@@ -161,7 +161,7 @@ subresultant result.
 
 ## 4. Exact controls
 
-The script `notes/2026-08-01-c756-masked-rs-collision-audit.py` recomputes the
+The script `notes/2026-08-01-c756-masked-rs-collision-controls.py` recomputes the
 agreement cells from the six previously committed direction-covering
 instances and checks
 
@@ -170,7 +170,7 @@ instances and checks
 \]
 
 cell occupancy one, and the matching cap.  Certificate:
-`notes/2026-08-01-c756-masked-rs-collision-audit.json`.
+`notes/2026-08-01-c756-masked-rs-collision-controls.json`.
 
 | \(n\) | \(q\) | \(\delta\) | fibre profile | \(R\) | \(R_{\rm cover}\) | \(H(U\mid T)\) |
 |---:|---:|---:|:---|---:|---:|:---|
@@ -191,15 +191,15 @@ Reproduction:
 
 ```text
 cd rust
-python3 ../notes/2026-08-01-c756-masked-rs-collision-audit.py
-sha256sum ../notes/2026-08-01-c756-masked-rs-collision-audit.{py,json}
+python3 ../notes/2026-08-01-c756-masked-rs-collision-controls.py
+sha256sum ../notes/2026-08-01-c756-masked-rs-collision-controls.{py,json}
 ```
 
 Recorded hashes from this pass:
 
 ```text
-bf54958662f148062da3fd902499cc0672cf0278e797976ae02f14e844dc0fa9  notes/2026-08-01-c756-masked-rs-collision-audit.py
-0f148cda3b35682c3160e74bb6014aa3ef6038d0402cbd98c934783308052dc1  notes/2026-08-01-c756-masked-rs-collision-audit.json
+acc40f77c43dde9036cb6ef0557f2fefc72973d49a40d6ea387b6c1183edd65c  notes/2026-08-01-c756-masked-rs-collision-controls.py
+0f148cda3b35682c3160e74bb6014aa3ef6038d0402cbd98c934783308052dc1  notes/2026-08-01-c756-masked-rs-collision-controls.json
 ```
 
 The certificate is a diagnostic exact-arithmetic replay, not exhaustive
@@ -257,8 +257,10 @@ coherent-double-clique program.
 
 ## 7. Mystery ledger
 
-- Does the conic mask force \(R>R_{\rm cover}\), or do audited
-  conic-external noncovering arcs already refute that direction?
+- The direct \(R>R_{\rm cover}\) prediction is not the clean empirical law:
+  exhaustive instances at \(q=29,31,43\) can have
+  \(R\le R_{\rm cover}\).  Yet no audited instance has \(h=0\) or \(h=1\).
+  Can the character mask force the sharper direction gap \(h\ge1\) uniformly?
 - Can \(R\) be written as a positive or nearly positive quadratic form after
   inserting the external-line character, so that the half-alphabet mask has
   a sign rather than only cancellation?
@@ -267,3 +269,64 @@ coherent-double-clique program.
   moments agree?
 - Does the saturated-internal signed indicator attain a genuine
   uncertainty-principle equality case whose support can be classified?
+
+## 8. Exhaustive resolution and parked portfolio
+
+The follow-up exhaustive audit is
+`notes/2026-08-01-c756-masked-rs-collision-audit.md`.  It enumerates every
+conic-external arc at a direction-cover-feasible size, every deleted point,
+and every spare external line through \(q\le43\): 234,188 instances.  The
+only feasible fields are \(q=27,29,31,41,43\), with respective minimum
+missing-direction counts
+
+\[
+                 \min h=6,2,4,6,8.
+\]
+
+Thus the existential falsifier does not fire: no conic-external instance
+has \(h\le1\).  Conversely, the threshold-unification hypothesis closes
+negative.  Away from the saturated \(q=11\) Clebsch hexagon, extremal
+conic-external arcs cover only 64--94% of the off-conic plane, with no trend
+toward a global near-cover.  Coincidences between \(m(q)\) and the numerical
+covering threshold appear to be rounding, not evidence that every extremal
+external clique nearly covers.
+
+The primary nonsaturated target is therefore the clean masked direction
+theorem:
+
+> If \(A\) is conic-external and \(\ell\) is a spare external line through
+> \(P\in A\), then \(A\setminus\{P\}\) misses at least one direction on
+> \(\ell\).
+
+This alone closes the nonsaturated branch, because conic filling forces all
+directions on every such line.  The weighted fourth moment \(R\) remains a
+fallback carrier if the direct \(h\ge1\) theorem is too strong.  The identity
+\(\sum_{\mu_t>0}(\mu_t-1)=\delta+h\) is exact; the residue-dependent incidence
+of equality \(R=\delta+h\) is unexplained.
+
+The following probability/information routes are deliberately parked for
+later return, in priority order, with their falsifiers retained:
+
+1. **Global split evaluation code.**  Treat the chord product \(H_A\) as a
+   completely split projective Reed--Muller word with nonzero support
+   \(C(\mathbb F_q)\sqcup S_A\).  Measure the Hilbert function, minimum
+   containing-curve degree, and line/pencil concentration of \(S_A\).  Generic
+   missing sets kill the proposed lacunary rigidity; low-complexity support
+   promotes a split-codeword classification.
+2. **Lloyd/Delsarte multiplicity enumerator.**  For
+   \(W_A(z)=\sum_jN_jz^j\), use the exact incidence moments and \(N_0=0\) to
+   search for a nonnegative dual polynomial on the allowable integer
+   multiplicities.  Repeated feasibility through higher moments demotes the
+   analogy; a negative summed value is an exact impossibility certificate.
+3. **Saturated-internal uncertainty.**  Measure Fourier entropy, Fourier
+   magnitude profile, additive energy, and doubling of the coherent signed
+   Paley eigenvector.  Near equality or high energy invites an equality-case
+   or inverse theorem; a large irregular uncertainty gap kills this route.
+4. **Resultant-sign prefix entropy.**  Record conditional extension counts for
+   ordered general-position prefixes and the latent line, pencil, coset, and
+   spectral states responsible for plateaux.  A bounded structured catalogue
+   supports an entropy-container proof; diffuse plateaux do not.
+5. **Local character cumulants.**  Measure \(K_4/K_5\) sign-pattern frequencies
+   and cycle cumulants.  A stable forbidden-pattern inequality can feed a
+   character-sum or flag-algebra certificate; locally consistent all-negative
+   data kills this lowest-priority route.
