@@ -194,7 +194,13 @@ remain inside C761 rather than becoming successor mysteries:
 
 ## Extra-juice closeout and mystery ledger
 
-The cheap high-value upgrades are complete: exact rank and association leaves,
+The semantic rank transport is now complete.  Its deterministic generator, checked left inverse,
+all-column expansion, semantic span equality, rank-nullity conclusion, and axiom-audited aggregate
+close the first formal boundary without trusting the generator for theorem correctness.  The first
+42 displayed columns happen to form the selected basis; this is an ordering-dependent certificate
+convenience and carries no geometric invariance claim.
+
+The other cheap high-value upgrades are complete: exact rank and association leaves,
 projective orbit shards, precomputed cycle syndromes, a precise manuscript
 trust statement, the abstract `im B=ker A` and orbit-factorization spanning
 chain, and an axiom-audited aggregate gate.  Fourteen execution shards are not
