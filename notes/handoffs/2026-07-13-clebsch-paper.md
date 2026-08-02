@@ -39,7 +39,7 @@ are reusable inputs to C756, but C761 does not own or block that theorem.
 | surface | root | current state | owning task |
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening and C762 owns the forward exposition pass | [C762](../clebsch-tasks/c762-paper-i-forward-exposition.md) |
-| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; C749/C750 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
+| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the trade-only exact \(B_3/H_3\) classification and sheet-sign cubic survive; C749/C750 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C763 consolidation is complete and C764 adds the minimal determinant-versus-permanent boundary for the forward version | [C764](../clebsch-tasks/c764-paper-iii-why-determinant.md) |
 | Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 human proof, paper-owned evidence, semantic modules, logical-spine lemmas, and sharded Lean gates green; semantic rank, normalized weight-eight, arbitrary weight-ten profiles, fixed-point weight-twelve exhaustion, and association/Gram spanning are closed, while two concrete transports and release remain | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -264,6 +264,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | complete; parity-specific proof has independent modular and context-free `GO` verdicts; human proof 3/4 | none; C749 owns final adversarial freeze |
 | [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | unblocked; human proof 4/4 | attack and compress the complete proof, then freeze it |
 | [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | active by explicit user override; six individually elaborated spine modules, full theorem still open | formalize the actual Lucas Hom basis, detecting-module vanishings, contraction, and classification composition |
+| [C797 — Paper II trade-only carrier reconstruction](../clebsch-tasks/c797-trade-only-carrier-reconstruction.md) | complete; carrier-free theorem fails sharply at \(q=7\) | none; seven \(S_4\)-fixed affine placements share the trade and only one is a matching orbit |
 | [C762 — Paper I forward exposition](../clebsch-tasks/c762-paper-i-forward-exposition.md) | active; authoritative exposition, PDFs, cold read, statement identity, and public-locator pass green | after C753, reconcile formal coverage, run the aggregate gate, and synchronize the standalone release |
 | [C763 — Paper III Golden consolidation](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) | complete; selective source--operator--cubics--harmonic chain, formal bridge, cold reads, and synchronized release gates green | none |
 | [C764 — Paper III “why determinant” boundary](../clebsch-tasks/c764-paper-iii-why-determinant.md) | complete; determinant-line explanation and explicit permanent gauge counterexample integrated; isolated authoritative and synchronized standalone release aggregates green | none; keep the physical companion outside Paper III until it has a stable public locator |
@@ -497,12 +498,28 @@ v1 baseline remains unchanged, while C694 has integrated the accepted v2
 arc.  A two-valued one-dimensional strength-two trade now derives the
 balanced \(q+q\) one-factorization sheets; the uniform Frobenius-digit
 criterion and local first-wall spill close the extension-field cases.  The
-canonical replay constructs only \(S,T,R,Y\), with q=121 and q=169 retained
+resulting exact \(B_3/\F_7\), \(H_3/\F_{11}\) classification uses only the
+two-valued quadratic-trade condition.  Rodr\'iguez-Pajares--Ruano--Salizzoni
+(2025) pre-empt the general self-associated/Schur-square/Gorenstein mechanism;
+Paper II turns that blocker into a reverse rigidity theorem, classifying the
+matching orbit and recovering the sheet-sign cubic from the two-valued trade,
+with Gorensteinness stated as a credited consequence rather than a priority
+claim.  The bounded extraction and source audit are recorded in
+`notes/2026-08-02-c577-paper-ii-priority-extraction.md`.  The canonical replay
+constructs only \(S,T,R,Y\), with q=121 and q=169 retained
 as corroboration.  One edge-selected alternating cycle and Dickson
 recurrence prove radial nonvanishing for both \(B_3\) and \(H_3\).  The
 Paley carrier explains the cross-sheet orientation but is not used as the
 Gorenstein pairing: it misses the radial/common-sum pair by one dimension.
 Maximal-isotropic quotient duality gives that pairing directly.
+
+C797 closes the stronger reverse-reconstruction question negatively.  In the
+\(q=7\) affine module, the \(S_4\)-fixed locus is a line of seven points whose
+seven size-\(14\) orbits all have the unique two-valued trade, while only one
+lies in the matching image.  The trade recovers the homogeneous sheet module
+but not its matching embedding.  Complete reducibility of one lift is the
+nearest exact repair.  Full report:
+`notes/2026-08-02-c797-trade-only-carrier-obstruction.md`.
 
 The paper-owned trust surface now has twenty-eight statements and thirteen
 evidence bundles, including independent generic-wall, shared-radial, and

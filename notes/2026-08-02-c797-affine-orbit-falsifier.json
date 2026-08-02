@@ -1,0 +1,417 @@
+{
+  "fields": [
+    {
+      "affine_orbit_count": 1,
+      "affine_point_count": 3,
+      "distinct_matching_image_points": 3,
+      "module_dimension": 1,
+      "orbit_size_histogram": {
+        "3": 1
+      },
+      "perfect_matching_count": 3,
+      "pgl_order": 24,
+      "q": 3,
+      "unique_two_valued_trade_orbits": []
+    },
+    {
+      "affine_orbit_count": 5,
+      "affine_point_count": 125,
+      "distinct_matching_image_points": 15,
+      "module_dimension": 3,
+      "orbit_size_histogram": {
+        "10": 1,
+        "20": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "perfect_matching_count": 15,
+      "pgl_order": 120,
+      "q": 5,
+      "unique_two_valued_trade_orbits": []
+    },
+    {
+      "affine_orbit_count": 519,
+      "affine_point_count": 117649,
+      "distinct_matching_image_points": 105,
+      "fixed_locus_obstruction": {
+        "all_fixed_locus_orbits_have_unique_two_valued_trade": true,
+        "distinct_orbits_from_fixed_locus": 7,
+        "distinct_projective_signed_cubics": 7,
+        "fixed_locus_affine_dimension": 1,
+        "fixed_locus_matching_image_point_count": 1,
+        "fixed_locus_orbits": [
+          {
+            "affine_rank": 6,
+            "contained_in_matching_image": false,
+            "orbit_size": 14,
+            "representative": [
+              0,
+              5,
+              0,
+              0,
+              3,
+              6
+            ],
+            "schur_square_rank": 13,
+            "signed_cubic_nonzero_coordinates": 10,
+            "signed_cubic_projective_sha256": "9bb36ff8a62bc073100ed993d9ac33b496e9e31d817afb6e6a0f25ab7c1a7509",
+            "signed_cubic_projective_singular_points": 57,
+            "trade_dimension": 1,
+            "trade_value_profile": {
+              "1": 7,
+              "6": 7
+            },
+            "two_valued_trade": true
+          },
+          {
+            "affine_rank": 7,
+            "contained_in_matching_image": false,
+            "orbit_size": 14,
+            "representative": [
+              0,
+              5,
+              0,
+              5,
+              0,
+              4
+            ],
+            "schur_square_rank": 13,
+            "signed_cubic_nonzero_coordinates": 10,
+            "signed_cubic_projective_sha256": "4d3d72faa5c14210395ebe91155d23a7f35dd44a5680dc15f776a3b4a40008bb",
+            "signed_cubic_projective_singular_points": 9,
+            "trade_dimension": 1,
+            "trade_value_profile": {
+              "1": 7,
+              "6": 7
+            },
+            "two_valued_trade": true
+          },
+          {
+            "affine_rank": 7,
+            "contained_in_matching_image": false,
+            "orbit_size": 14,
+            "representative": [
+              0,
+              5,
+              2,
+              3,
+              0,
+              4
+            ],
+            "schur_square_rank": 13,
+            "signed_cubic_nonzero_coordinates": 8,
+            "signed_cubic_projective_sha256": "fda77e861750b9a4381b7d9a1a6e1895958ad2d3870c205359e6117efaccb95c",
+            "signed_cubic_projective_singular_points": 9,
+            "trade_dimension": 1,
+            "trade_value_profile": {
+              "1": 7,
+              "6": 7
+            },
+            "two_valued_trade": true
+          },
+          {
+            "affine_rank": 7,
+            "contained_in_matching_image": false,
+            "orbit_size": 14,
+            "representative": [
+              0,
+              5,
+              2,
+              5,
+              3,
+              6
+            ],
+            "schur_square_rank": 13,
+            "signed_cubic_nonzero_coordinates": 9,
+            "signed_cubic_projective_sha256": "71d736ebc8239bc68b650f4ba594e1bd9c6ae6d07097954d7085ba03a09d6227",
+            "signed_cubic_projective_singular_points": 9,
+            "trade_dimension": 1,
+            "trade_value_profile": {
+              "1": 7,
+              "6": 7
+            },
+            "two_valued_trade": true
+          },
+          {
+            "affine_rank": 7,
+            "contained_in_matching_image": true,
+            "orbit_size": 14,
+            "representative": [
+              0,
+              5,
+              3,
+              2,
+              0,
+              4
+            ],
+            "schur_square_rank": 13,
+            "signed_cubic_nonzero_coordinates": 9,
+            "signed_cubic_projective_sha256": "253dee1d703db18eca5be8b0a426c73967a218ebb63db450835a152acb479d1d",
+            "signed_cubic_projective_singular_points": 9,
+            "trade_dimension": 1,
+            "trade_value_profile": {
+              "1": 7,
+              "6": 7
+            },
+            "two_valued_trade": true
+          },
+          {
+            "affine_rank": 7,
+            "contained_in_matching_image": false,
+            "orbit_size": 14,
+            "representative": [
+              0,
+              5,
+              3,
+              4,
+              3,
+              6
+            ],
+            "schur_square_rank": 13,
+            "signed_cubic_nonzero_coordinates": 9,
+            "signed_cubic_projective_sha256": "d1bb3a90f740a2814f4c2ce2f7a2b3d48163bf3d4525a3e6ee7706b2d75f7b4f",
+            "signed_cubic_projective_singular_points": 9,
+            "trade_dimension": 1,
+            "trade_value_profile": {
+              "1": 7,
+              "6": 7
+            },
+            "two_valued_trade": true
+          },
+          {
+            "affine_rank": 7,
+            "contained_in_matching_image": false,
+            "orbit_size": 14,
+            "representative": [
+              0,
+              5,
+              4,
+              1,
+              0,
+              4
+            ],
+            "schur_square_rank": 13,
+            "signed_cubic_nonzero_coordinates": 8,
+            "signed_cubic_projective_sha256": "27fbf6788b07e2552450ae0c76e0af561873423b918956eed6b1d6eaff2f5356",
+            "signed_cubic_projective_singular_points": 9,
+            "trade_dimension": 1,
+            "trade_value_profile": {
+              "1": 7,
+              "6": 7
+            },
+            "two_valued_trade": true
+          }
+        ],
+        "fixed_locus_point_count": 7,
+        "matching_point": [
+          0,
+          5,
+          5,
+          2,
+          3,
+          6
+        ],
+        "projective_signed_cubic_multiplicities": {
+          "253dee1d703db18eca5be8b0a426c73967a218ebb63db450835a152acb479d1d": 1,
+          "27fbf6788b07e2552450ae0c76e0af561873423b918956eed6b1d6eaff2f5356": 1,
+          "4d3d72faa5c14210395ebe91155d23a7f35dd44a5680dc15f776a3b4a40008bb": 1,
+          "71d736ebc8239bc68b650f4ba594e1bd9c6ae6d07097954d7085ba03a09d6227": 1,
+          "9bb36ff8a62bc073100ed993d9ac33b496e9e31d817afb6e6a0f25ab7c1a7509": 1,
+          "d1bb3a90f740a2814f4c2ce2f7a2b3d48163bf3d4525a3e6ee7706b2d75f7b4f": 1,
+          "fda77e861750b9a4381b7d9a1a6e1895958ad2d3870c205359e6117efaccb95c": 1
+        },
+        "stabilizer_order": 24,
+        "stabilizer_type": "S4 (order 24; identified by the B3 matching stabilizer)"
+      },
+      "module_dimension": 6,
+      "orbit_size_histogram": {
+        "14": 7,
+        "168": 207,
+        "21": 1,
+        "28": 1,
+        "336": 232,
+        "42": 17,
+        "56": 17,
+        "84": 37
+      },
+      "perfect_matching_count": 105,
+      "pgl_order": 336,
+      "q": 7,
+      "unique_two_valued_trade_orbits": [
+        {
+          "affine_rank": 6,
+          "contained_in_matching_image": false,
+          "orbit_size": 14,
+          "representative": [
+            0,
+            5,
+            0,
+            0,
+            3,
+            6
+          ],
+          "schur_square_rank": 13,
+          "signed_cubic_nonzero_coordinates": 10,
+          "signed_cubic_projective_sha256": "9bb36ff8a62bc073100ed993d9ac33b496e9e31d817afb6e6a0f25ab7c1a7509",
+          "signed_cubic_projective_singular_points": 57,
+          "trade_dimension": 1,
+          "trade_value_profile": {
+            "1": 7,
+            "6": 7
+          },
+          "two_valued_trade": true
+        },
+        {
+          "affine_rank": 7,
+          "contained_in_matching_image": false,
+          "orbit_size": 14,
+          "representative": [
+            0,
+            5,
+            0,
+            5,
+            0,
+            4
+          ],
+          "schur_square_rank": 13,
+          "signed_cubic_nonzero_coordinates": 10,
+          "signed_cubic_projective_sha256": "4d3d72faa5c14210395ebe91155d23a7f35dd44a5680dc15f776a3b4a40008bb",
+          "signed_cubic_projective_singular_points": 9,
+          "trade_dimension": 1,
+          "trade_value_profile": {
+            "1": 7,
+            "6": 7
+          },
+          "two_valued_trade": true
+        },
+        {
+          "affine_rank": 7,
+          "contained_in_matching_image": false,
+          "orbit_size": 14,
+          "representative": [
+            0,
+            5,
+            2,
+            3,
+            0,
+            4
+          ],
+          "schur_square_rank": 13,
+          "signed_cubic_nonzero_coordinates": 8,
+          "signed_cubic_projective_sha256": "fda77e861750b9a4381b7d9a1a6e1895958ad2d3870c205359e6117efaccb95c",
+          "signed_cubic_projective_singular_points": 9,
+          "trade_dimension": 1,
+          "trade_value_profile": {
+            "1": 7,
+            "6": 7
+          },
+          "two_valued_trade": true
+        },
+        {
+          "affine_rank": 7,
+          "contained_in_matching_image": false,
+          "orbit_size": 14,
+          "representative": [
+            0,
+            5,
+            2,
+            5,
+            3,
+            6
+          ],
+          "schur_square_rank": 13,
+          "signed_cubic_nonzero_coordinates": 9,
+          "signed_cubic_projective_sha256": "71d736ebc8239bc68b650f4ba594e1bd9c6ae6d07097954d7085ba03a09d6227",
+          "signed_cubic_projective_singular_points": 9,
+          "trade_dimension": 1,
+          "trade_value_profile": {
+            "1": 7,
+            "6": 7
+          },
+          "two_valued_trade": true
+        },
+        {
+          "affine_rank": 7,
+          "contained_in_matching_image": true,
+          "orbit_size": 14,
+          "representative": [
+            0,
+            5,
+            3,
+            2,
+            0,
+            4
+          ],
+          "schur_square_rank": 13,
+          "signed_cubic_nonzero_coordinates": 9,
+          "signed_cubic_projective_sha256": "253dee1d703db18eca5be8b0a426c73967a218ebb63db450835a152acb479d1d",
+          "signed_cubic_projective_singular_points": 9,
+          "trade_dimension": 1,
+          "trade_value_profile": {
+            "1": 7,
+            "6": 7
+          },
+          "two_valued_trade": true
+        },
+        {
+          "affine_rank": 7,
+          "contained_in_matching_image": false,
+          "orbit_size": 14,
+          "representative": [
+            0,
+            5,
+            3,
+            4,
+            3,
+            6
+          ],
+          "schur_square_rank": 13,
+          "signed_cubic_nonzero_coordinates": 9,
+          "signed_cubic_projective_sha256": "d1bb3a90f740a2814f4c2ce2f7a2b3d48163bf3d4525a3e6ee7706b2d75f7b4f",
+          "signed_cubic_projective_singular_points": 9,
+          "trade_dimension": 1,
+          "trade_value_profile": {
+            "1": 7,
+            "6": 7
+          },
+          "two_valued_trade": true
+        },
+        {
+          "affine_rank": 7,
+          "contained_in_matching_image": false,
+          "orbit_size": 14,
+          "representative": [
+            0,
+            5,
+            4,
+            1,
+            0,
+            4
+          ],
+          "schur_square_rank": 13,
+          "signed_cubic_nonzero_coordinates": 8,
+          "signed_cubic_projective_sha256": "27fbf6788b07e2552450ae0c76e0af561873423b918956eed6b1d6eaff2f5356",
+          "signed_cubic_projective_singular_points": 9,
+          "trade_dimension": 1,
+          "trade_value_profile": {
+            "1": 7,
+            "6": 7
+          },
+          "two_valued_trade": true
+        }
+      ]
+    }
+  ],
+  "schema": "c797-affine-orbit-falsifier-v1",
+  "scope": {
+    "domain": "every point and every PGL2 orbit in the affine conic-quotient module reconstructed from the full perfect-matching image",
+    "fields": [
+      3,
+      5,
+      7
+    ],
+    "stop_condition": "complete exhaustion of q^dim(F) affine points"
+  },
+  "verdict": "the carrier-free B3/H3 conjecture fails in this bounded scope"
+}

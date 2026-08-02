@@ -2,13 +2,19 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after C748; human proof round 4 of 4
+**Status:** unblocked after C748; human proof round 4 of 4
 
 ## Objective
 
 Attack the polished C748 proof as a skeptical expert, repair every surviving
 gap or unnecessary complication, and freeze the simplest rigorous human proof
 before any Lean work begins.
+
+The priority audit fixes the theorem's causal boundary: the headline proof
+must derive the exact \(B_3/H_3\) orbit classification from the two-valued
+quadratic-trade condition alone.  Self-association, Schur-square defect, and
+Gorenstein duality are downstream consequences and may not enter that
+classification proof.
 
 ## Method
 
@@ -37,4 +43,3 @@ for C750.
 
 C749 is a human-proof task.  It contains no Lean edits and cannot waive a
 human gap because formalization might later repair it.
-

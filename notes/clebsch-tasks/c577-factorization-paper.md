@@ -27,6 +27,12 @@ Paper III.
 
 ## Current state
 
+- The general self-associated/Schur-square/Gorenstein mechanism is credited
+  to Rodr\'iguez-Pajares--Ruano--Salizzoni (2025).  Paper II's surviving
+  headline is the reverse rigidity theorem: the exact \(B_3/H_3\) full-orbit
+  classification follows from the two-valued quadratic-trade condition alone,
+  without a self-duality or Gorenstein premise, and the recovered sheet sign
+  has a nonzero cubic as its first signed tensor moment.
 - The manuscript, conclusion, proof/evidence map, and verification
   architecture are complete except for the reopened all-`q` human-proof
   seam.
@@ -66,7 +72,14 @@ Acceptance requires the immutable locator, isolated replay of the frozen
 package, a final PDF/release review with no material objection, and closure
 of the 2026-07-31 all-`q` proof-depth finding.
 
-Current theorem, evidence boundary, and mystery ledger:
+Current priority boundary and adjacent-crown extraction:
+`notes/2026-08-02-c577-paper-ii-priority-extraction.md`.  Current proof-depth
+boundary and mystery ledger:
 `notes/2026-07-31-c577-paper-ii-new-math-audit.md`.  Earlier theorem
 development remains in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
+
+C797 closes the stronger priority-judo continuation negatively: at \(q=7\),
+seven \(S_4\)-fixed affine placements share the unique two-valued trade and
+only one is a matching orbit.  This confirms that the perfect-matching carrier
+in the current theorem is a genuine hypothesis and does not block C749/C750.
