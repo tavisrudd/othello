@@ -55,6 +55,9 @@ detours, and repeated trust disclaimers are removed or consolidated.
 
 ## Evidence and Lean requirements
 
+C832 owns the formal implementation and paper-owned Lean certificate gates;
+C831 owns their manuscript/trust integration and aggregate paper replay.
+
 - Vendor the four adopted C817 exact generators/certificates into the
   paper-owned verification surface with stable schemas, hashes, independent
   replay where available, and one aggregate entry point.
