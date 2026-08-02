@@ -30,33 +30,44 @@ The results are grouped as follows.
    is recovered from coarse decoding data.
 2. *Quadratic trade rigidity and cubic orientation in conic matching quotients* —
    what survives when a matching of conic points is restricted to the conic.
-3. *Arithmetic and harmonic realizations of the Clebsch cubic* — two
+3. *Golden descent and operator realizations of the Clebsch cubic* — two
    realizations of the same four-dimensional space, joined by a marked
-   orientation source theorem.
-4. *The golden conference operator and its shadow sisters* — one marked
-   order-six conference operator and the cubic, polar, determinantal,
-   fermionic, anomaly, and lattice shadows it generates.
-5. *Arcs complete outside a conic: a prescribed-hole defect identity and
+   orientation source theorem, and the conference operator that carries it
+   through the classical Clebsch–Segre shadows.
+4. *A binary [78,36,12] code from the passant lines of a conic over
+   \(\mathbb F_{13}\)* — a code whose minimum words reconstruct the geometry
+   and the full symmetry group they came from.
+5. The golden conference operator source programme — one marked order-six
+   conference operator and the cubic, polar, determinantal, fermionic,
+   anomaly, and lattice shadows it generates. This is a source-development
+   body of mathematics feeding future forward versions of the paper in
+   section 3, not a manuscript of its own.
+6. *Arcs complete outside a conic: a prescribed-hole defect identity and
    matching-design rigidity*.
-6. *Deep holes of projective Reed–Solomon codes beyond redundancy four: exact
+7. *Deep holes of projective Reed–Solomon codes beyond redundancy four: exact
    classifications at redundancies five through seven*.
-7. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
+8. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
    Structure* — local memory and exact transfer of erasure repair.
-8. *Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford
+9. *Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford
    Groups of MDS–CSS Codes* — every product-unitary intertwiner of a stabilizer
    absolutely maximally entangled state is local Clifford.
-9. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
-   extending Frobenius-invariant arcs by conjugate point pairs.
-10. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
+10. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
+    extending Frobenius-invariant arcs by conjugate point pairs.
+11. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
     graph that remembers its ambient plane.
-11. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
+12. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
     Schur-generates the two outer Fano modules, while the conic-link code is
     their defect-two jet modification.
-12. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
+13. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
     matrices of order 668.
-13. Two open programmes with substantial partial results: complete arcs of
+14. Two open programmes with substantial partial results: complete arcs of
     square-root size relative to a conic, and the outcome of the cap game on
     odd projective planes.
+
+The first four sections are the four numbered papers of the Clebsch series, in
+that order. The three released papers carry the titles under which versions one
+and two were published; where a forward version has changed a title, the
+section says so.
 
 ## *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus*
 
@@ -136,6 +147,75 @@ identifies its two endpoint cases with minimum-weight supports of the
 passant/internal incidence code. It does **not** exclude the five terminal
 pairs — the \(q=13\) elliptic-scheme audit reaches only the integer bound
 eight, one short — so the exhaustive terminal searches remain load-bearing.
+
+### Beyond eight points: how far the classification now reaches
+
+The natural completion of the statement above — that a deep-hole locus is a
+full conic exactly twice, ever, at the four-frame over \(\mathbb F_5\) and the
+Clebsch hexagon over \(\mathbb F_{11}\), for *every* arc size \(k\) — is **not
+proved**. What is proved is a reformulation, two size-uniform necessary
+conditions, a structural dichotomy that lands on both known examples, and a
+complete classification, all sizes at once, over every field up to \(43\).
+
+The reformulation splits the condition. \(\mathcal U(A)=\mathcal C\) holds
+exactly when every chord of \(A\) is *external* to \(\mathcal C\) (disjoint
+from it) and the chords cover all \(q^2\) points off \(\mathcal C\).
+Externality is hereditary and the covering condition is not, and that
+distinction is invisible to the chord-moment system, which counts chords
+without seeing that they all avoid one conic. In the binary-quadratic model of
+the plane, externality says every pairwise resultant is a quadratic nonresidue.
+Even \(q\) is impossible outright: every tangent passes through the nucleus, so
+no external chord covers it.
+
+The two uniform conditions are a covering linear-programming bound and a
+spare-line bound. The first uses the correct off-arc degree cap
+\(\lfloor k/2\rfloor\) rather than the accident \(\lfloor k/2\rfloor=3\) that
+the published \(k\le8\) bound \(q\le(k(k-1)+3)/3\) rests on, and so holds for
+every \(k\). The second gives a dichotomy: either \(\binom{k-1}2\ge q\), or
+every external line through every arc point is a chord, which forces all arc
+points to have one type and \(k=(q+1)/2\) with every arc point external, or
+\(k=(q+3)/2\) with every one internal. **Both known examples are exactly the
+two saturated types** — the four-frame is the internal one, the hexagon the
+external one — so the dichotomy locates them rather than merely admitting them.
+
+The saturated-external branch is now closed. Fixing one matching edge turns the
+arc condition into a complete mapping of the cyclic square group, which
+excludes every \(q\equiv1\pmod4\) and hence every odd square field by a group-sum
+obstruction; Segre's lemma of tangents forces every arc in the remaining branch
+to be sign-coherent; Stickelberger's half-carry profile and a base-\(p\)
+digit-weight lemma show one faithful Jacobi eigenvalue has exactly its Frobenius
+collisions, which makes every matching multiplication-Frobenius and lets a
+genus-one character sum with Hasse's bound finish, leaving \(q\in\{3,7,11\}\)
+where \(q=7\) fails covering and \(q=11\) is the hexagon.
+
+The nonsaturated branch is reduced but open. Deleting an arc point on a spare
+external line gives an affine \((k-1)\)-arc determining every direction but one,
+whose direction discriminant factors as \((T^q-T)E_P(T)\) with
+\(\deg E_P=\binom{k-1}2-q\), the roots of \(E_P\) recording exactly the excess
+parallel-chord concurrences. Zero slack is impossible over every odd field
+except the already excluded \(q=3\); slack one factors into \(q=5,9,27\), all
+removed by the classification below; so every nonsaturated conic-filling arc has
+\(\binom{k-1}2\ge q+2\). At slack two the residual divisor is one double
+rational point or two distinct rational points, and the first case the finite
+classification does not already remove is \((q,k)=(53,12)\).
+
+The bounded classification is complete for all sizes over each odd prime power
+\(q\le43\): the only conic-filling arcs are the four-frame at \(q=5\) and the
+hexagon at \(q=11\). Nine of the sixteen fields close by counting alone, because
+the largest conic-external arc is smaller than the smallest possible
+conic-filling one; the other seven need the conic-external arcs enumerated and
+the covering condition tested on each.
+
+**Why counting cannot finish it, stated with the measurement.** Both the
+threshold size and the largest conic-external arc are \(\sqrt{2q}+O(1)\), and
+which one wins alternates across the measured range with no trend — the ratio
+\(\binom{m(q)}2/q\) stays inside \([0.67,1.55]\) throughout. Every further
+refinement of the covering bound adds \(O(1)\) to one side while the other side
+also drifts by \(O(1)\). A proof of the general theorem needs an upper bound
+\(m(q)<\sqrt{2q}+O(1)\) on the largest arc all of whose secants avoid a fixed
+conic, and the measurements say that inequality is tight rather than generous,
+so it may simply be false for some \(q\). The underlying object is a clique
+bound for a Paley-type graph on the \(q^2\) points off the conic.
 
 ### Arrangements, low-degree rigidity, and decoding
 
@@ -229,18 +309,8 @@ a uniform theorem: the natural root-edge rational LP has optimum exactly the
 smaller residual pencil, hence at least \((q-3)/2\) against a required bound of
 four, so that first-order dual route fails for every odd \(q\ge13\).
 
-The associated \(q=13\) binary tangent code has exact minimum distance
-\(d=12\), proved without a support search. Segre tangent triples exclude weight
-eight: after one point is fixed, a cyclic 42-vertex compatibility graph has
-clique number five while a weight-eight word needs a seven-clique. The two
-forced weight-ten pencil profiles are excluded and a dihedral weight-twelve
-word is constructed. All \(364\) minimum words split into one \(S_4\) and three
-\(D_{24}\) projective orbits; their pair concurrence recovers passant versus
-secant join type, triple-concurrence profiles recover all six elliptic
-orbitals, and the \(78\) all-zero-triple seven-cliques are exactly the passant
-incidence rows, so the minimum layer self-reconstructs the matching. Every
-minimum-word orbit spans the full code, and the common code/hypergraph/scheme
-automorphism group is exactly \(\operatorname{PGL}(2,13)\).
+The binary code attached to the \(q=13\) passant lines grew out of this
+material and is now the separate paper of section 4 below.
 
 Side results: the dual code is again a Clebsch hexagon code (a self-duality
 phenomenon, not coordinate-for-coordinate); the two icosahedral hexads are
@@ -406,11 +476,28 @@ exact ranks, sheet recovery, cubic orientation, profile reconstruction,
 modular explanation, arithmetic gluing, and a completeness theorem naming the
 two occurring configurations.
 
-## *Arithmetic and harmonic realizations of the Clebsch cubic*
+## *Golden descent and operator realizations of the Clebsch cubic*
 
-A short note proving two independent results on the same Clebsch four-space.
-The wider inventory it was drawn from is larger than the note and is recorded
-separately below.
+A note proving two independent results on the same Clebsch four-space. Its
+released versions one and two carry the earlier title *Arithmetic and harmonic
+realizations of the Clebsch cubic*; the forward version renamed it because it
+now also carries a bounded selection of the conference-operator material of
+section 5, running as one chain from the incidence descent
+\(\sqrt{5J_0}\) through the relation \(C^2=5I\) to the triangle and
+middle-exterior cubics, the commutator Pfaffian and cross-golden determinant,
+the Joubert–Segre and Segre–Igusa shadows, and back to the degree-six harmonic
+return. It deliberately does not import the quantum, anomaly, Majorana,
+Coble–Burkhardt, exceptional-lattice, doily, or higher-conference branches;
+those remain source inventory. The wider inventory the original note was drawn
+from is larger than the note and is recorded separately below.
+
+The forward version also states why the cubic shadow is a determinant rather
+than a permanent. The map \(B_T(x):V_{T,+}\to V_{T,-}\) is intrinsic, so its
+determinant is a map between determinant lines and becomes the displayed scalar
+once orientations are chosen. A permanent has no basis-free counterpart: under
+independent orthonormal frames the matrix changes as \(B\mapsto R_-^{\mathsf T}BR_+\),
+and already the identity in dimension three, with a plane rotation on one side,
+moves the permanent from \(1\) to \(\cos2\theta\).
 
 ### The two adopted theorems
 
@@ -647,7 +734,56 @@ ten-dimensional rational Klein representation of \(\operatorname{PSL}_2(11)\)
 is positive, its discriminant-five lift fails. The proposed degree-23
 \(M_{23}\)/Golay coherence test is a future unity test, not a result.
 
-## *The golden conference operator and its shadow sisters*
+## *A binary [78,36,12] code from the passant lines of a conic over \(\mathbb F_{13}\)*
+
+Take the conic in \(\operatorname{PG}(2,13)\), its \(78\) internal points and
+its \(78\) passant lines, and let \(K\) be the kernel of the incidence matrix
+between them. The parameters are the front door; the reason for the paper is
+that the minimum words of \(K\) reconstruct the geometry and the symmetry group
+they came from.
+
+The minimum distance is exactly \(12\), proved without a support search. Segre
+tangent triples exclude weight eight: after one point is fixed, a cyclic
+42-vertex compatibility graph has clique number five while a weight-eight word
+would need a seven-clique. The two forced weight-ten pencil profiles are
+excluded, and a dihedral weight-twelve word is constructed. All \(364\) minimum
+words split into one \(S_4\) and three \(D_{24}\) projective orbits, and every
+one of those orbits spans the whole code.
+
+The reconstruction is the headline. Pair concurrence among minimum words
+recovers whether two points are joined by a passant or a secant;
+triple-concurrence profiles recover all six elliptic orbitals; and the \(78\)
+all-zero-triple seven-cliques are exactly the passant incidence rows, so the
+minimum layer rebuilds the incidence matrix it was defined by. The common
+automorphism group of the code, the minimum-support hypergraph, and the
+association scheme is exactly \(\operatorname{PGL}(2,13)\).
+
+**Priority boundary.** The code itself is not new and the boundary is closer
+than earlier drafts made visible. Droms, Mellinger and Meyer introduced this
+passant-line/internal-point parity-check code and bounded its minimum distance;
+the later code survey of Ma, Liu and Tian records
+\(\tfrac{q+3}2\le d\le q-1\) for it, which at \(q=13\) is the interval
+\(8\le d\le12\). This paper closes that interval at its upper endpoint and then
+proves the classification, spanning, reconstruction, and symmetry statements,
+for which no predecessor was located. Madison and Wu supply the general
+dimension formula and Hollmann and Xiang the elliptic association scheme used
+to explain the minimum layer.
+
+The proof is led by a human argument; computation records discovery and is
+retained only where finite bulk has resisted conceptual compression. Two Lean
+surfaces support it — shared semantic modules carrying the logical spine, and a
+paper-owned package checking the irreducibly finite leaves in small auditable
+shards. Neither is a claim that the main theorem is machine-checked. Four
+concrete transports and the public release remain open.
+
+## The golden conference operator source programme
+
+The results in this section are proved and available, but they are **not** a
+manuscript. They are the source body from which forward versions of the paper
+in section 3 draw; the legacy working title *The golden conference operator and
+its shadow sisters* survives only as a label for the programme. Read the
+priority note at the end of this section before quoting any of it: a
+literature audit found five clean pre-emptions, two of them close to verbatim.
 
 Let \(C\) be a marked symmetric conference operator on six axes with
 \(C^2=5I\), and let \(C_T\) run through its coherent outer six-family. The
@@ -901,11 +1037,127 @@ transitive on the \(22\) Clebsch matching rows and no row-to-geometric-parent
 bridge is supplied. The determinant sextic and dimer fingerprint close the
 reverse cycle exactly at the unoriented two-graph level and no further.
 
-The manuscript exists in draft with its title, abstract, principal theorem,
-proof roadmap, self-contained build, and verification policy in place;
-consolidating the placement and proof ledger is what remains. A
-boson--fermion permanent-side complement and a six-mode physical demonstrator
-are possible successors and are not claimed.
+### The six determinantal nodes, certified and machine-checked
+
+For every golden sister the cubic determinantal wall \(\{Z_T=0\}\) has exactly
+six singular points, the centered five-plus-one collision configurations
+\([\mathbf1-6e_i]\), all rational ordinary double points and common to all six
+walls. Their presence is elementary — at a five-plus-one collision every
+perfect matching has two pairs inside the five-point block, so every
+matching-bracket cubic vanishes to second order — and exact projective Jacobian
+elimination rules out any other singular support: in the centered gauge the
+homogeneous Jacobian ideal has projective dimension zero, one chart contains
+the whole singular scheme, and its quotient algebra is reduced of dimension six
+with six minimal primes. The statement is now kernel-checked in Lean rather
+than resting on the earlier symbolic census: the centered lift, the cubic, and
+its gradient are defined formally, the cubic is identified with the triangle
+cubic of the fixed conference matrix, the five displayed quadrics are proved to
+be its formal coordinate derivatives, and the elimination is carried by exact
+ideal-membership identities reproved by Lean's linear-combination tactic.
+
+### What the exchange-statistics reading does and does not add
+
+A separate companion in this programme asks what the fermionic protocol
+measures, and answers it in two layers, one general and one golden.
+
+The general layer is an orbit theorem. For a linear map \(K:V\to W\) between
+real Euclidean spaces of dimension \(n\ge2\), the double orbit under
+\(O(W)\times O(V)\) is determined by the singular values; restricting to the
+special orthogonal groups splits each invertible orbit into two, distinguished
+by the sign of the oriented determinant, and the two merge on the singular
+locus because a reflection can be absorbed in a zero singular direction. So the
+intrinsic object is not a scalar but the top exterior map
+\(\bigwedge^nK:\det V\to\det W\); orienting the two determinant lines turns it
+into a signed scalar, reversing one port orientation reverses that scalar, and
+the determinant-zero hypersurface is exactly where the oriented label
+disappears. Relatedly, a degree-\(n\) polynomial transforming by
+\(\det(R_-)\det(R_+)\) under frame changes is a scalar multiple of the
+determinant, so the top exterior amplitude is the unique lowest-degree carrier
+of that character. This is classical invariant reasoning and is claimed as
+such. The permanent does not descend even through the special-orthogonal double
+orbit.
+
+There is also a universal reason the zeros sit where they do. For any
+orthogonal \(d+d\) splitting of \(2d\) paths and any Boolean negative support
+\(S\), \(\operatorname{rank}K_S\le\min(|S|,2d-|S|)\), so a filled
+\(d\)-fermion determinant can be nonzero only at a balanced control. In
+dimension three that universal obstruction accounts for the \(44\) unbalanced
+zeros, and it is golden equispectrality — every balanced control invertible
+with the same squared singular spectrum — that supplies the twenty nonzero
+cases. The twenty-versus-forty-four boundary is therefore only half golden.
+
+The permanent-side complement exists but is orientation-blind. The intrinsic
+bosonic companion of the filled-fermion transfer is the trace of the transfer
+on the symmetric cube: with \(K=Q_-^{\mathsf T}D_xQ_+\) and \(H=K^{\mathsf T}K\),
+the total three-boson transfer probability is
+\(\operatorname{tr}(\operatorname{Sym}^3H)=h_3(H)\) against the fermionic
+\(\operatorname{tr}(\bigwedge^3H)=\det H\), and at every balanced mask for every
+golden protocol the spectrum is \(\{1/5,4/5,4/5\}\) with
+\(h_3=313/125\), \(\det=16/125\), and the exact difference
+\(\operatorname{tr}(H)\operatorname{tr}(H^2)=297/125\). The bare permanent of
+\(K\) is not a golden scalar at all — it depends on the ordered orthonormal port
+bases — so a coherent calibrated permanent can retain the oriented control while
+no probability-only intrinsic bosonic measurement can.
+
+The physical demonstrator is a **no-go for 2026 hardware**, for one specific
+reason: the required totally antisymmetric state of three photonic qutrits has
+linear-optical preparation proposals but no located experimental realization,
+and the demonstrated two-photon emulator does not close that gap. The best
+directly relevant three-qutrit benchmark reaches fidelity \(0.910(6)\) at about
+\(1.1\) fourfold events per second, far short of what the small chiral branch
+needs. A bounded precursor is a go: implement and phase-characterize the
+six-mode golden transfer with coherent light and run the ordinary three-boson
+collision-free controls, which measures the calibrated transfer and its
+determinant signs but must not be described as a direct three-fermion phase
+measurement. The companion is accordingly written as a design-limit and theory
+note, not an experimental proposal, and its attribution audit found the
+determinant/permanent and partial-distinguishability background, the
+conference-matrix and real equiangular-tight-frame dictionary, the real
+six-line measurement, the Joubert–Segre invariant theory, and the anomaly
+parametrizations all to be prior art now explicitly credited, together with one
+material omission repaired — a second interferometric proposal for preparing
+the \(N\)-particle, \(N\)-level singlet including the three-particle case.
+
+### Priority: five clean pre-emptions in this programme
+
+A full literature audit of the frozen manuscript found five clean
+pre-emptions, two of them close to verbatim, and they bind anything drawn from
+this section.
+
+- **The centered-square formula is Howard–Millson–Snowden–Vakil's, verbatim.**
+  Their Segre-to-Igusa duality map prints \(W_T=Z_T^2-\tfrac16\sum_UZ_U^2\)
+  together with the Igusa equation and the inverse map. The derivation here via
+  Newton's identities is a rederivation.
+- **The six sisters, the five-cycle normal form, and the unordered support
+  split are theirs and Seidel's.** The six mystic pentagons, the twelve
+  five-cycles pairing into six under complementation, the six splits of the
+  twenty triangles under exactly the conditions used here, and the identification
+  of the \(S_6\)-action as the outer automorphism are all in
+  Howard–Millson–Snowden–Vakil; Bussemaker–Mathon–Seidel add that the order-six
+  conference two-graph is unique with automorphism group \(A_5\).
+- **The Fano-component realization is largely Gripaios–Nguyen's** — the fifteen
+  planes and six split degree-five del Pezzo components, the transitive
+  \(S_6\)-action with stabilizer \(S_5\), the syntheme labelling, and the count
+  of six lines through a generic point of the Segre cubic.
+- **The order-ten shadow is a classical object.** Fickus–Mixon identify
+  symmetric conference matrices of order \(N\) with the sign Gram matrices of
+  real equiangular tight frames in dimension \(N/2\), and
+  Bussemaker–Mathon–Seidel give the order-ten conference two-graph's
+  uniqueness, its eigenvalues \(\pm3\), its automorphism group
+  \(\operatorname{Sp}(4,2)\cong S_6\), and the switching class containing the
+  Petersen graph.
+- **The rational anomaly inverse is prior art**, as the source text already
+  conceded.
+
+What survives with no located predecessor is the operator layer: the
+commutator-Pfaffian and middle-exterior presentations of the Joubert cubics,
+the golden eigenspace compression with its determinantal and maximal
+Cohen–Macaulay package, the Jacobian adjugate identity, the balanced-cut
+maximum-determinant characterization of \(C^2=5I\), the synchronized
+pure-spinor product, the unmarked-reconstruction boundary, and the exact
+anomaly-cost clauses. The real picture is that the operator layer holds while
+the classical-geometry layer is thinner than the earlier framing suggested;
+four statements need attribution surgery rather than retraction.
 
 ## *Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity*
 
@@ -2366,22 +2618,47 @@ are vacuous because a natural number can encode the whole residual.
   orientation torsor and the structural determinantal six-node proof; the
   computational strengthenings travel in a companion, *Computational
   strengthenings of Clebsch syndrome rigidity*, with a five-mode claim ledger.
-  What remains is publication packaging.
+  What remains is publication packaging. The all-sizes extension of the
+  conic-filling classification is **not proved**: it is complete over every odd
+  field up to \(43\), the saturated branch is closed uniformly and the
+  nonsaturated branch reduced to slack at least two, and the exact remaining
+  obstruction is an upper bound on the largest arc whose secants all avoid a
+  fixed conic — measured to be tight, so possibly false.
 - ***Quadratic trade rigidity and cubic orientation in conic matching
   quotients:*** complete theorem arc, with the one-factorization property
   derived rather than assumed and the completeness theorem naming the two
   occurring configurations; public packaging remains.
-- ***Arithmetic and harmonic realizations of the Clebsch cubic:*** both prior
-  proof gaps closed — the chart factorization is scheme-theoretic through a
-  global Stein algebra, and the two realizations share one marked orientation
-  source. The strongest bridge is explicitly relative to a marked datum with a
-  complete ambiguity ledger; artifact locator and author metadata remain.
-- ***The golden conference operator and its shadow sisters:*** source
-  mathematics proved and frozen across the cubic, polar, determinantal,
-  pure-spinor, Boolean, measurement, fermionic, anomaly, Clifford, and lattice
-  shadows; provenance descends from the unordered support two-graph with a
-  sharp insufficiency boundary for the bare deep-hole conic. Manuscript
-  consolidation is the active gate.
+- ***Golden descent and operator realizations of the Clebsch cubic:*** both
+  prior proof gaps closed — the chart factorization is scheme-theoretic through
+  a global Stein algebra, and the two realizations share one marked orientation
+  source. The forward version has absorbed a bounded operator core as one chain
+  from the incidence descent to the harmonic return, plus the
+  determinant-versus-permanent boundary; the released versions one and two are
+  unchanged and keep the earlier title. The strongest bridge is explicitly
+  relative to a marked datum with a complete ambiguity ledger; artifact locator
+  and author metadata remain.
+- ***A binary [78,36,12] code from the passant lines of a conic over
+  \(\mathbb F_{13}\):*** minimum distance, the 364-word minimum layer and its
+  four orbits, spanning, reconstruction of the passant incidence rows and the
+  elliptic scheme, and the exact automorphism group are proved by a human
+  argument, with a semantic Lean spine and sharded finite leaves supporting it.
+  The published interval for this code's minimum distance was
+  \(8\le d\le12\); this closes it at the top and adds everything above it. Four
+  concrete transports and public release remain.
+- **The golden conference operator source programme:** mathematics proved and
+  frozen across the cubic, polar, determinantal, pure-spinor, Boolean,
+  measurement, fermionic, anomaly, Clifford, and lattice shadows, with the
+  six determinantal nodes now certified by exact elimination and machine-checked;
+  provenance descends from the unordered support two-graph with a sharp
+  insufficiency boundary for the bare deep-hole conic. It is no longer a
+  manuscript of its own — it feeds forward versions of the paper above. Its
+  literature audit found five clean pre-emptions, two close to verbatim, so the
+  classical-geometry layer needs attribution surgery; the operator layer has no
+  located predecessor. The exchange-statistics companion adds a general oriented
+  top-exterior theorem, a universal balance obstruction that explains the
+  unbalanced zeros without golden input, and the symmetric-cube permanent-side
+  invariant, but the full photonic demonstrator is a no-go on 2026 hardware and
+  only a coherent-light precursor is available.
 - ***Arcs complete outside a conic:*** defect identity, zero-defect
   rigidity, and stability formally verified; six exact values of
   \(\rho_{\mathcal C}\); the \(q=16\) classification compressed to three

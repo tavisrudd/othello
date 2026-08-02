@@ -22,9 +22,12 @@ and completion-distance theory about geometric *legality* rather than game value
 carries a **publication portfolio alongside the open game programme**. Its original seven-paper
 backbone and two OEIS entries have expanded through the Clebsch and projective Reed–Solomon work and
 include a quantum-information branch on MDS–CSS AME states, local-unitary rigidity, and transversal
-Clifford groups (see §3, §7, §8). The Clebsch work is a four-manuscript family: a three-paper
-sequence sharing the title-page identity *The Clebsch cubic: recovering, orienting, and realizing*,
-and a separate fourth manuscript on the golden conference operator and the shadows it generates.
+Clifford groups (see §3, §7, §8). The Clebsch work is a **four-paper numbered series**: rigidity,
+factorization, the passages paper *Golden descent and operator realizations of the Clebsch cubic*,
+and the q13 passant-code paper. The first three released versions one and two share the title-page
+identity *The Clebsch cubic: recovering, orienting, and realizing*; the q13 paper is the active new
+build. The golden conference operator material is **not** a fifth numbered paper — it is a
+source-development lane feeding future forward versions of the passages paper.
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
@@ -312,6 +315,58 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   the five terminal pairs — the `q=13` elliptic-scheme audit reaches only the integer bound eight,
   one short — so the terminal searches remain load-bearing rather than decorative. Its consequence
   for coding is the length-at-most-eight projective MDS statement.
+
+  **The all-sizes theorem is the lane's high-upside open target, and it is not proved.** The goal
+  is that a deep-hole locus is a full conic exactly twice ever — the four-frame over `F₅` and the
+  Clebsch hexagon over `F₁₁` — for every arc size, not just `k ≤ 8`. What now exists is a
+  reformulation, two size-uniform bounds, a dichotomy that lands on both known examples, and a
+  complete classification over every odd field up to 43. `U(A) = C` splits into *(E)* every chord
+  external to `C` and *(V)* the chords covering all `q²` points off `C`; (E) is hereditary, (V) is
+  not, and the chord-moment system cannot see the difference. Even `q` dies outright at the nucleus.
+  The covering LP bound uses the correct degree cap `⌊k/2⌋` and so holds for every `k`, where the
+  published `q ≤ (k(k−1)+3)/3` rests on the accident `⌊k/2⌋ = 3`. The spare-external-line bound
+  gives a dichotomy — either `C(k−1,2) ≥ q`, or every arc point is saturated, forcing
+  `k = (q+1)/2` all-external or `k = (q+3)/2` all-internal — and **both known examples are exactly
+  the two saturated types**. The saturated-external branch is now **closed uniformly**: a complete
+  mapping of the cyclic square group kills every `q ≡ 1 (mod 4)` hence every odd square field;
+  Segre's lemma of tangents forces sign coherence; Stickelberger half-carry profiles plus a
+  base-`p` digit-weight lemma make every matching multiplication-Frobenius; and a genus-one
+  character sum with Hasse leaves `q ∈ {3,7,11}`, of which `q=7` fails covering and `q=11` is the
+  hexagon. The nonsaturated branch is reduced, not closed: the deleted-point direction discriminant
+  factors as `(T^q − T)·E_P(T)` with `deg E_P = C(k−1,2) − q` and roots recording excess
+  parallel-chord concurrences, slack zero is impossible over every odd field but the excluded
+  `q=3`, slack one factors into `q = 5,9,27` (all removed by the finite classification), so
+  `C(k−1,2) ≥ q+2` always; at slack two the first surviving boundary is `(q,k) = (53,12)`.
+
+  **Why counting cannot finish it — with the measurement that says so.** For every odd prime power
+  `q ≤ 43` and every `k`, the only conic-filling arcs are the two known ones; nine of the sixteen
+  fields close by counting alone and seven need the conic-external arcs enumerated. Both the
+  threshold size and the largest conic-external arc `m(q)` are `√(2q) + O(1)`, and which wins
+  alternates with no trend — `C(m(q),2)/q` stays inside `[0.67, 1.55]` across the range. Every
+  refinement of the covering bound adds `O(1)` to one side while the other drifts by `O(1)` too. A
+  general proof needs `m(q) < √(2q) + O(1)`, a clique bound for a Paley-type graph on the `q²`
+  points off the conic, and the measurements say that inequality is tight rather than generous — so
+  it may simply be false for some `q`. That negative is the real output of the pass.
+
+- **The q13 passant code** (`clebsch`, Paper IV) — the fourth numbered Clebsch paper, and the one
+  active new build. Take the conic in `PG(2,13)`, its 78 internal points and 78 passant lines, and
+  let `K` be the kernel of their incidence matrix: `K` is a binary `[78,36,12]` code whose **minimum
+  words reconstruct the geometry and symmetry they came from**. Minimum distance 12 is proved with
+  no support search — Segre tangent triples exclude weight eight (a cyclic 42-vertex compatibility
+  graph has clique number five against a required seven-clique), the two forced weight-ten pencil
+  profiles are excluded, and a dihedral weight-twelve word is constructed. All 364 minimum words
+  fall into one `S₄` and three `D₂₄` projective orbits, **every** orbit spans the code, pair
+  concurrence recovers passant-versus-secant join type, triple-concurrence profiles recover all six
+  elliptic orbitals, the 78 all-zero-triple seven-cliques are exactly the passant incidence rows,
+  and the common code/hypergraph/scheme automorphism group is exactly `PGL(2,13)`. **Priority is
+  closer than earlier drafts showed:** Droms–Mellinger–Meyer introduced this same
+  passant-line/internal-point parity-check code and bounded its distance, and the Ma–Liu–Tian survey
+  records `(q+3)/2 ≤ d ≤ q−1`, i.e. `8 ≤ d ≤ 12` at q=13. The paper closes that interval at the top
+  and adds the classification, spanning, reconstruction and symmetry results, for which no
+  predecessor was located; Madison–Wu supply the dimension formula and Hollmann–Xiang the elliptic
+  scheme. The proof is human-led with two green Lean surfaces beneath it — shared semantic modules
+  carrying the logical spine, and a paper-owned package checking the irreducibly finite leaves in
+  small auditable shards — and neither is a claim that the main theorem is machine-checked.
 
   **The spine is now conceptual rather than enumerative**, which is what moves the paper's central
   claim from an exact classification to an equality theorem. Two replacements did it. The **`q−5`
@@ -879,9 +934,15 @@ The remaining headline Clebsch-facing results and censuses are:
   quadratic-refinement, Maslov-holonomy, and Witt-bridge versions of the original roof while
   preserving the carrier-level outer bit.
 
-### The golden conference operator and its shadow sisters
+### The golden conference operator source programme
 
-A fourth Clebsch-family manuscript, carved out because the material outgrew the note it started in.
+**Not a paper.** This material was once carved out as a fourth Clebsch-family manuscript; under the
+2026-08-01 four-paper decision it is a source-development lane whose mathematics is selectively
+integrated into forward versions of the passages paper. The first integration took the
+source-operator-cubics-harmonic core and left the quantum, anomaly, Majorana, Coble–Burkhardt,
+exceptional-lattice, doily, and higher-conference branches as inventory. Read the priority note at
+the end of this section before quoting any of it.
+
 Let `C` be a marked symmetric conference operator on six axes with `C² = 5I`, and let `C_T` run
 through its coherent outer six-family. The claim is that a large family of apparently unrelated
 objects are images of that one operator under exterior power, golden compression, commutator,
@@ -964,6 +1025,58 @@ determinant/Pfaffian, adjugation and centered squaring — not accidental formul
   alone is **insufficient**: its `PGL₂(11)` action is transitive on the 22 Clebsch matching rows and
   supplies no row-to-parent bridge. The determinant sextic and dimer fingerprint close the reverse
   cycle exactly at the unoriented two-graph level and no further.
+- **The six determinantal nodes are now certified and machine-checked.** For every sister the cubic
+  wall `{Z_T = 0}` has exactly six singular points, the centered `5+1` collision configurations
+  `[1 − 6e_i]`, all rational ordinary double points common to all six walls. Presence is elementary
+  (at a `5+1` collision every matching has two pairs inside the five-block, so every
+  matching-bracket cubic vanishes to second order); exact projective Jacobian elimination excludes
+  any other singular support — in the centered gauge the homogeneous Jacobian ideal has projective
+  dimension zero, one chart holds the whole singular scheme, and its quotient algebra is reduced of
+  dimension six with six minimal primes. Lean now carries this rather than the earlier symbolic
+  census: the centered lift, cubic and gradient are formal, the cubic is identified with the
+  conference matrix's triangle cubic, the five quadrics are proved to be its coordinate
+  derivatives, and the elimination is exact ideal-membership reproved by `linear_combination`.
+- **The exchange-statistics companion — one general theorem, one universal obstruction, one
+  hardware no-go.** *General:* for `K : V → W` between real Euclidean `n`-spaces, the `O(W)×O(V)`
+  double orbit is fixed by the singular values; restricting to `SO×SO` splits each invertible orbit
+  into two by the sign of the oriented determinant, and the two merge on the singular locus because
+  a reflection is absorbed in a zero singular direction. The intrinsic object is the top exterior
+  map `Λⁿ K : det V → det W`, and a degree-`n` polynomial transforming by `det(R₋)det(R₊)` is a
+  scalar multiple of `det K` — classical invariant reasoning, claimed as such. The permanent does
+  not descend even through the special-orthogonal double orbit. *Universal:* for any orthogonal
+  `d+d` splitting of `2d` paths and any Boolean negative support `S`,
+  `rank K_S ≤ min(|S|, 2d − |S|)`, so a filled `d`-fermion determinant is nonzero only at balanced
+  controls — in dimension three that accounts for the **44 unbalanced zeros with no golden input**,
+  and only the twenty nonzero cases are golden (equispectrality). *Permanent side:* the intrinsic
+  bosonic companion is `tr(Sym³H) = h₃(H)` against the fermionic `tr(Λ³H) = det H`, with
+  `spec H = {1/5, 4/5, 4/5}`, `h₃ = 313/125`, `det = 16/125`, and exact difference
+  `tr(H)·tr(H²) = 297/125`; the bare permanent of `K` is *not* a golden scalar since it depends on
+  the ordered orthonormal port bases, so a calibrated coherent permanent can retain the oriented
+  control while no probability-only bosonic measurement can. *Hardware:* the full photonic
+  experiment is a **2026 NO-GO** — the required totally antisymmetric three-qutrit state has
+  linear-optical proposals but no located realization, and the best directly relevant benchmark is
+  fidelity `0.910(6)` at ~1.1 fourfold events/s. A bounded precursor is a **GO**: phase-characterize
+  the six-mode transfer with coherent light and run the ordinary three-boson collision-free
+  controls, describable as calibrated transfer and determinant signs but *not* as a direct
+  three-fermion phase measurement.
+- **Priority: five clean pre-emptions, two close to verbatim.** A full literature audit of the
+  frozen manuscript found that (i) the centered-square formula `W_T = Z_T² − (1/6)ΣZ_U²` is
+  Howard–Millson–Snowden–Vakil's printed Segre-to-Igusa duality map, verbatim, together with the
+  Igusa equation and inverse; (ii) the six sisters, the five-cycle normal form and the unordered
+  support split are theirs and Seidel's — the mystic pentagons, the twelve five-cycles pairing to
+  six under complementation, the six splits of the twenty triangles under exactly these conditions,
+  the `S₆`-action as outer automorphism, and Bussemaker–Mathon–Seidel's uniqueness of the order-six
+  conference two-graph with `Aut = A₅`; (iii) the Fano-component realization is largely
+  Gripaios–Nguyen's; (iv) the order-ten shadow is classical (Fickus–Mixon's conference-matrix /
+  real-ETF identification, plus Bussemaker–Mathon–Seidel's order-ten two-graph with eigenvalues
+  `±3`, `Aut = Sp(4,2) ≅ S₆`, and the Petersen switching class); and (v) the rational anomaly
+  inverse was already conceded. **What survives with no located predecessor is the operator layer:**
+  the commutator-Pfaffian and middle-exterior presentations, the golden eigenspace compression with
+  its determinantal/MCM package, the Jacobian adjugate identity, the balanced-cut
+  maximum-determinant characterization of `C² = 5I`, the synchronized pure-spinor product, the
+  unmarked-reconstruction boundary, and the exact anomaly-cost clauses. Four statements need
+  attribution surgery, not retraction; the classical-geometry layer is thinner than the earlier
+  framing suggested.
 
 ### Projective Reed–Solomon deep holes and reconstruction
 
@@ -1528,15 +1641,30 @@ only through theorem-producing orbit mechanisms. The `r=3,5,6,7` hierarchy is no
 its stated scopes; the next boundary is conceptual explanation and higher redundancy, not an
 unfinished low-field census and not the general Reed–Solomon deep-hole conjecture.
 
-**Clebsch publication:** all three papers of the sequence have cleared their mathematical gates and
-what remains is external. The rigidity paper carries the golden orientation as well as the
+**Clebsch — the all-sizes conic-filling theorem is the lane's one identified route to a top-tier
+paper.** A full review of the group found that no repackaging of the existing results clears the
+A−/A band: every headline concerns one exceptional object over one or two small fields, with no
+infinite family, no asymptotic statement, and no transferable technique — and exceptional-object
+papers reach the top tier only when the exceptional object closes a general question. The general
+question here is open at `k = 9`. The theorem would be a **new** headline paper (rigidity + all-k
+classification + golden operator), not a retrofit. Current state: proved for every `k` over every
+odd `q ≤ 43`, saturated branch uniformly closed, nonsaturated branch reduced to slack `≥ 2` with
+`(q,k) = (53,12)` the first surviving boundary. The exact remaining obstruction is a clique bound
+`m(q) < √(2q) + O(1)` for a Paley-type graph on the points off the conic, measured to be tight
+rather than generous — so it may be false for some `q`, and that possibility is itself the finding.
+
+**Clebsch publication:** the three released papers have cleared their mathematical gates and what
+remains is external. The rigidity paper carries the golden orientation as well as the
 reconstruction, and its companion carries a five-mode claim ledger; the trade-rigidity paper derives
-the one-factorization split rather than assuming it; the passages note has closed both of its former
-proof gaps and states its orientation bridge relative to an explicit marked datum. Each still owes an
-immutable artifact locator, and the passages note also owes author affiliation/contact metadata. The
-fourth manuscript — the golden conference operator — has its source mathematics proved and frozen and
-its manuscript root installed; **consolidating the placement and proof ledger is its gate, and no
-new exploration should precede it**. Keep the modular sequel separate: its proved centre is the
+the one-factorization split rather than assuming it; the passages paper has closed both of its former
+proof gaps, states its orientation bridge relative to an explicit marked datum, and its forward
+version has absorbed a bounded golden-operator core. Each still owes an immutable artifact locator,
+and the passages paper also owes author affiliation/contact metadata. The q13 passant-code paper is
+the active build: human proof, paper-owned evidence, semantic modules and sharded Lean gates are
+green, with four concrete transports and release outstanding. The golden operator lane keeps its
+proved source mathematics but is no longer chasing a manuscript of its own; its live obligation is
+absorbing the five literature pre-emptions into whatever forward version consumes it. Keep the
+modular sequel separate: its proved centre is the
 Modular Gateway Theorem and its `q=7,11,23` realizations/boundary, not the refuted universal
 metaplectic/theta roof.
 
@@ -1822,8 +1950,8 @@ so it stays inspectable — a better answer than waiting.
 The deliverable is no longer "the odd-plane prize, de-risked into stepping stones." An initial
 packaging review resolved the then-existing body of work into **seven papers in ship order + two
 OEIS entries**, staged under `papers/` with per-paper status maps. That fixed count is now
-historical: the Clebsch work has split coherently into a factorization-memory paper and a modular
-gateway sequel, while the projective Reed–Solomon theorem programme has become a major paper-scale
+historical: the Clebsch work has resolved into a four-paper numbered series with a separate source
+lane behind it, while the projective Reed–Solomon theorem programme has become a major paper-scale
 track of its own. The table below remains the original release-order backbone, not a current count
 of every candidate manuscript.
 
@@ -1833,11 +1961,16 @@ Do not edit it by hand; run `lean/scripts/paper-facts.py generate`. Its counts a
 contain, not a judgement about what is ready: the ship-order table after it carries that, and stays
 hand-written.
 
-**Read the row count with two corrections, or it overstates the portfolio by two papers.**
+**Read the row count with three corrections, or it misdescribes the portfolio.**
 `beyond4_prs` and `beyond4_prs_submission` are one manuscript in two typesettings, not two results;
-and `clebsch_hexagon_code` is the superseded integrated manuscript, preserved only as a fallback for
-material the rigidity paper, its companion, and the trade-rigidity paper now carry. So the rows
-describe **eleven live manuscripts**, not thirteen. The statement and label columns need the same
+`clebsch_hexagon_code` is the superseded integrated manuscript, preserved only as a fallback for
+material the rigidity paper, its companion, and the trade-rigidity paper now carry; and
+`golden_operator` is a source-lane draft feeding forward versions of the passages paper, not a
+numbered paper. So the rows describe **twelve live manuscripts**, of which eleven are papers. Two
+newer sources are not in the table at all — the q13 passant-code manuscript
+(`papers/q13-passant-code/passant_code_q13.tex`, the fourth numbered Clebsch paper) and the
+lane-local exchange-statistics companion
+(`papers/golden-quantum-statistics/golden_quantum_statistics.tex`). The statement and label columns need the same
 care: labels count anything labelled, and corollary-heavy papers inflate against theorem-heavy ones —
 the arcs manuscript alone carries 21 corollaries against 8 theorems, so its 77 labels are not 77
 independent results. Neither column measures depth, and none of them should be summed across rows.
@@ -1849,15 +1982,16 @@ independent results. Neither column measures depth, and none of them should be s
 | `arcs_complete_outside_conic`   | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity                                 | `relconic`       | 24    | 8   | 4   | 5    | 21  | 77     |
 | `beyond4_prs`                   | Deep holes of projective Reed--Solomon codes beyond redundancy four: exact classifications at redundancies five through seven | `reed-solomon`   | 30    | 6   | 10  | 18   | 3   | 60     |
 | `beyond4_prs_submission`        | Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Exact Classifications at Redundancies Five Through Seven | `reed-solomon`   | 30    | 6   | 10  | 18   | 3   | 60     |
-| `clebsch_factorization`         | Quadratic trade rigidity and cubic orientation in conic matching quotients                                                    | `clebsch`        | 36    | 6   | 7   | 5    | 10  | 44     |
+| `clebsch_factorization`         | Quadratic trade rigidity and cubic orientation in conic matching quotients                                                    | `clebsch`        | 39    | 6   | 7   | 5    | 10  | 44     |
 | `clebsch_hexagon_code`          | Deep-hole rigidity and factorization memory in the Clebsch hexagon code                                                       | `clebsch`        | 37    | 9   | 4   | 13   | 3   | 59     |
-| `clebsch_passages`              | Arithmetic and harmonic realizations of the Clebsch cubic                                                                     | `clebsch`        | 17    | 3   | 0   | 2    | 0   | 11     |
-| `clebsch_rigidity`              | Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus                                  | `clebsch`        | 21    | 4   | 1   | 7    | 3   | 28     |
-| `clebsch_rigidity_companion`    | Computational strengthenings of Clebsch syndrome rigidity                                                                     | `clebsch`        | 21    | 7   | 1   | 1    | 1   | 17     |
+| `clebsch_passages`              | Golden descent and operator realizations of the Clebsch cubic                                                                 | `clebsch`        | 20    | 3   | 0   | 3    | 0   | 14     |
+| `clebsch_rigidity`              | Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus                                  | `clebsch`        | 22    | 4   | 1   | 7    | 3   | 28     |
+| `clebsch_rigidity_companion`    | Computational strengthenings of Clebsch syndrome rigidity                                                                     | `clebsch`        | 22    | 7   | 1   | 1    | 1   | 17     |
 | `complete_repair_ports`         | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure                                                 | `complete-ports` | 16    | 6   | 0   | 4    | 3   | 17     |
 | `continuation_graph_rigidity`   | Semilinear rigidity of four-point-frame continuation graphs                                                                   | `continuation`   | —     | 5   | 3   | 3    | 0   | 18     |
 | `dihedral_schreier_node_kayles` | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                                                       | `dihedral`       | 19    | 15  | 4   | 4    | 5   | 90     |
 | `equivariant_robust_completion` | Frobenius-equivariant pair extension and robust repair of eight-arcs                                                          | `paper-frob-eq`  | 14    | 4   | 2   | 3    | 7   | 33     |
+| `golden_operator`               | The golden conference operator and its shadow sisters                                                                         | `golden`         | —     | 7   | 1   | 3    | 2   | 14     |
 <!-- trust-spine:end area=papers section=manuscripts -->
 
 | # | Paper                                                | Lead                                                            | State                                                |
@@ -1871,20 +2005,29 @@ independent results. Neither column measures depth, and none of them should be s
 | 7 | Semilinear rigidity of four-point-frame continuation graphs | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13` | manuscript complete; Lean planned; audit gated |
 | — | Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications at redundancies five through seven | exact R5–R7 + coherent-polar high-field containment | 30-page reproducible V1; external release gates |
 | — | Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS–CSS Codes | LU-to-LC for every stabilizer AME state | 18-page local candidate; generic Lean core |
-| — | Arithmetic and harmonic realizations of the Clebsch cubic | one oriented coordinate line behind both realizations, relative to a marked datum | both proof gaps closed; locator + author metadata remain |
-| — | Quadratic trade rigidity and cubic orientation in conic matching quotients | the conic-ideal factorization quotient and its `B₃/H₃` completeness, with one-factorization derived | v2 arc integrated; public packaging remains |
-| — | The golden conference operator and its shadow sisters | one operator, and the cubic/polar/determinantal/fermionic/anomaly/lattice shadows it generates | source mathematics frozen; manuscript consolidation is the gate |
+| — | Golden descent and operator realizations of the Clebsch cubic (Clebsch III) | one oriented coordinate line behind both realizations, relative to a marked datum, plus a bounded operator core | v1/v2 released under the earlier title; forward version consolidated |
+| — | Quadratic trade rigidity and cubic orientation in conic matching quotients (Clebsch II) | the conic-ideal factorization quotient and its `B₃/H₃` completeness, with one-factorization derived | v1/v2 released; forward human/Lean strengthening active |
+| — | A binary [78,36,12] code from the passant lines of a conic over F13 (Clebsch IV) | minimum words reconstruct the passant geometry and `PGL(2,13)` | human proof + semantic Lean spine + sharded leaves green; four transports and release remain |
+| — | *(not a paper)* golden conference operator source programme | one operator, and the cubic/polar/determinantal/fermionic/anomaly/lattice shadows it generates | source lane for Clebsch III forward versions; five literature pre-emptions to absorb |
 
 The arcs manuscript was retitled when it acquired the zero-defect matching-design capstone that
 earlier work identified as the missing structural complement: `ρ_𝒞(16) = 9` is now an application
-rather than a headline. The active Clebsch program is a three-paper sequence sharing one
-title-page identity — rigidity/decoding,
-then the conic matching quotient, then the arithmetic/harmonic note; the 37-page integrated
-manuscript *Deep-hole rigidity and factorization memory in the Clebsch hexagon code* is preserved
-only as a fallback. A fourth manuscript on the golden conference operator sits beside that sequence
-rather than inside it: the post-rigidity shadow material was assigned to it by an explicit ownership
-decision, the three sequence papers end before all of it, and it may cite them but not edit,
-extract from, or reorganize them. The rigidity paper has itself split — a human
+rather than a headline.
+
+**The Clebsch assignment changed on 2026-08-01 and supersedes every earlier description of it.**
+The public series has exactly **four numbered papers**: rigidity, factorization, the passages paper
+(now titled *Golden descent and operator realizations of the Clebsch cubic* in its forward version,
+with released versions one and two immutable under the earlier title *Arithmetic and harmonic
+realizations of the Clebsch cubic*), and the q13 passant-code paper. The first three have GitHub and
+DOI releases at versions one and two; further strengthening is by forward version only. The q13
+paper is the active new build. **The golden conference operator is no longer a manuscript** — it is
+a source-development lane feeding forward versions of the passages paper, and its first integration
+took only the source-operator-cubics-harmonic core plus the determinant-versus-permanent boundary.
+Its exchange-statistics material sits in a separate lane-local companion, written as a design-limit
+and theory note rather than an experimental proposal. The Paper-I computational companion stays
+unnumbered and becomes a forward-pointing evidence companion once the q13 paper is public. The
+37-page integrated manuscript *Deep-hole rigidity and factorization memory in the Clebsch hexagon
+code* is preserved only as a fallback. The rigidity paper has itself split — a human
 core carrying the theorems and a separate companion, *Computational strengthenings of Clebsch
 syndrome rigidity*, carrying the fifteen-class, low-degree, cross-field and through-eight-points
 classifications, each with its own build target, bibliography, machine-readable claim ledger and
