@@ -2402,8 +2402,17 @@
       "last": 828,
       "purpose": "tighten the AME-LU manuscript after the C805 cold read",
       "sequence": 267
+    },
+    {
+      "count": 1,
+      "first": 829,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 829,
+      "purpose": "external mathematical cold read of Golden continuous-control and rigidity-stability proofs",
+      "sequence": 268
     }
   ],
-  "next_id": 829,
+  "next_id": 830,
   "schema": "codex-task-id-allocations-v1"
 }
