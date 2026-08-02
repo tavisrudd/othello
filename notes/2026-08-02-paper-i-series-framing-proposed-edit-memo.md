@@ -3,7 +3,8 @@
 **Lane:** `clebsch`
 
 **Status:** revised after C802 red-team and accepted by a fresh cold check;
-proposal only; no manuscript source has been edited
+abstract and figure addendum accepted by an incremental cold check; proposal
+only; no manuscript source has been edited
 
 **Target:** the next simultaneous forward release of Papers I--IV
 
@@ -137,16 +138,74 @@ relation.
 Use at most three locations.  Do not add a strict-information subsection or a
 series manifesto.
 
-### 1. One restrained abstract sentence
+### Abstract-strength audit
 
-Possible text:
+The current abstract is mathematically strong but not yet maximally
+hierarchical.  It gives the exact inverse theorem, orientation theorem, proof
+mechanism, and uniform all-$k$ consequence.  Two features weaken that sequence:
+
+- the classical $A_5$ stabilizer identification interrupts the principal
+  inverse theorem; and
+- adding a general sentence about the companion papers would replace a precise
+  theorem by series-level interpretation.
+
+The best answer to the exceptional-object objection inside the abstract is the
+paper's own uniform theorem, not the existence of companion papers.  The final
+paragraph should promote the sharp conic-filling window from a “secondary”
+consequence to a general theorem and name its actual mechanisms: the
+even-characteristic nucleus obstruction and the two passant-cover bounds.  The
+universal chord-defect identity remains part of the separate rigidity argument.
+The simultaneous series belongs in the introduction and cover letter.
+
+Subject to the C753 correspondence audit, the strongest proportionate abstract
+candidate is:
+
+> Let $A$ be a six-arc in $\operatorname{PG}(2,11)$, and let $\mathcal U(A)$
+> be the projective points on no chord of $A$, equivalently the projective
+> deep-hole syndrome locus of its $[6,3,4]_{11}$ MDS code.  We prove that
+> $\mathcal U(A)$ lies on a conic if and only if $A$ is projectively equivalent
+> to the Clebsch hexagon; then $\mathcal U(A)$ is exactly a nonsingular conic.
+> Thus nearest-codeword data reconstruct the non-GRS Clebsch code up to monomial
+> equivalence.
+>
+> Nearest-codeword ambiguity then reconstructs an unordered support
+> bipartition and orientation torsor on six axes.  Its signed orbital operator
+> satisfies $B^2=5I$, while triangle holonomy gives the support cubic by
+> $c_{ijk}=B_{ij}B_{jk}B_{ki}$.  In the diagonal determinant pencil of $B$, the
+> sole nonsymmetric term is $-2C$; in turn the cubic recovers the six-axis
+> carrier, its projective $S_5$ symmetry, and the integral order
+> $\mathbf Z[\sqrt5]$.
+>
+> The rigidity argument uses a universal chord-defect identity.  For every
+> conic-filling $k$-arc, the even-characteristic nucleus obstruction, passant
+> incidence, and exact conic-complement bound force $q$ odd and
+> \[2k-3\le q\le (k(k-1)+3)/3.\]
+> Both bounds are attained.  Thus the paper proves a uniform finite-field
+> constraint alongside the complete Clebsch inverse theorem.
+
+This candidate is stronger than the present abstract because it ends on the
+uniform mechanism, records sharpness, and includes the cubic's reconstruction
+of its carrier.  It is not longer in conceptual scope: every claim is already a
+stated theorem or corollary.  If the final word count is too high, cut the
+$S_5$ and integral-order consequences before cutting the uniform theorem.
+
+Do not add a formal-verification sentence until the C753 axiom and
+correspondence audits identify the exact covered statements.  Even then, place
+that sentence in the introduction unless the target venue expects formal
+verification in the abstract.
+
+### 1. No series sentence in the abstract
+
+The earlier possible sentence was:
 
 > More broadly, the argument isolates a reconstruction pattern in which coarse
 > incidence data recover a carrier and ambiguity data recover additional
 > structure; the accompanying papers test related recovery and transport steps
 > in different exact settings.
 
-Omit this sentence if it weakens the abstract or the locators are not ready.
+Do not use it.  It weakens the exact ending above and asks the abstract to carry
+release architecture.  Use the recurring-pattern language only in the early
+introduction and compact roadmap.
 
 ### 2. One early-introduction paragraph
 
@@ -181,6 +240,76 @@ finishes a Paper I proof.
 If a two-column table survives the final cold read, call it **Conceptual role /
 Paper I realization**.  Populate it only after O1--O8 and the correspondence
 audit.  No symmetry row may precede O7's non-tautological closure.
+
+## Diagram audit
+
+Paper I currently has one figure, the five-matchings--Petersen dictionary.  It
+does a necessary local job: it makes the Brianchon point/support-pair
+correspondence visible.  It does not show the global inverse mechanism.
+
+Add at most one further diagram, near the end of the introduction, only if it
+survives a rendered-page test.  Its first panel must separate the uniform
+conic-filling bound from the $q=11$, $k=6$ equality case.  Its second panel
+must show the two independent observable routes that the orientation theorem
+identifies:
+
+```text
+GENERAL BOUND
+conic-filling k-arc: U(A) is a nonsingular conic
+        |
+        | nucleus obstruction + passant incidence + exact conic-complement bound
+        v
+q odd and  2k-3 <= q <= (k(k-1)+3)/3
+
+q=11 RIGIDITY
+six-arc A in PG(2,11), with U(A) contained in a conic
+        |
+        | line bound + chord defect + Dye equality case
+        v
+Clebsch six-arc / projective code
+        |
+        | conic polarity + Dye stabilizer theorem
+        v
+polarity and A5 action
+
+ORIENTATION COMPARISON
+reconstructed twelve-point locus                decoder ambiguity
+        |                                               |
+        | antipodal quotient + five-valent orbitals     | Brianchon/self-polar dictionary
+        v                                               v
+switching class [B], B^2 = 5I              unordered support bipartition
+        |                                               |
+        |                                               | signed support difference
+        |                                               v
+        +---- triangle holonomy: c_ijk=B_ij B_jk B_ki -> cubic line [C]
+                                                            |
+                                                            | node-frame theorem
+                                                            v
+                                                   six-axis carrier and S5
+```
+
+The rendered version should use solid versus dashed arrows, not color alone, to
+distinguish reconstruction from identification; each arrow should name the
+mathematical mechanism, not a section number.  A caption should state that all
+nodes and arrows belong to Paper I, that the general panel assumes conic filling,
+and that the rigidity panel is the separate $q=11$, $k=6$ specialization with
+only conic containment assumed.
+
+This diagram earns its space because it exposes the proof's causal structure
+and separates the uniform counting mechanism from the exceptional equality
+case.  It directly addresses the reviewer-perception problem without asserting
+a family theorem that is not proved.
+
+Do **not** add:
+
+- a four-paper ladder diagram, which would visually overstate a common theorem;
+- a C494 information-lattice diagram in Paper I, whose analogy and ownership
+  need more qualification than a figure can carry;
+- a separate determinant-expansion diagram, because the displayed identity and
+  the existing proof stages already express that mechanism; or
+- both this diagram and the optional conceptual-role table.  Prefer the diagram
+  if the introduction needs causal orientation; prefer the table only if the
+  final correspondence audit is the harder reader problem.
 
 ## Cover-letter use of C494
 

@@ -65,7 +65,20 @@ No memo or manuscript text was changed in this review round.
 
 The memo was subsequently revised, received a second cold-read `GO`, and now
 contains the accepted stage and ownership audits plus the complete C494
-boundary.  The accepted recommendation to C762 is limited to one optional
-abstract sentence, one early-introduction paragraph, and one compact roadmap,
-all conditional on C753, exact theorem locators, and dependency verification.
-No manuscript source changed during C802.
+boundary.  The accepted recommendation to C762 is limited to the revised
+abstract proposal and two early-introduction locations: one framing paragraph
+and one compact roadmap or causal diagram.  All remain conditional on C753,
+exact theorem locators, and dependency verification.  No manuscript source
+changed during C802.
+
+An incremental abstract-and-figure pass subsequently replaced the optional
+series sentence with a stronger theorem-first abstract proposal.  It promotes
+the sharp uniform conic-filling window, keeps its nucleus and passant-cover
+mechanisms distinct from the q=11 chord-defect rigidity argument, and records
+the cubic's carrier-recovery consequence.  The same pass recommends at most one
+new Paper-I-only causal diagram: separate panels for the general window and the
+q=11 rigidity theorem, followed by the exact comparison between the orbital
+operator and support-cubic routes.  It rejects a four-paper ladder, a C494
+diagram in Paper I, and simultaneous use of both the causal diagram and the
+optional conceptual-role table.  A fresh incremental cold check returned
+`GO`; no manuscript source changed.
