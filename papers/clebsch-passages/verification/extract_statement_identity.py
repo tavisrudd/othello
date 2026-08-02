@@ -19,10 +19,10 @@ INPUT_RE = re.compile(r"\\input\{([^}]+)\}")
 EXPECTED_LABELS = (
     "thm:arithmetic-main",
     "thm:orientation-source",
-    "thm:harmonic-main",
     "prop:golden-fibre",
     "prop:spinor-specialization",
     "thm:operator-shadows",
+    "thm:harmonic-main",
 )
 
 
