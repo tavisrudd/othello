@@ -53,7 +53,9 @@ gauge-theory simulation.
 
 ## Task graph
 
-1. C766 proves and sharpens the exchange-statistics orientation theorem.
+1. C766 is complete: it proves the general exchange-statistics orientation
+   theorem, its determinant-line interpretation, the unitary analogue, and
+   the full mixed-sector checksum.
 2. C767 imports the exact statistics, arithmetic instance, decoder, and trust
    surface.
 3. C768 closes the full-text literature and attribution audit.

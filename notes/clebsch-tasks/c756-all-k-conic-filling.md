@@ -28,13 +28,14 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Six research passes complete; the theorem is **not** proved. Reports:
+Seven research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
 `notes/2026-08-01-c756-paley-windmill-reduction.md`, and
 `notes/2026-08-01-c756-paley-bispectral-reduction.md`, and
-`notes/2026-08-01-c756-primitive-jacobi-collisions.md`.
+`notes/2026-08-01-c756-primitive-jacobi-collisions.md`, and
+`notes/2026-08-01-c756-nonsaturated-direction-reduction.md`.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -79,6 +80,21 @@ What the saturated-external attack adds:
 - polarity turns covering into the assertion that the complete node set of \((q+1)/2\) secants,
   consisting entirely of internal points, blocks every non-tangent line.
 
+What the first nonsaturated pass adds:
+
+- deleting an arc point on a spare external line produces a \((k-1)\)-arc in the affine
+  plane which determines exactly all \(q\) directions other than the deleted point;
+- its direction discriminant factors as
+  \(D_P(T)=(T^q-T)E_P(T)\), where
+  \(\deg E_P=\binom{k-1}{2}-q\) and the root multiplicities of \(E_P\) are exactly
+  the excess parallel-chord concurrences;
+- equivalently, the complete chord product on the spare line is the binary Moore form,
+  the forced \((k-2)\)-fold residual factor at the deleted point, and one canonical
+  degree-\(\delta\) concurrence divisor;
+- zero slack is impossible over every odd prime-power field except the already excluded
+  \(q=3\), so every nonsaturated conic-filling arc satisfies the strict uniform bound
+  \(\binom{k-1}{2}\ge q+1\).
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -86,10 +102,12 @@ hexagon at \(q=11\).
 Remaining frontier: counting cannot finish the job (both \(k_{\min}(q)\) and the largest
 conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternates with
 \(q\)).  The sixth pass proves the primitive Jacobi collision lemma and closes the entire
-saturated-external branch.  Outside saturation, the type-aware spare-line and
-general-position character-sum routes remain live; a \(k\)-uniform obstruction there is now
-the load-bearing gate for the full theorem.  The dual internal-node blocking formulation is
-retained as structural input rather than as a substitute for the closed spectral step.
+saturated-external branch.  The seventh pass gives the strict nonsaturated bound and divides
+the direction polynomial by its forced Moore factor.  Positive residual slack remains open;
+the next gate is to combine Segre's tangent-product relation with the degree-\(\delta\)
+residual concurrence divisor, so that a character sum sees \(\delta\) rather than the
+original degree about \(q\).  The dual internal-node blocking formulation is retained as
+structural input rather than as a substitute for the closed spectral step.
 
 ## Current boundary
 

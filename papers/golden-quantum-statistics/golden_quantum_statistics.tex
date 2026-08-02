@@ -41,9 +41,9 @@ diagonal path control \(D_x\), the postselected block
 has filled three-fermion amplitude \(\det K_T(x)\), proportional to a signed
 Joubert coordinate on the Segre cubic.  We show that this orientation has no
 intrinsic permanent counterpart: permanents depend on the chosen input and
-output port frames, whereas the basis-independent bosonic observable is the
-symmetric-cube trace \(h_3(K_T^\dagger K_T)\), a function only of the singular
-values.  At each of twenty balanced controls, all six transfers have squared
+output port frames, whereas a canonical basis-independent bosonic aggregate is
+the symmetric-cube trace \(h_3(K_T^\dagger K_T)\), a function only of the
+singular values.  At each of twenty balanced controls, all six transfers have squared
 singular spectrum \(\{1/5,4/5,4/5\}\), giving
 \(h_3=313/125\) and exterior-cube probability \(e_3=16/125\); the other
 44 Boolean controls have zero fermionic amplitude.  Calibrated determinant
@@ -85,13 +85,15 @@ antisymmetric exchange statistics.
 The central point is an orientation boundary.  The Golden data determine the
 two three-dimensional port spaces but not ordered orthonormal frames inside
 them.  Changing those frames acts on \(K\) from the left and right by
-orthogonal matrices.  The determinant retains an orientation sign.  The
-permanent does not descend through this action.  Consequently the intrinsic
-bosonic companion is not a second signed Segre coordinate: it is a spectral
-quantity on the symmetric cube.
+orthogonal matrices.  The top exterior power is intrinsically a map between
+the two determinant lines; after both lines are oriented, it becomes the
+signed scalar \(\det K\).  The permanent does not descend through the same
+port-frame action.  Consequently the canonical intrinsic bosonic aggregate
+used here is not a second signed Segre coordinate: it is a spectral quantity
+on the symmetric cube.
 
-Theorem~\ref{thm:exchange-boundary} states this distinction together with the
-exact balanced benchmark.  The remaining sections separate intrinsic
+Theorems~\ref{thm:orbit-boundary} and~\ref{thm:exchange-boundary} state this
+distinction and its exact balanced specialization.  The remaining sections separate intrinsic
 observables from calibrated ones, give a short arithmetic application, and
 identify the boundary of a photonic implementation.  General
 boson--fermion complementarity in linear interferometers is due to
@@ -147,24 +149,81 @@ by the ten-dimensional symmetric-cube input space.  Thus the operational
 uniform-input average is \(B_{\mathrm{sym}}/10\).  The second expression is
 the filled three-fermion probability.
 
-\begin{theorem}[Exchange-statistics orientation boundary]
-\label{thm:exchange-boundary}
-Let \(K_T(x)\) be a Golden transfer block.
+\begin{theorem}[Left--right orbit and orientation boundary]
+\label{thm:orbit-boundary}
+Let \(V\) and \(W\) be real Euclidean spaces of the same dimension
+\(n\geq2\), and let \(K:V\to W\).
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
-\item A change of ordered orthonormal port frames sends
+\item A change of ordered orthonormal frames sends the matrix of \(K\) to
 \[
  K\longmapsto R_-^{\mathsf T}KR_+,
- \qquad R_\pm\in O(3).
+ \qquad R_\pm\in O(n).
 \]
-The determinant changes by
-\(\det(R_-)\det(R_+)\), while the permanent does not define a scalar on the
-resulting double orbit.
-\item Every scalar intrinsic under the \(O(3)\times O(3)\) port action factors
-through the singular values of \(K\).  Under
-\(SO(3)\times SO(3)\), the sign of \(\det K\) is the additional orientation
-label.
-\item At every balanced control with three entries \(+1\) and three entries
-\(-1\), for each of the six marked protocols,
+The \(O(W)\times O(V)\) orbit is determined by the singular values.  If
+\(K\) is invertible, this orbit splits into two
+\(SO(W)\times SO(V)\) orbits, distinguished by the sign of the oriented
+determinant.  If \(K\) is singular, it does not split.
+\item Intrinsically, \(\bigwedge^nK\) is a map
+\(\det V\to\det W\).  Choosing orientations turns it into a scalar, and a
+frame change multiplies that scalar by
+\(\det(R_-)\det(R_+)\).  Thus its absolute value is an orthogonal invariant,
+while its sign is an invariant of oriented port spaces.
+\item The permanent of a matrix does not descend to either the orthogonal or
+the special-orthogonal double orbit.  Hence it is a calibrated port-frame
+amplitude rather than a scalar attached to \(K\) as an unframed Euclidean
+map.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The singular-value decomposition proves that two matrices lie in the same
+\(O(W)\times O(V)\) orbit exactly when they have the same singular values.
+For an invertible map, special-orthogonal changes preserve the sign of the
+oriented determinant.  Conversely, singular-value decompositions of two maps
+with the same singular values and determinant sign can be chosen with the
+same pair of orientation parities, so special-orthogonal left and right
+factors relate them.  When a singular value is zero, reflecting its kernel
+direction changes one parity without changing the diagonal singular-value
+matrix.  The two orientation classes therefore merge on the singular locus.
+
+The functorial map on top exterior powers gives (ii), including its frame
+transformation law.  For (iii), let \(R_\theta\) be a plane rotation and use
+the special-orthogonal family
+\(R_\theta\oplus I_{n-2}\).  Along the right orbit of the identity matrix,
+\[
+ \per(R_\theta\oplus I_{n-2})=\cos(2\theta),
+ \qquad
+ \det(R_\theta\oplus I_{n-2})=1.
+\]
+The permanent therefore varies inside a single special-orthogonal double
+orbit.
+\end{proof}
+
+Every scalar invariant under the full orthogonal port action consequently
+factors through the singular values.  This statement concerns the unframed
+map.  A laboratory may freeze ordered phase-referenced port frames and then
+measure additional calibrated amplitudes.
+
+\begin{corollary}[Orientation chambers]
+On the invertible real transfer space, the two oriented double orbits over a
+fixed singular-value point are exchanged by reversing one port orientation.
+They meet only on the determinantal hypersurface.  Thus \(\det K=0\) is
+exactly the boundary at which the oriented top-exterior label disappears.
+\end{corollary}
+
+\begin{remark}[Complex port gauges]
+For complex port frames, \(O(n)\) and \(SO(n)\) are replaced by \(U(n)\) and
+\(SU(n)\).  Singular values again classify the full double orbit.  On the
+invertible locus, the residual label is the phase of the oriented determinant;
+on the singular locus it disappears.  The real Golden transfer and a coherent
+phase reference reduce this determinant-line phase to the sign studied here.
+\end{remark}
+
+\begin{theorem}[Golden exchange-sector benchmark]
+\label{thm:exchange-boundary}
+Let \(K_T(x)\) be a Golden transfer block.  At every balanced control with
+three entries \(+1\) and three entries \(-1\), for each of the six marked
+protocols,
 \[
  \operatorname{spec}H=\left\{\frac15,\frac45,\frac45\right\}.
 \]
@@ -174,23 +233,23 @@ Consequently
  F_{\mathrm{ext}}=\frac{16}{125},\qquad
  B_{\mathrm{sym}}-F_{\mathrm{ext}}=\frac{297}{125}.
 \]
-All intrinsic bosonic scalars are therefore blind to the marked Segre node
-and its orientation on this balanced family.
-\end{enumerate}
+The mixed exchange sector has
+\[
+ \operatorname{tr}\bigl(S_{(2,1)}(H)\bigr)=s_{(2,1)}(H)=\frac85,
+\]
+and the Schur--Weyl checksum is
+\[
+ h_3(H)+2s_{(2,1)}(H)+e_3(H)
+ =\operatorname{tr}(H)^3=\frac{729}{125}.
+\]
+In particular, every scalar invariant under the full orthogonal port action
+has the same value on all these balanced blocks and cannot distinguish their
+marked Segre nodes or orientations.
 \end{theorem}
 
 \begin{proof}
-Part (i) follows directly from changing the two orthonormal frames.  The
-determinant transformation law is multiplicative.  The permanent has no
-corresponding covariance: for \(K=I_3\), rotating the first two columns by an
-angle \(\theta\) changes its value to \(\cos(2\theta)\), although the singular
-values and \(|\det K|\) remain fixed.
-
-The real singular-value decomposition classifies the
-\(O(3)\times O(3)\) double orbits, proving (ii).  Restricting to the two special
-orthogonal groups retains the determinant sign.  For (iii), the Golden
-conference identity gives the displayed spectrum on every balanced cut.  The
-complete symmetric functions then give
+The Golden conference identity gives the displayed spectrum on every
+balanced cut.  The complete and elementary symmetric functions give
 \[
  h_3\left(\frac15,\frac45,\frac45\right)=\frac{313}{125},
  \qquad
@@ -198,6 +257,17 @@ complete symmetric functions then give
 \]
 Finally, the degree-three symmetric-function identity
 \(h_3-e_3=p_1p_2\) gives \(297/125\).
+For the remaining partition of three,
+\[
+ s_{(2,1)}=\frac{p_1^3-p_3}{3}=\frac85.
+\]
+Schur--Weyl decomposition
+\[
+ V^{\otimes3}=\Sym^3V\oplus
+ 2S_{(2,1)}V\oplus\bigwedge^3V
+\]
+then gives the checksum.  The final assertion follows from
+Theorem~\ref{thm:orbit-boundary}.
 \end{proof}
 
 The theorem does not say that calibrated bosonic measurements lose all

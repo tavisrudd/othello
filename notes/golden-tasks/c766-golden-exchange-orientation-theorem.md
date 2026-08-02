@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**State:** queued; first C765 proof gate
+**State:** complete; reported in
+`notes/2026-08-01-c766-golden-exchange-orientation-theorem.md`
 
 ## Objective
 
