@@ -1,7 +1,7 @@
 # C817 — Paper IV structural mathematics upgrade
 
 **Lane:** `clebsch`  
-**Status:** active; subitems 1--4 positive and frozen; mathematics research only;
+**Status:** active; subitems 1--5 positive and frozen; mathematics research only;
 manuscript integration requires later user discussion
 
 ## Current state
@@ -56,8 +56,19 @@ coordinate labeling, and displayed equation remain absent.  Report and exact
 evidence bundle:
 `notes/2026-08-02-c817-intrinsic-conic-action.md`.
 
-The next gate is subitem 5, a compact exact spectral obstruction for weight
-eight.
+Subitem 5 is complete.  A six-block integral circulant matrix \(C\) has
+diagonal \(40\), edge entry \(-10\), rank \(28\), and is positive
+semidefinite by an exact alternating-factor characteristic polynomial and an
+independent rational Schur elimination.  Hence
+\(\omega(\Gamma)=\vartheta(\overline\Gamma)=5\), replacing the subset and
+five-row unique-closure leaves in the weight-eight exclusion.  Its
+fourteen-dimensional kernel is exactly the span of the fourteen translated
+five-cliques, which also classifies every equality case.  Report and exact
+evidence bundle:
+`notes/2026-08-02-c817-weight-eight-theta-certificate.md`.
+
+The next gate is subitem 6, a Terwilliger or exact-dual exclusion of both
+weight-ten pencil profiles.
 
 ## Objective
 
