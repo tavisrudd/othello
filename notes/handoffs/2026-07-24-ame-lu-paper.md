@@ -10,6 +10,17 @@ Discovery companion:
 
 ## Current status
 
+**C828 queued (2026-08-02): tighten the manuscript around the four bounded
+C805 cold-read findings.**  Remove or rigorously restrict the unsupported
+minimal-codeword claim, distinguish generator-coordinate radius from the
+defect-only threshold throughout the framing, source or cut the Gross--Van den
+Nest specialization sentence, and split Section 3 while synchronizing all
+numbering and release surfaces.  The task is editorial and corrective: it must
+not enlarge the theorem package.  Its acceptance gate includes adversarial
+proof/scope review, a warning-free build, affected-page and whole-paper visual
+sweeps, evidence/release checks, and standalone synchronization.  See
+`2026-08-02-c828-ame-lu-manuscript-tightening.md`.
+
 **C805 closed (2026-08-02): all six explanatory figures won blinded
 comprehension comparisons.**  The adopted vector figures cover axis recovery,
 minimum-support holonomy, the symmetry-group extensions, the defect/threshold
