@@ -330,6 +330,16 @@ portfolio.  In particular:
   `golden-quantum-statistics-c770-v1` at commit `9fe72fac`; the public-preprint
   and Paper-III forward-reference gates remain closed.  Report:
   `notes/2026-08-01-c770-golden-quantum-statistics-submission.md`.
+- C771 cold referee round 1 is complete with a major-revision verdict and no
+  manuscript edit.  The report found the paper potentially publishable in PRA
+  but required a checkable Golden theorem interface, strict separation of the
+  determinant amplitude from probability and tomography, a public artifact and
+  APS data statement, and derivations for the quantitative design limits.  The
+  author triage accepts the core objections.  The live Clebsch Paper III may
+  carry the full public operator theorem, while the note must retain local
+  definitions and the short balanced-spectrum derivation.  Reports:
+  `notes/2026-08-01-c771-golden-quantum-statistics-cold-referee-r1.md` and
+  `notes/2026-08-01-c771-golden-quantum-statistics-author-triage-r1.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
   C735's operator-first architecture.  The genuinely source-free signed
@@ -444,15 +454,15 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-- C771 is in progress: first cold PRA referee round on the immutable
-  `golden-quantum-statistics-c770-v1` package.  Freeze the referee report before
-  author-side triage and do not edit the manuscript during the cold read.
+None.  C771 is closed; its accepted revision requirements need a separately
+allocated implementation task.
 
 ## Recommended order
 
-1. Preserve the tagged PRA package.  A public preprint upload requires a
-   separately authorized and allocated task; record its stable locator before
-   requesting any Paper-III forward citation.
+1. Allocate the bounded C771 revision implementation: operational-claim repair,
+   live Clebsch citations plus local theorem interface, quantitative
+   derivations, APS data statement, and focus compression.  The user owns live
+   posting and the Clebsch forward reference; add no separate gate.
 2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 

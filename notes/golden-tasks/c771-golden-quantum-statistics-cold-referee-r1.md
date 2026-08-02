@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**State:** in progress
+**State:** complete 2026-08-01; frozen report recommends major revision and the
+author triage accepts the core objections; no manuscript edit made
 
 ## Objective
 
@@ -20,4 +21,3 @@ reports during the read.
 - an author-side triage after the cold report is frozen, distinguishing
   required revisions, optional improvements, and rejected suggestions;
 - no manuscript edit until the cold report and recommendation are recorded.
-

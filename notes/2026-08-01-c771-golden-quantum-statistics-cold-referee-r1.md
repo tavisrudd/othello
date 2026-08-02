@@ -54,24 +54,24 @@ checkable and its principal physical claim must match its actual readout.
 
 1. **Define and prove the Golden specialization in the submitted paper.**  On
    pages 1--2 the manuscript introduces “six coherently marked conference
-   matrices,” later writes (C_T), (Q_{T,\pm}), (arepsilon_T), and “six
+   matrices,” later writes \(C_T\), \(Q_{T,\pm}\), \(\varepsilon_T\), and “six
    marked protocols,” but never supplies a base matrix, the set indexed by
-   (T), the path permutations, or the orientation convention.  The claimed
+   \(T\), the path permutations, or the orientation convention.  The claimed
    Joubert realization is deferred to an uncited “companion operator paper.”
    The proof of Theorem 3.5 on page 4 begins, “The Golden conference identity
    gives the displayed spectrum,” without stating or proving that identity.
    This leaves the common spectrum, the 20-mask sufficiency, the six sign words,
    and all later exact numbers resting on an unavailable assertion.  At minimum,
-   give one explicit (C), define all six protocols and their markings, state
+   give one explicit \(C\), define all six protocols and their markings, state
    the algebraic identity from which the balanced spectrum follows, and provide
    either a short proof or a precise accessible citation.  The reader should be
    able to reproduce Theorem 3.5 without reverse-engineering the verification
    files.
 
 2. **Separate determinant-line covariance from an observed exchange-statistics
-   signal.**  Theorem 3.1 correctly says that (det K) becomes a signed scalar
+   signal.**  Theorem 3.1 correctly says that \(\det K\) becomes a signed scalar
    only after orientations are chosen.  The filled-fermion probability used in
-   Theorem 3.5 is (F_{\rm ext}=|\det K|^2), which is orientation-blind.  The
+   Theorem 3.5 is \(F_{\rm ext}=|\det K|^2\), which is orientation-blind.  The
    experimental section then obtains a sign from coherent transfer tomography
    and explicitly says this is not a direct many-fermion phase observation
    (page 7).  Please reconcile this with the title, the abstract's statement
@@ -81,7 +81,7 @@ checkable and its principal physical claim must match its actual readout.
    many-particle observable, or consistently state that antisymmetrization
    supplies an orientation-covariant amplitude while the proposed precursor
    infers its sign from calibrated one-particle tomography.  Also explain why
-   (O(3)\times O(3)) is a gauge of the mathematical Golden object but not of
+   \(O(3)\times O(3)\) is a gauge of the mathematical Golden object but not of
    the laboratory apparatus once eigenport frames are physically compiled.
 
 3. **Make the computational evidence available to a referee and add the APS
@@ -127,15 +127,15 @@ checkable and its principal physical claim must match its actual readout.
    operationally at first use.  These are not standard terms for a general PRA
    reader.
 2. The formula on page 2 appears as
-   (Z_T(x)=\varepsilon_T,10\sqrt5\det K_T(x)).  Replace the comma by an
+   \(Z_T(x)=\varepsilon_T,10\sqrt5\det K_T(x)\).  Replace the comma by an
    unambiguous multiplication or spacing symbol.
 3. The companion operator paper mentioned on pages 1--2 needs a bibliographic
    citation and a clear status.  If it is unpublished, the present manuscript
    must not depend on it for a central proof.
-4. On page 3, distinguish (B_{\rm sym}), which is a trace/sum, from the
-   operational uniform-input average (B_{\rm sym}/10) consistently in the
+4. On page 3, distinguish \(B_{\rm sym}\), which is a trace/sum, from the
+   operational uniform-input average \(B_{\rm sym}/10\) consistently in the
    abstract, theorem, and later physical discussion.
-5. State explicitly whether (K^\dagger K) is retained only to anticipate the
+5. State explicitly whether \(K^\dagger K\) is retained only to anticipate the
    complex extension; the constructed transfer is real and most formulas use
    transposes.
 6. Explain how the three selected signs are chosen and whether the selection is
@@ -178,4 +178,3 @@ The most natural PRA handling appears to be a Regular Article in quantum
 information science/tomography or quantum optics, not a Letter.  The arithmetic
 anomaly section should not influence the editorial decision unless the authors
 connect it more tightly to the AMO experiment.
-
