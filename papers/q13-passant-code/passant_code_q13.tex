@@ -51,7 +51,8 @@ their coordinate-permutation automorphism group is exactly
 \(\PGL(2,13)\).  The proof combines a tangent-product exclusion in weight
 eight, two exhaustive but compact syndrome-disjointness checks in
 weight ten, the binary association algebra for spanning, and concurrence
-with four resolving anchors for reconstruction and symmetry.
+with a seven-clique census for reconstruction and four resolving anchors for
+symmetry.
 \end{abstract}
 
 \noindent\textbf{Keywords.} binary incidence code; finite conic; passant
@@ -64,6 +65,10 @@ that define them.  Row operations erase the choice of parity checks, and a
 minimum-distance computation need not reveal why the first codewords occur.
 Here the minimum words recover both the parity checks and the association
 scheme on the coordinates.
+This is the fourth paper in a program on code-theoretic reconstruction around
+the Clebsch cubic.  The first paper begins from the conic code over
+\(\F_{11}\); the present \(q=13\) theorem is logically independent of the
+earlier papers.
 
 Fix a nonsingular conic \(\cC\subset\PG(2,13)\).  A line is
 \emph{passant} when it is disjoint from \(\cC(\F_{13})\).  Conic polarity
@@ -472,6 +477,11 @@ ends with \texttt{Paper-IV q=13 evidence: PASS} and then builds the
 warning-free PDF.  The persistent repository-relative references are
 \nolinkurl{verification/README.md} for the exact programs and
 \nolinkurl{lean-certificates/README.md} for the formal package.
+The Python evidence uses only the standard library.  On the release
+x86-64 Linux workstation, Python \(3.13.12\) runs \texttt{make evidence} in
+about \(6.2\) seconds with peak resident memory below \(100\) MiB; the full
+command additionally uses the Nix-provided \TeX\ Live environment to build
+the PDF.
 
 The shared Lean library formalizes the normalized conic and incidence code,
 the two parity-profile reductions, the tangent graph, the binary association

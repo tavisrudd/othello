@@ -18,7 +18,10 @@ four-anchor transport now identifies every polar-relation automorphism with one 
 normalized symmetric-square projective maps.  The local release audit and the already-integrated
 Paper-I forward pointer are green.  The Milnor--Serre exposition pass and warning-free PDF gate are
 also green.  The context-free cold read's four finite/trust-interface revisions are integrated and
-the eight-page warning-free PDF gate is green.  Public packaging, immutable locators, fresh
+the eight-page warning-free PDF gate is green.  A different context-free rerun scored the paper
+92/100 and marked the theorem, language changes, distance mechanism, and trust boundary all clear;
+its three local abstract, series-framing, and execution-metadata points are integrated.  Public
+packaging, immutable locators, fresh
 isolated replay, and publication with explicit authority remain;
 the minimum-support-to-polar-relation implication remains an explicit human-proof boundary in the
 partial formal mirror.

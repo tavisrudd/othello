@@ -42,8 +42,8 @@ all 78 rows, and automorphism group `PGL(2,13)`.  The tracked source and PDF at
 the audit point have SHA-256 hashes
 
 ```text
-passant_code_q13.tex  ad046524458049c0041fa2d8dfed7247f232783fbf3b0276fae00e4f97aef5ac
-passant_code_q13.pdf  5fd1227940ded1391be075dabafc3bacbb9e335ba4a29d064f223c98d8fbe550
+passant_code_q13.tex  b2a53b54446c7b59037c7e203ce32c9200df8db9d54806dd68cce100daf36b54
+passant_code_q13.pdf  1df999a442c04dbeccf0c58807f892d840303ec2b0dd2e5e85d7167dd5f879e6
 ```
 
 The guarded exact-target Lean queue checked
@@ -90,13 +90,29 @@ The six pair/triple concurrence signatures and the complete
 1716-to-78 seven-clique census are printed in the manuscript.
 
 A five-row proof-mode table now separates the cited theorem, human reductions,
-classical tangent input, finite certificates, native Lean evaluation,
+classical tangent input, trusted Python, native Lean evaluation,
 kernel-checked transports, and the two human globalizations.  The source
 archive's persistent repository-relative README paths, public replay command,
 and expected success marker are explicit.  Native evaluation is identified as
 compiled trusted execution exposed by declaration-local axioms.  The immutable
 external artifact locator remains the release-packaging gate recorded below.
 A fresh forced check rebuilt the eight-page PDF with no TeX warnings.
+
+### Final cold-read rerun
+
+A different context-free subagent read only the revised manuscript and style
+guide.  It raised the verdict to GO WITH MINOR REVISIONS at 92/100 and answered
+yes to all four proof-facing gates: the theorem is findable, the language
+changes are followable, the distance-twelve mechanism is auditable, and the
+human/trusted-execution/Lean boundary is clear.
+
+Its three local points are integrated.  The abstract now assigns the
+seven-clique census to reconstruction and the four anchors to symmetry; the
+series banner has a standalone orienting sentence; and the verification
+section gives the Python version, dependency boundary, measured runtime,
+memory, and platform.  Its remaining material objection is exactly the known
+release blocker: repository-relative artifact paths are not public locators
+until C761 cuts and pins the external release.
 
 ## Paper-I pointer
 
@@ -135,6 +151,9 @@ authority.
 - **Settled:** the context-free cold read found four compressed finite/trust
   interfaces.  Exact cyclic coordinates, finite algorithms, concurrence
   signatures, the clique census, and the proof-mode table now close them.
+- **Settled:** the final 92/100 cold read confirmed every proof-facing audit
+  gate and exposed three local release-surface wording/metadata points; all
+  three are integrated.
 - **Open, owned by C761 release packaging:** the final public repository shape
   and immutable locator do not yet exist.  The evidence gap is exactly a fresh
   isolated replay from pinned public dependencies.
