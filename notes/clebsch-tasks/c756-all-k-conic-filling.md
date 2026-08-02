@@ -24,6 +24,18 @@ joined, outside a perfect matching, to its Frobenius image.*  The affine-line ca
 every \(q\equiv3\pmod4\) up to \(151\) are already closed; see
 `notes/2026-08-02-c756-crown-reformulation-and-line-case.md`.
 
+The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
+closing it.  **Baer-subline containment is now settled unconditionally for every odd
+prime power** (Theorem 6): a coherent system lies in no Baer subline missing \(\infty\),
+so with Theorem 2 containment in any Baer subline forces \(q=5\) and an affine line.
+The consequence that changes the programme: gate 1's stability statement is now
+**sufficient on its own** — proving it closes the saturated-internal branch, with no
+second step.  The single newly identified lever is that no argument so far uses both
+halves of the crown at once; gate 1 uses independence only, gate 2 the bipartite half
+only, and the two frames are exactly the configurations extremal for both.  See
+`notes/2026-08-02-c756-baer-subline-containment.md` and
+`notes/2026-08-02-c756-direction-coordinatization.md`.
+
 The binding constraint on any replacement: exhaustive search is the only thing currently
 covering the small fields, and small \(q\) is exactly where character-sum arguments
 fail, since every Weil bound leaves a tail of order \(\sqrt q\).  So a structural
@@ -31,26 +43,34 @@ replacement must be an **exact** combinatorial argument with no error term, in t
 of Theorem 2 — whose chain ends in the integer inequality \(q-2\le(q+1)/2\) — and not
 another analytic estimate.  Ranked gates:
 
-1. **Baer-subline containment.**  Theorems 2 and 4 are the same "more than half a
-   structure of size \(\approx q\), against an admissible set of size \(\approx q/2\)"
-   argument run on the two kinds of Baer subline (a line, and the norm-one circle, which
-   is the image of \(\mathbf P^1(\mathbb F_q)\) under an explicit Möbius map).  Prove
-   the unified statement: a coherent system contained in any Baer subline forces
-   \(q=5\).  Then aim at the stability conjecture that would finish everything — the
-   support of a \(\pm1\)-valued, Frobenius-odd \(\lambda_{\min}\)-eigenfunction of
-   support at most \(q+3\) lies on a Baer subline.  Supporting evidence: the known
-   minimum-support eigenfunction, of support \(q+1\), is supported exactly on one.  The
-   general second-minimum problem is open in the Paley literature, but the \(\pm1\) and
+1. **Baer-subline containment — containment half CLOSED; stability half is now the
+   whole gate.**  The twenty-sixth pass proved Theorem 6 unconditionally for every odd
+   prime power: no coherent system lies in a Baer subline missing \(\infty\).  The proof
+   is an exact coboundary identity, \(\chi(c-c')=\delta\lambda(c)\lambda(c')\) on the
+   norm-one circle, so condition (A) alone confines the system to one \(\lambda\)-coset
+   of size \((q+1)/2<(q+3)/2\).  Note the card's earlier framing was wrong and is
+   corrected there: Theorems 2 and 4 are *not* the same argument on two containers —
+   they load on opposite halves of the crown, and Theorem 4's container is not a Baer
+   subline.  What remains is the stability conjecture, which is now **sufficient by
+   itself**: the support of a \(\pm1\)-valued, Frobenius-odd
+   \(\lambda_{\min}\)-eigenfunction of support at most \(q+3\) lies on a Baer subline.
+   Supporting evidence: the known minimum-support eigenfunction, of support \(q+1\), is
+   supported exactly on one, and the coboundary identity is precisely why.  The general
+   second-minimum problem is open in the Paley literature, but the \(\pm1\) and
    Frobenius-odd hypotheses make this a much smaller target.
-2. **Complete-mapping endgame (best track record).**  This is what closed the
-   saturated-external branch: a complete mapping of the cyclic square group, a group-sum
-   obstruction removing one residue class, then a genus-one character sum and Hasse's
-   bound leaving three fields.  Theorem 5 supplies the internal analogue — \((q+1)/2\)
-   derangements indexed by directions, with \(\sigma_{c^{-1}}=\sigma_c^{-1}\).  The
-   missing step is to compute them algebraically rather than combinatorially; the cycle
-   structure of \(\sigma_c\sigma_{c'}^{-1}\) is a field-arithmetic invariant not yet
-   extracted.  Output would be an explicit finite list of \(q\), which is what actually
-   replaces a census.
+2. **Complete-mapping endgame — algebraic computation DONE, obstruction not extracted.**
+   This is what closed the saturated-external branch: a complete mapping of the cyclic
+   square group, a group-sum obstruction removing one residue class, then a genus-one
+   character sum and Hasse's bound leaving three fields.  Theorem 5 supplies the internal
+   analogue — \((q+1)/2\) derangements indexed by directions, with
+   \(\sigma_{c^{-1}}=\sigma_c^{-1}\).  The twenty-sixth pass computed them algebraically
+   (Theorem 7): each is an equality of two \(\mathbb F_q\)-linear functionals, giving
+   scalar coordinates with \(X_c=\rho(c)X_{c^{-1}}\).  That yielded Theorem 8 — all mixed
+   sums rational below level \((q+1)/2\), for every odd prime power — but **no cycle
+   structure invariant**, and it showed the wall is a dimension count: a one-parameter
+   direction family carries only \(|G|=(q+1)/2\) linear conditions, which is exactly where
+   the twenty-fourth pass's tower also stopped.  Any continuation needs a *joint*
+   invariant of two coordinates \((x_c,x_{c'})\), not another symmetric function of one.
 3. **Rédei-type direction theorem (highest leverage — serves both open branches).**
    Theorem 5 says the \(q+3\) support points meet every line in \((q+1)/2\) of the
    \(q+1\) directions in zero or two points: a point set determining few directions with
@@ -88,7 +108,9 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty-five research passes complete; the theorem is **not** proved. Reports:
+Twenty-six research passes complete; the theorem is **not** proved. Reports:
+`notes/2026-08-02-c756-baer-subline-containment.md` and
+`notes/2026-08-02-c756-direction-coordinatization.md` and
 `notes/2026-08-02-c756-crown-reformulation-and-line-case.md` and
 `notes/2026-08-02-c756-paley-eigenfunction-support-literature.md`, and
 `notes/2026-08-02-c756-clique-orbit-crown-check.md`, and
@@ -125,9 +147,12 @@ Branch ledger:
 - **saturated-internal — reduced to one clique statement, still open:** coherent systems
   are exactly induced crown graphs in the Paley graph of order \(q^2\); the four-frame
   over \(\mathbb F_5\) is the only example, unconditionally, for every odd prime power
-  \(q\le151\); line-contained systems force
-  \(q=5\) for all \(q\); and the remaining uniform gate is the crown-restricted case
-  of the Baker–Ebert–Hemmeter–Woldar gap conjecture;
+  \(q\le151\); systems contained in **any** Baer subline force \(q=5\) for all \(q\)
+  (line case Theorem 2, circle case Theorem 6, both exact and prime-power-general); all
+  mixed sums are rational below level \((q+1)/2\) for every odd prime power (Theorem 8);
+  and the remaining uniform gate is the crown-restricted case of the
+  Baker–Ebert–Hemmeter–Woldar gap conjecture, or equivalently the Baer-subline stability
+  statement, which now suffices on its own;
 - **nonsaturated — open for \(\delta\ge2\):** \(\delta=0,1\) are closed, while the
   direct Segre, global-moment, raw-subresultant, and dual-pencil low-degree norm repairs
   fail; the three exceptional missing-set kernels are smooth symmetry-specific curves
@@ -581,6 +606,47 @@ What the crown-reformulation and affine-line pass (twenty-fifth) adds:
   of the crown; every published stability theorem fails because Paley sits at edge
   density exactly \(1/2\).
 
+What the Baer-subline and coordinatization pass (twenty-sixth) adds:
+
+- **Theorem 6, containment.**  On the norm-one circle, \(\chi(c-c')=\delta\lambda(c)\lambda(c')\)
+  where \(\lambda\) is the order-two character of the circle group; this is a one-line
+  rederivation of the Goryainov–Kabanov–Shalaginov–Valyuzhenich lemma that the circle
+  induces \(K_{m,m}\), read as a coboundary rather than as a bipartite graph.  Condition
+  (A) alone then forces \(\chi(a)=1\) and a single \(\lambda\)-coset, of size
+  \((q+1)/2<(q+3)/2\).  Since every Baer subline missing \(\infty\) is \(aC+b\) — the
+  orbit count \(q^2(q-1)\) matches the subline count exactly — no coherent system lies on
+  one, for any odd prime power;
+- with Theorem 2 this is the unified statement gate 1 asked for, and it upgrades the
+  stability conjecture to sufficient on its own;
+- the bound is **sharp**, and the extremal configuration is a full \(\lambda\)-coset.
+  That derives the shape of the published Baker–Ebert–Hemmeter–Woldar cliques
+  \(S_j=Q_j\cup\{0\}\) rather than importing it: a size-\((q+3)/2\) clique built from a
+  circle must be a full coset plus exactly one point off the circle;
+- empirically, once condition (B) is imposed the maximum inside a circle collapses from
+  \((q+1)/2\) to \(2,3,4,4,4,5,5\) at \(q\le23\), apparently \(O(\sqrt q)\).  Recorded as
+  structure only: proving it needs a character-sum clique bound, whose \(\sqrt q\) tail
+  fails exactly at small \(q\);
+- **Theorem 7, linearity.**  \(\operatorname{dir}(z-w^q)=c\) iff \(\varphi_c(z)=\psi_c(w)\)
+  for \(\varphi_c(z)=z^q-cz\), \(\psi_c(z)=z-cz^q\), both \(\mathbb F_q\)-linear with
+  one-dimensional kernels \(L_c,L_{c^{-1}}\) and common image line \(M_c\).  Fixing
+  generators gives scalar coordinates \(x_c:Z\to\mathbb F_q\), injective on \(Z\) by (A),
+  and every Theorem 5 matching becomes the set identity \(X_c=\rho(c)X_{c^{-1}}\);
+- **Theorem 8, mixed moments.**  Comparing \(m\)-th power sums of that identity collapses
+  to \(\sum_r\binom mr(-1)^rc^rN_r=0\) with \(N_r=M_{r,m-r}-M_{r,m-r}^q\), a degree-\(m\)
+  polynomial vanishing on all \(|G|=(q+1)/2\) directions.  Hence all mixed sums
+  \(M_{r,m-r}=\sum_iz_i^r(z_i^q)^{m-r}\) are rational for \(m<(q+1)/2\), for **every odd
+  prime power**.  This reproves the twenty-fourth pass's digit tower without the Lucas
+  argument, extends it from primes to prime powers and from pure to mixed sums, and
+  explains its critical level as the direction count rather than as arithmetic.  At
+  \(m=1\) it gives \(S=\sum z_i\in\mathbb F_q\), so \(S=0\) is a free normalization;
+- **negative, and load-bearing for routing:** no cycle-structure obstruction was
+  extracted, and the dimension count shows why — a one-parameter direction family supplies
+  only \(|G|\) linear conditions, so gate 2's wall and the digit tower's wall are the same
+  wall.  Continuation requires a joint invariant of two coordinates \((x_c,x_{c'})\);
+- **newly identified lever:** gate 1 uses only the independence half of the crown and
+  gate 2 only the bipartite half.  No argument in the branch couples them, and the two
+  \(q=5\) frames are precisely the configurations extremal for both at once.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -622,9 +688,10 @@ Two independent uniform obstructions are still required:
 The old secant-pencil and association-scheme candidates are superseded.  The active
 saturated-internal gate is now stated in Paley-graph terms: prove that no clique of
 size \((q+3)/2\) in \(P(q^2)\) is completely joined, outside a perfect matching, to its
-Frobenius image.  The affine-line configurations and the two published second-largest
-clique orbits are closed; what remains is the crown-restricted case of the
-Baker–Ebert–Hemmeter–Woldar gap conjecture.  The composition normal form
+Frobenius image.  Every Baer-subline configuration — affine line and circle alike — and
+the two published second-largest clique orbits are closed; what remains is the
+crown-restricted case of the Baker–Ebert–Hemmeter–Woldar gap conjecture, or equivalently
+the Baer-subline stability statement, which since the twenty-sixth pass suffices alone.  The composition normal form
 (\(G=(R-\gamma)(R-\gamma^q)\), proved for every coherent system over prime \(q\)) is
 retained as the fallback route.
 The nonsaturated branch has no bounded per-line algebraic-compression gate left.  Its clean active
