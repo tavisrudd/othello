@@ -1,40 +1,44 @@
-# Verification map
+# Evidence supplement
 
-The initial manuscript imports frozen results from these atomic bundles:
+This directory is the paper-local reproducibility package for the finite and
+symbolic claims used by the manuscript. The human orbit, rank, and
+determinant-line proofs remain primary. The supplement checks the balanced
+census, exchange-sector values, anomaly filter, decoder, and optical
+compilation.
 
-- `notes/2026-08-01-c718-golden-boson-fermion-complement.*` for the permanent
-  obstruction, symmetric/exterior-cube values, and balanced census;
-- `notes/2026-08-01-c719-golden-six-mode-demonstrator.*` for the exact mesh,
-  thresholds, shot budgets, and simplex schedules;
-- `notes/2026-07-31-c715-golden-anomaly-inverse.*` for the rational filter,
-  amplitude normalization, and exact success costs.
+The publication-facing files have mathematical names only. Internal workflow
+identifiers, private reports, and repository-external paths are not part of
+this package.
 
-The paper-local checker verifies the three source manifests, reads their
-canonical certificates, and independently recomputes the displayed rational
-identities and finite decoder checks using only the Python standard library.
-Run from the repository root:
+Run the compact standard-library gate from the paper directory:
 
-    python3 papers/golden-quantum-statistics/verification/check_imports.py --check
+```text
+python3 verification/verify.py --check
+```
 
-or run the complete paper gate:
+Run the three generators and their independent replays in the pinned symbolic
+environment with:
 
-    make -C papers/golden-quantum-statistics check
+```text
+make verify-sources
+```
 
-The paper-local `uv.lock` pins SymPy for the C718 symbolic generator. To
-regenerate all three imported atomic certificates and run their independent
-replays in that environment, use:
+The evidence bundles are:
 
-    make -C papers/golden-quantum-statistics verify-sources
+- `evidence/anomaly_inverse.py`, its canonical JSON certificate, and
+  `evidence/anomaly_inverse_replay.py`;
+- `evidence/boson_fermion_complement.py`, its canonical JSON certificate, and
+  `evidence/boson_fermion_complement_replay.py`; and
+- `evidence/six_mode_demonstrator.py`, its canonical JSON certificate, and
+  `evidence/six_mode_demonstrator_replay.py`.
 
-The generated `c767-import-certificate.json` records the imported values,
-source hashes, and trust classification. `SHA256SUMS` covers the paper-local
-checker and certificate. Regenerate only after an intentional source-bundle
-change:
+`evidence_certificate.json` extracts exactly the claims used in the paper,
+including the six decoder words, full-precision optical netlist, and the
+separate reconstruction errors for full-precision and six-decimal angles.
+`evidence_manifest.json` pins the byte count and SHA-256 hash of every
+load-bearing paper-local file. The release verifier also rejects internal
+workflow identifiers and private source paths anywhere in the exported
+filenames or text files.
 
-    python3 papers/golden-quantum-statistics/verification/check_imports.py --write
-
-The source generators and their independent replays remain authoritative for
-the internal algebra of each atomic bundle. The C767 checker verifies their
-hashes and the claims used by this paper; it does not reimplement their full
-symbolic derivations. C768 owns the full-text literature record and
-citation-depth ledger. No priority claim is licensed by this evidence surface.
+The checker does not certify experimental feasibility, source availability,
+or literature priority. Those remain empirical or bibliographic inputs.

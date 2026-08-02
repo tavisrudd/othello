@@ -13,15 +13,15 @@ lint:
 	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
 
 verify:
-	python3 verification/check_imports.py --check
+	python3 verification/verify.py --check
 
 verify-sources:
-	$(UV) run python ../../notes/2026-07-31-c715-golden-anomaly-inverse.py --check
-	$(UV) run python ../../notes/2026-07-31-c715-golden-anomaly-inverse-replay.py
-	$(UV) run python ../../notes/2026-08-01-c718-golden-boson-fermion-complement.py --check
-	$(UV) run python ../../notes/2026-08-01-c718-golden-boson-fermion-complement-replay.py
-	$(UV) run python ../../notes/2026-08-01-c719-golden-six-mode-demonstrator.py --check
-	$(UV) run python ../../notes/2026-08-01-c719-golden-six-mode-demonstrator-replay.py
+	$(UV) run python verification/evidence/anomaly_inverse.py --check
+	$(UV) run python verification/evidence/anomaly_inverse_replay.py
+	$(UV) run python verification/evidence/boson_fermion_complement.py --check
+	$(UV) run python verification/evidence/boson_fermion_complement_replay.py
+	$(UV) run python verification/evidence/six_mode_demonstrator.py --check
+	$(UV) run python verification/evidence/six_mode_demonstrator_replay.py
 
 golden_quantum_statistics.pdf: $(SOURCE)
 	python3 ../scripts/lint_tex_spacing.py $(SOURCE)

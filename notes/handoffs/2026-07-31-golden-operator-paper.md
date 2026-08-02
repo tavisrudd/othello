@@ -349,6 +349,21 @@ portfolio.  In particular:
   final local artifact; the user owns live posting and the Clebsch forward
   reference.  Report:
   `notes/2026-08-01-c772-golden-quantum-statistics-referee-revision.md`.
+- C773 is complete.  The paper-local evidence package is standalone and uses
+  publication-facing mathematical filenames throughout; its release gate
+  rejects internal task identifiers and private report paths.  The supplement
+  includes every generator, canonical certificate, independent replay, full
+  decoder word, and the full-precision optical netlist.  The manuscript
+  distinguishes the six-decimal table's `6.82e-7` reconstruction error from
+  the full-precision `1.14e-16` error, prints the three-cut decoder, numbers the
+  audit-critical equations, expands the balanced trace calculation, and fixes
+  the fidelity convention.  The warning-free paper is thirteen pages.  Use
+  only the semantic artifact `golden-quantum-statistics-referee-r2-revised`.
+  On the next cold-referee round, give the referee access to the Clebsch paper
+  repositories under `~/src/math-papers/` and instruct it not to treat public
+  posting or public-locator availability as a concern; theorem identity,
+  marking, normalization, and citation accuracy remain in scope.  Report:
+  `notes/2026-08-01-c773-golden-referee-r2-repairs.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
   C735's operator-first architecture.  The genuinely source-free signed
@@ -463,13 +478,16 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-None.  The C772 PRA package is technically ready; live posting and the Clebsch
-forward reference are user-owned.
+None.  The revised PRA package is technically ready for the next local referee
+round; live posting and the Clebsch forward reference are user-owned.
 
 ## Recommended order
 
-1. Preserve `golden-quantum-statistics-c772-final`.  The user will post it,
-   assign the live identifiers, and add the Clebsch forward reference.
+1. Preserve `golden-quantum-statistics-referee-r2-revised`.  On the next cold
+   read, expose the related repositories under `~/src/math-papers/` and exclude
+   public-access availability from the referee's remit.  The user will post the
+   accepted package, assign live identifiers, and add the Clebsch forward
+   reference.
 2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 

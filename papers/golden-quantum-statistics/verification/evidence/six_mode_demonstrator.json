@@ -1,0 +1,507 @@
+{
+  "coherent_sign_readout": {
+    "balanced_operator_norm_error_for_sign": 0.11925695879998878,
+    "chiral_smallest_operator_norm_error_for_10pct_amplitude": 0.0004717857710768787,
+    "chiral_smallest_operator_norm_error_for_sign": 0.004717857710768787,
+    "claim_boundary": "recovers the determinant sign relative to calibrated port phases; it is not a direct many-body phase measurement",
+    "method": "phase-sensitive coherent-light characterization of each 6x6 transfer, followed by the calibrated real 3x3 determinant",
+    "settings": "six single-input intensity settings plus five reference-input phase scans per copy"
+  },
+  "controls": {
+    "balanced": {
+      "calibrated_boson_collision_free_probabilities": [
+        {
+          "hours_at_1_accepted_trial_per_second": 37.56944444444444,
+          "minutes_at_100_accepted_trials_per_second": 22.541666666666668,
+          "probability": "16/3125",
+          "trials_for_10pct_relative_familywise_95pct": 135250
+        },
+        {
+          "hours_at_1_accepted_trial_per_second": 16.59027777777778,
+          "minutes_at_100_accepted_trials_per_second": 9.954166666666667,
+          "probability": "36/3125",
+          "trials_for_10pct_relative_familywise_95pct": 59725
+        },
+        {
+          "hours_at_1_accepted_trial_per_second": 9.2475,
+          "minutes_at_100_accepted_trials_per_second": 5.5485,
+          "probability": "64/3125",
+          "trials_for_10pct_relative_familywise_95pct": 33291
+        }
+      ],
+      "fermion_amplitude_absolute": 0.35777087639996635,
+      "fermion_probability": {
+        "hours_at_1_accepted_trial_per_second": 1.3172222222222223,
+        "minutes_at_100_accepted_trials_per_second": 0.7903333333333333,
+        "probability": "16/125",
+        "trials_for_10pct_relative_familywise_95pct": 4742
+      },
+      "intrinsic_uniform_boson_average": "313/1250",
+      "path_mask": "any 3+3 sign mask; ten projective masks and their complements"
+    },
+    "chiral": {
+      "charge_vector": [
+        11,
+        -10,
+        -8,
+        5,
+        4,
+        -2
+      ],
+      "common_amplitude_scale_kappa": "72/455",
+      "fermion_probabilities": [
+        {
+          "hours_at_1_accepted_trial_per_second": 31.713055555555556,
+          "minutes_at_100_accepted_trials_per_second": 19.027833333333334,
+          "probability": "156816/25878125",
+          "trials_for_10pct_relative_familywise_95pct": 114167
+        },
+        {
+          "hours_at_1_accepted_trial_per_second": 38.413333333333334,
+          "minutes_at_100_accepted_trials_per_second": 23.048,
+          "probability": "5184/1035125",
+          "trials_for_10pct_relative_familywise_95pct": 138288
+        },
+        {
+          "hours_at_1_accepted_trial_per_second": 60.129444444444445,
+          "minutes_at_100_accepted_trials_per_second": 36.077666666666666,
+          "probability": "82944/25878125",
+          "trials_for_10pct_relative_familywise_95pct": 216466
+        },
+        {
+          "hours_at_1_accepted_trial_per_second": 154.2325,
+          "minutes_at_100_accepted_trials_per_second": 92.5395,
+          "probability": "1296/1035125",
+          "trials_for_10pct_relative_familywise_95pct": 555237
+        },
+        {
+          "hours_at_1_accepted_trial_per_second": 241.09694444444443,
+          "minutes_at_100_accepted_trials_per_second": 144.65816666666666,
+          "probability": "20736/25878125",
+          "trials_for_10pct_relative_familywise_95pct": 867949
+        },
+        {
+          "hours_at_1_accepted_trial_per_second": 964.9675,
+          "minutes_at_100_accepted_trials_per_second": 578.9805,
+          "probability": "5184/25878125",
+          "trials_for_10pct_relative_familywise_95pct": 3473883
+        }
+      ],
+      "path_filter": [
+        "1",
+        "7/13",
+        "1/7",
+        "-1/5",
+        "-1/2",
+        "-1"
+      ]
+    }
+  },
+  "literature_benchmarks": {
+    "antisymmetric_qutrit_resource": "Goyal et al. 2014 give a two-beam-splitter preparation proposal; no experiment located",
+    "fermion_emulation": "Matthews et al. 2013 demonstrated two particles and proposed N-particle/N-copy emulation",
+    "processor": "Somhorst et al. 2023 used three photons, a universal 12-mode SiN mesh, 54-60% transmission, and about 90% SNSPD efficiency",
+    "three_qutrit_entanglement": "Hu et al. 2025 report GHZ fidelity 0.910(6) and about 1.1 Hz fourfold coincidences",
+    "transfer_tomography": "Rahimi-Keshari et al. 2013 demonstrated coherent phase characterization of a 6x6 optical network"
+  },
+  "logical_network": {
+    "balanced_direct_mesh_count_per_copy": 15,
+    "base_O_columns": "[Q_+,Q_-] in the frozen Golden pivot gauge",
+    "base_O_input_phase_signs": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "base_O_input_to_output_givens": [
+      {
+        "modes_zero_based": [
+          4,
+          5
+        ],
+        "theta_radians": 2.3282952903420293
+      },
+      {
+        "modes_zero_based": [
+          3,
+          4
+        ],
+        "theta_radians": -3.141592653589793
+      },
+      {
+        "modes_zero_based": [
+          4,
+          5
+        ],
+        "theta_radians": 2.3282952903420293
+      },
+      {
+        "modes_zero_based": [
+          2,
+          3
+        ],
+        "theta_radians": -1.5707963267948968
+      },
+      {
+        "modes_zero_based": [
+          3,
+          4
+        ],
+        "theta_radians": -1.5707963267948968
+      },
+      {
+        "modes_zero_based": [
+          4,
+          5
+        ],
+        "theta_radians": -1.0172219678978514
+      },
+      {
+        "modes_zero_based": [
+          1,
+          2
+        ],
+        "theta_radians": -1.5707963267948966
+      },
+      {
+        "modes_zero_based": [
+          2,
+          3
+        ],
+        "theta_radians": -2.356194490192345
+      },
+      {
+        "modes_zero_based": [
+          3,
+          4
+        ],
+        "theta_radians": -0.9553166181245093
+      },
+      {
+        "modes_zero_based": [
+          4,
+          5
+        ],
+        "theta_radians": 4.80740671595891e-17
+      },
+      {
+        "modes_zero_based": [
+          0,
+          1
+        ],
+        "theta_radians": -0.7853981633974483
+      },
+      {
+        "modes_zero_based": [
+          1,
+          2
+        ],
+        "theta_radians": -1.1071487177940904
+      },
+      {
+        "modes_zero_based": [
+          2,
+          3
+        ],
+        "theta_radians": -1.0471975511965976
+      },
+      {
+        "modes_zero_based": [
+          3,
+          4
+        ],
+        "theta_radians": -0.9553166181245093
+      },
+      {
+        "modes_zero_based": [
+          4,
+          5
+        ],
+        "theta_radians": 2.356194490192345
+      }
+    ],
+    "base_O_mzi_count": 15,
+    "base_O_numeric": [
+      [
+        0.7071067811865476,
+        0.0,
+        0.0,
+        0.7071067811865476,
+        0.0,
+        0.0
+      ],
+      [
+        0.31622776601683794,
+        0.6324555320336759,
+        0.0,
+        -0.31622776601683794,
+        0.6324555320336759,
+        0.0
+      ],
+      [
+        0.31622776601683794,
+        -0.5116672736016927,
+        0.3717480344601845,
+        -0.31622776601683794,
+        0.19543950758485482,
+        0.6015009550075456
+      ],
+      [
+        0.31622776601683794,
+        -0.5116672736016927,
+        -0.3717480344601845,
+        -0.31622776601683794,
+        0.19543950758485482,
+        -0.6015009550075456
+      ],
+      [
+        -0.31622776601683794,
+        -0.19543950758485482,
+        0.6015009550075456,
+        0.31622776601683794,
+        0.5116672736016927,
+        -0.3717480344601845
+      ],
+      [
+        -0.31622776601683794,
+        -0.19543950758485482,
+        -0.6015009550075456,
+        0.31622776601683794,
+        0.5116672736016927,
+        0.3717480344601845
+      ]
+    ],
+    "filtered_svd_mesh_count_per_copy": 30,
+    "filtered_variable_attenuators_per_copy": 6,
+    "formula": "U_T(x)=O_T^T diag(x) O_T; K_T is rows 3..5, columns 0..2",
+    "givens_convention": "[[cos(theta),sin(theta)],[-sin(theta),cos(theta)]] on the named adjacent modes",
+    "photonic_emulation_copies": 3,
+    "physical_modes_if_spatially_parallel": 18,
+    "protocol_transport": "surround the base program by the recorded path permutation; odd representatives exchange the two three-port halves and transpose K",
+    "reconstruction_max_entry_error": 1.1371144305660282e-16,
+    "six_protocol_path_permutations": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        5,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        4,
+        3,
+        5
+      ],
+      [
+        0,
+        1,
+        2,
+        4,
+        5,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        5,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        5,
+        4,
+        3
+      ]
+    ]
+  },
+  "robustness": {
+    "determinant_lipschitz_bound": "for contraction blocks, |det(K+E)-det(K)| <= 3 ||E||_2",
+    "diagonal_coherent_phase": "preserves the two polynomial identities over C; destroys a literal real sign unless phase-referenced",
+    "diagonal_real_loss": "preserves sum Z_T=sum Z_T^3=0 exactly but moves the target projective point",
+    "mesh_or_copy_mismatch": "breaks the shared Golden carrier; the linear residual sum Z_T is the first falsifiable null",
+    "uniform_amplitude_transmission_lambda": "amplitudes scale as lambda^3 and probabilities as lambda^6"
+  },
+  "schema": "golden-six-mode-demonstrator-v1",
+  "simplex_decoder": {
+    "cut_representatives": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        0,
+        1,
+        5
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        4
+      ],
+      [
+        0,
+        2,
+        5
+      ],
+      [
+        0,
+        3,
+        4
+      ],
+      [
+        0,
+        3,
+        5
+      ],
+      [
+        0,
+        4,
+        5
+      ]
+    ],
+    "example_five_cycle_zero_based": [
+      0,
+      3,
+      4,
+      7,
+      9
+    ],
+    "example_three_cut_classifier_zero_based": [
+      0,
+      1,
+      2
+    ],
+    "guaranteed_sign_error_correction_full_ten": 2,
+    "matched_filter": "argmax_T <y,r_T>",
+    "number_of_three_cut_classifiers": 60,
+    "orientation_boundary": "the relative word does not distinguish C from -C",
+    "pairwise_hamming_distance": 6,
+    "six_words": [
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      [
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ]
+    ]
+  },
+  "state_quality": {
+    "benchmark_fourfold_rate_hz": 1.1,
+    "benchmark_three_qutrit_fidelity": 0.91,
+    "mixture_fidelity_needed_for_10pct_balanced_probability_bias": 0.9872,
+    "mixture_fidelity_needed_for_10pct_smallest_chiral_probability_bias": 0.9999799676367589,
+    "worst_case_fidelity_needed_for_10pct_balanced_probability_bias": 0.99983616,
+    "worst_case_fidelity_needed_for_10pct_smallest_chiral_probability_bias": 0.9999999995987044,
+    "worst_case_probability_bias_from_fidelity": 0.29999999999999993
+  },
+  "trust_boundary": {
+    "assumption": "reported GHZ resource metrics are a benchmark, not evidence that the antisymmetric state has been built",
+    "exact": "probabilities, charge scaling, simplex words, distance and decoder schedules",
+    "numerical": "pivot-frame Givens angles and normal-approximation planning counts"
+  },
+  "verdict": {
+    "blocking_component": "no demonstrated high-fidelity totally antisymmetric three-photon qutrit source",
+    "bounded_precursor": "GO for coherent transfer tomography plus ordinary three-boson control",
+    "full_experiment": "NO-GO on demonstrated 2026 photonic resources"
+  }
+}

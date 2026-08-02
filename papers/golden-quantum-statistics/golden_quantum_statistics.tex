@@ -172,14 +172,16 @@ is orthogonal.  Values \(|x_i|<1\) describe a diagonal filter followed by
 postselection.
 
 The six determinant amplitudes satisfy
-\[
+\begin{equation}
+\label{eq:golden-amplitude}
  Z_T(x)=\varepsilon_T\,10\sqrt5\det K_T(x),
  \qquad \varepsilon_T\in\{\pm1\},
-\]
+\end{equation}
 with signs fixed by the marked orientations.  They obey
-\[
+\begin{equation}
+\label{eq:segre-nulls}
  \sum_T Z_T(x)=0,\qquad \sum_T Z_T(x)^3=0.
-\]
+\end{equation}
 These are the Segre equations in Joubert coordinates.  The equations and the
 outer \(S_6\)-action are classical invariant theory
 \cite{HowardMillsonSnowdenVakil}; the point used below is their realization as
@@ -346,9 +348,25 @@ Let \(D=D_x\) and \(P_{T,-}=(I-C_T/\sqrt5)/2\).  Since \(D^2=I\),
 \[
  H=Q_{T,+}^{\mathsf T}DP_{T,-}DQ_{T,+}.
 \]
-For \(C_0\) displayed in Section~2, direct multiplication for the ten
-projective balanced supports (choose the representative containing path
-zero) gives
+Substituting \(P_{T,\pm}=(I\pm C_T/\sqrt5)/2\) gives
+\begin{equation}
+\label{eq:balanced-first-trace}
+ \operatorname{tr}H
+ =\frac14\left(6-\frac15\operatorname{tr}(C_TDC_TD)\right).
+\end{equation}
+Because \(C_{T,ij}^2=1\) off the diagonal,
+\(\operatorname{tr}(C_TDC_TD)=(\sum_i x_i)^2-6=-6\) for a balanced
+control.  For the displayed \(C_0\), direct multiplication on the ten
+projective balanced supports also gives
+\(\operatorname{tr}((C_0DC_0D)^2)=-42\).  Expanding the four projectors in
+\(\operatorname{tr}(P_+DP_-DP_+DP_-D)\) therefore yields
+\[
+ \operatorname{tr}(H^2)
+ =\frac1{16}\left(18-\frac45\operatorname{tr}(C_0DC_0D)
+ +\frac1{25}\operatorname{tr}((C_0DC_0D)^2)\right)
+ =\frac{33}{25}.
+\]
+Together with Eq.~\eqref{eq:balanced-first-trace}, this proves
 \[
  \operatorname{tr}H
  =\operatorname{tr}(P_{T,+}DP_{T,-}D)=\frac95,
@@ -366,11 +384,12 @@ and the triangle cubic of the same displayed matrix has
 Complementing a support negates \(K_T\) and leaves \(H\) fixed.  Transport by
 \(P_T\) merely permutes the supports, so these identities hold for all six
 protocols.  Newton's identities give
-\[
+\begin{equation}
+\label{eq:balanced-characteristic-polynomial}
  \det(\lambda I-H)
  =\lambda^3-\frac95\lambda^2+\frac{24}{25}\lambda-\frac{16}{125}
- =\left(\lambda-\frac15\right)\left(\lambda-\frac45\right)^2,
-\]
+ =\left(\lambda-\frac15\right)\left(\lambda-\frac45\right)^2.
+\end{equation}
 which proves the displayed spectrum without an exhaustive numerical search.
 The complete and elementary symmetric functions then give
 \[
@@ -470,6 +489,26 @@ membership is known.  The five-cycle
 \(012,015,023,034,045\) jointly tests the common Golden magnitudes and
 classifies the protocol.  These are fixed schedules for the transported
 marking above, not protocol-dependent choices.
+
+Order the protocols by the one-line forms of their frozen path permutations.
+In the common calibrated orientation, the complete three-cut decoder is
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+protocol & \(P_T\) & signs at \(012,013,014\)\\
+\midrule
+\(T_0\)&012345&\(-,-,-\)\\
+\(T_1\)&012354&\(-,-,+\)\\
+\(T_2\)&012435&\(-,+,+\)\\
+\(T_3\)&012453&\(+,-,-\)\\
+\(T_4\)&012534&\(+,+,-\)\\
+\(T_5\)&012543&\(+,+,+\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+The supplemental certificate records all ten signs for every row.  Reversing
+the common orientation negates every signature; it does not change the
+relative classifier once that orientation is calibrated.
 
 The universal complementarity identities for determinants and permanents of
 Jabbour and Cerf~\cite{JabbourCerf} provide a useful calibrated consistency
@@ -581,8 +620,10 @@ calibration or the device rather than acting as an unnoticed experimental
 gauge.
 In the frozen pivot gauge, input phases
 \(S=\operatorname{diag}(1,1,1,1,1,-1)\), followed in order by the cells below,
-reconstruct \(O_T\) to maximum entry error below \(2\times10^{-14}\).  Mode
-labels are zero-based and angles are in radians.
+reconstruct \(O_T\).  The table rounds angles to six decimal places and has
+maximum entry error below \(7\times10^{-7}\).  The machine-readable
+full-precision netlist in the supplemental certificate has error below
+\(2\times10^{-14}\).  Mode labels are zero-based and angles are in radians.
 
 \begin{center}
 \small
@@ -659,9 +700,10 @@ probabilities by \(\lambda^6\), while \(\rho_1\) and \(\rho_3\) remain
 unchanged.
 
 For two contraction blocks \(K\) and \(K+E\),
-\[
+\begin{equation}
+\label{eq:determinant-stability}
  |\det(K+E)-\det K|\leq3\lVert E\rVert_2.
-\]
+\end{equation}
 Indeed \(A(t)=K+tE\) is a contraction for \(0\leq t\leq1\), and
 \[
  \left|\frac{d}{dt}\det A(t)\right|
@@ -684,12 +726,13 @@ coverage of all six probabilities.  It excludes source preparation,
 coupling, propagation, and detector loss; these enter only when an accepted-
 trial rate is converted to laboratory time.
 With Bonferroni allocation over six two-sided intervals, put
-\[
+\begin{equation}
+\label{eq:shot-budget}
  z=\Phi^{-1}\left(1-\frac{0.05}{12}\right),\qquad
  n(p)=\left\lceil
  \frac{z^2(1-p)}{0.1^2p}
  \right\rceil .
-\]
+\end{equation}
 The table applies this formula to each ideal probability and rounds upward.
 \begin{center}
 \begin{tabular}{lrrr}
@@ -731,9 +774,16 @@ are \(F\geq0.999836\) and \(F\geq0.9999999996\).  A characterized noise model
 could relax these bounds, but the conclusion would then be model-dependent.
 For the mixture model, an event probability changes by at most \(1-F\), so
 ten-percent relative bias at ideal probability \(p\) requires
-\(F\geq1-0.1p\).  With fidelity alone, trace distance bounds the probability
-bias by \(\sqrt{1-F}\); the corresponding requirement is
-\(F\geq1-0.01p^2\).  Substitution of \(p=16/125\) and
+\(F\geq1-0.1p\).  Here
+\(F=(\operatorname{tr}\sqrt{\sqrt\rho\,\sigma\sqrt\rho})^2\) is the squared
+Uhlmann fidelity.  With fidelity alone, trace distance bounds the probability
+bias by \(\sqrt{1-F}\).  Thus the two generic gates are
+\begin{equation}
+\label{eq:source-fidelity-gates}
+ F\geq1-0.1p\quad\text{(mixture model)},\qquad
+ F\geq1-0.01p^2\quad\text{(fidelity only)}.
+\end{equation}
+Substitution of \(p=16/125\) and
 \(p=5184/25878125\) gives the four displayed gates.
 
 \section{Discussion}
@@ -771,23 +821,24 @@ The Boolean rank boundary, symmetric-function identities, orbit theorem, and
 distance-six correction radius are human derivations.  The twenty-mask census,
 three calibrated permanent values, rational filtered probabilities, six sign
 words, and fifteen-cell compilation are certificate-checked computations.
-Their three atomic source bundles have exact generators, SHA-256 manifests,
-and independent replays.
+Their three atomic source bundles have exact generators and independent
+replays; one paper-local manifest pins every load-bearing file.
 
 The paper-local standard-library checker verifies the source hashes and
 independently recomputes every imported rational identity, census total,
 Hamming distance, and schedule used above.  Run
 \begin{verbatim}
 cd papers/golden-quantum-statistics
-python3 verification/check_imports.py --check
+python3 verification/verify.py --check
 \end{verbatim}
 The pinned symbolic source environment and all independent replays run with
 \begin{verbatim}
 make -C papers/golden-quantum-statistics verify-sources
 \end{verbatim}
-The compact import certificate and its manifest are stored beside the checker.
-They do not certify experimental feasibility, source availability, or
-literature priority.
+The compact evidence certificate, byte-and-hash manifest, generators, and
+independent replays are all stored inside the supplemental package.  They do
+not certify experimental feasibility, source availability, or literature
+priority.
 
 \begingroup
 \raggedright

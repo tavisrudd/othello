@@ -1,0 +1,469 @@
+{
+  "claims": {
+    "balanced_boolean_boundary": {
+      "nonzero_balanced_masks": 20,
+      "rank_at_most_two_unbalanced_masks": 44
+    },
+    "balanced_exchange_invariants": {
+      "bosonic_uniform_input_average": "313/1250",
+      "e3": "16/125",
+      "h3": "313/125",
+      "h3_minus_e3": "297/125",
+      "s21": "8/5",
+      "squared_singular_values": [
+        "1/5",
+        "4/5",
+        "4/5"
+      ]
+    },
+    "calibrated_boson_census": {
+      "balanced_records": 20,
+      "probability_values": [
+        "16/3125",
+        "36/3125",
+        "64/3125"
+      ],
+      "two_multiset_class_sizes": [
+        8,
+        12
+      ]
+    },
+    "chiral_filter": {
+      "charge_vector": [
+        11,
+        -10,
+        -8,
+        5,
+        4,
+        -2
+      ],
+      "common_amplitude_scale": "72/455",
+      "path_filter": [
+        "1",
+        "7/13",
+        "1/7",
+        "-1/5",
+        "-1/2",
+        "-1"
+      ],
+      "probabilities": [
+        "156816/25878125",
+        "5184/1035125",
+        "82944/25878125",
+        "1296/1035125",
+        "20736/25878125",
+        "5184/25878125"
+      ]
+    },
+    "simplex_decoder": {
+      "all_pairwise_hamming_distances": [
+        6
+      ],
+      "correctable_hard_sign_errors": 2,
+      "cut_representatives": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          4
+        ],
+        [
+          0,
+          2,
+          5
+        ],
+        [
+          0,
+          3,
+          4
+        ],
+        [
+          0,
+          3,
+          5
+        ],
+        [
+          0,
+          4,
+          5
+        ]
+      ],
+      "five_cut_positions_zero_based": [
+        0,
+        3,
+        4,
+        7,
+        9
+      ],
+      "number_of_three_cut_classifiers": 60,
+      "six_words": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "three_cut_positions_zero_based": [
+        0,
+        1,
+        2
+      ],
+      "three_cut_signatures": [
+        [
+          -1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          -1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    "six_mode_compilation": {
+      "base_O_input_phase_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "base_O_input_to_output_givens": [
+        {
+          "modes_zero_based": [
+            4,
+            5
+          ],
+          "theta_radians": 2.3282952903420293
+        },
+        {
+          "modes_zero_based": [
+            3,
+            4
+          ],
+          "theta_radians": -3.141592653589793
+        },
+        {
+          "modes_zero_based": [
+            4,
+            5
+          ],
+          "theta_radians": 2.3282952903420293
+        },
+        {
+          "modes_zero_based": [
+            2,
+            3
+          ],
+          "theta_radians": -1.5707963267948968
+        },
+        {
+          "modes_zero_based": [
+            3,
+            4
+          ],
+          "theta_radians": -1.5707963267948968
+        },
+        {
+          "modes_zero_based": [
+            4,
+            5
+          ],
+          "theta_radians": -1.0172219678978514
+        },
+        {
+          "modes_zero_based": [
+            1,
+            2
+          ],
+          "theta_radians": -1.5707963267948966
+        },
+        {
+          "modes_zero_based": [
+            2,
+            3
+          ],
+          "theta_radians": -2.356194490192345
+        },
+        {
+          "modes_zero_based": [
+            3,
+            4
+          ],
+          "theta_radians": -0.9553166181245093
+        },
+        {
+          "modes_zero_based": [
+            4,
+            5
+          ],
+          "theta_radians": 4.80740671595891e-17
+        },
+        {
+          "modes_zero_based": [
+            0,
+            1
+          ],
+          "theta_radians": -0.7853981633974483
+        },
+        {
+          "modes_zero_based": [
+            1,
+            2
+          ],
+          "theta_radians": -1.1071487177940904
+        },
+        {
+          "modes_zero_based": [
+            2,
+            3
+          ],
+          "theta_radians": -1.0471975511965976
+        },
+        {
+          "modes_zero_based": [
+            3,
+            4
+          ],
+          "theta_radians": -0.9553166181245093
+        },
+        {
+          "modes_zero_based": [
+            4,
+            5
+          ],
+          "theta_radians": 2.356194490192345
+        }
+      ],
+      "givens_convention": "[[cos(theta),sin(theta)],[-sin(theta),cos(theta)]] on the named adjacent modes",
+      "mzi_count": 15,
+      "reconstruction_max_entry_error_full_precision": 1.1371144305660282e-16,
+      "reconstruction_max_entry_error_six_decimal_angles": 6.817741856623982e-07,
+      "six_protocol_path_permutations": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          5,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          4,
+          3,
+          5
+        ],
+        [
+          0,
+          1,
+          2,
+          4,
+          5,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          5,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          5,
+          4,
+          3
+        ]
+      ]
+    }
+  },
+  "evidence_bundles": {
+    "anomaly_inverse": {
+      "verification/evidence/anomaly_inverse.json": {
+        "bytes": 14269,
+        "sha256": "db542716c80d103d97a221b974f160db228c5095d7bb78139f8296bb87216584"
+      },
+      "verification/evidence/anomaly_inverse.py": {
+        "bytes": 19804,
+        "sha256": "38711f5ddaa1b9beeb0f1ec6380fde1268f809901173edd0682095091bd04457"
+      },
+      "verification/evidence/anomaly_inverse_replay.py": {
+        "bytes": 7147,
+        "sha256": "34eaf48a865819afa6fab5a6b7884c77898860edbbd00a5c7b28d6edcc79c971"
+      }
+    },
+    "boson_fermion_complement": {
+      "verification/evidence/boson_fermion_complement.json": {
+        "bytes": 331349,
+        "sha256": "5b3b08c07b50ea349ff7e2eebd76ef64d83589cc68cae6415d0c05251349c2eb"
+      },
+      "verification/evidence/boson_fermion_complement.py": {
+        "bytes": 15375,
+        "sha256": "9fc635ae57613aca9a2e86a26aa095a27a8b7b1cdf815feadc1da66ca30a88ef"
+      },
+      "verification/evidence/boson_fermion_complement_replay.py": {
+        "bytes": 3785,
+        "sha256": "2f9b72876aeb4b659b925d27ff375fdfaeed9c377e355fdb8209722cb8e75283"
+      }
+    },
+    "six_mode_demonstrator": {
+      "verification/evidence/six_mode_demonstrator.json": {
+        "bytes": 12548,
+        "sha256": "74307d6f509a7404a8f94d068944c94bb12c706213d038f64b3e9691d86b700e"
+      },
+      "verification/evidence/six_mode_demonstrator.py": {
+        "bytes": 12998,
+        "sha256": "f8771a9b80b2708285715311a5a87ef9f3318a256615a35473000f3326c1edb3"
+      },
+      "verification/evidence/six_mode_demonstrator_replay.py": {
+        "bytes": 2564,
+        "sha256": "812a9a72ed57f5c65f26f7d58e802b741ce97173a9c32d6c5d4f853ead4c5caf"
+      }
+    }
+  },
+  "schema": "golden-quantum-statistics-evidence-v1",
+  "trust_boundary": {
+    "certificate_checked": [
+      "balanced census and calibrated permanent probabilities",
+      "rational chiral filter, scale, and postselection probabilities",
+      "six sign words, schedules, and pairwise Hamming distance",
+      "six-mode compilation, full-precision netlist, and rounded-table residual"
+    ],
+    "human_derived": [
+      "44 unbalanced masks have rank at most two",
+      "symmetric-function and Schur-Weyl identities",
+      "nearest-word correction radius from distance six"
+    ],
+    "not_certified_here": [
+      "experimental feasibility or source availability",
+      "literature novelty or priority"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "files": {
+    "Makefile": {
+      "bytes": 1315,
+      "sha256": "492902b53d87d3099629053e3c3aca2b980bc01492fa29054b6f461f3ea39b7d"
+    },
+    "golden_quantum_statistics.tex": {
+      "bytes": 40626,
+      "sha256": "486882a1092e09a5f03282a0a9310a7755759aad5fe9f16e10d9d88c675be534"
+    },
+    "pyproject.toml": {
+      "bytes": 168,
+      "sha256": "d58925c8c32e80d8971af330033b085a31857e9be14ff63b70520657ab116203"
+    },
+    "uv.lock": {
+      "bytes": 1756,
+      "sha256": "1e477e1b1f12759445102c654ff14b01d32e392ef9f1ccfc4950d4c47818e5e5"
+    },
+    "verification/EVIDENCE.md": {
+      "bytes": 2634,
+      "sha256": "9e0742c5d5375db9660e041c6b79cb4a0da1a618faeed1dd56b93dfc0bd008b6"
+    },
+    "verification/README.md": {
+      "bytes": 1741,
+      "sha256": "cb7ca9b7f0ac74d7f47e754919112fbf4737b3ac37a73aea3f54395b7af7aad5"
+    },
+    "verification/evidence/anomaly_inverse.json": {
+      "bytes": 14269,
+      "sha256": "db542716c80d103d97a221b974f160db228c5095d7bb78139f8296bb87216584"
+    },
+    "verification/evidence/anomaly_inverse.py": {
+      "bytes": 19804,
+      "sha256": "38711f5ddaa1b9beeb0f1ec6380fde1268f809901173edd0682095091bd04457"
+    },
+    "verification/evidence/anomaly_inverse_replay.py": {
+      "bytes": 7147,
+      "sha256": "34eaf48a865819afa6fab5a6b7884c77898860edbbd00a5c7b28d6edcc79c971"
+    },
+    "verification/evidence/boson_fermion_complement.json": {
+      "bytes": 331349,
+      "sha256": "5b3b08c07b50ea349ff7e2eebd76ef64d83589cc68cae6415d0c05251349c2eb"
+    },
+    "verification/evidence/boson_fermion_complement.py": {
+      "bytes": 15375,
+      "sha256": "9fc635ae57613aca9a2e86a26aa095a27a8b7b1cdf815feadc1da66ca30a88ef"
+    },
+    "verification/evidence/boson_fermion_complement_replay.py": {
+      "bytes": 3785,
+      "sha256": "2f9b72876aeb4b659b925d27ff375fdfaeed9c377e355fdb8209722cb8e75283"
+    },
+    "verification/evidence/six_mode_demonstrator.json": {
+      "bytes": 12548,
+      "sha256": "74307d6f509a7404a8f94d068944c94bb12c706213d038f64b3e9691d86b700e"
+    },
+    "verification/evidence/six_mode_demonstrator.py": {
+      "bytes": 12998,
+      "sha256": "f8771a9b80b2708285715311a5a87ef9f3318a256615a35473000f3326c1edb3"
+    },
+    "verification/evidence/six_mode_demonstrator_replay.py": {
+      "bytes": 2564,
+      "sha256": "812a9a72ed57f5c65f26f7d58e802b741ce97173a9c32d6c5d4f853ead4c5caf"
+    },
+    "verification/evidence_certificate.json": {
+      "bytes": 9202,
+      "sha256": "2ef877e90629eac1b45061dd05ceb09b394bac1702603a905a3443f86784c965"
+    },
+    "verification/verify.py": {
+      "bytes": 13545,
+      "sha256": "3a87d562fdaa6acd0a0c175f344fd4513daafa1438b712ab52902a20f7f8a488"
+    }
+  },
+  "schema": "golden-quantum-statistics-manifest-v1"
+}
