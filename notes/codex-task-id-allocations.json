@@ -2204,8 +2204,17 @@
       "last": 797,
       "purpose": "trade-only reconstruction of the hidden conic-matching carrier and exact B3/H3 classification",
       "sequence": 245
+    },
+    {
+      "count": 1,
+      "first": 798,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 798,
+      "purpose": "classify B3/H3 stabilizer-fixed affine families and their unique secant-product Chow intersections",
+      "sequence": 246
     }
   ],
-  "next_id": 798,
+  "next_id": 799,
   "schema": "codex-task-id-allocations-v1"
 }
