@@ -358,3 +358,194 @@ manuscript's corrected pointer.
 
 Uncommitted: this note and the scratchpad scripts; commit decision left to the lane
 owner along with any of the repairs above.
+
+---
+
+# Coordinator follow-up: grade, incidental findings, venue
+
+Basis for what follows: the six red-team targets above, plus a complete read of
+`sections/01`–`06`, both `07` files, `08-verification-boundary.tex`,
+`09-party-extensions.tex`, the abstract in `main.tex`, and the C804/C807 note stack. Read
+by role only, not line-audited: `10-scalar-certificates.tex`, the `supplement/`
+certificates, and the Lean aggregate. The rigidity core (Section 3 up to the atlas
+theorem) was verified line by line in the red team; the stability half was read closely
+with spot-checks of its key inequalities (the local-generator isometry, the budget-free
+bound's coset counting, the site-contraction constant) but not adversarially exhausted.
+
+## 1. Grade
+
+**As committed today: B+.** Meaning, calibrated to a strong venue: technically correct
+everywhere I checked, with unusually disciplined claim-scoping, but its headline theorem
+sits closer to prior art than the rest of the paper deserves, and the manuscript
+currently under-sells itself at exactly that point.
+
+What is genuinely strong, in order:
+
+- **The atlas classification.** Reducing LU classification of stabilizer AME states to
+  finite symplectic linear algebra with an exact symmetry sequence, and then actually
+  computing with it (the pencil's degree-eight quotient `z` as a complete LU coordinate,
+  the 450-holonomy invariant with its collision analysis) has no precedent at any local
+  dimension — Van den Nest–Dehaene–De Moor's LC-invariant list is a different and weaker
+  kind of object. This, not the rigidity theorem, is the paper's deepest contribution.
+- **The discreteness and stability half.** Finiteness of the product-unitary symmetry
+  group from 2-uniformity alone — any local dimension, no stabilizer structure — with
+  explicit party-count-independent constants, the uniformity-order-controlled radius,
+  the quantized-overlap separation constant `(2−2p^{−1/2})^{1/2}`, and a closed-form
+  decomposition threshold, is clean, self-contained, and per the C807 audit unoccupied at
+  that scope. The `(3.8)` isometry is the kind of identity referees remember.
+- **The logical-phase dichotomy.** Diagonal isoduality ⟺ conic/self-association deciding
+  `SL₂(q)` versus the split torus for transversal logical groups is a genuinely new
+  bridge from nineteenth-century association theory to transversal-gate structure, and
+  the transversal Clifford no-go for the whole `[[2m−1,1,m]]_q` family is a crisp
+  quotable consequence.
+
+What is merely competent: the rigidity theorem's proof mechanics (support squeeze plus
+Jennrich, correctly attributed since commit `a742efca`), the scalar-blindness section (a
+first-fundamental-theorem argument, well executed), the transport divisor and
+party-extension appendices (careful certificate work, appendix-grade).
+
+What a hostile referee attacks first, in order: (i) "Theorem 1 is Rains's 1997 argument
+run over `F_q` after a standard MDS support computation, and its q=2 case has been known
+for twenty years — the paper says so itself." The current concession paragraph invites
+this by ceding more than the mathematics requires (the entire q=2 overlap is the single
+AME(6,2) family, which the manuscript never says). (ii) The missing Chang–Jing citation
+(see finding 1 below) — a referee who knows the 2022 paper will read its absence as
+selective citation next to the freshly added Kruskal chain. (iii) "Three papers stapled
+together": rigidity/atlas, stability theory, and finite-geometry applications each have
+their own introductions-in-miniature, and a 45-page referee assignment invites a
+split-and-resubmit report. (iv) A Gour–Wallach-school referee probing whether
+2-uniform-implies-stable-point is extractable from known GIT criteria; the manuscript
+hedges this correctly but the "no statement at that scope" sentence will be tested.
+
+To move up a band without new mathematics: settle the positioning paragraph (version-b
+direction, with my repairs), cite Chang–Jing, make the three-part structure legible or
+split it, and run the Tan order-5832 falsifier so the atlas is demonstrated as a
+computing device on a published external count.
+
+**With the recognition-group criterion adopted into Section 3, repairs applied: A−.**
+Adoption converts the paper's weakest paragraph into its strongest claim: the first
+LU-forces-LC criterion at every local dimension — prime-power and composite — subsuming
+Van den Nest–Dehaene–De Moor's full Theorem 1 rather than its case (iv), with the
+Wong–Jiang d=9 state as a correctly-predicted non-instance and the ceiling proposition
+showing their hypothesis is the exact reach of the mechanism. That is a headline a
+qubit-era expert cannot wave away, and the CSS corollary answers a listed open question.
+It does not reach A/flagship: the engine remains classical tensor uniqueness plus
+elementary group theory, the method has a 2022 precedent to cite, and the deep new
+object (the atlas) is unchanged by adoption. The cost is length and two new citation
+duties, both bounded.
+
+## 2. Everything else noticed, ranked by what a referee finding it would cost
+
+1. **Chang and Jing (arXiv:2205.06422) is cited nowhere in `sections/`** although the
+   bib entry exists and the C807 audit's gate 0 declares the citation mandatory (method
+   collision: CP/Kruskal uniqueness applied to a Pauli-basis coefficient tensor to
+   constrain local unitaries, 2022). The Jennrich/Kruskal repair is in the committed
+   Lemma; the nearest-neighbour quantum paper is not. Cost if a referee finds it first:
+   high — it converts a citation gap into a credibility question about the whole
+   attribution apparatus. One sentence in Section 3's attribution paragraph fixes it.
+2. **The concession paragraph over-cedes** (current `01-introduction.tex` lines
+   108–119, the committed version-a text): "is therefore already covered by their
+   result" without stating that the entire overlap is AME(6,2) (four-qubit AME
+   nonexistence plus the parity constraint). Whichever A/B branch wins, the quantified
+   overlap should appear, with Higuchi–Sudbery and Scott cited. Cost: high, strategic
+   rather than mathematical — this is the paragraph a VdN-DDM-literate referee reads
+   first.
+3. **`cor:full-weyl-cover` still carries the permutation ambiguity** flagged in the
+   specialization-inversion note: with a relabelling in play the second marginal should
+   be indexed `ρ^φ_{π(S)}`, or the statement scoped to a fixed labelling with the
+   permutation absorbed first. The proof of the main theorem does absorb it, so nothing
+   is wrong; but the corollary is written as a free-standing criterion and will be read
+   alone. Cost: medium — a careful referee files it as a correctness query and waits a
+   round for the answer.
+4. **GIT-adjacent exposure of the discreteness theorem.** The manuscript's own remark
+   maps 2-uniformity to stability for `SL(q,ℂ)^n` and cites the stabilizer-dimension
+   literature, but does not preempt the specific question "does 2-uniform ⇒ stable
+   follow from the Kempf–Ness criterion already in Bryan–Reichstein–Van Raamsdonk?" If
+   it does, finiteness (though not any constant) would be extractable from prior art.
+   I did not resolve this either way; the quantitative content is safe regardless.
+   Cost: medium — worst case is a demanded rewrite of one novelty sentence, not a
+   result loss. Cheap inoculation: one sentence acknowledging that stability-implies-
+   finiteness is classical and locating the contribution in the explicit constants and
+   the uniformity-order radius, which is where it actually lives.
+5. **The closing sentence of `03-lu-rigidity.tex`** (lines 1685–1689) restates the
+   full-Weyl-cover hypothesis with "an `F_q`-linear plane", but the corollary as proved
+   needs only a `q²`-element label group with bijective projections — no
+   `F_q`-linearity, which is precisely the paper's "arbitrary additive" selling point.
+   Logically harmless (it is a sufficient condition) but it contradicts the paper's own
+   emphasis and will confuse exactly the careful reader. Cost: low-medium.
+6. **Englbrecht–Kraus (arXiv:2001.07106) uncited** in the discreteness prior-art
+   remark. Their qubit-stabilizer symmetry characterization does not cover the
+   theorem's scope (arbitrary 2-uniform states, any dimension), so nothing is wrong,
+   but they determine every local symmetry of every qubit stabilizer state and a
+   referee from that school will expect the acknowledgment. Cost: low.
+7. **The Tan containment sentence in the introduction** ("that calculation contains the
+   q=3, m=2 automorphism subcase above") rests on inspection of Tan's displayed
+   generators, and the atlas-side reproduction of the order-5832 count — the
+   specialization-inversion note's sharp falsifier, with its two independently checkable
+   predictions — remains unrun. Running it is cheap, would either validate the atlas as
+   a computing device on external data or catch a real problem, and upgrades a
+   citation-level claim to a verified one. Cost of not doing it: low today, high in the
+   unlikely event the check fails after publication.
+8. **File-level oddity:** two section files numbered 07 (`07-conclusion.tex`,
+   `07-transport-sheaf.tex`). Build presumably orders them correctly; purely cosmetic.
+9. **Abstract length and density.** The abstract is a full paragraph-stack running
+   through all three sub-papers; at Quantum or IEEE-IT it will be asked to shrink.
+   Style only.
+
+Nothing I read in sections 4, 5, 6, 8, or 9 failed a spot-check: the bracket-multiset
+argument (4.3), the self-association lemma's five-row independence step, the
+coset-syndrome lemma, the generic-constancy proposition with its rational-point caveat,
+and the factor-set formalism in the appendix are all sound as written, and the
+verification section's trust map matches what the text actually proves versus
+certificates versus Lean — the scoping there is a model of its kind. The `native_decide`
+carve-out and the "independent implementations within one package, not an independent
+external reproduction" sentence are exactly the right level of candor.
+
+## 3. Venue, conditional on the fixes
+
+The tradeoff, stated plainly. A **quantum-information venue** (Quantum, PRX Quantum,
+npj QI, PRA) reads the main contribution as: LU⇒LC rigidity for qudit stabilizer AME
+states, the transversal Clifford no-go for quantum MDS codes, and the finiteness/
+stability theory of 2-uniform states; it will find the finite-geometry half (pencil,
+self-association, Clebsch syndromes, transport divisor) exotic and will not referee it
+deeply — underdeveloped for them means "no operational or fault-tolerance payoff beyond
+the no-go, no algorithms". A **coding/finite-geometry venue** (IEEE Trans. Inform.
+Theory, Designs Codes & Cryptography, Finite Fields Appl.) reads the main contribution
+as: the self-association/conic dichotomy for transversal logical groups of MDS–CSS
+codes, the pencil classification, and the arc–AME dictionary; it will treat the
+Lie-theoretic stability half as foreign ballast and the qudit LU⇒LC framing as a quantum
+lemma — underdeveloped for them means "no general-`m` non-GRS theory, six-party
+specialization carries the geometry".
+
+Realistic ceiling as one paper, fixes applied: **Quantum**. It is the one strong venue
+whose referee pool spans both halves, tolerates 45 pages, and values the
+verification/Lean apparatus as a feature rather than noise. PRX Quantum is the
+aspirational answer and I do not believe it: the paper is structural mathematics without
+a physics-facing payoff sentence, and PRX Quantum's filter is exactly that sentence.
+CMP is wrong-shaped (the applications sprawl breaks the single-theorem arc it wants).
+IEEE-IT would take a re-weighted version but at the cost of burying the atlas and
+stability material, which is where the depth is.
+
+**Does adoption change the answer? Yes, materially.** Without the recognition-group
+criterion, the QI-facing headline leans on AME structure and concedes the qubit case,
+and the balance tilts toward the coding community, where the VdN-DDM concession is
+irrelevant — a defensible IEEE-IT submission. With adoption and my repairs, the paper
+owns "first LU-forces-LC criterion at every local dimension, qubit theorem subsumed,
+composite dimensions included, published d=9 counterexample correctly explained" — that
+is a QI headline, it makes Quantum comfortable rather than arguable, and it is the only
+change on the table that moves the realistic ceiling at all.
+
+**Split recommendation: yes, one cut, and only if adoption happens.** Cut between the
+rigidity/atlas/stability body and the finite-geometry applications. Paper A ("rigidity
+and recognition"): Sections 1–3 plus the adopted criterion and the stability subsection
+— the recognition-group criterion, AME rigidity, atlas classification, discreteness and
+thresholds; venue Quantum. Paper B ("transversal groups and the self-association
+boundary"): the dictionary specialization, Sections 4–5, scalar blindness, transport,
+party extensions — the `SL₂`-versus-torus phase theorem as headline, pencil `z` as the
+worked classification; venue IEEE-IT or DCC, citing A for rigidity. The stability half
+should NOT be cut loose on its own: its dependence on the rigidity theorem for naming
+the finite group, and on overlap quantization for the explicit threshold, is the one
+genuine synergy in the current bundle, and as a standalone it would be a solid but
+unremarkable PRA paper. If adoption does not happen, keep it as one paper and send it to
+Quantum anyway — without the criterion, Paper A alone is thinner than the sum and the
+bundle's breadth is then its best argument.
