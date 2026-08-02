@@ -1,0 +1,135 @@
+[
+ {
+  "circle_orbit_expected": 100,
+  "circle_orbit_ok": true,
+  "circle_orbit_size": 100,
+  "coboundary_identity": true,
+  "conjugate_class_delta": true,
+  "coset_sizes": [
+   3,
+   3
+  ],
+  "delta": -1,
+  "eps": 2,
+  "half_circle": 3,
+  "max_clique_AB_in_circle": 2,
+  "max_clique_A_only_in_circle": 3,
+  "n_required": 4,
+  "parametrization": true,
+  "q": 5
+ },
+ {
+  "circle_orbit_expected": 294,
+  "circle_orbit_ok": true,
+  "circle_orbit_size": 294,
+  "coboundary_identity": true,
+  "conjugate_class_delta": true,
+  "coset_sizes": [
+   4,
+   4
+  ],
+  "delta": 1,
+  "eps": 3,
+  "half_circle": 4,
+  "max_clique_AB_in_circle": 3,
+  "max_clique_A_only_in_circle": 4,
+  "n_required": 5,
+  "parametrization": true,
+  "q": 7
+ },
+ {
+  "circle_orbit_expected": 1210,
+  "circle_orbit_ok": true,
+  "circle_orbit_size": 1210,
+  "coboundary_identity": true,
+  "conjugate_class_delta": true,
+  "coset_sizes": [
+   6,
+   6
+  ],
+  "delta": 1,
+  "eps": 2,
+  "half_circle": 6,
+  "max_clique_AB_in_circle": 4,
+  "max_clique_A_only_in_circle": 6,
+  "n_required": 7,
+  "parametrization": true,
+  "q": 11
+ },
+ {
+  "circle_orbit_expected": 2028,
+  "circle_orbit_ok": true,
+  "circle_orbit_size": 2028,
+  "coboundary_identity": true,
+  "conjugate_class_delta": true,
+  "coset_sizes": [
+   7,
+   7
+  ],
+  "delta": -1,
+  "eps": 2,
+  "half_circle": 7,
+  "max_clique_AB_in_circle": 4,
+  "max_clique_A_only_in_circle": 7,
+  "n_required": 8,
+  "parametrization": true,
+  "q": 13
+ },
+ {
+  "circle_orbit_expected": 4624,
+  "circle_orbit_ok": true,
+  "circle_orbit_size": 4624,
+  "coboundary_identity": true,
+  "conjugate_class_delta": true,
+  "coset_sizes": [
+   9,
+   9
+  ],
+  "delta": -1,
+  "eps": 3,
+  "half_circle": 9,
+  "max_clique_AB_in_circle": 4,
+  "max_clique_A_only_in_circle": 9,
+  "n_required": 10,
+  "parametrization": true,
+  "q": 17
+ },
+ {
+  "circle_orbit_expected": 6498,
+  "circle_orbit_ok": true,
+  "circle_orbit_size": 6498,
+  "coboundary_identity": true,
+  "conjugate_class_delta": true,
+  "coset_sizes": [
+   10,
+   10
+  ],
+  "delta": 1,
+  "eps": 2,
+  "half_circle": 10,
+  "max_clique_AB_in_circle": 5,
+  "max_clique_A_only_in_circle": 10,
+  "n_required": 11,
+  "parametrization": true,
+  "q": 19
+ },
+ {
+  "circle_orbit_expected": 11638,
+  "circle_orbit_ok": true,
+  "circle_orbit_size": 11638,
+  "coboundary_identity": true,
+  "conjugate_class_delta": true,
+  "coset_sizes": [
+   12,
+   12
+  ],
+  "delta": 1,
+  "eps": 5,
+  "half_circle": 12,
+  "max_clique_AB_in_circle": 5,
+  "max_clique_A_only_in_circle": 12,
+  "n_required": 13,
+  "parametrization": true,
+  "q": 23
+ }
+]
