@@ -19,7 +19,9 @@ material.
 | File | Role | Trust |
 |---|---|---|
 | `strip_simplex.py` | exact Phase-I simplex over `Fraction`, Bland's rule; the decision procedure behind the plateau theorem | load-bearing |
+| `strip_exact2.py` | exact Fourier--Motzkin with inlined rational Gaussian elimination; the independent cross-check | load-bearing, but carries the unjustified Sidon bound — see below |
 | `rm_family_check.py` | locally authored; tests triple-evenness of a Reed--Muller code by the three-level basis criterion | locally replayed, below |
+| `sidon_dominance_check.py` | locally authored; compares the justified and used Sidon bounds at every length | locally replayed, below |
 | `strip_exact.py` | earlier exact Fourier--Motzkin path | superseded; see the defect below |
 | `strip_lp.py` | floating-point Delsarte LP via `scipy.optimize.linprog` | discarded by the source session |
 | `strip_search.py` | randomized code growth | source session calls its results structurally vacuous |
@@ -61,6 +63,50 @@ Results reproduced here, all well inside a five-minute per-length timeout:
 The sanity battery passes and the boundary of the source note's Theorem 1.5 is reproduced at both
 ends of the open window. This is a spot check, not the certified sweep: no Farkas dual was extracted
 and no manifest was built.
+
+## The independent Fourier--Motzkin cross-check, replayed 2026-08-01
+
+`strip_exact2.py` is self-contained: the promised `strip_exact2_lib.py` does not exist as a separate
+file, because this version inlines its own exact Gaussian elimination (`solve_affine`) instead of
+calling sympy. Nothing is missing.
+
+Run with `python3 -u strip_exact2.py`. Both sanity points pass, and it agrees with
+`strip_simplex.py` at every length it reaches:
+
+    n = 16, 24, 32, 40, 48, 56   ->  INFEASIBLE, exact certificate (agrees with simplex)
+    n = 64                       ->  process dies, no output, no traceback
+
+The death at 64 is memory, not mathematics, and reproduces the source session's report exactly. It
+is a silent kill rather than the script's own `FM blowup` guard at 40000 constraints, so the
+elimination exhausts memory before the guard fires. This is why the exact simplex exists; do not
+try to push the Fourier--Motzkin path further without changing the elimination order.
+
+Two exact methods therefore agree across lengths 16--56 in multiples of eight, plus the independent
+hand proof at 16. That is the cross-validation the plateau theorem rests on.
+
+## Defect in the source session's dominance claim
+
+The source correction log states that the justified power-of-two Sidon bound dominates the
+too-strong `n^2/2 - 1` bound "at every certified length (checked case by case)", which is what makes
+any result computed under the wrong bound still sound. **That claim is false.** Checking every
+length from 9 to 128 (`dominance` check, 2026-08-01):
+
+    justified(n) = 2^ceil(log2(n(n-1)/2 + 1)) - 1        used(n) = n^2/2 - 1
+    justified(n) < used(n)  exactly at  n = 23  and  n = 91.
+
+At n = 23 the justified bound is 255 while the bound used is 263.5, so the imposed constraint was
+strictly stronger than a Sidon set justifies, and an infeasibility proved under it would not be a
+proof. Length 23 lies inside the claimed certified range 9--69.
+
+**No shipped result is affected**, for two independent reasons, both of which must be stated
+explicitly rather than asserted: the certified plateau came from `strip_simplex.py`, which computes
+`justified_R` and never used the bad bound; and `strip_exact2.py`, which does carry the bad bound,
+sweeps only multiples of eight and so never evaluates 23 or 91. The two exceptions fall in the gap
+between the flawed script's domain and the sound script's results.
+
+C778 must restate the dominance lemma with its exceptions named. The corrected form is stronger than
+the original because it is checkable: dominance holds at all lengths except 23 and 91, and neither
+is load-bearing because the certified sweep used the justified bound directly.
 
 ## The zip's staircase family is superseded — do not cite it
 
