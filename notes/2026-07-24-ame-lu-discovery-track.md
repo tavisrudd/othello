@@ -110,3 +110,73 @@ If so, the atlas supplies no independent invariant.
 **Evidence:** OPEN; the chart isomorphisms are kernel checked, but no
 transition invariant has been proposed or computed.
 **Status:** open lead.
+
+### 2026-08-01 — Schur-cube codimension one at the RM(1,4) witness
+
+**Provenance:** independently replaying the external session's diagonal
+numerics while the C776 scope review ran.
+**Was I looking for this?:** no — the replay was a spot check that the source's
+section 6 figures reproduce, which they did exactly.
+**Observed / musing:** the 16-qubit order-one Reed--Muller code's third Schur
+power has dimension 15 of 16, missing full by exactly one, and the missing
+direction is exactly the all-ones vector, which is exactly the surviving
+transversal-T symmetry.  The Schur-cube criterion says fullness kills every
+non-Clifford diagonal symmetry, so this witness sits at the precise minimum
+failure: one dimension short, one symmetry surviving, and the single invariant
+factor 8 in the lift lattice is that same direction seen from a different
+computation.
+**Why it may matter / strongest question:** is the tightness forced?  Can a
+code have codimension-one Schur cube without being triply even, or
+codimension two while carrying a symmetry of order sixteen?  A clean
+relationship between Schur-cube codimension and the surviving symmetry group
+would upgrade the criterion into a structure theorem rather than a test.
+**Discriminator / falsifier:** enumerate small self-orthogonal codes,
+tabulate Schur-cube codimension against the invariant-factor profile of the
+lift lattice, and look for a codimension-one code that is not triply even.
+One such code refutes any clean correspondence.
+**Evidence:** `notes/2026-08-01-external-source-numerics.md` and its
+certificates; three codes only, so this is one instance and two controls, not
+a pattern.
+**Status:** open lead.
+
+### 2026-08-01 — invariant factors as a searchable non-Clifford witness index
+
+**Provenance:** same replay.
+**Was I looking for this?:** no.
+**Observed / musing:** the Smith normal form invariant factors of the lift
+lattice are a complete invariant for the diagonal symmetry group and are
+computable in polynomial time from any generator matrix.  Deciding whether a
+code carries a non-Clifford transversal diagonal gate is therefore a database
+query over any code table that can be enumerated, not a research question per
+code.
+**Why it may matter / strongest question:** the certified plateau's linear
+programme loses its killing power by length 88, leaving lengths 81--124
+unreachable by that method.  A divisor-profile sweep cannot prove nonexistence
+there, but it could find a witness if one exists, which would settle the range
+in the positive direction at low cost.
+**Discriminator / falsifier:** the sweep is only as good as the code tables
+available at those lengths; if no sufficiently rich table exists, the idea
+yields nothing and should be dropped rather than pursued by random search.
+**Evidence:** the method is verified to reproduce known divisor profiles on
+three codes; no sweep has been run.
+**Status:** open lead.
+
+### 2026-08-01 — perfect-tensor tiling and the Gorenstein socle echo
+
+**Provenance:** the C776 scope review's extra-juice pass
+(`notes/2026-08-01-c776-scope-fable-review.md` section 3).
+**Was I looking for this?:** no — the review was asked for adoption scope.
+**Observed / musing:** two speculative leads recorded there.  Propagating the
+stability bound through one perfect-tensor tiling would bound the
+product-symmetry group of the resulting network state, a bottom-up
+no-global-symmetry instance.  Separately, the phase-boundary note identifies
+its Schur-cube trilinear obstruction with the Gorenstein socle pairing in the
+reconstruction corpus.
+**Why it may matter / strongest question:** the second would be a genuine
+cross-lane bridge between the quantum rigidity programme and the Clebsch
+reconstruction machinery, if the identification is more than formal analogy.
+**Discriminator / falsifier:** write both trilinear forms in coordinates and
+check whether they agree as pairings or merely share arity and symmetry.
+Shared arity alone is not a bridge.
+**Evidence:** none; both are unexamined analogies at this point.
+**Status:** open lead.
