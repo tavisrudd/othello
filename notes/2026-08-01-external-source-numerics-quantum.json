@@ -1,0 +1,83 @@
+{
+  "ame43": {
+    "all_rows_under_ceiling": true,
+    "fisher_4_over_q_frobenius": 31.3655584243,
+    "fisher_4_var_M": 31.3655584243,
+    "fisher_identity_holds": true,
+    "mean_M_is_zero": true,
+    "pair_marginal_max_deviation": 0.0,
+    "rows": [
+      {
+        "defect": 0.7734762077,
+        "defect_direct_norm": 0.7734762077,
+        "defect_routes_agree": true,
+        "generator_frobenius": 1.455051612,
+        "hypothesis_satisfied": false,
+        "hypothesis_t": 2.156756788,
+        "ratio_to_sqrt_q_defect": 1.0861024961,
+        "scale": 0.3,
+        "under_ceiling": true
+      },
+      {
+        "defect": 0.2774402695,
+        "defect_direct_norm": 0.2774402695,
+        "defect_routes_agree": true,
+        "generator_frobenius": 0.485017204,
+        "hypothesis_satisfied": false,
+        "hypothesis_t": 0.7189189293,
+        "ratio_to_sqrt_q_defect": 1.0093156764,
+        "scale": 0.1,
+        "under_ceiling": true
+      },
+      {
+        "defect": 0.0839372889,
+        "defect_direct_norm": 0.0839372889,
+        "defect_routes_agree": true,
+        "generator_frobenius": 0.1455051612,
+        "hypothesis_satisfied": true,
+        "hypothesis_t": 0.2156756788,
+        "ratio_to_sqrt_q_defect": 1.000835803,
+        "scale": 0.03,
+        "under_ceiling": true
+      },
+      {
+        "defect": 0.0279998818,
+        "defect_direct_norm": 0.0279998818,
+        "defect_routes_agree": true,
+        "generator_frobenius": 0.0485017204,
+        "hypothesis_satisfied": true,
+        "hypothesis_t": 0.0718918929,
+        "ratio_to_sqrt_q_defect": 1.0000928415,
+        "scale": 0.01,
+        "under_ceiling": true
+      },
+      {
+        "defect": 0.0084006742,
+        "defect_direct_norm": 0.0084006742,
+        "defect_routes_agree": true,
+        "generator_frobenius": 0.0145505161,
+        "hypothesis_satisfied": true,
+        "hypothesis_t": 0.0215675679,
+        "ratio_to_sqrt_q_defect": 1.0000083555,
+        "scale": 0.003,
+        "under_ceiling": true
+      }
+    ],
+    "rows_outside_hypothesis": [
+      0.3,
+      0.1
+    ],
+    "stability_ceiling_sqrt_6_over_5": 1.095445115,
+    "two_uniform_exact": true
+  },
+  "ghz4": {
+    "continuous_symmetry_defect": 0.0,
+    "exact_continuous_symmetry": true,
+    "pair_marginal_frobenius_deviation": 0.4714045208
+  },
+  "local_dimension": 3,
+  "parties": 4,
+  "schema": "external-source-numerics-quantum/1",
+  "seed": 11,
+  "source_note": "notes/2026-08-01-external-session-notes/approximate_rigidity_of_2uniform_states.md section 6"
+}

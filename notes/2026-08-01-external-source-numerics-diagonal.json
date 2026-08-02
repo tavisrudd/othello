@@ -1,0 +1,116 @@
+{
+  "codes": [
+    {
+      "all_factors_clifford": true,
+      "annihilator_size": 0,
+      "annihilator_vectors": [],
+      "crosscheck_allones_iff_triply_even": true,
+      "crosscheck_annihilator_contains_allones": false,
+      "crosscheck_has_factor_8": false,
+      "crosscheck_rank_consistent": true,
+      "crosscheck_triply_even": false,
+      "crosscheck_triply_even_iff_factor8": true,
+      "dimension": 4,
+      "dual_min_distance": 4,
+      "length": 7,
+      "min_distance": 3,
+      "name": "Hamming[7,4]",
+      "schur_cube_dim": 7,
+      "schur_cube_full": true,
+      "smith_invariant_factors": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2
+      ],
+      "uniformity": 2,
+      "weights": [
+        0,
+        3,
+        4,
+        7
+      ]
+    },
+    {
+      "all_factors_clifford": false,
+      "annihilator_size": 1,
+      "annihilator_vectors": [
+        "1111111111111111"
+      ],
+      "crosscheck_allones_iff_triply_even": true,
+      "crosscheck_annihilator_contains_allones": true,
+      "crosscheck_has_factor_8": true,
+      "crosscheck_rank_consistent": true,
+      "crosscheck_triply_even": true,
+      "crosscheck_triply_even_iff_factor8": true,
+      "dimension": 5,
+      "dual_min_distance": 4,
+      "length": 16,
+      "min_distance": 8,
+      "name": "RM(1,4)",
+      "schur_cube_dim": 15,
+      "schur_cube_full": false,
+      "smith_invariant_factors": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        4,
+        4,
+        4,
+        4,
+        8
+      ],
+      "uniformity": 3,
+      "weights": [
+        0,
+        8,
+        16
+      ]
+    },
+    {
+      "all_factors_clifford": true,
+      "annihilator_size": 0,
+      "annihilator_vectors": [],
+      "crosscheck_allones_iff_triply_even": true,
+      "crosscheck_annihilator_contains_allones": false,
+      "crosscheck_has_factor_8": false,
+      "crosscheck_rank_consistent": true,
+      "crosscheck_triply_even": false,
+      "crosscheck_triply_even_iff_factor8": true,
+      "dimension": 3,
+      "dual_min_distance": 3,
+      "length": 7,
+      "min_distance": 4,
+      "name": "Simplex[7,3]",
+      "schur_cube_dim": 7,
+      "schur_cube_full": true,
+      "smith_invariant_factors": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        4
+      ],
+      "uniformity": 2,
+      "weights": [
+        0,
+        4
+      ]
+    }
+  ],
+  "schema": "external-source-numerics-diagonal/1",
+  "source_note": "notes/2026-08-01-external-session-notes/diagonal_rigidity_phase_boundary.md section 6"
+}
