@@ -1363,18 +1363,16 @@ as its kernels.  Its induced form on the four-dimensional projective tangent
 space is nondegenerate, so every singularity is an ordinary double point.
 
 \paragraph{Frame symmetry.}
-The six points form a projective frame.  Every projective automorphism of
-the cubic permutes this complete frame, and each frame permutation has a
-unique projective extension.  The recovered switching class is the
-six-point regular two-graph.  In the gauge $B_{0i}=1$ it is equivalently a
-pentagon on the other five vertices.  Normalizing in turn at each vertex
-identifies the six axes with the six Sylow-$5$ subgroups of $A_5$.
-Consequently its permutation group is
-$N_{S_6}(A_5)\cong S_5$, of order $120$.  The sign on the two
-complementary triple orbits is its nontrivial quotient character; its
-kernel is the already constructed $A_5$.  Hence the cubic line has
-stabilizer $S_5$ and the oriented cubic has stabilizer $A_5$, without a
-separate signed-permutation enumeration.
+The node frame identifies every projective cubic automorphism with a frame
+permutation.  Let $N\le S_6$ normalize the five matchings $\mathcal T$ in
+Figure~\ref{fig:synthematic-petersen}.  Its action on $\mathcal T$ is
+faithful, and the displayed table supplies normalizers inducing generators
+of $A_5$ and an odd permutation; hence $N\cong S_5$.  The even generators
+preserve every $c_{ijk}$ and the odd element reverses them all.  Moreover,
+the identity and the five transpositions $(0\,i)$ give six distinct cubic
+lines.  Thus the line stabilizer has order at most $720/6=120$ and equals
+$N$; its orientation character is the sign on $\mathcal T$.  The cubic-line
+and oriented-cubic stabilizers are therefore $S_5$ and $A_5$.
 
 \paragraph{The integral commutant.}
 Finally, after extension from $\mathbf Q$ to
@@ -1435,28 +1433,25 @@ the paired cubic surface is smooth
 The line bound, chord-defect identity, partial-cover deduction, decoder
 reconstruction, support bipartition, and the orientation two-graph
 reconstruction are proved in the text.  In particular, the conference
-identity gives pair balance and the Hessian ranks, while the pentagon model
-gives the $S_5/A_5$ stabilizer distinction.  The golden cross block, its
+identity gives pair balance and the Hessian ranks, while the five-matching
+normalizer and six-coset bound give the $S_5/A_5$ stabilizer distinction.
+The golden cross block, its
 four-dimensional trace complement, and the smooth Clebsch dual surface put
 the cubic under the cited determinantal theorem, so singular-locus
 completeness is structural.  The paper-owned replay independently constructs
-the $A_5/C_5$ and $A_5/D_5$ actions, the signed operator, its triangle
-products and diagonal pencil, the cross-golden determinant and its
-trace-orthogonal dual, the balanced switching class, the five gradient ideals,
-and the six Hessian blocks.  The gradient-ideal exhaustion is now an
-independent exact check rather than the proof of completeness.
-It reads no
-later-paper artifact:
+the coset actions, signed operator, triangle products, diagonal pencil,
+cross-golden trace dual, switching class, gradient ideals, and Hessian blocks.
+The gradient exhaustion is independent rather than the proof of completeness.
+It reads no later-paper artifact:
 \begin{center}
 \small\path{check_orientation_two_graph.py}.
 \end{center}
 The formal gate checks the displayed q11 code and decoder tables, the
 symmetry-free rigidity implication, the chord-defect specialization, the
-$q=9$ distance-two obstruction, and the small-arc moment consequences.  It
-treats Dye's Brianchon bound and equality classification as two explicit
-axioms.  It does not claim the orientation theorem or certify any exhaustive
-search in the computational companion; those retain the human and finite
-proof modes stated there.  The reusable Lean development is distributed in
+$q=9$ obstruction, the small-arc moments, and the exact $S_5/A_5$ stabilizer
+boundary, with Dye's bound and classification as two explicit axioms.  The
+integral commutant and companion searches lie outside this gate.  The reusable
+Lean development is distributed in
 \href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}}, while
 the generated q11 tables and aggregate Paper I gate are in
 \href{https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates}
@@ -1483,7 +1478,7 @@ The SHA-256 digest of \path{verification/checker_outputs.json} is
 The SHA-256 digest of
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is
 \begin{center}
-\small\path{45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b}.
+\small\path{c33307f2972eac4814c1109c8cab83c446fac779a080fc2769128fbd42c8c2aa}.
 \end{center}
 This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its

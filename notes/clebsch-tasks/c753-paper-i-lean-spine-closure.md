@@ -4,7 +4,9 @@
 
 **Status:** active; C752 is complete and its implementation interface is
 frozen.  The finite prose-source repairs, R1--R4, and O1--O7 are complete;
-continue with O8, which must remain packet-gated.
+the Paper-I proof and trust surfaces now agree with O7.  Continue with O8,
+which must remain packet-gated, before the final correspondence and release
+replays.
 
 ## Current implementation state
 
@@ -100,6 +102,19 @@ structural generation-and-index proof.  The clean serialized replay at
 `~/.cache/othello-lean-build/run-20260802-205925-01ef7068` built all three
 modules and passed the trace-only aggregate gate.  The O7 terminals print
 exactly `propext`, `Classical.choice`, and `Quot.sound`.
+
+The authoritative Paper-I proof now exposes the same O7 mechanism rather than
+summarizing the stabilizer as a computation: the five distinguished matchings,
+faithful five-letter normalizer action, explicit even generators, odd
+orientation reverser, and six cubic-line cosets give the displayed
+`A₅ \subset S₅` boundary.  The Paper-I trust gate imports the O7 aggregate and
+prints the five public symmetry terminals; the axiom audit, statement identity,
+and nineteen-row trust manifest have been regenerated.  The guarded trust-gate
+replay at `~/.cache/othello-lean-build/run-20260802-211544-6ac6c934` and the
+Lean-root-dependent manifest verifier are green.  The main and companion PDFs
+remain warning-free at 21 and 12 pages.  This reconciliation claims nothing
+about O8, the integral commutant, the final release-output certificate, or the
+standalone replay.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`

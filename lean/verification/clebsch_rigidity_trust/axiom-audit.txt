@@ -68,4 +68,19 @@
 'RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-Build completed successfully (8781 jobs).
+'RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Build completed successfully (8800 jobs).

@@ -5,13 +5,14 @@ import RelativeConicArcs.Q11DyeConsequences
 import RelativeConicArcs.ClebschChordDefect
 import RelativeConicArcs.Q9Sylvester
 import RelativeConicArcs.SmallKGeometricBridge
+import RelativeConicArcs.PaperIOrientationSymmetry
 
 /-!
 # Trust gate for deep-hole rigidity of the Clebsch hexagon code
 
 This import-only module is the formal verification surface for the rigidity,
-decoding, chord-defect, field-uniqueness, and small-arc classification results
-used by the focused Clebsch hexagon paper.
+decoding, chord-defect, field-uniqueness, small-arc classification, and
+support-cubic symmetry results used by the focused Clebsch hexagon paper.
 
 The coordinate modules check the displayed finite configuration and decoder
 tables by kernel reduction.  The rigidity conclusion additionally depends on
@@ -21,6 +22,12 @@ London Mathematical Society* (2) 44 (1991), Theorems 1 and 3, pages 275--278,
 doi:10.1112/jlms/s2-44.2.270.  The small-arc bridge reduces the four-, five-,
 and seven-arc cases to exact secant moments; separate executable certificates
 discharge the remaining finite geometric exclusions.
+
+The support-cubic terminals identify the normalizer of the five distinguished
+perfect matchings with the full cubic-line stabilizer, identify its action with
+`S₅`, and identify the oriented sign kernel with `A₅` of index two.  They use
+kernel reduction only for three explicit generator actions and six cubic-line
+cosets; no permutation census or native execution enters these terminals.
 -/
 
 -- The explicit order-sixty action and its point orbits.
@@ -58,3 +65,10 @@ discharge the remaining finite geometric exclusions.
 #print axioms RelativeConicArcs.SmallKGeometricBridge.fourArc_conic_card_order
 #print axioms RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card
 #print axioms RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra
+
+-- The support-cubic line stabilizer and its oriented index-two subgroup.
+#print axioms RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine
+#print axioms RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5
+#print axioms RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff
+#print axioms RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5
+#print axioms RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two

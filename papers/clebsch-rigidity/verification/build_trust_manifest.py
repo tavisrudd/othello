@@ -69,6 +69,13 @@ TERMINALS = {
         "RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card",
         "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra",
     ],
+    "orientation_symmetry": [
+        "RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
+        "RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5",
+        "RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff",
+        "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5",
+        "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two",
+    ],
 }
 
 CLASSICAL_DYE = [
@@ -498,11 +505,12 @@ def components_by_row(
             ],
         ),
         23: (
-            "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently; the Paper I Lean gate does not import or claim this orientation surface.",
+            "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the exact S5/A5 stabilizer boundary; the remaining orientation statements, including the integral commutant, retain their human, cited, and replay routes.",
             [
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
                 replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
                 replay("support cubic, continuation operator, and diagonal determinant pencil", ["check_orientation_two_graph.py"], orientation_coverage, "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction.", direct_coordinates),
+                lean("support-cubic line and oriented stabilizers", ["orientation_symmetry"], axioms),
             ],
         ),
         24: (

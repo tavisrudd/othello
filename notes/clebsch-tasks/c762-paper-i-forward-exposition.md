@@ -2,10 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; the authoritative forward exposition pass and both PDF
-builds are green.  Released versions 1 and 2 remain immutable.  Formal
-correspondence, aggregate replay, and standalone synchronization wait for the
-active C753 extraction to reach a stable recorded state.
+**Status:** active; the authoritative forward exposition and O7 structural
+proof/trust reconciliation are green, as are both PDF builds.  Released
+versions 1 and 2 remain immutable.  O8, the final release-output replay, and
+standalone synchronization remain pending under C753.
 
 ## Current state
 
@@ -45,15 +45,30 @@ confirmed version-independent Zenodo concept DOIs.  The corresponding public
 GitHub releases were checked directly; forward versions remain separate from
 these immutable predecessors.
 
-The read-only Lean correspondence audit found no new declaration requirement.
+The initial read-only Lean correspondence audit found no new declaration requirement.
 The headline and three affected statement groups retain their exact SHA-256
 identities; only their source lines moved (headline `96→91`, orientation
 `966→983`, window `83→81`, q13 `385→386`).  The statement identity and
 dependent trust manifest are regenerated from the current manuscripts, and
 both generator check modes are green.  After C753's active extraction is
 stable, update formal coverage only to the strength actually achieved by the
-existing frozen packets and run the Lean-root-dependent trust verifier.  No
-Lean source, build artifact, or running extraction was touched by C762.
+existing frozen packets and run the Lean-root-dependent trust verifier.
+
+That reconciliation is now complete through O7.  The human frame-symmetry proof
+uses the formal structural route: five distinguished perfect matchings give a
+faithful five-letter normalizer action; explicit elements generate the even
+`A₅`, an odd element reverses orientation, and six distinct cubic-line cosets
+give the order-120 upper bound.  The trust gate imports the O7 aggregate and
+audits its five public terminals.  Statement identity and the nineteen-row
+trust manifest are regenerated; the guarded gate replay at
+`~/.cache/othello-lean-build/run-20260802-211544-6ac6c934`, the
+Lean-root-dependent trust verifier, and the 21+12-page warning-free manuscript
+build are green.  The abstract is unchanged because O7 strengthens the proof
+and formal boundary, not the headline theorem; the existing five-matchings
+figure already carries the structural picture, so no additional diagram was
+added.  O8 and the integral-commutant boundary remain explicitly unclaimed,
+and the stale release-output certificate has not been presented as a passing
+full aggregate.
 
 ## Objective
 
