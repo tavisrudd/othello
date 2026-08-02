@@ -129,11 +129,17 @@ five source records remain in force and are not recounted here.
 ### Greaves--Suda, *Symmetric and skew-symmetric {0, +/-1}-matrices with large determinants*
 
 - Identifier: arXiv `1601.02769`; DOI `10.1002/JCD.21567`.
-- **Read depth: partial.**  Read the arXiv abstract, introduction's description
-  of the submatrix problem, and the indexed statements surrounding Theorems 4.1
-  and 4.3.  The complete proof and the published version's body were not read.
-- Access: arXiv/ar5iv indexed HTML for arXiv `1601.02769`; no PDF bytes were
-  fetched or cached in this follow-up.
+- **Read depth: partial.**  Inherited from the focused C729 audit: read arXiv
+  v3, Section 4, especially Theorems 4.3 and 4.5.  This follow-up also rechecked
+  the arXiv abstract, introduction's description of the submatrix problem, and
+  indexed theorem statements.  The complete paper and the published version's
+  body were not read.
+- Access: shared cache key `arXiv:1601.02769`, PDF and text extraction;
+  SHA-256
+  `40cde5eff1bbd514c2952cb6ab36ad130116f7432ce6fb250cadb9c1eec093cf`.
+  The prior durable source record is
+  `notes/2026-07-31-c729-conference-cut-moments.md`, section “Focused
+  literature audit.”
 - Boundary: characterizes conference matrices from prescribed spectra of
   principal submatrices whose orders are close to the ambient order.  It does
   not reconstruct from the binary determinant-`(-3)` pattern on all
