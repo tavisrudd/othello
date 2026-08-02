@@ -33,6 +33,22 @@ did not falsify; it produced a sharper theorem, that a binary code's lift
 lattice has full rank exactly when its dual distance is at least three.
 See `2026-08-01-c774-two-uniform-rigidity-red-team.md`.
 
+**Round-two cold read: brief additions (2026-08-02).**  When C795 lands,
+the round-two cold read goes to a *fresh* reviewer — the one that reviewed
+the integration wrote the split being implemented and has read the
+manuscript twice, so it is no longer cold.  Beyond the usual referee pass,
+that reviewer must answer explicitly whether any diagram would help the
+exposition.  The paper currently contains no figure at all, while carrying
+the minimum-support atlas, operator-pushing loops and their holonomies, a
+four-step rigidity mechanism, exact sequences for the symmetry groups, and
+now a region picture parameterized by uniformity order.  The style guide
+admits a figure when it explains an incidence structure, correspondence,
+orbit relationship, or proof mechanism faster than prose can, and requires
+each figure to have a job in the argument, stay legible at publication
+size, be interpretable without colour, and carry a caption stating its
+mathematical point.  Ask for specific proposals against that bar, including
+the answer "none earns its place" if that is the honest one.
+
 **C777 closed (2026-08-02): the formal layer matches the manuscript, with
 its boundary stated.**  A new multipartite namespace, general in site set
 and local dimension, proves the generator splitting, the single-exponential
