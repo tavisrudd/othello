@@ -2222,8 +2222,17 @@
       "last": 799,
       "purpose": "Paper III aligned-design faithfulness and quadratic-decoder Lean closure",
       "sequence": 247
+    },
+    {
+      "count": 1,
+      "first": 800,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 800,
+      "purpose": "Paper III operator-shadow Lean and formal-release closure",
+      "sequence": 248
     }
   ],
-  "next_id": 800,
+  "next_id": 801,
   "schema": "codex-task-id-allocations-v1"
 }
