@@ -2393,8 +2393,17 @@
       "last": 827,
       "purpose": "post-integration Milnor-Serre exposition and copy-edit pass",
       "sequence": 266
+    },
+    {
+      "count": 1,
+      "first": 828,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 828,
+      "purpose": "tighten the AME-LU manuscript after the C805 cold read",
+      "sequence": 267
     }
   ],
-  "next_id": 828,
+  "next_id": 829,
   "schema": "codex-task-id-allocations-v1"
 }
