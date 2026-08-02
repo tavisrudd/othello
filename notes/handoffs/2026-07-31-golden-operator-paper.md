@@ -504,18 +504,34 @@ The first exchange moment is universal; the second is an exact affine count of
 aligned four-sets.  Inclusion-matrix injectivity and (R(3,3)=6) prove that
 cut-independent purity, hence cut-independent full spectrum, occurs exactly for
 (d\leq3).  Thus order six is the unique nontrivial realized uniform case, not
-the start of a higher-order family.  Its reopened `tt`+`ej2` closeout proves
-that the aligned four-sets form a universal
-(3\text{-}(2d,4,(d-3)/2)) design and derives exact switching-class-independent
-mean and variance formulas for balanced-cut purity.  At order ten the Steiner
-design forces the exact (36/90) purity split without enumeration.  The refreshed
-exact order-6/10/14 falsifier passes.
-A five-source audit found spectral monomorphy as the closest framework but no
-exact singular-spectral predecessor; MathSciNet, Google Scholar, two published
-full texts, and a subject-expert check remain open, so no “first” claim is
-licensed.  Report and audit:
+the start of a higher-order family.  Its reopened `tt`+`ej2` closeout derives
+exact switching-class-independent mean and variance formulas for balanced-cut
+purity from the aligned
+(3\text{-}(2d,4,(d-3)/2)) design.  The design theorem itself is directly
+pre-empted by Greaves--Suda, Example 2.3, and its Johnson-harmonic mechanism is
+classical; the surviving C788 content is the exchange interpretation, exact
+cut statistics, and inclusion/Ramsey rigidity theorem.  At order ten the
+Steiner design forces the exact (36/90) purity split without enumeration.  The
+refreshed exact order-6/10/14 falsifier passes.  The updated ten-source audit
+found spectral monomorphy as the closest framework for the surviving theorem
+but no exact singular-spectral predecessor; MathSciNet, Google Scholar, two
+published full texts, and a subject-expert check remain open, so no “first”
+claim is licensed.  Report and audit:
 `notes/2026-08-02-c788-general-balanced-cut-spectrum.md` and
 `notes/2026-08-02-c788-balanced-cut-spectrum-literature-audit.md`.
+
+C794 is queued after C793.  Its `ej3` crown is stronger than the initial
+conference question: prove that every two-graph on at least seven vertices is
+determined up to complement by its four-sets containing zero or four coherent
+triples, then deduce determinant-design reconstruction for conference
+two-graphs.  Exhaustion through seven vertices finds the sharp threshold:
+all 32,768 normalized seven-vertex two-graphs form 16,384 complementary-pair
+fibres, whereas larger fibres occur below seven.  The conference tests recover
+the coherent/incoherent components at Paley orders 14 and 18; at order ten the
+overlap graph degenerates into 30 isolated Steiner blocks but the full parity
+system still has only the complementary pair.  The task also owns the first
+higher balanced-cut moment not forced by the 3-design axioms.  Plan:
+`notes/golden-tasks/c794-conference-design-reconstruction.md`.
 
 The third cold-reader repairs are complete at
 `golden-quantum-statistics-editorial-referee-revised`: the balanced-spectrum
@@ -532,6 +548,8 @@ reference remain user-owned.
    the Clebsch forward reference.
 3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
+4. After C793, run C794's reverse determinant-design reconstruction before
+   claiming any further design novelty.
 
 ## Ownership and allowed paths
 

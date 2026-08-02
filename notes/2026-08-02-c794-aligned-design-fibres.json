@@ -1,0 +1,51 @@
+{
+  "normalization": "vertex 0 isolated in the graph representative",
+  "range": {
+    "maximum_vertices": 7,
+    "minimum_vertices": 4
+  },
+  "results": [
+    {
+      "aligned_images": 2,
+      "complement_pair_fibres": 1,
+      "fibre_size_histogram": {
+        "2": 1,
+        "6": 1
+      },
+      "normalized_graphs": 8,
+      "vertices": 4
+    },
+    {
+      "aligned_images": 17,
+      "complement_pair_fibres": 11,
+      "fibre_size_histogram": {
+        "12": 1,
+        "2": 11,
+        "6": 5
+      },
+      "normalized_graphs": 64,
+      "vertices": 5
+    },
+    {
+      "aligned_images": 462,
+      "complement_pair_fibres": 416,
+      "fibre_size_histogram": {
+        "12": 1,
+        "2": 416,
+        "4": 45
+      },
+      "normalized_graphs": 1024,
+      "vertices": 6
+    },
+    {
+      "aligned_images": 16384,
+      "complement_pair_fibres": 16384,
+      "fibre_size_histogram": {
+        "2": 16384
+      },
+      "normalized_graphs": 32768,
+      "vertices": 7
+    }
+  ],
+  "schema": "c794-aligned-design-fibres-v1"
+}

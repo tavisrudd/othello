@@ -88,8 +88,25 @@ needed.  For (d\geq3), the aligned four-sets of every symmetric conference
 matrix of order (2d) form a
 
 \[
- \boxed{3\text{-}(2d,4,(d-3)/2)\text{ design}.}
+\boxed{3\text{-}(2d,4,(d-3)/2)\text{ design}.}
 \]
+
+**Design-literature correction.**  This design theorem is not new.
+Greaves--Suda, arXiv `2402.17528`, Example 2.3, proves that the
+determinant-(-3) four-subsets of every symmetric conference matrix of order
+(4n+2) form a (3\text{-}(4n+2,4,n-1)) design.  The elementary identity
+(\det C[K]=3-2w(K)) identifies those blocks exactly with the aligned
+four-sets above.  Gillespie's regular-two-graph parameter calculus gives a
+second classical route: the aligned blocks are the union of the coherent and
+incoherent four-sets, whose triple degrees agree in the conference case.
+
+The “pure degree-four harmonic” formulation below is likewise the standard
+Delsarte--Johnson characterization of a 3-design, and its inclusion scalar is
+classical Wilson/Johnson-scheme machinery.  The exact balanced-cut mean and
+variance remain useful C788 corollaries, but this report makes no novelty claim
+for the design or harmonic package.  The surviving task-owned content is their
+exchange-purity interpretation and role in the inclusion/Ramsey rigidity
+classification.
 
 In particular their number and density among all four-sets are
 
@@ -340,13 +357,14 @@ classes; the theorem does not need such a classification.
 
 ## Literature and manuscript boundary
 
-The bounded audit
-`notes/2026-08-02-c788-balanced-cut-spectrum-literature-audit.md` consulted five
-individually discussed sources, four at full-text depth.  It found direct prior
-art for complementary conference-block spectra, conference-ETF moment methods,
-inclusion-matrix descent, and spectral monomorphy of Hermitian matrices and
-two-graphs.  It did not locate the weaker singular-spectral classification proved
-here, the aligned-four-set purity formula, or its Ramsey cutoff.
+The updated bounded audit
+`notes/2026-08-02-c788-balanced-cut-spectrum-literature-audit.md` discusses ten
+sources: four at full-text depth, five at partial depth, and one at
+abstract/metadata depth.  It found direct prior art for the aligned-four-set
+3-design in Greaves--Suda, as well as classical Delsarte--Johnson and Wilson
+machinery for its harmonic and inclusion calculations.  It did not locate the
+weaker singular-spectral classification proved here, the exchange-purity
+interpretation, or its Ramsey cutoff.
 
 The safe positioning is therefore “we prove” together with “we have not located
 this singular-spectral analogue,” never “first.”  MathSciNet, Google Scholar,
@@ -368,12 +386,17 @@ audit also exposed a terminology collision: two-graph literature reserves
   second moment is an exact affine count of aligned four-sets and is uniform
   only for (d\leq3).  Its nonzero gaps are quantized in units of
   (32/(2d-1)^2).
-- **Settled by the reopened `tt` pass:** the aligned four-sets form the
-  universal (3\text{-}(2d,4,(d-3)/2)) design.  The original inclusion proof
-  was detecting its pure degree-four Johnson harmonic.
+- **Re-derived by the reopened `tt` pass:** the aligned four-sets form the
+  universal (3\text{-}(2d,4,(d-3)/2)) design.  The literature update assigns
+  that theorem to Greaves--Suda and the pure degree-four interpretation to
+  classical Delsarte--Johnson machinery.
 - **Settled by the reopened `ej2` pass:** the full cut ensemble has exact,
   switching-class-independent purity mean and variance.  At order ten this
   forces the (36/90) purity split structurally, without cut enumeration.
+- **Settled by the design-literature update:** Greaves--Suda directly
+  pre-empts the 3-design theorem, while Delsarte--Johnson and Wilson machinery
+  pre-empts the harmonic mechanism.  The mean/variance formulas are retained
+  as convenient exchange-facing corollaries, not an independent crown.
 - **Settled by `ej`:** the two possible four-cycle sums have distinct endings:
   value (3) contradicts row orthogonality, while value (-1) is exactly a
   triangle-free two-coloring and stops at six vertices by (R(3,3)=6).
@@ -384,11 +407,11 @@ audit also exposed a terminology collision: two-graph literature reserves
   spectra within higher Paley cut orbits.  The C729 cross-ratio signatures are
   the natural input, but this would be a new arithmetic successor rather than
   a gap in the rigidity theorem.
-- **Open, newly isolated:** determine which
-  (3\text{-}(2d,4,(d-3)/2)) designs arise as aligned-block designs of symmetric
-  conference matrices, and which higher cut-count moments distinguish their
-  switching classes.  The present theorem fixes the first two moments exactly
-  but does not classify the full histogram beyond order ten.
+- **Open, newly isolated as C794:** prove the `ej3` conjecture that the aligned
+  four-set family determines every two-graph of order at least seven up to
+  complement, then determine which higher cut-count moments distinguish
+  conference switching classes.  The present theorem fixes the first two
+  moments exactly but does not classify the full histogram beyond order ten.
 - **Partially settled publication gate:** the focused audit found no exact
   predecessor for the singular-spectral classification and identified spectral
   monomorphy as the correct neighboring framework.  MathSciNet, Google Scholar,
