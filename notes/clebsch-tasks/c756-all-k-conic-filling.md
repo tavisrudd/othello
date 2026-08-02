@@ -26,6 +26,49 @@ at \(k = 9\).
 If the theorem lands, the packaging is a **new** headline paper (rigidity + all-k
 classification + golden operator), not a retrofit into Paper I.
 
+## Current state (2026-08-01)
+
+Two research passes complete; the theorem is **not** proved. Reports:
+`notes/2026-08-01-c756-all-k-conic-filling.md` and
+`notes/2026-08-01-c756-saturated-matching-attack.md`.
+
+What is now proved for all \(k\) and all \(q\):
+
+- \(\mathcal U(A)=C\) splits into (E) every chord is external to \(C\) and (V) the chords
+  cover all \(q^2\) points off \(C\); (E) is hereditary and equals
+  \(\chi(\operatorname{Res}(f_i,f_j))=-1\) in the binary-quadratic model of the plane.
+- Even \(q\) is impossible (the nucleus is never covered).
+- A covering LP bound with the correct degree cap \(\lfloor k/2\rfloor\), replacing the
+  \(k\le 8\)-only bound \(q\le(k(k-1)+3)/3\).
+- A spare-external-line bound: either \(\binom{k-1}{2}\ge q\), or every arc point is
+  saturated, which forces \(k=(q+1)/2\) with all arc points external or \(k=(q+3)/2\)
+  with all internal. **Both known examples are exactly the two saturated types**, and in
+  the saturated-external case the arc is a perfect matching of \(\mathbb P^1(\mathbb F_q)\)
+  with all pairwise resultants non-residues.
+
+What the saturated-external attack adds:
+
+- after fixing one matching edge, the arc condition forces a complete mapping of the cyclic
+  square group;
+- this excludes every \(q\equiv1\pmod4\), hence every odd square field, by a group-sum
+  obstruction;
+- for \(q\equiv3\pmod4\), the coherent scalar matching branch reduces to a genus-one character
+  sum and Hasse's bound forces \(q\in\{3,7,11\}\); only \(q=11\) also covers;
+- polarity turns covering into the assertion that the complete node set of \((q+1)/2\) secants,
+  consisting entirely of internal points, blocks every non-tangent line.
+
+What is now settled computationally: the complete classification, every \(k\) at once,
+for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
+hexagon at \(q=11\).
+
+Remaining frontier: counting cannot finish the job (both \(k_{\min}(q)\) and the largest
+conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternates with
+\(q\)). In the saturated-external branch the exact missing lemma is now sign coherence (or a
+counterexample): a cyclic complete mapping compatible with every nonsquare cross-resultant must
+have no sign-incoherence edge. The alternative saturated route is a structure-sensitive blocking
+bound for the internal node set. Outside saturation, the type-aware spare-line and general-position
+character-sum routes remain live.
+
 ## Current boundary
 
 - Open problem as stated: `papers/clebsch-rigidity/clebsch_rigidity.tex:1485-1489`.

@@ -33,6 +33,7 @@ For fresh sessions, the immediate paper-building step is C761. C756 remains
 the independent high-upside research task for the all-\(k\) conic-filling
 theorem. Paper IV's general passant-code definitions and weight-eight method
 are reusable inputs to C756, but C761 does not own or block that theorem.
+
 ## Program state
 
 | surface | root | current state | owning task |
@@ -253,8 +254,8 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
 | [C751 — Paper I proof-spine tightening](../clebsch-tasks/c751-paper-i-proof-spine-tightening.md) | complete; pentagon-first hybrid won the blind A/B 96--91, final referee GO, both release roots green | none |
 | [C752 — Paper I Lean spine audit](../clebsch-tasks/c752-paper-i-lean-spine-audit.md) | complete; transitive prose/definition audit and exact C753 packet interfaces frozen | none |
-| [C761 — Paper IV q13 passant code](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) | active; manuscript, verification, and plan infrastructure installed | freeze theorem language, extract paper-owned evidence, write the structural proof, and implement the semantic Lean gate |
 | [C753 — Paper I Lean spine closure](../clebsch-tasks/c753-paper-i-lean-spine-closure.md) | active; prose-source repairs and R1 first, then R2--R4 and O1--O8 | implement only the frozen same-mechanism interfaces and preserve packet gates |
+| [C761 — Paper IV q13 passant code](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) | active; manuscript, verification, and plan infrastructure installed | freeze theorem language, extract paper-owned evidence, write the structural proof, and implement the semantic Lean gate |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; C748's two-reader gate and authoritative release are green | complete C749 adversarial closure and C750 same-spine formal coverage before repackaging |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |
 | [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | complete; human proof 2/4 and independent modular read green under C748 | none |
@@ -275,6 +276,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | complete; two-graph flux and chiral commutator family survive, quadratic refinement and intrinsic spin structure do not | none |
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 | [C711 — Paper III sub-700 human proofs](../clebsch-tasks/c711-paper-iii-sub700-human-proofs.md) | complete; seven certificate-independent proofs, per-proof Tao checks, and frozen interfaces | none |
+| [C756 — all-\(k\) conic-filling classification](../clebsch-tasks/c756-all-k-conic-filling.md) | active; second pass closes saturated-external \(q\equiv1\pmod4\), reduces odd saturation to cyclic orthomorphisms, and closes the scalar subbranch by Hasse; bounded all-\(k\) classification remains \(q\le43\) | prove sign coherence for resultant-compatible complete mappings, or use the dual internal-node blocking structure; outside saturation retain the type-aware spare-line route |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -533,10 +535,10 @@ explicitly relative to the ordered golden representatives, plane-triple and
 Petersen labels, and normalized chart lift.  The full ambiguity ledger is
 integrated, and the sheet alone is not claimed to recover those inputs.
 Ordinary, isolated, visual, and fresh context-free gates are green.  The full
-geometric integral localization remains unspecified; versions 1 and 2 are
-released.  C680 is retired; C763 owns the selective Golden-core forward
-version, while the broader applications remain outside the numbered series.
-Full repair report:
+geometric integral localization remains unspecified; immutable artifact and
+versions 1 and 2 are released.  C680 is retired; C763 owns the selective
+Golden-core forward version, while the broader applications remain outside
+the numbered series.  Full repair report:
 `notes/2026-07-31-c733-paper-iii-relative-orientation-bridge.md`.
 
 C682 is independent exploration. Its current crown includes the

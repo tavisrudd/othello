@@ -1,0 +1,540 @@
+{
+ "rows": [
+  {
+   "fixed_edge_solutions": 2,
+   "invariants": [
+    {
+     "collinear_triples": 1,
+     "complete_mapping": false,
+     "count": 2,
+     "negative_degree_sequence": [
+      1,
+      1
+     ],
+     "negative_edges": 1,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 5
+  },
+  {
+   "fixed_edge_solutions": 5,
+   "invariants": [
+    {
+     "collinear_triples": 0,
+     "complete_mapping": true,
+     "count": 2,
+     "negative_degree_sequence": [
+      2,
+      2,
+      2
+     ],
+     "negative_edges": 3,
+     "positive_distinct_product_edges": 0
+    },
+    {
+     "collinear_triples": 4,
+     "complete_mapping": false,
+     "count": 3,
+     "negative_degree_sequence": [
+      0,
+      0,
+      0
+     ],
+     "negative_edges": 0,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 7
+  },
+  {
+   "fixed_edge_solutions": 12,
+   "invariants": [
+    {
+     "collinear_triples": 0,
+     "complete_mapping": true,
+     "count": 2,
+     "negative_degree_sequence": [
+      4,
+      4,
+      4,
+      4,
+      4
+     ],
+     "negative_edges": 10,
+     "positive_distinct_product_edges": 0
+    },
+    {
+     "collinear_triples": 20,
+     "complete_mapping": false,
+     "count": 5,
+     "negative_degree_sequence": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "negative_edges": 0,
+     "positive_distinct_product_edges": 0
+    },
+    {
+     "collinear_triples": 4,
+     "complete_mapping": false,
+     "count": 5,
+     "negative_degree_sequence": [
+      2,
+      2,
+      2,
+      2,
+      4
+     ],
+     "negative_edges": 6,
+     "positive_distinct_product_edges": 2
+    }
+   ],
+   "q": 11
+  },
+  {
+   "fixed_edge_solutions": 6,
+   "invariants": [
+    {
+     "collinear_triples": 35,
+     "complete_mapping": false,
+     "count": 6,
+     "negative_degree_sequence": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+     ],
+     "negative_edges": 15,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 13
+  },
+  {
+   "fixed_edge_solutions": 8,
+   "invariants": [
+    {
+     "collinear_triples": 84,
+     "complete_mapping": false,
+     "count": 8,
+     "negative_degree_sequence": [
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7
+     ],
+     "negative_edges": 28,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 17
+  },
+  {
+   "fixed_edge_solutions": 54,
+   "invariants": [
+    {
+     "collinear_triples": 120,
+     "complete_mapping": false,
+     "count": 9,
+     "negative_degree_sequence": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "negative_edges": 0,
+     "positive_distinct_product_edges": 0
+    },
+    {
+     "collinear_triples": 24,
+     "complete_mapping": false,
+     "count": 18,
+     "negative_degree_sequence": [
+      0,
+      2,
+      2,
+      4,
+      4,
+      6,
+      6,
+      6,
+      6
+     ],
+     "negative_edges": 18,
+     "positive_distinct_product_edges": 8
+    },
+    {
+     "collinear_triples": 24,
+     "complete_mapping": false,
+     "count": 9,
+     "negative_degree_sequence": [
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      4,
+      4,
+      4
+     ],
+     "negative_edges": 14,
+     "positive_distinct_product_edges": 10
+    },
+    {
+     "collinear_triples": 24,
+     "complete_mapping": false,
+     "count": 18,
+     "negative_degree_sequence": [
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      8
+     ],
+     "negative_edges": 26,
+     "positive_distinct_product_edges": 8
+    }
+   ],
+   "q": 19
+  },
+  {
+   "fixed_edge_solutions": 121,
+   "invariants": [
+    {
+     "collinear_triples": 20,
+     "complete_mapping": false,
+     "count": 22,
+     "negative_degree_sequence": [
+      2,
+      4,
+      4,
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      6,
+      8
+     ],
+     "negative_edges": 28,
+     "positive_distinct_product_edges": 22
+    },
+    {
+     "collinear_triples": 20,
+     "complete_mapping": false,
+     "count": 22,
+     "negative_degree_sequence": [
+      2,
+      6,
+      6,
+      6,
+      6,
+      6,
+      8,
+      8,
+      8,
+      8,
+      8
+     ],
+     "negative_edges": 36,
+     "positive_distinct_product_edges": 14
+    },
+    {
+     "collinear_triples": 20,
+     "complete_mapping": false,
+     "count": 22,
+     "negative_degree_sequence": [
+      4,
+      4,
+      4,
+      4,
+      6,
+      6,
+      6,
+      6,
+      8,
+      8,
+      8
+     ],
+     "negative_edges": 32,
+     "positive_distinct_product_edges": 18
+    },
+    {
+     "collinear_triples": 220,
+     "complete_mapping": false,
+     "count": 11,
+     "negative_degree_sequence": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "negative_edges": 0,
+     "positive_distinct_product_edges": 0
+    },
+    {
+     "collinear_triples": 24,
+     "complete_mapping": false,
+     "count": 44,
+     "negative_degree_sequence": [
+      2,
+      2,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      8,
+      8
+     ],
+     "negative_edges": 31,
+     "positive_distinct_product_edges": 18
+    }
+   ],
+   "q": 23
+  },
+  {
+   "fixed_edge_solutions": 14,
+   "invariants": [
+    {
+     "collinear_triples": 455,
+     "complete_mapping": false,
+     "count": 14,
+     "negative_degree_sequence": [
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13
+     ],
+     "negative_edges": 91,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 29
+  },
+  {
+   "fixed_edge_solutions": 31,
+   "invariants": [
+    {
+     "collinear_triples": 560,
+     "complete_mapping": false,
+     "count": 15,
+     "negative_degree_sequence": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "negative_edges": 0,
+     "positive_distinct_product_edges": 0
+    },
+    {
+     "collinear_triples": 60,
+     "complete_mapping": false,
+     "count": 10,
+     "negative_degree_sequence": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      12,
+      12,
+      12
+     ],
+     "negative_edges": 66,
+     "positive_distinct_product_edges": 30
+    },
+    {
+     "collinear_triples": 60,
+     "complete_mapping": false,
+     "count": 6,
+     "negative_degree_sequence": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      8,
+      8,
+      8,
+      8,
+      8
+     ],
+     "negative_edges": 50,
+     "positive_distinct_product_edges": 40
+    }
+   ],
+   "q": 31
+  },
+  {
+   "fixed_edge_solutions": 18,
+   "invariants": [
+    {
+     "collinear_triples": 969,
+     "complete_mapping": false,
+     "count": 18,
+     "negative_degree_sequence": [
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17
+     ],
+     "negative_edges": 153,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 37
+  },
+  {
+   "fixed_edge_solutions": 20,
+   "invariants": [
+    {
+     "collinear_triples": 1330,
+     "complete_mapping": false,
+     "count": 20,
+     "negative_degree_sequence": [
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19,
+      19
+     ],
+     "negative_edges": 190,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 41
+  },
+  {
+   "fixed_edge_solutions": 21,
+   "invariants": [
+    {
+     "collinear_triples": 1540,
+     "complete_mapping": false,
+     "count": 21,
+     "negative_degree_sequence": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "negative_edges": 0,
+     "positive_distinct_product_edges": 0
+    }
+   ],
+   "q": 43
+  }
+ ],
+ "schema": 1,
+ "task": "C756"
+}
