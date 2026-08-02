@@ -54,6 +54,20 @@ no predecessor for the exact conjunction within the recorded search boundary.
 An independent finite-geometer/coding cold read found no release-blocking
 defect and cleared four minor exposition repairs.
 
+C620 has completed its mathematical and reproducibility pass.  The first
+fresh carrier has empty split-free locus over every admissible binary field:
+C530/C531/C578 close the invariant four-space, a uniform genus-one
+final-pair argument closes the two-moduli complement from `q>=64`, and exact
+Borel-quotient certificates close `q=16,32`.  The same quotient gives a sharp
+obstruction to an exact linearized-polynomial law: 101 of the 292 `q=16`
+complement orbits have ordinary split witnesses but no projective-additive
+three-space witness.  The exact uniform replacement is the two-equation
+final-pair system with its Artin--Schreier trace and collision conditions.
+The result is placed in Version 2 and removes C532's remaining carrier
+residue.  C620 remains active only for an independent specialist proof review
+and the required post-review extra-juice/Tao closeout; its report is
+`notes/2026-08-02-c620-higher-lucas-modular-carriers.md`.
+
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
 Zenodo version DOI `10.5281/zenodo.21682216`, and concept DOI
@@ -969,10 +983,10 @@ from queue-row placement:
    generic-point rowspace transport give the all-level contained-carrier
    theorem; the incompatible vertical degrees sharply exclude the former
    arbitrary-base reduced scheme claim.
-2. **C620 — higher Lucas incidence (current dispatch).**  Classify the first fresh
-   carrier and decide whether a uniform digit-pattern/subspace-polynomial
-   criterion exists.  Membership in a Lucas kernel is never evidence of
-   split-freeness by itself.
+2. **C620 — higher Lucas incidence (review dispatch).**  The first carrier is
+   uniformly shallow and the exact trace criterion replaces the disproved
+   subspace-polynomial equivalence.  Run the independent specialist review,
+   repair if needed, then close out and archive the task.
 3. **C660 — independent R7 completeness.**  Remove the primary quotient
    enumerator from the bounded-field completeness route.  This is a trust
    upgrade, not a stronger deep-hole theorem, and it must retain the
@@ -1002,7 +1016,7 @@ companion formal geometry and is not a dispatch candidate in this ranking.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C620 | publication gate cleared; C820 geometry frozen | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion needed to evaluate the recursive theorem on new characteristic-two strata |
+| 1 | C620 | theorem/reproducibility green; specialist review pending | pressure-test the empty first-carrier theorem, degree-22 selection, exact trace criterion, and Version 2 placement; then close out |
 | 2 | C660 | publication gate cleared | remove R7's largest remaining computational single point of trust before final Version 2 synthesis |
 | 3 | C821 | after C646 and the C620 placement decision | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
 | 4 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |

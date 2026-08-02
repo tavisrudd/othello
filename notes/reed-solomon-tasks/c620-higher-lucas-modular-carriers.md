@@ -2,6 +2,9 @@
 
 **Lane:** `reed-solomon`
 
+**Status:** mathematics and reproducibility complete 2026-08-02; independent
+specialist review and post-review closeout pending
+
 **Dependency gate:** Cleared.  C545 published Version 1 on 2026-07-29 under
 Zenodo DOI `10.5281/zenodo.21682216`.  This task remains separate from the
 immutable Version 1 artifact.
@@ -58,6 +61,25 @@ six and seven are calibration cases, not assumptions.
   specialist review; and
 - a placement decision between Version 2 of the beyond-four paper and a
   separate modular-carrier companion.
+
+## Current result
+
+The first fresh carrier has empty split-free locus over every admissible
+binary field.  C530/C531/C578 close its invariant four-space; a uniform
+six-root/final-pair Artin--Schreier argument closes the two-moduli complement
+from `q>=64`, and exact Borel-quotient certificates close `q=16,32`.
+Subspace-polynomial witnesses are not exhaustive: at `q=16`, 101 of the 292
+complement orbits have ordinary split witnesses but no projective-additive
+three-space witness.  The exact uniform replacement is the final-pair linear
+system plus trace and collision conditions.  The result belongs in Version 2
+because it directly evaluates C820's first new carrier.
+
+Report and evidence:
+`notes/2026-08-02-c620-higher-lucas-modular-carriers.md` and its adjacent
+generator, two JSON certificates, independent replay, and checksum manifest.
+The remaining gate is an independent finite-geometer/coding-theorist proof
+review; after repair, run the required extra-juice/Tao closeout and lifecycle
+transition to C660.
 
 ## Cold-session routing
 
