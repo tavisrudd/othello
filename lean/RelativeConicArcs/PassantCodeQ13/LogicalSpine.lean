@@ -35,6 +35,96 @@ theorem weightTen_secant_count_is_zero_or_two
   obtain ⟨half, rfl⟩ := secantNeighbors_even
   omega
 
+private theorem card_le_sum_of_one_le
+    {Index : Type*} [DecidableEq Index]
+    (indices : Finset Index) (value : Index → ℕ)
+    (one_le : ∀ index ∈ indices, 1 ≤ value index) :
+    indices.card ≤ ∑ index ∈ indices, value index := by
+  rw [Finset.card_eq_sum_ones]
+  exact Finset.sum_le_sum fun index index_mem => one_le index index_mem
+
+/-- Seven positive fibre multiplicities summing to seven are all one. -/
+theorem seven_positive_fibres_sum_seven
+    (fibreSize : Fin 7 → ℕ)
+    (positive : ∀ index, 0 < fibreSize index)
+    (total : ∑ index, fibreSize index = 7) :
+    ∀ index, fibreSize index = 1 := by
+  intro index
+  have other_fibres : 6 ≤ ∑ other ∈ Finset.univ.erase index, fibreSize other := by
+    have erased_card : (Finset.univ.erase index : Finset (Fin 7)).card = 6 := by simp
+    rw [← erased_card]
+    exact card_le_sum_of_one_le _ _ fun other _ => positive other
+  have decomposition :
+      (∑ other ∈ Finset.univ.erase index, fibreSize other) + fibreSize index = 7 := by
+    rw [Finset.sum_erase_add _ _ (Finset.mem_univ index), total]
+  let remainder := ∑ other ∈ Finset.univ.erase index, fibreSize other
+  change 6 ≤ remainder at other_fibres
+  change remainder + fibreSize index = 7 at decomposition
+  have point_positive := positive index
+  omega
+
+/-- Seven positive odd fibre multiplicities summing to nine consist of one three and six ones. -/
+theorem seven_positive_odd_fibres_sum_nine
+    (fibreSize : Fin 7 → ℕ)
+    (positive : ∀ index, 0 < fibreSize index)
+    (odd : ∀ index, Odd (fibreSize index))
+    (total : ∑ index, fibreSize index = 9) :
+    ∃ exceptional, fibreSize exceptional = 3 ∧
+      ∀ index, index ≠ exceptional → fibreSize index = 1 := by
+  have value_one_or_three : ∀ index, fibreSize index = 1 ∨ fibreSize index = 3 := by
+    intro index
+    have other_fibres : 6 ≤ ∑ other ∈ Finset.univ.erase index, fibreSize other := by
+      have erased_card : (Finset.univ.erase index : Finset (Fin 7)).card = 6 := by simp
+      rw [← erased_card]
+      exact card_le_sum_of_one_le _ _ fun other _ => positive other
+    have decomposition :
+        (∑ other ∈ Finset.univ.erase index, fibreSize other) + fibreSize index = 9 := by
+      rw [Finset.sum_erase_add _ _ (Finset.mem_univ index), total]
+    let remainder := ∑ other ∈ Finset.univ.erase index, fibreSize other
+    change 6 ≤ remainder at other_fibres
+    change remainder + fibreSize index = 9 at decomposition
+    have point_positive := positive index
+    obtain ⟨half, odd_value⟩ := odd index
+    omega
+  have some_three : ∃ index, fibreSize index = 3 := by
+    by_contra no_three
+    push Not at no_three
+    have all_one : ∀ index, fibreSize index = 1 := fun index =>
+      (value_one_or_three index).resolve_right (no_three index)
+    have sum_is_seven : ∑ index, fibreSize index = 7 := by simp [all_one]
+    omega
+  obtain ⟨exceptional, exceptional_three⟩ := some_three
+  refine ⟨exceptional, exceptional_three, ?_⟩
+  intro index index_ne
+  rcases value_one_or_three index with value_one | value_three
+  · exact value_one
+  · exfalso
+    have index_mem : index ∈ (Finset.univ.erase exceptional : Finset (Fin 7)) := by
+      simp [index_ne]
+    have remaining_fibres :
+        5 ≤ ∑ other ∈ (Finset.univ.erase exceptional).erase index, fibreSize other := by
+      have erased_card :
+          ((Finset.univ.erase exceptional).erase index : Finset (Fin 7)).card = 5 := by
+        simp [index_ne]
+      rw [← erased_card]
+      exact card_le_sum_of_one_le _ _ fun other _ => positive other
+    have first_decomposition :
+        (∑ other ∈ Finset.univ.erase exceptional, fibreSize other) +
+            fibreSize exceptional = 9 := by
+      rw [Finset.sum_erase_add _ _ (Finset.mem_univ exceptional), total]
+    have second_decomposition :
+        (∑ other ∈ (Finset.univ.erase exceptional).erase index, fibreSize other) +
+            fibreSize index =
+          ∑ other ∈ Finset.univ.erase exceptional, fibreSize other := by
+      exact Finset.sum_erase_add _ _ index_mem
+    let firstRemainder := ∑ other ∈ Finset.univ.erase exceptional, fibreSize other
+    let secondRemainder :=
+      ∑ other ∈ (Finset.univ.erase exceptional).erase index, fibreSize other
+    change 5 ≤ secondRemainder at remaining_fibres
+    change firstRemainder + fibreSize exceptional = 9 at first_decomposition
+    change secondRemainder + fibreSize index = firstRemainder at second_decomposition
+    omega
+
 section Association
 
 variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]

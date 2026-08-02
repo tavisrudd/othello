@@ -55,4 +55,22 @@ theorem weightTen_profile_reduction
   LogicalSpine.weightTen_secant_count_is_zero_or_two secantNeighbors secantNeighbors_even
     seven_nonempty_fibres
 
+/-- The isolated weight-ten case has one three-point fibre and six singleton fibres. -/
+theorem weightTen_isolated_fibre_profile
+    (fibreSize : Fin 7 → ℕ)
+    (positive : ∀ index, 0 < fibreSize index)
+    (odd : ∀ index, Odd (fibreSize index))
+    (total : ∑ index, fibreSize index = 9) :
+    ∃ exceptional, fibreSize exceptional = 3 ∧
+      ∀ index, index ≠ exceptional → fibreSize index = 1 :=
+  LogicalSpine.seven_positive_odd_fibres_sum_nine fibreSize positive odd total
+
+/-- The cycle weight-ten case has seven singleton passant fibres. -/
+theorem weightTen_cycle_fibre_profile
+    (fibreSize : Fin 7 → ℕ)
+    (positive : ∀ index, 0 < fibreSize index)
+    (total : ∑ index, fibreSize index = 7) :
+    ∀ index, fibreSize index = 1 :=
+  LogicalSpine.seven_positive_fibres_sum_seven fibreSize positive total
+
 end RelativeConicArcs.Gates.PassantCodeQ13

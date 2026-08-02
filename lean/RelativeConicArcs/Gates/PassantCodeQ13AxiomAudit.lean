@@ -16,6 +16,10 @@ reconstruction-interface terminals exported by `RelativeConicArcs.Gates.PassantC
 #print axioms RelativeConicArcs.PassantCodeQ13.WeightEight.fiveClique_maximality_check
 #print axioms RelativeConicArcs.PassantCodeQ13.reconstructedRows_eq_passantRows
 #print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightTen_profile_reduction
+#print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightTen_isolated_fibre_profile
+#print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightTen_cycle_fibre_profile
+#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.seven_positive_fibres_sum_seven
+#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.seven_positive_odd_fibres_sum_nine
 #print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.association_kernel_rigidity
 #print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.relationOnKernel_surjective
 #print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.relation_range_eq_kernel

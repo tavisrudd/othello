@@ -31,7 +31,8 @@ a claim that the complete main theorem is Lean-proved.
   minimum-layer certificate record, and the coordinate-automorphism
   identification interface.
 - `LogicalSpine.lean`: proof-only reductions for the seven-companion lower
-  bound, the two weight-ten pencil profiles, association-kernel rigidity and
+  bound, `s=0 or 2`, the exact `(3,1,1,1,1,1,1;0)` and
+  `(1,1,1,1,1,1,1;2)` fibre multiplicities, association-kernel rigidity and
   surjectivity, `im B = ker A`, orbit spanning from a factorization `B=NᵀN`,
   and the abstract four-anchor closure.  It contains no native evaluation.
 - `Gates/PassantCodeQ13.lean` and `PassantCodeQ13AxiomAudit.lean`: aggregate
@@ -85,6 +86,12 @@ large enumeration:
 This is the useful Tao-style compression: the invariant reductions are the
 proof, while native evaluation records discovery and checks only finite
 terminal nodes that remain uncompressible.
+
+The deeper think-through pass closed a previously loose point in item 3:
+Lean now proves that seven positive fibres of total size seven are all
+singletons, and that seven positive odd fibres of total size nine are exactly
+one triple and six singletons.  Thus the finite leaves begin only after the
+two displayed profiles have been logically derived.
 
 ## Further compression from the extra-juice passes
 
@@ -147,8 +154,8 @@ them as completed semantic transports.
   `/home/tavis/.cache/othello-lean-build/run-20260802-005420-71bb12da`.
 - Logical-spine extension: direct pinned build of
   `RelativeConicArcs.Gates.PassantCodeQ13` and its axiom audit green; the new
-  profile, association, range/factorization, and anchor deductions have no
-  native-decision axiom.
+  secant-count, exact fibre-profile, association, range/factorization, and
+  anchor deductions have no native-decision axiom.
 - Standalone full shard run:
   `/home/tavis/.cache/othello-lean-build/run-20260802-004847-bc341bd6`.
 - Standalone final gate and audit:
