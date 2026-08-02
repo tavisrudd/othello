@@ -14,8 +14,9 @@ Discovery companion:
 minimum-support rounding.**  Orthogonality of all minimum-support sectors and
 a regular two-sector cover give an aggregate frame-rounding radius
 `Theta_q(m^{-3/4}(2/q)^m)` for stabilizer `AME(2m,q)` states, followed by the
-budget-free residual estimate `D <= pi sqrt(q) eps`.  The radius is polynomial
-at `q=2`, improves the exponential base at `q=3`, improves the frame prefactor
+budget-free residual estimate `D <= pi sqrt(q) eps`.  The radius formula is
+polynomial at `q=2` conditional on existence, improves the exponential base
+at `q=3`, improves the frame prefactor
 at `q=4`, and loses to the one-marginal theorem for `q>4`; the legacy global
 `ell^1` conclusion has the smaller `m^{-5/4}` scale at `q=2`.  The theorem,
 scope boundary, trust maps, and framing are adopted in the manuscript.  No

@@ -37,8 +37,9 @@ instead of the one-marginal scale \(2q^{(m+1)/2}\).  Since
 \[
  \alpha_{m,q}\sim 2(\pi m)^{1/4}(q/2)^m.
 \]
-Consequently the defect threshold for coherent local frames is polynomial,
-of order \(m^{-3/4}\), at \(q=2\); it has order
+Consequently the formula for the defect threshold for coherent local frames
+is polynomial, of order \(m^{-3/4}\), at \(q=2\), conditional on existence
+of the stated AME state; it has order
 \(m^{-3/4}(2/3)^m\) at \(q=3\), which improves the old exponential base;
 at \(q=4\) the exponential bases tie and aggregation improves the
 frame-rounding prefactor; the original route remains better for \(q>4\).
