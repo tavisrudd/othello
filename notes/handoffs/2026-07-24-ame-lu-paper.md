@@ -34,6 +34,14 @@ against the source note's plateau boundary on 2026-08-01; see
 `2026-08-01-c778-strip-certificates/PROVENANCE.md`.  If this
 becomes its own manuscript it needs its own lane, which requires approval.
 
+**C782--C785 queued (2026-08-01): open tails of the same external material.**
+C782 writes the general p-power qudit sector airtight and covers p=3; C783
+extends the boundary from the transversal-T sector to the full weighted
+diagonal sector; C784 repairs a scope gap, since the lattice classification is
+proved for equal-phase CSS coset states but the semi-Clifford reduction
+applies it to general stabilizer states; C785 searches the 16-qubit
+Reed--Muller state for non-diagonal non-Clifford product symmetries.
+
 **C734 closed (2026-07-31): Clebsch syndrome bridge formalized and proof
 spine made structural.**  `SyndromeGeometry` now proves generically that
 translated equal-phase states are classified by code cosets, distinct cosets

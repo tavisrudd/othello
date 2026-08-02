@@ -263,3 +263,16 @@ Strong and clean. The robust theorem survives with a transparent condition
 number, while C623 supplies an exact principled boundary rather than a
 nuisance exception. It is useful as a quantitative upgrade but correctly
 remains subordinate to the paper's exact rigidity theorem.
+
+## Successor note (2026-08-01)
+
+This result closed without manuscript adoption. C776 revisits that decision,
+because an external session produced a complementary stability statement and
+the two are stronger together than either alone. This report bounds how far an
+approximate *intertwiner between two* equal-phase `[6,3,4]_q` states is from an
+exact Clifford, with a constant that grows like `q^2`. The new statement bounds
+the generators of an approximate *symmetry of one* 2-uniform state, needs no
+stabilizer hypothesis, and its constant does not degrade with the party count.
+Adopting only one of them would leave the obvious question unanswered in
+whichever direction was dropped. See
+`2026-08-01-external-chat-artifact-gap-review.md`.

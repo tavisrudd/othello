@@ -137,6 +137,12 @@ These are connections to investigate, not novelty claims.
    could connect exact LU rigidity to robust fault tolerance and
    approximate Eastin--Knill bounds.
 
+   *Executed externally, 2026-07-29; queued here as C774--C777 on 2026-08-01.*
+   The route taken was not the tensor-axis one: 2-uniformity alone gives
+   discreteness with no stabilizer hypothesis, and the stability constant is
+   independent of the party count.  See
+   `2026-08-01-external-chat-artifact-gap-review.md`.
+
 The manuscript already cites or explicitly discusses Coble/Gale
 association, Eastin--Knill, finite-field Weil lifting, and extension-field
 Frobenius.  Those themes are underexploited, not absent.

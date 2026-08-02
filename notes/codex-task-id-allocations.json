@@ -2105,8 +2105,17 @@
       "last": 781,
       "purpose": "close referee-round-three attribution, standalone gate, and structural balanced-spectrum proof",
       "sequence": 234
+    },
+    {
+      "count": 4,
+      "first": 782,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 785,
+      "purpose": "qudit general p-power sector, weighted-t diagonal LP, affine-twisted classification extension, and beyond-diagonal RM(1,4) search",
+      "sequence": 235
     }
   ],
-  "next_id": 782,
+  "next_id": 786,
   "schema": "codex-task-id-allocations-v1"
 }

@@ -130,6 +130,13 @@ neither the corrected algebra of this report nor any of the benchmark code or re
 Note that the `continuation` lane in this repository is about projective four-point-frame
 continuation graphs, unrelated to the continuation-Hankel stream algebra of these scripts.
 
+## Related
+
+Cross-lane fusion proposals from the same external correspondence, with their premises checked
+locally, are in `2026-08-01-cross-lane-fusion-candidates.md`. Recovered
+verification scripts, their replays, and the defects found in the source session's own correction log
+are in `2026-08-01-c778-strip-certificates/PROVENANCE.md`.
+
 ## Disposition
 
 1. The three zip notes belong to `ame-lu`, not `golden`. Importing them needs allocated `ame-lu`
