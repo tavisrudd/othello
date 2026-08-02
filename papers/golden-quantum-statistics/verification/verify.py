@@ -26,7 +26,7 @@ SOURCES = {
 }
 
 INTERNAL_ID = re.compile(r"(?<![A-Za-z0-9])[Cc][0-9]{2,}(?![A-Za-z0-9])")
-PRIVATE_PATH = re.compile(r"notes/20[0-9]{2}-[0-9]{2}-[0-9]{2}-c[0-9]+")
+PRIVATE_PATH = re.compile(r"notes" r"/20[0-9]{2}-[0-9]{2}-[0-9]{2}-c[0-9]+")
 TEXT_SUFFIXES = {".json", ".md", ".py", ".tex"}
 
 

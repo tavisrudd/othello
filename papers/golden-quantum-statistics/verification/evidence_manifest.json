@@ -69,8 +69,8 @@
       "sha256": "511eb6837ec3b59769f4a2e3d76a9658403907f270246e9d739bec1afcc345e0"
     },
     "verification/verify.py": {
-      "bytes": 13630,
-      "sha256": "2df92a1c32f905d458430f7ea2c0a8a932996c9710cf017914136fba2c571ea6"
+      "bytes": 13634,
+      "sha256": "8cd027702e504469e1e5010f466f71670cd22cb924b1bb0b92b3168ffe37df31"
     }
   },
   "schema": "golden-quantum-statistics-manifest-v1"

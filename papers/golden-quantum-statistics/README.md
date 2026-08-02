@@ -14,7 +14,7 @@ The paper owns:
 - the common-reference coherent-tomography/bosonic precursor and the
   antisymmetric-resource design limit.
 
-The broader Golden operator inventory remains in `papers/golden-operator/`.
+The broader Golden operator inventory remains outside this repository.
 Paper III remains outside this manuscript's write surface. A forward citation
 from Paper III is permitted only after this paper has a stable public preprint
 locator.
