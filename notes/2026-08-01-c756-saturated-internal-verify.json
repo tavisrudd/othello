@@ -1,0 +1,41 @@
+{
+ "all_checks_pass": true,
+ "counts": {
+  "11": {
+   "arcs": 0,
+   "candidates": 28,
+   "coherent": 0,
+   "covering": 0
+  },
+  "13": {
+   "arcs": 0,
+   "candidates": 0,
+   "coherent": 0,
+   "covering": 0
+  },
+  "19": {
+   "arcs": 0,
+   "candidates": 55,
+   "coherent": 0,
+   "covering": 0
+  },
+  "5": {
+   "arcs": 2,
+   "candidates": 2,
+   "coherent": 2,
+   "covering": 2
+  },
+  "7": {
+   "arcs": 0,
+   "candidates": 5,
+   "coherent": 0,
+   "covering": 0
+  },
+  "q5_identity_suite": [
+   "ok",
+   "ok"
+  ]
+ },
+ "task": "C756",
+ "verifier": "saturated-internal"
+}
