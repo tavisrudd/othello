@@ -1,4 +1,4 @@
-# Claim, proof, and novelty ledger
+# Claim, proof, and literature boundaries
 
 This ledger records the claim-level boundary established by the 2026-08-01
 headline literature sweep. It licenses no unqualified claim of priority.
