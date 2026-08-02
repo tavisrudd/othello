@@ -31,7 +31,6 @@ Source material for C774--C777 is the external Fable session note
 numerical claim must be regenerated here under
 `notes/research-reproducibility-conventions.md`.
 
-- **C830 `[ame-lu]` [QUEUED; POST-VERSION-2 GLOBAL ROUNDING ENHANCEMENT]** — prove or refute a global rounding theorem for approximate product symmetries of stabilizer \(\AME(2m,q)\) states that avoids reading one exponentially faint \((m+1)\)-party marginal.  The primary route is to combine all balanced cuts, or characterize the equality and near-equality cases of the half-splitting bound, to force coherent nearby local Clifford frames from a small global defect.  Quantify the best threshold actually proved and compare it with the present \(q^{-(n+4)/4}/n\) defect-only threshold and the constant-scale generator-coordinate estimates; do not promise a constant threshold or call the current bound a limit.  Acceptance requires an adversarial family search, exact hypothesis/metric bookkeeping, independent checking of any computation, and manuscript adoption only after the theorem and its scope survive review → `notes/2026-08-02-c830-global-ame-rounding.md`.
 
 
 

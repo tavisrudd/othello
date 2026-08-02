@@ -1605,6 +1605,153 @@ defect is first rounded to a product Clifford by
 Proposition~\ref{prop:quantitative-intertwiner}, and the rounded operator
 is then an exact symmetry outright, because a near-miss is impossible.
 
+The rounding need not inspect one minimum-support marginal in isolation.
+All such marginals are projections of orthogonal exact-support sectors of
+the same global density-matrix difference.  Summing their squared errors
+therefore recovers part of the signal lost by marginalization.
+
+\begin{lemma}[Collective minimum-support energy]
+\label{lem:collective-support-energy}
+Let \(\rho=\lvert\psi\rangle\langle\psi\rvert\),
+\(\Delta=U\rho U^\dagger-\rho\), \(n=2m\), and \(r=m+1\).  Then
+\[
+ \sum_{\substack{A\subseteq[n]\\|A|=r}}
+ q^r\lVert\Delta_A\rVert_{\mathrm{HS}}^2
+ \leq q^n\lVert\Delta\rVert_{\mathrm{HS}}^2
+ \leq2q^n\varepsilon(U)^2.                       \tag{5.7}
+\]
+Writing \(\delta_A=q^{r/2}\lVert\Delta_A\rVert_{\mathrm{HS}}\) and
+\(N_m=\binom{2m}{m+1}\), there are two \(r\)-sets \(A,B\) with
+\(A\cup B=[n]\) and
+\[
+ \delta_A^2+\delta_B^2
+ \leq \frac{4q^n}{N_m}\varepsilon(U)^2.          \tag{5.8}
+\]
+\end{lemma}
+
+\begin{proof}
+The stabilizer expansion of \(\rho\) has no nonidentity component on at
+most \(m\) sites.  Local conjugation preserves exact support because it
+preserves tracelessness.  Thus \(\Delta_A\), for \(|A|=r\), is precisely
+the partial trace of the exact-support-\(A\) component of \(\Delta\).
+If that component is \(D_A\otimes I_{A^c}\), then
+\(\Delta_A=q^{n-r}D_A\) and
+\[
+ \lVert D_A\otimes I_{A^c}\rVert_{mathrm{HS}}^2
+ =q^{-(n-r)}\lVert\Delta_A\rVert_{mathrm{HS}}^2.
+\]
+Exact-support subspaces are mutually orthogonal, which gives the first
+inequality in (5.7).  The second follows from
+\(\lVert\Delta\rVert_{mathrm{HS}}^2
+=2(1-|\langle\psi|U|\psi\rangle|^2)leq2\varepsilon(U)^2\).
+
+Join two \(r\)-sets when their union is \([n]\).  This graph is regular:
+for fixed \(A\), the complement of a neighbor is any \((m-1)\)-subset of
+\(A\).  Averaging \(\delta_A^2+\delta_B^2\) over its edges gives twice
+the vertex average.  One edge therefore satisfies (5.8).
+\end{proof}
+
+The two good sets cover every party, so the quantitative-axis argument can
+be applied to \(A\) and \(B\), using \(A\) on their intersection.  This
+gives one product Clifford while retaining collective \(\ell^2\) control
+of the local errors.  Two-uniformity then converts that control directly
+to state distance, without a telescoping \(\ell^1\) estimate.
+
+\begin{theorem}[Aggregate global rounding]
+\label{thm:aggregate-global-rounding}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
+\(q=p^e\) and \(m\geq3\).  Put
+\[
+ \begin{gathered}
+ N_m=\binom{2m}{m+1},\quad r=m+1,\quad
+ d_p=(2-2p^{-1/2})^{1/2},\\
+ R_{m,q}=\min\left\{
+ \frac{\tau_p\sqrt{N_m}}{2q^m},
+ \frac{\sqrt{N_m}}{2q^{m+1/2}},
+ \frac{\sqrt{N_m}}{2\pi\sqrt{2r}\,q^m},
+ \frac{d_p}{1+\pi\sqrt{2r q^{2m}/N_m}}
+ \right\}.                                             \tag{5.9}
+ \end{gathered}
+\]
+If \(\varepsilon(U)<R_{m,q}\), then, up to a global phase,
+\[
+ U=g\bigotimes_{i=1}^{2m}e^{ih_i},\qquad g\in G(\psi),
+\]
+where the \(h_i\) are traceless Hermitian, have spectral spread at most
+\(\pi\), and satisfy
+\[
+ \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
+ \leq\pi\sqrt q\,\varepsilon(U).                       \tag{5.10}
+\]
+Moreover \(R_{m,q}=\Theta_q(m^{-3/4}(2/q)^m)\).  Thus this route is
+polynomial in \(m\) at \(q=2\), improves the exponential base at \(q=3\),
+improves the frame-rounding prefactor at \(q=4\), and is superseded by
+Theorem~\ref{thm:explicit-threshold} for \(q>4\).
+\end{theorem}
+
+\begin{proof}
+Choose \(A,B\) from Lemma~\ref{lem:collective-support-energy}.  The
+nonidentity part of each marginal has diagonal Weyl coefficient
+\(q^{-r/2}\), so Lemma~\ref{lem:quantitative-axes} and its
+additivity, commutator, and phase steps give a Clifford \(K_i\) at each
+party with
+\[
+ q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}
+ \leq\sqrt2\delta_i,\qquad
+ \sum_i\delta_i^2
+ \leq r(\delta_A^2+\delta_B^2)
+ \leq\frac{4rq^n}{N_m}\varepsilon(U)^2,          \tag{5.11}
+\]
+where \(\delta_i=\delta_A\) on \(A\) and \(\delta_i=\delta_B\) on
+\(A^c\subset B\).  The first clause of (5.9) supplies the axis threshold
+\(\tau_p\).
+
+Choose principal eigenangles of \(K_i^\dagger U_i\) after optimizing its
+scalar phase and subtract their mean, obtaining traceless \(h_i\).
+Since \(|x|\leq(\pi/2)|e^{ix}-1|\) for \(|x|\leq\pi\),
+\[
+ D^2:=\sum_i\lVert h_i\rVert_F^2
+ \leq\frac{\pi^2q}{2}\sum_i\delta_i^2
+ \leq\frac{2\pi^2qrq^n}{N_m}\varepsilon(U)^2.   \tag{5.12}
+\]
+The second clause of (5.9) puts all eigenangles in an arc of length
+\(\pi\); the third gives \(D\leq\sqrt q/2\).
+
+Put \(K=\bigotimes_iK_i\) and
+\(V=K^\dagger U=\bigotimes_ie^{ih_i}\), up to phase.  If
+\(M=\sum_ih_i^{(i)}\), two-uniformity and tracelessness give
+\(\langle M^2\rangle=D^2/q\).  Hence
+\[
+ \lVert(V-I)\psi\rVert^2
+ =\langle2-2\cos M\rangle\leq\langle M^2\rangle=D^2/q.
+\]
+Together with (5.12), the fourth clause of (5.9) puts the rays of
+\(K\psi\) and \(\psi\) less than \(d_p\) apart.  Corollary
+\ref{cor:uniform-separation} forces \(K\in G(\psi)\).  Apply
+Theorem~\ref{thm:budget-free-stability} to the residual \(V\): its
+constant has \(c\geq4/\pi^2\), giving (5.10).
+
+Finally \(N_m\sim4^m/\sqrt{\pi m}\).  The third and fourth clauses of
+(5.9) have order \(m^{-3/4}(2/q)^m\), and the other two are larger by a
+polynomial factor.  Comparison with the
+\(q^{-(m+2)/2}/m\) scale below gives the stated boundary at \(q=4\).
+\end{proof}
+
+The theorem separates frame recognition from the choice of residual
+metric.  If the \(\ell^1\) conclusion of
+Corollary~\ref{cor:approximate-decomposition} is required, the same
+covering pair and a telescoping estimate give it below
+\[
+ \min\left\{
+  \frac{\tau_p\sqrt{N_m}}{2q^m},
+  \frac{\sqrt{N_m}}
+       {4\pi\sqrt{2q}\sqrt{(m+1)^2+(m-1)^2}\,q^m}
+ \right\}.                                           \tag{5.13}
+\]
+At \(q=2\) this is of order \(m^{-5/4}\).  The loss relative to (5.9)
+comes from imposing a global generator \(\ell^1\) budget after the frames
+are known; it is not a remaining marginal-dilution loss.
+
 \begin{theorem}[Explicit decomposition threshold]
 \label{thm:explicit-threshold}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
@@ -1672,7 +1819,7 @@ The factorization is also constructive in the sense that matters: \(g\) is
 produced from \(U\) by rounding each local factor to a Clifford, and an
 \((m+1)\)-party marginal certifies the rounding.
 
-The price is the size of \(\varepsilon_0\), which is
+For this single-marginal route the price is the size of \(\varepsilon_0\), which is
 \(q^{-(n+4)/4}/n\) up to constants and therefore exponentially small in the
 number of parties.  Two steps pay it.  Rounding costs \(q^{(m+1)/2}\), and
 by the marginal-dilution remark after
@@ -1681,7 +1828,9 @@ single small marginal can avoid that factor.  Summing \(n\) per-site
 operator-norm errors and taking \(n\) logarithms costs a further
 \(n\sqrt q\), which is the price of a per-site conclusion.
 
-The gap this leaves is worth naming exactly, because it is not the gap
+The gap left after taking the better of this theorem and
+Theorem~\ref{thm:aggregate-global-rounding} is worth naming exactly,
+because it is not the gap
 Proposition~\ref{prop:stability-region} measures.  That proposition bounds
 any threshold valid across states of uniformity order three; an
 \(\AME(2m,q)\) state has uniformity order \(m\), and for such states
@@ -1690,11 +1839,13 @@ generator-coordinate region whose \(\ell^1\) radius grows with \(m\), as
 does Theorem~\ref{thm:budget-free-stability} once \(m\geq3\).  Those
 estimates control defect from specified generators; they do not put a
 defect ball inside that coordinate region.  The decomposition theorem is
-the inverse statement and is certified only below the exponentially small
-defect threshold above.  Closing that gap needs a rounding step that does
-not read a single small marginal.
-Proposition~\ref{prop:half-splitting} is global in exactly that sense, and
-whether its equality case forces a product unitary to be Clifford is open.
+the inverse statement.  The aggregate theorem removes exponential
+dependence at \(q=2\) and improves it at \(q=3\), but its exact
+support-energy ledger loses to the single-marginal estimate for \(q>4\).
+At \(q=4\) it improves the collective frame radius but the telescoping
+\(\ell^1\) version does not.  Improving the higher-dimensional range needs
+algebraic relations among distinct support sectors, rather than their
+orthogonality alone.
 
 \begin{corollary}[Local gauge groups of \(2\)-unitary gates]
 \label{cor:two-unitary-gauge}

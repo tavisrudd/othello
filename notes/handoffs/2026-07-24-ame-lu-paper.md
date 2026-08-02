@@ -10,13 +10,16 @@ Discovery companion:
 
 ## Current status
 
-**C830 queued (2026-08-02): post-Version-2 global rounding enhancement.**
-Prove or refute that small global defect forces coherent nearby local Clifford
-frames without reading one exponentially faint half-plus-one marginal.  The
-primary routes are simultaneous balanced-cut constraints and rigidity of the
-half-splitting equality/near-equality cases.  Quantify the threshold actually
-proved; do not promise a constant threshold or describe the present
-`q^{-(n+4)/4}/n` scale as a limit.  See the live queue and the future report
+**C830 closed positively with a dimension boundary (2026-08-02): global
+minimum-support rounding.**  Orthogonality of all minimum-support sectors and
+a regular two-sector cover give an aggregate frame-rounding radius
+`Theta_q(m^{-3/4}(2/q)^m)` for stabilizer `AME(2m,q)` states, followed by the
+budget-free residual estimate `D <= pi sqrt(q) eps`.  The radius is polynomial
+at `q=2`, improves the exponential base at `q=3`, improves the frame prefactor
+at `q=4`, and loses to the one-marginal theorem for `q>4`; the legacy global
+`ell^1` conclusion has the smaller `m^{-5/4}` scale at `q=2`.  The theorem,
+scope boundary, trust maps, and framing are adopted in the manuscript.  No
+computation or certificate is involved.  See
 `2026-08-02-c830-global-ame-rounding.md`.
 
 **C828 closed (2026-08-02): the four bounded C805 corrections are complete.**
