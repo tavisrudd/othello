@@ -153,4 +153,38 @@ theorem tensorOperator_exp (h : Site → LocalOperator Level) :
   rw [tensorOperator_eq_noncommProd]
   exact Finset.noncommProd_congr rfl (fun j _ => (exp_siteOperator j (h j)).symm) _
 
+omit [DecidableEq Site] [Fintype Level] [DecidableEq Level] in
+/-- The conjugate transpose of a product operator is the product of the
+conjugate transposed local operators. -/
+theorem tensorOperator_conjTranspose (U : Site → LocalOperator Level) :
+    (tensorOperator U)ᴴ = tensorOperator fun i => (U i)ᴴ := by
+  ext y x
+  rw [Matrix.conjTranspose_apply, tensorOperator_apply, tensorOperator_apply, star_prod]
+  exact Finset.prod_congr rfl fun i _ => (Matrix.conjTranspose_apply (U i) (x i) (y i)).symm
+
+/-- The operators applying a local operator at every site: the image of the
+site-by-site product map on tuples of local operators. -/
+def IsProductOperator (A : SystemOperator Site Level) : Prop :=
+  ∃ U : Site → LocalOperator Level, tensorOperator U = A
+
+omit [DecidableEq Site] [Fintype Level] in
+/-- The identity is a product operator. -/
+theorem isProductOperator_one : IsProductOperator (1 : SystemOperator Site Level) :=
+  ⟨fun _ => 1, tensorOperator_one⟩
+
+omit [DecidableEq Level] in
+/-- Product operators are closed under multiplication. -/
+theorem IsProductOperator.mul {A B : SystemOperator Site Level}
+    (hA : IsProductOperator A) (hB : IsProductOperator B) : IsProductOperator (A * B) := by
+  obtain ⟨U, hU⟩ := hA
+  obtain ⟨V, hV⟩ := hB
+  exact ⟨fun i => U i * V i, by rw [← tensorOperator_mul, hU, hV]⟩
+
+omit [DecidableEq Site] [Fintype Level] [DecidableEq Level] in
+/-- Product operators are closed under conjugate transposition. -/
+theorem IsProductOperator.conjTranspose {A : SystemOperator Site Level}
+    (hA : IsProductOperator A) : IsProductOperator Aᴴ := by
+  obtain ⟨U, hU⟩ := hA
+  exact ⟨fun i => (U i)ᴴ, by rw [← tensorOperator_conjTranspose, hU]⟩
+
 end RelativeConicArcs.AMELU.Multipartite
