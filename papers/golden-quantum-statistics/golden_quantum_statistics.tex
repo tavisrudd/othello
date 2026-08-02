@@ -132,7 +132,8 @@ C_0=\begin{pmatrix}
 \end{pmatrix},\qquad C_0^2=5I.
 \]
 Let \(\mathcal T\) be the six synthematic totals, that is, the six labelled
-one-factorizations of \(K_X\).  One total is
+one-factorizations of \(K_X\); below \(ij\) denotes the edge \(\{i,j\}\).
+One total is
 \[
 \begin{split}
 T_0=\{&
@@ -201,6 +202,8 @@ Write \(H=K^\dagger K\).  For the intrinsic comparison, define
  F_{\mathrm{ext}}(K)=\operatorname{tr}(\bigwedge^3 H)
  =e_3(H)=\det H.
 \]
+The dagger notation keeps the statement valid for the complex port-gauge
+extension; throughout the real Golden construction it is simply transpose.
 The first expression is the sum of all-transferred probabilities, averaged
 over the choice of normalized three-boson input occupation only after division
 by the ten-dimensional symmetric-cube input space.  Thus the operational
@@ -347,8 +350,17 @@ For \(C_0\) displayed in Section~2, direct multiplication for the ten
 projective balanced supports (choose the representative containing path
 zero) gives
 \[
- \operatorname{tr}H=\frac95,\qquad
- \operatorname{tr}(H^2)=\frac{33}{25},\qquad
+ \operatorname{tr}H
+ =\operatorname{tr}(P_{T,+}DP_{T,-}D)=\frac95,
+ \qquad
+ \operatorname{tr}(H^2)
+ =\operatorname{tr}(P_{T,+}DP_{T,-}DP_{T,+}DP_{T,-}D)
+ =\frac{33}{25},
+\]
+and the triangle cubic of the same displayed matrix has
+\(|Z_T(x)|=8\).  Since \(Z_T^2=500\det H\)
+\cite[Theorem~5.1]{ClebschIII}, this gives
+\[
  \det H=\frac{16}{125}.
 \]
 Complementing a support negates \(K_T\) and leaves \(H\) fixed.  Transport by
@@ -865,7 +877,7 @@ Sci. Rep. \textbf{4} (2014), 4543.
 M.~Piccolini, M.~Karczewski, A.~Winter, and R.~Lo Franco,
 \emph{Robust generation of \(N\)-partite \(N\)-level singlet states by
 identical-particle interferometry},
-arXiv:2312.17184.
+arXiv:2312.17184, doi:10.1088/2058-9565/ad8214.
 
 \bibitem{Hu}
 X.-M. Hu et al.,
