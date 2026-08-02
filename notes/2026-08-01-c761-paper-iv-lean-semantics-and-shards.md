@@ -150,6 +150,9 @@ them as completed semantic transports.
 
 ## Validation
 
+- Semantic rank transport, aggregate gate, and axiom audit:
+  `/home/tavis/.cache/othello-lean-build/run-20260802-020741-d62d2530`.
+- `python3 generate_rank_transport.py --check`: byte-identical recovery and expansion data green.
 - Shared exact gate and audit:
   `/home/tavis/.cache/othello-lean-build/run-20260802-005420-71bb12da`.
 - Logical-spine extension: direct pinned build of
@@ -172,20 +175,21 @@ The axiom audits show only Lean's standard `propext`, `Classical.choice`, and
 
 ## Exact remaining formal boundary
 
-All seven items remain inside C761 rather than becoming successor mysteries:
+The first transport is now closed: an explicit 42-column basis, checked left inverse, and checked
+expansion of all 78 columns prove that the executable elimination computes `Module.finrank` of the
+semantic incidence-map range. Rank-nullity then gives code dimension 36. The following six items
+remain inside C761 rather than becoming successor mysteries:
 
-1. prove that the bit-row rank evaluator computes `Module.finrank` of the
-   semantic incidence map;
-2. formalize transport from a weight-eight word through the arc/tangent lemma
+1. formalize transport from a weight-eight word through the arc/tangent lemma
    to a seven-clique in the concrete tangent graph;
-3. formalize transport from an arbitrary weight-ten codeword to the two
+2. formalize transport from an arbitrary weight-ten codeword to the two
    parity profiles;
-4. prove that the four fixed-point orbits exhaust the entire weight-twelve
+3. prove that the four fixed-point orbits exhaust the entire weight-twelve
    layer;
-5. connect the concrete relation matrices and orbit Gram identities to the
+4. connect the concrete relation matrices and orbit Gram identities to the
    proved abstract association-kernel spine;
-6. prove uniqueness of the reconstructed 78-row family;
-7. connect the regular triple orbit, forced fourth anchor, and separating
+5. prove uniqueness of the reconstructed 78-row family;
+6. connect the regular triple orbit, forced fourth anchor, and separating
    signatures to the proved abstract four-anchor closure.
 
 ## Extra-juice closeout and mystery ledger
@@ -196,6 +200,6 @@ trust statement, the abstract `im B=ker A` and orbit-factorization spanning
 chain, and an axiom-audited aggregate gate.  Fourteen execution shards are not
 fourteen mathematical cases, and full enumerations are now explicitly
 corroboration wherever symmetry transport can reduce them.  No new
-mathematical mystery appeared.  The remaining work is exactly the seven
+mathematical mystery appeared.  The remaining work is exactly the six
 semantic transports above plus the ordinary release audit and publication
 steps.

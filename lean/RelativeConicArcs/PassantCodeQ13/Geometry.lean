@@ -130,6 +130,38 @@ theorem passantCoordinateList_toFinset :
     passantCoordinateList.toFinset = passantCoordinates := by
   native_decide
 
+/-- The internal coordinate at an index in the displayed list. -/
+def internalPointAt (index : Fin 78) : InternalPoint :=
+  let listIndex : Fin internalCoordinateList.length :=
+    Fin.cast internalCoordinateList_length.symm index
+  ⟨internalCoordinateList.get listIndex, by
+    rw [← internalCoordinateList_toFinset]
+    exact List.mem_toFinset.mpr (List.get_mem internalCoordinateList listIndex)⟩
+
+/-- The displayed internal-point list indexes every internal point exactly once. -/
+theorem internalPointAt_bijective : Function.Bijective internalPointAt := by
+  native_decide
+
+/-- The displayed ordering identifies the 78 indices with the internal points. -/
+noncomputable def internalPointEquiv : Fin 78 ≃ InternalPoint :=
+  Equiv.ofBijective internalPointAt internalPointAt_bijective
+
+/-- The passant line at an index in the displayed dual-coordinate list. -/
+def passantLineAt (index : Fin 78) : PassantLine :=
+  let listIndex : Fin passantCoordinateList.length :=
+    Fin.cast passantCoordinateList_length.symm index
+  ⟨passantCoordinateList.get listIndex, by
+    rw [← passantCoordinateList_toFinset]
+    exact List.mem_toFinset.mpr (List.get_mem passantCoordinateList listIndex)⟩
+
+/-- The displayed passant-line list indexes every passant line exactly once. -/
+theorem passantLineAt_bijective : Function.Bijective passantLineAt := by
+  native_decide
+
+/-- The displayed ordering identifies the 78 indices with the passant lines. -/
+noncomputable def passantLineEquiv : Fin 78 ≃ PassantLine :=
+  Equiv.ofBijective passantLineAt passantLineAt_bijective
+
 /-- The coordinate set of the binary passant code has cardinality 78. -/
 theorem internalPoint_card : Fintype.card InternalPoint = 78 := by
   simpa only [Fintype.card_coe] using internalCoordinates_card

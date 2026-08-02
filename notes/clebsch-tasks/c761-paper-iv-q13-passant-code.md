@@ -4,7 +4,8 @@
 
 **Status:** active; theorem and novelty boundary frozen, full human proof and
 paper-owned evidence gate green, shared q13 semantic modules and the sharded
-paper-owned Lean certificate gate green.  Seven exact semantic transports and
+paper-owned Lean certificate gate green.  The rank evaluator now transports to
+semantic incidence-map rank 42 and code dimension 36.  Six exact semantic transports and
 the remaining release/publication work remain.
 
 ## Goal
@@ -42,7 +43,8 @@ silently shared with the released Paper-I surface.
 3. Copy the q13 generators, certificates, and independent replay into the
    Paper-IV root; give them paper-local semantics, stable schemas, hashes, and
    one aggregate verifier.
-4. **Green (partial formal coverage):** shared structural Lean modules and the
+4. **Green (partial formal coverage):** shared structural Lean modules, the semantic rank
+   transport, and the
    sharded q13 certificate package described in
    `papers/q13-passant-code/verification/README.md`; close the explicitly
    recorded evaluator, tangent/profile transports, orbit exhaustion,

@@ -1,7 +1,7 @@
 import RelativeConicArcs.Gates.PassantCodeQ13
 import PassantCodeQ13.WeightTen.Aggregate
 import PassantCodeQ13.MinimumWords.Reconstruction
-import PassantCodeQ13.Rank
+import PassantCodeQ13.SemanticTransports
 import PassantCodeQ13.AssociationAlgebra
 
 /-!
@@ -12,16 +12,23 @@ fixed-base syndrome exclusions, four 91-element projective orbits, span rank 36 
 pair-concurrence recovery of passant joins, and the zero-triple signatures of all 78 geometric
 passant rows.
 
-The gate does not claim the full minimum-distance or reconstruction theorem.  The remaining formal
-bridges are the parity-profile exhaustion from arbitrary weight-ten codewords, exhaustive equality
-of the four orbits with the complete weight-twelve layer, uniqueness of the recovered row family,
-and the projective anchor theorem for all coordinate automorphisms.
+The gate does not claim the full minimum-distance or reconstruction theorem.  Its scope excludes
+parity-profile exhaustion from arbitrary weight-ten codewords, exhaustive equality of the four
+orbits with the complete weight-twelve layer, uniqueness of the recovered row family, and the
+projective anchor theorem for all coordinate automorphisms.
 -/
 
 namespace PassantCodeQ13.Gates.Main
 
 open PassantCodeQ13.WeightTen
 open PassantCodeQ13.MinimumWords
+
+/-- The semantic incidence map has rank 42, hence the binary passant code has dimension 36. -/
+theorem incidenceRankAndCodeDimension :
+    RelativeConicArcs.PassantCodeQ13.IncidenceMapHasRankFortyTwo ∧
+      Module.finrank (ZMod 2) RelativeConicArcs.PassantCodeQ13.passantCode = 36 := by
+  have rank := PassantCodeQ13.SemanticTransports.incidenceMap_has_rank_fortyTwo
+  exact ⟨rank, RelativeConicArcs.PassantCodeQ13.passantCode_finrank_eq_thirtySix rank⟩
 
 /-- The two weight-ten syndrome profiles are empty in every shard. -/
 theorem weightTenCertificate :

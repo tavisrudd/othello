@@ -40,6 +40,24 @@
       "bytes": 3367,
       "sha256": "c7add51ff18bd1b0109b16e0a1e2d5fa85ae94c34e4a245da241e57726277d2f",
       "role": "independent dynamic-programming replay of the weight-ten exclusions"
+    },
+    {
+      "paper_iv_path": "lean-certificates/generate_rank_transport.py",
+      "bytes": 4216,
+      "sha256": "56bc474367cde405b533bd2ac1f64076f67d0e29ba95db9b62958bc04a919d12",
+      "role": "deterministic generator and byte-for-byte checker for the semantic rank-transport data"
+    },
+    {
+      "paper_iv_path": "lean-certificates/PassantCodeQ13/RankTransportData.lean",
+      "bytes": 2203,
+      "sha256": "c90ff8da881611960c875ec3b337cb8d40a92d645ed4d77eb841e3e7dc1668f6",
+      "role": "generated recovery and expansion masks for the 42-column incidence basis"
+    },
+    {
+      "paper_iv_path": "lean-certificates/PassantCodeQ13/SemanticTransports.lean",
+      "bytes": 4358,
+      "sha256": "47625a0ea75671b51db2123b65afc8b5802236c9c894df92d1659400d1cef127",
+      "role": "kernel-checked identification of executable rank 42 with semantic incidence-map rank and code dimension 36"
     }
   ],
   "commands": [
@@ -60,7 +78,13 @@
       "command": "python3 check_q13_tangent_code.py",
       "output_contains": "q=13 tangent-code replay: PASS",
       "certifies": "omega=5, d=12, 364 minimum words, 78 recovered rows, and automorphism group PGL(2,13)"
+    },
+    {
+      "cwd": "papers/q13-passant-code/lean-certificates",
+      "command": "python3 generate_rank_transport.py --check",
+      "output_contains": "q=13 semantic rank transport data: PASS",
+      "certifies": "the checked recovery and expansion masks are byte-identical to deterministic regeneration from the normalized conic incidence matrix"
     }
   ],
-  "boundary": "The scripts are exact trusted executions. The JSON certificate is independently replayed, but this migration bundle does not yet provide the planned Lean coverage theorems or replace the manuscript's human reductions."
+  "boundary": "The scripts are exact trusted executions. The weight-ten JSON is independently replayed. Lean checks the generated rank data against the semantic incidence relation and proves incidence-map rank 42 and code dimension 36. The remaining geometric transports retain the narrower boundary recorded in claim_map.json."
 }

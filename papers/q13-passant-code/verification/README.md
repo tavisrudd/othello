@@ -39,6 +39,8 @@ The current paper-local entry points are:
 - `generate_weight_ten_profiles.py --check` for the canonical certificate;
 - `replay_weight_ten_profiles.py` for the independent dynamic program; and
 - `check_q13_tangent_code.py` for the full exact replay.
+- `../lean-certificates/generate_rank_transport.py --check` for byte-identical regeneration of
+  the recovery and expansion masks used by the semantic rank theorem.
 
 Run all three together, after checking the manifest hashes and byte counts,
 with `python3 verify_evidence.py`.
@@ -71,8 +73,8 @@ PassantCodeQ13/Gates/Main.lean
 PassantCodeQ13/Gates/AxiomAudit.lean
 ```
 
-The public aggregate exposes its formal boundary: it does not establish
-arbitrary-word profile transport, minimum-layer exhaustion, uniqueness of the
+The public aggregate transports its exact 42-column elimination certificate to semantic rank and
+code dimension. It does not establish arbitrary-word profile transport, minimum-layer exhaustion, uniqueness of the
 recovered rows, or the automorphism anchor. Its axiom report comes
 from the pinned toolchain's actual `#print axioms` output. Task identifiers,
 manuscript section numbers, private reports, and workflow status language are

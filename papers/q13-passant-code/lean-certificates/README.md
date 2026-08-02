@@ -13,6 +13,10 @@ modulo seven.  `PassantCodeQ13.WeightTen.Aggregate` verifies that these partitio
 profiles and that their syndrome sets are disjoint.
 
 `PassantCodeQ13.Rank` checks binary row rank 42 for the displayed incidence matrix.
+`PassantCodeQ13.SemanticTransports` supplies checked recovery and expansion maps for a
+42-column basis and proves that this executable rank is `Module.finrank` of the semantic incidence
+map. Rank-nullity therefore gives code dimension 36 in the aggregate gate. The tracked generator
+`generate_rank_transport.py` reproduces `PassantCodeQ13.RankTransportData` byte for byte.
 `PassantCodeQ13.AssociationAlgebra` checks the ranks and squaring identities of the four binary
 elliptic relation matrices used by the orbit-spanning argument.  The minimum-word modules expand
 one symmetric-stabilizer and three dihedral-stabilizer representatives into four disjoint
@@ -23,8 +27,8 @@ The terminal theorems use native evaluation.  The axiom audit must therefore rep
 declaration-local native-decision axioms emitted by the pinned Lean toolchain.  No hash is used as a
 substitute for checking the incidence semantics or profile coverage.
 
-The package does not identify the executable bit-row rank with `Module.finrank`, prove that the two
-local parity profiles exhaust arbitrary weight-ten codewords, prove that the four projective orbits
+The package does not prove that the two local parity profiles exhaust arbitrary weight-ten
+codewords, prove that the four projective orbits
 exhaust the complete weight-twelve layer, prove uniqueness of the recovered row family, or classify
 all coordinate automorphisms.  These are explicit semantic boundaries, not computational claims.
 

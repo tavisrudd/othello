@@ -6,8 +6,8 @@
     {
       "id": "dimension",
       "statement": "The binary passant incidence code has length 78 and dimension 36.",
-      "current_modes": ["published dimension formula", "paper-owned independent exact elimination", "Lean native exact bit-row rank 42", "Lean symbolic rank-nullity bridge"],
-      "lean_boundary": "the bit-row evaluator is not yet proved equal to Module.finrank of the semantic incidence map"
+      "current_modes": ["published dimension formula", "paper-owned independent exact elimination", "Lean native exact bit-row rank 42", "Lean-checked recovery and expansion maps identifying the 42-column basis with the semantic incidence-map range", "Lean symbolic rank-nullity bridge"],
+      "lean_boundary": "closed: the paper-owned aggregate proves semantic incidence-map rank 42 and code dimension 36"
     },
     {
       "id": "minimum-distance",
