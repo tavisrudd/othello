@@ -93,3 +93,6 @@
  Quot.sound]
 'RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic' depends on axioms: [propext,
  Quot.sound]
+'RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

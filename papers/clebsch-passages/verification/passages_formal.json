@@ -107,6 +107,17 @@
       ],
       "excluded": "outer matching-frame identification, Joubert and Segre equations, diagonal Clebsch section, and Segre--Igusa polar map"
     },
+    "OPER-3": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
+      ],
+      "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
+      "supplemental_declarations": [
+        "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
+      ],
+      "excluded": "the general cross-block spectrum formula, closed-walk count, inclusion-rank descent, higher-order Ramsey exclusion, and classical aligned-design consequences remain human arguments"
+    },
     "HARM-1": {
       "coverage": "partial mechanism; no full row claim",
       "declarations": [

@@ -25,6 +25,146 @@ gives symmetric zero-diagonal sign matrices
 is part of the marked bridge datum; the incidence sheet by itself does not
 select it.
 
+The next theorem explains why this six-axis carrier has no uniform
+higher-order analogue.  Let \(C=C^{\mathsf T}\) be any symmetric conference
+matrix of order \(2d\), so \(C^2=qI\) with \(q=2d-1\).  For a balanced half
+\(Y\), order the coordinates by \((Y,Y^c)\) and write
+\[
+ C=\begin{pmatrix}A&R\\R^{\mathsf T}&E\end{pmatrix}.
+\]
+Let \(D_Y\) be the diagonal sign involution of this cut, put
+\(P_\pm=(I\pm C/\sqrt q)/2\), and choose an isometry
+\(Q_+:\mathbf R^d\to\operatorname{im}P_+\).  The balanced exchange operator
+is
+\[
+ H_Y=Q_+^{\mathsf T}D_YP_-D_YQ_+.
+\]
+
+\begin{theorem}[Balanced exchange rigidity]
+\label{thm:balanced-exchange-rigidity}
+With the notation above,
+\[
+ \Spec(H_Y)=\Spec\!\left(\frac1qRR^{\mathsf T}\right)
+ =\left\{1-\frac{\alpha_1^2}{q},\ldots,
+          1-\frac{\alpha_d^2}{q}\right\},
+\]
+where \(\alpha_1,\ldots,\alpha_d\) are the eigenvalues of \(A\).  The
+spectrum is independent of the balanced half \(Y\) if and only if
+\(d\leq3\).  Thus order six is the unique nontrivial realized symmetric
+conference order with this property, and its exchange spectrum is
+\[
+ \left\{\frac15,\frac45,\frac45\right\}.
+\]
+
+For a four-set \(K\), let \(w(K)\) be the sum of its three signed
+Hamilton-cycle products.  Call \(K\) \emph{aligned} if \(w(K)=3\), and let
+\(c_Y\) count the aligned four-sets in \(Y\).  Then
+\[
+ \operatorname{tr}(H_Y)=\frac{d^2}{q},\qquad
+ \operatorname{tr}(H_Y^2)=\frac{F_d+32c_Y}{q^2},
+\]
+where
+\[
+ F_d=dq^2-2qd(d-1)+d(d-1)+12\binom d3-8\binom d4.
+\]
+Hence the first exchange moment is universal, whereas the second is
+cut-independent exactly in the stated small orders.
+\end{theorem}
+
+\begin{proof}
+Put \(Q=C/\sqrt q\) and \(L=[D_Y,Q]\).  The commutator anticommutes with
+\(Q\), and on its positive eigenspace one has \(Lv=2P_-D_Yv\).  In cut
+coordinates,
+\[
+ L=\frac2{\sqrt q}
+ \begin{pmatrix}0&R\\-R^{\mathsf T}&0\end{pmatrix}.
+\]
+Thus \(H_Y\) has the squared singular values of \(R/\sqrt q\).  The
+\(Y\)-principal block of \(C^2=qI\) is
+\[
+ RR^{\mathsf T}=qI-A^2,
+\]
+which proves the spectral formula.  Complementary principal-block spectral
+relations of this kind are classical \cite{HaemersParsaeiMajd}.
+
+Since \(A\) is a zero-diagonal sign matrix,
+\(\operatorname{tr}(A^2)=d(d-1)\), giving the first trace formula.  Sorting
+the closed four-walks by support gives
+\[
+ \operatorname{tr}(A^4)=d(d-1)+12\binom d3
+   +8\sum_{\substack{K\subset Y\\|K|=4}}w(K).
+\]
+Every edge occurs twice in the product of the three cycle signs, so
+\(w(K)\in\{3,-1\}\).  Substitution yields the displayed formula for
+\(\operatorname{tr}(H_Y^2)\).  This is the exact finite version of the
+closed-walk organization used for conference-frame subensembles in
+\cite{MagsinoMixonParshall}.
+
+Suppose now that \(d\geq4\) and even the second exchange moment is independent
+of \(Y\).  Then the sums of the aligned-four-set indicator over all balanced
+halves are equal.  The characteristic-zero inclusion matrix from four-sets
+to \(d\)-sets has full column rank \cite[Theorem~1]{JolliffeInclusion}; hence
+the indicator itself is constant on four-sets.  Switch \(C\) so that all
+edges incident with one vertex \(\infty\) are positive.  On
+\(\{\infty,i,j,k\}\), if the remaining edge signs are \(x,y,z\), then
+\[
+ w=xy+xz+yz.
+\]
+If the common value is \(3\), every triangle on the other \(2d-1\) vertices
+is monochromatic.  All its edges have one sign, making the inner product of
+two corresponding conference rows equal to \(2d-2\), a contradiction.  If
+the common value is \(-1\), that two-colouring has no monochromatic triangle;
+the elementary equality \(R(3,3)=6\) gives \(2d-1\leq5\), again a
+contradiction.
+
+For \(d=1\) the conclusion is immediate, and for \(d=2\) every possible
+two-by-two principal sign block squares to \(I\).  For \(d=3\), if \(\tau\)
+is the product of the three edge signs, then
+\[
+ A^2=2I+\tau A,
+\]
+and \(\det(tI-A)=t^3-3t-2\tau\).  This polynomial factors as
+\((t-2)(t+1)^2\) or \((t+2)(t-1)^2\), so \(A^2\) always has spectrum
+\(\{4,1,1\}\).  The spectral formula then gives
+\(\{1/5,4/5,4/5\}\).
+\end{proof}
+
+The obstruction is local, but the aligned sets retain uniform aggregate
+statistics.  Greaves and Suda proved that the determinant-\((-3)\)
+four-subsets of a symmetric conference matrix form a
+\(3\)-\((2d,4,(d-3)/2)\) design \cite[Example~2.3]{GreavesSuda}; the identity
+\(\det C[K]=3-2w(K)\) identifies their blocks with the aligned sets above.
+The regular-two-graph parameters give the same identification
+\cite[Section~2.2 and Proposition~4.1]{GillespieTwoGraph}.  Classical
+Johnson-scheme inclusion calculus \cite[Section~8]{IntersectionMatrices}
+therefore gives, for a uniformly chosen balanced half and \(d\geq4\),
+\[
+ \mathbf E c_Y=\rho\binom d4,\qquad
+ \operatorname{Var}(c_Y)=
+ \frac{\binom{2d}{4}\binom{2d-8}{d-4}}{\binom{2d}{d}}
+ \rho(1-\rho),
+ \qquad \rho=\frac{d-3}{2(2d-3)}.
+\]
+These formulas also hold modulo complementation because \(c_Y=c_{Y^c}\).
+At order ten they give \(\mathbf E c_Y=5/7\) and
+\(\operatorname{Var}(c_Y)=10/49\), hence
+\(\mathbf E[c_Y(c_Y-1)]=0\).  The 126 projective cuts consequently split
+into 36 with \(c_Y=0\) and 90 with \(c_Y=1\).  The known design fixes this
+purity split without making the complete higher-order spectrum uniform.
+
+The neighboring framework is spectral monomorphy of principal submatrices
+\cite{AttasSpectralMonomorphy,BoussairiTwoGraphs}.  Here only the squared
+spectrum is assumed constant.  We have not located the balanced singular-
+spectral classification above in that literature; the block identity,
+closed-walk expansion, inclusion rank, and aligned design are credited as
+indicated.
+
+This exchange invariant deliberately forgets signs: it sees \(A^2\), or
+equivalently \(RR^{\mathsf T}\).  The cubic stage below retains the
+determinant-line orientation.  Cut-independent squared singular spectrum,
+determinant orientation, and the later cubic shadows are therefore distinct
+claims.
+
 For a three-subset \(S\subset X\), write \(x_S=\prod_{i\in S}x_i\), and set
 \[
  K_T=*\!\bigwedge\nolimits^3 C_T,

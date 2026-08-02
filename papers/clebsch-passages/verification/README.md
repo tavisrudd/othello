@@ -1,7 +1,7 @@
 # clebsch-passages verification
 
-`trust_manifest.json` is the seven-row claim/evidence map.
-`statement_identity.json` freezes the six theorem-like statements in
+`trust_manifest.json` is the eight-row claim/evidence map.
+`statement_identity.json` freezes the seven theorem-like statements in
 manuscript order.
 
 Run from the repository root:
@@ -81,7 +81,7 @@ python3 verification/verify_passages_lean.py \
   --lean-root /path/to/formal-artifact
 ```
 
-`passages_formal.json` maps each of the seven manuscript rows to exact Lean
+`passages_formal.json` maps each of the eight manuscript rows to exact Lean
 declarations and records the missing geometric hypotheses.  Its gate proves
 the abstract pinching, conductor, involution, golden-character, tight-frame,
 switching, Petersen, and fixed-line mechanisms without claiming the global
@@ -90,8 +90,9 @@ moment.
 
 The operator consolidation uses the expanded golden-return theorem package as
 a second pinned formal map.  It covers the conference, triangle, two-graph,
-middle-exterior, support-recovery, golden-descent, and fixed-conference
-commutator-Pfaffian mechanisms.  Outer-family coherence, the cross-golden
+middle-exterior, support-recovery, golden-descent, fixed-conference
+commutator-Pfaffian, and order-six signed-triangle mechanisms.  The general
+inclusion/Ramsey exchange-rigidity proof, outer-family coherence, the cross-golden
 determinant comparison, and the classical Joubert--Segre--Igusa
 identifications remain human proof boundaries.
 It is replayed against a checkout of the formal artifact with
@@ -105,5 +106,5 @@ python3 verification/verify_golden_return_lean.py \
 gate, declarations, and exact exclusions.  `golden_return_axioms.txt` records
 the complete pinned `#print axioms` output, including each native-decision
 terminal; replay rejects any change to that report.  This supplemental gate
-contributes partial mechanism coverage to `OPER-1`; no manuscript theorem
+contributes partial mechanism coverage to `OPER-1` and `OPER-3`; no manuscript theorem
 takes Lean as a proof dependency.

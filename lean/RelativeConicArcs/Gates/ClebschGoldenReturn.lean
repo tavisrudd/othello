@@ -4,6 +4,7 @@ import RelativeConicArcs.ClebschMiddleExteriorDiagonal
 import RelativeConicArcs.ClebschMiddleExteriorSupport
 import RelativeConicArcs.ClebschGoldenDescent
 import RelativeConicArcs.ClebschOperatorShadows
+import RelativeConicArcs.ConferenceCutSpectrum
 
 /-!
 # Trust gate for the golden conference and middle-exterior return
@@ -13,6 +14,9 @@ matrix, its triangle cubic and two-graph reconstruction, the fixed
 middle-exterior return, and the restriction-of-scalars comparison.
 The commutator-Pfaffian bridge identifies the matching expansion of the
 fixed conference matrix with four times its triangle cubic.
+The three-vertex principal-block identity gives the formal algebraic core of
+the order-six balanced exchange-spectrum calculation.  The higher-order
+inclusion-rank and Ramsey exclusion remains a human proof.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  Native
@@ -53,3 +57,5 @@ matrix is imported.
 
 #print axioms RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic
 #print axioms RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic
+
+#print axioms RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq

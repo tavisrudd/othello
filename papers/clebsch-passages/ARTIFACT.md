@@ -4,7 +4,7 @@ This directory is the source and verification artifact for *Golden descent
 and operator realizations of the Clebsch cubic*.
 
 The release surface is enumerated in `release_files.json`. It contains the
-manuscript source and PDF, the six-statement identity, the seven-row trust
+manuscript source and PDF, the seven-statement identity, the eight-row trust
 map, three paper-local exact certificate bundles, and the aggregate runner.
 No program in the release surface reads a parent directory or another
 repository subtree.
@@ -33,7 +33,8 @@ report are included in `verification/passages_formal.json` and
 `verification/passages_axioms.txt`, while no complete manuscript claim uses
 Lean as a proof premise.  The supplemental golden-return map and axiom report
 also cover the fixed-conference middle-exterior and commutator-Pfaffian
-mechanisms used by the operator theorem; outer-family coherence,
+mechanisms and the three-vertex signed-matrix square used by the operator
+theorems; the higher-order inclusion/Ramsey classification, outer-family coherence,
 cross-golden determinants, and the classical six-point quotient remain human
 proof boundaries.
 

@@ -1,20 +1,20 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "9fd2cd259d6bed9981f05a70b75ed6fa0137ace167f334ab29f47ae9f627d5cf",
+  "main_source_sha256": "aa5d9b3a4c3598661abc9825fe99b7467c5725dadefd3e948031b0752da324a0",
   "section_sha256": {
-    "sections/01-introduction.tex": "47ba1a44c739d17448ea01adab4f30d625be9fdcf4a205900d8b128bc1c4e96b",
+    "sections/01-introduction.tex": "68f40e14d250c6be43f4c7565db2b020a6c984ca61d5a27129317276a516796d",
     "sections/02-orientation-cover.tex": "34328aed7d067a8f43efb7875769410e66fe02679fad391a23beb9996adb366b",
     "sections/03-orientation-source.tex": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822",
     "sections/04-arithmetic-specialization.tex": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455",
-    "sections/05-golden-operator.tex": "e3b1d063e9bf9e4096d28b3b8489c4aad48760b98570fd2bbd9493856493c570",
+    "sections/05-golden-operator.tex": "692e3c3b8a80d5c81df9c7a93bd22b3a1d0b440dc00f14baf374edff391dce58",
     "sections/05-harmonic-realization.tex": "278565585415fd1e8a8d73e13536b6a5583c3b5cb19e5b0ed8e213cbb7f53fc3",
-    "sections/09-conclusion.tex": "8c9fdaaf889a4beba73d1e2751479cbe911842edf02d216c49f5cf17a8bed542",
+    "sections/09-conclusion.tex": "4ed44866b354edf4ad3cb255dfc5a22db1af161c83bd446dffaf0d4e8c611c3b",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
-    "sections/08-verification.tex": "c9235fe8e84635c13ab29752f300b2e6d85653db7a8ae98767deaa82dc918640",
-    "sections/10-references.tex": "ec804284b297b9b984465c004b1839f25fa64c26eecf391b857c9edee32ddd80"
+    "sections/08-verification.tex": "7e6646361a719a9b0895b2ed6896a1b0a1a22072ee71326897680a3f060fad86",
+    "sections/10-references.tex": "479dedaf35d2c5fba0fa5d3df3240d16b1d5a31b1a56bc08dbb4122da36be906"
   },
-  "statement_count": 6,
+  "statement_count": 7,
   "statements": [
     {
       "label": "thm:arithmetic-main",
@@ -53,11 +53,20 @@
       "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\nThe spinor class of \\(R\\) is \\([2]\\in k^\\times/k^{\\times2}\\).  Under the\nstandard identifications\n\\[\n \\operatorname{SO}_3(k)/\\Omega_3(k)\n \\cong \\operatorname{PGL}_2(k)/\\operatorname{PSL}_2(k),\n\\]\nthe exchanger lies outside \\(\\operatorname{PSL}_2(k)\\) exactly when \\(2\\)\nis nonsquare.  In particular, over \\(\\F_{11}\\) it represents the\nnontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
     },
     {
+      "label": "thm:balanced-exchange-rigidity",
+      "environment": "theorem",
+      "title": "Balanced exchange rigidity",
+      "source": "sections/05-golden-operator.tex",
+      "source_line": 43,
+      "sha256": "7265b0d355f993965b96497cc5af2ce9f13c06294dcd8585836348ab303dff44",
+      "tex": "\\begin{theorem}[Balanced exchange rigidity]\n\\label{thm:balanced-exchange-rigidity}\nWith the notation above,\n\\[\n \\Spec(H_Y)=\\Spec\\!\\left(\\frac1qRR^{\\mathsf T}\\right)\n =\\left\\{1-\\frac{\\alpha_1^2}{q},\\ldots,\n          1-\\frac{\\alpha_d^2}{q}\\right\\},\n\\]\nwhere \\(\\alpha_1,\\ldots,\\alpha_d\\) are the eigenvalues of \\(A\\).  The\nspectrum is independent of the balanced half \\(Y\\) if and only if\n\\(d\\leq3\\).  Thus order six is the unique nontrivial realized symmetric\nconference order with this property, and its exchange spectrum is\n\\[\n \\left\\{\\frac15,\\frac45,\\frac45\\right\\}.\n\\]\n\nFor a four-set \\(K\\), let \\(w(K)\\) be the sum of its three signed\nHamilton-cycle products.  Call \\(K\\) \\emph{aligned} if \\(w(K)=3\\), and let\n\\(c_Y\\) count the aligned four-sets in \\(Y\\).  Then\n\\[\n \\operatorname{tr}(H_Y)=\\frac{d^2}{q},\\qquad\n \\operatorname{tr}(H_Y^2)=\\frac{F_d+32c_Y}{q^2},\n\\]\nwhere\n\\[\n F_d=dq^2-2qd(d-1)+d(d-1)+12\\binom d3-8\\binom d4.\n\\]\nHence the first exchange moment is universal, whereas the second is\ncut-independent exactly in the stated small orders.\n\\end{theorem}"
+    },
+    {
       "label": "thm:operator-shadows",
       "environment": "theorem",
       "title": "Golden operator and classical cubic shadows",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 40,
+      "source_line": 180,
       "sha256": "c8cf0f8e7edb08a8a5a7370eb393feb09a92cc86a786495003e4282ab57add67",
       "tex": "\\begin{theorem}[Golden operator and classical cubic shadows]\n\\label{thm:operator-shadows}\nFor a marked bridge datum and its coherent outer family:\n\\begin{enumerate}\n\\item The triangle products of \\(C_T\\) satisfy\n\\[\n (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\n \\quad(S=\\{i,j,k\\}),\n\\]\nso \\(Z_T\\) is the switching-invariant orientation cubic on \\(A_X\\).\nThe four-point two-graph identity and pair balance recover the conference\nswitching class; after fixing a vertex, the negative edges on the other five\nvertices form a pentagon.\n\\item The same cubic is a commutator Pfaffian:\n\\[\n \\operatorname{Pf}[D_x,C_T]=4Z_T(x),\n \\qquad\n \\det[D_x,C_T]=16Z_T(x)^2.\n\\]\nOver \\(E=\\Q(\\sqrt5)\\), put\n\\(P_{T,\\pm}=(I\\pm C_T/\\sqrt5)/2\\) and\n\\(B_T(x)=P_{T,-}D_xP_{T,+}\\).  After orienting the two determinant lines,\n\\[\n Z_T(x)=\\pm10\\sqrt5\\det B_T(x).\n\\]\n\\item The six coordinates \\((Z_T)_{T\\in\\mathcal T}\\) satisfy\n\\[\n \\sum_TZ_T=0,\\qquad \\sum_TZ_T^3=0.\n\\]\nThey are the signed Joubert coordinates and hence define the classical map\nfrom six labelled points to the Segre cubic\n\\[\n \\left\\{[z]\\in\\mathbf P^5:\\sum_Tz_T=\\sum_Tz_T^3=0\\right\\}.\n\\]\nInside its hyperplane \\(z_T=0\\), the remaining linear relation cuts the\nambient space to \\(\\mathbf P^3\\), and the remaining cubic equation is the\ndiagonal Clebsch cubic surface.\n\\item The centered determinants\n\\[\n W_T=Z_T^2-\\frac16\\sum_UZ_U^2\n     =\\frac1{16}\\operatorname{center}_T\\det[D_x,C_T]\n\\]\nsatisfy\n\\[\n \\sum_TW_T=0,\n \\qquad\n \\left(\\sum_TW_T^2\\right)^2=4\\sum_TW_T^4.\n\\]\nThus \\(W\\) is the Segre--Igusa polar map.\n\\end{enumerate}\n\\end{theorem}"
     },
@@ -71,7 +80,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "464c6c8d8f127b52b379d50b0ce4dd71945452bafc5963e1aa4aef75e500d0c0",
+  "trust_rows_sha256": "ac3cc7a500292fb04fcd51b014abf8cbbf7687df7d597fd029582a056ddd9ec2",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -198,6 +207,31 @@
       "proof_role": "the operator matching expansion identifies the frame with the classical Howard--Millson--Snowden--Vakil coloured-triangle Joubert family; their Segre--Igusa duality supplies the centered-square map, while the paper identifies it with centered commutator determinants",
       "evidence": [
         "sections/05-golden-operator.tex"
+      ]
+    },
+    {
+      "id": "OPER-3",
+      "theorem_labels": [
+        "thm:balanced-exchange-rigidity"
+      ],
+      "clauses": [
+        "cross-block exchange-spectrum formula",
+        "universal first moment and aligned-four-set second moment",
+        "order-six uniqueness by inclusion rank and Ramsey exclusion",
+        "credited aligned-design mean, variance, and order-ten purity split"
+      ],
+      "statement": "For a symmetric conference matrix of order 2d, the balanced exchange spectrum is q inverse times the cross-block Gram spectrum and is independent of the balanced half exactly when d is at most 3; order six is the unique nontrivial realized case and has spectrum 1/5, 4/5, 4/5. In higher orders the second exchange moment is an affine aligned-four-set count whose ensemble mean and variance follow from the classical determinant-minus-three 3-design.",
+      "status": "proven",
+      "modes": [
+        "conceptual",
+        "classical-input",
+        "formal-partial"
+      ],
+      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, characteristic-zero inclusion-rank descent, and the Ramsey equality R(3,3)=6; Lean checks the three-vertex signed-matrix square identity used for the order-six converse, while Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences",
+      "evidence": [
+        "sections/05-golden-operator.tex",
+        "verification/golden_return_formal.json",
+        "verification/golden_return_axioms.txt"
       ]
     },
     {

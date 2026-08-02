@@ -14,7 +14,9 @@ main argument has four stages:
    marking and linear lift, their sign comparison with the conference class
    and Petersen four-space;
 3. the conference operator's triangle, middle-exterior, Pfaffian,
-   cross-golden determinant, Joubert--Segre, and Segre--Igusa cubic shadows;
+   cross-golden determinant, Joubert--Segre, and Segre--Igusa cubic shadows,
+   together with the balanced exchange-rigidity theorem that characterizes
+   order six among symmetric conference carriers;
    and
 4. the degree-six icosahedral Gaunt/Steinhardt cubic on the Petersen
    four-space.

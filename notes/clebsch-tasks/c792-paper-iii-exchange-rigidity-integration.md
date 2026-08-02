@@ -2,8 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; C788's theorem, falsifier bundle, and focused literature
-audit are complete
+**Status:** active; B-plus manuscript, trust surface, clean-overlay aggregate,
+and the order-six Lean identity are complete; the shared aggregate Lean gate,
+independent force-rank, fresh referee read, authoritative commit, and
+standalone synchronization remain
 
 ## Objective
 
