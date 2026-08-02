@@ -1,8 +1,6 @@
 import RelativeConicArcs.Gates.PassantCodeQ13
 import PassantCodeQ13.WeightTen.Aggregate
 import PassantCodeQ13.MinimumWords.Reconstruction
-import PassantCodeQ13.Rank
-import PassantCodeQ13.AssociationAlgebra
 
 /-!
 # Aggregate finite gate for the q=13 passant code
@@ -26,14 +24,8 @@ open PassantCodeQ13.MinimumWords
 /-- The two weight-ten syndrome profiles are empty in every shard. -/
 theorem weightTenCertificate :
     localPartitionCheck = true ∧
-      (isolatedProfileCheck 0 = true ∧ isolatedProfileCheck 1 = true ∧
-        isolatedProfileCheck 2 = true ∧ isolatedProfileCheck 3 = true ∧
-        isolatedProfileCheck 4 = true ∧ isolatedProfileCheck 5 = true ∧
-        isolatedProfileCheck 6 = true) ∧
-      (cycleProfileCheck 0 = true ∧ cycleProfileCheck 1 = true ∧
-        cycleProfileCheck 2 = true ∧ cycleProfileCheck 3 = true ∧
-        cycleProfileCheck 4 = true ∧ cycleProfileCheck 5 = true ∧
-        cycleProfileCheck 6 = true) :=
+      (List.range 7).all isolatedProfileCheck = true ∧
+      (List.range 7).all cycleProfileCheck = true :=
   ⟨local_partition, all_isolated_profiles_disjoint, all_cycle_profiles_disjoint⟩
 
 /-- The four displayed projective orbits are kernel orbits of size 91 and binary span rank 36. -/

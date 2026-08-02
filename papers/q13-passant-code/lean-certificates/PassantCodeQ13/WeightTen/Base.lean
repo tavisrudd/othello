@@ -98,11 +98,9 @@ def cyclePairs (residue : Nat) : List (List Nat) :=
 
 /-- The right syndrome image for one cycle-profile residue shard. -/
 def cycleRight (residue : Nat) : List Nat :=
-  let baseSyndrome := columnSyndrome 0
-  let tailSyndromes := (choices (fibres.drop 3)).map xorColumns
-  let pairSyndromes := (cyclePairs residue).map xorColumns
-  tailSyndromes.flatMap fun tail => pairSyndromes.map fun pair =>
-    baseSyndrome ^^^ tail ^^^ pair
+  let tails := choices (fibres.drop 3)
+  (tails.flatMap fun tail => (cyclePairs residue).map fun pair =>
+    columnSyndrome 0 ^^^ xorColumns tail ^^^ xorColumns pair).eraseDups
 
 /-- Whether one cycle-profile shard is disjoint from the common left syndrome image. -/
 def cycleProfileCheck (residue : Nat) : Bool :=

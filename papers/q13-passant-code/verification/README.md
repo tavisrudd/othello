@@ -1,7 +1,7 @@
 # Verification surface for the q=13 passant code
 
-This directory is the paper-owned trust boundary for Paper IV. The release
-verifier distinguishes five modes:
+This directory will be the paper-owned trust boundary for Paper IV. The
+release verifier must distinguish five modes:
 
 1. human structural proof;
 2. published theorem imported by pinpoint citation;
@@ -12,10 +12,8 @@ verifier distinguishes five modes:
 The current `claim_map.json` records the frozen source claims and their
 present trust modes. `evidence_manifest.json` records the first byte-for-byte
 migration from Paper I, including source commit, paths, byte counts, hashes,
-commands, and replay relationships. The paper-owned Lean package under
-`lean-certificates/` checks the q=13 coordinate semantics, tangent-graph leaf,
-both weight-ten syndrome profiles, and four displayed minimum-word orbits.
-Its formal scope is strictly smaller than the complete release theorem.
+commands, and replay relationships. This infrastructure is not yet a release
+certificate.
 
 ## Evidence to extract
 
@@ -43,7 +41,7 @@ with `python3 verify_evidence.py`.
 
 ## Lean release layout
 
-The shared Lean library contains these semantic, reusable modules:
+The shared `finitegeom` repository should contain semantic, reusable modules:
 
 ```text
 RelativeConicArcs/ConicPassantCode.lean
@@ -55,27 +53,23 @@ RelativeConicArcs/PassantCodeQ13/Reconstruction.lean
 RelativeConicArcs/Gates/PassantCodeQ13.lean
 ```
 
-The paper-owned standalone Lake package contains finite leaves partitioned by
-mathematical role rather than build chronology:
+Large generated finite leaves belong in a standalone certificate package,
+partitioned by mathematical role rather than build chronology:
 
 ```text
-PassantCodeQ13/WeightTen/IsolatedProfile/Fibre0.lean ... Fibre6.lean
-PassantCodeQ13/WeightTen/CycleProfile/Residue0.lean ... Residue6.lean
-PassantCodeQ13/WeightTen/Aggregate.lean
+PassantCodeQ13/WeightTen/IsolatedProfile.lean
+PassantCodeQ13/WeightTen/CycleProfile.lean
 PassantCodeQ13/MinimumWords/OrbitS4.lean
 PassantCodeQ13/MinimumWords/OrbitDihedral.lean
 PassantCodeQ13/MinimumWords/Reconstruction.lean
 PassantCodeQ13/Gates/Main.lean
-PassantCodeQ13/Gates/AxiomAudit.lean
 ```
 
-The public aggregate exposes its formal boundary: it does not establish
-arbitrary-word profile transport, minimum-layer exhaustion, uniqueness of the
-recovered rows, or the automorphism anchor. Its axiom report comes
-from the pinned toolchain's actual `#print axioms` output. Task identifiers,
-manuscript section numbers, private reports, and workflow status language are
-forbidden from module names, declaration names, comments, and generated
-banners.
+The public aggregate must prove the exact paper theorem or expose its residual
+human boundary. Its axiom report must be generated from the pinned toolchain's
+actual `#print axioms` output. Task identifiers, manuscript section numbers,
+private reports, and workflow status language are forbidden from module names,
+declaration names, comments, and generated banners.
 
 ## Formalization target
 
