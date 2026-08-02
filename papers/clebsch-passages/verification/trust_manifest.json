@@ -113,7 +113,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "tight-frame and two-graph reconstruction, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition",
+      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",
@@ -136,7 +136,7 @@
         "conceptual",
         "classical-input"
       ],
-      "proof_role": "human invariant-theory proof identifying the operator frame with the classical six-point matching quotient and deriving centered squaring from the projective gradient",
+      "proof_role": "the operator matching expansion identifies the frame with the classical Howard--Millson--Snowden--Vakil coloured-triangle Joubert family; their Segre--Igusa duality supplies the centered-square map, while the paper identifies it with centered commutator determinants",
       "evidence": [
         "sections/05-golden-operator.tex"
       ]

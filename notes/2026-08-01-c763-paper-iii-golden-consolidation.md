@@ -42,6 +42,40 @@ needed for its source--operator--cubic--harmonic chain; it does not absorb
 Paper I's decoder-to-two-graph rigidity theorem or the Golden manuscript's
 application inventory.
 
+## C755 literature-audit incorporation
+
+The C755 Golden-operator literature audit was rechecked clause by clause
+against the bounded operator material retained here.  Paper III now assigns
+the classical layer explicitly:
+
+- Howard--Millson--Snowden--Vakil own the mystic-pentagon outer six-family,
+  its coloured-triangle Joubert coordinates and Segre relations, and the
+  centered-square Segre--Igusa map.  The manuscript cites the full 2008 JCTA
+  paper at the relevant sections and corrects its DOI to
+  `10.1016/j.jcta.2008.01.004`; the short 2009 announcement is no longer used.
+- Bussemaker--Mathon--Seidel supply the unique order-six conference two-graph,
+  its pentagon-plus-isolated-vertex switching form, and its (A_5)
+  automorphism group.  Paper III now cites this source before its direct
+  recovery of the normal form.
+- HMSV's Galois-conjugate icosahedra are cited as the classical shadow of the
+  golden exchange.  Paper III's arithmetic content remains the identification
+  of that exchange with the square class of Hitchin's incidence cover.
+- The operator-specific content is restricted to the matching identification
+  with the marked conference family, the middle-exterior and
+  commutator-Pfaffian formulas, the cross-golden determinant comparison, and
+  the equality between centered commutator determinants and the classical
+  polar vector.  Because C755 did not cover MathSciNet, the manuscript makes
+  no `first` or `new` claim for these no-predecessor-located formulas.
+
+C755's anomaly/Fano-component, order-ten ETF, GIT collision, pure-spinor,
+Gauss-map fibre, rational-inverse, and higher-order recommendations concern
+material excluded from Paper III.  They were therefore not imported.  This
+is a scope decision, not an omission from the literature audit.
+The proposed node count for the source wall \(\{Z_T=0\}\) was also reviewed
+but not imported: Paper III uses the target section \(z_T=0\) to recover the
+diagonal Clebsch surface, and reopening the determinantal-cubic-threefold
+branch would undo that source--target boundary.
+
 ## Formal consolidation
 
 `RelativeConicArcs.ClebschOperatorShadows` proves over every commutative ring
