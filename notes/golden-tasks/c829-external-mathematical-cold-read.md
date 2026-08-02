@@ -57,3 +57,25 @@ then run the authoritative manuscript, warning, claim-preservation, and
 review gates.  Keep C829 active until the user explicitly authorizes closure;
 do not archive this continuation merely because an intermediate cleanup or
 review gate passes.
+
+## Exposition checkpoint — 2026-08-02
+
+The first author-side pass is complete without changing any theorem statement,
+constant, equality set, threshold, or scope boundary.  The manuscript now:
+
+- proves that separate convexity has no non-Boolean determinant equality case;
+- prints the explicit interval selecting a dominating point on the Hermitian
+  Pareto segment;
+- localizes the realizing family to Et-Taoui's displayed C(a,b),
+  Theorems 2 and 6, specialized to k=3, a=1;
+- defines the continuous Hermitian transfer convention explicitly; and
+- includes the cold reader's cheap contraction, complementary-block, pentagon,
+  and rounding clarifications.
+
+After regenerating the paper-owned evidence manifest, the authoritative
+`make check` passed with immutable inputs: TeX lint, certificate/manifest
+verification, independent source replays, XeLaTeX, and the warning gate are
+green.  Visual inspection of the changed proof pages 8--11 is clean.  The
+paper is 16 pages, with references 15--26 occupying a well-filled final
+bibliography page rather than a stray-line spill.  C829 remains active for
+the rest of the cleanup and review.

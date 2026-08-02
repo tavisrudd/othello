@@ -483,8 +483,13 @@ review under the same task ID; do not close it until the user says so.  Its
 independent cold-read checkpoint is frozen at commit `9f3e1639` with a
 `MINOR` verdict: every audited theorem, normalization, constant, equality
 set, and threshold survives.  The current work is to print the two elementary
-completeness bridges, localize the Et-Taoui realization citation, and run the
-resulting manuscript and review gates without changing theorem content.
+completeness bridges, localize the Et-Taoui realization citation, and continue
+the resulting cleanup and review without changing theorem content.  The first
+author-side checkpoint has now printed those bridges and the exact C(1,b)
+locator, added the cheap cold-reader clarifications, passed the full
+authoritative gate, and survived visual review of proof pages 8--11.  The
+clean bibliography layout brings the paper to 16 pages.  C829 remains active
+until the user explicitly closes it.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 

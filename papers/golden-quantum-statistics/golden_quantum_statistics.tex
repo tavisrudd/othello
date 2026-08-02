@@ -568,6 +568,9 @@ The balanced Boolean point is not only a discrete benchmark.  It is the exact
 joint optimum of the intrinsic degree-three exchange sectors over the entire
 real control cube.
 
+Since \(K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}\) is a compression of
+\(D_x\), it is a contraction on this cube.
+
 \begin{theorem}[Continuous Golden control]
 \label{thm:continuous-control}
 For the real Golden conference matrix and every
@@ -605,6 +608,10 @@ vanishes because one path contributes a rank-one matrix.  Hence the sum of
 their squares, \(e_2\), is separately convex and reduces to the same vertices.
 The determinant is multi-affine for the same reason, so its squared modulus
 gives \(e_3\le16/125\), with equality exactly at the balanced vertices.
+Indeed, equality at an interior coordinate would force equality at both
+endpoints of that coordinate interval.  Iterating would produce two
+maximizing Boolean vertices differing in one sign, whereas every maximizing
+Boolean vertex is balanced.  Hence no non-Boolean equality case occurs.
 
 Now \(h_3=e_3+p_1p_2\), which proves its bound and forces the same equality
 case.  The mixed sector is the only bound not obtained directly from separate
@@ -615,9 +622,14 @@ convexity.  An elementary three-variable lemma says that if
 \(u=a+b\), \(v=ab\), and maximize first in \(v\) under
 \(v\le u^2/4\) and \(v\le24/25-cu\).  The bounds exchange at \(c=1/5\);
 after imposing either \(e_1=9/5\) or \(e_2=24/25\), subtraction from
-\(8/5\) factors respectively through
-\((5c-1)(25c^2+50c-71)\) on \(0\le c\le1/5\) and
-\((5c-4)^2(5c-1)\) on \(1/5\le c\le3/5\).  Equality forces
+\(8/5\) is respectively
+\[
+ \frac{(5c-1)(25c^2+50c-71)}{500}
+ \quad(0\le c\le1/5),\qquad
+ \frac{(5c-4)^2(5c-1)}{125}
+ \quad(1/5\le c\le3/5).
+\]
+Both expressions are nonnegative on their stated intervals.  Equality forces
 \(c=1/5,u=8/5,v=16/25\).  The determinant equality case then forces a
 balanced Boolean control.
 \end{proof}
@@ -633,9 +645,14 @@ and define the real triangle holonomy
 \[
  r_T=\operatorname{Re}(C_{ij}C_{jk}C_{ki}).
 \]
+For continuous controls choose orthonormal frames \(Q_+,Q_-\) for the two
+eigenspaces of \(C\), put \(K_C(x)=Q_-^*D_xQ_+\), and apply the same
+symmetric-function notation to \(K_C(x)^*K_C(x)\).
 The known order-six Hermitian conference family realizes every
-\(r_T^2\in[0,1]\)~\cite{EtTaouiConference}.  The proofs do not use its
-classification.
+\(r_T^2\in[0,1]\): specialize Et-Taoui's displayed \(C(a,b)\) to
+\(k=3\) and \(a=1\), for which \(C(1,b)\) is Hermitian and a fixed triangle
+has \(r_T=\operatorname{Re}b\)~\cite[Theorems~2 and~6]{EtTaouiConference}.
+The proofs do not use the classification of this family.
 
 \begin{theorem}[Hermitian exchange landscape]
 \label{thm:hermitian-landscape}
@@ -687,11 +704,17 @@ symmetric-function identities give the remaining bounds.  In addition,
  s_{(2,1)}+e_3=p_1e_2\le\frac{216}{125},\qquad
  h_3+s_{(2,1)}=p_1(p_2+e_2)\le\frac{513}{125}.
 \]
-These two supporting inequalities show that every feasible point is dominated
-by a point of \eqref{eq:mixed-pareto}.  Conversely, the known one-parameter
-family has a fixed triangle with \(r_T=\operatorname{Re}b\), \(|b|=1\), and
-hence realizes every \(t\in[0,1]\).  Both pairwise inequalities are equalities on the
-segment, so no two distinct points on it dominate one another.
+For a feasible point \((h,s,e)\), put
+\[
+ L=\max\left\{0,\frac{125s-196}{4}\right\},\qquad
+ U=\min\left\{1,\frac{317-125h}{4},\frac{20-125e}{4}\right\}.
+\]
+The individual bounds and the two supporting inequalities give \(L\le U\).
+Every \(t\in[L,U]\) therefore gives a point of
+\eqref{eq:mixed-pareto} that dominates \((h,s,e)\).  Conversely, the cited
+one-parameter family realizes every \(t\in[0,1]\).  Both supporting
+inequalities are equalities on the segment, so no two distinct points on it
+dominate one another.
 \end{proof}
 
 Ordinary three-uniform ETF compressions retain the sign of
@@ -744,6 +767,8 @@ Pfaffian square excludes the purely imaginary endpoint.  Triangle-product
 estimates then give the global metric bound; dephasing and sign rounding give
 the local reverse bound.
 
+The complementary cross blocks are \(R\) and \(R^*\), so they have the same
+squared singular spectrum and hence the same \(r_T^2\).
 By \eqref{eq:holonomy-exchange}, any one-sector constancy is equivalent to
 \(|r_T|=\rho\) for every triangle.  Dephase one row and column to ones and
 write the remaining five-by-five block as \(S\).  Root triangles force every
@@ -760,7 +785,7 @@ The positive edges of \(A\) form a pentagon; label them
  (AB+BA)_{02}+(AB+BA)_{03}-(AB+BA)_{23}
  =2(b_{03}-b_{24}-b_{34}),
 \]
-which would equate an odd integer with an even integer.  At \(\rho=0\),
+whose parenthesized sum of three signs cannot vanish.  At \(\rho=0\),
 bordering \(B\) by a row and column of signs gives an integral
 six-by-six skew matrix \(\widetilde B\) with
 \(\widetilde B^2=-5I\).  Its determinant would be \(125\), impossible
@@ -780,8 +805,15 @@ have equal squared real holonomy.  Summing gives
 \eqref{eq:stability-lower}.
 
 For the reverse estimate, dephase at a root and round each of the ten other
-upper-triangular entries to the sign of its real part, obtaining a real sign
-matrix \(R\).  The ten root triangles give
+upper-triangular unit entries \(u\) to a nearest sign
+\(\sigma(u)\in\{\pm1\}\), choosing either sign when
+\(\operatorname{Re}u=0\).  This gives a real sign matrix \(R\), and
+\[
+ |u-\sigma(u)|^2
+ =2(1-|\operatorname{Re}u|)
+ \le2\bigl(1-(\operatorname{Re}u)^2\bigr),
+\]
+so the ten root triangles give
 \[
  \lVert C-R\rVert_F^2\le40\delta.
 \]
