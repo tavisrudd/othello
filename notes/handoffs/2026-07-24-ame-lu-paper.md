@@ -98,6 +98,24 @@ design-unforced cut moment.  Wording discipline throughout: "we prove",
 "to our knowledge", never "first", and no novelty claim on the elementary
 parts.
 
+**Adoption gate for any judo reframing: blind A/B against the frozen
+baseline.**  A reframing is adopted on evidence, not on the proposer's
+enthusiasm.  Freeze the current committed framing as the anonymous baseline,
+build the reframed version to the same finish — equal polish, or the test
+measures polish rather than framing — and give both to a cold reader who has
+seen neither and is not told which is which or which is ours.  This is the
+method the `golden` lane used for its editorial A/B, so the precedent and
+reporting shape exist.
+
+The reader answers two questions, and the second is the one that matters
+here: which version presents the stronger contribution, **and is the
+reframed version's specialization claim actually correct?**  A framing that
+reads better while overclaiming is the failure mode this whole technique
+invites — the predecessor must genuinely be a corollary, with its hypotheses
+implied by ours at its parameters, not merely adjacent to one.  Ask the
+reader to attack that implication as a referee would.  A reframing that wins
+on preference and loses on correctness is discarded, not softened.
+
 Ask of every conceded result: what broader statement would have it as a
 special case, and can we prove that statement?  Not what adjacent territory
 is free, but what theorem swallows theirs.
