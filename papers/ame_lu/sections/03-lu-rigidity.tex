@@ -1117,9 +1117,9 @@ local-Clifford symmetry.
 \end{corollary}
 
 The size constraint on the \(h_j\) is part of the conclusion and cannot be
-dropped: at \(q=2\) the traceless \(h_j=\pi\diag(1,-1)\) give
-\(\bigotimes_je^{ih_j}=(-1)^nI\), so the defect vanishes while the
-generator norm does not.
+dropped: the generators of Proposition~\ref{prop:region-ceiling} are
+traceless with \(\bigotimes_je^{ih_j}\) scalar, so the defect vanishes
+while the generator norm does not.
 
 \begin{proof}
 Work on the compact manifold \(X=\mathrm{PU}(q)^{2m}\), on which
@@ -1209,44 +1209,53 @@ and contains that coefficient, so its off-axis mass is at most
 
 \begin{proposition}[Quantitative intertwiner rigidity]
 \label{prop:quantitative-intertwiner}
-Let \(q=p^e\), let \(C,D\leq\F_q^6\) be linear \([6,3,4]_q\) MDS codes, and
-let \(\Psi_C,\Psi_D\) be their equal-phase CSS states.  Put
+Let \(q=p^e\), let \(m\geq2\), and let
+\(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer \(\AME(2m,q)\)
+states.  Put
 \[
- \tau_p=\min\Bigl\{\tfrac13,\ \frac{\sin(\pi/p)}{2\sqrt2}\Bigr\}.
+ \tau_p=\min\Bigl\{\tfrac13,\ \frac{\sin(\pi/p)}{2\sqrt2}\Bigr\},
+ \qquad
+ \delta=2q^{(m+1)/2}\varepsilon .
 \]
 Suppose that, after an allowed party permutation,
 \[
  \min_{\lvert\alpha\rvert=1}
- \bigl\lVert(U_1\otimes\cdots\otimes U_6)\Psi_C
-   -\alpha\Psi_D\bigr\rVert\leq\varepsilon
+ \bigl\lVert(U_1\otimes\cdots\otimes U_{2m})\lvert\psi\rangle
+   -\alpha\lvert\phi\rangle\bigr\rVert\leq\varepsilon
 \]
-and that \(2q^2\varepsilon<\tau_p\).  Then for every party \(i\) there is a
+and that \(\delta<\tau_p\).  Then for every party \(i\) there is a
 single-qudit Clifford \(K_i\) with
 \[
  q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}
-  \leq2\sqrt2\,q^2\varepsilon .                          \tag{3.12}
+  \leq\sqrt2\,\delta=2\sqrt2\,q^{(m+1)/2}\varepsilon .    \tag{3.12}
 \]
+For \(m=3\) and equal-phase CSS states of linear \([6,3,4]_q\) MDS codes
+this is the bound \(2\sqrt2\,q^2\varepsilon\) under \(2q^2\varepsilon<\tau_p\).
 \end{proposition}
 
 \begin{proof}
-Fix a four-party set \(S\).  By \((2.3)\) and \((3.7)\) the nonidentity
-part of the reduced operator is
+Fix an \((m+1)\)-party set \(S\).  By \((2.2)\) and
+Proposition~\ref{prop:stabilizer-ame-support} the supported label group
+\(L_\psi(S)\) has \(q^2\) elements and projects bijectively onto
+\(\F_q^2\) at every party of \(S\), so the nonidentity part of the reduced
+operator is
 \[
- T_S=q^{-4}\sum_{v\ne0}\lambda_v
-   W_{1,L_1v}\otimes\cdots\otimes W_{4,L_4v},
+ T_S=q^{-(m+1)}\sum_{v\ne0}\lambda_v
+   W_{1,L_1v}\otimes\cdots\otimes W_{m+1,L_{m+1}v},
+ \qquad\lvert\lambda_v\rvert=1,
 \]
 where \(v\) runs over the nonzero labels at one fixed party of \(S\) and
-each \(L_i\) is the resulting parametrization of \(L_C(S)\) at party
-\(i\), bijective by
-Proposition~\ref{prop:stabilizer-ame-support}.  Normalizing every Weyl
-operator by \(q^{-1/2}\) puts \(T_S\) in the form of
-Lemma~\ref{lem:quantitative-axes} with \(N=q^2-1\) and \(a=q^{-2}\).  Two
+each \(L_i\) is the resulting parametrization of \(L_\psi(S)\) at party
+\(i\).  Normalizing every Weyl operator by \(q^{-1/2}\) puts \(T_S\) in the
+form of Lemma~\ref{lem:quantitative-axes} with
+\(r=m+1\geq3\), \(N=q^2-1\), and
+\(a=q^{-(m+1)}q^{(m+1)/2}=q^{-(m+1)/2}\).  Two
 unit vectors at phase-optimized distance \(\varepsilon\) have density
 matrices at trace distance at most \(2\varepsilon\); partial trace
 contracts the trace norm, and the Hilbert--Schmidt norm is no larger, so
-every four-party marginal satisfies \(\eta\leq2\varepsilon\) and hence
-\(\delta=q^2\eta\leq2q^2\varepsilon\).  The lemma then matches Weyl axes
-within \(\kappa=\sqrt2\,\delta\).
+every \((m+1)\)-party marginal satisfies \(\eta\leq2\varepsilon\) and hence
+\(\eta/a\leq2q^{(m+1)/2}\varepsilon=\delta\).  The lemma then matches Weyl
+axes within \(\kappa=\sqrt2\,\delta\).
 
 It remains to turn approximate axes into an exact Clifford, party by party.
 Extend the matched label permutation by \(\pi(0)=0\); the identity axis is
@@ -1269,9 +1278,16 @@ gives \(\lvert q^{-1}\Tr(W_v^\dagger VW_vV^\dagger)\rvert\geq
 \(\sum_x\lvert c_x\rvert^4\geq(1-\kappa^2/2)^2\).  Hence some
 \(\lvert c_x\rvert\geq1-\kappa^2/2\), so \(V\) lies within \(\kappa\) of a
 phase times \(W_x\); absorbing that displacement into \(K_i\) gives
-\((3.12)\).  Two four-party sets cover all six parties, as in
+\((3.12)\).  Every party lies in some \((m+1)\)-set, as in
 Corollary~\ref{cor:full-weyl-cover}.
 \end{proof}
+
+The exponent in \(\delta\) is a feature of the states rather than slack in
+the estimate.  The nonidentity part of an \((m+1)\)-party marginal of an
+\(\AME(2m,q)\) state has Hilbert--Schmidt norm
+\(q^{-(m+1)/2}\sqrt{q^2-1}\): the marginal is nearly maximally mixed, and
+the Weyl signal that exposes the local factors is that small, so a global
+defect is diluted to that scale before any marginal can read it off.
 
 The closest general framework is the perturbation theory of nearly
 orthogonally decomposable tensors, which gives dimension-independent bounds
