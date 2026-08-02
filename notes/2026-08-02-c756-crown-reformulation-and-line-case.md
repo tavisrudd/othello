@@ -520,6 +520,34 @@ a Weil/Hasse argument finished it.  The same endgame is now available here, and 
 **not** route through the Baker et al. gap conjecture.  That makes it the highest-value
 open attack this pass produces.
 
+## 6b. What the bounded split-fiber census contributes
+
+Full report: `2026-08-02-c756-split-fiber-census.md`.  Three things bear on the
+argument above.
+
+- **Theorem 1 is verified empirically, not just proved.**  Across all 119,384
+  split-fiber pairs at \(q=5,7,11,13\), the crown characterization agrees with
+  coherence in every single case, with zero disagreements.  The census also confirms,
+  rather than assumes, that a totally split fiber automatically has distinct irrational
+  roots with no conjugate pair.
+- **The \(q=5\) solutions have a pure-power normal form.**  Up to the affine group the
+  two frames are \((R,\gamma)=(X^4,\zeta)\) with \(\zeta\) a primitive sixth root of
+  unity in \(\mathbb F_{25}\).  Since \(X^4=X^{q-1}\) and \(n=q-1\) only at \(q=5\),
+  this is a third \(q=5\) coincidence, alongside \(t+1=p-1\) and \((q-1)^2/2=q+3\), and
+  it is the same Dickson/power-map window that the fiber route reached from the other
+  side.
+- **Externality, not the derivative class, does the killing.**  Condition (F2), the
+  chord-externality product, already has zero survivors at every \(q\ge7\), while the
+  derivative-class filter (F1) still passes 42, 660 and 2106 pairs at \(q=7,11,13\).
+  So the derivative-class condition of §4, though free, is the weaker gate.
+
+One incidental correction the census makes to this pass's framing: the naive Poisson
+estimate for split-fiber counts overcounts by about \(2.4\times\) and does not converge
+to \(1\), because a split fiber can contain no rational element and no conjugate pair.
+The corrected model matches all four exact fields and both sampled ones.  The \(q=23\)
+and \(q=29\) samples are uninformative rather than negative: the expected hit counts are
+\(0.17\) and \(8.5\times10^{-5}\), so uniform sampling is the wrong instrument there.
+
 ## 7. EJ + TT closeout
 
 **EJ.**  Four upgrades came free with this pass and were taken here.
