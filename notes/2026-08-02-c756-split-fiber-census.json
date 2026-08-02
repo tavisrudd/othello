@@ -1,0 +1,79 @@
+{
+  "schema": "c756-split-fiber-census/1",
+  "conventions": {
+    "field": "F_{q^2} = F_q(s), s^2 = eps, eps = smallest nonsquare in F_q; element index a + b*q denotes a + b*s",
+    "chi": "chi(u) = legendre(N(u), q), N(u) = a^2 - eps*b^2, chi(0) = 0",
+    "nn": "(q+3)/2", "t": "(q+1)/2",
+    "R": "monic degree nn, R(0)=0, coefficient list c[0..nn] with c[0]=0, c[nn]=1",
+    "split_pair": "|R^{-1}(gamma)| = nn in F_{q^2}, gamma not in F_q",
+    "group": "X -> aX+b: R -> a^{-nn}(R(aX+b)-R(b)), gamma -> a^{-nn}(gamma-R(b)); on roots Z -> {(z-b)/a}"
+  },
+  "exact_census": [
+    {
+      "q": 5, "eps": 2, "nn": 4, "t": 3, "sign_t": -1,
+      "num_monic_R": 125, "num_gamma": 20,
+      "raw_split_pairs": 20, "unordered_gamma_pairs": 10, "affine_orbits": 4, "orbit_action_closed": true,
+      "heuristic_count": 104.1667, "observed_over_heuristic": 0.192000, "heuristic_refined_count": 26.8800, "observed_over_refined": 0.744048,
+      "funnel": {"split": 20, "F1": 10, "F2_alone": 10, "F1_F2": 10, "F3": 10},
+      "assertion_failures": 0, "f4_equivalence_failures": 0,
+      "f3_affine_orbits": 2, "f3_orbit_action_closed": true,
+      "brute_force_recount": 20, "brute_force_agrees": true,
+      "orbit_size_histogram": {"5": 4},
+      "max_ordered_pairs": 12,
+      "coherence_histogram": {"0": 10, "12": 10},
+      "f3_solutions": [{"R_coeffs_c0_to_cnn": [0, 0, 0, 0, 1], "gamma": "3+2s", "Z": ["3+1s", "1+2s", "4+3s", "2+4s"]}, {"R_coeffs_c0_to_cnn": [0, 0, 0, 0, 1], "gamma": "3+3s", "Z": ["2+1s", "4+2s", "1+3s", "3+4s"]}, {"R_coeffs_c0_to_cnn": [0, 1, 1, 1, 1], "gamma": "2+2s", "Z": ["4+1s", "2+2s", "0+3s", "3+4s"]}, {"R_coeffs_c0_to_cnn": [0, 1, 1, 1, 1], "gamma": "2+3s", "Z": ["3+1s", "0+2s", "2+3s", "4+4s"]}, {"R_coeffs_c0_to_cnn": [0, 2, 4, 3, 1], "gamma": "2+2s", "Z": ["1+1s", "4+2s", "2+3s", "0+4s"]}, {"R_coeffs_c0_to_cnn": [0, 2, 4, 3, 1], "gamma": "2+3s", "Z": ["0+1s", "2+2s", "4+3s", "1+4s"]}, {"R_coeffs_c0_to_cnn": [0, 3, 4, 2, 1], "gamma": "2+2s", "Z": ["0+1s", "3+2s", "1+3s", "4+4s"]}, {"R_coeffs_c0_to_cnn": [0, 3, 4, 2, 1], "gamma": "2+3s", "Z": ["4+1s", "1+2s", "3+3s", "0+4s"]}, {"R_coeffs_c0_to_cnn": [0, 4, 1, 4, 1], "gamma": "2+2s", "Z": ["2+1s", "0+2s", "3+3s", "1+4s"]}, {"R_coeffs_c0_to_cnn": [0, 4, 1, 4, 1], "gamma": "2+3s", "Z": ["1+1s", "3+2s", "0+3s", "2+4s"]}]
+    },
+    {
+      "q": 7, "eps": 3, "nn": 5, "t": 4, "sign_t": 1,
+      "num_monic_R": 2401, "num_gamma": 42,
+      "raw_split_pairs": 294, "unordered_gamma_pairs": 147, "affine_orbits": 7, "orbit_action_closed": true,
+      "heuristic_count": 840.3500, "observed_over_heuristic": 0.349854, "heuristic_refined_count": 271.2070, "observed_over_refined": 1.084043,
+      "funnel": {"split": 294, "F1": 42, "F2_alone": 0, "F1_F2": 0, "F3": 0},
+      "assertion_failures": 0, "f4_equivalence_failures": 0,
+      "f3_affine_orbits": 0, "f3_orbit_action_closed": true,
+      "brute_force_recount": 294, "brute_force_agrees": true,
+      "orbit_size_histogram": {"42": 7},
+      "max_ordered_pairs": 20,
+      "coherence_histogram": {"2": 42, "6": 126, "8": 126},
+      "f3_solutions": []
+    },
+    {
+      "q": 11, "eps": 2, "nn": 7, "t": 6, "sign_t": 1,
+      "num_monic_R": 1771561, "num_gamma": 110,
+      "raw_split_pairs": 16500, "unordered_gamma_pairs": 8250, "affine_orbits": 150, "orbit_action_closed": true,
+      "heuristic_count": 38665.0218, "observed_over_heuristic": 0.426742, "heuristic_refined_count": 14662.0685, "observed_over_refined": 1.125353,
+      "funnel": {"split": 16500, "F1": 660, "F2_alone": 0, "F1_F2": 0, "F3": 0},
+      "assertion_failures": 0, "f4_equivalence_failures": 0,
+      "f3_affine_orbits": 0, "f3_orbit_action_closed": true,
+      "brute_force_recount": 16500, "brute_force_agrees": true,
+      "orbit_size_histogram": {"110": 150},
+      "max_ordered_pairs": 42,
+      "coherence_histogram": {"2": 220, "4": 550, "6": 1210, "8": 3080, "10": 3520, "12": 2750, "14": 2200, "16": 1320, "18": 660, "20": 880, "22": 110},
+      "f3_solutions": []
+    },
+    {
+      "q": 13, "eps": 2, "nn": 8, "t": 7, "sign_t": -1,
+      "num_monic_R": 62748517, "num_gamma": 156,
+      "raw_split_pairs": 102570, "unordered_gamma_pairs": 51285, "affine_orbits": 698, "orbit_action_closed": true,
+      "heuristic_count": 242777.0003, "observed_over_heuristic": 0.422486, "heuristic_refined_count": 95658.0634, "observed_over_refined": 1.072257,
+      "funnel": {"split": 102570, "F1": 2106, "F2_alone": 0, "F1_F2": 0, "F3": 0},
+      "assertion_failures": 0, "f4_equivalence_failures": 0,
+      "f3_affine_orbits": 0, "f3_orbit_action_closed": true,
+      "brute_force_recount": 102570, "brute_force_agrees": true,
+      "orbit_size_histogram": {"39": 14, "78": 60, "156": 624},
+      "max_ordered_pairs": 56,
+      "coherence_histogram": {"4": 624, "6": 2340, "8": 6708, "10": 8112, "12": 13806, "14": 16692, "16": 15132, "18": 16224, "20": 9360, "22": 6396, "24": 5148, "26": 1560, "28": 312, "30": 156},
+      "f3_solutions": []
+    }
+  ],
+  "frame_check_q5": [
+    {"R_coeffs_c0_to_cnn": [0,2,4,3,1], "gamma": "2+3s", "split": true, "Z": ["0+1s", "2+2s", "4+3s", "1+4s"], "F1": true, "F2": true, "F3": true, "F4_crown": true, "F4_agrees_F3": true},
+    {"R_coeffs_c0_to_cnn": [0,3,4,2,1], "gamma": "2+2s", "split": true, "Z": ["0+1s", "3+2s", "1+3s", "4+4s"], "F1": true, "F2": true, "F3": true, "F4_crown": true, "F4_agrees_F3": true}
+  ],
+  "sampling": [
+    {"q": 17, "eps": 3, "nn": 10, "samples": 10000000, "seed": 3344302097, "R_with_split_fiber": 147, "total_split_fibers": 294, "observed_rate": 1.470000e-5, "heuristic_rate": 7.495591e-5, "heuristic_refined_fiber_rate": 3.095120e-5, "observed_fiber_rate": 2.940000e-5, "wilson95": [1.250801e-5, 1.727613e-5]},
+    {"q": 19, "eps": 2, "nn": 11, "samples": 10000000, "seed": 3344302099, "R_with_split_fiber": 14, "total_split_fibers": 28, "observed_rate": 1.400000e-6, "heuristic_rate": 8.567821e-6, "heuristic_refined_fiber_rate": 3.592726e-6, "observed_fiber_rate": 2.800000e-6, "wilson95": [8.339859e-7, 2.350159e-6]},
+    {"q": 23, "eps": 5, "nn": 13, "samples": 10000000, "seed": 3344302103, "R_with_split_fiber": 0, "total_split_fibers": 0, "observed_rate": 0.000000e0, "heuristic_rate": 8.125876e-8, "heuristic_refined_fiber_rate": 3.483807e-8, "observed_fiber_rate": 0.000000e0, "wilson95": [0.000000e0, 3.841457e-7]},
+    {"q": 29, "eps": 2, "nn": 16, "samples": 10000000, "seed": 3344302109, "R_with_split_fiber": 0, "total_split_fibers": 0, "observed_rate": 0.000000e0, "heuristic_rate": 3.880936e-11, "heuristic_refined_fiber_rate": 1.699451e-11, "observed_fiber_rate": 0.000000e0, "wilson95": [0.000000e0, 3.841457e-7]}
+  ]
+}
