@@ -2,11 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; the C794-rebuilt B-plus manuscript, nine-row trust surface,
-clean-overlay aggregate, rendered authorial pass, and order-six Lean identity
-are committed through `3daf2e35`; the independent subagent cold read returned
-`MAJOR REVISIONS` at 76/100, so paper and formal-release repairs precede the
-shared aggregate gate and standalone synchronization
+**Status:** complete; the repaired B-plus manuscript, reconciled formal pins,
+guarded aggregate and axiom audits, warning-free clean-overlay release, final
+rendered artifact, independent post-repair acceptance, and standalone
+synchronization are closed through `d2feb23` in the standalone repository
 
 ## Objective
 
@@ -99,6 +98,12 @@ manuscript; Lean and trust surfaces match the selected theorem; all manuscript
 and standalone gates pass; and review files use descriptive public-safe names.
 The post-repair independent subagent verdict is at least `GO WITH MINOR
 REVISIONS`, with no unresolved proof or replay blocker.
+
+The acceptance gate passed.  The same context-free reader graded the first
+repair 87/100 (`Minor revision`), the explicit outer-frame and exposition
+repair 94/100 (`Accept subject to minor copyediting`), and the final rendered
+artifact 96/100 (`Accept`).  The report is
+`notes/2026-08-02-c792-post-repair-independent-cold-read.md`.
 
 C794's human proof and novelty audit are closed, and the theorem has been
 promoted by explicit user direction.  The B-plus architecture is rebuilt
