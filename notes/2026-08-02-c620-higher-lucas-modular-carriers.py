@@ -244,15 +244,16 @@ def bounded_certificate(q: int) -> dict[str, object]:
         )
         if witness is None:
             raise AssertionError(f"candidate bank missed orbit {u}")
-        record: dict[str, object] = {"representative": list(u), "map_rank": rank, "roots": list(witness)}
+        additive_flag = -1
         if q == 16:
-            record["has_projective_additive_witness"] = any(
+            additive_flag = int(any(
                 dot(point, r1, modulus) == 0 and dot(point, r2, modulus) == 0
                 for r1, r2, _ in additive_rows
-            )
-        records.append(record)
+            ))
+        records.append([*u, *witness, additive_flag])
     result = {
-        "schema": "c620-higher-lucas-quotient-v1",
+        "schema": "c620-higher-lucas-quotient-v2",
+        "record_layout": ["u0", "u1", "u2", "u3", "root0", "root1", "root2", "root3", "root4", "root5", "root6", "root7", "projective_additive_flag"],
         "field_order": q,
         "modulus": modulus,
         "normalized_slice": "(z2,z3,z4,z5,z6,z7)=(u0,u1,1,0,u2,u3)",
@@ -265,7 +266,7 @@ def bounded_certificate(q: int) -> dict[str, object]:
     if q == 16:
         result["projective_additive_divisor_count"] = len(additive_rows)
         result["orbits_without_projective_additive_witness"] = sum(
-            not bool(record["has_projective_additive_witness"]) for record in records
+            record[-1] == 0 for record in records
         )
     return result
 

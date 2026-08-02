@@ -380,16 +380,22 @@ code.  It separately implements finite-field arithmetic, Lucas expansion of
 the degree-nine action, Borel orbit closure, polynomial reconstruction, and
 the projective-additive family.
 
-Both certificates use schema `c620-higher-lucas-quotient-v1` and canonical
-sorted JSON.  The `q=16` generator exhausts all 24,310 eight-subsets of
+Both certificates use schema `c620-higher-lucas-quotient-v2` and canonical
+sorted JSON.  One declared 13-field row layout replaces the former repeated
+per-orbit object keys: four normalized coordinates, eight sorted roots, and a
+projective-additive flag (`-1` when that audit is not applicable).  This
+structural encoding reduces the `q=16` certificate from 32,489 to 9,449 bytes
+and the `q=32` certificate from 81,955 to 39,574 bytes while retaining direct
+human inspection and exact replay.  The `q=16` generator exhausts all 24,310 eight-subsets of
 `P1(F16)`.  At `q=32`, witness discovery uses the fixed seed `620032` and the
 first 100,000 distinct sampled eight-subsets; the resulting certificate is
 not probabilistic because it stores one exact witness per complete quotient
 orbit and the replay checks those witnesses directly.  Replacing `--check` by
 `--output` regenerates the named certificate.
 
-The load-bearing byte counts are: report `19,060`, generator `11,094`, replay
-`8,321`, `q=16` certificate `32,489`, and `q=32` certificate `81,955`.
+The load-bearing byte counts are: generator `11,130`, replay `8,596`, `q=16`
+certificate `9,449`, and `q=32` certificate `39,574`.  The report's own final
+byte count is recorded after the review repairs below.
 
 The computation proves only the exact quotient statements (23), the listed
 witnesses, and the 510/101 linearized obstruction.  It does not prove the

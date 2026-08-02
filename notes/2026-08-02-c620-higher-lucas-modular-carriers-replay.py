@@ -216,23 +216,31 @@ def projective_additive_rows(modulus: int) -> list[tuple[tuple[int, ...], tuple[
 
 def replay(q: int) -> dict[str, int]:
     data = json.loads((HERE / f"2026-08-02-c620-higher-lucas-modular-carriers-q{q}.json").read_text())
+    assert data["schema"] == "c620-higher-lucas-quotient-v2"
+    assert data["record_layout"] == [
+        "u0", "u1", "u2", "u3",
+        "root0", "root1", "root2", "root3", "root4", "root5", "root6", "root7",
+        "projective_additive_flag",
+    ]
     modulus = first_irreducible(q.bit_length() - 1)
     assert modulus == data["modulus"]
     c531 = HERE / "2026-07-23-c531-degree-nine-lucas-carrier-pgl2-strata.py"
     assert hashlib.sha256(c531.read_bytes()).hexdigest() == data["c531_source_sha256"]
     representatives = quotient_representatives(q, modulus)
-    recorded = [tuple(record["representative"]) for record in data["records"]]
+    recorded = [tuple(record[:4]) for record in data["records"]]
     assert representatives == recorded
     for record in data["records"]:
-        check_witness(tuple(record["representative"]), tuple(record["roots"]), q, modulus)
+        assert len(record) == 13
+        assert record[-1] in ((0, 1) if q == 16 else (-1,))
+        check_witness(tuple(record[:4]), tuple(record[4:12]), q, modulus)
     if q == 16:
         rows = projective_additive_rows(modulus)
         without = 0
         for record in data["records"]:
-            u = tuple(record["representative"])
+            u = tuple(record[:4])
             point = (u[0], u[1], 1, 0, u[2], u[3])
             has = any(dot(point, row1, modulus) == 0 and dot(point, row2, modulus) == 0 for row1, row2 in rows)
-            assert has == record["has_projective_additive_witness"]
+            assert int(has) == record[-1]
             without += not has
         assert without == data["orbits_without_projective_additive_witness"] == 101
     return {"q": q, "orbit_count": len(representatives), "witnesses_checked": len(recorded)}
