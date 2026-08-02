@@ -2,14 +2,16 @@
 
 **Lane:** `golden`
 
-**Status:** complete — frozen `MINOR` report at commit `9f3e1639`
+**Status:** active — exposition cleanup and review continuation
 
 ## Objective
 
 Obtain an independent mathematical cold read of the authoritative Golden
 quantum-statistics paper, concentrated on the continuous-control theorem and
-the squared-spectrum rigidity/stability theorem. This is a review task; it
-does not authorize manuscript edits before author triage.
+the squared-spectrum rigidity/stability theorem.  The independent cold-read
+phase did not authorize manuscript edits before author triage.  The user has
+now authorized C829 to continue through the resulting exposition cleanup and
+review under the same task ID.
 
 ## Reviewer brief
 
@@ -46,3 +48,12 @@ author triage.  C829 made no manuscript edit.
 
 Lifecycle validation and the post-freeze `ej` + `tt` mystery ledger are in
 `notes/2026-08-02-c829-golden-cold-read-closeout.md`.
+
+## Continuation gate
+
+Preserve the frozen report and verdict at commit `9f3e1639`.  Implement the
+reader-visible completeness bridges and citation localization it requests,
+then run the authoritative manuscript, warning, claim-preservation, and
+review gates.  Keep C829 active until the user explicitly authorizes closure;
+do not archive this continuation merely because an intermediate cleanup or
+review gate passes.

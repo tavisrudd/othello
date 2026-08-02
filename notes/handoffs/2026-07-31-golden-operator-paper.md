@@ -478,16 +478,15 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C829 is complete with a frozen `MINOR` verdict and no manuscript edit.  The
-independent reader reconstructed the continuous-control equality cases,
-Hermitian Pareto completeness, squared-spectrum rigidity, and both stability
-inequalities before consulting private reports or certificates.  Every
-theorem statement, normalization, constant, equality set, and threshold
-survives.  Two elementary completeness bridges and one citation locator are
-left for author triage.  Report:
-`notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.  Lifecycle
-validation and mystery ledger:
-`notes/2026-08-02-c829-golden-cold-read-closeout.md`.
+C829 is active by user instruction for exposition cleanup and continuing
+review under the same task ID; do not close it until the user says so.  Its
+independent cold-read checkpoint is frozen at commit `9f3e1639` with a
+`MINOR` verdict: every audited theorem, normalization, constant, equality
+set, and threshold survives.  The current work is to print the two elementary
+completeness bridges, localize the Et-Taoui realization citation, and run the
+resulting manuscript and review gates without changing theorem content.
+Frozen report:
+`notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 
 C827 is complete.  The post-integration Milnor--Serre pass separates the
 orientation and real-conference scales, replaces the opening result ledger by
