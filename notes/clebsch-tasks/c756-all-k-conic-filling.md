@@ -13,6 +13,10 @@ decisively fail to prove, the complete statement:
 
 Quotable form: *deep-hole loci are conics exactly twice, ever.*
 
+Optional stuck-state/review context:
+`notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
+continuation.
+
 ## Why this task exists
 
 It is the only identified route to an A+ paper in the Clebsch/golden group. The

@@ -249,8 +249,8 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 
 | task | state | next gate |
 |---|---|---|
-| [C791 — Paper I balanced-spectrum consequence](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) | queued after C753; coordinate with C762 | add only the recovered-object consequence and audited attribution, then synchronize theorem/trust maps and the standalone mirror |
-| [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | queued; C788 theorem and literature boundary complete | cold-test compact proof versus sourced corollary, preserve the arithmetic--operator--harmonic line, and refresh the forward release surface |
+| [C791 — Paper I balanced-spectrum consequence](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) | queued after C753; coordinate with C762 | freeze baseline, red-team the inference boundary, and blind-test the bounded corollary before synchronizing trust maps and the standalone mirror |
+| [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | queued; C788 theorem and literature boundary complete | red-team the proof, blind-test baseline versus theorem-home and compact variants, update Lean for the selected structural statement, and refresh the forward release surface |
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | unblocked; C714 synchronized release gates complete | with explicit publication authority, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
@@ -280,6 +280,9 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 | [C711 — Paper III sub-700 human proofs](../clebsch-tasks/c711-paper-iii-sub700-human-proofs.md) | complete; seven certificate-independent proofs, per-proof Tao checks, and frozen interfaces | none |
 | [C756 — all-\(k\) conic-filling classification](../clebsch-tasks/c756-all-k-conic-filling.md) | active; full-theorem odds 10--15%, but the complete saturated classification is a separate ~50% publishable crown; eighteen passes retain the clean masked direction target \(h\ge1\); the angle matrix now has an exact rank-three double displacement, while bare ordinary rank is insufficient because singular negative candidates occur throughout the bounded audit | globalize the adjugate kernel line from the displacement identity and separately control the rank-\(\le k-2\) compound branch; for the nonsaturated lottery, label compressed prefix classes behind the global split/Rédei carrier; retain \(q=27\) and consolidation hygiene |
+
+C756 optional stuck-state/review reading:
+[`c756-proof-expert-dossier.md`](../clebsch-tasks/c756-proof-expert-dossier.md).
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
