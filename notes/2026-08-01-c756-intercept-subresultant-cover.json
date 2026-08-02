@@ -1,0 +1,477 @@
+{
+ "script": "2026-08-01-c756-intercept-subresultant-cover.py",
+ "search_negative": {
+  "instance": [
+   10,
+   43
+  ],
+  "delta": 2,
+  "method": "rust annealer, targeted+uniform moves, reheating",
+  "stop_condition": "8 seeds (20260801..20260808) x 3e7 moves, plus parabola-restricted sumset search; no covering configuration found",
+  "claim": "bounded search negative only, not nonexistence"
+ },
+ "instances": [
+  {
+   "n": 5,
+   "q": 7,
+   "delta": 3,
+   "seed": 20261308,
+   "points": [
+    [
+     3,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "provenance": "in-script-search",
+   "deg_E": 3,
+   "exceptional_dirs": {
+    "1": 2,
+    "3": 2,
+    "5": 2
+   },
+   "n_unique_dirs": 4,
+   "prs_degree_sequence": [
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "prs_nondefective": true,
+   "deg_S11": 11,
+   "deg_S10": 12,
+   "S11_generic_degree": 12,
+   "deg_gcd_S11_moore": 3,
+   "E2_divides_S11": true,
+   "E2_divides_S10": true,
+   "S11_eq_cE2G": true,
+   "scalar_c": 1,
+   "S10_eq_minus_cE2N": true,
+   "deg_G": 5,
+   "deg_N": 6,
+   "predicted_deg_G": 6,
+   "deg_gcd_G_N": 0,
+   "residual_deg_den": 5,
+   "residual_deg_num": 6,
+   "deg_gcd_G_moore": 0,
+   "pointwise_ok": 4,
+   "pointwise_G_vanished_at": [],
+   "intercept_interpolation_degree": 3,
+   "intercept_interpolation_max": 3
+  },
+  {
+   "n": 6,
+   "q": 13,
+   "delta": 2,
+   "seed": 20261414,
+   "points": [
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     12,
+     9
+    ],
+    [
+     10,
+     6
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "provenance": "in-script-search",
+   "deg_E": 2,
+   "exceptional_dirs": {
+    "2": 2,
+    "5": 2
+   },
+   "n_unique_dirs": 11,
+   "prs_degree_sequence": [
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "prs_nondefective": true,
+   "deg_S11": 20,
+   "deg_S10": 21,
+   "S11_generic_degree": 20,
+   "deg_gcd_S11_moore": 2,
+   "E2_divides_S11": true,
+   "E2_divides_S10": true,
+   "S11_eq_cE2G": true,
+   "scalar_c": 9,
+   "S10_eq_minus_cE2N": true,
+   "deg_G": 16,
+   "deg_N": 17,
+   "predicted_deg_G": 16,
+   "deg_gcd_G_N": 0,
+   "residual_deg_den": 16,
+   "residual_deg_num": 17,
+   "deg_gcd_G_moore": 0,
+   "pointwise_ok": 11,
+   "pointwise_G_vanished_at": [],
+   "intercept_interpolation_degree": 10,
+   "intercept_interpolation_max": 10
+  },
+  {
+   "n": 7,
+   "q": 19,
+   "delta": 2,
+   "seed": 20261520,
+   "points": [
+    [
+     2,
+     16
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     14,
+     4
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     17,
+     11
+    ],
+    [
+     13,
+     0
+    ],
+    [
+     10,
+     5
+    ]
+   ],
+   "provenance": "in-script-search",
+   "deg_E": 2,
+   "exceptional_dirs": {
+    "6": 2,
+    "17": 2
+   },
+   "n_unique_dirs": 17,
+   "prs_degree_sequence": [
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "prs_nondefective": true,
+   "deg_S11": 30,
+   "deg_S10": 31,
+   "S11_generic_degree": 30,
+   "deg_gcd_S11_moore": 2,
+   "E2_divides_S11": true,
+   "E2_divides_S10": true,
+   "S11_eq_cE2G": true,
+   "scalar_c": 10,
+   "S10_eq_minus_cE2N": true,
+   "deg_G": 26,
+   "deg_N": 27,
+   "predicted_deg_G": 26,
+   "deg_gcd_G_N": 0,
+   "residual_deg_den": 26,
+   "residual_deg_num": 27,
+   "deg_gcd_G_moore": 0,
+   "pointwise_ok": 17,
+   "pointwise_G_vanished_at": [],
+   "intercept_interpolation_degree": 16,
+   "intercept_interpolation_max": 16
+  },
+  {
+   "n": 7,
+   "q": 17,
+   "delta": 4,
+   "seed": 20261518,
+   "points": [
+    [
+     6,
+     12
+    ],
+    [
+     1,
+     16
+    ],
+    [
+     10,
+     3
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     15,
+     2
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     14,
+     14
+    ]
+   ],
+   "provenance": "in-script-search",
+   "deg_E": 4,
+   "exceptional_dirs": {
+    "5": 2,
+    "7": 2,
+    "11": 2,
+    "13": 2
+   },
+   "n_unique_dirs": 13,
+   "prs_degree_sequence": [
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "prs_nondefective": true,
+   "deg_S11": 30,
+   "deg_S10": 31,
+   "S11_generic_degree": 30,
+   "deg_gcd_S11_moore": 4,
+   "E2_divides_S11": true,
+   "E2_divides_S10": true,
+   "S11_eq_cE2G": true,
+   "scalar_c": 2,
+   "S10_eq_minus_cE2N": true,
+   "deg_G": 22,
+   "deg_N": 23,
+   "predicted_deg_G": 22,
+   "deg_gcd_G_N": 0,
+   "residual_deg_den": 22,
+   "residual_deg_num": 23,
+   "deg_gcd_G_moore": 1,
+   "pointwise_ok": 13,
+   "pointwise_G_vanished_at": [],
+   "intercept_interpolation_degree": 11,
+   "intercept_interpolation_max": 12
+  },
+  {
+   "n": 9,
+   "q": 31,
+   "delta": 5,
+   "seed": 20261732,
+   "points": [
+    [
+     17,
+     16
+    ],
+    [
+     11,
+     3
+    ],
+    [
+     24,
+     10
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     20,
+     27
+    ],
+    [
+     0,
+     27
+    ],
+    [
+     14,
+     1
+    ],
+    [
+     26,
+     0
+    ],
+    [
+     30,
+     22
+    ]
+   ],
+   "provenance": "rust-annealer-seed-20260801",
+   "deg_E": 5,
+   "exceptional_dirs": {
+    "5": 2,
+    "8": 2,
+    "11": 2,
+    "14": 2,
+    "26": 2
+   },
+   "n_unique_dirs": 26,
+   "prs_degree_sequence": [
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "prs_nondefective": true,
+   "deg_S11": 56,
+   "deg_S10": 57,
+   "S11_generic_degree": 56,
+   "deg_gcd_S11_moore": 5,
+   "E2_divides_S11": true,
+   "E2_divides_S10": true,
+   "S11_eq_cE2G": true,
+   "scalar_c": 9,
+   "S10_eq_minus_cE2N": true,
+   "deg_G": 46,
+   "deg_N": 47,
+   "predicted_deg_G": 46,
+   "deg_gcd_G_N": 0,
+   "residual_deg_den": 46,
+   "residual_deg_num": 47,
+   "deg_gcd_G_moore": 0,
+   "pointwise_ok": 26,
+   "pointwise_G_vanished_at": [],
+   "intercept_interpolation_degree": 25,
+   "intercept_interpolation_max": 25
+  },
+  {
+   "n": 10,
+   "q": 41,
+   "delta": 4,
+   "seed": 20261842,
+   "points": [
+    [
+     26,
+     16
+    ],
+    [
+     7,
+     16
+    ],
+    [
+     29,
+     35
+    ],
+    [
+     25,
+     36
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     21,
+     12
+    ],
+    [
+     23,
+     23
+    ],
+    [
+     5,
+     27
+    ],
+    [
+     24,
+     14
+    ],
+    [
+     4,
+     22
+    ]
+   ],
+   "provenance": "rust-annealer-seed-20260801",
+   "deg_E": 4,
+   "exceptional_dirs": {
+    "8": 2,
+    "16": 2,
+    "28": 2,
+    "37": 2
+   },
+   "n_unique_dirs": 37,
+   "prs_degree_sequence": [
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "prs_nondefective": true,
+   "deg_S11": 72,
+   "deg_S10": 73,
+   "S11_generic_degree": 72,
+   "deg_gcd_S11_moore": 4,
+   "E2_divides_S11": true,
+   "E2_divides_S10": true,
+   "S11_eq_cE2G": true,
+   "scalar_c": 25,
+   "S10_eq_minus_cE2N": true,
+   "deg_G": 64,
+   "deg_N": 65,
+   "predicted_deg_G": 64,
+   "deg_gcd_G_N": 0,
+   "residual_deg_den": 64,
+   "residual_deg_num": 65,
+   "deg_gcd_G_moore": 1,
+   "pointwise_ok": 37,
+   "pointwise_G_vanished_at": [],
+   "intercept_interpolation_degree": 36,
+   "intercept_interpolation_max": 36
+  }
+ ]
+}

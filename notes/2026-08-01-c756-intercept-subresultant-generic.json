@@ -1,0 +1,214 @@
+{
+ "script": "2026-08-01-c756-intercept-subresultant-generic.py",
+ "seed": 20260801,
+ "prime": "2^61-1",
+ "cases": [
+  {
+   "n": 3,
+   "mode": "symbolic",
+   "formula_ratio": "-1",
+   "deg_T_S11": 2,
+   "expected_deg_T_S11": 2
+  },
+  {
+   "n": 5,
+   "mode": "random specialization mod 2^61-1",
+   "points": [
+    [
+     163096,
+     136482
+    ],
+    [
+     477314,
+     395152
+    ],
+    [
+     973758,
+     -676197
+    ],
+    [
+     394384,
+     -792364
+    ],
+    [
+     -422300,
+     489236
+    ]
+   ],
+   "prs_degree_sequence": [
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "formula_matches_up_to_constant": true,
+   "deg_T_S11": 12,
+   "deg_T_S10": 13,
+   "expected_deg_T_S11": 12,
+   "deg_gcd_S11_S10": 0,
+   "deg_gcd_S11_D": 0
+  },
+  {
+   "n": 6,
+   "mode": "random specialization mod 2^61-1",
+   "points": [
+    [
+     -528515,
+     231209
+    ],
+    [
+     997870,
+     492133
+    ],
+    [
+     -432933,
+     -857003
+    ],
+    [
+     -588792,
+     -657518
+    ],
+    [
+     -226750,
+     174883
+    ],
+    [
+     -942035,
+     479823
+    ]
+   ],
+   "prs_degree_sequence": [
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "formula_matches_up_to_constant": true,
+   "deg_T_S11": 20,
+   "deg_T_S10": 21,
+   "expected_deg_T_S11": 20,
+   "deg_gcd_S11_S10": 0,
+   "deg_gcd_S11_D": 0
+  },
+  {
+   "n": 7,
+   "mode": "random specialization mod 2^61-1",
+   "points": [
+    [
+     824670,
+     490608
+    ],
+    [
+     -74897,
+     -406043
+    ],
+    [
+     -618212,
+     137238
+    ],
+    [
+     645629,
+     -264923
+    ],
+    [
+     266148,
+     -489480
+    ],
+    [
+     544414,
+     557069
+    ],
+    [
+     132883,
+     -499054
+    ]
+   ],
+   "prs_degree_sequence": [
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "formula_matches_up_to_constant": true,
+   "deg_T_S11": 30,
+   "deg_T_S10": 31,
+   "expected_deg_T_S11": 30,
+   "deg_gcd_S11_S10": 0,
+   "deg_gcd_S11_D": 0
+  },
+  {
+   "n": 10,
+   "mode": "random specialization mod 2^61-1",
+   "points": [
+    [
+     -714960,
+     -929346
+    ],
+    [
+     -858972,
+     -120518
+    ],
+    [
+     -335058,
+     382049
+    ],
+    [
+     -534788,
+     159242
+    ],
+    [
+     581107,
+     972767
+    ],
+    [
+     130039,
+     -163945
+    ],
+    [
+     704706,
+     -915918
+    ],
+    [
+     -532394,
+     -662492
+    ],
+    [
+     509923,
+     -850580
+    ],
+    [
+     379461,
+     24389
+    ]
+   ],
+   "prs_degree_sequence": [
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "formula_matches_up_to_constant": true,
+   "deg_T_S11": 72,
+   "deg_T_S10": 73,
+   "expected_deg_T_S11": 72,
+   "deg_gcd_S11_S10": 0,
+   "deg_gcd_S11_D": 0
+  }
+ ]
+}

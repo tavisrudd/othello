@@ -1,0 +1,11 @@
+(n,p)=(9,31) delta=5 seed=20260801 FOUND [(17, 16), (11, 3), (24, 10), (9, 6), (20, 27), (0, 27), (14, 1), (26, 0), (30, 22)]
+(n,p)=(10,41) delta=4 seed=20260801 FOUND [(26, 16), (7, 16), (29, 35), (25, 36), (8, 9), (21, 12), (23, 23), (5, 27), (24, 14), (4, 22)]
+(n,p)=(10,43) delta=2 seed=20260801 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 seed=20260802 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 seed=20260803 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 seed=20260804 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 seed=20260805 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 seed=20260806 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 seed=20260807 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 seed=20260808 exhausted 30000000 moves
+(n,p)=(10,43) delta=2 NOT FOUND after 8 seeds x 30000000 moves
