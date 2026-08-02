@@ -478,6 +478,12 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C818 is active.  It owns the gated promotion decision for C814's mixed-plane
+package: first an exact holonomy-defect stability probe, then a claim-level
+novelty audit, and only after both survive a minimal manuscript A/B with full
+paper and trust gates.  Charter:
+`notes/golden-tasks/c818-mixed-plane-stability-audit-promotion.md`.
+
 C814 is research-complete with no manuscript edit.  For the fixed real Golden
 operator, balanced Boolean controls simultaneously maximize every intrinsic
 degree-three Schur exchange sector over the full real diagonal-control cube.

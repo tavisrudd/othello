@@ -129,6 +129,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
+- **C818 `[golden]` [ACTIVE; STABILITY THEN NOVELTY GATES BEFORE MANUSCRIPT A/B]** — seek an exact holonomy-defect stability theorem for the C814 mixed plane, audit the continuous-control/Pareto/single-sector package claim by claim, and only if both gates survive build and independently compare a minimal Golden quantum-statistics manuscript variant → `notes/golden-tasks/c818-mixed-plane-stability-audit-promotion.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`
