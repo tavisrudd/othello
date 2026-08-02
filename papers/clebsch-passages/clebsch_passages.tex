@@ -5,6 +5,10 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{float}
 \usepackage[hidelinks]{hyperref}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -39,40 +43,36 @@ fixed while its shadows move}.
 \end{center}
 
 \begin{abstract}
-Hitchin's degree-two incidence cover of harmonic cubics has rational square
-class \(5J_0\).  Thus its golden orientation is defined over
-\(\Q(\sqrt5)\), and the Clebsch chart satisfies
-\(J_0=16\sigma_3^2\).  After fixing the full marked bridge datum, we
-transport the chosen sign to the unique regular two-graph on six points and
-its conference operator \(C\), with
-\(C^2=5I\).  Its balanced cross-block singular spectrum is cut-independent
-only in the trivial case and at order six, where it is
-\(\{1/5,4/5,4/5\}\).  In higher orders the exchange trace is universal,
-while the mean and variance of the second exchange moment are fixed by the
-classical \(3\)-design of principal four-subsets with determinant \(-3\);
-when marked, that design also reconstructs the signing up to switching and
-global negation.  The resulting outer family of cubic forms has
-four equivalent
-descriptions: triangle holonomy, diagonal coefficients of
-\(*\!\bigwedge^3C\), commutator Pfaffians
-\(\operatorname{Pf}[D_x,C]\), and cross-golden determinants.  Its six
-coordinates give the classical
-Joubert map to the Segre cubic; centered determinants give the
-Segre--Igusa polar map, and a distinguished hyperplane section is the
-diagonal Clebsch cubic surface.
+We determine the rational twist in Hitchin's degree-two incidence cover of
+harmonic cubics: its function field is
+\(\Q(\mathbf P(H))(\sqrt{5J_0})\).  A complete golden fibre over \([xyz]\)
+determines the factor \(5\), while the Clebsch chart satisfies
+\(J_0=16\sigma_3^2\).  After fixing the marked chart and compatible labels,
+we attach the resulting sign to the order-six conference operator \(C\),
+with \(C^2=5I\).
 
-The harmonic return uses the same Clebsch invariant.  Degree-six zonal
-harmonics on the ten icosahedral face axes contain the Clebsch four-space as
-their Petersen eigenspace, and their normalized spherical cubic restricts as
+We prove that its oriented cubic has four equivalent descriptions: triangle
+holonomy, the diagonal of \(*\!\bigwedge^3C\), a commutator Pfaffian, and a
+cross-golden determinant.  Its six outer translates are exactly the signed
+Joubert coordinates on the Segre cubic; centered determinants give the
+Segre--Igusa polar map, and a coordinate section gives the diagonal Clebsch
+cubic surface.  The carrier is structurally exceptional: order six is the
+unique nontrivial symmetric conference order with cut-independent balanced
+exchange spectrum.  At higher orders the exchange trace remains universal;
+the classical aligned \(3\)-design fixes the mean and variance of the second
+exchange moment and, when marked, reconstructs the signing up to switching
+and global negation.
+
+Finally, degree-six zonal harmonics on the ten icosahedral face axes contain
+the Clebsch four-space as their Petersen eigenspace, and their normalized
+spherical cubic restricts to
 \[
  \frac1{4\pi}\int_{S^2}F_y^3
  =-\frac{784000}{1247103}\sigma_3(y).
 \]
-The source-to-operator and operator-to-harmonic comparisons remain relative
-to an ordered golden realization, normalized chart lift, and compatible
-outer and Petersen labels.  The incidence sheet alone does not recover these
-markings, and no rational or integral identification of the two ambient
-harmonic representations is asserted.
+All sign comparisons are relative to the stated marked data; no canonical
+labeling or identification of the two ambient harmonic representations is
+claimed.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch configuration; Hitchin cover;

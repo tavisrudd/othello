@@ -24,6 +24,44 @@ determinant, and middle-exterior shadows give the classical Joubert, Segre,
 Igusa, and diagonal Clebsch models.  On the ten face axes it returns as the
 degree-six Gaunt cubic.
 
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  node distance=7mm and 13mm,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=5pt,
+    font=\small,text width=43mm},
+  wide/.style={box,text width=55mm},
+  arr/.style={-{Latex[length=2mm]},semithick},
+  lab/.style={font=\scriptsize,fill=white,inner sep=1.5pt}
+]
+\node[wide] (cover) {Hitchin incidence cover\\[-1pt]
+  \(z^2=5J_0\)};
+\node[wide,below=of cover] (mark) {chosen golden sign relative to the\\
+  marked bridge datum \(\mathfrak m\)};
+\node[box,below left=of mark] (six) {six ordered axes\\
+  \(C^2=5I\), oriented cubic \(Z_{\mathfrak m}\)};
+\node[box,below right=of mark] (ten) {ten labelled face axes\\
+  Petersen four-space};
+\node[box,below=of six] (classical) {four operator shadows\\
+  Joubert--Segre--Igusa--Clebsch};
+\node[box,below=of ten] (gaunt) {degree-six harmonic return\\
+  \(\displaystyle \frac1{4\pi}\int F_y^3
+     =-\frac{784000}{1247103}\sigma_3(y)\)};
+\draw[arr] (cover) -- node[lab,right] {normalize and mark} (mark);
+\draw[arr] (mark) -- node[lab,above left] {six-axis data} (six);
+\draw[arr] (mark) -- node[lab,above right] {Petersen labels} (ten);
+\draw[arr] (six) -- (classical);
+\draw[arr] (ten) -- (gaunt);
+\end{tikzpicture}%
+}
+\caption{The source--shadow--return scheme.  Every arrow below the incidence
+cover uses the fixed datum \(\mathfrak m\); the two bottom nodes are relative
+realizations of the same invariant, not a map between their ambient harmonic
+spaces.}
+\label{fig:source-shadow-return}
+\end{figure}
+
 Let \(J_0\) denote Hitchin's irreducible invariant sextic, with the
 normalization in the displayed definition immediately preceding his main
 theorem and the matching final formula in his appendix

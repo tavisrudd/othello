@@ -381,6 +381,51 @@ odd relabelling or switching transports both \(K_T\) and the sign of its
 diagonal; it is not legitimate to switch the matrix while holding the old
 Hodge convention fixed.
 
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=4pt,
+    font=\small,text width=39mm},
+  center/.style={box,text width=31mm,thick},
+  target/.style={box,text width=42mm},
+  arr/.style={-{Latex[length=2mm]},semithick},
+  lab/.style={font=\scriptsize,fill=white,inner sep=1.2pt}
+]
+\node[box] (tri) at (-3.4,2.3) {triangle holonomy\\
+  \(\sum_S\epsilon_T(S)x_S\)};
+\node[box] (wedge) at (3.4,2.3) {middle exterior power\\
+  \(\operatorname{diag}(*\!\bigwedge^3C_T)=4\epsilon_T\)};
+\node[box] (pf) at (-3.4,0.5) {commutator Pfaffian\\
+  \(\operatorname{Pf}[D_x,C_T]=4Z_T\)};
+\node[box] (det) at (3.4,0.5) {cross-golden determinant\\
+  \(Z_T=\pm10\sqrt5\det B_T(x)\)};
+\node[center] (z) at (0,-1.15) {all four equal\\\(Z_T=J_T\)};
+\draw[arr] (tri.south east) -- (z.north west);
+\draw[arr] (wedge.south west) -- (z.north east);
+\draw[arr] (pf.south east) -- (z.west);
+\draw[arr] (det.south west) -- (z.east);
+
+\node[target] (outer) at (0,-2.75) {six outer translates
+  \((Z_T)_{T\in\mathcal T}\)};
+\node[target] (segre) at (-3.4,-4.45) {Segre cubic\\
+  \(\sum_TZ_T=\sum_TZ_T^3=0\)};
+\node[target] (igusa) at (3.4,-4.45) {centered squares \(W_T\)\\
+  Segre--Igusa polar map};
+\node[target] (clebsch) at (-3.4,-6.15) {coordinate section \(Z_T=0\)\\
+  diagonal Clebsch cubic};
+\draw[arr] (z) -- (outer);
+\draw[arr] (outer.south west) -- node[lab,above left] {Segre relations}
+  (segre.north);
+\draw[arr] (outer.south east) -- node[lab,above right] {center}
+  (igusa.north);
+\draw[arr] (segre) -- node[lab,right] {section} (clebsch);
+\end{tikzpicture}
+\caption{The four constructions of the same marked cubic and their classical
+targets.  The signs in the determinant branch use the transported
+determinant-line orientations.}
+\label{fig:four-cubic-shadows}
+\end{figure}
+
 \begin{theorem}[Golden operator and classical cubic shadows]
 \label{thm:operator-shadows}
 For a marked bridge datum and its coherent outer family:
