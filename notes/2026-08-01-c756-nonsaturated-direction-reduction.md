@@ -74,8 +74,30 @@ division by \(T^q-T\) proves (2). In particular
 \[
  1\le\mu_t\le\left\lfloor\frac{k-1}{2}\right\rfloor,
  \qquad
- \sum_{t\in\mathbb F_q}(\mu_t-1)=\delta. \tag{4}
+\sum_{t\in\mathbb F_q}(\mu_t-1)=\delta. \tag{4}
 \]
+
+Let \(S_P=\{t:\mu_t\ge2\}\) and put \(s_P=|S_P|\). Since every root of
+\(D_P\) is rational, the quotient is completely split:
+
+\[
+ E_P(T)=c\prod_{t\in S_P}(T-t)^{\mu_t-1}. \tag{5}
+\]
+
+Consequently
+
+\[
+ s_P\le\delta,\qquad
+ \sum_{t\in S_P}\mu_t=\delta+s_P\le2\delta. \tag{6}
+\]
+
+Thus at least \(q-\delta\) directions are represented by a unique chord,
+and all repeated directions together contain at most \(2\delta\) chords.
+This is the **defect-localization lemma**: the positive slack is supported on
+a degree-\(\delta\) effective rational divisor, rather than being dispersed
+among the \(q\) forced directions. For \(\delta=1\), exactly one direction
+contains exactly two (necessarily disjoint) chords and every other direction
+contains exactly one.
 
 The argument is projective: changing the affine coordinate on
 \(\ell\setminus\{P\}\) changes (1) only by the corresponding binary-form
@@ -106,13 +128,13 @@ is, up to scalar, the product of the \(q+1\) rational point factors on
 
 \[
  H_A|_\ell=M_\ell\,L_P^{\,k-2}\,R_{P,\ell},
- \qquad \deg R_{P,\ell}=\binom{k-1}{2}-q=\delta. \tag{5}
+ \qquad \deg R_{P,\ell}=\binom{k-1}{2}-q=\delta. \tag{7}
 \]
 
 The residual roots of \(R_{P,\ell}\) are exactly the excess chord
 concurrences on \(\ell\setminus\{P\}\), with multiplicities \(\mu_X-1\). In the
 affine coordinate used in §1, \(R_{P,\ell}\) is \(E_P\) up to a nonzero
-scalar. Formula (5) is the coordinate-free form of (1), and it records the
+scalar. Formula (7) is the coordinate-free form of (1), and it records the
 full information left after the crude inequality
 \(\binom{k-1}{2}\ge q\).
 
@@ -134,8 +156,8 @@ vanish, which proves (3).
 
 This arithmetic step is small but essential: the ordinary covering-line
 count does not arithmetically exclude equality for arbitrary plane orders,
-while the prime-power order and
-the fact that only \(q\), rather than \(q+1\), directions are covered make
+while the prime-power order and the fact that only \(q\), rather than
+\(q+1\), directions are covered make
 equality impossible here.
 
 ## 4. What the reduction does and does not solve
@@ -146,6 +168,19 @@ cover \(\mathbb F_q\), and all repeated directions are encoded by one
 degree-\(\delta\) polynomial \(E_P\). The conic-external condition adds that
 every one of the corresponding affine secants is external to the fixed
 conic.
+
+As the spare line varies through a fixed arc point \(P\), formula (7) gives a
+canonical divisor-valued defect map
+
+\[
+ \ell\longmapsto \operatorname{div}(R_{P,\ell}). \tag{8}
+\]
+
+Its support consists of intersections of disjoint chords of
+\(A\setminus\{P\}\). In defect one, every spare line contains a unique such
+diagonal point, and distinct spare lines give distinct points. This is the
+smallest geometric carrier on which Segre's tangent-product relation can
+act.
 
 The direction factorization alone cannot finish the theorem. Small arcs
 covering a line are a classical and constructible phenomenon; Ng--Wild's
@@ -158,8 +193,9 @@ nonsaturated direction--intercept coupling.
 
 The next viable gate is therefore precise:
 
-> combine Segre's tangent-product relation with (5) to force a character
-> condition on \(R_{P,\ell}\), then use a Weil bound whose degree is \(\delta\)
+> combine Segre's tangent-product relation with (7) to force a character
+> condition on the completely split divisor \(R_{P,\ell}\), then use a Weil
+> bound whose degree is \(\delta\)
 > rather than \(\binom{k-1}{2}\).
 
 A direct character sum on the unreduced chord product has degree about \(q\)
@@ -172,16 +208,16 @@ Relevant adjacent sources:
   planes*, Ars Combinatoria 58 (2001), 289--300.
 - G. Van de Voorde, *On sets without tangents and exterior sets of a conic*,
   arXiv:1201.0484; cached bytes SHA-256
-  \`45891ed7688d6ab3677a57060ac69c876007104b7479944744724e69fc46f9a7\`.
+  `45891ed7688d6ab3677a57060ac69c876007104b7479944744724e69fc46f9a7`.
 - A. Blokhuis, Á. Seress, and H. A. Wilbrink, *Characterization of complete
   exterior sets of conics*, Combinatorica 12 (1992), 143--147; authoritative
-  page scans are in the shared \`bsw-1992\` cache.
+  page scans are in the shared `bsw-1992` cache.
 
 No novelty or priority claim is made, and no manuscript files were edited.
 
 ## 5. EJ + TT closeout
 
-The cheap upgrade is the coordinate-free factorization (5): it shows that
+The first cheap upgrade is the coordinate-free factorization (7): it shows that
 the spare-line inequality is not merely a count but the degree statement for
 a canonical residual concurrence divisor. The Tao compression is to divide
 out the forced Moore form before applying any character sum. This changes
@@ -189,8 +225,15 @@ the relevant degree from roughly \(q\) to the actual slack \(\delta\), and it
 identifies the only regime in which Weil can plausibly beat the trivial
 estimate.
 
+The second cheap upgrade is defect localization (5)--(6). A future character
+argument need not control all chord directions: at most \(\delta\)
+exceptional directions and \(2\delta\) participating chords carry every
+deviation from a one-factor-per-direction cover. The divisor map (8),
+especially its unique diagonal point in defect one, is the natural
+finite-geometric input for the next Segre comparison.
+
 The acceptance check is internal and exact: the roots and their
-multiplicities on both sides of (5) agree point by point, their degrees agree,
+multiplicities on both sides of (7) agree point by point, their degrees agree,
 and the zero-slack arithmetic uses only coprimality of consecutive integers.
 No computational claim is used.
 
@@ -201,5 +244,7 @@ No computational claim is used.
 | Why a spare line forces all \(q\) remaining directions | settled | deleting its arc point leaves the direction-cover in §1 |
 | Equality \(\binom{k-1}{2}=q\) | settled negatively | only the arithmetic pair \((q,k)=(3,4)\) survives, and the existing exact classification removes it |
 | Meaning of the slack \(\delta\) | settled | degree and total multiplicity of the residual concurrence divisor \(R_{P,\ell}\) |
+| Distribution of positive slack | settled | at most \(\delta\) exceptional directions and \(2\delta\) chords; \(E_P\) is completely split as in (5) |
+| Defect one | structurally settled, not excluded | each spare line has one unique doubled direction and one unique diagonal point; the missing step is compatibility across the spare pencil |
 | Positive slack, including the first \(k=9\) boundary \((q,k,\delta)=(27,9,1)\) | open | derive a character constraint on \(R_{P,\ell}\) from Segre tangent products and conic externality |
 | A raw general-position character sum | settled as the wrong scale | it retains the \(q\) forced direction roots; divide out the Moore form first |
