@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Date:** 2026-07-31
+**Date:** 2026-08-02
 
 > **LIVE MAP ONLY.** This is the routing and state surface for the active
 > four-paper program. Detailed live task internals belong in C-task cards;
@@ -256,7 +256,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C809 — four-shadow characterization](../clebsch-tasks/c809-four-shadow-characterization.md) | complete; positive math-only freeze; no paper promotion | none; nonzero triangle--Pfaffian proportionality characterizes the sign conference class, the two orientations are projectively isolated, and any manuscript/novelty integration requires a separately allocated follow-up |
 | [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | queued; C809 statement frozen; coordinate declaration and manifest ownership with C800 | formalize translation/pair-moment recognition, the nonzero-edge quadratic implication, pentagon classification, and six-test oriented packet without duplicating C763's forward bridge |
 | [C816 — Paper III four-shadow integration](../clebsch-tasks/c816-paper-iii-four-shadow-integration.md) | queued after C815 and coordinated C800 closure; manuscript promotion authorized | complete the full precedence audit, integrate the characterization and exact weighted boundary, refresh trust/release surfaces, then run Milnor--Serre, red-team, PDF inspection, and a fresh context-free cold-read regrade |
-| [C810 — aligned-certificate distance](../clebsch-tasks/c810-aligned-certificate-distance.md) | queued; math only; paper promotion excluded | compute the first exact distance spectra and nearest inequivalent collisions, then attempt a correction theorem only if the distance signal survives |
+| [C810 — aligned-certificate distance](../clebsch-tasks/c810-aligned-certificate-distance.md) | complete; exact seven-point distance two and correction radius zero; no paper promotion | none; the all-even spectrum follows from edge-toggle parity, and the conference-only multi-class question is outside the triggered cheap-stop boundary |
 | [C811 — quadratic-twist specialization](../clebsch-tasks/c811-quadratic-twist-specialization.md) | queued; math only; paper promotion excluded | stress-test the fibre-recovery claim and quickly delimit standard Kummer precedence before seeking a sharper geometric lemma |
 | [C812 — conference cut separation](../clebsch-tasks/c812-conference-cut-separation.md) | queued; math only; paper promotion excluded | find the first reproducible multi-class order and compare third moment, triple-union profile, and full cut histogram in that cost order |
 | [C813 — harmonic restriction generalization](../clebsch-tasks/c813-harmonic-restriction-generalization.md) | queued; math only; paper promotion excluded | compute bounded $A_5$-branching, Petersen-channel eigenvalues, and exact restriction scalars before pursuing a family or isolation theorem |

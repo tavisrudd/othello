@@ -1,7 +1,23 @@
 # C810 — Distance of aligned-design certificates
 
 **Lane:** `clebsch`  
-**Status:** queued; mathematics only; cheap falsifiers first; paper promotion excluded
+**Status:** complete; exact distance two at the first faithful order;
+adversarial correction radius zero; paper promotion excluded
+
+## Outcome
+
+The exact census through seven points has \(2,4,10,27\) two-graph classes
+modulo relabelling and complement. At seven points the labelled and quotient
+minimum distances are both two. An edge-toggle parity proof shows that every
+seven-point aligned certificate has odd weight, and an explicit inequivalent
+pair attains distance two. Thus one substituted bit is detectable and one
+erasure is correctable, but no unknown adversarial substitution is
+deterministically correctable. The parity law extends to every
+\(n\equiv3\pmod4\). The conference-only distance beyond the unique order-six
+class was not entered after the unrestricted cheap-stop gate fired.
+
+Full report and reproducible evidence:
+`notes/2026-08-02-c810-aligned-certificate-distance.md`.
 
 ## Objective
 
