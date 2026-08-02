@@ -146,7 +146,9 @@ atlas a complete classification reduction rather than only an obstruction.
 For six parties, explicit holonomy conjugacy data recover the pencil
 coordinate \(z\).
 The boundary \(m\geq2\) is sharp: a Bell pair has non-Clifford
-\(U\otimes\overline U\) symmetries.
+\(U\otimes\overline U\) symmetries.  Its pair marginal is pure rather than
+maximally mixed, which is exactly the failure that the second-moment
+computation of Section~\ref{sec:two-uniform} detects.
 
 Rigidity determines which product operations are possible; the
 maximum-distance-separable (MDS) Calderbank--Shor--Steane (CSS) model
@@ -209,12 +211,25 @@ For binary stabilizer codes, Wirthm\"uller determines the identity
 component of the local-unitary automorphism group and gives a protected-qubit
 criterion for finiteness of the induced automorphism group
 \cite[Theorem~7 and Corollary~11]{Wirthmuller2011}.  Our result instead
-determines every local factor and gives projective finiteness uniformly
-inside the prime-power stabilizer-AME class.  The stabilizer qualifier is
-essential: arbitrary phased minimal-support
-\(\AME(6,d)\) states form infinitely many LU classes
-\cite{RamadasLakshminarayan2025}; nonlinear orthogonal arrays and
-nonstabilizer AME states are not covered.
+determines every local factor inside the prime-power stabilizer-AME class.
+
+Finiteness alone needs much less than either hypothesis.
+Section~\ref{sec:two-uniform} proves that a pure state whose two-party
+marginals are all maximally mixed --- any local dimension, no stabilizer
+structure, no maximal entanglement --- has finite product-unitary symmetry
+group modulo phase, and that the defect of a product unitary grows
+quadratically away from that group, with an explicit ratio constant
+independent of the number of parties on a neighbourhood that shrinks like
+the inverse square root of it.  This splits the rigidity phenomenon into an
+entanglement half, which forces discreteness, and an algebraic half, which
+names the finite group.  It sharpens the limitation of the theorems above
+without removing it.  Arbitrary phased minimal-support \(\AME(6,d)\) states
+still form infinitely many LU classes
+\cite{RamadasLakshminarayan2025}, and nonlinear orthogonal arrays and
+nonstabilizer AME states are still unclassified here; but every one of
+those states has a finite product-symmetry group modulo phase, so the
+stabilizer hypothesis is doing only the work of identifying which finite
+group appears.
 
 The geometric applications in the remainder of the paper specialize to
 \(m=3\).  Our main explicit application is the ordered pencil
@@ -266,6 +281,8 @@ equivalence is fixed-party.}
 Result & \shortstack[l]{Local\\dimension} &
 \shortstack[l]{State or code\\assumptions} & Party motion \\
 \midrule
+Discreteness and local stability & any integer & arbitrary
+\(2\)-uniform pure state on \(n\geq4\) parties & fixed \\
 LU rigidity & \(p^e\) & arbitrary stabilizer \(\AME(2m,q)\) &
 allowed explicitly \\
 Atlas classification & \(p^e\) & arbitrary stabilizer

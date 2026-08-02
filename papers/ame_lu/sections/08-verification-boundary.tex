@@ -71,6 +71,18 @@ The manuscript gives complete proofs.  Lean kernel-checks the support,
 transition, marginal, covariance, axis-recovery, and holonomy cores; the
 manuscript proves the exact projective atlas extension.
 
+\noindent\textbf{Discreteness and quantitative stability.}
+The manuscript gives complete proofs.  No certificate and no Lean module
+supports Section~\ref{sec:two-uniform}; the numerical checks that first
+accompanied these statements are not used and are not part of the
+supplement.  Two thresholds behave differently and the difference is
+recorded in the statements: \(\tau_p\) in
+Proposition~\ref{prop:quantitative-intertwiner} is explicit, while
+\(\varepsilon_0\) in Corollary~\ref{cor:approximate-decomposition} comes
+from a compactness argument and is not exhibited.
+Proposition~\ref{prop:stability-region} proves that no such threshold can
+be uniform in the party count.
+
 \noindent\textbf{Pencil and six-arc classification.}
 The manuscript proof uses exact certificates for the finite holonomy
 calculation.  The Lean interface is conditional and names its geometric and
@@ -142,6 +154,11 @@ a Clifford from a Galois match.  Neither bridge is used as a paper theorem.
 
 Finally, none of the results classifies nonlinear orthogonal arrays,
 arbitrary nonstabilizer AME tensors, or stabilizer states that are not AME.
+Theorem~\ref{thm:two-uniform-discrete} and
+Theorem~\ref{thm:two-uniform-stability} apply to all of them, but they
+bound symmetry groups rather than classify states, and they do not identify
+the finite group; Remark~\ref{rem:two-uniform-not-clifford} exhibits a
+\(2\)-uniform state whose symmetry group contains a non-Clifford element.
 We do not claim that four
 copies are globally minimal, that \(z=2,4/9\) are orbit exceptions, or
 that a fixed copy degree separates all classes as \(q\) varies.  The

@@ -349,6 +349,219 @@ normalizer.  Taking adjoints preserves the normalizer as well, and
 finite-field Clifford group, and \(L\) is Clifford.
 \end{proof}
 
+\subsection{Discreteness and quantitative stability}
+\label{sec:two-uniform}
+
+The rigidity theorem uses the stabilizer hypothesis to identify the
+symmetry group.  Finiteness of that group needs far less: two-party
+marginals alone, at any local dimension, with no stabilizer structure.
+Throughout this subsection \(q\geq2\) is an arbitrary integer; only the
+statements naming Clifford operators return to \(q=p^e\).
+
+Call a pure state
+\(\lvert\psi\rangle\in(\mathbb C^q)^{\otimes n}\) \emph{\(2\)-uniform} if
+\[
+ \rho^\psi_{\{j,k\}}=q^{-2}I\qquad\text{for all }j\ne k .
+\]
+Tracing once more makes every one-party marginal \(q^{-1}I\).  Such states
+exist only for \(n\geq4\), since at \(n=3\) purity forces
+\(\rank\rho_{\{1,2\}}=\rank\rho_{\{3\}}\leq q\); and every
+\(\AME(2m,q)\) state with \(m\geq2\) is \(2\)-uniform, stabilizer or not.
+Write
+\[
+ G(\psi)=\{U_1\otimes\cdots\otimes U_n:
+   (U_1\otimes\cdots\otimes U_n)\lvert\psi\rangle
+     \in\mathbb C\lvert\psi\rangle\}
+\]
+for its product-unitary symmetry group and, for a product unitary \(U\),
+\[
+ \varepsilon(U)=\min_\theta\bigl\lVert U\lvert\psi\rangle
+    -e^{i\theta}\lvert\psi\rangle\bigr\rVert
+  =\bigl(2-2\lvert\langle\psi\rvert U\lvert\psi\rangle\rvert
+   \bigr)^{1/2}
+\]
+for its defect.  Because operators on distinct sites commute, a product
+unitary is a single exponential:
+\(\bigotimes_je^{iH_j}=e^{iL}\) with \(L=\sum_jH_j^{(j)}\), where
+\(H^{(j)}\) denotes \(H\) acting at site \(j\).  Splitting each \(H_j\)
+into a traceless part \(h_j\) and a multiple of the identity leaves
+\(L=M+cI\) with \(M=\sum_jh_j^{(j)}\).  Everything below rests on one
+computation about \(M\).
+
+\begin{lemma}[Local-generator isometry]
+\label{lem:local-generator-isometry}
+Let \(\lvert\psi\rangle\) be \(2\)-uniform and let \(h_j\) and \(h'_j\),
+\(1\leq j\leq n\), be traceless Hermitian operators on \(\mathbb C^q\).
+Put \(M=\sum_jh_j^{(j)}\) and \(M'=\sum_jh_j'^{(j)}\).  Then
+\(\langle\psi\rvert M\lvert\psi\rangle=0\) and
+\[
+ \bigl\langle M\lvert\psi\rangle,\,M'\lvert\psi\rangle\bigr\rangle
+  =\frac1q\sum_{j=1}^n\Tr(h_jh'_j).                      \tag{3.12}
+\]
+In particular \(\lVert M\lvert\psi\rangle\rVert^2
+ =q^{-1}\sum_j\lVert h_j\rVert_F^2\), so
+\((h_1,\ldots,h_n)\mapsto\sqrt q\,M\lvert\psi\rangle\) is an isometry from
+the traceless local generators, carrying the product Frobenius form, into
+the Hilbert space regarded as a real inner product space.
+\end{lemma}
+
+\begin{proof}
+The one-party marginals give
+\(\langle M\rangle=\sum_j\Tr(\rho^\psi_{\{j\}}h_j)
+ =\sum_j\Tr(h_j)/q=0\).  Expand \(\langle\psi\rvert MM'\lvert\psi\rangle\).
+The terms with equal site indices contribute
+\(\Tr(\rho^\psi_{\{j\}}h_jh'_j)=\Tr(h_jh'_j)/q\).  A term with \(j\ne k\)
+contributes
+\(\Tr\bigl(\rho^\psi_{\{j,k\}}(h_j\otimes h'_k)\bigr)
+ =\Tr(h_j)\Tr(h'_k)/q^2=0\); both maximal mixedness of the pair marginal
+and tracelessness are used.  Hence
+\(\langle\psi\rvert MM'\lvert\psi\rangle=q^{-1}\sum_j\Tr(h_jh'_j)\), which
+is real.  Since \(M\) and \(M'\) are Hermitian, the imaginary part of
+\(\langle M\psi,M'\psi\rangle\) is
+\(\langle[M,M']\rangle/2i\), and it vanishes as well: operators at distinct
+sites commute, and the surviving one-site commutators are traceless, so
+each term is of the form \(\Tr(\rho^\psi_{\{j\}}[h_j,h'_j])\)
+\(=\Tr([h_j,h'_j])/q=0\).  A real symmetric bilinear form agreeing with
+the product Frobenius form is that form.
+\end{proof}
+
+The identity has no error term, and that is the content of the
+\(2\)-uniformity hypothesis rather than a coincidence: the cross terms
+cancel exactly because the pair marginals are exactly \(q^{-2}I\).  A Bell
+pair is the boundary case.  There \(\rho_{\{1,2\}}\) is a pure state, the
+cross term survives, and \(M=h\otimes I-I\otimes h^{T}\) annihilates the
+state for every \(h\) --- the \(U\otimes\overline U\) gauge line that makes
+\(m\geq2\) sharp in Theorem~\ref{thm:lu-lc-rigidity}.
+
+The second ingredient is that a one-parameter group of product unitaries
+has a generator of summed local form.  This is not automatic: a
+one-parameter subgroup of \(G(\psi)\) is a priori only a continuous
+homomorphism into \(U(q^n)\), and the factors of a product unitary are
+determined only up to phases, so differentiating factor by factor carries a
+lifting obligation.
+
+\begin{lemma}[Product generators]\label{lem:product-lie}
+Let \(\pi:U(q)^n\to U(q^n)\) send \((U_1,\ldots,U_n)\) to
+\(U_1\otimes\cdots\otimes U_n\).  Then \(\pi\) is a smooth homomorphism of
+compact Lie groups, its image \(P\) is a closed subgroup of \(U(q^n)\), and
+\[
+ \operatorname{Lie}(P)
+  =\Bigl\{i\textstyle\sum_{j}H_j^{(j)}:
+    H_j=H_j^\dagger\ \text{on }\mathbb C^q\Bigr\}.       \tag{3.13}
+\]
+Hence every one-parameter subgroup of a closed subgroup of \(P\) has a
+generator of that form.
+\end{lemma}
+
+\begin{proof}
+The tensor product of unitaries is multiplicative factor by factor, so
+\(\pi\) is a smooth homomorphism.  Its source is compact, so \(P\) is
+compact and therefore closed, and Cartan's theorem makes \(P\) an embedded
+Lie subgroup of \(U(q^n)\).  A surjective homomorphism of Lie groups has
+surjective differential, so
+\(\operatorname{Lie}(P)=d\pi\bigl(\mathfrak u(q)^n\bigr)\), which is the
+displayed space; its kernel is
+\(\{(i\tau_1I,\ldots,i\tau_nI):\sum_j\tau_j=0\}\).  A closed subgroup
+\(H\leq P\) is a Lie subgroup with
+\(\operatorname{Lie}(H)\subseteq\operatorname{Lie}(P)\), and the generator
+of a one-parameter subgroup of \(H\) lies in \(\operatorname{Lie}(H)\).
+\end{proof}
+
+\begin{theorem}[Discreteness from \(2\)-uniformity]
+\label{thm:two-uniform-discrete}
+Let \(\lvert\psi\rangle\) be a \(2\)-uniform pure state of \(n\) qudits of
+local dimension \(q\).  Then \(\operatorname{Lie}(G(\psi))=i\mathbb RI\),
+and \(G(\psi)/U(1)\cdot I\) is finite.  In particular every
+\(\AME(2m,q)\) state with \(m\geq2\), stabilizer or not, has finite
+product-unitary symmetry group modulo global phase.
+\end{theorem}
+
+\begin{proof}
+The set \(\{U\in U(q^n):U\lvert\psi\rangle\in\mathbb C\lvert\psi\rangle\}\)
+is a closed subgroup, so \(G(\psi)=P\cap\{\cdots\}\) is a closed subgroup
+of \(P\) and hence a compact Lie group.  Let
+\(X\in\operatorname{Lie}(G(\psi))\).  By Lemma~\ref{lem:product-lie},
+\(X=iL\) with \(L=\sum_jH_j^{(j)}\) Hermitian; write \(L=M+cI\) as above.
+Each \(e^{itL}\) fixes the ray of \(\lvert\psi\rangle\), so
+\(e^{itL}\lvert\psi\rangle=\lambda(t)\lvert\psi\rangle\) with
+\(\lambda(t)=\langle\psi\rvert e^{itL}\lvert\psi\rangle\) unimodular and
+smooth in \(t\).  Differentiating at \(t=0\) shows that
+\(\lvert\psi\rangle\) is an eigenvector of the Hermitian operator \(L\),
+say \(L\lvert\psi\rangle=\mu\lvert\psi\rangle\) with \(\mu\) real.  Pairing
+with \(\lvert\psi\rangle\) and using \(\langle M\rangle=0\) gives
+\(\mu=c\), hence \(M\lvert\psi\rangle=0\).  By
+Lemma~\ref{lem:local-generator-isometry}, \(\sum_j\lVert h_j\rVert_F^2=0\),
+so every \(h_j=0\) and every \(H_j\) is scalar.  Thus
+\(\operatorname{Lie}(G(\psi))=i\mathbb RI\).  Since \(U(1)\cdot I\) is a
+closed central one-dimensional subgroup of \(G(\psi)\), the compact Lie
+group \(G(\psi)/U(1)\cdot I\) has dimension zero and is therefore finite.
+\end{proof}
+
+\begin{remark}[Which torus is divided out]
+\label{rem:local-phase-torus}
+Upstairs in \(U(q)^n\) the preimage \(\pi^{-1}(G(\psi))\) always contains
+the local-phase torus \(T=U(1)^n\), of dimension \(n\).  This does not
+contradict the theorem: \(\pi(T)=U(1)\cdot I\) and \(\ker\pi\subset T\) has
+dimension \(n-1\), so
+\(\pi^{-1}(G(\psi))/T\cong G(\psi)/U(1)\cdot I\).  Statements about local
+factors below are statements on \(\mathrm{PU}(q)^n\), not statements
+modulo one global phase.
+\end{remark}
+
+\begin{remark}[Discreteness in the literature]
+\label{rem:discreteness-prior-art}
+Finiteness of this kind is known in two special cases.  Wirthm\"uller
+determines the identity component of the local-unitary automorphism group
+of a binary stabilizer code and gives a protected-qubit criterion for
+finiteness of the induced group
+\cite[Theorem~7 and Corollary~11]{Wirthmuller2011}; his exclusion of Bell
+factors is the \(n\geq4\) boundary above.  Tan computes the local symmetry
+group of the four-qutrit AME state outright, of order \(5832\)
+\cite[Theorem~5.3]{Tan2026}.  Theorem~\ref{thm:two-uniform-discrete} covers
+arbitrary local dimension and arbitrary, in particular nonstabilizer,
+\(2\)-uniform states; to our knowledge no statement at that scope is
+available.
+
+The hypothesis is exactly \(2\)-uniformity, and one-party marginals are
+not enough.  S{\l}owik, Sawicki, and Maci\k{a}\.zek construct locally
+maximally entangled states --- every one-party marginal maximally mixed
+--- whose local-unitary symmetry group contains a nontrivial continuous
+image of \(\mathrm{SU}(N)\) and is therefore positive-dimensional, with
+dimension growing in the number of parties
+\cite[Lemma~2]{SlowikSawickiMaciazek2021}.  Passing from one-party to
+two-party marginals is what forces discreteness.  In the language of
+geometric invariant theory the theorem says that a \(2\)-uniform state is a
+stable point for \(\mathrm{SL}(q,\mathbb C)^n\) rather than merely a
+critical one; stabilizer dimensions there are known for generic states and
+in the extremal qubit case
+\cite{BryanReichsteinVanRaamsdonk2018,%
+BryanLeutheusserReichsteinVanRaamsdonk2019,LyonsWalckBlanda2008,%
+GourKrausWallach2017}, but a genericity statement does not decide a
+particular state.
+\end{remark}
+
+\begin{remark}[Two-uniformity does not identify the group]
+\label{rem:two-uniform-not-clifford}
+An explicit state shows that the second half of the rigidity phenomenon
+needs strictly more than the first.  Let \(q=2\) and
+\(C=\mathrm{RM}(1,4)\leq\F_2^{16}\), whose nonzero codeword weights are
+\(8\) and \(16\) and whose dual \(\mathrm{RM}(2,4)\) has minimum distance
+\(4\).  The equal-phase CSS state of \(C\) has label group
+\(C_X\oplus C^\perp_Z\), so by \((2.2)\) a marginal fails to be maximally
+mixed only when a nonzero word of \(C\) or of \(C^\perp\) is supported
+inside it; both distances exceed \(2\), so the state is \(2\)-uniform and
+Theorem~\ref{thm:two-uniform-discrete} makes its symmetry group finite.
+That group is not Clifford.  Writing \(T=\diag(1,e^{i\pi/4})\), the product
+\(T^{\otimes16}\) multiplies \(\lvert x\rangle\) by
+\(e^{i\pi\operatorname{wt}(x)/4}\), which is \(1\) at every codeword
+weight, so \(T^{\otimes16}\) fixes the state exactly; and
+\(TX(1)T^\dagger=2^{-1/2}\bigl(X(1)+iX(1)Z(1)\bigr)\) is not a Weyl axis.
+Two-uniformity buys finiteness and nothing else.  Identifying the finite
+group as local Clifford is what the AME hypothesis and
+Theorem~\ref{thm:lu-lc-rigidity} supply, and the next corollary is that
+identification.
+\end{remark}
+
 \begin{corollary}[Discrete product-unitary symmetry]
 \label{cor:discrete-lu-symmetry}
 Fix a stabilizer AME state \(\lvert\psi\rangle\) as in
@@ -440,6 +653,377 @@ commuting any kernel factors.  Finally, the factor set is identically one
 precisely when the section preserves multiplication, which proves the
 splitting characterization.
 \end{proof}
+
+Discreteness makes the exact symmetries isolated.  The same identity
+\((3.12)\) says how fast the defect grows away from them, with a constant
+that does not involve the number of parties.
+
+\begin{theorem}[Local stability]\label{thm:two-uniform-stability}
+Let \(\lvert\psi\rangle\) be \(2\)-uniform, let each \(h_j\) be traceless
+Hermitian on \(\mathbb C^q\), and put
+\[
+ U=\bigotimes_{j=1}^ne^{ih_j},\qquad
+ t=\sum_{j=1}^n\lVert h_j\rVert_{\mathrm{op}},\qquad
+ D=\Bigl(\sum_{j=1}^n\lVert h_j\rVert_F^2\Bigr)^{1/2}.
+\]
+If \(t\leq\frac12\) then
+\[
+ \frac{D^2}q\Bigl(1-\frac t3\Bigr)\leq\varepsilon(U)^2
+ \leq\frac{D^2}q\Bigl(1+\frac t3\Bigr).                  \tag{3.14}
+\]
+In particular \(D\leq\sqrt{6q/5}\,\varepsilon(U)<1.096\sqrt q\,
+\varepsilon(U)\), and \(\varepsilon(U)^2/D^2\to q^{-1}\) as \(t\to0\),
+uniformly in \(n\).
+\end{theorem}
+
+\begin{proof}
+Since the sites commute, \(U=e^{iM}\) with \(M=\sum_jh_j^{(j)}\), and
+\(\lVert M\rVert_{\mathrm{op}}\leq t\) by the triangle inequality.  Write
+\(\langle\cdot\rangle=\langle\psi\rvert\cdot\lvert\psi\rangle\).  Taylor's
+formula with integral remainder gives
+\(e^{ix}=1+ix-x^2/2+r(x)\) with \(\lvert r(x)\rvert\leq\lvert x\rvert^3/6\)
+for real \(x\).  Let \(M=\sum_i\lambda_iP_i\) be the spectral decomposition
+and put \(p_i=\langle P_i\rangle\geq0\), so that \(\sum_ip_i=1\).  Then
+\(\langle r(M)\rangle=\sum_ip_ir(\lambda_i)\) and
+\[
+ \lvert\langle r(M)\rangle\rvert
+  \leq\frac16\sum_ip_i\lvert\lambda_i\rvert^3
+  \leq\frac{t\langle M^2\rangle}6 .
+\]
+By Lemma~\ref{lem:local-generator-isometry}, \(\langle M\rangle=0\) and
+\(\langle M^2\rangle=D^2/q\), so
+\(\langle e^{iM}\rangle=1-\langle M^2\rangle/2+\langle r(M)\rangle\).
+Also \(\langle M^2\rangle\leq t^2\leq\frac14\), so
+\(1-\langle M^2\rangle/2>0\) and
+\[
+ \Bigl\lvert\,\lvert\langle e^{iM}\rangle\rvert
+   -\bigl(1-\tfrac12\langle M^2\rangle\bigr)\Bigr\rvert
+ \leq\frac{t\langle M^2\rangle}6 ,
+\]
+using \(\lvert\langle e^{iM}\rangle\rvert\geq
+\operatorname{Re}\langle e^{iM}\rangle\) for the lower estimate.  Since
+\(\varepsilon(U)^2=2-2\lvert\langle e^{iM}\rangle\rvert\), this is exactly
+\((3.14)\).  At \(t\leq\frac12\) the left inequality reads
+\(\varepsilon^2\geq\frac56D^2/q\), and the two-sided form gives the
+limit.
+\end{proof}
+
+The constant \(\sqrt{6/5}=1.0954\ldots\) is therefore sharp to within about
+ten percent: the true asymptotic constant is \(\sqrt q\), and the excess is
+the cubic Taylor cutoff, not structure.
+
+\begin{remark}[The stability constant is a Fisher metric]
+\label{rem:fisher-isotropy}
+Identity \((3.12)\) also explains why the constant does not involve \(n\).
+For the family \(U(s)=\bigotimes_je^{ish_j}=e^{isM}\), the quantum Fisher
+information of a pure state is \(4\operatorname{Var}_\psi(M)\)
+\cite{BraunsteinCaves1994}, so
+\[
+ F_Q=\frac4q\sum_{j=1}^n\lVert h_j\rVert_F^2 .
+\]
+Splitting the variance of a sum of one-site terms into single-party
+variances and cross-party covariances is the standard framework for
+metrologically useful entanglement
+\cite{HyllusEtAl2012,Toth2012}; \(2\)-uniformity is exactly the hypothesis
+that annihilates every covariance and pins every single-party variance.  On
+traceless local generators --- and only there, since \((3.12)\) says
+nothing about generators that are not sums of one-site terms --- the Fisher
+form is a flat multiple of the Euclidean one.  A degenerate direction would
+be a continuous product symmetry, which
+Theorem~\ref{thm:two-uniform-discrete} excludes; an enhanced direction, of
+the kind a GHZ state supplies, would need the pair correlations that
+\(2\)-uniformity forbids.  The stability constant is the inverse of that
+flat metric.
+\end{remark}
+
+The constant is independent of the party count.  The region on which the
+theorem says anything is not, and the following family shows that the
+shrinkage is real rather than an artifact of the cubic cutoff.
+
+\begin{proposition}[The certified region shrinks with the party count]
+\label{prop:stability-region}
+Let \(m\geq3\), \(N=2^m\), and let \(\lvert C\rangle\) be the equal-phase
+CSS state of \(C=\mathrm{RM}(1,m)\leq\F_2^N\); it is \(2\)-uniform.  Take
+\(h_j=cZ(1)\) at every site and put \(\theta=Nc\in(0,2\pi)\).  Then
+\[
+ \sum_j\lVert h_j\rVert_{\mathrm{op}}=\theta,\qquad
+ D=\frac{\theta\sqrt2}{\sqrt N},\qquad
+ \varepsilon=\frac{2\lvert\sin(\theta/2)\rvert}{\sqrt N},\qquad
+ \frac D{\sqrt2\,\varepsilon}=\frac\theta{2\sin(\theta/2)} .
+\]
+The last ratio does not depend on \(N\) and increases on \((0,2\pi)\); it
+passes \(\sqrt{6/5}\) at the unique \(\theta^*=1.46562\ldots\), where the
+defect is \(1.3379\ldots N^{-1/2}\).  Hence the conclusion of
+Theorem~\ref{thm:two-uniform-stability} fails at defects tending to zero
+with \(N\): no threshold below which it holds can be uniform in the party
+count, and every valid threshold is \(O(n^{-1/2})\).
+\end{proposition}
+
+\begin{proof}
+The nonzero weights of \(\mathrm{RM}(1,m)\) are \(N/2\) and \(N\), and
+\(C^\perp=\mathrm{RM}(m-2,m)\) has minimum distance \(4\); both exceed
+\(2\), so \((2.2)\) makes the state \(2\)-uniform as in
+Remark~\ref{rem:two-uniform-not-clifford}.  Since
+\(Z(1)\lvert x\rangle=(-1)^x\lvert x\rangle\) at a single site,
+\(U\lvert x\rangle=e^{ic(N-2\operatorname{wt}(x))}\lvert x\rangle\), and
+the weight distribution \(1,\,2N-2,\,1\) on weights \(0,\,N/2,\,N\) gives
+\(\langle U\rangle=1-(1-\cos\theta)/N\).  This is nonnegative, so
+\(\varepsilon^2=2-2\langle U\rangle=4\sin^2(\theta/2)/N\).  Also
+\(\lVert cZ(1)\rVert_F^2=2c^2\) and
+\(\lVert cZ(1)\rVert_{\mathrm{op}}=c\), giving the displayed \(D\) and
+\(\theta\).  Finally \(\theta/(2\sin(\theta/2))=u/\sin u\) with
+\(u=\theta/2\in(0,\pi)\), which increases from \(1\) to \(\infty\); at
+\(\theta^*\) the ratio exceeds the constant of
+Theorem~\ref{thm:two-uniform-stability} while the defect is
+\(2\sin(\theta^*/2)N^{-1/2}\).
+\end{proof}
+
+Two consequences.  The smallness hypothesis is load-bearing, and its
+constant \(\frac12\) is within a factor of about three of sharp, since the
+family leaves the hypothesis at \(\theta=\frac12\) and violates the
+conclusion at \(\theta^*\).  And the correct summary of the party count is
+two separate statements in one breath: the ratio constant
+\(\sqrt{6q/5}\) is independent of \(n\), while the certified neighbourhood
+shrinks like \(n^{-1/2}\) in defect, at a rate this family attains.  Both
+statements concern a known state acted on by product unitaries of bounded
+generator norm; neither certifies an unknown device.
+
+\begin{corollary}[Approximate symmetries decompose]
+\label{cor:approximate-decomposition}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
+\(m\geq2\).  There is an \(\varepsilon_0(\psi)>0\) such that every product
+unitary \(U\) with \(\varepsilon(U)<\varepsilon_0\) factors as
+\[
+ U=g\cdot\bigotimes_{j=1}^{2m}e^{ih_j},\qquad g\in G(\psi),
+\]
+with the \(h_j\) traceless Hermitian,
+\(\sum_j\lVert h_j\rVert_{\mathrm{op}}\leq\frac12\), and
+\[
+ \Bigl(\sum_j\lVert h_j\rVert_F^2\Bigr)^{1/2}
+   \leq\sqrt{6q/5}\;\varepsilon(U).
+\]
+By Theorem~\ref{thm:lu-lc-rigidity} the factor \(g\) is an exact
+local-Clifford symmetry.
+\end{corollary}
+
+The size constraint on the \(h_j\) is part of the conclusion and cannot be
+dropped: at \(q=2\) the traceless \(h_j=\pi\diag(1,-1)\) give
+\(\bigotimes_je^{ih_j}=(-1)^nI\), so the defect vanishes while the
+generator norm does not.
+
+\begin{proof}
+Work on the compact manifold \(X=\mathrm{PU}(q)^{2m}\), on which
+\(f(U)=\varepsilon(U)^2\) is well defined because the defect depends on
+\(U\) only through \(\lvert\langle\psi\rvert U\lvert\psi\rangle\rvert\).
+
+\emph{Quadratic growth.}  Let \(B\subseteq X\) be the image of
+\(\{(h_j)\ \text{traceless}:\sum_j\lVert h_j\rVert_{\mathrm{op}}
+\leq\frac12\}\) under \((h_j)\mapsto[\bigotimes_je^{ih_j}]\).  That map is
+a diffeomorphism near the origin, of matching dimension
+\(2m(q^2-1)\), so \(B\) is a neighbourhood of the identity coset, and
+Theorem~\ref{thm:two-uniform-stability} gives
+\(f\geq\frac5{6q}\sum_j\lVert h_j\rVert_F^2\) on it.  For \(g\in G(\psi)\)
+one has \(f(Vg)=f(V)\), since \(g\lvert\psi\rangle\) and
+\(\lvert\psi\rangle\) differ by a phase, so the same estimate holds on
+\(gB\) with the generators measured from \(g\).
+
+\emph{Isolation and the threshold.}  The zero set of \(f\) on \(X\) is the
+image \(Z\) of \(G(\psi)\), finite by
+Theorem~\ref{thm:two-uniform-discrete} and
+Remark~\ref{rem:local-phase-torus}.  So \(\bigcup_{g\in Z}gB\) is a
+neighbourhood of \(Z\), its complement \(K\) is compact, and \(f>0\) on
+\(K\); put \(\varepsilon_0=(\min_Kf)^{1/2}>0\).  If
+\(\varepsilon(U)<\varepsilon_0\) then \(U\notin K\), so \(U\in gB\) for
+some \(g\in Z\), and the first step applies at that \(g\).
+\end{proof}
+
+The stabilizer hypothesis enters this corollary only in the last sentence
+of its statement.  The factorization itself holds for every \(2\)-uniform
+state, with \(g\) an exact product-unitary symmetry; and finiteness of the
+zero set is a consequence of \((3.12)\) rather than a separate input, since
+quadratic growth already isolates the zeros of \(f\) on a compact manifold.
+The threshold \(\varepsilon_0\) comes from compactness and is not explicit.
+It depends on \(\lvert\psi\rangle\), and by
+Proposition~\ref{prop:stability-region} its dependence on the party count
+cannot be removed.
+
+Corollary~\ref{cor:approximate-decomposition} measures how far an
+approximate symmetry of one state is from an exact one.  The intertwiner
+question between two states is different, and the two answers cover each
+other's weakness: the constant below grows with \(q\) but the threshold is
+explicit.
+
+\begin{lemma}[Quantitative diagonal-tensor axes]
+\label{lem:quantitative-axes}
+Let \(r\geq3\), let \(E_1,\ldots,E_r\) be \(N\)-dimensional complex inner
+product spaces with orthonormal bases \(\{e_{ij}\}\), and put
+\[
+ T=a\sum_{j=1}^N\lambda_je_{1j}\otimes\cdots\otimes e_{rj},
+ \qquad a>0,\quad\lvert\lambda_j\rvert=1 .
+\]
+Let \(T'\) have the same form in orthonormal bases \(\{e'_{ij}\}\) of
+spaces \(E'_i\), and let \(A_i:E_i\to E'_i\) be unitaries with
+\[
+ \lVert(A_1\otimes\cdots\otimes A_r)T-T'\rVert\leq\eta,
+ \qquad\delta=\eta/a<1/\sqrt2 .
+\]
+Then in each factor there is a unique permutation \(\pi_i\) with
+\[
+ \min_{\lvert\alpha\rvert=1}
+ \lVert A_ie_{ij}-\alpha e'_{i,\pi_i(j)}\rVert\leq\sqrt2\,\delta
+ \qquad(1\leq j\leq N).                                  \tag{3.15}
+\]
+\end{lemma}
+
+\begin{proof}
+Contract both tensors in the first factor against a target frame vector
+\(e_{1k}'^{\,*}\).  The contraction of \(T'\) has rank one, and the
+contraction of \((A_1\otimes\cdots\otimes A_r)T\) is within \(\eta\) of it.
+Flattening the latter between its first remaining factor and the last
+\(r-2\) exhibits its singular values as
+\(a\lvert\langle e'_{1k},A_1e_{1j}\rangle\rvert\), \(1\leq j\leq N\).  By
+the Eckart--Young theorem the squared mass outside the largest is at most
+\(\eta^2\), hence at most \(\delta^2\) after dividing by \(a\).
+Unitarity of \(A_1\) and completeness of the source basis make the total
+squared mass one, so the dominant coefficient has square at least
+\(1-\delta^2>\frac12\).  Two orthogonal rows cannot select the same
+dominant column, and the overlap matrix is square, so the selections form a
+permutation \(\pi_1\).  Each matched column also has total squared mass one
+and contains that coefficient, so its off-axis mass is at most
+\(\delta^2\), and \(2\bigl(1-\sqrt{1-\delta^2}\bigr)\leq2\delta^2\) gives
+\((3.15)\).  Repeat in every factor.
+\end{proof}
+
+\begin{proposition}[Quantitative intertwiner rigidity]
+\label{prop:quantitative-intertwiner}
+Let \(q=p^e\), let \(C,D\leq\F_q^6\) be linear \([6,3,4]_q\) MDS codes, and
+let \(\Psi_C,\Psi_D\) be their equal-phase CSS states.  Put
+\[
+ \tau_p=\min\Bigl\{\tfrac13,\ \frac{\sin(\pi/p)}{2\sqrt2}\Bigr\}.
+\]
+Suppose that, after an allowed party permutation,
+\[
+ \min_{\lvert\alpha\rvert=1}
+ \bigl\lVert(U_1\otimes\cdots\otimes U_6)\Psi_C
+   -\alpha\Psi_D\bigr\rVert\leq\varepsilon
+\]
+and that \(2q^2\varepsilon<\tau_p\).  Then for every party \(i\) there is a
+single-qudit Clifford \(K_i\) with
+\[
+ q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}
+  \leq2\sqrt2\,q^2\varepsilon .                          \tag{3.16}
+\]
+\end{proposition}
+
+\begin{proof}
+Fix a four-party set \(S\).  By \((2.3)\) and \((3.7)\) the nonidentity
+part of the reduced operator is
+\[
+ T_S=q^{-4}\sum_{v\ne0}\lambda_v
+   W_{1,L_1v}\otimes\cdots\otimes W_{4,L_4v},
+\]
+where \(v\) runs over the nonzero labels at one fixed party of \(S\) and
+each \(L_i\) is the resulting parametrization of \(L_C(S)\) at party
+\(i\), bijective by
+Proposition~\ref{prop:stabilizer-ame-support}.  Normalizing every Weyl
+operator by \(q^{-1/2}\) puts \(T_S\) in the form of
+Lemma~\ref{lem:quantitative-axes} with \(N=q^2-1\) and \(a=q^{-2}\).  Two
+unit vectors at phase-optimized distance \(\varepsilon\) have density
+matrices at trace distance at most \(2\varepsilon\); partial trace
+contracts the trace norm, and the Hilbert--Schmidt norm is no larger, so
+every four-party marginal satisfies \(\eta\leq2\varepsilon\) and hence
+\(\delta=q^2\eta\leq2q^2\varepsilon\).  The lemma then matches Weyl axes
+within \(\kappa=\sqrt2\,\delta\).
+
+It remains to turn approximate axes into an exact Clifford, party by party.
+Extend the matched label permutation by \(\pi(0)=0\); the identity axis is
+matched exactly.  Conjugating a product of two Weyl operators in the two
+available orders places the axes labelled \(\pi(v+w)\) and
+\(\pi(v)+\pi(w)\) within \(3\kappa\).  Distinct Weyl axes are at
+phase-minimized distance \(\sqrt2\), so \(\delta<\frac13\) forces
+\(\pi(v+w)=\pi(v)+\pi(w)\); the matching was a permutation, so \(\pi\) is
+\(\F_p\)-linear.  Conjugation preserves Weyl commutators exactly, replacing
+the four factors of a commutator by matched axes costs at most
+\(4\kappa\), and distinct \(p\)-th root commutator phases are separated by
+\(2\sin(\pi/p)\), so \(\delta<\sin(\pi/p)/(2\sqrt2)\) forces \(\pi\) to
+preserve the prime-field symplectic form.  By \((2.0)\) it is realized by
+an exact Clifford \(K_i\).
+
+Finally the phases.  Put \(V=K_i^\dagger U_i\) and expand
+\(V=\sum_xc_xW_x\) with \(\sum_x\lvert c_x\rvert^2=1\).  Axis closeness
+gives \(\lvert q^{-1}\Tr(W_v^\dagger VW_vV^\dagger)\rvert\geq
+1-\kappa^2/2\) for every \(v\), and character orthogonality turns this into
+\(\sum_x\lvert c_x\rvert^4\geq(1-\kappa^2/2)^2\).  Hence some
+\(\lvert c_x\rvert\geq1-\kappa^2/2\), so \(V\) lies within \(\kappa\) of a
+phase times \(W_x\); absorbing that displacement into \(K_i\) gives
+\((3.16)\).  Two four-party sets cover all six parties, as in
+Corollary~\ref{cor:full-weyl-cover}.
+\end{proof}
+
+The closest general framework is the perturbation theory of nearly
+orthogonally decomposable tensors, which gives dimension-independent bounds
+without a singular-value gap \cite{AuddyYuan2020}; the argument above is
+the equal-weight complex specialization needed here, together with the
+Weyl multiplication, commutator, and implementing-Clifford steps.  Its
+conclusion is distance from the ambient Clifford group and nothing finer.
+Whenever two states admit an exact intertwiner outside a proposed smaller
+subgroup, that intertwiner has positive distance from the finite closed
+subgroup, so taking \(\varepsilon=0\) falsifies every uniform estimate
+toward it.
+
+\begin{corollary}[Local gauge groups of \(2\)-unitary gates]
+\label{cor:two-unitary-gauge}
+Let \(W\) be a two-qudit gate whose associated four-party state
+\(\psi_{ijkl}=q^{-1}W_{kl,ij}\) is \(\AME(4,q)\) --- equivalently, \(W\) is
+\(2\)-unitary, remaining unitary after realignment and after partial
+transposition --- and let \(G(\psi)\) be its product-unitary symmetry
+group.  Then
+\((u_1,u_2,u_3,u_4)\mapsto(\overline u_1,\overline u_2,u_3,u_4)\) is an
+isometric group isomorphism carrying \(G(\psi)\) onto the local gauge
+group
+\[
+ \{(v_1\otimes v_2,\,u_3\otimes u_4):
+   (u_3\otimes u_4)W(v_1\otimes v_2)^\dagger=e^{i\varphi}W\},
+\]
+and it preserves \(\bigl(\sum_j\lVert h_j\rVert_F^2\bigr)^{1/2}\).
+Consequently the local gauge group of any \(2\)-unitary gate is finite
+modulo the local phases, Theorem~\ref{thm:two-uniform-stability} transports
+with its hypothesis \(\sum_j\lVert h_j\rVert_{\mathrm{op}}\leq\frac12\),
+and Corollary~\ref{cor:approximate-decomposition} transports with a
+threshold \(\varepsilon_0(W)\) that is again not explicit.  Gate defects
+are measured in the metric \(q^{-1}\lVert\cdot\rVert_F\).  For a gate
+arising from a stabilizer \(\AME(4,q)\) state the exact gauge group is
+local Clifford.
+\end{corollary}
+
+\begin{proof}
+Normalization is consistent: \(\lVert W\rVert_F^2=q^2\) for a unitary on
+\(\mathbb C^q\otimes\mathbb C^q\), so
+\(\langle\psi\vert\psi\rangle=\lVert W\rVert_F^2/q^2=1\).  A product
+unitary acts on the reshaped gate by
+\(W\mapsto(u_3\otimes u_4)W(u_1\otimes u_2)^{T}\), so
+\(\lVert U\lvert\psi\rangle-e^{i\theta}\lvert\psi\rangle\rVert
+ =q^{-1}\lVert(u_3\otimes u_4)W(u_1\otimes u_2)^T-e^{i\theta}W\rVert_F\);
+this is the stated metric.  Transposition preserves the Frobenius norm and
+\(u\mapsto\overline u\) is an automorphism of \(U(q)\) fixing
+\(\lVert h\rVert_F\) for the corresponding generators, and
+\((u_1\otimes u_2)^T=(v_1\otimes v_2)^\dagger\) with
+\(v_a=\overline u_a\), which gives the displayed isomorphism.  An
+\(\AME(4,q)\) state is \(2\)-uniform, so
+Theorem~\ref{thm:two-uniform-discrete} applies, with
+Remark~\ref{rem:local-phase-torus} identifying the quotient as the one by
+the local phases; the stabilizer case is
+Theorem~\ref{thm:lu-lc-rigidity}.
+\end{proof}
+
+The statement is vacuous at \(q=2\), where no \(\AME(4,2)\) state exists.
+In the dual-unitary circuit literature the local gauge freedom is the
+standing nuisance parameter of the classification programme
+\cite{RatherAravindaLakshminarayan2022}, and the finite-field Clifford
+subfamily has been classified, with perfect-tensor cores appearing among
+its equivalence classes \cite{Pahari2026}; the corollary says that for
+\(2\)-unitary gates the gauge group itself is finite and, in the stabilizer
+case, Clifford.
 
 \subsection{Exact MDS--CSS logical images and lifts}
 

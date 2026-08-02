@@ -22,6 +22,8 @@ still depends on the claim, evidence, literature, and prose gates.
 | C619 | the GRS propagation maps satisfy the `SL_2(q)` relations exactly; over odd fields the Weil lift splits the scalar extension on the linear factor, while the full affine one-qudit extension is non-split by the Weyl commutator | adopted lift-boundary audit | odd prime `q`, generalized and extended GRS tower; no claim about splitting the realized party-permutation extension | explicit conjugation formula, finite-field Heisenberg--Weil representation, and the nontrivial Pauli commutator |
 | C624/C629 | the realized party-permutation extensions split in twelve concrete pencil, GRS, enhanced-symmetry, and \(H_3\) rows; on every listed non-GRS/\(H_3\) row, odd party motion inverts `T` and gives `N(T)` | adopted as a computed structural corollary | exactly the twelve rows listed in `cor:computed-party-splitting`; \(N(T)/T\cong C_2\), but the determinant-one Weyl lift has \(J^2=-I\), so the linear torus-normalizer extension is not asserted to split; no all-good-reduction or arbitrary-six-arc splitting claim | exhaustive exact local-symplectic enumeration, normalized factor sets, explicit party-extension complements and cochains; abstract splitting consequences and the separate \(J\)-matrix relations kernel checked, concrete complements certificate checked |
 | Clebsch-rigidity/C731 | the Clebsch equal-phase AME state has 120 covering-radius \(X\)-syndromes on twelve conic rays, exactly one minimum representative on each three-party support, and one \(C_{10}\times A_5\) monomial orbit, while its nonconic defining arc forces the fixed-party split-torus phase | adopted as a worked example after referee red team | \(q=11\); generalized-\(X\) sector only; projective syndrome coordinates; \(A_5\) is the monomial quotient rather than the full party-moving image; no arbitrary weight-three correction, Hamiltonian, or Golden-operator claim | direct coset-state/stabilizer-syndrome proof, cited Clebsch deep-hole theorem, and composition with `thm:logical-phase`; no new computation |
+| C581 | approximate product-unitary intertwiners between equal-phase `[6,3,4]_q` MDS--CSS states lie within `2√2·q²·ε` of exact single-qudit Cliffords, with explicit threshold `2q²ε < τ_p` | adopted as the two-state quantitative counterpart | every prime power `q=p^e`; equal-phase CSS states of linear `[6,3,4]_q` MDS codes; conclusion is distance from the ambient Clifford group only | quantitative diagonal-axis lemma (Eckart--Young), Weyl additivity and commutator resolution, character-averaging phase step |
+| C774/C775/C776 (external source note) | 2-uniformity alone forces a finite product-unitary symmetry group modulo phase and a two-sided quadratic defect estimate with a party-count-independent ratio constant; the certified neighbourhood shrinks like `n^{-1/2}` and that rate is attained; the 2-unitary gate corollary follows by vectorization | adopted quantitative package | any integer local dimension and any 2-uniform pure state on `n≥4` parties for discreteness and stability; the decomposition corollary adds a stabilizer `AME(2m,q)` hypothesis only to call the exact factor local Clifford, and its threshold is non-explicit; the gate corollary is vacuous at `q=2` | second-moment isometry against maximally mixed pair marginals, Cartan closed-subgroup lemma for the summed local generator, cubic Taylor remainder, compactness for the threshold, closed-form Reed--Muller family for the region bound |
 | C633 | each field-automorphism exponent has exact diagonal and Gale divisors; the explicit Gale multiplier, same-exponent sector disjointness, and automorphism equivariance of `G,A,B,z` hold on the admitted non-GRS pencil | adopted scalar extension-field structure | every odd finite field and every field automorphism; no full additive-Clifford orbit classification | unconditional ring and field algebra in `ExtensionFieldPencil`; the two representation-theoretic bridges needed for the orbit theorem remain named hypotheses |
 
 ## Stable source labels
@@ -50,6 +52,11 @@ still depends on the claim, evidence, literature, and prose gates.
 - `cor:computed-party-splitting`: exact splitting and parity action for the twelve C624 party-permutation examples; C629 formalizes the consequences of a supplied complement, while the concrete complements remain certificate checked.
 - `cor:six-arc-fixed-party-group`: exact projective fixed-party logical group `F_q^2 ⋊ SL_2(q)` on the GRS six-arc locus and `F_q^2 ⋊ T` off it.
 - `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.
+- `lem:local-generator-isometry`: the second-moment identity `(3.12)` in its polarized isometry form; `lem:product-lie`: summed local form of every one-parameter product-unitary generator.
+- `thm:two-uniform-discrete`: finiteness of `G(ψ)/U(1)` from 2-uniformity alone, with `rem:local-phase-torus` fixing which torus is divided out, `rem:discreteness-prior-art` conceding Wirthmüller and Tan and citing Słowik--Sawicki--Maciążek for the 1-uniform contrast, and `rem:two-uniform-not-clifford` exhibiting the `RM(1,4)` coset state whose finite symmetry group contains transversal `T`.
+- `thm:two-uniform-stability`: two-sided defect estimate `(3.14)` with party-count-independent constant; `rem:fisher-isotropy` identifies the inverse constant with the quantum Fisher form; `prop:stability-region` bounds the certified neighbourhood by `O(n^{-1/2})` on an explicit Reed--Muller family; `cor:approximate-decomposition` gives the non-explicit-threshold decomposition with its minimal-lift hypothesis.
+- `lem:quantitative-axes`, `prop:quantitative-intertwiner`: quantitative diagonal-axis recovery and the explicit-threshold two-state Clifford bound.
+- `cor:two-unitary-gauge`: finiteness modulo local phases and transported stability for local gauge groups of 2-unitary gates.
 
 ## Frozen theorem hierarchy
 
@@ -65,6 +72,15 @@ still depends on the claim, evidence, literature, and prose gates.
    projective transversal group to be `F_q^2 ⋊ SL_2(q)`; otherwise it is
    `F_q^2 ⋊ T`.  Every state in the general family has finite projective
    product-unitary automorphism group.
+2b. **Entanglement-only package (`thm:two-uniform-discrete`,
+   `thm:two-uniform-stability`, `cor:approximate-decomposition`,
+   `prop:quantitative-intertwiner`, `cor:two-unitary-gauge`).** Two-party
+   marginals alone force a finite product-unitary symmetry group modulo
+   phase and a two-sided quadratic defect estimate whose ratio constant
+   does not depend on the party count.  The certified neighbourhood does,
+   shrinking like `n^{-1/2}` at a rate an explicit Reed--Muller family
+   attains.  The stabilizer hypothesis reappears only to name the exact
+   symmetries as local Clifford.
 3. **Classification corollary (`cor:lu-lc-pencil`).** On C396's admitted
    odd-prime-field non-GRS pencil, projective, monomial-code, LC, and LU
    equivalence are all equivalent to equality of `z`. Over extension
@@ -88,6 +104,10 @@ still depends on the claim, evidence, literature, and prose gates.
 
 | Result | Field/domain | Included exceptions | Excluded boundary |
 |---|---|---|---|
+| Discreteness from 2-uniformity | any integer local dimension `q≥2`, any 2-uniform pure state on `n≥4` parties | nonstabilizer states, non-prime-power `q`, and `k`-uniform states with `k≥2` are all included | the finite group is not identified; Bell factors and every 1-uniform-only state are excluded |
+| Local stability and decomposition | any `q≥2` and any 2-uniform state for the two-sided estimate `(3.14)`; the decomposition corollary adds stabilizer `AME(2m,q)`, `m≥2` | ratio constant `√(6q/5)` is independent of the party count; asymptotic constant `√q` | the smallness hypothesis `Σ‖h_j‖_op ≤ 1/2` is load-bearing; no threshold uniform in the party count exists, and `ε₀` is non-explicit |
+| Quantitative intertwiner rigidity | every prime power `q=p^e`; equal-phase CSS states of linear `[6,3,4]_q` MDS codes | explicit threshold `2q²ε < τ_p`; conclusion is a nearby implementing Clifford | no uniform approximate semilinear, split-torus, or code reconstruction; no claim at general `m` |
+| 2-unitary gate gauge groups | every `q≥3` with an `AME(4,q)` state | finiteness modulo the local phases; stability transports with its hypotheses | vacuous at `q=2`; the transported threshold remains non-explicit |
 | LU-intertwiner rigidity and transversal no-go | every prime power `q=p^e`, every `m≥2`, and every additive stabilizer `AME(2m,q)` state; associated stabilizer `[[2m-1,1,m]]_q` encoder for the corollary | arbitrary stabilizer phases and non-`\(\F_q\)`-linear additive label groups | `m=1`, nonstabilizer AME tensors, and transversal gates of other quantum-code families |
 | Exact diagonal-isodual transversal logical group | odd prime `q`, `m≥2`, and a linear `[2m,m,m+1]_q` MDS code | `F_q^2 ⋊ SL_2(q)` iff `SC=C^\perp` for nonsingular diagonal `S`, and `F_q^2 ⋊ T` otherwise; includes non-GRS diagonally isodual codes | extension-field full Clifford groups, party-moving enlargements, and non-product physical implementations |
 | Diagonal-multiplier phase test | every finite field and exact linear `[2m,m,m+1]` MDS pair | multiplier nullity zero or one; every nonzero multiplier has full support and a unique projective class | no generator-matrix/Veronese or higher-\(m\) codimension claim |
@@ -106,4 +126,7 @@ still depends on the claim, evidence, literature, and prose gates.
 - No claim that `z=2,4/9` are LU-orbit exceptions.
 - No claim that four copies are a globally minimal invariant degree.
 - No new holographic-code construction or tensor-network performance claim.
+- No party-count-independent certification claim: the ratio constant is independent of the party count, the certified neighbourhood is not.
+- No self-testing or device-independent certification claim; the stability results assume a known state and bounded generators.
+- No explicit stability threshold `ε₀`, and no claim that the metrology reading of the Fisher identity is new.
 - No novelty wording before C562 closes the claim-specific audit.
