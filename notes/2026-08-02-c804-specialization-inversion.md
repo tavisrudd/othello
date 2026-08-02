@@ -243,7 +243,9 @@ The other mentions in the five controlling files refer correctly to the
 second-moment identity `(3.8)` and stability estimate `(3.10)`; the evidence
 manifest and formal crosswalk contained no numbered Section 3 references.
 `make check` passes without TeX warnings on the 49-page PDF, and pages 2--3,
-9--12, and 37 were rendered and inspected after the final build.
+9--12, and 37 were rendered and inspected after the final build.  The
+standalone paper mirror was synchronized by forward commit `7b7968c`; its
+warning-free `make check` produced the same 49-page PDF byte for byte.
 
 ## Extra-juice and Tao closeout
 

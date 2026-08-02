@@ -26,7 +26,8 @@ obstruction explicit, corrected the stale propagation reference from
 warning-free 49-page build and affected-page visual sweep pass.  The
 package is manuscript proved, with no certificate or Lean coverage.  Tan's
 four-qutrit concession remains unchanged pending the separately gated atlas
-reproduction.  See
+reproduction.  Standalone forward commit `7b7968c` is synchronized and
+unpushed.  See
 `2026-08-02-c804-specialization-inversion.md`.
 
 **C775 closed (2026-08-02): the 2-uniform claims survive, with conceded
