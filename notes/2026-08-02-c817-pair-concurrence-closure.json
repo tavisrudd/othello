@@ -31,6 +31,13 @@
     "8": 273,
     "9": 546
   },
+  "pair_concurrence_parity_operator": {
+    "P+P^7": "A9=alpha",
+    "P^7": "code projector e_K",
+    "image": "binary code K",
+    "rank_over_F2": 36,
+    "recovered_field": "F2[alpha]/(alpha^3+alpha^2+1)=F8"
+  },
   "point_count": 78,
   "rho_to_pair_concurrence": {
     "0": [

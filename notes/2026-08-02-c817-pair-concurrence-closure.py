@@ -126,6 +126,46 @@ def incident(
     return sum(a * b for a, b in zip(line, point)) % Q == 0
 
 
+def binary_identity(size: int) -> list[int]:
+    return [1 << index for index in range(size)]
+
+
+def binary_add(*matrices: list[int]) -> list[int]:
+    result = []
+    for rows in zip(*matrices):
+        value = 0
+        for row in rows:
+            value ^= row
+        result.append(value)
+    return result
+
+
+def binary_multiply(first: list[int], second: list[int]) -> list[int]:
+    product = []
+    for support in first:
+        row = 0
+        while support:
+            bit = support & -support
+            row ^= second[bit.bit_length() - 1]
+            support ^= bit
+        product.append(row)
+    return product
+
+
+def binary_rank(rows: list[int]) -> int:
+    pivots: dict[int, int] = {}
+    for original in rows:
+        row = original
+        while row:
+            pivot = row.bit_length() - 1
+            if pivot in pivots:
+                row ^= pivots[pivot]
+            else:
+                pivots[pivot] = row
+                break
+    return len(pivots)
+
+
 def compute() -> dict[str, object]:
     points = internal_points()
     point_index = {point: index for index, point in enumerate(points)}
@@ -244,6 +284,46 @@ def compute() -> dict[str, object]:
     assert len(passants) == 78
     assert color_eight_neighborhoods == polar_rows == incidence_rows
 
+    relation_matrices = {
+        value: [
+            sum(
+                1 << second
+                for second in range(78)
+                if first != second and rho(points[first], points[second]) == value
+            )
+            for first in range(78)
+        ]
+        for value in RELATIONS
+    }
+    pair_parity = [
+        sum(
+            1 << second
+            for second in range(78)
+            if first != second and initial[first][second] % 2
+        )
+        for first in range(78)
+    ]
+    assert pair_parity == binary_add(relation_matrices[10], relation_matrices[12])
+    assert binary_rank(pair_parity) == 36
+    assert binary_rank(relation_matrices[0]) == 42
+    assert binary_multiply(relation_matrices[0], pair_parity) == [0] * 78
+
+    pair_parity_seventh = binary_identity(78)
+    for _ in range(7):
+        pair_parity_seventh = binary_multiply(pair_parity_seventh, pair_parity)
+    code_projector = binary_add(
+        binary_identity(78),
+        binary_multiply(relation_matrices[0], relation_matrices[0]),
+    )
+    recovered_a9 = binary_add(pair_parity, pair_parity_seventh)
+    assert pair_parity_seventh == code_projector
+    assert recovered_a9 == relation_matrices[9]
+    recovered_a9_squared = binary_multiply(recovered_a9, recovered_a9)
+    recovered_a9_cubed = binary_multiply(recovered_a9_squared, recovered_a9)
+    assert binary_add(
+        recovered_a9_cubed, recovered_a9_squared, code_projector
+    ) == [0] * 78
+
     return {
         "schema": "c817-pair-concurrence-closure-v1",
         "point_count": len(points),
@@ -267,6 +347,13 @@ def compute() -> dict[str, object]:
         "color_8_neighborhood_count": len(color_eight_neighborhoods),
         "color_8_neighborhood_size": 7,
         "color_8_neighborhoods_equal_passant_incidence_rows": True,
+        "pair_concurrence_parity_operator": {
+            "rank_over_F2": 36,
+            "image": "binary code K",
+            "P^7": "code projector e_K",
+            "P+P^7": "A9=alpha",
+            "recovered_field": "F2[alpha]/(alpha^3+alpha^2+1)=F8",
+        },
         "automorphism_group_order_via_full_scheme_rigidity": 2184,
         "independent_closure_checks": [
             "full coherent signature refinement",

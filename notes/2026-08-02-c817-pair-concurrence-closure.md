@@ -47,6 +47,51 @@ is constant.  Reconstruction arity is therefore exactly two: unary data is
 trivial, while pair data recovers both the row family and, after one coherent
 refinement, the full elliptic scheme.
 
+## Pair-parity recovery of the code and hidden field
+
+The pair layer contains an even cheaper synthesis.  Form the binary matrix
+
+\[
+ P_{xy}=c(x,y)\pmod2,\qquad P_{xx}=0.
+\]
+
+Only concurrence 7 and concurrence 9 are odd, so the pair table gives
+
+\[
+ P=A_{10}+A_{12}=B^2+B^4.
+\]
+
+This operator has rank 36 and \(A_0P=0\).  Therefore
+
+\[
+ \operatorname{im}P=K=\ker A_0.
+\]
+
+Thus the binary code itself is the image of the parity reduction of its
+minimum-layer pair-concurrence matrix.  No orbit-spanning argument, coherent
+refinement, polarity, or prior incidence matrix is needed to define it from
+the abstract minimum hypergraph.
+
+The same single operator recovers the hidden field.  Exact matrix powers give
+
+\[
+ P^7=e_K,
+ \qquad
+ B=P+P^7,
+ \qquad
+ B^3+B^2+e_K=0.
+\]
+
+Hence the weighted 2-section intrinsically reconstructs the code projector,
+the distinguished scalar \(\alpha=B\), and
+
+\[
+ \mathbf F_2[B]\cong\mathbf F_8.
+\]
+
+This synthesizes C817 subitems 1 and 2: the hidden \(\mathbf F_8\)-symplectic
+module is already encoded in the parity of minimum-support pair concurrence.
+
 ## Pair-only reconstruction theorem
 
 From the abstract weighted graph \((X,c)\), define
@@ -142,7 +187,9 @@ on all \(78^2\) ordered pairs until stability, and independently checks the
 split by the common-concurrence-7 formula.  It then constructs every passant
 line and verifies that the 78 concurrence-8 neighborhoods, the 78 polar
 neighborhoods, and the 78 incidence rows are identical as sets of canonical
-seven-subsets.  There is no randomness, sampling, or early stop.
+seven-subsets.  It also reduces the full pair matrix modulo two and verifies
+its rank, image containment, seventh-power projector, recovered \(A_9\), and
+irreducible cubic identity.  There is no randomness, sampling, or early stop.
 
 The automorphism order uses the already-frozen full-scheme four-anchor
 rigidity theorem after the exact closure identifies the full scheme; this
@@ -161,10 +208,10 @@ Aut = PGL(2,13)`.
 
 Evidence files:
 
-- `notes/2026-08-02-c817-pair-concurrence-closure.py` — 9521 bytes,
-  SHA-256 `9a6fd3fec093dbfe973bccb974bdaa02e23bbb6800e08080341eadbdd21c54df`;
-- `notes/2026-08-02-c817-pair-concurrence-closure.json` — 1118 bytes,
-  SHA-256 `d514b9f3984d163eaa1448bf7ebdc59e011b95de633313f9a7cab3a5f5d29cbd`.
+- `notes/2026-08-02-c817-pair-concurrence-closure.py` — 12229 bytes,
+  SHA-256 `8cfeb472c314e5821fd9eba1d59f934cc084e2c6b1a846954c4ab484c1117e48`;
+- `notes/2026-08-02-c817-pair-concurrence-closure.json` — 1333 bytes,
+  SHA-256 `a0d46db25200017e3e24cf7138f42ea90322687bcecf4f6495cdc5db373804ba`.
 
 The adjacent checksum manifest freezes the same hashes.
 
@@ -172,11 +219,13 @@ The adjacent checksum manifest freezes the same hashes.
 
 ### `ej`
 
-The free upgrade is stronger than the requested coherent-closure theorem:
-the unique concurrence-8 color directly recovers \(A_0\), and polarity turns
-its neighborhoods into the incidence rows.  Thus triples are unnecessary not
-only for separating the fused scheme colors but also for reconstructing
-\(M\).
+The first free upgrade is stronger than the requested coherent-closure
+theorem: the unique concurrence-8 color directly recovers \(A_0\), and
+polarity turns its neighborhoods into the incidence rows.  The deeper cheap
+synthesis is the parity operator \(P=c\bmod2\): its image is the entire code,
+its seventh power is the code projector, and \(P+P^7\) is the hidden
+\(\mathbf F_8\) generator.  Thus the pair layer intrinsically reconstructs
+\(M\), \(K\), and the field action by two complementary one-line operations.
 
 ### `tt`
 
@@ -204,7 +253,9 @@ and yielded the stronger direct row-recovery theorem.
 - **Settled:** the five-color fusion is not coherent; the exact obstruction is
   \(p_{10,10}^{1}=2\ne4=p_{10,10}^{3}\).
 - **Settled by `ej`:** concurrence-8 neighborhoods already are the passant
-  rows, so neither clique selection nor triples are required for \(M\).
+  rows, while pair parity has image \(K\) and recovers the hidden field via
+  \(P^7=e_K\) and \(P+P^7=A_9\).  Neither clique selection, triples, nor orbit
+  spanning are required for these reconstructions.
 - **Settled by `tt`:** “pair-only” means closure under pair-derived walk
   counts, not separation by the raw concurrence value alone.
 - **Settled by `ej2`:** reconstruction arity is exactly two, since every unary
