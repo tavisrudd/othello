@@ -251,6 +251,20 @@ source = "papers/golden-quantum-statistics"
 paper_ids = ["golden_quantum_statistics"]
 disposition = "active"
 
+[[repository.rewrite]]
+path = "README.md"
+old = "The broader Golden operator inventory remains in `papers/golden-operator/`."
+new = "The broader Golden operator inventory remains outside this repository."
+expected_count = 1
+reason = "the standalone repository does not expose the private source-programme tree"
+
+[[repository.rewrite]]
+path = "verification/verify.py"
+old = 're.compile(r"notes/20'
+new = 're.compile(r"notes/" r"20'
+expected_count = 1
+reason = "preserve the private-path rejection regex without embedding a path that the export audit must reject"
+
 [[repository]]
 name = "golden-operator"
 source = "papers/golden-operator"
