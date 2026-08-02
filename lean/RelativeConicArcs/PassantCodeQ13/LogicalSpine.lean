@@ -251,4 +251,39 @@ theorem four_anchor_rigidity
 
 end Anchors
 
+section AnchorTransports
+
+variable {Point Transport : Type*}
+
+/-- A four-anchor argument for a concrete family of bijective transports.  A preserving
+permutation is first factored as one chosen transport followed by a normalized preserving map.
+The forced fourth anchor and separating signatures then make the normalized factor the identity. -/
+theorem four_anchor_transport_rigidity
+    (action : Transport → Point → Point)
+    (Preserves : (Point → Point) → Prop)
+    (first second third fourth : Point)
+    (normalize : ∀ permutation, Preserves permutation →
+      ∃ transporter normalized,
+        permutation = action transporter ∘ normalized ∧ Preserves normalized ∧
+          normalized first = first ∧ normalized second = second ∧ normalized third = third)
+    (fourth_forced : ∀ permutation, Preserves permutation →
+      permutation first = first → permutation second = second → permutation third = third →
+        permutation fourth = fourth)
+    (signatures_separate : ∀ permutation, Preserves permutation →
+      permutation first = first → permutation second = second → permutation third = third →
+        permutation fourth = fourth → permutation = id) :
+    ∀ permutation, Preserves permutation →
+      ∃ transporter, permutation = action transporter := by
+  intro permutation preserves
+  obtain ⟨transporter, normalized, factorization, normalized_preserves,
+    fixes_first, fixes_second, fixes_third⟩ := normalize permutation preserves
+  have fixes_fourth := fourth_forced normalized normalized_preserves
+    fixes_first fixes_second fixes_third
+  have normalized_identity := signatures_separate normalized normalized_preserves
+    fixes_first fixes_second fixes_third fixes_fourth
+  refine ⟨transporter, ?_⟩
+  simpa [normalized_identity] using factorization
+
+end AnchorTransports
+
 end RelativeConicArcs.PassantCodeQ13.LogicalSpine

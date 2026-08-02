@@ -13,8 +13,11 @@ exhausts the four pencil-profile domains and identifies their 56 solutions
 with the four disjoint 14-support orbit slices; the point stabilizer is
 transitive on each slice.  The concrete association identities and four
 orbit Gram matrices now feed the abstract kernel-spanning theorem.  Row-family uniqueness is
-closed by a semantic seven-set transport and seven local-extension residues.  Only the concrete
-four-anchor automorphism transport and the remaining release/publication work remain.
+closed by a semantic seven-set transport and seven local-extension residues.  The concrete
+four-anchor transport now identifies every polar-relation automorphism with one of the 2184
+normalized symmetric-square projective maps.  Only the remaining release/publication work remains;
+the minimum-support-to-polar-relation implication remains an explicit human-proof boundary in the
+partial formal mirror.
 
 ## Goal
 
@@ -55,9 +58,10 @@ silently shared with the released Paper-I surface.
    transport, and the
    sharded q13 certificate package described in
    `papers/q13-passant-code/verification/README.md`; close the explicitly
-   recorded evaluator, orbit exhaustion,
-   concrete automorphism-anchor boundary before claiming full Lean coverage.  Row uniqueness is
-   green through `PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique`.
+   recorded evaluator and orbit exhaustion boundaries before claiming full Lean coverage.  Row
+   uniqueness is green through `PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique`, and the
+   concrete elliptic-scheme anchor gate is green through
+   `PassantCodeQ13.Gates.Main.ellipticSchemeAutomorphismsAreProjective`.
 5. Connect every manuscript statement to an exact Lean declaration,
    certificate, citation, or human proof and generate an axiom audit.
 6. Update the released Paper-I companion by forward version: replace the full

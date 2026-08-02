@@ -6,6 +6,7 @@ import PassantCodeQ13.MinimumWords.RowUniqueness.Transport
 import PassantCodeQ13.SemanticTransports
 import PassantCodeQ13.AssociationAlgebra
 import PassantCodeQ13.AssociationTransport
+import PassantCodeQ13.Automorphisms.Transport
 
 /-!
 # Aggregate finite gate for the q=13 passant code
@@ -18,7 +19,9 @@ joins, and exact reconstruction of the 78 geometric passant rows.
 The gate does not claim the full minimum-distance or reconstruction theorem.  Its fixed-point
 weight-twelve terminal exhausts the four parity profiles and identifies their 56 solutions with
 the four orbit slices; transport from the fixed point uses the symmetric-square projective action.
-The remaining scope exclusion is the projective anchor theorem for all coordinate automorphisms.
+The concrete four-anchor transport identifies every polar-relation automorphism with one of the
+2184 normalized symmetric-square projective maps.  Transport from minimum-support-hypergraph
+automorphisms to polar-relation automorphisms remains part of the human concurrence argument.
 -/
 
 namespace PassantCodeQ13.Gates.Main
@@ -121,5 +124,14 @@ theorem minimumOrbitsSpanRhoZeroKernel :
           LinearMap.ker (Matrix.toLin'
             (PassantCodeQ13.AssociationTransport.relationLinearMatrix 0)) :=
   PassantCodeQ13.AssociationTransport.every_minimum_orbit_spans_rhoZero_kernel
+
+/-- Every permutation of the indexed internal points preserving the six-valued polar relation is
+one of the 2184 normalized symmetric-square projective maps. -/
+theorem ellipticSchemeAutomorphismsAreProjective
+    (permutation : Equiv.Perm PassantCodeQ13.Automorphisms.Coordinate) :
+    PassantCodeQ13.Automorphisms.PreservesRho permutation ↔
+      ∃ matrix : Fin PassantCodeQ13.MinimumWords.projectiveMatrices.length,
+        permutation = PassantCodeQ13.Automorphisms.matrixEquiv matrix :=
+  PassantCodeQ13.Automorphisms.preservesRho_iff_projective permutation
 
 end PassantCodeQ13.Gates.Main

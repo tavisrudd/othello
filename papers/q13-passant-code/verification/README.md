@@ -90,6 +90,11 @@ PassantCodeQ13/AssociationTransport/OrbitDihedralA.lean
 PassantCodeQ13/AssociationTransport/OrbitDihedralB.lean
 PassantCodeQ13/AssociationTransport/OrbitDihedralC.lean
 PassantCodeQ13/AssociationTransport.lean
+PassantCodeQ13/Automorphisms/Base.lean
+PassantCodeQ13/Automorphisms/TripleOrbit.lean
+PassantCodeQ13/Automorphisms/FourthAnchor.lean
+PassantCodeQ13/Automorphisms/Signatures.lean
+PassantCodeQ13/Automorphisms/Transport.lean
 PassantCodeQ13/Gates/Main.lean
 PassantCodeQ13/Gates/AxiomAudit.lean
 ```
@@ -102,8 +107,10 @@ Eight bounded association leaves, joined by one generic parity-to-matrix theorem
 orbit Grams and prove that every orbit row space equals the kernel of the rho-zero relation matrix.
 Polarity identifies that matrix with the incidence matrix up to row order.  The passage from the
 fixed point to the global 364-support layer remains
-the human projective-transitivity and double-count argument.  The aggregate does not establish
-uniqueness of the recovered rows or the automorphism anchor. Its axiom report comes
+the human projective-transitivity and double-count argument.  The aggregate also identifies every
+automorphism of the six-valued polar-relation scheme with one of the 2184 normalized
+symmetric-square projective maps.  The passage from support-hypergraph automorphisms to
+polar-relation automorphisms remains the human concurrence transport.  Its axiom report comes
 from the pinned toolchain's actual `#print axioms` output. Task identifiers,
 manuscript section numbers, private reports, and workflow status language are
 forbidden from module names, declaration names, comments, and generated
@@ -126,6 +133,6 @@ This formal surface is supporting evidence, not the manuscript's narrative
 spine. It should preserve the human mechanisms. In particular, it
 should formalize the tangent-graph reduction in weight eight, the exhaustive
 coverage theorem for the two weight-ten profiles, the mod-two association-
-algebra spanning argument, and the anchor proof of the automorphism group.
+algebra spanning argument, and the anchor proof of the elliptic-scheme automorphism group.
 It should not replace the entire theorem by an opaque enumeration of
 `2^78` words.

@@ -311,6 +311,16 @@ It remains to determine the scheme automorphisms.  Use the four anchors
  P_0=(1:0:2),\quad P_1=(1:1:7),\quad
  P_2=(1:0:7),\quad P_3=(1:1:3).
 \]
+The rigidity mechanism is summarized by
+\[
+ \underbrace{(P_0,P_1,P_2)}_{(10,3,9)\text{ regular orbit}}
+ \quad\Longrightarrow\quad
+ \underbrace{P_3}_{(3,1,9)\text{ is unique}}
+ \quad\Longrightarrow\quad
+ \underbrace{P\longmapsto
+   \bigl([P=P_i],\rho(P,P_i)\bigr)_{i=0}^{3}}
+   _{\text{injective on the 78 points}}.
+\]
 The first three have pair-relation pattern \((10,3,9)\).  There are
 \(78\cdot14\cdot2=2184\) ordered triples with this pattern: \(A_{10}\)
 has valency 14 and \(p_{3,9}^{10}=2\).  Substitution in the symmetric-square
@@ -382,13 +392,26 @@ Row-family uniqueness is compressed to local extension pools.  For each three-po
 the points that extend it to an admissible four-set.  Every non-row seed has at most ten such
 extensions.  Seven first-index residue leaves check every four-subset of these pools, while a
 symbolic coverage argument shows that every admissible seven-set occurs in one of those checks.
-The three-point shortcut itself is false: there are (1456) non-row passant triangles with zero
+The three-point shortcut itself is false: there are \(1456\) non-row passant triangles with zero
 triple concurrence, so the four-extension test is essential rather than a computational
 convenience.
 The terminal declaration is
 \nolinkurl{PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique}.  The independent replay follows
 a different route by enumerating all \(1716\) passant seven-cliques before selecting the \(78\)
 zero-concurrence rows.
+
+The automorphism gate follows the displayed three-step diagram.  Separate finite leaves check that
+the \(2184\) normalized symmetric-square maps form the regular orbit of triples with pattern
+\((10,3,9)\), that the signature \((3,1,9)\) forces the fourth anchor, and that the resulting
+four-anchor signatures separate all \(78\) points.  A symbolic transport then identifies every
+automorphism of the six-valued polar-relation scheme with one of those projective maps.  Its
+terminal declaration is
+\begin{flushleft}
+\small\nolinkurl{PassantCodeQ13.Gates.Main.}\\[-0.4ex]
+\nolinkurl{ellipticSchemeAutomorphismsAreProjective}.
+\end{flushleft}
+The preceding concurrence argument supplies the passage from minimum-support automorphisms to
+polar-relation automorphisms.
 
 For weight eight, the shared formalization derives saturation of the seven
 passant pencils from the semantic row equations, identifies the \(42\)
@@ -414,8 +437,10 @@ singleton fibres with two secant neighbors.  Its terminal declaration is
 These checks support the finite leaves; they do not replace the structural
 proof.  Projective transitivity and the double count transport the checked
 fixed-point exhaustion to the full weight-twelve layer in the human proof.
-The formal package does not yet prove uniqueness of the reconstructed row
-family or the four-anchor classification of every coordinate automorphism.
+The formal package proves uniqueness of the reconstructed row family and the
+four-anchor classification of every polar-relation automorphism.  It does not
+formalize the concurrence-equivariance passage from minimum-support
+automorphisms to polar-relation automorphisms.
 The complete theorem is therefore presented first and foremost as a human
 proof, with exact finite evidence at its uncompressed leaves; its formal
 subclaims have the narrower scope just stated.

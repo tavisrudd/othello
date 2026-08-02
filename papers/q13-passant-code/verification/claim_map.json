@@ -36,8 +36,8 @@
     {
       "id": "automorphisms",
       "statement": "The coordinate-permutation automorphism group of the minimum-support system is PGL(2,13).",
-      "current_modes": ["human anchor argument", "paper-owned exact stabilizer-chain replay", "Lean abstract four-anchor closure", "Lean coordinate-automorphism identification interface"],
-      "lean_boundary": "the concrete regular triple orbit, forced fourth anchor, and separating signatures are not yet connected to the abstract closure theorem"
+      "current_modes": ["human concurrence and anchor argument", "paper-owned exact stabilizer-chain replay", "Lean concrete regular triple orbit", "Lean forced fourth anchor", "Lean separating four-anchor signatures", "Lean symbolic transport identifying all polar-relation automorphisms with the 2184 normalized symmetric-square maps", "Lean coordinate-automorphism identification interface"],
+      "lean_boundary": "the four-anchor classification is closed for the six-valued polar-relation scheme by PassantCodeQ13.Gates.Main.ellipticSchemeAutomorphismsAreProjective; transport from minimum-support-hypergraph automorphisms to polar-relation automorphisms remains in the human concurrence argument"
     }
   ]
 }

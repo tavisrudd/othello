@@ -56,6 +56,14 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.reconstructionCandidateCheck_eq_true_iff
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.admissible_seven_set_is_geometric_row
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.reconstructed_rows_eq_geometric_passant_rows
+#print axioms PassantCodeQ13.Automorphisms.projectiveMatrices_length
+#print axioms PassantCodeQ13.Automorphisms.anchorTriplePattern
+#print axioms PassantCodeQ13.Automorphisms.matrixAction_bijective
+#print axioms PassantCodeQ13.Automorphisms.matrixAction_preservesRho
+#print axioms PassantCodeQ13.Automorphisms.projectiveAnchorTriples_eq_patterned
+#print axioms PassantCodeQ13.Automorphisms.firstThreeSignature_eq_iff
+#print axioms PassantCodeQ13.Automorphisms.anchorSignature_injective
+#print axioms PassantCodeQ13.Automorphisms.preservesRho_iff_projective
 #print axioms PassantCodeQ13.Gates.Main.weightTenCertificate
 #print axioms PassantCodeQ13.Gates.Main.arbitraryWeightTenProfileTransport
 #print axioms PassantCodeQ13.Gates.Main.minimumOrbitCertificate
@@ -63,3 +71,4 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.Gates.Main.fixedPointSlicesAreStabilizerOrbits
 #print axioms PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique
 #print axioms PassantCodeQ13.Gates.Main.minimumOrbitsSpanRhoZeroKernel
+#print axioms PassantCodeQ13.Gates.Main.ellipticSchemeAutomorphismsAreProjective
