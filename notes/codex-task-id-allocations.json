@@ -2141,8 +2141,17 @@
       "last": 789,
       "purpose": "freeze the repaired quantum-statistics baseline, build the referee-recommended editorial variant, and run a blind A/B cold read",
       "sequence": 238
+    },
+    {
+      "count": 1,
+      "first": 790,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 790,
+      "purpose": "prove the Smith normal form of the lift lattice equals the Schur filtration",
+      "sequence": 239
     }
   ],
-  "next_id": 790,
+  "next_id": 791,
   "schema": "codex-task-id-allocations-v1"
 }

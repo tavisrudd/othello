@@ -150,3 +150,42 @@ it into a part fixed by the code's dimension and a part carrying the actual arit
 **Scope.** Ten codes, all binary, all small. The unit-factor law is a conjecture supported by ten
 instances, not a theorem; it has an obvious candidate proof (the lifted basis contributes
 dim(C) unimodular directions) which nobody has written. Recorded in the lane discovery track.
+
+### The invariant factors are the Schur filtration
+
+Probing further: for each code, compare the number of invariant factors divisible by `2^l`, plus the
+free rank `n - rank(Lambda_C)`, against the codimension of the `l`-th Schur power, for `l = 1..4`.
+
+**They agree in every entry of every row, for all ten codes.**
+
+| Code | invariant factors | count divisible by `2^l`, plus free rank | codim of `l`-th Schur power |
+|---|---|---|---|
+| `RM(1,5)` | `1^6 2^10 4^10 8^5 16^1` | 26, 16, 6, 1 | 26, 16, 6, 1 |
+| `RM(1,4)` | `1^5 2^6 4^4 8^1` | 11, 5, 1, 0 | 11, 5, 1, 0 |
+| `RM(2,5)` | `1^16 2^15 4^1` | 16, 1, 0, 0 | 16, 1, 0, 0 |
+| `ExtHamming[8,4]` | `1^4 2^3 4^1` | 4, 1, 0, 0 | 4, 1, 0, 0 |
+| `Golay[24,12]` | `1^12 2^12` | 12, 0, 0, 0 | 12, 0, 0, 0 |
+| `Repetition[8,1]` | `1^1` | 7, 7, 7, 7 | 7, 7, 7, 7 |
+
+(Remaining four codes agree likewise; see the certificate.) The repetition code is the reason the
+free rank has to be in the count: its lattice has rank 1, and its seven torus directions behave as
+divisible by every power of two. With that term included the correspondence is exact everywhere,
+including the continuous case.
+
+**Conjecture.** For a binary linear code `C` of length `n` with lift lattice `Lambda_C`,
+
+```
+#{ i : 2^l divides d_i }  +  ( n - rank Lambda_C )  =  codim C^(o l)      for every l >= 1.
+```
+
+If this is a theorem, the two main results of the diagonal note are one result. The classification
+by Smith normal form and the Schur-cube rigidity criterion stop being separate theorems joined by a
+cascade argument: the `l = 3` case reads "no invariant factor divisible by 8 exactly when the third
+Schur power is full", which is precisely the Clifford criterion of the classification theorem
+against the hypothesis of the rigidity theorem. The cascade lemma supplies one inclusion and the
+lift identity `2(x AND y) = x + y - lift(x XOR y)` is the natural source of the other.
+
+**Scope and caution.** Ten codes, all binary, lengths 7 to 32, levels 1 to 4. This is a conjecture
+with strong numerical support, not a theorem, and characteristic two is special here — the lift
+identity carries the factors of two that drive the whole correspondence, so nothing about odd
+characteristic should be inferred. Owned by C790.

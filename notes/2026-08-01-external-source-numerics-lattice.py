@@ -110,6 +110,28 @@ def rm14_state_probe():
     }
 
 
+def basis_of(vecs):
+    rows, piv = [], []
+    for v in vecs:
+        for pv, r in zip(piv, rows):
+            if v >> pv & 1:
+                v ^= r
+        if v:
+            piv.append(v.bit_length() - 1)
+            rows.append(v)
+    return rows
+
+
+def schur_codimensions(rows, n, levels=4):
+    """codim of the l-th Schur power, l = 1..levels, by iterated bilinear span."""
+    cb = basis_of(rows)
+    cur, out = cb[:], []
+    for _ in range(levels):
+        out.append(n - len(basis_of(cur)))
+        cur = basis_of([a & b for a in cur for b in cb])
+    return out
+
+
 def lattice_probe():
     out = []
     for name, (n, rows) in sorted(CODES.items()):
@@ -118,7 +140,14 @@ def lattice_probe():
         lifts = [[(c >> (n - 1 - j)) & 1 for j in range(n)] for c in cw if c]
         divs = smith(lifts, n)
         ones = sum(1 for d in divs if d == 1)
+        free = n - len(divs)
+        codim = schur_codimensions(rows, n)
+        counted = [sum(1 for d in divs if d % (2 ** l) == 0) + free
+                   for l in range(1, len(codim) + 1)]
         out.append({
+            "schur_codimensions": codim,
+            "factors_divisible_by_2_to_l_plus_free_rank": counted,
+            "smith_equals_schur_filtration": counted == codim,
             "name": name,
             "length": n,
             "dim_C": k,
@@ -141,6 +170,8 @@ def build():
         "lattice": lat,
         "unit_factor_law_holds_everywhere": all(
             r["unit_factors_equals_dim_C"] for r in lat),
+        "smith_equals_schur_filtration_everywhere": all(
+            r["smith_equals_schur_filtration"] for r in lat),
         "naive_dual_dimension_law_counterexamples": [
             r["name"] for r in lat if not r["nontrivial_equals_dim_C_perp"]],
     }
@@ -155,6 +186,7 @@ def main():
             print("MISMATCH against tracked certificate", file=sys.stderr)
             sys.exit(1)
         if not (doc["unit_factor_law_holds_everywhere"]
+                and doc["smith_equals_schur_filtration_everywhere"]
                 and doc["rm14_state"]["two_uniform"]
                 and doc["rm14_state"]["transversal_T_is_exact_symmetry"]):
             print("CROSS-CHECK FAILED", file=sys.stderr)
