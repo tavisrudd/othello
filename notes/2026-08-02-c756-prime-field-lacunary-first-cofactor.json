@@ -1,0 +1,552 @@
+{
+  "construction": "E2=sum_{a<b} f_a f_b product_{r notin {a,b}} f_r^q; E2'/(X-X^q) mod G is the canonical cleared first cofactor section",
+  "inputs": [
+    "2026-08-01-c756-probability-cheap-tests.py",
+    "2026-08-01-c756-saturated-internal-audit.json"
+  ],
+  "rows": [
+    {
+      "angle_moment": {
+        "degree": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        },
+        "support": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        }
+      },
+      "candidate_count": 2,
+      "cleared_first_cofactor": {
+        "degree": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        },
+        "support": {
+          "distribution": {
+            "0": 2
+          },
+          "maximum": 0,
+          "minimum": 0
+        }
+      },
+      "q": 5,
+      "vanishing_candidates": 2
+    },
+    {
+      "angle_moment": {
+        "degree": {
+          "distribution": {
+            "8": 5
+          },
+          "maximum": 8,
+          "minimum": 8
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 3,
+            "3": 2
+          },
+          "maximum": 3,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 5
+          },
+          "maximum": 3,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "4": 2,
+            "5": 2
+          },
+          "maximum": 5,
+          "minimum": 3
+        }
+      },
+      "candidate_count": 5,
+      "cleared_first_cofactor": {
+        "degree": {
+          "distribution": {
+            "8": 5
+          },
+          "maximum": 8,
+          "minimum": 8
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 3,
+            "3": 2
+          },
+          "maximum": 3,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 5
+          },
+          "maximum": 3,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "4": 2,
+            "5": 2
+          },
+          "maximum": 5,
+          "minimum": 3
+        }
+      },
+      "q": 7,
+      "vanishing_candidates": 0
+    },
+    {
+      "angle_moment": {
+        "degree": {
+          "distribution": {
+            "12": 14,
+            "13": 14
+          },
+          "maximum": 13,
+          "minimum": 12
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 4,
+            "3": 20,
+            "4": 4
+          },
+          "maximum": 4,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 7,
+            "7": 1,
+            "9": 8,
+            "10": 4,
+            "11": 8
+          },
+          "maximum": 11,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 6,
+            "7": 1,
+            "11": 6,
+            "12": 4,
+            "13": 8,
+            "14": 2
+          },
+          "maximum": 14,
+          "minimum": 3
+        }
+      },
+      "candidate_count": 28,
+      "cleared_first_cofactor": {
+        "degree": {
+          "distribution": {
+            "12": 14,
+            "13": 14
+          },
+          "maximum": 13,
+          "minimum": 12
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 4,
+            "3": 16,
+            "4": 8
+          },
+          "maximum": 4,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 7,
+            "7": 1,
+            "8": 2,
+            "10": 10,
+            "11": 8
+          },
+          "maximum": 11,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 6,
+            "7": 1,
+            "11": 2,
+            "12": 4,
+            "13": 10,
+            "14": 4
+          },
+          "maximum": 14,
+          "minimum": 3
+        }
+      },
+      "q": 11,
+      "vanishing_candidates": 0
+    },
+    {
+      "angle_moment": {
+        "degree": {
+          "distribution": {
+            "20": 11,
+            "21": 44
+          },
+          "maximum": 21,
+          "minimum": 20
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 1,
+            "3": 22,
+            "4": 32
+          },
+          "maximum": 4,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 11,
+            "15": 2,
+            "17": 4,
+            "18": 14,
+            "19": 24
+          },
+          "maximum": 19,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 10,
+            "17": 2,
+            "19": 4,
+            "21": 20,
+            "22": 18
+          },
+          "maximum": 22,
+          "minimum": 3
+        }
+      },
+      "candidate_count": 55,
+      "cleared_first_cofactor": {
+        "degree": {
+          "distribution": {
+            "20": 11,
+            "21": 44
+          },
+          "maximum": 21,
+          "minimum": 20
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 1,
+            "3": 16,
+            "4": 38
+          },
+          "maximum": 4,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 11,
+            "15": 2,
+            "17": 2,
+            "18": 18,
+            "19": 22
+          },
+          "maximum": 19,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 10,
+            "18": 2,
+            "20": 6,
+            "21": 18,
+            "22": 18
+          },
+          "maximum": 22,
+          "minimum": 3
+        }
+      },
+      "q": 19,
+      "vanishing_candidates": 0
+    },
+    {
+      "angle_moment": {
+        "degree": {
+          "distribution": {
+            "24": 13,
+            "25": 26
+          },
+          "maximum": 25,
+          "minimum": 24
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 1,
+            "3": 18,
+            "4": 20
+          },
+          "maximum": 4,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 13,
+            "20": 2,
+            "21": 14,
+            "22": 10
+          },
+          "maximum": 22,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 12,
+            "23": 8,
+            "24": 10,
+            "25": 8
+          },
+          "maximum": 25,
+          "minimum": 3
+        }
+      },
+      "candidate_count": 39,
+      "cleared_first_cofactor": {
+        "degree": {
+          "distribution": {
+            "24": 13,
+            "25": 26
+          },
+          "maximum": 25,
+          "minimum": 24
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 1,
+            "3": 18,
+            "4": 20
+          },
+          "maximum": 4,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 13,
+            "20": 2,
+            "21": 14,
+            "22": 10
+          },
+          "maximum": 22,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 12,
+            "23": 8,
+            "24": 10,
+            "25": 8
+          },
+          "maximum": 25,
+          "minimum": 3
+        }
+      },
+      "q": 23,
+      "vanishing_candidates": 0
+    },
+    {
+      "angle_moment": {
+        "degree": {
+          "distribution": {
+            "32": 17
+          },
+          "maximum": 32,
+          "minimum": 32
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 3,
+            "3": 14
+          },
+          "maximum": 3,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 17
+          },
+          "maximum": 3,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "4": 2,
+            "5": 14
+          },
+          "maximum": 5,
+          "minimum": 3
+        }
+      },
+      "candidate_count": 17,
+      "cleared_first_cofactor": {
+        "degree": {
+          "distribution": {
+            "32": 17
+          },
+          "maximum": 32,
+          "minimum": 32
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 3,
+            "3": 14
+          },
+          "maximum": 3,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 17
+          },
+          "maximum": 3,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "4": 2,
+            "5": 14
+          },
+          "maximum": 5,
+          "minimum": 3
+        }
+      },
+      "q": 31,
+      "vanishing_candidates": 0
+    },
+    {
+      "angle_moment": {
+        "degree": {
+          "distribution": {
+            "44": 23
+          },
+          "maximum": 44,
+          "minimum": 44
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 1,
+            "3": 22
+          },
+          "maximum": 3,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 23
+          },
+          "maximum": 3,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 22
+          },
+          "maximum": 5,
+          "minimum": 3
+        }
+      },
+      "candidate_count": 23,
+      "cleared_first_cofactor": {
+        "degree": {
+          "distribution": {
+            "44": 23
+          },
+          "maximum": 44,
+          "minimum": 44
+        },
+        "distinct_projective_cartier_sections": {
+          "distribution": {
+            "2": 1,
+            "3": 22
+          },
+          "maximum": 3,
+          "minimum": 2
+        },
+        "nonzero_cartier_sections": {
+          "distribution": {
+            "3": 23
+          },
+          "maximum": 3,
+          "minimum": 3
+        },
+        "support": {
+          "distribution": {
+            "3": 1,
+            "5": 22
+          },
+          "maximum": 5,
+          "minimum": 3
+        }
+      },
+      "q": 43,
+      "vanishing_candidates": 0
+    }
+  ],
+  "schema": "c756-prime-field-lacunary-first-cofactor-v1",
+  "scope": "every normalized pairwise-character candidate in the audited prime fields q in {5,7,11,19,23,31,43}"
+}

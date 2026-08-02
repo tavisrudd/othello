@@ -17,10 +17,11 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** run one bounded Blokhuis lacunary-polynomial interface test on
-the cleared first middle coefficient, initially over prime fields.  Do not assume the
-generalized-hyperfocused blocker hypothesis, and stop unless the reformulation lowers
-degree or forces a four-point pattern.
+**Next-session entry:** run the bounded four-point row-transition diagnostic on the
+existing prime-field angle matrices: interpolate transitions on the norm-one torus and
+record least rational degree, pole divisor, and cross-ratio defect.  Continue only if
+the frames have a bounded profile that negative candidates violate, or if every candidate
+has a bounded profile susceptible to classification.
 
 ## Why this task exists
 
@@ -37,7 +38,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty research passes complete; the theorem is **not** proved. Reports:
+Twenty-one research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -57,7 +58,8 @@ Twenty research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-02-c756-tt-angle-bijections.md`, and
 `notes/2026-08-02-c756-cross-ratio-rank.md`, and
 `notes/2026-08-02-c756-ball-lavrauw-tensor-interface.md`, and
-`notes/2026-08-02-c756-alt-attacks.md`.
+`notes/2026-08-02-c756-alt-attacks.md`, and
+`notes/2026-08-02-c756-prime-field-lacunary-first-cofactor.md`.
 
 Branch ledger:
 
@@ -377,6 +379,27 @@ What the alternative-attacks reset adds:
   missing-set kernel curves remain closed; the prefix groupoid is scouting rather
   than a proof route until it has a bounded intrinsic state catalogue.
 
+What the prime-field lacunary first-cofactor pass adds:
+
+- with
+  \(E_2=\sum_{a<b}f_af_b\prod_{r\notin\{a,b\}}f_r^p\), the canonical reduced
+  first-cofactor section is exactly
+  \(\mathcal C=E_2'(X)(X-X^p)^{-1}\bmod G\); this removes the local factor
+  without choosing a tangent direction;
+- direct evaluation at every quadratic root independently checks both the cleared
+  cofactor and its angle-moment normalization on all 169 audited prime-field
+  candidates;
+- the two \(p=5\) frames give \(\mathcal C=0\), while every one of the 167
+  negative candidates gives a nonzero section;
+- the declared lacunarity gate nevertheless closes negatively: support reaches
+  \(p+3,p+3,p+2\) and first Cartier width reaches \(p,p,p-1\) at
+  \(p=11,19,23\), so reduction modulo \(G\) has linear rather than bounded
+  complexity;
+- endpoint-supported subclasses with exponents \(\{0,2,p+1\}\) and
+  \(\{0,1,2,p,p+1\}\) persist and pass to the four-point row-transition
+  diagnostic; they do not control every coherent candidate and hence do not rescue
+  the global lacunary route.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -431,11 +454,12 @@ closed-negative.
 Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
 now has the same theorem-shaped status the saturated-external branch had two passes before
 closure, but the tight balance theorem proves that another spectral bound cannot finish it.
-The bare cross-ratio nonsingularity shortcut is closed, and the Ball--Lavrauw tangent
-tensor does not globalize its adjugate kernel line: its planar order-two tensor stops at
-pairwise tangent evaluations and misses the simultaneous (t)-fold cofactor.  The next
-bounded interface is a prime-field lacunary-polynomial reformulation of that cleared
-coefficient; the direct adjugate/second-compound calculation stays parked unless a
+The bare cross-ratio nonsingularity shortcut is closed, the Ball--Lavrauw tangent tensor
+does not globalize its adjugate kernel line, and the prime-field first-cofactor section
+has exact canonical form but linear reduced support and Cartier width.  The next bounded
+interface is therefore the four-point row-transition diagnostic: interpolate the existing
+row bijections on the norm-one torus and measure least rational degree, pole divisor, and
+cross-ratio defect.  The direct adjugate/second-compound calculation stays parked unless a
 global low-degree carrier emerges.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot
