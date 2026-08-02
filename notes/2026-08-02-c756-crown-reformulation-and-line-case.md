@@ -588,6 +588,29 @@ certifies the small fields.  The corresponding sweep for \(q\equiv1\pmod4\) is q
 until it lands, that residue class is certified only through the earlier \(q\le43\)
 audit.
 
+## 6d. Replacing the census with an exact mechanism
+
+Exhaustive search is the only thing covering the small fields, and small \(q\) is where
+character-sum arguments fail: every Weil bound leaves a tail of order \(\sqrt q\), which
+is why Theorem 4 reaches down only to \(q\ge83\).  Any structural replacement must
+therefore be **exact**, in the style of Theorem 2, whose chain ends in the integer
+inequality \(q-2\le(q+1)/2\).  The ranked programme is recorded on the task card; its
+two load-bearing observations are:
+
+- Theorems 2 and 4 are one argument on two containers.  A line and the norm-one circle
+  are both Baer sublines of \(\mathbf P^1(\mathbb F_{q^2})\), and the known
+  minimum-support eigenfunction (support \(q+1\)) is supported exactly on one.  The
+  unifying target is that a coherent system inside any Baer subline forces \(q=5\), and
+  beyond it the stability conjecture that a \(\pm1\)-valued Frobenius-odd
+  \(\lambda_{\min}\)-eigenfunction of support at most \(q+3\) is supported on a Baer
+  subline.
+- **Both remaining C756 obstructions are now direction theorems.**  Theorem 5 makes the
+  saturated branch a statement about a \((q+3)\)-point set meeting every line in
+  \((q+1)/2\) directions evenly, and the nonsaturated branch's surviving target is
+  already a masked Rédei theorem.  A single Rédei–Szőnyi-type tool for point sets with
+  character-restricted differences could close both, which should be weighed before
+  choosing where the next pass goes.
+
 ## 7. EJ + TT closeout
 
 **EJ.**  Four upgrades came free with this pass and were taken here.
