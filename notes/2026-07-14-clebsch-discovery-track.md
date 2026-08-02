@@ -1210,3 +1210,39 @@ lift integrally.
 rank-one statement, and the displayed \(2\times2\) Weyl matrix; no
 cross-paper comparison map is asserted.
 **Status:** open structural-sibling lead; not allocated.
+
+### 2026-08-02 — punctured pencil-conic codewords beyond \(q=13\)
+
+**Provenance:** C817 subitem 3's split-torus normal form for the three
+q=13 dihedral minimum-word families.
+**Was I looking for this?:** no — the task was to replace the four q=13
+representative labels by intrinsic homogeneous constructions, not to prove an
+all-field passant-code lemma.
+**Observed / musing:** for any odd prime power \(q\equiv1\pmod4\), normalize a
+chord to \(\{0,\infty\}\) and choose \(r\) with
+\(\chi(r)=-1\), \(\chi(r-1)=1\).  The \(q-1\) internal points
+
+
+\[
+ S_r=\{(x:1:r^{-1}x^{-1}):x\in\mathbf F_q^\times\}
+\]
+
+are the rational points of \(y^2=r xz\) minus the chord endpoints and have
+even intersection with every passant.  Indeed a double intersection with
+\(AX+BY+CZ=0\) would force
+\(B^2-4AC=B^2(1-r)\), a square because \(-1\) and \(r-1\) are squares.
+Thus \(S_r\) is a binary passant-incidence codeword of weight \(q-1\).
+**Why it may matter / strongest question:** this supplies a uniform toric
+codeword family without implying minimum distance or importing C756.  Is the
+family already standard as a conic-pencil construction, and for which fields
+does it control the first non-row weight?
+**Structural mechanism:** a split-torus open orbit on a second conic through
+the chord endpoints, plus the discriminant parity obstruction to tangent
+intersection by a passant.
+**Discriminator / falsifier:** check the quadratic-character hypotheses and
+the double-root calculation in the first extension fields with
+\(q\equiv1\pmod4\); a known conic-pencil codeword theorem would retire the
+novelty lead without affecting C817.
+**Evidence:** REASONED uniformly; CHECKED exhaustively only at q=13 by
+`notes/2026-08-02-c817-toric-octahedral-geometry.py`.
+**Status:** open lead; not allocated and not part of the C817 theorem.

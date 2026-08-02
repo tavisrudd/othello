@@ -1,7 +1,7 @@
 # C817 — Paper IV structural mathematics upgrade
 
 **Lane:** `clebsch`  
-**Status:** active; subitems 1--2 positive and frozen; mathematics research only;
+**Status:** active; subitems 1--3 positive and frozen; mathematics research only;
 manuscript integration requires later user discussion
 
 ## Current state
@@ -30,9 +30,20 @@ matrix modulo two gives an operator \(P\) with image equal to the code,
 and exact evidence bundle:
 `notes/2026-08-02-c817-pair-concurrence-closure.md`.
 
-The next gate is subitem 3, homogeneous toric--octahedral geometry of the four
-minimum-word orbits, including the subitem-1 nonsplit-torus representation
-identification.
+Subitem 3 is complete.  The four minimum-word families are one octahedral
+\(G/S_4\) family and three chord-indexed \(G/D_{24}\) toric families.  After a
+chord is normalized to \(\{0,\infty\}\), the toric supports are exactly the
+punctured pencil conics \(y^2=r xz\) for
+\(r\in\{2,5,11\}\), with code parity proved by a discriminant argument.  The
+octahedral support is the intrinsic two-cross-pair orbit of the canonical
+\(6+8\) conic-point partition.  The hidden \(\mathbf F_8\)-module is, up to
+Frobenius, the mod-two reduction of the degree-12 cuspidal nonsplit-torus
+representation, and the three toric levels carry the three exact Frobenius
+Gram scalars.  Report and exact evidence bundle:
+`notes/2026-08-02-c817-toric-octahedral-geometry.md`.
+
+The next gate is subitem 4, intrinsic recovery of the conic action from the
+fourteen Sylow-\(13\) subgroups of the reconstructed group.
 
 ## Objective
 
