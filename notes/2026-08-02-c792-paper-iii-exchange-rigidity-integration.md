@@ -139,8 +139,9 @@ manuscript build, and warning-free PDF.  Pages 13--17 were inspected at
 publication scale; both new theorems and proofs are legible, and the original
 operator-shadows theorem remains visible immediately afterward.
 
+The authoritative forward integration is committed through `3daf2e35`.
 Standalone synchronization waits for the aggregate formal gate and the
-authoritative forward commit.
+genuinely independent force-rank.
 
 ## Extra-juice and Tao-style closeout
 

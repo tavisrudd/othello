@@ -4,8 +4,8 @@
 
 **Status:** active; the C794-rebuilt B-plus manuscript, nine-row trust surface,
 clean-overlay aggregate, rendered cold pass, and order-six Lean identity are
-complete; the shared aggregate Lean gate, genuinely independent force-rank,
-authoritative commit, and standalone synchronization remain
+complete and committed through `3daf2e35`; the shared aggregate Lean gate,
+genuinely independent force-rank, and standalone synchronization remain
 
 ## Objective
 
