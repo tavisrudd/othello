@@ -115,6 +115,16 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    commits and manifest hashes are in the C684 and C685 reports. The five earlier exported paper
    repositories now cite `10.5281/zenodo.21650878` explicitly as the formal companion's concept
    DOI; the independently owned `finitegeom` repository was not modified by the paper-side update.
+   Golden quantum statistics now also has a clean no-remote `main` history at
+   `~/src/math-papers/golden-quantum-statistics`, commit `8929f2cf`, from
+   Othello source `7eee6069`; its isolated paper gate passes.  A separate
+   `finitegeom` candidate worktree at
+   `~/src/lean/finitegeom-golden-quantum-statistics`, branch
+   `candidate/golden-quantum-statistics`, commit `1b9caa9`, contains the exact
+   one-module balanced-cut companion and complete trust/export metadata.
+   Static manifest and trust audits pass; real Lean elaboration and clean
+   replay wait for a quiet build window.  Report:
+   [`../2026-08-02-golden-quantum-statistics-standalone-export.md`](../2026-08-02-golden-quantum-statistics-standalone-export.md).
 9. **C685--C687 extraction corrections:** C685 is complete: it replaced the false “Passages has no
    Lean” intake inference with reviewed formal-companion roots while retaining the paper's honest
    no-formal-dependency boundary, and the standalone paper now pins the exact public commit. C686
