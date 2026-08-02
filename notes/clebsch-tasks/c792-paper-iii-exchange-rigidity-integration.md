@@ -3,9 +3,10 @@
 **Lane:** `clebsch`
 
 **Status:** active; the C794-rebuilt B-plus manuscript, nine-row trust surface,
-clean-overlay aggregate, rendered cold pass, and order-six Lean identity are
-complete and committed through `3daf2e35`; the shared aggregate Lean gate,
-genuinely independent force-rank, and standalone synchronization remain
+clean-overlay aggregate, rendered authorial pass, and order-six Lean identity
+are committed through `3daf2e35`; the independent subagent cold read returned
+`MAJOR REVISIONS` at 76/100, so paper and formal-release repairs precede the
+shared aggregate gate and standalone synchronization
 
 ## Objective
 
@@ -73,6 +74,20 @@ identify its real headlines, say what they would strip or promote, estimate a
 venue band, and state what still blocks an A or A-minus verdict.  The selected
 version then receives a fresh referee-style read.
 
+The independent report is
+`notes/2026-08-02-c792-independent-cold-read.md`.  Its submission blockers are
+the compressed seven-point pair-signature argument and incompatible shared-file
+hashes in the two Lean manifests.  Before rerunning review, supply the complete
+finite lemma; repair the marked-relative language and coherent outer-family
+normalization; tighten the abstract, hierarchy, excluded-application paragraph,
+and conclusion; and reconcile the formal maps.  C799 owns aligned-design Lean
+closure and C800 owns the remaining operator and formal-release closure.
+
+After those repairs, commission a new independent subagent cold read.  Give it
+only the repaired rendered PDF, public paper source, and optional Lean and
+verification access.  Withhold this report, task notes, git history, and prior
+scores.
+
 ## Acceptance
 
 The arithmetic--operator--harmonic spine remains visible; the unique
@@ -82,6 +97,8 @@ at the depth its displayed status promises; the Greaves--Suda and classical
 Johnson machinery are explicitly assigned; no quantum protocol enters the
 manuscript; Lean and trust surfaces match the selected theorem; all manuscript
 and standalone gates pass; and review files use descriptive public-safe names.
+The post-repair independent subagent verdict is at least `GO WITH MINOR
+REVISIONS`, with no unresolved proof or replay blocker.
 
 C794's human proof and novelty audit are closed, and the theorem has been
 promoted by explicit user direction.  The B-plus architecture is rebuilt

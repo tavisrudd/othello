@@ -2,8 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** manuscript, trust, and formal-source integration complete; the
-aggregate Lean gate and genuinely independent cold read remain open
+**Status:** the independent cold read returned `MAJOR REVISIONS` at 76/100;
+paper repair, C799/C800 formal closure, aggregate gates, a new independent
+subagent read, and standalone synchronization remain
 
 ## Result
 
@@ -46,7 +47,7 @@ The baseline A PDF was frozen under the descriptive alias
 aliases outside the release surface.  A has 20 pages; the exchange-rigidity
 candidate had 22, and the rebuilt faithfulness candidate has 24.
 
-B-plus still wins after the C794 rebuild.  Its four-page total cost buys both
+B-plus won the authorial comparison after the C794 rebuild.  Its four-page total cost buys both
 the missing explanation for why the six-axis operator is exceptional and the
 reverse theorem that the classical higher-order design remembers its source.
 The operator section now has a source--shadow--source arc without displacing
@@ -54,9 +55,13 @@ the arithmetic source, operator cubics, or harmonic return.  Testing, noisy
 recovery, database canonicalization, coding rates, privacy, ETFs, and higher
 moments remain excluded.
 
-This comparison was a role-separated authorial review, not a genuinely blind
-independent read.  The task card's independent force-rank and final fresh
-referee read remain acceptance gates.
+This comparison was a role-separated authorial review.  The later independent
+read retained exchange rigidity but returned `MAJOR REVISIONS`: the
+seven-point faithfulness lemma is too compressed, the marked-relative and
+outer-family interfaces need repair, and the two Lean manifests pin
+incompatible hashes for a shared source.  The exact report is
+`notes/2026-08-02-c792-independent-cold-read.md`.  After repair, a new
+context-free subagent read remains an acceptance gate.
 
 ## Proof and red-team corrections
 
