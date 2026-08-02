@@ -10,6 +10,25 @@ Discovery companion:
 
 ## Current status
 
+**C804 closed (2026-08-02): the central concession is inverted, and the
+recognition criterion is coherent.**  Section 3 now proves the
+partial-Weyl marginal criterion, recognition subgroup, generation
+criterion, minimal-support realization, prime-field CSS corollary, and
+integer-modulus extension.  At local dimension two the package unifies the
+full Van den Nest--Dehaene--De Moor theorem; above it, intermediate label
+subgroups give the new scope.  The introduction adopts that positioning
+after the adversarial pass, blind A/B, C807 audit, and Fable red team.  The
+final exposition review repaired two surviving mathematical sentences
+(exact order versus exponent at composite dimension, and the false qubit
+subset claim), made the second-state purity transfer and two-party
+obstruction explicit, corrected the stale propagation reference from
+\((3.8)\) to \((3.16)\), and synchronized every claim and trust map.  The
+warning-free 49-page build and affected-page visual sweep pass.  The
+package is manuscript proved, with no certificate or Lean coverage.  Tan's
+four-qutrit concession remains unchanged pending the separately gated atlas
+reproduction.  See
+`2026-08-02-c804-specialization-inversion.md`.
+
 **C775 closed (2026-08-02): the 2-uniform claims survive, with conceded
 prior art.**  Discreteness is not pre-empted, but Wirthmuller settles the
 binary stabilizer case and Tan computes the four-qutrit symmetry group, so

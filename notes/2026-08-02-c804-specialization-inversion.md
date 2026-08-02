@@ -2,8 +2,10 @@
 
 **Date:** 2026-08-02
 **Lane:** `ame-lu`
-**Stage:** adversarial pass (gate for the reframing and its blind A/B). No
-manuscript source was edited in this stage.
+**Stage:** closed after adversarial review, blind A/B, Fable red team,
+manuscript adoption, exposition pass, and consistency reconciliation.  The
+first-gate analysis below records the narrower full-Weyl comparison; the final
+disposition records the later recognition-group strengthening.
 
 ## Question put to the pass
 
@@ -161,7 +163,7 @@ adopted into the manuscript it needs the standard nonexistence and existence
 citations (Higuchi–Sudbery for four qubits, Scott for six), which the reframing
 does not otherwise require.
 
-## Consequences for the prescribed rewrite
+## Consequences at the first gate (superseded by the recognition criterion)
 
 The survey's steps 1–3 stand, with amendments:
 
@@ -199,21 +201,75 @@ merely leaving it unproved. That makes this a genuine falsifier for the atlas
 as a computing device, which is the property the ceilings document's level-up
 wanted.
 
+## Final adoption and consistency closeout
+
+The first adversarial pass showed only that the existing full-Weyl cover
+contains case (iv) of Van den Nest--Dehaene--De Moor's corollary.  The
+recognition-group criterion subsequently proved in
+`2026-08-02-c804-recognition-group-criterion.md` combines labels from several
+partial-Weyl marginals.  At local dimension two its two-term and four-term
+branches recover their full Theorem 1, while intermediate subgroup sizes give
+the new higher-dimensional content.  C807 supplied the claim-specific audit;
+the blind A/B preferred the reframing subject to named repairs; the Fable red
+team verified the criterion at the predecessor's exact hypotheses and exposed
+the integer-modulus, parity, attribution, and phase-convention defects recorded
+in its report.
+
+The adopted manuscript now:
+
+- replaces the introduction's pre-emption concession by the strictly scoped
+  recognition-group positioning;
+- proves the partial-Weyl criterion, recognition subgroup, generation
+  criterion, minimal-support realization, prime-field CSS corollary, and
+  arbitrary-integer-dimension extension in Section 3;
+- states explicitly how marginal purity transfers the minimal-support charts
+  to the second stabilizer state and why full entanglement excludes the
+  two-party four-term obstruction;
+- explains the sharp two-party failure for three or more equal-modulus terms;
+- uses the exponent identities `W_a^d=I` for odd `d` and `W_a^{2d}=I` for even
+  `d`, rather than the false assertion that every odd-dimensional Weyl operator
+  has exact order `d`;
+- replaces the false qubit-subset claim by the exact line-or-full subgroup
+  dichotomy; and
+- synchronizes the theorem, claim, verification, formalization, and formal
+  adequacy maps, with Section 7's trust crosswalk marking the package as
+  manuscript-only and unsupported by certificates or Lean.
+
+The bounded Section 3 number audit found one stale reference: the
+coordinatewise propagation homomorphism is equation `(3.16)`, not `(3.8)`.
+The other mentions in the five controlling files refer correctly to the
+second-moment identity `(3.8)` and stability estimate `(3.10)`; the evidence
+manifest and formal crosswalk contained no numbered Section 3 references.
+`make check` passes without TeX warnings on the 49-page PDF, and pages 2--3,
+9--12, and 37 were rendered and inspected after the final build.
+
+## Extra-juice and Tao closeout
+
+The closeout asked whether the new generality concealed a stronger
+two-party statement, a field/integer-modulus conflation, or an unnecessary
+stabilizer hypothesis.  The two-party obstruction is structural: with three
+or more equal-modulus terms the Schmidt axes are not intrinsic, while the
+two-term case is pinned by the identity.  The integer-modulus and finite-field
+Weyl systems are now separated at first use, and the even-dimensional Pauli
+phase convention is discharged by the exponent argument.  No further free
+strengthening survives these checks.
+
 ## Mystery ledger
 
-- **Why their Corollary 1 drops "fully entangled" while Theorem 1 carries it.**
-  Settled as a slip with no mathematical consequence for them: the omitted case
-  is exactly a state with an EPR factor, where the conclusion still holds by
-  factorization but their own Theorem 1 does not apply either. It matters only
-  to us, because it is precisely the corner our engine cannot reach; recorded in
-  Qualification 1 and handled by wording.
-- **Why the conceded overlap is a single state family.** Settled: the parity
-  constraint on minimal supports plus four-qubit AME nonexistence leaves only
-  the six-qubit case. This is the quantitative reason the concession
-  over-cedes, and it was not visible from the concession's own wording.
-- **Open: whether the mixed-support branch generalizes.** Their Theorem 1's
-  `A_ω = 1` branch has no prime-power analogue in our development, and whether
-  one exists is the survey's step 4. The evidence gap is complete — nothing in
-  this pass tested it. It is the owning successor for any claim beyond case (iv),
-  and no manuscript wording may anticipate it.
-- No other genuine mystery surfaced in this pass.
+- **Why the predecessor's two proof branches looked unrelated.** Settled.  They
+  are the only two nontrivial subgroup sizes in \(\F_2^2\); the recognition
+  group makes them one generation argument.
+- **Why their Corollary 1 omits the standing fully-entangled, \(n\geq3\)
+  boundary.** Settled for this manuscript by restating the boundary exactly.
+  The EPR factor is the sharp obstruction to factorwise Cliffordness.
+- **Whether the partial-Weyl theorem extends to two parties with at least three
+  terms.** Open beyond the present criterion.  Equal-modulus Schmidt
+  degeneracy defeats the axis proof; exploiting the Weyl multiplication on
+  both sides would require a different argument.  No successor is allocated,
+  and the manuscript claims nothing there.
+- **Whether Tan's four-qutrit group is reproduced by the atlas.** Open and
+  outside this adoption.  The exact falsifier remains the pair of predictions
+  above: trivial atlas holonomy and realized party image of order three.  This
+  requires a separately allocated computation before Tan's concession can be
+  changed.
+- No other genuine mystery remains.

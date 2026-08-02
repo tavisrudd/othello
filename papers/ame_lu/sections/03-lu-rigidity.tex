@@ -99,13 +99,11 @@ parties.
 \subsection{Partial marginals and the recognition group}
 \label{subsec:recognition}
 
-The two statements just proved use the whole local Weyl basis on a single
-party set.  That is more than the mechanism needs, and more than most
-states supply.  We record here what a marginal carrying fewer Weyl terms
-still forces, and organize the consequences into one invariant.  The
-generality costs nothing: the arguments below use only that the labels form
-a finite abelian group on which Weyl operators multiply additively up to
-phase.
+The full-Weyl criterion recovers the entire local Weyl basis from one
+marginal.  More generally, several marginals may each recover only part of
+that basis, while their labels together generate it.  The following
+criterion isolates this mechanism.  It uses only a finite abelian label
+group and a Weyl basis whose multiplication is additive up to phase.
 
 Call an operator on \(r\) parties \emph{partial-Weyl diagonal} if there are
 a finite index set \(P\) with a distinguished element \(0\), injections
@@ -158,6 +156,11 @@ factorization gives
 and each \(c_i\) is a phase by unitarity.
 \end{proof}
 
+The arity condition cannot be removed in this form.  For two parties and
+three or more terms, equal coefficient moduli leave a unitary freedom among
+the corresponding Schmidt axes.  With two terms, conjugation fixes the
+identity term and hence singles out the other axis.
+
 Fix a product unitary carrying \(\lvert\psi\rangle\) to \(\lvert\phi\rangle\)
 up to phase, after absorbing any party permutation by relabelling
 \(\lvert\phi\rangle\).  For each party \(i\) put
@@ -184,14 +187,13 @@ finite group, hence bijective, so conjugation permutes all projective Weyl
 axes, which is the Clifford condition.  The converse is immediate.
 \end{proof}
 
-At \(q=2\) the subgroup property is vacuous, since every subset of
-\(\F_2^2\) containing \(0\) and one further element is already a subgroup.
 For local-unitary equivalences between fully entangled qubit stabilizer
 states on at least three parties, Gross and Van den Nest show that each
-local factor already recognizes a nonzero label, so \(\Lambda_i\ne\{0\}\)
-there \cite{GrossVanDenNest2008}.  The content below is what happens when
-\(\Lambda_i\) is neither trivial nor everything, which requires
-\(q>2\).
+local factor recognizes a nonzero Pauli label
+\cite{GrossVanDenNest2008}.  Thus \(\Lambda_i\) is either a line or all of
+\(\F_2^2\).  The criterion below assembles labels recovered from different
+marginals; in larger local dimension it also accommodates intermediate
+subgroups that have no qubit analogue.
 
 \begin{corollary}[Generation criterion]\label{cor:recognition-generation}
 Suppose that for each party \(i\) there is a family of party sets
@@ -222,8 +224,9 @@ projection \(\pi_i:L(\omega)\to\F_q^2\) is injective.  Hence \(L(\omega)\)
 is isomorphic to a subgroup of \(\F_q^2\), every nonzero element of
 \(L(\omega)\) has support exactly \(\omega\), and \(\rho_\omega\) is
 partial-Weyl diagonal with index set \(L(\omega)\) and injections
-\(\pi_i\).  Conversely, a party set whose marginal is partial-Weyl diagonal
-with at least two terms is a minimal support.
+\(\pi_i\).  Conversely, if the retained label group on a party set has at
+least two elements and injects at every party, that set is a minimal
+support.
 \end{lemma}
 
 \begin{proof}
@@ -239,9 +242,26 @@ has smaller support.
 
 At \(q=2\) the possible orders of \(L(\omega)\) are \(2\) and \(4\), which
 is the dichotomy of \cite[Lemma~1]{VanDenNestDehaeneDeMoor2005}; the
-intermediate orders available for \(q>2\) are invisible there.  They are
-what a CSS state typically presents, since a minimum-weight \(X\)-support
-carrying no \(Z\)-word contributes a line of \(q\) labels.
+intermediate orders available for \(q>2\) are invisible there.  They occur
+naturally in CSS states: a minimum-weight \(X\)-support carrying no
+\(Z\)-word contributes a line of \(q\) labels.
+
+For two LU-equivalent stabilizer states, marginal purity preserves both the
+minimal supports and the order of each retained label group, since
+\[
+ \operatorname{Tr}(\rho_\omega^2)
+   =\frac{|L(\omega)|}{q^{|\omega|}}.
+\]
+Thus every source chart above has a target chart of the same size.  In the
+qubit case, the hypothesis of
+\cite[Theorem~1]{VanDenNestDehaeneDeMoor2005} says exactly that the labels
+from all minimal supports through a party generate \(\F_2^2\).  Label
+groups of order two use the two-term case of
+Proposition~\ref{prop:partial-weyl-marginal}; label groups of order four
+use its \(r\geq3\) case.  Their standing assumptions of at least three
+parties and full entanglement exclude a two-party support in the latter case.
+Corollary~\ref{cor:recognition-generation} therefore recovers their full
+theorem, not only its single-support corollary.
 
 \begin{corollary}[CSS states over a prime field]\label{cor:css-recognition}
 Let \(q\) be prime and let \(\lvert\psi\rangle\) be a CSS coset state such
@@ -253,6 +273,8 @@ Clifford factors.
 \end{corollary}
 
 \begin{proof}
+The preceding purity argument supplies matching partial-Weyl marginals for
+the target state.
 The two supports contribute independent labels \((x,0)\) and \((0,z)\) to
 \(\Lambda_i\), which generate \(\F_q^2\) over a prime field.  Apply
 Corollary~\ref{cor:recognition-generation}.
@@ -276,28 +298,25 @@ Weyl operators are an orthogonal Hilbert--Schmidt basis multiplying
 additively up to phase.  Replacing \(\F_q^2\) by \(\mathbb Z_d^2\), with
 \(X\) the shift and \(Z\) the clock operator on \(\mathbb C^d\), all five
 statements hold verbatim at every local dimension \(d\), prime power or
-not.  One point deserves care at composite \(d\).  A unitary whose conjugation
-permutes the projective Weyl axes normalizes the Pauli group itself, so it
-is Clifford in the standard sense, and this needs only an order argument
-rather than a lifting argument.  Write \(UW_aU^\dagger=c\,W_{a'}\).  Both
-\(W_a\) and \(W_{a'}\) have order \(d\) when \(d\) is odd, so \(c^d=1\) and
-\(c\) is a \(d\)-th root of unity; when \(d\) is even the Pauli phase
-convention uses \(2d\)-th roots, and the same computation gives
-\(c^{2d}=1\).  Either way \(c\) is one of the phases already present in the
-Pauli group, so \(UW_aU^\dagger\) lies in it.  Note that for \(d\) a proper prime power the
+not.  At composite \(d\), a unitary whose conjugation permutes the
+projective Weyl axes still normalizes the Pauli group itself and is
+Clifford in the standard sense.  Write \(UW_aU^\dagger=cW_{a'}\).  For
+odd \(d\), every Weyl operator satisfies \(W_a^d=I\); taking \(d\)-th powers
+gives \(c^d=1\).  For even \(d\), every Weyl operator satisfies
+\(W_a^{2d}=I\), and the standard Pauli convention includes the \(2d\)-th
+roots of unity; taking \(2d\)-th powers gives \(c^{2d}=1\).  Thus \(c\) is
+already a Pauli phase and \(UW_aU^\dagger\) lies in the Pauli group.  When
+\(d\) is a proper prime power, the
 \(\mathbb Z_d\) Weyl system and the \(\F_d\) Weyl system on \(\mathbb C^d\)
 are different, and a criterion instantiated in one says nothing in the
 other.
 \end{remark}
 
-The general Kruskal-type mechanism of constraining local unitaries by a
-uniqueness theorem for the decomposition of a coefficient tensor in a
-discrete operator basis is due to Chang and Jing \cite{ChangJing2022}, in
-the qubit setting.  There
-the states treated are generic, their Pauli coefficient tensors are not
-diagonal in the operator basis, and uniqueness yields invariants separating
-local-unitary classes rather than a Clifford conclusion; at \(q=2\) that
-conclusion for stabilizer states is
+Chang and Jing introduced the general Kruskal-type uniqueness method for
+coefficient tensors in a discrete operator basis into the qubit LU problem
+\cite{ChangJing2022}.  Their generic Pauli tensors are not diagonal in that
+basis, and uniqueness yields invariants separating LU classes rather than a
+Clifford conclusion.  For qubit stabilizer states that conclusion is
 \cite[Theorem~1]{VanDenNestDehaeneDeMoor2005}.
 
 \begin{proposition}[Stabilizer-AME support theorem]
