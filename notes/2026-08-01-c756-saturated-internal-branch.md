@@ -308,7 +308,13 @@ Evidence hashes and byte counts:
 ## 5. Literature boundary
 
 Bounded check against the shared cache (`/tmp/persistent/tavis/lit-search`, `list`
-plus targeted `get`/text greps); no external fetches were needed. Consulted:
+plus targeted `get`/text greps); no external fetches were needed. Of the four named
+sources below, two were read at **full text** and two at **partial** depth.  The cache
+screen contained 20 manifest records whose title matched the mechanical discriminator
+`conic|internal point|exterior set|arc` (case-insensitive); titles and manifest metadata
+were screened, and the three individually relevant works below were promoted for text
+reading.  This licenses only the stated cache-bounded verdict, not a field-wide absence
+claim. Consulted:
 
 * **Van de Voorde, *On sets without tangents and exterior sets of a conic***
   (arXiv:1201.0484): defines exterior sets (all secants external — our condition (E));
@@ -321,10 +327,24 @@ plus targeted `get`/text greps); no external fetches were needed. Consulted:
   classification closing the branch) does **not** exist in the searched domain. Our
   measured laws (L1)/(L2) are the exact internal mirror of the BSW parity split, with
   the residue classes exchanged and the extremal line replaced by an apex-plus-polar.
+  **Read depth:** full text, arXiv v1 (12 pages), shared-cache key
+  `arXiv:1201.0484`, SHA-256
+  `45891ed7688d6ab3677a57060ac69c876007104b7479944744724e69fc46f9a7`.
+  The BSW theorem scope was also checked directly at **partial** depth against the
+  authoritative scan of its title/abstract/theorem page 143, SHA-256
+  `577c6d656a48d51caf831f1b215c54656b4d8ca1b0e3a35d8c89f7d5818faad4`;
+  the searchable OCR was used only to locate that page.
 * **Ball, *On Segre's lemma of tangents*** (DOI 10.1016/j.endm.2018.06.003): supplies
   the triangle identity with sign \((-1)^{t+1}\) used in (3), scaling-invariant form.
+  **Read depth:** full text, published six-page version, shared-cache key
+  `10.1016/j.endm.2018.06.003`, SHA-256
+  `32ed679c03be2c4dfbb65931b1419bea49d47aefdcaf8e05fdb228126d58cde4`;
+  Lemma 1.1 is the relied-on passage.
 * **Ball–Lavrauw, *Planar arcs*** (arXiv:1705.10940): coordinate-free lemma of
   tangents, background for §2.
+  **Read depth:** partial, arXiv version, §5 “The tangent functions” and Lemma 10,
+  shared-cache key `arXiv:1705.10940`, SHA-256
+  `e9f316f5759f310c829489471b41c84972459482236df5023fb6e1f463c55872`.
 
 Stop condition: cache-only, as directed by the task; targeted at exterior/internal
 sets, Segre's lemma, and Paley-clique material. A full novelty audit (OpenAlex +
