@@ -2366,8 +2366,17 @@
       "last": 824,
       "purpose": "formalize and integrate C810-C812-C822 aligned-certificate upgrades",
       "sequence": 263
+    },
+    {
+      "count": 1,
+      "first": 825,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 825,
+      "purpose": "publication-grade literature and trust sweep for integrated Golden exchange-landscape paper package",
+      "sequence": 264
     }
   ],
-  "next_id": 825,
+  "next_id": 826,
   "schema": "codex-task-id-allocations-v1"
 }
