@@ -65,7 +65,46 @@ Without calibrated port frames, its singular values are intrinsic.  After
 calibration, bosonic collision-free amplitudes are permanents of the framed
 matrix.  After orienting the two port spaces, the top exterior map becomes the
 signed determinant.  These are different levels of information, not three
-notations for the same observable.
+notations for the same observable; Figure~\ref{fig:observable-hierarchy}
+records the resulting hierarchy.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >=Latex,
+  level/.style={draw,rounded corners=1pt,align=center,text width=39mm,
+    minimum height=29mm,inner xsep=3pt,inner ysep=3pt},
+  hierarrow/.style={->,semithick}
+]
+\node[level,fill=black!3] (unframed) {\textbf{Unframed ports}\\[-1pt]
+  gauge \(O(W)\times O(V)\)\\[2pt]
+  survives: \(\{\sigma_i(K)\}\)\\
+  hence \(\begin{gathered}|\det K|,\ h_3(K^\dagger K),\\
+  e_3(K^\dagger K)\end{gathered}\)};
+\node[level,fill=black!6,right=8mm of unframed] (oriented)
+  {\textbf{Oriented ports}\\[-1pt]
+  gauge \(SO(W)\times SO(V)\)\\[2pt]
+  survives: \(\{\sigma_i(K)\}\) and\\
+  \(\operatorname{sgn}(\det K)\); with \(|\det K|\)
+  this gives the oriented \(\det K\)};
+\node[level,fill=black!9,right=8mm of oriented] (calibrated)
+  {\textbf{Phase-calibrated ports}\\[-1pt]
+  fixed orthonormal basis\\[2pt]
+  survives: framed \(K\),\\
+  hence \(\per K,\ \det K\), and
+  other framed amplitudes};
+\draw[hierarrow] (unframed)--(oriented);
+\draw[hierarrow] (oriented)--(calibrated);
+\end{tikzpicture}
+\caption{Observable hierarchy for a one-particle transfer \(K:V\to W\).
+Moving right supplies structure and retains strictly more information.
+At the unframed level every scalar invariant factors through the singular
+values.  Orientations add the determinant sign off the singular locus;
+ordered phase-referenced frames then expose matrix-dependent amplitudes such
+as the permanent.}
+\label{fig:observable-hierarchy}
+\end{figure}
 
 We consider a six-mode transfer obtained from a real symmetric conference
 matrix \(C\) of order six, so that

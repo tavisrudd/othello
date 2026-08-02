@@ -478,6 +478,17 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C806 is complete.  The Golden quantum-statistics paper now has a compact
+opening TikZ figure that displays the unframed, oriented, and phase-calibrated
+port hierarchy together with the observables surviving at each level.  An
+anonymous page-level A/B cold read selected the figure page decisively at
+A-minus versus C; both requested wording repairs were adopted.  The
+color-independent fourteen-page paper passes the complete gate and visual
+inspection.  Use
+`golden-quantum-statistics-observable-hierarchy-figure` as the
+figure-enhanced forward artifact.  Report:
+`notes/2026-08-02-c806-golden-observable-hierarchy-figure.md`.
+
 C793 is complete.  The rigidity-and-design variant beat the hierarchy-first
 baseline, survived mathematical-physics and quantum-optics red teams, and was
 repaired to A-minus / accept in both the fresh selected-PDF and final
@@ -576,8 +587,8 @@ reference remain user-owned.
 
 ## Recommended order
 
-1. Use `golden-quantum-statistics-rigidity-referee-approved` as the forward PRA
-   manuscript; preserve the earlier baseline and tested variants as frozen
+1. Use `golden-quantum-statistics-observable-hierarchy-figure` as the forward
+   PRA manuscript; preserve the earlier baseline and tested variants as frozen
    comparison artifacts.
 2. The user will post the accepted package, assign live identifiers, and add
    the Clebsch forward reference.
