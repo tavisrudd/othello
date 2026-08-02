@@ -86,15 +86,17 @@ conic matching quotients*
   cubic-first orientation, six-profile reconstruction, modular depth, and
   arithmetic splitting/gluing.
 
-**Clebsch third paper · `clebsch-passages`** — *Arithmetic and harmonic realizations of the
+**Clebsch third paper · `clebsch-passages`** — *Golden descent and operator realizations of the
 Clebsch cubic*
-- *Status:* cut to a seven-page two-theorem note — the rational square class
-  `5J₀` with its constant golden torsor, and the degree-six face-axis Petersen
-  eigenspace. The five manuscript rows are proved or independently certified,
-  the public release bundle is self-contained, and the structural Lean companion
-  records exact partial-mechanism coverage without serving as a manuscript
-  premise. Local release gates are closed; submission still requires an immutable
-  public artifact locator and author affiliation/contact metadata.
+- *Status:* the rational square class `5J₀` supplies the golden orientation,
+  the conference operator carries it through the classical Clebsch--Segre
+  shadows, and the degree-six Petersen/Gaunt construction returns the same
+  invariant harmonically. The seven trust rows are proved, certified, or
+  literature-backed, and the structural Lean companion records exact
+  partial-mechanism coverage without serving as a manuscript premise. Local
+  release gates are closed; submission still requires an immutable public
+  locator for the supplemental golden-return sources and author affiliation
+  metadata.
 
 **Clebsch fourth paper · `q13-passant-code`** — *A binary [78,36,12] code from the passant
 lines of a conic over F13*

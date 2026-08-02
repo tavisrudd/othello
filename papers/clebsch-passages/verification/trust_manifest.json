@@ -3,8 +3,8 @@
   "local_release_ready": true,
   "submission_ready": false,
   "submission_blockers": [
-    "immutable public artifact locator",
-    "author affiliation and contact metadata"
+    "immutable public artifact locator for the supplemental golden-return sources",
+    "author affiliation metadata"
   ],
   "formal_coverage": {
     "status": "partial mechanisms; no complete manuscript row claimed",

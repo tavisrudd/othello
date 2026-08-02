@@ -37,6 +37,10 @@ mechanisms used by the operator theorem; outer-family coherence,
 cross-golden determinants, and the classical six-point quotient remain human
 proof boundaries.
 
-An immutable public identifier and the author's affiliation/contact line
-are external submission metadata and are not represented by placeholders
-in the manuscript.
+The correspondence address, ORCID, and version-independent finitegeom DOI are
+recorded in `.zenodo.json`.  Public finitegeom commit
+`f1d81641827fd037fcbd8363a6f9cd5abf3767cf` matches the complete base formal
+map, but not the supplemental golden-return source map.  Submission therefore
+still requires an immutable public locator for those supplemental sources and
+the author's affiliation metadata; neither is represented by a placeholder in
+the manuscript.
