@@ -279,5 +279,10 @@ flagship examples are both six objects under a three-three cut but at different
 field orders, so there is no numerical coincidence to chase.
 **Evidence:** none computed.  This is a reading of C786 section 4 against the
 C788 report and the golden manuscript's abstract.
-**Status:** open lead.  `golden` is a foreign lane here: nothing in it is to be
-edited, rebuilt, or re-planned on the strength of this note.
+**Status:** CLOSED NEGATIVE 2026-08-02 by C796.  The analogy is verbal, not
+structural: golden relies on a compact gauge group whose component set is the
+discarded layer, a determinant whose modulus squared has two square roots, a cut
+acting on the object rather than the bookkeeping, and a calibration resource;
+the ame-lu setting has none of them, and odd characteristic admits no
+two-element quotient at all.  Do not reopen.  The refutation was productive
+anyway — see the C796 report.  `golden` remains foreign and unedited.

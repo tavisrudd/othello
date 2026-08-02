@@ -33,6 +33,15 @@ did not falsify; it produced a sharper theorem, that a binary code's lift
 lattice has full rank exactly when its dual distance is at least three.
 See `2026-08-01-c774-two-uniform-rigidity-red-team.md`.
 
+**C796 closed (2026-08-02): cross-lane analogy refuted; two theorems
+recovered from the refutation.**  The golden lane's balanced-cut sign
+recovery does not transfer and the lead is closed — nothing should be
+imported from it.  Refuting it produced a stability estimate with no global
+generator-budget hypothesis, complementary to C786's moment route, and a
+proof that C786's one named blocking example for its central open problem
+does not exist.  The obstruction there is not phase-blindness.  See
+`2026-08-02-c796-phase-blindness-transfer.md`.
+
 **C786 closed (2026-08-02): the threshold is explicit and the region
 question was mis-parameterized.**  The certified radius grows with the
 uniformity order, so for an absolutely maximally entangled state it grows
