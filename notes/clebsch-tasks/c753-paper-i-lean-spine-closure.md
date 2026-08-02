@@ -3,8 +3,8 @@
 **Lane:** `clebsch`
 
 **Status:** active; C752 is complete and its implementation interface is
-frozen.  The finite prose-source repairs, R1--R4, and O1--O5 are complete;
-continue with O6--O8, which must remain packet-gated.
+frozen.  The finite prose-source repairs, R1--R4, and O1--O6 are complete;
+continue with O7--O8, which must remain packet-gated.
 
 ## Current implementation state
 
@@ -75,6 +75,16 @@ gate passed at
 `~/.cache/othello-lean-build/run-20260802-184426-cd072658`; the O5 terminals
 print exactly `propext`, `Classical.choice`, and `Quot.sound`, while the abstract
 citation-interface application itself prints no axioms.
+
+O6 is complete at `fa5cdaee`.  The exact six-line singular cone is exposed in
+`RelativeConicArcs/PaperIOrientationNodes.lean`.  For node type, the formal
+spine now derives `Mu=0`, `M²=5I-uuᵀ`, the one-dimensional kernel, and rank four
+from O4's structural rational signed-orbital square; the six-case chart
+determinant is retained only as the normalization bridge to the ordinary-node
+criterion.  This removes the draft's native conference-square dependency.  The
+clean owning build and trace-only aggregate gate passed at
+`~/.cache/othello-lean-build/run-20260802-190643-7d9c0ba5`, with no warnings;
+all O6 terminals print exactly `propext`, `Classical.choice`, and `Quot.sound`.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
