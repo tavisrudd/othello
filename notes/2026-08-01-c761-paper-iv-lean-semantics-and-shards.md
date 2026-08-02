@@ -32,8 +32,8 @@ a claim that the complete main theorem is Lean-proved.
   identification interface.
 - `LogicalSpine.lean`: proof-only reductions for the seven-companion lower
   bound, the two weight-ten pencil profiles, association-kernel rigidity and
-  surjectivity, and the abstract four-anchor closure.  It contains no native
-  evaluation.
+  surjectivity, `im B = ker A`, orbit spanning from a factorization `B=NᵀN`,
+  and the abstract four-anchor closure.  It contains no native evaluation.
 - `Gates/PassantCodeQ13.lean` and `PassantCodeQ13AxiomAudit.lean`: aggregate
   coverage and explicit trust audit.
 
@@ -86,13 +86,69 @@ This is the useful Tao-style compression: the invariant reductions are the
 proof, while native evaluation records discovery and checks only finite
 terminal nodes that remain uncompressible.
 
+## Further compression from the extra-juice passes
+
+Execution sharding and mathematical case splitting are different layers.
+The following reductions should govern the next Lean pass:
+
+1. The fourteen weight-ten files may remain as parallel build shards, but the
+   theorem has only two mathematical leaves.  Prove stabilizer equivariance
+   of the exceptional-fibre and endpoint-residue partitions, then transport
+   one representative isolated leaf and one representative cycle leaf.  Do
+   not remove aggregate dependencies until the implemented partitions are
+   proved equivariant.
+2. The seventy tangent four-cliques are fourteen translates of the five
+   representatives printed in the manuscript.  Prove simultaneous
+   `Z/14`-translation invariance, classify the five representative orbits,
+   and retain only those five checks as load-bearing leaves.  The full
+   enumeration remains useful corroboration.
+3. The association deduction is now complete at the abstract level:
+   squaring identities imply injectivity on `ker A`, finite dimension gives
+   surjectivity, hence `im B=ker A`, and `B=NᵀN` with orbit rows in the code
+   forces those rows to span.  The remaining work is only to identify the
+   executable relation and Gram matrices with these semantic linear maps.
+4. Minimum-layer exhaustion should use the 56 supports through one fixed
+   point, their four disjoint 14-element orbit slices, transitivity, and the
+   double count `56*78/12=364`.  The finite leaf is the fixed-point slice,
+   not a second global enumeration.
+5. Pair and triple concurrence should be proved equivariant under every
+   support-hypergraph automorphism.  Once the projective action bridge is in
+   place, row comparison can descend from all 78 rows to one representative.
+6. Automorphism classification has exactly three finite inputs: simple
+   transitivity on triples of relation pattern `(10,3,9)`, uniqueness of the
+   fourth anchor with signature `(3,1,9)`, and separation by four-anchor
+   signatures.  The abstract closure is already proved, so no full
+   coordinate-permutation search is needed.
+
+After those transports, the plausibly irreducible finite bulk is two
+representative weight-ten disjointness checks, five tangent representatives,
+the fixed-point weight-twelve exhaustion, the small relation/Gram tables, and
+the concrete fourth-anchor uniqueness/signature checks.  Rank elimination,
+full orbit generation, and all-row reconstruction remain valuable independent
+evidence and discovery provenance without being the narrative proof.
+
+## Interface declarations that are not yet proof coverage
+
+- `MinimumLayerCertificate.rows_recovered` is an exact required field; its
+  accessor theorem does not itself prove reconstruction.
+- `CoordinateAutomorphismIdentification.preserves_iff_in_range` freezes the
+  desired output type but takes the classification as input.
+- `IncidenceMapHasRankFortyTwo` still awaits the executable-rank to
+  `Module.finrank` bridge.
+- Native rank 36 for each orbit verifies spanning numerically but does not
+  instantiate the human association-algebra mechanism.
+
+These interfaces remain useful, but the gate and claim map must not count
+them as completed semantic transports.
+
 ## Validation
 
 - Shared exact gate and audit:
   `/home/tavis/.cache/othello-lean-build/run-20260802-005420-71bb12da`.
 - Logical-spine extension: direct pinned build of
   `RelativeConicArcs.Gates.PassantCodeQ13` and its axiom audit green; the new
-  profile, association, and anchor deductions have no native-decision axiom.
+  profile, association, range/factorization, and anchor deductions have no
+  native-decision axiom.
 - Standalone full shard run:
   `/home/tavis/.cache/othello-lean-build/run-20260802-004847-bc341bd6`.
 - Standalone final gate and audit:
@@ -125,13 +181,14 @@ All seven items remain inside C761 rather than becoming successor mysteries:
 7. connect the regular triple orbit, forced fourth anchor, and separating
    signatures to the proved abstract four-anchor closure.
 
-## Extra-juice + TT closeout and mystery ledger
+## Extra-juice closeout and mystery ledger
 
 The cheap high-value upgrades are complete: exact rank and association leaves,
 projective orbit shards, precomputed cycle syndromes, a precise manuscript
-trust statement, and an axiom-audited aggregate gate.  No new mathematical
-mystery appeared.  The remaining work is exactly the seven semantic transports
-above plus the ordinary release audit and publication steps.
-
-The follow-up extra-juice compression audit is
-[`2026-08-01-c761-paper-iv-ej.md`](2026-08-01-c761-paper-iv-ej.md).
+trust statement, the abstract `im B=ker A` and orbit-factorization spanning
+chain, and an axiom-audited aggregate gate.  Fourteen execution shards are not
+fourteen mathematical cases, and full enumerations are now explicitly
+corroboration wherever symmetry transport can reduce them.  No new
+mathematical mystery appeared.  The remaining work is exactly the seven
+semantic transports above plus the ordinary release audit and publication
+steps.
