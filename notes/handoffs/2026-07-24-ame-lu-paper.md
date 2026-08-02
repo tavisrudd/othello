@@ -33,6 +33,17 @@ did not falsify; it produced a sharper theorem, that a binary code's lift
 lattice has full rank exactly when its dual distance is at least three.
 See `2026-08-01-c774-two-uniform-rigidity-red-team.md`.
 
+**C786 closed (2026-08-02): the threshold is explicit and the region
+question was mis-parameterized.**  The certified radius grows with the
+uniformity order, so for an absolutely maximally entangled state it grows
+linearly in the party count rather than shrinking.  The family behind the
+earlier shrinkage finding holds uniformity at three for every length, so it
+measured uniformity order and not party count.  The global threshold is now
+closed form, obtained from quantized stabilizer overlaps with no compactness,
+though exponentially small in the party count.  C795 carries the manuscript
+correction and must red-team it first, since it reverses an adopted
+conclusion.  See `2026-08-01-c786-explicit-stability-threshold.md`.
+
 **C776, C777 open (2026-08-01): 2-uniform rigidity upgrade.**  An external
 Fable session produced a discreteness theorem requiring only 2-uniformity (no
 stabilizer hypothesis), an explicit stability constant independent of the party

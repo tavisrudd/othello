@@ -2177,8 +2177,17 @@
       "last": 794,
       "purpose": "conference determinant-design reconstruction and higher balanced-cut moments",
       "sequence": 242
+    },
+    {
+      "count": 1,
+      "first": 795,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 795,
+      "purpose": "correct the manuscript region scope and adopt the explicit threshold",
+      "sequence": 243
     }
   ],
-  "next_id": 795,
+  "next_id": 796,
   "schema": "codex-task-id-allocations-v1"
 }
