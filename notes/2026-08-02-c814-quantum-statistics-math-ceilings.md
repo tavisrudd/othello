@@ -2,9 +2,9 @@
 
 **Lane:** `golden`
 
-**Status:** in progress; mathematics research only; no manuscript edit
+**Status:** research complete; mathematics only; no manuscript edit
 
-## Interim verdict
+## Verdict
 
 The continuous-control branch has a sharp positive result.  For every Golden
 protocol and every real diagonal control (x\in[-1,1]^6), the twenty balanced
@@ -14,6 +14,13 @@ exchange traces.  Equality in any of the three-particle sector maxima forces a
 balanced sign control.  Thus the balanced masks are the unique joint Pareto
 optimum of the intrinsic three-particle exchange statistics, not merely a
 special Boolean stratum.
+
+The generalized branch gives the complementary obstruction.  Across the full
+order-six Hermitian conference class, triangle Bargmann holonomy preserves the
+first two balanced-cut moments but changes the full degree-three exchange
+split.  Cut-independent full exchange spectrum holds exactly on the real
+switching class.  Both results are retained only for later paper-inclusion
+review under the qualified literature boundary below.
 
 The unlabelled inverse and higher-moment branches are dependency-gated.  C810
 owns aligned-certificate distance and C812 owns the first same-order
