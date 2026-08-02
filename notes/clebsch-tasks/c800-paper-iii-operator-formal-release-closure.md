@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; operator lemmas follow the C792 statement freeze and final
-manifest reconciliation follows C799
+**Status:** fourth task for `go clebsch paper III`; begin after the
+C799/C815/C823 source freezes; owns the single shared manifest reconciliation
 
 ## Objective
 
@@ -24,17 +24,20 @@ formal maps replay against one exact Lean source closure.
 4. Audit the signed outer-family/Joubert interface.  Formalize the paper-owned
    algebraic comparison and leave classical Segre--Igusa recognition as a
    pinpointed literature input unless a clean existing interface applies.
-5. Reconcile `passages_formal.json` and `golden_return_formal.json` onto one
-   current shared-source hash closure, regenerate both axiom reports, and replay
-   both gates against that checkout.
+5. Absorb the frozen C799/C815/C823 modules, then reconcile
+   `passages_formal.json` and `golden_return_formal.json` onto one current
+   shared-source hash closure, regenerate both axiom reports, and replay both
+   gates against that checkout.
 6. Update the claim map, trust manifest, verification prose, artifact guide,
    and standalone package so every formal route describes the same sources and
    exclusions.
 
 ## Boundaries
 
-C792 freezes the paper wording and C799 owns aligned-family faithfulness and
-the decoder.  This task does not absorb global Hitchin geometry, raw spherical
+C792 freezes the paper wording, C799 owns aligned-family faithfulness and the
+decoder, C815 owns four-shadow recognition, and C823 owns robustness and
+moment compression.  This task merges their frozen source closures but does
+not duplicate their declarations.  It does not absorb global Hitchin geometry, raw spherical
 integration, or the classical Joubert--Segre--Igusa literature into Lean merely
 to raise a coverage count.
 

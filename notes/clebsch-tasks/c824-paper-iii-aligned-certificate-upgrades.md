@@ -1,8 +1,9 @@
 # C824 — Paper III integration of aligned-certificate upgrades
 
 **Lane:** `clebsch`  
-**Status:** queued after C822 human freeze and C823 Lean closure; manuscript
-promotion authorized; coordinate final merge with C800 and C816
+**Status:** sixth and final current task for `go clebsch paper III`; begin
+after C816; C822/C823 frozen; manuscript promotion authorized; owns the final
+C800/C816 trust, release, and synchronization merge
 
 ## Objective
 

@@ -1,8 +1,9 @@
 # C823 — Lean closure for aligned-certificate robustness
 
 **Lane:** `clebsch`  
-**Status:** queued after C799 and C822 statement freeze; coordinate shared
-declarations and manifests with C800/C815
+**Status:** third task for `go clebsch paper III`; begin after C815's
+declaration handoff; C799 and C822 statements frozen; C800 owns the later
+manifest reconciliation
 
 ## Objective
 
@@ -18,8 +19,9 @@ selected by C822.
   declarations. Do not create a second aligned-design API.
 - Wait for C822 to freeze the honest human statement controlling the
   order-26 compression.
-- Coordinate shared Paper III source closure and manifest ownership with C800;
-  avoid duplicating C815's four-shadow declarations.
+- Reuse the now-frozen C815 declarations where the branches meet; avoid
+  duplicating its four-shadow API.  Hand the combined source closure to C800
+  for the single manifest reconciliation.
 - Finite order-26 values may enter through small generated certificates only
   after the human/formal correspondence is explicit.
 

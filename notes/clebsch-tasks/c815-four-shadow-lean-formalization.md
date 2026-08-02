@@ -1,7 +1,8 @@
 # C815 — Lean formalization of four-shadow recognition
 
 **Lane:** `clebsch`  
-**Status:** queued; C809 theorem frozen; coordinate source and manifest ownership with C800
+**Status:** second task for `go clebsch paper III`; begin after C799's API
+handoff; C809 theorem frozen; C800 owns the later manifest reconciliation
 
 ## Objective
 

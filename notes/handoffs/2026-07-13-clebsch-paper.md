@@ -29,10 +29,41 @@ Paper III, not a fifth numbered paper. The Paper-I computational companion is
 unnumbered and becomes a forward-pointing evidence companion once Paper IV is
 public. The mega-paper remains an unpublished fallback only.
 
-For fresh sessions, the immediate paper-building step is C761. C756 remains
-the independent high-upside research task for the all-\(k\) conic-filling
-theorem. Paper IV's general passant-code definitions and weight-eight method
-are reusable inputs to C756, but C761 does not own or block that theorem.
+The numbered-paper streams are concurrent.  An explicit selector such as
+`go clebsch paper I`, `go clebsch paper III`, or `go clebsch paper IV`
+selects only that paper's stream; it does not pause, reorder, or absorb work
+in the other papers.  An unqualified `go clebsch` with no carried task or
+paper selection must ask which paper stream the user wants rather than
+silently choosing among concurrent work.
+
+### Deterministic Paper III route
+
+`go clebsch paper III` means: take the first unfinished task in this exact
+conflict-safe sequence:
+
+1. C799 — freeze the shared aligned-design Lean API;
+2. C815 — add four-shadow recognition Lean declarations without duplicating
+   the aligned-design API;
+3. C823 — add robustness, distance, moment, and C822 compression declarations
+   on those two frozen APIs;
+4. C800 — formalize the remaining operator identities and perform the single
+   shared-source/manifest reconciliation after C799/C815/C823;
+5. C816 — integrate the four-shadow characterization into the manuscript;
+6. C824 — integrate robustness and the order-26 separator, then perform the
+   final coordinated Paper III trust/release/synchronization pass.
+
+Skip completed tasks, but do not bypass an unfinished predecessor.  This is
+an execution serialization for shared Lean/manuscript/manifest ownership;
+the underlying mathematics remains the two branches
+`C809 -> C815 -> C816` and `C810/C812/C822 -> C823 -> C824`, both rooted in
+C792/C799 and merged through C800.  No C832 router task is required: the live
+handoff resolves the selector directly.  Paper I and Paper IV continue
+concurrently under their own explicit selectors and task cards.
+
+C756 remains the independent high-upside research task for the all-\(k\)
+conic-filling theorem. Paper IV's general passant-code definitions and
+weight-eight method are reusable inputs to C756, but C761 does not own or
+block that theorem.
 
 ## Program state
 
@@ -40,7 +71,7 @@ are reusable inputs to C756, but C761 does not own or block that theorem.
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening and C762 owns the forward exposition pass | [C762](../clebsch-tasks/c762-paper-i-forward-exposition.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; the C749/C750/C801 human and Lean strengthening is complete and C577 owns repackaging | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C763 consolidation is complete and C764 adds the minimal determinant-versus-permanent boundary for the forward version | [C764](../clebsch-tasks/c764-paper-iii-why-determinant.md) |
+| Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus human integration and independent acceptance are complete; the deterministic forward route is C799, C815, C823, C800, C816, C824 | [C799](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) |
 | Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 human proof, paper-owned evidence, semantic modules, logical-spine lemmas, and sharded Lean gates green; semantic rank, normalized weight-eight, arbitrary weight-ten profiles, fixed-point weight-twelve exhaustion, association/Gram spanning, row-family uniqueness, and concrete four-anchor scheme rigidity are closed, while release remains | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
@@ -250,18 +281,18 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | task | state | next gate |
 |---|---|---|
 | [C791 — Paper I balanced-spectrum consequence](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) | queued after C753; coordinate with C762 | freeze baseline, red-team the inference boundary, and blind-test the bounded corollary before synchronizing trust maps and the standalone mirror |
-| [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | active; independent cold read returned major revisions at 76/100 after the C794 rebuild | complete the seven-point proof, marked-relative and outer-family repairs, hierarchy pass, and manifest reconciliation; then run a new context-free subagent cold read before synchronization |
-| [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | queued after C792 human-proof freeze | formalize seven-point faithfulness, overlap globalization, the exact selected-query decoder, and conference-signing reconstruction; extend the Paper III gate and axiom audit |
-| [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | queued after C792 statement freeze; final manifest merge follows C799 | formalize retained exchange and determinant identities, reconcile both formal maps onto one source closure, regenerate audits, and replay both gates |
+| [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | complete; repaired B-plus manuscript, final independent acceptance 96/100, aggregate gates, and standalone synchronization closed | none; C799 is the first unfinished Paper III route task |
+| [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | next Paper III route task; C792 human theorem frozen | formalize seven-point faithfulness, overlap globalization, the exact selected-query decoder, and conference-signing reconstruction; then hand shared API ownership to C815 |
+| [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
 | [C809 — four-shadow characterization](../clebsch-tasks/c809-four-shadow-characterization.md) | complete; positive math-only freeze; no paper promotion | none; nonzero triangle--Pfaffian proportionality characterizes the sign conference class, the two orientations are projectively isolated, and any manuscript/novelty integration requires a separately allocated follow-up |
-| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | queued; C809 statement frozen; coordinate declaration and manifest ownership with C800 | formalize translation/pair-moment recognition, the nonzero-edge quadratic implication, pentagon classification, and six-test oriented packet without duplicating C763's forward bridge |
-| [C816 — Paper III four-shadow integration](../clebsch-tasks/c816-paper-iii-four-shadow-integration.md) | queued after C815 and coordinated C800 closure; manuscript promotion authorized | complete the full precedence audit, integrate the characterization and exact weighted boundary, refresh trust/release surfaces, then run Milnor--Serre, red-team, PDF inspection, and a fresh context-free cold-read regrade |
+| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | second Paper III route task; C809 frozen; begin after C799 API handoff | formalize translation/pair-moment recognition, the nonzero-edge quadratic implication, pentagon classification, and six-test oriented packet without duplicating C763/C799 declarations |
+| [C816 — Paper III four-shadow integration](../clebsch-tasks/c816-paper-iii-four-shadow-integration.md) | fifth Paper III route task; begin after C800 reconciliation; manuscript promotion authorized | complete the full precedence audit, integrate the characterization and exact weighted boundary, refresh trust/release surfaces, then run Milnor--Serre, red-team, PDF inspection, and a fresh context-free cold-read regrade |
 | [C810 — aligned-certificate distance](../clebsch-tasks/c810-aligned-certificate-distance.md) | complete; exact seven-point distance two and correction radius zero; no paper promotion | none; the all-even spectrum follows from edge-toggle parity, and the conference-only multi-class question is outside the triggered cheap-stop boundary |
 | [C811 — quadratic-twist specialization](../clebsch-tasks/c811-quadratic-twist-specialization.md) | queued; math only; paper promotion excluded | stress-test the fibre-recovery claim and quickly delimit standard Kummer precedence before seeking a sharper geometric lemma |
 | [C812 — conference cut separation](../clebsch-tasks/c812-conference-cut-separation.md) | complete; the scalar third cut moment separates all four order-26 classes; no paper promotion | none; the triple profile certifies the four values, the full histogram is unnecessary, and quotient certificate distance remains a separate alignment problem |
 | [C822 — conference moment human compression](../clebsch-tasks/c822-conference-moment-human-compression.md) | complete; conference contraction forces the two-pivot plane and four direct construction counts recover the separator; math only | none; coherent pentads and spanning aligned hexads reduce further to intercalates in the Latin classes and Pasches in the Steiner classes |
-| [C823 — aligned-certificate robustness Lean](../clebsch-tasks/c823-aligned-certificate-robustness-lean.md) | queued after C799 and C822; coordinate C800/C815 | formalize distance polarization, parity, bowtie equality, conference balance, moment recurrence, and C822's final compression in the shared Paper III API |
-| [C824 — Paper III aligned-certificate upgrades](../clebsch-tasks/c824-paper-iii-aligned-certificate-upgrades.md) | queued after C822/C823; manuscript promotion authorized; coordinate C800/C816 | select the smallest A/B architecture, complete precedence and trust integration, then run exposition, red-team, PDF, release, synchronization, and fresh cold-read gates |
+| [C823 — aligned-certificate robustness Lean](../clebsch-tasks/c823-aligned-certificate-robustness-lean.md) | third Paper III route task; C822 frozen; begin after C815 declaration handoff | formalize distance polarization, parity, bowtie equality, conference balance, moment recurrence, and C822's final compression in the shared C799/C815 API |
+| [C824 — Paper III aligned-certificate upgrades](../clebsch-tasks/c824-paper-iii-aligned-certificate-upgrades.md) | sixth and final current Paper III route task; begin after C816; manuscript promotion authorized | select the smallest A/B architecture, integrate the robustness/order-26 results, perform final C800/C816 trust reconciliation, then run exposition, red-team, PDF, release, synchronization, and fresh cold-read gates |
 | [C813 — harmonic restriction generalization](../clebsch-tasks/c813-harmonic-restriction-generalization.md) | queued; math only; paper promotion excluded | compute bounded $A_5$-branching, Petersen-channel eigenvalues, and exact restriction scalars before pursuing a family or isolation theorem |
 | [C802 — Paper I series-framing memo review](../clebsch-tasks/c802-paper-i-series-framing-memo-review.md) | queued after C753 and before C762's final prose merge; proposal memo exists and no manuscript source has changed | independently cold-read and iterate the memo, verify C494/Paper-III ownership and simultaneous locators, then hand accepted recommendations to C762 |
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | unblocked; C714 synchronized release gates complete | with explicit publication authority, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |

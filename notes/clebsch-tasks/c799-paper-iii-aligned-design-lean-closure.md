@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued after the C792 human proof is frozen
+**Status:** next task for `go clebsch paper III`; C792 human proof frozen;
+hands the shared aligned-design API to C815
 
 ## Objective
 

@@ -1,7 +1,9 @@
 # C816 — Paper III four-shadow characterization integration
 
 **Lane:** `clebsch`  
-**Status:** queued after C815 statement/formal freeze and coordination with C800; paper promotion authorized by this task only
+**Status:** fifth task for `go clebsch paper III`; begin after C800's shared
+formal reconciliation; C815 statement/formal freeze complete first; paper
+promotion authorized by this task only
 
 ## Objective
 
