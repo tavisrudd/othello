@@ -191,6 +191,45 @@ the remaining case \(a=3^r\); the same reduction modulo \(3\) forces
 The certified all-\(k\) classification through \(q=43\) excludes all three
 cases. Hence defect one is impossible, \(\delta\ge2\), and (3) follows.
 
+### Defect two is genuinely geometric
+
+For \(\delta=2\),
+\[
+ q=\binom n2-2,\qquad (2n-1)^2-8q=17. \tag{11}
+\]
+Unlike (9), this is Pell-type and does not factor into two almost-coprime
+integers. Already
+\[
+ (n,q)=(6,13),(7,19),(10,43),(11,53)
+\]
+gives four prime fields. The first three are excluded by the certified
+classification through \(q=43\); the first presently unclassified
+defect-two boundary is therefore
+\[
+ (q,k,\delta)=(53,12,2). \tag{12}
+\]
+
+Equations (5)--(6) leave exactly two local shapes on every spare line:
+\[
+ R_{P,\ell}=cL_X^2
+ \quad\text{or}\quad
+ R_{P,\ell}=cL_XL_Y\quad(X\ne Y). \tag{13}
+\]
+The first means one direction containing three disjoint chords; the second
+means two directions, each containing two disjoint chords. Thus the residual
+binary quadratic is split over \(\mathbb F_q\), and its discriminant is a
+square or zero.
+
+This exposes a sharper next gate than a generic degree-two Weil bound:
+compute the discriminant square class of \(R_{P,\ell}\) from Segre's
+tangent-product relation and the anisotropic quadratic \(Q|_\ell\). If that
+comparison forces the nonsquare class of \(Q|_\ell\), complete splitting in
+(13) gives the contradiction immediately.
+
+One exploratory parameter sweep was discarded because its output exceeded
+the repository command-hygiene bound. No statement here relies on it; the
+four displayed substitutions in (11) are direct.
+
 ## 4. What the reduction does and does not solve
 
 The reduction isolates the exact remaining object. For every spare external
@@ -273,6 +312,12 @@ classification closes it globally. The new first arithmetic frontier is
 a generalized Ramanujan--Nagell shape rather than another consecutive-factor
 identity.
 
+The fourth cheap upgrade is the split-quadratic dichotomy (13). Arithmetic
+cannot close this layer: the first unclassified case is already \(q=53\).
+But defect two carries a new binary invariant, the discriminant of
+\(R_{P,\ell}\). Its forced square class is the most economical possible
+target for the Segre--conic comparison.
+
 The acceptance check is internal and exact: the roots and their
 multiplicities on both sides of (7) agree point by point, their degrees agree,
 and the zero-slack arithmetic uses only coprimality of consecutive integers.
@@ -288,5 +333,6 @@ exactly \(q=5,9,27\); no new computational claim is introduced.
 | Meaning of the slack \(\delta\) | settled | degree and total multiplicity of the residual concurrence divisor \(R_{P,\ell}\) |
 | Distribution of positive slack | settled | at most \(\delta\) exceptional directions and \(2\delta\) chords; \(E_P\) is completely split as in (5) |
 | Defect one | settled negatively | prime-power arithmetic leaves only \(q=5,9,27\), all excluded by the certified bounded classification |
-| Residual slack \(\delta\ge2\) | open | derive a character constraint on \(R_{P,\ell}\) from Segre tangent products and conic externality; \(\delta=2\) has the arithmetic shape \((2n-1)^2-8q=17\) |
+| Defect two | open, sharply reduced | \(R_{P,\ell}\) is either \(2X\) or \(X+Y\), hence has square/zero discriminant; compare this with the nonsquare discriminant of \(Q|_\ell\). First unclassified case: \((q,k)=(53,12)\) |
+| Residual slack \(\delta\ge3\) | open | derive the general character constraint on the completely split divisor \(R_{P,\ell}\) |
 | A raw general-position character sum | settled as the wrong scale | it retains the \(q\) forced direction roots; divide out the Moore form first |

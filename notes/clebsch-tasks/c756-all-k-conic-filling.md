@@ -96,7 +96,10 @@ What the first nonsaturated pass adds:
 - zero slack is impossible over every odd prime-power field except the already excluded
   \(q=3\); defect one factors into exactly \(q=5,9,27\), all removed by the certified
   bounded classification; hence every nonsaturated conic-filling arc satisfies
-  \(\binom{k-1}{2}\ge q+2\).
+  \(\binom{k-1}{2}\ge q+2\);
+- at defect two the residual divisor is either one double rational point or two distinct
+  rational points, so its binary-quadratic discriminant is zero or a square; the first
+  boundary not removed by the \(q\le43\) classification is \((q,k)=(53,12)\).
 
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
@@ -107,10 +110,12 @@ conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternat
 \(q\)).  The sixth pass proves the primitive Jacobi collision lemma and closes the entire
 saturated-external branch.  The seventh pass gives the strict nonsaturated bound, divides
 the direction polynomial by its forced Moore factor, localizes the defect, and closes
-\(\delta=0,1\).  Residual slack \(\delta\ge2\) remains open;
-the next gate is to combine Segre's tangent-product relation with the completely split
-degree-\(\delta\) residual concurrence divisor, so that a character sum sees \(\delta\)
-rather than the original degree about \(q\).  The dual internal-node blocking formulation is retained as
+\(\delta=0,1\).  At \(\delta=2\), the problem is now the sharp comparison between the
+split residual quadratic and the nonsquare discriminant class of the anisotropic
+quadratic \(Q|_\ell\), beginning at \((q,k)=(53,12)\).  The next gate is to derive that
+comparison from Segre's tangent-product relation.  If it closes defect two, residual
+slack \(\delta\ge3\) remains for the completely split degree-\(\delta\) divisor.  The
+dual internal-node blocking formulation is retained as
 structural input rather than as a substitute for the closed spectral step.
 
 ## Current boundary
