@@ -2267,8 +2267,17 @@
       "last": 805,
       "purpose": "red-team and A/B the local-dimension-two specialization inversion; implement cold-read figures",
       "sequence": 252
+    },
+    {
+      "count": 1,
+      "first": 806,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 806,
+      "purpose": "Add compact opening observable-hierarchy figure to Golden quantum-statistics paper",
+      "sequence": 253
     }
   ],
-  "next_id": 806,
+  "next_id": 807,
   "schema": "codex-task-id-allocations-v1"
 }
