@@ -17,6 +17,9 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
+**Next-session entry:** run the bounded Ball--Lavrauw tangent-tensor interface test in
+the dossier's `Next-session protocol`; do not begin with another ordinary-rank bound.
+
 ## Why this task exists
 
 It is the only identified route to an A+ paper in the Clebsch/golden group. The

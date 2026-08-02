@@ -70,3 +70,35 @@ report as the minimal technical packet.
 
 These are abstract-level routing signals, not novelty evidence or claims that any named
 person has considered C756.
+
+## Next-session protocol
+
+**Objective:** decide whether the Ball--Lavrauw tangent tensor globalizes the
+distinguished kernel line of the angle matrix.  This is a bounded interface test, not
+a general literature pass.
+
+1. Load only the cross-ratio rank report, the TT angle-bijection report, and the
+   tangent-tensor/system-of-equations sections of *Planar arcs* and *Arcs and tensors*.
+2. Freeze the parameter dictionary.  Their planar-arc convention
+   $|A|=q+2-t$ gives $t=(q+1)/2$ for the saturated-internal family, exactly the
+   degree of the canonical tangent polynomial already constructed in C756.
+3. Express the first middle coefficient of the cleared angle binomial, or equivalently
+   the adjugate kernel line in the nullity-one branch, as a contraction or
+   specialization of their tangent tensor.  Keep the construction over the ground
+   field; record every Frobenius or Hasse-derivative seam.
+4. **Positive gate:** obtain either (a) one intrinsic nonzero section of degree below
+   $q+3$ whose vanishing on the arc divisor is equivalent to all first row moments,
+   or (b) a tensor-rank argument showing that full angle binomiality forces nullity
+   one.  Only then open the adjugate/compound calculation.
+5. **Stop condition:** if the tensor merely repackages the separate tangent
+   polynomials or the rowwise cofactor identity without lowering degree or coupling
+   different base points, close this route in one paragraph; do not read further arc
+   surveys.
+6. As a cheap independent check, spend at most one short pass testing whether polarity
+   produces the blocker set required by the generalized-hyperfocused-arc definition.
+   If no canonical $k-1$ blockers cover all secants, discard that analogy.  Do not
+   invoke the prime-field four-point theorem without this exact hypothesis.
+
+**Deliverable:** a one-page dictionary-and-verdict note.  A positive verdict must name
+the global section and its degree; a negative verdict must name the precise tensor
+slot that fails to couple the rows.
