@@ -21,3 +21,6 @@ locator.
 Build with:
 
     make check
+
+The C770 venue decision, trust ledger, cold-read closure, artifact label, and
+public-preprint gate are recorded in `SUBMISSION.md`.
