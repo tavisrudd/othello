@@ -120,7 +120,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C781 `[golden]` [IN PROGRESS]** — close the third cold-referee minors by repairing source attribution, making the complete paper gate standalone, and replacing the balanced-spectrum finite check by a structural block proof; then resume the referee for an editorial grading and promote/strip assessment → `notes/2026-08-01-c781-golden-referee-r3-repairs-and-editorial-grade.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`

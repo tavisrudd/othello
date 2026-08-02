@@ -478,17 +478,24 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-None.  The revised PRA package is technically ready for the next local referee
-round; live posting and the Clebsch forward reference are user-owned.
+None.  The third cold-reader repairs are complete at
+`golden-quantum-statistics-editorial-referee-revised`: the balanced-spectrum
+proof is structural and Lean-backed, the extracted package's complete
+`make check` is green, and the resumed reader gives B+ / accept after minor
+revision with no correctness blocker.  Live posting and the Clebsch forward
+reference remain user-owned.
 
 ## Recommended order
 
-1. Preserve `golden-quantum-statistics-referee-r2-revised`.  On the next cold
-   read, expose the related repositories under `~/src/math-papers/` and exclude
-   public-access availability from the referee's remit.  The user will post the
-   accepted package, assign live identifiers, and add the Clebsch forward
-   reference.
-2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+1. Preserve `golden-quantum-statistics-editorial-referee-revised`.  The bounded
+   A-minus editorial route is to foreground the observable hierarchy and
+   balanced-spectrum theorem, move the anomaly corollary out of the body, and
+   compress the classical setup and full ledgers.  Do not apply that scope edit
+   without a user decision.  The user will post the accepted package, assign
+   live identifiers, and add the Clebsch forward reference.
+2. The A-level research routes are a general order-`2d` cut-independence theorem
+   or a hardware-grounded end-to-end validation; neither is allocated.
+3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths
