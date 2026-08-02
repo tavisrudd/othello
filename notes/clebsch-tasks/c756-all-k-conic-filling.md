@@ -17,13 +17,16 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** Route F continues.  Attempt the digit-1 theorem: a genuine
-saturated arc's coherent orientation has rational support sum
-\(\sigma=\sum_{z\in Z}z\) (equivalently \(v_\pi(\widehat x)\ge2\) everywhere), via the
-balance theorem plus conjugation bookkeeping.  If that lands, pursue forced flatness
-and the biunimodular sparse-trade classification in the near-extremal uncertainty
-regime.  Stop if digit 1 is not derivable from existing exact identities and no new
-mechanism appears, then fall back to Route D or Route R.
+**Next-session entry:** attack the composition classification.  Every coherent system
+over prime \(q\) is the totally split irrational quadratic fiber of a monic rational
+\(R\) of degree \((q+3)/2\), with \(G=(R-\gamma)(R-\gamma^q)\).  Gates in order:
+(1) bounded census of all \((R,\gamma)\) with totally split irrational fibers for
+prime \(q\le43\), to measure split-fiber rarity before coherence; (2) re-express the
+coherence characters (A), (B) as conditions on \(R\) along its fiber; (3) the
+structural route via factorization/monodromy of \(R(X)-R(Y)\), value sets, and the
+exceptional-polynomial literature, including making the Dickson window
+\((q+3)/2\mid8\Rightarrow q\in\{5,13\}\) exclusion of \(q=13\) structural.  Stop a
+sub-gate if it degenerates into an unbounded case split with no monodromy control.
 
 ## Why this task exists
 
@@ -40,7 +43,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty-three research passes complete; the theorem is **not** proved. Reports:
+Twenty-four research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -63,7 +66,8 @@ Twenty-three research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-02-c756-alt-attacks.md`, and
 `notes/2026-08-02-c756-prime-field-lacunary-first-cofactor.md`, and
 `notes/2026-08-02-c756-four-point-row-transitions.md`, and
-`notes/2026-08-02-c756-sparse-paley-trade-profile.md`.
+`notes/2026-08-02-c756-sparse-paley-trade-profile.md`, and
+`notes/2026-08-02-c756-digit-tower-composition.md`.
 
 Branch ledger:
 
@@ -444,6 +448,29 @@ What the sparse Paley-trade census (Route F, twenty-third pass) adds:
   is invisible to the second moment; Route F's continue gate passes with digit-1
   rationality and forced flatness as the two frozen theorem gates.
 
+What the digit-tower and composition pass (twenty-fourth) adds:
+
+- digit 1 is **proved** from coherence alone, and far more: for prime \(q\), every
+  signed power sum \(P_{j+q(r-j)}\) vanishes through the critical level \(r=t\)
+  (nonsquare-coset character independence plus Lucas; the critical level closes by the
+  reflection \(P_{qt}=-P_t\)); hence \(s_1,\dots,s_t\) are rational and
+  \(v_\pi(\widehat x)\ge t+1=(q+3)/2\) uniformly, with \(t+1\) the exact generic value
+  attained by the frames (the census reading \(p-1\) was the \(q=5\) coincidence
+  \(t+1=p-1\));
+- balance needs no interlacing: coherence makes \(x\) an exact \(\pm q\)-eigenvector by
+  a two-line Parseval argument;
+- **composition normal form**: Newton converts the tower into
+  \(Z=R^{-1}(\gamma)\) for monic rational \(R\) of degree \((q+3)/2\) and a quadratic
+  point \(\gamma\), with \(G=(R-\gamma)(R-\gamma^q)\); both frames verified exactly
+  (e.g. \(R=X^4+3X^3+4X^2+2X\), \(\gamma=2+3\sqrt2\));
+- the tower explains the census valuations exactly: first failing level equals the
+  uniform valuation for all 129 candidates, and \(v=2\) is impossible because level 2
+  follows from level 1 for conjugation-odd vectors;
+- pure valuation-versus-Parseval counting provably cannot finish; the finisher is the
+  \((R,\gamma)\) classification — a completely-split-quadratic-fiber problem of
+  monodromy/exceptional-polynomial type, with the Dickson window
+  \((q+3)/2\mid8\Rightarrow q\in\{5,13\}\) and \(q=13\) already audit-excluded.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -483,8 +510,10 @@ Two independent uniform obstructions are still required:
    defect-two boundary \((q,k)=(53,12)\).
 
 The old secant-pencil and association-scheme candidates are superseded.  The active
-saturated-internal gate is the coherent Paley double-clique classification (equivalently,
-exploit balance, simultaneous angle bijections, or the master-polynomial divisibility).
+saturated-internal gate is the coherent Paley double-clique classification, now in its
+sharpest form: classify monic rational \(R\) of degree \((q+3)/2\) with a totally split
+irrational quadratic fiber satisfying the two coherence characters
+(\(G=(R-\gamma)(R-\gamma^q)\) is proved for every coherent system over prime \(q\)).
 The nonsaturated branch has no bounded per-line algebraic-compression gate left.  Its clean active
 target is now to prove \(h\ge1\): after deleting any arc point, a conic-external set cannot
 determine every direction on a spare external line.  This is a masked Rédei--Szőnyi-style
@@ -503,13 +532,14 @@ does not globalize its adjugate kernel line, and the prime-field first-cofactor 
 has exact canonical form but linear reduced support and Cartier width.  The four-point
 row-transition diagnostic also closes: its negative controls have no complete transition
 systems, their partial rational degree grows linearly, and their pole and cross-ratio
-profiles add no radial constraint.  Route F's sparse integral Paley-trade census now
-passes its continue gate: the frame is isolated by an exact valuation/support profile
-(terminal \(\pi\)-valuation, flat \(q\cdot\zeta^j\) spectrum, two-valued
-autocorrelation) that is invisible to the second moment and provably transverse to the
-coherence residual.  The active interface is the digit-1 rationality theorem for the
-oriented support sum, then forced flatness and the biunimodular sparse-trade
-classification.  The direct adjugate/second-compound calculation stays
+profiles add no radial constraint.  Route F's sparse integral Paley-trade census
+passed its continue gate, and the digit-tower pass has now converted it into proved
+structure: coherence alone forces rational power sums through the critical degree,
+uniform valuation \((q+3)/2\), and the composition normal form
+\(G=(R-\gamma)(R-\gamma^q)\) with \(R\) rational of degree \((q+3)/2\) and \(\gamma\)
+a quadratic point.  The active interface is the \((R,\gamma)\) classification:
+bounded split-fiber census, coherence expressed on the fiber, and the
+monodromy/exceptional-polynomial route for \(R(X)-R(Y)\).  The direct adjugate/second-compound calculation stays
 parked unless a global low-degree carrier emerges.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot
