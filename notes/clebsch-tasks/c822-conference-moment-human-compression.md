@@ -1,7 +1,22 @@
 # C822 — Human compression of the order-26 conference separator
 
 **Lane:** `clebsch`  
-**Status:** queued; mathematics only; C812 exact values frozen; paper promotion excluded
+**Status:** complete; two-pivot human theorem and four construction counts
+frozen; mathematics only; paper promotion excluded
+
+## Outcome
+
+Conference contraction forces the full eight-coordinate triple-union profile
+from the coherent-pentad and spanning-hexad counts \(x_5,x_6\).  In the two
+Latin-square classes these are affine functions of the intercalate count
+\(I=4,0\); in the two Steiner classes they are affine functions of the Pasch
+count \(P=8,13\).  Direct construction representatives recover C812's four
+moments and separate the imported four switching classes without the fifteen
+descendants.  The report distinguishes the human contraction and flag
+counts, imported classification, finite primitive ledgers, and exact replay.
+
+Full report and reproducible four-representative evidence:
+`notes/2026-08-02-c822-conference-moment-human-compression.md`.
 
 ## Objective
 

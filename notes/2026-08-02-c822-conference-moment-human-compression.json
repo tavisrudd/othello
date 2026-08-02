@@ -1,0 +1,159 @@
+{
+  "aligned_design": "3-(26,4,5)",
+  "order": 26,
+  "pair_profile": {
+    "5": 26000,
+    "6": 497250,
+    "7": 2171000,
+    "8": 2585375
+  },
+  "profile_affine": {
+    "10": {
+      "constant": 2034201000,
+      "x5": 74,
+      "x6": 15
+    },
+    "11": {
+      "constant": 1835593500,
+      "x5": -30,
+      "x6": -6
+    },
+    "12": {
+      "constant": 573095250,
+      "x5": 5,
+      "x6": 1
+    },
+    "5": {
+      "constant": 0,
+      "x5": 1,
+      "x6": 0
+    },
+    "6": {
+      "constant": 0,
+      "x5": 0,
+      "x6": 1
+    },
+    "7": {
+      "constant": 26864500,
+      "x5": -20,
+      "x6": -6
+    },
+    "8": {
+      "constant": 219189750,
+      "x5": 65,
+      "x6": 15
+    },
+    "9": {
+      "constant": 1027130000,
+      "x5": -95,
+      "x6": -20
+    }
+  },
+  "representatives": [
+    {
+      "construction": "TD(3,5)",
+      "five_set_aligned_block_histogram": {
+        "all": {
+          "0": 15696,
+          "1": 30960,
+          "2": 18360,
+          "5": 764
+        },
+        "with_root": {
+          "0": 2952,
+          "1": 6120,
+          "2": 3420,
+          "5": 158
+        },
+        "without_root": {
+          "0": 12744,
+          "1": 24840,
+          "2": 14940,
+          "5": 606
+        }
+      },
+      "intercalates": 4,
+      "name": "latin_non_group",
+      "six_set_spanning_triples": {
+        "total": 701666,
+        "with_root": 161070,
+        "without_root": 540596
+      },
+      "third_centered_moment": "5824547586/687739675",
+      "x5": 7640,
+      "x6": 701666
+    },
+    {
+      "construction": "TD(3,5)",
+      "five_set_aligned_block_histogram": {
+        "all": {
+          "0": 15600,
+          "1": 31200,
+          "2": 18200,
+          "5": 780
+        },
+        "with_root": {
+          "0": 3000,
+          "1": 6000,
+          "2": 3500,
+          "5": 150
+        },
+        "without_root": {
+          "0": 12600,
+          "1": 25200,
+          "2": 14700,
+          "5": 630
+        }
+      },
+      "intercalates": 0,
+      "name": "latin_cyclic",
+      "six_set_spanning_triples": {
+        "total": 705250,
+        "with_root": 162750,
+        "without_root": 542500
+      },
+      "third_centered_moment": "504439650/27509587",
+      "x5": 7800,
+      "x6": 705250
+    },
+    {
+      "construction": "S(2,3,13)",
+      "five_set_aligned_block_histogram": {
+        "all": {
+          "0": 14784,
+          "1": 33240,
+          "2": 16840,
+          "5": 916
+        }
+      },
+      "name": "steiner_noncyclic",
+      "pasch_configurations": 8,
+      "six_set_spanning_triples": {
+        "total": 682290
+      },
+      "third_centered_moment": "-489762702/137547935",
+      "x5": 9160,
+      "x6": 682290
+    },
+    {
+      "construction": "S(2,3,13)",
+      "five_set_aligned_block_histogram": {
+        "all": {
+          "0": 14664,
+          "1": 33540,
+          "2": 16640,
+          "5": 936
+        }
+      },
+      "name": "steiner_cyclic",
+      "pasch_configurations": 13,
+      "six_set_spanning_triples": {
+        "total": 679770
+      },
+      "third_centered_moment": "-699456186/137547935",
+      "x5": 9360,
+      "x6": 679770
+    }
+  ],
+  "schema": "c822-conference-moment-human-compression-v1"
+}
