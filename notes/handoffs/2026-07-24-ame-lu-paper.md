@@ -46,8 +46,21 @@ admits a figure when it explains an incidence structure, correspondence,
 orbit relationship, or proof mechanism faster than prose can, and requires
 each figure to have a job in the argument, stay legible at publication
 size, be interpretable without colour, and carry a caption stating its
-mathematical point.  Ask for specific proposals against that bar, including
-the answer "none earns its place" if that is the honest one.
+mathematical point.  **Lean generous: as many figures as genuinely help, not
+a minimal set.**  If five each earn their place, propose five; the bar is
+whether a figure does work prose cannot do as quickly, not scarcity.  Each
+proposal must name its job in the argument, the object depicted, the visual
+encoding, and a draft caption, in enough detail that an implementer can build
+it without re-deriving the idea.
+
+**Then test that they help, rather than asserting it.**  Figures are adopted
+on evidence: implement them, then run a blind comparative read of the affected
+passages with and without, by a reader who did not propose them and is not told
+which version is which, judging comprehension rather than aesthetics.  This is
+the method the `golden` lane used for its editorial A/B, so the precedent and
+its reporting shape already exist in the portfolio.  A figure that does not win
+its comparison is cut.  Figure implementation and its A/B are their own
+allocated C-item, not part of the cold read.
 
 **C777 closed (2026-08-02): the formal layer matches the manuscript, with
 its boundary stated.**  A new multipartite namespace, general in site set
