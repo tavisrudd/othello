@@ -490,3 +490,14 @@ judgment.
   ones, and pays for that generality with a stronger hypothesis.
 - No other genuine mystery. The remaining soft spots in the source note (non-explicit `ε₀`, the
   literature question) are known open items, not surprises.
+
+---
+
+**Superseded in scope, 2026-08-02.** Section 3.2's shrinkage result is correct and its
+family is genuine, but the inference from it was drawn too widely. C786 showed the certified radius
+is governed by the uniformity order, not the party count, and that the Reed--Muller family used here
+holds uniformity at three for every length. So the conclusion applies to the 2-uniform class and not
+to the absolutely-maximally-entangled class the decomposition corollary is stated for, where the
+region grows linearly in the party count. The mystery-ledger item asking for a matching lower bound
+is resolved by reparameterization rather than by that bound. See
+`2026-08-01-c786-explicit-stability-threshold.md`; the manuscript correction is C795.

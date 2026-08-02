@@ -191,3 +191,12 @@ discreteness corollary into a specialization rather than sitting beside it, and 
 makes the entanglement/algebraic split visible in one object. The real soft spot is the
 non-explicit threshold, which C774 showed cannot be made uniform in the party count — the paper now
 says so in three places rather than selling the constant's independence as certification.
+
+---
+
+**Superseded in part, 2026-08-02.** The region proposition adopted here, and the abstract and
+introduction sentences describing it, generalize a 2-uniform-class fact to the class the
+decomposition corollary is stated for. C786 proved the certified radius grows with the uniformity
+order, hence linearly in the party count for absolutely maximally entangled states, and replaced the
+compactness threshold with a closed form. C795 carries the correction. Everything else adopted here
+stands. See `2026-08-01-c786-explicit-stability-threshold.md`.

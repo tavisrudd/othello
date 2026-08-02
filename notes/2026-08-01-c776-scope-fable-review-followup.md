@@ -214,3 +214,13 @@ surfaced); the equation-tag ordering (by grep across the section files); and the
 greps behind §3. Taken from C774/C775 on their authority, not re-derived: the RM failure-scan
 table, the exhaustive `n ≤ 7` coset census, the citation-graph findings, and every read-depth
 record. The rulings in §4 and the compression call in §5 are my judgment.
+
+---
+
+**Section 2 revisited, 2026-08-02.** The ruling that the Fisher remark stays with the stability
+theorem still holds, but its stated explanandum shifts again: C786 showed the region shrinkage is a
+uniformity-order effect rather than a party-count effect, so the remark's forward pointer and the
+recommended clarifying clause should be rewritten against the corrected region statement rather than
+the one reviewed here. The section 3 item asking to soften the abstract's neighbourhood phrasing is
+superseded — that sentence is being restated wholesale. Carried by C795. See
+`2026-08-01-c786-explicit-stability-threshold.md`.
