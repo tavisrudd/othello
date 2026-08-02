@@ -98,6 +98,22 @@ design-unforced cut moment.  Wording discipline throughout: "we prove",
 "to our knowledge", never "first", and no novelty claim on the elementary
 parts.
 
+**And red-team the move before the A/B, in a separate pass.**  The blind
+read measures how the reframing lands; it does not establish that the
+specialization holds, and a cold reader given two polished drafts will not
+reliably catch a hypothesis that fails at the predecessor's parameters.  So
+run an adversarial pass first, by an agent whose brief is to break the claim:
+take the predecessor's exact hypotheses and conclusion, instantiate our
+theorem at their parameters, and check the implication in both directions —
+does our statement really imply theirs, and does theirs assume anything ours
+does not supply.  Look specifically for a hypothesis that is free at our
+generality but binding at theirs, and for a conclusion of theirs that is
+strictly stronger on their domain.  Only a claim that survives that pass goes
+to the A/B; a broken one is dropped and the honest concession stays.  This
+ordering is deliberate — the lane has twice adopted a conclusion that a later
+pass narrowed, and a priority claim is far more costly to retract than a
+scope sentence.
+
 **Adoption gate for any judo reframing: blind A/B against the frozen
 baseline.**  A reframing is adopted on evidence, not on the proposer's
 enthusiasm.  Freeze the current committed framing as the anonymous baseline,
