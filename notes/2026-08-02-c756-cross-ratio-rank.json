@@ -1,0 +1,111 @@
+{
+  "identity": "with X=diag(z_i), Y=diag(z_i^q), the double displacement (Y M-M X) followed by (Y M-M Y) sends the cross-ratio matrix to E_ij=(z_i-z_j)(z_i-z_j^q), a rank-at-most-three evaluation matrix",
+  "inputs": [
+    "2026-08-02-c756-simultaneous-angle-moments.py"
+  ],
+  "rows": [
+    {
+      "candidate_count": 2,
+      "constant_vector_in_kernel": 2,
+      "matrix_size": 4,
+      "q": 5,
+      "rank_zero_row_profile": [
+        {
+          "candidates": 2,
+          "rank": 3,
+          "zero_row_sums": 4
+        }
+      ]
+    },
+    {
+      "candidate_count": 5,
+      "constant_vector_in_kernel": 0,
+      "matrix_size": 5,
+      "q": 7,
+      "rank_zero_row_profile": [
+        {
+          "candidates": 5,
+          "rank": 4,
+          "zero_row_sums": 1
+        }
+      ]
+    },
+    {
+      "candidate_count": 28,
+      "constant_vector_in_kernel": 0,
+      "matrix_size": 7,
+      "q": 11,
+      "rank_zero_row_profile": [
+        {
+          "candidates": 28,
+          "rank": 6,
+          "zero_row_sums": 1
+        }
+      ]
+    },
+    {
+      "candidate_count": 55,
+      "constant_vector_in_kernel": 0,
+      "matrix_size": 11,
+      "q": 19,
+      "rank_zero_row_profile": [
+        {
+          "candidates": 11,
+          "rank": 10,
+          "zero_row_sums": 1
+        },
+        {
+          "candidates": 44,
+          "rank": 11,
+          "zero_row_sums": 1
+        }
+      ]
+    },
+    {
+      "candidate_count": 39,
+      "constant_vector_in_kernel": 0,
+      "matrix_size": 13,
+      "q": 23,
+      "rank_zero_row_profile": [
+        {
+          "candidates": 26,
+          "rank": 11,
+          "zero_row_sums": 7
+        },
+        {
+          "candidates": 13,
+          "rank": 12,
+          "zero_row_sums": 1
+        }
+      ]
+    },
+    {
+      "candidate_count": 17,
+      "constant_vector_in_kernel": 0,
+      "matrix_size": 17,
+      "q": 31,
+      "rank_zero_row_profile": [
+        {
+          "candidates": 17,
+          "rank": 16,
+          "zero_row_sums": 1
+        }
+      ]
+    },
+    {
+      "candidate_count": 23,
+      "constant_vector_in_kernel": 0,
+      "matrix_size": 23,
+      "q": 43,
+      "rank_zero_row_profile": [
+        {
+          "candidates": 23,
+          "rank": 22,
+          "zero_row_sums": 1
+        }
+      ]
+    }
+  ],
+  "schema": "c756-cross-ratio-rank-v1",
+  "scope": "all normalized pairwise-resultant-character candidates in prime fields q in {5,7,11,19,23,31,43}"
+}

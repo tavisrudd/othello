@@ -33,7 +33,7 @@ This is the best new theorem-shaped gate exposed by the Tao pass.  In the
 bounded independent prime-field enumeration, (A2) holds in every row of both
 $q=5$ frames and fails in at least one row of every one of the 167
 pairwise-character candidates at $q>5$.  In five of the six tested fields it
-fails in every row of every candidate.  This is finite evidence, not an
+fails in exactly all but one row of every candidate.  This is finite evidence, not an
 all-field proof, but it sharply upgrades simultaneous angle bijections from a
 vague option to the leading exact-algebra route.
 
@@ -118,8 +118,8 @@ counts against the Rust saturated-internal audit.
 | 43 | 23 | 0 | 0 | $22^{23}$ |
 
 For example, $4^5$ means that each of the five candidates has four rows with
-nonzero first moment.  At $q=7,11,19,31,43$, every row of every candidate
-fails (A2).  The $q=23$ split is the only texture: 26 candidates have six
+nonzero first moment.  At $q=7,11,19,31,43$, exactly one row of every candidate
+satisfies (A2).  The $q=23$ split is the only texture: 26 candidates have six
 failing rows and 13 have twelve.  No tested candidate first survives (A2)
 and then fails only at a higher moment.
 
@@ -217,7 +217,7 @@ novelty claim.
 building machinery for all of (A1).  It already separates the two positive
 frames from every tested negative candidate.  The row-count profile also
 shows that the obstruction is not a fragile one-row normalization: except at
-$q=23$, every row of every negative candidate fails.  Hence higher angle
+$q=23$, all but one row of every negative candidate fail.  Hence higher angle
 moments should remain parked until the first-moment matrix route is exhausted.
 
 **TT.**  Stop treating spectral tightness as the whole saturated structure.

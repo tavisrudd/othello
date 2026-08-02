@@ -26,9 +26,9 @@ at \(k = 9\).
 If the theorem lands, the packaging is a **new** headline paper (rigidity + all-k
 classification + golden operator), not a retrofit into Paper I.
 
-## Current state (2026-08-01)
+## Current state (2026-08-02)
 
-Seventeen research passes complete; the theorem is **not** proved. Reports:
+Eighteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -45,7 +45,8 @@ Seventeen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-probability-cheap-tests.md`, and
 `notes/2026-08-01-c756-kernel-curves.md`, and
 `notes/2026-08-01-c756-coordinate-free-upgrades.md`, and
-`notes/2026-08-02-c756-tt-angle-bijections.md`.
+`notes/2026-08-02-c756-tt-angle-bijections.md`, and
+`notes/2026-08-02-c756-cross-ratio-rank.md`.
 
 Branch ledger:
 
@@ -312,11 +313,25 @@ What the TT simultaneous-angle pass adds:
 - the first new equation \(\sum_{j\ne i}\alpha_{ij}=0\) holds in every row of both
   \(q=5\) frames and fails in at least one row of every one of the 167 normalized
   pairwise candidates at \(q=7,11,19,23,31,43\); in all tested fields except \(q=23\)
-  it fails in every row of every candidate;
+  it fails in all but one row of every candidate;
 - the leading saturated proof targets are now the rank of the cross-ratio matrix
   \((\alpha_{ij})\) and a degree-bounded globalization of its first cofactor on the arc
   divisor.  Sparse signed-Paley-trade classification is the fallback; higher angle
   moments wait until the first moment stalls.
+
+What the cross-ratio rank pass adds:
+
+- with (X=\operatorname{diag}(z_i)), (Y=\operatorname{diag}(z_i^q)), the
+  cross-ratio matrix has an exact rank-three double displacement;
+- a hypothetical first-moment kernel therefore satisfies an exact quadratic
+  kernel-propagation identity, giving the correct low-degree input for cofactor
+  globalization;
+- bare ordinary rank closes negative as the obstruction: singular negative candidates
+  occur in every tested field, and (q=23) has rank-(k-2) candidates with seven
+  already-vanishing rows;
+- in the rank-(k-1) branch the target is alignment of the adjugate kernel line with
+  the constant line; the rank-(\le k-2) branch needs a second-compound argument or
+  exclusion from the full angle-binomial identities.
 
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
@@ -372,6 +387,9 @@ closed-negative.
 Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
 now has the same theorem-shaped status the saturated-external branch had two passes before
 closure, but the tight balance theorem proves that another spectral bound cannot finish it.
+The bare cross-ratio nonsingularity shortcut is now closed: exploit the exact rank-three
+double displacement to globalize the adjugate kernel line, with a separate second-compound
+gate for possible nullity at least two.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot
 close.  The exhaustive masked-direction audit kills threshold unification but promotes
@@ -380,7 +398,7 @@ sharpens but does not yet raise the 10--15% full-theorem odds.  The probability 
 leave one bounded global lead but no new theorem.  Cheap
 hygiene still owed before a later end-to-end handoff is one explicit
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
-read of the full seventeen-pass argument; neither item reopens a closed mathematical branch.
+read of the full eighteen-pass argument; neither item reopens a closed mathematical branch.
 
 Decision split: do not price the saturated crown and the full theorem as one outcome.
 The realistic publishable narrowing is the **complete saturated classification** — over
