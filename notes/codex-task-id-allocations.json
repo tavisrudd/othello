@@ -2339,8 +2339,17 @@
       "last": 818,
       "purpose": "audit and promote the C814 mixed-plane theorem package, beginning with an exact holonomy-defect stability probe and gating manuscript A/B on novelty clearance",
       "sequence": 260
+    },
+    {
+      "count": 3,
+      "first": 819,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 821,
+      "purpose": "Beyond-four PRS Version 2: cheap recursive-polar refactor, exact all-level carrier geometry, and final synthesis",
+      "sequence": 261
     }
   ],
-  "next_id": 819,
+  "next_id": 822,
   "schema": "codex-task-id-allocations-v1"
 }
