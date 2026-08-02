@@ -30,10 +30,10 @@ def determinant (matrix : Matrix2) : Field13 :=
 def projectiveMatrices : List Matrix2 :=
   let field := fieldElements
   let first := field.flatMap fun b => field.flatMap fun c =>
-    field.map fun d => ⟨1, b, c, d⟩
-  let second := field.flatMap fun c => field.map fun d => ⟨0, 1, c, d⟩
-  let third := field.map fun d => ⟨0, 0, 1, d⟩
-  (first ++ second ++ third ++ [⟨0, 0, 0, 1⟩]).filter fun matrix =>
+    field.map fun d => (⟨1, b, c, d⟩ : Matrix2)
+  let second := field.flatMap fun c => field.map fun d => (⟨0, 1, c, d⟩ : Matrix2)
+  let third := field.map fun d => (⟨0, 0, 1, d⟩ : Matrix2)
+  (first ++ second ++ third ++ [(⟨0, 0, 0, 1⟩ : Matrix2)]).filter fun matrix =>
     determinant matrix != 0
 
 /-- Normalize a nonzero homogeneous triple by its first nonzero coordinate. -/

@@ -22,13 +22,13 @@ def minimumSupportCodes : List Nat :=
   (supportOrbit representativeS4 ++ supportOrbit representativeDihedralA ++
     supportOrbit representativeDihedralB ++ supportOrbit representativeDihedralC).eraseDups
 
-/-- Pair concurrence in the encoded 364-support hypergraph. -/
-def pairConcurrence (first second : Nat) : Nat :=
-  minimumSupportCodes.countP fun support => support.testBit first && support.testBit second
+/-- Pair concurrence in an explicitly supplied encoded support hypergraph. -/
+def pairConcurrenceIn (supports : List Nat) (first second : Nat) : Nat :=
+  supports.countP fun support => support.testBit first && support.testBit second
 
-/-- Triple concurrence in the encoded 364-support hypergraph. -/
-def tripleConcurrence (first second third : Nat) : Nat :=
-  minimumSupportCodes.countP fun support =>
+/-- Triple concurrence in an explicitly supplied encoded support hypergraph. -/
+def tripleConcurrenceIn (supports : List Nat) (first second third : Nat) : Nat :=
+  supports.countP fun support =>
     support.testBit first && support.testBit second && support.testBit third
 
 /-- Whether two indexed internal points lie on a common passant. -/
@@ -43,13 +43,23 @@ def passantRowCodes : List Nat :=
 
 /-- Every geometric passant row has seven points and zero concurrence on each of its triples. -/
 def passantRowTripleCheck : Bool :=
+  let supports := minimumSupportCodes
   passantRowCodes.all fun row =>
     let points := (List.range 78).filter row.testBit
     points.length == 7 &&
       (points.sublistsLen 3).all fun triple =>
         match triple with
-        | [first, second, third] => tripleConcurrence first second third == 0
+        | [first, second, third] => tripleConcurrenceIn supports first second third == 0
         | _ => false
+
+/-- Exhaustive pair-concurrence comparison with geometric passant joins. -/
+def pairRecoveryCheck : Bool :=
+  let supports := minimumSupportCodes
+  (List.range 78).all (fun first =>
+    (List.range 78).all fun second =>
+      first == second ||
+        (hasPassantJoin first second ==
+          ([7, 9, 12].contains (pairConcurrenceIn supports first second))))
 
 /-- The four projective orbits contain 364 distinct supports. -/
 theorem minimumSupportCodes_length : minimumSupportCodes.length = 364 := by
@@ -57,11 +67,7 @@ theorem minimumSupportCodes_length : minimumSupportCodes.length = 364 := by
 
 /-- Pair concurrence recovers whether the join of two distinct internal points is passant. -/
 theorem pair_concurrence_recovers_passant_join :
-    (List.range 78).all (fun first =>
-      (List.range 78).all fun second =>
-        first == second ||
-          (hasPassantJoin first second ==
-            ([7, 9, 12].contains (pairConcurrence first second)))) = true := by
+    pairRecoveryCheck = true := by
   native_decide
 
 /-- The 78 geometric passant rows have the required seven-point zero-triple signatures. -/
