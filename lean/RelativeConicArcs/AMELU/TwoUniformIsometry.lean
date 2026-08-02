@@ -99,7 +99,7 @@ theorem expectation_sum {ι : Type*} (ψ : Label Site Level → ℂ) (s : Finset
       rw [Finset.sum_insert ha, Finset.sum_insert ha, expectation_add, ih]
 
 /-- Dividing every summand by a fixed scalar divides the sum. -/
-private theorem sum_div_const {ι : Type*} (s : Finset ι) (f : ι → ℂ) (c : ℂ) :
+theorem sum_div_const {ι : Type*} (s : Finset ι) (f : ι → ℂ) (c : ℂ) :
     ∑ i ∈ s, f i / c = (∑ i ∈ s, f i) / c := by
   simp only [div_eq_mul_inv, ← Finset.sum_mul]
 
