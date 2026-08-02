@@ -3,8 +3,8 @@
 **Lane:** `clebsch`
 
 **Status:** active; C752 is complete and its implementation interface is
-frozen.  The finite prose-source repairs and R1 are complete; continue with
-R2--R4, then O1--O8, which must remain packet-gated.
+frozen.  The finite prose-source repairs, R1--R4, and O1--O4 are complete;
+continue with O5--O8, which must remain packet-gated.
 
 ## Current implementation state
 
@@ -47,17 +47,21 @@ in `~/.cache/othello-lean-build/run-20260802-052520-f9e2ac88`; the printed axiom
 set is exactly `propext`, `Classical.choice`, `Quot.sound`,
 `dye1991_brianchon_bound`, and `dye1991_equality_classification`.
 
-O1 source work has begun at
-`RelativeConicArcs/PaperIOrientationCover.lean`.  Its current untracked base
-constructs the alternating group on the five-letter affine line, embeds the
-order-ten dihedral action by translations and affine reflections, defines the
-order-five rotation subgroup, and derives the `A5/C5 → A5/D5` two-point
-fibres from coset factorization.  The staged source now also constructs the two
-twenty-five-element inverse-stable `C5` double cosets, their self-paired
-five-valent orbitals, and the regular-action proof that each orbital meets every
-other antipodal fibre exactly once.  Its first elaboration exposed incompatible
-coset APIs and unresolved placeholders in the staged draft; O1 is under repair
-and is not evidence until its replacement owning build and audit pass.
+O1--O4 are complete.  O1 constructs the `A5/C5 → A5/D5` antipodal cover and
+the two self-paired five-valent orbitals in
+`RelativeConicArcs/PaperIOrientationCover.lean` (`716fe27a`).  O2 derives the
+signed orbital matrix and golden square from the orbital pentagon in
+`RelativeConicArcs/PaperIOrientationPentagon.lean` (`f22175ff`).  O3 proves
+switching-invariant triangle holonomy, the support cubic, and the vanishing
+lower signed moments in `RelativeConicArcs/PaperIOrientationHolonomy.lean`
+(`50ff55ef`).  O4 proves the full diagonal determinant pencil and its odd part
+in `RelativeConicArcs/PaperIOrientationDeterminant.lean` (`8378023a`).  Its
+determinant coefficients come from multilinearity, the conference inverse,
+Schur--Jacobi complementation, and a reducible ten-positive-triple evaluator;
+no large determinant certificate is used.  The clean owning build and
+trace-only aggregate gate passed at
+`~/.cache/othello-lean-build/run-20260802-183008-bed33545`.  The two terminal
+theorems print exactly `propext`, `Classical.choice`, and `Quot.sound`.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
