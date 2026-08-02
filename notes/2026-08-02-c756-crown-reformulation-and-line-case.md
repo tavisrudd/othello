@@ -500,9 +500,17 @@ the number of cross pairs, so they partition them.  Every direction therefore oc
 once per row and once per column, and \(z_i-z_i^q\in s\mathbb F_q\) gives the constant
 diagonal. \(\square\)
 
-Two remarks.  The row half is the coherence-only analogue of the forced angle bijection
-of the twenty-second pass, which had to invoke the arc condition; the **column half has
-no earlier counterpart** and is new.  Second, the obvious group obstruction is already
+Three remarks, one of them a correction to a first version of this claim.  Writing
+directions multiplicatively via \(D(i,j)=(z_i-z_j^q)^{q-1}\) in the norm-one circle,
+one has unconditionally \(z_j-z_i^q=-(z_i-z_j^q)^q\) and hence
+\(D(j,i)=D(i,j)^{-1}\), while the good set \(G\) is closed under inversion.  So the
+**column condition follows formally from the row condition** and is not independent
+content; only the row condition carries information.  What *is* new is that the row
+condition here follows from coherence alone by the Fourier argument, whereas the forced
+angle bijection of the twenty-second pass concerned the different quantity
+\(f_j(z_i)^{1-q}\) and had to invoke the arc condition.  Its geometric reading is
+clean: **no point of \(Z\) lies on an \(\mathbb F_q\)-line containing two points of
+\(Z^q\)**.  Third, the obvious group obstruction is already
 satisfied and so gives no cheap kill: the product of a row is
 \(\prod_{j\ne i}(z_i-z_j^q)=(\gamma-\gamma^q)/(z_i-z_i^q)\in\mathbb F_q^\times\), i.e.
 the trivial direction, and the product of all class-\(-\delta\) directions in
@@ -592,9 +600,10 @@ form, not conversely — so excluding coherent systems is strictly stronger than
 The Tao question about where the argument is wasteful has a clear answer: the reduction
 to two clique orbits uses only that \(Z\) is a clique, discarding the whole bipartite
 half of the crown.  Acting on that produced Theorem 5 (§6a): the cross-direction array
-is a Latin square of order \(n\) with constant diagonal.  Its row half is the
-coherence-only version of the earlier forced angle bijection and its column half is new,
-and — decisively — it is the internal analogue of the complete-mapping structure that
+is a Latin square of order \(n\) with constant diagonal.  Its informative half is the
+row condition, obtained from coherence alone rather than from the arc condition as in
+the earlier angle bijection — the column half turns out to follow formally.  Decisively,
+the resulting family of \(n-1\) derangements is the internal analogue of the complete-mapping structure that
 closed the saturated-external branch, so it offers an endgame that bypasses the gap
 conjecture entirely.  A second Tao-style reading worth recording: the master polynomial
 \(G=(R-\gamma)(R-\gamma^q)\) of the fiber route is precisely the Rédei polynomial of
