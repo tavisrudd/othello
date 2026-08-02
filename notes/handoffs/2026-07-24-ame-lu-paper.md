@@ -22,7 +22,18 @@ is retained.  Two framing corrections to the source material are mandatory,
 and the approximate-representation stability literature remains unsearched.
 See `2026-08-01-c775-two-uniform-rigidity-literature-audit.md`.
 
-**C774, C776, C777 open (2026-08-01): 2-uniform rigidity upgrade.**  An external
+**C774 closed (2026-08-02): the claims hold, the selling point does not.**
+All four results survive step-by-step checking, with named repairs.  The
+advertised party-count independence is narrower than stated: the ratio
+constant is independent of the party count, but the certified neighbourhood
+shrinks like its inverse square root, and an explicit Reed--Muller family
+attains that rate, so no uniform version exists and the manuscript must not
+claim party-count-independent certification.  The cross-programme falsifier
+did not falsify; it produced a sharper theorem, that a binary code's lift
+lattice has full rank exactly when its dual distance is at least three.
+See `2026-08-01-c774-two-uniform-rigidity-red-team.md`.
+
+**C776, C777 open (2026-08-01): 2-uniform rigidity upgrade.**  An external
 Fable session produced a discreteness theorem requiring only 2-uniformity (no
 stabilizer hypothesis), an explicit stability constant independent of the party
 count, an exact quantum-Fisher isotropy proposition, and a finiteness statement
