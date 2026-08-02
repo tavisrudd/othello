@@ -1,7 +1,13 @@
 # C809 — Four-shadow characterization of the golden operator
 
 **Lane:** `clebsch`  
-**Status:** queued; mathematics only; cheap falsifiers first; paper promotion excluded
+**Status:** complete; exact math-only characterization frozen; paper promotion excluded
+
+## Outcome
+
+The four shadows reduce to one nontrivial comparison: the third-compound diagonal and commutator Pfaffian agree universally, while the cross-golden determinant follows once the quadratic splitting exists. Nonzero proportionality between the Pfaffian/compound cubic and the triangle cubic forces $A^2=\lambda I$ for every zero-diagonal symmetric matrix with nonzero off-diagonal entries. On scalar sign matrices it characterizes the unique order-six conference switching class, with the sign distinguishing its two outer orientations. The equality locus is projectively isolated at both golden orientations inside the full weighted ambient space.
+
+Full theorem, proofs, exact census, tangent certificate, bounded literature boundary, and mystery ledger: `notes/2026-08-02-c809-four-shadow-characterization.md`.
 
 ## Objective
 

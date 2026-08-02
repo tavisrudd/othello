@@ -1,0 +1,180 @@
+{
+  "definitions": {
+    "hodge_orientation": "compound coefficient = -sgn(S^c,S) det A[S^c,S]",
+    "matrix_domain": "symmetric 6x6, zero diagonal",
+    "signing_gauge": "a_0i=1 for i=1,...,5; ten remaining edges in {+1,-1}"
+  },
+  "degenerate_zero_shadow": {
+    "S5_graph_isomorphism_orbits": 14,
+    "gauge_signings": 172,
+    "matrix_rank_histogram": {
+      "6": 172
+    }
+  },
+  "oriented_representatives_in_gauge": 6,
+  "representative": [
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      1,
+      1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      1,
+      0,
+      -1,
+      1,
+      -1
+    ],
+    [
+      1,
+      1,
+      -1,
+      0,
+      -1,
+      1
+    ],
+    [
+      1,
+      -1,
+      1,
+      -1,
+      0,
+      1
+    ],
+    [
+      1,
+      -1,
+      -1,
+      1,
+      1,
+      0
+    ]
+  ],
+  "schema": "c809-four-shadow-characterization-v1",
+  "signing_census": {
+    "all_1024_gauge_signings": 1024,
+    "conference": 12,
+    "nonzero_proportional": 12,
+    "opposite_compound_equals_minus_4_triangle": 6,
+    "oriented_compound_equals_4_triangle": 6,
+    "zero_compound_shadow": 172
+  },
+  "six_test_recognition_packet": {
+    "survivors_for_each_of_20_coefficient_choices": {
+      "012": 6,
+      "013": 6,
+      "014": 6,
+      "015": 6,
+      "023": 6,
+      "024": 6,
+      "025": 6,
+      "034": 6,
+      "035": 6,
+      "045": 6,
+      "123": 6,
+      "124": 6,
+      "125": 6,
+      "134": 6,
+      "135": 6,
+      "145": 6,
+      "234": 6,
+      "235": 6,
+      "245": 6,
+      "345": 6
+    },
+    "tests": "five first-row balance equations plus any one oriented shadow coefficient"
+  },
+  "tangent_ranks": {
+    "generalized_conference_rank": 11,
+    "generalized_conference_tangent_dimension": 5,
+    "generalized_conference_variables_including_lambda": 16,
+    "projective_tangent_dimension": 0,
+    "rank_at_opposite_orientation": 14,
+    "rank_at_oriented_golden_point": 14,
+    "variables_for_shadow_equality": 15
+  },
+  "universal_identity_check": {
+    "coefficients_checked": 20,
+    "generic_integer_matrix": [
+      [
+        0,
+        2,
+        -1,
+        3,
+        1,
+        -2
+      ],
+      [
+        2,
+        0,
+        1,
+        -2,
+        4,
+        1
+      ],
+      [
+        -1,
+        1,
+        0,
+        2,
+        -3,
+        1
+      ],
+      [
+        3,
+        -2,
+        2,
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        4,
+        -3,
+        1,
+        0,
+        -1
+      ],
+      [
+        -2,
+        1,
+        1,
+        2,
+        -1,
+        0
+      ]
+    ],
+    "oriented_pfaffian_equals_compound_diagonal": true,
+    "translation_derivative_coefficients": {
+      "01": -10,
+      "02": -3,
+      "03": -27,
+      "04": 16,
+      "05": -12,
+      "12": -17,
+      "13": -28,
+      "14": -16,
+      "15": -11,
+      "23": -12,
+      "24": -12,
+      "25": 10,
+      "34": -13,
+      "35": -14,
+      "45": -1
+    },
+    "translation_formula": "sum_{k not i,j} tau_ijk = a_ij (A^2)_ij"
+  }
+}
