@@ -549,3 +549,118 @@ genuine synergy in the current bundle, and as a standalone it would be a solid b
 unremarkable PRA paper. If adoption does not happen, keep it as one paper and send it to
 Quantum anyway — without the criterion, Paper A alone is thinner than the sum and the
 bundle's breadth is then its best argument.
+
+---
+
+# Red team on the adoption commit 7c15ec3d
+
+Scope cut by coordinator budget call: items 1 and 4 in full; items 2, 3 and 5 were
+already analysed before the cut and are reported briefly; grade and venue re-read
+dropped, earlier answers stand.
+
+## 1. The parity argument in rem:arbitrary-dimension — DOES NOT DISCHARGE THE OBLIGATION. Confirmed break, with the correct replacement.
+
+The remark's care sentence argues: axis-permuting ⇒ label map is an additive
+automorphism ⇒ "preserves the commutator pairing up to a unit and lifts" ⇒ Clifford in
+the standard sense. Three defects, the first two mathematical:
+
+- **"Up to a unit" is wrong, in both directions.** Conjugation preserves the commutator
+  scalar *exactly*: `U(W_aW_bW_a†W_b†)U† = ω^{⟨a,b⟩}I` on both sides, so
+  `⟨σa,σb⟩ = ⟨a,b⟩` mod d exactly. And a unit-multiplier similitude would NOT suffice:
+  the Clifford group realizes symplectic maps, not similitudes, so as written the
+  chain asserts a lifting that the cited-in-spirit theory does not provide.
+- **Lifting is the wrong argument shape and is incomplete even if repaired.** Producing
+  some Clifford V with the same label action σ does not by itself put U in the Clifford
+  group; one must also show UV† is Pauli-times-phase. That step is provable (UV† fixes
+  every Weyl axis; the phase character a ↦ c_a is then the symplectic pairing against
+  some b by additivity, so UV† = phase·W_b since the Weyl system is irreducible), but
+  the remark neither states it nor proves the lifting surjectivity onto the label
+  automorphism group at composite d — which is itself the delicate even-d point
+  (Appleby-type Z_{2d} structure) and is nowhere established in the paper.
+- **"The parity of d enters only through which root of unity records the pairing" is
+  false**: the pairing is recorded by a d-th root ω^{⟨a,b⟩} at every d; the 2d-th roots
+  enter through element orders and lift phases, not the pairing.
+
+**The correct argument needs no lifting at all and fits in the same remark** (this is
+the order argument the first red-team pass identified as the owed obligation): if
+`U W_v U† = c W_w`, raise to the order of W_v. For odd d, `W_v^d = I`, so `c^d = 1` and
+U literally normalizes the Pauli group with phase group the d-th roots. For even d,
+`W_v^d = (−1)^{ab}I`, so `W_v^{2d} = I` and `c^{2d} = 1`; with the standard even-d
+convention in which the Pauli group carries the 2d-th roots of unity
+(Hostens–Dehaene–De Moor), U again normalizes it. Membership in the normalizer is the
+standard Clifford condition; done. Replace the care sentence with this. Note the
+realizability direction (which label maps ARE realized) is never needed anywhere in the
+subsection, so nothing else depends on the deleted lifting claim.
+
+## 4. What now contradicts what — the adoption is incoherent with three layers of the paper's own control documents
+
+Confirmed contradictions (checked directly):
+
+- **theorem-map.md has no row for the adopted package.** The map's own preamble says it
+  "controls which source results may appear as manuscript theorems"; its rows end at
+  C633/C796-era packages and contain no entry for the partial-Weyl criterion, the
+  recognition group, the generation corollary, the minimal-support converse, the CSS
+  corollary, or the arbitrary-dimension remark. By the map's stated rule, Section 3 now
+  contains six numbered results the map does not authorize. A C804-sourced row (status,
+  exact boundary — including `N ≥ 2`, `r ≥ 3` or `N = 2`, prime field for the CSS
+  corollary, the Z_d scope of the remark — and evidence type "conceptual proof in the
+  text, no certificate, no Lean") must be added.
+- **Section 8's claim-to-trust map omits the new subsection entirely.** Its enumerated
+  paragraphs cover rigidity/atlas/no-go, discreteness/stability, pencil, separators,
+  isodual groups, Clebsch, party extensions — and nothing for
+  `subsec:recognition`. Since the map is framed as the complete claim crosswalk
+  ("the corresponding certificate entry points and formal theorem names appear in the
+  claim crosswalk"), silence now reads as an unaccounted claim class. One paragraph is
+  needed: manuscript-only proofs, no certificate, no Lean module, and — if accurate —
+  a sentence that the Lean axis-recovery core covers Lemma diagonal-axes but not the
+  partial-Weyl application of it.
+- **The introduction still concedes what Section 3 now refutes.** `01-introduction.tex`
+  carries the version-a paragraph ("The LU-to-LC conclusion … is therefore already
+  covered by their result") with no mention of the new subsection, while Section 3 now
+  proves the criterion that subsumes their Theorem 1 and credits Chang–Jing. Until the
+  repaired version-b paragraph (or equivalent) replaces it, the paper's positioning
+  contradicts its own contents — this is the single worst referee impression available.
+  version-b's references (`cor:recognition-generation`, `prop:partial-weyl-marginal`)
+  now resolve, so the A/B is unblocked.
+
+Provisional, not checked before the budget cut: (i) whether
+`formal-statement-adequacy.md`, `claim-proof-novelty-ledger.md`, or
+`verification-map.md` refer to Section 3 statements by *number* rather than label —
+the insertion renumbers every theorem-counter item in Section 3 after 3.4, so any
+numeric reference in those three files, in `supplement/EVIDENCE.md`, or in the Lean
+crosswalk is now stale; grep for `3\.[5-9]` and `3\.1[0-9]` in all five places before
+calling this coherent. (ii) Whether the release manifest's byte-hash identity makes the
+committed PDF regeneration a required step elsewhere. Neither was verified.
+
+## Items 2, 3 and 5 — already analysed before the cut, reported in brief
+
+- **(2) Z_d substitution in prop:partial-weyl-marginal: survives.** The r ≥ 3 proof
+  uses only `d^{-1/2}W_v` orthonormality (`Tr(W_v†W_w) = dδ`, true at every d), linear
+  independence, and Lemma diagonal-axes, which is stated for arbitrary N-dimensional
+  inner-product spaces and is field-free; the N = 2 proof needs only tracelessness of
+  nonidentity Weyl operators (any d) and product-operator factorization. "Verbatim"
+  is earned, with q^{-1/2} read as d^{-1/2}. One nit: the diagonal-axes "Consequently"
+  clause is phrased for one set of spaces while the application maps E_i → E'_i;
+  intrinsic-axes on both sides bridges it, worth one clause, not a break.
+- **(3) The converse clause in lem:minimal-support-charts: quantifier gap, confirmed
+  small break.** The partial-Weyl definition admits |P| = 1, and a set S with
+  L(S) = {0} has ρ_S maximally mixed — partial-Weyl diagonal under the letter of the
+  definition with the trivial index set — yet is not a minimal support. The converse
+  must say "with at least two terms" (equivalently L(S) ≠ 0, equivalently N ≥ 2). With
+  that added, the proof is right, and the implicit "in this way" scoping can be
+  discharged by noting the Weyl expansion of a stabilizer marginal is unique, so any
+  partial-Weyl presentation forces P ≅ L(S) with the coordinate projections.
+- **(5) Credits: one confirmed misstatement, one internal tension.** (a) The Gross–Van
+  den Nest sentence — "Λ_i is nontrivial at every party of a fully entangled qubit
+  stabilizer state" — is false as literally written: Λ_i depends on the unitary, and
+  their theorem is about product unitaries relating TWO fully entangled qubit
+  stabilizer states on at least three qubits (their n ≥ 3 is load-bearing: at n = 2,
+  U ⊗ Ū on a Bell state has trivial Λ for generic U). Rescope the sentence to the
+  two-stabilizer-state, n ≥ 3 setting. (b) "The mechanism … is due to Chang and Jing"
+  sits in tension with the same section's opening, which credits the diagonal-tensor
+  axis mechanism to Rains and Van den Nest–Dehaene–De Moor; what is Chang and Jing's is
+  the general Kruskal-type uniqueness machinery on generic (non-diagonal) coefficient
+  tensors. Insert "general" / "Kruskal-type" so the two attributions stop competing.
+  (c) The Englbrecht–Kraus sentence and placement are accurate; the two new bib entries
+  match the audit's pinned identifiers (E–K as arXiv-only @misc is conservative but
+  fine).
