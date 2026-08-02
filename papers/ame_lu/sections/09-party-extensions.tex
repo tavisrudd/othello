@@ -1,9 +1,50 @@
 \section{Computed party-permutation extensions}
 \label{sec:party-extensions}
 
-This optional appendix records finite examples of the projective extension
-in Corollary~\ref{cor:discrete-lu-symmetry}.  It may be skipped without
-affecting the uniform rigidity, atlas, or transversal-group theorems.
+This optional appendix records the splitting obstruction for the projective
+party-permutation extension of Corollary~\ref{cor:discrete-lu-symmetry},
+together with finite examples of it.  It may be skipped without affecting
+the uniform rigidity, atlas, or transversal-group theorems.
+
+\subsection*{The nonabelian factor set}
+
+Keep the notation of Corollary~\ref{cor:discrete-lu-symmetry}: \(\Gamma\)
+is the fixed-party projective product-unitary symmetry group,
+\(\widetilde\Gamma\) allows party motion, and \(\Pi\) is the realized
+permutation group, so that
+\(1\to\Gamma\to\widetilde\Gamma\to\Pi\to1\) is exact.
+
+The extension has a section-free outer action
+\(\Pi\to\operatorname{Out}(\Gamma)\): conjugation by any lift of
+\(\pi\in\Pi\) gives an automorphism of \(\Gamma\), and changing the lift
+changes that automorphism by an inner automorphism, because elements of the
+kernel act by inner automorphisms.  For a normalized set-theoretic section
+\(s(1)=1\), write
+\[
+  s(\pi)s(\rho)
+    =f_s(\pi,\rho)s(\pi\rho),\qquad f_s(\pi,\rho)\in\Gamma .
+\]
+Then \(f_s(1,\pi)=f_s(\pi,1)=1\), and, with \(\alpha_\pi\) denoting
+conjugation by \(s(\pi)\), associativity of three chosen lifts gives
+\[
+ f_s(\pi,\rho)f_s(\pi\rho,\upsilon)
+ =\alpha_\pi\!\left(f_s(\rho,\upsilon)\right)
+   f_s(\pi,\rho\upsilon).
+\]
+If another normalized section is \(s'(\pi)=b(\pi)s(\pi)\) with
+\(b(1)=1\), then substituting and commuting no kernel factors gives
+\[
+ f_{s'}(\pi,\rho)
+ =b(\pi)\alpha_\pi\!\left(b(\rho)\right)
+   f_s(\pi,\rho)b(\pi\rho)^{-1}.
+\]
+The order of the factors is essential because \(\Gamma\) need not be
+abelian.  The factor set is identically one precisely when the section
+preserves multiplication, so the extension splits exactly when \(f_s\) can
+be changed to the constant identity factor set by such a normalized \(b\).
+That criterion is what the computed rows below verify.
+
+\subsection*{Computed rows}
 
 \begin{corollary}[Computed party-extension splittings]
 \label{cor:computed-party-splitting}

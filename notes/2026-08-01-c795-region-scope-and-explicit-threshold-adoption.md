@@ -2,7 +2,7 @@
 
 **Lane**: `ame-lu`. Allowed paths: `papers/ame_lu/**` and this report stem.
 
-Status: IN PROGRESS. Written incrementally; the item ledger in §1 is the resume point.
+Status: COMPLETE. All ten brief items discharged; the paper's gate passes warning-free.
 
 ## 0. Sources read
 
@@ -33,8 +33,8 @@ by hand as recorded in §2. No evidence bundle ships because no claim needs one.
 | 9 | Quantitative-axes trust gap | CLOSED by verification, §2.4 |
 | 2 | Explicit threshold and the quantized-overlap lemma | DONE |
 | 3 | Uniform-separation corollary | DONE |
-| 8b | Move nonabelian factor-set displays to the party-extensions appendix | TODO |
-| 10 | Sync theorem map, claim ledger, verification map | PARTIAL (theorem map done; claim ledger and verification map TODO) |
+| 8b | Move nonabelian factor-set displays to the party-extensions appendix | DONE |
+| 10 | Sync theorem map, claim ledger, verification map | DONE |
 
 Front matter: the abstract (`main.tex`) and introduction were aligned to the corrected region claim
 by the coordinator while this task was interrupted. That wording is accurate and I have kept it.
@@ -232,26 +232,93 @@ of the paragraph after `cor:approximate-decomposition`'s proof; the non-explicit
 abstract, introduction and conclusion each gained the uniform-separation statement, since it is the
 memorable form of the result and the front matter previously said nothing about it.
 
-## 4. Still to do
+### 3.4 Factor set relocated, ledgers synced (this commit)
 
-Item 8b and the remainder of item 10. Notes for whoever continues:
+`cor:discrete-lu-symmetry` keeps its two scalar-torus short exact sequences, the finiteness and
+component statements, and the third sequence through the realized permutation group `Π`, together
+with the sentence that the extension splits exactly when the realized permutations admit a
+homomorphic choice of lifts. The outer action, the normalized factor set, the associativity and
+change-of-section laws, and the trivializability criterion move to a new opening subsection of
+`sec:party-extensions`, immediately before the computed rows that verify that criterion. The
+corollary's proof loses the corresponding three sentences and gains nothing; the appendix carries
+the derivations in prose. One cross-reference inside the proof of
+`cor:diagonal-isodual-transversal-group` was repointed from "stated there" to the appendix.
 
-- Item 8b touches `theorem-map.md`'s `cor:discrete-lu-symmetry` label, which names the kernel-checked
-  factor-set terminals `genericPartyPermutationOuterAction` and the three
-  `genericPartyPermutationFactorSet_*` declarations. Those terminals do not change — only where the
-  manuscript displays them — so the formalization ledger's row for that corollary stands as written.
-- Nothing in this pass changes what is kernel checked. `formalization-ledger.md` is untouched and
-  must stay untouched: the new material (moment route, ceiling, bipartition route, general-`m`
-  intertwiner, threshold) is all outside the Lean development, and the ledger's existing row already
-  says the intertwiner bound and the stability estimate are not formalized.
+**This changes nothing about what is kernel checked, and `formalization-ledger.md` is untouched.**
+The terminals `genericPartyPermutationOuterAction`,
+`genericPartyPermutationFactorSet_associativity`, `genericPartyPermutationFactorSet_change`, and
+`genericPartyPermutationFactorSet_trivializable_iff_splits` prove exactly the statements that moved;
+only the page they appear on changed. The theorem map's `cor:discrete-lu-symmetry` label now records
+the split location while naming the same terminals. Everything else added by this task — the moment
+route, the ceiling, the bipartition route, the general-`m` intertwiner bound, the overlap gap, the
+separation corollary, and the explicit threshold — lies outside the Lean development, and the
+ledger's existing row for that block already says the stability estimate and the intertwiner bound
+are not formalized. That row remains accurate without edit.
 
-## 5. Validation
+Ledger sync: `theorem-map.md` gains source rows for C786/C795 and C796, a corrected C774/C775/C776
+row (its "shrinks like `n^{-1/2}` and that rate is attained" clause was the adopted form of the scope
+error), a rewritten entanglement-only hierarchy entry, a rewritten stability boundary row, and
+corrected exclusions. `claim-proof-novelty-ledger.md` and `verification-map.md` list every new label
+and record that none has Lean coverage and none needs a replay.
+
+## 4. Validation
 
 `make -C papers/ame_lu check` after each item: PASS, exit 0, warning-free (the Makefile fails on any
 Overfull, Underfull, LaTeX Warning, Package Warning, undefined reference, or undefined citation).
 Manual equation tags `(3.1)`–`(3.16)` remain in document order; the new material uses no manual tags,
 so nothing needed renumbering.
 
-## 6. Mystery ledger
+The standalone mirror `~/src/math-papers/ame-lu` was not touched, as required. It will need the
+whole of this pass forward-committed: `sections/03-lu-rigidity.tex` (the rewritten region material,
+the bipartition route, the general-`m` intertwiner, the overlap gap, the separation corollary, the
+explicit threshold, and the trimmed discreteness corollary), `sections/09-party-extensions.tex`,
+`sections/01-introduction.tex`, `sections/07-conclusion.tex`,
+`sections/08-verification-boundary.tex`, `main.tex`, the three ledgers, and the rebuilt PDF.
 
-Deferred to the closeout pass, after items 2, 3, 8b and 10.
+## 5. Mystery ledger
+
+- **Is the `n^{-1/2}` shrinkage of C774 a party-count effect?** *Settled, negatively.* It is a
+  bounded-uniformity-order effect. The Reed–Muller family has uniformity order three at every
+  length, and the manuscript now proves that where it previously asserted 2-uniformity. For AME
+  states, whose uniformity order is half the party count, the certified defect neighbourhood has
+  constant radius. C774's ledger request for a matching lower bound is retired rather than answered.
+- **Why is the overlap gap a constant of the characteristic rather than something that degrades with
+  the party count?** *Settled.* Stabilizer overlaps are quantized by a subgroup index, and an index
+  is a power of `p` however many parties there are. This is why the compactness step could be deleted
+  at all, and it is the reason the separation corollary reads more cleanly than the threshold it
+  produces.
+- **The exact `ℓ¹` radius at uniformity order three.** *Open, bracketed to a factor `2.07`*: in
+  `[R_3, θ*] = [0.707, 1.466]` under the hypotheses as stated, narrowing to `[1, 1.466]` in the
+  vanishing-spread limit. Closing it means sharpening the per-site contraction bound at `k = 3` or
+  exhibiting a 3-uniform family that fails below `1.466`. Low value; recorded for completeness.
+- **The gap between the explicit threshold and the certified stability region.** *Open, and this is
+  the one that matters.* For an `AME(2m,q)` state the quadratic estimate is certified out to
+  constant defect, while the decomposition is certified only below `ε₀ ≍ q^{-(n+4)/4}/n`. The
+  obstruction is localized: the rounding step reads a single `(m+1)`-party marginal whose Weyl signal
+  has amplitude `q^{-(m+1)/2}`, and no marginal-based detector can beat that. The successor must be
+  global. `prop:half-splitting` is the global object; the missing ingredient is a classification of
+  the equality case of its Cauchy–Schwarz step, for which `lem:cut-transversal` is the natural first
+  constraint. C796 removed the one obstacle previously thought to block this route by showing its
+  named blocking configuration does not exist. Owner: an ame-lu successor, not this task.
+- **Surprising and unexplained: none remaining.** The feature that looked odd going in — a bound with
+  an `n`-independent constant but an apparently `n`-dependent region — is fully explained once the
+  region is measured against the uniformity order, and the two regimes are separated by which of the
+  three hypotheses binds. That is not a coincidence and nothing else in the subsection is unaccounted
+  for.
+
+## 6. Method labels
+
+- Every manuscript statement added is proved in the text. Nothing rests on a computation, a table, or
+  a sweep, in keeping with the standing preference for structural proofs.
+- Verified by my own re-derivation, step by step: everything in §2, including the full chain from
+  `lem:quantitative-axes` through `prop:quantitative-intertwiner` to the explicit threshold, and
+  every arithmetic constant quoted in the new material.
+- Taken from C774 on that task's authority and not re-derived: the numerical value
+  `θ* = 1.46562…` and the defect `1.3379…N^{-1/2}` at that point. The manuscript's proof of
+  `prop:stability-region` derives the ratio function and its monotonicity, so `θ*` enters only as the
+  root of a displayed scalar equation.
+- Judgment, not proof: that the moment route and the bipartition route both belong in the paper as a
+  choice of hypothesis set rather than one superseding the other; that the separation corollary is
+  the statement to lead with in the front matter; and that the correct comparison for the explicit
+  threshold is against the certified stability region for AME states rather than against the
+  order-three ceiling.

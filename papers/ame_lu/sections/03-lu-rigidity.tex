@@ -601,33 +601,9 @@ sequence
     \longrightarrow\Pi\longrightarrow 1.
 \]
 This last extension splits exactly when the realized permutations admit a
-homomorphic choice of projective product-unitary lifts.
-It has a section-free outer action
-\(\Pi\to\operatorname{Out}(\Gamma)\): conjugation by any lift of
-\(\pi\in\Pi\) gives an automorphism of \(\Gamma\), and changing the lift
-changes that automorphism by an inner automorphism.
-For a normalized set-theoretic section \(s(1)=1\), write
-\[
-  s(\pi)s(\rho)
-    =f_s(\pi,\rho)s(\pi\rho),\qquad f_s(\pi,\rho)\in\Gamma .
-\]
-Then \(f_s(1,\pi)=f_s(\pi,1)=1\), and, with
-\(\alpha_\pi\) denoting conjugation by \(s(\pi)\),
-\[
- f_s(\pi,\rho)f_s(\pi\rho,\upsilon)
- =\alpha_\pi\!\left(f_s(\rho,\upsilon)\right)
-   f_s(\pi,\rho\upsilon).
-\]
-If another normalized section is
-\(s'(\pi)=b(\pi)s(\pi)\), where \(b(1)=1\), then
-\[
- f_{s'}(\pi,\rho)
- =b(\pi)\alpha_\pi\!\left(b(\rho)\right)
-   f_s(\pi,\rho)b(\pi\rho)^{-1}.
-\]
-The order of these factors is essential because \(\Gamma\) need not be
-abelian.  The extension splits exactly when this factor set can be changed
-to the constant identity factor set by such a normalized \(b\).
+homomorphic choice of projective product-unitary lifts.  Its obstruction is
+a nonabelian factor set, computed in
+Appendix~\ref{sec:party-extensions}.
 \end{corollary}
 
 \begin{proof}
@@ -644,14 +620,7 @@ Forgetting the local factors maps
 Its kernel consists exactly of the fixed-party projective
 automorphisms, which gives the third sequence.  A splitting is, by
 definition, a group-homomorphic right inverse; arbitrary or
-generator-by-generator lifts do not provide one.  Conjugation by the
-middle group descends to the outer action because elements of the kernel
-act by inner automorphisms.  Associativity of three chosen lifts gives the
-displayed factor-set identity.  Substituting
-\(s'(\pi)=b(\pi)s(\pi)\) gives the change-of-section formula without
-commuting any kernel factors.  Finally, the factor set is identically one
-precisely when the section preserves multiplication, which proves the
-splitting characterization.
+generator-by-generator lifts do not provide one.
 \end{proof}
 
 Discreteness makes the exact symmetries isolated.  The same identity
@@ -1699,7 +1668,7 @@ Corollary~\ref{cor:discrete-lu-symmetry}.  Its quotient is the
 evaluation-set-dependent realized permutation group \(\Pi\), and its
 kernel is the full fixed-party projective group \(\Gamma\), rather than
 the scalar phases.  Its splitting remains exactly the nonabelian
-factor-set triviality criterion stated there.
+factor-set triviality criterion of Appendix~\ref{sec:party-extensions}.
 \end{proof}
 
 For a stabilizer state, the hypotheses of
