@@ -467,6 +467,59 @@ python3 2026-08-02-c756-weil-discriminant-check.py
   `ac31b1d0c6a94b0b3ea0fe64a97fe0a0f1eb28d1d5c0aa2f0f96a1f9d0d6b6a7` (recomputed in the JSON)
 - `2026-08-02-c756-line-case-verification.json`
 
+## 6a. TT addendum: the direction map is a Latin square
+
+Directions — classes of \(\mathbb F_{q^2}^\times\) modulo \(\mathbb F_q^\times\) — form
+a cyclic group \(C_{q+1}\), and \(\chi\) is constant on each direction, so
+\(\chi\) descends to the unique order-two character of \(C_{q+1}\).  This gives a
+constraint that uses the bipartite half of the crown, which Theorems 3 and 4 discard.
+
+> **Theorem 5.**  Let \(Z\) be a coherent system, \(n=(q+3)/2\).  Then the array
+> \(d(i,j)=\)direction of \(z_i-z_j^q\) is a **Latin square of order \(n\)**: its
+> diagonal is constantly the direction of \(s\), and its off-diagonal entries range
+> over the \(n-1\) directions of class \(-\delta\), each occurring exactly once in
+> every row **and** exactly once in every column.
+
+*Proof.*  Fourier-analytically, \(\hat x\) vanishes on the whole dual line
+\(b'\mathbb F_q\) if and only if \(x\) sums to zero on every coset of the line of
+direction \(s/b'\).  Now \(\hat x\) vanishes on the nonsquare class (Lemma 1 of the
+twenty-fourth pass) and, by Frobenius-oddness \(\hat x(w^q)=-\hat x(w)\), also on the
+rational frequencies \(\mathbb F_q\).  Dualizing, the directions along which all line
+sums vanish are exactly the \(n-1\) directions of class \(-\delta\) together with the
+direction of \(s\) — that is, \(n\) directions in all.
+
+Fix a direction \(b\) with \(\chi(b)=-\delta\) and a line \(\ell\) in that direction.
+Any two points of \(Y=Z\sqcup Z^q\) on \(\ell\) differ by an element of class
+\(-\delta\).  But differences inside \(Z\), inside \(Z^q\), and across a conjugate pair
+all have class \(\delta\).  So \(\ell\) carries at most one point of \(Z\) and at most
+one of \(Z^q\), and these are not conjugate; vanishing of the signed sum then forces
+\(\ell\cap Y\) to be empty or a pair \(\{z_i,z_j^q\}\) with \(i\ne j\).  Hence each
+such \(b\) induces a fixed-point-free perfect matching between \(Z\) and \(Z^q\).  The
+\(n-1\) directions give disjoint matchings totalling \((n-1)n\) pairs, which is exactly
+the number of cross pairs, so they partition them.  Every direction therefore occurs
+once per row and once per column, and \(z_i-z_i^q\in s\mathbb F_q\) gives the constant
+diagonal. \(\square\)
+
+Two remarks.  The row half is the coherence-only analogue of the forced angle bijection
+of the twenty-second pass, which had to invoke the arc condition; the **column half has
+no earlier counterpart** and is new.  Second, the obvious group obstruction is already
+satisfied and so gives no cheap kill: the product of a row is
+\(\prod_{j\ne i}(z_i-z_j^q)=(\gamma-\gamma^q)/(z_i-z_i^q)\in\mathbb F_q^\times\), i.e.
+the trivial direction, and the product of all class-\(-\delta\) directions in
+\(C_{q+1}\) is indeed trivial in both residue classes of \(q\) modulo 4.
+
+`2026-08-02-c756-direction-latin-square-check.py` verifies the whole statement on both
+\(q=5\) frames, including that the line sums vanish on exactly those \(n\) directions
+and that rows and columns are both Latin.  Writing this check is what caught the
+omission of the \(s\)-direction from a first version of the argument.
+
+**Why this matters.**  This is the internal-branch analogue of the complete-mapping
+structure that closed the saturated-*external* branch: there, fixing one matching edge
+forced a complete mapping of the cyclic square group, and a group-sum obstruction plus
+a Weil/Hasse argument finished it.  The same endgame is now available here, and it does
+**not** route through the Baker et al. gap conjecture.  That makes it the highest-value
+open attack this pass produces.
+
 ## 7. EJ + TT closeout
 
 **EJ.**  Four upgrades came free with this pass and were taken here.
@@ -508,12 +561,19 @@ It does not, and in the safe direction: coherent systems are a *relaxation* of g
 saturated-internal arcs — Segre's lemma of tangents forces every arc into coherent
 form, not conversely — so excluding coherent systems is strictly stronger than needed.
 
-The Tao question Tao would ask next is where the argument is wasteful, and the answer
-is clear: the reduction to two clique orbits uses only that \(Z\) is a clique.  The
-whole bipartite half of the crown — the complete join between \(Z\) and \(Z^q\) — is
-unused, and it is exactly the extra structure that might replace the Baker et al. gap
-conjecture with an unconditional argument.  That is the highest-value open lead this
-pass produces.
+The Tao question about where the argument is wasteful has a clear answer: the reduction
+to two clique orbits uses only that \(Z\) is a clique, discarding the whole bipartite
+half of the crown.  Acting on that produced Theorem 5 (§6a): the cross-direction array
+is a Latin square of order \(n\) with constant diagonal.  Its row half is the
+coherence-only version of the earlier forced angle bijection and its column half is new,
+and — decisively — it is the internal analogue of the complete-mapping structure that
+closed the saturated-external branch, so it offers an endgame that bypasses the gap
+conjecture entirely.  A second Tao-style reading worth recording: the master polynomial
+\(G=(R-\gamma)(R-\gamma^q)\) of the fiber route is precisely the Rédei polynomial of
+the clique \(Z\sqcup Z^q\), so the fiber route and the clique route are not
+alternatives but one object seen twice — which means Blokhuis' polynomial proof of
+\(\omega(P(q^2))=q\) is the natural template to re-run at size \((q+3)/2\) with the
+crown as the extra hypothesis.
 
 ## 8. Mystery ledger
 

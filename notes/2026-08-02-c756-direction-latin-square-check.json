@@ -1,0 +1,217 @@
+{
+ "claim": "the cross-direction array of a coherent system is a Latin square with constant diagonal; good directions are chi = -delta",
+ "eps": 2,
+ "q": 5,
+ "rows": [
+  {
+   "array": [
+    [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    [
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    [
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ]
+    ],
+    [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ]
+   ],
+   "cols_are_latin": true,
+   "delta": -1,
+   "diagonal_direction": [
+    0,
+    1
+   ],
+   "frame": [
+    "0+1s",
+    "1+4s",
+    "2+2s",
+    "4+3s"
+   ],
+   "good_directions": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "line_sums_vanish_exactly_on_good": true,
+   "rows_are_latin": true
+  },
+  {
+   "array": [
+    [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    [
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    [
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ]
+    ],
+    [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ]
+   ],
+   "cols_are_latin": true,
+   "delta": -1,
+   "diagonal_direction": [
+    0,
+    1
+   ],
+   "frame": [
+    "0+1s",
+    "4+4s",
+    "1+3s",
+    "3+2s"
+   ],
+   "good_directions": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "line_sums_vanish_exactly_on_good": true,
+   "rows_are_latin": true
+  }
+ ],
+ "source_sha256": "659c1c2a8530b8327414c5dec882f3715e167794be5c605fd368f2eb5377418c",
+ "task": "C756"
+}
