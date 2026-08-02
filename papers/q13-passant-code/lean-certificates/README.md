@@ -22,6 +22,9 @@ base pencils from code membership, identifies the 42 semantic passant-join neigh
 three cyclic vertex orbits, checks that tangent holonomy is exactly the displayed adjacency, and
 proves the five-clique bound.  Its terminal theorem excludes a normalized weight-eight word once
 the classical arc/tangent lemma supplies pairwise passant joins and tangent holonomy one.
+The shared `RelativeConicArcs.PassantCodeQ13.WeightTen` module then treats an arbitrary supported
+point of an arbitrary weight-ten word: its seven passant fibres are odd, the complementary joins
+are secants, and the support partition forces the isolated `(3,1^6;0)` or cycle `(1^7;2)` profile.
 `PassantCodeQ13.AssociationAlgebra` checks the ranks and squaring identities of the four binary
 elliptic relation matrices used by the orbit-spanning argument.  The minimum-word modules expand
 one symmetric-stabilizer and three dihedral-stabilizer representatives into four disjoint
@@ -32,10 +35,9 @@ The terminal theorems use native evaluation.  The axiom audit must therefore rep
 declaration-local native-decision axioms emitted by the pinned Lean toolchain.  No hash is used as a
 substitute for checking the incidence semantics or profile coverage.
 
-The package does not prove that the two local parity profiles exhaust arbitrary weight-ten
-codewords, prove that the four projective orbits
-exhaust the complete weight-twelve layer, prove uniqueness of the recovered row family, or classify
-all coordinate automorphisms.  These are explicit semantic boundaries, not computational claims.
+The package does not prove that the four projective orbits exhaust the complete weight-twelve
+layer, prove uniqueness of the recovered row family, or classify all coordinate automorphisms.
+These are explicit semantic boundaries, not computational claims.
 
 From this package root, the public replay command is:
 

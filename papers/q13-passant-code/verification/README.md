@@ -21,6 +21,8 @@ both weight-ten syndrome profiles, and checks four displayed minimum-word orbits
 Its formal scope is strictly smaller than the complete release theorem.
 The normalized weight-eight terminal is
 `RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport`.
+The arbitrary-word weight-ten profile terminal is
+`RelativeConicArcs.Gates.PassantCodeQ13.arbitrary_weightTen_profile_transport`.
 
 ## Evidence to extract
 
@@ -57,6 +59,7 @@ RelativeConicArcs/ConicPassantCode.lean
 RelativeConicArcs/PassantCodeQ13/Geometry.lean
 RelativeConicArcs/PassantCodeQ13/Rank.lean
 RelativeConicArcs/PassantCodeQ13/WeightEight.lean
+RelativeConicArcs/PassantCodeQ13/WeightTen.lean
 RelativeConicArcs/PassantCodeQ13/AssociationAlgebra.lean
 RelativeConicArcs/PassantCodeQ13/Reconstruction.lean
 RelativeConicArcs/Gates/PassantCodeQ13.lean
@@ -77,7 +80,8 @@ PassantCodeQ13/Gates/AxiomAudit.lean
 ```
 
 The public aggregate transports its exact 42-column elimination certificate to semantic rank and
-code dimension. It does not establish arbitrary-word profile transport, minimum-layer exhaustion, uniqueness of the
+code dimension, and transports every supported point of every weight-ten word to one of the two
+exhaustive pencil profiles. It does not establish minimum-layer exhaustion, uniqueness of the
 recovered rows, or the automorphism anchor. Its axiom report comes
 from the pinned toolchain's actual `#print axioms` output. Task identifiers,
 manuscript section numbers, private reports, and workflow status language are

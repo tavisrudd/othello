@@ -374,14 +374,24 @@ and the preceding arc identification as the classical geometric input stated
 in the proof.  Its terminal declaration is
 \nolinkurl{RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport}.
 
+For weight ten, the shared formalization now starts from an arbitrary codeword
+and any point in its support.  The seven actual passant rows through that point
+have odd support fibres; the other support points are exactly its secant
+neighbors.  Partitioning the remaining nine points then gives either one
+triple fibre and six singleton fibres with no secant neighbor, or seven
+singleton fibres with two secant neighbors.  Its terminal declaration is
+\begin{flushleft}
+\small\nolinkurl{RelativeConicArcs.Gates.PassantCodeQ13.}\\[-0.4ex]
+\nolinkurl{arbitrary_weightTen_profile_transport}.
+\end{flushleft}
+
 These checks support the finite leaves; they do not replace the structural
-proof.  The formal package does not yet prove the transport from arbitrary codewords to
-the two local weight-ten profiles, exhaustion of the full weight-twelve layer
-by the four orbits, uniqueness of the reconstructed row family, or the
-four-anchor classification of every coordinate automorphism.  The complete
-theorem is therefore presented first and foremost as a human proof, with
-exact finite evidence at its uncompressed leaves; its formal subclaims have
-the narrower scope just stated.
+proof.  The formal package does not yet prove exhaustion of the full
+weight-twelve layer by the four orbits, uniqueness of the reconstructed row
+family, or the four-anchor classification of every coordinate automorphism.
+The complete theorem is therefore presented first and foremost as a human
+proof, with exact finite evidence at its uncompressed leaves; its formal
+subclaims have the narrower scope just stated.
 
 \section{Conclusion}
 

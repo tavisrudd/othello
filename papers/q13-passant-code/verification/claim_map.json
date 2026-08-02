@@ -12,8 +12,8 @@
     {
       "id": "minimum-distance",
       "statement": "The code has minimum distance 12.",
-      "current_modes": ["human parity reduction", "human tangent-product reduction", "Lean row-parity saturation of the seven base pencils", "Lean semantic identification of the 42 tangent neighbors and cyclic graph", "Lean tangent graph with 70 four-cliques and 14 maximal five-cliques", "Lean secant-count and exact fibre-multiplicity deductions", "fourteen Lean weight-ten certificate shards", "explicit weight-twelve witness", "paper-owned independent replay"],
-      "lean_boundary": "RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport closes weight eight after the classical arc/tangent lemma supplies pairwise passant joins and tangent holonomy one; transport from an arbitrary weight-ten word to the proved pencil-profile hypotheses remains a human argument"
+      "current_modes": ["human parity reduction", "human tangent-product reduction", "Lean row-parity saturation of the seven base pencils", "Lean semantic identification of the 42 tangent neighbors and cyclic graph", "Lean tangent graph with 70 four-cliques and 14 maximal five-cliques", "Lean secant-count and exact fibre-multiplicity deductions", "Lean arbitrary-word transport to the two semantic weight-ten pencil profiles", "fourteen Lean weight-ten certificate shards", "explicit weight-twelve witness", "paper-owned independent replay"],
+      "lean_boundary": "RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport closes weight eight after the classical arc/tangent lemma supplies pairwise passant joins and tangent holonomy one; RelativeConicArcs.Gates.PassantCodeQ13.arbitrary_weightTen_profile_transport closes the arbitrary-word reduction to the isolated and cycle pencil profiles"
     },
     {
       "id": "minimum-layer",

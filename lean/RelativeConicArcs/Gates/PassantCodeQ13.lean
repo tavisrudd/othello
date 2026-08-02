@@ -1,5 +1,6 @@
 import RelativeConicArcs.PassantCodeQ13.Rank
 import RelativeConicArcs.PassantCodeQ13.WeightEight
+import RelativeConicArcs.PassantCodeQ13.WeightTen
 import RelativeConicArcs.PassantCodeQ13.Reconstruction
 import RelativeConicArcs.PassantCodeQ13.LogicalSpine
 
@@ -89,5 +90,14 @@ theorem weightTen_cycle_fibre_profile
     (total : ∑ index, fibreSize index = 7) :
     ∀ index, fibreSize index = 1 :=
   LogicalSpine.seven_positive_fibres_sum_seven fibreSize positive total
+
+/-- Every supported point of an arbitrary weight-ten codeword has one of the two exhaustive
+passant-pencil profiles used by the isolated and cycle certificate leaves. -/
+theorem arbitrary_weightTen_profile_transport
+    (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
+    (weight : CodingBridge.hammingWeight word = 10)
+    (base : InternalPoint) (base_mem : base ∈ CodingBridge.hammingSupport word) :
+    WeightTen.WeightTenPencilProfile (CodingBridge.hammingSupport word) base :=
+  WeightTen.arbitrary_weightTen_word_has_pencil_profile word word_mem weight base base_mem
 
 end RelativeConicArcs.Gates.PassantCodeQ13

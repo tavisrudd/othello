@@ -5,9 +5,11 @@
 **Status:** active; theorem and novelty boundary frozen, full human proof and
 paper-owned evidence gate green, shared q13 semantic modules and the sharded
 paper-owned Lean certificate gate green.  The rank evaluator now transports to
-semantic incidence-map rank 42 and code dimension 36, and the normalized weight-eight word now
-transports through pencil saturation and tangent holonomy to the concrete cyclic graph.  Five exact semantic transports and
-the remaining release/publication work remain.
+semantic incidence-map rank 42 and code dimension 36, and the normalized
+weight-eight word now transports through pencil saturation and tangent holonomy
+to the concrete cyclic graph.  Every arbitrary weight-ten word now transports
+to the two exact pencil profiles.  Four exact semantic transports and the
+remaining release/publication work remain.
 
 ## Goal
 
@@ -48,7 +50,7 @@ silently shared with the released Paper-I surface.
    transport, and the
    sharded q13 certificate package described in
    `papers/q13-passant-code/verification/README.md`; close the explicitly
-   recorded evaluator, tangent/profile transports, orbit exhaustion,
+   recorded evaluator, orbit exhaustion,
    association/Gram transport, row uniqueness, and concrete automorphism-
    anchor boundaries before claiming full Lean coverage.
 5. Connect every manuscript statement to an exact Lean declaration,
