@@ -49,6 +49,8 @@ classification + golden operator), not a retrofit into Paper I.
 Twenty-five research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-02-c756-crown-reformulation-and-line-case.md` and
 `notes/2026-08-02-c756-paley-eigenfunction-support-literature.md`, and
+`notes/2026-08-02-c756-clique-orbit-crown-check.md`, and
+`notes/2026-08-02-c756-split-fiber-census.md`, and
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -508,6 +510,22 @@ What the crown-reformulation and affine-line pass (twenty-fifth) adds:
 - **Field generality.**  Unlike the prime-only composition tower, this whole route
   holds for every odd prime power, so it removes the \(q=27\) extension-field gap from
   this branch's argument.
+- **Certified range extended without any conjecture.**  Coherence is a clique condition
+  in a graph on the irrational elements whose affine automorphisms act transitively, so
+  an exhaustive search through one vertex is complete.  It returns nothing for every
+  \(q\equiv3\pmod4\) with \(7\le q\le151\) (prime powers included, so the
+  \(q=27\) hygiene item is discharged), and the two published clique orbits are empty
+  for every such \(q\le503\) across 1,686,529,824 tested orbit members.  The
+  \(q\equiv1\pmod4\) sweep is queued; that class is certified only through the older
+  \(q\le43\) audit until it lands.
+- **Latin-square constraint (Theorem 5).**  Coherence alone forces the direction of
+  \(z_i-z_j^q\), for fixed \(i\), to run bijectively over the \((q+1)/2\) directions
+  of class \(-\delta\) — geometrically, no point of \(Z\) lies on an
+  \(\mathbb F_q\)-line containing two points of \(Z^q\).  The corresponding column
+  statement follows formally from the unconditional identity
+  \(D(j,i)=D(i,j)^{-1}\) and is not independent.  The resulting \(n-1\) derangements
+  are the internal analogue of the complete mapping that closed the saturated-external
+  branch, and this route does not pass through the clique conjecture at all.
 - **Honest verification status.**  The gap conjecture is proved for no \(q\); Yip
   records that "no partial progress has been made".  The claimed check to \(q\le109\)
   is unattributed and the published orbit-complete table stops at \(q\le47\).  So the
