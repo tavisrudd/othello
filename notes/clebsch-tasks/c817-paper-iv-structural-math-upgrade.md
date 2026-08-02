@@ -10,8 +10,9 @@ Subitem 1 is complete.  The modular Bose--Mesner action on
 \(K=\ker A_0\) has image exactly \(\mathbf F_8\), with
 \(K\cong\mathbf F_8^{12}\) and
 \((A_9,A_{10},A_{12})=(\alpha,\alpha^2,\alpha^4)\).  The stronger ambient
-primary split and canonical projector are also frozen.  Report and exact
-evidence bundle: `notes/2026-08-02-c817-hidden-f8-module.md`.
+primary split, canonical projector, trace/norm three-Gram resolution,
+\(\mathbf F_8\)-symplectic form, and exact Schur field are also frozen.  Report
+and exact evidence bundle: `notes/2026-08-02-c817-hidden-f8-module.md`.
 
 The next gate is subitem 2, pair-concurrence coherent closure and minimal
 reconstruction arity.

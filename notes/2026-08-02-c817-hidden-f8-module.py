@@ -150,6 +150,16 @@ def compute() -> dict[str, object]:
     for exponent in range(2, 8):
         powers[exponent] = multiply(powers[exponent - 1], b)
     assert powers[7] == projection_to_k
+    assert add(b, b2, b4) == projection_to_k
+    assert add(
+        multiply(b, b2), multiply(b, b4), multiply(b2, b4)
+    ) == [0] * size
+    assert multiply(multiply(b, b2), b4) == projection_to_k
+    assert all(
+        powers[exponent] == list_transpose(powers[exponent], size)
+        for exponent in range(7)
+    )
+    assert all(row.bit_count() % 2 == 0 for row in projection_to_k)
     assert all(
         add(*[matrix for bit, matrix in zip((1, 2, 4), (projection_to_k, b, b2)) if mask & bit])
         != [0] * size
@@ -221,6 +231,16 @@ def compute() -> dict[str, object]:
             "e_K=I+A0^2",
             "e_K^2=e_K",
             "A9^7=e_K",
+        ],
+        "verified_Frobenius_packet_identities": [
+            "A9+A10+A12=e_K",
+            "A9*A10+A9*A12+A10*A12=0",
+            "A9*A10*A12=e_K",
+        ],
+        "verified_binary_form_properties": [
+            "e_K is symmetric of rank 36",
+            "every vector in image(e_K)=K has even weight",
+            "all F8 scalar operators are self-adjoint",
         ],
         "verified_matrix_identities": [
             "A0^2=I+A9+A10+A12",
