@@ -222,6 +222,15 @@ The nonsaturated branch has no bounded algebraic-compression gate left; only a s
 classification of the dual internal-node near-transversal, a pair-coupled carrier, or a
 uniform second-order covering count remains identified.
 
+Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
+now has the same theorem-shaped status the saturated-external branch had two passes before
+closure, but the tight balance theorem proves that another spectral bound cannot finish it.
+The fragmented-Moore/intercept mechanism is independently durable negative material: it is
+the precise explanation requested here for why the chord-moment compression family cannot
+close.  Cheap hygiene still owed before a later end-to-end handoff is one explicit
+\(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
+read of the full eleven-pass argument; neither item reopens a closed mathematical branch.
+
 ## Prior estimate
 
 The review prior was ~30% provable with current tools (§12.6).  The saturated-internal
