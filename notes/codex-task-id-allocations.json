@@ -2033,8 +2033,17 @@
       "last": 764,
       "purpose": "integrate determinant-versus-permanent boundary remark into forward Paper III",
       "sequence": 226
+    },
+    {
+      "count": 1,
+      "first": 765,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 765,
+      "purpose": "charter minimal Golden quantum statistics companion note after C719",
+      "sequence": 227
     }
   ],
-  "next_id": 765,
+  "next_id": 766,
   "schema": "codex-task-id-allocations-v1"
 }
