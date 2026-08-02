@@ -2276,8 +2276,26 @@
       "last": 806,
       "purpose": "Add compact opening observable-hierarchy figure to Golden quantum-statistics paper",
       "sequence": 253
+    },
+    {
+      "count": 1,
+      "first": 807,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 807,
+      "purpose": "novelty audit for the recognition-group criterion (partial-Weyl marginal rigidity, all local dimensions)",
+      "sequence": 254
+    },
+    {
+      "count": 1,
+      "first": 808,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 808,
+      "purpose": "Milnor-Serre exposition audit and copy edit of Golden quantum-statistics paper",
+      "sequence": 255
     }
   ],
-  "next_id": 807,
+  "next_id": 809,
   "schema": "codex-task-id-allocations-v1"
 }
