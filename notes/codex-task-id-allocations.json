@@ -2303,8 +2303,17 @@
       "last": 813,
       "purpose": "Paper III mathematical ceiling tests: four-shadow characterization, aligned-certificate distance, quadratic-twist specialization, higher cut separation, and harmonic restriction generalization",
       "sequence": 256
+    },
+    {
+      "count": 1,
+      "first": 814,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 814,
+      "purpose": "Golden quantum-statistics math ceilings: robust and unlabelled inverse, higher moments, continuous controls, and generalized conference classes",
+      "sequence": 257
     }
   ],
-  "next_id": 814,
+  "next_id": 815,
   "schema": "codex-task-id-allocations-v1"
 }
