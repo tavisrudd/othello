@@ -2024,8 +2024,17 @@
       "last": 763,
       "purpose": "Paper I forward exposition pass; Paper III Golden-core consolidation",
       "sequence": 225
+    },
+    {
+      "count": 1,
+      "first": 764,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 764,
+      "purpose": "integrate determinant-versus-permanent boundary remark into forward Paper III",
+      "sequence": 226
     }
   ],
-  "next_id": 764,
+  "next_id": 765,
   "schema": "codex-task-id-allocations-v1"
 }
