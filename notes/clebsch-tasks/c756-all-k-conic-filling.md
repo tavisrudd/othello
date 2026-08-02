@@ -17,12 +17,13 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** run Route F's bounded sparse-integral Paley-trade diagnostic on
-the existing coherent candidates: record exact Fourier-value distributions, prime-ideal
-valuation profiles, and short autocorrelations of
-\(x=\mathbf1_Z-\mathbf1_{Z^q}\).  Continue only if the frame is isolated by an
-integral profile invisible to the already-tight second moment; stop on any renamed norm,
-entropy, or interlacing inequality.
+**Next-session entry:** Route F continues.  Attempt the digit-1 theorem: a genuine
+saturated arc's coherent orientation has rational support sum
+\(\sigma=\sum_{z\in Z}z\) (equivalently \(v_\pi(\widehat x)\ge2\) everywhere), via the
+balance theorem plus conjugation bookkeeping.  If that lands, pursue forced flatness
+and the biunimodular sparse-trade classification in the near-extremal uncertainty
+regime.  Stop if digit 1 is not derivable from existing exact identities and no new
+mechanism appears, then fall back to Route D or Route R.
 
 ## Why this task exists
 
@@ -39,7 +40,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty-two research passes complete; the theorem is **not** proved. Reports:
+Twenty-three research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -61,7 +62,8 @@ Twenty-two research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-02-c756-ball-lavrauw-tensor-interface.md`, and
 `notes/2026-08-02-c756-alt-attacks.md`, and
 `notes/2026-08-02-c756-prime-field-lacunary-first-cofactor.md`, and
-`notes/2026-08-02-c756-four-point-row-transitions.md`.
+`notes/2026-08-02-c756-four-point-row-transitions.md`, and
+`notes/2026-08-02-c756-sparse-paley-trade-profile.md`.
 
 Branch ledger:
 
@@ -422,6 +424,26 @@ What the four-point row-transition pass adds:
 - Route Q therefore closes at its predeclared stop gate.  Route F, sparse integral Paley
   trades, is the next saturated-internal discriminator.
 
+What the sparse Paley-trade census (Route F, twenty-third pass) adds:
+
+- for all 129 bounded candidates (\(q\le23\)), the conjugation-odd vector
+  \(x=\mathbf1_Z-\mathbf1_{Z^q}\) has exact cyclotomic Fourier values with
+  \(\widehat x(w^q)=-\widehat x(w)\) and forced vanishing on rational frequencies;
+- the two \(q=5\) frames are flat biunimodular trades: Fourier support exactly the
+  eight nonrational square-class frequencies (the class has size \((q-1)^2/2=q+3\)
+  only at \(q=5\)), every value \(\pm5\zeta^j\), uniform terminal valuation
+  \(v_\pi=4=p-1\), and two-valued autocorrelation
+  \(A=-2+5\cdot\mathbf1_{\text{nonrational nonsquares}}\);
+- every negative candidate has full nonrational Fourier support, all-irrational
+  squared moduli, many-valued autocorrelation, and uniform \(v_\pi\in\{1,3\}\);
+- the digit mechanism is exact: \(v_\pi\ge2\) everywhere iff the oriented support sum
+  \(\sigma\) is rational; conjugation-oddness kills the even digit, so \(v_\pi=2\)
+  never occurs; the 13 \(\sigma_1=0\) candidates (all at \(q=23\)) have the larger
+  coherence-violation count, proving the valuation tower transverse to coherence;
+- additive energy and Parseval mass are constant per field, so the isolating profile
+  is invisible to the second moment; Route F's continue gate passes with digit-1
+  rationality and forced flatness as the two frozen theorem gates.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -481,8 +503,13 @@ does not globalize its adjugate kernel line, and the prime-field first-cofactor 
 has exact canonical form but linear reduced support and Cartier width.  The four-point
 row-transition diagnostic also closes: its negative controls have no complete transition
 systems, their partial rational degree grows linearly, and their pole and cross-ratio
-profiles add no radial constraint.  The next bounded interface is therefore Route F's
-sparse integral Paley-trade profile.  The direct adjugate/second-compound calculation stays
+profiles add no radial constraint.  Route F's sparse integral Paley-trade census now
+passes its continue gate: the frame is isolated by an exact valuation/support profile
+(terminal \(\pi\)-valuation, flat \(q\cdot\zeta^j\) spectrum, two-valued
+autocorrelation) that is invisible to the second moment and provably transverse to the
+coherence residual.  The active interface is the digit-1 rationality theorem for the
+oriented support sum, then forced flatness and the biunimodular sparse-trade
+classification.  The direct adjugate/second-compound calculation stays
 parked unless a global low-degree carrier emerges.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot

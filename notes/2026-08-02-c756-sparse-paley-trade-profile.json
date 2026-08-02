@@ -1,0 +1,2985 @@
+{
+  "inputs": {
+    "2026-08-01-c756-probability-cheap-tests.py": "34fe706268e51f4ed09a95ec64424430e11f46d9e03fae320ca16eac0580fff2",
+    "2026-08-01-c756-saturated-internal-audit.json": "acabee2fa04d61e6673c60a5cc429ba11f9e294e233a96c53d8451d91f6104d7"
+  },
+  "rows": [
+    {
+      "candidate_count": 2,
+      "distinct_profiles": [
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 200,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-2": 4,
+              "chi=-1:A=3": 8,
+              "chi=1:A=-2": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 4
+            },
+            "coherence_violations_min": 0,
+            "fourier_support_size": 8,
+            "irrational_squared_moduli": 0,
+            "orientation_bits": "0101",
+            "pi_valuation_by_class": {
+              "chi=1:v=4": 8
+            },
+            "pi_valuation_histogram": {
+              "4": 8
+            },
+            "rational_squared_moduli": {
+              "25": 8
+            },
+            "wrong_class_support": 8
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 200,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-2": 4,
+              "chi=-1:A=3": 8,
+              "chi=1:A=-2": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 4
+            },
+            "coherence_violations_min": 0,
+            "fourier_support_size": 8,
+            "irrational_squared_moduli": 0,
+            "orientation_bits": "0110",
+            "pi_valuation_by_class": {
+              "chi=1:v=4": 8
+            },
+            "pi_valuation_histogram": {
+              "4": 8
+            },
+            "rational_squared_moduli": {
+              "25": 8
+            },
+            "wrong_class_support": 8
+          }
+        }
+      ],
+      "frame_exact_fourier_values": [
+        [
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              -5,
+              0,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              1,
+              1
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              5,
+              0,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              1,
+              4
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              -5,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              2,
+              2
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              5,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              2,
+              3
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              0,
+              5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              3,
+              2
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              0,
+              -5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              3,
+              3
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              -5,
+              -5,
+              -5,
+              -5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              4,
+              1
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              5,
+              5,
+              5,
+              5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              4,
+              4
+            ]
+          }
+        ],
+        [
+          {
+            "chi": 1,
+            "coefficients": [
+              -5,
+              -5,
+              -5,
+              -5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              1,
+              1
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              5,
+              5,
+              5,
+              5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              1,
+              4
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              0,
+              5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              2,
+              2
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              0,
+              -5
+            ],
+            "pi_valuation": 4,
+            "w": [
+              2,
+              3
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              -5,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              3,
+              2
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              0,
+              5,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              3,
+              3
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              -5,
+              0,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              4,
+              1
+            ]
+          },
+          {
+            "chi": 1,
+            "coefficients": [
+              0,
+              5,
+              0,
+              0
+            ],
+            "pi_valuation": 4,
+            "w": [
+              4,
+              4
+            ]
+          }
+        ]
+      ],
+      "paley_eigenvalue_by_chi_class": {
+        "-1": 2,
+        "1": -3
+      },
+      "q": 5
+    },
+    {
+      "candidate_count": 5,
+      "distinct_profiles": [
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 318,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 4,
+              "chi=-1:A=-2": 8,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 4,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 8,
+              "chi=1:A=0": 2,
+              "chi=1:A=2": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 2,
+              "2": 4
+            },
+            "coherence_violations_min": 2,
+            "fourier_support_size": 42,
+            "irrational_squared_moduli": 42,
+            "orientation_bits": "00000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 24,
+              "chi=1:v=1": 18
+            },
+            "pi_valuation_histogram": {
+              "1": 42
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 24
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 318,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 4,
+              "chi=-1:A=-2": 8,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 4,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 8,
+              "chi=1:A=0": 2,
+              "chi=1:A=2": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 2,
+              "2": 4
+            },
+            "coherence_violations_min": 2,
+            "fourier_support_size": 42,
+            "irrational_squared_moduli": 42,
+            "orientation_bits": "00111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 24,
+              "chi=1:v=1": 18
+            },
+            "pi_valuation_histogram": {
+              "1": 42
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 24
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 318,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 4,
+              "chi=-1:A=-2": 8,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 4,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 8,
+              "chi=1:A=0": 2,
+              "chi=1:A=2": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 2,
+              "2": 4
+            },
+            "coherence_violations_min": 2,
+            "fourier_support_size": 42,
+            "irrational_squared_moduli": 42,
+            "orientation_bits": "01100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 24,
+              "chi=1:v=1": 18
+            },
+            "pi_valuation_histogram": {
+              "1": 42
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 24
+          }
+        }
+      ],
+      "frame_exact_fourier_values": null,
+      "paley_eigenvalue_by_chi_class": {
+        "-1": -4,
+        "1": 3
+      },
+      "q": 7
+    },
+    {
+      "candidate_count": 28,
+      "distinct_profiles": [
+        {
+          "count": 3,
+          "profile": {
+            "additive_energy": 482,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 8,
+              "chi=-1:A=1": 12,
+              "chi=1:A=-1": 12,
+              "chi=1:A=-2": 2,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 8,
+              "chi=1:A=1": 16,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 6,
+              "2": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0001010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 3,
+          "profile": {
+            "additive_energy": 482,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 8,
+              "chi=-1:A=1": 12,
+              "chi=1:A=-1": 12,
+              "chi=1:A=-2": 2,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 8,
+              "chi=1:A=1": 16,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 6,
+              "2": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0001100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 482,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 8,
+              "chi=-1:A=1": 12,
+              "chi=1:A=-1": 12,
+              "chi=1:A=-2": 2,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 8,
+              "chi=1:A=1": 16,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 6,
+              "2": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0010000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 3,
+          "profile": {
+            "additive_energy": 482,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 8,
+              "chi=-1:A=1": 12,
+              "chi=1:A=-1": 12,
+              "chi=1:A=-2": 2,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 8,
+              "chi=1:A=1": 16,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 6,
+              "2": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0100000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 482,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 8,
+              "chi=-1:A=1": 12,
+              "chi=1:A=-1": 12,
+              "chi=1:A=-2": 2,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 8,
+              "chi=1:A=1": 16,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 6,
+              "2": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0101000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 482,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 8,
+              "chi=-1:A=1": 12,
+              "chi=1:A=-1": 12,
+              "chi=1:A=-2": 2,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 8,
+              "chi=1:A=1": 16,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 6,
+              "2": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0110000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 482,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 8,
+              "chi=-1:A=1": 12,
+              "chi=1:A=-1": 12,
+              "chi=1:A=-2": 2,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 8,
+              "chi=1:A=1": 16,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 6,
+              "2": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0111111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 5,
+          "profile": {
+            "additive_energy": 666,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 12,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 16,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-2": 16,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 20,
+              "chi=1:A=2": 16,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 4,
+              "2": 4,
+              "6": 2
+            },
+            "coherence_violations_min": 6,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0000000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 666,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 12,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 16,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-2": 16,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 20,
+              "chi=1:A=2": 16,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 4,
+              "2": 4,
+              "6": 2
+            },
+            "coherence_violations_min": 6,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0011000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 6,
+          "profile": {
+            "additive_energy": 722,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 4,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 24,
+              "chi=-1:A=1": 4,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-4": 2,
+              "chi=1:A=0": 24,
+              "chi=1:A=2": 14,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 4,
+              "2": 2,
+              "6": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0000001",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 722,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 4,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 24,
+              "chi=-1:A=1": 4,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-4": 2,
+              "chi=1:A=0": 24,
+              "chi=1:A=2": 14,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 4,
+              "2": 2,
+              "6": 4
+            },
+            "coherence_violations_min": 4,
+            "fourier_support_size": 110,
+            "irrational_squared_moduli": 110,
+            "orientation_bits": "0001111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 60,
+              "chi=1:v=1": 50
+            },
+            "pi_valuation_histogram": {
+              "1": 110
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 60
+          }
+        }
+      ],
+      "frame_exact_fourier_values": null,
+      "paley_eigenvalue_by_chi_class": {
+        "-1": -6,
+        "1": 5
+      },
+      "q": 11
+    },
+    {
+      "candidate_count": 55,
+      "distinct_profiles": [
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1050,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 56,
+              "chi=-1:A=-2": 32,
+              "chi=-1:A=0": 44,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 22,
+              "chi=1:A=-2": 22,
+              "chi=1:A=0": 66,
+              "chi=1:A=1": 36,
+              "chi=1:A=2": 26,
+              "chi=1:A=3": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 10,
+              "2": 6
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00001100111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1050,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 56,
+              "chi=-1:A=-2": 32,
+              "chi=-1:A=0": 44,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 22,
+              "chi=1:A=-2": 22,
+              "chi=1:A=0": 66,
+              "chi=1:A=1": 36,
+              "chi=1:A=2": 26,
+              "chi=1:A=3": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 10,
+              "2": 6
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00010100111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1066,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 60,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 8,
+              "chi=-1:A=0": 72,
+              "chi=-1:A=1": 20,
+              "chi=-1:A=2": 4,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 30,
+              "chi=1:A=-2": 16,
+              "chi=1:A=-3": 4,
+              "chi=1:A=0": 42,
+              "chi=1:A=1": 64,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 14,
+              "2": 4
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000101000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1066,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 60,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 8,
+              "chi=-1:A=0": 72,
+              "chi=-1:A=1": 20,
+              "chi=-1:A=2": 4,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 30,
+              "chi=1:A=-2": 16,
+              "chi=1:A=-3": 4,
+              "chi=1:A=0": 42,
+              "chi=1:A=1": 64,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 14,
+              "2": 4
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000110000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 4,
+          "profile": {
+            "additive_energy": 1066,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 60,
+              "chi=-1:A=-2": 20,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 56,
+              "chi=-1:A=1": 36,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 26,
+              "chi=1:A=-2": 24,
+              "chi=1:A=0": 58,
+              "chi=1:A=1": 32,
+              "chi=1:A=2": 32,
+              "chi=1:A=3": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 8
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000011010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1066,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 60,
+              "chi=-1:A=-2": 20,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 56,
+              "chi=-1:A=1": 36,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 26,
+              "chi=1:A=-2": 24,
+              "chi=1:A=0": 58,
+              "chi=1:A=1": 32,
+              "chi=1:A=2": 32,
+              "chi=1:A=3": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 8
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000110001",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 4,
+          "profile": {
+            "additive_energy": 1098,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 60,
+              "chi=-1:A=-2": 24,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 48,
+              "chi=-1:A=1": 36,
+              "chi=-1:A=2": 8,
+              "chi=1:A=-1": 30,
+              "chi=1:A=-2": 24,
+              "chi=1:A=0": 50,
+              "chi=1:A=1": 32,
+              "chi=1:A=2": 40,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 8
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00001000011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1114,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 44,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 68,
+              "chi=-1:A=1": 36,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 46,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-3": 4,
+              "chi=1:A=0": 40,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 22,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 12,
+              "2": 2,
+              "4": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00001100001",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1114,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 44,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 68,
+              "chi=-1:A=1": 36,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 46,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-3": 4,
+              "chi=1:A=0": 40,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 22,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 12,
+              "2": 2,
+              "4": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00001100010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1130,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 52,
+              "chi=-1:A=-2": 40,
+              "chi=-1:A=0": 36,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 4,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 22,
+              "chi=1:A=-2": 26,
+              "chi=1:A=0": 54,
+              "chi=1:A=1": 40,
+              "chi=1:A=2": 34,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 10,
+              "2": 6
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000000001",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1130,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 52,
+              "chi=-1:A=-2": 40,
+              "chi=-1:A=0": 36,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 4,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 22,
+              "chi=1:A=-2": 26,
+              "chi=1:A=0": 54,
+              "chi=1:A=1": 40,
+              "chi=1:A=2": 34,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 10,
+              "2": 6
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000000010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000001011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000001101",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000010011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000010101",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000011001",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000011010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000101001",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1162,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 48,
+              "chi=-1:A=-2": 12,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 50,
+              "chi=1:A=-2": 14,
+              "chi=1:A=0": 38,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 18,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 14,
+              "2": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000101010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1178,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 44,
+              "chi=-1:A=-2": 24,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 52,
+              "chi=-1:A=1": 40,
+              "chi=-1:A=2": 4,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 30,
+              "chi=1:A=-2": 24,
+              "chi=1:A=0": 50,
+              "chi=1:A=1": 32,
+              "chi=1:A=2": 40,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 4,
+              "0": 10,
+              "2": 4
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000001101",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1178,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 44,
+              "chi=-1:A=-2": 24,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 52,
+              "chi=-1:A=1": 40,
+              "chi=-1:A=2": 4,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 30,
+              "chi=1:A=-2": 24,
+              "chi=1:A=0": 50,
+              "chi=1:A=1": 32,
+              "chi=1:A=2": 40,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 4,
+              "0": 10,
+              "2": 4
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000010011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 4,
+          "profile": {
+            "additive_energy": 1242,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 56,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 60,
+              "chi=-1:A=1": 20,
+              "chi=-1:A=2": 12,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 46,
+              "chi=1:A=-2": 16,
+              "chi=1:A=-3": 4,
+              "chi=1:A=0": 28,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 24,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 6
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 12,
+              "2": 4,
+              "4": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000000000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 4,
+          "profile": {
+            "additive_energy": 1258,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 44,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 42,
+              "chi=1:A=-2": 16,
+              "chi=1:A=-3": 4,
+              "chi=1:A=0": 36,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 6
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 12,
+              "2": 4,
+              "4": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000001111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1258,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 44,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=-3": 16,
+              "chi=-1:A=0": 64,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 42,
+              "chi=1:A=-2": 16,
+              "chi=1:A=-3": 4,
+              "chi=1:A=0": 36,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 16,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 6
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 12,
+              "2": 4,
+              "4": 2
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000011011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1602,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 28,
+              "chi=-1:A=-4": 16,
+              "chi=-1:A=0": 76,
+              "chi=-1:A=2": 40,
+              "chi=1:A=-2": 48,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 68,
+              "chi=1:A=2": 56,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 8,
+              "2": 8,
+              "6": 2
+            },
+            "coherence_violations_min": 20,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000011100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 3,
+          "profile": {
+            "additive_energy": 1602,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 28,
+              "chi=-1:A=-4": 16,
+              "chi=-1:A=0": 76,
+              "chi=-1:A=2": 40,
+              "chi=1:A=-2": 48,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 68,
+              "chi=1:A=2": 56,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 8,
+              "2": 8,
+              "6": 2
+            },
+            "coherence_violations_min": 20,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00011000011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1602,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 28,
+              "chi=-1:A=-4": 16,
+              "chi=-1:A=0": 76,
+              "chi=-1:A=2": 40,
+              "chi=1:A=-2": 48,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 68,
+              "chi=1:A=2": 56,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 8,
+              "2": 8,
+              "6": 2
+            },
+            "coherence_violations_min": 20,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00110000000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1602,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 28,
+              "chi=-1:A=-4": 16,
+              "chi=-1:A=0": 76,
+              "chi=-1:A=2": 40,
+              "chi=1:A=-2": 48,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 68,
+              "chi=1:A=2": 56,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 8,
+              "2": 8,
+              "6": 2
+            },
+            "coherence_violations_min": 20,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00110000011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1602,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 28,
+              "chi=-1:A=-4": 16,
+              "chi=-1:A=0": 76,
+              "chi=-1:A=2": 40,
+              "chi=1:A=-2": 48,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 68,
+              "chi=1:A=2": 56,
+              "chi=1:A=4": 4,
+              "chi=1:A=6": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 8,
+              "2": 8,
+              "6": 2
+            },
+            "coherence_violations_min": 20,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00111110000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 970,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=0": 60,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 30,
+              "chi=1:A=-2": 18,
+              "chi=1:A=0": 62,
+              "chi=1:A=1": 32,
+              "chi=1:A=2": 34,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 10,
+              "2": 6
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000010100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 970,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 16,
+              "chi=-1:A=0": 60,
+              "chi=-1:A=1": 28,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 30,
+              "chi=1:A=-2": 18,
+              "chi=1:A=0": 62,
+              "chi=1:A=1": 32,
+              "chi=1:A=2": 34,
+              "chi=1:A=3": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "-2": 2,
+              "0": 10,
+              "2": 6
+            },
+            "coherence_violations_min": 19,
+            "fourier_support_size": 342,
+            "irrational_squared_moduli": 342,
+            "orientation_bits": "00000011000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 180,
+              "chi=1:v=1": 162
+            },
+            "pi_valuation_histogram": {
+              "1": 342
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 180
+          }
+        }
+      ],
+      "frame_exact_fourier_values": null,
+      "paley_eigenvalue_by_chi_class": {
+        "-1": -10,
+        "1": 9
+      },
+      "q": 19
+    },
+    {
+      "candidate_count": 39,
+      "distinct_profiles": [
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1350,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 84,
+              "chi=-1:A=-2": 20,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 112,
+              "chi=-1:A=1": 40,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 48,
+              "chi=1:A=-2": 18,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 98,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 40,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 20,
+              "4": 2
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111111101",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1350,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 84,
+              "chi=-1:A=-2": 20,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=0": 112,
+              "chi=-1:A=1": 40,
+              "chi=-1:A=2": 4,
+              "chi=1:A=-1": 48,
+              "chi=1:A=-2": 18,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 98,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 40,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 20,
+              "4": 2
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111111110",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1446,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 32,
+              "chi=-1:A=-3": 8,
+              "chi=-1:A=0": 96,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 56,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 104,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 40,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111101010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1446,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 32,
+              "chi=-1:A=-3": 8,
+              "chi=-1:A=0": 96,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 4,
+              "chi=1:A=-1": 56,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 104,
+              "chi=1:A=1": 48,
+              "chi=1:A=2": 40,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111101100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1462,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 84,
+              "chi=-1:A=-2": 40,
+              "chi=-1:A=0": 80,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 16,
+              "chi=1:A=-1": 32,
+              "chi=1:A=-2": 14,
+              "chi=1:A=-3": 6,
+              "chi=1:A=-4": 2,
+              "chi=1:A=0": 108,
+              "chi=1:A=1": 64,
+              "chi=1:A=2": 32,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 2
+            },
+            "autocorrelation_on_rational_d": {
+              "-4": 2,
+              "0": 18,
+              "4": 2
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0001001011000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1478,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 80,
+              "chi=-1:A=-2": 28,
+              "chi=-1:A=-3": 8,
+              "chi=-1:A=0": 92,
+              "chi=-1:A=1": 40,
+              "chi=-1:A=2": 16,
+              "chi=1:A=-1": 48,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-3": 2,
+              "chi=1:A=-4": 2,
+              "chi=1:A=0": 112,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 28,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 6
+            },
+            "autocorrelation_on_rational_d": {
+              "-4": 2,
+              "0": 18,
+              "4": 2
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111101101",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1510,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 68,
+              "chi=-1:A=-2": 32,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 88,
+              "chi=-1:A=1": 48,
+              "chi=-1:A=2": 16,
+              "chi=1:A=-1": 56,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 110,
+              "chi=1:A=1": 44,
+              "chi=1:A=2": 32,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 6
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 20,
+              "4": 2
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000000110111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1510,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 68,
+              "chi=-1:A=-2": 32,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 88,
+              "chi=-1:A=1": 48,
+              "chi=-1:A=2": 16,
+              "chi=1:A=-1": 56,
+              "chi=1:A=-2": 10,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 110,
+              "chi=1:A=1": 44,
+              "chi=1:A=2": 32,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 6
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 20,
+              "4": 2
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000010010111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1542,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 24,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 100,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 26,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 96,
+              "chi=1:A=1": 60,
+              "chi=1:A=2": 28,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000000011000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 1542,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 24,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 100,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 26,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 96,
+              "chi=1:A=1": 60,
+              "chi=1:A=2": 28,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000000101000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1542,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 24,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 100,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 26,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 96,
+              "chi=1:A=1": 60,
+              "chi=1:A=2": 28,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0010001110000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1542,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 72,
+              "chi=-1:A=-2": 24,
+              "chi=-1:A=-3": 12,
+              "chi=-1:A=0": 100,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 12,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 26,
+              "chi=1:A=-3": 2,
+              "chi=1:A=0": 96,
+              "chi=1:A=1": 60,
+              "chi=1:A=2": 28,
+              "chi=1:A=3": 4,
+              "chi=1:A=4": 8
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0010010110000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 3,
+          "profile": {
+            "additive_energy": 1654,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 76,
+              "chi=-1:A=-2": 48,
+              "chi=-1:A=0": 80,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 8,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 18,
+              "chi=1:A=-3": 2,
+              "chi=1:A=-5": 4,
+              "chi=1:A=0": 100,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 36,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000110001100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1654,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 76,
+              "chi=-1:A=-2": 48,
+              "chi=-1:A=0": 80,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 8,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 18,
+              "chi=1:A=-3": 2,
+              "chi=1:A=-5": 4,
+              "chi=1:A=0": 100,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 36,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111110001",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1654,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 76,
+              "chi=-1:A=-2": 48,
+              "chi=-1:A=0": 80,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 8,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 18,
+              "chi=1:A=-3": 2,
+              "chi=1:A=-5": 4,
+              "chi=1:A=0": 100,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 36,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111110010",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1654,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 76,
+              "chi=-1:A=-2": 48,
+              "chi=-1:A=0": 80,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 8,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 18,
+              "chi=1:A=-3": 2,
+              "chi=1:A=-5": 4,
+              "chi=1:A=0": 100,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 36,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111110100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 1654,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 76,
+              "chi=-1:A=-2": 48,
+              "chi=-1:A=0": 80,
+              "chi=-1:A=1": 44,
+              "chi=-1:A=2": 8,
+              "chi=-1:A=3": 8,
+              "chi=1:A=-1": 40,
+              "chi=1:A=-2": 18,
+              "chi=1:A=-3": 2,
+              "chi=1:A=-5": 4,
+              "chi=1:A=0": 100,
+              "chi=1:A=1": 52,
+              "chi=1:A=2": 36,
+              "chi=1:A=3": 8,
+              "chi=1:A=4": 4
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 18,
+              "4": 4
+            },
+            "coherence_violations_min": 28,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111111000",
+            "pi_valuation_by_class": {
+              "chi=-1:v=1": 264,
+              "chi=1:v=1": 242
+            },
+            "pi_valuation_histogram": {
+              "1": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 2094,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 72,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 104,
+              "chi=-1:A=2": 60,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 72,
+              "chi=1:A=0": 106,
+              "chi=1:A=2": 72,
+              "chi=1:A=4": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 12
+            },
+            "coherence_violations_min": 30,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000000000110",
+            "pi_valuation_by_class": {
+              "chi=-1:v=3": 264,
+              "chi=1:v=3": 242
+            },
+            "pi_valuation_histogram": {
+              "3": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 2094,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 72,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 104,
+              "chi=-1:A=2": 60,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 72,
+              "chi=1:A=0": 106,
+              "chi=1:A=2": 72,
+              "chi=1:A=4": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 12
+            },
+            "coherence_violations_min": 30,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000001111100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=3": 264,
+              "chi=1:v=3": 242
+            },
+            "pi_valuation_histogram": {
+              "3": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 2094,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 72,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 104,
+              "chi=-1:A=2": 60,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 72,
+              "chi=1:A=0": 106,
+              "chi=1:A=2": 72,
+              "chi=1:A=4": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 12
+            },
+            "coherence_violations_min": 30,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000001111111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=3": 264,
+              "chi=1:v=3": 242
+            },
+            "pi_valuation_histogram": {
+              "3": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 2094,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 72,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 104,
+              "chi=-1:A=2": 60,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 72,
+              "chi=1:A=0": 106,
+              "chi=1:A=2": 72,
+              "chi=1:A=4": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 12
+            },
+            "coherence_violations_min": 30,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0000111000011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=3": 264,
+              "chi=1:v=3": 242
+            },
+            "pi_valuation_histogram": {
+              "3": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 2094,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 72,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 104,
+              "chi=-1:A=2": 60,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 72,
+              "chi=1:A=0": 106,
+              "chi=1:A=2": 72,
+              "chi=1:A=4": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 12
+            },
+            "coherence_violations_min": 30,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0010000110011",
+            "pi_valuation_by_class": {
+              "chi=-1:v=3": 264,
+              "chi=1:v=3": 242
+            },
+            "pi_valuation_histogram": {
+              "3": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 2,
+          "profile": {
+            "additive_energy": 2094,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 72,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 104,
+              "chi=-1:A=2": 60,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 72,
+              "chi=1:A=0": 106,
+              "chi=1:A=2": 72,
+              "chi=1:A=4": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 12
+            },
+            "coherence_violations_min": 30,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0011100001111",
+            "pi_valuation_by_class": {
+              "chi=-1:v=3": 264,
+              "chi=1:v=3": 242
+            },
+            "pi_valuation_histogram": {
+              "3": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        },
+        {
+          "count": 1,
+          "profile": {
+            "additive_energy": 2094,
+            "autocorrelation_by_class": {
+              "chi=-1:A=-1": 20,
+              "chi=-1:A=-2": 72,
+              "chi=-1:A=-3": 4,
+              "chi=-1:A=-4": 4,
+              "chi=-1:A=0": 104,
+              "chi=-1:A=2": 60,
+              "chi=1:A=-1": 2,
+              "chi=1:A=-2": 72,
+              "chi=1:A=0": 106,
+              "chi=1:A=2": 72,
+              "chi=1:A=4": 12
+            },
+            "autocorrelation_on_rational_d": {
+              "0": 10,
+              "2": 12
+            },
+            "coherence_violations_min": 30,
+            "fourier_support_size": 506,
+            "irrational_squared_moduli": 506,
+            "orientation_bits": "0111111111100",
+            "pi_valuation_by_class": {
+              "chi=-1:v=3": 264,
+              "chi=1:v=3": 242
+            },
+            "pi_valuation_histogram": {
+              "3": 506
+            },
+            "rational_squared_moduli": {},
+            "wrong_class_support": 264
+          }
+        }
+      ],
+      "frame_exact_fourier_values": null,
+      "paley_eigenvalue_by_chi_class": {
+        "-1": -12,
+        "1": 11
+      },
+      "q": 23
+    }
+  ],
+  "schema": "c756-sparse-paley-trade-profile-v1",
+  "scope": "every normalized pairwise-resultant-character candidate in the bounded prime fields q in {5,7,11,19,23}, in the canonical minimizing orientation of the 2026-08-01 uncertainty pass",
+  "vector": "x = 1_Z - 1_{Z^q} on the additive group of F_{q^2}, trace pairing Tr(wz), values in Z[zeta_q]"
+}
