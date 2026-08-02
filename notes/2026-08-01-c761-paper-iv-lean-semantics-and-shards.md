@@ -125,10 +125,13 @@ All seven items remain inside C761 rather than becoming successor mysteries:
 7. connect the regular triple orbit, forced fourth anchor, and separating
    signatures to the proved abstract four-anchor closure.
 
-## EJ+TT closeout and mystery ledger
+## Extra-juice + TT closeout and mystery ledger
 
 The cheap high-value upgrades are complete: exact rank and association leaves,
 projective orbit shards, precomputed cycle syndromes, a precise manuscript
 trust statement, and an axiom-audited aggregate gate.  No new mathematical
 mystery appeared.  The remaining work is exactly the seven semantic transports
 above plus the ordinary release audit and publication steps.
+
+The follow-up extra-juice compression audit is
+[`2026-08-01-c761-paper-iv-ej.md`](2026-08-01-c761-paper-iv-ej.md).

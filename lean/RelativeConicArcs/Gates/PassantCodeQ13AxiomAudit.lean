@@ -18,4 +18,6 @@ reconstruction-interface terminals exported by `RelativeConicArcs.Gates.PassantC
 #print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightTen_profile_reduction
 #print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.association_kernel_rigidity
 #print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.relationOnKernel_surjective
+#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.relation_range_eq_kernel
+#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.factorization_forces_orbit_span
 #print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.four_anchor_rigidity

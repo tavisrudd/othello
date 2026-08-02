@@ -93,6 +93,40 @@ theorem relationOnKernel_surjective
   LinearMap.injective_iff_surjective.mp
     (relationOnKernel_injective A B B2 B4 AB_zero B_squared B2_squared A_squared)
 
+/-- The relation operator has image exactly the incidence kernel.  This packages the manuscript's
+`im B = K` conclusion, leaving only the concrete association identities as finite inputs. -/
+theorem relation_range_eq_kernel
+    [FiniteDimensional K V]
+    (A B B2 B4 : V →ₗ[K] V)
+    (AB_zero : A.comp B = 0)
+    (B_squared : B.comp B = B2)
+    (B2_squared : B2.comp B2 = B4)
+    (A_squared : A.comp A = LinearMap.id + B + B2 + B4) :
+    LinearMap.range B = LinearMap.ker A := by
+  apply le_antisymm
+  · rintro vector ⟨source, rfl⟩
+    have evaluated := LinearMap.congr_fun AB_zero source
+    simpa [LinearMap.mem_ker] using evaluated
+  · intro vector vector_mem
+    obtain ⟨source, source_maps⟩ :=
+      relationOnKernel_surjective A B B2 B4 AB_zero B_squared B2_squared A_squared
+        ⟨vector, vector_mem⟩
+    refine ⟨source, ?_⟩
+    exact congrArg Subtype.val source_maps
+
+/-- If a relation operator factors through an orbit support map, its full-kernel image forces the
+orbit rows to span the code.  In the manuscript the factorization is `B = NᵀN`. -/
+theorem factorization_forces_orbit_span
+    {OrbitSpace : Type*} [AddCommGroup OrbitSpace] [Module K OrbitSpace]
+    (A B : V →ₗ[K] V) (orbitRows : OrbitSpace →ₗ[K] V) (transposeRows : V →ₗ[K] OrbitSpace)
+    (factorization : orbitRows.comp transposeRows = B)
+    (relation_image : LinearMap.range B = LinearMap.ker A)
+    (rows_are_codewords : LinearMap.range orbitRows ≤ LinearMap.ker A) :
+    LinearMap.range orbitRows = LinearMap.ker A := by
+  apply le_antisymm rows_are_codewords
+  rw [← relation_image, ← factorization]
+  exact LinearMap.range_comp_le_range transposeRows orbitRows
+
 end Association
 
 section Anchors
