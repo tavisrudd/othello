@@ -414,18 +414,53 @@ support of that state's three-party marginals and read off the recognition
 groups — and it is worth asking precisely because a positive answer would be a
 rigidity statement about an object with no code-theoretic description.
 
+### The axis lemma is Jennrich's theorem, and this reaches the committed manuscript
+
+**C807 finding, and the most consequential one in either half.** Lemma
+`diagonal-axes` is not ours. It is Jennrich's uniqueness theorem, published in
+Harshman's 1970 working paper, whose conclusion "a permutation matrix times
+diagonal matrices" is our "monomial in the displayed bases" and whose
+full-column-rank hypothesis is ours; our orthonormal-basis setting is the
+special case where every factor matrix is the identity. Kolda and Bader's
+survey states the attribution chain explicitly, including that Harshman credits
+Jennrich for the proof. The sharpest general form is Kruskal's k-rank
+condition, extended to arbitrarily many factors by Sidiropoulos and Bro.
+
+Our proof is not Jennrich's — his argument expands new factor columns in the
+old and forces one nonzero entry per column, ours identifies the axes as the
+rank-one locus of a one-factor contraction. The audit could not locate the
+contraction route in a source and could not rule it out either, so the correct
+posture is to cite the statement to Jennrich as published by Harshman, present
+the proof as a short self-contained argument, and claim novelty for neither.
+
+**This is not confined to the new work.** `sections/03-lu-rigidity.tex` states
+Lemma `diagonal-axes` today, in the committed manuscript, crediting only the
+three-Pauli argument of Rains and of Van den Nest, Dehaene and De Moor for the
+mechanism. The tensor-uniqueness attribution is missing from the released
+candidate. Repairing it is a citation correction to shipped material, which
+outranks the reframing in urgency and needs a decision independent of anything
+else in C804.
+
 ### The three-party floor is Kruskal's boundary, and that is a citation duty
 
 Lemma `diagonal-axes` is a special case of the uniqueness theory for tensor
 decompositions. Kruskal's condition for an `r`-factor decomposition of rank `N`
 is that the sum of the factor k-ranks be at least `2N + r − 1`. Our factors are
 sets of `N` distinct Weyl operators, which are linearly independent, so every
-k-rank is `N`, and the condition reads `rN ≥ 2N + r − 1`, i.e. `r ≥ 3` for
-`N ≥ 2` and `N ≥ 2` for `r ≥ 3` — exactly the two boundaries found
-independently in the sharpness section. That the two-party case fails is the
-same fact as the rotation freedom in a singular value decomposition with
-repeated singular values. Any manuscript adoption should cite the tensor
-uniqueness literature rather than present the boundary as ours.
+k-rank is `N`, and the condition reads `rN ≥ 2N + r − 1`, i.e. `N ≥ 2` at every
+`r ≥ 3`. That the two-party case fails in general is the same fact as the
+rotation freedom in a singular value decomposition, and is textbook. Any
+manuscript adoption should cite the tensor uniqueness literature rather than
+present the boundary as ours.
+
+**Correction from C807: "exactly the Kruskal boundary" was wrong, and the
+mismatch runs in our favour.** Kruskal's inequality fails at `r = 2` for every
+`N ≥ 2`, including `N = 2`, yet Theorem P holds at `r = 2, N = 2`. Theorem P is
+not a bare tensor-uniqueness statement: it pins one index at the identity and
+restricts the equivalence to unitary conjugation, and that structure lies
+outside what Kruskal's condition can see. The three-party floor is Kruskal's
+and must be cited as such; the surviving two-party case rests on unitarity plus
+the pinned identity term and is not a consequence of tensor uniqueness at all.
 
 The same identification supplies the escape route from the ceiling. Kruskal's
 condition is stated in k-ranks, not in injectivity, so a marginal whose labels
@@ -436,6 +471,14 @@ posed as a question rather than a result: repeated columns drop a factor's
 k-rank to one, so the compensation demanded of the remaining parties is severe,
 and for stabilizer marginals the repeats come in whole cosets of the projection
 kernel. Whether any non-minimal support survives that arithmetic is untested.
+
+C807 found this is a named and active area rather than open ground: decompositions
+with deliberately repeated columns are studied under the name PARALIND, the
+available results are partial-uniqueness rather than uniqueness, and the
+rank-based generalization of Lovitz and Petrov is the right tool here precisely
+because coset repeats drop the k-rank to one and k-rank-based conditions
+therefore say nothing. Nothing located treats repeats organised as cosets of a
+subgroup, which is our case.
 
 ### Why the tensor structure is doing all the work
 
@@ -497,6 +540,19 @@ data point and costs almost nothing.
 
 ## Gates before any of this reaches the manuscript
 
+0. **The method is pre-empted; only the conclusion is unoccupied.** C807 located
+   Chang and Jing (2022), who expand a multi-qubit state in the Pauli basis,
+   note that a local unitary acts on the coefficient tensor through the adjoint
+   action, and apply tensor-decomposition uniqueness with Kruskal's condition to
+   characterise local-unitary equivalence. That is the same machine as Theorem
+   P and must be cited. What they do not do is the conclusion: for qubits the
+   basis-preservation statement is vacuous, since every single-qubit unitary
+   preserves the span of the Pauli operators, so their use of uniqueness builds
+   invariants separating equivalence classes rather than forcing a factor into
+   the Clifford group. Our conclusion is nontrivial exactly because above local
+   dimension two a general unitary does not preserve the Weyl axes. Any "to our
+   knowledge" sentence must survive that citation and be scoped to the
+   conclusion, never to the method.
 1. **Novelty audit, blocking.** The specialization inversion needed no audit
    because it claimed only what the manuscript already proved. This does not
    qualify: Theorem P, Corollary G, and Corollary C are new statements, and the
