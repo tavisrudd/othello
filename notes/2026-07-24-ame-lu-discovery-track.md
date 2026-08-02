@@ -208,4 +208,8 @@ unit count differs from the dimension.  Ten small binary codes is not evidence
 of a general law, and nothing here tested odd characteristic.
 **Evidence:** `notes/2026-08-01-external-source-numerics-lattice.json`, ten
 codes, exact integer arithmetic, with a `--check` replay.
-**Status:** open lead.
+**Status:** SUBSUMED 2026-08-01, same day.  A Tao pass found the general
+statement: the count of invariant factors divisible by `2^l`, plus the free
+rank, equals the codimension of the l-th Schur power, at every level tested.
+The unit-factor law is its `l = 1` case, so this is no longer a separate
+lead.  Promoted to C790; do not pursue independently.
