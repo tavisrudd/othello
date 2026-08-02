@@ -218,7 +218,9 @@ in its report.
 The adopted manuscript now:
 
 - replaces the introduction's pre-emption concession by the strictly scoped
-  recognition-group positioning;
+  recognition-group positioning, while keeping the proof-branch audit and
+  \(d=9\) nongenerating example in Section 3 rather than crowding the
+  introduction;
 - proves the partial-Weyl criterion, recognition subgroup, generation
   criterion, minimal-support realization, prime-field CSS corollary, and
   arbitrary-integer-dimension extension in Section 3;
