@@ -37,10 +37,10 @@ mechanisms used by the operator theorem; outer-family coherence,
 cross-golden determinants, and the classical six-point quotient remain human
 proof boundaries.
 
-The correspondence address, ORCID, and version-independent finitegeom DOI are
-recorded in `.zenodo.json`.  Public finitegeom commit
+The author is an independent researcher with no institutional affiliation; this
+status, the correspondence address, the ORCID, and the version-independent
+finitegeom DOI are recorded in `.zenodo.json`.  Public finitegeom commit
 `f1d81641827fd037fcbd8363a6f9cd5abf3767cf` matches the complete base formal
 map, but not the supplemental golden-return source map.  Submission therefore
-still requires an immutable public locator for those supplemental sources and
-the author's affiliation metadata; neither is represented by a placeholder in
-the manuscript.
+still requires an immutable finitegeom release containing those supplemental
+sources; no metadata placeholder remains in the manuscript.

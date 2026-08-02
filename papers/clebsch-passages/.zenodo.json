@@ -1,10 +1,11 @@
 {
   "title": "Golden descent and operator realizations of the Clebsch cubic",
-  "description": "This preprint identifies arithmetic and harmonic passages between classical models of the Clebsch cubic. It determines the rational square class of the incidence orientation cover, analyzes its exact local golden fibre and mod-11 exchanger, and realizes the degree-six icosahedral Gaunt cubic on the Petersen four-space, with replayable exact computations and an optional formal companion.",
+  "description": "This preprint traces the golden orientation of the Clebsch cubic from Hitchin's incidence cover, whose rational square class is 5J0, through a six-point conference operator with square 5I. Its triangle, middle-exterior, commutator-Pfaffian, and determinant shadows recover the classical Joubert--Segre and Segre--Igusa constructions, while a degree-six Petersen/Gaunt realization returns the same Clebsch invariant harmonically. The marking boundary is explicit, and replayable exact computations accompany a partial formal companion.",
   "creators": [
     {
       "name": "Rudd, Tavis",
-      "orcid": "0009-0003-6405-3275"
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
     }
   ],
   "access_right": "open",

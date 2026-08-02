@@ -94,9 +94,8 @@ Clebsch cubic*
   invariant harmonically. The seven trust rows are proved, certified, or
   literature-backed, and the structural Lean companion records exact
   partial-mechanism coverage without serving as a manuscript premise. Local
-  release gates are closed; submission still requires an immutable public
-  locator for the supplemental golden-return sources and author affiliation
-  metadata.
+  release gates are closed; submission still requires an immutable finitegeom
+  release containing the supplemental golden-return sources.
 
 **Clebsch fourth paper · `q13-passant-code`** — *A binary [78,36,12] code from the passant
 lines of a conic over F13*
