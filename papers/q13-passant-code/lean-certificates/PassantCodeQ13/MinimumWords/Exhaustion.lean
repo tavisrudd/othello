@@ -105,6 +105,22 @@ def fixedPointWeightTwelveSolutions : List Nat :=
 def fixedPointOrbitSlices : List Nat :=
   minimumSupportCodes.filter fun support => support.testBit 0
 
+/-- The 28 projective transformations fixing the normalized internal point of index zero. -/
+def fixedPointStabilizer : List Matrix2 :=
+  projectiveMatrices.filter fun matrix =>
+    internalIndex (act matrix (internalAt 0)) == 0
+
+/-- Image of an encoded support under the symmetric-square projective action. -/
+def actOnSupportCode (matrix : Matrix2) (support : Nat) : Nat :=
+  (List.range 78).foldl (fun image point =>
+    if support.testBit point then
+      image ||| (1 <<< internalIndex (act matrix (internalAt point)))
+    else image) 0
+
+/-- Orbit of one encoded support under the fixed-point stabilizer. -/
+def fixedPointStabilizerOrbit (support : Nat) : List Nat :=
+  (fixedPointStabilizer.map fun matrix => actOnSupportCode matrix support).eraseDups
+
 /-- The four fixed-point profile searches return exactly the 56 supports in the four orbit slices. -/
 theorem fixedPoint_weightTwelve_exhaustion :
     fixedPointWeightTwelveSolutions.toFinset = fixedPointOrbitSlices.toFinset ∧
@@ -113,6 +129,19 @@ theorem fixedPoint_weightTwelve_exhaustion :
       (supportOrbit representativeDihedralA).countP (fun support => support.testBit 0) = 14 ∧
       (supportOrbit representativeDihedralB).countP (fun support => support.testBit 0) = 14 ∧
       (supportOrbit representativeDihedralC).countP (fun support => support.testBit 0) = 14 := by
+  native_decide
+
+/-- The order-28 fixed-point stabilizer acts transitively on each 14-support orbit slice. -/
+theorem fixedPoint_slices_are_stabilizer_orbits :
+    fixedPointStabilizer.length = 28 ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeS4)).toFinset =
+        ((supportOrbit representativeS4).filter fun support => support.testBit 0).toFinset ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeDihedralA)).toFinset =
+        ((supportOrbit representativeDihedralA).filter fun support => support.testBit 0).toFinset ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeDihedralB)).toFinset =
+        ((supportOrbit representativeDihedralB).filter fun support => support.testBit 0).toFinset ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeDihedralC)).toFinset =
+        ((supportOrbit representativeDihedralC).filter fun support => support.testBit 0).toFinset := by
   native_decide
 
 end PassantCodeQ13.MinimumWords
