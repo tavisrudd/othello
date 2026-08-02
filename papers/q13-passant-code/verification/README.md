@@ -15,8 +15,9 @@ The current `claim_map.json` records the frozen source claims and their
 present trust modes. `evidence_manifest.json` records the first byte-for-byte
 migration from Paper I, including source commit, paths, byte counts, hashes,
 commands, and replay relationships. The paper-owned Lean package under
-`lean-certificates/` checks the q=13 coordinate semantics, tangent-graph leaf,
-both weight-ten syndrome profiles, and four displayed minimum-word orbits.
+`lean-certificates/`, together with the shared semantic library, checks the q=13 coordinate
+semantics, transports the normalized weight-eight reduction to the cyclic tangent graph, checks
+both weight-ten syndrome profiles, and checks four displayed minimum-word orbits.
 Its formal scope is strictly smaller than the complete release theorem.
 
 ## Evidence to extract

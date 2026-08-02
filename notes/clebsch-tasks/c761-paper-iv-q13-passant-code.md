@@ -5,7 +5,8 @@
 **Status:** active; theorem and novelty boundary frozen, full human proof and
 paper-owned evidence gate green, shared q13 semantic modules and the sharded
 paper-owned Lean certificate gate green.  The rank evaluator now transports to
-semantic incidence-map rank 42 and code dimension 36.  Six exact semantic transports and
+semantic incidence-map rank 42 and code dimension 36, and the normalized weight-eight word now
+transports through pencil saturation and tangent holonomy to the concrete cyclic graph.  Five exact semantic transports and
 the remaining release/publication work remain.
 
 ## Goal

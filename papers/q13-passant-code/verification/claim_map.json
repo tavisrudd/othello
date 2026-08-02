@@ -12,8 +12,8 @@
     {
       "id": "minimum-distance",
       "statement": "The code has minimum distance 12.",
-      "current_modes": ["human parity reduction", "human tangent-product reduction", "Lean seven-companion, secant-count, and exact fibre-multiplicity deductions", "Lean tangent graph with 70 four-cliques and 14 maximal five-cliques", "fourteen Lean weight-ten certificate shards", "explicit weight-twelve witness", "paper-owned independent replay"],
-      "lean_boundary": "the geometric transports from a weight-eight word to the tangent graph and from an arbitrary weight-ten word to the proved pencil-profile hypotheses remain human arguments"
+      "current_modes": ["human parity reduction", "human tangent-product reduction", "Lean row-parity saturation of the seven base pencils", "Lean semantic identification of the 42 tangent neighbors and cyclic graph", "Lean tangent graph with 70 four-cliques and 14 maximal five-cliques", "Lean secant-count and exact fibre-multiplicity deductions", "fourteen Lean weight-ten certificate shards", "explicit weight-twelve witness", "paper-owned independent replay"],
+      "lean_boundary": "closed in weight eight after the classical arc/tangent lemma supplies pairwise passant joins and tangent holonomy one; transport from an arbitrary weight-ten word to the proved pencil-profile hypotheses remains a human argument"
     },
     {
       "id": "minimum-layer",

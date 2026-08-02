@@ -17,6 +17,11 @@ profiles and that their syndrome sets are disjoint.
 42-column basis and proves that this executable rank is `Module.finrank` of the semantic incidence
 map. Rank-nullity therefore gives code dimension 36 in the aggregate gate. The tracked generator
 `generate_rank_transport.py` reproduces `PassantCodeQ13.RankTransportData` byte for byte.
+The shared `RelativeConicArcs.PassantCodeQ13.WeightEight` module derives saturation of the seven
+base pencils from code membership, identifies the 42 semantic passant-join neighbors with the
+three cyclic vertex orbits, checks that tangent holonomy is exactly the displayed adjacency, and
+proves the five-clique bound.  Its terminal theorem excludes a normalized weight-eight word once
+the classical arc/tangent lemma supplies pairwise passant joins and tangent holonomy one.
 `PassantCodeQ13.AssociationAlgebra` checks the ranks and squaring identities of the four binary
 elliptic relation matrices used by the orbit-spanning argument.  The minimum-word modules expand
 one symmetric-stabilizer and three dihedral-stabilizer representatives into four disjoint

@@ -47,6 +47,23 @@ theorem tangent_graph_certificate :
   ⟨WeightEight.fourCliques_length, WeightEight.fourClique_unique_extension_check,
     WeightEight.fiveCliqueCodes_length, WeightEight.fiveClique_maximality_check⟩
 
+/-- After projective normalization, row parity saturates the seven passant pencils of a
+weight-eight word.  If the classical arc/tangent lemma supplies pairwise passant joins and tangent
+holonomy one on the other seven support points, the semantic cyclic-graph identification and its
+five-clique bound give a contradiction. -/
+theorem weightEight_semantic_transport
+    (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
+    (weight : CodingBridge.hammingWeight word = 8)
+    (base_mem : WeightEight.basePoint ∈ CodingBridge.hammingSupport word)
+    (tangent_identity : ∀ first ∈ CodingBridge.hammingSupport word,
+      first ≠ WeightEight.basePoint →
+      ∀ second ∈ CodingBridge.hammingSupport word,
+        second ≠ WeightEight.basePoint → first ≠ second →
+          WeightEight.PassantJoin first second ∧
+            WeightEight.TangentHolonomyOne WeightEight.basePoint first second) : False :=
+  WeightEight.no_normalized_weightEight_codeword_of_tangent_holonomy
+    word word_mem weight base_mem tangent_identity
+
 /-- The weight-ten arithmetic reduction belongs to the human proof spine, not a certificate leaf. -/
 theorem weightTen_profile_reduction
     (secantNeighbors : ℕ) (secantNeighbors_even : Even secantNeighbors)
