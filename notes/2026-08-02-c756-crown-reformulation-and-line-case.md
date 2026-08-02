@@ -21,21 +21,23 @@ Two results, one structural and one a closed configuration.
    frames are contained in a line and sit exactly on the boundary of the inequality,
    which is why they survive and nothing else does.
 
-3. **Reduction and closure.**  A line-free clique of size \((q+3)/2\) in \(P(q^2)\) is
-   exactly the regime of the Baker–Ebert–Hemmeter–Woldar maximal cliques.  Their gap
-   and two-orbit conjecture — proved for no \(q\), but computer-verified in the
-   literature for \(q\le109\) — forces \(q\equiv3\pmod4\) and
-   \(Z=a(Q_j\cup\{0\})+b\) (Theorem 3), and that residual two-parameter family is
-   killed **unconditionally for \(q\ge83\)** by a Weil bound whose key step is that the
-   relevant discriminant is a fixed nonsquare (Theorem 4).
+3. **Reduction and conditional closure.**  A line-free clique of size \((q+3)/2\) in
+   \(P(q^2)\) is exactly the regime of the Baker–Ebert–Hemmeter–Woldar maximal cliques.
+   Their gap and two-orbit conjecture forces \(q\equiv3\pmod4\) and
+   \(Z=a(Q_j\cup\{0\})+b\) (Theorem 3), and that residual two-parameter family is killed
+   **unconditionally for \(q\ge83\)** by a Weil bound whose key step is that the relevant
+   discriminant is a fixed nonsquare (Theorem 4), with the smaller fields covered by
+   direct computation.
 
-Net effect on the branch: the saturated-internal gate, previously "prove no coherent
-system exists for \(q>5\)" with an exhaustive audit reaching \(q\le43\), is now closed
-for every \(q\le109\), and closed for **all** \(q\) modulo one named published
-conjecture about maximal cliques of Paley graphs.  The saturated crown — over every
-field, the four-frame and the Clebsch hexagon are the only saturated conic-filling
-arcs — moves from roughly 50% to substantially better, gated on whether the clique
-conjecture can be proved or bypassed rather than on new arc combinatorics.
+What this does and does not buy.  It does **not** extend the unconditional range much:
+the gap conjecture is unproved — Yip states in print that "no partial progress has been
+made" on it — and the published orbit-complete clique tables reach only \(q\le47\),
+barely past the existing exhaustive audit at \(q\le43\).  What it buys is a change of
+kind.  The saturated-internal gate stops being an open search over arcs and becomes a
+single named, actively studied conjecture in Paley-graph combinatorics, of which we need
+only a special case: not "no maximal clique of size \((q+3)/2\)", but "no such clique
+that also carries a Frobenius crown".  The extra crown hypothesis is real leverage that
+the reduction currently throws away.
 
 ## 1. Setup and conventions
 
@@ -265,13 +267,20 @@ takes over.  The relevant published statements are quoted verbatim in
   index-two subgroup and \(Q_1\) the other coset: for \(q\equiv3\pmod4\),
   \(S_j=Q_j\cup\{0\}\) are maximal cliques of size \((q+3)/2\); for
   \(q\equiv1\pmod4\), \(Q_0,Q_1\) are maximal *cocliques* of size \((q+1)/2\).
-- **Gap and two-orbit conjecture (Baker et al.; restated in Bamberg–Goryainov–
+- **Gap and two-orbit conjecture (Baker et al.; restated in Brouwer–Goryainov–
   Shalaginov–Yip).**  There is no maximal clique of size \(s\) with
   \((q+\epsilon)/2<s<q\) where \(q\equiv\epsilon\pmod4\), and for \(q\ge25\) the
-  second-largest maximal cliques form exactly two orbits.  *"This conjecture has been
-  checked for \(r\le109\)."*  Extra second-largest maximal cliques occur only for
-  \(q\in\{9,11,13,17,19,23\}\) (Chen–Goryainov–Hu), all inside the certified
-  \(q\le43\) audit.
+  second-largest maximal cliques form exactly two orbits.  Extra second-largest maximal
+  cliques occur only for \(q\in\{9,11,13,17,19,23\}\) (Chen–Goryainov–Hu), all inside
+  the certified \(q\le43\) audit.
+  **Verification status matters here and is weaker than it first appears.**  The
+  conjecture is proved for no \(q\).  Brouwer et al. assert a check to \(r\le109\) with
+  no attribution or method; their published orbit-complete table stops at \(r\le47\)
+  (prime powers included), and it shows no maximal clique of size \((q+3)/2\) for any
+  \(q\equiv1\pmod4\) up to \(41\) — data, not a theorem.  Yip (*Canad. Math. Bull.*
+  2023) writes that on the gap conjecture "no partial progress has been made".  Full
+  sourcing, including the failure of every published stability result to apply at Paley
+  density, is in the literature report, §6.
 
 > **Theorem 3.**  Assume the gap and two-orbit conjecture for the field \(q\).  Then a
 > coherent system with \(q>5\) exists only if \(q\equiv3\pmod4\) and
@@ -376,10 +385,18 @@ The saturated-internal branch now rests on exactly one external statement.
 - For \(q\equiv3\pmod4\): the gap plus two-orbit classification puts \(Z\) in the
   family \(aS_j+b\), and Theorem 4 plus the bounded check kills that family.
 
-So: **modulo the Baker–Ebert–Hemmeter–Woldar gap and two-orbit conjecture — verified in
-the literature for \(q\le109\) — no coherent system exists for \(q>5\), and the
-saturated-internal branch is closed.**  Unconditionally, the branch is closed for every
-\(q\le109\) rather than the previous \(q\le43\).
+So: **modulo the Baker–Ebert–Hemmeter–Woldar gap and two-orbit conjecture, no coherent
+system exists for \(q>5\) and the saturated-internal branch is closed.**  The
+unconditional range is unchanged in substance — the exhaustive audit at \(q\le43\),
+extended to \(q\le47\) if one leans on the published orbit-complete clique table — so
+the gain is structural, not numerical.
+
+The unconditional target to aim at is therefore *not* the full gap conjecture, which is
+open with no partial progress, but its crown-restricted special case: no maximal clique
+of size \((q+3)/2\) in \(P(q^2)\) is completely joined, outside a perfect matching, to
+its Frobenius image.  Every published stability result fails at Paley's edge density of
+exactly \(1/2\), so a proof will have to use that extra hypothesis rather than a density
+argument.
 
 The previous route via the composition normal form is not superseded but is now the
 fallback: what follows records it for completeness.
@@ -449,6 +466,67 @@ python3 2026-08-02-c756-weil-discriminant-check.py
 - `2026-08-02-c756-line-case-verification.py`
   `ac31b1d0c6a94b0b3ea0fe64a97fe0a0f1eb28d1d5c0aa2f0f96a1f9d0d6b6a7` (recomputed in the JSON)
 - `2026-08-02-c756-line-case-verification.json`
+
+## 7. EJ + TT closeout
+
+**EJ.**  Four upgrades came free with this pass and were taken here.
+
+*The route is field-general.*  The composition normal form of the twenty-fourth pass
+needed \(q\) prime (its binomial expansion is a prime-field argument).  Theorems 1, 2
+and 4 use only \(\mathbb F_q\) arithmetic and Weil's bound, so they hold for every odd
+prime power, and the published clique statements are stated for prime powers as well.
+The standing \(q=27\) extension-field hygiene item is therefore no longer a gap in this
+branch's argument, only in the older fiber-side one.
+
+*"Why \(q=5\)" now has a one-line answer.*  Theorem 2's chain ends in
+\(q-2\le(q+1)/2\).  That is an equality precisely at \(q=5\), where the arc must use
+every element of \(\mathbb F_5^\times\) as a line coordinate and the admissible ratio
+set is exactly the complement of the identity.  The four-frame is not an accident found
+by search; it is the unique solution of an inequality that is tight at one field.
+
+*The reformulation is exportable.*  Theorem 1 states C756's saturated gate entirely
+inside Paley-graph spectral combinatorics, where the minimum support is known
+(\(q+1\)) but its classification is an open problem in that literature and nothing at
+all is known for supports \(q+2,\dots,2q-1\).  A proof that support \(q+3\) is empty is
+a contribution there on its own terms, independent of arcs and conics.
+
+*The Theorem 4 mechanism is reusable.*  Whenever a condition has the shape "a quadratic
+character of a bilinear expression in two circle parameters is constant", the norm
+structure makes \(\operatorname{disc}_{t'}\) equal to a nonsquare times a square, so
+irreducibility of the inner quadratic is automatic and the two-variable sum never has
+to be estimated.  The nonsaturated masked-Rédei target has the same circle
+parametrization available and should be re-examined with this tool.
+
+**TT.**  The Tao question — *what is the bounded object?* — has moved twice.  It was
+\(G\) of degree \(q+3\); the twenty-fourth pass made it the pair \((R,\gamma)\) of
+description length \(O(q)\); it is now the pair \((a,\kappa)\), three field elements,
+against \(\Theta(q^2)\) conditions.  That is the real reason a character sum finishes
+the job: the overdetermination is finally by a factor of \(q^2\) rather than a constant.
+
+The sharpest skeptical check is whether the reformulation quietly discards a hypothesis.
+It does not, and in the safe direction: coherent systems are a *relaxation* of genuine
+saturated-internal arcs — Segre's lemma of tangents forces every arc into coherent
+form, not conversely — so excluding coherent systems is strictly stronger than needed.
+
+The Tao question Tao would ask next is where the argument is wasteful, and the answer
+is clear: the reduction to two clique orbits uses only that \(Z\) is a clique.  The
+whole bipartite half of the crown — the complete join between \(Z\) and \(Z^q\) — is
+unused, and it is exactly the extra structure that might replace the Baker et al. gap
+conjecture with an unconditional argument.  That is the highest-value open lead this
+pass produces.
+
+## 8. Mystery ledger
+
+| mystery | status | exact gap / owner |
+|---|---|---|
+| Why does a coherent system exist at \(q=5\) and nowhere else? | settled | Theorem 2: \(q-2\le(q+1)/2\) is tight exactly at \(q=5\) |
+| Are coherent systems confined to a line? | settled negatively for \(q>5\) | Theorem 2; for \(q>5\) they must be line-free |
+| Is the residual clique-orbit family nonempty? | settled negatively for \(q\ge83\) | Theorem 4, plus the bounded check for smaller \(q\) |
+| Can the Baker–Ebert–Hemmeter–Woldar gap conjecture be avoided? | open, and it must be | it is the sole external dependency and has no partial progress in print; the unused crown/bipartite structure is the only visible lever |
+| Is there an unconditional bound on non-line cliques of \(P(q^2)\)? | settled negatively | none exists below \(q\); every stability theorem needs edge density \(<1/2\) and Paley sits at exactly \(1/2\).  So \(q\equiv1\pmod4\) does not close unconditionally by any published route |
+| Extension fields | settled for this route | Theorems 1, 2, 4 are prime-power-general; only the older fiber-side tower is prime-only |
+| Which \(R\) admit totally split irrational quadratic fibers? | superseded as the gate | retained as the fallback route; see the split-fiber census |
+| Nonsaturated branch (\(\delta\ge2\), masked Rédei \(h\ge1\)) | untouched | unchanged by this pass; still the blocker for the full all-\(k\) theorem |
 
 Companion computations from this pass are reported separately:
 `2026-08-02-c756-split-fiber-census.md` (bounded \((R,\gamma)\) census and the crown
