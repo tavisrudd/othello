@@ -1,0 +1,263 @@
+{
+ "claim": "a coherent system contained in an F_q-affine line forces q=5",
+ "frames": [
+  {
+   "T": [
+    2,
+    3,
+    4
+   ],
+   "T_size": 3,
+   "U": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "U_is_all_of_Fq_star": true,
+   "direction_beta": 2,
+   "frame": [
+    "0+1s",
+    "1+4s",
+    "2+2s",
+    "4+3s"
+   ],
+   "line_rational_point": 3,
+   "needed_ratios": [
+    2,
+    3,
+    4
+   ],
+   "q_minus_2": 3,
+   "ratios_inside_T": true
+  },
+  {
+   "T": [
+    2,
+    3,
+    4
+   ],
+   "T_size": 3,
+   "U": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "U_is_all_of_Fq_star": true,
+   "direction_beta": 3,
+   "frame": [
+    "0+1s",
+    "4+4s",
+    "1+3s",
+    "3+2s"
+   ],
+   "line_rational_point": 2,
+   "needed_ratios": [
+    2,
+    3,
+    4
+   ],
+   "q_minus_2": 3,
+   "ratios_inside_T": true
+  }
+ ],
+ "primes": [
+  5,
+  7,
+  11,
+  13,
+  17,
+  19,
+  23,
+  29,
+  31,
+  37,
+  41,
+  43
+ ],
+ "rows": [
+  {
+   "arc_size": 4,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": null,
+   "case_a_possible": false,
+   "case_b_exhaustive_clear": false,
+   "case_b_impossible_by_counting": false,
+   "case_b_max_T": 3,
+   "case_b_max_U": 4,
+   "case_b_needed_T": 3,
+   "delta": -1,
+   "eps": 2,
+   "q": 5,
+   "t": 3
+  },
+  {
+   "arc_size": 5,
+   "case_a_exhaustive_clear": true,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": 4,
+   "case_a_max_U": 3,
+   "case_a_needed_T": 6,
+   "case_a_possible": true,
+   "case_b_exhaustive_clear": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 4,
+   "case_b_max_U": 3,
+   "case_b_needed_T": 5,
+   "delta": 1,
+   "eps": 3,
+   "q": 7,
+   "t": 4
+  },
+  {
+   "arc_size": 7,
+   "case_a_exhaustive_clear": true,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": 6,
+   "case_a_max_U": 4,
+   "case_a_needed_T": 10,
+   "case_a_possible": true,
+   "case_b_exhaustive_clear": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 6,
+   "case_b_max_U": 5,
+   "case_b_needed_T": 9,
+   "delta": 1,
+   "eps": 2,
+   "q": 11,
+   "t": 6
+  },
+  {
+   "arc_size": 8,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": null,
+   "case_a_possible": false,
+   "case_b_exhaustive_clear": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 7,
+   "case_b_max_U": 6,
+   "case_b_needed_T": 11,
+   "delta": -1,
+   "eps": 2,
+   "q": 13,
+   "t": 7
+  },
+  {
+   "arc_size": 10,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": null,
+   "case_a_possible": false,
+   "case_b_exhaustive_clear": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 9,
+   "case_b_max_U": 4,
+   "case_b_needed_T": 15,
+   "delta": -1,
+   "eps": 3,
+   "q": 17,
+   "t": 9
+  },
+  {
+   "arc_size": 11,
+   "case_a_exhaustive_clear": true,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": 10,
+   "case_a_max_U": 4,
+   "case_a_needed_T": 18,
+   "case_a_possible": true,
+   "case_b_exhaustive_clear": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 10,
+   "case_b_max_U": 6,
+   "case_b_needed_T": 17,
+   "delta": 1,
+   "eps": 2,
+   "q": 19,
+   "t": 10
+  },
+  {
+   "arc_size": 13,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": 12,
+   "case_a_needed_T": 22,
+   "case_a_possible": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 12,
+   "case_b_needed_T": 21,
+   "delta": 1,
+   "eps": 5,
+   "q": 23,
+   "t": 12
+  },
+  {
+   "arc_size": 16,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": null,
+   "case_a_possible": false,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 15,
+   "case_b_needed_T": 27,
+   "delta": -1,
+   "eps": 2,
+   "q": 29,
+   "t": 15
+  },
+  {
+   "arc_size": 17,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": 16,
+   "case_a_needed_T": 30,
+   "case_a_possible": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 16,
+   "case_b_needed_T": 29,
+   "delta": 1,
+   "eps": 3,
+   "q": 31,
+   "t": 16
+  },
+  {
+   "arc_size": 20,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": null,
+   "case_a_possible": false,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 19,
+   "case_b_needed_T": 35,
+   "delta": -1,
+   "eps": 2,
+   "q": 37,
+   "t": 19
+  },
+  {
+   "arc_size": 22,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": null,
+   "case_a_possible": false,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 21,
+   "case_b_needed_T": 39,
+   "delta": -1,
+   "eps": 3,
+   "q": 41,
+   "t": 21
+  },
+  {
+   "arc_size": 23,
+   "case_a_impossible_by_counting": true,
+   "case_a_max_T": 22,
+   "case_a_needed_T": 42,
+   "case_a_possible": true,
+   "case_b_impossible_by_counting": true,
+   "case_b_max_T": 22,
+   "case_b_needed_T": 41,
+   "delta": 1,
+   "eps": 2,
+   "q": 43,
+   "t": 22
+  }
+ ],
+ "source_sha256": "7ae0bc1ece5be1100bbe61e3e9509f7f6495dcfaf02be3db4fc1e77993879135",
+ "task": "C756"
+}

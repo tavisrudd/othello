@@ -1,0 +1,243 @@
+# C756 — crown reformulation of coherence and the affine-line case (twenty-fifth pass)
+
+**Lane**: `clebsch` · **Date**: 2026-08-02 · **Task**: C756, saturated-internal branch,
+\((R,\gamma)\) split-fiber gate
+
+## Verdict
+
+Two results, one structural and one a closed configuration.
+
+1. **Reformulation.**  A coherent system is exactly an induced *crown graph* in the
+   Paley graph of order \(q^2\) whose missing perfect matching is Frobenius
+   conjugation; equivalently a \(\pm1\)-valued, Frobenius-odd eigenfunction of that
+   Paley graph for the eigenvalue \(-(q+1)/2\), with support exactly \(q+3\).  This
+   moves the branch out of arc combinatorics and into the classification of
+   small-support Paley eigenfunctions and of maximal cliques of \(P(q^2)\), both of
+   which are established literatures.
+2. **Affine-line theorem.**  *If a coherent system is contained in an
+   \(\mathbb F_q\)-affine line of \(\mathbb F_{q^2}\), then \(q=5\).*  The proof is
+   elementary and uniform over every odd prime power: a "more than half the group"
+   sumset step against a single Weil-free quadratic character count.  Both \(q=5\)
+   frames are contained in a line and sit exactly on the boundary of the inequality,
+   which is why they survive and nothing else does.
+
+The remaining saturated-internal gate is therefore the *line-free* case: a coherent
+system for \(q>5\) must be a clique of size \((q+3)/2\) in \(P(q^2)\) not contained in
+a line.  That is precisely the regime of the Baker–Ebert–Hemmeter–Woldar maximal
+cliques, so the branch now has a named, finite structural target rather than an open
+search.
+
+## 1. Setup and conventions
+
+\(q\) is an odd prime power, \(\varepsilon\) a fixed nonsquare in \(\mathbb F_q\),
+\(\mathbb F_{q^2}=\mathbb F_q(s)\) with \(s^2=\varepsilon\), conjugation
+\(z\mapsto z^q\), norm \(N(z)=z^{q+1}\).  Write \(\chi\) for the quadratic character of
+\(\mathbb F_{q^2}\) and \(\chi_q\) for that of \(\mathbb F_q\); then
+\(\chi(u)=\chi_q(N(u))\).  Set \(t=(q+1)/2\), \(n=t+1=(q+3)/2\), and
+\(\delta=(-1)^t\).
+
+A **coherent system** is a set \(Z=\{z_1,\dots,z_n\}\subset
+\mathbb F_{q^2}\setminus\mathbb F_q\), no two elements conjugate, with
+
+- (A) \(\chi(z_i-z_j)=\delta\) for all \(i\ne j\);
+- (B) \(\chi(z_i-z_j^q)=-\delta\) for all \(i\ne j\).
+
+Two facts used throughout.  First, \(\chi(u)=+1\) for every \(u\in\mathbb F_q^\times\),
+because \(N(u)=u^2\).  Second,
+\(\chi(z-z^q)=\chi_q(-\varepsilon)=(-1)^{(q+1)/2}=\delta\): conjugate differences fall
+in the same class as the (A)-differences, never the (B)-class.
+
+## 2. The crown reformulation
+
+Let \(P_{\mathrm{cross}}\) be the Cayley graph on \(\mathbb F_{q^2}\) with connection
+set \(\{u\ne0:\chi(u)=-\delta\}\).  This is the Paley graph of order \(q^2\) when
+\(-\delta=+1\) and its complement otherwise; both are isomorphic to \(P(q^2)\), with
+spectrum \((q^2-1)/2\) and \((-1\pm q)/2\).
+
+The **crown graph** \(S_n^0\) is \(K_{n,n}\) minus a perfect matching.  Its spectrum is
+\(\pm(n-1)\) and \(\pm1\); the \(-(n-1)\)-eigenvector is \(+1\) on one side and \(-1\)
+on the other.
+
+> **Theorem 1.**  \(Z\) is a coherent system if and only if the \(q+3\) vertices
+> \(Y=Z\sqcup Z^q\) induce in \(P_{\mathrm{cross}}\) the crown graph with parts
+> \(Z,Z^q\) and missing matching \(\{z,z^q\}\).  In that case
+> \(x=\mathbf 1_Z-\mathbf 1_{Z^q}\), extended by zero, is an eigenfunction of
+> \(P_{\mathrm{cross}}\) for the eigenvalue \(\lambda_{\min}=-(q+1)/2\), and
+> eigenvalue interlacing is tight: \(\lambda_{\min}(S_n^0)=-(n-1)=-(q+1)/2\).
+
+*Proof.*  (A) says \(Z\) is independent in \(P_{\mathrm{cross}}\), and applying
+Frobenius says the same for \(Z^q\).  (B) says every \(z_i\) is adjacent to every
+\(z_j^q\) with \(j\ne i\), while \(\chi(z_i-z_i^q)=\delta\) says the conjugate pairs are
+non-adjacent.  That is exactly the crown.  Conversely the induced crown returns (A) and
+(B).  The eigenvector claim is the crown's \(-(n-1)\)-eigenvector, and it extends by
+zero because every vertex outside \(Y\) would need \(\sum\) over its neighbours in \(Y\)
+to vanish — which is Lemma 1 of the twenty-fourth pass
+(`2026-08-02-c756-digit-tower-composition.md`), the Parseval argument showing
+\(\chi*x=q\delta x\) globally. \(\square\)
+
+Three consequences worth recording.
+
+- \(Z\) is a **clique of size \((q+3)/2\)** in the Paley graph on the class \(\delta\).
+  Since the clique number of \(P(q^2)\) is \(q\) with maximum cliques exactly the
+  \(\mathbb F_q\)-lines (Blokhuis), \(Z\) is roughly a half-size clique.
+- \(x\) is a \(\pm1\)-valued eigenfunction of \(P(q^2)\) with **support exactly
+  \(q+3\)** for the eigenvalue \(-(q+1)/2\), and it is Frobenius-**odd**:
+  \(x(z^q)=-x(z)\), hence \(\hat x(w^q)=-\hat x(w)\) and \(\hat x\) vanishes on
+  \(\mathbb F_q\).
+- Tight interlacing is not an accident to be exploited further: it is equivalent to the
+  eigenfunction statement, so no additional spectral bound can be extracted here.  This
+  is the precise reason the "tight balance theorem" of the earlier passes could not
+  finish the branch.
+
+## 3. The affine-line theorem
+
+> **Theorem 2.**  Let \(Z\) be a coherent system contained in an \(\mathbb F_q\)-affine
+> line \(L=a+b\,\mathbb F_q\subset\mathbb F_{q^2}\).  Then \(q=5\), and \(Z\) is a line
+> \(b\,\mathbb F_q^\times\) through a rational point with \(Z=b\cdot\mathbb F_q^\times\)
+> after translation.  Both \(q=5\) frames are of this shape.
+
+The only external input is the following elementary lemma.
+
+> **Lemma (more than half).**  If \(A,B\) are subsets of a finite group \(G\) with
+> \(|A|+|B|>|G|\), then \(AB=G\).
+
+*Proof of Theorem 2.*  Lines split into two types by their direction.
+
+**Case (a): \(b\in\mathbb F_q^\times\), so \(L=a+\mathbb F_q\) with \(a\notin\mathbb F_q\).**
+Write \(Z=a+U\) with \(U\subseteq\mathbb F_q\), \(|U|=n\).  Differences inside \(Z\) are
+differences inside \(U\), hence rational, hence \(\chi=+1\); so (A) forces
+\(\delta=+1\).  Put \(c=a-a^q=ds\) with \(d\in\mathbb F_q^\times\).  For \(i\ne j\),
+\[
+  z_i-z_j^q=c+w,\qquad w=u_i-u_j\in\mathbb F_q,
+\]
+and \(N(c+w)=(w+c)(w-c)=w^2-\varepsilon d^2\).  So (B) reads
+\(\chi_q(w^2-\varepsilon d^2)=-1\) for every nonzero \(w\in U-U\).  Since
+\(\varepsilon d^2\) is a nonsquare the quadratic \(w^2-\varepsilon d^2\) is irreducible,
+so \(\sum_{w\in\mathbb F_q}\chi_q(w^2-\varepsilon d^2)=-1\) and the admissible set
+\(T_a=\{w:\chi_q(w^2-\varepsilon d^2)=-1\}\) has size exactly \((q+1)/2\).  But
+\(|U|=(q+3)/2>q/2\), so by the lemma applied in \((\mathbb F_q,+)\) we get
+\(U-U=\mathbb F_q\), forcing \(q-1=|\mathbb F_q^\times|\le|T_a|=(q+1)/2\), i.e.
+\(q\le3\).  Case (a) is empty.
+
+**Case (b): \(b\notin\mathbb F_q\).**  Then \(L\) meets \(\mathbb F_q\) in exactly one
+point \(r\); translating by \(-r\) (a rational translation, which preserves both (A) and
+(B)) we may take \(L=b\,\mathbb F_q\).  Since \(bu\in\mathbb F_q\) only for \(u=0\), we
+have \(Z=bU\) with \(U\subseteq\mathbb F_q^\times\), \(|U|=n\).  Scaling \(b\) by
+\(\mathbb F_q^\times\) changes nothing, so write \(b=\beta+s\).
+
+Differences inside \(Z\) are \(b(u_i-u_j)\), so \(\chi=\chi(b)\) and (A) is just the
+normalization \(\chi(b)=\delta\).  All the content is in (B).  With \(u=u_i\),
+\(v=u_j\),
+\[
+  N(bu-b^qv)=N(b)(u^2+v^2)-\operatorname{Tr}(b^2)\,uv
+  =v^2\,g(u/v),\qquad
+  g(r)=N(b)(r^2+1)-\operatorname{Tr}(b^2)\,r,
+\]
+so \(\chi(z_i-z_j^q)\) depends only on the **ratio** \(r=u_i/u_j\).  Here
+\(N(b)=\beta^2-\varepsilon\) and \(\operatorname{Tr}(b^2)=2(\beta^2+\varepsilon)\), and
+the discriminant of \(g\) is \(16\varepsilon\beta^2\).  If \(\beta=0\) then
+\(g(r)=-\varepsilon(r+1)^2\) and \(\chi_q(g(r))=\delta\) for every \(r\ne-1\), so (B)
+would force \(u_i+u_j=0\) for all \(i\ne j\), impossible for \(n\ge3\).  Hence
+\(\beta\ne0\), the discriminant is a nonsquare, \(g\) is irreducible, and
+\(\sum_{r\in\mathbb F_q}\chi_q(g(r))=-\chi_q(N(b))\).  Consequently the admissible ratio
+set
+\[
+  T_b=\{r\in\mathbb F_q^\times:\chi_q(g(r))=-\delta\}
+\]
+has \(|T_b|\le(q+1)/2\).  Note \(g(1)=-4\varepsilon\), so \(\chi_q(g(1))=\delta\) and
+\(1\notin T_b\), consistent with \(r=1\) being the diagonal.
+
+Now \(|U|=(q+3)/2>(q-1)/2=|\mathbb F_q^\times|/2\), so the lemma gives
+\(U\cdot U^{-1}=\mathbb F_q^\times\): *every* \(r\in\mathbb F_q^\times\) is a ratio of
+two elements of \(U\), and every \(r\ne1\) is a ratio of two *distinct* elements.  Hence
+\(\mathbb F_q^\times\setminus\{1\}\subseteq T_b\), giving
+\(q-2\le(q+1)/2\), i.e. \(q\le5\).
+
+At \(q=5\) the inequality is an equality: \(|U|=4=|\mathbb F_5^\times|\) forces
+\(U=\mathbb F_5^\times\), the required ratio set is
+\(\mathbb F_5^\times\setminus\{1\}=\{2,3,4\}\) of size \(3=(q+1)/2\), and \(T_b\) must be
+exactly that set.  Both frames realize it. \(\square\)
+
+Restated: for \(q>5\) a coherent system is **line-free**.  In the crown picture, the
+clique \(Z\) of size \((q+3)/2\) in \(P(q^2)\) cannot be a subset of an
+\(\mathbb F_q\)-line, so it lies inside a maximal clique that is not a line.
+
+**Scope caveat.**  Conditions (A) and (B) are stated in the canonical orientation and
+normalization of the earlier passes; they are not invariant under the Möbius action of
+\(\mathrm{PGL}(2,q)\) on \(\mathbb F_{q^2}\setminus\mathbb F_q\) — that action twists
+\(\chi(z_i-z_j)\) by the coboundary \(\lambda_i\lambda_j\),
+\(\lambda_i=\chi(cz_i+d)\), and \(\lambda\) is genuinely non-constant on the \(q=5\)
+frames.  Only the triple products (the two-graph) are invariant.  Consequently
+"contained in a line" is a condition on the normalized model and Theorem 2 must not be
+transported through \(\mathrm{PGL}(2,q)\) to Baer sublines without redoing the twist.
+
+## 4. Coherence expressed on the fiber (gate 2)
+
+The twenty-fourth pass proved the composition normal form: over prime \(q\), every
+coherent system is \(Z=R^{-1}(\gamma)\) for monic \(R\in\mathbb F_q[X]\) of degree
+\(n=(q+3)/2\) and \(\gamma\in\mathbb F_{q^2}\setminus\mathbb F_q\), with
+\(G=(R-\gamma)(R-\gamma^q)\).  Gate 2 asked for (A) and (B) as conditions on
+\((R,\gamma)\).  They are conditions of *total splitting after a quadratic twist* on two
+explicit resultants.
+
+Define, over \(\mathbb F_{q^2}[Y]\),
+\[
+  \Delta(Y)=\frac{\operatorname{Res}_X\bigl(R(X)-\gamma,\;R(X+Y)-\gamma\bigr)}{Y^{\,n}},
+  \qquad
+  \Delta^{*}(Y)=\operatorname{Res}_X\bigl(R(X)-\gamma,\;R(X+Y)-\gamma^q\bigr),
+\]
+\[
+  D(Y)=\operatorname{Res}_X\bigl(R(X)-\gamma,\;Y-(X^q-X)\bigr).
+\]
+The roots of \(\Delta\) are the \(n(n-1)\) pairwise differences \(z_j-z_i\); the roots of
+\(\Delta^{*}\) are the \(n^2\) differences \(z_j^q-z_i\), of which the \(n\) roots of
+\(D\) are the conjugate-pair differences.  Fix \(\nu,\nu'\in\mathbb F_{q^2}^\times\) with
+\(\chi(\nu)=\delta\) and \(\chi(\nu')=-\delta\).  Then
+
+- (A) holds \(\iff\) \(\Delta(\nu Y^2)\) splits completely over \(\mathbb F_{q^2}\);
+- (B) holds \(\iff\) \((\Delta^{*}/D)(\nu' Y^2)\) splits completely over
+  \(\mathbb F_{q^2}\).
+
+A useful low-degree necessary consequence, obtained by differentiating
+\(G=\Phi\circ R\) with \(\Phi(Y)=(Y-\gamma)(Y-\gamma^q)\): at every \(z\in Z\),
+\(G'(z)=(\gamma-\gamma^q)R'(z)\) and also
+\(G'(z)=(z-z^q)\prod_{j\ne i}f_j(z)\), whence
+
+> **Derivative-class condition.**  \(\chi\bigl(R'(z)\bigr)=\delta\) for every
+> \(z\in R^{-1}(\gamma)\); equivalently
+> \(\operatorname{Res}_X(R-\gamma,\;Y-R'(X))\) evaluated at \(\nu Y^2\) splits.
+
+This is implied by (A) alone and costs \(O(n)\) work per candidate, so it is the natural
+first filter in any \((R,\gamma)\) census.  The chord-externality condition of the
+earlier passes is recovered as
+\(\chi_q\bigl(\operatorname{Res}(f_i,f_j)\bigr)=-1\), the product of the (A) and (B)
+characters.
+
+The Dickson window remains as recorded: the pure power/Dickson mechanism requires
+\(\mu_{(q+3)/2}\subset\mathbb F_{q^2}\), i.e. \((q+3)/2\mid8\), i.e.
+\(q\in\{5,13\}\), and \(q=13\) is excluded by the certified audit.
+
+## 5. Verification and replay
+
+`2026-08-02-c756-line-case-verification.py` checks every quantitative step of
+Theorem 2 over the prime fields \(q\le43\): the identity \(\chi(s)=\delta\); that
+\(g\) has no rational root and \(1\notin T_b\) for every admissible direction; that
+\(|T_a|,|T_b|\le(q+1)/2\); and, exhaustively for \(q\le19\), the largest \(U\) whose
+ratios (resp. differences) all lie in the admissible set.  The exhaustive maxima are
+strictly below the arc size \((q+3)/2\) for every \(q>5\) and equal to it at \(q=5\).
+Both frames are exhibited inside their line with \(U=\mathbb F_5^\times\),
+\(T_b=\{2,3,4\}\).
+
+```sh
+cd notes
+python3 2026-08-02-c756-line-case-verification.py
+```
+
+- `2026-08-02-c756-line-case-verification.py`
+  `ac31b1d0c6a94b0b3ea0fe64a97fe0a0f1eb28d1d5c0aa2f0f96a1f9d0d6b6a7` (recomputed in the JSON)
+- `2026-08-02-c756-line-case-verification.json`
+
+Companion computations from this pass are reported separately:
+`2026-08-02-c756-split-fiber-census.md` (bounded \((R,\gamma)\) census and the crown
+cross-check) and `2026-08-02-c756-paley-eigenfunction-support-literature.md`
+(minimum-support and maximal-clique literature).
