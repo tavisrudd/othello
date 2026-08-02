@@ -2,9 +2,9 @@
 
 **Lane:** `reed-solomon`
 
-**Dependency gate:** Begin theorem development only after C545 publishes
-Version 1. The task may design exact tests before publication, but it must not
-expand or delay the reviewed Version 1 artifact.
+**Dependency gate:** Cleared.  C545 published Version 1 on 2026-07-29 under
+Zenodo DOI `10.5281/zenodo.21682216`.  This task remains separate from the
+immutable Version 1 artifact.
 
 ## Target
 

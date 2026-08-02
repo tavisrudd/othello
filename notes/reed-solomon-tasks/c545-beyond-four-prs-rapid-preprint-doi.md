@@ -1,11 +1,10 @@
 # C545 — rapid beyond-four PRS preprint and DOI
 
-**Lane:** `reed-solomon` · **Status:** active; local proof, classification-record,
-supplement-schema, literature, referee-polish, and C539--C544 aggregate-formal
-gates closed; DOI publication blocked on two independent specialist reads,
-the public Lean revision, clean public export/replay, immutable
-identifiers, and author/account confirmation; TIT is the selected journal
-target and its 32-page IEEEtran review packet is locally green
+**Lane:** `reed-solomon` · **Status:** complete; Version 1 published on
+2026-07-29 at `github.com/tavisrudd/beyond4-prs`, archived under Zenodo version
+DOI `10.5281/zenodo.21682216` and concept DOI
+`10.5281/zenodo.21682069`, with the public Lean companion linked at concept
+DOI `10.5281/zenodo.21650878`
 
 ## Objective
 

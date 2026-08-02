@@ -1,11 +1,33 @@
 # Release manifest
 
-Status: **complete local evidence bundle — external publication not performed**
+Status: **Version 1 published; Version 2 is the current local draft**
 
-The manuscript, public certificates, generators, replays, classification
-records, and toolchain locks are present under stable paper-local paths.  The
-fields explicitly marked `external publication step` are intentionally not
-claimed by this local bundle.
+Version 1 was published on 2026-07-29 in the public GitHub repository and
+archived by Zenodo.  Its immutable record is:
+
+| Version 1 field | Value |
+|---|---|
+| Paper-export repository | `https://github.com/tavisrudd/beyond4-prs` |
+| Release tag | `v0.1.0` |
+| Release commit | `0d3cea228b852c45f048c3446604ee2146219144` |
+| GitHub release | `https://github.com/tavisrudd/beyond4-prs/releases/tag/v0.1.0` |
+| Zenodo record | `21682216` |
+| Version DOI | `10.5281/zenodo.21682216` |
+| Concept DOI | `10.5281/zenodo.21682069` |
+| Source archive | `tavisrudd/beyond4-prs-v0.1.0.zip` |
+| Source archive SHA-256 | `99c02781074a47c10cf2be75289900c1f4c15650a849ece96ce08b7feba8046b` |
+| Source archive bytes | `900454` |
+| Released PDF SHA-256 | `43315c95e51c95992a09ce133862824264f23611fa8090923fc469e5aad56bec` |
+| Released PDF bytes | `238922` |
+| Public Lean repository | `https://github.com/tavisrudd/finitegeom` |
+| Public Lean revision | `77c0d6bb5a45a1aa15a0ab90b7db307e1a1804d2` |
+| Public Lean concept DOI | `10.5281/zenodo.21650878` |
+
+The fields below describe the current Version 2 working draft.  Values marked
+`external publication step` are intentionally unset for Version 2 and do not
+undo the completed Version 1 publication record.
+
+## Current Version 2 local candidate
 
 | Field | Value |
 |---|---|

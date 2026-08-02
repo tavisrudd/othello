@@ -2,8 +2,8 @@
 
 **Lane:** `reed-solomon`
 
-**Dependency gate:** Begin only after C545 publishes Version 1.  This task must
-not alter, delay, or retroactively strengthen the reviewed Version 1 claim.
+**Dependency gate:** Cleared by C545's 2026-07-29 Version 1 publication.  This
+task must not alter or retroactively strengthen the immutable Version 1 claim.
 
 ## Target
 

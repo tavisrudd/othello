@@ -2,8 +2,8 @@
 
 **Lane:** `reed-solomon`
 
-**Dependency gate:** Start only after C545 publishes Version 1. This task must
-not change the Version 1 manuscript or its reviewed release artifact.
+**Dependency gate:** Cleared by C545's 2026-07-29 Version 1 publication. This
+task must not change the immutable Version 1 manuscript or release artifact.
 
 ## Target
 
@@ -48,4 +48,3 @@ and recovers nonzero error values from the Vandermonde system.
 - independent coding-theory and algorithm review; and
 - a decision whether the result is a compact Version 2 corollary or a separate
   practical-decoding companion.
-

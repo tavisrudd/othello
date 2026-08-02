@@ -39,6 +39,13 @@ is isolated exactly in C820: bottom primary decomposition, the true
 modular-union pullback degree, and generic-point recursive transport.  C620
 then owns higher-Lucas split-freeness, and C821 owns final Version 2 synthesis.
 
+C545 is complete.  Version 1 was published on 2026-07-29 at
+`github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
+Zenodo version DOI `10.5281/zenodo.21682216`, and concept DOI
+`10.5281/zenodo.21682069`.  The source archive and released PDF hashes are
+recorded in `papers/beyond4_prs/supplement/RELEASE-MANIFEST.md`; the C620,
+C660, and C608 publication gates are cleared.
+
 At the C656 checkpoint, its cold audit rejected the arbitrary-level
 stable-component release claim and narrowed Version 1 to the complete R5--R7
 results.  The fourteen-field R7 arithmetic reconstruction, exact 74-target
@@ -944,13 +951,12 @@ companion formal geometry and is not a dispatch candidate in this ranking.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C545 | external release gates | publish the exact repaired R5--R7 Version 1 priority record; this unlocks C620 and keeps Version 2 research from delaying the reviewed artifact |
-| 2 | C820 | after C819; compose with C646 | close C656's three concrete geometric defects and prove the strongest honest recursively contained-carrier theorem |
-| 3 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion needed to evaluate the recursive theorem on new characteristic-two strata |
-| 4 | C660 | only after Version 1 is published | remove R7's largest remaining computational single point of trust before final Version 2 synthesis |
-| 5 | C821 | after C820/C646 and the C620 placement decision | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
-| 6 | C608 | only after Version 1 is published | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
-| 7 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C820 | compose with active C646 | close C656's three concrete geometric defects and prove the strongest honest recursively contained-carrier theorem |
+| 2 | C620 | publication gate cleared | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion needed to evaluate the recursive theorem on new characteristic-two strata |
+| 3 | C660 | publication gate cleared | remove R7's largest remaining computational single point of trust before final Version 2 synthesis |
+| 4 | C821 | after C820/C646 and the C620 placement decision | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
+| 5 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
+| 6 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1010,9 +1016,7 @@ history.
 
 ## Next command
 
-`go C545`
+`go C820`
 
-(The C603 local trust repair and independent rerun are green. C545 now owns
-the publicly fetchable Lean/export revision, two final specialist signoffs,
-immutable identifiers, author/account confirmation, and upload gates. No
-external upload is authorized.)
+(C545's public repository and Zenodo DOI are verified.  C820 is the highest-EV
+Version 2 mathematics and composes with the already active C646 formal work.)
