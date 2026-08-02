@@ -515,6 +515,8 @@ theorem triangleSign_eq_principalHolonomy_of_lt :
         principalHolonomy {i, j, k} := by
   decide
 
+/-- Symmetric form of the bounded table bridge, used to rewrite a displayed
+three-subset coefficient into its triangle product. -/
 theorem principalHolonomy_triple_of_lt (i j k : Fin 6)
     (hij : i < j) (hjk : j < k) :
     principalHolonomy {i, j, k} =
