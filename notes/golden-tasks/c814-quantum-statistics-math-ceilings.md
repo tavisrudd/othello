@@ -2,7 +2,18 @@
 
 **Lane:** `golden`
 
-**Status:** queued; mathematics research only
+**Status:** research complete 2026-08-02; mathematics only; no manuscript edit
+
+**Result:** `notes/2026-08-02-c814-quantum-statistics-math-ceilings.md`
+
+**Evidence:**
+`notes/2026-08-02-c814-continuous-frontier.{py,json,sha256}` with independent
+`notes/2026-08-02-c814-continuous-frontier-replay.py`, and
+`notes/2026-08-02-c814-complex-conference-rigidity.{py,json,sha256}` with
+independent `notes/2026-08-02-c814-complex-conference-rigidity-replay.py`.
+
+**Literature boundary:**
+`notes/2026-08-02-c814-quantum-statistics-literature-audit.md`.
 
 ## Objective
 
@@ -92,4 +103,3 @@ branch closes.
   artifact/tag.
 - Final `ej`+`tt` closeout after the last acceptance gate, in addition to the
   mandatory `ej`/`tt`/`aa` passes before every pivot.
-

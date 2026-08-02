@@ -478,14 +478,17 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C814 is queued as mathematics research only, with no manuscript edit.  It is
-the Golden umbrella for the remaining quantum-statistics ceilings: unlabelled
-and robust inverse invariants, higher exchange statistics, continuous diagonal
-controls, and generalized conference-class rigidity.  It consumes the frozen
-outputs of Clebsch-owned C810 and C812 rather than duplicating them.  Every
-research pivot requires recorded `ej`, `tt`, and `aa` passes; all results return
-for a separate paper-inclusion review.  Charter:
-`notes/golden-tasks/c814-quantum-statistics-math-ceilings.md`.
+C814 is research-complete with no manuscript edit.  For the fixed real Golden
+operator, balanced Boolean controls simultaneously maximize every intrinsic
+degree-three Schur exchange sector over the full real diagonal-control cube.
+For varying order-six Hermitian conference operators, balanced-cut purity stays
+fixed while triangle Bargmann holonomy transfers weight exactly among the
+degree-three sectors; cut-independent full exchange spectrum characterizes the
+real switching class.  Exact certificates and independent replays pass.  Both
+theorem packages remain candidates for a separate paper-inclusion and stronger
+novelty review.  The unlabelled inverse and higher-moment questions remain with
+Clebsch-owned C810/C812.  Report:
+`notes/2026-08-02-c814-quantum-statistics-math-ceilings.md`.
 
 C808 is complete.  A full Milnor--Serre exposition audit aligned the abstract,
 introduction, figure, and discussion with the correct unframed
@@ -616,8 +619,8 @@ reference remain user-owned.
    the paper ad hoc.
 4. C794's aligned-design theorem is available for later placement only under
    its qualified novelty wording and a separate manuscript gate.
-5. Run C814 only as a mathematics-research programme; review its accepted
-   results separately before authorizing any paper inclusion.
+5. Review C814's two accepted mathematics packages separately before
+   authorizing any paper inclusion; do not import them ad hoc.
 
 ## Ownership and allowed paths
 
