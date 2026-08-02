@@ -396,7 +396,7 @@ Put \(M=\sum_jh_j^{(j)}\) and \(M'=\sum_jh_j'^{(j)}\).  Then
 \(\langle\psi\rvert M\lvert\psi\rangle=0\) and
 \[
  \bigl\langle M\lvert\psi\rangle,\,M'\lvert\psi\rangle\bigr\rangle
-  =\frac1q\sum_{j=1}^n\Tr(h_jh'_j).                      \tag{3.12}
+  =\frac1q\sum_{j=1}^n\Tr(h_jh'_j).                      \tag{3.8}
 \]
 In particular \(\lVert M\lvert\psi\rangle\rVert^2
  =q^{-1}\sum_j\lVert h_j\rVert_F^2\), so
@@ -447,7 +447,7 @@ compact Lie groups, its image \(P\) is a closed subgroup of \(U(q^n)\), and
 \[
  \operatorname{Lie}(P)
   =\Bigl\{i\textstyle\sum_{j}H_j^{(j)}:
-    H_j=H_j^\dagger\ \text{on }\mathbb C^q\Bigr\}.       \tag{3.13}
+    H_j=H_j^\dagger\ \text{on }\mathbb C^q\Bigr\}.       \tag{3.9}
 \]
 Hence every one-parameter subgroup of a closed subgroup of \(P\) has a
 generator of that form.
@@ -655,7 +655,7 @@ splitting characterization.
 \end{proof}
 
 Discreteness makes the exact symmetries isolated.  The same identity
-\((3.12)\) says how fast the defect grows away from them, with a constant
+\((3.8)\) says how fast the defect grows away from them, with a constant
 that does not involve the number of parties.
 
 \begin{theorem}[Local stability]\label{thm:two-uniform-stability}
@@ -669,7 +669,7 @@ Hermitian on \(\mathbb C^q\), and put
 If \(t\leq\frac12\) then
 \[
  \frac{D^2}q\Bigl(1-\frac t3\Bigr)\leq\varepsilon(U)^2
- \leq\frac{D^2}q\Bigl(1+\frac t3\Bigr).                  \tag{3.14}
+ \leq\frac{D^2}q\Bigl(1+\frac t3\Bigr).                  \tag{3.10}
 \]
 In particular \(D\leq\sqrt{6q/5}\,\varepsilon(U)<1.096\sqrt q\,
 \varepsilon(U)\), and \(\varepsilon(U)^2/D^2\to q^{-1}\) as \(t\to0\),
@@ -703,7 +703,7 @@ Also \(\langle M^2\rangle\leq t^2\leq\frac14\), so
 using \(\lvert\langle e^{iM}\rangle\rvert\geq
 \operatorname{Re}\langle e^{iM}\rangle\) for the lower estimate.  Since
 \(\varepsilon(U)^2=2-2\lvert\langle e^{iM}\rangle\rvert\), this is exactly
-\((3.14)\).  At \(t\leq\frac12\) the left inequality reads
+\((3.10)\).  At \(t\leq\frac12\) the left inequality reads
 \(\varepsilon^2\geq\frac56D^2/q\), and the two-sided form gives the
 limit.
 \end{proof}
@@ -714,7 +714,7 @@ the cubic Taylor cutoff, not structure.
 
 \begin{remark}[The stability constant is a Fisher metric]
 \label{rem:fisher-isotropy}
-Identity \((3.12)\) also explains why the constant does not involve \(n\).
+Identity \((3.8)\) also explains why the constant does not involve \(n\).
 For the family \(U(s)=\bigotimes_je^{ish_j}=e^{isM}\), the quantum Fisher
 information of a pure state is \(4\operatorname{Var}_\psi(M)\)
 \cite{BraunsteinCaves1994}, so
@@ -726,7 +726,7 @@ variances and cross-party covariances is the standard framework for
 metrologically useful entanglement
 \cite{HyllusEtAl2012,Toth2012}; \(2\)-uniformity is exactly the hypothesis
 that annihilates every covariance and pins every single-party variance.  On
-traceless local generators --- and only there, since \((3.12)\) says
+traceless local generators --- and only there, since \((3.8)\) says
 nothing about generators that are not sums of one-site terms --- the Fisher
 form is a flat multiple of the Euclidean one.  A degenerate direction would
 be a continuous product symmetry, which
@@ -823,9 +823,12 @@ a diffeomorphism near the origin, of matching dimension
 \(2m(q^2-1)\), so \(B\) is a neighbourhood of the identity coset, and
 Theorem~\ref{thm:two-uniform-stability} gives
 \(f\geq\frac5{6q}\sum_j\lVert h_j\rVert_F^2\) on it.  For \(g\in G(\psi)\)
-one has \(f(Vg)=f(V)\), since \(g\lvert\psi\rangle\) and
-\(\lvert\psi\rangle\) differ by a phase, so the same estimate holds on
-\(gB\) with the generators measured from \(g\).
+one has \(f(gV)=f(V)\): if \(g\lvert\psi\rangle=e^{i\theta}\lvert\psi\rangle\)
+then \(\langle\psi\rvert g V\lvert\psi\rangle
+=e^{-i\theta}\langle\psi\rvert V\lvert\psi\rangle\) after conjugating the
+left factor, and \(f\) depends only on the modulus.  Hence the same estimate
+holds on the left translate \(gB\), with the generators measured from \(g\),
+which is the form the factorization \(U=g\cdot\bigotimes_je^{ih_j}\) requires.
 
 \emph{Isolation and the threshold.}  The zero set of \(f\) on \(X\) is the
 image \(Z\) of \(G(\psi)\), finite by
@@ -840,7 +843,7 @@ some \(g\in Z\), and the first step applies at that \(g\).
 The stabilizer hypothesis enters this corollary only in the last sentence
 of its statement.  The factorization itself holds for every \(2\)-uniform
 state, with \(g\) an exact product-unitary symmetry; and finiteness of the
-zero set is a consequence of \((3.12)\) rather than a separate input, since
+zero set is a consequence of \((3.8)\) rather than a separate input, since
 quadratic growth already isolates the zeros of \(f\) on a compact manifold.
 The threshold \(\varepsilon_0\) comes from compactness and is not explicit.
 It depends on \(\lvert\psi\rangle\), and by
@@ -871,7 +874,7 @@ Then in each factor there is a unique permutation \(\pi_i\) with
 \[
  \min_{\lvert\alpha\rvert=1}
  \lVert A_ie_{ij}-\alpha e'_{i,\pi_i(j)}\rVert\leq\sqrt2\,\delta
- \qquad(1\leq j\leq N).                                  \tag{3.15}
+ \qquad(1\leq j\leq N).                                  \tag{3.11}
 \]
 \end{lemma}
 
@@ -891,7 +894,7 @@ dominant column, and the overlap matrix is square, so the selections form a
 permutation \(\pi_1\).  Each matched column also has total squared mass one
 and contains that coefficient, so its off-axis mass is at most
 \(\delta^2\), and \(2\bigl(1-\sqrt{1-\delta^2}\bigr)\leq2\delta^2\) gives
-\((3.15)\).  Repeat in every factor.
+\((3.11)\).  Repeat in every factor.
 \end{proof}
 
 \begin{proposition}[Quantitative intertwiner rigidity]
@@ -911,7 +914,7 @@ and that \(2q^2\varepsilon<\tau_p\).  Then for every party \(i\) there is a
 single-qudit Clifford \(K_i\) with
 \[
  q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}
-  \leq2\sqrt2\,q^2\varepsilon .                          \tag{3.16}
+  \leq2\sqrt2\,q^2\varepsilon .                          \tag{3.12}
 \]
 \end{proposition}
 
@@ -956,7 +959,7 @@ gives \(\lvert q^{-1}\Tr(W_v^\dagger VW_vV^\dagger)\rvert\geq
 \(\sum_x\lvert c_x\rvert^4\geq(1-\kappa^2/2)^2\).  Hence some
 \(\lvert c_x\rvert\geq1-\kappa^2/2\), so \(V\) lies within \(\kappa\) of a
 phase times \(W_x\); absorbing that displacement into \(K_i\) gives
-\((3.16)\).  Two four-party sets cover all six parties, as in
+\((3.12)\).  Two four-party sets cover all six parties, as in
 Corollary~\ref{cor:full-weyl-cover}.
 \end{proof}
 
@@ -1080,12 +1083,12 @@ matrices with the corresponding entries.  Preservation of
 \begin{array}{ll}
 D_\alpha C\subseteq C,&D_\gamma C\subseteq C^\perp,\\
 D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
-\end{array}                                             \tag{3.8}
+\end{array}                                             \tag{3.13}
 \]
 
 If the block at the chosen input is nondiagonal, then \(D_\beta\) or
 \(D_\gamma\) is nonzero.
-Proposition~\ref{prop:diagonal-multiplier-line} and \((3.8)\) give
+Proposition~\ref{prop:diagonal-multiplier-line} and \((3.13)\) give
 \[
  D_\gamma C=C^\perp\qquad\text{or}\qquad
  D_\beta C^\perp=C.
@@ -1098,7 +1101,7 @@ hence the exact linear factor there is \(T\).
 
 Now suppose
 \[
- S=\diag(s_1,\ldots,s_{2m}),\qquad SC=C^\perp .          \tag{3.9}
+ S=\diag(s_1,\ldots,s_{2m}),\qquad SC=C^\perp .          \tag{3.14}
 \]
 The projective vector \([s_1:\cdots:s_{2m}]\), and hence every propagation
 ratio \(s_i/s_j\), depends only on \(C\).
@@ -1109,7 +1112,7 @@ For \(\lambda,\mu\in\F_q\), put
  \begin{pmatrix}1&0\\ \lambda s_i&1\end{pmatrix},
  \qquad
  F_i^+(\mu)=
- \begin{pmatrix}1&\mu s_i^{-1}\\0&1\end{pmatrix}.       \tag{3.10}
+ \begin{pmatrix}1&\mu s_i^{-1}\\0&1\end{pmatrix}.       \tag{3.15}
 \]
 On the CSS label space
 \(L_C=(C\oplus0)+(0\oplus C^\perp)\), the product of the lower blocks
@@ -1139,7 +1142,7 @@ Corollary~\ref{cor:transversal-clifford} excludes every product-unitary
 logical action outside that group.  Hence the displayed group is exact.
 
 For a generalized or extended generalized Reed--Solomon code, the
-standard dual formula supplies \((3.9)\), including the extended
+standard dual formula supplies \((3.14)\), including the extended
 evaluation point at length \(q+1\)
 \cite[Sections~5.2--5.3]{HuffmanPless2003}.  Thus the GRS tower lies on the
 diagonally isodual branch, but the proof used no evaluation structure.
@@ -1156,10 +1159,10 @@ Propagation to coordinate \(i\) is
  =
  \begin{pmatrix}1&0\\0&t_i\end{pmatrix}
  A
- \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{3.11}
+ \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{3.16}
 \]
 Thus every \(\phi_i\) is a homomorphism, \(\phi_j\) is the identity,
-and the elementary matrices in \((3.10)\) satisfy all
+and the elementary matrices in \((3.15)\) satisfy all
 \(\mathrm{SL}_2(q)\) relations coordinatewise.  This calculation also
 applies at the extended evaluation point.  It uses only the diagonal
 duality \(SC=C^\perp\), not the evaluation formula for a GRS code.
