@@ -2132,8 +2132,17 @@
       "last": 788,
       "purpose": "derive the general order-2d balanced-cut exchange-spectrum theorem and classify cut-independence, with a fast stop if dimension six is isolated",
       "sequence": 237
+    },
+    {
+      "count": 1,
+      "first": 789,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 789,
+      "purpose": "freeze the repaired quantum-statistics baseline, build the referee-recommended editorial variant, and run a blind A/B cold read",
+      "sequence": 238
     }
   ],
-  "next_id": 789,
+  "next_id": 790,
   "schema": "codex-task-id-allocations-v1"
 }
