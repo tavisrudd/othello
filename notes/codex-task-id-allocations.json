@@ -2294,8 +2294,17 @@
       "last": 808,
       "purpose": "Milnor-Serre exposition audit and copy edit of Golden quantum-statistics paper",
       "sequence": 255
+    },
+    {
+      "count": 5,
+      "first": 809,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 813,
+      "purpose": "Paper III mathematical ceiling tests: four-shadow characterization, aligned-certificate distance, quadratic-twist specialization, higher cut separation, and harmonic restriction generalization",
+      "sequence": 256
     }
   ],
-  "next_id": 809,
+  "next_id": 814,
   "schema": "codex-task-id-allocations-v1"
 }
