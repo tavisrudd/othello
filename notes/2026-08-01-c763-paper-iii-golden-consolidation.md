@@ -89,8 +89,8 @@ manuscript and required no change.
   bundles, public vocabulary, release allowlist, and warning-free PDF.
 - The standalone Paper III aggregate and pinned formal-source replay passed.
 - Authoritative integration commit: `5f144ed6`.
-- First standalone forward commit: `e6ff826`; the final editorial refresh is
-  synchronized by the completion commit recorded in the handoff.
+- Standalone forward commits: `e6ff826` and final editorial refresh
+  `22bb6ec`.
 
 ## Extra-juice and Tao-style closeout
 
