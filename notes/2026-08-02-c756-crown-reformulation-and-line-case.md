@@ -5,7 +5,7 @@
 
 ## Verdict
 
-Two results, one structural and one a closed configuration.
+Four results: a reformulation, a proved configuration, a conditional reduction, and a much larger certified range.
 
 1. **Reformulation.**  A coherent system is exactly an induced *crown graph* in the
    Paley graph of order \(q^2\) whose missing perfect matching is Frobenius
@@ -29,11 +29,18 @@ Two results, one structural and one a closed configuration.
    discriminant is a fixed nonsquare (Theorem 4), with the smaller fields covered by
    direct computation.
 
-What this does and does not buy.  It does **not** extend the unconditional range much:
-the gap conjecture is unproved — Yip states in print that "no partial progress has been
+4. **Certified range, without the conjecture.**  Recognizing coherence as a clique
+   condition in a vertex-transitive graph makes an exhaustive search practical far past
+   the old audit: the branch is unconditionally empty for every \(q\equiv3\pmod4\)
+   with \(7\le q\le151\), and the two published clique orbits are empty for every
+   such \(q\le503\).  This also discharges the standing \(q=27\) extension-field
+   item.
+
+What this does and does not buy.  The reduction of item 3 does **not** by itself extend
+the unconditional range: the gap conjecture is unproved — Yip states in print that "no partial progress has been
 made" on it — and the published orbit-complete clique tables reach only \(q\le47\),
-barely past the existing exhaustive audit at \(q\le43\).  What it buys is a change of
-kind.  The saturated-internal gate stops being an open search over arcs and becomes a
+barely past the old exhaustive audit at \(q\le43\).  What item 3 buys is a change of
+kind, and what actually moved the certified range is item 4.  The saturated-internal gate stops being an open search over arcs and becomes a
 single named, actively studied conjecture in Paley-graph combinatorics, of which we need
 only a special case: not "no maximal clique of size \((q+3)/2\)", but "no such clique
 that also carries a Frobenius crown".  The extra crown hypothesis is real leverage that
@@ -555,6 +562,31 @@ to \(1\), because a split fiber can contain no rational element and no conjugate
 The corrected model matches all four exact fields and both sampled ones.  The \(q=23\)
 and \(q=29\) samples are uninformative rather than negative: the expected hit counts are
 \(0.17\) and \(8.5\times10^{-5}\), so uniform sampling is the wrong instrument there.
+
+## 6c. The certified range, extended without the conjecture
+
+Full report: `2026-08-02-c756-clique-orbit-crown-check.md`.  The orbit sweep was run as
+specified — every member of the two published maximal-clique orbits \(Z=aS_j+b\) for
+every prime power \(q\equiv3\pmod4\) with \(7\le q\le503\), 1,686,529,824 orbit members
+in all, zero passes — and every setup assertion about \(C\), \(Q_j\) and the maximality
+of \(S_j\) held at all 53 fields.
+
+The more valuable outcome is that the check made the conjecture unnecessary over a large
+range.  A coherent system is precisely a clique of size \((q+3)/2\) in the graph on
+irrational elements where \(z\sim w\) iff \(\chi(z-w)=\delta\) **and**
+\(\chi(z-w^q)=-\delta\); the maps \(z\mapsto az+b\) with \(a\in\mathbb F_q^\times\),
+\(b\in\mathbb F_q\) are automorphisms of that graph and act transitively on its
+vertices, so a search through the single vertex \(s\) is exhaustive.  That search
+returns nothing for every \(q\equiv3\pmod4\) with \(7\le q\le151\), including the prime
+powers \(27\), and it recovers exactly the two frames at \(q=5\) as a positive control.
+
+So for \(q\equiv3\pmod4\) the branch is now **unconditionally empty through \(q\le151\)**,
+with no dependence on Blokhuis, on the two-orbit classification, or on the gap
+conjecture, and with the \(q=27\) extension-field hygiene item discharged along the way.
+Theorems 3 and 4 remain the only route to *all* \(q\), but they are no longer what
+certifies the small fields.  The corresponding sweep for \(q\equiv1\pmod4\) is queued;
+until it lands, that residue class is certified only through the earlier \(q\le43\)
+audit.
 
 ## 7. EJ + TT closeout
 
