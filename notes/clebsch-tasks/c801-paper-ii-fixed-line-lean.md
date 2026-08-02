@@ -2,7 +2,8 @@
 
 **Lane:** clebsch
 
-**Status:** queued after C798 statement freeze
+**Status:** complete on 2026-08-02; table-free radial inheritance, sheet-sign trade line, and
+`q-2` count are kernel-checked and integrated into the Paper II gate and trust surface
 
 ## Goal
 
@@ -37,3 +38,8 @@ Chow-rigidity level-up without encoding an eleven-orbit table.
 
 C801 owns the Lean additions and their Paper II trust integration. C798 owns
 the human fixed-space, normalizer, block-system, and Chow-intersection proof.
+
+## Closeout
+
+Implemented in `RelativeConicArcs.ClebschFixedLineRadialTranslation`; the complete report is
+`notes/2026-08-02-c801-paper-ii-fixed-line-lean.md`.

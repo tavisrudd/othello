@@ -8,10 +8,10 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "d194793bcd324345e2fda4cc3bbc41977825f7f607f76e7c3785b5d2555168b4",
-  "runner_sha256": "ec8a1905548e10ed414cac503e0d5c94dc962e62dbed23135cf9515582d42399",
+  "trust_manifest_sha256": "aa497dd481d9201e9242805ee5f4bcb5e9bbd7f5413eede2f843c29208cf7815",
+  "runner_sha256": "e9f5957d6245486e26fd06343aa5fcab744804edecbe76199c10f06c3596d026",
   "review_sources_sha256": {
-    "normalized_manuscript": "8fc8c2b5f418c1593ffbd32ed4b3aa4c032c5662d4c84e1c2339dc3ac94603ef",
+    "normalized_manuscript": "d4ffe1b44f3eda4d6c3e9bdc8da332166361197605b686a651b1f7b1b0090997",
     "normalized_statement_identity": "800b2e79e3e9bac9bb04d4d0379ad1e5f450acb782319d605dad66ec034d08ee",
     "statement_extractor": "a9c4eed0aafa50a98881550c3efaf647e0fc3a474f509380758e40e85d0d3f1b",
     "paper_readme": "7cf272443df7732c1de94ff71e953ca09ccbf249c4f7d57984fb57026830e21a",
@@ -21,7 +21,7 @@
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
       "ClebschHilbertSymmetry.lean": "0be6e0b36ede1ee9ebc7ade0abaa84694e8b45059a38b191d2074b943cedd620",
       "ClebschHyperplaneSquare.lean": "8b76e121f657f454c1727fc2018e0b535ff7125a08e381de1cecd259018fe450",
-      "ClebschPaperIIStructural.lean": "893df605dd815ca040a73d36fd0d3750ce7196b55f5bd8ea75b32ea207db9a10"
+      "ClebschPaperIIStructural.lean": "1f976c25eb25a85a80954e9f554dbba42eb4bf7f1ffb895dc91b309937397c06"
     },
     "guarded_lean": "4967378822df0f357f0bd3cba9a80fcceae1a8d5d5d45b1d4977c159c4515249"
   },
@@ -85,6 +85,7 @@
       "lean/RelativeConicArcs/ClebschFiniteRootRecurrenceBridge.lean": "a3de554d8e6119a902b1bd9c100c96bb594b9df313af4118f663beaca435f94e",
       "lean/RelativeConicArcs/ClebschFiniteRootWeightSlice.lean": "b27cee7e69cc7993ec902456515a963f05bc10711299f1e40a67487c0fefdff0",
       "lean/RelativeConicArcs/ClebschFirstFrobeniusSection.lean": "1acd9a639efd03d8fc20f448f22a027cc217270b32d59b6fa18c954ddd0df06d",
+      "lean/RelativeConicArcs/ClebschFixedLineRadialTranslation.lean": "d2ce3d84cd4b104be49ecded55fbfdaae1e155f48da09b0e972ec6b8afb037e1",
       "lean/RelativeConicArcs/ClebschGateway.lean": "24e786a37ad2dab7d91651e51d5dbb5427fc26bd9e22c6a54fddda97abc66fd8",
       "lean/RelativeConicArcs/ClebschH3InvariantMatchings.lean": "4f30b97b4d8e62b451a8fc23c99f5872baf1e0f11ebb8b2fd7f1bb1893c919e6",
       "lean/RelativeConicArcs/ClebschHarmonicQuotient.lean": "2cdedcfa1115120f317b124fde3109081e703173f783b5d10795d91b30a1448f",
@@ -107,7 +108,7 @@
       "lean/RelativeConicArcs/Conic.lean": "7e5cc2823c925d418660ab88e8753b76673cb35966e03cf86d7b4b1e33c7b6e4",
       "lean/RelativeConicArcs/Defect.lean": "5caae34f785b5c37df05ed42c8c278dbf88e0ef98b6adf2d514716122f31ee2d",
       "lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean": "9ea2ba12de452fb6eef09f34d4c204c6e3bc9573f4b317108dea7fe3b714d5c8",
-      "lean/RelativeConicArcs/Gates/ClebschPaperIIStructural.lean": "893df605dd815ca040a73d36fd0d3750ce7196b55f5bd8ea75b32ea207db9a10",
+      "lean/RelativeConicArcs/Gates/ClebschPaperIIStructural.lean": "1f976c25eb25a85a80954e9f554dbba42eb4bf7f1ffb895dc91b309937397c06",
       "lean/RelativeConicArcs/Moments.lean": "5892d6448b919dffe5988502b014948831294247657b49a68e0aa228517305e8",
       "lean/RelativeConicArcs/Plane.lean": "4884204d8c0a1c219e969b72c6fa394abc28be3097c7eed6bed97e8f63c21ff5",
       "lean/RelativeConicArcs/ProjectiveBridge.lean": "423405930931867f62730ba3d2013012026f8a64db0af81d7b0ace6a43524a3f",
@@ -224,7 +225,7 @@
     },
     "paper-ii-structural": {
       "checksum_manifest": "verification/paper_ii_structural.sha256",
-      "checksum_manifest_sha256": "b0d373ffc20427db37b9a3d18349f72edfea85f1f4a83a49d6ea316814650847",
+      "checksum_manifest_sha256": "ed9331f8b19f41a3e9159d2576978ed1e316ccadb1384797ce277f5c427d032a",
       "checksum_root": ".",
       "commands": []
     },

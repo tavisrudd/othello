@@ -41,7 +41,7 @@ LEAN_GATE_COMMANDS = [
         "RelativeConicArcs/Gates/ClebschPaperIIStructural.lean",
     ],
 ]
-LEAN_GATE_TERMINALS = 48
+LEAN_GATE_TERMINALS = 54
 ALLOWED_LEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 EXPECTED_EVIDENCE = {
     "matching-module": {
@@ -259,8 +259,8 @@ EXPECTED_CLAIMS = {
          "shared-radial"},
     ),
     "thm:fixed-line-chow-rigidity": (
-        {"conceptual", "classical-input"},
-        set(),
+        {"conceptual", "classical-input", "lean"},
+        {"paper-ii-structural"},
     ),
     "lem:hyperplane-square": (
         {"conceptual", "lean"},

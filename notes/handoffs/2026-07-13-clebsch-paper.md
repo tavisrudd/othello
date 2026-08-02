@@ -269,7 +269,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | active by explicit user override; six individually elaborated spine modules, full theorem still open | formalize the actual Lucas Hom basis, detecting-module vanishings, contraction, and classification composition |
 | [C797 — Paper II trade-only carrier reconstruction](../clebsch-tasks/c797-trade-only-carrier-reconstruction.md) | complete; carrier-free theorem fails sharply at \(q=7\) | none; seven \(S_4\)-fixed affine placements share the trade and only one is a matching orbit |
 | [C798 — Paper II fixed-line Chow rigidity](../clebsch-tasks/c798-fixed-line-chow-rigidity.md) | complete; structural priority-judo theorem integrated and authoritative gate green | none; \(q-2\) nonmatching exact-trade orbits and the unique matching Chow point are proved without an orbit table |
-| [C801 — Paper II fixed-line Lean update](../clebsch-tasks/c801-paper-ii-fixed-line-lean.md) | queued after C798 statement freeze | formalize radial translation, noncoalescent Radical--Hadamard inheritance, and the \(q-2\) count without enumerating eleven orbits |
+| [C801 — Paper II fixed-line Lean update](../clebsch-tasks/c801-paper-ii-fixed-line-lean.md) | complete; table-free radial inheritance, sheet-sign annihilator, and \(q-2\) count are kernel-checked | none; the unique Chow point remains the human finite-group/factorization boundary |
 | [C803 — Paper II fixed-line literature audit](../clebsch-tasks/c803-paper-ii-fixed-line-literature-audit.md) | complete; exceptional one-factorizations attributed, C494 boundary recorded, exposition and release gates green | none; C801 owns the Lean update |
 | [C762 — Paper I forward exposition](../clebsch-tasks/c762-paper-i-forward-exposition.md) | active; authoritative exposition, PDFs, cold read, statement identity, and public-locator pass green | after C753, reconcile formal coverage, run the aggregate gate, and synchronize the standalone release |
 | [C763 — Paper III Golden consolidation](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) | complete; selective source--operator--cubics--harmonic chain, formal bridge, cold reads, and synchronized release gates green | none |
@@ -539,6 +539,16 @@ paper spine.  The single coalescence point is non-load-bearing.  The exact
 eleven-orbit census is retained only in the C798 research bundle.  C801 is
 queued for the reusable Lean abstraction after statement freeze.  Full
 report: `notes/2026-08-02-c798-fixed-line-chow-rigidity.md`.
+
+C801 is complete.  The reusable two-sheet radial interface, affine outer
+constant and unique coalescence parameter, noncoalescent Radical--Hadamard
+inheritance, exact sheet-sign annihilator, and \(q-2\) finite-line count are
+kernel-checked without an orbit table.  The Paper II structural gate now has
+twenty-eight terminals, the four-gate axiom audit has fifty-four terminals,
+and the complete warning-free release aggregate is green.  The fixed-space,
+stabilizer, block-system, and unique Chow-intersection arguments remain
+explicitly human and classical.  Full report:
+`notes/2026-08-02-c801-paper-ii-fixed-line-lean.md`.
 
 The paper-owned trust surface now has twenty-nine statements and fourteen
 evidence bundles, including independent generic-wall, shared-radial, and

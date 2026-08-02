@@ -3153,11 +3153,26 @@ The Paper-II structural gate
 follows the proof spine from the projective pullback through the concrete
 finite-root fixed line and Lucas recurrence, the outer-parity defect and
 divided-power detectors, and the affine contraction, to the rank-three
-endpoint.  Its twenty-two audited terminals include the derived fused
+endpoint.  Its twenty-eight audited terminals include the derived fused
 \(q=5\) exclusion and point-stabilizer uniqueness certificates for the
 \(B_3/\F_7\) and \(H_3/\F_{11}\) matchings.  The \(H_3\) uniqueness check
 uses twelve explicit point-stabilizer witnesses per sheet, not a matching
-census.  Steinberg and modular Hermite reciprocity still identify the
+census.  The same gate imports
+\begin{center}
+\small\texttt{ClebschFixedLineRadialTranslation}.
+\end{center}
+The exact terminals are
+\begin{center}\small
+\texttt{annihilates\_hadamardSquare\_iff\_}\\[-2pt]
+\texttt{eq\_sheetSignLine\_of\_noncoalescent}
+and
+\path{card_nonmatchingNoncoalescentParameters}.
+\end{center}
+They check the table-free Radical--Hadamard inheritance and the exact
+\(q-2\) count after removing the matching and coalescence parameters.
+The invariant-space, stabilizer, block-system, and unique-Chow-point
+arguments remain human and classical inputs.  Steinberg and modular Hermite
+reciprocity still identify the
 concrete coefficient blocks with the finite-group Hom spaces; tilting and
 socle theory identify the ambient symmetric-square slices and validate the
 root/Weyl intertwiner; Dickson--Giudici identifies the abstract subgroup

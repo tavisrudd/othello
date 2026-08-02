@@ -20,6 +20,7 @@ import RelativeConicArcs.ClebschOrbitOrderReduction
 import RelativeConicArcs.ClebschBalancedOrbitEndgame
 import RelativeConicArcs.ClebschRankThreeBalancedEndgame
 import RelativeConicArcs.ClebschArithmeticGluing
+import RelativeConicArcs.ClebschFixedLineRadialTranslation
 
 /-!
 # Structural audit for the all-field conic-matching argument
@@ -30,6 +31,10 @@ the finite-field root defect, the four-weight Frobenius section, the detector
 coefficients, evaluation--coevaluation contraction and coboundary descent,
 regular matching and dihedral parity reductions, exceptional-order endgame,
 and the exact `q = 5, 7, 11` endpoint data.
+
+It also checks the table-free fixed-line algebra: radial translation preserves the top and moment
+data, changes one outer constant affinely, transports the Radical--Hadamard conclusion to every
+noncoalescent parameter, and leaves exactly `|K| - 2` nonmatching noncoalescent parameters.
 
 The gate distinguishes kernel-checked implications from classical
 representation and subgroup identifications.  In particular, importing this
@@ -59,6 +64,12 @@ finite-group Hom space or prove Dickson's maximal-subgroup theorem.
 #check RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff
 #check RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner
 #check RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy
+#check RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant
+#check RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub
+#check RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent
+#check RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent
+#check RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters
+#check RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card
 
 #print axioms RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback
 #print axioms RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient
@@ -82,3 +93,9 @@ finite-group Hom space or prove Dickson's maximal-subgroup theorem.
 #print axioms RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff
 #print axioms RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner
 #print axioms RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy
+#print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant
+#print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub
+#print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent
+#print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent
+#print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters
+#print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card
