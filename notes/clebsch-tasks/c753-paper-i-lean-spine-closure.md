@@ -3,8 +3,8 @@
 **Lane:** `clebsch`
 
 **Status:** active; C752 is complete and its implementation interface is
-frozen.  The finite prose-source repairs, R1--R4, and O1--O4 are complete;
-continue with O5--O8, which must remain packet-gated.
+frozen.  The finite prose-source repairs, R1--R4, and O1--O5 are complete;
+continue with O6--O8, which must remain packet-gated.
 
 ## Current implementation state
 
@@ -62,6 +62,19 @@ no large determinant certificate is used.  The clean owning build and
 trace-only aggregate gate passed at
 `~/.cache/othello-lean-build/run-20260802-183008-bed33545`.  The two terminal
 theorems print exactly `propext`, `Classical.choice`, and `Quot.sound`.
+
+O5 is complete at `ae1ac210`.  The two displayed golden eigenspaces,
+cross-golden compression, translation invariance, exact one-dimensional kernel,
+five-dimensional image, perfect trace pairing, and four-dimensional trace
+annihilator are formalized in
+`RelativeConicArcs/PaperIOrientationTraceDual.lean`.  Its determinant is the
+negative support cubic.  The Hassett--Tschinkel Proposition 10 implication is
+an explicitly supplied proposition-level hypothesis with a pinpoint DOI
+citation, not a global axiom.  The clean owning build and trace-only aggregate
+gate passed at
+`~/.cache/othello-lean-build/run-20260802-184426-cd072658`; the O5 terminals
+print exactly `propext`, `Classical.choice`, and `Quot.sound`, while the abstract
+citation-interface application itself prints no axioms.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
