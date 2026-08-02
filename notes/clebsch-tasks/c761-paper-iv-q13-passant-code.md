@@ -2,8 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; manuscript, verification, and planning infrastructure
-installed.
+**Status:** active; theorem and novelty boundary frozen, full human proof and
+paper-owned evidence gate green, reusable Lean incidence-code semantics green;
+the q13 semantic modules and release gates remain.
 
 ## Goal
 
