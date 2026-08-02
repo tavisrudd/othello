@@ -2069,8 +2069,17 @@
       "last": 772,
       "purpose": "implement C771 PRA referee revisions and ready Golden quantum-statistics package",
       "sequence": 230
+    },
+    {
+      "count": 1,
+      "first": 773,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 773,
+      "purpose": "close C772 referee packaging, netlist, and minor presentation defects",
+      "sequence": 231
     }
   ],
-  "next_id": 773,
+  "next_id": 774,
   "schema": "codex-task-id-allocations-v1"
 }
