@@ -522,20 +522,24 @@ claim is licensed.  Report and audit:
 `notes/2026-08-02-c788-general-balanced-cut-spectrum.md` and
 `notes/2026-08-02-c788-balanced-cut-spectrum-literature-audit.md`.
 
-C794 is queued after C793.  Its `ej3` crown is stronger than the initial
-conference question: every two-graph on at least seven vertices is determined
-up to complement by its four-sets containing zero or four coherent triples,
-so conference determinant-design reconstruction is only a corollary.
-Exhaustion through seven vertices proves the sharp finite base:
-all 32,768 normalized seven-vertex two-graphs form 16,384 complementary-pair
-fibres, whereas larger fibres occur below seven.  Restriction to seven-sets
-and overlap consistency give the unrestricted computer-assisted theorem; C794
-owns a human proof of the base lemma.  The conference tests recover
-the coherent/incoherent components at Paley orders 14 and 18; at order ten the
-overlap graph degenerates into 30 isolated Steiner blocks but the full parity
-system still has only the complementary pair.  The task also owns the first
-higher balanced-cut moment not forced by the 3-design axioms.  Plan:
-`notes/golden-tasks/c794-conference-design-reconstruction.md`.
+C794 is complete, research-only, with no manuscript edit.  The aligned
+four-set functor is faithful up to complement on every two-graph of order at
+least seven, by a human proof anchored at one Ramsey-forced aligned four-set.
+Balanced (2+2) cuts explain every smaller fibre and the sharp cutoff.
+Greaves--Suda's determinant-((-3)) design therefore reconstructs every
+marked conference two-graph of order at least ten; the empty order-six design
+is the genuine exception.  At order ten the naive overlap graph has thirty
+components, but the nonblock parity system has rank 28 and leaves exactly the
+complementary nonconstant colorings.  The third balanced-cut moment is the
+first statistic not fixed by the (3)-design parameters and is controlled by
+the triple-block union profile.  Exact order-10/14/18 certificates and an
+independent replay pass.  The bounded audit found
+Pouzet--Si Kaddour--Trotignon's homogeneous-triple reconstruction as the
+closest predecessor but no exact two-graph theorem; MathSciNet, Google
+Scholar, Crossref forward citations, and a subject-expert check remain open,
+so only qualified wording is licensed.  Report and audit:
+`notes/2026-08-02-c794-aligned-design-faithfulness.md` and
+`notes/2026-08-02-c794-aligned-design-faithfulness-literature-audit.md`.
 
 The third cold-reader repairs are complete at
 `golden-quantum-statistics-editorial-referee-revised`: the balanced-spectrum
@@ -552,8 +556,8 @@ reference remain user-owned.
    the Clebsch forward reference.
 3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
-4. After C793, run C794's humanization and novelty audit of aligned-design
-   faithfulness before claiming it in a paper.
+4. C794's aligned-design theorem is available for later placement only under
+   its qualified novelty wording and a separate manuscript gate.
 
 ## Ownership and allowed paths
 

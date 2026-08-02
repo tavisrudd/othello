@@ -2,7 +2,11 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C793
+**Status:** complete
+
+**Report:** `notes/2026-08-02-c794-aligned-design-faithfulness.md`
+
+**Audit:** `notes/2026-08-02-c794-aligned-design-faithfulness-literature-audit.md`
 
 ## Goal
 
@@ -48,10 +52,10 @@ balanced-cut moment not forced by the conference 3-design parameters.
   (-840/1331) and (9216/17875); unlike mean and variance, this level depends
   on triple-block intersection data not fixed by the 3-design parameters.
 
-The seven-vertex census is now a compact exact reproducibility bundle.  Together
-with the elementary overlap argument above it proves the unrestricted theorem
-with a finite computational base.  The conference and higher-moment
-computations remain cheap triage and are not yet a reproducibility bundle.
+The seven-vertex census remains a compact exact falsifier, but C794 has now
+replaced it in the theorem's trust boundary by a human four-point cut proof.
+The conference reconstruction, order-ten rank calculation, and higher-moment
+computations are frozen in the report and exact reproducibility bundle above.
 
 ## `ej3` exact census evidence
 

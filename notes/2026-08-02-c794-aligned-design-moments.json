@@ -1,0 +1,120 @@
+{
+  "order_ten_reconstruction": {
+    "admissible_nonconstant_color_weights": [
+      15,
+      15
+    ],
+    "aligned_blocks": 30,
+    "gf2_nullity": 2,
+    "gf2_rank": 28,
+    "nonblock_parity_equations": 180,
+    "triple_degree": 1,
+    "triple_overlap_components": {
+      "count": 30,
+      "size": 4
+    },
+    "vertices": 10
+  },
+  "paley_cut_moments": [
+    {
+      "aligned_blocks": 182,
+      "factorial_moments": {
+        "one": {
+          "denominator": 11,
+          "numerator": 70
+        },
+        "three": {
+          "denominator": 11,
+          "numerator": 1785
+        },
+        "two": {
+          "denominator": 1,
+          "numerator": 35
+        }
+      },
+      "half_size": 7,
+      "projective_cut_histogram": {
+        "5": 546,
+        "7": 1170
+      },
+      "third_centered_moment": {
+        "denominator": 1331,
+        "numerator": -840
+      },
+      "triple_degree": 2,
+      "unordered_pair_union_profile": {
+        "5": 364,
+        "6": 4914,
+        "7": 7644,
+        "8": 3549
+      },
+      "unordered_triple_union_profile": {
+        "10": 222222,
+        "11": 51324,
+        "12": 3276,
+        "6": 3458,
+        "7": 65156,
+        "8": 261352,
+        "9": 381472
+      },
+      "variance": {
+        "denominator": 121,
+        "numerator": 105
+      },
+      "vertices": 14
+    },
+    {
+      "aligned_blocks": 612,
+      "factorial_moments": {
+        "one": {
+          "denominator": 5,
+          "numerator": 126
+        },
+        "three": {
+          "denominator": 143,
+          "numerator": 2049624
+        },
+        "two": {
+          "denominator": 143,
+          "numerator": 87570
+        }
+      },
+      "half_size": 9,
+      "projective_cut_histogram": {
+        "22": 918,
+        "23": 3672,
+        "24": 2448,
+        "25": 6120,
+        "26": 7344,
+        "27": 2584,
+        "29": 1224
+      },
+      "third_centered_moment": {
+        "denominator": 17875,
+        "numerator": 9216
+      },
+      "triple_degree": 3,
+      "unordered_pair_union_profile": {
+        "5": 2448,
+        "6": 34884,
+        "7": 88128,
+        "8": 61506
+      },
+      "unordered_triple_union_profile": {
+        "10": 13110876,
+        "11": 5855616,
+        "12": 869244,
+        "6": 40188,
+        "7": 807840,
+        "8": 5060016,
+        "9": 12272640
+      },
+      "variance": {
+        "denominator": 3575,
+        "numerator": 9072
+      },
+      "vertices": 18
+    }
+  ],
+  "schema": "c794-aligned-design-moments-v1"
+}
