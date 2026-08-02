@@ -25,14 +25,14 @@ publication actions outside this bundle.
 - `pyproject.toml` and `uv.lock`, which pin the symbolic replay environment;
 - `verification/README.md` and the paper-level `README.md`.
 
-The revised PDF is sixteen pages.  The release build has no TeX spacing error,
+The revised PDF is fifteen pages.  The release build has no TeX spacing error,
 undefined reference or citation, overfull or underfull box, or package
 warning.  The source and PDF hashes at closure are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 53,203 | `6341feccfd5c20d1a0610beda09c2b6914cb80c30b111d8e796a089744e8c7f8` |
-| `golden_quantum_statistics.pdf` | 143,783 | `812bbc5dbf8e254c76a6369ccefd59142aa21346ad7716f82de39aa11109b7c2` |
+| `golden_quantum_statistics.tex` | 52,775 | `70062fda37433788647f6dec8f29914c0aa509ed784f82799fa1a762695edc98` |
+| `golden_quantum_statistics.pdf` | 142,706 | `e6ff9ce225fe29517ce99e3c843d096717f91db27192b5a6fae1d22fb5b717f0` |
 
 Rebuild and verify from this directory with:
 

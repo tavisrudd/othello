@@ -5,8 +5,8 @@
       "sha256": "841f8a27d30371c1ecc069166755a62a107bdd129cc228343bf08b6fb33e5f11"
     },
     "golden_quantum_statistics.tex": {
-      "bytes": 53203,
-      "sha256": "6341feccfd5c20d1a0610beda09c2b6914cb80c30b111d8e796a089744e8c7f8"
+      "bytes": 52775,
+      "sha256": "70062fda37433788647f6dec8f29914c0aa509ed784f82799fa1a762695edc98"
     },
     "pyproject.toml": {
       "bytes": 168,

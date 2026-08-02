@@ -478,11 +478,14 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C827 is active and owns the post-integration Milnor--Serre copy edit of the
-Golden quantum-statistics manuscript.  It may improve theorem order, paragraph
-jobs, proof causality, notation economy, and sentence rhythm, but may not alter
-the C826 theorem package or C825 trust boundary.  Charter:
-`notes/golden-tasks/c827-post-integration-milnor-serre-copy-edit.md`.
+C827 is complete.  The post-integration Milnor--Serre pass separates the
+orientation and real-conference scales, replaces the opening result ledger by
+three causal reductions, and exposes the mixed-sector and
+holonomy-to-stability bottlenecks without changing the C826 theorem package or
+C825 trust boundary.  The authoritative paper is now fifteen pages and passes
+complete in-tree, clean extracted-package, warning, claim-preservation, and
+visual gates.  Report:
+`notes/2026-08-02-c827-golden-post-integration-milnor-serre-copy-edit.md`.
 
 C826 is complete and the integrated theorem-first manuscript is adopted as the
 authoritative single-paper package.  It replaces the Boolean-only center by the

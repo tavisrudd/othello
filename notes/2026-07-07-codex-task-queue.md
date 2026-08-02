@@ -130,7 +130,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C827 `[golden]` [ACTIVE; POST-INTEGRATION MILNOR--SERRE COPY EDIT]** — give the integrated Golden quantum-statistics paper a reader-first theorem-order, paragraph-job, notation, proof-causality, and sentence-economy pass while preserving every mathematical and trust boundary; rebuild and inspect the authoritative and extracted packages → `notes/golden-tasks/c827-post-integration-milnor-serre-copy-edit.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`

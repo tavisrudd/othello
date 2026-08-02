@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** active
+**Status:** complete
 
 ## Objective
 
@@ -36,3 +36,11 @@ its mathematical claims, hypotheses, trust boundaries, or operational scope.
 - clean extracted-package check;
 - updated submission hashes and a dated editorial report.
 
+## Outcome
+
+Completed on 2026-08-02.  The edited manuscript preserves the C826 theorem
+and C825 trust boundaries, gives real conference spectra their own section,
+adds causal orientation at the mixed-sector and stability bottlenecks, and
+reduces the paper from sixteen to fifteen pages.  Both authoritative and clean
+extracted `make check` gates pass.  Report:
+`notes/2026-08-02-c827-golden-post-integration-milnor-serre-copy-edit.md`.
