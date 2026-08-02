@@ -250,3 +250,17 @@ include_release_pdfs = true
 source = "papers/golden-quantum-statistics"
 paper_ids = ["golden_quantum_statistics"]
 disposition = "active"
+
+[[repository]]
+name = "golden-operator"
+source = "papers/golden-operator"
+paper_ids = ["golden_operator"]
+disposition = "gated"
+gate = "source programme is not adopted as a standalone publication"
+
+[[repository]]
+name = "q13-passant-code"
+source = "papers/q13-passant-code"
+paper_ids = ["passant_code_q13"]
+disposition = "gated"
+gate = "release identity and standalone validation contract are not yet frozen"
