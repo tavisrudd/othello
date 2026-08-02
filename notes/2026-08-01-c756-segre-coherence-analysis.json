@@ -1,0 +1,120 @@
+{
+ "rows": [
+  {
+   "local_tournament": {
+    "complete_mappings_in_stabilizer": 1,
+    "degree_set": [
+     1
+    ],
+    "full_automorphism_group": 3,
+    "stabilizer_of_1": 1,
+    "vertices": 3
+   },
+   "matching": {
+    "arc_not_coherent": 0,
+    "arcs": 2,
+    "coherent": 2,
+    "coherent_not_arc": 0,
+    "matchings": 5
+   },
+   "q": 7
+  },
+  {
+   "local_tournament": {
+    "complete_mappings_in_stabilizer": 1,
+    "degree_set": [
+     2
+    ],
+    "full_automorphism_group": 5,
+    "stabilizer_of_1": 1,
+    "vertices": 5
+   },
+   "matching": {
+    "arc_not_coherent": 0,
+    "arcs": 2,
+    "coherent": 2,
+    "coherent_not_arc": 0,
+    "matchings": 12
+   },
+   "q": 11
+  },
+  {
+   "local_tournament": {
+    "complete_mappings_in_stabilizer": 1,
+    "degree_set": [
+     4
+    ],
+    "full_automorphism_group": 9,
+    "stabilizer_of_1": 1,
+    "vertices": 9
+   },
+   "matching": {
+    "arc_not_coherent": 0,
+    "arcs": 0,
+    "coherent": 0,
+    "coherent_not_arc": 0,
+    "matchings": 54
+   },
+   "q": 19
+  },
+  {
+   "local_tournament": {
+    "complete_mappings_in_stabilizer": 1,
+    "degree_set": [
+     5
+    ],
+    "full_automorphism_group": 11,
+    "stabilizer_of_1": 1,
+    "vertices": 11
+   },
+   "matching": {
+    "arc_not_coherent": 0,
+    "arcs": 0,
+    "coherent": 0,
+    "coherent_not_arc": 0,
+    "matchings": 121
+   },
+   "q": 23
+  },
+  {
+   "local_tournament": {
+    "complete_mappings_in_stabilizer": 1,
+    "degree_set": [
+     7
+    ],
+    "full_automorphism_group": 15,
+    "stabilizer_of_1": 1,
+    "vertices": 15
+   },
+   "matching": {
+    "arc_not_coherent": 0,
+    "arcs": 0,
+    "coherent": 0,
+    "coherent_not_arc": 0,
+    "matchings": 31
+   },
+   "q": 31
+  },
+  {
+   "local_tournament": {
+    "complete_mappings_in_stabilizer": 1,
+    "degree_set": [
+     10
+    ],
+    "full_automorphism_group": 21,
+    "stabilizer_of_1": 1,
+    "vertices": 21
+   },
+   "matching": {
+    "arc_not_coherent": 0,
+    "arcs": 0,
+    "coherent": 0,
+    "coherent_not_arc": 0,
+    "matchings": 21
+   },
+   "q": 43
+  }
+ ],
+ "schema": 1,
+ "task": "C756"
+}

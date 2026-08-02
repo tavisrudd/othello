@@ -323,3 +323,18 @@ forced, Hasse gives a constant field bound rather than an asymptotic one.
 | The internal node set has size ((q^2-1)/8) and blocks every non-tangent line only at (q=11) in the surviving scalar branch | partly settled | a structure-sensitive blocking theorem is the highest-EV remaining route |
 
 No manuscript files were edited.
+
+## 8. Third-pass update: the sign-coherence gate is closed
+
+The successor report `notes/2026-08-01-c756-segre-tangent-coherence.md`
+proves that every saturated-external resultant-compatible arc over
+\(q\equiv3\pmod4\) is sign-coherent. Segre's lemma of tangents supplies the
+missing implication: the canonical tangent products are symmetric because
+their scale factors are all pinned by the fixed edge \(\{0,\infty\}\).
+
+The remaining saturated-external gate is no longer item 1 of Section 6. It is
+the narrower first-subconstituent rigidity problem: classify the automorphisms
+of the Paley tournament induced on \(S\). If they are the expected maps
+\(s\mapsto c s^{p^j}\), the same successor report proves by a coset Weil bound
+that every \(j>0\) is impossible; the scalar \(j=0\) case is already closed by
+Proposition 2 above.

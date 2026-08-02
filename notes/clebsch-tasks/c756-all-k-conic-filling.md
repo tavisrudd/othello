@@ -28,9 +28,10 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Two research passes complete; the theorem is **not** proved. Reports:
+Three research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
-`notes/2026-08-01-c756-saturated-matching-attack.md`.
+`notes/2026-08-01-c756-saturated-matching-attack.md`, and
+`notes/2026-08-01-c756-segre-tangent-coherence.md`.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -54,6 +55,9 @@ What the saturated-external attack adds:
   obstruction;
 - for \(q\equiv3\pmod4\), the coherent scalar matching branch reduces to a genus-one character
   sum and Hasse's bound forces \(q\in\{3,7,11\}\); only \(q=11\) also covers;
+- Segre's lemma of tangents forces **every** saturated-external arc in the odd branch to be
+  sign-coherent; conditional on the remaining first-subconstituent automorphism lemma, a coset
+  Weil bound eliminates every nontrivial Frobenius form and reduces uniformly to the scalar branch;
 - polarity turns covering into the assertion that the complete node set of \((q+1)/2\) secants,
   consisting entirely of internal points, blocks every non-tangent line.
 
@@ -63,11 +67,11 @@ hexagon at \(q=11\).
 
 Remaining frontier: counting cannot finish the job (both \(k_{\min}(q)\) and the largest
 conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternates with
-\(q\)). In the saturated-external branch the exact missing lemma is now sign coherence (or a
-counterexample): a cyclic complete mapping compatible with every nonsquare cross-resultant must
-have no sign-incoherence edge. The alternative saturated route is a structure-sensitive blocking
-bound for the internal node set. Outside saturation, the type-aware spare-line and general-position
-character-sum routes remain live.
+\(q\)). In the saturated-external branch sign coherence is now proved. The exact missing lemma is
+local Paley rigidity: an automorphism of the tournament induced on the nonzero squares, subject to
+the complete-mapping condition, must be multiplication--Frobenius. The alternative saturated route
+is a structure-sensitive blocking bound for the internal node set. Outside saturation, the
+type-aware spare-line and general-position character-sum routes remain live.
 
 ## Current boundary
 
