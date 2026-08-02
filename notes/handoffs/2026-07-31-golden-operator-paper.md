@@ -483,8 +483,10 @@ the selected hierarchy-first Golden quantum-statistics manuscript as baseline
 A and tests a rigidity-and-design variant B, including the universal
 higher-order purity mean and variance, through mathematical-physics and
 quantum-optics red teams, a blind PRA comparison, and a fresh selected-PDF
-referee round.  C788's follow-up design-literature verdict is an upstream
-wording gate.  Cross-paper identity checks may use the other paper
+referee round.  C788's settled verdict assigns the design to Greaves--Suda and
+the harmonic machinery to the classical literature; only the exchange-facing
+synthesis is available for qualified novelty wording.  Cross-paper identity
+checks may use the other paper
 repositories; public access is out of scope.  Task card:
 `notes/golden-tasks/c793-golden-quantum-balanced-rigidity-ab.md`.  The shared
 allocation plan is

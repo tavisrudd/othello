@@ -14,22 +14,25 @@ purity—and hence cut-independent full spectrum—occurs exactly for (d\leq3).
 Thus order six is the unique nontrivial realized symmetric conference case
 with uniform balanced exchange spectrum.
 
-The strengthened result adds a second layer.  The aligned four-sets form a
-(3)-((2d,4,(d-3)/2)) design.  Consequently the balanced-cut purity has
+The strengthened analysis adds a second, correctly attributed layer.
+Greaves--Suda already prove that the aligned four-sets form a
+(3)-((2d,4,(d-3)/2)) design, and the Johnson-harmonic mechanism is
+classical.  C788's exchange-facing corollary is that balanced-cut purity has
 exact switching-class-independent mean and variance at every conference
-order.  At order ten the design is an (S(3,4,10)), forcing the exact
-(36/90) two-purity split without enumerating cuts.  Paper integration must
-therefore test both the exceptional deterministic endpoint and the universal
-higher-order statistical law.
+order.  At order ten the (S(3,4,10)) parameters force the exact (36/90)
+two-purity split without enumerating cuts.  Paper integration must therefore
+test both the new exceptional-endpoint classification and a credited
+higher-order statistical law; it must not market the design itself as new.
 
 The three papers should allocate this result by mathematical function:
 
 1. **Paper I recovers the object.**  It receives only the bounded consequence
    that the recovered order-six two-graph carries the unique nontrivial
    balanced-singular-rigid conference case.
-2. **Paper III explains the object.**  It is the canonical home of the general
-   cross-Gram, aligned-design, moment, inclusion, and Ramsey theorem at the
-   operator stage.
+2. **Paper III explains the object.**  It is the canonical home of the new
+   cross-Gram exchange interpretation and inclusion/Ramsey rigidity theorem at
+   the operator stage, while crediting Greaves--Suda for the aligned design
+   used to derive the exact ensemble statistics.
 3. **Golden quantum statistics operationalizes the object.**  It promotes the
    classification as the reason the six-mode benchmark is exceptional and
    tests the higher-order mean/variance law as its general statistical
@@ -70,9 +73,9 @@ following failure modes:
   identification;
 - treating the classical block identity, closed-walk moments, inclusion rank,
   or spectral monomorphy as new;
-- presenting the aligned (3)-design, Johnson-harmonic interpretation,
-  variance law, or order-ten Steiner specialization beyond the wording
-  licensed by C788's follow-up design-literature audit;
+- presenting the aligned (3)-design or Johnson-harmonic interpretation as
+  new rather than assigning them to Greaves--Suda and classical
+  Delsarte--Johnson/Wilson machinery;
 - importing the quantum protocol into Papers I or III, or importing the full
   general proof into Paper I;
 - allowing the new theorem to displace the established headline or break the
@@ -111,8 +114,31 @@ remains logically independent.  Paper III owns the general proof; Paper I
 contains only a consequence; the Golden paper contains enough local
 derivation to remain checkable and cites Paper III for the classification and
 design law.  C788's follow-up design-literature audit must settle the
-publication wording for conference-derived aligned (3)-designs and the
-(S(3,4,10)) specialization before either paper freezes.
+  publication wording: the design theorem is pre-empted, while the surviving
+  claim is its exchange-purity interpretation and role in the singular-
+  spectral rigidity theorem.
+
+## C794 level-up boundary
+
+C794 is a separate, currently computer-assisted successor.  Its target is
+that on at least seven vertices the family of four-sets containing zero or
+four coherent triples determines an arbitrary two-graph up to complement.
+The exact seven-vertex census and local-to-global overlap argument already
+establish this with a finite base; a human proof, novelty audit, and higher-
+moment theorem remain open.
+
+If C794 closes, it composes with C788's inclusion recovery to say that the
+**labelled balanced-purity landscape** of every conference matrix of order at
+least ten reconstructs its two-graph up to complement.  This would be a new
+shadow-to-source theorem for Paper III and an exchange-statistical tomography
+theorem for the Golden paper.  Paper I lies below the sharp seven-vertex
+threshold and receives no such claim.  No current manuscript variant may use
+this theorem until C794 passes its human-proof, novelty, and placement gates.
+
+The live queue currently places C794 after C793.  Before beginning manuscript
+work, make an explicit sequencing decision: running C794 first avoids a
+possible second Paper-III/Golden A/B cycle if its reconstruction theorem
+survives.
 All statement identities, trust maps, PDFs, release allowlists, and relevant
 standalone forward commits must be green.  If the selected Paper-III theorem
 is structural, its Lean interface and aggregate gate must be updated rather

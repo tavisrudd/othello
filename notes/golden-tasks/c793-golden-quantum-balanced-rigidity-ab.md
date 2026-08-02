@@ -19,11 +19,11 @@ damaging its observable hierarchy or honest design-limit boundary.
   semantic tag `golden-quantum-statistics-observable-hierarchy-selected`.
 - **B — rigidity-and-design integration:** promote the order-six
   classification in the abstract and first-page theorem hierarchy; present the
-  higher-order switching-class-independent purity mean and variance as its
-  statistical envelope; retain a short local order-six derivation, cite Paper
-  III for the general theorem, and make explicit that singular statistics are
-  orientation-blind while determinant signs carry the missing relative
-  orientation.
+  higher-order switching-class-independent purity mean and variance as a
+  credited Greaves--Suda/Johnson statistical envelope; retain a short local
+  order-six derivation, cite Paper III for the new general exchange-rigidity
+  theorem, and make explicit that singular statistics are orientation-blind
+  while determinant signs carry the missing relative orientation.
 
 Variant B must preserve the Golden/Clebsch naming bridge.  It may compress
 secondary explanation to pay for the theorem, but may not restore the anomaly
@@ -48,8 +48,9 @@ Run two independent attacks before the blind comparison:
 Both readers may inspect Papers I and III under `/home/tavis/src/math-papers`.
 They must ignore public-posting and public-locator availability while checking
 theorem identity, markings, normalizations, and citations.
-C788's follow-up design-literature verdict must be consumed before B uses
-novelty language for the strengthened result; C793 must not repeat that sweep.
+C788's settled design-literature verdict is binding: the aligned design is
+Greaves--Suda's and the harmonic mechanism is classical.  C793 must not repeat
+that sweep or use the design itself as a novelty claim.
 
 ## Blind A/B and referee gates
 
@@ -73,3 +74,7 @@ checkable; the balanced benchmark, decoder, source limitation, and design-limit
 derivations remain intact; the complete paper-local and extracted-package
 gates pass; and all frozen/exported files use descriptive publication-safe
 names.
+
+C794's possible reconstruction of a two-graph from its aligned-block shadow is
+not available to this A/B unless C794 is explicitly promoted ahead of C793 and
+passes its human-proof, novelty, and manuscript-placement gates.

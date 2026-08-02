@@ -8,10 +8,11 @@ audit are complete
 ## Objective
 
 Make Paper III the canonical theorem home for balanced singular-spectrum
-rigidity and the aligned-block (3)-design at the Golden operator stage,
-explaining structurally why order six is the unique nontrivial uniform
-conference case and why higher orders nevertheless have universal purity mean
-and variance, without importing the quantum design package.
+rigidity at the Golden operator stage, explaining structurally why order six
+is the unique nontrivial uniform conference case and why the classical
+Greaves--Suda aligned design nevertheless gives higher orders universal purity
+mean and variance, without importing the quantum design package or claiming
+the design as new.
 
 ## Candidate architectures
 
@@ -20,9 +21,10 @@ and variance, without importing the quantum design package.
 - **B — classification home:** insert the cross-Gram spectral formula,
   universal trace, aligned-four-set purity, and inclusion/Ramsey classification
   with a compact self-contained proof.
-- **B-plus — design-complete home:** add the aligned
-  (3)-((2d,4,(d-3)/2)) theorem, Johnson-harmonic mean/variance law, and
-  structural order-ten (36/90) corollary.
+- **B-plus — rigidity with design consequences:** add the credited
+  Greaves--Suda (3)-design, classical Johnson-harmonic mean/variance law,
+  and structural order-ten (36/90) corollary around the new exchange-
+  rigidity theorem.
 - **B-lite — compressed home:** retain the classification and design
   statements with their decisive proof ideas while moving routine block,
   inclusion-norm, or variance algebra to the trust/evidence surface.
@@ -41,10 +43,10 @@ updating the formal surface.
    moments, inclusion-rank descent, and spectral monomorphy.  Describe the new
    result as a balanced singular-spectral analogue with qualified priority
    wording.
-3. Consume C788's follow-up literature verdict for conference-derived
-   (3)-designs, the aligned-block construction, Johnson-harmonic cut
-   statistics, and the (S(3,4,10)) specialization before assigning novelty
-   wording to the strengthened theorem.  Do not duplicate that audit.
+3. Apply C788's settled literature verdict: Greaves--Suda owns the aligned
+   (3)-design, and Delsarte--Johnson/Wilson machinery owns the harmonic and
+   inclusion calculations.  Reserve qualified novelty language for the
+   exchange interpretation and singular-spectral inclusion/Ramsey theorem.
 4. Preserve the exact distinctions among cut-independent squared singular
    spectrum, determinant orientation, and the later cubic shadows.
 5. Update the relevant Lean definitions and theorem interface for the
@@ -72,9 +74,13 @@ version then receives a fresh referee-style read.
 ## Acceptance
 
 The arithmetic--operator--harmonic spine remains visible; the unique
-nontrivial order-six conclusion and universal higher-order design law are
+nontrivial order-six conclusion and credited higher-order statistical law are
 memorable and precisely qualified; every selected general statement is proved
-at the depth its displayed status promises; the design-specific literature
-boundary is recorded; no quantum protocol enters the manuscript; Lean and
-trust surfaces match the selected theorem; all manuscript and standalone gates
-pass; and review files use descriptive public-safe names.
+at the depth its displayed status promises; the Greaves--Suda and classical
+Johnson machinery are explicitly assigned; no quantum protocol enters the
+manuscript; Lean and trust surfaces match the selected theorem; all manuscript
+and standalone gates pass; and review files use descriptive public-safe names.
+
+C794's two-graph reconstruction theorem is outside this task until its human
+proof and novelty audit close.  If it is promoted ahead of C792, rebuild the
+candidate architecture rather than appending the result after the A/B freeze.
