@@ -2,7 +2,9 @@
 
 **Lane:** `golden`
 
-**Status:** active
+**Status:** complete — stability theorem proved; bounded novelty audit passed
+only at qualified-candidate strength; manuscript promotion rejected on scope
+and literature-trust grounds
 
 ## Objective
 
@@ -48,3 +50,16 @@ manuscript variant.
   characterized source.
 - If promoted, a complete paper-local evidence/trust update and comparison
   report; otherwise no manuscript mutation.
+
+## Outcome
+
+The classification-free stability gate produced the global bound
+\(d_{\mathbb R}(C)^2\ge(10/3)\delta(C)\) and, for
+\(\delta(C)<(6-\sqrt{35})/20\), the local reverse bound
+\(d_{\mathbb R}(C)^2\le40\delta(C)\).  Root dephasing, sign rounding, and
+even-integral parity force the rounded matrix to be an exact real conference
+matrix.  The audit leaves the squared-spectrum/Pareto/stability package as a
+qualified research candidate but finds enough adjacent ETF and conference
+classification prior art that the present paper should not widen into the
+Hermitian moduli branch.  No manuscript file was changed.  Full report:
+`notes/2026-08-02-c818-mixed-plane-stability-audit.md`.

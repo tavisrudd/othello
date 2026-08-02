@@ -478,11 +478,22 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C818 is active.  It owns the gated promotion decision for C814's mixed-plane
-package: first an exact holonomy-defect stability probe, then a claim-level
-novelty audit, and only after both survive a minimal manuscript A/B with full
-paper and trust gates.  Charter:
-`notes/golden-tasks/c818-mixed-plane-stability-audit-promotion.md`.
+C818 is complete with no manuscript edit.  It proves the classification-free
+stability bounds
+`d_R(C)^2 >= (10/3) delta(C)` globally and
+`d_R(C)^2 <= 40 delta(C)` when
+`delta(C) < (6-sqrt(35))/20`: after root dephasing, sign rounding is close
+enough that the conference equation and even-integral parity force an exact
+real conference matrix.  The structural certificate is now only triangle
+coordinates, pentagon parity/Pfaffian extremal rigidity, and stable parity
+rounding.  A conventions-compliant bounded audit of eight characterized
+sources leaves the squared cross-block/Pareto/stability package as qualified
+research candidates, but established ETF triple-product/three-uniform work,
+the published order-six conference classification claim, two unreached full
+texts, and the current paper's already-tight real/operator scope make promotion
+a net regression.  Preserve the package for a sequel or later theorem-only
+revision; the best first future test is the real continuous-control theorem.
+Report: `notes/2026-08-02-c818-mixed-plane-stability-audit.md`.
 
 C814 is research-complete with no manuscript edit.  For the fixed real Golden
 operator, balanced Boolean controls simultaneously maximize every intrinsic
@@ -511,7 +522,10 @@ The ensuing `ej2` shows that cut-independence of any one of
 `e3`, `h3`, or `s21` already characterizes the real switching class, and
 packages all three cut averages through the single nonnegative holonomy defect
 `delta(C)=1-average(r_T^2)`; a quantitative pentagon bound gives
-`||AB+BA||_F^2 >= 8` inside the equal-holonomy ansatz.
+`||AB+BA||_F^2 >= 8` inside the equal-holonomy ansatz.  C818 has now supplied
+the fresh promotion audit and the stronger classification-free local metric
+stability theorem; its no-promotion verdict supersedes the earlier pending
+review marker.
 
 C808 is complete.  A full Milnor--Serre exposition audit aligned the abstract,
 introduction, figure, and discussion with the correct unframed
