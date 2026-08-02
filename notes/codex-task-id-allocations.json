@@ -2429,8 +2429,17 @@
       "last": 831,
       "purpose": "Paper IV structural version with C817 integration, proof tightening, evidence, and Lean formalization",
       "sequence": 270
+    },
+    {
+      "count": 1,
+      "first": 832,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 832,
+      "purpose": "Paper IV C831 structural theorem Lean formalization and paper-owned certificate gates",
+      "sequence": 271
     }
   ],
-  "next_id": 832,
+  "next_id": 833,
   "schema": "codex-task-id-allocations-v1"
 }
