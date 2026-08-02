@@ -29,6 +29,35 @@ def CubicsProportional
     (C : Matrix (Fin 6) (Fin 6) R) (mu : R) : Prop :=
   ∀ x, matchingEvaluation C x = mu * triangleCubic C x
 
+/-- Scaling every matrix entry gives the commutator-Pfaffian cubic weight
+three in the matrix. -/
+theorem matchingEvaluation_smul (s : R)
+    (C : Matrix (Fin 6) (Fin 6) R) (x : Fin 6 → R) :
+    matchingEvaluation (s • C) x = s ^ 3 * matchingEvaluation C x := by
+  simp [matchingEvaluation]
+  ring
+
+/-- Scaling every matrix entry gives the triangle cubic weight three in the
+matrix. -/
+theorem triangleCubic_smul (s : R)
+    (C : Matrix (Fin 6) (Fin 6) R) (x : Fin 6 → R) :
+    triangleCubic (s • C) x = s ^ 3 * triangleCubic C x := by
+  simp [triangleCubic, cubicTerm, triangleSign]
+  ring
+
+/-- A nonzero common edge scale does not change the proportionality scalar
+between the two cubic shadows. -/
+theorem cubicsProportional_smul_iff (s : R) (hs : s ≠ 0)
+    (C : Matrix (Fin 6) (Fin 6) R) (mu : R) :
+    CubicsProportional (s • C) mu ↔ CubicsProportional C mu := by
+  constructor <;> intro h x
+  · have hx := h x
+    rw [matchingEvaluation_smul, triangleCubic_smul] at hx
+    apply mul_left_cancel₀ (pow_ne_zero 3 hs)
+    simpa [mul_assoc, mul_left_comm] using hx
+  · rw [matchingEvaluation_smul, triangleCubic_smul, h x]
+    ring
+
 /-- Nonzero proportionality transfers affine translation invariance from the
 commutator-Pfaffian cubic to the triangle cubic. -/
 theorem triangleCubic_translate_of_proportional
@@ -400,5 +429,21 @@ theorem exists_nonzero_cubicsProportional_iff_conferenceSquare
     rcases orientation012_of_firstRowBalanced bits hbalance with hpos | hneg
     · exact ⟨4, by norm_num, cubicsProportional_four_of_sixTests bits hbalance hpos⟩
     · exact ⟨-4, by norm_num, cubicsProportional_neg_four_of_sixTests bits hbalance hneg⟩
+
+/-- The normalized classification is unchanged after multiplying every edge
+by one nonzero scalar.  This is the scalar-sign form of the recognition
+theorem. -/
+theorem exists_nonzero_cubicsProportional_smul_iff_conferenceSquare
+    (bits : Fin 10 → Bool) (s : ℤ) (hs : s ≠ 0) :
+    (∃ mu : ℤ, mu ≠ 0 ∧
+      CubicsProportional (s • normalizedSignMatrix bits) mu) ↔
+      normalizedSignMatrix bits * normalizedSignMatrix bits =
+        5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
+  rw [← exists_nonzero_cubicsProportional_iff_conferenceSquare bits]
+  constructor
+  · rintro ⟨mu, hmu, hprop⟩
+    exact ⟨mu, hmu, (cubicsProportional_smul_iff s hs _ mu).mp hprop⟩
+  · rintro ⟨mu, hmu, hprop⟩
+    exact ⟨mu, hmu, (cubicsProportional_smul_iff s hs _ mu).mpr hprop⟩
 
 end RelativeConicArcs.FourShadowRecognition
