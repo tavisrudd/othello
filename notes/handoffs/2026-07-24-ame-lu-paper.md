@@ -33,6 +33,17 @@ did not falsify; it produced a sharper theorem, that a binary code's lift
 lattice has full rank exactly when its dual distance is at least three.
 See `2026-08-01-c774-two-uniform-rigidity-red-team.md`.
 
+**C777 closed (2026-08-02): the formal layer matches the manuscript, with
+its boundary stated.**  A new multipartite namespace, general in site set
+and local dimension, proves the generator splitting, the single-exponential
+identity, the polarized second-moment identity, discreteness, and two-sided
+defect invariance; the decomposition corollary is a hypothesis-explicit
+interface.  Gate and axiom audit passed with only the three standard axioms
+and no certificates.  The stability estimate and the intertwiner bound are
+reported unformalized rather than weakened, and the formalization ledger now
+says what may be cited as kernel checked.  See
+`2026-08-01-c777-two-uniform-rigidity-lean.md`.
+
 **C796 closed (2026-08-02): cross-lane analogy refuted; two theorems
 recovered from the refutation.**  The golden lane's balanced-cut sign
 recovery does not transfer and the lead is closed — nothing should be
