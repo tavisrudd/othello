@@ -261,7 +261,7 @@ reason = "the standalone repository does not expose the private source-programme
 [[repository.rewrite]]
 path = "verification/verify.py"
 old = 're.compile(r"notes/20'
-new = 're.compile(r"notes/" r"20'
+new = 're.compile(r"notes" r"/20'
 expected_count = 1
 reason = "preserve the private-path rejection regex without embedding a path that the export audit must reject"
 
