@@ -20,19 +20,19 @@ whose four values on every four-set have even sum.  Call a four-set
  \left\{Q\in\binom V4:\tau|_{\binom Q3}\text{ is constant}\right\}.
 \]
 
-Complementation (	au\mapsto\tau+1) preserves this family.
+Complementation ($\tau\mapsto\tau+1$) preserves this family.
 
-> **Aligned-design faithfulness theorem.**  If (|V|\geq7) and two
-> two-graphs (	au,	au') have the same aligned four-sets, then
-> (	au'=	au) or (	au'=	au+1).  The bound seven is sharp.
+> **Aligned-design faithfulness theorem.**  If ($|V|\geq7$) and two
+> two-graphs ($\tau,\tau'$) have the same aligned four-sets, then
+> $\tau'=\tau$ or $\tau'=\tau+1$.  The bound seven is sharp.
 
 The proof is human and elementary.  It replaces the C794 seven-vertex
 exhaustion by a four-point cut argument.  The old census remains an exact
 falsifier and confirms the labelled small-order fibre table, but it is no
 longer part of the proof.
 
-For a symmetric conference matrix, the determinant-((-3)) principal
-four-sets of Greaves--Suda are exactly (mathcal A(	au)).  Hence their
+For a symmetric conference matrix, the determinant-$(-3)$ principal
+four-sets of Greaves--Suda are exactly $\mathcal A(\tau)$.  Hence their
 marked design reconstructs the conference two-graph up to complement at
 every order at least ten.  Order six is a real exception: the design is
 empty and has twelve labelled two-graph preimages, although these preimages
@@ -143,6 +143,96 @@ triple; inspecting that triple forces the two local choices to agree.  The
 Johnson graph on seven-subsets is connected, so one choice holds on every
 seven-set and therefore on every triple of (V).  This proves the theorem.
 
+### ej2: a quadratic sparse inverse
+
+Fix any aligned four-set $Q$, put $m=|V|-4$, and retain only
+
+\[
+ \mathcal F_Q=\left\{R\in\binom V4:|R\cap Q|\geq2\right\}.
+\]
+
+> **Sparse aligned-certificate theorem.**  For $|V|\geq7$, the restriction
+> $\mathcal A(\tau)\cap\mathcal F_Q$, together with the knowledge that
+> $Q$ is aligned, determines $\tau$ up to complement.  It uses exactly
+>
+> \[
+> 1+4m+6\binom m2=3|V|^2-23|V|+45
+> \]
+>
+> four-set answers, rather than $\binom{|V|}{4}$.
+
+The $4m$ sets meeting $Q$ in three points give every one-point cut signature
+$p_x$.  The $6\binom m2$ sets meeting $Q$ in two points give the pair
+signatures.  The pair lemma forces all outside cuts to be simultaneously
+unchanged or changed; any three outside points rule out the changed case, and
+the same tests recover every outside edge $c_{xy}$.  Thus the switching
+representative is recovered directly, without passing through all seven-sets.
+
+The displayed certificate is nonadaptive and uses
+
+\[
+ q_{\rm nonad}=1+4m+6\binom m2=3|V|^2-23|V|+45
+\]
+
+answers.  There is a sharper adaptive decoder.  Query all one-point
+signatures, use the full six pair tests only on three outside seed points and
+between one fixed seed and each later point, and thereby recover every cut.
+Once two cuts are known, the signatures for $c_{xy}=0$ and $c_{xy}=1$ are
+distinct by the pair lemma, so one adaptively chosen four-set recovers that
+remaining edge bit.  This gives
+
+\[
+ q_{\rm ad}
+ =1+\binom m2+9m
+ =\frac{|V|^2+9|V|-50}{2}. \tag{A}
+\]
+
+The bound is asymptotically information-optimal.  After orienting the known
+aligned block to value zero, fix one cross edge per outside point by switching.
+The remaining $3m+\binom m2$ graph bits vary freely and give distinct
+two-graphs.  Any binary-query decision tree must therefore use at least
+
+\[
+ q_{\rm lb}=3m+\binom m2
+ =\frac{|V|^2-3|V|-4}{2}. \tag{B}
+\]
+
+answers in the worst case.  Thus $q_{\rm ad}=q_{\rm lb}+6m+1$: its leading
+constant is optimal and only a linear additive gap remains.  Both decoders
+take $O(|V|^2)$ bit operations and $O(|V|)$ streaming workspace.  Producing a
+switching representative costs $\Theta(|V|^2)$; explicitly listing all
+recovered triples necessarily costs $\Theta(|V|^3)$ output time and space.
+
+Against exhaustive testing, the nonadaptive query reduction factor is
+$|V|^2/72+O(|V|)$, while the adaptive factor is
+$|V|^2/12+O(|V|)$.  On seven points both bounds equal 31, forcing the other
+four design coordinates.  At conference order ten the bounds are 115
+nonadaptive and 70 adaptive, versus all 210 principal four-set tests; the
+information lower bound is 33.
+
+If the input is a block list, hashing it costs $O(|\mathcal A|)$ expected time
+and space before the quadratic decode.  With only a membership oracle and no
+supplied anchor, blind search is quartic in the worst case.  Conference
+regularity makes randomized anchor discovery cheap: at order $2d$ the aligned
+density is
+
+\[
+ \rho=\frac{d-3}{2(2d-3)}.
+\]
+
+The expected number of uniform determinant probes is
+$1/\rho=2(2d-3)/(d-3)$: 7, $11/2$, and 5 at orders 10, 14, and 18, tending
+to 4.  After $k$ with-replacement probes the failure probability is
+$(1-\rho)^k$; sampling without replacement is at least as good.
+
+The main commercially relevant transfers are exact signed-network/gauge
+synchronization, sparse validation of conference or ETF codebooks, discrete
+phase/sign tomography from quartic observables, and switching-class
+fingerprinting or deduplication.  The gain is from exhaustive quartic minor
+scans to quadratic local tests.  This theorem does **not** yet improve generic
+real matrix completion, continuous phase retrieval, or noisy synchronization:
+those require a stability theorem and a soft-data decoder.
+
 ## Sharp fibres below seven
 
 The same cut calculation gives a structural explanation of every exceptional
@@ -193,10 +283,10 @@ For a Seidel matrix (C), put
  \epsilon_{ijk}=C_{ij}C_{ik}C_{jk}.
 \]
 
-The four signs (epsilon_{ijk}) on a four-set have product one.  They are
+The four signs $\epsilon_{ijk}$ on a four-set have product one.  They are
 all equal exactly when the sum of the three Hamilton-cycle signs is three,
 equivalently when the principal determinant is (-3).  Thus
-Greaves--Suda's (3	ext{-}(4n+2,4,n-1)) design is precisely the aligned
+Greaves--Suda's $3\text{-}(4n+2,4,n-1)$ design is precisely the aligned
 family of the conference two-graph.  The faithfulness theorem gives marked
 reconstruction up to complement for (4n+2\geq10).
 
@@ -210,7 +300,7 @@ disjoint union of thirty four-vertex components.
 The full marked design still reconstructs.  Give the thirty blocks binary
 colors, and for every one of the 180 nonblock four-sets impose the two-graph
 parity equation on the four block colors owning its four triples.  The exact
-(mathbf F_2) matrix has rank 28 and nullity two.  Its kernel is spanned by
+$\mathbf F_2$ matrix has rank 28 and nullity two.  Its kernel is spanned by
 the constant coloring and the actual weight-15 coloring.  The two constant
 solutions would make every four-set aligned and are rejected by the given
 design; the two surviving nonconstant solutions are the weight-15 coloring
@@ -219,8 +309,8 @@ the functor remains faithful.
 
 ## The first design-unforced cut moment
 
-Let (mathcal B) be any four-block family on (v=2d) points and let
-(c_T=|\{B\in\mathcal B:B\subseteq T\}|) for a uniformly chosen (d)-set.
+Let $\mathcal B$ be any four-block family on ($v=2d$) points and let
+$c_T=|\{B\in\mathcal B:B\subseteq T\}|$ for a uniformly chosen $d$-set.
 For (r=1,2,3), let (N_r(u)) be the number of unordered (r)-sets of
 distinct blocks whose union has size (u).  Double counting a chosen block
 tuple inside (T) gives the factorial moments
@@ -277,7 +367,7 @@ giving
 
 The complete cut histograms and union profiles are in the certificate.  For
 exchange purity, multiply the centered third moment by
-((32/(2d-1)^2)^3), since C788 gives an affine function of (c_T).
+$(32/(2d-1)^2)^3$, since C788 gives an affine function of $c_T$.
 
 ## Exact evidence and trusted boundary
 
@@ -314,7 +404,7 @@ Files:
 
 ## Literature boundary
 
-Greaves--Suda owns the determinant-((-3)) (3)-design construction.
+Greaves--Suda owns the determinant-$(-3)$ $3$-design construction.
 Gillespie supplies the classical regular-two-graph coherent/incoherent
 four-set parameter framework.  Pouzet--Si Kaddour--Trotignon is the closest
 reconstruction predecessor found: it classifies pairs of ordinary graphs with
@@ -344,6 +434,10 @@ No manuscript edit is authorized by this task.
 - **Settled:** the first design-unforced moment is not merely “third order.”
   Equations (2)--(3) identify its exact owner as the triple-block union
   profile.
+- **Settled by ej2:** after one aligned anchor, the quadratic family of
+  four-sets meeting it in at least two points is already faithful.  It gives
+  an explicit $O(n^2)$ decoder, and conference density makes randomized
+  anchor discovery constant expected cost.
 - **Open, evidence gap:** no audited pair of inequivalent conference
   switching classes at one order has yet been shown to have distinct third
   moments.  The full triple-union profile is the sharper candidate; a future
@@ -354,4 +448,3 @@ No manuscript edit is authorized by this task.
 - **No manufactured mystery:** the small-order fibre multiplicities and the
   sign change between the order-14 and order-18 third moments are completely
   explained by the recorded cut signatures and triple-union profiles.
-

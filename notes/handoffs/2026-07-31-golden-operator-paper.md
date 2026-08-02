@@ -537,7 +537,13 @@ independent replay pass.  The bounded audit found
 Pouzet--Si Kaddour--Trotignon's homogeneous-triple reconstruction as the
 closest predecessor but no exact two-graph theorem; MathSciNet, Google
 Scholar, Crossref forward citations, and a subject-expert check remain open,
-so only qualified wording is licensed.  Report and audit:
+so only qualified wording is licensed.  Its ej2 strengthening gives an
+asymptotically information-optimal adaptive inverse: after one aligned anchor,
+at most $(v^2+9v-50)/2$ marked tests reconstruct a switching representative
+in $O(v^2)$ time, against the binary-query lower bound
+$(v^2-3v-4)/2$; explicit triple output costs $\Theta(v^3)$.  Conference
+density makes randomized anchor discovery constant expected cost tending to
+four determinant probes.  Report and audit:
 `notes/2026-08-02-c794-aligned-design-faithfulness.md` and
 `notes/2026-08-02-c794-aligned-design-faithfulness-literature-audit.md`.
 

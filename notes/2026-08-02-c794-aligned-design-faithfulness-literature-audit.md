@@ -13,7 +13,7 @@ Five individually discussed sources were consulted: **zero at full-text
 depth**, three at partial depth, and two at abstract/metadata depth.  This is a
 bounded adjacent-literature audit, not a priority closure.
 
-Greaves--Suda directly owns the forward determinant-((-3)) design theorem.
+Greaves--Suda directly owns the forward determinant-$(-3)$ design theorem.
 Gillespie gives the classical regular-two-graph parameters behind the
 coherent/incoherent four-set classes.  The closest reverse result located is
 Pouzet--Si Kaddour--Trotignon's classification of pairs of ordinary graphs
@@ -47,9 +47,9 @@ claim is licensed by this audit.
 - Access: shared cache key `arXiv:2402.17528`, PDF and text extraction;
   SHA-256
   `230c4cb862cd51f0d51f20af91c56f2e7453f2e2472114bda6c42b3a5af99e32`.
-- Load-bearing content: Example 2.3 proves that determinant-((-3))
-  principal four-subsets of a symmetric conference matrix of order (4n+2)
-  form a (3	ext{-}(4n+2,4,n-1)) design.  It does not discuss recovering
+- Load-bearing content: Example 2.3 proves that determinant-$(-3)$
+  principal four-subsets of a symmetric conference matrix of order ($4n+2$)
+  form a $3\text{-}(4n+2,4,n-1)$ design.  It does not discuss recovering
   the matrix switching class or two-graph from that design, nor balanced-half
   third moments.
 
@@ -182,4 +182,3 @@ These are access/coverage gaps, not searches that found nothing.  They block
 “first” and any unqualified absence sentence.  They do not affect the
 mathematical proof or the direct attribution to Greaves--Suda, Gillespie, and
 Pouzet--Si Kaddour--Trotignon.
-
