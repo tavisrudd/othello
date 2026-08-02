@@ -13,6 +13,11 @@ returned survive-with-amendments, and version B implements those amendments.
   specialization, with their Theorem 1 conceded and the prime-power analogue of
   Theorem 1 posed as open.
 
+**Hold before running this.** `notes/2026-08-02-c804-recognition-group-criterion.md`
+proves a criterion that has their Theorem 1 as well as case (iv) as
+specializations. If that criterion is adopted, version B understates the
+position and should be rewritten before any reader sees it.
+
 The surrounding text, including the Tan sentences, is identical in both, so the
 comparison isolates the one change. The companion demotion of the Tan
 concession is gated on a separate atlas computation and is not part of this
