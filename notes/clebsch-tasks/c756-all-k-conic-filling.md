@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Fifteen research passes complete; the theorem is **not** proved. Reports:
+Sixteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -43,7 +43,8 @@ Fifteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-information-probability-structure-lottery.md`, and
 `notes/2026-08-01-c756-masked-rs-collision-audit.md`, and
 `notes/2026-08-01-c756-probability-cheap-tests.md`, and
-`notes/2026-08-01-c756-kernel-curves.md`.
+`notes/2026-08-01-c756-kernel-curves.md`, and
+`notes/2026-08-01-c756-coordinate-free-upgrades.md`.
 
 Branch ledger:
 
@@ -267,6 +268,26 @@ What the missing-set kernel-curve extraction adds:
   route.  The \(q=31\) \(A_5\) pencil remains a finite exceptional object, and the
   prefix-container diagnostic is the sole survivor of the probability cheap-test pair.
 
+What the coordinate-free upgrade pass adds:
+
+- every missing-set curve is the canonical kernel line of the evaluation map
+  \(H^0(\mathbf P(\operatorname{Sym}^2V),\mathcal O(d))\to
+  H^0(S_A,\mathcal O(d))\), so the \(q=13,29\) curves are as intrinsic as the
+  six-axis \(q=31\) sextic even though their stabilizer-character spaces are larger;
+- the Moore quotient is the residual Cartier divisor \(R_{P,\ell}\) in the exact
+  restriction of the chord arrangement to a spare line;
+- direction and intercept are respectively the base and fibre coordinates of the
+  canonical incidence ruled surface over \(\ell\).  On it, the old first subresultant is
+  a rank-two bundle section vanishing along \(2R_{P,\ell}\); this is the intrinsic
+  Fitting/determinantal statement behind \(E_P^2\mid A,B\), and its nonzero fibre at a
+  unique collision explains invariantly why no Moore factor divides;
+- the completed saturated-external branch can be stated as a classification of
+  fixed-point-free involutions of the conic carrying the resultant-character two-graph;
+  fixed-edge complete-mapping coordinates belong only to its proof;
+- the norm-one-torus/Cartier saturated-internal rewrite, dual internal-node
+  near-transversal, and intrinsic prefix groupoid are frozen as explicit future
+  interfaces, with stop conditions, rather than claimed as completed arguments.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -329,7 +350,7 @@ sharpens but does not yet raise the 10--15% full-theorem odds.  The probability 
 leave one bounded global lead but no new theorem.  Cheap
 hygiene still owed before a later end-to-end handoff is one explicit
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
-read of the full fifteen-pass argument; neither item reopens a closed mathematical branch.
+read of the full sixteen-pass argument; neither item reopens a closed mathematical branch.
 
 Decision split: do not price the saturated crown and the full theorem as one outcome.
 The realistic publishable narrowing is the **complete saturated classification** — over
