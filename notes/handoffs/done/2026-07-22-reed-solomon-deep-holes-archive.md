@@ -224,3 +224,19 @@ Gmainer--Havlicek supply the nucleus supports; neither states the consecutive id
 adjacent-run rule.  No third component occurs in C536's componentwise secant/nucleus functor.
 Cyclic/wild residual carriers remain C512's level-specific boundary, and C531's degree-nine
 arithmetic remains untouched.
+
+## 2026-08-02 — C620 higher-Lucas carrier closure
+
+C620 proves that the first fresh carrier
+`P<e2,e3,e4,e5,e6,e7>` has empty split-free locus over every admissible
+binary field.  A uniform final-pair Artin--Schreier argument covers `q>=64`;
+the theorem-derived Borel quotients close `q=16,32`.  Their structurally
+compressed v2 certificates occupy 9,449 and 39,574 bytes and retain exact
+independent replay.  The 510/101 separation shows only that projective images
+of affine `F2^3` cosets are sufficient rather than necessary; the exact
+uniform criterion is the final-pair linear system with trace and collision
+conditions.  Combining the theorem with C532 gives `rho_q=0`, persistent-only
+binary deepest syndromes, and cardinality `q(q+1)^2/2` from `q>=64`, followed
+separately by Seroussi--Roth code promotion.  A specialist cold read returned
+major revision, checked the repairs, and finished at **ACCEPT**.  C821 owns
+Version 2 integration; C660 becomes the next dispatch.

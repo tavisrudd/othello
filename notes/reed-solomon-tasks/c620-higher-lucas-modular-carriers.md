@@ -2,8 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** mathematics and reproducibility complete 2026-08-02; independent
-specialist review and post-review closeout pending
+**Status:** complete 2026-08-02; independent specialist review ACCEPT
 
 **Dependency gate:** Cleared.  C545 published Version 1 on 2026-07-29 under
 Zenodo DOI `10.5281/zenodo.21682216`.  This task remains separate from the
@@ -71,15 +70,21 @@ from `q>=64`, and exact Borel-quotient certificates close `q=16,32`.
 Subspace-polynomial witnesses are not exhaustive: at `q=16`, 101 of the 292
 complement orbits have ordinary split witnesses but no projective-additive
 three-space witness.  The exact uniform replacement is the final-pair linear
-system plus trace and collision conditions.  The result belongs in Version 2
-because it directly evaluates C820's first new carrier.
+system plus trace and collision conditions.  The result is designated for
+C821's Version 2 integration because it directly evaluates C820's first new
+carrier.  In binary \(q\ge64\), C532's containment now sharpens to
+\(\mathcal D_{10}=\mathcal P_9\), \(\rho_q=0\), and exact cardinality
+\(q(q+1)^2/2\); Seroussi--Roth separately promotes this syndrome
+classification to code deep holes.
 
 Report and evidence:
 `notes/2026-08-02-c620-higher-lucas-modular-carriers.md` and its adjacent
 generator, two JSON certificates, independent replay, and checksum manifest.
-The remaining gate is an independent finite-geometer/coding-theorist proof
-review; after repair, run the required extra-juice/Tao closeout and lifecycle
-transition to C660.
+The first specialist pass returned major revision on the Toeplitz rank seam,
+linear-\(Q\) branch, projective chart, 510/101 scope, and coding implications.
+All were repaired; focused re-review returned **ACCEPT**.  The compact v2
+certificate schema reduces the \(q=16\) and \(q=32\) JSON artifacts to 9,449
+and 39,574 bytes respectively without weakening independent replay.
 
 ## Cold-session routing
 
