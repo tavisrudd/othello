@@ -1,4 +1,4 @@
-# C756 — the known Paley-clique orbits never give a coherent system
+# C756 — no coherent system exists for any odd prime power q <= 151
 
 **Lane**: `clebsch`. Date: 2026-08-02.
 
@@ -10,13 +10,19 @@ of the two published maximal-clique orbits — `Z = a*S_j + b` with `chi(a) = 1`
 **1,686,529,824**; total passing: **0**.
 
 Independently, and much more strongly, a complete clique search over the coherence graph found
-**no coherent system at all** for every `q = 3 (mod 4)` prime power with `7 <= q <= 151`
-(that is `7, 11, 19, 23, 27, 31, 43, 47, 59, 67, 71, 79, 83, 103, 107, 127, 131, 139, 151`).
-That search does not depend on the published clique classification, so for that range it settles
-nonexistence outright rather than only for the two orbits.
+**no coherent system at all, in either residue class, for every odd prime power `q` with
+`7 <= q <= 151`** — the nineteen fields `7, 11, 19, 23, 27, 31, 43, 47, 59, 67, 71, 79, 83, 103,
+107, 127, 131, 139, 151` with `q = 3 (mod 4)`, and the twenty-two fields `5, 9, 13, 17, 25, 29,
+37, 41, 49, 53, 61, 73, 81, 89, 97, 101, 109, 113, 121, 125, 137, 149` with `q = 1 (mod 4)`.
+That search depends on no published clique classification and on no conjecture, so over that range
+it settles nonexistence outright. **This supersedes the conjecture-dependent framing entirely for
+`q <= 151`**: nothing there rests on the Baker–Ebert–Hemmeter–Woldar gap conjecture or on the
+two-orbit classification. Only the rows with `151 < q <= 503` remain orbit-only, and those are
+conditional.
 
-The only coherent systems seen anywhere in this run are the two known `q = 5` four-frames, which
-appear as positive controls and are recovered by both the direct tester and the clique search.
+The only coherent systems that exist anywhere in this run are the two known `q = 5` four-frames.
+They are recovered three separate ways — by the direct tester in both languages, and by the clique
+search, which at `q = 5` returns exactly those two sets through the vertex `s` and nothing else.
 
 ## Setup and conventions
 
@@ -35,9 +41,12 @@ A coherent system is `Z` inside `F_{q^2} \ F_q` with `|Z| = k`, no two elements 
 `C = {z : N(z) = 1}` is the norm-one circle, `Q_0 = {z in C : z^{(q+1)/2} = 1}` its index-2
 subgroup, `Q_1 = C \ Q_0`, and `S_j = Q_j ∪ {0}`.
 
+The `q = 3 (mod 4)` sections below concern the orbit sweep and the circle construction, which only
+make sense in that residue class. The `q = 1 (mod 4)` sweep has its own section further down.
+
 ## Setup validation
 
-For every one of the 53 fields in range the run checked, and confirmed, all of:
+For every one of the 53 `q = 3 (mod 4)` fields in range the run checked, and confirmed, all of:
 
 - `|C| = q + 1` and `|Q_0| = |Q_1| = (q+1)/2`, so `|S_j| = (q+3)/2 = k`;
 - `S_0` and `S_1` are cliques in `P(q^2)`: every difference of two distinct elements is a nonzero
@@ -59,7 +68,7 @@ sample of `(a, j, b, b')` with `b - b^q = b' - b'^q` the full `k x k` matrices o
 `q^2` values of `b` outright, so its counts are `q^2/q = q` times larger and depend on no
 reduction at all. Both give zero passes.
 
-## Results
+## Results, `q = 3 (mod 4)`
 
 `family size` is the number of `(a, c, j)` triples swept, `= q(q^2 - 1) = 2 * ((q^2-1)/2) * q`.
 `coherent systems` counts `k`-cliques of the coherence graph through the fixed vertex `s`; by the
@@ -145,14 +154,71 @@ searching only cliques containing `s` loses nothing.
 Note that the full Paley automorphism group `z -> a z^{p^i} + b` with `chi(a) = 1` does **not**
 preserve condition (B) — that is exactly why the orbit sweep has to range over `a` and `c` at all.
 
+## `q = 1 (mod 4)` unconditional sweep
+
+For `q = 1 (mod 4)` we have `t = (q+1)/2` odd, so `delta = -1`: condition (A) asks for
+`chi(z_i - z_j) = -1`, making `Z` a clique in the **complement** of `P(q^2)`, and condition (B)
+asks for `chi(z_i - z_j^q) = +1`. The Paley maximal-clique literature says nothing here, so there
+is no orbit family to sweep — but the exhaustive search needs no classification, and it applies
+verbatim. `delta` is taken from the formula `(-1)^{(q+1)/2}` throughout the program, never from
+the residue class; the `q = 1 (mod 4)` code path asserts `delta = -1` as a guard, and the graph
+construction reads `f2.delta` rather than a constant.
+
+The vertex-transitivity and automorphism arguments were re-verified separately for each of these
+fields, not carried over: `transitive` checks that the orbit of `s` under `z -> a z + b`
+(`a in F_q^*`, `b in F_q`) is the whole irrational vertex set, and `aut_verified` checks edge
+preservation over all vertex pairs for the generators `z -> g z` and `z -> z + 1`. Both are `true`
+at all 22 fields. The argument itself does not use the residue class: `chi(a) = legendre(a^2) = +1`
+for `a in F_q^*` regardless, so those maps scale `z - w` and `z - w^q` by a square either way.
+
+Fields swept: all prime powers `q = 1 (mod 4)` with `5 <= q <= 151`, namely
+`5, 9, 13, 17, 25, 29, 37, 41, 49, 53, 61, 73, 81, 89, 97, 101, 109, 113, 121, 125, 137, 149`.
+The prime powers in that list are `9 = 3^2`, `25 = 5^2`, `49 = 7^2`, `81 = 3^4`, `121 = 11^2`, and
+`125 = 5^3`; there are no others, since `q = p^m = 1 (mod 4)` needs either `p = 1 (mod 4)` or `m`
+even. (`151 = 3 (mod 4)`, so it belongs to the other table.)
+
+**Result: `q = 5` yields exactly 2 coherent systems through `s` — the two known four-frames, and
+the positive control fires as required — and every other field yields 0.** Every search ran to
+completion; the largest budget consumption was 126.5 s of the 400 s per-field allowance, at
+`q = 149`. No field hit its budget, so every zero below is a genuine negative rather than an
+exhausted search.
+
+| q | p^m | eps | k | delta | vertices | budget used | coherent systems through s |
+|---|---|---|---|---|---|---|---|
+| 5 | 5 | 2 | 4 | -1 | 20 | 0.00s of 400 s | 2 |
+| 9 | 3^2 | 4 | 6 | -1 | 72 | 0.00s of 400 s | 0 |
+| 13 | 13 | 2 | 8 | -1 | 156 | 0.00s of 400 s | 0 |
+| 17 | 17 | 3 | 10 | -1 | 272 | 0.00s of 400 s | 0 |
+| 25 | 5^2 | 5 | 14 | -1 | 600 | 0.00s of 400 s | 0 |
+| 29 | 29 | 2 | 16 | -1 | 812 | 0.00s of 400 s | 0 |
+| 37 | 37 | 2 | 20 | -1 | 1332 | 0.01s of 400 s | 0 |
+| 41 | 41 | 3 | 22 | -1 | 1640 | 0.01s of 400 s | 0 |
+| 49 | 7^2 | 9 | 26 | -1 | 2352 | 0.04s of 400 s | 0 |
+| 53 | 53 | 2 | 28 | -1 | 2756 | 0.05s of 400 s | 0 |
+| 61 | 61 | 2 | 32 | -1 | 3660 | 0.12s of 400 s | 0 |
+| 73 | 73 | 5 | 38 | -1 | 5256 | 0.38s of 400 s | 0 |
+| 81 | 3^4 | 3 | 42 | -1 | 6480 | 0.79s of 400 s | 0 |
+| 89 | 89 | 3 | 46 | -1 | 7832 | 1.48s of 400 s | 0 |
+| 97 | 97 | 5 | 50 | -1 | 9312 | 2.91s of 400 s | 0 |
+| 101 | 101 | 2 | 52 | -1 | 10100 | 3.99s of 400 s | 0 |
+| 109 | 109 | 2 | 56 | -1 | 11772 | 7.69s of 400 s | 0 |
+| 113 | 113 | 3 | 58 | -1 | 12656 | 11.22s of 400 s | 0 |
+| 121 | 11^2 | 12 | 62 | -1 | 14520 | 19.59s of 400 s | 0 |
+| 125 | 5^3 | 2 | 64 | -1 | 15500 | 26.38s of 400 s | 0 |
+| 137 | 137 | 3 | 70 | -1 | 18632 | 58.00s of 400 s | 0 |
+| 149 | 149 | 2 | 76 | -1 | 22052 | 126.51s of 400 s | 0 |
+
+Total wall clock for this sweep: 259.1 s over the 22 fields.
+
 ## Controls
 
 - **Positive, tester.** The two known `q = 5` four-frames `{s, 1+4s, 2+2s, 4+3s}` and
   `{s, 4+4s, 1+3s, 3+2s}` (with `eps = 2`, `t = 3`, `k = 4`, `delta = -1`) are both reported
   coherent by the generic tester, in Rust and in Python.
 - **Positive, clique search.** Run at `q = 5`, the exhaustive clique search finds exactly two
-  coherent systems through the vertex `s` — the two known frames — confirming the search is not
-  vacuously returning zero.
+  coherent systems through the vertex `s`, and the Python cross-check verifies that those two sets
+  are precisely the two known frames rather than merely two sets of the right count. This control
+  sits inside the `q = 1 (mod 4)` sweep itself, so that sweep cannot be vacuously returning zero.
 - **Negative, random.** 8000 deterministic pseudorandom size-`k` subsets of the irrational
   elements, with no two conjugate, over `q = 5, 7, 11, 27`: 2 coherent, both at `q = 5`
   (where coherent systems genuinely exist and are dense enough to hit by chance), and 0 at
@@ -165,7 +231,9 @@ preserve condition (B) — that is exactly why the orbit sweep has to range over
   validation, clique and maximality of `S_0`, `S_1`, zero orbit passes, zero coherent systems)
   with independently written code: `Q_0` is computed as `{z^2 : z in C}` rather than by the
   `z^{(q+1)/2} = 1` test, and the orbit family is swept over all `b in F_{q^2}` rather than over
-  the reduced parameter `c`.
+  the reduced parameter `c`. It also reproduces the `q = 1 (mod 4)` clique searches at the primes
+  `13, 17, 29, 37, 41, 53` (all zero) and at `q = 5` (exactly the two known frames). Prime powers
+  are covered by the Rust run only, since the Python field layer is built for prime `q`.
 
 ## What this does and does not certify
 
@@ -173,22 +241,24 @@ Certified:
 
 - For each `q = 3 (mod 4)` prime power with `7 <= q <= 503`, no member of the two published
   maximal-clique orbits of `P(q^2)` is a coherent system.
-- For each `q = 3 (mod 4)` prime power with `7 <= q <= 151`, no coherent system exists at all.
-  This is a full nonexistence result over that finite range, independent of the clique
-  classification.
+- For **every** odd prime power `q` with `7 <= q <= 151`, in both residue classes mod 4, no
+  coherent system exists at all. This is a full nonexistence result over that finite range,
+  independent of the clique classification and of any conjecture.
+- At `q = 5` the coherent systems are exactly the two known four-frames up to the transitive
+  affine action; the search returns precisely those two through the vertex `s`.
 
 Not certified:
 
-- Nothing about `q = 1 (mod 4)`, where `delta = -1` and condition (A) is not a Paley-clique
-  condition. The `q = 5` material here is a control, not a sweep.
 - Nothing beyond `q = 503`, and no infinite-family statement. Finite exhaustion is not a theorem.
-- For `109 < q <= 503` (indeed for `151 < q <= 503`) the rows test only the two known orbits. The
+  The unconditional part stops at `q = 151`.
+- For `151 < q <= 503` the rows test only the two known orbits. The
   two-orbit classification of maximal `(q+3)/2`-cliques in `P(q^2)` is computer-verified in the
   literature only for `q <= 109`; above that it is conjectural. So those rows are **not** by
   themselves a nonexistence proof — they become one only conditional on the conjecture.
 - The trusted boundary is the field construction, the quadratic-character table, and the clique
-  search in this program. Both implementations agree at `q = 7, 11, 19, 23`, and the field layer is
-  independently exercised by the `q = 5` positive controls.
+  search in this program. Both implementations agree at `q = 7, 11, 19, 23` and at
+  `q = 5, 13, 17, 29, 37, 41, 53`, and the field layer is independently exercised by the `q = 5`
+  positive controls.
 
 ## Replay
 
@@ -197,7 +267,7 @@ nothing is written to the `rust/` crate.
 
 ```
 rustc -O -o "$SCRATCH/c756" notes/2026-08-02-c756-clique-orbit-crown-check.rs
-"$SCRATCH/c756" --max 503 --exhaustive-max 151 --exhaustive-budget 400 \
+"$SCRATCH/c756" --max 503 --exhaustive-max 151 --mod1-max 151 --exhaustive-budget 400 \
     --out notes/2026-08-02-c756-clique-orbit-crown-check.json
 python3 notes/2026-08-02-c756-clique-orbit-crown-check.py
 ```
@@ -208,13 +278,17 @@ pass `--timings` to include it, which makes the output non-canonical. With the d
 output is byte-identical across runs — verified by regenerating into a scratch path and comparing.
 The Python program prints its table and exits `0` when every assertion holds.
 
+`--mod1-max 151` adds the `q = 1 (mod 4)` exhaustive-only sweep; `--mod1-max 0` (the default)
+omits it, and the `rows_q1mod4` array is then empty. Certificate schema is
+`c756-clique-orbit-crown-check/2`.
+
 Toolchain used: `rustc 1.93.1 (01f6ddf75 2026-02-11)`, `Python 3.13.12` (standard library only).
-Total run time: about 6 minutes for the Rust sweep, about 4 seconds for the Python cross-check.
+Total run time: about 10 minutes for the Rust sweep, about 7 seconds for the Python cross-check.
 
 ### Hashes
 
 | file | bytes | sha256 |
 |---|---|---|
-| `notes/2026-08-02-c756-clique-orbit-crown-check.rs`   | 31799 | `34b672be7e04f6a1fa0a1088ad676c6d80add1ade35e9d8fbc7622b1b16ef8bd` |
-| `notes/2026-08-02-c756-clique-orbit-crown-check.py`   |  8337 | `631dc3fda2518137bc035e4ceff4128f3f3a03ad935623d2604426d9e6bd53e7` |
-| `notes/2026-08-02-c756-clique-orbit-crown-check.json` | 18311 | `dd23b16c7329651baa83cc30a0a26f7a21259566cac9498d1502cceec60a8d19` |
+| `notes/2026-08-02-c756-clique-orbit-crown-check.rs`   | 34194 | `6dc98bed3a3e29a5d7d109ef0def7d341efb1bde65ee6018d0547610b79b4367` |
+| `notes/2026-08-02-c756-clique-orbit-crown-check.py`   |  9000 | `c3478f94a5537cf2357ed0b2e1228fb2f1885283bceb50f03d5ef467bdb3f3bb` |
+| `notes/2026-08-02-c756-clique-orbit-crown-check.json` | 22155 | `990e05fb02edf2c006fade503cb3f8a2179641379dcd539102a07d230b707ce9` |

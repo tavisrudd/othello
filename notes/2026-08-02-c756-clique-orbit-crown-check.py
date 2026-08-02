@@ -199,9 +199,12 @@ def exhaustive(q):
             rec(clique + [v], {w for w in cand if w in adj[v] and w > v})
 
     rec([v0], set(adj[v0]))
+    out = []
     for cl in found:
-        assert is_coherent(F, [verts[i] for i in cl])
-    return len(found)
+        Z = [verts[i] for i in cl]
+        assert is_coherent(F, Z)
+        out.append(frozenset(Z))
+    return out
 
 
 def main():
@@ -219,10 +222,12 @@ def main():
         print("control q=5 %s coherent: %s" % (nm, r))
         ok &= r
 
-    # -- positive control: the clique search finds them
-    n5 = exhaustive(5)
-    print("control q=5 coherent systems through s: %d" % n5)
-    ok &= (n5 == 2)
+    # -- positive control: the clique search finds exactly those two
+    found5 = exhaustive(5)
+    print("control q=5 coherent systems through s: %d" % len(found5))
+    ok &= (set(found5) == {frozenset(frame1), frozenset(frame2)})
+    print("control q=5 search recovers exactly the two known frames: %s"
+          % (set(found5) == {frozenset(frame1), frozenset(frame2)}))
 
     # -- negative controls: deterministic non-random spoilers
     bad = [(0, 1), (1, 1), (2, 1), (3, 1)]
@@ -243,8 +248,16 @@ def main():
         assert r["circle"] == q + 1 and r["q0"] == r["q1"] == (q + 1) // 2
 
     for q in (7, 11, 19, 23):
-        n = exhaustive(q)
-        print("exhaustive q=%d coherent systems through s: %d" % (q, n))
+        n = len(exhaustive(q))
+        print("exhaustive q=%d (3 mod 4) coherent systems through s: %d" % (q, n))
+        ok &= (n == 0)
+
+    # -- q = 1 mod 4: delta = -1, so Z is a clique in the complement of P(q^2).
+    #    Prime q only here; the Rust run covers the prime powers 9, 25, 49, 81, 121, 125.
+    for q in (13, 17, 29, 37, 41, 53):
+        assert params(q)[2] == -1
+        n = len(exhaustive(q))
+        print("exhaustive q=%d (1 mod 4) coherent systems through s: %d" % (q, n))
         ok &= (n == 0)
 
     print("ALL CHECKS PASSED" if ok else "FAILURE")

@@ -2,7 +2,7 @@
 // satisfy the crown condition (B) of a coherent system?
 //
 // Build:  rustc -O -o <scratch>/c756 2026-08-02-c756-clique-orbit-crown-check.rs
-// Run:    <scratch>/c756 --max <QMAX> --exhaustive-max <QEX> --out <path.json>
+// Run:    <scratch>/c756 --max <QMAX> --exhaustive-max <QEX> --mod1-max <QM1> --out <path.json>
 //
 // Conventions
 //   q = p^m odd, q = 3 (mod 4) for the orbit sweep.
@@ -893,7 +893,29 @@ fn controls() -> String {
 
 // ---------------------------------------------------------------- driver
 
-fn prime_powers_3mod4(lo: usize, hi: usize) -> Vec<(usize, usize)> {
+/// Exhaustive-only row for q = 1 (mod 4), where delta = -1 and condition (A) makes Z a
+/// clique in the COMPLEMENT of P(q^2), so the Paley-clique classification says nothing.
+struct Mod1Row {
+    q: usize,
+    p: usize,
+    m: usize,
+    eps: usize,
+    k: usize,
+    delta: i8,
+    exh: Exh,
+}
+
+fn run_q1(p: usize, m: usize, budget: Duration) -> Mod1Row {
+    let f2 = F2::new(p, m);
+    let q = f2.q;
+    assert_eq!(q % 4, 1, "this path is for q = 1 mod 4");
+    // delta comes from the formula, never from the residue class
+    assert_eq!(f2.delta, -1);
+    let exh = exhaustive_search(&f2, budget);
+    Mod1Row { q, p, m, eps: f2.f.eps, k: f2.k, delta: f2.delta, exh }
+}
+
+fn prime_powers_mod4(lo: usize, hi: usize, r: usize) -> Vec<(usize, usize)> {
     let mut v = Vec::new();
     for p in 2..=hi {
         // primality
@@ -915,7 +937,7 @@ fn prime_powers_3mod4(lo: usize, hi: usize) -> Vec<(usize, usize)> {
             if q > hi {
                 break;
             }
-            if q >= lo && q % 4 == 3 {
+            if q >= lo && q % 4 == r {
                 v.push((p, m));
             }
             m += 1;
@@ -931,6 +953,8 @@ fn main() {
     let mut exh_max = 31usize;
     let mut out_path = String::from("c756.json");
     let mut exh_budget_s = 300u64;
+    // exhaustive-only sweep of the other residue class, q = 1 (mod 4); 0 disables it
+    let mut mod1_max = 0usize;
     // Wall-clock is host-dependent, so it is omitted from the certificate by default;
     // pass --timings to include it (the run log on stderr always carries it).
     let mut timings = false;
@@ -949,6 +973,10 @@ fn main() {
                 exh_budget_s = args[i + 1].parse().unwrap();
                 i += 2;
             }
+            "--mod1-max" => {
+                mod1_max = args[i + 1].parse().unwrap();
+                i += 2;
+            }
             "--timings" => {
                 timings = true;
                 i += 1;
@@ -962,7 +990,7 @@ fn main() {
     }
 
     let ctrl = controls();
-    let list = prime_powers_3mod4(7, maxq);
+    let list = prime_powers_mod4(7, maxq, 3);
     let mut rows = Vec::new();
     let mut total_tested = 0u64;
     let mut total_passed = 0u64;
@@ -976,6 +1004,19 @@ fn main() {
             row.q, row.triples_tested, row.triples_passed, row.seconds
         );
         rows.push(row);
+    }
+
+    // exhaustive-only sweep over q = 1 (mod 4)
+    let mut rows1: Vec<Mod1Row> = Vec::new();
+    if mod1_max >= 5 {
+        for &(p, m) in &prime_powers_mod4(5, mod1_max, 1) {
+            let r = run_q1(p, m, Duration::from_secs(exh_budget_s));
+            eprintln!(
+                "q1mod4 q={} verts={} found={} completed={} {:.2}s",
+                r.q, r.exh.vertices, r.exh.cliques_through_s, r.exh.completed, r.exh.seconds
+            );
+            rows1.push(r);
+        }
     }
 
     let secs = |v: f64| if timings { format!("{:.3}", v) } else { String::from("null") };
@@ -996,20 +1037,42 @@ fn main() {
         ));
     }
 
+    let mut rj1 = Vec::new();
+    let mut total_found1 = 0u64;
+    let mut incomplete1 = 0usize;
+    for r in &rows1 {
+        total_found1 += r.exh.cliques_through_s;
+        if !r.exh.completed {
+            incomplete1 += 1;
+        }
+        rj1.push(format!(
+            "{{\"q\":{},\"p\":{},\"m\":{},\"eps\":{},\"k\":{},\"delta\":{},\"vertices\":{},\"aut_verified\":{},\"transitive\":{},\"coherent_systems_through_s\":{},\"completed\":{},\"seconds\":{}}}",
+            r.q, r.p, r.m, r.eps, r.k, r.delta, r.exh.vertices, r.exh.aut_verified,
+            r.exh.transitive, r.exh.cliques_through_s, r.exh.completed, secs(r.exh.seconds)
+        ));
+    }
+
     let json = format!(
-        "{{\n  \"schema\": {},\n  \"task\": {},\n  \"generator\": {},\n  \"conventions\": {},\n  \"params\": {{\"q_min\":7,\"q_max\":{},\"exhaustive_max\":{},\"exhaustive_budget_seconds\":{}}},\n  \"controls\": {},\n  \"totals\": {{\"triples_tested\":{},\"triples_passed\":{}}},\n  \"rows\": [\n    {}\n  ]\n}}\n",
-        jstr("c756-clique-orbit-crown-check/1"),
+        "{{\n  \"schema\": {},\n  \"task\": {},\n  \"generator\": {},\n  \"conventions\": {},\n  \"params\": {{\"q_min\":7,\"q_max\":{},\"exhaustive_max\":{},\"exhaustive_budget_seconds\":{},\"mod1_max\":{}}},\n  \"controls\": {},\n  \"totals\": {{\"triples_tested\":{},\"triples_passed\":{},\"q1mod4_coherent_systems_found\":{},\"q1mod4_incomplete_searches\":{}}},\n  \"rows\": [\n    {}\n  ],\n  \"rows_q1mod4\": [\n    {}\n  ]\n}}\n",
+        jstr("c756-clique-orbit-crown-check/2"),
         jstr("C756"),
         jstr("notes/2026-08-02-c756-clique-orbit-crown-check.rs"),
         jstr("F_q from lex-first monic irreducible over F_p (little-endian digits); eps = least nonsquare of F_q; F_{q^2}=F_q(s), s^2=eps; element x+y*s encoded as x*q+y; chi(u)=quadratic character of N(u); t=(q+1)/2, k=t+1, delta=(-1)^t; orbit family Z = a*S_j + b with chi(a)=1 and b entering only through c=b-b^q in s*F_q"),
         maxq,
         exh_max,
         exh_budget_s,
+        mod1_max,
         ctrl,
         total_tested,
         total_passed,
-        rj.join(",\n    ")
+        total_found1,
+        incomplete1,
+        rj.join(",\n    "),
+        rj1.join(",\n    ")
     );
     fs::write(&out_path, json).unwrap();
-    eprintln!("TOTAL tested={} passed={}", total_tested, total_passed);
+    eprintln!(
+        "TOTAL tested={} passed={} q1mod4_found={} q1mod4_incomplete={}",
+        total_tested, total_passed, total_found1, incomplete1
+    );
 }
