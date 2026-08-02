@@ -258,6 +258,10 @@ EXPECTED_CLAIMS = {
         {"matching-module", "h3-equivariant-rank", "balanced-sheet",
          "shared-radial"},
     ),
+    "thm:fixed-line-chow-rigidity": (
+        {"conceptual", "classical-input"},
+        set(),
+    ),
     "lem:hyperplane-square": (
         {"conceptual", "lean"},
         {"hyperplane-square"},

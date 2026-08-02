@@ -39,7 +39,7 @@ are reusable inputs to C756, but C761 does not own or block that theorem.
 | surface | root | current state | owning task |
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening and C762 owns the forward exposition pass | [C762](../clebsch-tasks/c762-paper-i-forward-exposition.md) |
-| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the trade-only exact \(B_3/H_3\) classification and sheet-sign cubic survive; C749/C750 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
+| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; C749/C750/C801 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C763 consolidation is complete and C764 adds the minimal determinant-versus-permanent boundary for the forward version | [C764](../clebsch-tasks/c764-paper-iii-why-determinant.md) |
 | Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 human proof, paper-owned evidence, semantic modules, logical-spine lemmas, and sharded Lean gates green; semantic rank, normalized weight-eight, arbitrary weight-ten profiles, fixed-point weight-twelve exhaustion, and association/Gram spanning are closed, while two concrete transports and release remain | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -268,6 +268,8 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | unblocked; human proof 4/4 | attack and compress the complete proof, then freeze it |
 | [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | active by explicit user override; six individually elaborated spine modules, full theorem still open | formalize the actual Lucas Hom basis, detecting-module vanishings, contraction, and classification composition |
 | [C797 — Paper II trade-only carrier reconstruction](../clebsch-tasks/c797-trade-only-carrier-reconstruction.md) | complete; carrier-free theorem fails sharply at \(q=7\) | none; seven \(S_4\)-fixed affine placements share the trade and only one is a matching orbit |
+| [C798 — Paper II fixed-line Chow rigidity](../clebsch-tasks/c798-fixed-line-chow-rigidity.md) | complete; structural priority-judo theorem integrated and authoritative gate green | none; \(q-2\) nonmatching exact-trade orbits and the unique matching Chow point are proved without an orbit table |
+| [C801 — Paper II fixed-line Lean update](../clebsch-tasks/c801-paper-ii-fixed-line-lean.md) | queued after C798 statement freeze | formalize radial translation, noncoalescent Radical--Hadamard inheritance, and the \(q-2\) count without enumerating eleven orbits |
 | [C762 — Paper I forward exposition](../clebsch-tasks/c762-paper-i-forward-exposition.md) | active; authoritative exposition, PDFs, cold read, statement identity, and public-locator pass green | after C753, reconcile formal coverage, run the aggregate gate, and synchronize the standalone release |
 | [C763 — Paper III Golden consolidation](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) | complete; selective source--operator--cubics--harmonic chain, formal bridge, cold reads, and synchronized release gates green | none |
 | [C764 — Paper III “why determinant” boundary](../clebsch-tasks/c764-paper-iii-why-determinant.md) | complete; determinant-line explanation and explicit permanent gauge counterexample integrated; isolated authoritative and synchronized standalone release aggregates green | none; keep the physical companion outside Paper III until it has a stable public locator |
@@ -524,10 +526,23 @@ but not its matching embedding.  Complete reducibility of one lift is the
 nearest exact repair.  Full report:
 `notes/2026-08-02-c797-trade-only-carrier-obstruction.md`.
 
-The paper-owned trust surface now has twenty-eight statements and thirteen
+C798 turns that failure into the sharp positive boundary theorem.  For both
+\((q,K)=(7,S_4),(11,A_5)\), the stabilizer-fixed locus in the ambient conic
+fiber is an affine line, its rational points give distinct \(G/K\)
+placements, and the secant-product Chow locus meets it only at the matching
+point.  Radial translation leaves the top sheet data unchanged and changes
+only the outer radial constant, so Radical--Hadamard proves that all but one
+parameter have the exact sheet-sign trade.  This gives \(q-2\) nonmatching
+counterexamples structurally, with no seven- or eleven-orbit table in the
+paper spine.  The single coalescence point is non-load-bearing.  The exact
+eleven-orbit census is retained only in the C798 research bundle.  C801 is
+queued for the reusable Lean abstraction after statement freeze.  Full
+report: `notes/2026-08-02-c798-fixed-line-chow-rigidity.md`.
+
+The paper-owned trust surface now has twenty-nine statements and fourteen
 evidence bundles, including independent generic-wall, shared-radial, and
 q=9 small-field replays.  The authoritative aggregate gate and warning-free
-thirty-six-page PDF are green; the standalone repository remains at the
+forty-one-page PDF are green; the standalone repository remains at the
 previous frozen release pending the human-proof freeze.  A
 2026-07-31 audit nevertheless reopened the local proof gate: the checker is
 correctly conditional on the human projective--trade, Lucas-socle, and

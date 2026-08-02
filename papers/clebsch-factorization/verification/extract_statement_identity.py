@@ -28,6 +28,7 @@ EXPECTED_LABELS = (
     "cor:h3-middle-layer",
     "prop:radical-hadamard",
     "prop:modular-sheet-mechanism",
+    "thm:fixed-line-chow-rigidity",
     "lem:hyperplane-square",
     "thm:balanced-cubic",
     "cor:graded-evaluation",
