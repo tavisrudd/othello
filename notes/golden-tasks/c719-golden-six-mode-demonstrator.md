@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C715 and C718
+**Status:** ready; C715 and C718 complete
 
 ## Objective
 
@@ -52,4 +52,6 @@ that it realizes a dynamical gauge theory.
 
 ## Dependencies
 
-C715 and C718.  C717 is optional input if a Majorana platform is selected.
+C715 and C718 are complete.  C717 is optional input if a Majorana platform
+is selected.  C718 supplies both the pivot-gauge collision-free ratios and
+the basis-free symmetric-cube/exterior-cube spectral discriminator.

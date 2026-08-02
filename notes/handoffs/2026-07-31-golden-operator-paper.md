@@ -275,6 +275,18 @@ portfolio.  In particular:
   protected monodromy or parity pump without added spatial, boundary, or
   defect structure.  Report and evidence:
   `notes/2026-07-31-c717-golden-majorana-parity-chambers.md`.
+- C718 is complete, research-only, with no manuscript edit.  The bare
+  permanent is obstructed by the internal (O(3)\times O(3)) port gauge,
+  while the intrinsic bosonic companion is the symmetric-cube trace
+  (h_3=313/125).  Its fermionic exterior complement is (16/125), their
+  difference is (297/125), and the mixed-symmetry trace is (8/5).
+  A frozen pivot gauge supplies the exact 44-term permanent cubic, all six
+  transported protocols, the full balanced occupation census, and a
+  calibrated two-pattern boson/fermion control; coherent amplitudes retain
+  all twenty oriented masks, but probabilities and every intrinsic scalar
+  are orientation-blind.  The three aggregate spectral readings unblock
+  C719.  Report and evidence:
+  `notes/2026-08-01-c718-golden-boson-fermion-complement.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
   C735's operator-first architecture.  The genuinely source-free signed
@@ -383,16 +395,14 @@ from this manuscript, and they must be audited before any sequel.  Full report:
 | task | state | next gate |
 |---|---|---|
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
-| [C718 — boson--fermion complement](../golden-tasks/c718-golden-boson-fermion-complement.md) | queued after C720; independent of C715 | compute permanent-side identities and seek a new invariant or discriminator |
-| [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | queued after C715 and C718 | produce a platform circuit, coherent-sign readout, and feasibility budget |
+| [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | ready; C715 and C718 complete | produce a platform circuit, coherent-sign readout, and feasibility budget |
 
 ## Recommended order
 
-1. C718 boson--fermion complement only if a precise unifying need is selected;
-   otherwise it remains deferred physical/combinatorial work.
+1. C719 six-mode demonstrator, using C718's basis-free spectral discriminator
+   and pivot-gauge collision-free ratios with an explicit platform budget.
 2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
-3. Keep C719 deferred until C718 supplies a literal permanent-side theorem.
 
 ## Ownership and allowed paths
 

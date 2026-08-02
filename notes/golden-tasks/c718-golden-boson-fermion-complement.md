@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C720; independent of C715
+**Status:** complete; research-only, no manuscript edit
 
 ## Objective
 
@@ -43,3 +43,25 @@ observable without an explicit theorem supplying that structure.
 
 C720 freezes the paper interface; C707 is complete.  C719 consumes the
 accepted experimental discriminator.
+
+## Resolution
+
+The bare permanent is not an invariant of the unmarked Golden block because
+the internal (O(3)\times O(3)) port gauge changes it.  A frozen pivot gauge
+nevertheless gives an exact 44-term permanent cubic and a complete balanced
+census: coherent amplitudes distinguish all twenty oriented masks, while
+probabilities collapse to four labelled vectors.  The intrinsic bosonic
+companion is instead
+
+\[
+ \operatorname{tr}(\operatorname{Sym}^3(K_T^{\mathsf T}K_T))=313/125,
+\]
+
+with fermionic exterior probability (16/125), complement (297/125), and
+mixed-symmetry trace (8/5).  Together with the one-particle trace these
+aggregate readings recover the balanced squared singular spectrum.  The
+Jabbour--Cerf covariance sum rule supplies a universal matched-mode control,
+not a Golden certificate by itself.
+
+Full report and evidence:
+`notes/2026-08-01-c718-golden-boson-fermion-complement.md`.
