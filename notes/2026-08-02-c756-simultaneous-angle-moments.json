@@ -1,0 +1,94 @@
+{
+  "identity": "a genuine saturated-internal arc has angle polynomial product_{j!=i}(X-alpha_ij)=X^((q+1)/2)+1 at every i",
+  "inputs": [
+    "2026-08-01-c756-probability-cheap-tests.py",
+    "2026-08-01-c756-saturated-internal-audit.json"
+  ],
+  "rows": [
+    {
+      "all_rows_first_moment_zero_candidates": 2,
+      "all_rows_full_odd_coset_candidates": 2,
+      "candidate_count": 2,
+      "failing_first_moment_row_count_profile": {
+        "0": 2
+      },
+      "minimum_failing_moment_profile": {},
+      "q": 5
+    },
+    {
+      "all_rows_first_moment_zero_candidates": 0,
+      "all_rows_full_odd_coset_candidates": 0,
+      "candidate_count": 5,
+      "failing_first_moment_row_count_profile": {
+        "4": 5
+      },
+      "minimum_failing_moment_profile": {
+        "1": 5
+      },
+      "q": 7
+    },
+    {
+      "all_rows_first_moment_zero_candidates": 0,
+      "all_rows_full_odd_coset_candidates": 0,
+      "candidate_count": 28,
+      "failing_first_moment_row_count_profile": {
+        "6": 28
+      },
+      "minimum_failing_moment_profile": {
+        "1": 28
+      },
+      "q": 11
+    },
+    {
+      "all_rows_first_moment_zero_candidates": 0,
+      "all_rows_full_odd_coset_candidates": 0,
+      "candidate_count": 55,
+      "failing_first_moment_row_count_profile": {
+        "10": 55
+      },
+      "minimum_failing_moment_profile": {
+        "1": 55
+      },
+      "q": 19
+    },
+    {
+      "all_rows_first_moment_zero_candidates": 0,
+      "all_rows_full_odd_coset_candidates": 0,
+      "candidate_count": 39,
+      "failing_first_moment_row_count_profile": {
+        "6": 26,
+        "12": 13
+      },
+      "minimum_failing_moment_profile": {
+        "1": 39
+      },
+      "q": 23
+    },
+    {
+      "all_rows_first_moment_zero_candidates": 0,
+      "all_rows_full_odd_coset_candidates": 0,
+      "candidate_count": 17,
+      "failing_first_moment_row_count_profile": {
+        "16": 17
+      },
+      "minimum_failing_moment_profile": {
+        "1": 17
+      },
+      "q": 31
+    },
+    {
+      "all_rows_first_moment_zero_candidates": 0,
+      "all_rows_full_odd_coset_candidates": 0,
+      "candidate_count": 23,
+      "failing_first_moment_row_count_profile": {
+        "22": 23
+      },
+      "minimum_failing_moment_profile": {
+        "1": 23
+      },
+      "q": 43
+    }
+  ],
+  "schema": "c756-simultaneous-angle-moments-v1",
+  "scope": "every normalized pairwise-character candidate in the audited prime fields q in {5,7,11,19,23,31,43}; every base-point row"
+}

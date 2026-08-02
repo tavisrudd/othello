@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Sixteen research passes complete; the theorem is **not** proved. Reports:
+Seventeen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -44,7 +44,8 @@ Sixteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-masked-rs-collision-audit.md`, and
 `notes/2026-08-01-c756-probability-cheap-tests.md`, and
 `notes/2026-08-01-c756-kernel-curves.md`, and
-`notes/2026-08-01-c756-coordinate-free-upgrades.md`.
+`notes/2026-08-01-c756-coordinate-free-upgrades.md`, and
+`notes/2026-08-02-c756-tt-angle-bijections.md`.
 
 Branch ledger:
 
@@ -294,6 +295,29 @@ What the coordinate-free upgrade pass adds:
   near-transversal, and intrinsic prefix groupoid are frozen as explicit future
   interfaces, with stop conditions, rather than claimed as completed arguments.
 
+What the TT simultaneous-angle pass adds:
+
+- the forced angle bijection at every arc point gives the complete row identity
+  \[
+    \prod_{j\ne i}(X-\alpha_{ij})=X^{(q+1)/2}+1,
+    \qquad \alpha_{ij}=f_j(z_i)^{1-q},
+  \]
+  so every intermediate elementary symmetric function and every power sum through
+  degree \((q-1)/2\) vanishes; the prior master-polynomial constraint used only the
+  constant coefficient;
+- after clearing denominators, the product of the other quadratic evaluations on the
+  two conjugate fibres is a pure binomial.  This is a simultaneous first-jet/cofactor
+  condition at all \((q+3)/2\) closed points, giving roughly \(q^2/4\) exact row
+  equations on \(O(q)\) geometric data;
+- the first new equation \(\sum_{j\ne i}\alpha_{ij}=0\) holds in every row of both
+  \(q=5\) frames and fails in at least one row of every one of the 167 normalized
+  pairwise candidates at \(q=7,11,19,23,31,43\); in all tested fields except \(q=23\)
+  it fails in every row of every candidate;
+- the leading saturated proof targets are now the rank of the cross-ratio matrix
+  \((\alpha_{ij})\) and a degree-bounded globalization of its first cofactor on the arc
+  divisor.  Sparse signed-Paley-trade classification is the fallback; higher angle
+  moments wait until the first moment stalls.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -356,7 +380,7 @@ sharpens but does not yet raise the 10--15% full-theorem odds.  The probability 
 leave one bounded global lead but no new theorem.  Cheap
 hygiene still owed before a later end-to-end handoff is one explicit
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
-read of the full sixteen-pass argument; neither item reopens a closed mathematical branch.
+read of the full seventeen-pass argument; neither item reopens a closed mathematical branch.
 
 Decision split: do not price the saturated crown and the full theorem as one outcome.
 The realistic publishable narrowing is the **complete saturated classification** — over
