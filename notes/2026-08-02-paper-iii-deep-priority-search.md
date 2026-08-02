@@ -39,7 +39,7 @@ and, if absence is mentioned, “to our knowledge”; never “first.”
 
 ## Individually discussed sources
 
-Seven sources are discussed in this follow-up: **one at full-text depth**, two
+Eight sources are discussed in this follow-up: **one at full-text depth**, three
 at partial depth, and four at abstract/metadata depth.  The earlier C794 audit's
 five source records remain in force and are not recounted here.
 
@@ -48,7 +48,8 @@ five source records remain in force and are not recounted here.
 - Identifier: arXiv `0810.3189`; published DOI
   `10.1216/RMJ-2011-41-1-133`.
 - **Read depth: full text.**  Read the complete arXiv v1 extraction, Sections
-  1--7 and Appendix A.
+  1--7 and Appendix A.  The published version's body was not read; the
+  mathematical characterization below is of arXiv v1.
 - Access: shared cache key `arXiv:0810.3189`; SHA-256
   `47b184d9e56da34cb24b7289b5a4ad54b4f922164e8831a367e1f79354f5f01e`.
 - Boundary: proposes reconstruction of a switching-equivalence class from its
@@ -62,7 +63,7 @@ five source records remain in force and are not recounted here.
   (2016), with publication metadata read on the journal page.
 - **Read depth: partial.**  Read the abstract, Section 1, definitions in Section
   2.1, Theorem 7 and its proof boundary, and Theorems 8--10 surrounding the
-  general threshold.
+  general threshold in arXiv v1.  The published version's body was not read.
 - Access: shared cache key `arXiv:1501.05181`; SHA-256
   `cf9d5463dc97bafa9fc7038c65bf73d271bf1198f27c301ad9b7c768b60a85a7`.
 - Boundary: for arbitrary `h`-uniform hypergraphs, proves eventual equality up
@@ -75,8 +76,8 @@ five source records remain in force and are not recounted here.
 - Identifiers: arXiv `math/0601118`; DOI
   `10.1016/j.jctb.2008.04.004`.
 - **Read depth: partial.**  Read the abstract, introduction, main theorem
-  statements, definitions, and the stated threshold boundary; the full proof
-  was not read.
+  statements, definitions, and the stated threshold boundary in the arXiv
+  preprint; the full proof and the published version's body were not read.
 - Access: shared cache key `arXiv:math/0601118`; SHA-256
   `95dacb0ed74c3c09f37857201dfbf9b6e72e4502c0f396baf3c705d38bde4f29`.
 - Boundary: proves the graph (`h=2`) four-local reconstruction result, including
@@ -125,12 +126,18 @@ five source records remain in force and are not recounted here.
   binary class of fourth-order minors.  The input model is therefore strictly
   different.
 
-Greaves--Suda's 2017 large-submatrix result was also screened at indexed-text
-depth.  It characterizes conference matrices from spectra of submatrices of
-orders near the ambient order, not from the binary determinant-`(-3)` pattern on
-all four-subsets, and was not promoted to a separate source record because the
-same authors and conference-matrix boundary are already owned by the earlier
-audit.
+### Greaves--Suda, *Symmetric and skew-symmetric {0, +/-1}-matrices with large determinants*
+
+- Identifier: arXiv `1601.02769`; DOI `10.1002/JCD.21567`.
+- **Read depth: partial.**  Read the arXiv abstract, introduction's description
+  of the submatrix problem, and the indexed statements surrounding Theorems 4.1
+  and 4.3.  The complete proof and the published version's body were not read.
+- Access: arXiv/ar5iv indexed HTML for arXiv `1601.02769`; no PDF bytes were
+  fetched or cached in this follow-up.
+- Boundary: characterizes conference matrices from prescribed spectra of
+  principal submatrices whose orders are close to the ambient order.  It does
+  not reconstruct from the binary determinant-`(-3)` pattern on all
+  four-subsets.
 
 ## Search record
 
@@ -157,6 +164,30 @@ No exact two-graph predecessor was promoted.  The search did promote the
 hypomorphy-up-to-complementation lineage, the switching-deck conjecture, the
 coloring-from-homogeneous-sets branch, and principal-minor recovery as necessary
 related-work boundaries.
+
+This was a discovery screen, not an exhaustive database screen: the web search
+interface exposed no stable total result counts.  The screened fields were
+title, snippet, abstract, and accessible indexed theorem text.  The discriminator
+was: `recover the labelled two-graph from only the binary zero/four-versus-two
+type of every four-subset`.  Sources using all triangle signs, numerical
+principal minors, vertex-deleted decks, or full induced isomorphism types were
+classified as adjacent rather than pre-emptive.
+
+## Coverage gaps
+
+- **Google Scholar: NOT COVERED.**  Automated access was unavailable; the
+  manual queries below are supplied for the user-facing browser pass.
+- **DeepDyve: NOT COVERED.**  No authenticated interactive account was
+  available in the agent session; the manual queries below are supplied for
+  that pass.
+- **MathSciNet: NOT COVERED.**  Institutional authentication was unavailable.
+- **Subject-expert check: NOT COVERED.**  No expert response was solicited.
+- **zbMATH Open: NOT EXHAUSTIVELY COVERED.**  General web discovery exposed
+  indexed records, but no bounded MSC or author-result set was enumerated.
+
+These are access or coverage gaps and license no negative.  The negative in the
+verdict is limited to the explicitly recorded web discovery queries and the
+individually read sources above.
 
 ## External manual-search queries
 
