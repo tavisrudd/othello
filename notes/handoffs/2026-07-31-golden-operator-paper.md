@@ -478,9 +478,12 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C789 is in progress: freeze the repaired quantum-statistics paper as anonymous
-baseline A, build the referee-recommended hierarchy-first variant B, and run a
-blind cold-reader comparison before selecting either manuscript.
+C789 is complete.  A context-free reader selected the hierarchy-first variant
+B over baseline A, A-minus versus B-plus.  The selected twelve-page manuscript
+is `golden-quantum-statistics-observable-hierarchy-selected`; it retains the
+Golden/conference naming bridge and compact three-cut decoder, removes the
+anomaly branch from the main narrative, and passes the complete gate locally
+and from an auxiliary-free tagged extraction.
 
 C788 is queued as a pure-theory, AI-speed investigation of the general
 order-`2d` balanced-cut exchange spectrum.  Its first gate is an hours-scale
@@ -496,16 +499,12 @@ reference remain user-owned.
 
 ## Recommended order
 
-1. Complete C789's editorial A/B and preserve both anonymous inputs and the
-   reader's independent verdict before selecting a forward manuscript.
+1. Preserve `golden-quantum-statistics-observable-hierarchy-selected` as the
+   forward PRA manuscript; baseline A and tested B remain separately tagged.
 2. Run C788's fast structural/falsifier gate.  This is the only queued A-level
    upgrade and is pure theory; no laboratory or hardware-data route is active.
-3. Preserve `golden-quantum-statistics-editorial-referee-revised`.  The bounded
-   A-minus editorial route is to foreground the observable hierarchy and
-   balanced-spectrum theorem, move the anomaly corollary out of the body, and
-   compress the classical setup and full ledgers.  Do not apply that scope edit
-   without a user decision.  The user will post the accepted package, assign
-   live identifiers, and add the Clebsch forward reference.
+3. The user will post the accepted package, assign live identifiers, and add
+   the Clebsch forward reference.
 4. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
