@@ -1964,13 +1964,13 @@ hand-written.
 **Read the row count with three corrections, or it misdescribes the portfolio.**
 `beyond4_prs` and `beyond4_prs_submission` are one manuscript in two typesettings, not two results;
 `clebsch_hexagon_code` is the superseded integrated manuscript, preserved only as a fallback for
-material the rigidity paper, its companion, and the trade-rigidity paper now carry; and
-`golden_operator` is a source-lane draft feeding forward versions of the passages paper, not a
-numbered paper. So the rows describe **twelve live manuscripts**, of which eleven are papers. Two
-newer sources are not in the table at all — the q13 passant-code manuscript
-(`papers/q13-passant-code/passant_code_q13.tex`, the fourth numbered Clebsch paper) and the
-lane-local exchange-statistics companion
-(`papers/golden-quantum-statistics/golden_quantum_statistics.tex`). The statement and label columns need the same
+material the rigidity paper, its companion, and the trade-rigidity paper now carry; and two rows are
+not papers — `golden_operator` is a source-lane draft feeding forward versions of the passages
+paper, and `golden_quantum_statistics` is the lane-local exchange-statistics companion written as a
+design-limit and theory note. So the rows describe **fourteen live manuscripts**, of which twelve
+are papers or paper companions. The newest two rows are early builds and their statement counts say
+so: `passant_code_q13` is the fourth numbered Clebsch paper with its human proof landed but its
+manuscript still being written out, and `golden_quantum_statistics` is a short note. The statement and label columns need the same
 care: labels count anything labelled, and corollary-heavy papers inflate against theorem-heavy ones —
 the arcs manuscript alone carries 21 corollaries against 8 theorems, so its 77 labels are not 77
 independent results. Neither column measures depth, and none of them should be summed across rows.
@@ -1992,6 +1992,8 @@ independent results. Neither column measures depth, and none of them should be s
 | `dihedral_schreier_node_kayles` | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                                                       | `dihedral`       | 19    | 15  | 4   | 4    | 5   | 90     |
 | `equivariant_robust_completion` | Frobenius-equivariant pair extension and robust repair of eight-arcs                                                          | `paper-frob-eq`  | 14    | 4   | 2   | 3    | 7   | 33     |
 | `golden_operator`               | The golden conference operator and its shadow sisters                                                                         | `golden`         | —     | 7   | 1   | 3    | 2   | 14     |
+| `golden_quantum_statistics`     | Orientation and exchange statistics in a Golden six-mode transfer                                                             | `golden`         | 10    | 2   | 0   | 2    | 1   | 5      |
+| `passant_code_q13`              | A binary $[78,36,12]$ code from the passant lines of a conic over $\F_{13}$                                                   | `clebsch`        | 7     | 1   | 0   | 0    | 0   | 2      |
 <!-- trust-spine:end area=papers section=manuscripts -->
 
 | # | Paper                                                | Lead                                                            | State                                                |

@@ -192,3 +192,15 @@ id = "golden_operator"
 dir = "papers/golden-operator"
 main = "golden_operator.tex"
 lane = "golden"
+
+[[paper]]
+id = "golden_quantum_statistics"
+dir = "papers/golden-quantum-statistics"
+main = "golden_quantum_statistics.tex"
+lane = "golden"
+
+[[paper]]
+id = "passant_code_q13"
+dir = "papers/q13-passant-code"
+main = "passant_code_q13.tex"
+lane = "clebsch"
