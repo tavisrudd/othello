@@ -2123,8 +2123,17 @@
       "last": 787,
       "purpose": "explicit stability threshold via higher moments, and party-count-independent intertwiner stability",
       "sequence": 236
+    },
+    {
+      "count": 1,
+      "first": 788,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 788,
+      "purpose": "derive the general order-2d balanced-cut exchange-spectrum theorem and classify cut-independence, with a fast stop if dimension six is isolated",
+      "sequence": 237
     }
   ],
-  "next_id": 788,
+  "next_id": 789,
   "schema": "codex-task-id-allocations-v1"
 }
