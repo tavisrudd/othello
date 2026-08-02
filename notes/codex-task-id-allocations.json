@@ -2384,8 +2384,17 @@
       "last": 826,
       "purpose": "plan queue and implement integrated theorem-first Golden exchange-landscape paper",
       "sequence": 265
+    },
+    {
+      "count": 1,
+      "first": 827,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 827,
+      "purpose": "post-integration Milnor-Serre exposition and copy-edit pass",
+      "sequence": 266
     }
   ],
-  "next_id": 827,
+  "next_id": 828,
   "schema": "codex-task-id-allocations-v1"
 }
