@@ -478,6 +478,10 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C789 is in progress: freeze the repaired quantum-statistics paper as anonymous
+baseline A, build the referee-recommended hierarchy-first variant B, and run a
+blind cold-reader comparison before selecting either manuscript.
+
 C788 is queued as a pure-theory, AI-speed investigation of the general
 order-`2d` balanced-cut exchange spectrum.  Its first gate is an hours-scale
 symbolic/exact falsifier; proceed to a full theorem only if the dependence on
@@ -492,15 +496,17 @@ reference remain user-owned.
 
 ## Recommended order
 
-1. Run C788's fast structural/falsifier gate.  This is the only queued A-level
+1. Complete C789's editorial A/B and preserve both anonymous inputs and the
+   reader's independent verdict before selecting a forward manuscript.
+2. Run C788's fast structural/falsifier gate.  This is the only queued A-level
    upgrade and is pure theory; no laboratory or hardware-data route is active.
-2. Preserve `golden-quantum-statistics-editorial-referee-revised`.  The bounded
+3. Preserve `golden-quantum-statistics-editorial-referee-revised`.  The bounded
    A-minus editorial route is to foreground the observable hierarchy and
    balanced-spectrum theorem, move the anomaly corollary out of the body, and
    compress the classical setup and full ledgers.  Do not apply that scope edit
    without a user decision.  The user will post the accepted package, assign
    live identifiers, and add the Clebsch forward reference.
-3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+4. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths
