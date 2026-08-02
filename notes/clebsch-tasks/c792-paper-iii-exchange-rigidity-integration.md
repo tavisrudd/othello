@@ -5,7 +5,7 @@
 **Status:** complete; the repaired B-plus manuscript, reconciled formal pins,
 guarded aggregate and axiom audits, warning-free clean-overlay release, final
 rendered artifact, independent post-repair acceptance, and standalone
-synchronization are closed through `d2feb23` in the standalone repository
+synchronization are closed through `fb7bef8` in the standalone repository
 
 ## Objective
 

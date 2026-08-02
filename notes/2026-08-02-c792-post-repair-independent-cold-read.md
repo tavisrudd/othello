@@ -39,3 +39,24 @@ scores, or the standalone repository.
 
 The final PDF is the artifact committed in the monorepo and synchronized to
 the standalone `clebsch-passages` repository.
+
+## Abstract and diagram follow-up
+
+The strengthened abstract and two TikZ exposition figures received separate
+adversarial and PDF-only reviews.  The first diagram exposes the finite Stein
+normalization and marked bridge datum as independent inputs to the relative
+sign comparison.  The second separates four normalized formulas for the same
+cubic from their Segre, Igusa, and Clebsch consequences; plain connectors mean
+equality and arrows mean subsequent construction.
+
+The mathematical red team returned **PASS, 99/100**, with no blocker.  The
+context-free PDF reader returned **Strong pass, 93/100**, scoring the two
+figures 96 and 95 and recommending that both remain.  Its sole optional
+abstract trim was applied by replacing the compressed higher-design sentence
+with the direct order-at-least-ten reconstruction statement.
+
+The final 26-page artifact is
+`/home/tavis/.cache/c792-review/paper-iii-abstract-diagrams-final.pdf`, SHA-256
+`ca250c07c189b5613741156562b807c068ff0177ead4aba30bb598dace38154b`.
+It passes the warning-free clean-overlay release gate and is synchronized to
+standalone commit `fb7bef8`.
