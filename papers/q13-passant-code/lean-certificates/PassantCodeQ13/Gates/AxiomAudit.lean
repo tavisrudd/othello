@@ -26,8 +26,10 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.MinimumWords.orbitDihedralC_certificate
 #print axioms PassantCodeQ13.MinimumWords.dihedral_orbits_pairwise_disjoint
 #print axioms PassantCodeQ13.MinimumWords.minimumSupportCodes_length
+#print axioms PassantCodeQ13.MinimumWords.fixedPoint_weightTwelve_exhaustion
 #print axioms PassantCodeQ13.MinimumWords.pair_concurrence_recovers_passant_join
 #print axioms PassantCodeQ13.MinimumWords.geometric_rows_have_zero_triple_signatures
 #print axioms PassantCodeQ13.Gates.Main.weightTenCertificate
 #print axioms PassantCodeQ13.Gates.Main.arbitraryWeightTenProfileTransport
 #print axioms PassantCodeQ13.Gates.Main.minimumOrbitCertificate
+#print axioms PassantCodeQ13.Gates.Main.fixedPointWeightTwelveExhaustion

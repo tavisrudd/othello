@@ -1,6 +1,7 @@
 import RelativeConicArcs.Gates.PassantCodeQ13
 import PassantCodeQ13.WeightTen.Aggregate
 import PassantCodeQ13.MinimumWords.Reconstruction
+import PassantCodeQ13.MinimumWords.Exhaustion
 import PassantCodeQ13.SemanticTransports
 import PassantCodeQ13.AssociationAlgebra
 
@@ -12,9 +13,11 @@ arbitrary-word reduction to the two passant-pencil profiles, the fixed-base synd
 four 91-element projective orbits, span rank 36 for each orbit, pair-concurrence recovery of passant
 joins, and the zero-triple signatures of all 78 geometric passant rows.
 
-The gate does not claim the full minimum-distance or reconstruction theorem.  Its scope excludes
-exhaustive equality of the four orbits with the complete weight-twelve layer, uniqueness of the
-recovered row family, and the projective anchor theorem for all coordinate automorphisms.
+The gate does not claim the full minimum-distance or reconstruction theorem.  Its fixed-point
+weight-twelve terminal exhausts the four parity profiles and identifies their 56 solutions with
+the four orbit slices; transport from the fixed point uses the symmetric-square projective action.
+The remaining scope exclusions are uniqueness of the recovered row family and the projective
+anchor theorem for all coordinate automorphisms.
 -/
 
 namespace PassantCodeQ13.Gates.Main
@@ -64,5 +67,12 @@ theorem minimumOrbitCertificate :
       binaryRank (supportOrbit representativeDihedralC) = 36 := by
   exact ⟨minimumSupportCodes_length, orbitS4_rank, orbitDihedralA_certificate.2.2,
     orbitDihedralB_certificate.2.2, orbitDihedralC_certificate.2.2⟩
+
+/-- At the normalized fixed point, the four exhaustive weight-twelve pencil profiles give exactly
+the four disjoint 14-support orbit slices. -/
+theorem fixedPointWeightTwelveExhaustion :
+    fixedPointWeightTwelveSolutions.toFinset = fixedPointOrbitSlices.toFinset ∧
+      fixedPointWeightTwelveSolutions.length = 56 :=
+  ⟨fixedPoint_weightTwelve_exhaustion.1, fixedPoint_weightTwelve_exhaustion.2.1⟩
 
 end PassantCodeQ13.Gates.Main

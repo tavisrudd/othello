@@ -8,8 +8,10 @@ paper-owned Lean certificate gate green.  The rank evaluator now transports to
 semantic incidence-map rank 42 and code dimension 36, and the normalized
 weight-eight word now transports through pencil saturation and tangent holonomy
 to the concrete cyclic graph.  Every arbitrary weight-ten word now transports
-to the two exact pencil profiles.  Four exact semantic transports and the
-remaining release/publication work remain.
+to the two exact pencil profiles.  The fixed-point weight-twelve leaf now
+exhausts the four pencil-profile domains and identifies their 56 solutions
+with the four disjoint 14-support orbit slices.  Three exact semantic
+transports and the remaining release/publication work remain.
 
 ## Goal
 

@@ -17,7 +17,9 @@ migration from Paper I, including source commit, paths, byte counts, hashes,
 commands, and replay relationships. The paper-owned Lean package under
 `lean-certificates/`, together with the shared semantic library, checks the q=13 coordinate
 semantics, transports the normalized weight-eight reduction to the cyclic tangent graph, checks
-both weight-ten syndrome profiles, and checks four displayed minimum-word orbits.
+both weight-ten syndrome profiles, and checks four displayed minimum-word orbits.  Its fixed-point
+weight-twelve leaf exhausts the four pencil-profile domains and identifies their 56 solutions with
+the four disjoint 14-support orbit slices.
 Its formal scope is strictly smaller than the complete release theorem.
 The normalized weight-eight terminal is
 `RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport`.
@@ -74,15 +76,18 @@ PassantCodeQ13/WeightTen/CycleProfile/Residue0.lean ... Residue6.lean
 PassantCodeQ13/WeightTen/Aggregate.lean
 PassantCodeQ13/MinimumWords/OrbitS4.lean
 PassantCodeQ13/MinimumWords/OrbitDihedral.lean
+PassantCodeQ13/MinimumWords/Exhaustion.lean
 PassantCodeQ13/MinimumWords/Reconstruction.lean
 PassantCodeQ13/Gates/Main.lean
 PassantCodeQ13/Gates/AxiomAudit.lean
 ```
 
 The public aggregate transports its exact 42-column elimination certificate to semantic rank and
-code dimension, and transports every supported point of every weight-ten word to one of the two
-exhaustive pencil profiles. It does not establish minimum-layer exhaustion, uniqueness of the
-recovered rows, or the automorphism anchor. Its axiom report comes
+code dimension, transports every supported point of every weight-ten word to one of the two
+exhaustive pencil profiles, and checks the fixed-point weight-twelve exhaustion against the four
+projective orbit slices.  The passage from the fixed point to the global 364-support layer remains
+the human projective-transitivity and double-count argument.  The aggregate does not establish
+uniqueness of the recovered rows or the automorphism anchor. Its axiom report comes
 from the pinned toolchain's actual `#print axioms` output. Task identifiers,
 manuscript section numbers, private reports, and workflow status language are
 forbidden from module names, declaration names, comments, and generated

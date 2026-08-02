@@ -18,8 +18,8 @@
     {
       "id": "minimum-layer",
       "statement": "There are 364 minimum words in four PGL(2,13)-orbits of size 91.",
-      "current_modes": ["paper-owned fixed-base profile exhaustion", "Lean execution of four disjoint projective kernel orbits of size 91", "Lean rank-36 check for each orbit", "transitive double count"],
-      "lean_boundary": "the four computed orbits are not yet proved to exhaust every weight-twelve codeword"
+      "current_modes": ["paper-owned fixed-base profile exhaustion", "Lean native exhaustion of the four fixed-point pencil-profile domains", "Lean identification of their 56 solutions with four disjoint 14-support orbit slices", "Lean execution of four projective kernel orbits of size 91", "Lean rank-36 check for each orbit", "human projective-transitivity and double-count transport"],
+      "lean_boundary": "the fixed-point exhaustion is closed by PassantCodeQ13.Gates.Main.fixedPointWeightTwelveExhaustion; transport to all 364 supports uses the human projective-transitivity and double-count argument"
     },
     {
       "id": "orbit-spanning",

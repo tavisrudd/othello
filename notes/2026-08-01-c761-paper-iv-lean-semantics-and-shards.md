@@ -153,6 +153,10 @@ them as completed semantic transports.
 
 ## Validation
 
+- Fixed-point weight-twelve leaf:
+  `/home/tavis/.cache/othello-lean-build/run-20260802-035638-07abc617`;
+  aggregate gate, exact-target confirmation, and axiom audit:
+  `/home/tavis/.cache/othello-lean-build/run-20260802-035750-925b8874`.
 - Normalized weight-eight semantic transport, shared aggregate gate, and axiom audit:
   `/home/tavis/.cache/othello-lean-build/run-20260802-024309-4d173679`.
 - Standalone aggregate and axiom audit against the updated shared semantic dependency:
@@ -197,15 +201,17 @@ holonomy one, and unique extension forces clique size at most five.  The formal 
 classical arc/tangent lemma's pairwise-passant and holonomy-one conclusion as its named geometric
 input.  The third transport is now closed: for an arbitrary weight-ten codeword and any supported
 point, the seven semantic passant fibres are odd, their complement is exactly the secant-neighbor
-set, and the support partition forces either `(3,1^6;0)` or `(1^7;2)`.  The following four items
-remain inside C761 rather than becoming successor mysteries:
+set, and the support partition forces either `(3,1^6;0)` or `(1^7;2)`.  The fourth transport is
+now closed at its exact finite boundary: a syndrome-indexed meet in the middle exhausts the four
+fixed-point weight-twelve pencil domains and identifies their 56 solutions with four disjoint
+14-support projective-orbit slices.  Projective transitivity and
+`56*78/12=364` remain the human transport from that normalized slice to the global layer.  The
+following three items remain inside C761 rather than becoming successor mysteries:
 
-1. prove that the four fixed-point orbits exhaust the entire weight-twelve
-   layer;
-2. connect the concrete relation matrices and orbit Gram identities to the
+1. connect the concrete relation matrices and orbit Gram identities to the
    proved abstract association-kernel spine;
-3. prove uniqueness of the reconstructed 78-row family;
-4. connect the regular triple orbit, forced fourth anchor, and separating
+2. prove uniqueness of the reconstructed 78-row family;
+3. connect the regular triple orbit, forced fourth anchor, and separating
    signatures to the proved abstract four-anchor closure.
 
 ## Extra-juice closeout and mystery ledger
@@ -237,9 +243,16 @@ trust statement, the abstract `im B=ker A` and orbit-factorization spanning
 chain, and an axiom-audited aggregate gate.  Fourteen execution shards are not
 fourteen mathematical cases, and full enumerations are now explicitly
 corroboration wherever symmetry transport can reduce them.  No new
-mathematical mystery appeared.  The remaining work is exactly the four
+mathematical mystery appeared.  The remaining work is exactly the three
 semantic transports above plus the ordinary release audit and publication
 steps.
+
+The fixed-point EJ+TT pass kept the finite domain at its natural quotient.  It evaluates the 78
+incidence columns once, performs four syndrome-indexed meets in the middle, and compares only the
+56 normalized solutions with the four 14-support orbit slices.  The equality of the four slice
+sizes is forced by orbit incidence, `91*12/78=14`, so it is not a new unexplained regularity.
+No second 364-support enumeration is load-bearing, and no genuine new mystery remains in this
+transport.
 
 **EJ+TT closeout.**  The cheap strengthening was to derive the clique bound logically from the
 70-member unique-extension certificate instead of adding a second six-clique enumeration.  The
@@ -268,8 +281,9 @@ formal aggregate still does not claim the complete minimum-distance theorem.
 | first 42 incidence columns form the chosen basis | settled as an ordering-dependent certificate fact | no geometric invariance claim |
 | normalized weight-eight semantic transport | settled | `RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport`; Segre's lemma and projective normalization remain explicit classical inputs |
 | arbitrary weight-ten profile transport | settled | `RelativeConicArcs.Gates.PassantCodeQ13.arbitrary_weightTen_profile_transport`; the two paper-owned disjointness aggregates remain the finite terminal leaves |
+| fixed-point weight-twelve exhaustion | settled at the finite normalized slice | `PassantCodeQ13.Gates.Main.fixedPointWeightTwelveExhaustion`; global transport remains the human projective-transitivity and double-count argument |
 | unique closure of the q13 tangent graph | settled exactly | finite q13 native terminals; no second clique enumeration |
 | uniform source of the six cyclic difference sets | outside C761 | C756 owns any all-field torus explanation |
-| remaining Paper-IV formal seams | open and fully enumerated | the four transports in the preceding section |
+| remaining Paper-IV formal seams | open and fully enumerated | the three transports in the preceding section |
 
 No further C761-owned mathematical mystery arose in the weight-eight or weight-ten profile passes.
