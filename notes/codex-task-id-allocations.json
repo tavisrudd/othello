@@ -2330,8 +2330,17 @@
       "last": 817,
       "purpose": "Paper IV structural mathematics upgrade diagnostics and proofs; manuscript integration requires later discussion",
       "sequence": 259
+    },
+    {
+      "count": 1,
+      "first": 818,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 818,
+      "purpose": "audit and promote the C814 mixed-plane theorem package, beginning with an exact holonomy-defect stability probe and gating manuscript A/B on novelty clearance",
+      "sequence": 260
     }
   ],
-  "next_id": 818,
+  "next_id": 819,
   "schema": "codex-task-id-allocations-v1"
 }
