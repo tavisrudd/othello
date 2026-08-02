@@ -313,7 +313,10 @@ portfolio.  In particular:
   thresholds.  A publication-size color-independent figure separates
   coherent inference, bosonic controls, and source-dependent direct
   three-fermion emulation.  The C768-qualified absence wording is preserved,
-  and the warning-free ten-page paper gate plus visual check pass.  Report:
+  and a post-closeout clarification distinguishes the filtered sandwich from
+  the direct balanced mesh, algebraic residual scores from statistical tests,
+  and conditional fermionic budgets from precursor data.  The warning-free
+  ten-page paper gate plus visual check pass.  Report:
   `notes/2026-08-01-c769-golden-photonic-design-limit.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under

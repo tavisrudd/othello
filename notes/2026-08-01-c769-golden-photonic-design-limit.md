@@ -122,6 +122,14 @@ is the linear residual.  The revised hierarchy therefore puts \(r_1\) first,
 \(r_3\) second, calibrated probabilities after both, and the direct
 many-fermion interpretation behind the antisymmetric-source gate.
 
+The post-closeout extra-juice pass removed three remaining routes to
+overinterpretation.  The figure caption now identifies its 30-cell sandwich
+as the filtered realization and distinguishes the direct 15-cell balanced
+compilation.  The normalized residuals are explicitly descriptive algebraic
+scores rather than goodness-of-fit statistics.  The shot table now says
+directly that its fermionic rows are conditional budgets unavailable to the
+precursor without the antisymmetric source.
+
 ## Mystery ledger
 
 | Feature | Status | Evidence gap, gate, or owner |
@@ -129,6 +137,7 @@ many-fermion interpretation behind the antisymmetric-source gate.
 | Raw linear and cubic residuals scale differently under uniform loss | **Settled** | The scale-free scores \(\rho_1,\rho_3\) are now defined in the paper. |
 | Two preparation proposals exist, but no characterized three-photon qutrit singlet experiment was located | **Open external dependency** | C770 must rerun C768's pinned graphs at submission; Google Scholar, MathSciNet, and a subject-expert check remain uncovered. |
 | Worst-case weakest-chiral fidelity is far more severe than its shot count | **Settled as a model boundary** | The paper labels the arbitrary-mixture and trace-distance gates as adversarial; a future source prototype with a characterized noise model would own any relaxation. |
+| The filter sandwich, normalized residuals, and fermionic shot rows could be read as one demonstrated protocol | **Settled** | The caption distinguishes the 30-cell filter from the direct balanced compilation, the scores from statistical tests, and the fermionic budgets from feasible precursor data. |
 
 No other genuine mystery remains within C769's circuit, readout, robustness,
 budget, and presentation scope.  Review against the discovery-track

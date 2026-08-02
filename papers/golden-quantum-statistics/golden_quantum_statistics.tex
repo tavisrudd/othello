@@ -457,7 +457,9 @@ bounded precursor; the third is conditional on the additional source.
 \node[below=1mm of pf,align=center] {source-dependent};
 \end{tikzpicture}
 \caption{Circuit and readout boundary.  The upper line implements
-\(U_T(x)=O_T^{\mathsf T}D_xO_T\); its indicated subblock maps input ports
+\(U_T(x)=O_T^{\mathsf T}D_xO_T\) in the filtered realization; a balanced
+mask may instead use the direct fifteen-cell compilation.  The indicated
+subblock maps input ports
 \(0,1,2\) to output ports \(3,4,5\).  Solid arrows are demonstrated
 measurement primitives.  The dashed box and arrow mark the additional
 resource needed for direct three-fermion emulation.  The structural nulls are
@@ -535,6 +537,9 @@ For reporting across transmission levels, use the dimensionless scores
  \rho_3=\frac{|r_3|}{\sum_T|\widehat Z_T|^3},
 \]
 whenever the respective denominator is nonzero.
+These are descriptive algebraic residuals, not goodness-of-fit statistics;
+experimental uncertainties must be propagated from the transfer
+reconstruction.
 Diagonal real loss changes \(x\) but leaves both nulls exact.  Coherent
 diagonal phase error also leaves them exact over \(\mathbb C\), although a
 literal real sign then needs the phase reference.  Mesh error or mismatch
@@ -572,6 +577,8 @@ smallest chiral branch & \(5184/25878125\) & 3,473,883 & 579 min\\
 \bottomrule
 \end{tabular}
 \end{center}
+The fermionic rows are conditional design budgets; the feasible precursor
+cannot collect them without the antisymmetric source.
 At one accepted trial per second the corresponding times are \(1.32\),
 \(37.6\), \(31.7\), and \(965\) hours.  The weakest chiral branch, rather than
 the balanced benchmark, fixes the design limit.
