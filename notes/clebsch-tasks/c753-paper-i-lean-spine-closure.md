@@ -27,6 +27,17 @@ peak, built `Q11A5PointOrbits.lean` in 19 minutes 39 seconds at a measured
 5,675,148 KiB peak, and passed the trace-only aggregate gate.  The reviewed q11
 prose bundle was committed at `12031d32`.  R2 is the next formal packet.
 
+R2's incidence consequence is committed at `17d24b61` in
+`SixArcDegenerateConicExclusion.lean`.  The module freezes the permitted exact
+conic-type interface and proves, from R1 rather than a coordinate census, that
+containment in either a nonsingular conic or at most two projective lines gives
+at most twelve uncovered points.  Its direct guarded elaboration is green and
+its three printed terminals introduce no axiom.  The causal R3 source is staged
+at `RelativeConicArcs/Q11RigiditySpine.lean`; it derives Dye equality only after
+that upper bound.  It remains untracked until the serialized two-module build
+at `~/.cache/othello-lean-build/run-20260802-040636-81ccef51`, currently queued
+behind a foreign Lean owner, supplies its first dependency-ordered validation.
+
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
 from a two-line rational cover and R1.  Dye's lower bound then forces equality
