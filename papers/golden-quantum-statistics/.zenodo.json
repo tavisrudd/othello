@@ -1,0 +1,25 @@
+{
+  "title": "Orientation, exchange statistics, and rigidity in the Golden six-mode conference interferometer",
+  "description": "This preprint identifies what a one-particle transfer retains under unframed, oriented, and phase-calibrated port descriptions. It proves that balanced exchange spectra of symmetric conference matrices are normalized cross-Gram spectra and are cut-independent only through half-size three, making the Golden six-mode case the unique nontrivial realized uniform example. Exact bosonic and fermionic benchmarks, calibrated Joubert sign coding, and a quantitative photonic design boundary accompany the theorem.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "conference matrices",
+    "exchange statistics",
+    "linear optics",
+    "fermionic determinants",
+    "bosonic permanents",
+    "equiangular tight frames",
+    "Clebsch cubic surface"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com"
+}
