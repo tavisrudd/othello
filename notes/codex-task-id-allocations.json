@@ -2168,8 +2168,17 @@
       "last": 793,
       "purpose": "Golden quantum-statistics balanced-rigidity A/B integration",
       "sequence": 241
+    },
+    {
+      "count": 1,
+      "first": 794,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 794,
+      "purpose": "conference determinant-design reconstruction and higher balanced-cut moments",
+      "sequence": 242
     }
   ],
-  "next_id": 794,
+  "next_id": 795,
   "schema": "codex-task-id-allocations-v1"
 }
