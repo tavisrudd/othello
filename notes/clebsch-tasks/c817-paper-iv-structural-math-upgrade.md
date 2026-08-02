@@ -1,7 +1,7 @@
 # C817 — Paper IV structural mathematics upgrade
 
 **Lane:** `clebsch`  
-**Status:** active; subitems 1--3 positive and frozen; mathematics research only;
+**Status:** active; subitems 1--4 positive and frozen; mathematics research only;
 manuscript integration requires later user discussion
 
 ## Current state
@@ -42,8 +42,20 @@ representation, and the three toric levels carry the three exact Frobenius
 Gram scalars.  Report and exact evidence bundle:
 `notes/2026-08-02-c817-toric-octahedral-geometry.md`.
 
-The next gate is subitem 4, intrinsic recovery of the conic action from the
-fourteen Sylow-\(13\) subgroups of the reconstructed group.
+Subitem 4 is complete.  The fourteen Sylow-\(13\) subgroups of the
+reconstructed group form the canonical sharply three-transitive conic-point
+set.  More strongly, adjoining the \(169\) involutions and defining incidence
+by normalization and involution products reconstructs the full
+\(\operatorname{PG}(2,13)\) with its conic polarity.  The \(78\) hypergraph
+vertices are the nonsplit involution class; their central involutions recover
+all internal-point/secant matchings, and the old matrix \(M\) is exactly the
+internal--internal polarity block.  Only a preferred projective frame,
+coordinate labeling, and displayed equation remain absent.  Report and exact
+evidence bundle:
+`notes/2026-08-02-c817-intrinsic-conic-action.md`.
+
+The next gate is subitem 5, a compact exact spectral obstruction for weight
+eight.
 
 ## Objective
 
