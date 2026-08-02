@@ -96,22 +96,16 @@ Reproduction:
 
 The script has 9,968 bytes and the canonical JSON has 10,147 bytes.
 
-## Bounded novelty check
+## Literature disposition
 
-On 2026-08-02, four exact/near-exact searches combined the distinctive
-terms PGL(2,q), conic matching products, \(S_4/A_5\), fixed affine line,
-quadratic trade, and Chow locus. They found neighboring work on general
-Chow and secant varieties and on the association schemes of
-\(\operatorname{PGL}_2(q)\) acting on conic secants, but no source stating
-this exceptional fixed-line ambiguity, the unique matching-Chow
-intersection, or the \(q-2\) carrier-free exact-trade family. This is a
-bounded negative, not a universal priority guarantee.
-
-Relevant neighbors:
-
-- https://arxiv.org/abs/1602.04275
-- https://arxiv.org/abs/2005.12436
-- https://arxiv.org/abs/math/0503573
+The preliminary bounded check has been superseded by the convention-complete
+C803 audit in
+`notes/2026-08-02-c803-paper-ii-fixed-line-literature-audit.md`.
+Cameron--Korchm\'aros (1993) and Han (2025) establish that the exceptional
+one-factorizations are classical.  No screened source states the affine
+fixed-line ambiguity, its unique matching-Chow intersection, or the
+\(q-2\) carrier-free exact-trade family.  That negative remains bounded by
+the coverage gaps recorded in C803.
 
 ## Manuscript disposition
 
