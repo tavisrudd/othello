@@ -18,7 +18,9 @@ independent `notes/2026-08-02-c814-complex-conference-rigidity-replay.py`.
 **Post-closeout strengthening:** a user-requested `tt`+`ej` theorem pass and
 `aa` mixed-plane pass are recorded in Sections 6--7 of the result.  They settle
 the scalar Hermitian-conference/real-control Pareto edge while leaving the full
-interior image and promotion audit open.
+interior image and promotion audit open.  Theorem C's later structural
+compression replaces its finite rigidity census by a pentagon
+anticommutation-parity proof and a Pfaffian-square endpoint obstruction.
 
 ## Objective
 

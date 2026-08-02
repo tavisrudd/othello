@@ -276,11 +276,40 @@ For \(0<\rho<1\), put \(t=\rho^2\) and write
 \]
 
 The row sums force \(a\) to be a symmetric sign graph with two plus and two
-minus neighbors at every vertex, and \(b\) to be a regular tournament.  There
-are exactly 12 and 24 labeled patterns.  Substitution in \(S^2=5I-J\), followed
-by the remaining triangle equations, rejects all \(12\cdot24=288\) pairs.
-At \(t=0\), direct substitution rejects all 24 regular tournaments.  Hence
-only \(t=1\) remains, which is the real conference endpoint.  The converse is
+minus neighbors at every vertex, and \(b\) to be a regular tournament.  The
+positive edges of \(a\) therefore form a pentagon.  Relabel its vertices so
+that those edges are
+\(01,12,23,34,40\), and write \(A=(a_{ij})\), \(B=(b_{ij})\), with \(B\)
+skew-symmetric.  The imaginary part of \(S^2=5I-J\) is
+
+\[
+ \sqrt{t(1-t)}(AB+BA)=0.
+\]
+
+But direct expansion of only three entries gives
+
+\[
+ (AB+BA)_{02}+(AB+BA)_{03}-(AB+BA)_{23}
+   =2(b_{03}-b_{24}-b_{34}).
+\]
+
+Anticommutation would force \(b_{03}=b_{24}+b_{34}\), impossible because
+the left side is odd and the right side is even.  This rules out every
+\(0<t<1\) without classifying tournaments or checking triangle equations.
+
+At \(t=0\), \(S=iB\) would give \(B\mathbf1=0\) and
+\(B^2=J-5I\).  Border it by
+
+\[
+ \widetilde B=\begin{pmatrix}0&\mathbf1^{\mathsf T}\\
+ -\mathbf1&B\end{pmatrix}.
+\]
+
+Then \(\widetilde B\) is an integral skew-symmetric sign matrix and
+\(\widetilde B^2=-5I_6\), so \(\det\widetilde B=5^3=125\).  The determinant
+of an even integral skew-symmetric matrix is the square of its integral
+Pfaffian, whereas 125 is not a square.  Thus \(t=0\) is impossible as well.
+Only \(t=1\) remains, which is the real conference endpoint.  The converse is
 the real order-six cut rigidity already established in the Golden analysis.
 
 Et-Taoui's exact \(C_6(i)\) supplies the sharp falsifier to any broader
@@ -290,10 +319,11 @@ complex-rigidity claim: cuts \(012\) and \(013\) have respectively
 
 ### Exact evidence
 
-The deterministic certificate enumerates the 12 row-balanced real sign
-patterns and 24 regular tournaments using exact integer/rational arithmetic,
-checks all 288 interior combinations, checks the purely imaginary endpoint,
-and records the holonomy formulas.  An independent replay fixes one canonical
+The human parity/Pfaffian proof above is now load-bearing.  The deterministic
+certificate is retained as a non-load-bearing exhaustive cross-check: it
+enumerates the 12 row-balanced real sign patterns and 24 regular tournaments,
+checks all 288 interior combinations and the purely imaginary endpoint, and
+records the holonomy formulas.  An independent replay fixes one canonical
 five-cycle, checks all 24 relative tournaments, and independently verifies the
 Gaussian-integer \(C_6(i)\) example and its two cuts.
 
@@ -311,8 +341,9 @@ Files:
 - `notes/2026-08-02-c814-complex-conference-rigidity.json`;
 - `notes/2026-08-02-c814-complex-conference-rigidity.sha256`.
 
-The finite exhaustion is only the exact reduced order-six classification; it
-does not assert a corresponding theorem at larger orders or for nonconference
+The finite exhaustion is redundant for Theorem C and only cross-checks its
+exact reduced order-six setup; neither the structural proof nor the certificate
+asserts a corresponding theorem at larger orders or for nonconference
 two-eigenvalue frames.
 
 ## 4. Generalized branch pivot record
@@ -325,9 +356,10 @@ two-eigenvalue frames.
   than only Et-Taoui's displayed family.
 - **`aa`:** three attacks were separated: an explicit-family falsifier, a full
   dephased sign/tournament classification, and an appeal to general uniform-
-  subframe or spectral-monomorphy machinery.  The finite dephased reduction
-  gives the sharp order-six theorem; the external frameworks are used only for
-  positioning.
+  subframe or spectral-monomorphy machinery.  A post-closeout compression
+  reduces the finite classification to one pentagon anticommutation parity and
+  one Pfaffian-square obstruction; the enumeration is now only a cross-check.
+  The external frameworks are used only for positioning.
 - **Decision:** stop the generalized branch at the exact obstruction and
   rigidity classification.  A broader two-eigenvalue/ETF claim would be a new
   task and is not supported by this order-six certificate.

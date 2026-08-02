@@ -495,7 +495,12 @@ holonomy formulas extend to every three-subset of every Hermitian conference
 matrix, the order-six real-control bounds are phase-uniform, and the complete
 componentwise-maximal mixed-plane frontier is the balanced-Boolean segment
 `(317-4t,196+4t,20-4t)/125`, `0 <= t <= 1`.  This strengthening is likewise
-research-only and has not passed a fresh paper-promotion novelty audit.
+research-only and has not passed a fresh paper-promotion novelty audit.  A
+later structural compression removes the 288-case rigidity census from the
+trust boundary: the interior phase range dies by a three-entry pentagon
+anticommutation parity, and the purely imaginary endpoint dies because an
+integral skew determinant would have to equal the nonsquare 125 despite being
+a Pfaffian square.  The enumeration remains only an independent cross-check.
 
 C808 is complete.  A full Milnor--Serre exposition audit aligned the abstract,
 introduction, figure, and discussion with the correct unframed
