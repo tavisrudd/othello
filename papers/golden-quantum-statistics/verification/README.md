@@ -1,9 +1,11 @@
 # Evidence supplement
 
 This directory is the paper-local reproducibility package for the finite and
-symbolic claims used by the manuscript. The human orbit, rank, and
-determinant-line proofs remain primary. The supplement checks the balanced
-census, exchange-sector values, decoder, and optical compilation.  It also
+symbolic claims used by the manuscript. The human orbit, continuous-control,
+Hermitian rigidity/stability, rank, and determinant-line proofs remain
+primary. The supplement checks the continuous Boolean endpoint profiles,
+Hermitian exchange formulas and stability constants, balanced census,
+exchange-sector values, decoder, and optical compilation.  It also
 retains a separate exact arithmetic specialization that is not part of the
 main manuscript.
 

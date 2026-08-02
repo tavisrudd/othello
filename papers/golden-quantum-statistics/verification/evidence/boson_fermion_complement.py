@@ -279,6 +279,36 @@ def generate() -> dict:
         )
     assert sorted(collision_free_patterns.values()) == [8, 12]
 
+    boolean_profiles: dict[int, dict[str, str]] = {}
+    for support_size in range(4):
+        for support in itertools.combinations(range(6), support_size):
+            complement = tuple(i for i in range(6) if i not in support)
+            cross = BASE_C.extract(support, complement)
+            h = cross * cross.T / 5
+            p1 = sp.trace(h)
+            p2 = sp.trace(h**2)
+            p3 = sp.trace(h**3)
+            e2 = sp.simplify((p1**2 - p2) / 2)
+            e3 = h.det() if support_size == 3 else sp.Integer(0)
+            profile = {
+                "p1": expr_string(p1),
+                "p2": expr_string(p2),
+                "exterior2": expr_string(e2),
+                "exterior3": expr_string(e3),
+                "symmetric3": expr_string(e3 + p1 * p2),
+                "mixed21": expr_string((p1**3 - p3) / 3),
+            }
+            if support_size in boolean_profiles:
+                assert boolean_profiles[support_size] == profile
+            else:
+                boolean_profiles[support_size] = profile
+    assert set(boolean_profiles) == {0, 1, 2, 3}
+
+    delta_threshold = (sp.Integer(6) - sp.sqrt(35)) / 20
+    rounding_radius = sp.sqrt(7) - sp.sqrt(5)
+    assert sp.simplify(rounding_radius**2 - 40 * delta_threshold) == 0
+    assert sp.simplify(rounding_radius * (2 * sp.sqrt(5) + rounding_radius) - 2) == 0
+
     return {
         "schema": "golden-boson-fermion-complement-v1",
         "sympy_version": sp.__version__,
@@ -314,6 +344,40 @@ def generate() -> dict:
             "trace_level_muir_identity": "h3-e1 h2+e2 h1-e3=0 with layers (313,513,216,16)/125",
             "schur_weyl_identity": "h3+2 s21+e3=tr(H)^3=729/125",
         },
+        "continuous_control": {
+            "boolean_profiles_up_to_complement": [
+                {"negative_support_size": size, **boolean_profiles[size]}
+                for size in range(4)
+            ],
+            "bounds": {
+                "p1": "9/5",
+                "p2": "33/25",
+                "exterior2": "24/25",
+                "exterior3_real": "16/125",
+                "symmetric3_real": "313/125",
+                "mixed21": "8/5",
+            },
+            "proof_boundary": "human convexity, separate convexity of rank-one minors, and the three-variable spectral lemma reduce the continuous cube to these exact endpoint data",
+        },
+        "hermitian_exchange_landscape": {
+            "balanced_formulas": {
+                "exterior3": "4*(5-r^2)/125",
+                "symmetric3": "(317-4*r^2)/125",
+                "mixed21": "(196+4*r^2)/125",
+            },
+            "pareto_parameterization_h3_s21_e3": [
+                "(317-4*t)/125",
+                "(196+4*t)/125",
+                "(20-4*t)/125",
+            ],
+            "stability": {
+                "global_lower_squared_distance_factor": "10/3",
+                "local_upper_squared_distance_factor": "40",
+                "delta_threshold": expr_string(delta_threshold),
+                "rounding_radius": expr_string(rounding_radius),
+            },
+            "proof_boundary": "human triangle-holonomy calculation, pentagon parity, Pfaffian-square endpoint obstruction, and parity rounding",
+        },
         "balanced_census": {
             "records": balanced_records,
             "calibrated_amplitude_vectors": len(amplitude_vectors),
@@ -333,6 +397,8 @@ def generate() -> dict:
                 "all ten postselected V_- occupations and all 56 six-mode occupations for the base protocol",
                 "the 3x3 Jabbour-Cerf alternating minor identity at every balanced base-protocol block",
                 "the basis-free symmetric/exterior cube trace identity and balanced values",
+                "all 64 Boolean endpoint profiles used by the continuous-control reduction",
+                "the Hermitian holonomy/Pareto formulas and exact stability-threshold identities",
             ],
             "does_not_certify": [
                 "a gauge-independent permanent coordinate",

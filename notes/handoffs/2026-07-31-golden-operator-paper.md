@@ -478,14 +478,15 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C826 is active and owns the integrated theorem-first manuscript.  It will
-replace the Boolean-only center by the continuous control theorem, add the
-classification-free Hermitian holonomy/Pareto, squared-spectrum rigidity,
-averaged-defect, and local stability package cleared by C825, compress
-subordinate implementation and higher-order material, rebuild the paper-local
-trust surface, and adopt only after complete paper, extraction, visual, and
-comparative gates.  Charter:
-`notes/golden-tasks/c826-integrated-exchange-landscape-paper.md`.
+C826 is complete and the integrated theorem-first manuscript is adopted as the
+authoritative single-paper package.  It replaces the Boolean-only center by the
+continuous real-cube theorem, adds the classification-free Hermitian
+holonomy/Pareto, narrow squared-spectrum rigidity, averaged-defect, and local
+stability chain cleared by C825, and compresses subordinate implementation and
+higher-order material.  The sixteen-page paper and extended exact evidence
+surface passed complete in-tree, clean extracted-package, warning, visual, and
+comparative gates.  Report:
+`notes/2026-08-02-c826-integrated-exchange-landscape-paper.md`.
 
 C825 is complete with no manuscript edit.  Its publication-grade audit
 characterized eleven sources at five full-text, three partial, and three

@@ -147,6 +147,34 @@ def build_certificate() -> dict:
         invariant["bosonic_uniform_input_average_h3_over_10"]
     )
 
+    continuous = exchange["continuous_control"]
+    continuous_bounds = continuous["bounds"]
+    assert continuous_bounds == {
+        "p1": "9/5",
+        "p2": "33/25",
+        "exterior2": "24/25",
+        "exterior3_real": "16/125",
+        "symmetric3_real": "313/125",
+        "mixed21": "8/5",
+    }
+    endpoint_profiles = continuous["boolean_profiles_up_to_complement"]
+    assert [row["negative_support_size"] for row in endpoint_profiles] == [0, 1, 2, 3]
+    assert endpoint_profiles[-1]["symmetric3"] == "313/125"
+    assert endpoint_profiles[-1]["mixed21"] == "8/5"
+
+    landscape = exchange["hermitian_exchange_landscape"]
+    assert landscape["balanced_formulas"] == {
+        "exterior3": "4*(5-r^2)/125",
+        "mixed21": "(196+4*r^2)/125",
+        "symmetric3": "(317-4*r^2)/125",
+    }
+    assert landscape["pareto_parameterization_h3_s21_e3"] == [
+        "(317-4*t)/125", "(196+4*t)/125", "(20-4*t)/125"
+    ]
+    stability = landscape["stability"]
+    assert stability["global_lower_squared_distance_factor"] == "10/3"
+    assert stability["local_upper_squared_distance_factor"] == "40"
+
     census = exchange["balanced_census"]
     assert len(census["records"]) == math.comb(6, 3) == 20
     probability_counts = {
@@ -209,6 +237,14 @@ def build_certificate() -> dict:
                 "s21": str(computed_s21),
                 "squared_singular_values": [str(value) for value in spectrum],
             },
+            "continuous_control_bounds": continuous_bounds,
+            "hermitian_exchange_landscape": {
+                "balanced_formulas": landscape["balanced_formulas"],
+                "pareto_parameterization_h3_s21_e3": landscape[
+                    "pareto_parameterization_h3_s21_e3"
+                ],
+                "stability": stability,
+            },
             "calibrated_boson_census": {
                 "balanced_records": len(census["records"]),
                 "probability_values": probability_values,
@@ -260,6 +296,8 @@ def build_certificate() -> dict:
             "human_derived": [
                 "44 unbalanced masks have rank at most two",
                 "symmetric-function and Schur-Weyl identities",
+                "continuous-cube convexity and equality classification",
+                "Hermitian holonomy, Pareto, rigidity, and metric-stability proofs",
                 "nearest-word correction radius from distance six",
             ],
             "not_certified_here": [
@@ -319,8 +357,8 @@ def check_outputs() -> None:
     assert MANIFEST.read_bytes() == expected_manifest, "stale evidence manifest"
     assert digest(CERTIFICATE) == hashlib.sha256(expected_certificate).hexdigest()
     print(
-        "ok: evidence verifies 20+44 masks, h3/e3/s21, three permanent values, "
-        "the chiral filter, distance-six decoder, and 15-cell compilation"
+        "ok: evidence verifies continuous endpoints, Hermitian landscape formulas, "
+        "20+44 masks, h3/e3/s21, decoder, and 15-cell compilation"
     )
 
 

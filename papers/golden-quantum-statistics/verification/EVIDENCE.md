@@ -26,12 +26,14 @@ Files: `evidence/boson_fermion_complement.py`,
 `evidence/boson_fermion_complement_replay.py`.
 
 The generator uses exact SymPy arithmetic in the environment pinned by
-`pyproject.toml` and `uv.lock`. It checks the twenty balanced controls, the 44
+`pyproject.toml` and `uv.lock`. It checks all 64 Boolean endpoint profiles used
+by the continuous-cube reduction, the twenty balanced controls, the 44
 rank-deficient controls, the common squared singular spectrum, the three
-calibrated permanent probabilities, and the symmetric-, mixed-, and
-exterior-cube values. The standard-library replay independently recomputes the
-rational aggregate identities from the certificate. It does not certify the
-human left--right orbit theorem.
+calibrated permanent probabilities, the Hermitian holonomy/Pareto formulas and
+stability-threshold identities, and the symmetric-, mixed-, and exterior-cube
+values. The standard-library replay independently rebuilds the endpoint
+profiles from cut Gram matrices and checks the rational Pareto identities. It
+does not certify the human convexity, parity/Pfaffian, or metric arguments.
 
 ## Six-mode design
 

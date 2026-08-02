@@ -128,7 +128,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C826 `[golden]` [ACTIVE; INTEGRATED THEOREM-FIRST PAPER]** — redesign the Golden quantum-statistics manuscript around the audited continuous-control, Hermitian holonomy/Pareto, sign-blind squared-spectrum rigidity, averaged-defect, and quantitative-stability package; compress subordinate implementation and higher-order material; refresh the complete evidence/trust surface; and adopt only after full paper, extracted-package, visual, and comparative gates → `notes/golden-tasks/c826-integrated-exchange-landscape-paper.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`

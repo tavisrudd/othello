@@ -2,11 +2,11 @@
 
 ## Decision
 
-The target venue is **Physical Review A**.  The general orientation theorem is
-useful but elementary; the paper's publication case is its combination with
-balanced-exchange rigidity, the exact Golden benchmark, and the experimentally
-explicit design limit.  That combination fits PRA better than a `Quantum`
-submission centered on a standalone general theorem.
+The target venue remains **Physical Review A**.  The publication case is now
+the integrated theorem-first exchange landscape: the orientation boundary,
+continuous Golden control, Hermitian Pareto and squared-spectrum rigidity, and
+quantitative stability, with the interferometric design limit as a concise
+operational consequence.
 
 The frozen submission bundle contains this record, the manuscript, the locked
 verification environment, and the paper-local evidence package. Live posting,
@@ -25,14 +25,14 @@ publication actions outside this bundle.
 - `pyproject.toml` and `uv.lock`, which pin the symbolic replay environment;
 - `verification/README.md` and the paper-level `README.md`.
 
-The revised PDF is fourteen pages.  The release build has no TeX spacing error,
+The revised PDF is sixteen pages.  The release build has no TeX spacing error,
 undefined reference or citation, overfull or underfull box, or package
 warning.  The source and PDF hashes at closure are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 48,132 | `7740fd3110770473fecd73902bdb31c1c2cbf46a3d5255528573dbba29a7563b` |
-| `golden_quantum_statistics.pdf` | 134,800 | `3da0eb41c0433089df4fd9874f85e875d51a7ba197f314dd05f1aa3a68d2e31e` |
+| `golden_quantum_statistics.tex` | 53,203 | `6341feccfd5c20d1a0610beda09c2b6914cb80c30b111d8e796a089744e8c7f8` |
+| `golden_quantum_statistics.pdf` | 143,783 | `812bbc5dbf8e254c76a6369ccefd59142aa21346ad7716f82de39aa11109b7c2` |
 
 Rebuild and verify from this directory with:
 
@@ -51,6 +51,9 @@ make verify-sources
 | Labelled-landscape reconstruction | Paper-III human theorem | retained only as a subordinate collective inverse-boundary remark, not a local optical observable |
 | Universal balanced-control rank obstruction and the 20+44 split | human proof | proved in the manuscript; the checker independently confirms the finite count |
 | Golden common spectrum and exchange-sector values | live Clebsch source theorem, local exact derivation, and paper-local certificate | explicit matrix, marking convention, trace identities, and characteristic polynomial are in the manuscript; the checker and frozen independent replays cross-check them |
+| Continuous-control joint optimum | human convexity, rank-one-minor, and spectral-lemma proof plus exact endpoint replay | the manuscript proves the cube reduction and equality cases; the paper-local certificate checks all 64 Boolean profiles |
+| Hermitian exchange Pareto segment | human triangle-holonomy and convexity proof plus exact formula replay | the prior conference family is credited only for attainability; no classification theorem is imported |
+| Squared-spectrum rigidity and quantitative stability | human pentagon parity, Pfaffian-square endpoint, triangle-product Lipschitz, and parity-rounding proofs | ordinary three-uniform ETF theory is explicitly distinguished; the reverse estimate is local and no constants are claimed sharp |
 | Permanent census, simplex words, and 15-cell frame compilation | certificate-checked exact computation | compact certificate and source hashes are local; balanced direct compilation additionally requires the stated fixed sign flip; `make verify-sources` runs the independent source replays |
 | Retained arithmetic specialization | supplementary exact computation | its generator and replay remain in the package but no manuscript claim depends on it |
 | Optical component capabilities and antisymmetric-source availability | literature and empirical boundary | not certified by the checker; the source remains an explicit external dependency |

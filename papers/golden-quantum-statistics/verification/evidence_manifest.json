@@ -5,8 +5,8 @@
       "sha256": "841f8a27d30371c1ecc069166755a62a107bdd129cc228343bf08b6fb33e5f11"
     },
     "golden_quantum_statistics.tex": {
-      "bytes": 48132,
-      "sha256": "7740fd3110770473fecd73902bdb31c1c2cbf46a3d5255528573dbba29a7563b"
+      "bytes": 53203,
+      "sha256": "6341feccfd5c20d1a0610beda09c2b6914cb80c30b111d8e796a089744e8c7f8"
     },
     "pyproject.toml": {
       "bytes": 168,
@@ -17,12 +17,12 @@
       "sha256": "1e477e1b1f12759445102c654ff14b01d32e392ef9f1ccfc4950d4c47818e5e5"
     },
     "verification/EVIDENCE.md": {
-      "bytes": 2728,
-      "sha256": "42e5c86ce572f8d0d90b15851924b776fc657b341ed9cdbcada1b27f96d4207d"
+      "bytes": 2927,
+      "sha256": "04ae8fc3486b38f396a52c6431a70fb0e3ff9135013f63e05a27a412cd2af357"
     },
     "verification/README.md": {
-      "bytes": 1857,
-      "sha256": "c0e99d3ca94d92360e90083ec153d90635d369ae6dcaea5824a3bb17bd94b986"
+      "bytes": 1998,
+      "sha256": "28185ef880145d1e0165ba3b4e3cfeed927912c01e4048e551494cb87a0b5c96"
     },
     "verification/evidence/anomaly_inverse.json": {
       "bytes": 14269,
@@ -37,16 +37,16 @@
       "sha256": "34eaf48a865819afa6fab5a6b7884c77898860edbbd00a5c7b28d6edcc79c971"
     },
     "verification/evidence/boson_fermion_complement.json": {
-      "bytes": 331349,
-      "sha256": "5b3b08c07b50ea349ff7e2eebd76ef64d83589cc68cae6415d0c05251349c2eb"
+      "bytes": 333438,
+      "sha256": "1989fc56e7b4eaa9d8598b1b818d3027173238630ffc6561618f89346d12dbd0"
     },
     "verification/evidence/boson_fermion_complement.py": {
-      "bytes": 15375,
-      "sha256": "9fc635ae57613aca9a2e86a26aa095a27a8b7b1cdf815feadc1da66ca30a88ef"
+      "bytes": 18431,
+      "sha256": "316739532824a0899cc95adaf277ffd16e65438aefb7b82fd70e80bffd8ddfb7"
     },
     "verification/evidence/boson_fermion_complement_replay.py": {
-      "bytes": 3785,
-      "sha256": "2f9b72876aeb4b659b925d27ff375fdfaeed9c377e355fdb8209722cb8e75283"
+      "bytes": 6360,
+      "sha256": "0d6706c87b90850d5e478bce6a4aa25d5add791d2ca79681230544b04af28644"
     },
     "verification/evidence/six_mode_demonstrator.json": {
       "bytes": 12548,
@@ -61,16 +61,16 @@
       "sha256": "812a9a72ed57f5c65f26f7d58e802b741ce97173a9c32d6c5d4f853ead4c5caf"
     },
     "verification/evidence_certificate.json": {
-      "bytes": 9202,
-      "sha256": "2ef877e90629eac1b45061dd05ceb09b394bac1702603a905a3443f86784c965"
+      "bytes": 10104,
+      "sha256": "592c10c67616c26bc55c9a9aa5f0357d679b79e6fe8b62639d579b45d417501a"
     },
     "verification/lint_tex_spacing.py": {
       "bytes": 1499,
       "sha256": "511eb6837ec3b59769f4a2e3d76a9658403907f270246e9d739bec1afcc345e0"
     },
     "verification/verify.py": {
-      "bytes": 13634,
-      "sha256": "8cd027702e504469e1e5010f466f71670cd22cb924b1bb0b92b3168ffe37df31"
+      "bytes": 15269,
+      "sha256": "5c90a68e496f97de24ab02956b644f532941dca9fe58131e66189bbc65144e13"
     }
   },
   "schema": "golden-quantum-statistics-manifest-v1"

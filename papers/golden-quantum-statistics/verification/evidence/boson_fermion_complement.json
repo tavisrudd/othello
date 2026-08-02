@@ -14829,6 +14829,55 @@
     "trace_H_squared": "33/25",
     "trace_level_muir_identity": "h3-e1 h2+e2 h1-e3=0 with layers (313,513,216,16)/125"
   },
+  "continuous_control": {
+    "boolean_profiles_up_to_complement": [
+      {
+        "exterior2": "0",
+        "exterior3": "0",
+        "mixed21": "0",
+        "negative_support_size": 0,
+        "p1": "0",
+        "p2": "0",
+        "symmetric3": "0"
+      },
+      {
+        "exterior2": "0",
+        "exterior3": "0",
+        "mixed21": "0",
+        "negative_support_size": 1,
+        "p1": "1",
+        "p2": "1",
+        "symmetric3": "1"
+      },
+      {
+        "exterior2": "16/25",
+        "exterior3": "0",
+        "mixed21": "128/125",
+        "negative_support_size": 2,
+        "p1": "8/5",
+        "p2": "32/25",
+        "symmetric3": "256/125"
+      },
+      {
+        "exterior2": "24/25",
+        "exterior3": "16/125",
+        "mixed21": "8/5",
+        "negative_support_size": 3,
+        "p1": "9/5",
+        "p2": "33/25",
+        "symmetric3": "313/125"
+      }
+    ],
+    "bounds": {
+      "exterior2": "24/25",
+      "exterior3_real": "16/125",
+      "mixed21": "8/5",
+      "p1": "9/5",
+      "p2": "33/25",
+      "symmetric3_real": "313/125"
+    },
+    "proof_boundary": "human convexity, separate convexity of rank-one minors, and the three-variable spectral lemma reduce the continuous cube to these exact endpoint data"
+  },
   "exact_permanent": {
     "determinant_formula": "det(K_base(x))=-1 Z_base(x)/(10 sqrt(5))",
     "formula": "per(K_base(x))=Y(x)/(100 sqrt(5))",
@@ -15320,6 +15369,25 @@
     ],
     "term_count": 44
   },
+  "hermitian_exchange_landscape": {
+    "balanced_formulas": {
+      "exterior3": "4*(5-r^2)/125",
+      "mixed21": "(196+4*r^2)/125",
+      "symmetric3": "(317-4*r^2)/125"
+    },
+    "pareto_parameterization_h3_s21_e3": [
+      "(317-4*t)/125",
+      "(196+4*t)/125",
+      "(20-4*t)/125"
+    ],
+    "proof_boundary": "human triangle-holonomy calculation, pentagon parity, Pfaffian-square endpoint obstruction, and parity rounding",
+    "stability": {
+      "delta_threshold": "3/10 - sqrt(35)/20",
+      "global_lower_squared_distance_factor": "10/3",
+      "local_upper_squared_distance_factor": "40",
+      "rounding_radius": "-sqrt(5) + sqrt(7)"
+    }
+  },
   "port_gauge": {
     "definition": "Gram-Schmidt(P_+ e0,P_+ e1,P_+ e2) and Gram-Schmidt(P_- e0,P_- e1,P_- e2), with positive square roots",
     "q_minus": [
@@ -15450,7 +15518,9 @@
       "all 20 balanced masks for all six transported protocols",
       "all ten postselected V_- occupations and all 56 six-mode occupations for the base protocol",
       "the 3x3 Jabbour-Cerf alternating minor identity at every balanced base-protocol block",
-      "the basis-free symmetric/exterior cube trace identity and balanced values"
+      "the basis-free symmetric/exterior cube trace identity and balanced values",
+      "all 64 Boolean endpoint profiles used by the continuous-control reduction",
+      "the Hermitian holonomy/Pareto formulas and exact stability-threshold identities"
     ],
     "does_not_certify": [
       "a gauge-independent permanent coordinate",

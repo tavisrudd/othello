@@ -55,6 +55,32 @@
         "5184/25878125"
       ]
     },
+    "continuous_control_bounds": {
+      "exterior2": "24/25",
+      "exterior3_real": "16/125",
+      "mixed21": "8/5",
+      "p1": "9/5",
+      "p2": "33/25",
+      "symmetric3_real": "313/125"
+    },
+    "hermitian_exchange_landscape": {
+      "balanced_formulas": {
+        "exterior3": "4*(5-r^2)/125",
+        "mixed21": "(196+4*r^2)/125",
+        "symmetric3": "(317-4*r^2)/125"
+      },
+      "pareto_parameterization_h3_s21_e3": [
+        "(317-4*t)/125",
+        "(196+4*t)/125",
+        "(20-4*t)/125"
+      ],
+      "stability": {
+        "delta_threshold": "3/10 - sqrt(35)/20",
+        "global_lower_squared_distance_factor": "10/3",
+        "local_upper_squared_distance_factor": "40",
+        "rounding_radius": "-sqrt(5) + sqrt(7)"
+      }
+    },
     "simplex_decoder": {
       "all_pairwise_hamming_distances": [
         6
@@ -421,16 +447,16 @@
     },
     "boson_fermion_complement": {
       "verification/evidence/boson_fermion_complement.json": {
-        "bytes": 331349,
-        "sha256": "5b3b08c07b50ea349ff7e2eebd76ef64d83589cc68cae6415d0c05251349c2eb"
+        "bytes": 333438,
+        "sha256": "1989fc56e7b4eaa9d8598b1b818d3027173238630ffc6561618f89346d12dbd0"
       },
       "verification/evidence/boson_fermion_complement.py": {
-        "bytes": 15375,
-        "sha256": "9fc635ae57613aca9a2e86a26aa095a27a8b7b1cdf815feadc1da66ca30a88ef"
+        "bytes": 18431,
+        "sha256": "316739532824a0899cc95adaf277ffd16e65438aefb7b82fd70e80bffd8ddfb7"
       },
       "verification/evidence/boson_fermion_complement_replay.py": {
-        "bytes": 3785,
-        "sha256": "2f9b72876aeb4b659b925d27ff375fdfaeed9c377e355fdb8209722cb8e75283"
+        "bytes": 6360,
+        "sha256": "0d6706c87b90850d5e478bce6a4aa25d5add791d2ca79681230544b04af28644"
       }
     },
     "six_mode_demonstrator": {
@@ -459,6 +485,8 @@
     "human_derived": [
       "44 unbalanced masks have rank at most two",
       "symmetric-function and Schur-Weyl identities",
+      "continuous-cube convexity and equality classification",
+      "Hermitian holonomy, Pareto, rigidity, and metric-stability proofs",
       "nearest-word correction radius from distance six"
     ],
     "not_certified_here": [

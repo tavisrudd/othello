@@ -1,4 +1,4 @@
-# Orientation, exchange statistics, and rigidity in the Golden six-mode conference interferometer
+# Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer
 
 This directory is the authoritative manuscript root for the unnumbered Golden
 quantum-statistics companion. It is a theory and design-limit paper, not a
@@ -9,10 +9,14 @@ The paper owns:
 - the determinant orientation and permanent port-gauge boundary;
 - the self-contained balanced-exchange rigidity theorem and the exact
   higher-order purity envelope credited to the classical design literature;
+- the continuous-control joint optimum for every degree-three Schur sector;
+- the Hermitian order-six holonomy formulas, exact Pareto segment, sign-blind
+  squared-spectrum rigidity, averaged defect, and quantitative local stability;
 - the intrinsic symmetric/exterior-cube comparison;
 - the exact Golden balanced benchmark and calibrated readout schedule;
-- the common-reference coherent-tomography/bosonic precursor and the
-  antisymmetric-resource design limit.
+- the concise common-reference coherent-tomography/bosonic precursor and the
+  antisymmetric-resource design limit, with detailed compilation and resource
+  gates retained in the supplement.
 
 The broader Golden operator inventory remains outside this repository.
 Paper III remains outside this manuscript's write surface. A forward citation

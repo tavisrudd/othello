@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** active
+**Status:** complete
 
 ## Objective
 
@@ -71,3 +71,13 @@ uniformity”, or global two-sided stability.
 - a dated C826 integration and A/B report;
 - warning-free PDF and complete replay logs;
 - explicit final adopt/reject verdict for the integrated paper.
+
+## Outcome
+
+Adopted on 2026-08-02.  The integrated sixteen-page manuscript carries the
+continuous real-control optimum, exact Hermitian exchange Pareto segment,
+narrow squared-spectrum rigidity, averaged defect, and quantitative stability
+as one theorem spine.  The paper-local certificate and independent replay were
+extended accordingly, and both the in-tree and clean extracted `make check`
+gates passed.  Full result and A/B decision:
+`notes/2026-08-02-c826-integrated-exchange-landscape-paper.md`.

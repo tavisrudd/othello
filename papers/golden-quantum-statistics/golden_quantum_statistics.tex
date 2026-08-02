@@ -22,7 +22,7 @@
 \newcommand{\Sym}{\operatorname{Sym}}
 \newcommand{\per}{\operatorname{per}}
 
-\title{Orientation, exchange statistics, and rigidity in the Golden six-mode conference interferometer}
+\title{Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer}
 \author{Tavis Rudd}
 \date{August 2026}
 
@@ -30,34 +30,32 @@
 \maketitle
 
 \begin{abstract}
-Which features of a one-particle transfer remain observable when its port
-spaces are unframed, oriented, or fully phase-calibrated?  Singular values
-classify an unframed real transfer.  Orienting the port spaces adds the sign
-of the top exterior amplitude; up to scale, the determinant is the unique
-minimal-degree polynomial carrying this relative orientation.  Fully calibrated
-frames expose matrix-dependent amplitudes such as the permanent.  For every
-symmetric conference matrix, we identify the balanced exchange spectrum with
-a normalized cross-Gram spectrum and prove that it is cut-independent exactly
-when each half has size at most three.  Among symmetric conference matrices,
-order six is the unique nontrivial uniform case, with spectrum
-\(\{1/5,4/5,4/5\}\).  For every symmetric conference matrix of higher order,
-the spectrum varies with the cut, while a classical aligned \(3\)-design fixes
-the exact mean and variance of cut purity.
+Which features of a one-particle transfer remain observable when its ports are
+unframed, oriented, or phase-calibrated, and how do those features vary under
+continuous control and conference phase?  Singular values classify an
+unframed real transfer.  Orienting the ports adds the sign of the top exterior
+amplitude; up to scale, the determinant is the unique minimal-degree
+polynomial carrying this relative orientation.  Fully calibrated frames
+expose matrix-dependent amplitudes such as the permanent.
 
-We realize this exceptional endpoint in the Golden six-mode interferometer.
-For a diagonal path control \(D_x\), the postselected block
-\(K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}\) has oriented top-exterior amplitude
-\(\det K_T(x)\), but its filled-fermion probability is sign-blind.  The
-balanced symmetric-cube trace and filled-fermion probability are \(313/125\)
-and \(16/125\), respectively; all 44 unbalanced Boolean controls have zero
-fermionic amplitude.  In the Clebsch realization, the six determinant
-amplitudes are calibrated Joubert coordinates; across the ten projective
-balanced cuts, the six protocol sign words form an equidistant binary code
-with pairwise Hamming distance six.  A compiled architecture and quantitative
-gates separate common-reference tomography, ordinary-photon controls, and
-direct three-fermion emulation, whose totally antisymmetric three-photon
-qutrit source remains an external dependency.  This is a theory and
-design-limit analysis, not a report of a built device.
+For symmetric conference matrices we identify the balanced exchange spectrum
+with a normalized cross-Gram spectrum and prove that order six is the unique
+nontrivial cut-independent case.  For the Golden order-six transfer, balanced
+Boolean controls are the unique joint maximizers of every degree-three Schur
+exchange sector over the full real diagonal-control cube.  Allowing an
+arbitrary order-six Hermitian conference matrix exposes a second, independent
+axis: triangle holonomy preserves the first two exchange moments but moves the
+three degree-three sectors along an exact Pareto segment.  Constancy of any
+one such sector across balanced cuts characterizes the real switching class.
+An averaged squared-holonomy defect gives all three mean deviations and
+globally lower-bounds squared Frobenius distance to the real conference orbit;
+below an explicit threshold it also gives a linear reverse estimate.
+
+The Golden realization retains a calibrated determinant-sign code and a
+photonic design boundary.  Common-reference tomography and ordinary-photon
+controls test its one-particle carrier and bosonic shadow, whereas direct
+three-fermion emulation needs an additional antisymmetric three-qutrit source.
+This is a theory and design-limit analysis, not a report of a built device.
 \end{abstract}
 
 \section{Introduction}
@@ -128,22 +126,18 @@ The name \emph{Golden} is retained from that series and refers to the paired
 \(\pm\sqrt5\) conference eigenspaces; \emph{conference interferometer} names
 the operational realization studied here.
 
-The paper has two principal results.  First, the left--right orbit theorem
-classifies the information retained by unframed and oriented port spaces and
-proves that the determinant is the unique minimal-degree polynomial carrying
-their relative orientation.  Second, every balanced Boolean control in the
-six-mode conference family has squared singular spectrum
-\(\{1/5,4/5,4/5\}\).
-Theorem~\ref{thm:general-exchange-rigidity} proves that no symmetric conference
-matrix of higher order has a cut-independent balanced spectrum.  At higher
-orders a classical aligned \(3\)-design instead fixes the
-switching-class-independent mean and variance of the two-copy purity.  The
-order-six statement follows from the signed triangle identity and the \(3+3\)
-conference block equations, not a finite census.  It gives exact symmetric,
-mixed, and exterior exchange-sector benchmarks and the sharp split between
-twenty invertible and 44 singular Boolean controls.  The singular-value
-classification supplies the language; the contribution is its combination
-with the minimal orientation carrier and calibrated readout boundary.
+The paper has one theorem spine with three layers.  The left--right orbit
+theorem first identifies the information retained by unframed and oriented
+ports and forces the determinant as the minimal orientation carrier.  The
+real conference layer then proves the all-order balanced-cut classification
+and upgrades the Golden Boolean benchmark to a joint optimum over the full
+continuous control cube.  Finally, the Hermitian order-six layer identifies
+triangle holonomy as the moving coordinate, determines the exact exchange
+Pareto edge, proves sign-blind squared-spectrum rigidity, and makes that
+rigidity quantitative through an averaged defect.  The order-six proofs use
+conference block equations, a pentagon parity obstruction, a Pfaffian-square
+endpoint obstruction, and stable sign rounding rather than a conference-family
+classification or a finite census.
 
 The mechanism is the determinant line.  The Golden data determine the two
 three-dimensional port spaces but not ordered orthonormal frames inside them.
@@ -156,9 +150,10 @@ action.  The canonical intrinsic bosonic aggregate is therefore a spectral
 quantity on the symmetric cube, not a second signed Segre coordinate.
 
 Theorems~\ref{thm:orbit-boundary},
-\ref{thm:general-exchange-rigidity}, and~\ref{thm:exchange-boundary} separate
-the general orientation boundary, the conference classification, and the
-exact Golden benchmark.
+\ref{thm:general-exchange-rigidity}, \ref{thm:continuous-control}, and
+\ref{thm:hermitian-landscape} separate the orientation boundary, real
+conference classification, controlled Golden optimum, and complex-phase
+exchange landscape.
 
 Their experimental consequence has three levels.  Phase-referenced
 one-particle tomography infers calibrated determinant signs; ordinary photons
@@ -175,9 +170,18 @@ Jabbour and Cerf~\cite{JabbourCerf}; its extension to partially distinguishable
 particles is due to Robbio, Jabbour, and Cerf~\cite{RobbioJabbourCerf}.  The
 Clebsch source paper already records the determinant-line interpretation and
 the failure of the permanent to descend through port-frame changes
-\cite[Section~5]{ClebschIII}.  The present contribution is the general orbit
-classification and minimal-degree theorem, their exact Golden exchange-sector
-specialization, and the associated measurement and resource package.
+\cite[Section~5]{ClebschIII}.  Triple products as switching invariants and
+ordinary three-uniform ETF compression spectra are established
+\cite{BodmannPaulsen,HoffmanSolazzo,KingHomogeneous}; equal characteristic
+polynomials of Hermitian principal blocks form the distinct spectral-monomorphy
+problem~\cite{AttasSpectral}; uniform subframe bounds are another adjacent but
+unsquared condition~\cite{ChengUSB}.  The order-six Hermitian conference family used
+below is also prior~\cite{EtTaouiConference}, and a later work states an
+order-six classification~\cite{EtTaouiMakhlouf}.  Our rigidity concerns the
+sign-blind squared complementary cross-block spectrum rather than the ordinary
+principal spectrum.  The contribution is the unified orientation and exchange
+landscape, its quantitative real-orbit stability, and a concise measurement
+boundary.
 
 \section{The Golden transfer}
 
@@ -564,6 +568,233 @@ then gives the checksum.  The final assertion follows from
 Theorem~\ref{thm:orbit-boundary}.
 \end{proof}
 
+\section{Continuous control and the Hermitian exchange landscape}
+
+The balanced Boolean point is not only a discrete benchmark.  It is the exact
+joint optimum of the intrinsic degree-three exchange sectors over the entire
+real control cube.
+
+\begin{theorem}[Continuous Golden control]
+\label{thm:continuous-control}
+For the real Golden conference matrix and every
+\(x\in[-1,1]^6\), let \(H(x)=K_T(x)^{\mathsf T}K_T(x)\) and
+\(p_j=\operatorname{tr}(H^j)\).  Then
+\[
+ p_1\le\frac95,\qquad p_2\le\frac{33}{25},\qquad
+ e_2\le\frac{24}{25},\qquad e_3\le\frac{16}{125},
+\]
+and
+\[
+ h_3\le\frac{313}{125},\qquad s_{(2,1)}\le\frac85.
+\]
+Equality in any one of the three degree-three Schur bounds
+\(h_3,s_{(2,1)},e_3\) occurs exactly at the twenty balanced Boolean controls.
+Thus those controls are the unique joint maximizers of every degree-three
+exchange sector on the cube.
+\end{theorem}
+
+\begin{proof}
+The projector diagonal gives
+\[
+ p_1=\frac{6\sum_i x_i^2-(\sum_i x_i)^2}{20}\le\frac95.
+\]
+The fourth Schatten power \(p_2=\lVert K\rVert_{S_4}^4\) is convex in
+the linear matrix \(K(x)\), hence is maximized at a cube vertex.  Up to
+complement, Boolean negative-support sizes \(0,1,2,3\) have squared-singular
+spectra
+\[
+ (0,0,0),\quad(1,0,0),\quad(4/5,4/5,0),\quad(4/5,4/5,1/5),
+\]
+which gives \(p_2\le33/25\).  Every two-by-two minor of
+\(K(x)\) is affine in each individual coordinate: the quadratic coefficient
+vanishes because one path contributes a rank-one matrix.  Hence the sum of
+their squares, \(e_2\), is separately convex and reduces to the same vertices.
+The determinant is multi-affine for the same reason, so its squared modulus
+gives \(e_3\le16/125\), with equality exactly at the balanced vertices.
+
+Now \(h_3=e_3+p_1p_2\), which proves its bound and forces the same equality
+case.  For the mixed sector, an elementary three-variable lemma says that if
+\(0\le\lambda_i\le1\), \(e_1\le9/5\), and \(e_2\le24/25\), then
+\(s_{(2,1)}=e_1e_2-e_3\le8/5\), with equality only at a permutation of
+\((4/5,4/5,1/5)\).  To see this, sort \(a\ge b\ge c\), put
+\(u=a+b\), \(v=ab\), and maximize first in \(v\) under
+\(v\le u^2/4\) and \(v\le24/25-cu\).  The bounds exchange at \(c=1/5\);
+after imposing either \(e_1=9/5\) or \(e_2=24/25\), subtraction from
+\(8/5\) factors respectively through
+\((5c-1)(25c^2+50c-71)\) on \(0\le c\le1/5\) and
+\((5c-4)^2(5c-1)\) on \(1/5\le c\le3/5\).  Equality forces
+\(c=1/5,u=8/5,v=16/25\).  The determinant equality case then forces a
+balanced Boolean control.
+\end{proof}
+
+We next vary the conference phase.  Let \(C=C^*\) be an arbitrary Hermitian
+conference matrix of order six, so \(C_{ii}=0\), \(|C_{ij}|=1\), and
+\(C^2=5I\).  For a balanced triple \(T=\{i,j,k\}\), write
+\[
+ A=C[T],\qquad R=C[T,T^c],\qquad
+ H_T=RR^*/5=I-A^2/5,
+\]
+and define the real triangle holonomy
+\[
+ r_T=\operatorname{Re}(C_{ij}C_{jk}C_{ki}).
+\]
+The family used below to realize all values of \(r_T^2\) is the previously
+known order-six Hermitian conference family~\cite{EtTaouiConference}; none of
+the proofs uses its classification.
+
+\begin{theorem}[Hermitian exchange landscape]
+\label{thm:hermitian-landscape}
+For every balanced triple,
+\[
+ p_1=\frac95,\qquad p_2=\frac{33}{25},\qquad e_2=\frac{24}{25},
+\]
+while
+\begin{equation}
+\label{eq:holonomy-exchange}
+ e_3=\frac{4(5-r_T^2)}{125},\qquad
+ h_3=\frac{317-4r_T^2}{125},\qquad
+ s_{(2,1)}=\frac{196+4r_T^2}{125}.
+\end{equation}
+For arbitrary real controls \(x\in[-1,1]^6\), uniformly over this Hermitian
+conference class,
+\[
+\begin{gathered}
+ p_1\le\frac95,\quad p_2\le\frac{33}{25},\quad
+ e_2\le\frac{24}{25},\quad e_3\le\frac4{25},\\
+ h_3\le\frac{317}{125},\quad s_{(2,1)}\le\frac85.
+\end{gathered}
+\]
+The complete componentwise-maximal frontier of
+\((h_3,s_{(2,1)},e_3)\) is
+\begin{equation}
+\label{eq:mixed-pareto}
+ \frac1{125}(317-4t,\ 196+4t,\ 20-4t),
+ \qquad 0\le t\le1.
+\end{equation}
+It is realized by balanced Boolean controls with \(t=r_T^2\).  Its
+\(t=0\) endpoint maximizes the symmetric and exterior sectors, while
+\(t=1\) maximizes the mixed sector.
+\end{theorem}
+
+\begin{proof}
+The triangle block has characteristic polynomial
+\(z^3-3z-2r_T\).  Newton identities applied to
+\(H_T=I-A^2/5\) give the fixed first two moments and determinant in
+\eqref{eq:holonomy-exchange}; the identities
+\(h_3=e_3+p_1p_2\) and \(s_{(2,1)}=p_1e_2-e_3\) give the other sectors.
+
+For continuous controls, the convexity and rank-one-minor arguments in
+Theorem~\ref{thm:continuous-control} do not use real conference entries through
+\(e_2\).  Separate convexity of \(|\det K|^2\) reduces \(e_3\) to Boolean
+cuts, where \eqref{eq:holonomy-exchange} gives \(e_3\le4/25\).  The same
+symmetric-function identities give the remaining bounds.  In addition,
+\[
+ s_{(2,1)}+e_3=p_1e_2\le\frac{216}{125},\qquad
+ h_3+s_{(2,1)}=p_1(p_2+e_2)\le\frac{513}{125}.
+\]
+Every feasible point is therefore dominated by a point of
+\eqref{eq:mixed-pareto}.  Conversely the known one-parameter family has a
+fixed triangle with \(r_T=\operatorname{Re}b\), \(|b|=1\), and hence realizes
+every \(t\in[0,1]\).  Both pairwise inequalities are equalities on the
+segment, so no two distinct points on it dominate one another.
+\end{proof}
+
+Ordinary three-uniform ETF compressions retain the sign of
+\(\operatorname{Re}z_T\) and select a purely imaginary/skew class
+\cite{BodmannPaulsen,HoffmanSolazzo}.  The exchange operator instead sees
+\((\operatorname{Re}z_T)^2\); its rigidity endpoint is real.
+
+\begin{theorem}[Squared-spectrum rigidity and stability]
+\label{thm:squared-rigidity}
+For an order-six Hermitian conference matrix, the following are equivalent:
+the balanced squared cross-block spectrum is cut-independent; any one of
+\(e_3,h_3,s_{(2,1)}\) is cut-independent; and \(C\) is switching/permutation
+equivalent to a real symmetric conference matrix.
+
+Complementary triples have the same squared real holonomy, so choose one
+triple from each of the ten complementary balanced-cut pairs and put
+\[
+ \delta(C)=1-\frac1{10}\sum_T r_T^2.
+\]
+Then
+\[
+ \overline e_3=\frac{16+4\delta}{125},\qquad
+ \overline h_3=\frac{313+4\delta}{125},\qquad
+ \overline{s}_{(2,1)}=\frac{200-4\delta}{125}.
+\]
+Let \(d_{\mathbb R}(C)\) be the unnormalized Frobenius distance from \(C\)
+to the diagonal-unitary switching and permutation orbit of the real order-six
+conference matrices.  Globally,
+\begin{equation}
+\label{eq:stability-lower}
+ d_{\mathbb R}(C)^2\ge\frac{10}{3}\delta(C).
+\end{equation}
+If
+\begin{equation}
+\label{eq:stability-threshold}
+ \delta(C)<\frac{6-\sqrt{35}}{20},
+\end{equation}
+then
+\begin{equation}
+\label{eq:stability-upper}
+ d_{\mathbb R}(C)^2\le40\delta(C).
+\end{equation}
+No sharpness is asserted for the constants or threshold.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:holonomy-exchange}, any one-sector constancy is equivalent to
+\(|r_T|=\rho\) for every triangle.  Dephase one row and column to ones and
+write the remaining five-by-five block as \(S\).  Root triangles force every
+off-diagonal entry to have real part \(\pm\rho\).  If \(0<\rho<1\), write
+\[
+ S=\rho A+i\sqrt{1-\rho^2}\,B,
+\]
+where the row sums make \(A\) a symmetric sign matrix with two positive and
+two negative neighbors at each vertex and \(B\) a regular skew tournament.
+The positive edges of \(A\) form a pentagon; label them
+\(01,12,23,34,40\).  The imaginary part of \(S^2=5I-J\) requires
+\(AB+BA=0\), but three entries satisfy
+\[
+ (AB+BA)_{02}+(AB+BA)_{03}-(AB+BA)_{23}
+ =2(b_{03}-b_{24}-b_{34}),
+\]
+which would equate an odd integer with an even integer.  At \(\rho=0\),
+bordering \(B\) by a row and column of signs gives an integral
+six-by-six skew matrix \(\widetilde B\) with
+\(\widetilde B^2=-5I\).  Its determinant would be \(125\), impossible
+because an even integral skew determinant is an integral Pfaffian square.
+Thus \(\rho=1\), the real class.  The converse is immediate.  Averaging
+\eqref{eq:holonomy-exchange} gives the three defect identities.
+
+For stability, align \(C\) with any real-orbit representative \(R\).  If
+\(z_T\) and \(w_T\in\{\pm1\}\) are their triangle products, then
+\[
+ 1-(\operatorname{Re}z_T)^2\le |z_T-w_T|^2
+ \le3\sum_{e\subset T}|C_e-R_e|^2.
+\]
+Each edge belongs to four of the twenty triangles and complementary triples
+have equal squared real holonomy.  Summing gives
+\(20\delta\le6\lVert C-R\rVert_F^2\), proving
+\eqref{eq:stability-lower}.
+
+For the reverse estimate, dephase at a root and round each of the ten other
+upper-triangular entries to the sign of its real part, obtaining a real sign
+matrix \(R\).  The ten root triangles give
+\[
+ \lVert C-R\rVert_F^2\le40\delta.
+\]
+Put \(x=\lVert C-R\rVert_F\).  Since \(C^2=5I\),
+\[
+ \lVert R^2-5I\rVert_2\le x(2\sqrt5+x).
+\]
+Every off-diagonal entry of \(R^2\) is an even integer and every diagonal
+entry is five.  Under \eqref{eq:stability-threshold},
+\(x<\sqrt7-\sqrt5\), so the displayed norm is less than two; parity forces
+\(R^2=5I\).  This rounded \(R\) is therefore an exact real conference
+matrix and proves \eqref{eq:stability-upper}.
+\end{proof}
+
 Calibrated bosonic measurements retain more than the spectral aggregate.  Once
 physical port axes are fixed, a permanent is an ordinary transition amplitude,
 accessible only through a phase-sensitive multiphoton protocol; photon
@@ -720,225 +951,103 @@ resource needed for direct three-fermion emulation.  The structural nulls are
 \label{fig:photonic-gate}
 \end{figure}
 
-\subsection*{Circuit and port convention}
+\subsection*{Circuit, readout, and quantitative gates}
 
-Put \(O_T=[Q_{T,+}\ Q_{T,-}]\), inject the first three eigenports numbered
-\(0,1,2\), and postselect the last three outputs numbered \(3,4,5\).  Thus
-\(K_T\) is the row-\(3{:}5\), column-\(0{:}2\) block of \(U_T\).  For adjacent
-modes \(a,b\), our compiled two-mode cell is
-\[
- G_{ab}(\theta)|_{a,b}=
- \begin{pmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix}.
-\]
-The \(O(3)\times O(3)\) action of Theorem~\ref{thm:orbit-boundary} is a gauge
-of the unframed Golden source object.  Compiling \(O_T\) chooses physical,
-phase-referenced laboratory axes; a later port rotation changes that
-calibration or the device rather than acting as an unnoticed experimental
-gauge.
-In the frozen pivot gauge, input phases
-\(S=\operatorname{diag}(1,1,1,1,1,-1)\), followed in order by the cells below,
-reconstruct \(O_T\).  The table rounds angles to six decimal places and has
-maximum entry error below \(7\times10^{-7}\).  The machine-readable
-full-precision netlist in the supplemental certificate has error below
-\(2\times10^{-14}\).  Mode labels are zero-based and angles are in radians.
+Put \(O_T=[Q_{T,+}\ Q_{T,-}]\), inject eigenports \(0,1,2\), and postselect
+outputs \(3,4,5\).  Thus \(K_T\) is the corresponding off-diagonal block of
+\(U_T=O_T^{\mathsf T}D_xO_T\).  A frozen adjacent-mode Givens decomposition
+uses fifteen cells for \(O_T\); the full-precision netlist and the rounded
+six-decimal table are retained in the supplement, with maximum reconstruction
+errors below \(2\times10^{-14}\) and \(7\times10^{-7}\), respectively.
+Balanced orthogonal controls admit a direct fifteen-cell compilation plus one
+fixed sign flip.  A general real filter uses two meshes and six variable
+attenuators, with amplitude transmission \(x_i\) and intensity transmission
+\(x_i^2\).  The other marked protocols are obtained by the frozen path
+permutations.
 
-\begin{center}
-\small
-\begin{tabular}{rcc@{\qquad}rcc@{\qquad}rcc}
-\toprule
-\(j\)&\(ab\)&\(\theta_j\)&\(j\)&\(ab\)&\(\theta_j\)&\(j\)&\(ab\)&\(\theta_j\)\\
-\midrule
-1&45& 2.328295&6&45&-1.017222&11&01&-0.785398\\
-2&34&-3.141593&7&12&-1.570796&12&12&-1.107149\\
-3&45& 2.328295&8&23&-2.356194&13&23&-1.047198\\
-4&23&-1.570796&9&34&-0.955317&14&34&-0.955317\\
-5&34&-1.570796&10&45&0&15&45& 2.356194\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-A balanced \(U_T(x)\), whose determinant is \(-1\), may be compiled directly
-into at most fifteen such cells plus one sign flip or \(\pi\)-phase element
-per copy.  A general real filter uses the displayed sandwich with two
-fifteen-cell meshes and six variable attenuators; an amplitude transmission
-\(x_i\) means intensity transmission \(x_i^2\), with a \(0\) or \(\pi\) path
-phase supplying its sign.
-Three spatially parallel emulator copies therefore occupy eighteen modes and
-use at most 45 Givens cells plus three fixed \(\pi\)-phase elements in the
-balanced direct compilation.  Encodings in time
-or frequency may reuse one physical mesh, but still require three matched
-logical copies.
-The other five marked protocols are obtained by the frozen path
-permutations; an odd representative exchanges the two port triples and
-transposes \(K_T\).
-
-\subsection*{Readout, nulls, and quantitative gates}
-
-Inject each of the six inputs coherently and measure the complex field at all
-outputs against one common local oscillator.  This determines the transfer in
-six input settings, each with the phase sampling required by the detector.
+Injecting each input coherently and measuring every output against one common
+local oscillator fixes the phase-referenced transfer in six input settings.
 The common output reference is essential: intensity data and input-only
-interference leave independent output-row phases free and therefore cannot
-determine a block-determinant sign.  The intensity/interference reconstruction
-of Rahimi-Keshari et al.~\cite{RahimiKeshari} supplies the demonstrated
-transfer-characterization primitive; the determinant-sign claim here assumes
-the additional common input--output phase calibration.  It is not a direct
-observation of a many-fermion phase.
-Programmable twelve-mode processors have separately operated with three
-photons~\cite{Somhorst}.
+interference leave independent output-row phases free and cannot determine a
+block-determinant sign.  The reconstruction primitive is demonstrated
+experimentally~\cite{RahimiKeshari}; the common input--output phase calibration
+is an additional assumption here.  Programmable twelve-mode processors have
+separately operated with three photons~\cite{Somhorst}.
 
-The first acceptance test is structural, before comparison with any target
-probability.  For the six reconstructed amplitudes set
+Before comparing probabilities, reconstruct the six marked amplitudes in one
+gain and orientation convention and test the structural nulls
 \[
- r_1=\sum_T\widehat Z_T,\qquad
- r_3=\sum_T\widehat Z_T^3.
+ r_1=\sum_T\widehat Z_T,\qquad r_3=\sum_T\widehat Z_T^3.
 \]
-All six amplitudes must first be expressed in one calibrated gain and
-orientation convention.  Independent normalization of each protocol would
-erase the content of these cross-protocol identities.
-For reporting across transmission levels, use the dimensionless scores
-\[
- \rho_1=\frac{|r_1|}{\sum_T|\widehat Z_T|},\qquad
- \rho_3=\frac{|r_3|}{\sum_T|\widehat Z_T|^3},
-\]
-whenever the respective denominator is nonzero.
-These are descriptive algebraic residuals, not goodness-of-fit statistics;
-experimental uncertainties must be propagated from the transfer
-reconstruction.
-Diagonal real loss changes \(x\) but leaves both nulls exact.  Coherent
-diagonal phase error also leaves them exact over \(\mathbb C\), although a
-literal real sign then needs the phase reference.  Mesh error can move the
-amplitude word off the common Golden carrier: \(r_1\) is the primary
-falsification test and \(r_3\) the nonlinear confirmation.  Passing both is
-necessary for carrier membership but does not certify the target transfer;
-the calibrated spectrum and probabilities supply the subsequent tests.
-Mismatch among the three emulator copies is a separate failure, because then
-no single block \(K_T\) describes the process.  Each copy must be tomographed
-and matched before the determinant interpretation is applied.  Uniform
-amplitude transmission \(\lambda\) scales amplitudes by \(\lambda^3\) and
-probabilities by \(\lambda^6\), while \(\rho_1\) and \(\rho_3\) remain
-unchanged.
+Independent normalization of the protocols would erase these identities.
+Diagonal loss remains within the controlled family, whereas mesh error can
+move the amplitudes off the common Golden carrier.  Passing both nulls is
+necessary but not sufficient; the controlled exchange spectra and calibrated
+probabilities provide the subsequent tests.
 
 For two contraction blocks \(K\) and \(K+E\),
 \begin{equation}
 \label{eq:determinant-stability}
  |\det(K+E)-\det K|\leq3\lVert E\rVert_2.
 \end{equation}
-Indeed \(A(t)=K+tE\) is a contraction for \(0\leq t\leq1\), and
+Indeed, integrate the derivative along \(K+tE\): the trace norm of its
+adjugate is at most three because its singular values are pairwise products of
+contraction singular values.  At a balanced real control the determinant sign
+is therefore certified by
 \[
- \left|\frac{d}{dt}\det A(t)\right|
- \leq \lVert\operatorname{adj}A(t)\rVert_*
-       \lVert E\rVert_2
- \leq3\lVert E\rVert_2,
+ \lVert E\rVert_2<\frac{4}{15\sqrt5}.
 \]
-because the three singular values of the adjugate are pairwise products of
-singular values of \(A(t)\), hence at most one.  Integration gives the bound.
-The balanced sign is certified by
-\[
- \lVert E\rVert_2<\frac{4}{15\sqrt5}=0.119256\ldots .
-\]
-This is an operator-norm requirement on transfer tomography, not a
-phase-shifter specification; experimental entrywise confidence regions must
-be propagated to this norm before the gate is applied.
-
-The shot budget assumes independent Bernoulli accepted trials, ten-percent
-relative precision, a normal approximation, and simultaneous 95-percent
-coverage of all six probabilities.  It excludes source preparation,
-coupling, propagation, and detector loss; these enter only when an accepted-
-trial rate is converted to laboratory time.
-With Bonferroni allocation over six two-sided intervals, put
-\begin{equation}
-\label{eq:shot-budget}
- z=\Phi^{-1}\left(1-\frac{0.05}{12}\right),\qquad
- n(p)=\left\lceil
- \frac{z^2(1-p)}{0.1^2p}
- \right\rceil .
-\end{equation}
-The table applies this formula to each ideal probability and rounds upward.
-\begin{center}
-\begin{tabular}{lrrr}
-\toprule
-reading & probability & accepted trials & time at \(100\,\mathrm{s}^{-1}\)\\
-\midrule
-balanced fermion, each protocol & \(16/125\) & 4,742 & 0.79 min\\
-weakest calibrated boson event & \(16/3125\) & 135,250 & 22.5 min\\
-\bottomrule
-\end{tabular}
-\end{center}
-The fermionic row is a conditional design budget; the feasible precursor
-cannot collect it without the antisymmetric source.  At one accepted trial
-per second the corresponding times are \(1.32\) and \(37.6\) hours.  The
-weakest calibrated bosonic control fixes the precursor shot budget.  These
-are per-probability accepted-trial counts; a full run must multiply by the
-chosen protocols and cuts and separately budget phase samples, tomography
-repetitions, coupling loss, and detector acceptance.
+The supplemental package retains the exact decoder, compilation, accepted-
+trial formulas, and source-quality gates.  They are conditional design
+calculations rather than theorem inputs or claims of experimental performance.
 
 \subsection*{External resource dependency}
 
 The emulator of Matthews et al.~\cite{Matthews} sends an entangled resource
-through identical copies of a one-particle process.  Here direct
-three-fermion emulation requires the totally antisymmetric state of three
-photonic qutrits.  Goyal et al.~\cite{Goyal} give a linear-optical preparation
-proposal, and Piccolini et al.~\cite{PiccoliniSinglet} give a second
-interferometric proposal.  To our knowledge, no experiment has prepared and
-characterized this three-photon qutrit singlet.  The source is therefore an
-external dependency, not a component claimed here.  A demonstrated
-three-qutrit GHZ state~\cite{Hu} has different exchange symmetry and neither
-supplies the resource nor predicts its engineering performance.
+through identical copies of a one-particle process.  Direct three-fermion
+emulation here requires the totally antisymmetric state of three photonic
+qutrits.  Goyal et al.~\cite{Goyal} and Piccolini et
+al.~\cite{PiccoliniSinglet} give preparation proposals.  No preparation and
+characterization experiment was located in the bounded audit, so the source
+remains an external dependency rather than a component claimed here.  A
+demonstrated three-qutrit GHZ state~\cite{Hu} has different exchange symmetry.
 
 The value \(P_F=\det H\) assumes normalized antisymmetric input and output
-states.  In the emulator the six permutation amplitudes are combined
-coherently in one normalized antisymmetric output projection, so no factor of
-\(3!\) multiplies the stated probability.  Resource fidelity, photon
-indistinguishability, matching of the three transfer copies, and analyzer
-calibration are separate requirements.
-
-Under adversarial error models, resource quality is more restrictive than
-shot noise.  If preparation noise is an arbitrary mixture with target-state
-weight \(\eta\), an event probability changes by at most \(1-\eta\).
-Keeping the relative bias below ten percent at ideal probability \(p\)
-therefore requires \(\eta\geq1-0.1p\).
-If only the squared Uhlmann fidelity
-\[
- F_{\rm U}
- =(\operatorname{tr}\sqrt{\sqrt\rho\,\sigma\sqrt\rho})^2
-\]
-is known, trace distance bounds the probability bias by
-\(\sqrt{1-F_{\rm U}}\).  The two generic gates are
-\begin{equation}
-\label{eq:source-fidelity-gates}
- \eta\geq1-0.1p\quad\text{(mixture model)},\qquad
- F_{\rm U}\geq1-0.01p^2\quad\text{(fidelity only)}.
-\end{equation}
-At the balanced value \(p=16/125\), these become
-\(\eta\geq0.9872\) and \(F_{\rm U}\geq0.999836\).  A characterized noise model
-could relax these bounds, but the conclusion would then be model-dependent.
+states.  The six permutation amplitudes are combined coherently in one
+normalized antisymmetric projection, so no factor of \(3!\) multiplies the
+stated probability.  Resource fidelity, photon indistinguishability, matching
+of the three transfer copies, and analyzer calibration remain separate
+requirements.  The supplement records conservative mixture- and
+fidelity-based quality gates; without a characterized noise model they are
+worst-case design bounds, not performance predictions.
 
 \section{Discussion}
 
-The Golden transfer separates three levels of information.  Its singular
-values determine every intrinsic bosonic scalar.  Orienting the determinant
-lines adds the sign of the top exterior amplitude.  Fixing phase-referenced
-port frames then exposes matrix-dependent amplitudes such as the permanent.
-Antisymmetric exchange realizes the determinant amplitude, but its event
-probability discards the sign.  The precursor recovers that sign by coherent
-one-particle tomography after the laboratory frames have been compiled and
-oriented.  The Segre coordinate is therefore not an arbitrary cubic
-observable, and its sign is not claimed here as a direct many-fermion
-measurement.
+The Golden transfer separates three levels of information.  Singular values
+determine every intrinsic exchange scalar; orienting the determinant lines
+adds the sign of the top exterior amplitude; phase-referenced port frames then
+expose calibrated amplitudes such as the permanent.  Antisymmetric exchange
+realizes the determinant amplitude, but its event probability discards the
+sign.  Coherent one-particle tomography can infer that sign only after the
+laboratory frames have been compiled and oriented.
 
-The six-mode benchmark is also the only nontrivial symmetric conference case
-in which every balanced control has the same singular spectrum.  Higher
-orders retain a universal statistical envelope---the exact purity mean and
-variance---but not a universal spectrum.  This distinction is operational:
-singular statistics remain orientation-blind, while the determinant signs
-used by the calibrated decoder carry the missing relative orientation.
+The exchange landscape has two independent deformations.  Continuous real
+control moves inside a fixed Golden operator and has the balanced Boolean
+points as its unique degree-three joint optimum.  Hermitian conference phase
+moves the balanced endpoint itself: the first two moments remain fixed while
+triangle holonomy transfers weight along the exact Pareto segment.  Forgetting
+the holonomy sign changes the rigidity class from the purely imaginary class
+of ordinary three-uniform spectra to the real conference class of squared
+exchange spectra.  The averaged defect both records the mean sector transfer
+and provides a quantitative local coordinate transverse to the real orbit.
 
-The example also separates a feasible optical certification from a direct
-many-particle realization.  Current mesh and tomography technology can test
-the one-particle carrier and its bosonic shadows.  Direct photonic emulation of
-the three-fermion amplitude depends on an additional antisymmetric resource.
-The paper proves this design boundary; it does not claim a built experiment.
+The order-six real point remains exceptional in the order direction as well:
+it is the only nontrivial symmetric conference order with a cut-independent
+balanced spectrum.  Higher orders retain exact mean and variance but not a
+universal spectrum.  Finally, the optical section separates a feasible
+one-particle and bosonic certification from direct three-fermion emulation,
+which still depends on an additional antisymmetric resource.  The paper proves
+these mathematical and design boundaries; it does not claim a built device.
 
 \section*{Data availability}
 
@@ -952,11 +1061,12 @@ record.
 
 \section*{Verification}
 
-Human proofs cover the Boolean rank boundary, general rigidity, local balanced
-spectrum, symmetric functions, orbit theorem, and decoder radius.  Classical
-citations supply the design statistics; Paper~III supplies labelled
-reconstruction.  The local certificate does not re-prove either result.  It
-independently checks all twenty balanced masks, the three calibrated permanent
+Human proofs cover the orbit theorem, continuous-control reduction, Hermitian
+holonomy formulas, exact Pareto edge, squared-spectrum rigidity, averaged
+defect, local metric stability, Boolean rank boundary, and decoder radius.
+Classical citations supply the higher-order design statistics; Paper~III
+supplies labelled reconstruction.  The local certificate independently checks
+the Boolean endpoint profiles, exchange identities, calibrated permanent
 values, six sign words, full-precision netlist, and fifteen-cell compilation.
 Three atomic source bundles provide exact generators and independent replays;
 one paper-local manifest pins every load-bearing file.
@@ -1013,6 +1123,42 @@ M. Robbio, M.~G. Jabbour, and N.~J. Cerf,
 \emph{Complementarity between bosonic and fermionic many-body interferences
 with partially distinguishable particles},
 arXiv:2604.23316.
+
+\bibitem{BodmannPaulsen}
+B.~G. Bodmann and V.~I. Paulsen,
+\emph{Frames, graphs and erasures},
+arXiv:math/0406134.
+
+\bibitem{HoffmanSolazzo}
+T.~R. Hoffman and J.~P. Solazzo,
+\emph{Complex equiangular tight frames and erasures},
+arXiv:1107.2267, doi:10.1016/j.laa.2012.01.024.
+
+\bibitem{KingHomogeneous}
+E.~J. King,
+\emph{\(k\)-homogeneous equiangular tight frames},
+arXiv:2505.00160v2.
+
+\bibitem{AttasSpectral}
+M. Attas, A. Boussa\"iri, and A. Souktani,
+\emph{Characterization of \(k\)-spectrally monomorphic Hermitian matrices},
+arXiv:1907.05817v2.
+
+\bibitem{ChengUSB}
+Q. Cheng, F. Lv, and W. Sun,
+\emph{Frames of uniform subframe bounds with applications to erasures},
+doi:10.1016/j.laa.2018.05.025.
+
+\bibitem{EtTaouiConference}
+B. Et-Taoui,
+\emph{Complex conference matrices, complex Hadamard matrices and complex
+equiangular tight frames},
+arXiv:1409.5720.
+
+\bibitem{EtTaouiMakhlouf}
+B. Et-Taoui and A. Makhlouf,
+\emph{Complex skew-symmetric conference matrices},
+doi:10.1080/03081087.2021.1967848.
 
 \bibitem{GreavesSuda}
 G.~R.~W. Greaves and S.~Suda,
