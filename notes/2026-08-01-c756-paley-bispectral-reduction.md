@@ -219,6 +219,59 @@ inside every Frobenius Jacobi block, a sign-valued skew square root with
 multiplicative translation.  The coset Weil argument in the Segre report
 then excludes every nonidentity Frobenius power.
 
+In fact, it is unnecessary to classify every block.  Let \(\rho\) be one
+faithful character of the cyclic group \(S\), and suppose only that its
+\(B\)-eigenvalue has the expected collision class:
+
+\[
+ \beta_\sigma=\beta_\rho
+ \quad\Longrightarrow\quad
+ \sigma=\rho^{p^j}\quad(0\le j<n). \tag{8}
+\]
+
+If \(P\) commutes with \(B\), then \(P\rho\) lies in the span of those
+Frobenius conjugates.  On the other hand, \(P\rho=\rho\circ f^{-1}\) has
+absolute value one at every point of \(S\).  Write
+
+\[
+ P\rho=\sum_{j=0}^{n-1}a_j\rho^{p^j}.
+\]
+
+The exponents \(\{p^j:0\le j<n\}\) form a Sidon set modulo
+\(m=(p^n-1)/2\).  Indeed,
+
+\[
+ |p^i-p^j|<p^{n-1}<m,
+\]
+
+so a congruence
+\(p^i-p^j\equiv p^k-p^\ell\pmod m\) is an equality of integers; its
+\(p\)-adic valuation and then its quotient force
+\((i,j)=(k,\ell)\).
+
+Expanding \(|P\rho|^2=1\) in characters, the Fourier coefficient at
+\(\rho^{p^i-p^j}\) is therefore the single product
+\(a_i\overline{a_j}\).  Every such coefficient with \(i\ne j\) vanishes,
+so only one \(a_j\) is nonzero.  Hence
+
+\[
+ \rho(f^{-1}(s))=a\,\rho(s)^{p^j}.
+\]
+
+Faithfulness of \(\rho\) gives
+
+\[
+ f^{-1}(s)=c s^{p^j}.
+\]
+
+This proves:
+
+**Proposition (one-block rigidity).**  The single primitive-character
+noncollision statement (8) implies the full multiplication--Frobenius
+classification of every local Paley automorphism, without classifying any
+other eigenspace.  Combined with the mixed-sign Weil bound and the scalar
+Hasse argument, (8) closes the complete saturated-external branch.
+
 ## 5. Gaussian simplex and Pfaffian obstruction
 
 The forced square has an arithmetic consequence that does not require simple
@@ -232,7 +285,7 @@ Every off-diagonal entry of \(W\) is one of \(\{\pm1,\pm i\}\), its diagonal
 is zero, and \(W^T=-W\).  Since \(B\) and \(K\) commute, (3) gives
 
 \[
- WW^*=mI-J. \tag{8}
+ WW^*=mI-J. \tag{9}
 \]
 
 Thus the rows of \(W\) are a quaternary regular simplex: they have sum zero,
@@ -245,7 +298,7 @@ therefore gives
 
 \[
  \left|\det W_{\widehat a,\widehat a}\right|
-   =m^{(m-3)/2}. \tag{9}
+   =m^{(m-3)/2}. \tag{10}
 \]
 
 The principal minor has even size and is skew, so
@@ -299,6 +352,11 @@ arithmetic subfamily before any Jacobi-spectrum analysis and turns every
 remaining solution into a quaternary simplex with an Eulerian real/imaginary
 edge decomposition.
 
+The Tao compression goes further: even “classify the Frobenius blocks” is
+overbuilt.  The constant-modulus image of one faithful character and the Sidon
+property of its Frobenius exponents reduce the whole automorphism theorem to
+one primitive Jacobi-eigenvalue collision class.
+
 The Tao-style next question is not “which permutations preserve the local
 tournament?” but “can a nonsemilinear permutation produce a sign-valued
 square root of the fixed operator in (3)?”  The latter remembers both Paley
@@ -317,6 +375,7 @@ No manuscript files were edited.  No unrestricted novelty claim is made.
 | Every solution yields a quaternary regular simplex | settled | \(W=(B+iK)/(1+i)\) and \(WW^*=mI-J\) |
 | Fields with \(q\equiv3\pmod8\) and nonsum-of-two-squares \(m\) | settled negatively | Gaussian principal-Pfaffian norm |
 | Both phase-color graphs are Eulerian | settled | separate the zero row sums of \(B\) and \(K\) |
-| The local Paley spectrum appears simple in prime fields | open uniformly | prove distinctness of the Jacobi values \(\beta_\rho\), likely by Stickelberger valuation recovery |
-| Frobenius is the only forced source of spectral multiplicity in extension fields | expected, not proved | classify sign-valued square roots inside each Jacobi block |
+| Frobenius exponents form a Sidon set and force one-term unit-modulus Fourier support | settled | elementary size and \(p\)-adic valuation argument |
+| The primitive Jacobi eigenvalue has only its Frobenius collisions | open uniformly | prove (8), likely by Stickelberger valuation recovery |
+| Other Jacobi blocks may have extra collisions | no longer load-bearing | one-block rigidity bypasses them |
 | Whether a nonsemilinear signed matching solution exists | open | exact owner: the next C756 pass |

@@ -84,6 +84,9 @@ be strengthened to signed-monomial Paley rigidity.  The fifth pass reduces the p
 branch to distinctness of explicit Jacobi-sum eigenvalues of \(B\), and the extension-field
 branch to semilinear rigidity inside the forced Frobenius spectral blocks.  Either statement
 classifies the perfect-matching solutions forced by \(AM+MA=-2I\) and the two vector equations.
+In fact one faithful character suffices: if its Jacobi eigenvalue collides only along its
+Frobenius orbit, the Sidon property of the Frobenius exponents and a constant-modulus Fourier
+argument force the whole matching permutation to be multiplication--Frobenius.
 The alternative saturated route
 is a structure-sensitive blocking bound for the internal node set. Outside saturation, the
 type-aware spare-line and general-position character-sum routes remain live.
