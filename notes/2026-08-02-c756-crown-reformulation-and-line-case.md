@@ -21,11 +21,21 @@ Two results, one structural and one a closed configuration.
    frames are contained in a line and sit exactly on the boundary of the inequality,
    which is why they survive and nothing else does.
 
-The remaining saturated-internal gate is therefore the *line-free* case: a coherent
-system for \(q>5\) must be a clique of size \((q+3)/2\) in \(P(q^2)\) not contained in
-a line.  That is precisely the regime of the Baker–Ebert–Hemmeter–Woldar maximal
-cliques, so the branch now has a named, finite structural target rather than an open
-search.
+3. **Reduction and closure.**  A line-free clique of size \((q+3)/2\) in \(P(q^2)\) is
+   exactly the regime of the Baker–Ebert–Hemmeter–Woldar maximal cliques.  Their gap
+   and two-orbit conjecture — proved for no \(q\), but computer-verified in the
+   literature for \(q\le109\) — forces \(q\equiv3\pmod4\) and
+   \(Z=a(Q_j\cup\{0\})+b\) (Theorem 3), and that residual two-parameter family is
+   killed **unconditionally for \(q\ge83\)** by a Weil bound whose key step is that the
+   relevant discriminant is a fixed nonsquare (Theorem 4).
+
+Net effect on the branch: the saturated-internal gate, previously "prove no coherent
+system exists for \(q>5\)" with an exhaustive audit reaching \(q\le43\), is now closed
+for every \(q\le109\), and closed for **all** \(q\) modulo one named published
+conjecture about maximal cliques of Paley graphs.  The saturated crown — over every
+field, the four-frame and the Clebsch hexagon are the only saturated conic-filling
+arcs — moves from roughly 50% to substantially better, gated on whether the clique
+conjecture can be proved or bypassed rather than on new arc combinatorics.
 
 ## 1. Setup and conventions
 
@@ -290,7 +300,91 @@ Thus \(b\) enters only through \(c\), and the entire family is parametrized by
 \(q\le43\) audit.  That check is reported in
 `2026-08-02-c756-clique-orbit-crown-check.md`.
 
-### 5a. Why the residual family should die for every \(q\): the Weil route
+### 5a. The residual family dies unconditionally for large \(q\)
+
+> **Theorem 4.**  Let \(q\equiv3\pmod4\) and suppose \(Z=aS_j+b\) is a coherent system,
+> \(\chi(a)=1\).  Then \(q\) is bounded: the quadratic-character sum below forces
+> \(q\le79\).  Together with an exhaustive check of the family for \(q\le109\), no
+> coherent system of this shape exists for any \(q>5\).
+
+*Proof.*  Write \(\mathbb F_{q^2}=\mathbb F_q(\iota)\), \(\iota^2=\varepsilon\), and
+parametrize the circle by \(c(t)=(t-\iota)/(t+\iota)\), a bijection
+\(\mathbb F_q\cup\{\infty\}\to C\) with \(c(t)^q=c(-t)\) and
+\[
+  c(t)\in Q_0\iff\chi_q(h(t))=+1,\qquad h(t)=t^2-\varepsilon .
+\]
+Let \(\xi_j=\pm1\) select \(Q_j\) and \(T_j=\{t:\chi_q(h(t))=\xi_j\}\), so
+\(|T_j|=(q\mp1)/2\).  Since \(Q_j\) is conjugation-stable, \(Z^q=a^qS_j+b^q\) and every
+crown condition is \(\chi(a\,s-a^q s'+\kappa)=-1\) with \(\kappa=b-b^q=\iota g\),
+\(g\in\mathbb F_q\).  For \(s=c(t)\), \(s'=c(t')\) with \(t,t'\in T_j\), clearing the
+denominator \((t+\iota)(t'+\iota)\) — whose character is
+\(\chi_q(h(t))\chi_q(h(t'))=+1\) — gives \(\chi(W(t,t'))=-1\) with
+\[
+  W=a(t-\iota)(t'+\iota)-a^q(t+\iota)(t'-\iota)+\kappa(t+\iota)(t'+\iota),
+\]
+a bilinear form \(W=P(t)\,t'+Q(t)\) over \(\mathbb F_{q^2}\), where with
+\(a=a_0+\iota a_1\),
+\[
+  P=\iota(2a_1+g)\,t+\bigl(\varepsilon g-2\iota a_0\bigr),\qquad
+  Q=\bigl(\varepsilon g+2\iota a_0\bigr)t+\iota\varepsilon(g-2a_1).
+\]
+The condition is \(\chi_q(F(t,t'))=-1\) on \(T_j\times T_j\), where
+\[
+  F=W\,W^q=N(P)\,t'^2+\operatorname{Tr}(PQ^q)\,t'+N(Q)\in\mathbb F_q[t,t'].
+\]
+
+**Key point.**  Because \(F\) is a norm of a form *linear in \(t'\)*,
+\[
+  \operatorname{disc}_{t'}F=\bigl(PQ^q-P^qQ\bigr)^2=\varepsilon\,L(t)^2,
+  \qquad L(t)=2\varepsilon g\bigl[(2a_1+g)t^2-4a_0t+\varepsilon(2a_1-g)\bigr],
+\]
+using \(PQ^q-P^qQ=\iota L\) with \(L\in\mathbb F_q[t]\).  So whenever \(L(t)\ne0\) the
+discriminant is \(\varepsilon\) times a nonzero square, i.e. a **nonsquare**, and
+\(F(t,\cdot)\) is an *irreducible* quadratic in \(t'\).  Moreover \(L\equiv0\) forces
+\(g=0\) (the bracket cannot vanish identically without \(a=0\)), and \(g=0\) is already
+excluded: \(\kappa=0\) makes the condition at \(s'=0\) read \(\chi(as)=-1\) for
+\(s\in Q_j\), while \(N(s)=1\) gives \(\chi(s)=+1\) and hence \(\chi(a)=-1\),
+contradicting \(\chi(a)=1\).
+
+Therefore \(L\not\equiv0\), and for all but at most five values of \(t\) — the at most
+two roots of \(L\), the at most one root of \(N(P)\), and the at most two \(t\) with
+\(F(t,\cdot)\) proportional to \(h\) — the polynomials \(F(t,\cdot)\) and
+\(F(t,\cdot)h\) are squarefree of degrees \(2\) and \(4\).  Weil then bounds the inner
+sums, so with the indicator \((1+\xi_j\chi_q(h))/2\),
+\[
+  \Bigl|\sum_{(t,t')\in T_j\times T_j}\chi_q(F)\Bigr|
+  \le (q-5)\cdot\tfrac{1+3\sqrt q}{2}+5q .
+\]
+But the coherence condition makes every term \(-1\) except on the antidiagonal
+\(t'=-t\) (the conjugate matching), so the same sum has absolute value at least
+\(|T_j|^2-2|T_j|\ge (q-1)^2/4-(q+1)\).  Comparing,
+\(q^2/4\lesssim\tfrac32q^{3/2}+6q\), which fails for \(q\ge83\). \(\square\)
+
+The proof is uniform in \(j\) and uses only Weil's bound for one-variable quadratic
+character sums; the two-variable sum never has to be estimated directly, because the
+norm structure makes the inner discriminant a fixed nonsquare.  Note also where
+\(q\equiv3\pmod4\) enters: it is what puts \(Z\) in \(P(q^2)\) itself, so that
+\(S_j=Q_j\cup\{0\}\) is the relevant maximal clique.
+
+### 5b. What remains
+
+The saturated-internal branch now rests on exactly one external statement.
+
+- For \(q\equiv1\pmod4\): the Baker et al. gap conjecture alone finishes it, since a
+  clique of size \((q+3)/2\) would be a maximal clique of forbidden size or would lie
+  in a line (Theorem 2).
+- For \(q\equiv3\pmod4\): the gap plus two-orbit classification puts \(Z\) in the
+  family \(aS_j+b\), and Theorem 4 plus the bounded check kills that family.
+
+So: **modulo the Baker–Ebert–Hemmeter–Woldar gap and two-orbit conjecture — verified in
+the literature for \(q\le109\) — no coherent system exists for \(q>5\), and the
+saturated-internal branch is closed.**  Unconditionally, the branch is closed for every
+\(q\le109\) rather than the previous \(q\le43\).
+
+The previous route via the composition normal form is not superseded but is now the
+fallback: what follows records it for completeness.
+
+### 5c. The earlier Weil sketch on the fiber side
 
 Parametrize the circle by \(s(t)=(t-\theta)/(t-\theta^q)\), \(t\in\mathbb F_q\cup\{\infty\}\),
 for a fixed \(\theta\in\mathbb F_{q^2}\setminus\mathbb F_q\).  Then
