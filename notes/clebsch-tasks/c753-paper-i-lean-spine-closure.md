@@ -37,6 +37,15 @@ at `RelativeConicArcs/Q11RigiditySpine.lean`; it derives Dye equality only after
 that upper bound.  It remains untracked until the serialized two-module build
 at `~/.cache/othello-lean-build/run-20260802-040636-81ccef51`, currently queued
 behind a foreign Lean owner, supplies its first dependency-ordered validation.
+The working R2 source has since been strengthened so the conditional conic-type
+interface carries an actual nonzero `QuadraticForm` and its exact projective
+zero locus, rather than an arbitrary finite point set; that strengthening is
+uncommitted pending the same gate.  R4 is staged, also untracked, at
+`RelativeConicArcs/Q11CodeRigidityBridge.lean`; it reuses the proved canonical
+ray normalization to construct the `Fin 133`--projective-point equivalence and
+adds symbolic uncovered/distance-three, monomial-kernel, affine-coset, and
+minimum-leader bridges.  Neither staged module is release evidence before its
+dependency-ordered elaboration and axiom review pass.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
