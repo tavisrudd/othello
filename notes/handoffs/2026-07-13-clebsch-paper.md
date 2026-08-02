@@ -249,8 +249,8 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 
 | task | state | next gate |
 |---|---|---|
-| [C791 — Paper I balanced-spectrum consequence](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) | queued after C753; coordinate with C762 | add only the recovered-object consequence and audited attribution, then synchronize theorem/trust maps and the standalone mirror |
-| [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | queued; C788 theorem and literature boundary complete | cold-test compact proof versus sourced corollary, preserve the arithmetic--operator--harmonic line, and refresh the forward release surface |
+| [C791 — Paper I balanced-spectrum consequence](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) | queued after C753; coordinate with C762 | freeze baseline, red-team the inference boundary, and blind-test the bounded corollary before synchronizing trust maps and the standalone mirror |
+| [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | queued; strengthened C788 theorem complete | consume C788's design-literature verdict, red-team classification and design proofs, blind-test baseline versus theorem-home and compact variants, update Lean for the selected structural statement, and refresh the forward release surface |
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | unblocked; C714 synchronized release gates complete | with explicit publication authority, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
 | [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |

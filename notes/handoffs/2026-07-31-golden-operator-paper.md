@@ -478,6 +478,18 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C793 is queued after C792 freezes Paper III's theorem surface.  It preserves
+the selected hierarchy-first Golden quantum-statistics manuscript as baseline
+A and tests a rigidity-and-design variant B, including the universal
+higher-order purity mean and variance, through mathematical-physics and
+quantum-optics red teams, a blind PRA comparison, and a fresh selected-PDF
+referee round.  C788's follow-up design-literature verdict is an upstream
+wording gate.  Cross-paper identity checks may use the other paper
+repositories; public access is out of scope.  Task card:
+`notes/golden-tasks/c793-golden-quantum-balanced-rigidity-ab.md`.  The shared
+allocation plan is
+`notes/2026-08-02-balanced-spectrum-three-paper-integration-plan.md`.
+
 C789 is complete.  A context-free reader selected the hierarchy-first variant
 B over baseline A, A-minus versus B-plus.  The selected twelve-page manuscript
 is `golden-quantum-statistics-observable-hierarchy-selected`; it retains the

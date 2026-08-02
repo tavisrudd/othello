@@ -122,6 +122,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
+- **C793 `[golden]` [QUEUED AFTER C792; FROZEN-BASELINE A/B]** — test the selected hierarchy-first Golden quantum-statistics manuscript against a rigidity-and-design variant that promotes order six as the unique nontrivial conference case with control-independent balanced exchange spectrum and gives the universal higher-order purity mean/variance law; retain the Golden naming bridge and local six-mode derivation, consume C788's follow-up design-literature verdict, source the general theorem to Paper III, run mathematical-physics and quantum-optics red teams plus blind PRA A/B and final cold-referee gates, export only descriptive public-safe filenames, and preserve the honest antisymmetric-source boundary → `notes/golden-tasks/c793-golden-quantum-balanced-rigidity-ab.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`
