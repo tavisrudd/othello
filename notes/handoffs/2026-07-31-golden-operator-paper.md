@@ -543,7 +543,14 @@ at most $(v^2+9v-50)/2$ marked tests reconstruct a switching representative
 in $O(v^2)$ time, against the binary-query lower bound
 $(v^2-3v-4)/2$; explicit triple output costs $\Theta(v^3)$.  Conference
 density makes randomized anchor discovery constant expected cost tending to
-four determinant probes.  Report and audit:
+four determinant probes.  Its ej3 continuation uses the exact determinant
+gap $-3$ versus $5$ to obtain threshold robustness, an eight-percent
+entrywise perturbation guarantee, and logarithmic repetition overhead under
+independent noise.  The resulting binary-channel family has KL and Chernoff
+geometry exactly proportional to certificate Hamming distance, giving direct
+active-learning, experimental-design, finite-population-statistics,
+sequential-testing, and gauge-invariant-ML translations; adversarial
+certificate distance remains open.  Report and audit:
 `notes/2026-08-02-c794-aligned-design-faithfulness.md` and
 `notes/2026-08-02-c794-aligned-design-faithfulness-literature-audit.md`.
 

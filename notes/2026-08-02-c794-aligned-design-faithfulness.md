@@ -233,6 +233,122 @@ scans to quadratic local tests.  This theorem does **not** yet improve generic
 real matrix completion, continuous phase retrieval, or noisy synchronization:
 those require a stability theorem and a soft-data decoder.
 
+### ej3: noise margins, information geometry, and active learning
+
+In the conference case the binary aligned answer has a built-in analog
+margin.  For a zero-diagonal symmetric $4\times4$ matrix with off-diagonal
+entries $a,b,c,d,e,f$, its determinant is
+
+\[
+ a^2f^2+b^2e^2+c^2d^2
+ -2(abef+acdf+bcde).
+\]
+
+At a sign matrix the aligned and nonaligned values are respectively $-3$ and
+$5$.  Thresholding at 1 therefore tolerates any direct determinant error of
+magnitude less than 4.
+
+There is also an entrywise guarantee.  If every off-diagonal sign entry is
+perturbed by at most $\varepsilon$ and the zero diagonal is retained, every
+partial derivative of the displayed polynomial is at most
+$6(1+\varepsilon)^3$ in magnitude along the connecting segment.  Hence
+
+\[
+ |\Delta\det|\leq36\varepsilon(1+\varepsilon)^3.
+\]
+
+The threshold decoder is certified whenever
+$9\varepsilon(1+\varepsilon)^3<1$; in particular, $\varepsilon\leq0.08$
+is a simple rigorous sufficient bound.  This is a worst-case entrywise bound,
+not a typical-noise estimate.
+
+For repeated noisy determinant measurements the sample complexity is also
+explicit.  If a thresholded answer is independently flipped with probability
+$p<1/2$, majority vote over $r$ repetitions makes all $q$ adaptive answers
+correct with probability at least $1-\delta$ whenever
+
+\[
+ r\geq\frac{2\log(q/\delta)}{(1-2p)^2}.
+\]
+
+Thus the full noisy acquisition cost is
+$O(n^2\log(n/\delta)/(1-2p)^2)$.  If the determinant error itself is
+$\sigma$-sub-Gaussian, averaging $r$ repetitions and using the margin four
+gives the sufficient bound
+
+\[
+ r\geq\frac{\sigma^2}{8}\log(q/\delta).
+\]
+
+These repetition guarantees handle stochastic measurement noise.  They do
+not give adversarial error correction: that requires a lower bound on the
+Hamming distance between distinct aligned certificates in the promised input
+class.
+
+The same channel gives an exact discrete information geometry.  Let
+$a(\tau)$ be any fixed nonadaptive aligned-answer vector and transmit each
+coordinate through a binary symmetric channel of crossover $p$.  If two
+two-graphs differ in $h$ queried answers, the product distributions satisfy
+
+\[
+ D_{\rm KL}(P_\tau\Vert P_{\tau'})
+ =h(1-2p)\log\frac{1-p}{p},
+\]
+
+and their Chernoff information is
+
+\[
+ h\left[-\log\!\left(2\sqrt{p(1-p)}\right)\right].
+\]
+
+Thus Hamming geometry of aligned designs is exactly statistical
+distinguishability geometry for the natural noisy observation model.  Under
+additive Gaussian determinant noise of variance $\sigma^2$, each differing
+query contributes $32/\sigma^2$ to KL divergence because the two means are
+eight apart.
+
+This has three concrete translations beyond conference-matrix reconstruction.
+
+1. **Active concept learning.**  With a known anchor the concept class has
+   $2^{3m+\binom m2}$ members.  The adaptive decoder is a zero-error
+   twenty-questions scheme whose transcript length differs from entropy by
+   only $6m+1$ bits.  It is therefore asymptotically capacity-achieving.
+2. **Gauge-invariant machine learning.**  The aligned four-set features are a
+   complete labeled invariant of a signed complete graph under vertex
+   switching, up to global sign reversal.  They can serve as an exact
+   higher-order feature layer, kernel key, or supervision target for signed
+   networks.  The sparse inverse matters when features are acquired on demand;
+   it does not accelerate a model that already receives the full sign matrix.
+3. **Information-geometric experimental design.**  Query choice directly
+   controls KL and Chernoff separation through Hamming distance.  This turns
+   sensor selection into choosing four-set tests that split the current
+   version space, with the C794 decoder providing a near-entropy benchmark for
+   learned or greedy policies.
+4. **Exact finite-population statistics.**  The balanced-half block count
+   $c_T$ is a degree-four finite-population U-statistic.  Its conference-null
+   mean and variance are switching-class independent, while C794's
+   triple-union formula shows that its third cumulant is the first
+   design-unforced method-of-moments diagnostic.  Standardized skewness can
+   therefore test higher block-intersection structure after the universal
+   location and scale have been removed; at order 14 it is exactly
+   $-8/\sqrt{105}$.
+5. **Sequential quality control.**  Under the binary or Gaussian channel
+   above, likelihood ratios add over queried four-sets.  Sequential
+   probability-ratio tests can stop as soon as the accumulated evidence
+   separates a promised conference model from a specified alternative, while
+   held-out four-sets provide a direct goodness-of-fit check for the decoded
+   switching representative.
+6. **Signed graphical models.**  In binary signed Ising or correlation
+   networks, vertex sign changes are gauge transformations and triangle
+   products are frustration observables.  The aligned layer reconstructs the
+   labeled frustration pattern up to global reversal.  It identifies sign
+   structure, not interaction magnitudes or a partition function.
+
+For permutation-unlabelled ML, C794 alone is not a complete graph-isomorphism
+invariant: one must select an anchor canonically or combine the decoder with a
+canonical-labelling step.  For continuous weights, a differentiable soft
+surrogate and a stability theorem remain necessary.
+
 ## Sharp fibres below seven
 
 The same cut calculation gives a structural explanation of every exceptional
@@ -438,6 +554,16 @@ No manuscript edit is authorized by this task.
   four-sets meeting it in at least two points is already faithful.  It gives
   an explicit $O(n^2)$ decoder, and conference density makes randomized
   anchor discovery constant expected cost.
+- **Settled by ej3:** the conference determinant gap gives an exact threshold
+  margin, an eight-percent worst-case entrywise perturbation guarantee, and
+  logarithmic repetition overhead under stochastic noise.  The induced
+  binary-channel model turns certificate Hamming distance into exact KL and
+  Chernoff geometry and identifies active learning, finite-population
+  inference, sequential testing, and gauge-invariant ML as literal, rather
+  than metaphorical, transfers.
+- **Open, robustness gate:** adversarial correction still needs the minimum
+  Hamming distance of the promised conference certificate class; stochastic
+  repetition does not settle it.
 - **Open, evidence gap:** no audited pair of inequivalent conference
   switching classes at one order has yet been shown to have distinct third
   moments.  The full triple-union profile is the sharper candidate; a future
