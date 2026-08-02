@@ -478,6 +478,15 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C825 is active as a delegated publication-grade literature/trust sweep for the
+strongest integrated single-paper package.  It audits the continuous-control,
+Hermitian mixed-plane Pareto/single-sector rigidity, defect formulas, and C818
+stability theorem claim by claim under
+`notes/literature-audit-conventions.md`, including full-text and three-graph
+coverage where the negative depends on a citing set.  It authorizes no
+manuscript edit.  Charter:
+`notes/golden-tasks/c825-integrated-exchange-landscape-literature-trust-sweep.md`.
+
 C818 is complete with no manuscript edit.  It proves the classification-free
 stability bounds
 `d_R(C)^2 >= (10/3) delta(C)` globally and
