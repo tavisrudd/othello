@@ -2051,8 +2051,17 @@
       "last": 770,
       "purpose": "C765 quantum-statistics companion: theorem, exact results, literature, experiment, and submission gates",
       "sequence": 228
+    },
+    {
+      "count": 1,
+      "first": 771,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 771,
+      "purpose": "cold referee submission round 1 for Golden quantum-statistics PRA package",
+      "sequence": 229
     }
   ],
-  "next_id": 771,
+  "next_id": 772,
   "schema": "codex-task-id-allocations-v1"
 }
