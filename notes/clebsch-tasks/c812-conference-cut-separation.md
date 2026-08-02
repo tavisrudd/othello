@@ -1,7 +1,22 @@
 # C812 — Higher cut moments as switching-class separators
 
 **Lane:** `clebsch`  
-**Status:** queued; mathematics only; cheap falsifiers first; paper promotion excluded
+**Status:** complete; scalar third moment separates all four first-order
+classes; mathematics only; paper promotion excluded
+
+## Outcome
+
+Orders \(6,10,14,18\) are unique, order \(22\) is impossible, and order
+\(26\) has exactly four conference switching classes. The fifteen public
+\((25,12,5,6)\) descendants cluster as \(4+1+8+2\), and their exact centred
+third aligned-block cut moments take four pairwise distinct rational values.
+Thus the cheapest design-unforced scalar is already complete on the first
+multi-class order; the triple-union profiles certify it, and no full cut
+histogram is needed. The quotient Hamming distance among the four aligned
+designs remains a separate canonical-alignment problem.
+
+Full report and reproducible evidence:
+`notes/2026-08-02-c812-conference-cut-separation.md`.
 
 ## Objective
 
