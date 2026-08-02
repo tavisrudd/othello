@@ -2375,8 +2375,17 @@
       "last": 825,
       "purpose": "publication-grade literature and trust sweep for integrated Golden exchange-landscape paper package",
       "sequence": 264
+    },
+    {
+      "count": 1,
+      "first": 826,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 826,
+      "purpose": "plan queue and implement integrated theorem-first Golden exchange-landscape paper",
+      "sequence": 265
     }
   ],
-  "next_id": 826,
+  "next_id": 827,
   "schema": "codex-task-id-allocations-v1"
 }
