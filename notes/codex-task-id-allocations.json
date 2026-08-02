@@ -2312,8 +2312,17 @@
       "last": 814,
       "purpose": "Golden quantum-statistics math ceilings: robust and unlabelled inverse, higher moments, continuous controls, and generalized conference classes",
       "sequence": 257
+    },
+    {
+      "count": 2,
+      "first": 815,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 816,
+      "purpose": "C809 follow-ups: Lean formalization of the four-shadow recognition theorem and Paper III literature-audited integration with fresh cold read",
+      "sequence": 258
     }
   ],
-  "next_id": 815,
+  "next_id": 817,
   "schema": "codex-task-id-allocations-v1"
 }
