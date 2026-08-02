@@ -2114,8 +2114,17 @@
       "last": 785,
       "purpose": "qudit general p-power sector, weighted-t diagonal LP, affine-twisted classification extension, and beyond-diagonal RM(1,4) search",
       "sequence": 235
+    },
+    {
+      "count": 2,
+      "first": 786,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 787,
+      "purpose": "explicit stability threshold via higher moments, and party-count-independent intertwiner stability",
+      "sequence": 236
     }
   ],
-  "next_id": 786,
+  "next_id": 788,
   "schema": "codex-task-id-allocations-v1"
 }
