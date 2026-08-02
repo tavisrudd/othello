@@ -80,8 +80,10 @@ is exactly the single-qudit Clifford condition.
 \begin{corollary}[Full-Weyl marginal-cover rigidity]
 \label{cor:full-weyl-cover}
 Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be \(n\)-qudit states and
-suppose a product unitary, after a party relabelling, carries
-\(\lvert\psi\rangle\) to \(\lvert\phi\rangle\) up to phase.  If every
+suppose a product unitary carries \(\lvert\psi\rangle\) to
+\(\lvert\phi\rangle\) up to phase, any party permutation having first been
+absorbed by relabelling \(\lvert\phi\rangle\), so that the two states are
+indexed by the same parties.  If every
 party belongs to a set \(S\) of at least three parties for which both
 reduced operators \(\rho^\psi_S\) and \(\rho^\phi_S\) are full-Weyl
 diagonal, then every local factor is Clifford.
@@ -93,6 +95,206 @@ operators on each chosen \(S\).  Apply
 Proposition~\ref{prop:full-weyl-marginal}; the chosen sets cover all
 parties.
 \end{proof}
+
+\subsection{Partial marginals and the recognition group}
+\label{subsec:recognition}
+
+The two statements just proved use the whole local Weyl basis on a single
+party set.  That is more than the mechanism needs, and more than most
+states supply.  We record here what a marginal carrying fewer Weyl terms
+still forces, and organize the consequences into one invariant.  The
+generality costs nothing: the arguments below use only that the labels form
+a finite abelian group on which Weyl operators multiply additively up to
+phase.
+
+Call an operator on \(r\) parties \emph{partial-Weyl diagonal} if there are
+a finite index set \(P\) with a distinguished element \(0\), injections
+\(f_i:P\to\F_q^2\) with \(f_i(0)=0\), and nonzero coefficients, for which
+\[
+ R=\sum_{v\in P}\lambda_v\bigotimes_{i=1}^{r}W_{f_i(v)},
+ \qquad \lambda_v\ne0.
+\]
+Write \(N=|P|\).  The full-Weyl condition \((3.2)\) is the case
+\(N=q^2\), where the injections are forced to be bijections.
+
+\begin{proposition}[Partial-Weyl marginal criterion]
+\label{prop:partial-weyl-marginal}
+Let \(R\) and \(R'\) be partial-Weyl diagonal operators on the same
+\(r\) parties with index sets of the same size \(N\geq2\), possibly with
+different index sets, injections, and coefficients, and suppose
+\[
+ R'=(U_1\otimes\cdots\otimes U_r)R(U_1\otimes\cdots\otimes U_r)^\dagger .
+\]
+Assume \(r\geq3\), or \(N=2\).  Then for each \(i\), conjugation by
+\(U_i\) carries every \(W_{f_i(v)}\) to a phase times a Weyl operator, and
+induces a bijection \(f_i(P)\to f_i'(P')\) fixing \(0\).
+\end{proposition}
+
+\begin{proof}
+Suppose \(r\geq3\).  Let \(E_i\) be the span of
+\(\{W_{f_i(v)}:v\in P\}\) inside the single-party Hilbert--Schmidt space
+and \(E_i'\) the span of \(\{W_{f_i'(v')}:v'\in P'\}\).  Both have
+dimension \(N\), because the Weyl operators are linearly independent and
+the injections are injective, and the rescaled operators
+\(q^{-1/2}W_v\) are orthonormal.  All \(N\) coefficients of \(R\) are
+nonzero, so by the rank computation in the proof of
+Lemma~\ref{lem:diagonal-axes} the smallest subspace of factor \(i\)
+supporting \(R\) is \(E_i\), and likewise for \(R'\) and \(E_i'\); hence
+the product of the conjugations carries \(E_i\) onto \(E_i'\).  Now apply
+Lemma~\ref{lem:diagonal-axes} to the two tensors in
+\(E_1\otimes\cdots\otimes E_r\) and \(E_1'\otimes\cdots\otimes E_r'\).
+Its proof uses only \(r\geq3\), nonzero coefficients, and orthonormal
+bases, never \(N=q^2\).  The maps are therefore monomial in the displayed
+bases, and each scalar is a phase because conjugation is unitary for the
+Hilbert--Schmidt inner product.  The identity axis is fixed, so the
+bijection fixes \(0\).
+
+Suppose instead \(N=2\), with \(R=\lambda_0I+\lambda_1\bigotimes_iW_{f_i(1)}\)
+and \(R'=\lambda_0'I+\lambda_1'\bigotimes_iW_{f_i'(1)}\).  Conjugation
+fixes the identity, so comparing traces gives \(\lambda_0=\lambda_0'\);
+subtracting leaves an equality of nonzero product operators, whose tensor
+factorization gives
+\(U_iW_{f_i(1)}U_i^\dagger=c_iW_{f_i'(1)}\) with \(\prod_ic_i=\lambda_1'/\lambda_1\),
+and each \(c_i\) is a phase by unitarity.
+\end{proof}
+
+Fix a product unitary carrying \(\lvert\psi\rangle\) to \(\lvert\phi\rangle\)
+up to phase, after absorbing any party permutation by relabelling
+\(\lvert\phi\rangle\).  For each party \(i\) put
+\[
+ \Lambda_i=\{a\in\F_q^2:\ U_iW_aU_i^\dagger\in\mathbb C^\times W_b
+   \text{ for some }b\},
+\]
+the \emph{recognition group} at \(i\).
+
+\begin{lemma}[Recognition group]\label{lem:recognition-group}
+\(\Lambda_i\) is a subgroup of \(\F_q^2\), the induced map \(a\mapsto b\)
+is an injective additive homomorphism, and \(U_i\) is Clifford if and only
+if \(\Lambda_i=\F_q^2\).
+\end{lemma}
+
+\begin{proof}
+If \(U_iW_aU_i^\dagger=\alpha W_{a'}\) and \(U_iW_bU_i^\dagger=\beta W_{b'}\),
+then \(W_aW_b\) is a phase times \(W_{a+b}\), so conjugating that product
+shows \(U_iW_{a+b}U_i^\dagger\) is a scalar times \(W_{a'+b'}\).  Hence
+\(\Lambda_i\) is closed under addition and the induced map is additive; it
+is injective because distinct labels have distinct projective axes.  If
+\(\Lambda_i=\F_q^2\) the induced map is an injective endomorphism of a
+finite group, hence bijective, so conjugation permutes all projective Weyl
+axes, which is the Clifford condition.  The converse is immediate.
+\end{proof}
+
+At \(q=2\) the subgroup property is vacuous, since every subset of
+\(\F_2^2\) containing \(0\) and one further element is already a subgroup;
+that \(\Lambda_i\) is nontrivial at every party of a fully entangled qubit
+stabilizer state is a theorem of Gross and Van den Nest
+\cite{GrossVanDenNest2008}.  The content below is what happens when
+\(\Lambda_i\) is neither trivial nor everything, which requires
+\(q>2\).
+
+\begin{corollary}[Generation criterion]\label{cor:recognition-generation}
+Suppose that for each party \(i\) there is a family of party sets
+containing \(i\), each with at least three parties or with a two-element
+index set, such that \(\rho^\psi_S\) and \(\rho^\phi_S\) are partial-Weyl
+diagonal with index sets of equal size.  If the labels recovered at \(i\)
+over that family generate \(\F_q^2\), then \(U_i\) is Clifford.
+\end{corollary}
+
+\begin{proof}
+Partial trace gives a product-unitary equivalence of the two reduced
+operators on each set.  Proposition~\ref{prop:partial-weyl-marginal} places
+each recovered label in \(\Lambda_i\), and
+Lemma~\ref{lem:recognition-group} closes \(\Lambda_i\) under addition and
+converts \(\Lambda_i=\F_q^2\) into the Clifford property.
+\end{proof}
+
+Corollary~\ref{cor:full-weyl-cover} is the case of one set per party with
+\(N=q^2\), where generation is automatic.  For stabilizer states the
+supply of usable sets is exactly the minimal supports.
+
+\begin{lemma}[Minimal supports carry partial-Weyl marginals]
+\label{lem:minimal-support-charts}
+Let \(\lvert\psi\rangle\) be a stabilizer state and \(\omega\) a minimal
+support of its stabilizer, and let \(L(\omega)\) be the group of labels
+supported inside \(\omega\).  Then for every \(i\in\omega\) the coordinate
+projection \(\pi_i:L(\omega)\to\F_q^2\) is injective.  Hence \(L(\omega)\)
+is isomorphic to a subgroup of \(\F_q^2\), every nonzero element of
+\(L(\omega)\) has support exactly \(\omega\), and \(\rho_\omega\) is
+partial-Weyl diagonal with index set \(L(\omega)\) and injections
+\(\pi_i\).  Conversely, a party set whose marginal is partial-Weyl diagonal
+in this way is a minimal support.
+\end{lemma}
+
+\begin{proof}
+An element of the kernel of \(\pi_i\) has support contained in
+\(\omega\setminus\{i\}\), a proper subset of \(\omega\), so it is zero by
+minimality.  The partial trace of \(\lvert\psi\rangle\langle\psi\rvert\)
+over the complement of \(\omega\) retains exactly the stabilizer elements
+supported inside \(\omega\), each with a coefficient of modulus one.  For
+the converse, injectivity at every party of the set says that no nonzero
+element of its label group vanishes anywhere on it, so no nonzero element
+has smaller support.
+\end{proof}
+
+At \(q=2\) the possible orders of \(L(\omega)\) are \(2\) and \(4\), which
+is the dichotomy of \cite[Lemma~1]{VanDenNestDehaeneDeMoor2005}; the
+intermediate orders available for \(q>2\) are invisible there.  They are
+what a CSS state typically presents, since a minimum-weight \(X\)-support
+carrying no \(Z\)-word contributes a line of \(q\) labels.
+
+\begin{corollary}[CSS states over a prime field]\label{cor:css-recognition}
+Let \(q\) be prime and let \(\lvert\psi\rangle\) be a CSS coset state such
+that every coordinate lies in two minimal supports of the stabilizer, each
+with at least three coordinates, one whose label group contains a nonzero
+\(X\)-type label and one whose label group contains a nonzero \(Z\)-type
+label.  Then every product-unitary equivalence to another such state has
+Clifford factors.
+\end{corollary}
+
+\begin{proof}
+The two supports contribute independent labels \((x,0)\) and \((0,z)\) to
+\(\Lambda_i\), which generate \(\F_q^2\) over a prime field.  Apply
+Corollary~\ref{cor:recognition-generation}.
+\end{proof}
+
+A minimum-weight codeword of the \(X\) code need not give a minimal support
+of the stabilizer, since a \(Z\)-word may sit strictly inside it; the
+hypothesis above is about minimal supports of the full stabilizer.  What is
+automatic is coverage: an additive code is generated by its minimal
+codewords, so every coordinate of a full-support stabilizer lies in some
+minimal support.
+
+\begin{remark}[Arbitrary local dimension]\label{rem:arbitrary-dimension}
+Nothing in the partial-Weyl condition,
+Proposition~\ref{prop:partial-weyl-marginal},
+Lemma~\ref{lem:recognition-group},
+Corollary~\ref{cor:recognition-generation}, or
+Lemma~\ref{lem:minimal-support-charts} uses the field structure of
+\(\F_q\).  Each uses only that the labels form a finite abelian group whose
+Weyl operators are an orthogonal Hilbert--Schmidt basis multiplying
+additively up to phase.  Replacing \(\F_q^2\) by \(\mathbb Z_d^2\), with
+\(X\) the shift and \(Z\) the clock operator on \(\mathbb C^d\), all five
+statements hold verbatim at every local dimension \(d\), prime power or
+not.  One point deserves care at composite \(d\): the phase convention uses
+\(2d\)-th roots of unity when \(d\) is even, and a unitary whose
+conjugation permutes the projective Weyl axes is a Clifford operation in
+the standard sense because the induced label map is an additive
+automorphism of \(\mathbb Z_d^2\), so it preserves the commutator pairing
+up to a unit and lifts; the parity of \(d\) enters only through which root
+of unity records the pairing.  Note that for \(d\) a proper prime power the
+\(\mathbb Z_d\) Weyl system and the \(\F_d\) Weyl system on \(\mathbb C^d\)
+are different, and a criterion instantiated in one says nothing in the
+other.
+\end{remark}
+
+The mechanism of constraining local unitaries by a uniqueness theorem for
+the decomposition of a coefficient tensor in a discrete operator basis is
+due to Chang and Jing \cite{ChangJing2022}, in the qubit setting.  There
+the states treated are generic, their Pauli coefficient tensors are not
+diagonal in the operator basis, and uniqueness yields invariants separating
+local-unitary classes rather than a Clifford conclusion; at \(q=2\) that
+conclusion for stabilizer states is
+\cite[Theorem~1]{VanDenNestDehaeneDeMoor2005}.
 
 \begin{proposition}[Stabilizer-AME support theorem]
 \label{prop:stabilizer-ame-support}
@@ -526,7 +728,9 @@ determines the identity component of the local-unitary automorphism group
 of a binary stabilizer code and gives a protected-qubit criterion for
 finiteness of the induced group
 \cite[Theorem~7 and Corollary~11]{Wirthmuller2011}; his exclusion of Bell
-factors is the \(n\geq4\) boundary above.  Tan computes the local symmetry
+factors is the \(n\geq4\) boundary above.  Englbrecht and Kraus determine
+the local symmetries of qubit stabilizer states, including where continuous
+ones occur \cite{EnglbrechtKraus2020}.  Tan computes the local symmetry
 group of the four-qutrit AME state outright, of order \(5832\)
 \cite[Theorem~5.3]{Tan2026}.  Theorem~\ref{thm:two-uniform-discrete} covers
 arbitrary local dimension and arbitrary, in particular nonstabilizer,
@@ -1684,6 +1888,10 @@ factor-set triviality criterion of Appendix~\ref{sec:party-extensions}.
 
 For a stabilizer state, the hypotheses of
 Corollary~\ref{cor:full-weyl-cover} hold whenever every party belongs to
-a support \(S\) of size at least three whose full supported stabilizer
-label subgroup is an \(\F_q\)-linear plane and projects isomorphically
-onto the local Weyl-label plane at every party of \(S\).
+a support \(S\) of size at least three whose supported stabilizer label
+subgroup has order \(q^2\) and projects isomorphically onto the local
+Weyl-label group at every party of \(S\).  No \(\F_q\)-linearity of that
+subgroup is needed, in keeping with the arbitrary-additive scope of
+Theorem~\ref{thm:lu-lc-rigidity}; and by
+Corollary~\ref{cor:recognition-generation} even the order \(q^2\) may be
+relaxed, provided the labels recovered at each party generate.
