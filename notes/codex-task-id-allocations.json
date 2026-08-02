@@ -2411,8 +2411,17 @@
       "last": 829,
       "purpose": "external mathematical cold read of Golden continuous-control and rigidity-stability proofs",
       "sequence": 268
+    },
+    {
+      "count": 1,
+      "first": 830,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 830,
+      "purpose": "post-Version-2 global rounding theorem for stabilizer AME approximate symmetries",
+      "sequence": 269
     }
   ],
-  "next_id": 830,
+  "next_id": 831,
   "schema": "codex-task-id-allocations-v1"
 }
