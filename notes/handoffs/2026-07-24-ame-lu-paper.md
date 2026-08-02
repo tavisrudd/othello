@@ -62,6 +62,20 @@ its reporting shape already exist in the portfolio.  A figure that does not win
 its comparison is cut.  Figure implementation and its A/B are their own
 allocated C-item, not part of the cold read.
 
+**C780 closed (2026-08-02): the diagonal programme's coding half is
+pre-empted; its dictionary is the asset.**  The plateau is a corollary of
+published classification below length 48 and survives only above it; the
+staircase family and the transversal-T correspondence are pre-empted; the
+classification and our two own findings are clear but must cite
+Gross--Van den Nest.  The claim that symmetry of one state and equivalence
+of two are different problems is too strong — symmetry is a specialization,
+and the surviving distinction is whole-solution-group versus
+some-solution-is-Clifford.  Disposition: a section of this manuscript, not a
+standalone paper, led by the dictionary that finiteness of the diagonal
+symmetry group is exactly projectivity of the code.  **The eight queued
+diagonal rows now need re-scoping, which is a scope pivot and awaits the
+user's decision.**  See `2026-08-01-c780-diagonal-rigidity-novelty-audit.md`.
+
 **C777 closed (2026-08-02): the formal layer matches the manuscript, with
 its boundary stated.**  A new multipartite namespace, general in site set
 and local dimension, proves the generator splitting, the single-exponential
