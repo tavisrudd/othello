@@ -31,8 +31,8 @@ warning.  The source and PDF hashes at closure are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 40,626 | `486882a1092e09a5f03282a0a9310a7755759aad5fe9f16e10d9d88c675be534` |
-| `golden_quantum_statistics.pdf` | 119,415 | `2bab40161ba09d7035fe9e5a93feba65a525b7d9956839c2324d5a3b3592dca6` |
+| `golden_quantum_statistics.tex` | 41,835 | `a18ca88e57079f169bbca864847cb895dd3286bc8b0d5814ce08091f02d1bf80` |
+| `golden_quantum_statistics.pdf` | 119,582 | `d0c61850d741c8d4c3013a6b530f102350b8ffe2cc1735c0cd02fdb0bf8d8fda` |
 
 Rebuild and verify from this directory with:
 

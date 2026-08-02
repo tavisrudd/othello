@@ -280,6 +280,7 @@ def local_manifest_bytes(certificate_bytes: bytes) -> bytes:
         (CERTIFICATE, certificate_bytes),
         (HERE / "README.md", (HERE / "README.md").read_bytes()),
         (HERE / "EVIDENCE.md", (HERE / "EVIDENCE.md").read_bytes()),
+        (HERE / "lint_tex_spacing.py", (HERE / "lint_tex_spacing.py").read_bytes()),
         (PAPER_ROOT / "Makefile", (PAPER_ROOT / "Makefile").read_bytes()),
         (PAPER_ROOT / "golden_quantum_statistics.tex",
          (PAPER_ROOT / "golden_quantum_statistics.tex").read_bytes()),

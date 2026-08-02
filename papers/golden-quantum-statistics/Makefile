@@ -10,7 +10,7 @@ all: lint golden_quantum_statistics.pdf
 check: lint verify golden_quantum_statistics.pdf warnings
 
 lint:
-	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
+	python3 verification/lint_tex_spacing.py $(SOURCE)
 
 verify:
 	python3 verification/verify.py --check
@@ -24,7 +24,7 @@ verify-sources:
 	$(UV) run python verification/evidence/six_mode_demonstrator_replay.py
 
 golden_quantum_statistics.pdf: $(SOURCE)
-	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
+	python3 verification/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: golden_quantum_statistics.pdf

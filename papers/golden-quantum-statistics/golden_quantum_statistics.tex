@@ -114,8 +114,11 @@ used here~\cite{Shchesnovich}.  General
 boson--fermion complementarity in linear interferometers is due to
 Jabbour and Cerf~\cite{JabbourCerf}; its extension to partially distinguishable
 particles is due to Robbio, Jabbour, and Cerf~\cite{RobbioJabbourCerf}.  The
-present contribution is the exact Golden specialization, the port-gauge
-obstruction, and the associated measurement and resource package.
+Clebsch source paper already records the determinant-line interpretation and
+the failure of the permanent to descend through port-frame changes
+\cite[Section~5]{ClebschIII}.  The present contribution is the general orbit
+classification and minimal-degree theorem, their exact Golden exchange-sector
+specialization, and the associated measurement and resource package.
 
 \section{The Golden transfer}
 
@@ -196,6 +199,12 @@ This distinction matters here because the transfer is real and its port
 orientation is part of the calibrated data.
 
 \section{Why the determinant retains orientation}
+
+The source construction identifies the determinant line and gives the basic
+plane-rotation counterexample for the permanent
+\cite[Section~5]{ClebschIII}.  We sharpen that observation by classifying the
+full and oriented double orbits in every dimension and proving that the
+determinant is the unique relative invariant of minimal degree.
 
 Write \(H=K^\dagger K\).  For the intrinsic comparison, define
 \[
@@ -356,16 +365,46 @@ Substituting \(P_{T,\pm}=(I\pm C_T/\sqrt5)/2\) gives
 \end{equation}
 Because \(C_{T,ij}^2=1\) off the diagonal,
 \(\operatorname{tr}(C_TDC_TD)=(\sum_i x_i)^2-6=-6\) for a balanced
-control.  For the displayed \(C_0\), direct multiplication on the ten
-projective balanced supports also gives
-\(\operatorname{tr}((C_0DC_0D)^2)=-42\).  Expanding the four projectors in
-\(\operatorname{tr}(P_+DP_-DP_+DP_-D)\) therefore yields
+control.
+
+The second trace and determinant are structural as well.  Order the
+coordinates by the negative support \(S\) and its complement, and write
 \[
- \operatorname{tr}(H^2)
- =\frac1{16}\left(18-\frac45\operatorname{tr}(C_0DC_0D)
- +\frac1{25}\operatorname{tr}((C_0DC_0D)^2)\right)
- =\frac{33}{25}.
+ C_T=\begin{pmatrix}A&R\\R^{\mathsf T}&E\end{pmatrix},
+ \qquad D=\begin{pmatrix}-I&0\\0&I\end{pmatrix}.
 \]
+The conference equation gives
+\[
+ A^2+RR^{\mathsf T}=5I,
+ \qquad AR+RE=0.
+\]
+If \(\tau\) is the product of the three off-diagonal entries of \(A\), then
+\(A^2=2I+\tau A\).  Hence \(A^2\) has eigenvalues \(4,1,1\), so
+\(RR^{\mathsf T}=5I-A^2\) has eigenvalues \(1,4,4\).  In particular,
+\(\det(R)^2=16\), \(R\) is invertible, and
+\(E=-R^{-1}AR\).
+
+Put \(M=C_TDC_TD\).  The same block equations give
+\[
+ M=\begin{pmatrix}
+ 2A^2-5I&-2AR\\
+ -2ER^{\mathsf T}&2E^2-5I
+ \end{pmatrix}.
+\]
+The two diagonal blocks have squared trace \(27\), while the product of the
+off-diagonal blocks has trace
+\[
+ -4\operatorname{tr}\bigl(A^2(5I-A^2)\bigr)=-48.
+\]
+Therefore \(\operatorname{tr}(M^2)=27+27-96=-42\).  Expanding the four
+projectors now yields
+\begin{align*}
+ \operatorname{tr}(H^2)
+ &=\operatorname{tr}(P_{T,+}DP_{T,-}DP_{T,+}DP_{T,-}D)\\
+ &=\frac1{16}\left(18-\frac45\operatorname{tr}(C_TDC_TD)
+ +\frac1{25}\operatorname{tr}((C_TDC_TD)^2)\right)\\
+ &=\frac{33}{25}.
+\end{align*}
 Together with Eq.~\eqref{eq:balanced-first-trace}, this proves
 \[
  \operatorname{tr}H
@@ -375,22 +414,26 @@ Together with Eq.~\eqref{eq:balanced-first-trace}, this proves
  =\operatorname{tr}(P_{T,+}DP_{T,-}DP_{T,+}DP_{T,-}D)
  =\frac{33}{25},
 \]
-and the triangle cubic of the same displayed matrix has
-\(|Z_T(x)|=8\).  Since \(Z_T^2=500\det H\)
-\cite[Theorem~5.1]{ClebschIII}, this gives
+without enumerating the balanced supports.  Finally,
+\[
+ [D,C_T]=\begin{pmatrix}0&-2R\\2R^{\mathsf T}&0\end{pmatrix},
+ \qquad \det[D,C_T]=64\det(R)^2=1024.
+\]
+The source identities \(\det[D,C_T]=16Z_T^2\) and
+\(Z_T^2=500\det H\) \cite[Theorem~5.1]{ClebschIII} therefore give
+\(|Z_T|=8\) and
 \[
  \det H=\frac{16}{125}.
 \]
-Complementing a support negates \(K_T\) and leaves \(H\) fixed.  Transport by
-\(P_T\) merely permutes the supports, so these identities hold for all six
-protocols.  Newton's identities give
+The argument used only the conference relations and hence applies to every
+balanced support in all six protocols.  Newton's identities give
 \begin{equation}
 \label{eq:balanced-characteristic-polynomial}
  \det(\lambda I-H)
  =\lambda^3-\frac95\lambda^2+\frac{24}{25}\lambda-\frac{16}{125}
  =\left(\lambda-\frac15\right)\left(\lambda-\frac45\right)^2.
 \end{equation}
-which proves the displayed spectrum without an exhaustive numerical search.
+This proves the displayed spectrum without an exhaustive numerical search.
 The complete and elementary symmetric functions then give
 \[
  h_3\left(\frac15,\frac45,\frac45\right)=\frac{313}{125},
@@ -817,32 +860,24 @@ record.
 
 \section*{Verification}
 
-The Boolean rank boundary, symmetric-function identities, orbit theorem, and
-distance-six correction radius are human derivations.  The twenty-mask census,
-three calibrated permanent values, rational filtered probabilities, six sign
-words, and fifteen-cell compilation are certificate-checked computations.
+The Boolean rank boundary, structural balanced-spectrum proof,
+symmetric-function identities, orbit theorem, and distance-six correction
+radius are human derivations.  The certificate independently checks all
+twenty balanced masks together with the three calibrated permanent values,
+rational filtered probabilities, six sign words, and fifteen-cell compilation.
 Their three atomic source bundles have exact generators and independent
 replays; one paper-local manifest pins every load-bearing file.
 
-The paper-local standard-library checker verifies the source hashes and
-independently recomputes every imported rational identity, census total,
-Hamming distance, and schedule used above.  Run
-\begin{verbatim}
-cd papers/golden-quantum-statistics
-python3 verification/verify.py --check
-\end{verbatim}
-The pinned symbolic source environment and all independent replays run with
-\begin{verbatim}
-make -C papers/golden-quantum-statistics verify-sources
-\end{verbatim}
-The compact evidence certificate, byte-and-hash manifest, generators, and
-independent replays are all stored inside the supplemental package.  They do
-not certify experimental feasibility, source availability, or literature
+From the supplemental-package directory, \texttt{make check} verifies source
+hashes and independently recomputes every imported rational identity, census
+total, Hamming distance, schedule, and source replay used above.  This evidence
+does not certify experimental feasibility, source availability, or literature
 priority.
 
 \begingroup
 \raggedright
 \begin{thebibliography}{99}
+\setlength{\itemsep}{0pt}
 
 \bibitem{ClebschI}
 T.~Rudd,

@@ -1,15 +1,17 @@
 import RelativeConicArcs.ClebschGoldenConference
 import RelativeConicArcs.CorankOneAdjugate
 import RelativeConicArcs.GoldenCommutatorPfaffian
+import RelativeConicArcs.GoldenBalancedCut
 import RelativeConicArcs.GoldenMatchingJacobian
 import RelativeConicArcs.WeightedMatchingEvaluation
 
 /-!
 # Trust gate for the algebraic Golden proof spine
 
-This gate imports the order-six conference matrix together with four reusable
-algebraic mechanisms: affine covariance and `3+3` collision evaluation of
-noncrossing matching cubics,
+This gate imports the order-six conference matrix together with five reusable
+algebraic mechanisms: the structural determinant and fourth-word trace of a
+balanced `3+3` conference cut, affine covariance and `3+3` collision evaluation
+of noncrossing matching cubics,
 symbolic Jacobian-minor identities on three collision charts, Pfaffian
 evaluation as a signed sum over perfect matchings, and the outer-product form
 of an adjugate with generated one-dimensional left and right kernels.
@@ -22,6 +24,11 @@ slices to a geometric quotient.
 
 #print axioms RelativeConicArcs.GoldenMatchingCubics.matchingCubics_affine
 #print axioms RelativeConicArcs.GoldenMatchingCubics.matchingCubics_eq_rainbow_of_threeThree
+
+#print axioms RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries
+#print axioms RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen
+#print axioms RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve
+#print axioms RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula
 
 #print axioms RelativeConicArcs.WeightedMatchingEvaluation.edgeProduct_bracketWeightedMatrix
 #print axioms RelativeConicArcs.WeightedMatchingEvaluation.weightedEdgeSum_bracketWeightedMatrix

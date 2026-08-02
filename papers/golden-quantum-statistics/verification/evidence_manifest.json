@@ -1,12 +1,12 @@
 {
   "files": {
     "Makefile": {
-      "bytes": 1315,
-      "sha256": "492902b53d87d3099629053e3c3aca2b980bc01492fa29054b6f461f3ea39b7d"
+      "bytes": 1319,
+      "sha256": "e88d663be174864b95d5e6c88a0985e982c2f78db33a3b899b8ed32facdf8e3e"
     },
     "golden_quantum_statistics.tex": {
-      "bytes": 40626,
-      "sha256": "486882a1092e09a5f03282a0a9310a7755759aad5fe9f16e10d9d88c675be534"
+      "bytes": 41835,
+      "sha256": "a18ca88e57079f169bbca864847cb895dd3286bc8b0d5814ce08091f02d1bf80"
     },
     "pyproject.toml": {
       "bytes": 168,
@@ -64,9 +64,13 @@
       "bytes": 9202,
       "sha256": "2ef877e90629eac1b45061dd05ceb09b394bac1702603a905a3443f86784c965"
     },
+    "verification/lint_tex_spacing.py": {
+      "bytes": 1499,
+      "sha256": "511eb6837ec3b59769f4a2e3d76a9658403907f270246e9d739bec1afcc345e0"
+    },
     "verification/verify.py": {
-      "bytes": 13545,
-      "sha256": "3a87d562fdaa6acd0a0c175f344fd4513daafa1438b712ab52902a20f7f8a488"
+      "bytes": 13630,
+      "sha256": "2df92a1c32f905d458430f7ea2c0a8a932996c9710cf017914136fba2c571ea6"
     }
   },
   "schema": "golden-quantum-statistics-manifest-v1"
