@@ -1,20 +1,20 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "aa5d9b3a4c3598661abc9825fe99b7467c5725dadefd3e948031b0752da324a0",
+  "main_source_sha256": "a86214cfdb6a021443265ce662db0a606f17d5e048b40b391fe746f6337906c8",
   "section_sha256": {
-    "sections/01-introduction.tex": "68f40e14d250c6be43f4c7565db2b020a6c984ca61d5a27129317276a516796d",
+    "sections/01-introduction.tex": "319169c0e102d597ee284ec4c5d8988c3da5b17bb47463a188332667b8d2c0b4",
     "sections/02-orientation-cover.tex": "34328aed7d067a8f43efb7875769410e66fe02679fad391a23beb9996adb366b",
     "sections/03-orientation-source.tex": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822",
     "sections/04-arithmetic-specialization.tex": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455",
-    "sections/05-golden-operator.tex": "692e3c3b8a80d5c81df9c7a93bd22b3a1d0b440dc00f14baf374edff391dce58",
+    "sections/05-golden-operator.tex": "725944a186464a97b4a12b59b92485ce7aba2bb7484b99a21306d3eab66e30c1",
     "sections/05-harmonic-realization.tex": "278565585415fd1e8a8d73e13536b6a5583c3b5cb19e5b0ed8e213cbb7f53fc3",
-    "sections/09-conclusion.tex": "4ed44866b354edf4ad3cb255dfc5a22db1af161c83bd446dffaf0d4e8c611c3b",
+    "sections/09-conclusion.tex": "229ee0c73425485cb2a94ca154b9c757fbe3da422085f0b3f2c4e6adbfdd261c",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
-    "sections/08-verification.tex": "7e6646361a719a9b0895b2ed6896a1b0a1a22072ee71326897680a3f060fad86",
-    "sections/10-references.tex": "479dedaf35d2c5fba0fa5d3df3240d16b1d5a31b1a56bc08dbb4122da36be906"
+    "sections/08-verification.tex": "392737b9f50be55bb145d4db1c3a988a8dcd8d84eff590b4921b1306998f52e5",
+    "sections/10-references.tex": "450ed024901ace94e82ad698a3e2aaaa841c01d62ef204950847fcc468293f38"
   },
-  "statement_count": 7,
+  "statement_count": 8,
   "statements": [
     {
       "label": "thm:arithmetic-main",
@@ -57,16 +57,25 @@
       "environment": "theorem",
       "title": "Balanced exchange rigidity",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 43,
+      "source_line": 45,
       "sha256": "7265b0d355f993965b96497cc5af2ce9f13c06294dcd8585836348ab303dff44",
       "tex": "\\begin{theorem}[Balanced exchange rigidity]\n\\label{thm:balanced-exchange-rigidity}\nWith the notation above,\n\\[\n \\Spec(H_Y)=\\Spec\\!\\left(\\frac1qRR^{\\mathsf T}\\right)\n =\\left\\{1-\\frac{\\alpha_1^2}{q},\\ldots,\n          1-\\frac{\\alpha_d^2}{q}\\right\\},\n\\]\nwhere \\(\\alpha_1,\\ldots,\\alpha_d\\) are the eigenvalues of \\(A\\).  The\nspectrum is independent of the balanced half \\(Y\\) if and only if\n\\(d\\leq3\\).  Thus order six is the unique nontrivial realized symmetric\nconference order with this property, and its exchange spectrum is\n\\[\n \\left\\{\\frac15,\\frac45,\\frac45\\right\\}.\n\\]\n\nFor a four-set \\(K\\), let \\(w(K)\\) be the sum of its three signed\nHamilton-cycle products.  Call \\(K\\) \\emph{aligned} if \\(w(K)=3\\), and let\n\\(c_Y\\) count the aligned four-sets in \\(Y\\).  Then\n\\[\n \\operatorname{tr}(H_Y)=\\frac{d^2}{q},\\qquad\n \\operatorname{tr}(H_Y^2)=\\frac{F_d+32c_Y}{q^2},\n\\]\nwhere\n\\[\n F_d=dq^2-2qd(d-1)+d(d-1)+12\\binom d3-8\\binom d4.\n\\]\nHence the first exchange moment is universal, whereas the second is\ncut-independent exactly in the stated small orders.\n\\end{theorem}"
+    },
+    {
+      "label": "thm:aligned-faithfulness",
+      "environment": "theorem",
+      "title": "Aligned-design faithfulness",
+      "source": "sections/05-golden-operator.tex",
+      "source_line": 170,
+      "sha256": "d4071c638ee238c77271a52d42ea62c5b888d1ab389ed5b1a1a7679939a63809",
+      "tex": "\\begin{theorem}[Aligned-design faithfulness]\n\\label{thm:aligned-faithfulness}\nIf \\(|V|\\geq7\\), then \\(\\mathcal A(\\tau)\\) determines \\(\\tau\\) up to\ncomplement.\n\nFor a symmetric conference matrix of order \\(n\\geq10\\), its marked family of\nprincipal four-subsets with determinant \\(-3\\) therefore determines its\nsigning up to diagonal switching and global negation.  After one aligned\nfour-set \\(Q\\) is known, the\n\\[\n 1+4(n-4)+6\\binom{n-4}{2}=3n^2-23n+45\n\\]\ntests on four-sets meeting \\(Q\\) in at least two points already suffice.\nAn aligned anchor is found deterministically with at most twenty tests, so\nthe complete marked reconstruction uses \\(O(n^2)\\) selected determinants.\nOne calibrated triangle product selects between the two global orientations.\n\\end{theorem}"
     },
     {
       "label": "thm:operator-shadows",
       "environment": "theorem",
       "title": "Golden operator and classical cubic shadows",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 180,
+      "source_line": 267,
       "sha256": "c8cf0f8e7edb08a8a5a7370eb393feb09a92cc86a786495003e4282ab57add67",
       "tex": "\\begin{theorem}[Golden operator and classical cubic shadows]\n\\label{thm:operator-shadows}\nFor a marked bridge datum and its coherent outer family:\n\\begin{enumerate}\n\\item The triangle products of \\(C_T\\) satisfy\n\\[\n (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\n \\quad(S=\\{i,j,k\\}),\n\\]\nso \\(Z_T\\) is the switching-invariant orientation cubic on \\(A_X\\).\nThe four-point two-graph identity and pair balance recover the conference\nswitching class; after fixing a vertex, the negative edges on the other five\nvertices form a pentagon.\n\\item The same cubic is a commutator Pfaffian:\n\\[\n \\operatorname{Pf}[D_x,C_T]=4Z_T(x),\n \\qquad\n \\det[D_x,C_T]=16Z_T(x)^2.\n\\]\nOver \\(E=\\Q(\\sqrt5)\\), put\n\\(P_{T,\\pm}=(I\\pm C_T/\\sqrt5)/2\\) and\n\\(B_T(x)=P_{T,-}D_xP_{T,+}\\).  After orienting the two determinant lines,\n\\[\n Z_T(x)=\\pm10\\sqrt5\\det B_T(x).\n\\]\n\\item The six coordinates \\((Z_T)_{T\\in\\mathcal T}\\) satisfy\n\\[\n \\sum_TZ_T=0,\\qquad \\sum_TZ_T^3=0.\n\\]\nThey are the signed Joubert coordinates and hence define the classical map\nfrom six labelled points to the Segre cubic\n\\[\n \\left\\{[z]\\in\\mathbf P^5:\\sum_Tz_T=\\sum_Tz_T^3=0\\right\\}.\n\\]\nInside its hyperplane \\(z_T=0\\), the remaining linear relation cuts the\nambient space to \\(\\mathbf P^3\\), and the remaining cubic equation is the\ndiagonal Clebsch cubic surface.\n\\item The centered determinants\n\\[\n W_T=Z_T^2-\\frac16\\sum_UZ_U^2\n     =\\frac1{16}\\operatorname{center}_T\\det[D_x,C_T]\n\\]\nsatisfy\n\\[\n \\sum_TW_T=0,\n \\qquad\n \\left(\\sum_TW_T^2\\right)^2=4\\sum_TW_T^4.\n\\]\nThus \\(W\\) is the Segre--Igusa polar map.\n\\end{enumerate}\n\\end{theorem}"
     },
@@ -80,7 +89,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "ac3cc7a500292fb04fcd51b014abf8cbbf7687df7d597fd029582a056ddd9ec2",
+  "trust_rows_sha256": "522328ef7bc44320ef7b3c71d005e5d25682018eebe872eea2064872b8b6df48",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -228,6 +237,31 @@
         "formal-partial"
       ],
       "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, characteristic-zero inclusion-rank descent, and the Ramsey equality R(3,3)=6; Lean checks the three-vertex signed-matrix square identity used for the order-six converse, while Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences",
+      "evidence": [
+        "sections/05-golden-operator.tex",
+        "verification/golden_return_formal.json",
+        "verification/golden_return_axioms.txt"
+      ]
+    },
+    {
+      "id": "OPER-4",
+      "theorem_labels": [
+        "thm:aligned-faithfulness"
+      ],
+      "clauses": [
+        "faithfulness of aligned four-sets for two-graphs on at least seven vertices",
+        "conference-signing reconstruction from the marked determinant-minus-three design",
+        "quadratic selected-determinant decoder and deterministic anchor search",
+        "single triangle-product orientation calibration"
+      ],
+      "statement": "For every two-graph on at least seven labelled vertices, the four-sets on which all four triangle values agree determine the two-graph up to global complement. Consequently, from order ten onward the marked determinant-minus-three design of a symmetric conference matrix determines its signing up to diagonal switching and global negation; relative to an aligned anchor, 3n squared minus 23n plus 45 selected determinant predicates suffice, an anchor costs at most twenty deterministic tests, and one calibrated triangle product selects the orientation.",
+      "status": "proven",
+      "modes": [
+        "conceptual",
+        "classical-input",
+        "formal-partial"
+      ],
+      "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by connected Johnson-graph descent; Lean supplies only rooted triangle reconstruction and the two-graph parity mechanisms, while the aligned-family faithfulness and quadratic query bound are human proofs",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",

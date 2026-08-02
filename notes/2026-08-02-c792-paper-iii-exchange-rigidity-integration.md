@@ -25,6 +25,14 @@ determinant-((-3)) design and Johnson inclusion calculus give the exact mean
 and variance of that count, including the structural (36|90) order-ten
 split.
 
+C794's human faithfulness theorem is now integrated at the same operator
+stage.  For every two-graph on at least seven vertices, the aligned four-sets
+determine the two-graph up to complement.  Hence the marked determinant-
+((-3)) design reconstructs every conference signing from order ten onward up
+to switching and global negation.  Relative to one aligned anchor,
+(3n^2-23n+45) selected determinant predicates suffice; deterministic anchor
+search costs at most twenty tests, and one triangle product fixes orientation.
+
 The theorem sits after the general conference carrier is defined and before
 the marked cubic shadows.  A transition immediately after it states the
 essential boundary: exchange spectrum sees (A^2), whereas determinant-line
@@ -35,15 +43,16 @@ orientation and the later cubic shadows retain sign.
 The baseline A PDF was frozen under the descriptive alias
 `frozen-current-forward-paper.pdf`; B-plus was rendered as
 `exchange-rigidity-with-design-consequences.pdf`.  The files are local review
-aliases outside the release surface.  A has 20 pages and B-plus has 22.
+aliases outside the release surface.  A has 20 pages; the exchange-rigidity
+candidate had 22, and the rebuilt faithfulness candidate has 24.
 
-B-plus wins the force-rank.  It adds one theorem and one credited consequence
-paragraph without displacing the arithmetic source, operator cubics, or
-harmonic return.  The two-page cost buys the missing explanation for why the
-six-axis operator is exceptional and turns the higher-order design from an
-application branch into the exact statistical residue of failed rigidity.
-B and B-lite were not rendered because B-plus passed the warning-free visual
-gate and did not lose pace.
+B-plus still wins after the C794 rebuild.  Its four-page total cost buys both
+the missing explanation for why the six-axis operator is exceptional and the
+reverse theorem that the classical higher-order design remembers its source.
+The operator section now has a source--shadow--source arc without displacing
+the arithmetic source, operator cubics, or harmonic return.  Testing, noisy
+recovery, database canonicalization, coding rates, privacy, ETFs, and higher
+moments remain excluded.
 
 This comparison was a role-separated authorial review, not a genuinely blind
 independent read.  The task card's independent force-rank and final fresh
@@ -79,7 +88,8 @@ The editorial pass retained the classification as a theorem, moved design
 statistics to an unnumbered consequence paragraph, and added one explicit
 sentence separating squared spectrum from determinant orientation.  No
 quantum protocol or Golden application inventory entered the manuscript.
-C794's reverse two-graph reconstruction theorem remains outside this task.
+The rebuilt cold pass returned `GO WITH MINOR REVISIONS`; all seven requested
+repairs were applied before the faithfulness layer was added.
 
 ## Literature boundary
 
@@ -89,9 +99,10 @@ Jolliffe for inclusion rank, Attas--Boussaïri--Souktani and
 Boussaïri--Souktani--Zouagui for spectral monomorphy, Greaves--Suda for the
 determinant-((-3)) (3)-design, Gillespie for regular-two-graph four-set
 parameters, and Ghareghani--Ghorbani--Mohammad-Noori for Johnson inclusion
-calculus.  The novelty sentence remains qualified: the bounded C788 audit did
-not locate the balanced singular-spectral classification, and the paper makes
-no `first` claim.
+calculus.  Pouzet--Si Kaddour--Trotignon receives the neighboring
+homogeneous-triple reconstruction problem.  The novelty sentences remain
+qualified: the bounded C788/C794 audits did not locate either reverse theorem,
+and the paper makes no `first` claim.
 
 ## Formal and trust surface
 
@@ -105,9 +116,11 @@ satisfies
 
 The Golden-return gate imports and audits this declaration.  Lean covers the
 algebraic core of the order-six converse; the unrestricted cross-block,
-closed-walk, inclusion-rank, and Ramsey argument remains human proof.  The
-paper now has seven frozen theorem-like statements and eight trust rows, with
-the new row `OPER-3`.  The formal source map, axiom report, artifact guide,
+closed-walk, inclusion-rank, and Ramsey argument remains human proof.  Lean's
+existing rooted two-graph declarations cover only a local mechanism of C794;
+aligned-design faithfulness and its quadratic decoder remain human proofs.
+The paper now has eight frozen theorem-like statements and nine trust rows,
+with rows `OPER-3` and `OPER-4`.  The formal source map, axiom report, artifact guide,
 verification guide, README, abstract, introduction, conclusion, references,
 and claim/novelty ledger agree with that boundary.
 
@@ -122,8 +135,8 @@ process or artifact was touched.
 A clean archive overlay preserves the pre-existing modified monorepo PDF.
 The authoritative overlay aggregate ends `ALL CHECKS PASS`, including all
 three exact evidence bundles, statement/trust identity, release allowlist,
-manuscript build, and warning-free PDF.  Pages 12--15 were inspected at
-publication scale; the new theorem and proof are legible, and the original
+manuscript build, and warning-free PDF.  Pages 13--17 were inspected at
+publication scale; both new theorems and proofs are legible, and the original
 operator-shadows theorem remains visible immediately afterward.
 
 Standalone synchronization waits for the aggregate formal gate and the
@@ -147,15 +160,18 @@ not full spectral classification, is needed for the higher-order exclusion.
   the classical aligned design fixes mean and variance but not each cut.
 - **Settled:** the order-ten (36|90) split follows from the design moments
   without enumerating cuts.
-- **Open, C794:** whether the labelled aligned design reconstructs every
-  two-graph on at least seven vertices up to complement.  It is not needed for
-  C792 and was not imported.
+- **Settled by C794:** the labelled aligned design reconstructs every two-graph
+  on at least seven vertices up to complement, and an explicit quadratic
+  selected-query family already suffices.
+- **Settled by the integration:** one triangle calibration removes the only
+  global sign ambiguity and reconnects the decoder to the oriented cubic.
 - **Open, optional successor:** classify complete higher-order exchange spectra
   within arithmetic cut orbits.  No successor is allocated.
 
 No unexplained feature remains in the Paper-III theorem itself.  The remaining
 C792 gates are review and shared-build validation, not mathematical gaps.
 
-Vibe check: the theorem earns its two pages.  Paper III now explains the
-six-axis operator's exceptional status without diluting the Golden descent or
-claiming the classical design machinery.
+Vibe check: the two reverse theorems earn their four pages.  Paper III now
+explains the six-axis exception and proves that the higher determinant shadow
+faithfully returns to its source, without importing the Golden application
+inventory or claiming the classical design machinery.

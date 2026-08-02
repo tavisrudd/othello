@@ -2,10 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; B-plus manuscript, trust surface, clean-overlay aggregate,
-and the order-six Lean identity are complete; the shared aggregate Lean gate,
-independent force-rank, fresh referee read, authoritative commit, and
-standalone synchronization remain
+**Status:** active; the C794-rebuilt B-plus manuscript, nine-row trust surface,
+clean-overlay aggregate, rendered cold pass, and order-six Lean identity are
+complete; the shared aggregate Lean gate, genuinely independent force-rank,
+authoritative commit, and standalone synchronization remain
 
 ## Objective
 
@@ -83,6 +83,9 @@ Johnson machinery are explicitly assigned; no quantum protocol enters the
 manuscript; Lean and trust surfaces match the selected theorem; all manuscript
 and standalone gates pass; and review files use descriptive public-safe names.
 
-C794's two-graph reconstruction theorem is outside this task until its human
-proof and novelty audit close.  If it is promoted ahead of C792, rebuild the
-candidate architecture rather than appending the result after the A/B freeze.
+C794's human proof and novelty audit are closed, and the theorem has been
+promoted by explicit user direction.  The B-plus architecture is rebuilt
+around the source--shadow--source chain: aligned-design faithfulness,
+quadratic selected-determinant reconstruction, and one-bit orientation
+calibration now precede the cubic shadows.  Testing, noisy recovery,
+canonicalization, coding rates, privacy, ETFs, and higher moments remain out.

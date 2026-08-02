@@ -16,7 +16,9 @@ main argument has four stages:
 3. the conference operator's triangle, middle-exterior, Pfaffian,
    cross-golden determinant, Joubert--Segre, and Segre--Igusa cubic shadows,
    together with the balanced exchange-rigidity theorem that characterizes
-   order six among symmetric conference carriers;
+   order six among symmetric conference carriers and the aligned-design
+   inversion theorem that reconstructs every higher signing from quadratic
+   selected determinant data;
    and
 4. the degree-six icosahedral Gaunt/Steinhardt cubic on the Petersen
    four-space.

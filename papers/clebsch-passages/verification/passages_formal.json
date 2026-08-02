@@ -118,6 +118,19 @@
       ],
       "excluded": "the general cross-block spectrum formula, closed-walk count, inclusion-rank descent, higher-order Ramsey exclusion, and classical aligned-design consequences remain human arguments"
     },
+    "OPER-4": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
+        "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign"
+      ],
+      "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
+      "supplemental_declarations": [
+        "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root",
+        "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot"
+      ],
+      "excluded": "aligned-anchor existence, seven-point cut faithfulness, Johnson-graph globalization, the sparse quadratic decoder, and conference determinant-design inversion remain human arguments"
+    },
     "HARM-1": {
       "coverage": "partial mechanism; no full row claim",
       "declarations": [

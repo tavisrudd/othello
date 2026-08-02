@@ -25,9 +25,11 @@ gives symmetric zero-diagonal sign matrices
 is part of the marked bridge datum; the incidence sheet by itself does not
 select it.
 
-The next theorem explains why this six-axis carrier has no uniform
+The next theorem explains why this six-axis carrier has no cut-independent
 higher-order analogue.  Let \(C=C^{\mathsf T}\) be any symmetric conference
-matrix of order \(2d\), so \(C^2=qI\) with \(q=2d-1\).  For a balanced half
+matrix of order \(2d\), that is, a zero-diagonal matrix with off-diagonal
+entries in \(\{\pm1\}\) and \(C^2=qI\), where \(q=2d-1\).  Its zero trace
+gives two eigenspaces of dimension \(d\).  For a balanced half
 \(Y\), order the coordinates by \((Y,Y^c)\) and write
 \[
  C=\begin{pmatrix}A&R\\R^{\mathsf T}&E\end{pmatrix}.
@@ -79,6 +81,7 @@ coordinates,
  L=\frac2{\sqrt q}
  \begin{pmatrix}0&R\\-R^{\mathsf T}&0\end{pmatrix}.
 \]
+Consequently \(4H_Y\) is \(L^*L\) restricted to the positive eigenspace.
 Thus \(H_Y\) has the squared singular values of \(R/\sqrt q\).  The
 \(Y\)-principal block of \(C^2=qI\) is
 \[
@@ -148,14 +151,98 @@ therefore gives, for a uniformly chosen balanced half and \(d\geq4\),
 These formulas also hold modulo complementation because \(c_Y=c_{Y^c}\).
 At order ten they give \(\mathbf E c_Y=5/7\) and
 \(\operatorname{Var}(c_Y)=10/49\), hence
-\(\mathbf E[c_Y(c_Y-1)]=0\).  The 126 projective cuts consequently split
+\(\mathbf E[c_Y(c_Y-1)]=0\).  Since \(c_Y\) is a nonnegative integer, it is
+therefore \(0\) or \(1\) on every cut.  The 126 projective cuts consequently split
 into 36 with \(c_Y=0\) and 90 with \(c_Y=1\).  The known design fixes this
-purity split without making the complete higher-order spectrum uniform.
+second-moment split without making the complete higher-order spectrum uniform.
+
+The design still retains the full discrete signing, despite fixing only
+aggregate low moments.  Write a two-graph on a finite set \(V\) as a function
+\[
+ \tau:\binom V3\longrightarrow\mathbf F_2,
+ \qquad
+ \sum_{S\in\binom Q3}\tau(S)=0
+ \quad\left(Q\in\binom V4\right),
+\]
+and let \(\mathcal A(\tau)\) be the four-sets on which the four values of
+\(\tau\) are all equal.  Complementing \(\tau\) preserves this family.
+
+\begin{theorem}[Aligned-design faithfulness]
+\label{thm:aligned-faithfulness}
+If \(|V|\geq7\), then \(\mathcal A(\tau)\) determines \(\tau\) up to
+complement.
+
+For a symmetric conference matrix of order \(n\geq10\), its marked family of
+principal four-subsets with determinant \(-3\) therefore determines its
+signing up to diagonal switching and global negation.  After one aligned
+four-set \(Q\) is known, the
+\[
+ 1+4(n-4)+6\binom{n-4}{2}=3n^2-23n+45
+\]
+tests on four-sets meeting \(Q\) in at least two points already suffice.
+An aligned anchor is found deterministically with at most twenty tests, so
+the complete marked reconstruction uses \(O(n^2)\) selected determinants.
+One calibrated triangle product selects between the two global orientations.
+\end{theorem}
+
+\begin{proof}
+Fix \(r\in V\) and form a graph \(G_r\) on \(V\setminus\{r\}\), with \(ij\)
+an edge when \(\tau(rij)=1\).  The two-graph equation gives
+\[
+ \tau(ijk)=\tau(rij)+\tau(rik)+\tau(rjk).
+\]
+Thus \(\{r,i,j,k\}\) is aligned exactly when \(ijk\) is a clique or an
+independent triple of \(G_r\).  The equality \(R(3,3)=6\) supplies an aligned
+anchor on every seven-set.
+
+It remains to prove faithfulness on seven points.  Fix an aligned
+\(Q=\{1,2,3,4\}\), complement one candidate if necessary, and switch graph
+representatives so that both vanish on \(Q\).  An outside point \(x\) then
+determines a cut
+\[
+ p_x=(e_{1x},e_{2x},e_{3x},e_{4x})
+ \in\mathbf F_2^4/\langle(1,1,1,1)\rangle.
+\]
+The four tests meeting \(Q\) in three points recover \(p_x\), except that the
+three balanced \(2+2\) cuts have the same empty signature.  For two outside
+points \(x,y\), put \(p=p_x\), \(s=p_y\), and \(e=e_{xy}\).  The six tests
+\(\{i,j,x,y\}\) are governed by
+\[
+ p_i+p_j=s_i+s_j=p_i+s_i+e=p_j+s_j+e.
+\]
+Substitution shows that they recover both cuts and \(e\), with one possible
+ambiguity: two distinct balanced cuts may be interchanged.  There are three
+outside points.  Applying the pair condition to all three pairs would force
+two cuts simultaneously to be equal and distinct, so the interchange
+ambiguity is impossible.  The candidates agree after the initial possible
+complement.
+
+For larger \(V\), apply the seven-point result to every seven-set.  Adjacent
+seven-sets in the connected Johnson graph share a triple, which forces their
+complement choices to agree.  This proves faithfulness.  The same one-point
+and pair tests use exactly the displayed quadratic family, and the twenty
+triples on six vertices give the deterministic anchor search.
+
+For a conference signing, the identity
+\(\det C[Q]=3-2w(Q)\) identifies the determinant-\((-3)\) family with
+\(\mathcal A(\tau)\).  Choosing a root and switching its incident signs to
+one recovers every matrix entry from the rooted triangle values.  The sole
+remaining complement sends \(C\) to \(-C\), and one triangle product fixes
+that orientation.
+\end{proof}
+
+The closest reverse construction located is the homogeneous-triple
+reconstruction problem for ordinary graphs
+\cite{PouzetHomogeneousTriples}.  It supplies the one-anchor viewpoint but
+not the away-from-anchor tests that remove the balanced-cut ambiguity above.
+We have not located the aligned-design faithfulness theorem in the bounded
+audit; this sentence carries the same database qualifications as the
+singular-spectral statement below.
 
 The neighboring framework is spectral monomorphy of principal submatrices
 \cite{AttasSpectralMonomorphy,BoussairiTwoGraphs}.  Here only the squared
-spectrum is assumed constant.  We have not located the balanced singular-
-spectral classification above in that literature; the block identity,
+spectrum is assumed constant.  We have not located the balanced
+singular-spectral classification above in that literature; the block identity,
 closed-walk expansion, inclusion rank, and aligned design are credited as
 indicated.
 
