@@ -361,10 +361,26 @@ that is local-unitarily but not local-Cliffordly equivalent to the
 Greenberger–Horne–Zeilinger state (arXiv:2507.09416, recorded at
 abstract/metadata depth in the audit, so its details must be read before
 anything is concluded). Their Theorem 1 does not reach it. Corollary G says its
-recognition group must be a proper subgroup at some party, and that is
-checkable from the state's stabilizer data with no new theory. A pass makes the
-criterion near-necessary in the only regime where necessity is currently
-testable; a failure kills Corollary G outright.
+recognition group must be a proper subgroup at some party.
+
+**Run, and the criterion passes.** Computed from their generators in
+`notes/2026-08-02-c807-recognition-group-novelty-audit.md`: the minimal
+supports are the three two-party sets, each of order nine, and each projects at
+party one into the three-torsion subgroup, so the recognition ceiling there is
+`3Z₉ × 3Z₉`, of order nine inside a label group of order eighty-one. The
+three-party set is not a minimal support, so the full-support generators
+contribute nothing. Proper, of index nine, as predicted.
+
+The result is explanatory rather than merely consistent: the three-torsion
+subgroup is exactly the sub-dimension structure their decomposition exploits,
+since their construction is about three-level pieces inside nine-level qudits.
+The recognition group computes their structural obstruction.
+
+It does not settle the two-party question below. Their minimal supports have
+two parties with index sets of order nine, which is exactly the open case — but
+the ceiling here is proper regardless, so Corollary G fails for a reason
+independent of arity, and no refutation of a two-party rescue can be extracted
+from this example.
 
 ### Operational reading
 
