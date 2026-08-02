@@ -478,14 +478,19 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C825 is active as a delegated publication-grade literature/trust sweep for the
-strongest integrated single-paper package.  It audits the continuous-control,
-Hermitian mixed-plane Pareto/single-sector rigidity, defect formulas, and C818
-stability theorem claim by claim under
-`notes/literature-audit-conventions.md`, including full-text and three-graph
-coverage where the negative depends on a citing set.  It authorizes no
-manuscript edit.  Charter:
-`notes/golden-tasks/c825-integrated-exchange-landscape-literature-trust-sweep.md`.
+C825 is complete with no manuscript edit.  Its publication-grade audit
+characterized eleven sources at five full-text, three partial, and three
+abstract/metadata-only depths and independently screened three pinned citation
+graphs through OpenAlex, Crossref, and Semantic Scholar.  It recommends the
+integrated theorem-first paper, led by C818's quantitative stability theorem.
+The continuous-control and exact Pareto results remain qualified-clear; the
+rigidity result must be stated narrowly as sign-blind squared complementary
+cross-block/exchange-spectrum rigidity, distinct from established ordinary
+three-uniform ETF theory.  The Hermitian family and existence of its order-six
+classification are prior.  The unreached Et-Taoui--Makhlouf and
+Cheng--Lv--Sun bodies force conservative wording but do not mathematically
+force a sequel split.  Report:
+`notes/2026-08-02-c825-integrated-exchange-landscape-literature-trust-sweep.md`.
 
 C818 is complete with no manuscript edit.  It proves the classification-free
 stability bounds

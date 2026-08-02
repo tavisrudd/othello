@@ -130,7 +130,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
-- **C825 `[golden]` [ACTIVE; DELEGATED PUBLICATION-GRADE LITERATURE/TRUST SWEEP; NO MANUSCRIPT EDIT]** — audit the integrated continuous-control, Hermitian Pareto/rigidity, and quantitative-stability package under the repository literature conventions, close full-text and citation-graph gaps where possible, and issue the strongest safe single-paper recommendation → `notes/golden-tasks/c825-integrated-exchange-landscape-literature-trust-sweep.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`
