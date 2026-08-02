@@ -1,0 +1,3870 @@
+{
+  "inputs": {
+    "2026-08-01-c756-masked-rs-collision-audit.json": "dbefb995e5ff64195f9ca3f0b07f147399fd45e50131242aed409b301d9f81a4",
+    "2026-08-01-c756-saturated-internal-audit.json": "acabee2fa04d61e6673c60a5cc429ba11f9e294e233a96c53d8451d91f6104d7",
+    "2026-08-01-c756-saturated-internal-verify.py": "7d6a5b0f09bcb1ccb001e0f0bee202635468bc6ec46f01240863a59304415d48"
+  },
+  "task": "C756",
+  "tests": {
+    "lloyd_moments": {
+      "checks": {
+        "forced_arc_vertices": 12,
+        "incidence_count": 3564,
+        "line_pair_intersections": 2145,
+        "point_count": 2809
+      },
+      "chord_count": 66,
+      "covering_profile_N_j": {
+        "1": 2502,
+        "2": 210,
+        "6": 85,
+        "11": 12
+      },
+      "k": 12,
+      "kill_criterion": "An exact nonnegative integer profile with N_0=0 satisfies all universal moments and the forced arc-vertex multiplicities.",
+      "q": 53,
+      "scope": "degree-two incidence moments at the first live boundary (q,k)=(53,12)",
+      "targets": {
+        "forced_arc_vertices": 12,
+        "incidence_count": 3564,
+        "line_pair_intersections": 2145,
+        "point_count": 2809
+      },
+      "verdict": "KILLED at degree two: no quadratic Lloyd/Delsarte dual polynomial using only these moments can force an uncovered point. Higher-order concurrency identities would be genuinely new input."
+    },
+    "local_cumulants": {
+      "kill_criterion": "Local all-negative patterns occur with slack and the adjacent/disjoint edge mutual information or cycle biases do not yield a stable forbidden pattern.",
+      "q11_hexagon_all_negative_5_subsets": 6,
+      "rows": [
+        {
+          "adjacent_edge_mutual_information_nats": 0.025452236132,
+          "all_negative_fraction": 0.000807102502,
+          "all_negative_sets": 5,
+          "disjoint_edge_mutual_information_nats": 0.019078365277,
+          "edge_count_histogram": {
+            "(0, 3, 3)": 20,
+            "(1, 2, 3)": 180,
+            "(1, 3, 2)": 60,
+            "(1, 4, 1)": 30,
+            "(2, 0, 4)": 90,
+            "(2, 1, 3)": 660,
+            "(2, 2, 2)": 750,
+            "(2, 3, 1)": 480,
+            "(2, 4, 0)": 15,
+            "(3, 0, 3)": 740,
+            "(3, 1, 2)": 1560,
+            "(3, 2, 1)": 480,
+            "(3, 3, 0)": 60,
+            "(4, 0, 2)": 615,
+            "(4, 1, 1)": 360,
+            "(4, 2, 0)": 60,
+            "(5, 0, 1)": 30,
+            "(6, 0, 0)": 5
+          },
+          "four_cycle_product_histogram": {
+            "-1": 3240,
+            "0": 11475,
+            "1": 3870
+          },
+          "general_position_sets": 6195,
+          "q": 5,
+          "triangle_product_histogram": {
+            "-1": 5720,
+            "0": 12320,
+            "1": 6740
+          },
+          "tuple_size": 4
+        },
+        {
+          "adjacent_edge_mutual_information_nats": 0.029539484153,
+          "all_negative_fraction": 0.0,
+          "all_negative_sets": 0,
+          "disjoint_edge_mutual_information_nats": 0.011814579161,
+          "edge_count_histogram": {
+            "(2, 4, 4)": 60,
+            "(3, 2, 5)": 60,
+            "(3, 3, 4)": 300,
+            "(3, 4, 3)": 240,
+            "(3, 5, 2)": 60,
+            "(4, 1, 5)": 420,
+            "(4, 2, 4)": 1020,
+            "(4, 3, 3)": 900,
+            "(4, 4, 2)": 120,
+            "(5, 0, 5)": 192,
+            "(5, 1, 4)": 780,
+            "(5, 2, 3)": 660,
+            "(5, 3, 2)": 360,
+            "(5, 5, 0)": 12,
+            "(6, 0, 4)": 240,
+            "(6, 1, 3)": 300
+          },
+          "four_cycle_product_histogram": {
+            "-1": 3384,
+            "0": 9745,
+            "1": 4043
+          },
+          "general_position_sets": 5724,
+          "q": 5,
+          "triangle_product_histogram": {
+            "-1": 14040,
+            "0": 28560,
+            "1": 14640
+          },
+          "tuple_size": 5
+        },
+        {
+          "adjacent_edge_mutual_information_nats": 0.010930494763,
+          "all_negative_fraction": 0.001225626741,
+          "all_negative_sets": 154,
+          "disjoint_edge_mutual_information_nats": 0.004101128466,
+          "edge_count_histogram": {
+            "(0, 1, 5)": 168,
+            "(0, 3, 3)": 224,
+            "(0, 4, 2)": 42,
+            "(1, 0, 5)": 336,
+            "(1, 1, 4)": 1848,
+            "(1, 2, 3)": 3192,
+            "(1, 3, 2)": 1176,
+            "(1, 4, 1)": 84,
+            "(2, 0, 4)": 6552,
+            "(2, 1, 3)": 15288,
+            "(2, 2, 2)": 9828,
+            "(2, 3, 1)": 3192,
+            "(2, 4, 0)": 84,
+            "(3, 0, 3)": 21784,
+            "(3, 1, 2)": 24360,
+            "(3, 2, 1)": 6720,
+            "(3, 3, 0)": 504,
+            "(4, 0, 2)": 17010,
+            "(4, 1, 1)": 8400,
+            "(4, 2, 0)": 1092,
+            "(5, 0, 1)": 3108,
+            "(5, 1, 0)": 504,
+            "(6, 0, 0)": 154
+          },
+          "four_cycle_product_histogram": {
+            "-1": 95760,
+            "0": 177030,
+            "1": 104160
+          },
+          "general_position_sets": 125650,
+          "q": 7,
+          "triangle_product_histogram": {
+            "-1": 151032,
+            "0": 187376,
+            "1": 164192
+          },
+          "tuple_size": 4
+        },
+        {
+          "adjacent_edge_mutual_information_nats": 0.011000395566,
+          "all_negative_fraction": 0.0,
+          "all_negative_sets": 0,
+          "disjoint_edge_mutual_information_nats": 0.003014151914,
+          "edge_count_histogram": {
+            "(1, 2, 7)": 168,
+            "(1, 3, 6)": 168,
+            "(2, 2, 6)": 504,
+            "(2, 3, 5)": 2184,
+            "(2, 4, 4)": 2016,
+            "(2, 5, 3)": 168,
+            "(3, 0, 7)": 1008,
+            "(3, 1, 6)": 6552,
+            "(3, 2, 5)": 14616,
+            "(3, 3, 4)": 15288,
+            "(3, 4, 3)": 4536,
+            "(3, 5, 2)": 336,
+            "(4, 0, 6)": 8568,
+            "(4, 1, 5)": 41328,
+            "(4, 2, 4)": 50400,
+            "(4, 3, 3)": 25536,
+            "(4, 4, 2)": 5208,
+            "(4, 5, 1)": 168,
+            "(5, 0, 5)": 35448,
+            "(5, 1, 4)": 67032,
+            "(5, 2, 3)": 42168,
+            "(5, 3, 2)": 12936,
+            "(5, 4, 1)": 840,
+            "(6, 0, 4)": 31416,
+            "(6, 1, 3)": 33432,
+            "(6, 2, 2)": 9240,
+            "(6, 3, 1)": 840,
+            "(6, 4, 0)": 168,
+            "(7, 0, 3)": 8400,
+            "(7, 1, 2)": 3864,
+            "(7, 2, 1)": 672,
+            "(8, 0, 2)": 336,
+            "(8, 1, 1)": 168
+          },
+          "four_cycle_product_histogram": {
+            "-1": 345122,
+            "0": 556111,
+            "1": 375903
+          },
+          "general_position_sets": 425712,
+          "q": 7,
+          "triangle_product_histogram": {
+            "-1": 1297296,
+            "0": 1589952,
+            "1": 1369872
+          },
+          "tuple_size": 5
+        }
+      ],
+      "scope": "all general-position 4- and 5-subsets of the off-conic plane at q=5,7"
+    },
+    "prefix_entropy": {
+      "kill_criterion": "At fixed depth the surviving-prefix extension counts are diffuse rather than collapsing to a small, stable catalogue of plateau values.",
+      "rows": [
+        {
+          "by_depth": [
+            {
+              "coefficient_of_variation": 0.076923076923,
+              "count_label_entropy_nats": 0.69314718056,
+              "depth": 1,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "78": 3,
+                "91": 3
+              },
+              "independent_coin_baseline": 84.5,
+              "max_extensions": 91,
+              "mean_extensions": 84.5,
+              "min_extensions": 78,
+              "subsets": 6
+            },
+            {
+              "coefficient_of_variation": 0.115467521683,
+              "count_label_entropy_nats": 0.950270539233,
+              "depth": 2,
+              "distinct_extension_counts": 3,
+              "extension_count_histogram": {
+                "25": 3,
+                "30": 9,
+                "36": 3
+              },
+              "independent_coin_baseline": 42.25,
+              "max_extensions": 36,
+              "mean_extensions": 30.2,
+              "min_extensions": 25,
+              "subsets": 15
+            },
+            {
+              "coefficient_of_variation": 0.256643753359,
+              "count_label_entropy_nats": 1.175204597081,
+              "depth": 3,
+              "distinct_extension_counts": 5,
+              "extension_count_histogram": {
+                "6": 12,
+                "8": 3,
+                "9": 3,
+                "10": 1,
+                "13": 1
+              },
+              "independent_coin_baseline": 21.125,
+              "max_extensions": 13,
+              "mean_extensions": 7.3,
+              "min_extensions": 6,
+              "subsets": 20
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 4,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "2": 15
+              },
+              "independent_coin_baseline": 10.5625,
+              "max_extensions": 2,
+              "mean_extensions": 2.0,
+              "min_extensions": 2,
+              "subsets": 15
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 5,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "1": 6
+              },
+              "independent_coin_baseline": 5.28125,
+              "max_extensions": 1,
+              "mean_extensions": 1.0,
+              "min_extensions": 1,
+              "subsets": 6
+            },
+            {
+              "coefficient_of_variation": null,
+              "count_label_entropy_nats": -0.0,
+              "depth": 6,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "0": 1
+              },
+              "independent_coin_baseline": 2.640625,
+              "max_extensions": 0,
+              "mean_extensions": 0.0,
+              "min_extensions": 0,
+              "subsets": 1
+            }
+          ],
+          "k": 6,
+          "q": 13
+        },
+        {
+          "by_depth": [
+            {
+              "coefficient_of_variation": 0.048765984909,
+              "count_label_entropy_nats": 0.636514168295,
+              "depth": 1,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "171": 2,
+                "190": 4
+              },
+              "independent_coin_baseline": 180.5,
+              "max_extensions": 190,
+              "mean_extensions": 183.666666666667,
+              "min_extensions": 171,
+              "subsets": 6
+            },
+            {
+              "coefficient_of_variation": 0.069555823265,
+              "count_label_entropy_nats": 0.882310924515,
+              "depth": 2,
+              "distinct_extension_counts": 3,
+              "extension_count_histogram": {
+                "64": 1,
+                "72": 8,
+                "81": 6
+              },
+              "independent_coin_baseline": 90.25,
+              "max_extensions": 81,
+              "mean_extensions": 75.066666666667,
+              "min_extensions": 64,
+              "subsets": 15
+            },
+            {
+              "coefficient_of_variation": 0.075262892727,
+              "count_label_entropy_nats": 1.372765530892,
+              "depth": 3,
+              "distinct_extension_counts": 6,
+              "extension_count_histogram": {
+                "22": 5,
+                "23": 1,
+                "24": 10,
+                "26": 1,
+                "27": 1,
+                "28": 2
+              },
+              "independent_coin_baseline": 45.125,
+              "max_extensions": 28,
+              "mean_extensions": 24.1,
+              "min_extensions": 22,
+              "subsets": 20
+            },
+            {
+              "coefficient_of_variation": 0.224873018672,
+              "count_label_entropy_nats": 1.395397092327,
+              "depth": 4,
+              "distinct_extension_counts": 5,
+              "extension_count_histogram": {
+                "3": 1,
+                "5": 7,
+                "6": 3,
+                "7": 2,
+                "8": 2
+              },
+              "independent_coin_baseline": 22.5625,
+              "max_extensions": 8,
+              "mean_extensions": 5.733333333333,
+              "min_extensions": 3,
+              "subsets": 15
+            },
+            {
+              "coefficient_of_variation": 0.559016994375,
+              "count_label_entropy_nats": 0.450561208866,
+              "depth": 5,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "1": 5,
+                "3": 1
+              },
+              "independent_coin_baseline": 11.28125,
+              "max_extensions": 3,
+              "mean_extensions": 1.333333333333,
+              "min_extensions": 1,
+              "subsets": 6
+            },
+            {
+              "coefficient_of_variation": null,
+              "count_label_entropy_nats": -0.0,
+              "depth": 6,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "0": 1
+              },
+              "independent_coin_baseline": 5.640625,
+              "max_extensions": 0,
+              "mean_extensions": 0.0,
+              "min_extensions": 0,
+              "subsets": 1
+            }
+          ],
+          "k": 6,
+          "q": 19
+        },
+        {
+          "by_depth": [
+            {
+              "coefficient_of_variation": 0.034482758621,
+              "count_label_entropy_nats": 0.69314718056,
+              "depth": 1,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "406": 5,
+                "435": 5
+              },
+              "independent_coin_baseline": 420.5,
+              "max_extensions": 435,
+              "mean_extensions": 420.5,
+              "min_extensions": 406,
+              "subsets": 10
+            },
+            {
+              "coefficient_of_variation": 0.049409059951,
+              "count_label_entropy_nats": 0.99502699018,
+              "depth": 2,
+              "distinct_extension_counts": 3,
+              "extension_count_histogram": {
+                "169": 10,
+                "182": 25,
+                "196": 10
+              },
+              "independent_coin_baseline": 210.25,
+              "max_extensions": 196,
+              "mean_extensions": 182.222222222222,
+              "min_extensions": 169,
+              "subsets": 45
+            },
+            {
+              "coefficient_of_variation": 0.077521709118,
+              "count_label_entropy_nats": 2.369382119695,
+              "depth": 3,
+              "distinct_extension_counts": 12,
+              "extension_count_histogram": {
+                "62": 10,
+                "63": 10,
+                "64": 10,
+                "65": 10,
+                "66": 5,
+                "68": 20,
+                "70": 10,
+                "72": 5,
+                "73": 10,
+                "75": 20,
+                "79": 5,
+                "81": 5
+              },
+              "independent_coin_baseline": 105.125,
+              "max_extensions": 81,
+              "mean_extensions": 69.333333333333,
+              "min_extensions": 62,
+              "subsets": 120
+            },
+            {
+              "coefficient_of_variation": 0.137459354566,
+              "count_label_entropy_nats": 2.298558110792,
+              "depth": 4,
+              "distinct_extension_counts": 13,
+              "extension_count_histogram": {
+                "16": 10,
+                "18": 5,
+                "21": 20,
+                "22": 10,
+                "23": 45,
+                "24": 15,
+                "25": 35,
+                "26": 15,
+                "27": 30,
+                "28": 5,
+                "29": 10,
+                "30": 5,
+                "33": 5
+              },
+              "independent_coin_baseline": 52.5625,
+              "max_extensions": 33,
+              "mean_extensions": 24.309523809524,
+              "min_extensions": 16,
+              "subsets": 210
+            },
+            {
+              "coefficient_of_variation": 0.241829258158,
+              "count_label_entropy_nats": 2.032996328663,
+              "depth": 5,
+              "distinct_extension_counts": 10,
+              "extension_count_histogram": {
+                "6": 31,
+                "7": 35,
+                "8": 50,
+                "9": 35,
+                "10": 50,
+                "11": 25,
+                "12": 10,
+                "13": 5,
+                "15": 10,
+                "16": 1
+              },
+              "independent_coin_baseline": 26.28125,
+              "max_extensions": 16,
+              "mean_extensions": 9.015873015873,
+              "min_extensions": 6,
+              "subsets": 252
+            },
+            {
+              "coefficient_of_variation": 0.140367965224,
+              "count_label_entropy_nats": 0.848367511103,
+              "depth": 6,
+              "distinct_extension_counts": 3,
+              "extension_count_histogram": {
+                "4": 130,
+                "5": 65,
+                "6": 15
+              },
+              "independent_coin_baseline": 13.140625,
+              "max_extensions": 6,
+              "mean_extensions": 4.452380952381,
+              "min_extensions": 4,
+              "subsets": 210
+            },
+            {
+              "coefficient_of_variation": 0.089638507847,
+              "count_label_entropy_nats": 0.286835983056,
+              "depth": 7,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "3": 110,
+                "4": 10
+              },
+              "independent_coin_baseline": 6.5703125,
+              "max_extensions": 4,
+              "mean_extensions": 3.083333333333,
+              "min_extensions": 3,
+              "subsets": 120
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 8,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "2": 45
+              },
+              "independent_coin_baseline": 3.28515625,
+              "max_extensions": 2,
+              "mean_extensions": 2.0,
+              "min_extensions": 2,
+              "subsets": 45
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 9,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "1": 10
+              },
+              "independent_coin_baseline": 1.642578125,
+              "max_extensions": 1,
+              "mean_extensions": 1.0,
+              "min_extensions": 1,
+              "subsets": 10
+            },
+            {
+              "coefficient_of_variation": null,
+              "count_label_entropy_nats": -0.0,
+              "depth": 10,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "0": 1
+              },
+              "independent_coin_baseline": 0.8212890625,
+              "max_extensions": 0,
+              "mean_extensions": 0.0,
+              "min_extensions": 0,
+              "subsets": 1
+            }
+          ],
+          "k": 10,
+          "q": 29
+        },
+        {
+          "by_depth": [
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 1,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "465": 10
+              },
+              "independent_coin_baseline": 480.5,
+              "max_extensions": 465,
+              "mean_extensions": 465.0,
+              "min_extensions": 465,
+              "subsets": 10
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 2,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "196": 45
+              },
+              "independent_coin_baseline": 240.25,
+              "max_extensions": 196,
+              "mean_extensions": 196.0,
+              "min_extensions": 196,
+              "subsets": 45
+            },
+            {
+              "coefficient_of_variation": 0.063174781551,
+              "count_label_entropy_nats": 1.545422903194,
+              "depth": 3,
+              "distinct_extension_counts": 5,
+              "extension_count_histogram": {
+                "71": 30,
+                "73": 30,
+                "75": 30,
+                "79": 10,
+                "85": 20
+              },
+              "independent_coin_baseline": 120.125,
+              "max_extensions": 85,
+              "mean_extensions": 75.5,
+              "min_extensions": 71,
+              "subsets": 120
+            },
+            {
+              "coefficient_of_variation": 0.201242676782,
+              "count_label_entropy_nats": 1.694312369408,
+              "depth": 4,
+              "distinct_extension_counts": 7,
+              "extension_count_histogram": {
+                "16": 15,
+                "18": 10,
+                "23": 30,
+                "24": 5,
+                "25": 30,
+                "28": 60,
+                "34": 60
+              },
+              "independent_coin_baseline": 60.0625,
+              "max_extensions": 34,
+              "mean_extensions": 27.142857142857,
+              "min_extensions": 16,
+              "subsets": 210
+            },
+            {
+              "coefficient_of_variation": 0.3194382825,
+              "count_label_entropy_nats": 1.841794511862,
+              "depth": 5,
+              "distinct_extension_counts": 7,
+              "extension_count_histogram": {
+                "6": 60,
+                "7": 60,
+                "10": 30,
+                "11": 30,
+                "12": 30,
+                "13": 30,
+                "16": 12
+              },
+              "independent_coin_baseline": 30.03125,
+              "max_extensions": 16,
+              "mean_extensions": 9.333333333333,
+              "min_extensions": 6,
+              "subsets": 252
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 6,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "4": 210
+              },
+              "independent_coin_baseline": 15.015625,
+              "max_extensions": 4,
+              "mean_extensions": 4.0,
+              "min_extensions": 4,
+              "subsets": 210
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 7,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "3": 120
+              },
+              "independent_coin_baseline": 7.5078125,
+              "max_extensions": 3,
+              "mean_extensions": 3.0,
+              "min_extensions": 3,
+              "subsets": 120
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 8,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "2": 45
+              },
+              "independent_coin_baseline": 3.75390625,
+              "max_extensions": 2,
+              "mean_extensions": 2.0,
+              "min_extensions": 2,
+              "subsets": 45
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 9,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "1": 10
+              },
+              "independent_coin_baseline": 1.876953125,
+              "max_extensions": 1,
+              "mean_extensions": 1.0,
+              "min_extensions": 1,
+              "subsets": 10
+            },
+            {
+              "coefficient_of_variation": null,
+              "count_label_entropy_nats": -0.0,
+              "depth": 10,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "0": 1
+              },
+              "independent_coin_baseline": 0.9384765625,
+              "max_extensions": 0,
+              "mean_extensions": 0.0,
+              "min_extensions": 0,
+              "subsets": 1
+            }
+          ],
+          "k": 10,
+          "q": 31
+        },
+        {
+          "by_depth": [
+            {
+              "coefficient_of_variation": 0.023310584238,
+              "count_label_entropy_nats": 0.655481773901,
+              "depth": 1,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "820": 4,
+                "861": 7
+              },
+              "independent_coin_baseline": 840.5,
+              "max_extensions": 861,
+              "mean_extensions": 846.090909090909,
+              "min_extensions": 820,
+              "subsets": 11
+            },
+            {
+              "coefficient_of_variation": 0.032925007332,
+              "count_label_entropy_nats": 0.953019470824,
+              "depth": 2,
+              "distinct_extension_counts": 3,
+              "extension_count_histogram": {
+                "361": 6,
+                "380": 28,
+                "400": 21
+              },
+              "independent_coin_baseline": 420.25,
+              "max_extensions": 400,
+              "mean_extensions": 385.563636363636,
+              "min_extensions": 361,
+              "subsets": 55
+            },
+            {
+              "coefficient_of_variation": 0.05264812097,
+              "count_label_entropy_nats": 3.236328667088,
+              "depth": 3,
+              "distinct_extension_counts": 31,
+              "extension_count_histogram": {
+                "140": 2,
+                "144": 6,
+                "145": 2,
+                "146": 9,
+                "148": 8,
+                "150": 5,
+                "151": 3,
+                "152": 6,
+                "154": 6,
+                "155": 6,
+                "156": 11,
+                "157": 12,
+                "158": 9,
+                "159": 12,
+                "160": 5,
+                "161": 8,
+                "162": 5,
+                "163": 4,
+                "164": 2,
+                "165": 4,
+                "166": 9,
+                "167": 5,
+                "168": 4,
+                "169": 5,
+                "170": 1,
+                "171": 9,
+                "172": 2,
+                "173": 1,
+                "177": 2,
+                "178": 1,
+                "179": 1
+              },
+              "independent_coin_baseline": 210.125,
+              "max_extensions": 179,
+              "mean_extensions": 158.49696969697,
+              "min_extensions": 140,
+              "subsets": 165
+            },
+            {
+              "coefficient_of_variation": 0.101329291959,
+              "count_label_entropy_nats": 3.072545340969,
+              "depth": 4,
+              "distinct_extension_counts": 29,
+              "extension_count_histogram": {
+                "45": 2,
+                "46": 4,
+                "48": 2,
+                "49": 10,
+                "50": 5,
+                "51": 4,
+                "52": 12,
+                "53": 15,
+                "54": 20,
+                "55": 8,
+                "56": 16,
+                "57": 28,
+                "58": 23,
+                "59": 14,
+                "60": 24,
+                "61": 26,
+                "62": 21,
+                "63": 18,
+                "64": 26,
+                "65": 4,
+                "66": 12,
+                "67": 7,
+                "68": 11,
+                "69": 8,
+                "70": 3,
+                "71": 2,
+                "74": 1,
+                "77": 2,
+                "85": 2
+              },
+              "independent_coin_baseline": 105.0625,
+              "max_extensions": 85,
+              "mean_extensions": 59.4,
+              "min_extensions": 45,
+              "subsets": 330
+            },
+            {
+              "coefficient_of_variation": 0.171071570254,
+              "count_label_entropy_nats": 2.669578596559,
+              "depth": 5,
+              "distinct_extension_counts": 21,
+              "extension_count_histogram": {
+                "11": 1,
+                "14": 9,
+                "15": 8,
+                "16": 11,
+                "17": 29,
+                "18": 21,
+                "19": 52,
+                "20": 45,
+                "21": 53,
+                "22": 45,
+                "23": 48,
+                "24": 35,
+                "25": 35,
+                "26": 27,
+                "27": 18,
+                "28": 2,
+                "29": 7,
+                "30": 3,
+                "31": 10,
+                "33": 2,
+                "34": 1
+              },
+              "independent_coin_baseline": 52.53125,
+              "max_extensions": 34,
+              "mean_extensions": 21.777056277056,
+              "min_extensions": 11,
+              "subsets": 462
+            },
+            {
+              "coefficient_of_variation": 0.212397871795,
+              "count_label_entropy_nats": 2.036722434194,
+              "depth": 6,
+              "distinct_extension_counts": 12,
+              "extension_count_histogram": {
+                "5": 1,
+                "6": 19,
+                "7": 78,
+                "8": 86,
+                "9": 92,
+                "10": 69,
+                "11": 54,
+                "12": 36,
+                "13": 18,
+                "14": 4,
+                "15": 2,
+                "16": 3
+              },
+              "independent_coin_baseline": 26.265625,
+              "max_extensions": 16,
+              "mean_extensions": 9.231601731602,
+              "min_extensions": 5,
+              "subsets": 462
+            },
+            {
+              "coefficient_of_variation": 0.195615199109,
+              "count_label_entropy_nats": 1.303647918749,
+              "depth": 7,
+              "distinct_extension_counts": 6,
+              "extension_count_histogram": {
+                "4": 96,
+                "5": 148,
+                "6": 57,
+                "7": 21,
+                "8": 5,
+                "9": 3
+              },
+              "independent_coin_baseline": 13.1328125,
+              "max_extensions": 9,
+              "mean_extensions": 5.090909090909,
+              "min_extensions": 4,
+              "subsets": 330
+            },
+            {
+              "coefficient_of_variation": 0.15663743711,
+              "count_label_entropy_nats": 0.713725803374,
+              "depth": 8,
+              "distinct_extension_counts": 3,
+              "extension_count_histogram": {
+                "3": 112,
+                "4": 49,
+                "5": 4
+              },
+              "independent_coin_baseline": 6.56640625,
+              "max_extensions": 5,
+              "mean_extensions": 3.345454545455,
+              "min_extensions": 3,
+              "subsets": 165
+            },
+            {
+              "coefficient_of_variation": 0.176776695297,
+              "count_label_entropy_nats": 0.474139313058,
+              "depth": 9,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "2": 45,
+                "3": 10
+              },
+              "independent_coin_baseline": 3.283203125,
+              "max_extensions": 3,
+              "mean_extensions": 2.181818181818,
+              "min_extensions": 2,
+              "subsets": 55
+            },
+            {
+              "coefficient_of_variation": 0.263523138347,
+              "count_label_entropy_nats": 0.304636097349,
+              "depth": 10,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "1": 10,
+                "2": 1
+              },
+              "independent_coin_baseline": 1.6416015625,
+              "max_extensions": 2,
+              "mean_extensions": 1.090909090909,
+              "min_extensions": 1,
+              "subsets": 11
+            },
+            {
+              "coefficient_of_variation": null,
+              "count_label_entropy_nats": -0.0,
+              "depth": 11,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "0": 1
+              },
+              "independent_coin_baseline": 0.82080078125,
+              "max_extensions": 0,
+              "mean_extensions": 0.0,
+              "min_extensions": 0,
+              "subsets": 1
+            }
+          ],
+          "k": 11,
+          "q": 41
+        },
+        {
+          "by_depth": [
+            {
+              "coefficient_of_variation": 0.022233204295,
+              "count_label_entropy_nats": 0.655481773901,
+              "depth": 1,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "903": 4,
+                "946": 7
+              },
+              "independent_coin_baseline": 924.5,
+              "max_extensions": 946,
+              "mean_extensions": 930.363636363636,
+              "min_extensions": 903,
+              "subsets": 11
+            },
+            {
+              "coefficient_of_variation": 0.031326538077,
+              "count_label_entropy_nats": 0.953019470824,
+              "depth": 2,
+              "distinct_extension_counts": 3,
+              "extension_count_histogram": {
+                "400": 6,
+                "420": 28,
+                "441": 21
+              },
+              "independent_coin_baseline": 462.25,
+              "max_extensions": 441,
+              "mean_extensions": 425.836363636364,
+              "min_extensions": 400,
+              "subsets": 55
+            },
+            {
+              "coefficient_of_variation": 0.04658969888,
+              "count_label_entropy_nats": 2.807540999463,
+              "depth": 3,
+              "distinct_extension_counts": 23,
+              "extension_count_histogram": {
+                "153": 2,
+                "158": 3,
+                "159": 4,
+                "162": 4,
+                "163": 2,
+                "164": 7,
+                "166": 2,
+                "167": 4,
+                "168": 4,
+                "169": 6,
+                "170": 2,
+                "172": 8,
+                "173": 2,
+                "174": 20,
+                "176": 23,
+                "177": 2,
+                "178": 17,
+                "180": 8,
+                "182": 6,
+                "184": 12,
+                "186": 18,
+                "188": 7,
+                "190": 2
+              },
+              "independent_coin_baseline": 231.125,
+              "max_extensions": 190,
+              "mean_extensions": 175.624242424242,
+              "min_extensions": 153,
+              "subsets": 165
+            },
+            {
+              "coefficient_of_variation": 0.089767230668,
+              "count_label_entropy_nats": 3.063480059055,
+              "depth": 4,
+              "distinct_extension_counts": 28,
+              "extension_count_histogram": {
+                "39": 1,
+                "49": 2,
+                "53": 5,
+                "54": 4,
+                "55": 12,
+                "56": 4,
+                "57": 6,
+                "58": 10,
+                "59": 5,
+                "60": 14,
+                "61": 8,
+                "62": 18,
+                "63": 24,
+                "64": 24,
+                "65": 18,
+                "66": 34,
+                "67": 22,
+                "68": 24,
+                "69": 22,
+                "70": 16,
+                "71": 17,
+                "72": 8,
+                "73": 11,
+                "74": 7,
+                "75": 2,
+                "76": 2,
+                "78": 4,
+                "79": 6
+              },
+              "independent_coin_baseline": 115.5625,
+              "max_extensions": 79,
+              "mean_extensions": 65.336363636364,
+              "min_extensions": 39,
+              "subsets": 330
+            },
+            {
+              "coefficient_of_variation": 0.164602716223,
+              "count_label_entropy_nats": 2.695987353299,
+              "depth": 5,
+              "distinct_extension_counts": 21,
+              "extension_count_histogram": {
+                "12": 3,
+                "14": 4,
+                "15": 4,
+                "16": 15,
+                "17": 12,
+                "18": 14,
+                "19": 14,
+                "20": 30,
+                "21": 48,
+                "22": 58,
+                "23": 62,
+                "24": 51,
+                "25": 28,
+                "26": 34,
+                "27": 34,
+                "28": 17,
+                "29": 8,
+                "30": 6,
+                "31": 12,
+                "32": 6,
+                "33": 2
+              },
+              "independent_coin_baseline": 57.78125,
+              "max_extensions": 33,
+              "mean_extensions": 23.090909090909,
+              "min_extensions": 12,
+              "subsets": 462
+            },
+            {
+              "coefficient_of_variation": 0.22150293647,
+              "count_label_entropy_nats": 2.101046788602,
+              "depth": 6,
+              "distinct_extension_counts": 11,
+              "extension_count_histogram": {
+                "5": 8,
+                "6": 30,
+                "7": 60,
+                "8": 89,
+                "9": 88,
+                "10": 66,
+                "11": 60,
+                "12": 29,
+                "13": 20,
+                "14": 11,
+                "15": 1
+              },
+              "independent_coin_baseline": 28.890625,
+              "max_extensions": 15,
+              "mean_extensions": 9.179653679654,
+              "min_extensions": 5,
+              "subsets": 462
+            },
+            {
+              "coefficient_of_variation": 0.180651651524,
+              "count_label_entropy_nats": 1.21218452432,
+              "depth": 7,
+              "distinct_extension_counts": 5,
+              "extension_count_histogram": {
+                "4": 127,
+                "5": 126,
+                "6": 61,
+                "7": 14,
+                "8": 2
+              },
+              "independent_coin_baseline": 14.4453125,
+              "max_extensions": 8,
+              "mean_extensions": 4.90303030303,
+              "min_extensions": 4,
+              "subsets": 330
+            },
+            {
+              "coefficient_of_variation": 0.12615934755,
+              "count_label_entropy_nats": 0.508690278893,
+              "depth": 8,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "3": 131,
+                "4": 34
+              },
+              "independent_coin_baseline": 7.22265625,
+              "max_extensions": 4,
+              "mean_extensions": 3.206060606061,
+              "min_extensions": 3,
+              "subsets": 165
+            },
+            {
+              "coefficient_of_variation": 0.091925269116,
+              "count_label_entropy_nats": 0.156210171062,
+              "depth": 9,
+              "distinct_extension_counts": 2,
+              "extension_count_histogram": {
+                "2": 53,
+                "3": 2
+              },
+              "independent_coin_baseline": 3.611328125,
+              "max_extensions": 3,
+              "mean_extensions": 2.036363636364,
+              "min_extensions": 2,
+              "subsets": 55
+            },
+            {
+              "coefficient_of_variation": 0.0,
+              "count_label_entropy_nats": -0.0,
+              "depth": 10,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "1": 11
+              },
+              "independent_coin_baseline": 1.8056640625,
+              "max_extensions": 1,
+              "mean_extensions": 1.0,
+              "min_extensions": 1,
+              "subsets": 11
+            },
+            {
+              "coefficient_of_variation": null,
+              "count_label_entropy_nats": -0.0,
+              "depth": 11,
+              "distinct_extension_counts": 1,
+              "extension_count_histogram": {
+                "0": 1
+              },
+              "independent_coin_baseline": 0.90283203125,
+              "max_extensions": 0,
+              "mean_extensions": 0.0,
+              "min_extensions": 0,
+              "subsets": 1
+            }
+          ],
+          "k": 11,
+          "q": 43
+        }
+      ],
+      "scope": "all subsets of one exact maximum witness at q in {13,19,29,31,41,43}; extension counts impose both externality and general position"
+    },
+    "saturated_uncertainty": {
+      "kill_criterion": "The q=5 coherent examples are not distinguished by a sharp uncertainty gap, additive-energy signature, or exact Paley eigen-residual.",
+      "rows": [
+        {
+          "candidate_count": 2,
+          "diagnostics": [
+            {
+              "additive_energy": 200,
+              "coherence_violations_min": 0,
+              "fourier_entropy_nats": 2.07944154168,
+              "normalized_additive_energy": 0.390625,
+              "orientation_bits": "0101",
+              "paley_nonsquare_eigen_residual_squared": 0.0,
+              "paley_square_eigen_residual_squared": 200.0,
+              "sumset_size": 25,
+              "support_size": 8,
+              "uncertainty_gap_nats": 0.940007258491
+            },
+            {
+              "additive_energy": 200,
+              "coherence_violations_min": 0,
+              "fourier_entropy_nats": 2.07944154168,
+              "normalized_additive_energy": 0.390625,
+              "orientation_bits": "0110",
+              "paley_nonsquare_eigen_residual_squared": 0.0,
+              "paley_square_eigen_residual_squared": 200.0,
+              "sumset_size": 25,
+              "support_size": 8,
+              "uncertainty_gap_nats": 0.940007258491
+            }
+          ],
+          "q": 5
+        },
+        {
+          "candidate_count": 5,
+          "diagnostics": [
+            {
+              "additive_energy": 318,
+              "coherence_violations_min": 2,
+              "fourier_entropy_nats": 3.028530358658,
+              "normalized_additive_energy": 0.318,
+              "orientation_bits": "00000",
+              "paley_nonsquare_eigen_residual_squared": 378.0,
+              "paley_square_eigen_residual_squared": 112.0,
+              "sumset_size": 43,
+              "support_size": 10,
+              "uncertainty_gap_nats": 1.439295153541
+            },
+            {
+              "additive_energy": 318,
+              "coherence_violations_min": 2,
+              "fourier_entropy_nats": 3.028530358658,
+              "normalized_additive_energy": 0.318,
+              "orientation_bits": "00111",
+              "paley_nonsquare_eigen_residual_squared": 378.0,
+              "paley_square_eigen_residual_squared": 112.0,
+              "sumset_size": 43,
+              "support_size": 10,
+              "uncertainty_gap_nats": 1.439295153541
+            },
+            {
+              "additive_energy": 318,
+              "coherence_violations_min": 2,
+              "fourier_entropy_nats": 3.028530358658,
+              "normalized_additive_energy": 0.318,
+              "orientation_bits": "00111",
+              "paley_nonsquare_eigen_residual_squared": 378.0,
+              "paley_square_eigen_residual_squared": 112.0,
+              "sumset_size": 43,
+              "support_size": 10,
+              "uncertainty_gap_nats": 1.439295153541
+            },
+            {
+              "additive_energy": 318,
+              "coherence_violations_min": 2,
+              "fourier_entropy_nats": 3.028530358658,
+              "normalized_additive_energy": 0.318,
+              "orientation_bits": "00000",
+              "paley_nonsquare_eigen_residual_squared": 378.0,
+              "paley_square_eigen_residual_squared": 112.0,
+              "sumset_size": 43,
+              "support_size": 10,
+              "uncertainty_gap_nats": 1.439295153541
+            },
+            {
+              "additive_energy": 318,
+              "coherence_violations_min": 2,
+              "fourier_entropy_nats": 3.028530358658,
+              "normalized_additive_energy": 0.318,
+              "orientation_bits": "01100",
+              "paley_nonsquare_eigen_residual_squared": 378.0,
+              "paley_square_eigen_residual_squared": 112.0,
+              "sumset_size": 43,
+              "support_size": 10,
+              "uncertainty_gap_nats": 1.439295153541
+            }
+          ],
+          "q": 7
+        },
+        {
+          "candidate_count": 28,
+          "diagnostics": [
+            {
+              "additive_energy": 754,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 3.899810077546,
+              "normalized_additive_energy": 0.274781341108,
+              "orientation_bits": "0000001",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 73,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.743076861565
+            },
+            {
+              "additive_energy": 754,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 3.899810077546,
+              "normalized_additive_energy": 0.274781341108,
+              "orientation_bits": "0000001",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 73,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.743076861565
+            },
+            {
+              "additive_energy": 666,
+              "coherence_violations_min": 6,
+              "fourier_entropy_nats": 3.983855099251,
+              "normalized_additive_energy": 0.242711370262,
+              "orientation_bits": "0000000",
+              "paley_nonsquare_eigen_residual_squared": 1166.0,
+              "paley_square_eigen_residual_squared": 528.0,
+              "sumset_size": 85,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.827121883269
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0001010",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 754,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 3.899810077546,
+              "normalized_additive_energy": 0.274781341108,
+              "orientation_bits": "0000001",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 73,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.743076861565
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0001100",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 666,
+              "coherence_violations_min": 6,
+              "fourier_entropy_nats": 3.983855099251,
+              "normalized_additive_energy": 0.242711370262,
+              "orientation_bits": "0000000",
+              "paley_nonsquare_eigen_residual_squared": 1166.0,
+              "paley_square_eigen_residual_squared": 528.0,
+              "sumset_size": 85,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.827121883269
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0111111",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0100000",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 666,
+              "coherence_violations_min": 6,
+              "fourier_entropy_nats": 3.983855099251,
+              "normalized_additive_energy": 0.242711370262,
+              "orientation_bits": "0000000",
+              "paley_nonsquare_eigen_residual_squared": 1166.0,
+              "paley_square_eigen_residual_squared": 528.0,
+              "sumset_size": 85,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.827121883269
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0001010",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0001010",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 754,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 3.899810077546,
+              "normalized_additive_energy": 0.274781341108,
+              "orientation_bits": "0000001",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 73,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.743076861565
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0001100",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0001100",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 666,
+              "coherence_violations_min": 6,
+              "fourier_entropy_nats": 3.983855099251,
+              "normalized_additive_energy": 0.242711370262,
+              "orientation_bits": "0011000",
+              "paley_nonsquare_eigen_residual_squared": 1166.0,
+              "paley_square_eigen_residual_squared": 528.0,
+              "sumset_size": 85,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.827121883269
+            },
+            {
+              "additive_energy": 754,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 3.899810077546,
+              "normalized_additive_energy": 0.274781341108,
+              "orientation_bits": "0000001",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 73,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.743076861565
+            },
+            {
+              "additive_energy": 666,
+              "coherence_violations_min": 6,
+              "fourier_entropy_nats": 3.983855099251,
+              "normalized_additive_energy": 0.242711370262,
+              "orientation_bits": "0011000",
+              "paley_nonsquare_eigen_residual_squared": 1166.0,
+              "paley_square_eigen_residual_squared": 528.0,
+              "sumset_size": 85,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.827121883269
+            },
+            {
+              "additive_energy": 754,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 3.899810077546,
+              "normalized_additive_energy": 0.274781341108,
+              "orientation_bits": "0000001",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 73,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.743076861565
+            },
+            {
+              "additive_energy": 666,
+              "coherence_violations_min": 6,
+              "fourier_entropy_nats": 3.983855099251,
+              "normalized_additive_energy": 0.242711370262,
+              "orientation_bits": "0000000",
+              "paley_nonsquare_eigen_residual_squared": 1166.0,
+              "paley_square_eigen_residual_squared": 528.0,
+              "sumset_size": 85,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.827121883269
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0100000",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0111111",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 666,
+              "coherence_violations_min": 6,
+              "fourier_entropy_nats": 3.983855099251,
+              "normalized_additive_energy": 0.242711370262,
+              "orientation_bits": "0000000",
+              "paley_nonsquare_eigen_residual_squared": 1166.0,
+              "paley_square_eigen_residual_squared": 528.0,
+              "sumset_size": 85,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.827121883269
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0100000",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0110000",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 754,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 3.899810077546,
+              "normalized_additive_energy": 0.274781341108,
+              "orientation_bits": "0001111",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 73,
+              "support_size": 14,
+              "uncertainty_gap_nats": 1.743076861565
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0010000",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            },
+            {
+              "additive_energy": 578,
+              "coherence_violations_min": 4,
+              "fourier_entropy_nats": 4.184331089819,
+              "normalized_additive_energy": 0.210641399417,
+              "orientation_bits": "0101000",
+              "paley_nonsquare_eigen_residual_squared": 1342.0,
+              "paley_square_eigen_residual_squared": 352.0,
+              "sumset_size": 80,
+              "support_size": 14,
+              "uncertainty_gap_nats": 2.027597873837
+            }
+          ],
+          "q": 11
+        },
+        {
+          "candidate_count": 55,
+          "diagnostics": [
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00110000011",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00011000011",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00011000011",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00111110000",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.305102346514,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000001111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.50726684154
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000010011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000101001",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.305102346514,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000001111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.50726684154
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000001011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000101010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.31590004912,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000001101",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.518064544146
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.31590004912,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000010011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.518064544146
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.275350335667,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000000000",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.477514830692
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.391469795857,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000011010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.593634290882
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.391469795857,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000011010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.593634290882
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.275350335667,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000000000",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.477514830692
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.375492448753,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00010100111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.577656943778
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00110000000",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.375492448753,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00001100111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.577656943778
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.370052845952,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00001000011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.572217340977
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.370052845952,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00001000011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.572217340977
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00000011100",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00000011100",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.375492448753,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00010100111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.577656943778
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00110000000",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.375492448753,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00001100111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.577656943778
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.370052845952,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00001000011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.572217340977
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.370052845952,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00001000011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.572217340977
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00011000011",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.275350335667,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000000000",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.477514830692
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.391469795857,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000011010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.593634290882
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.391469795857,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000011010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.593634290882
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.275350335667,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000000000",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.477514830692
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00111110000",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.305102346514,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000001111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.50726684154
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000010101",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000011001",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.305102346514,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000001111",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.50726684154
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000001101",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.329975718481,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000011010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.532140213507
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.31590004912,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000001101",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.518064544146
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.31590004912,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000010011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.518064544146
+            },
+            {
+              "additive_energy": 1602,
+              "coherence_violations_min": 20,
+              "fourier_entropy_nats": 5.117789823957,
+              "normalized_additive_energy": 0.150450788881,
+              "orientation_bits": "00110000011",
+              "paley_nonsquare_eigen_residual_squared": 4902.0,
+              "paley_square_eigen_residual_squared": 3040.0,
+              "sumset_size": 217,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.319954318983
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.364749403076,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000110000",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.566913898101
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.348113177178,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000000001",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.550277672204
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.426804367829,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000011000",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.628968862854
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.391469795857,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000110001",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.593634290882
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.391469795857,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000110001",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.593634290882
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.426804367829,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000010100",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.628968862854
+            },
+            {
+              "additive_energy": 1338,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.348113177178,
+              "normalized_additive_energy": 0.125657400451,
+              "orientation_bits": "00000000010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 210,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.550277672204
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.364749403076,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000101000",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.566913898101
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.361784685123,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00001100010",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.563949180149
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.361784685123,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00001100001",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.563949180149
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.305102346514,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000011011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.50726684154
+            },
+            {
+              "additive_energy": 1418,
+              "coherence_violations_min": 19,
+              "fourier_entropy_nats": 5.305102346514,
+              "normalized_additive_energy": 0.13317054846,
+              "orientation_bits": "00000011011",
+              "paley_nonsquare_eigen_residual_squared": 5054.0,
+              "paley_square_eigen_residual_squared": 2888.0,
+              "sumset_size": 202,
+              "support_size": 22,
+              "uncertainty_gap_nats": 2.50726684154
+            }
+          ],
+          "q": 19
+        },
+        {
+          "candidate_count": 39,
+          "diagnostics": [
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.822632498118,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111111101",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.809740604281
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.723969702399,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000110001100",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.711077808562
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000001111111",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.785137055216,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0001001011000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.772245161379
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.766567963369,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111101101",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.753676069532
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0011100001111",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.75575380075,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000000101000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.742861906913
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000000000110",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.75575380075,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000000011000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.742861906913
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.822632498118,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111111110",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.809740604281
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.822632498118,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111111101",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.809740604281
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000111000011",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000001111100",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.77816024815,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000010010111",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.765268354313
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.77816024815,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000010010111",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.765268354313
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0010000110011",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.723969702399,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000110001100",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.711077808562
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.723969702399,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000110001100",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.711077808562
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0010000110011",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.77816024815,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000000110111",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.765268354313
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.77816024815,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000000110111",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.765268354313
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000001111100",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000111000011",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.75575380075,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000000101000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.742861906913
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000000000110",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.75575380075,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000000011000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.742861906913
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.785137055216,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0001001011000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.772245161379
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.766567963369,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111101101",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.753676069532
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0011100001111",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0000001111111",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 2094,
+              "coherence_violations_min": 30,
+              "fourier_entropy_nats": 5.504306358964,
+              "normalized_additive_energy": 0.119139736004,
+              "orientation_bits": "0111111111100",
+              "paley_nonsquare_eigen_residual_squared": 8234.0,
+              "paley_square_eigen_residual_squared": 5520.0,
+              "sumset_size": 319,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.491414465128
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.723969702399,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111110001",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.711077808562
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.75575380075,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0010001110000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.742861906913
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.75575380075,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0010010110000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.742861906913
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.723969702399,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111110010",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.711077808562
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.795475513009,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111101010",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.782583619172
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.795475513009,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111101100",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.782583619172
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.723969702399,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111110100",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.711077808562
+            },
+            {
+              "additive_energy": 1990,
+              "coherence_violations_min": 28,
+              "fourier_entropy_nats": 5.723969702399,
+              "normalized_additive_energy": 0.11322257624,
+              "orientation_bits": "0000111111000",
+              "paley_nonsquare_eigen_residual_squared": 8602.0,
+              "paley_square_eigen_residual_squared": 5152.0,
+              "sumset_size": 273,
+              "support_size": 26,
+              "uncertainty_gap_nats": 2.711077808562
+            }
+          ],
+          "q": 23
+        }
+      ],
+      "scope": "all character candidates over prime q in {5,7,11,19,23}"
+    },
+    "split_support": {
+      "kill_criterion": "The missing sets have generic Hilbert functions through degree 10 and no persistent line concentration beyond their O(|S|/q) scale.",
+      "rows": [
+        {
+          "chord_count": 15,
+          "first_unexpected_hilbert_degree": 4,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 14,
+              "rank_defect": 1,
+              "vanishing_kernel_dimension": 1
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 18,
+              "rank_defect": 3,
+              "vanishing_kernel_dimension": 3
+            },
+            {
+              "degree": 6,
+              "generic_rank": 24,
+              "monomials": 28,
+              "rank": 21,
+              "rank_defect": 3,
+              "vanishing_kernel_dimension": 7
+            },
+            {
+              "degree": 7,
+              "generic_rank": 24,
+              "monomials": 36,
+              "rank": 23,
+              "rank_defect": 1,
+              "vanishing_kernel_dimension": 13
+            },
+            {
+              "degree": 8,
+              "generic_rank": 24,
+              "monomials": 45,
+              "rank": 24,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 21
+            },
+            {
+              "degree": 9,
+              "generic_rank": 24,
+              "monomials": 55,
+              "rank": 24,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 31
+            },
+            {
+              "degree": 10,
+              "generic_rank": 24,
+              "monomials": 66,
+              "rank": 24,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 42
+            }
+          ],
+          "k": 6,
+          "line_intersection_profile": {
+            "0": 33,
+            "1": 36,
+            "2": 60,
+            "3": 36,
+            "4": 18
+          },
+          "max_missing_on_line": 4,
+          "missing_count": 24,
+          "missing_over_q": 1.846153846154,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 24,
+            "1": 102,
+            "2": 33,
+            "3": 4,
+            "5": 6
+          },
+          "q": 13
+        },
+        {
+          "chord_count": 15,
+          "first_unexpected_hilbert_degree": 10,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 28,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 36,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 45,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 9,
+              "generic_rank": 55,
+              "monomials": 55,
+              "rank": 55,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 10,
+              "generic_rank": 66,
+              "monomials": 66,
+              "rank": 63,
+              "rank_defect": 3,
+              "vanishing_kernel_dimension": 3
+            }
+          ],
+          "k": 6,
+          "line_intersection_profile": {
+            "0": 15,
+            "2": 8,
+            "3": 28,
+            "4": 66,
+            "5": 70,
+            "6": 62,
+            "7": 46,
+            "8": 6,
+            "9": 4,
+            "10": 2
+          },
+          "max_missing_on_line": 10,
+          "missing_count": 84,
+          "missing_over_q": 4.941176470588,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 84,
+            "1": 162,
+            "2": 33,
+            "3": 4,
+            "5": 6
+          },
+          "q": 17
+        },
+        {
+          "chord_count": 15,
+          "first_unexpected_hilbert_degree": 10,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 28,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 36,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 45,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 9,
+              "generic_rank": 55,
+              "monomials": 55,
+              "rank": 55,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 10,
+              "generic_rank": 66,
+              "monomials": 66,
+              "rank": 65,
+              "rank_defect": 1,
+              "vanishing_kernel_dimension": 1
+            }
+          ],
+          "k": 6,
+          "line_intersection_profile": {
+            "0": 15,
+            "4": 50,
+            "5": 40,
+            "6": 92,
+            "7": 80,
+            "8": 68,
+            "9": 16,
+            "10": 20
+          },
+          "max_missing_on_line": 10,
+          "missing_count": 120,
+          "missing_over_q": 6.315789473684,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 120,
+            "1": 210,
+            "2": 15,
+            "3": 10,
+            "5": 6
+          },
+          "q": 19
+        },
+        {
+          "chord_count": 28,
+          "first_unexpected_hilbert_degree": null,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 28,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 36,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 45,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 9,
+              "generic_rank": 55,
+              "monomials": 55,
+              "rank": 55,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 10,
+              "generic_rank": 66,
+              "monomials": 66,
+              "rank": 66,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            }
+          ],
+          "k": 8,
+          "line_intersection_profile": {
+            "0": 30,
+            "1": 16,
+            "2": 39,
+            "3": 97,
+            "4": 111,
+            "5": 115,
+            "6": 102,
+            "7": 32,
+            "8": 11
+          },
+          "max_missing_on_line": 8,
+          "missing_count": 97,
+          "missing_over_q": 4.217391304348,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 97,
+            "1": 247,
+            "2": 165,
+            "3": 9,
+            "4": 3,
+            "7": 8
+          },
+          "q": 23
+        },
+        {
+          "chord_count": 45,
+          "first_unexpected_hilbert_degree": 7,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 28,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 35,
+              "rank_defect": 1,
+              "vanishing_kernel_dimension": 1
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 41,
+              "rank_defect": 4,
+              "vanishing_kernel_dimension": 4
+            },
+            {
+              "degree": 9,
+              "generic_rank": 50,
+              "monomials": 55,
+              "rank": 46,
+              "rank_defect": 4,
+              "vanishing_kernel_dimension": 9
+            },
+            {
+              "degree": 10,
+              "generic_rank": 50,
+              "monomials": 66,
+              "rank": 49,
+              "rank_defect": 1,
+              "vanishing_kernel_dimension": 17
+            }
+          ],
+          "k": 10,
+          "line_intersection_profile": {
+            "0": 161,
+            "1": 230,
+            "2": 285,
+            "3": 90,
+            "4": 95,
+            "5": 10
+          },
+          "max_missing_on_line": 5,
+          "missing_count": 50,
+          "missing_over_q": 1.724137931034,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 50,
+            "1": 430,
+            "2": 245,
+            "3": 85,
+            "4": 20,
+            "5": 1,
+            "9": 10
+          },
+          "q": 29
+        },
+        {
+          "chord_count": 45,
+          "first_unexpected_hilbert_degree": 6,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 27,
+              "rank_defect": 1,
+              "vanishing_kernel_dimension": 1
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 33,
+              "rank_defect": 3,
+              "vanishing_kernel_dimension": 3
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 39,
+              "rank_defect": 6,
+              "vanishing_kernel_dimension": 6
+            },
+            {
+              "degree": 9,
+              "generic_rank": 55,
+              "monomials": 55,
+              "rank": 45,
+              "rank_defect": 10,
+              "vanishing_kernel_dimension": 10
+            },
+            {
+              "degree": 10,
+              "generic_rank": 60,
+              "monomials": 66,
+              "rank": 50,
+              "rank_defect": 10,
+              "vanishing_kernel_dimension": 16
+            }
+          ],
+          "k": 10,
+          "line_intersection_profile": {
+            "0": 143,
+            "1": 180,
+            "2": 480,
+            "3": 60,
+            "4": 60,
+            "5": 60,
+            "6": 10
+          },
+          "max_missing_on_line": 6,
+          "missing_count": 60,
+          "missing_over_q": 1.935483870968,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 60,
+            "1": 570,
+            "2": 210,
+            "3": 90,
+            "4": 15,
+            "5": 6,
+            "9": 10
+          },
+          "q": 31
+        },
+        {
+          "chord_count": 45,
+          "first_unexpected_hilbert_degree": null,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 28,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 36,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 45,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 9,
+              "generic_rank": 55,
+              "monomials": 55,
+              "rank": 55,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 10,
+              "generic_rank": 66,
+              "monomials": 66,
+              "rank": 66,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            }
+          ],
+          "k": 10,
+          "line_intersection_profile": {
+            "0": 45,
+            "2": 4,
+            "3": 34,
+            "4": 64,
+            "5": 154,
+            "6": 253,
+            "7": 264,
+            "8": 236,
+            "9": 150,
+            "10": 131,
+            "11": 48,
+            "12": 16,
+            "13": 2,
+            "14": 6
+          },
+          "max_missing_on_line": 14,
+          "missing_count": 260,
+          "missing_over_q": 7.027027027027,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 260,
+            "1": 674,
+            "2": 340,
+            "3": 76,
+            "4": 7,
+            "5": 2,
+            "9": 10
+          },
+          "q": 37
+        },
+        {
+          "chord_count": 55,
+          "first_unexpected_hilbert_degree": null,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 28,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 36,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 45,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 9,
+              "generic_rank": 55,
+              "monomials": 55,
+              "rank": 55,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 10,
+              "generic_rank": 66,
+              "monomials": 66,
+              "rank": 66,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            }
+          ],
+          "k": 11,
+          "line_intersection_profile": {
+            "0": 55,
+            "1": 2,
+            "2": 6,
+            "3": 44,
+            "4": 112,
+            "5": 233,
+            "6": 291,
+            "7": 312,
+            "8": 257,
+            "9": 213,
+            "10": 114,
+            "11": 61,
+            "12": 15,
+            "13": 6,
+            "14": 1,
+            "15": 1
+          },
+          "max_missing_on_line": 15,
+          "missing_count": 280,
+          "missing_over_q": 6.829268292683,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 280,
+            "1": 745,
+            "2": 495,
+            "3": 135,
+            "4": 15,
+            "10": 11
+          },
+          "q": 41
+        },
+        {
+          "chord_count": 55,
+          "first_unexpected_hilbert_degree": null,
+          "hilbert": [
+            {
+              "degree": 1,
+              "generic_rank": 3,
+              "monomials": 3,
+              "rank": 3,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 2,
+              "generic_rank": 6,
+              "monomials": 6,
+              "rank": 6,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 3,
+              "generic_rank": 10,
+              "monomials": 10,
+              "rank": 10,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 4,
+              "generic_rank": 15,
+              "monomials": 15,
+              "rank": 15,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 5,
+              "generic_rank": 21,
+              "monomials": 21,
+              "rank": 21,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 6,
+              "generic_rank": 28,
+              "monomials": 28,
+              "rank": 28,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 7,
+              "generic_rank": 36,
+              "monomials": 36,
+              "rank": 36,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 8,
+              "generic_rank": 45,
+              "monomials": 45,
+              "rank": 45,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 9,
+              "generic_rank": 55,
+              "monomials": 55,
+              "rank": 55,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            },
+            {
+              "degree": 10,
+              "generic_rank": 66,
+              "monomials": 66,
+              "rank": 66,
+              "rank_defect": 0,
+              "vanishing_kernel_dimension": 0
+            }
+          ],
+          "k": 11,
+          "line_intersection_profile": {
+            "0": 55,
+            "2": 2,
+            "4": 46,
+            "5": 89,
+            "6": 160,
+            "7": 310,
+            "8": 346,
+            "9": 309,
+            "10": 242,
+            "11": 192,
+            "12": 74,
+            "13": 42,
+            "14": 15,
+            "15": 4,
+            "16": 4,
+            "17": 2,
+            "18": 1
+          },
+          "max_missing_on_line": 18,
+          "missing_count": 356,
+          "missing_over_q": 8.279069767442,
+          "off_conic_chord_multiplicity_profile": {
+            "0": 356,
+            "1": 804,
+            "2": 539,
+            "3": 129,
+            "4": 9,
+            "5": 1,
+            "10": 11
+          },
+          "q": 43
+        }
+      ],
+      "scope": "maximum-coverage extremal witnesses in every audited prime field q>=13; degrees 1 through 10"
+    }
+  }
+}

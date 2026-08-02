@@ -270,7 +270,7 @@ coherent-double-clique program.
 - Does the saturated-internal signed indicator attain a genuine
   uncertainty-principle equality case whose support can be classified?
 
-## 8. Exhaustive resolution and parked portfolio
+## 8. Exhaustive resolution and probability portfolio
 
 The follow-up exhaustive audit is
 `notes/2026-08-01-c756-masked-rs-collision-audit.md`.  It enumerates every
@@ -304,8 +304,8 @@ fallback carrier if the direct \(h\ge1\) theorem is too strong.  The identity
 \(\sum_{\mu_t>0}(\mu_t-1)=\delta+h\) is exact; the residue-dependent incidence
 of equality \(R=\delta+h\) is unexplained.
 
-The following probability/information routes are deliberately parked for
-later return, in priority order, with their falsifiers retained:
+The following probability/information routes were recorded in priority order
+with their falsifiers retained:
 
 1. **Global split evaluation code.**  Treat the chord product \(H_A\) as a
    completely split projective Reed--Muller word with nonzero support
@@ -330,3 +330,9 @@ later return, in priority order, with their falsifiers retained:
    and cycle cumulants.  A stable forbidden-pattern inequality can feed a
    character-sum or flag-algebra certificate; locally consistent all-negative
    data kills this lowest-priority route.
+
+They were subsequently executed in
+`notes/2026-08-01-c756-probability-cheap-tests.md`.  Entropic uncertainty,
+degree-two Lloyd moments, and uniform local cumulants close negative; global
+split support is mixed-positive; prefix entropy survives with a compressed
+but as-yet-unlabelled extension-count catalogue.

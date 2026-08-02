@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Thirteen research passes complete; the theorem is **not** proved. Reports:
+Fourteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -41,7 +41,8 @@ Thirteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-saturated-internal-branch.md`, and
 `notes/2026-08-01-c756-intercept-subresultant-probe.md`, and
 `notes/2026-08-01-c756-information-probability-structure-lottery.md`, and
-`notes/2026-08-01-c756-masked-rs-collision-audit.md`.
+`notes/2026-08-01-c756-masked-rs-collision-audit.md`, and
+`notes/2026-08-01-c756-probability-cheap-tests.md`.
 
 Branch ledger:
 
@@ -222,6 +223,26 @@ What the exhaustive masked-direction audit adds:
   plane.  Equalities \(m(q)=k_{\min}(q)\) are not evidence that every extremizer is a
   near-cover.
 
+What the probability/information cheap-test pass adds:
+
+- the saturated-internal entropic-uncertainty route closes negative as a new mechanism:
+  the \(q=5\) frame has an exact Paley eigen-residual but a positive 0.94-nat uncertainty
+  gap, while the exact residual is only the known coherence condition in Fourier form;
+- the global split-support test is mixed-positive: maximum-coverage missing sets have
+  unexpected first Hilbert defects in degrees \(4,7,6\) at \(q=13,29,31\), but the
+  phenomenon is not uniform through degree 10 at \(q=23,37,41,43\);
+- the quadratic Lloyd/Delsarte incidence route closes negative at the first live boundary:
+  the exact covering profile
+  \(N_1=2502,N_2=210,N_6=85,N_{11}=12\) satisfies all universal degree-two moments and
+  the twelve forced arc vertices at \((q,k)=(53,12)\);
+- prefix entropy survives its cheap falsifier: middle-depth extension counts collapse to
+  only 7--21 values across 252--462 subsets of each tested maximum witness, but the
+  geometric labels of those count classes are unknown and only one witness per field was
+  tested;
+- uniform local \(K_4/K_5\) cumulants close negative: mutual information is tiny at
+  \(q=5,7\), and the \(q=11\) hexagon supplies the all-negative five-pattern absent in
+  those two fields.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -261,13 +282,14 @@ Two independent uniform obstructions are still required:
 The old secant-pencil and association-scheme candidates are superseded.  The active
 saturated-internal gate is the coherent Paley double-clique classification (equivalently,
 exploit balance, simultaneous angle bijections, or the master-polynomial divisibility).
-The nonsaturated branch has no bounded algebraic-compression gate left.  Its clean active
+The nonsaturated branch has no bounded per-line algebraic-compression gate left.  Its clean active
 target is now to prove \(h\ge1\): after deleting any arc point, a conic-external set cannot
 determine every direction on a spare external line.  This is a masked Rédei--Szőnyi-style
 direction theorem whose natural global carrier is the completely split chord polynomial;
-the weighted collision statistic \(R\), projective Reed--Muller support rigidity,
-Lloyd/Delsarte multiplicity integrality, prefix entropy, and local character cumulants are
-recorded as fallback or diagnostic routes in the information/probability report.
+the weighted collision statistic \(R\) remains a fallback.  The next global diagnostics
+are to extract the unexpected \(q=13,29,31\) missing-set curves and geometrically label
+the compressed prefix-extension classes.  Raw entropic uncertainty, degree-two Lloyd
+moments, and unstructured local cumulants are closed-negative.
 
 Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
 now has the same theorem-shaped status the saturated-external branch had two passes before
@@ -276,10 +298,11 @@ The fragmented-Moore/intercept mechanism is independently durable negative mater
 the precise explanation requested here for why the chord-moment compression family cannot
 close.  The exhaustive masked-direction audit kills threshold unification but promotes
 the simpler \(h\ge1\) theorem, supported without exception in the certified range; this
-sharpens but does not yet raise the 10--15% full-theorem odds.  Cheap
+sharpens but does not yet raise the 10--15% full-theorem odds.  The probability cheap tests
+leave two bounded global leads but no new theorem.  Cheap
 hygiene still owed before a later end-to-end handoff is one explicit
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
-read of the full thirteen-pass argument; neither item reopens a closed mathematical branch.
+read of the full fourteen-pass argument; neither item reopens a closed mathematical branch.
 
 Decision split: do not price the saturated crown and the full theorem as one outcome.
 The realistic publishable narrowing is the **complete saturated classification** — over
