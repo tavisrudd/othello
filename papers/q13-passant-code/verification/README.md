@@ -19,6 +19,8 @@ commands, and replay relationships. The paper-owned Lean package under
 semantics, transports the normalized weight-eight reduction to the cyclic tangent graph, checks
 both weight-ten syndrome profiles, and checks four displayed minimum-word orbits.
 Its formal scope is strictly smaller than the complete release theorem.
+The normalized weight-eight terminal is
+`RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport`.
 
 ## Evidence to extract
 
