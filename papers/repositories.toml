@@ -170,6 +170,20 @@ new = ""
 expected_count = 11
 reason = "commands are executed from the standalone repository root after flattening"
 
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all lint clean\n\nall: lint clebsch_passages.pdf\n\nlint:\n\tpython3 ../scripts/lint_tex_spacing.py clebsch_passages.tex sections\n"
+new = ".PHONY: all clean\n\nall: clebsch_passages.pdf\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "clebsch_passages.pdf: clebsch_passages.tex sections/*.tex\n\tpython3 ../scripts/lint_tex_spacing.py clebsch_passages.tex sections\n"
+new = "clebsch_passages.pdf: clebsch_passages.tex sections/*.tex\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
 [[repository]]
 name = "clebsch-rigidity"
 include_release_pdfs = true
