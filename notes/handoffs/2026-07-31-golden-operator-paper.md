@@ -478,6 +478,17 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C808 is complete.  A full Milnor--Serre exposition audit aligned the abstract,
+introduction, figure, and discussion with the correct unframed
+\(\to\) oriented \(\to\) phase-calibrated hierarchy; separated theorem,
+experimental, and literature paragraph jobs; removed repeated mask and
+resource-gate derivations; clarified the operational normalizations; and
+repaired a transfer/four-set notation clash.  No theorem, numerical gate,
+citation boundary, or experimental claim changed.  The warning-free
+fourteen-page paper passes the complete gate and visual inspection.  Use
+`golden-quantum-statistics-milnor-serre-edited` as the forward artifact.
+Report: `notes/2026-08-02-c808-golden-milnor-serre-copy-edit.md`.
+
 C806 is complete.  The Golden quantum-statistics paper now has a compact
 opening TikZ figure that displays the unframed, oriented, and phase-calibrated
 port hierarchy together with the observables surviving at each level.  An
@@ -587,8 +598,8 @@ reference remain user-owned.
 
 ## Recommended order
 
-1. Use `golden-quantum-statistics-observable-hierarchy-figure` as the forward
-   PRA manuscript; preserve the earlier baseline and tested variants as frozen
+1. Use `golden-quantum-statistics-milnor-serre-edited` as the forward PRA
+   manuscript; preserve the earlier baseline and tested variants as frozen
    comparison artifacts.
 2. The user will post the accepted package, assign live identifiers, and add
    the Clebsch forward reference.

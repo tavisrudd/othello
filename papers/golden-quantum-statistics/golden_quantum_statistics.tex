@@ -32,15 +32,17 @@
 \begin{abstract}
 Which features of a one-particle transfer remain observable when its port
 spaces are unframed, oriented, or fully phase-calibrated?  Singular values
-classify an unframed real transfer; calibrated permanent amplitudes depend on
-the chosen frames; and, up to scale, the determinant is the unique
-least-degree polynomial transforming with their relative orientation.  For
-every symmetric conference matrix, we identify the balanced exchange spectrum
-with a normalized cross-Gram spectrum and prove that it is cut-independent
-exactly through half-size three.  Thus order six is the unique nontrivial realized
-uniform case, with spectrum \(\{1/5,4/5,4/5\}\).  At every higher realized
-order the spectrum varies, while a classical aligned \(3\)-design fixes the
-exact mean and variance of its purity.
+classify an unframed real transfer.  Orienting the port spaces adds the sign
+of the top exterior amplitude; up to scale, the determinant is the unique
+minimal-degree polynomial carrying this relative orientation.  Fully calibrated
+frames expose matrix-dependent amplitudes such as the permanent.  For every
+symmetric conference matrix, we identify the balanced exchange spectrum with
+a normalized cross-Gram spectrum and prove that it is cut-independent exactly
+when each half has size at most three.  Among symmetric conference matrices,
+order six is the unique nontrivial uniform case, with spectrum
+\(\{1/5,4/5,4/5\}\).  For every symmetric conference matrix of higher order,
+the spectrum varies with the cut, while a classical aligned \(3\)-design fixes
+the exact mean and variance of cut purity.
 
 We realize this exceptional endpoint in the Golden six-mode interferometer.
 For a diagonal path control \(D_x\), the postselected block
@@ -61,12 +63,12 @@ design-limit analysis, not a report of a built device.
 \section{Introduction}
 
 Let \(K\) be a real input--output block of a linear one-particle transfer.
-Without calibrated port frames, its singular values are intrinsic.  After
-calibration, bosonic collision-free amplitudes are permanents of the framed
-matrix.  After orienting the two port spaces, the top exterior map becomes the
-signed determinant.  These are different levels of information, not three
-notations for the same observable; Figure~\ref{fig:observable-hierarchy}
-records the resulting hierarchy.
+Without port frames, its singular values are intrinsic.  Orienting the two
+port spaces turns the top exterior map into the signed determinant.  Fixing
+ordered phase-calibrated frames then exposes matrix-dependent amplitudes,
+including bosonic collision-free permanents.  These are different levels of
+information, not three notations for the same observable;
+Figure~\ref{fig:observable-hierarchy} records the hierarchy.
 
 \begin{figure}[t]
 \centering
@@ -98,7 +100,7 @@ records the resulting hierarchy.
 \draw[hierarrow] (oriented)--(calibrated);
 \end{tikzpicture}
 \caption{Observable hierarchy for a one-particle transfer \(K:V\to W\).
-Moving right supplies structure and retains strictly more information.
+Moving right supplies additional structure and can retain more information.
 At the unframed level every scalar invariant factors through the singular
 values.  Orientations add the determinant sign off the singular locus;
 ordered phase-referenced frames then expose matrix-dependent amplitudes such
@@ -131,42 +133,44 @@ classifies the information retained by unframed and oriented port spaces and
 proves that the determinant is the unique minimal-degree polynomial carrying
 their relative orientation.  Second, every balanced Boolean control in the
 six-mode conference family has squared singular spectrum
-\(\{1/5,4/5,4/5\}\).  Paper~III proves that no higher symmetric conference
-order has a cut-independent balanced spectrum.  At higher orders a credited aligned
-\(3\)-design instead fixes the switching-class-independent mean and variance
-of the two-copy purity.  The order-six statement is a structural consequence
-of the signed triangle identity and the \(3+3\) conference block equations,
-not a finite census.  It gives exact symmetric, mixed, and exterior
-exchange-sector benchmarks and the sharp split between twenty invertible and
-44 singular Boolean controls.
-The elementary singular-value classification supplies the invariant language;
-the substantive combination is its minimal orientation carrier, the uniform
-conference spectrum, and the calibrated readout boundary.
+\(\{1/5,4/5,4/5\}\).
+Theorem~\ref{thm:general-exchange-rigidity} proves that no symmetric conference
+matrix of higher order has a cut-independent balanced spectrum.  At higher
+orders a classical aligned \(3\)-design instead fixes the
+switching-class-independent mean and variance of the two-copy purity.  The
+order-six statement follows from the signed triangle identity and the \(3+3\)
+conference block equations, not a finite census.  It gives exact symmetric,
+mixed, and exterior exchange-sector benchmarks and the sharp split between
+twenty invertible and 44 singular Boolean controls.  The singular-value
+classification supplies the language; the contribution is its combination
+with the minimal orientation carrier and calibrated readout boundary.
 
-The orientation mechanism is as follows.  The Golden data determine the
-two three-dimensional port spaces but not ordered orthonormal frames inside
-them.  Changing those frames acts on \(K\) from the left and right by
-orthogonal matrices.  The top exterior power is intrinsically a map between
-the two determinant lines; after both lines are oriented, it becomes the
-signed scalar \(\det K\), while the ordinary filled-fermion probability
-\(|\det K|^2\) is sign-blind.  The permanent does not descend through the same
-port-frame action.  Consequently the canonical intrinsic bosonic aggregate
-used here is not a second signed Segre coordinate: it is a spectral quantity
-on the symmetric cube.
+The mechanism is the determinant line.  The Golden data determine the two
+three-dimensional port spaces but not ordered orthonormal frames inside them.
+Changing those frames acts on \(K\) from the left and right by orthogonal
+matrices.  The top exterior power is intrinsically a map between the two
+determinant lines; after both lines are oriented, it becomes the signed scalar
+\(\det K\), while the filled-fermion probability \(|\det K|^2\) is
+sign-blind.  The permanent does not descend through the same port-frame
+action.  The canonical intrinsic bosonic aggregate is therefore a spectral
+quantity on the symmetric cube, not a second signed Segre coordinate.
 
 Theorems~\ref{thm:orbit-boundary},
 \ref{thm:general-exchange-rigidity}, and~\ref{thm:exchange-boundary} separate
 the general orientation boundary, the conference classification, and the
-exact Golden benchmark.  Their experimental consequence has three levels.
-Phase-referenced
+exact Golden benchmark.
+
+Their experimental consequence has three levels.  Phase-referenced
 one-particle tomography infers calibrated determinant signs; ordinary photons
 measure bosonic controls; direct antisymmetric emulation needs an additional
-three-qutrit resource.  The permanent
-description of multiphoton scattering is standard~\cite{Scheel}; immanants
+three-qutrit resource.
+
+The permanent description of multiphoton scattering is
+standard~\cite{Scheel}; immanants
 organize the intermediate symmetry sectors~\cite{Tichy}, and general
 partial-distinguishability formalisms precede the complementarity identities
-used here~\cite{Shchesnovich}.  General
-boson--fermion complementarity in linear interferometers is due to
+used here~\cite{Shchesnovich}.  General boson--fermion complementarity in
+linear interferometers is due to
 Jabbour and Cerf~\cite{JabbourCerf}; its extension to partially distinguishable
 particles is due to Robbio, Jabbour, and Cerf~\cite{RobbioJabbourCerf}.  The
 Clebsch source paper already records the determinant-line interpretation and
@@ -177,8 +181,8 @@ specialization, and the associated measurement and resource package.
 
 \section{The Golden transfer}
 
-Here is a reproducible local model of the source object.  On the ordered path
-set \(X=\{0,\ldots,5\}\), take
+Fix the following local model of the source object.  On the ordered path set
+\(X=\{0,\ldots,5\}\), take
 \[
 C_0=\begin{pmatrix}
 0&1&1&1&-1&-1\\
@@ -202,8 +206,8 @@ T_0=\{&
 The \(S_6\)-orbit of \(T_0\) has six elements.  For each
 \(T\in\mathcal T\), choose the lexicographically first permutation
 \(\pi_T\) carrying \(T_0\) to \(T\), let \(P_T\) be its permutation matrix,
-and put \(C_T=P_TC_0P_T^{\mathsf T}\).  This is the frozen convention used by
-the artifact.  Transporting the ordered path basis fixes the Hodge and
+and put \(C_T=P_TC_0P_T^{\mathsf T}\).  We use this convention throughout.
+Transporting the ordered path basis fixes the Hodge and
 determinant-line orientations, including the signs \(\varepsilon_T\) below.
 The Clebsch source theorem proves that this marked family is the
 conference-operator realization of the six Joubert coordinates
@@ -242,8 +246,8 @@ with signs fixed by the marked orientations.  They obey
 \end{equation}
 These are the Segre equations in Joubert coordinates.  The equations and the
 outer \(S_6\)-action are classical invariant theory
-\cite{HowardMillsonSnowdenVakil}; the point used below is their realization as
-six amplitudes of one marked transfer.
+\cite{HowardMillsonSnowdenVakil}; here we use their realization as six
+amplitudes of one marked transfer.
 
 The six coordinate lines obtained from either three-dimensional eigenspace
 form the classical real \(\operatorname{ETF}(3,6)\) associated with a symmetric
@@ -270,19 +274,17 @@ Write \(H=K^\dagger K\).  For the intrinsic comparison, define
 \]
 The dagger notation keeps the statement valid for the complex port-gauge
 extension; throughout the real Golden construction it is simply transpose.
-The first expression is the sum of all-transferred probabilities, averaged
-over the choice of normalized three-boson input occupation only after division
-by the ten-dimensional symmetric-cube input space.  Thus the operational
-uniform-input average is \(B_{\mathrm{sym}}/10\).  The second expression is
-the filled three-fermion probability.
+The first expression sums, over the ten normalized three-boson input
+occupations, the probabilities that all three bosons transfer.  Dividing by
+ten gives the uniform-input average \(B_{\mathrm{sym}}/10\).  The second
+expression is the filled three-fermion probability.
 
 For an orthogonal sign control, the singular values of \(K\) are the cosines
 of the principal angles between the output space and the controlled image of
 the input space.  For a filtered control they remain transfer singular values,
-but need not be principal-angle cosines.
-The absolute determinant is their product.  Its sign, after orientations are
-chosen, records whether the induced map between the two determinant lines
-preserves or reverses orientation.
+but need not be principal-angle cosines.  Their product is the absolute
+determinant.  After orientations are chosen, its sign records whether the
+induced map between the determinant lines preserves or reverses orientation.
 
 \begin{theorem}[Left--right orbit and orientation boundary]
 \label{thm:orbit-boundary}
@@ -405,12 +407,12 @@ For every symmetric conference matrix,
 \]
 where the \(\alpha_i\) are the eigenvalues of \(A\).  This spectrum is
 independent of the balanced half exactly when \(d\leq3\).  Hence order six is
-the unique nontrivial realized symmetric conference order with uniform
-balanced exchange spectrum.  The order-two case is the trivial one-mode
-case, and no symmetric conference matrix of order four exists.
+the unique nontrivial symmetric conference case with uniform balanced
+exchange spectrum.  The order-two case is the trivial one-mode case, and no
+symmetric conference matrix of order four exists.
 
-For a four-set \(K\), let \(w(K)\) be the sum of its three signed
-Hamilton-cycle products, call \(K\) \emph{aligned} when \(w(K)=3\), and let
+For a four-set \(J\), let \(w(J)\) be the sum of its three signed
+Hamilton-cycle products, call \(J\) \emph{aligned} when \(w(J)=3\), and let
 \(c_Y\) count aligned four-sets contained in \(Y\).  Then
 \[
  \operatorname{tr}(H_Y^2)=\frac{F_d+32c_Y}{q^2},\qquad
@@ -433,9 +435,9 @@ is \(RR^{\mathsf T}=qI-A^2\), the spectral formula follows.
 The identities \(\operatorname{tr}(A^2)=d(d-1)\) and
 \[
  \operatorname{tr}(A^4)=d(d-1)+12\binom d3
-   +8\sum_{\substack{K\subset Y\\|K|=4}}w(K)
+   +8\sum_{\substack{J\subset Y\\|J|=4}}w(J)
 \]
-give the displayed purity formula, because \(w(K)\) is \(3\) on aligned
+give the displayed purity formula, because \(w(J)\) is \(3\) on aligned
 four-sets and \(-1\) otherwise.  Suppose \(d\geq4\) and this purity is
 independent of \(Y\).  The sums of the aligned-set indicator over all
 \(d\)-subsets are then constant.  The characteristic-zero inclusion matrix
@@ -457,8 +459,8 @@ product of the three edge signs, then \(A^2=2I+\tau A\), so \(A^2\) always
 has spectrum \(\{4,1,1\}\).  This proves both directions.
 \end{proof}
 
-The higher-order residue is statistical rather than spectral.  Greaves and
-Suda proved that the aligned sets form a
+At higher orders only statistics remain universal.  Greaves and Suda proved
+that the aligned sets form a
 \(3\)-\((2d,4,(d-3)/2)\) design~\cite[Example~2.3]{GreavesSuda}.
 Classical Johnson inclusion calculus~\cite{IntersectionMatrices} gives, for a
 uniformly chosen balanced half and \(d\geq4\),
@@ -478,8 +480,8 @@ Steiner system and force the 126 projective cuts to split into 36 with
 Paper~III gives the same general theorem at the conference-operator stage
 \cite[Theorem~5.1]{ClebschIII}; the local proof above keeps the present
 observable claim independently assessable.  The aligned design and Johnson
-calculus are classical; the exchange interpretation and rigidity
-classification are the distinct layer used here.
+calculus are classical; the present use is the exchange interpretation and
+rigidity classification.
 
 \begin{remark}[Collective inverse boundary]
 At order \(2d\geq10\), the complete labelled purity landscape recovers every
@@ -562,13 +564,12 @@ then gives the checksum.  The final assertion follows from
 Theorem~\ref{thm:orbit-boundary}.
 \end{proof}
 
-The theorem does not say that calibrated bosonic measurements lose all
-control information.  Once physical port axes are fixed, a permanent is an
-ordinary transition amplitude, accessible only through a phase-sensitive
-multiphoton protocol; photon counting measures its squared modulus.  Such a
-value belongs to the calibrated apparatus rather than to the unmarked Golden
-operator.  Likewise,
-the determinant sign belongs to the oriented amplitude: the probability
+Calibrated bosonic measurements retain more than the spectral aggregate.  Once
+physical port axes are fixed, a permanent is an ordinary transition amplitude,
+accessible only through a phase-sensitive multiphoton protocol; photon
+counting measures its squared modulus.  Such a value belongs to the calibrated
+apparatus rather than to the unmarked Golden operator.  Likewise, the
+determinant sign belongs to the oriented amplitude: the probability
 \(F_{\mathrm{ext}}\) does not retain it.  The precursor below infers that sign
 from phase-referenced one-particle tomography; it does not measure a direct
 many-fermion phase.
@@ -599,29 +600,27 @@ so \(\operatorname{rank}K_S\leq|S|\).  Complementing the control negates its
 cross block and gives the second bound.
 \end{proof}
 
-There are \(64\) Boolean controls \(x\in\{\pm1\}^6\).  The twenty balanced
-controls are the common nonzero determinant optimum.  For each one,
+There are \(64\) Boolean controls \(x\in\{\pm1\}^6\).
+Proposition~\ref{prop:balance-obstruction} bounds the rank of the
+\(2\binom60+2\binom61+2\binom62=44\) unbalanced masks by two.  The common
+balanced spectrum makes all \(\binom63=20\) remaining masks invertible.
+Thus exactly the balanced controls have nonzero determinant, and all attain
+the same Boolean optimum:
 \[
  |\det K_T|=\frac{4}{5\sqrt5},\qquad
  P_F=|\det K_T|^2=\frac{16}{125}.
 \]
-The other 44 controls have zero filled-fermion amplitude.  This gives a sharp
-Boolean boundary rather than a numerical search criterion.
+Hence the Boolean boundary is exact.
 
-Proposition~\ref{prop:balance-obstruction} makes every unbalanced mask rank at
-most two.  There are
-\(2\binom60+2\binom61+2\binom62=44\) such masks.  The common balanced spectrum
-proves that all \(\binom63=20\) remaining masks are invertible.
-
-Freeze the port frames by a reproducible pivot convention.  In that gauge the
-collision-free bosonic probabilities on balanced controls take the values
+A reproducible pivot convention fixes the port frames.  In that gauge the
+collision-free bosonic probabilities on balanced controls are
 \[
  P_B(111\mid111)\in
  \left\{\frac{16}{3125},\frac{36}{3125},\frac{64}{3125}\right\}.
 \]
-These values are controls, not invariants.  Coherent access to the calibrated
-amplitudes distinguishes all twenty oriented masks; squaring pairs antipodal
-controls and loses the overall orientation.
+These are calibrated control values, not port-gauge invariants.  Coherent
+access to the amplitudes distinguishes all twenty oriented masks; squaring
+pairs antipodal controls and loses the overall orientation.
 
 Across the ten projective balanced cuts, the six determinant sign words have
 pairwise Hamming distance six.  Three selected signs identify a marked
@@ -670,7 +669,7 @@ a phase-referenced matrix and hence an inferred determinant sign.  Ordinary
 three-photon input measures calibrated bosonic probabilities.  Direct
 three-fermion emulation instead requires three identical copies of the
 transfer and an antisymmetric three-qutrit resource.  The first two form a
-bounded precursor; the third is conditional on the additional source.
+feasible precursor; the third is conditional on the additional source.
 
 \begin{figure}[t]
 \centering
@@ -775,10 +774,10 @@ transposes \(K_T\).
 
 \subsection*{Readout, nulls, and quantitative gates}
 
-Injecting each of the six inputs coherently and measuring the complex field at
-all outputs against one common local oscillator determines the transfer in six
-input settings, each with the phase sampling required by the detector.  The
-common output reference is essential: intensity data and input-only
+Inject each of the six inputs coherently and measure the complex field at all
+outputs against one common local oscillator.  This determines the transfer in
+six input settings, each with the phase sampling required by the detector.
+The common output reference is essential: intensity data and input-only
 interference leave independent output-row phases free and therefore cannot
 determine a block-determinant sign.  The intensity/interference reconstruction
 of Rahimi-Keshari et al.~\cite{RahimiKeshari} supplies the demonstrated
@@ -894,39 +893,38 @@ coherently in one normalized antisymmetric output projection, so no factor of
 indistinguishability, matching of the three transfer copies, and analyzer
 calibration are separate requirements.
 
-Resource quality is more restrictive than shot noise under adversarial error
-models.  If preparation noise is an arbitrary mixture with target-state
-weight \(\eta\),
-keeping probability bias below ten percent for the balanced event requires
-\(\eta\geq0.9872\).  With only a squared-Uhlmann-fidelity bound, denoted
-\(F_{\rm U}\), and the trace-distance worst case, the corresponding gate is
-\(F_{\rm U}\geq0.999836\).  A characterized noise
-model could relax these bounds, but the conclusion would then be
-model-dependent.
-For the mixture model, an event probability changes by at most \(1-\eta\), so
-ten-percent relative bias at ideal probability \(p\) requires
-\(\eta\geq1-0.1p\).  Here
-\(F_{\rm U}=(\operatorname{tr}\sqrt{\sqrt\rho\,\sigma\sqrt\rho})^2\) is the squared
-Uhlmann fidelity.  With fidelity alone, trace distance bounds the probability
-bias by \(\sqrt{1-F_{\rm U}}\).  Thus the two generic gates are
+Under adversarial error models, resource quality is more restrictive than
+shot noise.  If preparation noise is an arbitrary mixture with target-state
+weight \(\eta\), an event probability changes by at most \(1-\eta\).
+Keeping the relative bias below ten percent at ideal probability \(p\)
+therefore requires \(\eta\geq1-0.1p\).
+If only the squared Uhlmann fidelity
+\[
+ F_{\rm U}
+ =(\operatorname{tr}\sqrt{\sqrt\rho\,\sigma\sqrt\rho})^2
+\]
+is known, trace distance bounds the probability bias by
+\(\sqrt{1-F_{\rm U}}\).  The two generic gates are
 \begin{equation}
 \label{eq:source-fidelity-gates}
  \eta\geq1-0.1p\quad\text{(mixture model)},\qquad
  F_{\rm U}\geq1-0.01p^2\quad\text{(fidelity only)}.
 \end{equation}
-Substitution of \(p=16/125\) gives the two displayed balanced-event gates.
+At the balanced value \(p=16/125\), these become
+\(\eta\geq0.9872\) and \(F_{\rm U}\geq0.999836\).  A characterized noise model
+could relax these bounds, but the conclusion would then be model-dependent.
 
 \section{Discussion}
 
 The Golden transfer separates three levels of information.  Its singular
-values determine every intrinsic bosonic scalar.  A calibrated port frame
-adds permanent amplitudes and oriented control information.  Antisymmetric
-exchange supplies the determinant as a one-dimensional, orientation-covariant
-amplitude of the port-frame action; its event probability discards the sign.
-The proposed precursor recovers the signed matrix element by coherent
+values determine every intrinsic bosonic scalar.  Orienting the determinant
+lines adds the sign of the top exterior amplitude.  Fixing phase-referenced
+port frames then exposes matrix-dependent amplitudes such as the permanent.
+Antisymmetric exchange realizes the determinant amplitude, but its event
+probability discards the sign.  The precursor recovers that sign by coherent
 one-particle tomography after the laboratory frames have been compiled and
 oriented.  The Segre coordinate is therefore not an arbitrary cubic
-observable, but neither is its sign claimed here as a direct many-fermion
+observable, and its sign is not claimed here as a direct many-fermion
 measurement.
 
 The six-mode benchmark is also the only nontrivial symmetric conference case
@@ -940,7 +938,7 @@ The example also separates a feasible optical certification from a direct
 many-particle realization.  Current mesh and tomography technology can test
 the one-particle carrier and its bosonic shadows.  Direct photonic emulation of
 the three-fermion amplitude depends on an additional antisymmetric resource.
-This boundary is part of the result rather than an experimental claim.
+The paper proves this design boundary; it does not claim a built experiment.
 
 \section*{Data availability}
 
@@ -959,9 +957,9 @@ spectrum, symmetric functions, orbit theorem, and decoder radius.  Classical
 citations supply the design statistics; Paper~III supplies labelled
 reconstruction.  The local certificate does not re-prove either result.  It
 independently checks all twenty balanced masks, the three calibrated permanent
-values, six sign words, full-precision netlist, and fifteen-cell compilation.  Their
-three atomic source bundles have exact generators and independent replays; one
-paper-local manifest pins every load-bearing file.
+values, six sign words, full-precision netlist, and fifteen-cell compilation.
+Three atomic source bundles provide exact generators and independent replays;
+one paper-local manifest pins every load-bearing file.
 
 From the supplemental-package directory, \texttt{make check} verifies source
 hashes and independently recomputes every imported rational identity, census
