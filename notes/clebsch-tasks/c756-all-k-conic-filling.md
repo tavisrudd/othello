@@ -281,6 +281,12 @@ What the coordinate-free upgrade pass adds:
   a rank-two bundle section vanishing along \(2R_{P,\ell}\); this is the intrinsic
   Fitting/determinantal statement behind \(E_P^2\mid A,B\), and its nonzero fibre at a
   unique collision explains invariantly why no Moore factor divides;
+- the Moore rational-point divisor globalizes only over the Frobenius-fixed members of
+  the varying pencil: Frobenius moves every nonrational line to a different fibre.  Thus
+  \(\ell\mapsto R_{P,\ell}\) is canonical on rational spare fibres but is not an ordinary
+  algebraic divisor map on the full pencil; any global \(h\ge1\) proof must use the
+  Frobenius graph/fixed locus or an additional polarity lift, not naive intersection
+  theory on the blow-up;
 - the completed saturated-external branch can be stated as a classification of
   fixed-point-free involutions of the conic carrying the resultant-character two-graph;
   fixed-edge complete-mapping coordinates belong only to its proof;

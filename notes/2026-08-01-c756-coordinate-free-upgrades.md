@@ -165,8 +165,51 @@ No affine slope coordinate is part of (CF5)--(CF7).  The divisor-valued map
   \ell\longmapsto R_{P,\ell}                              \tag{CF8}
 \]
 
-on the pencil of spare lines through (P) is the correct global carrier of
-the nonsaturated defect.
+on the rational spare members of the pencil through (P) is the correct
+finite-field carrier of the nonsaturated defect.  It is deliberately not
+called a morphism on the entire geometric pencil; the Frobenius obstruction
+to doing so is important.
+
+### 3.1 Why the Moore divisor does not globalize naively
+
+Let the projective line (Lambda_P) be the full pencil of lines through (P),
+and let
+
+\[
+ f:X_P=\operatorname{Bl}_P(\Pi)\longrightarrow\Lambda_P                  \tag{CF8a}
+\]
+
+be its incidence surface.  Every chord of (B) avoids (P), so its strict
+transform is a section of (f).  Their sum is therefore a genuine global
+relative divisor of degree (binom{k-1}{2}) on (X_P).
+
+The rational-point divisor of a fibre behaves differently.  Absolute
+Frobenius sends the fibre over (ell) to the fibre over (Fell).  Only when
+(Fell=ell) do a point and its Frobenius image lie in the same
+two-dimensional line, allowing their wedge to be the scalar Moore section
+whose zero divisor is the rational-point set of that fibre.  Consequently
+the family of Moore divisors is canonically defined on
+
+\[
+ X_P\times_{\Lambda_P}\Lambda_P^F,
+ \qquad
+ \Lambda_P^F=\operatorname{Fix}(F:\Lambda_P\to\Lambda_P),                \tag{CF8b}
+\]
+
+the disjoint union of the (q+1) rational fibres, but not as an ordinary
+Cartier divisor on all of (X_P).
+
+Thus (CF5) gives a canonical residual divisor separately on each rational
+spare fibre, while no formal subtraction of a global Moore divisor produces
+an effective divisor on the whole ruled surface.  Interpolating those
+(q+1) fibrewise divisors would add a noncanonical choice and could silently
+reintroduce the high-degree terms that the Moore quotient removed.
+
+This closes a tempting but invalid cheap route: ordinary intersection theory
+on (X_P) cannot by itself prove the masked direction gap (h ge 1).  A valid
+global proof must instead work on a Frobenius graph/fixed-locus incidence
+space, or use the conic polarity to construct an additional equivariant lift
+that compares different Frobenius fibres.
 
 ## 4. The first subresultant on the incidence ruled surface
 
@@ -302,6 +345,7 @@ condition.
 | saturated-internal double clique | use the norm-one torus (T=\operatorname{Res}^1_{\mathbf F_{q^2}/\mathbf F_q}\mathbf G_m); oriented representatives form a torsor over (T/\{z\sim z^{-1}\}), and coherence is a switching class on two conjugate Paley cliques | prove the only balanced coherent section is the (q=5) frame; stop if the torus formulation merely restates the existing eigenvector equation |
 | master-polynomial divisibility | regard (G=\prod_i f_i) as the section cutting out the arc divisor in (Pi); replace the chart derivative by a Hasse derivative or Cartier operator between explicitly named line bundles | construct an equivariant operator whose local expression is (G'^q-(-1)^{(q+3)/2}G'); if no such operator exists without choosing a tangent direction, record that dependence rather than calling the formula intrinsic |
 | dual conic-weighted pencil | apply (perp_C) to every chord, obtaining internal nodes on the pencil through (ell^\perp); this is a defect-(delta) near-transversal retaining the ruled-surface fibre point | classify all-internal defect-two near-transversals or derive a bounded-degree norm; stop if the Moore mass again fragments to degree (Theta(q)), as in the completed intercept probe |
+| masked direction gap on the varying pencil | place the fibrewise Moore divisors on the Frobenius-fixed base (CF8b), or construct a polarity-based lift on the Frobenius graph | do not treat (CF8) as an algebraic morphism on the full pencil; stop any ordinary intersection-number argument that assumes a global Moore Cartier divisor |
 | prefix-container classes | treat a prefix as an object of the action groupoid of (operatorname{PGL}(V)) on partial conic-external arcs; label it by secant divisor, point types, pencil multiplicities, cross-ratio/norm cosets, and stabilizer orbit | test all maximum-witness orbits, not one selected witness; stop if equal extension counts split across unboundedly many intrinsic labels |
 | (q=13,29) compact orbit products | search inside the four- and six-dimensional stabilizer-character spaces for short sums of polar-orbit products | exposition only: (CF1) is already canonical; stop unless a formula reveals a new incidence interpretation |
 | (q=31) classical identification | compare the six-axis pencil under full (operatorname{PGL}(3,31)) and only then run a bounded literature audit | no priority claim from the current computation; stop if the comparison is merely a change of equation |
@@ -313,7 +357,8 @@ The cheap coordinate-free work is complete at the level needed by C756:
 - use (CF1) for all missing-set curves and (CF4) for the special (A_5)
   sextic;
 - use the divisor equality (CF5), never the affine factorization
-  (D_P=(T^q-T)E_P), as the primary statement;
+  (D_P=(T^q-T)E_P), as the primary statement, while retaining the
+  Frobenius-fixed-base limitation (CF8b);
 - use the ruled surface (CF9) and bundle vanishing (CF15), never raw
   coefficient divisibility, as the primary subresultant statement; and
 - state the saturated-external theorem as a matching-two-graph
@@ -343,7 +388,10 @@ the repeatedly lost intercept was not intrinsically absent: direction and
 intercept are the base and fibre coordinates of one canonical
 (mathbf P^1)-bundle.  The old subresultant already lived there; only its
 presentation had projected the geometry into two large coefficient
-polynomials.
+polynomials.  The second free gain is the Frobenius-base obstruction in
+(CF8b): it explains why the fibrewise residual divisors do not automatically
+assemble into a divisor on the blow-up, and kills a tempting but invalid
+ordinary intersection-theory route to (h ge 1).
 
 **TT.**  The useful coordinate-free move is not to erase coordinates from a
 formula but to identify the moduli object on which the formula is a section.
@@ -356,6 +404,7 @@ not yet have closed theorem interfaces.
 |---|---|---|
 | Is the missing-set curve intrinsic? | settled | it is the unique line (mathbf P K_d(A)) in the three extracted cases |
 | What is (E_P) without a slope coordinate? | settled | it is the effective residual divisor (R_{P,ell}) in (CF5)--(CF6) |
+| Does (R_{P,ell}) vary as an ordinary algebraic divisor over the full pencil? | settled negatively | the Moore divisor exists canonically only over the Frobenius-fixed base (CF8b); a global argument needs the Frobenius graph or an extra polarity lift |
 | What is (A(T)U+B(T)) without (T,U)? | settled | the relative first-subresultant section of the section divisor (mathscr D_B) on (mathscr I_ell) |
 | Why exactly (E_P^2)? | settled | each excess matching collision remains in every relevant Vandermonde minor and the subresultant uses its square |
 | Can the saturated-internal derivative be made intrinsic? | open | construct the line-bundle/Hasse--Cartier operator in §6 or prove that the tangent chart is essential |
