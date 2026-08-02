@@ -1,0 +1,405 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{3em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\per}{\operatorname{per}}
+
+\title{Orientation and exchange statistics in a Golden six-mode transfer}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Exchange statistics determine which information a many-particle
+interferometer can retain about its one-particle transfer.  We study this
+distinction in an exact six-mode transfer constructed from the two
+three-dimensional eigenspaces of a real symmetric conference matrix.  For a
+diagonal path control \(D_x\), the postselected block
+
+\[
+ K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}
+\]
+
+has filled three-fermion amplitude \(\det K_T(x)\), proportional to a signed
+Joubert coordinate on the Segre cubic.  We show that this orientation has no
+intrinsic permanent counterpart: permanents depend on the chosen input and
+output port frames, whereas the basis-independent bosonic observable is the
+symmetric-cube trace \(h_3(K_T^\dagger K_T)\), a function only of the singular
+values.  At each of twenty balanced controls, all six transfers have squared
+singular spectrum \(\{1/5,4/5,4/5\}\), giving
+\(h_3=313/125\) and exterior-cube probability \(e_3=16/125\); the other
+44 Boolean controls have zero fermionic amplitude.  Calibrated determinant
+signs form a distance-six simplex code supporting economical three-, five-,
+and ten-cut readout, and a rational lossy control realizes an exact chiral
+anomaly-free charge vector projectively.  We give a six-mode optical
+compilation and quantitative certification thresholds.  Present photonic
+components support coherent transfer tomography and bosonic controls; direct
+three-fermion emulation additionally requires a totally antisymmetric
+three-photon qutrit resource.  The result is a theory and design-limit
+analysis, not a report of a built device or a dynamical gauge-theory
+simulation.
+\end{abstract}
+
+\section{Introduction}
+
+Let \(K\) be a three-input, three-output block of a linear one-particle
+transfer.  If all three inputs and outputs are occupied, the fermionic
+transition amplitude is \(\det K\), while the collision-free bosonic amplitude
+is \(\per K\).  This familiar distinction does not by itself say whether the
+two amplitudes encode the same geometric information.  The answer depends on
+which changes of input and output coordinates belong to the physical data.
+
+We consider a six-mode transfer obtained from a real symmetric conference
+matrix \(C\) of order six, so that
+\[
+ C^{\mathsf T}=C,\qquad C_{ii}=0,\qquad C_{ij}\in\{\pm1\},
+ \qquad C^2=5I.
+\]
+The two eigenspaces of \(C\), with eigenvalues \(\pm\sqrt5\), both have
+dimension three.  A diagonal path control couples them through a
+three-by-three block \(K\).  Six coherently marked conference matrices produce
+six such blocks.  Their determinants are the six classical Joubert
+coordinates and satisfy the two equations of the Segre cubic.  This
+identification, including its invariant-theoretic provenance, is developed in
+the companion operator paper; here we ask what it means under symmetric and
+antisymmetric exchange statistics.
+
+The central point is an orientation boundary.  The Golden data determine the
+two three-dimensional port spaces but not ordered orthonormal frames inside
+them.  Changing those frames acts on \(K\) from the left and right by
+orthogonal matrices.  The determinant retains an orientation sign.  The
+permanent does not descend through this action.  Consequently the intrinsic
+bosonic companion is not a second signed Segre coordinate: it is a spectral
+quantity on the symmetric cube.
+
+Theorem~\ref{thm:exchange-boundary} states this distinction together with the
+exact balanced benchmark.  The remaining sections separate intrinsic
+observables from calibrated ones, give a short arithmetic application, and
+identify the boundary of a photonic implementation.  General
+boson--fermion complementarity in linear interferometers is due to
+Jabbour and Cerf~\cite{JabbourCerf}; its extension to partially distinguishable
+particles is due to Robbio, Jabbour, and Cerf~\cite{RobbioJabbourCerf}.  The
+present contribution is the exact Golden specialization, the port-gauge
+obstruction, and the associated measurement and resource package.
+
+\section{The Golden transfer}
+
+For one member \(C_T\) of the marked conference family, let
+\(Q_{T,+}\) and \(Q_{T,-}\) be matrices whose columns are ordered orthonormal
+frames for the \(\pm\sqrt5\)-eigenspaces.  For
+\(x=(x_0,\ldots,x_5)\), put
+\[
+ D_x=\operatorname{diag}(x_0,\ldots,x_5),\qquad
+ K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}.
+\]
+When \(|x_i|=1\), the six-mode transfer
+\[
+ U_T(x)=
+ [Q_{T,+}\ Q_{T,-}]^{\mathsf T}D_x[Q_{T,+}\ Q_{T,-}]
+\]
+is orthogonal.  Values \(|x_i|<1\) describe a diagonal filter followed by
+postselection.
+
+The six determinant amplitudes satisfy
+\[
+ Z_T(x)=\varepsilon_T,10\sqrt5\det K_T(x),
+ \qquad \varepsilon_T\in\{\pm1\},
+\]
+with signs fixed by the marked orientations.  They obey
+\[
+ \sum_T Z_T(x)=0,\qquad \sum_T Z_T(x)^3=0.
+\]
+These are the Segre equations in Joubert coordinates.  The equations and the
+outer \(S_6\)-action are classical invariant theory
+\cite{HowardMillsonSnowdenVakil}; the point used below is their realization as
+six amplitudes of one marked transfer.
+
+\section{Why the determinant retains orientation}
+
+Write \(H=K^\dagger K\).  For the intrinsic comparison, define
+\[
+ B_{\mathrm{sym}}(K)=\operatorname{tr}(\Sym^3 H)=h_3(H),
+ \qquad
+ F_{\mathrm{ext}}(K)=\operatorname{tr}(\bigwedge^3 H)
+ =e_3(H)=\det H.
+\]
+The first expression is the sum of all-transferred probabilities, averaged
+over the choice of normalized three-boson input occupation only after division
+by the ten-dimensional symmetric-cube input space.  Thus the operational
+uniform-input average is \(B_{\mathrm{sym}}/10\).  The second expression is
+the filled three-fermion probability.
+
+\begin{theorem}[Exchange-statistics orientation boundary]
+\label{thm:exchange-boundary}
+Let \(K_T(x)\) be a Golden transfer block.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item A change of ordered orthonormal port frames sends
+\[
+ K\longmapsto R_-^{\mathsf T}KR_+,
+ \qquad R_\pm\in O(3).
+\]
+The determinant changes by
+\(\det(R_-)\det(R_+)\), while the permanent does not define a scalar on the
+resulting double orbit.
+\item Every scalar intrinsic under the \(O(3)\times O(3)\) port action factors
+through the singular values of \(K\).  Under
+\(SO(3)\times SO(3)\), the sign of \(\det K\) is the additional orientation
+label.
+\item At every balanced control with three entries \(+1\) and three entries
+\(-1\), for each of the six marked protocols,
+\[
+ \operatorname{spec}H=\left\{\frac15,\frac45,\frac45\right\}.
+\]
+Consequently
+\[
+ B_{\mathrm{sym}}=\frac{313}{125},\qquad
+ F_{\mathrm{ext}}=\frac{16}{125},\qquad
+ B_{\mathrm{sym}}-F_{\mathrm{ext}}=\frac{297}{125}.
+\]
+All intrinsic bosonic scalars are therefore blind to the marked Segre node
+and its orientation on this balanced family.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Part (i) follows directly from changing the two orthonormal frames.  The
+determinant transformation law is multiplicative.  The permanent has no
+corresponding covariance: for \(K=I_3\), rotating the first two columns by an
+angle \(\theta\) changes its value to \(\cos(2\theta)\), although the singular
+values and \(|\det K|\) remain fixed.
+
+The real singular-value decomposition classifies the
+\(O(3)\times O(3)\) double orbits, proving (ii).  Restricting to the two special
+orthogonal groups retains the determinant sign.  For (iii), the Golden
+conference identity gives the displayed spectrum on every balanced cut.  The
+complete symmetric functions then give
+\[
+ h_3\left(\frac15,\frac45,\frac45\right)=\frac{313}{125},
+ \qquad
+ e_3\left(\frac15,\frac45,\frac45\right)=\frac{16}{125}.
+\]
+Finally, the degree-three symmetric-function identity
+\(h_3-e_3=p_1p_2\) gives \(297/125\).
+\end{proof}
+
+The theorem does not say that calibrated bosonic measurements lose all
+control information.  Once physical port axes are fixed, a permanent is an
+ordinary measurable amplitude.  It says that such a value belongs to the
+calibrated apparatus rather than to the unmarked Golden operator.
+
+\section{Balanced controls and calibrated readout}
+
+There are \(64\) Boolean controls \(x\in\{\pm1\}^6\).  The twenty balanced
+controls are the common nonzero determinant optimum.  For each one,
+\[
+ |\det K_T|=\frac{4}{5\sqrt5},\qquad
+ P_F=|\det K_T|^2=\frac{16}{125}.
+\]
+The other 44 controls have zero filled-fermion amplitude.  This gives a sharp
+Boolean boundary rather than a numerical search criterion.
+
+Freeze the port frames by a reproducible pivot convention.  In that gauge the
+collision-free bosonic probabilities on balanced controls take the values
+\[
+ P_B(111\mid111)\in
+ \left\{\frac{16}{3125},\frac{36}{3125},\frac{64}{3125}\right\}.
+\]
+These values are controls, not invariants.  Coherent access to the calibrated
+amplitudes distinguishes all twenty oriented masks; squaring pairs antipodal
+controls and loses the overall orientation.
+
+Across the ten projective balanced cuts, the six determinant sign words have
+pairwise Hamming distance six.  Three selected signs identify a marked
+protocol once Golden membership is already known.  Five signs and magnitudes
+jointly test membership and identify the protocol.  Measuring all ten signs
+supports soft matched-filter decoding; hard nearest-word decoding corrects
+two sign errors.  No relative sign word fixes the global orientation without
+a coherent port reference.
+
+The universal complementarity identities for determinants and permanents of
+Jabbour and Cerf~\cite{JabbourCerf} provide a useful calibrated consistency
+check.  They do not distinguish the Golden family by themselves.
+
+\section{An exact arithmetic instance}
+
+The rational diagonal filter
+\[
+ x=\left(1,\frac7{13},\frac17,-\frac15,-\frac12,-1\right)
+\]
+gives
+\[
+ Z(x)=\frac{72}{455}(11,-10,-8,5,4,-2).
+\]
+The integer vector on the right has vanishing sum and vanishing sum of cubes,
+so it is an anomaly-free chiral charge vector for six Weyl fermions.  General
+parametrizations of Abelian anomaly equations are known
+\cite{CostaDobrescuFox,CostaDobrescuFoxFew}; the contribution here is the
+operator filter and its exact postselection cost.  In the present
+normalization,
+\[
+ P_{F,T}=\frac{(72/455)^2q_T^2}{500},
+ \qquad q=(11,-10,-8,5,4,-2).
+\]
+
+This construction realizes arithmetic coordinates satisfying the anomaly
+equations.  It contains no gauge field, regulator, anomalous current, or
+gauge-theory dynamics.  The extension to two \(U(1)\) factors is governed by
+lines on the Segre cubic and has its own established algebraic geometry
+\cite{GripaiosNguyen}; it is outside the scope of this paper.
+
+\section{Photonic design limit}
+
+The balanced six-mode transfer needs at most fifteen tunable two-mode cells.
+A filtered implementation uses two such meshes and six attenuators.  Coherent
+transfer characterization fixes the input and output phase gauges and infers
+the sign of the reconstructed real determinant.  Six-mode coherent transfer
+tomography of this kind has been demonstrated~\cite{RahimiKeshari}, and
+programmable twelve-mode processors have operated with three photons
+\cite{Somhorst}.
+
+This feasible precursor supports two distinct tests:
+\begin{enumerate}[leftmargin=*]
+\item reconstruct the six-mode transfer coherently and test the determinant
+signs and the linear and cubic Segre residuals;
+\item inject ordinary photons and measure the calibrated bosonic controls,
+optionally upgrading to the ten-input symmetric-cube average.
+\end{enumerate}
+The inferred determinant sign in the first test is not a direct measurement
+of a many-fermion phase.
+
+The photonic fermion emulator of Matthews et al.~\cite{Matthews} sends an
+entangled resource through identical copies of a one-particle process.  For
+three particles in this setting it requires a totally antisymmetric state of
+three photonic qutrits.  Goyal et al.~\cite{Goyal} give a linear-optical
+preparation proposal for this state.  The design evaluated here treats a
+demonstrated, characterized source of that resource as an unmet input.  A
+three-qutrit GHZ state, although experimentally accessible
+\cite{Hu}, has different exchange symmetry and does not substitute for it.
+
+The determinant perturbation bound
+\[
+ |\det(K+E)-\det K|\leq 3\lVert E\rVert_2
+\]
+for contraction blocks yields a balanced-sign threshold
+\(\lVert E\rVert_2<0.1193\).  The smallest chiral sign requires
+\(\lVert E\rVert_2<0.00472\), and ten-percent amplitude precision there
+requires \(4.72\times10^{-4}\).  The weak chiral branch, rather than the
+balanced benchmark, sets the severe resource requirement.
+
+Diagonal real loss merely changes the real filter and preserves the two Segre
+identities.  Coherent diagonal phase error preserves them over
+\(\mathbb C\), though a real sign still needs a phase reference.  Transfer
+error or mismatch between emulator copies leaves the common carrier.  The
+linear residual \(\sum_T\widehat Z_T\) is therefore the first structural null,
+followed by the cubic residual \(\sum_T\widehat Z_T^3\).
+
+\section{Discussion}
+
+The Golden transfer separates three levels of information.  Its singular
+values determine every intrinsic bosonic scalar.  A calibrated port frame
+adds permanent amplitudes and oriented control information.  Antisymmetric
+exchange statistics retain the determinant orientation as a one-dimensional
+representation of the port-frame action.  The Segre coordinate is therefore
+not an arbitrary choice of cubic observable: it is the top exterior amplitude
+of the transfer.
+
+The example also separates a feasible optical certification from a direct
+many-particle realization.  Current mesh and tomography technology can test
+the one-particle carrier and its bosonic shadows.  Direct photonic emulation of
+the three-fermion amplitude depends on an additional antisymmetric resource.
+This boundary is part of the result rather than an experimental claim.
+
+\section*{Verification}
+
+The exact spectra, balanced census, permanent controls, six-mode compilation,
+error thresholds, shot budgets, and decoding schedules are accompanied by
+exact generators, compact certificates, SHA-256 manifests, and independent
+standard-library replays in the project repository.  The final archival
+version will identify a stable artifact release and the precise trust boundary
+for each displayed finite claim.
+
+\begingroup
+\raggedright
+\begin{thebibliography}{99}
+
+\bibitem{JabbourCerf}
+M.~G. Jabbour and N.~J. Cerf,
+\emph{Boson--fermion complementarity in a linear interferometer},
+arXiv:2312.17709.
+
+\bibitem{RobbioJabbourCerf}
+M. Robbio, M.~G. Jabbour, and N.~J. Cerf,
+\emph{Complementarity between bosonic and fermionic many-body interferences
+with partially distinguishable particles},
+arXiv:2604.23316.
+
+\bibitem{HowardMillsonSnowdenVakil}
+B. Howard, J. Millson, A. Snowden, and R. Vakil,
+\emph{A description of the outer automorphism of \(S_6\), and the invariants
+of six points in projective space},
+J. Combin. Theory Ser. A \textbf{115} (2008), 1296--1303.
+
+\bibitem{CostaDobrescuFox}
+D.~B. Costa, B.~A. Dobrescu, and P.~J. Fox,
+\emph{General solution to the (U(1)) anomaly equations},
+arXiv:1905.13729.
+
+\bibitem{CostaDobrescuFoxFew}
+D.~B. Costa, B.~A. Dobrescu, and P.~J. Fox,
+\emph{Chiral Abelian gauge theories with few fermions},
+arXiv:2001.11991.
+
+\bibitem{GripaiosNguyen}
+B. Gripaios and K.~L.~N. Nguyen,
+\emph{Anomaly cancellation for two (U(1)) factors},
+arXiv:2607.09879.
+
+\bibitem{Matthews}
+J.~C.~F. Matthews et al.,
+\emph{Observing fermionic statistics with photons in arbitrary processes},
+Sci. Rep. \textbf{3} (2013), 1539.
+
+\bibitem{Goyal}
+S.~K. Goyal et al.,
+\emph{Qudit-teleportation for photons with linear optics},
+Sci. Rep. \textbf{4} (2014), 4543.
+
+\bibitem{Hu}
+X.-M. Hu et al.,
+\emph{Observation of genuine high-dimensional multipartite nonlocality in
+entangled photon states},
+Nat. Commun. (2025), doi:10.1038/s41467-025-59717-y.
+
+\bibitem{RahimiKeshari}
+S. Rahimi-Keshari et al.,
+\emph{Direct characterization of linear-optical networks},
+Opt. Express \textbf{21} (2013), 13450--13458.
+
+\bibitem{Somhorst}
+F.~H.~B. Somhorst et al.,
+\emph{Quantum simulation of thermodynamics in an integrated quantum photonic
+processor},
+Nat. Commun. \textbf{14} (2023), 3895.
+
+\end{thebibliography}
+\endgroup
+
+\end{document}

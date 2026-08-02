@@ -405,14 +405,21 @@ from this manuscript, and they must be audited before any sequel.  Full report:
 |---|---|---|
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | complete; exact circuit/budget frozen, bounded precursor `GO`, full three-fermion photonic experiment `NO-GO` | none; C765 owns design-limit placement |
-| [C765 — minimal quantum-statistics companion](../golden-tasks/c765-golden-quantum-statistics-note.md) | ready; unnumbered design-limit/theory note, not Paper V | assemble only the C707/C715/C718/C719 physical spine and keep the unbuilt antisymmetric source explicit |
+| [C765 — minimal quantum-statistics companion](../golden-tasks/c765-golden-quantum-statistics-note.md) | in progress; manuscript scaffold installed, unnumbered design-limit/theory note, not Paper V | run C766--C770 in order and keep the antisymmetric source as an explicit external dependency |
+| [C766 — exchange orientation theorem](../golden-tasks/c766-golden-exchange-orientation-theorem.md) | queued; first C765 proof gate | prove the general port-gauge theorem and exact Golden specialization |
+| [C767 — statistics evidence import](../golden-tasks/c767-golden-statistics-evidence-import.md) | queued after C766 | install exact values, decoder, and paper-local trust map |
+| [C768 — quantum-statistics literature](../golden-tasks/c768-golden-quantum-statistics-literature.md) | queued; required before submission wording | close full-text attribution and absence claims under the audit conventions |
+| [C769 — photonic design limit](../golden-tasks/c769-golden-photonic-design-limit.md) | queued after C767; wording waits for C768 | compress circuit, thresholds, null tests, and source dependency into the physical section and figure |
+| [C770 — submission closure](../golden-tasks/c770-golden-quantum-statistics-submission.md) | queued after C766--C769 | cold reads, venue decision, artifact/preprint locator, and forward-reference gate |
 
 ## Recommended order
 
-1. C765 minimal design-limit companion, using C719's bounded precursor and
-   explicit antisymmetric-state obstruction; add a
-   Paper-III forward citation only after the note has a stable public locator.
-2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+1. C766 exchange-statistics orientation theorem.
+2. C767 exact-result and trust-surface import.
+3. C768 full-text literature closure, then C769 physical presentation.
+4. C770 cold reads and submission closure; add a Paper-III forward citation
+   only after the note has a stable public locator.
+5. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths

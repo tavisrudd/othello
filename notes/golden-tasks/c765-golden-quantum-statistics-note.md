@@ -2,8 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** ready; C719 complete with a full-experiment `NO-GO` and bounded
-precursor `GO`.
+**Status:** in progress; manuscript scaffold installed, with C766--C770 queued
+as the proof, evidence, literature, experiment, and submission gates.
 
 ## Objective
 
@@ -23,6 +23,47 @@ is actually feasible.  This is not a fifth Clebsch-series paper.
    and thresholds as the principal design limit.
 4. Use the three-, five-, and ten-cut simplex decoder only to the extent that
    it reduces experimental resources or improves error tolerance.
+
+## Frozen paper identity
+
+**Title:** *Orientation and exchange statistics in a Golden six-mode
+transfer*.
+
+**Principal claim:** antisymmetric exchange statistics retain the orientation
+of the Golden transfer through its determinant line, whereas every intrinsic
+bosonic scalar factors through singular values. A permanent becomes useful
+only after the physical port frames are calibrated.
+
+**Headlines:**
+
+1. antisymmetry carries the signed Joubert/Segre coordinate;
+2. the intrinsic bosonic companion is the symmetric-cube trace, not another
+   signed coordinate;
+3. the twenty balanced masks give an exact common statistics benchmark and
+   the other 44 Boolean controls have zero fermionic amplitude;
+4. a calibrated simplex schedule reduces sign readout to three, five, or ten
+   cuts according to the certification goal;
+5. current photonics supports the carrier and bosonic controls, while direct
+   three-fermion emulation depends on an additional antisymmetric three-qutrit
+   resource.
+
+The anomaly-free charge vector is one bounded arithmetic application. It is
+not in the title, does not drive the abstract, and is not described as a
+gauge-theory simulation.
+
+## Task graph
+
+1. C766 proves and sharpens the exchange-statistics orientation theorem.
+2. C767 imports the exact statistics, arithmetic instance, decoder, and trust
+   surface.
+3. C768 closes the full-text literature and attribution audit.
+4. C769 turns the demonstrator ledger into the physical design-limit section
+   and figure.
+5. C770 performs cold reads, selects the venue, and closes the preprint and
+   forward-reference gates.
+
+The manuscript authority is
+`papers/golden-quantum-statistics/golden_quantum_statistics.tex`.
 
 ## Exclusions
 
