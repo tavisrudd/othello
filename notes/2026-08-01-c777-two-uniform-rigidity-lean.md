@@ -32,7 +32,7 @@ All under `lean/RelativeConicArcs/AMELU/`.
 |---|---|
 | `SiteOperators.lean` | `siteOperator j A` (local operator at one site), its algebra-embedding laws (`siteOperator_one/_add/_smul/_mul/_conjTranspose`), the bundled `siteAlgHom j`, the two-site entry formula, and commutation of operators at distinct sites |
 | `TwoUniformIsometry.lean` | `stateInner`, `expectation`, `IsTwoUniform`, `localGeneratorSum`, the polarized second-moment identity, its norm form, and injectivity of the isometry |
-| `ProductUnitaryExponential.lean` | `tensorOperator`, site-by-site multiplicativity, product operator as an ordered product of single-site operators, `exp_siteOperator`, and the single-exponential identity `tensorOperator_exp` |
+| `ProductUnitaryExponential.lean` | `tensorOperator`, site-by-site multiplicativity, conjugate transposition, product operator as an ordered product of single-site operators, closure of `IsProductOperator` under multiplication and adjoint, `exp_siteOperator`, and the single-exponential identity `tensorOperator_exp` |
 | `LocalGeneratorDecomposition.lean` | `tracelessPart`, its tracelessness and hermiticity, and the splitting `Sum_j H_j^(j) = M + c I` with `M` traceless-local |
 | `TwoUniformDiscreteness.lean` | the derivative-at-the-identity argument: a one-parameter group `exp(t (i (M + cI)))` fixing the ray of a 2-uniform state forces every traceless local generator to vanish |
 | `TwoUniformProductSymmetry.lean` | the same conclusion stated directly for product unitaries `⊗_j exp(i t H_j)` with arbitrary Hermitian local generators |
@@ -108,11 +108,18 @@ with the continuous linear functional `A ↦ ⟪M ψ, A ψ⟫`, and read off
 manuscript's "differentiate the unimodular scalar `λ(t)`" with an equivalent
 one-line derivative that needs no spectral theorem.
 
-Unformalized boundary for this theorem: `lem:product-lie` and the last sentence
-of `thm:two-uniform-discrete`.  Specifically, Lean does not prove that the
-product map `U(q)^n → U(q^n)` has closed image and that the Lie algebra of a
-closed subgroup of that image consists of the summed local generators, nor that
-a compact Lie group with zero-dimensional quotient is finite.  Mathlib has no
+Partial coverage of `lem:product-lie`: the algebraic half is proved.
+`tensorOperator_mul`, `tensorOperator_one`, `tensorOperator_conjTranspose`, and
+the `IsProductOperator.mul` / `.conjTranspose` closure lemmas say that the
+site-by-site product map is a homomorphism and that its image is closed under
+multiplication and adjoint.
+
+Unformalized boundary for this theorem: the topological and Lie-theoretic half
+of `lem:product-lie`, and the last sentence of `thm:two-uniform-discrete`.
+Specifically, Lean does not prove that the image of the product map is closed in
+the unitary group, that the Lie algebra of a closed subgroup of that image
+consists of the summed local generators, or that a compact Lie group with
+zero-dimensional quotient is finite.  Mathlib has no
 Cartan closed-subgroup theorem, and there is no Lie-algebra-of-a-matrix-group
 API to hang the statement on.  The formal statement is therefore about a
 one-parameter group *presented* with a generator of summed local form, which is
@@ -234,14 +241,16 @@ recommendation, not an edit):
 - **Formal status.**  `RelativeConicArcs.AMELU.Multipartite` proves
   unconditionally, for an arbitrary finite site set and arbitrary local
   dimension: the traceless/scalar splitting of Hermitian local generators; the
-  single-exponential identity `⊗_j exp(h_j) = exp(Sum_j h_j^(j))`; the polarized
+  single-exponential identity `⊗_j exp(h_j) = exp(Sum_j h_j^(j))`; that the
+  site-by-site product map is a homomorphism whose image is closed under
+  multiplication and adjoint; the polarized
   second-moment identity (3.8) with its norm form and injectivity; that a
   one-parameter group of product unitaries fixing the ray of a 2-uniform state
   has scalar local generators; and that the defect is invariant under an exact
   ray symmetry composed on either side.  `ApproximateDecompositionInputs` is a
   hypothesis-explicit interface whose terminal is the decomposition corollary.
-- **Unformalized boundary.**  The closed-subgroup and Lie-algebra content of
-  `lem:product-lie`, and the passage from a trivial Lie algebra to a finite
+- **Unformalized boundary.**  The topological closed-subgroup and Lie-algebra
+  content of `lem:product-lie`, and the passage from a trivial Lie algebra to a finite
   quotient in `thm:two-uniform-discrete`; the equivalence of the expectation form
   of 2-uniformity with a partial-trace presentation; the whole of
   `thm:two-uniform-stability`, whose growth estimate appears only as the named
