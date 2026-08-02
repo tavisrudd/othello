@@ -550,7 +550,22 @@ independent noise.  The resulting binary-channel family has KL and Chernoff
 geometry exactly proportional to certificate Hamming distance, giving direct
 active-learning, experimental-design, finite-population-statistics,
 sequential-testing, and gauge-invariant-ML translations; adversarial
-certificate distance remains open.  Report and audit:
+certificate distance remains open.  Its ej4 closeout corrects the fingerprint
+cascade, gives a deterministic twenty-query anchor, two adaptive rounds after
+the anchor, an
+$O(n^2+\varepsilon^{-1}\log(1/\delta))$ promise-free property tester, and a
+reduction of canonicalization to at most $2n$ derived-graph canonicalization
+calls.  It also identifies the aligned-design automorphism group as the
+index-at-most-two extension of the oriented two-graph automorphism group.  In
+particular, aligned-design isomorphism is exactly two-graph isomorphism up to
+complement.  For conference matrices and ETFs the marked determinant pattern
+recovers the discrete sign codebook up to relabeling, switching, and global
+negation; one calibrated triangle product fixes the final bit.  The
+nonadaptive signature has asymptotic rate $1/6$ and gives a quadratic promised
+equality certificate, while its adversarial distance remains the main open
+robustness problem.  Publishing the full labelled determinant pattern is
+therefore not a privacy-preserving digest of the signing.
+Report and audit:
 `notes/2026-08-02-c794-aligned-design-faithfulness.md` and
 `notes/2026-08-02-c794-aligned-design-faithfulness-literature-audit.md`.
 

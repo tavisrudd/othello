@@ -349,6 +349,196 @@ invariant: one must select an anchor canonically or combine the decoder with a
 canonical-labelling step.  For continuous weights, a differentiable soft
 surrogate and a stability theorem remain necessary.
 
+### ej4: the corrected fingerprint cascade and three free algorithms
+
+The C788--C794 invariants do support a classification cascade, but not a
+literal chain of increasingly fine invariants.  At fixed conference order the
+mean and variance are universal, so they validate the promise and
+normalization but cannot reject two switching classes.  The third moment can
+reject.  The triple-block union profile determines the third factorial moment,
+whereas the full balanced-cut histogram determines every moment of $c_T$;
+neither summary is known to determine the other.  They are complementary
+branches, not successive complete refinements.
+
+For one object with marked-query access, the $O(n^2)$ C794 decoder is normally
+cheaper than either an exact full histogram or a naive triple-block census.
+The useful database cascade is therefore
+
+\[
+\begin{array}{c}
+\text{promise/order checks}\\
+\downarrow\\
+\text{sampled or cached third moment}\\
+\downarrow\\
+\text{cached histogram and/or triple-union profile}\\
+\downarrow\\
+\text{C794 decode to a switching representative}\\
+\downarrow\\
+\text{cheap graph invariants}\\
+\downarrow\\
+\text{canonical labelling only inside the surviving bucket}.
+\end{array}
+\]
+
+Early mismatches prove inequivalence; matches only pass a candidate onward.
+The exact final comparison is reconstruction followed by canonicalization,
+not the third moment.
+
+Three items in the proposed algorithmic programme close almost for free.
+
+#### Deterministic anchor search and parallel rounds
+
+Choose any seven vertices, distinguish one as $r$, and query the twenty
+four-sets consisting of $r$ plus three of the other six vertices.  The derived
+graph on those six vertices has a clique or independent triple by
+$R(3,3)=6$, so at least one of the twenty answers is aligned.  Thus every
+valid two-graph oracle of order at least seven supplies an anchor in one
+nonadaptive round and at most twenty queries.  The earlier quartic blind-search
+bound is unnecessary.
+
+After the anchor, query in one parallel round all one-point signatures, all
+six signatures on three fixed outside seeds, and all six signatures from one
+fixed seed to every later point.  Decode the cuts, then use one final adaptive
+round to recover each remaining outside edge.  Hence:
+
+- with a supplied anchor, the adaptive decoder has two query rounds;
+- without one, it has three query rounds;
+- the nonadaptive quadratic decoder has one round after the anchor, at the
+  larger factor-six leading query constant.
+
+The total deterministic query bound without a supplied anchor is at most
+$q_{\rm ad}+19$ because the successful anchor query is already counted in
+$q_{\rm ad}$.
+
+#### Promise-free recognition and property testing
+
+For an arbitrary marked four-set family, run the twenty-query anchor test.  If
+it fails, the family cannot be an aligned design.  Otherwise enumerate the at
+most $3^3=27$ cut assignments on three outside seed points.  The pair lemma
+propagates each seed assignment uniquely or rejects it, so all candidate
+two-graphs are produced in $O(n^2)$ time.
+
+Exact recognition verifies every four-set against the at most 27 candidates,
+using $O(n^4)$ oracle queries and time.  For property testing, suppose distance
+is normalized by $\binom n4$ and the input is promised either valid or
+$\varepsilon$-far from every valid aligned design.  Test
+
+\[
+ h\geq\frac{\log(27/\delta)}{\varepsilon}
+\]
+
+uniform held-out four-sets.  Valid inputs are always accepted, while every
+$\varepsilon$-far input is rejected with probability at least $1-\delta$.
+The total query complexity is
+
+\[
+ O\!\left(n^2+\varepsilon^{-1}\log(1/\delta)\right).
+\]
+
+This is a tester for marked families; it does not solve noisy recovery when
+the queried decoding coordinates themselves are adversarially corrupted.
+
+#### Canonicalization and automorphisms
+
+For each vertex $r$, form the derived graph $G_r$ on $V\setminus\{r\}$ with
+$ij$ an edge exactly when $\tau(rij)=1$.  A complete canonical form of the
+unlabelled complement pair is
+
+\[
+ \min_{r\in V}
+ \left\{\operatorname{canon}(G_r),
+       \operatorname{canon}(\overline{G_r})\right\}.
+\]
+
+An isomorphism between two derived graphs extends by sending their omitted
+vertices to one another; the two-graph parity identity then recovers every
+remaining triple.  Conversely every two-graph isomorphism induces such a
+derived-graph isomorphism.  Thus canonicalization reduces to at most $2n$
+ordinary graph-canonicalization calls on $n-1$ vertices, plus $O(n^3)$ work to
+form all derived graphs.  The hard complexity is exactly the chosen
+graph-isomorphism backend, not C794 reconstruction.
+
+There is also an exact group statement.  Faithfulness gives
+
+\[
+ \operatorname{Aut}(\mathcal A(\tau))
+ =\{\pi:\pi\tau=\tau\text{ or }\pi\tau=\tau+1\}.
+\]
+
+The ordinary automorphism group $\operatorname{Aut}(\tau)$ is the kernel of
+the homomorphism to $C_2$ recording whether a permutation preserves or
+complements $\tau$, hence has index one or two in the aligned-design
+automorphism group.  A canonical-labelling backend can therefore return both
+the extended group and the oriented subgroup.
+
+#### Exact isomorphism reduction and conference/ETF recovery
+
+For $n\geq 7$, faithfulness is equivalently the unlabelled statement
+
+\[
+ \mathcal A(\tau_1)\cong\mathcal A(\tau_2)
+ \quad\Longleftrightarrow\quad
+ \tau_1\cong\tau_2\text{ or }\tau_1\cong\overline{\tau_2}.
+\]
+
+Thus aligned-design isomorphism is exactly two-graph isomorphism modulo the
+single complement bit.  It does not make graph isomorphism easy, but it proves
+that the aligned design loses no information relevant to canonicalization,
+deduplication, or automorphism extraction.
+
+For a conference two-graph, choose a root $0$ and switch a Seidel or
+conference representative so that $C_{0i}=1$ for every $i\ne0$.  The triangle
+value on $\{0,i,j\}$ then determines the sign of $C_{ij}$.  Hence the marked
+determinant-$(-3)$ predicate reconstructs the conference signing up to vertex
+relabeling, diagonal switching, and global negation.  The last ambiguity is
+exactly $\tau\leftrightarrow\overline\tau$ and one calibrated triangle-product
+measurement selects its orientation.  Under the usual $G=I+\alpha C$
+normalization, the same statement recovers the discrete ETF sign codebook.
+It does not claim recovery of an unknown scale, physical basis, or arbitrary
+real-valued perturbation.
+
+This is a measurement-compression result: $O(n^2)$ selected quartic tests
+recover the discrete codebook, whereas materializing the complete aligned
+family uses $\binom n4=\Theta(n^4)$ tests.  It is also a non-hiding theorem.
+Publishing the labelled determinant-$(-3)$ pattern exposes the switching
+class to a quadratic-query adversary, so that pattern is not a
+privacy-preserving or cryptographic digest of the conference signing.
+
+#### Sparse certificates and the coding problem
+
+The nonadaptive signature of length
+
+\[
+ 4m+6\binom m2=3n^2-23n+44,
+ \qquad m=n-4,
+\]
+
+together with the known aligned-anchor bit, certifies equality of promised
+two-graphs up to complement.  The normalized message has
+$3m+\binom m2=(n^2-3n-4)/2$ bits, so the signature rate tends to $1/6$.
+The adaptive transcript has asymptotic rate one.  These quadratic signatures
+support proof-carrying switching-class databases, compact deduplication
+records, distributed verification, and streaming decoders without ever
+materializing all four-sets.
+
+The promise is essential: this certificate compares valid aligned designs;
+by itself it does not certify that an arbitrary four-uniform family lies in
+the image of $\tau\mapsto\mathcal A(\tau)$.  The exact-recognition and testing
+procedures above supply that missing check at different costs.
+
+The principal open coding-theoretic question is adversarial distance.  A
+minimum-distance bound, a local-testability theorem, or an efficient decoding
+radius would upgrade exact reconstruction to corrupted-test recovery, noisy
+quartic tomography, and quantitative error localization.  The independent
+noise guarantees in ej3 do not answer this adversarial question.
+
+After these reductions, the genuinely new algorithmic priorities are:
+
+1. adversarial certificate distance and robust decoding;
+2. a canonicalization/automorphism reference implementation and benchmarks;
+3. closing the remaining linear additive query gap;
+4. a complete conference/ETF reconstruction package with noisy-data tests.
+
 ## Sharp fibres below seven
 
 The same cut calculation gives a structural explanation of every exceptional
@@ -564,6 +754,21 @@ No manuscript edit is authorized by this task.
 - **Open, robustness gate:** adversarial correction still needs the minimum
   Hamming distance of the promised conference certificate class; stochastic
   repetition does not settle it.
+- **Settled by ej4:** deterministic anchor search costs at most twenty
+  parallel queries; adaptive reconstruction takes three rounds without an
+  anchor and two with one; exact recognition is quartic, while
+  $\varepsilon$-far property testing is quadratic plus
+  $O(\varepsilon^{-1}\log(1/\delta))$; canonicalization reduces to derived
+  graph canonicalization, and the aligned-design automorphism group is the
+  index-at-most-two extension allowing global complementation.
+- **Corrected:** the moment/profile “cascade” is a rejection cascade, not a
+  hierarchy of complete invariants.  Mean and variance are universal, and the
+  full histogram and triple-union profile are incomparable summaries.
+- **Settled by ej4, encoding:** the nonadaptive promised-equality certificate
+  has asymptotic rate $1/6$; marked conference/ETF signs are recovered up to
+  relabeling, switching, and one global bit.  Consequently the labelled
+  determinant pattern is a compressed codebook, not a privacy-preserving
+  digest.
 - **Open, evidence gap:** no audited pair of inequivalent conference
   switching classes at one order has yet been shown to have distinct third
   moments.  The full triple-union profile is the sharper candidate; a future
