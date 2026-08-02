@@ -2,7 +2,7 @@
 
 **Lane**: `ame-lu`
 **Date**: 2026-08-02
-**Status**: COMPLETE for the scoped items; the lane exit gate awaits a quiet build window (see Validation).
+**Status**: COMPLETE.  Gate built and axiom-audited; two scoped items are reported as boundaries rather than weakened (see Validation and the two Boundary sections).
 
 Formalizes the adopted `sec:two-uniform` subsection of
 `papers/ame_lu/sections/03-lu-rigidity.tex` ("Discreteness and quantitative
@@ -225,13 +225,21 @@ already exist, as its own task.
 
 ## Validation
 
-**Full-source elaboration: PASSED.**  All seven modules were elaborated together
-in one environment, from source, through `lean/scripts/guarded-lean`, with zero
-errors and zero warnings.  This is stronger than a single-file smoke test: no
-declaration relies on a previously built object file of the new modules.
+**Lane exit gate: PASSED.**  The unattended build queue built
+`RelativeConicArcs.Gates.AMELUTwoUniformRigidity` and
+`RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms` and passed the
+trace-only aggregate gate:
 
-**Axiom audit: PASSED, with the standard three axioms only.**  In the same
-elaboration, `#print axioms` on every paper-facing terminal reports exactly
+    lean/scripts/lean-build-queue.py run \
+      RelativeConicArcs.Gates.AMELUTwoUniformRigidity \
+      RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms \
+      --profile single --threads 1 --cores 20-23
+
+Run directory `~/.cache/othello-lean-build/run-20260802-084409-67b7d51a`, state
+`success`, aggregate `lake build --no-build` reporting all targets up to date.
+
+**Axiom audit: PASSED, with the standard three axioms only.**  The audit module
+prints seventeen `#print axioms` lines, and every one of them reports exactly
 `propext`, `Classical.choice`, `Quot.sound`:
 
     stateInner_localGeneratorSum_mulVec
@@ -252,33 +260,15 @@ elaboration, `#print axioms` on every paper-facing terminal reports exactly
     defectSq_mul_symmetry
     approximate_decomposition
 
-There is no `sorry`, no `native_decide`, no external certificate, no generated
-source, and no project-specific axiom anywhere in the dependency closure of the
-new modules.
+No `sorryAx` appears in the audit output.  There is no `sorry`, no
+`native_decide`, no external certificate, no generated source, and no
+project-specific axiom anywhere in the dependency closure of the new modules.
 
-**Per-module build and gate confirmation: NOT YET RUN.**  The host-wide build
-lock was held throughout this work by other lanes' live builds
-(`PassantCodeQ13.MinimumWords.*` and `RelativeConicArcs.PaperIOrientation*`), so
-the unattended queue could not complete
-`RelativeConicArcs.Gates.AMELUTwoUniformRigidity` and
-`RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms`.  One module,
-`RelativeConicArcs.AMELU.TwoUniformIsometry`, did build in the queue before the
-window was lost.  The remaining step is to run
-
-    lean/scripts/lean-build-queue.py run \
-      RelativeConicArcs.Gates.AMELUTwoUniformRigidity \
-      RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms \
-      --profile single --threads 1 --cores 20-23
-
-in a quiet window and record the gate's `--no-build` confirmation.  A run of
-exactly that command was submitted while this work was finishing and was still
-waiting for a quiet window; its run directory is
-`~/.cache/othello-lean-build/run-20260802-084409-67b7d51a`, and
-`lean/scripts/lean-build-queue.py status <that directory>` reports its outcome
-without resubmitting it.  Until that is
-done, the trust statement above rests on the full-source elaboration and the
-axiom audit taken in that same elaboration, which is exact evidence about the
-same declarations but not the lane's documented exit gate.
+**Full-source elaboration: PASSED.**  Independently of the gate, all seven
+modules were elaborated together in one environment, from source, through
+`lean/scripts/guarded-lean`, with zero errors and zero warnings, and the same
+seventeen `#print axioms` queries in that elaboration gave the same three
+axioms.
 
 ## Formalization ledger: what the row should say
 
