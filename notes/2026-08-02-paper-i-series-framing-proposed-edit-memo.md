@@ -1,258 +1,221 @@
-# Proposed Paper I edit memo — from exceptional object to strict recovery mechanism
+# Proposed Paper I edit memo — exceptional object, recurring reconstruction pattern
 
 **Lane:** `clebsch`
 
-**Status:** proposal only; no manuscript source has been edited
+**Status:** revised after C802's first independent red-team; proposal only;
+no manuscript source has been edited
 
 **Target:** the next simultaneous forward release of Papers I--IV
 
+**Review record:** `notes/2026-08-02-c802-paper-i-series-framing-memo-red-team.md`
+
 ## Editorial objective
 
-Prevent a referee from reading Paper I as an exhaustive study of one exceptional
-configuration.  The paper should remain honest that the Clebsch hexagon is an
-exceptional classified object, while making the reusable reconstruction mechanism
-the primary conceptual contribution:
+Prevent a referee from reading Paper I as merely an exhaustive study of one
+exceptional configuration, without inventing a common theorem that the four
+papers do not prove.
 
-```text
-coarse observable data
-    -> latent carrier
-    -> unordered decomposition
-    -> first surviving odd covariant
-    -> oriented cubic and its realizations.
-```
+The honest series claim is:
 
-The simultaneous release changes the evidentiary posture.  Papers II--IV are not
-future promises and should not be described as such.  They are accompanying,
-independently checkable evidence that the same recovery architecture survives
-changes of field, carrier, quotient, and representation.
+> Paper I proves a complete reconstruction chain from coarse syndrome data to a
+> projective code, an unordered support structure, and its orientation.  The
+> simultaneously released companions establish selected analogous recovery or
+> transport steps in distinct exact settings.  Together they exhibit a recurring
+> reconstruction pattern, not a universal four-paper ladder.
 
-## Governing claim
+The Clebsch objects remain exceptional classified configurations.  What repeats
+is the use of lost and recovered information as an organizing question.
 
-Use the following distinction consistently:
+## Claims explicitly withdrawn after red-team
 
-> The Clebsch objects are exceptional as classified configurations.  The strict
-> recovery mechanism is not confined to a single object: across the four papers,
-> progressively richer observable algebras recover a carrier, an unordered
-> decomposition, its exact orbit, and finally its orientation.
+The eventual exposition must not say any of the following without new theorems:
 
-Do **not** claim that Clebsch configurations are generic, that C494 proves an
-arbitrary-`q` theorem, or that every stage of the four-paper series has a common
-formal dependency.  The series-level claim is replication of a mechanism across
-distinct exact settings, not prevalence in a parameter space.
+- C494's displayed sheet label is Paper I's triangle holonomy, support cubic, or
+  first surviving odd covariant;
+- all four papers prove the same ordered recovery ladder;
+- Paper III owns or states C494's result before an exact forward theorem and
+  trust-manifest locator exist;
+- Paper III's operator and harmonic passages are successive levels of an
+  information algebra; or
+- the C494 gate supplies a general-`q`, projectively intrinsic, or general
+  double-coset theorem.
 
-## C494 evidence to promote
+## What C494 actually contributes
 
-C494 supplies a precise information-theoretic bridge rather than a loose analogy.
-For the frozen `B3` and `H3` matching configurations, it kernel-checks:
+For the two displayed, provenance-pinned finite datasets at
+`B3/F7` and `H3/F11`, C494 proves:
 
 - equality of `(sheet,D')` fibres with the displayed `K`-orbits;
-- failure of the two shared-edge counts without the sheet coordinate to separate
-  all `K`-orbits;
-- actual strict inclusions of rational invariant-function subalgebras; and
+- failure of the two shared-edge counts without the displayed sheet coordinate
+  to separate all displayed `K`-orbits;
+- strict inclusions of rational fibre-constant function subalgebras; and
 - dimension chains
   \[
-    1<2<6<14 \quad(B_3/\mathbf F_7),
+    1<2<6<14,
     \qquad
-    1<2<6<22 \quad(H_3/\mathbf F_{11}).
+    1<2<6<22.
   \]
 
-This proves that the orientation/sheet datum is load-bearing information.  It is
-not decorative structure added after the orbit has already been recovered.
+The permitted interpretation is:
 
-The accepted boundary must travel with every use of C494: it is finite and exact
-at `q=7,11`; it does not prove a general double-coset theorem, canonical
-association-scheme identification, or general-`q` result.  The projective
-derivation of the displayed tables is outside that Lean gate.
+> In these two finite tables, a final binary refinement is indispensable for
+> recovering the displayed orbit from the two shared-edge counts.
 
-### Proposed Paper III upgrade
+This is a precise finite analogue of information recovery.  Identifying that
+binary refinement with Paper I's odd orientation would require a separate
+comparison theorem.
 
-Paper III should use C494 as the finite, exact instance of a **strict recovery
-ladder**.  Its operator and harmonic passages then become realizations of
-information recovered at successive levels, rather than a catalogue of
-Clebsch coincidences.  Before Paper I attributes this upgrade to Paper III, the
-Paper III forward version must contain an exact theorem/proposition locator and
-must state the C494 boundary above.  Until that integration exists, Paper I may
-cite the C494 result through the paper that actually owns the theorem, but must
-not silently transfer proof ownership.
+### Complete C494 boundary
 
-## Proposed Paper I interventions
+Kernel evaluation checks the explicitly displayed matching and action tables;
+the fibre-subalgebra finrank theorem is symbolic.  The gate does not prove:
 
-These are proposed edits only.  Apply them later as one coherent exposition pass
-after the formal spine and correspondence audit are closed.
+- projective derivation or translation of the accepted tables;
+- an arbitrary-`q` result;
+- a general `K\G/H` theorem;
+- abstract-group naming;
+- canonical association-scheme identification; or
+- identification of the shared-edge labels with C425's depth coordinates.
 
-### 1. Abstract
+Any paper-facing use that bears argumentative weight must carry this boundary,
+preferably in a precise remark, footnote, or cover-letter theorem table rather
+than compressed promotional prose.
 
-The abstract currently begins at the `q=11` specialization and mentions the
-uniform field window only at the end.  Add one sentence naming the inverse
-mechanism before specializing:
+## Proposed Paper III upgrade: conditional only
 
-> We study when coarse nearest-codeword data recover a projective code and when
-> the first odd invariant of the recovered ambiguity data supplies its missing
-> orientation.
+C494 may motivate a Paper III interpretation in terms of lost and recovered
+information, but Paper I must not attribute that interpretation to Paper III
+until the Paper III forward version contains:
 
-Near the end, add a restrained simultaneous-series sentence:
+1. an exact theorem or proposition statement;
+2. an explicit comparison with the relevant Paper III objects;
+3. unambiguous proof ownership;
+4. a trust-manifest row; and
+5. a stable public locator for the simultaneous version.
 
-> The accompanying papers test the same recovery ladder on conic matching
-> quotients, characteristic-zero golden descent and operator realizations, and a
-> distinct finite-field passant code.
+Until all five exist, C494 remains evidence owned by its actual formal and
+scholarly source.  Paper III should be described as arithmetic descent and
+transport through operator and harmonic realizations, not as proving the same
+reconstruction chain as Paper I.
 
-Avoid listing every companion theorem in the abstract.
+## Required theorem-interface and dependency matrix
 
-### 2. First two pages of the introduction
+Before editing Paper I, replace the provisional entries below with exact theorem
+numbers, trust rows, and public locators.
 
-Move the series architecture ahead of the long literature survey.  The reader
-should encounter the general inverse problem, the recovery ladder, and only then
-the sharp Clebsch closure.
+| paper | standalone input | standalone main output | relation to reconstruction | proof dependency on Paper I |
+|:--|:--|:--|:--|:--|
+| I | projective deep-hole syndrome locus and ambiguity data | code, support structure, golden orientation | complete carrier--decomposition--orientation chain | none |
+| II | conic matching quotient and quadratic-trade hypothesis | exact surviving matching orbits, unordered sheets, sheet-sign cubic | selected analogous recovery steps | none; verify exact citation boundary |
+| III | characteristic-zero incidence source and marked bridge data | golden descent and conference/exterior/determinant/Pfaffian/harmonic realizations | transport and realization of an oriented source | none; do not claim C494 ownership without the conditional upgrade |
+| IV | `q=13` passant incidence data | binary code and its minimum-layer reconstruction package | distinct finite-field reconstruction problem | none; verify final released theorem surface |
 
-Proposed paragraph:
+This matrix, not a slogan, must carry the anti-hidden-dependency and
+anti-salami-slicing argument.  The cover letter may include its full form.
+Paper I should contain only a short statement that the papers are logically
+independent and structurally related, supported by exact citations.
 
-> The point of the example is not that the Clebsch hexagon is typical.  It is a
-> sharp instance in which a reconstruction ladder closes completely.  Coarse
-> syndrome incidence recovers the carrier; nearest-codeword ambiguity recovers
-> an unordered support decomposition; triangle holonomy, the first surviving odd
-> covariant, recovers its orientation.  The simultaneously released companion
-> papers vary the field, carrier, quotient, and representation while retaining
-> this sequence of information gains.
+## Proposed Paper I intervention
 
-### 3. Separate mechanism from specialization
+Keep the eventual manuscript change to three locations.  Do not add a separate
+strict-information subsection or a repeated series manifesto.
 
-Insert a compact table after the principal Paper I theorems:
+### 1. One restrained abstract sentence
 
-| Mechanism-level ingredient | Paper I specialization |
-|:--|:--|
-| chord-defect identity and partial-cover bounds | six-arcs in `PG(2,11)` |
-| syndrome locus as a projective observable | the nonsingular conic |
-| ambiguity data recover a two-sheet/two-graph structure | the Clebsch support bipartition |
-| first odd covariant orients an unordered decomposition | triangle holonomy and the support cubic |
-| diagonal determinant pencil exposes the odd term | the golden order-six conference operator |
-| exact rigidity closes the inverse problem | the Clebsch orbit and its `A5` stabilizer |
+Possible text:
 
-This table should distinguish what transfers from what is exceptional without
-weakening the sharp theorem.
+> More broadly, the argument isolates a reconstruction pattern in which coarse
+> incidence data recover a carrier and ambiguity data recover additional
+> structure; the accompanying papers test related recovery and transport steps
+> in different exact settings.
 
-### 4. Add a strict-information paragraph
+This sentence is optional.  Delete it if the abstract becomes less focused or
+if the exact companion locators are not ready.
 
-After the orientation theorem, explain why orientation is mathematically
-necessary rather than an attractive embellishment:
+### 2. One early-introduction paragraph
 
-> The companion matching calculation makes this loss of information exact.  In
-> the `B3/F7` and `H3/F11` cases, the constant, sheet, orbit, and full function
-> algebras form strict towers of dimensions `1<2<6<14` and `1<2<6<22`; the
-> shared-edge profile without the sheet merges distinct orbits, whereas
-> `(sheet,D')` has exactly the orbit fibres.  Thus the odd orientation datum is a
-> genuine additional recovery step.
+Possible text:
 
-Replace the informal names and ASCII dimensions with the final mathematical
-notation and exact simultaneous-paper theorem locators during implementation.
+> The Clebsch hexagon is not presented as a typical configuration.  It is a sharp
+> case in which an inverse problem closes completely: syndrome incidence recovers
+> the projective code, decoder ambiguity recovers an unordered support structure,
+> and triangle holonomy recovers its orientation.  The simultaneously released
+> companion papers address related but logically independent reconstruction or
+> transport problems; the roadmap below states their distinct inputs and outputs.
 
-### 5. Replace the late series paragraph
+This paragraph concerns Paper I's proved chain.  It does not use C494 to identify
+the sheet bit with holonomy.
 
-The existing paragraph beginning “This is Paper I of a four-paper sequence” is
-too late and too bibliographic.  Retain a short roadmap there, but make it a
-summary of four independent inverse problems:
+### 3. One compact roadmap with exact locators
 
-1. Paper I: deep-hole syndrome locus to code, support, and orientation;
-2. Paper II: quadratic trade to matching sheets and their cubic orientation;
-3. Paper III: golden descent and transport of the oriented source through
-   conference, exterior, determinant/Pfaffian, and harmonic realizations,
-   augmented by the strict recovery-ladder interpretation;
-4. Paper IV: a different finite-field reconstruction problem for the
-   `q=13` passant code.
+The roadmap should give one sentence per paper:
 
-Use present tense throughout.  Remove “forthcoming,” “later paper,” and any
-language that makes the simultaneous papers sound speculative.
+1. Paper I closes the deep-hole-syndrome inverse problem through orientation.
+2. Paper II classifies the relevant quadratic-trade matching quotients and their
+   sheet-sign cubic.
+3. Paper III carries the characteristic-zero golden source through its arithmetic,
+   operator, and harmonic realizations.
+4. Paper IV proves a separate reconstruction theorem for the `q=13` passant code.
 
-### 6. Title and subtitle
+Use present tense only after the simultaneous versions and stable locators are
+confirmed.  Remove “forthcoming,” “later paper,” and any claim that a companion
+finishes a Paper I proof.
 
-Do not rename Paper I merely to sound general.  Its current title honestly names
-the sharp object and inverse datum.  If a framing change is desired, add a short
-running subtitle or series-deck phrase such as “A strict reconstruction ladder”
-rather than replacing the canonical title.
+## Optional explanatory table
 
-### 7. Cover letter and shared release metadata
+Do not call a two-column table “mechanism-level.”  If a table survives the final
+cold read, title it **Conceptual role / Paper I realization** and populate it only
+after O1--O8 and the correspondence audit close.  In particular, no stabilizer or
+symmetry row may appear until O7 is non-tautological and reconciled with the prose.
 
-Prepare a one-page series synopsis to accompany simultaneous submission.  It
-should contain:
+## Cover-letter use of C494
 
-- the recovery-ladder diagram;
-- one sentence on the independent mathematical question of each paper;
-- a statement that no companion is a hidden proof dependency of Paper I;
-- exact stable public locators and version identifiers for all four papers; and
-- the mechanism/specialization distinction.
+The cover letter, rather than Paper I's main narrative, is the natural place for
+the fuller information-lattice example.  Proposed bounded statement:
 
-Use the same restrained two-sentence series description in repository READMEs,
-release notes, and submission comments.  Do not duplicate a long manifesto in
+> A separate finite calculation for the two displayed `B3/F7` and `H3/F11`
+> matching datasets makes one loss of information exact: two shared-edge counts
+> merge displayed orbits, while adjoining the displayed sheet label gives exactly
+> the displayed orbit fibres, with strict function-algebra dimensions
+> `1<2<6<14` and `1<2<6<22`.  This result is an analogy for a final binary
+> refinement; no identification with Paper I's holonomy is claimed.
+
+Attach the exact theorem and trust locators.  Do not repeat this full paragraph in
 all four manuscripts.
 
-## Reviewer-perception checks
+## Reviewer-perception gates
 
-The final exposition pass should be tested against four predictable readings.
+The revised proposal must pass these checks before any manuscript edit:
 
-### “This is only a sporadic configuration.”
+1. **Exceptional object:** does it say “recurring pattern” rather than imply a
+   generic family or common theorem?
+2. **C494:** does every use say “displayed finite datasets,” preserve all
+   exclusions, and avoid sheet/odd-orientation identification?
+3. **Paper III:** is every C494 attribution conditional on an exact theorem and
+   manifest owner?
+4. **Independence:** does the theorem-interface matrix show distinct inputs and
+   outputs rather than merely assert independence?
+5. **Length:** is the Paper I change limited to the three locations above?
+6. **Formal correspondence:** have O1--O8, especially O7/O8, and the prose audit
+   closed before claims are promoted?
 
-Answer with repeated mechanism, not with a claim of genericity: two finite
-fields in the strict information lattice, three Coxeter types in the quotient
-rank picture, characteristic-zero arithmetic/operator transport, and the
-separate `q=13` code problem.
+## Deferred implementation sequence
 
-### “The sequels are being used to complete Paper I.”
+This memo authorizes no manuscript edit.
 
-State logical independence explicitly.  Paper I's proofs and trust manifest
-must close on their own.  The other papers provide simultaneous transfer and
-replication evidence.
+1. Finish C753's O1--O8 formal spine and correspondence audit.
+2. Determine whether the proposed C494-based Paper III upgrade obtains an exact
+   theorem, proof owner, trust row, and locator; otherwise omit the attribution.
+3. Fill the dependency matrix with exact simultaneous-version evidence.
+4. Under C802, run a second independent cold check of this revised memo.
+5. Hand the accepted three-location recommendation to C762.
+6. Under C762, draft and cold-read one coherent manuscript patch, then reconcile
+   the trust manifests and synchronize the standalone Paper I repository.
 
-### “This is one result split into several papers.”
+## Recommended decision
 
-Name the different inverse problems and theorem interfaces.  The shared ladder
-is the organizing principle; each paper changes both the observable input and
-the structure reconstructed.
-
-### “The information-lattice claim is computational evidence.”
-
-State the exact trust boundary: C494 uses explicit finite `B3/H3` data with
-kernel checking plus a symbolic subalgebra-finrank theorem.  Do not present it
-as a general structural proof beyond those two cases.
-
-## Language rules for the eventual edit
-
-Prefer:
-
-- “simultaneously released companion papers”;
-- “replicated reconstruction mechanism”;
-- “strict information gain” or “strict recovery ladder”;
-- “exceptional specialization in which the ladder closes completely”; and
-- “logically independent, structurally connected.”
-
-Avoid:
-
-- “representative example” or “generic model”;
-- “the sequels will show”;
-- “universal information lattice” unless a universal theorem is actually
-  proved;
-- “orientation is encoded already” when C494 shows the sheet coordinate is
-  load-bearing; and
-- any Paper III attribution without an exact forward-version theorem locator.
-
-## Deferred implementation checklist
-
-No item below is authorized by this memo itself.
-
-1. Finish Paper I's O1--O8 formal spine and correspondence audit.
-2. Confirm the final Paper III location and statement of the C494-based upgrade.
-3. Confirm stable public locators and simultaneous version identifiers for
-   Papers II--IV.
-4. Draft the abstract, early introduction paragraph, mechanism/specialization
-   table, strict-information paragraph, and revised roadmap as one patch.
-5. Run a cold read asking specifically whether Paper I appears to be a case
-   study, a hidden multi-paper dependency, or a salami-sliced result.
-6. Reconcile every cross-paper statement with the trust manifests before
-   synchronizing the standalone Paper I repository.
-
-## Recommended editorial decision
-
-Adopt the strict recovery ladder as the series-level organizing principle, but
-keep Paper I's theorem statements and title centered on the Clebsch inverse
-problem.  The strongest answer to the “exceptional object” objection is not a
-broader slogan; it is the simultaneous availability of exact companion
-theorems, with C494 proving that the missing orientation is a strict and
-measurable increment of information.
+Use **recurring reconstruction pattern** as the series-level framing.  Keep the
+complete reconstruction chain as a Paper I theorem, describe Papers II--IV by
+their distinct exact interfaces, and use C494 only as a bounded finite example
+of a load-bearing binary refinement unless a separate comparison theorem proves
+more.
