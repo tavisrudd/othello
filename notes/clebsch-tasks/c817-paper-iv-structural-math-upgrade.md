@@ -1,7 +1,7 @@
 # C817 — Paper IV structural mathematics upgrade
 
 **Lane:** `clebsch`  
-**Status:** active; subitem 1 positive and frozen; mathematics research only;
+**Status:** active; subitems 1--2 positive and frozen; mathematics research only;
 manuscript integration requires later user discussion
 
 ## Current state
@@ -17,8 +17,17 @@ is excluded; a precise nonsplit-torus identification remains a subitem-3
 Brauer-character gate.  Report and exact evidence bundle:
 `notes/2026-08-02-c817-hidden-f8-module.md`.
 
-The next gate is subitem 2, pair-concurrence coherent closure and minimal
-reconstruction arity.
+Subitem 2 is complete.  One coherent refinement of the five weighted
+pair-concurrence colors recovers all six elliptic relations: the two
+concurrence-6 relations have respectively two and four common
+concurrence-7 neighbors.  More strongly, the concurrence-8 neighborhoods are
+already the 78 passant incidence rows, so weighted-pair data reconstructs
+\(M\) directly and reconstruction arity is exactly two.  Report and exact
+evidence bundle: `notes/2026-08-02-c817-pair-concurrence-closure.md`.
+
+The next gate is subitem 3, homogeneous toric--octahedral geometry of the four
+minimum-word orbits, including the subitem-1 nonsplit-torus representation
+identification.
 
 ## Objective
 
