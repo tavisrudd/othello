@@ -17,16 +17,19 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** attack the composition classification.  Every coherent system
-over prime \(q\) is the totally split irrational quadratic fiber of a monic rational
-\(R\) of degree \((q+3)/2\), with \(G=(R-\gamma)(R-\gamma^q)\).  Gates in order:
-(1) bounded census of all \((R,\gamma)\) with totally split irrational fibers for
-prime \(q\le43\), to measure split-fiber rarity before coherence; (2) re-express the
-coherence characters (A), (B) as conditions on \(R\) along its fiber; (3) the
-structural route via factorization/monodromy of \(R(X)-R(Y)\), value sets, and the
-exceptional-polynomial literature, including making the Dickson window
-\((q+3)/2\mid8\Rightarrow q\in\{5,13\}\) exclusion of \(q=13\) structural.  Stop a
-sub-gate if it degenerates into an unbounded case split with no monodromy control.
+**Next-session entry:** attack the crown-restricted clique statement.  The saturated
+gate is now: *no clique of size \((q+3)/2\) in the Paley graph of order \(q^2\) is
+completely joined, outside a perfect matching, to its Frobenius image* — the affine-line
+case and the two published clique orbits are already closed (Theorems 2 and 4 of
+`notes/2026-08-02-c756-crown-reformulation-and-line-case.md`).  Gates in order:
+(1) use the bipartite half of the crown, which the current reduction discards, to
+replace the Baker–Ebert–Hemmeter–Woldar gap conjecture — note that no density-based
+stability argument can work, since Paley sits at edge density exactly \(1/2\);
+(2) failing that, attack the gap conjecture's crown-restricted case directly, e.g. by
+extending a crown clique to a larger clique or deriving a contradiction from the
+\(\pm1\)-valued Frobenius-odd eigenfunction of support \(q+3\); (3) the composition
+normal form \(G=(R-\gamma)(R-\gamma^q)\) remains the fallback route and is prime-only.
+Stop a sub-gate if it degenerates into an unbounded case split.
 
 ## Why this task exists
 
@@ -43,7 +46,9 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty-four research passes complete; the theorem is **not** proved. Reports:
+Twenty-five research passes complete; the theorem is **not** proved. Reports:
+`notes/2026-08-02-c756-crown-reformulation-and-line-case.md` and
+`notes/2026-08-02-c756-paley-eigenfunction-support-literature.md`, and
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -471,6 +476,49 @@ What the digit-tower and composition pass (twenty-fourth) adds:
   monodromy/exceptional-polynomial type, with the Dickson window
   \((q+3)/2\mid8\Rightarrow q\in\{5,13\}\) and \(q=13\) already audit-excluded.
 
+What the crown-reformulation and affine-line pass (twenty-fifth) adds:
+
+- **Reformulation.**  A coherent system is exactly an induced *crown graph*
+  (\(K_{n,n}\) minus a perfect matching, \(n=(q+3)/2\)) in the Paley graph of order
+  \(q^2\) whose missing matching is Frobenius conjugation; equivalently a
+  \(\pm1\)-valued, Frobenius-odd eigenfunction for the eigenvalue \(-(q+1)/2\) with
+  support exactly \(q+3\).  Interlacing is tight, which is why no further spectral
+  bound can finish the branch — that tightness *is* the eigenfunction statement.
+- The known minimum-support eigenfunction of \(P(q^2)\) has support \(q+1\), inducing
+  \(K_{m,m}\) on the norm-one circle, and is Frobenius-even; C756's object is its
+  immediate neighbour.  Minimum support \(q+1\) is a theorem
+  (Goryainov–Kabanov–Shalaginov–Valyuzhenich 2018), its classification is an open
+  problem in that literature, and nothing is known for supports \(q+2,\dots,2q-1\).
+- **Affine-line theorem (proved, all odd prime powers).**  A coherent system contained
+  in an \(\mathbb F_q\)-affine line forces \(q=5\).  Both frames are of that shape and
+  sit exactly on the boundary: the chain ends in \(q-2\le(q+1)/2\).  So for \(q>5\)
+  every coherent system is line-free.
+- **Reduction.**  Line-free cliques of size \((q+3)/2\) in \(P(q^2)\) are the
+  Baker–Ebert–Hemmeter–Woldar regime.  Under their gap and two-orbit conjecture,
+  \(q\equiv1\pmod4\) is impossible outright and \(q\equiv3\pmod4\) forces
+  \(Z=a(Q_j\cup\{0\})+b\) — a three-field-element family.
+- **Weil closure of that family (proved for \(q\ge83\)).**  Parametrizing the circle by
+  \(c(t)=(t-\iota)/(t+\iota)\), the crown condition becomes
+  \(\chi_q(F(t,t'))=-1\) on \(T_j\times T_j\) with \(F=N(P(t)t'+Q(t))\).  Because
+  \(F\) is the norm of a form linear in \(t'\),
+  \(\operatorname{disc}_{t'}F=\varepsilon L(t)^2\) is a nonsquare whenever
+  \(L(t)\ne0\), and \(L\equiv0\) only when \(b\in\mathbb F_q\), which is excluded.
+  Hence the inner sums are Weil sums of squarefree polynomials, giving
+  \(O(q^{3/2})\) against a required \(q^2/4\).
+- **Field generality.**  Unlike the prime-only composition tower, this whole route
+  holds for every odd prime power, so it removes the \(q=27\) extension-field gap from
+  this branch's argument.
+- **Honest verification status.**  The gap conjecture is proved for no \(q\); Yip
+  records that "no partial progress has been made".  The claimed check to \(q\le109\)
+  is unattributed and the published orbit-complete table stops at \(q\le47\).  So the
+  unconditional range is not materially extended; the gain is that the branch reduces
+  to one named conjecture, and in fact only to its crown-restricted special case.
+- The next unconditional target is therefore: no maximal clique of size \((q+3)/2\) in
+  \(P(q^2)\) is completely joined, outside a perfect matching, to its Frobenius image.
+  The reduction currently uses only clique-ness and discards the entire bipartite half
+  of the crown; every published stability theorem fails because Paley sits at edge
+  density exactly \(1/2\).
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -510,10 +558,13 @@ Two independent uniform obstructions are still required:
    defect-two boundary \((q,k)=(53,12)\).
 
 The old secant-pencil and association-scheme candidates are superseded.  The active
-saturated-internal gate is the coherent Paley double-clique classification, now in its
-sharpest form: classify monic rational \(R\) of degree \((q+3)/2\) with a totally split
-irrational quadratic fiber satisfying the two coherence characters
-(\(G=(R-\gamma)(R-\gamma^q)\) is proved for every coherent system over prime \(q\)).
+saturated-internal gate is now stated in Paley-graph terms: prove that no clique of
+size \((q+3)/2\) in \(P(q^2)\) is completely joined, outside a perfect matching, to its
+Frobenius image.  The affine-line configurations and the two published second-largest
+clique orbits are closed; what remains is the crown-restricted case of the
+Baker–Ebert–Hemmeter–Woldar gap conjecture.  The composition normal form
+(\(G=(R-\gamma)(R-\gamma^q)\), proved for every coherent system over prime \(q\)) is
+retained as the fallback route.
 The nonsaturated branch has no bounded per-line algebraic-compression gate left.  Its clean active
 target is now to prove \(h\ge1\): after deleting any arc point, a conic-external set cannot
 determine every direction on a spare external line.  This is a masked Rédei--Szőnyi-style
