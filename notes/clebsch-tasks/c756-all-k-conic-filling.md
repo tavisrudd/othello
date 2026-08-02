@@ -231,13 +231,24 @@ close.  Cheap hygiene still owed before a later end-to-end handoff is one explic
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
 read of the full eleven-pass argument; neither item reopens a closed mathematical branch.
 
+Decision split: do not price the saturated crown and the full theorem as one outcome.
+The realistic publishable narrowing is the **complete saturated classification** — over
+every field, the four-frame and Clebsch hexagon are the only saturated conic-filling arcs.
+It needs only the coherent-double-clique gate and is currently estimated at roughly 50%
+(the gate itself 55--65%, discounted for the outstanding extension-field and end-to-end
+verification).  The full all-\(k\) theorem additionally requires a new nonsaturated
+invariant and remains a 10--15% lottery ticket.  A positive saturated result would trigger
+its own paper-scoping task; it is not silently promoted to a manuscript under C756.
+
 ## Prior estimate
 
-The review prior was ~30% provable with current tools (§12.6).  The saturated-internal
-audit produced a strong normal form but not its final classification, while the bounded
-dual conic-weighted-pencil norm fails at degree \(\Theta(q)\).  The working estimate stays
-~5--10%, read at its low end for the current toolkit.  The two remaining gates require
-new structural input and no present route joins them.
+The review prior was ~30% for the full theorem (§12.6), before the last identified
+small-degree nonsaturated route failed.  The saturated-internal audit produced a strong
+normal form but not its final classification, while the bounded dual conic-weighted-pencil
+norm fails by a proved degree-\(\Theta(q)\) fragmentation mechanism.  Recalibrated odds:
+~10--15% for the full all-\(k\) theorem, and ~50% for the complete saturated
+classification.  The latter is the active bet; the former remains alive only if genuinely
+new nonsaturated structure appears.
 
 ## Scope
 
