@@ -213,3 +213,31 @@ statement: the count of invariant factors divisible by `2^l`, plus the free
 rank, equals the codimension of the l-th Schur power, at every level tested.
 The unit-factor law is its `l = 1` case, so this is no longer a separate
 lead.  Promoted to C790; do not pursue independently.
+
+### 2026-08-02 — the quantitative theory meets the atlas
+
+**Provenance:** extra-juice pass over the C786 threshold report.
+**Was I looking for this?:** no — C786 was asked for an explicit threshold, and
+its half-splitting bound was offered as optional material that nothing
+downstream uses.
+**Observed / musing:** C786's Proposition 9 says a product unitary with small
+defect must have its Weyl amplitude profiles on the two halves of a balanced
+cut agree in Hellinger distance, and it identifies the map between the two
+halves as a maximum-distance-separable transition map.  That map is the
+paper's own minimum-support atlas — the object its classification theorem
+already proves is a complete local-unitary invariant.  So the quantitative
+and the classification halves of the paper meet at the same structure, which
+neither the report nor the manuscript notices.
+**Why it may matter / strongest question:** the report localizes the open
+problem — beat the marginal-dilution barrier with a global argument — and
+names the missing ingredient as phase information in the non-Clifford
+directions.  The atlas already carries phase data in its holonomies, which the
+paper computes explicitly for the six-party pencil.  Attacking the open
+problem through atlas holonomies rather than through a fresh global estimate is
+the obvious move if the identification is more than notational.
+**Discriminator / falsifier:** write the half-splitting bound's transition map
+and the atlas transition maps in the same coordinates and check they agree as
+maps, not merely in type.  If they agree, test whether the holonomy phases
+supply exactly the discarded arguments.  Shared shape alone is not a bridge.
+**Evidence:** none computed; this is a reading of two statements side by side.
+**Status:** open lead.
