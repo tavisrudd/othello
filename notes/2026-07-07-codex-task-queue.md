@@ -88,6 +88,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `golden`
 
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
+- **C772 `[golden]` [IN PROGRESS]** — implement the accepted C771 PRA referee revisions: explicit build-on-Clebsch framing, local Golden theorem interface, amplitude/probability/tomography repair, quantitative derivations, APS data statement, and final package validation; the user owns live posting and the Clebsch forward reference → `notes/golden-tasks/c772-golden-quantum-statistics-referee-revision.md`.
 
 ### `complete-ports`
 

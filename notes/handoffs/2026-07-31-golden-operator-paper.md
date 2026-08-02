@@ -454,8 +454,9 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-None.  C771 is closed; its accepted revision requirements need a separately
-allocated implementation task.
+- C772 is in progress: implement the accepted C771 PRA referee revisions and
+  make the package technically ready.  The user owns live posting and the
+  Clebsch forward reference; add no separate gate.
 
 ## Recommended order
 
