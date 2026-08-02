@@ -2195,8 +2195,17 @@
       "last": 796,
       "purpose": "falsify or confirm the phase-blindness transfer from the golden balanced-cut sign to the C786 open problem",
       "sequence": 244
+    },
+    {
+      "count": 1,
+      "first": 797,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 797,
+      "purpose": "trade-only reconstruction of the hidden conic-matching carrier and exact B3/H3 classification",
+      "sequence": 245
     }
   ],
-  "next_id": 797,
+  "next_id": 798,
   "schema": "codex-task-id-allocations-v1"
 }
