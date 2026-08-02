@@ -17,19 +17,61 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** attack the crown-restricted clique statement.  The saturated
-gate is now: *no clique of size \((q+3)/2\) in the Paley graph of order \(q^2\) is
-completely joined, outside a perfect matching, to its Frobenius image* — the affine-line
-case and the two published clique orbits are already closed (Theorems 2 and 4 of
-`notes/2026-08-02-c756-crown-reformulation-and-line-case.md`).  Gates in order:
-(1) use the bipartite half of the crown, which the current reduction discards, to
-replace the Baker–Ebert–Hemmeter–Woldar gap conjecture — note that no density-based
-stability argument can work, since Paley sits at edge density exactly \(1/2\);
-(2) failing that, attack the gap conjecture's crown-restricted case directly, e.g. by
-extending a crown clique to a larger clique or deriving a contradiction from the
-\(\pm1\)-valued Frobenius-odd eigenfunction of support \(q+3\); (3) the composition
-normal form \(G=(R-\gamma)(R-\gamma^q)\) remains the fallback route and is prime-only.
-Stop a sub-gate if it degenerates into an unbounded case split.
+**Next-session entry:** replace the census with an exact mechanism.  The saturated gate
+is: *no clique of size \((q+3)/2\) in the Paley graph of order \(q^2\) is completely
+joined, outside a perfect matching, to its Frobenius image.*  The affine-line case
+(Theorem 2), the two published clique orbits (Theorem 4), and every \(q\le43\) plus
+every \(q\equiv3\pmod4\) up to \(151\) are already closed; see
+`notes/2026-08-02-c756-crown-reformulation-and-line-case.md`.
+
+The binding constraint on any replacement: exhaustive search is the only thing currently
+covering the small fields, and small \(q\) is exactly where character-sum arguments
+fail, since every Weil bound leaves a tail of order \(\sqrt q\).  So a structural
+replacement must be an **exact** combinatorial argument with no error term, in the style
+of Theorem 2 — whose chain ends in the integer inequality \(q-2\le(q+1)/2\) — and not
+another analytic estimate.  Ranked gates:
+
+1. **Baer-subline containment.**  Theorems 2 and 4 are the same "more than half a
+   structure of size \(\approx q\), against an admissible set of size \(\approx q/2\)"
+   argument run on the two kinds of Baer subline (a line, and the norm-one circle, which
+   is the image of \(\mathbf P^1(\mathbb F_q)\) under an explicit Möbius map).  Prove
+   the unified statement: a coherent system contained in any Baer subline forces
+   \(q=5\).  Then aim at the stability conjecture that would finish everything — the
+   support of a \(\pm1\)-valued, Frobenius-odd \(\lambda_{\min}\)-eigenfunction of
+   support at most \(q+3\) lies on a Baer subline.  Supporting evidence: the known
+   minimum-support eigenfunction, of support \(q+1\), is supported exactly on one.  The
+   general second-minimum problem is open in the Paley literature, but the \(\pm1\) and
+   Frobenius-odd hypotheses make this a much smaller target.
+2. **Complete-mapping endgame (best track record).**  This is what closed the
+   saturated-external branch: a complete mapping of the cyclic square group, a group-sum
+   obstruction removing one residue class, then a genus-one character sum and Hasse's
+   bound leaving three fields.  Theorem 5 supplies the internal analogue — \((q+1)/2\)
+   derangements indexed by directions, with \(\sigma_{c^{-1}}=\sigma_c^{-1}\).  The
+   missing step is to compute them algebraically rather than combinatorially; the cycle
+   structure of \(\sigma_c\sigma_{c'}^{-1}\) is a field-arithmetic invariant not yet
+   extracted.  Output would be an explicit finite list of \(q\), which is what actually
+   replaces a census.
+3. **Rédei-type direction theorem (highest leverage — serves both open branches).**
+   Theorem 5 says the \(q+3\) support points meet every line in \((q+1)/2\) of the
+   \(q+1\) directions in zero or two points: a point set determining few directions with
+   even multiplicity, which is Rédei–Szőnyi territory and exact rather than asymptotic.
+   The nonsaturated branch's clean surviving target is *already* a masked Rédei direction
+   theorem.  Both remaining obstructions in C756 are therefore direction theorems for
+   point sets with character-restricted differences, and one sufficiently general tool
+   could close both.  Weigh this before choosing where to spend the pass.
+4. **Rédei polynomial at half size (most conservative).**  Blokhuis proved
+   \(\omega(P(q^2))=q\) by a polynomial argument, and the master polynomial
+   \(G=(R-\gamma)(R-\gamma^q)\) is literally the Rédei polynomial of the crown, with a
+   Frobenius divisibility congruence already in hand from the lacunary pass.  Re-run
+   Blokhuis' method at size \((q+3)/2\) using the crown's second condition as the extra
+   input his proof does not have.
+
+Closed, do not retry: density and stability arguments (Paley sits at edge density exactly
+\(1/2\) and every published stability theorem needs strictly less); further spectral
+bounds (interlacing is already tight, and that tightness is the eigenfunction property
+restated); valuation-versus-Parseval counting (shown insufficient in the twenty-fourth
+pass); ordinary rank, cofactor variants, and row-transition interpolation.  The
+\((R,\gamma)\) composition normal form remains the fallback and is prime-only.
 
 ## Why this task exists
 
