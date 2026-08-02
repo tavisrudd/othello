@@ -501,6 +501,11 @@ trust boundary: the interior phase range dies by a three-entry pentagon
 anticommutation parity, and the purely imaginary endpoint dies because an
 integral skew determinant would have to equal the nonsquare 125 despite being
 a Pfaffian square.  The enumeration remains only an independent cross-check.
+The ensuing `ej2` shows that cut-independence of any one of
+`e3`, `h3`, or `s21` already characterizes the real switching class, and
+packages all three cut averages through the single nonnegative holonomy defect
+`delta(C)=1-average(r_T^2)`; a quantitative pentagon bound gives
+`||AB+BA||_F^2 >= 8` inside the equal-holonomy ansatz.
 
 C808 is complete.  A full Milnor--Serre exposition audit aligned the abstract,
 introduction, figure, and discussion with the correct unframed

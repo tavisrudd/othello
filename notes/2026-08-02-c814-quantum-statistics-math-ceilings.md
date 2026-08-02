@@ -584,3 +584,99 @@ open attack direction.  What remains is the complete nonmaximal semialgebraic
 image, complex-valued diagonal controls, and higher-order/larger-conference
 analogues.  Those are distinct future questions and are not needed for the
 paper-review candidates recorded here.
+
+## 8. Structural-compression `ej2`
+
+The parity/Pfaffian proof yields three further theorem-level consequences at
+essentially no additional cost.
+
+### One scalar sector already detects rigidity
+
+For an order-six Hermitian conference matrix, the following are equivalent:
+
+1. the full balanced exchange spectrum is cut-independent;
+2. the filled-fermion statistic \(e_3\) is cut-independent;
+3. the symmetric statistic \(h_3\) is cut-independent;
+4. the mixed statistic \(s_{(2,1)}\) is cut-independent;
+5. the matrix is switching/permutation equivalent to the real symmetric
+   conference class.
+
+Indeed, Theorem B makes each statistic in items 2--4 an injective affine
+function of \(r_T^2\).  Constancy of any one therefore makes \(|r_T|\)
+constant, and Theorem C applies.  Conversely the real class has
+\(r_T^2=1\) on every cut.  By contrast, \(p_1,p_2,e_2\) are identically
+cut-independent throughout the complex class and cannot witness rigidity.
+
+Thus the full-spectrum hypothesis in Theorem C can be replaced by any single
+degree-three Schur sector.  This is the minimal operational formulation of the
+complex rigidity theorem.
+
+### Exact averaged phase-defect functional
+
+Choose one triple from each of the ten complementary balanced-cut pairs and
+define
+
+\[
+ \delta(C)=1-\frac1{10}\sum_T r_T^2.
+\]
+
+Then \(0\le\delta(C)\le1\), and the exact cut averages are
+
+\[
+\begin{aligned}
+ \overline{e_3}&=\frac{16}{125}+\frac4{125}\delta(C),\\
+ \overline{h_3}&=\frac{313}{125}+\frac4{125}\delta(C),\\
+ \overline{s_{(2,1)}}&=\frac{200}{125}-\frac4{125}\delta(C).
+\end{aligned}
+\]
+
+Moreover \(\delta(C)=0\) if and only if \(C\) is in the real switching
+class.  Hence the real class simultaneously minimizes the averaged symmetric
+and filled-fermion sectors and maximizes the averaged mixed sector.  The same
+nonnegative holonomy defect measures all three deviations, so three landscape
+averages contain only one new scalar.
+
+### Quantitative parity gap and general Pfaffian obstruction
+
+Let \(A\) be the pentagon sign matrix and let \(B\) be any skew sign matrix of
+order five.  For \(M=AB+BA\), the three-entry identity in Theorem C has a
+right side equal to twice an odd integer.  Every entry of \(M\) is even, so at
+least one of \(M_{02},M_{03},M_{23}\) has absolute value at least two.  Since
+\(M\) is skew,
+
+\[
+ \lVert AB+BA\rVert_F^2\ge8.
+\]
+
+Consequently an equal-holonomy ansatz
+\(S=\sqrt tA+i\sqrt{1-t}B\) with \(0<t<1\) has the explicit conference-equation
+defect
+
+\[
+ \left\lVert\operatorname{Im}(S^2)\right\rVert_F
+ \ge \sqrt{8t(1-t)}.
+\]
+
+This is a robust falsifier for numerical near-solutions inside the ansatz, not
+a global metric stability theorem for arbitrary Hermitian conference matrices.
+
+The endpoint argument also has a reusable form: if an integral skew-symmetric
+matrix \(K\) of order \(2m\) satisfies \(K^2=-qI\), then
+
+\[
+ q^m=\det K=\operatorname{Pf}(K)^2.
+\]
+
+Thus \(q^m\) must be a square; when \(m\) is odd, \(q\) itself must be a
+square.  The impossible order-six endpoint is the case \((m,q)=(3,5)\).
+
+### `ej2` disposition
+
+- **Keep:** the single-sector rigidity equivalences and the averaged defect
+  formulas; these materially simplify both theorem statement and operational
+  interpretation.
+- **Keep as proof support:** the three-entry parity identity and Pfaffian-square
+  endpoint obstruction.
+- **Defer:** a genuine stability theorem bounding distance to the real
+  switching orbit from small \(\delta(C)\); compactness gives only qualitative
+  control without a new quantitative argument.

@@ -21,6 +21,8 @@ the scalar Hermitian-conference/real-control Pareto edge while leaving the full
 interior image and promotion audit open.  Theorem C's later structural
 compression replaces its finite rigidity census by a pentagon
 anticommutation-parity proof and a Pfaffian-square endpoint obstruction.
+Section 8 records the resulting `ej2`: single-sector rigidity equivalences,
+an exact averaged holonomy-defect functional, and a quantitative parity gap.
 
 ## Objective
 
