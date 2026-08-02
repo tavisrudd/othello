@@ -266,7 +266,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C752 — Paper I Lean spine audit](../clebsch-tasks/c752-paper-i-lean-spine-audit.md) | complete; transitive prose/definition audit and exact C753 packet interfaces frozen | none |
 | [C753 — Paper I Lean spine closure](../clebsch-tasks/c753-paper-i-lean-spine-closure.md) | active; prose-source repairs, q11 serialized gate, and R1 complete | implement R2--R4 and O1--O8 in frozen order, then run correspondence and aggregate gates |
 | [C761 — Paper IV q13 passant code](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) | active; theorem, evidence, formal transports, Milnor--Serre exposition, local release audit, and Paper-I forward pointer green | replace the local Lean path dependency with a pinned public package, run fresh isolated replays, insert immutable locators, and publish with explicit authority |
-| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; the C749 human freeze and C750/C801 Lean surfaces are complete and the authoritative release is green | repackage and synchronize the standalone release when publication authority is available |
+| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; the human/Lean surfaces and Milnor--Serre copy edit are complete and the authoritative release is green | repackage and synchronize the standalone release when publication authority is available |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |
 | [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | complete; human proof 2/4 and independent modular read green under C748 | none |
 | [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | complete; parity-specific proof has independent modular and context-free `GO` verdicts; human proof 3/4 | none; C749 owns final adversarial freeze |
@@ -567,11 +567,14 @@ close the corresponding structural and table-free radial Lean surfaces.
 The warning-free authoritative PDF and full release aggregate are green.
 The standalone repository remains at the previous frozen release because
 C577 owns repackaging and synchronized publication after authority is
-available.  Audit and closure reports:
+available.  The opening, proof roadmap, conclusion, README, and appendix
+transition have also passed a statement-preserving Milnor--Serre copy edit.
+Audit and closure reports:
 `notes/2026-07-31-c577-paper-ii-new-math-audit.md`,
 `notes/2026-07-31-c747-paper-ii-socle-wall-proof.md`,
 `notes/2026-07-31-c748-paper-ii-serre-integration.md`, and
-`notes/2026-08-02-c749-paper-ii-adversarial-human-proof.md`.
+`notes/2026-08-02-c749-paper-ii-adversarial-human-proof.md`, and
+`notes/2026-08-02-c577-paper-ii-milnor-serre-copy-edit.md`.
 C682 characteristic-zero work is inventory unless
 explicitly promoted.
 

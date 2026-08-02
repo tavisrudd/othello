@@ -2,19 +2,21 @@
 
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- II*
 
-The shared progression is expository; this manuscript is logically
-independent of the other two.
+The shared series progression is expository; this manuscript is logically
+independent of the other papers.
 
 This directory contains the manuscript
 *Quadratic trade rigidity and cubic orientation in conic matching quotients*.
 
-The paper studies matching products modulo a conic ideal, their quotient
-ranks `3,6,10`, uniform classification from an intrinsic two-valued
-quadratic trade, edge-selected alternating-cycle radial nonvanishing,
-cubic orientation, and self-associated arithmetically Gorenstein
-evaluation sets. Appendices
-record six-profile reconstruction, modular depth, arithmetic splitting,
-and further `H_3` cubic structure.
+The paper classifies full projective matching orbits from an intrinsic
+two-valued quadratic trade.  Exactly the `B_3/F_7` and `H_3/F_11`
+orbits survive.  Quadratic products recover their two unordered sheets,
+and the first signed tensor moment is a cubic that orients them.  The
+matching hypothesis is sharp: off the secant-product Chow locus, `q-2`
+nonmatching orbits retain the same trade.  The paper also proves quotient
+ranks `3,6,10` and the self-associated Gorenstein consequences.  The
+appendices record six-profile reconstruction, modular depth, arithmetic
+splitting, and further `H_3` cubic structure.
 
 ## Files
 

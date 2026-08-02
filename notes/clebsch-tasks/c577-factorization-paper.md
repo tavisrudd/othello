@@ -4,14 +4,13 @@
 
 **Opened:** 2026-07-24
 
-**Status:** active under the C182 external-wait exception; the 2026-07-31
-newer-math audit reopened the local proof gate for the all-`q`
-classification.  Public packaging remains external and must not begin until
-that gate closes.
+**Status:** active under the C182 external-wait exception.  The C749 human
+freeze, C750/C801 Lean closure, and Milnor--Serre exposition pass are
+complete.  Public packaging and the immutable locator remain external.
 
 ## Objective
 
-Release *Quadratic recovery and cubic orientation in conic matching
+Release *Quadratic trade rigidity and cubic orientation in conic matching
 quotients* as a standalone Paper II with no proof dependency on Paper I or
 Paper III.
 
@@ -34,11 +33,11 @@ Paper III.
   without a self-duality or Gorenstein premise, and the recovered sheet sign
   has a nonzero cubic as its first signed tensor moment.
 - The manuscript, conclusion, proof/evidence map, and verification
-  architecture are complete except for the reopened all-`q` human-proof
-  seam.
-- The prior technical rereads and post-spine staged cold read returned `GO`,
-  but the later audit found that the projective--trade, Lucas-socle, and
-  adjacent-wall identifications are stated below referee proof depth.
+  architecture are complete.  C749 closed the reopened all-\(q\) human
+  proof seam with a final context-free **GO**.
+- The opening, section hierarchy, conclusion, verification prose, README,
+  and appendix transition have passed the Milnor--Serre copy edit recorded
+  in notes/2026-08-02-c577-paper-ii-milnor-serre-copy-edit.md.
 - All paper-owned semantic evidence paths and the local aggregate replay are
   green.
 - Exact findings and completed trust/editorial repairs are recorded in
@@ -46,19 +45,10 @@ Paper III.
 
 ## Next action
 
-Execute four human-proof rounds in order:
-
-1. C746 proves the intrinsic projective--trade reduction;
-2. C747 proves the Lucas-socle and first-wall non-splitting theorem;
-3. C748 integrates the Serre-style proof and obtains two cold reads; and
-4. C749 attacks, compresses, and freezes the final human proof.
-
-Only then may C750 close the Lean gap.
-
-After that local gate and publication authority are both available, freeze
-the Paper II package, obtain its immutable locator, insert the final public
-citations, run the isolated release replay, and perform the separate release
-pass.
+Once publication authority is available, synchronize the standalone
+repository by an ordinary forward commit, obtain the immutable locator,
+insert the final public citations, run the isolated release replay, and
+perform the separate release pass.
 
 ## Boundaries
 
@@ -82,4 +72,5 @@ development remains in
 C797 closes the stronger priority-judo continuation negatively: at \(q=7\),
 seven \(S_4\)-fixed affine placements share the unique two-valued trade and
 only one is a matching orbit.  This confirms that the perfect-matching carrier
-in the current theorem is a genuine hypothesis and does not block C749/C750.
+in the current theorem is a genuine hypothesis; the sharp boundary is now
+integrated in the manuscript.

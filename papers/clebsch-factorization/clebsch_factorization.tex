@@ -70,10 +70,10 @@ are self-associated and arithmetically Gorenstein, and maximal isotropy
 identifies this cubic with the inverse system of an Artinian reduction.
 General self-dual-code criteria already account for the Gorenstein conclusion
 from the Schur square; the orbit classification, sharp carrier boundary, and
-sheet-sign cubic are the configuration-specific results.  The proof replaces
-extension-field casework by modular socle maps and two highest-weight tests;
-one alternating-cycle calculation and a Dickson recurrence handle the two
-radial nonvanishing problems uniformly.
+sheet-sign cubic are the configuration-specific results.  A uniform modular
+argument excludes every other matching orbit without a field census.  One
+alternating-cycle calculation and a Dickson recurrence then handle the two
+radial nonvanishing problems at once.
 \end{abstract}
 
 \noindent\textbf{Keywords.} conic ideal; secant matching; Coxeter
@@ -92,13 +92,13 @@ conic-ideal quotient remember?
 
 The main point is completeness: the intrinsic quadratic-trade condition
 selects exactly two full projective matching orbits over all odd finite
-fields.  The answer is governed by a short chain of mechanisms.  A four-endpoint switch shows
-that competing secant products differ by the conic equation, so their
-quotients form an affine configuration.  In the balanced cases,
-Hadamard squares recover an unordered bipartition of that configuration;
-the first signed tensor that survives is cubic and orients the two
-parts.  Thus quadratic data recover the factorization without choosing
-its orientation, and the first odd covariant restores that choice.
+fields.  A four-endpoint switch shows that competing secant products differ
+by the conic equation, so their quotients form an affine configuration.
+For the two surviving orbits, quadratic products recover an unordered
+bipartition of that configuration.  The first surviving signed tensor is
+cubic and orients its two parts.  Thus quadratic data recover the
+factorization without choosing an orientation; the first odd covariant
+restores the choice.
 
 Rodr\'iguez-Pajares, Ruano, and Salizzoni characterize the Gorenstein
 defect of a self-dual code by its indecomposable blocks, equivalently by
@@ -127,24 +127,22 @@ type & linear quotient & sheets/cubic\\
 \end{tabular}
 \end{center}
 \noindent
-The proof has three layers.  Section~\ref{sec:matching-products} proves the
-quotient and switch identities symbolically for arbitrary matchings.
-Section~\ref{sec:rank-three} first classifies every full projective
-matching orbit with a two-valued one-dimensional quadratic trade.  The
-classification combines the projective sheet module with a uniform
-outer-parity obstruction; a two-digit torus-normalizer module and the
-Steinberg module remove the extension-field affine pullback.  The same section
-then obtains all three ranks from the affine
-connecting cocycle and the defining-characteristic
-\(\operatorname{SL}_2\)-modules in the Fischer decomposition.  One
-edge-selected alternating-cycle calculation supplies the radial line in
-both \(B_3\) and \(H_3\).
-In Section~\ref{sec:balanced}, the defining-characteristic permutation
-module proves the sheet restriction and moment ranks, and elementary
-duality forces the nonzero cubic and full Schur cube.  Signed Gale duality
-records self-association, while maximal-isotropic quotient duality gives
-the Gorenstein pairing directly.  Appendix
-F maps each finite input to its primary check and independent replay.
+The proof separates classification from its consequences.
+Section~\ref{sec:matching-products} constructs the quotient for arbitrary
+matchings.  Section~\ref{sec:rank-three} then starts from a hypothetical
+two-valued trade, derives its two projective sheets, and excludes every
+sheet size except \(q=7,11\).  The difficult step is the outer-parity
+obstruction: a finite-group socle calculation and a first-wall defect rule
+out the unwanted quadratic copy.  Dickson's subgroup theorem then leaves
+the octahedral and icosahedral stabilizers.  The same section obtains the
+ranks \(3,6,10\); one selected alternating cycle supplies the radial
+component in both balanced cases.
+
+Section~\ref{sec:balanced} recovers the sheets from quadratic products,
+shows exactly where that recovery fails off the matching carrier, and
+proves that the first signed moment is cubic.  Maximal isotropy then gives
+the Gorenstein pairing.  The appendices develop optional \(H_3\)
+refinements; Appendix F separates the human, formal, and finite inputs.
 
 \begin{theorem}[Quadratic-trade classification and cubic orientation]
 \label{thm:factorization-recovery}
@@ -167,7 +165,7 @@ while a nonzero degree-three tensor transforms by the character that
 exchanges the sheets;
 \item the homogenized \(B_3\) and \(H_3\) configurations are
 self-associated with Gorenstein coordinate rings; the signed cubic is
-the Macaulay inverse system of their Artinian reductions.
+the Macaulay inverse system of their Artinian reductions;
 \item for either surviving stabilizer, the fixed locus in the ambient
 conic fiber is an affine line whose unique secant-product point is the
 matching point, while \(q-2\) nonmatching orbits on that line still have
@@ -285,12 +283,12 @@ The switch identity records how local changes of factorization move in
 the quotient space.  A selected Coxeter orbit need not contain every
 perfect matching or every intermediate switch.
 
-\section{The rank-three configurations}
+\section{Matching-orbit classification and quotient ranks}
 \label{sec:rank-three}
 
-We now select three finite matching orbits.  This selection is discrete
-input: Proposition~\ref{prop:matching-secant-quotient} applies to every
-matching, but it does not distinguish the Coxeter orbits.
+The three distinguished finite matching orbits are discrete input:
+Proposition~\ref{prop:matching-secant-quotient} applies to every matching,
+but it does not distinguish the Coxeter orbits.
 Here and below, ``rank three'' refers to Coxeter rank.  It does not
 refer to the dimensions of the conic-ideal quotient spaces, which are
 \(3,6,10\).
@@ -617,7 +615,7 @@ Set \(h_j=\delta_j+2r_j\).  Tensoring the Frobenius twists of
 \]
 Its tensor-flip sign is \((-1)^{\sum_j\delta_j}\).
 
-For completeness after restriction to \(H\), evaluation on a highest
+After restriction to \(H\), evaluation on a highest
 vector gives an injection
 \[
  \operatorname{Hom}_H(L(\mathbf c),F)
@@ -788,8 +786,7 @@ positive-root statement on \(\Theta(D)\); the middle-column relations
 give all remaining zero entries in the table.  The table is exactly the
 divided-power action on the displayed basis of
 \(L(1)\otimes L(1)^{(e)}\).  Together with the four weights and the Weyl
-action, it proves that \(\Theta\) is an algebraic \(\mathbf G\)-map.
-Moreover
+action, it proves that \(\Theta\) is an algebraic \(\mathbf G\)-map.  Also,
 \[
  \Theta(C-B)=\phi.
 \]
@@ -803,7 +800,7 @@ Therefore \(\phi=0\), and we have the parity-specific injection
  \operatorname{Hom}_{\mathbf G}(S\otimes Y_1,M).       \tag{3.2c$_{11}$}
 \]
 
-We now show that the right side of (3.2c$_{11}$) vanishes for the detecting
+It remains to show that the right side of (3.2c$_{11}$) vanishes for the detecting
 modules in the statement.  Put \(M=\operatorname{Sym}^2F\).
 For the Steinberg module,
 \(\operatorname{St}\otimes L(1)\otimes L(1)^{(e)}\) has simple head
@@ -1103,12 +1100,12 @@ summand of \(P\).  The digit sum is even, and
 \]
 is an extension to \(G\); the other is its \(\chi\)-twist.
 
-We first verify that the ambient affine class is nonzero.  Put
+To verify that the ambient affine class is nonzero, put
 \[
  r=\frac{p-1}{2},\qquad m=r+1,\qquad
  P_0=Y(X^r-Z^r)\in R_m.
 \]
-We first identify the polynomial model of the point-vector extension
+The following polynomial model identifies the point-vector extension
 used in (3.2d).  Let \(D=s^pt-st^p\) and
 \[
  E_{\rm poly}=\{P\in R_m:P\circ\nu\in kD\}.
@@ -1528,7 +1525,7 @@ obtained from the Clebsch identification
 weight in the quotient transformation (2.2), gives the linearized module
 \[
  \widetilde R_4=R_4\otimes\det^{-1}
-  =M_8\oplus M_4\oplus M_0,                       \tag{3.5}
+  =M_8\oplus M_4\oplus M_0.                       \tag{3.5}
 \]
 Explicitly, \(g\in\operatorname{GL}_2(11)\) acts on the first expression
 by
@@ -1606,8 +1603,8 @@ products would identify their irreducible line factors and hence the
 matchings.  Its \(M_4\)- and \(M_0\)-components vanish, so it gives a
 nonzero vector in \(M_8\).  The degree-eight restricted
 \(\operatorname{SL}_2(\F_{11})\)-module is irreducible
-\cite[Fact~3.1]{BraunNebe2025}.  Moreover the
-span of the cocycle values is \(G\)-stable, since
+\cite[Fact~3.1]{BraunNebe2025}.  The span of the cocycle values is
+\(G\)-stable, since
 \[
  b\,c(g)=c(bg)-c(b)\qquad(b,g\in G).
 \]
@@ -1709,23 +1706,14 @@ The quadratic decomposition \(R_2=\mathcal H_2\oplus\F_{11}Q\)
 therefore gives (3.14).
 \end{proof}
 
-The rank proof has two distinct boundaries.  The common restriction and
-quotient are general consequences of the conic ideal, and (3.3) describes
-the intrinsic target subspaces.  For \(A_3\), irreducibility alone forces
-the image.  For \(B_3\), irreducibility forces the top summand.  For \(H_3\),
-(3.7)--(3.10) prove the containment and top-summand nonvanishing
-equivariantly.  Lemma~\ref{lem:shared-radial-cycle} proves radial
-nonvanishing in both types from one recurrence.  The primary certificate
-still enumerates every orbit and recovers the ranks, while an independent
-replay reconstructs that calculation and the common cycle mechanism.
-
-This proof is uniform at the level of its mechanism---an affine connecting
-cocycle, its Sylow-normalizer weights, stabilizer fixed spaces, and
-irreducible summands---but it still uses the \(H_3\)-specific
-\(A_5<\operatorname{PGL}_2(11)\) module data.  A theorem over all good
-reductions would additionally require
-integral models and an analysis of the characteristics in which the
-harmonic decomposition, orbit structure, or marker algebra degenerates.
+The rank proof has one general part and one exceptional input.  The conic
+ideal gives the common restriction and quotient, while irreducibility
+forces the \(A_3\) image and the top \(B_3\) summand.  For \(H_3\),
+(3.7)--(3.10) use the specific
+\(A_5<\operatorname{PGL}_2(11)\) module data to force the top summand and
+exclude the middle one.  Lemma~\ref{lem:shared-radial-cycle} supplies both
+radial lines from the same recurrence.  Appendix F records the finite
+cross-checks.
 
 Corollary~\ref{cor:h3-middle-layer} identifies the linear information
 lost by the \(H_3\) orbit, but linear span does not recover the two
@@ -1894,7 +1882,7 @@ Adding constants gives all of \(P_0\), proving the restriction rank and
 the top second-moment rank.  The same argument applies to the other
 sheet.
 
-The two top second moments are not merely proportional.  On
+The two top second moments are equal.  On
 \[
  M_{q-3}=\operatorname{Sym}^{q-3}(V^\vee)
           \otimes\det^{(q-3)/2}\otimes\chi
@@ -1923,9 +1911,8 @@ matching \(M_T\) with stabilizer \(K=S_4,A_5\).  Put
 \(m=(q+1)/2\) and \(d=m-2\).  Write \(\mathcal A_T\) for the affine space
 of degree-\(m\) forms whose restriction to the conic is the product of its
 \(q+1\) marked rational points.  We call the completely reducible forms
-inside it its Chow locus.  Symmetry
-leaves one affine parameter in \(\mathcal A_T\), while complete reducibility
-removes it.
+inside it its Chow locus.  Symmetry leaves one affine parameter in
+\(\mathcal A_T\); complete reducibility selects one point.
 
 \begin{theorem}[The fixed line and its Chow point]
 \label{thm:fixed-line-chow-rigidity}
@@ -2320,40 +2307,35 @@ injective.
 
 \section*{Conclusion}
 
-Restriction to a conic erases the pairing of marked points, but division
-by its equation retains a structured record of the factorization.  The
-four-endpoint switch produces an affine quotient configuration, and the
-three rank-three systems span spaces of dimensions \(3,6,10\).  In type
-\(H_3\), the quotient retains the top harmonic part and deepest radial
-line while losing exactly \(Q\mathcal H_2\); its base-choice cocycle also
-obstructs an equivariant affine origin.
+Restriction to a conic erases the pairing of its marked points.  Dividing
+differences of secant products by the conic equation retains enough
+information to recover exactly two balanced matching orbits:
+\(B_3/\F_7\) and \(H_3/\F_{11}\).  The proof derives their
+one-factorization sheets from the two-valued quadratic trade and excludes
+all other odd prime powers without a matching census.  The same quotient
+construction gives the ranks \(3,6,10\); for \(H_3\), it retains the top
+harmonic part and deepest radial line and loses exactly
+\(Q\mathcal H_2\).
 
-In the balanced \(B_3\) and \(H_3\) cases, quadratic products recover the
-unordered factorization sheets, and their first signed tensor moment is
-cubic.  The same cubic is the Macaulay inverse system of the resulting
-self-associated arithmetically Gorenstein homogenization.  The general
-Schur-square criterion accounts for Gorensteinness; the extra content here
-is the reverse rigidity theorem: a two-valued quadratic trade forces the
-exact matching orbit and reconstructs its sheet sign, whose first odd moment
-is the cubic line.  Thus the
-information forgotten by conic restriction returns in two stages:
-quadratic data recover the unoriented factorization, and cubic data
-recover its orientation.
+The matching hypothesis is the precise boundary.  Each surviving
+stabilizer fixes an affine line of conic products.  Its only completely
+reducible point is the matching product, although \(q-2\) other orbits
+retain the same two-valued trade.  The trade therefore remembers the
+homogeneous sheet module but not its embedding as a secant factorization;
+the Chow condition restores that information.
 
-The affine-origin obstruction is not the end of the cubic.  Once the
-icosahedral marking is fixed, its orientation line survives in a
-cross-characteristic lift.
-
-The completeness theorem shows that, among full projective matching orbits,
-a one-dimensional strength-two trade space with a two-valued generator
-occurs only for \(B_3/\F_7\) and \(H_3/\F_{11}\).  The proof derives the
-one-factorization sheets rather than assuming them.  Its
-extension-field input is one Frobenius-parity bit and two elementary socle
-tests, and the two radial projections are specializations of
-one edge-selected alternating-cycle recurrence.
+On the matching orbit, quadratic products recover the two sheets without
+orienting them.  Their first signed tensor moment is cubic, and this cubic
+orients the recovered pair.  It is also the Macaulay inverse system of the
+self-associated Gorenstein homogenization.  The general Schur-square
+criterion explains Gorensteinness; the configuration-specific result is
+the chain from quadratic trade to matching orbit, from matching orbit to
+unordered sheets, and from unordered sheets to the cubic orientation.
 
 \appendix
 
+\medskip
+\noindent\textbf{Appendix guide.}
 The appendices record further consequences and refinements of the
 \(H_3\) configuration that are not needed for the main theorem.  They
 require a chosen \(A_4\)-structure and do not canonically identify the
@@ -2366,7 +2348,7 @@ The final appendix gives the verification architecture for all statements.
 \section{Six profiles and matching-row reconstruction}
 \label{sec:six-profiles}
 
-We now specialize to \(H_3\).  Put
+Specialize to \(H_3\).  Put
 \[
  G=\operatorname{PGL}_2(11),\qquad
  G^+=\operatorname{PSL}_2(11),\qquad
@@ -3231,7 +3213,7 @@ Paper-II-structural, arithmetic-gluing, Hilbert-symmetry, and
 hyperplane-square Lean gates, and rebuilds this manuscript through the
 repository Makefile.
 
-The enumerated review closure accompanying this candidate is pinned by
+The reproducible review source is pinned by
 \begin{center}
 \small\path{verification/evidence_fingerprint.json}.
 \end{center}
@@ -3256,7 +3238,8 @@ The normalization replaces only the displayed fingerprint digest and
 the statement identity's derived full-source hash, avoiding a circular
 self-hash.  This is an explicit review-source allowlist, not a claim to
 hash every file in the repository or every transitive tool dependency.
-An immutable public archive locator must be added before release.
+The fingerprint identifies the source closure; it is not an immutable
+public locator.
 
 The Paper-II structural gate
 \begin{center}
@@ -3313,9 +3296,9 @@ The separate structural gate
 \small\texttt{RelativeConicArcs.Gates.}\\[-2pt]
 \texttt{ClebschHilbertSymmetry}
 \end{center}
-retains an independent check of the v1 Hilbert arithmetic: a symmetric
+retains an independent check of the Hilbert arithmetic: a symmetric
 finite Hilbert function of total length \(2q\) whose first values are
-\(1,q-1,q-1\) has socle degree three and final value one.  The v2
+\(1,q-1,q-1\) has socle degree three and final value one.  The
 Gorenstein proof does not use this implication; it obtains the perfect
 degree-\(1\)-by-degree-\(2\) pairing directly from maximal isotropy.
 
