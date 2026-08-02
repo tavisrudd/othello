@@ -42,8 +42,8 @@ all 78 rows, and automorphism group `PGL(2,13)`.  The tracked source and PDF at
 the audit point have SHA-256 hashes
 
 ```text
-passant_code_q13.tex  61899fe418589b14234a5be69e83b2339f95e3e4ab04ec960e756f3e071e07cf
-passant_code_q13.pdf  4932bf7fcd309da596eeae97a85cd6e8266e0181e054e045b87644076bdba893
+passant_code_q13.tex  7b4388db794d4ad565002eb1644dab8716fa9e330a109862cbd5be95868d8d77
+passant_code_q13.pdf  f3bc83f93a4ffc702e7d55d029328dd5c35104516eb5ecb35903c75862482b9f
 ```
 
 The guarded exact-target Lean queue checked
@@ -55,6 +55,24 @@ closure found no task/lane/agent vocabulary, workflow placeholders, private
 paths, `sorry`, `admit`, declared axioms, or opaque declarations.  Native
 evaluation remains disclosed by the declaration-level axiom audit and by the
 manuscript's trust-boundary section.
+
+## Milnor--Serre exposition closeout
+
+The final copy-edit pass moves the theorem before the literature paragraph,
+assigns spanning, reconstruction, and symmetry to their correct mechanisms in
+the abstract, and expands the equality case behind the weight-eight arc
+reduction.  It also proves that the tangent-product quotient is well defined,
+displays the four weight-twelve multiplicity domains, states the equivariance
+behind the intersection-table check, and makes the automorphism-span argument
+intrinsic.
+
+The verification section is compressed to its mathematical claim map,
+manuscript-facing formal conclusions, named terminals, native-evaluation
+boundary, and two remaining human transports.  Detailed shard inventories stay
+in the accompanying artifact.  The conclusion now ends with the mathematical
+division of labor among concurrence, the binary association algebra, and the
+four anchors.  A fresh forced check rebuilt the seven-page PDF with no TeX
+warnings.
 
 ## Paper-I pointer
 
@@ -87,7 +105,11 @@ authority.
 
 - **Settled:** the apparent missing Paper-I pointer was stale routing state;
   C762 had already integrated and cold-read the correct forward pointer.
+- **Settled:** the prose had described three secant-count families but the
+  formal package correctly used four multiplicity domains.  The manuscript now
+  displays all four domains and explains their common fixed-point exhaustion.
 - **Open, owned by C761 release packaging:** the final public repository shape
   and immutable locator do not yet exist.  The evidence gap is exactly a fresh
   isolated replay from pinned public dependencies.
-- **No mathematical mystery remains in the C761 theorem surface.**
+- **No mathematical or exposition mystery remains in the C761 theorem
+  surface.**

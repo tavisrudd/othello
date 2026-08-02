@@ -16,8 +16,9 @@ orbit Gram matrices now feed the abstract kernel-spanning theorem.  Row-family u
 closed by a semantic seven-set transport and seven local-extension residues.  The concrete
 four-anchor transport now identifies every polar-relation automorphism with one of the 2184
 normalized symmetric-square projective maps.  The local release audit and the already-integrated
-Paper-I forward pointer are green.  Public packaging, immutable locators, fresh isolated replay,
-and publication with explicit authority remain;
+Paper-I forward pointer are green.  The Milnor--Serre exposition pass and warning-free PDF gate are
+also green.  Public packaging, immutable locators, fresh isolated replay, and publication with
+explicit authority remain;
 the minimum-support-to-polar-relation implication remains an explicit human-proof boundary in the
 partial formal mirror.
 

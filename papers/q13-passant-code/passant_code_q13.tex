@@ -45,13 +45,13 @@ Let \(\cC\) be a nonsingular conic in \(\PG(2,13)\), and form the binary
 incidence code on its \(78\) internal points using the \(78\) passant lines.
 We prove that this code has parameters \([78,36,12]_2\).  It has exactly
 \(364\) minimum words, in four \(\PGL(2,13)\)-orbits of size \(91\), and
-each orbit spans the code.  More strongly, the minimum supports reconstruct
+each orbit spans the code.  The minimum supports reconstruct
 the passant incidence matrix and the six-class elliptic association scheme;
 their coordinate-permutation automorphism group is exactly
 \(\PGL(2,13)\).  The proof combines a tangent-product exclusion in weight
 eight, two exhaustive but compact syndrome-disjointness checks in
-weight ten, and structural arguments in the binary association algebra for
-spanning and reconstruction.
+weight ten, the binary association algebra for spanning, and concurrence
+with four resolving anchors for reconstruction and symmetry.
 \end{abstract}
 
 \noindent\textbf{Keywords.} binary incidence code; finite conic; passant
@@ -64,18 +64,6 @@ that define them.  Row operations erase the choice of parity checks, and a
 minimum-distance computation need not reveal why the first codewords occur.
 Here the minimum words recover both the parity checks and the association
 scheme on the coordinates.
-
-The code belongs to the fixed-conic LDPC family introduced by
-Droms--Mellinger--Meyer~\cite{DromsMellingerMeyer2006}.  Their general bounds,
-as recorded in the later comparison table of Ma--Liu--Tian
-\cite[Table~1]{MaLiuTian2024}, specialize here to \(8\le d\le12\).
-Madison and Wu proved the general nullity formula
-\((q-1)^2/4\)~\cite[Corollary~6.3]{MadisonWu2012}.  Hollmann and Xiang
-constructed the elliptic association scheme afforded by the same conic
-action~\cite[Sections~3--5]{HollmannXiang2006}.  We determine the upper
-endpoint of the distance interval at \(q=13\), classify its minimum words,
-and recover the incidence and relation structures from their unlabeled
-support hypergraph.
 
 Fix a nonsingular conic \(\cC\subset\PG(2,13)\).  A line is
 \emph{passant} when it is disjoint from \(\cC(\F_{13})\).  Conic polarity
@@ -122,7 +110,20 @@ exact orbit/concurrence replay for the minimum layer.  The reductions to
 those leaves and the association-algebra argument are mathematical proofs in
 the text.
 
+The code belongs to the fixed-conic LDPC family introduced by
+Droms--Mellinger--Meyer~\cite{DromsMellingerMeyer2006}.  Their general bounds,
+as recorded in the later comparison table of Ma--Liu--Tian
+\cite[Table~1]{MaLiuTian2024}, specialize here to \(8\le d\le12\).
+Madison and Wu proved the general nullity formula
+\((q-1)^2/4\)~\cite[Corollary~6.3]{MadisonWu2012}.  Hollmann and Xiang
+constructed the elliptic association scheme afforded by the same conic
+action~\cite[Sections~3--5]{HollmannXiang2006}.  We determine the upper
+endpoint of the distance interval at \(q=13\), classify its minimum words,
+and recover the incidence and relation structures from their unlabeled
+support hypergraph.
+
 \section{Distance twelve}
+\label{sec:distance}
 
 We use the model \(\cC:XZ-Y^2=0\).  Every row and column of \(M\) has
 weight seven, and conic polarity identifies the two index sets.  The
@@ -137,13 +138,17 @@ least eight.
 
 \subsection{The tangent obstruction in weight eight}
 
-Suppose that a word has weight eight.  The preceding parity argument forces
-its support to be an eight-arc: every join of two support points is passant,
-and every passant pencil at a support point is saturated.  The seven
-remaining lines through each support point are therefore both the
+Suppose that a word has weight eight and fix a support point \(P\).  Each of
+the seven passants through \(P\) must contain another support point.  Since
+only seven points remain, each passant contains exactly one of them.  Applying
+the same argument at every support point shows that every support join is
+passant and that no three support points are collinear.  Thus the support is
+an eight-arc, and every passant pencil at a support point is saturated.  The
+seven remaining lines through each support point are therefore both the
 combinatorial tangents to the arc and the conic secants through that point.
 
-For an internal point \(P\), put
+For each secant line choose a nonzero linear equation.  For an internal point
+\(P\), put
 \[
  T_P(X)=\prod_{\substack{\ell\ni P\\
                     \ell\text{ secant to }\cC}}\ell(X).
@@ -154,6 +159,11 @@ For a pairwise-passant triple define
  \frac{T_P(Q)T_Q(R)T_R(P)}
       {T_P(R)T_R(Q)T_Q(P)}.
 \]
+Every displayed evaluation is nonzero because the three joins are passant.
+Rescaling a line equation multiplies one numerator and one denominator factor
+by the same scalar, so \(h\) is well defined.  The saturated-pencil
+identification above makes the factors of \(T_P\) precisely the combinatorial
+tangents at \(P\).
 Segre's lemma of tangents in the coordinate-free form of
 Ball--Lavrauw~\cite[Lemma~27]{BallLavrauw2019} gives
 \(h(P,Q,R)=1\) for every triple in the hypothetical support.  Fix
@@ -231,21 +241,28 @@ Therefore \(d(K)=12\).
 
 \section{Minimum words and the elliptic scheme}
 
-The exact replay first fixes one support point.  Pencil parity leaves
-\(s=0,2,4\) secant neighbors, and a meet-in-the-middle enumeration of all
-three profile families finds exactly \(56\) weight-twelve words through the
-fixed point.  The four proposed projective orbits have disjoint fixed-point
-slices of sizes \(14\), and those slices equal the 56-word exhaustive list.
+Fix one support point.  Pencil parity leaves \(s=0,2,4\) secant neighbors.
+The corresponding multiplicities in the seven passant fibres, followed by
+the number of secant neighbors, are
+\[
+ (5,1^6;0),\qquad (3,3,1^5;0),\qquad
+ (3,1^6;2),\qquad (1^7;4).
+\]
+A syndrome-indexed meet in the middle exhausts these four finite domains and
+finds exactly \(56\) weight-twelve words through the fixed point.  The
+canonical replay records four projective representatives.  Their disjoint
+fixed-point slices each have size \(14\), and together they equal the
+56-word exhaustive list.
 The order-\(28\) stabilizer of the fixed point acts transitively on each
 slice; the stabilizer of a support inside it has order \(2\).
 Transitivity, or equivalently the count \(56\cdot78/12=364\), proves global
 exhaustion.
 
-The same replay generates each orbit from a projective representative and
-checks every support against \(M\).  The stabilizers have order \(24\), so
-each orbit has size \(2184/24=91\).  Their element-order profiles identify
-one stabilizer with \(S_4\) and the other three with dihedral groups of order
-\(24\).
+The replay generates each orbit from its recorded representative and checks
+every support against \(M\).  The stabilizers in \(\PGL(2,13)\) have order
+\(24\), so each orbit has size \(2184/24=91\).  Their element-order profiles
+identify one stabilizer with \(S_4\) and the other three with dihedral groups
+of order \(24\).
 
 For a pair or triple of coordinates, its concurrence is the number of the
 364 minimum supports containing it.  Pair concurrences are \(7,9,12\) when
@@ -255,11 +272,10 @@ Hence these intrinsic counts recover all six colors of the elliptic
 association scheme.
 
 After recovering the passant color, form its seven-cliques.  Exactly \(78\)
-have zero triple concurrence, and direct incidence comparison identifies
-them with the supports of the \(78\) rows of \(M\).  Both tests use only the
-minimum-support hypergraph after its coordinate set is supplied.  They
-therefore define a reconstruction map independent of the original
-projective labels.
+have zero concurrence on every one of their triples.  Direct incidence
+comparison identifies them with the supports of the \(78\) rows of \(M\).
+Pair and triple concurrence are intrinsic to the minimum-support hypergraph,
+so this reconstruction is independent of the original projective labels.
 
 \section{Spanning and automorphisms}
 
@@ -286,8 +302,9 @@ The needed part of the integral intersection table reduces modulo two to
  A_9^2&=A_{10},\qquad A_{10}^2=A_{12},\qquad A_{12}^2=A_9.
 \end{split}
 \end{equation}
-These are parity reductions of intersection numbers, checked by fixing one
-point and substituting one representative of each relation.
+These are parity reductions of intersection numbers.  The
+\(\PGL(2,13)\)-action is transitive on each relation, so fixing one point and
+substituting one representative of every relation checks all entries.
 
 Put \(B=A_9\).  Since \(A_0B=0\), the image of \(B\) lies in \(K\).  If
 \(x\in K\) and \(Bx=0\), then \eqref{eq:scheme} gives
@@ -321,7 +338,11 @@ The rigidity mechanism is summarized by
    \bigl([P=P_i],\rho(P,P_i)\bigr)_{i=0}^{3}}
    _{\text{injective on the 78 points}}.
 \]
-The first three have pair-relation pattern \((10,3,9)\).  There are
+The first three satisfy
+\[
+ \bigl(\rho(P_0,P_1),\rho(P_0,P_2),\rho(P_1,P_2)\bigr)=(10,3,9).
+\]
+There are
 \(78\cdot14\cdot2=2184\) ordered triples with this pattern: \(A_{10}\)
 has valency 14 and \(p_{3,9}^{10}=2\).  Substitution in the symmetric-square
 action shows that the stabilizer of \((P_0,P_1,P_2)\) in
@@ -339,119 +360,76 @@ element of \(\PGL(2,13)\) to fix the first three anchors; it then fixes the
 fourth and every point.  Thus the reconstructed scheme has automorphism
 group \(\PGL(2,13)\).
 
-An automorphism of \(K\) permutes its minimum supports.  Conversely an
-automorphism of \(\mathcal H\) preserves \(K\), because any one of the four
-minimum orbits spans it.  The two coordinate-permutation groups therefore
+Every coordinate automorphism of \(K\) preserves \(\mathcal H\).
+Conversely, \(\mathcal H\) spans \(K\), so every automorphism of
+\(\mathcal H\) preserves \(K\).  The two coordinate-permutation groups
 coincide.  This completes the proof of Theorem~\ref{thm:main}.
 
-\section{Human proof and exact finite evidence}
+\section{Proof and verification boundary}
 
-The proof above is a human structural proof: parity and pencil geometry make
-the low-weight reductions, the tangent product controls weight eight, the
-association algebra explains spanning, and concurrence and anchors explain
-reconstruction and rigidity.  Computation is not the proof architecture.  It
-records discovery and checks only finite leaves that have not admitted useful
-conceptual compression.
+Parity and pencil geometry give the low-weight reductions; the tangent
+product controls weight eight; the association algebra explains spanning;
+and concurrence with four anchors gives reconstruction and rigidity.  Three
+steps remain finite: the two weight-ten syndrome exclusions, the fixed-point
+classification of the minimum words, and the bounded clique and anchor
+checks.
 
-The public evidence directory contains four paper-owned objects.  A profile
-generator checks the canonical weight-ten finite data.  An independent
-dynamic program reconstructs the incidence matrix and repeats both
-exclusions.  The main exact replay checks the clique closure, rank, minimum
-layer, concurrence reconstruction, spanning identities, and automorphism
-anchors.  The aggregate entry point \nolinkurl{verify_evidence.py} first
-checks all recorded byte counts and SHA-256 hashes and then runs the three
-replays.  Its adjacent README gives the individual filenames and commands.
+The accompanying \nolinkurl{verification/} directory contains the canonical
+weight-ten generator, an independent replay with a separately reconstructed
+incidence matrix, and the main exact replay.  The last records the four
+minimum-word representatives and checks the clique closure, rank, orbit
+exhaustion, concurrence reconstruction, spanning identities, and anchors.
+The entry point \nolinkurl{verify_evidence.py} checks the recorded byte counts
+and SHA-256 hashes before running all three programs.  Every computation is
+deterministic and uses exact finite-field or binary arithmetic.
 
-The trusted boundary is explicit.  The shared Lean library mirrors the
-normalized conic, the incidence code, parity-profile reductions,
-association-algebra deductions, tangent graph, reconstruction semantics, and
-four-anchor closure used by the human argument.  A paper-owned Lean package
-checks the remaining finite bulk:
-fourteen weight-ten syndrome shards, exact bit-row rank \(42\), four
-projective kernel orbits of size \(91\) and span rank \(36\), the binary
-association identities, pair-color recovery, the zero-triple signatures
-of the \(78\) geometric rows, uniqueness of the recovered row family, and the fixed-point
-weight-twelve exhaustion.
-The last check implements the four pencil-profile domains by a
-syndrome-indexed meet in the middle and identifies their \(56\) solutions with
-the four disjoint \(14\)-support orbit slices.  Explicit recovery and expansion maps transport
-the 42-column elimination certificate to the semantic incidence map, so the
-formal aggregate also proves dimension \(36\).  A generic Boolean-parity
-bridge, four one-product relation shards, and four orbit shards transport the
-concrete association identities and Gram matrices into ordinary matrices over
-\(\mathbf F_2\).  The abstract association-kernel argument then proves that
-the row space of every displayed orbit is exactly \(\ker A_0\); polarity is
-the row permutation identifying this kernel with the code.  The terminal
-declaration is
-\nolinkurl{PassantCodeQ13.Gates.Main.minimumOrbitsSpanRhoZeroKernel}.
-These checks use native
-evaluation and expose the corresponding declaration-local axioms in the pinned
-toolchain.
-
-Row-family uniqueness is compressed to local extension pools.  For each three-point seed, retain
-the points that extend it to an admissible four-set.  Every non-row seed has at most ten such
-extensions.  Seven first-index residue leaves check every four-subset of these pools, while a
-symbolic coverage argument shows that every admissible seven-set occurs in one of those checks.
-The three-point shortcut itself is false: there are \(1456\) non-row passant triangles with zero
-triple concurrence, so the four-extension test is essential rather than a computational
-convenience.
-The terminal declaration is
-\nolinkurl{PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique}.  The independent replay follows
-a different route by enumerating all \(1716\) passant seven-cliques before selecting the \(78\)
-zero-concurrence rows.
-
-The automorphism gate follows the displayed three-step diagram.  Separate finite leaves check that
-the \(2184\) normalized symmetric-square maps form the regular orbit of triples with pattern
-\((10,3,9)\), that the signature \((3,1,9)\) forces the fourth anchor, and that the resulting
-four-anchor signatures separate all \(78\) points.  A symbolic transport then identifies every
-automorphism of the six-valued polar-relation scheme with one of those projective maps.  Its
-terminal declaration is
+The shared Lean library formalizes the normalized conic and incidence code,
+the two parity-profile reductions, the tangent graph, the binary association
+argument, and the reconstruction and anchor interfaces.  The paper-owned
+package checks the finite leaves and transports them to the following
+manuscript-facing conclusions:
+\begin{itemize}[leftmargin=*]
+\item rank \(42\) and code dimension \(36\);
+\item exclusion of the normalized weight-eight case and reduction of every
+  weight-ten word to the two profiles in Section~\ref{sec:distance};
+\item the \(56\)-word fixed-point exhaustion and the four rank-\(36\) orbit
+  spans;
+\item uniqueness of the \(78\) reconstructed passant rows; and
+\item every automorphism of the six-valued relation scheme is projective.
+\end{itemize}
+The paper-owned aggregate namespace is
+\nolinkurl{PassantCodeQ13.Gates.Main}; its terminals are
 \begin{flushleft}
-\small\nolinkurl{PassantCodeQ13.Gates.Main.}\\[-0.4ex]
+\small
+\nolinkurl{incidenceRankAndCodeDimension}\\
+\nolinkurl{fixedPointWeightTwelveExhaustion}\\
+\nolinkurl{minimumOrbitsSpanRhoZeroKernel}\\
+\nolinkurl{recoveredRowFamilyIsUnique}\\
 \nolinkurl{ellipticSchemeAutomorphismsAreProjective}.
 \end{flushleft}
-The preceding concurrence argument supplies the passage from minimum-support automorphisms to
-polar-relation automorphisms.
-
-For weight eight, the shared formalization derives saturation of the seven
-passant pencils from the semantic row equations, identifies the \(42\)
-passant-join neighbors of \((1:0:2)\) with the three cyclic graph orbits, and
-checks that graph adjacency is exactly passant join together with tangent
-holonomy one.  The five-row unique-extension certificate then proves that the
-seven companions cannot exist.  This transport takes Segre's lemma of tangents
-and the preceding arc identification as the classical geometric input stated
-in the proof.  Its terminal declaration is
-\nolinkurl{RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport}.
-
-For weight ten, the shared formalization now starts from an arbitrary codeword
-and any point in its support.  The seven actual passant rows through that point
-have odd support fibres; the other support points are exactly its secant
-neighbors.  Partitioning the remaining nine points then gives either one
-triple fibre and six singleton fibres with no secant neighbor, or seven
-singleton fibres with two secant neighbors.  Its terminal declaration is
+The shared low-weight namespace is
+\nolinkurl{RelativeConicArcs.Gates.PassantCodeQ13}; its terminals are
 \begin{flushleft}
-\small\nolinkurl{RelativeConicArcs.Gates.PassantCodeQ13.}\\[-0.4ex]
+\small
+\nolinkurl{weightEight_semantic_transport}\\
 \nolinkurl{arbitrary_weightTen_profile_transport}.
 \end{flushleft}
 
-These checks support the finite leaves; they do not replace the structural
-proof.  Projective transitivity and the double count transport the checked
-fixed-point exhaustion to the full weight-twelve layer in the human proof.
-The formal package proves uniqueness of the reconstructed row family and the
-four-anchor classification of every polar-relation automorphism.  It does not
-formalize the concurrence-equivariance passage from minimum-support
-automorphisms to polar-relation automorphisms.
-The complete theorem is therefore presented first and foremost as a human
-proof, with exact finite evidence at its uncompressed leaves; its formal
-subclaims have the narrower scope just stated.
+Native evaluation discharges the finite leaves.  Under Lean
+\(4.32.0\)-rc1, the tracked audit reports the axioms of each terminal.
+The formal scope stops at two human transports.  Projective transitivity and
+the double count carry the fixed-point exhaustion to all \(364\) minimum words.
+Concurrence carries minimum-support automorphisms to automorphisms of the
+polar-relation scheme.  Segre's lemma of tangents is the cited classical
+input to the formal weight-eight transport.
 
 \section{Conclusion}
 
-The minimum layer determines more than the parameters of the code: it
-recovers the finite geometry that defined the parity checks.  The result
-therefore gives a concrete reconstruction theorem for a binary incidence
-code, with the irreducibly finite exclusions isolated from the association-
-algebra mechanism that explains spanning and symmetry.
+The code determines a row space, but its minimum words recover more: they
+distinguish the original parity-check rows inside that space.  At \(q=13\),
+concurrence recovers the elliptic relations, the binary association algebra
+explains why every minimum orbit spans, and four anchors force the full
+projective symmetry.
 
 \begin{thebibliography}{9}
 
