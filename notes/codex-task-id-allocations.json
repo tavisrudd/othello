@@ -2213,8 +2213,17 @@
       "last": 798,
       "purpose": "classify B3/H3 stabilizer-fixed affine families and their unique secant-product Chow intersections",
       "sequence": 246
+    },
+    {
+      "count": 1,
+      "first": 799,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 799,
+      "purpose": "Paper III aligned-design faithfulness and quadratic-decoder Lean closure",
+      "sequence": 247
     }
   ],
-  "next_id": 799,
+  "next_id": 800,
   "schema": "codex-task-id-allocations-v1"
 }
