@@ -129,6 +129,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
+- **C814 `[golden]` [QUEUED; MATH RESEARCH ONLY; EJ+TT+AA BEFORE EVERY PIVOT; NO MANUSCRIPT EDIT]** — test the remaining Golden quantum-statistics ceilings through unlabelled and robust inverse invariants, higher exchange statistics, continuous diagonal controls, and generalized conference classes; consume rather than duplicate C810/C812, and return exact results or sharp obstructions for later paper-inclusion review → `notes/golden-tasks/c814-quantum-statistics-math-ceilings.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`

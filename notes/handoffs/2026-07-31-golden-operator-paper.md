@@ -478,6 +478,15 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C814 is queued as mathematics research only, with no manuscript edit.  It is
+the Golden umbrella for the remaining quantum-statistics ceilings: unlabelled
+and robust inverse invariants, higher exchange statistics, continuous diagonal
+controls, and generalized conference-class rigidity.  It consumes the frozen
+outputs of Clebsch-owned C810 and C812 rather than duplicating them.  Every
+research pivot requires recorded `ej`, `tt`, and `aa` passes; all results return
+for a separate paper-inclusion review.  Charter:
+`notes/golden-tasks/c814-quantum-statistics-math-ceilings.md`.
+
 C808 is complete.  A full Milnor--Serre exposition audit aligned the abstract,
 introduction, figure, and discussion with the correct unframed
 \(\to\) oriented \(\to\) phase-calibrated hierarchy; separated theorem,
@@ -607,6 +616,8 @@ reference remain user-owned.
    the paper ad hoc.
 4. C794's aligned-design theorem is available for later placement only under
    its qualified novelty wording and a separate manuscript gate.
+5. Run C814 only as a mathematics-research programme; review its accepted
+   results separately before authorizing any paper inclusion.
 
 ## Ownership and allowed paths
 
