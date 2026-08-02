@@ -77,10 +77,14 @@ diagonal rows now need re-scoping, which is a scope pivot and awaits the
 user's decision.**  See `2026-08-01-c780-diagonal-rigidity-novelty-audit.md`.
 
 **Re-scoping template for the pre-empted diagonal material (2026-08-02):
-the `golden` lane's C794 manoeuvre.**  That task faced the same situation —
-a published result owning its territory — and converted it into an asset
-rather than competing with it.  Its five moves, in order, are the template
-here:  (1) identify the published object with ours, showing the
+the `golden` lane's C794 manoeuvre.**  The move is to **prove something
+broader, of which the classical result is a consequence** — the prior work
+stops being a competitor because it becomes a corollary, a specialization of
+our theorem at their parameters.  C794 proves faithfulness for *every*
+two-graph on at least seven vertices, strictly broader than conference
+two-graphs, and the Greaves--Suda reconstruction then falls out as the
+specialization; that is why its citation reads as composition rather than
+concession.  The supporting moves, in order:  (1) identify the published object with ours, showing the
 determinant-minus-three principal four-sets *are* the aligned four-sets, so
 the prior work is our object in other language;  (2) prove the direction
 nobody had — they go matrix to design, C794 goes design back to two-graph up
@@ -93,6 +97,10 @@ published invariants do not settle, and answer it — their first
 design-unforced cut moment.  Wording discipline throughout: "we prove",
 "to our knowledge", never "first", and no novelty claim on the elementary
 parts.
+
+Ask of every conceded result: what broader statement would have it as a
+special case, and can we prove that statement?  Not what adjacent territory
+is free, but what theorem swallows theirs.
 
 Applied to our case:  the published classification of projective triply-even
 codes owns the plateau; our dual-distance dictionary says full lattice rank
