@@ -2159,8 +2159,17 @@
       "last": 792,
       "purpose": "integrate the balanced singular-spectrum rigidity consequence separately into forward Paper I and Paper III versions with audited attribution and preserved paper boundaries",
       "sequence": 240
+    },
+    {
+      "count": 1,
+      "first": 793,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 793,
+      "purpose": "Golden quantum-statistics balanced-rigidity A/B integration",
+      "sequence": 241
     }
   ],
-  "next_id": 793,
+  "next_id": 794,
   "schema": "codex-task-id-allocations-v1"
 }
