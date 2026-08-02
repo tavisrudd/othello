@@ -2,7 +2,7 @@
 
 **Lane**: `ame-lu`
 **Date**: 2026-08-02
-**Status**: IN PROGRESS
+**Status**: COMPLETE for the scoped items; the lane exit gate awaits a quiet build window (see Validation).
 
 Formalizes the adopted `sec:two-uniform` subsection of
 `papers/ame_lu/sections/03-lu-rigidity.tex` ("Discreteness and quantitative
@@ -225,7 +225,55 @@ already exist, as its own task.
 
 ## Validation
 
-(to be completed once the shared build lock is free)
+**Full-source elaboration: PASSED.**  All seven modules were elaborated together
+in one environment, from source, through `lean/scripts/guarded-lean`, with zero
+errors and zero warnings.  This is stronger than a single-file smoke test: no
+declaration relies on a previously built object file of the new modules.
+
+**Axiom audit: PASSED, with the standard three axioms only.**  In the same
+elaboration, `#print axioms` on every paper-facing terminal reports exactly
+`propext`, `Classical.choice`, `Quot.sound`:
+
+    stateInner_localGeneratorSum_mulVec
+    stateInner_self_localGeneratorSum_mulVec
+    eq_zero_of_stateInner_self_eq_zero
+    eq_zero_of_localGeneratorSum_mulVec_eq_zero
+    tensorOperator_mul
+    tensorOperator_eq_noncommProd
+    exp_siteOperator
+    tensorOperator_exp
+    localGeneratorSum_eq_traceless_add_scalar
+    tensorOperator_exp_eq_exp_traceless_add_scalar
+    localGenerator_eq_zero_of_ray_invariant
+    localGeneratorSum_eq_zero_of_ray_invariant
+    tracelessPart_eq_zero_of_productUnitary_ray_invariant
+    raySymmetry_eigenvalue
+    defectSq_symmetry_mul
+    defectSq_mul_symmetry
+    approximate_decomposition
+
+There is no `sorry`, no `native_decide`, no external certificate, no generated
+source, and no project-specific axiom anywhere in the dependency closure of the
+new modules.
+
+**Per-module build and gate confirmation: NOT YET RUN.**  The host-wide build
+lock was held throughout this work by other lanes' live builds
+(`PassantCodeQ13.MinimumWords.*` and `RelativeConicArcs.PaperIOrientation*`), so
+the unattended queue could not complete
+`RelativeConicArcs.Gates.AMELUTwoUniformRigidity` and
+`RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms`.  One module,
+`RelativeConicArcs.AMELU.TwoUniformIsometry`, did build in the queue before the
+window was lost.  The remaining step is to run
+
+    lean/scripts/lean-build-queue.py run \
+      RelativeConicArcs.Gates.AMELUTwoUniformRigidity \
+      RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms \
+      --profile single --threads 1 --cores 20-23
+
+in a quiet window and record the gate's `--no-build` confirmation.  Until that is
+done, the trust statement above rests on the full-source elaboration and the
+axiom audit taken in that same elaboration, which is exact evidence about the
+same declarations but not the lane's documented exit gate.
 
 ## Formalization ledger: what the row should say
 
