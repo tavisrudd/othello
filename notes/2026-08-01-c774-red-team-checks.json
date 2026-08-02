@@ -1,0 +1,140 @@
+{
+  "probe1_lattice_rank_vs_dual_distance": {
+    "1": {
+      "agree": 2,
+      "codes": 2,
+      "counterexamples": []
+    },
+    "2": {
+      "agree": 5,
+      "codes": 5,
+      "counterexamples": []
+    },
+    "3": {
+      "agree": 16,
+      "codes": 16,
+      "counterexamples": []
+    },
+    "4": {
+      "agree": 67,
+      "codes": 67,
+      "counterexamples": []
+    },
+    "5": {
+      "agree": 374,
+      "codes": 374,
+      "counterexamples": []
+    },
+    "6": {
+      "agree": 2825,
+      "codes": 2825,
+      "counterexamples": []
+    },
+    "7": {
+      "agree": 29212,
+      "codes": 29212,
+      "counterexamples": []
+    }
+  },
+  "probe2_breakdown_theta": 1.46562,
+  "probe2_constant": 1.095445115,
+  "probe2_nearest_diagonal_symmetry": {
+    "argmin_is_zero": true,
+    "c": 0.09375,
+    "distance_to_identity": 0.5303300859,
+    "group_order": 131072,
+    "identity_is_nearest": true,
+    "invariant_factors": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      4,
+      4,
+      8
+    ],
+    "min_distance_over_diagonal_symmetry_group": 0.5303300859
+  },
+  "probe2_state": {
+    "code": "RM(1,4)",
+    "codewords": 32,
+    "length": 16,
+    "max_pair_marginal_deviation": 0.0,
+    "weights": [
+      0,
+      8,
+      16
+    ]
+  },
+  "probe2_theorem_b_scan": [
+    {
+      "D": 0.1767766953,
+      "c": 0.03125,
+      "eps": 0.1237019796,
+      "eps_statevector_direct": 0.1237019796,
+      "eps_statevector_overlap": 0.1237019796,
+      "ratio_closed_form": 1.0104931253,
+      "ratio_statevector": 1.0104931253,
+      "satisfies_hypothesis": true,
+      "sum_op_norms": 0.5,
+      "violates_theorem_B": false
+    },
+    {
+      "D": 0.2828427125,
+      "c": 0.05,
+      "eps": 0.1947091712,
+      "eps_statevector_direct": 0.1947091712,
+      "eps_statevector_overlap": 0.1947091712,
+      "ratio_closed_form": 1.0271729822,
+      "ratio_statevector": 1.0271729822,
+      "satisfies_hypothesis": false,
+      "sum_op_norms": 0.8,
+      "violates_theorem_B": false
+    },
+    {
+      "D": 0.3535533906,
+      "c": 0.0625,
+      "eps": 0.2397127693,
+      "eps_statevector_direct": 0.2397127693,
+      "eps_statevector_overlap": 0.2397127693,
+      "ratio_closed_form": 1.0429148215,
+      "ratio_statevector": 1.0429148215,
+      "satisfies_hypothesis": false,
+      "sum_op_norms": 1.0,
+      "violates_theorem_B": false
+    },
+    {
+      "D": 0.5303300859,
+      "c": 0.09375,
+      "eps": 0.34081938,
+      "eps_statevector_direct": 0.34081938,
+      "eps_statevector_overlap": 0.34081938,
+      "ratio_closed_form": 1.1002895434,
+      "ratio_statevector": 1.1002895434,
+      "satisfies_hypothesis": false,
+      "sum_op_norms": 1.5,
+      "violates_theorem_B": true
+    },
+    {
+      "D": 0.5656854249,
+      "c": 0.1,
+      "eps": 0.3586780454,
+      "eps_statevector_direct": 0.3586780454,
+      "eps_statevector_overlap": 0.3586780454,
+      "ratio_closed_form": 1.1152062555,
+      "ratio_statevector": 1.1152062555,
+      "satisfies_hypothesis": false,
+      "sum_op_norms": 1.6,
+      "violates_theorem_B": true
+    }
+  ]
+}
