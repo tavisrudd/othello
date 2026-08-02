@@ -1688,9 +1688,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "b78ab7fa16bac6c6d1c435aec3c85de8c64a4f63f9bb34db60fce08200f296a9"
+    "sha256": "6f5a85763defd01626eaf7539219ea3701c73b91dab2fa30a0fe3f901e4e78bd"
   },
-  "manuscript_sha256": "526a6576d7023678780f02f96eddd8ebbd728bd6f4177f2cc32290fe0c06765f",
+  "manuscript_sha256": "0af33acb22f04583bd201c150cf0d19c0e305f5741ef0949cf0047f5032f940c",
   "public_documents": [
     {
       "path": "README.md",

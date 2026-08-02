@@ -3,8 +3,8 @@
 **Lane:** `clebsch`
 
 **Status:** active; C752 is complete and its implementation interface is
-frozen.  Begin with the finite prose-source repairs and R1; orientation is
-split into O1--O8 and must remain packet-gated.
+frozen.  The finite prose-source repairs and R1 are complete; continue with
+R2--R4, then O1--O8, which must remain packet-gated.
 
 ## Current implementation state
 
@@ -15,22 +15,17 @@ terminal theorem
 Its guarded elaboration is green, and its printed axiom set contains only
 `propext`, `Classical.choice`, and `Quot.sound`.
 
-The finite source-owned prose repairs are implemented in the authoritative
-working tree.  The q11 generator now emits the correct repository-relative
-banner, and regeneration changed exactly 55 arithmetic leaves and 11
-aggregators.  The misleading “reflected” terminology, “opaque certificates”
-wording, and the status-language sentence in `SmallKChordMoments.lean` are
-repaired.  `SmallKChordMoments.lean` elaborates cleanly; the q11 generated
-bundle remains uncommitted pending its serialized package gate.  The prior
-direct elaboration of `Q11A5PointOrbitsData.lean` ended with exit 137 before
-Lean emitted a diagnostic and must not be repeated unchanged.  The first
-serialized replacement run correctly refused because the Paper II structural
-gate already owned the shared build window.  The replacement run at
-`~/.cache/othello-lean-build/run-20260801-211243-49eee223` subsequently acquired
-the lock, built `Q11A5PointOrbitsData.lean` in 42 seconds with a measured
-3,456,068 KiB peak, and is serially rebuilding the generated row closure before
-the trace-only aggregate gate.  Keep the source bundle unchanged until its
-terminal status is recorded.
+The finite source-owned prose repairs are committed.  The q11 generator emits
+the correct repository-relative banner, and regeneration changed exactly 55
+arithmetic leaves and 11 aggregators.  The misleading “reflected” terminology,
+“opaque certificates” wording, and the status-language sentence in
+`SmallKChordMoments.lean` are repaired.  `SmallKChordMoments.lean` elaborates
+cleanly.  The serialized replacement run at
+`~/.cache/othello-lean-build/run-20260801-211243-49eee223` finished successfully:
+it built `Q11A5PointOrbitsData.lean` in 42 seconds at a measured 3,456,068 KiB
+peak, built `Q11A5PointOrbits.lean` in 19 minutes 39 seconds at a measured
+5,675,148 KiB peak, and passed the trace-only aggregate gate.  The reviewed q11
+prose bundle was committed at `12031d32`.  R2 is the next formal packet.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`

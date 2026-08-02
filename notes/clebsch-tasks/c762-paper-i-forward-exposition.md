@@ -40,6 +40,11 @@ rebuilt and the companion bibliography identified Paper I as a released
 version-2 manuscript.  It found no remaining hierarchy, series, ownership,
 citation-interface, bibliography, or layout defect.
 
+The released Paper II and Paper III bibliography entries now include their
+confirmed version-independent Zenodo concept DOIs.  The corresponding public
+GitHub releases were checked directly; forward versions remain separate from
+these immutable predecessors.
+
 The read-only Lean correspondence audit found no new declaration requirement.
 The headline and three affected statement groups retain their exact SHA-256
 identities; only their source lines moved (headline `96→91`, orientation
