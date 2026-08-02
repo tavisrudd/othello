@@ -19,5 +19,7 @@ The proof is human and structural. The verification surface under
 `verification/` records discovery provenance and checks only finite leaves
 that resist further conceptual compression. Paper-owned replay files and the
 semantic Lean aggregate gate are green, with an exact axiom audit and a scope
-strictly narrower than the main theorem. Release still requires an immutable
-artifact locator and a clean isolated replay.
+strictly narrower than the main theorem. Release still requires replacing the
+Lean package's repository-relative semantic-library dependency with a pinned
+public dependency, replaying both bundles from fresh isolated checkouts, and
+inserting their immutable artifact locators.
