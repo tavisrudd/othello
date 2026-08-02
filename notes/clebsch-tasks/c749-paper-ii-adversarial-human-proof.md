@@ -2,7 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** unblocked after C748; human proof round 4 of 4
+**Status:** complete on 2026-08-02; human proof round 4 of 4, final cold
+**GO**, authoritative release aggregate green, and human theorem surface
+frozen.  Full report:
+notes/2026-08-02-c749-paper-ii-adversarial-human-proof.md.
 
 ## Objective
 

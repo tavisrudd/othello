@@ -622,9 +622,21 @@ vector gives an injection
 \[
  \operatorname{Hom}_H(L(\mathbf c),F)
  \lhook\joinrel\longrightarrow
- \{v\in F:v\text{ has weight }\mathbf c
+\{v\in F:v\text{ has weight }\mathbf c
              \text{ and is fixed by the positive root group}\}.
 \]
+Here \(\mathbf c\) initially denotes the corresponding character of the
+finite torus.  If \(0\leq c\leq q-2\) represents that character, its
+algebraic-weight representatives in the target interval
+\([-(q-3),q-3]\) are \(c\) and \(c-(q-1)\) when both lie in the interval,
+and just the surviving one at the endpoints.  Both representatives are
+included in the displayed weight space.  In (3.2c$_1$) their constant
+and \(t^{q-1}\) coefficients belong to the same triangular system:
+there is no \(t^{q-1}-1\) ambiguity, because the equation also holds at
+\(t=0\).  Thus coefficient comparison couples the two representatives
+and leaves only the digitwise lines described below; a shifted
+representative supplies no additional kernel.
+
 Indeed the
 \(U^-(\F_q)\)-orbit of that vector spans \(L(\mathbf c)\): in the
 Frobenius tensor basis the orbit matrix is the Vandermonde matrix on the
@@ -721,33 +733,63 @@ Choose the Weyl element \(w\) with
  \Theta(A)=-\beta_+,\qquad \Theta(C)=\phi_+,\qquad
  \Theta(B)=-\phi_-,\qquad \Theta(D)=w\Theta(A).       \tag{3.2c$_8$}
 \]
-Equations (3.2c$_7$) give
-\(E^{(1)}\Theta(C)=\Theta(A)=E^{(q)}\Theta(B)\), with all
-other positive divided powers on \(\Theta(B),\Theta(C)\) zero.
-Conjugating the defect by \(w\) and separating weights gives
+We verify the complete distribution-algebra seam rather than only the
+two middle weights.  Since \(\phi\) is a finite-group map, it commutes
+with \(w\); separation of weights gives
+\(w\phi_+=\phi_-\) and \(w\phi_-=\phi_+\).  Hence \(\Theta\) already
+commutes with \(w\).  Equations (3.2c$_7$) give the two middle columns
+below, and Weyl conjugation gives their negative-root counterparts:
 \[
- F^{(1)}\Theta(C)=F^{(q)}\Theta(B)=0,\qquad
- F^{(q)}\Theta(C)=F^{(1)}\Theta(B)=\Theta(D),           \tag{3.2c$_9$}
+\begin{array}{c|cccc}
+ &\Theta(A)&\Theta(C)&\Theta(B)&\Theta(D)\\ \hline
+ E^{(1)}&0&\Theta(A)&0&\Theta(B)\\
+ E^{(q)}&0&0&\Theta(A)&\Theta(C)\\
+ E^{(q+1)}&0&0&0&\Theta(A)\\ \hline
+ F^{(1)}&\Theta(C)&0&\Theta(D)&0\\
+ F^{(q)}&\Theta(B)&\Theta(D)&0&0\\
+ F^{(q+1)}&\Theta(D)&0&0&0
+\end{array}                                                   \tag{3.2c$_9$}
 \]
-with all other negative divided powers on these two vectors zero.
-The ordinary commutator gives
-\(F^{(1)}\Theta(A)=\Theta(C)\), since
-\(q-1=-1\) in \(k\).  For the \(q\)-step, apply
+
+Here are the missing corner checks.  The ordinary divided-power
+commutator gives \(F^{(1)}\Theta(A)=\Theta(C)\), since
+\(q-1=-1\) in \(k\).  Applying
 \[
  E^{(q)}F^{(q)}=
  \sum_iF^{(q-i)}\binom{H-2q+2i}{i}E^{(q-i)}
 \]
-to \(\Theta(C)\).  Only \(i=q,q-1\) can survive; their binomial
-coefficients are respectively \(0,1\).  Using (3.2c$_9$) and Weyl
-conjugation gives \(F^{(q)}\Theta(A)=\Theta(B)\).  Hence
+to \(\Theta(C)\) leaves only \(i=q,q-1\), with coefficients \(0,1\),
+and gives \(F^{(q)}\Theta(A)=\Theta(B)\).  Multiplication in the
+distribution algebra then gives
 \[
  F^{(q+1)}\Theta(A)=F^{(1)}F^{(q)}\Theta(A)=\Theta(D),
 \]
-since
-\(\binom{q+1}{1}=1\) in \(k\).  The same commutator expresses every
-other \(F^{(i)}\Theta(A)\) through the already zero terms in
-(3.2c$_9$); Weyl conjugation supplies the dual relations on \(D\).
-Thus (3.2c$_8$) is a \(\mathbf G\)-map.  Moreover
+because \(\binom{q+1}{1}=1\) in \(k\).
+
+To check that no omitted divided powers survive, use the Chevalley
+factorization
+\[
+ u(s)\ell(t)=
+ \ell\!\left(\frac{t}{1+st}\right)
+ h(1+st)
+ u\!\left(\frac{s}{1+st}\right)                         \tag{3.2c$_{10}$}
+\]
+first for \(1+st\ne0\), and then as a polynomial identity after
+clearing denominators.  Substituting the two middle columns and the
+three corner coefficients just proved, comparison of the coefficients
+of \(s^at^b\) gives
+\[
+ \ell(t)\Theta(A)=\Theta(A)+t\Theta(C)+t^q\Theta(B)
+                    +t^{q+1}\Theta(D).
+\]
+Thus \(F^{(i)}\Theta(A)=0\) for
+\(i\notin\{0,1,q,q+1\}\).  Weyl conjugation gives the corresponding
+positive-root statement on \(\Theta(D)\); the middle-column relations
+give all remaining zero entries in the table.  The table is exactly the
+divided-power action on the displayed basis of
+\(L(1)\otimes L(1)^{(e)}\).  Together with the four weights and the Weyl
+action, it proves that \(\Theta\) is an algebraic \(\mathbf G\)-map.
+Moreover
 \[
  \Theta(C-B)=\phi.
 \]
@@ -758,10 +800,10 @@ Therefore \(\phi=0\), and we have the parity-specific injection
 \[
  \operatorname{Hom}_{\operatorname{PGL}_2(q)}(S^\square,M)
  \lhook\joinrel\longrightarrow
- \operatorname{Hom}_{\mathbf G}(S\otimes Y_1,M).       \tag{3.2c$_{10}$}
+ \operatorname{Hom}_{\mathbf G}(S\otimes Y_1,M).       \tag{3.2c$_{11}$}
 \]
 
-We now show that the right side of (3.2c$_{10}$) vanishes for the detecting
+We now show that the right side of (3.2c$_{11}$) vanishes for the detecting
 modules in the statement.  Put \(M=\operatorname{Sym}^2F\).
 For the Steinberg module,
 \(\operatorname{St}\otimes L(1)\otimes L(1)^{(e)}\) has simple head
@@ -927,9 +969,15 @@ summand of \(F\), and the contraction in
 Lemma~\ref{lem:lucas-socle-square-parity} rules out the split pullback.  This
 separates the extension-field argument from affine cohomology entirely.
 
-Dickson's \(p'\)-subgroup list reduces \(K\) to cyclic, dihedral, and
-exceptional types; compare the maximal-subgroup form in
-\cite[Theorem~2.2]{Giudici2007}.
+Dickson's maximal-subgroup list, in the form
+\cite[Theorem~2.2]{Giudici2007}, gives the required \(p'\)-subgroup
+list by induction down the subfield chain.  Indeed, if a maximal
+overgroup is Borel, then a \(p'\)-subgroup injects into its cyclic torus
+quotient and is cyclic.  In a dihedral maximal subgroup it is cyclic or
+dihedral.  In a proper subfield subgroup the same argument repeats over
+the smaller field.  The chain terminates, leaving only cyclic, dihedral,
+and the exceptional groups \(A_4,S_4,A_5\).  Thus the following case
+split is exhaustive, not an additional classification assumption.
 
 Suppose first that \(e>1\).  If a cyclic or dihedral \(K\) is
 intransitive on \(\mathbb P^1(\F_q)\), take
@@ -944,18 +992,29 @@ Its zeroth digit \(p-1\) exceeds \(2a=p-3\), hence it is absent from
 contrary to the square-parity assertion.
 
 It remains among cyclic and dihedral groups only to consider a transitive
-dihedral \(K\).  Then \(K\) is the full nonsplit normalizer of order
-\(q+1\), acting regularly.  Put \(n=(q+1)/2\) and write
+dihedral \(K\).  A cyclic subgroup of \(H\) lies in a nonsplit torus of
+order at most \((q+1)/2\), so it cannot be transitive on \(q+1\)
+endpoints.  Thus \(K\) is the full nonsplit normalizer of order
+\(q+1\), acting regularly.  Put \(n=(q+1)/2\).  Choose a generator
+\(z\) of the nonsplit torus of order \(2n\) in \(G\), with
+\(z\notin G^+\), and write
 \[
+ r=z^2,\qquad
  K=\langle r,w:r^n=w^2=1,\ wrw=r^{-1}\rangle .
 \]
-A \(K\)-invariant matching is right multiplication by an involution.
-The central-involution matching has an outer stabilizer.  For a
-reflection matching, an element in the outer coset sends \(w\) to
-\(r^{2a+1}w\) after multiplication by \(r^a\); it fixes the matching
-exactly when \(2a+1=0\pmod n\).  Thus all reflection matchings for odd
-\(n\) also have an outer stabilizer and do not give two \(H\)-sheets.
-Consequently
+A \(K\)-invariant matching on the regular \(K\)-set is right
+multiplication by a nonidentity involution.  Since
+\(zwz^{-1}=rw\), conjugation by the outer element \(r^az\) sends the
+reflection \(r^jw\) to \(r^{j+2a+1}w\).  It preserves the matching
+exactly when
+\[
+ 2a+1=0\pmod n.                                         \tag{3.2f$_0$}
+\]
+If \(n\) is even, the rotation involution \(r^{n/2}\) is fixed by
+\(z\), so its matching has an outer stabilizer.  If \(n\) is odd,
+(3.2f$_0$) is soluble and every reflection matching has an outer
+stabilizer.  Consequently the only dihedral matching that can give two
+\(H\)-sheets is a reflection matching with \(n\) even.  Thus
 \(q\equiv3\pmod4\), the matching is a reflection matching, and we take
 \[
  S=L(q-7).
@@ -1021,6 +1080,18 @@ S_4&(1,1),(9,4),(8,6),(6,8)\\
 A_5&(1,1),(15,4),(20,6),(12,10),(12,5).
 \end{array}
 \]
+Substitution gives the complete averages
+\[
+\begin{array}{c|c|c}
+K&S&|K|\dim S^K\\ \hline
+A_4&L(6)&12\\
+S_4&L(8)&24\\
+A_5&L(12)&60.
+\end{array}
+\]
+Thus each fixed space is one-dimensional.  The binary lift is used
+only to evaluate the ordinary symmetric-power character; because \(K\)
+is a \(p'\)-group, averaging is valid in \(k\).
 Frobenius reciprocity makes \(S\) a quotient of \(P=k[G^+/K]\).
 The permutation form identifies \(P\) with \(P^*\), and every displayed
 \(S\) is self-dual, so dualizing embeds \(S\) in \(P\).  This proves
@@ -1037,6 +1108,29 @@ We first verify that the ambient affine class is nonzero.  Put
  r=\frac{p-1}{2},\qquad m=r+1,\qquad
  P_0=Y(X^r-Z^r)\in R_m.
 \]
+We first identify the polynomial model of the point-vector extension
+used in (3.2d).  Let \(D=s^pt-st^p\) and
+\[
+ E_{\rm poly}=\{P\in R_m:P\circ\nu\in kD\}.
+\]
+With the determinant normalization of (2.2), restriction to the conic
+is a \(G\)-map
+\[
+ 0\longrightarrow QR_{m-2}\longrightarrow E_{\rm poly}
+ \mathrel{\mathop{\longrightarrow}^{\epsilon_{\rm poly}}}k
+ \longrightarrow0,                                    \tag{3.2f$_1$}
+\]
+where \(\epsilon_{\rm poly}(P)=\lambda\) when
+\(P\circ\nu=\lambda D\).  The conic ideal is \((Q)\), so the kernel
+is exactly \(QR_{m-2}\); multiplication by \(Q\) identifies it with
+\(F=R_{m-2}\).  The affine chart \(\epsilon_{\rm poly}=1\) is precisely
+the ambient space of degree-\(m\) forms with the fixed Dickson
+restriction.  Homogenizing this affine space identifies (3.2f$_1$)
+equivariantly with the point-vector sequence (3.2d): a form \(P\) in
+the chart corresponds to its evaluation vector \(v_P\), and translation
+by \(QA\) corresponds to \(A\in F\).  Thus a base form \(P_0\) gives
+the same connecting cocycle in either model.
+
 On the conic, \(P_0\) restricts to the common Dickson form
 \(s^pt-st^p\).  Thus the cocycle of the affine point-vector extension is
 represented by
@@ -1068,7 +1162,11 @@ summand of \(L(2)^{\otimes d}\); every displayed highest weight is in the
 bottom alcove, where its tilting module is simple.
 Each selected \(L(s)\), for \(s=2,4,6,8,12\), is either absent from this
 sum or occurs once and has a retraction.  In the first case
-\(i_\square=0\).  In the second, the affine class is supported only on the
+\(i_\square=0\), and square parity already gives the contradiction.
+In the second, \(i_\square\ne0\) itself identifies the selected outer
+extension with the unique \(H\)-copy in \(F\); no independent parity
+claim about that copy is used.  Its multiplicity-one Fischer summand
+has an \(H\)-retraction.  The affine class is supported only on the
 top factor, so the contraction gives \((\dim S)[c]\) on a lower factor
 and \((\dim S+1)[c]\) on the top factor.  Both scalars are nonzero in
 every selected row.  To see the support assertion directly, restrict to the
@@ -1099,15 +1197,23 @@ small & \(q=3,5,7,13\)
 \bottomrule
 \end{tabular}
 \end{center}
-The remaining endpoint statements make the last row explicit.  The
-\((q,K)=(5,A_4)\) and \((7,A_4)\) endpoint matchings are the unique
-two-point block systems of the endpoint actions and are preserved by the
-outer \(S_4\)-normalizer; their full orbits therefore do not give a split
-\(\lambda>1\) case.  For \(q=3\), the
+The remaining endpoint statements make the last row explicit:
+\[
+\begin{array}{c|c|c|c|c}
+q&K&\text{orbits}&\text{unique matching data}&N_G(K)\\ \hline
+5&A_4&6&C_2<V_4\text{ is the two-point block}&S_4\\
+7&A_4&4+4&
+ N_{A_4}(C_3)=C_3\text{ gives the cross-orbit pairing}&S_4\\
+5&D_6&6&\text{reflection, }n=3\text{ in (3.2f$_0$)}&D_{12}.
+\end{array}                                               \tag{3.2g$_0$}
+\]
+In each row the displayed outer normalizer preserves the unique
+matching, so the full orbit does not give a split \(\lambda>1\) case.
+For \(q=3\), the
 three perfect matchings form one \(G^+\)-orbit, so the two-sheet premise
 is impossible.  There is no \(A_5\) row at \(q=13\), since
-\(60\nmid|\operatorname{PSL}_2(13)|\).  The isolated \(q=5\) dihedral matching has an outer full
-stabilizer.  We have therefore produced the quadratic obstruction for every
+\(60\nmid|\operatorname{PSL}_2(13)|\).  We have therefore produced the
+quadratic obstruction for every
 possible split stabilizer with \(\lambda>1\), a contradiction.
 Hence \(\lambda=1\).
 \end{proof}
@@ -1204,10 +1310,17 @@ unique possible two-point block stabilizer is
 \(N_{A_5}(C_5)=D_{10}\).  The invariant matching is again unique.
 In each case the two \(G^+\)-classes of the exceptional subgroup are
 fused by \(G\), and the subgroup has no outer normalizer
-\cite{Giudici2007}.  Its full matching stabilizer is therefore exactly
-\(S_4\) or \(A_5\), so the orbit has size \(2q\) and splits into the two
-claimed \(G^+\)-orbits.  The unique block systems are precisely the
-matchings displayed in (3.1), up to \(G\)-conjugacy.
+\cite[Lemma~2.3]{Giudici2007}: the diagonal outer automorphism fuses the
+two classes, so no element in its coset normalizes a representative.
+Indeed, if \(J=\operatorname{Stab}_G(M)\), then
+\(J\cap G^+\) contains \(K\).  Maximality gives
+\(J\cap G^+=K\) or \(G^+\), and the latter is impossible because
+\(G^+\) does not fix \(M\).  If \(J>K\), an element of \(J\setminus K\)
+would therefore be an outer normalizer of \(K\), contrary to the cited
+fusion statement.  Thus \(J=K\), so the orbit has size \(2q\) and
+splits into the two claimed \(G^+\)-orbits.  The unique block systems
+are precisely the matchings displayed in (3.1), up to
+\(G\)-conjugacy.
 
 Conversely, \(q=7,11\) are both \(3\pmod4\), so \(G^+\) is transitive on
 unordered pairs of endpoints.  Each \(q\)-matching sheet therefore covers

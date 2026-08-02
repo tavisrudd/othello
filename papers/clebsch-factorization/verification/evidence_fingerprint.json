@@ -11,8 +11,8 @@
   "trust_manifest_sha256": "aa497dd481d9201e9242805ee5f4bcb5e9bbd7f5413eede2f843c29208cf7815",
   "runner_sha256": "e9f5957d6245486e26fd06343aa5fcab744804edecbe76199c10f06c3596d026",
   "review_sources_sha256": {
-    "normalized_manuscript": "d4ffe1b44f3eda4d6c3e9bdc8da332166361197605b686a651b1f7b1b0090997",
-    "normalized_statement_identity": "800b2e79e3e9bac9bb04d4d0379ad1e5f450acb782319d605dad66ec034d08ee",
+    "normalized_manuscript": "10fca77a26401694c77961b80dcf3de9ce8812ed1cef8a3f0e7804ea9d30bad4",
+    "normalized_statement_identity": "a167b445c12ec592648f5e709fcdfa949b7869daaf90b0b0e49c4ed6774021cd",
     "statement_extractor": "a9c4eed0aafa50a98881550c3efaf647e0fc3a474f509380758e40e85d0d3f1b",
     "paper_readme": "7cf272443df7732c1de94ff71e953ca09ccbf249c4f7d57984fb57026830e21a",
     "verification_readme": "f76c62eba7edeb2c79ce39d449e25fe72fefea70afe7b9040c1247cddfd4b31a",

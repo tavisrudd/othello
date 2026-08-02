@@ -39,7 +39,7 @@ are reusable inputs to C756, but C761 does not own or block that theorem.
 | surface | root | current state | owning task |
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening and C762 owns the forward exposition pass | [C762](../clebsch-tasks/c762-paper-i-forward-exposition.md) |
-| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; C749/C750/C801 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
+| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; the C749/C750/C801 human and Lean strengthening is complete and C577 owns repackaging | [C577](../clebsch-tasks/c577-factorization-paper.md) |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C763 consolidation is complete and C764 adds the minimal determinant-versus-permanent boundary for the forward version | [C764](../clebsch-tasks/c764-paper-iii-why-determinant.md) |
 | Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 human proof, paper-owned evidence, semantic modules, logical-spine lemmas, and sharded Lean gates green; semantic rank, normalized weight-eight, arbitrary weight-ten profiles, fixed-point weight-twelve exhaustion, association/Gram spanning, row-family uniqueness, and concrete four-anchor scheme rigidity are closed, while release remains | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -261,12 +261,12 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C752 — Paper I Lean spine audit](../clebsch-tasks/c752-paper-i-lean-spine-audit.md) | complete; transitive prose/definition audit and exact C753 packet interfaces frozen | none |
 | [C753 — Paper I Lean spine closure](../clebsch-tasks/c753-paper-i-lean-spine-closure.md) | active; prose-source repairs, q11 serialized gate, and R1 complete | implement R2--R4 and O1--O8 in frozen order, then run correspondence and aggregate gates |
 | [C761 — Paper IV q13 passant code](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) | active; theorem, evidence, formal transports, Milnor--Serre exposition, local release audit, and Paper-I forward pointer green | replace the local Lean path dependency with a pinned public package, run fresh isolated replays, insert immutable locators, and publish with explicit authority |
-| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; C748's two-reader gate and authoritative release are green | complete C749 adversarial closure and C750 same-spine formal coverage before repackaging |
+| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; the C749 human freeze and C750/C801 Lean surfaces are complete and the authoritative release is green | repackage and synchronize the standalone release when publication authority is available |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |
 | [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | complete; human proof 2/4 and independent modular read green under C748 | none |
 | [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | complete; parity-specific proof has independent modular and context-free `GO` verdicts; human proof 3/4 | none; C749 owns final adversarial freeze |
-| [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | unblocked; human proof 4/4 | attack and compress the complete proof, then freeze it |
-| [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | active by explicit user override; six individually elaborated spine modules, full theorem still open | formalize the actual Lucas Hom basis, detecting-module vanishings, contraction, and classification composition |
+| [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | complete; human proof 4/4, adversarial MAJOR repaired through MINOR to a fresh final **GO**, theorem surface frozen | none; C577 owns repackaging |
+| [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | complete; 22-terminal structural gate, axiom audit, trust map, evidence fingerprint, and authoritative aggregate green | none |
 | [C797 — Paper II trade-only carrier reconstruction](../clebsch-tasks/c797-trade-only-carrier-reconstruction.md) | complete; carrier-free theorem fails sharply at \(q=7\) | none; seven \(S_4\)-fixed affine placements share the trade and only one is a matching orbit |
 | [C798 — Paper II fixed-line Chow rigidity](../clebsch-tasks/c798-fixed-line-chow-rigidity.md) | complete; structural priority-judo theorem integrated and authoritative gate green | none; \(q-2\) nonmatching exact-trade orbits and the unique matching Chow point are proved without an orbit table |
 | [C801 — Paper II fixed-line Lean update](../clebsch-tasks/c801-paper-ii-fixed-line-lean.md) | complete; table-free radial inheritance, sheet-sign annihilator, and \(q-2\) count are kernel-checked | none; the unique Chow point remains the human finite-group/factorization boundary |
@@ -550,22 +550,23 @@ stabilizer, block-system, and unique Chow-intersection arguments remain
 explicitly human and classical.  Full report:
 `notes/2026-08-02-c801-paper-ii-fixed-line-lean.md`.
 
-The paper-owned trust surface now has twenty-nine statements and fourteen
+The paper-owned trust surface has twenty-nine statements and fourteen
 evidence bundles, including independent generic-wall, shared-radial, and
-q=9 small-field replays.  The authoritative aggregate gate and warning-free
-forty-one-page PDF are green; the standalone repository remains at the
-previous frozen release pending the human-proof freeze.  A
-2026-07-31 audit nevertheless reopened the local proof gate: the checker is
-correctly conditional on the human projective--trade, Lucas-socle, and
-adjacent-wall identifications, but those identifications are not yet written
-at referee proof depth.  C746 and C747 now supply the exact quadratic
-pullback, actual Lucas Hom space, outer-parity seam, first-wall spill, and
-structural characteristic-three endpoint.  C748 owns two independent cold
-reads before C749 can freeze the human surface; C750 begins only after that
-freeze.  Audit and current proof reports:
+q=9 small-field replays.  C749 closed the reopened human-proof gate after an
+adversarial cold **MAJOR**, localized repairs, a fresh **MINOR** transparency
+pass, and a final context-free **GO**.  The complete divided-power seam,
+finite-torus alias elimination, affine polynomial/point-vector bridge,
+transitive-dihedral and endpoint actions, exact \(p'\)-subgroup exhaustion,
+and exceptional fusion locator are now explicit.  C750 and C801 already
+close the corresponding structural and table-free radial Lean surfaces.
+The warning-free authoritative PDF and full release aggregate are green.
+The standalone repository remains at the previous frozen release because
+C577 owns repackaging and synchronized publication after authority is
+available.  Audit and closure reports:
 `notes/2026-07-31-c577-paper-ii-new-math-audit.md`,
-`notes/2026-07-31-c747-paper-ii-socle-wall-proof.md`, and
-`notes/2026-07-31-c748-paper-ii-serre-integration.md`.
+`notes/2026-07-31-c747-paper-ii-socle-wall-proof.md`,
+`notes/2026-07-31-c748-paper-ii-serre-integration.md`, and
+`notes/2026-08-02-c749-paper-ii-adversarial-human-proof.md`.
 C682 characteristic-zero work is inventory unless
 explicitly promoted.
 
