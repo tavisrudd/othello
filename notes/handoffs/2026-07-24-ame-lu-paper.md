@@ -76,6 +76,37 @@ symmetry group is exactly projectivity of the code.  **The eight queued
 diagonal rows now need re-scoping, which is a scope pivot and awaits the
 user's decision.**  See `2026-08-01-c780-diagonal-rigidity-novelty-audit.md`.
 
+**Re-scoping template for the pre-empted diagonal material (2026-08-02):
+the `golden` lane's C794 manoeuvre.**  That task faced the same situation —
+a published result owning its territory — and converted it into an asset
+rather than competing with it.  Its five moves, in order, are the template
+here:  (1) identify the published object with ours, showing the
+determinant-minus-three principal four-sets *are* the aligned four-sets, so
+the prior work is our object in other language;  (2) prove the direction
+nobody had — they go matrix to design, C794 goes design back to two-graph up
+to complement — so the prior theorem is the input and the new one gives it a
+faithfulness property it lacked;  (3) compose rather than compete, stating
+the consequence as "hence their design reconstructs at every order at least
+ten";  (4) replace the computer census by a human proof and demote the
+census to an independent falsifier;  (5) locate the first question the
+published invariants do not settle, and answer it — their first
+design-unforced cut moment.  Wording discipline throughout: "we prove",
+"to our knowledge", never "first", and no novelty claim on the elementary
+parts.
+
+Applied to our case:  the published classification of projective triply-even
+codes owns the plateau; our dual-distance dictionary says full lattice rank
+is exactly projectivity, hence exactly finiteness of the diagonal symmetry
+group, so their length set *is* the classification of which CSS coset states
+have a finite diagonal symmetry group carrying a non-Clifford order-eight
+element.  Cite their classification, do not reprove it; keep the recovered
+simplex certificates as an independent falsifier that now also validates our
+tooling against a published result; and identify the first quantum question
+their coding classification does not answer — the weighted sector and the
+non-diagonal residue are the candidates — as our analogue of the
+design-unforced moment.  This is a recommendation; the re-scope itself is a
+scope pivot and awaits the user.
+
 **C777 closed (2026-08-02): the formal layer matches the manuscript, with
 its boundary stated.**  A new multipartite namespace, general in site set
 and local dimension, proves the generator splitting, the single-exponential
