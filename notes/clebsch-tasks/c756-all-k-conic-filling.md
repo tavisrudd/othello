@@ -17,8 +17,10 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** run the bounded Ball--Lavrauw tangent-tensor interface test in
-the dossier's `Next-session protocol`; do not begin with another ordinary-rank bound.
+**Next-session entry:** run one bounded Blokhuis lacunary-polynomial interface test on
+the cleared first middle coefficient, initially over prime fields.  Do not assume the
+generalized-hyperfocused blocker hypothesis, and stop unless the reformulation lowers
+degree or forces a four-point pattern.
 
 ## Why this task exists
 
@@ -35,7 +37,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Eighteen research passes complete; the theorem is **not** proved. Reports:
+Nineteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -53,7 +55,8 @@ Eighteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-kernel-curves.md`, and
 `notes/2026-08-01-c756-coordinate-free-upgrades.md`, and
 `notes/2026-08-02-c756-tt-angle-bijections.md`, and
-`notes/2026-08-02-c756-cross-ratio-rank.md`.
+`notes/2026-08-02-c756-cross-ratio-rank.md`, and
+`notes/2026-08-02-c756-ball-lavrauw-tensor-interface.md`.
 
 Branch ledger:
 
@@ -340,6 +343,24 @@ What the cross-ratio rank pass adds:
   the constant line; the rank-(\le k-2) branch needs a second-compound argument or
   exclusion from the full angle-binomial identities.
 
+What the Ball--Lavrauw tangent-tensor interface adds:
+
+- the parameter dictionary is exact: their planar tangent degree is
+  $t=(q+1)/2$, C756's canonical $T_i$ is their tangent form, and the whole
+  $(t+1)$-point arc is a $t$-socle;
+- the planar tensor is only a bidegree-$(t,t)$ bilinear form on two Veronese slots.
+  It globalizes the pairwise values $T_i(P_j)$, hence the norm/resultant and Segre
+  reciprocity data already used by sign coherence, but not the conjugate-fibre phases
+  $\alpha_{ij}$;
+- the first cleared angle coefficient is a $t$-fold cofactor across all neighbours.
+  Tensor specialization and jets remain rowwise, so recovering it reintroduces the
+  original arc-dependent product without a degree drop or a nullity-one theorem;
+- this is a uniform ground-field failure, before any Frobenius or Hasse-derivative
+  seam.  The routed tensor interface therefore closes negatively;
+- polarity does not produce the $k-1$ blockers required by generalized
+  hyperfocused arcs: a passant chord's pole is not on the chord, and angle-pencil
+  labels depend on the base point.  The prime-field four-point theorem is inapplicable.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -394,9 +415,12 @@ closed-negative.
 Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
 now has the same theorem-shaped status the saturated-external branch had two passes before
 closure, but the tight balance theorem proves that another spectral bound cannot finish it.
-The bare cross-ratio nonsingularity shortcut is now closed: exploit the exact rank-three
-double displacement to globalize the adjugate kernel line, with a separate second-compound
-gate for possible nullity at least two.
+The bare cross-ratio nonsingularity shortcut is closed, and the Ball--Lavrauw tangent
+tensor does not globalize its adjugate kernel line: its planar order-two tensor stops at
+pairwise tangent evaluations and misses the simultaneous (t)-fold cofactor.  The next
+bounded interface is a prime-field lacunary-polynomial reformulation of that cleared
+coefficient; the direct adjugate/second-compound calculation stays parked unless a
+global low-degree carrier emerges.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot
 close.  The exhaustive masked-direction audit kills threshold unification but promotes
