@@ -478,19 +478,17 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-C793 is queued after C792 freezes Paper III's theorem surface.  It preserves
-the selected hierarchy-first Golden quantum-statistics manuscript as baseline
-A and tests a rigidity-and-design variant B, including the universal
-higher-order purity mean and variance, through mathematical-physics and
-quantum-optics red teams, a blind PRA comparison, and a fresh selected-PDF
-referee round.  C788's settled verdict assigns the design to Greaves--Suda and
-the harmonic machinery to the classical literature; only the exchange-facing
-synthesis is available for qualified novelty wording.  Cross-paper identity
-checks may use the other paper
-repositories; public access is out of scope.  Task card:
-`notes/golden-tasks/c793-golden-quantum-balanced-rigidity-ab.md`.  The shared
-allocation plan is
-`notes/2026-08-02-balanced-spectrum-three-paper-integration-plan.md`.
+C793 is complete.  The rigidity-and-design variant beat the hierarchy-first
+baseline, survived mathematical-physics and quantum-optics red teams, and was
+repaired to A-minus / accept in both the fresh selected-PDF and final
+title/abstract cold reads.  The paper now gives a self-contained cross-Gram
+rigidity proof, retains the Greaves--Suda/Johnson higher-order statistics as a
+credited subordinate layer, and keeps C794 reconstruction as a collective
+inverse boundary.  The user-approved title is *Orientation, exchange
+statistics, and rigidity in the Golden six-mode conference interferometer*.
+Use only `golden-quantum-statistics-rigidity-referee-approved` at `b0fb4007`;
+the authoritative and extracted-package gates pass.  Report:
+`notes/2026-08-02-c793-golden-quantum-balanced-rigidity-ab.md`.
 
 C789 is complete.  A context-free reader selected the hierarchy-first variant
 B over baseline A, A-minus versus B-plus.  The selected twelve-page manuscript
@@ -578,8 +576,9 @@ reference remain user-owned.
 
 ## Recommended order
 
-1. Preserve `golden-quantum-statistics-observable-hierarchy-selected` as the
-   forward PRA manuscript; baseline A and tested B remain separately tagged.
+1. Use `golden-quantum-statistics-rigidity-referee-approved` as the forward PRA
+   manuscript; preserve the earlier baseline and tested variants as frozen
+   comparison artifacts.
 2. The user will post the accepted package, assign live identifiers, and add
    the Clebsch forward reference.
 3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit

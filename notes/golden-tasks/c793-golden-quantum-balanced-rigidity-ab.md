@@ -2,8 +2,13 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C792 freezes Paper III's selected theorem surface;
-the existing hierarchy-first manuscript is the immutable baseline
+**Status:** complete; variant B selected and repaired to A-minus / accept
+
+**Result:** the rigidity-and-design integration won the blind comparison,
+survived both red teams, and passed fresh selected-PDF and title/abstract cold
+reads.  The final artifact is
+`golden-quantum-statistics-rigidity-referee-approved` at `b0fb4007`; report:
+`notes/2026-08-02-c793-golden-quantum-balanced-rigidity-ab.md`.
 
 ## Objective
 
