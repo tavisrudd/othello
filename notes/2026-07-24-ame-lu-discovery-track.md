@@ -180,3 +180,32 @@ check whether they agree as pairings or merely share arity and symmetry.
 Shared arity alone is not a bridge.
 **Evidence:** none; both are unexamined analogies at this point.
 **Status:** open lead.
+
+### 2026-08-01 — the unit invariant factors count the code dimension
+
+**Provenance:** widening the three-code replay table to ten codes while
+running an extra-juice pass.
+**Was I looking for this?:** no — the widening was meant to test a guess that
+turned out to be half wrong.
+**Observed / musing:** across ten binary codes the lift lattice's invariant
+factor list contains exactly dim(C) units, without exception.  The companion
+guess — that the remaining factors number dim(C-perp) — is false, and fails at
+exactly one code, the repetition code, whose lattice has rank 1.  That failure
+is the continuous case rather than an anomaly: the repetition coset state is
+the GHZ state, its symmetry group carries a 7-torus, and 7 is exactly the
+length minus the lattice rank.  The GHZ control in the companion quantum
+battery verified that continuous symmetry by an unrelated route, so the two
+batteries meet at one point and agree.
+**Why it may matter / strongest question:** the corrected picture splits the
+classification into a part fixed by the code dimension and a part carrying the
+arithmetic content — units count dim(C), the total counts the lattice rank,
+the torus part is length minus rank, and the finite part has rank minus dim(C)
+cyclic factors.  If the unit-factor law is a theorem it makes the invariant
+factor profile far easier to read and to tabulate.
+**Discriminator / falsifier:** the candidate proof is that a lifted basis
+contributes dim(C) unimodular directions; write it, or find a code where the
+unit count differs from the dimension.  Ten small binary codes is not evidence
+of a general law, and nothing here tested odd characteristic.
+**Evidence:** `notes/2026-08-01-external-source-numerics-lattice.json`, ten
+codes, exact integer arithmetic, with a `--check` replay.
+**Status:** open lead.

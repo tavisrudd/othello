@@ -1,0 +1,144 @@
+{
+  "lattice": [
+    {
+      "dim_C": 7,
+      "dim_C_perp": 1,
+      "lattice_rank": 8,
+      "length": 8,
+      "name": "Even[8,7]",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 1,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 7,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 4,
+      "dim_C_perp": 4,
+      "lattice_rank": 8,
+      "length": 8,
+      "name": "ExtHamming[8,4]",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 4,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 4,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 12,
+      "dim_C_perp": 12,
+      "lattice_rank": 24,
+      "length": 24,
+      "name": "Golay[24,12]",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 12,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 12,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 4,
+      "dim_C_perp": 3,
+      "lattice_rank": 7,
+      "length": 7,
+      "name": "Hamming[7,4]",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 3,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 4,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 4,
+      "dim_C_perp": 4,
+      "lattice_rank": 8,
+      "length": 8,
+      "name": "RM(1,3)",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 4,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 4,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 5,
+      "dim_C_perp": 11,
+      "lattice_rank": 16,
+      "length": 16,
+      "name": "RM(1,4)",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 11,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 5,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 6,
+      "dim_C_perp": 26,
+      "lattice_rank": 32,
+      "length": 32,
+      "name": "RM(1,5)",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 26,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 6,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 16,
+      "dim_C_perp": 16,
+      "lattice_rank": 32,
+      "length": 32,
+      "name": "RM(2,5)",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 16,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 16,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 1,
+      "dim_C_perp": 7,
+      "lattice_rank": 1,
+      "length": 8,
+      "name": "Repetition[8,1]",
+      "nontrivial_equals_dim_C_perp": false,
+      "nontrivial_factors": 0,
+      "torus_factors_in_symmetry_group": 7,
+      "unit_factors": 1,
+      "unit_factors_equals_dim_C": true
+    },
+    {
+      "dim_C": 3,
+      "dim_C_perp": 4,
+      "lattice_rank": 7,
+      "length": 7,
+      "name": "Simplex[7,3]",
+      "nontrivial_equals_dim_C_perp": true,
+      "nontrivial_factors": 4,
+      "torus_factors_in_symmetry_group": 0,
+      "unit_factors": 3,
+      "unit_factors_equals_dim_C": true
+    }
+  ],
+  "naive_dual_dimension_law_counterexamples": [
+    "Repetition[8,1]"
+  ],
+  "rm14_state": {
+    "T_is_non_clifford": true,
+    "codewords": 32,
+    "length": 16,
+    "note": "the defect formula sqrt(2-2|<psi|U|psi>|) square-roots machine epsilon here and reads ~1e-8; the norm difference is the meaningful figure",
+    "pair_marginal_max_deviation": 0.0,
+    "transversal_T_is_exact_symmetry": true,
+    "transversal_T_norm_difference": 0.0,
+    "two_uniform": true,
+    "weights": [
+      0,
+      8,
+      16
+    ]
+  },
+  "schema": "external-source-numerics-lattice/1",
+  "unit_factor_law_holds_everywhere": true
+}
