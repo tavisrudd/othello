@@ -25,14 +25,14 @@ publication actions outside this bundle.
 - `pyproject.toml` and `uv.lock`, which pin the symbolic replay environment;
 - `verification/README.md` and the paper-level `README.md`.
 
-The revised PDF is thirteen pages.  The release build has no TeX spacing error,
+The revised PDF is twelve pages.  The release build has no TeX spacing error,
 undefined reference or citation, overfull or underfull box, or package
 warning.  The source and PDF hashes at closure are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 41,835 | `a18ca88e57079f169bbca864847cb895dd3286bc8b0d5814ce08091f02d1bf80` |
-| `golden_quantum_statistics.pdf` | 119,582 | `d0c61850d741c8d4c3013a6b530f102350b8ffe2cc1735c0cd02fdb0bf8d8fda` |
+| `golden_quantum_statistics.tex` | 39,693 | `74227e10ea7547391937a8cbb2c68901ddc4a58b57af47194f3600f950a4b798` |
+| `golden_quantum_statistics.pdf` | 115,882 | `7b73a978606d080f322c9fb20fad86a5d9d6c62038afdd9d494483b5af73013e` |
 
 Rebuild and verify from this directory with:
 
@@ -48,7 +48,8 @@ make verify-sources
 | Left--right orbit theorem, determinant-line interpretation, permanent obstruction, and minimal orientation carrier | human proof | proved in the manuscript |
 | Universal balanced-control rank obstruction and the 20+44 split | human proof | proved in the manuscript; the checker independently confirms the finite count |
 | Golden common spectrum and exchange-sector values | live Clebsch source theorem, local exact derivation, and paper-local certificate | explicit matrix, marking convention, trace identities, and characteristic polynomial are in the manuscript; the checker and frozen independent replays cross-check them |
-| Permanent census, chiral filter and costs, simplex words, and 15-cell compilation | certificate-checked exact computation | compact certificate and source hashes are local; `make verify-sources` runs the independent source replays |
+| Permanent census, simplex words, and 15-cell compilation | certificate-checked exact computation | compact certificate and source hashes are local; `make verify-sources` runs the independent source replays |
+| Retained arithmetic specialization | supplementary exact computation | its generator and replay remain in the package but no manuscript claim depends on it |
 | Optical component capabilities and antisymmetric-source availability | literature and empirical boundary | not certified by the checker; the source remains an explicit external dependency |
 | Shot and fidelity thresholds | analytic calculation under stated models | conditional design budgets, not experimental performance claims |
 

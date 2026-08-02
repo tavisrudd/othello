@@ -22,7 +22,7 @@
 \newcommand{\Sym}{\operatorname{Sym}}
 \newcommand{\per}{\operatorname{per}}
 
-\title{Orientation and exchange statistics in a Golden six-mode transfer}
+\title{Orientation and exchange statistics in the Golden six-mode conference interferometer}
 \author{Tavis Rudd}
 \date{August 2026}
 
@@ -30,46 +30,40 @@
 \maketitle
 
 \begin{abstract}
-Exchange statistics determine which information a many-particle
-interferometer can retain about its one-particle transfer.  Building on the
-Golden conference-operator and Joubert--Segre construction of the Clebsch
-series, we study this distinction in its exact six-mode transfer.  For a
-diagonal path control \(D_x\), the postselected block
+Which features of a one-particle transfer remain observable when its input and
+output port frames are uncalibrated, calibrated, or oriented?  We prove that
+singular values classify an unframed real transfer, that calibrated permanent
+amplitudes depend on the chosen frames, and that the determinant is the unique
+minimal-degree polynomial retaining their relative orientation.  We realize
+this hierarchy exactly in a six-mode conference interferometer.  For a
+diagonal path control \(D_x\), its postselected block
 
 \[
  K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}
 \]
 
-has top-exterior amplitude \(\det K_T(x)\), proportional to a signed Joubert
-coordinate on the Segre cubic.  This amplitude is orientation-covariant,
-although its filled-fermion probability \(|\det K_T(x)|^2\) is sign-blind.
-There is no intrinsic permanent counterpart: permanents depend on the chosen
-input and output port frames, whereas a canonical basis-independent bosonic
-aggregate is the symmetric-cube trace \(h_3(K_T^\dagger K_T)\), a function
-only of the singular values.  At each of twenty balanced controls, all six transfers have squared
-singular spectrum \(\{1/5,4/5,4/5\}\), giving
-\(h_3=313/125\) (uniform-input average \(313/1250\)) and exterior-cube
-probability \(e_3=16/125\); the other
-44 Boolean controls have zero fermionic amplitude.  Calibrated determinant
-signs, inferred from phase-referenced one-particle tomography rather than a
-direct many-fermion phase measurement, form a distance-six simplex code
-supporting three-, five-, and ten-cut readout.  We give a six-mode optical
-compilation and quantitative certification thresholds.  Present photonic
-components support coherent transfer tomography and bosonic controls; direct
-three-fermion emulation additionally requires a totally antisymmetric
-three-photon qutrit resource.  The result is a theory and design-limit
-analysis, not a report of a built device or a dynamical gauge-theory
-simulation.
+has top-exterior amplitude \(\det K_T(x)\); its filled-fermion probability is
+sign-blind.  Every marked transfer has squared singular spectrum
+\(\{1/5,4/5,4/5\}\) at each of the twenty balanced Boolean controls, while the
+other 44 controls have zero fermionic amplitude.  Thus the symmetric- and
+exterior-cube values are \(313/125\) and \(16/125\).  In the Clebsch
+realization the six determinants are signed Joubert coordinates on the Segre
+cubic.  Their calibrated signs form a distance-six simplex code.  A six-mode
+compilation and quantitative gates separate three experiments: coherent
+tomography can infer determinant signs, ordinary photons probe bosonic
+controls, and direct three-fermion emulation additionally requires a totally
+antisymmetric three-photon qutrit resource.  This is a theory and design-limit
+analysis, not a report of a built device.
 \end{abstract}
 
 \section{Introduction}
 
-Let \(K\) be a three-input, three-output block of a linear one-particle
-transfer.  If all three inputs and outputs are occupied, the fermionic
-transition amplitude is \(\det K\), while the collision-free bosonic amplitude
-is \(\per K\).  This familiar distinction does not by itself say whether the
-two amplitudes encode the same geometric information.  The answer depends on
-which changes of input and output coordinates belong to the physical data.
+Let \(K\) be a real input--output block of a linear one-particle transfer.
+Without calibrated port frames, its singular values are intrinsic.  After
+calibration, bosonic collision-free amplitudes are permanents of the framed
+matrix.  After orienting the two port spaces, the top exterior map becomes the
+signed determinant.  These are different levels of information, not three
+notations for the same observable.
 
 We consider a six-mode transfer obtained from a real symmetric conference
 matrix \(C\) of order six, so that
@@ -87,8 +81,22 @@ are the six classical Joubert coordinates on the Segre cubic
 what the transfer retains under symmetric and antisymmetric exchange
 statistics, how its marked determinant signs can be read in a calibrated
 apparatus, and where a photonic realization stops.
+The name \emph{Golden} is retained from that series and refers to the paired
+\(\pm\sqrt5\) conference eigenspaces; \emph{conference interferometer} names
+the operational realization studied here.
 
-The central point is an orientation boundary.  The Golden data determine the
+The paper has two principal results.  First, the left--right orbit theorem
+classifies the information retained by unframed and oriented port spaces and
+proves that the determinant is the unique minimal-degree polynomial carrying
+their relative orientation.  Second, every balanced Boolean control in the
+six-mode conference family has squared singular spectrum
+\(\{1/5,4/5,4/5\}\).  The latter is a structural consequence of the signed
+triangle identity and the \(3+3\) conference block equations, not a finite
+census.  It gives exact symmetric, mixed, and exterior exchange-sector
+benchmarks and the sharp split between twenty invertible and 44 singular
+Boolean controls.
+
+The orientation mechanism is as follows.  The Golden data determine the
 two three-dimensional port spaces but not ordered orthonormal frames inside
 them.  Changing those frames acts on \(K\) from the left and right by
 orthogonal matrices.  The top exterior power is intrinsically a map between
@@ -99,14 +107,11 @@ port-frame action.  Consequently the canonical intrinsic bosonic aggregate
 used here is not a second signed Segre coordinate: it is a spectral quantity
 on the symmetric cube.
 
-Theorems~\ref{thm:orbit-boundary} and~\ref{thm:exchange-boundary} state this
-distinction and its exact balanced specialization.  The Golden spectrum gives
-all six protocols one calibration target, the Boolean rank theorem gives a
-sharp \(20/44\) control boundary, and the simplex words reduce calibrated sign
-readout.  These are the operational gains of the exceptional family.
-The remaining sections separate intrinsic
-observables from calibrated ones, give a short arithmetic application, and
-identify the boundary of a photonic implementation.  The permanent
+Theorems~\ref{thm:orbit-boundary} and~\ref{thm:exchange-boundary} state the two
+results.  Their experimental consequence has three levels.  Phase-referenced
+one-particle tomography infers calibrated determinant signs; ordinary photons
+measure bosonic controls; direct antisymmetric emulation needs an additional
+three-qutrit resource.  The permanent
 description of multiphoton scattering is standard~\cite{Scheel}; immanants
 organize the intermediate symmetry sectors~\cite{Tichy}, and general
 partial-distinguishability formalisms precede the complementarity identities
@@ -322,7 +327,7 @@ on the singular locus it disappears.  The real Golden transfer and a coherent
 phase reference reduce this determinant-line phase to the sign studied here.
 \end{remark}
 
-\begin{theorem}[Golden exchange-sector benchmark]
+\begin{theorem}[Balanced six-mode exchange spectrum]
 \label{thm:exchange-boundary}
 Let \(K_T(x)\) be a Golden transfer block.  At every balanced control with
 three entries \(+1\) and three entries \(-1\), for each of the six marked
@@ -533,59 +538,15 @@ membership is known.  The five-cycle
 classifies the protocol.  These are fixed schedules for the transported
 marking above, not protocol-dependent choices.
 
-Order the protocols by the one-line forms of their frozen path permutations.
-In the common calibrated orientation, the complete three-cut decoder is
-\begin{center}
-\begin{tabular}{ccc}
-\toprule
-protocol & \(P_T\) & signs at \(012,013,014\)\\
-\midrule
-\(T_0\)&012345&\(-,-,-\)\\
-\(T_1\)&012354&\(-,-,+\)\\
-\(T_2\)&012435&\(-,+,+\)\\
-\(T_3\)&012453&\(+,-,-\)\\
-\(T_4\)&012534&\(+,+,-\)\\
-\(T_5\)&012543&\(+,+,+\)\\
-\bottomrule
-\end{tabular}
-\end{center}
-The supplemental certificate records all ten signs for every row.  Reversing
-the common orientation negates every signature; it does not change the
-relative classifier once that orientation is calibrated.
+For example, the base protocol has signs \((-,-,-)\) on the three-cut
+schedule.  The supplemental certificate records the complete decoder and all
+ten signs for every marked protocol.  Reversing the common orientation negates
+every signature; it does not change the relative classifier once that
+orientation is calibrated.
 
 The universal complementarity identities for determinants and permanents of
 Jabbour and Cerf~\cite{JabbourCerf} provide a useful calibrated consistency
 check.  They do not distinguish the Golden family by themselves.
-
-\subsection*{Bounded arithmetic corollary}
-
-The same coordinate map has the following arithmetic specialization.  It is
-not used by the optical benchmark.
-
-The rational diagonal filter
-\[
- x=\left(1,\frac7{13},\frac17,-\frac15,-\frac12,-1\right)
-\]
-gives
-\[
- Z(x)=\frac{72}{455}(11,-10,-8,5,4,-2).
-\]
-The integer vector on the right has vanishing sum and vanishing sum of cubes,
-so it is an anomaly-free chiral charge vector for six Weyl fermions.  General
-parametrizations of Abelian anomaly equations are known
-\cite{CostaDobrescuFox,CostaDobrescuFoxFew}; the contribution here is the
-operator filter and its exact postselection cost.  In the present
-normalization,
-\[
- P_{F,T}=\frac{(72/455)^2q_T^2}{500},
- \qquad q=(11,-10,-8,5,4,-2).
-\]
-
-This construction realizes arithmetic coordinates satisfying the anomaly
-equations.  It contains no gauge field, regulator, anomalous current, or
-gauge-theory dynamics.  The extension to two \(U(1)\) factors is governed by
-lines on the Segre cubic and has its own established algebraic geometry
-\cite{GripaiosNguyen}; it is outside the scope of this paper.
 
 \section{Photonic design limit}
 
@@ -684,17 +645,14 @@ full-precision netlist in the supplemental certificate has error below
 \end{center}
 
 A balanced \(U_T(x)\) may be compiled directly into at most fifteen such
-cells per copy.  A general real filter uses the displayed sandwich: two
-fifteen-cell meshes and six variable attenuators per copy.  An amplitude
-transmission \(x_i\) means intensity transmission \(x_i^2\), with a
-\(0\) or \(\pi\) path phase supplying its sign.  The chiral setting is
-\[
- x=\left(1,\frac7{13},\frac17,-\frac15,-\frac12,-1\right).
-\]
+cells per copy.  A general real filter uses the displayed sandwich with two
+fifteen-cell meshes and six variable attenuators; an amplitude transmission
+\(x_i\) means intensity transmission \(x_i^2\), with a \(0\) or \(\pi\) path
+phase supplying its sign.
 Three spatially parallel emulator copies therefore occupy eighteen modes and
-use at most 45 cells in the balanced direct compilation, or 90 cells and
-18 attenuators in the filtered compilation.  Encodings in time or frequency
-may reuse one physical mesh, but still require three matched logical copies.
+use at most 45 cells in the balanced direct compilation.  Encodings in time
+or frequency may reuse one physical mesh, but still require three matched
+logical copies.
 The other five marked protocols are obtained by the frozen path
 permutations; an odd representative exchanges the two port triples and
 transposes \(K_T\).
@@ -757,11 +715,8 @@ Indeed \(A(t)=K+tE\) is a contraction for \(0\leq t\leq1\), and
 because the three singular values of the adjugate are pairwise products of
 singular values of \(A(t)\), hence at most one.  Integration gives the bound.
 The balanced sign is certified by
-\(\lVert E\rVert_2<0.1193\).  The smallest chiral amplitude requires
-\(\lVert E\rVert_2<0.00472\) for its sign and
-\(4.72\times10^{-4}\) for ten-percent relative amplitude precision.  These
-are operator-norm requirements on transfer tomography, not phase-shifter
-specifications.
+\(\lVert E\rVert_2<0.1193\).  This is an operator-norm requirement on
+transfer tomography, not a phase-shifter specification.
 
 The shot budget assumes independent Bernoulli accepted trials, ten-percent
 relative precision, a normal approximation, and simultaneous 95-percent
@@ -784,16 +739,13 @@ reading & probability & accepted trials & time at \(100\,\mathrm{s}^{-1}\)\\
 \midrule
 balanced fermion, each protocol & \(16/125\) & 4,742 & 0.79 min\\
 weakest calibrated boson event & \(16/3125\) & 135,250 & 22.5 min\\
-largest chiral branch & \(156816/25878125\) & 114,167 & 19.0 min\\
-smallest chiral branch & \(5184/25878125\) & 3,473,883 & 579 min\\
 \bottomrule
 \end{tabular}
 \end{center}
-The fermionic rows are conditional design budgets; the feasible precursor
-cannot collect them without the antisymmetric source.
-At one accepted trial per second the corresponding times are \(1.32\),
-\(37.6\), \(31.7\), and \(965\) hours.  The weakest chiral branch, rather than
-the balanced benchmark, fixes the design limit.
+The fermionic row is a conditional design budget; the feasible precursor
+cannot collect it without the antisymmetric source.  At one accepted trial
+per second the corresponding times are \(1.32\) and \(37.6\) hours.  The
+weakest calibrated bosonic control fixes the precursor shot budget.
 
 \subsection*{External resource dependency}
 
@@ -810,11 +762,11 @@ supplies the resource nor predicts its engineering performance.
 
 Resource quality is more restrictive than shot noise under adversarial error
 models.  If preparation noise is an arbitrary mixture of weight \(1-F\),
-keeping probability bias below ten percent requires \(F\geq0.9872\) for the
-balanced event and \(F\geq0.999980\) for the smallest chiral event.  With only
-a fidelity bound and the trace-distance worst case, the corresponding gates
-are \(F\geq0.999836\) and \(F\geq0.9999999996\).  A characterized noise model
-could relax these bounds, but the conclusion would then be model-dependent.
+keeping probability bias below ten percent for the balanced event requires
+\(F\geq0.9872\).  With only a fidelity bound and the trace-distance worst
+case, the corresponding gate is \(F\geq0.999836\).  A characterized noise
+model could relax these bounds, but the conclusion would then be
+model-dependent.
 For the mixture model, an event probability changes by at most \(1-F\), so
 ten-percent relative bias at ideal probability \(p\) requires
 \(F\geq1-0.1p\).  Here
@@ -826,8 +778,7 @@ bias by \(\sqrt{1-F}\).  Thus the two generic gates are
  F\geq1-0.1p\quad\text{(mixture model)},\qquad
  F\geq1-0.01p^2\quad\text{(fidelity only)}.
 \end{equation}
-Substitution of \(p=16/125\) and
-\(p=5184/25878125\) gives the four displayed gates.
+Substitution of \(p=16/125\) gives the two displayed balanced-event gates.
 
 \section{Discussion}
 
@@ -864,9 +815,9 @@ The Boolean rank boundary, structural balanced-spectrum proof,
 symmetric-function identities, orbit theorem, and distance-six correction
 radius are human derivations.  The certificate independently checks all
 twenty balanced masks together with the three calibrated permanent values,
-rational filtered probabilities, six sign words, and fifteen-cell compilation.
-Their three atomic source bundles have exact generators and independent
-replays; one paper-local manifest pins every load-bearing file.
+six sign words, full-precision netlist, and fifteen-cell compilation.  Their
+three atomic source bundles have exact generators and independent replays; one
+paper-local manifest pins every load-bearing file.
 
 From the supplemental-package directory, \texttt{make check} verifies source
 hashes and independently recomputes every imported rational identity, census
@@ -935,21 +886,6 @@ arXiv:1504.00253.
 I.~Bengtsson and K.~\.{Z}yczkowski,
 \emph{On discrete structures in finite Hilbert spaces},
 arXiv:1701.07902.
-
-\bibitem{CostaDobrescuFox}
-D.~B. Costa, B.~A. Dobrescu, and P.~J. Fox,
-\emph{General solution to the (U(1)) anomaly equations},
-arXiv:1905.13729.
-
-\bibitem{CostaDobrescuFoxFew}
-D.~B. Costa, B.~A. Dobrescu, and P.~J. Fox,
-\emph{Chiral Abelian gauge theories with few fermions},
-arXiv:2001.11991.
-
-\bibitem{GripaiosNguyen}
-B. Gripaios and K.~L.~N. Nguyen,
-\emph{Anomaly cancellation for two (U(1)) factors},
-arXiv:2607.09879.
 
 \bibitem{Matthews}
 J.~C.~F. Matthews et al.,

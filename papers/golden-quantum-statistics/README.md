@@ -1,4 +1,4 @@
-# Orientation and exchange statistics in a Golden six-mode transfer
+# Orientation and exchange statistics in the Golden six-mode conference interferometer
 
 This directory is the authoritative manuscript root for the unnumbered Golden
 quantum-statistics companion. It is a theory and design-limit paper, not a
@@ -9,7 +9,6 @@ The paper owns:
 - the determinant orientation and permanent port-gauge boundary;
 - the intrinsic symmetric/exterior-cube comparison;
 - the exact Golden balanced benchmark and calibrated readout schedule;
-- one bounded anomaly-coordinate application;
 - the coherent-tomography/bosonic precursor and the antisymmetric-resource
   design limit.
 

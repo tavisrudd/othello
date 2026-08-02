@@ -5,8 +5,8 @@
       "sha256": "841f8a27d30371c1ecc069166755a62a107bdd129cc228343bf08b6fb33e5f11"
     },
     "golden_quantum_statistics.tex": {
-      "bytes": 41835,
-      "sha256": "a18ca88e57079f169bbca864847cb895dd3286bc8b0d5814ce08091f02d1bf80"
+      "bytes": 39693,
+      "sha256": "74227e10ea7547391937a8cbb2c68901ddc4a58b57af47194f3600f950a4b798"
     },
     "pyproject.toml": {
       "bytes": 168,
@@ -17,12 +17,12 @@
       "sha256": "1e477e1b1f12759445102c654ff14b01d32e392ef9f1ccfc4950d4c47818e5e5"
     },
     "verification/EVIDENCE.md": {
-      "bytes": 2634,
-      "sha256": "9e0742c5d5375db9660e041c6b79cb4a0da1a618faeed1dd56b93dfc0bd008b6"
+      "bytes": 2728,
+      "sha256": "42e5c86ce572f8d0d90b15851924b776fc657b341ed9cdbcada1b27f96d4207d"
     },
     "verification/README.md": {
-      "bytes": 1741,
-      "sha256": "cb7ca9b7f0ac74d7f47e754919112fbf4737b3ac37a73aea3f54395b7af7aad5"
+      "bytes": 1857,
+      "sha256": "c0e99d3ca94d92360e90083ec153d90635d369ae6dcaea5824a3bb17bd94b986"
     },
     "verification/evidence/anomaly_inverse.json": {
       "bytes": 14269,

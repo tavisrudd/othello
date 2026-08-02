@@ -14,9 +14,10 @@ The generator uses exact integer and rational arithmetic. It verifies the
 matching-coordinate dictionary, the rational filter and charge vector, the
 finite height-three search over 5,040 normalized filters, and the seven real
 pole domains used in the bounded optimization statement. The replay rebuilds
-the finite enumeration and the paper's charge and probability identities by a
-separate implementation. It does not establish a gauge-theory model or a
-literature-priority claim.
+the finite enumeration and the charge and probability identities by a separate
+implementation.  This bundle is retained as supplementary arithmetic data and
+is not invoked by the main manuscript.  It does not establish a gauge-theory
+model or a literature-priority claim.
 
 ## Exchange-sector complement
 
