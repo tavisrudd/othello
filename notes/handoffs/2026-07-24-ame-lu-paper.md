@@ -29,7 +29,8 @@ four numbered conceptual units, with all downstream sections, equation tags,
 roadmaps, maps, ledgers, figure references, and release identities synchronized.
 The adversarial proof/scope pass, warning-free 51-page build, affected-page and
 whole-paper visual sweeps, complete evidence replay, and public/formal release
-checks pass.  See `2026-08-02-c828-ame-lu-manuscript-tightening.md`.
+checks pass.  Standalone forward commit `a53d40c` is synchronized and unpushed.
+See `2026-08-02-c828-ame-lu-manuscript-tightening.md`.
 
 **C805 closed (2026-08-02): all six explanatory figures won blinded
 comprehension comparisons.**  The adopted vector figures cover axis recovery,

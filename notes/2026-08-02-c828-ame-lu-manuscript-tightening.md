@@ -68,6 +68,10 @@ Rendered numbering follows the intended blocks: equations (3.1)--(3.3),
   `2e918cf5d4f917945fd12c843880778966c9e546b2f89d770d3aa7ace4361353`.
 - `make release-check` passed in 6 minutes 2 seconds, including the complete
   independent evidence replay and both release-tree checks.
+- The standalone paper mirror passed its warning-free 51-page build and
+  43-artifact paper-only verifier.  Its public tree is
+  `297b95ac09a56f140ac5eb88e927cabac734a30304a97c2264cef5b45eb1e2b9`;
+  forward commit `a53d40c` is synchronized and unpushed.
 
 ## Extra-juice and Tao closeout
 
