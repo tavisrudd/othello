@@ -37,7 +37,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Nineteen research passes complete; the theorem is **not** proved. Reports:
+Twenty research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -56,7 +56,8 @@ Nineteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-coordinate-free-upgrades.md`, and
 `notes/2026-08-02-c756-tt-angle-bijections.md`, and
 `notes/2026-08-02-c756-cross-ratio-rank.md`, and
-`notes/2026-08-02-c756-ball-lavrauw-tensor-interface.md`.
+`notes/2026-08-02-c756-ball-lavrauw-tensor-interface.md`, and
+`notes/2026-08-02-c756-alt-attacks.md`.
 
 Branch ledger:
 
@@ -360,6 +361,21 @@ What the Ball--Lavrauw tangent-tensor interface adds:
 - polarity does not produce the $k-1$ blockers required by generalized
   hyperfocused arcs: a passant chord's pole is not on the chord, and angle-pencil
   labels depend on the base point.  The prime-field four-point theorem is inapplicable.
+
+What the alternative-attacks reset adds:
+
+- five non-equivalent routes now have frozen inputs, outputs, and bounded stop gates:
+  lacunary first cofactor, four-point row transitions, sparse integral Paley trades,
+  coupled higher-moment compounds, and the independent masked Rédei gap;
+- the first-cofactor lacunary route remains highest EV for one prime-field pass, but
+  it must produce bounded support or a bounded-order Cartier recurrence rather than
+  restate the rowwise vanishing;
+- the row-transition route is the clean fallback: interpolate the simultaneous angle
+  bijections on the norm-one torus and test least rational degree, pole divisor, and
+  four-point cross-ratio defect using the existing matrices;
+- ordinary rank, another spectral bound, raw entropy, local cumulants, and the
+  missing-set kernel curves remain closed; the prefix groupoid is scouting rather
+  than a proof route until it has a bounded intrinsic state catalogue.
 
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
