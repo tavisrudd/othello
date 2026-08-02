@@ -30,8 +30,8 @@
     {
       "id": "reconstruction",
       "statement": "The minimum supports reconstruct the elliptic scheme and the 78 passant incidence rows.",
-      "current_modes": ["human concurrence reduction", "Lean pair-concurrence recovery", "Lean zero-triple signatures for all 78 geometric rows", "paper-owned independent replay"],
-      "lean_boundary": "uniqueness of the reconstructed 78-row family remains a human argument"
+      "current_modes": ["human concurrence reduction", "Lean pair-concurrence recovery", "Lean seven-shard local-extension exhaustion", "Lean symbolic row-family coverage transport", "paper-owned independent maximal-clique replay"],
+      "lean_boundary": "closed for the decoded four-orbit minimum-support hypergraph by PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique"
     },
     {
       "id": "automorphisms",

@@ -12,8 +12,9 @@ to the two exact pencil profiles.  The fixed-point weight-twelve leaf now
 exhausts the four pencil-profile domains and identifies their 56 solutions
 with the four disjoint 14-support orbit slices; the point stabilizer is
 transitive on each slice.  The concrete association identities and four
-orbit Gram matrices now feed the abstract kernel-spanning theorem.  Two exact
-semantic transports and the remaining release/publication work remain.
+orbit Gram matrices now feed the abstract kernel-spanning theorem.  Row-family uniqueness is
+closed by a semantic seven-set transport and seven local-extension residues.  Only the concrete
+four-anchor automorphism transport and the remaining release/publication work remain.
 
 ## Goal
 
@@ -55,8 +56,8 @@ silently shared with the released Paper-I surface.
    sharded q13 certificate package described in
    `papers/q13-passant-code/verification/README.md`; close the explicitly
    recorded evaluator, orbit exhaustion,
-   row uniqueness and concrete automorphism-
-   anchor boundaries before claiming full Lean coverage.
+   concrete automorphism-anchor boundary before claiming full Lean coverage.  Row uniqueness is
+   green through `PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique`.
 5. Connect every manuscript statement to an exact Lean declaration,
    certificate, citation, or human proof and generate an axiom audit.
 6. Update the released Paper-I companion by forward version: replace the full

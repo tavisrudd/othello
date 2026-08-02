@@ -91,4 +91,55 @@ theorem minimumSupports_eq_weightTwelveLayer
     minimumSupports = ConicPassantCode.supportsOfWeight Incident 12 :=
   certificate.exact_weight_layer
 
+/-- Every passant row in the normalized `q = 13` model contains seven internal points. -/
+theorem passantRow_card (line : PassantLine) :
+    (ConicPassantCode.rowSupport Incident line).card = 7 := by
+  native_decide +revert
+
+/-- A complete transport for admissible seven-sets identifies the reconstructed row family.
+
+The first finite input checks the zero-concurrence signature of every geometric row.  The second
+classifies every seven-set satisfying the intrinsic passant-clique and zero-triple conditions as a
+geometric row.  The theorem packages the two directions of the reconstruction equality. -/
+theorem reconstructedRows_eq_passantRows_of_sevenSet_transport
+    (minimumSupports : Finset (Finset InternalPoint))
+    (geometric_triples_zero : ∀ line : PassantLine,
+      ∀ first second third : InternalPoint,
+        Incident line first → Incident line second → Incident line third →
+          first ≠ second → first ≠ third → second ≠ third →
+          ConicPassantCode.tripleConcurrence minimumSupports first second third = 0)
+    (admissible_seven_set_is_row : ∀ vertices : Finset InternalPoint,
+      vertices.card = 7 → IsPassantClique vertices →
+      (∀ triple ∈ vertices.powersetCard 3,
+        ∀ first ∈ triple, ∀ second ∈ triple, ∀ third ∈ triple,
+          first ≠ second → first ≠ third → second ≠ third →
+            ConicPassantCode.tripleConcurrence minimumSupports first second third = 0) →
+        vertices ∈ ConicPassantCode.rowSupports Incident) :
+    reconstructedRows minimumSupports = ConicPassantCode.rowSupports Incident := by
+  classical
+  ext vertices
+  constructor
+  · intro vertices_mem
+    simp only [reconstructedRows, mem_filter, mem_powersetCard] at vertices_mem
+    obtain ⟨⟨_, vertices_card⟩, vertices_clique, vertices_zero⟩ := vertices_mem
+    apply admissible_seven_set_is_row vertices vertices_card vertices_clique
+    intro triple triple_mem
+    exact vertices_zero triple (Finset.mem_powersetCard.mp triple_mem)
+  · intro vertices_mem
+    obtain ⟨line, _, rfl⟩ := Finset.mem_image.mp vertices_mem
+    simp only [reconstructedRows, mem_filter, mem_powersetCard]
+    refine ⟨⟨subset_univ _, passantRow_card line⟩, ?_, ?_⟩
+    · intro first first_mem second second_mem first_ne_second
+      exact ⟨line, (ConicPassantCode.mem_rowSupport Incident line first).mp first_mem,
+        (ConicPassantCode.mem_rowSupport Incident line second).mp second_mem⟩
+    · intro triple triple_mem first first_mem second second_mem third third_mem
+        first_ne_second first_ne_third second_ne_third
+      exact geometric_triples_zero line first second third
+        ((ConicPassantCode.mem_rowSupport Incident line first).mp
+          (triple_mem.1 first_mem))
+        ((ConicPassantCode.mem_rowSupport Incident line second).mp
+          (triple_mem.1 second_mem))
+        ((ConicPassantCode.mem_rowSupport Incident line third).mp
+          (triple_mem.1 third_mem)) first_ne_second first_ne_third second_ne_third
+
 end RelativeConicArcs.PassantCodeQ13

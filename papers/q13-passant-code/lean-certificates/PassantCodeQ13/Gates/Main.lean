@@ -2,6 +2,7 @@ import RelativeConicArcs.Gates.PassantCodeQ13
 import PassantCodeQ13.WeightTen.Aggregate
 import PassantCodeQ13.MinimumWords.Reconstruction
 import PassantCodeQ13.MinimumWords.Exhaustion
+import PassantCodeQ13.MinimumWords.RowUniqueness.Transport
 import PassantCodeQ13.SemanticTransports
 import PassantCodeQ13.AssociationAlgebra
 import PassantCodeQ13.AssociationTransport
@@ -12,13 +13,12 @@ import PassantCodeQ13.AssociationTransport
 This gate imports separately elaborated weight-ten and minimum-orbit leaves.  It establishes the
 arbitrary-word reduction to the two passant-pencil profiles, the fixed-base syndrome exclusions,
 four 91-element projective orbits, span rank 36 for each orbit, pair-concurrence recovery of passant
-joins, and the zero-triple signatures of all 78 geometric passant rows.
+joins, and exact reconstruction of the 78 geometric passant rows.
 
 The gate does not claim the full minimum-distance or reconstruction theorem.  Its fixed-point
 weight-twelve terminal exhausts the four parity profiles and identifies their 56 solutions with
 the four orbit slices; transport from the fixed point uses the symmetric-square projective action.
-The remaining scope exclusions are uniqueness of the recovered row family and the projective
-anchor theorem for all coordinate automorphisms.
+The remaining scope exclusion is the projective anchor theorem for all coordinate automorphisms.
 -/
 
 namespace PassantCodeQ13.Gates.Main
@@ -88,6 +88,15 @@ theorem fixedPointSlicesAreStabilizerOrbits :
       (fixedPointStabilizerOrbit (encodeSupport representativeDihedralC)).toFinset =
         ((supportOrbit representativeDihedralC).filter fun support => support.testBit 0).toFinset :=
   fixedPoint_slices_are_stabilizer_orbits
+
+/-- The intrinsic seven-clique and zero-concurrence test recovers exactly the geometric passant-row
+family from the four displayed minimum-support orbits. -/
+theorem recoveredRowFamilyIsUnique :
+    RelativeConicArcs.PassantCodeQ13.reconstructedRows
+        PassantCodeQ13.MinimumWords.RowUniqueness.semanticMinimumSupports =
+      RelativeConicArcs.ConicPassantCode.rowSupports
+        RelativeConicArcs.PassantCodeQ13.Incident :=
+  PassantCodeQ13.MinimumWords.RowUniqueness.reconstructed_rows_eq_geometric_passant_rows
 
 /-- Each displayed minimum-word orbit spans the kernel of the rho-zero relation matrix. -/
 theorem minimumOrbitsSpanRhoZeroKernel :

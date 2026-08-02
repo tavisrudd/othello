@@ -360,7 +360,8 @@ checks the remaining finite bulk:
 fourteen weight-ten syndrome shards, exact bit-row rank \(42\), four
 projective kernel orbits of size \(91\) and span rank \(36\), the binary
 association identities, pair-color recovery, the zero-triple signatures
-of the \(78\) geometric rows, and the fixed-point weight-twelve exhaustion.
+of the \(78\) geometric rows, uniqueness of the recovered row family, and the fixed-point
+weight-twelve exhaustion.
 The last check implements the four pencil-profile domains by a
 syndrome-indexed meet in the middle and identifies their \(56\) solutions with
 the four disjoint \(14\)-support orbit slices.  Explicit recovery and expansion maps transport
@@ -376,6 +377,18 @@ declaration is
 These checks use native
 evaluation and expose the corresponding declaration-local axioms in the pinned
 toolchain.
+
+Row-family uniqueness is compressed to local extension pools.  For each three-point seed, retain
+the points that extend it to an admissible four-set.  Every non-row seed has at most ten such
+extensions.  Seven first-index residue leaves check every four-subset of these pools, while a
+symbolic coverage argument shows that every admissible seven-set occurs in one of those checks.
+The three-point shortcut itself is false: there are (1456) non-row passant triangles with zero
+triple concurrence, so the four-extension test is essential rather than a computational
+convenience.
+The terminal declaration is
+\nolinkurl{PassantCodeQ13.Gates.Main.recoveredRowFamilyIsUnique}.  The independent replay follows
+a different route by enumerating all \(1716\) passant seven-cliques before selecting the \(78\)
+zero-concurrence rows.
 
 For weight eight, the shared formalization derives saturation of the seven
 passant pencils from the semantic row equations, identifies the \(42\)

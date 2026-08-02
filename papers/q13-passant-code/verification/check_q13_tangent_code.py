@@ -445,6 +445,47 @@ def verify_distance() -> None:
     assert len(reconstructed_rows) == 78
     assert reconstructed_rows == actual_rows
 
+    def is_admissible(vertices: tuple[int, ...]) -> bool:
+        return all(
+            adjacency[first] >> second & 1
+            for first, second in itertools.combinations(vertices, 2)
+        ) and all(
+            triple_concurrences[triple] == 0
+            for triple in itertools.combinations(vertices, 3)
+        )
+
+    row_triples = {
+        triple
+        for row in actual_rows
+        for triple in itertools.combinations(sorted(row), 3)
+    }
+    nonrow_admissible_triples = [
+        triple
+        for triple in itertools.combinations(range(78), 3)
+        if triple not in row_triples and is_admissible(triple)
+    ]
+    assert len(row_triples) == 2730
+    assert len(nonrow_admissible_triples) == 1456
+    nonrow_admissible_triple_set = set(nonrow_admissible_triples)
+    extension_pool_sizes = []
+    for triple in sorted(row_triples) + nonrow_admissible_triples:
+        extension_pool = [
+            point
+            for point in range(78)
+            if point not in triple and is_admissible((*triple, point))
+        ]
+        if triple in nonrow_admissible_triple_set:
+            extension_pool_sizes.append(len(extension_pool))
+        for extra in itertools.combinations(extension_pool, 4):
+            vertices = (*triple, *extra)
+            if is_admissible(vertices):
+                assert frozenset(vertices) in actual_rows
+    assert max(extension_pool_sizes) == 10
+    assert Counter(extension_pool_sizes) == Counter(
+        {5: 208, 6: 201, 4: 199, 3: 196, 8: 143, 7: 132,
+         2: 123, 9: 83, 10: 71, 1: 56, 0: 44}
+    )
+
     def quadratic(point: tuple[int, int, int]) -> int:
         return (point[1] * point[1] - point[0] * point[2]) % q
 

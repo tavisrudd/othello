@@ -34,15 +34,19 @@ The minimum-word modules expand
 one symmetric-stabilizer and three dihedral-stabilizer representatives into four disjoint
 91-element kernel orbits, each of binary span rank 36.  At a fixed point, the order-28 point
 stabilizer acts transitively on each 14-support slice.  The reconstruction leaf checks pair-color
-recovery of passant joins and the zero-triple signatures of all 78 geometric rows.
+recovery of passant joins.  Seven first-index residue leaves check every four-subset of the local
+extension pool of each of the 4,186 canonically ordered admissible three-point seeds; the largest
+non-row pool has ten points.  A symbolic
+coverage argument then proves that the intrinsic seven-clique test recovers exactly the 78
+geometric rows; the independent replay instead enumerates all 1716 passant seven-cliques.
 
 The terminal theorems use native evaluation.  The axiom audit must therefore report the
 declaration-local native-decision axioms emitted by the pinned Lean toolchain.  No hash is used as a
 substitute for checking the incidence semantics or profile coverage.
 
-The package does not prove that the four projective orbits exhaust the complete weight-twelve
-layer, prove uniqueness of the recovered row family, or classify all coordinate automorphisms.
-These are explicit semantic boundaries, not computational claims.
+The package does not transport the fixed-point exhaustion to equality of the four projective orbits
+with the complete weight-twelve layer, or classify all coordinate automorphisms.  These are
+explicit semantic boundaries, not computational claims.
 
 From this package root, the public replay command is:
 
