@@ -1,13 +1,13 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "a2a22840dc165ad1390295036171f360de5308f41bc1acf810c98ab153ef1c2a",
+  "main_source_sha256": "68b02675bf5c67fa0e3b2bafbbf41bb1c3a013ed0b4ce9414044cfc28112605c",
   "section_sha256": {
-    "sections/01-introduction.tex": "f53f249612800981b4870584c5b2aaeb052f75edbdb348035847e18e5551ed6b",
+    "sections/01-introduction.tex": "462dc5bee18de8e8897b06eb60837260d311f52edceb364cffa3fd71aa23182c",
     "sections/02-orientation-cover.tex": "34328aed7d067a8f43efb7875769410e66fe02679fad391a23beb9996adb366b",
     "sections/03-orientation-source.tex": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822",
     "sections/04-arithmetic-specialization.tex": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455",
-    "sections/05-golden-operator.tex": "b7ccde137b680980706729b35d62c69208be4a63ee97e93380a4be5e80fb8a33",
+    "sections/05-golden-operator.tex": "64446d3074cf684bc5884fb2f649de4b7fede5bdbe603953faf118fda418960c",
     "sections/05-harmonic-realization.tex": "278565585415fd1e8a8d73e13536b6a5583c3b5cb19e5b0ed8e213cbb7f53fc3",
     "sections/09-conclusion.tex": "0c3cb0fed30d0a69b7d5f1a1564b8199903b512f0f68c04ead171c0e1b6d549b",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
@@ -21,7 +21,7 @@
       "environment": "theorem",
       "title": "Arithmetic incidence cover",
       "source": "sections/01-introduction.tex",
-      "source_line": 86,
+      "source_line": 90,
       "sha256": "6d903edd8afda2dfcabeca11638ed302f19edfb75d50fbb001e36983d4eac34a",
       "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nIf \\(\\mathcal N\\to\\mathbf P(H)\\) is its finite Stein normalization, then,\nafter normalizing the anti-invariant summand, its algebra is\n\\[\n \\mathcal O\\oplus\\mathcal O(-3),\\qquad z^2=5J_0.\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
     },
@@ -30,7 +30,7 @@
       "environment": "proposition",
       "title": "Relative marked orientation bridge",
       "source": "sections/01-introduction.tex",
-      "source_line": 150,
+      "source_line": 154,
       "sha256": "13be624e23ff39cd96f99fa9409d47733f8dc4c27d97e1fe66c97462d2e9c4db",
       "tex": "\\begin{proposition}[Relative marked orientation bridge]\n\\label{thm:orientation-source}\nFix a marked bridge datum \\(\\mathfrak m\\).  Let\n\\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) they are the two distinct icosahedral configurations;\non the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nRelative to \\(\\mathfrak m\\), equip \\(B_+\\) with the source\n\\([C_{\\mathfrak m},Z_{\\mathfrak m}]_{\\rm or}\\) and equip \\(B_-\\) with its\ndeck-opposite.  At \\([xyz]\\), the golden\nexchanger identifies this opposite with the conjugate configuration and\nthe representative\n\\((-C_{\\mathfrak m},-Z_{\\mathfrak m})\\).  Under the marked primitive\npair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same relative convention fixes the sign of the degree-six cubic in\nTheorem~\\ref{thm:harmonic-main}.  The normalized component alone is not\nasserted to determine \\(\\mathfrak m\\).\n\\end{proposition}"
     },
@@ -75,7 +75,7 @@
       "environment": "theorem",
       "title": "Golden operator and classical cubic shadows",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 430,
+      "source_line": 433,
       "sha256": "c9d9f2663a7101e66dcccdf3bffb7881aa4f5da2330fcd6d1971cbef17290924",
       "tex": "\\begin{theorem}[Golden operator and classical cubic shadows]\n\\label{thm:operator-shadows}\nFor a marked bridge datum and its coherent outer family:\n\\begin{enumerate}\n\\item The triangle products of \\(C_T\\) satisfy\n\\[\n (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}=4\\epsilon_T(S)\n \\quad(S=\\{i,j,k\\}),\n\\]\nso \\(Z_T=J_T\\) is the switching-invariant orientation cubic on \\(A_X\\).\nThe four-point two-graph identity and pair balance recover the conference\nswitching class; after fixing a vertex, the negative edges on the other five\nvertices form a pentagon.\n\\item The same cubic is a commutator Pfaffian:\n\\[\n \\operatorname{Pf}[D_x,C_T]=4Z_T(x),\n \\qquad\n \\det[D_x,C_T]=16Z_T(x)^2.\n\\]\nOver \\(E=\\Q(\\sqrt5)\\), put\n\\(P_{T,\\pm}=(I\\pm C_T/\\sqrt5)/2\\) and\n\\(B_T(x)=P_{T,-}D_xP_{T,+}\\).  After orienting the two determinant lines,\n\\[\n Z_T(x)=\\pm10\\sqrt5\\det B_T(x).\n\\]\n\\item The six coordinates \\((Z_T)_{T\\in\\mathcal T}\\) satisfy\n\\[\n \\sum_TZ_T=0,\\qquad \\sum_TZ_T^3=0.\n\\]\nThey are the signed Joubert coordinates and hence define the classical map\nfrom six labelled points to the Segre cubic\n\\[\n \\left\\{[z]\\in\\mathbf P^5:\\sum_Tz_T=\\sum_Tz_T^3=0\\right\\}.\n\\]\nInside its hyperplane \\(z_T=0\\), the remaining linear relation cuts the\nambient space to \\(\\mathbf P^3\\), and the remaining cubic equation is the\ndiagonal Clebsch cubic surface.\n\\item The centered determinants\n\\[\n W_T=Z_T^2-\\frac16\\sum_UZ_U^2\n     =\\frac1{16}\\operatorname{center}_T\\det[D_x,C_T]\n\\]\nsatisfy\n\\[\n \\sum_TW_T=0,\n \\qquad\n \\left(\\sum_TW_T^2\\right)^2=4\\sum_TW_T^4.\n\\]\nThus \\(W\\) is the Segre--Igusa polar map.\n\\end{enumerate}\n\\end{theorem}"
     },

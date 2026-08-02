@@ -379,7 +379,8 @@ For a three-subset \(S\subset X\), set
 The Hodge orientation is transported with the ordered axis basis.  Thus an
 odd relabelling or switching transports both \(K_T\) and the sign of its
 diagonal; it is not legitimate to switch the matrix while holding the old
-Hodge convention fixed.
+Hodge convention fixed.  Figure~\ref{fig:four-cubic-shadows} separates the
+four normalized formulas from their classical consequences.
 
 \begin{figure}[t]
 \centering
@@ -389,30 +390,31 @@ Hodge convention fixed.
   center/.style={box,text width=43mm,thick},
   target/.style={box,text width=42mm},
   arr/.style={-{Latex[length=2mm]},semithick},
+  eqline/.style={semithick},
   lab/.style={font=\scriptsize,fill=white,inner sep=1.2pt}
 ]
 \node[box] (tri) at (-3.4,2.3) {triangle holonomy\\
-  \(\sum_S\epsilon_T(S)x_S\)};
+  \(\sum_S\epsilon_T(S)x_S=Z_T\)};
 \node[box] (wedge) at (3.4,2.3) {middle exterior power\\
-  \(\operatorname{diag}(*\!\bigwedge^3C_T)=4\epsilon_T\)};
+  \(\frac14\sum_S(K_T)_{SS}x_S=Z_T\)};
 \node[box] (pf) at (-3.4,0.5) {commutator Pfaffian\\
-  \(\operatorname{Pf}[D_x,C_T]=4Z_T\)};
-\node[box] (det) at (3.4,0.5) {cross-golden determinant\\
-  \(Z_T=\pm10\sqrt5\det B_T(x)\)};
-\node[center] (z) at (0,-1.15) {normalized to the same cubic\\
+  \(\frac14\operatorname{Pf}[D_x,C_T]=Z_T\)};
+\node[box] (det) at (3.4,0.5) {oriented cross-golden determinant\\
+  \(\pm10\sqrt5\det B_T(x)=Z_T\)};
+\node[center] (z) at (0,-1.15) {four normalized formulas agree\\
   \(Z_T=J_T\)};
-\draw[arr] (tri.south east) -- (z.north west);
-\draw[arr] (wedge.south west) -- (z.north east);
-\draw[arr] (pf.south east) -- (z.west);
-\draw[arr] (det.south west) -- (z.east);
+\draw[eqline,rounded corners=3pt] (tri.west) -- ++(-4mm,0) |- (z.north west);
+\draw[eqline,rounded corners=3pt] (wedge.east) -- ++(4mm,0) |- (z.north east);
+\draw[eqline] (pf.south east) -- (z.west);
+\draw[eqline] (det.south west) -- (z.east);
 
-\node[target] (outer) at (0,-2.75) {six outer translates
+\node[target] (outer) at (0,-2.75) {six outer coordinates\\
   \((Z_T)_{T\in\mathcal T}\)};
 \node[target] (segre) at (-3.4,-4.45) {Segre cubic\\
   \(\sum_TZ_T=\sum_TZ_T^3=0\)};
 \node[target] (igusa) at (3.4,-4.45) {centered squares \(W_T\)\\
   Segre--Igusa polar map};
-\node[target] (clebsch) at (-3.4,-6.15) {coordinate section \(Z_T=0\)\\
+\node[target] (clebsch) at (-3.4,-6.15) {hyperplane section \(z_T=0\)\\
   diagonal Clebsch cubic};
 \draw[arr] (z) -- (outer);
 \draw[arr] (outer.south west) -- node[lab,above left] {Segre relations}
@@ -422,8 +424,9 @@ Hodge convention fixed.
 \draw[arr] (segre) -- node[lab,right] {section} (clebsch);
 \end{tikzpicture}
 \caption{The four constructions of the same marked cubic and their classical
-targets.  The signs in the determinant branch use the transported
-determinant-line orientations.}
+targets.  Plain connectors denote the normalized identities displayed in the
+upper boxes; arrows denote subsequent constructions.  The transported
+determinant-line orientation selects the sign in the cross-golden formula.}
 \label{fig:four-cubic-shadows}
 \end{figure}
 

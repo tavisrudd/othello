@@ -22,7 +22,8 @@ realizations.  On the six-axis carrier the marked sign determines a
 conference operator whose Pfaffian,
 determinant, and middle-exterior shadows give the classical Joubert, Segre,
 Igusa, and diagonal Clebsch models.  On the ten face axes it returns as the
-degree-six Gaunt cubic.
+degree-six Gaunt cubic.  Figure~\ref{fig:source-shadow-return} records this
+architecture and the role of the marking.
 
 \begin{figure}[H]
 \centering
@@ -35,10 +36,12 @@ degree-six Gaunt cubic.
   arr/.style={-{Latex[length=2mm]},semithick},
   lab/.style={font=\scriptsize,fill=white,inner sep=1.5pt}
 ]
-\node[wide] (cover) {Hitchin incidence cover\\[-1pt]
+\node[box] (cover) {finite Stein normalization\\of Hitchin's cover\\[-1pt]
   \(z^2=5J_0\)};
-\node[wide,below=of cover] (mark) {chosen golden sign relative to the\\
-  marked bridge datum \(\mathfrak m\)};
+\node[box,right=of cover] (datum) {marked bridge datum \(\mathfrak m\)\\
+  chart lift, outer and Petersen labels};
+\node[wide,below=15mm of $(cover)!0.5!(datum)$] (mark) {chosen golden sign\\
+  with its compatible labels};
 \node[box,below left=of mark] (six) {six ordered axes\\
   \(C^2=5I\), oriented cubic \(Z_{\mathfrak m}\)};
 \node[box,below right=of mark] (ten) {ten labelled face axes\\
@@ -48,15 +51,16 @@ degree-six Gaunt cubic.
 \node[box,below=of ten] (gaunt) {degree-six harmonic return\\
   \(\displaystyle \frac1{4\pi}\int F_y^3
      =-\frac{784000}{1247103}\sigma_3(y)\)};
-\draw[arr] (cover) -- node[lab,right] {normalize and mark} (mark);
-\draw[arr] (mark) -- node[lab,above left] {six-axis data} (six);
-\draw[arr] (mark) -- node[lab,above right] {Petersen labels} (ten);
+\draw[arr] (cover) -- node[lab,above left] {pull back to \(\iota_t\)} (mark);
+\draw[arr] (datum) -- node[lab,above right] {select component and label} (mark);
+\draw[arr] (mark) -- (six);
+\draw[arr] (mark) -- (ten);
 \draw[arr] (six) -- (classical);
 \draw[arr] (ten) -- (gaunt);
 \end{tikzpicture}%
 }
-\caption{The source--shadow--return scheme.  Every arrow below the incidence
-cover uses the fixed datum \(\mathfrak m\).  The two branches compare the
+\caption{The source--shadow--return scheme.  Solid arrows are constructions
+after the two top inputs have been fixed.  The lower branches compare the
 chosen sign; they neither identify the displayed cubics nor define a map
 between their ambient harmonic spaces.}
 \label{fig:source-shadow-return}
