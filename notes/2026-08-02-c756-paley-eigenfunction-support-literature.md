@@ -482,3 +482,312 @@ Each negative below lists the exact domain searched and the stop condition.
    support `filter=reference.doi`, and OpenCitations COCI was unreachable at query time, so the
    closure in Section 6 is two-index (OpenAlex + Semantic Scholar), not three. Treat the "no work
    solves Problem 11" claim as strong but not exhaustively index-confirmed.
+
+---
+
+# Follow-up (same day): unconditional bounds on non-line cliques of `P(q^2)`
+
+Numbered **7** rather than 6 because §6 above is already the forward-citation section; the
+coordinator's requested title is kept.
+
+## 7. Unconditional bounds on cliques of `P(q^2)` not contained in a line
+
+Setting: a clique of `P(q^2)` is a set `C` with `C - C` inside the squares together with `0`.
+"Line" = image `a F_q + b` of the subfield with `chi(a) = 1`, equivalently a line of the affine
+plane `AG(2,q)` with square direction; these are exactly the Delsarte cliques, of size `q`.
+Question: the best explicit `f(q)` in a theorem "a clique of `P(q^2)` either lies in a line or has
+size at most `f(q)`".
+
+### 7.0 Short answer
+
+**`f(q) = q - 1`, and nothing better is known.** That bound is just the contrapositive of
+Blokhuis's theorem. Every stability improvement in the literature requires edge density strictly
+below `1/2`, i.e. `m >= 3` in `GP(q^2, m)`, and therefore excludes the Paley graph itself. The
+authors closest to the problem say so in print, twice, in 2022 and 2023 (quoted in 7.3).
+
+### 7.1 The one unconditional theorem: Blokhuis, and its modern reproofs
+
+A. Blokhuis, "On subsets of `GF(q^2)` with square differences", *Nederl. Akad. Wetensch. Indag.
+Math.* **46** (1984), no. 4, 369-372. As restated by Yip (arXiv:2505.04061v2, §1, verbatim):
+
+> The well-known Van Lint-MacWilliams' conjecture states that if `q` is an odd prime power, and
+> `A subset F_{q^2}` such that `0, 1 in A`, `|A| = q`, and `a - b` is a square for each `a, b in A`,
+> then `A` must be the subfield `F_q`.
+
+and as restated by Brouwer-Goryainov-Shalaginov-Yip (arXiv:2503.09914v2, §1.5, verbatim):
+
+> Blokhuis [4] showed for Paley graphs of square order `q = r^2` that the only cliques of size `r`
+> are lines of the underlying affine plane of order `r` (images `aF + b` of the subfield
+> `F = F_r`, where `a` is a nonzero square).
+
+Contrapositive, which is the answer to the coordinator's question: a clique of `P(q^2)` not
+contained in a line has size at most `q - 1`. This is `f(q) = q - 1` and it is unconditional.
+
+Sziklai's extension (P. Sziklai, "On subsets of `GF(q^2)` with `d`th power differences", *Discrete
+Math.* **208/209** (1999) 547-555, Theorem 1.2) covers `d | (q+1)`, `d >= 2`, and gives the same
+`|A| = q` conclusion; Goryainov-Shalaginov-Yip state it as their Lemma 1.1
+(arXiv:2203.16081v3, p. 2), verbatim:
+
+> **Lemma 1.1** ([3], [21, Theorem 1.2]). Let `q` be an odd prime power and `m` a divisor of
+> `(q + 1)` such that `m > 1`, then in the generalised Paley graph `GP(q^2, m)`, the only maximum
+> clique containing `0, 1` is the subfield `F_q`; in particular, each maximum clique in
+> `GP(q^2, m)` is the image of the subfield `F_q` under an affine transformation.
+
+Two recent reproofs, both still about `|A| = q` exactly and therefore giving nothing below `q`:
+
+- S. Asgarli, C. H. Yip, "Van Lint-MacWilliams' conjecture and maximum cliques in Cayley graphs
+  over finite fields", *J. Combin. Theory Ser. A* **192** (2022), Paper No. 105667, 23 pp.;
+  arXiv:2106.01522. Theorem 1.3 (verbatim): "Let `n >= 2` be an integer and `epsilon > 0` a real
+  number. Let `X = Cay(F^+_{q^2}, S)` be a Peisert-type graph, where `q = p^n` and
+  `p > 4.1 n^2 / eps^2`. Suppose that there is a nontrivial multiplicative character `chi` of
+  `F_{q^2}`, such that the set `{chi(x) : x in S}` is `eps`-lower bounded. Then in the Cayley graph
+  `X`, the only maximum clique containing `0, 1` is the subfield `F_q`."
+- C. H. Yip, "Van Lint-MacWilliams' conjecture and maximum cliques in Cayley graphs over finite
+  fields, II", *J. Combin. Theory Ser. A* (2026); arXiv:2505.04061v2, 14 Jan 2026. Theorem 1.1
+  (verbatim): "Let `S subset F*_{q^2}` with `S = -S` such that
+  `|SSSS^{-1}S^{-1}S^{-1}| <= (q^2-1)/2` or `|SS^{-1}S^{-1}F*_q| <= (q^2-3)/2`. If
+  `A subset F_{q^2}` with `|A| = q` and `0, 1 in A` such that `A - A subset S union {0}`, then `A`
+  is the subfield `F_q`." Corollary 1.3 recovers Blokhuis and Sziklai. Every hypothesis fixes
+  `|A| = q`; there is no statement about `|A| < q`, and the words "stability", "second largest" and
+  "Baker" do not occur in the paper (verified by grep over the full text).
+
+Also checked and not applicable: C. H. Yip, "Maximality of subfields as cliques in Cayley graphs
+over finite fields", *Algebraic Combinatorics* **6** (2023), no. 4, 901-905,
+DOI `10.5802/alco.291` — proves `F_q` is a *maximal* clique in various graphs, i.e. a lower-bound
+direction, not an upper bound on other cliques.
+
+### 7.2 Hanson-Petridis: prime order only, does not touch square order
+
+B. Hanson, G. Petridis, "Refined estimates concerning sumsets contained in the roots of unity",
+*Proc. London Math. Soc.* (3) **122** (2021), no. 3, 353-358, DOI `10.1112/plms.12322`; preprint
+arXiv:1905.09134v3. Abstract, verbatim:
+
+> We prove that the clique number of the Paley graph is at most `sqrt(p/2) + 1`, and that any
+> supposed additive decompositions of the set of quadratic residues can only come from co-Sidon
+> sets.
+
+This is the Paley graph of **prime** order `p`, where the clique number is conjecturally around
+`log p` and the trivial bound is `sqrt(p)`. For square order `q^2` the clique number is exactly
+`q = sqrt(q^2)`, so the Hanson-Petridis inequality is an equality there and carries no information;
+it gives no bound on non-line cliques. Their *method* (Stepanov / polynomial-method style estimates
+for sumsets in roots of unity) is what Asgarli-Yip adapted in arXiv:2106.01522, and that adaptation
+lands exactly on the `|A| = q` statement quoted in 7.1 — not below `q`.
+
+Related and also not applicable: C. H. Yip, "Gauss sums and the maximum cliques in generalized
+Paley graphs of square order", arXiv:2103.09438v2 (published in *Finite Fields Appl.*), whose
+result is that the trivial bound `sqrt(q)` on `omega(GP(q,d))` is tight **iff** `d | (sqrt(q) + 1)`
+— a statement about when maximum cliques of size `q` exist at all, not about the next size down.
+C. H. Yip, "On the clique number of Paley graphs of prime power order" concerns non-square orders
+and gives no `P(q^2)` content.
+
+### 7.3 The stability literature, and why every piece of it excludes `m = 2`
+
+This is the decisive negative, and it is stated explicitly by the authors themselves.
+
+**(a) Sziklai's stability theorem needs `m >= 3`.** Goryainov-Shalaginov-Yip, Lemma 1.2
+(arXiv:2203.16081v3, p. 2), verbatim:
+
+> **Lemma 1.2** ([21, Theorem 1.3]). Let `q` be an odd prime power and `m` a divisor of `(q + 1)`
+> such that `m >= 3`. If `C` is a clique in the generalised Paley graph `GP(q^2, m)`, such that
+> `0, 1 in C`, and `|C| > q - (1 - 1/m) sqrt(q)`, then `C subset F_q`.
+
+Reference [21] is Sziklai (1999), Theorem 1.3. Note the hypothesis `m >= 3`. If one formally
+substituted `m = 2` the threshold would read `|C| > q - sqrt(q)/2`. The next paragraph of GSY23
+(p. 3) says in terms exactly on point, verbatim:
+
+> Lemma 1.2 is a consequence of the stability of the direction set determined by point sets in the
+> affine plane `AG(2, q)` (see [22, Theorem 4] and [21, Theorem 3.1]). It is conjectured that the
+> lower bound on `|C|` can be improved significantly. In particular, when `m = 2`, it is conjectured
+> in [4, 10, 11] that there is no maximal clique with size between `(q+3)/2` and `q` (exclusive).
+> Equivalently, in the case `m = 2`, it is conjectured that the lower bound on `|C|` can be improved
+> to `(q+3)/2`; **however, even the weaker bound `q - sqrt(q)/2` stated in Lemma 1.2 is not known to
+> be true.**
+
+(Emphasis mine.) So the `m = 2` case of the Sziklai-type stability bound — `f(q) = q - sqrt(q)/2`,
+which would be the weakest imaginable improvement on `q - 1` — is open. `[4]` is Baker-Ebert-
+Hemmeter-Woldar, `[10]` is GKSV18, `[11]` is GMS22.
+
+**(b) Yip says no partial progress exists.** C. H. Yip, "Erdős-Ko-Rado theorem in Peisert-type
+graphs", *Canad. Math. Bull.* (2023); arXiv:2302.00745v3, §1, p. 2, verbatim (he writes `ST(k)`
+for "each clique of size at least `q - k` is contained in a canonical clique"):
+
+> One widely open conjecture, due to by Baker, Ebert, Hemmeter, and Woldar [3], states that the
+> second largest maximal clique in the Paley graph with order `q^2` has size `(q + r(q))/2`, where
+> `r(q) = 1` or `3`, depending on `q` modulo 4. In other words, Paley graphs of order `q^2` has the
+> property `ST((q - r(q))/2 - 1)`. **To the best knowledge of the author, no partial progress has
+> been made for this conjecture.** For `d`-Paley graphs of order `q^2` with `d >= 3`, Sziklai
+> [19, Theorem 1.3] showed they have the property `ST(c sqrt(q))` for some positive constant `c`
+> (depending on `d`); we refer to [2, Corollary 4.4] and [13, Section 6] for some generalization and
+> improvement on his results. **However, all known results in this direction assume the edge density
+> of the graph being strictly less than 1/2.** In general, such type of stability questions is
+> widely open for Peisert-type graphs.
+
+(Emphasis mine.) `P(q^2)` has edge density exactly `1/2`, so it falls outside every result named
+there. This is a 2023 peer-reviewed statement by the most active author in the area, and I found
+nothing published since that changes it.
+
+**(c) The two named improvements, checked individually against `m = 2`.**
+
+- Asgarli-Yip, arXiv:2106.01522, Corollary 4.4, verbatim: "Under the same assumptions as in
+  Theorem 1.3, if `|S| < (q^2-1)/2`, then for any clique `C` in `X` with
+  `|C| > q - 1 - (sqrt(q))/(m) sqrt(q)`" — the OCR of the displayed fraction is unreliable, but the
+  gating hypothesis is unambiguous: `|S| < (q^2-1)/2`. For `P(q^2)` the connection set is the set of
+  nonzero squares, `|S| = (q^2-1)/2` exactly, so the hypothesis fails. Excluded.
+- Goryainov-Shalaginov-Yip, §6 "Stability of canonical cliques". Theorem 6.1
+  (arXiv:2203.16081v3, p. 29), verbatim: "Let `m | (q+1)` and `2 <= m <= (q+1)/3`. If `C'` is a
+  maximal clique in the generalised Paley graph `GP(q^2, m)` which is not maximum, then
+  `|C'| <= ((q+1)/m - 1)^2`; moreover, if `p` does not divide `(m-1)` and `m <= (q+1)/4`, then
+  `|C'| <= 1 + (q+1)/m ((q+1)/m - 3)`." Corollary 6.2, verbatim: "Assume `m > (q+1)/sqrt(q+1)` and
+  `m | (q + 1)`. If `C` is a clique in the generalised Paley graph `GP(q^2, m)` such that
+  `0, 1 in C` and `|C| > ((q+1)/m - 1)^2`, then `C subset F_q`. Moreover, if `p` does not divide
+  `(m-1)` and `m <= (q+1)/4`, then the previous statement holds for `|C'| > 1 + (q+1)/m((q+1)/m-3)`."
+
+  Theorem 6.1 *does* formally admit `m = 2`, but it is vacuous there: with `w = (q+1)/m = (q+1)/2`
+  the bound `(w-1)^2 = ((q-1)/2)^2` is quadratic in `q`, far above the trivial `q`, and the refined
+  `1 + w(w-3)` is likewise quadratic (my arithmetic from the quoted statement). Corollary 6.2, the
+  useful one, requires `m > sqrt(q+1)`, which excludes `m = 2` for every `q >= 4`. GSY23 says this
+  in its own words on p. 3, verbatim: "We provide a significant improvement on Lemma 1.2 in
+  Corollary 6.2, provided that `m > sqrt(q)`." So GSY23 contributes nothing to `P(q^2)`.
+- Asgarli, Goryainov, Lin, Yip, "The EKR-Module Property of Pseudo-Paley Graphs of Square Order",
+  *Electron. J. Combin.* **29** (2022), no. 4, Paper 4.33, Corollary 8, as quoted in Yip
+  arXiv:2302.00745v3 Theorem 2.2, verbatim: "If `q > (m - 1)^2`, then all maximum cliques [in a
+  Peisert-type graph of type `(m,q)`] are canonical." For `P(q^2)`, `m = (q+1)/2` and
+  `q > ((q-1)/2)^2` fails for `q >= 5`. Excluded, and in any case it is again a statement about
+  maximum cliques only.
+
+### 7.4 The one unconditional structural partial result I did find
+
+Brouwer-Goryainov-Shalaginov-Yip, arXiv:2503.09914v2, Theorem 2.1 (§2, p. 6), verbatim:
+
+> **Theorem 2.1** Let `r` be a power of the prime `p`, and consider a Desarguesian net of order `r`
+> and degree `m`. If `L` is a line and `x` a point outside, then the clique `{x} union (x^perp cap L)`
+> in the collinearity graph of the net is contained in a unique maximal clique `C_{x,L}`. Moreover,
+> when `p` does not divide `(m - 1)`, if `{x} union (x^perp cap L)` is not maximal, then `C_{x,L}`
+> is contained in the union `L union M` of two lines, where `M` is a unique line passing through `x`.
+
+and Proposition 2.5 (§2, p. 8), verbatim:
+
+> **Proposition 2.5** Let `2 < m < r - 1`. One has `|C_{x,L}| = m - 1 + h p^f` where `h` is a
+> positive integer such that `h | gcd(r - 1, m - 2, p^f - 1)`, and `f` is a nonnegative integer such
+> that `p^f | gcd(r, m - 1)`.
+
+Specialization to `P(r^2)` (my arithmetic, not stated in the paper): the Paley graph is the
+Desarguesian net of order `r`, degree `m = (r+1)/2`, so `m - 1 = (r-1)/2`; since `r` is a power of
+`p` we have `gcd(r, (r-1)/2) = 1`, forcing `p^f = 1`, hence `|C_{x,L}| = (r-1)/2 + h` with
+`h | gcd(r-1, (r-3)/2)`. Also `p` never divides `m - 1 = (r-1)/2` for `r` a power of `p`, so the
+second clause of Theorem 2.1 always applies to the Paley case. Taking `h = 1` and `h = 2` recovers
+the Baker et al. sizes `(r+1)/2` and `(r+3)/2`.
+
+This is unconditional and explicit, but it constrains only maximal cliques that contain a whole
+configuration `{x} union (x^perp cap L)` — a point together with all `(r-1)/2` of its neighbours on
+some line. It says nothing about a clique that meets every line in fewer points. It is the only
+thing I found that could reasonably be called partial progress toward the gap conjecture, and even
+BGSY26 does not present it as such.
+
+### 7.5 What exactly is proved, versus computer-verified
+
+**Proved:**
+- A clique of `P(q^2)` of size `q` is a line (Blokhuis 1984; reproved by Asgarli-Yip 2022 and Yip
+  2026). Hence non-line cliques have size `<= q - 1`.
+- `{x} union (x^perp cap C)` for `x` outside a line `C` is a maximal clique of size `(q+1)/2` when
+  `q = 1 (mod 4)`, and `{x, x^q} union (x^perp cap C)` is maximal of size `(q+3)/2` when
+  `q = 3 (mod 4)` and `C = F_q` (Baker-Ebert-Hemmeter-Woldar 1996; alternative proof in BGSY26 §2).
+- `Q_0` (resp. `Q_0 union {0}`) is a maximal coclique of size `(q+1)/2` (resp. maximal clique of
+  size `(q+3)/2`) (GKSV18 Theorem 1), and the two families correspond under an explicit linear
+  fractional map (GMS22; BGSY26 Propositions 1.1-1.2).
+- The structural results of BGSY26 §2 quoted in 7.4.
+
+**Not proved, only conjectured:** that `(q + r(q))/2` is the second largest clique size, i.e. that
+there is no maximal clique of size strictly between `(q + r(q))/2` and `q`; and that there are
+exactly two orbits at that size for `q >= 25`. CGH24, §1, gives the original form, verbatim:
+
+> They proposed a conjecture that there are no maximal cliques of size `s` in `P(q^2)`, where
+> `(q + eps)/2 < s < q` for `q = eps (mod 4)`.
+
+**Computer verification — exactly what, by whom, over what range:**
+
+1. BEHW96 themselves ran an exhaustive search; GKSV18 (arXiv v1, p. 1) reports only its conclusion,
+   verbatim: "an exhaustive computer search done by them showed that these cliques are not the only
+   cliques of such size". No range is given in the text I read.
+2. GKSV18 (published FFA version) used **Magma**. I did not see this in the arXiv v1; it is reported
+   by CGH24, §1, verbatim: "By Magma [3], they found that for `25 <= q <= 83`, the graph `P(q^2)`
+   contains exactly two non-equivalent (under the action of the automorphism group) maximal cliques
+   of size `(q+eps)/2` for `q = eps (mod 4)`, and these cliques are the second largest."
+   **Evidence boundary:** this is a second-hand attribution; I read the arXiv v1 of GKSV18, not the
+   published FFA text, so I did not verify the `25 <= q <= 83` range at source.
+3. CGH24 computed the number of orbits of maximal cliques of size `(q+eps)/2` for `q <= 23` (citing
+   GKSV18 for the table) and analysed the extra orbits, which occur exactly for
+   `q in {9, 11, 13, 17, 19, 23}` — note this range includes the prime powers `9` and `27` is
+   outside it, so the small-`q` exceptions are a mix of primes and one prime power.
+4. BGSY26, §1.6, verbatim: "One conjectures that this size (`(r+1)/2` if `r = 1 (mod 4)` or
+   `(r+3)/2` if `r = 3 (mod 4)`) is the second largest size for cliques in `P(r^2)`, and that there
+   are only two orbits of cliques of this size when `r >= 25`. This conjecture has been checked for
+   `r <= 109`." **The paper gives no attribution, no method, and no software for the `r <= 109`
+   check, and does not say whether `r` ranges over prime powers or only primes.** Its published
+   tables are smaller: §3.1 tabulates all maximal clique sizes with orbit counts only for
+   `r <= 47`, and the smallest-maximal-clique table runs to `r <= 73`. Both tables do include prime
+   powers (`9, 25, 27, 49` appear), so the convention in the paper is prime powers; I could not
+   confirm that the `109` figure follows the same convention.
+
+The §3.1 table of BGSY26 is worth recording directly, because it answers the `q = 1 (mod 4)` case
+of your question empirically. Sizes of maximal cliques in `P(r^2)`, exponents = number of
+inequivalent orbits under the full automorphism group (verbatim transcription of BGSY26 Table,
+§3.1, for the `r = 1 (mod 4)` rows):
+
+| `r` | maximal clique sizes (exponent = orbit count) | `(r+1)/2` | is `(r+3)/2` present? |
+|---|---|---|---|
+| 5 | `3^1, 5^1` | 3 | 4: no |
+| 9 | `5^3, 9^1` | 5 | 6: no |
+| 13 | `5^10, 7^4, 13^1` | 7 | 8: no |
+| 17 | `5^3, 7^41, 9^9, 17^1` | 9 | 10: no |
+| 25 | `7^405, 8^226, 9^49, 13^2, 25^1` | 13 | 14: no |
+| 29 | `7^410, 8^1584, 9^2104, 10^148, 11^46, 13^1, 15^2, 29^1` | 15 | 16: no |
+| 37 | `7^103, 8^2505, 9^21556, 10^14002, 11^5712, 12^219, 13^222, 19^2, 37^1` | 19 | 20: no |
+| 41 | `7^168, 8^7801, 9^104495, 10^62070, 11^9583, 12^149, 13^128, 14^19, 21^2, 41^1` | 21 | 22: no |
+
+So for `q = 1 (mod 4)` and `q <= 41`, `P(q^2)` contains **no maximal clique of size `(q+3)/2` at
+all** — and since every clique extends to a maximal one, no clique of that size that is not inside
+a larger one; the sizes present jump from a band around `sqrt(q)`-ish values straight to `(q+1)/2`
+and then to `q`. This is data, not a theorem. BGSY26 also notes for the `r = 3 (mod 4)` rows: "For
+`r = 3 (mod 4)` this confirms the values from Kiermaier & Kurz [13]."
+
+### 7.6 What is NOT in the literature (this section's negatives)
+
+9. **Any theorem "a clique of `P(q^2)` either lies in a line or has size at most `f(q)`" with
+   `f(q) < q - 1`.** Domain: Blokhuis 1984 and both modern reproofs (arXiv:2106.01522,
+   arXiv:2505.04061); Sziklai 1999 Theorems 1.2 and 1.3 as restated in GSY23 Lemmas 1.1-1.2 and in
+   Yip arXiv:2302.00745 §1; GSY23 §6 in full; Asgarli-Yip Corollary 4.4; Asgarli-Goryainov-Lin-Yip
+   Corollary 8; Hanson-Petridis 2021; Yip's Gauss-sums paper; Yip's `alco.291`. Stop condition: two
+   independent explicit statements by the authors of the field that nothing better is known — GSY23
+   p. 3 ("even the weaker bound `q - sqrt(q)/2` ... is not known to be true") and Yip
+   arXiv:2302.00745 p. 2 ("no partial progress has been made for this conjecture ... all known
+   results in this direction assume the edge density of the graph being strictly less than 1/2").
+
+10. **A Blokhuis-type stability statement "cliques of size `> c q` in `P(q^2)` lie in a line" for
+    any explicit `c < 1`.** Domain: as in (9). Stop condition: the only thresholds that exist are
+    `q - (1 - 1/m) sqrt(q)` for `m >= 3` (Sziklai), which is of the form `q - O(sqrt q)` rather than
+    `c q`, and is unavailable at `m = 2`. No result of the form `c q` with `c < 1` exists for any
+    `m`, let alone for Paley.
+
+11. **A stability or second-largest version of Sziklai's `d`-th power theorem covering `d = 2`.**
+    Domain: Sziklai 1999 Theorem 1.3 as restated in GSY23 Lemma 1.2 and Yip arXiv:2302.00745 §1;
+    GSY23 §6; Asgarli-Yip Corollary 4.4. Stop condition: every restatement carries the hypothesis
+    `m >= 3` / `d >= 3` / density `< 1/2`. I did not read Sziklai's 1999 paper at source (Discrete
+    Math. 208/209, not open access, not in the cache); the `m >= 3` hypothesis is taken from two
+    independent restatements by different author sets, which agree.
+
+12. **An unconditional partial result toward the Baker et al. gap conjecture in BGSY26.** Domain:
+    full text of arXiv:2503.09914v2. Stop condition: its §2 results (Theorem 2.1, Propositions
+    2.2-2.6, Theorems 2.7 and 2.10, Corollary 2.8) all concern the specific maximal cliques
+    `C_{x,L}` built from a point plus its neighbours on a line, and its §1.6 presents the gap
+    statement as a conjecture "checked for `r <= 109`", not as a theorem.
+
+### Answer to the closing question
+
+**Is there an unconditional theorem forbidding a non-line clique of size `(q+3)/2` in `P(q^2)` for
+`q = 1 (mod 4)`?** No — the best unconditional bound on a non-line clique is `q - 1` (Blokhuis's
+theorem, contrapositive), every stability improvement in print requires edge density strictly below
+`1/2` and so excludes the Paley graph, and Goryainov-Shalaginov-Yip state in print that even the
+much weaker threshold `q - sqrt(q)/2` is not known for `m = 2`; the non-existence of such a clique
+is supported only by the Baker-Ebert-Hemmeter-Woldar conjecture and by exhaustive computation
+(orbit-complete for `r <= 47` in BGSY26 §3.1, and asserted without attribution for `r <= 109`).
