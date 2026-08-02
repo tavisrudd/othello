@@ -143,17 +143,80 @@ edge-toggle parity formula. It explains the all-even seven-point spectrum,
 extends for free to every \(n\equiv3\pmod4\), and separates one-error detection
 from one-erasure correction and one-substitution correction.
 
+There is a stronger linearization behind the distance problem. On the
+even-weight four-bit space put
+\[
+ q(x)=\sum_{i<j}x_ix_j,
+ \qquad a(x)=1+q(x),
+\]
+so that \(a(x)\) is the aligned indicator. Fix a two-graph difference
+\(\delta=\tau+\sigma\). Coordinatewise,
+\[
+ A_Q(\tau)+A_Q(\tau+\delta)
+ =q(\delta_Q)+B_q(\tau_Q,\delta_Q),
+\]
+where \(B_q\) is the polar form of \(q\). Thus, although the certificate map
+is quadratic, its difference at fixed \(\delta\) is affine-linear in
+\(\tau\). Minimizing distance for fixed \(\delta\) is consequently a binary
+coset-leader problem. This gives a second attack on larger orders: classify
+the relevant difference orbits, form their affine syndrome maps, and use
+linear-code rank and coset-leader methods instead of enumerating all pairs of
+two-graphs.
+
+The seven-point equality case is not a weak single-edge perturbation. Toggling
+one rooted-graph edge \(ab\) changes a four-set \(abxy\) exactly when
+\(\tau(abx)=\tau(aby)\). If
+\[
+ k=\#\{z\ne a,b:\tau(abz)=1\},
+\]
+the exact number of changed coordinates is
+\[
+ \binom{k}{2}+\binom{n-2-k}{2}.
+\]
+At \(n=7\) this is at least four. By contrast, the distance-two witnesses
+above have rooted-graph difference
+\[
+ E_A\mathbin\triangle E_B
+ =\{01,02,12\}\cup\{03,04,34\},
+\]
+a pair of triangles sharing vertex \(0\), with vertex \(5\) isolated. The
+minimum therefore comes from coordinated cancellation among six edge changes.
+Classifying the distance-two affine coset leaders may show that this bowtie is
+the unique primitive obstruction.
+
+This also sharpens the conference-only opportunity. For a symmetric
+conference signing, row orthogonality forces the triangle signs through each
+pair \(ab\) to split equally, so \(k=(n-2)/2\). A single-edge departure then
+has distance
+\[
+ 2\binom{(n-2)/2}{2}=\frac{(n-2)(n-4)}4.
+\]
+Such a departure need not remain inside the conference family, but the
+quadratic local response shows that the unrestricted distance-two obstruction
+does not by itself settle the distance of the conference subcode. The
+highest-value bounded test is to attach aligned-certificate distances to the
+first reproducible multi-class conference census: it will show immediately
+whether conference regularity excludes the bowtie coset or admits an analogous
+collective cancellation.
+
 - **Settled — why every seven-point distance is even.** The edge-toggle
   formula makes certificate-weight parity invariant and fixes it to
   \(\binom74\equiv1\pmod2\).
 - **Settled — whether quotienting hides the nearest pair.** The equality
   pair has different certificate weights, so it remains inequivalent after
   every permitted relabelling and complement.
+- **Settled — whether distance two is a trivial edge flip.** It is not:
+  every seven-point single-edge move has distance at least four, while the
+  equality difference is the six-edge bowtie above.
+- **Settled — how to avoid quadratic all-pairs search at larger orders.**
+  Fixing the two-graph difference turns certificate disagreement into an
+  affine binary coset-leader problem.
 - **Open outside the stop condition — conference-only distance.** This census
   reaches only the unique order-six conference class. Determining the first
-  multi-class conference distance requires an independently allocated
-  restricted-family task with canonical representatives; it is not evidence
-  for stronger correction in the unrestricted two-graph code.
+  multi-class conference distance requires canonical representatives. C812's
+  first reproducible multi-class conference census is the natural place to
+  compute this diagnostic; a positive value there would not strengthen the
+  unrestricted two-graph code without an additional structural theorem.
 
 ## Scope
 
