@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued
+**Status:** complete — frozen `MINOR` report at commit `9f3e1639`
 
 ## Objective
 
@@ -34,3 +34,15 @@ reconstruction of the causal proof spine; and a separate list of optional
 expository improvements. Freeze the report before author triage. Do not
 inspect private research reports or exact certificates until after the
 independent verdict.
+
+## Outcome
+
+The frozen independent report is
+`notes/2026-08-02-c829-golden-external-mathematical-cold-read.md` at commit
+`9f3e1639`.  Its verdict is `MINOR`: all audited theorem statements,
+normalizations, constants, equality sets, and thresholds survive; two
+elementary completeness bridges and one citation locator are deferred to
+author triage.  C829 made no manuscript edit.
+
+Lifecycle validation and the post-freeze `ej` + `tt` mystery ledger are in
+`notes/2026-08-02-c829-golden-cold-read-closeout.md`.
