@@ -209,15 +209,178 @@ joint upper/Pareto boundary, not the complete semialgebraic image of the cube.
   conference-class rigidity.  A full semialgebraic image is deferred unless a
   later branch makes it free.
 
-## Mystery ledger (interim)
+## 3. Complex Hermitian conference ceiling
+
+Let \(C=C^*\) be any complex Hermitian conference matrix of order six:
+\(C_{ii}=0\), \(|C_{ij}|=1\), and \(C^2=5I\).  For a balanced triple
+\(T=\{i,j,k\}\), let \(A=C[T]\), let \(R=C[T,T^c]\), and set
+
+\[
+ H_T=RR^*/5=I-A^2/5,
+ \qquad r_T=\operatorname{Re}(C_{ij}C_{jk}C_{ki}).
+\]
+
+### Theorem B — holonomy controls the entire degree-three exchange split
+
+For every such \(C\) and every balanced triple,
+
+\[
+ p_1=\frac95,\qquad p_2=\frac{33}{25},\qquad e_2=\frac{24}{25},
+\]
+
+while
+
+\[
+ e_3=\frac{4(5-r_T^2)}{125},\qquad
+ h_3=\frac{317-4r_T^2}{125},\qquad
+ s_{(2,1)}=\frac{196+4r_T^2}{125}.
+\]
+
+Thus complex phase does not change one-particle mass, purity, or the
+two-fermion sector, but transfers weight exactly between the symmetric and
+mixed three-particle sectors; in particular
+\(h_3+s_{(2,1)}=513/125\).  The real Golden spectrum is the \(|r_T|=1\)
+endpoint \(\{1/5,4/5,4/5\}\), whereas \(r_T=0\) gives
+\(\{2/5,2/5,1\}\), raises \(e_3\) from \(16/125\) to \(4/25\), and raises
+\(h_3\) by \(4/125\).
+
+**Proof.**  The conference block equations give \(RR^*=5I-A^2\).
+The characteristic polynomial of the unit-modulus Hermitian triangle is
+\(z^3-3z-2r_T\).  Newton identities therefore give the stated fixed first two
+moments and determinant; the displayed Schur formulas then follow from
+\(h_3=e_3+p_1p_2\) and \(s_{(2,1)}=p_1e_2-e_3\).
+
+### Theorem C — sharp order-six rigidity
+
+An order-six Hermitian complex conference matrix has cut-independent full
+balanced exchange spectrum if and only if it is switching/permutation
+equivalent to the real symmetric conference class.
+
+For the nontrivial direction, dephase row and column zero to ones and write
+the remaining block as \(S\).  Then
+\(S\mathbf1=0\) and \(S^2=5I-J\).  Cut-independence is equivalent by Theorem B
+to \(|r_T|=\rho\) on all triangles.  Triangles containing zero force every
+off-diagonal entry of \(S\) to have real part \(\pm\rho\).
+
+For \(0<\rho<1\), put \(t=\rho^2\) and write
+
+\[
+ S_{ij}=a_{ij}\sqrt t+i b_{ij}\sqrt{1-t}.
+\]
+
+The row sums force \(a\) to be a symmetric sign graph with two plus and two
+minus neighbors at every vertex, and \(b\) to be a regular tournament.  There
+are exactly 12 and 24 labeled patterns.  Substitution in \(S^2=5I-J\), followed
+by the remaining triangle equations, rejects all \(12\cdot24=288\) pairs.
+At \(t=0\), direct substitution rejects all 24 regular tournaments.  Hence
+only \(t=1\) remains, which is the real conference endpoint.  The converse is
+the real order-six cut rigidity already established in the Golden analysis.
+
+Et-Taoui's exact \(C_6(i)\) supplies the sharp falsifier to any broader
+complex-rigidity claim: cuts \(012\) and \(013\) have respectively
+\(r=-1,0\) and squared spectra
+\(\{1/5,4/5,4/5\}\), \(\{2/5,2/5,1\}\).
+
+### Exact evidence
+
+The deterministic certificate enumerates the 12 row-balanced real sign
+patterns and 24 regular tournaments using exact integer/rational arithmetic,
+checks all 288 interior combinations, checks the purely imaginary endpoint,
+and records the holonomy formulas.  An independent replay fixes one canonical
+five-cycle, checks all 24 relative tournaments, and independently verifies the
+Gaussian-integer \(C_6(i)\) example and its two cuts.
+
+Replay from the repository root:
+
+```sh
+python3 notes/2026-08-02-c814-complex-conference-rigidity.py --check
+python3 notes/2026-08-02-c814-complex-conference-rigidity-replay.py
+```
+
+Files:
+
+- `notes/2026-08-02-c814-complex-conference-rigidity.py`;
+- `notes/2026-08-02-c814-complex-conference-rigidity-replay.py`;
+- `notes/2026-08-02-c814-complex-conference-rigidity.json`;
+- `notes/2026-08-02-c814-complex-conference-rigidity.sha256`.
+
+The finite exhaustion is only the exact reduced order-six classification; it
+does not assert a corresponding theorem at larger orders or for nonconference
+two-eigenvalue frames.
+
+## 4. Generalized branch pivot record
+
+- **`ej`:** triangle holonomy is the sole moving coordinate.  Purity remains
+  fixed, and the identity \(h_3+s_{(2,1)}=513/125\) exposes an exact transfer
+  between symmetry types rather than an overall gain.
+- **`tt`:** the natural invariant is the Bargmann triangle product, and the
+  theorem should cover the entire Hermitian order-six conference class rather
+  than only Et-Taoui's displayed family.
+- **`aa`:** three attacks were separated: an explicit-family falsifier, a full
+  dephased sign/tournament classification, and an appeal to general uniform-
+  subframe or spectral-monomorphy machinery.  The finite dephased reduction
+  gives the sharp order-six theorem; the external frameworks are used only for
+  positioning.
+- **Decision:** stop the generalized branch at the exact obstruction and
+  rigidity classification.  A broader two-eigenvalue/ETF claim would be a new
+  task and is not supported by this order-six certificate.
+
+## 5. Final synthesis and paper-review disposition
+
+### Generalized branch to synthesis: `ej`/`tt`/`aa`
+
+- **`ej`:** real balanced masks maximize every degree-three sector when the
+  Golden operator is fixed, yet deforming that operator through complex
+  conference phases raises \(e_3\).  The apparent ceiling therefore has two
+  distinct axes: control generality and operator generality.
+- **`tt`:** control variation is governed by cube convexity and spectral
+  inequalities; operator variation is governed by gauge-invariant triangle
+  holonomy.  Conflating them would conceal the exact phase-induced tradeoff.
+- **`aa`:** possible next attacks are complex diagonal controls, deformation of
+  the operator class, or their joint optimization.  The combined landscape is
+  deferred because neither current theorem controls both axes simultaneously.
+- **Decision:** close C814 with the two sharp one-axis theorems and leave the
+  combined complex-control problem as an explicitly separate ceiling.
+
+| Result | Disposition for later paper review |
+|---|---|
+| Full-cube simultaneous Schur-sector maxima for fixed real Golden \(C\) | **Keep as candidate.** Human proof plus dual replay; novelty audit still incomplete. |
+| Complex holonomy exchange formulas and order-six uniformity classification | **Keep as candidate.** Sharp and replayable; publication-stage literature audit required. |
+| Robust unlabelled inverse and higher cut-moment separation | **Defer.** Await C810/C812 frozen outputs; do not duplicate their searches. |
+| Generic two-eigenvalue/ETF or combined complex-control classification | **Reject from C814 scope.** No justified theorem yet. |
+
+The bounded literature record is
+`notes/2026-08-02-c814-quantum-statistics-literature-audit.md`.  It locates the
+Et-Taoui family and the adjacent uniform-subframe/spectral-monomorphy
+frameworks, but it explicitly does **not** clear either result for a priority
+claim.
+
+## Mystery ledger (final)
 
 - **Settled:** balanced sign controls are genuine global, simultaneous
   exchange-sector optima on the full physical filter cube.
 - **Settled:** the mixed (S_{(2,1)}) sector has no hidden interior maximizer.
 - **Open dependency:** adversarial certificate distance and same-order
   higher-moment separation remain owned by C810 and C812.
-- **Open:** whether complex Hermitian conference matrices retain or destroy
-  the real cut-rigidity cutoff is the next C814 branch.
+- **Settled:** complex Hermitian phases destroy full real cut rigidity while
+  preserving purity; triangle holonomy gives the exact exchange-sector split.
+- **Settled:** cut-independent full balanced exchange spectrum at order six
+  characterizes the real switching class inside the Hermitian conference
+  class.
 - **Deferred:** the complete interior semialgebraic exchange region; it is not
   needed for the sharp operational ceiling.
+- **Deferred:** the joint landscape of complex conference deformation and
+  continuous/complex controls, and any higher-order two-eigenvalue analogue.
+- **Open audit:** both kept results require later paper-inclusion review and a
+  stronger literature audit before any novelty wording.
 
+## Final `ej` + `tt` closeout
+
+- **`ej`:** the complex endpoint \(r_T=0\) is not merely a counterexample: it
+  is the maximal filled-fermion point allowed by the exact holonomy formula,
+  while the real Golden class is the minimal endpoint.  The conserved sum
+  \(h_3+s_{(2,1)}\) identifies where the gain comes from.
+- **`tt`:** the clean research object is a two-axis phase diagram—filter
+  geometry for fixed \(C\), gauge holonomy for varying \(C\).  C814 has solved
+  each coordinate axis sharply at order six; the mixed plane is the honest
+  remaining mathematical ceiling.

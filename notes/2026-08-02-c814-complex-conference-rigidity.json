@@ -1,0 +1,51 @@
+{
+  "balanced_cut_formulas": {
+    "exterior2": "24/25",
+    "exterior3": "4*(5-r^2)/125",
+    "mixed21": "(196+4*r^2)/125",
+    "p1": "9/5",
+    "p2": "33/25",
+    "parameter": "r=Re(c_ij*c_jk*c_ki)",
+    "symmetric3": "(317-4*r^2)/125"
+  },
+  "dephased_remainder_order": 5,
+  "ettaoui_b_i_counterexample": {
+    "common_p1": "9/5",
+    "common_p2": "33/25",
+    "cut_012_real_holonomy": "-1",
+    "cut_012_squared_singular_spectrum": [
+      "1/5",
+      "4/5",
+      "4/5"
+    ],
+    "cut_013_real_holonomy": "0",
+    "cut_013_squared_singular_spectrum": [
+      "2/5",
+      "2/5",
+      "1"
+    ],
+    "exterior3_values": [
+      "16/125",
+      "4/25"
+    ]
+  },
+  "interior_candidate_parameters": [],
+  "interior_pattern_pairs_checked": 288,
+  "interior_rejection_counts": {
+    "nonzero_offdiagonal_imaginary_part": 288
+  },
+  "interior_survivors": 0,
+  "order": 6,
+  "purely_imaginary_survivors": 0,
+  "real_endpoint": {
+    "balanced_squared_singular_spectrum": [
+      "1/5",
+      "4/5",
+      "4/5"
+    ],
+    "uniform": true
+  },
+  "real_row_balance_patterns": 12,
+  "regular_tournament_patterns": 24,
+  "schema": "c814-complex-conference-rigidity-v1"
+}
