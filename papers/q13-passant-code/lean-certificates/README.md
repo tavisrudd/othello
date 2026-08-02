@@ -25,10 +25,15 @@ the classical arc/tangent lemma supplies pairwise passant joins and tangent holo
 The shared `RelativeConicArcs.PassantCodeQ13.WeightTen` module then treats an arbitrary supported
 point of an arbitrary weight-ten word: its seven passant fibres are odd, the complementary joins
 are secants, and the support partition forces the isolated `(3,1^6;0)` or cycle `(1^7;2)` profile.
-`PassantCodeQ13.AssociationAlgebra` checks the ranks and squaring identities of the four binary
-elliptic relation matrices used by the orbit-spanning argument.  The minimum-word modules expand
+`PassantCodeQ13.AssociationAlgebra` checks the ranks and encoded squaring identities of the four
+binary elliptic relation matrices used by the orbit-spanning argument.
+`PassantCodeQ13.AssociationTransport` proves once that Boolean parity multiplication is ordinary
+matrix multiplication over `ZMod 2`; four one-product relation shards and four orbit shards then feed the concrete
+squares and Gram/kernel identities to the computation-free abstract association-kernel spine.
+The minimum-word modules expand
 one symmetric-stabilizer and three dihedral-stabilizer representatives into four disjoint
-91-element kernel orbits, each of binary span rank 36.  The reconstruction leaf checks pair-color
+91-element kernel orbits, each of binary span rank 36.  At a fixed point, the order-28 point
+stabilizer acts transitively on each 14-support slice.  The reconstruction leaf checks pair-color
 recovery of passant joins and the zero-triple signatures of all 78 geometric rows.
 
 The terminal theorems use native evaluation.  The axiom audit must therefore report the

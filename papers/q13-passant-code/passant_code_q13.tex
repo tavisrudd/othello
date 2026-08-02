@@ -236,6 +236,8 @@ The exact replay first fixes one support point.  Pencil parity leaves
 three profile families finds exactly \(56\) weight-twelve words through the
 fixed point.  The four proposed projective orbits have disjoint fixed-point
 slices of sizes \(14\), and those slices equal the 56-word exhaustive list.
+The order-\(28\) stabilizer of the fixed point acts transitively on each
+slice; the stabilizer of a support inside it has order \(2\).
 Transitivity, or equivalently the count \(56\cdot78/12=364\), proves global
 exhaustion.
 
@@ -363,7 +365,15 @@ The last check implements the four pencil-profile domains by a
 syndrome-indexed meet in the middle and identifies their \(56\) solutions with
 the four disjoint \(14\)-support orbit slices.  Explicit recovery and expansion maps transport
 the 42-column elimination certificate to the semantic incidence map, so the
-formal aggregate also proves dimension \(36\).  These checks use native
+formal aggregate also proves dimension \(36\).  A generic Boolean-parity
+bridge, four one-product relation shards, and four orbit shards transport the
+concrete association identities and Gram matrices into ordinary matrices over
+\(\mathbf F_2\).  The abstract association-kernel argument then proves that
+the row space of every displayed orbit is exactly \(\ker A_0\); polarity is
+the row permutation identifying this kernel with the code.  The terminal
+declaration is
+\nolinkurl{PassantCodeQ13.Gates.Main.minimumOrbitsSpanRhoZeroKernel}.
+These checks use native
 evaluation and expose the corresponding declaration-local axioms in the pinned
 toolchain.
 

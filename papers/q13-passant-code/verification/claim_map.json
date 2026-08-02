@@ -18,14 +18,14 @@
     {
       "id": "minimum-layer",
       "statement": "There are 364 minimum words in four PGL(2,13)-orbits of size 91.",
-      "current_modes": ["paper-owned fixed-base profile exhaustion", "Lean native exhaustion of the four fixed-point pencil-profile domains", "Lean identification of their 56 solutions with four disjoint 14-support orbit slices", "Lean execution of four projective kernel orbits of size 91", "Lean rank-36 check for each orbit", "human projective-transitivity and double-count transport"],
+      "current_modes": ["paper-owned fixed-base profile exhaustion", "Lean native exhaustion of the four fixed-point pencil-profile domains", "Lean identification of their 56 solutions with four disjoint 14-support orbit slices", "Lean transitivity of the order-28 fixed-point stabilizer on each 14-support slice", "Lean execution of four projective kernel orbits of size 91", "Lean rank-36 check for each orbit", "human projective-transitivity and double-count transport"],
       "lean_boundary": "the fixed-point exhaustion is closed by PassantCodeQ13.Gates.Main.fixedPointWeightTwelveExhaustion; transport to all 364 supports uses the human projective-transitivity and double-count argument"
     },
     {
       "id": "orbit-spanning",
       "statement": "Each minimum-word orbit spans the 36-dimensional code.",
-      "current_modes": ["human association-algebra proof", "Lean proof that the squaring identities force kernel rigidity and surjectivity", "Lean native relation ranks 42,36,36,36", "Lean native identities A0^2=I+A9+A10+A12 and A9^2=A10, A10^2=A12, A12^2=A9"],
-      "lean_boundary": "the concrete relation matrices and orbit Gram identities are not yet transported into the abstract spine theorem"
+      "current_modes": ["human association-algebra proof", "Lean proof that the squaring identities force kernel rigidity and surjectivity", "Lean structural parity-to-matrix bridge", "Lean native relation squaring identities", "Lean native orbit Gram and kernel identities", "Lean structural derivation of relation annihilation from each Gram factorization", "Lean theorem that each orbit row space equals the rho-zero kernel"],
+      "lean_boundary": "closed relative to the rho-zero matrix by PassantCodeQ13.Gates.Main.minimumOrbitsSpanRhoZeroKernel; polarity identifies A0 with the incidence matrix up to row order"
     },
     {
       "id": "reconstruction",

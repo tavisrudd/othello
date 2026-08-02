@@ -139,20 +139,21 @@ the concrete fourth-anchor uniqueness/signature checks.  Rank elimination,
 full orbit generation, and all-row reconstruction remain valuable independent
 evidence and discovery provenance without being the narrative proof.
 
-## Interface declarations that are not yet proof coverage
+## Remaining interface declarations that are not yet proof coverage
 
 - `MinimumLayerCertificate.rows_recovered` is an exact required field; its
   accessor theorem does not itself prove reconstruction.
 - `CoordinateAutomorphismIdentification.preserves_iff_in_range` freezes the
   desired output type but takes the classification as input.
-- Native rank 36 for each orbit verifies spanning numerically but does not
-  instantiate the human association-algebra mechanism.
-
-These interfaces remain useful, but the gate and claim map must not count
+These two interfaces remain useful, but the gate and claim map must not count
 them as completed semantic transports.
 
 ## Validation
 
+- Boolean association relation/orbit shards:
+  `/home/tavis/.cache/othello-lean-build/run-20260802-060643-0701e5c2`;
+  public aggregate, exact-target confirmation, and axiom audit:
+  `/home/tavis/.cache/othello-lean-build/run-20260802-062648-bc895829`.
 - Fixed-point weight-twelve leaf:
   `/home/tavis/.cache/othello-lean-build/run-20260802-035638-07abc617`;
   aggregate gate, exact-target confirmation, and axiom audit:
@@ -206,12 +207,10 @@ now closed at its exact finite boundary: a syndrome-indexed meet in the middle e
 fixed-point weight-twelve pencil domains and identifies their 56 solutions with four disjoint
 14-support projective-orbit slices.  Projective transitivity and
 `56*78/12=364` remain the human transport from that normalized slice to the global layer.  The
-following three items remain inside C761 rather than becoming successor mysteries:
+following two items remain inside C761 rather than becoming successor mysteries:
 
-1. connect the concrete relation matrices and orbit Gram identities to the
-   proved abstract association-kernel spine;
-2. prove uniqueness of the reconstructed 78-row family;
-3. connect the regular triple orbit, forced fourth anchor, and separating
+1. prove uniqueness of the reconstructed 78-row family;
+2. connect the regular triple orbit, forced fourth anchor, and separating
    signatures to the proved abstract four-anchor closure.
 
 ## Extra-juice closeout and mystery ledger
@@ -240,10 +239,15 @@ uniqueness, and the two-element coefficient field.
 The other cheap high-value upgrades are complete: exact rank and association leaves,
 projective orbit shards, precomputed cycle syndromes, a precise manuscript
 trust statement, the abstract `im B=ker A` and orbit-factorization spanning
-chain, and an axiom-audited aggregate gate.  Fourteen execution shards are not
+chain, and an axiom-audited aggregate gate.  The concrete association transport is now structural:
+one generic theorem identifies Boolean parity evaluation with matrix multiplication over `ZMod 2`;
+four one-product relation shards and four bounded orbit shards supply only the finite identities;
+and a computation-free aggregator feeds them to the abstract spine.  Keeping the evaluator in
+Boolean matrices rather than converting every entry to `ZMod 2` reduces the worst shard from an
+unfinished eleven-minute elaboration to 22 seconds.  Fourteen execution shards are not
 fourteen mathematical cases, and full enumerations are now explicitly
 corroboration wherever symmetry transport can reduce them.  No new
-mathematical mystery appeared.  The remaining work is exactly the three
+mathematical mystery appeared.  The remaining work is exactly the two
 semantic transports above plus the ordinary release audit and publication
 steps.
 
@@ -251,6 +255,8 @@ The fixed-point EJ+TT pass kept the finite domain at its natural quotient.  It e
 incidence columns once, performs four syndrome-indexed meets in the middle, and compares only the
 56 normalized solutions with the four 14-support orbit slices.  The equality of the four slice
 sizes is forced by orbit incidence, `91*12/78=14`, so it is not a new unexplained regularity.
+The order-28 point stabilizer acts transitively on every slice, with support stabilizer order two;
+this replaces four flat 14-entry comparisons by four genuine stabilizer orbits.
 No second 364-support enumeration is load-bearing, and no genuine new mystery remains in this
 transport.
 
@@ -282,8 +288,9 @@ formal aggregate still does not claim the complete minimum-distance theorem.
 | normalized weight-eight semantic transport | settled | `RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport`; Segre's lemma and projective normalization remain explicit classical inputs |
 | arbitrary weight-ten profile transport | settled | `RelativeConicArcs.Gates.PassantCodeQ13.arbitrary_weightTen_profile_transport`; the two paper-owned disjointness aggregates remain the finite terminal leaves |
 | fixed-point weight-twelve exhaustion | settled at the finite normalized slice | `PassantCodeQ13.Gates.Main.fixedPointWeightTwelveExhaustion`; global transport remains the human projective-transitivity and double-count argument |
+| association/Gram transport | settled relative to the rho-zero matrix | `PassantCodeQ13.Gates.Main.minimumOrbitsSpanRhoZeroKernel`; polarity supplies the row permutation from `A0` to the incidence matrix |
 | unique closure of the q13 tangent graph | settled exactly | finite q13 native terminals; no second clique enumeration |
 | uniform source of the six cyclic difference sets | outside C761 | C756 owns any all-field torus explanation |
-| remaining Paper-IV formal seams | open and fully enumerated | the three transports in the preceding section |
+| remaining Paper-IV formal seams | open and fully enumerated | row-family uniqueness and the concrete four-anchor transport |
 
 No further C761-owned mathematical mystery arose in the weight-eight or weight-ten profile passes.

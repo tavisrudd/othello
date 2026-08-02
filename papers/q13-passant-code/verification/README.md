@@ -19,7 +19,8 @@ commands, and replay relationships. The paper-owned Lean package under
 semantics, transports the normalized weight-eight reduction to the cyclic tangent graph, checks
 both weight-ten syndrome profiles, and checks four displayed minimum-word orbits.  Its fixed-point
 weight-twelve leaf exhausts the four pencil-profile domains and identifies their 56 solutions with
-the four disjoint 14-support orbit slices.
+the four disjoint 14-support orbit slices; the point stabilizer acts transitively on each slice.
+Its association transport proves that every displayed orbit spans the rho-zero kernel.
 Its formal scope is strictly smaller than the complete release theorem.
 The normalized weight-eight terminal is
 `RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport`.
@@ -78,6 +79,17 @@ PassantCodeQ13/MinimumWords/OrbitS4.lean
 PassantCodeQ13/MinimumWords/OrbitDihedral.lean
 PassantCodeQ13/MinimumWords/Exhaustion.lean
 PassantCodeQ13/MinimumWords/Reconstruction.lean
+PassantCodeQ13/AssociationTransport/Base.lean
+PassantCodeQ13/AssociationTransport/RelationSquares/RhoZero.lean
+PassantCodeQ13/AssociationTransport/RelationSquares/Nine.lean
+PassantCodeQ13/AssociationTransport/RelationSquares/Ten.lean
+PassantCodeQ13/AssociationTransport/RelationSquares/Twelve.lean
+PassantCodeQ13/AssociationTransport/RelationSquares.lean
+PassantCodeQ13/AssociationTransport/OrbitS4.lean
+PassantCodeQ13/AssociationTransport/OrbitDihedralA.lean
+PassantCodeQ13/AssociationTransport/OrbitDihedralB.lean
+PassantCodeQ13/AssociationTransport/OrbitDihedralC.lean
+PassantCodeQ13/AssociationTransport.lean
 PassantCodeQ13/Gates/Main.lean
 PassantCodeQ13/Gates/AxiomAudit.lean
 ```
@@ -85,7 +97,11 @@ PassantCodeQ13/Gates/AxiomAudit.lean
 The public aggregate transports its exact 42-column elimination certificate to semantic rank and
 code dimension, transports every supported point of every weight-ten word to one of the two
 exhaustive pencil profiles, and checks the fixed-point weight-twelve exhaustion against the four
-projective orbit slices.  The passage from the fixed point to the global 364-support layer remains
+projective orbit slices.  The fixed-point stabilizer acts transitively on each 14-support slice.
+Eight bounded association leaves, joined by one generic parity-to-matrix theorem, identify the four
+orbit Grams and prove that every orbit row space equals the kernel of the rho-zero relation matrix.
+Polarity identifies that matrix with the incidence matrix up to row order.  The passage from the
+fixed point to the global 364-support layer remains
 the human projective-transitivity and double-count argument.  The aggregate does not establish
 uniqueness of the recovered rows or the automorphism anchor. Its axiom report comes
 from the pinned toolchain's actual `#print axioms` output. Task identifiers,

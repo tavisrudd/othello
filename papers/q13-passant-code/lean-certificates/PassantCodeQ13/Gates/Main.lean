@@ -4,6 +4,7 @@ import PassantCodeQ13.MinimumWords.Reconstruction
 import PassantCodeQ13.MinimumWords.Exhaustion
 import PassantCodeQ13.SemanticTransports
 import PassantCodeQ13.AssociationAlgebra
+import PassantCodeQ13.AssociationTransport
 
 /-!
 # Aggregate finite gate for the q=13 passant code
@@ -74,5 +75,42 @@ theorem fixedPointWeightTwelveExhaustion :
     fixedPointWeightTwelveSolutions.toFinset = fixedPointOrbitSlices.toFinset ∧
       fixedPointWeightTwelveSolutions.length = 56 :=
   ⟨fixedPoint_weightTwelve_exhaustion.1, fixedPoint_weightTwelve_exhaustion.2.1⟩
+
+/-- The order-28 fixed-point stabilizer acts transitively on each 14-support orbit slice. -/
+theorem fixedPointSlicesAreStabilizerOrbits :
+    fixedPointStabilizer.length = 28 ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeS4)).toFinset =
+        ((supportOrbit representativeS4).filter fun support => support.testBit 0).toFinset ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeDihedralA)).toFinset =
+        ((supportOrbit representativeDihedralA).filter fun support => support.testBit 0).toFinset ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeDihedralB)).toFinset =
+        ((supportOrbit representativeDihedralB).filter fun support => support.testBit 0).toFinset ∧
+      (fixedPointStabilizerOrbit (encodeSupport representativeDihedralC)).toFinset =
+        ((supportOrbit representativeDihedralC).filter fun support => support.testBit 0).toFinset :=
+  fixedPoint_slices_are_stabilizer_orbits
+
+/-- Each displayed minimum-word orbit spans the kernel of the rho-zero relation matrix. -/
+theorem minimumOrbitsSpanRhoZeroKernel :
+    LinearMap.range
+        (Matrix.toLin' (PassantCodeQ13.AssociationTransport.orbitSupportMatrix
+          (supportOrbit representativeS4)).transpose) =
+          LinearMap.ker (Matrix.toLin'
+            (PassantCodeQ13.AssociationTransport.relationLinearMatrix 0)) ∧
+      LinearMap.range
+        (Matrix.toLin' (PassantCodeQ13.AssociationTransport.orbitSupportMatrix
+          (supportOrbit representativeDihedralA)).transpose) =
+          LinearMap.ker (Matrix.toLin'
+            (PassantCodeQ13.AssociationTransport.relationLinearMatrix 0)) ∧
+      LinearMap.range
+        (Matrix.toLin' (PassantCodeQ13.AssociationTransport.orbitSupportMatrix
+          (supportOrbit representativeDihedralB)).transpose) =
+          LinearMap.ker (Matrix.toLin'
+            (PassantCodeQ13.AssociationTransport.relationLinearMatrix 0)) ∧
+      LinearMap.range
+        (Matrix.toLin' (PassantCodeQ13.AssociationTransport.orbitSupportMatrix
+          (supportOrbit representativeDihedralC)).transpose) =
+          LinearMap.ker (Matrix.toLin'
+            (PassantCodeQ13.AssociationTransport.relationLinearMatrix 0)) :=
+  PassantCodeQ13.AssociationTransport.every_minimum_orbit_spans_rhoZero_kernel
 
 end PassantCodeQ13.Gates.Main

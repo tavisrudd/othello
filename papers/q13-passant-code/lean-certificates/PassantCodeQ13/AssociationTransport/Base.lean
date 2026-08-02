@@ -5,10 +5,10 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 /-!
 # Binary matrix semantics for association and orbit certificates
 
-This definitions-only module interprets encoded bit rows as matrices over `ZMod 2`.  It also proves
-once that an executable Boolean parity product is ordinary matrix multiplication over the binary
-field.  Finite relation and orbit leaves use the Boolean evaluator; their aggregators transport the
-results through `parityProductMatrix_eq_mul` without repeating field arithmetic.
+This module evaluates relation and orbit matrices over `Bool`, then proves once that Boolean parity
+linearizes to ordinary matrix multiplication over `ZMod 2`.  Finite leaves never perform field
+arithmetic; their aggregators transport only compact entry checks through
+`booleanParityProduct_linearize`.
 -/
 
 namespace PassantCodeQ13.AssociationTransport
@@ -21,10 +21,6 @@ abbrev Coordinate := Fin 78
 
 /-- The 91 rows in each displayed projective minimum-word orbit. -/
 abbrev OrbitCoordinate := Fin 91
-
-/-- Interpret 78 encoded binary rows as a matrix over the binary field. -/
-def binaryMatrix (rows : List Nat) : Matrix Coordinate Coordinate (ZMod 2) :=
-  fun row column => if (rows.getD row.1 0).testBit column.1 then 1 else 0
 
 /-- Embed a Boolean parity value in the binary field. -/
 def boolValue (value : Bool) : ZMod 2 :=
@@ -113,41 +109,6 @@ theorem booleanMatrixEqualityCheck_sound {rowCard columnCard : Nat}
   simp only [booleanMatrixEqualityCheck, List.all_eq_true, List.forall_mem_ofFn_iff, id_eq] at checked
   exact eq_of_beq (checked row column)
 
-private theorem zmodTwo_eq_zero_or_one (value : ZMod 2) : value = 0 ∨ value = 1 := by
-  revert value
-  native_decide
-
-/-- Boolean parity of one row-column product. -/
-def productParity {Rows Columns : Type*} {middleCard : Nat}
-    (left : Matrix Rows (Fin middleCard) (ZMod 2))
-    (right : Matrix (Fin middleCard) Columns (ZMod 2))
-    (row : Rows) (column : Columns) : Bool :=
-  ((List.ofFn fun middle : Fin middleCard =>
-      left row middle = 1 && right middle column = 1).foldl
-    (fun parity term => if term then !parity else parity) false)
-
-/-- Matrix product evaluated by Boolean parity before embedding in `ZMod 2`. -/
-def parityProductMatrix {Rows Columns : Type*} {middleCard : Nat}
-    (left : Matrix Rows (Fin middleCard) (ZMod 2))
-    (right : Matrix (Fin middleCard) Columns (ZMod 2)) :
-    Matrix Rows Columns (ZMod 2) :=
-  fun row column => boolValue (productParity left right row column)
-
-/-- Compact Boolean equality check for finite matrices. -/
-def matrixEqualityCheck {rowCard columnCard : Nat}
-    (left right : Matrix (Fin rowCard) (Fin columnCard) (ZMod 2)) : Bool :=
-  (List.ofFn fun row : Fin rowCard =>
-    (List.ofFn fun column : Fin columnCard => decide (left row column = right row column)).all id
-  ).all id
-
-/-- A successful compact entry check gives extensional matrix equality. -/
-theorem matrixEqualityCheck_sound {rowCard columnCard : Nat}
-    {left right : Matrix (Fin rowCard) (Fin columnCard) (ZMod 2)}
-    (checked : matrixEqualityCheck left right = true) : left = right := by
-  ext row column
-  simp only [matrixEqualityCheck, List.all_eq_true, List.forall_mem_ofFn_iff, id_eq] at checked
-  exact of_decide_eq_true (checked row column)
-
 private theorem parityFold_value
     (conditions : List Bool) (initial : Bool) :
     boolValue (conditions.foldl (fun parity term => if term then !parity else parity) initial) =
@@ -177,25 +138,5 @@ theorem booleanParityProduct_linearize {Rows Columns : Type*} {middleCard : Nat}
   apply Finset.sum_congr rfl
   intro middle _
   cases left row middle <;> cases right middle column <;> rfl
-
-/-- Boolean parity multiplication agrees with ordinary matrix multiplication over `ZMod 2`. -/
-theorem parityProductMatrix_eq_mul {Rows Columns : Type*} {middleCard : Nat}
-    (left : Matrix Rows (Fin middleCard) (ZMod 2))
-    (right : Matrix (Fin middleCard) Columns (ZMod 2)) :
-    parityProductMatrix left right = left * right := by
-  ext row column
-  rw [Matrix.mul_apply]
-  change boolValue
-      ((List.ofFn fun middle : Fin middleCard =>
-        left row middle = 1 && right middle column = 1).foldl
-          (fun parity term => if term then !parity else parity) false) = _
-  rw [parityFold_value]
-  simp only [boolValue, Bool.false_eq_true, ↓reduceIte, zero_add, List.map_ofFn,
-    Function.comp_apply, List.sum_ofFn]
-  apply Finset.sum_congr rfl
-  intro middle _
-  rcases zmodTwo_eq_zero_or_one (left row middle) with leftZero | leftOne <;>
-    rcases zmodTwo_eq_zero_or_one (right middle column) with rightZero | rightOne <;>
-    simp_all
 
 end PassantCodeQ13.AssociationTransport
