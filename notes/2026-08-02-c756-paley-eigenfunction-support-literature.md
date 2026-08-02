@@ -628,11 +628,14 @@ nothing published since that changes it.
 
 **(c) The two named improvements, checked individually against `m = 2`.**
 
-- Asgarli-Yip, arXiv:2106.01522, Corollary 4.4, verbatim: "Under the same assumptions as in
-  Theorem 1.3, if `|S| < (q^2-1)/2`, then for any clique `C` in `X` with
-  `|C| > q - 1 - (sqrt(q))/(m) sqrt(q)`" — the OCR of the displayed fraction is unreliable, but the
-  gating hypothesis is unambiguous: `|S| < (q^2-1)/2`. For `P(q^2)` the connection set is the set of
-  nonzero squares, `|S| = (q^2-1)/2` exactly, so the hypothesis fails. Excluded.
+- Asgarli-Yip, arXiv:2106.01522, Corollary 4.4 (p. 13), verbatim (re-extracted with `pdftotext
+  -layout` to get the fractions right): "Under the same assumptions as in Theorem 1.3, if
+  `|S| < (q^2-1)/2`, then for any clique `C` in `X` with `|C| > q - 1 - (m/(q+1)) sqrt(q)` and
+  `0, 1 in C`, we have `C subset F_q`." Here `m` is the number of `F*_q`-cosets making up `S`.
+  Formally substituting the Paley value `m = (q+1)/2` would give the threshold
+  `q - 1 - sqrt(q)/2`, matching Sziklai's `m = 2` case — but the gating hypothesis
+  `|S| < (q^2-1)/2` fails exactly there, since for `P(q^2)` the connection set is the set of nonzero
+  squares and `|S| = (q^2-1)/2` on the nose. Excluded, by a hair, and deliberately so.
 - Goryainov-Shalaginov-Yip, §6 "Stability of canonical cliques". Theorem 6.1
   (arXiv:2203.16081v3, p. 29), verbatim: "Let `m | (q+1)` and `2 <= m <= (q+1)/3`. If `C'` is a
   maximal clique in the generalised Paley graph `GP(q^2, m)` which is not maximum, then
