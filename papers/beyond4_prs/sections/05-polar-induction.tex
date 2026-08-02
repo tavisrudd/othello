@@ -397,9 +397,25 @@ When the list is clear we write
 \end{definition}
 
 
-\begin{theorem}[One-step polar escape]\label{thm:induction}
-Let \(f\in S_n(\F_q)\) have a one-step lower package as in
-Definition~\ref{def:lower-package}.  Put
+\begin{theorem}[Finite-depth polar escape]\label{thm:induction}
+Let \(s\geq1\) and \(f\in S_n(\F_q)\).  Suppose that coherent markers
+can be chosen in \(s\) stages with the following uniform data.
+After every surviving partial flag of length \(i<s\), the unavailable
+choices for the next marker form a zero-dimensional scheme on
+\(\PP(E^\vee)\) of degree at most \(d_{i+1}\).  Outside this scheme
+the next contraction is nonzero, the markers remain distinct, and all
+earlier markers remain forbidden.  After \(s\) contractions, every
+surviving flag lies in one of finitely many strata \(\alpha\) carrying
+a proper geometrically integral curve \(Y_{\alpha,\boldsymbol\lambda}\) with
+\[
+ \#Y_{\alpha,\boldsymbol\lambda}(\F_q)\geq
+ q+\kappa_\alpha-2g_\alpha\sqrt q .
+\]
+Assume that a deletion scheme of degree at most \(\delta_\alpha\)
+contains the singular, branch, diagonal, collision, and all retained-
+marker incidences, and that every remaining rational point gives a
+split squarefree member of the terminal Hankel system avoiding every
+marker.  Put
 \[
 \mathcal H_\kappa(g,\delta)=
 1+\left\lfloor
@@ -412,30 +428,36 @@ If
 \[
 q\geq \max_\alpha
 \mathcal H_{\kappa_\alpha}(g_\alpha,\delta_\alpha)
-\quad\text{and}\quad q+1>d,
+\quad\text{and}\quad
+q+1>\max_{1\leq i\leq s}d_i,
 \]
 then \(W_f\) contains a split squarefree member.
 \end{theorem}
 
 \begin{proof}
-Since \(\#\PP^1(\F_q)=q+1>d\), choose
-\(\lambda\notin Z_f(\F_q)\).  On the corresponding lower stratum the
-recorded point bound
+Choose the markers successively.  At stage \(i\), a zero-dimensional
+scheme of degree at most \(d_i<q+1\) cannot contain all
+\(q+1\) rational points of \(\PP^1\), so a surviving choice exists.
+On the resulting terminal stratum the recorded point bound
 gives
 \[
  q+\kappa_\alpha-2g_\alpha\sqrt q>\delta_\alpha,
 \]
 so there is a rational point outside all deletions.  It yields a split
-squarefree lower member avoiding \(\lambda\).  Equation
-\eqref{eq:lift} lifts it to a split squarefree member upstairs,
-so the original system is shallow.
+squarefree terminal member avoiding every marker.  Repeated application
+of Equation~\eqref{eq:lift} multiplies it by the distinct marker factors;
+the avoidance hypotheses make the resulting member of \(W_f\)
+squarefree.
 \end{proof}
 
-The theorem isolates the numerical escape and one-step lifting
-argument.  Iterating it requires the contained-component assertion at
-every intermediate level, not only at the top.  This paper applies the
-argument only in the direct redundancy-six and redundancy-seven
-calculations below and makes no arbitrary-level iteration claim.
+The one-step theorem used below is the case \(s=1\): a lower package in
+Definition~\ref{def:lower-package} supplies \(d_1=d\) and the terminal
+curve data.  The theorem isolates the uniform numerical escape and
+lifting argument at every finite depth.  Applying it at a new
+redundancy still requires a complete contained-component assertion and
+uniform lower package at every intermediate level.  This paper verifies
+those inputs only at depths one and two, for redundancies six and seven;
+it makes no arbitrary-level carrier-classification claim.
 
 
 \subsection{Contained-component calculations}

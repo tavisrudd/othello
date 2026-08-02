@@ -88,7 +88,7 @@ by `supplement/verify.py`.
 The aggregate imports the shared foundation, redundancy-five,
 polar-induction and redundancy-six/seven gates.  It also regression-checks
 companion stable-component and uniform-radius interfaces that are not adopted
-as Version 1 paper theorems. Its audit covers the adopted algebraic,
+as current-draft classification theorems. Its audit covers the adopted algebraic,
 contraction, arithmetic, finite-table, and conditional synthesis terminals.
 It reports no project-specific axiom or
 opaque computational oracle; only `propext`, `Classical.choice`, and
@@ -102,10 +102,12 @@ terminals are direct specializations of the imported generic MDS--CSS
 theorems.
 
 `RelativeConicArcs.PRSUniformCoveringRadius` checks the arithmetic of a
-proposed all-level threshold and the \((q,r)=(8,6)\) endpoint, but Version 1
-does not consume that proposal.
+proposed all-level threshold and the \((q,r)=(8,6)\) endpoint, but the current
+draft does not consume that proposal.
 `PRSPolarInduction.RecursiveContainedInput` checks the finite recursive
-classification once component selection and one-step lifts are supplied.
+classification once component selection and finite-depth lifting inputs are
+supplied.  The manuscript proves the finite-depth marker-choice and lifting
+theorem directly; it verifies the concrete carrier inputs only for R6 and R7.
 The radius module then composes separately supplied Seroussi--Roth and Dür
 implications with `PRSFoundation.CoveringRadiusInput`. Irreducible-component
 selection, concrete scheme geometry, code duality, nonextendability,

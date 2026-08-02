@@ -9,7 +9,10 @@ The paper proves complete deep-hole classifications at redundancies five and
 six over every prime power \(q\geq7\).  At redundancy seven it proves the
 complete split-free classification over the same range and promotes it to a
 deep-hole classification whenever the covering radius is six, in particular
-for \(q\geq11\).  It makes no arbitrary-redundancy claim.
+for \(q\geq11\).  Its finite-depth coherent-polar escape theorem treats the
+uniform lifting step at arbitrary depth; the paper proves the required
+contained-carrier hypotheses only at depths one and two and therefore makes no
+arbitrary-redundancy classification claim.
 
 ## Build
 
@@ -55,9 +58,10 @@ retain the explicit trust routes recorded in
 ## Scope
 
 Redundancies eight and nine, ordered-Hessian geometry, arbitrary-level
-stable-component assertions, and higher Lucas-carrier arithmetic are companion
-work.  They are neither manuscript theorems nor inputs to the R5--R7
-classifications.
+contained-carrier classification, and higher Lucas-carrier arithmetic are
+companion work.  They are neither manuscript classification theorems nor
+inputs to the R5--R7 results.  The finite-depth escape theorem deliberately
+exposes these missing carrier hypotheses instead of assuming them.
 
 Public release remains blocked on the immutable paper and Lean exports,
 independent specialist signoffs, public identifiers, and author/account

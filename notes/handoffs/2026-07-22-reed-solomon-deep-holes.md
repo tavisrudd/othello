@@ -2,7 +2,7 @@
 
 **Lane**: `reed-solomon`
 
-**Date:** 2026-07-26
+**Date:** 2026-08-02
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
 C603 and C656 complete. A second pair of independent cold reads exposed and
@@ -29,6 +29,15 @@ A same-day literature delta found no new or revised pre-empting work; it
 resolved one earlier abstract-access gap by confirming that
 Cheng--Wu--Zhou treats a non-Reed--Solomon evaluation code. The bounded
 search record is `notes/2026-07-26-c656-prs-literature-delta.md`.
+
+C819 upgrades the working Version 2 draft without consuming companion
+geometry: the polar theorem now permits arbitrary finite depth under explicit
+stagewise carrier/marker and terminal-cover hypotheses, and R6/R7 are its
+depth-one/depth-two specializations.  Both manuscript builds and the
+scope-sensitive 45-artifact verifier are green.  The missing all-level content
+is isolated exactly in C820: bottom primary decomposition, the true
+modular-union pullback degree, and generic-point recursive transport.  C620
+then owns higher-Lucas split-freeness, and C821 owns final Version 2 synthesis.
 
 At the C656 checkpoint, its cold audit rejected the arbitrary-level
 stable-component release claim and narrowed Version 1 to the complete R5--R7
@@ -935,11 +944,13 @@ companion formal geometry and is not a dispatch candidate in this ranking.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C545 | external release gates | publish the exact repaired R5--R7 Lean revision and paper-only export; obtain two publication-independent human signoffs, immutable identifiers, and author/account confirmation before upload |
-| 2 | C660 | only after Version 1 is published | remove R7's largest remaining computational single point of trust by deriving finite completeness without the primary quotient enumerator |
-| 3 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion identified independently by both full-draft cold readers |
-| 4 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
-| 5 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
+| 1 | C545 | external release gates | publish the exact repaired R5--R7 Version 1 priority record; this unlocks C620 and keeps Version 2 research from delaying the reviewed artifact |
+| 2 | C820 | after C819; compose with C646 | close C656's three concrete geometric defects and prove the strongest honest recursively contained-carrier theorem |
+| 3 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion needed to evaluate the recursive theorem on new characteristic-two strata |
+| 4 | C660 | only after Version 1 is published | remove R7's largest remaining computational single point of trust before final Version 2 synthesis |
+| 5 | C821 | after C820/C646 and the C620 placement decision | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
+| 6 | C608 | only after Version 1 is published | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
+| 7 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
