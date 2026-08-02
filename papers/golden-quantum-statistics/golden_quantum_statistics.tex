@@ -95,7 +95,11 @@ on the symmetric cube.
 Theorems~\ref{thm:orbit-boundary} and~\ref{thm:exchange-boundary} state this
 distinction and its exact balanced specialization.  The remaining sections separate intrinsic
 observables from calibrated ones, give a short arithmetic application, and
-identify the boundary of a photonic implementation.  General
+identify the boundary of a photonic implementation.  The permanent
+description of multiphoton scattering is standard~\cite{Scheel}; immanants
+organize the intermediate symmetry sectors~\cite{Tichy}, and general
+partial-distinguishability formalisms precede the complementarity identities
+used here~\cite{Shchesnovich}.  General
 boson--fermion complementarity in linear interferometers is due to
 Jabbour and Cerf~\cite{JabbourCerf}; its extension to partially distinguishable
 particles is due to Robbio, Jabbour, and Cerf~\cite{RobbioJabbourCerf}.  The
@@ -133,6 +137,14 @@ These are the Segre equations in Joubert coordinates.  The equations and the
 outer \(S_6\)-action are classical invariant theory
 \cite{HowardMillsonSnowdenVakil}; the point used below is their realization as
 six amplitudes of one marked transfer.
+
+The six coordinate lines obtained from either three-dimensional eigenspace
+form the classical real \(\operatorname{ETF}(3,6)\) associated with a symmetric
+conference matrix~\cite{FickusMixon}.  In measurement language these are the
+six icosahedral lines of the real three-level SIC~\cite{BengtssonZyczkowski};
+they are not the nine-line informationally complete SIC for a complex qutrit.
+This distinction matters here because the transfer is real and its port
+orientation is part of the calibrated data.
 
 \section{Why the determinant retains orientation}
 
@@ -419,9 +431,11 @@ The photonic fermion emulator of Matthews et al.~\cite{Matthews} sends an
 entangled resource through identical copies of a one-particle process.  For
 three particles in this setting it requires a totally antisymmetric state of
 three photonic qutrits.  Goyal et al.~\cite{Goyal} give a linear-optical
-preparation proposal for this state.  The design evaluated here treats a
-demonstrated, characterized source of that resource as an unmet input.  A
-three-qutrit GHZ state, although experimentally accessible
+preparation proposal for this state, and Piccolini et
+al.~\cite{PiccoliniSinglet} give a second interferometric proposal.  To our
+knowledge, no experiment has prepared and characterized this three-photon
+qutrit singlet.  The design therefore treats such a source as an unmet input.
+A three-qutrit GHZ state, although experimentally accessible
 \cite{Hu}, has different exchange symmetry and does not substitute for it.
 
 The determinant perturbation bound
@@ -485,6 +499,23 @@ literature priority.
 \raggedright
 \begin{thebibliography}{99}
 
+\bibitem{Scheel}
+S.~Scheel,
+\emph{Permanents in linear optical networks},
+arXiv:quant-ph/0406127.
+
+\bibitem{Tichy}
+M.~C. Tichy,
+\emph{Interference of identical particles from entanglement to boson
+sampling},
+arXiv:1312.4266.
+
+\bibitem{Shchesnovich}
+V.~S. Shchesnovich,
+\emph{Partial indistinguishability theory for multiphoton experiments in
+multiport devices},
+arXiv:1410.1506.
+
 \bibitem{JabbourCerf}
 M.~G. Jabbour and N.~J. Cerf,
 \emph{Boson--fermion complementarity in a linear interferometer},
@@ -501,6 +532,16 @@ B. Howard, J. Millson, A. Snowden, and R. Vakil,
 \emph{A description of the outer automorphism of \(S_6\), and the invariants
 of six points in projective space},
 J. Combin. Theory Ser. A \textbf{115} (2008), 1296--1303.
+
+\bibitem{FickusMixon}
+M.~Fickus and D.~G. Mixon,
+\emph{Tables of the existence of equiangular tight frames},
+arXiv:1504.00253.
+
+\bibitem{BengtssonZyczkowski}
+I.~Bengtsson and K.~\.{Z}yczkowski,
+\emph{On discrete structures in finite Hilbert spaces},
+arXiv:1701.07902.
 
 \bibitem{CostaDobrescuFox}
 D.~B. Costa, B.~A. Dobrescu, and P.~J. Fox,
@@ -526,6 +567,12 @@ Sci. Rep. \textbf{3} (2013), 1539.
 S.~K. Goyal et al.,
 \emph{Qudit-teleportation for photons with linear optics},
 Sci. Rep. \textbf{4} (2014), 4543.
+
+\bibitem{PiccoliniSinglet}
+M.~Piccolini, M.~Karczewski, A.~Winter, and R.~Lo Franco,
+\emph{Robust generation of \(N\)-partite \(N\)-level singlet states by
+identical-particle interferometry},
+arXiv:2312.17184.
 
 \bibitem{Hu}
 X.-M. Hu et al.,
