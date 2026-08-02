@@ -2258,8 +2258,17 @@
       "last": 803,
       "purpose": "Paper II fixed-line and Chow-rigidity literature audit",
       "sequence": 251
+    },
+    {
+      "count": 2,
+      "first": 804,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 805,
+      "purpose": "red-team and A/B the local-dimension-two specialization inversion; implement cold-read figures",
+      "sequence": 252
     }
   ],
-  "next_id": 804,
+  "next_id": 806,
   "schema": "codex-task-id-allocations-v1"
 }
