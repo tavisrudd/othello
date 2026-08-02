@@ -2,6 +2,11 @@
 
 This ledger records the claim-level boundary established by the 2026-08-01
 headline literature sweep. It licenses no unqualified claim of priority.
+That bounded sweep read the cited primary sources and screened Crossref,
+OpenAlex, Semantic Scholar, and zbMATH Open results and forward citations.
+MathSciNet and automated Google Scholar were unavailable; two published full
+texts and a subject-expert check also remained open.  Rows `OPER-3` and
+`OPER-4` therefore record negative search results, not priority claims.
 
 | Claim row | Mathematical and evidence status | Established literature boundary | Paper-owned content and wording boundary |
 |---|---|---|---|
