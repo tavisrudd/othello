@@ -270,7 +270,12 @@ window was lost.  The remaining step is to run
       RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms \
       --profile single --threads 1 --cores 20-23
 
-in a quiet window and record the gate's `--no-build` confirmation.  Until that is
+in a quiet window and record the gate's `--no-build` confirmation.  A run of
+exactly that command was submitted while this work was finishing and was still
+waiting for a quiet window; its run directory is
+`~/.cache/othello-lean-build/run-20260802-084409-67b7d51a`, and
+`lean/scripts/lean-build-queue.py status <that directory>` reports its outcome
+without resubmitting it.  Until that is
 done, the trust statement above rests on the full-source elaboration and the
 axiom audit taken in that same elaboration, which is exact evidence about the
 same declarations but not the lane's documented exit gate.
