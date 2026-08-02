@@ -42,6 +42,11 @@ The release aggregate ended `ALL CHECKS PASS`, including the exact statement
 identity, every primary and independent evidence replay, manuscript build, and
 warning-free build.
 
+The clean standalone paper root was then synchronized and passed the same
+aggregate.  Monorepo integration commit: `5258ceaa`; standalone forward commit:
+`28cb42e`.  The monorepo's pre-existing generated-PDF modification remains
+untouched.
+
 ## Closeout
 
 The extra-juice check tested whether C718 supplied a second invariant that
