@@ -1,0 +1,172 @@
+{
+  "normalization": "polynomial is det(t I - R R^T); cuts contain vertex 0",
+  "orders": [
+    {
+      "aligned_four_set_count_distribution": [
+        {
+          "count": 0,
+          "multiplicity": 10
+        }
+      ],
+      "balanced_projective_cuts": 10,
+      "cross_gram_characteristic_polynomials": [
+        {
+          "coefficients": [
+            1,
+            -9,
+            24,
+            -16
+          ],
+          "multiplicity": 10
+        }
+      ],
+      "order": 6,
+      "principal_fourth_trace_distribution": [
+        {
+          "multiplicity": 10,
+          "trace": 18
+        }
+      ]
+    },
+    {
+      "aligned_four_set_count_distribution": [
+        {
+          "count": 0,
+          "multiplicity": 36
+        },
+        {
+          "count": 1,
+          "multiplicity": 90
+        }
+      ],
+      "balanced_projective_cuts": 126,
+      "cross_gram_characteristic_polynomials": [
+        {
+          "coefficients": [
+            1,
+            -25,
+            224,
+            -832,
+            1024,
+            0
+          ],
+          "multiplicity": 90
+        },
+        {
+          "coefficients": [
+            1,
+            -25,
+            240,
+            -1120,
+            2560,
+            -2304
+          ],
+          "multiplicity": 36
+        }
+      ],
+      "order": 10,
+      "principal_fourth_trace_distribution": [
+        {
+          "multiplicity": 36,
+          "trace": 100
+        },
+        {
+          "multiplicity": 90,
+          "trace": 132
+        }
+      ]
+    },
+    {
+      "aligned_four_set_count_distribution": [
+        {
+          "count": 5,
+          "multiplicity": 546
+        },
+        {
+          "count": 7,
+          "multiplicity": 1170
+        }
+      ],
+      "balanced_projective_cuts": 1716,
+      "cross_gram_characteristic_polynomials": [
+        {
+          "coefficients": [
+            1,
+            -49,
+            952,
+            -9296,
+            47488,
+            -118272,
+            114688,
+            -36864
+          ],
+          "multiplicity": 78
+        },
+        {
+          "coefficients": [
+            1,
+            -49,
+            952,
+            -9264,
+            46848,
+            -115456,
+            116736,
+            -36864
+          ],
+          "multiplicity": 546
+        },
+        {
+          "coefficients": [
+            1,
+            -49,
+            952,
+            -9232,
+            45696,
+            -101888,
+            61440,
+            -4096
+          ],
+          "multiplicity": 546
+        },
+        {
+          "coefficients": [
+            1,
+            -49,
+            984,
+            -10480,
+            64000,
+            -225024,
+            423936,
+            -331776
+          ],
+          "multiplicity": 182
+        },
+        {
+          "coefficients": [
+            1,
+            -49,
+            984,
+            -10384,
+            60928,
+            -190464,
+            262144,
+            -65536
+          ],
+          "multiplicity": 364
+        }
+      ],
+      "order": 14,
+      "principal_fourth_trace_distribution": [
+        {
+          "multiplicity": 546,
+          "trace": 342
+        },
+        {
+          "multiplicity": 1170,
+          "trace": 406
+        }
+      ]
+    }
+  ],
+  "schema": "c788-balanced-cut-spectrum-v1"
+}

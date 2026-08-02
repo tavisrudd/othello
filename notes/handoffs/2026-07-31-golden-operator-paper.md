@@ -485,10 +485,20 @@ Golden/conference naming bridge and compact three-cut decoder, removes the
 anomaly branch from the main narrative, and passes the complete gate locally
 and from an auxiliary-free tagged extraction.
 
-C788 is queued as a pure-theory, AI-speed investigation of the general
-order-`2d` balanced-cut exchange spectrum.  Its first gate is an hours-scale
-symbolic/exact falsifier; proceed to a full theorem only if the dependence on
-the principal block admits a clean cut-independence classification.
+C788 is complete, research-only, with no manuscript edit.  For every symmetric
+conference matrix of order (2d), the balanced exchange spectrum is the
+normalized cross-Gram spectrum (\operatorname{Spec}(RR^{\mathsf T}/(2d-1))).
+The first exchange moment is universal; the second is an exact affine count of
+aligned four-sets.  Inclusion-matrix injectivity and (R(3,3)=6) prove that
+cut-independent purity, hence cut-independent full spectrum, occurs exactly for
+(d\leq3).  Thus order six is the unique nontrivial realized uniform case, not
+the start of a higher-order family.  The exact order-6/10/14 falsifier passes.
+A five-source audit found spectral monomorphy as the closest framework but no
+exact singular-spectral predecessor; MathSciNet, Google Scholar, two published
+full texts, and a subject-expert check remain open, so no “first” claim is
+licensed.  Report and audit:
+`notes/2026-08-02-c788-general-balanced-cut-spectrum.md` and
+`notes/2026-08-02-c788-balanced-cut-spectrum-literature-audit.md`.
 
 The third cold-reader repairs are complete at
 `golden-quantum-statistics-editorial-referee-revised`: the balanced-spectrum
@@ -501,11 +511,9 @@ reference remain user-owned.
 
 1. Preserve `golden-quantum-statistics-observable-hierarchy-selected` as the
    forward PRA manuscript; baseline A and tested B remain separately tagged.
-2. Run C788's fast structural/falsifier gate.  This is the only queued A-level
-   upgrade and is pure theory; no laboratory or hardware-data route is active.
-3. The user will post the accepted package, assign live identifiers, and add
+2. The user will post the accepted package, assign live identifiers, and add
    the Clebsch forward reference.
-4. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths
