@@ -2150,8 +2150,17 @@
       "last": 790,
       "purpose": "prove the Smith normal form of the lift lattice equals the Schur filtration",
       "sequence": 239
+    },
+    {
+      "count": 2,
+      "first": 791,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 792,
+      "purpose": "integrate the balanced singular-spectrum rigidity consequence separately into forward Paper I and Paper III versions with audited attribution and preserved paper boundaries",
+      "sequence": 240
     }
   ],
-  "next_id": 791,
+  "next_id": 793,
   "schema": "codex-task-id-allocations-v1"
 }
