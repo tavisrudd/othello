@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Eleven research passes complete; the theorem is **not** proved. Reports:
+Twelve research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -39,7 +39,8 @@ Eleven research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-segre-discriminant-comparison.md`, and
 `notes/2026-08-01-c756-subresultant-moment-obstruction.md`, and
 `notes/2026-08-01-c756-saturated-internal-branch.md`, and
-`notes/2026-08-01-c756-intercept-subresultant-probe.md`.
+`notes/2026-08-01-c756-intercept-subresultant-probe.md`, and
+`notes/2026-08-01-c756-information-probability-structure-lottery.md`.
 
 Branch ledger:
 
@@ -179,6 +180,28 @@ What the bounded dual-pencil/intercept pass adds:
   all-internal near-transversals themselves; it closes only their last identified
   small-degree algebraic compression.
 
+What the information/probability pass adds:
+
+- deleting the spare-line point identifies the remaining affine points with degree-one
+  Reed--Solomon words \(c_i(t)=y_i-tx_i\); chord directions and intercepts are exactly
+  pairwise agreement coordinates and symbols;
+- the arc condition makes every agreement cell contain one chord, covering makes every
+  coordinate nonempty, and conic externality restricts every agreement symbol to a
+  direction-dependent quadratic-character half-alphabet;
+- for chord-direction multiplicities \(\mu_t\), the conditional entropy and Renyi
+  collision statistic are
+  \(H(U\mid T)=\binom{n}{2}^{-1}\sum_t\mu_t\log\mu_t\) and
+  \(\Pr(T=T')=(\binom{n}{2}+2R)/\binom{n}{2}^2\), where
+  \(R=\sum_t\binom{\mu_t}{2}\) counts pairs of parallel chords;
+- covering gives a sharp convexity upper bound
+  \(R\le R_{\rm cover}(n,\delta)\), equal to 3 at defect two.  A conic-character
+  lower bound exceeding this threshold would be a uniform nonsaturated obstruction;
+  the needed mask-to-variance inequality is not yet proved;
+- six exact covering controls verify the collision dictionary and show ordinary covering
+  disperses rather than concentrates excess chords.  The next cheap falsification test is
+  to record \((\delta,R,R_{\rm cover})\) in the existing conic-external enumeration
+  through \(q\le43\).
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -218,18 +241,22 @@ Two independent uniform obstructions are still required:
 The old secant-pencil and association-scheme candidates are superseded.  The active
 saturated-internal gate is the coherent Paley double-clique classification (equivalently,
 exploit balance, simultaneous angle bijections, or the master-polynomial divisibility).
-The nonsaturated branch has no bounded algebraic-compression gate left; only a structural
-classification of the dual internal-node near-transversal, a pair-coupled carrier, or a
-uniform second-order covering count remains identified.
+The nonsaturated branch has no bounded algebraic-compression gate left.  Its pair-coupled
+and second-order possibilities now have one exact common target: use the conic-character
+mask to force the parallel-chord collision count \(R\) above the sharp covering threshold.
+This is a falsifiable carrier, not yet a mechanism; the structural classification of the
+dual internal-node near-transversal remains the other identified possibility.
 
 Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
 now has the same theorem-shaped status the saturated-external branch had two passes before
 closure, but the tight balance theorem proves that another spectral bound cannot finish it.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot
-close.  Cheap hygiene still owed before a later end-to-end handoff is one explicit
+close.  The masked Reed--Solomon collision formulation gives the 10--15% nonsaturated
+lottery ticket a precise fourth-moment threshold, but does not yet raise its odds.  Cheap
+hygiene still owed before a later end-to-end handoff is one explicit
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
-read of the full eleven-pass argument; neither item reopens a closed mathematical branch.
+read of the full twelve-pass argument; neither item reopens a closed mathematical branch.
 
 Decision split: do not price the saturated crown and the full theorem as one outcome.
 The realistic publishable narrowing is the **complete saturated classification** — over
