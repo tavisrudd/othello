@@ -13,8 +13,6 @@ manual edit or stale generation.
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.Binary` | `ProjectiveCap.Binary` | 1 | 1 | extracted and matched |
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.EllipticMirror` | `ProjectiveCap.EllipticMirror` | 2 | 2 | extracted and matched |
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.PlaneOutcome` | `ProjectiveCap.PlaneOutcome` | 3 | 3 | extracted and matched |
-| `trust-spine:relconic:gate:RelativeConicArcs.Gates.AlternateOrbitRepairQ25` | `RelativeConicArcs.Gates.AlternateOrbitRepairQ25` | 1 | 0 | 1 await extraction |
-| `trust-spine:relconic:gate:RelativeConicArcs.Gates.Baer` | `RelativeConicArcs.Gates.Baer` | 1 | 0 | 1 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ClebschOrientationMechanisms` | `RelativeConicArcs.Gates.ClebschOrientationMechanisms` | 12 | 0 | 12 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` | `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` | 32 | 0 | 32 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.GoldenCubicNodes` | `RelativeConicArcs.Gates.GoldenCubicNodes` | 17 | 0 | 17 await extraction |
@@ -27,6 +25,6 @@ manual edit or stale generation.
 |---|---:|---:|---|
 | `trust-spine:complete_ports` | 42 | 36 | 6 terminal axiom sets await extraction |
 | `trust-spine:finitegeom_first_tag` | 7 | 7 | all terminal axioms extracted and matched |
-| `trust-spine:relconic` | 77 | 0 | 77 terminal axiom sets await extraction |
+| `trust-spine:relconic` | 76 | 0 | 76 terminal axiom sets await extraction |
 
-The machine-readable list contains exactly 126 adopted public terminals.
+The machine-readable list contains exactly 125 adopted public terminals.

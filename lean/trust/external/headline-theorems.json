@@ -2457,24 +2457,6 @@
     },
     {
       "axiom_status": "declared-unextracted",
-      "declaration": "RelativeConicArcs.Q25AllProfiles.pair_extension",
-      "declaration_module": null,
-      "expected_axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "facts_artifacts": [],
-      "gates": [
-        "RelativeConicArcs.Gates.AlternateOrbitRepairQ25",
-        "RelativeConicArcs.Gates.Baer"
-      ],
-      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Q25AllProfiles.pair_extension",
-      "observed_axioms": null,
-      "trust_area": "relconic"
-    },
-    {
-      "axiom_status": "declared-unextracted",
       "declaration": "RelativeConicArcs.WeightedMatchingEvaluation.bracketProduct_scale",
       "declaration_module": null,
       "expected_axioms": [

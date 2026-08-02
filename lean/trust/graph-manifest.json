@@ -1,12 +1,12 @@
 {
-  "canonical_bytes": 18203626,
-  "canonical_sha256": "a0a213f7a6141dee662d8bbdbe6f4a7063afe5442814836ce15426e721a8d68a",
+  "canonical_bytes": 18201740,
+  "canonical_sha256": "12ae1f9fbe52a9aec2f5c01da93d20345eb59e1586ef0b91f215d96c41ac7a19",
   "edge_kinds": {
     "declares": 3466,
     "depends_on_axiom": 129,
-    "exports": 127,
+    "exports": 125,
     "has_data_tree": 15,
-    "has_gate": 39,
+    "has_gate": 34,
     "has_member": 10353,
     "imports": 43031,
     "uses": 16340
@@ -17,7 +17,7 @@
     "data_tree": 15,
     "declaration": 3459,
     "external_input": 3,
-    "gate": 39,
+    "gate": 34,
     "module": 13517
   },
   "replay": "lean/scripts/lean-trust-spine.py graph --out <path>",

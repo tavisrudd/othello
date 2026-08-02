@@ -94,31 +94,6 @@ terminals = []
 coverage_rule = "closure"
 
 [[gate]]
-module = "RelativeConicArcs.Gates.Baer"
-terminals = ["RelativeConicArcs.Q25AllProfiles.pair_extension"]
-coverage_rule = "closure"
-
-[[gate]]
-module = "RelativeConicArcs.Gates.AlternateOrbitRepairQ25"
-terminals = ["RelativeConicArcs.Q25AllProfiles.pair_extension"]
-coverage_rule = "closure"
-
-[[gate]]
-module = "RelativeConicArcs.Gates.AlternateOrbitRepairQ25Minimum"
-terminals = []
-coverage_rule = "closure"
-
-[[gate]]
-module = "RelativeConicArcs.Gates.AlternateOrbitRepairParameterized"
-terminals = []
-coverage_rule = "closure"
-
-[[gate]]
-module = "RelativeConicArcs.Gates.AlternateOrbitRepairProfileEnvelope"
-terminals = []
-coverage_rule = "closure"
-
-[[gate]]
 module = "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
 terminals = [
   "RelativeConicArcs.InvolutiveOddUnit.map_evenPart",
@@ -285,20 +260,9 @@ coverage_rule = "closure"
 # deliberately absent until extraction resolves their exact names: a guessed name would produce a
 # green check for a declaration that does not exist.
 #
-# `pair_extension` sits in two gates on purpose.  It is the multi-gate case the schema has to
-# support, since the Baer and Q25 gates cannot be compiled into one environment.
-
 [[terminal]]
 declaration = "RelativeConicArcs.Certificate.check_sound"
 gates = ["RelativeConicArcs.Gates.Relconic"]
-expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
-
-[[terminal]]
-declaration = "RelativeConicArcs.Q25AllProfiles.pair_extension"
-gates = [
-  "RelativeConicArcs.Gates.Baer",
-  "RelativeConicArcs.Gates.AlternateOrbitRepairQ25",
-]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
@@ -683,6 +647,18 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 # are not in any gate closure, so no gate build kernel-checks them and no terminal depends on them.
 # They appear in the unaudited-modules table for exactly that reason.  Removing an entry once its
 # work lands is how the tree stops being invisible.
+
+[[unreached]]
+modules = [
+  "RelativeConicArcs.Baer**",
+  "RelativeConicArcs.Q25**",
+  "RelativeConicArcs.Gates.Baer",
+  "RelativeConicArcs.Gates.AlternateOrbitRepair**",
+]
+severity = "info"
+reason = """\
+Unpublished Baer and alternate-orbit Q25 work.  No adopted standalone-paper manifest names these \
+gates or their `Q25AllProfiles` terminal, so they are outside the paper-facing extraction surface."""
 
 [[unreached]]
 modules = [
