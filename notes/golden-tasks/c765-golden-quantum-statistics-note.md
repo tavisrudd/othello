@@ -67,6 +67,19 @@ gauge-theory simulation.
 The manuscript authority is
 `papers/golden-quantum-statistics/golden_quantum_statistics.tex`.
 
+## Tao-pass strengthening
+
+The post-C767 Tao pass added two general human propositions to keep the paper
+from reading as an exact example alone:
+
+- the determinant is, up to scale, the unique degree-
+  (n) polynomial carrying the left--right port-orientation character;
+- for every orthogonal (d+d) path split, a Boolean cross block can be full
+  rank only at a balanced (d+d) control.
+
+The Golden result is now the exceptional sufficiency and equispectrality of
+all balanced controls, not the general necessity of balance.
+
 ## Exclusions
 
 - no claim that the proposed device has been built;

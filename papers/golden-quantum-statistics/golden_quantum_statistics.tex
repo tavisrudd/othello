@@ -149,6 +149,12 @@ by the ten-dimensional symmetric-cube input space.  Thus the operational
 uniform-input average is \(B_{\mathrm{sym}}/10\).  The second expression is
 the filled three-fermion probability.
 
+Geometrically, the singular values of \(K\) are the cosines of the principal
+angles between the output space and the controlled image of the input space.
+The absolute determinant is their product.  Its sign, after orientations are
+chosen, records whether the induced map between the two determinant lines
+preserves or reverses orientation.
+
 \begin{theorem}[Left--right orbit and orientation boundary]
 \label{thm:orbit-boundary}
 Let \(V\) and \(W\) be real Euclidean spaces of the same dimension
@@ -197,6 +203,31 @@ the special-orthogonal family
 \]
 The permanent therefore varies inside a single special-orthogonal double
 orbit.
+\end{proof}
+
+\begin{proposition}[The determinant is the minimal orientation carrier]
+\label{prop:unique-orientation-carrier}
+Up to scale, \(\det K\) is the unique degree-\(n\) polynomial in the entries
+of \(K\) satisfying
+\[
+ F(R_-^{\mathsf T}KR_+)
+ =\det(R_-)\det(R_+)F(K)
+ \qquad (R_\pm\in O(n)).
+\]
+In particular, an orientation-covariant amplitude of the lowest possible
+degree is forced to be the top exterior amplitude.
+\end{proposition}
+
+\begin{proof}
+Apply diagonal sign changes on the left.  Every monomial of a degree-\(n\)
+relative invariant must have odd degree in each of the \(n\) rows, hence
+degree one in every row.  Right sign changes give degree one in every column.
+The polynomial is therefore a linear combination of the \(n!\) permutation
+monomials.  Invariance under orientation-preserving rotations in each pair of
+rows, followed by a reflection in one row, forces the coefficients of
+permutations differing by a transposition to have opposite signs.  All
+coefficients are thus one common scalar times the permutation sign, which is
+the determinant expansion.
 \end{proof}
 
 Every scalar invariant under the full orthogonal port action consequently
@@ -277,6 +308,30 @@ calibrated apparatus rather than to the unmarked Golden operator.
 
 \section{Balanced controls and calibrated readout}
 
+The necessity of balance is independent of the Golden conference matrix.
+
+\begin{proposition}[Universal balance obstruction]
+\label{prop:balance-obstruction}
+Let \(V_+\oplus V_-\) be an orthogonal splitting of
+\(\mathbb R^{2d}\) into two \(d\)-planes.  For a Boolean path control with
+negative support \(S\), the cross block \(K_S:V_+\to V_-\) satisfies
+\[
+ \operatorname{rank}K_S\leq\min\{|S|,2d-|S|\}.
+\]
+Consequently a nonzero filled \(d\)-fermion amplitude is possible only for a
+balanced \(d+d\) control.
+\end{proposition}
+
+\begin{proof}
+Writing \(P_S\) for the coordinate projection onto the negative paths and
+using orthogonality of the two port spaces gives
+\[
+ K_S=-2Q_-^{\mathsf T}P_SQ_+,
+\]
+so \(\operatorname{rank}K_S\leq|S|\).  Complementing the control negates its
+cross block and gives the second bound.
+\end{proof}
+
 There are \(64\) Boolean controls \(x\in\{\pm1\}^6\).  The twenty balanced
 controls are the common nonzero determinant optimum.  For each one,
 \[
@@ -286,16 +341,8 @@ controls are the common nonzero determinant optimum.  For each one,
 The other 44 controls have zero filled-fermion amplitude.  This gives a sharp
 Boolean boundary rather than a numerical search criterion.
 
-The zero count has a direct rank proof.  If \(S\) is the negative support,
-orthogonality of the two port spaces gives
-\[
- K_T(x)=-2\sum_{i\in S}
- (Q_{T,-}^{\mathsf T}e_i)(e_i^{\mathsf T}Q_{T,+}).
-\]
-Hence \(\operatorname{rank}K_T(x)\leq |S|\).  Replacing \(x\) by \(-x\)
-negates \(K_T(x)\), so also
-\(\operatorname{rank}K_T(x)\leq6-|S|\).  Every unbalanced mask therefore has
-rank at most two.  There are
+Proposition~\ref{prop:balance-obstruction} makes every unbalanced mask rank at
+most two.  There are
 \(2\binom60+2\binom61+2\binom62=44\) such masks.  The common balanced spectrum
 proves that all \(\binom63=20\) remaining masks are invertible.
 
