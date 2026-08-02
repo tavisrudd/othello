@@ -10,16 +10,26 @@ Discovery companion:
 
 ## Current status
 
-**C828 queued (2026-08-02): tighten the manuscript around the four bounded
-C805 cold-read findings.**  Remove or rigorously restrict the unsupported
-minimal-codeword claim, distinguish generator-coordinate radius from the
-defect-only threshold throughout the framing, source or cut the Gross--Van den
-Nest specialization sentence, and split Section 3 while synchronizing all
-numbering and release surfaces.  The task is editorial and corrective: it must
-not enlarge the theorem package.  Its acceptance gate includes adversarial
-proof/scope review, a warning-free build, affected-page and whole-paper visual
-sweeps, evidence/release checks, and standalone synchronization.  See
-`2026-08-02-c828-ame-lu-manuscript-tightening.md`.
+**C830 queued (2026-08-02): post-Version-2 global rounding enhancement.**
+Prove or refute that small global defect forces coherent nearby local Clifford
+frames without reading one exponentially faint half-plus-one marginal.  The
+primary routes are simultaneous balanced-cut constraints and rigidity of the
+half-splitting equality/near-equality cases.  Quantify the threshold actually
+proved; do not promise a constant threshold or describe the present
+`q^{-(n+4)/4}/n` scale as a limit.  See the live queue and the future report
+`2026-08-02-c830-global-ame-rounding.md`.
+
+**C828 closed (2026-08-02): the four bounded C805 corrections are complete.**
+The false arbitrary-additive minimal-codeword claim and the unsourced
+Gross--Van den Nest specialization sentence are removed; the recognition proof
+is unchanged and independent of both.  Every framing and trust surface now
+separates the generator-coordinate `ell^1` radius from the exponentially small
+defect-only decomposition threshold.  The overgrown Section 3 is split into
+four numbered conceptual units, with all downstream sections, equation tags,
+roadmaps, maps, ledgers, figure references, and release identities synchronized.
+The adversarial proof/scope pass, warning-free 51-page build, affected-page and
+whole-paper visual sweeps, complete evidence replay, and public/formal release
+checks pass.  See `2026-08-02-c828-ame-lu-manuscript-tightening.md`.
 
 **C805 closed (2026-08-02): all six explanatory figures won blinded
 comprehension comparisons.**  The adopted vector figures cover axis recovery,

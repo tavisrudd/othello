@@ -62,26 +62,26 @@ replays its load-bearing algebra.
 
 | Structure field | Manuscript source | Evidence source | Status |
 |---|---|---|---|
-| `PencilClassificationInputs.oddCharacteristic` | Section 4 opening and (4.1) | C396 row of `supplement/EVIDENCE.md` | domain hypothesis |
-| `.admitted_isSixArc` | Section 4, explanation after (4.1) | C396 symbolic and twelve-field replay | constructed and certificate-supported |
-| `.equal_z_implies_projectivelyEquivalent` | Section 4, (4.2) and the four-row projectivity table | C396 explicit-projectivity replay | constructed and certificate-supported |
-| `.projectivelyEquivalent_implies_equal_z` | Section 4, bracket multiset (4.3) and its multiplicity argument | C396 symbolic bracket replay | constructed and certificate-supported |
-| `.locallyCliffordEquivalent_implies_equal_z` | Section 4, shortened-plane holonomy paragraph and (4.4) | C396 direct-Lagrangian holonomy replay | constructed and certificate-supported |
-| `LogicalPhaseInputs.kernel_specialLinear` | Section 5, first paragraph and first proof paragraph | C397 full-Lagrangian row-space replay | constructed and certificate-supported |
-| `.splitTorus_subset_kernel` | Section 5, “Diagonal anchor blocks always propagate” | C397 group-closure replay | constructed and certificate-supported |
-| `.conic_specialLinear_subset_kernel` | Section 5, GRS dual-multiplier propagation paragraph | C397 Gale and group-closure replays | constructed and certificate-supported |
-| `.offDiagonal_kernel_implies_conic` | Section 5, coordinatewise scaling/Gale-fixed paragraph | C397 symbolic Gale replay | constructed and certificate-supported |
+| `PencilClassificationInputs.oddCharacteristic` | Section 7 opening and (7.1) | C396 row of `supplement/EVIDENCE.md` | domain hypothesis |
+| `.admitted_isSixArc` | Section 7, explanation after (7.1) | C396 symbolic and twelve-field replay | constructed and certificate-supported |
+| `.equal_z_implies_projectivelyEquivalent` | Section 7, (7.2) and the four-row projectivity table | C396 explicit-projectivity replay | constructed and certificate-supported |
+| `.projectivelyEquivalent_implies_equal_z` | Section 7, bracket multiset (7.3) and its multiplicity argument | C396 symbolic bracket replay | constructed and certificate-supported |
+| `.locallyCliffordEquivalent_implies_equal_z` | Section 7, shortened-plane holonomy paragraph and (7.4) | C396 direct-Lagrangian holonomy replay | constructed and certificate-supported |
+| `LogicalPhaseInputs.kernel_specialLinear` | Section 8, first paragraph and first proof paragraph | C397 full-Lagrangian row-space replay | constructed and certificate-supported |
+| `.splitTorus_subset_kernel` | Section 8, “Diagonal anchor blocks always propagate” | C397 group-closure replay | constructed and certificate-supported |
+| `.conic_specialLinear_subset_kernel` | Section 8, GRS dual-multiplier propagation paragraph | C397 Gale and group-closure replays | constructed and certificate-supported |
+| `.offDiagonal_kernel_implies_conic` | Section 8, coordinatewise scaling/Gale-fixed paragraph | C397 symbolic Gale replay | constructed and certificate-supported |
 | `MarginalMomentModel.traceMoment` and `.commonConcurrent` | Appendix~A, first two paragraphs of the marginal-moment subsection | C402 row | constructed definitions |
 | `.trace_eq_card_pow_rank` | Appendix~A, stabilizer expansion \(\eqref{eq:marginal-moment-rank}\) | C402 direct Lagrangian-rank replay | constructed and certificate-supported |
 | `.rank_eq_four_iff` | Appendix~A, star/perfect-matching reduction through \(\eqref{eq:marginal-moment-count}\) | C402 chord/rank replay | constructed and certificate-supported |
-| `MarginalLUSeparatorInputs.source` and `.target` | Theorem 6.2 and its proof: H3 and arbitrary same-field GRS states | C402 exact-domain row | constructed instances |
-| `.source_concurrency` | Theorem 6.2 proof, ten integral H3 determinants | C402 exact `Q(τ)` certificate | certificate-supported mathematical input |
-| `.target_concurrency` | Theorem 6.2 proof, projective involution classification | C402 finite-permutation replay; Dickson for the finite-field families and Faber for the modern classification over general fields | constructed and independently certificate-supported |
+| `MarginalLUSeparatorInputs.source` and `.target` | Theorem 9.2 and its proof: H3 and arbitrary same-field GRS states | C402 exact-domain row | constructed instances |
+| `.source_concurrency` | Theorem 9.2 proof, ten integral H3 determinants | C402 exact `Q(τ)` certificate | certificate-supported mathematical input |
+| `.target_concurrency` | Theorem 9.2 proof, projective involution classification | C402 finite-permutation replay; Dickson for the finite-field families and Faber for the modern classification over general fields | constructed and independently certificate-supported |
 | `.lu_implies_equal_rankFourMultiplicity` | Appendix~A opening: simultaneous reduced-operator conjugation and party relabelling | no computation required | constructed implication |
 | `FourCopySeparatorInputs.sourceContractionOrbitSum` and `.targetContractionOrbitSum` | Appendix~A, definition of `J_σ` and \(\eqref{eq:q13-values}\) | C397 row | constructed definitions |
 | `.source_contraction_eq_rankOrbitSum` and `.target_contraction_eq_rankOrbitSum` | solution-counting identity \(\eqref{eq:permutation-contraction}\) and the proof of `thm:q13-lu` | C397 independent orbit-sum replay | constructed and certificate-supported |
 | `.source_rankOrbitSum_evaluation` and `.target_rankOrbitSum_evaluation` | rank histograms and values in \(\eqref{eq:q13-values}\) | C397 exhaustive 720-permutation evaluation | certificate-supported inputs |
-| `.lu_implies_equal_contractionOrbitSum` | Section~6 definition and Appendix~A party-orbit symmetrization | no finite computation required | constructed implication |
+| `.lu_implies_equal_contractionOrbitSum` | Section~9 definition and Appendix~A party-orbit symmetrization | no finite computation required | constructed implication |
 | `TransportCycleCoverInputs.*Actions` | Appendix~B, the six copy permutations, systematic matrices `Q_p`, quotient actions `ρ_i`, and block operator \(\eqref{eq:transport-systematic}\)--\(\eqref{eq:transport-operator}\) | C550 section/transport replay | constructed and certificate-supported |
 | `.negativeSigned_det_cycleCover`, `.positiveSigned_det_cycleCover`, `.axial_det_cycleCover` | Theorem A.1 proof, three displayed determinant formulas | C550 signed cycle-cover and fraction-free determinant paths | constructed and certificate-supported |
 | `TransportRankBridgeInputs.matchingRank`, `.transportRank`, `.matchingRank_le`, `.transportRank_le`, `.kernelExcess_eq` | Appendix~B, the `24×21` and `9×9` constructions and \(\eqref{eq:transport-rank-bridge}\) | C550 comparison at all 720 assignments for six exact points | constructed; identity certificate-supported |

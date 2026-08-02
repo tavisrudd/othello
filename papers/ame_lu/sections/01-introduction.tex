@@ -217,7 +217,7 @@ and is unique up to scalar.
 The nullity-one condition governs the two branches above.  In odd
 characteristic the \(\mathrm{SL}_2(q)\) factor has coherent Weil lifts,
 while the affine projective group retains the usual Heisenberg central
-extension; Section~\ref{sec:rigidity} separates these lift questions.
+extension; Section~\ref{sec:exact-logical} separates these lift questions.
 Generalized and extended generalized Reed--Solomon codes are diagonally
 isodual, but the condition is not confined to that family: self-dual
 non-GRS MDS constructions are known \cite{ZhuLiao2024}.
@@ -240,17 +240,19 @@ marginals are all maximally mixed --- any local dimension, no stabilizer
 structure, no maximal entanglement --- has finite product-unitary symmetry
 group modulo phase, and that the defect of a product unitary grows
 quadratically away from that group, with an explicit ratio constant
-independent of the number of parties, on a neighbourhood whose size is
-governed by the state's uniformity order rather than by the number of
-parties; for a \(2\)-uniform state that neighbourhood can shrink as the
-party count grows, while for an \(\AME(2m,q)\) state, which is
-\(m\)-uniform, it does not.  The stabilizer hypothesis then sharpens
+independent of the number of parties.  This local estimate is stated in
+generator coordinates: the admissible \(\ell^1\) radius is governed by the
+state's uniformity order, remaining bounded in the order-three family and
+growing linearly for an \(\AME(2m,q)\) state.  It is not a defect ball.
+The stabilizer hypothesis then sharpens
 discreteness into uniform separation: because overlaps of stabilizer states
 are quantized, a product Clifford is either an exact symmetry or has defect
 at least \((2-2p^{-1/2})^{1/2}\), a constant depending on the
 characteristic and on nothing else.  Rounding a near-symmetry to a Clifford
-and invoking that gap gives an explicit threshold below which every
-approximate symmetry factors through an exact one.  This splits the
+and invoking that gap gives a defect-only threshold below which every
+approximate symmetry factors through an exact one; unlike the generator
+radius, this threshold is exponentially small in the number of parties.
+This splits the
 rigidity phenomenon into an
 entanglement half, which forces discreteness, and an algebraic half, which
 names the finite group.  It sharpens the limitation of the theorems above
@@ -282,7 +284,7 @@ local-Clifford classification to the following complete local result.
 
 \begin{corollary}[Classification of the admitted pencil]
 \label{cor:lu-lc-pencil}
-Let \(t,u\) lie in the nondegenerate locus \((4.1)\) over an odd prime
+Let \(t,u\) lie in the nondegenerate locus \((7.1)\) over an odd prime
 field \(\F_q\).  Write \(\sim_{\mathrm{proj}}\) for projective equivalence
 of the ordered six-arcs up to a party permutation and
 \(\sim_{\mathrm{mon}}\) for monomial equivalence of their codes.  Then
@@ -378,9 +380,12 @@ picture: the branch condition becomes diagonal isoduality, and the
 Veronese determinant detects the conic/GRS locus.  This interpretation is
 not used in the proof.
 
-Sections~\ref{sec:dictionary} and~\ref{sec:rigidity} contain the main line:
-the arc--code--AME conventions, LU-to-LC rigidity, and its structural
-completion by the minimum-support atlas.  The next three sections develop
+Sections~\ref{sec:dictionary}--\ref{sec:atlas} contain the main line: the
+arc--code--AME conventions, LU-to-LC rigidity, and its structural
+completion by the minimum-support atlas.  Section~\ref{sec:two-uniform}
+develops discreteness and quantitative stability, while
+Section~\ref{sec:exact-logical} determines the exact MDS--CSS logical
+images and their lifts.  The next three sections develop the six-party
 applications and contrasts.  Section~\ref{sec:pencil} proves the
 \(z\)-classification; Section~\ref{sec:logical} proves the
 logical-Clifford phase theorem; and Section~\ref{sec:invariants} compares
