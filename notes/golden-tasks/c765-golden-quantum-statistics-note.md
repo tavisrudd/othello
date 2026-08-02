@@ -56,8 +56,8 @@ gauge-theory simulation.
 1. C766 is complete: it proves the general exchange-statistics orientation
    theorem, its determinant-line interpretation, the unitary analogue, and
    the full mixed-sector checksum.
-2. C767 imports the exact statistics, arithmetic instance, decoder, and trust
-   surface.
+2. C767 is complete: it imports the exact statistics, arithmetic instance,
+   decoder, locked symbolic environment, and paper-local trust surface.
 3. C768 closes the full-text literature and attribution audit.
 4. C769 turns the demonstrator ledger into the physical design-limit section
    and figure.

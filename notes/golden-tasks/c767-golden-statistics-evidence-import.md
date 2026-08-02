@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**State:** queued after C766
+**State:** complete; reported in
+`notes/2026-08-01-c767-golden-statistics-evidence-import.md`
 
 ## Objective
 

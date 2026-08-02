@@ -286,6 +286,19 @@ controls are the common nonzero determinant optimum.  For each one,
 The other 44 controls have zero filled-fermion amplitude.  This gives a sharp
 Boolean boundary rather than a numerical search criterion.
 
+The zero count has a direct rank proof.  If \(S\) is the negative support,
+orthogonality of the two port spaces gives
+\[
+ K_T(x)=-2\sum_{i\in S}
+ (Q_{T,-}^{\mathsf T}e_i)(e_i^{\mathsf T}Q_{T,+}).
+\]
+Hence \(\operatorname{rank}K_T(x)\leq |S|\).  Replacing \(x\) by \(-x\)
+negates \(K_T(x)\), so also
+\(\operatorname{rank}K_T(x)\leq6-|S|\).  Every unbalanced mask therefore has
+rank at most two.  There are
+\(2\binom60+2\binom61+2\binom62=44\) such masks.  The common balanced spectrum
+proves that all \(\binom63=20\) remaining masks are invertible.
+
 Freeze the port frames by a reproducible pivot convention.  In that gauge the
 collision-free bosonic probabilities on balanced controls take the values
 \[
@@ -399,12 +412,27 @@ This boundary is part of the result rather than an experimental claim.
 
 \section*{Verification}
 
-The exact spectra, balanced census, permanent controls, six-mode compilation,
-error thresholds, shot budgets, and decoding schedules are accompanied by
-exact generators, compact certificates, SHA-256 manifests, and independent
-standard-library replays in the project repository.  The final archival
-version will identify a stable artifact release and the precise trust boundary
-for each displayed finite claim.
+The Boolean rank boundary, symmetric-function identities, orbit theorem, and
+distance-six correction radius are human derivations.  The twenty-mask census,
+three calibrated permanent values, rational filtered probabilities, six sign
+words, and fifteen-cell compilation are certificate-checked computations.
+Their three atomic source bundles have exact generators, SHA-256 manifests,
+and independent replays.
+
+The paper-local standard-library checker verifies the source hashes and
+independently recomputes every imported rational identity, census total,
+Hamming distance, and schedule used above.  Run
+\begin{verbatim}
+cd papers/golden-quantum-statistics
+python3 verification/check_imports.py --check
+\end{verbatim}
+The pinned symbolic source environment and all independent replays run with
+\begin{verbatim}
+make -C papers/golden-quantum-statistics verify-sources
+\end{verbatim}
+The compact import certificate and its manifest are stored beside the checker.
+They do not certify experimental feasibility, source availability, or
+literature priority.
 
 \begingroup
 \raggedright

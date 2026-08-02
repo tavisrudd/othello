@@ -407,18 +407,17 @@ from this manuscript, and they must be audited before any sequel.  Full report:
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | complete; exact circuit/budget frozen, bounded precursor `GO`, full three-fermion photonic experiment `NO-GO` | none; C765 owns design-limit placement |
 | [C765 — minimal quantum-statistics companion](../golden-tasks/c765-golden-quantum-statistics-note.md) | in progress; manuscript scaffold installed, unnumbered design-limit/theory note, not Paper V | run C766--C770 in order and keep the antisymmetric source as an explicit external dependency |
 | [C766 — exchange orientation theorem](../golden-tasks/c766-golden-exchange-orientation-theorem.md) | complete; general `O/SO` and `U/SU` orbit boundary, determinant-line interpretation, and mixed-sector checksum installed | preserve the dated report and theorem; C767 owns exact-value trust integration |
-| [C767 — statistics evidence import](../golden-tasks/c767-golden-statistics-evidence-import.md) | ready; C766 complete | install exact values, decoder, and paper-local trust map |
-| [C768 — quantum-statistics literature](../golden-tasks/c768-golden-quantum-statistics-literature.md) | queued; required before submission wording | close full-text attribution and absence claims under the audit conventions |
+| [C767 — statistics evidence import](../golden-tasks/c767-golden-statistics-evidence-import.md) | complete; human 20+44 rank proof, compact import certificate, locked SymPy environment, and trust map installed | preserve the dated report and paper-local replay surface |
+| [C768 — quantum-statistics literature](../golden-tasks/c768-golden-quantum-statistics-literature.md) | ready; C767 complete, required before submission wording | close full-text attribution and absence claims under the audit conventions |
 | [C769 — photonic design limit](../golden-tasks/c769-golden-photonic-design-limit.md) | queued after C767; wording waits for C768 | compress circuit, thresholds, null tests, and source dependency into the physical section and figure |
 | [C770 — submission closure](../golden-tasks/c770-golden-quantum-statistics-submission.md) | queued after C766--C769 | cold reads, venue decision, artifact/preprint locator, and forward-reference gate |
 
 ## Recommended order
 
-1. C767 exact-result and trust-surface import.
-2. C768 full-text literature closure, then C769 physical presentation.
-3. C770 cold reads and submission closure; add a Paper-III forward citation
+1. C768 full-text literature closure, then C769 physical presentation.
+2. C770 cold reads and submission closure; add a Paper-III forward citation
    only after the note has a stable public locator.
-4. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths
