@@ -2240,8 +2240,17 @@
       "last": 801,
       "purpose": "Lean fixed-line ambiguity and Chow-rigidity theorem update",
       "sequence": 249
+    },
+    {
+      "count": 1,
+      "first": 802,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 802,
+      "purpose": "Review and iterate the Paper I strict-recovery series-framing edit memo",
+      "sequence": 250
     }
   ],
-  "next_id": 802,
+  "next_id": 803,
   "schema": "codex-task-id-allocations-v1"
 }
