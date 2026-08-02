@@ -28,12 +28,13 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Five research passes complete; the theorem is **not** proved. Reports:
+Six research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
 `notes/2026-08-01-c756-paley-windmill-reduction.md`, and
-`notes/2026-08-01-c756-paley-bispectral-reduction.md`.
+`notes/2026-08-01-c756-paley-bispectral-reduction.md`, and
+`notes/2026-08-01-c756-primitive-jacobi-collisions.md`.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -70,6 +71,11 @@ What the saturated-external attack adds:
 - the Gaussian-unit matrix \(W=(B+iK)/(1+i)\) is a regular simplex with
   \(WW^*=((q-1)/2)I-J\); its principal Pfaffian norm excludes every
   \(q\equiv3\pmod8\) for which \((q-1)/2\) is not a sum of two squares;
+- Stickelberger's half-carry profile and a base-\(p\) digit-weight lemma prove that one
+  faithful Jacobi eigenvalue has exactly its Frobenius collisions, including exclusion
+  of collisions with imprimitive characters; the one-block Sidon argument therefore
+  makes every matching multiplication--Frobenius, and the prior Weil/Hasse arguments
+  close the saturated-external branch completely;
 - polarity turns covering into the assertion that the complete node set of \((q+1)/2\) secants,
   consisting entirely of internal points, blocks every non-tangent line.
 
@@ -79,17 +85,11 @@ hexagon at \(q=11\).
 
 Remaining frontier: counting cannot finish the job (both \(k_{\min}(q)\) and the largest
 conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternates with
-\(q\)). In the saturated-external branch sign coherence is now proved. The exact missing lemma can
-be strengthened to signed-monomial Paley rigidity.  The fifth pass reduces the prime-field
-branch to distinctness of explicit Jacobi-sum eigenvalues of \(B\), and the extension-field
-branch to semilinear rigidity inside the forced Frobenius spectral blocks.  Either statement
-classifies the perfect-matching solutions forced by \(AM+MA=-2I\) and the two vector equations.
-In fact one faithful character suffices: if its Jacobi eigenvalue collides only along its
-Frobenius orbit, the Sidon property of the Frobenius exponents and a constant-modulus Fourier
-argument force the whole matching permutation to be multiplication--Frobenius.
-The alternative saturated route
-is a structure-sensitive blocking bound for the internal node set. Outside saturation, the
-type-aware spare-line and general-position character-sum routes remain live.
+\(q\)).  The sixth pass proves the primitive Jacobi collision lemma and closes the entire
+saturated-external branch.  Outside saturation, the type-aware spare-line and
+general-position character-sum routes remain live; a \(k\)-uniform obstruction there is now
+the load-bearing gate for the full theorem.  The dual internal-node blocking formulation is
+retained as structural input rather than as a substitute for the closed spectral step.
 
 ## Current boundary
 
