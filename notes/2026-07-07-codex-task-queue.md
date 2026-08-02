@@ -88,8 +88,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `golden`
 
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
-- **C765 `[golden]` [IN PROGRESS; MANUSCRIPT SCAFFOLD INSTALLED]** — assemble a minimal unnumbered Golden quantum-statistics design-limit companion around the determinant-orientation theorem, C718's intrinsic bosonic boundary, C719's bounded precursor and antisymmetric-resource dependency, one C715 arithmetic instance, and only the simplex decoding needed by the experiment → `notes/golden-tasks/c765-golden-quantum-statistics-note.md`.
-- **C770 `[golden]` [QUEUED AFTER C766--C769]** — run mathematical-physics and quantum-optics cold reads, close the warning-free submission package, choose the venue, and require a stable preprint locator before any Paper-III forward citation → `notes/golden-tasks/c770-golden-quantum-statistics-submission.md`.
 
 ### `complete-ports`
 

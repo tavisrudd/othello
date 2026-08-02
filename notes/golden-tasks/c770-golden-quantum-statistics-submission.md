@@ -2,7 +2,9 @@
 
 **Lane:** `golden`
 
-**State:** queued after C766--C769
+**State:** complete 2026-08-01; PRA package closed at
+`golden-quantum-statistics-c770-v1`; public-preprint and Paper-III
+forward-reference gates remain closed
 
 ## Objective
 

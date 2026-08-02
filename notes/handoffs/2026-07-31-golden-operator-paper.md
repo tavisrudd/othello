@@ -321,6 +321,15 @@ portfolio.  In particular:
   than sufficient, and three-copy matching is an independent tomography
   gate.  The warning-free ten-page paper gate plus visual check pass.  Report:
   `notes/2026-08-01-c769-golden-photonic-design-limit.md`.
+- C770 and its umbrella C765 are complete.  Quantum-optics and
+  mathematical-physics cold reads found no submission blocker; theorem-opening,
+  paragraph-job, notation, citation, page-budget, warning, and visual gates
+  pass.  Physical Review A is selected because the general orientation theorem
+  does not carry a Quantum submission independently of the exact Golden
+  benchmark and design limit.  The immutable local artifact is
+  `golden-quantum-statistics-c770-v1` at commit `9fe72fac`; the public-preprint
+  and Paper-III forward-reference gates remain closed.  Report:
+  `notes/2026-08-01-c770-golden-quantum-statistics-submission.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
   C735's operator-first architecture.  The genuinely source-free signed
@@ -435,21 +444,14 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-| task | state | next gate |
-|---|---|---|
-| [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
-| [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | complete; exact circuit/budget frozen, bounded precursor `GO`, full three-fermion photonic experiment `NO-GO` | none; C765 owns design-limit placement |
-| [C765 — minimal quantum-statistics companion](../golden-tasks/c765-golden-quantum-statistics-note.md) | in progress; manuscript scaffold installed, unnumbered design-limit/theory note, not Paper V | run C766--C770 in order and keep the antisymmetric source as an explicit external dependency |
-| [C766 — exchange orientation theorem](../golden-tasks/c766-golden-exchange-orientation-theorem.md) | complete; general `O/SO` and `U/SU` orbit boundary, determinant-line interpretation, and mixed-sector checksum installed | preserve the dated report and theorem; C767 owns exact-value trust integration |
-| [C767 — statistics evidence import](../golden-tasks/c767-golden-statistics-evidence-import.md) | complete; human 20+44 rank proof, compact import certificate, locked SymPy environment, and trust map installed | preserve the dated report and paper-local replay surface |
-| [C768 — quantum-statistics literature](../golden-tasks/c768-golden-quantum-statistics-literature.md) | complete; attribution and qualified experimental-absence wording closed | preserve the audit record; rerun pinned graphs only at C770 submission closure |
-| [C769 — photonic design limit](../golden-tasks/c769-golden-photonic-design-limit.md) | complete; physical section and color-independent figure installed | preserve the exact presentation and C768-qualified source wording |
-| [C770 — submission closure](../golden-tasks/c770-golden-quantum-statistics-submission.md) | queued after C766--C769 | cold reads, venue decision, artifact/preprint locator, and forward-reference gate |
+None.  C765--C770 are closed; C739's research programme remains frozen and its
+placement was absorbed by C742.
 
 ## Recommended order
 
-1. C770 cold reads and submission closure; rerun C768's pinned absence graphs and add a Paper-III forward citation
-   only after the note has a stable public locator.
+1. Preserve the tagged PRA package.  A public preprint upload requires a
+   separately authorized and allocated task; record its stable locator before
+   requesting any Paper-III forward citation.
 2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 

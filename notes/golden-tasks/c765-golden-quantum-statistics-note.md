@@ -2,8 +2,9 @@
 
 **Lane:** `golden`
 
-**Status:** in progress; manuscript scaffold installed, with C766--C770 queued
-as the proof, evidence, literature, experiment, and submission gates.
+**Status:** complete 2026-08-01; C766--C770 closed the proof, evidence,
+literature, experiment, and PRA submission gates.  The immutable local artifact
+is `golden-quantum-statistics-c770-v1`; no public preprint locator exists yet.
 
 ## Objective
 
@@ -61,8 +62,9 @@ gauge-theory simulation.
 3. C768 is complete: it closes the full-text literature and attribution audit.
 4. C769 is complete: it turns the demonstrator ledger into the physical
    design-limit section and figure.
-5. C770 performs cold reads, selects the venue, and closes the preprint and
-   forward-reference gates.
+5. C770 is complete: both cold reads passed, PRA was selected, the local
+   artifact was frozen, and the public-preprint and forward-reference gates
+   remain closed pending a separately routed public posting.
 
 The manuscript authority is
 `papers/golden-quantum-statistics/golden_quantum_statistics.tex`.
