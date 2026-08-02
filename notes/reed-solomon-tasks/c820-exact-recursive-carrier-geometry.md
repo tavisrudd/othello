@@ -30,3 +30,13 @@ coherent polar flags.
 Do not infer split-freeness merely from membership in a modular contraction
 kernel. Higher-Lucas incidence on individual carrier strata remains C620
 unless it is forced as a lemma of the exact carrier theorem.
+
+## Cold-session routing
+
+- Read first: `notes/2026-07-26-c656-prs-cold-read-release-repairs.md`,
+  `notes/2026-08-02-c819-beyond4-v2-cheap-strengthening.md`, and
+  `notes/reed-solomon-tasks/c646-prs-stable-component-lean-geometry.md`.
+- C646 is a parallel formal dependency, not a substitute for this concrete
+  geometry task.
+- On completion or a sharp obstruction exit, update the handoff and dispatch
+  C620.  Do not dispatch C821 directly.

@@ -943,6 +943,43 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
 `notes/reed-solomon-tasks/c498-prs-redundancy-six.md` and
 `notes/reed-solomon-tasks/c509-prs-redundancy-seven.md`.
 
+## Cold-session dispatch ladder for Version 2
+
+The Version 2 critical path is sequential.  A cold session should take the
+first unfinished numbered step below and should not infer a different order
+from queue-row placement:
+
+1. **C820 — recursive carrier geometry (current dispatch).**  Read C656's
+   rejection report, C819's finite-depth theorem report, and the C646 task
+   card.  Close, or sharply obstruct, the bottom primary decomposition,
+   modular-union pullback degree, and generic-point recursive transport.  Do
+   not duplicate C646's active formal density/closure work.
+2. **C620 — higher Lucas incidence.**  Start after C820 has frozen the exact
+   recursive-carrier statement or obstruction.  Classify the first fresh
+   carrier and decide whether a uniform digit-pattern/subspace-polynomial
+   criterion exists.  Membership in a Lucas kernel is never evidence of
+   split-freeness by itself.
+3. **C660 — independent R7 completeness.**  Remove the primary quotient
+   enumerator from the bounded-field completeness route.  This is a trust
+   upgrade, not a stronger deep-hole theorem, and it must retain the
+   (q=7,8,9) covering-radius boundary.
+4. **C821 — Version 2 synthesis.**  Begin only after C820 and C620 close, C646
+   freezes its formal boundary, and C660 either closes or an explicit scope
+   decision leaves that independent replay outside Version 2.  Integrate only
+   proved carrier levels; import Wang--Wu--Hu's endpoint criterion; then run
+   the full novelty, trust, reproducibility, and specialist-review gates.
+
+Two active tasks are parallel context, not alternative dispatches: C646 owns
+the formal recursive interfaces needed by C821, while C607 owns the broader
+decoding-complexity question.  C608 is a later explicit-decoder consequence
+and is not on the Version 2 theorem critical path.  The public Version 1
+repository and DOI are immutable inputs; no successor edits or retags them.
+
+If any step fails, record the strongest proved obstruction in its report and
+continue to the next step only with the synthesis boundary updated.  Never
+replace a missing carrier theorem by a conditional claim whose hypotheses hide
+the same missing geometry.
+
 ## Open work by expected value
 
 This is the authoritative order for open `reed-solomon` C-items; dependency

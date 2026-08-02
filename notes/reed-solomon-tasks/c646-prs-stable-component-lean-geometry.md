@@ -29,3 +29,9 @@ the geometric classification of its components are not to be disguised as
 formal conclusions. They may remain manuscript/certificate inputs if the
 formal API and all trust prose identify them explicitly.
 
+## Version 2 routing
+
+C646 is the active formal dependency of C820/C821.  It does not own C820's
+bottom primary decomposition, modular-union degree, or generic-point geometry,
+and a cold session must not merge the two scopes.  Freeze the exact formal
+input boundary before C821 begins synthesis.

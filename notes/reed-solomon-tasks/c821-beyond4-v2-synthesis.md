@@ -4,9 +4,10 @@
 
 ## Dependencies
 
-C819, C820, C646, and the placement decision at C620. C660 must either close
-the independent R7 completeness gate or remain explicitly outside the theorem
-trust claim.
+C819, C820, C646, and the placement decision at C620. C660 should close the
+independent R7 completeness gate; bypassing it requires an explicit scope
+decision that leaves the primary quotient enumerator in the Version 2 trust
+boundary.
 
 ## Objective
 
@@ -36,3 +37,11 @@ Every claimed all-level or higher-Lucas statement has a printed proof or an
 exactly identified formal/certificate/import route, and the paper remains
 readable as one theorem plus evaluated carrier levels rather than an archive of
 the development programme.
+
+## Cold-session routing
+
+This is the terminal synthesis card, never the discovery card.  Before editing
+the manuscript, verify from the task reports that C820 and C620 are complete,
+C646's formal boundary is frozen, and C660 is complete or explicitly deferred.
+If any prerequisite is missing, return to that card instead of drafting around
+it.  Version 1 remains untouched.

@@ -58,3 +58,11 @@ six and seven are calibration cases, not assumptions.
   specialist review; and
 - a placement decision between Version 2 of the beyond-four paper and a
   separate modular-carrier companion.
+
+## Cold-session routing
+
+- Enter only after C820 has frozen the exact recursive-carrier theorem or its
+  sharp obstruction boundary; read C820's closeout before experimentation.
+- Preserve Wang--Wu--Hu Proposition 11 as an imported endpoint criterion.
+- On completion, dispatch C660.  C821 remains blocked until C646's formal
+  boundary is also frozen.

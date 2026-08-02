@@ -20,6 +20,14 @@ new deep-hole theorem.  It must retain the separate covering-radius boundary:
 the rows at \(q=7,8,9\) classify split-free syndrome directions but are not
 promoted to code deep holes.
 
+## Cold-session routing
+
+- Enter after C620 on the Version 2 critical path; the mathematics is
+  independent, but this ordering keeps theorem development ahead of trust
+  polishing.
+- On completion, dispatch C821 if C820 and C620 are complete and C646 has
+  frozen its formal boundary.  Otherwise return to the first unmet dependency.
+
 ## Independence boundary
 
 The current C656 replay replaces the finite-field implementation and
