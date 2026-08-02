@@ -1,7 +1,8 @@
 # C817 — Paper IV structural mathematics upgrade
 
 **Lane:** `clebsch`  
-**Status:** active; subitems 1--5 positive and frozen; mathematics research only;
+**Status:** active; all six subitems positive and frozen; task-wide closeout remains;
+mathematics research only;
 manuscript integration requires later user discussion
 
 ## Current state
@@ -67,8 +68,20 @@ five-cliques, which also classifies every equality case.  Report and exact
 evidence bundle:
 `notes/2026-08-02-c817-weight-eight-theta-certificate.md`.
 
-The next gate is subitem 6, a Terwilliger or exact-dual exclusion of both
-weight-ten pencil profiles.
+Subitem 6 is complete.  The global identity
+\(4n_4+12n_6+\cdots=10-m\) reduces every hypothetical weight-ten word to
+two shapes.  The \(m=6\) shape dies on four \(D_{14}\)-orbits of four points
+on the unique four-point passant; the \(m=10\) shape dies on thirty-three
+\(D_{28}\)-orbits of the two secant neighbors of a fixed support point, with
+every pruned fibre construction stopping before its fifth completed fibre.
+This common moment-and-stabilizer certificate uses no syndrome
+meet-in-the-middle enumeration.  Exact rank gaps also close linear and
+quadratic syndrome separators negatively.  Report and exact evidence bundle:
+`notes/2026-08-02-c817-weight-ten-moment-certificate.md`.
+
+All six research subitems are now frozen.  The remaining C817 gate is the
+task-wide novelty boundary, ranked integration-options memo, final
+`ej`+`tt` closeout, and explicit stop before any manuscript change.
 
 ## Objective
 
