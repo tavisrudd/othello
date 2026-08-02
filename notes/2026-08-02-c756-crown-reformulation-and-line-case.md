@@ -31,10 +31,11 @@ Four results: a reformulation, a proved configuration, a conditional reduction, 
 
 4. **Certified range, without the conjecture.**  Recognizing coherence as a clique
    condition in a vertex-transitive graph makes an exhaustive search practical far past
-   the old audit: the branch is unconditionally empty for every \(q\equiv3\pmod4\)
-   with \(7\le q\le151\), and the two published clique orbits are empty for every
-   such \(q\le503\).  This also discharges the standing \(q=27\) extension-field
-   item.
+   the old audit: **no coherent system exists for any odd prime power \(q\) with
+   \(5<q\le151\)**, in either residue class, resting on no clique classification and
+   no gap conjecture.  Beyond that, the two published clique orbits are empty for every
+   \(q\equiv3\pmod4\) up to \(503\), conditionally.  This also discharges the
+   standing \(q=27\) extension-field item.
 
 What this does and does not buy.  The reduction of item 3 does **not** by itself extend
 the unconditional range: the gap conjecture is unproved — Yip states in print that "no partial progress has been
@@ -580,13 +581,16 @@ vertices, so a search through the single vertex \(s\) is exhaustive.  That searc
 returns nothing for every \(q\equiv3\pmod4\) with \(7\le q\le151\), including the prime
 powers \(27\), and it recovers exactly the two frames at \(q=5\) as a positive control.
 
-So for \(q\equiv3\pmod4\) the branch is now **unconditionally empty through \(q\le151\)**,
+That search returns nothing for **every odd prime power \(q\) with \(5<q\le151\)**, in
+both residue classes and including the prime powers \(9,25,27,49,81,121,125,243,343\),
 with no dependence on Blokhuis, on the two-orbit classification, or on the gap
 conjecture, and with the \(q=27\) extension-field hygiene item discharged along the way.
-Theorems 3 and 4 remain the only route to *all* \(q\), but they are no longer what
-certifies the small fields.  The corresponding sweep for \(q\equiv1\pmod4\) is queued;
-until it lands, that residue class is certified only through the earlier \(q\le43\)
-audit.
+Every search ran to completion — the heaviest field used under a third of its
+allowance — so no zero is an exhausted search rather than a negative.  The \(q=5\)
+control returns exactly the two known four-frames, verified as sets and not merely
+counted.  Theorems 3 and 4 remain the only route to *all* \(q\), but they are no longer
+what certifies the small fields, and only the orbit-only rows above \(q=151\) are
+conditional.
 
 ## 6d. Replacing the census with an exact mechanism
 

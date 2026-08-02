@@ -124,8 +124,8 @@ Branch ledger:
   only covering example;
 - **saturated-internal — reduced to one clique statement, still open:** coherent systems
   are exactly induced crown graphs in the Paley graph of order \(q^2\); the four-frame
-  over \(\mathbb F_5\) is the only example, unconditionally, for every \(q\le43\)
-  and every \(q\equiv3\pmod4\) up to \(151\); line-contained systems force
+  over \(\mathbb F_5\) is the only example, unconditionally, for every odd prime power
+  \(q\le151\); line-contained systems force
   \(q=5\) for all \(q\); and the remaining uniform gate is the crown-restricted case
   of the Baker–Ebert–Hemmeter–Woldar gap conjecture;
 - **nonsaturated — open for \(\delta\ge2\):** \(\delta=0,1\) are closed, while the
@@ -555,12 +555,13 @@ What the crown-reformulation and affine-line pass (twenty-fifth) adds:
   this branch's argument.
 - **Certified range extended without any conjecture.**  Coherence is a clique condition
   in a graph on the irrational elements whose affine automorphisms act transitively, so
-  an exhaustive search through one vertex is complete.  It returns nothing for every
-  \(q\equiv3\pmod4\) with \(7\le q\le151\) (prime powers included, so the
-  \(q=27\) hygiene item is discharged), and the two published clique orbits are empty
-  for every such \(q\le503\) across 1,686,529,824 tested orbit members.  The
-  \(q\equiv1\pmod4\) sweep is queued; that class is certified only through the older
-  \(q\le43\) audit until it lands.
+  an exhaustive search through one vertex is complete.  It returns nothing for every odd
+  prime power \(q\) with \(5<q\le151\), in both residue classes and including
+  \(9,25,27,49,81,121,125\), so the \(q=27\) hygiene item is discharged; every search
+  ran to completion and \(q=5\) returns exactly the two known frames as a positive
+  control.  Beyond \(151\) the two published clique orbits are empty for every
+  \(q\equiv3\pmod4\) up to \(503\) across 1,686,529,824 tested orbit members, but
+  those rows are conditional on the two-orbit classification.
 - **Latin-square constraint (Theorem 5).**  Coherence alone forces the direction of
   \(z_i-z_j^q\), for fixed \(i\), to run bijectively over the \((q+1)/2\) directions
   of class \(-\delta\) — geometrically, no point of \(Z\) lies on an
