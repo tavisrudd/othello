@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**State:** queued after C753 and before C762's final prose merge
+**State:** first independent red-team complete with `NO-GO`; memo iteration and
+second cold check remain queued after C753 and before C762's final prose merge
 
 ## Goal
 
@@ -52,3 +53,12 @@ the later accepted manuscript integration.
 - an exact list of accepted recommendations handed to C762; and
 - confirmation that no manuscript source changed during C802.
 
+## First red-team result
+
+The read-only sub-agent review is recorded in
+`notes/2026-08-02-c802-paper-i-series-framing-memo-red-team.md`.  Its central
+finding is that C494's load-bearing displayed sheet label is not identified by
+any cited theorem with Paper I's odd orientation covariant.  It also requires a
+per-paper theorem/dependency matrix, conditional Paper III attribution, fuller
+C494 exclusions, and a substantially shorter eventual Paper I intervention.
+No memo or manuscript text was changed in this review round.
