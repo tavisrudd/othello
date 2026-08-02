@@ -92,11 +92,11 @@ What the first nonsaturated pass adds:
   the forced \((k-2)\)-fold residual factor at the deleted point, and one canonical
   degree-\(\delta\) concurrence divisor;
 - the residual divisor is completely split and supported on at most \(\delta\) exceptional
-  directions involving at most \(2\delta\) chords; in defect one there is exactly one
-  doubled direction on every spare line;
+  directions involving at most \(2\delta\) chords;
 - zero slack is impossible over every odd prime-power field except the already excluded
-  \(q=3\), so every nonsaturated conic-filling arc satisfies the strict uniform bound
-  \(\binom{k-1}{2}\ge q+1\).
+  \(q=3\); defect one factors into exactly \(q=5,9,27\), all removed by the certified
+  bounded classification; hence every nonsaturated conic-filling arc satisfies
+  \(\binom{k-1}{2}\ge q+2\).
 
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
@@ -105,12 +105,12 @@ hexagon at \(q=11\).
 Remaining frontier: counting cannot finish the job (both \(k_{\min}(q)\) and the largest
 conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternates with
 \(q\)).  The sixth pass proves the primitive Jacobi collision lemma and closes the entire
-saturated-external branch.  The seventh pass gives the strict nonsaturated bound and divides
-the direction polynomial by its forced Moore factor.  Positive residual slack remains open;
+saturated-external branch.  The seventh pass gives the strict nonsaturated bound, divides
+the direction polynomial by its forced Moore factor, localizes the defect, and closes
+\(\delta=0,1\).  Residual slack \(\delta\ge2\) remains open;
 the next gate is to combine Segre's tangent-product relation with the completely split
 degree-\(\delta\) residual concurrence divisor, so that a character sum sees \(\delta\)
-rather than the
-original degree about \(q\).  The dual internal-node blocking formulation is retained as
+rather than the original degree about \(q\).  The dual internal-node blocking formulation is retained as
 structural input rather than as a substitute for the closed spectral step.
 
 ## Current boundary

@@ -36,18 +36,15 @@ direction, then they form a matching and
  \operatorname{ord}_t E_P=\mu_t-1. \tag{2}
 \]
 
-Consequently every nonsaturated conic-filling arc with \(q>3\) satisfies the
-strict uniform obstruction
+Combining zero- and defect-one closure below, every nonsaturated
+conic-filling arc satisfies the uniform obstruction
 
 \[
- \boxed{\binom{k-1}{2}\ge q+1.} \tag{3}
+ \boxed{\binom{k-1}{2}\ge q+2.} \tag{3}
 \]
 
-This strictly improves the spare-line bound for every \(k\). It does **not**
-finish C756: positive slack \(\delta\ge1\) remains possible, and the first
-\(k=9\) boundary has \(\delta=1\) at \((q,k)=(27,9)\). The existing
-exhaustive classification rules that field
-out, but no all-field contradiction for \(E_P\ne1\) is proved here.
+This improves the spare-line bound by two for every \(k\). It does **not**
+finish C756: residual slack \(\delta\ge2\) remains possible.
 
 ## 1. The direction-cover lemma
 
@@ -95,9 +92,10 @@ Thus at least \(q-\delta\) directions are represented by a unique chord,
 and all repeated directions together contain at most \(2\delta\) chords.
 This is the **defect-localization lemma**: the positive slack is supported on
 a degree-\(\delta\) effective rational divisor, rather than being dispersed
-among the \(q\) forced directions. For \(\delta=1\), exactly one direction
+among the \(q\) forced directions. Hypothetically, for \(\delta=1\), exactly
+one direction
 contains exactly two (necessarily disjoint) chords and every other direction
-contains exactly one.
+contains exactly one; §3 excludes that arithmetic case globally.
 
 The argument is projective: changing the affine coordinate on
 \(\ell\setminus\{P\}\) changes (1) only by the corresponding binary-form
@@ -152,13 +150,46 @@ only the degenerate \(n=2\) case. If \(n\) is odd, the coprime integers \(n\)
 and \((n-1)/2\) have product \(p^h\); one must be \(1\), and the only
 nondegenerate possibility is \(n=3,q=3\). The first C756 pass already
 classifies \(q=3\) and finds no conic-filling arc. Hence \(\delta\) cannot
-vanish, which proves (3).
+vanish.
 
 This arithmetic step is small but essential: the ordinary covering-line
 count does not arithmetically exclude equality for arbitrary plane orders,
 while the prime-power order and the fact that only \(q\), rather than
 \(q+1\), directions are covered make
 equality impossible here.
+
+### Defect one is also impossible
+
+Suppose \(\delta=1\). Then
+
+\[
+ q=\binom n2-1=\frac{(n-2)(n+1)}2. \tag{9}
+\]
+
+After dividing the even factor by \(2\), the two displayed factors have
+greatest common divisor dividing \(3\). Since their product is the odd prime
+power \(q=p^h\), either one factor is \(1\), or \(p=3\) and both factors
+are powers of \(3\).
+
+If \(n\) is even, put \(a=(n-2)/2\), so the other factor is
+\(n+1=2a+3\). The unit-factor case gives \(a=1\), hence
+\((q,n)=(5,4)\). Otherwise \(a=3^r\). For \(r\ge2\),
+\((2a+3)/3=2\cdot3^{r-1}+1\) is congruent to \(1\pmod3\), so it cannot
+be a positive power of \(3\); for \(r=1\) one gets
+\((q,n)=(27,8)\).
+
+If \(n\) is odd, put \(a=n-2\), so the other factor is
+\((a+3)/2\). The unit-factor case gives only the even field \(q=2\). In
+the remaining case \(a=3^r\); the same reduction modulo \(3\) forces
+\(r=1\), giving \((q,n)=(9,5)\). Thus
+
+\[
+ \delta=1\quad\Longrightarrow\quad
+ (q,k)\in\{(5,5),(9,6),(27,9)\}. \tag{10}
+\]
+
+The certified all-\(k\) classification through \(q=43\) excludes all three
+cases. Hence defect one is impossible, \(\delta\ge2\), and (3) follows.
 
 ## 4. What the reduction does and does not solve
 
@@ -177,10 +208,10 @@ canonical divisor-valued defect map
 \]
 
 Its support consists of intersections of disjoint chords of
-\(A\setminus\{P\}\). In defect one, every spare line contains a unique such
-diagonal point, and distinct spare lines give distinct points. This is the
-smallest geometric carrier on which Segre's tangent-product relation can
-act.
+\(A\setminus\{P\}\). Before defect-one closure, every spare line would contain
+a unique such diagonal point, and distinct spare lines would give distinct
+points. The same divisor map in degree at least two is now the smallest
+geometric carrier on which Segre's tangent-product relation can act.
 
 The direction factorization alone cannot finish the theorem. Small arcs
 covering a line are a classical and constructible phenomenon; Ng--Wild's
@@ -229,13 +260,24 @@ The second cheap upgrade is defect localization (5)--(6). A future character
 argument need not control all chord directions: at most \(\delta\)
 exceptional directions and \(2\delta\) participating chords carry every
 deviation from a one-factor-per-direction cover. The divisor map (8),
-especially its unique diagonal point in defect one, is the natural
-finite-geometric input for the next Segre comparison.
+now of degree at least two, is the natural finite-geometric input for the next
+Segre comparison.
+
+The third cheap upgrade is the factorization (9). Prime-power arithmetic
+reduces defect one to exactly \(q=5,9,27\), so the existing certified bounded
+classification closes it globally. The new first arithmetic frontier is
+\(\delta=2\), equivalently
+\[
+ (2n-1)^2-8q=17,
+\]
+a generalized Ramanujan--Nagell shape rather than another consecutive-factor
+identity.
 
 The acceptance check is internal and exact: the roots and their
 multiplicities on both sides of (7) agree point by point, their degrees agree,
 and the zero-slack arithmetic uses only coprimality of consecutive integers.
-No computational claim is used.
+Defect-one closure uses the already certified all-\(k\) classification at
+exactly \(q=5,9,27\); no new computational claim is introduced.
 
 ## 6. Mystery ledger
 
@@ -245,6 +287,6 @@ No computational claim is used.
 | Equality \(\binom{k-1}{2}=q\) | settled negatively | only the arithmetic pair \((q,k)=(3,4)\) survives, and the existing exact classification removes it |
 | Meaning of the slack \(\delta\) | settled | degree and total multiplicity of the residual concurrence divisor \(R_{P,\ell}\) |
 | Distribution of positive slack | settled | at most \(\delta\) exceptional directions and \(2\delta\) chords; \(E_P\) is completely split as in (5) |
-| Defect one | structurally settled, not excluded | each spare line has one unique doubled direction and one unique diagonal point; the missing step is compatibility across the spare pencil |
-| Positive slack, including the first \(k=9\) boundary \((q,k,\delta)=(27,9,1)\) | open | derive a character constraint on \(R_{P,\ell}\) from Segre tangent products and conic externality |
+| Defect one | settled negatively | prime-power arithmetic leaves only \(q=5,9,27\), all excluded by the certified bounded classification |
+| Residual slack \(\delta\ge2\) | open | derive a character constraint on \(R_{P,\ell}\) from Segre tangent products and conic externality; \(\delta=2\) has the arithmetic shape \((2n-1)^2-8q=17\) |
 | A raw general-position character sum | settled as the wrong scale | it retains the \(q\) forced direction roots; divide out the Moore form first |
