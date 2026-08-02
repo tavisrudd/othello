@@ -2,8 +2,22 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; supersedes C680 for all future Paper III work. Released
-versions 1 and 2 remain immutable.
+**Status:** complete; reported 2026-08-01. Released versions 1 and 2 remain
+immutable.
+
+## Result
+
+The forward manuscript is now *Golden descent and operator realizations of
+the Clebsch cubic*.  Its seven-row trust surface follows one selective chain
+from the square class `5J_0` through the conference carrier, middle-exterior
+and commutator-Pfaffian cubic, Joubert--Segre and Segre--Igusa recognition,
+and degree-six Gaunt return.  The marked bridge is a proposition with its
+ambiguity ledger in an appendix, and the broader Golden applications remain
+excluded.  A new ring-general Lean bridge identifies the fixed conference
+commutator Pfaffian with four times its triangle cubic.  Authoritative and
+standalone release gates, the serialized formal gate and axiom audit, and
+independent theorem/editorial reads are green.  Full report:
+`notes/2026-08-01-c763-paper-iii-golden-consolidation.md`.
 
 ## Objective
 

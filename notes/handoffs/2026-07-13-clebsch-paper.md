@@ -40,7 +40,7 @@ are reusable inputs to C756, but C761 does not own or block that theorem.
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; C753 owns forward formal strengthening and C762 owns the forward exposition pass | [C762](../clebsch-tasks/c762-paper-i-forward-exposition.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; C749/C750 own forward human/Lean strengthening | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III (`passages`) — *Arithmetic and harmonic realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released; C763 selectively consolidates the Golden structural core into the next forward version | [C763](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) |
+| Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C763 forward Golden-core consolidation complete with authoritative and standalone gates green | [C763](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) |
 | Paper IV — *A binary [78,36,12] code from the passant lines of a conic over F13* | `papers/q13-passant-code/` | C761 infrastructure installed; extraction, proof compression, paper-owned evidence, and structural Lean formalization remain | [C761](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
@@ -263,7 +263,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C749 — Paper II adversarial human closure](../clebsch-tasks/c749-paper-ii-adversarial-human-proof.md) | unblocked; human proof 4/4 | attack and compress the complete proof, then freeze it |
 | [C750 — Paper II structural Lean](../clebsch-tasks/c750-paper-ii-structural-lean.md) | active by explicit user override; six individually elaborated spine modules, full theorem still open | formalize the actual Lucas Hom basis, detecting-module vanishings, contraction, and classification composition |
 | [C762 — Paper I forward exposition](../clebsch-tasks/c762-paper-i-forward-exposition.md) | queued; released versions remain immutable | revise the headline order, series spine, Paper-IV pointer, and citation/trust presentation after reconciling with C753 |
-| [C763 — Paper III Golden consolidation](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) | queued; supersedes retired C680 for forward work | freeze the selective source--operator--cubics--harmonic theorem map before manuscript integration |
+| [C763 — Paper III Golden consolidation](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) | complete; selective source--operator--cubics--harmonic chain, formal bridge, cold reads, and synchronized release gates green | none |
 | [C744 — Paper III proof-spine structuralization](../clebsch-tasks/c744-paper-iii-proof-spine-structuralization.md) | complete; pinching, Gram, torsor, harmonic-scalar, A/B 96/100, EJ/EJ2, and synchronized release gates green | none |
 | [C745 — Paper III current-theorem Lean formalization](../clebsch-tasks/c745-paper-iii-current-lean-formalization.md) | complete; Paper-III-only structural gate, 34-declaration audit, five-row honest boundary, clean replay, and standalone synchronization green | none; C287 owns later reviewed extraction/tagging only |
 | [C733 — Paper III canonical orientation bridge](../clebsch-tasks/c733-paper-iii-canonical-orientation-bridge.md) | complete; strongest theorem is explicitly relative to the full marked datum, with ambiguity ledger and final `GO` | none; C763 owns any forward integration |
@@ -525,6 +525,15 @@ python3 verification/verify_release.py
 ```
 
 ## Paper III
+
+Paper III's forward version is *Golden descent and operator realizations of
+the Clebsch cubic*.  C763 inserts the selective conference,
+middle-exterior, commutator-Pfaffian, cross-golden determinant,
+Joubert--Segre, and Segre--Igusa chain between the square-class source and
+the degree-six harmonic return.  Its exact trust surface has seven rows and
+a new ring-general fixed-conference Pfaffian bridge; the broader Golden
+application inventory remains excluded.  Full report:
+`notes/2026-08-01-c763-paper-iii-golden-consolidation.md`.
 
 Paper III's corrected arithmetic statement has global square class `5J_0`;
 the fixed Clebsch chart lives over `Q(sqrt(5))`, and the displayed golden

@@ -6,10 +6,14 @@ bit on the six-axis carrier and apply three elementary operations to its
 conference operator: middle exterior power, commutator with the diagonal
 algebra, and centered squaring.  These operations produce the Joubert,
 Segre, Igusa, and diagonal Clebsch models in one calculation.
+The marked datum defines the coherent operator family.  The theorem below
+proves that its apparently different cubic outputs are the same forms and
+then recognizes their classical quotient geometry.
 
 Let \(X\) be the ordered six-axis set and
 \(A_X=\Q^X/\Q\mathbf1\).  The outer six-set \(\mathcal T\) consists of the
-six synthematic totals, that is, the six one-factorizations of \(K_6\).
+six synthematic totals, that is, the six labelled one-factorizations of the
+fixed labelled graph \(K_X\).
 Transporting the marked conference class coherently around \(\mathcal T\)
 gives symmetric zero-diagonal sign matrices
 \((C_T)_{T\in\mathcal T}\) with \(C_T^2=5I\).  This coherent outer marking
@@ -58,8 +62,13 @@ Over \(E=\Q(\sqrt5)\), put
  \sum_TZ_T=0,\qquad \sum_TZ_T^3=0.
 \]
 They are the signed Joubert coordinates and hence define the classical map
-from six labelled points to the Segre cubic.  In the Segre target, the
-hyperplane \(z_T=0\) cuts out the diagonal Clebsch cubic surface.
+from six labelled points to the Segre cubic
+\[
+ \left\{[z]\in\mathbf P^5:\sum_Tz_T=\sum_Tz_T^3=0\right\}.
+\]
+Inside its hyperplane \(z_T=0\), the remaining linear relation cuts the
+ambient space to \(\mathbf P^3\), and the remaining cubic equation is the
+diagonal Clebsch cubic surface.
 \item The centered determinants
 \[
  W_T=Z_T^2-\frac16\sum_UZ_U^2
