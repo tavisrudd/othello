@@ -22,6 +22,7 @@ standalone commit repeated manifest verification and the full 14-page
 - path: `/home/tavis/src/math-papers/golden-quantum-statistics`;
 - branch: `main`;
 - commit: `8929f2cf433355e39f6a2eb60197831463867f52`;
+- tag: `golden-quantum-statistics-rigidity-referee-approved`;
 - export-manifest SHA-256:
   `58c421fed689d7a4f3ea5159cf35e12551e57b3469d25815b25689ede4cbd0d8`;
 - remote: none.
