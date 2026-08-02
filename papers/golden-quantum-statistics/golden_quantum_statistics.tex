@@ -31,27 +31,29 @@
 
 \begin{abstract}
 Exchange statistics determine which information a many-particle
-interferometer can retain about its one-particle transfer.  We study this
-distinction in an exact six-mode transfer constructed from the two
-three-dimensional eigenspaces of a real symmetric conference matrix.  For a
+interferometer can retain about its one-particle transfer.  Building on the
+Golden conference-operator and Joubert--Segre construction of the Clebsch
+series, we study this distinction in its exact six-mode transfer.  For a
 diagonal path control \(D_x\), the postselected block
 
 \[
  K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}
 \]
 
-has filled three-fermion amplitude \(\det K_T(x)\), proportional to a signed
-Joubert coordinate on the Segre cubic.  We show that this orientation has no
-intrinsic permanent counterpart: permanents depend on the chosen input and
-output port frames, whereas a canonical basis-independent bosonic aggregate is
-the symmetric-cube trace \(h_3(K_T^\dagger K_T)\), a function only of the
-singular values.  At each of twenty balanced controls, all six transfers have squared
+has top-exterior amplitude \(\det K_T(x)\), proportional to a signed Joubert
+coordinate on the Segre cubic.  This amplitude is orientation-covariant,
+although its filled-fermion probability \(|\det K_T(x)|^2\) is sign-blind.
+There is no intrinsic permanent counterpart: permanents depend on the chosen
+input and output port frames, whereas a canonical basis-independent bosonic
+aggregate is the symmetric-cube trace \(h_3(K_T^\dagger K_T)\), a function
+only of the singular values.  At each of twenty balanced controls, all six transfers have squared
 singular spectrum \(\{1/5,4/5,4/5\}\), giving
-\(h_3=313/125\) and exterior-cube probability \(e_3=16/125\); the other
+\(h_3=313/125\) (uniform-input average \(313/1250\)) and exterior-cube
+probability \(e_3=16/125\); the other
 44 Boolean controls have zero fermionic amplitude.  Calibrated determinant
-signs form a distance-six simplex code supporting economical three-, five-,
-and ten-cut readout, and a rational lossy control realizes an exact chiral
-anomaly-free charge vector projectively.  We give a six-mode optical
+signs, inferred from phase-referenced one-particle tomography rather than a
+direct many-fermion phase measurement, form a distance-six simplex code
+supporting three-, five-, and ten-cut readout.  We give a six-mode optical
 compilation and quantitative certification thresholds.  Present photonic
 components support coherent transfer tomography and bosonic controls; direct
 three-fermion emulation additionally requires a totally antisymmetric
@@ -78,24 +80,31 @@ matrix \(C\) of order six, so that
 The two eigenspaces of \(C\), with eigenvalues \(\pm\sqrt5\), both have
 dimension three.  A diagonal path control couples them through a
 three-by-three block \(K\).  Six coherently marked conference matrices produce
-six such blocks.  Their determinants are the six classical Joubert
-coordinates and satisfy the two equations of the Segre cubic.  This
-identification, including its invariant-theoretic provenance, is developed in
-the companion operator paper; here we ask what it means under symmetric and
-antisymmetric exchange statistics.
+six such blocks.  The Clebsch source papers construct this Golden operator
+family from the regular six-point two-graph and prove that its determinants
+are the six classical Joubert coordinates on the Segre cubic
+\cite{ClebschI,ClebschIII}.  The present paper builds on that theorem: it asks
+what the transfer retains under symmetric and antisymmetric exchange
+statistics, how its marked determinant signs can be read in a calibrated
+apparatus, and where a photonic realization stops.
 
 The central point is an orientation boundary.  The Golden data determine the
 two three-dimensional port spaces but not ordered orthonormal frames inside
 them.  Changing those frames acts on \(K\) from the left and right by
 orthogonal matrices.  The top exterior power is intrinsically a map between
 the two determinant lines; after both lines are oriented, it becomes the
-signed scalar \(\det K\).  The permanent does not descend through the same
+signed scalar \(\det K\), while the ordinary filled-fermion probability
+\(|\det K|^2\) is sign-blind.  The permanent does not descend through the same
 port-frame action.  Consequently the canonical intrinsic bosonic aggregate
 used here is not a second signed Segre coordinate: it is a spectral quantity
 on the symmetric cube.
 
 Theorems~\ref{thm:orbit-boundary} and~\ref{thm:exchange-boundary} state this
-distinction and its exact balanced specialization.  The remaining sections separate intrinsic
+distinction and its exact balanced specialization.  The Golden spectrum gives
+all six protocols one calibration target, the Boolean rank theorem gives a
+sharp \(20/44\) control boundary, and the simplex words reduce calibrated sign
+readout.  These are the operational gains of the exceptional family.
+The remaining sections separate intrinsic
 observables from calibrated ones, give a short arithmetic application, and
 identify the boundary of a photonic implementation.  The permanent
 description of multiphoton scattering is standard~\cite{Scheel}; immanants
@@ -110,9 +119,44 @@ obstruction, and the associated measurement and resource package.
 
 \section{The Golden transfer}
 
-For one member \(C_T\) of the marked conference family, let
+Here is a reproducible local model of the source object.  On the ordered path
+set \(X=\{0,\ldots,5\}\), take
+\[
+C_0=\begin{pmatrix}
+0&1&1&1&-1&-1\\
+1&0&-1&-1&-1&-1\\
+1&-1&0&1&1&-1\\
+1&-1&1&0&-1&1\\
+-1&-1&1&-1&0&-1\\
+-1&-1&-1&1&-1&0
+\end{pmatrix},\qquad C_0^2=5I.
+\]
+Let \(\mathcal T\) be the six synthematic totals, that is, the six labelled
+one-factorizations of \(K_X\).  One total is
+\[
+\begin{split}
+T_0=\{&
+\{01,23,45\},\{02,14,35\},\{03,15,24\},\\
+&\{04,13,25\},\{05,12,34\}\}.
+\end{split}
+\]
+The \(S_6\)-orbit of \(T_0\) has six elements.  For each
+\(T\in\mathcal T\), choose the lexicographically first permutation
+\(\pi_T\) carrying \(T_0\) to \(T\), let \(P_T\) be its permutation matrix,
+and put \(C_T=P_TC_0P_T^{\mathsf T}\).  This is the frozen convention used by
+the artifact.  Transporting the ordered path basis fixes the Hodge and
+determinant-line orientations, including the signs \(\varepsilon_T\) below.
+The Clebsch source theorem proves that this marked family is the
+conference-operator realization of the six Joubert coordinates
+\cite[Theorem~5.1]{ClebschIII}; Paper~I supplies its upstream
+two-graph provenance~\cite{ClebschI}.
+
+For one member \(C_T\) of this marked conference family, let
 \(Q_{T,+}\) and \(Q_{T,-}\) be matrices whose columns are ordered orthonormal
-frames for the \(\pm\sqrt5\)-eigenspaces.  For
+frames for the \(\pm\sqrt5\)-eigenspaces.  In the base gauge these frames are
+obtained by Gram--Schmidt from
+\(P_{\pm}e_0,P_{\pm}e_1,P_{\pm}e_2\), where
+\(P_\pm=(I\pm C_0/\sqrt5)/2\), and are transported by \(P_T\).  For
 \(x=(x_0,\ldots,x_5)\), put
 \[
  D_x=\operatorname{diag}(x_0,\ldots,x_5),\qquad
@@ -128,7 +172,7 @@ postselection.
 
 The six determinant amplitudes satisfy
 \[
- Z_T(x)=\varepsilon_T,10\sqrt5\det K_T(x),
+ Z_T(x)=\varepsilon_T\,10\sqrt5\det K_T(x),
  \qquad \varepsilon_T\in\{\pm1\},
 \]
 with signs fixed by the marked orientations.  They obey
@@ -278,6 +322,8 @@ Consequently
  F_{\mathrm{ext}}=\frac{16}{125},\qquad
  B_{\mathrm{sym}}-F_{\mathrm{ext}}=\frac{297}{125}.
 \]
+The corresponding uniform average over the ten normalized symmetric-cube
+input occupations is \(B_{\mathrm{sym}}/10=313/1250\).
 The mixed exchange sector has
 \[
  \operatorname{tr}\bigl(S_{(2,1)}(H)\bigr)=s_{(2,1)}(H)=\frac85,
@@ -293,8 +339,28 @@ marked Segre nodes or orientations.
 \end{theorem}
 
 \begin{proof}
-The Golden conference identity gives the displayed spectrum on every
-balanced cut.  The complete and elementary symmetric functions give
+Let \(D=D_x\) and \(P_{T,-}=(I-C_T/\sqrt5)/2\).  Since \(D^2=I\),
+\[
+ H=Q_{T,+}^{\mathsf T}DP_{T,-}DQ_{T,+}.
+\]
+For \(C_0\) displayed in Section~2, direct multiplication for the ten
+projective balanced supports (choose the representative containing path
+zero) gives
+\[
+ \operatorname{tr}H=\frac95,\qquad
+ \operatorname{tr}(H^2)=\frac{33}{25},\qquad
+ \det H=\frac{16}{125}.
+\]
+Complementing a support negates \(K_T\) and leaves \(H\) fixed.  Transport by
+\(P_T\) merely permutes the supports, so these identities hold for all six
+protocols.  Newton's identities give
+\[
+ \det(\lambda I-H)
+ =\lambda^3-\frac95\lambda^2+\frac{24}{25}\lambda-\frac{16}{125}
+ =\left(\lambda-\frac15\right)\left(\lambda-\frac45\right)^2,
+\]
+which proves the displayed spectrum without an exhaustive numerical search.
+The complete and elementary symmetric functions then give
 \[
  h_3\left(\frac15,\frac45,\frac45\right)=\frac{313}{125},
  \qquad
@@ -318,7 +384,11 @@ Theorem~\ref{thm:orbit-boundary}.
 The theorem does not say that calibrated bosonic measurements lose all
 control information.  Once physical port axes are fixed, a permanent is an
 ordinary measurable amplitude.  It says that such a value belongs to the
-calibrated apparatus rather than to the unmarked Golden operator.
+calibrated apparatus rather than to the unmarked Golden operator.  Likewise,
+the determinant sign belongs to the oriented amplitude: the probability
+\(F_{\mathrm{ext}}\) does not retain it.  The precursor below infers that sign
+from phase-referenced one-particle tomography; it does not measure a direct
+many-fermion phase.
 
 \section{Balanced controls and calibrated readout}
 
@@ -378,11 +448,25 @@ supports soft matched-filter decoding; hard nearest-word decoding corrects
 two sign errors.  No relative sign word fixes the global orientation without
 a coherent port reference.
 
+For an explicit schedule, order the projective cuts lexicographically by the
+negative supports containing path zero:
+\[
+012,013,014,015,023,024,025,034,035,045.
+\]
+The first three positions \(012,013,014\) classify the six protocols after
+membership is known.  The five-cycle
+\(012,015,023,034,045\) jointly tests the common Golden magnitudes and
+classifies the protocol.  These are fixed schedules for the transported
+marking above, not protocol-dependent choices.
+
 The universal complementarity identities for determinants and permanents of
 Jabbour and Cerf~\cite{JabbourCerf} provide a useful calibrated consistency
 check.  They do not distinguish the Golden family by themselves.
 
-\section{An exact arithmetic instance}
+\subsection*{Bounded arithmetic corollary}
+
+The same coordinate map has the following arithmetic specialization.  It is
+not used by the optical benchmark.
 
 The rational diagonal filter
 \[
@@ -431,11 +515,11 @@ bounded precursor; the third is conditional on the additional source.
   flow/.style={->,semithick},
   dep/.style={->,semithick,dashed}
 ]
-\node[box] (in) {ports \(0,1,2\)};
+\node[box] (in) {selected inputs\\ports \(0,1,2\)};
 \node[gate,right=5mm of in] (o) {\(O_T\)\\15 Givens};
 \node[gate,right=5mm of o] (d) {\(D_x\)\\phase/filter};
 \node[gate,right=5mm of d] (ot) {\(O_T^{\mathsf T}\)\\15 Givens};
-\node[box,right=5mm of ot] (out) {ports \(3,4,5\)};
+\node[box,right=5mm of ot] (out) {postselected outputs\\ports \(3,4,5\)};
 \draw[flow] (in)--(o); \draw[flow] (o)--(d); \draw[flow] (d)--(ot);
 \draw[flow] (ot)--node[above,pos=.58]{\(K_T\)}(out);
 
@@ -478,6 +562,11 @@ modes \(a,b\), our compiled two-mode cell is
  G_{ab}(\theta)|_{a,b}=
  \begin{pmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix}.
 \]
+The \(O(3)\times O(3)\) action of Theorem~\ref{thm:orbit-boundary} is a gauge
+of the unframed Golden source object.  Compiling \(O_T\) chooses physical,
+phase-referenced laboratory axes; a later port rotation changes that
+calibration or the device rather than acting as an unnoticed experimental
+gauge.
 In the frozen pivot gauge, input phases
 \(S=\operatorname{diag}(1,1,1,1,1,-1)\), followed in order by the cells below,
 reconstruct \(O_T\) to maximum entry error below \(2\times10^{-14}\).  Mode
@@ -561,6 +650,15 @@ For two contraction blocks \(K\) and \(K+E\),
 \[
  |\det(K+E)-\det K|\leq3\lVert E\rVert_2.
 \]
+Indeed \(A(t)=K+tE\) is a contraction for \(0\leq t\leq1\), and
+\[
+ \left|\frac{d}{dt}\det A(t)\right|
+ \leq \lVert\operatorname{adj}A(t)\rVert_*
+       \lVert E\rVert_2
+ \leq3\lVert E\rVert_2,
+\]
+because the three singular values of the adjugate are pairwise products of
+singular values of \(A(t)\), hence at most one.  Integration gives the bound.
 The balanced sign is certified by
 \(\lVert E\rVert_2<0.1193\).  The smallest chiral amplitude requires
 \(\lVert E\rVert_2<0.00472\) for its sign and
@@ -573,6 +671,14 @@ relative precision, a normal approximation, and simultaneous 95-percent
 coverage of all six probabilities.  It excludes source preparation,
 coupling, propagation, and detector loss; these enter only when an accepted-
 trial rate is converted to laboratory time.
+With Bonferroni allocation over six two-sided intervals, put
+\[
+ z=\Phi^{-1}\left(1-\frac{0.05}{12}\right),\qquad
+ n(p)=\left\lceil
+ \frac{z^2(1-p)}{0.1^2p}
+ \right\rceil .
+\]
+The table applies this formula to each ideal probability and rounds upward.
 \begin{center}
 \begin{tabular}{lrrr}
 \toprule
@@ -611,22 +717,41 @@ balanced event and \(F\geq0.999980\) for the smallest chiral event.  With only
 a fidelity bound and the trace-distance worst case, the corresponding gates
 are \(F\geq0.999836\) and \(F\geq0.9999999996\).  A characterized noise model
 could relax these bounds, but the conclusion would then be model-dependent.
+For the mixture model, an event probability changes by at most \(1-F\), so
+ten-percent relative bias at ideal probability \(p\) requires
+\(F\geq1-0.1p\).  With fidelity alone, trace distance bounds the probability
+bias by \(\sqrt{1-F}\); the corresponding requirement is
+\(F\geq1-0.01p^2\).  Substitution of \(p=16/125\) and
+\(p=5184/25878125\) gives the four displayed gates.
 
 \section{Discussion}
 
 The Golden transfer separates three levels of information.  Its singular
 values determine every intrinsic bosonic scalar.  A calibrated port frame
 adds permanent amplitudes and oriented control information.  Antisymmetric
-exchange statistics retain the determinant orientation as a one-dimensional
-representation of the port-frame action.  The Segre coordinate is therefore
-not an arbitrary choice of cubic observable: it is the top exterior amplitude
-of the transfer.
+exchange supplies the determinant as a one-dimensional, orientation-covariant
+amplitude of the port-frame action; its event probability discards the sign.
+The proposed precursor recovers the signed matrix element by coherent
+one-particle tomography after the laboratory frames have been compiled and
+oriented.  The Segre coordinate is therefore not an arbitrary cubic
+observable, but neither is its sign claimed here as a direct many-fermion
+measurement.
 
 The example also separates a feasible optical certification from a direct
 many-particle realization.  Current mesh and tomography technology can test
 the one-particle carrier and its bosonic shadows.  Direct photonic emulation of
 the three-fermion amplitude depends on an additional antisymmetric resource.
 This boundary is part of the result rather than an experimental claim.
+
+\section*{Data availability}
+
+No empirical data were generated or analyzed.  The exact mathematical
+artifacts supporting the finite claims---the standard-library checker,
+compact certificate, SHA-256 manifest, locked symbolic environment, and
+independent replay entry points---are included with the article's
+supplemental package.  The submitted artifact version is identified in that
+package; live hosting and its public locator are supplied with the publication
+record.
 
 \section*{Verification}
 
@@ -655,6 +780,17 @@ literature priority.
 \begingroup
 \raggedright
 \begin{thebibliography}{99}
+
+\bibitem{ClebschI}
+T.~Rudd,
+\emph{Reconstructing the Clebsch code and its golden orientation from its
+deep-hole syndrome locus},
+The Clebsch cubic: Recovering, orienting, and realizing I, preprint (2026).
+
+\bibitem{ClebschIII}
+T.~Rudd,
+\emph{Golden descent and operator realizations of the Clebsch cubic},
+The Clebsch cubic: Recovering, orienting, and realizing III, preprint (2026).
 
 \bibitem{Scheel}
 S.~Scheel,
