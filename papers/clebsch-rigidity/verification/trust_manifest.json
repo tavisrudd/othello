@@ -47,7 +47,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -93,7 +93,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 96",
+      "paper_location": "source line 91",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -145,7 +145,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 635",
+      "paper_location": "source line 652",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -215,7 +215,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 598",
+      "paper_location": "source line 615",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 615",
+      "paper_location": "source line 632",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 724",
+      "paper_location": "source line 741",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -382,7 +382,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 776",
+      "paper_location": "source line 793",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 330",
+      "paper_location": "source line 347",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -554,7 +554,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -575,7 +575,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 143",
+      "paper_location": "source line 138",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -646,7 +646,7 @@
         }
       ],
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 213",
+      "paper_location": "source line 211",
       "route": "mixed",
       "row": 18,
       "source": {
@@ -662,7 +662,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 239",
+      "paper_location": "source line 237",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -734,7 +734,7 @@
         }
       ],
       "id": "thm-gap",
-      "paper_location": "source line 271",
+      "paper_location": "source line 269",
       "route": "mixed",
       "row": 20,
       "source": {
@@ -750,7 +750,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 900",
+      "paper_location": "source line 917",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -809,7 +809,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -831,7 +831,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 950",
+      "paper_location": "source line 967",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -915,7 +915,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 966",
+      "paper_location": "source line 983",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -966,7 +966,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -1014,7 +1014,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1033,7 +1033,7 @@
         }
       ],
       "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
-      "paper_location": "source line 83",
+      "paper_location": "source line 81",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -1077,7 +1077,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1121,7 +1121,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 341",
+      "paper_location": "source line 339",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1156,7 +1156,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula"
@@ -1199,7 +1199,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 493",
+      "paper_location": "source line 510",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1271,7 +1271,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "45056ea72f225ce373d774ed274f4d0216b38c21fb57c26dfc5c84b0a2ef413b"
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
             },
             "terminals": [
               "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card",
@@ -1506,7 +1506,7 @@
         }
       ],
       "id": "thm-q13-tangent-code+thm-small-k-conic-filling",
-      "paper_location": "source line 385",
+      "paper_location": "source line 386",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1588,7 +1588,7 @@
         }
       ],
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 141",
+      "paper_location": "source line 139",
       "route": "mixed",
       "row": 58,
       "source": {
@@ -1665,12 +1665,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "500b9e530146958c93a128f8352e12cbdec6bed5945e6e5c11d05d0f4ca757eb"
+      "sha256": "9712ed68d0015e5b768c9bf5a20c772bf97f0860b979e6fe01ce64d7f75783cd"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "f162ac23598a4e67ff657d539627848df3864a1452b9a2d9624470be128561e3"
+      "sha256": "fc9383a730bd87ff495bf30661613870a74fc04e028d9a462447122ac25e25b2"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -1688,9 +1688,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "5accf6215a6fac7d269c2ced66fd9bb755a6e75dc9db1b1193dafa7ce9186fc1"
+    "sha256": "b78ab7fa16bac6c6d1c435aec3c85de8c64a4f63f9bb34db60fce08200f296a9"
   },
-  "manuscript_sha256": "492f07ad5e88ba039ffbb9be49ee1c41c9e2ad20e6ed1f1ae4c79f7d6ada2a45",
+  "manuscript_sha256": "526a6576d7023678780f02f96eddd8ebbd728bd6f4177f2cc32290fe0c06765f",
   "public_documents": [
     {
       "path": "README.md",
@@ -1730,7 +1730,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "2af0edf7d2bf22e2d6664201aa6f99018af958f71b67f4e82c97f61d5414139c"
+    "sha256": "fc12218a1a666c3d5a3918c2c4b962627779875b858a3818d3a1e819c4175a73"
   },
   "verify_all": {
     "checker_output_certificate": {

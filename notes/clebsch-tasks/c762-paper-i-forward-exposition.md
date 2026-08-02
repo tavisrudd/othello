@@ -43,12 +43,12 @@ citation-interface, bibliography, or layout defect.
 The read-only Lean correspondence audit found no new declaration requirement.
 The headline and three affected statement groups retain their exact SHA-256
 identities; only their source lines moved (headline `96→91`, orientation
-`966→981`, window `83→81`, q13 `385→386`).  After C753's active extraction is
-stable, regenerate
-`verification/statement_identity.json` and the dependent trust manifest, then
-update formal coverage only to the strength actually achieved by the existing
-frozen C753 packets.  No Lean source, build artifact, or running extraction was
-touched by C762.
+`966→983`, window `83→81`, q13 `385→386`).  The statement identity and
+dependent trust manifest are regenerated from the current manuscripts, and
+both generator check modes are green.  After C753's active extraction is
+stable, update formal coverage only to the strength actually achieved by the
+existing frozen packets and run the Lean-root-dependent trust verifier.  No
+Lean source, build artifact, or running extraction was touched by C762.
 
 ## Objective
 
