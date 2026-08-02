@@ -118,6 +118,143 @@ def checked_rank(rows: list[int], width: int) -> int:
     return first
 
 
+def coordinate_basis(rows: list[int]) -> tuple[list[int], dict[int, tuple[int, int]]]:
+    selected: list[int] = []
+    pivots: dict[int, tuple[int, int]] = {}
+    for original in rows:
+        row = original
+        coefficients = 1 << len(selected)
+        while row:
+            pivot = row.bit_length() - 1
+            if pivot in pivots:
+                reduced, change = pivots[pivot]
+                row ^= reduced
+                coefficients ^= change
+            else:
+                pivots[pivot] = (row, coefficients)
+                selected.append(original)
+                break
+    return selected, pivots
+
+
+def coordinates(vector: int, pivots: dict[int, tuple[int, int]]) -> int:
+    result = 0
+    while vector:
+        pivot = vector.bit_length() - 1
+        assert pivot in pivots
+        reduced, change = pivots[pivot]
+        vector ^= reduced
+        result ^= change
+    return result
+
+
+def permute_vector(vector: int, permutation: list[int]) -> int:
+    result = 0
+    while vector:
+        bit = vector & -vector
+        result |= 1 << permutation[bit.bit_length() - 1]
+        vector ^= bit
+    return result
+
+
+def flatten_matrix(matrix: list[int], size: int) -> int:
+    return sum(row << (size * index) for index, row in enumerate(matrix))
+
+
+def action_algebra_dimension(
+    generators: list[list[int]], size: int, *, side: str
+) -> int:
+    pivots: dict[int, int] = {}
+    queue: list[list[int]] = []
+
+    def insert(matrix: list[int]) -> None:
+        vector = flatten_matrix(matrix, size)
+        while vector:
+            pivot = (
+                vector.bit_length() - 1
+                if side == "right"
+                else (vector & -vector).bit_length() - 1
+            )
+            if pivot in pivots:
+                vector ^= pivots[pivot]
+            else:
+                pivots[pivot] = vector
+                queue.append(matrix)
+                return
+
+    insert(identity(size))
+    cursor = 0
+    while cursor < len(queue):
+        matrix = queue[cursor]
+        cursor += 1
+        for generator in generators:
+            insert(
+                multiply(matrix, generator)
+                if side == "right"
+                else multiply(generator, matrix)
+            )
+    return len(pivots)
+
+
+def canonical_projective(vector: tuple[int, ...]) -> tuple[int, ...]:
+    first = next(value for value in vector if value)
+    inverse = pow(first, -1, Q)
+    return tuple(value * inverse % Q for value in vector)
+
+
+def multiply_projective(
+    first: tuple[int, int, int, int], second: tuple[int, int, int, int]
+) -> tuple[int, int, int, int]:
+    a, b, c, d = first
+    e, f, g, h = second
+    return canonical_projective(
+        (
+            (a * e + b * g) % Q,
+            (a * f + b * h) % Q,
+            (c * e + d * g) % Q,
+            (c * f + d * h) % Q,
+        )
+    )
+
+
+def act_projective(
+    matrix: tuple[int, int, int, int], point: tuple[int, int, int]
+) -> tuple[int, int, int]:
+    a, b, c, d = matrix
+    x, y, z = point
+    return canonical_projective(
+        (
+            (a * a * x + 2 * a * b * y + b * b * z) % Q,
+            (a * c * x + (a * d + b * c) * y + b * d * z) % Q,
+            (c * c * x + 2 * c * d * y + d * d * z) % Q,
+        )
+    )
+
+
+def mobius(matrix: tuple[int, int, int, int], point: int) -> int:
+    a, b, c, d = matrix
+    if point == Q:
+        return Q if c == 0 else a * pow(c, -1, Q) % Q
+    denominator = (c * point + d) % Q
+    return (
+        Q
+        if denominator == 0
+        else (a * point + b) * pow(denominator, -1, Q) % Q
+    )
+
+
+def conic_heart_matrix(matrix: tuple[int, int, int, int]) -> list[int]:
+    permutation = [mobius(matrix, point) for point in range(Q + 1)]
+    rows = []
+    for point in range(Q - 1):
+        vector = (1 << permutation[point]) ^ (1 << permutation[Q])
+        last = (vector >> (Q - 1)) & 1
+        rows.append(
+            sum((((vector >> index) & 1) ^ last) << index for index in range(Q - 1))
+        )
+    return rows
+
+
 def compute() -> dict[str, object]:
     points = internal_points()
     size = len(points)
@@ -205,8 +342,56 @@ def compute() -> dict[str, object]:
     assert kernel_dimension == 36
     assert fixed_dimension == 0
 
+    group_generators = [(1, 1, 0, 1), (0, 1, 1, 0), (2, 0, 0, 1)]
+    generated_group = {(1, 0, 0, 1)}
+    group_queue = [(1, 0, 0, 1)]
+    cursor = 0
+    while cursor < len(group_queue):
+        element = group_queue[cursor]
+        cursor += 1
+        for generator in group_generators:
+            product = multiply_projective(element, generator)
+            if product not in generated_group:
+                generated_group.add(product)
+                group_queue.append(product)
+    assert len(generated_group) == 2184
+
+    k_basis, k_pivots = coordinate_basis(projection_to_k)
+    assert len(k_basis) == 36
+    point_index = {point: index for index, point in enumerate(points)}
+    k_generators = []
+    for generator in group_generators:
+        permutation = [
+            point_index[act_projective(generator, point)] for point in points
+        ]
+        k_generators.append(
+            [
+                coordinates(permute_vector(vector, permutation), k_pivots)
+                for vector in k_basis
+            ]
+        )
+    scalar_alpha = [
+        coordinates(multiply([vector], b)[0], k_pivots) for vector in k_basis
+    ]
+    assert all(
+        multiply(generator, scalar_alpha) == multiply(scalar_alpha, generator)
+        for generator in k_generators
+    )
+    k_algebra_dimensions = {
+        side: action_algebra_dimension(k_generators, 36, side=side)
+        for side in ("right", "left")
+    }
+    assert k_algebra_dimensions == {"right": 432, "left": 432}
+
+    heart_generators = [conic_heart_matrix(generator) for generator in group_generators]
+    heart_algebra_dimensions = {
+        side: action_algebra_dimension(heart_generators, 12, side=side)
+        for side in ("right", "left")
+    }
+    assert heart_algebra_dimensions == {"right": 144, "left": 144}
+
     return {
-        "schema": "c817-hidden-f8-v1",
+        "schema": "c817-hidden-f8-v3",
         "field": 13,
         "point_count": size,
         "relation_valencies": {
@@ -216,6 +401,17 @@ def compute() -> dict[str, object]:
         "kernel_A0_dimension_over_F2": kernel_dimension,
         "kernel_A0_intersect_kernel_B_plus_I_dimension": fixed_dimension,
         "kernel_A0_dimension_over_F8": kernel_dimension // 3,
+        "PGL2_generators": [list(generator) for generator in group_generators],
+        "PGL2_generated_order": len(generated_group),
+        "code_module_action_algebra_dimensions_over_F2": k_algebra_dimensions,
+        "full_End_F8_dimension_over_F2": 12 * 12 * 3,
+        "ordinary_14_point_heart_action_algebra_dimensions_over_F2": (
+            heart_algebra_dimensions
+        ),
+        "representation_verdict": (
+            "absolutely irreducible over F8; minimal definition field F8; "
+            "not the ordinary 14-point deleted permutation heart"
+        ),
         "modular_Bose_Mesner_action_on_kernel_A0": {
             "I": "1",
             "A0": "0",

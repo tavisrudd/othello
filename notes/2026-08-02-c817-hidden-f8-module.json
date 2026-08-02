@@ -1,5 +1,31 @@
 {
+  "PGL2_generated_order": 2184,
+  "PGL2_generators": [
+    [
+      1,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      1,
+      0
+    ],
+    [
+      2,
+      0,
+      0,
+      1
+    ]
+  ],
+  "code_module_action_algebra_dimensions_over_F2": {
+    "left": 432,
+    "right": 432
+  },
   "field": 13,
+  "full_End_F8_dimension_over_F2": 432,
   "independent_rank_implementations": [
     "bitset_echelon",
     "dense_rref"
@@ -16,6 +42,10 @@
     "A9": "alpha",
     "I": "1",
     "alpha_relation": "alpha^3+alpha^2+1=0"
+  },
+  "ordinary_14_point_heart_action_algebra_dimensions_over_F2": {
+    "left": 144,
+    "right": 144
   },
   "point_count": 78,
   "ranks_over_F2": {
@@ -34,7 +64,8 @@
     "3": 14,
     "9": 14
   },
-  "schema": "c817-hidden-f8-v1",
+  "representation_verdict": "absolutely irreducible over F8; minimal definition field F8; not the ordinary 14-point deleted permutation heart",
+  "schema": "c817-hidden-f8-v3",
   "verified_Frobenius_packet_identities": [
     "A9+A10+A12=e_K",
     "A9*A10+A9*A12+A10*A12=0",

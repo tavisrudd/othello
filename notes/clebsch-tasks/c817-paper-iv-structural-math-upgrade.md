@@ -11,8 +11,11 @@ Subitem 1 is complete.  The modular Bose--Mesner action on
 \(K\cong\mathbf F_8^{12}\) and
 \((A_9,A_{10},A_{12})=(\alpha,\alpha^2,\alpha^4)\).  The stronger ambient
 primary split, canonical projector, trace/norm three-Gram resolution,
-\(\mathbf F_8\)-symplectic form, and exact Schur field are also frozen.  Report
-and exact evidence bundle: `notes/2026-08-02-c817-hidden-f8-module.md`.
+\(\mathbf F_8\)-symplectic form, exact Schur field, absolute irreducibility,
+and minimal definition field are also frozen.  The ordinary conic-point heart
+is excluded; a precise nonsplit-torus identification remains a subitem-3
+Brauer-character gate.  Report and exact evidence bundle:
+`notes/2026-08-02-c817-hidden-f8-module.md`.
 
 The next gate is subitem 2, pair-concurrence coherent closure and minimal
 reconstruction arity.
