@@ -2420,8 +2420,17 @@
       "last": 830,
       "purpose": "post-Version-2 global rounding theorem for stabilizer AME approximate symmetries",
       "sequence": 269
+    },
+    {
+      "count": 1,
+      "first": 831,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 831,
+      "purpose": "Paper IV structural version with C817 integration, proof tightening, evidence, and Lean formalization",
+      "sequence": 270
     }
   ],
-  "next_id": 831,
+  "next_id": 832,
   "schema": "codex-task-id-allocations-v1"
 }
