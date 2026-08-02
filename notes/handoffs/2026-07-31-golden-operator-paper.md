@@ -396,12 +396,15 @@ from this manuscript, and they must be audited before any sequel.  Full report:
 |---|---|---|
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
 | [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | ready; C715 and C718 complete | produce a platform circuit, coherent-sign readout, and feasibility budget |
+| [C765 — minimal quantum-statistics companion](../golden-tasks/c765-golden-quantum-statistics-note.md) | queued after C719; unnumbered physical note, not Paper V | assemble only the experimentally feasible C707/C715/C718/C719 spine, or a design-limit note if C719 is negative |
 
 ## Recommended order
 
 1. C719 six-mode demonstrator, using C718's basis-free spectral discriminator
    and pivot-gauge collision-free ratios with an explicit platform budget.
-2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+2. C765 minimal physical companion, conditioned on C719's verdict; add a
+   Paper-III forward citation only after the note has a stable public locator.
+3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths

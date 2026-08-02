@@ -89,6 +89,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 - **C719 `[golden]` [READY; C715 AND C718 COMPLETE]** — design a platform-specific six-mode demonstration with coherent sign readout, anomaly witness, bosonic control, optimal three/five/ten-cut simplex decoding, and quantitative loss/shot budget → `notes/golden-tasks/c719-golden-six-mode-demonstrator.md`.
+- **C765 `[golden]` [QUEUED AFTER C719]** — assemble a minimal unnumbered Golden quantum-statistics companion around C719's feasible platform, C707/C715's determinant amplitudes and coherent-sign witness, C718's calibrated permanent control and intrinsic symmetric/exterior-cube comparison, and only the simplex decoding needed by the experiment; if C719 is negative, publish a design-limit note instead → `notes/golden-tasks/c765-golden-quantum-statistics-note.md`.
 
 ### `complete-ports`
 
