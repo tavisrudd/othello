@@ -386,7 +386,7 @@ Hodge convention fixed.
 \begin{tikzpicture}[
   box/.style={draw,rounded corners=2pt,align=center,inner sep=4pt,
     font=\small,text width=39mm},
-  center/.style={box,text width=31mm,thick},
+  center/.style={box,text width=43mm,thick},
   target/.style={box,text width=42mm},
   arr/.style={-{Latex[length=2mm]},semithick},
   lab/.style={font=\scriptsize,fill=white,inner sep=1.2pt}
@@ -399,7 +399,8 @@ Hodge convention fixed.
   \(\operatorname{Pf}[D_x,C_T]=4Z_T\)};
 \node[box] (det) at (3.4,0.5) {cross-golden determinant\\
   \(Z_T=\pm10\sqrt5\det B_T(x)\)};
-\node[center] (z) at (0,-1.15) {all four equal\\\(Z_T=J_T\)};
+\node[center] (z) at (0,-1.15) {normalized to the same cubic\\
+  \(Z_T=J_T\)};
 \draw[arr] (tri.south east) -- (z.north west);
 \draw[arr] (wedge.south west) -- (z.north east);
 \draw[arr] (pf.south east) -- (z.west);
