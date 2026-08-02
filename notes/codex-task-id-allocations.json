@@ -2078,8 +2078,17 @@
       "last": 773,
       "purpose": "close C772 referee packaging, netlist, and minor presentation defects",
       "sequence": 231
+    },
+    {
+      "count": 4,
+      "first": 774,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 777,
+      "purpose": "red-team, literature audit, manuscript integration, and Lean update for the 2-uniform discreteness/stability/Fisher-isotropy upgrade",
+      "sequence": 232
     }
   ],
-  "next_id": 774,
+  "next_id": 778,
   "schema": "codex-task-id-allocations-v1"
 }

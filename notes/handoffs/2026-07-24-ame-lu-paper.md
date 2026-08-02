@@ -10,6 +10,20 @@ Discovery companion:
 
 ## Current status
 
+**C774--C777 queued (2026-08-01): 2-uniform rigidity upgrade.**  An external
+Fable session produced a discreteness theorem requiring only 2-uniformity (no
+stabilizer hypothesis), an explicit stability constant independent of the party
+count, an exact quantum-Fisher isotropy proposition, and a finiteness statement
+for local gauge groups of 2-unitary gates.  None of it exists locally; it
+executes frontier item 6 of
+`2026-07-25-ame-lu-two-cold-read-frontier.md`.  C774 red-teams and
+regenerates the numerics, C775 audits the literature, C776 integrates on a
+double pass, C777 updates the Lean aggregate.  Source catalogue:
+`2026-08-01-external-chat-artifact-gap-review.md`.  The same
+external material also carries a diagonal-symmetry classification and
+rigidity phase boundary for binary CSS coset states; that is a separate
+prospective paper and is not pegged here.
+
 **C734 closed (2026-07-31): Clebsch syndrome bridge formalized and proof
 spine made structural.**  `SyndromeGeometry` now proves generically that
 translated equal-phase states are classified by code cosets, distinct cosets

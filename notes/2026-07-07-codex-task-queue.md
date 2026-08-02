@@ -23,6 +23,19 @@ ordering and detail.
 
 ## Open tasks by lane
 
+### `ame-lu`
+
+Source material for C774--C777 is the external Fable session note
+`approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
+`notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every
+numerical claim must be regenerated here under
+`notes/research-reproducibility-conventions.md`.
+
+- **C774 `[ame-lu]` [QUEUED]** — red-team the 2-uniform rigidity upgrade: verify the second-moment isometry identity, the discreteness theorem for arbitrary 2-uniform states, the explicit party-count-independent stability constant and its compactness step, the Fisher-isotropy proposition, and the 2-unitary gauge corollary; regenerate the AME(4,3) and GHZ kill-battery numerics locally as a committed evidence bundle → `notes/2026-08-01-c774-two-uniform-rigidity-red-team.md`.
+- **C775 `[ame-lu]` [QUEUED AFTER C774]** — claim-specific literature audit for the surviving statements, per `notes/literature-audit-conventions.md`: k-uniform and LU-equivalence discreteness precedents (Rather--Burchardt--Zyczkowski line), self-testing and robust-certification stability bounds for maximally entangled resource states, quantum Fisher information of k-uniform states, and local gauge groups of dual-unitary/2-unitary gates → `notes/2026-08-01-c775-two-uniform-rigidity-literature-audit.md`.
+- **C776 `[ame-lu]` [GATED on C774 and C775 both passing]** — integrate the surviving statements into `papers/ame_lu`: separate the entanglement half (discreteness) from the algebraic half (Clifford identification), adopt the stability corollary and Fisher framing, synchronize `theorem-map.md`, refresh the evidence ledger, and forward-commit the standalone mirror → `notes/2026-08-01-c776-two-uniform-rigidity-adoption.md`.
+- **C777 `[ame-lu]` [GATED on C776]** — formalize the adopted statements in `lean/RelativeConicArcs/AMELU/**` to match the manuscript: the traceless local-generator decomposition, the second-moment identity under 2-uniform marginals, discreteness of the product-symmetry group, and the quantitative stability bound; run the aggregate axiom and trust gates → `notes/2026-08-01-c777-two-uniform-rigidity-lean.md`.
+
 ### `paper-frob-eq`
 
 - **C152 `[paper-frob-eq]` [QUEUED]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
