@@ -1,0 +1,59 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[
+  x=1cm,y=1cm,>=Latex,
+  exact/.style={circle,fill=black,inner sep=2.1pt},
+  clifford/.style={diamond,draw,fill=white,inner sep=2.2pt},
+  every node/.style={font=\small}
+]
+  \draw[->] (-0.15,0) -- (10.25,0)
+    node[right,below,font=\scriptsize] {local coordinate};
+  \draw[->] (0,-0.05) -- (0,4.15) node[above] {$\varepsilon(U)^2$};
+
+  \draw[thick]
+    (0.35,2.0) .. controls (0.85,0.35) and (1.35,0.05) .. (1.75,0)
+    .. controls (2.15,0.05) and (2.65,0.35) .. (3.15,2.0);
+  \draw[thick]
+    (3.3,2.0) .. controls (3.8,0.35) and (4.3,0.05) .. (4.7,0)
+    .. controls (5.1,0.05) and (5.6,0.35) .. (6.1,2.0);
+  \draw[thick]
+    (6.35,2.0) .. controls (6.85,0.35) and (7.35,0.05) .. (7.75,0)
+    .. controls (8.15,0.05) and (8.65,0.35) .. (9.15,2.0);
+
+  \node[exact] at (1.75,0) {};
+  \node[exact] at (4.7,0) {};
+  \node[exact] at (7.75,0) {};
+  \node[font=\scriptsize,anchor=north] at (4.7,-0.15)
+    {exact symmetries};
+
+  \draw[<->,thick] (3.85,0.42) -- (5.55,0.42);
+  \node[fill=white,font=\scriptsize] at (4.7,0.42)
+    {certified local radius};
+  \node[font=\scriptsize,align=center] at (1.75,1.55)
+    {quadratic well\\$\varepsilon^2\asymp D^2/q$};
+
+  \draw[dashed] (0.05,1.03) -- (10.0,1.03)
+    node[right,font=\scriptsize] {$\varepsilon_0^2$};
+  \node[font=\scriptsize,anchor=south east,fill=white,inner sep=1pt]
+    at (9.85,1.03) {$\varepsilon_0^2$: rounding threshold};
+
+  \draw[densely dashed] (0.05,3.15) -- (10.0,3.15);
+  \node[font=\scriptsize,align=left,anchor=west] at (6.25,3.62)
+    {product Cliffords outside the symmetry group};
+  \node[font=\scriptsize,anchor=west,fill=white,inner sep=1pt] at (7.15,3.15)
+    {$\varepsilon^2\geq 2-2p^{-1/2}$};
+  \foreach \x/\y in {0.9/3.55,2.85/3.35,5.85/3.65,8.9/3.42}
+    \node[clifford] at (\x,\y) {};
+
+  \node[font=\scriptsize,align=left,anchor=west] at (0.25,3.82)
+    {schematic only: no claim is made\\about other critical points};
+\end{tikzpicture}
+\caption{Roadmap for the defect estimates (a one-dimensional schematic of a
+high-dimensional product-unitary group).  Exact symmetries are isolated zeros
+with certified local quadratic growth.  Every product Clifford outside the
+symmetry group has defect at least \((2-2p^{-1/2})^{1/2}\); below the explicit
+decomposition threshold, an arbitrary product unitary rounds to a Clifford and
+then to an exact symmetry.  The picture asserts neither that every local
+minimum is Clifford nor that the displayed coordinate exhausts the group.}
+\label{fig:defect-landscape}
+\end{figure}

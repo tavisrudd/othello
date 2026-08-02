@@ -11,7 +11,12 @@
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{float}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,patterns,positioning,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage[hidelinks]{hyperref}
 \setlength{\emergencystretch}{2em}
 \hbadness=10000
@@ -41,6 +46,25 @@
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\diag}{\operatorname{diag}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% These switches support the anonymous one-figure-at-a-time comparisons
+% recorded in C805.  The committed paper includes every surviving figure.
+\newcommand{\AMEFigureOne}{%
+  \ifdefined\AMEHideFigureOne\else\input{figures/01-operator-holonomy}\fi}
+\newcommand{\AMEFigureTwo}{%
+  \ifdefined\AMEHideFigureTwo\else\input{figures/02-axis-recovery}\fi}
+\newcommand{\AMEFigureThree}{%
+  \ifdefined\AMEHideFigureThree\else\input{figures/03-symmetry-groups}\fi}
+\newcommand{\AMEFigureFour}{%
+  \ifdefined\AMEHideFigureFour\else
+    Figure~\ref{fig:defect-landscape} gives a roadmap for the local estimates,
+    the Clifford separation step, and the resulting explicit threshold.
+    \input{figures/04-defect-landscape}%
+  \fi}
+\newcommand{\AMEFigureFive}{%
+  \ifdefined\AMEHideFigureFive\else\input{figures/05-stability-radius}\fi}
+\newcommand{\AMEFigureSix}{%
+  \ifdefined\AMEHideFigureSix\else\input{figures/06-pencil-quotient}\fi}
 
 \title{Local-Unitary Rigidity of Stabilizer AME States and
 Transversal Clifford Groups of MDS--CSS Codes}

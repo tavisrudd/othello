@@ -5,7 +5,7 @@
 **Date:** 2026-08-02
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
-C603 and C656 complete. A second pair of independent cold reads exposed and
+C603, C656, C819, and C820 complete. A second pair of independent cold reads exposed and
 closed three Version 1 defects: the R7 common-factor proposition now states
 the exact-gcd hypothesis its proof needs, the R6 lower-carrier exhaustion is
 proved by an explicit monodromy/characteristic trichotomy, and R7 finite
@@ -34,10 +34,25 @@ C819 upgrades the working Version 2 draft without consuming companion
 geometry: the polar theorem now permits arbitrary finite depth under explicit
 stagewise carrier/marker and terminal-cover hypotheses, and R6/R7 are its
 depth-one/depth-two specializations.  Both manuscript builds and the
-scope-sensitive 45-artifact verifier are green.  The missing all-level content
-is isolated exactly in C820: bottom primary decomposition, the true
-modular-union pullback degree, and generic-point recursive transport.  C620
-then owns higher-Lucas split-freeness, and C821 owns final Version 2 synthesis.
+scope-sensitive 45-artifact verifier are green.  C820 now closes the concrete
+all-level geometry at the exact reduced-fibre boundary.  The terminal carrier
+has an irredundant two-prime decomposition in every characteristic; a flat
+reduced integral model with those fibres is impossible because the residual
+degree drops from four to one in characteristic two.  Every recursive modular
+descendant lies in the top-order adjacent-zero Lucas carrier, so the full
+modular-union pullback degree is one.  Dense squarefree-marker contractions
+close to an irreducible catalecticant row space and select one bottom component
+in every geometric fibre.  Consequently the recursively contained carrier is
+exactly the persistent scheme plus that single maximal Lucas carrier, restoring
+the all-level split-free containment and its former numerical threshold without
+claiming higher-Lucas split-freeness, nilpotent integral structure, or a
+covering-radius promotion.  C620 now owns higher-Lucas arithmetic, C646 owns
+the companion kernel-checked density/closure boundary, and C821 owns final
+Version 2 synthesis.  A bounded theorem-level delta keeps
+Wang--Wu--Hu's projective-subline endpoint criterion as prior art and locates
+no predecessor for the exact conjunction within the recorded search boundary.
+An independent finite-geometer/coding cold read found no release-blocking
+defect and cleared four minor exposition repairs.
 
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
@@ -949,13 +964,12 @@ The Version 2 critical path is sequential.  A cold session should take the
 first unfinished numbered step below and should not infer a different order
 from queue-row placement:
 
-1. **C820 — recursive carrier geometry (current dispatch).**  Read C656's
-   rejection report, C819's finite-depth theorem report, and the C646 task
-   card.  Close, or sharply obstruct, the bottom primary decomposition,
-   modular-union pullback degree, and generic-point recursive transport.  Do
-   not duplicate C646's active formal density/closure work.
-2. **C620 — higher Lucas incidence.**  Start after C820 has frozen the exact
-   recursive-carrier statement or obstruction.  Classify the first fresh
+1. **C820 — recursive carrier geometry (complete).**  The exact fibrewise
+   reduced bottom decomposition, degree-one maximal modular carrier, and
+   generic-point rowspace transport give the all-level contained-carrier
+   theorem; the incompatible vertical degrees sharply exclude the former
+   arbitrary-base reduced scheme claim.
+2. **C620 — higher Lucas incidence (current dispatch).**  Classify the first fresh
    carrier and decide whether a uniform digit-pattern/subspace-polynomial
    criterion exists.  Membership in a Lucas kernel is never evidence of
    split-freeness by itself.
@@ -988,12 +1002,11 @@ companion formal geometry and is not a dispatch candidate in this ranking.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C820 | compose with active C646 | close C656's three concrete geometric defects and prove the strongest honest recursively contained-carrier theorem |
-| 2 | C620 | publication gate cleared | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion needed to evaluate the recursive theorem on new characteristic-two strata |
-| 3 | C660 | publication gate cleared | remove R7's largest remaining computational single point of trust before final Version 2 synthesis |
-| 4 | C821 | after C820/C646 and the C620 placement decision | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
-| 5 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
-| 6 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C620 | publication gate cleared; C820 geometry frozen | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion needed to evaluate the recursive theorem on new characteristic-two strata |
+| 2 | C660 | publication gate cleared | remove R7's largest remaining computational single point of trust before final Version 2 synthesis |
+| 3 | C821 | after C646 and the C620 placement decision | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
+| 4 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
+| 5 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1053,7 +1066,8 @@ history.
 
 ## Next command
 
-`go C820`
+`go C620`
 
-(C545's public repository and Zenodo DOI are verified.  C820 is the highest-EV
-Version 2 mathematics and composes with the already active C646 formal work.)
+(C820 freezes the exact recursive-carrier geometry.  C620 is the highest-EV
+remaining Version 2 mathematics; C646 continues in parallel on the formal
+density/closure boundary.)

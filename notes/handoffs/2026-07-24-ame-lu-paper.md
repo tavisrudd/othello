@@ -10,6 +10,22 @@ Discovery companion:
 
 ## Current status
 
+**C805 closed (2026-08-02): all six explanatory figures won blinded
+comprehension comparisons.**  The adopted vector figures cover axis recovery,
+minimum-support holonomy, the symmetry-group extensions, the defect/threshold
+mechanism, the uniformity-order radius, and the pencil quotient.  Two invalid
+controls were discarded and rebuilt before scoring: one diagram had visually
+concatenated distinct exact sequences, and one no-figure control retained an
+unresolved reference.  Fresh readers preferred both corrected figures; all six
+falsehood probes passed.  The warning-free 51-page build, affected-page sweep,
+release profiles, and standalone synchronization pass.  A concurrent cold read
+passed the C804 recognition theorem but found four follow-ups: delete or prove a
+false blanket minimal-codeword claim for additive codes, separate generator
+radius from the exponentially small defect-only threshold in the framing, add
+an exact Gross--Van den Nest locator or cut that sentence, and split the
+overgrown Section 3.  See `2026-08-02-c805-figures-and-ab.md`.
+Standalone forward commit `4f64e7e` is synchronized and unpushed.
+
 **C804 closed (2026-08-02): the central concession is inverted, and the
 recognition criterion is coherent.**  Section 3 now proves the
 partial-Weyl marginal criterion, recognition subgroup, generation

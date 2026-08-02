@@ -39,10 +39,11 @@ def record(path: Path, name: str) -> dict[str, object]:
 
 def paper_paths() -> list[str]:
     paths = set(PAPER_FILES)
-    paths.update(
-        str(path.relative_to(PAPER_ROOT))
-        for path in (PAPER_ROOT / "sections").glob("*.tex")
-    )
+    for directory in ("sections", "figures"):
+        paths.update(
+            str(path.relative_to(PAPER_ROOT))
+            for path in (PAPER_ROOT / directory).glob("*.tex")
+        )
     evidence = json.loads(
         (PAPER_ROOT / "supplement" / "EVIDENCE-MANIFEST.json").read_text()
     )
@@ -185,7 +186,7 @@ def export_archive(destination: Path, profile: str) -> None:
         paths.extend(
             item["path"]
             for item in manifest["public_export"]["artifacts"]
-            if str(item["path"]).startswith("sections/")
+            if str(item["path"]).startswith(("sections/", "figures/"))
         )
         prefix = ""
     else:

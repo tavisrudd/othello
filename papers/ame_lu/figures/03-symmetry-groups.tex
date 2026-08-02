@@ -1,0 +1,74 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  group/.style={draw,rounded corners,minimum width=1.2cm,minimum height=6.5mm},
+  note/.style={font=\scriptsize,align=center},
+  every node/.style={font=\small}
+]
+  % Scalar-phase quotients, fixed parties and with party motion.
+  \node (one11) at (-5.5,1.25) {$1$};
+  \node[group] (t1) at (-4.2,1.25) {$T$};
+  \node[group] (g) at (-2.2,1.25) {$G$};
+  \node[group] (ga) at (-0.1,1.25) {$\Gamma$};
+  \node (one12) at (1.35,1.25) {$1$};
+  \draw[->] (one11) -- (t1);
+  \draw[->] (t1) -- (g);
+  \draw[->] (g) -- (ga);
+  \draw[->] (ga) -- (one12);
+
+  \node (one21) at (-5.5,0.15) {$1$};
+  \node[group] (t2) at (-4.2,0.15) {$T$};
+  \node[group] (gt) at (-2.2,0.15) {$\widetilde G$};
+  \node[group] (gat) at (-0.1,0.15) {$\widetilde\Gamma$};
+  \node (one22) at (1.35,0.15) {$1$};
+  \draw[->] (one21) -- (t2);
+  \draw[->] (t2) -- (gt);
+  \draw[->] (gt) -- (gat);
+  \draw[->] (gat) -- (one22);
+  \draw[->] (t1) -- (t2) node[midway,left,note] {$=$};
+  \draw[->] (g) -- (gt);
+  \draw[->] (ga) -- (gat);
+
+  \node[note,anchor=west] at (1.8,0.75)
+    {$T=(S^1)^{2m}$ is the connected identity component;\\
+     $\Gamma$ and $\widetilde\Gamma$ are finite.};
+
+  % The independent party-permutation extension.
+  \node at (-5.5,-1.05) {$1$};
+  \node[group] (ga2) at (-4.0,-1.05) {$\Gamma$};
+  \node[group] (gat2) at (-1.75,-1.05) {$\widetilde\Gamma$};
+  \node[group] (pi) at (0.45,-1.05) {$\Pi$};
+  \node at (1.95,-1.05) {$1$};
+  \draw[->] (-5.5,-1.05) -- (ga2);
+  \draw[->] (ga2) -- (gat2);
+  \draw[->] (gat2) -- (pi);
+  \draw[->] (pi) -- (1.95,-1.05);
+  \node[note,align=left,anchor=west] at (2.3,-1.05)
+    {party motion; splits iff the\\Appendix~\ref{sec:party-extensions} factor set is trivial};
+
+  \draw[thick] (-5.75,-1.75) -- (5.65,-1.75);
+
+  % Internal structure of the fixed-party projective group.
+  \node at (-5.5,-2.55) {$1$};
+  \node[group] (l) at (-4.0,-2.55) {$L_\psi$};
+  \node[group] (g2) at (-1.75,-2.55) {$\Gamma_\psi$};
+  \node[group] (gps) at (0.65,-2.55) {$\mathcal G_\psi$};
+  \node at (2.45,-2.55) {$1$};
+  \draw[->] (-5.5,-2.55) -- (l);
+  \draw[->] (l) -- (g2);
+  \draw[->] (g2) -- (gps);
+  \draw[->] (gps) -- (2.45,-2.55);
+  \node[note,anchor=north] at (-4.0,-3.0) {projective Pauli\\stabilizer};
+  \node[note,anchor=north] at (-1.75,-3.0) {$\Gamma_\psi=\Gamma$};
+  \node[note,anchor=north] at (0.65,-3.0)
+    {atlas gauges; for prime $q$,\\a holonomy centralizer in $\mathrm{SL}_2(q)$};
+\end{tikzpicture}
+\caption{The layered symmetry group of a stabilizer AME state.  One-site
+phases form the identity component, with finite fixed-party and party-moving
+projective quotients.  The fixed-party quotient is itself an extension of the
+atlas gauge group by the projective Pauli stabilizer.  Independently, allowing
+party motion extends the fixed-party projective group by the realized
+permutation group, with splitting governed by a nonabelian factor set.}
+\label{fig:symmetry-groups}
+\end{figure}

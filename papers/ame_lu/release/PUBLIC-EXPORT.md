@@ -32,7 +32,7 @@ recorded but absent. In the companion repository,
 ## arXiv source bundle
 
 The arXiv profile contains only `main.tex`, `refs.bib`, and the included
-section sources:
+section and figure sources:
 
 ```text
 python3 release/verify_release.py \
