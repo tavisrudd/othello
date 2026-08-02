@@ -1,0 +1,106 @@
+{
+  "boolean_maxima": {
+    "exterior2": {
+      "support_sizes": [
+        3
+      ],
+      "value": "24/25",
+      "witness_count": 20
+    },
+    "exterior3": {
+      "support_sizes": [
+        3
+      ],
+      "value": "16/125",
+      "witness_count": 20
+    },
+    "mixed21": {
+      "support_sizes": [
+        3
+      ],
+      "value": "8/5",
+      "witness_count": 20
+    },
+    "p1": {
+      "support_sizes": [
+        3
+      ],
+      "value": "9/5",
+      "witness_count": 20
+    },
+    "p2": {
+      "support_sizes": [
+        3
+      ],
+      "value": "33/25",
+      "witness_count": 20
+    },
+    "symmetric3": {
+      "support_sizes": [
+        3
+      ],
+      "value": "313/125",
+      "witness_count": 20
+    }
+  },
+  "boolean_profiles_up_to_complement": [
+    {
+      "exterior2": "0",
+      "exterior3": "0",
+      "mixed21": "0",
+      "negative_support_size": 0,
+      "p1": "0",
+      "p2": "0",
+      "symmetric3": "0"
+    },
+    {
+      "exterior2": "0",
+      "exterior3": "0",
+      "mixed21": "0",
+      "negative_support_size": 1,
+      "p1": "1",
+      "p2": "1",
+      "symmetric3": "1"
+    },
+    {
+      "exterior2": "16/25",
+      "exterior3": "0",
+      "mixed21": "128/125",
+      "negative_support_size": 2,
+      "p1": "8/5",
+      "p2": "32/25",
+      "symmetric3": "256/125"
+    },
+    {
+      "exterior2": "24/25",
+      "exterior3": "16/125",
+      "mixed21": "8/5",
+      "negative_support_size": 3,
+      "p1": "9/5",
+      "p2": "33/25",
+      "symmetric3": "313/125"
+    }
+  ],
+  "boolean_vertex_count": 64,
+  "conference_order": 6,
+  "conference_square": 5,
+  "control_domain": "[-1,1]^6",
+  "mixed_sector_lemma": {
+    "active_e1_case_factors": [
+      "(5*c-1)*(25*c^2+50*c-71)/500 on 0<=c<=1/5",
+      "(5*c-4)^2*(5*c-1)/125 on 1/5<=c<=3/5"
+    ],
+    "conclusion": "s_(2,1)=e1*e2-e3 <= 8/5",
+    "equality_spectrum": [
+      "1/5",
+      "4/5",
+      "4/5"
+    ],
+    "hypotheses": [
+      "0 <= lambda_i <= 1",
+      "e1 <= 9/5",
+      "e2 <= 24/25"
+    ]
+  },
+  "schema": "c814-golden-continuous-frontier-v1"
+}
