@@ -2321,8 +2321,17 @@
       "last": 816,
       "purpose": "C809 follow-ups: Lean formalization of the four-shadow recognition theorem and Paper III literature-audited integration with fresh cold read",
       "sequence": 258
+    },
+    {
+      "count": 1,
+      "first": 817,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 817,
+      "purpose": "Paper IV structural mathematics upgrade diagnostics and proofs; manuscript integration requires later discussion",
+      "sequence": 259
     }
   ],
-  "next_id": 817,
+  "next_id": 818,
   "schema": "codex-task-id-allocations-v1"
 }
