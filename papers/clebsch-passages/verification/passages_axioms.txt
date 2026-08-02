@@ -66,6 +66,26 @@
 'RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff' does not depend on any axioms
+'RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor' does not depend on any axioms
+'RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple' does not depend on any axioms
+'RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced' depends on axioms: [propext,
+ RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced._native.native_decide.ax_1_1]
+'RelativeConicArcs.AlignedTwoGraph.pairSignature_classification' depends on axioms: [propext,
+ RelativeConicArcs.AlignedTwoGraph.pairSignature_classification._native.native_decide.ax_1_1]
+'RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps' depends on axioms: [propext]
+'RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.AlignedTwoGraph.pairSignature_classification._native.native_decide.ax_1_1]
+'RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions' depends on axioms: [propext]
+'RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement' depends on axioms: [propext]
+'RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation' depends on axioms: [propext]
+'RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount' does not depend on any axioms
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square' depends on axioms: [propext]
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package' depends on axioms: [propext, Quot.sound]

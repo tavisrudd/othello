@@ -11,7 +11,7 @@
     "sections/05-harmonic-realization.tex": "278565585415fd1e8a8d73e13536b6a5583c3b5cb19e5b0ed8e213cbb7f53fc3",
     "sections/09-conclusion.tex": "0c3cb0fed30d0a69b7d5f1a1564b8199903b512f0f68c04ead171c0e1b6d549b",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
-    "sections/08-verification.tex": "392737b9f50be55bb145d4db1c3a988a8dcd8d84eff590b4921b1306998f52e5",
+    "sections/08-verification.tex": "14fd06707e3eeaba50d08170025a516ddb31641455a7c2412975e7e19968af77",
     "sections/10-references.tex": "adfe54289d4f19789f41b0ca9de828541a06f5a9fb7cea4dab55289997d4d892"
   },
   "statement_count": 8,
@@ -89,7 +89,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "522328ef7bc44320ef7b3c71d005e5d25682018eebe872eea2064872b8b6df48",
+  "trust_rows_sha256": "a83f2af45623df2b20dcf8f3aa62eb3106305186cefd892fec0b54595a35020e",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -261,9 +261,11 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by connected Johnson-graph descent; Lean supplies only rooted triangle reconstruction and the two-graph parity mechanisms, while the aligned-family faithfulness and quadratic query bound are human proofs",
+      "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by connected Johnson-graph descent; Lean checks the normalized cut classifier, symbolic third-point disambiguation, overlap consistency, switching transport, determinant identity, query polynomial, and calibration, while the classical Ramsey theorem, finite-set extension, and arbitrary-label normalization remain human inputs",
       "evidence": [
         "sections/05-golden-operator.tex",
+        "verification/passages_formal.json",
+        "verification/passages_axioms.txt",
         "verification/golden_return_formal.json",
         "verification/golden_return_axioms.txt"
       ]

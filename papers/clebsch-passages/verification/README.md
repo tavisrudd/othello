@@ -84,16 +84,20 @@ python3 verification/verify_passages_lean.py \
 `passages_formal.json` maps each of the nine manuscript rows to exact Lean
 declarations and records the missing geometric hypotheses.  Its gate proves
 the abstract pinching, conductor, involution, golden-character, tight-frame,
-switching, Petersen, and fixed-line mechanisms without claiming the global
-Hitchin correspondences, face-axis addition theorem, or raw spherical
-moment.
+switching, Petersen, fixed-line, and normalized aligned-design mechanisms.
+For aligned designs it checks the two-cut classifier by native decision and
+proves the third-point disambiguation, overlap consistency, signing transport,
+four-by-four determinant identity, and query polynomial symbolically.  The
+classical Ramsey theorem, finite-set extension, and normalization from an
+arbitrary labelled two-graph remain human inputs, as do the global Hitchin
+correspondences, face-axis addition theorem, and raw spherical moment.
 
 The operator consolidation uses the expanded golden-return theorem package as
 a second pinned formal map.  It covers the conference, triangle, two-graph,
 middle-exterior, support-recovery, golden-descent, fixed-conference
 commutator-Pfaffian, and order-six signed-triangle mechanisms.  The general
-inclusion/Ramsey exchange-rigidity proof, aligned-design faithfulness and its
-quadratic decoder, outer-family coherence, the cross-golden
+inclusion/Ramsey exchange-rigidity proof, the classical inputs to the
+aligned-design faithfulness argument, outer-family coherence, the cross-golden
 determinant comparison, and the classical Joubert--Segre--Igusa
 identifications remain human proof boundaries.
 It is replayed against a checkout of the formal artifact with

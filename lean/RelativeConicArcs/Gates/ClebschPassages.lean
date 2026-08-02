@@ -9,16 +9,19 @@ import RelativeConicArcs.MarkedClebschBridge
 import RelativeConicArcs.KneserPairEigenspace
 import RelativeConicArcs.PetersenHarmonicKernel
 import RelativeConicArcs.ClebschInvariantCubic
+import RelativeConicArcs.AlignedTwoGraph
 import RelativeConicArcs.ClebschPassagesCorrespondence
 
 /-!
 # Gate: structural Clebsch passages
 
 This is the public replay surface for the algebraic mechanisms used in the
-current Clebsch paper.  The pinching, eigenspace, tight-frame, switching, and
-scalar-factor arguments are symbolic.  Native decision is confined to the
-displayed finite conference/reflection matrices, one finite-field nonsquare
-check, and values of explicitly displayed finite vectors.
+current Clebsch paper.  The pinching, eigenspace, tight-frame, switching,
+aligned-design globalization, and scalar-factor arguments are symbolic.
+Native decision is confined to the displayed finite conference/reflection
+matrices, one finite-field nonsquare check, values of explicitly displayed
+finite vectors, and the 16,384 cases in the normalized two-cut signature
+classifier.  The third-outside-point elimination is symbolic.
 
 The gate deliberately does not assert the geometric correspondence between
 Hitchin's spaces and these algebraic models, nor the integral
@@ -53,6 +56,19 @@ claim.
 #print axioms RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector
 #print axioms RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree
 #print axioms RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization
+#print axioms RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff
+#print axioms RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor
+#print axioms RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple
+#print axioms RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced
+#print axioms RelativeConicArcs.AlignedTwoGraph.pairSignature_classification
+#print axioms RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps
+#print axioms RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective
+#print axioms RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions
+#print axioms RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement
+#print axioms RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation
+#print axioms RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum
+#print axioms RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq
+#print axioms RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package

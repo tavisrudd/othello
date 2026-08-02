@@ -2,8 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** next task for `go clebsch paper III`; C792 human proof frozen;
-hands the shared aligned-design API to C815
+**Status:** complete; normalized seven-point classifier, symbolic third-point
+disambiguation, overlap consistency, query count, conference transport,
+forty-seven-declaration audit, both formal replays, and paper release gate are
+green; shared aligned-design API handed to C815
 
 ## Objective
 
@@ -50,3 +52,7 @@ human-only; every declaration in the paper-facing closure has a complete axiom
 audit and referee-ready prose; the guarded shared aggregate gate and both
 paper-local formal replays pass; and the trust manifests claim neither more nor
 less than the elaborated theorem package.
+
+Acceptance passed.  The exact result, trust boundary, replay commands, hashes,
+and closeout ledger are recorded in
+`notes/2026-08-02-c799-paper-iii-aligned-design-lean-closure.md`.

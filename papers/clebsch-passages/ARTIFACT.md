@@ -34,10 +34,13 @@ report are included in `verification/passages_formal.json` and
 Lean as a proof premise.  The supplemental golden-return map and axiom report
 also cover the fixed-conference middle-exterior and commutator-Pfaffian
 mechanisms and the three-vertex signed-matrix square used by the operator
-theorems; the higher-order inclusion/Ramsey classification, aligned-design
-faithfulness and its quadratic decoder, outer-family coherence,
-cross-golden determinants, and the classical six-point quotient remain human
-proof boundaries.
+theorems.  The current-paper map additionally covers the normalized
+aligned-design cut classifier, third-point disambiguation, overlap consistency,
+switching transport, determinant identity, and query polynomial.  The
+higher-order inclusion/Ramsey classification, classical Ramsey and finite-set
+inputs to aligned-design faithfulness, outer-family coherence, cross-golden
+determinants, and the classical six-point quotient remain human proof
+boundaries.
 
 The author is an independent researcher with no institutional affiliation; this
 status, the correspondence address, the ORCID, and the version-independent
