@@ -28,11 +28,12 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Four research passes complete; the theorem is **not** proved. Reports:
+Five research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
-`notes/2026-08-01-c756-paley-windmill-reduction.md`.
+`notes/2026-08-01-c756-paley-windmill-reduction.md`, and
+`notes/2026-08-01-c756-paley-bispectral-reduction.md`.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -62,6 +63,10 @@ What the saturated-external attack adds:
 - every surviving local automorphism produces a signed perfect-matching matrix \(M\) with
   \(M^2=-I\), two forced vector equations, and the single Paley anticommutator
   \(AM+MA=-2I\); the mixed sign diagonal is forced to be \(-1\);
+- the anticommutator produces a second regular tournament matrix \(K\) commuting with the
+  first-subconstituent Paley matrix \(B\), with the forced square
+  \(K^2=-B^2-(q-1)I+2J\); if \(B\) has simple spectrum, every signed monomial solution is
+  scalar and the existing Hasse argument closes it;
 - polarity turns covering into the assertion that the complete node set of \((q+1)/2\) secants,
   consisting entirely of internal points, blocks every non-tangent line.
 
@@ -72,9 +77,11 @@ hexagon at \(q=11\).
 Remaining frontier: counting cannot finish the job (both \(k_{\min}(q)\) and the largest
 conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternates with
 \(q\)). In the saturated-external branch sign coherence is now proved. The exact missing lemma can
-be strengthened to signed-monomial Paley rigidity: classify the perfect-matching solutions forced
-by \(AM+MA=-2I\) and the two vector equations, thereby proving that the corresponding local Paley
-automorphism is multiplication--Frobenius. The alternative saturated route
+be strengthened to signed-monomial Paley rigidity.  The fifth pass reduces the prime-field
+branch to distinctness of explicit Jacobi-sum eigenvalues of \(B\), and the extension-field
+branch to semilinear rigidity inside the forced Frobenius spectral blocks.  Either statement
+classifies the perfect-matching solutions forced by \(AM+MA=-2I\) and the two vector equations.
+The alternative saturated route
 is a structure-sensitive blocking bound for the internal node set. Outside saturation, the
 type-aware spare-line and general-position character-sum routes remain live.
 
