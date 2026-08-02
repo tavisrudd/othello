@@ -17,9 +17,9 @@ traceless/scalar splitting of the Hermitian local generators, the
 single-exponential identity for a product of one-site exponentials, and the
 polarized second-moment identity of a 2-uniform state.
 
-The remaining step of the manuscript's discreteness theorem — that a compact
-symmetry group with trivial Lie algebra is finite modulo global phase — belongs
-to the Lie theory of closed subgroups and is not formalized here.
+The further step from a trivial Lie algebra to finiteness of the symmetry group
+modulo global phase belongs to the Lie theory of closed subgroups and is not
+formalized here.
 
 All arguments are symbolic and kernel checked.  The module contains no
 generated data, native evaluation, axioms, or admitted declarations.

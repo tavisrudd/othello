@@ -13,9 +13,8 @@ family of Hermitian local operators therefore gives
 
   `Σ_j H_j^{(j)} = Σ_j (tracelessPart H_j)^{(j)} + (Σ_j Tr H_j / q) • 1`,
 
-which is the manuscript's splitting `L = M + cI` of the generator of a
-one-parameter group of product unitaries: `M` is a sum of traceless local
-generators and `c` is a real scalar.  Combined with the single-exponential
+the splitting `L = M + cI` of the generator of a one-parameter group of product
+unitaries into a sum `M` of traceless local generators and a real scalar `c`.  Combined with the single-exponential
 identity this writes an arbitrary product of one-site unitary exponentials as
 one exponential whose generator is split in that way.
 
@@ -71,9 +70,9 @@ theorem siteOperator_smul_one (j : Site) (c : ℂ) :
       c • (1 : SystemOperator Site Level) := by
   rw [siteOperator_smul, siteOperator_one]
 
-/-- The manuscript's splitting `L = M + cI`: summing the site embeddings of
-Hermitian local operators gives a sum of traceless local generators plus a real
-multiple of the identity. -/
+/-- The splitting `L = M + cI`: summing the site embeddings of Hermitian local
+operators gives a sum of traceless local generators plus a real multiple of the
+identity. -/
 theorem localGeneratorSum_eq_traceless_add_scalar [Nonempty Level]
     (H : Site → LocalOperator Level) :
     localGeneratorSum H =

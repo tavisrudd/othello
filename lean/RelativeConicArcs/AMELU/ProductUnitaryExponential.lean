@@ -22,10 +22,9 @@ exponentials is a single exponential of the summed local generators:
 
   ⊗_j exp (h_j) = exp (Σ_j h_j^{(j)}).
 
-This is the manuscript's observation that a product unitary `⊗_j exp(i H_j)` is
-`exp(i L)` with `L = Σ_j H_j^{(j)}`, and it is what lets the traceless/scalar
-splitting of the local Hermitian generators be carried out inside one
-exponential.  The matrix exponential is Mathlib's `NormedSpace.exp`, computed
+In particular a product unitary `⊗_j exp(i H_j)` is `exp(i L)` with
+`L = Σ_j H_j^{(j)}`, so the traceless/scalar splitting of the local Hermitian
+generators can be carried out inside one exponential.  The matrix exponential is Mathlib's `NormedSpace.exp`, computed
 here with the operator norms on matrices; the identity itself does not depend
 on the choice of norm.
 

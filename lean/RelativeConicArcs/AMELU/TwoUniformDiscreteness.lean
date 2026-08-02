@@ -17,10 +17,9 @@ product of one-site exponentials is a single exponential.
 
 The theorem below says that such a one-parameter group can fix the ray of `ψ`
 only when every traceless part vanishes, so that the generator is the scalar
-`icI` and the group is a group of global phases.  The proof is the manuscript
-argument: pairing the derivative at the identity against `M ψ` and using the
-polarized second-moment identity leaves `‖M ψ‖² = 0`, which the isometry turns
-into `h_j = 0` for every site.
+`icI` and the group is a group of global phases.  The proof pairs the derivative at the identity against `M ψ`; the polarized
+second-moment identity then leaves `‖M ψ‖² = 0`, which the isometry turns into
+`h_j = 0` for every site.
 
 What is *not* formalized here is the passage from an abstract one-parameter
 subgroup of the symmetry group to a generator of the displayed form, and the

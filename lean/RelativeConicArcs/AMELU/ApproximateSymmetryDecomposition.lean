@@ -12,23 +12,21 @@ Two things are recorded here.
 
 First, an unconditional lemma: the defect is unchanged when an exact ray
 symmetry that is unitary is composed on either side.  Both invariances are
-needed by the manuscript's decomposition argument, which measures the local
-generators of an approximate symmetry from the nearest exact symmetry: the
-factorization `U = g · ⊗_j exp(i h_j)` places the exact symmetry on the left, so
-it is left invariance that transports the growth estimate to the translate.
+needed when the local generators of an approximate symmetry are measured from
+the nearest exact symmetry: the factorization `U = g · ⊗_j exp(i h_j)` places the
+exact symmetry on the left, so it is left invariance that transports a growth
+estimate on generators to the translate.
 
-Second, a hypothesis-explicit interface for the decomposition itself.  The
-manuscript obtains a threshold `ε₀(ψ) > 0` from compactness of the projective
-group of local factors together with finiteness of the zero set of the defect,
-and that extraction is not formalized: it appears here as the field
+Second, a hypothesis-explicit interface for the decomposition itself.  A threshold `ε₀(ψ) > 0` can be obtained from compactness of the projective group
+of local factors together with finiteness of the zero set of the defect; that
+extraction is not formalized and appears here as the field
 `exists_nearby_symmetry` of `ApproximateDecompositionInputs`, which asserts that
 every product unitary of defect below the threshold factors through an exact ray
-symmetry with small traceless local generators.  The quadratic growth estimate
-that converts the generator size into a defect bound is the second field.  The
-terminal theorem composes the two into the manuscript's conclusion, and is
-therefore a conditional formal interface rather than an unconditional theorem;
-the threshold is not explicit and no compactness extraction is carried out in
-Lean.
+symmetry with traceless Hermitian local generators.  The quadratic growth
+estimate converting generator size into a defect bound is the second field.  The
+terminal theorem composes the two, and is therefore a conditional formal
+interface rather than an unconditional theorem: the threshold is not explicit
+and no compactness extraction is carried out in Lean.
 
 All arguments are symbolic and kernel checked.  The module contains no
 generated data, native evaluation, axioms, or admitted declarations.
@@ -134,7 +132,7 @@ theorem defectSq_mul_symmetry {ψ : Label Site Level → ℂ}
 noncomputable def frobeniusSq (h : Site → LocalOperator Level) : ℝ :=
   ∑ j, ∑ a, ∑ b, Complex.normSq ((h j) a b)
 
-/-- The two unformalized inputs of the manuscript's decomposition corollary.
+/-- The two unformalized inputs of the decomposition of approximate symmetries.
 
 The first field is the compactness extraction: a positive threshold below which
 every product unitary factors as an exact ray symmetry followed by a product of
@@ -142,8 +140,8 @@ one-site exponentials with small traceless Hermitian generators.  The threshold
 is not explicit and depends on the state; no compactness argument is carried out
 in Lean.
 
-The second field is the quadratic growth estimate of the manuscript's stability
-theorem, in the form needed after the factorization: the product Frobenius norm
+The second field is the quadratic growth estimate for the defect of a product of
+one-site exponentials, in the form needed after the factorization: the product Frobenius norm
 of the generators is controlled by the defect, with the constant `6q/5`. -/
 structure ApproximateDecompositionInputs (ψ : Label Site Level → ℂ) where
   /-- The defect threshold produced by compactness. -/
@@ -169,8 +167,8 @@ structure ApproximateDecompositionInputs (ψ : Label Site Level → ℂ) where
           (6 * (Fintype.card Level : ℝ) / 5) *
             defectSq ψ (tensorOperator (fun j => NormedSpace.exp (Complex.I • h j)))
 
-/-- The manuscript's decomposition of approximate symmetries, derived from the
-compactness threshold and the quadratic growth estimate.  Every product unitary
+/-- The decomposition of approximate symmetries, derived from the compactness
+threshold and the quadratic growth estimate.  Every product unitary
 whose defect is below the threshold is an exact ray symmetry composed with a
 product of one-site exponentials whose traceless Hermitian generators have
 product Frobenius norm controlled by the defect of the original operator.  The
