@@ -7,9 +7,10 @@ three elementary operations to its
 conference operator: middle exterior power, commutator with the diagonal
 algebra, and centered squaring.  These operations produce the Joubert,
 Segre, Igusa, and diagonal Clebsch models in one calculation.
-We first fix the outer family.  We then prove two independent facts: order
-six is the only nontrivial carrier with cut-independent exchange spectrum,
-and four standard operations on that carrier give the same cubic.
+We first fix the outer family.  We then prove three facts.  Order six is the
+only nontrivial carrier with cut-independent exchange spectrum; the marked
+aligned design reconstructs the signing; and four standard operations on
+the order-six carrier give the same cubic.
 
 Let \(X\) be the ordered six-axis set and
 \(A_X=\Q^X/\Q\mathbf1\).  The outer six-set \(\mathcal T\) consists of the
@@ -51,15 +52,19 @@ headed ``coefficient word'', the signs occur in the order
 123,124,125,134,135,145,234,235,245,345.
 \]
 \[
+\begingroup
+\newcommand{\sgminus}{\mathord{-}}
+\newcommand{\sgplus}{\mathord{+}}
 \begin{array}{c|c|c}
 r&p_r&\text{coefficient word of }J_{T_r}\\ \hline
-0&012345&\texttt{--+++-++--++--+---++}\\
-1&012354&\texttt{++----++-+-+--++++--}\\
-2&012435&\texttt{+-+-+---++--+++-+-+-}\\
-3&012453&\texttt{-+-+++---+-+++---+-+}\\
-4&012534&\texttt{-++--++-+-+-+--++--+}\\
-5&012543&\texttt{+--+-+-++-+--+-+-++-}
+0&012345&\sgminus\sgminus\sgplus\sgplus\sgplus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgminus\sgminus\sgminus\sgplus\sgplus\\
+1&012354&\sgplus\sgplus\sgminus\sgminus\sgminus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgplus\sgplus\sgplus\sgminus\sgminus\\
+2&012435&\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\\
+3&012453&\sgminus\sgplus\sgminus\sgplus\sgplus\sgplus\sgminus\sgminus\sgminus\sgplus\sgminus\sgplus\sgplus\sgplus\sgminus\sgminus\sgminus\sgplus\sgminus\sgplus\\
+4&012534&\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\\
+5&012543&\sgplus\sgminus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgplus\sgminus
 \end{array}                                                     \tag{5.1}
+\endgroup
 \]
 Indeed,
 \(\epsilon_{pT_0}(S)=\operatorname{sgn}(p)
