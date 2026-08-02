@@ -33,6 +33,20 @@ comparison isolates the one change. The companion demotion of the Tan
 concession is gated on a separate atlas computation and is not part of this
 A/B.
 
+## Run of 2026-08-02
+
+Blind read dispatched with the reframed candidate as **Passage One** and the
+frozen baseline as **Passage Two**. The reader was given the two passages, the
+statements of every result they cite (so the read is self-contained even though
+Section 3 does not yet carry the criterion), and the cache key for Van den Nest,
+Dehaene and De Moor. It was barred from reading anything under `notes/`, so it
+saw neither the criterion note nor the audit, and was not told which passage is
+current or which is ours. Result lands in `cold-read.md`.
+
+Sequencing decided by the user: A/B first, fix on its result, then a Fable red
+team, and only then adopt the criterion into Section 3. The manuscript's frozen
+theorem package is therefore edited once, after both checks, rather than twice.
+
 ## Reader protocol
 
 The reader must not have seen the manuscript or the adversarial pass, must be
