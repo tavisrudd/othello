@@ -241,3 +241,43 @@ maps, not merely in type.  If they agree, test whether the holonomy phases
 supply exactly the discarded arguments.  Shared shape alone is not a bridge.
 **Evidence:** none computed; this is a reading of two statements side by side.
 **Status:** open lead.
+
+### 2026-08-02 — the golden lane has already solved our phase-blindness
+
+**Provenance:** the user pointed at the `golden` lane's C788 and C794 while the
+C786 threshold report was fresh.
+**Was I looking for this?:** no — C786 was asked for an explicit threshold and
+named its own obstruction; the resemblance surfaced only on comparison.
+**Observed / musing:** C786's half-splitting bound stalls for a stated reason.
+It bounds the overlap by a product of Weyl amplitude *moduli* across a balanced
+cut, discards every phase, and therefore cannot separate an exact symmetry from
+a unitary with symmetric moduli; the blocking example is a Hadamard at every
+site, where the obstruction is purely a phase.  The `golden` lane has the same
+shape and has already worked its side: its transfer determinant across a
+balanced cut is orientation-covariant while the corresponding probability is
+sign-blind, and its answer is calibrated phase-referenced readout rather than a
+direct modulus measurement.  C788 then fixes the first two balanced-cut moments
+exactly, and C794 is allocated to find the first *higher* cut moment that
+separates switching classes — that is, to recover the sign layer the spectrum
+loses.  Both programmes independently reached: a balanced-cut modulus invariant
+is blind to a sign or phase layer, and recovering it needs either calibration
+or a higher moment.
+**Why it may matter / strongest question:** if the analogy is structural rather
+than verbal, the higher-moment construction C794 produces is a template for the
+missing ingredient in C786, and the transfer runs golden-to-ame-lu.  The
+sharpest question: is C786's discarded phase data the same *kind* of object as
+the golden determinant sign — a torsor over a two-element group carried by a
+balanced cut — or merely another thing that moduli forget?
+**Discriminator / falsifier:** the objects differ (stabilizer Weyl amplitudes
+over a finite field against conference-matrix blocks and two-graph switching
+classes), so shared shape proves nothing.  Test: write C786's discarded phases
+and the golden orientation sign in the same balanced-cut coordinates and check
+whether either is a function of the other.  If the golden sign is a
+two-element torsor and C786's phases live in a larger group with no distinguished
+quotient, the template does not transfer and this should be dropped.  The
+flagship examples are both six objects under a three-three cut but at different
+field orders, so there is no numerical coincidence to chase.
+**Evidence:** none computed.  This is a reading of C786 section 4 against the
+C788 report and the golden manuscript's abstract.
+**Status:** open lead.  `golden` is a foreign lane here: nothing in it is to be
+edited, rebuilt, or re-planned on the strength of this note.
