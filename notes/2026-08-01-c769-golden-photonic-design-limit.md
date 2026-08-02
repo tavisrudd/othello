@@ -130,6 +130,17 @@ scores rather than goodness-of-fit statistics.  The shot table now says
 directly that its fermionic rows are conditional budgets unavailable to the
 precursor without the antisymmetric source.
 
+The subsequent Tao pass exposed an identifiability boundary behind the null
+tests.  The six amplitudes must share one calibrated gain and orientation
+convention; protocol-wise renormalization would make the cross-protocol
+identities meaningless.  Passing both Segre residuals is necessary for the
+carrier but does not identify the target transfer, so the spectrum and
+probabilities remain later gates.  Equality of the three emulator copies is
+separate again: each copy must be tomographed and matched before one
+determinant can describe the direct emulator.  The manuscript now states all
+three boundaries and gives the determinant Lipschitz bound its exact
+two-contraction hypothesis.
+
 ## Mystery ledger
 
 | Feature | Status | Evidence gap, gate, or owner |
@@ -138,6 +149,7 @@ precursor without the antisymmetric source.
 | Two preparation proposals exist, but no characterized three-photon qutrit singlet experiment was located | **Open external dependency** | C770 must rerun C768's pinned graphs at submission; Google Scholar, MathSciNet, and a subject-expert check remain uncovered. |
 | Worst-case weakest-chiral fidelity is far more severe than its shot count | **Settled as a model boundary** | The paper labels the arbitrary-mixture and trace-distance gates as adversarial; a future source prototype with a characterized noise model would own any relaxation. |
 | The filter sandwich, normalized residuals, and fermionic shot rows could be read as one demonstrated protocol | **Settled** | The caption distinguishes the 30-cell filter from the direct balanced compilation, the scores from statistical tests, and the fermionic budgets from feasible precursor data. |
+| Vanishing residuals might be mistaken for a complete device certificate | **Settled** | The paper now requires common gain/orientation calibration, calls the residual gate necessary rather than sufficient, and separates three-copy matching from carrier membership. |
 
 No other genuine mystery remains within C769's circuit, readout, robustness,
 budget, and presentation scope.  Review against the discovery-track

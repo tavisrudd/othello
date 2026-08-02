@@ -531,6 +531,9 @@ probability.  For the six reconstructed amplitudes set
  r_1=\sum_T\widehat Z_T,\qquad
  r_3=\sum_T\widehat Z_T^3.
 \]
+All six amplitudes must first be expressed in one calibrated gain and
+orientation convention.  Independent normalization of each protocol would
+erase the content of these cross-protocol identities.
 For reporting across transmission levels, use the dimensionless scores
 \[
  \rho_1=\frac{|r_1|}{\sum_T|\widehat Z_T|},\qquad
@@ -542,14 +545,19 @@ experimental uncertainties must be propagated from the transfer
 reconstruction.
 Diagonal real loss changes \(x\) but leaves both nulls exact.  Coherent
 diagonal phase error also leaves them exact over \(\mathbb C\), although a
-literal real sign then needs the phase reference.  Mesh error or mismatch
-among emulator copies leaves the common Golden carrier: \(r_1\) is the
-primary falsification test and \(r_3\) the nonlinear confirmation.  Uniform
+literal real sign then needs the phase reference.  Mesh error can move the
+amplitude word off the common Golden carrier: \(r_1\) is the primary
+falsification test and \(r_3\) the nonlinear confirmation.  Passing both is
+necessary for carrier membership but does not certify the target transfer;
+the calibrated spectrum and probabilities supply the subsequent tests.
+Mismatch among the three emulator copies is a separate failure, because then
+no single block \(K_T\) describes the process.  Each copy must be tomographed
+and matched before the determinant interpretation is applied.  Uniform
 amplitude transmission \(\lambda\) scales amplitudes by \(\lambda^3\) and
 probabilities by \(\lambda^6\), while \(\rho_1\) and \(\rho_3\) remain
 unchanged.
 
-For contraction blocks,
+For two contraction blocks \(K\) and \(K+E\),
 \[
  |\det(K+E)-\det K|\leq3\lVert E\rVert_2.
 \]

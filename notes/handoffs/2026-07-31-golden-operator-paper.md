@@ -316,7 +316,10 @@ portfolio.  In particular:
   and a post-closeout clarification distinguishes the filtered sandwich from
   the direct balanced mesh, algebraic residual scores from statistical tests,
   and conditional fermionic budgets from precursor data.  The warning-free
-  ten-page paper gate plus visual check pass.  Report:
+  Tao pass also fixes the identifiability hierarchy: common gain/orientation
+  calibration precedes the residuals, their vanishing is necessary rather
+  than sufficient, and three-copy matching is an independent tomography
+  gate.  The warning-free ten-page paper gate plus visual check pass.  Report:
   `notes/2026-08-01-c769-golden-photonic-design-limit.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
