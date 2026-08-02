@@ -435,8 +435,10 @@ circle with \(c(t)^q=c(-t)\); that \(c(t)\in Q_0\iff\chi_q(t^2-\varepsilon)=+1\)
 the stated \(P,Q\) reproduce \(W\) at every \((t,t')\); that
 \(\operatorname{disc}_{t'}F=\varepsilon L(t)^2\) with the stated \(L\); that
 \(F(t,\cdot)\) is irreducible whenever \(L(t)\ne0\) and \(N(P(t))\ne0\); and that
-\(L\equiv0\) exactly when \(g=0\).  All parameters are swept for \(q\le11\) and
-deterministically sampled above.
+\(L\equiv0\) exactly when \(g=0\).  It also counts the exceptional \(t\) at which the
+Weil step needs care (\(L(t)=0\), \(N(P(t))=0\), or \(F(t,\cdot)\propto h\)): with
+\(g\ne0\) the observed maximum is \(3\), against the \(5\) assumed in the proof.  All
+parameters are swept for \(q\le11\) and deterministically sampled above.
 
 ```sh
 cd notes

@@ -113,6 +113,7 @@ def check_field(q: int) -> dict:
 
     # ---- C3..C6: the discriminant identity ------------------------------
     checked = 0
+    max_exc = 0
     params = [(a0, a1, g) for a0 in range(q) for a1 in range(q) for g in range(q)
               if (a0, a1) != (0, 0) and F.chi((a0, a1)) == 1]
     if q > 11:  # keep the run bounded; sample deterministically
@@ -155,12 +156,35 @@ def check_field(q: int) -> dict:
                                  if (A * tp * tp + Bc * tp + C) % q == 0]
                         assert not roots, "irreducibility"
                     checked += 1
+                # C8: count exceptional t (where the Weil bound needs care)
+                exceptional = 0
+                for t in range(q):
+                    tv = (t, 0)
+                    Pt = F.add(F.mul(P[0], tv), P[1])
+                    Qt = F.add(F.mul(Q[0], tv), Q[1])
+                    A = F.norm(Pt)
+                    Bc = (2 * F.mul(Pt, F.conj(Qt))[0]) % q
+                    C = F.norm(Qt)
+                    L = (2 * eps * g * (((2 * a1 + g) * t * t - 4 * a0 * t
+                                         + eps * (2 * a1 - g)) % q)) % q
+                    prop_h = (Bc % q == 0) and ((C + eps * A) % q == 0)
+                    if L == 0 or A == 0 or prop_h:
+                        exceptional += 1
+                # g = 0 is excluded from the family by C7 (it forces chi(a) = -1),
+                # and it is exactly the case L == 0, so every t is exceptional there.
+                if g != 0:
+                    max_exc = max(max_exc, exceptional)
+                    assert exceptional <= 5, (q, a, g, exceptional,
+                                              "too many exceptional t")
+                else:
+                    assert exceptional == q
                 # C6
                 Lzero = all((2 * eps * g * (((2 * a1 + g) * t * t - 4 * a0 * t
                                              + eps * (2 * a1 - g)) % q)) % q == 0
                             for t in range(q))
                 assert Lzero == (g == 0), (q, a, g, "L==0 iff g==0")
-    return {"q": q, "eps": eps, "t_values_checked": checked}
+    return {"q": q, "eps": eps, "t_values_checked": checked,
+            "max_exceptional_t": max_exc}
 
 
 def pow_circle(F: F2, x, e: int):
@@ -196,8 +220,8 @@ def main() -> None:
     }
     OUTPUT.write_text(json.dumps(payload, indent=1, sort_keys=True) + "\n")
     for r in rows:
-        print(f"q={r['q']:>3} eps={r['eps']} (a,g,t) triples checked: "
-              f"{r['t_values_checked']}")
+        print(f"q={r['q']:>3} eps={r['eps']} triples={r['t_values_checked']:>6} "
+              f"max exceptional t: {r['max_exceptional_t']}")
     print("all identities hold; certificate:", OUTPUT.name)
 
 
