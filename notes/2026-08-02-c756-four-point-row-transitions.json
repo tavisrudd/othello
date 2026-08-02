@@ -1,0 +1,5285 @@
+{
+  "inputs": [
+    "2026-08-02-c756-prime-field-lacunary-first-cofactor.py",
+    "2026-08-01-c756-probability-cheap-tests.py",
+    "2026-08-01-c756-saturated-internal-audit.json"
+  ],
+  "least_degree_convention": "minimum max(deg P,deg Q) among exact P/Q interpolants with no pole on the odd norm-one input coset; the first valid interpolant in a deterministic RREF projective basis fixes the reported pole divisor",
+  "rows": [
+    {
+      "all_rows_vanishing_candidates": 2,
+      "all_transition_mobius_candidates": 2,
+      "candidate_count": 2,
+      "candidate_profiles": [
+        {
+          "all_transitions_mobius": true,
+          "angle_row_image_size_histogram": {
+            "3": 4
+          },
+          "bijective_angle_rows": 4,
+          "complete_permutation_transition_count": 12,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 12,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 1,
+          "nonfunctional_transition_count": 0,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 12
+          },
+          "ordered_transition_count": 12,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 4
+          },
+          "pole_divisor_stream_sha256": "b273599f4e6a28f96c1874152343fbc5cd4da25c39028ab2fe342a73a5c6c86e",
+          "vanishing_first_angle_rows": 4
+        },
+        {
+          "all_transitions_mobius": true,
+          "angle_row_image_size_histogram": {
+            "3": 4
+          },
+          "bijective_angle_rows": 4,
+          "complete_permutation_transition_count": 12,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 12,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 1,
+          "nonfunctional_transition_count": 0,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 12
+          },
+          "ordered_transition_count": 12,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 4
+          },
+          "pole_divisor_stream_sha256": "6ddb355e365cb7c2ee37ab105d94272571ae0d407d48acd33175c9a46b3029ee",
+          "vanishing_first_angle_rows": 4
+        }
+      ],
+      "complete_permutation_transition_count": 24,
+      "four_point_comparisons": 0,
+      "four_point_defects": 0,
+      "functional_transition_count": 24,
+      "least_rational_degree_histogram": {
+        "1": 24
+      },
+      "maximum_degree_across_candidates": {
+        "1": 2
+      },
+      "nonfunctional_transition_count": 0,
+      "norm_one_torus_pole_count_histogram": {
+        "0": 24
+      },
+      "ordered_transition_count": 24,
+      "pole_divisor_degree_histogram": {
+        "0": 16,
+        "1": 8
+      },
+      "q": 5
+    },
+    {
+      "all_rows_vanishing_candidates": 0,
+      "all_transition_mobius_candidates": 0,
+      "candidate_count": 5,
+      "candidate_profiles": [
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 4,
+            "4": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 16,
+          "functional_transition_count": 16,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 4
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 4,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 16
+          },
+          "ordered_transition_count": 20,
+          "pole_divisor_degree_histogram": {
+            "0": 16
+          },
+          "pole_divisor_stream_sha256": "8afe23c4844c6b3e08e50874b25939a9cc6c0501e5c920b1f5618790d0a294e6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 4,
+            "4": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 16,
+          "functional_transition_count": 16,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 4
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 4,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 16
+          },
+          "ordered_transition_count": 20,
+          "pole_divisor_degree_histogram": {
+            "0": 16
+          },
+          "pole_divisor_stream_sha256": "8afe23c4844c6b3e08e50874b25939a9cc6c0501e5c920b1f5618790d0a294e6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 4,
+            "4": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 16,
+          "functional_transition_count": 16,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 4
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 4,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 16
+          },
+          "ordered_transition_count": 20,
+          "pole_divisor_degree_histogram": {
+            "0": 16
+          },
+          "pole_divisor_stream_sha256": "8afe23c4844c6b3e08e50874b25939a9cc6c0501e5c920b1f5618790d0a294e6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 4,
+            "4": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 16,
+          "functional_transition_count": 16,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 4
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 4,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 16
+          },
+          "ordered_transition_count": 20,
+          "pole_divisor_degree_histogram": {
+            "0": 16
+          },
+          "pole_divisor_stream_sha256": "8afe23c4844c6b3e08e50874b25939a9cc6c0501e5c920b1f5618790d0a294e6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 4,
+            "4": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 16,
+          "functional_transition_count": 16,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 4
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 4,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 16
+          },
+          "ordered_transition_count": 20,
+          "pole_divisor_degree_histogram": {
+            "0": 16
+          },
+          "pole_divisor_stream_sha256": "8afe23c4844c6b3e08e50874b25939a9cc6c0501e5c920b1f5618790d0a294e6",
+          "vanishing_first_angle_rows": 1
+        }
+      ],
+      "complete_permutation_transition_count": 0,
+      "four_point_comparisons": 0,
+      "four_point_defects": 0,
+      "functional_transition_count": 80,
+      "least_rational_degree_histogram": {
+        "1": 60,
+        "3": 20
+      },
+      "maximum_degree_across_candidates": {
+        "3": 5
+      },
+      "nonfunctional_transition_count": 20,
+      "norm_one_torus_pole_count_histogram": {
+        "0": 80
+      },
+      "ordered_transition_count": 100,
+      "pole_divisor_degree_histogram": {
+        "0": 80
+      },
+      "q": 7
+    },
+    {
+      "all_rows_vanishing_candidates": 0,
+      "all_transition_mobius_candidates": 0,
+      "candidate_count": 28,
+      "candidate_profiles": [
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "634fa559bf31eff2a9a3619df25f09665286886d9efe2a964d3eb9cabfcb6d40",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "f24036fcd6c1fabb75c6e47490ab70c07df8869b886e73776bf2e8dae620fb07",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 6,
+            "6": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 36,
+          "functional_transition_count": 36,
+          "injective_function_transition_count": 30,
+          "least_rational_degree_histogram": {
+            "1": 30,
+            "5": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 6,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 36
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 36
+          },
+          "pole_divisor_stream_sha256": "5f9012540bddbcfae2eabdc9c6e25624e08392f4dcfadc4f2b36d33a6600e037",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 6,
+            "1": 12
+          },
+          "pole_divisor_stream_sha256": "a78dfc084059b95b4b4d1c6899482ebcf1d91d03a87fd46285639cc9eeeb03c3",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "e76e510b3dac1771cca58e2ded5fa373c6e9d8d3eb23af7b6140767889f86c51",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 6,
+            "1": 12
+          },
+          "pole_divisor_stream_sha256": "8f3b512c9eb9200e450e2ef8a7d52a8cc9a4d3206e7200dda55ad618b9178bf9",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 6,
+            "6": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 36,
+          "functional_transition_count": 36,
+          "injective_function_transition_count": 30,
+          "least_rational_degree_histogram": {
+            "1": 30,
+            "5": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 6,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 36
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 36
+          },
+          "pole_divisor_stream_sha256": "5f9012540bddbcfae2eabdc9c6e25624e08392f4dcfadc4f2b36d33a6600e037",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 10
+          },
+          "pole_divisor_stream_sha256": "a32dfc8462d116b31069d841aa822f33a64560e1f57e8e03fc2b5c48a8373d67",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 10
+          },
+          "pole_divisor_stream_sha256": "03f731210f4df66bddbe014b647107122ffd9942f4473cc50994136c85f85034",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 6,
+            "6": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 36,
+          "functional_transition_count": 36,
+          "injective_function_transition_count": 30,
+          "least_rational_degree_histogram": {
+            "1": 30,
+            "5": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 6,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 36
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 36
+          },
+          "pole_divisor_stream_sha256": "5f9012540bddbcfae2eabdc9c6e25624e08392f4dcfadc4f2b36d33a6600e037",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 6,
+            "1": 12
+          },
+          "pole_divisor_stream_sha256": "54d96925fba1e6c34bfe32cc869c5ed19dd22fe8726b44fb500f74d1c1564b8d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 6,
+            "1": 12
+          },
+          "pole_divisor_stream_sha256": "8eec9e6907a0d86a91b4e2fe6123ea90244baf92a960496eb871fbfc766495f6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "2b387e03e041d3e857cdb17a7cd94fb422dc8a81d49d641cabc97afd38fece9d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 6,
+            "1": 12
+          },
+          "pole_divisor_stream_sha256": "a5a27c2d0ff981997e60a31aa425c8c112a0eda77ef0eca986840d2c6977a57b",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 6,
+            "1": 12
+          },
+          "pole_divisor_stream_sha256": "84c52cfe42bbcd7eb24992e7d60c684aaf4c5fd6a5eacd27f5154ea10a256757",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 6,
+            "6": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 36,
+          "functional_transition_count": 36,
+          "injective_function_transition_count": 30,
+          "least_rational_degree_histogram": {
+            "1": 30,
+            "5": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 6,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 36
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 36
+          },
+          "pole_divisor_stream_sha256": "5f9012540bddbcfae2eabdc9c6e25624e08392f4dcfadc4f2b36d33a6600e037",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "2c0960f6458e2daa3d24a474f785df2f739be707607d74f6053e2ea770596eb3",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 6,
+            "6": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 36,
+          "functional_transition_count": 36,
+          "injective_function_transition_count": 30,
+          "least_rational_degree_histogram": {
+            "1": 30,
+            "5": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 6,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 36
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 36
+          },
+          "pole_divisor_stream_sha256": "5f9012540bddbcfae2eabdc9c6e25624e08392f4dcfadc4f2b36d33a6600e037",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "a1c3016f3677fcdf62d5402c46b1246b46f8a4383e11534551bc3026cae2235f",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 6,
+            "6": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 36,
+          "functional_transition_count": 36,
+          "injective_function_transition_count": 30,
+          "least_rational_degree_histogram": {
+            "1": 30,
+            "5": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 6,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 36
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 36
+          },
+          "pole_divisor_stream_sha256": "5f9012540bddbcfae2eabdc9c6e25624e08392f4dcfadc4f2b36d33a6600e037",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 10
+          },
+          "pole_divisor_stream_sha256": "57922f6032c393501724b5b1c8ea94a3107c7cf143d249def1be936a977a27ed",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 10
+          },
+          "pole_divisor_stream_sha256": "6c31825b220c417b5325975147f2918dd8193873f476bddd6e6369153020b07e",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 6,
+            "6": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 36,
+          "functional_transition_count": 36,
+          "injective_function_transition_count": 30,
+          "least_rational_degree_histogram": {
+            "1": 30,
+            "5": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 6,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 36
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 36
+          },
+          "pole_divisor_stream_sha256": "5f9012540bddbcfae2eabdc9c6e25624e08392f4dcfadc4f2b36d33a6600e037",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 10
+          },
+          "pole_divisor_stream_sha256": "0024610fe7b83b0a423b42da2bca67cea002e0f243b2d29c1c4d4ef2b4c16b39",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "f73e7dbf858ace6deda54f969491f8c7945b4af285662a37c8cd800d0a1659c2",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 6,
+            "1": 12
+          },
+          "pole_divisor_stream_sha256": "664cfb6408f7fbbdb17eff27b1a992bc510db440f018b75c912288af7b35c4f9",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 8,
+            "1": 10
+          },
+          "pole_divisor_stream_sha256": "69fa8fca90f0e8a6c97936a75fda4d35f52d0cc7ab8fef95b945c6391098a099",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 1,
+            "4": 6
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 12,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 18,
+          "functional_transition_count": 18,
+          "injective_function_transition_count": 12,
+          "least_rational_degree_histogram": {
+            "1": 12,
+            "3": 6
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 3,
+          "nonfunctional_transition_count": 24,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 18
+          },
+          "ordered_transition_count": 42,
+          "pole_divisor_degree_histogram": {
+            "0": 10,
+            "1": 8
+          },
+          "pole_divisor_stream_sha256": "a2ffc58077ff094307e242fada0b131a11d3c2a2add54a38d0dbe6918df75bec",
+          "vanishing_first_angle_rows": 1
+        }
+      ],
+      "complete_permutation_transition_count": 0,
+      "four_point_comparisons": 252,
+      "four_point_defects": 0,
+      "functional_transition_count": 630,
+      "least_rational_degree_histogram": {
+        "1": 462,
+        "3": 126,
+        "5": 42
+      },
+      "maximum_degree_across_candidates": {
+        "3": 21,
+        "5": 7
+      },
+      "nonfunctional_transition_count": 546,
+      "norm_one_torus_pole_count_histogram": {
+        "0": 630
+      },
+      "ordered_transition_count": 1176,
+      "pole_divisor_degree_histogram": {
+        "0": 422,
+        "1": 208
+      },
+      "q": 11
+    },
+    {
+      "all_rows_vanishing_candidates": 0,
+      "all_transition_mobius_candidates": 0,
+      "candidate_count": 55,
+      "candidate_profiles": [
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "b8377811937ad05909a499271a6fa4890fdf3626be2ef186920ec23da8dc854b",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "7680cb9f48578dfe06ded64f9c1ec9b87fe032072835443834a555d13df42f1c",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "73a7572667174cf4b03c6fabd316aa8e180fa25739ef995c28c37896c8e817ae",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "47f1ec9926d9a4db95a8e98e87b5a82b0b02704e09c10f7ea43c0ea522c392cb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "3848888ee9e32c1ab3e0149d44dc0c19689eb3c48d9e262e84d8a436d92d478d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "679ea7e12e1d0190db39c5ceb2df043d9809a807c76a78ed9914c78c387ec24c",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "279eaf12c21fdd94f4a97a46375242f9b319d58c9d35b6f780f373ec9543c1d1",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "b0e3707dc7627ae5cc36505d2afcf1fde469b24e0f84ffb7d26060b72024ae7e",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "3ff849d164f6f2403f62c46b7d1a478ab158ded61f5f035ceae6d6075c467808",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "45395c9da154a3a763f7c41b99671e84634e2e536e99705912ef77d214da19bd",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "f875523def1e1225f830a2e5ad3ee6ebaf2f5ff8ea5f2ca0dba5bfab66926a5e",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "0de00cec13ed3eb530abd2737b6c620dab404f8ec82d75bbba417fe18fff51a6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "f13b36099037b13e81063c39b3faaaf80a83dd563a77ba53bbc05f7b3ce05000",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "45fe9bb244be89feed3920299ede247e369d8adc8afc06bb1a2024fbee3209b5",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "7fcc25dcd56bcae88be20cd19cb80c54c1ec9990823d2bc1abe8424232277e5e",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "e402809b289bc6250ee643b36dda73cc8804741dc2d24f2edccbf51529541d70",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "ee4e2ca64947fb21ce79667d0fa2bb18639beb911bc51ea094ab8370286dc038",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "25e6c9efc48af087809d9079e9ebfb362a0b1e5dc2422427916566e46b614ac7",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "ea4ae6230ec66af423b703f7e2bcbe887e2a38fcb7da9b6fc93023fa2c9db9cb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "8684c0e9bbb912d5c3de0548286628f8c7b662492ac1b69fba8291ec75b67250",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "55f686c7d36bf21bfc2846ebfe0505572daaed3ba284556c561d5eb1e52e9314",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "b19b2d4c73ddf32afe60d5bc5e71be11545d892a48a13c3bb60dbf3adb88df16",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "c320e6e6039d569b408fd22995451c2fcdd04eef70db2ee9725c3721a111d4a3",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "0aba3cfb29e6e494106c0f1ee93451d60e0a50f6dca84fc6c6878e884982e34c",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "b8377811937ad05909a499271a6fa4890fdf3626be2ef186920ec23da8dc854b",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "3f66f9b268f3ed5acb54dfe4047627efaa21ca6516e9fd1a7060fc662cd8206b",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "c986fe9af60242d1d5f83cb5e41faf5cefbdea50197bd62959bf9fa2fa267d9a",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "47f1ec9926d9a4db95a8e98e87b5a82b0b02704e09c10f7ea43c0ea522c392cb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "13894d244f73355289fae04d39a47dab9fb847ce70a0caa12cdc9129f8d06b2e",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "81c616bd76c2750289b529e1cf01dcc1c51852dc9c83f15bfff5c11c1dd5c7d6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "279eaf12c21fdd94f4a97a46375242f9b319d58c9d35b6f780f373ec9543c1d1",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "b0e3707dc7627ae5cc36505d2afcf1fde469b24e0f84ffb7d26060b72024ae7e",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "2": 10
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 100,
+          "functional_transition_count": 100,
+          "injective_function_transition_count": 90,
+          "least_rational_degree_histogram": {
+            "1": 90,
+            "9": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 9,
+          "nonfunctional_transition_count": 10,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 100
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "0": 100
+          },
+          "pole_divisor_stream_sha256": "3bee7f98c735d85b7883fbd94471987b71a6260a7b97d7b4596cd7e3da2b1f6d",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "548282b562f71a771f3397e844872c92b3dcaf4c4cd942c432b82c9f4e88bf3b",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "1e949a016b0dc7e24479f026f0786da9bcdb5b8268f2c775f652a90879a95cb4",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "57582bc5039ccae4b12d2dcdee31110506b483c61df4f054ef1427ecded7c6ed",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "8d131a0c22d0d7cdf646a755e85d2389607c9bda222abd55e542fc71afd068c6",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "6dae279d333538ec44085589268a70e5ad378c6fa2903d0d47b63b5e0ab53ee7",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "501619b05a25dea5df28104544f7d45b41aba2966937a32a483bf797169d8da1",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "42fca40a7f84d04e5fe09035ac06e4212263f572010313524452d3b940546b33",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "164ae951ff6ea4623baa717d71661b98d84827af0b66f9ab849dea4f3c64cc3e",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "97efc288e983e62aa592c1a0f139933866cadd6a82bf68c0b767c5e5fc3890e9",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "e47fc616b6985606da57e258b638db4cb6305509582b98bad8d34c39840d8385",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "16b0d0d12f4079adccf5d8f4bbadf2cb65caa6b8aa59f7c50317808d2f7c73d4",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "10": 1,
+            "5": 5,
+            "6": 5
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 10,
+          "functional_transition_count": 10,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {
+            "5": 10
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 5,
+          "nonfunctional_transition_count": 100,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 10
+          },
+          "ordered_transition_count": 110,
+          "pole_divisor_degree_histogram": {
+            "4": 10
+          },
+          "pole_divisor_stream_sha256": "c29cb156835c09820d738de09c53ed16806064438031123982f6cb11bcee89b7",
+          "vanishing_first_angle_rows": 1
+        }
+      ],
+      "complete_permutation_transition_count": 0,
+      "four_point_comparisons": 0,
+      "four_point_defects": 0,
+      "functional_transition_count": 1540,
+      "least_rational_degree_histogram": {
+        "1": 990,
+        "5": 440,
+        "9": 110
+      },
+      "maximum_degree_across_candidates": {
+        "5": 44,
+        "9": 11
+      },
+      "nonfunctional_transition_count": 4510,
+      "norm_one_torus_pole_count_histogram": {
+        "0": 1540
+      },
+      "ordered_transition_count": 6050,
+      "pole_divisor_degree_histogram": {
+        "0": 1100,
+        "4": 440
+      },
+      "q": 19
+    },
+    {
+      "all_rows_vanishing_candidates": 0,
+      "all_transition_mobius_candidates": 0,
+      "candidate_count": 39,
+      "candidate_profiles": [
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "12": 1,
+            "2": 12
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 144,
+          "functional_transition_count": 144,
+          "injective_function_transition_count": 132,
+          "least_rational_degree_histogram": {
+            "1": 132,
+            "11": 12
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 11,
+          "nonfunctional_transition_count": 12,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 144
+          },
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {
+            "0": 144
+          },
+          "pole_divisor_stream_sha256": "c5f9e42b6b128f11e500f6da6a3fb08c9f62999243e942b3d0f17c9fcdc722eb",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "4": 3,
+            "6": 10
+          },
+          "bijective_angle_rows": 0,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 0,
+          "functional_transition_count": 0,
+          "injective_function_transition_count": 0,
+          "least_rational_degree_histogram": {},
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": null,
+          "nonfunctional_transition_count": 156,
+          "norm_one_torus_pole_count_histogram": {},
+          "ordered_transition_count": 156,
+          "pole_divisor_degree_histogram": {},
+          "pole_divisor_stream_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "vanishing_first_angle_rows": 7
+        }
+      ],
+      "complete_permutation_transition_count": 0,
+      "four_point_comparisons": 0,
+      "four_point_defects": 0,
+      "functional_transition_count": 1872,
+      "least_rational_degree_histogram": {
+        "1": 1716,
+        "11": 156
+      },
+      "maximum_degree_across_candidates": {
+        "11": 13,
+        "none": 26
+      },
+      "nonfunctional_transition_count": 4212,
+      "norm_one_torus_pole_count_histogram": {
+        "0": 1872
+      },
+      "ordered_transition_count": 6084,
+      "pole_divisor_degree_histogram": {
+        "0": 1872
+      },
+      "q": 23
+    },
+    {
+      "all_rows_vanishing_candidates": 0,
+      "all_transition_mobius_candidates": 0,
+      "candidate_count": 17,
+      "candidate_profiles": [
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "16": 1,
+            "2": 16
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 256,
+          "functional_transition_count": 256,
+          "injective_function_transition_count": 240,
+          "least_rational_degree_histogram": {
+            "1": 240,
+            "15": 16
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 15,
+          "nonfunctional_transition_count": 16,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 256
+          },
+          "ordered_transition_count": 272,
+          "pole_divisor_degree_histogram": {
+            "0": 256
+          },
+          "pole_divisor_stream_sha256": "e638894cce7a3f1da61d4d405e2fd40f6ec7804b10068d665ddc383a38a10f42",
+          "vanishing_first_angle_rows": 1
+        }
+      ],
+      "complete_permutation_transition_count": 0,
+      "four_point_comparisons": 0,
+      "four_point_defects": 0,
+      "functional_transition_count": 4352,
+      "least_rational_degree_histogram": {
+        "1": 4080,
+        "15": 272
+      },
+      "maximum_degree_across_candidates": {
+        "15": 17
+      },
+      "nonfunctional_transition_count": 272,
+      "norm_one_torus_pole_count_histogram": {
+        "0": 4352
+      },
+      "ordered_transition_count": 4624,
+      "pole_divisor_degree_histogram": {
+        "0": 4352
+      },
+      "q": 31
+    },
+    {
+      "all_rows_vanishing_candidates": 0,
+      "all_transition_mobius_candidates": 0,
+      "candidate_count": 23,
+      "candidate_profiles": [
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        },
+        {
+          "all_transitions_mobius": false,
+          "angle_row_image_size_histogram": {
+            "2": 22,
+            "22": 1
+          },
+          "bijective_angle_rows": 1,
+          "complete_permutation_transition_count": 0,
+          "defective_transition_count": 0,
+          "four_point_comparisons": 0,
+          "four_point_defects": 0,
+          "functional_nonpermutation_transition_count": 484,
+          "functional_transition_count": 484,
+          "injective_function_transition_count": 462,
+          "least_rational_degree_histogram": {
+            "1": 462,
+            "21": 22
+          },
+          "maximum_defects_in_one_transition": 0,
+          "maximum_least_rational_degree": 21,
+          "nonfunctional_transition_count": 22,
+          "norm_one_torus_pole_count_histogram": {
+            "0": 484
+          },
+          "ordered_transition_count": 506,
+          "pole_divisor_degree_histogram": {
+            "0": 484
+          },
+          "pole_divisor_stream_sha256": "dbecefd70a75210ff661cb5eaef9f2d7d3ed085abda562d5d4cdcd4255be6acf",
+          "vanishing_first_angle_rows": 1
+        }
+      ],
+      "complete_permutation_transition_count": 0,
+      "four_point_comparisons": 0,
+      "four_point_defects": 0,
+      "functional_transition_count": 11132,
+      "least_rational_degree_histogram": {
+        "1": 10626,
+        "21": 506
+      },
+      "maximum_degree_across_candidates": {
+        "21": 23
+      },
+      "nonfunctional_transition_count": 506,
+      "norm_one_torus_pole_count_histogram": {
+        "0": 11132
+      },
+      "ordered_transition_count": 11638,
+      "pole_divisor_degree_histogram": {
+        "0": 11132
+      },
+      "q": 43
+    }
+  ],
+  "schema": "c756-four-point-row-transitions-v1",
+  "scope": "every ordered row transition of every normalized pairwise-character candidate in prime q in {5,7,11,19,23,31,43}",
+  "transition_completion": "common label j maps alpha_ij to alpha_lj; the deleted label l maps alpha_il to the inserted value alpha_li"
+}

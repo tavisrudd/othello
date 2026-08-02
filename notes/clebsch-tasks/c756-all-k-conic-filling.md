@@ -17,11 +17,12 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** run the bounded four-point row-transition diagnostic on the
-existing prime-field angle matrices: interpolate transitions on the norm-one torus and
-record least rational degree, pole divisor, and cross-ratio defect.  Continue only if
-the frames have a bounded profile that negative candidates violate, or if every candidate
-has a bounded profile susceptible to classification.
+**Next-session entry:** run Route F's bounded sparse-integral Paley-trade diagnostic on
+the existing coherent candidates: record exact Fourier-value distributions, prime-ideal
+valuation profiles, and short autocorrelations of
+\(x=\mathbf1_Z-\mathbf1_{Z^q}\).  Continue only if the frame is isolated by an
+integral profile invisible to the already-tight second moment; stop on any renamed norm,
+entropy, or interlacing inequality.
 
 ## Why this task exists
 
@@ -38,7 +39,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty-one research passes complete; the theorem is **not** proved. Reports:
+Twenty-two research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -59,7 +60,8 @@ Twenty-one research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-02-c756-cross-ratio-rank.md`, and
 `notes/2026-08-02-c756-ball-lavrauw-tensor-interface.md`, and
 `notes/2026-08-02-c756-alt-attacks.md`, and
-`notes/2026-08-02-c756-prime-field-lacunary-first-cofactor.md`.
+`notes/2026-08-02-c756-prime-field-lacunary-first-cofactor.md`, and
+`notes/2026-08-02-c756-four-point-row-transitions.md`.
 
 Branch ledger:
 
@@ -400,6 +402,26 @@ What the prime-field lacunary first-cofactor pass adds:
   diagnostic; they do not control every coherent candidate and hence do not rescue
   the global lacunary route.
 
+What the four-point row-transition pass adds:
+
+- the two \(p=5\) frames are the only complete angle-row permutation systems in the
+  audited prime fields, and all \(24\) ordered transitions are Möbius of degree one;
+- this separation is not new rigidity: every negative candidate has at most one
+  bijective row, so none supplies a complete negative transition and the gate collapses
+  back to the already-known first angle moment;
+- functional partial transitions have least rational degrees reaching
+  \(3,5,9,11,15,21\) at \(p=7,11,19,23,31,43\); the \(p=31,43\) transitions from
+  the unique bijective row attain the full polynomial scale \((p-1)/2\);
+- every canonical pole divisor misses the full norm-one torus, while the only \(252\)
+  nonvacuous negative four-point comparisons all preserve cross-ratio, so neither poles
+  nor cross-ratio defect controls the surviving radial coordinate;
+- conditionally, a uniform transition bound \(d\) with \((p+1)/2>d^2+1\) would force
+  all opposite transitions to be Möbius and embed \(S_{(p+1)/2}\) in tame
+  \(\operatorname{PGL}_2\), impossible for \(p\ge11\); the missing input is exactly
+  the bounded-degree lemma, and the declared finite diagnostic supplies no route to it;
+- Route Q therefore closes at its predeclared stop gate.  Route F, sparse integral Paley
+  trades, is the next saturated-internal discriminator.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -456,11 +478,12 @@ now has the same theorem-shaped status the saturated-external branch had two pas
 closure, but the tight balance theorem proves that another spectral bound cannot finish it.
 The bare cross-ratio nonsingularity shortcut is closed, the Ball--Lavrauw tangent tensor
 does not globalize its adjugate kernel line, and the prime-field first-cofactor section
-has exact canonical form but linear reduced support and Cartier width.  The next bounded
-interface is therefore the four-point row-transition diagnostic: interpolate the existing
-row bijections on the norm-one torus and measure least rational degree, pole divisor, and
-cross-ratio defect.  The direct adjugate/second-compound calculation stays parked unless a
-global low-degree carrier emerges.
+has exact canonical form but linear reduced support and Cartier width.  The four-point
+row-transition diagnostic also closes: its negative controls have no complete transition
+systems, their partial rational degree grows linearly, and their pole and cross-ratio
+profiles add no radial constraint.  The next bounded interface is therefore Route F's
+sparse integral Paley-trade profile.  The direct adjugate/second-compound calculation stays
+parked unless a global low-degree carrier emerges.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot
 close.  The exhaustive masked-direction audit kills threshold unification but promotes
