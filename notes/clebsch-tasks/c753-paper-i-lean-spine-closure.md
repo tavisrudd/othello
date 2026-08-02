@@ -27,25 +27,25 @@ peak, built `Q11A5PointOrbits.lean` in 19 minutes 39 seconds at a measured
 5,675,148 KiB peak, and passed the trace-only aggregate gate.  The reviewed q11
 prose bundle was committed at `12031d32`.  R2 is the next formal packet.
 
-R2's incidence consequence is committed at `17d24b61` in
-`SixArcDegenerateConicExclusion.lean`.  The module freezes the permitted exact
-conic-type interface and proves, from R1 rather than a coordinate census, that
-containment in either a nonsingular conic or at most two projective lines gives
-at most twelve uncovered points.  Its direct guarded elaboration is green and
-its three printed terminals introduce no axiom.  The causal R3 source is staged
-at `RelativeConicArcs/Q11RigiditySpine.lean`; it derives Dye equality only after
-that upper bound.  It remains untracked until the serialized two-module build
-at `~/.cache/othello-lean-build/run-20260802-040636-81ccef51`, currently queued
-behind a foreign Lean owner, supplies its first dependency-ordered validation.
-The working R2 source has since been strengthened so the conditional conic-type
-interface carries an actual nonzero `QuadraticForm` and its exact projective
-zero locus, rather than an arbitrary finite point set; that strengthening is
-uncommitted pending the same gate.  R4 is staged, also untracked, at
-`RelativeConicArcs/Q11CodeRigidityBridge.lean`; it reuses the proved canonical
-ray normalization to construct the `Fin 133`--projective-point equivalence and
-adds symbolic uncovered/distance-three, monomial-kernel, affine-coset, and
-minimum-leader bridges.  Neither staged module is release evidence before its
-dependency-ordered elaboration and axiom review pass.
+R2 and R3 are complete at `04e734de`.  The final R2 conic-type interface carries
+an actual nonzero `QuadraticForm`, its exact projective zero locus, and the
+nonsingular-or-two-lines alternative; the resulting upper bound is proved from
+R1 rather than a coordinate census.  R3 then applies Dye's lower bound, forces
+the twelve-point equality, and only at that causal endpoint invokes the named
+equality classification.  The serialized build at
+`~/.cache/othello-lean-build/run-20260802-043209-83831e3c` built both owning
+modules and passed its aggregate no-build gate.  The R3 terminal's printed
+axiom set is exactly `propext`, `Classical.choice`, `Quot.sound`,
+`dye1991_brianchon_bound`, and `dye1991_equality_classification`.  R4 is complete
+at `a903dd2b`.  `RelativeConicArcs/Q11CodeRigidityBridge.lean` reuses the proved
+canonical ray normalization to construct the `Fin 133`--projective-point
+equivalence and adds symbolic uncovered/distance-three, monomial-kernel,
+affine-coset, and minimum-leader bridges.  The strengthened terminal also
+records the explicit transported-column equation, rather than leaving its row
+equivalence existentially unused.  The owning build and aggregate gate passed
+in `~/.cache/othello-lean-build/run-20260802-052520-f9e2ac88`; the printed axiom
+set is exactly `propext`, `Classical.choice`, `Quot.sound`,
+`dye1991_brianchon_bound`, and `dye1991_equality_classification`.
 
 O1 source work has begun at
 `RelativeConicArcs/PaperIOrientationCover.lean`.  Its current untracked base
@@ -55,8 +55,9 @@ order-five rotation subgroup, and derives the `A5/C5 → A5/D5` two-point
 fibres from coset factorization.  The staged source now also constructs the two
 twenty-five-element inverse-stable `C5` double cosets, their self-paired
 five-valent orbitals, and the regular-action proof that each orbital meets every
-other antipodal fibre exactly once.  O1 is source-complete but, as with R3/R4,
-is not evidence until the shared build window validates it.
+other antipodal fibre exactly once.  Its first elaboration exposed incompatible
+coset APIs and unresolved placeholders in the staged draft; O1 is under repair
+and is not evidence until its replacement owning build and audit pass.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
