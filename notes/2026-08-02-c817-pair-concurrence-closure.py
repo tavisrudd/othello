@@ -308,16 +308,32 @@ def compute() -> dict[str, object]:
     assert binary_rank(relation_matrices[0]) == 42
     assert binary_multiply(relation_matrices[0], pair_parity) == [0] * 78
 
-    pair_parity_seventh = binary_identity(78)
-    for _ in range(7):
-        pair_parity_seventh = binary_multiply(pair_parity_seventh, pair_parity)
+    pair_parity_powers = {0: binary_identity(78)}
+    for exponent in range(1, 8):
+        pair_parity_powers[exponent] = binary_multiply(
+            pair_parity_powers[exponent - 1], pair_parity
+        )
+    pair_parity_seventh = pair_parity_powers[7]
     code_projector = binary_add(
         binary_identity(78),
         binary_multiply(relation_matrices[0], relation_matrices[0]),
     )
-    recovered_a9 = binary_add(pair_parity, pair_parity_seventh)
+    recovered_a9 = pair_parity_powers[3]
     assert pair_parity_seventh == code_projector
+    assert binary_add(pair_parity, recovered_a9) == code_projector
     assert recovered_a9 == relation_matrices[9]
+    assert pair_parity_powers[5] == relation_matrices[12]
+    assert pair_parity_powers[6] == relation_matrices[10]
+    assert pair_parity_powers == {
+        0: binary_identity(78),
+        1: binary_add(relation_matrices[10], relation_matrices[12]),
+        2: binary_add(relation_matrices[9], relation_matrices[12]),
+        3: relation_matrices[9],
+        4: binary_add(relation_matrices[9], relation_matrices[10]),
+        5: relation_matrices[12],
+        6: relation_matrices[10],
+        7: code_projector,
+    }
     recovered_a9_squared = binary_multiply(recovered_a9, recovered_a9)
     recovered_a9_cubed = binary_multiply(recovered_a9_squared, recovered_a9)
     assert binary_add(
@@ -351,8 +367,20 @@ def compute() -> dict[str, object]:
             "rank_over_F2": 36,
             "image": "binary code K",
             "P^7": "code projector e_K",
-            "P+P^7": "A9=alpha",
-            "recovered_field": "F2[alpha]/(alpha^3+alpha^2+1)=F8",
+            "P^3": "A9=alpha",
+            "P+P^3": "code projector e_K",
+            "minimal_polynomial_on_K": "t^3+t+1",
+            "characteristic_polynomial_on_F2^78": "t^42*(t^3+t+1)^12",
+            "power_table": {
+                "P^1": "A10+A12",
+                "P^2": "A9+A12",
+                "P^3": "A9",
+                "P^4": "A9+A10",
+                "P^5": "A12",
+                "P^6": "A10",
+                "P^7": "A9+A10+A12=e_K",
+            },
+            "recovered_field": "F2[P]/(P^3+P+e_K)=F8",
         },
         "automorphism_group_order_via_full_scheme_rigidity": 2184,
         "independent_closure_checks": [

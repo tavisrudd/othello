@@ -23,10 +23,11 @@ concurrence-6 relations have respectively two and four common
 concurrence-7 neighbors.  More strongly, the concurrence-8 neighborhoods are
 already the 78 passant incidence rows, so weighted-pair data reconstructs
 \(M\) directly and reconstruction arity is exactly two.  Reducing the pair
-matrix modulo two has image equal to the code; its seventh power is the code
-projector and adding that projector recovers \(A_9\), so the pair layer also
-reconstructs the hidden \(\mathbf F_8\)-module intrinsically.  Report and
-exact evidence bundle:
+matrix modulo two gives an operator \(P\) with image equal to the code,
+\(P^3=A_9\), and \(P+P^3=e_K\); its fifth and sixth powers recover
+\(A_{12}\) and \(A_{10}\).  Thus the pair layer also reconstructs the hidden
+\(\mathbf F_8\)-module and all three rank-36 orbitals intrinsically.  Report
+and exact evidence bundle:
 `notes/2026-08-02-c817-pair-concurrence-closure.md`.
 
 The next gate is subitem 3, homogeneous toric--octahedral geometry of the four

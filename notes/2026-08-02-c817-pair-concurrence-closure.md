@@ -72,22 +72,44 @@ minimum-layer pair-concurrence matrix.  No orbit-spanning argument, coherent
 refinement, polarity, or prior incidence matrix is needed to define it from
 the abstract minimum hypergraph.
 
-The same single operator recovers the hidden field.  Exact matrix powers give
+The same single operator recovers the hidden field.  The lowest-degree exact
+identities are
 
 \[
- P^7=e_K,
+ P^3=B=A_9,
  \qquad
- B=P+P^7,
+ P+P^3=e_K,
  \qquad
- B^3+B^2+e_K=0.
+ P^3+P+e_K=0.
 \]
 
-Hence the weighted 2-section intrinsically reconstructs the code projector,
-the distinguished scalar \(\alpha=B\), and
+The full cyclic orbital calculus is
 
 \[
- \mathbf F_2[B]\cong\mathbf F_8.
+\begin{array}{c|ccccccc}
+j&1&2&3&4&5&6&7\\ \hline
+P^j&A_{10}+A_{12}&A_9+A_{12}&A_9&A_9+A_{10}&A_{12}&A_{10}&e_K.
+\end{array}
 \]
+
+Hence one pair-parity operator intrinsically reconstructs the code projector,
+all three rank-36 orbital matrices, the distinguished scalar \(\alpha=B\), and
+
+\[
+ \mathbf F_2[P]|_K\cong
+ \mathbf F_2[t]/(t^3+t+1)\cong\mathbf F_8.
+\]
+
+On the ambient binary space the complete primary profile is
+
+\[
+ \chi_P(t)=t^{42}(t^3+t+1)^{12}.
+\]
+
+The pair-parity primitive element \(P\) and the adjacency primitive element
+\(B=P^3\) satisfy the two reciprocal irreducible cubics
+\(t^3+t+1\) and \(t^3+t^2+1\), respectively.  Cubing is therefore the exact
+orientation bridge between the two order-seven Frobenius packets.
 
 This synthesizes C817 subitems 1 and 2: the hidden \(\mathbf F_8\)-symplectic
 module is already encoded in the parity of minimum-support pair concurrence.
@@ -188,8 +210,9 @@ split by the common-concurrence-7 formula.  It then constructs every passant
 line and verifies that the 78 concurrence-8 neighborhoods, the 78 polar
 neighborhoods, and the 78 incidence rows are identical as sets of canonical
 seven-subsets.  It also reduces the full pair matrix modulo two and verifies
-its rank, image containment, seventh-power projector, recovered \(A_9\), and
-irreducible cubic identity.  There is no randomness, sampling, or early stop.
+its rank, image containment, complete seven-power orbital table, recovered
+projector, and reciprocal irreducible-cubic identities.  There is no
+randomness, sampling, or early stop.
 
 The automorphism order uses the already-frozen full-scheme four-anchor
 rigidity theorem after the exact closure identifies the full scheme; this
@@ -208,10 +231,10 @@ Aut = PGL(2,13)`.
 
 Evidence files:
 
-- `notes/2026-08-02-c817-pair-concurrence-closure.py` — 12229 bytes,
-  SHA-256 `8cfeb472c314e5821fd9eba1d59f934cc084e2c6b1a846954c4ab484c1117e48`;
-- `notes/2026-08-02-c817-pair-concurrence-closure.json` — 1333 bytes,
-  SHA-256 `a0d46db25200017e3e24cf7138f42ea90322687bcecf4f6495cdc5db373804ba`.
+- `notes/2026-08-02-c817-pair-concurrence-closure.py` — 13325 bytes,
+  SHA-256 `8e8039855fe7d4c079d7618f0cff3f7b99204a9425954b65d5bfc29b9a134c20`;
+- `notes/2026-08-02-c817-pair-concurrence-closure.json` — 1646 bytes,
+  SHA-256 `6275bb7905aee12b7927a428d8c12e77a469666f4a4b4093d0f6071fe17a7d2b`.
 
 The adjacent checksum manifest freezes the same hashes.
 
@@ -223,9 +246,9 @@ The first free upgrade is stronger than the requested coherent-closure
 theorem: the unique concurrence-8 color directly recovers \(A_0\), and
 polarity turns its neighborhoods into the incidence rows.  The deeper cheap
 synthesis is the parity operator \(P=c\bmod2\): its image is the entire code,
-its seventh power is the code projector, and \(P+P^7\) is the hidden
-\(\mathbf F_8\) generator.  Thus the pair layer intrinsically reconstructs
-\(M\), \(K\), and the field action by two complementary one-line operations.
+its cube is \(A_9\), and \(P+P^3\) is the code projector.  Thus the pair layer
+intrinsically reconstructs \(M\), \(K\), and the field action by two
+complementary one-line operations.
 
 ### `tt`
 
@@ -244,6 +267,10 @@ non-load-bearing for both scheme and row reconstruction.  They remain useful
 as independent descriptive checks, but the causal proof can be reduced to one
 intersection number and the polar-neighborhood identity.  This simultaneously
 lowers computational trust cost and strengthens the minimal-arity statement.
+The second-order algebraic gain is the seven-power table above: all three
+rank-36 orbital operators are powers of pair parity, and the reciprocal cubic
+pair isolates cubing as the exact bridge between the concurrence and adjacency
+primitive elements.
 
 `aa` was not triggered because the cheapest coherent-closure diagnostic passed
 and yielded the stronger direct row-recovery theorem.
@@ -254,12 +281,14 @@ and yielded the stronger direct row-recovery theorem.
   \(p_{10,10}^{1}=2\ne4=p_{10,10}^{3}\).
 - **Settled by `ej`:** concurrence-8 neighborhoods already are the passant
   rows, while pair parity has image \(K\) and recovers the hidden field via
-  \(P^7=e_K\) and \(P+P^7=A_9\).  Neither clique selection, triples, nor orbit
+  \(P^3=A_9\) and \(P+P^3=e_K\).  Neither clique selection, triples, nor orbit
   spanning are required for these reconstructions.
 - **Settled by `tt`:** “pair-only” means closure under pair-derived walk
   counts, not separation by the raw concurrence value alone.
 - **Settled by `ej2`:** reconstruction arity is exactly two, since every unary
-  degree is 56 and the weighted 2-section recovers the full target.
+  degree is 56 and the weighted 2-section recovers the full target.  Its parity
+  operator also generates \(A_9,A_{10},A_{12}\) by powers and has exact
+  primary polynomial \(t^{42}(t^3+t+1)^{12}\).
 - **Open evidence gap:** the pair-concurrence table still enters through the
   exact four-orbit minimum-layer computation.  A representation-theoretic
   derivation of all five values would be an optional strengthening, not a gap
