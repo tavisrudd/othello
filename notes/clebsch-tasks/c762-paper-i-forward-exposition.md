@@ -26,6 +26,20 @@ were checked from full text in the persistent literature cache (BBS SHA-256
 Hassett--Tschinkel SHA-256
 `89ca37f2a5908c3355fda20bda6e8e469d22ffcc5f93232de88a60a7f700f885`).
 
+An independent PDF-first cold read returned `GO` after the tracked PDFs were
+rebuilt and the companion bibliography identified Paper I as a released
+version-2 manuscript.  It found no remaining hierarchy, series, ownership,
+citation-interface, bibliography, or layout defect.
+
+The read-only Lean correspondence audit found no new declaration requirement.
+The three affected statement groups retain their exact SHA-256 identities;
+only their source lines moved (orientation `966→984`, window `83→85`, q13
+`385→390`).  After C753's active extraction is stable, regenerate
+`verification/statement_identity.json` and the dependent trust manifest, then
+update formal coverage only to the strength actually achieved by the existing
+frozen C753 packets.  No Lean source, build artifact, or running extraction was
+touched by C762.
+
 ## Objective
 
 Prepare the next forward version of Paper I without merging it with the
