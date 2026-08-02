@@ -217,7 +217,114 @@ The Dickson window remains as recorded: the pure power/Dickson mechanism require
 \(\mu_{(q+3)/2}\subset\mathbb F_{q^2}\), i.e. \((q+3)/2\mid8\), i.e.
 \(q\in\{5,13\}\), and \(q=13\) is excluded by the certified audit.
 
-## 5. Verification and replay
+### 2a. The known minimum-support eigenfunction is the neighbouring member
+
+The minimum support of an eigenfunction of \(P(q^2)\) for either non-principal
+eigenvalue is \(q+1\) (Goryainov–Kabanov–Shalaginov–Valyuzhenich, *Finite Fields Appl.*
+52 (2018) 361–369, Thm 2), and the known optimal one is supported on the norm-one
+circle \(C=\{z:z^{q+1}=1\}\), splitting as \(Q_0\sqcup Q_1\) with induced graph
+\(K_{(q+1)/2,(q+1)/2}\) (their Lemma 8).  Its interlacing is also tight:
+\(\lambda_{\min}(K_{m,m})=-m=-(q+1)/2\).
+
+So the object C756 needs to exclude is the immediate neighbour of a known object.  Put
+side by side, in the Paley graph of order \(q^2\):
+
+| support | induced graph | \(\lambda_{\min}\) | Frobenius | status |
+|---|---|---|---|---|
+| \(q+1\) | \(K_{m,m}\), \(m=(q+1)/2\) | \(-m=-(q+1)/2\) | even (\(Q_0,Q_1\) each stable) | exists; the known minimum |
+| \(q+3\) | \(K_{m',m'}\) minus a perfect matching, \(m'=(q+3)/2\) | \(-(m'-1)=-(q+1)/2\) | odd (matching = conjugation) | C756's saturated-internal gate |
+
+Both realize \(\lambda_{\min}\) exactly, so both are as spectrally tight as an induced
+subgraph can be.  The classification of the minimum-support eigenfunctions is itself
+an open problem in that literature (Sotnikova–Valyuzhenich survey, Problem 11), and no
+result exists for any support size between \(q+2\) and \(2q-1\).  A proof that the
+second row is empty for \(q>5\) is therefore new in the eigenfunction literature as
+well as decisive for C756.
+
+## 5. Consequence: the branch reduces to two classified clique orbits
+
+Theorem 1 makes \(Z\) a clique of size \((q+3)/2\) in a Paley graph of order \(q^2\), and
+Theorem 2 says it is not inside an \(\mathbb F_q\)-line.  The clique literature then
+takes over.  The relevant published statements are quoted verbatim in
+`2026-08-02-c756-paley-eigenfunction-support-literature.md`, §5a; in brief:
+
+- **Blokhuis (1984).**  The only cliques of size \(q\) in \(P(q^2)\) are the lines
+  \(a\mathbb F_q+b\) with \(\chi(a)=1\).
+- **Baker–Ebert–Hemmeter–Woldar (1996), Goryainov–Kabanov–Shalaginov–Valyuzhenich
+  (2018, Thm 1).**  With \(C=\{z:z^{q+1}=1\}\) the norm-one circle, \(Q_0\) its
+  index-two subgroup and \(Q_1\) the other coset: for \(q\equiv3\pmod4\),
+  \(S_j=Q_j\cup\{0\}\) are maximal cliques of size \((q+3)/2\); for
+  \(q\equiv1\pmod4\), \(Q_0,Q_1\) are maximal *cocliques* of size \((q+1)/2\).
+- **Gap and two-orbit conjecture (Baker et al.; restated in Bamberg–Goryainov–
+  Shalaginov–Yip).**  There is no maximal clique of size \(s\) with
+  \((q+\epsilon)/2<s<q\) where \(q\equiv\epsilon\pmod4\), and for \(q\ge25\) the
+  second-largest maximal cliques form exactly two orbits.  *"This conjecture has been
+  checked for \(r\le109\)."*  Extra second-largest maximal cliques occur only for
+  \(q\in\{9,11,13,17,19,23\}\) (Chen–Goryainov–Hu), all inside the certified
+  \(q\le43\) audit.
+
+> **Theorem 3.**  Assume the gap and two-orbit conjecture for the field \(q\).  Then a
+> coherent system with \(q>5\) exists only if \(q\equiv3\pmod4\) and
+> \(Z=a\,S_j+b\) for some \(j\in\{0,1\}\), \(\chi(a)=1\), \(b\in\mathbb F_{q^2}\).
+
+*Proof.*  \(Z\) is a clique of size \((q+3)/2\) in \(P(q^2)\) (for
+\(q\equiv1\pmod4\), after the isomorphism \(z\mapsto\nu z\), \(\chi(\nu)=-1\), from the
+complement; this map carries lines to lines, so Theorem 2 survives it).  Its size lies
+strictly between \((q+1)/2\) and \(q\).  If \(Z\) is not maximal it lies in a maximal
+clique of larger size, which by the gap conjecture must have size \(q\), hence is a
+line by Blokhuis, and Theorem 2 gives \(q=5\).  So \(Z\) is maximal, which for
+\(q\equiv1\pmod4\) contradicts the gap conjecture outright (there the second-largest
+maximal size is \((q+1)/2<(q+3)/2\)), and for \(q\equiv3\pmod4\) puts \(Z\) in one of
+the two orbits.  Finally \(Q_j\) is stable under \(z\mapsto z^{p^i}\), so the orbit of
+\(S_j\) under \(\operatorname{Aut}P(q^2)=\{z\mapsto az^{p^i}+b:\chi(a)=1\}\) is
+\(\{aS_j+b\}\). \(\square\)
+
+The residual family is tiny.  \(Q_j\) is conjugation-stable (conjugation is inversion
+on \(C\)), so \(Z^q=a^qS_j+b^q\) and every crown condition reads
+\[
+  \chi\bigl(as-a^qs'+c\bigr)=-\delta,\qquad s,s'\in S_j,\ s'\ne s^q,
+  \qquad c=b-b^q\in s\,\mathbb F_q .
+\]
+Thus \(b\) enters only through \(c\), and the entire family is parametrized by
+\((a,c,j)\): about \(q^3/2\) cases, exhaustively testable far beyond the current
+\(q\le43\) audit.  That check is reported in
+`2026-08-02-c756-clique-orbit-crown-check.md`.
+
+### 5a. Why the residual family should die for every \(q\): the Weil route
+
+Parametrize the circle by \(s(t)=(t-\theta)/(t-\theta^q)\), \(t\in\mathbb F_q\cup\{\infty\}\),
+for a fixed \(\theta\in\mathbb F_{q^2}\setminus\mathbb F_q\).  Then
+\(s(t)\in Q_0\iff\chi_q(h(t))=+1\) with \(h(t)=N(t-\theta)\) an irreducible quadratic,
+so \(Q_j\) corresponds to a character-selected set \(T_j\subset\mathbb F_q\) of size
+\(\approx q/2\).  Taking \(s'=0\) in the crown condition and writing
+\(\alpha=a+c\), \(\beta=a\theta+c\theta^q\), \(P(t)=N(\alpha t-\beta)\),
+\[
+  \chi\bigl(as(t)+c\bigr)=\chi_q\bigl(P(t)\bigr)\,\chi_q\bigl(h(t)\bigr),
+\]
+so the condition becomes \(\chi_q(P(t))=-\xi_j\) for every \(t\in T_j\), where
+\(\xi_j=\pm1\) selects \(T_j\).  Summing against the indicator
+\((1+\xi_j\chi_q(h))/2\) gives
+\[
+  \tfrac12\sum_t\chi_q(P)+\tfrac{\xi_j}{2}\sum_t\chi_q(Ph)=-\xi_j\bigl(|T_j|-O(1)\bigr).
+\]
+The right side has size \(\approx q/2\); the left side is \(O(\sqrt q)\) by Weil unless
+\(P\) or \(Ph\) is a constant times a square.  Both degeneracies are explicit:
+\(Ph\) is a square exactly when \(c=0\), which forces \(\chi(a)=-1\) and is excluded;
+\(P\) is a square exactly when \(\beta/\alpha\in\mathbb F_q\).  The surviving
+degenerate branch is a single explicit one-parameter family
+\(a=-c\,(\theta-\lambda)^{q-1}\), \(\lambda\in\mathbb F_q\), and closing it needs the
+genuinely two-variable condition: with both \(s,s'\ne0\) the crown condition becomes
+\(\chi_q\bigl(N(M)(t,t')\bigr)=-\delta\) on \(T_j\times T_j\) for an explicit bidegree
+\((2,2)\) form \(N(M)\), where the same indicator expansion produces four two-variable
+Weil sums of size \(O(q^{3/2})\) against a required \(\approx q^2/4\).
+
+This is the concrete finisher for the saturated-internal branch: an unconditional
+character-sum argument for \(q\) above an explicit bound, with the small fields covered
+by the certified audit.  It is not yet carried out — the degenerate-locus bookkeeping
+for the two-variable sums is the remaining work — and it still rests on the gap
+conjecture for the reduction of Theorem 3.
+
+## 6. Verification and replay
 
 `2026-08-02-c756-line-case-verification.py` checks every quantitative step of
 Theorem 2 over the prime fields \(q\le43\): the identity \(\chi(s)=\delta\); that
