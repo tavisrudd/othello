@@ -16,12 +16,14 @@ released Papers II--III and forthcoming Paper IV.  The computational companion
 marks its q13 theorem as the historical computational source and points forward
 to Paper IV's standalone proof and evidence surface.
 
-The title-page audit retains the precise Paper-I title, replaces the historical
-three-stage strapline by the neutral series label `Paper I`, and removes the
-metaphorical epigraph.  The main abstract now has exactly three levels: the
-inverse theorem, the golden identity and its triangle-holonomy mechanism, then
-the secondary field window.  The companion abstract no longer restates Paper
-IV's theorem package; one sentence preserves provenance and points forward.
+The title-page audit preserves C703's reader-facing series banner and Paper-I
+refrain while leaving the canonical Paper-I title visually dominant and
+bibliographically unchanged.  The main abstract now has exactly three levels:
+the inverse theorem, the golden identity and its triangle-holonomy mechanism,
+then the secondary field window.  The companion abstract no longer restates
+Paper IV's theorem package; one sentence preserves provenance and points
+forward.  Paper IV retains its own standalone title, restrained Roman numeral,
+and no repeated trilogy refrain, as frozen by C761.
 
 The BBS interface now cites the exact conic-complement statement,
 Proposition 1.6, rather than deriving it through Proposition 1.5.  The
@@ -40,8 +42,8 @@ citation-interface, bibliography, or layout defect.
 
 The read-only Lean correspondence audit found no new declaration requirement.
 The headline and three affected statement groups retain their exact SHA-256
-identities; only their source lines moved (headline `96→85`, orientation
-`966→975`, window `83→81`, q13 `385→386`).  After C753's active extraction is
+identities; only their source lines moved (headline `96→91`, orientation
+`966→981`, window `83→81`, q13 `385→386`).  After C753's active extraction is
 stable, regenerate
 `verification/statement_identity.json` and the dependent trust manifest, then
 update formal coverage only to the strength actually achieved by the existing
