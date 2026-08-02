@@ -489,7 +489,10 @@ author-side checkpoint has now printed those bridges and the exact C(1,b)
 locator, added the cheap cold-reader clarifications, passed the full
 authoritative gate, and survived visual review of proof pages 8--11.  The
 clean bibliography layout brings the paper to 16 pages.  C829 remains active
-until the user explicitly closes it.
+until the user explicitly closes it.  A subsequent theorem/section-flow,
+paragraph-job, notation, and full-PDF pass found no further defect and made no
+gratuitous edit; theorem, proposition, and corollary statement hashes are
+unchanged from the pre-repair manuscript.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 

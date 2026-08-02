@@ -79,3 +79,27 @@ green.  Visual inspection of the changed proof pages 8--11 is clean.  The
 paper is 16 pages, with references 15--26 occupying a well-filled final
 bibliography page rather than a stray-line spill.  C829 remains active for
 the rest of the cleanup and review.
+
+## Review checkpoint — 2026-08-02
+
+A subsequent whole-paper pass read the abstract, theorem statements, section
+openings, proof transitions, discussion, verification boundary, and every
+rendered page.  The causal order is coherent: port-gauge information,
+conference cross-Grams, continuous and Hermitian exchange, squared rigidity,
+calibrated readout, and the photonic design limit each have distinct jobs.
+No duplicate proof spine, notation collision, unsupported scope expansion, or
+page-layout defect was found.  The theorem, proposition, and corollary blocks
+have byte-identical SHA-256 hashes before and after the exposition edit:
+
+- theorem blocks:
+  23575c9343e8495b19967f3613138d00daf1ec1939332739f19ca806a4eea22f;
+- proposition blocks:
+  e4dd59dd9d459d22cb1096efb2ac6b6de3a70d6766574f79f29584fd3f2763a5;
+- corollary blocks:
+  f6b1905d11c1ef81e50d8f64a5418fc32c1c17d9692c99acabe162451a0d22f9.
+
+This pass deliberately made no additional manuscript edit: the remaining
+prose is already doing distinct mathematical or experimental-boundary work,
+and compression back to fifteen pages would trade clarity for an arbitrary
+page count.  C829 remains open for later cleanup and review by user
+instruction.
