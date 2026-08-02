@@ -50,6 +50,14 @@ TERMINALS = {
         "RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic",
         "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic",
     ],
+    "rigidity_spine": [
+        "RelativeConicArcs.OddSixArcPrismExtraction.sixArc_uncoveredOnLine_card_le_order_sub_five",
+        "RelativeConicArcs.ClebschDye.sixArc_uncovered_card_le_twelve_of_subset_planeQuadraticLocus",
+        "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic",
+    ],
+    "code_rigidity": [
+        "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode",
+    ],
     "defect_bridge": [
         "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
     ],
@@ -76,7 +84,34 @@ TERMINALS = {
         "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5",
         "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two",
     ],
+    "orientation_spine": [
+        "RelativeConicArcs.PaperIOrientationCover.antipodalQuotient_fiber_card_two",
+        "RelativeConicArcs.PaperIOrientationCover.fiveOrbitals_selfPaired",
+        "RelativeConicArcs.PaperIOrientationCover.fiveOrbital_one_mem_each_other_fiber",
+        "RelativeConicArcs.PaperIOrientationPentagon.signedOrbitalMatrix_sq",
+        "RelativeConicArcs.PaperIOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck",
+        "RelativeConicArcs.PaperIOrientationHolonomy.supportSign_eq_triangleProduct",
+        "RelativeConicArcs.PaperIOrientationHolonomy.fourPoint_twoGraph_identity",
+        "RelativeConicArcs.PaperIOrientationHolonomy.pairBalance_iff_sq_five",
+        "RelativeConicArcs.PaperIOrientationHolonomy.supportCubic_translation_invariant",
+        "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal",
+        "RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic",
+        "RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic",
+        "RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual",
+        "RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame",
+        "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes",
+        "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B",
+        "RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive",
+        "RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
+    ],
 }
+
+CLASSICAL_ODD_A5_SPLITTING = (
+    "The proposition-valued interface "
+    "RelativeConicArcs.PaperIOrientationCommutant."
+    "ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate "
+    "3+3' decomposition, Schur-lemma upper containment, and Galois descent."
+)
 
 CLASSICAL_DYE = [
     "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and "
@@ -285,25 +320,28 @@ def lean(
             terminal for group in groups for terminal in TERMINALS[group]
         )
     )
+    lean_evidence = {
+        "gate": file_evidence("lean", GATE_PATH),
+        "audit": file_evidence("lean", AUDIT_PATH),
+        "terminals": terminals,
+        "axioms": {terminal: axioms[terminal] for terminal in terminals},
+        "validation": {
+            "command": (
+                "nix develop --command env LEAN_NUM_THREADS=1 lake build "
+                "RelativeConicArcs.Gates.ClebschRigidityTrust"
+            ),
+            "toolchain": {
+                "lean": "4.32.0-rc1",
+                "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+            },
+        },
+    }
+    if "orientation_spine" in groups:
+        lean_evidence["conditional_interfaces"] = [CLASSICAL_ODD_A5_SPLITTING]
     return {
         "route": "kernel-checked-lean",
         "subclaim": subclaim,
-        "lean": {
-            "gate": file_evidence("lean", GATE_PATH),
-            "audit": file_evidence("lean", AUDIT_PATH),
-            "terminals": terminals,
-            "axioms": {terminal: axioms[terminal] for terminal in terminals},
-            "validation": {
-                "command": (
-                    "nix develop --command env LEAN_NUM_THREADS=1 lake build "
-                    "RelativeConicArcs.Gates.ClebschRigidityTrust"
-                ),
-                "toolchain": {
-                    "lean": "4.32.0-rc1",
-                    "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
-                },
-            },
-        },
+        "lean": lean_evidence,
     }
 
 
@@ -409,7 +447,7 @@ def components_by_row(
             "Lean proves the conic-containment implication through the explicit Dye axiom seam; the associated polarity and stabilizer identification remain cited classical consequences.",
             [
                 conceptual("classical equality, polarity, and stabilizer identification", CLASSICAL_DYE_RIGIDITY, "The line bound and chord-defect deduction are proved in the manuscript."),
-                lean("symmetry-free rigidity implication", ["rigidity"], axioms),
+                lean("symmetry-free rigidity implication", ["rigidity", "rigidity_spine"], axioms),
                 replay("finite witness and orbit census", ["check_rigidity_degenerate_conic.py"], frame_coverage, "The replay checks the explicit Clebsch witness and normalized class census.", direct_coordinates),
             ],
         ),
@@ -458,7 +496,7 @@ def components_by_row(
             "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences.",
             [
                 conceptual("degenerate-conic reduction and Dye equality boundary", CLASSICAL_DYE, "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, and proves the chord-defect identity independently."),
-                lean("nonsingular-conic rigidity implication", ["rigidity"], axioms),
+                lean("containing-quadratic rigidity implication", ["rigidity", "rigidity_spine"], axioms),
             ],
         ),
         18: (
@@ -477,7 +515,10 @@ def components_by_row(
         ),
         19: (
             "This is a conceptual corollary of the code--arc dictionary and the preceding replay-backed proposition.",
-            [conceptual("monomial characterization", CLASSICAL_CODE, "The manuscript reduces monomial code equivalence to projective equivalence and invokes row 18.")],
+            [
+                conceptual("monomial characterization", CLASSICAL_CODE, "The manuscript reduces monomial code equivalence to projective equivalence and invokes row 18."),
+                lean("projective, monomial-code, coset, and leader correspondence", ["code_rigidity"], axioms),
+            ],
         ),
         20: (
             "Orbit masses, concurrence counts, and chord defect certify the fifteen uncovered sizes. The absence of a nearer conic remains a trusted exhaustive execution over all 160,930 nonsingular conics; qualitative rigidity is routed separately in row 17.",
@@ -505,12 +546,12 @@ def components_by_row(
             ],
         ),
         23: (
-            "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the exact S5/A5 stabilizer boundary; the remaining orientation statements, including the integral commutant, retain their human, cited, and replay routes.",
+            "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the eight-step orientation spine; the two commutant equalities use the explicitly recorded classical 3+3' splitting interface.",
             [
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
                 replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
                 replay("support cubic, continuation operator, and diagonal determinant pencil", ["check_orientation_two_graph.py"], orientation_coverage, "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction.", direct_coordinates),
-                lean("support-cubic line and oriented stabilizers", ["orientation_symmetry"], axioms),
+                lean("antipodal cover through rational and integral commutants", ["orientation_symmetry", "orientation_spine"], axioms),
             ],
         ),
         24: (

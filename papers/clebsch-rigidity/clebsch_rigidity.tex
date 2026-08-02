@@ -1446,12 +1446,16 @@ It reads no later-paper artifact:
 \begin{center}
 \small\path{check_orientation_two_graph.py}.
 \end{center}
-The formal gate checks the displayed q11 code and decoder tables, the
-symmetry-free rigidity implication, the chord-defect specialization, the
-$q=9$ obstruction, the small-arc moments, and the exact $S_5/A_5$ stabilizer
-boundary, with Dye's bound and classification as two explicit axioms.  The
-integral commutant and companion searches lie outside this gate.  The reusable
-Lean development is distributed in
+The formal gate checks the displayed q11 code and decoder tables, the causal
+containing-quadratic rigidity spine, the projective-to-code correspondence,
+the chord-defect specialization, the $q=9$ obstruction, the small-arc moments,
+and the eight orientation mechanisms from the antipodal cover through the
+rational and integral commutants.  Dye's bound and classification remain two
+explicit axioms.  The commutant theorems instead take an explicit
+proposition-valued interface for the classical conjugate $3+3'$ decomposition,
+Schur's lemma, and Galois descent; Lean checks golden equivariance, the reverse
+containment, and the diagonal/off-diagonal integral test.  The companion
+searches lie outside this gate.  The reusable Lean development is distributed in
 \href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}}, while
 the generated q11 tables and aggregate Paper I gate are in
 \href{https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates}
@@ -1478,13 +1482,15 @@ The SHA-256 digest of \path{verification/checker_outputs.json} is
 The SHA-256 digest of
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is
 \begin{center}
-\small\path{c33307f2972eac4814c1109c8cab83c446fac779a080fc2769128fbd42c8c2aa}.
+\small\path{c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747}.
 \end{center}
 This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its
 recorded axiom audit lists the standard logical axioms and exactly the two
 Dye axioms above for the rigidity implication; the gate uses neither
-admitted declarations nor native execution.
+admitted declarations nor native execution.  Because the classical $3+3'$
+input is a theorem parameter rather than a global axiom, the trust manifest
+records that interface beside the two commutant terminals.
 
 \section{Conclusion}
 

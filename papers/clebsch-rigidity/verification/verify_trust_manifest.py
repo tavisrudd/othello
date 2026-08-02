@@ -32,13 +32,21 @@ ROUTES = {
 SHELLS = {"bash", "dash", "fish", "powershell", "pwsh", "sh", "zsh"}
 FORBIDDEN_SCOPE = {
     "factorization",
-    "holonomy",
     "mathieu",
     "passage",
     "reflection",
-    "singular",
     "torsor",
 }
+ODD_A5_COMMUTANT_TERMINALS = {
+    "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B",
+    "RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
+}
+CLASSICAL_ODD_A5_SPLITTING = (
+    "The proposition-valued interface "
+    "RelativeConicArcs.PaperIOrientationCommutant."
+    "ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate "
+    "3+3' decomposition, Schur-lemma upper containment, and Galois descent."
+)
 
 
 def fail(message: str) -> NoReturn:
@@ -156,6 +164,17 @@ def validate_lean(
             fail(f"{where} terminal absent from axiom audit: {terminal}")
         if axioms[terminal] != audit[terminal]:
             fail(f"{where} axiom mismatch for {terminal}")
+    conditional_interfaces = value.get("conditional_interfaces", [])
+    if not isinstance(conditional_interfaces, list) or any(
+        not isinstance(item, str) or not item
+        for item in conditional_interfaces
+    ):
+        fail(f"{where}.conditional_interfaces must be a list of nonempty strings")
+    if ODD_A5_COMMUTANT_TERMINALS & set(terminals):
+        if conditional_interfaces != [CLASSICAL_ODD_A5_SPLITTING]:
+            fail(f"{where} must disclose the classical odd-A5 splitting interface")
+    elif conditional_interfaces:
+        fail(f"{where} declares a conditional interface for unrelated terminals")
     validation = value.get("validation")
     if not isinstance(validation, dict):
         fail(f"{where}.validation must be an object")

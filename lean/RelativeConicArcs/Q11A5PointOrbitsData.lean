@@ -3,10 +3,12 @@ import RelativeConicArcs.Q11BrianchonPetersen
 /-!
 # Data for the finite A5 point-orbit bridge for the Clebsch hexagon
 
-This base module records the 60 normalized projective lifts independently constructed by
-`check_code_automorphisms.py`, the canonical 133 points of `PG(2,11)`, and the explicit orbit data.
-The bounded `Q11A5PointOrbitsMatrix*`, `Support*`, `Rows*`, and `Fixed*` leaves check the finite
-certificates.
+This base module records sixty normalized projective matrices over `F_11`,
+the canonical 133 representatives of `PG(2,11)`, and the explicit orbit
+data.  The bounded matrix, support, row, and fixed-point modules verify by
+kernel reduction that these matrices are invertible, preserve the displayed
+six-arc, act on every projective point as recorded, and have the stated fixed
+sets.
 
 This is a finite bridge, not the pencil-and-paper derivation that the projective stabilizer is the
 icosahedral `A5` representation.  Every finite assertion uses kernel-checked `norm_num` or ordinary
@@ -35,7 +37,10 @@ def pointVec (p : PointIndex) : Vec3 :=
   else if _ : p.1 < 132 then ![0, 1, ((p.1 - 121 : ℕ) : Scalar)]
   else ![0, 0, 1]
 
-/-- The 60 projective matrices, normalized exactly as in `check_code_automorphisms.py`. -/
+/-- Sixty row-major `3 × 3` matrices over `F_11`, each normalized by making
+its first nonzero entry equal to one.  The matrix checker proves that every
+entry represents an invertible projective transformation and that the sixty
+transformations are distinct. -/
 def matrixCode (g : GroupIndex) : MatrixCode :=
   ![
     ![1, 0, 0, 0, 1, 0, 0, 0, 1],
