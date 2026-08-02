@@ -10,7 +10,19 @@ Discovery companion:
 
 ## Current status
 
-**C774--C777 queued (2026-08-01): 2-uniform rigidity upgrade.**  An external
+**C775 closed (2026-08-02): the 2-uniform claims survive, with conceded
+prior art.**  Discreteness is not pre-empted, but Wirthmuller settles the
+binary stabilizer case and Tan computes the four-qutrit symmetry group, so
+the adopted theorem needs a concession paragraph and a firstness sentence
+scoped to arbitrary local dimension and non-stabilizer states.  The audit
+also supplies the contrast that makes 2-uniformity rather than
+1-uniformity the load-bearing hypothesis.  Stability is clear; Fisher
+isotropy becomes an explanatory remark with citations; the gauge corollary
+is retained.  Two framing corrections to the source material are mandatory,
+and the approximate-representation stability literature remains unsearched.
+See `2026-08-01-c775-two-uniform-rigidity-literature-audit.md`.
+
+**C774, C776, C777 open (2026-08-01): 2-uniform rigidity upgrade.**  An external
 Fable session produced a discreteness theorem requiring only 2-uniformity (no
 stabilizer hypothesis), an explicit stability constant independent of the party
 count, an exact quantum-Fisher isotropy proposition, and a finiteness statement
