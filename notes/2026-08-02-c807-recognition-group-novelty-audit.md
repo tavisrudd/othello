@@ -77,20 +77,28 @@ three-level GHZ states, associated differently.
 
 **The test.** Corollary G, applied to this pair, would force every local factor
 Clifford and contradict their result. So the recognition groups must be proper.
-Computing them from their generators, with a general element
-`(X₁X₂X₃)^a (X₁³X₂⁶)^b (Z₁Z₂Z₃)^c (Z₁³Z₂⁶)^d`, `a,c ∈ Z₉`, `b,d ∈ Z₃`, the
-party labels are `(a+3b, c+3d)`, `(a+6b, c+6d)`, `(a, c)`. Setting each party in
-turn to zero gives the minimal supports: `{1,2}` at `a = c = 0`, `{1,3}` at
-`a = −6b, c = −6d`, and `{2,3}` at `a = −3b, c = −3d`, each of order nine. Every
-one of them projects at party one into `{0,3,6} × {0,3,6}`. The three-party set
-is not a minimal support, so the full-support generators `X₁X₂X₃` and `Z₁Z₂Z₃`
-are not minimal elements and contribute nothing. Hence
 
-  Λ₁^max = π₁(M(ψ)) = 3Z₉ × 3Z₉,
+**Do not compute from the printed generators — they are a misprint.** The
+Fable red team (`notes/2026-08-02-c804-fable-red-team.md`) established that the
+generating set as printed does not form an abelian group over `Z₉`: the
+symplectic pairing of two of the listed elements is `3 ≢ 0 mod 9`, and
+`Z₁Z₂Z₃` is verifiably absent from the true stabilizer of the state. The
+computation first recorded here was derived from those generators and was
+therefore invalid, though its answer was right. The sound route is to compute
+from the state itself, given explicitly in their equation (4) as a product of
+two three-level GHZ states associated differently.
+
+Computed that way, the minimal supports are the three two-party sets, each
+carrying nine labels, and each projects at *every* party into
+`3Z₉ × 3Z₉`. The three-party set is not a minimal support, so the full-support
+elements are not minimal elements and contribute nothing. Hence at every party
+
+  Λ_i^max = π_i(M(ψ)) = 3Z₉ × 3Z₉,
 
 of order nine inside a label group of order eighty-one — **proper, of index
 nine.** The criterion's prediction holds on the first published state able to
-test it above local dimension two.
+test it above local dimension two. Every conclusion recorded here survives the
+correction; only the derivation changed.
 
 **And the value is explanatory, not just confirmatory.** The recognition group
 is exactly the three-torsion subgroup, which is precisely the sub-dimension
