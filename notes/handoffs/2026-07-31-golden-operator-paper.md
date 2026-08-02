@@ -478,7 +478,12 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-None.  The third cold-reader repairs are complete at
+C788 is queued as a pure-theory, AI-speed investigation of the general
+order-`2d` balanced-cut exchange spectrum.  Its first gate is an hours-scale
+symbolic/exact falsifier; proceed to a full theorem only if the dependence on
+the principal block admits a clean cut-independence classification.
+
+The third cold-reader repairs are complete at
 `golden-quantum-statistics-editorial-referee-revised`: the balanced-spectrum
 proof is structural and Lean-backed, the extracted package's complete
 `make check` is green, and the resumed reader gives B+ / accept after minor
@@ -487,14 +492,14 @@ reference remain user-owned.
 
 ## Recommended order
 
-1. Preserve `golden-quantum-statistics-editorial-referee-revised`.  The bounded
+1. Run C788's fast structural/falsifier gate.  This is the only queued A-level
+   upgrade and is pure theory; no laboratory or hardware-data route is active.
+2. Preserve `golden-quantum-statistics-editorial-referee-revised`.  The bounded
    A-minus editorial route is to foreground the observable hierarchy and
    balanced-spectrum theorem, move the anomaly corollary out of the body, and
    compress the classical setup and full ledgers.  Do not apply that scope edit
    without a user decision.  The user will post the accepted package, assign
    live identifiers, and add the Clebsch forward reference.
-2. The A-level research routes are a general order-`2d` cut-independence theorem
-   or a hardware-grounded end-to-end validation; neither is allocated.
 3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
