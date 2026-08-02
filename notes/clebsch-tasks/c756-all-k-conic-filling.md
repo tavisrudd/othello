@@ -80,11 +80,12 @@ Branch ledger:
 
 - **saturated-external — closed:** the Clebsch hexagon over \(\mathbb F_{11}\) is the
   only covering example;
-- **saturated-internal — sharply reduced but open:** canonical tangent polynomials and
-  Segre's lemma force a coherent Paley double-clique-plus-matching at tight spectral
-  interlacing; the four-frame over \(\mathbb F_5\) is the known example, the exact audit
-  through \(q\le43\) finds no other coherent candidate, and the remaining uniform gate
-  is to prove that no coherent system exists for \(q>5\);
+- **saturated-internal — reduced to one clique statement, still open:** coherent systems
+  are exactly induced crown graphs in the Paley graph of order \(q^2\); the four-frame
+  over \(\mathbb F_5\) is the only example, unconditionally, for every \(q\le43\)
+  and every \(q\equiv3\pmod4\) up to \(151\); line-contained systems force
+  \(q=5\) for all \(q\); and the remaining uniform gate is the crown-restricted case
+  of the Baker–Ebert–Hemmeter–Woldar gap conjecture;
 - **nonsaturated — open for \(\delta\ge2\):** \(\delta=0,1\) are closed, while the
   direct Segre, global-moment, raw-subresultant, and dual-pencil low-degree norm repairs
   fail; the three exceptional missing-set kernels are smooth symmetry-specific curves
