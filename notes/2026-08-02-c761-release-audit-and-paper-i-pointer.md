@@ -42,8 +42,8 @@ all 78 rows, and automorphism group `PGL(2,13)`.  The tracked source and PDF at
 the audit point have SHA-256 hashes
 
 ```text
-passant_code_q13.tex  7b4388db794d4ad565002eb1644dab8716fa9e330a109862cbd5be95868d8d77
-passant_code_q13.pdf  f3bc83f93a4ffc702e7d55d029328dd5c35104516eb5ecb35903c75862482b9f
+passant_code_q13.tex  ad046524458049c0041fa2d8dfed7247f232783fbf3b0276fae00e4f97aef5ac
+passant_code_q13.pdf  5fd1227940ded1391be075dabafc3bacbb9e335ba4a29d064f223c98d8fbe550
 ```
 
 The guarded exact-target Lean queue checked
@@ -73,6 +73,30 @@ in the accompanying artifact.  The conclusion now ends with the mathematical
 division of labor among concurrence, the binary association algebra, and the
 four anchors.  A fresh forced check rebuilt the seven-page PDF with no TeX
 warnings.
+
+## Independent cold-read closure
+
+A context-free subagent read only the style guide and final manuscript.  It
+returned GO WITH MINOR REVISIONS at 88/100: the theorem, language changes, and
+reason for distance twelve were clear, while four finite/trust interfaces were
+too compressed.
+
+The revision defines the order-fourteen projective map and the three cyclic
+orbits, then states the exact four-subset census behind the five-row clique
+closure.  It gives the XOR split, key, acceptance criterion, and domain sizes
+for both weight-ten exclusions.  The four weight-twelve domains now state
+their individual meet-in-the-middle splits and output counts 0,0,0,56.
+The six pair/triple concurrence signatures and the complete
+1716-to-78 seven-clique census are printed in the manuscript.
+
+A five-row proof-mode table now separates the cited theorem, human reductions,
+classical tangent input, finite certificates, native Lean evaluation,
+kernel-checked transports, and the two human globalizations.  The source
+archive's persistent repository-relative README paths, public replay command,
+and expected success marker are explicit.  Native evaluation is identified as
+compiled trusted execution exposed by declaration-local axioms.  The immutable
+external artifact locator remains the release-packaging gate recorded below.
+A fresh forced check rebuilt the eight-page PDF with no TeX warnings.
 
 ## Paper-I pointer
 
@@ -108,6 +132,9 @@ authority.
 - **Settled:** the prose had described three secant-count families but the
   formal package correctly used four multiplicity domains.  The manuscript now
   displays all four domains and explains their common fixed-point exhaustion.
+- **Settled:** the context-free cold read found four compressed finite/trust
+  interfaces.  Exact cyclic coordinates, finite algorithms, concurrence
+  signatures, the clique census, and the proof-mode table now close them.
 - **Open, owned by C761 release packaging:** the final public repository shape
   and immutable locator do not yet exist.  The evidence gap is exactly a fresh
   isolated replay from pinned public dependencies.
