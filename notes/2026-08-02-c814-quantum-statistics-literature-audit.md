@@ -112,3 +112,12 @@ this is a bounded search observation, not proof of absence.
 
 Consequently both C814 theorem packages remain **research candidates for later
 paper-inclusion review**, not publication-cleared novelty claims.
+
+## Post-closeout scope note
+
+The later `tt`+`ej`/`aa` pass in the main C814 report derives a general
+three-subset holonomy formula and the exact order-six Hermitian-conference/
+real-control Pareto edge.  No additional source search was performed for those
+strengthenings.  They inherit every coverage gap above and must be treated as a
+third research candidate requiring its own claim-level promotion audit, not as
+an extension of this audit's bounded negative.

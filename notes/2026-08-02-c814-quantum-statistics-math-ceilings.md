@@ -354,7 +354,8 @@ two-eigenvalue frames.
 | Full-cube simultaneous Schur-sector maxima for fixed real Golden \(C\) | **Keep as candidate.** Human proof plus dual replay; novelty audit still incomplete. |
 | Complex holonomy exchange formulas and order-six uniformity classification | **Keep as candidate.** Sharp and replayable; publication-stage literature audit required. |
 | Robust unlabelled inverse and higher cut-moment separation | **Defer.** Await C810/C812 frozen outputs; do not duplicate their searches. |
-| Generic two-eigenvalue/ETF or combined complex-control classification | **Reject from C814 scope.** No justified theorem yet. |
+| Generic two-eigenvalue/ETF classification | **Reject from C814 scope.** No justified theorem yet. |
+| Combined Hermitian-conference/real-control Pareto boundary | **Superseded by post-closeout request.** Section 7 settles the scalar upper frontier; the full interior image remains deferred. |
 
 The bounded literature record is
 `notes/2026-08-02-c814-quantum-statistics-literature-audit.md`.  It locates the
@@ -376,8 +377,10 @@ claim.
   class.
 - **Deferred:** the complete interior semialgebraic exchange region; it is not
   needed for the sharp operational ceiling.
-- **Deferred:** the joint landscape of complex conference deformation and
-  continuous/complex controls, and any higher-order two-eigenvalue analogue.
+- **Superseded by post-closeout Section 7:** the scalar joint Pareto boundary
+  for complex conference deformation and real controls is now settled.  The
+  full interior image, complex controls, and higher-order analogues remain
+  deferred.
 - **Open audit:** both kept results require later paper-inclusion review and a
   stronger literature audit before any novelty wording.
 
@@ -390,4 +393,162 @@ claim.
 - **`tt`:** the clean research object is a two-axis phase diagram—filter
   geometry for fixed \(C\), gauge holonomy for varying \(C\).  C814 has solved
   each coordinate axis sharply at order six; the mixed plane is the honest
-  remaining mathematical ceiling.
+  remaining mathematical ceiling.  **This historical closeout was reopened by
+  the post-closeout request and is superseded by Theorem D below.**
+
+## 6. Post-closeout `tt` + `ej`: theorem strengthening
+
+The requested second pass removes two artificial restrictions from the
+statements above.
+
+### `tt`: natural generality and hidden hypotheses
+
+1. The holonomy formulas are not intrinsically order-six formulas.  If \(C\)
+   is a Hermitian conference matrix of order \(q+1\), \(T\) is any triple,
+   \(A=C[T]\), and \(H_T=C[T,T^c]C[T,T^c]^*/q=I-A^2/q\), then, with
+   \(r_T=\operatorname{Re}(C_{ij}C_{jk}C_{ki})\),
+   \[
+   \begin{aligned}
+   p_1(H_T)&=3-\frac6q,\\
+   p_2(H_T)&=3-\frac{12}{q}+\frac{18}{q^2},\\
+   e_2(H_T)&=3-\frac{12}{q}+\frac9{q^2},\\
+   e_3(H_T)&=\frac{(q-3)^2}{q^2}-\frac{4r_T^2}{q^3}.
+   \end{aligned}
+   \]
+   This follows directly from
+   \(\det(zI-A)=z^3-3z-2r_T\).  Order six is special only because a
+   triple is then a balanced half and because the rigidity classification in
+   Theorem C closes there.
+2. Hermiticity is load-bearing: it supplies orthogonal \(\pm\sqrt q\)
+   eigenspaces and turns the cross block into a positive Gram operator.
+   Unit-modulus off-diagonal entries are load-bearing for the universal first
+   two moments.  The real-sign hypothesis is *not* load-bearing for the
+   continuous-control bounds through \(e_2\).
+3. The cube normalization is cosmetic.  On a scalar interval \([a,b]\), the
+   transfer is invariant under adding the midpoint and scales by
+   \((b-a)/2\); a homogeneous degree-\(k\) statistic of \(H\) therefore scales
+   by \(((b-a)/2)^{2k}\).
+
+### `ej`: free consequences
+
+- For every order-six Hermitian conference matrix, not merely the real Golden
+  representative, and every real \(x\in[-1,1]^6\),
+  \[
+  p_1\le\frac95,\qquad p_2\le\frac{33}{25},\qquad
+  e_2\le\frac{24}{25}.
+  \]
+  The \(p_1\) formula uses only \(|C_{ij}|=1\).  The fourth Schatten power
+  \(p_2\) is convex in the linear commutator, hence is maximized at a cube
+  vertex.  Every two-by-two minor of
+  \(K=Q_-^*\operatorname{diag}(x)Q_+\) is affine in each coordinate separately,
+  because changing one coordinate adds a rank-one matrix; summing their
+  squared moduli makes \(e_2\) separately convex.  At Boolean support sizes
+  \(0,1,2,3\), the nonzero spectra give respectively the universal endpoint
+  profiles, with the displayed maxima only at size three.
+- The same rank-one argument makes
+  \(e_3=|\det K|^2\) separately convex.  Its Boolean boundary and Theorem B
+  therefore give the phase-uniform sharp bound
+  \[
+  e_3\le\frac4{25},
+  \]
+  and balanced Boolean controls whose cut triangle has \(r_T=0\) attain it.
+- Consequently
+  \[
+  h_3\le\frac{317}{125},\qquad
+  s_{(2,1)}\le\frac85.
+  \]
+  The first follows from \(h_3=e_3+p_1p_2\); the second is the phase-blind
+  spectral lemma from Theorem A.  Equality for \(h_3\) occurs at balanced
+  Boolean controls with \(r_T=0\), while equality for the mixed sector occurs
+  at balanced Boolean controls with \(|r_T|=1\).  Thus the two maxima are
+  incompatible, rather than two faces of one common maximizer.
+
+These strengthenings have not received a fresh publication-grade novelty
+audit.  They inherit the qualified C814 literature boundary and remain
+research candidates only.
+
+## 7. `aa`: mixed-plane attacks and resolution
+
+The mixed plane is
+
+\[
+ \mathcal M=\{(h_3,s_{(2,1)},e_3): C=C^*,\ C^2=5I,\ |C_{ij}|=1,
+ \ x\in[-1,1]^6\}.
+\]
+
+Three genuinely different attacks are available.
+
+1. **Coordinate convexity / rank-one minors.**  Push each control coordinate
+   to an endpoint for \(p_1,p_2,e_2,e_3\), then use scalar identities to bound
+   the Schur traces.  This has the shortest trust boundary and does not require
+   parametrizing complex conference matrices.
+2. **Spectral moment body / SOS.**  Eliminate the controls into inequalities
+   for three eigenvalues in \([0,1]\), with conference identities added as
+   moment constraints.  This is suited to the full semialgebraic image, but it
+   forgets the rank-one coordinate mechanism and introduces a much larger
+   elimination problem.
+3. **Gauge-holonomy stratification.**  Classify the Boolean boundary by the
+   triangle Bargmann invariant and then use Et-Taoui's \(C_6(b)\) family to
+   realize the holonomy interval.  This identifies equality geometry and
+   attainability, but alone does not exclude a non-Boolean interior Pareto
+   point.
+
+The first and third attacks combine to solve the upper Pareto boundary without
+an SOS calculation.
+
+### Theorem D — exact mixed-plane Pareto edge
+
+Every point of \(\mathcal M\) satisfies
+
+\[
+\begin{aligned}
+ e_3&\le\frac{20}{125},&
+ h_3&\le\frac{317}{125},&
+ s_{(2,1)}&\le\frac{200}{125},\\
+ s_{(2,1)}+e_3&\le\frac{216}{125},&
+ h_3+s_{(2,1)}&\le\frac{513}{125}.&&
+\end{aligned}
+\]
+
+Its complete componentwise-maximal frontier is the line segment
+
+\[
+ (h_3,s_{(2,1)},e_3)
+ =\frac1{125}(317-4t,\ 196+4t,\ 20-4t),
+ \qquad 0\le t\le1.
+\]
+
+It is realized by balanced Boolean controls in Et-Taoui's continuous
+order-six family, with \(t=r_T^2\).  The endpoint \(t=0\) maximizes the
+symmetric and filled-fermion sectors; \(t=1\) maximizes the mixed sector.
+
+**Proof.**  The first row of inequalities is the preceding `ej` package.  The
+identities
+\[
+ s_{(2,1)}+e_3=p_1e_2,
+ \qquad
+ h_3+s_{(2,1)}=p_1(p_2+e_2)
+\]
+and the sharp phase-uniform bounds on \(p_1,p_2,e_2\) give the second row.
+For any point satisfying these inequalities, the interval
+\[
+ \frac{125s_{(2,1)}-196}{4}
+ \le t\le
+ \min\!\left\{\frac{20-125e_3}{4},
+                  \frac{317-125h_3}{4}\right\}
+\]
+meets \([0,1]\).  The corresponding displayed frontier point dominates it
+componentwise.  Conversely, every displayed point is attained: in the
+dephased \(C_6(b)\) family a fixed triangle has
+\(r_T=\operatorname{Re}b\), so unit complex \(b\) realizes every
+\(t=r_T^2\in[0,1]\).  Theorem B supplies the three coordinates.  Each such
+point saturates both pairwise inequalities, so no distinct point can dominate
+it; hence the segment is exactly the Pareto frontier.
+
+### Decision after `aa`
+
+The scalar mixed-plane Pareto ceiling is therefore **settled**, not merely an
+open attack direction.  What remains is the complete nonmaximal semialgebraic
+image, complex-valued diagonal controls, and higher-order/larger-conference
+analogues.  Those are distinct future questions and are not needed for the
+paper-review candidates recorded here.

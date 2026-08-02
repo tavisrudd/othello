@@ -15,6 +15,11 @@ independent `notes/2026-08-02-c814-complex-conference-rigidity-replay.py`.
 **Literature boundary:**
 `notes/2026-08-02-c814-quantum-statistics-literature-audit.md`.
 
+**Post-closeout strengthening:** a user-requested `tt`+`ej` theorem pass and
+`aa` mixed-plane pass are recorded in Sections 6--7 of the result.  They settle
+the scalar Hermitian-conference/real-control Pareto edge while leaving the full
+interior image and promotion audit open.
+
 ## Objective
 
 Determine the strongest remaining mathematical extensions of the Golden
