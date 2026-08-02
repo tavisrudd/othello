@@ -67,6 +67,9 @@ What the saturated-external attack adds:
   first-subconstituent Paley matrix \(B\), with the forced square
   \(K^2=-B^2-(q-1)I+2J\); if \(B\) has simple spectrum, every signed monomial solution is
   scalar and the existing Hasse argument closes it;
+- the Gaussian-unit matrix \(W=(B+iK)/(1+i)\) is a regular simplex with
+  \(WW^*=((q-1)/2)I-J\); its principal Pfaffian norm excludes every
+  \(q\equiv3\pmod8\) for which \((q-1)/2\) is not a sum of two squares;
 - polarity turns covering into the assertion that the complete node set of \((q+1)/2\) secants,
   consisting entirely of internal points, blocks every non-tangent line.
 

@@ -219,14 +219,85 @@ inside every Frobenius Jacobi block, a sign-valued skew square root with
 multiplicative translation.  The coset Weil argument in the Segre report
 then excludes every nonidentity Frobenius power.
 
-## 5. EJ + TT closeout
+## 5. Gaussian simplex and Pfaffian obstruction
 
-The cheap extra value is that one no longer needs the complete automorphism
+The forced square has an arithmetic consequence that does not require simple
+spectrum.  Put \(m=(q-1)/2\) and
+
+\[
+ W=\frac{B+iK}{1+i}.
+\]
+
+Every off-diagonal entry of \(W\) is one of \(\{\pm1,\pm i\}\), its diagonal
+is zero, and \(W^T=-W\).  Since \(B\) and \(K\) commute, (3) gives
+
+\[
+ WW^*=mI-J. \tag{8}
+\]
+
+Thus the rows of \(W\) are a quaternary regular simplex: they have sum zero,
+and their Gram matrix has diagonal \(m-1\) and off-diagonal \(-1\).
+
+Delete one row and the corresponding column.  The nonzero singular values of
+\(W\) are all \(\sqrt m\), with multiplicity \(m-1\), and the normalized left
+and right null vectors are both \(m^{-1/2}\mathbf1\).  The adjugate formula
+therefore gives
+
+\[
+ \left|\det W_{\widehat a,\widehat a}\right|
+   =m^{(m-3)/2}. \tag{9}
+\]
+
+The principal minor has even size and is skew, so
+
+\[
+ \det W_{\widehat a,\widehat a}
+   =\operatorname{Pf}(W_{\widehat a,\widehat a})^2.
+\]
+
+Its Pfaffian is a Gaussian integer.  Taking complex absolute values in the
+last two displays proves:
+
+**Proposition (Gaussian norm obstruction).**  Every signed monomial Paley
+solution satisfies
+
+\[
+ m^{(m-3)/2}=N_{\mathbb Z[i]/\mathbb Z}(\alpha)
+\]
+
+for a Gaussian integer \(\alpha\).  In particular, if \(q\equiv3\pmod8\),
+then \(m\equiv1\pmod4\) and \((m-3)/2\) is odd, so \(m\) itself must be a sum
+of two squares.  Equivalently, every prime \(\ell\equiv3\pmod4\) must occur
+to even valuation in \((q-1)/2\).
+
+This uniformly excludes every \(q\equiv3\pmod8\) for which
+\((q-1)/2\) violates the sum-of-two-squares criterion.  For example, the
+signed anticommutator has no solution at \(q=43\) for the structural reason
+\((q-1)/2=21\), without enumerating matchings or resolving the Jacobi
+spectrum.  The obstruction is silent when \(q\equiv7\pmod8\), because then
+\((m-3)/2\) is even.
+
+There is also a combinatorial shadow.  Color an edge \(\{s,t\}\) according
+to whether \(K_{s,t}=B_{s,t}\) or \(K_{s,t}=-B_{s,t}\).  The entries of \(W\)
+are respectively real or purely imaginary.  Since both \(B\) and \(K\) have
+zero row sum, at every vertex each color class has equally many incoming and
+outgoing \(B\)-edges.  Hence the agreement graph and its complement are both
+Eulerian.  This supplies a parity-sensitive alternative to the spectral-block
+attack.
+
+## 6. EJ + TT closeout
+
+The first cheap extra value is that one no longer needs the complete automorphism
 group of the first Paley subconstituent.  It is enough to control the much
 smaller intersection of its commutant with the fixed skew-square-root locus
 (3).  In prime fields, simple spectrum collapses that intersection
 immediately to circulants; in extension fields, only the forced Frobenius
 blocks survive as possible hiding places.
+
+The second is the Gaussian norm obstruction above.  It removes an infinite
+arithmetic subfamily before any Jacobi-spectrum analysis and turns every
+remaining solution into a quaternary simplex with an Eulerian real/imaginary
+edge decomposition.
 
 The Tao-style next question is not “which permutations preserve the local
 tournament?” but “can a nonsemilinear permutation produce a sign-valued
@@ -236,13 +307,16 @@ problem.
 
 No manuscript files were edited.  No unrestricted novelty claim is made.
 
-## 6. Mystery ledger
+## 7. Mystery ledger
 
 | feature | status | exact gap / next gate |
 |---|---|---|
 | The matching signs are forced by the involution | settled | the two vector equations give \(M_{x,\tau(x)}=\chi(x)\) |
 | Every solution produces a commuting regular tournament square root \(K\) | settled | equations (1)--(3) |
 | Simple spectrum forces the scalar branch | settled | polynomial commutant plus circulant-permutation rigidity |
+| Every solution yields a quaternary regular simplex | settled | \(W=(B+iK)/(1+i)\) and \(WW^*=mI-J\) |
+| Fields with \(q\equiv3\pmod8\) and nonsum-of-two-squares \(m\) | settled negatively | Gaussian principal-Pfaffian norm |
+| Both phase-color graphs are Eulerian | settled | separate the zero row sums of \(B\) and \(K\) |
 | The local Paley spectrum appears simple in prime fields | open uniformly | prove distinctness of the Jacobi values \(\beta_\rho\), likely by Stickelberger valuation recovery |
 | Frobenius is the only forced source of spectral multiplicity in extension fields | expected, not proved | classify sign-valued square roots inside each Jacobi block |
 | Whether a nonsemilinear signed matching solution exists | open | exact owner: the next C756 pass |
