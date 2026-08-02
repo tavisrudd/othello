@@ -9,7 +9,7 @@ That combination fits PRA better than a `Quantum` submission centered on a
 standalone general theorem.
 
 The immutable local artifact label is
-`golden-quantum-statistics-c772-r1`.  It identifies the Git commit containing
+`golden-quantum-statistics-c772-final`.  It identifies the Git commit containing
 this record, the manuscript, the locked verification environment, and the
 paper-local certificate.  It is a stable repository artifact locator, not a
 public preprint URL.
@@ -34,8 +34,8 @@ warning.  The source and PDF hashes at closure are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 38,467 | `73ec419a8fcaa1648f92056f9bc1a7fd476496dfd926e3a76ad132905249a140` |
-| `golden_quantum_statistics.pdf` | 116,063 | `dc572fa6f7193c89934392cd5fa54a89c3fd027ac4d9f79219fe6bf07bd92967` |
+| `golden_quantum_statistics.tex` | 38,581 | `8ee5873b69cb817dab2c8d051e512bddb08257a0c866efde596ad21e5644e832` |
+| `golden_quantum_statistics.pdf` | 116,416 | `6337d5526aa5ab7bd5b2c10f9d83880885ea626cb97c27ce28a56e6761021919` |
 
 Rebuild and verify from this directory with:
 
