@@ -22,7 +22,7 @@
 \newcommand{\Sym}{\operatorname{Sym}}
 \newcommand{\per}{\operatorname{per}}
 
-\title{Orientation and exchange statistics in the Golden six-mode conference interferometer}
+\title{Orientation, exchange statistics, and rigidity in the Golden six-mode conference interferometer}
 \author{Tavis Rudd}
 \date{August 2026}
 
@@ -30,33 +30,32 @@
 \maketitle
 
 \begin{abstract}
-Which features of a one-particle transfer remain observable when its input and
-output port frames are unframed, oriented, or fully phase-calibrated?  We prove that
-singular values classify an unframed real transfer, that calibrated permanent
-amplitudes depend on the chosen frames, and that the determinant is the unique
-minimal-degree polynomial retaining their relative orientation.  We realize
-this hierarchy exactly in a six-mode conference interferometer.  For a
-diagonal path control \(D_x\), its postselected block
+Which features of a one-particle transfer remain observable when its port
+spaces are unframed, oriented, or fully phase-calibrated?  Singular values
+classify an unframed real transfer; calibrated permanent amplitudes depend on
+the chosen frames; and, up to scale, the determinant is the unique
+least-degree polynomial transforming with their relative orientation.  For
+every symmetric conference matrix, we identify the balanced exchange spectrum
+with a normalized cross-Gram spectrum and prove that it is cut-independent
+exactly through half-size three.  Thus order six is the unique nontrivial realized
+uniform case, with spectrum \(\{1/5,4/5,4/5\}\).  At every higher realized
+order the spectrum varies, while a classical aligned \(3\)-design fixes the
+exact mean and variance of its purity.
 
-\[
- K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}
-\]
-
-has top-exterior amplitude \(\det K_T(x)\); its filled-fermion probability is
-sign-blind.  Six modes are the unique nontrivial realized symmetric conference
-order whose balanced controls all have one exchange spectrum, namely
-\(\{1/5,4/5,4/5\}\); the other 44 Boolean controls have zero fermionic
-amplitude.  At every realized higher symmetric-conference order the spectrum
-varies, but a classical aligned \(3\)-design fixes the exact mean and variance
-of its purity.  The six-mode symmetric- and exterior-cube values are \(313/125\) and
-\(16/125\).  In the Clebsch
-realization the six determinants are signed Joubert coordinates on the Segre
-cubic.  Their calibrated signs form a distance-six simplex code.  A six-mode
-compilation and quantitative gates separate three experiments: coherent
-tomography can infer determinant signs, ordinary photons probe bosonic
-controls, and direct three-fermion emulation additionally requires a totally
-antisymmetric three-photon qutrit resource.  This is a theory and design-limit
-analysis, not a report of a built device.
+We realize this exceptional endpoint in the Golden six-mode interferometer.
+For a diagonal path control \(D_x\), the postselected block
+\(K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}\) has oriented top-exterior amplitude
+\(\det K_T(x)\), but its filled-fermion probability is sign-blind.  The
+balanced symmetric-cube trace and filled-fermion probability are \(313/125\)
+and \(16/125\), respectively; all 44 unbalanced Boolean controls have zero
+fermionic amplitude.  In the Clebsch realization, the six determinant
+amplitudes are calibrated Joubert coordinates; across the ten projective
+balanced cuts, the six protocol sign words form an equidistant binary code
+with pairwise Hamming distance six.  A compiled architecture and quantitative
+gates separate common-reference tomography, ordinary-photon controls, and
+direct three-fermion emulation, whose totally antisymmetric three-photon
+qutrit source remains an external dependency.  This is a theory and
+design-limit analysis, not a report of a built device.
 \end{abstract}
 
 \section{Introduction}
@@ -313,6 +312,8 @@ degree is forced to be the top exterior amplitude.
 Apply diagonal sign changes on the left.  Every monomial of a degree-\(n\)
 relative invariant must have odd degree in each of the \(n\) rows, hence
 degree one in every row.  Right sign changes give degree one in every column.
+The same parity argument shows that every nonzero relative invariant has
+degree at least \(n\).
 The polynomial is therefore a linear combination of the \(n!\) permutation
 monomials.  Invariance under orientation-preserving rotations in each pair of
 rows, followed by a reflection in one row, forces the coefficients of

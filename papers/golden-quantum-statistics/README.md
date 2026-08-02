@@ -1,4 +1,4 @@
-# Orientation and exchange statistics in the Golden six-mode conference interferometer
+# Orientation, exchange statistics, and rigidity in the Golden six-mode conference interferometer
 
 This directory is the authoritative manuscript root for the unnumbered Golden
 quantum-statistics companion. It is a theory and design-limit paper, not a
