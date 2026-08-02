@@ -52,10 +52,11 @@ O1 source work has begun at
 constructs the alternating group on the five-letter affine line, embeds the
 order-ten dihedral action by translations and affine reflections, defines the
 order-five rotation subgroup, and derives the `A5/C5 → A5/D5` two-point
-fibres from coset factorization.  The two inverse-stable five-valent double
-cosets and one-point-per-other-fibre theorem remain to be added before O1 is a
-complete packet.  As with R3/R4, this source is not evidence until the shared
-build window validates it.
+fibres from coset factorization.  The staged source now also constructs the two
+twenty-five-element inverse-stable `C5` double cosets, their self-paired
+five-valent orbitals, and the regular-action proof that each orbital meets every
+other antipodal fibre exactly once.  O1 is source-complete but, as with R3/R4,
+is not evidence until the shared build window validates it.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
