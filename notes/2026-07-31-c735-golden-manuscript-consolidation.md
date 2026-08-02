@@ -99,6 +99,51 @@ Every completed post-charter result has exactly one disposition below.
 C718 and C719 remain deferred.  Consolidation found no theorem-level gap that
 requires either task.
 
+## Paper-III-excluded novelty ledger
+
+This table is the binding novelty marker for Golden results not carried into
+Paper III.  It inherits the verdicts and coverage limits of the full C755
+audit, `notes/2026-08-01-c755-golden-operator-literature-audit.md`.  Older
+reports establish the mathematics and proof ownership; words such as
+`paper-owned` in those reports do not override the novelty status here.
+
+Legend: `PE` = pre-empted; `PPE` = partially pre-empted; `NPL` = no
+predecessor located under C755's recorded coverage; `NA` = not audited.
+Every `NPL` row permits only “to our knowledge” or “we have not located,”
+never “first” or an unqualified novelty claim.  MathSciNet and Google Scholar
+were not covered, and the source-specific access gaps remain binding.
+
+| excluded result family | owner report or ledger | marker and future-use rule |
+|---|---|---|
+| C755 `C1`: primitive-kernel cofactor lemma | C704/C705 human-proof reports | `PPE`: the corank-one adjugate fact is textbook material; retain only as a convenience lemma and make no novelty claim |
+| C755 `C2`: regular-simplex conference frame, outer augmentation module, and lift uniqueness | C704 and C739 reports | `PPE`: HMSV own the signed outer representation and matching dictionary; only the conference origin, regular-simplex form, and marked integral/Pfaffian lift remain `NPL`-qualified |
+| C755 `C4`: golden \(3\times3\) determinant, exterior grades, small resolutions, and MCM pair | C704/C705 reports | `PPE`: determinantal resolutions and rank-one MCM geometry are classical; only the specific golden block, scalar, grade package, and conjugation exchange remain `NPL`-qualified |
+| C755 `C5b`: Jacobian adjugate identity and kernel normalization | C705 report | `NPL`: no predecessor located, subject to C755's database and access gaps |
+| C755 `C6a--c`: GIT stability, matching base scheme, critical ideals, and the \(3+3\) nilpotent defect | C728, C739, and C743 reports | mixed: stability is `PE`; reducedness is imported from McDaniel--Watanabe (`PPE`, body not verified by C755); the critical-ideal formula and square-zero defect are `NPL` |
+| C755 `C7`: synchronized six-fold pure-spinor construction | C728 report | `PPE`: factorwise Cartan/Pfaffian geometry is classical; synchronization, outer equivariance, exact image, and marked base data are `NPL`-qualified |
+| C755 `C8b--c`: balanced-cut characterization of \(C^2=5I\) and cut Gram identity | C729 simplex/conference report | mixed: the balanced-cut equivalence is `NPL`, while the Gram identity is `PPE`; no “first” before the recorded MathSciNet and source gaps close |
+| C755 `C9`: order-ten ETF/conference shadow and uniqueness | C729 reports | `PE`: conference-matrix/real-ETF correspondence and the unique order-ten conference two-graph are classical; only the readout from the six Golden sisters is a task-specific presentation |
+| C755 `C10`: \(S_6/F_{20}\cong X\times\mathcal T\) and the canonical \(36\to6\) return | C729 and C739 reports | `PPE`: subgroup ingredients are classical; the packaged equivariant product and Golden return are `NPL`-qualified assemblies |
+| C755 `C12--C13`: recovery--propagation, minimal marking, and unmarked non-descent | C727 and C739 reports | `NPL`: coverage is thin for the Clebsch/deep-hole-code side; use “to our knowledge” only |
+| C755 `C14a--b`: resolved Segre--Igusa Gauss map and explicit fibres | C727 placement and C739 report | mixed: birationality, ten-node base, and contraction geometry are `PE`; the explicit fibre conic and six-line closure are `NPL` with Hunt Ch. 3 not accessed, hence a weak negative |
+| C755 `C15a--c`: rational anomaly inverse, Vandermonde/product identities, and exact cost optimization | C715 report | mixed: rational inversion is `PE`; product formulas are `PPE`; Slater normalization, chamber census, and exact optimization clauses are `NPL` |
+| C755 `C16a--c`: two-\(U(1)\) Fano components, moving-path realization, and mixed identities | C716 report | mixed: component classification, \(S_6\)-action, syntheme planes, and generic six-line count are `PE`; moving-path marking and controls are `PPE`; mixed determinant--Pfaffian identities are `NPL` |
+| C755 `C17`: collision filtration and unstable-chart identities | C739 and C743 reports | `NPL`: Luna's theorem is classical and cited, but C755 did not access Luna's source; no priority claim until that citation and the negative coverage are closed |
+| post-C755: six-node golden determinant wall | C757/C758 reports | later settled attribution: the six-node theorem already appears in Paper I by a different route; claim only an independent matching/Jacobian proof and its formalization |
+| C755 `C18`: Majorana chambers, Clifford/doily, Coble--Burkhardt, \(E_6/E_8\), lattice, McKay, Sylvester/Bose--Mesner, Kasteleyn, and higher-conference branches | C704--C710, C717, C729, and C739 reports | `NA` in C755: these were outside its manuscript scope.  Individual classical ingredients may already be conceded, but no combined novelty claim may be published without a dedicated audit |
+| post-C755: boson/fermion complement and six-mode quantum-statistics branch | C718/C719 reports | governed by the later C768 full-text audit: background scattering, ETF/SIC, anomaly, and experimental-source claims carry its exact attribution and qualified-absence wording; never import a broader priority claim from the older reports |
+| post-C755: order-eight Paley--Hafnian/disjoint-\(SQS(8)\)/self-polar bridge | C739 report, `ej5`--`ej7` | targeted later audit: strong `NPL` candidate only for the combined bridge; every ingredient is classical, and “first” remains barred pending MathSciNet, Google Scholar, forward citations, and subject-expert review |
+
+Coverage check (2026-08-01): the ledger contains all fifteen C755 verdict
+groups excluded wholly or partly from Paper III.  C755 rows `C3a`, `C3b`,
+`C5a`, `C8a`, and `C11` are absent by design because their bounded
+triangle/Pfaffian, Segre--Igusa, five-cycle, and two-graph content remains in
+Paper III with the C755 attribution repairs.  The excluded portions of the
+split `C2` and `C4` rows are recorded above.
+
+Future manuscript placement must consult this table and then the cited audit
+before copying a theorem headline or novelty sentence from an owner report.
+
 ## Revised contents and length budget
 
 The target is 46 pages of main argument and 60 pages total.
@@ -149,15 +194,15 @@ scheme-saturation, slice, or exact Golden normalization inputs.
 
 | claim cluster | attribution boundary | exact evidence/replay |
 |---|---|---|
-| exterior/Joubert/Segre and commutator normalization | Joubert quotient classical; common marked operator realization paper-owned | C704 report/bundle and independent replay listed in `papers/golden-operator/verification/README.md` |
-| golden determinant, resolutions, MCM pair | standard determinantal geometry imported; cross-golden realization and descent paper-owned | C704/C705 exact scalar and rank witnesses |
-| assembled polar adjugate | Segre--Igusa duality classical; two-kernel operator factorization paper-owned | C705 generator, compact certificate, independent replay |
-| synchronized spinors | Cartan/Wick identities classical factorwise; golden synchronization and exact image paper-owned | `python3 notes/2026-07-31-c728-synchronized-pure-spinor-geometry.py --check`; independent replay command in verification README |
-| balanced frustration and `6 -> 10` | maximum determinant elementary; equivalence, simplex, descent, and reverse factorization paper-owned | human proof; C729 cut-moment generator/replay checks frozen tables |
-| recovery from support split | Paper I supplies unordered support split; Paper IV proves two-graph descent and propagation | C727 human proof; C720 symbolic sextic/dimer equivalence |
-| anomaly inverse and physical cost | six-point quotient and rational anomaly parametrization classical/prior; Golden marking and Slater normalization paper-owned | C715 checker and independent replay |
-| two-Abelian lines | 21-component Fano classification imported; one-moving-path realization and exact marking paper-owned | C716 checker and independent replay |
-| marked rigidity, pole descent, collision filtration, and `36 -> 6` return | matching carrier classical; Golden synchronization, diagonal-congruence obstruction, quotient slice, and subgroup return are paper-owned syntheses | C739 representation/degeneracy/cycle bundles and C743 chart/node bundles; Lean checks the three chart identities, while saturation remains human |
+| exterior/Joubert/Segre and commutator normalization | Joubert quotient classical (`PE`); the marked conference/Pfaffian realization is `NPL`-qualified, not an unqualified novelty claim | C704 report/bundle and independent replay listed in `papers/golden-operator/verification/README.md` |
+| golden determinant, resolutions, MCM pair | standard determinantal geometry imported (`PPE`); the specific golden block, scalar, grades, and conjugation exchange are `NPL`-qualified | C704/C705 exact scalar and rank witnesses |
+| assembled polar adjugate | Segre--Igusa duality classical (`PE`); the normalized two-kernel identity is `NPL` under C755's coverage | C705 generator, compact certificate, independent replay |
+| synchronized spinors | Cartan/Wick identities classical factorwise (`PPE`); synchronization and exact image are `NPL`-qualified | `python3 notes/2026-07-31-c728-synchronized-pure-spinor-geometry.py --check`; independent replay command in verification README |
+| balanced frustration and `6 -> 10` | balanced-cut equivalence is `NPL`; the order-ten conference/ETF object is `PE`; Golden readout and return are `PPE`/`NPL` assemblies | human proof; C729 cut-moment generator/replay checks frozen tables |
+| recovery from support split | Paper I supplies the split; propagation and non-descent are `NPL` with thin coding-literature coverage | C727 human proof; C720 symbolic sextic/dimer equivalence |
+| anomaly inverse and physical cost | rational inversion is `PE`, product formulas `PPE`, and exact Golden cost clauses `NPL` | C715 checker and independent replay |
+| two-Abelian lines | the Fano realization is largely `PE`; moving-path marking is `PPE`; mixed operator identities are `NPL` | C716 checker and independent replay |
+| marked rigidity, pole descent, collision filtration, and `36 -> 6` return | matching and subgroup ingredients are classical; the assembled Golden statements are `PPE` or `NPL` exactly as split in the excluded-results ledger | C739 representation/degeneracy/cycle bundles and C743 chart/node bundles; Lean checks the three chart identities, while saturation remains human |
 
 The synchronized verification surface is
 `papers/golden-operator/verification/README.md`.  It now names C727--C729,

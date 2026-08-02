@@ -408,6 +408,15 @@ Bose--Mesner, class-D and Kasteleyn seeds are **not audited** — they are seque
 from this manuscript, and they must be audited before any sequel.  Full report:
 `notes/2026-08-01-c755-golden-operator-literature-audit.md`.
 
+**Binding future-use marker.**  The claim-by-claim novelty status of every
+Golden result excluded from Paper III is indexed in
+`notes/2026-07-31-c735-golden-manuscript-consolidation.md`, section
+“Paper-III-excluded novelty ledger.”  That ledger points back to each owner
+report and distinguishes `PE`, `PPE`, qualified `NPL`, later-audited, and
+`NA` branches.  It overrides older shorthand such as “paper-owned” for
+novelty purposes.  No future manuscript may copy a priority sentence from an
+owner report without consulting that ledger and the governing audit.
+
 ## Active and queued tasks
 
 | task | state | next gate |
