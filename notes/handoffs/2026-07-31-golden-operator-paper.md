@@ -340,6 +340,15 @@ portfolio.  In particular:
   definitions and the short balanced-spectrum derivation.  Reports:
   `notes/2026-08-01-c771-golden-quantum-statistics-cold-referee-r1.md` and
   `notes/2026-08-01-c771-golden-quantum-statistics-author-triage-r1.md`.
+- C772 is complete.  The paper now credits and locally instantiates the live
+  Clebsch source theorem, distinguishes determinant amplitude from probability
+  and tomographic sign inference throughout, derives the quantitative design
+  limits, prints the decoder schedules, adds the APS data statement, and closes
+  all C771 comments.  Both package gates pass on a warning-free twelve-page
+  PDF.  Use only `golden-quantum-statistics-c772-final` (`dfaae2bb`) as the
+  final local artifact; the user owns live posting and the Clebsch forward
+  reference.  Report:
+  `notes/2026-08-01-c772-golden-quantum-statistics-referee-revision.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
   C735's operator-first architecture.  The genuinely source-free signed
@@ -454,16 +463,13 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-- C772 is in progress: implement the accepted C771 PRA referee revisions and
-  make the package technically ready.  The user owns live posting and the
-  Clebsch forward reference; add no separate gate.
+None.  The C772 PRA package is technically ready; live posting and the Clebsch
+forward reference are user-owned.
 
 ## Recommended order
 
-1. Allocate the bounded C771 revision implementation: operational-claim repair,
-   live Clebsch citations plus local theorem interface, quantitative
-   derivations, APS data statement, and focus compression.  The user owns live
-   posting and the Clebsch forward reference; add no separate gate.
+1. Preserve `golden-quantum-statistics-c772-final`.  The user will post it,
+   assign the live identifiers, and add the Clebsch forward reference.
 2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 

@@ -2,7 +2,9 @@
 
 **Lane:** `golden`
 
-**State:** in progress
+**State:** complete 2026-08-01; referee matrix closed, warning-free final
+artifact `golden-quantum-statistics-c772-final`; live posting and Clebsch
+forward reference are user-owned
 
 ## Objective
 
@@ -20,4 +22,3 @@ forward reference.
 - add an APS Data Availability Statement without creating a posting gate;
 - compress secondary material, resolve accepted minor comments, pass the full
   warning-free package gate, and run a referee-response check.
-
