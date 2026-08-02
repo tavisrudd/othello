@@ -3,8 +3,8 @@
 **Lane:** `clebsch`
 
 **Status:** active; C752 is complete and its implementation interface is
-frozen.  The finite prose-source repairs, R1--R4, and O1--O6 are complete;
-continue with O7--O8, which must remain packet-gated.
+frozen.  The finite prose-source repairs, R1--R4, and O1--O7 are complete;
+continue with O8, which must remain packet-gated.
 
 ## Current implementation state
 
@@ -25,7 +25,7 @@ cleanly.  The serialized replacement run at
 it built `Q11A5PointOrbitsData.lean` in 42 seconds at a measured 3,456,068 KiB
 peak, built `Q11A5PointOrbits.lean` in 19 minutes 39 seconds at a measured
 5,675,148 KiB peak, and passed the trace-only aggregate gate.  The reviewed q11
-prose bundle was committed at `12031d32`.  R2 is the next formal packet.
+prose bundle was committed at `12031d32`.
 
 R2 and R3 are complete at `04e734de`.  The final R2 conic-type interface carries
 an actual nonzero `QuadraticForm`, its exact projective zero locus, and the
@@ -85,6 +85,21 @@ criterion.  This removes the draft's native conference-square dependency.  The
 clean owning build and trace-only aggregate gate passed at
 `~/.cache/othello-lean-build/run-20260802-190643-7d9c0ba5`, with no warnings;
 all O6 terminals print exactly `propext`, `Classical.choice`, and `Quot.sound`.
+
+O7 is complete in
+`RelativeConicArcs/PaperIOrientationSymmetryCore.lean`,
+`RelativeConicArcs/PaperIOrientationSymmetryGenerators.lean`, and
+`RelativeConicArcs/PaperIOrientationSymmetry.lean`.  The support two-graph's
+five distinguished perfect matchings give a faithful order-120 normalizer
+action on five letters.  Explicit frame elements inducing a three-cycle and a
+five-cycle generate `A₅` by element orders, Lagrange's theorem, and simplicity;
+one odd element reverses every support sign.  Six distinct cubic-line cosets
+bound the full line stabilizer by order 120, so it equals the matching
+normalizer.  This replaces the rejected permutation-enumeration leaves with a
+structural generation-and-index proof.  The clean serialized replay at
+`~/.cache/othello-lean-build/run-20260802-205925-01ef7068` built all three
+modules and passed the trace-only aggregate gate.  The O7 terminals print
+exactly `propext`, `Classical.choice`, and `Quot.sound`.
 
 The R2/R3 implementation must follow the manuscript's actual order.  A
 degenerate containing quadratic first gives the upper bound `|U(A)| ≤ 12`
