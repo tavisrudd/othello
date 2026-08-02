@@ -2357,8 +2357,17 @@
       "last": 822,
       "purpose": "compress C812 to a human two-parameter conference-class proof",
       "sequence": 262
+    },
+    {
+      "count": 2,
+      "first": 823,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 824,
+      "purpose": "formalize and integrate C810-C812-C822 aligned-certificate upgrades",
+      "sequence": 263
     }
   ],
-  "next_id": 823,
+  "next_id": 825,
   "schema": "codex-task-id-allocations-v1"
 }
