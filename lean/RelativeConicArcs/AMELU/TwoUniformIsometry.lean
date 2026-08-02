@@ -104,6 +104,26 @@ private theorem sum_div_const {ι : Type*} (s : Finset ι) (f : ι → ℂ) (c :
   simp only [div_eq_mul_inv, ← Finset.sum_mul]
 
 omit [DecidableEq Level] in
+/-- The inner product is additive in its second argument. -/
+theorem stateInner_add_right (φ ψ χ : Label Site Level → ℂ) :
+    stateInner φ (ψ + χ) = stateInner φ ψ + stateInner φ χ := by
+  unfold stateInner
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [Pi.add_apply]
+  ring
+
+omit [DecidableEq Level] in
+/-- The inner product is complex linear in its second argument. -/
+theorem stateInner_smul_right (c : ℂ) (φ ψ : Label Site Level → ℂ) :
+    stateInner φ (c • ψ) = c * stateInner φ ψ := by
+  unfold stateInner
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [Pi.smul_apply, smul_eq_mul]
+  ring
+
+omit [DecidableEq Level] in
 /-- Moving a system operator across the inner product replaces it by its
 conjugate transpose. -/
 theorem stateInner_mulVec_left (A : SystemOperator Site Level)
@@ -251,22 +271,19 @@ theorem stateInner_self_localGeneratorSum_mulVec {ψ : Label Site Level → ℂ}
   exact Finset.sum_congr rfl fun j _ => trace_mul_self_of_isHermitian (hherm j)
 
 /-- The isometry is injective: a family of traceless Hermitian local generators
-annihilating a 2-uniform state is identically zero. -/
-theorem eq_zero_of_localGeneratorSum_mulVec_eq_zero [Nonempty Level]
+whose generated vector has vanishing norm is identically zero. -/
+theorem eq_zero_of_stateInner_self_eq_zero [Nonempty Level]
     {ψ : Label Site Level → ℂ}
     (hψ : IsTwoUniform ψ) {h : Site → LocalOperator Level}
     (hherm : ∀ j, (h j).IsHermitian) (htr : ∀ j, (h j).trace = 0)
-    (hzero : localGeneratorSum h *ᵥ ψ = 0) :
+    (hzero : stateInner (localGeneratorSum h *ᵥ ψ) (localGeneratorSum h *ᵥ ψ) = 0) :
     ∀ j, h j = 0 := by
   have hq : (Fintype.card Level : ℂ) ≠ 0 := by
     exact_mod_cast Nat.cast_ne_zero.mpr Fintype.card_ne_zero
   have hnorm := stateInner_self_localGeneratorSum_mulVec hψ hherm htr
   rw [hzero] at hnorm
-  have hzero' : (∑ j, ∑ a, ∑ b, (Complex.normSq ((h j) a b) : ℂ)) = 0 := by
-    have hz : stateInner (0 : Label Site Level → ℂ) 0 = 0 := by
-      unfold stateInner; simp
-    rw [hz] at hnorm
-    exact (div_eq_zero_iff.mp hnorm.symm).resolve_right hq
+  have hzero' : (∑ j, ∑ a, ∑ b, (Complex.normSq ((h j) a b) : ℂ)) = 0 :=
+    (div_eq_zero_iff.mp hnorm.symm).resolve_right hq
   have hreal : (∑ j, ∑ a, ∑ b, Complex.normSq ((h j) a b)) = 0 := by
     have hcast : ((∑ j, ∑ a, ∑ b, Complex.normSq ((h j) a b) : ℝ) : ℂ) = 0 := by
       simp only [Complex.ofReal_sum]
@@ -287,5 +304,18 @@ theorem eq_zero_of_localGeneratorSum_mulVec_eq_zero [Nonempty Level]
     fun b' _ => Complex.normSq_nonneg ((h j) a b')).mp ha b (Finset.mem_univ b)
   rw [Matrix.zero_apply]
   exact Complex.normSq_eq_zero.mp hb
+
+/-- A family of traceless Hermitian local generators annihilating a 2-uniform
+state is identically zero. -/
+theorem eq_zero_of_localGeneratorSum_mulVec_eq_zero [Nonempty Level]
+    {ψ : Label Site Level → ℂ}
+    (hψ : IsTwoUniform ψ) {h : Site → LocalOperator Level}
+    (hherm : ∀ j, (h j).IsHermitian) (htr : ∀ j, (h j).trace = 0)
+    (hzero : localGeneratorSum h *ᵥ ψ = 0) :
+    ∀ j, h j = 0 := by
+  refine eq_zero_of_stateInner_self_eq_zero hψ hherm htr ?_
+  rw [hzero]
+  unfold stateInner
+  simp
 
 end RelativeConicArcs.AMELU.Multipartite
