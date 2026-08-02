@@ -521,12 +521,14 @@ claim is licensed.  Report and audit:
 `notes/2026-08-02-c788-balanced-cut-spectrum-literature-audit.md`.
 
 C794 is queued after C793.  Its `ej3` crown is stronger than the initial
-conference question: prove that every two-graph on at least seven vertices is
-determined up to complement by its four-sets containing zero or four coherent
-triples, then deduce determinant-design reconstruction for conference
-two-graphs.  Exhaustion through seven vertices finds the sharp threshold:
+conference question: every two-graph on at least seven vertices is determined
+up to complement by its four-sets containing zero or four coherent triples,
+so conference determinant-design reconstruction is only a corollary.
+Exhaustion through seven vertices proves the sharp finite base:
 all 32,768 normalized seven-vertex two-graphs form 16,384 complementary-pair
-fibres, whereas larger fibres occur below seven.  The conference tests recover
+fibres, whereas larger fibres occur below seven.  Restriction to seven-sets
+and overlap consistency give the unrestricted computer-assisted theorem; C794
+owns a human proof of the base lemma.  The conference tests recover
 the coherent/incoherent components at Paley orders 14 and 18; at order ten the
 overlap graph degenerates into 30 isolated Steiner blocks but the full parity
 system still has only the complementary pair.  The task also owns the first
@@ -548,8 +550,8 @@ reference remain user-owned.
    the Clebsch forward reference.
 3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
-4. After C793, run C794's reverse determinant-design reconstruction before
-   claiming any further design novelty.
+4. After C793, run C794's humanization and novelty audit of aligned-design
+   faithfulness before claiming it in a paper.
 
 ## Ownership and allowed paths
 

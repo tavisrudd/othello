@@ -407,11 +407,11 @@ audit also exposed a terminology collision: two-graph literature reserves
   spectra within higher Paley cut orbits.  The C729 cross-ratio signatures are
   the natural input, but this would be a new arithmetic successor rather than
   a gap in the rigidity theorem.
-- **Open, newly isolated as C794:** prove the `ej3` conjecture that the aligned
-  four-set family determines every two-graph of order at least seven up to
-  complement, then determine which higher cut-count moments distinguish
-  conference switching classes.  The present theorem fixes the first two
-  moments exactly but does not classify the full histogram beyond order ten.
+- **Open, newly isolated as C794:** replace the exact seven-vertex base of the
+  `ej3` computer-assisted faithfulness theorem by a human proof and audit its
+  novelty, then determine which higher cut-count moments distinguish conference
+  switching classes.  The present theorem fixes the first two moments exactly
+  but does not classify the full histogram beyond order ten.
 - **Partially settled publication gate:** the focused audit found no exact
   predecessor for the singular-spectral classification and identified spectral
   monomorphy as the correct neighboring framework.  MathSciNet, Google Scholar,
