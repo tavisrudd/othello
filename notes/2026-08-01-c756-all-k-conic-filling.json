@@ -1,0 +1,174 @@
+{
+ "claim": "for each listed q, every k-arc of PG(2,q) whose uncovered locus is a nonsingular conic is listed in conic_filling",
+ "conic": "y^2 - x z",
+ "rows": [
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 4,
+   "kmin_line": 2,
+   "kmin_lp": 4,
+   "m_q": 3,
+   "n_conic_filling": 0,
+   "q": 3
+  },
+  {
+   "conic_filling": [
+    "{\"k\": 4, \"points\": [[2, 0, 1], [1, 2, 1], [2, 3, 1], [4, 4, 1]]}",
+    "{\"k\": 4, \"points\": [[2, 0, 1], [4, 1, 1], [2, 2, 1], [1, 3, 1]]}"
+   ],
+   "excluded_by_counting": false,
+   "kmin": 4,
+   "kmin_line": 3,
+   "kmin_lp": 4,
+   "m_q": 4,
+   "n_conic_filling": 2,
+   "q": 5
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 5,
+   "kmin_line": 4,
+   "kmin_lp": 5,
+   "m_q": 4,
+   "n_conic_filling": 0,
+   "q": 7
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 6,
+   "kmin_line": 5,
+   "kmin_lp": 6,
+   "m_q": 4,
+   "n_conic_filling": 0,
+   "q": 9
+  },
+  {
+   "conic_filling": [
+    "{\"k\": 6, \"points\": [[2, 0, 1], [1, 4, 1], [0, 5, 1], [2, 6, 1], [4, 8, 1], [7, 1, 0]]}",
+    "{\"k\": 6, \"points\": [[2, 0, 1], [4, 3, 1], [2, 5, 1], [0, 6, 1], [1, 7, 1], [4, 1, 0]]}"
+   ],
+   "excluded_by_counting": false,
+   "kmin": 6,
+   "kmin_line": 6,
+   "kmin_lp": 6,
+   "m_q": 6,
+   "n_conic_filling": 2,
+   "q": 11
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 7,
+   "kmin_line": 7,
+   "kmin_lp": 7,
+   "m_q": 6,
+   "n_conic_filling": 0,
+   "q": 13
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 8,
+   "kmin_line": 8,
+   "kmin_lp": 8,
+   "m_q": 6,
+   "n_conic_filling": 0,
+   "q": 17
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 8,
+   "kmin_line": 8,
+   "kmin_lp": 8,
+   "m_q": 6,
+   "n_conic_filling": 0,
+   "q": 19
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 9,
+   "kmin_line": 9,
+   "kmin_lp": 9,
+   "m_q": 8,
+   "n_conic_filling": 0,
+   "q": 23
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 9,
+   "kmin_line": 9,
+   "kmin_lp": 9,
+   "m_q": 8,
+   "n_conic_filling": 0,
+   "q": 25
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": false,
+   "kmin": 9,
+   "kmin_line": 9,
+   "kmin_lp": 9,
+   "m_q": 9,
+   "n_conic_filling": 0,
+   "q": 27
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": false,
+   "kmin": 10,
+   "kmin_line": 10,
+   "kmin_lp": 10,
+   "m_q": 10,
+   "n_conic_filling": 0,
+   "q": 29
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": false,
+   "kmin": 10,
+   "kmin_line": 10,
+   "kmin_lp": 10,
+   "m_q": 10,
+   "n_conic_filling": 0,
+   "q": 31
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": true,
+   "kmin": 11,
+   "kmin_line": 11,
+   "kmin_lp": 10,
+   "m_q": 10,
+   "n_conic_filling": 0,
+   "q": 37
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": false,
+   "kmin": 11,
+   "kmin_line": 11,
+   "kmin_lp": 11,
+   "m_q": 11,
+   "n_conic_filling": 0,
+   "q": 41
+  },
+  {
+   "conic_filling": [],
+   "excluded_by_counting": false,
+   "kmin": 11,
+   "kmin_line": 11,
+   "kmin_lp": 11,
+   "m_q": 11,
+   "n_conic_filling": 0,
+   "q": 43
+  }
+ ],
+ "schema": 1,
+ "task": "C756"
+}
