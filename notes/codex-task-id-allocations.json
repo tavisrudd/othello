@@ -2231,8 +2231,17 @@
       "last": 800,
       "purpose": "Paper III operator-shadow Lean and formal-release closure",
       "sequence": 248
+    },
+    {
+      "count": 1,
+      "first": 801,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 801,
+      "purpose": "Lean fixed-line ambiguity and Chow-rigidity theorem update",
+      "sequence": 249
     }
   ],
-  "next_id": 801,
+  "next_id": 802,
   "schema": "codex-task-id-allocations-v1"
 }
