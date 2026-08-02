@@ -2060,8 +2060,17 @@
       "last": 771,
       "purpose": "cold referee submission round 1 for Golden quantum-statistics PRA package",
       "sequence": 229
+    },
+    {
+      "count": 1,
+      "first": 772,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 772,
+      "purpose": "implement C771 PRA referee revisions and ready Golden quantum-statistics package",
+      "sequence": 230
     }
   ],
-  "next_id": 772,
+  "next_id": 773,
   "schema": "codex-task-id-allocations-v1"
 }
