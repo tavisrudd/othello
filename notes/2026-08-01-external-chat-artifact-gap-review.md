@@ -59,8 +59,12 @@ across `notes/`, `papers/`, `lean/` returns nothing in this sense.
   everything, every diagonal symmetry is Clifford of level at most 2. Kills continuous, odd-torsion,
   and high 2-power symmetries at once.
 - **Theorem 3.** Exact order-8 existence criterion; triply-even codes carry transversal T.
-- **Theorem 4.** Explicit non-rigid family RM(r,4r): uniformity ~2n^{1/4} with an exact
-  non-Clifford transversal-T symmetry, verified at n = 16.
+- **Theorem 4.** Explicit non-rigid family with an exact non-Clifford transversal-T symmetry,
+  verified at n = 16. **The family as stated in the zip is wrong.** It gives RM(r,4r) and uniformity
+  growing like 2n^{1/4}; the correct threshold is m at least 3r+1, so the family is RM(r,3r+1),
+  uniformity grows like 2^{2/3}n^{1/3}, and the first staircase point past 16 is length 128 rather
+  than 256. Corrected later in the same external programme and verified locally; see
+  `2026-08-01-c778-strip-certificates/PROVENANCE.md`.
 - **Corollary.** For MDS input at rate at least 1/3 the Schur cube saturates, so the diagonal
   sector of AME rigidity follows from Schur-power growth — a mechanism explanation for the theorem
   we already have by Weyl-axis argument. Qudit case stated conditionally.
@@ -77,9 +81,12 @@ Also absent locally in full.
 
 - **Theorem 1.5.** Exact-rational Delsarte certificates prove no triply-even binary code with dual
   distance at least 5 exists for lengths 9--69 and 75--80, so the transversal-T rigidity boundary is
-  flat at uniformity 3 there. Open window is exactly lengths 70--74. Certified with exact simplex
-  and, independently for n at most 56, Fourier--Motzkin; a floating-point LP failed its sanity
-  battery and was discarded.
+  flat at uniformity 3 there. Certified with exact simplex and, independently for n at most 56,
+  Fourier--Motzkin; a floating-point LP failed its sanity battery and was discarded. The simplex
+  script was recovered and this boundary reproduced locally on 2026-08-01. With the corrected
+  staircase family the open strip is lengths 70--74 **and** 81--124; the zip's single-window
+  statement assumed the wrong family. The LP loses its killing power by length 88, so 81--124 cannot
+  be closed by this method.
 - **Propositions 1.1--1.4.** Triply-even implies self-orthogonal; a basis criterion (singles mod 8,
   pairs mod 4, triples mod 2); a finite-geometry reformulation as a cap/Sidon problem with a
   Walsh-mod-16 constraint; a repaired Sidon dimension bound.
