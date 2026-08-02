@@ -46,6 +46,22 @@ projective frame, a named \(\mathbf F_{13}\)-coordinate, and a displayed
 quadratic equation.  The conic and its polarity are canonical; their equation
 is not canonical before coordinates are chosen.
 
+### Arity-two ambient reconstruction corollary
+
+Subitem 2 makes the input smaller.  Its weighted pair-concurrence matrix
+recovers the full elliptic scheme, the incidence matrix \(M\), and hence its
+automorphism group \(G\), using pair data alone.  Applying the construction
+above to that recovered group proves:
+
+> The weighted 2-section of the minimum-support hypergraph intrinsically
+> reconstructs \(\operatorname{PG}(2,13)\), its distinguished conic and
+> polarity, all three line types, and the binary passant-incidence code.
+
+Consequently ambient-plane reconstruction has exact arity two as well: arity
+one cannot distinguish a transitive \(78\)-set, while the weighted pair layer
+already suffices.  The full minimum-support hypergraph and triple concurrence
+carry no additional information needed for this reconstruction theorem.
+
 ## Sylow reconstruction of the conic
 
 In the standard matrix model, every Sylow-\(13\) subgroup is conjugate to
@@ -220,12 +236,14 @@ proof rather than a larger permutation certificate.
 
 ### `ej2`
 
-The second-order gain is that the previously reconstructed incidence matrix
-\(M\) is not an extra object.  It is exactly the internal--internal block of
-the canonical polarity matrix on
-\(\operatorname{Syl}_{13}(G)\sqcup\mathcal I\).  The four minimum families,
-the hidden module, the conic, and the old incidence matrix now all live on one
-group-intrinsic carrier.
+The first second-order gain is that the previously reconstructed incidence
+matrix \(M\) is not an extra object.  It is exactly the internal--internal
+block of the canonical polarity matrix on
+\(\operatorname{Syl}_{13}(G)\sqcup\mathcal I\).  The further cross-subitem
+gain is exact arity-two ambient reconstruction: subitem 2 recovers \(M\) and
+\(G\) from weighted pair concurrence, and the present theorem recovers the
+entire marked plane from \(G\).  Thus the weighted 2-section alone carries the
+four minimum families, hidden module, conic, polarity, full plane, and code.
 
 `aa` was not triggered: the Sylow count, faithful action, secant matching,
 and adjoint-plane upgrade all passed their cheapest exact falsifiers.
@@ -242,7 +260,9 @@ and adjoint-plane upgrade all passed their cheapest exact falsifiers.
   Sylow-plus-involution adjoint model and intrinsic polarity.
 - **Settled by `ej2`:** the old matrix \(M\) is exactly the
   internal--internal polarity block, so ambient reconstruction strictly
-  subsumes unlabeled matrix reconstruction.
+  subsumes unlabeled matrix reconstruction.  Combining subitems 2 and 4 shows
+  that weighted pair concurrence already reconstructs the entire marked plane
+  and code; triples and full hyperedges are unnecessary for this purpose.
 - **Exact residual ambiguity:** no preferred ordered triple of conic points,
   field-coordinate labeling, or displayed equation survives the full
   \(G\)-symmetry.  The \(2184\) ordered triples form a simply transitive

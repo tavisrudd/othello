@@ -49,7 +49,9 @@ by normalization and involution products reconstructs the full
 \(\operatorname{PG}(2,13)\) with its conic polarity.  The \(78\) hypergraph
 vertices are the nonsplit involution class; their central involutions recover
 all internal-point/secant matchings, and the old matrix \(M\) is exactly the
-internal--internal polarity block.  Only a preferred projective frame,
+internal--internal polarity block.  Combining this with subitem 2 gives exact
+arity-two reconstruction of the full marked plane and passant code from the
+weighted pair-concurrence layer alone.  Only a preferred projective frame,
 coordinate labeling, and displayed equation remain absent.  Report and exact
 evidence bundle:
 `notes/2026-08-02-c817-intrinsic-conic-action.md`.
