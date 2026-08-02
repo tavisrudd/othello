@@ -7,6 +7,8 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
 \usepackage[hidelinks]{hyperref}
 \setlength{\emergencystretch}{3em}
 
@@ -409,51 +411,191 @@ lines on the Segre cubic and has its own established algebraic geometry
 
 \section{Photonic design limit}
 
-The balanced six-mode transfer needs at most fifteen tunable two-mode cells.
-A filtered implementation uses two such meshes and six attenuators.  Coherent
-transfer characterization fixes the input and output phase gauges and infers
-the sign of the reconstructed real determinant.  Six-mode coherent transfer
-tomography of this kind has been demonstrated~\cite{RahimiKeshari}, and
-programmable twelve-mode processors have operated with three photons
-\cite{Somhorst}.
+Figure~\ref{fig:photonic-gate} separates three experiments that use the same
+one-particle transfer but answer different questions.  Coherent light recovers
+a phase-referenced matrix and hence an inferred determinant sign.  Ordinary
+three-photon input measures calibrated bosonic probabilities.  Direct
+three-fermion emulation instead requires three identical copies of the
+transfer and an antisymmetric three-qutrit resource.  The first two form a
+bounded precursor; the third is conditional on the additional source.
 
-This feasible precursor supports two distinct tests:
-\begin{enumerate}[leftmargin=*]
-\item reconstruct the six-mode transfer coherently and test the determinant
-signs and the linear and cubic Segre residuals;
-\item inject ordinary photons and measure the calibrated bosonic controls,
-optionally upgrading to the ten-input symmetric-cube average.
-\end{enumerate}
-The inferred determinant sign in the first test is not a direct measurement
-of a many-fermion phase.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >=Latex,
+  box/.style={draw,rounded corners=1pt,align=center,minimum height=7mm,
+    inner xsep=5pt},
+  gate/.style={box,fill=black!7},
+  unmet/.style={box,dashed},
+  flow/.style={->,semithick},
+  dep/.style={->,semithick,dashed}
+]
+\node[box] (in) {ports \(0,1,2\)};
+\node[gate,right=5mm of in] (o) {\(O_T\)\\15 Givens};
+\node[gate,right=5mm of o] (d) {\(D_x\)\\phase/filter};
+\node[gate,right=5mm of d] (ot) {\(O_T^{\mathsf T}\)\\15 Givens};
+\node[box,right=5mm of ot] (out) {ports \(3,4,5\)};
+\draw[flow] (in)--(o); \draw[flow] (o)--(d); \draw[flow] (d)--(ot);
+\draw[flow] (ot)--node[above,pos=.58]{\(K_T\)}(out);
 
-The photonic fermion emulator of Matthews et al.~\cite{Matthews} sends an
-entangled resource through identical copies of a one-particle process.  For
-three particles in this setting it requires a totally antisymmetric state of
-three photonic qutrits.  Goyal et al.~\cite{Goyal} give a linear-optical
-preparation proposal for this state, and Piccolini et
-al.~\cite{PiccoliniSinglet} give a second interferometric proposal.  To our
-knowledge, no experiment has prepared and characterized this three-photon
-qutrit singlet.  The design therefore treats such a source as an unmet input.
-A three-qutrit GHZ state, although experimentally accessible
-\cite{Hu}, has different exchange symmetry and does not substitute for it.
+\node[box,below=9mm of d,xshift=-48mm,text width=35mm] (coh)
+  {coherent probe\\\(6+5\) settings};
+\node[box,below=9mm of d,text width=35mm] (bos)
+  {ordinary photons\\bosonic controls};
+\node[unmet,below=9mm of d,xshift=48mm,text width=35mm] (anti)
+  {antisymmetric\\three-qutrit source};
+\node[box,below=12mm of coh,text width=35mm] (tom) {transfer tomography\\
+  \(\det\widehat K_T,\ r_1,\ r_3\)};
+\node[box,below=12mm of bos,text width=35mm] (pb)
+  {collision-free \(P_B\)\\or \(h_3/10\)};
+\node[box,below=12mm of anti,text width=35mm] (pf)
+  {three identical copies\\direct \(P_F\)};
+\draw[flow] (coh)--(tom); \draw[flow] (bos)--(pb); \draw[dep] (anti)--(pf);
+\node[below=1mm of tom] {feasible};
+\node[below=1mm of pb] {feasible};
+\node[below=1mm of pf,align=center] {source-dependent};
+\end{tikzpicture}
+\caption{Circuit and readout boundary.  The upper line implements
+\(U_T(x)=O_T^{\mathsf T}D_xO_T\); its indicated subblock maps input ports
+\(0,1,2\) to output ports \(3,4,5\).  Solid arrows are demonstrated
+measurement primitives.  The dashed box and arrow mark the additional
+resource needed for direct three-fermion emulation.  The structural nulls are
+\(r_1=\sum_T\widehat Z_T\) and
+\(r_3=\sum_T\widehat Z_T^3\); the drawing uses no color coding.}
+\label{fig:photonic-gate}
+\end{figure}
 
-The determinant perturbation bound
+\subsection*{Circuit and port convention}
+
+Put \(O_T=[Q_{T,+}\ Q_{T,-}]\), inject the first three eigenports numbered
+\(0,1,2\), and postselect the last three outputs numbered \(3,4,5\).  Thus
+\(K_T\) is the row-\(3{:}5\), column-\(0{:}2\) block of \(U_T\).  For adjacent
+modes \(a,b\), our compiled two-mode cell is
 \[
- |\det(K+E)-\det K|\leq 3\lVert E\rVert_2
+ G_{ab}(\theta)|_{a,b}=
+ \begin{pmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix}.
 \]
-for contraction blocks yields a balanced-sign threshold
-\(\lVert E\rVert_2<0.1193\).  The smallest chiral sign requires
-\(\lVert E\rVert_2<0.00472\), and ten-percent amplitude precision there
-requires \(4.72\times10^{-4}\).  The weak chiral branch, rather than the
-balanced benchmark, sets the severe resource requirement.
+In the frozen pivot gauge, input phases
+\(S=\operatorname{diag}(1,1,1,1,1,-1)\), followed in order by the cells below,
+reconstruct \(O_T\) to maximum entry error below \(2\times10^{-14}\).  Mode
+labels are zero-based and angles are in radians.
 
-Diagonal real loss merely changes the real filter and preserves the two Segre
-identities.  Coherent diagonal phase error preserves them over
-\(\mathbb C\), though a real sign still needs a phase reference.  Transfer
-error or mismatch between emulator copies leaves the common carrier.  The
-linear residual \(\sum_T\widehat Z_T\) is therefore the first structural null,
-followed by the cubic residual \(\sum_T\widehat Z_T^3\).
+\begin{center}
+\small
+\begin{tabular}{rcc@{\qquad}rcc@{\qquad}rcc}
+\toprule
+\(j\)&\(ab\)&\(\theta_j\)&\(j\)&\(ab\)&\(\theta_j\)&\(j\)&\(ab\)&\(\theta_j\)\\
+\midrule
+1&45& 2.328295&6&45&-1.017222&11&01&-0.785398\\
+2&34&-3.141593&7&12&-1.570796&12&12&-1.107149\\
+3&45& 2.328295&8&23&-2.356194&13&23&-1.047198\\
+4&23&-1.570796&9&34&-0.955317&14&34&-0.955317\\
+5&34&-1.570796&10&45&0&15&45& 2.356194\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A balanced \(U_T(x)\) may be compiled directly into at most fifteen such
+cells per copy.  A general real filter uses the displayed sandwich: two
+fifteen-cell meshes and six variable attenuators per copy.  An amplitude
+transmission \(x_i\) means intensity transmission \(x_i^2\), with a
+\(0\) or \(\pi\) path phase supplying its sign.  The chiral setting is
+\[
+ x=\left(1,\frac7{13},\frac17,-\frac15,-\frac12,-1\right).
+\]
+Three spatially parallel emulator copies therefore occupy eighteen modes and
+use at most 45 cells in the balanced direct compilation, or 90 cells and
+18 attenuators in the filtered compilation.  Encodings in time or frequency
+may reuse one physical mesh, but still require three matched logical copies.
+The other five marked protocols are obtained by the frozen path
+permutations; an odd representative exchanges the two port triples and
+transposes \(K_T\).
+
+\subsection*{Readout, nulls, and quantitative gates}
+
+Six single-input intensity settings determine the transfer moduli.  Five
+two-input scans against one fixed reference determine the remaining phases.
+After fixing the input and output phase gauges, the determinant of the real
+reconstructed block has a calibrated sign.  This is the demonstrated
+six-mode characterization method of Rahimi-Keshari et
+al.~\cite{RahimiKeshari}, not a direct observation of a many-fermion phase.
+Programmable twelve-mode processors have separately operated with three
+photons~\cite{Somhorst}.
+
+The first acceptance test is structural, before comparison with any target
+probability.  For the six reconstructed amplitudes set
+\[
+ r_1=\sum_T\widehat Z_T,\qquad
+ r_3=\sum_T\widehat Z_T^3.
+\]
+For reporting across transmission levels, use the dimensionless scores
+\[
+ \rho_1=\frac{|r_1|}{\sum_T|\widehat Z_T|},\qquad
+ \rho_3=\frac{|r_3|}{\sum_T|\widehat Z_T|^3},
+\]
+whenever the respective denominator is nonzero.
+Diagonal real loss changes \(x\) but leaves both nulls exact.  Coherent
+diagonal phase error also leaves them exact over \(\mathbb C\), although a
+literal real sign then needs the phase reference.  Mesh error or mismatch
+among emulator copies leaves the common Golden carrier: \(r_1\) is the
+primary falsification test and \(r_3\) the nonlinear confirmation.  Uniform
+amplitude transmission \(\lambda\) scales amplitudes by \(\lambda^3\) and
+probabilities by \(\lambda^6\), while \(\rho_1\) and \(\rho_3\) remain
+unchanged.
+
+For contraction blocks,
+\[
+ |\det(K+E)-\det K|\leq3\lVert E\rVert_2.
+\]
+The balanced sign is certified by
+\(\lVert E\rVert_2<0.1193\).  The smallest chiral amplitude requires
+\(\lVert E\rVert_2<0.00472\) for its sign and
+\(4.72\times10^{-4}\) for ten-percent relative amplitude precision.  These
+are operator-norm requirements on transfer tomography, not phase-shifter
+specifications.
+
+The shot budget assumes independent Bernoulli accepted trials, ten-percent
+relative precision, a normal approximation, and simultaneous 95-percent
+coverage of all six probabilities.  It excludes source preparation,
+coupling, propagation, and detector loss; these enter only when an accepted-
+trial rate is converted to laboratory time.
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+reading & probability & accepted trials & time at \(100\,\mathrm{s}^{-1}\)\\
+\midrule
+balanced fermion, each protocol & \(16/125\) & 4,742 & 0.79 min\\
+weakest calibrated boson event & \(16/3125\) & 135,250 & 22.5 min\\
+largest chiral branch & \(156816/25878125\) & 114,167 & 19.0 min\\
+smallest chiral branch & \(5184/25878125\) & 3,473,883 & 579 min\\
+\bottomrule
+\end{tabular}
+\end{center}
+At one accepted trial per second the corresponding times are \(1.32\),
+\(37.6\), \(31.7\), and \(965\) hours.  The weakest chiral branch, rather than
+the balanced benchmark, fixes the design limit.
+
+\subsection*{External resource dependency}
+
+The emulator of Matthews et al.~\cite{Matthews} sends an entangled resource
+through identical copies of a one-particle process.  Here direct
+three-fermion emulation requires the totally antisymmetric state of three
+photonic qutrits.  Goyal et al.~\cite{Goyal} give a linear-optical preparation
+proposal, and Piccolini et al.~\cite{PiccoliniSinglet} give a second
+interferometric proposal.  To our knowledge, no experiment has prepared and
+characterized this three-photon qutrit singlet.  The source is therefore an
+external dependency, not a component claimed here.  A demonstrated
+three-qutrit GHZ state~\cite{Hu} has different exchange symmetry and neither
+supplies the resource nor predicts its engineering performance.
+
+Resource quality is more restrictive than shot noise under adversarial error
+models.  If preparation noise is an arbitrary mixture of weight \(1-F\),
+keeping probability bias below ten percent requires \(F\geq0.9872\) for the
+balanced event and \(F\geq0.999980\) for the smallest chiral event.  With only
+a fidelity bound and the trace-distance worst case, the corresponding gates
+are \(F\geq0.999836\) and \(F\geq0.9999999996\).  A characterized noise model
+could relax these bounds, but the conclusion would then be model-dependent.
 
 \section{Discussion}
 

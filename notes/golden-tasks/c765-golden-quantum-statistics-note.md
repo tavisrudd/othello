@@ -58,9 +58,9 @@ gauge-theory simulation.
    the full mixed-sector checksum.
 2. C767 is complete: it imports the exact statistics, arithmetic instance,
    decoder, locked symbolic environment, and paper-local trust surface.
-3. C768 closes the full-text literature and attribution audit.
-4. C769 turns the demonstrator ledger into the physical design-limit section
-   and figure.
+3. C768 is complete: it closes the full-text literature and attribution audit.
+4. C769 is complete: it turns the demonstrator ledger into the physical
+   design-limit section and figure.
 5. C770 performs cold reads, selects the venue, and closes the preprint and
    forward-reference gates.
 

@@ -305,6 +305,16 @@ portfolio.  In particular:
   MathSciNet, Google Scholar, and a subject-expert check remain explicitly
   uncovered.  The warning-free eight-page manuscript gate passes.  Report:
   `notes/2026-08-01-c768-golden-quantum-statistics-literature-audit.md`.
+- C769 is complete.  The physical section now fixes the zero-based port
+  convention, full 15-Givens base-mesh netlist, direct-balanced and filtered
+  resource counts, signed attenuation model, coherent-tomography settings,
+  linear/cubic residuals with scale-free reporting scores, determinant-error
+  gates, simultaneous-coverage shot budget, and adversarial source-quality
+  thresholds.  A publication-size color-independent figure separates
+  coherent inference, bosonic controls, and source-dependent direct
+  three-fermion emulation.  The C768-qualified absence wording is preserved,
+  and the warning-free ten-page paper gate plus visual check pass.  Report:
+  `notes/2026-08-01-c769-golden-photonic-design-limit.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
   C735's operator-first architecture.  The genuinely source-free signed
@@ -427,15 +437,14 @@ owner report without consulting that ledger and the governing audit.
 | [C766 — exchange orientation theorem](../golden-tasks/c766-golden-exchange-orientation-theorem.md) | complete; general `O/SO` and `U/SU` orbit boundary, determinant-line interpretation, and mixed-sector checksum installed | preserve the dated report and theorem; C767 owns exact-value trust integration |
 | [C767 — statistics evidence import](../golden-tasks/c767-golden-statistics-evidence-import.md) | complete; human 20+44 rank proof, compact import certificate, locked SymPy environment, and trust map installed | preserve the dated report and paper-local replay surface |
 | [C768 — quantum-statistics literature](../golden-tasks/c768-golden-quantum-statistics-literature.md) | complete; attribution and qualified experimental-absence wording closed | preserve the audit record; rerun pinned graphs only at C770 submission closure |
-| [C769 — photonic design limit](../golden-tasks/c769-golden-photonic-design-limit.md) | queued after C767; wording waits for C768 | compress circuit, thresholds, null tests, and source dependency into the physical section and figure |
+| [C769 — photonic design limit](../golden-tasks/c769-golden-photonic-design-limit.md) | complete; physical section and color-independent figure installed | preserve the exact presentation and C768-qualified source wording |
 | [C770 — submission closure](../golden-tasks/c770-golden-quantum-statistics-submission.md) | queued after C766--C769 | cold reads, venue decision, artifact/preprint locator, and forward-reference gate |
 
 ## Recommended order
 
-1. C769 physical presentation.
-2. C770 cold reads and submission closure; rerun C768's pinned absence graphs and add a Paper-III forward citation
+1. C770 cold reads and submission closure; rerun C768's pinned absence graphs and add a Paper-III forward citation
    only after the note has a stable public locator.
-3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths

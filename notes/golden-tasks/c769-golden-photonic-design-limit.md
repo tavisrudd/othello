@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**State:** queued after C767; literature wording waits for C768
+**State:** complete
 
 ## Objective
 
@@ -25,3 +25,11 @@ one useful circuit/readout figure.
 - no claim that the device or antisymmetric source has been built;
 - no engineering forecast from the adjacent three-qutrit GHZ benchmark;
 - no Physical Review Applied framing before a source prototype exists.
+
+## Outcome
+
+The manuscript now contains the complete circuit, readout, robustness, shot,
+and source-quality presentation, together with a color-independent
+circuit/readout figure.  The warning-free ten-page build and visual gate pass.
+The dated report is
+`notes/2026-08-01-c769-golden-photonic-design-limit.md`.
