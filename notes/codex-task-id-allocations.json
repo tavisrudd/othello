@@ -2096,8 +2096,17 @@
       "last": 780,
       "purpose": "triply-even plateau certificate bundle, structural mechanism attempt, and diagonal-programme novelty audit",
       "sequence": 233
+    },
+    {
+      "count": 1,
+      "first": 781,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 781,
+      "purpose": "close referee-round-three attribution, standalone gate, and structural balanced-spectrum proof",
+      "sequence": 234
     }
   ],
-  "next_id": 781,
+  "next_id": 782,
   "schema": "codex-task-id-allocations-v1"
 }
