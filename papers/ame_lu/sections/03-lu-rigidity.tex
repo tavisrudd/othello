@@ -1155,16 +1155,16 @@ of its statement.  The factorization itself holds for every \(2\)-uniform
 state, with \(g\) an exact product-unitary symmetry; and finiteness of the
 zero set is a consequence of \((3.8)\) rather than a separate input, since
 quadratic growth already isolates the zeros of \(f\) on a compact manifold.
-The threshold \(\varepsilon_0\) comes from compactness and is not explicit.
-It depends on \(\lvert\psi\rangle\), and by
-Proposition~\ref{prop:stability-region} its dependence on the party count
-cannot be removed.
+The threshold this proof produces comes from compactness and is not
+exhibited; Theorem~\ref{thm:explicit-threshold} below replaces it by a
+formula, at the cost of the stabilizer hypothesis and of a factor
+exponential in the party count.
 
 Corollary~\ref{cor:approximate-decomposition} measures how far an
 approximate symmetry of one state is from an exact one.  The intertwiner
-question between two states is different, and the two answers cover each
-other's weakness: the constant below grows with \(q\) but the threshold is
-explicit.
+question between two states is different, and its answer is the tool the
+explicit threshold needs: it converts a small global defect into a nearby
+Clifford at each party, with a threshold exhibited in closed form.
 
 \begin{lemma}[Quantitative diagonal-tensor axes]
 \label{lem:quantitative-axes}
@@ -1300,6 +1300,176 @@ subgroup, that intertwiner has positive distance from the finite closed
 subgroup, so taking \(\varepsilon=0\) falsifies every uniform estimate
 toward it.
 
+Rounding a product unitary to a nearby product Clifford is only half of a
+decomposition.  The other half is deciding whether that Clifford is an
+exact symmetry, and for stabilizer states it needs no approximation
+argument at all, because their overlaps take only finitely many values.
+
+\begin{lemma}[Quantized stabilizer overlap]
+\label{lem:stabilizer-overlap-gap}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer states on \(n\)
+qudits of local dimension \(q=p^e\), with label groups \(L_\psi,L_\phi\)
+and stabilizer characters \(\chi_\psi,\chi_\phi\).  Then
+\[
+ \lvert\langle\psi\vert\phi\rangle\rvert^2=
+ \begin{cases}
+  \lvert L_\psi\cap L_\phi\rvert/q^n,
+   &\text{if \(\chi_\psi=\chi_\phi\) on \(L_\psi\cap L_\phi\)},\\
+  0,&\text{otherwise.}
+ \end{cases}
+\]
+In particular
+\(\lvert\langle\psi\vert\phi\rangle\rvert^2\in\{0\}\cup\{p^{-j}:j\geq0\}\),
+so \(\lvert\langle\psi\vert\phi\rangle\rvert>p^{-1/2}\) forces
+\(\lvert\phi\rangle\in\mathbb C\lvert\psi\rangle\).
+\end{lemma}
+
+\begin{proof}
+By \((2.2)\), \(\rho_\psi=q^{-n}\sum_{\ell\in L_\psi}\chi_\psi(\ell)W_\ell\)
+and likewise for \(\phi\).  Weyl orthogonality
+\(\Tr(W_\ell^\dagger W_{\ell'})=q^n\delta_{\ell,\ell'}\) gives
+\[
+ \lvert\langle\psi\vert\phi\rangle\rvert^2=\Tr(\rho_\psi\rho_\phi)
+  =q^{-n}\sum_{\ell\in L_\psi\cap L_\phi}
+    (\chi_\psi\overline{\chi_\phi})(\ell).
+\]
+The summand is a character of the group \(L_\psi\cap L_\phi\), so the sum
+is \(\lvert L_\psi\cap L_\phi\rvert\) when that character is trivial and
+\(0\) otherwise.  The group has \(p\)-power order and \(q^n=p^{en}\), which
+gives the quantization; the value \(1\) occurs only when \(L_\psi=L_\phi\)
+and the characters agree, that is, when the two states span the same ray.
+\end{proof}
+
+The quantization has a consequence about the symmetry group that is
+stronger, and easier to remember, than any threshold formula.
+Theorem~\ref{thm:two-uniform-discrete} makes \(G(\psi)\) finite, hence its
+elements isolated; on the Clifford locus they are isolated by a fixed
+amount that no parameter of the problem can erode.
+
+\begin{corollary}[Uniform separation of the exact symmetries]
+\label{cor:uniform-separation}
+Let \(\lvert\psi\rangle\) be a stabilizer state on \(n\) qudits of local
+dimension \(q=p^e\), and let \(K\) be a product Clifford.  Then either
+\(K\in G(\psi)\) or
+\[
+ \varepsilon(K)\geq\bigl(2-2p^{-1/2}\bigr)^{1/2}\geq\bigl(2-\sqrt2\bigr)^{1/2}
+  =0.7653\ldots
+\]
+Equivalently, if \(K\) and \(K'\) are product Cliffords in different cosets
+of \(G(\psi)\), then \(K^\dagger K'\) has defect at least this much.  The
+bound depends on the characteristic alone: not on the number of parties,
+not on the state, and not on the local dimension beyond its
+characteristic.
+\end{corollary}
+
+\begin{proof}
+\(K\lvert\psi\rangle\) is a stabilizer state, so
+Lemma~\ref{lem:stabilizer-overlap-gap} applies to the pair
+\(\lvert\psi\rangle,K\lvert\psi\rangle\): either
+\(\lvert\langle\psi\rvert K\lvert\psi\rangle\rvert\leq p^{-1/2}\), whence
+\(\varepsilon(K)^2=2-2\lvert\langle\psi\rvert K\lvert\psi\rangle\rvert
+\geq2-2p^{-1/2}\), or the overlap exceeds \(p^{-1/2}\) and
+\(K\lvert\psi\rangle\in\mathbb C\lvert\psi\rangle\).  For two product
+Cliffords apply this to \(K^\dagger K'\), which is again one.  Since
+\(p\geq2\), the bound is least at \(p=2\).
+\end{proof}
+
+So on the Clifford locus the defect has no small nonzero values.  This is
+what removes the compactness step from
+Corollary~\ref{cor:approximate-decomposition}: a product unitary with small
+defect is first rounded to a product Clifford by
+Proposition~\ref{prop:quantitative-intertwiner}, and the rounded operator
+is then an exact symmetry outright, because a near-miss is impossible.
+
+\begin{theorem}[Explicit decomposition threshold]
+\label{thm:explicit-threshold}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
+\(q=p^e\), \(m\geq2\), \(n=2m\).  Put
+\[
+ \varepsilon_0=\min\Bigl\{
+   \frac{\tau_p}{2q^{(m+1)/2}},\
+   \frac1{4\sqrt2\,\pi n\,q^{(m+2)/2}}\Bigr\},
+ \qquad
+ \tau_p=\min\Bigl\{\tfrac13,\frac{\sin(\pi/p)}{2\sqrt2}\Bigr\}.
+\]
+Every product unitary \(U\) with \(\varepsilon(U)<\varepsilon_0\) satisfies
+the conclusion of Corollary~\ref{cor:approximate-decomposition}.
+\end{theorem}
+
+\begin{proof}
+Write \(\varepsilon=\varepsilon(U)\) and
+\(B=2\sqrt2\,n\,q^{(m+2)/2}\varepsilon\), so that
+\(\varepsilon<\varepsilon_0\) gives \(B<1/(2\pi)\).
+
+\emph{Rounding.}  Since \(2q^{(m+1)/2}\varepsilon<\tau_p\),
+Proposition~\ref{prop:quantitative-intertwiner} applied with
+\(\lvert\phi\rangle=\lvert\psi\rangle\) and the identity permutation
+supplies Cliffords \(K_i\) with
+\(\lVert U_i-K_i\rVert_{\mathrm{op}}\leq
+\lVert U_i-K_i\rVert_{\mathrm{HS}}\leq2\sqrt2\,q^{(m+2)/2}\varepsilon\).
+Summing over the \(n\) parties gives
+\(\sum_i\lVert U_i-K_i\rVert_{\mathrm{op}}\leq B\).
+
+\emph{The rounded Clifford is exact.}  Put \(K=\bigotimes_iK_i\), so that
+\(\lVert U-K\rVert_{\mathrm{op}}\leq B\) and
+\(\lvert\langle\psi\rvert K\lvert\psi\rangle\rvert\geq
+1-\varepsilon^2/2-B\).  Here \(B<1/(2\pi)<0.1592\), and
+\(\varepsilon\leq\tau_p/(2q^{(m+1)/2})\leq1/(6\cdot2^{3/2})<0.06\) because
+\(q\geq2\) and \(m\geq2\), so the right side exceeds
+\(1-0.0018-0.1592>1/\sqrt2\geq p^{-1/2}\).  By
+Corollary~\ref{cor:uniform-separation}, \(K\in G(\psi)\); set \(g=K\).
+
+\emph{The residual generators are small.}  Each factor of
+\(V=g^\dagger U\) satisfies
+\(\min_\varphi\lVert K_i^\dagger U_i-e^{i\varphi}I\rVert_{\mathrm{op}}
+\leq\lVert U_i-K_i\rVert_{\mathrm{op}}\leq B<1\).  For a unitary \(W\) on
+\(\mathbb C^q\) with
+\(\sigma=\min_\varphi\lVert W-e^{i\varphi}I\rVert_{\mathrm{op}}\leq1\), the
+eigenvalues of \(e^{-i\varphi}W\) at the optimal phase are \(e^{i\mu_a}\)
+with \(2\lvert\sin(\mu_a/2)\rvert\leq\sigma\) and
+\(\mu_a\in(-\pi,\pi]\), so
+\(\lvert\mu_a\rvert\leq2\arcsin(\sigma/2)\leq\pi\sigma/2\); subtracting the
+mean gives \(W=e^{i\varphi'}e^{ih}\) with \(h\) traceless Hermitian and
+\(\lVert h\rVert_{\mathrm{op}}\leq2\max_a\lvert\mu_a\rvert\leq\pi\sigma\).
+Applying this at each site,
+\(\sum_i\lVert h_i\rVert_{\mathrm{op}}\leq\pi B<\frac12\), and the
+collected phases are a global phase absorbed into \(g\).  Finally
+\(\varepsilon(V)=\varepsilon(U)\), because \(g\) fixes the ray of
+\(\lvert\psi\rangle\), so Theorem~\ref{thm:two-uniform-stability} applies
+to \(V\) on its hypothesis and gives
+\(D\leq\sqrt{6q/5}\,\varepsilon(U)\).
+\end{proof}
+
+Nothing in this proof is a compactness argument: the finite zero set is
+never enumerated and no minimum over a compact remainder is taken.  What
+compactness supplied in Corollary~\ref{cor:approximate-decomposition} is
+supplied here by Corollary~\ref{cor:uniform-separation}, in closed form.
+The factorization is also constructive in the sense that matters: \(g\) is
+produced from \(U\) by rounding each local factor to a Clifford, and an
+\((m+1)\)-party marginal certifies the rounding.
+
+The price is the size of \(\varepsilon_0\), which is
+\(q^{-(n+4)/4}/n\) up to constants and therefore exponentially small in the
+number of parties.  Two steps pay it.  Rounding costs \(q^{(m+1)/2}\), and
+by the marginal-dilution remark after
+Proposition~\ref{prop:quantitative-intertwiner} no detector that reads a
+single small marginal can avoid that factor.  Summing \(n\) per-site
+operator-norm errors and taking \(n\) logarithms costs a further
+\(n\sqrt q\), which is the price of a per-site conclusion.
+
+The gap this leaves is worth naming exactly, because it is not the gap
+Proposition~\ref{prop:stability-region} measures.  That proposition bounds
+any threshold valid across states of uniformity order three; an
+\(\AME(2m,q)\) state has uniformity order \(m\), and for such states
+Corollary~\ref{cor:k-uniform-region} and
+Theorem~\ref{thm:budget-free-stability} certify the quadratic estimate out
+to defects of constant order.  So the estimate holds where the defect is
+small in absolute terms, while the decomposition is certified only where
+the defect is exponentially small.  Closing that gap needs a rounding step
+that does not read a single small marginal.
+Proposition~\ref{prop:half-splitting} is global in exactly that sense, and
+whether its equality case forces a product unitary to be Clifford is open.
+
 \begin{corollary}[Local gauge groups of \(2\)-unitary gates]
 \label{cor:two-unitary-gauge}
 Let \(W\) be a two-qudit gate whose associated four-party state
@@ -1318,8 +1488,11 @@ and it preserves \(\bigl(\sum_j\lVert h_j\rVert_F^2\bigr)^{1/2}\).
 Consequently the local gauge group of any \(2\)-unitary gate is finite
 modulo the local phases, Theorem~\ref{thm:two-uniform-stability} transports
 with its hypothesis \(\sum_j\lVert h_j\rVert_{\mathrm{op}}\leq\frac12\),
-and Corollary~\ref{cor:approximate-decomposition} transports with a
-threshold \(\varepsilon_0(W)\) that is again not explicit.  Gate defects
+and Corollary~\ref{cor:approximate-decomposition} transports with its
+threshold; for a gate arising from a stabilizer \(\AME(4,q)\) state
+Theorem~\ref{thm:explicit-threshold} exhibits that threshold at \(m=2\),
+namely \(\varepsilon_0=\min\{\tau_p/(2q^{3/2}),\,
+1/(16\sqrt2\,\pi q^2)\}\).  Gate defects
 are measured in the metric \(q^{-1}\lVert\cdot\rVert_F\).  For a gate
 arising from a stabilizer \(\AME(4,q)\) state the exact gauge group is
 local Clifford.

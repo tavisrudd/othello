@@ -58,6 +58,7 @@ still depends on the claim, evidence, literature, and prose gates.
 - `lem:quantitative-axes`, `prop:quantitative-intertwiner`: quantitative diagonal-axis recovery and the explicit-threshold two-state Clifford bound, at every `m≥2`.
 - `lem:tracial-agreement`, `lem:site-contraction`, `thm:k-uniform-stability`, `cor:k-uniform-region`, `prop:region-ceiling`: the higher-moment route, whose certified `ℓ¹` radius `R_k ∼ k/e` is indexed by the uniformity order and is capped at `2π(1−1/q)n`.
 - `prop:half-splitting`, `lem:cut-transversal`, `thm:budget-free-stability`: the bipartition route, which deletes the `ℓ¹` budget, relaxes the per-site spread to `π`, and pays `2√(q/c)` instead of `√(6q/5)`.
+- `lem:stabilizer-overlap-gap`, `cor:uniform-separation`, `thm:explicit-threshold`: quantized stabilizer overlap; uniform separation of the exact product-Clifford symmetries by `(2−2p^{-1/2})^{1/2}`, a constant of the characteristic alone; and the closed-form decomposition threshold that replaces the compactness step.
 - `cor:two-unitary-gauge`: finiteness modulo local phases and transported stability for local gauge groups of 2-unitary gates.
 
 ## Frozen theorem hierarchy
@@ -128,7 +129,8 @@ still depends on the claim, evidence, literature, and prose gates.
 - No claim that `z=2,4/9` are LU-orbit exceptions.
 - No claim that four copies are a globally minimal invariant degree.
 - No new holographic-code construction or tensor-network performance claim.
-- No party-count-independent certification claim: the ratio constant is independent of the party count, the certified neighbourhood is not.
+- No party-count-independent certification claim: the ratio constant is independent of the party count, and the certified neighbourhood is governed by the uniformity order, which for a bounded-order family shrinks as the party count grows.
 - No self-testing or device-independent certification claim; the stability results assume a known state and bounded generators.
-- No explicit stability threshold `ε₀`, and no claim that the metrology reading of the Fisher identity is new.
+- No claim that the explicit threshold `ε₀` of `thm:explicit-threshold` is of the right order; it is exponentially small in the party count and the gap to the certified stability region is open.
+- No claim that the metrology reading of the Fisher identity is new.
 - No novelty wording before C562 closes the claim-specific audit.

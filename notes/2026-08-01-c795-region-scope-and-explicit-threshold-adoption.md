@@ -31,10 +31,10 @@ by hand as recorded in §2. No evidence bundle ships because no claim needs one.
 | 8a | Fisher remark clause on quadratic data versus neighbourhood size | DONE (commit 83bd2e1c) |
 | 7 | Intertwiner bound generalized to arbitrary party count | DONE |
 | 9 | Quantitative-axes trust gap | CLOSED by verification, §2.4 |
-| 2 | Explicit threshold and the quantized-overlap lemma | TODO |
-| 3 | Uniform-separation corollary | TODO |
+| 2 | Explicit threshold and the quantized-overlap lemma | DONE |
+| 3 | Uniform-separation corollary | DONE |
 | 8b | Move nonabelian factor-set displays to the party-extensions appendix | TODO |
-| 10 | Sync theorem map, claim ledger, verification map | PARTIAL (theorem map: items 1/4/6/7 landed) |
+| 10 | Sync theorem map, claim ledger, verification map | PARTIAL (theorem map done; claim ledger and verification map TODO) |
 
 Front matter: the abstract (`main.tex`) and introduction were aligned to the corrected region claim
 by the coordinator while this task was interrupted. That wording is accurate and I have kept it.
@@ -196,20 +196,46 @@ boundary-table row drops "no claim at general `m`" and names the exponential deg
 cause, and three new stable-source label lines cover the moment route, the ceiling, and the
 bipartition route.
 
+### 3.3 Quantized overlap, uniform separation, explicit threshold (this commit)
+
+Placed after `prop:quantitative-intertwiner`, since the threshold's rounding step calls it. The
+file order is now: decomposition corollary (compactness, kept as the qualitative statement) →
+quantitative axes → intertwiner → overlap gap → uniform separation → explicit threshold → gauge
+corollary.
+
+- `lem:stabilizer-overlap-gap` — the quantization `|⟨ψ|φ⟩|² ∈ {0} ∪ {p^{-j}}`, stated against the
+  characteristic `p` rather than the local dimension `q`, as C786 §5 item 2 asks.
+- `cor:uniform-separation` — a product Clifford is either an exact symmetry or has defect at least
+  `(2−2p^{-1/2})^{1/2} ≥ 0.7653`. This is the statement a reader should carry away, and it is
+  strictly stronger than the threshold formula: the exact symmetries are not merely isolated but
+  separated by a constant that depends on the characteristic and on nothing else — not the party
+  count, not the state, not the local dimension beyond its characteristic.
+- `thm:explicit-threshold` — `ε₀ = min{τ_p/(2q^{(m+1)/2}), 1/(4√2 π n q^{(m+2)/2})}`, with the
+  three steps (round, recognize as exact, take minimal logarithms) written out. Followed by a
+  paragraph saying plainly that `ε₀ ≍ q^{-(n+4)/4}/n` is exponentially small in the party count, and
+  locating the two places that pay: marginal dilution `q^{(m+1)/2}` in the rounding step, and a
+  union bound `n√q` over sites.
+
+**One correction to how C786 frames its own gap, carried into the manuscript.** C786 §3.5 measures
+the threshold against C774's ceiling `1.34 n^{-1/2}` and calls the shortfall "a factor exponential
+in `n`". That comparison repeats the scope error this task exists to fix: the ceiling is a statement
+about uniformity order three, while the threshold is about `AME(2m,q)` states of uniformity order
+`m`. The manuscript instead compares like with like — for AME states the quadratic estimate is
+certified out to defects of constant order by `cor:k-uniform-region` and
+`thm:budget-free-stability`, whereas the decomposition is certified only at exponentially small
+defect — and names that as the open gap.
+
+Sentences carried in the same commit, each of which the threshold falsified: the closing sentence
+of the paragraph after `cor:approximate-decomposition`'s proof; the non-explicit clause in
+`cor:two-unitary-gauge`, which now displays the `m = 2` threshold; the claim-to-trust paragraph in
+`sections/08-verification-boundary.tex`; and `theorem-map.md`'s deliberate-exclusion line. The
+abstract, introduction and conclusion each gained the uniform-separation statement, since it is the
+memorable form of the result and the front matter previously said nothing about it.
+
 ## 4. Still to do
 
-Items 2, 3, 8b and the remainder of 10, in that order. Notes for whoever continues:
+Item 8b and the remainder of item 10. Notes for whoever continues:
 
-- The explicit threshold must go **after** `prop:quantitative-intertwiner`, since its first step
-  calls it. Order in the file: decomposition corollary (compactness, kept as the qualitative
-  statement) → quantitative axes → intertwiner → overlap gap → uniform separation → explicit
-  threshold → gauge corollary.
-- Three sentences become false the moment the threshold lands and must be carried in the same
-  commit: the closing sentence of the paragraph after `cor:approximate-decomposition`'s proof
-  ("comes from compactness and is not explicit"); the corresponding clause in
-  `cor:two-unitary-gauge`; and the claim-to-trust paragraph in `sections/08-verification-boundary.tex`
-  that contrasts explicit `τ_p` with non-explicit `ε₀`. `theorem-map.md`'s deliberate-exclusion line
-  "No explicit stability threshold `ε₀`" also becomes false.
 - Item 8b touches `theorem-map.md`'s `cor:discrete-lu-symmetry` label, which names the kernel-checked
   factor-set terminals `genericPartyPermutationOuterAction` and the three
   `genericPartyPermutationFactorSet_*` declarations. Those terminals do not change — only where the
