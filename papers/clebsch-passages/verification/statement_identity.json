@@ -1,15 +1,15 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "a86214cfdb6a021443265ce662db0a606f17d5e048b40b391fe746f6337906c8",
+  "main_source_sha256": "1cb6afcc4260435962acf0d1e48ededf55b5801fdbd860b766f0dba8ae2e8186",
   "section_sha256": {
-    "sections/01-introduction.tex": "319169c0e102d597ee284ec4c5d8988c3da5b17bb47463a188332667b8d2c0b4",
+    "sections/01-introduction.tex": "c882d1bd4ede0ab1ffebcc5bf2e3ee65a5382f53bab945a9d5d4484a714d4590",
     "sections/02-orientation-cover.tex": "34328aed7d067a8f43efb7875769410e66fe02679fad391a23beb9996adb366b",
     "sections/03-orientation-source.tex": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822",
     "sections/04-arithmetic-specialization.tex": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455",
-    "sections/05-golden-operator.tex": "725944a186464a97b4a12b59b92485ce7aba2bb7484b99a21306d3eab66e30c1",
+    "sections/05-golden-operator.tex": "8bb0ab7b35d83ff958b142e6f44508a18b549669539a8b080fd6cb7035801dee",
     "sections/05-harmonic-realization.tex": "278565585415fd1e8a8d73e13536b6a5583c3b5cb19e5b0ed8e213cbb7f53fc3",
-    "sections/09-conclusion.tex": "229ee0c73425485cb2a94ca154b9c757fbe3da422085f0b3f2c4e6adbfdd261c",
+    "sections/09-conclusion.tex": "0c3cb0fed30d0a69b7d5f1a1564b8199903b512f0f68c04ead171c0e1b6d549b",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
     "sections/08-verification.tex": "392737b9f50be55bb145d4db1c3a988a8dcd8d84eff590b4921b1306998f52e5",
     "sections/10-references.tex": "450ed024901ace94e82ad698a3e2aaaa841c01d62ef204950847fcc468293f38"
@@ -21,7 +21,7 @@
       "environment": "theorem",
       "title": "Arithmetic incidence cover",
       "source": "sections/01-introduction.tex",
-      "source_line": 47,
+      "source_line": 48,
       "sha256": "6d903edd8afda2dfcabeca11638ed302f19edfb75d50fbb001e36983d4eac34a",
       "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nIf \\(\\mathcal N\\to\\mathbf P(H)\\) is its finite Stein normalization, then,\nafter normalizing the anti-invariant summand, its algebra is\n\\[\n \\mathcal O\\oplus\\mathcal O(-3),\\qquad z^2=5J_0.\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
     },
@@ -30,7 +30,7 @@
       "environment": "proposition",
       "title": "Relative marked orientation bridge",
       "source": "sections/01-introduction.tex",
-      "source_line": 111,
+      "source_line": 112,
       "sha256": "13be624e23ff39cd96f99fa9409d47733f8dc4c27d97e1fe66c97462d2e9c4db",
       "tex": "\\begin{proposition}[Relative marked orientation bridge]\n\\label{thm:orientation-source}\nFix a marked bridge datum \\(\\mathfrak m\\).  Let\n\\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) they are the two distinct icosahedral configurations;\non the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nRelative to \\(\\mathfrak m\\), equip \\(B_+\\) with the source\n\\([C_{\\mathfrak m},Z_{\\mathfrak m}]_{\\rm or}\\) and equip \\(B_-\\) with its\ndeck-opposite.  At \\([xyz]\\), the golden\nexchanger identifies this opposite with the conjugate configuration and\nthe representative\n\\((-C_{\\mathfrak m},-Z_{\\mathfrak m})\\).  Under the marked primitive\npair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same relative convention fixes the sign of the degree-six cubic in\nTheorem~\\ref{thm:harmonic-main}.  The normalized component alone is not\nasserted to determine \\(\\mathfrak m\\).\n\\end{proposition}"
     },
@@ -57,7 +57,7 @@
       "environment": "theorem",
       "title": "Balanced exchange rigidity",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 45,
+      "source_line": 59,
       "sha256": "7265b0d355f993965b96497cc5af2ce9f13c06294dcd8585836348ab303dff44",
       "tex": "\\begin{theorem}[Balanced exchange rigidity]\n\\label{thm:balanced-exchange-rigidity}\nWith the notation above,\n\\[\n \\Spec(H_Y)=\\Spec\\!\\left(\\frac1qRR^{\\mathsf T}\\right)\n =\\left\\{1-\\frac{\\alpha_1^2}{q},\\ldots,\n          1-\\frac{\\alpha_d^2}{q}\\right\\},\n\\]\nwhere \\(\\alpha_1,\\ldots,\\alpha_d\\) are the eigenvalues of \\(A\\).  The\nspectrum is independent of the balanced half \\(Y\\) if and only if\n\\(d\\leq3\\).  Thus order six is the unique nontrivial realized symmetric\nconference order with this property, and its exchange spectrum is\n\\[\n \\left\\{\\frac15,\\frac45,\\frac45\\right\\}.\n\\]\n\nFor a four-set \\(K\\), let \\(w(K)\\) be the sum of its three signed\nHamilton-cycle products.  Call \\(K\\) \\emph{aligned} if \\(w(K)=3\\), and let\n\\(c_Y\\) count the aligned four-sets in \\(Y\\).  Then\n\\[\n \\operatorname{tr}(H_Y)=\\frac{d^2}{q},\\qquad\n \\operatorname{tr}(H_Y^2)=\\frac{F_d+32c_Y}{q^2},\n\\]\nwhere\n\\[\n F_d=dq^2-2qd(d-1)+d(d-1)+12\\binom d3-8\\binom d4.\n\\]\nHence the first exchange moment is universal, whereas the second is\ncut-independent exactly in the stated small orders.\n\\end{theorem}"
     },
@@ -66,7 +66,7 @@
       "environment": "theorem",
       "title": "Aligned-design faithfulness",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 170,
+      "source_line": 185,
       "sha256": "d4071c638ee238c77271a52d42ea62c5b888d1ab389ed5b1a1a7679939a63809",
       "tex": "\\begin{theorem}[Aligned-design faithfulness]\n\\label{thm:aligned-faithfulness}\nIf \\(|V|\\geq7\\), then \\(\\mathcal A(\\tau)\\) determines \\(\\tau\\) up to\ncomplement.\n\nFor a symmetric conference matrix of order \\(n\\geq10\\), its marked family of\nprincipal four-subsets with determinant \\(-3\\) therefore determines its\nsigning up to diagonal switching and global negation.  After one aligned\nfour-set \\(Q\\) is known, the\n\\[\n 1+4(n-4)+6\\binom{n-4}{2}=3n^2-23n+45\n\\]\ntests on four-sets meeting \\(Q\\) in at least two points already suffice.\nAn aligned anchor is found deterministically with at most twenty tests, so\nthe complete marked reconstruction uses \\(O(n^2)\\) selected determinants.\nOne calibrated triangle product selects between the two global orientations.\n\\end{theorem}"
     },
@@ -75,7 +75,7 @@
       "environment": "theorem",
       "title": "Golden operator and classical cubic shadows",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 267,
+      "source_line": 336,
       "sha256": "c8cf0f8e7edb08a8a5a7370eb393feb09a92cc86a786495003e4282ab57add67",
       "tex": "\\begin{theorem}[Golden operator and classical cubic shadows]\n\\label{thm:operator-shadows}\nFor a marked bridge datum and its coherent outer family:\n\\begin{enumerate}\n\\item The triangle products of \\(C_T\\) satisfy\n\\[\n (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\n \\quad(S=\\{i,j,k\\}),\n\\]\nso \\(Z_T\\) is the switching-invariant orientation cubic on \\(A_X\\).\nThe four-point two-graph identity and pair balance recover the conference\nswitching class; after fixing a vertex, the negative edges on the other five\nvertices form a pentagon.\n\\item The same cubic is a commutator Pfaffian:\n\\[\n \\operatorname{Pf}[D_x,C_T]=4Z_T(x),\n \\qquad\n \\det[D_x,C_T]=16Z_T(x)^2.\n\\]\nOver \\(E=\\Q(\\sqrt5)\\), put\n\\(P_{T,\\pm}=(I\\pm C_T/\\sqrt5)/2\\) and\n\\(B_T(x)=P_{T,-}D_xP_{T,+}\\).  After orienting the two determinant lines,\n\\[\n Z_T(x)=\\pm10\\sqrt5\\det B_T(x).\n\\]\n\\item The six coordinates \\((Z_T)_{T\\in\\mathcal T}\\) satisfy\n\\[\n \\sum_TZ_T=0,\\qquad \\sum_TZ_T^3=0.\n\\]\nThey are the signed Joubert coordinates and hence define the classical map\nfrom six labelled points to the Segre cubic\n\\[\n \\left\\{[z]\\in\\mathbf P^5:\\sum_Tz_T=\\sum_Tz_T^3=0\\right\\}.\n\\]\nInside its hyperplane \\(z_T=0\\), the remaining linear relation cuts the\nambient space to \\(\\mathbf P^3\\), and the remaining cubic equation is the\ndiagonal Clebsch cubic surface.\n\\item The centered determinants\n\\[\n W_T=Z_T^2-\\frac16\\sum_UZ_U^2\n     =\\frac1{16}\\operatorname{center}_T\\det[D_x,C_T]\n\\]\nsatisfy\n\\[\n \\sum_TW_T=0,\n \\qquad\n \\left(\\sum_TW_T^2\\right)^2=4\\sum_TW_T^4.\n\\]\nThus \\(W\\) is the Segre--Igusa polar map.\n\\end{enumerate}\n\\end{theorem}"
     },

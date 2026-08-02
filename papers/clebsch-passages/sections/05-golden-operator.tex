@@ -1,12 +1,13 @@
 \section{The golden operator and its cubic shadows}
 \label{sec:golden-operator}
 
-The incidence cover supplies a golden orientation bit.  We now retain that
-bit on the six-axis carrier and apply three elementary operations to its
+The incidence cover supplies a golden orientation bit.  Relative to the
+marked bridge datum, we attach that bit to the six-axis carrier and apply
+three elementary operations to its
 conference operator: middle exterior power, commutator with the diagonal
 algebra, and centered squaring.  These operations produce the Joubert,
 Segre, Igusa, and diagonal Clebsch models in one calculation.
-The marked datum defines the coherent operator family.  The theorem below
+The construction below makes the coherent operator family explicit.  The theorem below
 proves that its apparently different cubic outputs are the same forms and
 then recognizes their classical quotient geometry.
 
@@ -14,16 +15,29 @@ Let \(X\) be the ordered six-axis set and
 \(A_X=\Q^X/\Q\mathbf1\).  The outer six-set \(\mathcal T\) consists of the
 six synthematic totals, that is, the six labelled one-factorizations of the
 fixed labelled graph \(K_X\).
-These are the classical mystic pentagons, whose complementary triangle
-colourings give the outer six-family \cite[Sections~1.1--1.2 and~1.6]{HMSVOuter}.
+These are the classical mystic pentagons.  For each \(T\in\mathcal T\), its
+complementary triangle colouring assigns signs
+\(\epsilon_T(S)\in\{\pm1\}\) to the three-subsets \(S\subset X\), with the
+global sign fixed by the marked outer orientation.  The signs obey the
+four-point two-graph identity and transform by
+\[
+ \epsilon_{gT}(gS)=\operatorname{sgn}(g)\epsilon_T(S)
+ \qquad(g\in S_X).
+\]
+This is the signed coloured-triangle construction of the outer six-family
+\cite[Sections~1.1--1.2 and~1.6]{HMSVOuter}.
 The order-six conference two-graph is likewise classical: its switching
 class has the pentagon-plus-isolated-vertex form and automorphism group
 \(A_5\) \cite{BMS}.
-Transporting the marked conference class coherently around \(\mathcal T\)
-gives symmetric zero-diagonal sign matrices
-\((C_T)_{T\in\mathcal T}\) with \(C_T^2=5I\).  This coherent outer marking
-is part of the marked bridge datum; the incidence sheet by itself does not
-select it.
+The four-point identity reconstructs from each \(\epsilon_T\) a switching
+class of symmetric zero-diagonal sign matrices; it is the unique order-six
+conference class.  Choose representatives \(C_T\) whose triangle products
+are \(\epsilon_T\), and transport the Hodge orientations with the ordered
+axis basis.  Then \(C_T^2=5I\), and
+the resulting cubics defined below satisfy
+\(gZ_T=\operatorname{sgn}(g)Z_{gT}\).  These choices constitute the coherent
+outer marking.  The incidence sheet supplies only its orientation bit, not
+the outer labels or representatives.
 
 The next theorem explains why this six-axis carrier has no cut-independent
 higher-order analogue.  Let \(C=C^{\mathsf T}\) be any symmetric conference
@@ -156,6 +170,7 @@ therefore \(0\) or \(1\) on every cut.  The 126 projective cuts consequently spl
 into 36 with \(c_Y=0\) and 90 with \(c_Y=1\).  The known design fixes this
 second-moment split without making the complete higher-order spectrum uniform.
 
+\paragraph{A reverse design consequence.}
 The design still retains the full discrete signing, despite fixing only
 aggregate low moments.  Write a two-graph on a finite set \(V\) as a function
 \[
@@ -197,31 +212,85 @@ anchor on every seven-set.
 
 It remains to prove faithfulness on seven points.  Fix an aligned
 \(Q=\{1,2,3,4\}\), complement one candidate if necessary, and switch graph
-representatives so that both vanish on \(Q\).  An outside point \(x\) then
-determines a cut
+representatives so that both vanish on \(Q\).  Switch each outside vertex
+once more so that its edge to vertex \(4\) is zero.  An outside point \(x\)
+then determines a uniquely normalized cut
 \[
  p_x=(e_{1x},e_{2x},e_{3x},e_{4x})
- \in\mathbf F_2^4/\langle(1,1,1,1)\rangle.
+ \in\mathbf F_2^4,\qquad (p_x)_4=0.
 \]
-The four tests meeting \(Q\) in three points recover \(p_x\), except that the
-three balanced \(2+2\) cuts have the same empty signature.  For two outside
-points \(x,y\), put \(p=p_x\), \(s=p_y\), and \(e=e_{xy}\).  The six tests
-\(\{i,j,x,y\}\) are governed by
+The four tests meeting \(Q\) in three points have the following complete
+signature table; an entry \(ijk\) means that \(\{i,j,k,x\}\) is aligned.
 \[
- p_i+p_j=s_i+s_j=p_i+s_i+e=p_j+s_j+e.
+\begin{array}{c|c@{\qquad}c|c}
+p_x&\text{aligned triples}&p_x&\text{aligned triples}\\ \hline
+0000&123,124,134,234&1000&234\\
+0100&134&0010&124\\
+1110&123&1100,1010,0110&\varnothing
+\end{array}
 \]
-Substitution shows that they recover both cuts and \(e\), with one possible
-ambiguity: two distinct balanced cuts may be interchanged.  There are three
-outside points.  Applying the pair condition to all three pairs would force
-two cuts simultaneously to be equal and distinct, so the interchange
-ambiguity is impossible.  The candidates agree after the initial possible
-complement.
+Thus they recover \(p_x\), except that the three balanced cuts
+\(B_{12}=1100\), \(B_{13}=1010\), and \(B_{14}=0110\) have the same empty
+signature.
+
+We record the remaining finite step explicitly.  For outside points \(x,y\),
+put \(p=p_x\), \(s=p_y\), \(e=e_{xy}\), and let
+\(\mathcal B(p,s,e)\) be the set of pairs \(ij\subset Q\) for which
+\(\{i,j,x,y\}\) is aligned.  Its four triangle values give
+\[
+ ij\in\mathcal B(p,s,e)
+ \quad\Longleftrightarrow\quad
+ p_i+s_i=p_j+s_j\ \text{ and }\ e=p_j+s_i.                 \tag{5.1}
+\]
+This criterion gives a complete classification.  If \(p\) and \(s\) are
+already known, some pair has \(p_i+s_i=p_j+s_j\), and exactly one value of
+\(e\) makes that pair aligned.  If exactly one cut is balanced, relabelling
+\(Q\) reduces the known cut to \(0000\) or \(1000\); substituting the three
+balanced cuts in (5.1) gives
+\[
+\begin{array}{c|c|c|c}
+p&s&\mathcal B(p,s,0)&\mathcal B(p,s,1)\\ \hline
+0000&B_{12}&34&12\\
+0000&B_{13}&24&13\\
+0000&B_{14}&14&23\\
+1000&B_{12}&34&13,14\\
+1000&B_{13}&24&12,14\\
+1000&B_{14}&12,13&23
+\end{array}
+\]
+so both the balanced cut and \(e\) are recovered.  When both cuts are
+balanced, the remaining table is
+\[
+\begin{array}{c|c|c}
+\{p,s\}&\mathcal B(p,s,0)&\mathcal B(p,s,1)\\ \hline
+\{B_{12},B_{12}\}&12,34&13,14,23,24\\
+\{B_{13},B_{13}\}&13,24&12,14,23,34\\
+\{B_{14},B_{14}\}&14,23&12,13,24,34\\
+\{B_{12},B_{13}\}&23&14\\
+\{B_{12},B_{14}\}&13&24\\
+\{B_{13},B_{14}\}&12&34
+\end{array}
+\]
+The rows are distinct.  The sole loss of information is the order of two
+distinct balanced cuts: interchanging \(p\) and \(s\) preserves the six pair
+tests and leaves \(e\) fixed.
+
+There are three outside points.  Suppose one cut changes between the two
+candidates.  For each of the other two points the classification forces the
+pair to consist of distinct balanced cuts and swaps them.  Those two other
+cuts are therefore equal to the same changed cut.  Their mutual pair cannot
+be a distinct-cut swap, so it must agree pointwise, contradicting either of
+the first two swaps.  No cut changes, and then (5.1) recovers every outside
+edge.  The candidates agree after the initial possible complement.
 
 For larger \(V\), apply the seven-point result to every seven-set.  Adjacent
-seven-sets in the connected Johnson graph share a triple, which forces their
-complement choices to agree.  This proves faithfulness.  The same one-point
-and pair tests use exactly the displayed quadratic family, and the twenty
-triples on six vertices give the deterministic anchor search.
+seven-sets in the connected Johnson graph share six vertices.  On any triple
+in that intersection the two restrictions cannot choose opposite complement
+conventions, so their complement choices agree.  This proves faithfulness.
+The same one-point and pair tests use exactly the displayed quadratic family.
+To find the anchor, fix a root and six other vertices and test the twenty
+four-sets formed by the root and a triple of the six; \(R(3,3)=6\) makes at
+least one aligned.
 
 For a conference signing, the identity
 \(\det C[Q]=3-2w(Q)\) identifies the determinant-\((-3)\) family with
@@ -349,10 +418,11 @@ Comparison with \(16Z_T^2\) gives
 \(Z_T^2=500\det(B_T)^2\); the chosen determinant-line orientation fixes the
 displayed sign.
 
-Finally, the coloured-triangle Joubert coordinates and their Segre relations
-are classical \cite[Sections~2.1--2.2]{HMSVOuter}.  The matching expansion
-identifies the six operator cubics \(Z_T\) with that regular simplex in the
-five-dimensional invariant space of six points, so
+Finally, by construction the coefficient of \(x_S\) in \(Z_T\) is the signed
+triangle colour \(\epsilon_T(S)\).  Thus the six operator cubics are exactly
+the signed coloured-triangle Joubert coordinates, including the normalization
+and transformation rule \(gZ_T=\operatorname{sgn}(g)Z_{gT}\).  Their Segre
+relations are classical \cite[Sections~2.1--2.2]{HMSVOuter}, so
 \(\sum Z_T=\sum Z_T^3=0\).  Setting one coordinate to zero gives
 \(\sum_{U\ne T}Z_U=\sum_{U\ne T}Z_U^3=0\), the diagonal Clebsch cubic.
 The centered-square formula and the symmetric Igusa equation are the
@@ -371,8 +441,6 @@ rotation through angle \(\theta\) in a coordinate plane changes its permanent
 from \(1\) to \(\cos(2\theta)\).  Thus the permanent supplies no further cubic
 shadow of the marked operator.
 
-The theorem uses no physical or exceptional-group interpretation.  In
-particular, the quantum, anomaly, Majorana, Coble--Burkhardt, lattice, doily,
-and higher-conference constructions attached to the same operator play no
-role here.  The only retained chain is incidence descent, conference carrier,
-classical cubics, and the harmonic return of Section~\ref{sec:harmonic}.
+No physical or exceptional-group interpretation is used here.  The retained
+chain is incidence descent, conference carrier, classical cubics, and the
+harmonic return of Section~\ref{sec:harmonic}.
