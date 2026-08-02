@@ -28,14 +28,15 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Seven research passes complete; the theorem is **not** proved. Reports:
+Eight research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
 `notes/2026-08-01-c756-paley-windmill-reduction.md`, and
 `notes/2026-08-01-c756-paley-bispectral-reduction.md`, and
 `notes/2026-08-01-c756-primitive-jacobi-collisions.md`, and
-`notes/2026-08-01-c756-nonsaturated-direction-reduction.md`.
+`notes/2026-08-01-c756-nonsaturated-direction-reduction.md`, and
+`notes/2026-08-01-c756-segre-discriminant-comparison.md`.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -101,6 +102,20 @@ What the first nonsaturated pass adds:
   rational points, so its binary-quadratic discriminant is zero or a square; the first
   boundary not removed by the \(q\le43\) classification is \((q,k)=(53,12)\).
 
+What the defect-two comparison adds:
+
+- the residual quadratic has square-or-zero discriminant while the anisotropic
+  \(Q|_\ell\) has nonsquare discriminant, but Segre reciprocity does not identify them;
+- every tangent product factors as a conic-meeting factor times a spare-external factor;
+  the latter is trivial in the saturated proof but has large positive degree here and
+  absorbs the desired square-class comparison;
+- after removing the selected spare line, its tangent factor restricts back to that line
+  as a pure power at the selected arc point, so it contains no residual concurrence
+  divisor;
+- the smallest replacement carrier is the first subresultant of
+  \(\mathcal H(U,T)=\prod_i(U+x_iT-y_i)\), which retains the repeated chord intercept as
+  well as its direction.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -110,13 +125,15 @@ conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternat
 \(q\)).  The sixth pass proves the primitive Jacobi collision lemma and closes the entire
 saturated-external branch.  The seventh pass gives the strict nonsaturated bound, divides
 the direction polynomial by its forced Moore factor, localizes the defect, and closes
-\(\delta=0,1\).  At \(\delta=2\), the problem is now the sharp comparison between the
-split residual quadratic and the nonsquare discriminant class of the anisotropic
-quadratic \(Q|_\ell\), beginning at \((q,k)=(53,12)\).  The next gate is to derive that
-comparison from Segre's tangent-product relation.  If it closes defect two, residual
-slack \(\delta\ge3\) remains for the completely split degree-\(\delta\) divisor.  The
-dual internal-node blocking formulation is retained as
-structural input rather than as a substitute for the closed spectral step.
+\(\delta=0,1\).  At \(\delta=2\), the direct Segre discriminant comparison is now
+closed negatively: the split residual quadratic and anisotropic \(Q|_\ell\) have
+opposite square classes, but the tangent identity contains an uncontrolled spare-line
+factor and does not equate them.  The next gate is to divide the forced Moore square
+from the first subresultant of the affine chord polynomial and determine whether its
+residual intercept rational function has degree \(O(\delta)\).  A positive degree bound
+would make a Weil argument viable first at \((q,k)=(53,12)\); failure would rule out
+the last identified small-degree route.  Residual slack \(\delta\ge3\) and the dual
+internal-node blocking formulation remain open structural input.
 
 ## Current boundary
 
@@ -139,10 +156,12 @@ Two candidate routes, both about making a second-order count uniform in \(k\):
 
 ## Prior estimate
 
-~30% provable with current tools (review §12.6). The estimate is driven entirely by
-whether either route above admits a \(k\)-uniform form. Record the actual obstruction
-if it fails — a sharp statement of *why* the chord-moment system cannot close is itself
-publishable material for the existing papers.
+The review prior was ~30% provable with current tools (§12.6).  After the direct
+defect-two Segre comparison failed, the working estimate is ~20--25%.  The remaining
+positive route is whether the intercept subresultant admits an \(O(\delta)\)-degree
+Moore quotient.  Record the actual obstruction if it fails — a sharp statement of
+*why* the chord-moment system cannot close is itself publishable material for the
+existing papers.
 
 ## Scope
 
