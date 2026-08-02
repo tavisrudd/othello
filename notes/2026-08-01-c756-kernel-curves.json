@@ -1,0 +1,1012 @@
+{
+  "dependencies": {
+    "python-flint": "0.9.0",
+    "sympy": "1.14.0"
+  },
+  "input": "2026-08-01-c756-masked-rs-collision-audit.json",
+  "rows": [
+    {
+      "chord_curve_rational_intersection_profile": {
+        "0": 6,
+        "1": 9
+      },
+      "conic_preserving_stabilizer": {
+        "conic_orbit_sizes": [
+          2,
+          6,
+          6
+        ],
+        "conic_power_in_same_character_space": true,
+        "curve_character_scalar_profile": {
+          "1": 2,
+          "3": 2,
+          "9": 2
+        },
+        "degree_d_character_space_dimension": 4,
+        "element_order_profile": {
+          "1": 1,
+          "2": 3,
+          "3": 2
+        },
+        "equals_selected_witness_stabilizer": true,
+        "isomorphism_type": "S3",
+        "missing_orbit_sizes": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "off_conic_orbit_size_profile": {
+          "1": 1,
+          "3": 14,
+          "6": 21
+        },
+        "order": 6,
+        "witness_orbit_sizes": [
+          3,
+          3
+        ]
+      },
+      "curve_degree_kernel_dimension": 1,
+      "curve_off_conic_chord_multiplicity_profile": {
+        "0": 24,
+        "3": 3
+      },
+      "curve_point_decomposition": {
+        "arc_vertices": 0,
+        "covered_off_conic_nonvertices": 3,
+        "missing": 24,
+        "on_conic": 2
+      },
+      "curve_rational_points": 29,
+      "degree": 4,
+      "evaluation_rank": 14,
+      "flint_factorization": "irreducible over F_q",
+      "genus": 3,
+      "geometric_classification": "smooth absolutely irreducible plane curve",
+      "kernel_dimension": 1,
+      "missing_count": 24,
+      "monomial_count": 15,
+      "normalization": "coefficient of x^degree equals 1",
+      "polynomial_terms": [
+        {
+          "coefficient": 1,
+          "exponents": [
+            0,
+            0,
+            4
+          ]
+        },
+        {
+          "coefficient": -5,
+          "exponents": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "coefficient": -3,
+          "exponents": [
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            0,
+            3,
+            1
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            1,
+            0,
+            3
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "coefficient": -4,
+          "exponents": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "coefficient": 2,
+          "exponents": [
+            1,
+            3,
+            0
+          ]
+        },
+        {
+          "coefficient": -5,
+          "exponents": [
+            2,
+            0,
+            2
+          ]
+        },
+        {
+          "coefficient": 3,
+          "exponents": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": 3,
+          "exponents": [
+            2,
+            2,
+            0
+          ]
+        },
+        {
+          "coefficient": -4,
+          "exponents": [
+            3,
+            0,
+            1
+          ]
+        },
+        {
+          "coefficient": -2,
+          "exponents": [
+            3,
+            1,
+            0
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            4,
+            0,
+            0
+          ]
+        }
+      ],
+      "q": 13,
+      "rational_singular_points": 0,
+      "smooth_chart_certificates": {
+        "x": "unit_ideal",
+        "y": "unit_ideal",
+        "z": "unit_ideal"
+      },
+      "stabilizer_invariant_external_arcs": {
+        "count": 4,
+        "missing_count_profile": {
+          "24": 4
+        },
+        "selected_curve_container_count": 1,
+        "selected_witness_count": 1
+      },
+      "witness": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          3,
+          12,
+          1
+        ],
+        [
+          4,
+          9,
+          1
+        ],
+        [
+          6,
+          5,
+          1
+        ],
+        [
+          9,
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "chord_curve_rational_intersection_profile": {
+        "0": 15,
+        "1": 15,
+        "2": 10,
+        "3": 5
+      },
+      "conic_preserving_stabilizer": {
+        "conic_orbit_sizes": [
+          10,
+          10,
+          10
+        ],
+        "conic_power_in_same_character_space": null,
+        "curve_character_scalar_profile": {
+          "1": 3,
+          "12": 2,
+          "17": 3,
+          "28": 2
+        },
+        "degree_d_character_space_dimension": 6,
+        "element_order_profile": {
+          "1": 1,
+          "2": 5,
+          "5": 4
+        },
+        "equals_selected_witness_stabilizer": true,
+        "isomorphism_type": "D10",
+        "missing_orbit_sizes": [
+          10,
+          10,
+          10,
+          10,
+          10
+        ],
+        "off_conic_orbit_size_profile": {
+          "1": 1,
+          "5": 30,
+          "10": 69
+        },
+        "order": 10,
+        "witness_orbit_sizes": [
+          5,
+          5
+        ]
+      },
+      "curve_degree_kernel_dimension": 1,
+      "curve_off_conic_chord_multiplicity_profile": {
+        "0": 50,
+        "1": 10,
+        "2": 10,
+        "4": 5
+      },
+      "curve_point_decomposition": {
+        "arc_vertices": 0,
+        "covered_off_conic_nonvertices": 25,
+        "missing": 50,
+        "on_conic": 0
+      },
+      "curve_rational_points": 75,
+      "degree": 7,
+      "evaluation_rank": 35,
+      "flint_factorization": "irreducible over F_q",
+      "genus": 15,
+      "geometric_classification": "smooth absolutely irreducible plane curve",
+      "kernel_dimension": 1,
+      "missing_count": 50,
+      "monomial_count": 36,
+      "normalization": "coefficient of x^degree equals 1",
+      "polynomial_terms": [
+        {
+          "coefficient": 1,
+          "exponents": [
+            0,
+            0,
+            7
+          ]
+        },
+        {
+          "coefficient": -10,
+          "exponents": [
+            0,
+            1,
+            6
+          ]
+        },
+        {
+          "coefficient": -11,
+          "exponents": [
+            0,
+            2,
+            5
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            0,
+            3,
+            4
+          ]
+        },
+        {
+          "coefficient": -6,
+          "exponents": [
+            0,
+            4,
+            3
+          ]
+        },
+        {
+          "coefficient": 11,
+          "exponents": [
+            0,
+            5,
+            2
+          ]
+        },
+        {
+          "coefficient": 8,
+          "exponents": [
+            0,
+            6,
+            1
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            0,
+            7,
+            0
+          ]
+        },
+        {
+          "coefficient": 12,
+          "exponents": [
+            1,
+            0,
+            6
+          ]
+        },
+        {
+          "coefficient": 14,
+          "exponents": [
+            1,
+            1,
+            5
+          ]
+        },
+        {
+          "coefficient": -3,
+          "exponents": [
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "coefficient": -3,
+          "exponents": [
+            1,
+            3,
+            3
+          ]
+        },
+        {
+          "coefficient": -13,
+          "exponents": [
+            1,
+            4,
+            2
+          ]
+        },
+        {
+          "coefficient": 9,
+          "exponents": [
+            1,
+            6,
+            0
+          ]
+        },
+        {
+          "coefficient": -14,
+          "exponents": [
+            2,
+            0,
+            5
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            2,
+            1,
+            4
+          ]
+        },
+        {
+          "coefficient": -3,
+          "exponents": [
+            2,
+            2,
+            3
+          ]
+        },
+        {
+          "coefficient": 6,
+          "exponents": [
+            2,
+            3,
+            2
+          ]
+        },
+        {
+          "coefficient": 3,
+          "exponents": [
+            2,
+            4,
+            1
+          ]
+        },
+        {
+          "coefficient": 9,
+          "exponents": [
+            2,
+            5,
+            0
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            3,
+            0,
+            4
+          ]
+        },
+        {
+          "coefficient": 8,
+          "exponents": [
+            3,
+            1,
+            3
+          ]
+        },
+        {
+          "coefficient": 8,
+          "exponents": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "coefficient": -10,
+          "exponents": [
+            3,
+            3,
+            1
+          ]
+        },
+        {
+          "coefficient": 7,
+          "exponents": [
+            3,
+            4,
+            0
+          ]
+        },
+        {
+          "coefficient": -11,
+          "exponents": [
+            4,
+            0,
+            3
+          ]
+        },
+        {
+          "coefficient": -2,
+          "exponents": [
+            4,
+            1,
+            2
+          ]
+        },
+        {
+          "coefficient": 9,
+          "exponents": [
+            4,
+            2,
+            1
+          ]
+        },
+        {
+          "coefficient": 6,
+          "exponents": [
+            4,
+            3,
+            0
+          ]
+        },
+        {
+          "coefficient": 6,
+          "exponents": [
+            5,
+            0,
+            2
+          ]
+        },
+        {
+          "coefficient": 11,
+          "exponents": [
+            5,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            5,
+            2,
+            0
+          ]
+        },
+        {
+          "coefficient": -12,
+          "exponents": [
+            6,
+            0,
+            1
+          ]
+        },
+        {
+          "coefficient": 2,
+          "exponents": [
+            6,
+            1,
+            0
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            7,
+            0,
+            0
+          ]
+        }
+      ],
+      "q": 29,
+      "rational_singular_points": 0,
+      "smooth_chart_certificates": {
+        "x": "unit_ideal",
+        "y": "unit_ideal",
+        "z": "unit_ideal"
+      },
+      "stabilizer_invariant_external_arcs": {
+        "count": 4,
+        "missing_count_profile": {
+          "50": 2,
+          "70": 2
+        },
+        "selected_curve_container_count": 1,
+        "selected_witness_count": 1
+      },
+      "witness": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          12,
+          1
+        ],
+        [
+          5,
+          14,
+          1
+        ],
+        [
+          6,
+          19,
+          1
+        ],
+        [
+          7,
+          1,
+          1
+        ],
+        [
+          12,
+          1,
+          0
+        ],
+        [
+          14,
+          5,
+          1
+        ],
+        [
+          16,
+          7,
+          1
+        ],
+        [
+          24,
+          11,
+          1
+        ]
+      ]
+    },
+    {
+      "chord_curve_rational_intersection_profile": {
+        "0": 30,
+        "2": 15
+      },
+      "conic_preserving_stabilizer": {
+        "conic_orbit_sizes": [
+          12,
+          20
+        ],
+        "conic_power_in_same_character_space": true,
+        "curve_character_scalar_profile": {
+          "1": 18,
+          "2": 12,
+          "4": 18,
+          "8": 12
+        },
+        "degree_d_character_space_dimension": 2,
+        "element_order_profile": {
+          "1": 1,
+          "2": 15,
+          "3": 20,
+          "5": 24
+        },
+        "equals_selected_witness_stabilizer": true,
+        "isomorphism_type": "A5",
+        "missing_orbit_sizes": [
+          60
+        ],
+        "off_conic_orbit_size_profile": {
+          "6": 1,
+          "10": 1,
+          "15": 1,
+          "30": 13,
+          "60": 9
+        },
+        "order": 60,
+        "witness_orbit_sizes": [
+          10
+        ]
+      },
+      "curve_degree_kernel_dimension": 1,
+      "curve_off_conic_chord_multiplicity_profile": {
+        "0": 60,
+        "1": 30
+      },
+      "curve_point_decomposition": {
+        "arc_vertices": 0,
+        "covered_off_conic_nonvertices": 30,
+        "missing": 60,
+        "on_conic": 12
+      },
+      "curve_rational_points": 102,
+      "degree": 6,
+      "evaluation_rank": 27,
+      "flint_factorization": "irreducible over F_q",
+      "genus": 10,
+      "geometric_classification": "smooth absolutely irreducible plane curve",
+      "kernel_dimension": 1,
+      "missing_count": 60,
+      "monomial_count": 28,
+      "normalization": "coefficient of x^degree equals 1",
+      "polynomial_terms": [
+        {
+          "coefficient": 4,
+          "exponents": [
+            0,
+            0,
+            6
+          ]
+        },
+        {
+          "coefficient": 7,
+          "exponents": [
+            0,
+            1,
+            5
+          ]
+        },
+        {
+          "coefficient": -2,
+          "exponents": [
+            0,
+            2,
+            4
+          ]
+        },
+        {
+          "coefficient": -6,
+          "exponents": [
+            0,
+            3,
+            3
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            0,
+            4,
+            2
+          ]
+        },
+        {
+          "coefficient": 12,
+          "exponents": [
+            0,
+            5,
+            1
+          ]
+        },
+        {
+          "coefficient": 12,
+          "exponents": [
+            0,
+            6,
+            0
+          ]
+        },
+        {
+          "coefficient": 6,
+          "exponents": [
+            1,
+            0,
+            5
+          ]
+        },
+        {
+          "coefficient": -10,
+          "exponents": [
+            1,
+            1,
+            4
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "coefficient": -1,
+          "exponents": [
+            1,
+            3,
+            2
+          ]
+        },
+        {
+          "coefficient": -8,
+          "exponents": [
+            1,
+            4,
+            1
+          ]
+        },
+        {
+          "coefficient": -9,
+          "exponents": [
+            1,
+            5,
+            0
+          ]
+        },
+        {
+          "coefficient": -14,
+          "exponents": [
+            2,
+            0,
+            4
+          ]
+        },
+        {
+          "coefficient": -8,
+          "exponents": [
+            2,
+            1,
+            3
+          ]
+        },
+        {
+          "coefficient": 12,
+          "exponents": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            2,
+            3,
+            1
+          ]
+        },
+        {
+          "coefficient": 12,
+          "exponents": [
+            2,
+            4,
+            0
+          ]
+        },
+        {
+          "coefficient": 7,
+          "exponents": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "coefficient": 6,
+          "exponents": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "coefficient": 12,
+          "exponents": [
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "coefficient": 12,
+          "exponents": [
+            3,
+            3,
+            0
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            4,
+            0,
+            2
+          ]
+        },
+        {
+          "coefficient": -11,
+          "exponents": [
+            4,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": -7,
+          "exponents": [
+            4,
+            2,
+            0
+          ]
+        },
+        {
+          "coefficient": -10,
+          "exponents": [
+            5,
+            0,
+            1
+          ]
+        },
+        {
+          "coefficient": 15,
+          "exponents": [
+            5,
+            1,
+            0
+          ]
+        },
+        {
+          "coefficient": 1,
+          "exponents": [
+            6,
+            0,
+            0
+          ]
+        }
+      ],
+      "q": 31,
+      "rational_singular_points": 0,
+      "smooth_chart_certificates": {
+        "x": "unit_ideal",
+        "y": "unit_ideal",
+        "z": "unit_ideal"
+      },
+      "stabilizer_invariant_external_arcs": {
+        "count": 1,
+        "missing_count_profile": {
+          "60": 1
+        },
+        "selected_curve_container_count": 1,
+        "selected_witness_count": 1
+      },
+      "witness": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          19,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          7,
+          5,
+          1
+        ],
+        [
+          8,
+          7,
+          1
+        ],
+        [
+          13,
+          1,
+          0
+        ],
+        [
+          13,
+          10,
+          1
+        ],
+        [
+          13,
+          24,
+          1
+        ],
+        [
+          16,
+          30,
+          1
+        ],
+        [
+          17,
+          9,
+          1
+        ]
+      ]
+    }
+  ],
+  "schema": "c756-kernel-curves-v1",
+  "scope": "the selected maximum-coverage extremal witness in each of the prime fields q=13,29,31, at its first unexpected Hilbert degree"
+}

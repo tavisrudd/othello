@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Fourteen research passes complete; the theorem is **not** proved. Reports:
+Fifteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -42,7 +42,8 @@ Fourteen research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-intercept-subresultant-probe.md`, and
 `notes/2026-08-01-c756-information-probability-structure-lottery.md`, and
 `notes/2026-08-01-c756-masked-rs-collision-audit.md`, and
-`notes/2026-08-01-c756-probability-cheap-tests.md`.
+`notes/2026-08-01-c756-probability-cheap-tests.md`, and
+`notes/2026-08-01-c756-kernel-curves.md`.
 
 Branch ledger:
 
@@ -55,7 +56,9 @@ Branch ledger:
   is to prove that no coherent system exists for \(q>5\);
 - **nonsaturated — open for \(\delta\ge2\):** \(\delta=0,1\) are closed, while the
   direct Segre, global-moment, raw-subresultant, and dual-pencil low-degree norm repairs
-  fail; the all-internal near-transversal classification itself remains open.
+  fail; the three exceptional missing-set kernels are smooth symmetry-specific curves
+  rather than a common split-support carrier, and the all-internal near-transversal
+  classification itself remains open.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -243,6 +246,24 @@ What the probability/information cheap-test pass adds:
   \(q=5,7\), and the \(q=11\) hexagon supplies the all-negative five-pattern absent in
   those two fields.
 
+What the missing-set kernel-curve extraction adds:
+
+- the first unexpected kernels for the selected maximum-coverage witnesses at
+  \(q=13,29,31\) are one-dimensional and define smooth absolutely irreducible plane
+  curves of degrees \(4,7,6\), genera \(3,15,10\), and respectively \(29,75,102\)
+  rational points;
+- their exact conic-preserving stabilizers equal the witness stabilizers and are
+  \(S_3,D_{10},A_5\); the missing sets split into regular orbits
+  \(6^4,10^5,60\);
+- no curve contains an arc vertex or factors through the conic or chord lines, and their
+  conic/chord intersection profiles have no common pattern;
+- the \(q=31\) sextic lies in an exact two-dimensional \(A_5\)-stable character space
+  containing \((y^2-xz)^3\), while the corresponding spaces at \(q=13,29\) have
+  dimensions four and six;
+- hence the promoted split-support diagnostic closes as a uniform nonsaturated proof
+  route.  The \(q=31\) \(A_5\) pencil remains a finite exceptional object, and the
+  prefix-container diagnostic is the sole survivor of the probability cheap-test pair.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -262,7 +283,9 @@ intercept calculation now proves that its natural conic-weighted norm also remai
 degree \(\Theta(q)\).  No current small-degree nonsaturated route remains.  The
 all-internal defect-two near-transversal classification, genuinely pair-coupled carriers,
 and second-order covering counts remain structural possibilities; residual slack
-\(\delta\ge3\) stays open behind the defect-two gate.
+\(\delta\ge3\) stays open behind the defect-two gate.  The selected-witness kernel
+curves do not supply the missing global carrier: their degrees and stabilizers are
+field-specific.
 
 ## Current boundary
 
@@ -286,10 +309,11 @@ The nonsaturated branch has no bounded per-line algebraic-compression gate left.
 target is now to prove \(h\ge1\): after deleting any arc point, a conic-external set cannot
 determine every direction on a spare external line.  This is a masked Rédei--Szőnyi-style
 direction theorem whose natural global carrier is the completely split chord polynomial;
-the weighted collision statistic \(R\) remains a fallback.  The next global diagnostics
-are to extract the unexpected \(q=13,29,31\) missing-set curves and geometrically label
-the compressed prefix-extension classes.  Raw entropic uncertainty, degree-two Lloyd
-moments, and unstructured local cumulants are closed-negative.
+the weighted collision statistic \(R\) remains a fallback.  The next global diagnostic
+is to geometrically label the compressed prefix-extension classes.  The unexpected
+\(q=13,29,31\) missing-set curves are now extracted and close as a uniform route.  Raw
+entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
+closed-negative.
 
 Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
 now has the same theorem-shaped status the saturated-external branch had two passes before
@@ -299,10 +323,10 @@ the precise explanation requested here for why the chord-moment compression fami
 close.  The exhaustive masked-direction audit kills threshold unification but promotes
 the simpler \(h\ge1\) theorem, supported without exception in the certified range; this
 sharpens but does not yet raise the 10--15% full-theorem odds.  The probability cheap tests
-leave two bounded global leads but no new theorem.  Cheap
+leave one bounded global lead but no new theorem.  Cheap
 hygiene still owed before a later end-to-end handoff is one explicit
 \(q=27\) extension-field audit of the closed saturated-external chain and one consolidated
-read of the full fourteen-pass argument; neither item reopens a closed mathematical branch.
+read of the full fifteen-pass argument; neither item reopens a closed mathematical branch.
 
 Decision split: do not price the saturated crown and the full theorem as one outcome.
 The realistic publishable narrowing is the **complete saturated classification** — over
@@ -310,7 +334,8 @@ every field, the four-frame and Clebsch hexagon are the only saturated conic-fil
 It needs only the coherent-double-clique gate and is currently estimated at roughly 50%
 (the gate itself 55--65%, discounted for the outstanding extension-field and end-to-end
 verification).  The full all-\(k\) theorem additionally requires a new nonsaturated
-invariant and remains a 10--15% lottery ticket.  A positive saturated result would trigger
+invariant and remains a 10--15% lottery ticket; the kernel-curve pass removes one of the
+two surviving cheap global diagnostics without changing those odds.  A positive saturated result would trigger
 its own paper-scoping task; it is not silently promoted to a manuscript under C756.
 
 ## Prior estimate
