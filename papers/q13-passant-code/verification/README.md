@@ -1,7 +1,9 @@
 # Verification surface for the q=13 passant code
 
-This directory will be the paper-owned trust boundary for Paper IV. The
-release verifier must distinguish five modes:
+This directory is the paper-owned trust boundary for Paper IV. The human
+structural proof is primary. Evidence records discovery and discharges only
+finite terminal leaves that have not admitted useful conceptual compression.
+Within that hierarchy, the release verifier distinguishes five modes:
 
 1. human structural proof;
 2. published theorem imported by pinpoint citation;
@@ -12,8 +14,10 @@ release verifier must distinguish five modes:
 The current `claim_map.json` records the frozen source claims and their
 present trust modes. `evidence_manifest.json` records the first byte-for-byte
 migration from Paper I, including source commit, paths, byte counts, hashes,
-commands, and replay relationships. This infrastructure is not yet a release
-certificate.
+commands, and replay relationships. The paper-owned Lean package under
+`lean-certificates/` checks the q=13 coordinate semantics, tangent-graph leaf,
+both weight-ten syndrome profiles, and four displayed minimum-word orbits.
+Its formal scope is strictly smaller than the complete release theorem.
 
 ## Evidence to extract
 
@@ -41,7 +45,7 @@ with `python3 verify_evidence.py`.
 
 ## Lean release layout
 
-The shared `finitegeom` repository should contain semantic, reusable modules:
+The shared Lean library contains these semantic, reusable modules:
 
 ```text
 RelativeConicArcs/ConicPassantCode.lean
@@ -53,28 +57,33 @@ RelativeConicArcs/PassantCodeQ13/Reconstruction.lean
 RelativeConicArcs/Gates/PassantCodeQ13.lean
 ```
 
-Large generated finite leaves belong in a standalone certificate package,
-partitioned by mathematical role rather than build chronology:
+The paper-owned standalone Lake package contains finite leaves partitioned by
+mathematical role rather than build chronology:
 
 ```text
-PassantCodeQ13/WeightTen/IsolatedProfile.lean
-PassantCodeQ13/WeightTen/CycleProfile.lean
+PassantCodeQ13/WeightTen/IsolatedProfile/Fibre0.lean ... Fibre6.lean
+PassantCodeQ13/WeightTen/CycleProfile/Residue0.lean ... Residue6.lean
+PassantCodeQ13/WeightTen/Aggregate.lean
 PassantCodeQ13/MinimumWords/OrbitS4.lean
 PassantCodeQ13/MinimumWords/OrbitDihedral.lean
 PassantCodeQ13/MinimumWords/Reconstruction.lean
 PassantCodeQ13/Gates/Main.lean
+PassantCodeQ13/Gates/AxiomAudit.lean
 ```
 
-The public aggregate must prove the exact paper theorem or expose its residual
-human boundary. Its axiom report must be generated from the pinned toolchain's
-actual `#print axioms` output. Task identifiers, manuscript section numbers,
-private reports, and workflow status language are forbidden from module names,
-declaration names, comments, and generated banners.
+The public aggregate exposes its formal boundary: it does not establish
+arbitrary-word profile transport, minimum-layer exhaustion, uniqueness of the
+recovered rows, or the automorphism anchor. Its axiom report comes
+from the pinned toolchain's actual `#print axioms` output. Task identifiers,
+manuscript section numbers, private reports, and workflow status language are
+forbidden from module names, declaration names, comments, and generated
+banners.
 
-## Formalization target
+## Semantic mirror and finite-leaf target
 
-The preferred endpoint is an axiom-free finite theorem, apart from Mathlib's
-standard logical axioms, establishing:
+The preferred endpoint is a semantic Lean mirror of the human mechanisms,
+with kernel checking at irreducibly finite leaves. It should eventually
+establish, apart from Mathlib's standard logical axioms:
 
 - the binary code has length 78, dimension 36, and minimum distance 12;
 - its minimum layer has 364 words in the stated four orbits;
@@ -83,7 +92,8 @@ standard logical axioms, establishing:
 - the resulting coordinate-permutation automorphism group is
   `PGL(2,13)`.
 
-The formal proof should preserve the human mechanisms. In particular, it
+This formal surface is supporting evidence, not the manuscript's narrative
+spine. It should preserve the human mechanisms. In particular, it
 should formalize the tangent-graph reduction in weight eight, the exhaustive
 coverage theorem for the two weight-ten profiles, the mod-two association-
 algebra spanning argument, and the anchor proof of the automorphism group.

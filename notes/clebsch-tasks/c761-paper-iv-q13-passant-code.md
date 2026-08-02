@@ -3,8 +3,9 @@
 **Lane:** `clebsch`
 
 **Status:** active; theorem and novelty boundary frozen, full human proof and
-paper-owned evidence gate green, reusable Lean incidence-code semantics green;
-the q13 semantic modules and release gates remain.
+paper-owned evidence gate green, shared q13 semantic modules and the sharded
+paper-owned Lean certificate gate green.  Seven exact semantic transports and
+the remaining release/publication work remain.
 
 ## Goal
 
@@ -41,8 +42,12 @@ silently shared with the released Paper-I surface.
 3. Copy the q13 generators, certificates, and independent replay into the
    Paper-IV root; give them paper-local semantics, stable schemas, hashes, and
    one aggregate verifier.
-4. Build the shared structural Lean modules and the sharded q13 certificate
-   package described in `papers/q13-passant-code/verification/README.md`.
+4. **Green (partial formal coverage):** shared structural Lean modules and the
+   sharded q13 certificate package described in
+   `papers/q13-passant-code/verification/README.md`; close the explicitly
+   recorded evaluator, tangent/profile transports, orbit exhaustion,
+   association/Gram transport, row uniqueness, and concrete automorphism-
+   anchor boundaries before claiming full Lean coverage.
 5. Connect every manuscript statement to an exact Lean declaration,
    certificate, citation, or human proof and generate an axiom audit.
 6. Update the released Paper-I companion by forward version: replace the full

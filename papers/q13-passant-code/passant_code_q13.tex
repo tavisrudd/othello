@@ -49,7 +49,7 @@ each orbit spans the code.  More strongly, the minimum supports reconstruct
 the passant incidence matrix and the six-class elliptic association scheme;
 their coordinate-permutation automorphism group is exactly
 \(\PGL(2,13)\).  The proof combines a tangent-product exclusion in weight
-eight, two exhaustive but compact syndrome-disjointness certificates in
+eight, two exhaustive but compact syndrome-disjointness checks in
 weight ten, and structural arguments in the binary association algebra for
 spanning and reconstruction.
 \end{abstract}
@@ -117,7 +117,7 @@ in its symmetric-square action on the \(78\) internal points.
 Reconstruction here is a permutation statement.  It does not choose an
 equation for the conic, label the projective points, or order the parity
 checks.  The proof has three finite leaves: a five-row clique closure in
-weight eight, two syndrome-disjointness certificates in weight ten, and an
+weight eight, two syndrome-disjointness checks in weight ten, and an
 exact orbit/concurrence replay for the minimum layer.  The reductions to
 those leaves and the association-algebra argument are mathematical proofs in
 the text.
@@ -203,7 +203,7 @@ and \(9-s\ge7\), so \(s=0\) or \(s=2\).  The profiles are
 where the last entry is the number of secant neighbors.
 
 Write \(m_Q\) for the \(78\)-bit incidence column at \(Q\).  For the first
-profile and each choice of exceptional fibre, the certificate forms two
+profile and each choice of exceptional fibre, the finite check forms two
 canonically sorted partial-XOR sets of sizes \(216\) and \(4320\).  For the
 second profile the sizes are \(216\) and \(771024\).  In every case the two
 sets are disjoint.  The raw domains have sizes
@@ -332,10 +332,17 @@ automorphism of \(\mathcal H\) preserves \(K\), because any one of the four
 minimum orbits spans it.  The two coordinate-permutation groups therefore
 coincide.  This completes the proof of Theorem~\ref{thm:main}.
 
-\section{Formalization and exact evidence}
+\section{Human proof and exact finite evidence}
+
+The proof above is a human structural proof: parity and pencil geometry make
+the low-weight reductions, the tangent product controls weight eight, the
+association algebra explains spanning, and concurrence and anchors explain
+reconstruction and rigidity.  Computation is not the proof architecture.  It
+records discovery and checks only finite leaves that have not admitted useful
+conceptual compression.
 
 The public evidence directory contains four paper-owned objects.  A profile
-generator checks the canonical weight-ten certificate.  An independent
+generator checks the canonical weight-ten finite data.  An independent
 dynamic program reconstructs the incidence matrix and repeats both
 exclusions.  The main exact replay checks the clique closure, rank, minimum
 layer, concurrence reconstruction, spanning identities, and automorphism
@@ -343,13 +350,25 @@ anchors.  The aggregate entry point \nolinkurl{verify_evidence.py} first
 checks all recorded byte counts and SHA-256 hashes and then runs the three
 replays.  Its adjacent README gives the individual filenames and commands.
 
-The trusted boundary is explicit.  The parity and pencil-profile reductions,
-the tangent-product implication, the association-algebra proof, and the
-anchor argument are human proofs.  The two large weight-ten leaves and the
-364-word exhaustion are exact trusted executions with independent checks.
-The planned Lean development will formalize the structural reductions and
-coverage maps, but the present manuscript does not describe the complete
-theorem as Lean-proved.
+The trusted boundary is explicit.  The shared Lean library mirrors the
+normalized conic, the incidence code, parity-profile reductions,
+association-algebra deductions, tangent graph, reconstruction semantics, and
+four-anchor closure used by the human argument.  A paper-owned Lean package
+checks the remaining finite bulk:
+fourteen weight-ten syndrome shards, exact bit-row rank \(42\), four
+projective kernel orbits of size \(91\) and span rank \(36\), the binary
+association identities, pair-color recovery, and the zero-triple signatures
+of the \(78\) geometric rows.  These checks use native evaluation and expose
+the corresponding declaration-local axioms in the pinned toolchain.
+
+These checks support the finite leaves; they do not replace the structural
+proof.  The formal package does not yet prove the transport from arbitrary codewords to
+the two local weight-ten profiles, exhaustion of the full weight-twelve layer
+by the four orbits, uniqueness of the reconstructed row family, or the
+four-anchor classification of every coordinate automorphism.  The complete
+theorem is therefore presented first and foremost as a human proof, with
+exact finite evidence at its uncompressed leaves; its formal subclaims have
+the narrower scope just stated.
 
 \section{Conclusion}
 

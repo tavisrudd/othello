@@ -15,8 +15,9 @@ The manuscript is `passant_code_q13.tex`. Build and check it with:
 
     make check
 
-The verification surface is under `verification/`. It currently records the
-claim partition and the frozen evidence to extract from Paper I. It is not yet
-a release certificate. Release requires paper-owned replay files, a semantic
-Lean aggregate gate with an exact axiom audit, an immutable artifact locator,
-and a clean isolated replay.
+The proof is human and structural. The verification surface under
+`verification/` records discovery provenance and checks only finite leaves
+that resist further conceptual compression. Paper-owned replay files and the
+semantic Lean aggregate gate are green, with an exact axiom audit and a scope
+strictly narrower than the main theorem. Release still requires an immutable
+artifact locator and a clean isolated replay.
