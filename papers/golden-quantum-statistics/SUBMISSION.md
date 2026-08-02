@@ -9,14 +9,13 @@ That combination fits PRA better than a `Quantum` submission centered on a
 standalone general theorem.
 
 The immutable local artifact label is
-`golden-quantum-statistics-c770-v1`.  It identifies the Git commit containing
+`golden-quantum-statistics-c772-r1`.  It identifies the Git commit containing
 this record, the manuscript, the locked verification environment, and the
 paper-local certificate.  It is a stable repository artifact locator, not a
 public preprint URL.
 
-The public-preprint gate is **closed**.  No Paper-III forward citation is
-authorized until an arXiv identifier, DOI, or equivalently stable public
-locator has been recorded in a later routed task.
+The user owns live posting, assignment of the public locator, and the Clebsch
+forward reference.  This package adds no separate gate for those actions.
 
 ## Submission contents
 
@@ -29,14 +28,14 @@ locator has been recorded in a later routed task.
 - `pyproject.toml` and `uv.lock`, which pin the symbolic replay environment;
 - `verification/README.md` and the paper-level `README.md`.
 
-The submitted PDF is ten pages.  Its C770 build has no TeX spacing error,
+The revised PDF is twelve pages.  Its C772 build has no TeX spacing error,
 undefined reference or citation, overfull or underfull box, or package
 warning.  The source and PDF hashes at closure are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 31,995 | `167d73977be5103f557daf7304c4966fede69e4d255971b4ebfd5ad9f5dc3ddf` |
-| `golden_quantum_statistics.pdf` | 105,207 | `51f32c34f379f4e6a08910f7b473a61b575748f17b8a130c2b345bb8860db62e` |
+| `golden_quantum_statistics.tex` | 38,467 | `73ec419a8fcaa1648f92056f9bc1a7fd476496dfd926e3a76ad132905249a140` |
+| `golden_quantum_statistics.pdf` | 116,063 | `dc572fa6f7193c89934392cd5fa54a89c3fd027ac4d9f79219fe6bf07bd92967` |
 
 Rebuild and verify from this directory with:
 
@@ -51,31 +50,34 @@ make verify-sources
 |---|---|---|
 | Left--right orbit theorem, determinant-line interpretation, permanent obstruction, and minimal orientation carrier | human proof | proved in the manuscript |
 | Universal balanced-control rank obstruction and the 20+44 split | human proof | proved in the manuscript; the checker independently confirms the finite count |
-| Golden common spectrum and exchange-sector values | exact imported identity plus paper-local certificate | checked by `verification/check_imports.py`; the frozen source bundles have independent replays |
+| Golden common spectrum and exchange-sector values | live Clebsch source theorem, local exact derivation, and paper-local certificate | explicit matrix, marking convention, trace identities, and characteristic polynomial are in the manuscript; the checker and frozen independent replays cross-check them |
 | Permanent census, chiral filter and costs, simplex words, and 15-cell compilation | certificate-checked exact computation | compact certificate and source hashes are local; `make verify-sources` runs the independent source replays |
 | Optical component capabilities and antisymmetric-source availability | literature and empirical boundary | not certified by the checker; the source remains an explicit external dependency |
 | Shot and fidelity thresholds | analytic calculation under stated models | conditional design budgets, not experimental performance claims |
 
-## Cold-read closure
+## Referee-round closure
 
-The quantum-optics read found the one-particle tomography, ordinary-boson
-control, and direct three-fermion emulator cleanly separated.  Port numbering,
-mesh resources, accepted-trial assumptions, copy matching, and source-fidelity
-conditions are explicit.  The manuscript does not present the conditional
-fermionic branch as a demonstrated experiment.
+C771's frozen PRA-style referee report recommended major revision.  C772
+implements every substantive request:
 
-The mathematical-physics read found the determinant-line mechanism before the
-Golden specialization, the `O/SO` and `U/SU` boundaries stated with their
-singular cases, and the trust boundary recoverable without consulting the
-development reports.  The arithmetic anomaly example is visibly bounded and
-does not become a dynamical gauge-theory claim.
+- the opening now states that the paper builds on the live Clebsch source
+  papers, while the manuscript gives an explicit conference matrix,
+  synthematic-total indexing, transported orientation convention, and local
+  balanced-spectrum derivation;
+- the abstract, theorem transition, apparatus discussion, and conclusion
+  distinguish the orientation-covariant determinant amplitude from the
+  sign-blind fermionic probability and the sign inferred by coherent
+  one-particle tomography;
+- the three- and five-cut schedules are printed, the apparatus gauge is
+  explained, and the anomaly instance is demoted from the opening;
+- the determinant perturbation, simultaneous shot-count, mixture-bias, and
+  trace-distance fidelity formulas are derived in the text;
+- Figure 1 identifies selected and postselected ports, and the manuscript
+  includes the APS Data Availability Statement.
 
-The theorem-opening, section-opening, paragraph-job, notation, and citation
-passes found no submission-blocking defect.  The title and abstract identify a
-theory/design-limit paper; the main theorem appears before the exact benchmark;
-each later section has one primary role; `K`, `H`, `B_sym`, and `F_ext` retain
-one meaning; and the sole literature-dependent experimental negative remains
-qualified by “to our knowledge.”
+The revised response check finds all five major and ten minor comments
+resolved at the paper or submission-metadata level.  The paper remains a PRA
+Regular Article; it does not claim a direct many-fermion phase measurement.
 
 ## Submission-day literature rerun
 
