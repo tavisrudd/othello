@@ -16,9 +16,12 @@ general \([f]\in\mathbf P(H)\) two icosahedral six-axis configurations:
 equivalently, two Mukai--Umemura isotropic three-planes \(U\subset H\) with
 \(f\perp U\) \cite{HitchinIcosahedron,HitchinBundles}.  The incidence
 variety of pairs \(([f],U)\) is therefore generically a degree-two cover of
-\(\mathbf P(H)\).  We determine its rational square class, which specifies
-the resulting quadratic function-field extension, and then study a separate
-occurrence of the same Clebsch invariant in degree-six spherical harmonics.
+\(\mathbf P(H)\).  We determine its rational square class and retain the
+resulting golden orientation through two further realizations.  On the
+six-axis carrier it becomes a conference operator whose Pfaffian,
+determinant, and middle-exterior shadows give the classical Joubert, Segre,
+Igusa, and diagonal Clebsch models.  On the ten face axes it returns as the
+degree-six Gaunt cubic.
 
 Let \(J_0\) denote Hitchin's irreducible invariant sextic, with the
 normalization in the displayed definition immediately preceding his main
@@ -101,7 +104,7 @@ is retained, so the brackets are not projective notation.  Relabelling is
 equivariant only when all labelled objects are transported together; it is
 not quotiented silently.
 
-\begin{theorem}[Relative marked orientation bridge]
+\begin{proposition}[Relative marked orientation bridge]
 \label{thm:orientation-source}
 Fix a marked bridge datum \(\mathfrak m\).  Let
 \(B=\mathbf P(V_E)\), where \(E=\Q(\sqrt5)\), and pull Hitchin's
@@ -135,11 +138,19 @@ pair-sum map
 the same relative convention fixes the sign of the degree-six cubic in
 Theorem~\ref{thm:harmonic-main}.  The normalized component alone is not
 asserted to determine \(\mathfrak m\).
-\end{theorem}
+\end{proposition}
 
 Here \(Z_{\mathfrak m}\) and \(\sigma_3\) are different cubics on spaces of
-dimensions five and four.  The theorem compares their orientations relative
+dimensions five and four.  The proposition compares their orientations relative
 to \(\mathfrak m\); it does not identify their polynomial domains.
+
+The operator stage is Theorem~\ref{thm:operator-shadows}.  The six outer
+translates of \(Z_{\mathfrak m}\) are simultaneously triangle cubics,
+middle-exterior diagonals, commutator Pfaffians, and cross-golden
+determinants.  Their Joubert coordinates land on the Segre cubic, whose
+coordinate sections are diagonal Clebsch cubic surfaces; centered squaring
+is the Segre--Igusa polar map.  This is the structural passage between the
+arithmetic source and the harmonic theorem below.
 
 \begin{theorem}[Degree-six harmonic restriction]
 \label{thm:harmonic-main}
@@ -170,7 +181,7 @@ orthogonal transformation between the two configurations yields spinor
 class \([2]\).  Independently, the harmonic proof identifies the pair-sum
 coefficients with the Petersen \((-2)\)-eigenspace and determines the
 invariant cubic from one exact spherical-moment calculation.
-Between these arguments, Theorem~\ref{thm:orientation-source} normalizes the
+Between these arguments, Proposition~\ref{thm:orientation-source} normalizes the
 chart pullback and, relative to the stated marking and lift, follows its deck
 involution through the golden conference matrix and Petersen pair-sum map.
 

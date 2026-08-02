@@ -2,7 +2,7 @@
   "schema": "clebsch-golden-return-formal-v1",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
-  "axiom_report_sha256": "2175e341892601da0c6aad2fc1658ba2b65b2b92f9f6d58c565a2569c0d78783",
+  "axiom_report_sha256": "b0a4bf671c8316a25b8dcbaa18136d2293e3075f8175f4c33755f28c252bfb37",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
@@ -15,7 +15,8 @@
     "RelativeConicArcs/ClebschMiddleExteriorDiagonal.lean": "fc5ff13994581026438b443c82e62798851f9f835e4b0df25dcbb50712e9583a",
     "RelativeConicArcs/ClebschMiddleExteriorSupport.lean": "6673976d33f8c98b46182f78639314ccc11f2049d65db058f7a2316a0d99b4a0",
     "RelativeConicArcs/ClebschGoldenDescent.lean": "0bd348a2e7054c4385f2a6fc0683f0e159996906647ad010156227e50e20a395",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "b74488ae840f8cb651b15bb4060cf73215ad8092753ecaeadd814242642eb101"
+    "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "8b878beedbd48df0286444ef64104e3db384d86f6fcfb8495c6743640e6a7df4"
   },
   "audited_declarations": [
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq",
@@ -42,10 +43,12 @@
     "RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient",
     "RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison",
     "RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det",
-    "RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar"
+    "RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar",
+    "RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic",
+    "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic"
   ],
   "trust_boundary": {
-    "symbolic": "Ring-general switching, four-point, balance, reconstruction, augmentation, and companion identities are kernel-checked symbolic proofs.",
+    "symbolic": "Ring-general switching, four-point, balance, reconstruction, augmentation, companion, matching-evaluation, and commutator-Pfaffian identities are kernel-checked symbolic proofs.",
     "native": "Literal integral matrix, determinant-minor, and finite twenty-triple claims use native decision in the pinned Lean runtime.",
     "excluded": "The manifest does not claim formal coverage of balanced-class classification, abstract atom recovery, the exterior-cube kernel, binary transvectants, or optional quaternion-order refinements."
   }

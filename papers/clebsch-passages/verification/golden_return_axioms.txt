@@ -89,3 +89,7 @@
 'RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic' depends on axioms: [propext,
+ Quot.sound]
+'RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic' depends on axioms: [propext,
+ Quot.sound]

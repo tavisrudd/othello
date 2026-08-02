@@ -22,6 +22,7 @@ EXPECTED_LABELS = (
     "thm:harmonic-main",
     "prop:golden-fibre",
     "prop:spinor-specialization",
+    "thm:operator-shadows",
 )
 
 

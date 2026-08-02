@@ -3,6 +3,7 @@ import RelativeConicArcs.ClebschMiddleExteriorSquare
 import RelativeConicArcs.ClebschMiddleExteriorDiagonal
 import RelativeConicArcs.ClebschMiddleExteriorSupport
 import RelativeConicArcs.ClebschGoldenDescent
+import RelativeConicArcs.ClebschOperatorShadows
 
 /-!
 # Trust gate for the golden conference and middle-exterior return
@@ -10,6 +11,8 @@ import RelativeConicArcs.ClebschGoldenDescent
 This gate imports the formal package for the order-six golden conference
 matrix, its triangle cubic and two-graph reconstruction, the fixed
 middle-exterior return, and the restriction-of-scalars comparison.
+The commutator-Pfaffian bridge identifies the matching expansion of the
+fixed conference matrix with four times its triangle cubic.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  Native
@@ -47,3 +50,6 @@ matrix is imported.
 #print axioms RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison
 #print axioms RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det
 #print axioms RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar
+
+#print axioms RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic
+#print axioms RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic

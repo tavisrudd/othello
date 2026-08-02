@@ -1,4 +1,4 @@
-# Arithmetic and harmonic realizations of the Clebsch cubic
+# Golden descent and operator realizations of the Clebsch cubic
 
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- III*
 

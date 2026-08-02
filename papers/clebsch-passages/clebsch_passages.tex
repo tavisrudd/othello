@@ -9,6 +9,7 @@
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
@@ -16,9 +17,9 @@
 \newcommand{\F}{\mathbf F}
 \newcommand{\Spec}{\operatorname{Spec}}
 \newcommand{\PSL}{\operatorname{PSL}}
-\title{Arithmetic and harmonic realizations of the Clebsch cubic}
+\title{Golden descent and operator realizations of the Clebsch cubic}
 \author{Tavis Rudd}
-\date{July 2026}
+\date{August 2026}
 
 \begin{document}
 \begingroup
@@ -38,32 +39,31 @@ fixed while its shadows move}.
 \end{center}
 
 \begin{abstract}
-We determine the rational square class of Hitchin's degree-two incidence
-cover of harmonic cubics.  Its function field is obtained by adjoining
-\(\sqrt{5J_0}\).  We define the Clebsch chart over
-\(\Q(\sqrt5)\), where \(J_0=16\sigma_3^2\), and prove that the two
-configurations over the rational cubic \(xyz\) form the complete reduced
-fibre with residue algebra \(\Q(\sqrt5)\).  The projective orthogonal
-transformation exchanging them has nonsquare spinor class after reduction
-modulo \(11\).  This reduction concerns the displayed golden fibre and
-exchanger only; no good reduction of the full geometric incidence comparison
-at \(11\) is asserted.  On the golden Clebsch chart, normalization separates the
-pullback into two components.  After an ordered golden realization, a
-normalized linear Clebsch lift, and compatible plane-triple and Petersen
-labels are fixed, choosing one component fixes the relative sign of the
-golden conference and degree-six cubics.  Independently, the degree-six
-zonal harmonics on the ten icosahedral face axes contain a
-Clebsch four-space as their Petersen eigenspace, and their normalized
-spherical cubic restricts exactly as
+Hitchin's degree-two incidence cover of harmonic cubics has rational square
+class \(5J_0\).  Thus its golden orientation is defined over
+\(\Q(\sqrt5)\), and the Clebsch chart satisfies
+\(J_0=16\sigma_3^2\).  We show how this same orientation passes through the
+unique regular two-graph on six points to a conference operator \(C\) with
+\(C^2=5I\).  The resulting outer family of cubic forms has three equivalent
+descriptions: triangle holonomy, diagonal coefficients of
+\(*\!\bigwedge^3C\), and commutator Pfaffians
+\(\operatorname{Pf}[D_x,C]\).  Its six coordinates give the classical
+Joubert map to the Segre cubic; centered determinants give the
+Segre--Igusa polar map, and a distinguished hyperplane section is the
+diagonal Clebsch cubic surface.
+
+The harmonic return uses the same Clebsch invariant.  Degree-six zonal
+harmonics on the ten icosahedral face axes contain the Clebsch four-space as
+their Petersen eigenspace, and their normalized spherical cubic restricts as
 \[
  \frac1{4\pi}\int_{S^2}F_y^3
  =-\frac{784000}{1247103}\sigma_3(y).
 \]
-The comparison is relative to the displayed marking and lift; the incidence
-sheet alone is not asserted to determine them.  It identifies orientation
-torsors, not the two cubics as polynomials: they live on different modules.
-No rational or integral
-identification between their ambient harmonic embeddings is asserted.
+The source-to-operator and operator-to-harmonic comparisons remain relative
+to an ordered golden realization, normalized chart lift, and compatible
+outer and Petersen labels.  The incidence sheet alone does not recover these
+markings, and no rational or integral identification of the two ambient
+harmonic representations is asserted.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch configuration; Hitchin cover;
@@ -78,9 +78,12 @@ Gaunt invariant.
 \input{sections/02-orientation-cover}
 \input{sections/03-orientation-source}
 \input{sections/04-arithmetic-specialization}
+\input{sections/05-golden-operator}
 \input{sections/05-harmonic-realization}
-\input{sections/08-verification}
 \input{sections/09-conclusion}
+\appendix
+\input{sections/07-marking-ambiguities}
+\input{sections/08-verification}
 
 \section*{AI assistance disclosure}
 

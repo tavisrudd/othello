@@ -1,0 +1,127 @@
+\section{The golden operator and its cubic shadows}
+\label{sec:golden-operator}
+
+The incidence cover supplies a golden orientation bit.  We now retain that
+bit on the six-axis carrier and apply three elementary operations to its
+conference operator: middle exterior power, commutator with the diagonal
+algebra, and centered squaring.  These operations produce the Joubert,
+Segre, Igusa, and diagonal Clebsch models in one calculation.
+
+Let \(X\) be the ordered six-axis set and
+\(A_X=\Q^X/\Q\mathbf1\).  The outer six-set \(\mathcal T\) consists of the
+six synthematic totals, that is, the six one-factorizations of \(K_6\).
+Transporting the marked conference class coherently around \(\mathcal T\)
+gives symmetric zero-diagonal sign matrices
+\((C_T)_{T\in\mathcal T}\) with \(C_T^2=5I\).  This coherent outer marking
+is part of the marked bridge datum; the incidence sheet by itself does not
+select it.
+
+For a three-subset \(S\subset X\), write \(x_S=\prod_{i\in S}x_i\), and set
+\[
+ K_T=*\!\bigwedge\nolimits^3 C_T,
+ \qquad
+ Z_T(x)=\frac14\sum_{|S|=3}(K_T)_{SS}x_S,
+ \qquad D_x=\operatorname{diag}(x).
+\]
+The Hodge orientation is transported with the ordered axis basis.  Thus an
+odd relabelling or switching transports both \(K_T\) and the sign of its
+diagonal; it is not legitimate to switch the matrix while holding the old
+Hodge convention fixed.
+
+\begin{theorem}[Golden operator and classical cubic shadows]
+\label{thm:operator-shadows}
+For a marked bridge datum and its coherent outer family:
+\begin{enumerate}
+\item The triangle products of \(C_T\) satisfy
+\[
+ (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}
+ \quad(S=\{i,j,k\}),
+\]
+so \(Z_T\) is the switching-invariant orientation cubic on \(A_X\).
+The four-point two-graph identity and pair balance recover the conference
+switching class; after fixing a vertex, the negative edges on the other five
+vertices form a pentagon.
+\item The same cubic is a commutator Pfaffian:
+\[
+ \operatorname{Pf}[D_x,C_T]=4Z_T(x),
+ \qquad
+ \det[D_x,C_T]=16Z_T(x)^2.
+\]
+Over \(E=\Q(\sqrt5)\), put
+\(P_{T,\pm}=(I\pm C_T/\sqrt5)/2\) and
+\(B_T(x)=P_{T,-}D_xP_{T,+}\).  After orienting the two determinant lines,
+\[
+ Z_T(x)=\pm10\sqrt5\det B_T(x).
+\]
+\item The six coordinates \((Z_T)_{T\in\mathcal T}\) satisfy
+\[
+ \sum_TZ_T=0,\qquad \sum_TZ_T^3=0.
+\]
+They are the signed Joubert coordinates and hence define the classical map
+from six labelled points to the Segre cubic.  In the Segre target, the
+hyperplane \(z_T=0\) cuts out the diagonal Clebsch cubic surface.
+\item The centered determinants
+\[
+ W_T=Z_T^2-\frac16\sum_UZ_U^2
+     =\frac1{16}\operatorname{center}_T\det[D_x,C_T]
+\]
+satisfy
+\[
+ \sum_TW_T=0,
+ \qquad
+ \left(\sum_TW_T^2\right)^2=4\sum_TW_T^4.
+\]
+Thus \(W\) is the Segre--Igusa polar map.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The tight-frame argument in Section~\ref{sec:orientation-source} gives
+\(C_T^2=5I\).  Its off-diagonal entries are the pair-balance identities
+\[
+ \sum_{k\ne i,j}(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}=0.
+\]
+Triangle products are unchanged by diagonal switching and obey the
+four-point identity because every edge of a four-set occurs twice.  In the
+gauge \((C_T)_{0i}=1\), pair balance says that every vertex among the other
+five has two negative incident edges.  The negative graph is therefore a
+five-cycle.  This proves both reconstruction and uniqueness without a
+switching-class enumeration.
+
+Expand the Pfaffian of \([D_x,C_T]\) over perfect matchings.  The coefficient
+of \(x_S\) pairs \(S\) bijectively with \(S^c\), and its signed sum is the
+complementary \(3\)-minor of \(C_T\).  The Hodge convention makes this minor
+\((K_T)_{SS}\).  Two dihedral representatives and complementation give
+\((K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\), so the Pfaffian is \(4Z_T\);
+squaring gives the determinant identity.
+
+The projectors split the axis space into two three-spaces.  Relative to that
+splitting,
+\[
+ [D_x,C_T]=
+ \begin{pmatrix}
+ 0&-2\sqrt5\,B_T(x)^{\mathsf T}\\
+ 2\sqrt5\,B_T(x)&0
+ \end{pmatrix}.
+\]
+Comparison with \(16Z_T^2\) gives
+\(Z_T^2=500\det(B_T)^2\); the chosen determinant-line orientation fixes the
+displayed sign.
+
+Finally, the matching expansion identifies the six \(Z_T\) with the regular
+simplex of matching functionals in the five-dimensional invariant space of
+six points.  The classical matching quotient therefore gives
+\(\sum Z_T=\sum Z_T^3=0\) and identifies these as Joubert coordinates
+\cite{HMSV,HMSVOuter}.  Setting one coordinate to zero gives
+\(\sum_{U\ne T}Z_U=\sum_{U\ne T}Z_U^3=0\), the diagonal Clebsch cubic.
+Centered squaring is the projective gradient of the Segre equation modulo
+\(\sum Z_T=0\).  Newton identities yield the two displayed relations for
+\(W\), which are the standard Igusa quartic equations
+\cite[Section~2.2]{HMSVOuter}.
+\end{proof}
+
+The theorem uses no physical or exceptional-group interpretation.  In
+particular, the quantum, anomaly, Majorana, Coble--Burkhardt, lattice, doily,
+and higher-conference constructions attached to the same operator play no
+role here.  The only retained chain is incidence descent, conference carrier,
+classical cubics, and the harmonic return of Section~\ref{sec:harmonic}.

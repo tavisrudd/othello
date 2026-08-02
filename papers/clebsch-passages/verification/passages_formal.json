@@ -85,6 +85,28 @@
       ],
       "excluded": "scheme normalization of the incidence pullback and its geometric marked identification"
     },
+    "OPER-1": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.TightFrameConference.conference_sq_of_gram",
+        "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq",
+        "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch"
+      ],
+      "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
+      "supplemental_declarations": [
+        "RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal",
+        "RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic",
+        "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic"
+      ],
+      "excluded": "coherence of the outer six-family, the determinant-square identity, and the cross-golden determinant comparison remain human proofs"
+    },
+    "OPER-2": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch"
+      ],
+      "excluded": "outer matching-frame identification, Joubert and Segre equations, diagonal Clebsch section, and Segre--Igusa polar map"
+    },
     "HARM-1": {
       "coverage": "partial mechanism; no full row claim",
       "declarations": [
@@ -108,6 +130,6 @@
   "trust_boundary": {
     "symbolic": "Pinching, conductor, involutive splitting, tight-frame, signed-Gram, switching, Petersen-eigenspace, fixed-line, and scalar identities are kernel-checked symbolic proofs.",
     "native": "Native decision is confined to displayed finite conference/reflection matrices, explicit finite vectors, finite conference signs, and the F_11 nonsquare leaf.",
-    "excluded": "No full manuscript row is claimed: the global geometric correspondences, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
+    "excluded": "No full manuscript row is claimed: the global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
   }
 }

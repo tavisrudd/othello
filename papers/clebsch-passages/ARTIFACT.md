@@ -4,7 +4,7 @@ This directory is the source and verification artifact for *Arithmetic and
 harmonic realizations of the Clebsch cubic*.
 
 The release surface is enumerated in `release_files.json`. It contains the
-manuscript source and PDF, the five-statement identity, the five-row trust
+manuscript source and PDF, the six-statement identity, the seven-row trust
 map, three paper-local exact certificate bundles, and the aggregate runner.
 No program in the release surface reads a parent directory or another
 repository subtree.
