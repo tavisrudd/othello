@@ -2,7 +2,20 @@
 
 **Lane:** `golden`
 
-**Status:** ready; C715 and C718 complete
+**Status:** complete; reported 2026-08-01
+
+## Result
+
+The full three-fermion photonic emulator is a 2026 hardware `NO-GO`: the
+required totally antisymmetric three-photon qutrit source has a preparation
+proposal but no located experimental realization, and current three-qutrit
+fidelity/rate benchmarks do not meet the chiral branch's contamination
+threshold.  A bounded precursor is feasible now: a 15-Givens six-mode Golden
+mesh, coherent transfer/sign tomography, and ordinary three-boson controls.
+The exact netlist, probabilities, shot/state-quality budget, and optimal
+three-/five-/ten-cut schedules are frozen in
+`notes/2026-08-01-c719-golden-six-mode-demonstrator.md` and its evidence
+bundle.  C765 is unblocked as a design-limit/theory note.
 
 ## Objective
 

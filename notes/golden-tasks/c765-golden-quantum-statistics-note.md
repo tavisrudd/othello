@@ -2,7 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C719.
+**Status:** ready; C719 complete with a full-experiment `NO-GO` and bounded
+precursor `GO`.
 
 ## Objective
 
@@ -17,8 +18,9 @@ is actually feasible.  This is not a fifth Clebsch-series paper.
 2. Explain the boson--fermion boundary from C718: basis-dependent permanents
    may be measured in a calibrated port gauge, while the intrinsic comparison
    is the symmetric/exterior-cube spectral pair.
-3. Present only C719's feasible certification schedule, coherent-sign method,
-   loss/phase budget, and falsifiable claims.
+3. Present C719's feasible coherent-tomography/bosonic precursor and its exact
+   certification schedule, then state the antisymmetric-resource obstruction
+   and thresholds as the principal design limit.
 4. Use the three-, five-, and ten-cut simplex decoder only to the extent that
    it reduces experimental resources or improves error tolerance.
 
@@ -33,8 +35,7 @@ is actually feasible.  This is not a fifth Clebsch-series paper.
 
 ## Acceptance
 
-A compact manuscript package with one physical question, one platform, one
-primary boson--fermion comparison, one coherent-sign witness, a reproducible
-ideal calculation, and an honest experimental budget.  If C719 returns
-`NO-GO`, replace the manuscript by a design-limit note rather than disguising
-the obstruction as an experiment proposal.
+A compact design-limit/theory package with one physical question, one
+platform, one primary boson--fermion comparison, one coherent-sign witness, a
+reproducible ideal calculation, and an honest experimental budget.  It must
+not disguise C719's missing antisymmetric source as an experiment proposal.

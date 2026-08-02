@@ -287,6 +287,15 @@ portfolio.  In particular:
   are orientation-blind.  The three aggregate spectral readings unblock
   C719.  Report and evidence:
   `notes/2026-08-01-c718-golden-boson-fermion-complement.md`.
+- C719 is complete.  The exact six-mode mesh, coherent transfer tomography,
+  ordinary bosonic controls, chiral probabilities, robustness identities,
+  and simplex schedule are feasible as a bounded precursor.  The full
+  entangled-photon fermion emulator is a 2026 hardware `NO-GO` because no
+  experimental totally antisymmetric three-photon qutrit source was located,
+  and the closest three-qutrit fidelity/rate benchmark misses the derived
+  contamination thresholds.  C765 is therefore unblocked as a minimal
+  design-limit/theory note, not a claimed experiment.  Report and evidence:
+  `notes/2026-08-01-c719-golden-six-mode-demonstrator.md`.
 - C742 is complete with a sharp obstruction crown.  C739's marked rigidity,
   pole descent, collision filtration, and canonical return are placed under
   C735's operator-first architecture.  The genuinely source-free signed
@@ -395,16 +404,15 @@ from this manuscript, and they must be audited before any sequel.  Full report:
 | task | state | next gate |
 |---|---|---|
 | [C739 — cubic lift rigidity and transfer predictions](../golden-tasks/c739-golden-cubic-lift-rigidity.md) | research complete by explicit override; placement absorbed by C742 phase 0 | preserve the frozen report and evidence; do not reopen its research programme |
-| [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | ready; C715 and C718 complete | produce a platform circuit, coherent-sign readout, and feasibility budget |
-| [C765 — minimal quantum-statistics companion](../golden-tasks/c765-golden-quantum-statistics-note.md) | queued after C719; unnumbered physical note, not Paper V | assemble only the experimentally feasible C707/C715/C718/C719 spine, or a design-limit note if C719 is negative |
+| [C719 — six-mode demonstrator](../golden-tasks/c719-golden-six-mode-demonstrator.md) | complete; exact circuit/budget frozen, bounded precursor `GO`, full three-fermion photonic experiment `NO-GO` | none; C765 owns design-limit placement |
+| [C765 — minimal quantum-statistics companion](../golden-tasks/c765-golden-quantum-statistics-note.md) | ready; unnumbered design-limit/theory note, not Paper V | assemble only the C707/C715/C718/C719 physical spine and keep the unbuilt antisymmetric source explicit |
 
 ## Recommended order
 
-1. C719 six-mode demonstrator, using C718's basis-free spectral discriminator
-   and pivot-gauge collision-free ratios with an explicit platform budget.
-2. C765 minimal physical companion, conditioned on C719's verdict; add a
+1. C765 minimal design-limit companion, using C719's bounded precursor and
+   explicit antisymmetric-state obstruction; add a
    Paper-III forward citation only after the note has a stable public locator.
-3. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
+2. Keep C717 sequel-only under C735's manuscript placement ledger; do not edit
    the paper ad hoc.
 
 ## Ownership and allowed paths
