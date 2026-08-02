@@ -3,10 +3,10 @@
 ## Decision
 
 The target venue is **Physical Review A**.  The general orientation theorem is
-useful but elementary; the paper's publication case is the theorem together
-with the exact Golden benchmark and the experimentally explicit design limit.
-That combination fits PRA better than a `Quantum` submission centered on a
-standalone general theorem.
+useful but elementary; the paper's publication case is its combination with
+balanced-exchange rigidity, the exact Golden benchmark, and the experimentally
+explicit design limit.  That combination fits PRA better than a `Quantum`
+submission centered on a standalone general theorem.
 
 The frozen submission bundle contains this record, the manuscript, the locked
 verification environment, and the paper-local evidence package. Live posting,
@@ -25,14 +25,14 @@ publication actions outside this bundle.
 - `pyproject.toml` and `uv.lock`, which pin the symbolic replay environment;
 - `verification/README.md` and the paper-level `README.md`.
 
-The revised PDF is twelve pages.  The release build has no TeX spacing error,
+The revised PDF is fourteen pages.  The release build has no TeX spacing error,
 undefined reference or citation, overfull or underfull box, or package
 warning.  The source and PDF hashes at closure are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 40,231 | `6ff3f701d6a2acf227fc345c70b5c98c03e3f2606bb62a9b1cd5758c7886f77c` |
-| `golden_quantum_statistics.pdf` | 117,124 | `20cbfa987ad87be5ab038f11a1848bcadb9739e28c3d356e649d7b9c400ef330` |
+| `golden_quantum_statistics.tex` | 46,690 | `25709bfd5bcbf405f9968aca887c1d08ecb73191fdc6e4d8cc5c94828d98ed8c` |
+| `golden_quantum_statistics.pdf` | 127,050 | `bd37a79b91d6ef285070a0468ecfbfea7a317c063bdf7fbf09b281ef7342df33` |
 
 Rebuild and verify from this directory with:
 
@@ -46,9 +46,12 @@ make verify-sources
 | Claim layer | Trust class | Submission boundary |
 |---|---|---|
 | Left--right orbit theorem, determinant-line interpretation, permanent obstruction, and minimal orientation carrier | human proof | proved in the manuscript |
+| Balanced-exchange cross-Gram formula and rigidity classification | human proof plus matching Paper-III source theorem | proved self-contained in the manuscript; Paper III carries the source-operator version |
+| Higher-order purity mean and variance | classical design theorem and Johnson inclusion calculus | credited to Greaves--Suda and classical inclusion machinery; the exchange interpretation is local |
+| Labelled-landscape reconstruction | Paper-III human theorem | retained only as a subordinate collective inverse-boundary remark, not a local optical observable |
 | Universal balanced-control rank obstruction and the 20+44 split | human proof | proved in the manuscript; the checker independently confirms the finite count |
 | Golden common spectrum and exchange-sector values | live Clebsch source theorem, local exact derivation, and paper-local certificate | explicit matrix, marking convention, trace identities, and characteristic polynomial are in the manuscript; the checker and frozen independent replays cross-check them |
-| Permanent census, simplex words, and 15-cell compilation | certificate-checked exact computation | compact certificate and source hashes are local; `make verify-sources` runs the independent source replays |
+| Permanent census, simplex words, and 15-cell frame compilation | certificate-checked exact computation | compact certificate and source hashes are local; balanced direct compilation additionally requires the stated fixed sign flip; `make verify-sources` runs the independent source replays |
 | Retained arithmetic specialization | supplementary exact computation | its generator and replay remain in the package but no manuscript claim depends on it |
 | Optical component capabilities and antisymmetric-source availability | literature and empirical boundary | not certified by the checker; the source remains an explicit external dependency |
 | Shot and fidelity thresholds | analytic calculation under stated models | conditional design budgets, not experimental performance claims |

@@ -48,10 +48,7 @@ order whose balanced controls all have one exchange spectrum, namely
 \(\{1/5,4/5,4/5\}\); the other 44 Boolean controls have zero fermionic
 amplitude.  At every realized higher symmetric-conference order the spectrum
 varies, but a classical aligned \(3\)-design fixes the exact mean and variance
-of its purity.  The
-full labelled higher-order purity landscape nevertheless recovers the
-discrete conference signing up to switching and global negation.  The
-six-mode symmetric- and exterior-cube values are \(313/125\) and
+of its purity.  The six-mode symmetric- and exterior-cube values are \(313/125\) and
 \(16/125\).  In the Clebsch
 realization the six determinants are signed Joubert coordinates on the Segre
 cubic.  Their calibrated signs form a distance-six simplex code.  A six-mode
@@ -104,10 +101,6 @@ of the signed triangle identity and the \(3+3\) conference block equations,
 not a finite census.  It gives exact symmetric, mixed, and exterior
 exchange-sector benchmarks and the sharp split between twenty invertible and
 44 singular Boolean controls.
-At every realized higher order, the full labelled purity landscape recovers
-the aligned design by inclusion inversion and hence the discrete conference
-signing up to switching and global negation.  This collective reconstruction
-does not turn any one singular spectrum into oriented determinant data.
 The elementary singular-value classification supplies the invariant language;
 the substantive combination is its minimal orientation carrier, the uniform
 conference spectrum, and the calibrated readout boundary.
@@ -362,7 +355,7 @@ where \(P_\pm=(I\pm C/\sqrt q)/2\), \(Q_+\) is an isometry onto
 Complementing the half gives \(D_{Y^c}=-D_Y\) and hence
 \(H_{Y^c}=H_Y\); all cut counts below are therefore projective.
 
-\begin{theorem}[Conference exchange rigidity and statistical envelope]
+\begin{theorem}[Conference exchange rigidity]
 \label{thm:general-exchange-rigidity}
 For every symmetric conference matrix,
 \[
@@ -383,9 +376,52 @@ Hamilton-cycle products, call \(K\) \emph{aligned} when \(w(K)=3\), and let
  \operatorname{tr}(H_Y^2)=\frac{F_d+32c_Y}{q^2},\qquad
  F_d=dq^2-2qd(d-1)+d(d-1)+12\binom d3-8\binom d4.
 \]
-Greaves and Suda proved that the aligned sets form a
+Hence the purity is cut-independent exactly in the same small orders.
+\end{theorem}
+
+\begin{proof}
+Put \(Q=C/\sqrt q\) and \(L=[D_Y,Q]\).  The commutator anticommutes with
+\(Q\), and on the positive eigenspace \(Lv=2P_-D_Yv\).  In cut coordinates,
+\[
+ L=\frac2{\sqrt q}
+ \begin{pmatrix}0&R\\-R^{\mathsf T}&0\end{pmatrix}.
+\]
+Thus \(4H_Y\) is \(L^*L\) on that eigenspace, and \(H_Y\) has the squared
+singular values of \(R/\sqrt q\).  Since the principal block of \(C^2=qI\)
+is \(RR^{\mathsf T}=qI-A^2\), the spectral formula follows.
+
+The identities \(\operatorname{tr}(A^2)=d(d-1)\) and
+\[
+ \operatorname{tr}(A^4)=d(d-1)+12\binom d3
+   +8\sum_{\substack{K\subset Y\\|K|=4}}w(K)
+\]
+give the displayed purity formula, because \(w(K)\) is \(3\) on aligned
+four-sets and \(-1\) otherwise.  Suppose \(d\geq4\) and this purity is
+independent of \(Y\).  The sums of the aligned-set indicator over all
+\(d\)-subsets are then constant.  The characteristic-zero inclusion matrix
+from four-sets to \(d\)-sets has full column rank
+\cite[Theorem~1]{JolliffeInclusion}, so the indicator is constant on
+four-sets.
+
+Switch \(C\) so that every edge incident with one vertex is positive.  For a
+four-set containing that vertex, if the other three edge signs are \(x,y,z\),
+then \(w=xy+xz+yz\).  If the common value is \(3\), every triangle on the
+other \(2d-1\) vertices is monochromatic; all its edges then have one sign,
+contradicting orthogonality of two conference rows.  If the common value is
+\(-1\), the edge two-colouring has no monochromatic triangle, and
+\(R(3,3)=6\) gives \(2d-1\leq5\), again a contradiction.
+
+For \(d=1\) the claim is immediate, and for \(d=2\) every two-by-two
+principal sign block squares to \(I\).  For \(d=3\), if \(\tau\) is the
+product of the three edge signs, then \(A^2=2I+\tau A\), so \(A^2\) always
+has spectrum \(\{4,1,1\}\).  This proves both directions.
+\end{proof}
+
+The higher-order residue is statistical rather than spectral.  Greaves and
+Suda proved that the aligned sets form a
 \(3\)-\((2d,4,(d-3)/2)\) design~\cite[Example~2.3]{GreavesSuda}.
-Consequently, for a uniformly chosen balanced half and \(d\geq4\),
+Classical Johnson inclusion calculus~\cite{IntersectionMatrices} gives, for a
+uniformly chosen balanced half and \(d\geq4\),
 \[
  \mathbb E c_Y=\rho\binom d4,\qquad
  \operatorname{Var}(c_Y)=
@@ -399,36 +435,21 @@ quantized in steps of \(32/q^2\).  At order ten the aligned sets form a
 Steiner system and force the 126 projective cuts to split into 36 with
 \(\operatorname{tr}(H_Y^2)=145/81\) and 90 with
 \(\operatorname{tr}(H_Y^2)=59/27\).
-\end{theorem}
+Paper~III gives the same general theorem at the conference-operator stage
+\cite[Theorem~5.1]{ClebschIII}; the local proof above keeps the present
+observable claim independently assessable.  The aligned design and Johnson
+calculus are classical; the exchange interpretation and rigidity
+classification are the distinct layer used here.
 
-The spectral formula is the cross-Gram identity
-\(RR^{\mathsf T}=qI-A^2\).  Paper~III proves the classification by expanding
-the second moment into aligned four-sets, applying inclusion-matrix
-injectivity, and using \(R(3,3)=6\) to exclude constant local signs in every
-higher order~\cite[Theorem~5.1]{ClebschIII}.  The mean and variance are the
-classical Johnson inclusion norm of the Greaves--Suda design
-\cite{IntersectionMatrices}.  The exchange interpretation and rigidity
-classification are distinct from that classical design theorem.
-
-\begin{corollary}[Labelled exchange tomography]
-\label{cor:labelled-exchange-tomography}
-For a symmetric conference matrix of order \(2d\geq10\), the labelled
-landscape
-\[
- Y\longmapsto\operatorname{tr}(H_Y^2),\qquad |Y|=d,
-\]
-determines its discrete signing up to diagonal switching and global negation.
-One calibrated triangle product selects the remaining global orientation
-relative to that calibration; the purity landscape does not make it
-canonical.
-\end{corollary}
-
-Indeed the purity formula and full column rank of the four-set--to--\(d\)-set
-inclusion matrix recover every aligned four-set.  Paper~III proves that on at
-least seven vertices this aligned family determines the two-graph up to
-complement~\cite[Theorems~5.1--5.2]{ClebschIII}.  Labels and access to the
-complete landscape are essential: the mean and variance alone are universal,
-and each individual \(H_Y\) remains orientation-blind.
+\begin{remark}[Collective inverse boundary]
+At order \(2d\geq10\), the complete labelled purity landscape recovers every
+aligned four-set by inclusion inversion.  Paper~III proves that this family
+determines the discrete signing up to switching and global negation
+\cite[Theorem~5.2]{ClebschIII}; one calibrated triangle product selects the
+remaining bit relative to that calibration.  This is a collective inverse
+corollary, not a local optical observable: the mean and variance alone are
+universal, and each individual \(H_Y\) remains orientation-blind.
+\end{remark}
 
 \begin{theorem}[Golden six-mode exchange benchmark]
 \label{thm:exchange-boundary}
@@ -834,22 +855,24 @@ indistinguishability, matching of the three transfer copies, and analyzer
 calibration are separate requirements.
 
 Resource quality is more restrictive than shot noise under adversarial error
-models.  If preparation noise is an arbitrary mixture of weight \(1-F\),
+models.  If preparation noise is an arbitrary mixture with target-state
+weight \(\eta\),
 keeping probability bias below ten percent for the balanced event requires
-\(F\geq0.9872\).  With only a fidelity bound and the trace-distance worst
-case, the corresponding gate is \(F\geq0.999836\).  A characterized noise
+\(\eta\geq0.9872\).  With only a squared-Uhlmann-fidelity bound, denoted
+\(F_{\rm U}\), and the trace-distance worst case, the corresponding gate is
+\(F_{\rm U}\geq0.999836\).  A characterized noise
 model could relax these bounds, but the conclusion would then be
 model-dependent.
-For the mixture model, an event probability changes by at most \(1-F\), so
+For the mixture model, an event probability changes by at most \(1-\eta\), so
 ten-percent relative bias at ideal probability \(p\) requires
-\(F\geq1-0.1p\).  Here
-\(F=(\operatorname{tr}\sqrt{\sqrt\rho\,\sigma\sqrt\rho})^2\) is the squared
+\(\eta\geq1-0.1p\).  Here
+\(F_{\rm U}=(\operatorname{tr}\sqrt{\sqrt\rho\,\sigma\sqrt\rho})^2\) is the squared
 Uhlmann fidelity.  With fidelity alone, trace distance bounds the probability
-bias by \(\sqrt{1-F}\).  Thus the two generic gates are
+bias by \(\sqrt{1-F_{\rm U}}\).  Thus the two generic gates are
 \begin{equation}
 \label{eq:source-fidelity-gates}
- F\geq1-0.1p\quad\text{(mixture model)},\qquad
- F\geq1-0.01p^2\quad\text{(fidelity only)}.
+ \eta\geq1-0.1p\quad\text{(mixture model)},\qquad
+ F_{\rm U}\geq1-0.01p^2\quad\text{(fidelity only)}.
 \end{equation}
 Substitution of \(p=16/125\) gives the two displayed balanced-event gates.
 
@@ -872,10 +895,6 @@ orders retain a universal statistical envelope---the exact purity mean and
 variance---but not a universal spectrum.  This distinction is operational:
 singular statistics remain orientation-blind, while the determinant signs
 used by the calibrated decoder carry the missing relative orientation.
-Across all labelled cuts in higher order, those same orientation-blind
-purities recover the discrete signing up to its one complement bit.  That is
-a collective tomography statement, not a signed many-fermion observable; one
-calibrated triangle product is still required to select the orientation.
 
 The example also separates a feasible optical certification from a direct
 many-particle realization.  Current mesh and tomography technology can test
@@ -895,14 +914,12 @@ record.
 
 \section*{Verification}
 
-The Boolean rank boundary, local balanced-spectrum proof,
-symmetric-function identities, orbit theorem, and distance-six correction
-radius are human derivations.  The general rigidity, design-statistics, and
-labelled-reconstruction results are imported from Paper~III with their human
-proof boundary; the paper-local certificate does not re-prove them.  It
-independently checks all
-twenty balanced masks together with the three calibrated permanent values,
-six sign words, full-precision netlist, and fifteen-cell compilation.  Their
+Human proofs cover the Boolean rank boundary, general rigidity, local balanced
+spectrum, symmetric functions, orbit theorem, and decoder radius.  Classical
+citations supply the design statistics; Paper~III supplies labelled
+reconstruction.  The local certificate does not re-prove either result.  It
+independently checks all twenty balanced masks, the three calibrated permanent
+values, six sign words, full-precision netlist, and fifteen-cell compilation.  Their
 three atomic source bundles have exact generators and independent replays; one
 paper-local manifest pins every load-bearing file.
 
@@ -970,6 +987,12 @@ N.~Ghareghani, E.~Ghorbani, and M.~Mohammad-Noori,
 \emph{Intersection matrices revisited},
 J. Combin. Des. \textbf{21} (2013), 123--143,
 doi:10.1002/jcd.21308.
+
+\bibitem{JolliffeInclusion}
+W.~Jolliffe,
+\emph{A short proof of the rank formula for inclusion matrices using the
+representation theory of the symmetric group},
+arXiv:2009.05202v1 (2020).
 
 \bibitem{HowardMillsonSnowdenVakil}
 B. Howard, J. Millson, A. Snowden, and R. Vakil,

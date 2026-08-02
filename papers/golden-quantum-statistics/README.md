@@ -7,10 +7,12 @@ fifth numbered Clebsch-series paper and not a report of a built device.
 The paper owns:
 
 - the determinant orientation and permanent port-gauge boundary;
+- the self-contained balanced-exchange rigidity theorem and the exact
+  higher-order purity envelope credited to the classical design literature;
 - the intrinsic symmetric/exterior-cube comparison;
 - the exact Golden balanced benchmark and calibrated readout schedule;
-- the coherent-tomography/bosonic precursor and the antisymmetric-resource
-  design limit.
+- the common-reference coherent-tomography/bosonic precursor and the
+  antisymmetric-resource design limit.
 
 The broader Golden operator inventory remains in `papers/golden-operator/`.
 Paper III remains outside this manuscript's write surface. A forward citation
