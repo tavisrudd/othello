@@ -478,6 +478,14 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
+C829 is queued for an independent mathematical cold read of the authoritative
+fifteen-page Golden quantum-statistics paper.  The reviewer must reconstruct
+the continuous-control equality cases, Hermitian Pareto completeness,
+squared-spectrum rigidity, and both stability inequalities before consulting
+private reports or certificates, then freeze a PASS/MINOR/MAJOR report before
+author triage.  Charter:
+`notes/golden-tasks/c829-external-mathematical-cold-read.md`.
+
 C827 is complete.  The post-integration Milnor--Serre pass separates the
 orientation and real-conference scales, replaces the opening result ledger by
 three causal reductions, and exposes the mixed-sector and

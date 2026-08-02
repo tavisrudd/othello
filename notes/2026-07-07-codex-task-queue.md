@@ -130,6 +130,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `golden`
 
+- **C829 `[golden]` [QUEUED; EXTERNAL MATHEMATICAL COLD READ]** — independently referee the authoritative Golden quantum-statistics paper's continuous-control, Hermitian Pareto, squared-spectrum rigidity, and quantitative stability proofs; reconstruct every equality case, normalization, constant, and threshold before consulting private reports or certificates; freeze a PASS/MINOR/MAJOR report before author triage → `notes/golden-tasks/c829-external-mathematical-cold-read.md`.
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
 
 ### `complete-ports`
