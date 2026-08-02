@@ -243,3 +243,10 @@ name = "equivariant-robust-completion"
 source = "papers/equivariant-robust-completion"
 paper_ids = ["equivariant_robust_completion"]
 disposition = "active"
+
+[[repository]]
+name = "golden-quantum-statistics"
+include_release_pdfs = true
+source = "papers/golden-quantum-statistics"
+paper_ids = ["golden_quantum_statistics"]
+disposition = "active"
