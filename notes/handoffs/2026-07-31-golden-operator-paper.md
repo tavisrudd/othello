@@ -444,8 +444,9 @@ owner report without consulting that ledger and the governing audit.
 
 ## Active and queued tasks
 
-None.  C765--C770 are closed; C739's research programme remains frozen and its
-placement was absorbed by C742.
+- C771 is in progress: first cold PRA referee round on the immutable
+  `golden-quantum-statistics-c770-v1` package.  Freeze the referee report before
+  author-side triage and do not edit the manuscript during the cold read.
 
 ## Recommended order
 

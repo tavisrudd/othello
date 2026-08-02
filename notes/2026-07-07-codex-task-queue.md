@@ -88,6 +88,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `golden`
 
 - **C739 `[golden]` [RESEARCH COMPLETE; PLACEMENT ABSORBED BY C742]** — the marked tensor-diagram lift is rigid, the degeneracies form a strict scheme filtration, and the canonical (36\to6) return is proved; C742 owns its bounded post-C735 manuscript placement and framing → `notes/2026-07-31-c739-golden-cubic-lift-rigidity.md`.
+- **C771 `[golden]` [IN PROGRESS]** — run a first cold PRA referee round on the frozen Golden quantum-statistics submission, freeze the referee report before author-side triage, and make no manuscript edit until the review verdict is recorded → `notes/golden-tasks/c771-golden-quantum-statistics-cold-referee-r1.md`.
 
 ### `complete-ports`
 
