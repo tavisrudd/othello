@@ -2249,8 +2249,17 @@
       "last": 802,
       "purpose": "Review and iterate the Paper I strict-recovery series-framing edit memo",
       "sequence": 250
+    },
+    {
+      "count": 1,
+      "first": 803,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 803,
+      "purpose": "Paper II fixed-line and Chow-rigidity literature audit",
+      "sequence": 251
     }
   ],
-  "next_id": 803,
+  "next_id": 804,
   "schema": "codex-task-id-allocations-v1"
 }
