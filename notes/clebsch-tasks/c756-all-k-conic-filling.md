@@ -259,7 +259,10 @@ What the missing-set kernel-curve extraction adds:
   conic/chord intersection profiles have no common pattern;
 - the \(q=31\) sextic lies in an exact two-dimensional \(A_5\)-stable character space
   containing \((y^2-xz)^3\), while the corresponding spaces at \(q=13,29\) have
-  dimensions four and six;
+  dimensions four and six.  More exactly, in the frozen normalization it is the product
+  of the polar lines of the unique six-point orbit plus \(5(y^2-xz)^3\); the resulting
+  pencil has singular parameters \(0,16,19\), smooth point counts
+  \(12,42,72,102\), and two maximum members at parameters \(5,7\);
 - hence the promoted split-support diagnostic closes as a uniform nonsaturated proof
   route.  The \(q=31\) \(A_5\) pencil remains a finite exceptional object, and the
   prefix-container diagnostic is the sole survivor of the probability cheap-test pair.

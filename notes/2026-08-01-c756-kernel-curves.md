@@ -17,8 +17,12 @@ the three selected maximum-coverage witnesses, not as evidence for a uniform
 split-support factorization.  The bounded split-support follow-up is therefore
 closed as a general nonsaturated proof route.  The (q=31) row retains a clean
 finite-geometric gem: its sextic belongs to a two-dimensional (A_5)-stable
-character space containing (Q^3=(y^2-xz)^3), hence is a distinguished member
-of an exact (A_5)-invariant pencil.
+character space containing (Q^3=(y^2-xz)^3).  In the frozen normalization it
+has the intrinsic six-axis formula
+$$
+ F=\prod_{u\in O_6}\operatorname{polar}_Q(u)+5Q^3,
+$$
+where (O_6) is the unique six-point off-conic orbit of the stabilizer.
 
 Evidence:
 `notes/2026-08-01-c756-kernel-curves.py` and
@@ -110,13 +114,37 @@ missing set of exactly one such invariant arc.  Hence the curve is canonical
 for the selected witness and distinguishes it inside this bounded invariant
 catalogue, while the symmetry group by itself does not do so at (q=13,29).
 
+### The q=31 six-axis pencil
+
+The exact formula above explains the twelve conic points immediately: on
+(Q=0), the sextic restricts to the six polar lines, whose conic intersections
+form the twelve-point (A_5)-orbit.  Its remaining rational points are one
+30-orbit and one regular 60-orbit, giving (102=12+30+60).
+
+The complete pencil
+
+$$
+ F_\lambda=\prod_{u\in O_6}\operatorname{polar}_Q(u)+\lambda Q^3,
+ \qquad \lambda\in\mathbf F_{31},
+$$
+
+has singular parameters $0,16,19$.  Among its 28 smooth members, the rational
+point counts are $12^{(12)}$, $42^{(8)}$, $72^{(6)}$, and $102^{(2)}$.
+The two maximum parameters are 5 and 7.  The selected missing-set curve is
+$\lambda=5$; no conic-preserving projectivity transports it to the
+$\lambda=7$ sister.  Thus the selected curve is extremal but not uniquely so
+inside the pencil, and its point decomposition is forced by the three smallest
+icosahedral orbit sizes rather than by a chord component.
+
 ## EJ + TT closeout and mystery ledger
 
 **EJ.**  The free upgrade was to compute the complete conic-preserving
 stabilizers and orbit decompositions, rather than stop after coefficient
 extraction.  This turns three unexplained rank defects into an exact
 (S_3/D_{10}/A_5) symmetry trichotomy and exposes the (q=31) two-dimensional
-(A_5) sextic pencil.
+(A_5) sextic pencil.  The follow-on six-axis calculation gives the exact
+formula (F=P_6+5Q^3), the complete singular-parameter census, and the
+four-valued rational-point spectrum essentially for free.
 
 **TT.**  The decisive comparison is not whether each individual curve looks
 structured—it does—but whether the structures transport across fields.  They
@@ -132,10 +160,13 @@ Open mysteries:
   orbit of maximum witnesses at (q=13,29,31) has an early kernel.  Closing
   this requires an all-maximum-witness orbit census, not another calculation on
   these three examples.  It is not needed for the negative uniform verdict.
-- **The (A_5) pencil parameter is not intrinsically named.**  The checker
-  proves the exact two-space and the (Q^3) member, but does not identify the
-  second generator with a preferred classical normalization.  Such a naming
-  would be exposition, not a new obstruction, and has no allocated successor.
+- **The six-axis formula is settled; a classical name is not.**  The checker
+  now identifies the second generator intrinsically as the product of the six
+  polar lines and certifies the full finite pencil.  Whether this reduction is
+  projectively equivalent to a specifically named classical sextic has not
+  been literature-audited or tested under full (\operatorname{PGL}(3,31)).
+  Such a naming would be exposition, not a new obstruction, and has no
+  allocated successor.
 - **Why these audit representatives maximize coverage remains separate.**  The
   kernel curves recover their symmetry, but do not prove extremality or the
   masked direction gap (h\ge1).  Those remain owned by the global
@@ -163,8 +194,8 @@ evaluation checks every kernel equation and every stabilizer scalar identity.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-08-01-c756-kernel-curves.py` | 18,389 | `404e1ea824fdbac182a2aedcf43d43cd87423faa94af58eef5a1c07f1614829b` |
-| `notes/2026-08-01-c756-kernel-curves.json` | 18,282 | `3cf5a14fb0655cd080f119e5a26c9597ce06512f4c0122f83627e718b2af88e9` |
+| `notes/2026-08-01-c756-kernel-curves.py` | 23,641 | `5d375aa22bb91143ce8485a2704a9bfae9f2fe05a021f9ac2ab00e9d6dc56ac4` |
+| `notes/2026-08-01-c756-kernel-curves.json` | 25,841 | `f36025a0314db067a3ec35f61e23ab2d44644fd2a6d83742e1878957b134a880` |
 | input `notes/2026-08-01-c756-masked-rs-collision-audit.json` | 9,581 | `dbefb995e5ff64195f9ca3f0b07f147399fd45e50131242aed409b301d9f81a4` |
 
 The result certifies only the three selected prime-field witnesses and their

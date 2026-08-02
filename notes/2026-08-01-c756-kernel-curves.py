@@ -204,6 +204,26 @@ def centered(value: int, q: int) -> int:
     return value if value <= q // 2 else value - q
 
 
+def polynomial_multiply(left, right, q: int):
+    answer = {}
+    for left_exponent, left_coefficient in left.items():
+        for right_exponent, right_coefficient in right.items():
+            exponent = tuple(a + b for a, b in zip(left_exponent, right_exponent))
+            answer[exponent] = (
+                answer.get(exponent, 0) + left_coefficient * right_coefficient
+            ) % q
+    return {exponent: coefficient for exponent, coefficient in answer.items()
+            if coefficient}
+
+
+def evaluate_polynomial_dict(polynomial, point, q: int) -> int:
+    return sum(
+        coefficient * pow(point[0], exponent[0], q)
+        * pow(point[1], exponent[1], q) * pow(point[2], exponent[2], q)
+        for exponent, coefficient in polynomial.items()
+    ) % q
+
+
 def identify_group(order_profile) -> str:
     known = {
         ((1, 1), (2, 3), (3, 2)): "S3",
@@ -380,6 +400,106 @@ def extract_case(q: int, degree: int, witness):
         multiplicity[point] for point in curve - conic
     )
 
+    six_axis_pencil = None
+    if q == 31:
+        axis_orbit = next(orbit for orbit in off_conic_orbits if len(orbit) == 6)
+        axis_product = {(0, 0, 0): 1}
+        for x, y, z in sorted(axis_orbit):
+            # The polar line of (x:y:z) for Q=y^2-xz is
+            # -z X + 2y Y - x Z = 0.
+            axis_product = polynomial_multiply(axis_product, {
+                (1, 0, 0): -z % q,
+                (0, 1, 0): 2 * y % q,
+                (0, 0, 1): -x % q,
+            }, q)
+        conic_form = {(0, 2, 0): 1, (1, 0, 1): -1 % q}
+        conic_cube = {(0, 0, 0): 1}
+        for _ in range(3):
+            conic_cube = polynomial_multiply(conic_cube, conic_form, q)
+        curve_polynomial = {
+            exponent: coefficient for exponent, coefficient
+            in zip(exponents, coefficients) if coefficient
+        }
+        assert all(
+            (curve_polynomial.get(exponent, 0)
+             - axis_product.get(exponent, 0)
+             - 5 * conic_cube.get(exponent, 0)) % q == 0
+            for exponent in set(curve_polynomial) | set(axis_product) | set(conic_cube)
+        )
+
+        pencil_rows = []
+        pencil_curves = {}
+        for parameter in range(q):
+            member = {
+                exponent: (axis_product.get(exponent, 0)
+                           + parameter * conic_cube.get(exponent, 0)) % q
+                for exponent in set(axis_product) | set(conic_cube)
+            }
+            member = {exponent: coefficient for exponent, coefficient in member.items()
+                      if coefficient}
+            member_curve = {
+                point for point in points
+                if evaluate_polynomial_dict(member, point, q) == 0
+            }
+            pencil_curves[parameter] = member_curve
+            member_expression = sum(
+                coefficient * sx ** exponent[0] * sy ** exponent[1]
+                * sz ** exponent[2]
+                for exponent, coefficient in member.items()
+            )
+            member_smooth = True
+            for chart in variables:
+                chart_expression = member_expression.subs(chart, 1)
+                remaining = [variable for variable in variables if variable != chart]
+                basis = groebner(
+                    [chart_expression] + [diff(chart_expression, variable)
+                                          for variable in remaining],
+                    *remaining, modulus=q,
+                )
+                if not (len(basis.polys) == 1 and basis.polys[0].as_expr() == 1):
+                    member_smooth = False
+                    break
+            pencil_rows.append({
+                "parameter": parameter,
+                "geometrically_smooth": member_smooth,
+                "rational_points": len(member_curve),
+                "orbit_sizes": sorted(map(len, group_orbits(
+                    witness_stabilizer, member_curve, q
+                ))),
+            })
+        smooth_rows = [row for row in pencil_rows if row["geometrically_smooth"]]
+        maximum_points = max(row["rational_points"] for row in smooth_rows)
+        assert pencil_curves[5] == curve
+        transporters_to_other_maximum = sum(
+            {conic_action(element, point, q) for point in pencil_curves[5]}
+            == pencil_curves[7]
+            for element in all_pgl2
+        )
+        assert transporters_to_other_maximum == 0
+        six_axis_pencil = {
+            "axis_orbit": sorted(map(list, axis_orbit)),
+            "intrinsic_equation": "F = product_{u in O_6} polar_Q(u) + 5 Q^3",
+            "base_locus_on_conic": len(curve & conic),
+            "selected_parameter": 5,
+            "selected_orbit_sizes": next(
+                row["orbit_sizes"] for row in pencil_rows if row["parameter"] == 5
+            ),
+            "singular_parameters": [
+                row["parameter"] for row in pencil_rows
+                if not row["geometrically_smooth"]
+            ],
+            "smooth_point_count_profile": dict(sorted(Counter(
+                row["rational_points"] for row in smooth_rows
+            ).items())),
+            "maximum_smooth_rational_points": maximum_points,
+            "maximum_parameters": [
+                row["parameter"] for row in smooth_rows
+                if row["rational_points"] == maximum_points
+            ],
+            "conic_preserving_transporters_5_to_7": transporters_to_other_maximum,
+            "members": pencil_rows,
+        }
+
     return {
         "q": q,
         "degree": degree,
@@ -443,6 +563,7 @@ def extract_case(q: int, degree: int, witness):
                 row["is_selected_witness"] for row in invariant_arcs
             ),
         },
+        "six_axis_pencil": six_axis_pencil,
     }
 
 

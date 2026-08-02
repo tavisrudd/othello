@@ -184,6 +184,7 @@
       ],
       "q": 13,
       "rational_singular_points": 0,
+      "six_axis_pencil": null,
       "smooth_chart_certificates": {
         "x": "unit_ideal",
         "y": "unit_ideal",
@@ -583,6 +584,7 @@
       ],
       "q": 29,
       "rational_singular_points": 0,
+      "six_axis_pencil": null,
       "smooth_chart_certificates": {
         "x": "unit_ideal",
         "y": "unit_ideal",
@@ -940,6 +942,340 @@
       ],
       "q": 31,
       "rational_singular_points": 0,
+      "six_axis_pencil": {
+        "axis_orbit": [
+          [
+            4,
+            12,
+            1
+          ],
+          [
+            10,
+            20,
+            1
+          ],
+          [
+            12,
+            3,
+            1
+          ],
+          [
+            14,
+            27,
+            1
+          ],
+          [
+            20,
+            16,
+            1
+          ],
+          [
+            23,
+            23,
+            1
+          ]
+        ],
+        "base_locus_on_conic": 12,
+        "conic_preserving_transporters_5_to_7": 0,
+        "intrinsic_equation": "F = product_{u in O_6} polar_Q(u) + 5 Q^3",
+        "maximum_parameters": [
+          5,
+          7
+        ],
+        "maximum_smooth_rational_points": 102,
+        "members": [
+          {
+            "geometrically_smooth": false,
+            "orbit_sizes": [
+              12,
+              15,
+              30,
+              60,
+              60
+            ],
+            "parameter": 0,
+            "rational_points": 177
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 1,
+            "rational_points": 42
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 2,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 3,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 4,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30,
+              60
+            ],
+            "parameter": 5,
+            "rational_points": 102
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 6,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30,
+              60
+            ],
+            "parameter": 7,
+            "rational_points": 102
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 8,
+            "rational_points": 42
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              60
+            ],
+            "parameter": 9,
+            "rational_points": 72
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 10,
+            "rational_points": 42
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30,
+              30
+            ],
+            "parameter": 11,
+            "rational_points": 72
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 12,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 13,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 14,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 15,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": false,
+            "orbit_sizes": [
+              10,
+              12
+            ],
+            "parameter": 16,
+            "rational_points": 22
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 17,
+            "rational_points": 42
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              60
+            ],
+            "parameter": 18,
+            "rational_points": 72
+          },
+          {
+            "geometrically_smooth": false,
+            "orbit_sizes": [
+              6,
+              12
+            ],
+            "parameter": 19,
+            "rational_points": 18
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 20,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              60
+            ],
+            "parameter": 21,
+            "rational_points": 72
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 22,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              60
+            ],
+            "parameter": 23,
+            "rational_points": 72
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              60
+            ],
+            "parameter": 24,
+            "rational_points": 72
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 25,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12
+            ],
+            "parameter": 26,
+            "rational_points": 12
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 27,
+            "rational_points": 42
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 28,
+            "rational_points": 42
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 29,
+            "rational_points": 42
+          },
+          {
+            "geometrically_smooth": true,
+            "orbit_sizes": [
+              12,
+              30
+            ],
+            "parameter": 30,
+            "rational_points": 42
+          }
+        ],
+        "selected_orbit_sizes": [
+          12,
+          30,
+          60
+        ],
+        "selected_parameter": 5,
+        "singular_parameters": [
+          0,
+          16,
+          19
+        ],
+        "smooth_point_count_profile": {
+          "12": 12,
+          "42": 8,
+          "72": 6,
+          "102": 2
+        }
+      },
       "smooth_chart_certificates": {
         "x": "unit_ideal",
         "y": "unit_ideal",
