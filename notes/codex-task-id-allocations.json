@@ -2348,8 +2348,17 @@
       "last": 821,
       "purpose": "Beyond-four PRS Version 2: cheap recursive-polar refactor, exact all-level carrier geometry, and final synthesis",
       "sequence": 261
+    },
+    {
+      "count": 1,
+      "first": 822,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 822,
+      "purpose": "compress C812 to a human two-parameter conference-class proof",
+      "sequence": 262
     }
   ],
-  "next_id": 822,
+  "next_id": 823,
   "schema": "codex-task-id-allocations-v1"
 }
