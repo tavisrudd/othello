@@ -28,7 +28,7 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-01)
 
-Eight research passes complete; the theorem is **not** proved. Reports:
+Nine research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-all-k-conic-filling.md` and
 `notes/2026-08-01-c756-saturated-matching-attack.md`, and
 `notes/2026-08-01-c756-segre-tangent-coherence.md`, and
@@ -36,7 +36,18 @@ Eight research passes complete; the theorem is **not** proved. Reports:
 `notes/2026-08-01-c756-paley-bispectral-reduction.md`, and
 `notes/2026-08-01-c756-primitive-jacobi-collisions.md`, and
 `notes/2026-08-01-c756-nonsaturated-direction-reduction.md`, and
-`notes/2026-08-01-c756-segre-discriminant-comparison.md`.
+`notes/2026-08-01-c756-segre-discriminant-comparison.md`, and
+`notes/2026-08-01-c756-subresultant-moment-obstruction.md`.
+
+Branch ledger:
+
+- **saturated-external — closed:** the Clebsch hexagon over \(\mathbb F_{11}\) is the
+  only covering example;
+- **saturated-internal — open:** the four-frame over \(\mathbb F_5\) is the known
+  example, but no uniform obstruction beyond the certified \(q\le43\) range is on
+  record; the saturated-external mod-4 and matching arguments do not transfer;
+- **nonsaturated — open for \(\delta\ge2\):** \(\delta=0,1\) are closed, while the
+  direct Segre, raw-subresultant, and global-moment defect-two repairs fail.
 
 What is now proved for all \(k\) and all \(q\):
 
@@ -116,6 +127,21 @@ What the defect-two comparison adds:
   \(\mathcal H(U,T)=\prod_i(U+x_iT-y_i)\), which retains the repeated chord intercept as
   well as its direction.
 
+What the subresultant and Tao-moment pass adds:
+
+- the first subresultant has Vandermonde-minor coefficients \(A,B\), is nonzero at every
+  uniquely represented direction, and therefore cannot inherit the Moore factor;
+- the exact uniform forced factor is \(E_P^2\mid A,B\), but after division the coefficient
+  degrees remain \(\Theta(q)\), with the predicted maxima attained by exact defect-two
+  examples over \(\mathbb F_{13}\);
+- all global slope moments satisfy
+  \(\sum_{i<j}t_{ij}^m=r^m+s^m\) for \(1\le m\le q-2\), but explicit affine six-arcs
+  realize both the one-triple and two-double residual shapes, so those moments do not
+  obstruct either shape before conic externality;
+- the remaining bounded nonsaturated attack is the dual conic-weighted pencil: internal chord poles
+  form a defect-two near-transversal of the pencil through \(\ell^\perp\), retaining both
+  direction and intercept.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -125,15 +151,17 @@ conic-external arc \(m(q)\) are \(\sqrt{2q}+O(1)\), and which is larger alternat
 \(q\)).  The sixth pass proves the primitive Jacobi collision lemma and closes the entire
 saturated-external branch.  The seventh pass gives the strict nonsaturated bound, divides
 the direction polynomial by its forced Moore factor, localizes the defect, and closes
-\(\delta=0,1\).  At \(\delta=2\), the direct Segre discriminant comparison is now
-closed negatively: the split residual quadratic and anisotropic \(Q|_\ell\) have
-opposite square classes, but the tangent identity contains an uncontrolled spare-line
-factor and does not equate them.  The next gate is to divide the forced Moore square
-from the first subresultant of the affine chord polynomial and determine whether its
-residual intercept rational function has degree \(O(\delta)\).  A positive degree bound
-would make a Weil argument viable first at \((q,k)=(53,12)\); failure would rule out
-the last identified small-degree route.  Residual slack \(\delta\ge3\) and the dual
-internal-node blocking formulation remain open structural input.
+\(\delta=0,1\).  The saturated-internal branch remains independently open beyond the
+known \(q=5\) four-frame; none of the saturated-external closure proves its uniqueness.
+At nonsaturated defect \(\delta=2\), both the direct Segre discriminant comparison and the
+unweighted subresultant/moment repairs are closed negatively: the former loses the spare
+factor, the subresultant remains degree \(\Theta(q)\) after its exact \(E_P^2\) division,
+and both residual fibre shapes satisfy all global slope moments.  The next and last
+identified bounded nonsaturated gate is the dual conic-weighted pencil through \(\ell^\perp\): derive
+a degree-\(O(\delta)\) norm or classify its all-internal defect-two near-transversals.
+If that fails, no current small-degree nonsaturated route remains.  Residual slack
+\(\delta\ge3\) stays open behind the defect-two gate, while saturated-internal needs a
+separate torus/Segre or literature classification.
 
 ## Current boundary
 
@@ -143,25 +171,26 @@ internal-node blocking formulation remain open structural input.
 
 ## What must be proved
 
-A uniform obstruction for \(k \ge 9\) across the window's \(\sim k^2/3\)-sized \(q\)-range.
-The chord-moment system leaves free concurrence parameters for \(r \ge 4\)
-(`clebsch_hexagon_code.tex:1646-1647`), so this needs a new idea rather than more search:
-the \(k = 7\) case already required brute force, and that does not scale.
+Two independent uniform obstructions are still required:
 
-Two candidate routes, both about making a second-order count uniform in \(k\):
+1. classify the saturated-internal family \(k=(q+3)/2\), proving that only the
+   \(q=5\) four-frame covers; and
+2. exclude every nonsaturated family with \(\delta\ge2\), beginning with the
+   defect-two boundary \((q,k)=(53,12)\).
 
-1. Secant-pencil saturation, generalizing the \(q = 13\) weight-eight argument in the
-   computational companion.
-2. An association-scheme or clique bound generalizing the Sylvester trick.
+The old secant-pencil and association-scheme candidates are superseded.  The active
+nonsaturated gate is the dual internal-node near-transversal through \(\ell^\perp\); the
+saturated-internal branch requires a separate torus/Segre normal form or a literature
+classification.
 
 ## Prior estimate
 
-The review prior was ~30% provable with current tools (§12.6).  After the direct
-defect-two Segre comparison failed, the working estimate is ~20--25%.  The remaining
-positive route is whether the intercept subresultant admits an \(O(\delta)\)-degree
-Moore quotient.  Record the actual obstruction if it fails — a sharp statement of
-*why* the chord-moment system cannot close is itself publishable material for the
-existing papers.
+The review prior was ~30% provable with current tools (§12.6).  After the direct Segre,
+subresultant, and global-moment repairs failed and the saturated-internal omission was
+identified, the working estimate is ~5--10%.  A bounded dual conic-weighted-pencil route
+and a separate saturated-internal audit remain.  Record the actual obstruction if either
+fails — a sharp statement of *why* the chord-moment system cannot close is itself
+publishable material for the existing papers.
 
 ## Scope
 
