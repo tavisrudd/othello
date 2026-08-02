@@ -429,9 +429,19 @@ strictly below the arc size \((q+3)/2\) for every \(q>5\) and equal to it at \(q
 Both frames are exhibited inside their line with \(U=\mathbb F_5^\times\),
 \(T_b=\{2,3,4\}\).
 
+`2026-08-02-c756-weil-discriminant-check.py` independently verifies every algebraic
+step of Theorem 4 over \(q=7,11,19,23,31,43\): that \(c(t)\) is a bijection onto the
+circle with \(c(t)^q=c(-t)\); that \(c(t)\in Q_0\iff\chi_q(t^2-\varepsilon)=+1\); that
+the stated \(P,Q\) reproduce \(W\) at every \((t,t')\); that
+\(\operatorname{disc}_{t'}F=\varepsilon L(t)^2\) with the stated \(L\); that
+\(F(t,\cdot)\) is irreducible whenever \(L(t)\ne0\) and \(N(P(t))\ne0\); and that
+\(L\equiv0\) exactly when \(g=0\).  All parameters are swept for \(q\le11\) and
+deterministically sampled above.
+
 ```sh
 cd notes
 python3 2026-08-02-c756-line-case-verification.py
+python3 2026-08-02-c756-weil-discriminant-check.py
 ```
 
 - `2026-08-02-c756-line-case-verification.py`

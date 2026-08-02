@@ -1,0 +1,37 @@
+{
+ "claim": "disc_{t'} F = eps * L(t)^2 with L == 0 iff g == 0",
+ "rows": [
+  {
+   "eps": 3,
+   "q": 7,
+   "t_values_checked": 1176
+  },
+  {
+   "eps": 2,
+   "q": 11,
+   "t_values_checked": 7260
+  },
+  {
+   "eps": 2,
+   "q": 19,
+   "t_values_checked": 8132
+  },
+  {
+   "eps": 5,
+   "q": 23,
+   "t_values_checked": 9315
+  },
+  {
+   "eps": 3,
+   "q": 31,
+   "t_values_checked": 12493
+  },
+  {
+   "eps": 2,
+   "q": 43,
+   "t_values_checked": 17286
+  }
+ ],
+ "source_sha256": "e807e8b0af5bc9f6cbd4aeecd0c395aaa54991496eb0ea57256899917e6aac69",
+ "task": "C756"
+}
