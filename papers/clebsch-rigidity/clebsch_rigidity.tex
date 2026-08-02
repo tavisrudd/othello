@@ -39,17 +39,11 @@ from its deep-hole syndrome locus}
 \makeatletter
 \let\clebschmaintitle\@title
 \def\@title{\large\textsc{The Clebsch cubic}\\[0.15em]
-  \normalsize\textsc{Recovering, orienting, and realizing --- }\textbf{I}\\[0.7em]
+  \normalsize\textsc{Paper I}\\[0.7em]
   \LARGE\clebschmaintitle}
 \makeatother
 \maketitle
 \endgroup
-
-\begin{center}
-\small\itshape
-From deep holes, the cubic \textbf{takes shape}, finds its bearings, and stands
-fixed while its shadows move.
-\end{center}
 
 \begin{abstract}
 Let $A$ be a six-arc in $\PG(2,11)$, and let $\cU(A)$ be the projective
@@ -62,21 +56,18 @@ monomial equivalence.  The reconstructed conic then determines its polarity,
 and Dye's theorem identifies the stabilizer as $A_5$; none of this geometry
 is assumed.
 
-For the resulting code, the reconstructed conic equation is an exact
-syndrome-distance oracle, while decoder ambiguity recovers the Brianchon
-geometry and an orientation torsor on the three-coordinate supports.
-The twelve deep-hole directions also form a twisted two-cover of six axes.
-Its signed orbital operator $B$ satisfies $B^2=5I$, and its triangle
-products are exactly the coefficients of the support-orientation cubic.
-Thus the support cubic and the golden continuation algebra are two
-presentations of the same intrinsic signed two-graph; the cubic is the
-sole nonsymmetric term in the operator's diagonal determinant pencil.
-Its six ordinary nodes form a projective frame, so the cubic also recovers
-the unlabelled axis carrier.
-The conceptual tools are a universal chord-defect identity and a
-partial-cover bound.  As a secondary uniform consequence, any $k$-arc
-whose uncovered locus is a nonsingular conic has $q$ odd and lies in the
-field window $2k-3\le q\le(k(k-1)+3)/3$.
+Nearest-codeword ambiguity then reconstructs an unordered orientation torsor
+on six axes.  Its signed orbital operator satisfies $B^2=5I$, and triangle
+holonomy gives the support cubic through
+$c_{ijk}=B_{ij}B_{jk}B_{ki}$; equivalently, this cubic is the sole
+nonsymmetric term in the diagonal determinant pencil of $B$.  Thus the same
+syndrome and support data recover both the code and its golden orientation.
+
+The proof uses a universal chord-defect identity and a partial-cover bound
+for rigidity, then decoder ambiguity and the orbital pentagon for orientation.
+As a secondary uniform consequence, any $k$-arc whose uncovered locus is a
+nonsingular conic has $q$ odd and lies in the field window
+$2k-3\le q\le(k(k-1)+3)/3$.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite

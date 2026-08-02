@@ -16,6 +16,13 @@ released Papers II--III and forthcoming Paper IV.  The computational companion
 marks its q13 theorem as the historical computational source and points forward
 to Paper IV's standalone proof and evidence surface.
 
+The title-page audit retains the precise Paper-I title, replaces the historical
+three-stage strapline by the neutral series label `Paper I`, and removes the
+metaphorical epigraph.  The main abstract now has exactly three levels: the
+inverse theorem, the golden identity and its triangle-holonomy mechanism, then
+the secondary field window.  The companion abstract no longer restates Paper
+IV's theorem package; one sentence preserves provenance and points forward.
+
 The BBS interface now cites the exact conic-complement statement,
 Proposition 1.6, rather than deriving it through Proposition 1.5.  The
 Hassett--Tschinkel interface explicitly identifies the cross-golden four-space
@@ -32,9 +39,10 @@ version-2 manuscript.  It found no remaining hierarchy, series, ownership,
 citation-interface, bibliography, or layout defect.
 
 The read-only Lean correspondence audit found no new declaration requirement.
-The three affected statement groups retain their exact SHA-256 identities;
-only their source lines moved (orientation `966→984`, window `83→85`, q13
-`385→390`).  After C753's active extraction is stable, regenerate
+The headline and three affected statement groups retain their exact SHA-256
+identities; only their source lines moved (headline `96→85`, orientation
+`966→975`, window `83→81`, q13 `385→386`).  After C753's active extraction is
+stable, regenerate
 `verification/statement_identity.json` and the dependent trust manifest, then
 update formal coverage only to the strength actually achieved by the existing
 frozen C753 packets.  No Lean source, build artifact, or running extraction was
