@@ -7,7 +7,7 @@ SOURCE := golden_quantum_statistics.tex
 
 all: lint golden_quantum_statistics.pdf
 
-check: lint verify golden_quantum_statistics.pdf warnings
+check: lint verify verify-sources golden_quantum_statistics.pdf warnings
 
 lint:
 	python3 verification/lint_tex_spacing.py $(SOURCE)
@@ -28,6 +28,9 @@ golden_quantum_statistics.pdf: $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: golden_quantum_statistics.pdf
+	@if [ ! -f golden_quantum_statistics.log ]; then \
+		$(LATEXMK) -g $(LATEXMK_FLAGS) $(SOURCE); \
+	fi
 	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' golden_quantum_statistics.log; then \
 		exit 1; \
 	fi

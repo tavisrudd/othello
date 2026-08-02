@@ -1,8 +1,8 @@
 {
   "files": {
     "Makefile": {
-      "bytes": 1319,
-      "sha256": "e88d663be174864b95d5e6c88a0985e982c2f78db33a3b899b8ed32facdf8e3e"
+      "bytes": 1436,
+      "sha256": "841f8a27d30371c1ecc069166755a62a107bdd129cc228343bf08b6fb33e5f11"
     },
     "golden_quantum_statistics.tex": {
       "bytes": 41835,
