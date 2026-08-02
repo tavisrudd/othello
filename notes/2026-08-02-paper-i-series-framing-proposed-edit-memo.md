@@ -2,12 +2,13 @@
 
 **Lane:** `clebsch`
 
-**Status:** revised after C802's first independent red-team; proposal only;
-no manuscript source has been edited
+**Status:** revised after C802 red-team and accepted by a fresh cold check;
+proposal only; no manuscript source has been edited
 
 **Target:** the next simultaneous forward release of Papers I--IV
 
 **Review record:** `notes/2026-08-02-c802-paper-i-series-framing-memo-red-team.md`
+(final verdict: `GO`)
 
 ## Purpose
 

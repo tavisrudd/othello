@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**State:** first independent red-team complete with `NO-GO`; memo iteration and
-second cold check remain queued after C753 and before C762's final prose merge
+**State:** memo review and iteration complete with final independent `GO`;
+manuscript integration remains owned by C762 after C753
 
 ## Goal
 
@@ -62,3 +62,10 @@ any cited theorem with Paper I's odd orientation covariant.  It also requires a
 per-paper theorem/dependency matrix, conditional Paper III attribution, fuller
 C494 exclusions, and a substantially shorter eventual Paper I intervention.
 No memo or manuscript text was changed in this review round.
+
+The memo was subsequently revised, received a second cold-read `GO`, and now
+contains the accepted stage and ownership audits plus the complete C494
+boundary.  The accepted recommendation to C762 is limited to one optional
+abstract sentence, one early-introduction paragraph, and one compact roadmap,
+all conditional on C753, exact theorem locators, and dependency verification.
+No manuscript source changed during C802.

@@ -73,3 +73,21 @@ Do not edit a manuscript.  C802 must first revise the memo around the narrower
 matrix, and remove every sheet-equals-odd-orientation inference.  A second cold
 check is required because these repairs change the central architecture.
 
+## Revision and second cold check
+
+The memo was revised to remove the sheet/odd-orientation identification, replace
+the common ladder by a recurring reconstruction pattern, make every Paper III
+attribution conditional, state the complete C494 boundary, limit Paper I to
+three proposed edit locations, and add separate stage and ownership audits.
+
+The fresh read-only cold check first returned `NO-GO` on three local omissions:
+the stage audit did not explicitly mark `proved`/`absent`/`analogous`, the
+ownership table omitted cross-paper citations/imports, and the cover-letter
+instruction did not require the full C494 boundary adjacent to its use.  All
+three were repaired.  A Milnor/Serre-style exposition pass then put the result
+before its interpretation and boundary, stabilized the terminology, shortened
+the prose, and kept one distinction per paragraph.
+
+The final cold-check verdict is **GO**, with no remaining blocker.  It confirms
+that the memo is precise, economical, and correctly gated on O1--O8, exact
+locators, and completed dependency audits.  No manuscript source changed.
