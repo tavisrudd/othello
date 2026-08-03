@@ -1,7 +1,7 @@
 # C862 — Paper III ceiling and theorem-upgrade research
 
 **Lane:** `clebsch`  
-**Status:** active; research report only; do not close
+**Status:** active; first research-report pass delivered; research report only; do not close
 
 ## Objective
 
@@ -30,3 +30,7 @@ Write `notes/2026-08-03-c862-paper-iii-ceiling-upgrade-research.md` as a researc
 ## Acceptance for this reporting pass
 
 A committed, evidence-backed research report that distinguishes prose-only upgrades from theorem-ready syntheses and genuinely new research obligations, with bounded novelty claims and an explicit next research frontier. Reporting does not complete or close C862.
+
+## First reporting pass
+
+`notes/2026-08-03-c862-paper-iii-ceiling-upgrade-research.md` records the independent verdict. Its main new findings are the spectral realization of the golden incidence fibre as `Q[C]`, the resulting norm interpretation of the commutator determinant, C809's shadow-recognition theorem as the true Paper-II-style priority-judo move, and arXiv `2601.10106` as a new integral-model input reducing the open seam to comparison and Stein-base-change questions. C862 remains active.
