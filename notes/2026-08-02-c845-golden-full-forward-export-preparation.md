@@ -94,6 +94,18 @@ build released the window, `lean-trust-extract.py` generated
 the clean worktree. Its exact observed axiom set is `{propext}` for each of the
 four terminals, with no project axiom and no opaque declaration.
 
+The exact project-local export closure is already frozen even though the
+canonical materializer is absent:
+
+| Module | Bytes | SHA-256 |
+|---|---:|---|
+| `RelativeConicArcs.GoldenBalancedCut` | 4,246 | `ea9aa97f486ef37d6cc8becbca8d6d71b202172d0282a95b8c0de120756ed22a` |
+| `RelativeConicArcs.Gates.GoldenQuantumStatistics` | 614 | `ac102609c2a0d9143bf48fe1d16d0019c27d63640d03b56a780a3bf53aa5f468` |
+
+Its only external import is `Mathlib.Tactic.Ring`. This is the source-manifest
+input the guarded exporter must derive and verify, not a manually assembled
+standalone manifest.
+
 The area-wide trust-spine audit is not a usable C845 exit gate: it currently
 reports 165 pre-existing errors across unrelated relconic/AME--LU/Q25 units,
 including missing facts and unreached modules. Global external-view generation
@@ -137,6 +149,8 @@ prose, axiom, and deterministic-export gates before handing it to C840.
   is the evidence gap.
 - **Settled:** exact terminal facts are generated; all four terminals use only
   `propext` and introduce no project axiom.
+- **Settled:** the project-local closure is exactly two modules and 4,860
+  bytes; both source hashes are frozen above.
 - **Open:** the aggregate no-build confirmation and canonical clean-checkout
   replay await the guarded exporter path.
 - **Open:** the monolithic relconic trust-spine audit has 165 unrelated
