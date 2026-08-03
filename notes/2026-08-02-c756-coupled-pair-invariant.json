@@ -1,0 +1,54 @@
+[
+ {
+  "G1_symmetric_crossratio_affine_invariant": true,
+  "G2_beta_identity": true,
+  "G3_conditionB_is_chi_one_minus_g": true,
+  "G4_exact_class_counts": true,
+  "all_g_values_in_target_set": true,
+  "coherent_systems": 10,
+  "collision_forced": true,
+  "delta": -1,
+  "q": 5,
+  "row_length": 3,
+  "row_profiles_len_distinct": [
+   [
+    3,
+    2
+   ]
+  ],
+  "target_set_size": 2
+ },
+ {
+  "G1_symmetric_crossratio_affine_invariant": true,
+  "G2_beta_identity": true,
+  "G3_conditionB_is_chi_one_minus_g": true,
+  "G4_exact_class_counts": true,
+  "collision_forced": true,
+  "delta": 1,
+  "q": 7,
+  "row_length": 4,
+  "target_set_size": 3
+ },
+ {
+  "G1_symmetric_crossratio_affine_invariant": true,
+  "G2_beta_identity": true,
+  "G3_conditionB_is_chi_one_minus_g": true,
+  "G4_exact_class_counts": true,
+  "collision_forced": true,
+  "delta": 1,
+  "q": 11,
+  "row_length": 6,
+  "target_set_size": 5
+ },
+ {
+  "G1_symmetric_crossratio_affine_invariant": true,
+  "G2_beta_identity": true,
+  "G3_conditionB_is_chi_one_minus_g": true,
+  "G4_exact_class_counts": true,
+  "collision_forced": true,
+  "delta": -1,
+  "q": 13,
+  "row_length": 7,
+  "target_set_size": 6
+ }
+]
