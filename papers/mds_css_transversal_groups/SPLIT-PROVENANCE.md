@@ -1,4 +1,4 @@
-# Provenance
+# Split provenance
 
 This paper was split from the final combined AME--LU baseline without
 rewriting any public Git history.
@@ -15,5 +15,5 @@ rewriting any public Git history.
 
 The two content-addressed tree hashes, rather than a later mutable monorepo
 commit, identify the mathematical and formal combined baseline. Paper II was
-established from those source bytes. Paper I remains authoritative at
-`papers/ame_lu`; no Paper I source was removed during this phase.
+established from those source bytes. Paper I remains authoritative in its
+companion source repository; no Paper I source was removed during this phase.
