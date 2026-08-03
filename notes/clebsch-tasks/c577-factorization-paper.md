@@ -11,6 +11,18 @@ C750/C801 formal closure.  Do not push the current standalone commit.  C856
 must repair and replay the authoritative Lean/trust surface first; C577 then
 owns a new forward synchronization and the remaining publication steps.
 
+**Sequencing and scope (2026-08-03).** Repackaging and the new canonical
+standalone forward commit also wait for C860 stages 2--4.  Those stages change
+the membership of the Paper II gate closure
+(`RelativeConicArcs.Gates.ClebschFactorization` and its axiom audit), so every
+export-manifest hash and the module count must be regenerated afterwards rather
+than before.  C577 must not audit, document, or remediate any `ProjectiveCap`
+or `CapGame` module; it consumes the audited, relocated shared
+projective-plane base that C860 delivers under `RelativeConicArcs`, documented
+during the move.  A residual cap-game import in the Paper II closure after
+C860's stages is a defect to report to C860, not to repair here.  Measured
+deltas: `notes/2026-08-03-c860-execution-design.md`.
+
 ## Objective
 
 Release *Quadratic trade rigidity and cubic orientation in conic matching

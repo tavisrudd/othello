@@ -52,7 +52,14 @@ coordination with their recorded owners; do not edit foreign dirty work.
 - [ ] Audit the full transitive project-owned closure for scholarly docstrings,
   stable names, precise scope, trust disclosures, and forbidden workflow or
   machine-local references; record any foreign-owned cleanup instead of
-  editing it opportunistically.
+  editing it opportunistically.  **Scope note (2026-08-03):** this audit
+  excludes every `ProjectiveCap` and `CapGame` module.  Run it against the
+  post-C860 closure, which consumes the audited, relocated shared
+  projective-plane base under `RelativeConicArcs` — documented by C860 during
+  the move — rather than the cap-game library.  A residual cap-game import in
+  the AME-LU gate closure (`RelativeConicArcs.Gates.AMELUAggregate` and its
+  axiom audit) after C860's stages is a defect to report to C860, not to repair
+  here.  See `notes/2026-08-03-c860-execution-design.md`.
 
 ## 3. Create and verify the axiom audit
 

@@ -4,6 +4,14 @@
 
 **Status:** active; required dependency of C761 by author direction 2026-08-02
 
+**Sequencing note (2026-08-03), informational — no action required of C834.** C860 stage 1 removes
+the cap-game API (`CapGame.BuildGame`) from the Paper IV gate closure
+`RelativeConicArcs.Gates.PassantCodeQ13`, and stages 2--4 relocate the remaining shared
+projective-plane vocabulary into a documented `RelativeConicArcs` base. C834 must not audit,
+document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-game import in the
+Paper IV closure after C860's stages is a defect to report to C860. See
+`notes/2026-08-03-c860-execution-design.md`.
+
 ## Current state
 
 The incidence/dimension packet is partially closed.  The normalized 183-point coordinate model,

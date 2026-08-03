@@ -4,6 +4,15 @@
 
 **Status:** queued after C834; required before C761 release authority
 
+**Sequencing and scope (2026-08-03).** Run the closure audit against the post-C860-stage-1 Paper IV
+closure, not the current one: that stage removes `CapGame.BuildGame` and the cap-game API from
+`RelativeConicArcs.Gates.PassantCodeQ13`, shrinking what section D has to document. C857 must not
+audit, document, or remediate any `ProjectiveCap` or `CapGame` module. It consumes the audited,
+relocated shared projective-plane base that C860 delivers under `RelativeConicArcs`, whose
+declarations are documented during the move. Any residual cap-game import still in the Paper IV
+closure after C860's stages is a defect to report to C860, not to repair here. Details and the
+measured closure deltas are in `notes/2026-08-03-c860-execution-design.md`.
+
 ## Governing standards
 
 This task closes the complete gap list in
@@ -83,9 +92,11 @@ import closure and fail if new files or declarations escape classification.
   coverage relation, and final trust mode.
 - [ ] Add the analogous exact-domain and trust-boundary module doc to
   `MinimumWords/RowUniqueness/GeometricRows.lean`.
-- [ ] Add non-redundant docstrings to the 86 public theorems and two abbreviations identified in the
-  additional shared closure, prioritizing `ProjectiveCap/PlaneTransitivity.lean`,
-  `RelativeConicArcs/Moments.lean`, and `RelativeConicArcs/CodingBridge.lean`.
+- [ ] Add non-redundant docstrings to the public theorems and abbreviations identified in the
+  additional shared closure, prioritizing `RelativeConicArcs/Moments.lean` and
+  `RelativeConicArcs/CodingBridge.lean`. `ProjectiveCap/PlaneTransitivity.lean` is removed from this
+  item as of 2026-08-03: C860 relocates the shared content it supplies into the documented
+  `RelativeConicArcs` base, and the remainder is cap-owned and out of the Paper IV closure.
 - [ ] Re-run the declaration-docstring audit on the final transitive closure; every public
   scholarly theorem and every non-obvious public definition must be documented.
 - [ ] Re-run the module-header audit and ensure every module explains its mathematical object,
