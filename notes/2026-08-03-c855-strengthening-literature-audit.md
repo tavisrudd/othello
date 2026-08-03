@@ -141,6 +141,49 @@ Combinatorica 12 (2) (1992), 143–147. DOI `10.1007/bf01204717` (confirmed via 
   companion note's exact definitions in this run — that comparison is still open and must be done
   before any pre-emption verdict is written for Claims 4 or 5.
 
+### Van de Voorde 2011/2012 — read depth: `full text`
+
+Geertrui Van de Voorde, "On sets without tangents and exterior sets of a conic," `arXiv:1201.0484`
+(2012); published version Discrete Mathematics (2011/2012, exact volume/issue not independently
+confirmed this run — the arXiv preprint is what was read). Fetched via the shared lit-search cache
+workflow — already present as `arXiv:1201.0484` (checked with `litcache.py list` before any network
+fetch), fetched 2026-07-20, SHA-256 `45891ed7688d6ab3677a57060ac69c876007104b7479944744724e69fc46f9a7`,
+12 pages, extracted text at `/tmp/persistent/tavis/lit-search/text/arXiv_1201.0484.txt` (6,013 words,
+`pdftotext`). Read complete this run.
+
+- **Relation to BSW — restates and uses BSW's theorem and conjecture as background, does not extend
+  the exceptional census.** §1.1 ("Exterior sets of conics," page 2 of the PDF) states, citing BSW as
+  reference [4] (the same paper audited above): "Theorem 1. [4] Let S be a set of (q+1)/2 exterior
+  points forming an exterior set of the conic C. If q ≡ 1 (mod 4), S consists of the (q+1)/2 exterior
+  points on an external line of C. If q ≡ 3 (mod 4), there exist other examples (at least for q = 7,
+  11, ..., 31)." — an exact restatement, and then: "It is conjectured by the authors of the same paper
+  (and checked by computer for q < 131), that only for q = 7, 11, ..., 31, there exist other examples."
+  §3 (page 8) sharpens this into a specialized corollary the audit note had not previously located:
+  "In the same paper, Blokhuis, Seress and Wilbrink conjecture that if q > 31, there are no exterior
+  sets consisting of (q + 1)/2 non-collinear exterior points in PG(2, q), and they found by computer
+  that for 11 < q ≤ 31, all exterior sets consisting of (q + 1)/2 exterior points contain a line with
+  at least 3 points of this set. Hence, the cases q = 7 and q = 11 are conjectured to be the only cases
+  for which a conic C and (q + 1)/2 exterior points of C form a set without tangents." This last
+  sentence is Van de Voorde's own inference from BSW's results (marked here as such, per the
+  conventions' Attribution section — it is not a quotation from BSW 1992 itself), not a re-derivation
+  or extension of BSW's exceptional census past q = 131; it recasts the same q ≤ 31 census into the
+  "set without tangents" framing that is this paper's own object of study.
+  The paper's own new result (Theorem 15, page 9) is a different, narrower question: whether a single
+  point Q can extend the (q+1)/2 exterior points of one external line L to a strictly larger exterior
+  set. Proved: if q ≡ 3 (mod 4), any such Q must lie on L (so no genuine extension exists off the
+  line); if q ≡ 1 (mod 4), there is a unique such Q off the line, namely (in the paper's own
+  coordinates) the point ⟨(1, 0, −a)⟩ where L has equation Z = aX for a fixed non-square a. This is a
+  one-point local-extendability question, not a maximum-size or exceptional-census question, and it is
+  a new result of this paper, not attributed to BSW.
+- **Bearing on Claims 4–5, stated precisely.** Nothing in this paper addresses a "pairwise-passant arc"
+  as a free-standing object independent of the (q+1)/2-sized complete-exterior-set or
+  sets-without-tangents framings; q = 23 and q = 9 (the companion note's Claim 4 and Claim 5 orders) do
+  not appear anywhere in this paper (checked over the full extracted text — the only q-values named
+  are 3, 5, 7, 9, 11 for `u_q` sizes in §1.2, and the general q ≡ 1/3 (mod 4) theorems). This paper
+  therefore does not pre-empt, extend, or otherwise bear on Claims 4 or 5 beyond restating the same BSW
+  background already recorded above. It is not a lead requiring further reading for Claims 4–5; it is
+  now a closed, fully-read source that turned out not to be on point for those two claims specifically.
+
 ## Searches run
 
 ### Forward-citation enumeration for Blokhuis–Seress–Wilbrink 1992 (resume checklist item 4)
@@ -181,13 +224,11 @@ queried independently on 2026-08-03:
   none of the 11 titles is, by title alone, a direct re-derivation or extension of the BSW theorem or
   conjecture into the q ≡ 3 (mod 4), q > 31 exceptional-census question that Claims 4–5 touch. The
   closest by title is "On sets without tangents and exterior sets of a conic" (G. Van de Voorde,
-  Discrete Mathematics 2011 / arXiv:1201.0484 2012), which by its abstract (retrieved via web search,
-  not fetched at full text) extends the *sets-without-tangents* and single-point-extension question
-  for exterior sets of a conic, and states that for q ≡ 3 (mod 4) an extension point of an external
-  line's exterior set must lie on that same line, versus a unique off-line point for q ≡ 1 (mod 4).
-  This is adjacent to, but is not shown here to directly re-derive or contradict, the BSW q ≡ 3
-  (mod 4) exceptional-census conjecture; it is recorded as a lead, not a verdict, since it has not
-  been read at full text. None of the remaining nine titles engages the exceptional census or
+  arXiv:1201.0484 2012), now read at full text in a follow-up pass (see the dedicated source entry
+  above): it restates BSW's theorem and conjecture as background and proves a related but distinct
+  single-point-extendability result, and does not extend BSW's exceptional census or bear on Claims
+  4–5's specific orders (q = 23, q = 9). None of the remaining nine titles engages the exceptional
+  census or
   conjecture by title. **This screen is title-only and does not discharge a full pre-emption check**
   for Claims 4–5; it only answers resume-checklist item 4 (the three-way count) and flags one lead
   for a possible future full-text read.
@@ -371,9 +412,12 @@ searches of resume checklist item 5 are run.
   reconciliation).
 - The forward-citation screen (see "Searches run" above) found no citing work, by title, that
   directly extends BSW's exceptional census past q = 131 or restates it in the pairwise-passant-arc
-  framing the companion note uses; the closest lead, Van de Voorde 2011/2012, is unread at full text.
-  "Avoiding secants of given size in finite projective planes" (arXiv:2409.14213) surfaced in the
-  topical web search and is also an unread lead in the same territory.
+  framing the companion note uses. The closest lead, Van de Voorde 2011/2012, is now read at full text
+  (see its dedicated source entry above) and confirmed **not** to bear on Claim 4: it restates BSW's
+  theorem/conjecture as background and proves an unrelated single-point-extendability result, naming
+  neither q = 23 nor q = 9 anywhere in the paper. "Avoiding secants of given size in finite projective
+  planes" (arXiv:2409.14213) surfaced in the topical web search and remains an unread lead in the same
+  territory.
 - Korchmáros and Ughi were not searched by name this run; that remains an open gap from the
   checkpoint, since resume checklist item 5 named only the six queries actually run, not this pair of
   authors.
@@ -405,19 +449,19 @@ value of five at q = 9 was located or checked. This remains open.
   this run despite being reachable. A systematic OpenAlex/Crossref *keyword* search (as opposed to the
   one citation-graph enumeration run for BSW specifically) was not run for Claims 1–3's topics — only
   WebSearch was used for those, per the resume checklist's own item 5 wording.
-- **Available but not read at full text (leads, not verdicts):** Van de Voorde 2011/2012 ("On sets
-  without tangents and exterior sets of a conic"); "Avoiding secants of given size in finite
-  projective planes" (arXiv:2409.14213); "Line partitions of internal points to a conic in PG(2,q)"
-  (Giulietti et al.); Madison–Wu 2012 ("On Binary Codes from Conics in PG(2,q)," European Journal of
-  Combinatorics, arXiv:1104.0324); Wu 2010 ("Some p-ranks related to a conic in PG(2,q)",
+- **Available but not read at full text (leads, not verdicts):** "Avoiding secants of given size in
+  finite projective planes" (arXiv:2409.14213); "Line partitions of internal points to a conic in
+  PG(2,q)" (Giulietti et al.); Wu 2010 ("Some p-ranks related to a conic in PG(2,q)",
   arXiv:1002.1138); "Determinantal representations of smooth cubic surfaces" (Buckley & Košir,
   Geometriae Dedicata 2007).
 - **NOT COVERED:** MathSciNet (institutional authentication, as expected). zbMATH Open (reachable,
   simply not queried this run).
 - **COVERED this run:** Dye 1991 (complete, full text). Blokhuis–Seress–Wilbrink 1992 (complete, full
-  text). The three-graph forward-citation count for Blokhuis–Seress–Wilbrink (OpenAlex, Crossref,
-  Semantic Scholar, from the pinned DOI). WebSearch for the six resume-checklist-item-5 topics plus
-  two topics for the new candidates below.
+  text). Van de Voorde 2011/2012 (complete, full text, follow-up pass — confirmed not to bear on
+  Claims 4–5). Madison–Wu 2012 (complete, full text, follow-up pass — module decomposition of the F₂
+  null space now fully recorded for candidate (a)). The three-graph forward-citation count for
+  Blokhuis–Seress–Wilbrink (OpenAlex, Crossref, Semantic Scholar, from the pinned DOI). WebSearch for
+  the six resume-checklist-item-5 topics plus two topics for the new candidates below.
 
 Claims 1–3 no longer need the caution about Dye's unread pages; their remaining hedge is only the
 weaker-than-citation-graph strength of a title-level web-search negative (stated per claim above).
@@ -442,8 +486,9 @@ hedging, now for a narrower and more precisely stated reason than at checkpoint 
 4. **Done.** Forward citations of Blokhuis–Seress–Wilbrink enumerated independently: OpenAlex 9,
    Crossref 3, Semantic Scholar 11, from the pinned DOI `10.1007/bf01204717`. The three-way
    disagreement is itself recorded as a reportable finding per the conventions. A title-only screen of
-   the union of citing works found no direct extension of the exceptional census or conjecture; one
-   adjacent, unread lead (Van de Voorde 2011/2012) was flagged.
+   the union of citing works found no direct extension of the exceptional census or conjecture; the
+   closest lead, Van de Voorde 2011/2012, was subsequently read at full text in a follow-up pass and
+   confirmed not to bear on Claims 4–5 (see its dedicated source entry above).
 5. **Done.** All six named searches run, verbatim queries, database (WebSearch), and date
    (2026-08-03) recorded under "Searches run" above; each returned no matching result for its own
    query text, with the domain/stop-condition caveats stated there.
@@ -458,29 +503,65 @@ compared side-by-side against the source found, the way Claims 1–3 were compar
 ### (a) F₂ kernel of the passant-line incidence matrix of a conic in PG(2, 13): irreducibility as an
 F₂[PGL(2, 13)]-module / 2-rank formulas
 
-**Directly relevant prior work located, not yet read at full text.** Adonus L. Madison and Junhua Wu,
-"On Binary Codes from Conics in PG(2, q)," European Journal of Combinatorics 33 (2012); also on arXiv
-as `arXiv:1104.0324` (2011). Abstract (retrieved via WebFetch of the arXiv abstract page, 2026-08-03,
-`abstract/metadata only` read depth): "Let A be the incidence matrix of passant lines and internal
-points with respect to a conic in PG(2, q), where q is an odd prime power. In this article, we study
-both geometric and algebraic properties of the column null space L of A over the finite field of 2
-elements. In particular, using methods from both finite geometry and modular presentation theory, we
-manage to compute the dimension of L, which provides a proof for the conjecture on the dimension of
-the binary code generated by L." This is the same matrix (passant lines vs. a conic's points, F₂
-null-space) named in the new candidate, and it computes the dimension (i.e. the 2-rank via the
-null-space dimension) for general odd q, which includes q = 13. **What the abstract does not state:**
-whether the null space is shown to be an *irreducible* F₂[PGL(2, q)]-module, as opposed to merely
-having its dimension computed; that is a finer structural question the abstract does not address, and
-the full text was not fetched this run to check. A companion paper, Junhua Wu, "Some p-ranks related
-to a conic in PG(2, q)" (`arXiv:1002.1138`, 2010), was also located; its abstract (same read depth)
-concerns p-ranks for the odd defining characteristic, not the F₂ (2-rank) case, so it is adjacent but
-not the same question. **Search domain and stop condition:** two WebSearch queries (`2-rank passant
-incidence matrix conic PG(2,q) binary code irreducible module PGL(2,q)`; `Madison Wu 2-rank incidence
-matrix conic finite geometry`) plus one WebFetch of each arXiv abstract page, run 2026-08-03; stopped
-once the Madison–Wu paper's exact scope (passant-line/internal-point incidence matrix, F₂ null space,
-dimension computed for general odd q) was confirmed as matching the candidate's stated matrix. This is
-a strong lead for at least the dimension/2-rank half of candidate (a); the irreducibility-as-a-module
-question is open and requires the full text.
+**Read depth upgraded to `full text` this follow-up (2026-08-03).** Adonus L. Madison and Junhua Wu,
+"On Binary Codes from Conics in PG(2, q)," European Journal of Combinatorics 33 (2012). Fetched via
+the shared lit-search cache workflow — already present as `arXiv:1104.0324` (checked with `litcache.py
+list` before any network fetch, per the cache contract), fetched 2026-07-21, SHA-256
+`f3edf20a2b63286164b3aced06a04a9039d7bbba2eb955a6461b7f7e793f6343`, 23 pages, extracted text at
+`/tmp/persistent/tavis/lit-search/text/arXiv_1104.0324.txt` (12,883 words, `pdftotext`). Read complete
+this run, front matter through the appendix character tables and reference list.
+
+- **Exact statement of the null-space/2-rank result, all q cases (Theorem 6.1, page 20 of the PDF).**
+  Let A be the incidence matrix of passant lines versus internal points of a conic in PG(2, q), q an
+  odd prime power; let φ: F I → F I be the F H-module homomorphism with matrix A, where H ≅ PSL(2, q)
+  is the index-2 subgroup of the conic's automorphism group G ≅ PGL(2, q), F is an algebraic closure of
+  F₂, and I is the set of internal points (so F I has the internal points as a permutation basis).
+  Verbatim: "(i) if q ≡ 1 (mod 4), then Ker(φ) = ⊕_{s=1}^{(q−1)/4} Mₛ, where Mₛ for 1 ≤ s ≤ (q−1)/4
+  are pairwise non-isomorphic simple F H-modules of dimension q − 1; (ii) if q ≡ 3 (mod 4), then
+  Ker(φ) = ⟨Ĵ⟩ ⊕ (⊕_{r=1}^{(q−3)/4} Mᵣ), where Mᵣ for 1 ≤ r ≤ (q−3)/4 are pairwise non-isomorphic
+  simple F H-modules of dimension q + 1 and ⟨Ĵ⟩ is the trivial F H-module generated by the all-one
+  column vector of length |I|." The dimension formula (Corollary 6.3, page 21) follows immediately:
+  dim_{F₂}(L) = (q−1)²/4 in both congruence cases, where L is the F₂-null space of A — this is exactly
+  Conjecture 1.1 of Droms–Mellinger–Meyer (2006), which the paper proves.
+- **Specialized to q = 13 (≡ 1 mod 4, the candidate's exact case).** (q−1)/4 = 3, so Ker(φ) =
+  M₁ ⊕ M₂ ⊕ M₃, a direct sum of exactly three pairwise non-isomorphic simple F H-modules, each of
+  dimension q − 1 = 12; total dimension 36 = (13−1)²/4, matching Corollary 6.3.
+- **Proof mechanism.** Hybrid, and character-theoretic/modular-representation-theoretic in its
+  culminating step, not purely combinatorial. The paper first establishes purely geometric/combinatorial
+  parity lemmas (Theorem 2.12, page 6: the number of internal points on a passant line's "internal
+  neighbourhood" is always even; Lemmas 3.5–3.6, pages 8–11: parity of conjugacy-class intersections
+  with point-stabilizer double cosets), which are used to prove the matrix identity A³ ≡ A (mod 2)
+  (Lemma 2.13, page 6). It then switches to Brauer's modular representation theory: the 2-blocks of
+  H ≅ PSL(2, q) and their block idempotents (§4, following the character tables of Jordan and Schur and
+  the companion paper Sin–Wu–Xiang, J. Combin. Theory (A) 118 (2011), 853–878 — reference [17]), and
+  uses the block-idempotent action on Ker(φ) (Lemma 6.2, page 19) to identify each simple summand with
+  a specific 2-block of defect 0 (Corollary 5.3, page 17, combined with the Frobenius-reciprocity
+  induced-character decomposition of Lemma 5.2, pages 16–17). The dimension formula is thus proved by
+  exhibiting the *exact* module decomposition, not merely counted combinatorially.
+- **Decisive finding for the novelty ledger, stated precisely.** The F₂ null space is **not**
+  irreducible as an F H-module for H ≅ PSL(2, q) — Madison–Wu's own Theorem 6.1 gives its exact
+  composition into (q−1)/4 (or 1 + (q−3)/4) pairwise non-isomorphic simple summands, each of a single
+  fixed dimension (q − 1, or q + 1). This is a *stronger* result than irreducibility: it is the complete
+  list of composition factors (with multiplicity one each, all distinct), not merely a dimension count.
+  **One precision the candidate's own framing should be corrected for:** Madison–Wu's module structure
+  theorem is stated for the group H ≅ PSL(2, q) (index 2 in G ≅ PGL(2, q)) over F, the algebraic closure
+  of F₂ — not literally "F₂[PGL(2, q)]" as the candidate names it. Whether the same decomposition
+  descends to an F₂[PGL(2, q)]-module statement (as opposed to F[PSL(2, q)]) is a distinct question the
+  paper does not itself address in these terms; the endomorphism-ring/field-of-definition question the
+  candidate also names (does each simple summand's endomorphism ring equal F, i.e. is F a splitting
+  field for these summands) is likewise not stated by the paper in that language, though "pairwise
+  non-isomorphic simple F H-modules" is consistent with, but does not by itself establish, absolute
+  irreducibility over a smaller field.
+- **Minimum weight, minimum-word counts, and the weight-12 layer at q = 13: not treated.** The word
+  "minimum weight" does not occur anywhere in the paper (checked over the full extracted text); the
+  paper's entire content is the dimension (2-rank) of the null space and its exact module
+  decomposition, not the weight distribution or minimum weight of the resulting code, and it makes no
+  statement about q = 13 specifically or about a weight-12 layer. This is a clean, full-text-confirmed
+  gap, not merely an abstract-level absence.
+- A companion paper, Junhua Wu, "Some p-ranks related to a conic in PG(2, q)" (`arXiv:1002.1138`,
+  2010), remains at `abstract/metadata only` read depth (not upgraded this run); its abstract concerns
+  p-ranks for the odd defining characteristic p, not the F₂ (2-rank) case, so it stays adjacent but
+  distinct.
 
 ### (b) Cross-ratio level-set constructions of low-weight words in conic-related binary codes
 
@@ -543,8 +624,21 @@ general field golden ratio icosahedral`.
    geometry of six-arcs, golden ratio in PG(2, q), and maximum passant/external arcs, recording each
    query verbatim with its database and date. **Done — see "Resume checklist — disposition."**
 
+## Two full-text follow-ups (2026-08-03, second pass)
+
+Madison–Wu 2012 and Van de Voorde 2011/2012 were both upgraded to `full text` read depth in a second
+follow-up pass the same day; see their dedicated "Sources consulted" entries above (Madison–Wu:
+candidate (a) section; Van de Voorde: immediately before "Searches run"). Both were already present in
+the shared lit-search cache (checked with `litcache.py list` before any fetch, per the cache's own
+contract) — no new network fetch of either paper's bytes was needed, only the already-cached extracted
+text was read.
+
 **Still open for a future pass:** the exact-quantity comparison between the companion notes' Claims 4
 and 5 and BSW's complete-exterior-set definitions and census (needed before any Claim 4/5 verdict);
-Korchmáros/Ughi author-name searches; zbMATH Open; full-text reads of the leads named above
-(Van de Voorde 2011/2012; Madison–Wu 2012 and Wu 2010 for candidate (a)'s irreducibility question;
-Buckley–Košir 2007 and Dolgachev for candidate (c)).
+Korchmáros/Ughi author-name searches; zbMATH Open; full-text reads of "Avoiding secants of given size
+in finite projective planes" (arXiv:2409.14213), "Line partitions of internal points to a conic in
+PG(2,q)" (Giulietti et al.), Wu 2010 (`arXiv:1002.1138`, candidate (a)'s p-rank companion, still only
+`abstract/metadata only`), and Buckley–Košir 2007 / Dolgachev for candidate (c). The
+F₂[PGL(2,13)]-versus-F[PSL(2,13)] precision noted in candidate (a)'s writeup, and whether the simple
+summands are absolutely irreducible over F₂ itself (splitting-field question), remain open and would
+need Madison–Wu's cited companion paper (Sin–Wu–Xiang 2011) or direct calculation to close.
