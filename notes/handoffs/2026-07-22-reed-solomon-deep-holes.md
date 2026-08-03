@@ -89,6 +89,16 @@ replay gates, and public q=49 Rust regeneration.  Version 1 remains
 immutable.  The synthesis and repair ledger is
 `notes/reed-solomon-tasks/c821-beyond4-v2-synthesis.md`.
 
+C846 is complete.  Version 2 now presents the complete R5 terminal proof,
+coherent polar induction, exact recursive carrier theorem, and a fixed-level
+mechanism synopsis in a 15-page TIT body.  The full R6--R10 coordinate proofs,
+R9 slice ledger, Lucas arithmetic, and verification boundary remain in the
+same 39-page PDF as Appendices A--E.  The restructuring preserves all 75
+mapped labels and 69 public evidence artifacts; both builds, the paper
+verifier, a clean standalone export rebuild, and a fresh geometry cold read
+are green.  The edit and repair ledger is
+`notes/reed-solomon-tasks/c846-prs-v2-spine-compression.md`.
+
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
 Zenodo version DOI `10.5281/zenodo.21682216`, and concept DOI

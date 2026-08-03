@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** Structural edit complete; clean-export and cold-read gates remain.
+**Status:** Complete.
 
 ## Objective
 
@@ -58,3 +58,26 @@ and the conclusion repeats the intermediate-lower-package hypothesis before
 the arbitrary-redundancy large-characteristic classification.  The R10 synopsis
 also names the empty carriers in the remaining odd characteristics rather than
 an ambiguous generic odd-characteristic calculation.
+
+## Verification
+
+- Canonical `make check`: PASS, 54 pages, warning-free.
+- `make tit-check`: PASS, 39/50 pages, warning-free; Appendix A begins on
+  page 16.
+- `python3 supplement/verify.py`: PASS, 75 labels and 69 public artifacts.
+- Clean standalone export: both builds PASS byte-identically; paper and Lean
+  export repositories remain clean.
+- Final canonical PDF SHA-256:
+  `3e72693dff2314f523aac92b82b4e1a5875416f569ec237b10a92fdedc30e307`.
+- Fresh geometry cold read: MINOR, with all findings repaired and no lost
+  proof dependency.
+
+## Mystery ledger and closeout
+
+The explicit `ej`+`tt` pass found no new mathematical mystery.  The apparent
+compression beyond the working 24--27-page body target is explained by moving
+whole fixed-level proof units rather than abridging them: the body ends on page
+15, while the unchanged proof burden occupies Appendices A--E and the complete
+TIT PDF remains 39 pages.  No incidental result crossed the discovery-track
+discriminator, and no new successor is required; C608 remains the lane's
+highest-EV open task.

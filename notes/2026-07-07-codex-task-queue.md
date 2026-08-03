@@ -215,7 +215,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `reed-solomon`
 
-- **C846 `[reed-solomon]` [ACTIVE]** — compress PRS Version 2 around the coherent-polar and recursive-carrier spine, moving fixed-level audits and reproducibility detail into proof appendices without weakening or externalizing any proof → `notes/reed-solomon-tasks/c846-prs-v2-spine-compression.md`.
 - **C608 `[reed-solomon]` [QUEUED; VERSION 1 PUBLICATION GATE CLEARED 2026-07-29]** — turn the paper's Hankel split-form criterion into exact maximum-likelihood PRS decoders with proposed field-operation bounds \(O(q)\), \(O(q^2)\), and \(O(q^3)\) at redundancies \(5,6,7\), closing the locator-rank, terminal-hyperplane, small-field, and prior-decoder gates without changing Version 1 → `notes/reed-solomon-tasks/c608-explicit-prs-decoders-r5-r7.md`.
 - **C607 `[reed-solomon]` [ACTIVE]** — prove and literature-audit exact PRS decoding through split Hankel locators: deterministic \(F(r)\operatorname{poly}(\log q)\) syndrome-distance decision, unconditional \(F(r)q\operatorname{poly}(\log q)\) explicit recovery, and the exact finite-field factorization barrier → `notes/reed-solomon-tasks/c607-exact-prs-decoding-fpt.md`.
 
