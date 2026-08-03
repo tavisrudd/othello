@@ -1,6 +1,6 @@
 # C646 — PRS stable-component Lean geometry and novelty delta
 
-Date: 2026-07-25 America/Los_Angeles
+Date: 2026-08-02 America/Los_Angeles
 
 ## Outcome
 
@@ -45,13 +45,25 @@ The following concrete geometry remains manuscript or Certificate SC input:
 The new Lean API makes those inputs explicit and derives component selection
 from them. It does not relabel them as kernel-checked conclusions.
 
+C820 sharpens the geometric side of this boundary.  Its carrier theorem is
+fibrewise and reduced: in each geometric fibre, the dense retained-marker
+image closes to an irreducible catalecticant row space, and that row space is
+selected into one component of the exact reduced ledger.  The Lean structures
+formalize precisely this implication.  They do not assert a flat reduced
+integral carrier whose residual component would have incompatible degrees in
+characteristic zero and characteristic two, nor do they prove C820's concrete
+primary decompositions or consecutive-row exclusions.
+
 ## Literature and novelty delta
 
-The baseline is paper commit `b77f4683`. The seven new labelled mathematical
-items are the old-marker fixed-factor lemma, exact-linear-gcd transport,
-identically-colliding stages, exact bottom carrier ledger, recursive bottom
-transport, uniform iterated lower packages, and the higher-Lucas endpoint
-test.
+The baseline is paper commit `b77f4683`.  The original seven new labelled
+mathematical items were the old-marker fixed-factor lemma,
+exact-linear-gcd transport, identically-colliding stages, exact bottom carrier
+ledger, recursive bottom transport, uniform iterated lower packages, and the
+higher-Lucas endpoint test.  The post-baseline inventory now also includes
+C819's finite-depth escape theorem, C820's reduced-fibre carrier and maximal
+Lucas-union theorem, C620's empty first higher-Lucas carrier and exact
+final-pair trace criterion, and C660's finite R7 reproducibility upgrade.
 
 The first six are specialized proof components built from sources and
 standard tools already scoped by the prior audit; none receives a standalone
@@ -71,9 +83,35 @@ criterion as new. The source does not identify the coherent Hankel endpoint
 or prove shallowness of the larger full \(e_7\) kernel orbit for every
 \(m\geq3\); those remain the paper-specific extension.
 
-The complete query strings, result counts, read depth, cache key, graph-access
-limitations, and claim-by-claim verdict are recorded in
-`papers/beyond4_prs/literature-audit.md`.
+The post-baseline source inventory contains two sources read at **full text**,
+one at **partial** depth, and one at **abstract/metadata only**:
+
+- Wang--Wu--Hu, arXiv `2604.21183v4` — **full text**, all sections; cache
+  SHA-256
+  `ad1e19b1a1bf7b1bbc016cc4617a59a718cf1a3f9396f6386f4b1b151149a811`.
+- Wang, *Splitting of Polynomial Families via Galois Theory*, arXiv
+  `2606.12810v1` — **full text**, all sections; cache SHA-256
+  `5dd4e19544335ebc2c75a184074e94adb91b78331930b5e8a643ae606021a107`.
+- Gmainer--Havlicek, *Nuclei of Normal Rational Curves*, arXiv
+  `1304.0088v1` — **partial**, abstract and Theorem 1; cache SHA-256
+  `da688c01e3953319ef93f17e1676fedf0470c590a0a348a853dabb11209526d0`.
+- Dau--Xinh--Kiah--Luong--Milenkovic, *Repairing Reed--Solomon Codes via
+  Subspace Polynomials*, arXiv `2007.15253v1` — **abstract/metadata only**,
+  official arXiv record accessed 2026-08-02; screened for the shared
+  subspace-polynomial tool and not used as a theorem input.
+
+C819 makes no new all-level carrier or higher-Lucas priority claim.  C820's
+dated theorem-level delta attributes normal-rational-curve nuclei and the
+projective-subline endpoint exactly, and locates no predecessor for the exact
+reduced-fibre/Pascal-nesting/recursive-transport conjunction within its four
+recorded arXiv queries.  C620 reuses that source boundary and makes no priority
+claim for its final-pair trace system or empty-carrier theorem.  C660 changes
+no mathematical theorem and therefore adds a reproducibility boundary, not a
+novelty claim.  MathSciNet, Google Scholar, zbMATH, and forward-citation graphs
+were not jointly covered; no unqualified absence or priority claim is licensed.
+The exact query strings, result counts, access depths, cache keys, and
+claim-by-claim comparisons are recorded in
+`papers/beyond4_prs/literature-audit.md`, the C820 report, and the C620 report.
 
 ## Trust-surface reconciliation
 
@@ -100,12 +138,25 @@ Updated:
 - `python3 supplement/verify.py --replay`: pass, including the R5, R6,
   R6-normal-form, R7-calibration, and both stable-component certificate
   replays.
-- exact four-target Lean queue plus aggregate:
-  pending at report draft time because the unrelated
-  `RelativeConicArcs.Gates.Relconic` run
-  `20260726-051858-715bd3b0` owns the shared build lock.
+- exact stable-component and beyond-four gate queue, both axiom audits, and
+  final aggregate trace gate: pending final guarded replay.
 
 ## Mystery ledger
 
-To be finalized after the guarded aggregate and the required `ej`+`tt`
-closeout pass.
+- **Settled:** the density theorem is an infinite-field polynomial-density
+  statement after passage to an algebraic closure; it makes no density claim
+  for the finite set of rational marker tuples.
+- **Settled:** closure transport and irreducibility select one member of a
+  finite closed component ledger, and the recursive polar theorem consumes
+  that selection without a preselected component axiom.
+- **Settled:** C820's exact compatibility point is fibrewise reduced geometry.
+  The impossible flat reduced integral model is neither needed nor implied by
+  the formal API.
+- **Explicit external geometry:** the retained-marker row-space
+  identification, reduced primary decompositions, saturation, and concrete
+  component classifications remain manuscript/certificate inputs owned by
+  C820 and its cited C525/C597 calculations.
+- **Version 2 adoption:** C821 owns manuscript synthesis after this interface
+  is frozen; it is not a mathematical or formal gap in C646.
+
+No genuine C646 mystery remains conditional on the final guarded gate.
