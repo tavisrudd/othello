@@ -1,5 +1,7 @@
 # Deep holes beyond redundancy four
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21682069.svg)](https://doi.org/10.5281/zenodo.21682069)
+
 This directory contains the manuscript
 *Deep holes of projective Reed--Solomon codes beyond redundancy four:
 recursive carriers and exact classifications through redundancy ten* and its public
