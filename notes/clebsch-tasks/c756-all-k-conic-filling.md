@@ -40,9 +40,20 @@ The twenty-seventh pass acted on that lever and found the coupled object — the
 cross-ratio \(g_{ij}\) of the two conjugate point-pairs, Theorem 9 — but its pigeonhole
 runs one short in the unhelpful direction, forcing collisions rather than forbidding
 them.  Do not retry it as a closure route; its successor target is a row-distinctness
-lower bound.  See `notes/2026-08-02-c756-coupled-pair-invariant.md`.  **Gate 1's
-Baer-subline stability statement remains the single sufficient target and the highest-EV
-next move.**
+lower bound.  See `notes/2026-08-02-c756-coupled-pair-invariant.md`.
+
+The twenty-eighth pass changed the shape of the branch by going the other way — **dropping**
+condition (A) instead of adding structure.  What is left is the invariant half alone: a
+coherent system is in particular a clique of size \((q+3)/2\) in the graph \(\Gamma_q\) on
+the \(q(q-1)/2\) internal points of the conic, adjacent when the join is an external line.
+Exhaustively, \(\omega(\Gamma_q)=(q+3)/2\) for \(q\equiv3\pmod4\) but \((q+1)/2\) for
+\(q\equiv1\pmod4\) with \(q>5\), for every odd prime power \(q\le49\).  So the invariant
+half **alone** empties the branch for \(q\equiv1\pmod4\) — using neither (A), nor Paley
+eigenfunctions, nor the Baker–Ebert–Hemmeter–Woldar conjecture — and it **provably cannot**
+decide \(q\equiv3\pmod4\), because Theorem 10 exhibits the extremal \((q+3)/2\)-clique
+there.  See `notes/2026-08-02-c756-invariant-half-clique.md`.  Gate 1's stability statement
+is sufficient but, if the branch is true, vacuous for \(q>5\), so it is not a logical
+weakening; gate 0 below replaces it for the \(q\equiv1\pmod4\) half.
 
 The binding constraint on any replacement: exhaustive search is the only thing currently
 covering the small fields, and small \(q\) is exactly where character-sum arguments
@@ -51,6 +62,17 @@ replacement must be an **exact** combinatorial argument with no error term, in t
 of Theorem 2 — whose chain ends in the integer inequality \(q-2\le(q+1)/2\) — and not
 another analytic estimate.  Ranked gates:
 
+0. **Invariant-half clique bound (new, and the highest-EV target for \(q\equiv1\pmod4\)).**
+   Prove \(\omega(\Gamma_q)\le(q+1)/2\) for \(q\equiv1\pmod4\), \(q>5\), where \(\Gamma_q\)
+   is the external-join graph on internal points.  This closes the saturated-internal branch
+   for that whole residue class, unconditionally and for all fields, with no arithmetic
+   normalization and no conjecture.  Theorem 10 already proves it for cliques containing all
+   \((q+1)/2\) internal points of an external line: the pole is the only candidate extension
+   and it works exactly when \(q\equiv3\pmod4\).  What is missing is a bound with no line
+   hypothesis; at \(q=13\) most maximum cliques are not line-anchored, so it is not a
+   corollary.  Do **not** aim this at \(q\equiv3\pmod4\): \(C_\ell\cup\{\ell^{\perp}\}\) is a
+   genuine \((q+3)/2\)-clique, so that class needs (A) or the arc condition.  The cheap
+   successor there is to test (A) directly against \(C_\ell\cup\{\ell^{\perp}\}\).
 1. **Baer-subline containment — containment half CLOSED; stability half is now the
    whole gate.**  The twenty-sixth pass proved Theorem 6 unconditionally for every odd
    prime power: no coherent system lies in a Baer subline missing \(\infty\).  The proof
@@ -116,7 +138,8 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty-seven research passes complete; the theorem is **not** proved. Reports:
+Twenty-eight research passes complete; the theorem is **not** proved. Reports:
+`notes/2026-08-02-c756-invariant-half-clique.md` and
 `notes/2026-08-02-c756-coupled-pair-invariant.md` and
 `notes/2026-08-02-c756-baer-subline-containment.md` and
 `notes/2026-08-02-c756-direction-coordinatization.md` and
@@ -159,9 +182,12 @@ Branch ledger:
   \(q\le151\); systems contained in **any** Baer subline force \(q=5\) for all \(q\)
   (line case Theorem 2, circle case Theorem 6, both exact and prime-power-general); all
   mixed sums are rational below level \((q+1)/2\) for every odd prime power (Theorem 8);
-  and the remaining uniform gate is the crown-restricted case of the
-  Baker–Ebert–Hemmeter–Woldar gap conjecture, or equivalently the Baer-subline stability
-  statement, which now suffices on its own;
+  the invariant half alone (chord externality, condition (A) discarded) already empties the
+  branch for every \(q\equiv1\pmod4\) with \(5<q\le49\), and provably cannot decide
+  \(q\equiv3\pmod4\); and the remaining uniform gates are the invariant clique bound
+  \(\omega(\Gamma_q)\le(q+1)/2\) for \(q\equiv1\pmod4\), and, for \(q\equiv3\pmod4\), the
+  crown-restricted case of the Baker–Ebert–Hemmeter–Woldar gap conjecture or equivalently the
+  Baer-subline stability statement;
 - **nonsaturated — open for \(\delta\ge2\):** \(\delta=0,1\) are closed, while the
   direct Segre, global-moment, raw-subresultant, and dual-pencil low-degree norm repairs
   fail; the three exceptional missing-set kernels are smooth symmetry-specific curves
@@ -683,6 +709,41 @@ What the coupled pair-invariant pass (twenty-seventh) adds:
   With Theorem 2's tight \(q-2\le(q+1)/2\) and Theorem 6's saturated \(\lambda\)-coset,
   that is a third independent counting bound tight exactly at \(q=5\).
 
+What the invariant-half clique pass (twenty-eighth) adds:
+
+- **The relaxation.**  Discarding condition (A) and keeping only chord externality, every
+  coherent system becomes a clique of size \((q+3)/2\) in \(\Gamma_q\), the graph on the
+  \(q(q-1)/2\) internal points of the conic with adjacency "the join misses the conic".  The
+  reduction is exact: (B) forces \(z_j\ne z_i^q\), so the \(n\) elements give \(n\) distinct
+  internal points, and \(\alpha_{ij}\beta_{ij}=\operatorname{Res}(F_i,F_j)=B^2-QQ'\) has
+  character \(-1\).  \(\Gamma_q\) is regular of degree \((q^2-1)/4\);
+- **Theorem 10 (unconditional, all odd prime powers).**  An external line \(\ell\) carries
+  \((q+1)/2\) internal points \(C_\ell\), automatically a clique.  An internal point off
+  \(\ell\) is joined externally to all of \(C_\ell\) **iff** it is the pole \(\ell^{\perp}\)
+  **and** \(q\equiv3\pmod4\).  The proof is exact: on \(v_0^{\perp}\cong\mathbb F_{q^2}\) the
+  adjacency invariants are \(\chi_q(\sigma^2-1)\) over the trace values of a norm sphere, the
+  set inclusion \(S_\lambda\subseteq S_1\) forces \(\chi_q(\lambda)=+1\) and hence equality by
+  the counts \((q\pm1)/2\), and equality then forces
+  \(\chi_q(\lambda-1)=\chi_q(1-\lambda)=+1\), contradicting the rational-trace requirement
+  \(\chi_q(\lambda-1)=-1\).  No Weil bound is used; the analytic route would only give
+  \(q\le16\);
+- **The dichotomy.**  \(\omega(\Gamma_q)=(q+3)/2\) for \(q\equiv3\pmod4\), attained by
+  \(C_\ell\cup\{\ell^{\perp}\}\), and \((q+1)/2\) for \(q\equiv1\pmod4\) with \(q>5\); checked
+  for every odd prime power \(q\le49\), including \(9,25,27,49\).  \(q=5\) is the exception in
+  its class, and its \(4\)-cliques are not line-anchored;
+- **Consequence for routing.**  The invariant half decides \(q\equiv1\pmod4\) and provably
+  cannot decide \(q\equiv3\pmod4\).  This is the operational form of the twenty-seventh pass's
+  localization of non-invariance in (A);
+- **Two free upgrades.**  \(N(\varphi_i(z_j))=\alpha_{ij}/\beta_{ij}=1/(1-g_{ij})\) in the
+  chart carrying \((z_i,z_i^q)\) to \((0,\infty)\), so Theorem 9's level sets are the circles
+  of the elliptic pencil with those limit points and Corollary 9.2 becomes a pencil-incidence
+  statement with \(q+1\)-point fibres; and
+  \(\prod_i\chi_q(c_i)=\chi_q(-\gamma_1)^{(q+3)/2}\) ties Theorem 9's signs to the composition
+  normal form (prime \(q\) only, inheriting that form's status);
+- **negative, and load-bearing:** maximum \(\Gamma_q\)-cliques are not a single orbit — the
+  counts \(21,220,855,759\) at \(q=7,11,19,23\) exceed the external-line counts — so Theorem 10
+  does not give the general bound, and gate 0 is not a corollary of it.
+
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
 hexagon at \(q=11\).
@@ -727,7 +788,10 @@ size \((q+3)/2\) in \(P(q^2)\) is completely joined, outside a perfect matching,
 Frobenius image.  Every Baer-subline configuration — affine line and circle alike — and
 the two published second-largest clique orbits are closed; what remains is the
 crown-restricted case of the Baker–Ebert–Hemmeter–Woldar gap conjecture, or equivalently
-the Baer-subline stability statement, which since the twenty-sixth pass suffices alone.  The composition normal form
+the Baer-subline stability statement, which since the twenty-sixth pass suffices alone.
+Since the twenty-eighth pass that gate is needed only for \(q\equiv3\pmod4\): for
+\(q\equiv1\pmod4\) the invariant clique bound \(\omega(\Gamma_q)\le(q+1)/2\) suffices and is
+already proved for line-anchored cliques.  The composition normal form
 (\(G=(R-\gamma)(R-\gamma^q)\), proved for every coherent system over prime \(q\)) is
 retained as the fallback route.
 The nonsaturated branch has no bounded per-line algebraic-compression gate left.  Its clean active

@@ -1,0 +1,367 @@
+[
+ {
+  "case_ii_solutions": [],
+  "coherent_systems": 10,
+  "coherent_systems_are_gamma_cliques": true,
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   6
+  ],
+  "half": 3,
+  "internal_points": 10,
+  "max_conic_external_internal_arc": 4,
+  "models_agree": true,
+  "n_saturated": 4,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 4,
+  "omega_equals_n": true,
+  "omega_plane_model": 4,
+  "polar_internal_sizes": [
+   3
+  ],
+  "pole_extends": 0,
+  "q": 5,
+  "q_mod_4": 1,
+  "seconds": 0.0
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   12
+  ],
+  "half": 4,
+  "internal_points": 21,
+  "max_conic_external_internal_arc": 3,
+  "models_agree": true,
+  "n_saturated": 5,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 5,
+  "omega_equals_n": true,
+  "omega_plane_model": 5,
+  "polar_internal_sizes": [
+   4
+  ],
+  "pole_extends": 21,
+  "q": 7,
+  "q_mod_4": 3,
+  "seconds": 0.01
+ },
+ {
+  "case_ii_solutions": [
+   3,
+   6
+  ],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   20
+  ],
+  "half": 5,
+  "internal_points": 36,
+  "max_conic_external_internal_arc": 4,
+  "models_agree": true,
+  "n_saturated": 6,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 5,
+  "omega_equals_n": false,
+  "omega_plane_model": 5,
+  "polar_internal_sizes": [
+   5
+  ],
+  "pole_extends": 0,
+  "q": 9,
+  "q_mod_4": 1,
+  "seconds": 0.07
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   30
+  ],
+  "half": 6,
+  "internal_points": 55,
+  "max_conic_external_internal_arc": 5,
+  "models_agree": true,
+  "n_saturated": 7,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 7,
+  "omega_equals_n": true,
+  "omega_plane_model": 7,
+  "polar_internal_sizes": [
+   6
+  ],
+  "pole_extends": 55,
+  "q": 11,
+  "q_mod_4": 3,
+  "seconds": 0.09
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   42
+  ],
+  "half": 7,
+  "internal_points": 78,
+  "max_conic_external_internal_arc": 6,
+  "models_agree": true,
+  "n_saturated": 8,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 7,
+  "omega_equals_n": false,
+  "omega_plane_model": 7,
+  "polar_internal_sizes": [
+   7
+  ],
+  "pole_extends": 0,
+  "q": 13,
+  "q_mod_4": 1,
+  "seconds": 0.25
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   72
+  ],
+  "half": 9,
+  "internal_points": 136,
+  "max_conic_external_internal_arc": 6,
+  "models_agree": true,
+  "n_saturated": 10,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 9,
+  "omega_equals_n": false,
+  "omega_plane_model": 9,
+  "polar_internal_sizes": [
+   9
+  ],
+  "pole_extends": 0,
+  "q": 17,
+  "q_mod_4": 1,
+  "seconds": 1.29
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   90
+  ],
+  "half": 10,
+  "internal_points": 171,
+  "max_conic_external_internal_arc": 6,
+  "models_agree": true,
+  "n_saturated": 11,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 11,
+  "omega_equals_n": true,
+  "omega_plane_model": 11,
+  "polar_internal_sizes": [
+   10
+  ],
+  "pole_extends": 171,
+  "q": 19,
+  "q_mod_4": 3,
+  "seconds": 2.74
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   132
+  ],
+  "half": 12,
+  "internal_points": 253,
+  "max_conic_external_internal_arc": 6,
+  "models_agree": true,
+  "n_saturated": 13,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 13,
+  "omega_equals_n": true,
+  "omega_plane_model": 13,
+  "polar_internal_sizes": [
+   12
+  ],
+  "pole_extends": 253,
+  "q": 23,
+  "q_mod_4": 3,
+  "seconds": 9.74
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   156
+  ],
+  "half": 13,
+  "internal_points": 300,
+  "models_agree": true,
+  "n_saturated": 14,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 13,
+  "omega_equals_n": false,
+  "omega_plane_model": 13,
+  "polar_internal_sizes": [
+   13
+  ],
+  "pole_extends": 0,
+  "q": 25,
+  "q_mod_4": 1,
+  "seconds": 0.63
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   182
+  ],
+  "half": 14,
+  "internal_points": 351,
+  "models_agree": true,
+  "n_saturated": 15,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 15,
+  "omega_equals_n": true,
+  "omega_plane_model": 15,
+  "polar_internal_sizes": [
+   14
+  ],
+  "pole_extends": 351,
+  "q": 27,
+  "q_mod_4": 3,
+  "seconds": 0.94
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   210
+  ],
+  "half": 15,
+  "internal_points": 406,
+  "models_agree": true,
+  "n_saturated": 16,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 15,
+  "omega_equals_n": false,
+  "omega_plane_model": 15,
+  "polar_internal_sizes": [
+   15
+  ],
+  "pole_extends": 0,
+  "q": 29,
+  "q_mod_4": 1,
+  "seconds": 0.57
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   240
+  ],
+  "half": 16,
+  "internal_points": 465,
+  "models_agree": true,
+  "n_saturated": 17,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 17,
+  "omega_equals_n": true,
+  "omega_plane_model": 17,
+  "polar_internal_sizes": [
+   16
+  ],
+  "pole_extends": 465,
+  "q": 31,
+  "q_mod_4": 3,
+  "seconds": 0.83
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   342
+  ],
+  "half": 19,
+  "internal_points": 666,
+  "models_agree": true,
+  "n_saturated": 20,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 19,
+  "omega_equals_n": false,
+  "omega_plane_model": 19,
+  "polar_internal_sizes": [
+   19
+  ],
+  "pole_extends": 0,
+  "q": 37,
+  "q_mod_4": 1,
+  "seconds": 2.27
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   420
+  ],
+  "half": 21,
+  "internal_points": 820,
+  "models_agree": true,
+  "n_saturated": 22,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 21,
+  "omega_equals_n": false,
+  "omega_plane_model": 21,
+  "polar_internal_sizes": [
+   21
+  ],
+  "pole_extends": 0,
+  "q": 41,
+  "q_mod_4": 1,
+  "seconds": 4.05
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   462
+  ],
+  "half": 22,
+  "internal_points": 903,
+  "models_agree": true,
+  "n_saturated": 23,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 23,
+  "omega_equals_n": true,
+  "omega_plane_model": 23,
+  "polar_internal_sizes": [
+   22
+  ],
+  "pole_extends": 903,
+  "q": 43,
+  "q_mod_4": 3,
+  "seconds": 4.49
+ },
+ {
+  "case_ii_solutions": [],
+  "conjugate_model_degrees_match": true,
+  "degree": [
+   600
+  ],
+  "half": 25,
+  "internal_points": 1176,
+  "models_agree": true,
+  "n_saturated": 26,
+  "non_pole_extensions": 0,
+  "omega_conjugate_model": 25,
+  "omega_equals_n": false,
+  "omega_plane_model": 25,
+  "polar_internal_sizes": [
+   25
+  ],
+  "pole_extends": 0,
+  "q": 49,
+  "q_mod_4": 1,
+  "seconds": 18.88
+ }
+]
