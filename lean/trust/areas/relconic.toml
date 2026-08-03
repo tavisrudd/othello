@@ -39,7 +39,7 @@ terminals = []
 coverage_rule = "closure"
 
 [[gate]]
-module = "RelativeConicArcs.Gates.C637Witnesses"
+module = "RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions"
 terminals = []
 coverage_rule = "closure"
 
@@ -50,11 +50,6 @@ coverage_rule = "closure"
 
 [[gate]]
 module = "RelativeConicArcs.Gates.ChowRestrictionDescent"
-terminals = []
-coverage_rule = "closure"
-
-[[gate]]
-module = "RelativeConicArcs.Gates.MatchingPackingDefect"
 terminals = []
 coverage_rule = "closure"
 
