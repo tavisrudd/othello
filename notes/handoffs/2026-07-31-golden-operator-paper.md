@@ -521,14 +521,18 @@ mutation is authorized before its recorded gates.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 
-C840 and C841 are the allocated Golden successors.  C840 owns the
-claim-by-claim Lean reconciliation, current-main candidate refresh, honest
-partial-coverage boundary, manifests, gate, and deferred quiet-window
-validation.  C841 begins only after that exact gate passes and owns the
+C845, C840, and C841 are the allocated Golden successors.  C845 first owns
+the exporter-only full-forward preparation: authoritative paper and Lean trust
+roots, canonical `~/src/lean/finitegeom` destination contract, tracked-PDF
+disposition, and disposable export gates.  The suffixed finitegeom candidate
+clone is superseded read-only evidence and must not be edited.  C840 then owns
+the claim-by-claim Lean reconciliation, canonical exported-candidate
+validation, honest partial-coverage boundary, manifests, gate, and deferred
+quiet-window validation.  C841 begins only after that exact gate passes and owns the
 Clebsch-style paper declaration, immutable public pin, metadata/verifier
 surface, and official forward synchronization of the standalone repository.
-Neither task may advertise full formalization, copy files manually, or mutate
-the mirror before its predecessor gate.
+None may advertise full formalization, copy files manually, hand-edit either
+destination, or mutate the paper mirror before its predecessor gate.
 
 C827 is complete.  The post-integration Milnor--Serre pass separates the
 orientation and real-conference scales, replaces the opening result ledger by

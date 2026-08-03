@@ -48,7 +48,7 @@ pinned to the released PDF.
 
 - make check: PASS, canonical PDF 53 pages, warning-free.
 - make tit-check: PASS, 39/50 pages, warning-free.
-- supplement quick verifier: PASS, 74 manuscript labels and 69 artifacts.
+- supplement quick verifier: PASS, 75 manuscript labels and 69 artifacts.
 - complete Python replay: PASS.
 - public q=49 Rust regeneration and byte comparison: PASS.
 - Version 1 release/tag/DOI sources were not modified.
