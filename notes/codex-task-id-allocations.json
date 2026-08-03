@@ -2591,8 +2591,17 @@
       "last": 853,
       "purpose": "remediate Golden quantum-statistics Lean from scalar identities to standards-compliant theorem-level coverage",
       "sequence": 288
+    },
+    {
+      "count": 1,
+      "first": 854,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 854,
+      "purpose": "Audit and close PRS Lean referee-facing standards gaps",
+      "sequence": 289
     }
   ],
-  "next_id": 854,
+  "next_id": 855,
   "schema": "codex-task-id-allocations-v1"
 }
