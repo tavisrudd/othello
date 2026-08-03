@@ -12,13 +12,19 @@ independent bit-row rank calculation, and the recovery/expansion masks transport
 semantic incidence map now use kernel reduction.  The four-anchor signature injectivity leaf is
 also kernel checked.  Focused guarded elaboration and the semantic rank-transport target are green.
 
+The reusable weight-ten reachability kernel is also in place.  It checks generated transition
+layers, proves coverage for every member of the complete Cartesian choice domain, supports compact
+selected-row projections through a proved XOR homomorphism, and derives target exclusion from a
+checked terminal list.  This infrastructure is kernel checked, but no native weight-ten leaf has
+yet been removed.
+
 Direct kernel reduction is not an admissible replacement for the larger finite leaves: even one
 semantic unary-degree point and one raw isolated weight-ten shard exceed the measured memory gate.
-The next implementation packet is therefore a proved reachability checker over compact generated
-syndrome sets.  Its generic transition-coverage theorem must connect the compact certificate to the
-complete Cartesian profile domain before any weight-ten native leaf is removed.  Unary constancy
-will use the manuscript's orbit-transitivity and double-count mechanism rather than semantic
-support filtering.
+The next implementation packet is the seven isolated-profile generated layer certificates on this
+checker, followed by a compact projected-state cover for the cycle profile.  No native leaf may be
+removed until its generated certificate is connected to the complete Cartesian domain.  Unary
+constancy will use the manuscript's orbit-transitivity and double-count mechanism rather than
+semantic support filtering.
 
 ## Objective
 
