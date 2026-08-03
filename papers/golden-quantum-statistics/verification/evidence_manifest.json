@@ -1,12 +1,12 @@
 {
   "files": {
     "Makefile": {
-      "bytes": 1436,
-      "sha256": "841f8a27d30371c1ecc069166755a62a107bdd129cc228343bf08b6fb33e5f11"
+      "bytes": 1490,
+      "sha256": "90fc0c1c1da701aeab57ca2338f770176fbc101971331a2284b509542da1f94c"
     },
     "golden_quantum_statistics.tex": {
-      "bytes": 54011,
-      "sha256": "734e9a540b9d226a49cad0191ad1e15e4af3047bece878d236bfb243407e7507"
+      "bytes": 54082,
+      "sha256": "6d66d473b873e1a94f448368d3a2bcf33c4039b88e18e2029cbd139785d24810"
     },
     "pyproject.toml": {
       "bytes": 168,

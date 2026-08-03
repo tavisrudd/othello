@@ -499,6 +499,12 @@ fragment at the foot of page 13; the full gate and direct inspection of pages
 the symmetric-function notation and removes only the now-redundant local
 definition of p_j from Theorem 5.1; its mathematical content is unchanged,
 and pages 4 and 8 pass direct inspection without increasing the page count.
+A fresh proof-continuity pass prints the monotonicity in \(u=a+b\) that
+licenses the mixed-sector lemma's final saturation step; this closes the last
+reader-reconstruction gap without changing a statement, bound, or equality
+case.  The same gate pass found that unfrozen dependency replays advanced the
+lockfile's date cutoff and thereby stale-dated their own evidence manifest;
+the six paper-owned replay commands now run frozen.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 
