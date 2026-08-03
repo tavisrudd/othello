@@ -11,7 +11,7 @@ boundaries remain separate.
 | R7 | Complete split-free classification | all prime powers q >= 7; deep holes for q >= 11 | no radius promotion at q=7,8,9 | printed depth-two proof plus compact R7 record and direct-locus replay |
 | Polar escape | Finite-depth coherent marked contraction | arbitrary finite depth under explicit stagewise data | supplies neither carrier geometry nor radius | printed construction; contraction/lifting algebra kernel checked |
 | Recursive carrier | Exact reduced contained carrier | every r >= 6, fibrewise over each characteristic | persistent scheme plus one maximal adjacent-zero Lucas carrier; no uniform nilpotent integral model | printed reduced-prime, Pascal, density, and generic-point proofs; stable-component replay; kernel-checked density/selection |
-| Uniform consequence | Split-free containment and high-characteristic classification | q >= 6r-15+floor(2 sqrt(6r-17)) | containment in persistent/Lucas generally; exact deep holes when char(F_q) > r-1 | recursive carrier plus uniform packages and Seroussi--Roth--Dür radius route |
+| Uniform consequence | Conditional split-free containment and high-characteristic classification | q >= 6r-15+floor(2 sqrt(6r-17)) | requires explicit stagewise lower packages; exact deep holes when these hold and char(F_q) > r-1 | recursive carrier plus stated package hypothesis and Seroussi--Roth--Dür radius route |
 | R8 | Persistent-only deep holes | q >= 43 | no bounded-field classification | printed three-marker proof plus Certificate R8 |
 | R9 | Persistent-only deep holes | q >= 53 | characteristic-seven carrier handled by slice theorem and finite bridge | printed residual-quadratic proof, appendix, and Certificate R9 |
 | Higher Lucas | Empty first fresh carrier | every F_(2^m), m >= 4 | projective-subline endpoint attributed to Wang--Wu--Hu; full carrier uses the final-pair criterion | printed all-field proof plus q=16,32,64 certificates and independent replay |
@@ -38,7 +38,7 @@ supplement/LEAN-STATEMENTS.md.
 - The reduced theorem is fibrewise. It does not assert a flat reduced
   arithmetic model or classify nilpotent/embedded structure of a chosen model.
 - Wang--Wu--Hu Proposition 11 owns the projective-subline endpoint criterion.
-- The C660 direct-locus route shares the published direct-locus engine, the R5
+- The second R7 direct-locus route shares the published direct-locus engine, the R5
   finite-field layer, and the proved R6 pointed classification from q >= 16;
   its checker is not a second finite-field implementation.
 - Version 1, its public commit, DOI, tag, and archive remain immutable.

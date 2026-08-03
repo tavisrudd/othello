@@ -71,6 +71,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `prop:maximal-lucas-union` | no direct declaration | Manuscript Lucas/Pascal proof. The degree-one pullback enters the formal recursive interface as an explicit geometric input. |
 | `prop:recursive-component-selection` | 'PRSSquarefreeMarkerDensity.eq_zero_of_splitCoefficientPullback_eval_eq_zero_on_injective'; 'PRSStableComponents.RecursiveContainedGeometryInput.bad_implies_persistent_or_modular' | Polynomial density, closure transport, finite-component selection, and recursive logical composition are kernel checked. The marker-to-rowspace identification and concrete component classification are manuscript inputs. |
 | `thm:recursive-carrier` | 'PRSStableComponents.RecursiveContainedGeometryInput.bad_implies_persistent_or_modular'; 'PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold'; radius bridge terminals | Conditional synthesis and threshold arithmetic are checked. The reduced carrier theorem, persistent-family geometry, and cited coding implications remain manuscript or imported inputs. |
+| `prop:upper-radius` | radius bridge terminals | The manuscript applies the cited Seroussi--Roth and Dür theorems; Lean keeps those coding inputs explicit. |
 | `prop:r8-bottom` | no direct declaration | Manuscript point-count and ramification-degree proof; Certificate R8 checks the numerical data. |
 | `lem:r8-bottom-strata` | no direct declaration | Manuscript exhaustive bottom-stratum proof. |
 | `lem:r8-monodromy` | no direct declaration | Manuscript geometric-\(S_3\) integrality and deletion proof. |
@@ -98,7 +99,10 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `thm:e7` | companion endpoint terminal, outside the aggregate | Manuscript constructive proof and exact counting formula. |
 | `prop:m9-invariant-block` | no direct declaration | Manuscript proof route through the rank-one constructions, rank-two Artin--Schreier argument, and exact \(q=16,32,64\) certificates. |
 | `prop:final-pair` | no direct declaration | Manuscript expansion and Cramer's-rule proof. |
-| `thm:m9-shallow` | external C620 quotient certificates plus manuscript all-field proof | The finite certificates check \(q=16,32\); the genus-one argument proves \(q\ge64\). Lean makes no carrier-exhaustion claim. |
+| `thm:m9-shallow` | public Lucas M9 quotient certificates plus manuscript all-field proof | The finite certificates check \(q=16,32\); the genus-one argument proves \(q\ge64\). Lean makes no carrier-exhaustion claim. |
+| `prop:r10-pointed-budgets` | no direct declaration | Manuscript degree calculation for all five retained-marker stages; the abstract finite-depth synthesis remains conditional in Lean. |
+| `prop:r10-escape` | 'PRSStableComponents' conditional interface | The fixed-depth package discharge and concrete R10 budgets are manuscript mathematics with Certificate R10 arithmetic replay. |
+| `prop:r10-char7-lift` | 'PRSPolarInduction.mem_modularContractionKernel_iff' | Contraction algebra is kernel checked; the R9 finite-root witness and marker-avoidance argument are printed mathematics. |
 | `cor:r10` | 'PRSStableComponents' and 'PRSUniformCoveringRadius' conditional interfaces | Derived manuscript corollary. The first-carrier arithmetic is supplied by 'thm:m9-shallow', not by Lean. |
 
 ## Exact project-owned closure
@@ -148,24 +152,13 @@ The release-level evidence manifest records the same bytes and hash.
 From the repository root, the supported aggregate gate is:
 
 ```text
-lean/scripts/lean-build-queue.py run \
+(cd lean && nix develop --command lake build \
   RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
-  --profile single --threads 1 --cores 20-23 \
-  --aggregate RelativeConicArcs.Gates.PRSBeyondRedundancyFour
+  RelativeConicArcs.Gates.PRSBeyondRedundancyFour)
 ```
 
-The queue records per-target source/toolchain traces, build telemetry,
-exact-target currentness, and the final trace-only aggregate gate. The
-paper-local verifier independently checks that this table has exactly the
-current TeX label set and that the aggregate and audit source have exactly the
-declared R5--R7 target sets.
-
-The balanced quantum bridge is checked separately by:
-
-```text
-lean/scripts/lean-build-queue.py run \
-  RelativeConicArcs.PRSBalancedQuantumExtension \
-  RelativeConicArcs.Gates.PRSBalancedQuantumExtension \
-  RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit \
-  --profile single --threads 1 --cores 20-23
-```
+The paper-local verifier independently checks that the statement table has
+exactly the current TeX label set and that the aggregate and audit source
+have exactly the declared target sets.  The balanced quantum bridge has its
+own formal gate in the development repository; it is not part of this
+17-source-file paper export and no replay command for it is advertised here.

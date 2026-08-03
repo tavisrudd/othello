@@ -87,6 +87,6 @@
     "tangent_cardinality": "q*(q+1)",
     "tangent_law": "z -> z + 9*u"
   },
-  "schema": "c532-redundancy-ten-synthesis-v1",
+  "schema": "r10-redundancy-ten-synthesis-v1",
   "syndrome_degree": 9
 }

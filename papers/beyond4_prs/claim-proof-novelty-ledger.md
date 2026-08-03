@@ -21,8 +21,8 @@ is used to infer a covering radius or an unrestricted geometric statement.
 | R5 | complete redundancy-five deep holes for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | cubic-pencil geometry, R5 certificate, cited radius theorem |
 | PF | finite-depth coherent polar escape | MANUSCRIPT / KERNEL-ALGEBRA | concrete stagewise carrier and curve data remain inputs |
 | RC | reduced recursively contained carrier equals persistent plus maximal Lucas | MANUSCRIPT / CERTIFIED-ELIMINATION / KERNEL-CONDITIONAL | concrete terminal primes and consecutive-row exclusions are manuscript/certificate inputs; density and finite-component selection are kernel checked |
-| UC | split-free containment above Q_r | MANUSCRIPT / KERNEL-CONDITIONAL | Q_r = 6r-15+floor(2 sqrt(6r-17)); no radius is inferred |
-| HC | high-characteristic exact classification above Q_r | DERIVED / IMPORTED-1 | char(F_q) > r-1 makes the Lucas carrier empty; Seroussi--Roth and Dür supply the radius promotion |
+| UC | split-free containment above Q_r, conditional on stagewise lower packages | MANUSCRIPT / KERNEL-CONDITIONAL | Q_r = 6r-15+floor(2 sqrt(6r-17)); lower packages are hypotheses and no radius is inferred |
+| HC | conditional high-characteristic exact classification above Q_r | DERIVED / IMPORTED-1 | with the stagewise packages, char(F_q) > r-1 makes the Lucas carrier empty; Seroussi--Roth and Dür supply radius promotion |
 | R6 | complete redundancy-six deep holes for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | R6/R6-NF certificates and exact radius endpoint |
 | R7-SF | complete redundancy-seven split-free classification for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | uniform T/T^6 spine from q >= 13; central odd-binary singleton separate; exception delta only at 7,8,9,11 |
 | R7-DH | redundancy-seven deep holes for q >= 11 | DERIVED / IMPORTED-1 | no promotion at q=7,8,9 |

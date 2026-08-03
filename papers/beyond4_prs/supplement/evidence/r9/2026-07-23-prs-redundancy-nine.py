@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the compact C516 residual-quadratic certificate."""
+"""Generate the compact R9 residual-quadratic certificate."""
 
 from __future__ import annotations
 
@@ -499,7 +499,7 @@ def build_certificate():
     # branch divisor.
     modular_curve_deletion = 8 + 4 + 4 + 4 * 2 + 8
     return {
-        "schema": "c516-prs-redundancy-nine-v1",
+        "schema": "r9-prs-redundancy-nine-v1",
         "field_characteristic": 7,
         "residual_formula": {
             "hankel_contractions": [

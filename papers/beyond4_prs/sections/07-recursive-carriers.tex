@@ -56,6 +56,15 @@ reduction gives the plane in characteristic two and (27) in characteristic
 three.  The ordered-Hessian calculation sends its complementary ruling to
 rank one, so the list is exhaustive.
 
+Here exhaustiveness is an exact elimination statement, not a visual
+factorization heuristic.  Certificate SC starts from the terminal
+ordered-root incidence ideal, saturates the collision factors, eliminates
+the root variables, and verifies the two generic primes and their
+characteristic-\(2,3\) fibres by Gröbner reduction.  Its public Python and
+Singular inputs are in
+\texttt{supplement/evidence/stable-components/}; every generator and
+remainder used for this conclusion is hash-pinned there.
+
 Each displayed residual ideal is prime: (26) is a projective parametrization
 with prime kernel, the characteristic-two ideal is linear, and (27) is the
 toric prime of the monomial quartic after projection from \(e_2\).  None is
@@ -153,16 +162,23 @@ ruling through \(e_2\), and the consecutive rows again force rank one.  In
 characteristic two, containment in \(V(c_0,c_4)\) gives first the binary
 line, then the central point, and then the empty projective space; these are
 already Lucas lifts.  The complementary ordered-Hessian ruling is rank one.
+The coherent-Fano part of Certificate SC verifies these consecutive-row
+substitutions, including the characteristic-three ruling and the
+characteristic-two successive supports, against the same incidence ideal.
 This exhausts every component and proves \eqref{eq:recursive-carrier} by
 induction on the flag length.
 \end{proof}
 
-\begin{theorem}[Recursive carrier and high-characteristic classification]
+\begin{theorem}[Finite-depth recursive-carrier consequence]
 \label{thm:recursive-carrier}
 Let \(r\geq6\), and let \(q\) be a prime power with
 \begin{equation}\label{eq:uniform-threshold}
  q\geq Q_r:=6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor.
 \end{equation}
+Assume that at every intermediate redundancy the transverse strata admit
+the one-step lower packages of Definition~\ref{def:lower-package}, with
+terminal deletion at most \(6r-17\), exact-linear-gcd deletion at most
+\(2r-2\), and every other parameter budget below \(3r-5\).
 Every split-free redundancy-\(r\) syndrome lies in
 \(\cP_r\cup\cM^{\max}_{r,p}\).  If \(p>r-1\), the modular term is empty,
 and the projective deep-hole syndromes are exactly the persistent tangent
@@ -175,10 +191,11 @@ Frobenius, with tangent cocycle \(z\mapsto z+(r-1)u\).
 \end{theorem}
 
 \begin{proof}
-Proposition~\ref{prop:recursive-component-selection} supplies the sole
+Proposition~\ref{prop:recursive-component-selection} supplies the
 all-level contained-component hypothesis in the finite-depth escape theorem.
-The uniform lower packages have terminal deletion \(6r-17\), exact-linear-gcd
-deletion \(2r-2\), and intermediate parameter budgets below \(3r-5\).
+The lower packages and their bounds are hypotheses here; they must be
+discharged at each fixed redundancy and are not inferred from component
+selection.
 Solving the genus-one inequality gives \eqref{eq:uniform-threshold}; the
 modular pullback costs only one parameter by
 Proposition~\ref{prop:maximal-lucas-union}.  Thus every point outside
@@ -192,7 +209,37 @@ Seroussi--Roth--Dür radius range, so split-free and deep coincide.  The count
 and orbit law are the persistent calculation already used at R6 and R7.
 \end{proof}
 
-The theorem is fibrewise and reduced.  It makes no assertion about nilpotent
+The carrier theorem is fibrewise and reduced, and its finite-depth
+consequence is explicitly conditional on the displayed lower packages.  It
+makes no assertion about nilpotent
 structure in a chosen integral incidence model, and in small characteristic
 it classifies the only possible carrier of additional split-free points, not
 the arithmetic of every point on that carrier.
+
+\begin{proposition}[Upper-level radius gate]\label{prop:upper-radius}
+For the ranges used below,
+\[
+\begin{aligned}
+ \rho(\PRS(q-7))&=7 &&(q\geq43),\\
+ \rho(\PRS(q-8))&=8 &&(q\geq53),\\
+ \rho(\PRS(q-9))&=9 &&(q\geq59).
+\end{aligned}
+\]
+More generally, the radius is \(r-1\) in the range of
+Theorem~\ref{thm:recursive-carrier}.
+\end{proposition}
+
+\begin{proof}
+The dual GRS code has dimension \(r\).  In each displayed range, and also
+under \eqref{eq:uniform-threshold}, one has
+\[
+                         r\leq\left\lfloor q/2\right\rfloor+2.
+\]
+Seroussi--Roth \cite[Thm.~1]{SeroussiRoth1986} therefore gives
+nonextendability of the corresponding normal rational curve; its stated
+even-field dimension-three exception is irrelevant because \(r\geq8\).
+Dür's completeness--covering-radius equivalence \cite{Dur1994}, in the
+form recorded by Kaipa \cite[Sec.~IV and Prop.~4(1)]{Kaipa2017}, gives
+the asserted radius.  Thus the promotion from split-free syndromes to deep
+holes in R8--R10 uses one explicit imported gate.
+\end{proof}

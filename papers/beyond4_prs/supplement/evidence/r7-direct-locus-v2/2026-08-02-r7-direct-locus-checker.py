@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the frozen C660 certificate and, optionally, Certificate R7.
+"""Check the frozen R7 direct locus certificate and, optionally, Certificate R7.
 
 The intrinsic checks do not import the generator or any finite-field code.
 The comparison mode is intentionally separate so the independent certificate
@@ -15,9 +15,9 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-DEFAULT_CERTIFICATE = HERE / "2026-08-02-c660-r7-independent-certificate.json"
+DEFAULT_CERTIFICATE = HERE / "2026-08-02-r7-direct-locus-certificate.json"
 DEFAULT_PUBLIC_RECORD = HERE.parent.parent / "CLASSIFICATION-RECORDS.json"
-DEFAULT_COMPARISON = HERE / "2026-08-02-c660-r7-public-comparison.json"
+DEFAULT_COMPARISON = HERE / "2026-08-02-r7-direct-locus-public-comparison.json"
 EXPECTED_FIELDS = (7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32)
 FIELD_SHAPES = {
     7: (7, 1), 8: (2, 3), 9: (3, 2), 11: (11, 1), 13: (13, 1),
@@ -51,7 +51,7 @@ def decode_base_q(code: int, q: int, length: int):
 
 
 def check_intrinsic(document, certificate: Path):
-    assert document["schema"] == "c660-r7-independent-completeness-v2"
+    assert document["schema"] == "r7_direct-r7-independent-completeness-v2"
     assert document["comparison_status"] == "not-compared"
     assert tuple(document["field_domain"]) == EXPECTED_FIELDS
     assert tuple(row["q"] for row in document["fields"]) == EXPECTED_FIELDS
@@ -122,7 +122,7 @@ def check_intrinsic(document, certificate: Path):
             f"orbits={row['pgl_orbit_count']}: INTRINSIC PASS"
         )
     print(
-        f"PASS intrinsic C660 certificate {certificate} "
+        f"PASS intrinsic R7 direct locus certificate {certificate} "
         f"sha256={sha256_path(certificate)} bytes={certificate.stat().st_size}"
     )
 
@@ -205,7 +205,7 @@ def compare_public(document, certificate: Path, public_path: Path):
         })
         print(f"q={q}: Certificate R7 exact comparison PASS")
     return {
-        "schema": "c660-r7-public-comparison-v1",
+        "schema": "r7_direct-r7-public-comparison-v1",
         "independent_certificate": certificate.name,
         "independent_certificate_sha256": sha256_path(certificate),
         "public_record": str(public_path.relative_to(HERE.parent)),

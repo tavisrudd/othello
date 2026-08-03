@@ -5,7 +5,7 @@
 **Date:** 2026-08-02
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
-C603, C620, C646, C656, C660, C819, and C820 complete. A second pair of independent cold reads exposed and
+C603, C620, C646, C656, C660, C819, C820, and C821 complete. A second pair of independent cold reads exposed and
 closed three Version 1 defects: the R7 common-factor proposition now states
 the exact-gcd hypothesis its proof needs, the R6 lower-carrier exhaustion is
 proved by an explicit monodromy/characteristic trichotomy, and R7 finite
@@ -46,9 +46,11 @@ in every geometric fibre.  Consequently the recursively contained carrier is
 exactly the persistent scheme plus that single maximal Lucas carrier, restoring
 the all-level split-free containment and its former numerical threshold without
 claiming higher-Lucas split-freeness, nilpotent integral structure, or a
-covering-radius promotion.  C620 freezes higher-Lucas arithmetic, C646 freezes
-the companion kernel-checked density/closure boundary, and C821 owns final
-Version 2 synthesis.  A bounded theorem-level delta keeps
+covering-radius promotion.  C620 freezes higher-Lucas arithmetic and C646
+freezes the companion kernel-checked density/closure boundary.  C821 has
+completed Version 2 synthesis: the all-\(r\) reduced carrier is unconditional,
+its numerical consequence has the necessary stagewise-package hypothesis,
+and R8--R10 discharge their fixed packages.  A bounded theorem-level delta keeps
 Wang--Wu--Hu's projective-subline endpoint criterion as prior art and locates
 no predecessor for the exact conjunction within the recorded search boundary.
 An independent finite-geometer/coding cold read found no release-blocking
@@ -76,6 +78,16 @@ datum.  Byte-identical replay, the SHA-256 manifest, and a fresh independent
 coding/computational review are green.  The exact proof, field ledger, trust
 boundary, and mystery closeout are in
 `notes/2026-08-02-c660-r7-independent-completeness.md`.
+
+C821 is complete.  Version 2 now has the recursive carrier as its geometric
+spine, exact R8--R10 fixed-level classifications, the complete binary
+higher-Lucas theorem, a printed characteristic-seven R10 coherent lift, and
+one centralized R8--R10 radius gate.  Independent cold reads exposed and
+then closed mathematical-scope and standalone-release defects.  The repaired
+candidate passes both manuscript builds, the 69-artifact quick and complete
+replay gates, and public q=49 Rust regeneration.  Version 1 remains
+immutable.  The synthesis and repair ledger is
+`notes/reed-solomon-tasks/c821-beyond4-v2-synthesis.md`.
 
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
@@ -1003,10 +1015,9 @@ from queue-row placement:
    route removes the primary quotient enumerator, proves exact candidate-domain
    coverage, matches all fourteen Certificate R7 rows only after freezing, and
    retains the (q=7,8,9) covering-radius boundary.
-4. **C821 — Version 2 synthesis.**  C820, C620, C646, and C660 are closed.
-   Integrate only
-   proved carrier levels; import Wang--Wu--Hu's endpoint criterion; then run
-   the full novelty, trust, reproducibility, and specialist-review gates.
+4. **C821 — Version 2 synthesis (complete).**  The exact recursive carrier,
+   fixed R8--R10 packages, higher-Lucas arithmetic, Wang--Wu--Hu endpoint,
+   and novelty/trust/reproducibility surfaces are integrated.
 
 C607 is parallel context on the broader decoding-complexity question, not an
 alternative dispatch.  C608 is a later explicit-decoder consequence
@@ -1025,9 +1036,8 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C821 | all entry gates closed | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
-| 2 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
-| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
+| 2 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1087,8 +1097,7 @@ history.
 
 ## Next command
 
-`go C821`
+`go C608`
 
-(C620 freezes the higher-Lucas arithmetic, C646 freezes the formal
-density/closure boundary, and C660 closes the independent R7 trust upgrade.
-C821 is ready.)
+(Version 2 synthesis is complete.  C608 is the next unblocked queued
+Reed--Solomon lane task; C607 continues in parallel.)

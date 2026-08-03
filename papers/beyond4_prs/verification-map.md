@@ -55,5 +55,5 @@ Classical.choice, and Quot.sound.
 
 The public Version 1 commit, archive, tag, DOI, PDF hash, and source hash are
 immutable fields in supplement/RELEASE-MANIFEST.md. Local Version 2 candidate
-hashes and the expanded 80-artifact evidence map are separate mutable
+hashes and the expanded 69-artifact evidence map are separate mutable
 candidate fields until a new reviewed release is authorized.

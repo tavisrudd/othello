@@ -1,4 +1,4 @@
-schema=c516-q49-carrier-v1
+schema=r9-q49-carrier-v1
 field=F49_tau2_eq_3
 projective_quartics=5884901
 quintics_tested=194584

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent replay for the C516 residual-quadratic certificate."""
+"""Independent replay for the R9 residual-quadratic certificate."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DATA = json.loads(
-    (HERE / "2026-07-23-c516-prs-redundancy-nine.json").read_text()
+    (HERE / "2026-07-23-prs-redundancy-nine.json").read_text()
 )
 PAPER_DATA = (
     HERE.parent
@@ -373,7 +373,7 @@ def main():
     replay_thresholds_and_counts()
     replay_orbits()
     print(
-        "C516 replay passed: F49 discriminant interpolation, Bezout identity, "
+        "R9 replay passed: F49 discriminant interpolation, Bezout identity, "
         "residual equations, thresholds, q=7 count, and orbit fusion"
     )
 

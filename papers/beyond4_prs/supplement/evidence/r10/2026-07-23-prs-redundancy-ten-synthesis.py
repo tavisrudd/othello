@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the compact arithmetic certificate for C532."""
+"""Generate the compact arithmetic certificate for R10."""
 
 from __future__ import annotations
 
@@ -93,7 +93,7 @@ def build() -> dict[str, object]:
     assert len(inversion_orbits(9, 5)) == 3
 
     return {
-        "schema": "c532-redundancy-ten-synthesis-v1",
+        "schema": "r10-redundancy-ten-synthesis-v1",
         "syndrome_degree": 9,
         "kernel_member_degree": 8,
         "generic_spine": {

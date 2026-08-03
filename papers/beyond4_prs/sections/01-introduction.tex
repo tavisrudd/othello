@@ -6,7 +6,9 @@ through redundancy ten.  The common mechanism is a coherent polar flag, a
 marked contraction that propagates splitting information without forgetting
 the factor needed for a squarefree lift.  The contained part of the
 recursion is exactly the persistent catalecticant scheme together with one
-maximal Lucas carrier; the transverse part escapes by a uniform point count.
+maximal Lucas carrier.  At a fixed depth, the transverse part escapes by a
+uniform point count once the explicit one-step lower packages at every
+intermediate stage have been established.
 
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
@@ -50,7 +52,11 @@ Every split-free redundancy-\(r\) syndrome belongs to
  \binom{r-2}{j}=\binom{r-2}{j-1}=0
  \pmod{\operatorname{char}\F_q}\right\rangle .             \tag{1}
 \]
-If \(\operatorname{char}\F_q>r-1\), the second term is empty and the
+provided the explicit one-step lower packages of
+Definition~\ref{def:lower-package}, with the stated deletion bounds, exist at
+every intermediate redundancy.
+Under the same package hypothesis, if
+\(\operatorname{char}\F_q>r-1\), the second term is empty and the
 deep-hole syndromes are exactly the persistent tangent and conjugate-secant
 families, of total cardinality \(q(q+1)^2/2\).
 
@@ -61,7 +67,10 @@ for every \(q\geq7\), at redundancy seven in the split-free sense for every
 deep holes whenever the radius is six, in particular for \(q\geq11\).
 \end{theorem}
 
-Theorem~\ref{thm:recursive-carrier} proves the recursive statement.
+Propositions~\ref{prop:reduced-terminal-carrier}--%
+\ref{prop:recursive-component-selection} prove the exact recursive carrier
+statement, and Theorem~\ref{thm:recursive-carrier} gives its conditional
+finite-depth consequence.
 Theorems~\ref{thm:r5}, \ref{thm:r6}, \ref{thm:r7}, \ref{thm:r8},
 \ref{thm:r9}, and Corollary~\ref{cor:r10} give the fixed levels.  The
 redundancy-ten conclusion uses Theorem~\ref{thm:m9-shallow}: the first fresh

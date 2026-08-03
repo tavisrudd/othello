@@ -14,6 +14,7 @@ from pathlib import Path
 SUPPLEMENT = Path(__file__).resolve().parent
 PAPER = SUPPLEMENT.parent
 REPOSITORY = PAPER.parents[1]
+LEAN_ROOT = PAPER / "lean" if (PAPER / "lean").is_dir() else REPOSITORY / "lean"
 LOCAL_MANIFEST_ARTIFACTS = (
     "EVIDENCE-MANIFEST.json",
     "EVIDENCE-ROWS.md",
@@ -22,12 +23,10 @@ LOCAL_MANIFEST_ARTIFACTS = (
     "build_r6_paper_table.py",
 )
 AGGREGATE = (
-    REPOSITORY
-    / "lean/RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean"
+    LEAN_ROOT / "RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean"
 )
 AXIOM_AUDIT = (
-    REPOSITORY
-    / "lean/RelativeConicArcs/Gates/PRSBeyondRedundancyFourAxiomAudit.lean"
+    LEAN_ROOT / "RelativeConicArcs/Gates/PRSBeyondRedundancyFourAxiomAudit.lean"
 )
 EXPECTED_AGGREGATE_IMPORTS = (
     "RelativeConicArcs.Gates.PRSFoundation",
@@ -186,7 +185,7 @@ def tex_include_closure(path: Path, seen: set[Path]) -> list[Path]:
 def project_import_closure(module: str, seen: set[str]) -> None:
     if module in seen:
         return
-    source = REPOSITORY / "lean" / Path(*module.split(".")).with_suffix(".lean")
+    source = LEAN_ROOT / Path(*module.split(".")).with_suffix(".lean")
     if not source.exists():
         return
     seen.add(module)
@@ -223,8 +222,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 71:
-        raise SystemExit(f"expected 71 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 75:
+        raise SystemExit(f"expected 75 adopted manuscript labels, found {len(labels)}")
 
     formal_sources = (AGGREGATE.is_file(), AXIOM_AUDIT.is_file())
     if formal_sources == (False, False):
@@ -270,11 +269,15 @@ def check_formal_scope() -> None:
 def check_public_release_gate() -> None:
     manifest = (SUPPLEMENT / "RELEASE-MANIFEST.md").read_text(encoding="utf-8")
     main = (PAPER / "main.tex").read_text(encoding="utf-8")
+    signoff = (SUPPLEMENT / "FINAL-READER-SIGNOFF.md").read_text(encoding="utf-8")
+    candidate_manifest = manifest.split(
+        "## Current Version 2 local candidate", 1
+    )[1].split("## Artifact rows", 1)[0]
 
     def field(label: str) -> str:
         match = re.search(
             rf"^\| {re.escape(label)} \| (.+) \|$",
-            manifest,
+            candidate_manifest,
             flags=re.MULTILINE,
         )
         if match is None:
@@ -301,13 +304,16 @@ def check_public_release_gate() -> None:
         raise SystemExit("public PDF hash differs from the reviewed local candidate")
     if field("PDF bytes") != field("Local built PDF bytes"):
         raise SystemExit("public PDF byte count differs from the reviewed local candidate")
-    lean_revision = field("Public Lean revision")
-    flake = (PAPER / "flake.nix").read_text(encoding="utf-8")
-    lock = (PAPER / "flake.lock").read_text(encoding="utf-8")
-    if "finitegeom" not in flake or lean_revision not in lock:
-        raise SystemExit("release flake does not resolve the public Lean revision")
     if "Unrefereed preprint" not in main:
         raise SystemExit("the manuscript is not visibly labelled as an unrefereed preprint")
+    verdicts = re.findall(r"^Verdict: (.+)$", signoff, flags=re.MULTILINE)
+    if verdicts != ["green", "green"]:
+        raise SystemExit("public release gate requires two green reader verdicts")
+    if re.search(r"^Reader name, date, and stable report identifier: pending\.$",
+                 signoff, flags=re.MULTILINE):
+        raise SystemExit("public release gate requires two stable reader reports")
+    if field("PDF SHA-256") not in signoff:
+        raise SystemExit("reader signoff is not pinned to the released PDF")
     print("verified public release metadata")
 
 
@@ -362,55 +368,55 @@ def replay() -> None:
         ),
         (
             "r7-direct-locus-v2",
-            ["2026-08-02-c660-r7-independent-generator.py", "--check"],
+            ["2026-08-02-r7-direct-locus-generator.py", "--check"],
         ),
         (
             "r7-direct-locus-v2",
             [
-                "2026-08-02-c660-r7-independent-checker.py",
-                "2026-08-02-c660-r7-independent-certificate.json",
+                "2026-08-02-r7-direct-locus-checker.py",
+                "2026-08-02-r7-direct-locus-certificate.json",
                 "--compare-public",
                 "../../CLASSIFICATION-RECORDS.json",
                 "--output-comparison",
-                "2026-08-02-c660-r7-public-comparison.json",
+                "2026-08-02-r7-direct-locus-public-comparison.json",
                 "--check-comparison",
             ],
         ),
-        ("r8", ["2026-07-23-c513-prs-redundancy-eight.py", "--check"]),
-        ("r8", ["2026-07-23-c513-prs-redundancy-eight-replay.py"]),
-        ("r9", ["2026-07-23-c516-prs-redundancy-nine.py", "--check"]),
-        ("r9", ["2026-07-23-c516-prs-redundancy-nine-replay.py"]),
-        ("r10", ["2026-07-23-c532-prs-redundancy-ten-synthesis.py", "--check"]),
-        ("r10", ["2026-07-23-c532-prs-redundancy-ten-synthesis-replay.py"]),
+        ("r8", ["2026-07-23-prs-redundancy-eight.py", "--check"]),
+        ("r8", ["2026-07-23-prs-redundancy-eight-replay.py"]),
+        ("r9", ["2026-07-23-prs-redundancy-nine.py", "--check"]),
+        ("r9", ["2026-07-23-prs-redundancy-nine-replay.py"]),
+        ("r10", ["2026-07-23-prs-redundancy-ten-synthesis.py", "--check"]),
+        ("r10", ["2026-07-23-prs-redundancy-ten-synthesis-replay.py"]),
         (
             "lucas-m9",
-            ["2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance.py", "--check"],
+            ["2026-07-24-degree-nine-rank-two-artin-schreier-avoidance.py", "--check"],
         ),
         (
             "lucas-m9",
-            ["2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance-replay.py"],
+            ["2026-07-24-degree-nine-rank-two-artin-schreier-avoidance-replay.py"],
         ),
         (
             "lucas-m9",
             [
-                "2026-08-02-c620-higher-lucas-modular-carriers.py",
+                "2026-08-02-higher-lucas-modular-carriers.py",
                 "16",
                 "--check",
-                "2026-08-02-c620-higher-lucas-modular-carriers-q16.json",
+                "2026-08-02-higher-lucas-modular-carriers-q16.json",
             ],
         ),
         (
             "lucas-m9",
             [
-                "2026-08-02-c620-higher-lucas-modular-carriers.py",
+                "2026-08-02-higher-lucas-modular-carriers.py",
                 "32",
                 "--check",
-                "2026-08-02-c620-higher-lucas-modular-carriers-q32.json",
+                "2026-08-02-higher-lucas-modular-carriers-q32.json",
             ],
         ),
         (
             "lucas-m9",
-            ["2026-08-02-c620-higher-lucas-modular-carriers-replay.py"],
+            ["2026-08-02-higher-lucas-modular-carriers-replay.py"],
         ),
     )
     for directory, arguments in python_jobs:

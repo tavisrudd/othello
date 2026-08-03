@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate/check the compact C578 rank-two certificate.
+"""Generate/check the compact rank-two rank-two certificate.
 
 The structural theorem is proved in the adjacent report.  This program checks
 the only new bounded field, F_64: the five rational A5 twists, their complete
@@ -17,13 +17,13 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-STEM = "2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance"
-C531 = HERE / "2026-07-23-c531-degree-nine-lucas-carrier-pgl2-strata.py"
+STEM = "2026-07-24-degree-nine-rank-two-artin-schreier-avoidance"
+invariant-block = HERE / "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py"
 OUTPUT = HERE / f"{STEM}.json"
 
 
-def load_c531():
-    spec = importlib.util.spec_from_file_location("c531_frozen", C531)
+def load_lucas_action():
+    spec = importlib.util.spec_from_file_location("lucas_action_frozen", invariant-block)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -78,7 +78,7 @@ def orbit(seed, generators, module, modulus):
 
 
 def generate() -> dict[str, object]:
-    module = load_c531()
+    module = load_lucas_action()
     q = 64
     modulus = module.first_irreducible(6)
     primitive = module.primitive_element(q, modulus)
@@ -126,9 +126,9 @@ def generate() -> dict[str, object]:
     assert frobenius(TWISTS[3]["representative"]) in orbit_sets["5B"]
     assert frobenius(TWISTS[4]["representative"]) in orbit_sets["5A"]
 
-    c531_sha256 = hashlib.sha256(C531.read_bytes()).hexdigest()
+    lucas_action_sha256 = hashlib.sha256(invariant-block.read_bytes()).hexdigest()
     return {
-        "schema": "c578-rank-two-avoidance-v1",
+        "schema": "rank_two-rank-two-avoidance-v1",
         "structural_bound": {
             "five_root_bad_degree": 102,
             "first_theorem_power_of_two": 128,
@@ -138,8 +138,8 @@ def generate() -> dict[str, object]:
             "hasse_lower_at_q64": 49,
         },
         "frozen_input": {
-            "path": C531.name,
-            "sha256": c531_sha256,
+            "path": invariant-block.name,
+            "sha256": lucas_action_sha256,
         },
         "bounded_field": {
             "q": q,

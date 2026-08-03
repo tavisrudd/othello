@@ -20,8 +20,10 @@ following headline rows in `claim-proof-novelty-ledger.md`:
 - R6 and R7, including the contained-component exhaustions, point-count
   conventions, deletion budgets, threshold endpoints, and the separate
   covering-radius boundary at redundancy seven; and
-- the explicit exclusion of the proposed arbitrary-redundancy
-  stable-component theorem and higher-Lucas proposition from Version 1.
+- the exact arbitrary-redundancy reduced carrier theorem and the explicit
+  stagewise-package hypothesis on its finite-depth numerical consequence;
+- the fixed-level R8--R10 escape packages, the characteristic-seven coherent
+  lift, and the characteristic-two higher-Lucas theorem.
 
 Verdict: pending.
 
@@ -33,13 +35,13 @@ The reader must check:
 
 - the syndrome, split-free, covering-radius, deep-hole, and one-column
   MDS-extension dictionary;
-- every all-field, high-field, and bounded-field qualifier in R5--R7;
+- every all-field, high-field, and bounded-field qualifier in R5--R10;
 - the public classification representatives, stabilizers, Frobenius fusions,
   exhaustion identities, and independent replay claims;
 - the distinction between manuscript proof, cited input, certificate,
   kernel-checked algebra, and conditional Lean synthesis;
-- the one-command clean-checkout replay, the exact paper-facing R5--R7 Lean
-  closure, and the public release manifest.
+- the one-command clean-checkout replay, the exact paper-facing Lean closure
+  and flake, and the public release manifest.
 
 Verdict: pending.
 

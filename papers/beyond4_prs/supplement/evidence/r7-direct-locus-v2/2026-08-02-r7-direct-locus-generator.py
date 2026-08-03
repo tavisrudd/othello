@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Freeze the independent C660 redundancy-seven completeness records.
+"""Freeze the independent R7 direct locus redundancy-seven completeness records.
 
 This generator deliberately has no Certificate R7 input.  It reuses the
-post-Version-1 direct-locus engine, which is independent of the C509 quotient
+post-Version-1 direct-locus engine, which is independent of the R7 primary quotient
 enumerator, and adds a canonical candidate-domain ledger, full orbit records,
 and intrinsic family flags.  Public-record comparison belongs to the separate
-C660 checker and may be run only after this output has been frozen.
+R7 direct locus checker and may be run only after this output has been frozen.
 """
 
 from __future__ import annotations
@@ -19,12 +19,12 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ENGINE_PATH = HERE.parent / "r7" / "2026-07-26-r7-direct-locus-replay.py"
-DEFAULT_OUTPUT = HERE / "2026-08-02-c660-r7-independent-certificate.json"
+DEFAULT_OUTPUT = HERE / "2026-08-02-r7-direct-locus-certificate.json"
 FIELDS = (7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32)
 
 
 def load_engine():
-    spec = importlib.util.spec_from_file_location("c660_direct_locus", ENGINE_PATH)
+    spec = importlib.util.spec_from_file_location("r7_direct_direct_locus", ENGINE_PATH)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
@@ -202,7 +202,7 @@ def canonical_document(fields):
             flush=True,
         )
     return {
-        "schema": "c660-r7-independent-completeness-v2",
+        "schema": "r7_direct-r7-independent-completeness-v2",
         "comparison_status": "not-compared",
         "field_domain": list(fields),
         "engine": ENGINE_PATH.name,

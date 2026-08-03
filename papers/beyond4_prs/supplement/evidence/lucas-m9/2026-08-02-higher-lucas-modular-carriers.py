@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Intrinsic quotient experiments for C620's degree-nine Lucas carrier."""
+"""Intrinsic quotient experiments for Lucas M9's degree-nine Lucas carrier."""
 
 from __future__ import annotations
 
@@ -13,30 +13,30 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-C531_PATH = HERE / "2026-07-23-c531-degree-nine-lucas-carrier-pgl2-strata.py"
-SPEC = importlib.util.spec_from_file_location("c531", C531_PATH)
+invariant-block_PATH = HERE / "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py"
+SPEC = importlib.util.spec_from_file_location("lucas_action", invariant-block_PATH)
 assert SPEC is not None and SPEC.loader is not None
-C531 = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(C531)
+invariant-block = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(invariant-block)
 
 def gf_add_product(total: int, left: int, right: int, modulus: int) -> int:
-    return total ^ C531.gf_mul(left, right, modulus)
+    return total ^ invariant-block.gf_mul(left, right, modulus)
 
 
 def evaluate_action_entry(source: int, target: int, matrix: tuple[int, int, int, int], modulus: int) -> int:
     a, b, c, d = matrix
     total = 0
-    for ea, eb, ec, ed in C531.action_entry(source, target):
-        term = C531.gf_pow(a, ea, modulus)
-        term = C531.gf_mul(term, C531.gf_pow(b, eb, modulus), modulus)
-        term = C531.gf_mul(term, C531.gf_pow(c, ec, modulus), modulus)
-        term = C531.gf_mul(term, C531.gf_pow(d, ed, modulus), modulus)
+    for ea, eb, ec, ed in invariant-block.action_entry(source, target):
+        term = invariant-block.gf_pow(a, ea, modulus)
+        term = invariant-block.gf_mul(term, invariant-block.gf_pow(b, eb, modulus), modulus)
+        term = invariant-block.gf_mul(term, invariant-block.gf_pow(c, ec, modulus), modulus)
+        term = invariant-block.gf_mul(term, invariant-block.gf_pow(d, ed, modulus), modulus)
         total ^= term
     return total
 
 
 def canonical(point: tuple[int, ...], modulus: int) -> tuple[int, ...]:
-    return C531.canonical(point, modulus)
+    return invariant-block.canonical(point, modulus)
 
 
 def carrier_matrix(matrix: tuple[int, int, int, int], modulus: int) -> tuple[tuple[int, ...], ...]:
@@ -109,12 +109,12 @@ def matrix_rank(rows: list[list[int]], modulus: int) -> int:
         if pivot is None:
             continue
         work[rank], work[pivot] = work[pivot], work[rank]
-        inverse = C531.gf_pow(work[rank][column], (1 << (modulus.bit_length() - 1)) - 2, modulus)
-        work[rank] = [C531.gf_mul(value, inverse, modulus) for value in work[rank]]
+        inverse = invariant-block.gf_pow(work[rank][column], (1 << (modulus.bit_length() - 1)) - 2, modulus)
+        work[rank] = [invariant-block.gf_mul(value, inverse, modulus) for value in work[rank]]
         for i in range(len(work)):
             if i != rank and work[i][column]:
                 factor = work[i][column]
-                work[i] = [x ^ C531.gf_mul(factor, y, modulus) for x, y in zip(work[i], work[rank])]
+                work[i] = [x ^ invariant-block.gf_mul(factor, y, modulus) for x, y in zip(work[i], work[rank])]
         rank += 1
     return rank
 
@@ -141,14 +141,14 @@ def normalized_complement_action(
 ) -> tuple[int, int, int, int]:
     image = act(complement_point(u), matrix, modulus)
     assert image[2] and image[3] == 0
-    inverse = C531.gf_pow(image[2], (1 << (modulus.bit_length() - 1)) - 2, modulus)
-    normalized = tuple(C531.gf_mul(value, inverse, modulus) for value in image)
+    inverse = invariant-block.gf_pow(image[2], (1 << (modulus.bit_length() - 1)) - 2, modulus)
+    normalized = tuple(invariant-block.gf_mul(value, inverse, modulus) for value in image)
     assert normalized[2:4] == (1, 0)
     return normalized[0], normalized[1], normalized[4], normalized[5]
 
 
 def complement_orbit_representatives(q: int, modulus: int) -> list[tuple[int, int, int, int]]:
-    primitive = C531.primitive_element(q, modulus)
+    primitive = invariant-block.primitive_element(q, modulus)
     generators = [
         (1, 1, 0, 1),
         (primitive, 0, 0, 1),
@@ -193,17 +193,17 @@ def mobius(point: int, matrix: tuple[int, int, int, int], q: int, modulus: int) 
     if point == q:
         if c == 0:
             return q
-        return C531.gf_mul(a, C531.gf_pow(c, q - 2, modulus), modulus)
-    numerator = C531.gf_mul(a, point, modulus) ^ b
-    denominator = C531.gf_mul(c, point, modulus) ^ d
+        return invariant-block.gf_mul(a, invariant-block.gf_pow(c, q - 2, modulus), modulus)
+    numerator = invariant-block.gf_mul(a, point, modulus) ^ b
+    denominator = invariant-block.gf_mul(c, point, modulus) ^ d
     if denominator == 0:
         return q
-    return C531.gf_mul(numerator, C531.gf_pow(denominator, q - 2, modulus), modulus)
+    return invariant-block.gf_mul(numerator, invariant-block.gf_pow(denominator, q - 2, modulus), modulus)
 
 
 def projective_additive_rows_q16(modulus: int) -> list[tuple[tuple[int, ...], tuple[int, ...], tuple[int, ...]]]:
     q = 16
-    primitive = C531.primitive_element(q, modulus)
+    primitive = invariant-block.primitive_element(q, modulus)
     generators = [(1, 1, 0, 1), (primitive, 0, 0, 1), (0, 1, 1, 0)]
     root_sets = {
         tuple(x for x in range(q) if (x & functional).bit_count() % 2 == value)
@@ -228,7 +228,7 @@ def projective_additive_rows_q16(modulus: int) -> list[tuple[tuple[int, ...], tu
 def bounded_certificate(q: int) -> dict[str, object]:
     assert q in (16, 32)
     m = q.bit_length() - 1
-    modulus = C531.first_irreducible(m)
+    modulus = invariant-block.first_irreducible(m)
     representatives = complement_orbit_representatives(q, modulus)
     candidates = candidate_divisors(q, modulus)
     additive_rows = projective_additive_rows_q16(modulus) if q == 16 else []
@@ -252,15 +252,15 @@ def bounded_certificate(q: int) -> dict[str, object]:
             ))
         records.append([*u, *witness, additive_flag])
     result = {
-        "schema": "c620-higher-lucas-quotient-v2",
+        "schema": "lucas_m9-higher-lucas-quotient-v2",
         "record_layout": ["u0", "u1", "u2", "u3", "root0", "root1", "root2", "root3", "root4", "root5", "root6", "root7", "projective_additive_flag"],
         "field_order": q,
         "modulus": modulus,
         "normalized_slice": "(z2,z3,z4,z5,z6,z7)=(u0,u1,1,0,u2,u3)",
-        "borel_generators": [[1, 1, 0, 1], [C531.primitive_element(q, modulus), 0, 0, 1]],
+        "borel_generators": [[1, 1, 0, 1], [invariant-block.primitive_element(q, modulus), 0, 0, 1]],
         "orbit_count": len(representatives),
         "map_rank_orbit_counts": {str(key): value for key, value in sorted(rank_counts.items())},
-        "c531_source_sha256": hashlib.sha256(C531_PATH.read_bytes()).hexdigest(),
+        "carrier_action_source_sha256": hashlib.sha256(invariant-block_PATH.read_bytes()).hexdigest(),
         "records": records,
     }
     if q == 16:

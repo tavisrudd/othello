@@ -86,12 +86,11 @@ the paper-local verifier and retain their own generator/replay boundaries.
 
 The supported aggregate gate is:
 
-    lean/scripts/lean-build-queue.py run \
+    (cd lean && nix develop --command lake build \
       RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
-      --profile single --threads 1 --cores 20-23 \
-      --aggregate RelativeConicArcs.Gates.PRSBeyondRedundancyFour
+      RelativeConicArcs.Gates.PRSBeyondRedundancyFour)
 
 The balanced q=8 quantum consequence retains its separate
 RelativeConicArcs.Gates.PRSBalancedQuantumExtension gate and axiom audit so
 the AME--LU dependency closure is not misreported as part of the PRS
-geometric aggregate.
+geometric aggregate; those modules are outside this paper export.

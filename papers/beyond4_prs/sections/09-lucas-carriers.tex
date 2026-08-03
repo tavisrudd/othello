@@ -334,7 +334,11 @@ the bad-base and deletion estimates give a witness for $q\geq128$.
 The complete $q=64$ quotient certificate and the $q=16,32$ quotient
 certificates cover the remaining admissible fields.  Their checkers rebuild
 the orbit partitions, twists, root polynomials, and both Hankel equations;
-Section~\ref{sec:verification} records the exact trust boundary.
+the generator and separately written replay are the
+\texttt{rank-two-artin-schreier-avoidance} and
+\texttt{higher-lucas-modular-carriers} artifacts under
+\texttt{supplement/evidence/lucas-m9/}.  Section~\ref{sec:verification}
+records their exact trust boundary.
 \end{proof}
 
 \begin{proposition}[Exact final-pair criterion]\label{prop:final-pair}
@@ -431,6 +435,9 @@ component of $Q=0$, differentiation gives
 \]
 The six column relations in (37) again force $z_4=z_5=0$.  Hence the
 Artin--Schreier cover is geometrically integral throughout the complement.
+The symbolic rank split, derivative identities, and all rational
+\(A_5\)-twists are reconstructed by the public rank-two replay just cited;
+the manuscript argument supplies the all-field geometric implication.
 
 Fix five roots and let $x$ be the sixth.  Then each $A_j$ is affine in
 $x$, $Q$ is quadratic, and the reduced cover has at most two simple
@@ -465,6 +472,115 @@ split witnesses still exist on all $101$.  Thus the endpoint criterion of
 Wang--Wu--Hu and Proposition~\ref{prop:linearized} describe a proper section.
 The exact uniform replacement is (33)--(36).
 
+\begin{proposition}[Pointed R10 stage budgets]\label{prop:r10-pointed-budgets}
+Let \(f\notin\cP_{10}\cup\cM^{\max}_{10,p}\), and retain \(i\) distinct
+markers after \(i\) contractions, \(0\leq i\leq4\).  The unavailable
+choices for the next marker form a zero-dimensional scheme of degree at
+most \(19+i\), hence at most \(23\).  None of its defining factors vanishes identically off the
+displayed carrier union.
+\end{proposition}
+
+\begin{proof}
+At syndrome degree \(9-i\), the pullback of the lower persistent carrier
+has degree at most three and the complete lower Lucas union has degree at
+most two.  After its fixed factors are removed, the moving separable
+linear series has ramification degree at most
+\[
+                         2(9-i)-4=14-2i.
+\]
+Each retained marker contributes one linear marker diagonal and one
+fixed-marker gcd incidence cut out by quadratic minors, of degree at most
+two.  Thus the full pointed degree is
+\[
+             3+2+(14-2i)+i+2i=19+i\leq23.                  \tag{38}
+\]
+The persistent and Lucas pullbacks can vanish identically only on the
+contained schemes classified by
+Proposition~\ref{prop:recursive-component-selection}.  Identically zero
+ramification is the inseparable case routed to the Lucas carrier.  A marker
+diagonal is a proper point.  Finally, the evaluation-hyperplane argument in
+the proof of Proposition~\ref{prop:r9-budgets} shows that an identically
+vanishing fixed-marker minor forces the exact-linear-gcd package after
+cancellation, whose contained case is persistent.  Hence every factor in
+(38) is proper on the stated complement.
+\end{proof}
+
+\begin{proposition}[R10 fixed-depth escape]\label{prop:r10-escape}
+For odd \(q\geq59\), and for even \(q\geq64\), every split-free
+redundancy-ten syndrome belongs to
+\(\cP_{10}\cup\cM^{\max}_{10,p}\).
+\end{proposition}
+
+\begin{proof}
+Apply the finite-depth escape theorem through five markers.
+Proposition~\ref{prop:r10-pointed-budgets} supplies all five successive
+unavailable-marker schemes, including the retained-marker incidences omitted
+by an unpointed iteration.  The terminal lower packages are the R8 package of
+Propositions~\ref{prop:r8-bottom} and \ref{prop:r8-lp61}, followed by the
+R9 package of Propositions~\ref{prop:r9-budgets} and
+\ref{prop:r9-contained}; the R5--R7 terminal packages are those used in
+their respective classification theorems.  At the top step, the generic
+ordered-pair cover has genus at most one.  Its base diagonal and branch
+delete \(12\) points, and each of the five forbidden markers deletes at
+most \(6\), for the exact total
+\[
+                              12+5\cdot6=42.
+\]
+These are all terminal transverse, modular, and self-collision strata.
+Since
+\[
+                              q+1-2\sqrt q>42
+\]
+first holds at a prime power \(q=59\), the odd assertion follows.
+In characteristic two the ordered-Hessian base selector requires
+\[
+\min\{(9-4)(9+11)/2+1,\;9(9-4)\}=45
+\]
+parameters, and its reduced \((2,2)\) slice deletes
+\(5+2+2+10+4=23\) points.  The first binary field satisfying both
+conditions is \(64\).  The selector is obtained by pulling back one nonzero
+equation from each of the common-quadratic and complementary Fano rulings:
+their product has individual root degree eight, so Schwartz--Zippel or
+nine-element block interpolation gives the displayed bound.  The normalized
+\((2,2)\) ordered-Hessian slice has genus at most one, and its five deletion
+degrees are exactly the displayed summands.  Proposition~\ref{prop:recursive-component-selection}
+then identifies the sole contained locus in either case as the displayed
+carrier union.
+\end{proof}
+
+\begin{proposition}[Characteristic-seven coherent lift at R10]
+\label{prop:r10-char7-lift}
+Let \(q=7^m\geq343\).  Every point of
+\[
+       \cM^{\max}_{10,7}\subseteq\PP\langle e_3,e_4,e_5,e_6\rangle
+       \subset\PP(\Gamma^9E)
+\]
+has a split squarefree octic in its Hankel kernel.
+\end{proposition}
+
+\begin{proof}
+Choose the marker at infinity.  In the affine-coordinate convention of
+Section~\ref{sec:polar}, contraction deletes the last coordinate, so a
+nonzero \(f\in\langle e_3,e_4,e_5,e_6\rangle\) contracts to the same
+coefficient row
+\[
+ b=\iota_\infty f\in
+ \PP\langle e_3,e_4,e_5,e_6\rangle
+ \subset\PP\langle e_2,e_3,e_4,e_5,e_6\rangle,
+\]
+the characteristic-seven R9 binary-quartic carrier.  Since \(q>102\),
+Proposition~\ref{prop:r9-components} selects four distinct finite base
+roots.  The construction in Proposition~\ref{prop:r9-slice} then fixes a
+fifth finite root as its moving parameter; because
+\(q+1-2\sqrt q>32\), Proposition~\ref{prop:r9-deletion} selects a point
+whose residual quadratic is separable and avoids all five fixed roots.
+Its nonzero leading coefficient is part of the deleted determinant locus,
+so both residual roots are finite.  The resulting split squarefree septic
+\(g\in W_b\) therefore avoids the marked root at infinity.  Equation
+\eqref{eq:lift} gives \(\lambda_\infty g\in W_f\), and marker avoidance
+makes this octic squarefree.
+\end{proof}
+
 \begin{corollary}[Redundancy ten]\label{cor:r10}
 For every prime power $q\geq59$, the projective deep-hole syndromes of
 $\PRS(q-9)$ are exactly the persistent tangent and conjugate-secant
@@ -474,12 +590,15 @@ $z\mapsto z+9u$.
 \end{corollary}
 
 \begin{proof}
-For odd $q\geq59$, Theorem~\ref{thm:recursive-carrier} and the
-level-nine component calculation leave no nonpersistent split-free point.
+For odd $q\geq59$, Proposition~\ref{prop:r10-escape} confines a
+nonpersistent split-free point to the maximal Lucas carrier.  Its support
+is empty except in characteristic seven; the
+first field in this range is \(343\), where
+Proposition~\ref{prop:r10-char7-lift} applies.
 For even prime powers in the range one has $q\geq64$;
-Theorem~\ref{thm:recursive-carrier} confines every split-free point to
+Proposition~\ref{prop:r10-escape} confines every split-free point to
 $\cP_{10}\cup\cM_9$, and Theorem~\ref{thm:m9-shallow} eliminates the
-second term.  The radius premise holds throughout the stated range, so the
+second term.  Proposition~\ref{prop:upper-radius} holds throughout the stated range, so the
 split-free equality promotes to deep holes.  The persistent count and orbit
 law are the specialization $r=10$ of
 Theorem~\ref{thm:recursive-carrier}.

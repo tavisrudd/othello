@@ -50,8 +50,7 @@ holes. No predecessor was located.
 Those counts were refreshed on 2026-07-24 and were unchanged.  The
 query URLs, empty-versus-error checks, complete largest-set screen, promoted
 candidates, and source-by-source read depths are recorded in
-`notes/2026-07-22-c491-prs-literature-audit-searchlog.md` and
-`notes/2026-07-22-c498-audit-axisA-coding-forward-citation.md`.  In
+the dated repository search logs and coding-forward citation audit.  In
 particular, this is forward-citation evidence rather than an inference from
 the cited papers' bibliographies.
 
@@ -205,7 +204,7 @@ not as an enumerable negative set.  OpenAlex resolves the new preprint as
 resolve the arXiv-issued DOI and Semantic Scholar rate-limited the request.
 No negative verdict rests on this incomplete forward-citation check.
 
-## C656 post-baseline delta through 2026-07-26
+## Post-baseline delta through 2026-07-26
 
 This delta was run after Version 1 was narrowed to the R5--R7
 classifications.  It makes no absence claim for the excluded all-level

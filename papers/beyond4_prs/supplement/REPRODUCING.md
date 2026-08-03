@@ -21,15 +21,16 @@ Run every paper-local Python replay with:
 python3 supplement/verify.py --replay
 ```
 
-Create the paper-only and exact 17-file Lean fresh-history candidates from a
-clean development revision with:
+Create the paper-only and exact 17-source-file Lean fresh-history candidates
+from a clean development revision with:
 
 ```text
 python3 supplement/prepare_release_export.py /disk-backed/output/path
 ```
 
 The command refuses an existing destination or dirty release-owned source,
-archives only the committed paper tree and exact 17-file Lean closure, and
+archives only the committed paper tree and exact 17-source-file Lean closure,
+and
 prints the source, paper, and Lean commit identifiers.  The output contains a
 paper repository at its root and a separately initialized Lean repository
 under `lean/`; the paper repository excludes that adjacent Lean checkout.
@@ -61,15 +62,15 @@ Build the manuscript with `make check`.  The canonical output is
 `prs-beyond-redundancy-four.pdf`;
 `main.pdf` is not part of the export.
 
-In the export layout, `../lean` is the repository root of the public
-formal-verification checkout
-`https://github.com/tavisrudd/finitegeom`.  Its immutable commit revision is
-release metadata in `RELEASE-MANIFEST.md` and must also be resolved by the
-release flake and lock.  The version-independent archival locator for that
+In the export layout, `lean/` is a separately initialized repository
+containing the exact paper-facing formal closure and its pinned build flake.
+Its eventual immutable public commit in
+`https://github.com/tavisrudd/finitegeom` is release metadata in
+`RELEASE-MANIFEST.md`.  The version-independent archival locator for that
 repository is the Zenodo concept DOI
 [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
-The checkout is not silently replaced by a path into the
-development monorepo.  Every certificate consumed by the adopted theorem set
+The exported repository is not a path into the development monorepo.  Every
+certificate consumed by the adopted theorem set
 is already paper-local; no separate certificate-package input belongs in the
 release flake.  Until the public Lean repository and revision are published,
 the local bundle checks the paper-local evidence and Lean interface described
@@ -111,19 +112,20 @@ separate checks in the same evidence bundle.
 (cd supplement/evidence/r7 && python3 2026-07-23-prs-deep-hole-calibration-replay.py)
 (cd supplement/evidence/r7 && python3 2026-07-26-r7-independent-arithmetic-replay.py)
 (cd supplement/evidence/r7 && python3 2026-07-26-r7-direct-locus-replay.py --check 2026-07-26-r7-direct-locus-replay.json)
-(cd supplement/evidence/r7-direct-locus-v2 && python3 2026-08-02-c660-r7-independent-generator.py --check)
-(cd supplement/evidence/r7-direct-locus-v2 && python3 2026-08-02-c660-r7-independent-checker.py 2026-08-02-c660-r7-independent-certificate.json --compare-public ../../CLASSIFICATION-RECORDS.json --output-comparison 2026-08-02-c660-r7-public-comparison.json --check-comparison)
-(cd supplement/evidence/r8 && python3 2026-07-23-c513-prs-redundancy-eight.py --check)
-(cd supplement/evidence/r8 && python3 2026-07-23-c513-prs-redundancy-eight-replay.py)
-(cd supplement/evidence/r9 && python3 2026-07-23-c516-prs-redundancy-nine.py --check)
-(cd supplement/evidence/r9 && python3 2026-07-23-c516-prs-redundancy-nine-replay.py)
-(cd supplement/evidence/r10 && python3 2026-07-23-c532-prs-redundancy-ten-synthesis.py --check)
-(cd supplement/evidence/r10 && python3 2026-07-23-c532-prs-redundancy-ten-synthesis-replay.py)
-(cd supplement/evidence/lucas-m9 && python3 2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance.py --check)
-(cd supplement/evidence/lucas-m9 && python3 2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance-replay.py)
-(cd supplement/evidence/lucas-m9 && python3 2026-08-02-c620-higher-lucas-modular-carriers.py 16 --check 2026-08-02-c620-higher-lucas-modular-carriers-q16.json)
-(cd supplement/evidence/lucas-m9 && python3 2026-08-02-c620-higher-lucas-modular-carriers.py 32 --check 2026-08-02-c620-higher-lucas-modular-carriers-q32.json)
-(cd supplement/evidence/lucas-m9 && python3 2026-08-02-c620-higher-lucas-modular-carriers-replay.py)
+(cd supplement/evidence/r7-direct-locus-v2 && python3 2026-08-02-r7-direct-locus-generator.py --check)
+(cd supplement/evidence/r7-direct-locus-v2 && python3 2026-08-02-r7-direct-locus-checker.py 2026-08-02-r7-direct-locus-certificate.json --compare-public ../../CLASSIFICATION-RECORDS.json --output-comparison 2026-08-02-r7-direct-locus-public-comparison.json --check-comparison)
+(cd supplement/evidence/r8 && python3 2026-07-23-prs-redundancy-eight.py --check)
+(cd supplement/evidence/r8 && python3 2026-07-23-prs-redundancy-eight-replay.py)
+(cd supplement/evidence/r9 && python3 2026-07-23-prs-redundancy-nine.py --check)
+(cd supplement/evidence/r9 && python3 2026-07-23-prs-redundancy-nine-replay.py)
+(cd supplement/evidence/r9 && rustc -O 2026-07-23-prs-redundancy-nine-q49.rs -o /tmp/prs-r9-q49 && /tmp/prs-r9-q49 | cmp - 2026-07-23-prs-redundancy-nine-q49.txt)
+(cd supplement/evidence/r10 && python3 2026-07-23-prs-redundancy-ten-synthesis.py --check)
+(cd supplement/evidence/r10 && python3 2026-07-23-prs-redundancy-ten-synthesis-replay.py)
+(cd supplement/evidence/lucas-m9 && python3 2026-07-24-degree-nine-rank-two-artin-schreier-avoidance.py --check)
+(cd supplement/evidence/lucas-m9 && python3 2026-07-24-degree-nine-rank-two-artin-schreier-avoidance-replay.py)
+(cd supplement/evidence/lucas-m9 && python3 2026-08-02-higher-lucas-modular-carriers.py 16 --check 2026-08-02-higher-lucas-modular-carriers-q16.json)
+(cd supplement/evidence/lucas-m9 && python3 2026-08-02-higher-lucas-modular-carriers.py 32 --check 2026-08-02-higher-lucas-modular-carriers-q32.json)
+(cd supplement/evidence/lucas-m9 && python3 2026-08-02-higher-lucas-modular-carriers-replay.py)
 (cd supplement/evidence/stable-components && python3 2026-07-24-r10-integral-bad-scheme-sc11.py --check)
 (cd supplement/evidence/stable-components && python3 2026-07-24-stable-component-fano-elimination.py --check)
 (cd supplement/evidence/stable-components && Singular -q 2026-07-24-r10-integral-bad-scheme-sc11.sing)

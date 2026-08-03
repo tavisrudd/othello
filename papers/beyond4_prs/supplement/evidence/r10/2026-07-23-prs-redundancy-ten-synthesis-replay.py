@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent arithmetic replay for the C532 certificate."""
+"""Independent arithmetic replay for the R10 certificate."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import math
 from pathlib import Path
 
 
-DATA = Path(__file__).with_name("2026-07-23-c532-prs-redundancy-ten-synthesis.json")
+DATA = Path(__file__).with_name("2026-07-23-prs-redundancy-ten-synthesis.json")
 
 
 def prime(n: int) -> bool:
@@ -63,7 +63,7 @@ def main() -> None:
         sigma = q * (q * q - 1) // 2
         assert tangent + sigma == q * (q + 1) ** 2 // 2
         assert q * (q * q - 1) + q**4 * (q + 1) >= 0
-    print("C532 independent arithmetic replay: PASS")
+    print("R10 independent arithmetic replay: PASS")
 
 
 if __name__ == "__main__":

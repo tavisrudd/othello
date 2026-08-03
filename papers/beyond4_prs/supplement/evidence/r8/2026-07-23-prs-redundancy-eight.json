@@ -61,10 +61,10 @@
       2,
       2
     ],
-    "c512_closed_integer_bound": 44,
+    "finite_depth_closed_integer_bound": 44,
     "deletion_per_marker": 6,
     "exact_normalization_inequality_first_integer": 42,
-    "first_prime_power_at_least_c512_bound": 47,
+    "first_prime_power_at_least_closed_bound": 47,
     "first_prime_power_at_least_exact_inequality": 43,
     "geometric_monodromy": "S3 on ordered distinct root pairs",
     "marker_count": 3,
@@ -423,7 +423,7 @@
     "marker_count": 4,
     "syndrome_degree": 8
   },
-  "schema": "c513-prs-redundancy-eight-v1",
+  "schema": "r8-prs-redundancy-eight-v1",
   "syndrome_degree": 7,
   "top_level": {
     "collision_degree": 10,

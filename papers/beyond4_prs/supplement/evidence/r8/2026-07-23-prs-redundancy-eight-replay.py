@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent replay for the C513 algebraic certificate."""
+"""Independent replay for the R8 algebraic certificate."""
 
 import json
 import math
@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-DATA = HERE / "2026-07-23-c513-prs-redundancy-eight.json"
+DATA = HERE / "2026-07-23-prs-redundancy-eight.json"
 
 
 def rank_mod_p(rows, p):
@@ -49,13 +49,13 @@ def contraction_kernel_dimension(support, p):
 
 def main():
     data = json.loads(DATA.read_text())
-    assert data["schema"] == "c513-prs-redundancy-eight-v1"
+    assert data["schema"] == "r8-prs-redundancy-eight-v1"
 
     lower = data["lower_cover"]
     assert lower["total_deletion_degree"] == 12 + 3 * 6 == 30
     exact_bound = math.floor((1 + math.sqrt(31)) ** 2) + 1
-    assert lower["c512_closed_integer_bound"] == exact_bound == 44
-    assert lower["first_prime_power_at_least_c512_bound"] == 47
+    assert lower["finite_depth_closed_integer_bound"] == exact_bound == 44
+    assert lower["first_prime_power_at_least_closed_bound"] == 47
     assert lower["exact_normalization_inequality_first_integer"] == 42
     assert 42 + 1 - 2 * math.sqrt(42) > 30
     assert 41 + 1 - 2 * math.sqrt(41) <= 30
@@ -198,7 +198,7 @@ def main():
         == "(A*C+B*E)^2-4*(C^2-A*E)*(A^2+B*C)"
     )
     assert "collision" in detector["full_family_gate"]
-    print("C513 independent replay: PASS")
+    print("R8 independent replay: PASS")
 
 
 if __name__ == "__main__":

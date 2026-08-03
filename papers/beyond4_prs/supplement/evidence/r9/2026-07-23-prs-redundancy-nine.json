@@ -543,7 +543,7 @@
     "residual_quadratic": "D*T^2-N_s*T+N_u",
     "trace_numerator": "N_s=H_-1*H_2-H_0*H_1"
   },
-  "schema": "c516-prs-redundancy-nine-v1",
+  "schema": "r9-prs-redundancy-nine-v1",
   "thresholds": {
     "exact_integer_threshold": 50,
     "first_prime_power": 53,

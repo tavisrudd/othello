@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent replay of C620's q=16,32 intrinsic quotient certificates."""
+"""Independent replay of Lucas M9's q=16,32 intrinsic quotient certificates."""
 
 from __future__ import annotations
 
@@ -215,8 +215,8 @@ def projective_additive_rows(modulus: int) -> list[tuple[tuple[int, ...], tuple[
 
 
 def replay(q: int) -> dict[str, int]:
-    data = json.loads((HERE / f"2026-08-02-c620-higher-lucas-modular-carriers-q{q}.json").read_text())
-    assert data["schema"] == "c620-higher-lucas-quotient-v2"
+    data = json.loads((HERE / f"2026-08-02-higher-lucas-modular-carriers-q{q}.json").read_text())
+    assert data["schema"] == "lucas_m9-higher-lucas-quotient-v2"
     assert data["record_layout"] == [
         "u0", "u1", "u2", "u3",
         "root0", "root1", "root2", "root3", "root4", "root5", "root6", "root7",
@@ -224,8 +224,8 @@ def replay(q: int) -> dict[str, int]:
     ]
     modulus = first_irreducible(q.bit_length() - 1)
     assert modulus == data["modulus"]
-    c531 = HERE / "2026-07-23-c531-degree-nine-lucas-carrier-pgl2-strata.py"
-    assert hashlib.sha256(c531.read_bytes()).hexdigest() == data["c531_source_sha256"]
+    lucas_action = HERE / "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py"
+    assert hashlib.sha256(lucas_action.read_bytes()).hexdigest() == data["carrier_action_source_sha256"]
     representatives = quotient_representatives(q, modulus)
     recorded = [tuple(record[:4]) for record in data["records"]]
     assert representatives == recorded

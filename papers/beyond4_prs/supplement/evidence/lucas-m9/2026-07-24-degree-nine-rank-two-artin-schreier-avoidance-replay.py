@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent replay for the compact C578 F_64 certificate."""
+"""Independent replay for the compact rank-two F_64 certificate."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DATA = json.loads(
-    (HERE / "2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance.json").read_text()
+    (HERE / "2026-07-24-degree-nine-rank-two-artin-schreier-avoidance.json").read_text()
 )
 Q = 64
 MODULUS = int(DATA["bounded_field"]["modulus_hex"], 16)
@@ -148,7 +148,7 @@ def main() -> None:
         "five_root_bad_degree": 102,
         "hasse_lower_at_q64": 49,
     }
-    print("C578 replay passed: 5 twists, complete F_64 mass, witnesses, and bounds")
+    print("rank-two replay passed: 5 twists, complete F_64 mass, witnesses, and bounds")
 
 
 if __name__ == "__main__":

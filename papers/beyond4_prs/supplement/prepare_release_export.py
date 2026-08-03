@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import tarfile
 from pathlib import Path
@@ -14,6 +15,7 @@ from pathlib import Path
 PAPER_PATH = Path("papers/beyond4_prs")
 PAPER_PATHS = (
     PAPER_PATH / "README.md",
+    PAPER_PATH / "LICENSE",
     PAPER_PATH / "Makefile",
     PAPER_PATH / "main.tex",
     PAPER_PATH / "main-tit.tex",
@@ -199,13 +201,25 @@ def main() -> None:
     )
     output.mkdir(parents=True)
     extract_archive(source, revision, PAPER_PATHS, output)
+    nested_paper = output / PAPER_PATH
+    for child in nested_paper.iterdir():
+        child.rename(output / child.name)
+    shutil.rmtree(output / "papers")
     extract_archive(source, revision, LEAN_PATHS, output)
+    shutil.copy2(
+        output / "supplement/toolchain/export-flake.nix",
+        output / "lean/flake.nix",
+    )
+    shutil.copy2(
+        output / "supplement/toolchain/export-flake.lock",
+        output / "lean/flake.lock",
+    )
 
     paper_commit = commit(
         output,
-        "Release projective Reed-Solomon syndromes R5-R7 candidate",
+        "Release projective Reed-Solomon syndromes R5-R10 Version 2 candidate",
         paper_timestamp,
-        [PAPER_PATH.as_posix()],
+        [path.relative_to(PAPER_PATH).as_posix() for path in PAPER_PATHS],
     )
     (output / ".git/info/exclude").write_text(
         "\n".join(
@@ -227,12 +241,14 @@ def main() -> None:
     lean_root = output / "lean"
     lean_commit = commit(
         lean_root,
-        "Publish R5-R7 Lean verification closure",
+        "Publish PRS Version 2 Lean verification closure",
         lean_timestamp,
         [
             "lakefile.toml",
             "lake-manifest.json",
             "lean-toolchain",
+            "flake.nix",
+            "flake.lock",
             "RelativeConicArcs",
         ],
     )

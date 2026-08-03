@@ -165,3 +165,22 @@ the entire characteristic-seven carrier shallow at that field order.
 `notes/2026-07-23-c516-prs-redundancy-nine.md`.
 **Evidence:** CHECKED witness; LEAN boundary record keeps only the q=7/q=49 statements.
 **Status:** retired -> q=49 rootless sufficiency is false.
+
+### 2026-08-02 — carrier geometry does not generate transverse packages
+
+**Provenance:** Version 2 synthesis and independent geometry cold read.
+**Was I looking for this?:** no — the synthesis was expected to promote the
+closed recursive carrier directly to the old uniform numerical theorem.
+**Observed:** the exact reduced carrier theorem classifies polar lines
+contained in the terminal bad union.  It does not construct or exhaust the
+one-step lower packages on every transverse stratum at an arbitrary new
+redundancy.  The finite-depth escape theorem explicitly requires those
+packages stage by stage.
+**Discriminator:** any future unconditional all-\(r\) threshold must print a
+uniform transverse-stratum atlas, its integral covers, and marker/collision
+budgets.  Further primary decomposition or Lucas-carrier refinement cannot
+close this gate.  Fixed R10 is separate and is closed by its printed
+five-marker package.
+**Evidence:** manuscript theorem scope was narrowed to the explicit package
+hypothesis; R8--R10 remain unconditional after fixed-level discharge.
+**Status:** open structural lead; no task allocated by the synthesis.

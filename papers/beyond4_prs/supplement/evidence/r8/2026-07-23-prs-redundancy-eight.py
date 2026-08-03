@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate/check the compact algebraic certificate for C513.
+"""Generate/check the compact algebraic certificate for R8.
 
 This is not a deep-hole census.  It verifies the degree arithmetic, the lower
 normal-rational-curve nuclei, their consecutive-row lifts to degree seven, and
@@ -14,7 +14,7 @@ import tempfile
 from pathlib import Path
 
 
-SCHEMA = "c513-prs-redundancy-eight-v1"
+SCHEMA = "r8-prs-redundancy-eight-v1"
 PRIMES = (2, 3, 5, 7)
 
 
@@ -273,8 +273,8 @@ def build_certificate():
             "marker_count": marker_count,
             "deletion_per_marker": marker_cost,
             "total_deletion_degree": deletion,
-            "c512_closed_integer_bound": hasse_bound,
-            "first_prime_power_at_least_c512_bound": first_prime_power_at_least(hasse_bound),
+            "finite_depth_closed_integer_bound": hasse_bound,
+            "first_prime_power_at_least_closed_bound": first_prime_power_at_least(hasse_bound),
             "exact_normalization_inequality_first_integer": exact_hasse_integer,
             "first_prime_power_at_least_exact_inequality": first_prime_power_at_least(
                 exact_hasse_integer
@@ -400,7 +400,7 @@ def main():
         "--output",
         type=Path,
         default=Path(__file__).with_name(
-            "2026-07-23-c513-prs-redundancy-eight.json"
+            "2026-07-23-prs-redundancy-eight.json"
         ),
     )
     parser.add_argument("--check", action="store_true")
@@ -408,14 +408,14 @@ def main():
 
     payload = canonical_bytes(build_certificate())
     if args.check:
-        with tempfile.TemporaryDirectory(prefix="c513-check-") as tmp:
+        with tempfile.TemporaryDirectory(prefix="r8-check-") as tmp:
             candidate = Path(tmp) / args.output.name
             candidate.write_bytes(payload)
             if not args.output.exists():
                 raise SystemExit(f"missing tracked certificate: {args.output}")
             if candidate.read_bytes() != args.output.read_bytes():
                 raise SystemExit("certificate differs from canonical regeneration")
-        print("C513 certificate: PASS")
+        print("R8 certificate: PASS")
         return
 
     args.output.write_bytes(payload)

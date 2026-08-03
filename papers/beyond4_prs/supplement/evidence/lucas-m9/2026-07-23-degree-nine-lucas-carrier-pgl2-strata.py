@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the compact exact certificate for C531.
+"""Generate the compact exact certificate for invariant-block.
 
 The computation uses only integer arithmetic, polynomial arithmetic over F_2,
 and deterministic finite-field enumeration.  It certifies the modular
@@ -18,7 +18,7 @@ from pathlib import Path
 import tempfile
 
 
-STEM = "2026-07-23-c531-degree-nine-lucas-carrier-pgl2-strata"
+STEM = "2026-07-23-degree-nine-lucas-carrier-pgl2-strata"
 INF = -1
 
 
@@ -451,7 +451,7 @@ def orbit_control(m: int) -> dict[str, object]:
 
 def certificate() -> dict[str, object]:
     return {
-        "schema": "c531-degree-nine-lucas-carrier-strata-v1",
+        "schema": "lucas_action-degree-nine-lucas-carrier-strata-v1",
         "field_characteristic": 2,
         "representation": representation_certificate(),
         "geometric_strata": [
@@ -460,7 +460,7 @@ def certificate() -> dict[str, object]:
                 "dimension": 1,
                 "stabilizer": "Borel",
                 "closure": "closed",
-                "arithmetic": "shallow for every q=2^m, m>=3 (C530)",
+                "arithmetic": "shallow for every q=2^m, m>=3(additive-frame theorem)",
             },
             {
                 "name": "rank-one off graph",
@@ -527,7 +527,7 @@ def main() -> None:
     data = certificate()
     payload = canonical_bytes(data)
     if args.check:
-        with tempfile.TemporaryDirectory(prefix="c531-check-") as directory:
+        with tempfile.TemporaryDirectory(prefix="lucas_action-check-") as directory:
             candidate = Path(directory) / f"{STEM}.json"
             candidate.write_bytes(payload)
             expected = args.check.read_bytes()

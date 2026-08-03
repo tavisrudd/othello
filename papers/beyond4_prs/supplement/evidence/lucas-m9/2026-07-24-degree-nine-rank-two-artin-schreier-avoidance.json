@@ -180,10 +180,10 @@
     ]
   },
   "frozen_input": {
-    "path": "2026-07-23-c531-degree-nine-lucas-carrier-pgl2-strata.py",
+    "path": "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py",
     "sha256": "2b70e26d1aa49f350c25ba8eaec600f55bd5c62acd82aa092dc5bdad5e8caab6"
   },
-  "schema": "c578-rank-two-avoidance-v1",
+  "schema": "rank_two-rank-two-avoidance-v1",
   "structural_bound": {
     "deleted_curve_points_upper_bound": 48,
     "deleted_x_values_upper_bound": 23,

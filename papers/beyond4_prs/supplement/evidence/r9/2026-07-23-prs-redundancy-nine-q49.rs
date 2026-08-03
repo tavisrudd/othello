@@ -1,4 +1,4 @@
-// Exact q=49 carrier closure for C516.  Standard library only.
+// Exact q=49 carrier closure for R9.  Standard library only.
 
 #[derive(Clone)]
 struct Field {
@@ -196,7 +196,7 @@ fn main() {
             break;
         }
     }
-    println!("schema=c516-q49-carrier-v1");
+    println!("schema=r9-q49-carrier-v1");
     println!("field=F49_tau2_eq_3");
     println!("projective_quartics={initial}");
     println!("quintics_tested={tested}");
