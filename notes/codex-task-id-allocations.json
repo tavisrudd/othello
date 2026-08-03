@@ -2537,8 +2537,17 @@
       "last": 847,
       "purpose": "Paper II theorem-only cold and adversarial read, including exact-group figure comprehension, before formal extraction",
       "sequence": 282
+    },
+    {
+      "count": 1,
+      "first": 848,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 848,
+      "purpose": "repair Paper II atlas import, stale equation references, and companion citation boundary",
+      "sequence": 283
     }
   ],
-  "next_id": 848,
+  "next_id": 849,
   "schema": "codex-task-id-allocations-v1"
 }
