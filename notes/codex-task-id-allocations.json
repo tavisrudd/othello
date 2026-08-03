@@ -2483,8 +2483,26 @@
       "last": 841,
       "purpose": "Golden quantum-statistics formal coverage correction and validated standalone companion promotion",
       "sequence": 276
+    },
+    {
+      "count": 1,
+      "first": 842,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 842,
+      "purpose": "Phase A-B two-paper split: freeze combined identities, create theorem-ownership ledger, establish self-contained Paper II root, and stop after independent build and evidence replay",
+      "sequence": 277
+    },
+    {
+      "count": 1,
+      "first": 843,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 843,
+      "purpose": "Close arcs Lean trust and finitegeom export gaps",
+      "sequence": 278
     }
   ],
-  "next_id": 842,
+  "next_id": 844,
   "schema": "codex-task-id-allocations-v1"
 }
