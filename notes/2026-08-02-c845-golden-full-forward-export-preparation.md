@@ -95,6 +95,15 @@ This was a local paper-only forward commit. It did not add a formal-companion
 declaration, mutate either Lean repository, create or change a remote, tag, or
 push anything.
 
+A subsequent user-requested README pass added the relative link
+`[Read the paper (PDF).](golden_quantum_statistics.pdf)` in authoritative
+source commit `93e5dd45c4b86e6fddd437fb276bb1e56d2dc15e`. The exporter plan,
+zero-finding audit, materialization, and manifest verification pass. The
+standalone history advances from `8aee16d9` to
+`2af6d3fd7f8db960c8e7aa6e65d3cc3269db5b48`, changing only `README.md`,
+`PROVENANCE.md`, and `export-manifest.json`. The live tree is clean and no push
+or tag was performed.
+
 ## Lean source gate and exact blocker
 
 The clean disposable Othello worktree at `ee60800c` built
@@ -155,7 +164,8 @@ prose, axiom, and deterministic-export gates before handing it to C840.
 - **Settled:** the tracked PDF is immutable source evidence, never disposable
   rebuild output.
 - **Settled:** the existing standalone paper history now has the exact
-  exporter-produced sixteen-page tree as local forward commit `8aee16d9`;
+  exporter-produced sixteen-page tree and PDF-linked README at local forward
+  commit `2af6d3fd`;
   there was no manual copy, history replacement, tag, or push.
 - **Settled:** the four Lean declarations are mechanism-level partial coverage,
   not full theorem formalization.

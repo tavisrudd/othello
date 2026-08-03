@@ -89,6 +89,7 @@ finitegeom from immutable source and base commits. Do not use the superseded
 suffixed clone to bypass that gate.
 
 The paper-only mirror advance is complete at local standalone commit
-`8aee16d93d738e3e9add479b74d248bdf3c76a9f`, produced from immutable Othello
-commit `3c5c72dd8c259cca10cf1a024caf4766277a1e85`. It contains no formal-companion
+`2af6d3fd7f8db960c8e7aa6e65d3cc3269db5b48`, including the requested relative
+PDF link, and was produced from immutable Othello commit
+`93e5dd45c4b86e6fddd437fb276bb1e56d2dc15e`. It contains no formal-companion
 declaration and was not pushed or tagged.
