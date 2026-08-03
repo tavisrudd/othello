@@ -261,13 +261,28 @@ rather than import work, and they dominate the remaining cost.
 ## Progress
 
 The elementary arithmetic group is partly closed. The module
-`RelativeConicArcs/ClebschFamilyRegimes.lean` in the base library now proves the
+`RelativeConicArcs/GoldenOrderConductorTwo.lean` in the base library now closes the
+conductor-at-two remark in three independent pieces. The first is the modulo-two collapse of
+the sign pattern: for any integer matrix with vanishing diagonal and off-diagonal entries
+`±1`, the reduction of `B - 1` is the all-ones matrix, every triangle product of three
+distinct indices reduces to one, and on an index set of even positive cardinality that
+reduced matrix squares to zero and has rank one. Nothing there uses `B² = 5` or any ambient
+geometry. The second is the ring degeneration behind the collapse: over the field with two
+elements `X² - 5` equals `(X - 1)²`, together with the induced identification of the root
+algebras, so the reduction is the local algebra rather than a quadratic field extension or a
+product of fields. The third is the conductor itself on additive coordinates in the basis
+`(1, φ)`: the pairs representing `ℤ[√5]` are exactly those with even second coordinate,
+doubling always lands in that sublattice, and `φ` does not, which together say
+`ℤ[√5] = ℤ + 2·ℤ[φ]`. All ten terminals depend only on the standard logical axioms, with no
+`sorry`, native execution, or project axiom.
+
+The module `RelativeConicArcs/ClebschFamilyRegimes.lean` in the base library proves the
 factorization of the Clebsch uncovered-cardinality formula, the characterization of the
 orders at which the uncovered set is empty, the off-conic excess formula, the reduction of
 exact conic filling to orders four and eleven, the order-nineteen values, and the
 deep-hole counting layer with its specialization to the displayed code. All six terminals
 depend only on the standard logical axioms, with no `sorry`, native execution, or project
-axiom. The module is not yet imported by the aggregate gate; gate rewiring and the
+axiom. Neither module is yet imported by the aggregate gate; gate rewiring and the
 manifest and hash refresh it forces are deliberately batched until more of the
 formalization has landed, so that the heavy aggregate replay runs once rather than after
 each module.

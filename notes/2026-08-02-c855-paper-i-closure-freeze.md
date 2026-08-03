@@ -74,6 +74,41 @@ include and fully audit those ten modules to the same scholarly standard, or the
 crossing imports must be removed by relocating the shared content into the Paper I
 closure under its own semantic names.
 
+## The crossing imports are shared, not Paper I-local
+
+Severing the three crossing imports is not a change Paper I can make on its own. Recomputing
+the same closure from the other papers' gate roots in the base package shows that the
+dependency is carried by the shared modules `RelativeConicArcs.Certificate` and
+`RelativeConicArcs.Conic`, which several papers sit on:
+
+| gate | reaches `ProjectiveCap.FrameGridBridge` | foreign modules | project-owned closure |
+|---|---|---|---|
+| `Gates.ArcsCompleteOutsideConicHuman`     | yes | 10 | 77 |
+| `Gates.ArcsCompleteOutsideConicAdditions` | yes | 8  | 33 |
+| `Gates.AMELUAggregate`                    | no  | 3  | 67 |
+| `Gates.PRSBeyondRedundancyFour`           | no  | 0  | 16 |
+| `Gates.ClebschRigidityHuman`              | no  | 0  | 10 |
+
+The arcs paper therefore carries exactly the same ten foreign modules Paper I does, and
+AME-LU carries three. Repointing `Certificate` or `Conic` is a change to `relconic`-owned and
+`ame-lu`-owned verification surfaces and obliges revalidating every affected gate in one
+quiescent window.
+
+The proof work itself is small. Inside the ten-module foreign closure, `FrameGridBridge` is
+reached for a single lemma: three coordinate-lifted points are collinear exactly when their
+determinant vanishes, used ten times across four `RelativeConicArcs` modules. That lemma needs
+only the collinear-versus-dependent dictionary and two independence helpers, all of which
+could be reproved against `ProjectiveCap.Projective` and Mathlib, so severing it would remove
+`FrameGridBridge`, `PlaneTransitivity`, `Grid`, `GridSeed`, and `GridGame` — five of the ten —
+from every dependent closure at once. The remaining coupling through
+`ProjectiveCap.Sym2ConicBridge` and `ProjectiveCap.Projective` is the ambient projective plane,
+conic form, and Veronese embedding on which the whole `RelativeConicArcs` conic layer is built,
+and is a relocation rather than a severance.
+
+Consequently the decoupling is one coordinated shared-library relocation serving Paper I, the
+arcs paper, and AME-LU together, with a separate owner and build window, rather than a step
+inside the Paper I remediation.
+
 ## Recomputed proof-mode inventory
 
 The paper-side trust surfaces confirm how far the artifact is from theorem-complete.
