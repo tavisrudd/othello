@@ -31,8 +31,8 @@ warning.  The source and PDF hashes at this accepted checkpoint are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 54,082 | `6d66d473b873e1a94f448368d3a2bcf33c4039b88e18e2029cbd139785d24810` |
-| `golden_quantum_statistics.pdf` | 145,623 | `70d726a9111c5a0fa69767e9b7b9c9c614b78eb16740575793ad8b6a03959718` |
+| `golden_quantum_statistics.tex` | 54,313 | `1c1cae140fd42ce6a1cdd09c243965f66e914df4164cc9983bee8f31945fd07a` |
+| `golden_quantum_statistics.pdf` | 145,927 | `316d3d17bc7f15f564917b6348c3b8fa24af1bcf3fcc60b69e74d712a6604bbc` |
 
 Rebuild and verify from this directory with:
 

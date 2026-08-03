@@ -507,7 +507,9 @@ lockfile's date cutoff and thereby stale-dated their own evidence manifest;
 the six paper-owned replay commands now run frozen.  The subsequent
 submission-package pass synchronizes the public README boundary, the
 sixteen-page build record and hashes, and the Zenodo title and description
-with the integrated manuscript.
+with the integrated manuscript.  The archive-facing PDF pass adds the missing
+embedded title, author, subject, and keyword metadata without changing visible
+content.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 
