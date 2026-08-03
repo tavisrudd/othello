@@ -60,6 +60,55 @@ C792/C799 and merged through C800.  No C832 router task is required: the live
 handoff resolves the selector directly.  Paper I and Paper IV continue
 concurrently under their own explicit selectors and task cards.
 
+### Active C815 repair handoff
+
+C815 is reopened under
+`notes/2026-08-02-paper-iii-lean-audit-checklist.md`.  The Paper III replay
+programs and their exact transitive-closure inventories are hardened and
+committed: they no longer invoke Lean or Lake, require an explicit
+`--source-only` or `--axiom-log` mode, pin their own bytes, and validate
+main-versus-supplemental declaration ownership.
+
+The uncommitted proof authority is
+`lean/RelativeConicArcs/FourShadowRecognition.lean`.  Its mixed-difference
+argument now uses one monomial theorem, a reducible twenty-term coefficient
+table, and a small label bridge; the heartbeat and recursion overrides are
+removed.  Its three native orientation checks are replaced by one exhaustive
+classifier with symbolic projections.  The module and focused gate now state
+the root-normalized scope, the absent switching/permutation uniqueness claim,
+and the external rank-fourteen Jacobian boundary.  These edits are not yet
+validated and must not be overwritten or committed as green.
+
+The exact target waiting behind the shared Lean owner lock is
+`/home/tavis/.cache/othello-lean-build/run-20260803-045829-a52e3917`.
+It requires pinned-cache restoration before building
+`RelativeConicArcs.FourShadowRecognition`.  Inspect its atomic status no more
+than once per five minutes.  If it fails after entering Lean, repair only the
+first saved error and rerun serially.  If it restores the cache, resume
+single-file iteration before widening to either gate.
+
+Opus may take the following non-overlapping grunt work without editing the
+C815 proof or focused gate:
+
+- audit the complete files named by both committed Paper III closure
+  inventories for missing public docstrings, status prose, and trust-boundary
+  mismatches, recording findings in the audit checklist;
+- check that the C799 task card, report, handoff row, and formal map state only
+  normalized seven-point injectivity, conditional overlap consistency, the
+  query-polynomial identity, and the external Ramsey/normalization/cardinality
+  inputs;
+- review the paper-local replay programs and manifests for deterministic
+  source, verifier, closure, declaration, and axiom-report equality;
+- prepare hash-table and checklist updates after the Lean source is frozen,
+  but do not fill the four-shadow axiom hash or claim a pass before a guarded
+  focused-gate log exists.
+
+Current uncommitted C799/referee-prose edits are in
+`AlignedTwoGraph.lean`, `PetersenHarmonicKernel.lean`,
+`Gates/ClebschPassages.lean`, and the C799 task card.  Current untracked C815
+evidence files are the focused gate, dated report, formal manifest, and
+verifier.  Coordinate before touching any of these shared paths.
+
 C756 remains the independent high-upside research task for the all-\(k\)
 conic-filling theorem. Paper IV's general passant-code definitions and
 weight-eight method are reusable inputs to C756, but C761 does not own or
