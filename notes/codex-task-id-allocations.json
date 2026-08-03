@@ -2510,8 +2510,17 @@
       "last": 844,
       "purpose": "Phase C two-paper split: trim and sharpen Paper I around exact stabilizer-AME rigidity, cleaning-based quantitative rounding, robust atlas compatibility, and the affine-character obstruction",
       "sequence": 279
+    },
+    {
+      "count": 1,
+      "first": 845,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 845,
+      "purpose": "prepare authoritative paper and Lean trust roots for exporter-only full-forward materialization",
+      "sequence": 280
     }
   ],
-  "next_id": 845,
+  "next_id": 846,
   "schema": "codex-task-id-allocations-v1"
 }
