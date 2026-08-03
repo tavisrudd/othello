@@ -114,11 +114,19 @@ Two standards violations remain there, outside this task's safe edit scope:
    declarations without docstrings, 38 of them in
    `ProjectiveCap.FrameGridBridge` and 37 in `ProjectiveCap.PlaneTransitivity`.
 
-These are recorded, not waived. Until the owning lane clears them, the Paper II
-formal artifact cannot be called referee-ready on the transitive-closure
-standard, even though every project-owned `RelativeConicArcs` file now passes.
-Clearing them needs an allocated task pegged to the projective-cap lane; C856
-does not edit foreign modules.
+These are recorded, not waived. Until they are cleared, the Paper II formal
+artifact cannot be called referee-ready on the transitive-closure standard,
+even though every project-owned `RelativeConicArcs` file now passes.
+
+A follow-on measurement showed this is not a Paper II problem: about half the
+gate modules in the workspace carry `ProjectiveCap`/`CapGame` in their closure,
+including the released Paper I and arcs papers, Paper IV in active release
+preparation, AME/LU, and `beyond4_prs`. Paper III, the golden-operator paper,
+and the transversal-groups paper are clean. The chosen response is therefore to
+remove the dependency rather than audit the cap modules: C860 covers moving the
+thirty-seven used projective-plane declarations into a shared referee-standard
+base module under `RelativeConicArcs` and repointing the cap game at it. Plan:
+`notes/clebsch-tasks/c860-projective-base-dependency-inversion.md`.
 
 ## 5. Negative checks re-run after repair
 
