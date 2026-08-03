@@ -81,6 +81,17 @@ Every landed declaration elaborates through the guarded single-file entry point,
 and the import-only gate `RelativeConicArcs.Gates.GoldenQuantumStatistics`
 builds through the guarded queue with its trace-only aggregate gate passing in
 the shared tree.  The trust registry now advertises the eight matrix-level
-terminals alongside the four legacy scalar identities.  The generated fact for
-the gate is regenerating from a clean disposable worktree; the shared tree
-carries foreign uncommitted Lean edits, so extraction correctly refuses there.
+terminals alongside the four legacy scalar identities.
+
+The gate also builds in a clean disposable worktree at the exact source commit,
+and the generated fact was regenerated there because the shared tree carries
+foreign uncommitted Lean edits and extraction correctly refuses in that state.
+The fact records a three-module closure, no project axiom, and no opaque
+declaration.  The eight matrix-level terminals observe exactly
+`Classical.choice`, `Quot.sound`, and `propext`; the four legacy scalar
+identities observe exactly `propext`.  The area-wide audit reports no finding
+against this unit; its remaining errors are the unrelated relconic baseline.
+
+The guarded companion exporter then produces a verified, deterministic
+eleven-file candidate carrying all twelve terminals, taking the canonical
+library state from 273 to 276 modules, without mutating the canonical base.
