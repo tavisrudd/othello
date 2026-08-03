@@ -2519,8 +2519,17 @@
       "last": 845,
       "purpose": "prepare authoritative paper and Lean trust roots for exporter-only full-forward materialization",
       "sequence": 280
+    },
+    {
+      "count": 1,
+      "first": 846,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 846,
+      "purpose": "PRS Version 2 spine compression and proof-appendix restructuring",
+      "sequence": 281
     }
   ],
-  "next_id": 846,
+  "next_id": 847,
   "schema": "codex-task-id-allocations-v1"
 }
