@@ -351,6 +351,13 @@ Clifford/symplectic sequence, stabilizer-overlap quantization, and the
 budget-free local stability theorem.  There is no computation, certificate,
 or Lean coverage.
 
+C835 subsequently identified Pastawski--Yoshida, Lemma 5, as a direct
+precedent for the exact three-cleanable-region Clifford conclusion, with
+Bravyi--König as the nested-commutator lineage.  The leakage-aware
+quantitative estimate, the one-site Fourier lemma, and the global
+composition remain the manuscript-local claims; see
+notes/2026-08-02-c835-cleaning-rounding-trust-audit.md.
+
 Adopt the cleaning theorem after the aggregate theorem and before the
 single-marginal theorem.  Retain both older routes as explanatory bounds,
 but change every summary sentence that calls their exponential scale the
@@ -392,4 +399,3 @@ already been solved.
   the last Fourier-to-Clifford step needs a specified logical Weyl system.
   Literature and scope are unaudited.  Owner: a separately allocated
   generalization task if desired.
-

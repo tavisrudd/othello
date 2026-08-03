@@ -1758,7 +1758,18 @@ all.  Choose one AME party as a logical input.  The other \(2m-1\) parties
 form an \([[2m-1,1,m]]_q\) stabilizer code, and the product of their local
 factors approximately implements the transpose-inverse of the factor on the
 chosen party.  Three correctable regions then test that logical action by a
-nested commutator.
+nested commutator.  The exact mechanism is standard: the stabilizer cleaning
+lemma is due to Bravyi and Terhal
+\cite[Lemma~1]{BravyiTerhal2009}, nested-commutator localization underlies the
+Bravyi--K\"onig hierarchy theorem \cite{BravyiKonig2013}, and
+Pastawski--Yoshida prove directly that a transversal logical unitary on three
+cleanable regions is Clifford \cite[Lemma~5]{PastawskiYoshida2015}.
+Disjointness gives a complementary exact-code hierarchy bound
+\cite[Theorem~5]{JochymOConnorKubicaYoder2018}.  The point below is therefore
+not a new qualitative transversal-gate obstruction.  It is the robust step:
+an implementation with leakage error \(\varepsilon\) forces every nested
+logical Weyl commutator within \(8\varepsilon\) of a scalar, after which a
+Fourier argument gives an explicit Clifford distance.
 
 For an encoding isometry \(V:\mathbb C^q\to\mathcal H\), write
 \[
@@ -1770,7 +1781,8 @@ It satisfies
 
 \begin{lemma}[Quantitative cleaning commutator]
 \label{lem:quantitative-cleaning-commutator}
-Let \(V\) encode an \([[2m-1,1,m]]_q\) stabilizer code, let \(T\) be
+Let \(V\) encode one logical qudit in a stabilizer code whose physical
+parties have a partition into three correctable regions.  Let \(T\) be
 transversal, and suppose \(E(T,L)\leq\varepsilon\).  For all logical Weyl
 operators \(P,Q\),
 \[
@@ -1782,9 +1794,8 @@ where \([A,B]=ABA^\dagger B^\dagger\).
 \end{lemma}
 
 \begin{proof}
-Partition the physical parties into regions \(R_1,R_2,R_3\) of sizes
-\(m-1,m-1,1\).  Every region is correctable.  The stabilizer cleaning
-lemma supplies a representative \(\widetilde P\) of \(P\) outside
+Let \(R_1,R_2,R_3\) be the assumed correctable partition.  The stabilizer
+cleaning lemma supplies a representative \(\widetilde P\) of \(P\) outside
 \(R_1\) and a representative \(\widetilde Q\) of \(Q\) outside \(R_2\).
 For reference, cleaning here is the elementary symplectic statement that
 the restriction of a normalizer label to a correctable region lies in the
@@ -1858,6 +1869,11 @@ commutators are within \(\eta\) of scalars.  The Fourier observation puts
 it within \(\eta\) of a Weyl; multiplying that Weyl into \(K_0\) gives
 the required Clifford.
 \end{proof}
+
+At \(\varepsilon=0\), the preceding two lemmas recover the
+three-cleanable-region Clifford conclusion of
+\cite[Lemma~5]{PastawskiYoshida2015}.  Their quantitative combination, and
+the constants in (5.14), are what will be used here.
 
 \begin{theorem}[Cleaning-based global rounding]
 \label{thm:cleaning-global-rounding}

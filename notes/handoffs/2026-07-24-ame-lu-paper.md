@@ -10,13 +10,16 @@ Discovery companion:
 
 ## Current status
 
-**C835--C838 are the active trust-first strengthening sequence (2026-08-02).**
-C835 audits C833's cleaning mechanism and quantitative novelty boundary against
-primary exact-code precedents.  Only after that gate, C836 replaces the
-fixed-`q` shorthand by admissible joint `(n,q)` regimes, C837 tests whether a
-collective coercivity estimate can remove the `sqrt(n)` entry loss, and C838
-tests exact transport-atlas compatibility including the affine character data.
-The sequence is structural; certificates are discovery-only.
+**C835 closed with the exact mechanism conceded; C836 is active
+(2026-08-02).**  Pastawski--Yoshida Lemma 5 already gives the exact
+three-cleanable-region Clifford obstruction.  The paper now claims only the
+leakage-aware `8 eps` estimate, explicit Weyl-Fourier rounding, and AME global
+composition as local content; the quantitative lemma is stated for every
+one-logical-qudit stabilizer code with a three-correctable-region partition.
+C836 now replaces the fixed-`q` shorthand by admissible joint `(n,q)` regimes,
+after which C837 tests collective coercivity and C838 tests exact atlas
+compatibility including affine character data.  See
+`2026-08-02-c835-cleaning-rounding-trust-audit.md`.
 
 **C830 closed positively with a dimension boundary (2026-08-02): global
 minimum-support rounding.**  Orthogonality of all minimum-support sectors and
