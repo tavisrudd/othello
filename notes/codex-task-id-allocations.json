@@ -2555,8 +2555,17 @@
       "last": 849,
       "purpose": "PRS Version 2 abstract and strength-positioning repair",
       "sequence": 284
+    },
+    {
+      "count": 1,
+      "first": 850,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 850,
+      "purpose": "export and clean-room validate the new mds-css-transversal-groups standalone companion",
+      "sequence": 285
     }
   ],
-  "next_id": 850,
+  "next_id": 851,
   "schema": "codex-task-id-allocations-v1"
 }
