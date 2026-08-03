@@ -12,6 +12,12 @@ release closure). No source, generated leaf, manifest, or manuscript was edited.
 |---|---|---|
 | manuscript authority          | `~/src/othello`                                  | `8c5437ef`, no dirty path under `papers/clebsch-rigidity` |
 | Lean base package (authority) | `~/src/lean/finitegeom`                          | `HEAD = 0b3f37d264f54b52e6c703a75e2704a3f9cbe4b4`, clean |
+
+> **Correction (2026-08-03, confirmed by the author):** the row above mislabels
+> `~/src/lean/finitegeom` as the authority. The Lean authority is the monorepo
+> tree `~/src/othello/lean`; `finitegeom` and its siblings are tooled downstream
+> exports. The C855 modules committed directly in `finitegeom` on 2026-08-02/03
+> are downstream-first and are being forward-ported to the authority tree.
 | Lean base package (export)    | `~/src/lean/finitegeom-paper-i-base`             | `HEAD = 81227352974bf7d28f84cb6866936f842fb4de02`, clean |
 | q11 certificate package       | `~/src/lean/finitegeom-clebsch-q11-certificates` | `HEAD = 09d8e174880e7370966da788da3c5d303df8af4f`, clean |
 | standalone paper mirror       | `~/src/math-papers/clebsch-rigidity`             | not yet touched; downstream of the authority |
