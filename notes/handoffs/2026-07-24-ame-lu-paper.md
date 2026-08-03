@@ -23,6 +23,15 @@ scope boundary, trust maps, and framing are adopted in the manuscript.  No
 computation or certificate is involved.  See
 `2026-08-02-c830-global-ame-rounding.md`.
 
+**C833 queued (2026-08-02): q>4 rounding beyond support
+orthogonality.**  Test whether stabilizer multiplication, minimum-support
+generation, or higher-weight coupling forces relations among C830's support
+blocks and improves the global frame radius above local dimension four; the
+falsifier is a product-unitary family saturating the orthogonal energy ledger.
+Keep AME existence and both metrics explicit, and use certificates only for
+discovery unless a computation becomes load-bearing.  See the live queue and
+the future report `2026-08-02-c833-qgt4-support-sector-coercivity.md`.
+
 **C828 closed (2026-08-02): the four bounded C805 corrections are complete.**
 The false arbitrary-additive minimal-codeword claim and the unsourced
 Gross--Van den Nest specialization sentence are removed; the recognition proof
