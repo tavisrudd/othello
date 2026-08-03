@@ -34,6 +34,12 @@
    - the displayed slack identity is an algebraic refinement of the same construction: its three
      terms are respectively overlap among local deletion sets, off-hole local slack, and hole
      local slack. This refinement is proved in the manuscript but is not a separate Lean theorem.
+   - when the full matching-design block count is integral, maximum-index centres form a packing
+     of maximum-matching cliques. A packing one block short always completes because its leave has
+     $\binom m2$ edges, all positive degrees divisible by $m-1$, and is therefore one $K_m$.
+     Thus abstract design nonexistence forces
+     $2m\le m\Delta_H(A)$, equivalently $\Delta_H(A)\ge2$. This implication is kernel-checked by
+     `RelativeConicArcs.two_mul_half_le_scaledDefect_of_no_disjointness_decomposition`.
    The incidence decomposition, simplicity, zero-defect maximum index, both exact double-count
    identities, the bad-edge inequality, and the deletion statement are kernel-checked
    respectively by
@@ -47,8 +53,9 @@
    The six-point realization is proved by a projective frame normalization: the first diagonal
    determinant is `-2`, and the second quadrangle has diagonal line
    `t(1+t)x+(1+t)y+tz=0`, whose passage through the remaining frame point gives
-   `t^2+t+1=0`. The seven-point nonexistence is not claimed as new: it is
-   Alspach--Heinrich, Theorem 3.1.
+   `t^2+t+1=0`. The seven-point design nonexistence is not claimed as new: it is
+   Alspach--Heinrich, Theorem 3.1. Combining it with the formal packing theorem gives the
+   quantitative conclusion $\Delta_H(A)\ge2$.
 4. For an arbitrary prescribed hole set of size \(h\), completeness gives the corrected capacity
    inequality with required-locus size \(q^2+q+1-k-h\). The conic specialization uses only
    \(|C|=q+1\). In particular, every prescribed hole set \(H\) of cardinality \(q+1\) gives
@@ -177,12 +184,14 @@
 The defect identity, equality criterion, matching rigidity, deletion stability,
 and reconstruction theorem have ordinary proofs in the manuscript and
 independent Lean formalizations.  The averaging and asymptotic arguments are
-ordinary paper proofs.  The two essential finite arguments have different trust
-boundaries.  The q=16 exclusion is a Lean-kernel-checked exhaustive certificate
-theorem; its separate Python pattern certificate explains the generic leaves
-geometrically but is not a premise of the Lean theorem.  The ten-point
-realization classification imports Mathon's published abstract classification
-and trusts exact Singular executions; it is not consumed by Lean.
+ordinary paper proofs.  The finite arguments have different trust boundaries.
+The q=16 exclusion is a Lean-kernel-checked exhaustive certificate theorem; its
+separate Python pattern certificate explains the generic leaves geometrically
+but is not a premise of the Lean theorem.  The exact values at q=13,17,19 use
+trusted exhaustive C++ classifications for their lower bounds and
+kernel-checked Lean witnesses for their upper bounds.  The ten-point realization
+classification imports Mathon's published abstract classification and trusts
+exact Singular executions; it is not consumed by Lean.
 
 The manuscript now reflects that division of labor explicitly.  The main body
 ends after the defect mechanism, equality consequences, and conic lower bound.
@@ -192,7 +201,8 @@ Generators, raw certificates, hashes, and replay scripts remain in the
 electronic companion, so implementation detail does not interrupt the main proof.
 
 The supplementary verifier checks explicit upper-bound witnesses for
-\(q=8,9,11,16\). The C187 small-\(k\) checker independently verifies the
+\(q=8,9,11,16\), and the dedicated prime-field gate checks witnesses for
+\(q=13,17,19\). The C187 small-\(k\) checker independently verifies the
 four-frame conic-filling identity at \(q=5\), and the C188 Lean leaf transports
 that frame to the standard conic and checks the relative certificate. These
 checks enumerate the relevant projective plane and verify the conic, arc
@@ -260,6 +270,19 @@ every canonical leaf and, in
 `arbitrary_eight_arc_projectiveQuadraticAvoidance`, the complete arbitrary-eight-arc statement.
 That theorem includes coefficient pullback, preservation of nonzeroness, projective transport of
 zero sets, and the identity `U(gA)=gU(A)`. The full conic corollary is also formalized.
+
+The exact values at orders 13, 17, and 19 have a separate finite boundary.
+Projective-frame canonicalization enumerates all 80 seven-arc classes over
+`GF(13)` and all 5,441 eight-arc classes over `GF(17)`. At order 19, all
+20,361 canonical eight-arc classes and every one of their 1,053,996 legal
+nine-arc extensions are tested; deleting one point from an arbitrary nine-arc
+proves exhaustive coverage without deduplicating the extensions. Every tested ordinary-uncovered
+quadratic evaluation system has rank six. An independent fixed-frame
+enumeration checks the order-13 lower bound; the order-17 class reduction and
+order-19 extension reduction have no second implementation. Lean checks the
+three attaining witnesses and the inequalities `rhoC_ZMod13_le_eight`,
+`rhoC_ZMod17_le_nine`, and `rhoC_ZMod19_le_ten`; it does not represent the
+exhaustive lower classifications as theorems.
 
 The manuscript now isolates the underlying linear-algebra argument as the
 general uncovered-evaluation obstruction: injective evaluation on the
@@ -335,20 +358,22 @@ the source and report hashes are recorded in `lean/RelativeConicArcs/TRUST.md`.
 
 ## Lean formalization
 
-The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain and the five finite
+The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain and the finite
 certificates. In particular, it proves the arbitrary-hole capacity theorem, the complete-affine
 line-hole equivalence, ideal-line incidence identity, corrected affine bound and equality criterion, the generic
 projective-averaging transfer, the explicit additive lower bound, and the universal
 even-characteristic incidence loss. It also proves exact uncovered-locus reconstruction and its
 equivariant stabilizer corollary, concurrence decomposition, zero-defect maximum-matching
 rigidity, exact total and per-secant centre counts, and edge/vertex stability of the
-bad-concurrence graph. Its generic Boolean checker verifies conic disjointness, the arc
+bad-concurrence graph. It also formalizes the two-unit defect implication from matching-design
+nonexistence and checks the three prime-field upper witnesses. Its generic Boolean checker verifies conic disjointness, the arc
 condition, and coverage on the (q^2+q+1) canonical projective representatives; `check_sound`
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.
 
-The manuscript-facing modules are imported and audited by
-`RelativeConicArcs.Gates.ArcsCompleteOutsideConic`; the broader
+The stable manuscript-facing modules are imported and audited by
+`RelativeConicArcs.Gates.ArcsCompleteOutsideConic`; the matching-packing gap
+and prime-field upper witnesses retain their dedicated gates, and the broader
 `RelativeConicArcs.Results` aggregate remains the exact-small-results registry.
 No proof uses `sorry`, `admit`, a custom axiom, or
 `native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
@@ -368,8 +393,8 @@ rejected by Lean and the restored sources rebuilt through the final result regis
 - No claim that a lower bound on the conic-incidence term alone settles the
 exact \(q=16\) value; the paper proves that this route is too weak and uses
   the independent uncovered-quadratic-rank obstruction instead.
-- No exact values for orders whose witnesses were not independently included
-  and checked by the supplementary verifier or the dedicated q=5 checker.
+- No exact values beyond the orders whose attaining witnesses and lower-bound
+  arguments are explicitly identified in the manuscript.
 - No unconditional novelty certification for the parameter itself.
 - No claim that the 2633-class ordinary eight-arc enumeration is new.
 - No claim that the general evaluation lemma, or the use of quadrics and

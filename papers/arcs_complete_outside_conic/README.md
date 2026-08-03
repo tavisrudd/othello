@@ -14,8 +14,11 @@ For a nonsingular conic \(\mathcal C\subset PG(2,q)\), the paper studies arcs
 - complete-affine and arbitrary-hole specializations;
 - a lower bound for the minimum relative-complete arc size;
 - evaluation obstructions for exceptional loci;
-- verified values at \(q=5,8,9,11,16\), including
-  \(\rho_{\mathcal C}(16)=9\); and
+- a two-unit defect gap whenever the relevant maximum-matching design does
+  not exist;
+- verified values at \(q=5,8,9,11,13,16,17,19\), including
+  \(\rho_{\mathcal C}(13)=8\), \(\rho_{\mathcal C}(16)=9\),
+  \(\rho_{\mathcal C}(17)=9\), and \(\rho_{\mathcal C}(19)=10\); and
 - a classification certificate excluding every eight-arc at \(q=16\).
 
 The formal development is distributed separately in
@@ -40,6 +43,11 @@ and classical inputs. The formal sources are not bundled here.
   generator.
 - `check_q16_uncovered_patterns.py`, its JSON certificate, and checksum —
   line–triangle witnesses for the \(2630+3\) terminal partition.
+- `2026-07-25-c637-secant-hull-coupling.cpp`, its four canonical JSON
+  summaries, the independent \(q=13\) frame check, and their checksum —
+  exhaustive lower classifications at \(q=13,17,19\). Lean independently
+  checks all three attaining witnesses; the lower classifications remain
+  trusted executions, as stated in the manuscript.
 
 ## Reproduction
 
@@ -66,6 +74,25 @@ python3 check_q16_uncovered_patterns.py --check \
 
 The rank-three replay requires Singular; the other commands use the Python
 standard library.
+
+Replay the small odd-order classifications with:
+
+```text
+g++ -O3 -std=c++20 -Wall -Wextra -Werror \
+  -Wno-array-bounds -Wno-stringop-overread \
+  2026-07-25-c637-secant-hull-coupling.cpp -o /var/tmp/classify-small-odd
+/var/tmp/classify-small-odd 13 7 /var/tmp/q13.json
+/var/tmp/classify-small-odd 17 8 /var/tmp/q17.json
+/var/tmp/classify-small-odd 19 8 /var/tmp/q19-k8.json
+/var/tmp/classify-small-odd 19 9 /var/tmp/q19.json --extension-witness
+diff -u 2026-07-25-c637-q13.json /var/tmp/q13.json
+diff -u 2026-07-25-c637-q17.json /var/tmp/q17.json
+diff -u 2026-07-25-c637-q19-k8.json /var/tmp/q19-k8.json
+diff -u 2026-07-25-c637-q19-k9.json /var/tmp/q19.json
+python3 2026-07-25-c637-q13-frame-check.py /var/tmp/q13-frame.json
+diff -u 2026-07-25-c637-q13-frame-check.json /var/tmp/q13-frame.json
+sha256sum -c 2026-07-25-c637.sha256
+```
 
 Regenerate the \(q=16\) search report with:
 

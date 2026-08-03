@@ -20,7 +20,7 @@ ordinary-uncovered locus: the points outside \(A\) which lie on no secant of
 there is a nonsingular quadratic form which vanishes on \(U(A)\) and nowhere
 on \(A\).
 
-C628 proves, for the three sizes relevant here, that this is equivalent to
+C628 proves, for the four sizes relevant here, that this is equivalent to
 \[
 \operatorname{rank}\nu_2(U(A))<6,\qquad
 U(A)\text{ is an arc},\qquad
@@ -47,6 +47,7 @@ The exact results are:
 |---:|---:|---:|---:|---:|
 | 13 | 7 | 80 | 80 classes | all 80 have rank 6 |
 | 17 | 8 | 5,441 | 5,441 classes | all 5,441 have rank 6 |
+| 19 | 8 | 20,361 | 20,361 classes | all 20,361 have rank 6 |
 | 19 | 9 | reached from 20,361 eight-arc classes | 1,053,996 legal extensions | all 1,053,996 have rank 6 |
 
 For \(q=19\), testing all legal extensions of all canonical eight-arc
@@ -55,7 +56,7 @@ deduplicated: deleting one point from any nine-arc produces an eight-arc,
 and projective transport identifies that parent with one of the enumerated
 representatives.
 
-Consequently no arc of the rejected size can be complete outside a
+Consequently no arc of any rejected size can be complete outside a
 nonsingular conic.  Together with the pre-existing integer lower bounds this
 gives
 \[
@@ -148,6 +149,8 @@ The exact commands producing the lower-bound outputs were
 /home/tavis/.cache/othello-c637/secant-hull-coupling \
   17 8 notes/2026-07-25-c637-q17.json
 /home/tavis/.cache/othello-c637/secant-hull-coupling \
+  19 8 notes/2026-07-25-c637-q19-k8.json
+/home/tavis/.cache/othello-c637/secant-hull-coupling \
   19 9 notes/2026-07-25-c637-q19-k9.json --extension-witness
 ```
 
@@ -155,6 +158,8 @@ The positive extension outputs, deterministic fixed-conic search, independent
 frame check, and independent witness replay are in the accompanying
 `c637-*` JSON and source files listed by the SHA-256 manifest
 `notes/2026-07-25-c637.sha256`.
+The added canonical `q=19,k=8` summary is 260 bytes, with SHA-256
+`afc7c40dc25f4287c48a77c8c80d7242ed4ad3a26d12b924268e839db8fd216d`.
 
 The trust boundary is finite-field integer arithmetic modulo the declared
 prime, exhaustive loop coverage, projective-frame canonicalization, and the
@@ -184,9 +189,11 @@ hull or an all-singular quadratic kernel.
 
 - **Settled:** the bounded C628 pilots have exact values
   \((8,9,10)\) at \(q=(13,17,19)\).
-- **Settled:** every minimum-size candidate previously left open is rejected
-  by the first C628 alternative, full quadratic rank.  No hull-incidence or
-  singular-kernel ambiguity survives in these cases.
+- **Settled:** every candidate below the displayed exact values is rejected
+  by the first C628 alternative, full quadratic rank.  At (q=19) this
+  includes all 20,361 eight-arc classes as well as all 1,053,996 tested
+  nine-arc extensions.  No hull-incidence or singular-kernel ambiguity
+  survives in these cases.
 - **Settled:** explicit witnesses attain the next size in all three fields,
   with independent direct verification.
 - **Open:** there is no field-uniform theorem explaining why all 80,

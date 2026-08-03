@@ -1,0 +1,1 @@
+{"schema":"secant-hull-coupling-v1","q":19,"k":9,"points":381,"search_mode":"frame_extension_witness","class_counts":[1,5,117,1768,20361],"extension_counts":[272,1055,17354,166219,1053996],"tested_candidates":1053996,"rank_counts":[0,0,0,0,0,0,1053996],"verdict":"no_witness"}

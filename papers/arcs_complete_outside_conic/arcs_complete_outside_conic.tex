@@ -51,7 +51,9 @@ remaining point outside \(\cC\).  We prove
 We determine the possible zero-defect orders and classify zero defect in
 characteristic two: odd \(k\) gives an oval whose nucleus lies on \(\cC\),
 while even \(k\) forces \(k=q+2\).  A kernel-checked finite classification
-proves \(\rhoC(16)=9\).
+proves \(\rhoC(16)=9\).  Separate exhaustive classifications, with
+kernel-checked attaining witnesses, give
+\(\rhoC(13)=8\), \(\rhoC(17)=9\), and \(\rhoC(19)=10\).
 
 The mechanism is a theorem for every finite projective plane and every
 prescribed hole set \(\cH\): the first two secant moments combine into an
@@ -153,7 +155,7 @@ secants, every surviving Kneser edge lies in a maximum concurrency
 clique.
 \end{corollary}
 
-\begin{theorem}[\(q+1\)-hole lower bound and \(q=16\)]
+\begin{theorem}[\(q+1\)-hole lower bound and exact small orders]
 \label{thm:main-conic}
 If
 \[
@@ -167,7 +169,11 @@ satisfies \(k\ge L_2(q)\).  In particular, every nonsingular conic satisfies
  \rhoC(q)\ge L_2(q)
  \ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-Moreover, \(\rhoC(16)=9\).
+Moreover,
+\[
+ \rhoC(13)=8,\qquad \rhoC(16)=9,\qquad
+ \rhoC(17)=9,\qquad \rhoC(19)=10.
+\]
 \end{theorem}
 
 The identity carries more information than the resulting scalar bound.
@@ -181,9 +187,13 @@ two the odd branch is exactly the oval--nucleus configuration, while the
 even branch leaves only the hyperoval scale, by a tangent-involution
 congruence on the maximum-index points of the prescribed conic.
 
-The last assertion of Theorem~\ref{thm:main-conic} has a separate finite
-input: a checked augmentation certificate enumerates the eight-arc leaves,
-and checked quadratic-evaluation records reject every leaf.
+The exact small-order assertions in Theorem~\ref{thm:main-conic} have
+separate finite inputs.  At order $16$, a checked augmentation certificate
+enumerates the eight-arc leaves, and checked quadratic-evaluation records
+reject every leaf.  Exhaustive projective classifications reject size $7$
+at order $13$, size $8$ at order $17$, and sizes $8,9$ at order $19$; the attaining
+witnesses are checked independently in Lean.  Appendix~\ref{app:verification}
+states the two trust boundaries separately.
 
 The surrounding notions differ at the defining containment.  Saturating
 sets need not be arcs, while almost-complete conic subsets select points
@@ -202,6 +212,19 @@ recent explicit complete-arc bound of
 Alabdullah--Hirschfeld~\cite{AlabdullahHirschfeld2019}.  The new step is
 the exact local remainder after splitting those equations over a
 prescribed hole and its complement.
+
+Localization of an uncovered locus on a proper subgeometry is also known
+for curve-derived arcs with larger line intersections.  Korchm\'aros,
+Nagy, and Sz\H{o}nyi~\cite[Theorem~7.5]{KorchmarosNagySzonyi2024} prove
+that, for odd $q$ and odd $r\ge5$, the points left uncovered by the
+$(q+1)$-secants of their rational BKS $(k,q+1)$-arc in
+\(\PG(2,q^r)\) are exactly the points of the proper subplane
+\(\PG(2,q)\) not belonging to the arc.  Thus localization of holes in a
+prescribed subplane is prior art.  Their theorem concerns a particular
+curve-derived $(k,q+1)$-arc; the contribution here is instead the exact
+defect identity for an arbitrary prescribed hole set, together with its
+equality and stability theory and its specialization to a prescribed conic
+for ordinary arcs.
 
 The equality structure belongs to the established theory of matching
 designs.  Alspach and Heinrich~\cite{AlspachHeinrich1990} call a family of
@@ -601,6 +624,40 @@ centre cannot have index below \(m\), since all but one of its secants
 would then meet \(D\); hence its index is \(m\).
 \end{proof}
 
+\begin{corollary}[Matching-design nonexistence gives a two-unit gap]
+\label{cor:matching-nonexistence-gap}
+Let $k\ge4$, put $m=\lfloor k/2\rfloor$, and suppose that
+\[
+ v=\frac{3\binom{k}{4}}{\binom m2}
+\]
+is an integer.  If no simple
+\(\operatorname{MATCH}(k,m,1)\) design exists, then every $k$-arc and
+every prescribed hole set disjoint from it satisfy
+\[
+ \Delta_{\cH}(A)\ge2.
+\]
+\end{corollary}
+
+\begin{proof}
+The maximum-index concurrence cliques form a packing of $b$ maximum
+matchings in $KG(k,2)$.  If $B$ is the number of Kneser edges in the
+remaining concurrence cliques, the exact concurrence decomposition gives
+\[
+ B=(v-b)\binom m2.
+\]
+Corollary~\ref{cor:bad-concurrence-stability} gives
+$B\le\binom m2\Delta_{\cH}(A)$, so $v-b\le\Delta_{\cH}(A)$.
+
+It remains to exclude $v-b=1$.  The leave of such a packing has
+\(\binom m2\) edges.  Every positive leave degree is divisible by $m-1$:
+the ambient Kneser degree and the degree removed by each $K_m$ block are
+both divisible by $m-1$.  Hence the leave has at most $m$ nonisolated
+vertices, while its minimum positive degree forces at least $m$.  It is
+therefore a $K_m$, supported on $m$ pairwise disjoint edges of $K_k$,
+and adjoining that maximum matching completes the design.  Nonexistence
+thus forces $v-b\ge2$, proving the claim.
+\end{proof}
+
 \begin{remark}[Slack in the deletion bound]
 \label{rem:deletion-slack}
 The proof records why the vertex-cover bound can be strict.  Include
@@ -966,14 +1023,16 @@ For comparison, some values are
 \begin{array}{c|rrrrrrrr}
 q&5&8&9&11&13&16&17&19\\ \hline
 L_1(q)&4&5&5&6&6&7&7&7\\
-L_2(q)&4&6&6&6&7&8&8&8
+L_2(q)&4&6&6&6&7&8&8&8\\
+\rhoC(q)&4&6&6&6&8&9&9&10
 \end{array}
 \]
-The entries at \(q=13,17,19\) are lower bounds only.  The present work
-supplies neither witnesses attaining these bounds nor nonexistence proofs,
-so the corresponding exact values remain undetermined here.
-Thus the second-moment correction alone proves, for example, that a
-$\cC$-complete arc in $\PG(2,16)$ has at least eight points.
+The last row combines the analytic lower bounds at $q=5,8,9,11$, the
+kernel-checked classification at $q=16$, and the exhaustive classifications
+at $q=13,17,19$ described in Section~\ref{sec:examples}.  Thus the
+second-moment correction alone proves, for example, that a
+$\cC$-complete arc in $\PG(2,16)$ has at least eight points, while the
+finite classifications determine the displayed exact values.
 
 The routine algebra behind the additive bound is isolated in the next lemma
 on the full interval needed to avoid any parity split.
@@ -1141,8 +1200,8 @@ contains $\F_4$, and the arc is projectively equivalent to
 Conversely, this configuration has the stated concurrence property.
 In particular, every zero-defect six-arc in a Desarguesian plane has this
 form.
-\item In any projective plane, no seven-arc has zero defect with respect to
-any prescribed hole set.
+\item In any projective plane, every seven-arc has
+\(\Delta_{\cH}(A)\ge2\) with respect to every prescribed hole set.
 \end{enumerate}
 \end{corollary}
 
@@ -1172,7 +1231,9 @@ $(1,t^2,t)$.  Direct substitution verifies all required concurrences.
 For seven points, Theorem~\ref{thm:matching-design} would produce a
 $\operatorname{MATCH}(7,3,1)$ design.  Alspach and
 Heinrich~\cite[Theorem~3.1]{AlspachHeinrich1990} proved that no such design
-exists.
+exists.  Here $v=35$, so
+Corollary~\ref{cor:matching-nonexistence-gap} gives the stated quantitative
+bound.
 \end{proof}
 
 \begin{theorem}[Rank-three ten-point classification]
@@ -1405,8 +1466,10 @@ inequality.
 \label{sec:examples}
 
 The verified values at $q=5,8,9,11$ use the lower bound $L_2(q)$ and explicit
-coordinates.  At $q=5$ the witness is the projective four-frame.  At $q=16$,
-the same ingredients give $8\le\rhoC(16)\le9$;
+coordinates.  At $q=5$ the witness is the projective four-frame.  Exhaustive
+projective classifications reject size $7$ at $q=13$, size $8$ at $q=17$,
+and sizes $8,9$ at $q=19$; checked witnesses attain sizes $8,9,10$.  At $q=16$,
+the defect bound and a checked witness give $8\le\rhoC(16)\le9$;
 a checked exhaustive augmentation covering list excludes eight.  The proof has three
 steps: the defect bound supplies the lower bound eight; a hypothetical
 $\cC$-complete eight-arc would have its ordinary-uncovered locus on a
@@ -1482,13 +1545,10 @@ For the standard conic
 \]
 in the indicated projective planes,
 \[
- \rhoC(5)=4,
- \qquad
- \rhoC(8)=6,
- \qquad
- \rhoC(9)=6,
- \qquad
- \rhoC(11)=6.
+\begin{gathered}
+ \rhoC(5)=4,\quad \rhoC(8)=6,\quad \rhoC(9)=6,\quad \rhoC(11)=6,\\
+ \rhoC(13)=8,\quad \rhoC(17)=9,\quad \rhoC(19)=10.
+\end{gathered}
 \]
 \end{proposition}
 
@@ -1507,7 +1567,15 @@ a nonsingular six-point conic.  An invertible coordinate change carries this
 conic to $XZ=Y^2$ and the frame to the four coordinates in
 Appendix~\ref{app:witnesses}; the relative certificate is checked in Lean.
 The appendix also lists $\cC$-complete arcs of size six for $q=8,9,11$.
-Their verification is described below.
+It also lists the attaining arcs at $q=13,17,19$; their relative
+certificates are kernel-checked.  For the reverse inequalities, the
+classifier enumerates all $80$ projective seven-arc classes at $q=13$,
+all $5441$ projective eight-arc classes at $q=17$, all $20{,}361$ projective
+eight-arc classes at $q=19$, and all $1{,}053{,}996$ legal nine-arc extensions
+of those classes.  In each case the ordinary-uncovered quadratic evaluation matrix
+has full rank six, excluding containment in any conic avoiding the arc.
+Appendix~\ref{app:verification} records the exhaustive-search contract and
+the external-execution boundary.
 \end{proof}
 
 The ordinary classification of eight-arcs over $\F_{16}$ records arc
@@ -1749,10 +1817,11 @@ computer algebra outside Lean.
                 >{\raggedright\arraybackslash}p{0.36\textwidth}}
 \hline
 Claim & Certificate and checker & Remaining trust\\ \hline
-Defect, bounds, transfer, exact reconstruction, matching rigidity, and
-bad-concurrence edge/vertex stability&
-\texttt{Gates.ArcsCompleteOutside\allowbreak Conic}; the named reconstruction and matching terminals in
-the trust manifest&
+Defect, bounds, transfer, exact reconstruction, matching rigidity,
+bad-concurrence stability, and the two-unit design-nonexistence gap&
+\texttt{Gates.ArcsCompleteOutside\allowbreak Conic} and
+\texttt{Gates.MatchingPacking\allowbreak Defect}; the named reconstruction
+and matching terminals in the trust manifest&
 Lean kernel, Mathlib, and
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}\\
 \(q=16\) exclusion&
@@ -1762,6 +1831,15 @@ augmentation transitions, the line--triangle pattern certificate,
 The theorem trusts the Lean kernel and Mathlib.  Exact Python arithmetic
 certifies the geometric compression independently but is not a premise of the
 Lean theorem; generator labels and deduplication are not trusted\\
+Exact values at \(q=13,17,19\)&
+the exhaustive projective classifier and canonical JSON summaries;
+\texttt{Gates.C637Witnesses} checks the three attaining witnesses and upper
+bounds&
+The upper bounds trust only the Lean kernel, Mathlib, and explicit
+finite-field reduction.  The exhaustive lower classifications trust the C++
+compiler and execution; the \(q=13\) lower bound has an independent frame
+enumeration, while the \(q=17,19\) class reductions have no second
+implementation\\
 Ten-point realization&
 \texttt{check\_match10\_\allowbreak rank\_three.py} and its JSON certificate&
 Mathon's external two-class classification; Python integer arithmetic and
@@ -1772,6 +1850,19 @@ Lean kernel and the explicit finite-field implementations; no witness-search
 execution is trusted\\ \hline
 \end{tabular}
 \end{center}
+
+For \(q=13\) and \(q=17\), the small-order classifier fixes a projective
+four-frame, augments by every legal point, and retains the lexicographically
+least image over all ordered frames.  Induction on the arc size therefore
+retains one representative of every projective class.  At \(q=19\), it tests
+every canonical eight-arc and every legal extension of each one; deleting one
+point from an arbitrary nine-arc proves that this covers every nine-arc.  The companion
+source is
+\path{2026-07-25-c637-secant-hull-coupling.cpp}; the four canonical JSON
+summaries and \path{2026-07-25-c637.sha256} record the parameters, counts,
+outputs, and replay hashes.  A separate frame-normalized Python enumeration
+rechecks the \(q=13\) lower bound.  No second implementation checks the
+\(q=17\) class reduction or the \(q=19\) extension reduction.
 
 \subsection{Rank-three realization certificates}
 \label{app:rank-three-certificates}
@@ -1832,7 +1923,8 @@ For \(q=8\) and \(q=16\), an integer is the binary coefficient vector of
 the polynomial basis \(1,\alpha,\ldots\), with
 \(\alpha^3+\alpha+1=0\) and \(\alpha^4+\alpha+1=0\), respectively.  For
 \(q=9\), the integer \(a_0+3a_1\) denotes \(a_0+a_1\alpha\), where
-\(\alpha^2+1=0\).  Coordinates for \(q=5,11\) are read modulo the prime.
+\(\alpha^2+1=0\).  Coordinates for \(q=5,11,13,17,19\) are read modulo
+the prime.
 The checked witnesses are
 \[
 \begin{array}{c|l}
@@ -1845,10 +1937,25 @@ q& A\\ \hline
 \{(1,0,4),(1,0,5),(1,1,0),(1,1,2),(1,2,3),(1,2,4)\}\\[2pt]
 11&
 \{(1,10,0),(1,9,1),(1,4,7),(1,8,5),(0,1,4),(1,1,7)\}\\[2pt]
+13&
+\begin{gathered}
+\{(4,0,5),(3,12,7),(2,3,10),(9,2,9),\\
+\phantom{\{}(7,1,0),(6,0,2),(8,12,11),(7,11,0)\}
+\end{gathered}\\[2pt]
 16&
 \begin{gathered}
 \{(1,5,14),(1,5,3),(1,9,2),(1,0,9),(1,13,13),\\
 \phantom{\{}(1,6,10),(1,3,9),(0,1,11),(1,10,2)\}
+\end{gathered}\\[2pt]
+17&
+\begin{gathered}
+\{(0,11,0),(0,8,1),(3,5,15),(3,7,16),(3,3,0),\\
+\phantom{\{}(3,0,1),(3,7,2),(3,12,7),(3,16,14)\}
+\end{gathered}\\[2pt]
+19&
+\begin{gathered}
+\{(0,1,8),(1,1,0),(1,3,14),(1,9,0),(1,9,12),\\
+\phantom{\{}(1,11,11),(1,13,9),(1,16,1),(1,16,12),(1,18,7)\}
 \end{gathered}
 \end{array}
 \]
@@ -1859,6 +1966,10 @@ relative coverage.  The independent verifier
 \path{verify_relative_conic_arcs.py}
 regenerates the same coverage data; its digest and frozen output are
 recorded in the trust manifest.
+The separate gate
+\path{lean/RelativeConicArcs/Gates/C637Witnesses.lean} checks the three
+prime-field witnesses just added, including ordinary completeness of the
+\(q=19\) arc.
 
 \section*{AI assistance disclosure}
 
@@ -1948,6 +2059,15 @@ G.~Korchm\'aros and T.~Sz\H{o}nyi,
 \newblock \emph{Contributions to Discrete Mathematics} \textbf{3}(1)
 (2008), 20--38.
 \newblock doi:10.55016/ojs/cdm.v3i1.62767.
+
+\bibitem{KorchmarosNagySzonyi2024}
+G.~Korchm\'aros, G.~P. Nagy, and T.~Sz\H{o}nyi,
+\newblock Algebraic approach to the completeness problem for $(k,n)$-arcs
+in planes over finite fields,
+\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{204}
+(2024), 105851.
+\newblock doi:10.1016/j.jcta.2023.105851.
+\newblock arXiv:2302.10162.
 
 \bibitem{Nagy2018}
 Z.~L.~Nagy,
