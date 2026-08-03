@@ -1,0 +1,67 @@
+{
+  "closure": [
+    "RelativeConicArcs.Gates.GoldenQuantumStatistics",
+    "RelativeConicArcs.GoldenBalancedCut"
+  ],
+  "declaration_module": {
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet": "RelativeConicArcs.GoldenBalancedCut",
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1": "RelativeConicArcs.GoldenBalancedCut",
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": "RelativeConicArcs.GoldenBalancedCut",
+    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula": "RelativeConicArcs.GoldenBalancedCut",
+    "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries": "RelativeConicArcs.GoldenBalancedCut",
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction": "RelativeConicArcs.GoldenBalancedCut",
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction.eq_1": "RelativeConicArcs.GoldenBalancedCut",
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve": "RelativeConicArcs.GoldenBalancedCut"
+  },
+  "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "lean_version": "4.32.0-rc1",
+  "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "opaque": [],
+  "project_axioms": [],
+  "project_declarations": [
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet",
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1",
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
+    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula",
+    "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries",
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction",
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction.eq_1",
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
+  ],
+  "schema_version": 1,
+  "terminal_axioms": {
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": [
+      "propext"
+    ],
+    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula": [
+      "propext"
+    ],
+    "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries": [
+      "propext"
+    ],
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve": [
+      "propext"
+    ]
+  },
+  "unit": "RelativeConicArcs.Gates.GoldenQuantumStatistics",
+  "uses": {
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1": [
+      "RelativeConicArcs.GoldenBalancedCut.crossGramDet"
+    ],
+    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": [
+      "RelativeConicArcs.GoldenBalancedCut.crossGramDet"
+    ],
+    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula": [
+      "RelativeConicArcs.GoldenBalancedCut.traceContraction",
+      "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
+    ],
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction.eq_1": [
+      "RelativeConicArcs.GoldenBalancedCut.traceContraction"
+    ],
+    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve": [
+      "RelativeConicArcs.GoldenBalancedCut.traceContraction"
+    ]
+  },
+  "uses_included": true
+}
