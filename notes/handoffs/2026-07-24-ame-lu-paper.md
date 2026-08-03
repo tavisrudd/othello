@@ -10,10 +10,14 @@ Discovery companion:
 
 ## Current status
 
-**C851 in progress (2026-08-02): add Paper II DOI and PDF README links.**  Add
-the Zenodo DOI `10.5281/zenodo.21766798` badge and a relative link to the tracked
-PDF in the authoritative README, validate the immutable export, and forward-sync
-the existing standalone with an ordinary local commit and no push.  Report to
+**C851 closed (2026-08-02): Paper II DOI and PDF links are synchronized.**
+The authoritative and standalone READMEs now carry the Zenodo DOI badge
+`10.5281/zenodo.21766798` and a relative link to the tracked PDF.  The
+immutable selected plan/audit has zero findings, the 46-file candidate and
+final standalone pass manifest verification, and the forward standalone commit
+is `1057d12` with manifest SHA-256
+`52710853d63e13d2e34c10d6d75829065ce368ab1b68f6c1fb049d83d100a137`.
+The existing remote was not contacted and nothing was pushed.  See
 `2026-08-02-c851-mds-css-doi-readme.md`.
 
 **C850 closed `local-ready` (2026-08-02): Paper II has a validated standalone.**
