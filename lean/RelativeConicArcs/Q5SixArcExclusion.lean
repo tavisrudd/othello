@@ -1,5 +1,5 @@
 import RelativeConicArcs.Certificate
-import ProjectiveCap.PlaneTransitivity
+import ProjectiveCap.PlaneTransitivityGame
 
 /-!
 # The order-five six-arc exclusion

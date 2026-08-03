@@ -1,4 +1,5 @@
 import ProjectiveCap.GridGame
+import ProjectiveCap.PlaneTransitivityGame
 import Mathlib.Data.Fintype.Basic
 import Mathlib.Data.Fintype.Card
 import Mathlib.Data.Fintype.Prod

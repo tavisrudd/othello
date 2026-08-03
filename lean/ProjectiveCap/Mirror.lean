@@ -1,6 +1,7 @@
 import CapGame.Mirror
 import ProjectiveCap.Projective
 import ProjectiveCap.PlaneTransitivity
+import ProjectiveCap.ProjectiveCapGame
 
 /-!
 # Mirror wrappers for the projective cap game

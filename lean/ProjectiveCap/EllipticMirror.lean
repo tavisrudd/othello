@@ -1,4 +1,5 @@
 import ProjectiveCap.Mirror
+import ProjectiveCap.PlaneTransitivityGame
 import Mathlib.FieldTheory.Finite.Basic
 
 /-!

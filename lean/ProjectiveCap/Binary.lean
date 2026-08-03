@@ -1,4 +1,5 @@
 import ProjectiveCap.PlaneTransitivity
+import ProjectiveCap.ProjectiveCapGame
 import Sumfree.Nonzero
 
 /-!

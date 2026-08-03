@@ -1,5 +1,6 @@
 import RelativeConicArcs.Arc
 import ProjectiveCap.PlaneTransitivity
+import ProjectiveCap.ProjectiveCapGame
 import Mathlib.Combinatorics.Configuration
 import Mathlib.LinearAlgebra.CrossProduct
 import Mathlib.LinearAlgebra.Projectivization.Cardinality

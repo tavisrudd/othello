@@ -1,4 +1,5 @@
 import ProjectiveCap.FrameGridBridge
+import ProjectiveCap.PlaneTransitivityGame
 import ProjectiveCap.GridGame
 import ProjectiveCap.GridSeed
 import Mathlib.Tactic
