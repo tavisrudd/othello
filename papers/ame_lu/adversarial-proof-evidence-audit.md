@@ -1,62 +1,47 @@
 # Adversarial proof and evidence audit
 
-This is the C571 referee-facing failure checklist. A row closes only with a
-specific proof location or evidence record.
+| Risk | Closure |
+|---|---|
+| “LU=LC” is read as the false global conjecture | Theorem 1.1 states additive stabilizer `AME(2m,q)`, prime-power Weyl convention, and sharp `m≥2` boundary. |
+| Exact rigidity silently depends on MDS--CSS linearity | Sections 2--3 use only the additive stabilizer projector, AME support vanishing, and the cardinality squeeze. All MDS--CSS source material has been removed. |
+| The encoder corollary has the Choi transpose on the wrong side | Section 4 displays `((L^T)^-1⊗U_phys)|ψ⟩=|φ⟩` and proves transpose closure from conjugation plus adjoint. |
+| The cleaning theorem is presented as a new qualitative obstruction | The introduction and Section 5 credit the exact three-cleanable-region Clifford theorem and isolate the local contribution as leakage control, Fourier rounding, and AME composition. |
+| The `8ε` estimate assumes the localized commutator preserves the code | The proof uses only scalar compression on the correctable third region and separately controls leakage in the encoded implementation metric. |
+| A local Clifford rounded independently at each party is assumed to be an exact symmetry | The proof invokes stabilizer-overlap quantization only after bounding the product branch; robust linear atlas compatibility is stated separately and is not used as affine branch selection. |
+| Robust atlas compatibility is overstated as a global-radius improvement | The proposition and conclusion state that commutators cancel Weyl phases, leaving an uncontrolled product-Pauli character correction. |
+| `Theta(n^-1/2)` is read as an unconditional AME existence result | Every asymptotic statement says “over existing states” or names the explicit Reed--Solomon family. |
+| Generator-coordinate stability is confused with a defect-ball radius | Appendix B and the introduction distinguish the two; only cleaning supplies the defect-only entry theorem. |
+| Secondary quantitative routes compete with the headline | They occur only in Appendix B and are introduced as mechanism comparisons. |
+| Paper I retains Paper II theorem or certificate dependencies | The exact-group, pencil, Clebsch, scalar, transport, party-extension sections, figures, and complete computational supplement have been removed after Paper II's independent replay passed. |
+| Formal coverage is overstated | Section 6 and the ledgers separate kernel-checked cores from manuscript composition and say that no Paper I semantic gate exists yet. |
 
-| Risk | Present status | Closure gate |
-|---|---|---|
-| “LU=LC” is read as the false global conjecture | closed in Theorem 1.1 and Section 8 | exact additive stabilizer-AME scope, prime-power Weyl convention, and sharp \(m\ge2\) boundary stated at first use and in the final trust boundary |
-| Equality of orbit partitions is confused with classification of all LU intertwiners | closed in Theorem 1.1 | headline theorem quantifies over every intertwiner; the six-party orbit classification is Corollary 1.4 |
-| The arbitrary-\(m\) theorem silently reuses MDS shortening or a six-coordinate formula | closed in Sections 2--3 | the general stabilizer projector and partial trace precede the exact \(2m\) versus \(m-1\) support-kernel squeeze; MDS shortening appears only afterward as an explicit CSS specialization |
-| The transversal conversion corollary has the Choi transpose on the wrong side or assumes transpose preserves Cliffordness | closed after Theorem 1.1 | for two encoders the proof displays `((L^T)^{-1}⊗U_phys)|Ψ_C⟩=|Ψ_D⟩` and derives transpose stability from entrywise conjugation plus adjoint |
-| The exact higher-\(m\) GRS transversal group is inferred from six-party propagation or only proves containment | closed in Corollary 1.3 and Section 3 | the general GRS dual multiplier `SC=Cᗮ` gives explicit product upper/lower unipotents at every length; these generate `SL₂(q)`, physical Paulis supply `F_q²`, and the LU-rigidity converse excludes every product-unitary enlargement |
-| A Pauli or holonomy signature is used as an arbitrary-LU invariant | closed in Sections 4 and 6 | holonomy used only for LC; LU claims use reduced-operator covariance or basis-free contractions |
-| The scalar `z` is claimed LU-complete from finite samples | closed in Sections 3--4 | exact bracket quotient plus uniform LU-to-LC rigidity, not interpolation |
-| Exceptional characteristics are silently removed | closed in Sections 4, 7, and 8 | admitted pencil equation and detector-only exception table are explicit |
-| The H3/GRS theorem is generalized to the whole pencil | closed in Theorem 6.1 | exact odd good non-GRS H3 domain retained |
-| Four-copy rank drop is mistaken for a complete coordinate | closed after Theorem A.1 | generic-constancy proposition and closing warning distinguish divisor from coordinate |
-| Computational evidence lacks a public replay | closed by C563 | `supplement/EVIDENCE.md`, manifest, exact generators/certificates, and `verify.py --replay` |
-| Classical six-point invariant theory, QMDS weights, operator pushing, or the axis mechanism is presented as new | closed by C562/C649 and Sections 1--4 | Rains--Van den Nest, Tan, Huber--Grassl, Ketkar et al., and Pastawski et al. are credited at theorem level; the contribution is the exact all-prime-power, all-\(m\), arbitrary-additive intertwiner scope, with no “first” claim |
-| The Clebsch syndrome conic is confused with a conic defining arc, full quantum decoding radius, full party symmetry, or a Golden/colloidal physical realization | closed in `lem:coset-syndrome-charts`, `prop:clebsch-x-syndrome`, and the boundary remark | the manuscript separates the reusable coset/syndrome mechanism from the imported twelve-ray \(X\)-syndrome conic, distinguishes that conic from the nonconic six-arc, restricts the radius statement to generalized-\(X\) translates, distinguishes the \(A_5\) monomial quotient from the computed \(S_5\) party image, and imports no Hamiltonian or marked-support operator claim |
-| The manuscript inherits report terminology without defining conventions | closed in Section 2 | projective, monomial, Weyl, Clifford, stabilizer, GRS, and party actions defined |
+## Theorem-only cold-read gate
 
-## C571 independent cold-read closures
+The cold read must answer all three questions without using the ledgers:
 
-The cold reader first read only the manuscript, without the ledgers. The
-headline LU-to-LC theorem, arc/code/state dictionary, and diagonal-axis proof
-were judged clear and convincing. The following defects were then repaired.
+1. Are exact rigidity and cleaning-based quantitative rounding identifiable
+   by page two?
+2. Can the reader state both proof mechanisms: full-Weyl marginal axis
+   recovery and cleaning followed by Weyl--Fourier concentration and the
+   stabilizer gap?
+3. Does the reader identify the affine stabilizer character, rather than the
+   symplectic atlas, as the remaining branch-selection obstruction?
 
-| Cold-read finding | Revision | Closure |
-|---|---|---|
-| `T_p` in the transport display had no `p`-dependence | Appendix B now defines the systematic matrix `Q_p` after each party assignment and derives the block operator and rank bridge in labelled displays | displayed-definition contradiction closed |
-| LC holonomy was undefined and the 450-entry collision claim was asserted | Section 4 now defines `K_T`, `M_T(i,j)`, and `Hol(T,U;i,j)`, proves LC covariance, states the symbolic/certificate bridge, and gives the complete multiplicity-collision argument | central `LC ⇒ z` proof made referee-followable |
-| “fixed-party symplectic kernel” and its propagation were undefined | Section 5 now defines the kernel, gives the four multiplier inclusions (5.2), derives code--dual equivalence from a nondiagonal block, cites the six-point self-association theorem, and states the GRS converse | fixed-party theorem proof expanded |
-| party-moving normalizer sounded unconditional | Theorem 5.1 now says an isoduality generates the normalizer only when present; the order `2420` is explicitly restricted to the two certificate-checked `q=11` non-GRS classes | scope corrected |
-| Weyl phases were underspecified | Section 2 distinguishes arbitrary nonzero stabilizer-lift phases from the exact CSS lift `X(c)Z(h)` and explains why the latter multiply without residual phase | the projector, atlas, and marginal-moment displays use the stated conventions |
-| “odd good residue field” was undefined | Theorem 6.1 now quantifies over a prime ideal of `Z[τ]`, names the residue field, and defines goodness by the six-arc condition | arithmetic domain explicit |
-| marginal rank/concurrency bridge was asserted | Appendix A derives the trace normalization, addition-map kernel count, Gale-dual split, and graph-type reduction | conceptual bridge constructed in prose |
-| q=13 copy pattern and party action were absent | Appendix A displays the six permutations, defines `πσ`, states the rank field, and names the complete C397 replay | finite domain explicit |
-| generic constancy was false on reducible families | Proposition 6.3 now assumes an irreducible reduced parameter variety and regular constant-dimension chart, states componentwise scope, and separates geometric density from finite rational points | theorem corrected |
-| transport type exhaustion, minors, and double cosets were hidden | Appendix B distinguishes the conceptual systematization from certificate-supported cycle-cover exhaustion, exact minors, representatives, stabilizers, intersections, and supports | trust boundary and completeness bridge explicit |
-| exceptional-characteristic table lacked derivation | Appendix B displays the characteristic `3,5,7` factor identities and gives the exact-minor reason that `7,11,13,41` have no larger kernel | exceptional arithmetic reconciled with theorem |
-| the paper ended administratively | Section 8 now ends with the mathematical contrast between Weyl-axis covariants and generically blind scalars | hierarchy restored |
-| second cold read found that full extension-field Cliffords are larger than `SL₂(q)` | Theorems 4.1, 5.1, and Corollary 1.4 restrict their quantum clauses to odd prime fields; Section 4 records the exact admitted `q=25` Frobenius counterexample `t=s`, `u=-s`, `z(s)≠z(-s)` | release-blocking scope error corrected; the now-general all-prime-power Theorem 1.1 remains unchanged |
-| the displayed definition of \(\mathcal K_C\subseteq\mathrm{SL}_2(q)^6\) could recreate the retracted extension-field claim | Section 5 now assumes \(q\) odd prime before defining \(\mathcal K_C\) and contrasts its blocks with the full \(\mathrm{Sp}_{2e}(\F_p)\) extension-field action | scope caveat moved to first use |
-| the proof asserted the unsupported exact set \(b\in\{0,1,2,3,4,6\}\) although it established only \(b\leq6\) | Theorem 6.1 now states only the needed bound and records the octahedral equality case | stronger unproved exclusion removed; \(70>66\) argument unchanged |
-| the logical-phase positioning did not separate prior GRS gate constructions from the paper's contribution | the introduction now credits quantum RS encoders, polynomial-code gate procedures, and general stabilizer Clifford gadgets, disclaims priority for the GRS constructions, and identifies the new claim as the fixed-party self-association iff classification | novelty boundary made explicit |
-| Theorem A.1 did not quantify the party assignment | It now states `∃ p∈S₆` for nonconstant sections and follows with the generic number of such assignments | quantifier repaired |
-| Theorem 6.1's characteristic-five vacuity appeared only in the proof | the theorem statement now says explicitly that the non-GRS hypothesis is vacuous in characteristic five | exceptional-field scope visible at first use |
-| the octahedral equality case was phrased as though every field contained the required subgroup | the proof now conditions attainment on the existence of an octahedral \(S_4\subseteq\mathrm{PGL}_2(q)\) | equality case no longer overgeneralized |
-| Proposition 6.3 used one field both as parameter base and local Hilbert-space cardinality without saying so | the proposition names \(k\), identifies \(q=|k|\) with the local dimension under the code--state dictionary, and declares \(X/k\) | the two roles are explicit |
-| “redundant witness” had no local referent | the introduction says that the appendix witness is redundant specifically by the admitted-pencil classification, now Corollary 1.4 | redundancy claim is theorem-linked |
-| the fixed-party dichotomy novelty sentence lacked a stated search scope | the introduction now lists the quantum RS/polynomial-code, stabilizer-Clifford, and transversal-gate literatures screened and compares the exact scope of Dasu--Burton's matrix-algebra classification | bounded search scope stated without an exhaustive priority claim |
+Any negative answer reopens the introduction or theorem ordering. Page count
+alone is not a reason to add material.
 
-## Formal-coverage adversarial checklist
+## C844 cold-read result
 
-| Required check | Evidence | Verdict |
-|---|---|---|
-| Two-way manuscript/declaration coverage | Main table and reverse map in `formal-statement-adequacy.md`; all 150 declarations in `AMELUAggregateAxioms` are represented | closed |
-| Every conditional field has a source | Field-by-field table maps every field of `PencilClassificationInputs`, `LogicalPhaseInputs`, `MarginalMomentModel`, `MarginalLUSeparatorInputs`, `FourCopySeparatorInputs`, `TransportCycleCoverInputs`, `TransportRankBridgeInputs`, and `TransportOrbitGeometryInputs` | closed |
-| Full project-owned transitive referee-prose review | The 41 `RelativeConicArcs.AMELU` source modules and 15 AMELU gate/axiom terminals contain no task IDs, temporary paths, `TODO`/`FIXME`, workflow residue, hidden `sorry`, project axiom, or unsafe declaration.  The recursive closure adds 11 foreign-owned project modules.  `RelativeConicArcs/Plane.lean:7` reverse-references `papers/arcs_complete_outside_conic`, and `FiniteGeom/Code.lean:16` cites `notes/handoffs/2026-07-11-lean-formalization-plan.md` and “Phase 0 next-step 1.” | blocked only on the two exact foreign-owned prose defects |
-| Separate formalized implication, constructed hypothesis, and certificate-supported hypothesis | Section 8 and the field map use these categories explicitly; mixed rows name both roles | closed |
-| Release includes adequacy and exact aggregate audit | `release/verify_release.py` recursively binds the adequacy ledger and all 80 source, gate, toolchain, Lake, and Nix files in the AME--LU verification graph into `RELEASE-MANIFEST.json`; the two foreign prose defects above remain disclosed | byte closure closed; referee-prose readiness blocked as stated |
+**PASS.** The exact theorem begins on page 1 and the quantitative theorem on
+page 2. The intervening prose states the two mechanisms without relying on
+later notation: full-Weyl marginal axis recovery for exact rigidity, and
+three-region cleaning followed by Weyl--Fourier concentration and the
+stabilizer overlap gap for rounding. The abstract, introduction, robust-atlas
+paragraph, and conclusion all identify the affine stabilizer character as the
+remaining obstruction and say why symplectic compatibility alone does not
+select a locally close product-Pauli correction.
+
+Rendered pages 1, 2, 9, 13, 15, 17, and 35 were inspected. The title and
+opening theorem hierarchy, quantitative section opening, trust transition,
+both appendix transitions, bibliography close, figures, equations, and page
+breaks are legible. The paper has 35 pages, within the frozen total target.

@@ -1,35 +1,32 @@
-\section{Conclusion}
-\label{sec:conclusion}
+\section{Conclusion}\label{sec:conclusion}
 
-An \((m+1)\)-party marginal of a stabilizer
-\(\AME(2m,q)\) state retains the full configuration of local Weyl axes.
-Rank-one contractions recover those axes intrinsically, so every
-product-unitary intertwiner is Clifford factor by factor.  The
-minimum-support atlas is the structural completion of this rigidity
-mechanism: it records how the recovered frames fit together and classifies
-the residual Clifford equivalence exactly.
+The same support geometry controls the exact and approximate problems.
+On an \((m+1)\)-party marginal it exposes every local Weyl axis, which
+turns arbitrary product-unitary intertwiners into product Cliffords and
+organizes their residual freedom as a minimum-support atlas.  After one
+party is reinterpreted as a logical input, the support geometry becomes
+three-region correctability.  Cleaning and Weyl--Fourier concentration
+then recover the same discrete Clifford frame without paying the
+exponentially small amplitude of a single marginal.
 
-Two-party marginals already decide the coarse question.  They make the
-symmetry group finite and control how fast the defect grows away from it,
-at any local dimension and with no stabilizer hypothesis, so the maximal
-entanglement and stabilizer structure used above are spent entirely on
-naming the finite group rather than on producing it.  Naming it also
-separates it: stabilizer overlaps are quantized by a subgroup index, so the
-exact product-Clifford symmetries stand apart in defect by a constant of
-the characteristic, and an approximate symmetry small enough to be rounded
-to a Clifford is thereby exact.
+The quantitative conclusion is uniform only when all varying parameters
+are displayed:
+\[
+ R^{\mathrm{clean}}_{n,q}
+ =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),
+ \qquad q=p^e.
+\]
+For fixed local dimension this gives the conditional \(n^{-1/2}\) scale
+along any existing stabilizer-AME family.  On generalized and extended
+Reed--Solomon constructions, where \(n\leq q+1\), the scale is
+\(\Theta(q^{-1})\) over prime fields and \(\Theta(q^{-1/2})\) when
+\(e\geq2\).  These are certified radii; their optimal order is open.
 
-The applications expose two consequences of that structure.  For the
-equal-phase linear MDS--CSS states over odd prime fields considered here,
-diagonal isoduality is exactly the boundary between the full projective
-logical \(\F_q^2\rtimes\mathrm{SL}_2(q)\) group and the affine split-torus
-subgroup.  On the six-party pencil over odd prime fields, the degree-eight
-projective quotient \(z\) is also the complete LU coordinate.  Fixed-copy
-scalar contractions, by contrast, discard the recovered axes and are
-generically constant on irreducible code families.
-
-Over extension fields, the atlas classification remains exact with local
-blocks in \(\mathrm{Sp}_{2e}(\F_p)\), but the two representation-theoretic
-bridges from additive Clifford maps to Frobenius sectors and back are not
-proved here.  Determining when an extension-field atlas admits a semilinear
-canonical form is the remaining exact classification problem.
+The robust atlas result identifies the remaining bottleneck.  Linear
+symplectic compatibility becomes exact at a radius depending only on the
+local dimension, but commutators discard the affine Weyl phases.  They
+therefore determine the stabilizer label group and not its character.  A
+party-count-independent global entry theorem would need a new way to
+control that character discrepancy, or an equivalent collective branch
+selection principle, before the product-Pauli correction is known to be
+locally small.

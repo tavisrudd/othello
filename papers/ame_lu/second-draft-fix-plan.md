@@ -1,71 +1,43 @@
-# Second-draft fix plan
+# Paper I sharpening plan
 
-## Closed before the first draft
+## Closed in the manuscript split
 
-- C559--C561 froze the theorem hierarchy, exact domains, title, and section
-  order.
-- C562 fixed the qualified novelty boundary and mandatory Rains--Van den Nest
-  ancestry.
-- C563 imported every retained computational bundle and passed the complete
-  deterministic replay.
-- C564 wrote all eight sections, synchronized every stable theorem label,
-  built an eleven-page warning-free PDF, and visually inspected the title,
-  middle theorem, and bibliography pages.
+- Paper II independently builds, verifies all 17 inherited artifacts, and
+  owns every MDS--CSS exact-group, six-point, scalar, transport, and
+  party-extension theorem.
+- Paper I now has the title *Local-Unitary Rigidity and Quantitative Rounding
+  for Stabilizer AME States*.
+- The abstract and first two pages lead with exact rigidity and the
+  cleaning-based quantitative theorem.
+- The body order is support geometry, exact rigidity, atlas/encoder
+  consequence, cleaning-based rounding, robust atlas compatibility, trust
+  boundary, and conclusion.
+- Partial-Weyl recognition, two-/`k`-uniform stability, the budget-free
+  residual estimate, and the single-marginal and aggregate routes are
+  appendices.
+- Paper II source sections, figures, and the computational supplement have
+  been removed from this root.
+- The manuscript, README, provenance, Zenodo metadata, and internal theorem,
+  novelty, verification, formalization, and adversarial ledgers use the Paper
+  I boundary.
 
-## Closed formal reconciliation
+## Validation gate — passed
 
-- C565--C570 completed the shared definitions, theorem interfaces, aggregate
-  import and axiom audit, and declaration-level manuscript reconciliation.
-- `formal-statement-adequacy.md` distinguishes unconditional coverage,
-  conditional interfaces, and unformalized paper proofs for every stable
-  manuscript label.
-- Section 8 names the pinned toolchain and aggregate import/audit terminals
-  without presenting conditional interfaces as unconditional formal proofs.
+- warning-free `make check`;
+- 32--36 total pages;
+- theorem-only cold read passes the three questions in
+  `adversarial-proof-evidence-audit.md`;
+- title, theorem openings, figures, appendix transition, and conclusion pass
+  rendered inspection;
+- no source reference to a removed Paper II section, label, figure, or
+  computational supplement.
 
-## C571 formal-coverage adversarial checklist — closed
+## Deliberately pending
 
-C571 did not treat a successful aggregate import as a completeness
-certificate. It closed all of the following:
+- create and validate the Paper I semantic Lean gate and axiom audit;
+- replace the broad pre-split release closure by a formal-root contract;
+- regenerate the release manifest and public source identity;
+- synchronize the existing standalone by a forward commit;
+- obtain the final release cold read and public citation.
 
-1. The two-way coverage check maps every manuscript claim to the exact
-   audited Lean declarations, and every declaration claimed as paper-facing
-   maps back to exact manuscript wording.
-2. Every field of each conditional input structure maps to a specific proof
-   paragraph, theorem, or paper-local evidence-manifest entry.
-3. The full project-owned transitive verification closure was reviewed for
-   referee-facing prose, trust disclosures, forbidden workflow references,
-   and statement/name adequacy, including all source modules and component
-   gates rather than only the aggregate modules.
-4. “Formalized implication,” “constructed hypothesis,” and
-   “certificate-supported hypothesis” distinct in the manuscript and ledgers.
-5. The release plan includes the statement-adequacy ledger and recursively
-   complete 72-file project-owned AME--LU verification graph;
-   `RELEASE-MANIFEST.json` records their immutable public identity.  Two
-   foreign-owned source comments remain disclosed prose blockers.
-
-## Exposition decisions
-
-- C609 supersedes the frozen six-party headline and title with the uniform
-  `[2m,m,m+1]` rigidity theorem, its transversal Clifford corollary, and the
-  broader MDS--CSS title; the exact six-party classification and logical-phase
-  scopes are unchanged.
-- The theorem/section-opening pass still presents rigidity before scalar
-  detectors.
-- The logical-group order paragraph and detector exception table remain in the
-  body: both are short, and the second draft remains compact.
-- Add a stable public repository/archive identifier only at the release gate;
-  do not insert provisional links.
-- Citation metadata was checked against DOI/Crossref publisher records and
-  repaired.  C609 retains the C562 ancestry but makes no absence or “first”
-  claim for the broader theorem pending a repository-compliant audit.
-
-## Adversarial and release gates
-
-- C571: closed. The independent cold read found three initial blockers and
-  eleven major issues; its revised read then found the extension-field
-  Frobenius counterexample and two remaining statement/proof defects. Every
-  blocker and manuscript-scoped major issue is resolved in
-  `adversarial-proof-evidence-audit.md`. The evidence replay and warning-free
-  build pass, and every page and table has been inspected.
-- C572: replay from a clean public export, freeze the immutable evidence
-  manifest, verify source/PDF hashes, and close release metadata.
+These are formal-split and release phases, not part of manuscript sharpening.

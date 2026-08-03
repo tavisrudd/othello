@@ -1,0 +1,342 @@
+\section{Cleaning-based quantitative rounding}
+\label{sec:quantitative}
+
+There is a stronger global route which does not estimate support sectors at
+all.  Choose one AME party as a logical input.  The other \(2m-1\) parties
+form an \([[2m-1,1,m]]_q\) stabilizer code, and the product of their local
+factors approximately implements the transpose-inverse of the factor on the
+chosen party.  Three correctable regions then test that logical action by a
+nested commutator.  The exact mechanism is standard: the stabilizer cleaning
+lemma is due to Bravyi and Terhal
+\cite[Lemma~1]{BravyiTerhal2009}, nested-commutator localization underlies the
+Bravyi--K\"onig hierarchy theorem \cite{BravyiKonig2013}, and
+Pastawski--Yoshida prove directly that a transversal logical unitary on three
+cleanable regions is Clifford \cite[Lemma~5]{PastawskiYoshida2015}.
+Disjointness gives a complementary exact-code hierarchy bound
+\cite[Theorem~5]{JochymOConnorKubicaYoder2018}.  The point below is therefore
+not a new qualitative transversal-gate obstruction.  It is the robust step:
+an implementation with leakage error \(\varepsilon\) forces every nested
+logical Weyl commutator within \(8\varepsilon\) of a scalar, after which a
+Fourier argument gives an explicit Clifford distance.
+
+For an encoding isometry \(V:\mathbb C^q\to\mathcal H\), write
+\[
+ E(T,L)=q^{-1/2}\lVert TV-VL\rVert_{\mathrm{HS}}.
+\]
+It satisfies
+\(E(TS,LM)\leq E(T,L)+E(S,M)\) and
+\(E(T^\dagger,L^\dagger)=E(T,L)\).
+
+\begin{lemma}[Quantitative cleaning commutator]
+\label{lem:quantitative-cleaning-commutator}
+Let \(V\) encode one logical qudit in a stabilizer code whose physical
+parties have a partition into three correctable regions.  Let \(T\) be
+transversal, and suppose \(E(T,L)\leq\varepsilon\).  For all logical Weyl
+operators \(P,Q\),
+\[
+ q^{-1/2}\min_{|z|=1}
+ \lVert [[L,P],Q]-zI\rVert_{\mathrm{HS}}
+ \leq8\varepsilon,                                  \tag{5.1}
+\]
+where \([A,B]=ABA^\dagger B^\dagger\).
+\end{lemma}
+
+\begin{proof}
+Let \(R_1,R_2,R_3\) be the assumed correctable partition.  The stabilizer
+cleaning lemma supplies a representative \(\widetilde P\) of \(P\) outside
+\(R_1\) and a representative \(\widetilde Q\) of \(Q\) outside \(R_2\).
+For reference, cleaning here is the elementary symplectic statement that
+the restriction of a normalizer label to a correctable region lies in the
+restriction of the stabilizer label space; subtracting that stabilizer
+removes the restriction.
+
+Transversality makes \([T,\widetilde P]\) supported outside \(R_1\), so
+\(C=[[T,\widetilde P],\widetilde Q]\) is supported on
+\(R_1^c\cap R_2^c=R_3\).  The composition rules give
+\[
+ E(C,[[L,P],Q])\leq4\varepsilon.                      \tag{5.2}
+\]
+Knill--Laflamme correction on \(R_3\) gives
+\(V^\dagger C V=cI\).  Hence the logical nested commutator lies within
+\(4\varepsilon\) of \(cI\).  Its normalized Hilbert--Schmidt norm is one,
+so \(|c|\geq1-4\varepsilon\); replacing \(c\) by its phase proves (5.1).
+Notice that \(C\) need not preserve the code.  Only its scalar compression
+is used, while (5.2) controls leakage.
+\end{proof}
+
+The remaining step is finite-dimensional Fourier concentration.  It is
+stated separately because it is the point where scalar commutators become
+Clifford axes.
+
+\begin{lemma}[Nested Weyl commutators round to a Clifford]
+\label{lem:nested-weyl-rounding}
+Let \(L\in U(q)\), \(q=p^e\), and suppose for all Weyl labels \(v,w\)
+that
+\[
+ q^{-1/2}\min_{|z|=1}
+ \lVert [[L,W_v],W_w]-zI\rVert_{\mathrm{HS}}\leq\eta.
+\]
+If
+\[
+ \eta<\tau_p:=\min\left\{\frac13,
+       \frac{\sin(\pi/p)}{2\sqrt2}\right\},
+\]
+then some additive one-qudit Clifford \(K\) satisfies
+\[
+ q^{-1/2}\min_{|z|=1}\lVert L-zK\rVert_{\mathrm{HS}}\leq\eta.
+\]
+\end{lemma}
+
+\begin{proof}
+Put \(A_v=LW_vL^\dagger\).  Conjugation of \(W_w\) by \(W_v\) changes
+only its phase, so every \([A_v,W_w]\) is within \(\eta\) of a scalar.
+We use the following Fourier observation twice.  If
+\(A=\sum_a c_aW_a\) is unitary and every \([A,W_w]\) is within \(\eta\)
+of a scalar, then \(A\) lies within \(\eta\) of one Weyl axis.  Indeed,
+with \(p_a=|c_a|^2\), the commutator estimate gives
+\[
+ \left|\sum_a p_a\chi_w(a)\right|\geq1-\eta^2/2.
+\]
+Character orthogonality, averaged over \(w\), yields
+\(\sum_ap_a^2\geq(1-\eta^2/2)^2\).  Thus
+\(\max_ap_a\geq(1-\eta^2/2)^2\), which is precisely the asserted
+normalized distance bound.
+
+Apply the observation to each \(A_v\), and call its unique nearby Weyl
+label \(F(v)\).  The exact identity
+\(A_{v+u}\in\mathbb C A_vA_u\) puts the axes labelled by \(F(v+u)\) and
+\(F(v)+F(u)\) within \(3\eta\).  Distinct Weyl axes have phase-optimized
+distance \(\sqrt2\), so \(\eta<1/3\) makes \(F\) additive.  Comparing
+the exact commutator phases of \(A_v,A_u\) with those of their nearby
+Weyls costs at most \(4\eta\).  The least nontrivial \(p\)-th-root chord
+is \(2\sin(\pi/p)\), so the stated bound makes \(F\) trace-symplectic.
+
+Choose an additive Clifford \(K_0\) inducing \(F\).  Then
+\(K_0^\dagger L\) approximately fixes every Weyl axis, so all its Weyl
+commutators are within \(\eta\) of scalars.  The Fourier observation puts
+it within \(\eta\) of a Weyl; multiplying that Weyl into \(K_0\) gives
+the required Clifford.
+\end{proof}
+
+At \(\varepsilon=0\), the preceding two lemmas recover the
+three-cleanable-region Clifford conclusion of
+\cite[Lemma~5]{PastawskiYoshida2015}.  Their quantitative combination, and
+the constants in (5.1), are what will be used here.
+
+\begin{theorem}[Cleaning-based global rounding]
+\label{thm:cleaning-global-rounding}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
+\(q=p^e\), \(m\geq2\), and \(n=2m\).  Put
+\[
+ d_p=(2-2p^{-1/2})^{1/2},
+\]
+and
+\[
+ R^{\mathrm{clean}}_{n,q}=\min\left\{
+  \frac{\tau_p}{8},\frac1{4\sqrt{2q}},
+  \frac1{8\pi\sqrt n},
+  \frac{d_p}{1+4\pi\sqrt n}
+ \right\}.                                           \tag{5.3}
+\]
+If \(\varepsilon(U)<R^{\mathrm{clean}}_{n,q}\), then, up to a global
+phase,
+\[
+ U=g\bigotimes_{i=1}^n e^{ih_i},\qquad g\in G(\psi),
+\]
+where the \(h_i\) are traceless Hermitian, have spectral spread at most
+\(\pi\), and satisfy
+\[
+ \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
+ \leq\pi\sqrt q\,\varepsilon(U).                     \tag{5.4}
+\]
+Before the exact-symmetry step, the recovered local Cliffords obey
+\[
+ q^{-1/2}\min_{|z|=1}\lVert U_i-zK_i\rVert_{\mathrm{HS}}
+ \leq8\varepsilon(U)                                 \tag{5.5}
+\]
+at every party.  For fixed \(q\), (5.3) has order \(n^{-1/2}\),
+conditional on existence of the stated AME states.
+\end{theorem}
+
+\begin{proof}
+Choose party \(i\) as the logical leg and write the AME Choi form as
+\(q^{-1/2}\sum_a|a\rangle\otimes V_i|a\rangle\).  The other local
+factors form a transversal physical unitary \(T_i\), and vectorization
+gives a logical unitary \(L_i\), obtained from \(U_i\) by transpose and
+inverse, with \(E(T_i,L_i)=\varepsilon(U)\).  Lemmas
+\ref{lem:quantitative-cleaning-commutator} and
+\ref{lem:nested-weyl-rounding}, with \(\eta=8\varepsilon(U)\), give
+(5.5); transpose and inverse preserve the additive Clifford group.
+
+Put \(K=\bigotimes_iK_i\), choose principal logarithms of
+\(K_i^\dagger U_i\) after optimizing the local phases, and let
+\(D^2=\sum_i\lVert h_i\rVert_F^2\).  The chord--angle bound gives
+\[
+ D^2\leq\frac{\pi^2q}{4}\sum_i
+  \left(q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}\right)^2
+ \leq16\pi^2qn\varepsilon(U)^2.                      \tag{5.6}
+\]
+The second clause of (5.3) puts every spectrum in an arc of length
+\(\pi\); the third gives \(D\leq\sqrt q/2\).  Two-uniformity gives
+\(\lVert(K^\dagger U-I)\psi\rVert\leq D/\sqrt q
+\leq4\pi\sqrt n\,\varepsilon(U)\).  The fourth clause and the triangle
+inequality put \(K\psi\) less than \(d_p\) from \(\psi\), so
+Corollary~\ref{cor:uniform-separation} makes \(K\) an exact symmetry.
+Apply Theorem~\ref{thm:budget-free-stability} to the residual to obtain
+(5.4).
+\end{proof}
+
+The theorem already contains a genuinely collective estimate once the
+exact branch has been selected.  Writing \(g=\bigotimes_i g_i\) in the
+factorization above,
+\[
+ \sum_i\left(q^{-1/2}\min_{|z|=1}
+   \lVert U_i-zg_i\rVert_{\mathrm{HS}}\right)^2
+ \leq \frac{D^2}{q}
+ \leq \pi^2\varepsilon(U)^2.                         \tag{5.7}
+\]
+The first inequality is the elementary chord bound
+\(\lVert e^{ih_i}-I\rVert_{\mathrm{HS}}\leq\lVert h_i\rVert_F\).
+Thus the \(\sqrt n\) loss is absent after exact-symmetry recovery.
+
+This does not enlarge the entry radius in (5.3).  Before the branch is
+known, cleaning supplies only the separate bounds (5.5) for locally
+chosen Cliffords \(K_i\).  The \(n\) encoded implementation errors are
+unitary reshapings of the same global defect vector, not projections onto
+orthogonal sectors, so their squared bounds cannot be summed by a Bessel
+argument.  A radius-improving collective estimate would itself imply
+constant-radius branch selection: the chord--angle inequality would make
+\(\sum_i\lVert h_i\rVert_F^2=O(q\varepsilon^2)\), and the uniform
+stabilizer gap would force \(\bigotimes_iK_i\) to be exact.  The missing
+input is therefore compatibility of the recovered discrete Clifford data,
+not a sharper final norm summation.
+
+The linear part of that compatibility can in fact be recovered without a
+party-count loss.
+
+\begin{proposition}[Robust symplectic-atlas compatibility]
+\label{prop:robust-linear-atlas}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
+\(q=p^e\), and let \(U=\bigotimes_iU_i\) be a product unitary.  Suppose
+\[
+ \varepsilon(U)<
+ R_q^{\mathrm{atlas}}
+ :=\min\left\{\frac{\tau_p}{8},
+   \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\}.
+\]
+The cleaning and Fourier lemmas give local Cliffords \(K_i\) satisfying
+(5.5).  Let \(F_i\) be their symplectic maps.  Then
+\[
+ F_jM_A(i,j)=M_A(i,j)F_i
+\]
+for every \((m+1)\)-set \(A\) and \(i,j\in A\).  Consequently
+\(F=\bigoplus_iF_i\) preserves the stabilizer label group \(L\), and some
+product-Pauli correction \(W_vK\) is an exact symmetry of \(\psi\).
+\end{proposition}
+
+\begin{proof}
+Fix \(A\), distinct \(i,j\in A\), and put
+\(B=A^c\cup\{i,j\}\).  Both \(A\) and \(B\) have size \(m+1\), while
+\(A\cap B=\{i,j\}\).  Choose \(\ell\in L(A)\) and \(r\in L(B)\), and set
+\[
+ C=[UW_\ell U^\dagger,W_r].
+\]
+After choosing the phase of \(U\) realizing its defect,
+\(\lVert(UW_\ell U^\dagger-I)\psi\rVert\leq2\varepsilon(U)\), and the
+same holds with the adjoint.  Since \(W_r\psi=\psi\),
+\[
+ \lVert(C-I)\psi\rVert\leq4\varepsilon(U).             \tag{5.8}
+\]
+
+The commutator is supported only on \(A\cap B=\{i,j\}\).
+Choose phases so that
+\(\lVert U_s-K_s\rVert_{\mathrm{HS}}\leq8\sqrt q\,\varepsilon(U)\).
+Replacing \(U_sW_{\ell_s}U_s^\dagger\) by its \(K_s\)-conjugate costs at
+most \(16\sqrt q\,\varepsilon(U)\) in operator norm, and replacing its
+commutator with \(W_{r_s}\) costs at most twice that.  On the two sites,
+the total cost is therefore at most
+\(64\sqrt q\,\varepsilon(U)\).  The Clifford commutator is a scalar
+\(p\)-th root \(\zeta\), so (5.8) gives
+\[
+ |\zeta-1|\leq(4+64\sqrt q)\varepsilon(U)<2\sin(\pi/p).
+\]
+Hence \(\zeta=1\).
+
+Write \(a=\ell_i\), \(b=r_i\),
+\(\ell_j=M_A(i,j)a\), and \(r_j=M_B(i,j)b\).
+The identity \(\zeta=1\), for all \(a,b\), says
+\[
+ [F_i a,b]+[F_jM_A(i,j)a,M_B(i,j)b]=0.                \tag{5.9}
+\]
+Here brackets denote the trace-symplectic pairing.  Isotropy of \(L\),
+applied to the element of \(L(A)\) whose \(i\)-coordinate is \(F_i a\),
+gives
+\[
+ [F_i a,b]+[M_A(i,j)F_i a,M_B(i,j)b]=0.
+\]
+Subtracting this from (5.9), using surjectivity of \(M_B(i,j)\) and
+nondegeneracy of the pairing, proves the atlas equation.
+The exact atlas theorem gives \(FL=L\), and
+Lemma~\ref{lem:pauli-phase-correction} supplies \(W_v\).
+\end{proof}
+
+The Pauli correction in the proposition is essential.  All localized
+commutators are unchanged when a recovered \(K_i\) is multiplied by a
+local Weyl: that multiplication changes conjugation phases, and the
+commutator cancels them.  Equivalently, the symplectic atlas sees \(L\)
+but not its stabilizer character.  The correction \(v\) can therefore be
+nonzero modulo \(L\), in which case \(W_vK\) need not be locally close to
+\(U\).  Exact affine compatibility cannot be obtained from these
+commutator tests, and Proposition~\ref{prop:robust-linear-atlas} alone
+does not improve (5.3).  Controlling the character discrepancy is the
+same remaining branch-selection problem isolated by the collective
+estimate above.
+
+The exact formula, rather than a fixed-dimension slogan, controls scaling.
+Uniformly over prime powers \(q=p^e\) and existing tensors,
+\[
+ R^{\mathrm{clean}}_{n,q}
+ =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{5.10}
+\]
+with absolute implied constants.  Indeed
+\(\sin(\pi/p)=\Theta(p^{-1})\), while \(d_p\) is bounded above and below
+by positive absolute constants.  An asymptotic use of (5.10) must specify
+an existing family.
+
+For the explicit generalized and extended generalized Reed--Solomon
+construction, \(n=2m\leq q+1\), so the party-count term cannot be smaller
+than the local-dimension term.  Hence
+\[
+ R^{\mathrm{clean}}_{n,q}
+ =\begin{cases}
+   \Theta(q^{-1}),&q=p,\\
+   \Theta(q^{-1/2}),&q=p^e,\ e\geq2.
+  \end{cases}                                                        \tag{5.11}
+\]
+On a length-saturating subfamily \(n\asymp q\), these are
+\(\Theta(n^{-1})\) and \(\Theta(n^{-1/2})\), respectively.  For fixed
+characteristic and growing extension degree, the second line applies.
+The earlier fixed-\(q\), \(n^{-1/2}\) reading of the exact minimum remains
+a conditional formal slice only; it is not an AME-existence claim.
+
+If the sharper local constant and the old global generator budget are
+needed, the same proof gives the conclusion of
+Corollary~\ref{cor:approximate-decomposition} under
+\[
+ \varepsilon(U)<\min\left\{
+  \frac{\tau_p}{8},\frac1{16\pi n\sqrt q}
+ \right\}.                                           \tag{5.12}
+\]
+Indeed (5.5), the operator-norm bound by Hilbert--Schmidt norm, and the
+principal logarithm give
+\(\sum_i\lVert h_i\rVert_{\mathrm{op}}
+\leq8\pi n\sqrt q\,\varepsilon(U)<1/2\); the sharp local theorem then
+gives \(D\leq\sqrt{6q/5}\,\varepsilon(U)\).
+
+The cleaning route supersedes both explicit radii above on every admissible
+parameter pair where its displayed minimum is larger, and it has no
+boundary at \(q=4\).  The earlier theorems remain useful because they expose the exact
+cost of reading one marginal and of aggregating orthogonal minimum-support
+sectors.  The new \(n^{-1/2}\) scale is a proved lower bound, not an
+optimality claim; no product-unitary family is known to saturate the
+collective frame-error estimate (5.6).

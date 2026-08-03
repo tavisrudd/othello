@@ -1,217 +1,67 @@
-\section{Verification and scope}\label{sec:verification}
+\section{Verification and trust boundary}\label{sec:verification}
 
-The rigidity theorem, the arc--AME dictionary, and generic constancy are
-conceptual proofs in the text.  The projective quotient uses displayed
-bracket identities and projectivities.  Its transition-map invariance and
-collision argument are proved in Section 4, while the 450 exact rational
-functions are certificate-supported.
-Section~\ref{sec:exact-logical} proves the general MDS diagonal-multiplier
-criterion.  Section~\ref{sec:logical} combines it with Gale duality to
-obtain the six-arc phase theorem.  The party groups,
-factor sets, complements, and torus actions in
-Corollary~\ref{cor:computed-party-splitting} are certificate-supported
-finite examples, not inputs to the uniform theorem.
-Appendix~\ref{sec:scalar-certificates} proves the marginal trace/rank and
-incidence bridges; the \(H_3\) determinants and \(q=13\) contractions are
-certificate-supported.
-Appendix~\ref{sec:transport} proves the systematic transport reduction; the cycle-cover
-determinants, assignment exhaustion, exact minors, and double-coset
-support sets are certificate-supported.
+The principal results are conceptual proofs.  This paper contains no
+paper-facing finite census, generated certificate, or numerical experiment.
+Its trust boundary has three layers: complete manuscript proofs, selected
+kernel-checked algebraic cores, and standard results imported by citation.
 
-The reproducibility package is in \texttt{supplement/}.  From that
-directory,
-\[
-\begin{array}{ll}
-\texttt{python3 verify.py}
- &\text{checks all seventeen byte counts and SHA-256 digests},\\
-\texttt{python3 verify.py --replay}
- &\text{regenerates all eight canonical JSON certificates in memory}.
-\end{array}
-\]
-The full replay uses only the Python standard library, deterministic
-integer, rational, polynomial, and finite-field arithmetic, and canonical
-JSON serialization.  It includes separately implemented checks appropriate
-to each claim: CSS versus direct-Lagrangian shortening, symbolic versus
-finite projectivity, chord concurrency versus stabilizer ranks, quotient
-minors versus finite-field elimination, and cycle-cover versus
-fraction-free transport determinants.  These checks belong to one
-paper-owned Python package.  They provide independent implementations
-within that package, not an independent external reproduction.  The exact
-files, entry points, hashes, domains, expected
-outputs, and negative scopes are recorded in
-\texttt{supplement/EVIDENCE.md} and
-\texttt{supplement/EVIDENCE-MANIFEST.json}.
-On the reference machine the digest check takes under a second, the full
-evidence replay about six minutes, and each Lean aggregate under ten
-seconds.
+\begin{table}[ht]
+\centering
+\small
+\caption{Trust boundary for the theorem families retained in this paper.
+``Core formalization'' means that the named algebraic step is kernel checked;
+it does not promote the complete manuscript theorem to a formal theorem.}
+\label{tab:trust-boundary}
+\begin{tabular}{@{}L{0.27\linewidth}L{0.34\linewidth}L{0.31\linewidth}@{}}
+\toprule
+Result family & Manuscript proof & Formal status \\
+\midrule
+AME support squeeze and full-Weyl rigidity &
+Sections~\ref{sec:dictionary}--\ref{sec:rigidity} &
+coordinate squeeze, unique local labels, and the abstract axis criterion are
+kernel checked; the concrete additive-state marginal composition is not \\
+Minimum-support atlas and phase correction &
+Section~\ref{sec:atlas} &
+minimum-support generation, the abstract holonomy centralizer, and the
+stabilizer-character algebra are kernel checked; the state-ray correction is
+a manuscript step \\
+Encoder Clifford no-go & Section~\ref{sec:atlas} &
+the Choi orientation and Clifford closure are kernel checked; the complete
+arbitrary-additive encoder theorem is assembled in the manuscript \\
+Cleaning and Weyl--Fourier rounding & Section~\ref{sec:quantitative} &
+manuscript only; neither the leakage constant \(8\), the Fourier rounding
+lemma, nor the global radius is formalized \\
+Robust atlas compatibility and affine obstruction &
+Section~\ref{sec:quantitative} & manuscript only \\
+Two- and \(k\)-uniform stability and alternative radii & Appendices A--B &
+only the generator splitting, single-exponential identity, polarized
+second-moment identity, and absence of a nonscalar continuous symmetry are
+kernel checked; all quantitative constants are manuscript only \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-From the repository root, the exact formal replay is
-\begin{verbatim}
-python3 lean/scripts/lean-build-queue.py run \
-  RelativeConicArcs.Gates.AMELUAggregate \
-  RelativeConicArcs.Gates.AMELUAggregateAxioms \
-  --profile single --threads 1 \
-  --aggregate RelativeConicArcs.Gates.AMELUAggregateAxioms
-\end{verbatim}
-The checked release is then reproduced from \texttt{papers/ame\_lu/} by
-\begin{verbatim}
-make release-check
-\end{verbatim}
-The release identifier is content based:
-\texttt{release/RELEASE-MANIFEST.json} records the SHA-256 digest of every
-public byte and every file in the recursive formal dependency closure,
-including the Lean toolchain and build definitions.  The manifest, rather
-than a mutable working-tree name, is the immutable identity of the
-companion release.
+The formal source namespace is
+\texttt{RelativeConicArcs.AMELU}.  In the checked Lean toolchain
+\texttt{v4.32.0-rc1}, the relevant exact cores lie in the support-profile,
+tensor-rigidity, holonomy-centralizer, stabilizer-dictionary,
+encoder-transversal, and multipartite modules.  Their current aggregate
+audit reports only \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound} for these declarations.  The aggregate belongs to the
+pre-split formal companion: a paper-specific semantic gate and recursive
+formal-root contract have not yet been created.  Accordingly, this paper
+does not describe the whole theorem package as end-to-end formalized.
 
-\paragraph{Claim-to-trust map.}
-\noindent\textbf{LU-to-LC rigidity, atlas classification, and the
-transversal no-go.}
-The manuscript gives complete proofs.  Lean kernel-checks the support,
-transition, marginal, covariance, axis-recovery, and holonomy cores; the
-manuscript proves the exact projective atlas extension.
+The cleaning theorem uses three cited exact inputs: stabilizer cleaning,
+localization of nested commutators, and the exact three-cleanable-region
+Clifford obstruction.  The manuscript proves the leakage estimate, the
+finite Weyl--Fourier concentration step, the stabilizer overlap gap, and
+their AME composition.  Equations \((5.3)\)--\((5.11)\) are closed-form
+deductions; they do not depend on a computational search or floating-point
+evaluation.
 
-\noindent\textbf{Partial-Weyl recognition criterion.}
-Section~\ref{subsec:recognition} gives complete manuscript proofs of the
-partial-marginal criterion, the recognition-group lemma, its
-minimal-support realization, and the CSS and arbitrary-dimension
-consequences.  These results use no finite certificate and have no Lean
-coverage.  Their relation to the qubit theorem of Van den Nest, Dehaene,
-and De Moor and to the tensor-uniqueness literature is established by the
-cited sources and the manuscript reduction, not by the supplement.
-
-\noindent\textbf{Discreteness and quantitative stability.}
-The manuscript gives complete proofs.  No certificate and no Lean module
-supports Section~\ref{sec:two-uniform}; the numerical checks that first
-accompanied these statements are not used and are not part of the
-supplement.  Every constant in the subsection is exhibited.  The threshold
-in Corollary~\ref{cor:approximate-decomposition} is obtained by three
-explicit routes with different standing:
-Corollary~\ref{cor:approximate-decomposition} produces it from compactness
-without exhibiting it.  Theorem~\ref{thm:explicit-threshold} gives the
-single-marginal closed formula, while
-Theorem~\ref{thm:aggregate-global-rounding} aggregates all orthogonal
-minimum-support sectors and gives the stronger low-dimensional frame
-radius.  The latter formula is polynomial in the party count at local
-dimension two, conditional on existence, with no claim of optimality.
-Theorem~\ref{thm:cleaning-global-rounding} bypasses support amplitudes by a
-three-region correctable-code commutator and gives the strongest radius,
-of order \(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\), again with no optimality
-claim or fixed-\(q\) existence assertion.  On the explicit Reed--Solomon
-tower \(n\leq q+1\), the scale is \(q^{-1}\) over prime fields and
-\(q^{-1/2}\) at extension degree at least two.  Its exact qualitative
-mechanism is inherited from the
-cleaning and transversal-gate hierarchy literature
-\cite{BravyiTerhal2009,BravyiKonig2013,PastawskiYoshida2015,
-JochymOConnorKubicaYoder2018}; the manuscript-local claims are the
-leakage-aware \(8\varepsilon\) commutator estimate, the Weyl-Fourier
-rounding constant, and their AME global composition.
-After exact-branch recovery, the theorem also gives the collective bound
-\(\sum_i d_2(U_i,g_i)^2\leq\pi^2\varepsilon(U)^2\).  This does not improve
-the entry radius: before branch recovery the local cleaning tests are
-reshapings of the same defect vector rather than orthogonal projections.
-Proposition~\ref{prop:robust-linear-atlas} does recover all linear
-symplectic atlas equations at a dimension-only radius, using pairs of
-minimum supports whose intersection has two parties.  It deliberately
-stops before affine compatibility: Weyl translations change stabilizer
-characters but cancel from every localized commutator, so the resulting
-product-Pauli correction is not controlled in local distance.
-Proposition~\ref{prop:stability-region} bounds any threshold valid
-at uniformity order three; it is a statement about that order, not about
-the party count, and the certified region is measured against the
-uniformity order throughout.
-
-\noindent\textbf{Pencil and six-arc classification.}
-The manuscript proof uses exact certificates for the finite holonomy
-calculation.  The Lean interface is conditional and names its geometric and
-holonomy inputs.
-
-\noindent\textbf{\(H_3\) and \(q=13\) separators.}
-The manuscript proof uses exact certificates for the determinants and
-contraction ranks.  The finite graph core is unconditional in Lean; the
-trace/covariance bridges and exact ranks are named inputs.
-
-\noindent\textbf{Diagonal-isodual logical groups.}
-The manuscript gives the proof, and the multiplier theorem is unconditional
-in Lean.  The formal exact-carrier terminal names the propagation interface
-as a hypothesis.
-
-\noindent\textbf{Clebsch extremal \(X\)-syndromes.}
-The coset-state, stabilizer-character, and one-representative-per-support
-lemma is proved in the manuscript and kernel checked in Lean.  The
-nonsingular conic, 120 syndromes, and transitive
-\(C_{10}\times A_5\) action are imported from the cited companion Clebsch
-theorem; they are not outputs of this paper's certificates or Lean aggregate.
-
-\noindent\textbf{Twelve computed party-extension splittings and transport.}
-Exact certificates supply the finite complements and transport matrices.
-Lean proves the abstract splitting algebra once a complement is supplied.
-
-The corresponding certificate entry points and formal theorem names appear
-in the claim crosswalk in \texttt{supplement/EVIDENCE.md}.
-
-The trusted boundary is Python integer arithmetic, the exact-arithmetic
-implementations in the generators, deterministic Gaussian elimination,
-and the mathematical dictionaries connecting arcs, codes, stabilizers,
-and tensor contractions.  The certificates check the bounded
-enumerations and symbolic identities that they record.  They do not prove
-the conceptual correspondence between the implemented objects and the
-paper definitions; that correspondence is supplied in the preceding
-sections.
-
-The Lean~4 artifact uses toolchain \texttt{v4.32.0-rc1}; no aggregate module
-uses \texttt{sorry} or an unsafe declaration.  Its aggregate contains
-unconditional formal proofs
-of the support squeeze, minimum-support generation, marginal and
-axis-recovery cores, atlas equivalence, abstract holonomy centralizers,
-the Choi/transversal bridge, the diagonal-multiplier theorem, and the
-abstract projective-extension algebra.  The ordinary kernel-checked
-declarations use only \texttt{propext}, \texttt{Classical.choice}, and
-\texttt{Quot.sound}; three finite graph cardinalities use
-\texttt{native\_decide} and are reported separately by the axiom terminal.
-All other finite evidence is replayed by the Python supplement rather than
-imported as a Lean axiom.
-
-The geometric classification, exact logical propagation, finite
-contractions, concrete party complements, and transport-orbit inputs enter
-conditional interfaces.  The manuscript proves or the supplement
-certificate-checks those inputs as recorded in the claim-to-trust map above;
-importing the aggregate does not turn them into unconditional Lean theorems.
-The exact module-to-claim crosswalk and each named hypothesis are recorded
-in \texttt{supplement/EVIDENCE.md}.
-
-The extension-field scalar statements in
-Proposition~\ref{prop:frobenius-sector-divisors} are unconditional in
-Lean.  The aggregate audit checks the frame-ratio
-factorization, explicit Gale multiplier and odd-characteristic zero
-criterion, same-exponent sector disjointness, and automorphism equivariance
-of \(G,A,B,z\) and the admitted locus.  Its separate Galois-\(z\) orbit
-terminal is conditional on two named bridges: extraction of a projective
-Frobenius sector from an additive Clifford equivalence, and construction of
-a Clifford from a Galois match.  Neither bridge is used as a paper theorem.
-
-Finally, none of the results classifies nonlinear orthogonal arrays,
-arbitrary nonstabilizer AME tensors, or stabilizer states that are not AME.
-Theorem~\ref{thm:two-uniform-discrete} and
-Theorem~\ref{thm:two-uniform-stability} apply to all of them, but they
-bound symmetry groups rather than classify states, and they do not identify
-the finite group; Remark~\ref{rem:two-uniform-not-clifford} exhibits a
-\(2\)-uniform state whose symmetry group contains a non-Clifford element.
-We do not claim that four
-copies are globally minimal, that \(z=2,4/9\) are orbit exceptions, or
-that a fixed copy degree separates all classes as \(q\) varies.  The
-logical-group theorem and the quantum part of the pencil classification
-are restricted to odd prime fields.  Over extension fields, Frobenius
-basis permutations are additional local Cliffords.  The scalar \(z\)
-is Frobenius-covariant, and
-Proposition~\ref{prop:frobenius-sector-divisors} determines the two
-divisors attached to each field automorphism, but the two additive-Clifford
-bridges needed for a full orbit classification are outside the theorem
-package.  The minimum-support atlas theorem remains exact over extension
-fields, with local blocks in \(\mathrm{Sp}_{2e}(\F_p)\); its holonomy form
-requires both a centralizing base block and the propagated symplectic
-membership conditions, and does not imply a semilinear classification.
-Theorem~\ref{thm:lu-h3-grs} is restricted to the stated
-odd residue-field reductions, and the detector exceptions described in
-Appendix~\ref{sec:transport} do not alter the
-characteristic-uniform rigidity theorem.
+The appendices serve as mechanism comparisons.  Their single-marginal and
+aggregate thresholds are weaker than the cleaning radius, and none is used
+to prove Theorem~\ref{thm:quantitative-rounding}.  The partial-Weyl
+recognition criterion is likewise independent of the stabilizer-AME
+support squeeze used in the headline theorem.

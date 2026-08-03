@@ -1,601 +1,4 @@
-\section{Full-Weyl marginals and LU rigidity}\label{sec:rigidity}
-
-We first isolate the linear-algebra statement that recovers a diagonal
-tensor's coordinate axes.  It is the full-Weyl counterpart of the
-three-Pauli argument in \cite{Rains1999,VanDenNestDehaeneDeMoor2005}.
-The statement itself is classical: it is Jennrich's uniqueness theorem for
-trilinear decompositions, published in \cite[\S V]{Harshman1970} and there
-credited to Jennrich, whose conclusion that the factor matrices agree up to
-one permutation and compensating diagonal scalings is the monomial property
-below.  It is the full-column-rank case of Kruskal's condition
-\cite{Kruskal1977}, extended to arbitrarily many factors in
-\cite{SidiropoulosBro2000}; see \cite[\S3.2]{KoldaBader2009} for the
-attribution and for a survey of the uniqueness theory.  We give a short
-self-contained proof because the contraction argument is the one used in
-Proposition~\ref{prop:full-weyl-marginal}, and claim no novelty for either
-the statement or the proof.
-
-\begin{lemma}[Diagonal-tensor axes]\label{lem:diagonal-axes}
-Let \(r\geq3\), let \(E_1,\ldots,E_r\) be \(N\)-dimensional complex inner
-product spaces, and choose orthonormal bases
-\(\{e_{ij}:1\leq j\leq N\}\).  If
-\[
- T=\sum_{j=1}^N\lambda_j
- e_{1j}\otimes\cdots\otimes e_{rj},\qquad \lambda_j\ne0,       \tag{3.1}
-\]
-then the coordinate axes in every \(E_i\) are intrinsic to \(T\).
-Consequently, a product of invertible linear maps carrying one tensor of
-the form \((3.1)\) to another is monomial in the displayed bases.
-\end{lemma}
-
-\begin{proof}
-For nonzero \(x=\sum_jx_je_{1j}^*\), contract the first factor against
-\(x\).  The result is
-\[
- T_x=\sum_j\lambda_jx_j e_{2j}\otimes\cdots\otimes e_{rj}.
-\]
-Flattening from \(E_2\) to \(E_3\otimes\cdots\otimes E_r\) gives a matrix
-of rank \(\#\{j:x_j\ne0\}\).  Thus \(T_x\) has rank one exactly when
-the ray of \(x\) is a dual coordinate axis.  Product equivalence preserves
-this projective rank-one contraction locus.  The inner products identify
-the recovered dual axes with the coordinate axes in the first factor.
-Apply the same argument in every factor.
-\end{proof}
-
-\AMEFigureTwo
-
-Call an operator on \(r\geq3\) qudits \emph{full-Weyl diagonal} if there
-is a \(q^2\)-element set \(P\), a distinguished element \(0\in P\), and
-bijections \(f_i:P\to\F_q^2\) with \(f_i(0)=0\), for which
-\[
- R=\sum_{v\in P}\lambda_v
-       \bigotimes_{i=1}^r W_{f_i(v)},\qquad \lambda_v\ne0.       \tag{3.2}
-\]
-The coefficients need not be equal.  What matters is that the same
-\(q^2\)-element index set runs bijectively through the complete local
-Weyl basis at every party.  Neither \(P\) nor the bijections need be
-\(\F_q\)-linear.
-
-\begin{proposition}[Full-Weyl marginal criterion]
-\label{prop:full-weyl-marginal}
-Let \(R\) and \(R'\) be full-Weyl diagonal operators on the same
-\(r\geq3\) parties, possibly with different indexing sets, bijections,
-and coefficients.  If
-\[
- R'=(U_1\otimes\cdots\otimes U_r)R
-       (U_1\otimes\cdots\otimes U_r)^\dagger ,
-\]
-then every \(U_i\) is Clifford.
-\end{proposition}
-
-\begin{proof}
-View \(R\) and \(R'\) as tensors in the local Hilbert--Schmidt spaces.
-After replacing \(W_v\) by the orthonormal basis \(q^{-1/2}W_v\) and
-absorbing the common normalization into the coefficients, both have the
-form in Lemma~\ref{lem:diagonal-axes}, with \(N=q^2\).
-Local conjugation acts invertibly on each factor, so it must permute the
-Weyl axes.  It fixes the identity operator and hence the identity axis.
-It therefore permutes the nonidentity projective Weyl operators, which
-is exactly the single-qudit Clifford condition.
-\end{proof}
-
-\begin{corollary}[Full-Weyl marginal-cover rigidity]
-\label{cor:full-weyl-cover}
-Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be \(n\)-qudit states and
-suppose a product unitary carries \(\lvert\psi\rangle\) to
-\(\lvert\phi\rangle\) up to phase, any party permutation having first been
-absorbed by relabelling \(\lvert\phi\rangle\), so that the two states are
-indexed by the same parties.  If every
-party belongs to a set \(S\) of at least three parties for which both
-reduced operators \(\rho^\psi_S\) and \(\rho^\phi_S\) are full-Weyl
-diagonal, then every local factor is Clifford.
-\end{corollary}
-
-\begin{proof}
-Partial trace gives a product-unitary equivalence of the two reduced
-operators on each chosen \(S\).  Apply
-Proposition~\ref{prop:full-weyl-marginal}; the chosen sets cover all
-parties.
-\end{proof}
-
-\subsection{Partial marginals and the recognition group}
-\label{subsec:recognition}
-
-The full-Weyl criterion recovers the entire local Weyl basis from one
-marginal.  More generally, several marginals may each recover only part of
-that basis, while their labels together generate it.  The following
-criterion isolates this mechanism.  It uses only a finite abelian label
-group and a Weyl basis whose multiplication is additive up to phase.
-
-Call an operator on \(r\) parties \emph{partial-Weyl diagonal} if there are
-a finite index set \(P\) with a distinguished element \(0\), injections
-\(f_i:P\to\F_q^2\) with \(f_i(0)=0\), and nonzero coefficients, for which
-\[
- R=\sum_{v\in P}\lambda_v\bigotimes_{i=1}^{r}W_{f_i(v)},
- \qquad \lambda_v\ne0.
-\]
-Write \(N=|P|\).  The full-Weyl condition \((3.2)\) is the case
-\(N=q^2\), where the injections are forced to be bijections.
-
-\begin{proposition}[Partial-Weyl marginal criterion]
-\label{prop:partial-weyl-marginal}
-Let \(R\) and \(R'\) be partial-Weyl diagonal operators on the same
-\(r\) parties with index sets of the same size \(N\geq2\), possibly with
-different index sets, injections, and coefficients, and suppose
-\[
- R'=(U_1\otimes\cdots\otimes U_r)R(U_1\otimes\cdots\otimes U_r)^\dagger .
-\]
-Assume \(r\geq3\), or \(N=2\).  Then for each \(i\), conjugation by
-\(U_i\) carries every \(W_{f_i(v)}\) to a phase times a Weyl operator, and
-induces a bijection \(f_i(P)\to f_i'(P')\) fixing \(0\).
-\end{proposition}
-
-\begin{proof}
-Suppose \(r\geq3\).  Let \(E_i\) be the span of
-\(\{W_{f_i(v)}:v\in P\}\) inside the single-party Hilbert--Schmidt space
-and \(E_i'\) the span of \(\{W_{f_i'(v')}:v'\in P'\}\).  Both have
-dimension \(N\), because the Weyl operators are linearly independent and
-the injections are injective, and the rescaled operators
-\(q^{-1/2}W_v\) are orthonormal.  All \(N\) coefficients of \(R\) are
-nonzero, so by the rank computation in the proof of
-Lemma~\ref{lem:diagonal-axes} the smallest subspace of factor \(i\)
-supporting \(R\) is \(E_i\), and likewise for \(R'\) and \(E_i'\); hence
-the product of the conjugations carries \(E_i\) onto \(E_i'\).  Now apply
-Lemma~\ref{lem:diagonal-axes} to the two tensors in
-\(E_1\otimes\cdots\otimes E_r\) and \(E_1'\otimes\cdots\otimes E_r'\).
-Its proof uses only \(r\geq3\), nonzero coefficients, and orthonormal
-bases, never \(N=q^2\).  The maps are therefore monomial in the displayed
-bases, and each scalar is a phase because conjugation is unitary for the
-Hilbert--Schmidt inner product.  The identity axis is fixed, so the
-bijection fixes \(0\).
-
-Suppose instead \(N=2\), with \(R=\lambda_0I+\lambda_1\bigotimes_iW_{f_i(1)}\)
-and \(R'=\lambda_0'I+\lambda_1'\bigotimes_iW_{f_i'(1)}\).  Conjugation
-fixes the identity, so comparing traces gives \(\lambda_0=\lambda_0'\);
-subtracting leaves an equality of nonzero product operators, whose tensor
-factorization gives
-\(U_iW_{f_i(1)}U_i^\dagger=c_iW_{f_i'(1)}\) with \(\prod_ic_i=\lambda_1'/\lambda_1\),
-and each \(c_i\) is a phase by unitarity.
-\end{proof}
-
-The arity condition cannot be removed in this form.  For two parties and
-three or more terms, equal coefficient moduli leave a unitary freedom among
-the corresponding Schmidt axes.  With two terms, conjugation fixes the
-identity term and hence singles out the other axis.
-
-Fix a product unitary carrying \(\lvert\psi\rangle\) to \(\lvert\phi\rangle\)
-up to phase, after absorbing any party permutation by relabelling
-\(\lvert\phi\rangle\).  For each party \(i\) put
-\[
- \Lambda_i=\{a\in\F_q^2:\ U_iW_aU_i^\dagger\in\mathbb C^\times W_b
-   \text{ for some }b\},
-\]
-the \emph{recognition group} at \(i\).
-
-\begin{lemma}[Recognition group]\label{lem:recognition-group}
-\(\Lambda_i\) is a subgroup of \(\F_q^2\), the induced map \(a\mapsto b\)
-is an injective additive homomorphism, and \(U_i\) is Clifford if and only
-if \(\Lambda_i=\F_q^2\).
-\end{lemma}
-
-\begin{proof}
-If \(U_iW_aU_i^\dagger=\alpha W_{a'}\) and \(U_iW_bU_i^\dagger=\beta W_{b'}\),
-then \(W_aW_b\) is a phase times \(W_{a+b}\), so conjugating that product
-shows \(U_iW_{a+b}U_i^\dagger\) is a scalar times \(W_{a'+b'}\).  Hence
-\(\Lambda_i\) is closed under addition and the induced map is additive; it
-is injective because distinct labels have distinct projective axes.  If
-\(\Lambda_i=\F_q^2\) the induced map is an injective endomorphism of a
-finite group, hence bijective, so conjugation permutes all projective Weyl
-axes, which is the Clifford condition.  The converse is immediate.
-\end{proof}
-
-When \(q=2\), a recognition group containing a nonzero label is either a
-line or all of \(\F_2^2\).  The criterion below assembles labels recovered
-from different marginals; in larger local dimension it also accommodates
-intermediate subgroups that have no qubit analogue.
-
-\begin{corollary}[Generation criterion]\label{cor:recognition-generation}
-Suppose that for each party \(i\) there is a family of party sets
-containing \(i\), each with at least three parties or with a two-element
-index set, such that \(\rho^\psi_S\) and \(\rho^\phi_S\) are partial-Weyl
-diagonal with index sets of equal size.  If the labels recovered at \(i\)
-over that family generate \(\F_q^2\), then \(U_i\) is Clifford.
-\end{corollary}
-
-\begin{proof}
-Partial trace gives a product-unitary equivalence of the two reduced
-operators on each set.  Proposition~\ref{prop:partial-weyl-marginal} places
-each recovered label in \(\Lambda_i\), and
-Lemma~\ref{lem:recognition-group} closes \(\Lambda_i\) under addition and
-converts \(\Lambda_i=\F_q^2\) into the Clifford property.
-\end{proof}
-
-Corollary~\ref{cor:full-weyl-cover} is the case of one set per party with
-\(N=q^2\), where generation is automatic.  For stabilizer states the
-supply of usable sets is exactly the minimal supports.
-
-\begin{lemma}[Minimal supports carry partial-Weyl marginals]
-\label{lem:minimal-support-charts}
-Let \(\lvert\psi\rangle\) be a stabilizer state and \(\omega\) a minimal
-support of its stabilizer, and let \(L(\omega)\) be the group of labels
-supported inside \(\omega\).  Then for every \(i\in\omega\) the coordinate
-projection \(\pi_i:L(\omega)\to\F_q^2\) is injective.  Hence \(L(\omega)\)
-is isomorphic to a subgroup of \(\F_q^2\), every nonzero element of
-\(L(\omega)\) has support exactly \(\omega\), and \(\rho_\omega\) is
-partial-Weyl diagonal with index set \(L(\omega)\) and injections
-\(\pi_i\).  Conversely, if the retained label group on a party set has at
-least two elements and injects at every party, that set is a minimal
-support.
-\end{lemma}
-
-\begin{proof}
-An element of the kernel of \(\pi_i\) has support contained in
-\(\omega\setminus\{i\}\), a proper subset of \(\omega\), so it is zero by
-minimality.  The partial trace of \(\lvert\psi\rangle\langle\psi\rvert\)
-over the complement of \(\omega\) retains exactly the stabilizer elements
-supported inside \(\omega\), each with a coefficient of modulus one.  For
-the converse, injectivity at every party of the set says that no nonzero
-element of its label group vanishes anywhere on it, so no nonzero element
-has smaller support.
-\end{proof}
-
-At \(q=2\) the possible orders of \(L(\omega)\) are \(2\) and \(4\), which
-is the dichotomy of \cite[Lemma~1]{VanDenNestDehaeneDeMoor2005}; the
-intermediate orders available for \(q>2\) are invisible there.  They occur
-naturally in CSS states: a minimum-weight \(X\)-support carrying no
-\(Z\)-word contributes a line of \(q\) labels.
-
-For two LU-equivalent stabilizer states, marginal purity preserves both the
-minimal supports and the order of each retained label group, since
-\[
- \operatorname{Tr}(\rho_\omega^2)
-   =\frac{|L(\omega)|}{q^{|\omega|}}.
-\]
-Thus every source chart above has a target chart of the same size.  In the
-qubit case, the hypothesis of
-\cite[Theorem~1]{VanDenNestDehaeneDeMoor2005} says exactly that the labels
-from all minimal supports through a party generate \(\F_2^2\).  Label
-groups of order two use the two-term case of
-Proposition~\ref{prop:partial-weyl-marginal}; label groups of order four
-use its \(r\geq3\) case.  Their standing assumptions of at least three
-parties and full entanglement exclude a two-party support in the latter case.
-Corollary~\ref{cor:recognition-generation} therefore recovers their full
-theorem, not only its single-support corollary.
-
-\begin{corollary}[CSS states over a prime field]\label{cor:css-recognition}
-Let \(q\) be prime and let \(\lvert\psi\rangle\) be a CSS coset state such
-that every coordinate lies in two minimal supports of the stabilizer, each
-with at least three coordinates, one whose label group contains a nonzero
-\(X\)-type label and one whose label group contains a nonzero \(Z\)-type
-label.  Then every product-unitary equivalence to another such state has
-Clifford factors.
-\end{corollary}
-
-\begin{proof}
-The preceding purity argument supplies matching partial-Weyl marginals for
-the target state.
-The two supports contribute independent labels \((x,0)\) and \((0,z)\) to
-\(\Lambda_i\), which generate \(\F_q^2\) over a prime field.  Apply
-Corollary~\ref{cor:recognition-generation}.
-\end{proof}
-
-A minimum-weight codeword of the \(X\) code need not give a minimal support
-of the stabilizer, since a \(Z\)-word may sit strictly inside it; the
-hypothesis above is about minimal supports of the full stabilizer.  What is
-not automatic for an arbitrary additive stabilizer is either coverage by
-minimal supports or the availability of both label types at every party;
-the corollary keeps both requirements explicit.
-
-\begin{remark}[Arbitrary local dimension]\label{rem:arbitrary-dimension}
-Nothing in the partial-Weyl condition,
-Proposition~\ref{prop:partial-weyl-marginal},
-Lemma~\ref{lem:recognition-group},
-Corollary~\ref{cor:recognition-generation}, or
-Lemma~\ref{lem:minimal-support-charts} uses the field structure of
-\(\F_q\).  Each uses only that the labels form a finite abelian group whose
-Weyl operators are an orthogonal Hilbert--Schmidt basis multiplying
-additively up to phase.  Replacing \(\F_q^2\) by \(\mathbb Z_d^2\), with
-\(X\) the shift and \(Z\) the clock operator on \(\mathbb C^d\), all five
-statements hold verbatim at every local dimension \(d\), prime power or
-not.  At composite \(d\), a unitary whose conjugation permutes the
-projective Weyl axes still normalizes the Pauli group itself and is
-Clifford in the standard sense.  Write \(UW_aU^\dagger=cW_{a'}\).  For
-odd \(d\), every Weyl operator satisfies \(W_a^d=I\); taking \(d\)-th powers
-gives \(c^d=1\).  For even \(d\), every Weyl operator satisfies
-\(W_a^{2d}=I\), and the standard Pauli convention includes the \(2d\)-th
-roots of unity; taking \(2d\)-th powers gives \(c^{2d}=1\).  Thus \(c\) is
-already a Pauli phase and \(UW_aU^\dagger\) lies in the Pauli group.  When
-\(d\) is a proper prime power, the
-\(\mathbb Z_d\) Weyl system and the \(\F_d\) Weyl system on \(\mathbb C^d\)
-are different, and a criterion instantiated in one says nothing in the
-other.
-\end{remark}
-
-The generation hypothesis is sufficient, not necessary.  Wong and Jiang
-exhibit at \(d=9\) a three-party stabilizer state that is LU but not LC
-equivalent to the GHZ state \cite{WongJiang2025}.  Its three two-party
-minimal supports each carry nine labels whose projections lie in
-\(3\mathbb Z_9\times3\mathbb Z_9\).  They generate a subgroup of index
-nine rather than \(\mathbb Z_9^2\), so
-Corollary~\ref{cor:recognition-generation} does not apply.
-
-Chang and Jing introduced the general Kruskal-type uniqueness method for
-coefficient tensors in a discrete operator basis into the qubit LU problem
-\cite{ChangJing2022}.  Their generic Pauli tensors are not diagonal in that
-basis, and uniqueness yields invariants separating LU classes rather than a
-Clifford conclusion.  For qubit stabilizer states that conclusion is
-\cite[Theorem~1]{VanDenNestDehaeneDeMoor2005}.
-
-\begin{proposition}[Stabilizer-AME support theorem]
-\label{prop:stabilizer-ame-support}
-Let \(\lvert\psi\rangle\) be a stabilizer
-\(\AME(2m,q)\) state, and let \(A\) be any \(m+1\) parties.  Then
-\[
- |L(A)|=q^2.
-\]
-Every nonidentity label in \(L(A)\) has support exactly \(A\), and for
-each \(i\in A\) the coordinate projection
-\[
- p_i:L(A)\longrightarrow\F_q^2
-\]
-is bijective.
-\end{proposition}
-
-\begin{proof}
-The projective label group \(L\) has order \(q^{2m}\).  Restrict its
-labels to the \(m-1\) parties outside \(A\).  The target has order
-\(q^{2(m-1)}\), and the kernel is \(L(A)\); hence
-\[
- |L(A)|\geq q^{2m}/q^{2(m-1)}=q^2.                    \tag{3.3}
-\]
-Fix \(i\in A\).  A label in the kernel of \(p_i\) is supported on the
-\(m\)-set \(A\setminus\{i\}\).  The AME condition and \((2.2)\) exclude
-every such nonidentity stabilizer, so \(p_i\) is injective.  Its codomain
-has order \(q^2\), giving the reverse inequality in \((3.3)\) and hence
-bijectivity.  The same no-small-support argument shows that every
-nonidentity element of \(L(A)\) has full support \(A\).
-\end{proof}
-
-\begin{proposition}[A stabilizer-AME marginal fixes the local Weyl axes]
-\label{prop:marginal-axes}
-Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
-\(\AME(2m,q)\) states.  If a product unitary on an \((m+1)\)-set \(A\)
-carries \(\rho^\psi_A\) to \(\rho^\phi_A\), then every local factor on
-\(A\) is Clifford.
-\end{proposition}
-
-\begin{proof}
-By \((2.2)\),
-\[
- \rho^\psi_A=q^{-|A|}
-   \sum_{\ell\in L_\psi(A)}\widetilde W_\ell .
-\]
-Index this sum by \(P=L_\psi(A)\).  Proposition
-\ref{prop:stabilizer-ame-support} says that every coordinate projection
-\(P\to\F_q^2\) is bijective.  Relative to the fixed Weyl convention, each
-stabilizer lift contributes a nonzero coefficient.  Thus
-\(\rho^\psi_A\) is full-Weyl diagonal in the sense of \((3.2)\), and the
-same holds for \(\rho^\phi_A\).  Apply
-Proposition~\ref{prop:full-weyl-marginal}.
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
-Absorb the party permutation by relabelling \(\lvert\phi\rangle\).  Partial
-trace gives a product-unitary equivalence
-\(\rho^\psi_A\sim\rho^\phi_A\) for every \((m+1)\)-set \(A\).  Given a
-party \(i\), choose such a set containing it and apply
-Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
-\end{proof}
-
-\section{Minimum-support atlases and encoder consequences}
-\label{sec:atlas}
-
-The same support calculation recovers standard quantum-MDS structure.
-If \(|A|\leq m\), the AME condition gives \(L(A)=\{0\}\).  If
-\(|A|>m\), then \(\rho^\psi_{A^c}\) is maximally mixed, so purity of the
-global state gives
-\(\Tr((\rho^\psi_A)^2)=q^{-(2m-|A|)}\).  On the other hand, \((2.2)\)
-and Weyl orthogonality give
-\(\Tr((\rho^\psi_A)^2)=q^{-|A|}|L(A)|\).  Hence, for every party set
-\(A\),
-\[
- |L(A)|=q^{2\max(|A|-m,0)}.                              \tag{4.1}
-\]
-M\"obius inversion is the stabilizer-state specialization of the
-quantum-MDS Shor--Laflamme distribution of Huber and Grassl
-\cite[Theorems~8 and 9]{HuberGrassl2020}; in particular the number of
-weight-\(m+1\) projective stabilizers is
-\(\binom{2m}{m+1}(q^2-1)\).  We use one further consequence.  If
-\(|A|\geq m+2\) and \(i\ne j\) lie in \(A\), then the dimensions in
-\((4.1)\), together with
-\[
- L(A\setminus\{i\})\cap L(A\setminus\{j\})
-   =L(A\setminus\{i,j\}),
-\]
-give
-\[
- L(A)=L(A\setminus\{i\})+L(A\setminus\{j\}).             \tag{4.2}
-\]
-Descending induction shows that the \((m+1)\)-supported subgroups span
-the full label group.  This is the additive quantum-MDS form of
-minimum-weight generation, not a separate weight-enumerator claim.
-
-We now prove the atlas classification stated in the introduction.  Regard
-each local label group
-\[
- P_i=\F_q^2
-\]
-as a \(2e\)-dimensional trace-symplectic space over \(\F_p\).  For every
-\((m+1)\)-set \(A\) and \(i,j\in A\), the support theorem defines the
-operator-pushing transition
-\[
- M_A(i,j)=p_jp_i^{-1}:P_i\longrightarrow P_j.
-\]
-\AMEFigureOne
-
-For two states \(\psi,\phi\) on the same labelled parties, a
-\emph{symplectic atlas equivalence} is a tuple
-\(F_i\in\operatorname{Sp}(P_i)\) satisfying
-\[
- F_jM_A^\psi(i,j)=M_A^\phi(i,j)F_i
- \quad\text{for every \(A\) and \(i,j\in A\)}.           \tag{4.3}
-\]
-Here
-\(\operatorname{Sp}(P_i)=\operatorname{Sp}_{2e}(\F_p)\) is the action
-induced by the standard
-additive local Clifford group.
-
-For one state, define
-\[
-\begin{split}
- \Gamma_\psi
-  &=\{[U]\in\operatorname{PU}(q^{2m}):
-       U=U_1\otimes\cdots\otimes U_{2m},\
-       U\lvert\psi\rangle\in\mathbb C\lvert\psi\rangle\},\\
- \mathcal G_\psi
-  &=\{(F_i)\in\prod_i\operatorname{Sp}(P_i):
-       F_jM_A(i,j)=M_A(i,j)F_i\ \text{for all }A,i,j\in A\}.
-\end{split}
-\]
-Theorem~\ref{thm:lu-lc-rigidity} and the Clifford sequence \((2.0)\)
-give a well-defined homomorphism
-\[
- \lambda_\psi:\Gamma_\psi\longrightarrow\mathcal G_\psi,\qquad
- [U_1\otimes\cdots\otimes U_{2m}]\longmapsto(\overline U_i)_i,
-\]
-where \(\overline U_i\) is the induced symplectic label map.  A product
-decomposition is unique up to one-site scalars, which do not change
-\(\overline U_i\).  The injection
-\(L_\psi\hookrightarrow\Gamma_\psi\) sends a label
-\(\ell\) to the projective Pauli \([W_\ell]\).
-
-\begin{lemma}[Pauli phase correction]\label{lem:pauli-phase-correction}
-Let \(\psi\) and \(\phi\) be stabilizer states with Lagrangian label groups
-\(L_\psi\) and \(L_\phi\).  If a product Clifford \(U\) induces a
-symplectic label map carrying \(L_\psi\) onto \(L_\phi\), then there is a
-product Pauli \(W_v\) such that
-\(W_vU\lvert\psi\rangle\in\mathbb C\lvert\phi\rangle\).
-\end{lemma}
-
-\begin{proof}
-The state \(U\lvert\psi\rangle\) is stabilized on the same Pauli axes as
-\(\lvert\phi\rangle\), possibly with a different stabilizer character.
-The trace-symplectic pairing identifies the ambient label space modulo
-\(L_\phi=L_\phi^\perp\) with the character dual of \(L_\phi\).  Choose
-\(v\) whose pairing character is the inverse of the discrepancy.
-Conjugation by the product Pauli \(W_v\) cancels it.  The corrected state
-and \(\lvert\phi\rangle\) therefore lie in the same one-dimensional joint
-stabilizer eigenspace.
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:atlas-classification}]
-First fix the party labels.  A block symplectic map
-\(F=\bigoplus_iF_i\) carrying \(L_\psi\) to \(L_\phi\) carries every
-supported subgroup \(L_\psi(A)\) to \(L_\phi(A)\).  Writing these
-subgroups as graphs through any projection \(p_i\) gives exactly
-\((4.3)\).
-
-Conversely, suppose \((4.3)\) holds.  Fix \(A\) and \(i\in A\).  Every
-element of \(L_\psi(A)\) is uniquely determined by its \(i\)-coordinate,
-and the equations with \(j\in A\) show that its image under \(F\) is the
-unique element of \(L_\phi(A)\) with \(i\)-coordinate \(F_i p_i(\ell)\).
-Thus \(F L_\psi(A)=L_\phi(A)\).  Since the \((m+1)\)-supported subgroups
-generate the full label groups, \(F L_\psi=L_\phi\).
-
-Sequence \((2.0)\) supplies local Clifford lifts of the \(F_i\), and
-Lemma~\ref{lem:pauli-phase-correction} supplies the product-Pauli
-correction.  Hence an atlas equivalence lifts to an LC equivalence.
-The reverse implication follows
-from the induced label action, and Theorem~\ref{thm:lu-lc-rigidity}
-replaces LC by LU.  A party permutation is absorbed by relabelling first.
-
-For automorphisms, \(\lambda_\psi\) is surjective by the same lifting and
-phase-correction argument.  Its kernel consists of projective product
-Paulis by \((2.0)\).  Such a Pauli fixes the state ray exactly when its
-label lies in \(L_\psi^\perp=L_\psi\).  Thus the displayed injection of
-\(L_\psi\) identifies it with \(\ker\lambda_\psi\), proving exactness.
-
-Finally suppose \(q=p\).  Form the directed multigraph with vertices the
-parties and an edge \((A,i,j)\) carrying \(M_A(i,j)\).  Every pair of
-parties belongs to an \((m+1)\)-set, so the graph is connected.  Choose a
-base \(b\), a spanning tree, and tree transports
-\(T_i:P_b\to P_i\), with \(T_b=I\).  For every edge define its based
-holonomy
-\[
- H_A(i,j)=T_j^{-1}M_A(i,j)T_i\in\operatorname{GL}_2(q).
-\]
-Compatibility propagates a base block \(F_b\) uniquely as
-\(F_i=T_iF_bT_i^{-1}\); the edge \((A,i,j)\) is then compatible exactly
-when \(F_b\) commutes with \(H_A(i,j)\).  Since
-\(\operatorname{Sp}_2(\F_q)=\mathrm{SL}_2(q)\) is normal in
-\(\mathrm{GL}_2(q)\), every propagated block remains symplectic.
-Evaluation at the base therefore identifies
-\(\mathcal G_\psi\) with the holonomy centralizer inside
-\(\mathrm{SL}_2(q)\).  Different spanning trees generate the same based
-holonomy subgroup; changing the base conjugates that subgroup, and hence
-its centralizer, by a chosen transport.
-\end{proof}
-
-\subsection{Encoder consequences}
-
-Let \(C\leq\F_q^{2m}\) be \([2m,m,m+1]_q\) MDS, and fix a party set
-\(S\) of size \(m+1\).  Shortening \(C\) on the \(m-1\) coordinates
-outside \(S\) gives an \([m+1,1,m+1]_q\) MDS code.  The dual
-\(C^\perp\) has the same parameters, so its corresponding shortening
-does as well.  Choose nonzero shortened words
-\(c^S\in C\) and \(h^S\in C^\perp\).  Each has support exactly \(S\),
-and
-\[
- L_C(S)=
- \{(ac^S,bh^S):a,b\in\F_q\}.                            \tag{4.4}
-\]
-At a party \(i\in S\), projection of this plane to the local Pauli labels
-is
-\[
- (a,b)\longmapsto(ac_i^S,bh_i^S),
-\]
-which is invertible because both coordinates are nonzero.  Thus all
-\(q^2\) labels in \(L_C(S)\) run bijectively through the full local Weyl
-basis at every party of \(S\); in particular, the \(q^2-1\)
-nonidentity labels run bijectively through the nonidentity Weyl labels.
-
-\begin{proof}[Proof of Corollary~\ref{cor:transversal-clifford}]
-The input marginal of each AME Choi state is \(q^{-1}I\), so one-leg
-reshaping gives an isometry.  The projection of its stabilizer label group
-onto the input Weyl-label space is surjective: otherwise a nonzero local
-label orthogonal to the image would lie in the maximal isotropic space
-\(L^\perp=L\), contradicting the absence of a one-party stabilizer.  The
-kernel therefore has \(q^{2m-2}\) elements and stabilizes the image, making
-it a one-logical-qudit stabilizer code.  AME corrects erasure of any
-\(m-1\) outputs, so its distance is at least \(m\); the quantum Singleton
-bound gives equality.  This is the standard perfect-tensor/quantum-MDS
-correspondence used in \cite[Theorems~3.5 and 3.6]{Tan2026}.
-
-Let \(\lvert\Phi\rangle=q^{-1/2}\sum_x\lvert x,x\rangle\), and use the
-Choi convention
-\(\lvert\psi\rangle=(I\otimes V_\psi)\lvert\Phi\rangle\) and
-\(\lvert\phi\rangle=(I\otimes V_\phi)\lvert\Phi\rangle\).
-Writing \(U_{\mathrm{phys}}=\bigotimes_iU_i\), the relation
-\(U_{\mathrm{phys}}V_\psi=V_\phi L\) gives
-\[
- (I\otimes U_{\mathrm{phys}})\lvert\psi\rangle
-   =(L^T\otimes I)\lvert\phi\rangle .
-\]
-Hence
-\[
- \bigl((L^T)^{-1}\otimes U_{\mathrm{phys}}\bigr)
-   \lvert\psi\rangle=\lvert\phi\rangle .
-\]
-Theorem~\ref{thm:lu-lc-rigidity} makes every displayed local factor
-Clifford.  Entrywise conjugation preserves the finite-field Weyl group,
-since \(\overline{X(a)}=X(a)\) and
-\(\overline{Z(b)}=Z(-b)\); it therefore preserves the Clifford
-normalizer.  Taking adjoints preserves the normalizer as well, and
-\(U^T=(\overline U)^\dagger\).  Thus transposition preserves the
-finite-field Clifford group, and \(L\) is Clifford.
-\end{proof}
-
-\section{Discreteness and quantitative stability}
+\section{Secondary quantitative routes and local stability}
 \label{sec:two-uniform}
 
 The rigidity theorem uses the stabilizer hypothesis to identify the
@@ -644,7 +47,7 @@ Put \(M=\sum_jh_j^{(j)}\) and \(M'=\sum_jh_j'^{(j)}\).  Then
 \(\langle\psi\rvert M\lvert\psi\rangle=0\) and
 \[
  \bigl\langle M\lvert\psi\rangle,\,M'\lvert\psi\rangle\bigr\rangle
-  =\frac1q\sum_{j=1}^n\Tr(h_jh'_j).                      \tag{5.1}
+  =\frac1q\sum_{j=1}^n\Tr(h_jh'_j).                      \tag{B.1}
 \]
 In particular \(\lVert M\lvert\psi\rangle\rVert^2
  =q^{-1}\sum_j\lVert h_j\rVert_F^2\), so
@@ -695,7 +98,7 @@ compact Lie groups, its image \(P\) is a closed subgroup of \(U(q^n)\), and
 \[
  \operatorname{Lie}(P)
   =\Bigl\{i\textstyle\sum_{j}H_j^{(j)}:
-    H_j=H_j^\dagger\ \text{on }\mathbb C^q\Bigr\}.       \tag{5.2}
+    H_j=H_j^\dagger\ \text{on }\mathbb C^q\Bigr\}.       \tag{B.2}
 \]
 Hence every one-parameter subgroup of a closed subgroup of \(P\) has a
 generator of that form.
@@ -767,7 +170,7 @@ factors is the \(n\geq4\) boundary above.  Englbrecht and Kraus determine
 the local symmetries of qubit stabilizer states, including where continuous
 ones occur \cite{EnglbrechtKraus2020}.  Tan computes the local symmetry
 group of the four-qutrit AME state outright, of order \(5832\)
-\cite[Theorem~5.3]{Tan2026}.  Theorem~\ref{thm:two-uniform-discrete} covers
+\cite[Theorem~B.3]{Tan2026}.  Theorem~\ref{thm:two-uniform-discrete} covers
 arbitrary local dimension and arbitrary, in particular nonstabilizer,
 \(2\)-uniform states; to our knowledge no statement at that scope is
 available.
@@ -851,9 +254,9 @@ sequence
     \longrightarrow\Pi\longrightarrow 1.
 \]
 This last extension splits exactly when the realized permutations admit a
-homomorphic choice of projective product-unitary lifts.  Its obstruction is
-a nonabelian factor set, computed in
-Appendix~\ref{sec:party-extensions}.
+homomorphic choice of projective product-unitary lifts.  We use only the
+finiteness statement here; the extension class is not part of the
+quantitative argument.
 \end{corollary}
 
 \begin{proof}
@@ -873,10 +276,9 @@ definition, a group-homomorphic right inverse; arbitrary or
 generator-by-generator lifts do not provide one.
 \end{proof}
 
-\AMEFigureThree
 
 Discreteness makes the exact symmetries isolated.  The same identity
-\((5.1)\) says how fast the defect grows away from them, with a constant
+\((B.1)\) says how fast the defect grows away from them, with a constant
 that does not involve the number of parties.
 
 \begin{theorem}[Local stability]\label{thm:two-uniform-stability}
@@ -890,7 +292,7 @@ Hermitian on \(\mathbb C^q\), and put
 If \(t\leq\frac12\) then
 \[
  \frac{D^2}q\Bigl(1-\frac t3\Bigr)\leq\varepsilon(U)^2
- \leq\frac{D^2}q\Bigl(1+\frac t3\Bigr).                  \tag{5.3}
+ \leq\frac{D^2}q\Bigl(1+\frac t3\Bigr).                  \tag{B.3}
 \]
 In particular \(D\leq\sqrt{6q/5}\,\varepsilon(U)<1.096\sqrt q\,
 \varepsilon(U)\), and \(\varepsilon(U)^2/D^2\to q^{-1}\) as \(t\to0\),
@@ -924,7 +326,7 @@ Also \(\langle M^2\rangle\leq t^2\leq\frac14\), so
 using \(\lvert\langle e^{iM}\rangle\rvert\geq
 \operatorname{Re}\langle e^{iM}\rangle\) for the lower estimate.  Since
 \(\varepsilon(U)^2=2-2\lvert\langle e^{iM}\rangle\rvert\), this is exactly
-\((5.3)\).  At \(t\leq\frac12\) the left inequality reads
+\((B.3)\).  At \(t\leq\frac12\) the left inequality reads
 \(\varepsilon^2\geq\frac56D^2/q\), and the two-sided form gives the
 limit.
 \end{proof}
@@ -935,7 +337,7 @@ the cubic Taylor cutoff, not structure.
 
 \begin{remark}[The stability constant is a Fisher metric]
 \label{rem:fisher-isotropy}
-Identity \((5.1)\) also explains why the constant does not involve \(n\).
+Identity \((B.1)\) also explains why the constant does not involve \(n\).
 For the family \(U(s)=\bigotimes_je^{ish_j}=e^{isM}\), the quantum Fisher
 information of a pure state is \(4\operatorname{Var}_\psi(M)\)
 \cite{BraunsteinCaves1994}, so
@@ -947,7 +349,7 @@ variances and cross-party covariances is the standard framework for
 metrologically useful entanglement
 \cite{HyllusEtAl2012,Toth2012}; \(2\)-uniformity is exactly the hypothesis
 that annihilates every covariance and pins every single-party variance.  On
-traceless local generators --- and only there, since \((5.1)\) says
+traceless local generators --- and only there, since \((B.1)\) says
 nothing about generators that are not sums of one-site terms --- the Fisher
 form is a flat multiple of the Euclidean one.  A degenerate direction would
 be a continuous product symmetry, which
@@ -1377,7 +779,7 @@ some \(g\in Z\), and the first step applies at that \(g\).
 The stabilizer hypothesis enters this corollary only in the last sentence
 of its statement.  The factorization itself holds for every \(2\)-uniform
 state, with \(g\) an exact product-unitary symmetry; and finiteness of the
-zero set is a consequence of \((5.1)\) rather than a separate input, since
+zero set is a consequence of \((B.1)\) rather than a separate input, since
 quadratic growth already isolates the zeros of \(f\) on a compact manifold.
 The threshold this proof produces comes from compactness and is not
 exhibited; Theorem~\ref{thm:explicit-threshold} below replaces it by a
@@ -1408,7 +810,7 @@ Then in each factor there is a unique permutation \(\pi_i\) with
 \[
  \min_{\lvert\alpha\rvert=1}
  \lVert A_ie_{ij}-\alpha e'_{i,\pi_i(j)}\rVert\leq\sqrt2\,\delta
- \qquad(1\leq j\leq N).                                  \tag{5.4}
+ \qquad(1\leq j\leq N).                                  \tag{B.4}
 \]
 \end{lemma}
 
@@ -1428,7 +830,7 @@ dominant column, and the overlap matrix is square, so the selections form a
 permutation \(\pi_1\).  Each matched column also has total squared mass one
 and contains that coefficient, so its off-axis mass is at most
 \(\delta^2\), and \(2\bigl(1-\sqrt{1-\delta^2}\bigr)\leq2\delta^2\) gives
-\((5.4)\).  Repeat in every factor.
+\((B.4)\).  Repeat in every factor.
 \end{proof}
 
 \begin{proposition}[Quantitative intertwiner rigidity]
@@ -1451,7 +853,7 @@ and that \(\delta<\tau_p\).  Then for every party \(i\) there is a
 single-qudit Clifford \(K_i\) with
 \[
  q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}
-  \leq\sqrt2\,\delta=2\sqrt2\,q^{(m+1)/2}\varepsilon .    \tag{5.5}
+  \leq\sqrt2\,\delta=2\sqrt2\,q^{(m+1)/2}\varepsilon .    \tag{B.5}
 \]
 For \(m=3\) and equal-phase CSS states of linear \([6,3,4]_q\) MDS codes
 this is the bound \(2\sqrt2\,q^2\varepsilon\) under \(2q^2\varepsilon<\tau_p\).
@@ -1502,7 +904,7 @@ gives \(\lvert q^{-1}\Tr(W_v^\dagger VW_vV^\dagger)\rvert\geq
 \(\sum_x\lvert c_x\rvert^4\geq(1-\kappa^2/2)^2\).  Hence some
 \(\lvert c_x\rvert\geq1-\kappa^2/2\), so \(V\) lies within \(\kappa\) of a
 phase times \(W_x\); absorbing that displacement into \(K_i\) gives
-\((5.5)\).  Every party lies in some \((m+1)\)-set, as in
+\((B.5)\).  Every party lies in some \((m+1)\)-set, as in
 Corollary~\ref{cor:full-weyl-cover}.
 \end{proof}
 
@@ -1618,14 +1020,14 @@ Let \(\rho=\lvert\psi\rangle\langle\psi\rvert\),
  \sum_{\substack{A\subseteq[n]\\|A|=r}}
  q^r\lVert\Delta_A\rVert_{\mathrm{HS}}^2
  \leq q^n\lVert\Delta\rVert_{\mathrm{HS}}^2
- \leq2q^n\varepsilon(U)^2.                       \tag{5.7}
+ \leq2q^n\varepsilon(U)^2.                       \tag{B.7}
 \]
 Writing \(\delta_A=q^{r/2}\lVert\Delta_A\rVert_{\mathrm{HS}}\) and
 \(N_m=\binom{2m}{m+1}\), there are two \(r\)-sets \(A,B\) with
 \(A\cup B=[n]\) and
 \[
  \delta_A^2+\delta_B^2
- \leq \frac{4q^n}{N_m}\varepsilon(U)^2.          \tag{5.8}
+ \leq \frac{4q^n}{N_m}\varepsilon(U)^2.          \tag{B.8}
 \]
 \end{lemma}
 
@@ -1641,14 +1043,14 @@ If that component is \(D_A\otimes I_{A^c}\), then
  =q^{-(n-r)}\lVert\Delta_A\rVert_{mathrm{HS}}^2.
 \]
 Exact-support subspaces are mutually orthogonal, which gives the first
-inequality in (5.7).  The second follows from
+inequality in (B.7).  The second follows from
 \(\lVert\Delta\rVert_{mathrm{HS}}^2
 =2(1-|\langle\psi|U|\psi\rangle|^2)leq2\varepsilon(U)^2\).
 
 Join two \(r\)-sets when their union is \([n]\).  This graph is regular:
 for fixed \(A\), the complement of a neighbor is any \((m-1)\)-subset of
 \(A\).  Averaging \(\delta_A^2+\delta_B^2\) over its edges gives twice
-the vertex average.  One edge therefore satisfies (5.8).
+the vertex average.  One edge therefore satisfies (B.8).
 \end{proof}
 
 The two good sets cover every party, so the quantitative-axis argument can
@@ -1670,7 +1072,7 @@ Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
  \frac{\sqrt{N_m}}{2q^{m+1/2}},
  \frac{\sqrt{N_m}}{2\pi\sqrt{2r}\,q^m},
  \frac{d_p}{1+\pi\sqrt{2r q^{2m}/N_m}}
- \right\}.                                             \tag{5.9}
+ \right\}.                                             \tag{B.9}
  \end{gathered}
 \]
 If \(\varepsilon(U)<R_{m,q}\), then, up to a global phase,
@@ -1681,7 +1083,7 @@ where the \(h_i\) are traceless Hermitian, have spectral spread at most
 \(\pi\), and satisfy
 \[
  \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
- \leq\pi\sqrt q\,\varepsilon(U).                       \tag{5.10}
+ \leq\pi\sqrt q\,\varepsilon(U).                       \tag{B.10}
 \]
 Moreover \(R_{m,q}=\Theta_q(m^{-3/4}(2/q)^m)\).  Thus this route is
 polynomial in \(m\) at \(q=2\), whenever the stated AME state exists,
@@ -1701,10 +1103,10 @@ party with
  \leq\sqrt2\delta_i,\qquad
  \sum_i\delta_i^2
  \leq r(\delta_A^2+\delta_B^2)
- \leq\frac{4rq^n}{N_m}\varepsilon(U)^2,          \tag{5.11}
+ \leq\frac{4rq^n}{N_m}\varepsilon(U)^2,          \tag{B.11}
 \]
 where \(\delta_i=\delta_A\) on \(A\) and \(\delta_i=\delta_B\) on
-\(A^c\subset B\).  The first clause of (5.9) supplies the axis threshold
+\(A^c\subset B\).  The first clause of (B.9) supplies the axis threshold
 \(\tau_p\).
 
 Choose principal eigenangles of \(K_i^\dagger U_i\) after optimizing its
@@ -1713,9 +1115,9 @@ Since \(|x|\leq(\pi/2)|e^{ix}-1|\) for \(|x|\leq\pi\),
 \[
  D^2:=\sum_i\lVert h_i\rVert_F^2
  \leq\frac{\pi^2q}{2}\sum_i\delta_i^2
- \leq\frac{2\pi^2qrq^n}{N_m}\varepsilon(U)^2.   \tag{5.12}
+ \leq\frac{2\pi^2qrq^n}{N_m}\varepsilon(U)^2.   \tag{B.12}
 \]
-The second clause of (5.9) puts all eigenangles in an arc of length
+The second clause of (B.9) puts all eigenangles in an arc of length
 \(\pi\); the third gives \(D\leq\sqrt q/2\).
 
 Put \(K=\bigotimes_iK_i\) and
@@ -1726,14 +1128,14 @@ Put \(K=\bigotimes_iK_i\) and
  \lVert(V-I)\psi\rVert^2
  =\langle2-2\cos M\rangle\leq\langle M^2\rangle=D^2/q.
 \]
-Together with (5.12), the fourth clause of (5.9) puts the rays of
+Together with (B.12), the fourth clause of (B.9) puts the rays of
 \(K\psi\) and \(\psi\) less than \(d_p\) apart.  Corollary
 \ref{cor:uniform-separation} forces \(K\in G(\psi)\).  Apply
 Theorem~\ref{thm:budget-free-stability} to the residual \(V\): its
-constant has \(c\geq4/\pi^2\), giving (5.10).
+constant has \(c\geq4/\pi^2\), giving (B.10).
 
 Finally \(N_m\sim4^m/\sqrt{\pi m}\).  The third and fourth clauses of
-(5.9) have order \(m^{-3/4}(2/q)^m\), and the other two are larger by a
+(B.9) have order \(m^{-3/4}(2/q)^m\), and the other two are larger by a
 polynomial factor.  Comparison with the
 \(q^{-(m+2)/2}/m\) scale below gives the stated boundary at \(q=4\).
 \end{proof}
@@ -1747,351 +1149,13 @@ covering pair and a telescoping estimate give it below
   \frac{\tau_p\sqrt{N_m}}{2q^m},
   \frac{\sqrt{N_m}}
        {4\pi\sqrt{2q}\sqrt{(m+1)^2+(m-1)^2}\,q^m}
- \right\}.                                           \tag{5.13}
+ \right\}.                                           \tag{B.13}
 \]
-At \(q=2\) this is of order \(m^{-5/4}\).  The loss relative to (5.9)
+At \(q=2\) this is of order \(m^{-5/4}\).  The loss relative to (B.9)
 comes from imposing a global generator \(\ell^1\) budget after the frames
 are known; it is not a remaining marginal-dilution loss.
 
-There is a stronger global route which does not estimate support sectors at
-all.  Choose one AME party as a logical input.  The other \(2m-1\) parties
-form an \([[2m-1,1,m]]_q\) stabilizer code, and the product of their local
-factors approximately implements the transpose-inverse of the factor on the
-chosen party.  Three correctable regions then test that logical action by a
-nested commutator.  The exact mechanism is standard: the stabilizer cleaning
-lemma is due to Bravyi and Terhal
-\cite[Lemma~1]{BravyiTerhal2009}, nested-commutator localization underlies the
-Bravyi--K\"onig hierarchy theorem \cite{BravyiKonig2013}, and
-Pastawski--Yoshida prove directly that a transversal logical unitary on three
-cleanable regions is Clifford \cite[Lemma~5]{PastawskiYoshida2015}.
-Disjointness gives a complementary exact-code hierarchy bound
-\cite[Theorem~5]{JochymOConnorKubicaYoder2018}.  The point below is therefore
-not a new qualitative transversal-gate obstruction.  It is the robust step:
-an implementation with leakage error \(\varepsilon\) forces every nested
-logical Weyl commutator within \(8\varepsilon\) of a scalar, after which a
-Fourier argument gives an explicit Clifford distance.
-
-For an encoding isometry \(V:\mathbb C^q\to\mathcal H\), write
-\[
- E(T,L)=q^{-1/2}\lVert TV-VL\rVert_{\mathrm{HS}}.
-\]
-It satisfies
-\(E(TS,LM)\leq E(T,L)+E(S,M)\) and
-\(E(T^\dagger,L^\dagger)=E(T,L)\).
-
-\begin{lemma}[Quantitative cleaning commutator]
-\label{lem:quantitative-cleaning-commutator}
-Let \(V\) encode one logical qudit in a stabilizer code whose physical
-parties have a partition into three correctable regions.  Let \(T\) be
-transversal, and suppose \(E(T,L)\leq\varepsilon\).  For all logical Weyl
-operators \(P,Q\),
-\[
- q^{-1/2}\min_{|z|=1}
- \lVert [[L,P],Q]-zI\rVert_{\mathrm{HS}}
- \leq8\varepsilon,                                  \tag{5.14}
-\]
-where \([A,B]=ABA^\dagger B^\dagger\).
-\end{lemma}
-
-\begin{proof}
-Let \(R_1,R_2,R_3\) be the assumed correctable partition.  The stabilizer
-cleaning lemma supplies a representative \(\widetilde P\) of \(P\) outside
-\(R_1\) and a representative \(\widetilde Q\) of \(Q\) outside \(R_2\).
-For reference, cleaning here is the elementary symplectic statement that
-the restriction of a normalizer label to a correctable region lies in the
-restriction of the stabilizer label space; subtracting that stabilizer
-removes the restriction.
-
-Transversality makes \([T,\widetilde P]\) supported outside \(R_1\), so
-\(C=[[T,\widetilde P],\widetilde Q]\) is supported on
-\(R_1^c\cap R_2^c=R_3\).  The composition rules give
-\[
- E(C,[[L,P],Q])\leq4\varepsilon.                      \tag{5.15}
-\]
-Knill--Laflamme correction on \(R_3\) gives
-\(V^\dagger C V=cI\).  Hence the logical nested commutator lies within
-\(4\varepsilon\) of \(cI\).  Its normalized Hilbert--Schmidt norm is one,
-so \(|c|\geq1-4\varepsilon\); replacing \(c\) by its phase proves (5.14).
-Notice that \(C\) need not preserve the code.  Only its scalar compression
-is used, while (5.15) controls leakage.
-\end{proof}
-
-The remaining step is finite-dimensional Fourier concentration.  It is
-stated separately because it is the point where scalar commutators become
-Clifford axes.
-
-\begin{lemma}[Nested Weyl commutators round to a Clifford]
-\label{lem:nested-weyl-rounding}
-Let \(L\in U(q)\), \(q=p^e\), and suppose for all Weyl labels \(v,w\)
-that
-\[
- q^{-1/2}\min_{|z|=1}
- \lVert [[L,W_v],W_w]-zI\rVert_{\mathrm{HS}}\leq\eta.
-\]
-If
-\[
- \eta<\tau_p:=\min\left\{\frac13,
-       \frac{\sin(\pi/p)}{2\sqrt2}\right\},
-\]
-then some additive one-qudit Clifford \(K\) satisfies
-\[
- q^{-1/2}\min_{|z|=1}\lVert L-zK\rVert_{\mathrm{HS}}\leq\eta.
-\]
-\end{lemma}
-
-\begin{proof}
-Put \(A_v=LW_vL^\dagger\).  Conjugation of \(W_w\) by \(W_v\) changes
-only its phase, so every \([A_v,W_w]\) is within \(\eta\) of a scalar.
-We use the following Fourier observation twice.  If
-\(A=\sum_a c_aW_a\) is unitary and every \([A,W_w]\) is within \(\eta\)
-of a scalar, then \(A\) lies within \(\eta\) of one Weyl axis.  Indeed,
-with \(p_a=|c_a|^2\), the commutator estimate gives
-\[
- \left|\sum_a p_a\chi_w(a)\right|\geq1-\eta^2/2.
-\]
-Character orthogonality, averaged over \(w\), yields
-\(\sum_ap_a^2\geq(1-\eta^2/2)^2\).  Thus
-\(\max_ap_a\geq(1-\eta^2/2)^2\), which is precisely the asserted
-normalized distance bound.
-
-Apply the observation to each \(A_v\), and call its unique nearby Weyl
-label \(F(v)\).  The exact identity
-\(A_{v+u}\in\mathbb C A_vA_u\) puts the axes labelled by \(F(v+u)\) and
-\(F(v)+F(u)\) within \(3\eta\).  Distinct Weyl axes have phase-optimized
-distance \(\sqrt2\), so \(\eta<1/3\) makes \(F\) additive.  Comparing
-the exact commutator phases of \(A_v,A_u\) with those of their nearby
-Weyls costs at most \(4\eta\).  The least nontrivial \(p\)-th-root chord
-is \(2\sin(\pi/p)\), so the stated bound makes \(F\) trace-symplectic.
-
-Choose an additive Clifford \(K_0\) inducing \(F\).  Then
-\(K_0^\dagger L\) approximately fixes every Weyl axis, so all its Weyl
-commutators are within \(\eta\) of scalars.  The Fourier observation puts
-it within \(\eta\) of a Weyl; multiplying that Weyl into \(K_0\) gives
-the required Clifford.
-\end{proof}
-
-At \(\varepsilon=0\), the preceding two lemmas recover the
-three-cleanable-region Clifford conclusion of
-\cite[Lemma~5]{PastawskiYoshida2015}.  Their quantitative combination, and
-the constants in (5.14), are what will be used here.
-
-\begin{theorem}[Cleaning-based global rounding]
-\label{thm:cleaning-global-rounding}
-Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
-\(q=p^e\), \(m\geq2\), and \(n=2m\).  Put
-\[
- d_p=(2-2p^{-1/2})^{1/2},
-\]
-and
-\[
- R^{\mathrm{clean}}_{n,q}=\min\left\{
-  \frac{\tau_p}{8},\frac1{4\sqrt{2q}},
-  \frac1{8\pi\sqrt n},
-  \frac{d_p}{1+4\pi\sqrt n}
- \right\}.                                           \tag{5.16}
-\]
-If \(\varepsilon(U)<R^{\mathrm{clean}}_{n,q}\), then, up to a global
-phase,
-\[
- U=g\bigotimes_{i=1}^n e^{ih_i},\qquad g\in G(\psi),
-\]
-where the \(h_i\) are traceless Hermitian, have spectral spread at most
-\(\pi\), and satisfy
-\[
- \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
- \leq\pi\sqrt q\,\varepsilon(U).                     \tag{5.17}
-\]
-Before the exact-symmetry step, the recovered local Cliffords obey
-\[
- q^{-1/2}\min_{|z|=1}\lVert U_i-zK_i\rVert_{\mathrm{HS}}
- \leq8\varepsilon(U)                                 \tag{5.18}
-\]
-at every party.  For fixed \(q\), (5.16) has order \(n^{-1/2}\),
-conditional on existence of the stated AME states.
-\end{theorem}
-
-\begin{proof}
-Choose party \(i\) as the logical leg and write the AME Choi form as
-\(q^{-1/2}\sum_a|a\rangle\otimes V_i|a\rangle\).  The other local
-factors form a transversal physical unitary \(T_i\), and vectorization
-gives a logical unitary \(L_i\), obtained from \(U_i\) by transpose and
-inverse, with \(E(T_i,L_i)=\varepsilon(U)\).  Lemmas
-\ref{lem:quantitative-cleaning-commutator} and
-\ref{lem:nested-weyl-rounding}, with \(\eta=8\varepsilon(U)\), give
-(5.18); transpose and inverse preserve the additive Clifford group.
-
-Put \(K=\bigotimes_iK_i\), choose principal logarithms of
-\(K_i^\dagger U_i\) after optimizing the local phases, and let
-\(D^2=\sum_i\lVert h_i\rVert_F^2\).  The chord--angle bound gives
-\[
- D^2\leq\frac{\pi^2q}{4}\sum_i
-  \left(q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}\right)^2
- \leq16\pi^2qn\varepsilon(U)^2.                      \tag{5.19}
-\]
-The second clause of (5.16) puts every spectrum in an arc of length
-\(\pi\); the third gives \(D\leq\sqrt q/2\).  Two-uniformity gives
-\(\lVert(K^\dagger U-I)\psi\rVert\leq D/\sqrt q
-\leq4\pi\sqrt n\,\varepsilon(U)\).  The fourth clause and the triangle
-inequality put \(K\psi\) less than \(d_p\) from \(\psi\), so
-Corollary~\ref{cor:uniform-separation} makes \(K\) an exact symmetry.
-Apply Theorem~\ref{thm:budget-free-stability} to the residual to obtain
-(5.17).
-\end{proof}
-
-The theorem already contains a genuinely collective estimate once the
-exact branch has been selected.  Writing \(g=\bigotimes_i g_i\) in the
-factorization above,
-\[
- \sum_i\left(q^{-1/2}\min_{|z|=1}
-   \lVert U_i-zg_i\rVert_{\mathrm{HS}}\right)^2
- \leq \frac{D^2}{q}
- \leq \pi^2\varepsilon(U)^2.                         \tag{5.20}
-\]
-The first inequality is the elementary chord bound
-\(\lVert e^{ih_i}-I\rVert_{\mathrm{HS}}\leq\lVert h_i\rVert_F\).
-Thus the \(\sqrt n\) loss is absent after exact-symmetry recovery.
-
-This does not enlarge the entry radius in (5.16).  Before the branch is
-known, cleaning supplies only the separate bounds (5.18) for locally
-chosen Cliffords \(K_i\).  The \(n\) encoded implementation errors are
-unitary reshapings of the same global defect vector, not projections onto
-orthogonal sectors, so their squared bounds cannot be summed by a Bessel
-argument.  A radius-improving collective estimate would itself imply
-constant-radius branch selection: the chord--angle inequality would make
-\(\sum_i\lVert h_i\rVert_F^2=O(q\varepsilon^2)\), and the uniform
-stabilizer gap would force \(\bigotimes_iK_i\) to be exact.  The missing
-input is therefore compatibility of the recovered discrete Clifford data,
-not a sharper final norm summation.
-
-The linear part of that compatibility can in fact be recovered without a
-party-count loss.
-
-\begin{proposition}[Robust symplectic-atlas compatibility]
-\label{prop:robust-linear-atlas}
-Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
-\(q=p^e\), and let \(U=\bigotimes_iU_i\) be a product unitary.  Suppose
-\[
- \varepsilon(U)<
- R_q^{\mathrm{atlas}}
- :=\min\left\{\frac{\tau_p}{8},
-   \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\}.
-\]
-The cleaning and Fourier lemmas give local Cliffords \(K_i\) satisfying
-(5.18).  Let \(F_i\) be their symplectic maps.  Then
-\[
- F_jM_A(i,j)=M_A(i,j)F_i
-\]
-for every \((m+1)\)-set \(A\) and \(i,j\in A\).  Consequently
-\(F=\bigoplus_iF_i\) preserves the stabilizer label group \(L\), and some
-product-Pauli correction \(W_vK\) is an exact symmetry of \(\psi\).
-\end{proposition}
-
-\begin{proof}
-Fix \(A\), distinct \(i,j\in A\), and put
-\(B=A^c\cup\{i,j\}\).  Both \(A\) and \(B\) have size \(m+1\), while
-\(A\cap B=\{i,j\}\).  Choose \(\ell\in L(A)\) and \(r\in L(B)\), and set
-\[
- C=[UW_\ell U^\dagger,W_r].
-\]
-After choosing the phase of \(U\) realizing its defect,
-\(\lVert(UW_\ell U^\dagger-I)\psi\rVert\leq2\varepsilon(U)\), and the
-same holds with the adjoint.  Since \(W_r\psi=\psi\),
-\[
- \lVert(C-I)\psi\rVert\leq4\varepsilon(U).             \tag{5.21}
-\]
-
-The commutator is supported only on \(A\cap B=\{i,j\}\).
-Choose phases so that
-\(\lVert U_s-K_s\rVert_{\mathrm{HS}}\leq8\sqrt q\,\varepsilon(U)\).
-Replacing \(U_sW_{\ell_s}U_s^\dagger\) by its \(K_s\)-conjugate costs at
-most \(16\sqrt q\,\varepsilon(U)\) in operator norm, and replacing its
-commutator with \(W_{r_s}\) costs at most twice that.  On the two sites,
-the total cost is therefore at most
-\(64\sqrt q\,\varepsilon(U)\).  The Clifford commutator is a scalar
-\(p\)-th root \(\zeta\), so (5.21) gives
-\[
- |\zeta-1|\leq(4+64\sqrt q)\varepsilon(U)<2\sin(\pi/p).
-\]
-Hence \(\zeta=1\).
-
-Write \(a=\ell_i\), \(b=r_i\),
-\(\ell_j=M_A(i,j)a\), and \(r_j=M_B(i,j)b\).
-The identity \(\zeta=1\), for all \(a,b\), says
-\[
- [F_i a,b]+[F_jM_A(i,j)a,M_B(i,j)b]=0.                \tag{5.22}
-\]
-Here brackets denote the trace-symplectic pairing.  Isotropy of \(L\),
-applied to the element of \(L(A)\) whose \(i\)-coordinate is \(F_i a\),
-gives
-\[
- [F_i a,b]+[M_A(i,j)F_i a,M_B(i,j)b]=0.
-\]
-Subtracting this from (5.22), using surjectivity of \(M_B(i,j)\) and
-nondegeneracy of the pairing, proves the atlas equation.
-The exact atlas theorem gives \(FL=L\), and
-Lemma~\ref{lem:pauli-phase-correction} supplies \(W_v\).
-\end{proof}
-
-The Pauli correction in the proposition is essential.  All localized
-commutators are unchanged when a recovered \(K_i\) is multiplied by a
-local Weyl: that multiplication changes conjugation phases, and the
-commutator cancels them.  Equivalently, the symplectic atlas sees \(L\)
-but not its stabilizer character.  The correction \(v\) can therefore be
-nonzero modulo \(L\), in which case \(W_vK\) need not be locally close to
-\(U\).  Exact affine compatibility cannot be obtained from these
-commutator tests, and Proposition~\ref{prop:robust-linear-atlas} alone
-does not improve (5.16).  Controlling the character discrepancy is the
-same remaining branch-selection problem isolated by the collective
-estimate above.
-
-The exact formula, rather than a fixed-dimension slogan, controls scaling.
-Uniformly over prime powers \(q=p^e\) and existing tensors,
-\[
- R^{\mathrm{clean}}_{n,q}
- =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{5.23}
-\]
-with absolute implied constants.  Indeed
-\(\sin(\pi/p)=\Theta(p^{-1})\), while \(d_p\) is bounded above and below
-by positive absolute constants.  An asymptotic use of (5.23) must specify
-an existing family.
-
-For the explicit generalized and extended generalized Reed--Solomon
-construction, \(n=2m\leq q+1\), so the party-count term cannot be smaller
-than the local-dimension term.  Hence
-\[
- R^{\mathrm{clean}}_{n,q}
- =\begin{cases}
-   \Theta(q^{-1}),&q=p,\\
-   \Theta(q^{-1/2}),&q=p^e,\ e\geq2.
-  \end{cases}                                                        \tag{5.24}
-\]
-On a length-saturating subfamily \(n\asymp q\), these are
-\(\Theta(n^{-1})\) and \(\Theta(n^{-1/2})\), respectively.  For fixed
-characteristic and growing extension degree, the second line applies.
-The earlier fixed-\(q\), \(n^{-1/2}\) reading of the exact minimum remains
-a conditional formal slice only; it is not an AME-existence claim.
-
-If the sharper local constant and the old global generator budget are
-needed, the same proof gives the conclusion of
-Corollary~\ref{cor:approximate-decomposition} under
-\[
- \varepsilon(U)<\min\left\{
-  \frac{\tau_p}{8},\frac1{16\pi n\sqrt q}
- \right\}.                                           \tag{5.25}
-\]
-Indeed (5.18), the operator-norm bound by Hilbert--Schmidt norm, and the
-principal logarithm give
-\(\sum_i\lVert h_i\rVert_{\mathrm{op}}
-\leq8\pi n\sqrt q\,\varepsilon(U)<1/2\); the sharp local theorem then
-gives \(D\leq\sqrt{6q/5}\,\varepsilon(U)\).
-
-The cleaning route supersedes both explicit radii above on every admissible
-parameter pair where its displayed minimum is larger, and it has no
-boundary at \(q=4\).  The earlier theorems remain useful because they expose the exact
-cost of reading one marginal and of aggregating orthogonal minimum-support
-sectors.  The new \(n^{-1/2}\) scale is a proved lower bound, not an
-optimality claim; no product-unitary family is known to saturate the
-collective frame-error estimate (5.19).
+\subsection{The single-marginal decomposition threshold}
 
 \begin{theorem}[Explicit decomposition threshold]
 \label{thm:explicit-threshold}
@@ -2183,6 +1247,8 @@ defect ball inside that coordinate region.  The cleaning theorem supplies
 the inverse statement at radius of order \(n^{-1/2}\), with no claim that
 this party-count dependence is optimal.
 
+\subsection{Local gauge groups of two-unitary gates}
+
 \begin{corollary}[Local gauge groups of \(2\)-unitary gates]
 \label{cor:two-unitary-gauge}
 Let \(W\) be a two-qudit gate whose associated four-party state
@@ -2239,189 +1305,3 @@ subfamily has been classified, with perfect-tensor cores appearing among
 its equivalence classes \cite{Pahari2026}; the corollary says that for
 \(2\)-unitary gates the gauge group itself is finite and, in the stabilizer
 case, Clifford.
-
-\section{Exact MDS--CSS logical images and lifts}
-\label{sec:exact-logical}
-
-\begin{proposition}[The diagonal-multiplier line]
-\label{prop:diagonal-multiplier-line}
-Let \(E,F\leq\F_q^{2m}\) be linear
-\([2m,m,m+1]_q\) MDS codes, and put
-\[
- \mathcal D(E,F)=
- \{s\in\F_q^{2m}:\diag(s)E\subseteq F\}.
-\]
-Every nonzero \(s\in\mathcal D(E,F)\) has full coordinate support and
-\(\diag(s)E=F\).  Consequently
-\[
- \dim_{\F_q}\mathcal D(E,F)\leq1,
- \qquad
- \mathcal D(E,E)=\F_q(1,\ldots,1).
-\]
-In particular, \(\mathcal D(C,C^\perp)\) has dimension zero or one,
-and \(C\) is diagonally isodual exactly in the dimension-one case.
-When that line exists, any two nonzero witnesses differ by a unique
-nonzero scalar, so every ratio \(s_i/s_j\) is intrinsic.
-\end{proposition}
-
-\begin{proof}
-Let \(s\ne0\), and write \(D=\diag(s)\).  If \(D\) had support of size at
-most \(m\), choose a word of \(E\) nonzero at a supported coordinate.
-Its image would be a nonzero word of \(F\) of weight at most \(m\),
-contrary to the distance of \(F\).  Thus \(D\) has at least \(m+1\)
-nonzero entries.  Its kernel on \(E\) consists of words supported on at
-most \(m-1\) coordinates, so the distance of \(E\) makes that kernel
-zero.  Equal dimensions now give \(DE=F\).  A zero diagonal entry would
-force every word of \(F\) to vanish at that coordinate, which an MDS code
-does not, so \(s\) has full support.
-
-If two multipliers were independent, a nonzero linear combination could
-be chosen to vanish at one coordinate, contradicting full support.
-Hence \(\dim\mathcal D(E,F)\leq1\).  The all-ones vector belongs to
-\(\mathcal D(E,E)\), proving the self-multiplier statement.  Taking
-\(F=C^\perp\) gives the remaining assertions.
-\end{proof}
-
-\begin{proof}[Proof of
-Corollary~\ref{cor:diagonal-isodual-transversal-group}]
-Write a fixed-party product-Clifford action on Pauli labels as
-\[
- F_i=\begin{pmatrix}\alpha_i&\beta_i\\
-                     \gamma_i&\delta_i\end{pmatrix},
-\]
-and let \(D_\alpha,D_\beta,D_\gamma,D_\delta\) be the diagonal
-matrices with the corresponding entries.  Preservation of
-\(L_C=C_X\oplus C^\perp_Z\) is equivalent to
-\[
-\begin{array}{ll}
-D_\alpha C\subseteq C,&D_\gamma C\subseteq C^\perp,\\
-D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
-\end{array}                                             \tag{6.1}
-\]
-
-If the block at the chosen input is nondiagonal, then \(D_\beta\) or
-\(D_\gamma\) is nonzero.
-Proposition~\ref{prop:diagonal-multiplier-line} and \((6.1)\) give
-\[
- D_\gamma C=C^\perp\qquad\text{or}\qquad
- D_\beta C^\perp=C.
-\]
-The second equality can be inverted, so either one supplies a
-nonsingular diagonal \(S\) with \(SC=C^\perp\).  Consequently, on the
-non-isodual branch every input block is diagonal.  Its determinant is
-one, and the common blocks \(\diag(a,a^{-1})\) always preserve \(L_C\);
-hence the exact linear factor there is \(T\).
-
-Now suppose
-\[
- S=\diag(s_1,\ldots,s_{2m}),\qquad SC=C^\perp .          \tag{6.2}
-\]
-The projective vector \([s_1:\cdots:s_{2m}]\), and hence every propagation
-ratio \(s_i/s_j\), depends only on \(C\).
-
-For \(\lambda,\mu\in\F_q\), put
-\[
- F_i^-(\lambda)=
- \begin{pmatrix}1&0\\ \lambda s_i&1\end{pmatrix},
- \qquad
- F_i^+(\mu)=
- \begin{pmatrix}1&\mu s_i^{-1}\\0&1\end{pmatrix}.       \tag{6.3}
-\]
-On the CSS label space
-\(L_C=(C\oplus0)+(0\oplus C^\perp)\), the product of the lower blocks
-sends
-\[
- (c,h)\longmapsto(c,h+\lambda Sc),
-\]
-and the product of the upper blocks sends
-\[
- (c,h)\longmapsto(c+\mu S^{-1}h,h).
-\]
-Thus both products preserve \(L_C\) and lift to product-Clifford tensor
-symmetries: Lemma~\ref{lem:pauli-phase-correction} supplies the required
-product-Pauli corrections.  Thus label-space preservation is sufficient
-here; no coherent choice of Clifford phases is being assumed.
-At any chosen input party \(j\), their blocks run through all lower and
-upper elementary unipotents because \(s_j\ne0\).  Together these generate
-\(\mathrm{SL}_2(q)\).  Under the Choi correspondence, an input block
-\(A\) induces the logical block \(A^{-T}\).  This map is an automorphism
-of \(\mathrm{SL}_2(q)\), so every one-qudit logical symplectic action has
-a product-Clifford physical implementation.  Logical Paulis have
-physical Pauli representatives, so the full projective one-qudit
-Clifford group
-\(\F_q^2\rtimes\mathrm{SL}_2(q)\) is transversal.
-
-Corollary~\ref{cor:transversal-clifford} excludes every product-unitary
-logical action outside that group.  Hence the displayed group is exact.
-
-For a generalized or extended generalized Reed--Solomon code, the
-standard dual formula supplies \((6.2)\), including the extended
-evaluation point at length \(q+1\)
-\cite[Sections~5.2--5.3]{HuffmanPless2003}.  Thus the GRS tower lies on the
-diagonally isodual branch, but the proof used no evaluation structure.
-
-There are two different lift questions behind this projective statement.
-Fix an input coordinate \(j\), put \(t_i=s_i/s_j\), and write
-\[
- A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\mathrm{SL}_2(q).
-\]
-Propagation to coordinate \(i\) is
-\[
- \phi_i(A)=
- \begin{pmatrix}a&t_i^{-1}b\\t_i c&d\end{pmatrix}
- =
- \begin{pmatrix}1&0\\0&t_i\end{pmatrix}
- A
- \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{6.4}
-\]
-Thus every \(\phi_i\) is a homomorphism, \(\phi_j\) is the identity,
-and the elementary matrices in \((6.3)\) satisfy all
-\(\mathrm{SL}_2(q)\) relations coordinatewise.  This calculation also
-applies at the extended evaluation point.  It uses only the diagonal
-duality \(SC=C^\perp\), not the evaluation formula for a GRS code.
-
-For the present odd prime \(q\), and more generally for any odd prime
-power, the finite Stone--von Neumann representation of the Heisenberg
-group \(H_q\) extends to a genuine representation of
-\(\mathrm{SL}_2(q)\ltimes H_q\)
-\cite[Theorem~1]{Gerardin1976}.  Apply its Weil factor to each
-\(\phi_i(A)\).  The resulting tensor product is multiplicative in
-\(A\), and exact Egorov covariance preserves the CSS stabilizer line.
-Consequently the one-qudit Clifford scalar extension, restricted to the
-linear \(\mathrm{SL}_2(q)\) factor, splits coherently with the propagated
-tensor symmetries.  The exceptional uniqueness clause at \(q=3\) in
-G\'erardin's theorem does not remove existence.
-
-The affine extension does not split.  Choose \(a,b\in\F_q\) with
-\(\chi(ab)\ne1\), and put \(X=X(a)\), \(Z=Z(b)\).  Their projective
-classes commute, whereas every choice of unitary representatives
-satisfies
-\[
- ZX=\chi(ab)XZ,\qquad \chi(ab)\ne1 .
-\]
-Scalar changes of \(X\) and \(Z\) do not change their commutator.
-Hence the translation subgroup
-\(\F_q^2\) has no homomorphic lift to the one-qudit unitary Clifford
-group.  The coherent lift above is therefore
-\(H_q\rtimes\mathrm{SL}_2(q)\), not a section of
-\(\F_q^2\rtimes\mathrm{SL}_2(q)\) through the scalar quotient.
-This is the Heisenberg central extension, not a residual metaplectic
-or Schur-multiplier obstruction on \(\mathrm{SL}_2(q)\).
-
-Neither conclusion decides the party-permutation extension in
-Corollary~\ref{cor:discrete-lu-symmetry}.  Its quotient is the
-evaluation-set-dependent realized permutation group \(\Pi\), and its
-kernel is the full fixed-party projective group \(\Gamma\), rather than
-the scalar phases.  Its splitting remains exactly the nonabelian
-factor-set triviality criterion of Appendix~\ref{sec:party-extensions}.
-\end{proof}
-
-For a stabilizer state, the hypotheses of
-Corollary~\ref{cor:full-weyl-cover} hold whenever every party belongs to
-a support \(S\) of size at least three whose supported stabilizer label
-subgroup has order \(q^2\) and projects isomorphically onto the local
-Weyl-label group at every party of \(S\).  No \(\F_q\)-linearity of that
-subgroup is needed, in keeping with the arbitrary-additive scope of
-Theorem~\ref{thm:lu-lc-rigidity}; and by
-Corollary~\ref{cor:recognition-generation} even the order \(q^2\) may be
-relaxed, provided the labels recovered at each party generate.

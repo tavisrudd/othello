@@ -53,8 +53,6 @@
   \ifdefined\AMEHideFigureOne\else\input{figures/01-operator-holonomy}\fi}
 \newcommand{\AMEFigureTwo}{%
   \ifdefined\AMEHideFigureTwo\else\input{figures/02-axis-recovery}\fi}
-\newcommand{\AMEFigureThree}{%
-  \ifdefined\AMEHideFigureThree\else\input{figures/03-symmetry-groups}\fi}
 \newcommand{\AMEFigureFour}{%
   \ifdefined\AMEHideFigureFour\else
     Figure~\ref{fig:defect-landscape} gives a roadmap for the local estimates,
@@ -63,16 +61,14 @@
   \fi}
 \newcommand{\AMEFigureFive}{%
   \ifdefined\AMEHideFigureFive\else\input{figures/05-stability-radius}\fi}
-\newcommand{\AMEFigureSix}{%
-  \ifdefined\AMEHideFigureSix\else\input{figures/06-pencil-quotient}\fi}
 
-\title{Local-Unitary Rigidity of Stabilizer AME States and
-Transversal Clifford Groups of MDS--CSS Codes}
+\title{Local-Unitary Rigidity and Quantitative Rounding for
+Stabilizer AME States}
 \author{Tavis Rudd}
 \date{July 2026}
 \hypersetup{
-  pdftitle={Local-Unitary Rigidity of Stabilizer AME States and
-    Transversal Clifford Groups of MDS--CSS Codes},
+  pdftitle={Local-Unitary Rigidity and Quantitative Rounding for
+    Stabilizer AME States},
   pdfauthor={Tavis Rudd}
 }
 
@@ -80,64 +76,45 @@ Transversal Clifford Groups of MDS--CSS Codes}
 \maketitle
 
 \begin{abstract}
-Let \(q=p^e\).  For every \(m\geq2\), each product-unitary intertwiner
-between two stabilizer \(\AME(2m,q)\) states is Clifford factor by factor.
-On any \(m+1\) parties, the supported stabilizer labels form a
-\(q^2\)-element group and project bijectively onto the complete local Weyl
-basis at every party in the marginal.  The reduced operator therefore determines
-its local Weyl axes intrinsically.  Consequently, every tensor-product
-conversion between the associated \([[2m-1,1,m]]_q\) stabilizer
-quantum-MDS encoders is Clifford on every physical factor and on the
+Let \(q=p^e\) and \(m\geq2\).  Every product-unitary intertwiner between
+two stabilizer \(\AME(2m,q)\) states is Clifford on each party.  The proof
+recovers the complete local Weyl frame from any \((m+1)\)-party marginal:
+the supported stabilizer labels form a \(q^2\)-element group and project
+bijectively onto the local Weyl labels.  These support bijections also form
+a minimum-support atlas which classifies local-unitary equivalence up to
+local symplectic changes of frame.  As an encoder consequence, every
+transversal conversion between the associated
+\([[2m-1,1,m]]_q\) stabilizer codes is Clifford on every physical and
 logical factor.
-Discreteness of these symmetry groups needs neither maximal entanglement
-nor stabilizer structure: every pure state whose two-party marginals are
-all maximally mixed, at any local dimension, has finite product-unitary
-symmetry group modulo phase, and the defect of a product unitary grows
-quadratically away from that group with an explicit ratio constant
-independent of the number of parties.  The certified set is described in
-generator coordinates: its \(\ell^1\) radius is governed by the state's
-uniformity order.  For a stabilizer state the exact product-Clifford
-symmetries are not merely isolated: any product Clifford outside the
-symmetry group has defect at least \((2-2p^{-1/2})^{1/2}\), a constant of
-the characteristic alone.  Quantitative Clifford rounding and that
-separation remove compactness from the approximate-symmetry decomposition
-and give defect-only thresholds.  Viewing each party as the logical leg of
-an \([[2m-1,1,m]]_q\) code, a quantitative three-region cleaning argument
-rounds every local factor at constant error and gives a global threshold of
-order
-\(\min\{p^{-1},q^{-1/2},m^{-1/2}\}\).  On the explicit
-Reed--Solomon AME tower \(2m\leq q+1\), this is of order \(q^{-1}\) over
-prime fields and \(q^{-1/2}\) at extension degree at least two.
-This bypasses the exponentially faint minimum-support marginals.
-Modulo party relabelling and local trace-symplectic
-\(\F_p\)-linear changes of frame, the transition atlas obtained by pushing
-Weyl labels between parties on minimum supports is a complete structured
-LU invariant.
 
-For equal-phase CSS states of linear \([2m,m,m+1]_q\) MDS codes over an
-odd prime field, the exact fixed-party projective transversal logical group
-is \(\F_q^2\rtimes\mathrm{SL}_2(q)\) precisely when \(C\) is diagonally
-isodual, and \(\F_q^2\rtimes T\) otherwise, where \(T\) is the split
-torus; generalized Reed--Solomon codes lie on the first branch.
-
-For \(m=3\), a degree-eight quotient \(z\) classifies projective and
-monomial-code equivalence on an explicit non-GRS pencil of six-point arcs
-over odd fields; over odd prime fields it also classifies local-Clifford
-and local-unitary equivalence.
+We prove a quantitative counterpart without reading the exponentially
+small Weyl signal of one marginal.  Viewing each party as the logical leg
+of the associated code, a leakage-aware three-region cleaning argument and
+Weyl--Fourier concentration round every local factor within \(8\varepsilon\)
+of a Clifford.  The uniform stabilizer overlap gap then selects an exact
+symmetry and gives a defect-only decomposition radius
+\[
+ \Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),\qquad n=2m,
+\]
+with residual generator norm at most \(\pi\sqrt q\,\varepsilon\).
+At a dimension-only radius the rounded symplectic maps already satisfy the
+exact minimum-support atlas.  The remaining obstruction is affine: localized
+commutators cancel the stabilizer-character phases and therefore cannot
+control the product-Pauli correction.  On generalized and extended
+Reed--Solomon AME families the certified scale is \(\Theta(q^{-1})\) over
+prime fields and \(\Theta(q^{-1/2})\) at extension degree at least two.
 \end{abstract}
+
 
 \input{sections/01-introduction}
 \input{sections/02-geometry-ame-dictionary}
-\input{sections/03-lu-rigidity}
-\input{sections/04-pencil-classification}
-\input{sections/05-logical-clifford-phase}
-\input{sections/06-lu-invariants}
+\input{sections/03-exact-rigidity-atlas}
+\input{sections/05-quantitative-rounding}
 \input{sections/08-verification-boundary}
 \input{sections/07-conclusion}
 \appendix
-\input{sections/10-scalar-certificates}
-\input{sections/07-transport-sheaf}
-\input{sections/09-party-extensions}
+\input{sections/A-partial-weyl-recognition}
+\input{sections/B-secondary-quantitative}
 
 \section*{AI assistance disclosure}
 

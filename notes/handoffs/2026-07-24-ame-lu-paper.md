@@ -2,13 +2,29 @@
 
 **Lane:** `ame-lu`
 
-**Purpose:** complete the paper titled *Local-Unitary Rigidity of
-Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes*.
+**Purpose:** complete the two-paper AME rigidity and MDS--CSS transversal
+groups release programme.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).
 
 ## Current status
+
+**C844 closed (2026-08-02): Paper I is sharply independent.** The authoritative
+`papers/ame_lu` root now builds a warning-free 35-page *Local-Unitary
+Rigidity and Quantitative Rounding for Stabilizer AME States*. Exact rigidity
+starts on page 1 and cleaning-based rounding on page 2; the body retains the
+minimum-support atlas, encoder no-go, robust symplectic compatibility, uniform
+scaling, and the affine stabilizer-character obstruction. Partial-Weyl
+recognition and the secondary quantitative routes are restrained appendices.
+All Paper II sections, figures, and the complete inherited computational
+supplement have been removed after rechecking Paper II's independent ownership
+and replay. The theorem-only cold read, rendered-page sweep, warning-free
+build, metadata syntax check, and source-boundary scans pass. The pre-split
+release manifest, semantic Lean gate, formal-root contract, public formal
+extraction, and standalone synchronization remain deliberately untouched and
+need separately allocated successor work. See
+`2026-08-02-c844-ame-lu-paper-i-sharpening.md`.
 
 **C842 closed (2026-08-02): Paper II is independently established and the
 combined baseline remains intact.**  The new authoritative root

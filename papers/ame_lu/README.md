@@ -1,30 +1,21 @@
-# Paper: Local-unitary rigidity of stabilizer AME states
+# Paper: Local-unitary rigidity and quantitative rounding
 
-**Title:** *Local-Unitary Rigidity of Stabilizer AME States and
-Transversal Clifford Groups of MDS--CSS Codes.*
+**Title:** *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer
+AME States.*
 
 **Lane:** `ame-lu`
 
-**Status:** post-version-1 general-theorem revision. Every local-unitary
-intertwiner between arbitrary additive stabilizer `AME(2m,q)` states is
-local Clifford, for every prime power and \(m\geq2\).  Transversal
-conversions between the associated stabilizer `[[2m-1,1,m]]_q` quantum-MDS
-encoders are Clifford factor by factor; over odd prime fields the MDS--CSS
-specialization has exact projective
-transversal logical group `F_q^2 ⋊ SL_2(q)`, and diagonal isoduality is the
-exact all-length condition for that group rather than the split-torus
-alternative.  The six-party pencil and logical-phase applications retain
-their existing scopes. Public identifiers,
-public deposit, and submission authorization remain author gates. Repository
-metadata identifies Tavis Rudd, and the release is licensed under CC BY 4.0.
+**Status:** Paper I of the completed manuscript split. The source builds as a
+35-page paper centered on exact stabilizer-AME rigidity, cleaning-based
+quantitative rounding, the minimum-support atlas, and the affine
+stabilizer-character obstruction. The MDS--CSS exact-group, six-point,
+computational, transport, and party-extension material is owned by the
+separate `mds_css_transversal_groups` paper.
 
-The formal companion distinguishes the kernel-checked
-finite-coordinate, minimum-support, diagonal-axis, and Choi cores from the
-remaining stabilizer-state/reduced-density composition.  The previous
-release is superseded; the current content-addressed manifest pins this
-revision.
-Its version-independent archival locator is the Zenodo concept DOI
-[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
+Public identifiers, deposit, and submission remain author gates. The release
+manifest, paper-specific formal-root contract, and standalone synchronization
+are later split phases and have not been refreshed from the pre-split
+baseline.
 
 ## Build
 
@@ -34,54 +25,41 @@ From this directory:
 make check
 ```
 
-The build driver is `main.tex`; section units are under `sections/`.
-
-The `supplement/` directory contains the paper-local report, exact generators,
-compact certificates, load-bearing input, SHA-256 manifest, and deterministic
-replay driver for every adopted computation.  Run `make evidence` for the
-integrity gate or `python3 supplement/verify.py --replay` for full regeneration.
-
-The `release/` directory contains the immutable release manifest and its
-verifier. Run `make release-check` for the warning-free manuscript build, full
-evidence replay, and release-manifest verification.
+The build driver is `main.tex`; section units are under `sections/`. This
+paper has no computational supplement or certificate dependency.
 
 ## Mathematical scope
 
-The headline theorem studies arbitrary additive stabilizer `AME(2m,q)`
-tensors.  Linear `[2m,m,m+1]_q` MDS--CSS states supply the exact-group and
-geometric specialization; the detailed applications use `AME(6,q)` tensors
-from six-point projective arcs.  Its proved core is:
+For every prime power `q=p^e` and every `m≥2`, each product-unitary
+intertwiner between additive stabilizer `AME(2m,q)` states is Clifford on
+every party. The support bijections on `(m+1)`-party marginals form a
+minimum-support atlas which classifies the residual local symplectic frames.
+The Choi interpretation gives a factorwise transversal Clifford no-go for the
+associated stabilizer `[[2m-1,1,m]]_q` encoders.
 
-1. uniform LU-to-LC rigidity and factorwise rigidity of transversal encoder
-   conversions;
-2. the field-generic one-dimensional diagonal-multiplier/nullity test and
-   the resulting exact full-Clifford versus split-torus transversal
-   dichotomy over odd prime fields;
-3. exact local-Clifford classification of the admitted non-GRS pencil by one
-   bracket scalar `z`;
-4. the `SL_2(q)` versus split-torus logical-Clifford phase on and off the GRS
-   locus;
-5. exact splitting of twelve concrete party-permutation extensions, with odd
-   motion enlarging `T` to `N(T)` on the listed non-GRS/H3 rows;
-6. uniform arbitrary-LU separation of good H3 reductions from every GRS
-   class;
-7. an exact four-copy separator for the difficult `q=13` pair; and
-8. a transport-sheaf explanation of the exceptional contraction divisor and
-   its multiplicities.
+For an approximate product symmetry with defect `ε`, three-region cleaning
+and Weyl--Fourier rounding put every local factor within normalized
+Hilbert--Schmidt distance `8ε` of a Clifford. Stabilizer-overlap quantization
+then selects an exact branch and gives a certified radius
 
-Fixed-copy permutation contractions cannot supply a generic pencil
-coordinate: on an equal-phase linear-code state each is a power of `q`
-determined by a linear-system rank.  Their maximal minors detect special
-rank-jump divisors, but their values are generically constant.
+```text
+Theta(min{p^-1, q^-1/2, n^-1/2}),  n=2m,
+```
 
-For the admitted odd non-GRS pencil, equal-phase MDS stabilizer rigidity and
-the pencil-classification theorem give `LU iff LC iff z equality`.  The
-additive-stabilizer theorem is stronger: every LU intertwiner between
-stabilizer AME states is factorwise Clifford.  This is a theorem for the
-stabilizer-AME class, not a revival of the false global LU--LC conjecture
-for arbitrary stabilizer states.
+with collective residual generator norm at most `pi sqrt(q) ε`. At a
+dimension-only radius, the rounded symplectic maps already satisfy the exact
+atlas. Localized commutators do not see the affine stabilizer character, so
+the remaining product-Pauli correction need not be locally small.
 
-## Evidence
+The appendices retain partial-Weyl recognition, detailed two- and `k`-uniform
+stability, and the single-marginal and aggregate rounding routes as mechanism
+comparisons. They are not competing headline theorems.
 
-The claim-level artifact map, exact replay commands, and trust boundaries are
-recorded in `supplement/EVIDENCE.md`.
+## Formal boundary
+
+Selected finite-coordinate, support-profile, diagonal-axis, holonomy,
+stabilizer-character, Choi, and second-moment cores are kernel checked in the
+shared `RelativeConicArcs.AMELU` namespace. The cleaning constants, Fourier
+rounding, global quantitative theorem, robust atlas compatibility, and affine
+obstruction are manuscript proofs without Lean or certificate coverage. A
+paper-specific semantic gate has not yet replaced the pre-split aggregate.

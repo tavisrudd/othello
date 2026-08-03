@@ -25,7 +25,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C844 `[ame-lu]` [QUEUED NEXT; TWO-PAPER SPLIT PHASE C]** — trim Paper I only after rechecking Paper II ownership, reorder it around exact stabilizer-AME rigidity and the cleaning-based `n^{-1/2}` quantitative theorem, retain robust symplectic-atlas compatibility and the affine-character obstruction, move secondary quantitative routes to restrained appendices, and rewrite its title/front matter/conclusion/trust ledgers to the frozen 32--36-page target; stop before the formal-gate or standalone split → `notes/2026-08-02-c844-ame-lu-paper-i-sharpening.md`.
 
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in

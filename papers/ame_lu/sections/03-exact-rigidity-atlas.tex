@@ -1,0 +1,347 @@
+\section{Full-Weyl marginals and LU rigidity}\label{sec:rigidity}
+
+We first isolate the linear-algebra statement that recovers a diagonal
+tensor's coordinate axes.  It is the full-Weyl counterpart of the
+three-Pauli argument in \cite{Rains1999,VanDenNestDehaeneDeMoor2005}.
+The statement itself is classical: it is Jennrich's uniqueness theorem for
+trilinear decompositions, published in \cite[\S V]{Harshman1970} and there
+credited to Jennrich, whose conclusion that the factor matrices agree up to
+one permutation and compensating diagonal scalings is the monomial property
+below.  It is the full-column-rank case of Kruskal's condition
+\cite{Kruskal1977}, extended to arbitrarily many factors in
+\cite{SidiropoulosBro2000}; see \cite[\S3.2]{KoldaBader2009} for the
+attribution and for a survey of the uniqueness theory.  We give a short
+self-contained proof because the contraction argument is the one used in
+Proposition~\ref{prop:full-weyl-marginal}, and claim no novelty for either
+the statement or the proof.
+
+\begin{lemma}[Diagonal-tensor axes]\label{lem:diagonal-axes}
+Let \(r\geq3\), let \(E_1,\ldots,E_r\) be \(N\)-dimensional complex inner
+product spaces, and choose orthonormal bases
+\(\{e_{ij}:1\leq j\leq N\}\).  If
+\[
+ T=\sum_{j=1}^N\lambda_j
+ e_{1j}\otimes\cdots\otimes e_{rj},\qquad \lambda_j\ne0,       \tag{3.1}
+\]
+then the coordinate axes in every \(E_i\) are intrinsic to \(T\).
+Consequently, a product of invertible linear maps carrying one tensor of
+the form \((3.1)\) to another is monomial in the displayed bases.
+\end{lemma}
+
+\begin{proof}
+For nonzero \(x=\sum_jx_je_{1j}^*\), contract the first factor against
+\(x\).  The result is
+\[
+ T_x=\sum_j\lambda_jx_j e_{2j}\otimes\cdots\otimes e_{rj}.
+\]
+Flattening from \(E_2\) to \(E_3\otimes\cdots\otimes E_r\) gives a matrix
+of rank \(\#\{j:x_j\ne0\}\).  Thus \(T_x\) has rank one exactly when
+the ray of \(x\) is a dual coordinate axis.  Product equivalence preserves
+this projective rank-one contraction locus.  The inner products identify
+the recovered dual axes with the coordinate axes in the first factor.
+Apply the same argument in every factor.
+\end{proof}
+
+\AMEFigureTwo
+
+Call an operator on \(r\geq3\) qudits \emph{full-Weyl diagonal} if there
+is a \(q^2\)-element set \(P\), a distinguished element \(0\in P\), and
+bijections \(f_i:P\to\F_q^2\) with \(f_i(0)=0\), for which
+\[
+ R=\sum_{v\in P}\lambda_v
+       \bigotimes_{i=1}^r W_{f_i(v)},\qquad \lambda_v\ne0.       \tag{3.2}
+\]
+The coefficients need not be equal.  What matters is that the same
+\(q^2\)-element index set runs bijectively through the complete local
+Weyl basis at every party.  Neither \(P\) nor the bijections need be
+\(\F_q\)-linear.
+
+\begin{proposition}[Full-Weyl marginal criterion]
+\label{prop:full-weyl-marginal}
+Let \(R\) and \(R'\) be full-Weyl diagonal operators on the same
+\(r\geq3\) parties, possibly with different indexing sets, bijections,
+and coefficients.  If
+\[
+ R'=(U_1\otimes\cdots\otimes U_r)R
+       (U_1\otimes\cdots\otimes U_r)^\dagger ,
+\]
+then every \(U_i\) is Clifford.
+\end{proposition}
+
+\begin{proof}
+View \(R\) and \(R'\) as tensors in the local Hilbert--Schmidt spaces.
+After replacing \(W_v\) by the orthonormal basis \(q^{-1/2}W_v\) and
+absorbing the common normalization into the coefficients, both have the
+form in Lemma~\ref{lem:diagonal-axes}, with \(N=q^2\).
+Local conjugation acts invertibly on each factor, so it must permute the
+Weyl axes.  It fixes the identity operator and hence the identity axis.
+It therefore permutes the nonidentity projective Weyl operators, which
+is exactly the single-qudit Clifford condition.
+\end{proof}
+
+\begin{corollary}[Full-Weyl marginal-cover rigidity]
+\label{cor:full-weyl-cover}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be \(n\)-qudit states and
+suppose a product unitary carries \(\lvert\psi\rangle\) to
+\(\lvert\phi\rangle\) up to phase, any party permutation having first been
+absorbed by relabelling \(\lvert\phi\rangle\), so that the two states are
+indexed by the same parties.  If every
+party belongs to a set \(S\) of at least three parties for which both
+reduced operators \(\rho^\psi_S\) and \(\rho^\phi_S\) are full-Weyl
+diagonal, then every local factor is Clifford.
+\end{corollary}
+
+\begin{proof}
+Partial trace gives a product-unitary equivalence of the two reduced
+operators on each chosen \(S\).  Apply
+Proposition~\ref{prop:full-weyl-marginal}; the chosen sets cover all
+parties.
+\end{proof}
+
+\begin{proposition}[Stabilizer-AME support theorem]
+\label{prop:stabilizer-ame-support}
+Let \(\lvert\psi\rangle\) be a stabilizer
+\(\AME(2m,q)\) state, and let \(A\) be any \(m+1\) parties.  Then
+\[
+ |L(A)|=q^2.
+\]
+Every nonidentity label in \(L(A)\) has support exactly \(A\), and for
+each \(i\in A\) the coordinate projection
+\[
+ p_i:L(A)\longrightarrow\F_q^2
+\]
+is bijective.
+\end{proposition}
+
+\begin{proof}
+The projective label group \(L\) has order \(q^{2m}\).  Restrict its
+labels to the \(m-1\) parties outside \(A\).  The target has order
+\(q^{2(m-1)}\), and the kernel is \(L(A)\); hence
+\[
+ |L(A)|\geq q^{2m}/q^{2(m-1)}=q^2.                    \tag{3.3}
+\]
+Fix \(i\in A\).  A label in the kernel of \(p_i\) is supported on the
+\(m\)-set \(A\setminus\{i\}\).  The AME condition and \((2.2)\) exclude
+every such nonidentity stabilizer, so \(p_i\) is injective.  Its codomain
+has order \(q^2\), giving the reverse inequality in \((3.3)\) and hence
+bijectivity.  The same no-small-support argument shows that every
+nonidentity element of \(L(A)\) has full support \(A\).
+\end{proof}
+
+\begin{proposition}[A stabilizer-AME marginal fixes the local Weyl axes]
+\label{prop:marginal-axes}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
+\(\AME(2m,q)\) states.  If a product unitary on an \((m+1)\)-set \(A\)
+carries \(\rho^\psi_A\) to \(\rho^\phi_A\), then every local factor on
+\(A\) is Clifford.
+\end{proposition}
+
+\begin{proof}
+By \((2.2)\),
+\[
+ \rho^\psi_A=q^{-|A|}
+   \sum_{\ell\in L_\psi(A)}\widetilde W_\ell .
+\]
+Index this sum by \(P=L_\psi(A)\).  Proposition
+\ref{prop:stabilizer-ame-support} says that every coordinate projection
+\(P\to\F_q^2\) is bijective.  Relative to the fixed Weyl convention, each
+stabilizer lift contributes a nonzero coefficient.  Thus
+\(\rho^\psi_A\) is full-Weyl diagonal in the sense of \((3.2)\), and the
+same holds for \(\rho^\phi_A\).  Apply
+Proposition~\ref{prop:full-weyl-marginal}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
+Absorb the party permutation by relabelling \(\lvert\phi\rangle\).  Partial
+trace gives a product-unitary equivalence
+\(\rho^\psi_A\sim\rho^\phi_A\) for every \((m+1)\)-set \(A\).  Given a
+party \(i\), choose such a set containing it and apply
+Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
+\end{proof}
+
+\section{Minimum-support atlases and encoder consequences}
+\label{sec:atlas}
+
+The same support calculation recovers standard quantum-MDS structure.
+If \(|A|\leq m\), the AME condition gives \(L(A)=\{0\}\).  If
+\(|A|>m\), then \(\rho^\psi_{A^c}\) is maximally mixed, so purity of the
+global state gives
+\(\Tr((\rho^\psi_A)^2)=q^{-(2m-|A|)}\).  On the other hand, \((2.2)\)
+and Weyl orthogonality give
+\(\Tr((\rho^\psi_A)^2)=q^{-|A|}|L(A)|\).  Hence, for every party set
+\(A\),
+\[
+ |L(A)|=q^{2\max(|A|-m,0)}.                              \tag{4.1}
+\]
+M\"obius inversion is the stabilizer-state specialization of the
+quantum-MDS Shor--Laflamme distribution of Huber and Grassl
+\cite[Theorems~8 and 9]{HuberGrassl2020}; in particular the number of
+weight-\(m+1\) projective stabilizers is
+\(\binom{2m}{m+1}(q^2-1)\).  We use one further consequence.  If
+\(|A|\geq m+2\) and \(i\ne j\) lie in \(A\), then the dimensions in
+\((4.1)\), together with
+\[
+ L(A\setminus\{i\})\cap L(A\setminus\{j\})
+   =L(A\setminus\{i,j\}),
+\]
+give
+\[
+ L(A)=L(A\setminus\{i\})+L(A\setminus\{j\}).             \tag{4.2}
+\]
+Descending induction shows that the \((m+1)\)-supported subgroups span
+the full label group.  This is the additive quantum-MDS form of
+minimum-weight generation, not a separate weight-enumerator claim.
+
+We now prove the atlas classification stated in the introduction.  Regard
+each local label group
+\[
+ P_i=\F_q^2
+\]
+as a \(2e\)-dimensional trace-symplectic space over \(\F_p\).  For every
+\((m+1)\)-set \(A\) and \(i,j\in A\), the support theorem defines the
+operator-pushing transition
+\[
+ M_A(i,j)=p_jp_i^{-1}:P_i\longrightarrow P_j.
+\]
+\AMEFigureOne
+
+For two states \(\psi,\phi\) on the same labelled parties, a
+\emph{symplectic atlas equivalence} is a tuple
+\(F_i\in\operatorname{Sp}(P_i)\) satisfying
+\[
+ F_jM_A^\psi(i,j)=M_A^\phi(i,j)F_i
+ \quad\text{for every \(A\) and \(i,j\in A\)}.           \tag{4.3}
+\]
+Here
+\(\operatorname{Sp}(P_i)=\operatorname{Sp}_{2e}(\F_p)\) is the action
+induced by the standard
+additive local Clifford group.
+
+For one state, define
+\[
+\begin{split}
+ \Gamma_\psi
+  &=\{[U]\in\operatorname{PU}(q^{2m}):
+       U=U_1\otimes\cdots\otimes U_{2m},\
+       U\lvert\psi\rangle\in\mathbb C\lvert\psi\rangle\},\\
+ \mathcal G_\psi
+  &=\{(F_i)\in\prod_i\operatorname{Sp}(P_i):
+       F_jM_A(i,j)=M_A(i,j)F_i\ \text{for all }A,i,j\in A\}.
+\end{split}
+\]
+Theorem~\ref{thm:lu-lc-rigidity} and the Clifford sequence \((2.0)\)
+give a well-defined homomorphism
+\[
+ \lambda_\psi:\Gamma_\psi\longrightarrow\mathcal G_\psi,\qquad
+ [U_1\otimes\cdots\otimes U_{2m}]\longmapsto(\overline U_i)_i,
+\]
+where \(\overline U_i\) is the induced symplectic label map.  A product
+decomposition is unique up to one-site scalars, which do not change
+\(\overline U_i\).  The injection
+\(L_\psi\hookrightarrow\Gamma_\psi\) sends a label
+\(\ell\) to the projective Pauli \([W_\ell]\).
+
+\begin{lemma}[Pauli phase correction]\label{lem:pauli-phase-correction}
+Let \(\psi\) and \(\phi\) be stabilizer states with Lagrangian label groups
+\(L_\psi\) and \(L_\phi\).  If a product Clifford \(U\) induces a
+symplectic label map carrying \(L_\psi\) onto \(L_\phi\), then there is a
+product Pauli \(W_v\) such that
+\(W_vU\lvert\psi\rangle\in\mathbb C\lvert\phi\rangle\).
+\end{lemma}
+
+\begin{proof}
+The state \(U\lvert\psi\rangle\) is stabilized on the same Pauli axes as
+\(\lvert\phi\rangle\), possibly with a different stabilizer character.
+The trace-symplectic pairing identifies the ambient label space modulo
+\(L_\phi=L_\phi^\perp\) with the character dual of \(L_\phi\).  Choose
+\(v\) whose pairing character is the inverse of the discrepancy.
+Conjugation by the product Pauli \(W_v\) cancels it.  The corrected state
+and \(\lvert\phi\rangle\) therefore lie in the same one-dimensional joint
+stabilizer eigenspace.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas-classification}]
+First fix the party labels.  A block symplectic map
+\(F=\bigoplus_iF_i\) carrying \(L_\psi\) to \(L_\phi\) carries every
+supported subgroup \(L_\psi(A)\) to \(L_\phi(A)\).  Writing these
+subgroups as graphs through any projection \(p_i\) gives exactly
+\((4.3)\).
+
+Conversely, suppose \((4.3)\) holds.  Fix \(A\) and \(i\in A\).  Every
+element of \(L_\psi(A)\) is uniquely determined by its \(i\)-coordinate,
+and the equations with \(j\in A\) show that its image under \(F\) is the
+unique element of \(L_\phi(A)\) with \(i\)-coordinate \(F_i p_i(\ell)\).
+Thus \(F L_\psi(A)=L_\phi(A)\).  Since the \((m+1)\)-supported subgroups
+generate the full label groups, \(F L_\psi=L_\phi\).
+
+Sequence \((2.0)\) supplies local Clifford lifts of the \(F_i\), and
+Lemma~\ref{lem:pauli-phase-correction} supplies the product-Pauli
+correction.  Hence an atlas equivalence lifts to an LC equivalence.
+The reverse implication follows
+from the induced label action, and Theorem~\ref{thm:lu-lc-rigidity}
+replaces LC by LU.  A party permutation is absorbed by relabelling first.
+
+For automorphisms, \(\lambda_\psi\) is surjective by the same lifting and
+phase-correction argument.  Its kernel consists of projective product
+Paulis by \((2.0)\).  Such a Pauli fixes the state ray exactly when its
+label lies in \(L_\psi^\perp=L_\psi\).  Thus the displayed injection of
+\(L_\psi\) identifies it with \(\ker\lambda_\psi\), proving exactness.
+
+Finally suppose \(q=p\).  Form the directed multigraph with vertices the
+parties and an edge \((A,i,j)\) carrying \(M_A(i,j)\).  Every pair of
+parties belongs to an \((m+1)\)-set, so the graph is connected.  Choose a
+base \(b\), a spanning tree, and tree transports
+\(T_i:P_b\to P_i\), with \(T_b=I\).  For every edge define its based
+holonomy
+\[
+ H_A(i,j)=T_j^{-1}M_A(i,j)T_i\in\operatorname{GL}_2(q).
+\]
+Compatibility propagates a base block \(F_b\) uniquely as
+\(F_i=T_iF_bT_i^{-1}\); the edge \((A,i,j)\) is then compatible exactly
+when \(F_b\) commutes with \(H_A(i,j)\).  Since
+\(\operatorname{Sp}_2(\F_q)=\mathrm{SL}_2(q)\) is normal in
+\(\mathrm{GL}_2(q)\), every propagated block remains symplectic.
+Evaluation at the base therefore identifies
+\(\mathcal G_\psi\) with the holonomy centralizer inside
+\(\mathrm{SL}_2(q)\).  Different spanning trees generate the same based
+holonomy subgroup; changing the base conjugates that subgroup, and hence
+its centralizer, by a chosen transport.
+\end{proof}
+
+\subsection{Encoder consequences}
+
+\begin{proof}[Proof of Corollary~\ref{cor:transversal-clifford}]
+The input marginal of each AME Choi state is \(q^{-1}I\), so one-leg
+reshaping gives an isometry.  The projection of its stabilizer label group
+onto the input Weyl-label space is surjective: otherwise a nonzero local
+label orthogonal to the image would lie in the maximal isotropic space
+\(L^\perp=L\), contradicting the absence of a one-party stabilizer.  The
+kernel therefore has \(q^{2m-2}\) elements and stabilizes the image, making
+it a one-logical-qudit stabilizer code.  AME corrects erasure of any
+\(m-1\) outputs, so its distance is at least \(m\); the quantum Singleton
+bound gives equality.  This is the standard perfect-tensor/quantum-MDS
+correspondence used in \cite[Theorems~3.5 and 3.6]{Tan2026}.
+
+Let \(\lvert\Phi\rangle=q^{-1/2}\sum_x\lvert x,x\rangle\), and use the
+Choi convention
+\(\lvert\psi\rangle=(I\otimes V_\psi)\lvert\Phi\rangle\) and
+\(\lvert\phi\rangle=(I\otimes V_\phi)\lvert\Phi\rangle\).
+Writing \(U_{\mathrm{phys}}=\bigotimes_iU_i\), the relation
+\(U_{\mathrm{phys}}V_\psi=V_\phi L\) gives
+\[
+ (I\otimes U_{\mathrm{phys}})\lvert\psi\rangle
+   =(L^T\otimes I)\lvert\phi\rangle .
+\]
+Hence
+\[
+ \bigl((L^T)^{-1}\otimes U_{\mathrm{phys}}\bigr)
+   \lvert\psi\rangle=\lvert\phi\rangle .
+\]
+Theorem~\ref{thm:lu-lc-rigidity} makes every displayed local factor
+Clifford.  Entrywise conjugation preserves the finite-field Weyl group,
+since \(\overline{X(a)}=X(a)\) and
+\(\overline{Z(b)}=Z(-b)\); it therefore preserves the Clifford
+normalizer.  Taking adjoints preserves the normalizer as well, and
+\(U^T=(\overline U)^\dagger\).  Thus transposition preserves the
+finite-field Clifford group, and \(L\) is Clifford.
+\end{proof}

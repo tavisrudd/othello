@@ -15,5 +15,9 @@ two-paper split. The pre-split combined baseline is preserved by:
   `570086982b26075a71a331a81bb1b519e9a27e7f`.
 
 The content-addressed public and formal trees identify the combined baseline.
-The standalone history remains forward-only. Paper I is not trimmed until the
-new Paper II root builds and replays its inherited evidence independently.
+The standalone history remains forward-only. Paper II now builds and replays
+the inherited evidence independently, so this root has been trimmed to Paper
+I's exact and quantitative theorem package. The pre-split release manifest and
+formal aggregate remain recorded but are not current Paper I release
+identities; later phases own the semantic formal gate, regenerated manifest,
+and forward standalone synchronization.
