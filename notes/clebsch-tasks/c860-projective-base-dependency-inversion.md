@@ -19,7 +19,10 @@ executed by sub-agents under the C855 management session. Stage 1 lands
 immediately in the next free finitegeom build window; stages 2--4 execute as
 one window with a single revalidation sweep; the C855 rename/gate/manifest
 window runs only after that; Paper II repackaging under C577 waits for
-stages 2--4.
+stages 2--4. Once C860 is complete and Paper I's hard formalization parts have
+landed, the Paper II and Paper III Lean plans get a dedicated review pass to
+correct any planning gaps against the post-relocation closure (Tavis,
+2026-08-03).
 
 ## Why this exists
 
