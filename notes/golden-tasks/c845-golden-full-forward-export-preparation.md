@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** queued after C829 and before C840
+**Status:** active; source preparation committed, stopped at the missing canonical finitegeom exporter contract
 
 ## Objective
 
@@ -78,3 +78,12 @@ push, replace repository history, or claim that the paper is fully formalized.
 C840 validates the prepared canonical Lean export, including clean-checkout
 elaboration and axiom reconciliation.  C841 then adds the public companion
 declaration and performs the history-preserving standalone paper promotion.
+
+## Current checkpoint
+
+The committed source checkpoint, paper-export evidence, formal-coverage
+ledger, and exact missing-contract boundary are recorded in
+`notes/2026-08-02-c845-golden-full-forward-export-preparation.md`. Resume this
+task only after the repository-owned guarded exporter can target canonical
+finitegeom from immutable source and base commits. Do not use the superseded
+suffixed clone to bypass that gate.

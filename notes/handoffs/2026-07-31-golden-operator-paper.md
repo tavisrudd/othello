@@ -521,11 +521,17 @@ mutation is authorized before its recorded gates.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 
-C845, C840, and C841 are the allocated Golden successors.  C845 first owns
-the exporter-only full-forward preparation: authoritative paper and Lean trust
-roots, canonical `~/src/lean/finitegeom` destination contract, tracked-PDF
-disposition, and disposable export gates.  The suffixed finitegeom candidate
-clone is superseded read-only evidence and must not be edited.  C840 then owns
+C845 is active. Its immutable source checkpoint adds the narrow import-only
+Golden quantum-statistics gate and makes the tracked-PDF policy explicitly
+immutable-source. The disposable paper plan, audit, deterministic
+materialization, manifest, sixteen-page check, and exact sixteen-file forward
+delta pass without touching the live mirror. The Lean source gate builds in a
+clean worktree, but the repository has no guarded exporter from an immutable
+Othello trust unit onto an immutable canonical `~/src/lean/finitegeom` base;
+C845 stops at that exact build-system-owned contract rather than editing either
+destination or using the superseded suffixed clone. Details:
+`notes/2026-08-02-c845-golden-full-forward-export-preparation.md`.
+C840 and C841 remain allocated successors. C840 then owns
 the claim-by-claim Lean reconciliation, canonical exported-candidate
 validation, honest partial-coverage boundary, manifests, gate, and deferred
 quiet-window validation.  C841 begins only after that exact gate passes and owns the
