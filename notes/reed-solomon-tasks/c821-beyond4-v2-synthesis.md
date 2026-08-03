@@ -71,6 +71,12 @@ Three independent readers first returned MAJOR.
 Post-repair cold-read verdicts are recorded in the closeout below; internal
 AI review does not replace the still-pending external publication signoff.
 
+Final closeout: the coding reader returned **ACCEPT** on the corrected
+pointed bounds \(19+i\leq23\); the finite-geometer returned **ACCEPT** on the
+conditional all-level scope and fixed R10 proof; and the trust/release reader
+returned **ACCEPT** on the flattened clean export, 75-label map, 69-artifact
+bundle, and fail-closed publication gate.
+
 ## Mystery and cheap-opportunity ledger
 
 - **Resolved:** the apparent all-level package theorem was a scope error, not
