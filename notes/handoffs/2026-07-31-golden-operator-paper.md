@@ -535,11 +535,19 @@ forward commit `42794f25`; both endpoints and the live manifest verify, with no
 push, tag, remote mutation, or formal-companion declaration. The
 Lean source gate builds in a
 clean worktree, and generated facts give exactly `{propext}` for all four
-terminals. The monolithic relconic audit retains 165 unrelated baseline errors,
-and the repository has no guarded exporter from an immutable
-Othello trust unit onto an immutable canonical `~/src/lean/finitegeom` base;
-C845 stops at that exact build-system-owned contract rather than editing either
-destination or using the superseded suffixed clone. Details:
+terminals. The monolithic relconic audit retains 165 unrelated baseline errors.
+By explicit user instruction the missing guarded exporter was then built:
+`lean/scripts/lean-companion-export.py` derives a gate's project-local closure,
+terminal list, and observed axioms from the committed registry and generated
+fact, materializes a disposable candidate on the canonical
+`~/src/lean/finitegeom` base twice, requires byte-identical repeats, verifies
+byte identity, manifests, terminals, and an unchanged base, and prints a
+read-only forward delta without committing, tagging, pushing, or editing either
+repository. Its Golden configuration is
+`lean/trust/export/golden_quantum_statistics.toml`, and an end-to-end run gives
+a ten-file forward delta taking the canonical library state from 273 to 275
+modules. That candidate is deliberately not adopted or elaborated because C853
+replaces its four scalar terminals. Details:
 `notes/2026-08-02-c845-golden-full-forward-export-preparation.md`.
 C853 is queued after C845 to remediate the substantive formal-coverage gap
 identified by the exhaustive Lean audit.  Its checklist starts from the

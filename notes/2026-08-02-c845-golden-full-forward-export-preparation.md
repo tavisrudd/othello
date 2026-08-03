@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** paper forward-exported by explicit user instruction; canonical Lean export stopped at a missing guarded exporter contract
+**Status:** paper forward-exported by explicit user instruction; the guarded canonical Lean exporter now exists and runs end to end, with candidate adoption deferred to the successor formal-remediation gate
 
 ## Result
 
@@ -166,6 +166,59 @@ the contract exists, resume C845 to generate facts/external views, create the
 single canonical exported candidate, and pass the remaining source, manifest,
 prose, axiom, and deterministic-export gates before handing it to C840.
 
+## Guarded exporter now exists
+
+The missing seven-point contract is implemented as
+`lean/scripts/lean-companion-export.py`, with `lean/scripts/test_lean_companion_export.py`
+covering it and `lean/trust/export/golden_quantum_statistics.toml` supplying the
+Golden destination names and release prose.  The tool is generic: the area
+configuration holds only file names and prose, while the module closure,
+terminal list, and observed axioms are derived from the committed trust
+registry and the generated fact of the declared gate.
+
+Against the seven required points:
+
+1. `--source-commit` and `--base-commit` read only committed blobs of this
+   repository and of canonical `/home/tavis/src/lean/finitegeom`.
+2. The closure is derived twice — from the generated fact and from a transitive
+   import walk — and disagreement refuses the run; the terminal list comes from
+   the registry and must equal the fact's terminal set.
+3. Materialization clones the canonical base, detaches at the exact base
+   commit, drops the clone's remote, and writes only planned files, so base
+   tree and history are preserved and nothing is committed.
+4. Modules, `lakefile.toml` roots, the area registry, trust statement, axiom
+   audit, area source and target manifests, the global target manifest, and the
+   README and provenance module counts are all generated mechanically.
+5. Verification checks module byte identity against the source blobs, manifest
+   completeness against candidate bytes, registry and axiom-audit terminal
+   agreement, detached-at-base state, absent remote, unchanged base worktree and
+   head, and byte-identical repeat materialization.
+6. Any repository whose directory name is a suffixed `finitegeom-*` clone is
+   refused as base and as destination, as is a destination inside the base or on
+   a memory-backed filesystem.
+7. The forward delta is read-only `git status` output and must equal the planned
+   file set exactly; no commit, fast-forward, tag, push, or canonical edit
+   occurs anywhere in the tool.
+
+Base prose drift is not silently repaired: the base's provenance statement still
+declares a 251-module library state while its manifest records 273, so the run
+refuses unless `--accept-base-prose-drift` is passed, and then leaves that
+statement untouched and reports it.
+
+An end-to-end run over source commit `8c5437ef` and base commit `0b3f37d2`
+produces a byte-identical repeat, passes verification, and yields a ten-file
+forward delta: the two closure modules, the trust statement, axiom audit, area
+registry, and the two area manifests are added, while `README.md`,
+`TARGET_MANIFEST.json`, and `lakefile.toml` are modified, taking the declared
+library state from 273 to 275 modules.  The canonical repository remains clean
+at `0b3f37d2` with its single existing tag.
+
+That candidate was not adopted and was not elaborated.  Its content is the
+four scalar terminals that the successor formal-remediation task replaces, so
+the clean-checkout elaboration, axiom audit against the generated registry, and
+adoption decision belong to that task's build gate rather than to a candidate
+that is about to be superseded.
+
 ## Mystery ledger
 
 - **Settled:** the tracked PDF is immutable source evidence, never disposable
@@ -176,9 +229,10 @@ prose, axiom, and deterministic-export gates before handing it to C840.
   there was no manual copy, history replacement, tag, or push.
 - **Settled:** the four Lean declarations are mechanism-level partial coverage,
   not full theorem formalization.
-- **Open:** the canonical finitegeom forward-export mechanism is absent. The
-  exact required contract is the seven-point gate above; build-system ownership
-  is the evidence gap.
+- **Settled:** the canonical finitegeom forward-export mechanism now exists as
+  `lean/scripts/lean-companion-export.py`, satisfies all seven contract points,
+  and has passed an end-to-end deterministic run against the current canonical
+  base without mutating it.
 - **Settled:** exact terminal facts are generated; all four terminals use only
   `propext` and introduce no project axiom.
 - **Settled:** the project-local closure is exactly two modules and 4,860
