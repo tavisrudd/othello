@@ -4,6 +4,8 @@ This directory is the authoritative manuscript root for the unnumbered Golden
 quantum-statistics companion. It is a theory and design-limit paper, not a
 fifth numbered Clebsch-series paper and not a report of a built device.
 
+[Read the paper (PDF).](golden_quantum_statistics.pdf)
+
 The paper owns:
 
 - the determinant orientation and permanent port-gauge boundary;
