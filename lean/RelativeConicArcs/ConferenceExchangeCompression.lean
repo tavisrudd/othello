@@ -146,6 +146,45 @@ theorem commutator_mul_positiveProjection (Q D : Matrix m m ℝ) (hQ : Q * Q = 1
     Matrix.mul_assoc, hQ]
   module
 
+/-- An eigenframe is fixed by the projection onto its own eigenspace. -/
+theorem positiveProjection_mul_frame (Q : Matrix m m ℝ) (Qp : Matrix m ι ℝ)
+    (hQp : Qpᵀ * Qp = 1) (hPp : Qp * Qpᵀ = positiveProjection Q) :
+    positiveProjection Q * Qp = Qp := by
+  rw [← hPp, Matrix.mul_assoc, hQp, Matrix.mul_one]
+
+/-- On a positive eigenframe, the commutator of the control with the involution
+is twice the complementary projection of the controlled frame. -/
+theorem commutator_mul_frame (Q D : Matrix m m ℝ) (Qp : Matrix m ι ℝ) (hQ : Q * Q = 1)
+    (hQp : Qpᵀ * Qp = 1) (hPp : Qp * Qpᵀ = positiveProjection Q) :
+    (D * Q - Q * D) * Qp = (2 : ℝ) • (negativeProjection Q * D * Qp) := by
+  conv_lhs => rw [← positiveProjection_mul_frame Q Qp hQp hPp]
+  rw [← Matrix.mul_assoc, commutator_mul_positiveProjection Q D hQ, Matrix.smul_mul,
+    Matrix.mul_assoc, positiveProjection_mul_frame Q Qp hQp hPp]
+
+/-- The exchange operator of the transfer block is a quarter of the compression
+of `Lᵀ * L`, where `L` is the commutator of the control with the involution.
+This is the matrix form of the statement that the transfer is, up to the factor
+two, the complementary projection of the controlled positive eigenspace. -/
+theorem four_smul_transferBlock_gram (Q D : Matrix m m ℝ) (Qp Qm : Matrix m ι ℝ)
+    (hQ : Q * Q = 1) (hQsym : Qᵀ = Q) (hD : Dᵀ = D)
+    (hQp : Qpᵀ * Qp = 1) (hPp : Qp * Qpᵀ = positiveProjection Q)
+    (hQm : Qm * Qmᵀ = negativeProjection Q) :
+    (4 : ℝ) • ((transferBlock D Qp Qm)ᵀ * transferBlock D Qp Qm)
+      = Qpᵀ * ((D * Q - Q * D)ᵀ * (D * Q - Q * D)) * Qp := by
+  have hPmsym : (negativeProjection Q)ᵀ = negativeProjection Q := by
+    simp [negativeProjection, Matrix.transpose_smul, Matrix.transpose_sub, hQsym]
+  have hPmm := negativeProjection_mul_self Q hQ
+  have hframe := commutator_mul_frame Q D Qp hQ hQp hPp
+  have hsplit : Qpᵀ * ((D * Q - Q * D)ᵀ * (D * Q - Q * D)) * Qp
+      = ((D * Q - Q * D) * Qp)ᵀ * ((D * Q - Q * D) * Qp) := by
+    simp [Matrix.transpose_mul, Matrix.mul_assoc]
+  rw [hsplit, hframe, transferBlock_gram Q D Qp Qm hD hQm]
+  rw [Matrix.transpose_smul, Matrix.smul_mul, Matrix.mul_smul, smul_smul]
+  congr 1
+  · norm_num
+  · simp only [Matrix.transpose_mul, hD, hPmsym, Matrix.mul_assoc]
+    rw [← Matrix.mul_assoc (negativeProjection Q) (negativeProjection Q), hPmm]
+
 end Compression
 
 end ConferenceExchange
