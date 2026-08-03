@@ -1,5 +1,7 @@
 # Paper: Local-unitary rigidity and quantitative rounding
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21681856.svg)](https://doi.org/10.5281/zenodo.21681856)
+
 **Title:** *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer
 AME States.*
 
