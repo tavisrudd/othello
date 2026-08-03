@@ -2546,8 +2546,17 @@
       "last": 848,
       "purpose": "repair Paper II atlas import, stale equation references, and companion citation boundary",
       "sequence": 283
+    },
+    {
+      "count": 1,
+      "first": 849,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 849,
+      "purpose": "PRS Version 2 abstract and strength-positioning repair",
+      "sequence": 284
     }
   ],
-  "next_id": 849,
+  "next_id": 850,
   "schema": "codex-task-id-allocations-v1"
 }
