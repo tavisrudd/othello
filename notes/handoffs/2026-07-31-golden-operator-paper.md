@@ -509,7 +509,9 @@ submission-package pass synchronizes the public README boundary, the
 sixteen-page build record and hashes, and the Zenodo title and description
 with the integrated manuscript.  The archive-facing PDF pass adds the missing
 embedded title, author, subject, and keyword metadata without changing visible
-content.
+content.  A final public-package consistency pass finds no stale title, page
+count, hash, or bibliography key and removes the redundant instruction to run
+the source-replay subgate again after the complete gate.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 

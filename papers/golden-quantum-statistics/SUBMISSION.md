@@ -38,8 +38,10 @@ Rebuild and verify from this directory with:
 
 ```sh
 make check
-make verify-sources
 ```
+
+For the generator and independent-replay subgate alone, use
+`make verify-sources`.
 
 ## Proof and trust ledger
 
