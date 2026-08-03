@@ -72,7 +72,15 @@ preference, not a task.
 ## Rosetta hosting and the series map
 
 **Decision input (session discussion, 2026-08-03):** the Rosetta theorem is
-hosted by the golden paper. It owns the operator corpus the proof draws on,
+hosted by the golden lane's standalone operator paper — *Golden conference
+operator and its shadow sisters*, the paper the 2026-07-31 ownership
+decision assigned the C704--C710 corpus to. That manuscript is not yet
+live; the lane's only live manuscript, the quantum-statistics
+interferometer companion, is the wrong host (physics register and
+audience). If the operator paper stays unstarted when the Rosetta is
+wanted, the fallback is a short standalone series note in the golden lane,
+not the quantum companion. The operator paper owns the corpus the proof
+draws on,
 sits outside the numbered series so it may cite all four papers freely, and
 is not constrained by released-version immutability; the torsor-Rosetta Lean
 gate is its formal anchor. Paper III is the runner-up but may not absorb the
