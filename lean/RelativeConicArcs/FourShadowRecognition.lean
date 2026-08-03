@@ -74,38 +74,53 @@ private def singleBump (i : Fin 6) : Fin 6 → R :=
 private def doubleBump (i j : Fin 6) : Fin 6 → R :=
   fun k => singleBump i k + singleBump j k
 
+set_option maxHeartbeats 800000 in
+private theorem pairTriangleSum_eq_translationMixedDifference
+    (C : Matrix (Fin 6) (Fin 6) R)
+    (hsymm : C.transpose = C)
+    (hdiag : ∀ i, C i i = 0)
+    (i j : Fin 6) (hij : i ≠ j) :
+    pairTriangleSum C i j =
+      triangleCubic C (fun k => doubleBump i j k + 1) -
+      triangleCubic C (fun k => singleBump i k + 1) -
+      triangleCubic C (fun k => singleBump j k + 1) +
+      triangleCubic C (fun _ => 1) := by
+  have hs : ∀ a b, C a b = C b a := by
+    intro a b
+    simpa [Matrix.transpose_apply] using
+      congrArg (fun M : Matrix (Fin 6) (Fin 6) R => M b a) hsymm
+  fin_cases i <;> fin_cases j <;>
+    simp_all [triangleCubic, cubicTerm, pairTriangleSum, triangleSign,
+      doubleBump, singleBump, hdiag, hs, Fin.sum_univ_succ] <;>
+    ring
+
 /-- Translation invariance of the triangle cubic makes every pair moment
 vanish.  The four translated sparse vectors implement the mixed finite
 difference which extracts the coefficient through the chosen pair. -/
 theorem pairTriangleSum_eq_zero_of_triangleCubic_translate
     (C : Matrix (Fin 6) (Fin 6) R)
+    (hsymm : C.transpose = C)
     (hdiag : ∀ i, C i i = 0)
     (htranslate : ∀ (x : Fin 6 → R) (t : R),
       triangleCubic C (fun i => x i + t) = triangleCubic C x)
     (i j : Fin 6) (hij : i ≠ j) :
     pairTriangleSum C i j = 0 := by
-  have hboth := htranslate (doubleBump i j) 1
-  have hleft := htranslate (singleBump i) 1
-  have hright := htranslate (singleBump j) 1
-  have hzero := htranslate (fun _ => 0) 1
-  have hij' := hij
-  fin_cases i <;> fin_cases j <;> simp_all only [Fin.isValue, Fin.zero_eta,
-    Fin.mk.injEq, OfNat.ofNat, ne_eq, not_false_eq_true]
-  all_goals
-    simp [triangleCubic, cubicTerm, pairTriangleSum, triangleSign,
-      doubleBump, singleBump, hdiag] at hboth hleft hright hzero ⊢
-    ring_nf at hboth hleft hright hzero ⊢
-    linear_combination hboth - hleft - hright + hzero
+  rw [pairTriangleSum_eq_translationMixedDifference C hsymm hdiag i j hij,
+    htranslate (doubleBump i j) 1, htranslate (singleBump i) 1,
+    htranslate (singleBump j) 1, htranslate (fun _ => 0) 1]
+  fin_cases i <;> fin_cases j <;>
+    simp_all [triangleCubic, cubicTerm, doubleBump, singleBump]
 
 /-- Nonzero proportionality of the two cubic shadows forces all pair moments
 of a zero-diagonal matrix to vanish. -/
 theorem pairTriangleSum_eq_zero_of_cubicsProportional
     (C : Matrix (Fin 6) (Fin 6) R) (mu : R)
+    (hsymm : C.transpose = C)
     (hdiag : ∀ i, C i i = 0)
     (hmu : mu ≠ 0) (hprop : CubicsProportional C mu)
     (i j : Fin 6) (hij : i ≠ j) :
     pairTriangleSum C i j = 0 := by
-  apply pairTriangleSum_eq_zero_of_triangleCubic_translate C hdiag _ i j hij
+  apply pairTriangleSum_eq_zero_of_triangleCubic_translate C hsymm hdiag _ i j hij
   exact triangleCubic_translate_of_proportional C mu hmu hprop
 
 /-- Pair balance and nonzero edges make the square of a symmetric matrix
@@ -171,7 +186,7 @@ theorem exists_mul_self_eq_scalar_of_cubicsProportional
     (hmu : mu ≠ 0) (hprop : CubicsProportional C mu) :
     ∃ lambda : R, C * C = lambda • (1 : Matrix (Fin 6) (Fin 6) R) := by
   have hbalance : ∀ i j, i ≠ j → pairTriangleSum C i j = 0 :=
-    pairTriangleSum_eq_zero_of_cubicsProportional C mu hdiag hmu hprop
+    pairTriangleSum_eq_zero_of_cubicsProportional C mu hsymm hdiag hmu hprop
   apply exists_scalar_mul_self_of_offDiagonal_zero C hedge
   exact mul_self_apply_eq_zero_of_pairBalance C hsymm hedge hbalance
 
@@ -417,6 +432,8 @@ theorem exists_nonzero_cubicsProportional_iff_conferenceSquare
     intro i hi
     exact pairTriangleSum_eq_zero_of_cubicsProportional
       (normalizedSignMatrix bits) mu (by
+        ext p q
+        fin_cases p <;> fin_cases q <;> rfl) (by
         intro k
         fin_cases k <;> rfl) hmu hprop 0 i hi
   · intro hsq
