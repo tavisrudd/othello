@@ -9,6 +9,21 @@ recorded in [`../2026-08-02-c855-paper-i-assertion-inventory.md`](../2026-08-02-
 the formalization bullets of section 2 and all of sections 3--11 are open. Required before the Paper I formal artifact is called
 referee-ready or packaged for its next public release.
 
+## Decisions (2026-08-03, author-delegated)
+
+- The exhaustive 160,930-conic distance audit is demoted from a claim row to
+  reported computation: rigidity plus the now-human gap theorem make it
+  redundant, and only a descriptive sharpness figure survives. Authorized by
+  Tavis via `yc`.
+- The q=23 eight-point-passant-arc sharpness witness lands as a Lean theorem
+  and, in the same future manuscript pass, as a companion remark; the
+  `q = 2k - 3` pencil-saturation mechanism is extracted as a named lemma.
+- `HassettTschinkelProposition10` is renamed semantically; the citation moves
+  to its docstring and the formal map.
+- The q13/q17/q19 maximum-six family ships as a compressed verified checker
+  (no structural route exists: the bound fails at q=23), first in the
+  checker prototype order.
+
 ## Objective
 
 Bring the complete Paper I Lean artifact—not merely the files changed by the
