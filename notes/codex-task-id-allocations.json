@@ -2627,8 +2627,17 @@
       "last": 857,
       "purpose": "close every Paper IV Lean standards-audit gap with a release checklist",
       "sequence": 292
+    },
+    {
+      "count": 1,
+      "first": 858,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 858,
+      "purpose": "audit all Paper II Lean and mathematical additions since 2026-08-01 against formal and paper standards",
+      "sequence": 293
     }
   ],
-  "next_id": 858,
+  "next_id": 859,
   "schema": "codex-task-id-allocations-v1"
 }
