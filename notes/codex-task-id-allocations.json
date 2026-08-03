@@ -2573,8 +2573,17 @@
       "last": 851,
       "purpose": "add Paper II Zenodo DOI badge and PDF link, then forward-sync standalone",
       "sequence": 286
+    },
+    {
+      "count": 1,
+      "first": 852,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 852,
+      "purpose": "PRS carrier and M9 proof-bottleneck exposition upgrade",
+      "sequence": 287
     }
   ],
-  "next_id": 852,
+  "next_id": 853,
   "schema": "codex-task-id-allocations-v1"
 }
