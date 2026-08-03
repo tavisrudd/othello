@@ -10,15 +10,18 @@ Discovery companion:
 
 ## Current status
 
-**C847 queued next (2026-08-02): cold/adversarial Paper II read before formal
-extraction.** Freeze `papers/mds_css_transversal_groups`; reconstruct the
-diagonal-multiplier/nullity and exact-carrier proof spine without the internal
-ledgers; attack its hypotheses, converse, imported Paper I boundary, and
-independence from the finite six-point evidence; test the rewritten exact-group
-figure; inspect the PDF and trust statement; and issue a locatored
-`GO`/`MINOR`/`MAJOR` verdict. Do not touch Lean, release manifests,
-standalones, or remotes. Report to
-`2026-08-02-c847-mds-css-paper-cold-read.md`.
+**C847 closed `MINOR` (2026-08-02): Paper II's headline theorem survives,
+with bounded manuscript repairs required before formal extraction.**  The
+diagonal-multiplier line and the nullity-one/nullity-zero exact fixed-party
+carriers reconstruct independently, and no finite six-point computation is a
+premise.  The 22-page PDF, exact-group figure, warning log, and trust boundary
+pass.  The pencil LC converse must explicitly import Paper I's minimum-support
+atlas clauses; two attached atlas locators and four other hard-coded equation
+references are stale after the split; and Paper I needs a public scholarly
+locator before release.  No manuscript, Lean, release manifest, standalone, or
+remote was changed.  The next move is a newly allocated bounded Paper II
+manuscript-correction task, followed by the planned formal-extraction phase.
+See `2026-08-02-c847-mds-css-paper-cold-read.md`.
 
 **C844 closed (2026-08-02): Paper I is sharply independent.** The authoritative
 `papers/ame_lu` root now builds a warning-free 35-page *Local-Unitary
