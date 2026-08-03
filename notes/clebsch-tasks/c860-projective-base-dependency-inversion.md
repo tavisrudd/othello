@@ -6,6 +6,14 @@
 **Status:** queued; scoped 2026-08-02, superseding the original
 "document the cap modules" framing
 
+**Route decision (Tavis, 2026-08-03):** dependency inversion, staged per the
+staging section below. Move the shared projective-plane vocabulary out of the
+cap modules into `RelativeConicArcs` in stages; keep all cap-game material —
+especially cap-game certificates — out of the finitegeom builds and paper
+closures. Re-derivation is rejected. Still open: the lane peg, whether Paper II
+repackaging under C577 waits for this, and whether stage 1 lands immediately
+for AME/LU, Paper IV, and `beyond4_prs`.
+
 ## Why this exists
 
 The Paper II standards closure found that the four Paper II Lean gates import
