@@ -28,13 +28,19 @@ has.
 For the forward series framing, after the Paper-III recognition upgrades
 land:
 
-> The Clebsch program is a sequence of recognition theorems.  Data that
-> appear too coarse to remember their source---deep-hole syndromes, a
-> quadratic trade, an arithmetic fibre with determinant and Pfaffian
-> shadows, and weighted pairs of minimum supports---recover respectively a
-> projective code with its golden endomorphism order, an exceptional
-> factorization with its orientation, a conference operator with its
-> coefficient algebra, and a binary code with its full marked conic plane.
+> The Clebsch program is a sequence of recognition theorems.  In each paper,
+> data that appear too coarse to remember their source recover the hidden
+> structure:
+>
+> - **Paper I:** deep-hole syndromes recover a projective code and its golden
+>   endomorphism order;
+> - **Paper II:** a quadratic trade recovers an exceptional factorization and
+>   its orientation;
+> - **Paper III:** an arithmetic fibre and its determinant--Pfaffian shadows
+>   recover a conference operator and its coefficient algebra;
+> - **Paper IV:** weighted pairs of minimum supports recover a binary code and
+>   its full marked conic plane.
+>
 > The point is not four isolated exceptional configurations.  It is a
 > common information principle: in the Clebsch six-axis geometry,
 > low-degree shadows retain enough structure to reconstruct the object that
