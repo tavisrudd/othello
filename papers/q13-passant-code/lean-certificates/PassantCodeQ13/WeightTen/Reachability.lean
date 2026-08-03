@@ -4,15 +4,15 @@ import Mathlib.Data.Nat.Bitwise
 /-!
 # Kernel-checked Cartesian syndrome reachability
 
-A finite syndrome certificate may replace a large Cartesian enumeration by a sequence of explicit
-reachable-state lists.  At each stage, the checker verifies that every transition from the current
-list by every allowed syndrome increment occurs in the next list.  The soundness theorem then
-proves, independently of how the lists were generated, that the last list contains the XOR of
-every complete Cartesian choice.
+A finite syndrome certificate may replace one large Cartesian elaboration by a sequence of explicit
+reachable-state lists.  At each stage, the checker verifies exact equality with the Cartesian
+traversal obtained by XORing every current state with every allowed increment.  The soundness
+theorem then proves, independently of how the lists were generated, that the last list contains the
+XOR of every complete Cartesian choice.
 
-The checker proves coverage, not equality: a generated list may contain redundant states.  Thus
-external generation affects certificate size only.  The mathematical conclusion follows from the
-kernel-checked transition table and the theorem below.
+Exact traversal equality also checks multiplicity and order, although the soundness theorem needs
+only coverage.  External generation therefore carries no logical authority.  The mathematical
+conclusion follows from the kernel-checked transition tables and the theorem below.
 -/
 
 namespace PassantCodeQ13.WeightTen.Reachability
@@ -74,11 +74,11 @@ theorem ChoicePath.map {options : List (List Nat)} {path : List Nat}
   | cons choice_mem _ induction =>
       exact .cons (List.mem_map.mpr ⟨_, choice_mem, rfl⟩) induction
 
-/-- The canonical sorted list of XOR successors from one transition stage. -/
+/-- The one-step XOR successors in Cartesian traversal order. -/
 def transitionSuccessors (current options : List Nat) : List Nat :=
-  (current.flatMap fun state => options.map fun increment => state ^^^ increment).mergeSort.eraseDups
+  current.flatMap fun state => options.map fun increment => state ^^^ increment
 
-/-- Check that `next` is exactly the canonical list of one-step XOR successors. -/
+/-- Check that `next` is the one-step XOR successor list in Cartesian traversal order. -/
 def transitionCheck (current options next : List Nat) : Bool :=
   transitionSuccessors current options == next
 
@@ -89,6 +89,18 @@ def chainCheck : List Nat → List (List Nat) → List (List Nat) → Bool
       transitionCheck current options next && chainCheck next remaining later
   | _, _, _ => false
 
+/-- A checked first transition and a checked tail assemble into a checked transition chain. -/
+theorem chainCheck_cons_of_transitionCheck
+    {current options next : List Nat} {remaining later : List (List Nat)}
+    (first_checked : transitionCheck current options next = true)
+    (later_checked : chainCheck next remaining later = true) :
+    chainCheck current (options :: remaining) (next :: later) = true := by
+  simp [chainCheck, first_checked, later_checked]
+
+/-- The empty Cartesian transition sequence is checked. -/
+theorem chainCheck_nil (current : List Nat) : chainCheck current [] [] = true := by
+  rfl
+
 /-- The terminal state list of a certificate, or the initial list when there are no transitions. -/
 def terminalStates (initial : List Nat) : List (List Nat) → List Nat
   | [] => initial
@@ -97,6 +109,15 @@ def terminalStates (initial : List Nat) : List (List Nat) → List Nat
 /-- Check that two explicit state lists are disjoint. -/
 def disjointCheck (first second : List Nat) : Bool :=
   first.all fun state => !second.contains state
+
+/-- Disjointness checks on two left-hand pieces combine across concatenation. -/
+theorem disjointCheck_append {first second third : List Nat}
+    (first_checked : disjointCheck first third = true)
+    (second_checked : disjointCheck second third = true) :
+    disjointCheck (first ++ second) third = true := by
+  unfold disjointCheck at first_checked second_checked ⊢
+  rw [List.all_append, first_checked, second_checked]
+  rfl
 
 /-- A successful disjointness check excludes equality between arbitrary members of the lists. -/
 theorem ne_of_disjointCheck {first second : List Nat}
@@ -120,8 +141,7 @@ theorem mem_next_of_transitionCheck
   have next_eq : transitionSuccessors current options = next := by
     simpa [transitionCheck] using checked
   rw [← next_eq]
-  simp only [transitionSuccessors, List.mem_eraseDups, List.mem_mergeSort, List.mem_flatMap,
-    List.mem_map]
+  simp only [transitionSuccessors, List.mem_flatMap, List.mem_map]
   exact ⟨state, state_mem, increment, increment_mem, rfl⟩
 
 /-- Every complete Cartesian choice reaches the terminal list of a successful chain certificate. -/

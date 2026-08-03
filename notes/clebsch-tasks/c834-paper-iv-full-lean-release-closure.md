@@ -20,10 +20,18 @@ yet been removed.
 
 Direct kernel reduction is not an admissible replacement for the larger finite leaves: even one
 semantic unary-degree point and one raw isolated weight-ten shard exceed the measured memory gate.
-The next implementation packet is the seven isolated-profile generated layer certificates on this
-checker, followed by a compact projected-state cover for the cycle profile.  No native leaf may be
-removed until its generated certificate is connected to the complete Cartesian domain.  Unary
-constancy will use the manuscript's orbit-transitivity and double-count mechanism rather than
+
+The seven isolated-profile generated layer certificates are now complete on that checker.  Each
+option bridge, transition, and sharded terminal disjointness check is kernel reduced in its own
+module, and the seven profile aggregates exclude syndrome equality for every choice in the complete
+Cartesian domain rather than only for generator-emitted paths.  Report:
+`notes/2026-08-02-c834-isolated-weight-ten-reachability.md`.
+
+The next implementation packet is a compact projected-state cover for the cycle profile.  Still
+outstanding on this endpoint after that: the structural reduction of an arbitrary weight-ten word
+to the two pencil profiles, and the projective transport from the fixed internal point.  No native
+leaf may be removed until its generated certificate is connected to the complete Cartesian domain.
+Unary constancy will use the manuscript's orbit-transitivity and double-count mechanism rather than
 semantic support filtering.
 
 ## Objective
