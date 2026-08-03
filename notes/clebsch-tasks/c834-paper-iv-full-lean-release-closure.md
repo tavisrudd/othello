@@ -27,12 +27,24 @@ module, and the seven profile aggregates exclude syndrome equality for every cho
 Cartesian domain rather than only for generator-emitted paths.  Report:
 `notes/2026-08-02-c834-isolated-weight-ten-reachability.md`.
 
-The next implementation packet is a compact projected-state cover for the cycle profile.  Still
-outstanding on this endpoint after that: the structural reduction of an arbitrary weight-ten word
-to the two pencil profiles, and the projective transport from the fixed internal point.  No native
-leaf may be removed until its generated certificate is connected to the complete Cartesian domain.
-Unary constancy will use the manuscript's orbit-transitivity and double-count mechanism rather than
-semantic support filtering.
+The cycle profile is now closed too, by kernel reduction of the manuscript's geometric rejection
+search rather than by a projected-state cover of the syndrome product, which is not viable: the
+disjointness product is fixed at 1.67e8 regardless of the split, and projection does not shorten an
+exact-traversal transition list.  Seven residue shards discharge all 595 secant pairs with no
+generated data, no generator, and no group action.  Report:
+`notes/2026-08-02-c834-cycle-profile-kernel-exclusion.md`.
+
+That report also settles the route for the rest of weight ten.  The already-formalized pencil-profile
+dichotomy of `RelativeConicArcs.PassantCodeQ13.WeightTen.arbitrary_weightTen_word_has_pencil_profile`
+closes the endpoint with the two existing certificates, so neither the global moment identity and
+its `m=6`/`m=10` shape classification nor the thirty-seven stabilizer obstruction records need to be
+formalized.  The next implementation packet is the semantic bridge carrying the fibre decomposition
+and the secant-join relation between the coordinate-index model of the certificates and the
+`InternalPoint` model of the profile theorem, followed by the projective transport of an arbitrary
+support point to the fixed internal point, which is the sole remaining weight-ten gap.  No native
+leaf may be removed until its replacement is connected to the complete domain.  Unary constancy will
+use the manuscript's orbit-transitivity and double-count mechanism rather than semantic support
+filtering.
 
 ## Objective
 
