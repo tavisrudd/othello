@@ -219,6 +219,59 @@ and should be scoped before any of the certificate work begins, since they deter
 whether a verified-checker approach is feasible at all or whether the underlying
 assertions need to be reproved structurally.
 
+## Part E — What Mathlib supplies for the external transfers
+
+Every external transfer must end either in a Lean proof or in an audited kernel-checked
+library theorem, so the first question for each is whether Mathlib already has it. A
+bounded survey of the pinned Mathlib checkout gives a sharp split.
+
+Mathlib supplies the representation-theoretic layer. Maschke's theorem is in
+`Mathlib/RepresentationTheory/Maschke.lean`. Schur's lemma is available both as
+`bijective_or_eq_zero` for simple modules in `Mathlib/RingTheory/SimpleModule/Basic.lean`
+and in the finite-dimensional representation category through
+`Mathlib/CategoryTheory/Preadditive/Schur.lean`, re-exported by `FDRep`. Ordinary
+character theory, including orthogonality, is in `Mathlib/RepresentationTheory/Character.lean`,
+and Hilbert's theorem 90 is available for the Galois descent step. Strongly regular graphs
+have a development in `Mathlib/Combinatorics/SimpleGraph/StronglyRegular.lean`.
+
+Mathlib does not supply the finite-geometry layer. A search for arcs, ovals, hyperovals,
+nuclei, conics in finite planes, and Segre's lemma of tangents returns nothing.
+`Mathlib/Combinatorics/Configuration.lean` develops projective planes abstractly, as
+incidence structures with nondegeneracy and existence axioms, not the coordinate conic
+theory that Paper I needs. There is no Bézout theorem for plane curves, no theory of
+exterior sets or complete arcs, no association schemes, and no Brauer character theory.
+
+The practical consequence is that the eighteen external transfers do not form one class.
+Maschke, Schur, ordinary characters, and Galois descent are library imports and should be
+cheap. Everything geometric — Dye's four cited results, Edge's concurrence construction,
+the Hirschfeld nucleus theorem, the Blokhuis–Brouwer–Szőnyi covering bound, the
+Blokhuis–Seress–Wilbrink exterior-set characterization, the Storme–Thas
+normal-rational-curve dictionary, the Storme–Van Maldeghem classification entry, Bézout's
+bound on the two conics, Segre's lemma of tangents, the Sylvester-graph identification,
+Madison–Wu's nullity formula, and the Hollmann–Xiang association scheme — has to be built
+inside this development. The Brauer character step in the orbit classification likewise
+has no library counterpart and needs an argument that avoids modular character theory or
+develops the piece it uses.
+
+That is not starting from nothing: the `RelativeConicArcs` namespace already carries a
+homegrown projective plane, conic, arc, and certificate layer, which is where these
+results belong. But it does mean the geometric transfers are original formalization work
+rather than import work, and they dominate the remaining cost.
+
+## Progress
+
+The elementary arithmetic group is partly closed. The module
+`RelativeConicArcs/ClebschFamilyRegimes.lean` in the base library now proves the
+factorization of the Clebsch uncovered-cardinality formula, the characterization of the
+orders at which the uncovered set is empty, the off-conic excess formula, the reduction of
+exact conic filling to orders four and eleven, the order-nineteen values, and the
+deep-hole counting layer with its specialization to the displayed code. All six terminals
+depend only on the standard logical axioms, with no `sorry`, native execution, or project
+axiom. The module is not yet imported by the aggregate gate; gate rewiring and the
+manifest and hash refresh it forces are deliberately batched until more of the
+formalization has landed, so that the heavy aggregate replay runs once rather than after
+each module.
+
 ## What this step does not establish
 
 No renaming, docstring, provenance, manifest, gate, axiom-audit, or release work was
