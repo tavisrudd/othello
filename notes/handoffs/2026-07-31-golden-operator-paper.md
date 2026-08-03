@@ -541,10 +541,19 @@ Othello trust unit onto an immutable canonical `~/src/lean/finitegeom` base;
 C845 stops at that exact build-system-owned contract rather than editing either
 destination or using the superseded suffixed clone. Details:
 `notes/2026-08-02-c845-golden-full-forward-export-preparation.md`.
-C840 and C841 remain allocated successors. C840 then owns
-the claim-by-claim Lean reconciliation, canonical exported-candidate
-validation, honest partial-coverage boundary, manifests, gate, and deferred
-quiet-window validation.  C841 begins only after that exact gate passes and owns the
+C853 is queued after C845 to remediate the substantive formal-coverage gap
+identified by the exhaustive Lean audit.  Its checklist starts from the
+matrix-level conference and cross-Gram semantics, requires at least one
+end-to-end manuscript theorem before expansion, then targets the Hermitian
+landscape, rigidity, stability, general balanced-spectrum, continuous-control,
+balance-obstruction, and orientation layers with exact referee-facing trust
+boundaries.  It may not count scalar algebra as theorem coverage.  The full
+plan is `notes/golden-tasks/c853-golden-lean-remediation.md`.
+
+C840 is now queued after C853 and owns the independent claim-by-claim Lean
+reconciliation, canonical exported-candidate validation, honest
+partial-coverage boundary, manifests, gate, and deferred quiet-window
+validation.  C841 begins only after that exact gate passes and owns the
 Clebsch-style paper declaration, immutable public pin, metadata/verifier
 surface, and any later companion-bearing forward synchronization of the standalone repository.
 None may advertise full formalization, copy files manually, hand-edit either
