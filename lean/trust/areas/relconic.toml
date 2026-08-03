@@ -786,9 +786,11 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 modules = [
   "RelativeConicArcs.C637Witness**",
   "RelativeConicArcs.Gates.C637Witnesses",
+  "RelativeConicArcs.Gates.MatchingPackingDefect",
+  "RelativeConicArcs.Gates.SmallOddRelativeConicWitnesses",
 ]
 severity = "info"
-reason = "legacy compatibility names; the paper-facing gate imports the stable small odd-order witness modules"
+reason = "compatibility and dedicated component gates superseded by the combined paper-facing supplement gate"
 
 [[unreached]]
 modules = [
