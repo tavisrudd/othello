@@ -101,7 +101,8 @@ terminals.
 
 -- Cross-golden trace duality and the six ordinary nodes.
 #print axioms RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic
-#print axioms RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual
+#print axioms RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval
+#print axioms RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses
 #print axioms RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame
 #print axioms RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes
 

@@ -12,14 +12,14 @@ operator between them gives the cross-golden block.  Orthogonality makes the
 block translation invariant, and its three-by-three determinant is the
 negative support cubic.
 
-The final declaration isolates the implication used from Brendan Hassett and
-Yuri Tschinkel, *Flops on holomorphic symplectic fourfolds and determinantal
-cubic hypersurfaces* (2010), DOI `10.1017/S1474748009000140`, Section 3,
-Proposition 10: smoothness of the determinant cubic on a four-dimensional trace
-annihilator implies that the dual five-dimensional determinantal cubic has six
-ordinary nodes in linear general position.  The cited implication is supplied
-as an explicit hypothesis; this module does not formalize its algebro-geometric
-proof.
+The trace pairing on three-by-three matrices is perfect, so the five-dimensional
+cross-golden image has a four-dimensional trace annihilator; both dimensions are
+recorded here.  The singular locus of the resulting determinantal cubic
+threefold is not treated in this module: it is classified, from the determinant
+identity proved below, in `RelativeConicArcs.PaperIOrientationNodes`.
+
+Every declaration in this module is proved from the definitions; nothing is
+assumed.
 -/
 
 namespace RelativeConicArcs.PaperIOrientationTraceDual
@@ -319,36 +319,6 @@ theorem det_crossGoldenBlock_eq_neg_supportCubic
   rw [ht6, ht5, ht4, ht3, ht]
   ring
 
-/-- Proposition-level form of the implication used from Brendan Hassett and
-Yuri Tschinkel, *Flops on holomorphic symplectic fourfolds and determinantal
-cubic hypersurfaces* (2010), DOI `10.1017/S1474748009000140`, Section 3,
-Proposition 10.  Its algebro-geometric content remains an explicit hypothesis
-at each use. -/
-def HassettTschinkelProposition10
-    {DeterminantalCubic : Type*}
-    (isPairedTraceDual : DeterminantalCubic → DeterminantalCubic → Prop)
-    (isSmoothFourfoldSection : DeterminantalCubic → Prop)
-    (hasSixOrdinaryNodesInLinearGeneralPosition : DeterminantalCubic → Prop)
-    (primal dual : DeterminantalCubic) : Prop :=
-  isPairedTraceDual primal dual →
-    isSmoothFourfoldSection primal →
-      hasSixOrdinaryNodesInLinearGeneralPosition dual
-
-/-- Apply the explicitly supplied Proposition 10 interface. -/
-theorem hassettTschinkel_six_nodes_of_traceDual
-    {DeterminantalCubic : Type*}
-    (isPairedTraceDual : DeterminantalCubic → DeterminantalCubic → Prop)
-    (isSmoothFourfoldSection : DeterminantalCubic → Prop)
-    (hasSixOrdinaryNodesInLinearGeneralPosition : DeterminantalCubic → Prop)
-    (primal dual : DeterminantalCubic)
-    (hHT : HassettTschinkelProposition10 isPairedTraceDual
-      isSmoothFourfoldSection hasSixOrdinaryNodesInLinearGeneralPosition
-      primal dual)
-    (hdual : isPairedTraceDual primal dual)
-    (hsmooth : isSmoothFourfoldSection primal) :
-    hasSixOrdinaryNodesInLinearGeneralPosition dual :=
-  hHT hdual hsmooth
-
 #print axioms goldenEigenspaceBasis_eigen
 #print axioms goldenEigenspaceBasis_eq_paper_transport
 #print axioms paperConferenceMatrix_eq_transport
@@ -359,6 +329,5 @@ theorem hassettTschinkel_six_nodes_of_traceDual
 #print axioms tracePairing_nondegenerate
 #print axioms finrank_traceAnnihilator
 #print axioms det_crossGoldenBlock_eq_neg_supportCubic
-#print axioms hassettTschinkel_six_nodes_of_traceDual
 
 end RelativeConicArcs.PaperIOrientationTraceDual

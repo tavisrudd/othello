@@ -3,14 +3,32 @@ import RelativeConicArcs.GoldenCubicNodes
 import RelativeConicArcs.GoldenCubicNodeHessians
 
 /-!
-# Singular locus and ordinary-node type
+# Singular locus and ordinary-node type of the determinantal cubic threefold
 
-The cross-golden trace-dual theorem supplies the cited completeness route.
-Independently, the repository already contains a kernel-checked elimination
-of the five gradient quadrics; this packet exposes that stronger internal
-certificate as the exact singular-locus statement.  The six frame points are
-then ordinary nodes because their deleted four-by-four Hessian blocks have
-nonzero determinant.
+Fix a field `K` of characteristic zero containing a root `t` of `t^2 = t + 1`.
+Five centered coordinates `x 0, …, x 4` describe the augmentation hyperplane of
+the six labelled golden axes, the omitted sixth coordinate being
+`-(x 0 + ⋯ + x 4)`; `GoldenCubicNodesBase.centeredLift` performs that
+completion and `GoldenCubicNodesBase.centeredNode i` is the centered
+representative of the axis vector `1 - 6 e i`.
+
+Two descriptions of one cubic form meet here.  Compressing the diagonal
+operator `diag y` between the two conjugate golden eigenspaces produces the
+three-by-three cross-golden block `crossGoldenBlock t y`, whose determinant is
+the negative oriented triangle cubic of the golden conference matrix.
+Independently, an exact ideal-membership elimination classifies the common zero
+locus of the five gradient quadrics `GoldenCubicNodesBase.gradient` of that same
+cubic.  This module joins the two: differentiating the determinant along a
+single centered coordinate line returns the corresponding gradient quadric with
+a sign, so the singular points of the determinantal cubic threefold are exactly
+the six axis classes, and each of them is an ordinary double point because its
+deleted five-by-five Hessian block has rank four and its dehomogenized Hessian
+is nonsingular.
+
+Terminal results: `singularPoints_crossGoldenDeterminant_eq_axisClasses`,
+`supportCubic_singularLocus_eq_frame`, `supportCubic_framePoints_ordinaryNodes`.
+Everything below is proved from the definitions; nothing in this module is
+assumed or discharged outside the kernel.
 -/
 
 namespace RelativeConicArcs.PaperIOrientationNodes
@@ -23,6 +41,7 @@ open ClebschGoldenConference
 open PaperIOrientationPentagon
 open PaperIOrientationHolonomy
 open PaperIOrientationDeterminant
+open PaperIOrientationTraceDual
 
 /-- Five-by-five principal block obtained by deleting one support axis. -/
 def deletedPrincipalBlock (a : Fin 6) : Matrix (Fin 5) (Fin 5) ℚ :=
@@ -151,6 +170,83 @@ theorem finrank_deletedPrincipalBlock_range (a : Fin 6) :
   have hdomain : Module.finrank ℚ (Fin 5 → ℚ) = 5 := by simp
   omega
 
+/-- The determinant of the cross-golden block restricted to the `j`-th centered
+coordinate line, as a univariate polynomial over the base ring.
+
+The five centered coordinates of `x` are frozen as constants except the `j`-th,
+which is replaced by the indeterminate; the resulting five-tuple is completed to
+six homogeneous coordinates by `centeredLift`, the diagonal operator it names is
+compressed between the two conjugate golden eigenspaces attached to the root `t`
+of `t^2 = t + 1`, and the three-by-three determinant of that compression is
+taken.  Evaluating at `x j` returns the determinant at `x` itself. -/
+noncomputable def crossGoldenDeterminantLine {R : Type*} [CommRing R] (t : R)
+    (x : Fin 5 → R) (j : Fin 5) : Polynomial R :=
+  Matrix.det (crossGoldenBlock (Polynomial.C t)
+    (centeredLift (Function.update (fun k => Polynomial.C (x k)) j Polynomial.X)))
+
+/-- Differentiating the cross-golden determinant along the `j`-th centered
+coordinate line and evaluating at the original coordinate returns the negative
+of the `j`-th displayed gradient quadric.
+
+Concretely: for a golden root `t` in a commutative ring `R` and centered
+coordinates `x : Fin 5 → R`, the `j`-th partial derivative of the cubic form
+`x ↦ det (crossGoldenBlock t (centeredLift x))` equals `- gradient x j`.  This
+is the identification of the determinantal cubic with the negative oriented
+triangle cubic, `det_crossGoldenBlock_eq_neg_supportCubic`, transported to the
+polynomial ring in one variable. -/
+theorem derivative_crossGoldenDeterminantLine_eval
+    {R : Type*} [CommRing R] (t : R) (ht : t ^ 2 = t + 1)
+    (x : Fin 5 → R) (j : Fin 5) :
+    (crossGoldenDeterminantLine t x j).derivative.eval (x j) = -gradient x j := by
+  have hC : (Polynomial.C t) ^ 2 = Polynomial.C t + 1 := by
+    rw [← Polynomial.C_pow, ht, Polynomial.C_add, Polynomial.C_1]
+  rw [crossGoldenDeterminantLine,
+    det_crossGoldenBlock_eq_neg_supportCubic (Polynomial.C t) hC]
+  fin_cases j <;>
+    simp [triangleCubic, cubicTerm, triangleSign, conferenceMatrixOver,
+      conferenceMatrix, centeredLift, GoldenCubicNodesBase.gradient,
+      Function.update,
+      Fin.sum_univ_succ, Polynomial.derivative_pow] <;>
+    ring
+
+/-- The singular points of the cross-golden determinantal cubic threefold are
+exactly the six axis classes.
+
+Let `K` be a field of characteristic zero containing a root `t` of
+`t^2 = t + 1`, and let `x : Fin 5 → K` be a nonzero centered five-vector.  All
+five partial derivatives of the cubic form `x ↦ det (crossGoldenBlock t
+(centeredLift x))` vanish at `x` if and only if `x` is a nonzero scalar multiple
+of one of the six centered axis vectors `centeredNode i`, that is, of `1 - 6 e i`
+in the six homogeneous coordinates.  Projectively, the determinantal cubic
+threefold cut out in the five-dimensional cross-golden image has exactly the six
+axis classes as singular points.
+
+Two further features of the same configuration are established separately: the
+six classes are a projective frame because the kernel of the
+cross-golden compression is exactly the all-ones line
+(`PaperIOrientationTraceDual.crossGoldenMap_mem_ker_iff_constant`), and each is
+an ordinary double point (`supportCubic_framePoints_ordinaryNodes`).
+
+The corresponding statement in the literature is the determinantal duality of
+Brendan Hassett and Yuri Tschinkel, *Flops on holomorphic symplectic fourfolds
+and determinantal cubic hypersurfaces*, Journal of the Institute of Mathematics
+of Jussieu 9 (2010), no. 1, 125-153, doi:10.1017/S1474748009000140, Section 3,
+Proposition 10, which characterizes the trace-dual partner of a smooth
+determinantal cubic surface as a cubic threefold with six ordinary double points
+in linear general position.  That result is not used here: the statement above is
+established for the cross-golden family directly, without its smoothness or
+transversality hypotheses. -/
+theorem singularPoints_crossGoldenDeterminant_eq_axisClasses
+    {K : Type*} [Field K] [CharZero K] (t : K) (ht : t ^ 2 = t + 1)
+    (x : Fin 5 → K) (hx : x ≠ 0) :
+    (∀ j, (crossGoldenDeterminantLine t x j).derivative.eval (x j) = 0) ↔
+      ∃ c : K, c ≠ 0 ∧ ∃ i : Fin 6, x = c • centeredNode i := by
+  have hderiv : ∀ j : Fin 5,
+      (crossGoldenDeterminantLine t x j).derivative.eval (x j) = -gradient x j :=
+    fun j => derivative_crossGoldenDeterminantLine_eval t ht x j
+  simp only [hderiv, neg_eq_zero]
+  exact nonzero_gradient_zero_iff_projective_centeredNode x hx
+
 /-- The nonzero singular cone is exactly the six projective frame lines. -/
 theorem supportCubic_singularLocus_eq_frame
     {K : Type*} [Field K] [CharZero K] (x : Fin 5 → K) (hx : x ≠ 0) :
@@ -170,6 +266,8 @@ theorem supportCubic_framePoints_ordinaryNodes
   ⟨finrank_deletedPrincipalBlock_range i,
     det_chartHessian_chartNode_ne_zero i⟩
 
+#print axioms derivative_crossGoldenDeterminantLine_eval
+#print axioms singularPoints_crossGoldenDeterminant_eq_axisClasses
 #print axioms supportCubic_singularLocus_eq_frame
 #print axioms supportCubic_framePoints_ordinaryNodes
 #print axioms deletedPrincipalBlock_mulVec_incidentRow
