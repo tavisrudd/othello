@@ -2501,8 +2501,17 @@
       "last": 843,
       "purpose": "Close arcs Lean trust and finitegeom export gaps",
       "sequence": 278
+    },
+    {
+      "count": 1,
+      "first": 844,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 844,
+      "purpose": "Phase C two-paper split: trim and sharpen Paper I around exact stabilizer-AME rigidity, cleaning-based quantitative rounding, robust atlas compatibility, and the affine-character obstruction",
+      "sequence": 279
     }
   ],
-  "next_id": 844,
+  "next_id": 845,
   "schema": "codex-task-id-allocations-v1"
 }
