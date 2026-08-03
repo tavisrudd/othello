@@ -2564,8 +2564,17 @@
       "last": 850,
       "purpose": "export and clean-room validate the new mds-css-transversal-groups standalone companion",
       "sequence": 285
+    },
+    {
+      "count": 1,
+      "first": 851,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 851,
+      "purpose": "add Paper II Zenodo DOI badge and PDF link, then forward-sync standalone",
+      "sequence": 286
     }
   ],
-  "next_id": 851,
+  "next_id": 852,
   "schema": "codex-task-id-allocations-v1"
 }
