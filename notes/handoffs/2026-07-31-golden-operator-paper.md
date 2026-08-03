@@ -530,7 +530,9 @@ pristine tree and Git fast-forwarded the existing standalone history from
 `8929f2cf` to local commit `8aee16d9`; the live manifest and clean-tree checks
 pass. A subsequent requested PDF link was added authoritatively and exported as
 the three-file forward commit `2af6d3fd`; the live README link and manifest
-verify, with no push, tag, remote mutation, or formal-companion declaration. The
+verify. The supplied Zenodo DOI badge was then exported as the three-file
+forward commit `42794f25`; both endpoints and the live manifest verify, with no
+push, tag, remote mutation, or formal-companion declaration. The
 Lean source gate builds in a
 clean worktree, and generated facts give exactly `{propext}` for all four
 terminals. The monolithic relconic audit retains 165 unrelated baseline errors,

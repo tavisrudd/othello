@@ -104,6 +104,13 @@ standalone history advances from `8aee16d9` to
 `PROVENANCE.md`, and `export-manifest.json`. The live tree is clean and no push
 or tag was performed.
 
+The supplied Zenodo DOI `10.5281/zenodo.21766748` was then added as the
+standard resolving badge in authoritative commit `5d37d131`. Both DOI and
+badge endpoints return HTTP 200. The same three-file exporter delta advances
+the clean standalone history to
+`42794f25e9daaceb7853e8c392884faefd7aa16b`; manifest verification passes and
+no push or tag was performed.
+
 ## Lean source gate and exact blocker
 
 The clean disposable Othello worktree at `ee60800c` built
@@ -165,7 +172,7 @@ prose, axiom, and deterministic-export gates before handing it to C840.
   rebuild output.
 - **Settled:** the existing standalone paper history now has the exact
   exporter-produced sixteen-page tree and PDF-linked README at local forward
-  commit `2af6d3fd`;
+  commit `42794f25`, including the resolving Zenodo DOI badge;
   there was no manual copy, history replacement, tag, or push.
 - **Settled:** the four Lean declarations are mechanism-level partial coverage,
   not full theorem formalization.
