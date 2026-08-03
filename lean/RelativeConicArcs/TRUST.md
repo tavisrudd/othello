@@ -1,8 +1,8 @@
 # Trust manifest — arcs complete outside a conic
 
 This is the comprehensive monorepo trust ledger for the shared `RelativeConicArcs` tree.  Public
-paper packages use narrower gates and content-addressed source allowlists under `lean/trust/`; this
-ledger is not copied into the human-scale `finitegeom` export.
+paper packages use narrower gates and content-addressed source allowlists in their release
+repositories; this ledger is not copied into the human-scale `finitegeom` export.
 
 ## Machine-checked theorem map
 
