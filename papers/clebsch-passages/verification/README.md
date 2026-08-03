@@ -78,7 +78,7 @@ manuscript row claimed`.  The current-paper gate is replayed with
 
 ```text
 python3 verification/verify_passages_lean.py \
-  --lean-root /path/to/formal-artifact
+  --lean-root /path/to/formal-artifact --source-only
 ```
 
 `passages_formal.json` maps each of the nine manuscript rows to exact Lean
@@ -91,6 +91,19 @@ four-by-four determinant identity, and query polynomial symbolically.  The
 classical Ramsey theorem, finite-set extension, and normalization from an
 arbitrary labelled two-graph remain human inputs, as do the global Hitchin
 correspondences, face-axis addition theorem, and raw spherical moment.
+`passages_source_closure.json` is the exact project-local transitive import
+closure produced by the repository import-closure tool; the verifier pins the
+inventory, every listed source, and its own bytes.
+
+Repository validation elaborates the gate through the guarded Lean entry
+point.  Its disk-backed standard output is checked separately with
+
+```text
+python3 verification/verify_passages_lean.py \
+  --lean-root /path/to/formal-artifact --axiom-log /path/to/gate-stdout.log
+```
+
+The replay program never starts Lean or Lake itself.
 
 The operator consolidation uses the expanded golden-return theorem package as
 a second pinned formal map.  It covers the conference, triangle, two-graph,
@@ -104,7 +117,7 @@ It is replayed against a checkout of the formal artifact with
 
 ```text
 python3 verification/verify_golden_return_lean.py \
-  --lean-root /path/to/formal-artifact
+  --lean-root /path/to/formal-artifact --source-only
 ```
 
 `golden_return_formal.json` fixes the Lean toolchain, source hashes, audit
@@ -113,3 +126,7 @@ the complete pinned `#print axioms` output, including each native-decision
 terminal; replay rejects any change to that report.  This supplemental gate
 contributes partial mechanism coverage to `OPER-1`, `OPER-3`, and `OPER-4`; no manuscript theorem
 takes Lean as a proof dependency.
+`golden_return_source_closure.json` pins the exact project-local transitive
+import closure.  A guarded gate log is checked by replacing `--source-only`
+with `--axiom-log /path/to/gate-stdout.log`; the replay program does not invoke
+Lean or Lake directly.

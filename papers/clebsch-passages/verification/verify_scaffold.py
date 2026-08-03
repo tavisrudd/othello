@@ -13,6 +13,7 @@ PAPER = Path(__file__).resolve().parents[1]
 MAIN = PAPER / "clebsch_passages.tex"
 MANIFEST = PAPER / "verification" / "trust_manifest.json"
 IDENTITY = PAPER / "verification" / "statement_identity.json"
+GOLDEN_FORMAL = PAPER / "verification" / "golden_return_formal.json"
 
 ALLOWED_STATUSES = {
     "proven",
@@ -122,19 +123,44 @@ def main() -> None:
     formal_map_path = PAPER / formal_coverage.get("map", "")
     require(formal_map_path.is_file(), "formal declaration map is missing")
     formal_map = json.loads(formal_map_path.read_text(encoding="utf-8"))
+    golden_map = json.loads(GOLDEN_FORMAL.read_text(encoding="utf-8"))
     require(
         set(formal_map.get("claim_map", {})) == {claim["id"] for claim in claims},
         "formal declaration map does not cover exactly the manuscript rows",
     )
-    require(
-        all(
+    main_audit = set(formal_map.get("audited_declarations", []))
+    supplemental_audit = set(golden_map.get("audited_declarations", []))
+    for claim_id, row in formal_map["claim_map"].items():
+        declarations = set(row.get("declarations", []))
+        supplemental = set(row.get("supplemental_declarations", []))
+        require(
             row.get("coverage") == "partial mechanism; no full row claim"
-            and bool(row.get("declarations"))
-            and bool(row.get("excluded"))
-            for row in formal_map["claim_map"].values()
-        ),
-        "formal row boundary is incomplete",
-    )
+            and bool(declarations or supplemental)
+            and bool(row.get("excluded")),
+            f"formal row boundary is incomplete for {claim_id}",
+        )
+        require(
+            declarations <= main_audit,
+            f"main-gate declaration mismatch for {claim_id}",
+        )
+        require(
+            declarations.isdisjoint(supplemental),
+            f"declaration assigned to two gates for {claim_id}",
+        )
+        if supplemental:
+            require(
+                row.get("supplemental_gate") == golden_map.get("gate_module"),
+                f"supplemental gate mismatch for {claim_id}",
+            )
+            require(
+                supplemental <= supplemental_audit,
+                f"supplemental declaration mismatch for {claim_id}",
+            )
+        else:
+            require(
+                "supplemental_gate" not in row,
+                f"empty supplemental gate for {claim_id}",
+            )
     require(bool(manifest.get("local_release_ready")),
             "local release gate is not ready")
     require(manifest.get("submission_ready") is False,

@@ -7,13 +7,13 @@ import argparse
 import hashlib
 import json
 import re
-import subprocess
 from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
 MANIFEST = HERE / "golden_return_formal.json"
 AXIOM_REPORT = HERE / "golden_return_axioms.txt"
+CLOSURE_INVENTORY = HERE / "golden_return_source_closure.json"
 
 
 def sha256(path: Path) -> str:
@@ -54,9 +54,26 @@ def check_sources(lean_root: Path, manifest: dict[str, object]) -> None:
         )
     if sha256(AXIOM_REPORT) != manifest["axiom_report_sha256"]:
         raise SystemExit("golden-return formal replay: FAIL [axiom report hash]")
+    if sha256(Path(__file__).resolve()) != manifest["verifier_sha256"]:
+        raise SystemExit("golden-return formal replay: FAIL [verifier hash]")
+    if sha256(CLOSURE_INVENTORY) != manifest["source_closure_sha256"]:
+        raise SystemExit("golden-return formal replay: FAIL [source closure hash]")
+
+    inventory = json.loads(CLOSURE_INVENTORY.read_text(encoding="utf-8"))
+    if inventory.get("roots") != [manifest["gate_module"]]:
+        raise SystemExit("golden-return formal replay: FAIL [source closure root]")
+    observed_sources = {
+        item["path"]: item["sha256"] for item in inventory.get("sources", [])
+    }
+    if observed_sources != manifest["source_sha256"]:
+        raise SystemExit("golden-return formal replay: FAIL [source closure inventory]")
 
     forbidden = re.compile(r"^\s*(?:axiom|unsafe\s+(?:def|theorem))\b", re.MULTILINE)
     workflow_id = re.compile(r"\bC[0-9]{3,}\b")
+    workflow_prose = re.compile(
+        r"\b(?:TODO|FIXME|pending|temporary|fallback|agent|lane)\b",
+        re.IGNORECASE,
+    )
     for relative, expected in manifest["source_sha256"].items():
         source = lean_root / relative
         if not source.is_file():
@@ -69,41 +86,21 @@ def check_sources(lean_root: Path, manifest: dict[str, object]) -> None:
                 f"golden-return formal replay: FAIL [hash {relative}]"
             )
         text = source.read_text(encoding="utf-8")
-        if "sorry" in text or forbidden.search(text) or workflow_id.search(text):
+        if (
+            "sorry" in text
+            or forbidden.search(text)
+            or workflow_id.search(text)
+            or workflow_prose.search(text)
+        ):
             raise SystemExit(
                 f"golden-return formal replay: FAIL [source policy {relative}]"
             )
     print("golden-return formal replay: PASS [pinned sources and toolchain]")
 
 
-def run_gate(lean_root: Path, manifest: dict[str, object]) -> None:
-    gate = manifest["gate_module"]
-    build = subprocess.run(
-        ["nix", "develop", "--command", "lake", "build", gate],
-        cwd=lean_root,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
-    )
-    if build.returncode:
-        tail = "\n".join(build.stdout.splitlines()[-12:])
-        raise SystemExit(f"golden-return formal replay: FAIL [build]\n{tail}")
-
-    gate_path = Path(*gate.split(".")).with_suffix(".lean")
-    audit = subprocess.run(
-        ["nix", "develop", "--command", "lake", "env", "lean", str(gate_path)],
-        cwd=lean_root,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
-    )
-    if audit.returncode:
-        tail = "\n".join(audit.stdout.splitlines()[-12:])
-        raise SystemExit(f"golden-return formal replay: FAIL [axiom audit]\n{tail}")
+def check_axiom_log(manifest: dict[str, object], axiom_log: Path) -> None:
     expected = parse_axioms(AXIOM_REPORT.read_text(encoding="utf-8"))
-    observed = parse_axioms(audit.stdout)
+    observed = parse_axioms(axiom_log.read_text(encoding="utf-8"))
     declarations = set(manifest["audited_declarations"])
     if set(expected) != declarations:
         raise SystemExit(
@@ -111,23 +108,29 @@ def run_gate(lean_root: Path, manifest: dict[str, object]) -> None:
         )
     if observed != expected:
         raise SystemExit("golden-return formal replay: FAIL [axiom report mismatch]")
-    print("golden-return formal replay: PASS [gate and axiom audit]")
+    print("golden-return formal replay: PASS [pinned sources and supplied axiom audit]")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--lean-root", type=Path, required=True)
-    parser.add_argument(
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument(
         "--source-only",
         action="store_true",
-        help="check pinned sources and toolchain without invoking Lean",
+        help="check the pinned transitive source closure without a live gate",
+    )
+    mode.add_argument(
+        "--axiom-log",
+        type=Path,
+        help="stdout from a guarded elaboration of the import-only gate",
     )
     args = parser.parse_args()
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     lean_root = args.lean_root.resolve()
     check_sources(lean_root, manifest)
-    if not args.source_only:
-        run_gate(lean_root, manifest)
+    if args.axiom_log is not None:
+        check_axiom_log(manifest, args.axiom_log.resolve())
     return 0
 
 

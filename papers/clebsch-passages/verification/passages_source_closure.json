@@ -1,0 +1,109 @@
+{
+  "external_imports": [
+    "Mathlib",
+    "Mathlib.Data.Fintype.Defs",
+    "Mathlib.Data.Matrix.Mul",
+    "Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
+    "Mathlib.LinearAlgebra.Matrix.Notation",
+    "Mathlib.Tactic.FinCases",
+    "Mathlib.Tactic.NormNum",
+    "Mathlib.Tactic.Ring"
+  ],
+  "module_count": 15,
+  "roots": [
+    "RelativeConicArcs.Gates.ClebschPassages"
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 18205,
+      "module": "RelativeConicArcs.AlignedTwoGraph",
+      "path": "RelativeConicArcs/AlignedTwoGraph.lean",
+      "sha256": "85eb450500217a6949d57f6161a6354d9fc62047b7e4b0c4c1b5fdac81c27be0"
+    },
+    {
+      "bytes": 16029,
+      "module": "RelativeConicArcs.ClebschGoldenConference",
+      "path": "RelativeConicArcs/ClebschGoldenConference.lean",
+      "sha256": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2"
+    },
+    {
+      "bytes": 6090,
+      "module": "RelativeConicArcs.ClebschInvariantCubic",
+      "path": "RelativeConicArcs/ClebschInvariantCubic.lean",
+      "sha256": "1587594c3a63e4b866075c67cc5deac2e10bf00cd5708c9aaf39168bcd773bdd"
+    },
+    {
+      "bytes": 3725,
+      "module": "RelativeConicArcs.ClebschPassagesCorrespondence",
+      "path": "RelativeConicArcs/ClebschPassagesCorrespondence.lean",
+      "sha256": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28"
+    },
+    {
+      "bytes": 4738,
+      "module": "RelativeConicArcs.ClebschTwoGraph",
+      "path": "RelativeConicArcs/ClebschTwoGraph.lean",
+      "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
+    },
+    {
+      "bytes": 5254,
+      "module": "RelativeConicArcs.Gates.ClebschPassages",
+      "path": "RelativeConicArcs/Gates/ClebschPassages.lean",
+      "sha256": "1978f4e8e864c297c66ad947cae8d2e24584cb9a576f27bef68356e6e6a95608"
+    },
+    {
+      "bytes": 6426,
+      "module": "RelativeConicArcs.GoldenQuadraticCharacters",
+      "path": "RelativeConicArcs/GoldenQuadraticCharacters.lean",
+      "sha256": "347c060643bd582d2776c18c0108b04731950278779b9d54807209dc5c7f0008"
+    },
+    {
+      "bytes": 8824,
+      "module": "RelativeConicArcs.InvolutiveOddUnit",
+      "path": "RelativeConicArcs/InvolutiveOddUnit.lean",
+      "sha256": "4c89dc3c2619fc4cd52e53d8c421f6f4cc234a026265d65c00ef2dbb6509f3b6"
+    },
+    {
+      "bytes": 24986,
+      "module": "RelativeConicArcs.KneserPairEigenspace",
+      "path": "RelativeConicArcs/KneserPairEigenspace.lean",
+      "sha256": "eb2c89c22be925a62345746d0d3bf6a639ccd6fe5562859365875bbe3c1c03e6"
+    },
+    {
+      "bytes": 4494,
+      "module": "RelativeConicArcs.MarkedClebschBridge",
+      "path": "RelativeConicArcs/MarkedClebschBridge.lean",
+      "sha256": "30746ec72da8651bc8673b89d78f135632d37195b9c44ac5cca4f071808949ad"
+    },
+    {
+      "bytes": 5835,
+      "module": "RelativeConicArcs.PetersenHarmonicKernel",
+      "path": "RelativeConicArcs/PetersenHarmonicKernel.lean",
+      "sha256": "77f2195247beccee65a548788c3c9c8efee01177a093ee6f468aa38f64272f2c"
+    },
+    {
+      "bytes": 6345,
+      "module": "RelativeConicArcs.QuadraticPinching",
+      "path": "RelativeConicArcs/QuadraticPinching.lean",
+      "sha256": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4"
+    },
+    {
+      "bytes": 3417,
+      "module": "RelativeConicArcs.SignedEquiangularGram",
+      "path": "RelativeConicArcs/SignedEquiangularGram.lean",
+      "sha256": "477ff26912f2d63b999ec761ca5417707856914300f5bb156473751bb14df6ad"
+    },
+    {
+      "bytes": 6852,
+      "module": "RelativeConicArcs.SplitQuadraticPinching",
+      "path": "RelativeConicArcs/SplitQuadraticPinching.lean",
+      "sha256": "d46ec97de2670ef0d34873843a8d2821d532d4a00c56e6ebb829fd8c44def6f2"
+    },
+    {
+      "bytes": 3116,
+      "module": "RelativeConicArcs.TightFrameConference",
+      "path": "RelativeConicArcs/TightFrameConference.lean",
+      "sha256": "923582e8230cda462e0a7f42bbf323b6469b5f058ea0f0274e41c7e663993791"
+    }
+  ]
+}

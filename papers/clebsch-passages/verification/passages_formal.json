@@ -3,6 +3,8 @@
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
   "axiom_report_sha256": "a3c9529225248abf738d3c24711e6b504313230447be947b7c29c7da3893bd3b",
+  "verifier_sha256": "0f63106bc296089059e8d0a1d09a2600a0271ea427dd9281f393c482a5bceea3",
+  "source_closure_sha256": "74acc58ea71b66b472f0f1124dcb944390b3956a9bb4b200524543ecd0071ff1",
   "source_sha256": {
     "RelativeConicArcs/QuadraticPinching.lean": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4",
     "RelativeConicArcs/SplitQuadraticPinching.lean": "d46ec97de2670ef0d34873843a8d2821d532d4a00c56e6ebb829fd8c44def6f2",
@@ -16,6 +18,7 @@
     "RelativeConicArcs/PetersenHarmonicKernel.lean": "77f2195247beccee65a548788c3c9c8efee01177a093ee6f468aa38f64272f2c",
     "RelativeConicArcs/ClebschInvariantCubic.lean": "1587594c3a63e4b866075c67cc5deac2e10bf00cd5708c9aaf39168bcd773bdd",
     "RelativeConicArcs/AlignedTwoGraph.lean": "85eb450500217a6949d57f6161a6354d9fc62047b7e4b0c4c1b5fdac81c27be0",
+    "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ClebschPassagesCorrespondence.lean": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28",
     "RelativeConicArcs/Gates/ClebschPassages.lean": "1978f4e8e864c297c66ad947cae8d2e24584cb9a576f27bef68356e6e6a95608"
   },
@@ -123,9 +126,7 @@
     },
     "OPER-3": {
       "coverage": "partial mechanism; no full row claim",
-      "declarations": [
-        "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
-      ],
+      "declarations": [],
       "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "supplemental_declarations": [
         "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
@@ -135,8 +136,6 @@
     "OPER-4": {
       "coverage": "partial mechanism; no full row claim",
       "declarations": [
-        "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
-        "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign",
         "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff",
         "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
         "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple",
@@ -153,6 +152,8 @@
       ],
       "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "supplemental_declarations": [
+        "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
+        "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign",
         "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root",
         "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot"
       ],
