@@ -2600,8 +2600,17 @@
       "last": 854,
       "purpose": "Audit and close PRS Lean referee-facing standards gaps",
       "sequence": 289
+    },
+    {
+      "count": 1,
+      "first": 855,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 855,
+      "purpose": "remediate Paper I Lean referee-artifact standards audit",
+      "sequence": 290
     }
   ],
-  "next_id": 855,
+  "next_id": 856,
   "schema": "codex-task-id-allocations-v1"
 }
