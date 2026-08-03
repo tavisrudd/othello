@@ -2474,8 +2474,17 @@
       "last": 839,
       "purpose": "document the two-paper split, trust boundaries, and extraction gates for cold sessions",
       "sequence": 275
+    },
+    {
+      "count": 2,
+      "first": 840,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 841,
+      "purpose": "Golden quantum-statistics formal coverage correction and validated standalone companion promotion",
+      "sequence": 276
     }
   ],
-  "next_id": 840,
+  "next_id": 842,
   "schema": "codex-task-id-allocations-v1"
 }
