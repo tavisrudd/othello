@@ -10,7 +10,7 @@ dual triples on which `Y^2 - 4XZ` is a nonsquare.  Incidence is the vanishing of
 product.
 
 The resulting binary code is the kernel of the passant-by-internal-point incidence matrix.  The
-cardinality checks in this module use native evaluation on the explicitly bounded set of 183
+cardinality checks in this module use kernel reduction on the explicitly bounded set of 183
 normalized projective triples; they do not classify codewords or establish the rank or minimum
 distance of the code.
 -/
@@ -102,33 +102,33 @@ def passantCode : Submodule (ZMod 2) (InternalPoint → ZMod 2) :=
 
 /-- The normalized coordinate model contains all 183 projective points of `PG(2,13)`. -/
 theorem projectiveTriples_card : projectiveTriples.card = 183 := by
-  native_decide
+  decide +kernel
 
 /-- The standard conic over `ZMod 13` has 78 internal points. -/
 theorem internalCoordinates_card : internalCoordinates.card = 78 := by
-  native_decide
+  decide +kernel
 
 /-- The standard conic over `ZMod 13` has 78 passant lines. -/
 theorem passantCoordinates_card : passantCoordinates.card = 78 := by
-  native_decide
+  decide +kernel
 
 /-- The executable internal-point list has length 78 and no duplicates. -/
 theorem internalCoordinateList_length : internalCoordinateList.length = 78 := by
-  native_decide
+  decide +kernel
 
 /-- The executable internal-point list enumerates exactly the semantic coordinate finset. -/
 theorem internalCoordinateList_toFinset :
     internalCoordinateList.toFinset = internalCoordinates := by
-  native_decide
+  decide +kernel
 
 /-- The executable passant-line list has length 78 and no duplicates. -/
 theorem passantCoordinateList_length : passantCoordinateList.length = 78 := by
-  native_decide
+  decide +kernel
 
 /-- The executable passant-line list enumerates exactly the semantic coordinate finset. -/
 theorem passantCoordinateList_toFinset :
     passantCoordinateList.toFinset = passantCoordinates := by
-  native_decide
+  decide +kernel
 
 /-- The internal coordinate at an index in the displayed list. -/
 def internalPointAt (index : Fin 78) : InternalPoint :=
@@ -140,7 +140,7 @@ def internalPointAt (index : Fin 78) : InternalPoint :=
 
 /-- The displayed internal-point list indexes every internal point exactly once. -/
 theorem internalPointAt_bijective : Function.Bijective internalPointAt := by
-  native_decide
+  decide +kernel
 
 /-- The displayed ordering identifies the 78 indices with the internal points. -/
 noncomputable def internalPointEquiv : Fin 78 ≃ InternalPoint :=
@@ -156,7 +156,7 @@ def passantLineAt (index : Fin 78) : PassantLine :=
 
 /-- The displayed passant-line list indexes every passant line exactly once. -/
 theorem passantLineAt_bijective : Function.Bijective passantLineAt := by
-  native_decide
+  decide +kernel
 
 /-- The displayed ordering identifies the 78 indices with the passant lines. -/
 noncomputable def passantLineEquiv : Fin 78 ≃ PassantLine :=
