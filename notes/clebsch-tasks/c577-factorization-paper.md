@@ -4,7 +4,7 @@
 
 **Opened:** 2026-07-24
 
-**Status:** active under the C182 external-wait exception.  The C749 human
+**Status:** active.  The C749 human
 freeze, C750/C801 Lean closure, and Milnor--Serre exposition pass are
 complete.  Public packaging and the immutable locator remain external.
 

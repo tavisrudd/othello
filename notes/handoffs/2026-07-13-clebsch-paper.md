@@ -280,7 +280,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 
 | task | state | next gate |
 |---|---|---|
-| [C791 — Paper I balanced-spectrum consequence](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) | queued after C753; coordinate with C762 | freeze baseline, red-team the inference boundary, and blind-test the bounded corollary before synchronizing trust maps and the standalone mirror |
+| [C791 — Paper I balanced-spectrum consequence](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) | optional follow-up; not part of the sealed C753/C762 release | decide whether one bounded balanced-spectrum corollary improves Paper I enough to justify reopening its release surface |
 | [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | complete; repaired B-plus manuscript, final independent acceptance 96/100, aggregate gates, and standalone synchronization closed | none; C799 and C815 are complete and C823 is the first unfinished Paper III route task |
 | [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | complete; normalized cut classifier, symbolic third-point elimination, overlap consistency, query count, determinant/switching transport, formal audits, and paper gate green | none; shared `AlignedTwoGraph` API consumed without duplication by C815 and handed with it to C823 |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
@@ -294,19 +294,18 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C823 — aligned-certificate robustness Lean](../clebsch-tasks/c823-aligned-certificate-robustness-lean.md) | next Paper III route task; C799/C815 APIs and C822 human compression frozen | formalize distance polarization, parity, bowtie equality, conference balance, moment recurrence, and C822's final compression in the shared C799/C815 API |
 | [C824 — Paper III aligned-certificate upgrades](../clebsch-tasks/c824-paper-iii-aligned-certificate-upgrades.md) | sixth and final current Paper III route task; begin after C816; manuscript promotion authorized | select the smallest A/B architecture, integrate the robustness/order-26 results, perform final C800/C816 trust reconciliation, then run exposition, red-team, PDF, release, synchronization, and fresh cold-read gates |
 | [C813 — harmonic restriction generalization](../clebsch-tasks/c813-harmonic-restriction-generalization.md) | queued; math only; paper promotion excluded | compute bounded $A_5$-branching, Petersen-channel eigenvalues, and exact restriction scalars before pursuing a family or isolation theorem |
-| [C802 — Paper I series-framing memo review](../clebsch-tasks/c802-paper-i-series-framing-memo-review.md) | queued after C753 and before C762's final prose merge; proposal memo exists and no manuscript source has changed | independently cold-read and iterate the memo, verify C494/Paper-III ownership and simultaneous locators, then hand accepted recommendations to C762 |
-| [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | unblocked; C714 synchronized release gates complete | with explicit publication authority, publish the pinned repositories, create an immutable archive, replay it fresh, and insert its locator |
+| [C802 — Paper I series-framing memo review](../clebsch-tasks/c802-paper-i-series-framing-memo-review.md) | complete; red-team and second cold-read `GO` delivered to C762 | none |
 | [C713 — Paper I proof architecture](../clebsch-tasks/c713-paper-i-proof-architecture.md) | complete; causal proof order, structural determinantal six-node proof, and synchronized authoritative/standalone gates green | none |
-| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none; C182 owns external publication |
+| [C714 — Paper I companion structuralization](../clebsch-tasks/c714-paper-i-companion-structuralization.md) | complete; C721--C726 integrated and synchronized release gates green | none |
 | [C751 — Paper I proof-spine tightening](../clebsch-tasks/c751-paper-i-proof-spine-tightening.md) | complete; pentagon-first hybrid won the blind A/B 96--91, final referee GO, both release roots green | none |
 | [C752 — Paper I Lean spine audit](../clebsch-tasks/c752-paper-i-lean-spine-audit.md) | complete; transitive prose/definition audit and exact C753 packet interfaces frozen | none |
-| [C753 — Paper I Lean spine closure](../clebsch-tasks/c753-paper-i-lean-spine-closure.md) | active; prose-source repairs, R1--R4, O1--O7, and the O7 paper/trust reconciliation are complete | implement packet-gated O8, then run the final correspondence and release gates |
+| [C753 — Paper I Lean spine closure](../clebsch-tasks/c753-paper-i-lean-spine-closure.md) | complete; R1--R4, O1--O8, manifests, and all release replays green | none |
 | [C761 — Paper IV q13 passant code](../clebsch-tasks/c761-paper-iv-q13-passant-code.md) | active; structural manuscript and local release surfaces green, but public release is blocked on C834 full-Lean closure | after C834, pin the public package, run isolated replays, insert immutable locators, and seek explicit publication authority |
 | [C817 — Paper IV structural mathematics upgrade](../clebsch-tasks/c817-paper-iv-structural-math-upgrade.md) | complete 2026-08-02; all six subitems positive and frozen; bounded novelty boundary and ranked integration memo complete; no manuscript change made | none; any manuscript selection, claim-specific novelty closure, formalization, or integration requires later user discussion and authorization |
 | [C831 — Paper IV structural version](../clebsch-tasks/c831-paper-iv-structural-version.md) | complete 2026-08-02; longer title, full structural integration, evidence/trust refresh, Milnor--Serre tightening, eleven-page visual gate, and adversarial read green | none; green version returned to C761 |
 | [C832 — Paper IV structural theorem Lean](../clebsch-tasks/c832-paper-iv-structural-lean.md) | complete 2026-08-02 at the declared partial-formal boundary; shared mechanisms, concrete q13 gates, aggregate terminals, and axiom audit green | none; frozen formal surface returned to C831/C761 |
 | [C834 — Paper IV full Lean release closure](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md) | active; author requires theorem-complete Lean before public release | eliminate native/trusted/human boundaries from the full manuscript theorem, produce one clean aggregate and axiom audit, then unblock C761 |
-| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception; the human/Lean surfaces and Milnor--Serre copy edit are complete and the authoritative release is green | repackage and synchronize the standalone release when publication authority is available |
+| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active; the human/Lean surfaces and Milnor--Serre copy edit are complete and the authoritative release is green | repackage and synchronize the standalone release under its own Paper-II workflow |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |
 | [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | complete; human proof 2/4 and independent modular read green under C748 | none |
 | [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | complete; parity-specific proof has independent modular and context-free `GO` verdicts; human proof 3/4 | none; C749 owns final adversarial freeze |
@@ -316,7 +315,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C798 — Paper II fixed-line Chow rigidity](../clebsch-tasks/c798-fixed-line-chow-rigidity.md) | complete; structural priority-judo theorem integrated and authoritative gate green | none; \(q-2\) nonmatching exact-trade orbits and the unique matching Chow point are proved without an orbit table |
 | [C801 — Paper II fixed-line Lean update](../clebsch-tasks/c801-paper-ii-fixed-line-lean.md) | complete; table-free radial inheritance, sheet-sign annihilator, and \(q-2\) count are kernel-checked | none; the unique Chow point remains the human finite-group/factorization boundary |
 | [C803 — Paper II fixed-line literature audit](../clebsch-tasks/c803-paper-ii-fixed-line-literature-audit.md) | complete; exceptional one-factorizations attributed, C494 boundary recorded, exposition and release gates green | none; C801 owns the Lean update |
-| [C762 — Paper I forward exposition](../clebsch-tasks/c762-paper-i-forward-exposition.md) | active; authoritative exposition, O7 structural proof/trust alignment, PDFs, cold read, statement identity, and public-locator pass green | after C753 closes O8, run the full release-output gate and synchronize the standalone release |
+| [C762 — Paper I forward exposition](../clebsch-tasks/c762-paper-i-forward-exposition.md) | complete; structural q11 boundary, O1--O8 alignment, 22+12-page PDFs, manifests, and standalone release green | none |
 | [C763 — Paper III Golden consolidation](../clebsch-tasks/c763-paper-iii-golden-consolidation.md) | complete; selective source--operator--cubics--harmonic chain, formal bridge, cold reads, and synchronized release gates green | none |
 | [C764 — Paper III “why determinant” boundary](../clebsch-tasks/c764-paper-iii-why-determinant.md) | complete; determinant-line explanation and explicit permanent gauge counterexample integrated; isolated authoritative and synchronized standalone release aggregates green | none; keep the physical companion outside Paper III until it has a stable public locator |
 | [C744 — Paper III proof-spine structuralization](../clebsch-tasks/c744-paper-iii-proof-spine-structuralization.md) | complete; pinching, Gram, torsor, harmonic-scalar, A/B 96/100, EJ/EJ2, and synchronized release gates green | none |
@@ -344,10 +343,10 @@ the split-paper route without an explicit user decision.
 
 Paper I and its companion *Computational strengthenings of Clebsch syndrome
 rigidity* form one warning-free, nineteen-row release surface with twenty-six
-checks and page counts \(21+12\). C714 is complete: the companion now uses the
+checks and page counts \(22+12\). C714 is complete: the companion now uses the
 five explicit modes human structural proof, published theorem, Lean theorem,
-finite certificate, and trusted execution. C182 owns every remaining release
-action.
+finite certificate, and trusted execution.  The C753/C762 forward release is
+fully synchronized locally; no live Paper-I release task remains.
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
@@ -821,7 +820,7 @@ disclosure. Shared Lean sources stay in the pinned standalone Lean
 repository. An immutable public locator and fresh isolated replay are release
 requirements, not substitutes for the paper's local gates.
 
-Paper I ships only as the C320-approved C182 surface. Paper II requires its
+Paper I's current local export is the sealed C753/C762 surface. Paper II requires its
 own release pass. Paper III's relative marked bridge, global Stein algebra,
 mechanical artifact, isolated, visual, source-pinned Lean-boundary, and
 fresh-referee gates are green.  Its locator and author metadata must still be

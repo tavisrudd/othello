@@ -4,9 +4,23 @@
 
 **Opened:** 2026-07-15
 
-**Status:** external publication deferred behind queued C714; C713's structural
-proof pass and the shared trilogy title-page refinement are synchronized, while
-the companion pass must refresh the final release surface before publication.
+**Status:** archived 2026-08-03.  Its external-publication objective is no
+longer part of the live Paper-I workflow; the current requirement is a clean
+local standalone export and ready Lean content manifest, both now satisfied.
+
+## Archive resolution
+
+The authoritative Paper-I release is sealed at `81163be6`.  The local
+standalone repository at `~/src/math-papers/clebsch-rigidity` is synchronized
+at `58900f0`; its 58-file export manifest verifies against authoritative
+source commit `81163be6`, and its clean 26-check replay passes.  The q11 Lean
+package is sealed at `09d8e174880e7370966da788da3c5d303df8af4f`; its
+`MANIFEST.json` content-addresses all 121 local modules and the generator and
+pins reusable base commit `570086982b26075a71a331a81bb1b519e9a27e7f`.
+
+No remote publication, DOI creation, or fresh immutable deposit is required
+to close this historical card.  Those operations would require a new explicit
+request rather than reopening C182.
 
 ## Objective
 
@@ -32,7 +46,7 @@ insert its stable identifier into the manuscript.
 Cold-read report:
 `notes/2026-07-30-paper-i-v2-referee-cold-read.md`.
 
-## Next action
+## Historical next action (superseded)
 
 Complete C714 and freeze its synchronized human, computational, and Lean trust
 surfaces. Then, with explicit user authority and publication

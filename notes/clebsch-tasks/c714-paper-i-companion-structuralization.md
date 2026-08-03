@@ -4,8 +4,8 @@
 
 **Opened:** 2026-07-31
 
-**Status:** complete 2026-07-31; C721--C726 integrated, both release roots
-green, and external publication remains exclusively under C182.
+**Status:** complete 2026-07-31; C721--C726 integrated and both release roots
+green.  The later C753/C762 forward release supersedes its old C182 handoff.
 
 ## Objective
 
