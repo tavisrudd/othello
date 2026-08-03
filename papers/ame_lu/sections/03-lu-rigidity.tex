@@ -1963,15 +1963,96 @@ stabilizer gap would force \(\bigotimes_iK_i\) to be exact.  The missing
 input is therefore compatibility of the recovered discrete Clifford data,
 not a sharper final norm summation.
 
+The linear part of that compatibility can in fact be recovered without a
+party-count loss.
+
+\begin{proposition}[Robust symplectic-atlas compatibility]
+\label{prop:robust-linear-atlas}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
+\(q=p^e\), and let \(U=\bigotimes_iU_i\) be a product unitary.  Suppose
+\[
+ \varepsilon(U)<
+ R_q^{\mathrm{atlas}}
+ :=\min\left\{\frac{\tau_p}{8},
+   \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\}.
+\]
+The cleaning and Fourier lemmas give local Cliffords \(K_i\) satisfying
+(5.18).  Let \(F_i\) be their symplectic maps.  Then
+\[
+ F_jM_A(i,j)=M_A(i,j)F_i
+\]
+for every \((m+1)\)-set \(A\) and \(i,j\in A\).  Consequently
+\(F=\bigoplus_iF_i\) preserves the stabilizer label group \(L\), and some
+product-Pauli correction \(W_vK\) is an exact symmetry of \(\psi\).
+\end{proposition}
+
+\begin{proof}
+Fix \(A\), distinct \(i,j\in A\), and put
+\(B=A^c\cup\{i,j\}\).  Both \(A\) and \(B\) have size \(m+1\), while
+\(A\cap B=\{i,j\}\).  Choose \(\ell\in L(A)\) and \(r\in L(B)\), and set
+\[
+ C=[UW_\ell U^\dagger,W_r].
+\]
+After choosing the phase of \(U\) realizing its defect,
+\(\lVert(UW_\ell U^\dagger-I)\psi\rVert\leq2\varepsilon(U)\), and the
+same holds with the adjoint.  Since \(W_r\psi=\psi\),
+\[
+ \lVert(C-I)\psi\rVert\leq4\varepsilon(U).             \tag{5.21}
+\]
+
+The commutator is supported only on \(A\cap B=\{i,j\}\).
+Choose phases so that
+\(\lVert U_s-K_s\rVert_{\mathrm{HS}}\leq8\sqrt q\,\varepsilon(U)\).
+Replacing \(U_sW_{\ell_s}U_s^\dagger\) by its \(K_s\)-conjugate costs at
+most \(16\sqrt q\,\varepsilon(U)\) in operator norm, and replacing its
+commutator with \(W_{r_s}\) costs at most twice that.  On the two sites,
+the total cost is therefore at most
+\(64\sqrt q\,\varepsilon(U)\).  The Clifford commutator is a scalar
+\(p\)-th root \(\zeta\), so (5.21) gives
+\[
+ |\zeta-1|\leq(4+64\sqrt q)\varepsilon(U)<2\sin(\pi/p).
+\]
+Hence \(\zeta=1\).
+
+Write \(a=\ell_i\), \(b=r_i\),
+\(\ell_j=M_A(i,j)a\), and \(r_j=M_B(i,j)b\).
+The identity \(\zeta=1\), for all \(a,b\), says
+\[
+ [F_i a,b]+[F_jM_A(i,j)a,M_B(i,j)b]=0.                \tag{5.22}
+\]
+Here brackets denote the trace-symplectic pairing.  Isotropy of \(L\),
+applied to the element of \(L(A)\) whose \(i\)-coordinate is \(F_i a\),
+gives
+\[
+ [F_i a,b]+[M_A(i,j)F_i a,M_B(i,j)b]=0.
+\]
+Subtracting this from (5.22), using surjectivity of \(M_B(i,j)\) and
+nondegeneracy of the pairing, proves the atlas equation.
+The exact atlas theorem gives \(FL=L\), and
+Lemma~\ref{lem:pauli-phase-correction} supplies \(W_v\).
+\end{proof}
+
+The Pauli correction in the proposition is essential.  All localized
+commutators are unchanged when a recovered \(K_i\) is multiplied by a
+local Weyl: that multiplication changes conjugation phases, and the
+commutator cancels them.  Equivalently, the symplectic atlas sees \(L\)
+but not its stabilizer character.  The correction \(v\) can therefore be
+nonzero modulo \(L\), in which case \(W_vK\) need not be locally close to
+\(U\).  Exact affine compatibility cannot be obtained from these
+commutator tests, and Proposition~\ref{prop:robust-linear-atlas} alone
+does not improve (5.16).  Controlling the character discrepancy is the
+same remaining branch-selection problem isolated by the collective
+estimate above.
+
 The exact formula, rather than a fixed-dimension slogan, controls scaling.
 Uniformly over prime powers \(q=p^e\) and existing tensors,
 \[
  R^{\mathrm{clean}}_{n,q}
- =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{5.21}
+ =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{5.23}
 \]
 with absolute implied constants.  Indeed
 \(\sin(\pi/p)=\Theta(p^{-1})\), while \(d_p\) is bounded above and below
-by positive absolute constants.  An asymptotic use of (5.21) must specify
+by positive absolute constants.  An asymptotic use of (5.23) must specify
 an existing family.
 
 For the explicit generalized and extended generalized Reed--Solomon
@@ -1982,7 +2063,7 @@ than the local-dimension term.  Hence
  =\begin{cases}
    \Theta(q^{-1}),&q=p,\\
    \Theta(q^{-1/2}),&q=p^e,\ e\geq2.
-  \end{cases}                                                        \tag{5.22}
+  \end{cases}                                                        \tag{5.24}
 \]
 On a length-saturating subfamily \(n\asymp q\), these are
 \(\Theta(n^{-1})\) and \(\Theta(n^{-1/2})\), respectively.  For fixed
@@ -1996,7 +2077,7 @@ Corollary~\ref{cor:approximate-decomposition} under
 \[
  \varepsilon(U)<\min\left\{
   \frac{\tau_p}{8},\frac1{16\pi n\sqrt q}
- \right\}.                                           \tag{5.23}
+ \right\}.                                           \tag{5.25}
 \]
 Indeed (5.18), the operator-norm bound by Hilbert--Schmidt norm, and the
 principal logarithm give

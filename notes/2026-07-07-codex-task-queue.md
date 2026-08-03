@@ -25,8 +25,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C838 `[ame-lu]` [RUNNING; C837 REDUCED ENTRY LOSS TO DISCRETE COMPATIBILITY]** — prove or structurally refute exact compatibility of the locally recovered Clifford data through the minimum-support transport atlas at a dimension-only defect scale. Treat the affine Weyl/character data as well as the linear symplectic frames, and state precisely what this does or does not improve in global rounding → `notes/2026-08-02-c838-robust-atlas-compatibility.md`.
-
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every

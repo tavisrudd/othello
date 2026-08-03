@@ -10,7 +10,8 @@ Discovery companion:
 
 ## Current status
 
-**C835--C837 closed; C838 is active (2026-08-02).**
+**C835--C838 closed (2026-08-02): trust and the three structural
+strengthenings are resolved.**
 Pastawski--Yoshida Lemma 5 already gives the exact
 three-cleanable-region Clifford obstruction.  The paper now claims only the
 leakage-aware `8 eps` estimate, explicit Weyl-Fourier rounding, and AME global
@@ -22,11 +23,17 @@ C836 replaced the fixed-`q` shorthand by the uniform scale
 least two.  C837 extracted the post-branch collective estimate
 `sum_i d_2(U_i,g_i)^2 <= pi^2 eps^2` and showed that it cannot independently
 improve entry: a pre-entry version already contains exact branch selection.
-C838 now tests that selection through atlas compatibility, including affine
-character data.  See
+C838 proved exact symplectic-atlas compatibility at the dimension-only radius
+`min{tau_p/8,2 sin(pi/p)/(4+64 sqrt(q))}` by localizing on two intersecting
+minimum supports.  It also isolated the sharp remaining obstruction: all
+localized commutators cancel Weyl-translation phases and therefore cannot
+control the affine stabilizer character.  The resulting exact product-Pauli
+correction need not be locally close, so the global entry radius is unchanged.
+See
 `2026-08-02-c835-cleaning-rounding-trust-audit.md` and
 `2026-08-02-c836-admissible-ame-rounding-scaling.md` and
-`2026-08-02-c837-collective-frame-coercivity.md`.
+`2026-08-02-c837-collective-frame-coercivity.md` and
+`2026-08-02-c838-robust-atlas-compatibility.md`.
 
 **C830 closed positively with a dimension boundary (2026-08-02): global
 minimum-support rounding.**  Orthogonality of all minimum-support sectors and

@@ -11,9 +11,9 @@
         "sha256": "8e7291b7ddc73717c3640e5eeb0bd3d927f2dd81cdefd77f6e02b748bc61a362"
       },
       {
-        "bytes": 424590,
+        "bytes": 433301,
         "path": "ame-lu.pdf",
-        "sha256": "f3bd5c5b080432e6c1781ca463a512511e13dfdf882c8c740e99ea07f985a7a5"
+        "sha256": "bb18d768a1e5df7c0128d8b945e3af4b60e93c1aa6be642380821668fc42389c"
       },
       {
         "bytes": 2578,
@@ -61,9 +61,9 @@
         "sha256": "ca3e562179cb859043cb076a97e2e74221cf7a5532f8a79285700528a72bfafb"
       },
       {
-        "bytes": 21069,
+        "bytes": 21446,
         "path": "sections/01-introduction.tex",
-        "sha256": "03a27869ec6897c77f43e896e1e60bc7ffc28281e124bd79e851c1f23aea966f"
+        "sha256": "3a0fae7fae5245a3ea9e462c6cb4a31a69d0d828efc26ca91606f54b0e7ebb64"
       },
       {
         "bytes": 6200,
@@ -71,9 +71,9 @@
         "sha256": "9bd45727fd2aa46f56787ac729895b443fe9aa9fc35670ca21789bf0ce92db34"
       },
       {
-        "bytes": 107577,
+        "bytes": 112090,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "373b893d79ad38fa7b2dfd503fb2ecb2c4a7d229e983877d0d8d42b74ffdb4db"
+        "sha256": "33a0bf5b6484cb080b71406881a8875f55777529d1c8c1f693e263acb0472aa6"
       },
       {
         "bytes": 8998,
@@ -101,9 +101,9 @@
         "sha256": "273f370f80635ce0628851931982d0cbda697bdb26ca8dd8eadfe4aa5add7b0d"
       },
       {
-        "bytes": 11334,
+        "bytes": 12037,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "9b39fd6650728aa44df5869d4f768eac15f50e260a53d4eb151ae80c52857ed9"
+        "sha256": "fdcbbbe5fa2aae9bf1292dbcab7890e7952cab6adcde7ea13c6dbf044a533c5a"
       },
       {
         "bytes": 5676,
@@ -221,7 +221,7 @@
         "sha256": "b91ba7b352527fe5659a8f045ca22048eaa5f51e48fe04e7cf80465c91d97c4d"
       }
     ],
-    "tree_sha256": "a51f2f4ba82b14e1442388c185aca9ee5f8587f38e200ac14e86b31ae5a17db5"
+    "tree_sha256": "2ada0216f5176543f8e7612f38e0cba62e4406bf81a36a6593a55288ea3d98cd"
   },
   "formal_companion": {
     "artifacts": [
