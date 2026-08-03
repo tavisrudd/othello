@@ -10,12 +10,18 @@ Discovery companion:
 
 ## Current status
 
-**C848 in progress (2026-08-02): bounded Paper II C847 repairs.**  State the
-Paper I minimum-support atlas import used by the pencil LC converse, replace
-the six stale or unsupported hard-coded equation references, add a
-reader-resolvable Paper I repository locator, rebuild warning-free, and inspect
-the affected pages.  Do not touch Lean, release manifests, standalones, or
-remotes.  Report to `2026-08-02-c848-mds-css-paper-minor-repairs.md`.
+**C848 closed locally `GO` (2026-08-02): Paper II's C847 manuscript defects
+are repaired.**  The introduction now states the exact Paper I
+minimum-support atlas clauses used by the pencil LC converse, both use sites
+name that import, and all six stale or unsupported hard-coded equation
+references use semantic labels or direct prose.  The import remains unnumbered
+and Paper-I-owned, so theorem ownership and internal ledgers do not change.
+The warning-free build remains 22 pages and the full/affected-page sweeps pass.
+No Paper I paper DOI or public repository URL exists in the available metadata
+or bounded public check, so the real companion locator remains an honest
+release-order gate; no URL was invented and no remote action was taken.  No
+Lean, release manifest, standalone, formal repository, or remote was touched.
+See `2026-08-02-c848-mds-css-paper-minor-repairs.md`.
 
 **C847 closed `MINOR` (2026-08-02): Paper II's headline theorem survives,
 with bounded manuscript repairs required before formal extraction.**  The
