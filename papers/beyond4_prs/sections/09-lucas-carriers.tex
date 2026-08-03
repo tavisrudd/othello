@@ -287,5 +287,200 @@ gives the displayed formula.
 
 Thus the order-three law of Proposition~\ref{prop:linearized} belongs
 to a proper $\F_8$-linear section, not to deepness of the full
-$e_7$ kernel.  The other intrinsic strata of the six-dimensional
-degree-nine carrier are not classified here.
+$e_7$ kernel.  We now treat the complete carrier.
+
+\subsection{The complete degree-nine carrier}
+
+Write
+\[
+ \cM_9=\PP\langle e_2,e_3,e_4,e_5,e_6,e_7\rangle,\qquad
+ U=\langle e_2,e_3,e_6,e_7\rangle .
+\]
+The $PGL_2$-module filtration gives
+\[
+                    \cM_9/U\simeq\det^4\otimes E.          \tag{31}
+\]
+
+\begin{proposition}[Invariant-block arithmetic]\label{prop:m9-invariant-block}
+Every rational point of $\PP(U)$ is shallow over every
+$\F_{2^m}$ with $m\geq4$.
+\end{proposition}
+
+\begin{proof}
+The Frobenius-graph and off-graph rank-one strata have reciprocal
+three-space subspace-polynomial witnesses.  The remaining rank-two stratum
+is the $A_5$-stabilized orbit of $e_3+e_6$, including its rational twists.
+Choose six roots with polynomial $h=\sum_{i=0}^6h_it^i$, put
+\[
+\begin{array}{ll}
+A_0=h_0+h_3,&A_1=h_1+h_4,\\
+A_2=h_2+h_5,&A_3=h_3+1,
+\end{array}
+\]
+and set
+\[
+ \Delta=A_1A_3+A_2^2,\quad Q=A_0A_3+A_1A_2,\quad
+ N=A_1^2+A_0A_2.
+\]
+The final pair has sum $Q/\Delta$, product $N/\Delta$, and rational
+distinct roots precisely when
+\[
+                         y^2+y=N\Delta/Q^2                 \tag{32}
+\]
+has a rational point away from the root-collision divisors.  The double-pole
+coefficient on $Q=0$ is nonsquare on every rational twist, so the cover is
+geometrically integral.  A one-moving-root slice has genus at most one;
+the bad-base and deletion estimates give a witness for $q\geq128$.
+The complete $q=64$ quotient certificate and the $q=16,32$ quotient
+certificates cover the remaining admissible fields.  Their checkers rebuild
+the orbit partitions, twists, root polynomials, and both Hankel equations;
+Section~\ref{sec:verification} records the exact trust boundary.
+\end{proof}
+
+\begin{proposition}[Exact final-pair criterion]\label{prop:final-pair}
+Let $z=(z_2,\ldots,z_7)\in\cM_9(\F_{2^m})$.  Choose six distinct
+finite roots with monic polynomial $h=\sum_{i=0}^6h_it^i$, and define
+\[
+ A_j=\sum_{i=2}^7z_i h_{i+j-3}\quad(0\leq j\leq3),
+\]
+with coefficients outside $0,\ldots,6$ equal to zero.  If the final
+pair has sum $s$ and product $p$, the two Hankel equations are exactly
+\[
+ A_0+sA_1+pA_2=0,\qquad A_1+sA_2+pA_3=0.                  \tag{33}
+\]
+On
+\[
+ \Delta=A_1A_3+A_2^2\ne0,\qquad
+ Q=A_0A_3+A_1A_2\ne0,
+\]
+their unique solution is
+\[
+ s=Q/\Delta,\qquad p=(A_1^2+A_0A_2)/\Delta,               \tag{34}
+\]
+and the pair is rational and distinct exactly when
+\[
+ \Tr_{\F_{2^m}/\F_2}\!
+ \left(\frac{(A_1^2+A_0A_2)\Delta}{Q^2}\right)=0.          \tag{35}
+\]
+Collision with an old root $r$ is
+\[
+ r^2\Delta+rQ+(A_1^2+A_0A_2)=0.                           \tag{36}
+\]
+The rank-deficient cases are exactly the corresponding rank-one or
+rank-zero alternatives in (33).
+\end{proposition}
+
+\begin{proof}
+Substitute $f=h(t)(t^2+st+p)$ in the two consecutive Hankel equations.
+This gives (33); Cramer's rule gives (34).  In characteristic two the
+quadratic is split with distinct roots precisely when $s\ne0$ and
+$\Tr(p/s^2)=0$, which is (35).  Evaluation of the quadratic at $r$
+gives (36).  Conversely, every split divisor of nonfull support can be
+moved off infinity and partitioned into six roots and a final pair.
+The full-support divisor is checked directly in homogeneous coordinates.
+Thus the criterion loses neither infinity nor the degenerate linear-system
+cases.
+\end{proof}
+
+\begin{theorem}[Empty first higher Lucas carrier]\label{thm:m9-shallow}
+For every $m\geq4$,
+\[
+ \cM_9(\F_{2^m})\cap\{\textup{split-free syndromes}\}
+ =\varnothing .
+\]
+Equivalently, every one of
+\[
+                  1+q+q^2+q^3+q^4+q^5
+\]
+projective carrier points has a split squarefree degree-eight member in its
+Hankel kernel.
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:m9-invariant-block} handles $\PP(U)$.  Outside it,
+projective transport normalizes the quotient in (31) to $[e_4]$, leaving
+the affine slice
+\[
+              (z_2,z_3,z_4,z_5,z_6,z_7)=(a,b,1,0,c,d)
+\]
+modulo its upper-Borel stabilizer.
+
+For the all-field argument, the coefficient map
+\[
+ (A_0,A_1,A_2,A_3)^{\mathsf T}=M_zh+(0,0,z_7,z_6)^{\mathsf T},
+\quad
+M_z=\begin{pmatrix}
+ z_3&z_4&z_5&z_6&z_7&0\\
+ z_2&z_3&z_4&z_5&z_6&z_7\\
+ 0&z_2&z_3&z_4&z_5&z_6\\
+ 0&0&z_2&z_3&z_4&z_5
+\end{pmatrix}                                               \tag{37}
+\]
+has rank at least three whenever $z_4\ne0$ or $z_5\ne0$.
+Indeed, a two-dimensional left kernel either contains a vector supported
+in its last two coordinates or projects isomorphically to the first two;
+the boundary columns then successively force
+$z_2=z_3=z_4=z_5=0$, a contradiction.  At rank four, $Q$ is an
+irreducible quadric and the double-pole coefficient of (35) along $Q=0$
+is nonsquare.  At rank three, write the unique affine relation as
+$\sum\ell_iA_i=\kappa$.  If that coefficient were square on every
+component of $Q=0$, differentiation gives
+\[
+ \ell_0\kappa=\ell_1\kappa=0,\qquad
+ \ell_1\ell_2=\ell_0\ell_3.
+\]
+The six column relations in (37) again force $z_4=z_5=0$.  Hence the
+Artin--Schreier cover is geometrically integral throughout the complement.
+
+Fix five roots and let $x$ be the sixth.  Then each $A_j$ is affine in
+$x$, $Q$ is quadratic, and the reduced cover has at most two simple
+poles, hence genus at most one.  A nonzero pseudo-remainder, the derivative
+and leading coefficient of $Q$, and the five-root Vandermonde have degree
+at most $22$ in each root coordinate.  A rational good base therefore
+exists for every binary $q\geq32$.  The exact deletion table on the
+normalized cover is
+\[
+\begin{array}{c|ccccc}
+\text{condition}&x=r_i&Q=0&\Delta=0&
+\text{final/old collision}&\text{final/}x\text{ collision}\\
+\hline
+\deg_x&5&2&2&10&4,
+\end{array}
+\]
+so at most $48$ rational points are removed.  Since
+$64+1-2\sqrt{64}=49$, every complement point is shallow for
+$q\geq64$.
+
+For $q=16,32$, the intrinsic Borel quotients contain respectively
+$292$ and $1090$ orbits.  The compact certificates give one exact
+eight-root witness for every orbit, and an independently written replay
+reconstructs the quotient and both Hankel equations.  This closes the two
+fields below the point-count threshold and proves the theorem.
+\end{proof}
+
+Projective-additive three-space divisors are sufficient but not necessary.
+At $q=16$ their complete $PGL_2$-closure has $510$ divisors, while
+$101$ of the $292$ complement orbits contain none of them; ordinary
+split witnesses still exist on all $101$.  Thus the endpoint criterion of
+Wang--Wu--Hu and Proposition~\ref{prop:linearized} describe a proper section.
+The exact uniform replacement is (33)--(36).
+
+\begin{corollary}[Redundancy ten]\label{cor:r10}
+For every prime power $q\geq59$, the projective deep-hole syndromes of
+$\PRS(q-9)$ are exactly the persistent tangent and conjugate-secant
+families.  Their cardinality is $q(q+1)^2/2$, and their orbit law is
+$T/T^9$ modulo inversion and Frobenius, with tangent cocycle
+$z\mapsto z+9u$.
+\end{corollary}
+
+\begin{proof}
+For odd $q\geq59$, Theorem~\ref{thm:recursive-carrier} and the
+level-nine component calculation leave no nonpersistent split-free point.
+For even prime powers in the range one has $q\geq64$;
+Theorem~\ref{thm:recursive-carrier} confines every split-free point to
+$\cP_{10}\cup\cM_9$, and Theorem~\ref{thm:m9-shallow} eliminates the
+second term.  The radius premise holds throughout the stated range, so the
+split-free equality promotes to deep holes.  The persistent count and orbit
+law are the specialization $r=10$ of
+Theorem~\ref{thm:recursive-carrier}.
+\end{proof}

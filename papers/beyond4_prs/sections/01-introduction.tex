@@ -1,15 +1,12 @@
 \section{Introduction}
 
-This paper gives two complete deep-hole classifications over all prime powers
-\(q\geq7\), beyond the known cases through redundancy four.  At
-redundancies five and six we classify the
-projective deep-hole directions for every prime power \(q\geq7\), with
-exact projective counts and semilinear orbit laws.  At redundancy seven
-we classify every split-free syndrome over the same range; this is a
-deep-hole classification whenever the covering radius is six, in
-particular for \(q\geq11\).  The common mechanism is a coherent polar
-flag, a marked contraction that propagates splitting information
-without forgetting the factor needed for a squarefree lift.
+This paper gives a recursive obstruction theorem for projective
+Reed--Solomon deep holes at arbitrary redundancy and exact classifications
+through redundancy ten.  The common mechanism is a coherent polar flag, a
+marked contraction that propagates splitting information without forgetting
+the factor needed for a squarefree lift.  The contained part of the
+recursion is exactly the persistent catalecticant scheme together with one
+maximal Lucas carrier; the transverse part escapes by a uniform point count.
 
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
@@ -39,6 +36,37 @@ separation used throughout the paper is
 The first term is proved geometrically; the covering-radius equality
 is a separate coding-theoretic input and is never inferred from a
 finite split-free census.
+
+\begin{theorem}[Recursive obstruction and fixed-level consequences]
+\label{thm:main}
+Let \(r\geq6\), and let
+\[
+ q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
+\]
+Every split-free redundancy-\(r\) syndrome belongs to
+\[
+ \cP_r\cup
+ \PP\!\left\langle e_j:
+ \binom{r-2}{j}=\binom{r-2}{j-1}=0
+ \pmod{\operatorname{char}\F_q}\right\rangle .             \tag{1}
+\]
+If \(\operatorname{char}\F_q>r-1\), the second term is empty and the
+deep-hole syndromes are exactly the persistent tangent and conjugate-secant
+families, of total cardinality \(q(q+1)^2/2\).
+
+At fixed levels, the classifications are exact at redundancies five and six
+for every \(q\geq7\), at redundancy seven in the split-free sense for every
+\(q\geq7\), and at redundancies eight, nine, and ten for
+\(q\geq43,53,59\), respectively.  The redundancy-seven result promotes to
+deep holes whenever the radius is six, in particular for \(q\geq11\).
+\end{theorem}
+
+Theorem~\ref{thm:recursive-carrier} proves the recursive statement.
+Theorems~\ref{thm:r5}, \ref{thm:r6}, \ref{thm:r7}, \ref{thm:r8},
+\ref{thm:r9}, and Corollary~\ref{cor:r10} give the fixed levels.  The
+redundancy-ten conclusion uses Theorem~\ref{thm:m9-shallow}: the first fresh
+higher Lucas carrier is entirely shallow, including the two-dimensional
+quotient missed by the projective-additive section.
 
 The correspondence between deep holes,
 one-symbol MDS extensions, and uncovered points of a normal rational
@@ -93,13 +121,12 @@ redundancy, contraction lowers the degree, but the removed root must
 remain forbidden: restoring a lower witness through that root creates
 a double factor.  Coherent polar flags retain precisely this datum.
 The finite-depth polar-escape theorem separates the uniform induction
-from the hard level-specific question of which polar lines are trapped
-in the lower bad carrier.  The redundancy-six and redundancy-seven
-proofs verify that carrier input at depths one and two.  Their point
-counts and squarefree lifts are then specializations of one theorem,
-while the exact carrier calculations remain visible.  The three-row
-reading map in Section~\ref{sec:overview} identifies the terminal
-classification and the two evaluated carrier levels.
+from the question of which polar lines are trapped in the lower bad
+carrier.  Redundancies six and seven first evaluate that input at depths one
+and two.  The recursive carrier theorem then proves that the full contained
+locus is the persistent scheme plus the maximal Lucas carrier at every
+depth.  The later fixed-level results evaluate the arithmetic on that
+carrier.  Section~\ref{sec:overview} gives the short proof route.
 
 The resulting structural theorem has two outputs.
 
@@ -194,9 +221,10 @@ and factorization references supply normal forms and distribution
 tools, but not the coherent marked contraction used here.  The nucleus
 results locate characteristic-dependent kernels, while the present
 work computes which of their coherent lifts meet the PRS splitting
-incidence.  Accordingly, this paper's contributions are the
-redundancy-five through seven classifications, the finite-depth coherent
-polar-escape theorem, and the complete evaluation of its first two
-contained-carrier gates.  The theorem permits any finite number of marked
-contractions once the stagewise carrier and point-count hypotheses are
-proved; no arbitrary-level carrier classification is asserted here.
+incidence.  Accordingly, the mathematical spine consists of the
+redundancy-five terminal classification, finite-depth coherent polar escape,
+the reduced recursive carrier theorem, and the arithmetic evaluation of
+that carrier through redundancy ten.  Wang--Wu--Hu's projective-subline
+criterion is imported at its exact endpoint; the adjacent-zero carrier, its
+coherent nesting, and the final-pair split-squarefree classification are the
+paper-owned steps.

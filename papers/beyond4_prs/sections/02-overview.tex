@@ -1,31 +1,39 @@
 \section{Reading map}\label{sec:overview}
 
-The proof can be read at two speeds.  For the classification spine,
-follow the three rows of Table~\ref{tab:dependency-map}; the intervening
-definitions and lemmas discharge the cited carrier, collision, and
-point-count steps.  Table~\ref{tab:classification-status} separately
-records where a split-free classification needs a covering-radius
-input before it becomes a deep-hole classification.
+The proof has one recursive spine and six evaluated levels.
+Table~\ref{tab:dependency-map} isolates the load-bearing steps;
+Table~\ref{tab:classification-status} keeps split-free geometry separate
+from the covering-radius promotion.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Fast path through the classification proofs.}
+\caption{Fast path through the proof.}
 \label{tab:dependency-map}
-\begin{tabular}{p{0.09\textwidth}p{0.48\textwidth}p{0.31\textwidth}}
+\begin{tabular}{p{0.15\textwidth}p{0.50\textwidth}p{0.25\textwidth}}
 \toprule
-Result & Load-bearing printed argument & Imported input\\
+Result & Printed argument & Imported or certified input\\
 \midrule
-R5 & Hankel dictionary; gcd strata; cyclic descent; integral $(2,2)$
+Terminal R5 &
+Hankel dictionary; gcd strata; cyclic descent; integral \((2,2)\)
 fiber square and point bound &
-lower tangent/secant families; high-rate radius theorem; singular-curve
-bound\\
-R6 & depth-one polar escape; ordinary and binary contained components &
-R5 lower package and radius gate\\
-R7 & depth-two polar escape; complete second-marker bad scheme,
-including cyclic and fixed-gcd collisions; contained rank-two theorem;
-terminal pointed cover &
-R5/R6 lower packages; separate covering-radius result\\
+lower persistent families; radius theorem; finite exception certificate\\
+Polar escape &
+marked divided-power contraction; stagewise avoidance; repeated squarefree
+lifting &
+singular-curve point bound\\
+Recursive carrier &
+reduced terminal primes; dense marker row space; component selection;
+Pascal nesting of all nuclei &
+stable-component elimination replay; kernel-checked density and selection\\
+R6--R9 &
+successive lower packages and carrier evaluations; residual-quadratic
+calculation at R9 &
+bounded certificates; separate radius theorem\\
+R10 &
+maximal Lucas containment; invariant-block arithmetic; final-pair
+Artin--Schreier trace criterion &
+\(q=16,32,64\) carrier certificates; separate radius theorem\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -33,25 +41,31 @@ R5/R6 lower packages; separate covering-radius result\\
 \begin{table}[H]
 \centering
 \small
-\caption{Classification status by redundancy.  ``Unconditional''
-refers to the displayed field range.  A split-free classification
-becomes a deep-hole classification only after the separate radius
-gate.}
+\caption{Classification status.  A split-free equality becomes a code
+deep-hole equality only after the radius gate.}
 \label{tab:classification-status}
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{p{0.05\textwidth}p{0.13\textwidth}
-                p{0.24\textwidth}p{0.27\textwidth}
-                p{0.19\textwidth}}
+\begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}
+                p{0.29\textwidth}p{0.29\textwidth}
+                p{0.12\textwidth}}
 \toprule
 Red. & Field range & Split-free geometry & Deep holes/MDS extensions
-& Remaining gap\\
+& Gap\\
 \midrule
-$5$ & $q\geq7$ & Complete, unconditional & Complete,
-unconditional; $\rho=4$ & None\\
-$6$ & $q\geq7$ & Complete, unconditional & Complete,
-unconditional; $\rho=5$ & None\\
-$7$ & $q\geq7$ & Complete, unconditional & Complete for $q\geq11$;
-conditional on $\rho=6$ at $q=7,8,9$ & Radius at $q=7,8,9$\\
+\(5\) & \(q\geq7\) & Complete & Complete; \(\rho=4\) & None\\
+\(6\) & \(q\geq7\) & Complete & Complete; \(\rho=5\) & None\\
+\(7\) & \(q\geq7\) & Complete & Complete for \(q\geq11\) & Radius at
+\(7,8,9\)\\
+\(8\) & \(q\geq43\) & Persistent-only & Complete; \(\rho=7\) & Below range\\
+\(9\) & \(q\geq53\) & Persistent-only & Complete; \(\rho=8\) & Below range\\
+\(10\) & \(q\geq59\) & Persistent-only & Complete; \(\rho=9\) & Below range\\
+\(r\geq6\) & \(q\geq Q_r\) & Contained in persistent plus maximal Lucas;
+persistent-only if \(p>r-1\) & Complete if \(p>r-1\) & Lucas arithmetic
+in small characteristic\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Here \(Q_r=6r-15+\lfloor2\sqrt{6r-17}\rfloor\).  The R7 finite record
+is exposed only as a four-field exception delta beyond the uniform
+\(T/T^6\) spine: the full fourteen-field ledger remains in the supplement.

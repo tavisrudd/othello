@@ -1,52 +1,44 @@
-# Theorem adoption map
+# Version 2 theorem adoption map
 
-This map freezes the claims adopted by the R5--R7 manuscript. “Complete”
-describes the mathematical classification in its declared range; publication
-readiness remains separately gated by the proof, evidence, trust, and release
-ledgers.
+This map records the claims adopted by Version 2. “Complete” always refers to
+the stated field range; proof, certificate, formal, radius, and release
+boundaries remain separate.
 
-| Source | Manuscript result | Adopted strength | Exact boundary | Proof/evidence type |
+| Source | Manuscript result | Adopted strength | Exact boundary | Proof/evidence route |
 |---|---|---|---|---|
-| R5 | Complete redundancy-five classification | complete classification | every prime power `q >= 7`; sporadic orbits exactly at `7,8,9,11,13,17,19` | characteristic-free Hankel/cubic-cover proof plus exhaustive finite certificates |
-| R5 quantum corollary | Balanced \(q=8\) MDS extension, \(\operatorname{AME}(10,8)\), and \([[9,1,5]]_8\) quantum MDS code | exact derived corollary; no claim of a complete LU/LC orbit table | the `1116=360+756` relative projective extension directions at `(r,q)=(5,8)`; the only balanced prime-power row among R5--R7 | R5 extension dictionary and Certificate R5 count; standard MDS--AME/Choi correspondence; companion MDS--CSS LU and transversal-conversion theorems |
-| R6 | Redundancy-six classification | complete classification | every prime power `q >= 7`; small exceptional tables at `7,8,9,11,13`; recurring binary nucleus orbit for odd `m >= 5` | polar-line proof plus bounded census and semilinear normal-form certificate |
-| R7 | Redundancy-seven split-free syndrome classification | complete all-field split-free classification; deep-hole promotion only with the radius gate | finite certificate through `q=32`; geometric continuation from `q>=37`; genuine deep holes only for `q >= 11`; the `q=7,8,9` radius gate is not supplied | explicit degree-16 second-marker scheme, pointed linear-gcd and \(S_3\) bottom packages, contained rank-two proposition, and orbit-reduced finite certificate |
-| Polar flags | Polar construction and finite-depth escape | exact conditional construction and effective finite-depth implication | every stage requires its displayed carrier, collision, marker, and terminal-cover inputs; these are proved here only at depths one and two | projective divided-power contraction plus manuscript geometry and cited point bounds |
-| Lean boundary | R5--R7 algebra, arithmetic, coordinate identities, finite-table transcription, and conditional synthesis | one exact paper-facing closure, not a full formalization of the geometry | geometric classifications, cited theorems, group actions, and certificate semantics remain manuscript, literature, or public-validation inputs | `RelativeConicArcs.Gates.PRSBeyondRedundancyFour`, its axiom audit, and `supplement/LEAN-STATEMENTS.md` |
+| R5 | Complete redundancy-five classification | all prime powers q >= 7 | exact sporadic fields 7,8,9,11,13,17,19 | printed cubic-pencil proof plus Certificate R5 |
+| R6 | Complete redundancy-six classification | all prime powers q >= 7 | bounded exception delta and recurring odd-binary nucleus orbit | printed depth-one proof plus R6/R6-NF certificates |
+| R7 | Complete split-free classification | all prime powers q >= 7; deep holes for q >= 11 | no radius promotion at q=7,8,9 | printed depth-two proof plus compact R7 record and direct-locus replay |
+| Polar escape | Finite-depth coherent marked contraction | arbitrary finite depth under explicit stagewise data | supplies neither carrier geometry nor radius | printed construction; contraction/lifting algebra kernel checked |
+| Recursive carrier | Exact reduced contained carrier | every r >= 6, fibrewise over each characteristic | persistent scheme plus one maximal adjacent-zero Lucas carrier; no uniform nilpotent integral model | printed reduced-prime, Pascal, density, and generic-point proofs; stable-component replay; kernel-checked density/selection |
+| Uniform consequence | Split-free containment and high-characteristic classification | q >= 6r-15+floor(2 sqrt(6r-17)) | containment in persistent/Lucas generally; exact deep holes when char(F_q) > r-1 | recursive carrier plus uniform packages and Seroussi--Roth--Dür radius route |
+| R8 | Persistent-only deep holes | q >= 43 | no bounded-field classification | printed three-marker proof plus Certificate R8 |
+| R9 | Persistent-only deep holes | q >= 53 | characteristic-seven carrier handled by slice theorem and finite bridge | printed residual-quadratic proof, appendix, and Certificate R9 |
+| Higher Lucas | Empty first fresh carrier | every F_(2^m), m >= 4 | projective-subline endpoint attributed to Wang--Wu--Hu; full carrier uses the final-pair criterion | printed all-field proof plus q=16,32,64 certificates and independent replay |
+| R10 | Persistent-only deep holes | every prime power q >= 59 | odd fields from the recursive theorem; binary fields use the empty-carrier theorem | printed synthesis plus R10 and Lucas evidence bundles |
+| Lean boundary | Algebra, arithmetic, density, selection, and conditional synthesis | exact declarations in formalization-ledger.md and supplement/LEAN-STATEMENTS.md | concrete carrier primes, group actions, cited theorems, and external certificate semantics remain explicit | 17-file paper-facing aggregate plus separately identified companion terminals |
 
 ## Stable source labels
 
-- `thm:r5`: complete redundancy-five classification.
-- `cor:q8-quantum-extension`: balanced field-eight MDS, AME, and quantum-MDS consequence.
-- `thm:spine`: R6/R7 classification spine and persistent orbit law.
-- `thm:polar-construction`: intrinsic polar-flag construction and squarefree
-  lifting.
-- `thm:induction`: finite-depth polar escape from uniform stagewise marker
-  exclusions and a terminal splitting cover; R6 and R7 instantiate depths one
-  and two.
-- `thm:r6`: complete redundancy-six classification.
-- `thm:r7`: complete redundancy-seven split-free classification and the
-  `q>=11` deep-hole corollary.
+- thm:main: Version 2 headline.
+- thm:r5, thm:r6, thm:r7: all-field R5--R7 statements.
+- thm:induction: finite-depth polar escape.
+- thm:recursive-carrier: all-level reduced carrier and uniform consequence.
+- thm:r8, thm:r9, cor:r10: fixed high-field classifications.
+- thm:m9-shallow: empty first higher Lucas carrier.
 
-The complete set of 37 retained numbered labels is reconciled mechanically
-against `supplement/LEAN-STATEMENTS.md` by `supplement/verify.py`.
+The complete set of 71 numbered labels is reconciled mechanically against
+supplement/LEAN-STATEMENTS.md.
 
-## Companion-work boundary
+## Boundaries
 
-Redundancy eight, redundancy nine, ordered-Hessian geometry, an all-level
-classification of the recursively contained carrier, and higher Lucas-carrier
-arithmetic are not adopted by this manuscript.  The finite-depth escape
-theorem does not supply those carrier hypotheses.  Some reusable interfaces
-remain in the regression-checked Lean import closure, but no theorem from that
-companion work is mapped to a manuscript claim.
-
-## Excluded claims
-
-- No arbitrary-redundancy Reed--Solomon deep-hole classification.
-- No assertion that characteristic two has no higher modular carriers.
-- No redundancy-eight, redundancy-nine, or redundancy-ten theorem.
-- No promotion of the redundancy-seven `q=7,8,9` split-free tables to code
-  deep holes without a covering-radius proof.
-- No assertion that every Lucas-carrier point is deep.
-- No claim that Lean proves the geometric component, point-existence, coding,
-  group-action, or external-certificate inputs.
+- Split-free and deep-hole statements are separated by a named radius premise.
+- The all-level theorem classifies possible carriers in small characteristic,
+  not the arithmetic of every later Lucas carrier.
+- The reduced theorem is fibrewise. It does not assert a flat reduced
+  arithmetic model or classify nilpotent/embedded structure of a chosen model.
+- Wang--Wu--Hu Proposition 11 owns the projective-subline endpoint criterion.
+- The C660 direct-locus route shares the published direct-locus engine, the R5
+  finite-field layer, and the proved R6 pointed classification from q >= 16;
+  its checker is not a second finite-field implementation.
+- Version 1, its public commit, DOI, tag, and archive remain immutable.

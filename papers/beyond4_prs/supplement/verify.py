@@ -223,8 +223,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 37:
-        raise SystemExit(f"expected 37 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 71:
+        raise SystemExit(f"expected 71 adopted manuscript labels, found {len(labels)}")
 
     formal_sources = (AGGREGATE.is_file(), AXIOM_AUDIT.is_file())
     if formal_sources == (False, False):
@@ -264,7 +264,7 @@ def check_formal_scope() -> None:
         )
     if hashlib.sha256(target_bytes).hexdigest() != EXPECTED_AXIOM_TARGET_SHA256:
         raise SystemExit("paper-facing axiom target set or order has changed")
-    print("verified R5--R7 manuscript labels and exact Lean target sets")
+    print("verified Version 2 manuscript labels and exact Lean target sets")
 
 
 def check_public_release_gate() -> None:
@@ -359,6 +359,58 @@ def replay() -> None:
         (
             "stable-components",
             ["2026-07-24-stable-component-fano-elimination.py", "--check"],
+        ),
+        (
+            "r7-direct-locus-v2",
+            ["2026-08-02-c660-r7-independent-generator.py", "--check"],
+        ),
+        (
+            "r7-direct-locus-v2",
+            [
+                "2026-08-02-c660-r7-independent-checker.py",
+                "2026-08-02-c660-r7-independent-certificate.json",
+                "--compare-public",
+                "../../CLASSIFICATION-RECORDS.json",
+                "--output-comparison",
+                "2026-08-02-c660-r7-public-comparison.json",
+                "--check-comparison",
+            ],
+        ),
+        ("r8", ["2026-07-23-c513-prs-redundancy-eight.py", "--check"]),
+        ("r8", ["2026-07-23-c513-prs-redundancy-eight-replay.py"]),
+        ("r9", ["2026-07-23-c516-prs-redundancy-nine.py", "--check"]),
+        ("r9", ["2026-07-23-c516-prs-redundancy-nine-replay.py"]),
+        ("r10", ["2026-07-23-c532-prs-redundancy-ten-synthesis.py", "--check"]),
+        ("r10", ["2026-07-23-c532-prs-redundancy-ten-synthesis-replay.py"]),
+        (
+            "lucas-m9",
+            ["2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance.py", "--check"],
+        ),
+        (
+            "lucas-m9",
+            ["2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance-replay.py"],
+        ),
+        (
+            "lucas-m9",
+            [
+                "2026-08-02-c620-higher-lucas-modular-carriers.py",
+                "16",
+                "--check",
+                "2026-08-02-c620-higher-lucas-modular-carriers-q16.json",
+            ],
+        ),
+        (
+            "lucas-m9",
+            [
+                "2026-08-02-c620-higher-lucas-modular-carriers.py",
+                "32",
+                "--check",
+                "2026-08-02-c620-higher-lucas-modular-carriers-q32.json",
+            ],
+        ),
+        (
+            "lucas-m9",
+            ["2026-08-02-c620-higher-lucas-modular-carriers-replay.py"],
         ),
     )
     for directory, arguments in python_jobs:

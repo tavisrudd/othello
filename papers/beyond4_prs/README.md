@@ -2,17 +2,18 @@
 
 This directory contains the manuscript
 *Deep holes of projective Reed--Solomon codes beyond redundancy four:
-exact classifications at redundancies five through seven* and its public
+recursive carriers and exact classifications through redundancy ten* and its public
 verification bundle.
 
-The paper proves complete deep-hole classifications at redundancies five and
-six over every prime power \(q\geq7\).  At redundancy seven it proves the
-complete split-free classification over the same range and promotes it to a
-deep-hole classification whenever the covering radius is six, in particular
-for \(q\geq11\).  Its finite-depth coherent-polar escape theorem treats the
-uniform lifting step at arbitrary depth; the paper proves the required
-contained-carrier hypotheses only at depths one and two and therefore makes no
-arbitrary-redundancy classification claim.
+The paper proves complete classifications at redundancies five and six over
+every prime power \(q\geq7\), the complete split-free redundancy-seven
+classification, and exact high-field classifications at redundancies eight
+through ten.  Its recursive theorem identifies the reduced contained carrier
+at arbitrary redundancy as the persistent catalecticant scheme plus one
+maximal Lucas carrier.  In characteristic greater than \(r-1\), this gives an
+exact classification above the displayed uniform threshold.  At redundancy
+ten the first fresh higher Lucas carrier is shallow in every admissible binary
+field.
 
 ## Build
 
@@ -23,13 +24,13 @@ make check
 make tit-check
 ```
 
-`make check` builds the 30-page canonical preprint
-`prs-beyond-redundancy-four.pdf`.  `make tit-check` builds the 23-page
+`make check` builds the canonical preprint
+`prs-beyond-redundancy-four.pdf`.  `make tit-check` builds the
 IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`.
 
 The canonical and IEEEtran drivers consume the same abstract, index terms,
-eight active section files, acknowledgment, and bibliography.  Their layout
+active sections, appendix, acknowledgment, and bibliography.  Their layout
 is recorded in `sections/README.md`.
 
 ## Verification
@@ -49,19 +50,19 @@ checks.  Add `--replay` to execute every paper-local Python replay.
 `--release` is reserved for an immutable public candidate whose repository,
 revision, archive, DOI, PDF, and independent-reader fields are complete.
 
-Lean checks coordinate algebra, finite-record arithmetic, degree-specific
-budgets, and conditional synthesis.  The geometric classifications, cited
+Lean checks coordinate algebra, finite-record arithmetic, uniform budget
+arithmetic, density, component selection, and conditional synthesis.  The geometric classifications, cited
 point and covering-radius theorems, group actions, and certificate semantics
 retain the explicit trust routes recorded in
 `supplement/LEAN-STATEMENTS.md`.
 
 ## Scope
 
-Redundancies eight and nine, ordered-Hessian geometry, arbitrary-level
-contained-carrier classification, and higher Lucas-carrier arithmetic are
-companion work.  They are neither manuscript classification theorems nor
-inputs to the R5--R7 results.  The finite-depth escape theorem deliberately
-exposes these missing carrier hypotheses instead of assuming them.
+The arbitrary-redundancy statement is a reduced carrier containment theorem,
+not a complete small-characteristic classification on every later Lucas
+carrier.  It makes no assertion about nilpotent structure in a chosen
+integral model and does not settle the general Reed--Solomon deep-hole
+conjecture.  Version 1 and its public identifiers remain immutable.
 
 Public release remains blocked on the immutable paper and Lean exports,
 independent specialist signoffs, public identifiers, and author/account

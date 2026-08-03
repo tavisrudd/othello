@@ -1,0 +1,198 @@
+\section{The recursive carrier theorem}\label{sec:recursive-carriers}
+
+The finite-depth theorem reduces the uniform problem to the geometry of polar
+lines contained in the terminal bad locus.  We now determine that locus after
+reduction in each geometric fibre and show that all modular descendants merge
+into one linear carrier.
+
+For \(r\geq6\), put \(n=r-1\), and let the ground field have
+characteristic \(p>0\).  In divided-power coordinates define
+\begin{equation}\label{eq:maximal-lucas-carrier}
+ \cM^{\max}_{r,p}=
+ \PP\!\left\langle e_j:
+ \binom{r-2}{j}=\binom{r-2}{j-1}=0\pmod p\right\rangle .
+\end{equation}
+An empty span denotes the empty projective scheme.  Let
+\(\cP_r\) be the rank-at-most-two consecutive catalecticant scheme in
+\(\PP(\Gamma^{r-1}E)\).
+
+\begin{proposition}[Reduced terminal carrier]\label{prop:reduced-terminal-carrier}
+In bottom coordinates \(c=(c_0,\ldots,c_4)\), put
+\[
+ D=\det\begin{pmatrix}
+ c_0&c_1&c_2\\c_1&c_2&c_3\\c_2&c_3&c_4
+ \end{pmatrix}.
+\]
+The reduced terminal bad carrier is the irredundant union of the prime
+cubic \(V(D)\) and one residual prime.  Away from characteristics two and
+three the residual prime is the projected Veronese surface
+\[
+ [u:v:w]\longmapsto [u^2:2uv:v^2+2uw:2vw:w^2].             \tag{26}
+\]
+In characteristic two it is the plane \(V(c_0,c_4)\).  In
+characteristic three it is the cone with \(c_2\) free and prime ideal
+\[
+ (c_1c_3-c_0c_4,\ c_1^3-c_0^2c_3,\
+   c_0c_3^2-c_1^2c_4,\ c_3^3-c_1c_4^2).                   \tag{27}
+\]
+There is no flat reduced integral model having exactly these residual
+fibres.
+\end{proposition}
+
+\begin{proof}
+Outside characteristics two and three, elimination of the ordered residual
+roots gives the prime kernel of (26); one convenient generating set is
+\begin{align*}
+&2c_3^3-3c_2c_3c_4+c_1c_4^2,\\
+&6c_2c_3^2-9c_2^2c_4+2c_1c_3c_4+c_0c_4^2,\\
+&2c_1c_3^2-3c_1c_2c_4+c_0c_3c_4,\quad
+  c_0c_3^2-c_1^2c_4,
+\end{align*}
+together with their images under \(c_i\leftrightarrow c_{4-i}\).
+The symmetric, exchanged, and anti-invariant factorization alternatives
+give respectively this surface, the rank-two cubic, and a diagonal which
+survives only in characteristic three and is then a collision.  Direct
+reduction gives the plane in characteristic two and (27) in characteristic
+three.  The ordered-Hessian calculation sends its complementary ruling to
+rank one, so the list is exhaustive.
+
+Each displayed residual ideal is prime: (26) is a projective parametrization
+with prime kernel, the characteristic-two ideal is linear, and (27) is the
+toric prime of the monomial quartic after projection from \(e_2\).  None is
+contained in \(V(D)\): use \((1,0,2,0,1)\), \(e_2\), and
+\((1,0,1,0,0)\), respectively.  Thus the intersection with \((D)\) is an
+irredundant reduced decomposition and has no embedded prime.  The residual
+degree is four generically and one in characteristic two.  Constancy of the
+Hilbert polynomial in a flat projective family rules out the final assertion.
+The exact eliminations and the characteristic-\(2,3,5\) reductions are
+replayed by the stable-component certificates described in
+Section~\ref{sec:verification}.
+\end{proof}
+
+\begin{proposition}[Maximal Lucas union]\label{prop:maximal-lucas-union}
+Every normal-rational-curve nucleus encountered in a coherent polar flag,
+and every later lift of it, is contained in
+\(\cM^{\max}_{r,p}\).  Their reduced union equals that single linear
+scheme.  A polar line not contained in the union meets it in degree at most
+one.
+\end{proposition}
+
+\begin{proof}
+For the order-\(a\) nucleus of the degree-\(d\) curve, its coordinate support
+is contained in
+\[
+ \widehat S_{d,p}=\{i:\binom di=0\pmod p\},                \tag{28}
+\]
+because the nucleus conditions include the row \(d\).  If a support is
+\(S\subset\{0,\ldots,d\}\), one coherent lift has support
+\[
+ L_d(S)=\{j:(j=d+1\text{ or }j\in S),\
+                 (j=0\text{ or }j-1\in S)\}.              \tag{29}
+\]
+This operation preserves inclusions.  Pascal's identity gives
+\(L_d(\widehat S_{d,p})\subset\widehat S_{d+1,p}\).
+Induction therefore contains every earlier descendant in the last one.
+Conversely, the top-order nucleus at \(d=r-2\) occurs in the union, and its
+one-step lift is exactly \eqref{eq:maximal-lucas-carrier}.  The union is
+therefore one linear scheme.  Pulling its linear ideal back to a projective
+line gives nonzero linear forms unless the line is contained, proving the
+degree bound.
+\end{proof}
+
+The endpoint arithmetic in Proposition~\ref{prop:maximal-lucas-union} has a
+known projective-subline form.  Wang--Wu--Hu
+\cite[Prop.~11]{WangWuHu2026} prove that the Lucas block with
+\(k=p^a+1\) is nonempty over \(\F_{p^e}\) exactly when \(a\mid e\), and
+then its blocks are projective sublines.  We use this criterion at that
+exact boundary.  The adjacent-zero carrier
+\eqref{eq:maximal-lucas-carrier}, its nesting through coherent lifts, and
+its split-squarefree Hankel incidence are separate questions addressed here.
+
+\begin{proposition}[Recursive component selection]
+\label{prop:recursive-component-selection}
+The reduced recursively contained carrier generated by the terminal carrier
+and all intermediate nuclei is exactly
+\begin{equation}\label{eq:recursive-carrier}
+                       \cP_r\cup\cM^{\max}_{r,p}.
+\end{equation}
+Fixed linear gcds retain their quadratic-graph package, and marker collisions
+remain deletion divisors; neither is included in
+\eqref{eq:recursive-carrier}.
+\end{proposition}
+
+\begin{proof}
+Retain \(m\) markers.  If \(h\) is the coefficient row of their product,
+the bottom syndrome is
+\[
+ h\operatorname{Cat}_{m,4}(f),\qquad
+ \operatorname{Cat}_{m,4}(f)=
+ \begin{pmatrix}
+ a_0&a_1&a_2&a_3&a_4\\
+ a_1&a_2&a_3&a_4&a_5\\
+ \vdots&\vdots&\vdots&\vdots&\vdots\\
+ a_m&a_{m+1}&a_{m+2}&a_{m+3}&a_{m+4}
+ \end{pmatrix}.                                            \tag{30}
+\]
+Over an algebraic closure, products of distinct linear forms are dense in
+the projective space of binary forms.  Deleting the projective kernel of the
+linear map does not change its image closure.  Hence the attainable bottom
+syndromes close to the projectivized row space of (30).  This row space is
+irreducible.  If it lies in the finite reduced union of
+Proposition~\ref{prop:reduced-terminal-carrier}, its generic point lies in
+one component, so the whole row space lies in that component.  This is a
+geometric-marker statement; no density of the finite set of rational marker
+tuples is used.  The density and finite-component-selection implication are
+also kernel checked by the declarations listed in the formalization ledger.
+
+On \(V(D)\), the consecutive Fano identity gives the upper rank-two
+scheme.  On a nucleus, (29) and Proposition~\ref{prop:maximal-lucas-union}
+give the maximal modular carrier.  The projected Veronese contains no
+projective line, so a contained row space there has rank one.  In
+characteristic three every positive-dimensional linear space in (27) is a
+ruling through \(e_2\), and the consecutive rows again force rank one.  In
+characteristic two, containment in \(V(c_0,c_4)\) gives first the binary
+line, then the central point, and then the empty projective space; these are
+already Lucas lifts.  The complementary ordered-Hessian ruling is rank one.
+This exhausts every component and proves \eqref{eq:recursive-carrier} by
+induction on the flag length.
+\end{proof}
+
+\begin{theorem}[Recursive carrier and high-characteristic classification]
+\label{thm:recursive-carrier}
+Let \(r\geq6\), and let \(q\) be a prime power with
+\begin{equation}\label{eq:uniform-threshold}
+ q\geq Q_r:=6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor.
+\end{equation}
+Every split-free redundancy-\(r\) syndrome lies in
+\(\cP_r\cup\cM^{\max}_{r,p}\).  If \(p>r-1\), the modular term is empty,
+and the projective deep-hole syndromes are exactly the persistent tangent
+and conjugate-secant families.  Their cardinality is
+\[
+                         \frac{q(q+1)^2}{2},
+\]
+and their orbit law is \(T/T^{r-1}\) modulo inversion and coefficient
+Frobenius, with tangent cocycle \(z\mapsto z+(r-1)u\).
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:recursive-component-selection} supplies the sole
+all-level contained-component hypothesis in the finite-depth escape theorem.
+The uniform lower packages have terminal deletion \(6r-17\), exact-linear-gcd
+deletion \(2r-2\), and intermediate parameter budgets below \(3r-5\).
+Solving the genus-one inequality gives \eqref{eq:uniform-threshold}; the
+modular pullback costs only one parameter by
+Proposition~\ref{prop:maximal-lucas-union}.  Thus every point outside
+\eqref{eq:recursive-carrier} has a split squarefree kernel member.
+
+If \(p>r-1\), no interior entry of Pascal row \(r-2\) vanishes, so
+\(\cM^{\max}_{r,p}=\varnothing\).  Rank one and rational secants are shallow;
+the remaining rank-two points are precisely the tangent and conjugate-secant
+families and are split-free.  The threshold lies in the
+Seroussi--Roth--Dür radius range, so split-free and deep coincide.  The count
+and orbit law are the persistent calculation already used at R6 and R7.
+\end{proof}
+
+The theorem is fibrewise and reduced.  It makes no assertion about nilpotent
+structure in a chosen integral incidence model, and in small characteristic
+it classifies the only possible carrier of additional split-free points, not
+the arithmetic of every point on that carrier.

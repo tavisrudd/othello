@@ -38,9 +38,25 @@ independent syndrome replay and separate radius gate\\
 Certificate R6-NF & small exceptional normal forms & deterministic
 normal-form reconstruction; not a second implementation\\
 Certificate R7 & $q=7,8,9,11$ and finite bridge below $37$ &
-primary quotient enumeration, representative/orbit replay, and an
-independent direct-locus enumeration of the complete split-free sets and
-orbit partitions; split-free and radius flags remain separate\\
+primary quotient enumeration and representative/orbit replay;
+split-free and radius flags remain separate\\
+Certificate R7 direct locus & all fourteen R7 certificate fields &
+candidate-domain and marker-intersection reconstruction, orbit and
+Frobenius replay; shares the direct-locus engine, R5 field layer, and
+R6 pointed theorem from \(q\geq16\), and is not a second field
+implementation\\
+Certificate SC & terminal factorization and coherent-Fano identities &
+Python and Singular elimination replays; density and finite-component
+selection are separately kernel checked\\
+Certificate R8 & threshold, nucleus, witness, and budget data &
+generator plus separately written replay; no ambient syndrome census\\
+Certificate R9 & residual-quadratic and characteristic-seven data &
+independent algebra replay and exact \(q=49\) carrier bridge\\
+Certificate R10 & threshold and persistent orbit arithmetic &
+separate prime-power and cyclic-orbit replay\\
+Certificate Lucas M9 & rank-two twists and \(q=16,32,64\) carrier
+witnesses & independent action and Hankel replay; the all-field
+genus-one proof is mathematical, not computational\\
 \end{longtable}
 \normalsize
 
@@ -66,14 +82,12 @@ synthesis, not the geometric classifications or rational-point
 arguments.  The exact declarations, hypotheses, axiom audit, and
 reproduction command are listed in
 \texttt{supplement/LEAN-STATEMENTS.md}.
-Lean checks the contraction algebra, degree-specific R6/R7 budget
-arithmetic, finite-record arithmetic, and conditional synthesis
-interfaces used by the R5--R7 results proved here.  Companion
-stable-component and arbitrary-level budget modules remain regression
-checked but are not
-evidence for a theorem in this paper.  Lean also checks the R5--R7
-threshold-to-range arithmetic and the exact $(q,r)=(8,6)$ endpoint used
-at redundancy six.  The formal adapter keeps the dual-GRS identification,
+Lean checks the contraction algebra, R6/R7 budget arithmetic,
+finite-record arithmetic, uniform threshold arithmetic, squarefree-marker
+density, closure transport, finite-component selection, and the corresponding
+conditional synthesis interfaces.  It does not check the concrete terminal
+prime decomposition, the marker-to-rowspace identification, or the
+fixed-level R8--R10 carrier arithmetic.  The formal adapter keeps the dual-GRS identification,
 Seroussi--Roth nonextendability, Dür equivalence, and the concrete
 radius proposition as separate hypotheses.
 The balanced quantum corollary has a separate cross-paper gate.  Lean

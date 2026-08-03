@@ -1,114 +1,59 @@
-# Verification map
+# Version 2 verification map
 
-The stable paper-facing names are `Certificate R5`, `Certificate R6`,
-`Certificate R6-NF`, `Certificate R7`, and `Certificate SC`. Their schemas are
-defined in `supplement/CERTIFICATE-SCHEMA.md`. Internal development identifiers
-below record provenance only.
+The manuscript proves the general statements. Certificates close only the
+finite or symbolic domains named below. Every public artifact is hashed in
+supplement/EVIDENCE-MANIFEST.json and checked by supplement/verify.py.
 
-Artifact paths below are relative to `notes/`. Commands run from the repository
-root. The manuscript proves its mathematical claims; these artifacts certify
-only the finite or symbolic domains stated here.
+| Public bundle | Exact role | Independent or separate check | Non-claim |
+|---|---|---|---|
+| Certificate R5 | exhaustive bounded cubic-pencil census and orbit records | separately written R5 replay | no high-field geometry or radius theorem |
+| Certificate R6 | definition/Hankel equality on the declared finite fields | independent definition replay on the documented subrange | no continuation theorem |
+| Certificate R6-NF | small semilinear normal forms | deterministic checker plus R6 dependency replay | not a second full census |
+| Certificate R7 | finite pointed calibration and public orbit record | quotient replay and arithmetic replay | q=7,8,9 remain split-free rows only |
+| Certificate R7 direct locus | complete fourteen-field direct-locus reconstruction | checker validates mass identities, orbit--stabilizer, Frobenius, and frozen comparison | shares the public direct-locus engine, R5 field layer, and R6 pointed theorem from q >= 16; checker is not a second field implementation |
+| Certificate SC | bottom-factor identities, saturations, vertical reductions, and coherent-Fano elimination | dependency-free Python identities plus Singular scripts; Lean separately checks density/selection logic | does not prove a flat reduced integral carrier |
+| Certificate R8 | thresholds, nuclei, witnesses, and budgets | separately written replay | no ambient syndrome census |
+| Certificate R9 | residual-quadratic arithmetic, six-section slice data, and q=49 bridge | independent residual replay; Rust q=49 certificate | no unrestricted carrier theorem |
+| Certificate R10 | threshold, persistent orbit arithmetic, and carrier point-count synthesis | separate prime-power/orbit replay | does not prove first-carrier shallowness |
+| Certificate Lucas M9 | rank-two twists and q=16,32,64 carrier witnesses | independent finite-field/action/replay code | finite certificates do not prove the q>=64 genus-one theorem |
 
-The balanced \(q=8\) quantum corollary introduces no new computation:
-its `1116=360+756` count is the R5 certificate row, while the
-MDS--AME, Choi, local-unitary, and transversal conclusions are imported
-from the cited standard and companion theorems.
+The balanced q=8 quantum consequence introduces no computation beyond the R5
+row 1116=360+756. Its coding and quantum implications are cited or formalized
+through their separately declared interfaces.
 
-| Claim group | Generator | Certificate | Independent replay | Checksum |
-|---|---|---|---|---|
-| C491 redundancy-five census | `2026-07-22-prs-deep-hole-census.py` | `2026-07-22-prs-deep-hole-census.json` | `2026-07-22-redundancy-five-deep-hole-replay.py` | `2026-07-22-prs-redundancy-five.sha256` |
-| C498 redundancy-six census | `2026-07-22-prs-deep-hole-census.rs` | `2026-07-22-prs-deep-hole-census.json` | `2026-07-22-redundancy-six-deep-hole-replay.py` | `2026-07-22-prs-redundancy-six.sha256` |
-| C498 small semilinear normal forms | `2026-07-23-small-exceptional-normal-forms.py` | `2026-07-23-small-exceptional-normal-forms.json` | the generator is also the deterministic checker; no second implementation is claimed | `2026-07-23-small-exceptional-normal-forms.sha256` |
-| C509 redundancy-seven calibration | `2026-07-23-prs-deep-hole-calibration.py` | `2026-07-23-prs-deep-hole-calibration.json` | `2026-07-23-prs-deep-hole-calibration-replay.py` | `2026-07-23-prs-redundancy-seven.sha256` |
-| C595/C597 stable components | `2026-07-24-stable-component-fano-elimination.py`; `2026-07-24-r10-integral-bad-scheme-sc11.py`; `RelativeConicArcs.PRSStableComponents` | corresponding JSON records | both generators are dependency-free identity/factorization checkers; corresponding Singular scripts check saturation and vertical primary decompositions; Lean independently checks the Plücker factorizations, coherent-Fano identities, modular-kernel criterion, and binary block-coverage termination | corresponding SHA-256 manifests and `RelativeConicArcs.Gates.PRSStableComponentsAxiomAudit` |
+## Replay
 
-## Trusted boundaries
+From the standalone paper directory:
 
-- C491 uses two independent exhaustive algorithms on
-  `q={7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,47,49}` and stops
-  after every point of each `PG(4,q)` has been classified. The theorem, not the
-  census, supplies the continuation above `49`.
-- C498 searches exactly
-  `q={7,8,9,11,13,16,17,19,23,25,27}`. The Rust stop condition is
-  elementwise equality of the definition and Hankel scans over all of
-  `PG(5,q)`. Its independent replay reconstructs the definition scan through
-  `q=16`; the higher listed fields retain the explicitly documented
-  implementation boundary. The normal-form checker is limited to
-  `q={7,8,9,11,13}`.
-- C509 calibrates exactly
-  `q={7,8,9,11,13,16,17,19,23,25,27,29,31,32}` and stops after every
-  pointed-bad affine orbit and all of its extensions have been tested. Its
-  replay uses five-point spans rather than the pointed-contraction criterion.
-  At `q=7,8,9` this certifies split-freeness, not covering radius.
-- Certificate SC checks the stated integral identities, eliminations,
-  saturations, and finite bottom-component ledger. Lean separately checks
-  polynomial density of monic split-squarefree coefficient tuples over an
-  infinite field, as used after passage to an algebraic closure,
-  density-to-closure transport, and finite irreducible-component selection
-  once the marker-to-catalecticant identification, row-space closure equality,
-  and closed component ledger are supplied.
+    python3 supplement/verify.py --replay
 
-## Exact replay commands
-
-From the repository root:
-
-```text
-python3 notes/2026-07-22-prs-deep-hole-census.py
-python3 notes/2026-07-22-redundancy-five-deep-hole-replay.py
-rustc -O notes/2026-07-22-prs-deep-hole-census.rs -o /tmp/c498-census
-C498_JSON_OUT=/tmp/c498-census.json /tmp/c498-census
-cmp /tmp/c498-census.json notes/2026-07-22-prs-deep-hole-census.json
-python3 notes/2026-07-22-redundancy-six-deep-hole-replay.py
-python3 notes/2026-07-23-small-exceptional-normal-forms.py --summary
-python3 notes/2026-07-23-prs-deep-hole-calibration.py --jobs 3 \
-  --output notes/2026-07-23-prs-deep-hole-calibration.json --check
-python3 notes/2026-07-23-prs-deep-hole-calibration-replay.py
-python3 notes/2026-07-24-stable-component-fano-elimination.py --check
-python3 notes/2026-07-24-r10-integral-bad-scheme-sc11.py --check
-```
-
-The C491 and C498 manifests contain disclosed stale hashes only for living
-development reports; the load-bearing generator, data, and replay entries are
-unchanged. The paper-local evidence bundle is the public route and is checked
-by `supplement/verify.py`.
+This runs every Python generator/replay listed by the public gate, checks all
+classification records and manifest rows, and fails on schema or content
+drift. The q=49 Rust record and Singular stable-component scripts remain
+separately named exact replays in supplement/REPRODUCING.md; their outputs are
+hashed even when the quick Python replay is selected.
 
 ## Lean boundary
 
-- aggregate import closure:
-  `RelativeConicArcs.Gates.PRSBeyondRedundancyFour`;
-- aggregate tracked audit:
-  `RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit`;
-- balanced quantum bridge:
-  `RelativeConicArcs.Gates.PRSBalancedQuantumExtension`;
-- balanced quantum bridge audit:
-  `RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit`;
-- declaration-level manuscript reconciliation:
-  `supplement/LEAN-STATEMENTS.md`.
+- paper-facing aggregate:
+  RelativeConicArcs.Gates.PRSBeyondRedundancyFour;
+- aggregate audit:
+  RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit;
+- separate balanced-quantum gate and audit:
+  RelativeConicArcs.Gates.PRSBalancedQuantumExtension and its axiom audit;
+- label-by-label reconciliation:
+  supplement/LEAN-STATEMENTS.md.
 
-The aggregate imports the shared foundation, redundancy-five,
-polar-induction and redundancy-six/seven gates.  It also regression-checks
-companion stable-component and uniform-radius interfaces that are not adopted
-as current-draft classification theorems. Its audit covers the adopted algebraic,
-contraction, arithmetic, finite-table, and conditional synthesis terminals.
-It reports no project-specific axiom or
-opaque computational oracle; only `propext`, `Classical.choice`, and
-`Quot.sound` occur. The R5--R7 transcription modules name
-`supplement/CLASSIFICATION-RECORDS.json`, SHA-256
-`b3441d983798793f211878de7e72b976be9170b580041f460cf981a73dbf66a2`.
-The separate balanced-quantum audit reports the same standard axiom set.
-Its quantum-dictionary terminal is conditional on explicit MDS--AME and
-AME--quantum-MDS implication fields; its length-ten LU and transversal
-terminals are direct specializations of the imported generic MDS--CSS
-theorems.
+The aggregate checks R5--R7 algebra and conditional syntheses, contraction,
+uniform radius arithmetic, squarefree-marker density, closure transport, and
+finite-component selection. Concrete carrier primes, R8/R9 geometry, M9
+arithmetic, genuine group actions, cited radius theorems, and external
+certificate semantics remain explicit. The audit reports only propext,
+Classical.choice, and Quot.sound.
 
-`RelativeConicArcs.PRSUniformCoveringRadius` checks the arithmetic of a
-proposed all-level threshold and the \((q,r)=(8,6)\) endpoint, but the current
-draft does not consume that proposal.
-`PRSPolarInduction.RecursiveContainedInput` checks the finite recursive
-classification once component selection and finite-depth lifting inputs are
-supplied.  The manuscript proves the finite-depth marker-choice and lifting
-theorem directly; it verifies the concrete carrier inputs only for R6 and R7.
-The radius module then composes separately supplied Seroussi--Roth and Dür
-implications with `PRSFoundation.CoveringRadiusInput`. Irreducible-component
-selection, concrete scheme geometry, code duality, nonextendability,
-covering-radius equivalence, and syndrome semantics are not formalized.
+## Release boundary
+
+The public Version 1 commit, archive, tag, DOI, PDF hash, and source hash are
+immutable fields in supplement/RELEASE-MANIFEST.md. Local Version 2 candidate
+hashes and the expanded 80-artifact evidence map are separate mutable
+candidate fields until a new reviewed release is authorized.

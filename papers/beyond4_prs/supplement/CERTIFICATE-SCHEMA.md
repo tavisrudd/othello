@@ -14,7 +14,12 @@ and replay.
 | Certificate R6 | redundancy-six census and radius bridge | redundancy-six census and replay |
 | Certificate R6-NF | small exceptional normal forms | small-normal-form bundle |
 | Certificate R7 | redundancy-seven split-free finite bridge | redundancy-seven calibration and replay |
-| Companion Certificate SC | stable-component identities, saturation, and vertical fibres outside the Version 1 claim set | exploratory stable-component bundle |
+| Certificate R7 direct locus | fourteen-field direct-locus completeness reconstruction | compact candidate/orbit certificate and checker |
+| Certificate SC | stable-component identities, saturation, and vertical fibres | stable-component bundle |
+| Certificate R8 | redundancy-eight thresholds, nuclei, and witnesses | R8 generator and replay |
+| Certificate R9 | residual-quadratic and characteristic-seven bridge | R9 generator, replay, and q=49 record |
+| Certificate R10 | redundancy-ten threshold and orbit arithmetic | R10 generator and replay |
+| Certificate Lucas M9 | first higher-Lucas-carrier arithmetic | rank-two and complete-carrier generators, certificates, and replays |
 
 Certificate R7 has two replay routes.  The original replay checks every
 recorded representative directly by the five-secant criterion and rebuilds
@@ -32,6 +37,12 @@ binary-nucleus pieces, together with the transient 19-point marked orbit at
 \(q=19\).  It then intersects every contraction condition,
 rebuilds the complete \(\operatorname{PGL}_2(q)\) orbit and Frobenius
 partition, and compares exact sets and records in all fourteen bridge fields.
+Certificate R7 direct locus freezes this route before comparison and adds the
+two exact mass identities, compact orbit tuples, and one partition digest per
+field.  It shares the published direct-locus engine, its R5 field layer, and
+the proved R6 pointed-locus classification from \(q\geq16\).  Its checker
+validates the frozen schema and comparison but is not a second finite-field
+implementation.
 
 ## Classification record
 

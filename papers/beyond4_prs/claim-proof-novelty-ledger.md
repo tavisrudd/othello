@@ -1,116 +1,76 @@
-# Claim, proof, novelty, and formalization ledger
+# Version 2 claim, proof, novelty, and formalization ledger
 
-Governing rule: every assertion promoted to theorem or corollary status
-appears here with its exact formal boundary.  Mathematical proof, executable
-certification, imported input, formal-kernel checking, editorial disposition,
-and novelty are independent fields.
+Mathematical proof, executable certification, imported input, kernel checking,
+editorial adoption, and novelty are independent fields. No finite certificate
+is used to infer a covering radius or an unrestricted geometric statement.
 
 ## Status vocabulary
 
-- `KERNEL`: checked by the trusted Lean kernel.
-- `IMPORTED-1`: a named external theorem is consumed without reproving it.
-- `MANUSCRIPT`: a mathematical proof is present in the manuscript.
-- `CERTIFIED`: a finite executable certificate closes the stated finite domain.
-- `LITERATURE`: a cited source supplies context or a non-load-bearing method.
-- `PRIOR-ART`: the claimed content is already present in a cited source.
-- `DERIVED`: follows immediately from rows whose hypotheses are all recorded.
-- `NONE-FOUND`: the bounded novelty search located no prior statement; this
-  authorizes only “we did not locate,” never an unconditional priority claim.
-- `REVIEW-GATE`: a complete independent mathematical reread is required.
-- `OPEN-MATH`: a proof, bridge lemma, or classification record is still absent.
-
-Formal readiness is separate: `L1` means definitions/interfaces are ready,
-`L2` means the theorem has explicit hypotheses and a formalizable proof
-decomposition, and `L3` means a kernel-checked declaration exists.
-
-Editorial disposition is one of `main theorem`, `supporting theorem`,
-`boundary`, `supplement-only`, or `open/unallocated`.
+- MANUSCRIPT: a proof is printed in the paper.
+- CERTIFIED: an exact finite certificate closes the stated domain.
+- KERNEL: Lean checks the stated algebra, arithmetic, or conditional implication.
+- IMPORTED-1: one named external theorem is used at its exact hypotheses.
+- PRIOR-ART: the cited source already contains the stated item.
+- NONE-FOUND: no predecessor was located within the recorded bounded search.
+- DERIVED: follows from rows whose hypotheses are recorded.
 
 ## Mathematical result ledger
 
-| ID | Paper claim | Status | Formal declaration or certificate | Exact boundary / disposition |
-|---|---|---|---|---|
-| R5-radius | `rho(PRS(q-4))=4` for `q>=7` | `IMPORTED-1 / CERTIFIED` | Seroussi–Roth; Certificate R5 low band | Radius input, not claimed novel; `supporting theorem`; L1 |
-| R5 | Complete redundancy-five families and counts | `MANUSCRIPT / CERTIFIED / LEAN-CONDITIONAL` | Certificate R5; `RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate` | Hankel algebra, projective scaling, family/count arithmetic, compact sporadic records, Frobenius fusion, and the exact synthesis implication are kernel checked; the converse span bridge, Seroussi--Roth, Aubry--Perret, cubic-cover classification, genuine group actions, and external certificate semantics remain named inputs; `main theorem`; L1 |
-| R5-quantum | The `1116=360+756` relative \(q=8\) extensions give minimum-support \(\operatorname{AME}(10,8)\) states and \([[9,1,5]]_8\) quantum MDS codes; product-unitary equivalence and transversal conversions are Clifford | `DERIVED / IMPORTED-1` | Certificate R5 q=8 total; Raissi--Gogolin--Riera--Acín; companion MDS--CSS LU-rigidity and conversion theorems | Unique balanced row among R5--R7 because \(q+2=2r\); imports the quantum dictionaries and rigidity theorem, and does not claim that the PRS orbit table is a complete LU/LC orbit table; `corollary`; L1 |
-| PF | Polar-flag construction and squarefree lifting | `MANUSCRIPT` | `RelativeConicArcs.PRSPolarInduction` conditional terminals | Intrinsic construction only; no contained-component classification follows; `main theorem`; L3 at the interface boundary |
-| SC | Proposed all-level reduced irreducible-component exclusion | `OPEN-MATH / EXCLUDED-FROM-CURRENT-DRAFT` | Companion Certificate SC and conditional `RelativeConicArcs.PRSStableComponents` interfaces | C656 found that the printed bottom ledger does not expose the required primary ideals, multiplicities, exceptional fibres, or embedded-component exclusion, and that recursive transport still crosses an unstated scheme-theoretic step. No arbitrary-level carrier classification is adopted. |
-| TI | Finite-depth coherent-polar escape | `MANUSCRIPT` | Aubry–Perret input; iterated contraction and lift declarations in `RelativeConicArcs.PRSPolarInduction` | For every finite depth, uniform stagewise bad-parameter bounds and a terminal splitting cover produce a squarefree witness. R6 and R7 verify the hypotheses at depths one and two. The theorem supplies neither the missing carrier classifications nor a uniform all-redundancy threshold; `main theorem`; L2, with contraction/lifting algebra at L3. |
-| CC6 | Redundancy-six contained components | `MANUSCRIPT / CERTIFIED` | Certificates R6/R6-NF; `RelativeConicArcs.PRSRedundancySixSeven` | Secant degree, cyclic/wild surfaces, the explicit Wronskian collision divisor, and exceptional-characteristic components are named propositions; the Lean terminal consumes their geometric identification as an explicit input; `supporting theorem`; L3 at that boundary |
-| R6 | Redundancy-six all-field classification | `MANUSCRIPT / CERTIFIED` | Certificates R6/R6-NF; `redundancySixAllFieldSynthesis` | The exact-linear-gcd lemma, one-step exhaustion, finite bridge, radius gate, projective counts, and printed semilinear representatives form the synthesis; the repaired threshold formula and all three instantiations have independent confirmation; `main theorem`; L3 at the synthesis boundary |
-| CC7 | Redundancy-seven contained components | `MANUSCRIPT / CERTIFIED` | Certificate R7; `RelativeConicArcs.PRSRedundancySixSeven` | Rank--nullity, binary central lift, exact-gcd-one avoidance, and collision propositions close the component assertion; the Lean terminal keeps their geometric meaning explicit; `supporting theorem`; L3 at that boundary |
-| R7-sf | Redundancy-seven split-free classification | `MANUSCRIPT / CERTIFIED` | Certificate R7; `redundancySevenAllFieldSynthesis` | Geometry closes `q>=37` through an explicit second-marker bad scheme and the pointed linear-gcd/\(S_3\) bottom packages; the certificate closes the finite bridge, and public representatives are present with the small-field radius flag separated. The repaired two-step proof, fixed-factor exclusion, marker--gcd branch, and sample census invariants have independent cold confirmation; `main theorem`; L3 at the synthesis boundary |
-| R7-dh | Redundancy-seven deep-hole classification | `DERIVED / IMPORTED-1` | Seroussi--Roth nonextendability and Dür's completeness--radius equivalence | Valid for `q>=11`; `q=7,8,9` are not promoted without a separate radius result; `boundary`; L1 |
-| HL | Higher-Lucas canonical endpoint and first fresh orbit | `EXCLUDED-FROM-CURRENT-DRAFT` | Companion report; Wang--Wu--Hu Proposition 11 | Not needed for R5--R7 and not adopted by this manuscript. |
-
-No row with `OPEN-MATH` or `REVIEW-GATE` is called proof-complete.
+| ID | Adopted claim | Status | Exact proof/trust boundary |
+|---|---|---|---|
+| R5 | complete redundancy-five deep holes for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | cubic-pencil geometry, R5 certificate, cited radius theorem |
+| PF | finite-depth coherent polar escape | MANUSCRIPT / KERNEL-ALGEBRA | concrete stagewise carrier and curve data remain inputs |
+| RC | reduced recursively contained carrier equals persistent plus maximal Lucas | MANUSCRIPT / CERTIFIED-ELIMINATION / KERNEL-CONDITIONAL | concrete terminal primes and consecutive-row exclusions are manuscript/certificate inputs; density and finite-component selection are kernel checked |
+| UC | split-free containment above Q_r | MANUSCRIPT / KERNEL-CONDITIONAL | Q_r = 6r-15+floor(2 sqrt(6r-17)); no radius is inferred |
+| HC | high-characteristic exact classification above Q_r | DERIVED / IMPORTED-1 | char(F_q) > r-1 makes the Lucas carrier empty; Seroussi--Roth and Dür supply the radius promotion |
+| R6 | complete redundancy-six deep holes for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | R6/R6-NF certificates and exact radius endpoint |
+| R7-SF | complete redundancy-seven split-free classification for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | uniform T/T^6 spine from q >= 13; central odd-binary singleton separate; exception delta only at 7,8,9,11 |
+| R7-DH | redundancy-seven deep holes for q >= 11 | DERIVED / IMPORTED-1 | no promotion at q=7,8,9 |
+| R7-DL | direct-locus finite completeness replay | CERTIFIED | shares the direct-locus engine, R5 field layer, and R6 pointed theorem from q >= 16; not a second field implementation |
+| R8 | persistent-only deep holes for q >= 43 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | three-marker package and Certificate R8 |
+| R9 | persistent-only deep holes for q >= 53 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | residual-quadratic slice, characteristic-seven bridge, Certificate R9 |
+| WWH | projective-subline Lucas endpoint iff a divides e | PRIOR-ART / IMPORTED-1 | Wang--Wu--Hu Proposition 11; no novelty claim for this criterion |
+| M9 | first fresh higher Lucas carrier is entirely shallow for m >= 4 | MANUSCRIPT / CERTIFIED | all-field final-pair proof; exact q=16,32,64 certificates |
+| R10 | persistent-only deep holes for every prime power q >= 59 | DERIVED / MANUSCRIPT / CERTIFIED | odd fields use RC; binary fields use M9; separate radius route |
+| R5-Q | balanced q=8 AME and quantum-MDS consequence | DERIVED / IMPORTED-1 | exact R5 count plus cited coding/quantum dictionaries; no complete LU/LC orbit claim |
 
 ## Imported theorem ledger
 
-| Source | Consumed statement | Exact use / non-use |
+| Source | Exact use | Non-use |
 |---|---|---|
-| Seroussi–Roth | normal-rational-curve completeness / PRS radius range | Promotes split-free directions to code deep holes only in its stated fields. |
-| Zhang–Wan–Kaipa; Kaipa | syndrome/MDS/uncovered-point dictionary and lower persistent families | Does not supply the redundancy-five or higher classifications. |
-| Aubry–Perret / Hasse–Weil | rational-point lower bounds for the specified integral curve models | Does not prove integrality, genus, or deletion budgets. |
-| Cesaratto–Matera–Pérez | factorization-pattern precedent | Context only; not a proof of the exceptional Hankel families. |
-| Gmainer–Havlicek | binomial-coordinate NRC nuclei | Locates possible modular kernels; coherent lifts are computed here. |
-| Wang | Frobenius/monodromy semantics for splitting families | Does not prove the pointed Hankel induction or its contained cases. |
-| Wang--Wu--Hu | Lucas-subspace projective-subline nonemptiness iff the subfield degree divides the extension degree | Supplies the prior equivalent form of the canonical higher-Lucas endpoint criterion; does not identify the coherent Hankel endpoint or prove full-\(e_7\)-orbit shallowness. |
+| Seroussi--Roth; Dür; Kaipa | high-rate nonextendability, completeness--radius equivalence, and syndrome/MDS dictionary | no syndrome classification |
+| Zhang--Wan--Kaipa | lower persistent families and projective syndrome dictionary | no beyond-four exhaustion |
+| Aubry--Perret | rational-point lower bound on the stated integral curves | no integrality or deletion proof |
+| Gmainer--Havlicek | normal-rational-curve nuclei and binomial coordinates | no coherent lift or split-incidence theorem |
+| Wang | Frobenius/factorization semantics on the étale locus | no Hankel carrier or marked recursion |
+| Wang--Wu--Hu | projective-subline endpoint criterion | no adjacent-zero union, recursive transport, or full M9 shallowness |
 
-## Scope-survival ledger
+## Formal boundary
 
-| Mechanism | What survives | What it does not supply |
-|---|---|---|
-| Hankel correspondence | split-free syndrome criterion | covering radius or code deepness |
-| Radius theorem | promotion from split-free to deep in stated fields | syndrome classification |
-| Polar-flag construction | coherent markers and squarefree lifting | contained-component exhaustion |
-| Transverse induction | a witness outside finite bad/deletion loci | classification of identically contained lines |
-| Contained analysis | complete contained-component classifications at R6 and R7 | an arbitrary-level persistent/modular classification |
-| Finite certificates | exact bounded domains and orbit records | geometric integrality outside the domain |
-| Lean kernel | residual algebra and conditional synthesis implication | geometric hypotheses or genuine `PGL2/PGammaL2` orbit derivation |
+The 17-file paper-facing aggregate checks the shared Hankel interfaces,
+contraction algebra, R5--R7 conditional syntheses, uniform threshold
+arithmetic, polynomial density, closure transport, and finite-component
+selection. Existing companion R8/R9/residual modules are identified
+statement by statement but are not silently folded into that aggregate.
+Concrete primary decompositions, projective group actions, point-existence
+arguments, literature theorems, and external certificate semantics remain
+explicit. The exact row-by-row map is supplement/LEAN-STATEMENTS.md.
 
-## Context and novelty ledger
+## Novelty boundary
 
-| Claim under comparison | Status | Permitted wording |
-|---|---|---|
-| R5--R7 classifications | `NONE-FOUND / QUALIFIED` | “To our knowledge, no prior classification was located in the recorded search boundary.” |
-| Coherent marked contraction | `NONE-FOUND / QUALIFIED` | “The construction used here differs from the cited unmarked splitting-family semantics.” |
-| Higher-Lucas canonical divisibility | `PRIOR EQUIVALENT FORM LOCATED` | Cite Wang--Wu--Hu Proposition 11; claim only the Hankel-endpoint identification and the larger full-\(e_7\)-orbit conclusion as paper-specific. |
+The recorded audit located no predecessor for the exact conjunction of the
+reduced terminal decomposition, maximal adjacent-zero carrier, recursive
+transport, and PRS split-free consequence. This licenses only qualified
+wording within the stated search boundary. The paper makes no claim to solve
+the general Reed--Solomon deep-hole conjecture. MathSciNet and Google Scholar
+were not covered. Wang--Wu--Hu receives exact theorem-level attribution.
 
-The search method and database limitations belong in an adversarial novelty
-ledger, not in the mathematical manuscript.
+## Consistency checklist
 
-## Optional strengthening ledger
-
-| Direction | Status | Present boundary |
-|---|---|---|
-| Arithmetic classification inside every higher modular carrier | `OPEN-MATH` | The geometric stable-component theorem is uniform; fresh Lucas-carrier arithmetic remains degree-specific. |
-| Redundancy-eight and higher fixed levels | `COMPANION WORK` | Excluded from this manuscript and its Lean trust closure. |
-
-## Consistency and release checklist
-
-### Mathematical statements
-
-- [ ] Every “complete,” “exactly,” and “no other” points to a manuscript proof
-  plus any finite certificate required for the bounded bridge.
+- [x] Every adopted theorem has a printed proof or an exact
+  certificate/formal/import route.
 - [x] Split-free and deep-hole statements are separated by a radius row.
-- [ ] Every genus, degree, intersection, and deletion number has a named proof.
-
-### Formal and executable trust
-
-- [x] Kernel-checked implications are separated from geometric hypotheses.
-- [x] Public certificate labels are separated from internal C-numbers.
-- [ ] The immutable release manifest contains hashes, byte counts, commit, tag,
-  archive identifier, DOI, and toolchains.
-- [ ] Every public classification record exposes canonical representatives,
-  stabilizers, invariants, Frobenius fusion, and exhaustion.
-
-### Prose, novelty, and package synchronization
-
-- [x] The manuscript contains mathematical comparison rather than a search diary.
-- [x] The role-based bibliography audit is complete, including the pinned
-  three-graph forward-citation screen and statement-level Wang citation.
-- [ ] `main.tex`, theorem map, proof ledger, verification map, supplement, and
-  release metadata agree after the final cold read.
-- [ ] No DOI release is labelled proof-complete while an `OPEN-MATH` or
-  `REVIEW-GATE` row remains.
+- [x] The R7 direct-locus replay states its shared executable and theorem input.
+- [x] Version 1 release identifiers and bytes remain immutable.
+- [ ] Version 2 candidate hashes and cold-reader signoffs are frozen after the
+  final repaired build.

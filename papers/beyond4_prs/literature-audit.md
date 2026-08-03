@@ -255,6 +255,54 @@ by the unchanged three-graph baseline plus this delta.  MathSciNet and Google
 Scholar remain not covered for the reasons stated below; those gaps license
 no unqualified priority claim.
 
+## Version 2 synthesis delta through 2026-08-02
+
+Version 2 adopts the reduced recursive-carrier theorem and the complete first
+higher-Lucas-carrier arithmetic. The source inventory remains 26 works:
+seven read at full text, nine at partial depth, and ten at
+abstract/metadata depth. No source is promoted or characterized beyond the
+read-depth ledger below.
+
+Three pinned records were checked by identifier on 2026-08-02.
+Wang--Wu--Hu remains arXiv 2604.21183v4, Wang remains
+arXiv 2606.12810v1, and Gmainer--Havlicek remains arXiv 1304.0088v1.
+The cached bytes and read depths are:
+
+- Wang--Wu--Hu: full text, all sections, SHA-256
+  ad1e19b1a1bf7b1bbc016cc4617a59a718cf1a3f9396f6386f4b1b151149a811;
+- Wang: full text, all sections, SHA-256
+  5dd4e19544335ebc2c75a184074e94adb91b78331930b5e8a643ae606021a107;
+- Gmainer--Havlicek: partial, abstract and Theorem 1, SHA-256
+  da688c01e3953319ef93f17e1676fedf0470c590a0a348a853dabb11209526d0.
+
+Wang--Wu--Hu Proposition 11 proves the projective-subline/Lucas endpoint:
+for q=p^e and k=p^a+1, the block family is nonempty exactly when a divides
+e. Version 2 cites this proposition in the recursive-carrier section and
+claims no novelty for the endpoint criterion. The source does not state the
+adjacent-zero maximal carrier, its Pascal nesting through coherent polar
+lifts, the fibrewise reduced terminal decomposition, or the final-pair
+split-squarefree theorem on the complete degree-nine carrier.
+
+Four exact arXiv API searches on 2026-08-02 used start=0, max_results=100,
+last-update ordering, and the submission interval
+[202607270000 TO 202608022359]:
+
+| Exact object clause before the date restriction | Total/returned |
+|---|---:|
+| all:"projective Reed-Solomon" AND all:"recursive carrier" | 0/0 |
+| all:"projective Reed-Solomon" AND all:"coherent polar" | 0/0 |
+| all:"normal rational curve" AND all:nucleus AND all:Lucas | 0/0 |
+| all:"split squarefree" AND (all:Hankel OR all:catalecticant) | 0/0 |
+
+Every response was a valid Atom feed with totalResults=0; transport failures
+were not counted as empty sets. Same-object web searches were discovery-only
+and promoted no source. No negative rests on a forward-citation graph.
+MathSciNet, zbMATH, Google Scholar, and current forward-citation graphs were
+not jointly covered, so the manuscript uses no unqualified priority claim.
+Within this recorded boundary, no predecessor was located for the exact
+reduced-fibre/Pascal-nesting/recursive-transport conjunction or the complete
+degree-nine final-pair classification.
+
 ## Bibliography metadata and read-depth ledger
 
 Every DOI was resolved on 2026-07-23 by DOI content negotiation; author,
