@@ -9,6 +9,25 @@ recorded in [`../2026-08-02-c855-paper-i-assertion-inventory.md`](../2026-08-02-
 the formalization bullets of section 2 and all of sections 3--11 are open. Required before the Paper I formal artifact is called
 referee-ready or packaged for its next public release.
 
+Human-proof preparation for section 2 (2026-08-03): the q13 minimum-word scheme
+checkpoint [`../2026-08-03-c855-q13-scheme-proofs.md`](../2026-08-03-c855-q13-scheme-proofs.md)
+is confirmed by the committed check script
+`notes/2026-08-03-c855-q13-scheme-checks.py` (all checks pass); its two open
+gaps are closed structurally in
+[`../2026-08-03-c855-q13-scheme-gap-closure.md`](../2026-08-03-c855-q13-scheme-gap-closure.md)
+— `ker M` is an irreducible `F_2[PGL(2,13)]`-module with endomorphism field
+`F_8`, so every nonzero codeword spans, and `dim ker M = 36` is structural,
+making the Madison--Wu citation removable — adversarially refereed in
+[`../2026-08-03-c855-q13-gap-closure-referee.md`](../2026-08-03-c855-q13-gap-closure-referee.md)
+with all repairs applied. The consumed Hassett--Tschinkel six-node instance is
+proved citation-free over any golden field in
+[`../2026-08-03-c855-hassett-tschinkel-transfer.md`](../2026-08-03-c855-hassett-tschinkel-transfer.md)
+with exact corroboration in `notes/2026-08-03-c855-hassett-tschinkel-checks.py`,
+including the rename/docstring proposal for `HassettTschinkelProposition10`.
+Strengthening candidates from these passes are listed in the gap-closure and
+transfer notes; none is manuscript-integrated yet and all remain behind the
+literature gate.
+
 ## Decisions (2026-08-03, author-delegated)
 
 - The exhaustive 160,930-conic distance audit is demoted from a claim row to
