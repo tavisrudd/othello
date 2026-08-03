@@ -6,9 +6,9 @@
 
 **Status:** active.  The C749 human freeze, C750/C801 Lean closure,
 Milnor--Serre exposition pass, deterministic packaging, and local standalone
-forward commit are complete.  The authorized GitHub push is blocked only by
-missing SSH/GitHub credentials in the current environment; the immutable
-locator and locator insertion remain external.
+forward commit are complete.  The standalone commit is ready for the
+author-owned GitHub push.  The immutable locator and locator insertion remain
+external.
 
 ## Objective
 
@@ -46,19 +46,18 @@ Paper III.
   scope at commit `8fa7ac41bfd31906891de8fa0c9c1d6bee799cb4`.  The canonical
   62-file export is committed forward in the standalone repository at
   `71751691b026ff99c53a64c522b0464a2c5582e0`; its isolated aggregate replay
-  and export-manifest verification are green.  The attempted authorized push
-  failed because this environment has neither a usable GitHub SSH key nor an
-  authenticated `gh` session.
+  and export-manifest verification are green.  The standalone commit is ready
+  for the author to push; Codex does not push publication repositories.
 - Exact findings and completed trust/editorial repairs are recorded in
   `notes/2026-07-31-c577-paper-ii-new-math-audit.md`.
 
 ## Next action
 
-From an authenticated environment, push standalone commit
-`71751691b026ff99c53a64c522b0464a2c5582e0`, create the immutable public
-release/archive, insert its locator in the authoritative manuscript and
-README, regenerate and forward-commit the canonical export, then rerun the
-isolated release and separate final release pass.
+The author pushes standalone commit
+`71751691b026ff99c53a64c522b0464a2c5582e0` and creates the immutable public
+release/archive.  Once its locator is available, insert it in the authoritative
+manuscript and README, regenerate and forward-commit the canonical export,
+then rerun the isolated release and separate final release pass.
 
 ## Boundaries
 

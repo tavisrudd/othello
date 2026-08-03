@@ -7,7 +7,7 @@
 The strengthened Paper II release surface has been packaged deterministically
 from the monorepo authority and committed as an ordinary forward update in the
 standalone repository.  Publication remains incomplete only because the
-current environment cannot authenticate to GitHub.
+author owns the push and public-release operation.
 
 ## Frozen identities
 
@@ -44,14 +44,13 @@ The isolated replay rebuilt the PDF with environment-dependent bytes.  After
 the replay passed, the standalone was restored to the exact authoritative PDF
 from the canonical export, and the export verifier confirmed byte identity.
 
-## External gate
+## Author-controlled publication handoff
 
-The authorized `git push origin main` failed with GitHub SSH authentication
-denied.  The GitHub CLI is also unauthenticated.  No remote branch, tag,
-release, archive, or DOI state was changed.  The remaining sequence is:
+No remote branch, tag, release, archive, or DOI state was changed.  Codex does
+not push publication repositories.  The remaining sequence is:
 
-1. push standalone commit `71751691b026ff99c53a64c522b0464a2c5582e0` from
-   an authenticated environment;
+1. the author pushes standalone commit
+   `71751691b026ff99c53a64c522b0464a2c5582e0`;
 2. create the immutable public release/archive and obtain its locator;
 3. insert the locator in the authoritative manuscript and README;
 4. regenerate and forward-commit the canonical export;
@@ -60,7 +59,6 @@ release, archive, or DOI state was changed.  The remaining sequence is:
 ## Mystery ledger
 
 No mathematical mystery was created by packaging.  The only unresolved item
-is operational: authenticated GitHub and archive access are absent from this
-environment.  The PDF byte difference after local rebuilding is explained by
-environment-dependent TeX output and is controlled by restoring and verifying
-the authoritative release PDF.
+is the author-controlled public locator.  The PDF byte difference after local
+rebuilding is explained by environment-dependent TeX output and is controlled
+by restoring and verifying the authoritative release PDF.
