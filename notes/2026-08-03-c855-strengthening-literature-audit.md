@@ -10,9 +10,14 @@ displays re-checked against the page-image PNGs). Blokhuis–Seress–Wilbrink 1
 text (pages 143–147, all formulas checked against the page-image PNGs). Forward citations of
 Blokhuis–Seress–Wilbrink were enumerated independently in OpenAlex, Crossref, and Semantic Scholar
 from the pinned DOI `10.1007/bf01204717`, and the six listed topical searches were run and recorded.
-Three new candidate leads from later C855 work were also searched (see their own section). What
-remains open is stated per-claim below and in the coverage ledger; MathSciNet stays NOT COVERED as
-expected, and several of today's leads are themselves unread at full text and are marked as such.
+Three new candidate leads from later C855 work were also searched (see their own section). Claims 4
+and 5, the audit's last open items, are now closed by the definitional comparison in "Definitional
+comparison: companion arc claims vs BSW complete exterior sets" below: the companion/discovery-note
+arc quantities (no-three-collinear arcs, mixed or internal-only point type, maximum found by search)
+are a strictly different object from BSW's complete exterior sets (exactly `(q+1)/2` exterior points,
+collinearity permitted), so BSW's results neither pre-empt nor bound either figure. What remains open
+is stated per-claim below and in the coverage ledger; MathSciNet stays NOT COVERED as expected, and
+several of today's leads are themselves unread at full text and are marked as such.
 
 **Full-text count.** Two sources read at full text this run: Dye 1991 (complete, pages 270–286) and
 Blokhuis–Seress–Wilbrink 1992 (complete, pages 143–147). No other source named below was read beyond
@@ -390,51 +395,142 @@ cited as such rather than claimed.
 
 ### Claim 4 — eight-point pairwise-passant arcs at order twenty-three (sharpness)
 
-**Partially audited; still short of a verdict.** Blokhuis–Seress–Wilbrink 1992 is now read at full
-text first-hand (see "Sources consulted" above), its forward citations are enumerated independently
-in OpenAlex (9), Crossref (3), and Semantic Scholar (11) from the pinned DOI, and the topical web
-searches of resume checklist item 5 are run.
+**Closed this run (definitional comparison performed).** Blokhuis–Seress–Wilbrink 1992 is read at
+full text first-hand (see "Sources consulted" above); the exact companion/discovery-note statements
+were extracted and compared side by side against BSW's own definitions. See
+"Definitional comparison: companion arc claims vs BSW complete exterior sets" below for the full
+evidence chain.
 
-- BSW's own theorem and conjecture are about q ≡ 1 (mod 4) (proved: complete exterior sets are
-  exactly the exterior points of a passant) and q ≡ 3 (mod 4) (conjectured, on computer evidence up
-  to q = 131, for q > 31: same conclusion; exceptions catalogued for q = 7, 11, 19, 23, 27, 31 as
-  quoted verbatim above). q = 23 is inside BSW's own exceptional range, not covered by their proved
-  theorem or their conjecture's asserted range (q > 31): BSW's page 146 census explicitly records
-  *two* non-linear configurations for PG(2, 23) as an exception, not a sharpness statement about an
-  eight-point pairwise-passant arc.
-- **Open, and the load-bearing gap:** whether the companion note's "eight-point pairwise-passant arc"
-  quantity at q = 23 is the same object as either of BSW's two catalogued q = 23 exceptional
-  configurations, or a different quantity (a general pairwise-passant arc need not consist solely of
-  exterior points, and need not have size exactly (q+1)/2 = 12 as BSW's complete-exterior-set
-  definition requires — 8 ≠ 12). This comparison has **not** been done in this run; it requires
-  reading the companion note's exact claim statement and definitions side by side with BSW's page 146
-  configurations, which is outside this run's scope (a literature audit, not a definitional
-  reconciliation).
-- The forward-citation screen (see "Searches run" above) found no citing work, by title, that
-  directly extends BSW's exceptional census past q = 131 or restates it in the pairwise-passant-arc
-  framing the companion note uses. The closest lead, Van de Voorde 2011/2012, is now read at full text
-  (see its dedicated source entry above) and confirmed **not** to bear on Claim 4: it restates BSW's
-  theorem/conjecture as background and proves an unrelated single-point-extendability result, naming
-  neither q = 23 nor q = 9 anywhere in the paper. "Avoiding secants of given size in finite projective
-  planes" (arXiv:2409.14213) surfaced in the topical web search and remains an unread lead in the same
-  territory.
-- Korchmáros and Ughi were not searched by name this run; that remains an open gap from the
-  checkpoint, since resume checklist item 5 named only the six queries actually run, not this pair of
-  authors.
+**Verdict: incomparable objects, not pre-empted, not itself a manuscript "to our knowledge" claim.**
+The eight-point, order-twenty-three figure is not a statement in the `papers/clebsch-rigidity`
+manuscript; it is an internal finding in
+`notes/2026-08-03-c855-structural-exclusions.md:265-277`, used to show that the manuscript's actual
+theorem (`clebsch_rigidity_computational_companion.tex:607-621`, the `q ∈ {13,17,19}` maximum-arc-six
+statement) cannot be extended past `q = 19` by a uniform argument. Both this discovery-note figure and
+the manuscript's own `q = 13,17,19` theorem concern *arcs* — sets with no three collinear
+(`clebsch_rigidity_computational_companion.tex:63-64`, the paper's own `k`-arc definition) — of mixed
+internal/exterior point type, of whatever size the search finds. BSW's "complete exterior set" is a
+different object on every axis that matters: (a) it need not avoid three collinear points — their own
+linear example *is* the full set of exterior points of one passant line, hence entirely collinear, and
+their q = 19 and q = 23 exceptional census entries are Pasch configurations and "6 lines having four
+points" configurations, both explicitly collinearity-rich, not arcs; (b) it consists exclusively of
+exterior points, never internal ones, while the companion/discovery-note arcs are mixed type (the
+quoted q = 23 eight-point witness has six internal and two exterior vertices,
+`2026-08-03-c855-structural-exclusions.md:271-277`); (c) BSW's object has a fixed size of exactly
+`(q+1)/2` (12 at q = 23), not a maximum search over all sizes. None of BSW's q = 23 census entries (two
+non-linear complete exterior sets, both of size 12, both collinearity-rich) is the same object as, is
+implied by, or contradicts the discovery note's eight-point arc; the two results answer genuinely
+different combinatorial questions and cannot be compared as sharper/weaker versions of one claim.
+This closes the load-bearing gap the checkpoint left open: the numbers 8 (arc) and 12, "two
+Pasch/6-line configurations" (BSW's complete exterior sets) were never comparable quantities.
 
-**Provisional status:** still cannot be scored novel or pre-empted. BSW itself constrains the q = 23
-picture (an exception exists, on their own computer search) but the exact-quantity match to the
-companion note's Claim 4 is unverified, so no verdict is licensed either way.
+The forward-citation screen (see "Searches run" above) and the Van de Voorde 2011/2012 full-text read
+remain as recorded at checkpoint time — no citing work extends BSW's census into the arc (no-3-collinear)
+framing this comparison needed; that framing question is now closed directly against BSW's own text
+rather than by a citation-graph negative. Korchmáros and Ughi remain unsearched by author name — an
+open gap, but it no longer gates a verdict, since the object-level comparison above is decisive on its
+own terms.
 
 ### Claim 5 — maximum pairwise-passant arc of size four at order nine
 
-**Still unaudited on the specific point.** No source located in this run states a maximum
-pairwise-passant arc size of four for q = 9 specifically; q = 9 is even further from BSW's exceptional
-census (q = 7, 11, 19, 23, 27, 31) and their (q+1)/2 = 5 complete-exterior-set size does not match the
-claim's "four." The task's own flagged distinction — that a cited clique value of five for
-distance-two cliques is a different quantity from the maximum pairwise-passant arc size — is
-consistent with, but not confirmed by, anything read this run: no source naming a distance-two-clique
-value of five at q = 9 was located or checked. This remains open.
+**Closed this run (definitional comparison performed).** The exact source of the "four" figure is
+`notes/2026-08-03-c855-classical-transfer-proofs.md:497-499` and `:513` (restated in the reproducibility
+script `notes/2026-08-03-c855-q9-sylvester-kernel.py`, referenced at `:508-509`): "the true maximum
+pairwise-passant arc among **internal** points is four," contrasted there with the manuscript's own
+cited clique value of five (`clebsch_rigidity_computational_companion.tex:764`, the `q = 9` Sylvester
+polarity-graph clique-number-five result actually used in the manuscript to exclude q = 9 as a
+six-arc-conic-filling candidate). Like Claim 4, this four-point figure is not itself a manuscript
+statement; it is an internal discovery-note finding recorded as a "surprise" (an unexplained
+two-unit gap between the cited clique bound and the true arc maximum), not a published or
+"to our knowledge" sentence.
+
+**Verdict: incomparable objects, not pre-empted, and doubly distinct from BSW's setting.** q = 9 ≡ 1
+(mod 4), inside BSW's proved theorem's congruence class, but BSW's theorem and census concern
+**exterior** points exclusively — nothing in the full-text-read paper (theorem, census, or conjecture;
+see "Sources consulted" above) mentions internal points at any point. Claim 5's quantity is (a) an arc
+(no three collinear, by the same `k`-arc definition at
+`clebsch_rigidity_computational_companion.tex:63-64`) — which BSW's sets need not be, exactly as for
+Claim 4 — and (b) restricted to **internal** points only, a point type BSW's paper never addresses.
+There is no stated or implied duality in BSW 1992 between internal and exterior points that would let
+their exterior-point census bound, or fail to bound, an internal-point-only arc quantity. BSW's
+`(q+1)/2 = 5` complete-exterior-set size (q = 9) is therefore not the same quantity as, and does not
+bound, the internal-only arc maximum of four; the two numbers being numerically close (5 vs. 4) is
+coincidental, not a comparison of the same object under the two different definitions. This closes the
+claim: BSW neither confirms, bounds, nor contradicts it, because BSW's paper does not treat the object
+Claim 5 is about.
+
+## Definitional comparison: companion arc claims vs BSW complete exterior sets (closing Claims 4–5)
+
+This section performs the exact side-by-side comparison the checkpoint and the previous pass left
+open, per the conventions' requirement that a novelty/pre-emption verdict rest on comparing the
+deliverable's own object against the prior source's, not merely on citation counts.
+
+**Step 1 — extract the companion's own claims verbatim, with file:line.**
+
+- The manuscript's own maximum-arc theorem (`papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex:607-621`,
+  `thm:small-k-conic-filling`), the part relevant here: "Moreover, for each `q∈{13,17,19}`, an arc all
+  of whose chords are passant to a fixed nonsingular conic has at most six points, and this bound is
+  attained" (`:618-621`). Proof mode: finite certificate, root-edge orbit DAG (`:685-715`; claim-map
+  row "Maximum passant-arc size at q=13,17,19," `:784-785`).
+- The manuscript's own arc definition, load-bearing for both this theorem and for Claims 4-5:
+  "A `k`-arc is a set `A` of `k` points of `PG(2,q)` with no three collinear" (`:63-64`).
+- The manuscript's own terminology note connecting this object to BSW, already present in the source:
+  "In the terminology of Blokhuis, Seress, and Wilbrink, a set whose pairwise joins are passant is an
+  exterior set of the conic [BSW1992, pp. 143,146]; its vertices may have either internal or exterior
+  point type. Every conic-filling arc is such an exterior set" (`:663-669`). This is the companion's
+  own acknowledgement that it borrows BSW's name loosely (allowing mixed point type), not a claim that
+  its arcs are BSW's objects. A task-internal assessment written independently during this same C855
+  effort reached the same conclusion from the formalization side:
+  `notes/2026-08-03-c855-classical-transfer-proofs.md:480` records "Blokhuis–Seress–Wilbrink exterior
+  sets | must import or audit | terminological only" in its dependency-disposition table — i.e. BSW is
+  not load-bearing for any companion proof, only for a borrowed name. This is corroborating, not itself
+  literature-audit evidence (it is a task note, not a source comparison), so it is recorded as
+  supporting context rather than as the verdict's evidence.
+- Claim 4's eight-point, order-twenty-three figure: `notes/2026-08-03-c855-structural-exclusions.md:256-277`,
+  an exhaustive-search table of arc counts by size at `q=11,13,17,19,23` (no source in the published
+  manuscript states this number). The `q=23` row gives 6,072 eight-point arcs, all chords passant, and a
+  verified witness with "no three points... collinear" and "type profile... six internal and two
+  exterior points" (`:271-277`). This finding's purpose in its own note is to show the manuscript's
+  `q∈{13,17,19}` theorem cannot be extended uniformly to `q=23` (`:326-336`, "Verdict on Target 1").
+- Claim 5's four-point, order-nine figure: `notes/2026-08-03-c855-classical-transfer-proofs.md:497-499`,
+  "the `q = 9` obstruction has two units of slack: the true maximum pairwise-passant arc among
+  **internal points** is four, while the cited clique value only excludes six" (restated at `:513` and
+  in the replay script `2026-08-03-c855-q9-sylvester-kernel.py`, referenced at `:508-509`). The "cited
+  clique value" is the manuscript's own `q=9` Sylvester-graph clique-number-five result
+  (`clebsch_rigidity_computational_companion.tex:302-358`, claim-map row at `:764`), used there to
+  exclude `q=9` as a six-arc-conic-filling candidate — a different, already-published-and-attributed
+  claim, not itself part of Claim 5. Neither this note's title/heading nor its prose states a
+  "to our knowledge" or priority sentence for the four-point figure; it is recorded as an open surprise,
+  not a claim pressed into the manuscript.
+
+**Step 2 — extract BSW's own objects verbatim, as already recorded first-hand above.** BSW's theorem
+(q ≡ 1 mod 4) and census/conjecture (q ≡ 3 mod 4) both concern a **complete exterior set**: exactly
+`(q+1)/2` points, every one an **exterior** point of the conic, pairwise joined only by passants, with
+no constraint against three or more of them being collinear. The theorem's own linear example is the
+full set of exterior points lying on a single passant line — i.e. the extremal example is maximally
+collinear, not an arc. The exceptional census entries at q = 19, 23, 27, 31 (quoted verbatim under
+"Sources consulted" above) are Pasch configurations, "6 lines having four points" configurations, and
+similar structures that are explicitly collinearity-rich — none of BSW's own listed exceptional
+configurations is a `k`-arc in the companion's sense.
+
+**Step 3 — the comparison and its verdict, applied to each claim.**
+
+| axis | companion (Claims 4-5) | BSW complete exterior set |
+|---|---|---|
+| collinearity | forbidden (`k`-arc, no 3 collinear) | permitted; extremal/exceptional examples are collinearity-rich |
+| point type | mixed internal+exterior (Claim 4); internal-only (Claim 5) | exterior points exclusively |
+| size | maximum found by search, any size (8 at q=23; 4 at q=9) | fixed at exactly `(q+1)/2` (12 at q=23; 5 at q=9) |
+| status in this run | internal discovery-note findings, not manuscript "to our knowledge" sentences | published theorem + conjecture + reported computer census |
+
+On every axis the two are different objects, not a sharper/weaker pair of statements about the same
+quantity. Consequently: **BSW's results neither imply, nor are implied by, nor contradict, nor bound
+either companion figure.** Both are **not pre-empted** — there is no prior-work absence claim to make
+in the first place, because the companion's own arc quantities are not the quantity BSW's paper
+addresses. This is a "strictly different object" verdict, not a "novel" one in the sense of an unclaimed
+priority race over the same result: the manuscript's own load-bearing theorem
+(`thm:small-k-conic-filling`, q = 13,17,19) already only cites BSW for borrowed terminology
+(`:663-669`), never for the theorem's proof, and that citation practice is now confirmed correct by
+this comparison rather than merely asserted.
 
 ## Coverage statement
 
@@ -465,8 +561,12 @@ value of five at q = 9 was located or checked. This remains open.
 
 Claims 1–3 no longer need the caution about Dye's unread pages; their remaining hedge is only the
 weaker-than-citation-graph strength of a title-level web-search negative (stated per claim above).
-Claims 4 and 5 remain unresolved on the exact-quantity-match question and keep full "to our knowledge"
-hedging, now for a narrower and more precisely stated reason than at checkpoint time.
+Claims 4 and 5 are now closed on the exact-quantity-match question: the definitional comparison above
+found the companion/discovery-note arc quantities and BSW's complete exterior sets to be strictly
+different objects (arc/no-collinearity vs. collinearity-permitted; mixed-or-internal point type vs.
+exterior-only; search-maximum size vs. fixed size `(q+1)/2`), so neither figure is pre-empted, bounded,
+or contradicted by BSW, and neither figure is itself a manuscript "to our knowledge" sentence requiring
+further hedging — both are internal discovery-note findings, not published claims.
 
 ## Resume checklist — disposition
 
@@ -633,9 +733,13 @@ the shared lit-search cache (checked with `litcache.py list` before any fetch, p
 contract) — no new network fetch of either paper's bytes was needed, only the already-cached extracted
 text was read.
 
-**Still open for a future pass:** the exact-quantity comparison between the companion notes' Claims 4
-and 5 and BSW's complete-exterior-set definitions and census (needed before any Claim 4/5 verdict);
-Korchmáros/Ughi author-name searches; zbMATH Open; full-text reads of "Avoiding secants of given size
+**Closed this run:** the exact-quantity comparison between the companion/discovery notes' Claims 4 and
+5 and BSW's complete-exterior-set definitions and census — see "Definitional comparison: companion arc
+claims vs BSW complete exterior sets" above. Both claims are closed as strictly-different-object, not
+pre-empted.
+
+**Still open for a future pass:** Korchmáros/Ughi author-name searches; zbMATH Open; full-text reads of
+"Avoiding secants of given size
 in finite projective planes" (arXiv:2409.14213), "Line partitions of internal points to a conic in
 PG(2,q)" (Giulietti et al.), Wu 2010 (`arXiv:1002.1138`, candidate (a)'s p-rank companion, still only
 `abstract/metadata only`), and Buckley–Košir 2007 / Dolgachev for candidate (c). The
