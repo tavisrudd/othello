@@ -3,8 +3,28 @@
 **Lane:** pending confirmation (`clebsch` proposed; the work edits shared
 `RelativeConicArcs` infrastructure that `relconic`, `ame-lu`, and `cap` also use)
 
-**Status:** queued; scoped 2026-08-02, superseding the original
-"document the cap modules" framing
+**Status:** substantively executed 2026-08-03 by a lighter route than the
+inversion below; formal closeout pending a user decision. The C855 window's
+five "Separate the …" commits split the cap library so the game modules
+(`CapGame.BuildGame`, `FrameGridBridge`, `GridGame`, `GridSeed`) left the
+paper closures, and the `Sym2ConicBridge` reverse references are gone. The
+five geometry modules still imported by `RelativeConicArcs` — `Grid`,
+`PlaneAffineChart`, `PlaneTransitivity`, `Projective`, `Sym2ConicBridge` —
+were brought to the referee documentation standard in commit `566ab195`
+(all public declarations documented, header status prose repaired,
+negative checks clean, four Paper II gates rebuilt green through the guarded
+queue). The full vocabulary move into a `RelativeConicArcs` base module was
+not performed; the `ProjectiveCap` imports remain, now pointing at
+documented referee-standard modules.
+
+Stage-5 revalidation finding: the only paper surface pinning the edited
+files, `papers/ame_lu/release/RELEASE-MANIFEST.json`, was already broken
+before this work — commit `47ad5311` deleted `papers/ame_lu/supplement/`
+without regenerating the manifest, its generator
+(`release/verify_release.py`) now crashes on the missing
+`EVIDENCE-MANIFEST.json`, and thirty of its forty-three public-export
+entries no longer exist on disk. Repair needs an `ame-lu` lane decision
+(restore the supplement or change the generator); it is not owned here.
 
 **Route decision (Tavis, 2026-08-03):** dependency inversion, staged per the
 staging section below. Move the shared projective-plane vocabulary out of the
