@@ -8,6 +8,16 @@ target 4 (four-anchor rigidity). It also closes, as a by-product, the structural
 target 5 (the Madison–Wu instance `dim ker M = 36`), which the checkpoint had declared
 blocked.
 
+**Referee repairs (2026-08-03):** reviewed in
+`notes/2026-08-03-c855-q13-gap-closure-referee.md` (both gaps confirmed sound, no major
+finding). Three written steps have been repaired in place since that review: the lower bound
+of Proposition A4 now uses the saturated lattice `V ∩ Z_2[Ω]` instead of a sum of 2-block
+idempotents that is not 2-adically integral; the proof of Theorem A now runs on Brauer-character
+additivity instead of individual block idempotents, and the `K_1 = 0` payoff now carries the
+exclusion of `A_9|_K = 1`; and the informal general-mechanism paragraph of Theorem B1, with
+strengthening candidate 6, now carries the degenerate one-solution branch. No stated result
+changed.
+
 Everything below is a pen-and-paper derivation. Numerical confirmations were run and are
 itemised in §5; **no step of any proof depends on a computation**, and every computation
 listed there is a check of an already-derived statement.
@@ -67,7 +77,7 @@ needs no orbit-by-orbit input whatsoever.
 The proof has four steps: identify the ordinary constituents of the permutation module on
 `Ω` (§1.3); compute the eigenvalues of `M` on each of them (§1.4); deduce
 `dim K = 36` and that `K` is exactly the sum of the three 12-dimensional discrete-series
-block components (§1.5); and show that those three components are Galois-conjugate
+lattice components (§1.5); and show that those three components are Galois-conjugate
 absolutely irreducible modules (§1.6), which forces `F_2`-irreducibility (§1.7).
 
 ### 1.2 Lemma A1 — fixed internal points of odd-order elements
@@ -155,8 +165,10 @@ the Frobenius conjugation `σ` is `ω ↦ ω^{-13}`. A Möbius transformation
     G = PGL(2,13) ≅ { [[a, b],[\bar b, \bar a]] : a,b ∈ F_{169}, N(a) ≠ N(b) } / F_13^*,
 
 which has `(169^2 - (1 + 12·14^2))/12 = 2184` elements, and `P^1(F_{13})` is the fixed set
-`{ω : ω^{-13} = ω} = μ_{14}`. The internal points are the pairs `{ω, ω^{-13}}` with
-`ω ∉ μ_{14} ∪ {0,∞}`.
+`{ω : ω^{-13} = ω} = μ_{14}`. The internal points are the `σ`-orbits `{ω, ω^{-13}}` on the
+`170 - 14 = 156` points with `ω ∉ μ_{14}`, giving `156/2 = 78` of them. Note that `σ`
+interchanges `0` and `∞`, so `{0,∞}` is one of these 78 internal points — it is the base
+point `P_0` used in (b) below.
 
 **(b) The harmonic relation in this chart.** Fix the internal point `P_0 = {0,∞}` and let
 `P = {ω,ω^{-13}}`. By the cross-ratio form of `ρ` (checkpoint target 1(e)),
@@ -204,7 +216,9 @@ six `y` with `y^2 - 4` a nonsquare, namely `y ∈ {3,5,6,7,8,10}`, each from a p
 `{ε, ε^{-1}}`. Since `ε^7 = ±1` separates order-7 from order-14 parameters and the three `y`
 belonging to `ε ∈ μ_7` sum to `-1`, that triple is `{7,8,10}` and the order-14 triple is
 `{3,5,6}`. Now `c(y) = 7(y-2)`, and `g_ε` is split, unipotent or nonsplit according as
-`c^2-4` is a nonzero square, zero, or a nonsquare:
+`c^2-4` is a nonzero square, zero, or a nonsquare — with the caveat that `c^2 - 4 = 0` has
+the two roots `c = ±2`, of which only `c = 2` (i.e. `r = 1`) is the unipotent case, while
+`c = -2` (i.e. `r = -1`) is the split involution:
 
 | `y` | 2 | `-2` | 3 | 5 | 6 | 7 | 8 | 10 |
 |---|---|---|---|---|---|---|---|---|
@@ -254,32 +268,47 @@ so `det M = 7·(-3)^{13}·1^{14}·3^{14}·8^{12}`, an odd number times `2^{36}`.
 
     dim_{F_2} ker M ≤ 36.
 
-For the reverse inequality, let `e ∈ Z_2[G]` be the sum of the 2-block idempotents of the
-three characters `χ_{θ_i}` (a single `Z_2`-block, since the `χ_{θ_i}` are Galois-conjugate
-over `Q_2`), and put `L = e·Z_2[Ω]`, a `Z_2`-lattice of rank 36 by Lemma A2, and
-`W = L/2L ⊆ F_2[Ω]`. Because `M` is a `G`-endomorphism it preserves `L`, and on `L ⊗ Q_2` it
-acts with the three eigenvalues `2w_i`; the characteristic polynomial of `M|_L` is
-`(x^3+2x^2-8x-8)^{12} ≡ x^{36} (mod 2)`, so `M` is **nilpotent** on `W`. Since `M^3 = M`
-(input (I2)), nilpotence forces `M|_W = 0`, i.e. `W ⊆ K`. Hence `dim K ≥ 36` and therefore
+For the reverse inequality, let `V ⊆ Q_2[Ω]` be the `Q_2`-span of the three
+`χ_{θ_i}`-isotypic components, and put
 
-    dim K = 36  and  K = W = the reduction of the discrete-series block.
+    L := V ∩ Z_2[Ω],     W := L/2L ⊆ F_2[Ω].
+
+`V` is a `Q_2[G]`-submodule: the three `χ_{θ_i}` are Galois-conjugate over `Q_2` (their
+values generate `Q(ζ_7)^{+}`, in which `2` is inert because `2` has order 3 modulo 7), so
+their sum is `Q_2`-rational and `V` is defined over `Q_2`. Hence `L` is a `G`-stable
+`Z_2`-lattice of rank 36, and it is **saturated** in `Z_2[Ω]` by construction, which is
+exactly what makes `W = L/2L → F_2[Ω]` injective. Because `M` is a `G`-endomorphism it
+preserves `V` and hence `L`, and on `L ⊗ Q_2 = V` it acts with the three eigenvalues `2w_i`;
+so the characteristic polynomial of `M|_L` is `(x^3+2x^2-8x-8)^{12} ≡ x^{36} (mod 2)` and `M`
+is **nilpotent** on `W`. Since `M^3 = M` (input (I2)), nilpotence forces `M|_W = 0`, i.e.
+`W ⊆ K`. Hence `dim K ≥ 36` and therefore
+
+    dim K = 36  and  K = W = the reduction of the saturated discrete-series lattice.
 
 ∎
+
+*(A remark, because the natural shortcut is wrong: one cannot take `L = e·Z_2[Ω]` for `e` a
+sum of 2-block idempotents. `χ_θ(1) = 12` has `v_2 = 2` while `v_2(|G|) = 3`, so no `χ_θ` has
+defect zero for `G`, and the three order-14 discrete series are not a union of 2-blocks. The
+rational central idempotent `e = Σ_i e_{χ_{θ_i}}` exists but is not 2-adically integral: its
+coefficient at `g` is `s(g^{-1})/182` with `s = Σ_i χ_{θ_i}`, and `s` is odd on seven of the
+fifteen classes. Saturation of `V ∩ Z_2[Ω]` replaces the missing integrality.)*
 
 This is a complete structural proof of the single Madison–Wu instance the companion
 consumes, so `\cite{MadisonWu2012}` can be dropped from `thm:q13-tangent-code` in the same
 way the checkpoint dropped Hollmann–Xiang: the checkpoint's target 5 verdict ("blocked
 structurally at pinning `dim K`") is superseded. The mechanism is worth naming: the four
-"principal-block" eigenvalues `7, -3, 1, 3` are odd, so `M` is invertible mod 2 there, while
+remaining eigenvalues `7, -3, 1, 3` are odd, so `M` is invertible mod 2 there, while
 the discrete-series eigenvalues are `2 ×` (algebraic integer), so `M` dies mod 2 there. The
 nullity 36 is `3 × 12` for the reason that there are three Galois-conjugate discrete series
 of degree `q-1 = 12` in the permutation character.
 
-### 1.6 Lemma A5 — the three block constituents are Galois-conjugate absolutely irreducibles
+### 1.6 Lemma A5 — the three discrete-series constituents are Galois-conjugate absolutely irreducibles
 
-*Let `φ_i` be the Brauer character of `\bar F_2 ⊗ e_i Z_2[Ω]`, `i = 1,2,3`. Then each `φ_i`
-is irreducible of degree 12, the three are pairwise distinct, and `Gal(\bar F_2/F_2)`
-permutes them cyclically.*
+*Let `φ_i` be the restriction of `χ_{θ_i}` to the 2-regular classes of `G`, `i = 1,2,3` —
+that is, the Brauer character of the mod-2 reduction of any `G`-stable lattice in the
+`χ_{θ_i}`-isotypic component. Then each `φ_i` is an irreducible Brauer character of degree
+12, the three are pairwise distinct, and `Gal(\bar F_2/F_2)` permutes them cyclically.*
 
 *Proof.* Restrict `χ_{θ_i}` to `PSL(2,13)`: `θ_i` has order 14, so `θ_i|_{C_7}` is a
 nontrivial character of `C_7` and `χ_{θ_i}|_{PSL}` is the corresponding discrete series of
@@ -303,16 +332,22 @@ no smaller field. ∎
 **Theorem A.** `K` is irreducible as an `F_2[PGL(2,13)]`-module; `\bar F_2 ⊗ K ≅ φ_1 ⊕ φ_2 ⊕ φ_3`,
 and `End_{F_2G}(K) ≅ F_8`.
 
-*Proof.* By Proposition A4, `K = W = L/2L` with `L` the discrete-series block lattice, so
-`\bar F_2 ⊗ K` has composition factors exactly `φ_1, φ_2, φ_3`, each with multiplicity 1
-(each `e_iL` has rank 12 and reduces to the irreducible `φ_i`, so `\bar F_2 ⊗ K` is in fact
-semisimple). Let `0 ≠ U ⊆ K` be an `F_2[G]`-submodule. Then `\bar F_2 ⊗ U` is a
+*Proof.* By Proposition A4, `K = W = L/2L` with `L` the saturated discrete-series lattice, so
+the Brauer character of `\bar F_2 ⊗ K` is the restriction of `χ_{θ_1}+χ_{θ_2}+χ_{θ_3}` to the
+2-regular classes, i.e. `φ_1 + φ_2 + φ_3`. Brauer characters are additive along a composition
+series and the irreducible ones are linearly independent, so by Lemma A5 the composition
+factors of `\bar F_2 ⊗ K` are exactly `φ_1, φ_2, φ_3`, each with multiplicity 1. (No
+semisimplicity is assumed here; it follows below.) Let `0 ≠ U ⊆ K` be an `F_2[G]`-submodule.
+Then `\bar F_2 ⊗ U` is a
 `\bar F_2[G]`-submodule whose multiset of composition factors is a nonempty sub-multiset of
 `{φ_1,φ_2,φ_3}`, and it is stable under `Gal(\bar F_2/F_2)` because `U` is defined over
 `F_2`. By Lemma A5 that Galois group permutes `{φ_1,φ_2,φ_3}` transitively, so the
 sub-multiset is all of it and `dim U = 36 = dim K`, i.e. `U = K`. Hence `K` is irreducible.
-Its endomorphism algebra is a finite division algebra, hence a field, and it is `F_8`
-because `K ⊗ \bar F_2` splits into 3 non-isomorphic absolutely irreducible summands. ∎
+Its endomorphism algebra is then a finite division algebra, hence a field; it has degree 3
+over `F_2` because the three absolutely irreducible constituents `φ_i` are pairwise
+non-isomorphic and Galois-conjugate, so `End_{F_2G}(K) = F_8`. Scalar extension of an
+irreducible module whose endomorphism ring is a field is semisimple, which gives
+`\bar F_2 ⊗ K ≅ φ_1 ⊕ φ_2 ⊕ φ_3` as a consequence rather than a premise. ∎
 
 **Corollary A (target 3, closed).** *Every `PGL(2,13)`-orbit of minimum words of `K` spans
 `K`; more strongly, every single nonzero word of `K` generates `K` as an `F_2[G]`-module.*
@@ -333,11 +368,20 @@ Two further payoffs, both directly consumable by Paper IV:
 * `End_{F_2G}(K) = F_8` and `A_9|_K` is an `F_8`-scalar of multiplicative order 7, with
   `A_{10}|_K = (A_9|_K)^2` and `A_{12}|_K = (A_9|_K)^4` its two Frobenius conjugates. This
   identifies packet 6's "hidden field" as the field of definition of the discrete-series
-  block, and explains the 3-cycle `A_9 → A_{10} → A_{12}` of checkpoint §2.3 as Galois
-  conjugation. In particular `K_1 = ker(A_9 + I)|_K = 0` is automatic, since `A_9|_K` is a
-  scalar of order 7 in `F_8^*`.
-* The automorphism group of the code contains no more than the scheme automorphisms: any
-  linear map commuting with `G` on `K` is an `F_8`-scalar.
+  lattice, and explains the 3-cycle `A_9 → A_{10} → A_{12}` of checkpoint §2.3 as Galois
+  conjugation. That `λ := A_9|_K` lies in `F_8` is Theorem A; that its order is 7 — i.e. that
+  `λ ≠ 1` — needs one further line, because `λ = 1` satisfies both
+  `(I + B + B^2 + B^4)|_K = 0` and `λ + λ^2 + λ^4 = 1`. Here it is: by (I2),
+  `A_rA_0 = 0` for `r ∈ {9,10,12}` and `T = I + A_0^2` is the projection onto `K` along
+  `im A_0`, so `A_r = A_rT` and each `A_r` is determined by its restriction to `K`. If
+  `λ = 1` then `A_{10}|_K = λ^2 = λ = A_9|_K`, hence `A_{10} = A_9` as matrices — false, since
+  they are adjacency matrices of different relations. So `λ` has order 7, `A_9 + I` is
+  invertible on `K`, and `K_1 = ker(A_9+I)|_K = 0`.
+* The centraliser of `G` in `End_{F_2}(K)` is exactly `F_8`: every linear map of `K`
+  commuting with the `PGL(2,13)`-action is an `F_8`-scalar. This is a statement about linear
+  endomorphisms only. It says nothing directly about `Aut(K)` as a binary code, which is a
+  group of coordinate permutations with no reason to commute with `G`; the automorphism
+  claim of `thm:q13-tangent-code` comes from Corollary B below, not from here.
 
 ---
 
@@ -400,7 +444,16 @@ nonsquare, so `Δ(P_2)` is a nonsquare automatically.
 **General mechanism.** For any `r` and any nonzero `s,t`, the same two steps compute
 `p^{r}_{s,t}`: the ratio `t/s` is automatically a square (all nonzero `ρ`-values are
 squares), so the pair of relation equations always reduces to two lines through the pole of
-`P_0P_1`, on each of which one quadratic in `δ/γ` decides between 0 and 2 solutions. This
+`P_0P_1`, on each of which one equation of the form `c·(δ/γ)^2 = R` decides the count. That
+equation has **three** branches, not two: `2` solutions when `R` is a nonzero square, `0`
+when `R` is a nonsquare, and **`1` when `R = 0`**, the single solution then being `δ = 0`,
+i.e. the point of the line `⟨P_0,P_1⟩` itself. Theorem B1 excludes the degenerate branch for
+its own parameters (`-n/c` and `11n/c` are both nonzero), which is why `p^{10}_{3,9}` is
+even; in general odd values do occur, for instance `p^{9}_{9,10} = 1` — where the unique
+`P_2` is collinear with `P_0` and `P_1` — and `p^{1}_{1,1} = 3`. The checkpoint's parity
+remark (`p` is even, because the pair-stabilising involution acts on the solutions) is
+conditional on that involution acting freely, and it fails exactly on the degenerate branch,
+whose solution is fixed by it. This
 replaces the checkpoint's remark that "the `r ≠ s` case defeats the line-pair pencil trick
 of §2.3": the correct pencil here is not the pencil of the two conics but the pencil of
 lines through `U^{⊥}`, and the mixed case is *easier*, not harder, than the equal case.
@@ -530,9 +583,17 @@ Finally the anchors themselves are separated by the diagonal convention (equival
 **Corollary B (target 4, closed).** *The four points `P_0,P_1,P_2,P_3` are a geometric base:
 `G` acts simply transitively on the ordered `(10,3,9)`-triples (Theorem B1), the fourth
 anchor is canonically determined (Lemma B3), and the four-anchor signature separates points
-(Theorem B4). Hence a scheme automorphism can be composed with a unique element of `G` so as
-to fix `P_0,P_1,P_2`; it then fixes `P_3` and every internal point, so
-`Aut(scheme) = PGL(2,13)`.*
+(Theorem B4). Hence a **colour-preserving** automorphism of the scheme — a permutation of the
+78 internal points preserving each relation `ρ = r` individually — can be composed with a
+unique element of `G` so as to fix `P_0,P_1,P_2`; it then fixes `P_3` and every internal
+point. So the colour-preserving automorphism group of the scheme is exactly `PGL(2,13)`.*
+
+The colour-preserving hypothesis is what the argument uses and is therefore what the
+statement claims; automorphisms that permute the six relations among themselves are **not**
+addressed here. The one structural constraint available for free is that no such permutation
+can mix the two families, since the passant/secant split `{9,10,12}` / `{0,1,3}` is intrinsic
+to the scheme via the character of `ρ - 4` (checkpoint target 1(d)); ruling out the remaining
+permutations within each family is a separate argument, not made in this note.
 
 The checkpoint's "at most four sign classes, finishing not done" is thus replaced by an
 exact statement: the fibres have size at most 2, the exceptional locus is the line
@@ -582,7 +643,7 @@ the minimum layer. Logged as a lead, not a deliverable.
 | A — span of every minimum-word orbit (checkpoint target 3) | **proved.** `K` is an irreducible `F_2[PGL(2,13)]`-module with `End = F_8` (Theorem A), so every nonzero word — a fortiori every orbit — generates `K`. The Gram identity `N_i^{T}N_i = A_{r_i}` is no longer needed. |
 | B(i) — `p^{10}_{3,9} = 2` (checkpoint target 4) | **proved.** Theorem B1: the two relation equations reduce to two lines through the pole of `P_0P_1`, and exactly one of them meets the level set, because the two solvability conditions differ by the nonsquare 11. Gives simple transitivity on the 2184 triples. |
 | B(ii) — four-class sign elimination (checkpoint target 4) | **proved, and sharpened.** Lemma B2: fibres of the three-anchor signature have size at most **2** (not 4), with an explicit exceptional locus; Lemma B3: `P_3` is unique by a square-class computation; Theorem B4: the fourth anchor separates because `t = (6,4,3)` has `t_0,t_1,t_2, t_0+11t_1` all nonzero. |
-| bonus — `dim_{F_2} ker M = 36` (checkpoint target 5, Madison–Wu) | **proved.** Proposition A4, from the spectrum of Lemma A3: `v_2(det M) = 36` bounds the nullity above, and the discrete-series block reduces into `ker M` because its eigenvalues are `2 ×` an algebraic integer and `M^3 = M`. The external citation can be dropped. |
+| bonus — `dim_{F_2} ker M = 36` (checkpoint target 5, Madison–Wu) | **proved.** Proposition A4, from the spectrum of Lemma A3: `v_2(det M) = 36` bounds the nullity above, and the saturated discrete-series lattice reduces into `ker M` because its eigenvalues are `2 ×` an algebraic integer and `M^3 = M`. The external citation can be dropped. |
 | bonus — `K_1 = ker(A_9+I)|_K = 0` | **proved.** `A_9|_K` is an `F_8`-scalar of order 7 (Theorem A), so `A_9 + I` is invertible on `K`. |
 | lead — closed form for three of the four minimum-word orbits | **stated with computational confirmation, proof open.** §3. |
 
@@ -635,8 +696,8 @@ the strength of what is proved above. No novelty assessment is offered.
 
 1. **Madison–Wu for every `q ≡ 1 (mod 4)`, by the same mechanism.** Claim: for the
    internal-point/passant-line incidence matrix `M` over `F_2`,
-   `dim ker M = (q-1)^2/4`, because `ker M` is the mod-2 reduction of the sum of the
-   discrete-series 2-blocks whose torus parameter `θ` satisfies `θ(z) = -1`, of which there
+   `dim ker M = (q-1)^2/4`, because `ker M` is the mod-2 reduction of the saturated lattice spanned by the
+   discrete series whose torus parameter `θ` satisfies `θ(z) = -1`, of which there
    are `(q-1)/4` pairs, each of degree `q-1`. Every ingredient of §1.3–§1.5 is written in a
    `q`-independent form except the two explicit `F_{13}` tables in Lemma A3(e,f). Cost:
    redo Lemma A3(e,f) with `q` general — the split/nonsplit trichotomy becomes a Legendre
@@ -647,8 +708,9 @@ the strength of what is proved above. No novelty assessment is offered.
    `(q-1)^2/4`, so the roles of internal/external (and the valency of `ρ = 0`) shift and the
    argument must be redone, not transported.
 2. **A basis-free description of the code.** Claim: `K` is canonically the mod-2 reduction of
-   the order-14 discrete-series block of the permutation module on the internal points; the
-   passant code `im M` is the complementary block. This replaces "the kernel of a `78 × 78`
+   the saturated order-14 discrete-series lattice inside the permutation module on the
+   internal points; the passant code `im M` is the complementary summand. (Phrase it via the
+   saturated lattice, not via a "block": the three characters are not a union of 2-blocks.) This replaces "the kernel of a `78 × 78`
    incidence matrix" by an intrinsic, representation-theoretic definition and makes the
    `[78,36]` parameters, the `F_8` structure, and the `A_9/A_{10}/A_{12}` Frobenius 3-cycle
    one statement instead of four. Cost: none beyond §1 — it is a restatement of Proposition
@@ -670,8 +732,11 @@ the strength of what is proved above. No novelty assessment is offered.
    patterns (a short uniform calculation, one Legendre condition per line). Lands: companion.
 6. **The full intersection array without search.** Claim: `p^{r}_{s,t}` for all `r,s,t ≠ 0`
    is given uniformly by the two-line reduction — the ratio condition is always linear
-   because every nonzero `ρ`-value is a square — so the scheme's entire intersection array
-   is a table of Legendre symbols rather than an enumeration. Cost: bookkeeping over the
+   because every nonzero `ρ`-value is a square — with each line contributing `0`, `1` or `2`
+   points according to a Legendre symbol plus a vanishing test, so the scheme's entire
+   intersection array is a table of those two tests rather than an enumeration. The
+   one-solution branch is not decorative: `p^{9}_{9,10} = 1` and `p^{1}_{1,1} = 3` are real
+   values of the array. Cost: bookkeeping over the
    `5 × 5 × 5` patterns plus the `r = 0` degenerate cases. Lands: companion; it would retire
    the displayed integer intersection-number table entirely.
 7. **A closed-form family of minimum words for general odd `q`.** Claim: for each secant line
