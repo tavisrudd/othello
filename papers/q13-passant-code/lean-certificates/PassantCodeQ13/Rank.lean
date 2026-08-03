@@ -5,7 +5,7 @@ import PassantCodeQ13.MinimumWords.Base
 
 The 78 passant rows are encoded directly from the normalized conic incidence relation.  The
 descending-pivot evaluator in `PassantCodeQ13.MinimumWords.Base` performs exact Gaussian
-elimination over the binary field.  Native evaluation checks rank 42.
+elimination over the binary field.  Kernel reduction checks rank 42.
 
 The shared semantic theorem uses `Module.finrank`.  A separate symbolic correctness theorem for
 the bit-row evaluator is required to transport this leaf to
@@ -25,6 +25,6 @@ def incidenceRows : List Nat :=
 
 /-- Exact binary elimination gives incidence-row rank 42. -/
 theorem incidenceRows_rank : binaryRank incidenceRows = 42 := by
-  native_decide
+  decide +kernel
 
 end PassantCodeQ13.Rank

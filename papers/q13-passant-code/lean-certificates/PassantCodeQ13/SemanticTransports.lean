@@ -6,7 +6,7 @@ import RelativeConicArcs.PassantCodeQ13.Rank
 # Semantic transports for the finite passant-code certificates
 
 This module connects executable certificate data to the linear-algebraic objects used in the
-passant-code theorem.  Each theorem states a concrete correspondence; finite evaluation is used
+passant-code theorem.  Each theorem states a concrete correspondence; kernel reduction is used
 only after the correspondence has been expressed in the semantic types.
 -/
 
@@ -48,7 +48,7 @@ def recoverLinearMap (index : Fin 42) :
 /-- The recovery masks are left inverse to the first 42 incidence columns. -/
 theorem recoverCoefficient_basisColumn : ∀ row column : Fin 42,
     recoverCoefficient row (basisColumn column) = if row = column then 1 else 0 := by
-  native_decide
+  decide +kernel
 
 /-- The first 42 displayed incidence columns are linearly independent over the binary field. -/
 theorem basisColumn_linearIndependent :
@@ -66,7 +66,7 @@ theorem incidenceColumn_expansion : ∀ index : Fin 78,
       ∑ basisIndex : Fin 42,
         if (RankTransportData.columnExpansionMask index).testBit basisIndex.1 then
           basisColumn basisIndex else 0 := by
-  native_decide
+  decide +kernel
 
 /-- The first 42 columns span all semantic incidence columns. -/
 theorem incidenceColumn_span_eq_basisColumn_span :
