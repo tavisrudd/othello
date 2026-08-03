@@ -22,6 +22,14 @@ window runs only after that; Paper II repackaging under C577 waits for
 stages 2--4. The general Paper II/III Lean plan review that follows C860 and
 the hard Paper I parts is its own task, C861, not a C860 subtask.
 
+**Q11Residual residue decision (Tavis, 2026-08-03):** the genuine cap-game
+content in `RelativeConicArcs.Q11Residual` (with `Q9Terminal` and
+`Q5SixArcExclusion`) is accepted for now: Paper I and the arcs paper keep
+`CapGame.BuildGame`/`Mirror`/`GraphMirror` in their closures, and only those
+three modules get the narrow to-standard audit as load-bearing dependencies.
+Re-routing those claims off the game formulation may happen in the future but
+is a bigger task, explicitly not now, and is not part of C860 or C855.
+
 ## Why this exists
 
 The Paper II standards closure found that the four Paper II Lean gates import
