@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Intrinsic quotient experiments for Lucas M9's degree-nine Lucas carrier."""
+"""Generate exact intrinsic-quotient certificates for the degree-nine Lucas carrier."""
 
 from __future__ import annotations
 
@@ -13,30 +13,30 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-invariant-block_PATH = HERE / "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py"
-SPEC = importlib.util.spec_from_file_location("lucas_action", invariant-block_PATH)
+LUCAS_ACTION_PATH = HERE / "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py"
+SPEC = importlib.util.spec_from_file_location("lucas_action", LUCAS_ACTION_PATH)
 assert SPEC is not None and SPEC.loader is not None
-invariant-block = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(invariant-block)
+lucas_action = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(lucas_action)
 
 def gf_add_product(total: int, left: int, right: int, modulus: int) -> int:
-    return total ^ invariant-block.gf_mul(left, right, modulus)
+    return total ^ lucas_action.gf_mul(left, right, modulus)
 
 
 def evaluate_action_entry(source: int, target: int, matrix: tuple[int, int, int, int], modulus: int) -> int:
     a, b, c, d = matrix
     total = 0
-    for ea, eb, ec, ed in invariant-block.action_entry(source, target):
-        term = invariant-block.gf_pow(a, ea, modulus)
-        term = invariant-block.gf_mul(term, invariant-block.gf_pow(b, eb, modulus), modulus)
-        term = invariant-block.gf_mul(term, invariant-block.gf_pow(c, ec, modulus), modulus)
-        term = invariant-block.gf_mul(term, invariant-block.gf_pow(d, ed, modulus), modulus)
+    for ea, eb, ec, ed in lucas_action.action_entry(source, target):
+        term = lucas_action.gf_pow(a, ea, modulus)
+        term = lucas_action.gf_mul(term, lucas_action.gf_pow(b, eb, modulus), modulus)
+        term = lucas_action.gf_mul(term, lucas_action.gf_pow(c, ec, modulus), modulus)
+        term = lucas_action.gf_mul(term, lucas_action.gf_pow(d, ed, modulus), modulus)
         total ^= term
     return total
 
 
 def canonical(point: tuple[int, ...], modulus: int) -> tuple[int, ...]:
-    return invariant-block.canonical(point, modulus)
+    return lucas_action.canonical(point, modulus)
 
 
 def carrier_matrix(matrix: tuple[int, int, int, int], modulus: int) -> tuple[tuple[int, ...], ...]:
@@ -109,12 +109,12 @@ def matrix_rank(rows: list[list[int]], modulus: int) -> int:
         if pivot is None:
             continue
         work[rank], work[pivot] = work[pivot], work[rank]
-        inverse = invariant-block.gf_pow(work[rank][column], (1 << (modulus.bit_length() - 1)) - 2, modulus)
-        work[rank] = [invariant-block.gf_mul(value, inverse, modulus) for value in work[rank]]
+        inverse = lucas_action.gf_pow(work[rank][column], (1 << (modulus.bit_length() - 1)) - 2, modulus)
+        work[rank] = [lucas_action.gf_mul(value, inverse, modulus) for value in work[rank]]
         for i in range(len(work)):
             if i != rank and work[i][column]:
                 factor = work[i][column]
-                work[i] = [x ^ invariant-block.gf_mul(factor, y, modulus) for x, y in zip(work[i], work[rank])]
+                work[i] = [x ^ lucas_action.gf_mul(factor, y, modulus) for x, y in zip(work[i], work[rank])]
         rank += 1
     return rank
 
@@ -141,14 +141,14 @@ def normalized_complement_action(
 ) -> tuple[int, int, int, int]:
     image = act(complement_point(u), matrix, modulus)
     assert image[2] and image[3] == 0
-    inverse = invariant-block.gf_pow(image[2], (1 << (modulus.bit_length() - 1)) - 2, modulus)
-    normalized = tuple(invariant-block.gf_mul(value, inverse, modulus) for value in image)
+    inverse = lucas_action.gf_pow(image[2], (1 << (modulus.bit_length() - 1)) - 2, modulus)
+    normalized = tuple(lucas_action.gf_mul(value, inverse, modulus) for value in image)
     assert normalized[2:4] == (1, 0)
     return normalized[0], normalized[1], normalized[4], normalized[5]
 
 
 def complement_orbit_representatives(q: int, modulus: int) -> list[tuple[int, int, int, int]]:
-    primitive = invariant-block.primitive_element(q, modulus)
+    primitive = lucas_action.primitive_element(q, modulus)
     generators = [
         (1, 1, 0, 1),
         (primitive, 0, 0, 1),
@@ -193,17 +193,17 @@ def mobius(point: int, matrix: tuple[int, int, int, int], q: int, modulus: int) 
     if point == q:
         if c == 0:
             return q
-        return invariant-block.gf_mul(a, invariant-block.gf_pow(c, q - 2, modulus), modulus)
-    numerator = invariant-block.gf_mul(a, point, modulus) ^ b
-    denominator = invariant-block.gf_mul(c, point, modulus) ^ d
+        return lucas_action.gf_mul(a, lucas_action.gf_pow(c, q - 2, modulus), modulus)
+    numerator = lucas_action.gf_mul(a, point, modulus) ^ b
+    denominator = lucas_action.gf_mul(c, point, modulus) ^ d
     if denominator == 0:
         return q
-    return invariant-block.gf_mul(numerator, invariant-block.gf_pow(denominator, q - 2, modulus), modulus)
+    return lucas_action.gf_mul(numerator, lucas_action.gf_pow(denominator, q - 2, modulus), modulus)
 
 
 def projective_additive_rows_q16(modulus: int) -> list[tuple[tuple[int, ...], tuple[int, ...], tuple[int, ...]]]:
     q = 16
-    primitive = invariant-block.primitive_element(q, modulus)
+    primitive = lucas_action.primitive_element(q, modulus)
     generators = [(1, 1, 0, 1), (primitive, 0, 0, 1), (0, 1, 1, 0)]
     root_sets = {
         tuple(x for x in range(q) if (x & functional).bit_count() % 2 == value)
@@ -228,7 +228,7 @@ def projective_additive_rows_q16(modulus: int) -> list[tuple[tuple[int, ...], tu
 def bounded_certificate(q: int) -> dict[str, object]:
     assert q in (16, 32)
     m = q.bit_length() - 1
-    modulus = invariant-block.first_irreducible(m)
+    modulus = lucas_action.first_irreducible(m)
     representatives = complement_orbit_representatives(q, modulus)
     candidates = candidate_divisors(q, modulus)
     additive_rows = projective_additive_rows_q16(modulus) if q == 16 else []
@@ -257,10 +257,10 @@ def bounded_certificate(q: int) -> dict[str, object]:
         "field_order": q,
         "modulus": modulus,
         "normalized_slice": "(z2,z3,z4,z5,z6,z7)=(u0,u1,1,0,u2,u3)",
-        "borel_generators": [[1, 1, 0, 1], [invariant-block.primitive_element(q, modulus), 0, 0, 1]],
+        "borel_generators": [[1, 1, 0, 1], [lucas_action.primitive_element(q, modulus), 0, 0, 1]],
         "orbit_count": len(representatives),
         "map_rank_orbit_counts": {str(key): value for key, value in sorted(rank_counts.items())},
-        "carrier_action_source_sha256": hashlib.sha256(invariant-block_PATH.read_bytes()).hexdigest(),
+        "carrier_action_source_sha256": hashlib.sha256(LUCAS_ACTION_PATH.read_bytes()).hexdigest(),
         "records": records,
     }
     if q == 16:

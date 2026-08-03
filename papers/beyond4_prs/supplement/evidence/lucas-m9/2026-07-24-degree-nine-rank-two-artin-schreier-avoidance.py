@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Generate/check the compact rank-two rank-two certificate.
+"""Generate/check the compact degree-nine rank-two certificate.
 
-The structural theorem is proved in the adjacent report.  This program checks
+The structural theorem is proved in the accompanying manuscript.  This program checks
 the only new bounded field, F_64: the five rational A5 twists, their complete
 orbit mass, Frobenius fusion, and one split squarefree divisor per twist.
 """
@@ -18,12 +18,12 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 STEM = "2026-07-24-degree-nine-rank-two-artin-schreier-avoidance"
-invariant-block = HERE / "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py"
+LUCAS_ACTION = HERE / "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py"
 OUTPUT = HERE / f"{STEM}.json"
 
 
 def load_lucas_action():
-    spec = importlib.util.spec_from_file_location("lucas_action_frozen", invariant-block)
+    spec = importlib.util.spec_from_file_location("lucas_action_frozen", LUCAS_ACTION)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -126,9 +126,9 @@ def generate() -> dict[str, object]:
     assert frobenius(TWISTS[3]["representative"]) in orbit_sets["5B"]
     assert frobenius(TWISTS[4]["representative"]) in orbit_sets["5A"]
 
-    lucas_action_sha256 = hashlib.sha256(invariant-block.read_bytes()).hexdigest()
+    lucas_action_sha256 = hashlib.sha256(LUCAS_ACTION.read_bytes()).hexdigest()
     return {
-        "schema": "rank_two-rank-two-avoidance-v1",
+        "schema": "degree-nine-rank-two-avoidance-v1",
         "structural_bound": {
             "five_root_bad_degree": 102,
             "first_theorem_power_of_two": 128,
@@ -138,7 +138,7 @@ def generate() -> dict[str, object]:
             "hasse_lower_at_q64": 49,
         },
         "frozen_input": {
-            "path": invariant-block.name,
+            "path": LUCAS_ACTION.name,
             "sha256": lucas_action_sha256,
         },
         "bounded_field": {

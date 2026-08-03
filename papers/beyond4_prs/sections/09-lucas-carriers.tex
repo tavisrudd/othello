@@ -336,14 +336,32 @@ $\F_{2^m}$ with $m\geq4$.
 \end{proposition}
 
 \begin{proof}
-The Frobenius-graph and off-graph rank-one strata have reciprocal
-three-space subspace-polynomial witnesses.  The remaining rank-two stratum
-is the $A_5$-stabilized orbit of $e_3+e_6$, including its rational twists.
-Choose six roots with polynomial $h=\sum_{i=0}^6h_it^i$, put
+Identify \(U\) with \(2\times2\) matrices by
+\(e_2,e_3,e_6,e_7\leftrightarrow E_{00},E_{01},E_{10},E_{11}\).
+A rank-one matrix is \(u^{(4)}v^{\mathsf T}\).  The diagonal
+\([u]=[v]\) is the Frobenius-graph orbit and is handled by the subspace
+polynomial of a three-dimensional \(\F_2\)-space.  The off-graph orbit has
+representative \(e_3\), whose kernel equations are \(f_2=f_3=0\).  If
+\[
+ L_V(X)=X^8+A_4X^4+A_2X^2+A_1X,\qquad A_1\ne0,
+\]
+is the subspace polynomial of a three-space \(V\subset\F_{2^m}\), then
+\[
+ A_1^{-1}(t+A_4t^5+A_2t^7+A_1t^8)
+\]
+has the eight distinct roots
+\(\{0\}\cup\{v^{-1}:0\ne v\in V\}\) and satisfies those equations.
+Projective transport closes both rank-one strata.
+
+For rank two write the rational syndrome as
+\(z=(a,b,c,d)\), with \(ad+bc\ne0\).  This is the rational
+\(A_5\)-twist family of \(e_3+e_6\), but the construction below is defined
+over \(z\) itself and requires no chosen cocycle.  Choose six roots with
+polynomial $h=\sum_{i=0}^6h_it^i$, and put
 \[
 \begin{array}{ll}
-A_0=h_0+h_3,&A_1=h_1+h_4,\\
-A_2=h_2+h_5,&A_3=h_3+1,
+A_0=bh_0+ch_3+dh_4,&A_1=ah_0+bh_1+ch_4+dh_5,\\
+A_2=ah_1+bh_2+ch_5+d,&A_3=ah_2+bh_3+c.
 \end{array}
 \]
 and set
@@ -356,12 +374,38 @@ distinct roots precisely when
 \[
                          y^2+y=N\Delta/Q^2                 \tag{32}
 \]
-has a rational point away from the root-collision divisors.  The double-pole
-coefficient on $Q=0$ is nonsquare on every rational twist, so the cover is
-geometrically integral.  A one-moving-root slice has genus at most one;
-the bad-base and deletion estimates give a witness for $q\geq128$.
-The complete $q=64$ quotient certificate and the $q=16,32$ quotient
-certificates cover the remaining admissible fields.  Their checkers rebuild
+has a rational point away from the root-collision divisors.  These equations
+descend the cover uniformly across all twists.  Fix five roots and let \(x\)
+be the sixth.  Then \(Q\) has degree at most two in \(x\), \(N\Delta\) has
+degree at most four, and \(Q'\) is a nonzero polynomial in the five-root
+parameters; the good-base open below imposes \(Q'\ne0\).  At a root of \(Q\),
+Artin--Schreier reduction leaves a simple pole exactly when
+\[
+ R=((N\Delta)')^2+(Q')^2N\Delta\ne0.
+\]
+At the alternating representative \(e_3+e_6\), the four \(A_i\) are
+independent; on \(Q=0\) and \(A_3\ne0\) one has
+\[
+ A_0=A_1A_2/A_3,\qquad N\Delta=\Delta^2A_1/A_3.
+\]
+Thus the double-pole leading coefficient is \(A_1/A_3\), which is not a
+square in the residue function field.  Every geometric rank-two point is
+projectively conjugate to that representative, so the induced root-coordinate
+change is birational.
+Ordering the roots is finite separable; it cannot make the coefficient a
+square, because adjoining its square root in characteristic two would be
+purely inseparable.  Thus the same nonsquare test holds on every rational
+twist and says \(Q\nmid R\).  The cover is geometrically integral and has at
+most two reduced simple poles, so genus at most one.  A nonzero good-base
+selector has total degree at most \(102\) in the five ordered roots.  For a
+good base the forbidden
+\(x\)-values have degrees \(5,2,2,10,4\), totaling \(23\), and therefore
+delete at most \(2\cdot23+2=48\) points of the smooth double cover.  The
+zero bound gives a good base for \(q\ge128\), while Hasse--Weil then supplies
+a surviving point.
+The complete rank-two invariant-block quotient certificate at $q=64$ and the
+$q=16,32$ quotient certificates cover the remaining admissible fields.
+Their checkers rebuild
 the orbit partitions, twists, root polynomials, and both Hankel equations;
 the generator and separately written replay are the
 \texttt{rank-two-artin-schreier-avoidance} and
@@ -464,9 +508,10 @@ component of $Q=0$, differentiation gives
 \]
 The six column relations in (37) again force $z_4=z_5=0$.  Hence the
 Artin--Schreier cover is geometrically integral throughout the complement.
-The symbolic rank split, derivative identities, and all rational
-\(A_5\)-twists are reconstructed by the public rank-two replay just cited;
-the manuscript argument supplies the all-field geometric implication.
+The displayed rank split and derivative identities are manuscript
+calculations.  The public rank-two replay reconstructs the complete
+\(q=64\) rational-twist mass and its five witnesses; it is not a symbolic
+all-field proof.
 
 Fix five roots and let $x$ be the sixth.  Then each $A_j$ is affine in
 $x$, $Q$ is quadratic, and the reduced cover has at most two simple

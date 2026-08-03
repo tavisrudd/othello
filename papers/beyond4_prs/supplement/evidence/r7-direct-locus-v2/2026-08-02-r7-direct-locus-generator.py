@@ -202,7 +202,7 @@ def canonical_document(fields):
             flush=True,
         )
     return {
-        "schema": "r7_direct-r7-independent-completeness-v2",
+        "schema": "r7-direct-locus-independent-completeness-v2",
         "comparison_status": "not-compared",
         "field_domain": list(fields),
         "engine": ENGINE_PATH.name,

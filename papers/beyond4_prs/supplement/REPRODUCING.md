@@ -96,7 +96,7 @@ described as an independent derivation.
 | Certificate R8 | threshold, modular supports, and witness data | generator plus separately written replay |
 | Certificate R9 | residual-quadratic and characteristic-seven bridge data | generator, independent residual replay, and exact q=49 Rust record |
 | Certificate R10 | threshold and persistent orbit arithmetic | generator plus independent cyclic-orbit replay |
-| Certificate Lucas M9 | rank-two twists and complete q=16,32,64 carrier witnesses | exact certificates plus independent action/Hankel replay |
+| Certificate Lucas M9 | full carrier at q=16,32; invariant-block rank-two twists at q=64 | exact quotient certificates plus independent action/Hankel replay; the q=64 complement and all larger fields are mathematical |
 
 ## Exact replay commands
 

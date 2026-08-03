@@ -51,16 +51,14 @@ def decode_base_q(code: int, q: int, length: int):
 
 
 def check_intrinsic(document, certificate: Path):
-    assert document["schema"] == "r7_direct-r7-independent-completeness-v2"
+    assert document["schema"] == "r7-direct-locus-independent-completeness-v2"
     assert document["comparison_status"] == "not-compared"
     assert tuple(document["field_domain"]) == EXPECTED_FIELDS
     assert tuple(row["q"] for row in document["fields"]) == EXPECTED_FIELDS
 
-    engine = HERE.parent / "papers" / "beyond4_prs" / "supplement" / "evidence" / "r7" / document["engine"]
-    field_implementation = (
-        HERE.parent / "papers" / "beyond4_prs" / "supplement" /
-        document["field_implementation"]
-    )
+    supplement = HERE.parent.parent
+    engine = HERE.parent / "r7" / document["engine"]
+    field_implementation = supplement / document["field_implementation"]
     assert sha256_path(engine) == document["engine_sha256"]
     assert sha256_path(field_implementation) == document["field_implementation_sha256"]
 
@@ -205,10 +203,10 @@ def compare_public(document, certificate: Path, public_path: Path):
         })
         print(f"q={q}: Certificate R7 exact comparison PASS")
     return {
-        "schema": "r7_direct-r7-public-comparison-v1",
+        "schema": "r7-direct-locus-public-comparison-v1",
         "independent_certificate": certificate.name,
         "independent_certificate_sha256": sha256_path(certificate),
-        "public_record": str(public_path.relative_to(HERE.parent)),
+        "public_record": str(public_path.relative_to(HERE.parent.parent)),
         "public_record_sha256": sha256_path(public_path),
         "comparison_performed_after_freeze": True,
         "fields": comparisons,

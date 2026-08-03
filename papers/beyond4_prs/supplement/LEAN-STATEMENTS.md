@@ -97,9 +97,9 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `prop:e7-as` | no direct declaration | Manuscript Artin--Schreier quotient proof. |
 | `prop:e7-additive` | no direct declaration | Manuscript affine-frame monodromy proof. |
 | `thm:e7` | companion endpoint terminal, outside the aggregate | Manuscript constructive proof and exact counting formula. |
-| `prop:m9-invariant-block` | no direct declaration | Manuscript proof route through the rank-one constructions, rank-two Artin--Schreier argument, and exact \(q=16,32,64\) certificates. |
+| `prop:m9-invariant-block` | no direct declaration | Manuscript proof through the rank-one constructions and all-field rank-two Artin--Schreier argument; exact certificates close the invariant block at \(q=16,32,64\). |
 | `prop:final-pair` | no direct declaration | Manuscript expansion and Cramer's-rule proof. |
-| `thm:m9-shallow` | public Lucas M9 quotient certificates plus manuscript all-field proof | The finite certificates check \(q=16,32\); the genus-one argument proves \(q\ge64\). Lean makes no carrier-exhaustion claim. |
+| `thm:m9-shallow` | public Lucas M9 quotient certificates plus manuscript all-field proof | The finite certificates check the full carrier at \(q=16,32\) and only the invariant block at \(q=64\); the genus-one argument proves the complement for \(q\ge64\). Lean makes no carrier-exhaustion claim. |
 | `prop:r10-pointed-budgets` | no direct declaration | Manuscript degree calculation for all five retained-marker stages; the abstract finite-depth synthesis remains conditional in Lean. |
 | `prop:r10-escape` | 'PRSStableComponents' conditional interface | The fixed-depth package discharge and concrete R10 budgets are manuscript mathematics with Certificate R10 arithmetic replay. |
 | `prop:r10-char7-lift` | 'PRSPolarInduction.mem_modularContractionKernel_iff' | Contraction algebra is kernel checked; the R9 finite-root witness and marker-avoidance argument are printed mathematics. |

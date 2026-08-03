@@ -589,20 +589,20 @@ def canonical_bytes(data):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path(__file__).with_name("2026-07-23-prs-redundancy-nine.json"),
+    )
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     data = build_certificate()
     payload = canonical_bytes(data)
     if args.check:
-        if args.output is None:
-            raise SystemExit("--check requires --output")
         if args.output.read_bytes() != payload:
             raise SystemExit("tracked certificate differs from regeneration")
-    elif args.output:
-        args.output.write_bytes(payload)
     else:
-        print(payload.decode(), end="")
+        args.output.write_bytes(payload)
     print(
         json.dumps(
             {

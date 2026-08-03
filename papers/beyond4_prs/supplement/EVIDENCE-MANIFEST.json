@@ -1,12 +1,12 @@
 {
   "entries": [
     {
-      "bytes": 17629,
+      "bytes": 17645,
       "path": "evidence/lucas-m9/2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py",
       "public_label": "Certificate Lucas M9",
       "replay_class": "reconstruct",
       "role": "carrier-action-dependency",
-      "sha256": "951f6289fe87ebbeeb249d8c5caa8537c0bf9c8e1eff5e24d19bc3e3664ccd27"
+      "sha256": "19a0977984e1bff9bb91151a9a070f379c0df6b27865e0acf4ffa3040f3ce44a"
     },
     {
       "bytes": 5020,
@@ -17,20 +17,20 @@
       "sha256": "bb29b11004d71e5b733eeef1dccec65a3084ad0e973ca3dc771bf67783d63e1a"
     },
     {
-      "bytes": 3787,
+      "bytes": 3790,
       "path": "evidence/lucas-m9/2026-07-24-degree-nine-rank-two-artin-schreier-avoidance.json",
       "public_label": "Certificate Lucas M9",
       "replay_class": "compare",
       "role": "rank-two-certificate",
-      "sha256": "d60ac7aa08706ba0c5fcd025cb2d2aab6b5b1895f51a751b9ab009112831ad47"
+      "sha256": "d6b6aa1d6d5c2e702d4e1d9b79cc05ff27204837b854a87dd4d5a6a036f4dc47"
     },
     {
-      "bytes": 5663,
+      "bytes": 5665,
       "path": "evidence/lucas-m9/2026-07-24-degree-nine-rank-two-artin-schreier-avoidance.py",
       "public_label": "Certificate Lucas M9",
       "replay_class": "rederive",
       "role": "rank-two-generator",
-      "sha256": "e699656f55dc3b87a53e9b4f1cb4d697859d04586f1358eeafc8559c47039516"
+      "sha256": "e0f3791c531e9b8dc340dfda5f7cb34aaccbcff31d44e4c9c705adfbf33f60ea"
     },
     {
       "bytes": 9463,
@@ -38,7 +38,7 @@
       "public_label": "Certificate Lucas M9",
       "replay_class": "compare",
       "role": "q16-certificate",
-      "sha256": "9a5fb28c07437c74daa0d0a52bb5414918fae8577aa6ec9d62c66cc6fcb1e723"
+      "sha256": "dca46bbe94cb46d78afc8a8ced2adc37bd9220f981bae9484f43bf54bad16b34"
     },
     {
       "bytes": 39588,
@@ -46,7 +46,7 @@
       "public_label": "Certificate Lucas M9",
       "replay_class": "compare",
       "role": "q32-certificate",
-      "sha256": "09394b8036b6cce1f651c994545a800cb83cb7843c67a35cbb4b5447cc6dada6"
+      "sha256": "3b8786e96d28e0e501c516f6b77668adc81483b3b102c1afcf6cf3644cc16e99"
     },
     {
       "bytes": 8620,
@@ -57,12 +57,12 @@
       "sha256": "10679247697902d2a29986134778b3d0ae95d38baa55657aa66c94fd18be64df"
     },
     {
-      "bytes": 11481,
+      "bytes": 11400,
       "path": "evidence/lucas-m9/2026-08-02-higher-lucas-modular-carriers.py",
       "public_label": "Certificate Lucas M9",
       "replay_class": "rederive",
       "role": "carrier-generator",
-      "sha256": "52bd4bf8c5d49e57cb8ba660d988a0d983760e8392f3ae7cd61029bf992d29a0"
+      "sha256": "2ec96895f1e42c1c251c8a51b68564c93c6c58f59223b64ab535e6a4c5d1ac47"
     },
     {
       "bytes": 2231,
@@ -265,36 +265,36 @@
       "sha256": "60b36978d866b733620ac577da3a7a2ae7dc895324fa09912c9f2fca5b636ed9"
     },
     {
-      "bytes": 23145,
+      "bytes": 23148,
       "path": "evidence/r7-direct-locus-v2/2026-08-02-r7-direct-locus-certificate.json",
       "public_label": "Certificate R7 direct locus",
       "replay_class": "compare",
       "role": "certificate",
-      "sha256": "809b99a7129fbf42c0b7cf8fcbcc62c33b188488ee0d22baf096f2f388becfd7"
+      "sha256": "110e713e693c530e6446447e9610ead7fb129afb1407c27fe25339bfc6b0e08b"
     },
     {
-      "bytes": 10256,
+      "bytes": 10183,
       "path": "evidence/r7-direct-locus-v2/2026-08-02-r7-direct-locus-checker.py",
       "public_label": "Certificate R7 direct locus",
       "replay_class": "reconstruct",
       "role": "checker",
-      "sha256": "2dea247d5ae167a72e173dd66d5e6e7f76a33e689e5c3ceaf09740bab8de3b24"
+      "sha256": "17b3b39a128cfedf0508b663991ba6589b607d2e2f241f1a16c5446c0ebd939d"
     },
     {
-      "bytes": 8388,
+      "bytes": 8391,
       "path": "evidence/r7-direct-locus-v2/2026-08-02-r7-direct-locus-generator.py",
       "public_label": "Certificate R7 direct locus",
       "replay_class": "rederive",
       "role": "generator",
-      "sha256": "d17a183d5f5ece1ede5aff8f5aac93214afd186c963b0ab55c1de9ef76472970"
+      "sha256": "96bce5a0c4bc7497e462723a373fe25500ada726935851b01d80d4554160bae8"
     },
     {
-      "bytes": 3514,
+      "bytes": 3487,
       "path": "evidence/r7-direct-locus-v2/2026-08-02-r7-direct-locus-public-comparison.json",
       "public_label": "Certificate R7 direct locus",
       "replay_class": "compare",
       "role": "comparison",
-      "sha256": "4e2973b73b8ce8d5e5096700e038eec24f6adc70acbb4e74c0f631b4be5055d9"
+      "sha256": "3daae0bb43b0f5149d1aac57efe8840551550058cc964bbda778759209ec9898"
     },
     {
       "bytes": 7977,
@@ -310,7 +310,7 @@
       "public_label": "Certificate R8",
       "replay_class": "compare",
       "role": "certificate",
-      "sha256": "95a8cd06805eeace0b6c51df1e0dd0c674f0b16c2ac7bd688de4cea6d3b4de8c"
+      "sha256": "f9c566300404f5de8da0ca11dd609abe29cd4976114f560eb23b6a6ddc4bb209"
     },
     {
       "bytes": 15000,
@@ -337,12 +337,12 @@
       "sha256": "63b0cf89b07788a9f3d2dd4c11568ab7dc97e31e0ef6559c001bfebcee088b33"
     },
     {
-      "bytes": 11037,
+      "bytes": 10990,
       "path": "evidence/r9/2026-07-23-prs-redundancy-nine-replay.py",
       "public_label": "Certificate R9",
       "replay_class": "reconstruct",
       "role": "replay",
-      "sha256": "d5afc9892125d72d59281556b88a5aadccbf1f452b5877dab7036c07805b4019"
+      "sha256": "bf4c94dbdc5aa822560882b1e466e8e247a15e9c5c4335270dabfe5a3efd66d4"
     },
     {
       "bytes": 9512,
@@ -353,12 +353,12 @@
       "sha256": "6c561af6d2db90d42cb84ac2b86bf82fb8300d371ab3d29b38d358ddf6e622b8"
     },
     {
-      "bytes": 19002,
+      "bytes": 18954,
       "path": "evidence/r9/2026-07-23-prs-redundancy-nine.py",
       "public_label": "Certificate R9",
       "replay_class": "rederive",
       "role": "generator",
-      "sha256": "c614e102f36174dfb8d123a2923b71bdf1a1414c3db2efcd8900acd72a26afe9"
+      "sha256": "76851870f49d5c42a1a55f35f73d3d672a6b3f4b1d822ab85597f8dd3005e46b"
     },
     {
       "bytes": 3515,
@@ -457,20 +457,20 @@
       "sha256": "78d1e6150abe7e72292cf70bca6347780da4de22d8a9ac21245387c59c6dba12"
     },
     {
-      "bytes": 18609,
+      "bytes": 18721,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "938fff7b549bb82a220058c5b49144900158f41b70ab16d2bad4a2a2c55b64a4"
+      "sha256": "a565954653c85e0f6370e723bfcd7c6a8979b9a64b1ac48db5fc98ac886515c1"
     },
     {
-      "bytes": 9016,
+      "bytes": 9092,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "daa8f56ff71049de3be53245b524c7d1933815305b2c4f205c1f791ed63478f8"
+      "sha256": "200c794324041403e710b87f4a9709a9668306fa8eb2b03334b6bf6a43f22916"
     },
     {
       "bytes": 12027,

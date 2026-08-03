@@ -30,7 +30,7 @@ is used to infer a covering radius or an unrestricted geometric statement.
 | R8 | persistent-only deep holes for q >= 43 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | three-marker package and Certificate R8 |
 | R9 | persistent-only deep holes for q >= 53 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | residual-quadratic slice, characteristic-seven bridge, Certificate R9 |
 | WWH | projective-subline Lucas endpoint iff a divides e | PRIOR-ART / IMPORTED-1 | Wang--Wu--Hu Proposition 11; no novelty claim for this criterion |
-| M9 | first fresh higher Lucas carrier is entirely shallow for m >= 4 | MANUSCRIPT / CERTIFIED | all-field final-pair proof; exact q=16,32,64 certificates |
+| M9 | first fresh higher Lucas carrier is entirely shallow for m >= 4 | MANUSCRIPT / CERTIFIED | all-field final-pair proof; exact full-carrier q=16,32 certificates and q=64 invariant-block certificate |
 | R10 | persistent-only deep holes for every prime power q >= 59 | DERIVED / MANUSCRIPT / CERTIFIED | odd fields use RC; binary fields use M9; separate radius route |
 | R5-Q | balanced q=8 AME and quantum-MDS consequence | DERIVED / IMPORTED-1 | exact R5 count plus cited coding/quantum dictionaries; no complete LU/LC orbit claim |
 

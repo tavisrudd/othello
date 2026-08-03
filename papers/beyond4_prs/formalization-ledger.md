@@ -50,7 +50,7 @@ containing sorry.
 | R5--R7 | conditional terminals in the paper-facing aggregate | concrete proofs and certificates retain their separate trust routes |
 | R8 | existing companion conditional terminal | not silently imported into the 17-file aggregate; manuscript proof and Certificate R8 are authoritative |
 | R9 | existing residual algebra and companion conditional terminal | slice geometry, characteristic-seven bridge, and Certificate R9 remain external |
-| first higher Lucas carrier | no carrier-exhaustion Lean theorem | manuscript final-pair proof and q=16,32,64 certificates |
+| first higher Lucas carrier | no carrier-exhaustion Lean theorem | manuscript final-pair proof; full-carrier certificates at q=16,32 and invariant-block certificate at q=64 |
 | R10 | conditional composition uses shared recursive/radius interfaces | the empty-carrier arithmetic is supplied by the manuscript and certificates |
 
 The row-by-row reconciliation for all 75 numbered manuscript labels is

@@ -181,9 +181,9 @@
   },
   "frozen_input": {
     "path": "2026-07-23-degree-nine-lucas-carrier-pgl2-strata.py",
-    "sha256": "2b70e26d1aa49f350c25ba8eaec600f55bd5c62acd82aa092dc5bdad5e8caab6"
+    "sha256": "19a0977984e1bff9bb91151a9a070f379c0df6b27865e0acf4ffa3040f3ce44a"
   },
-  "schema": "rank_two-rank-two-avoidance-v1",
+  "schema": "degree-nine-rank-two-avoidance-v1",
   "structural_bound": {
     "deleted_curve_points_upper_bound": 48,
     "deleted_x_values_upper_bound": 23,

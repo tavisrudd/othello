@@ -48,16 +48,46 @@ equation is
  \Phi_z(t,s)=z_0+z_1(t+s)+z_2(t^2+ts+s^2)+z_3ts
               +z_4ts(t+s)+z_5t^2s^2.
 \]
+For the Hankel matrix
+\[
+ H_c=\begin{pmatrix}c_0&c_1&c_2&c_3\\c_1&c_2&c_3&c_4\end{pmatrix},
+\]
+the signed maximal minors give the map explicitly:
+\[
+ z(c)=(c_2c_4-c_3^2,\,-c_1c_4+c_2c_3,\,c_1c_3-c_2^2,
+ c_0c_4-c_1c_3,\,-c_0c_3+c_1c_2,\,c_0c_2-c_1^2).
+\]
 After the diagonal and collision factors already charged as deletion
 divisors are saturated away, the terminal bad locus is the pullback, along
 the Hankel Plücker map \(c\mapsto z(c)\), of the factorization locus of
 \(\Phi_z\).  The involution \((t,s)\leftrightarrow(s,t)\) leaves three
 possibilities.  Symmetric factors give the residual component below;
 exchanged factors give \(D=0\); and an anti-invariant factor is proportional
-to \(s-t\).  In the last case its Plücker product is \(-3\mu^2\), so it
+to \(s-t\).  In the last case the only nonzero Plücker coordinates are
+\(z_2=-\mu\) and \(z_3=3\mu\), and hence
+\[
+ z_0z_5-z_1z_4+z_2z_3=(-\mu)(3\mu)=-3\mu^2.
+\]
+Thus it
 survives only in characteristic three and is then the diagonal collision
 already removed.  Thus the two displayed primes are the only possible
 noncollision components before small-characteristic specialization.
+
+The exact saturated bridge can also be read without the elimination file.
+Let \(J\) be the pullback under \(z(c)\) of
+\[
+\begin{split}
+&(3z_4^2-9z_2z_5-z_3z_5,\ z_3z_4-3z_1z_5,\
+z_3^2-9z_0z_5,\\
+&\hspace{13mm}z_2z_3-z_1z_4+z_0z_5,\ z_1z_3-3z_0z_4,\
+3z_1^2-9z_0z_2-z_0z_3).
+\end{split}
+\]
+If \(V\) denotes the seven-generator residual ideal printed below, exact
+reduction gives \(J\subseteq V\), \(3D\,V\subseteq J\), and
+\((J:D^\infty)=V\) over \(\mathbb Q\).  The factor \(3\) is necessary over
+\(\mathbb Z\), which is precisely why the characteristic-three fibre is
+checked separately.
 
 Outside characteristics two and three, elimination of the ordered residual
 roots gives the prime kernel of (26); one convenient generating set is
@@ -180,14 +210,31 @@ V(c_0,c_4)\ (p=2)&\text{binary-plane subspace}&
    \cM^{\max}_{r,2}
 \end{array}
 \]
-The first row is the consecutive Fano identity.  The second uses that the
-projected Veronese contains no projective line.  In the third, every
-positive-dimensional linear space is a ruling through \(e_2\), and the
-overlap of consecutive Hankel rows forces rank one.  In the fourth,
-successive overlaps cut the binary plane to the binary line, then the central
-point, then the empty projective space; formula~(29) identifies precisely
-these spaces as Lucas lifts.  The complementary ordered-Hessian ruling is
-rank one.  On a nucleus, (29) and
+Here is the calculation behind the four rows.  Substitute
+\(c_i=xd_i+yd_{i+1}\).  For \(V(D)\), the coefficients in \(x,y\) are
+exactly the \(3\times3\) minors of
+\[
+ \begin{pmatrix}d_0&d_1&d_2&d_3\\d_1&d_2&d_3&d_4\\
+ d_2&d_3&d_4&d_5\end{pmatrix},
+\]
+the consecutive Fano identity.  For the generic residual prime their unique
+minimal prime is the ideal of the \(2\times2\) minors of
+\(\bigl(\begin{smallmatrix}d_0&\cdots&d_4\\d_1&\cdots&d_5\end{smallmatrix}\bigr)\),
+so the upper syndrome has rank one; geometrically this is also the fact that
+the projected Veronese contains no line.  The same coefficient ideal in
+characteristic three is again this rank-one ideal, verifying directly that
+every positive-dimensional ruling of the wild cone through \(e_2\) lifts
+into \(\cP_r\).  In characteristic two it has exactly the two minimal primes
+\[
+ (d_0,d_1,d_4,d_5)
+ \quad\text{and}\quad
+ (d_3d_4+d_2d_5,d_1d_4+d_0d_5,d_3^2+d_1d_5,
+ d_2d_3+d_0d_5,d_2^2+d_0d_4,d_1d_2+d_0d_3).
+\]
+The second lies in the persistent \(3\times3\)-minor ideal; the first is the
+binary-plane descendant.  Successive overlaps cut it to the binary line,
+then the central point, then the empty projective space, and formula~(29)
+identifies precisely these spaces as Lucas lifts.  On a nucleus, (29) and
 Proposition~\ref{prop:maximal-lucas-union} then place every surviving lift in
 the maximal modular carrier.
 

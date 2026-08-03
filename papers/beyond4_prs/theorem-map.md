@@ -14,7 +14,7 @@ boundaries remain separate.
 | Uniform consequence | Conditional split-free containment and high-characteristic classification | q >= 6r-15+floor(2 sqrt(6r-17)) | requires explicit stagewise lower packages; exact deep holes when these hold and char(F_q) > r-1 | recursive carrier plus stated package hypothesis and Seroussi--Roth--Dür radius route |
 | R8 | Persistent-only deep holes | q >= 43 | no bounded-field classification | printed three-marker proof plus Certificate R8 |
 | R9 | Persistent-only deep holes | q >= 53 | characteristic-seven carrier handled by slice theorem and finite bridge | printed residual-quadratic proof, appendix, and Certificate R9 |
-| Higher Lucas | Empty first fresh carrier | every F_(2^m), m >= 4 | projective-subline endpoint attributed to Wang--Wu--Hu; full carrier uses the final-pair criterion | printed all-field proof plus q=16,32,64 certificates and independent replay |
+| Higher Lucas | Empty first fresh carrier | every F_(2^m), m >= 4 | projective-subline endpoint attributed to Wang--Wu--Hu; full carrier uses the final-pair criterion | printed all-field proof; full-carrier q=16,32 certificates and invariant-block q=64 certificate with independent replay |
 | R10 | Persistent-only deep holes | every prime power q >= 59 | odd fields from the recursive theorem; binary fields use the empty-carrier theorem | printed synthesis plus R10 and Lucas evidence bundles |
 | Lean boundary | Algebra, arithmetic, density, selection, and conditional synthesis | exact declarations in formalization-ledger.md and supplement/LEAN-STATEMENTS.md | concrete carrier primes, group actions, cited theorems, and external certificate semantics remain explicit | 17-file paper-facing aggregate plus separately identified companion terminals |
 

@@ -15,7 +15,7 @@ supplement/EVIDENCE-MANIFEST.json and checked by supplement/verify.py.
 | Certificate R8 | thresholds, nuclei, witnesses, and budgets | separately written replay | no ambient syndrome census |
 | Certificate R9 | residual-quadratic arithmetic, six-section slice data, and q=49 bridge | independent residual replay; Rust q=49 certificate | no unrestricted carrier theorem |
 | Certificate R10 | threshold, persistent orbit arithmetic, and carrier point-count synthesis | separate prime-power/orbit replay | does not prove first-carrier shallowness |
-| Certificate Lucas M9 | rank-two twists and q=16,32,64 carrier witnesses | independent finite-field/action/replay code | finite certificates do not prove the q>=64 genus-one theorem |
+| Certificate Lucas M9 | full q=16,32 carrier and q=64 invariant-block rank-two twists | independent finite-field/action/replay code | finite certificates do not prove the q=64 complement or the all-field genus-one theorem |
 
 The balanced q=8 quantum consequence introduces no computation beyond the R5
 row 1116=360+756. Its coding and quantum implications are cited or formalized

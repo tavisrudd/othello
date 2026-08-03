@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the compact exact certificate for invariant-block.
+"""Generate the compact exact certificate for the degree-nine invariant block.
 
 The computation uses only integer arithmetic, polynomial arithmetic over F_2,
 and deterministic finite-field enumeration.  It certifies the modular

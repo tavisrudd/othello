@@ -61,9 +61,9 @@
       2,
       2
     ],
-    "finite_depth_closed_integer_bound": 44,
     "deletion_per_marker": 6,
     "exact_normalization_inequality_first_integer": 42,
+    "finite_depth_closed_integer_bound": 44,
     "first_prime_power_at_least_closed_bound": 47,
     "first_prime_power_at_least_exact_inequality": 43,
     "geometric_monodromy": "S3 on ordered distinct root pairs",

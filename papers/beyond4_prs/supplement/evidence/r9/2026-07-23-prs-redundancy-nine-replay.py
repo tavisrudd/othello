@@ -12,10 +12,7 @@ DATA = json.loads(
     (HERE / "2026-07-23-prs-redundancy-nine.json").read_text()
 )
 PAPER_DATA = (
-    HERE.parent
-    / "papers"
-    / "beyond4_prs"
-    / "supplement"
+    HERE.parent.parent
     / "R9-SLICE-DATA.md"
 )
 
