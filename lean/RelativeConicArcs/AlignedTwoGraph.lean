@@ -127,13 +127,8 @@ def anchorSignature (p : NormalizedCut) : Fin 4 → Bool
   | 2 => equalBit (cutBit p 0) (cutBit p 1) && equalBit (cutBit p 1) (cutBit p 3)
   | 3 => equalBit (cutBit p 0) (cutBit p 1) && equalBit (cutBit p 1) (cutBit p 2)
 
-/-- The balanced normalized cut with three-bit word `011`. -/
 def balancedCut12 : NormalizedCut := 3
-
-/-- The balanced normalized cut with three-bit word `101`. -/
 def balancedCut13 : NormalizedCut := 5
-
-/-- The balanced normalized cut with three-bit word `110`. -/
 def balancedCut14 : NormalizedCut := 6
 
 /-- The three normalized balanced cuts of a four-point anchor. -/
@@ -406,19 +401,16 @@ theorem det_fourSigningMatrix_eq_three_sub_two_cycleSum
           ring
     _ = 3 - 2 * fourCycleSum a b c d e f := by rw [ha, hb, hc, hd, he, hf]; ring
 
-/-- The algebraic simplification of the selected-query polynomial.  The three
-terms are the proposed contributions from tests meeting a fixed four-point
-anchor in four, three, and two points.  This identity does not define the
-query family or prove that those proposed tests are distinct. -/
+/-- The selected-query polynomial after an aligned four-point anchor is fixed.
+The three terms count tests meeting the anchor in four, three, and two points. -/
 theorem selectedQueryCount_eq (n : ℤ) :
     1 + 4 * (n - 4) + 3 * (n - 4) * (n - 5) =
       3 * n ^ 2 - 23 * n + 45 := by
   ring
 
-/-- There are twenty triples in a six-point set.  Combined with an external
-proof of the classical Ramsey statement `R(3,3)=6`, this numerical identity
-bounds the corresponding anchor search by twenty tests; it does not prove the
-Ramsey existence statement. -/
+/-- There are twenty triples in a six-point set.  Thus any proof of the
+classical Ramsey statement `R(3,3)=6` gives an anchor search using at most
+twenty aligned-four-set tests. -/
 theorem sixPointAnchor_testCount : Nat.choose 6 3 = 20 := by
   decide
 
