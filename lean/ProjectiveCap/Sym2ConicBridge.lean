@@ -69,6 +69,9 @@ def veronese (v : Line K) : Plane K :=
 def conicForm (w : Plane K) : K :=
   w 1 ^ 2 - w 0 * w 2
 
+/-- The Veronese image of any line vector satisfies the conic equation: with
+`(X, Y, Z) = (u², uv, v²)` one has `Y² - XZ = 0`. This is a polynomial identity, so
+it holds in every characteristic. -/
 @[simp] theorem conicForm_veronese (v : Line K) : conicForm (veronese v) = 0 := by
   simp only [conicForm, veronese, Matrix.cons_val_zero, Matrix.cons_val_one,
     Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons]
@@ -155,6 +158,8 @@ noncomputable def sym2Equiv {M : Matrix (Fin 2) (Fin 2) K} (hM : IsUnit M.det) :
     Plane K ≃ₗ[K] Plane K :=
   (sym2Mat M).toLinearEquiv' (sym2Invertible hM)
 
+/-- The plane automorphism attached to an invertible `2 × 2` matrix `M` acts by
+matrix-vector multiplication by the symmetric-square matrix of `M`. -/
 theorem sym2Equiv_apply {M : Matrix (Fin 2) (Fin 2) K} (hM : IsUnit M.det)
     (w : Plane K) : sym2Equiv hM w = sym2Mat M *ᵥ w := by
   have h2 := LinearMap.congr_fun
@@ -167,6 +172,8 @@ noncomputable def lineEquiv {M : Matrix (Fin 2) (Fin 2) K} (hM : IsUnit M.det) :
     Line K ≃ₗ[K] Line K :=
   M.toLinearEquiv' (Matrix.invertibleOfIsUnitDet _ hM)
 
+/-- The line automorphism attached to an invertible `2 × 2` matrix `M` acts by
+matrix-vector multiplication by `M`. -/
 theorem lineEquiv_apply {M : Matrix (Fin 2) (Fin 2) K} (hM : IsUnit M.det)
     (v : Line K) : lineEquiv hM v = M *ᵥ v := by
   have h2 := LinearMap.congr_fun
@@ -186,6 +193,9 @@ noncomputable def sym2Collineation {M : Matrix (Fin 2) (Fin 2) K} (hM : IsUnit M
 def OnConic (p : Projective.Point K (Plane K)) : Prop :=
   conicForm p.rep = 0
 
+/-- The conic form `Y² - XZ` is homogeneous of degree two: rescaling a plane vector
+by `c` multiplies its value by `c²`. This is why vanishing of the form depends only
+on the projective point and not on the chosen representative. -/
 theorem conicForm_smul (c : K) (w : Plane K) :
     conicForm (c • w) = c ^ 2 * conicForm w := by
   simp only [conicForm, Pi.smul_apply, smul_eq_mul]
@@ -224,6 +234,8 @@ theorem veronesePoint_mk (v : Line K) (hv : v ≠ 0) :
   refine ⟨c ^ 2, ?_⟩
   rw [← hc, Units.smul_def, Units.smul_def, veronese_smul, Units.val_pow_eq_pow_val]
 
+/-- Every Veronese point lies on the conic: the image `[u² : uv : v²]` of a point of
+the projective line satisfies `Y² - XZ = 0`. -/
 theorem veronesePoint_onConic (p : Projective.Point K (Line K)) :
     OnConic (veronesePoint p) := by
   induction p using Projectivization.ind with
@@ -287,6 +299,8 @@ noncomputable def veronesePointEmb :
     Projective.Point K (Line K) ↪ Projective.Point K (Plane K) :=
   ⟨veronesePoint, veronesePoint_injective⟩
 
+/-- The embedding of the projective line into the projective plane agrees with the
+Veronese point map on every point. -/
 @[simp] theorem veronesePointEmb_apply (p : Projective.Point K (Line K)) :
     veronesePointEmb p = veronesePoint p := rfl
 
@@ -354,10 +368,9 @@ theorem sym2Collineation_image_veronesePoint {M : Matrix (Fin 2) (Fin 2) K}
 
 omit [Fintype (Projective.Point K (Plane K))]
   [DecidableEq (Projective.Point K (Line K))] in
-/-- The on-conic cap of a parameter set has exactly one point per parameter: the
-Veronese embedding keeps the points distinct, so a size-`k` parameter set yields a
-`k`-point cap (e.g. an on-conic S4 state's six conic parameters give six distinct
-points). -/
+/-- The Veronese image of a finite set of conic parameters has exactly one point per
+parameter: since the Veronese point map is injective, a parameter set of size `k`
+yields a set of `k` distinct points on the conic. -/
 theorem card_image_veronesePoint (σ : Finset (Projective.Point K (Line K))) :
     (σ.image veronesePoint).card = σ.card :=
   Finset.card_image_of_injective σ veronesePoint_injective

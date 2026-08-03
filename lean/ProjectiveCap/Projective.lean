@@ -44,11 +44,17 @@ def Cap (S : Finset (Point K V)) : Prop :=
 
 variable {K V}
 
+/-- The cap property is inherited by subsets: if no three pairwise distinct points
+of the finite set `T` of projective points are collinear, the same holds for every
+`S ⊆ T`. -/
 theorem cap_mono {S T : Finset (Point K V)} (hST : S ⊆ T) (hT : Cap K V T) :
     Cap K V S := by
   intro a b c ha hb hc hab hac hbc
   exact hT (hST ha) (hST hb) (hST hc) hab hac hbc
 
+/-- A finite set of at most two projective points is a cap, vacuously: three
+pairwise distinct members of `S` would span a three-element subset of `S`, forcing
+`2 < S.card`. -/
 theorem cap_of_card_le_two {S : Finset (Point K V)} [DecidableEq (Point K V)]
     (hcard : S.card ≤ 2) : Cap K V S := by
   intro a b c ha hb hc hab hac hbc hcol
@@ -64,14 +70,20 @@ theorem cap_of_card_le_two {S : Finset (Point K V)} [DecidableEq (Point K V)]
   have hle := Finset.card_le_card hsub
   omega
 
+/-- The empty set of projective points is a cap. -/
 @[simp] theorem cap_empty [DecidableEq (Point K V)] :
     Cap K V (∅ : Finset (Point K V)) :=
   cap_of_card_le_two (K := K) (V := V) (by simp)
 
+/-- A one-point set of projective points is a cap: it contains no three pairwise
+distinct points. -/
 @[simp] theorem cap_singleton [DecidableEq (Point K V)] (a : Point K V) :
     Cap K V ({a} : Finset (Point K V)) :=
   cap_of_card_le_two (K := K) (V := V) (by simp)
 
+/-- A set consisting of two projective points `a` and `b`, not assumed distinct, is
+a cap: it has at most two elements, so it contains no three pairwise distinct
+points at all. -/
 theorem cap_pair [DecidableEq (Point K V)] (a b : Point K V) :
     Cap K V ({a, b} : Finset (Point K V)) :=
   cap_of_card_le_two (K := K) (V := V) (by

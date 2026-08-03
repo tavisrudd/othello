@@ -47,11 +47,16 @@ variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
 
 /-! ## Points versus representative vectors -/
 
+/-- Choosing representatives commutes with forming a triple: composing the
+representative map with the triple of points `a`, `b`, `c` gives the triple of their
+chosen representative vectors. -/
 theorem comp_rep_triple (a b c : Point K V) :
     Projectivization.rep ∘ ![a, b, c] = ![a.rep, b.rep, c.rep] := by
   ext i
   fin_cases i <;> rfl
 
+/-- A triple of projective points is independent exactly when the three chosen
+representative vectors are linearly independent over `K`. -/
 theorem independent_triple_iff {a b c : Point K V} :
     Independent ![a, b, c] ↔ LinearIndependent K ![a.rep, b.rep, c.rep] := by
   rw [independent_iff, comp_rep_triple]
@@ -73,6 +78,8 @@ theorem independent_triple_of_li {x y z : V} (hx : x ≠ 0) (hy : y ≠ 0) (hz :
 
 /-! ## Pair and permutation sublemmas for linear independence -/
 
+/-- The first and second members of a linearly independent triple of vectors are
+themselves linearly independent. -/
 theorem li_sub01 {x y z : V} (h : LinearIndependent K ![x, y, z]) :
     LinearIndependent K ![x, y] := by
   have h2 := h.comp ![0, 1] (by decide)
@@ -81,6 +88,8 @@ theorem li_sub01 {x y z : V} (h : LinearIndependent K ![x, y, z]) :
     fin_cases i <;> rfl
   rwa [hcomp] at h2
 
+/-- The first and third members of a linearly independent triple of vectors are
+themselves linearly independent. -/
 theorem li_sub02 {x y z : V} (h : LinearIndependent K ![x, y, z]) :
     LinearIndependent K ![x, z] := by
   have h2 := h.comp ![0, 2] (by decide)
@@ -89,6 +98,8 @@ theorem li_sub02 {x y z : V} (h : LinearIndependent K ![x, y, z]) :
     fin_cases i <;> rfl
   rwa [hcomp] at h2
 
+/-- The second and third members of a linearly independent triple of vectors are
+themselves linearly independent. -/
 theorem li_sub12 {x y z : V} (h : LinearIndependent K ![x, y, z]) :
     LinearIndependent K ![y, z] := by
   have h2 := h.comp ![1, 2] (by decide)
@@ -97,6 +108,8 @@ theorem li_sub12 {x y z : V} (h : LinearIndependent K ![x, y, z]) :
     fin_cases i <;> rfl
   rwa [hcomp] at h2
 
+/-- Linear independence of a triple of vectors is invariant under cyclic rotation:
+from `x, y, z` independent, the triple `z, x, y` is independent. -/
 theorem li_rotate {x y z : V} (h : LinearIndependent K ![x, y, z]) :
     LinearIndependent K ![z, x, y] := by
   have h2 := h.comp ![2, 0, 1] (by decide)
@@ -127,6 +140,9 @@ theorem mk_ne_of_li_pair {v : V} (hv : v ≠ 0) {p : Point K V}
 
 /-! ## Collinearity versus linear dependence -/
 
+/-- A collinear triple of projective points is dependent: if `{a, b, c}` is
+contained in a projective subspace of rank at most two, the chosen representatives
+cannot be linearly independent, since their span would have rank three. -/
 theorem dependent_of_collinear {a b c : Point K V}
     (h : Collinear K V a b c) : Dependent ![a, b, c] := by
   rw [dependent_iff_not_independent]
@@ -161,6 +177,10 @@ theorem mem_projectivization_of_rep_mem {s : Submodule K V} {p : Point K V}
     Submodule.span_singleton_le_iff_mem]
   exact h
 
+/-- A dependent triple of projective points is collinear. When two of the points
+coincide the set has at most two elements and lies on a line for that reason; when
+all three are distinct, the representative of the third lies in the plane spanned by
+the first two, and the projectivization of that plane is a line through all three. -/
 theorem collinear_of_dependent {a b c : Point K V}
     (h : Dependent ![a, b, c]) : Collinear K V a b c := by
   classical
@@ -218,14 +238,23 @@ theorem collinear_of_dependent {a b c : Point K V}
     · exact Submodule.mem_span_of_mem (by simp)
     · exact hcmem
 
+/-- The collinearity dictionary: three projective points, not assumed distinct, lie
+on a projective line exactly when the triple is dependent, that is, when their
+chosen representative vectors are linearly dependent. -/
 theorem collinear_iff_dependent {a b c : Point K V} :
     Collinear K V a b c ↔ Dependent ![a, b, c] :=
   ⟨dependent_of_collinear, collinear_of_dependent⟩
 
+/-- Contrapositive form of the collinearity dictionary: a triple of projective
+points fails to be collinear exactly when it is independent, that is, exactly when
+the chosen representative vectors are linearly independent. -/
 theorem not_collinear_iff_independent {a b c : Point K V} :
     ¬ Collinear K V a b c ↔ Independent ![a, b, c] := by
   rw [collinear_iff_dependent, ← independent_iff_not_dependent]
 
+/-- If `a` and `b` are distinct projective points and `a`, `b`, `c` are collinear,
+then the chosen representative of `c` lies in the plane spanned by the chosen
+representatives of `a` and `b`. -/
 theorem rep_mem_span_pair_of_collinear {a b c : Point K V} (hab : a ≠ b)
     (hcol : Collinear K V a b c) :
     c.rep ∈ Submodule.span K {a.rep, b.rep} := by
@@ -244,6 +273,9 @@ theorem rep_mem_span_pair_of_collinear {a b c : Point K V} (hab : a ≠ b)
   refine ⟨hpair, ?_⟩
   rwa [Matrix.range_cons_cons_empty]
 
+/-- Collinearity with a fixed distinct pair is transitive in the following sense: if
+`a ≠ b` and each of `c` and `d` is collinear with `a` and `b`, then `a`, `c`, `d`
+are collinear. All four points lie on the projective line spanned by `a` and `b`. -/
 theorem collinear_of_collinear_pair {a b c d : Point K V} (hab : a ≠ b)
     (hc : Collinear K V a b c) (hd : Collinear K V a b d) :
     Collinear K V a c d := by
@@ -289,23 +321,34 @@ def mapLinearEquiv (g : V ≃ₗ[K] W) : Point K V ≃ Point K W where
     rw [Projectivization.map_mk, Projectivization.map_mk]
     simp
 
+/-- The point bijection induced by a linear equivalence `g : V ≃ₗ[K] W` acts on the
+point represented by a nonzero vector `v` by applying `g` to that representative. -/
 theorem mapLinearEquiv_mk (g : V ≃ₗ[K] W) {v : V} (hv : v ≠ 0) :
     mapLinearEquiv g (Projectivization.mk K v hv) =
       Projectivization.mk K (g v) (by simp [hv]) := by
   simp [mapLinearEquiv, Projectivization.map_mk]
 
+/-- The inverse of the point bijection induced by a linear equivalence
+`g : V ≃ₗ[K] W` is the point bijection induced by the inverse equivalence. -/
 @[simp] theorem mapLinearEquiv_symm_eq (g : V ≃ₗ[K] W) :
     (mapLinearEquiv g).symm = mapLinearEquiv g.symm :=
   rfl
 
+/-- Transporting a projective point of `V` along `g : V ≃ₗ[K] W` and then back along
+`g.symm` returns the original point. -/
 @[simp] theorem mapLinearEquiv_symm_apply (g : V ≃ₗ[K] W) (p : Point K V) :
     mapLinearEquiv g.symm (mapLinearEquiv g p) = p := by
   exact (mapLinearEquiv g).symm_apply_apply p
 
+/-- Transporting a projective point of `W` back along `g.symm` and then forward
+along `g : V ≃ₗ[K] W` returns the original point. -/
 @[simp] theorem mapLinearEquiv_apply_symm (g : V ≃ₗ[K] W) (p : Point K W) :
     mapLinearEquiv g (mapLinearEquiv g.symm p) = p := by
   exact (mapLinearEquiv g).apply_symm_apply p
 
+/-- The point bijection induced by a linear equivalence `g : V ≃ₗ[K] W` carries an
+independent triple of projective points of `V` to an independent triple in the
+projective space of `W`. -/
 theorem independent_triple_mapLinearEquiv (g : V ≃ₗ[K] W) {a b c : Point K V}
     (h : Independent ![a, b, c]) :
     Independent ![mapLinearEquiv g a, mapLinearEquiv g b, mapLinearEquiv g c] := by
@@ -329,6 +372,9 @@ theorem independent_triple_mapLinearEquiv (g : V ≃ₗ[K] W) {a b c : Point K V
   rw [hconv a, hconv b, hconv c]
   exact hpts
 
+/-- The point bijection induced by a linear equivalence `g : V ≃ₗ[K] W` preserves
+and reflects collinearity: the images of `a`, `b`, `c` lie on a projective line of
+`W` exactly when `a`, `b`, `c` lie on a projective line of `V`. -/
 theorem collinear_mapLinearEquiv (g : V ≃ₗ[K] W) {a b c : Point K V} :
     Collinear K W (mapLinearEquiv g a) (mapLinearEquiv g b) (mapLinearEquiv g c) ↔
       Collinear K V a b c := by
@@ -361,6 +407,10 @@ theorem cap_image_mapLinearEquiv [DecidableEq (Point K V)] [DecidableEq (Point K
         simpa using hcol
       exact (collinear_mapLinearEquiv g).mp hcol')
 
+/-- Transport along a linear equivalence `g : V ≃ₗ[K] W` preserves and reflects the
+cap property: the image of a finite set `S` of projective points of `V` under the
+induced point bijection is a cap in the projective space of `W` exactly when `S` is
+a cap. -/
 theorem cap_map_mapLinearEquiv [DecidableEq (Point K V)] [DecidableEq (Point K W)]
     (g : V ≃ₗ[K] W) (S : Finset (Point K V)) :
     Cap K W (S.map (mapLinearEquiv g).toEmbedding) ↔ Cap K V S := by
@@ -392,21 +442,29 @@ def mapEquiv (g : V ≃ₗ[K] V) : Point K V ≃ Point K V where
     rw [Projectivization.map_mk, Projectivization.map_mk]
     simp
 
+/-- The permutation induced by a linear automorphism `g` of `V` acts on the point
+represented by a nonzero vector `v` by applying `g` to that representative. -/
 theorem mapEquiv_mk (g : V ≃ₗ[K] V) {v : V} (hv : v ≠ 0) :
     mapEquiv g (Projectivization.mk K v hv) =
       Projectivization.mk K (g v) (by simp [hv]) := by
   simp [mapEquiv, Projectivization.map_mk]
 
+/-- The inverse of the point permutation induced by a linear automorphism `g` of
+`V` is the point permutation induced by the inverse automorphism. -/
 @[simp] theorem mapEquiv_symm_eq (g : V ≃ₗ[K] V) :
     (mapEquiv g).symm = mapEquiv g.symm :=
   rfl
 
+/-- Applying the permutation induced by `g.symm` after the one induced by `g`
+returns every projective point of `V` to itself. -/
 @[simp] theorem mapEquiv_symm_mapEquiv (g : V ≃ₗ[K] V) (p : Point K V) :
     mapEquiv g.symm (mapEquiv g p) = p := by
   induction p using Projectivization.ind with | h v hv =>
   rw [mapEquiv_mk, mapEquiv_mk]
   simp
 
+/-- Applying the permutation induced by `g` after the one induced by `g.symm`
+returns every projective point of `V` to itself. -/
 @[simp] theorem mapEquiv_mapEquiv_symm (g : V ≃ₗ[K] V) (p : Point K V) :
     mapEquiv g (mapEquiv g.symm p) = p := by
   induction p using Projectivization.ind with | h v hv =>
@@ -428,6 +486,8 @@ theorem mapEquiv_eq_of_rep_eq (g : V ≃ₗ[K] V) {p q : Point K V}
   conv_rhs => rw [← Projectivization.mk_rep q]
   exact mapEquiv_mk_eq_mk p.rep_nonzero q.rep_nonzero h
 
+/-- The point permutation induced by a linear automorphism of `V` carries an
+independent triple of projective points to an independent triple. -/
 theorem independent_triple_map (g : V ≃ₗ[K] V) {a b c : Point K V}
     (h : Independent ![a, b, c]) :
     Independent ![mapEquiv g a, mapEquiv g b, mapEquiv g c] := by
@@ -451,6 +511,9 @@ theorem independent_triple_map (g : V ≃ₗ[K] V) {a b c : Point K V}
   rw [hconv' a, hconv' b, hconv' c]
   exact hpts
 
+/-- The point permutation induced by a linear automorphism `g` of `V` preserves and
+reflects collinearity: the images of `a`, `b`, `c` lie on a projective line exactly
+when `a`, `b`, `c` do. -/
 theorem collinear_mapEquiv (g : V ≃ₗ[K] V) {a b c : Point K V} :
     Collinear K V (mapEquiv g a) (mapEquiv g b) (mapEquiv g c) ↔
       Collinear K V a b c := by
@@ -461,8 +524,9 @@ theorem collinear_mapEquiv (g : V ≃ₗ[K] V) {a b c : Point K V} :
     simpa using h2
   · exact independent_triple_map g
 
-/-- Cap positions are preserved by induced point permutations: the validity
-transport hypothesis of `CapTransitiveStatement`. -/
+/-- Transport along the point permutation induced by a linear automorphism `g` of
+`V` preserves and reflects the cap property: the image of a finite set `S` of
+projective points is a cap exactly when `S` is a cap. -/
 theorem cap_map_mapEquiv [DecidableEq (Point K V)] (g : V ≃ₗ[K] V)
     (S : Finset (Point K V)) :
     Cap K V (S.map (mapEquiv g).toEmbedding) ↔ Cap K V S := by
@@ -490,6 +554,10 @@ theorem cap_map_mapEquiv [DecidableEq (Point K V)] (g : V ≃ₗ[K] V)
 
 /-! ## Caps from triple independence -/
 
+/-- A finite set `S` of projective points is a cap as soon as no three-element
+subset of `S` lies on a projective line. This converts the pointwise formulation of
+the cap property, quantified over pairwise distinct triples, into a statement about
+three-element subsets. -/
 theorem cap_of_forall_triple [DecidableEq (Point K V)] {S : Finset (Point K V)}
     (h : ∀ T : Finset (Point K V), T ⊆ S -> T.card = 3 ->
       ¬ IsCollinear (T : Set (Point K V))) :
@@ -597,6 +665,9 @@ theorem cap_quad_of_independent [DecidableEq (Point K V)] {p1 p2 p3 p4 : Point K
 
 /-! ## Independence with the coordinate-sum vector -/
 
+/-- Replacing the third member of a linearly independent triple by the total sum
+keeps the triple linearly independent: from `v1, v2, v3` independent, the vectors
+`v1`, `v2`, `v1 + v2 + v3` are independent. -/
 theorem li_with_sum12 {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3]) :
     LinearIndependent K ![v1, v2, v1 + v2 + v3] := by
   rw [Fintype.linearIndependent_iff] at h ⊢
@@ -623,6 +694,9 @@ theorem li_with_sum12 {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3]) :
   · exact hz1
   · exact e2
 
+/-- Replacing the second member of a linearly independent triple by the total sum
+keeps the triple linearly independent: from `v1, v2, v3` independent, the vectors
+`v1`, `v3`, `v1 + v2 + v3` are independent. -/
 theorem li_with_sum13 {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3]) :
     LinearIndependent K ![v1, v3, v1 + v2 + v3] := by
   rw [Fintype.linearIndependent_iff] at h ⊢
@@ -649,6 +723,9 @@ theorem li_with_sum13 {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3]) :
   · exact hz1
   · exact e1
 
+/-- Replacing the first member of a linearly independent triple by the total sum
+keeps the triple linearly independent: from `v1, v2, v3` independent, the vectors
+`v2`, `v3`, `v1 + v2 + v3` are independent. -/
 theorem li_with_sum23 {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3]) :
     LinearIndependent K ![v2, v3, v1 + v2 + v3] := by
   rw [Fintype.linearIndependent_iff] at h ⊢
@@ -675,6 +752,8 @@ theorem li_with_sum23 {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3]) :
   · exact hz1
   · exact e0
 
+/-- The total sum of a linearly independent triple of vectors is nonzero, since
+`v1 + v2 + v3 = 0` would be a nontrivial vanishing linear combination. -/
 theorem sum_ne_zero_of_li {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3]) :
     v1 + v2 + v3 ≠ 0 := by
   intro hzero
@@ -688,6 +767,9 @@ theorem sum_ne_zero_of_li {v1 v2 v3 : V} (h : LinearIndependent K ![v1, v2, v3])
 
 /-! ## Basis extension in rank three -/
 
+/-- Basis extension in rank three: if `V` has dimension three over `K` and
+`f : Fin n → V` is linearly independent with `n < 3`, then some `w : V` lies outside
+the span of `f`, and adjoining it in front keeps the family linearly independent. -/
 theorem exists_cons_li (hrank : finrank K V = 3) {n : ℕ} (hn : n < 3)
     (f : Fin n → V) (hf : LinearIndependent K f) :
     ∃ w : V, LinearIndependent K (Matrix.vecCons w f) := by
