@@ -25,6 +25,8 @@ ordering and detail.
 
 ### `ame-lu`
 
+- **C858 `[ame-lu]` [IN PROGRESS; PAPER II LEAN/MATH DELTA AUDIT]** — audit every Paper II mathematical and Lean addition since 2026-08-01 against the manuscript, formalization, trust-boundary, referee-facing prose/name, gate, axiom, and public-artifact standards; perform read-only guarded validation where ownership permits; issue a locatored verdict; and, if any gap remains, reserve a separate remediation C-item with an exhaustive checklist → `notes/2026-08-02-c858-mds-css-lean-math-delta-audit.md`.
+
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every

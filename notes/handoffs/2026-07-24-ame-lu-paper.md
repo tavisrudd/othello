@@ -10,6 +10,14 @@ Discovery companion:
 
 ## Current status
 
+**C858 in progress (2026-08-02): Paper II Lean/math delta audit.**  Review all
+mathematical and Lean additions since 2026-08-01 against the paper's theorem
+ownership and trust boundary plus the complete referee-facing Lean standards.
+Use only guarded read-only validation allowed by the Lean ownership rules.  If
+any gap remains, reserve a separate remediation C-item and give it an
+exhaustive checklist.  Report to
+`2026-08-02-c858-mds-css-lean-math-delta-audit.md`.
+
 **C851 closed (2026-08-02): Paper II DOI and PDF links are synchronized.**
 The authoritative and standalone READMEs now carry the Zenodo DOI badge
 `10.5281/zenodo.21766798` and a relative link to the tracked PDF.  The
