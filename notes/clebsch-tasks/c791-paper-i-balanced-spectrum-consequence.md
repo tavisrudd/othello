@@ -16,8 +16,11 @@ sentence and ``forthcoming'' wording were removed.  No theorem, proof, trust
 classification, or Lean source changed.  The regenerated statement identity,
 trust manifest, PDF, and release certificate pass the authoritative and
 standalone twenty-six-check gates.  The authoritative release snapshot is
-`a70f9b72f2ac7b7d1425e9171a5b7f16de839f00`; the standalone forward commit is
-`3307f22` and its 58-file export manifest verifies against that snapshot.
+`3c5c72dd8c259cca10cf1a024caf4766277a1e85`; the standalone forward commit is
+`835cb97` and its 58-file export manifest verifies against that snapshot.  A
+repository-wide manuscript audit also synchronized the current Paper-III and
+Paper-IV titles in Paper I, its computational companion, and the Golden
+operator paper.
 
 ## Objective
 
