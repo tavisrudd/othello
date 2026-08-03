@@ -333,6 +333,36 @@ reason = "private analysis workspace"
         with self.assertRaisesRegex(exporter.Refused, "already exists"):
             exporter.materialize_repository(self.fx.commit, "demo-paper", first)
 
+    def test_tracked_release_output_has_explicit_immutable_policy(self) -> None:
+        (self.fx.root / "papers/demo/main.pdf").write_bytes(b"content-addressed release\n")
+        mapping = (self.fx.root / "papers/repositories.toml").read_text()
+        mapping = mapping.replace(
+            'name = "demo-paper"\n',
+            'name = "demo-paper"\ninclude_release_pdfs = true\n'
+            'release_output_policy = "immutable-source"\n',
+        )
+        (self.fx.root / "papers/repositories.toml").write_text(mapping)
+        run(self.fx.root, "git", "add", "papers/demo/main.pdf", "papers/repositories.toml")
+        run(self.fx.root, "git", "commit", "-qm", "release output policy")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        plan = exporter.build_plan(commit, "demo-paper")["repositories"][0]
+        self.assertEqual(plan["release_output_policy"], "immutable-source")
+        candidate = self.fx.root / "release-candidate"
+        manifest = exporter.materialize_repository(commit, "demo-paper", candidate)
+        self.assertEqual(manifest["release_output_policy"], "immutable-source")
+        self.assertEqual((candidate / "main.pdf").read_bytes(), b"content-addressed release\n")
+
+    def test_release_output_policy_rejects_inconsistent_declaration(self) -> None:
+        mapping, papers = self.mapping()
+        row = mapping["repository"][0]
+        row["release_output_policy"] = "immutable-source"
+        with self.assertRaisesRegex(exporter.Refused, "excludes release PDFs"):
+            exporter.plan_repository(self.fx.commit, row, papers)
+        row["include_release_pdfs"] = True
+        row["release_output_policy"] = "rebuild"
+        with self.assertRaisesRegex(exporter.Refused, "unsupported release_output_policy"):
+            exporter.plan_repository(self.fx.commit, row, papers)
+
     def test_materialization_refuses_private_reference(self) -> None:
         (self.fx.root / "papers/demo/main.tex").write_text("../../notes/private.md\n")
         run(self.fx.root, "git", "add", "papers/demo/main.tex")

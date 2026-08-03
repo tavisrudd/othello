@@ -282,6 +282,7 @@ disposition = "active"
 [[repository]]
 name = "golden-quantum-statistics"
 include_release_pdfs = true
+release_output_policy = "immutable-source"
 source = "papers/golden-quantum-statistics"
 paper_ids = ["golden_quantum_statistics"]
 disposition = "active"

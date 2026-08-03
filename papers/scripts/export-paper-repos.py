@@ -338,6 +338,31 @@ def excluded_release_outputs(
     return {str(PurePosixPath(papers[paper_id]["main"]).with_suffix(".pdf")) for paper_id in row["paper_ids"]}
 
 
+def release_output_policy(row: dict[str, Any]) -> str:
+    """Return the disposition of tracked release PDFs in an export.
+
+    ``immutable-source`` means that the exporter copies the content-addressed
+    bytes from the selected source commit.  Disposable builds may overwrite
+    their own copies, but those rebuilt bytes are never a forward-export
+    input; forward deltas are computed from a fresh materialization.
+    """
+    include = row.get("include_release_pdfs", False)
+    policy = row.get("release_output_policy")
+    if not include:
+        if policy is not None:
+            raise Refused(
+                f"repository {row['name']} declares release_output_policy but excludes release PDFs"
+            )
+        return "excluded"
+    if policy is None:
+        return "legacy-unspecified"
+    if policy != "immutable-source":
+        raise Refused(
+            f"repository {row['name']} has unsupported release_output_policy {policy!r}"
+        )
+    return policy
+
+
 def rewrite_rules(row: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     result: dict[str, list[dict[str, Any]]] = {}
     for rule in row.get("rewrite", []):
@@ -530,6 +555,7 @@ def plan_repository(
         "excluded_paths": len(path_exclusions) + len(glob_exclusions),
         "excluded_globs": len(glob_rules),
         "excluded_release_outputs": sorted(release_outputs & set(by_relative)),
+        "release_output_policy": release_output_policy(row),
         "reference_findings": references,
         "local_path": f"~/src/math-papers/{row['name']}",
         "github": f"tavisrudd/{row['name']}",
@@ -674,6 +700,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         ],
         "excluded_path_count": len(path_exclusions) + len(glob_exclusions),
         "excluded_release_outputs": sorted(release_outputs),
+        "release_output_policy": release_output_policy(row),
         "files": sorted(manifest_files, key=lambda item: item["path"]),
     }
     manifest_bytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()

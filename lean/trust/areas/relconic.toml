@@ -249,6 +249,16 @@ terminals = [
 coverage_rule = "closure"
 
 [[gate]]
+module = "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+terminals = [
+  "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries",
+  "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
+  "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve",
+  "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula",
+]
+coverage_rule = "closure"
+
+[[gate]]
 module = "RelativeConicArcs.Gates.GoldenCubicNodes"
 terminals = [
   "RelativeConicArcs.GoldenCubicNodesBase.cubic_eq_conference_triangleCubic",
@@ -687,6 +697,26 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.CorankOneAdjugate.adjugate_eq_smul_outerProduct_of_generated_kernels"
 gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
