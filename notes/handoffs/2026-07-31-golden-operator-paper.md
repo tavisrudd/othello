@@ -492,10 +492,13 @@ clean bibliography layout brings the paper to 16 pages.  C829 remains active
 until the user explicitly closes it.  A subsequent theorem/section-flow,
 paragraph-job, notation, and full-PDF pass found no further defect and made no
 gratuitous edit; theorem, proposition, and corollary statement hashes are
-unchanged from the pre-repair manuscript.  A subsequent high-resolution
-page-boundary pass removed the one-word introduction continuation on page 3
-and the “At a” fragment at the foot of page 13; the full gate and direct
-inspection of pages 2--3 and 13--14 pass at 16 pages.
+unchanged across that checkpoint.  A subsequent high-resolution page-boundary
+pass removed the one-word introduction continuation on page 3 and the “At a”
+fragment at the foot of page 13; the full gate and direct inspection of pages
+2--3 and 13--14 pass at 16 pages.  The latest adjacent-reader pass centralizes
+the symmetric-function notation and removes only the now-redundant local
+definition of p_j from Theorem 5.1; its mathematical content is unchanged,
+and pages 4 and 8 pass direct inspection without increasing the page count.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 

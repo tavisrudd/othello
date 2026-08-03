@@ -89,7 +89,7 @@ conference cross-Grams, continuous and Hermitian exchange, squared rigidity,
 calibrated readout, and the photonic design limit each have distinct jobs.
 No duplicate proof spine, notation collision, unsupported scope expansion, or
 page-layout defect was found.  The theorem, proposition, and corollary blocks
-have byte-identical SHA-256 hashes before and after the exposition edit:
+had byte-identical SHA-256 hashes before and after the first exposition edit:
 
 - theorem blocks:
   23575c9343e8495b19967f3613138d00daf1ec1939332739f19ca806a4eea22f;
@@ -116,3 +116,15 @@ immutable-input make check remains green at 16 pages.  Direct inspection of
 pages 2--3 and 13--14 confirms that every affected page now begins and ends
 with a complete rhetorical unit.  No theorem statement or mathematical claim
 changed.  C829 remains active.
+
+## Notation checkpoint — 2026-08-02
+
+The adjacent-reader pass now declares the power-sum, elementary, complete, and
+Schur symmetric-function notation together at its first use.  The redundant
+local definition of the power sums was then removed from Theorem 5.1.  This
+changes that theorem block's bytes but not its hypotheses, inequalities,
+equality set, or meaning; propositions and corollaries are untouched.  An
+initial verbose notation sentence pushed the bibliography to page 17 and was
+rejected.  The compressed convention passes the full immutable-input gate and
+direct inspection of pages 4 and 8 at the established 16-page layout.  C829
+remains active.
