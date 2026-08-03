@@ -2438,8 +2438,17 @@
       "last": 832,
       "purpose": "Paper IV C831 structural theorem Lean formalization and paper-owned certificate gates",
       "sequence": 271
+    },
+    {
+      "count": 1,
+      "first": 833,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 833,
+      "purpose": "q>4 global AME rounding via algebraic relations among minimum-support sectors",
+      "sequence": 272
     }
   ],
-  "next_id": 833,
+  "next_id": 834,
   "schema": "codex-task-id-allocations-v1"
 }
