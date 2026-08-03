@@ -2447,8 +2447,17 @@
       "last": 833,
       "purpose": "q>4 global AME rounding via algebraic relations among minimum-support sectors",
       "sequence": 272
+    },
+    {
+      "count": 1,
+      "first": 834,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 834,
+      "purpose": "Paper IV full Lean release closure",
+      "sequence": 273
     }
   ],
-  "next_id": 834,
+  "next_id": 835,
   "schema": "codex-task-id-allocations-v1"
 }
