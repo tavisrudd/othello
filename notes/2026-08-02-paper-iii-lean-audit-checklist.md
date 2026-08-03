@@ -65,8 +65,9 @@ committed.
   small label normalization from polynomial matrix algebra.
 - [x] Prove translation invariance implies every pair moment through the new
   bridge, then reuse the existing pair-moment/matrix-square API.
-- [ ] Make every public docstring agree exactly with its hypotheses, including
-  the theorem whose scalar-square conclusion does not require symmetry.
+- [x] Make every public docstring agree exactly with its hypotheses, including
+  the theorem whose scalar-square conclusion does not require symmetry; that
+  docstring now states that symmetry and a vanishing diagonal are unused.
 
 ## Four-shadow normalized classification
 
@@ -88,8 +89,9 @@ committed.
   scope, and the external rank-14 weighted-Jacobian boundary.  The header now
   also states that compiled evaluation introduces a declaration-local axiom
   rather than a named global one.
-- [ ] Make the focused manifest disclose every native terminal, including the
-  orientation dichotomy.
+- [x] Make the focused manifest disclose every native terminal, including the
+  orientation dichotomy.  The manifest names the one compiled-evaluation
+  theorem and the four declarations that inherit its declaration-local axiom.
 
 ## Referee-facing prose
 

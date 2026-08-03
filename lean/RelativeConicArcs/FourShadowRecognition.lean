@@ -287,8 +287,10 @@ theorem pairTriangleSum_eq_zero_of_cubicsProportional
   apply pairTriangleSum_eq_zero_of_triangleCubic_translate C hsymm hdiag _ i j hij
   exact triangleCubic_translate_of_proportional C mu hmu hprop
 
-/-- Pair balance and nonzero edges make the square of a symmetric matrix
-diagonal. -/
+/-- For a symmetric matrix with nonzero off-diagonal entries whose pair
+moments all vanish, each off-diagonal entry of the square is zero.  The pair
+moment through a pair equals the joining edge times that entry of the square,
+so the domain hypothesis removes the edge factor. -/
 theorem mul_self_apply_eq_zero_of_pairBalance
     (C : Matrix (Fin 6) (Fin 6) R)
     (hsymm : C.transpose = C)
@@ -311,9 +313,13 @@ private theorem matrix_eq_diagonal_of_offDiagonal_zero
     simp
   · simp [hij, hoff i j hij]
 
-/-- A matrix with nonzero off-diagonal entries and diagonal square has scalar
-square.  The equality of diagonal entries follows from
-`C * C² = C² * C`. -/
+/-- An order-six matrix over an integral domain whose off-diagonal entries are
+all nonzero and whose square is diagonal has scalar square.  Symmetry and a
+vanishing diagonal are not needed: the hypotheses are exactly that every
+off-diagonal entry of `C` is nonzero and every off-diagonal entry of `C * C`
+vanishes.  Associativity gives `C * (C * C) = (C * C) * C`, and cancelling the
+nonzero entry `C 0 i` in the corresponding entry of that identity equates the
+diagonal entries of `C * C`. -/
 theorem exists_scalar_mul_self_of_offDiagonal_zero
     (C : Matrix (Fin 6) (Fin 6) R)
     (hedge : ∀ i j, i ≠ j → C i j ≠ 0)

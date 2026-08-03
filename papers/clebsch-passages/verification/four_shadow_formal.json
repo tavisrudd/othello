@@ -45,11 +45,11 @@
   "gate_module": "RelativeConicArcs.Gates.FourShadowRecognition",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-four-shadow-formal-v1",
-  "source_closure_sha256": "15d93e4e814e0e6bef0d31b71f813ffde06322fe5abf20fe705ae78ca6102e58",
+  "source_closure_sha256": "d7c0d0edae60a2368db3335b481a93936e554893e13be0ceabdcaaff26cfaf13",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2",
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
-    "RelativeConicArcs/FourShadowRecognition.lean": "a0a92a26ccb1b70430c805f1f172527689907bf2e37177735cf7f1203baa32ab",
+    "RelativeConicArcs/FourShadowRecognition.lean": "77fc5459958eb377e1c3110ee0f36c593cc083a86112d4510fc0002a6d75dae9",
     "RelativeConicArcs/Gates/FourShadowRecognition.lean": "ef1825b3d36b1f90b85349dad0ced74b6606693ab47a77b21d4e4260f6c93a27",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",
@@ -57,7 +57,7 @@
   },
   "trust_boundary": {
     "excluded": "The rank-14 weighted Jacobian calculation and any global classification of remote weighted solutions are not formalized.",
-    "native": "Native evaluation exhausts the 1024 normalized ten-edge Boolean codes only for the two six-element Hodge-orientation fibres.",
+    "native": "One theorem, the orientation classifier over the 1024 normalized ten-edge Boolean signings, is discharged by compiled evaluation of a decidable statement and carries a declaration-local axiom. The four declarations below it \u2014 cubicsProportional_four_of_sixTests, cubicsProportional_neg_four_of_sixTests, exists_nonzero_cubicsProportional_iff_conferenceSquare and exists_nonzero_cubicsProportional_smul_iff_conferenceSquare \u2014 inherit that axiom; every other audited declaration depends only on propext, Classical.choice and Quot.sound.",
     "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, and each surviving polynomial identity are kernel-checked."
   },
   "verifier_sha256": "9e914111e4bfc2ed38ed0baad4f0b427cb04a932ed656a8d6fe11a90921ad16d"
