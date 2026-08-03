@@ -358,3 +358,35 @@ Stretch item, gated on 1–5. `notes/2026-08-03-c855-dye-orbit-uniqueness.md` wa
 (`notes/2026-08-03-c855-q13-scheme-checks.py`, not yet written) verifying the six values, the
 valencies, the three mod-2 identity families, `A_0^3 = A_0`, `rank_2 M = 42`, and
 `p^{10}_{3,9}`. Every derivation above is pen-and-paper only.
+
+---
+
+## Computational confirmation (2026-08-03)
+
+Script: `notes/2026-08-03-c855-q13-scheme-checks.py` (pure Python, no dependencies, ~2 s).
+Replay: `python3 notes/2026-08-03-c855-q13-scheme-checks.py` from the repository root; exit
+status `0` iff every check passes. All **56 checks PASS**; nothing above needs correction.
+
+| check                                                     | result                                            |
+|-----------------------------------------------------------|---------------------------------------------------|
+| counts, (G1)/(G2), passant `7+7`, secant `6` internal      | PASS                                               |
+| chart `(★)`, `ρ = 4/(1+u)`, `u ∈ {2,3,8,9,11}`             | PASS (all off-polar pairs, every internal `P`)     |
+| six values `{0,1,3,9,10,12}`, `ρ = 4` only on diagonal     | PASS                                               |
+| valencies `(7,14,14,14,14,14)`                             | PASS                                               |
+| secant/passant split `{0,1,3}` vs `{9,10,12}`              | PASS                                               |
+| `A_0 = M` under pole relabelling                           | PASS                                               |
+| `A_0^2 = I+A_9+A_10+A_12`; `A_0A_r = 0`; `A_0^3 = A_0`     | PASS                                               |
+| general law `A_r^2 = A_{(r-2)^2}` (incl. `A_1^2=A_1`)      | PASS                                               |
+| `rank_2 M = 42`, `dim K = 36`, `rank_2 A_{9,10,12} = 36`   | PASS                                               |
+| `K_1 = 0`, so `K ≅ F_8^12`                                 | PASS                                               |
+| tangent-pole lemma and `Γ_r(P)` = 14 internal points       | PASS                                               |
+| `p^{10}_{3,9} = 2`; `2184` ordered `(10,3,9)` triples      | PASS — target 4's residual datum is now confirmed  |
+| rank 7, stabiliser orbits `1,7,14×5`, `|D_28| = 28`        | PASS                                               |
+| min weight of `K` is `12`, exactly `364` words             | PASS (exhaustive: two disjoint information sets)   |
+| `364 = 4 × 91`, stabilisers one `S_4` + three `D_24`       | PASS                                               |
+| concurrences `(c_0,c_1,c_3)=(8,6,6)`, `(c_9,c_10,c_12)=(12,7,9)`, mass `24024` | PASS            |
+| per-orbit Gram mod 2 = `(A_9,A_9,A_12,A_10)`               | PASS — closes target 3's named gap numerically     |
+
+Framing note: the weight-12 layer lives in `K = ker M` on the 78 internal coordinates, on the
+**dual** side. The span of the 78 passant lines inside `F_2^{183}` has full dimension 78 and
+contains none of the 364 words; each word is orthogonal to every passant line.
