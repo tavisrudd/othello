@@ -1,5 +1,6 @@
 import RelativeConicArcs.ExampleChecks.Q11
 import CapGame.GraphMirror
+import RelativeConicArcs.CapGameHoleLocalization
 
 /-!
 # The residual game of the `q = 11` relative-conic witness

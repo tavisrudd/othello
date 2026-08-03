@@ -1,5 +1,6 @@
 import RelativeConicArcs.ExampleChecks.Q9
 import CapGame.BuildGame
+import RelativeConicArcs.CapGameHoleLocalization
 
 /-!
 # The terminal `q = 9` relative-conic witness

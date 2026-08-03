@@ -1,4 +1,5 @@
 import RelativeConicArcs.Q11SemanticLeaders
+import RelativeConicArcs.CapGameHoleLocalization
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
 /-!
