@@ -132,7 +132,38 @@ are local hypothesis names (`c01`, `c12`, `c23`, `c34`), not identifiers.
 
 ## 6. Validation
 
-<!-- filled in after the gate replay -->
+All four gates were built through the guarded unattended queue and the
+trace-only aggregate gate is clean:
+
+```text
+lean/scripts/lean-build-queue.py run \
+  RelativeConicArcs.Gates.ClebschPaperIIStructural \
+  RelativeConicArcs.Gates.ClebschArithmeticGluing \
+  RelativeConicArcs.Gates.ClebschHilbertSymmetry \
+  RelativeConicArcs.Gates.ClebschHyperplaneSquare \
+  --profile single --threads 1 --cores 20-23
+```
+
+The complete authoritative aggregate then passed from the repository root:
+
+```text
+python3 papers/clebsch-factorization/verification/verify_release.py
+```
+
+It reported `metadata: 29 statements, 14 evidence bundles: CHECK OK`, every
+certificate check and independent replay, the four gates through their guarded
+entry points, `clebsch Lean-gate axiom allowlist: CHECK OK` at fifty-five
+terminals with only `propext`, `Classical.choice`, and `Quot.sound`,
+`clebsch factorization warnings: CHECK OK`, and
+`clebsch factorization release: CHECK OK`.
+
+Regenerating the statement identity after the manuscript edit changed only its
+derived full-source hash; no theorem-like statement moved. The evidence
+fingerprint and the Lean source checksum manifest were refreshed to match.
+
+One process note: an earlier replay of this gate set failed its trace check
+because the gate source was edited while that build was in flight. The rerun
+above was made against frozen sources.
 
 ## Mystery ledger
 

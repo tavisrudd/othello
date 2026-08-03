@@ -2,8 +2,13 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; blocks any claim that the Paper II formal artifact is
-referee-ready and blocks C577 repackaging
+**Status:** complete 2026-08-02 for every project-owned surface; the four gates
+and the full authoritative release aggregate are green and returned to C577.
+One boundary remains outside this task's edit scope: the eight shared
+projective-cap modules in the same transitive closure still carry reverse
+references and undocumented public declarations, allocated to C860. Until C860
+closes, "referee-ready" holds for the project-owned closure only.
+Full report: `../2026-08-02-c856-paper-ii-lean-standards-closure.md`.
 
 ## Objective
 

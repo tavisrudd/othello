@@ -119,7 +119,7 @@ block that theorem.
 | surface | root | current state | owning task |
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; existing gates are green, but C855 is required to formalize every paper/companion mathematical assertion in Lean and close the full referee-artifact standards debt before the next release is called theorem-complete | [C855](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) |
-| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; C856 must close the fixed-line inheritance, public-docstring, transitive-closure, and verification-expectation audit gaps before C577 repackaging | [C856](../clebsch-tasks/c856-paper-ii-lean-standards-closure.md) |
+| Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; C856 has closed the fixed-line inheritance, public-docstring, and verification-expectation gaps on every project-owned file and returned a green tree to C577; the shared projective-cap modules in the same import closure are still undocumented and carry reverse references, allocated to C860 | [C577](../clebsch-tasks/c577-factorization-paper.md), with [C860](../clebsch-tasks/) pending in the `cap` lane |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815 is reopened for proof-shape, classification-scope, and replay repairs before C823 | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md) |
 | Paper IV — *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete, but author now requires full Lean for public release; C834 must complete the proof-producing formal closure, then C857 must close the exhaustive Lean standards checklist before C761 packaging or publication | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
@@ -355,8 +355,8 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C832 — Paper IV structural theorem Lean](../clebsch-tasks/c832-paper-iv-structural-lean.md) | complete 2026-08-02 at the declared partial-formal boundary; shared mechanisms, concrete q13 gates, aggregate terminals, and axiom audit green | none; frozen formal surface returned to C831/C761 |
 | [C834 — Paper IV full Lean release closure](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md) | active; author requires theorem-complete Lean before public release | eliminate native/trusted/human boundaries from the full manuscript theorem, produce one clean aggregate and axiom audit, then unblock C761 |
 | [C857 — Paper IV Lean standards closure](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md) | queued after C834; exhaustive audit checklist allocated before C761 release | consume C834's formal API, close every trust, statement, transcript, allowlist, documentation, citation, provenance, and clean-checkout gap, then run the rejecting release verifier |
-| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active; the human proof and Milnor--Serre copy edit are complete, but the formal artifact is not referee-ready after the C856 standards audit | wait for C856's green authoritative closure, then repackage and synchronize the standalone release under the Paper-II workflow |
-| [C856 — Paper II Lean standards closure](../clebsch-tasks/c856-paper-ii-lean-standards-closure.md) | queued; the 2026-08-02 audit found one substantive fixed-line inheritance gap, ten changed-module docstring gaps, 116 legacy docstring gaps in the full four-gate closure, and a stale expected metadata count | repair every gap, re-audit and replay the authoritative closure, then return the green tree to C577 before repackaging |
+| [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active; the human proof, Milnor--Serre copy edit, and C856's project-owned standards closure are complete, and the authoritative aggregate is green | repackage and synchronize the standalone release under the Paper-II workflow, deciding explicitly whether publication waits on the shared projective-cap cleanup in C860 |
+| [C856 — Paper II Lean standards closure](../clebsch-tasks/c856-paper-ii-lean-standards-closure.md) | complete 2026-08-02; the fixed-line premises are derived rather than assumed, every scholarly-public declaration in the fifty-six-file project-owned closure is documented, a stale expected statement count now fails verification, and the four gates and full release aggregate are green | none in this lane; C860 owns the shared projective-cap closure debt, and C577 owns repackaging |
 | [C746 — Paper II projective--trade reduction](../clebsch-tasks/c746-paper-ii-projective-trade-reduction.md) | complete; human proof 1/4 | sheet-sign kernel reduced invariantly to the quadratic pullback obstruction |
 | [C747 — Paper II socle and first wall](../clebsch-tasks/c747-paper-ii-socle-wall-proof.md) | complete; human proof 2/4 and independent modular read green under C748 | none |
 | [C748 — Paper II Serre proof integration](../clebsch-tasks/c748-paper-ii-serre-proof-integration.md) | complete; parity-specific proof has independent modular and context-free `GO` verdicts; human proof 3/4 | none; C749 owns final adversarial freeze |
@@ -641,19 +641,30 @@ C801 is complete.  The reusable two-sheet radial interface, affine outer
 constant and unique coalescence parameter, noncoalescent Radical--Hadamard
 inheritance, exact sheet-sign annihilator, and \(q-2\) finite-line count are
 kernel-checked without an orbit table.  The Paper II structural gate now has
-twenty-eight terminals, the four-gate axiom audit has fifty-four terminals,
+twenty-nine terminals, the four-gate axiom audit has fifty-five terminals,
 and the complete warning-free release aggregate is green.  The fixed-space,
 stabilizer, block-system, and unique Chow-intersection arguments remain
 explicitly human and classical.  Full report:
 `notes/2026-08-02-c801-paper-ii-fixed-line-lean.md`.
 
-C856 is queued after a standards audit found that C801's family structure
-assumes, rather than derives, three parameterwise Radical--Hadamard premises;
-the trust prose therefore overstates the formal inheritance theorem.  The
-same audit found ten missing public docstrings in the changed modules, 116
-pre-existing missing public docstrings in the complete four-gate closure, and
-a stale expected metadata count.  C856 must repair and replay this complete
-surface before C577 repackages Paper II.
+C856 is complete.  The fixed-line family no longer assumes the three
+parameterwise Radical--Hadamard premises: each evaluation space is presented as
+a parameter-independent top space together with the constant function and the
+radial level, the space is proved unchanged between parameters with nonzero
+outer constant, and the premises are imposed at the reference parameter alone
+and derived elsewhere.  Identifying the geometric evaluation spaces with that
+presentation is now stated as a human input in the module header, gate header,
+manuscript, and trust manifest.  Every scholarly-public declaration in the
+fifty-six-file project-owned four-gate closure has a self-contained docstring,
+and the release runner derives its expected metadata line and rejects a stale
+statement count.  The structural gate has twenty-nine terminals and the
+four-gate axiom audit fifty-five, all on the foundational allowlist; the
+complete authoritative aggregate is green.  One defect is recorded rather than
+fixed: the eight shared `ProjectiveCap`/`CapGame` modules that the gates import
+transitively still carry internal work-item references and 106 undocumented
+public declarations, so the artifact is referee-ready on its project-owned
+closure only.  That cleanup is C860 in the `cap` lane.  Full report:
+`notes/2026-08-02-c856-paper-ii-lean-standards-closure.md`.
 
 The paper-owned trust surface has twenty-nine statements and fourteen
 evidence bundles, including independent generic-wall, shared-radial, and

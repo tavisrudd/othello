@@ -1246,3 +1246,33 @@ novelty lead without affecting C817.
 **Evidence:** REASONED uniformly; CHECKED exhaustively only at q=13 by
 `notes/2026-08-02-c817-toric-octahedral-geometry.py`.
 **Status:** open lead; not allocated and not part of the C817 theorem.
+
+## 2026-08-02 — the fixed line carries one evaluation space, not a family
+
+**Observation:** relative to the moving base point, the Paper II fixed-line
+evaluation spaces are not merely a family satisfying the same Radical--Hadamard
+hypotheses; on the noncoalescent locus they are literally one submodule.  The
+top space and the constant function are parameter-independent, and the radial
+level has sheet values \(0\) and \(c-2t\), so for \(c-2s\ne0\ne c-2t\) the two
+radial levels differ by the nonzero scalar \((c-2t)/(c-2s)\) and span the same
+line.
+**Why it may matter / strongest question:** the manuscript's fixed-line
+rigidity theorem currently reads as "each noncoalescent parameter separately
+satisfies the four hypotheses, hence has the sheet-sign trade."  The stronger
+reading is that the entire quadratic-trade datum is constant along the line, so
+nothing in the trade data distinguishes the matching orbit from the \(q-2\)
+others — only the Chow condition does.  Does that constancy have an
+intrinsic statement not phrased through a chosen base point?
+**Structural mechanism:** the radial character is trivial on the index-two
+subgroup and negated by the outer coset, so translation along the radial
+direction rescales one generator and fixes the rest.
+**Discriminator / falsifier:** the constancy is exactly as strong as the
+presentation of the geometric evaluation spaces as top space plus constant
+function plus radial level.  If some geometric space acquires a further
+parameter-dependent generator, constancy fails while the per-parameter
+conclusion survives.
+**Evidence:** PROVED in Lean for the presented spaces
+(`RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference`);
+the identification of the geometric spaces with that presentation is REASONED
+in the manuscript, not formalized.
+**Status:** open lead; not allocated, and no manuscript change made.

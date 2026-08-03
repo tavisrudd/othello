@@ -2645,8 +2645,17 @@
       "last": 859,
       "purpose": "Remediate Paper II audit gaps: semantic gates, axiom audit, formal manifest, atlas ownership, public status prose, paper facts/title drift, bibliography tracking, guarded validation, and standalone sync",
       "sequence": 294
+    },
+    {
+      "count": 1,
+      "first": 860,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 860,
+      "purpose": "Projective-cap Lean scholarly-artifact cleanup: remove reverse references and document public declarations in the shared ProjectiveCap/CapGame closure",
+      "sequence": 295
     }
   ],
-  "next_id": 860,
+  "next_id": 861,
   "schema": "codex-task-id-allocations-v1"
 }
