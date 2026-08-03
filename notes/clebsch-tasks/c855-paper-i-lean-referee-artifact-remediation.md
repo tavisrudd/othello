@@ -24,6 +24,22 @@ referee-ready or packaged for its next public release.
   (no structural route exists: the bound fails at q=23), first in the
   checker prototype order.
 
+- Manuscript-strengthening triage approved by Tavis: the batched manuscript
+  pass integrates (a) the all-odd-order concurrence-spectrum proposition with
+  its equivalence-relation mechanism, (b) the golden normal form and uniform
+  rigidity package (one orbit, existence iff 5 square, A5 stabilizer, unique
+  polarity over Z[phi]) replacing the Dye citation block, (c) the pentagon
+  converse and sharpened twelve-pentagon count in the orientation two-graph
+  theorem, and (d) the mandatory order-eleven tagging fix for Edge's
+  external/internal reading (types invert at order nineteen). Companion
+  additions: the q=23 sharpness witness, the pencil-saturation lemma, and the
+  characteristic-3/5 conic-avoidance caveats. Proof-route improvements
+  (Brauer-free, Dye-free, characteristic-three splitting) stay out of the
+  claim surface and go to formal-boundary prose. No new statement carries
+  novelty language until a bounded literature check under
+  `notes/literature-audit-conventions.md` clears it; that check gates the
+  manuscript pass.
+
 ## Objective
 
 Bring the complete Paper I Lean artifact—not merely the files changed by the
