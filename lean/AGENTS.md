@@ -137,6 +137,30 @@ measurement and the reserve formula; never derive a cap from `nproc` or another 
 `choom=1000` remains the default. Use `500` only when the user explicitly prioritizes this build and
 has coordinated other jobs to remain sacrificial.
 
+Companion export onto the canonical `finitegeom` base:
+
+```sh
+lean/scripts/lean-companion-export.py \
+  --config lean/trust/export/<area>.toml \
+  --source-commit <othello-commit> --base-commit <finitegeom-commit> plan
+
+lean/scripts/lean-companion-export.py \
+  --config lean/trust/export/<area>.toml \
+  --source-commit <othello-commit> --base-commit <finitegeom-commit> \
+  run --workdir <disk-backed-directory>
+```
+
+`plan` derives the gate's project-local module closure and exact terminal list
+from the committed trust registry and generated fact, then prints the planned
+file set without writing anything. `run` materializes the candidate twice on
+top of the canonical base tree and history, requires byte-identical repeats,
+verifies module byte identity, manifest completeness, terminal and axiom-audit
+agreement, and an unchanged base, and prints the read-only forward delta. It
+never commits, tags, pushes, fast-forwards, or edits either repository, refuses
+a dirty base, a memory-backed destination, a destination inside the base, and
+any suffixed candidate clone as authority or output. Adopting a delta is a
+separate explicit decision.
+
 Artifact backup:
 
 ```sh

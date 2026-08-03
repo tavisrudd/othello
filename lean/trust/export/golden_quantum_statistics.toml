@@ -1,0 +1,59 @@
+# Companion-export configuration for the Golden six-mode balanced-cut unit.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only
+# the destination file names and the release prose live here.
+
+schema_version = 1
+area = "golden_quantum_statistics"
+gate = "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+trust_statement = "trust/GOLDEN_QUANTUM_STATISTICS.md"
+axiom_audit = "trust/GoldenQuantumStatisticsAxiomAudit.lean"
+
+statement_title = "Golden six-mode conference interferometer: symbolic companion"
+
+overview = """
+This boundary records the symbolic order-six identities accompanying Tavis
+Rudd, *Orientation, exchange statistics, and rigidity in the Golden six-mode
+conference interferometer* (DOI 10.5281/zenodo.21766748).
+"""
+
+correspondence = """
+The exported closure proves, over an arbitrary commutative ring, the entrywise
+identity for the square of a signed triangle block with unit off-diagonal
+entries, the determinant of the associated cross Gram matrix, its trace
+contraction, and the fourth conference-word trace obtained from that
+contraction.  These are the scalar identities used inside the structural
+three-plus-three balanced-cut argument.
+
+The companion does not prove the all-orders conference exchange rigidity
+classification, the aligned-design mean and variance, the continuous-control
+optimum, the Hermitian exchange landscape, the squared-spectrum rigidity and
+stability bounds, the balance obstruction, the optical compilation, the
+tomographic identifiability statements, or any experimental threshold.  Those
+results are established in the accompanying paper by ordinary mathematical
+proof, cited literature, or exact certificate computation.
+"""
+
+boundary = """
+Every terminal is a symbolic kernel proof over a commutative ring, checked by
+Mathlib's ring normalization.  The closure contains no generated certificate,
+native evaluation, imported external data, user axiom, unsafe declaration, or
+admitted proof.
+"""
+
+axiom_audit_title = "Axiom audit for the Golden balanced-cut identities"
+
+axiom_audit_description = """
+This audit prints the axioms of the symbolic order-six identities exported with
+the Golden six-mode conference interferometer companion.  The statements
+concern a signed triangle block with unit off-diagonal entries over a
+commutative ring: its squared entries, the determinant of the cross Gram
+matrix, the trace contraction, and the resulting fourth conference-word trace.
+"""
+
+readme_anchor = "  the 77-module human Arcs boundary."
+
+readme_bullet = """- `trust/manifests/golden_quantum_statistics.json` records the symbolic
+  order-six balanced-cut boundary accompanying the Golden six-mode conference
+  interferometer."""
