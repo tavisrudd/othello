@@ -10,6 +10,13 @@ Discovery companion:
 
 ## Current status
 
+**C848 in progress (2026-08-02): bounded Paper II C847 repairs.**  State the
+Paper I minimum-support atlas import used by the pencil LC converse, replace
+the six stale or unsupported hard-coded equation references, add a
+reader-resolvable Paper I repository locator, rebuild warning-free, and inspect
+the affected pages.  Do not touch Lean, release manifests, standalones, or
+remotes.  Report to `2026-08-02-c848-mds-css-paper-minor-repairs.md`.
+
 **C847 closed `MINOR` (2026-08-02): Paper II's headline theorem survives,
 with bounded manuscript repairs required before formal extraction.**  The
 diagonal-multiplier line and the nullity-one/nullity-zero exact fixed-party

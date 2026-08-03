@@ -25,6 +25,8 @@ ordering and detail.
 
 ### `ame-lu`
 
+- **C848 `[ame-lu]` [IN PROGRESS; PAPER II C847 MINOR REPAIRS]** — state the exact imported minimum-support atlas clauses used by the pencil LC converse; replace the two unsupported atlas locators and four stale split equation references with semantic labels or direct prose; give Paper I a reader-resolvable repository locator; rebuild warning-free and inspect the affected pages, without touching Lean, release manifests, standalones, or remotes → `notes/2026-08-02-c848-mds-css-paper-minor-repairs.md`.
+
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every
