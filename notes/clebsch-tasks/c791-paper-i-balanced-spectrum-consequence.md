@@ -2,9 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** optional follow-up, not on the sealed Paper-I release path.  C753
-and C762 are complete; begin only if the added cross-paper consequence is
-judged worth reopening Paper I's prose, trust, PDF, and standalone gates.
+**Status:** queued after C753; coordinate with C762 and begin only from its
+stable forward Paper-I baseline
 
 ## Objective
 

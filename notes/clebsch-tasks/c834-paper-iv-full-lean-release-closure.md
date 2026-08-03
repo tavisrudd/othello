@@ -4,6 +4,22 @@
 
 **Status:** active; required dependency of C761 by author direction 2026-08-02
 
+## Current state
+
+The incidence/dimension packet is partially closed.  The normalized 183-point coordinate model,
+the 78 internal and 78 passant coordinate enumerations and their indexing equivalences, the
+independent bit-row rank calculation, and the recovery/expansion masks transporting rank 42 to the
+semantic incidence map now use kernel reduction.  The four-anchor signature injectivity leaf is
+also kernel checked.  Focused guarded elaboration and the semantic rank-transport target are green.
+
+Direct kernel reduction is not an admissible replacement for the larger finite leaves: even one
+semantic unary-degree point and one raw isolated weight-ten shard exceed the measured memory gate.
+The next implementation packet is therefore a proved reachability checker over compact generated
+syndrome sets.  Its generic transition-coverage theorem must connect the compact certificate to the
+complete Cartesian profile domain before any weight-ten native leaf is removed.  Unary constancy
+will use the manuscript's orbit-transitivity and double-count mechanism rather than semantic
+support filtering.
+
 ## Objective
 
 Replace Paper IV's partial formal mirror by a theorem-complete public Lean

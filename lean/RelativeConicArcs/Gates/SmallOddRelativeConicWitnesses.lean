@@ -1,0 +1,24 @@
+import RelativeConicArcs.SmallOddRelativeConicWitnesses
+
+/-!
+# Small odd-order upper-witness trust gate
+
+This gate audits only the kernel-checked upper bounds and the ordinary completeness of the
+`q = 19` witness.  The exhaustive lower-bound classifications at orders thirteen, seventeen, and
+nineteen remain external computations.
+-/
+
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnessData.q13Normalization_det
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnessData.q17Normalization_det
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnessData.q13Normalization_maps
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnessData.q17Normalization_maps
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnessData.q13Normalization_conicForm
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnessData.q17Normalization_conicForm
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.q13_check
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.q17_check
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.q19_check
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.q19_ordinaryCoverage
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.q19_complete
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.rhoC_ZMod13_le_eight
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.rhoC_ZMod17_le_nine
+#print axioms RelativeConicArcs.SmallOddRelativeConicWitnesses.rhoC_ZMod19_le_ten
