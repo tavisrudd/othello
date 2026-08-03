@@ -104,7 +104,7 @@ class ReleaseRunnerTests(unittest.TestCase):
         self.assertEqual(
             manuscript.EXPECTED_PAGES,
             {
-                "clebsch_rigidity.tex": 21,
+                "clebsch_rigidity.tex": 22,
                 "clebsch_rigidity_computational_companion.tex": 12,
             },
         )

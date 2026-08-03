@@ -2360,12 +2360,12 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "208e9f7d23f68d392c2d19762fc19386052127ddbffa0995add959f6c9ba3b78"
+        "sha256": "3062a24b077de467ce37b655805b88dadaaf897c516714d71524ef52bace8bb1"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "489c25e5cf26db1957d6cea76c0b383d5a32afae15301406266da5108aabd524"
+        "sha256": "19423f8b3ae5cf43bf6abbc464947b75554cbb6069bd3991ce237d4c551f9990"
       },
       {
         "path": "verification/verify_computational_companion.py",
