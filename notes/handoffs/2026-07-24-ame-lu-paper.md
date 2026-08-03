@@ -10,6 +10,26 @@ Discovery companion:
 
 ## Current status
 
+**C839 closed (2026-08-02): the two-paper split and every downstream trust
+and extraction boundary are frozen for cold sessions.**  Preserve the current
+58-page bundle as a content-addressed combined baseline.  Paper I keeps the
+existing `papers/ame_lu` and `~/src/math-papers/ame-lu` identities and becomes
+*Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States*.
+Paper II is a new physical root `papers/mds_css_transversal_groups`, with
+standalone `~/src/math-papers/mds-css-transversal-groups`, centered on the
+diagonal-isodual exact transversal-group theorem.  The plan assigns every
+current theorem, source section, figure, computation, ledger, and formal
+terminal to exactly one successor; Paper I is independent and Paper II cites
+its rigidity/no-go theorem.  Establish a self-contained, green Paper II before
+trimming Paper I.  The current release verifier's broad `AMELU` filename globs
+must be replaced by paper-specific formal-root contracts.  Public Lean
+extraction uses two semantic gates and two content-addressed manifests in
+`finitegeom`; the `ame-lu` lane owns theorem/manuscript decisions, while a
+separately allocated `build-sys` task owns public formal materialization.  No
+implementation task is allocated yet.  A fresh session reads
+`2026-08-02-c839-ame-lu-two-paper-split-plan.md` in full before touching either
+manuscript, standalone repository, release manifest, or Lean gate.
+
 **C835--C838 closed (2026-08-02): trust and the three structural
 strengthenings are resolved.**
 Pastawski--Yoshida Lemma 5 already gives the exact
