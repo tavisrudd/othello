@@ -402,3 +402,110 @@ alternative is *One cubic, three reconstructions, and the golden operator*.
 The abstract should fit in three sentences: the three constructions, their
 marked equality, and the theorem that the common cubic reconstructs the
 operator and makes every passage reversible.
+
+## Why the three single-punch options would matter
+
+The threshold for “holy shit” grade is not the number of connections placed
+in one paper.  Each option must convert an apparent loss of information into
+an unexpected rigidity theorem, create a bridge that other mathematicians can
+use, and have a conclusion shorter than its proof architecture.
+
+### Option 1 — the common shadow is lossless
+
+Normally a passage from geometry, arithmetic, or a code to one cubic
+invariant discards most of the source.  Option 1 asserts the opposite:
+
+\[
+ \text{source}\longrightarrow Z\longrightarrow\text{source reconstructed}.
+\]
+
+Three independently defined sources would produce the same lossless
+invariant.  The singular locus recovers the axes, the triangle coefficients
+recover the switching class of \(C\), and \(\mathbf Q[C]\) recovers the
+golden fibre algebra.  Mathematicians would care because this promotes a
+collection of correspondences to a reconstruction equivalence: a problem
+may be moved between coding, incidence, operator, and arithmetic languages
+without losing the underlying object.
+
+The grade depends on the inverse arrows.  Equality of three marked cubics is
+an elegant Rosetta theorem; proof that each cubic reconstructs the common
+operator package and that every round trip commutes is the exceptional
+rigidity statement.  Its natural review description is: “apparently lossy
+constructions are mutually reconstructive.”
+
+### Option 2 — exceptional closure from six axes
+
+The alternative single punch is:
+
+> An oriented order-six golden conference operator canonically and uniquely
+> extends to the \(27\)-dimensional minuscule \(E_6\) geometry and its Cartan
+> cubic, and the grading reconstructs the operator.
+
+In compact form,
+
+\[
+ (C,\text{ orientation})
+ \longleftrightarrow
+ \text{graded }6|15|6\text{ Cartan cubic}
+ \longleftrightarrow
+ 27\text{ lines and }45\text{ tritangents}.
+\]
+
+Exceptional geometry is normally entered from the top down through a Lie
+group, root system, Jordan algebra, or Cartan tensor.  This theorem would
+generate it from a \(6\times6\) sign operator.  The existing \(27=12+15\)
+branching, double-six, recovered fifteen lines, tritangent census, graded
+Cartan support, Weyl lift, and determinant-twisted descent make the question
+substantive rather than decorative.
+
+Mathematicians would care because it supplies an elementary and explicit
+entrance into \(E_6\), joining conference matrices, cubic-surface geometry,
+invariant theory, minuscule representations, and arithmetic descent.  It
+would also explain why so many exceptional-looking structures recur in the
+program: they are forced pieces of one exceptional parent.
+
+The grade requires exact tensor equality, canonical uniqueness, and reverse
+reconstruction.  A weight dictionary or matching monomial support is not
+enough.  Its natural review description is: “an unexpected reconstruction of
+the minuscule \(E_6\) geometry from an order-six conference operator.”
+
+### Option 3 — cubic self-testing
+
+The outward-facing single punch is a quantitative recognition theorem.  For
+a normalized symmetric zero-diagonal operator \(A\), put
+
+\[
+ \Delta(A)=\inf_\mu\|H_A-\mu T_A\|.
+\]
+
+The exact theorem already gives \(\Delta(A)=0\Rightarrow A^2=\lambda I\)
+when the edges are nonzero, and recognizes the golden orbit on the sign
+locus.  The level-up would prove an effective estimate such as
+
+\[
+ \operatorname{dist}(A,\mathcal C_{\mathrm{gold}})
+ \le K_\eta\,\Delta(A)
+\]
+
+under a normalization and a lower edge bound \(\eta\), together with an
+explicit reconstruction or decoding procedure.  A different exponent may
+be required for a global inequality; the rank-\(14\) Jacobian currently
+supports an effective local theorem.
+
+Mathematicians would care because twenty third-order coefficients would
+certify an entire structured operator.  The same theorem becomes robust
+frame certification, inverse recovery from nonlinear measurements,
+three-particle self-testing of a six-mode fermionic network, and error
+correction for two-graph data.  It turns the program's exact rigidity into a
+usable stability principle.
+
+The grade requires a rigorous stability radius, effective constants or
+conditioning, and an algorithm.  Infinitesimal Jacobian rank alone is not the
+application.  Its natural review description is: “third-order data robustly
+self-test an entire conference frame.”
+
+The three options answer different questions.  Option 1 explains why the
+series is one program; Option 2 explains why the common object carries
+exceptional geometry; Option 3 explains why its rigidity can be used.
+Combining all three as parallel sections would destroy the short-paper
+constraint unless a single stronger theorem makes them formal corollaries.
