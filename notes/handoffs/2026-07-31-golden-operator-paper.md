@@ -525,7 +525,11 @@ C845 is active. Its immutable source checkpoint adds the narrow import-only
 Golden quantum-statistics gate and makes the tracked-PDF policy explicitly
 immutable-source. The disposable paper plan, audit, deterministic
 materialization, manifest, sixteen-page check, and exact sixteen-file forward
-delta pass without touching the live mirror. The Lean source gate builds in a
+delta pass. By later explicit user instruction, the exporter materialized that
+pristine tree and Git fast-forwarded the existing standalone history from
+`8929f2cf` to local commit `8aee16d9`; the live manifest and clean-tree checks
+pass, with no push, tag, remote mutation, or formal-companion declaration. The
+Lean source gate builds in a
 clean worktree, and generated facts give exactly `{propext}` for all four
 terminals. The monolithic relconic audit retains 165 unrelated baseline errors,
 and the repository has no guarded exporter from an immutable
@@ -538,7 +542,7 @@ the claim-by-claim Lean reconciliation, canonical exported-candidate
 validation, honest partial-coverage boundary, manifests, gate, and deferred
 quiet-window validation.  C841 begins only after that exact gate passes and owns the
 Clebsch-style paper declaration, immutable public pin, metadata/verifier
-surface, and official forward synchronization of the standalone repository.
+surface, and any later companion-bearing forward synchronization of the standalone repository.
 None may advertise full formalization, copy files manually, hand-edit either
 destination, or mutate the paper mirror before its predecessor gate.
 

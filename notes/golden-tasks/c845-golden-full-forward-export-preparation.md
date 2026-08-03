@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** active; source preparation committed, stopped at the missing canonical finitegeom exporter contract
+**Status:** active; paper forward-exported by explicit user instruction, stopped at the missing canonical finitegeom exporter contract
 
 ## Objective
 
@@ -87,3 +87,8 @@ ledger, and exact missing-contract boundary are recorded in
 task only after the repository-owned guarded exporter can target canonical
 finitegeom from immutable source and base commits. Do not use the superseded
 suffixed clone to bypass that gate.
+
+The paper-only mirror advance is complete at local standalone commit
+`8aee16d93d738e3e9add479b74d248bdf3c76a9f`, produced from immutable Othello
+commit `3c5c72dd8c259cca10cf1a024caf4766277a1e85`. It contains no formal-companion
+declaration and was not pushed or tagged.

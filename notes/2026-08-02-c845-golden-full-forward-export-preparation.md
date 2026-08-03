@@ -2,7 +2,7 @@
 
 **Lane:** `golden`
 
-**Status:** source preparation committed; canonical Lean export stopped at a missing guarded exporter contract
+**Status:** paper forward-exported by explicit user instruction; canonical Lean export stopped at a missing guarded exporter contract
 
 ## Result
 
@@ -12,10 +12,11 @@ import-only gate `RelativeConicArcs.Gates.GoldenQuantumStatistics`, declares
 its four exact terminals in the monorepo trust spine, and makes the paper
 exporter's tracked-PDF disposition explicit as `immutable-source`.
 
-No file under `/home/tavis/src/math-papers/golden-quantum-statistics`,
-`/home/tavis/src/lean/finitegeom`, or the superseded
+By later explicit user instruction, the paper mirror was advanced as an
+ordinary child commit through the deterministic exporter. No file under
+`/home/tavis/src/lean/finitegeom` or the superseded
 `/home/tavis/src/lean/finitegeom-golden-quantum-statistics` clone was edited.
-No remote, branch, tag, or repository history was advanced.
+No remote, tag, push, or history rewrite occurred.
 
 ## Formal-coverage ledger
 
@@ -79,9 +80,20 @@ For source commit `ee60800c`:
 - the exact content delta against standalone commit `8929f2cf` is sixteen
   modified files, with no addition or deletion.
 
-The pristine candidate is retained at
-`/tmp/persistent/tavis/c845/paper/pristine`; the build-mutated tree is separate
-and has no promotion role.
+The explicit paper-only forward export used immutable Othello source commit
+`3c5c72dd8c259cca10cf1a024caf4766277a1e85`. The exporter repeated `plan`,
+zero-finding `audit`, two byte-identical materializations, manifest
+verification, and an isolated 16-page `make check`. Git then formed the exact
+pristine exported tree as a child of standalone commit `8929f2cf` and
+fast-forwarded the existing `main` branch to
+`8aee16d93d738e3e9add479b74d248bdf3c76a9f`. The live tree passes exporter
+verification, is clean, retains the immutable PDF hash above, and contains an
+export manifest with source commit `3c5c72dd`. The update changed sixteen
+tracked files and added or removed none.
+
+This was a local paper-only forward commit. It did not add a formal-companion
+declaration, mutate either Lean repository, create or change a remote, tag, or
+push anything.
 
 ## Lean source gate and exact blocker
 
@@ -142,6 +154,9 @@ prose, axiom, and deterministic-export gates before handing it to C840.
 
 - **Settled:** the tracked PDF is immutable source evidence, never disposable
   rebuild output.
+- **Settled:** the existing standalone paper history now has the exact
+  exporter-produced sixteen-page tree as local forward commit `8aee16d9`;
+  there was no manual copy, history replacement, tag, or push.
 - **Settled:** the four Lean declarations are mechanism-level partial coverage,
   not full theorem formalization.
 - **Open:** the canonical finitegeom forward-export mechanism is absent. The
