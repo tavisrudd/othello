@@ -36,6 +36,14 @@ only, and the two frames are exactly the configurations extremal for both.  See
 `notes/2026-08-02-c756-baer-subline-containment.md` and
 `notes/2026-08-02-c756-direction-coordinatization.md`.
 
+The twenty-seventh pass acted on that lever and found the coupled object — the
+cross-ratio \(g_{ij}\) of the two conjugate point-pairs, Theorem 9 — but its pigeonhole
+runs one short in the unhelpful direction, forcing collisions rather than forbidding
+them.  Do not retry it as a closure route; its successor target is a row-distinctness
+lower bound.  See `notes/2026-08-02-c756-coupled-pair-invariant.md`.  **Gate 1's
+Baer-subline stability statement remains the single sufficient target and the highest-EV
+next move.**
+
 The binding constraint on any replacement: exhaustive search is the only thing currently
 covering the small fields, and small \(q\) is exactly where character-sum arguments
 fail, since every Weil bound leaves a tail of order \(\sqrt q\).  So a structural
@@ -108,7 +116,8 @@ classification + golden operator), not a retrofit into Paper I.
 
 ## Current state (2026-08-02)
 
-Twenty-six research passes complete; the theorem is **not** proved. Reports:
+Twenty-seven research passes complete; the theorem is **not** proved. Reports:
+`notes/2026-08-02-c756-coupled-pair-invariant.md` and
 `notes/2026-08-02-c756-baer-subline-containment.md` and
 `notes/2026-08-02-c756-direction-coordinatization.md` and
 `notes/2026-08-02-c756-crown-reformulation-and-line-case.md` and
@@ -646,6 +655,33 @@ What the Baer-subline and coordinatization pass (twenty-sixth) adds:
 - **newly identified lever:** gate 1 uses only the independence half of the crown and
   gate 2 only the bipartite half.  No argument in the branch couples them, and the two
   \(q=5\) frames are precisely the configurations extremal for both at once.
+
+What the coupled pair-invariant pass (twenty-seventh) adds:
+
+- **Theorem 9.**  The cross-ratio
+  \(g_{ij}=(z_i-z_i^q)(z_j-z_j^q)/N(z_i-z_j)\in\mathbb F_q^\times\) is the unique
+  \(\mathrm{PGL}(2,q)\)-invariant of the pair of conjugate point-pairs.  With
+  \(\alpha_{ij}=N(z_i-z_j)\) and \(\beta_{ij}=N(z_i-z_j^q)\) one has the exact identity
+  \(\beta=\alpha-4\varepsilon c_ic_j=\alpha(1-g)\), so (A) is \(\chi_q(\alpha)=\delta\)
+  and, given (A), (B) is exactly \(\chi_q(1-g)=-1\).  This is the object the
+  twenty-sixth pass's lever asked for: one invariant matrix carrying both halves;
+- **the standing non-invariance caveat is localized.**  Coherence is not
+  \(\mathrm{PGL}(2,q)\)-invariant, but Theorem 9 shows all of that failure sits in (A);
+  (B) relative to (A) is invariant.  Projective tools are therefore available on the
+  bipartite half and forbidden on the independence half — a division of labour, not a
+  blanket restriction;
+- \(\chi_q(g_{ij})=-\delta\eta_i\eta_j\) with \(\eta_i=\chi_q(c_i)\) is a third
+  coboundary, implied by (A), which makes the row split by \(\eta_j\) exact;
+- **negative, and the reason to stop here.**  The exact Jacobi count puts each row's
+  \((q+1)/2\) entries inside a set of size \((q-1)/2\), so collisions
+  \(g_{ij}=g_{ik}\) are **forced** rather than forbidden.  The pigeonhole is off by one
+  in the direction that gives structure instead of contradiction, so this route does not
+  close the branch.  The successor target is a row-*distinctness lower bound* for
+  \(q>5\); a collision is a conic condition with \(\approx q\)-point fibres, so any bound
+  must couple many rows;
+- the two \(q=5\) frames realize the forced minimum of exactly one collision per row.
+  With Theorem 2's tight \(q-2\le(q+1)/2\) and Theorem 6's saturated \(\lambda\)-coset,
+  that is a third independent counting bound tight exactly at \(q=5\).
 
 What is now settled computationally: the complete classification, every \(k\) at once,
 for every odd prime power \(q\le 43\) — only the four-frame at \(q=5\) and the Clebsch
