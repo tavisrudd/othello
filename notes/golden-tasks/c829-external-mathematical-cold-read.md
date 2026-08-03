@@ -103,3 +103,16 @@ prose is already doing distinct mathematical or experimental-boundary work,
 and compression back to fifteen pages would trade clarity for an arbitrary
 page count.  C829 remains open for later cleanup and review by user
 instruction.
+
+## Page-break checkpoint — 2026-08-02
+
+A higher-resolution page-boundary pass found two layout defects outside the
+warning gate: the introduction left its final comparison as a one-word
+continuation on page 3, and the determinant-stability paragraph ended page 13
+with the fragment “At a”.  The first was repaired by deleting a redundant
+rhetorical tail and tightening the adjacent comparison; the second by placing
+the balanced-control consequence at the start of page 14.  The clean
+immutable-input make check remains green at 16 pages.  Direct inspection of
+pages 2--3 and 13--14 confirms that every affected page now begins and ends
+with a complete rhetorical unit.  No theorem statement or mathematical claim
+changed.  C829 remains active.
