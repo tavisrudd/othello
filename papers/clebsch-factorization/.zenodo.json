@@ -1,6 +1,6 @@
 {
-  "title": "Quadratic recovery and cubic orientation in conic matching quotients",
-  "description": "This preprint studies matching products modulo a conic ideal, the ranks governing quadratic recovery, and cubic orientation in conic matching quotients. It develops six-profile reconstruction, modular depth, arithmetic splitting, and arithmetically Gorenstein evaluation structures, with replayable computational evidence and a formal companion.",
+  "title": "Quadratic trade rigidity and cubic orientation in conic matching quotients",
+  "description": "This preprint classifies full projective matching orbits from an intrinsic two-valued quadratic trade. Exactly the B_3/F_7 and H_3/F_11 orbits survive; quadratic products recover their two unordered sheets, and the first signed tensor moment is a cubic that orients them. It also proves the sharp fixed-line carrier boundary, quotient ranks 3, 6, and 10, and the self-associated Gorenstein consequences, with replayable computational evidence and a formal companion.",
   "creators": [
     {
       "name": "Rudd, Tavis",
