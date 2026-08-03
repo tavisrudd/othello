@@ -23,14 +23,18 @@ scope boundary, trust maps, and framing are adopted in the manuscript.  No
 computation or certificate is involved.  See
 `2026-08-02-c830-global-ame-rounding.md`.
 
-**C833 queued (2026-08-02): q>4 rounding beyond support
-orthogonality.**  Test whether stabilizer multiplication, minimum-support
-generation, or higher-weight coupling forces relations among C830's support
-blocks and improves the global frame radius above local dimension four; the
-falsifier is a product-unitary family saturating the orthogonal energy ledger.
-Keep AME existence and both metrics explicit, and use certificates only for
-discovery unless a computation becomes load-bearing.  See the live queue and
-the future report `2026-08-02-c833-qgt4-support-sector-coercivity.md`.
+**C833 closed positively (2026-08-02): three-region cleaning removes the
+q=4 boundary.**  Choosing each party as the logical leg of the exact
+`[[2m-1,1,m]]_q` code, a leakage-aware nested commutator localizes on one of
+three correctable regions; a Weyl-character concentration lemma then rounds
+that party within normalized Hilbert--Schmidt distance `8 eps` of a Clifford.
+Combining all frames through the AME second moment and the uniform stabilizer
+gap gives a defect-only decomposition radius `Theta_q(n^{-1/2})` for every
+fixed local dimension, conditional on AME existence, with residual
+`D <= pi sqrt(q) eps`.  The legacy `ell^1` conclusion holds at radius
+`Theta_q(n^{-1})`.  The theorem and trust maps are adopted without computation
+or certificate; optimality remains open.  See
+`2026-08-02-c833-qgt4-support-sector-coercivity.md`.
 
 **C828 closed (2026-08-02): the four bounded C805 corrections are complete.**
 The false arbitrary-additive minimal-codeword claim and the unsourced

@@ -251,14 +251,14 @@ at least \((2-2p^{-1/2})^{1/2}\), a constant depending on the
 characteristic and on nothing else.  Rounding a near-symmetry to a Clifford
 and invoking that gap gives a defect-only threshold below which every
 approximate symmetry factors through an exact one.  Reading one
-minimum-support marginal gives an exponentially small threshold.  A global
-estimate instead sums the orthogonal errors of all minimum-support sectors:
-its formula has polynomial party-count dependence at local dimension two,
-conditional on existence, and improves the exponential base at dimension
-three.  At dimension four it improves the
-frame-rounding prefactor but not the radius with a prescribed global
-generator \(\ell^1\) budget; above dimension four the one-marginal estimate
-is stronger.
+minimum-support marginal gives an exponentially small threshold, and
+aggregating all such supports improves only the low-dimensional range.  The
+stronger route views each party as the logical leg of the exact
+\([[2m-1,1,m]]_q\) code.  A transversal physical implementation makes a
+nested logical Pauli commutator localize on one of three correctable
+regions; Fourier concentration then rounds the logical action to a
+Clifford.  The resulting defect threshold has order \(m^{-1/2}\) for every
+fixed local dimension, conditional on AME existence.
 This splits the
 rigidity phenomenon into an
 entanglement half, which forces discreteness, and an algebraic half, which

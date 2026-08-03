@@ -11,9 +11,9 @@
         "sha256": "8e7291b7ddc73717c3640e5eeb0bd3d927f2dd81cdefd77f6e02b748bc61a362"
       },
       {
-        "bytes": 406277,
+        "bytes": 418695,
         "path": "ame-lu.pdf",
-        "sha256": "4658ce87434e5344f3c36b342ed6a77e0844e11a36d657b67e66d0ac2121af09"
+        "sha256": "3feab73d4c92ac212291ef645cf9bc4f72e76be114b7a8d610c5bb9f1f9072ea"
       },
       {
         "bytes": 2578,
@@ -48,7 +48,7 @@
       {
         "bytes": 6436,
         "path": "main.tex",
-        "sha256": "bdf954f374f5b905ea12e8ebff0525cf0b87b1b2a44cba43ba6df330f9bffba1"
+        "sha256": "130f053aeac559cc1cdaaa4ac0f4fd0639d6476e470d2fc16bfd127c933ff498"
       },
       {
         "bytes": 19330,
@@ -61,9 +61,9 @@
         "sha256": "ca3e562179cb859043cb076a97e2e74221cf7a5532f8a79285700528a72bfafb"
       },
       {
-        "bytes": 20490,
+        "bytes": 20537,
         "path": "sections/01-introduction.tex",
-        "sha256": "ca74974ce577146d34a4fbb8a292e90e2dc029fb18b0be38c170098316dfd639"
+        "sha256": "f00981e2b76cda0f1eccd76ff5a726be0e72e54123f487449c4505b2a83a404d"
       },
       {
         "bytes": 6200,
@@ -71,9 +71,9 @@
         "sha256": "9bd45727fd2aa46f56787ac729895b443fe9aa9fc35670ca21789bf0ce92db34"
       },
       {
-        "bytes": 97830,
+        "bytes": 105347,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "834ae83988c8e806c77878917bacdbbb9f0a97e1fa50eb964b6842802bc4955a"
+        "sha256": "832987130dd3fb977ce659ba397fc6b589e982854503e4a565604a339073db0a"
       },
       {
         "bytes": 8998,
@@ -101,9 +101,9 @@
         "sha256": "273f370f80635ce0628851931982d0cbda697bdb26ca8dd8eadfe4aa5add7b0d"
       },
       {
-        "bytes": 10571,
+        "bytes": 10806,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "39c74641a24dadf599b264db2b3ead215eddadcb5c9996fb3400903f0cc82f84"
+        "sha256": "d61e0881b77d67bb8fd4a72c7f6d4beb4d06a23db9a132a803bf27790c086d9c"
       },
       {
         "bytes": 5676,
@@ -221,7 +221,7 @@
         "sha256": "b91ba7b352527fe5659a8f045ca22048eaa5f51e48fe04e7cf80465c91d97c4d"
       }
     ],
-    "tree_sha256": "3524f6f3de6ce8bcf5524e38a69010d5f48cf30dc3e3afd188fec674b90d1f80"
+    "tree_sha256": "017066dbff49ef90504cb18dd9dd7f7782fb886658e1f2babd86d4023adb16e2"
   },
   "formal_companion": {
     "artifacts": [

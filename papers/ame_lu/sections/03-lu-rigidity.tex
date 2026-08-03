@@ -1753,6 +1753,197 @@ At \(q=2\) this is of order \(m^{-5/4}\).  The loss relative to (5.9)
 comes from imposing a global generator \(\ell^1\) budget after the frames
 are known; it is not a remaining marginal-dilution loss.
 
+There is a stronger global route which does not estimate support sectors at
+all.  Choose one AME party as a logical input.  The other \(2m-1\) parties
+form an \([[2m-1,1,m]]_q\) stabilizer code, and the product of their local
+factors approximately implements the transpose-inverse of the factor on the
+chosen party.  Three correctable regions then test that logical action by a
+nested commutator.
+
+For an encoding isometry \(V:\mathbb C^q\to\mathcal H\), write
+\[
+ E(T,L)=q^{-1/2}\lVert TV-VL\rVert_{\mathrm{HS}}.
+\]
+It satisfies
+\(E(TS,LM)\leq E(T,L)+E(S,M)\) and
+\(E(T^\dagger,L^\dagger)=E(T,L)\).
+
+\begin{lemma}[Quantitative cleaning commutator]
+\label{lem:quantitative-cleaning-commutator}
+Let \(V\) encode an \([[2m-1,1,m]]_q\) stabilizer code, let \(T\) be
+transversal, and suppose \(E(T,L)\leq\varepsilon\).  For all logical Weyl
+operators \(P,Q\),
+\[
+ q^{-1/2}\min_{|z|=1}
+ \lVert [[L,P],Q]-zI\rVert_{\mathrm{HS}}
+ \leq8\varepsilon,                                  \tag{5.14}
+\]
+where \([A,B]=ABA^\dagger B^\dagger\).
+\end{lemma}
+
+\begin{proof}
+Partition the physical parties into regions \(R_1,R_2,R_3\) of sizes
+\(m-1,m-1,1\).  Every region is correctable.  The stabilizer cleaning
+lemma supplies a representative \(\widetilde P\) of \(P\) outside
+\(R_1\) and a representative \(\widetilde Q\) of \(Q\) outside \(R_2\).
+For reference, cleaning here is the elementary symplectic statement that
+the restriction of a normalizer label to a correctable region lies in the
+restriction of the stabilizer label space; subtracting that stabilizer
+removes the restriction.
+
+Transversality makes \([T,\widetilde P]\) supported outside \(R_1\), so
+\(C=[[T,\widetilde P],\widetilde Q]\) is supported on
+\(R_1^c\cap R_2^c=R_3\).  The composition rules give
+\[
+ E(C,[[L,P],Q])\leq4\varepsilon.                      \tag{5.15}
+\]
+Knill--Laflamme correction on \(R_3\) gives
+\(V^\dagger C V=cI\).  Hence the logical nested commutator lies within
+\(4\varepsilon\) of \(cI\).  Its normalized Hilbert--Schmidt norm is one,
+so \(|c|\geq1-4\varepsilon\); replacing \(c\) by its phase proves (5.14).
+Notice that \(C\) need not preserve the code.  Only its scalar compression
+is used, while (5.15) controls leakage.
+\end{proof}
+
+The remaining step is finite-dimensional Fourier concentration.  It is
+stated separately because it is the point where scalar commutators become
+Clifford axes.
+
+\begin{lemma}[Nested Weyl commutators round to a Clifford]
+\label{lem:nested-weyl-rounding}
+Let \(L\in U(q)\), \(q=p^e\), and suppose for all Weyl labels \(v,w\)
+that
+\[
+ q^{-1/2}\min_{|z|=1}
+ \lVert [[L,W_v],W_w]-zI\rVert_{\mathrm{HS}}\leq\eta.
+\]
+If
+\[
+ \eta<\tau_p:=\min\left\{\frac13,
+       \frac{\sin(\pi/p)}{2\sqrt2}\right\},
+\]
+then some additive one-qudit Clifford \(K\) satisfies
+\[
+ q^{-1/2}\min_{|z|=1}\lVert L-zK\rVert_{\mathrm{HS}}\leq\eta.
+\]
+\end{lemma}
+
+\begin{proof}
+Put \(A_v=LW_vL^\dagger\).  Conjugation of \(W_w\) by \(W_v\) changes
+only its phase, so every \([A_v,W_w]\) is within \(\eta\) of a scalar.
+We use the following Fourier observation twice.  If
+\(A=\sum_a c_aW_a\) is unitary and every \([A,W_w]\) is within \(\eta\)
+of a scalar, then \(A\) lies within \(\eta\) of one Weyl axis.  Indeed,
+with \(p_a=|c_a|^2\), the commutator estimate gives
+\[
+ \left|\sum_a p_a\chi_w(a)\right|\geq1-\eta^2/2.
+\]
+Character orthogonality, averaged over \(w\), yields
+\(\sum_ap_a^2\geq(1-\eta^2/2)^2\).  Thus
+\(\max_ap_a\geq(1-\eta^2/2)^2\), which is precisely the asserted
+normalized distance bound.
+
+Apply the observation to each \(A_v\), and call its unique nearby Weyl
+label \(F(v)\).  The exact identity
+\(A_{v+u}\in\mathbb C A_vA_u\) puts the axes labelled by \(F(v+u)\) and
+\(F(v)+F(u)\) within \(3\eta\).  Distinct Weyl axes have phase-optimized
+distance \(\sqrt2\), so \(\eta<1/3\) makes \(F\) additive.  Comparing
+the exact commutator phases of \(A_v,A_u\) with those of their nearby
+Weyls costs at most \(4\eta\).  The least nontrivial \(p\)-th-root chord
+is \(2\sin(\pi/p)\), so the stated bound makes \(F\) trace-symplectic.
+
+Choose an additive Clifford \(K_0\) inducing \(F\).  Then
+\(K_0^\dagger L\) approximately fixes every Weyl axis, so all its Weyl
+commutators are within \(\eta\) of scalars.  The Fourier observation puts
+it within \(\eta\) of a Weyl; multiplying that Weyl into \(K_0\) gives
+the required Clifford.
+\end{proof}
+
+\begin{theorem}[Cleaning-based global rounding]
+\label{thm:cleaning-global-rounding}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
+\(q=p^e\), \(m\geq2\), and \(n=2m\).  Put
+\[
+ d_p=(2-2p^{-1/2})^{1/2},
+\]
+and
+\[
+ R^{\mathrm{clean}}_{n,q}=\min\left\{
+  \frac{\tau_p}{8},\frac1{4\sqrt{2q}},
+  \frac1{8\pi\sqrt n},
+  \frac{d_p}{1+4\pi\sqrt n}
+ \right\}.                                           \tag{5.16}
+\]
+If \(\varepsilon(U)<R^{\mathrm{clean}}_{n,q}\), then, up to a global
+phase,
+\[
+ U=g\bigotimes_{i=1}^n e^{ih_i},\qquad g\in G(\psi),
+\]
+where the \(h_i\) are traceless Hermitian, have spectral spread at most
+\(\pi\), and satisfy
+\[
+ \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
+ \leq\pi\sqrt q\,\varepsilon(U).                     \tag{5.17}
+\]
+Before the exact-symmetry step, the recovered local Cliffords obey
+\[
+ q^{-1/2}\min_{|z|=1}\lVert U_i-zK_i\rVert_{\mathrm{HS}}
+ \leq8\varepsilon(U)                                 \tag{5.18}
+\]
+at every party.  For fixed \(q\), (5.16) has order \(n^{-1/2}\),
+conditional on existence of the stated AME states.
+\end{theorem}
+
+\begin{proof}
+Choose party \(i\) as the logical leg and write the AME Choi form as
+\(q^{-1/2}\sum_a|a\rangle\otimes V_i|a\rangle\).  The other local
+factors form a transversal physical unitary \(T_i\), and vectorization
+gives a logical unitary \(L_i\), obtained from \(U_i\) by transpose and
+inverse, with \(E(T_i,L_i)=\varepsilon(U)\).  Lemmas
+\ref{lem:quantitative-cleaning-commutator} and
+\ref{lem:nested-weyl-rounding}, with \(\eta=8\varepsilon(U)\), give
+(5.18); transpose and inverse preserve the additive Clifford group.
+
+Put \(K=\bigotimes_iK_i\), choose principal logarithms of
+\(K_i^\dagger U_i\) after optimizing the local phases, and let
+\(D^2=\sum_i\lVert h_i\rVert_F^2\).  The chord--angle bound gives
+\[
+ D^2\leq\frac{\pi^2q}{4}\sum_i
+  \left(q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}\right)^2
+ \leq16\pi^2qn\varepsilon(U)^2.                      \tag{5.19}
+\]
+The second clause of (5.16) puts every spectrum in an arc of length
+\(\pi\); the third gives \(D\leq\sqrt q/2\).  Two-uniformity gives
+\(\lVert(K^\dagger U-I)\psi\rVert\leq D/\sqrt q
+\leq4\pi\sqrt n\,\varepsilon(U)\).  The fourth clause and the triangle
+inequality put \(K\psi\) less than \(d_p\) from \(\psi\), so
+Corollary~\ref{cor:uniform-separation} makes \(K\) an exact symmetry.
+Apply Theorem~\ref{thm:budget-free-stability} to the residual to obtain
+(5.17).
+\end{proof}
+
+If the sharper local constant and the old global generator budget are
+needed, the same proof gives the conclusion of
+Corollary~\ref{cor:approximate-decomposition} under
+\[
+ \varepsilon(U)<\min\left\{
+  \frac{\tau_p}{8},\frac1{16\pi n\sqrt q}
+ \right\}.                                           \tag{5.20}
+\]
+Indeed (5.18), the operator-norm bound by Hilbert--Schmidt norm, and the
+principal logarithm give
+\(\sum_i\lVert h_i\rVert_{\mathrm{op}}
+\leq8\pi n\sqrt q\,\varepsilon(U)<1/2\); the sharp local theorem then
+gives \(D\leq\sqrt{6q/5}\,\varepsilon(U)\).
+
+The cleaning route supersedes both explicit radii above as a bound for
+fixed \(q\): it is polynomial in the party count and has no boundary at
+\(q=4\).  The earlier theorems remain useful because they expose the exact
+cost of reading one marginal and of aggregating orthogonal minimum-support
+sectors.  The new \(n^{-1/2}\) scale is a proved lower bound, not an
+optimality claim; no product-unitary family is known to saturate the
+collective frame-error estimate (5.19).
+
 \begin{theorem}[Explicit decomposition threshold]
 \label{thm:explicit-threshold}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
@@ -1829,24 +2020,19 @@ single small marginal can avoid that factor.  Summing \(n\) per-site
 operator-norm errors and taking \(n\) logarithms costs a further
 \(n\sqrt q\), which is the price of a per-site conclusion.
 
-The gap left after taking the better of this theorem and
-Theorem~\ref{thm:aggregate-global-rounding} is worth naming exactly,
-because it is not the gap
-Proposition~\ref{prop:stability-region} measures.  That proposition bounds
+The exponential gap left by this theorem and
+Theorem~\ref{thm:aggregate-global-rounding} is closed by
+Theorem~\ref{thm:cleaning-global-rounding}.  The remaining comparison is
+with Proposition~\ref{prop:stability-region}.  That proposition bounds
 any threshold valid across states of uniformity order three; an
 \(\AME(2m,q)\) state has uniformity order \(m\), and for such states
 Corollary~\ref{cor:k-uniform-region} certifies the quadratic estimate on a
 generator-coordinate region whose \(\ell^1\) radius grows with \(m\), as
 does Theorem~\ref{thm:budget-free-stability} once \(m\geq3\).  Those
 estimates control defect from specified generators; they do not put a
-defect ball inside that coordinate region.  The decomposition theorem is
-the inverse statement.  The aggregate theorem removes exponential
-dependence at \(q=2\) and improves it at \(q=3\), but its exact
-support-energy ledger loses to the single-marginal estimate for \(q>4\).
-At \(q=4\) it improves the collective frame radius but the telescoping
-\(\ell^1\) version does not.  Improving the higher-dimensional range needs
-algebraic relations among distinct support sectors, rather than their
-orthogonality alone.
+defect ball inside that coordinate region.  The cleaning theorem supplies
+the inverse statement at radius of order \(n^{-1/2}\), with no claim that
+this party-count dependence is optimal.
 
 \begin{corollary}[Local gauge groups of \(2\)-unitary gates]
 \label{cor:two-unitary-gauge}
