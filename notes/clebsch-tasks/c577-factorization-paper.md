@@ -60,13 +60,16 @@ Paper III.
 
 ## Next action
 
-Complete C856's fixed-line theorem, closure-wide documentation, trust, and
-verification repair.  After C856 returns a green authoritative tree, create a
-new canonical standalone forward commit and rerun its isolated aggregate.
-Only that successor commit may be considered for the author-owned push and
-immutable public release.  Once its locator is available, insert it in the
-authoritative manuscript and README, regenerate and forward-commit the export,
-then rerun the isolated release and separate final release pass.
+The post-standards-closure canonical export is forward-committed in the
+standalone repository at `6ce4165` (2026-08-03): the authoritative aggregate
+passed all four guarded gates, replays, PDF build, and warning scan at
+monorepo commit `2797c05e`; the export regenerated cleanly (sixty-two tracked
+files, ten content changes); and the isolated standalone aggregate is green
+on its fingerprint path.  `6ce4165` supersedes `71751691` as the sole
+publication candidate.  Next: the author-owned push of `6ce4165` and the
+immutable public locator.  Once the locator exists, insert it in the
+authoritative manuscript and README, regenerate and forward-commit the
+export, then rerun the isolated release and the separate final release pass.
 
 ## Boundaries
 
