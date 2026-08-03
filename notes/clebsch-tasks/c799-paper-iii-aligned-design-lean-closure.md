@@ -2,10 +2,12 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete; normalized seven-point classifier, symbolic third-point
-disambiguation, overlap consistency, query count, conference transport,
+**Status:** complete at the normalized-core boundary; normalized seven-point
+classifier, symbolic third-point disambiguation, conditional overlap
+consistency, query-polynomial identity, conference transport,
 forty-seven-declaration audit, both formal replays, and paper release gate are
-green; shared aligned-design API handed to C815
+green; Ramsey existence, arbitrary finite-set normalization, and query-family
+cardinality remain explicit human inputs
 
 ## Objective
 
@@ -53,6 +55,9 @@ audit and referee-ready prose; the guarded shared aggregate gate and both
 paper-local formal replays pass; and the trust manifests claim neither more nor
 less than the elaborated theorem package.
 
-Acceptance passed.  The exact result, trust boundary, replay commands, hashes,
-and closeout ledger are recorded in
+Acceptance passed for the normalized seven-point and algebraic transport
+scope.  The arbitrary finite-set globalization, Ramsey existence theorem, and
+cardinality of a defined selected-query family were not formalized and are not
+part of the Lean claim.  The exact result, trust boundary, replay commands,
+hashes, and closeout ledger are recorded in
 `notes/2026-08-02-c799-paper-iii-aligned-design-lean-closure.md`.

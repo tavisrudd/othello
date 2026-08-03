@@ -2,8 +2,9 @@
 
 **Lane:** `clebsch`  
 **Status:** third task for `go clebsch paper III`; begin after C815's
-declaration handoff; C799 and C822 statements frozen; C800 owns the later
-manifest reconciliation
+declaration handoff, now available in
+`RelativeConicArcs.FourShadowRecognition`; C799 and C822 statements frozen;
+C800 owns the later manifest reconciliation
 
 ## Objective
 
@@ -24,6 +25,27 @@ selected by C822.
   for the single manifest reconciliation.
 - Finite order-26 values may enter through small generated certificates only
   after the human/formal correspondence is explicit.
+
+## Frozen declaration handoff
+
+Reuse these C815 declarations rather than reopening the cubic-recognition
+layer:
+
+- `FourShadowRecognition.CubicsProportional`;
+- `FourShadowRecognition.pairTriangleSum_eq_zero_of_cubicsProportional`;
+- `FourShadowRecognition.exists_mul_self_eq_scalar_of_cubicsProportional`;
+- `FourShadowRecognition.PentagonGauge` and
+  `FourShadowRecognition.pentagonGauge_of_firstRowBalanced`;
+- `FourShadowRecognition.normalizedSignMatrix_sq_of_firstRowBalanced`;
+- `FourShadowRecognition.cubicsProportional_four_of_sixTests` and its
+  negative-orientation companion; and
+- `FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare`.
+
+The separately gated module reuses
+`ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply`; its pair-balance
+surface is the intended meeting point with this task's conference moment and
+departure-distance arguments.  C800, not this task, merges the focused gate
+into the final shared Paper III manifest.
 
 ## Work package
 
