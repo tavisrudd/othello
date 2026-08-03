@@ -74,9 +74,13 @@ theorem ChoicePath.map {options : List (List Nat)} {path : List Nat}
   | cons choice_mem _ induction =>
       exact .cons (List.mem_map.mpr ⟨_, choice_mem, rfl⟩) induction
 
-/-- Check that every XOR transition from `current` by an element of `options` lands in `next`. -/
+/-- The canonical sorted list of XOR successors from one transition stage. -/
+def transitionSuccessors (current options : List Nat) : List Nat :=
+  (current.flatMap fun state => options.map fun increment => state ^^^ increment).mergeSort.eraseDups
+
+/-- Check that `next` is exactly the canonical list of one-step XOR successors. -/
 def transitionCheck (current options next : List Nat) : Bool :=
-  current.all fun state => options.all fun increment => next.contains (state ^^^ increment)
+  transitionSuccessors current options == next
 
 /-- Check a sequence of post-transition state lists against a Cartesian list of increments. -/
 def chainCheck : List Nat → List (List Nat) → List (List Nat) → Bool
@@ -113,8 +117,12 @@ theorem mem_next_of_transitionCheck
     {current options next : List Nat} (checked : transitionCheck current options next = true)
     {state increment : Nat} (state_mem : state ∈ current) (increment_mem : increment ∈ options) :
     state ^^^ increment ∈ next := by
-  simp only [transitionCheck, List.all_eq_true] at checked
-  simpa using checked state state_mem increment increment_mem
+  have next_eq : transitionSuccessors current options = next := by
+    simpa [transitionCheck] using checked
+  rw [← next_eq]
+  simp only [transitionSuccessors, List.mem_eraseDups, List.mem_mergeSort, List.mem_flatMap,
+    List.mem_map]
+  exact ⟨state, state_mem, increment, increment_mem, rfl⟩
 
 /-- Every complete Cartesian choice reaches the terminal list of a successful chain certificate. -/
 theorem foldl_xor_mem_terminalStates
