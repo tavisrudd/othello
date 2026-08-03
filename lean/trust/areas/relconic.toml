@@ -251,6 +251,14 @@ coverage_rule = "closure"
 [[gate]]
 module = "RelativeConicArcs.Gates.GoldenQuantumStatistics"
 terminals = [
+  "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram",
+  "RelativeConicArcs.ConferenceExchange.crossGram_eq",
+  "RelativeConicArcs.ConferenceExchange.signedTriangle_sq",
+  "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange",
+  "RelativeConicArcs.ConferenceExchange.roots_charpoly_normalizedExchange",
+  "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange",
+  "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark",
+  "RelativeConicArcs.ConferenceExchange.schurWeyl_checksum",
   "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries",
   "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
   "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve",
@@ -697,6 +705,46 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.CorankOneAdjugate.adjugate_eq_smul_outerProduct_of_generated_kernels"
 gates = ["RelativeConicArcs.Gates.GoldenProofSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.crossGram_eq"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.signedTriangle_sq"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.roots_charpoly_normalizedExchange"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.schurWeyl_checksum"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
