@@ -68,6 +68,27 @@ def productSyndromes (pointLists : List (List Nat)) : List Nat :=
 def remainingFibres (special : Nat) : List Nat :=
   (List.range 7).filter fun index => index != special
 
+/-- Incidence-column syndromes offered by one list of point indices. -/
+def columnOptions (points : List Nat) : List Nat :=
+  points.map columnSyndrome
+
+/-- The three ordinary-fibre increment lists on the left of the isolated meet-in-the-middle
+decomposition. -/
+def isolatedLeftOptions (special : Nat) : List (List Nat) :=
+  (remainingFibres special).take 3 |>.map fun index =>
+    columnOptions (fibres.getD index [])
+
+/-- The base column, the twenty three-point increments in the distinguished fibre, and the three
+ordinary-fibre increment lists on the right of the isolated meet-in-the-middle decomposition. -/
+def isolatedRightOptions (special : Nat) : List (List Nat) :=
+  let remaining := remainingFibres special
+  [[columnSyndrome 0], (fibres.getD special []).sublistsLen 3 |>.map xorColumns] ++
+    (remaining.drop 3 |>.map fun index => columnOptions (fibres.getD index []))
+
+/-- The seven ordinary-fibre increment lists in the cycle profile. -/
+def cycleFibreOptions : List (List Nat) :=
+  fibres.map columnOptions
+
 /-- The 216 left syndromes for the isolated profile with a distinguished fibre. -/
 def isolatedLeft (special : Nat) : List Nat :=
   productSyndromes ((remainingFibres special).take 3 |>.map fun index => fibres.getD index [])
