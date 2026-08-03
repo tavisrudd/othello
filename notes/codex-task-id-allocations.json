@@ -2465,8 +2465,17 @@
       "last": 838,
       "purpose": "cleaning trust audit; admissible AME scaling; collective frame coercivity; robust atlas compatibility",
       "sequence": 274
+    },
+    {
+      "count": 1,
+      "first": 839,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 839,
+      "purpose": "document the two-paper split, trust boundaries, and extraction gates for cold sessions",
+      "sequence": 275
     }
   ],
-  "next_id": 839,
+  "next_id": 840,
   "schema": "codex-task-id-allocations-v1"
 }
