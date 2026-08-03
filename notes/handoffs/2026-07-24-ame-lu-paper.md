@@ -10,6 +10,14 @@ Discovery companion:
 
 ## Current status
 
+**C835--C838 are the active trust-first strengthening sequence (2026-08-02).**
+C835 audits C833's cleaning mechanism and quantitative novelty boundary against
+primary exact-code precedents.  Only after that gate, C836 replaces the
+fixed-`q` shorthand by admissible joint `(n,q)` regimes, C837 tests whether a
+collective coercivity estimate can remove the `sqrt(n)` entry loss, and C838
+tests exact transport-atlas compatibility including the affine character data.
+The sequence is structural; certificates are discovery-only.
+
 **C830 closed positively with a dimension boundary (2026-08-02): global
 minimum-support rounding.**  Orthogonality of all minimum-support sectors and
 a regular two-sector cover give an aggregate frame-rounding radius
