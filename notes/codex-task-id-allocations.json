@@ -2618,8 +2618,17 @@
       "last": 856,
       "purpose": "Repair the complete Paper II Lean standards audit gap set",
       "sequence": 291
+    },
+    {
+      "count": 1,
+      "first": 857,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 857,
+      "purpose": "close every Paper IV Lean standards-audit gap with a release checklist",
+      "sequence": 292
     }
   ],
-  "next_id": 857,
+  "next_id": 858,
   "schema": "codex-task-id-allocations-v1"
 }
