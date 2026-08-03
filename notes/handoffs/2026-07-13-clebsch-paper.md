@@ -69,7 +69,7 @@ block that theorem.
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; the forward formal and exposition release is complete, including concise Paper-III, Paper-IV, and Golden-companion pointers; authoritative and standalone twenty-six-check gates are green | [C791](../clebsch-tasks/c791-paper-i-balanced-spectrum-consequence.md) |
+| Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; existing gates are green, but C855 is required to formalize every paper/companion mathematical assertion in Lean and close the full referee-artifact standards debt before the next release is called theorem-complete | [C855](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; C856 must close the fixed-line inheritance, public-docstring, transitive-closure, and verification-expectation audit gaps before C577 repackaging | [C856](../clebsch-tasks/c856-paper-ii-lean-standards-closure.md) |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815 is reopened for proof-shape, classification-scope, and replay repairs before C823 | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md) |
 | Paper IV — *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete, but author now requires full Lean for public release; C834 must complete the proof-producing formal closure, then C857 must close the exhaustive Lean standards checklist before C761 packaging or publication | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md) |
@@ -280,6 +280,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 
 | task | state | next gate |
 |---|---|---|
+| [C855 — Paper I Lean referee-artifact standards remediation](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) | queued; required theorem-complete formalization and exhaustive standards closure for the full Paper I/main-companion release surface | map every rendered mathematical assertion to a kernel-checked Lean theorem, eliminate all human/computational/ad hoc-axiom gaps, then close semantic API, documentation, provenance, citation, manifest, trust, guarded replay, and standalone synchronization gates |
 | [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | complete; repaired B-plus manuscript, final independent acceptance 96/100, aggregate gates, and standalone synchronization closed | none; C815 is the current Paper III route task |
 | [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | complete at the normalized-core boundary; normalized cut classifier, symbolic third-point elimination, conditional overlap consistency, query-polynomial identity, determinant/switching transport, formal audits, and paper gate green | Ramsey existence, arbitrary finite-set normalization, and query-family cardinality remain human inputs; shared `AlignedTwoGraph` API is available to C815 and C823 |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
@@ -344,10 +345,12 @@ the split-paper route without an explicit user decision.
 
 Paper I and its companion *Computational strengthenings of Clebsch syndrome
 rigidity* form one warning-free, nineteen-row release surface with twenty-six
-checks and page counts \(22+12\). C714 is complete: the companion now uses the
-five explicit modes human structural proof, published theorem, Lean theorem,
-finite certificate, and trusted execution.  The C753/C762 forward release is
-fully synchronized locally; no live Paper-I release task remains.
+checks and page counts \(22+12\). C714 is complete: the companion currently
+records five modes—human structural proof, published theorem, Lean theorem,
+finite certificate, and trusted execution. C855 is now the live Paper I gate:
+it must replace every mathematical boundary in that five-mode ledger by a
+kernel-checked Lean theorem and close the complete scholarly-artifact audit
+before the next release is called theorem-complete.
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
