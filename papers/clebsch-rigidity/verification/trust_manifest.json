@@ -1933,9 +1933,9 @@
     }
   },
   "lean_repository": {
-    "commit": "09d8e174880e7370966da788da3c5d303df8af4f",
+    "commit": "9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5",
     "distribution": "separate shared Git repository",
-    "finitegeom_commit": "570086982b26075a71a331a81bb1b519e9a27e7f",
+    "finitegeom_commit": "85dfde9e13e6c3d004e0e659fb83c1a4761902d0",
     "path": ".",
     "url": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
   },
@@ -1944,7 +1944,7 @@
     "repository": "paper",
     "sha256": "8836bab9fa78e9fded27e5f2701cbd916de8b78a3f7d68e20843a7bd53c9c69d"
   },
-  "manuscript_sha256": "40519a2f05f19f21119e223c9a480cea182e2b1fe018819a4a0485f5debaa74b",
+  "manuscript_sha256": "58492d3dacb9b661987f26eb6b922a758fedae95008ad0b092bbb1279f9a0023",
   "public_documents": [
     {
       "path": "README.md",
@@ -1984,7 +1984,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "4706a31fa99f776ca63174e9101a9e69b7b320603b66d8cd651c30a53a2f811c"
+    "sha256": "35d95ae3b9cd791340628a9c1527ecde32c22a3c0a803b6fc7bc2ced5384204f"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2360,7 +2360,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "913f552780aa40f8a2538df593cc245f6c8a71254f6bba9bd815c5ca7638e5af"
+        "sha256": "0313536969c9cc25c0c440b5ce79bd0da72f023bfb5e207a9f8f3ef7da97ab82"
       },
       {
         "path": "verification/verify_trust_manifest.py",
