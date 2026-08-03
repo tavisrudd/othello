@@ -2636,8 +2636,17 @@
       "last": 858,
       "purpose": "audit all Paper II Lean and mathematical additions since 2026-08-01 against formal and paper standards",
       "sequence": 293
+    },
+    {
+      "count": 1,
+      "first": 859,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 859,
+      "purpose": "Remediate Paper II audit gaps: semantic gates, axiom audit, formal manifest, atlas ownership, public status prose, paper facts/title drift, bibliography tracking, guarded validation, and standalone sync",
+      "sequence": 294
     }
   ],
-  "next_id": 859,
+  "next_id": 860,
   "schema": "codex-task-id-allocations-v1"
 }
