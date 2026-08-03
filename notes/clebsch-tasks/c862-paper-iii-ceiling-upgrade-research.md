@@ -34,3 +34,11 @@ A committed, evidence-backed research report that distinguishes prose-only upgra
 ## First reporting pass
 
 `notes/2026-08-03-c862-paper-iii-ceiling-upgrade-research.md` records the independent verdict. Its main new findings are the spectral realization of the golden incidence fibre as `Q[C]`, the resulting norm interpretation of the commutator determinant, C809's shadow-recognition theorem as the true Paper-II-style priority-judo move, and arXiv `2601.10106` as a new integral-model input reducing the open seam to comparison and Stein-base-change questions. C862 remains active.
+
+## Theorem packet
+
+`notes/2026-08-03-c862-paper-iii-spectral-descent-recognition-theorem-packet.md`
+now gives the exact three-part human theorem package: golden spectral descent,
+determinant-line norm factorization with the factor `8000`, and the C809 converse
+recognition theorem with its marking, orientation, weighted, and integral boundaries.
+No manuscript or Lean source was changed. C862 remains active.

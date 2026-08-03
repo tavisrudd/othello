@@ -544,11 +544,12 @@ does not.
 
 This reporting pass is complete, but **C862 is deliberately not closed**. No queue row is
 archived or removed, no handoff is archived, and no manuscript promotion is authorized by
-this report. The highest-value continuation inside C862 is to formalize the
-spectral-algebra/norm theorem at human-proof level against the exact Paper III
-normalizations and then perform a bounded characteristic-three feasibility read of the
-Ito--Kanemitsu--Takamatsu--Tanaka model before deciding whether to allocate the integral
-comparison task.
+this report. The first continuation has now been delivered as
+`notes/2026-08-03-c862-paper-iii-spectral-descent-recognition-theorem-packet.md`,
+including the determinant-line norm formulation, exact scalar normalization, converse
+recognition proof, and promotion boundary. The next bounded research continuation is a
+characteristic-three feasibility read of the Ito--Kanemitsu--Takamatsu--Tanaka model
+before deciding whether to allocate the integral comparison task.
 
 Vibe check: the paper's ceiling is higher than the framing memo estimated. The main
 gain is not more material; it is discovering that the arithmetic fibre already acts on
