@@ -34,7 +34,17 @@ exact-traversal transition list.  Seven residue shards discharge all 595 secant 
 generated data, no generator, and no group action.  Report:
 `notes/2026-08-02-c834-cycle-profile-kernel-exclusion.md`.
 
-That report also settles the route for the rest of weight ten.  The already-formalized pencil-profile
+The first half of the semantic bridge is landed.  `PassantCodeQ13.WeightTen.PencilTransport`
+identifies the indexed base pencil, its fibres, and its secant neighbours with the corresponding
+semantic objects, and `PassantCodeQ13.WeightTen.SyndromeBits` characterizes every incidence-syndrome
+bit by induction on the row bound and proves that the certificates' two bitwise obstruction tests
+are exactly absence of a common passant and existence of a passant through three points.  Neither
+module runs a finite search.  What remains of the bridge is the list-versus-finset assembly turning
+the profile theorem's fibre sizes and secant-neighbour count into the selection shape the
+certificates consume, and the projective transport of an arbitrary support point to the fixed base
+point.  Report: `notes/2026-08-02-c834-weight-ten-semantic-bridge.md`.
+
+The earlier cycle-profile report also settles the route for the rest of weight ten.  The already-formalized pencil-profile
 dichotomy of `RelativeConicArcs.PassantCodeQ13.WeightTen.arbitrary_weightTen_word_has_pencil_profile`
 closes the endpoint with the two existing certificates, so neither the global moment identity and
 its `m=6`/`m=10` shape classification nor the thirty-seven stabilizer obstruction records need to be
