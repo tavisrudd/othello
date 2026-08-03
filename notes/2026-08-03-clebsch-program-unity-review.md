@@ -29,8 +29,8 @@ For the forward series framing, after the Paper-III recognition upgrades
 land:
 
 > The Clebsch program is a sequence of recognition theorems.  In each paper,
-> data that appear too coarse to remember their source recover the hidden
-> structure:
+> data that appear too coarse to remember their source nevertheless recover
+> the hidden structure:
 >
 > - **Paper I:** deep-hole syndromes recover a projective code and its golden
 >   endomorphism order;
