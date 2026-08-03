@@ -2654,8 +2654,26 @@
       "last": 860,
       "purpose": "Projective-cap Lean scholarly-artifact cleanup: remove reverse references and document public declarations in the shared ProjectiveCap/CapGame closure",
       "sequence": 295
+    },
+    {
+      "count": 1,
+      "first": 861,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 861,
+      "purpose": "general Paper II and Paper III Lean plan review and gap correction after C860 and the hard Paper I formalization parts",
+      "sequence": 296
+    },
+    {
+      "count": 1,
+      "first": 862,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 862,
+      "purpose": "Paper III framing, ceiling, and theorem-upgrade research report",
+      "sequence": 297
     }
   ],
-  "next_id": 861,
+  "next_id": 863,
   "schema": "codex-task-id-allocations-v1"
 }
