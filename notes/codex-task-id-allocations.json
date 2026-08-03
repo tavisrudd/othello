@@ -2672,8 +2672,17 @@
       "last": 862,
       "purpose": "Paper III framing, ceiling, and theorem-upgrade research report",
       "sequence": 297
+    },
+    {
+      "count": 1,
+      "first": 863,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 863,
+      "purpose": "Paper I II IV genre-appropriate significance exposition and Paper III advisory routing",
+      "sequence": 298
     }
   ],
-  "next_id": 863,
+  "next_id": 864,
   "schema": "codex-task-id-allocations-v1"
 }
