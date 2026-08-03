@@ -2456,8 +2456,17 @@
       "last": 834,
       "purpose": "Paper IV full Lean release closure",
       "sequence": 273
+    },
+    {
+      "count": 4,
+      "first": 835,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 838,
+      "purpose": "cleaning trust audit; admissible AME scaling; collective frame coercivity; robust atlas compatibility",
+      "sequence": 274
     }
   ],
-  "next_id": 835,
+  "next_id": 839,
   "schema": "codex-task-id-allocations-v1"
 }
