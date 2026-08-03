@@ -13,19 +13,22 @@ computational evidence.
 
 For a nonsingular conic \(\mathcal C\subset PG(2,q)\), the paper studies arcs
 \(A\) disjoint from \(\mathcal C\) whose secants cover every point outside
-\(A\cup\mathcal C\). Its main contributions include:
+\(A\cup\mathcal C\).  If \(\rho_{\mathcal C}(q)\) is the least possible size,
+the paper proves
+\(\rho_{\mathcal C}(q)\geq\sqrt{2q}+3/2-8/\sqrt{2q}\), classifies zero defect
+in characteristic two, and determines
+\(\rho_{\mathcal C}(13)=8\), \(\rho_{\mathcal C}(16)=9\),
+\(\rho_{\mathcal C}(17)=9\), and \(\rho_{\mathcal C}(19)=10\).
 
-- an exact prescribed-hole defect identity and its coverage consequences;
-- matching-design rigidity in the zero-defect case;
-- complete-affine and arbitrary-hole specializations;
-- a lower bound for the minimum relative-complete arc size;
-- evaluation obstructions for exceptional loci;
-- a two-unit defect gap whenever the relevant maximum-matching design does
-  not exist;
-- verified values at \(q=5,8,9,11,13,16,17,19\), including
-  \(\rho_{\mathcal C}(13)=8\), \(\rho_{\mathcal C}(16)=9\),
-  \(\rho_{\mathcal C}(17)=9\), and \(\rho_{\mathcal C}(19)=10\); and
-- a classification certificate excluding every eight-arc at \(q=16\).
+The mechanism works in every finite projective plane with an arbitrary
+prescribed hole set: the first two secant moments give an exact identity with
+a pointwise nonnegative remainder.  Equality converts the canonical
+secant-concurrency decomposition of the Kneser graph into a maximum-matching
+design; over a finite field that design has a rank-three projective
+realization.  The same identity supplies a quantitative deletion bound away
+from equality.  The defect identity, equality criterion, and deletion
+stability are independently formalized in Lean; the finite field values use
+the trust boundaries stated below.
 
 The human-scale formal development is distributed in
 [`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom). Its archived

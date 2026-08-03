@@ -1,10 +1,11 @@
 {
-  "title": "Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications at redundancies five through seven",
-  "description": "This preprint classifies deep holes of projective Reed–Solomon codes at redundancies five through seven. It combines geometric reductions with exact finite-field classifications, independently replayable certificates, and a separately archived formal-verification companion.",
+  "title": "Deep holes of projective Reed–Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten",
+  "description": "This preprint classifies projective Reed–Solomon split-free syndrome directions from redundancy five through ten and obtains deep-hole classifications wherever the covering-radius gate is available. Coherent polar contraction proves that, for every redundancy r≥6, the reduced recursively contained locus is exactly the catalecticant rank-two scheme plus one maximal adjacent-zero Lucas carrier. Fixed-level packages give exact deep-hole classifications at redundancies eight, nine, and ten for q≥43,53,59; a final-pair Artin–Schreier argument makes the full degree-nine Lucas carrier shallow over every F_{2^m}, m≥4. Replayable certificates and conditional Lean interfaces have explicit claim boundaries.",
   "creators": [
     {
       "name": "Rudd, Tavis",
-      "orcid": "0009-0003-6405-3275"
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
     }
   ],
   "access_right": "open",
@@ -19,7 +20,9 @@
     "normal rational curves",
     "finite geometry",
     "coding theory",
-    "formalized mathematics"
+    "formalized mathematics",
+    "Hankel matrices",
+    "Lucas carriers"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [

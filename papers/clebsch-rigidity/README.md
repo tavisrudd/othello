@@ -1,31 +1,29 @@
-# Clebsch rigidity paper
+# Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus
 
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- I*
 
 The shared progression is expository; this manuscript is logically
 independent of the other two.
 
-Working root for the focused rigidity/decoder manuscript titled
-*Reconstructing the Clebsch code and its golden orientation from its
-deep-hole syndrome locus*.
+[Read the paper (PDF).](clebsch_rigidity.pdf)
 
-- Scope owner: the focused Clebsch rigidity paper and its release surface.
-- Base: the focused manuscript snapshot at
-  `7d258dcd6cda9f54c330d4b705d553a975749014`.
-- Scope: rigidity, quantitative gaps, decoding, automorphisms, support
-  orientation, the intrinsic golden two-graph, Brianchon reconstruction,
-  the cubic's six-node projective frame, `q=11` uniqueness, the `q=13`
-  tangent code, the `4 <= k <= 8` classification, and their verification
-  architecture.
-- Boundary: no factorization-memory, reflection-arrangement, or later-passage
-  theorem or verification dependency.
+For a six-arc \(A\subset\operatorname{PG}(2,11)\), its uncovered points are
+the projective deep-hole syndromes of the associated \([6,3,4]_{11}\) MDS
+code.  The paper proves that this locus lies on a conic exactly when \(A\) is
+the Clebsch hexagon; in that case it is the entire conic.  Thus
+nearest-codeword data reconstruct the non-GRS code up to monomial equivalence,
+including its parity-check geometry and \(A_5\) stabilizer.
 
-The manuscript is `clebsch_rigidity.tex`. It was developed from the exact
-17-page source at `7d258dcd6cda9f54c330d4b705d553a975749014`, with the
-explicit matrix, complete census, and release-local verification surface
-added without importing later-paper claims.
+Coset-leader ambiguity then recovers an orientation torsor on six axes.  Its
+orbital operator satisfies \(B^2=5I\), and triangle holonomy recovers the
+support cubic and the integral order \(\mathbb Z[B]\simeq\mathbb Z[\sqrt5]\).
+The proof combines a universal chord-defect identity with decoder ambiguity
+and the orbital pentagon.  Uniformly, any \(k\)-arc whose uncovered locus is a
+nonsingular conic satisfies
+\(2k-3\leq q\leq(k(k-1)+3)/3\), reducing each fixed-\(k\) existence problem
+to finitely many fields.
 
-This is the active Clebsch manuscript. Build it from `papers/` with
+Build the manuscript from `papers/` with
 `make -B clebsch-rigidity`; the `clebsch` target builds the preserved
 mega-paper fallback.
 

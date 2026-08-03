@@ -1,10 +1,11 @@
 {
   "title": "Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes",
-  "description": "This preprint proves that diagonal isoduality is the exact all-length criterion selecting the full affine special-linear rather than split-torus transversal Clifford group of an MDS–CSS quantum code. Six-point geometry, exact finite classifications, and replayable certificates provide applications and boundary examples.",
+  "description": "For an odd-prime linear [2m,m,m+1]_q MDS code, this preprint proves that the diagonal code-to-dual multiplier space has dimension zero or one and exactly selects the projective transversal logical group: F_q²⋊SL₂(q) on the diagonally isodual branch and F_q²⋊T otherwise. Stabilizer-AME rigidity supplies the factorwise-Clifford converse; coherent Weil lifts and the Heisenberg obstruction delimit linear from affine splitting. For six coordinates, self-association gives the conic boundary and one degree-eight quotient classifies an explicit non-GRS pencil.",
   "creators": [
     {
       "name": "Rudd, Tavis",
-      "orcid": "0009-0003-6405-3275"
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
     }
   ],
   "access_right": "open",
@@ -19,7 +20,9 @@
     "quantum MDS codes",
     "CSS codes",
     "finite geometry",
-    "formalized mathematics"
+    "formalized mathematics",
+    "MDS codes",
+    "Weil representation"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [

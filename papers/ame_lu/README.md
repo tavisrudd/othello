@@ -2,22 +2,30 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21681856-blue.svg)](https://doi.org/10.5281/zenodo.21681856)
 
+## Read the paper
+
+[**Open the paper (PDF) →**](ame-lu.pdf)
+
 **Title:** *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer
 AME States.*
 
-**Lane:** `ame-lu`
+For every prime power \(q=p^e\) and \(m\geq2\), every product-unitary intertwiner
+between stabilizer \(\operatorname{AME}(2m,q)\) states is Clifford on each
+party.  The proof reconstructs the complete local Weyl frame from any
+\((m+1)\)-party marginal; the resulting minimum-support atlas also classifies
+local-unitary equivalence up to local symplectic frame changes.  Transversal
+conversions between the associated \([[2m-1,1,m]]_q\) stabilizer encoders are
+therefore Clifford factor by factor.
 
-**Status:** Paper I of the completed manuscript split. The source builds as a
-35-page paper centered on exact stabilizer-AME rigidity, cleaning-based
-quantitative rounding, the minimum-support atlas, and the affine
-stabilizer-character obstruction. The MDS--CSS exact-group, six-point,
-computational, transport, and party-extension material is owned by the
-separate `mds_css_transversal_groups` paper.
-
-Public identifiers, deposit, and submission remain author gates. The release
-manifest, paper-specific formal-root contract, and standalone synchronization
-are later split phases and have not been refreshed from the pre-split
-baseline.
+A leakage-aware three-region cleaning argument gives a quantitative theorem:
+defect \(\varepsilon\) puts every local factor within \(8\varepsilon\) of a
+Clifford throughout the certified radius
+\(\Theta(\min\{p^{-1},q^{-1/2},n^{-1/2}\})\).  Weyl--Fourier concentration and
+the stabilizer overlap gap select an exact symmetry.  The sharp remaining
+boundary is affine: localized commutators recover the symplectic atlas but
+cannot control the product-Pauli correction.  Exact MDS--CSS logical groups
+and six-point applications belong to the separate
+`mds_css_transversal_groups` paper.
 
 ## Build
 
@@ -65,3 +73,6 @@ shared `RelativeConicArcs.AMELU` namespace. The cleaning constants, Fourier
 rounding, global quantitative theorem, robust atlas compatibility, and affine
 obstruction are manuscript proofs without Lean or certificate coverage. A
 paper-specific semantic gate has not yet replaced the pre-split aggregate.
+The tracked release manifest and standalone evidence package likewise still
+describe the pre-split combined manuscript; they are not a release-ready
+statement of this Paper I scope.

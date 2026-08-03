@@ -5,23 +5,22 @@
 The shared progression is expository; this manuscript is logically
 independent of the other two.
 
-This directory contains the `clebsch-passages` manuscript and artifact.  Its
-main argument has four stages:
+[Read the paper (PDF).](clebsch_passages.pdf)
 
-1. the rational square class of Hitchin's incidence cover, its exact local
-   golden fibre, and the specialization of the fibre exchanger modulo `11`;
-2. the normalized incidence components and, relative to an explicit golden
-   marking and linear lift, their sign comparison with the conference class
-   and Petersen four-space;
-3. the conference operator's triangle, middle-exterior, Pfaffian,
-   cross-golden determinant, Joubert--Segre, and Segre--Igusa cubic shadows,
-   together with the balanced exchange-rigidity theorem that characterizes
-   order six among symmetric conference carriers and the aligned-design
-   inversion theorem that reconstructs every higher signing from quadratic
-   selected determinant data;
-   and
-4. the degree-six icosahedral Gaunt/Steinhardt cubic on the Petersen
-   four-space.
+The paper determines the rational twist in Hitchin's double cover of the
+projective space of harmonic cubics:
+\(\mathbb Q(\mathbf P(H))(\sqrt{5J_0})\).  A complete golden fibre fixes the
+factor \(5\), and a marked bridge datum turns the deck sign into the sign of an
+order-six conference operator \(C\) with \(C^2=5I\).
+
+The resulting oriented cubic is simultaneously triangle holonomy, the
+diagonal of the middle exterior power, a commutator Pfaffian, and a
+cross-golden determinant.  Its outer translates are Joubert coordinates on
+the Segre cubic, while centered squares give the Segre--Igusa polar map.
+Balanced exchange rigidity characterizes order six, and aligned four-sets
+reconstruct every two-graph on at least seven vertices up to complement.
+With the same marking, the Petersen eigenspace embeds as the Clebsch
+four-space in degree-six zonal harmonics.
 
 The fixed-icosahedron Clebsch charts in the first theorem are conjugate
 charts over `Q(sqrt(5))`; they are not presented as rational subspaces of

@@ -11,9 +11,18 @@ For an odd-prime linear `[2m,m,m+1]_q` MDS code, the paper proves that the
 space of diagonal code-to-dual multipliers has nullity zero or one and that
 this nullity selects the exact fixed-party projective transversal logical
 group: `F_q^2 ⋊ SL_2(q)` on the diagonally isodual branch and `F_q^2 ⋊ T`
-otherwise. The six-coordinate applications include the conic boundary, the
-non-GRS pencil quotient, Clebsch syndrome geometry, scalar separators, and
-computed party extensions.
+otherwise.  Stabilizer-AME rigidity supplies the converse: every
+tensor-product logical implementation is Clifford factor by factor.  The
+linear `SL_2(q)` action has coherent Weil lifts, while its affine extension
+retains the Heisenberg obstruction to scalar splitting.
+
+For six coordinates, diagonal isoduality is exactly self-association of the
+six-arc and hence the conic boundary.  On an explicit non-GRS pencil, one
+degree-eight quotient classifies projective and monomial-code equivalence over
+odd fields and local-Clifford and local-unitary equivalence over odd prime
+fields.  The Clebsch code supplies the worked syndrome-geometric example.
+Exact certificates cover the finite six-point calculations; the all-length
+multiplier and group theorems are conceptual.
 
 Build and verify from this directory:
 

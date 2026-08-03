@@ -8,15 +8,21 @@ independent of the other papers.
 This directory contains the manuscript
 *Quadratic trade rigidity and cubic orientation in conic matching quotients*.
 
-The paper classifies full projective matching orbits from an intrinsic
-two-valued quadratic trade.  Exactly the `B_3/F_7` and `H_3/F_11`
-orbits survive.  Quadratic products recover their two unordered sheets,
-and the first signed tensor moment is a cubic that orients them.  The
-matching hypothesis is sharp: off the secant-product Chow locus, `q-2`
-nonmatching orbits retain the same trade.  The paper also proves quotient
-ranks `3,6,10` and the self-associated Gorenstein consequences.  The
-appendices record six-profile reconstruction, modular depth, arithmetic
-splitting, and further `H_3` cubic structure.
+[Read the paper (PDF).](clebsch_factorization.pdf)
+
+Restriction to a conic forgets how its marked points were paired into
+secants.  The paper classifies the full projective matching orbits whose
+conic-quotient evaluation space has a two-valued strength-two trade: exactly
+the balanced `B_3/F_7` and `H_3/F_11` orbits survive.  The trade reconstructs
+their two unordered sheets, and the first signed tensor moment is the cubic
+that orients them and generates the Gorenstein duality of the associated
+Artinian reduction.
+
+The matching hypothesis is sharp.  On the ambient fixed line, the matching
+point is the only completely reducible Chow point, while `q-2` nonmatching
+orbits retain the same trade.  Complete reducibility therefore restores the
+faithfulness lost off the matching carrier.  A uniform modular argument
+excludes every other matching orbit without a field census.
 
 ## Files
 

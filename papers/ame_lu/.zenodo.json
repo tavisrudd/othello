@@ -1,10 +1,11 @@
 {
   "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States",
-  "description": "This preprint proves factorwise local-Clifford rigidity for product-unitary intertwiners of additive stabilizer absolutely maximally entangled states. A quantitative three-region cleaning and Weyl–Fourier argument gives explicit Clifford rounding, a defect-only decomposition radius, robust minimum-support-atlas compatibility, and an exact affine-character obstruction.",
+  "description": "For every prime power q and m≥2, this preprint proves that every product-unitary intertwiner between stabilizer AME(2m,q) states is Clifford on each party. Any (m+1)-party marginal reconstructs the complete local Weyl frame, yielding a minimum-support atlas and factorwise rigidity for transversal encoder conversions. A leakage-aware three-region cleaning and Weyl–Fourier argument gives 8ε Clifford rounding throughout the certified radius Θ(min{p⁻¹,q⁻¹ᐟ²,n⁻¹ᐟ²}); the remaining product-Pauli correction is the exact affine-character boundary.",
   "creators": [
     {
       "name": "Rudd, Tavis",
-      "orcid": "0009-0003-6405-3275"
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
     }
   ],
   "access_right": "open",

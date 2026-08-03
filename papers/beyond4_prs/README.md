@@ -2,20 +2,34 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682069-blue.svg)](https://doi.org/10.5281/zenodo.21682069)
 
+## Read the paper
+
+[**Open the paper (PDF) →**](prs-beyond-redundancy-four.pdf)
+
+[**Open the TIT submission version (PDF) →**](prs-beyond-redundancy-four-tit-submission.pdf)
+
 This directory contains the manuscript
 *Deep holes of projective Reed--Solomon codes beyond redundancy four:
 recursive carriers and exact classifications through redundancy ten* and its public
 verification bundle.
 
-The paper proves complete classifications at redundancies five and six over
-every prime power \(q\geq7\), the complete split-free redundancy-seven
-classification, and exact high-field classifications at redundancies eight
-through ten.  Its recursive theorem identifies the reduced contained carrier
-at arbitrary redundancy as the persistent catalecticant scheme plus one
-maximal Lucas carrier.  In characteristic greater than \(r-1\), this gives an
-exact classification above the displayed uniform threshold.  At redundancy
-ten the first fresh higher Lucas carrier is shallow in every admissible binary
-field.
+The first previously open case, redundancy five, and redundancy six are
+classified for every prime power \(q\geq7\).  Redundancy seven has a complete
+split-free classification for every \(q\geq7\), promoted to a deep-hole
+classification for \(q\geq11\); redundancies eight, nine, and ten have exact
+deep-hole classifications for \(q\geq43,53,59\), respectively.
+
+The governing mechanism is coherent polar contraction.  For every
+\(r\geq6\), the reduced recursively contained locus is unconditionally the
+union of the catalecticant rank-two scheme and one maximal adjacent-zero
+Lucas carrier.  Dense squarefree markers select one terminal component, while
+Pascal nesting merges all modular descendants into that carrier.  Under the
+stated intermediate-package hypothesis this yields the uniform
+arbitrary-redundancy classification; at redundancy ten a final-pair
+Artin--Schreier argument proves that the entire degree-nine Lucas carrier is
+shallow over every \(\mathbb F_{2^m}\), \(m\geq4\).  The supplement states
+exactly where bounded certificates, mathematical arguments, and conditional
+Lean interfaces enter.
 
 ## Build
 

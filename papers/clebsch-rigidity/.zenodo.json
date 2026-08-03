@@ -1,10 +1,11 @@
 {
   "title": "Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus",
-  "description": "This preprint proves that the projective deep-hole syndrome locus characterizes the Clebsch code and reconstructs its conic, polarity, symmetry, and intrinsic golden orientation two-graph. The repository also contains a computational companion with exact finite-field censuses, a q=13 tangent-code theorem, decoding checks, and independently replayable terminal exclusions.",
+  "description": "For a six-arc in PG(2,11), this preprint proves that the projective deep-hole syndrome locus lies on a conic exactly for the Clebsch hexagon, when it is the entire conic. Nearest-codeword data therefore reconstruct the non-GRS Clebsch code, parity-check geometry, polarity, and A₅ symmetry. Coset-leader ambiguity then recovers the golden orientation torsor, its support cubic, and the integral order Z[√5]. A uniform chord-defect bound reduces the analogous fixed-k existence problem to finitely many field orders.",
   "creators": [
     {
       "name": "Rudd, Tavis",
-      "orcid": "0009-0003-6405-3275"
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
     }
   ],
   "access_right": "open",

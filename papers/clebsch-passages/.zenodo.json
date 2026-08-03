@@ -1,6 +1,6 @@
 {
   "title": "Golden descent and operator realizations of the Clebsch cubic",
-  "description": "This preprint traces the golden orientation of the Clebsch cubic from Hitchin's incidence cover, whose rational square class is 5J0, through a six-point conference operator with square 5I. Its triangle, middle-exterior, commutator-Pfaffian, and determinant shadows recover the classical Joubert--Segre and Segre--Igusa constructions, while a degree-six Petersen/Gaunt realization returns the same Clebsch invariant harmonically. The marking boundary is explicit, and replayable exact computations accompany a partial formal companion.",
+  "description": "This preprint determines Hitchin's incidence double cover over harmonic cubics as Q(P(H))(√(5J₀)) and turns a marked deck sign into an order-six conference operator C with C²=5I. One oriented cubic appears as triangle holonomy, a middle-exterior diagonal, a commutator Pfaffian, and a cross-golden determinant; its translates and squares recover the Joubert–Segre and Segre–Igusa constructions. Balanced exchange rigidity characterizes order six, aligned four-sets reconstruct every two-graph on at least seven vertices up to complement, and a Petersen/Gaunt realization returns the same Clebsch invariant harmonically.",
   "creators": [
     {
       "name": "Rudd, Tavis",
@@ -20,7 +20,10 @@
     "Gaunt coefficients",
     "arithmetic geometry",
     "representation theory",
-    "formalized mathematics"
+    "formalized mathematics",
+    "conference matrices",
+    "two-graphs",
+    "Segre cubic"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [
