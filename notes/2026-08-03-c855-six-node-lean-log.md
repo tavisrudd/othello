@@ -54,12 +54,39 @@ All commands run from `/home/tavis/src/othello`.
   passed. This covers the reverse-import closure of the edited modules inside the Paper I
   stream (`PaperIOrientationSpine`, `PaperIOrientationSymmetryCore`).
 
+## Aggregate gate and audit refresh (2026-08-03, later session)
+
+* `lean/scripts/lean-build-queue.py run RelativeConicArcs.Gates.ClebschRigidityTrust --profile
+  single --threads 1 --cores 20-23` — run `~/.cache/othello-lean-build/run-20260803-201132-5b9abc76`,
+  state `success`: `built RelativeConicArcs.Gates.ClebschRigidityTrust` (24:29 wall, 11.5 GB peak
+  RSS) followed by `gate-passed <aggregate>` (the trace-only exact-target confirmation).
+* `lean/scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean` — `exit=0`,
+  156 stdout lines. That stdout is copied verbatim to
+  `lean/verification/clebsch_rigidity_trust/axiom-audit.txt`, per the audit convention that the
+  file is the raw standard output of a successful gate elaboration.
+* Counts: the gate now issues 52 `#print axioms` directives (previously 51 — one deleted terminal
+  removed, two new ones added), and the audit contains 52 declaration rows in the same order.
+* Audit content checks: no `sorry`/`sorryAx`, no native-execution or oracle axiom, and the only
+  axioms outside `propext`/`Classical.choice`/`Quot.sound` remain the two classical Dye
+  assumptions `RelativeConicArcs.ClebschDye.dye1991_brianchon_bound` and
+  `RelativeConicArcs.ClebschDye.dye1991_equality_classification`. Both
+  `derivative_crossGoldenDeterminantLine_eval` and
+  `singularPoints_crossGoldenDeterminant_eq_axisClasses` report exactly
+  `[propext, Classical.choice, Quot.sound]`.
+* `lean/scripts/paper-facts.py check` and `lean-trust-spine.py check` report only pre-existing
+  cross-lane drift (stale facts artifacts, citation-title drift, foreign undeclared axioms); no
+  finding names the Paper I gate, its terminals, or the audit artifact.
+
 ## Left for the owning gate build window
 
-* `RelativeConicArcs/Gates/ClebschRigidityTrust.lean` was edited (one `#print axioms` line
-  replaced by two) but not elaborated: its dependency closure is the full Paper I terminal set.
-* `verification/clebsch_rigidity_trust/axiom-audit.txt` still names the deleted theorem. It is a
-  generated audit artifact and must be regenerated with the gate.
 * The manuscript passages `papers/clebsch-rigidity/clebsch_rigidity.tex` around lines 1370 and
   1466 still attribute singular-locus completeness to the cited proposition; they should be
   rewritten to cite the proved Lean theorem, with Hassett–Tschinkel demoted to context.
+* `papers/clebsch-rigidity/verification/build_trust_manifest.py` still lists
+  `RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual` in its
+  `TERMINALS` orientation group and does not list the two new node theorems; its `parse_axioms`
+  raises on any mismatch with the audit, so `trust_manifest.json` cannot be regenerated until that
+  list is edited. That edit belongs with the manuscript rewrite and the full release replay
+  documented in `papers/clebsch-rigidity/verification/README.md` (regenerate statement identity and
+  trust manifest, refresh `verify-release-output.json` with `--update-output`, rerun
+  `build_trust_manifest.py`, then the clean-source release run). Left untouched here.

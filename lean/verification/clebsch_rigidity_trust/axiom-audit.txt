@@ -133,7 +133,12 @@
 'RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual' does not depend on any axioms
+'RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
