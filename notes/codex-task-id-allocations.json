@@ -2528,8 +2528,17 @@
       "last": 846,
       "purpose": "PRS Version 2 spine compression and proof-appendix restructuring",
       "sequence": 281
+    },
+    {
+      "count": 1,
+      "first": 847,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 847,
+      "purpose": "Paper II theorem-only cold and adversarial read, including exact-group figure comprehension, before formal extraction",
+      "sequence": 282
     }
   ],
-  "next_id": 847,
+  "next_id": 848,
   "schema": "codex-task-id-allocations-v1"
 }
