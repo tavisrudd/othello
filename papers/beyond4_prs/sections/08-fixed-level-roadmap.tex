@@ -1,0 +1,67 @@
+\section{From the carrier theorem to the fixed levels}
+
+Theorem~\ref{thm:recursive-carrier} identifies every component on which a
+polar line can remain trapped.  At a fixed redundancy, two questions remain.
+First, away from that carrier, one must construct the successive pointed lower
+packages required by Theorem~\ref{thm:induction}.  Second, one must decide
+whether the maximal Lucas carrier itself contains a split-free point.  These
+are finite-depth questions, but their answers use different geometry: the
+first is controlled by marker, ramification, and deletion divisors; the second
+by the arithmetic of the adjacent-zero Hankel kernel.
+
+Table~\ref{tab:classification-status} records the resulting field ranges and
+the separate covering-radius gates.  The exact exceptional orbits at
+redundancies six and seven are stated in Theorems~\ref{thm:r6} and
+\ref{thm:r7}; the high-field statements are Theorems~\ref{thm:r8},
+\ref{thm:r9}, and Corollary~\ref{cor:r10}.  In each case the geometric
+argument first classifies split-free syndrome directions and only then invokes
+Proposition~\ref{prop:upper-radius}.
+
+\subsection{Pointed escape through redundancy nine}
+
+At redundancies six and seven, the first two pointed packages expose the
+mechanism in its smallest dimensions.  The persistent rank-two carrier,
+exact-linear-gcd boundary, modular nucleus, and self-collision divisor account
+for every polar line that can fail to escape.  The remaining line meets a
+proper bad scheme of bounded degree, and the terminal cubic cover supplies a
+split squarefree witness.  Appendix~\ref{sec:r67} proves the exhaustive
+contained-component classification and closes the bounded fields by finite
+certificates.
+
+The next two levels repeat this argument with three and four retained markers.
+For redundancy eight, the terminal ordered-root object is the off-diagonal
+$(2,2)$ curve of a cubic pencil; its geometric $S_3$ monodromy gives an
+integral genus-one cover, while the three marker fibres contribute the exact
+deletion budget.  For redundancy nine, a principal-open cover of quartic
+moduli reduces the last obstruction to a residual quadratic and a
+one-moving-root slice.  The resulting bounds are $q\geq43$ and $q\geq53$.
+Appendix~\ref{sec:fixed} records the equations, divisor tables, modular lifts,
+and the proof that none of the named bad factors vanishes identically.
+
+\subsection{The first higher Lucas carrier}
+
+The first genuinely new arithmetic carrier occurs at redundancy ten in
+characteristic two.  A six-root divisor leaves a final quadratic pair.  After
+normalization, that pair is split and squarefree exactly when its nonzero
+linear coefficient $s$ satisfies an Artin--Schreier trace condition
+\(\operatorname{Tr}(p/s^2)=0\), together with the finitely many marker
+avoidances.  This final-pair criterion covers the quotient directions missed
+by the projective-additive subspace construction.  It proves
+Theorem~\ref{thm:m9-shallow}: every rational point of the degree-nine Lucas
+carrier is shallow over every admissible binary field.
+
+For the transverse R10 argument, the unavailable-marker degree after $i$
+contractions is
+\[
+                 3+2+(14-2i)+i+2i=19+i\leq23,
+                 \qquad 0\leq i\leq4.
+\]
+The five pointed stages therefore reach the same terminal cover without
+losing a retained marker.  In characteristic seven, contraction at infinity
+lands on the R9 binary-quartic carrier; its seven finite roots lift with the
+factor at infinity to a squarefree octic.  In characteristic two,
+Theorem~\ref{thm:m9-shallow} removes the remaining carrier.  These two
+arguments, together with the odd-characteristic carrier calculation, give
+Corollary~\ref{cor:r10}.  Appendix~\ref{sec:lucas} contains the invariant-block
+calculation, the full final-pair proof, the stagewise propriety checks, and the
+characteristic-seven lift.

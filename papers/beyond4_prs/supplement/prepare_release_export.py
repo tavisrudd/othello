@@ -39,6 +39,7 @@ PAPER_PATHS = (
     PAPER_PATH / "sections/05-polar-induction.tex",
     PAPER_PATH / "sections/06-redundancies-six-seven.tex",
     PAPER_PATH / "sections/07-recursive-carriers.tex",
+    PAPER_PATH / "sections/08-fixed-level-roadmap.tex",
     PAPER_PATH / "sections/07-fixed-level-eight-nine.tex",
     PAPER_PATH / "sections/09-lucas-carriers.tex",
     PAPER_PATH / "sections/10-verification.tex",

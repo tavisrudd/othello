@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** Active.
+**Status:** Structural edit complete; clean-export and cold-read gates remain.
 
 ## Objective
 
@@ -32,3 +32,18 @@ Reduce the TIT main body before appendices from 36 pages to approximately
 count; any net compression must come from deleting duplicated navigation or
 administrative prose, not from omitting proof.
 
+## Implemented structure
+
+The TIT body now ends on page 15 and Appendix A begins on page 16.  The body
+contains the introduction and reading map, syndrome--Hankel dictionary,
+complete R5 proof, coherent polar induction, exact recursive carrier theorem,
+a fixed-level mechanism synopsis, and the mathematical scope/open problems.
+The complete R6--R7, R8--R9, R9 slice, Lucas/R10, and verification arguments
+remain in the same PDF as Appendices A--E.
+
+The introductory R6/R7 synopsis was shortened without changing its label or
+scope.  The fixed-level synopsis exposes the pointed-package and Lucas-carrier
+interfaces, including the R10 stage budget and characteristic-seven lift,
+before sending coordinate classifications and divisor ledgers to the
+appendices.  The canonical and TIT builds are warning-free at 54 and 39 pages;
+the paper retains 75 mapped labels and 69 public evidence artifacts.

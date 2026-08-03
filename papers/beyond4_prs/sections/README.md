@@ -2,19 +2,22 @@
 
 `main.tex` is the canonical preprint driver and `main-tit.tex` is the
 single-column IEEEtran review driver.  Both consume the same frontmatter,
-eleven active section files, one appendix, acknowledgment, and bibliography:
+twelve active section files, one separate appendix file, acknowledgment, and
+bibliography.  The first eight entries form the body; the fixed-level proof
+files and verification section follow the appendix switch:
 
 1. `01-introduction.tex`
 2. `02-overview.tex`
 3. `03-dictionary.tex`
 4. `04-redundancy-five.tex`
 5. `05-polar-induction.tex`
-6. `06-redundancies-six-seven.tex`
-7. `07-recursive-carriers.tex`
-8. `07-fixed-level-eight-nine.tex`
-9. `09-lucas-carriers.tex`
-10. `10-verification.tex`
-11. `11-provenance-boundary.tex`
+6. `07-recursive-carriers.tex`
+7. `08-fixed-level-roadmap.tex`
+8. `11-provenance-boundary.tex`
+9. `06-redundancies-six-seven.tex`
+10. `07-fixed-level-eight-nine.tex`
+11. `09-lucas-carriers.tex`
+12. `10-verification.tex`
 
 The R9 slice data are in `appendices/r9-slice-data.tex`.
 

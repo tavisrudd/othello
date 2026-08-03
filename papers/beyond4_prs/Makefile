@@ -10,6 +10,7 @@ TEX_SOURCES := main.tex main-tit.tex $(wildcard frontmatter/*.tex) \
 	sections/03-dictionary.tex sections/04-redundancy-five.tex \
 	sections/05-polar-induction.tex sections/06-redundancies-six-seven.tex \
 	sections/07-recursive-carriers.tex \
+	sections/08-fixed-level-roadmap.tex \
 	sections/07-fixed-level-eight-nine.tex sections/09-lucas-carriers.tex \
 	sections/10-verification.tex sections/11-provenance-boundary.tex \
 	appendices/r9-slice-data.tex

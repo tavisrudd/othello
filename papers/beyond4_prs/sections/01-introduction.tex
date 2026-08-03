@@ -126,18 +126,11 @@ The Hankel dictionary turns redundancy five into a pencil of cubics.
 Cyclic descent gives the arithmetic families in
 Theorem~\ref{thm:r5}; the \(S_3\) case is controlled by the
 off-diagonal fiber square and a genus-one point bound.  At higher
-redundancy, contraction lowers the degree, but the removed root must
-remain forbidden: restoring a lower witness through that root creates
-a double factor.  Coherent polar flags retain precisely this datum.
-The finite-depth polar-escape theorem separates the uniform induction
-from the question of which polar lines are trapped in the lower bad
-carrier.  Redundancies six and seven first evaluate that input at depths one
-and two.  The recursive carrier theorem then proves that the full contained
-locus is the persistent scheme plus the maximal Lucas carrier at every
-depth.  The later fixed-level results evaluate the arithmetic on that
-carrier.  Section~\ref{sec:overview} gives the short proof route.
-
-The resulting structural theorem has two outputs.
+redundancy, coherent polar contraction lowers the degree while retaining the
+removed root as a forbidden marker.  The recursive carrier theorem identifies
+the polar lines that remain trapped; the fixed-level arguments evaluate the
+transverse packages and Lucas-carrier arithmetic.  Section~\ref{sec:overview}
+gives the short proof route.
 
 \begin{theorem}[Redundancy-six deep holes and redundancy-seven split-free syndromes]
 \label{thm:spine}
@@ -145,39 +138,19 @@ The following statements hold.
 \begin{enumerate}[label=\textup{(\alph*)}]
 \item For every prime power $q\geq7$, the projective deep-hole
       directions of $\PRS(q-5)$ are exactly the persistent tangent and
-      conjugate-secant families, the exceptional orbits listed for
-      $q=7,8,9,11,13$, and, when $q=2^m$ with odd $m\geq5$, one
-      characteristic-two nucleus orbit.  Here \(m\geq5\) avoids double
-      counting: \(m=3\), or \(q=8\), is already the
-      \(|\mathcal O|=9\) row of the exceptional table.
-\item The displayed finite domains through $q=32$ have the certified
-      split-free classification stated in Section~\ref{sec:r67}.
-      Together with the structural theorem, these finite
-      classifications give the all-prime-power result: for every $q\geq13$
-      the split-free locus consists of the persistent families and,
-      when $q=2^m$ with $m$ odd, one central nucleus point.  This is a
-      deep-hole classification only when $\rho(\PRS(q-6))=6$, in
-      particular for $q\geq11$.
+      conjugate-secant families, the five finite-field exception rows of
+      Theorem~\ref{thm:r6}, and, when $q=2^m$ with odd $m\geq5$, one
+      characteristic-two nucleus orbit.
+\item For every prime power $q\geq7$, Theorem~\ref{thm:r7} gives the
+      complete split-free redundancy-seven classification.  For $q\geq13$
+      only the persistent families and, when $q=2^m$ with odd $m$, one
+      central nucleus point remain.  The result is a deep-hole classification
+      for $q\geq11$; the radius at $q=7,8,9$ remains separate.
 \end{enumerate}
-At redundancy $r$, the semilinear orbits in the persistent
-conjugate-secant family are parameterized by
-\[
-       T/T^{\,r-1}\quad\text{modulo inversion and Frobenius},
-\]
-where
-$T=\{z\in\F_{q^2}^{\times}:z^{q+1}=1\}$ is the norm-one torus and
-Frobenius is coefficient Frobenius.  On the tangent family the
-unipotent coordinate transforms as $z\mapsto z+(r-1)u$; consequently
-its orbit decomposition changes precisely when
-$\operatorname{char}\F_q$ divides $r-1$.
 \end{theorem}
 
-The two parts have different scopes.  Both are unconditional syndrome
-classifications over every prime power \(q\geq7\), but part~(b)
-becomes a deep-hole classification only when
-$\rho(\PRS(q-6))=6$.  Table~\ref{tab:classification-status} places the
-split-free result, radius gate, deep-hole conclusion, and remaining
-field gap in separate columns for each redundancy.
+Table~\ref{tab:classification-status} separates the split-free result,
+radius gate, deep-hole conclusion, and remaining field gap at every level.
 
 \paragraph{Relation to previous work.}
 The tangent and conjugate-secant families and the coding/normal-rational
