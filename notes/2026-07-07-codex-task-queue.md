@@ -25,8 +25,7 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C836 `[ame-lu]` [RUNNING; TRUST GATE C835 CLOSED]** — replace the potentially vacuous fixed-local-dimension asymptotic framing of C833 by admissible joint `(n,q)` regimes: state the exact threshold without an existence claim, then specialize only to proved AME/MDS families and clearly separate prime, fixed-characteristic extension-field, and conditional regimes → `notes/2026-08-02-c836-admissible-ame-rounding-scaling.md`.
-- **C837 `[ame-lu]` [QUEUED; AFTER C836]** — prove or structurally refute a collective frame-coercivity estimate strong enough to eliminate the `sqrt(n)` summation loss in the entry threshold. Distinguish the already available post-entry quadratic bound from a genuinely radius-improving pre-entry estimate; use computation only for discovery if a bounded falsifier is useful → `notes/2026-08-02-c837-collective-frame-coercivity.md`.
+- **C837 `[ame-lu]` [RUNNING; C836 ADMISSIBLE SCALING CLOSED]** — prove or structurally refute a collective frame-coercivity estimate strong enough to eliminate the `sqrt(n)` summation loss in the entry threshold. Distinguish the already available post-entry quadratic bound from a genuinely radius-improving pre-entry estimate; use computation only for discovery if a bounded falsifier is useful → `notes/2026-08-02-c837-collective-frame-coercivity.md`.
 - **C838 `[ame-lu]` [QUEUED; AFTER C837]** — prove or structurally refute exact compatibility of the locally recovered Clifford data through the minimum-support transport atlas at a dimension-only defect scale. Treat the affine Weyl/character data as well as the linear symplectic frames, and state precisely what this does or does not improve in global rounding → `notes/2026-08-02-c838-robust-atlas-compatibility.md`.
 
 Source material for C774--C777 is the external Fable session note

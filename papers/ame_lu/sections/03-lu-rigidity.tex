@@ -1938,13 +1938,40 @@ Apply Theorem~\ref{thm:budget-free-stability} to the residual to obtain
 (5.17).
 \end{proof}
 
+The exact formula, rather than a fixed-dimension slogan, controls scaling.
+Uniformly over prime powers \(q=p^e\) and existing tensors,
+\[
+ R^{\mathrm{clean}}_{n,q}
+ =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{5.20}
+\]
+with absolute implied constants.  Indeed
+\(\sin(\pi/p)=\Theta(p^{-1})\), while \(d_p\) is bounded above and below
+by positive absolute constants.  An asymptotic use of (5.20) must specify
+an existing family.
+
+For the explicit generalized and extended generalized Reed--Solomon
+construction, \(n=2m\leq q+1\), so the party-count term cannot be smaller
+than the local-dimension term.  Hence
+\[
+ R^{\mathrm{clean}}_{n,q}
+ =\begin{cases}
+   \Theta(q^{-1}),&q=p,\\
+   \Theta(q^{-1/2}),&q=p^e,\ e\geq2.
+  \end{cases}                                                        \tag{5.21}
+\]
+On a length-saturating subfamily \(n\asymp q\), these are
+\(\Theta(n^{-1})\) and \(\Theta(n^{-1/2})\), respectively.  For fixed
+characteristic and growing extension degree, the second line applies.
+The earlier fixed-\(q\), \(n^{-1/2}\) reading of the exact minimum remains
+a conditional formal slice only; it is not an AME-existence claim.
+
 If the sharper local constant and the old global generator budget are
 needed, the same proof gives the conclusion of
 Corollary~\ref{cor:approximate-decomposition} under
 \[
  \varepsilon(U)<\min\left\{
   \frac{\tau_p}{8},\frac1{16\pi n\sqrt q}
- \right\}.                                           \tag{5.20}
+ \right\}.                                           \tag{5.22}
 \]
 Indeed (5.18), the operator-norm bound by Hilbert--Schmidt norm, and the
 principal logarithm give
@@ -1952,9 +1979,9 @@ principal logarithm give
 \leq8\pi n\sqrt q\,\varepsilon(U)<1/2\); the sharp local theorem then
 gives \(D\leq\sqrt{6q/5}\,\varepsilon(U)\).
 
-The cleaning route supersedes both explicit radii above as a bound for
-fixed \(q\): it is polynomial in the party count and has no boundary at
-\(q=4\).  The earlier theorems remain useful because they expose the exact
+The cleaning route supersedes both explicit radii above on every admissible
+parameter pair where its displayed minimum is larger, and it has no
+boundary at \(q=4\).  The earlier theorems remain useful because they expose the exact
 cost of reading one marginal and of aggregating orthogonal minimum-support
 sectors.  The new \(n^{-1/2}\) scale is a proved lower bound, not an
 optimality claim; no product-unitary family is known to saturate the
