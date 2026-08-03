@@ -2,214 +2,205 @@
 
 **Lane**: `relconic`
 
-**Status:** QUEUED
+**Status:** COMPLETE POSITIVE
 
 **Date:** 2026-08-02
 
-## Objective
+## Result
 
-Publish an honest, independently replayable human-scale Lean companion for
-*Arcs complete outside a prescribed conic* in `~/src/lean/finitegeom`.  Use the
-Clebsch Paper I package as the structural model: one narrow import-only paper
-gate, a machine-readable area manifest with explicit terminals and expected
-axioms, a short prose trust boundary, an axiom-audit entry point, content
-manifests for the source and exported closures, and documented replay commands.
+The human-scale Lean additions used by *Arcs complete outside a prescribed
+conic* now have a narrow, independently buildable public trust supplement in
+`~/src/lean/finitegeom`.  It follows the Clebsch Paper I package shape:
 
-The task is trust and release engineering.  It must not silently strengthen a
-mathematical claim, turn an exhaustive computation into a Lean theorem, or
-fold unrelated `RelativeConicArcs` work into the public paper boundary.
+- one import-only paper gate;
+- one machine-readable area with every terminal and expected axiom set;
+- one prose trust boundary and one direct axiom audit;
+- content-addressed source and target closures; and
+- README and provenance entries with guarded replay commands.
 
-## Current state and exact gaps
+The immutable 77-module base arcs package was not rewritten.  The supplement
+is a separate 33-module closure rooted at
+`RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions`.
 
-The monorepo already contains and builds the mathematical Lean sources needed
-for the two paper additions:
+## Exact trust boundary
 
-- `RelativeConicArcs.Gates.C637Witnesses` audits the normalization identities,
-  three checked witnesses, upper bounds
-  `rhoC_ZMod13_le_eight`, `rhoC_ZMod17_le_nine`, and
-  `rhoC_ZMod19_le_ten`, plus ordinary completeness of the q=19 witness.  It
-  deliberately does not formalize the exhaustive lower classifications.
-- `RelativeConicArcs.Gates.MatchingPackingDefect` audits the leave-completion
-  theorem, the matching-packing deficiency comparison, the impossibility of a
-  one-block-short packing, and the resulting two-unit defect implication.
+The gate exposes 23 terminals in two groups.
 
-Both gates are named in `lean/trust/areas/relconic.toml`, but that broad area is
-not an acceptable paper export gate: it owns the whole shared tree and its
-fresh trust-spine check currently fails on unrelated missing facts, unreachable
-modules, and external-input anchors.  In addition:
+The nine matching-packing terminals prove the one-block leave clique theorem,
+completion of a one-block-short maximum-clique packing, the exact partition of
+bad concurrence edges and maximum blocks, transfer of matching-packing
+deficiency to `scaledDefect`, and the implication from nonexistence of the
+exact decomposition to a two-missing-block defect bound.
 
-1. `lean/RelativeConicArcs/TRUST.md` records the C637 boundary but does not give
-   the matching-packing result its own theorem-map entry.
-2. Neither dedicated gate has a generated trust-facts JSON artifact.
-3. `~/src/lean/finitegeom` predates both gates and all supporting modules.
-4. The standalone arcs manifest and human gate cover the older paper surface
-   only; they do not name the new terminals.
-5. `lean/scripts/external-trust-exports.py` generates summary projections.  It
-   is not a source-tree synchronizer and therefore cannot perform this export.
+The fourteen small odd-order terminals check the order-13 and order-17
+normalization matrices and conic pullbacks, the three rules-only relative-conic
+certificates, the upper bounds
 
-The destination's existing `ClebschRigidityHuman` package is the model, not a
-file-for-file source: it uses a paper-local gate and area rather than relying
-on the broad shared `relconic` registry, explicitly lists every terminal and
-expected axiom set, separates human theory from downstream certificate data,
-and records both immutable source and transformed target closures.
+```text
+rhoC (ZMod 13) <= 8
+rhoC (ZMod 17) <= 9
+rhoC (ZMod 19) <= 10
+```
 
-## Claim boundary to preserve
+and ordinary completeness of the order-19 ten-point witness.
 
-The public trust documentation must distinguish all three evidence classes:
+Every terminal has the observed axiom set
 
-1. **Lean theorem:** the matching-packing nonexistence hypothesis forces block
-   deficiency at least two and hence the stated quantitative scaled-defect
-   lower bound.  The exact exported terminal names and their actual
-   `#print axioms` results are authoritative.
-2. **Lean upper certificate:** the q=13, q=17, and q=19 witnesses give only the
-   upper bounds 8, 9, and 10; q=19 ordinary completeness is also kernel checked.
-3. **External exhaustive classification:** the lower bounds, and therefore the
-   exact equalities `rho_C(13)=8`, `rho_C(17)=9`, and `rho_C(19)=10`, remain
-   computational results outside Lean.  The public manifest must not list
-   equality declarations that do not exist.
+```text
+[propext, Classical.choice, Quot.sound]
+```
 
-The restored Korchmaros--Nagy--Szonyi priority citation is manuscript prose,
-not a Lean terminal.  The proposed `(k,n)` generalization, nine-point matching
-design experiment, q=11 affine search, and coding-theory reconstruction audit
-are research frontiers and are explicitly outside C843.
+and no project-local axiom is permitted.
 
-## Work package
+The exhaustive lower classifications, and hence the exact equalities at
+orders 13, 17, and 19, remain external computations.  No Lean declaration in
+the supplement claims them.  The Korchmaros--Nagy--Szonyi priority citation,
+the proposed `(k,n)` generalization, the order-11 affine search, the proposed
+classification of realizable matching designs, and the coding-theory
+reconstruction audit are outside this formal boundary.
 
-### 1. Freeze the authoritative monorepo boundary
+## Stable public names
 
-- Add a narrow `RelativeConicArcs.Gates.ArcsCompleteOutsideConicHuman` gate in
-  the monorepo, derived from the existing standalone human gate but importing
-  the new C637 and matching-packing human modules.
-- Print every paper-facing terminal explicitly.  Do not rely on imported
-  dedicated gates to make terminal coverage implicit.
-- Keep generated q16 transition, row, and leaf families out of this gate.  The
-  human package may retain the existing two-sided q16 bound and checker
-  semantics; the separate `finitegeom-q16-certificates` package remains the
-  owner of the exact q16 exhaustive theorem.
-- Add or refresh the paper-local area manifest, prose trust document, and
-  axiom-audit module.  The narrow area must own only its import-only gate and
-  use closure coverage, matching the Clebsch Paper I layout.
-- Add the matching-packing theorem family to
-  `lean/RelativeConicArcs/TRUST.md`; retain the C637 paragraph's explicit
-  upper-versus-lower evidence split.
+The pre-existing witness modules encoded the internal identifier `C637` in
+their filenames, namespaces, and public declarations.  Referee-facing Lean
+rules prohibit exporting those names.  C843 therefore made a compatibility
+migration to
 
-### 2. Generate and check trust evidence
+```text
+RelativeConicArcs.SmallOddRelativeConicWitnessData
+RelativeConicArcs.SmallOddRelativeConicWitnesses
+RelativeConicArcs.Gates.SmallOddRelativeConicWitnesses
+```
 
-- Build the paper-human gate and the two dedicated gates through the guarded
-  Lean entry point required by `lean/AGENTS.md`.
-- Extract fresh facts for the narrow paper area and dedicated units.  Record
-  the exact terminal set and observed axioms; expected sets must be copied from
-  extraction, not assumed from nearby theorems.
-- Make the paper-local trust check independently green.  Do not claim that the
-  broad `relconic` portfolio is green, and do not repair unrelated portfolio
-  findings under C843.
-- Generate deterministic source-closure and target-closure manifests using the
-  same schema as Clebsch Paper I.  Each must content-address every shipped Lean
-  module and disclose deliberate source-to-target transformations.
+and their coordinate-partitioned leaf modules.  The data and proofs are the
+same; the new modules add self-contained headers and docstrings.  The combined
+paper gate imports only the stable API.  The old names remain in the monorepo
+for compatibility and are explicitly classified as outside the paper-facing
+extraction closure.
 
-### 3. Forward export to `~/src/lean/finitegeom`
+The sixteen newly shipped mathematical source modules contain 77 public
+declarations, all with adjacent docstrings.  The full 33-module transitive
+closure still contains 166 inherited public declarations without adjacent
+docstrings in previously shipped shared infrastructure.  C843 did not edit
+those foreign/base modules.  This is documentation debt under the newest
+referee-facing standard, not an axiom, build, terminal-coverage, or source
+provenance gap; a blanket claim that the entire inherited closure meets the
+new docstring standard would be false.
 
-- Treat the monorepo as authoritative and preserve the standalone repository's
-  existing history.  Apply the update as an ordinary forward commit; do not
-  reinitialize, overwrite, or merge changes back into the monorepo.
-- Copy only the reviewed human closure and required shared modules.  Exclude
-  generated q16 data and every unrelated research gate.
-- Update the existing standalone files rather than creating a second arcs
-  trust surface:
-  `RelativeConicArcs/Gates/ArcsCompleteOutsideConicHuman.lean`,
-  `trust/areas/arcs_complete_outside_conic_human.toml`,
-  `trust/ARCS_COMPLETE_OUTSIDE_CONIC.md`, the axiom-audit module, both content
-  manifests, and the README replay list.
-- Document any target-only edit exactly.  Permitted examples are removal of
-  private workflow references or replacement of the monorepo's exact-q16
-  aggregate by the human two-sided boundary.  No declaration-changing rewrite
-  may be described as prose-only.
+## Monorepo authority
 
-### 4. Validate the exported package
+The authoritative mathematical source state is commit
+`29c8946c9eb017fc79dc3c63dc58f350b54cd29a`.  It contains:
 
-The task is complete only when all of the following pass at the recorded
-commits:
+- the stable odd-order witness API and dedicated gate;
+- `RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions`;
+- the complete 23-terminal registration in
+  `lean/trust/areas/relconic.toml`;
+- explicit informational classification of the superseded component gates;
+  and
+- the matching-packing theorem-map entry and stable witness names in
+  `lean/RelativeConicArcs/TRUST.md`.
 
-- guarded monorepo builds of the paper-human, C637-witness, and
-  matching-packing gates;
-- the paper-local trust extraction/check with no missing facts, absent
-  terminals, unexpected axioms, stale generated regions, or closure drift;
-- source-manifest verification before copying and target-manifest verification
-  after copying;
-- guarded standalone build of
-  `RelativeConicArcs.Gates.ArcsCompleteOutsideConicHuman`;
-- standalone axiom-audit elaboration, with every listed terminal matching its
-  manifest axiom set;
-- a bounded source/target diff showing that every difference is one of the
-  documented target-only transformations;
-- a negative closure check showing that no generated q16 transition, row, or
-  leaf module entered the human package; and
-- clean scoped Git status followed by separate forward commits in the
-  monorepo and `~/src/lean/finitegeom`.
+The extracted facts were added at commit
+`92f8f04113cca73738d4b207f48537c3fbb707ff`.  The artifact SHA-256 is
 
-The completion report must record both commit IDs, exact guarded replay
-commands, gate/facts hashes, source- and target-manifest hashes, the exported
-module count, the terminal count, observed axiom sets, and the explicit list of
-external claims that Lean does not certify.
+```text
+72dcf074ec189359478c4a747b9bfa462a95725c18efe321e36ce1deaf8a654b  lean/trust/facts/RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions.json
+```
 
-## Expected task-owned paths
+It records the exact 33-module closure and all 23 terminal axiom sets, with no
+project-local axiom.  A post-extraction scoped audit reports no error for the
+supplement; its only matching finding is the intentional informational
+exclusion of the superseded `C637Witness**` compatibility modules.
 
-Monorepo authority:
+The broad `relconic` trust portfolio has unrelated pre-existing missing facts,
+unanchored external inputs, unreachable modules, and build-system-owned stale
+generated regions.  C843 did not claim or attempt to repair that cross-lane
+portfolio.
 
-- `notes/2026-08-02-c843-arcs-trust-finitegeom-export.md`;
-- `notes/2026-07-07-codex-task-queue.md` and the relconic handoff/archive for
-  lifecycle updates;
-- `lean/RelativeConicArcs/Gates/ArcsCompleteOutsideConicHuman.lean`;
-- `lean/RelativeConicArcs/Gates/C637Witnesses.lean` and
-  `lean/RelativeConicArcs/Gates/MatchingPackingDefect.lean` only if extraction
-  exposes a genuine gate defect;
-- the human closure modules required by those gates only when an exportability
-  issue is demonstrated;
-- `lean/RelativeConicArcs/TRUST.md`;
-- `lean/trust/areas/arcs_complete_outside_conic_human.toml` and the minimal
-  portfolio registration needed for its independent check;
-- `lean/trust/ARCS_COMPLETE_OUTSIDE_CONIC.md`;
-- `lean/trust/ArcsCompleteOutsideConicHumanAxiomAudit.lean`;
-- the corresponding generated facts, source manifest, target manifest, and
-  deterministic external trust summaries; and
-- `lean/README.md` only if the monorepo documents paper-local replay commands
-  there.
+## Standalone export
 
-Standalone forward export:
+The public forward commit is
+`0b3f37d264f54b52e6c703a75e2704a3f9cbe4b4` in
+`~/src/lean/finitegeom`.  It adds:
 
-- the reviewed `RelativeConicArcs` human closure;
-- `RelativeConicArcs/Gates/ArcsCompleteOutsideConicHuman.lean`;
-- `trust/areas/arcs_complete_outside_conic_human.toml`;
-- `trust/ARCS_COMPLETE_OUTSIDE_CONIC.md`;
-- `trust/ArcsCompleteOutsideConicHumanAxiomAudit.lean`;
-- `trust/source-manifests/arcs_complete_outside_conic_human.json`;
-- `trust/manifests/arcs_complete_outside_conic_human.json`;
-- generated paper-local trust facts/summaries if the standalone trust schema
-  requires them; and
-- `README.md`, `lakefile.toml`, and declaration/provenance inventories only to
-  the extent required by the reviewed closure.
+- the seventeen supplement source/gate modules;
+- `trust/areas/arcs_complete_outside_conic_additions.toml`;
+- `trust/ARCS_COMPLETE_OUTSIDE_CONIC_ADDITIONS.md`;
+- `trust/ArcsCompleteOutsideConicAdditionsAxiomAudit.lean`;
+- source and target content manifests;
+- portfolio and explicit Lake-root registration; and
+- README and release-provenance entries.
 
-Any newly required path must be added to the live handoff before editing it.
-Foreign dirty files in either repository remain untouched.
+The source and target manifests each contain 33 modules.  Their hashes are:
 
-## Stop conditions
+```text
+c807c34bbda3b3bc0eee7b34c0849f0609e1ca0321377bec2da92029323de132  trust/source-manifests/arcs_complete_outside_conic_additions.json
+c9c044b851c1e46cd9a8a0ad990b0c5c6eea16cc49c47652385ad430f7d188af  trust/manifests/arcs_complete_outside_conic_additions.json
+```
 
-Stop and report rather than widening the task if:
+All source-manifest hashes reproduce from the recorded monorepo commit.  All
+target-manifest hashes reproduce from the standalone commit.  The only source
+and target module whose bytes differ is
+`ProjectiveCap.Sym2ConicBridge`; the target retains the previously reviewed
+removal of private workflow prose, with no declaration change.  No generated
+q16 transition, row, leaf, step-book, or certificate module occurs in the
+supplement closure.
 
-- either new paper claim requires an axiom beyond the actual existing
-  standard axiom boundary;
-- the human closure unexpectedly depends on generated q16 data;
-- synchronizing a required module would pull in an unrelated unpublished
-  research closure;
-- a source/target declaration differs for a reason not covered by a reviewed
-  target-only transformation; or
-- standalone history cannot be preserved by an ordinary forward commit.
+## Validation
 
-## Completion artifact
+The authoritative source gate passed at the recorded source bytes.  The first
+stable-witness build took 6:36 and peaked at 9,319,468 kB; the combined gate
+then built in 0:31 with a 1,663,796 kB peak.
 
-Replace this queued plan with a dated results section containing the immutable
-source and target commit IDs, exact replay transcript summaries, hashes,
-counts, axiom table, disclosed exclusions, and a concise explanation of every
-source-to-target transformation.  Then archive C843 exactly once, remove it
-from the live queue, and refresh the relconic handoff in the same coherent
-completion commit.
+The standalone gate built from its own source tree in 7:19 with a 9,409,160 kB
+peak.  The standalone axiom audit elaborated in 17 seconds and matched all 23
+manifest entries.  A post-commit exact-target replay reported the gate current
+and passed the trace-only aggregate.
+
+The deterministic structural checks also established:
+
+- gate, audit, and TOML terminal lists are identical and ordered identically;
+- source and target manifest hashes match every listed file;
+- the source/target difference set is exactly
+  `ProjectiveCap.Sym2ConicBridge`;
+- the generated-q16 closure check is empty; and
+- the public 33-module closure contains no private task, lane, agent, session,
+  internal-note, or machine-local-path reference.
+
+The final clean detached extraction independently rebuilt the source gate in
+7:04 with a 10,354,392 kB peak, generated the facts artifact, and verified
+closure size 33, terminal count 23, exact expected axioms for all terminals,
+and zero project axioms.  The current monorepo bytes of all 33 source modules
+still reproduce the content-addressed source manifest.
+
+## Replay
+
+From the monorepo root:
+
+```text
+lean/scripts/lean-build-queue.py run \
+  RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions \
+  --profile single --threads 1 --cores 20-23
+
+python3 lean/scripts/lean-trust-extract.py run \
+  --area relconic \
+  --unit RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions
+```
+
+For the public package, through the canonical guarded entry points:
+
+```text
+lean/scripts/lean-build-queue.py run \
+  RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions \
+  --lean-root /home/tavis/src/lean/finitegeom \
+  --profile single --threads 1 --cores 20-23
+
+lean/scripts/guarded-lean \
+  --root /home/tavis/src/lean/finitegeom \
+  trust/ArcsCompleteOutsideConicAdditionsAxiomAudit.lean
+```
+
+No incidental mathematical lead was found: the stable-name migration,
+provenance split, and inherited documentation audit were direct C843
+deliverables, so the discovery companion receives no entry.
