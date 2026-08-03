@@ -2,10 +2,29 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; the authoritative forward exposition and O7 structural
-proof/trust reconciliation are green, as are both PDF builds.  Released
-versions 1 and 2 remain immutable.  O8, the final release-output replay, and
-standalone synchronization remain pending under C753.
+**Status:** complete.  The forward exposition, structural q11 proof boundary,
+O1--O8 correspondence, PDFs, release manifests, and standalone replay are
+green.  Released versions 1 and 2 remain immutable; this work is the sealed
+forward-release candidate.
+
+## Completion record (2026-08-03)
+
+The main paper now makes the q11 proof hierarchy explicit.  Its seven
+`A_5` point orbits are derived from cross-characteristic eigenspaces,
+subgroup stabilizers, orbit--stabilizer, and cardinality exhaustion.  Its
+complete syndrome oracle and ambiguity multiplicities are derived from the
+arc--coset dictionary and three displayed chord-incidence equations.  The
+formal q11 tables are described consistently in the main paper, companion,
+README, and verification guide as independent corroboration and as evidence
+for the companion's sharper finite census claims, not as premises of the
+main-paper proofs.
+
+The strengthened main PDF is warning-free at 22 pages and the companion at
+12 pages.  Both authoritative release runs pass all 26 checks against q11
+commit `09d8e174880e7370966da788da3c5d303df8af4f`; the final monorepo release
+commit is `81163be6`.  The standalone repository is synchronized and green at
+`58900f0`, with its formal-companion locator updated to the exact q11 and base
+commits.
 
 ## Current state
 

@@ -2,11 +2,42 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; C752 is complete and its implementation interface is
-frozen.  The finite prose-source repairs, R1--R4, and O1--O7 are complete;
-the Paper-I proof and trust surfaces now agree with O7.  Continue with O8,
-which must remain packet-gated, before the final correspondence and release
-replays.
+**Status:** complete.  R1--R4 and O1--O8 are formalized, the exact axiom and
+conditional-interface boundary is published, and the authoritative q11,
+paper, and standalone release replays are green.
+
+## Completion record (2026-08-03)
+
+O8 is complete in
+`RelativeConicArcs/PaperIOrientationCommutant.lean`.  The signed coset action
+is transported into conference gauge, golden equivariance is kernel checked,
+the reverse rational containment and integral diagonal/off-diagonal descent
+are proved, and only the explicit classical conjugate `3+3'` Schur--Galois
+interface remains conditional.  The aggregate orientation spine and Paper-I
+trust gate print only Lean's ordinary logical axioms, except for the two named
+Dye inputs on the rigidity branch.
+
+The reusable base is committed at
+`570086982b26075a71a331a81bb1b519e9a27e7f`.  The q11 certificate source is
+committed at `81bae5e0eb02c26992f21b71808ef74a22e3b406`, and its 121-module
+content manifest is sealed at `09d8e174880e7370966da788da3c5d303df8af4f`.
+The clean standalone gate passed incrementally at
+`~/.cache/othello-lean-build/run-20260803-012007-a6ce4d0c` after two
+package-boundary repairs: the byte-identical `Q11DyeAxioms` duplicate was
+removed in favor of the pinned base module, and the omitted q11 gateway
+bridge was added to the q11 package.
+
+The generated row, matrix, support, and fixed-point shards are now explicitly
+classified as internal finite leaves of a redundant formal cross-check, not
+as premises of the paper's structural orbit or decoder proofs.  Their reviewed
+module headers and generator provenance are therefore the public explanatory
+boundary; declaration-by-declaration prose on generated leaves is not a
+release requirement.  The generator staleness check passes.
+
+The authoritative 26-check release replay is sealed at `81163be6`; the
+standalone Paper-I repository is synchronized at `58900f0`, its 58-file
+export manifest verifies against authoritative commit `81163be6`, and the
+same 26-check clean replay passes there.
 
 ## Current implementation state
 
