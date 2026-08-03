@@ -9,17 +9,19 @@ committed.
 
 ## Build and lifecycle integrity
 
-- [ ] Remove every direct `nix ... lake` invocation from the Paper III replay
+- [x] Remove every direct `nix ... lake` invocation from the Paper III replay
   programs.  Repository validation must enter through the guarded Lean
-  wrappers and consume a supplied, disk-backed axiom log.
-- [ ] Require an explicit source-only mode or an explicit axiom log; never
-  print a full-replay pass when no live gate output was checked.
-- [ ] Reopen C815 in the lane handoff and task card until its source, focused
+  wrappers and consume a supplied, disk-backed axiom log.  None of the three
+  replay programs starts a subprocess.
+- [x] Require an explicit source-only mode or an explicit axiom log; never
+  print a full-replay pass when no live gate output was checked.  All three
+  replay programs make the two modes mutually exclusive and required.
+- [x] Reopen C815 in the lane handoff and task card until its source, focused
   gate, axiom audit, manifest, and paper-local replay are terminal green.
 - [ ] Keep the gate, verifier, manifest, axiom report, task report, and source
   in coherent validated commits; do not land a failing proof or placeholder
   evidence.
-- [ ] Record exact guarded run directories and terminal results in the C815
+- [x] Record exact guarded run directories and terminal results in the C815
   report.  A wrapper returning before `result.yaml` exists is not success.
 
 ## Pinned formal closure
@@ -28,7 +30,8 @@ committed.
   `RelativeConicArcs.Gates.ClebschPassages`.
 - [ ] Pin every project-owned file in the transitive import closure of
   `RelativeConicArcs.Gates.ClebschGoldenReturn`.
-- [ ] Pin each replay verifier itself and reject verifier drift.
+- [x] Pin each replay verifier itself and reject verifier drift.  Each program
+  compares its own bytes against the hash recorded in its manifest.
 - [ ] Make the verifier scan the complete pinned closure for `sorry`, explicit
   axioms, unsafe declarations, workflow identifiers, and forbidden scholarly
   status prose.

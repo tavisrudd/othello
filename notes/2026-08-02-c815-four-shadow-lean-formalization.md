@@ -124,6 +124,12 @@ the classifier.  That axiom is the entire finite trust boundary of this
 module; the weighted converse, the pentagon gauge, and the conference square
 do not touch it.
 
+The terminal guarded runs behind those results are the single-file
+elaboration `~/.cache/othello-lean-build/guarded-lean/20260802-224250-*`,
+which reported no error and no warning, and the queued gate build
+`~/.cache/othello-lean-build/run-20260803-054328-6a6e7eb2`, whose recorded
+state is `success` and whose stdout is the axiom log consumed by the replay.
+
 The validated artifacts are the tracked axiom report
 `papers/clebsch-passages/verification/four_shadow_axioms.txt`, the seven-file
 source closure `four_shadow_source_closure.json`, and the manifest
