@@ -1,0 +1,72 @@
+# Companion-export configuration for the golden orientation spine of the
+# Clebsch support cubic.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only
+# the destination file names and the release prose live here.
+
+schema_version = 1
+area = "clebsch_support_cubic_orientation"
+gate = "RelativeConicArcs.PaperIOrientationSpine"
+trust_statement = "trust/CLEBSCH_SUPPORT_CUBIC_ORIENTATION.md"
+axiom_audit = "trust/ClebschSupportCubicOrientationAxiomAudit.lean"
+
+statement_title = "Golden orientation of the Clebsch support cubic: formal boundary"
+
+overview = """
+This boundary records the orientation mechanisms accompanying Tavis Rudd,
+*Reconstructing the Clebsch code and its golden orientation from its deep-hole
+syndrome locus* (DOI 10.5281/zenodo.21652792).
+"""
+
+correspondence = """
+The exported closure constructs the antipodal homogeneous cover of the eleven
+point classes together with its signed golden orbital, proves the
+switching-invariant triangle holonomy identities for the associated two-graph,
+identifies the odd part of the determinant pencil with the support cubic, and
+compresses the diagonal operator between the two conjugate golden eigenspaces
+to obtain the cross-golden block whose determinant is the negative oriented
+triangle cubic.  Over a field of characteristic zero containing a root of
+`t^2 = t + 1`, it identifies the singular locus of that determinantal cubic
+with the six golden axis classes and proves each singular point an ordinary
+double point.  It further recovers the projective stabilizer of the support
+cubic as a copy of `S₅`, its oriented subgroup as a copy of `A₅` of index two,
+and computes the rational and integral commutants of the odd module, the last
+two conditional on the explicit classical splitting interface named in the
+exported spine module.
+
+The companion does not prove the deep-hole syndrome classification, the
+code--arc dictionary, the decoder stratification, the ten-point Brianchon
+bound and its equality classification, or the small-arc exclusions.  Those
+results are established in the accompanying paper by ordinary mathematical
+proof, cited literature, or exact certificate computation, and the generated
+finite tables supporting them are distributed separately.
+"""
+
+boundary = """
+Every unconditional terminal is a kernel proof over an explicit finite index
+type or an arbitrary field of characteristic zero containing a root of
+`t^2 = t + 1`.  The commutant terminals carry the classical splitting
+interface as an explicit hypothesis rather than an axiom.  The closure
+contains no generated certificate, native evaluation, imported external data,
+user axiom, unsafe declaration, or admitted proof.
+"""
+
+axiom_audit_title = "Axiom audit for the golden orientation of the Clebsch support cubic"
+
+axiom_audit_description = """
+This audit prints the axioms of the orientation terminals exported with the
+golden orientation boundary of the Clebsch support cubic: the antipodal cover
+and its self-paired orbitals, the signed orbital square identities, the
+triangle holonomy and two-graph identities, the determinant pencil, the
+cross-golden trace dual, the singular locus and ordinary-node type of the
+determinantal cubic, the `S₅` and `A₅` stabilizer boundary, and the rational
+and integral commutants.
+"""
+
+readme_anchor = "  the 77-module human Arcs boundary."
+
+readme_bullet = """- `trust/manifests/clebsch_support_cubic_orientation.json` records the golden
+  orientation boundary of the Clebsch support cubic, including the antipodal
+  cover, the determinant pencil, the cross-golden trace dual, and the six
+  ordinary nodes."""

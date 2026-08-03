@@ -167,3 +167,88 @@ is an ancestor of the base library's public `origin/main`.
 
 No git state was changed in the authority.  The only authority edit is this log section plus the
 cross-reference added to the preceding section.
+
+## Export area configuration created; export run blocked on the generated fact (2026-08-03)
+
+Follow-up to the section above, under the author's explicit authorization to create a Paper I export
+area and export the six-node delta onto the canonical base library.  The area configuration now
+exists in the authority.  The export itself was **not** performed: the guarded exporter refuses for a
+reason that no configuration change can remove.  Nothing was written to `~/src/lean/finitegeom`, and
+its head remains `56e4edc` (eight commits ahead of `origin/main`, worktree clean).
+
+### What was created (authority, uncommitted)
+
+| Path | Change |
+|---|---|
+| `lean/trust/export/clebsch_support_cubic_orientation.toml` | new companion-export configuration |
+| `lean/trust/areas/relconic.toml`                           | new `[[gate]]` entry for the orientation spine |
+
+The export configuration follows `lean/trust/export/golden_quantum_statistics.toml` field for field:
+`schema_version`, `area`, `gate`, `trust_statement`, `axiom_audit`, `statement_title`, `overview`,
+`correspondence`, `boundary`, `axiom_audit_title`, `axiom_audit_description`, `readme_anchor`, and
+`readme_bullet`.  Its gate is `RelativeConicArcs.PaperIOrientationSpine`, which imports both changed
+modules (`PaperIOrientationNodes`, `PaperIOrientationTraceDual`) directly and is already a declared
+root of the base library's `TARGET_MANIFEST.json`, so an adopted export refreshes those base modules
+in place rather than introducing a new root.  Destination names avoid manuscript labels:
+`trust/CLEBSCH_SUPPORT_CUBIC_ORIENTATION.md`, `trust/ClebschSupportCubicOrientationAxiomAudit.lean`,
+`trust/manifests/clebsch_support_cubic_orientation.json`.  The README anchor
+(`  the 77-module human Arcs boundary.`) is present in the base README, and the configured bullet is
+not yet present, so the mechanical README insertion would succeed.
+
+The registry entry declares the twenty-four orientation terminals that the focused Clebsch hexagon
+aggregate gate re-exports, taken verbatim from the `#print axioms` lines of
+`lean/RelativeConicArcs/Gates/ClebschRigidityTrust.lean`, including the two new node terminals
+`derivative_crossGoldenDeterminantLine_eval` and
+`singularPoints_crossGoldenDeterminant_eq_axisClasses`.  The exporter requires a non-empty registered
+terminal list; the closure is not enumerated by hand — the exporter derives it from the generated
+fact and independently re-derives it by parsing imports, refusing on any disagreement.
+
+### Exporter invocation and its refusal
+
+```
+python3 lean/scripts/lean-companion-export.py \
+  --config lean/trust/export/clebsch_support_cubic_orientation.toml \
+  --source-commit HEAD --base-commit HEAD plan
+refused: source commit 2797c05e has no generated fact
+         lean/trust/facts/RelativeConicArcs.PaperIOrientationSpine.json
+```
+
+### The two blockers, exactly
+
+1. **The generated fact requires a Lean extraction, and the extraction requires a quiet Lean
+   worktree.**  Facts are produced only by `lean/scripts/lean-trust-extract.py run`, which elaborates
+   a generated wrapper through `guarded-lean` and refuses while the Lean worktree carries changes the
+   trust tooling does not own.  Three foreign modified paths are present:
+   `lean/RelativeConicArcs/AlignedTwoGraph.lean`,
+   `lean/RelativeConicArcs/Gates/ClebschPassages.lean`, and
+   `lean/RelativeConicArcs/PetersenHarmonicKernel.lean`.  The tool reports this directly:
+   `lean/scripts/lean-trust-extract.py plan --area relconic` ends with
+   `quiet window: no — 3 foreign path(s)`, and now lists
+   `[missing  ] relconic: RelativeConicArcs.PaperIOrientationSpine (24 terminal(s))`.
+   Those three files belong to other work and were not touched.
+
+2. **The exporter reads the registry and the fact from a commit, not the worktree.**  Only
+   `--config` is read from disk; `lean/trust/areas/*.toml` and `lean/trust/facts/<gate>.json` are
+   read as blobs of `--source-commit`.  Both new authority edits above must therefore be committed
+   before any export run, and the export must name that commit.  No authority git state was changed.
+
+Neither blocker is a limitation of the area format.  The companion-export format does carry base
+library module updates: the exported closure overwrites the base's copies of the closure modules and
+rewrites `TARGET_MANIFEST.json`, so the six-node delta travels correctly once a fact exists.
+
+### Smallest viable path to a completed export
+
+1. Wait for, or arrange, a quiet Lean worktree (the three foreign modified paths committed or
+   otherwise settled by their owner).
+2. Commit the two authority edits above.
+3. `lean/scripts/lean-trust-extract.py run --unit RelativeConicArcs.PaperIOrientationSpine`, then
+   commit the generated `lean/trust/facts/RelativeConicArcs.PaperIOrientationSpine.json`.  This step
+   elaborates the spine and needs the owning build window.
+4. `lean-companion-export.py … plan`, then `… run --workdir <disk-backed directory>` against that
+   authority commit and base `56e4edc`.
+5. Validate the exported spine in the base tree with
+   `lean/scripts/guarded-lean --root ~/src/lean/finitegeom RelativeConicArcs/PaperIOrientationSpine.lean`
+   (`guarded-lean` accepts `--root`, so the base package is reachable through the guarded entry
+   point), then adopt the printed delta as one ordinary forward commit in the base repository.
+6. Only then does the certificate-package refresh sequence recorded in the previous section become
+   runnable, and publication of the base revision remains the author's decision.
