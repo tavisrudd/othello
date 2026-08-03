@@ -1,4 +1,4 @@
-import ProjectiveCap.FrameGridBridge
+import ProjectiveCap.PlaneAffineChart
 import ProjectiveCap.PlaneTransitivity
 
 /-!

@@ -1,5 +1,5 @@
 import RelativeConicArcs.Conic
-import ProjectiveCap.FrameGridBridge
+import ProjectiveCap.PlaneAffineChart
 
 /-!
 # Rules-only certificates for relative conic arcs

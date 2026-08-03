@@ -1,6 +1,6 @@
 import RelativeConicArcs.OddSixArcLineBound
 import RelativeConicArcs.ProjectiveTripleNormalization
-import ProjectiveCap.FrameGridBridge
+import ProjectiveCap.PlaneAffineChart
 
 /-!
 # The affine triangular-prism obstruction in odd characteristic
