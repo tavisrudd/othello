@@ -53,7 +53,7 @@ containing sorry.
 | first higher Lucas carrier | no carrier-exhaustion Lean theorem | manuscript final-pair proof and q=16,32,64 certificates |
 | R10 | conditional composition uses shared recursive/radius interfaces | the empty-carrier arithmetic is supplied by the manuscript and certificates |
 
-The row-by-row reconciliation for all 71 numbered manuscript labels is
+The row-by-row reconciliation for all 75 numbered manuscript labels is
 supplement/LEAN-STATEMENTS.md. That map distinguishes kernel algebra,
 conditional terminals, manuscript proofs, cited results, and external
 certificates for every label.

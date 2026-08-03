@@ -23,7 +23,7 @@ Declaration names below are relative to the `RelativeConicArcs` namespace.
 
 ## Manuscript declaration reconciliation
 
-The following table has one row for each of the 71 numbered lemma,
+The following table has one row for each of the 75 numbered lemma,
 proposition, theorem, or corollary labels in the TeX include graph.
 
 | Manuscript label | Lean boundary | Exact formal status |
