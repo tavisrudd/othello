@@ -2,7 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; required before the Paper I formal artifact is called
+**Status:** active; section 1 (ownership and release-closure freeze) is complete and
+recorded in [`../2026-08-02-c855-paper-i-closure-freeze.md`](../2026-08-02-c855-paper-i-closure-freeze.md).
+Sections 2--11 are open. Required before the Paper I formal artifact is called
 referee-ready or packaged for its next public release.
 
 ## Objective
@@ -39,14 +41,16 @@ package: every file in the published transitive closure is in scope.
 
 ## Frozen audit boundary and starting evidence
 
-- [ ] Record and retain the audited base commit
+- [x] Record and retain the audited base commit
   `570086982b26075a71a331a81bb1b519e9a27e7f`.
-- [ ] Record and retain the q11 source/gate commit
+- [x] Record and retain the q11 source/gate commit
   `81bae5e0eb02c26992f21b71808ef74a22e3b406`.
-- [ ] Record and retain the q11 manifest-seal commit
+- [x] Record and retain the q11 manifest-seal commit
   `09d8e174880e7370966da788da3c5d303df8af4f`.
-- [ ] Freeze the current Paper I aggregate gate's 188 project-owned-module
-  transitive closure and its complete non-Lean dependency closure before edits.
+- [x] Freeze the current Paper I aggregate gate's project-owned-module transitive
+  closure before edits. The recomputed closure has 198 project-owned modules: 188 in
+  `RelativeConicArcs` plus seven `ProjectiveCap` and three `CapGame` modules reached
+  through three crossing imports. The non-Lean dependency closure remains open.
 - [ ] Preserve the verified positive baseline as starting evidence: no `sorry`;
   exactly two explicit Dye axioms; 51 gate terminals matching 51 axiom-audit rows; no published
   terminal exposing a native-execution axiom; q11 manifest hashes valid for 121
@@ -63,10 +67,12 @@ package: every file in the published transitive closure is in scope.
 
 ### 1. Freeze ownership and the exact release closure
 
-- [ ] Start from clean, content-addressed authoritative and standalone roots;
+- [x] Start from clean, content-addressed authoritative and standalone roots;
   record both `HEAD`s and every intentionally dirty task-owned path.
-- [ ] Recompute the import closure from every Paper I public gate rather than
-  trusting the frozen count of 188.
+- [x] Recompute the import closure from every Paper I public gate rather than
+  trusting the frozen count of 188. The gate is
+  `RelativeConicArcs.Gates.ClebschRigidityTrust` and the recomputed closure is 198
+  project-owned modules over 43 `Mathlib` roots.
 - [ ] Enumerate every generator, generated leaf, certificate, manifest, axiom
   audit, claim map, correspondence table, README, toolchain pin, and replay
   script consumed by the aggregate verifier.
