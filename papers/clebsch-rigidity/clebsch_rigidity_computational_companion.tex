@@ -90,7 +90,7 @@ For every $k$-arc with $k\ge4$,
 \end{theorem}
 
 \begin{theorem}[Conic-filling window
-{\cite[Theorem 3.2]{RuddRigidity2026}}]
+{\cite[Theorem 4.4]{RuddRigidity2026}}]
 \label{cor:conic-filling-window}
 If $\cU(A)$ is a nonsingular conic, then $q$ is odd and
 \[
@@ -99,10 +99,11 @@ If $\cU(A)$ is a nonsingular conic, then $q$ is odd and
 For $k=6$, writing $c(A)=n_3$ gives
 \[
  |\cU(A)|=q^2-14q+55-c(A),\qquad
- 0\le c(A)\le15,\qquad
  c(A)=(q-6)(q-9)
 \]
-when $|\cU(A)|=q+1$.
+when $|\cU(A)|=q+1$, and for $q$ odd the concurrence spectrum restricts the
+count to $c(A)\in\{0,1,2,3,4,6,10\}$
+{\cite[Proposition 3.2]{RuddRigidity2026}}.
 \end{theorem}
 
 \begin{theorem}[Geometric rigidity
@@ -133,8 +134,8 @@ nonsingular conic. Their $|\cU(A)|$ histogram is
 \end{array}
 \]
 so
-$|\cU(A)|\in\{18,19,20,22\}$. The replay is listed in the ``Fifteen
-classes and numerical gap'' row of Table~\ref{tab:replays}.
+$|\cU(A)|\in\{18,19,20,22\}$. The replay is
+\path{check_rigidity_degenerate_conic.py}.
 
 Table~\ref{tab:fifteen-classes} records the complete census needed below.
 Every representative
@@ -188,8 +189,9 @@ class & pair & $|G|$ & $|\cU|$ & $d_{\min}$\\
 In the pair column, \(xy/uv\) abbreviates
 \((1,x,y),(1,u,v)\).
 Class \texttt{C15} is the Clebsch class.  Both replay programs regenerate
-the same canonical keys; the global-gap replay supplies $|G|$ and
-$|\cU|$, and the low-degree replay supplies $d_{\min}$.}
+the same canonical keys: \texttt{check\_global\_conic\_gap.py} supplies
+$|G|$ and $|\cU|$, and \texttt{check\_low\_degree\_loci.py} supplies
+$d_{\min}$.}
 \label{tab:fifteen-classes}
 \end{table}
 
@@ -201,7 +203,13 @@ concurrences, and its conic-intersection histogram.  It checks
  \qquad |\cU(A)|=22-c(A).
 \]
 Thus the fifteen rows and every uncovered-set size follow from the orbit
-ledger and the chord-defect identity.  Regenerating all $1548$ normalized
+ledger and the chord-defect identity.  The same counts corroborate the
+concurrence spectrum of the geometric
+paper~{\cite[Proposition 3.2]{RuddRigidity2026}}: across the fifteen
+classes $c(A)=22-|\cU(A)|$ takes each of the seven values
+$0,1,2,3,4,6,10$ and none of the excluded values five, seven, eight, and
+nine.  This is corroboration at $q=11$, not a second proof of the
+proposition.  Regenerating all $1548$ normalized
 arcs remains an independent audit rather than the reader-facing
 classification proof.
 
@@ -259,8 +267,8 @@ Dye's Theorem~3 gives the $A_5$ statement
 \label{rem:degree-threshold}
 The cutoff cannot be raised from three to four: the four non-Clebsch
 classes \texttt{C02}, \texttt{C11}, \texttt{C13}, and \texttt{C14} have
-$d_{\min}=4$, so the failure is not isolated. For \texttt{C02}, the
-low-degree replay in Table~\ref{tab:replays} prints a quartic whose rational
+$d_{\min}=4$, so the failure is not isolated. For \texttt{C02},
+\path{check_low_degree_loci.py} prints a quartic whose rational
 zero set is exactly the $18$-point uncovered locus and verifies the equality
 point by point. No smoothness, irreducibility, or genus assertion is used
 here.
@@ -348,8 +356,8 @@ Clebsch hexagon.
 \end{theorem}
 
 \begin{proof}
-Theorem~\ref{cor:conic-filling-window} gives $q\ge9$ and
-$c(A)=(q-6)(q-9)$ with $0\le c(A)\le15$. Thus the only prime-power
+Theorem~\ref{cor:conic-filling-window} gives $q\ge9$,
+$c(A)=(q-6)(q-9)$, and $c(A)\le10$ from the concurrence spectrum. Thus the only prime-power
 candidates are $q=9,11$: $q=10$ is not a prime power, and every
 $q\ge12$ gives $c(A)\ge18$.
 
@@ -396,15 +404,16 @@ an algebraic closure of $\F_2$ they give both its dimension $(q-1)^2/4$,
 which is $36$ at $q=13$, and its exact decomposition into pairwise
 nonisomorphic simple modules for
 $\operatorname{PSL}(2,q)$~\cite[Theorem~6.1, Corollary~6.3]{MadisonWu2012}.
-What is added here is the descent.  Over $\F_2$ itself, and for the full
+A descent refinement of that decomposition is recorded in the project's
+research notes: over $\F_2$ itself, and for the full
 $\operatorname{PGL}(2,13)$-action, $K=\ker M$ is irreducible with
 endomorphism field $\F_8$; equivalently $K$ carries a canonical
-twelve-dimensional $\F_8$-structure, and extending scalars to the closure
-returns Madison and Wu's three summands as its Galois conjugates.  Every
-nonzero codeword therefore generates $K$ as an
-$\F_2[\operatorname{PGL}(2,13)]$-module, which is why each minimum-word
-orbit below spans.  That descent is a human structural proof, adversarially
-refereed; it is not part of the formal gate.
+twelve-dimensional $\F_8$-structure whose base change to the closure
+returns Madison and Wu's three summands as Galois conjugates.  Its proof is
+not reproduced here and its formalization is pending, so it is outside the
+claim surface of this artifact and nothing below rests on it: the spanning
+conclusion of Theorem~\ref{thm:q13-tangent-code} is proved from the mod-two
+intersection algebra instead.
 Hollmann and Xiang construct the
 elliptic association scheme afforded by the
 $\operatorname{PGL}(2,q)$-action on the passant carrier
@@ -791,15 +800,15 @@ twenty-eight pairs, and none of the $56$ triples is collinear.  Six of the
 vertices are internal and two external, so the configuration does not have
 a single point type.
 
-A bound proved by counting, character sums, or clique arguments, with the
-order entering only as a parameter, is monotone or eventually increasing in
-$q$; no such bound can return six at $q=19$ and allow eight at $q=23$.  Any
-correct argument for $q\in\{13,17,19\}$ must therefore use an arithmetic
-coincidence of the individual order.  Lemma~\ref{lem:pencil-saturation} is
-exactly such a coincidence at $q=13$; at $q=17$ and $q=19$ the passant
-pencils are unsaturated by two and by three lines, external vertices become
-admissible, and the tangent product stops being a function of the conic
-alone.
+The bound six is therefore an order-specific phenomenon rather than a
+uniform one.  The counting, character-sum, and clique estimates tried here
+enter the order only as a parameter and do not distinguish $q=19$ from
+$q=23$.  What closes $q=13$ instead is the arithmetic coincidence
+$k-1=(q+1)/2$ of Lemma~\ref{lem:pencil-saturation}, which holds at that
+order alone; at $q=17$ and $q=19$ the passant pencils are unsaturated by
+two and by three lines, external vertices become admissible, and the
+tangent product stops being a function of the conic alone, which is why
+those two orders are closed by the terminal search.
 \end{remark}
 
 In coding terms, let $C$ be a projective $[k,k-3,4]_q$ MDS code with
@@ -867,9 +876,8 @@ $q=13$ weight-ten exclusions
 $q=13$ minimum-word classification and reconstruction
 & trusted execution & All four generated orbits and every pair/triple profile \\
 $q=13$ orbit spans and automorphism group
-& human structural proof & Irreducibility of $\ker M$ over $\F_2$ with
-  endomorphism field $\F_8$, the mod-two elliptic algebra, and resolving
-  anchors \\
+& human structural proof & The mod-two elliptic intersection algebra and
+  the four resolving anchors \\
 $q=11,13$ seven-arc exclusions
 & finite certificate & Three orbit masses and three quadratic minors \\
 Maximum passant-arc size at $q=13,17,19$

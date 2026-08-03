@@ -496,7 +496,7 @@ def components_by_row(
         17: (
             "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences.",
             [
-                conceptual("degenerate-conic reduction and Dye equality boundary", CLASSICAL_DYE, "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, and proves the chord-defect identity independently."),
+                conceptual("degenerate-conic reduction and Dye equality boundary", CLASSICAL_DYE, "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, proves the chord-defect identity independently, and derives the single-orbit statement relative to a fixed conic from Bezout."),
                 lean("containing-quadratic rigidity implication", ["rigidity", "rigidity_spine"], axioms),
             ],
         ),

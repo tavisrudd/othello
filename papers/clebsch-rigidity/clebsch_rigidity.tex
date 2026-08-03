@@ -76,7 +76,7 @@ integral quadratic order $\mathbf Z[B]\simeq\mathbf Z[\sqrt5]$.
 The proof uses a universal chord-defect identity and a partial-cover bound
 for rigidity, then decoder ambiguity and the orbital pentagon for orientation.
 As a secondary uniform consequence, any $k$-arc whose uncovered locus is a
-nonsingular conic has $q$ odd and lies in the field window
+nonsingular conic has $q$ odd, with
 $2k-3\le q\le(k(k-1)+3)/3$.  Thus for each fixed $k$, the
 all-field existence problem reduces to finitely many field orders.
 \end{abstract}
@@ -152,12 +152,10 @@ conic;
 \end{enumerate}
 \end{theorem}
 
-More precisely, fix a nonsingular conic $\cC$.  The six-arcs satisfying
+More precisely, for a fixed nonsingular conic $\cC$ the six-arcs satisfying
 $\cU(A)=\cC(\F_{11})$ form one orbit under
-$\operatorname{Stab}_{\mathrm{PGL}(3,11)}(\cC)$.  Indeed, a projectivity
-between two such arcs carries one uncovered locus to the other. Its image
-of $\cC$ therefore shares all twelve rational points with $\cC$, so
-B\'ezout's theorem makes the two conics equal. This is the exact geometric
+$\operatorname{Stab}_{\mathrm{PGL}(3,11)}(\cC)$
+(Corollary~\ref{cor:conic-stabilizer-orbit}).  That is the exact geometric
 sense in which the syndrome locus reconstructs the six-column realization.
 
 The proof reconstructs the hexagon from conic containment alone.
@@ -255,16 +253,23 @@ A convenient representative is
  A=\{(1,10,0),\,(1,9,1),\,(1,4,7),\,(1,8,5),\,(0,1,4),\,(1,1,7)\}.
 \]
 It is a six-arc disjoint from $\cC$; its fifteen joins also avoid $\cC$.
-The following invariant construction explains its symmetry.
+The invariant construction in the following definition explains its
+symmetry.
 
 \begin{definition}[Clebsch hexagon]
 \label{def:hexagon}
-Let $\A\subset\mathrm{PGL}_2(11)$ be an icosahedral subgroup. The
-six Sylow $5$-subgroups of $\A$ each fix two points of $\cC$. The
-\emph{Clebsch hexagon} is the set of poles of the six chords joining these
-fixed pairs. More generally, following Dye, a Clebsch hexagon over a field
-is a six-arc with exactly ten nonvertex triple-chord concurrence points,
-called its Brianchon points.
+Following Dye, a \emph{Clebsch hexagon} over a field is a six-arc with
+exactly ten nonvertex triple-chord concurrence points, called its
+\emph{Brianchon points}.
+
+At $q=11$ there is also a group-theoretic construction.  Let
+$\A\subset\mathrm{PGL}_2(11)$ be an icosahedral subgroup; its six Sylow
+$5$-subgroups each fix two points of $\cC$, and the poles of the six chords
+joining these fixed pairs form a six-arc with ten Brianchon
+points~\cite[\S\S29--32]{Edge1956}.  The two descriptions agree over
+$\F_{11}$: by Proposition~\ref{prop:golden-normal-form} the six-arcs with
+ten Brianchon points form a single $\mathrm{PGL}_3(11)$-orbit, which
+therefore contains the constructed arc.
 \end{definition}
 
 For a nonsingular conic over an odd field, an \emph{external point} lies on
@@ -488,14 +493,31 @@ dictionary the three matchings through $uv$ are a perfect matching of the
 six one-factorizations, and every perfect matching there arises this way;
 so $G$ contains no perfect matching.
 
-Second, adjacency in $G$ is transitive: if two disjoint matchings of a
-triangle triple concur, so does the third.  Take the common triangle
+Second, adjacency in $G$ is transitive: in a triangle
+$\{F_iF_j,F_jF_k,F_iF_k\}$ of pairs, if two of the three matchings are
+concurrent, so is the third.
+
+Such a triangle is exactly a triple whose three matchings span a
+$K_{3,3}$.  The union of three pairwise disjoint perfect matchings of $K_6$
+is a cubic graph on six vertices, hence either $K_{3,3}$ or the triangular
+prism.  The complement of a prism in $K_6$ is a six-cycle, which splits
+into two further matchings; a prism triple therefore extends to a
+one-factorization of $K_6$, so its three matchings share a common
+one-factorization and the triple is a star $\{F_iF_j,F_iF_k,F_iF_l\}$.  A
+triangle triple, whose pairs have no common member, thus spans $K_{3,3}$.
+Its bipartition splits the six vertices into two triangles, each of the
+three matchings joins one triangle to the other, and a concurrence of such
+a matching is a centre of perspective of the two triangles.
+
+Take the common triangle
 $A_1=(1{:}0{:}0)$, $A_2=(0{:}1{:}0)$, $A_3=(0{:}0{:}1)$ with the first
 centre of perspective at $(1{:}1{:}1)$, which is legitimate because $A$ is
 an arc, and write the other three vertices as $B_1=(x{:}1{:}1)$,
 $B_2=(1{:}y{:}1)$, $B_3=(1{:}1{:}z)$.  The determinant governing the second
 perspectivity is $xyz-1$ and that governing the third is $1-xyz$, so the
-two conditions coincide.  Only commutativity of the field is used.
+two conditions coincide.  Only commutativity of the field is used; this
+determinant identity is the classical theorem that two triangles of a
+Pappian plane in double perspective are in triple perspective.
 
 A transitive symmetric adjacency is an equivalence relation, so $G$ is a
 disjoint union of complete graphs; having no perfect matching means some
@@ -508,21 +530,34 @@ ones excluded.  The value ten arises only from $5+1$.
 \begin{remark}[What is classical here]
 The bound $c(A)\le10$, its quadrangle mechanism, and the one-factorization
 structure at equality are Dye's \cite[\S2.2 and the proof of Theorem~1,
-pp.~274--275]{Dye1991}.  The remaining content is the exclusion of the
-values five, seven, eight, and nine through the transitivity step, which we
+pp.~274--275]{Dye1991}.  The transitivity step is the classical
+double-implies-triple perspective theorem for a commutative field; what is
+used here is its reading as a transitivity relation on the six
+one-factorizations of $K_6$.  The remaining content is the exclusion of the
+values five, seven, eight, and nine through that step, which we
 have not found in the literature: Dye's paper treats hexagons with exactly
 ten Brianchon points, and to our knowledge no earlier source constrains the
 count of a six-arc strictly between zero and ten.
+
+The census of the computational companion corroborates the spectrum at
+$q=11$: across its fifteen projective classes of six-arcs the count
+$c(A)=22-|\cU(A)|$ realizes each of the seven predicted values and none of
+the excluded ones~\cite{RuddComputational2026}.
 \end{remark}
 
 \section{The rigidity theorem}
 \label{sec:rigidity}
 
-Proposition~\ref{prop:deep-holes-conic} concerns a specific arc. We now prove
-the symmetry-free characterization stated in
-Theorem~\ref{thm:rigidity}. The uncovered conic determines the resulting
-Clebsch hexagon's polarity, and Dye's stabilizer theorem then identifies
-its projective stabilizer as $A_5$; neither is assumed.
+The conic identification for the displayed arc, proved in
+Section~\ref{sec:code}, concerns that one arc.  We now prove the
+symmetry-free characterization stated in Theorem~\ref{thm:rigidity}.  The
+uncovered conic determines the resulting Clebsch hexagon's polarity, and
+Dye's stabilizer theorem then identifies its projective stabilizer as
+$A_5$; neither is assumed.  The two arguments are independent: the proof of
+Theorem~\ref{thm:rigidity} uses only Theorem~\ref{lem:chord-defect},
+Lemma~\ref{lem:six-arc-line-bound} and Dye's results, while
+Proposition~\ref{prop:deep-holes-conic} uses
+Theorem~\ref{cor:conic-filling-window}.
 
 \paragraph{Conic containment.}
 The condition is that the uncovered locus $\cU(A)$ lies on a conic, not
@@ -607,6 +642,22 @@ exteriority and count give (iii)$\Rightarrow$(ii)$\Rightarrow$(i).
 Dye's stabilizer theorem identifies the stabilizer with $A_5$.
 \end{proof}
 
+\begin{corollary}[Rigidity relative to a fixed conic]
+\label{cor:conic-stabilizer-orbit}
+Fix a nonsingular conic $\cC\subset\PG(2,11)$.  The six-arcs $A$ with
+$\cU(A)=\cC(\F_{11})$ form a single orbit under
+$\operatorname{Stab}_{\mathrm{PGL}(3,11)}(\cC)$.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:rigidity} any two such arcs are related by a
+projectivity $g$, and $g$ carries one uncovered locus to the other, hence
+$\cC(\F_{11})$ to $\cC(\F_{11})$.  The conic $g(\cC)$ therefore shares all
+twelve rational points of $\cC$ with $\cC$; two distinct conics meet in at
+most four points by B\'ezout's theorem, so $g(\cC)=\cC$ and
+$g\in\operatorname{Stab}_{\mathrm{PGL}(3,11)}(\cC)$.
+\end{proof}
+
 Projective equivalence of the unordered parity-check column sets is
 equivalent to monomial equivalence of the associated codes: choose column
 representatives after the projectivity, then absorb their nonzero scalar
@@ -640,10 +691,11 @@ $\cU(A)$ is a nonsingular conic, then $q$ is odd and
 For $k=6$, writing $c(A)=n_3$ gives
 \[
  |\cU(A)|=q^2-14q+55-c(A),\qquad
- 0\le c(A)\le15,\qquad
  c(A)=(q-6)(q-9)
 \]
-when $|\cU(A)|=q+1$. For the displayed Clebsch hexagon, Dye's ten
+when $|\cU(A)|=q+1$, and for $q$ odd
+Proposition~\ref{prop:concurrence-spectrum} restricts the concurrence count
+to $c(A)\in\{0,1,2,3,4,6,10\}$. For the displayed Clebsch hexagon, Dye's ten
 Brianchon points give $c(A)=10$; its fifteen chords have $45$ disjoint
 pairs, cover $115$ of the $127$ off-arc points, and leave exactly twelve
 uncovered.
@@ -657,8 +709,10 @@ $0\le q(q-m)\le k-m<0$, a contradiction.
 
 Suppose $q$ is even and $\cU(A)$ is an arc. Since it has $q+1$ points, it
 has a nucleus $N\notin\cU(A)$ through which every line is tangent
-\cite[p.~177]{Hirschfeld1998}. Every chord of $A$ is disjoint from
-$\cU(A)$, so no chord contains $N$; nor can $N$ be a vertex. Thus
+\cite[p.~177]{Hirschfeld1998}: every line through $N$ meets $\cU(A)$ in
+exactly one point.  A chord of $A$ is disjoint from $\cU(A)$ and so meets
+it in no point; hence no chord passes through $N$.  Nor can $N$ be a
+vertex, since each vertex lies on the $k-1$ chords through it.  Thus
 $N\in\cU(A)$, a contradiction.
 
 In the conic case, $q$ is therefore odd and every chord is passant. An
@@ -680,6 +734,20 @@ $c(A)=10$~\cite[Theorem~1, pp.~275--276]{Dye1991}. At $q=11$, the two
 moments read $\sum i n_i=150$ and $\sum\binom{i}{2}n_i=45$, whence
 $n_1+n_2+n_3=115$.
 \end{proof}
+
+\begin{remark}[The spectrum alone almost fixes the order]
+\label{rem:spectrum-field-restriction}
+For $k=6$ the two constraints combine.  If $\cU(A)$ is a nonsingular conic,
+then $q$ is odd and $c(A)=(q-6)(q-9)$ must lie in
+$\{0,1,2,3,4,6,10\}$ by Proposition~\ref{prop:concurrence-spectrum}: the
+order $q=7$ gives the negative value $-2$, every $q\ge13$ gives more than
+ten, and the remaining odd orders are $q=5,9,11$, with values $4,0,10$.
+The concurrence spectrum therefore recovers a finite list of orders without
+the conic-complement bound, and the window's lower bound $q\ge2k-3=9$
+removes $q=5$.  Only $q=9$ then has to be excluded, which the computational
+companion does with a Sylvester-graph clique
+bound~\cite{RuddComputational2026}.
+\end{remark}
 
 \begin{remark}[Sharpness of the window]
 Both bounds are attained. A projective four-frame over $\F_5$ has a
@@ -1919,11 +1987,6 @@ V.~Guruswami and A.~Vardy,
 \newblock \emph{IEEE Transactions on Information Theory} \textbf{51}(7)
 (2005), 2249--2256.
 
-\bibitem{Hirschfeld1998}
-J.~W.~P.~Hirschfeld,
-\newblock \emph{Projective Geometries over Finite Fields}, second edition,
-\newblock Oxford University Press, 1998.
-
 \bibitem{HassettTschinkel2010}
 B.~Hassett and Y.~Tschinkel,
 \newblock Flops on holomorphic symplectic fourfolds and determinantal cubic
@@ -1931,6 +1994,11 @@ hypersurfaces,
 \newblock \emph{Journal of the Institute of Mathematics of Jussieu}
 \textbf{9}(1) (2010), 125--153.
 \newblock doi:10.1017/S1474748009000140; arXiv:0805.4162.
+
+\bibitem{Hirschfeld1998}
+J.~W.~P.~Hirschfeld,
+\newblock \emph{Projective Geometries over Finite Fields}, second edition,
+\newblock Oxford University Press, 1998.
 
 \bibitem{Kaipa2017}
 K.~Kaipa,

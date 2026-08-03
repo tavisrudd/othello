@@ -30,7 +30,10 @@ ROW_LABELS = {
     14: "prop:deep-hole-orbit",
     15: "prop:decoding-oracle",
     16: "lem:six-arc-line-bound",
-    17: "thm:rigidity",
+    17: (
+        "thm:rigidity",
+        "cor:conic-stabilizer-orbit",
+    ),
     18: "prop:low-degree-rigidity",
     19: "cor:monomial-characterization",
     20: "thm:gap",

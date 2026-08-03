@@ -327,7 +327,89 @@
    `verify-release-output.json` refresh and the `~/src/math-papers` forward
    synchronization.
 
-## Changed paths (all uncommitted)
+## Referee revision round (2026-08-03, second pass)
+
+Work order: `notes/2026-08-03-c855-cold-read-referee.md` (verdict MINOR REVISIONS;
+4 MAJOR, 7 MINOR, 3 trivial, one free strengthening). Everything was applied except
+MAJOR 4 (item 15, the Section 9 pin block), which stays untouched: the q11 package
+re-export and re-pin is a separate Lean-side task.
+
+| Finding | Fix | Location |
+|---|---|---|
+| 1 MAJOR — companion cites `[9, Theorem 3.2]` for the conic-filling window | Pinpoint corrected to `[9, Theorem 4.4]`, verified against `clebsch_rigidity.aux` after the final build | companion `thm`/`cor:conic-filling-window` header |
+| 1 MAJOR — sweep of remaining cross-artifact numbers | `[9, Theorem 3.1]` (chord defect) and `[9, Theorem 1.1]` (rigidity) re-verified as correct; two new pinpoints `[9, Proposition 3.2]` verified; the `rem:char-three-five` citation stays unnumbered | companion lines 81, 109, 93, 205 region |
+| 2 MAJOR — q13 descent advertised as a new contribution with no in-artifact proof | Madison--Wu credit kept; descent kept but stated as a refinement recorded in the project's research notes, proof not reproduced, formalization pending, explicitly outside the artifact's claim surface, with a sentence saying the spanning conclusion is proved independently from the mod-two intersection algebra. "What is added here" and "adversarially refereed" deleted | companion Section `sec:q13-tangent-code` opening |
+| 2 MAJOR — Table 2 row boundary asserted the unproved irreducibility | Row kept (the spanning/automorphism claim is proved here); boundary column now reads "The mod-two elliptic intersection algebra and the four resolving anchors" | companion `tab:claim-modes` |
+| 3 MAJOR — Remark 5.2 impossibility framing | Rewritten as a descriptive observation: the bound six is order-specific; the counting, character-sum, and clique estimates tried here do not distinguish `q=19` from `q=23`; `lem:pencil-saturation` is the order-specific coincidence closing `q=13`. No quantification over proof techniques remains | companion `rem:q23-passant-arc` |
+| 4 MINOR — superseded `c(A) <= 15` in the window theorem | Display now carries only `|U(A)|` and `c(A)=(q-6)(q-9)`, with the spectrum `c(A) in {0,1,2,3,4,6,10}` cited to Proposition 3.2 for odd `q`; new `rem:spectrum-field-restriction` records that the spectrum alone leaves `q=5,9,11` and that the window removes `q=5`, so only `q=9` needs the companion's Sylvester bound. Propagated to companion Theorem 1.2 and to the first line of the `thm:why11` proof | main `cor:conic-filling-window`, new remark; companion Theorem 1.2, `thm:why11` |
+| 5 MINOR — classical transitivity ingredient uncredited | Proof now names the determinant identity as the classical double-implies-triple perspective theorem for a commutative field; Remark 3.3 repeats the credit once and scopes the novelty to the reading as a transitivity relation | main proof of `prop:concurrence-spectrum`, `Remark (What is classical here)` |
+| 6 MINOR — `K_{3,3}` normalization unjustified | New paragraph: the union of three pairwise disjoint perfect matchings is `K_{3,3}` or the prism; the prism's complement is a six-cycle, so a prism triple extends to a one-factorization and is a star triple; hence a triangle triple spans `K_{3,3}` and its bipartition gives the two triangles in perspective | main proof of `prop:concurrence-spectrum` |
+| 7 MINOR — proof material attached to Theorem 1.1 | Bezout argument moved into new `cor:conic-stabilizer-orbit` (Corollary 4.2) after the rigidity proof; the introduction now states the orbit fact and points at the corollary | main Section 1 and Section 4 |
+| 8 MINOR — Section 4 opens with a forward reference to Proposition 6.1 | Rephrased to name the content ("the conic identification for the displayed arc, proved in Section 6"), plus an explicit no-circularity sentence listing each side's inputs | main Section 4 opening |
+| 9 MINOR — compressed nucleus argument | Intermediate clause inserted: every line through the nucleus meets `U(A)` in exactly one point, a chord meets it in none, so no chord passes through `N`; and no vertex can be `N` since each vertex lies on its `k-1` chords | main proof of `cor:conic-filling-window` |
+| 10 MINOR — Definition 2.1's two definitions | Dye's ten-Brianchon-point condition is now the definition; the icosahedral construction follows as a `q=11` construction, and the agreement over `F_11` is stated via Edge's count plus the single-orbit statement of Proposition 2.2 | main `def:hexagon` |
+| 11 TRIVIAL — three names for one companion table row | All three replaced by the script names actually responsible: `check_rigidity_degenerate_conic.py` for the conic-inscribed subcensus, `check_global_conic_gap.py` and `check_low_degree_loci.py` in the Table 1 caption, `check_low_degree_loci.py` in Remark 2.3. (The Table 1 caption uses `\texttt` since `\path` breaks in a moving argument.) | companion Section 2, `tab:fifteen-classes` caption, `rem:degree-threshold` |
+| 12 TRIVIAL — bibliography order | Hassett--Tschinkel moved before Hirschfeld | main `thebibliography` |
+| 13 TRIVIAL — abstract wording | "has `q` odd, with `2k-3 <= q <= (k(k-1)+3)/3`"; the arc no longer "lies in" a field window | main abstract |
+| 14 — free strengthening | Companion census corroboration of the concurrence spectrum added in both papers, stated as corroboration at `q=11` and not a second proof: main Remark 3.3 and companion Section 2 after the `|U(A)|=22-c(A)` identity | main `Remark (What is classical here)`, companion Section 2 |
+| 15 MAJOR — stale Section 9 pin block | **Deferred, untouched.** Owned by the q11 package re-export/re-pin task. `verify_trust_manifest.py` still exits 1 with the single message "manuscript displays a stale digest for RelativeConicArcs/Gates/ClebschRigidityTrust.lean", exactly as before this round | main Section 9 |
+
+### Verification surface after this round
+
+* `verification/extract_statement_identity.py`: `cor:conic-stabilizer-orbit` attached to
+  existing row 17 (with `thm:rigidity`), so the published claim map stays at nineteen rows.
+  The new `rem:spectrum-field-restriction` is a remark and is not an extracted environment.
+* `verification/check_manuscript_build.py`: main-paper `EXPECTED_PAGES` 25 to 26 (the
+  companion stays at 13).
+* `verification/build_trust_manifest.py`: row 17's conceptual description now also records
+  the fixed-conic single-orbit statement.
+* Regenerated against the authoritative Lean root `othello/lean`:
+  `verification/statement_identity.json` and `verification/trust_manifest.json`.
+* `check_manuscript_build.py` reports
+  `manuscript_pages=clebsch_rigidity:26,clebsch_rigidity_computational_companion:13
+  warnings=0 pdfs=produced`; both root PDFs rebuilt with no warnings and no undefined
+  references.
+* `verify_computational_companion.py`: `companion_claims=12 modes=5 checks=10 artifacts=4
+  finite_boundary_claims=7 status=ok`.
+* `verify_trust_manifest.py --lean-root othello/lean`: still the single stale-digest
+  failure of item 15. No new failure mode.
+* `verify-release-output.json` was **not** touched and `--update-output` was **not** run,
+  per the same two blockers recorded above.
+* Pages inspected visually: main 2 (introduction and the relocated orbit statement),
+  4 (Definition 2.1), 7 (the `K_{3,3}` paragraph, the perspective credit, Remark 3.3),
+  9 (Corollary 4.2, the window theorem, the nucleus clause), 10 (the new spectrum remark);
+  companion 2 (Theorem 1.2 and the Table 1 caption), 3 (census corroboration), 5 (the
+  descent paragraph), 10 (Remark 5.2), 11 (Table 2). No overfull boxes and no float
+  displacement.
+
+### Numbering note
+
+The main paper's numbering moved: the conic-filling window is now Theorem 4.4 (was 4.3,
+and 4.2 one revision earlier), because Corollary 4.2 was inserted before it. The
+companion's pinpoint was set from the freshly built `.aux`, but this pointer has now
+drifted in three consecutive revisions. Before release, either regenerate the companion's
+restated-input numbers from the manuscript label set or drop the numbers and cite the
+window by name.
+
+## Changed paths, referee revision round (all uncommitted)
+
+```
+papers/clebsch-rigidity/clebsch_rigidity.tex
+papers/clebsch-rigidity/clebsch_rigidity.pdf
+papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex
+papers/clebsch-rigidity/clebsch_rigidity_computational_companion.pdf
+papers/clebsch-rigidity/verification/build_trust_manifest.py
+papers/clebsch-rigidity/verification/check_manuscript_build.py
+papers/clebsch-rigidity/verification/extract_statement_identity.py
+papers/clebsch-rigidity/verification/statement_identity.json
+papers/clebsch-rigidity/verification/trust_manifest.json
+notes/2026-08-03-c855-manuscript-pass-log.md   (this file)
+```
+
+Nothing under `lean/`, nothing under `~/src/math-papers/`, no git state change, and
+`verification/verify-release-output.json` untouched.
+
+## Changed paths, first batched pass (committed as `2799bcbf`)
 
 ```
 papers/clebsch-rigidity/clebsch_rigidity.tex

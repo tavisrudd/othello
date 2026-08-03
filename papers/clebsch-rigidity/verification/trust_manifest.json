@@ -186,7 +186,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 853",
+      "paper_location": "source line 921",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -280,7 +280,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 809",
+      "paper_location": "source line 877",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -296,7 +296,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 826",
+      "paper_location": "source line 894",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -344,7 +344,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 955",
+      "paper_location": "source line 1023",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -471,7 +471,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 1010",
+      "paper_location": "source line 1078",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -518,7 +518,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 541",
+      "paper_location": "source line 576",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -536,7 +536,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "degenerate-conic reduction and Dye equality boundary",
-          "unconditional_remainder": "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, and proves the chord-defect identity independently."
+          "unconditional_remainder": "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, proves the chord-defect identity independently, and derives the single-orbit statement relative to a fixed conic from Bezout."
         },
         {
           "lean": {
@@ -614,14 +614,14 @@
           "subclaim": "containing-quadratic rigidity implication"
         }
       ],
-      "id": "thm-rigidity",
+      "id": "thm-rigidity+cor-conic-stabilizer-orbit",
       "paper_location": "source line 143",
       "route": "mixed",
       "row": 17,
       "source": {
-        "id": "thm:rigidity",
+        "id": "thm:rigidity+cor:conic-stabilizer-orbit",
         "kind": "theorem-environment",
-        "sha256": "49282b0388745dbd71076010b8e0db376255306a903eb723e76f174285266f69"
+        "sha256": "8123932d99110b357477ba025a1e658a7190fbf1efcc8ae28ab0189d08f66794"
       },
       "trust_boundary": "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences."
     },
@@ -686,7 +686,7 @@
         }
       ],
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 211",
+      "paper_location": "source line 219",
       "route": "mixed",
       "row": 18,
       "source": {
@@ -744,7 +744,7 @@
         }
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 237",
+      "paper_location": "source line 245",
       "route": "mixed",
       "row": 19,
       "source": {
@@ -815,7 +815,7 @@
         }
       ],
       "id": "thm-gap",
-      "paper_location": "source line 269",
+      "paper_location": "source line 277",
       "route": "mixed",
       "row": 20,
       "source": {
@@ -831,7 +831,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 1143",
+      "paper_location": "source line 1211",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -912,7 +912,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 1193",
+      "paper_location": "source line 1261",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -1169,7 +1169,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1209",
+      "paper_location": "source line 1277",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1293,7 +1293,7 @@
       "source": {
         "id": "lem:chord-defect+prop:concurrence-spectrum+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "8b514a35d7e6a1531d48d323ea6b7a785a7023da028a47bd4357e1e246a2f0a1"
+        "sha256": "a232a350d24bdf85b845d3041f5bfd5c01f9673a962aa127b354ac395c352dd2"
       },
       "trust_boundary": "The manuscript proves the universal chord-defect identity, the odd-order concurrence spectrum, the quadratic barrier, the even-order oval obstruction, and the passant window, and applies the cited partial-cover theorem; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
@@ -1375,7 +1375,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 342",
+      "paper_location": "source line 350",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1453,7 +1453,7 @@
         }
       ],
       "id": "prop-golden-normal-form+prop-clebsch-family-uncovered",
-      "paper_location": "source line 294",
+      "paper_location": "source line 299",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1760,7 +1760,7 @@
         }
       ],
       "id": "thm-q13-tangent-code+lem-pencil-saturation+thm-small-k-conic-filling",
-      "paper_location": "source line 443",
+      "paper_location": "source line 452",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1842,7 +1842,7 @@
         }
       ],
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 139",
+      "paper_location": "source line 140",
       "route": "mixed",
       "row": 58,
       "source": {
@@ -1919,12 +1919,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "06cc6d02768d41d0f618b14ce2852e09ee5ae4003081e8b2b56359db1d0a8d5a"
+      "sha256": "50ec790620d1fc0ee827237f4eefd64506dedeb203fd6e201cbc05be4676495c"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "11b48e5a40f181b212a58bb483b7fe0796f2440f0d6d619b182f21ee026d8699"
+      "sha256": "09646fc67fd393a83b2e00c83fecba2ba8af583c1c0d4a815a8a1e932b376f83"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -1942,9 +1942,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "4ec99983025f0493eb1578d2cb477d4e0b43ebcf33ca3a92d140fce0093d5331"
+    "sha256": "8836bab9fa78e9fded27e5f2701cbd916de8b78a3f7d68e20843a7bd53c9c69d"
   },
-  "manuscript_sha256": "5d77440c98d63e4c2e0aed99a107cf00ecf4de4bd38979630294beb2fa943efe",
+  "manuscript_sha256": "40519a2f05f19f21119e223c9a480cea182e2b1fe018819a4a0485f5debaa74b",
   "public_documents": [
     {
       "path": "README.md",
@@ -1984,7 +1984,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "ca737dd3a9a1cadce6c3847e4ae5e43bd5358511b0c91ad33f4a04e29ae5f301"
+    "sha256": "4706a31fa99f776ca63174e9101a9e69b7b320603b66d8cd651c30a53a2f811c"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2355,12 +2355,12 @@
       {
         "path": "verification/extract_statement_identity.py",
         "repository": "paper",
-        "sha256": "30bbcce7987ededef1c9afc04805942cb847f161468c9a9826bdb6f004b2a6ab"
+        "sha256": "bcbcbfad393623b9eade58e8ebacf236f186f2461b6fd00b5f292955c511b185"
       },
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "36412d734d90f40394a2a0bd07a52eaf09b8ae67fe22d1cbafe9803ac151d609"
+        "sha256": "913f552780aa40f8a2538df593cc245f6c8a71254f6bba9bd815c5ca7638e5af"
       },
       {
         "path": "verification/verify_trust_manifest.py",
@@ -2375,7 +2375,7 @@
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "0f360b2719404e46b87391a9f1e0af5406cb5fa9c82efc4f7e64cceb4b1dacef"
+        "sha256": "f6cd748e00ba43472bc7987eeaf39ee9143b551a23d5663270c32cdf676b4a4e"
       },
       {
         "path": "verification/verify_computational_companion.py",
