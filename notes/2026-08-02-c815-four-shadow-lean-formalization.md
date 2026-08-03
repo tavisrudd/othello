@@ -105,12 +105,30 @@ classification, and scalar-transport terminals.  The paper-local replay is
 
 ```sh
 python3 papers/clebsch-passages/verification/verify_four_shadow_lean.py \
-  --lean-root /home/tavis/src/othello/lean
+  --lean-root /home/tavis/src/othello/lean --source-only
 ```
 
-Supplying the stdout of the focused gate with `--axiom-log` additionally
-checks observed axioms against the tracked report.  The later combined Paper
-III manifest remains owned by C800 after C823 lands its declarations.
+Supplying the stdout of the focused gate with `--axiom-log` instead of
+`--source-only` additionally checks observed axioms against the tracked
+report.  Both modes pass on the committed tree.  The later combined Paper III
+manifest remains owned by C800 after C823 lands its declarations.
+
+Every symbolic terminal depends only on `propext`, `Classical.choice`, and
+`Quot.sound`.  The four declarations below the orientation classifier —
+`cubicsProportional_four_of_sixTests`,
+`cubicsProportional_neg_four_of_sixTests`,
+`exists_nonzero_cubicsProportional_iff_conferenceSquare`, and
+`exists_nonzero_cubicsProportional_smul_iff_conferenceSquare` — additionally
+depend on the declaration-local axiom that compiled evaluation introduces for
+the classifier.  That axiom is the entire finite trust boundary of this
+module; the weighted converse, the pentagon gauge, and the conference square
+do not touch it.
+
+The validated artifacts are the tracked axiom report
+`papers/clebsch-passages/verification/four_shadow_axioms.txt`, the seven-file
+source closure `four_shadow_source_closure.json`, and the manifest
+`four_shadow_formal.json`, whose recorded source, verifier, closure, and axiom
+hashes agree with the committed tree.
 
 The exact rank-14 Jacobian calculation at the two weighted golden points
 remains the external rational certificate

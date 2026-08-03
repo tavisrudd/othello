@@ -1,12 +1,15 @@
 # C815 — Lean formalization of four-shadow recognition
 
 **Lane:** `clebsch`  
-**Status:** second task for `go clebsch paper III`; begin after C799's API
-handoff; C809 theorem frozen; C800 owns the later manifest reconciliation
+**Status:** reopened after formal audit; the source, focused gate, axiom
+report, manifest, and paper-local replay are now green, and the remaining work
+is the module-wide docstring/hypothesis audit, the manifest's disclosure of the
+finite terminal, and the two full Paper III gate runs before the API is handed
+to C823
 
 ## Objective
 
-Formalize the reusable converse theorem behind C809: for a symmetric zero-diagonal order-six matrix with nonzero off-diagonal entries, nonzero proportionality between the triangle cubic and the commutator-Pfaffian/third-compound cubic forces the quadratic relation $A^2=\lambda I$. Formalize the scalar-sign specialization that recovers the unique conference switching class and its oriented six-test recognition packet.
+Formalize the reusable converse theorem behind C809: for a symmetric zero-diagonal order-six matrix with nonzero off-diagonal entries, nonzero proportionality between the triangle cubic and the commutator-Pfaffian/third-compound cubic forces the quadratic relation $A^2=\lambda I$. Formalize the root-normalized scalar-sign specialization that detects the conference square and its oriented six-test recognition packet. Reduction of arbitrary sign matrices and uniqueness modulo switching and permutation are outside this API.
 
 ## Required scope
 
@@ -19,7 +22,7 @@ Formalize the reusable converse theorem behind C809: for a symmetric zero-diagon
 3. Express translation invariance of the commutator cubic and derive vanishing pair moments from nonzero proportionality.
 4. Prove that nonzero edges make $A^2$ diagonal and that commutation with $A$ makes its diagonal scalar.
 5. On scalar sign matrices, prove the gauge-to-pentagon classification and the converse conference square without replacing the structural argument by a 1,024-case table.
-6. Formalize that five first-row balance equations plus one oriented coefficient select the labelled oriented class. A finite `native_decide` replay may corroborate but must not replace the pentagon proof.
+6. Formalize that five first-row balance equations plus one oriented coefficient select the labelled oriented codes. One audited finite classifier may discharge this exact labelled fibre only after the conference square and pentagon degree statement have been proved symbolically.
 7. State the exact boundary: the rank-14 local weighted rigidity calculation remains an exact external certificate unless a clean existing rational-rank interface makes formalization essentially free.
 
 ## Coordination boundary
@@ -29,10 +32,25 @@ C815 owns the new converse/recognition declarations. C800 owns the pre-existing 
 ## Acceptance
 
 - The universal coefficient bridge used by the converse is either reused from C763 or proved once at the correct abstraction level.
-- The general nonzero-edge quadratic implication, scalar-sign conference classification, and six-test oriented recognition theorem are kernel-checked.
+- The general nonzero-edge quadratic implication, normalized scalar-sign conference-square characterization, and six-test oriented recognition theorem are kernel-checked.
 - The guarded focused gate, axiom audit, hash manifest, and paper-local replay surface pass.
 - Every theorem is mapped to C809's human statement and the local weighted Jacobian boundary remains honest.
 - No manuscript prose or public release is changed; C816 owns promotion.
+
+Acceptance has not fully passed.  The repair checklist is recorded in
+`notes/2026-08-02-paper-iii-lean-audit-checklist.md`; the final declaration
+map, trust boundary, replay surface, and closeout ledger belong in
+`notes/2026-08-02-c815-four-shadow-lean-formalization.md` only after terminal
+validation.
+
+The formalization itself is now kernel-checked: the module elaborates without
+errors or warnings, the focused gate builds through the guarded queue, its
+`#print axioms` output matches the tracked report, and the paper-local replay
+passes in both modes.  Validation also found that the `x₀x₁x₂` coefficient of
+the commutator-Pfaffian cubic carried the wrong sign, which had made both
+orientation predicates select the opposite six-code fibre; the corrected
+classification is confirmed by an exact independent recomputation committed
+with the report.
 
 ## Evidence source
 
