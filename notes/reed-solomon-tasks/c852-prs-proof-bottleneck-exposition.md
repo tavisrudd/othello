@@ -2,7 +2,8 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** Active.
+**Status:** Exposition implemented and local gates green; fresh-reader and
+clean-export gates remain.
 
 ## Objective
 
@@ -32,3 +33,23 @@ their statements or moving computational detail into the mathematical body:
   gate unless performed outside this workspace; a second local export is not
   described as external validation.
 
+## Implemented revision
+
+The recursive-carrier proof now prints the universal symmetric ordered-root
+equation on the cubic-pencil Grassmannian and explains how symmetric,
+exchanged, and anti-invariant factorization alternatives yield the residual
+prime, persistent determinant, and characteristic-three collision.  A compact
+four-row table exposes how each bottom component constrains a contained marker
+row space and why only the persistent or maximal Lucas carrier survives.
+
+The degree-nine Lucas section now begins its complete-carrier argument with a
+four-step synopsis: invariant-block arithmetic, rank-three/rank-four
+Artin--Schreier integrality, rational good-base selection, and the exact finite
+boundary.  It states that q16 and q32 are full-carrier certificate closures,
+whereas at q64 only the invariant block is certificate-backed and the
+complement is mathematical.  The verification table uses the same boundary.
+Appendices A, B, and D now state their input, bottleneck, and closing theorem at
+entry.  A second mechanism figure was rejected as redundant with the reading
+map; the characteristic table transfers the missing information more directly.
+
+The warning-free builds are currently 55 canonical pages and 40/50 TIT pages.

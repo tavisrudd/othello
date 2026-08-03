@@ -1,5 +1,10 @@
 \section{Lucas-carrier arithmetic and redundancy ten}\label{sec:lucas}
 
+This appendix evaluates the modular carrier left by the recursive theorem.
+It first separates the additive endpoint orbit from the full degree-nine
+carrier, then proves that the full carrier is shallow, and finally combines
+that arithmetic with five pointed contractions to obtain redundancy ten.
+
 Let $d=2^s$ with $s\geq2$ in characteristic two.  Lucas' theorem gives the top
 nucleus of the degree-$d$ normal rational curve as
 \[
@@ -300,6 +305,30 @@ The $PGL_2$-module filtration gives
 \[
                     \cM_9/U\simeq\det^4\otimes E.          \tag{31}
 \]
+
+\paragraph{Proof route}
+The proof of \(\cM_9(\F_{2^m})\) shallowness has four distinct steps.
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item On the invariant block \(\PP(U)\), reciprocal subspace polynomials
+      settle the rank-one strata.  The remaining rank-two twists reduce to
+      the Artin--Schreier final-pair cover in
+      Proposition~\ref{prop:m9-invariant-block}.
+\item Off \(\PP(U)\), projective transport fixes the nonzero quotient
+      coordinate.  The coefficient map in (37) has rank three or four; in
+      either case the nonsquare double-pole calculation makes the
+      Artin--Schreier cover geometrically integral.
+\item Fixing five roots leaves one moving base root.  The good-base
+      conditions have bounded degree, and the normalized cover has genus at
+      most one with deletion degree \(48\).  This gives every complement
+      point for \(q\geq64\).
+\item The finite boundary is explicit.  Full-carrier quotient certificates
+      close \(q=16,32\).  At \(q=64\), only the invariant block is
+      certificate-backed; the complement is covered by the preceding
+      mathematical point-count argument.  For \(q\geq128\), both parts are
+      mathematical.
+\end{enumerate}
+Thus the rank and selector calculations carry the uniform theorem, while the
+certificates close exactly the stated finite residue.
 
 \begin{proposition}[Invariant-block arithmetic]\label{prop:m9-invariant-block}
 Every rational point of $\PP(U)$ is shallow over every

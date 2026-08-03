@@ -40,6 +40,25 @@ fibres.
 \end{proposition}
 
 \begin{proof}
+The elimination has a concrete geometric source.  On
+\(\operatorname{Gr}(2,\Gamma^3E)\), let \(z_0,\ldots,z_5\) be Plücker
+coordinates for a cubic pencil.  Its universal symmetric ordered-root
+equation is
+\[
+ \Phi_z(t,s)=z_0+z_1(t+s)+z_2(t^2+ts+s^2)+z_3ts
+              +z_4ts(t+s)+z_5t^2s^2.
+\]
+After the diagonal and collision factors already charged as deletion
+divisors are saturated away, the terminal bad locus is the pullback, along
+the Hankel Plücker map \(c\mapsto z(c)\), of the factorization locus of
+\(\Phi_z\).  The involution \((t,s)\leftrightarrow(s,t)\) leaves three
+possibilities.  Symmetric factors give the residual component below;
+exchanged factors give \(D=0\); and an anti-invariant factor is proportional
+to \(s-t\).  In the last case its Plücker product is \(-3\mu^2\), so it
+survives only in characteristic three and is then the diagonal collision
+already removed.  Thus the two displayed primes are the only possible
+noncollision components before small-characteristic specialization.
+
 Outside characteristics two and three, elimination of the ordered residual
 roots gives the prime kernel of (26); one convenient generating set is
 \begin{align*}
@@ -48,13 +67,10 @@ roots gives the prime kernel of (26); one convenient generating set is
 &2c_1c_3^2-3c_1c_2c_4+c_0c_3c_4,\quad
   c_0c_3^2-c_1^2c_4,
 \end{align*}
-together with their images under \(c_i\leftrightarrow c_{4-i}\).
-The symmetric, exchanged, and anti-invariant factorization alternatives
-give respectively this surface, the rank-two cubic, and a diagonal which
-survives only in characteristic three and is then a collision.  Direct
+together with their images under \(c_i\leftrightarrow c_{4-i}\).  Direct
 reduction gives the plane in characteristic two and (27) in characteristic
 three.  The ordered-Hessian calculation sends its complementary ruling to
-rank one, so the list is exhaustive.
+rank one.
 
 Here exhaustiveness is an exact elimination statement, not a visual
 factorization heuristic.  Certificate SC starts from the terminal
@@ -153,15 +169,28 @@ geometric-marker statement; no density of the finite set of rational marker
 tuples is used.  The density and finite-component-selection implication are
 also kernel checked by the declarations listed in the formalization ledger.
 
-On \(V(D)\), the consecutive Fano identity gives the upper rank-two
-scheme.  On a nucleus, (29) and Proposition~\ref{prop:maximal-lucas-union}
-give the maximal modular carrier.  The projected Veronese contains no
-projective line, so a contained row space there has rank one.  In
-characteristic three every positive-dimensional linear space in (27) is a
-ruling through \(e_2\), and the consecutive rows again force rank one.  In
-characteristic two, containment in \(V(c_0,c_4)\) gives first the binary
-line, then the central point, and then the empty projective space; these are
-already Lucas lifts.  The complementary ordered-Hessian ruling is rank one.
+The remaining component check is summarized by
+\[
+\begin{array}{c|c|c}
+\text{component}&\text{possible linear part}&\text{upper lift}\\ \hline
+V(D)&\text{arbitrary}&\cP_r\\
+\text{Veronese }(p\ne2,3)&\text{point}&\text{rank one}\\
+\text{wild cone }(p=3)&\text{ruling through }e_2&\text{rank one}\\
+V(c_0,c_4)\ (p=2)&\text{binary-plane subspace}&
+   \cM^{\max}_{r,2}
+\end{array}
+\]
+The first row is the consecutive Fano identity.  The second uses that the
+projected Veronese contains no projective line.  In the third, every
+positive-dimensional linear space is a ruling through \(e_2\), and the
+overlap of consecutive Hankel rows forces rank one.  In the fourth,
+successive overlaps cut the binary plane to the binary line, then the central
+point, then the empty projective space; formula~(29) identifies precisely
+these spaces as Lucas lifts.  The complementary ordered-Hessian ruling is
+rank one.  On a nucleus, (29) and
+Proposition~\ref{prop:maximal-lucas-union} then place every surviving lift in
+the maximal modular carrier.
+
 The coherent-Fano part of Certificate SC verifies these consecutive-row
 substitutions, including the characteristic-three ruling and the
 characteristic-two successive supports, against the same incidence ideal.
