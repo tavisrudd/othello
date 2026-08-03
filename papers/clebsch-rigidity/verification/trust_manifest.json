@@ -2370,7 +2370,7 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "3062a24b077de467ce37b655805b88dadaaf897c516714d71524ef52bace8bb1"
+        "sha256": "0de259a17abc4f144f7773fe46dabeba352b61da85d23013ab3809547f051bae"
       },
       {
         "path": "verification/check_manuscript_build.py",
