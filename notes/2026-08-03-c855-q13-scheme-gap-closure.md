@@ -707,6 +707,17 @@ the strength of what is proved above. No novelty assessment is offered.
    parallel count separately — the naive character count there gives `(q^2-1)/4`, not
    `(q-1)^2/4`, so the roles of internal/external (and the valency of `ρ = 0`) shift and the
    argument must be redone, not transported.
+   **Scope correction (2026-08-03, literature audit):** the full-text read of Madison–Wu
+   (`notes/2026-08-03-c855-strengthening-literature-audit.md`) shows their Theorem 6.1
+   already proves, for every odd `q`, both the kernel dimension and the exact
+   decomposition into pairwise non-isomorphic simple summands — for `PSL(2,q)` over the
+   algebraic closure of `F_2`. So this candidate is not a new theorem: its residual value
+   is (i) an independent Hecke/parity proof mechanism and (ii) the part their paper does
+   not address, namely descent to `F_2` with the full `PGL(2,q)` action — irreducibility
+   over `F_2` with endomorphism field `F_8` at `q = 13` (Theorem A above) is consistent
+   with their three non-isomorphic `12`-dimensional summands over the closure but is not
+   stated by them, and their paper says nothing about minimum weight or the weight-12
+   layer.
 2. **A basis-free description of the code.** Claim: `K` is canonically the mod-2 reduction of
    the saturated order-14 discrete-series lattice inside the permutation module on the
    internal points; the passant code `im M` is the complementary summand. (Phrase it via the
