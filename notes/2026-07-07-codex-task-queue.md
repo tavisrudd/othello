@@ -25,6 +25,8 @@ ordering and detail.
 
 ### `ame-lu`
 
+- **C851 `[ame-lu]` [IN PROGRESS; PAPER II DOI/PDF README LINKS]** — add the Zenodo DOI `10.5281/zenodo.21766798` badge and tracked-paper PDF link to the authoritative Paper II README using the portfolio pattern, validate the immutable export, and forward-sync the existing `mds-css-transversal-groups` standalone without pushing → `notes/2026-08-02-c851-mds-css-doi-readme.md`.
+
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every

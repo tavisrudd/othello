@@ -10,6 +10,12 @@ Discovery companion:
 
 ## Current status
 
+**C851 in progress (2026-08-02): add Paper II DOI and PDF README links.**  Add
+the Zenodo DOI `10.5281/zenodo.21766798` badge and a relative link to the tracked
+PDF in the authoritative README, validate the immutable export, and forward-sync
+the existing standalone with an ordinary local commit and no push.  Report to
+`2026-08-02-c851-mds-css-doi-readme.md`.
+
 **C850 closed `local-ready` (2026-08-02): Paper II has a validated standalone.**
 The deterministic exporter now materializes 46 byte-identical tracked files
 from Othello source commit `b00ef327`; the standalone lives at
