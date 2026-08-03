@@ -3,9 +3,9 @@
 A linear \([2m,m,m+1]_q\) maximum-distance-separable (MDS) code
 \(C\leq\F_q^{2m}\) defines an equal-phase Calderbank--Shor--Steane (CSS)
 state
-\[
+\begin{equation}\label{eq:equal-phase-css-state}
  \lvert\Psi_C\rangle=q^{-m/2}\sum_{c\in C}\lvert c\rangle.
-\]
+\end{equation}
 It is an absolutely maximally entangled state, and choosing one tensor
 factor as an input turns it into the normalized Choi state of a
 \([[2m-1,1,m]]_q\) quantum MDS encoder.  We determine the logical unitaries
@@ -80,6 +80,15 @@ For stabilizer states in the standard finite-field Weyl convention, every
 product-Clifford map of their stabilizer label groups can be corrected by a
 product Pauli to map one state ray to the other.
 \end{lemma}
+
+\paragraph{Imported minimum-support atlas
+\cite{RuddAMEStabilizerRigidity2026}.}
+For a stabilizer \(\AME(2m,q)\) state with label group \(L\), every
+\((m+1)\)-party subgroup \(L(A)\) projects bijectively to the local Pauli-label
+plane at each party in \(A\), and these subgroups span \(L\).  After a party
+relabelling, two such states are local-Clifford equivalent exactly when their
+transition maps \(p_jp_i^{-1}\) are related by local trace-symplectic changes
+of Weyl frame.
 
 We use only these stated conclusions.  Their proofs, quantitative
 rounding theory, and minimum-support atlas belong to the companion paper and

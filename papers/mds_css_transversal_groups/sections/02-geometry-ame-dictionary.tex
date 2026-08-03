@@ -83,7 +83,8 @@ multiply without a residual phase and fix \(\lvert\Psi_C\rangle\).
 
 \begin{proposition}[Arc--AME dictionary]\label{thm:dictionary}
 For a six-arc with kernel \(C\), the state \(\lvert\Psi_C\rangle\) in
-\((1.1)\) is a minimal-support stabilizer \(\AME(6,q)\) state.  Its
+\eqref{eq:equal-phase-css-state} is a minimal-support stabilizer
+\(\AME(6,q)\) state.  Its
 projective Pauli-label Lagrangian is
 \[
  L_C=(C\oplus0)+(0\oplus C^\perp)\leq\F_q^{12}.
@@ -119,9 +120,9 @@ For a party set \(S\), let
  L_C(S)=\{\ell\in L_C:\supp(\ell)\subseteq S\}.
 \]
 The general stabilizer partial-trace formula specializes to
-\[
+\begin{equation}\label{eq:css-reduced-state}
  \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .        \tag{2.3}
-\]
+\end{equation}
 For later block calculations, write
 \[
  C_X=C\oplus0,\qquad C^\perp_Z=0\oplus C^\perp,
