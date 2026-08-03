@@ -2,29 +2,20 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; theorem and novelty boundary frozen, full human proof and
-paper-owned evidence gate green, shared q13 semantic modules and the sharded
-paper-owned Lean certificate gate green.  The rank evaluator now transports to
-semantic incidence-map rank 42 and code dimension 36, and the normalized
-weight-eight word now transports through pencil saturation and tangent holonomy
-to the concrete cyclic graph.  Every arbitrary weight-ten word now transports
-to the two exact pencil profiles.  The fixed-point weight-twelve leaf now
-exhausts the four pencil-profile domains and identifies their 56 solutions
-with the four disjoint 14-support orbit slices; the point stabilizer is
-transitive on each slice.  The concrete association identities and four
-orbit Gram matrices now feed the abstract kernel-spanning theorem.  Row-family uniqueness is
-closed by a semantic seven-set transport and seven local-extension residues.  The concrete
-four-anchor transport now identifies every polar-relation automorphism with one of the 2184
-normalized symmetric-square projective maps.  The local release audit and the already-integrated
-Paper-I forward pointer are green.  The Milnor--Serre exposition pass and warning-free PDF gate are
-also green.  The context-free cold read's four finite/trust-interface revisions are integrated and
-the eight-page warning-free PDF gate is green.  A different context-free rerun scored the paper
-92/100 and marked the theorem, language changes, distance mechanism, and trust boundary all clear;
-its three local abstract, series-framing, and execution-metadata points are integrated.  Public
-packaging, immutable locators, fresh
-isolated replay, and publication with explicit authority remain;
-the minimum-support-to-polar-relation implication remains an explicit human-proof boundary in the
-partial formal mirror.
+**Status:** active; C831/C832 structural version integrated under the longer
+title *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a
+binary conic code*.  The eleven-page warning-free manuscript now leads with
+exact weighted-pair recovery of the full marked conic plane.  Its rank-28
+theta certificate, global moment--stabilizer distance proof,
+toric--octahedral minimum geometry, compact \(\mathbf F_8\) operator-field
+core, six exact structural replays, shared Lean mechanisms, paper-owned
+concrete gates, and axiom audit are green.  The earlier semantic rank,
+minimum-layer exhaustion, orbit spanning, row-family uniqueness, and
+four-anchor scheme-rigidity gates remain green.  The local release audit and
+Paper-I forward pointer remain green.  Public packaging, immutable locators,
+fresh isolated replay, and publication with explicit authority remain; the
+Sylow/involution transport and several exact finite leaves remain explicitly
+human or trusted-execution boundaries in the partial formal mirror.
 
 ## Goal
 
@@ -33,10 +24,10 @@ archived artifact centered on the binary passant incidence code of a
 nonsingular conic in `PG(2,13)`.
 
 The principal theorem gives parameters `[78,36,12]_2`, exactly 364 minimum
-words in four `PGL(2,13)`-orbits, spanning by every minimum orbit,
-reconstruction of the elliptic association scheme and passant incidence
-matrix from the minimum layer, and exact coordinate-permutation automorphism
-group `PGL(2,13)`.
+words in four `PGL(2,13)`-orbits, spanning by every minimum orbit, exact
+arity-two recovery of the incidence matrix, code, elliptic scheme, full
+marked `PG(2,13)`, conic and polarity, and exact coordinate-permutation
+automorphism group `PGL(2,13)`.
 
 ## Owned paths
 

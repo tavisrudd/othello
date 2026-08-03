@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; integration and formalization authorized 2026-08-02
+**Status:** complete 2026-08-02; structural manuscript, evidence, Lean,
+warning-free PDF, visual, and adversarial gates green; returned to C761
 
 ## Objective
 

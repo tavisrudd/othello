@@ -1,5 +1,5 @@
 {
-  "schema": "q13-passant-code-evidence-migration-v1",
+  "schema": "q13-passant-code-structural-evidence-v2",
   "source": {
     "commit": "1ff658b90bfa93092e31f178f9e610e02a10e695",
     "root": "papers/clebsch-rigidity"
@@ -58,6 +58,102 @@
       "bytes": 4358,
       "sha256": "47625a0ea75671b51db2123b65afc8b5802236c9c894df92d1659400d1cef127",
       "role": "kernel-checked identification of executable rank 42 with semantic incidence-map rank and code dimension 36"
+    },
+    {
+      "paper_iv_path": "verification/verify_weight_eight_theta.py",
+      "bytes": 11198,
+      "sha256": "fa9383a32b864b2ed05915f0ca4198ac889026b56a7be3d00f8d2897b078aac2",
+      "role": "exact generator and checker for the rank-28 positive-semidefinite weight-eight certificate"
+    },
+    {
+      "paper_iv_path": "verification/weight_eight_theta.json",
+      "bytes": 3679,
+      "sha256": "689686d1f0ce3f57ba5e419a28ed44951a648477c42169ed3654cfdf58398eb9",
+      "role": "canonical theta matrix, characteristic polynomial, Schur pivots, and equality-kernel certificate"
+    },
+    {
+      "paper_iv_path": "verification/verify_weight_ten_moment.py",
+      "bytes": 16785,
+      "sha256": "6e8fe1d00e54eef378df9f3656003096b7177856a8ee2b828af18e438854b596",
+      "role": "exact generator and checker for the weight-ten moment and stabilizer reductions"
+    },
+    {
+      "paper_iv_path": "verification/weight_ten_moment.json",
+      "bytes": 14368,
+      "sha256": "dcc16d78f1a8fc9368cb33a9702b5596f04c71df851a27fde1efba14a5b8fa57",
+      "role": "canonical four-orbit and thirty-three-orbit weight-ten structural certificate"
+    },
+    {
+      "paper_iv_path": "verification/verify_pair_reconstruction.py",
+      "bytes": 13388,
+      "sha256": "20f3d8050fe801050d85dd41b022f653487a8f39abeb30a4a19710d2eb4ecf5f",
+      "role": "exact pair-concurrence closure, row recovery, parity-operator, and arity-two replay"
+    },
+    {
+      "paper_iv_path": "verification/pair_reconstruction.json",
+      "bytes": 1645,
+      "sha256": "cb9c1da169cef5f23402bb87d28d4f5885ddecb9ae7d92f784803a2d9d8d0ae6",
+      "role": "canonical weighted-pair reconstruction certificate"
+    },
+    {
+      "paper_iv_path": "verification/verify_minimum_geometry.py",
+      "bytes": 27489,
+      "sha256": "8b4ccfd1d9e978b65aca90e6ccaf55614b60085bacf7ca0aefc9d6a8e9106eca",
+      "role": "exact toric--octahedral support, stabilizer, parity, and Gram replay"
+    },
+    {
+      "paper_iv_path": "verification/minimum_geometry.json",
+      "bytes": 8368,
+      "sha256": "720ac6a0a78fd9c5a9ba17f0289de4956ab14556cecead0ef87f6381f726252c",
+      "role": "canonical homogeneous minimum-geometry certificate"
+    },
+    {
+      "paper_iv_path": "verification/verify_ambient_plane.py",
+      "bytes": 18754,
+      "sha256": "1478b0e360ec8dbe9021ffb0ea2445f133ecbf36da251921e3bf163bd303788e",
+      "role": "exact Sylow, involution, polarity, full-plane, and internal-chord replay"
+    },
+    {
+      "paper_iv_path": "verification/ambient_plane.json",
+      "bytes": 5539,
+      "sha256": "5a627bcf94dea6a7e91205016798ac38585312cccd2a9550e33ae43587e414de",
+      "role": "canonical intrinsic ambient-plane certificate"
+    },
+    {
+      "paper_iv_path": "verification/verify_hidden_field.py",
+      "bytes": 14589,
+      "sha256": "353d6db53241505281687c382c52cd584acc500a0cbdc328cb93b80f817f14e6",
+      "role": "exact binary Bose--Mesner and hidden operator-field replay"
+    },
+    {
+      "paper_iv_path": "verification/hidden_field.json",
+      "bytes": 1923,
+      "sha256": "422faf6be041359a6d5d6536b2e0bfb8596db17911402e55cb05899e83910943",
+      "role": "canonical compact hidden-F8 certificate"
+    },
+    {
+      "paper_iv_path": "../../lean/RelativeConicArcs/PassantCodeQ13/StructuralUpgrade.lean",
+      "bytes": 6828,
+      "sha256": "3c72f16b205dcc68816c4b3bfecbecbb20c45883db3b645b920ad09cd61c5be3",
+      "role": "shared kernel-checked theta, moment, pair-recovery, discriminant, hidden-cubic, and recovered-plane interfaces"
+    },
+    {
+      "paper_iv_path": "lean-certificates/PassantCodeQ13/StructuralUpgrade.lean",
+      "bytes": 5211,
+      "sha256": "d96f5b714386a1b47aed6c07fcba67a740affa196e94387a9223c5e6d13c2a41",
+      "role": "paper-owned pair-only, toric, hidden-cubic, and 183-point plane finite gates"
+    },
+    {
+      "paper_iv_path": "lean-certificates/PassantCodeQ13/Gates/Main.lean",
+      "bytes": 11150,
+      "sha256": "cd8b9a7a1e48fa3ab1e43606d867f426f41c68d8ccd077a4ebf160edf96fdc6b",
+      "role": "paper-owned aggregate theorem terminals for the structural version"
+    },
+    {
+      "paper_iv_path": "lean-certificates/PassantCodeQ13/Gates/AxiomAudit.lean",
+      "bytes": 6456,
+      "sha256": "b34f5bbe8627acc7deae98bc41c72c1e949285995234627581f369dedebb4630",
+      "role": "tracked axiom audit for all retained and structural aggregate terminals"
     }
   ],
   "commands": [
@@ -84,7 +180,43 @@
       "command": "python3 generate_rank_transport.py --check",
       "output_contains": "q=13 semantic rank transport data: PASS",
       "certifies": "the checked recovery and expansion masks are byte-identical to deterministic regeneration from the normalized conic incidence matrix"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 verify_weight_eight_theta.py --check weight_eight_theta.json",
+      "output_contains": "q=13 weight-eight theta certificate: PASS",
+      "certifies": "the exact positive-semidefinite completion has rank 28, clique bound five, and the stated equality kernel"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 verify_weight_ten_moment.py --check weight_ten_moment.json",
+      "output_contains": "q=13 weight-ten moment certificate: PASS",
+      "certifies": "the two global weight-ten shapes and all line/point stabilizer leaves are exhausted"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 verify_pair_reconstruction.py --check pair_reconstruction.json",
+      "output_contains": "q=13 pair reconstruction certificate: PASS",
+      "certifies": "weighted pairs recover all relations, the passant rows, the code image, hidden field, and exact arity two"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 verify_minimum_geometry.py --check minimum_geometry.json",
+      "output_contains": "q=13 minimum geometry certificate: PASS",
+      "certifies": "the four minimum orbits have the stated toric--octahedral constructions, stabilizers, parity, and Grams"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 verify_ambient_plane.py --check ambient_plane.json",
+      "output_contains": "q=13 ambient plane certificate: PASS",
+      "certifies": "Sylow subgroups and involutions recover the 183-point plane, conic polarity, and internal/chord incidence"
+    },
+    {
+      "cwd": "papers/q13-passant-code/verification",
+      "command": "python3 verify_hidden_field.py --check hidden_field.json",
+      "output_contains": "q=13 hidden-field certificate: PASS",
+      "certifies": "the compact F8 operator-field theorem and Frobenius Gram scalars hold exactly"
     }
   ],
-  "boundary": "The scripts are exact trusted executions. The weight-ten JSON is independently replayed. Lean checks the generated rank data against the semantic incidence relation and proves incidence-map rank 42 and code dimension 36. Lean also transports the decoded four-orbit hypergraph to exact uniqueness of the recovered passant-row family. The remaining geometric transports retain the narrower boundary recorded in claim_map.json."
+  "boundary": "The scripts are exact trusted executions. The old syndrome and clique replays remain independent cross-checks, while the theorem-facing weight-eight and weight-ten claims use the structural theta and moment certificates. Lean checks the generated rank data against the semantic incidence relation and proves incidence-map rank 42 and code dimension 36. The structural Lean packets and remaining human transports are recorded in claim_map.json and the tracked axiom audit."
 }

@@ -1,7 +1,7 @@
 # Lean certificates for the passant code over F13
 
-This Lake package checks the finite leaves used by the human structural proof of the binary
-incidence code of the passant lines of the standard conic `XZ-Y^2=0` over `ZMod 13`.  Its
+This Lake package checks the finite leaves used by the human structural proof of minimum-word
+reconstruction of the standard conic plane `XZ-Y^2=0` over `ZMod 13`.  Its
 computations record discovery and handle only bulk that has not admitted useful conceptual
 compression; they are not the narrative proof.  The package depends on the reusable semantic
 definitions in `RelativeConicArcs.PassantCodeQ13`.
@@ -22,6 +22,11 @@ base pencils from code membership, identifies the 42 semantic passant-join neigh
 three cyclic vertex orbits, checks that tangent holonomy is exactly the displayed adjacency, and
 proves the five-clique bound.  Its terminal theorem excludes a normalized weight-eight word once
 the classical arc/tangent lemma supplies pairwise passant joins and tangent holonomy one.
+The structural version retains that transport but replaces its finite clique leaf by a generic
+theta-inequality theorem and a separately hashed rank-28 PSD certificate.  Likewise, the global
+weight-ten moment is kernel checked algebraically, while the four line-stabilizer and thirty-three
+point-stabilizer leaves are named exact certificates; the older syndrome shards remain an
+independent regression check.
 The shared `RelativeConicArcs.PassantCodeQ13.WeightTen` module then treats an arbitrary supported
 point of an arbitrary weight-ten word: its seven passant fibres are odd, the complementary joins
 are secants, and the support partition forces the isolated `(3,1^6;0)` or cycle `(1^7;2)` profile.
@@ -39,6 +44,11 @@ extension pool of each of the 4,186 canonically ordered admissible three-point s
 non-row pool has ten points.  A symbolic
 coverage argument then proves that the intrinsic seven-clique test recovers exactly the 78
 geometric rows; the independent replay instead enumerates all 1716 passant seven-cliques.
+The theorem-facing gate is now stronger and smaller: concurrence-eight neighborhoods recover the
+polarity rows directly, unary degree is constant 56, and the fused concurrence-six color is split
+by a pair-derived common-color-seven count.  It also checks the three toric support parities, the
+hidden cubic on the `A9` image, the normalized 183-point plane axioms, and the four-anchor symmetry
+theorem.
 
 The terminal theorems use native evaluation.  The axiom audit must therefore report the
 declaration-local native-decision axioms emitted by the pinned Lean toolchain.  No hash is used as a

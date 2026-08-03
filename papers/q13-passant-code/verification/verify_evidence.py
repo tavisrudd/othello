@@ -21,7 +21,7 @@ def digest(path: Path) -> str:
 
 def main() -> None:
     manifest = json.loads(MANIFEST.read_text())
-    assert manifest["schema"] == "q13-passant-code-evidence-migration-v1"
+    assert manifest["schema"] == "q13-passant-code-structural-evidence-v2"
     for record in manifest["files"]:
         path = PAPER_ROOT / record["paper_iv_path"]
         assert path.stat().st_size == record["bytes"], path

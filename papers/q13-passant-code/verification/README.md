@@ -11,10 +11,11 @@ Within that hierarchy, the release verifier distinguishes five modes:
 4. compact finite certificate checked by a proved or transparent checker; and
 5. independent trusted exact execution.
 
-The current `claim_map.json` records the frozen source claims and their
-present trust modes. `evidence_manifest.json` records the first byte-for-byte
-migration from Paper I, including source commit, paths, byte counts, hashes,
-commands, and replay relationships. The paper-owned Lean package under
+The current `claim_map.json` records the structural source claims and their
+present trust modes. `evidence_manifest.json` records both the original
+Paper-I migration and the paper-owned structural certificates, including
+paths, byte counts, hashes, commands, and replay relationships. The
+paper-owned Lean package under
 `lean-certificates/`, together with the shared semantic library, checks the q=13 coordinate
 semantics, transports the normalized weight-eight reduction to the cyclic tangent graph, checks
 both weight-ten syndrome profiles, and checks four displayed minimum-word orbits.  Its fixed-point
@@ -22,7 +23,12 @@ weight-twelve leaf exhausts the four pencil-profile domains and identifies their
 the four disjoint 14-support orbit slices; the point stabilizer acts transitively on each slice.
 Its association transport proves that every displayed orbit spans the rho-zero kernel.
 Its formal scope is strictly smaller than the complete release theorem.
-The normalized weight-eight terminal is
+The old normalized weight-eight terminal is retained as an independent
+semantic transport; the theorem-facing bound now uses the exact theta
+certificate and its kernel-checked quadratic-form implication. The old
+weight-ten syndrome shards are likewise retained as an independent replay;
+the theorem-facing proof uses the global moment and stabilizer certificates.
+The normalized transport terminals remain
 `RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport`.
 The arbitrary-word weight-ten profile terminal is
 `RelativeConicArcs.Gates.PassantCodeQ13.arbitrary_weightTen_profile_transport`.
@@ -49,6 +55,14 @@ The current paper-local entry points are:
 - `check_q13_tangent_code.py` for the full exact replay.
 - `../lean-certificates/generate_rank_transport.py --check` for byte-identical regeneration of
   the recovery and expansion masks used by the semantic rank theorem.
+- `verify_weight_eight_theta.py --check weight_eight_theta.json` for the exact rank-28 PSD and
+  equality-kernel certificate;
+- `verify_weight_ten_moment.py --check weight_ten_moment.json` for the global moment and two
+  stabilizer leaves;
+- `verify_pair_reconstruction.py --check pair_reconstruction.json` for exact arity-two recovery;
+- `verify_minimum_geometry.py --check minimum_geometry.json` for the toric--octahedral families;
+- `verify_ambient_plane.py --check ambient_plane.json` for the Sylow/involution plane; and
+- `verify_hidden_field.py --check hidden_field.json` for the compact operator-field theorem.
 
 Run all three together, after checking the manifest hashes and byte counts,
 with `python3 verify_evidence.py`.
@@ -65,6 +79,7 @@ RelativeConicArcs/PassantCodeQ13/WeightEight.lean
 RelativeConicArcs/PassantCodeQ13/WeightTen.lean
 RelativeConicArcs/PassantCodeQ13/AssociationAlgebra.lean
 RelativeConicArcs/PassantCodeQ13/Reconstruction.lean
+RelativeConicArcs/PassantCodeQ13/StructuralUpgrade.lean
 RelativeConicArcs/Gates/PassantCodeQ13.lean
 ```
 
@@ -97,6 +112,7 @@ PassantCodeQ13/Automorphisms/Signatures.lean
 PassantCodeQ13/Automorphisms/Transport.lean
 PassantCodeQ13/Gates/Main.lean
 PassantCodeQ13/Gates/AxiomAudit.lean
+PassantCodeQ13/StructuralUpgrade.lean
 ```
 
 The public aggregate transports its exact 42-column elimination certificate to semantic rank and
@@ -125,14 +141,19 @@ establish, apart from Mathlib's standard logical axioms:
 - the binary code has length 78, dimension 36, and minimum distance 12;
 - its minimum layer has 364 words in the stated four orbits;
 - each orbit spans the code;
-- concurrence recovers the six elliptic relations and the 78 incidence rows;
+- weighted pairs recover the six elliptic relations, 78 incidence rows, code,
+  and full marked conic plane;
 - the resulting coordinate-permutation automorphism group is
   `PGL(2,13)`.
 
 This formal surface is supporting evidence, not the manuscript's narrative
 spine. It should preserve the human mechanisms. In particular, it
-should formalize the tangent-graph reduction in weight eight, the exhaustive
-coverage theorem for the two weight-ten profiles, the mod-two association-
-algebra spanning argument, and the anchor proof of the elliptic-scheme automorphism group.
+formalizes the tangent-graph reduction and theta implication in weight eight,
+the global moment compression in weight ten, pair-neighborhood reconstruction,
+three toric parities, the hidden cubic, both normalized projective-plane
+uniqueness axioms, the mod-two association-algebra spanning argument, and the
+anchor proof of the elliptic-scheme automorphism group. Exact PSD positivity,
+stabilizer tables, and the group-theoretic Sylow/involution census remain
+named paper-owned trusted leaves.
 It should not replace the entire theorem by an opaque enumeration of
 `2^78` words.

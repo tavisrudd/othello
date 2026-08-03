@@ -2,14 +2,18 @@ LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 SOURCE := passant_code_q13.tex
 
-.PHONY: all check evidence lint warnings clean distclean
+.PHONY: all check evidence lean lint warnings clean distclean
 
 all: lint passant_code_q13.pdf
 
-check: evidence lint passant_code_q13.pdf warnings
+check: evidence lean lint passant_code_q13.pdf warnings
 
 evidence:
 	python3 verification/verify_evidence.py
+
+lean:
+	cd lean-certificates && nix develop --command lake build \
+		PassantCodeQ13.Gates.Main PassantCodeQ13.Gates.AxiomAudit
 
 lint:
 	python3 ../scripts/lint_tex_spacing.py $(SOURCE)

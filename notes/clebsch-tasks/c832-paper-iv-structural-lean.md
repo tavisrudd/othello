@@ -2,7 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; C831 dependency; formalization authorized 2026-08-02
+**Status:** complete 2026-08-02 at the manuscript's declared formal boundary;
+shared implications, concrete q=13 gates, aggregate terminals, and axiom audit
+green
 
 ## Objective
 

@@ -7,6 +7,7 @@ import PassantCodeQ13.SemanticTransports
 import PassantCodeQ13.AssociationAlgebra
 import PassantCodeQ13.AssociationTransport
 import PassantCodeQ13.Automorphisms.Transport
+import PassantCodeQ13.StructuralUpgrade
 
 /-!
 # Aggregate finite gate for the q=13 passant code
@@ -133,5 +134,58 @@ theorem ellipticSchemeAutomorphismsAreProjective
       ∃ matrix : Fin PassantCodeQ13.MinimumWords.projectiveMatrices.length,
         permutation = PassantCodeQ13.Automorphisms.matrixEquiv matrix :=
   PassantCodeQ13.Automorphisms.preservesRho_iff_projective permutation
+
+/-- The decoded minimum layer recovers the polarity rows from concurrence-eight neighborhoods,
+has constant unary degree 56, and splits the fused concurrence-six color by pair-derived walks. -/
+theorem pairOnlyReconstruction :
+    RelativeConicArcs.PassantCodeQ13.PairOnlyReconstructionCertificate
+      PassantCodeQ13.MinimumWords.RowUniqueness.semanticMinimumSupports :=
+  PassantCodeQ13.StructuralUpgrade.pairOnlyCertificate
+
+/-- The three punctured pencil-conic levels have size twelve and satisfy every passant parity
+check. -/
+theorem toricMinimumSupports :
+    (PassantCodeQ13.StructuralUpgrade.toricSupport 2).card = 12 ∧
+      (PassantCodeQ13.StructuralUpgrade.toricSupport 5).card = 12 ∧
+      (PassantCodeQ13.StructuralUpgrade.toricSupport 11).card = 12 ∧
+      PassantCodeQ13.StructuralUpgrade.HasEvenPassantIntersections
+        (PassantCodeQ13.StructuralUpgrade.toricSupport 2) ∧
+      PassantCodeQ13.StructuralUpgrade.HasEvenPassantIntersections
+        (PassantCodeQ13.StructuralUpgrade.toricSupport 5) ∧
+      PassantCodeQ13.StructuralUpgrade.HasEvenPassantIntersections
+        (PassantCodeQ13.StructuralUpgrade.toricSupport 11) := by
+  exact ⟨PassantCodeQ13.StructuralUpgrade.toricSupport_cards.1,
+    PassantCodeQ13.StructuralUpgrade.toricSupport_cards.2.1,
+    PassantCodeQ13.StructuralUpgrade.toricSupport_cards.2.2,
+    PassantCodeQ13.StructuralUpgrade.toricSupport_even_passants.1,
+    PassantCodeQ13.StructuralUpgrade.toricSupport_even_passants.2.1,
+    PassantCodeQ13.StructuralUpgrade.toricSupport_even_passants.2.2⟩
+
+/-- The `A₉` relation operator satisfies the hidden cubic after restriction to its image. -/
+theorem hiddenFieldCubicOnImage :
+    let B := PassantCodeQ13.AssociationTransport.relationLinearMatrix 9
+    B ^ 4 + B ^ 3 + B = 0 :=
+  PassantCodeQ13.StructuralUpgrade.hiddenField_cubic_on_image
+
+/-- The normalized 183-coordinate incidence relation satisfies both projective-plane uniqueness
+axioms and has a fourteen-point determinant conic. -/
+theorem ambientPlaneIncidence :
+    Fintype.card PassantCodeQ13.StructuralUpgrade.PlaneCoordinate = 183 ∧
+      (Finset.univ.filter fun point : PassantCodeQ13.StructuralUpgrade.PlaneCoordinate =>
+        RelativeConicArcs.PassantCodeQ13.pointDiscriminant point.1 = 0).card = 14 ∧
+      (∀ first second : PassantCodeQ13.StructuralUpgrade.PlaneCoordinate,
+        first ≠ second →
+          ∃! line : PassantCodeQ13.StructuralUpgrade.PlaneCoordinate,
+            PassantCodeQ13.StructuralUpgrade.PlaneIncident line first ∧
+            PassantCodeQ13.StructuralUpgrade.PlaneIncident line second) ∧
+      (∀ first second : PassantCodeQ13.StructuralUpgrade.PlaneCoordinate,
+        first ≠ second →
+          ∃! point : PassantCodeQ13.StructuralUpgrade.PlaneCoordinate,
+            PassantCodeQ13.StructuralUpgrade.PlaneIncident first point ∧
+            PassantCodeQ13.StructuralUpgrade.PlaneIncident second point) := by
+  exact ⟨PassantCodeQ13.StructuralUpgrade.planeCoordinate_card,
+    PassantCodeQ13.StructuralUpgrade.determinantConic_card,
+    PassantCodeQ13.StructuralUpgrade.uniqueLine_through_two_points,
+    PassantCodeQ13.StructuralUpgrade.uniquePoint_on_two_lines⟩
 
 end PassantCodeQ13.Gates.Main
