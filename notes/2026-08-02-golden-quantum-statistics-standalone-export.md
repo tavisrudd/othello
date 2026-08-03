@@ -142,3 +142,9 @@ README companion paragraph, the Zenodo relation, immutable flake pins, and a
 paper-local declaration verifier.  The paper mirror then advances through the
 portfolio exporter as an ordinary forward commit; no manual copy or history
 replacement is permitted.
+
+The remaining work is allocated to the paper's owning lane: C840
+`[golden]` owns formal-coverage reconciliation and the refreshed validated
+candidate; C841 `[golden]` owns the subsequent paper declaration and
+standalone forward promotion.  Build-sys supplies the guarded tools but does
+not own either paper task.
