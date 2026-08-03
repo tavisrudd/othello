@@ -1,5 +1,7 @@
 # Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21766748.svg)](https://doi.org/10.5281/zenodo.21766748)
+
 This directory is the authoritative manuscript root for the unnumbered Golden
 quantum-statistics companion. It is a theory and design-limit paper, not a
 fifth numbered Clebsch-series paper and not a report of a built device.
