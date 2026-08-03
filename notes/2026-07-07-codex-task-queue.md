@@ -25,8 +25,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C850 `[ame-lu]` [IN PROGRESS; PAPER II STANDALONE EXPORT]** — export the new `papers/mds_css_transversal_groups` companion through the deterministic paper-repository tooling into `~/src/math-papers/mds-css-transversal-groups`; require immutable-source plan/audit, disposable byte-identical materializations, paper/evidence validation, a clean-room checkout, and an ordinary first local commit with no remote creation or push → `notes/2026-08-02-c850-mds-css-standalone-export.md`.
-
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every

@@ -10,13 +10,20 @@ Discovery companion:
 
 ## Current status
 
-**C850 in progress (2026-08-02): export Paper II as a new standalone.**  Use
-the deterministic paper-repository exporter to plan, audit, materialize, and
-clean-room validate `papers/mds_css_transversal_groups`, then create the first
-ordinary local commit at `~/src/math-papers/mds-css-transversal-groups` without
-creating a remote or pushing.  Preserve the monorepo as authority and stop on
-any registry, manifest, private-reference, overwrite, or validation failure.
-Report to `2026-08-02-c850-mds-css-standalone-export.md`.
+**C850 closed `local-ready` (2026-08-02): Paper II has a validated standalone.**
+The deterministic exporter now materializes 46 byte-identical tracked files
+from Othello source commit `b00ef327`; the standalone lives at
+`~/src/math-papers/mds-css-transversal-groups`, with clean root commit
+`15a9bf3` and export-manifest SHA-256
+`da001459a9f6e4e846af8a642e75f5a3c42eaa62a89e2da2e79ccb6cfe5172fd`.
+The source split record was renamed `SPLIT-PROVENANCE.md` so generated export
+provenance owns `PROVENANCE.md`; the README is standalone-neutral; and the TeX
+spacing linter is paper-local.  Two disposable exports are byte-identical, and
+a separate clean-room clone passes forced warning-free 22-page build, all eight
+evidence replays, manifest verification, and post-build Git cleanliness.  No
+remote exists and nothing was pushed; Lean, formal gates, release manifests,
+DOIs, and submissions were untouched.  See
+`2026-08-02-c850-mds-css-standalone-export.md`.
 
 **C848 closed locally `GO` (2026-08-02): Paper II's C847 manuscript defects
 are repaired.**  The introduction now states the exact Paper I
