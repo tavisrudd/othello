@@ -206,4 +206,192 @@ concurrence pattern, so several projective classes share a type.
 
 ## Target 1 — the maximum passant arc at orders thirteen, seventeen, and nineteen
 
-*(in progress)*
+### What the order-thirteen argument actually uses
+
+The companion's conceptual exclusion at order thirteen is a chain of three steps, and every one of
+them is an equality between two functions of the order that happens to hold at thirteen only.
+
+1. *All vertices are internal.* An eight-arc has seven chords at each vertex, all passant. An
+   exterior point lies on `(q−1)/2` passants and an internal point on `(q+1)/2`. At order thirteen
+   those are six and seven, so the exterior alternative is excluded by one line and every vertex is
+   internal.
+2. *The passant pencil at each vertex is saturated.* Seven chords fill all seven passants through an
+   internal point. Consequently the lines through a vertex that are not chords — the arc's tangent
+   lines at that vertex, in Segre's sense — are exactly the conic's secants through it. This is the
+   equality `k − 1 = (q+1)/2` with `k = 8`, that is, `q = 2k − 3 = 13`.
+3. *The Segre product becomes intrinsic to the conic.* Because of step 2, the tangent product
+   `T_P` appearing in Segre's lemma of tangents is the product of the conic's secants through `P`,
+   a function of the conic alone. The lemma then reads as the closed condition `h(P,Q,R) = 1` on
+   triples of internal points, and the eight-arc becomes an eight-clique in a graph defined purely
+   by the conic — the graph on the forty-two passant neighbours of a fixed internal point whose
+   local clique number is five by the five-row unique-closure argument. Saturation also makes the
+   arc's characteristic vector a weight-eight word of the order-thirteen passant code, which is the
+   same fact stated in coding terms.
+
+### What breaks at orders seventeen and nineteen
+
+Step 1 fails: exterior points lie on `(q−1)/2 = 8` and `9` passants respectively, both at least the
+seven chords an eight-arc needs, so vertices of either type are admissible and the arc can be of
+mixed type. Every maximum example found at orders thirteen, seventeen, and nineteen is in fact of
+mixed type, so this is not a removable inconvenience.
+
+Step 2 fails: an internal vertex has `(q+1)/2 − 7 = 2` and `3` leftover passants, and an exterior
+vertex has `(q−1)/2 − 7 = 1` and `2` leftover passants together with its two conic tangents. So the
+arc's tangent product at a vertex is the conic-secant product multiplied by an uncontrolled
+residual factor over the leftover passants — a factor that depends on the arc and not on the conic.
+
+Step 3 therefore fails too: Segre's lemma still holds, but the relation it gives is no longer a
+closed condition on the conic's own data, so there is no conic-defined graph in which the
+hypothetical arc is a clique, and no code in which its characteristic vector is a word. The
+five-row unique-closure lemma is a statement about that conic-defined graph at order thirteen; it
+has no order-seventeen or order-nineteen counterpart to generalize to, because the graph itself does
+not exist there. This is the precise sense in which the Segre lemma-of-tangents mechanism does not
+generalize.
+
+### The decisive obstruction: the statement is not uniform in the order
+
+The target asked for a proof uniform in the order. No such proof exists, because the statement
+being proved is false one order later.
+
+**Exhaustive search result.** Enumerating every arc of off-conic points all of whose joins are
+passant, in the plane of order `q` with conic `XZ = Y²`:
+
+| order | arcs of size 2 | 3         | 4          | 5          | 6          | 7       | 8    | maximum |
+|-------|----------------|-----------|------------|------------|------------|---------|------|---------|
+| 11    | 3 630          | 24 475    | 23 210     | 264        | 22         | 0       | 0    | 6       |
+| 13    | 7 098          | 71 526    | 123 123    | 15 288     | 546        | 0       | 0    | 6       |
+| 17    | 20 808         | 390 048   | 1 555 296  | 913 104    | 50 184     | 0       | 0    | 6       |
+| 19    | 32 490         | 782 325   | 4 301 220  | 3 962 412  | 395 124    | 0       | 0    | 6       |
+| 23    | 69 828         | 2 565 926 | 23 759 230 | 45 114 960 | 13 197 492 | 568 744 | 6 072| **8**   |
+
+At order twenty-three there are 6 072 eight-point arcs all of whose chords are passant. One of them
+is
+
+```
+(1:0:1), (1:1:2), (1:2:15), (1:5:15), (1:7:20), (1:12:18), (1:13:11), (1:16:11)
+```
+
+verified independently of the search: all eight points are off the conic, all twenty-eight joins are
+passant (the restricted discriminant `B(P,R)² − 4Q(P)Q(R)` is a nonzero non-square in every case,
+for `Q = Y² − XZ` and `B` its polarization), and no three points are collinear. Its type profile is
+six internal and two exterior points.
+
+Randomized greedy search pushes the lower bound further at larger orders: it finds passant arcs of
+size at least seven at order twenty-three, ten at twenty-nine, nine at thirty-one, nine at
+thirty-seven, ten at forty-one, and nine at forty-three. These are lower bounds only — greedy
+returns seven at order twenty-three where the true maximum is eight — and greedy reproduces the
+exact value six at orders thirteen, seventeen, and nineteen. The maximum passant arc size therefore
+grows with the order, and the value six is a small-order phenomenon confined to the window the
+theorem is about.
+
+**Consequence for any proof strategy.** A structural bound of the usual shape — a counting,
+character-sum, or clique bound in which the order enters as a parameter — is monotone or at worst
+eventually increasing in the order, so it cannot yield six at order nineteen while permitting eight
+at order twenty-three. Any correct argument at orders seventeen and nineteen must therefore be
+arithmetic in the individual order: it has to use a divisibility, quadratic-residue, or
+subgroup-order coincidence that holds at thirteen, seventeen, and nineteen and fails at
+twenty-three. That is exactly what the order-thirteen argument is — the coincidence `q = 2k − 3` —
+and no analogous coincidence has been found at seventeen or nineteen.
+
+### What the literature supplies, and its exact limit
+
+Blokhuis, Seress, and Wilbrink's characterization, whose terminology the companion already cites,
+is the natural published tool, and reading it pins down precisely how far it reaches. Their theorem:
+a set of `(q+1)/2` **exterior** points of a nonsingular conic, pairwise joined by passants, consists
+of the exterior points on a single passant line whenever `q ≡ 1 (mod 4)`. Their passant criterion is
+the same cross-ratio criterion that makes the group model work: identifying an exterior point with
+the pair of conic points whose tangents pass through it, the join of two such points is passant
+exactly when the cross-ratio of the two pairs is a non-square.
+
+Two limits keep this from closing the target.
+
+- It is a statement about exterior points only, and every maximum passant arc at orders thirteen,
+  seventeen, and nineteen is of mixed internal and exterior type. For a mixed set the pair attached
+  to an internal point is a conjugate pair over the quadratic extension, the cross-ratio criterion
+  survives, but the Paley-graph counting at the heart of their proof does not, since it is a count
+  in the rational Paley graph.
+- Even in the exterior-only case the bound it gives is `(q+1)/2 − 1`, that is, six at order thirteen
+  but eight at order seventeen and nine at order nineteen. It reproduces the order-thirteen bound
+  for exterior arcs and nothing sharper at the other two orders.
+
+Their own final remarks are worth recording for the record: for `q ≡ 3 (mod 4)` nonlinear complete
+exterior sets exist at orders seven, eleven, nineteen, twenty-three, twenty-seven, and thirty-one,
+including the order-eleven six-arc — which is the Clebsch hexagon — and an order-thirty-one
+configuration of a six-arc together with a ten-set carrying Petersen-graph structure. They state
+that no further examples exist for orders forty-three through one hundred thirty-one and conjecture
+that the linear ones are the only complete exterior sets beyond order thirty-one, adding that they
+have no idea how to prove it. So the exterior-set classification is itself an open problem in the
+regime the target would need.
+
+### Verdict on Target 1
+
+**Structurally blocked, with the blocker stated precisely: the maximum-passant-arc-size-six
+statement is not uniform in the order — it fails at order twenty-three, where eight-point passant
+arcs exist — so the requested uniform extension of the exterior-set/weight-eight argument cannot
+exist.** The order-thirteen exclusion rests on the numerical coincidence that seven chords exactly
+saturate the `(q+1)/2 = 7` passants through an internal point, that is, on `q = 2k − 3` with `k = 8`;
+at orders seventeen and nineteen the pencils are unsaturated by two and three passants, exterior
+vertices become admissible, and the Segre tangent product stops being a function of the conic, so
+neither the weight-eight codeword step nor the five-row unique-closure clique mechanism has a
+counterpart to generalize to.
+
+Consequences for the C855 plan, in the memo's own terms:
+
+- Family 2 is **not** deleted, and the fallback compressed checker of the memo is the correct route.
+  The memo's ranking, which put this attempt first and the order-nineteen checker leaf third, should
+  now advance the checker prototype to first place.
+- The memo's compression A is confirmed independently: the search reports zero arcs of size seven at
+  all three orders, so terminating the enumeration at level six is sound and no level-seven search is
+  needed. Compression B, orbit completeness at levels two through six, remains the irreducible core.
+- The Blokhuis–Seress–Wilbrink theorem yields no usable saving for the checker. At orders thirteen
+  and seventeen, both `1 (mod 4)`, it bounds all-exterior passant arcs by `(q+1)/2 − 1`, that is by
+  six and eight, which never bites below level six and says nothing about the mixed-type
+  configurations that the search shows are the real content. It should be cited in the companion as
+  context for the exterior-set terminology, not as a step in a proof.
+- The acceptance-bar contingency the memo flagged is now live: `thm:small-k-conic-filling` at orders
+  seventeen and nineteen will rest on a checker, so the go/no-go elaboration measurement for the
+  order-nineteen root-edge leaf is the next decision point.
+
+### Independent replay by-product
+
+The search used here is a bitmask depth-first enumeration in increasing point order with no group
+action, no canonical keys, and no orbit structure — a different program shape from all three
+existing replays. Its arc counts at orders thirteen, seventeen, and nineteen agree exactly, size by
+size, with the `labelled_arcs_by_size` figures recorded in the scoping memo for the root-edge orbit
+DAG certificate: `[7098, 71526, 123123, 15288, 546]`, `[20808, 390048, 1555296, 913104, 50184]`, and
+`[32490, 782325, 4301220, 3962412, 395124]`. That is a fourth independent replay of the certificate's
+labelled domain, obtained for free. Script and replay command:
+
+```
+python3 notes/2026-08-03-c855-passant-arc-search.py 11 13 17 19 23
+```
+
+## Mystery ledger
+
+- *Why does the maximum jump from six to eight between orders nineteen and twenty-three?* Settled
+  only as an observation. The exhaustive counts show a smooth growth in the number of five- and
+  six-arcs and then a sudden appearance of seven- and eight-arcs. Nothing in the counting or
+  character-sum bounds available here predicts the threshold. Owning successor: none allocated; this
+  is the sharpest open question the target raised, and it is also essentially the regime of
+  Blokhuis, Seress, and Wilbrink's own open conjecture.
+- *Why is the concurrence-type spectrum of six-arcs order-independent while the passant-arc maximum
+  is not?* Settled by the Target 2 theorem: the concurrence spectrum is forced by two facts, Fano's
+  axiom and the double-perspective identity, that are properties of the field rather than of its
+  size. The passant condition, by contrast, is a quadratic-residue condition whose combinatorics
+  genuinely depend on the order.
+- *Does the class partition `3+3` fail to occur at orders eleven and seventeen for a reason?* Open.
+  The type is realized at seven, thirteen, and nineteen but not eleven or seventeen, with no pattern
+  modulo four visible. Evidence gap: no argument attempted; the theorem bounds which types are
+  possible, not which are realized. Recording only, as descriptive census data.
+- *Is the equality case of Dye's bound a single projective orbit?* Open and now isolated. The
+  structural proof above gives the bound and the one-factorization structure at equality; the
+  remaining orbit-uniqueness clause is the only part of that Dye axiom still unproved here.
+
+## What this record does not establish
+
+No Lean file was read for edit, no Lean build, generator, gate, or manifest was run, and no
+manuscript was changed. The Target 2 theorem is a paper-grade human proof but has not been
+formalized, and the manuscript and companion still state `thm:gap` and Dye's bound in their
+certificate-backed form. The Target 1 finding is a negative result about proof strategy; it does not
+affect the correctness of `thm:small-k-conic-filling`, whose orders-seventeen-and-nineteen clause the
+search here independently confirms.
