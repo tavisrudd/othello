@@ -1,5 +1,11 @@
 # Arcs complete outside a conic
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21682568.svg)](https://doi.org/10.5281/zenodo.21682568)
+
+## Read the paper
+
+[**Open the paper (PDF) →**](arcs_complete_outside_conic.pdf)
+
 This repository contains the manuscript
 *Arcs complete outside a conic: a prescribed-hole defect identity and
 matching-design rigidity* by Tavis Rudd, together with its public
@@ -49,7 +55,7 @@ and classical inputs. The formal sources are not bundled here.
   generator.
 - `check_q16_uncovered_patterns.py`, its JSON certificate, and checksum —
   line–triangle witnesses for the \(2630+3\) terminal partition.
-- `2026-07-25-c637-secant-hull-coupling.cpp`, its four canonical JSON
+- `small_odd_relative_conic_classifier.cpp`, its four canonical JSON
   summaries, the independent \(q=13\) frame check, and their checksum —
   exhaustive lower classifications at \(q=13,17,19\). Lean independently
   checks all three attaining witnesses; the lower classifications remain
@@ -86,18 +92,18 @@ Replay the small odd-order classifications with:
 ```text
 g++ -O3 -std=c++20 -Wall -Wextra -Werror \
   -Wno-array-bounds -Wno-stringop-overread \
-  2026-07-25-c637-secant-hull-coupling.cpp -o /var/tmp/classify-small-odd
+  small_odd_relative_conic_classifier.cpp -o /var/tmp/classify-small-odd
 /var/tmp/classify-small-odd 13 7 /var/tmp/q13.json
 /var/tmp/classify-small-odd 17 8 /var/tmp/q17.json
 /var/tmp/classify-small-odd 19 8 /var/tmp/q19-k8.json
 /var/tmp/classify-small-odd 19 9 /var/tmp/q19.json --extension-witness
-diff -u 2026-07-25-c637-q13.json /var/tmp/q13.json
-diff -u 2026-07-25-c637-q17.json /var/tmp/q17.json
-diff -u 2026-07-25-c637-q19-k8.json /var/tmp/q19-k8.json
-diff -u 2026-07-25-c637-q19-k9.json /var/tmp/q19.json
-python3 2026-07-25-c637-q13-frame-check.py /var/tmp/q13-frame.json
-diff -u 2026-07-25-c637-q13-frame-check.json /var/tmp/q13-frame.json
-sha256sum -c 2026-07-25-c637.sha256
+diff -u small_odd_q13.json /var/tmp/q13.json
+diff -u small_odd_q17.json /var/tmp/q17.json
+diff -u small_odd_q19_k8.json /var/tmp/q19-k8.json
+diff -u small_odd_q19_k9.json /var/tmp/q19.json
+python3 small_odd_q13_frame_check.py /var/tmp/q13-frame.json
+diff -u small_odd_q13_frame_check.json /var/tmp/q13-frame.json
+sha256sum -c small_odd_relative_conic.sha256
 ```
 
 Regenerate the \(q=16\) search report with:

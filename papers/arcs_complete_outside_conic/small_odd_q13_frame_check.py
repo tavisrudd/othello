@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent frame-marked check of the C637 q=13 quadratic ranks."""
+"""Independent frame-marked check of the q=13 quadratic ranks."""
 
 from itertools import combinations
 import json

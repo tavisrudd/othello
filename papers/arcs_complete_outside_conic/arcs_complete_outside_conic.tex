@@ -1892,8 +1892,8 @@ retains one representative of every projective class.  At \(q=19\), it tests
 every canonical eight-arc and every legal extension of each one; deleting one
 point from an arbitrary nine-arc proves that this covers every nine-arc.  The companion
 source is
-\path{2026-07-25-c637-secant-hull-coupling.cpp}; the four canonical JSON
-summaries and \path{2026-07-25-c637.sha256} record the parameters, counts,
+\path{small_odd_relative_conic_classifier.cpp}; the four canonical JSON
+summaries and \path{small_odd_relative_conic.sha256} record the parameters, counts,
 outputs, and replay hashes.  A separate frame-normalized Python enumeration
 rechecks the \(q=13\) lower bound.  No second implementation checks the
 \(q=17\) class reduction or the \(q=19\) extension reduction.
@@ -2008,10 +2008,10 @@ relative coverage.  The independent verifier
 \path{verify_relative_conic_arcs.py}
 regenerates the same coverage data; its digest and frozen output are
 recorded in the trust manifest.
-The separate gate
-\path{lean/RelativeConicArcs/Gates/C637Witnesses.lean} checks the three
-prime-field witnesses just added, including ordinary completeness of the
-\(q=19\) arc.
+The public supplement gate
+\path{RelativeConicArcs/Gates/ArcsCompleteOutsideConicAdditions.lean}
+checks the three prime-field witnesses just added, including ordinary
+completeness of the \(q=19\) arc.
 
 \section*{AI assistance disclosure}
 
