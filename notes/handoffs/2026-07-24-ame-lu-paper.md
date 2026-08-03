@@ -10,6 +10,14 @@ Discovery companion:
 
 ## Current status
 
+**C850 in progress (2026-08-02): export Paper II as a new standalone.**  Use
+the deterministic paper-repository exporter to plan, audit, materialize, and
+clean-room validate `papers/mds_css_transversal_groups`, then create the first
+ordinary local commit at `~/src/math-papers/mds-css-transversal-groups` without
+creating a remote or pushing.  Preserve the monorepo as authority and stop on
+any registry, manifest, private-reference, overwrite, or validation failure.
+Report to `2026-08-02-c850-mds-css-standalone-export.md`.
+
 **C848 closed locally `GO` (2026-08-02): Paper II's C847 manuscript defects
 are repaired.**  The introduction now states the exact Paper I
 minimum-support atlas clauses used by the pencil LC converse, both use sites
