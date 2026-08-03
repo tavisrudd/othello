@@ -2,9 +2,11 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; section 1 (ownership and release-closure freeze) is complete and
+**Status:** active. Section 1 (ownership and release-closure freeze) is complete and
 recorded in [`../2026-08-02-c855-paper-i-closure-freeze.md`](../2026-08-02-c855-paper-i-closure-freeze.md).
-Sections 2--11 are open. Required before the Paper I formal artifact is called
+Section 2's assertion inventory and bidirectional correspondence map are complete and
+recorded in [`../2026-08-02-c855-paper-i-assertion-inventory.md`](../2026-08-02-c855-paper-i-assertion-inventory.md);
+the formalization bullets of section 2 and all of sections 3--11 are open. Required before the Paper I formal artifact is called
 referee-ready or packaged for its next public release.
 
 ## Objective
@@ -86,10 +88,12 @@ package: every file in the published transitive closure is in scope.
 
 ### 2. Close every mathematical statement in Lean
 
-- [ ] Build a sentence-level inventory of every mathematical assertion in the
+- [x] Build a sentence-level inventory of every mathematical assertion in the
   main paper and companion, including abstracts, theorem/lemma/corollary
   statements, proof-body claims, displayed identities, examples, tables,
-  captions, appendices, and mathematically substantive README claims.
+  captions, appendices, and mathematically substantive README claims. Recorded in
+  [`../2026-08-02-c855-paper-i-assertion-inventory.md`](../2026-08-02-c855-paper-i-assertion-inventory.md).
+  README claims are not yet swept; the two manuscripts are complete.
 - [ ] Give every inventoried assertion a stable Lean declaration and record the
   exact declaration name in a bidirectional paper-to-Lean correspondence map.
 - [ ] Formalize every previously human-only proof step. Expository proof prose
@@ -114,7 +118,9 @@ package: every file in the published transitive closure is in scope.
   classifications. No equality of “same mechanism” may live only in prose.
 - [ ] Require both coverage directions: no paper assertion without a Lean
   theorem, and no release-gate theorem without an explicit paper/companion role
-  or reusable-support classification.
+  or reusable-support classification. The reverse direction already holds: all 51
+  gate terminals have a paper-facing role in the recorded map. The forward
+  direction is the open half.
 - [ ] Have an independent reviewer compare the rendered PDFs line by line with
   the final correspondence map and sign off on zero unformalized mathematics.
 
