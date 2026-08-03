@@ -320,3 +320,85 @@ the Rosetta theorem with stable locators for all four predecessors, and earns
 the fifth epigraph clause.  The golden quantum-statistics companion may be
 released when ready, but it is neither the Rosetta host nor a prerequisite for
 finishing Papers I--IV.
+
+## Paper V single-punch architecture — Option 1: the golden round trip
+
+**Author preference recorded 2026-08-03:** Paper V should be short and deliver
+one extremely powerful theorem, not serve as an inventory of the golden
+operator corpus.  On that constraint, the leading architecture is the
+**golden round-trip theorem**.
+
+The theorem should say that, under the explicit markings of Papers I--III,
+the support cubic, sheet-sign cubic, and arithmetic triangle cubic are the
+same oriented cubic \(Z\).  More importantly, their common cubic is
+lossless: it reconstructs the signed-permutation class of the conference
+operator \(C\), its quadratic spectral algebra, and hence the shadow package
+from which it arose.  In compact form,
+
+\[
+ \boxed{
+ \begin{gathered}
+ Z_{\mathrm I}=Z_{\mathrm{II}}=Z_{\mathrm{III}}=Z,\\
+ Z\longleftrightarrow [C],\qquad C^2=5I,\qquad
+ E\stackrel{\sim}{\longrightarrow}\mathbf Q[C],
+ \quad t\longmapsto\frac{I+C}{2}.
+ \end{gathered}}
+\]
+
+Here equality of the three cubics means equality after transport into the
+common six-axis orientation line, not literal equality of polynomials before
+the paper-specific markings are supplied.  Reconstruction of \(C\) is up to
+switching and relabelling; orientation reversal, golden conjugation, and deck
+exchange act as stated involutions rather than disappearing into a claimed
+canonical sign.
+
+The causal proof has six short steps:
+
+1. transport the three cubic torsors into the common six-axis line and prove
+   their marked equality;
+2. recover the six axes from the six ordinary singular points of \(Z\);
+3. recover the switching class of \(C\) from the triangle coefficients;
+4. use the triangle--Pfaffian recognition theorem to derive \(C^2=5I\),
+   rather than importing the conference normal form;
+5. identify \(E=\mathbf Q[C]\) and the commutator determinant as the
+   quadratic norm of the determinant of the diagonal-linearity defect; and
+6. prove that construction followed by reconstruction is the identity up to
+   the declared marking groupoid.
+
+The one-line conclusion is:
+
+> The common shadow is lossless.
+
+This is stronger than a Rosetta equality.  The three preceding papers do not
+merely produce the same cubic; each produces enough of that cubic to recover
+the quadratic operator algebra, and that operator regenerates the
+configurations and shadows with which the passages began.
+
+The intended paper is approximately \(12\)--\(18\) pages.  Its structure is:
+
+1. statement of the golden round-trip theorem and the exact marking groupoid;
+2. marked Rosetta transport;
+3. reconstruction of the axes, operator, and spectral algebra;
+4. proof that the round trips commute;
+5. one page of consequences and boundaries.
+
+Conductor two, the Pfaffian and cross-golden norm identities, and the
+harmonic return enter only as immediate corollaries.  The \(E_6\) carrier,
+matrix factorizations, small resolutions, quantum statistics, anomaly
+identities, lattice obstructions, doily, and integral staircase do not become
+parallel sections; they are cited in a final returns paragraph or left to
+separate papers.
+
+Paper IV enters the headline theorem only if a canonical short bridge from
+its reconstructed minimum-word geometry to the same golden package is
+proved.  Its existing reconstruction of \(\operatorname{PG}(2,13)\) does
+not by itself supply that bridge.  If the bridge is not one-line and
+theorem-grade, Paper IV remains the fourth instance of the program's
+recognition principle in the introduction and conclusion rather than being
+forced into the cubic equivalence.
+
+A suitable title is *The golden reconstruction theorem*.  A more descriptive
+alternative is *One cubic, three reconstructions, and the golden operator*.
+The abstract should fit in three sentences: the three constructions, their
+marked equality, and the theorem that the common cubic reconstructs the
+operator and makes every passage reversible.
