@@ -18,7 +18,7 @@ The paper owns:
   antisymmetric-resource design limit, with detailed compilation and resource
   gates retained in the supplement.
 
-The broader Golden operator inventory remains outside this repository.
+The broader Golden operator inventory remains outside this submission package.
 Paper III remains outside this manuscript's write surface. A forward citation
 from Paper III is permitted only after this paper has a stable public preprint
 locator.

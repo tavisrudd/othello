@@ -504,7 +504,10 @@ licenses the mixed-sector lemma's final saturation step; this closes the last
 reader-reconstruction gap without changing a statement, bound, or equality
 case.  The same gate pass found that unfrozen dependency replays advanced the
 lockfile's date cutoff and thereby stale-dated their own evidence manifest;
-the six paper-owned replay commands now run frozen.
+the six paper-owned replay commands now run frozen.  The subsequent
+submission-package pass synchronizes the public README boundary, the
+sixteen-page build record and hashes, and the Zenodo title and description
+with the integrated manuscript.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 

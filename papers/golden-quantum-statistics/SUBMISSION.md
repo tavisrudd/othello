@@ -8,7 +8,7 @@ continuous Golden control, Hermitian Pareto and squared-spectrum rigidity, and
 quantitative stability, with the interferometric design limit as a concise
 operational consequence.
 
-The frozen submission bundle contains this record, the manuscript, the locked
+The current submission bundle contains this record, the manuscript, the locked
 verification environment, and the paper-local evidence package. Live posting,
 assignment of the public locator, and the Clebsch forward reference remain
 publication actions outside this bundle.
@@ -25,14 +25,14 @@ publication actions outside this bundle.
 - `pyproject.toml` and `uv.lock`, which pin the symbolic replay environment;
 - `verification/README.md` and the paper-level `README.md`.
 
-The revised PDF is fifteen pages.  The release build has no TeX spacing error,
+The revised PDF is sixteen pages.  The release build has no TeX spacing error,
 undefined reference or citation, overfull or underfull box, or package
-warning.  The source and PDF hashes at closure are:
+warning.  The source and PDF hashes at this accepted checkpoint are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 52,775 | `70062fda37433788647f6dec8f29914c0aa509ed784f82799fa1a762695edc98` |
-| `golden_quantum_statistics.pdf` | 142,706 | `e6ff9ce225fe29517ce99e3c843d096717f91db27192b5a6fae1d22fb5b717f0` |
+| `golden_quantum_statistics.tex` | 54,082 | `6d66d473b873e1a94f448368d3a2bcf33c4039b88e18e2029cbd139785d24810` |
+| `golden_quantum_statistics.pdf` | 145,623 | `70d726a9111c5a0fa69767e9b7b9c9c614b78eb16740575793ad8b6a03959718` |
 
 Rebuild and verify from this directory with:
 
