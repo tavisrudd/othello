@@ -10,6 +10,16 @@ Discovery companion:
 
 ## Current status
 
+**C847 queued next (2026-08-02): cold/adversarial Paper II read before formal
+extraction.** Freeze `papers/mds_css_transversal_groups`; reconstruct the
+diagonal-multiplier/nullity and exact-carrier proof spine without the internal
+ledgers; attack its hypotheses, converse, imported Paper I boundary, and
+independence from the finite six-point evidence; test the rewritten exact-group
+figure; inspect the PDF and trust statement; and issue a locatored
+`GO`/`MINOR`/`MAJOR` verdict. Do not touch Lean, release manifests,
+standalones, or remotes. Report to
+`2026-08-02-c847-mds-css-paper-cold-read.md`.
+
 **C844 closed (2026-08-02): Paper I is sharply independent.** The authoritative
 `papers/ame_lu` root now builds a warning-free 35-page *Local-Unitary
 Rigidity and Quantitative Rounding for Stabilizer AME States*. Exact rigidity

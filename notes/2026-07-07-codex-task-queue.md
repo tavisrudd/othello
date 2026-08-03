@@ -25,6 +25,8 @@ ordering and detail.
 
 ### `ame-lu`
 
+- **C847 `[ame-lu]` [QUEUED NEXT; PAPER II COLD/ADVERSARIAL READ]** — freeze the current `papers/mds_css_transversal_groups` manuscript and give it a theorem-only cold read before any formal extraction: independently reconstruct the diagonal-multiplier zero/one-dimensionality argument, the nullity-one/nullity-zero exact carrier dichotomy, and the one-way dependence on Paper I; attack every hypothesis and converse, check that the finite six-point evidence is application-only rather than a hidden premise, test the rewritten exact-group figure for comprehension and publication-size legibility, inspect the full PDF and trust boundary, and return a `GO`, `MINOR`, or `MAJOR` verdict with exact locators and bounded corrections, without editing Lean, release manifests, standalones, or remotes → `notes/2026-08-02-c847-mds-css-paper-cold-read.md`.
+
 
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
