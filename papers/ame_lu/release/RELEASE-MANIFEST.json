@@ -11,9 +11,9 @@
         "sha256": "8e7291b7ddc73717c3640e5eeb0bd3d927f2dd81cdefd77f6e02b748bc61a362"
       },
       {
-        "bytes": 418695,
+        "bytes": 422088,
         "path": "ame-lu.pdf",
-        "sha256": "3feab73d4c92ac212291ef645cf9bc4f72e76be114b7a8d610c5bb9f1f9072ea"
+        "sha256": "49d6c26197ac64d2669e571282a25bd0e127df311658a2e37d82c36b19f736ae"
       },
       {
         "bytes": 2578,
@@ -51,9 +51,9 @@
         "sha256": "130f053aeac559cc1cdaaa4ac0f4fd0639d6476e470d2fc16bfd127c933ff498"
       },
       {
-        "bytes": 19330,
+        "bytes": 20952,
         "path": "refs.bib",
-        "sha256": "654e311ad47cf3960f6af1c1b9bb8e0902f681baf9ec22c2e99706644ab74ead"
+        "sha256": "2a8762f937947af7e1cca096ce9cd8977964f52c5818b38c508e106a1b11a278"
       },
       {
         "bytes": 7563,
@@ -61,9 +61,9 @@
         "sha256": "ca3e562179cb859043cb076a97e2e74221cf7a5532f8a79285700528a72bfafb"
       },
       {
-        "bytes": 20537,
+        "bytes": 20726,
         "path": "sections/01-introduction.tex",
-        "sha256": "f00981e2b76cda0f1eccd76ff5a726be0e72e54123f487449c4505b2a83a404d"
+        "sha256": "9af3634e575ac26ec0d511268fb7382f10b5db7337e9e6d3fa01fafba1ed30cd"
       },
       {
         "bytes": 6200,
@@ -71,9 +71,9 @@
         "sha256": "9bd45727fd2aa46f56787ac729895b443fe9aa9fc35670ca21789bf0ce92db34"
       },
       {
-        "bytes": 105347,
+        "bytes": 106395,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "832987130dd3fb977ce659ba397fc6b589e982854503e4a565604a339073db0a"
+        "sha256": "5528e9ff4e09db84d4ccbba3a33679501d20daebbb9fd330cbf9955a05b533fa"
       },
       {
         "bytes": 8998,
@@ -101,9 +101,9 @@
         "sha256": "273f370f80635ce0628851931982d0cbda697bdb26ca8dd8eadfe4aa5add7b0d"
       },
       {
-        "bytes": 10806,
+        "bytes": 11162,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "d61e0881b77d67bb8fd4a72c7f6d4beb4d06a23db9a132a803bf27790c086d9c"
+        "sha256": "5dc695cd58eb682756e2a64fd0e711e4624677aab6a7fa32c0a0aaf3c5daeaed"
       },
       {
         "bytes": 5676,
@@ -221,7 +221,7 @@
         "sha256": "b91ba7b352527fe5659a8f045ca22048eaa5f51e48fe04e7cf80465c91d97c4d"
       }
     ],
-    "tree_sha256": "017066dbff49ef90504cb18dd9dd7f7782fb886658e1f2babd86d4023adb16e2"
+    "tree_sha256": "70aafb3dbeda840d9b2c91a231a92270203ff61d0ebe852cf090c329a01d405d"
   },
   "formal_companion": {
     "artifacts": [
