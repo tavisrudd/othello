@@ -10,12 +10,28 @@ Discovery companion:
 
 ## Current status
 
-**C858 in progress (2026-08-02): Paper II Lean/math delta audit.**  Review all
-mathematical and Lean additions since 2026-08-01 against the paper's theorem
-ownership and trust boundary plus the complete referee-facing Lean standards.
-Use only guarded read-only validation allowed by the Lean ownership rules.  If
-any gap remains, reserve a separate remediation C-item and give it an
-exhaustive checklist.  Report to
+**C859 queued next (2026-08-02): Paper II formal/trust remediation.** C858
+found no mathematical theorem or finite-evidence defect, but Paper II is not
+formal- or release-ready: its semantic gate, axiom audit, recursive trust
+contract, registered terminals, and generated paper facts are absent; public
+surfaces still describe those as future work; and the theorem map omits the
+now-explicit imported minimum-support atlas. Clear the complete checklist in
+`2026-08-02-c859-mds-css-formal-remediation-checklist.md`, including guarded
+exact-root validation and standalone resynchronization, before claiming formal
+or release readiness.
+
+**C858 closed `FAIL — REMEDIATION REQUIRED` (2026-08-02): Paper II's
+mathematics and all eight evidence replays pass, but the formal/public trust
+surface does not.** The seven Lean files added after the cutoff are exclusively
+Paper I's two-uniform quantitative chain and do not enter Paper II's closure.
+The relevant shared formal modules have candid conditional interfaces and no
+new source-hygiene defect, while the paper-local build verifies all 17
+artifacts and the full replay regenerates all eight bundles. Release blockers
+are the absent Paper II gate/axiom roots and recursive manifest, missing trust
+registry/facts entries, prohibited future-status prose in three public
+surfaces, stale atlas ownership text, and bounded portfolio bibliography/title
+drift. A guarded aggregate build was safely refused because a foreign Lean
+build owned the tree. See
 `2026-08-02-c858-mds-css-lean-math-delta-audit.md`.
 
 **C851 closed (2026-08-02): Paper II DOI and PDF links are synchronized.**
