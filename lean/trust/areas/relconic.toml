@@ -784,6 +784,14 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[unreached]]
 modules = [
+  "RelativeConicArcs.C637Witness**",
+  "RelativeConicArcs.Gates.C637Witnesses",
+]
+severity = "info"
+reason = "legacy compatibility names; the paper-facing gate imports the stable small odd-order witness modules"
+
+[[unreached]]
+modules = [
   "RelativeConicArcs.Baer**",
   "RelativeConicArcs.Q25**",
   "RelativeConicArcs.Gates.Baer",
