@@ -1,6 +1,6 @@
 # C839 — AME--LU two-paper split and extraction plan
 
-**Lane:** `ame-lu`  
+**Lane:** `ame-lu`
 **Status:** plan frozen; implementation requires newly allocated manuscript and build-system tasks
 
 ## Decision
@@ -468,4 +468,3 @@ Phase B only: freeze the combined identities, create the ownership ledger,
 establish the self-contained Paper II monorepo root, and stop once its build
 and evidence replay pass.  Allocate the separate `build-sys` formal/extraction
 task only after those manuscript roots and theorem ownership are stable.
-
