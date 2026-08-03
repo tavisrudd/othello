@@ -2,8 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** Revised abstract and introduction accepted; clean-export closeout
-pending.
+**Status:** Complete.
 
 ## Objective
 
@@ -49,3 +48,25 @@ The first re-grade raised the abstract from 78 to 91 and the overall paper from
 clarity issues.  After those repairs, the final cold reader returned
 **ACCEPT**, scoring the abstract 97/100 and the overall paper 94/100, with no
 remaining issue worth another edit and no additional self-citation warranted.
+
+## Verification
+
+- Canonical `make check`: PASS, 54 pages, warning-free.
+- `make tit-check`: PASS, 39/50 pages, warning-free.
+- `python3 supplement/verify.py`: PASS, 75 labels and 69 public artifacts.
+- Clean standalone export: both builds PASS byte-identically; paper and Lean
+  export repositories remain clean.
+- Final canonical PDF SHA-256:
+  `9d688dc7a5da7b34594c295f4f9308ffea2ca6e1eb3010906dc584164861a2e7`.
+- Final independent verdict: **ACCEPT**, abstract 97/100, overall 94/100.
+
+## Mystery ledger and closeout
+
+The explicit `ej`+`tt` pass found no remaining mathematical or positioning
+mystery.  The only live ambiguity exposed by the first re-grade was the R7
+split-free/deep-hole boundary in the opening sentence; it is now resolved at
+first contact.  The apparent opportunity to add more cross-paper references
+was rejected: the MDS--CSS/AME companion is the only imported author result,
+and the three non-input comparison papers already provide sufficient context.
+No incidental finding crossed the discovery-track discriminator.  C608
+remains the highest-EV open lane task.

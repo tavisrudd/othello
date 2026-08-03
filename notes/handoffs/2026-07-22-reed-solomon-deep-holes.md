@@ -99,6 +99,17 @@ verifier, a clean standalone export rebuild, and a fresh geometry cold read
 are green.  The edit and repair ledger is
 `notes/reed-solomon-tasks/c846-prs-v2-spine-compression.md`.
 
+C849 is complete.  The Version 2 abstract now leads with exact split-free
+classification and radius-delimited deep-hole promotion, states the
+unconditional reduced-carrier theorem before the conditional numerical escape,
+restores the dense-marker/Pascal-nesting mechanism, delimits the bounded
+certificate role, and ends on the uniform binary degree-nine Lucas result.  The
+introduction surfaces R5 as the first previously open level, the all-field
+R6/R7 structure, and the balanced q8 quantum consequence.  A blind re-grade
+raised the abstract from 78 to 97 and the overall paper from 91 to 94, with
+final ACCEPT and no additional self-citation recommended.  The report is
+`notes/reed-solomon-tasks/c849-prs-v2-abstract-strength-positioning.md`.
+
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
 Zenodo version DOI `10.5281/zenodo.21682216`, and concept DOI
