@@ -1,0 +1,200 @@
+{
+  "balanced_signings": 12,
+  "positive_orientation": [
+    {
+      "code": 234,
+      "scalar": 4,
+      "bits": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "code": 316,
+      "scalar": 4,
+      "bits": [
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "code": 453,
+      "scalar": 4,
+      "bits": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "code": 598,
+      "scalar": 4,
+      "bits": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "code": 665,
+      "scalar": 4,
+      "bits": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "code": 803,
+      "scalar": 4,
+      "bits": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ]
+    }
+  ],
+  "negative_orientation": [
+    {
+      "code": 220,
+      "scalar": -4,
+      "bits": [
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "code": 358,
+      "scalar": -4,
+      "bits": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "code": 425,
+      "scalar": -4,
+      "bits": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "code": 570,
+      "scalar": -4,
+      "bits": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "code": 707,
+      "scalar": -4,
+      "bits": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "code": 789,
+      "scalar": -4,
+      "bits": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true
+      ]
+    }
+  ],
+  "unclassified": []
+}

@@ -24,12 +24,14 @@ is used there.
 The scalar-sign results concern root-normalized matrices encoded by ten
 Boolean edge signs and their nonzero integral scalar multiples.  They do not
 formalize reduction of an arbitrary scalar sign matrix by switching or
-uniqueness modulo switching and permutation.  One native-decision theorem
-exhausts all `2^10` normalized codes and returns the two oriented six-code
-fibres; the ensuing cubic identities are proved by symbolic normalization.
-The dependency axiom exposed by native evaluation is reported by the focused
-import-only gate.  The rational rank-fourteen Jacobian calculation for local
-weighted rigidity is not formalized in this module.
+uniqueness modulo switching and permutation.  One theorem exhausts all `2^10`
+normalized signings by compiled evaluation of a decidable statement and
+returns the two oriented six-code fibres; the ensuing cubic identities are
+proved by symbolic normalization.  Compiled evaluation introduces a
+declaration-local axiom for that one theorem, so the Lean compiler is part of
+the trusted base of every result below it; the focused import-only gate prints
+the resulting axiom set.  The rational rank-fourteen Jacobian calculation for
+local weighted rigidity is not formalized in this module.
 -/
 
 namespace RelativeConicArcs.FourShadowRecognition
@@ -46,6 +48,7 @@ def CubicsProportional
     (C : Matrix (Fin 6) (Fin 6) R) (mu : R) : Prop :=
   ∀ x, matchingEvaluation C x = mu * triangleCubic C x
 
+omit [IsDomain R] in
 /-- Scaling every matrix entry gives the commutator-Pfaffian cubic weight
 three in the matrix. -/
 theorem matchingEvaluation_smul (s : R)
@@ -54,6 +57,7 @@ theorem matchingEvaluation_smul (s : R)
   simp [matchingEvaluation]
   ring
 
+omit [IsDomain R] in
 /-- Scaling every matrix entry gives the triangle cubic weight three in the
 matrix. -/
 theorem triangleCubic_smul (s : R)
@@ -132,6 +136,7 @@ private def pairCoefficientTable (C : Matrix (Fin 6) (Fin 6) R)
   triangleSign C 2 4 5 * pairIncidence i j 2 4 5 +
   triangleSign C 3 4 5 * pairIncidence i j 3 4 5
 
+omit [IsDomain R] in
 private theorem cubicTerm_mixedDifference
     (C : Matrix (Fin 6) (Fin 6) R)
     (i j a b c : Fin 6) (hij : i ≠ j)
@@ -146,6 +151,7 @@ private theorem cubicTerm_mixedDifference
     vertexIncidence]
   split_ifs <;> simp_all <;> ring
 
+omit [IsDomain R] in
 private theorem triangleMixedDifference_eq_pairCoefficientTable
     (C : Matrix (Fin 6) (Fin 6) R) (i j : Fin 6) (hij : i ≠ j) :
     triangleMixedDifference C i j = pairCoefficientTable C i j := by
@@ -194,6 +200,7 @@ private theorem triangleMixedDifference_eq_pairCoefficientTable
     h034 + h035 + h045 + h123 + h124 + h125 + h134 + h135 + h145 +
     h234 + h235 + h245 + h345
 
+omit [IsDomain R] in
 /-- For a symmetric zero-diagonal order-six matrix, the mixed coefficient of
 the triangle cubic in two distinct coordinate directions is the sum of the
 four triangle products through that pair. -/
@@ -224,26 +231,28 @@ theorem triangleMixedDifference_eq_pairTriangleSum
   have h53 := hs 5 3
   have h54 := hs 5 4
   fin_cases i <;> fin_cases j <;>
-    simp only [Fin.isValue, Fin.mk.injEq, OfNat.ofNat, ne_eq,
-      not_true_eq_false] at hij
+    simp only [Fin.mk.injEq, OfNat.ofNat, ne_eq, not_true_eq_false] at hij
   all_goals
     simp [pairCoefficientTable, pairIncidence, vertexIncidence,
       pairTriangleSum, Fin.sum_univ_succ, triangleSign, hdiag, h10, h20, h21,
-      h30, h31, h32, h40, h41, h42, h43, h50, h51, h52, h53, h54] <;>
+      h30, h31, h32, h40, h41, h42, h43, h50, h51, h52, h53, h54]
     ring
 
+omit [IsDomain R] in
 private theorem triangleCubic_coordinateBump_eq_zero
     (C : Matrix (Fin 6) (Fin 6) R) (i : Fin 6) :
     triangleCubic C (coordinateBump i) = 0 := by
   fin_cases i <;>
     simp [triangleCubic, cubicTerm, coordinateBump]
 
+omit [IsDomain R] in
 private theorem triangleCubic_pairBump_eq_zero
     (C : Matrix (Fin 6) (Fin 6) R) (i j : Fin 6) (hij : i ≠ j) :
     triangleCubic C (pairBump i j) = 0 := by
   fin_cases i <;> fin_cases j <;>
     simp_all [triangleCubic, cubicTerm, pairBump, coordinateBump]
 
+omit [IsDomain R] in
 /-- Translation invariance of the triangle cubic makes every pair moment
 vanish.  The four translated sparse vectors implement the mixed finite
 difference which extracts the coefficient through the chosen pair. -/
@@ -291,6 +300,7 @@ theorem mul_self_apply_eq_zero_of_pairBalance
   rw [hbalance i j hij] at hmoment
   exact (mul_eq_zero.mp hmoment.symm).resolve_left (hedge i j hij)
 
+omit [IsDomain R] in
 private theorem matrix_eq_diagonal_of_offDiagonal_zero
     (D : Matrix (Fin 6) (Fin 6) R)
     (hoff : ∀ i j, i ≠ j → D i j = 0) :
@@ -299,7 +309,7 @@ private theorem matrix_eq_diagonal_of_offDiagonal_zero
   by_cases hij : i = j
   · subst j
     simp
-  · simp [Matrix.diagonal_apply, hij, hoff i j hij]
+  · simp [hij, hoff i j hij]
 
 /-- A matrix with nonzero off-diagonal entries and diagonal square has scalar
 square.  The equality of diagonal entries follows from
@@ -326,7 +336,7 @@ theorem exists_scalar_mul_self_of_offDiagonal_zero
   by_cases hij : i = j
   · subst j
     simpa [Matrix.one_apply_eq] using hdiag_eq i
-  · simp [Matrix.one_apply, hij, hoff i j hij]
+  · simp [hij, hoff i j hij]
 
 /-- For a symmetric zero-diagonal order-six matrix with nonzero edges,
 nonzero proportionality between the commutator-Pfaffian cubic and the
@@ -521,7 +531,7 @@ theorem pentagonGauge_of_firstRowBalanced (bits : Fin 10 → Bool)
       revert hb
       cases h0 : bits 0 <;> cases h1 : bits 1 <;> cases h2 : bits 2 <;>
         cases h3 : bits 3 <;>
-          simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+          simp [pairTriangleSum, triangleSign,
             normalizedSignMatrix, boolSign, h0, h1, h2, h3,
             Fin.sum_univ_succ] <;>
           decide
@@ -529,7 +539,7 @@ theorem pentagonGauge_of_firstRowBalanced (bits : Fin 10 → Bool)
       revert hb
       cases h0 : bits 0 <;> cases h4 : bits 4 <;> cases h5 : bits 5 <;>
         cases h6 : bits 6 <;>
-          simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+          simp [pairTriangleSum, triangleSign,
             normalizedSignMatrix, boolSign, h0, h4, h5, h6,
             Fin.sum_univ_succ] <;>
           decide
@@ -537,7 +547,7 @@ theorem pentagonGauge_of_firstRowBalanced (bits : Fin 10 → Bool)
       revert hb
       cases h1 : bits 1 <;> cases h4 : bits 4 <;> cases h7 : bits 7 <;>
         cases h8 : bits 8 <;>
-          simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+          simp [pairTriangleSum, triangleSign,
             normalizedSignMatrix, boolSign, h1, h4, h7, h8,
             Fin.sum_univ_succ] <;>
           decide
@@ -545,7 +555,7 @@ theorem pentagonGauge_of_firstRowBalanced (bits : Fin 10 → Bool)
       revert hb
       cases h2 : bits 2 <;> cases h5 : bits 5 <;> cases h7 : bits 7 <;>
         cases h9 : bits 9 <;>
-          simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+          simp [pairTriangleSum, triangleSign,
             normalizedSignMatrix, boolSign, h2, h5, h7, h9,
             Fin.sum_univ_succ] <;>
           decide
@@ -553,7 +563,7 @@ theorem pentagonGauge_of_firstRowBalanced (bits : Fin 10 → Bool)
       revert hb
       cases h3 : bits 3 <;> cases h6 : bits 6 <;> cases h8 : bits 8 <;>
         cases h9 : bits 9 <;>
-          simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+          simp [pairTriangleSum, triangleSign,
             normalizedSignMatrix, boolSign, h3, h6, h8, h9,
             Fin.sum_univ_succ] <;>
           decide
@@ -567,35 +577,35 @@ theorem normalizedSignMatrix_sq_of_firstRowBalanced (bits : Fin 10 → Bool)
       5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
   have hsq : ∀ k, boolSign (bits k) * boolSign (bits k) = 1 := by
     intro k
-    cases hk : bits k <;> simp [boolSign, hk]
+    cases bits k <;> simp [boolSign]
   have hr1 : boolSign (bits 0) + boolSign (bits 1) + boolSign (bits 2) +
       boolSign (bits 3) = 0 := by
     have hb := hbalance 1 (by decide)
-    simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+    simp [pairTriangleSum, triangleSign,
       normalizedSignMatrix, Fin.sum_univ_succ] at hb
     linarith
   have hr2 : boolSign (bits 0) + boolSign (bits 4) + boolSign (bits 5) +
       boolSign (bits 6) = 0 := by
     have hb := hbalance 2 (by decide)
-    simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+    simp [pairTriangleSum, triangleSign,
       normalizedSignMatrix, Fin.sum_univ_succ] at hb
     linarith
   have hr3 : boolSign (bits 1) + boolSign (bits 4) + boolSign (bits 7) +
       boolSign (bits 8) = 0 := by
     have hb := hbalance 3 (by decide)
-    simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+    simp [pairTriangleSum, triangleSign,
       normalizedSignMatrix, Fin.sum_univ_succ] at hb
     linarith
   have hr4 : boolSign (bits 2) + boolSign (bits 5) + boolSign (bits 7) +
       boolSign (bits 9) = 0 := by
     have hb := hbalance 4 (by decide)
-    simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+    simp [pairTriangleSum, triangleSign,
       normalizedSignMatrix, Fin.sum_univ_succ] at hb
     linarith
   have hr5 : boolSign (bits 3) + boolSign (bits 6) + boolSign (bits 8) +
       boolSign (bits 9) = 0 := by
     have hb := hbalance 5 (by decide)
-    simp [FirstRowBalanced, pairTriangleSum, triangleSign,
+    simp [pairTriangleSum, triangleSign,
       normalizedSignMatrix, Fin.sum_univ_succ] at hb
     linarith
   obtain ⟨h12, h13, h14, h15, h23, h24, h25, h34, h35, h45⟩ :=

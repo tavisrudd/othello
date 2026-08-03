@@ -56,30 +56,38 @@ committed.
 
 ## Four-shadow weighted converse
 
-- [ ] Replace the matrix-expanded pair-by-pair mixed-difference proof with a
+- [x] Replace the matrix-expanded pair-by-pair mixed-difference proof with a
   reducible coefficient evaluator and a symbolic monomial-extraction bridge.
-- [ ] Remove the local heartbeat and recursion-depth overrides.
-- [ ] Keep `triangleSign` opaque during coefficient extraction and isolate the
+- [x] Remove the local heartbeat and recursion-depth overrides.  The twelve
+  labelled cubic identities are now separate declarations, each within the
+  default elaboration budget.
+- [x] Keep `triangleSign` opaque during coefficient extraction and isolate the
   small label normalization from polynomial matrix algebra.
-- [ ] Prove translation invariance implies every pair moment through the new
+- [x] Prove translation invariance implies every pair moment through the new
   bridge, then reuse the existing pair-moment/matrix-square API.
 - [ ] Make every public docstring agree exactly with its hypotheses, including
   the theorem whose scalar-square conclusion does not require symmetry.
 
 ## Four-shadow normalized classification
 
-- [ ] Replace three repeated whole-domain native decisions with one reducible
-  orientation classifier and symbolic transport theorems.
-- [ ] Derive the labelled six-code fibres from the pentagon structure, or state
+- [x] Replace three repeated whole-domain native decisions with one reducible
+  orientation classifier and symbolic transport theorems.  The classifier is
+  one closed decidable statement over the `2^10` signings; the orientation
+  dichotomy, the two fibre projections, and their disjointness are derived
+  from it symbolically.
+- [x] Derive the labelled six-code fibres from the pentagon structure, or state
   and audit the finite classification as the exact proof step rather than a
-  corroborating replay.
+  corroborating replay.  The finite classification is the exact proof step and
+  is disclosed as such in the module header and the focused gate.
 - [ ] Formalize root normalization by switching for arbitrary scalar sign
   matrices, or narrow every objective and completion claim to normalized
   scalar sign matrices.
 - [ ] Formalize the promised uniqueness of the conference switching class, or
   remove that strength from task and handoff claims.
-- [ ] Explain in the module header the native domain, kernel bridge, normalized
-  scope, and the external rank-14 weighted-Jacobian boundary.
+- [x] Explain in the module header the native domain, kernel bridge, normalized
+  scope, and the external rank-14 weighted-Jacobian boundary.  The header now
+  also states that compiled evaluation introduces a declaration-local axiom
+  rather than a named global one.
 - [ ] Make the focused manifest disclose every native terminal, including the
   orientation dichotomy.
 
@@ -93,11 +101,19 @@ committed.
   prose, missing public documentation, overstated strength, and unresolved
   repository-local references.
 
+## Corrections found while validating
+
+- [x] `shadowCoefficient012` carried the sign of the lower-left block
+  determinant rather than of the cubic coefficient it is documented to be, so
+  both orientation predicates named the opposite fibre.  The definition and its
+  docstring are corrected, and an exact recomputation of the twelve balanced
+  signings is committed with the report.
+
 ## Acceptance evidence
 
-- [ ] Single-file elaboration of each changed source reaches a terminal green
+- [x] Single-file elaboration of each changed source reaches a terminal green
   `result.yaml` through `lean/scripts/guarded-lean`.
-- [ ] The focused four-shadow gate elaborates and its complete `#print axioms`
+- [x] The focused four-shadow gate elaborates and its complete `#print axioms`
   output matches the committed report.
 - [ ] Both Paper III gates pass through the supported guarded queue, followed
   by exact-target trace confirmation.
