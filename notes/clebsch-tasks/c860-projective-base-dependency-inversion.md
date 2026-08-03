@@ -3,8 +3,9 @@
 **Lane:** pending confirmation (`clebsch` proposed; the work edits shared
 `RelativeConicArcs` infrastructure that `relconic`, `ame-lu`, and `cap` also use)
 
-**Status:** substantively executed 2026-08-03 by a lighter route than the
-inversion below; formal closeout pending a user decision. The C855 window's
+**Status:** complete 2026-08-03 by a lighter route than the inversion below,
+by user acceptance. Full report:
+`notes/2026-08-03-c860-cap-closure-remediation.md`. The C855 window's
 five "Separate the …" commits split the cap library so the game modules
 (`CapGame.BuildGame`, `FrameGridBridge`, `GridGame`, `GridSeed`) left the
 paper closures, and the `Sym2ConicBridge` reverse references are gone. The
