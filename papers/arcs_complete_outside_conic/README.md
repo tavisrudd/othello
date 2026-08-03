@@ -21,11 +21,17 @@ For a nonsingular conic \(\mathcal C\subset PG(2,q)\), the paper studies arcs
   \(\rho_{\mathcal C}(17)=9\), and \(\rho_{\mathcal C}(19)=10\); and
 - a classification certificate excluding every eight-arc at \(q=16\).
 
-The formal development is distributed separately in
-[`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom). The
-version-independent archival locator is the Zenodo concept DOI
-[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
-The manuscript identifies the exact gate, theorem names, trust boundary,
+The human-scale formal development is distributed in
+[`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom). Its archived
+0.2.0 release has DOI
+[`10.5281/zenodo.21664257`](https://doi.org/10.5281/zenodo.21664257), and the
+later matching-packing/small-odd supplement is fixed at commit
+[`0b3f37d`](https://github.com/tavisrudd/finitegeom/commit/0b3f37d264f54b52e6c703a75e2704a3f9cbe4b4).
+The generated exhaustive order-16 proof is in the separately pinned
+[`finitegeom-q16-certificates`](https://github.com/tavisrudd/finitegeom-q16-certificates)
+package at commit
+[`ecee482d`](https://github.com/tavisrudd/finitegeom-q16-certificates/commit/ecee482dd8d3501a0077a0781398a34df5f0f604).
+The manuscript identifies the exact gates, theorem names, trust boundaries,
 and classical inputs. The formal sources are not bundled here.
 
 ## Contents

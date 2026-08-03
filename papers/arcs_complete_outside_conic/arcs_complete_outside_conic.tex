@@ -176,6 +176,12 @@ Moreover,
 \]
 \end{theorem}
 
+The order-\(16\) lower exclusion in this theorem is an exhaustive
+Lean-kernel-checked certificate.  At orders \(13,17,19\), Lean checks the
+attaining witnesses and upper bounds, while the exhaustive lower exclusions
+are trusted classifier executions; the evidence map in
+Appendix~\ref{app:verification} records the distinction.
+
 The identity carries more information than the resulting scalar bound.
 The algebra is short; the point is the linear combination that factors
 pointwise into nonnegative terms.  Its summands record exactly where a
@@ -902,10 +908,17 @@ partner \(R'\in A\).  The other conic point on \(RR'\) is
 positive conic index to be \(m\).
 
 The involutions \(\sigma_P\) and \(\sigma_Q\) fix \(T\).  In the standard
-conic parameter they are distinct nonidentity characteristic-two
-translations with this common fixed point.  Hence they commute, and their
-product is a third nonidentity involution whose unique fixed point is also
-\(T\).  All three preserve \(S\), and
+conic parameter this can be seen directly.  Move \(T\) to
+\((1,0,0)\) on \(XZ=Y^2\), and write the other conic points as
+\(c(u)=(u^2,u,1)\).  The tangent at \(T\) is \(Z=0\), and the chord through
+\(c(u)\) and \(c(v)\) meets it at
+\((u+v,1,0)\).  Thus a centre \(R=(a,1,0)\) induces
+\(\sigma_R:u\mapsto u+a\).  The value \(a=0\) is the nucleus and gives the
+identity; since \(P,Q\in A\), the preceding exclusion of the nucleus and
+\(P\ne Q\) give distinct nonzero parameters \(a_P,a_Q\).  Hence
+\(\sigma_P,\sigma_Q\), and their product are the three nonidentity
+translations with parameters \(a_P,a_Q,a_P+a_Q\).  They commute and each
+has \(T\) as its unique fixed point.  All three preserve \(S\), and
 \[
  |S|=k-1\equiv3\pmod4.
 \]
@@ -1004,6 +1017,9 @@ $2q+2<q^2+q+1$ points.  Thus a $\cC$-complete arc has at least three points,
 so the moment bound applies to the unrestricted minimum defining $\rhoC(q)$.
 The definition of $L_2(q)$ involves only integer arithmetic after
 multiplication by $\lfloor k/2\rfloor$.
+The correction subtracted in the definition of \(L_2(q)\) is nonnegative,
+so every integer feasible for \(L_2(q)\) is feasible for \(L_1(q)\); hence
+\(L_2(q)\ge L_1(q)\).
 \end{proof}
 
 For calculation, the corrected capacity has the parity-dependent forms
@@ -1257,14 +1273,16 @@ of edges and is therefore impossible.  Thus their statement that Mathon
 found precisely two nonisomorphic
 \(\operatorname{MATCH}(10,5,1)\) designs applies to
 Definition~\ref{def:rank-three-realization}
-\cite[pp.~39--40]{AlspachHeinrich1990}.  Equivalently, these are the two
+\cite[p.~40, opening classification paragraph]{AlspachHeinrich1990}.
+Equivalently, these are the two
 partial geometries denoted \(\operatorname{pg}(5,7,3)\) in Reichard and
 Woldar's (line size, point degree, \(\alpha\)) convention, or
 \(\operatorname{pg}(4,6,3)\) in the common
 \(\operatorname{pg}(s,t,\alpha)\) convention.  Reichard and Woldar
 identify Mathon's result as a full classification and construct models of
 both classes in Proposition~5.1.5 and Corollary~5.1.6
-\cite[Sec.~6]{ReichardWoldar2022}.  This published two-class completeness
+\cite[Proposition~5.1.5 and Corollary~5.1.6]{ReichardWoldar2022}.
+This published two-class completeness
 is an external input.  The paper-local enumeration in
 Appendix~\ref{app:verification} reconstructs and checks representatives of
 the two classes, but is not used to prove that the list is complete.
@@ -1356,7 +1374,8 @@ range of sufficiently large \(q\), where the Kim--Vu bound supplies it.
 
 Kim and Vu proved that, for all sufficiently large $q$, every projective
 plane of order $q$ has a complete arc of size at most
-$\sqrt q(\log q)^c$ for an absolute constant $c$~\cite{KimVu2003}.  This is
+$\sqrt q(\log q)^c$ for an absolute constant $c$
+\cite[Theorem~1.1]{KimVu2003}.  This is
 less than $q$ for large $q$, so Corollary~\ref{cor:conic-transfer} gives the
 following immediate consequence.
 
@@ -1783,27 +1802,41 @@ uncovered locus $\cC(\F_5)$.
 
 The main body develops the mathematical mechanism; the appendices separate
 secondary deductions from finite exclusion.  The corresponding evidence and
-trust boundaries are summarized below.  In the electronic companion,
-\path{TRUST.md} records exact commands, toolchain versions, SHA-256 digests,
-theorem names, and frozen outputs.  The import-only gate
-\path{ArcsCompleteOutsideConic.lean} is the kernel-checking entry point for
-precisely the results used here; both files lie under
-\path{lean/RelativeConicArcs/}, with the gate in its \path{Gates/}
-subdirectory.  The formal repository has the version-independent Zenodo
-concept DOI \href{https://doi.org/10.5281/zenodo.21650878}
-{\texttt{10.5281/zenodo.21650878}}.
+trust boundaries are summarized below.  In the public \texttt{finitegeom}
+repository, the base human boundary is recorded in
+\path{trust/ARCS_COMPLETE_OUTSIDE_CONIC.md}.  The matching-packing and small
+odd-order supplement is recorded separately in
+\path{trust/ARCS_COMPLETE_OUTSIDE_CONIC_ADDITIONS.md}.  Under
+\path{RelativeConicArcs/Gates/}, the corresponding import-only modules are
+\begin{center}
+\small
+\texttt{ArcsCompleteOutsideConicHuman.lean},\\
+\texttt{ArcsCompleteOutsideConicAdditions.lean}.
+\end{center}
+The archived \texttt{finitegeom} release 0.2.0 has DOI
+\href{https://doi.org/10.5281/zenodo.21664257}
+{\texttt{10.5281/zenodo.21664257}}; the later supplement is fixed at public
+commit \href{https://github.com/tavisrudd/finitegeom/commit/0b3f37d264f54b52e6c703a75e2704a3f9cbe4b4}
+{\texttt{0b3f37d}}.  The generated order-\(16\) proof is distributed
+separately in \texttt{finitegeom-q16-certificates}, fixed at public commit
+\href{https://github.com/tavisrudd/finitegeom-q16-certificates/commit/ecee482dd8d3501a0077a0781398a34df5f0f604}
+{\texttt{ecee482d}} and pinned there to \texttt{finitegeom} commit
+\texttt{ef6317c5}.
 This appendix states the mathematical certificate contracts and the trust
 boundary; raw generated certificates, generators, and replay scripts remain
 in the companion.
 
-The gate also checks the discrete gap, complete-affine equality orders,
+The human gate and supplement also check the discrete gap, complete-affine equality orders,
 three-value equality spectra, and the standard-conic characteristic-two
 conclusions.  The identification of an arbitrary equality oval or hyperoval
 with its prescribed-conic configuration remains a paper proof.
 
-The complete \texttt{\#print axioms} output for the gate theorems consists
-only of \texttt{propext}, \texttt{Classical.choice}, and
-\texttt{Quot.sound}.  The checked sources contain no \texttt{sorry},
+The complete \texttt{\#print axioms} output for the cited gate theorems is
+\[
+ \texttt{propext},\qquad \texttt{Classical.choice},\qquad
+ \texttt{Quot.sound}.
+\]
+The checked sources contain no \texttt{sorry},
 custom axiom declaration, or \texttt{native\_decide}.
 
 The table distinguishes the three evidence roles: ordinary proofs with
@@ -1819,22 +1852,23 @@ computer algebra outside Lean.
 Claim & Certificate and checker & Remaining trust\\ \hline
 Defect, bounds, transfer, exact reconstruction, matching rigidity,
 bad-concurrence stability, and the two-unit design-nonexistence gap&
-\texttt{Gates.ArcsCompleteOutside\allowbreak Conic} and
-\texttt{Gates.MatchingPacking\allowbreak Defect}; the named reconstruction
-and matching terminals in the trust manifest&
+\texttt{Gates.ArcsCompleteOutside\allowbreak ConicHuman} and
+\texttt{Gates.ArcsCompleteOutside\allowbreak ConicAdditions}; the named
+reconstruction and matching terminals in the two public trust documents&
 Lean kernel, Mathlib, and
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}\\
 \(q=16\) exclusion&
 augmentation transitions, the line--triangle pattern certificate,
 \(2630+3\) Lean leaf records, and
-\texttt{Q16QuadraticTransport}, imported by the gate&
+\texttt{Q16QuadraticTransport}, imported by the separate certificate-package
+gate \texttt{Gates.ArcsCompleteOutside\allowbreak Conic}&
 The theorem trusts the Lean kernel and Mathlib.  Exact Python arithmetic
 certifies the geometric compression independently but is not a premise of the
 Lean theorem; generator labels and deduplication are not trusted\\
 Exact values at \(q=13,17,19\)&
 the exhaustive projective classifier and canonical JSON summaries;
-\texttt{Gates.C637Witnesses} checks the three attaining witnesses and upper
-bounds&
+\texttt{Gates.ArcsCompleteOutside\allowbreak ConicAdditions} checks the three
+attaining witnesses and upper bounds&
 The upper bounds trust only the Lean kernel, Mathlib, and explicit
 finite-field reduction.  The exhaustive lower classifications trust the C++
 compiler and execution; the \(q=13\) lower bound has an independent frame
@@ -1870,7 +1904,15 @@ rechecks the \(q=13\) lower bound.  No second implementation checks the
 The ten-point bundle consists of
 \texttt{check\_match10\_rank\_three.py}, its JSON certificate, and
 \texttt{check\_match10\_rank\_three.sha256} in the paper directory.
-The companion gives the exact replay command.  Singular Gr\"obner bases and
+It is fixed at companion commit
+\href{https://github.com/tavisrudd/arcs-complete-outside-conic/commit/ab3bcd6e51f59738acd1a6b04cff5f3867e2838d}
+{\texttt{ab3bcd6e}}; the checksum file there records the full SHA-256 digests
+of the checker and JSON.  The JSON fields
+\path{integral_lifts}, \path{algebraic_checks}, and
+\path{classical_char2_lex_basis} record respectively the rational unit
+relations and denominator primes, the saturated-ideal acceptance checks, and
+the characteristic-two triangular basis.  The companion gives the exact
+replay command.  Singular Gr\"obner bases and
 module lifts remain trusted executions.  A second monomial order and a
 direct \(\F_8\) incidence construction provide independent checks; the
 same record checks the regular hyperoval, the disjoint prescribed conic

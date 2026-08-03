@@ -112,12 +112,15 @@
    \(I_C(A)=\binom{k}{2}\) and \(k-1\) maximum-index conic points. Nucleus parity forces a tangent
    arc secant. Its two commuting conic involutions preserve that \(3\bmod4\) set and have, together
    with their product, the tangent contact as unique fixed point; permutation sign is contradictory.
-   The manuscript now supplies both bridges explicitly. If \(Y\) has maximum conic index, the
+   The manuscript supplies both bridges explicitly. If \(Y\) has maximum conic index, the
    secants through \(Y\) perfectly match the arc; pairing an arc point \(R\) with \(R'\) shows that
    the other conic point on \(RR'\), namely \(\sigma_R(Y)\), has positive index and therefore
-   maximum index at zero defect. In standard conic coordinates, two distinct secant involutions
-   with the same tangent fixed point are commuting characteristic-two translations, and their
-   product is a third nonidentity involution with that same unique fixed point.
+   maximum index at zero defect. After moving the tangent contact to \((1,0,0)\) on
+   \(XZ=Y^2\), write the finite conic points as \(c(u)=(u^2,u,1)\). The chord
+   \(c(u)c(v)\) meets the tangent \(Z=0\) at \((u+v,1,0)\), so a centre
+   \((a,1,0)\) acts by \(u\mapsto u+a\). The nucleus is \(a=0\); the two distinct
+   nonnuclear arc centres therefore give distinct nonzero translations, and their product is the
+   third nonidentity translation with the same unique fixed point.
    Lean checks the incidence identity in
    `RelativeConicArcs.upper_even_equality_branch_holeIncidence`, the invariant-set bridge in
    `ZeroDefectConicInvariance`, and the general terminal
@@ -353,13 +356,15 @@ transport and relabelling preserve the results; replacing one witness point chan
 count from 12 to 20 and collapses the stabilizer from 60 to 2, while a mutated generator is
 rejected.
 
-The exact-search report is frozen separately as `search_rhoc16_output.txt`;
-the source and report hashes are recorded in `lean/RelativeConicArcs/TRUST.md`.
+The exact-search report is frozen separately as `search_rhoc16_output.txt`.
+The public certificate package records the generator and report hashes in
+`MANIFEST.json` and pins its human-scale `finitegeom` dependency.
 
 ## Lean formalization
 
-The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain and the finite
-certificates. In particular, it proves the arbitrary-hole capacity theorem, the complete-affine
+The public `finitegeom` package formalizes the human-scale theorem chain, while the separately
+pinned `finitegeom-q16-certificates` package contains the generated order-16 proof. In particular,
+the human package proves the arbitrary-hole capacity theorem, the complete-affine
 line-hole equivalence, ideal-line incidence identity, corrected affine bound and equality criterion, the generic
 projective-averaging transfer, the explicit additive lower bound, and the universal
 even-characteristic incidence loss. It also proves exact uncovered-locus reconstruction and its
@@ -372,14 +377,18 @@ proves that acceptance implies semantic relative completeness. The accepted coor
 not be normalized or duplicate-free.
 
 The stable manuscript-facing modules are imported and audited by
-`RelativeConicArcs.Gates.ArcsCompleteOutsideConic`; the matching-packing gap
-and prime-field upper witnesses retain their dedicated gates, and the broader
-`RelativeConicArcs.Results` aggregate remains the exact-small-results registry.
+`RelativeConicArcs.Gates.ArcsCompleteOutsideConicHuman` and
+`RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions`. The generated
+order-16 theorem `RelativeConicArcs.rhoC_GF16` is exposed separately by the
+certificate-package gate `RelativeConicArcs.Gates.ArcsCompleteOutsideConic`.
 No proof uses `sorry`, `admit`, a custom axiom, or
 `native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
-exactly `[propext, Classical.choice, Quot.sound]`; see `lean/RelativeConicArcs/TRUST.md` for the
-theorem map, provenance, and trust boundary. The Kim--Vu input remains an explicit named theorem
-hypothesis and is not used by the finite results.
+exactly `[propext, Classical.choice, Quot.sound]`; see
+`trust/ARCS_COMPLETE_OUTSIDE_CONIC.md` and
+`trust/ARCS_COMPLETE_OUTSIDE_CONIC_ADDITIONS.md` in `finitegeom`, together with
+the certificate package's `README.md`, `PROVENANCE.md`, and `MANIFEST.json`, for the theorem maps,
+provenance, and trust boundaries. The Kim--Vu input remains an explicit named theorem hypothesis
+and is not used by the finite results.
 
 Three adversarial controls exercise distinct trust layers: changing a leaf member breaks its local
 rejection proof, changing a projective transition scalar breaks the row proof, and omitting the
