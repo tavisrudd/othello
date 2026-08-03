@@ -4,11 +4,12 @@
 
 **Opened:** 2026-07-24
 
-**Status:** active.  The C749 human freeze, C750/C801 Lean closure,
+**Status:** active, blocked on C856.  The C749 human freeze,
 Milnor--Serre exposition pass, deterministic packaging, and local standalone
-forward commit are complete.  The standalone commit is ready for the
-author-owned GitHub push.  The immutable locator and locator insertion remain
-external.
+forward commit are complete, but the 2026-08-02 standards audit reopened the
+C750/C801 formal closure.  Do not push the current standalone commit.  C856
+must repair and replay the authoritative Lean/trust surface first; C577 then
+owns a new forward synchronization and the remaining publication steps.
 
 ## Objective
 
@@ -46,17 +47,20 @@ Paper III.
   scope at commit `8fa7ac41bfd31906891de8fa0c9c1d6bee799cb4`.  The canonical
   62-file export is committed forward in the standalone repository at
   `71751691b026ff99c53a64c522b0464a2c5582e0`; its isolated aggregate replay
-  and export-manifest verification are green.  The standalone commit is ready
-  for the author to push; Codex does not push publication repositories.
+  and export-manifest verification were green before the C856 formal-standards
+  audit.  The standalone commit is superseded as a publication candidate and
+  must not be pushed; Codex does not push publication repositories.
 - Exact findings and completed trust/editorial repairs are recorded in
   `notes/2026-07-31-c577-paper-ii-new-math-audit.md`.
 
 ## Next action
 
-The author pushes standalone commit
-`71751691b026ff99c53a64c522b0464a2c5582e0` and creates the immutable public
-release/archive.  Once its locator is available, insert it in the authoritative
-manuscript and README, regenerate and forward-commit the canonical export,
+Complete C856's fixed-line theorem, closure-wide documentation, trust, and
+verification repair.  After C856 returns a green authoritative tree, create a
+new canonical standalone forward commit and rerun its isolated aggregate.
+Only that successor commit may be considered for the author-owned push and
+immutable public release.  Once its locator is available, insert it in the
+authoritative manuscript and README, regenerate and forward-commit the export,
 then rerun the isolated release and separate final release pass.
 
 ## Boundaries
