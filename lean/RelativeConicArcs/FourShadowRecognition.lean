@@ -1,5 +1,10 @@
 import RelativeConicArcs.ClebschOperatorShadows
-import Mathlib
+import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Ring
 
 /-!
 # Recognition from the triangle and commutator-Pfaffian cubics
@@ -11,8 +16,20 @@ nonzero scalar multiple of the former and every edge is nonzero, translation
 invariance forces all pair moments to vanish.  The matrix square is then
 diagonal, and associativity forces its diagonal entries to agree.
 
-The argument is symbolic over an integral domain.  No finite classification
-or generated certificate is used in the weighted converse.
+The weighted converse is symbolic over an integral domain.  Its coefficient
+step factors through a reducible twenty-term table and a proved monomial
+mixed-difference identity; no generated certificate or finite classification
+is used there.
+
+The scalar-sign results concern root-normalized matrices encoded by ten
+Boolean edge signs and their nonzero integral scalar multiples.  They do not
+formalize reduction of an arbitrary scalar sign matrix by switching or
+uniqueness modulo switching and permutation.  One native-decision theorem
+exhausts all `2^10` normalized codes and returns the two oriented six-code
+fibres; the ensuing cubic identities are proved by symbolic normalization.
+The dependency axiom exposed by native evaluation is reported by the focused
+import-only gate.  The rational rank-fourteen Jacobian calculation for local
+weighted rigidity is not formalized in this module.
 -/
 
 namespace RelativeConicArcs.FourShadowRecognition
@@ -68,31 +85,164 @@ theorem triangleCubic_translate_of_proportional
   apply mul_left_cancel₀ hmu
   rw [← hprop, matchingEvaluation_translate, hprop]
 
-private def singleBump (i : Fin 6) : Fin 6 → R :=
+/-- The coordinate vector supported at one of the six labels. -/
+def coordinateBump (i : Fin 6) : Fin 6 → R :=
   fun k => if k = i then 1 else 0
 
-private def doubleBump (i j : Fin 6) : Fin 6 → R :=
-  fun k => singleBump i k + singleBump j k
+/-- The sum of the two coordinate vectors supported at a pair of labels. -/
+def pairBump (i j : Fin 6) : Fin 6 → R :=
+  fun k => coordinateBump i k + coordinateBump j k
 
-set_option maxHeartbeats 800000 in
-private theorem pairTriangleSum_eq_translationMixedDifference
+/-- The mixed finite difference of the triangle cubic at the all-one vector
+in two coordinate directions. -/
+def triangleMixedDifference (C : Matrix (Fin 6) (Fin 6) R)
+    (i j : Fin 6) : R :=
+  triangleCubic C (fun k => pairBump i j k + 1) -
+    triangleCubic C (fun k => coordinateBump i k + 1) -
+    triangleCubic C (fun k => coordinateBump j k + 1) +
+    triangleCubic C (fun _ => 1)
+
+private def vertexIncidence (i a b c : Fin 6) : R :=
+  (if a = i then 1 else 0) + (if b = i then 1 else 0) +
+    (if c = i then 1 else 0)
+
+private def pairIncidence (i j a b c : Fin 6) : R :=
+  vertexIncidence i a b c * vertexIncidence j a b c
+
+private def pairCoefficientTable (C : Matrix (Fin 6) (Fin 6) R)
+    (i j : Fin 6) : R :=
+  triangleSign C 0 1 2 * pairIncidence i j 0 1 2 +
+  triangleSign C 0 1 3 * pairIncidence i j 0 1 3 +
+  triangleSign C 0 1 4 * pairIncidence i j 0 1 4 +
+  triangleSign C 0 1 5 * pairIncidence i j 0 1 5 +
+  triangleSign C 0 2 3 * pairIncidence i j 0 2 3 +
+  triangleSign C 0 2 4 * pairIncidence i j 0 2 4 +
+  triangleSign C 0 2 5 * pairIncidence i j 0 2 5 +
+  triangleSign C 0 3 4 * pairIncidence i j 0 3 4 +
+  triangleSign C 0 3 5 * pairIncidence i j 0 3 5 +
+  triangleSign C 0 4 5 * pairIncidence i j 0 4 5 +
+  triangleSign C 1 2 3 * pairIncidence i j 1 2 3 +
+  triangleSign C 1 2 4 * pairIncidence i j 1 2 4 +
+  triangleSign C 1 2 5 * pairIncidence i j 1 2 5 +
+  triangleSign C 1 3 4 * pairIncidence i j 1 3 4 +
+  triangleSign C 1 3 5 * pairIncidence i j 1 3 5 +
+  triangleSign C 1 4 5 * pairIncidence i j 1 4 5 +
+  triangleSign C 2 3 4 * pairIncidence i j 2 3 4 +
+  triangleSign C 2 3 5 * pairIncidence i j 2 3 5 +
+  triangleSign C 2 4 5 * pairIncidence i j 2 4 5 +
+  triangleSign C 3 4 5 * pairIncidence i j 3 4 5
+
+private theorem cubicTerm_mixedDifference
+    (C : Matrix (Fin 6) (Fin 6) R)
+    (i j a b c : Fin 6) (hij : i ≠ j)
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    cubicTerm C (fun k => pairBump i j k + 1) a b c -
+      cubicTerm C (fun k => coordinateBump i k + 1) a b c -
+      cubicTerm C (fun k => coordinateBump j k + 1) a b c +
+      cubicTerm C (fun _ => 1) a b c =
+        triangleSign C a b c * pairIncidence i j a b c := by
+  classical
+  simp only [cubicTerm, pairBump, coordinateBump, pairIncidence,
+    vertexIncidence]
+  split_ifs <;> simp_all <;> ring
+
+private theorem triangleMixedDifference_eq_pairCoefficientTable
+    (C : Matrix (Fin 6) (Fin 6) R) (i j : Fin 6) (hij : i ≠ j) :
+    triangleMixedDifference C i j = pairCoefficientTable C i j := by
+  have h012 := cubicTerm_mixedDifference C i j 0 1 2 hij
+    (by decide) (by decide) (by decide)
+  have h013 := cubicTerm_mixedDifference C i j 0 1 3 hij
+    (by decide) (by decide) (by decide)
+  have h014 := cubicTerm_mixedDifference C i j 0 1 4 hij
+    (by decide) (by decide) (by decide)
+  have h015 := cubicTerm_mixedDifference C i j 0 1 5 hij
+    (by decide) (by decide) (by decide)
+  have h023 := cubicTerm_mixedDifference C i j 0 2 3 hij
+    (by decide) (by decide) (by decide)
+  have h024 := cubicTerm_mixedDifference C i j 0 2 4 hij
+    (by decide) (by decide) (by decide)
+  have h025 := cubicTerm_mixedDifference C i j 0 2 5 hij
+    (by decide) (by decide) (by decide)
+  have h034 := cubicTerm_mixedDifference C i j 0 3 4 hij
+    (by decide) (by decide) (by decide)
+  have h035 := cubicTerm_mixedDifference C i j 0 3 5 hij
+    (by decide) (by decide) (by decide)
+  have h045 := cubicTerm_mixedDifference C i j 0 4 5 hij
+    (by decide) (by decide) (by decide)
+  have h123 := cubicTerm_mixedDifference C i j 1 2 3 hij
+    (by decide) (by decide) (by decide)
+  have h124 := cubicTerm_mixedDifference C i j 1 2 4 hij
+    (by decide) (by decide) (by decide)
+  have h125 := cubicTerm_mixedDifference C i j 1 2 5 hij
+    (by decide) (by decide) (by decide)
+  have h134 := cubicTerm_mixedDifference C i j 1 3 4 hij
+    (by decide) (by decide) (by decide)
+  have h135 := cubicTerm_mixedDifference C i j 1 3 5 hij
+    (by decide) (by decide) (by decide)
+  have h145 := cubicTerm_mixedDifference C i j 1 4 5 hij
+    (by decide) (by decide) (by decide)
+  have h234 := cubicTerm_mixedDifference C i j 2 3 4 hij
+    (by decide) (by decide) (by decide)
+  have h235 := cubicTerm_mixedDifference C i j 2 3 5 hij
+    (by decide) (by decide) (by decide)
+  have h245 := cubicTerm_mixedDifference C i j 2 4 5 hij
+    (by decide) (by decide) (by decide)
+  have h345 := cubicTerm_mixedDifference C i j 3 4 5 hij
+    (by decide) (by decide) (by decide)
+  unfold triangleMixedDifference triangleCubic pairCoefficientTable
+  linear_combination h012 + h013 + h014 + h015 + h023 + h024 + h025 +
+    h034 + h035 + h045 + h123 + h124 + h125 + h134 + h135 + h145 +
+    h234 + h235 + h245 + h345
+
+/-- For a symmetric zero-diagonal order-six matrix, the mixed coefficient of
+the triangle cubic in two distinct coordinate directions is the sum of the
+four triangle products through that pair. -/
+theorem triangleMixedDifference_eq_pairTriangleSum
     (C : Matrix (Fin 6) (Fin 6) R)
     (hsymm : C.transpose = C)
     (hdiag : ∀ i, C i i = 0)
     (i j : Fin 6) (hij : i ≠ j) :
-    pairTriangleSum C i j =
-      triangleCubic C (fun k => doubleBump i j k + 1) -
-      triangleCubic C (fun k => singleBump i k + 1) -
-      triangleCubic C (fun k => singleBump j k + 1) +
-      triangleCubic C (fun _ => 1) := by
+    triangleMixedDifference C i j = pairTriangleSum C i j := by
+  rw [triangleMixedDifference_eq_pairCoefficientTable C i j hij]
   have hs : ∀ a b, C a b = C b a := by
     intro a b
     simpa [Matrix.transpose_apply] using
       congrArg (fun M : Matrix (Fin 6) (Fin 6) R => M b a) hsymm
+  have h10 := hs 1 0
+  have h20 := hs 2 0
+  have h21 := hs 2 1
+  have h30 := hs 3 0
+  have h31 := hs 3 1
+  have h32 := hs 3 2
+  have h40 := hs 4 0
+  have h41 := hs 4 1
+  have h42 := hs 4 2
+  have h43 := hs 4 3
+  have h50 := hs 5 0
+  have h51 := hs 5 1
+  have h52 := hs 5 2
+  have h53 := hs 5 3
+  have h54 := hs 5 4
   fin_cases i <;> fin_cases j <;>
-    simp_all [triangleCubic, cubicTerm, pairTriangleSum, triangleSign,
-      doubleBump, singleBump, hdiag, hs, Fin.sum_univ_succ] <;>
+    simp only [Fin.isValue, Fin.mk.injEq, OfNat.ofNat, ne_eq,
+      not_true_eq_false] at hij
+  all_goals
+    simp [pairCoefficientTable, pairIncidence, vertexIncidence,
+      pairTriangleSum, Fin.sum_univ_succ, triangleSign, hdiag, h10, h20, h21,
+      h30, h31, h32, h40, h41, h42, h43, h50, h51, h52, h53, h54] <;>
     ring
+
+private theorem triangleCubic_coordinateBump_eq_zero
+    (C : Matrix (Fin 6) (Fin 6) R) (i : Fin 6) :
+    triangleCubic C (coordinateBump i) = 0 := by
+  fin_cases i <;>
+    simp [triangleCubic, cubicTerm, coordinateBump]
+
+private theorem triangleCubic_pairBump_eq_zero
+    (C : Matrix (Fin 6) (Fin 6) R) (i j : Fin 6) (hij : i ≠ j) :
+    triangleCubic C (pairBump i j) = 0 := by
+  fin_cases i <;> fin_cases j <;>
+    simp_all [triangleCubic, cubicTerm, pairBump, coordinateBump]
 
 /-- Translation invariance of the triangle cubic makes every pair moment
 vanish.  The four translated sparse vectors implement the mixed finite
@@ -105,11 +255,16 @@ theorem pairTriangleSum_eq_zero_of_triangleCubic_translate
       triangleCubic C (fun i => x i + t) = triangleCubic C x)
     (i j : Fin 6) (hij : i ≠ j) :
     pairTriangleSum C i j = 0 := by
-  rw [pairTriangleSum_eq_translationMixedDifference C hsymm hdiag i j hij,
-    htranslate (doubleBump i j) 1, htranslate (singleBump i) 1,
-    htranslate (singleBump j) 1, htranslate (fun _ => 0) 1]
-  fin_cases i <;> fin_cases j <;>
-    simp_all [triangleCubic, cubicTerm, doubleBump, singleBump]
+  rw [← triangleMixedDifference_eq_pairTriangleSum C hsymm hdiag i j hij]
+  have hone : triangleCubic C (fun _ : Fin 6 => (1 : R)) = 0 := by
+    have h := htranslate (fun _ => (0 : R)) 1
+    simpa [triangleCubic, cubicTerm] using h
+  simp only [triangleMixedDifference, htranslate (pairBump i j) 1,
+    htranslate (coordinateBump i) 1, htranslate (coordinateBump j) 1, hone,
+    triangleCubic_pairBump_eq_zero C i j hij,
+    triangleCubic_coordinateBump_eq_zero C i,
+    triangleCubic_coordinateBump_eq_zero C j]
+  ring
 
 /-- Nonzero proportionality of the two cubic shadows forces all pair moments
 of a zero-diagonal matrix to vanish. -/
@@ -146,34 +301,32 @@ private theorem matrix_eq_diagonal_of_offDiagonal_zero
     simp
   · simp [Matrix.diagonal_apply, hij, hoff i j hij]
 
-/-- A symmetric matrix with nonzero off-diagonal entries and diagonal square
-has scalar square.  The equality of diagonal entries follows from
+/-- A matrix with nonzero off-diagonal entries and diagonal square has scalar
+square.  The equality of diagonal entries follows from
 `C * C² = C² * C`. -/
 theorem exists_scalar_mul_self_of_offDiagonal_zero
     (C : Matrix (Fin 6) (Fin 6) R)
     (hedge : ∀ i j, i ≠ j → C i j ≠ 0)
     (hoff : ∀ i j, i ≠ j → (C * C) i j = 0) :
     ∃ lambda : R, C * C = lambda • (1 : Matrix (Fin 6) (Fin 6) R) := by
-  let D := C * C
-  have hdiagD : D = Matrix.diagonal (fun i => D i i) :=
-    matrix_eq_diagonal_of_offDiagonal_zero D hoff
-  have hcomm : C * D = D * C := by
-    simp only [D, Matrix.mul_assoc]
-  have hdiag_eq : ∀ i, D i i = D 0 0 := by
+  have hdiagD : C * C = Matrix.diagonal (fun i => (C * C) i i) :=
+    matrix_eq_diagonal_of_offDiagonal_zero (C * C) hoff
+  have hcomm : C * (C * C) = (C * C) * C := by
+    simp only [Matrix.mul_assoc]
+  have hdiag_eq : ∀ i, (C * C) i i = (C * C) 0 0 := by
     intro i
     by_cases hi : i = 0
-    · simpa [hi]
+    · rw [hi]
     · have hentry := congrArg (fun M : Matrix (Fin 6) (Fin 6) R => M 0 i) hcomm
       rw [hdiagD] at hentry
-      simp [Matrix.mul_apply] at hentry
-      exact (mul_left_cancel₀ (hedge 0 i (Ne.symm hi)) hentry).symm
-  refine ⟨D 0 0, ?_⟩
-  rw [hdiagD]
+      simp only [Matrix.mul_diagonal, Matrix.diagonal_mul] at hentry
+      exact mul_left_cancel₀ (hedge 0 i (Ne.symm hi)) (by rw [hentry]; ring)
+  refine ⟨(C * C) 0 0, ?_⟩
   ext i j
   by_cases hij : i = j
   · subst j
-    simp [hdiag_eq]
-  · simp [Matrix.diagonal_apply, hij]
+    simpa [Matrix.one_apply_eq] using hdiag_eq i
+  · simp [Matrix.one_apply, hij, hoff i j hij]
 
 /-- For a symmetric zero-diagonal order-six matrix with nonzero edges,
 nonzero proportionality between the commutator-Pfaffian cubic and the
@@ -364,13 +517,46 @@ def NegativeOrientation012 (C : Matrix (Fin 6) (Fin 6) ℤ) : Prop :=
 private def normalizedCode (n : ℕ) : Fin 10 → Bool :=
   fun k => n.testBit k
 
+private def PositiveSixTestCode (bits : Fin 10 → Bool) : Prop :=
+  bits = normalizedCode 234 ∨ bits = normalizedCode 316 ∨
+    bits = normalizedCode 453 ∨ bits = normalizedCode 598 ∨
+    bits = normalizedCode 665 ∨ bits = normalizedCode 803
+
+private def NegativeSixTestCode (bits : Fin 10 → Bool) : Prop :=
+  bits = normalizedCode 220 ∨ bits = normalizedCode 358 ∨
+    bits = normalizedCode 425 ∨ bits = normalizedCode 570 ∨
+    bits = normalizedCode 707 ∨ bits = normalizedCode 789
+
+/-- Exhaustive evaluation of the 1,024 normalized Boolean signings.  Under
+the five balance equations it returns one of the two oriented six-code
+fibres, including the corresponding coefficient orientation. -/
+private theorem six_test_code_classification (bits : Fin 10 → Bool)
+    (hbalance : FirstRowBalanced (normalizedSignMatrix bits)) :
+    (PositiveOrientation012 (normalizedSignMatrix bits) ∧
+        PositiveSixTestCode bits) ∨
+      (NegativeOrientation012 (normalizedSignMatrix bits) ∧
+        NegativeSixTestCode bits) := by
+  native_decide
+
+private theorem orientation012_disjoint (bits : Fin 10 → Bool) :
+    ¬(PositiveOrientation012 (normalizedSignMatrix bits) ∧
+      NegativeOrientation012 (normalizedSignMatrix bits)) := by
+  rintro ⟨hpos, hneg⟩
+  have hsign : triangleSign (normalizedSignMatrix bits) 0 1 2 ≠ 0 := by
+    simp [triangleSign, normalizedSignMatrix, boolSign]
+  unfold PositiveOrientation012 NegativeOrientation012 at hpos hneg
+  apply hsign
+  omega
+
 private theorem positive_six_test_codes (bits : Fin 10 → Bool)
     (hbalance : FirstRowBalanced (normalizedSignMatrix bits))
     (horientation : PositiveOrientation012 (normalizedSignMatrix bits)) :
     bits = normalizedCode 234 ∨ bits = normalizedCode 316 ∨
     bits = normalizedCode 453 ∨ bits = normalizedCode 598 ∨
     bits = normalizedCode 665 ∨ bits = normalizedCode 803 := by
-  native_decide
+  rcases six_test_code_classification bits hbalance with hpos | hneg
+  · exact hpos.2
+  · exact False.elim (orientation012_disjoint bits ⟨horientation, hneg.1⟩)
 
 private theorem negative_six_test_codes (bits : Fin 10 → Bool)
     (hbalance : FirstRowBalanced (normalizedSignMatrix bits))
@@ -378,13 +564,17 @@ private theorem negative_six_test_codes (bits : Fin 10 → Bool)
     bits = normalizedCode 220 ∨ bits = normalizedCode 358 ∨
     bits = normalizedCode 425 ∨ bits = normalizedCode 570 ∨
     bits = normalizedCode 707 ∨ bits = normalizedCode 789 := by
-  native_decide
+  rcases six_test_code_classification bits hbalance with hpos | hneg
+  · exact False.elim (orientation012_disjoint bits ⟨hpos.1, horientation⟩)
+  · exact hneg.2
 
 private theorem orientation012_of_firstRowBalanced (bits : Fin 10 → Bool)
     (hbalance : FirstRowBalanced (normalizedSignMatrix bits)) :
     PositiveOrientation012 (normalizedSignMatrix bits) ∨
       NegativeOrientation012 (normalizedSignMatrix bits) := by
-  native_decide
+  rcases six_test_code_classification bits hbalance with hpos | hneg
+  · exact Or.inl hpos.1
+  · exact Or.inr hneg.1
 
 /-- Five root-pair balances and the `012` coefficient with positive Hodge
 orientation force the complete cubic identity.  Finite evaluation selects the
@@ -447,9 +637,8 @@ theorem exists_nonzero_cubicsProportional_iff_conferenceSquare
     · exact ⟨4, by norm_num, cubicsProportional_four_of_sixTests bits hbalance hpos⟩
     · exact ⟨-4, by norm_num, cubicsProportional_neg_four_of_sixTests bits hbalance hneg⟩
 
-/-- The normalized classification is unchanged after multiplying every edge
-by one nonzero scalar.  This is the scalar-sign form of the recognition
-theorem. -/
+/-- The normalized conference-square characterization is unchanged after
+multiplying every edge by one nonzero integral scalar. -/
 theorem exists_nonzero_cubicsProportional_smul_iff_conferenceSquare
     (bits : Fin 10 → Bool) (s : ℤ) (hs : s ≠ 0) :
     (∃ mu : ℤ, mu ≠ 0 ∧

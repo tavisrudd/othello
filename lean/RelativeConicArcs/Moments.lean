@@ -24,19 +24,23 @@ namespace ArcPair
 variable [DecidableEq P]
 
 omit [DecidableEq P] in
+/-- The two points of an endpoint pair lie in the arc. -/
 theorem subset {A : Finset P} (e : ArcPair A) : e.1 ⊆ A :=
   (Finset.mem_powersetCard.mp e.2).1
 
 omit [DecidableEq P] in
+/-- An endpoint pair has exactly two points. -/
 theorem card {A : Finset P} (e : ArcPair A) : e.1.card = 2 :=
   (Finset.mem_powersetCard.mp e.2).2
 
+/-- An endpoint pair is a set of two distinct named points. -/
 theorem exists_eq_pair {A : Finset P} (e : ArcPair A) :
     ∃ a b : P, a ≠ b ∧ e.1 = {a, b} :=
   Finset.card_eq_two.mp e.card
 
 variable [Configuration.HasLines P L]
 
+/-- In a plane with the line axiom, an endpoint pair lies on exactly one line. -/
 theorem existsUnique_line {A : Finset P} (e : ArcPair A) :
     ∃! l : L, ∀ p ∈ e.1, p ∈ l := by
   obtain ⟨a, b, hab, he⟩ := e.exists_eq_pair
@@ -56,14 +60,18 @@ theorem existsUnique_line {A : Finset P} (e : ArcPair A) :
 noncomputable def line {A : Finset P} (e : ArcPair A) : L :=
   Classical.choose e.existsUnique_line
 
+/-- Both points of an endpoint pair lie on its joining line. -/
 theorem mem_line {A : Finset P} (e : ArcPair A) {p : P} (hp : p ∈ e.1) :
     p ∈ e.line (L := L) :=
   (Classical.choose_spec e.existsUnique_line).1 p hp
 
+/-- Any line carrying both points of an endpoint pair is its joining line. -/
 theorem line_unique {A : Finset P} (e : ArcPair A) {l : L}
     (hl : ∀ p ∈ e.1, p ∈ l) : e.line (L := L) = l :=
   ((Classical.choose_spec e.existsUnique_line).2 l hl).symm
 
+/-- On an arc, distinct endpoint pairs have distinct joining lines: a common line would carry
+three distinct arc points.  This makes the secant count a count of endpoint pairs. -/
 theorem line_injective {A : Finset P} (hA : Arc (L := L) A) :
     Function.Injective (line (L := L) : ArcPair A → L) := by
   intro e f hef
@@ -94,6 +102,8 @@ theorem line_injective {A : Finset P} (hA : Arc (L := L) A) :
     rw [hef]
     exact f.mem_line hp
 
+/-- On an arc, an arc point lying on the joining line of an endpoint pair is one of that pair's
+two points. -/
 theorem mem_of_mem_arc_of_mem_line {A : Finset P} (hA : Arc (L := L) A)
     (e : ArcPair A) {p : P} (hpA : p ∈ A) (hpl : p ∈ e.line (L := L)) :
     p ∈ e.1 := by
@@ -146,6 +156,7 @@ theorem secants_eq_image_pairLine {A : Finset P} :
       e.mem_line (by simp [he]), e.mem_line (by simp [he])⟩
 
 omit [Fintype P] in
+/-- An arc has exactly one secant per endpoint pair, so it has `binom(|A|,2)` secants. -/
 theorem card_secants {A : Finset P} (hA : Arc (L := L) A) :
     (secants (L := L) A).card = Nat.choose A.card 2 := by
   classical
@@ -156,6 +167,7 @@ theorem card_secants {A : Finset P} (hA : Arc (L := L) A) :
   rw [Fintype.card_coe, Finset.card_powersetCard]
 
 omit [Fintype P] [DecidableEq P] in
+/-- The number of unordered endpoint pairs of a finite point set is `binom(|A|,2)`. -/
 theorem card_arcPair (A : Finset P) :
     Fintype.card (ArcPair A) = Nat.choose A.card 2 := by
   change Fintype.card ↥(A.powersetCard 2) = Nat.choose A.card 2
@@ -167,6 +179,8 @@ noncomputable def pairsThrough (A : Finset P) (x : P) : Finset (ArcPair A) := by
   exact Finset.univ.filter fun e => x ∈ e.line (L := L)
 
 omit [Fintype P] [Fintype L] [DecidableEq L] in
+/-- An endpoint pair lies in the fiber over a point exactly when that point is on its joining
+line. -/
 @[simp] theorem mem_pairsThrough {A : Finset P} {x : P} {e : ArcPair A} :
     e ∈ pairsThrough (L := L) A x ↔ x ∈ e.line (L := L) := by
   classical
@@ -182,6 +196,9 @@ theorem pointIndex_eq_card_pairsThrough {A : Finset P} (hA : Arc (L := L) A) (x 
   rfl
 
 omit [Fintype P] [Fintype L] [DecidableEq L] in
+/-- For a point outside an arc, distinct endpoint pairs through it are disjoint as point sets:
+two secants meeting outside the arc share no arc point.  This is what makes the secant index at
+an external point at most half the arc size. -/
 theorem pairsThrough_pairwiseDisjoint {A : Finset P} (hA : Arc (L := L) A)
     {x : P} (hx : x ∉ A) :
     ((pairsThrough (L := L) A x : Finset (ArcPair A)) : Set (ArcPair A)).PairwiseDisjoint
@@ -232,12 +249,14 @@ noncomputable def pointsOnLine (l : L) : Finset P := by
   exact Finset.univ.filter fun p => p ∈ l
 
 omit [Fintype L] [DecidableEq P] [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Membership in the point set of a line is incidence with that line. -/
 @[simp] theorem mem_pointsOnLine {l : L} {p : P} :
     p ∈ pointsOnLine (P := P) l ↔ p ∈ l := by
   classical
   simp [pointsOnLine]
 
 omit [DecidableEq P] [DecidableEq L] in
+/-- Every line of a projective plane of order `q` carries exactly `q+1` points. -/
 theorem card_pointsOnLine (l : L) :
     (pointsOnLine (P := P) l).card = PlaneOrder P L + 1 := by
   classical
@@ -246,6 +265,7 @@ theorem card_pointsOnLine (l : L) :
   exact card_points_on_line l
 
 omit [Fintype L] [DecidableEq L] in
+/-- A secant of an arc meets the arc in exactly its two endpoints. -/
 theorem pointsOnPairLine_inter_arc {A : Finset P} (hA : Arc (L := L) A)
     (e : ArcPair A) :
     pointsOnLine (P := P) (e.line (L := L)) ∩ A = e.1 := by
@@ -258,6 +278,8 @@ theorem pointsOnPairLine_inter_arc {A : Finset P} (hA : Arc (L := L) A)
     exact ⟨e.mem_line hpe, e.subset hpe⟩
 
 omit [DecidableEq L] in
+/-- A secant of an arc carries exactly `q-1` points outside the arc: `q+1` points in all, minus
+its two endpoints. -/
 theorem card_external_pointsOnPairLine {A : Finset P} (hA : Arc (L := L) A)
     (e : ArcPair A) :
     (pointsOnLine (P := P) (e.line (L := L)) \ A).card = PlaneOrder P L - 1 := by
@@ -267,6 +289,8 @@ theorem card_external_pointsOnPairLine {A : Finset P} (hA : Arc (L := L) A)
   omega
 
 omit [Fintype P] [Fintype L] [DecidableEq L] in
+/-- Indicator form of the secant-fiber count, used to exchange the order of summation in the
+moment equations. -/
 theorem card_pairsThrough_eq_sum_indicator {A : Finset P} (x : P) :
     (pairsThrough (L := L) A x).card =
       ∑ e : ArcPair A, if x ∈ e.line (L := L) then 1 else 0 := by
@@ -275,6 +299,8 @@ theorem card_pairsThrough_eq_sum_indicator {A : Finset P} (x : P) :
   rw [Finset.sum_ite, Finset.sum_const_zero, add_zero, Finset.card_eq_sum_ones]
 
 omit [Fintype L] [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Indicator form of the count of external points on a line, the other half of the exchange of
+summation in the moment equations. -/
 theorem card_external_pointsOnLine_eq_sum_indicator (A : Finset P) (l : L) :
     (pointsOnLine (P := P) l \ A).card =
       ∑ x ∈ (Finset.univ \ A), if x ∈ l then 1 else 0 := by
@@ -320,12 +346,15 @@ noncomputable def disjointPartners (A : Finset P) (e : ArcPair A) : Finset (ArcP
   exact Finset.univ.filter fun f => Disjoint e.1 f.1
 
 omit [Fintype P] in
+/-- Membership in the set of disjoint partners is disjointness of the two endpoint pairs. -/
 @[simp] theorem mem_disjointPartners {A : Finset P} {e f : ArcPair A} :
     f ∈ disjointPartners A e ↔ Disjoint e.1 f.1 := by
   classical
   simp [disjointPartners]
 
 omit [Fintype P] in
+/-- The two-subsets of the arc disjoint from a fixed endpoint pair are exactly the two-subsets of
+the arc with that pair removed. -/
 theorem powersetCard_filter_disjoint (A : Finset P) (e : ArcPair A) :
     (A.powersetCard 2).filter (Disjoint e.1) = (A \ e.1).powersetCard 2 := by
   ext f
@@ -343,6 +372,7 @@ theorem powersetCard_filter_disjoint (A : Finset P) (e : ArcPair A) :
     exact (Finset.mem_sdiff.mp (hfsub hpf)).2 hpe
 
 omit [Fintype P] in
+/-- A fixed endpoint pair has exactly `binom(|A|-2,2)` disjoint partners. -/
 theorem card_disjointPartners (A : Finset P) (e : ArcPair A) :
     (disjointPartners A e).card = Nat.choose (A.card - 2) 2 := by
   classical
@@ -369,12 +399,14 @@ noncomputable def disjointOrderedPairs (A : Finset P) : Finset (ArcPair A × Arc
     (disjointPartners A e).image fun f => (e, f)
 
 omit [Fintype P] in
+/-- Membership in the set of ordered disjoint pairs is disjointness of the two endpoint pairs. -/
 @[simp] theorem mem_disjointOrderedPairs {A : Finset P} {e f : ArcPair A} :
     (e, f) ∈ disjointOrderedPairs A ↔ Disjoint e.1 f.1 := by
   classical
   simp [disjointOrderedPairs]
 
 omit [Fintype P] in
+/-- There are `binom(|A|,2)·binom(|A|-2,2)` ordered pairs of disjoint endpoint pairs. -/
 theorem card_disjointOrderedPairs (A : Finset P) :
     (disjointOrderedPairs A).card =
       Nat.choose A.card 2 * Nat.choose (A.card - 2) 2 := by
@@ -413,6 +445,8 @@ noncomputable def orderedPairsThrough (A : Finset P) (x : P) :
   exact (pairsThrough (L := L) A x).offDiag
 
 omit [Fintype P] [Fintype L] [DecidableEq L] in
+/-- Membership in the fiber of ordered secant pairs over a point: both joining lines pass through
+the point and the two endpoint pairs are distinct. -/
 @[simp] theorem mem_orderedPairsThrough {A : Finset P} {x : P} {e f : ArcPair A} :
     (e, f) ∈ orderedPairsThrough (L := L) A x ↔
       x ∈ e.line (L := L) ∧ x ∈ f.line (L := L) ∧ e ≠ f := by
@@ -421,6 +455,8 @@ omit [Fintype P] [Fintype L] [DecidableEq L] in
   simp only [mem_pairsThrough]
 
 omit [Fintype P] in
+/-- The fiber of ordered secant pairs over a point has `r(r-1)` elements, where `r` is the secant
+index at that point. -/
 theorem card_orderedPairsThrough {A : Finset P} (hA : Arc (L := L) A) (x : P) :
     (orderedPairsThrough (L := L) A x).card =
       pointIndex (L := L) A x * (pointIndex (L := L) A x - 1) := by
@@ -434,6 +470,8 @@ noncomputable def externalOrderedPairs (A : Finset P) : Finset (ArcPair A × Arc
   exact (Finset.univ \ A).biUnion fun x => orderedPairsThrough (L := L) A x
 
 omit [Fintype L] [DecidableEq L] in
+/-- The fibers of ordered secant pairs over distinct external points are disjoint: two distinct
+secants meet in exactly one point. -/
 theorem orderedPairsThrough_pairwiseDisjoint {A : Finset P} (hA : Arc (L := L) A) :
     (((Finset.univ \ A : Finset P) : Set P).PairwiseDisjoint
       fun x => orderedPairsThrough (L := L) A x) := by
@@ -450,6 +488,9 @@ theorem orderedPairsThrough_pairwiseDisjoint {A : Finset P} (hA : Arc (L := L) A
     hxmem.1 hymem.1 hxmem.2.1 hymem.2.1).resolve_right hlines)
 
 omit [Fintype L] [DecidableEq L] in
+/-- Ordered pairs of distinct secants meeting outside the arc are exactly the ordered pairs of
+disjoint endpoint pairs.  This identification is the combinatorial content of the second moment
+equation. -/
 theorem externalOrderedPairs_eq_disjointOrderedPairs {A : Finset P}
     (hA : Arc (L := L) A) :
     externalOrderedPairs (L := L) A = disjointOrderedPairs A := by
@@ -485,6 +526,8 @@ theorem externalOrderedPairs_eq_disjointOrderedPairs {A : Finset P}
     refine ⟨x, Finset.mem_sdiff.mpr ⟨Finset.mem_univ _, hxA⟩, ?_⟩
     exact mem_orderedPairsThrough.mpr ⟨hxlines.1, hxlines.2, hef⟩
 
+/-- Counting the external ordered secant pairs fiberwise gives the sum of `r(r-1)` over the points
+outside the arc. -/
 theorem card_externalOrderedPairs {A : Finset P} (hA : Arc (L := L) A) :
     (externalOrderedPairs (L := L) A).card =
       ∑ x ∈ (Finset.univ \ A),
@@ -495,11 +538,15 @@ theorem card_externalOrderedPairs {A : Finset P} (hA : Arc (L := L) A) :
   intro x _hx
   exact card_orderedPairsThrough hA x
 
+/-- Falling-factorial form of the second binomial coefficient, in truncated natural subtraction. -/
 theorem two_mul_choose_two (n : ℕ) :
     2 * Nat.choose n 2 = n * (n - 1) := by
   have h := Nat.choose_succ_right_eq n 1
   simpa [Nat.mul_comm] using h
 
+/-- The product counting ordered disjoint two-subsets equals six times the fourth binomial
+coefficient: an ordered pair of disjoint two-subsets is a four-subset with one of its three
+splittings, taken in either order. -/
 theorem choose_two_mul_choose_sub_two (n : ℕ) :
     Nat.choose n 2 * Nat.choose (n - 2) 2 = 6 * Nat.choose n 4 := by
   have h := Nat.choose_mul (n := n) (k := 4) (s := 2) (by omega)

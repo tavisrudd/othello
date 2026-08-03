@@ -52,6 +52,8 @@ noncomputable def intermediateHoles (A H : Finset P) : Finset P := by
   exact H.filter fun y =>
     0 < pointIndex (L := L) A y ∧ pointIndex (L := L) A y < A.card / 2
 
+/-- For an arc disjoint from the prescribed holes, the complement of the arc is partitioned in the
+sense of a union into the prescribed holes and the required locus. -/
 theorem external_eq_holes_union_required {A H : Finset P} (hdisj : Disjoint A H) :
     Finset.univ \ A = H ∪ requiredLocus A H := by
   classical
@@ -69,6 +71,8 @@ theorem external_eq_holes_union_required {A H : Finset P} (hdisj : Disjoint A H)
     · exact fun hxA => (Finset.disjoint_left.mp hdisj) hxA hxH
     · exact fun hxA => hxnotUnion (Or.inl hxA)
 
+/-- The prescribed holes and the required locus are disjoint, so the union above is a partition
+of the complement of the arc. -/
 theorem holes_disjoint_required (A H : Finset P) :
     Disjoint H (requiredLocus A H) := by
   classical
@@ -77,6 +81,8 @@ theorem holes_disjoint_required (A H : Finset P) :
   exact (Finset.mem_sdiff.mp hxrequired).2 (Finset.mem_union_right A hxH)
 
 omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Summing the secant index over the required locus is the same as summing it over the covered
+part alone, since uncovered points contribute index zero. -/
 theorem sum_required_eq_sum_coveredRequired (A H : Finset P) :
     (∑ x ∈ requiredLocus A H, pointIndex (L := L) A x) =
       ∑ x ∈ coveredRequired (L := L) A H, pointIndex (L := L) A x := by
@@ -93,6 +99,8 @@ theorem sum_required_eq_sum_coveredRequired (A H : Finset P) :
   omega
 
 omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Summing the number of secant pairs at a point over the required locus is the same as summing
+it over the covered part alone, since uncovered points have index zero and hence no pair. -/
 theorem sum_choose_required_eq_sum_choose_coveredRequired (A H : Finset P) :
     (∑ x ∈ requiredLocus A H,
         Nat.choose (pointIndex (L := L) A x) 2) =
@@ -253,6 +261,9 @@ private theorem hole_remainder_nonneg_at {A H : Finset P} (hA : Arc (L := L) A)
   have hle := pointIndex_le_half_card (L := L) hA hyA
   exact mul_nonneg (by positivity) (by omega)
 
+/-- The required-locus side of the defect identity is nonnegative for every arc: at each covered
+required point the index lies between one and half the arc size, so each summand is a product of
+two nonnegative integers. -/
 theorem requiredRemainder_nonneg {A H : Finset P} (hA : Arc (L := L) A) :
     0 ≤ requiredRemainder (L := L) A H := by
   classical
@@ -260,6 +271,8 @@ theorem requiredRemainder_nonneg {A H : Finset P} (hA : Arc (L := L) A) :
   exact Finset.sum_nonneg fun x hx => required_remainder_nonneg_at (L := L) hA hx
 
 omit [Fintype P] in
+/-- The prescribed-hole side of the defect identity is nonnegative for every arc disjoint from the
+holes: at each hole the index lies between zero and half the arc size. -/
 theorem holeRemainder_nonneg {A H : Finset P} (hA : Arc (L := L) A)
     (hdisj : Disjoint A H) : 0 ≤ holeRemainder (L := L) A H := by
   classical
@@ -353,6 +366,7 @@ theorem coverage_bound {A H : Finset P} (hA : Arc (L := L) A)
   omega
 
 omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- The covered and uncovered parts of the required locus exhaust it. -/
 theorem covered_union_uncovered (A H : Finset P) :
     coveredRequired (L := L) A H ∪ uncovered (L := L) A H = requiredLocus A H := by
   classical
@@ -361,6 +375,7 @@ theorem covered_union_uncovered (A H : Finset P) :
   tauto
 
 omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- The covered and uncovered parts of the required locus are disjoint. -/
 theorem covered_disjoint_uncovered (A H : Finset P) :
     Disjoint (coveredRequired (L := L) A H) (uncovered (L := L) A H) := by
   classical
@@ -369,6 +384,7 @@ theorem covered_disjoint_uncovered (A H : Finset P) :
   exact (Finset.mem_filter.mp hxu).2 (Finset.mem_filter.mp hxc).2
 
 omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- The size of the required locus is the sum of the sizes of its covered and uncovered parts. -/
 theorem card_requiredLocus (A H : Finset P) :
     (requiredLocus A H).card =
       (coveredRequired (L := L) A H).card + (uncovered (L := L) A H).card := by

@@ -54,6 +54,8 @@ theorem completeOutside_bound_general {A H : Finset P}
 #print axioms completeOutside_bound_general
 
 omit [DecidableEq L] in
+/-- When the prescribed hole set has the conic cardinality `q+1` and is disjoint from the arc, the
+required locus has exactly `q² - |A|` points. -/
 theorem card_requiredLocus_of_card_holes {A H : Finset P} (hdisj : Disjoint A H)
     (hH : H.card = PlaneOrder P L + 1) :
     (requiredLocus A H).card = PlaneOrder P L ^ 2 - A.card := by
@@ -109,6 +111,8 @@ theorem naive_capacity_bound_of_card_holes {A H : Finset P}
   rw [card_requiredLocus_of_card_holes hcomplete.2.1 hH] at hcard
   omega
 
+/-- An arc complete outside a hole set of cardinality `q+1` has at least three points.  Only the
+hole cardinality is used; no coordinate geometry enters. -/
 theorem completeOutside_card_ge_three_of_card_holes {A H : Finset P}
     (hcomplete : CompleteOutside (L := L) A H)
     (hH : H.card = PlaneOrder P L + 1) : 3 ≤ A.card := by
@@ -147,6 +151,8 @@ noncomputable def correctedCapacityQ (q k : ℕ) : ℚ :=
   (Nat.choose k 2 : ℚ) * (q - 1 : ℕ) -
     6 / (k / 2 : ℕ) * (Nat.choose k 4 : ℚ)
 
+/-- The falling-factorial form of the fourth binomial coefficient, in the truncated-subtraction
+arithmetic of the natural numbers. -/
 theorem twentyFour_mul_choose_four (k : ℕ) :
     24 * Nat.choose k 4 = k * (k - 1) * (k - 2) * (k - 3) := by
   have h := Nat.descFactorial_eq_factorial_mul_choose k 4
@@ -208,6 +214,7 @@ theorem correctedCapacityQ_odd (q n : ℕ) (hn : 1 ≤ n) :
   field_simp [show (n : ℚ) ≠ 0 by exact_mod_cast (by omega : n ≠ 0)]
   ring
 
+/-- The second-moment-corrected admissibility condition implies the first-moment one. -/
 theorem l2Admissible_l1Admissible {q k : ℕ} (h : L2Admissible q k) :
     L1Admissible q k := by
   rcases h with ⟨hk, hbound⟩
@@ -224,6 +231,8 @@ variable {P L : Type*} [Membership P L]
   [Fintype P] [Fintype L] [DecidableEq P]
 
 omit [Fintype P] [DecidableEq P] in
+/-- A point is covered exactly when it is collinear with some pair of distinct points of the set.
+This is the collinearity form of coverage, with no reference to the secant line itself. -/
 theorem covered_iff_collinear_pair {A : Finset P} {x : P} :
     Covered (L := L) A x ↔
       ∃ a ∈ A, ∃ b ∈ A, a ≠ b ∧ Collinear (L := L) x a b := by
@@ -295,9 +304,14 @@ end Transport
 
 variable {K : Type*} [Field K]
 
+/-- The two-dimensional coordinate space whose projectivization is the parameter line of the
+conic. -/
 abbrev LineSpace (K : Type*) := ProjectiveCap.Sym2Bridge.Line K
+/-- The three-dimensional coordinate space whose projectivization is the ambient plane. -/
 abbrev PlaneSpace (K : Type*) := ProjectiveCap.Sym2Bridge.Plane K
+/-- A point of the projective parameter line of the conic. -/
 abbrev LinePoint (K : Type*) [Field K] := Projectivization K (LineSpace K)
+/-- A point of the ambient projective plane `PG(2,K)`. -/
 abbrev Point (K : Type*) [Field K] := ProjectiveBridge.Point K
 
 /-- The standard conic `XZ = Y²`, parametrized by the projective line. -/
@@ -305,6 +319,8 @@ noncomputable def standardConic [Fintype K] [DecidableEq K] : Finset (Point K) :
   letI : Fintype (LinePoint K) := Fintype.ofFinite (LinePoint K)
   exact Finset.univ.map ProjectiveCap.Sym2Bridge.veronesePointEmb
 
+/-- A plane point lies on the standard conic exactly when it is the Veronese image of a point of
+the projective parameter line. -/
 @[simp] theorem mem_standardConic [Fintype K] [DecidableEq K] {p : Point K} :
     p ∈ standardConic (K := K) ↔
       ∃ t : LinePoint K, ProjectiveCap.Sym2Bridge.veronesePoint t = p := by
@@ -312,6 +328,8 @@ noncomputable def standardConic [Fintype K] [DecidableEq K] : Finset (Point K) :
   letI : Fintype (LinePoint K) := Fintype.ofFinite (LinePoint K)
   simp [standardConic]
 
+/-- The standard conic over a finite field of order `q` has exactly `q+1` points, one for each
+point of the projective parameter line. -/
 theorem standardConic_card [Fintype K] [DecidableEq K] :
     (standardConic (K := K)).card = Fintype.card K + 1 := by
   classical
@@ -326,6 +344,7 @@ noncomputable def rhoC [Fintype K] [DecidableEq K] : ℕ := by
   letI : DecidableEq (Point K) := Classical.decEq (Point K)
   exact rho (L := Point K) (standardConic (K := K))
 
+/-- Every point of the Veronese-parametrized standard conic satisfies the equation `XZ = Y²`. -/
 theorem standardConic_subset_zeroLocus [Fintype K] [DecidableEq K] :
     ∀ p ∈ standardConic (K := K), ProjectiveCap.Sym2Bridge.OnConic p := by
   intro p hp
@@ -403,6 +422,8 @@ noncomputable def points (C : NonsingularConic (K := K)) : Finset (Point K) :=
   (standardConic (K := K)).map
     (ProjectiveCap.Projective.mapEquiv C.coordinateChange).toEmbedding
 
+/-- Every nonsingular conic over a finite field of order `q` has exactly `q+1` points, since a
+projective coordinate change is a bijection of the plane. -/
 @[simp] theorem card_points (C : NonsingularConic (K := K)) :
     C.points.card = Fintype.card K + 1 := by
   rw [points, Finset.card_map, standardConic_card]
@@ -448,10 +469,12 @@ theorem rho_points_eq_standardConic (C : NonsingularConic (K := K)) :
     (ProjectiveCap.Projective.mapEquiv C.coordinateChange)
     C.collinear_map_coordinateChange (standardConic (K := K))
 
+/-- Any two nonsingular conics give the same relative-completeness parameter. -/
 theorem rho_points_eq (C D : NonsingularConic (K := K)) :
     rho (L := Point K) C.points = rho (L := Point K) D.points :=
   C.rho_points_eq_standardConic.trans D.rho_points_eq_standardConic.symm
 
+/-- The relative-completeness parameter of any nonsingular conic is the standard-conic value. -/
 theorem rho_points_eq_rhoC (C : NonsingularConic (K := K)) :
     rho (L := Point K) C.points = rhoC (K := K) := by
   rw [rhoC]
@@ -484,6 +507,7 @@ theorem corrected_capacity_bound (C : NonsingularConic (K := K)) {A : Finset (Po
   rw [ProjectiveBridge.planeOrder_eq_card] at h
   exact h
 
+/-- An arc complete outside the points of a nonsingular conic has at least three points. -/
 theorem completeOutside_card_ge_three (C : NonsingularConic (K := K))
     {A : Finset (Point K)} (hcomplete : CompleteOutside (L := Point K) A C.points) :
     3 ≤ A.card := by
@@ -493,6 +517,8 @@ theorem completeOutside_card_ge_three (C : NonsingularConic (K := K))
   exact completeOutside_card_ge_three_of_card_holes (P := Point K) (L := Point K)
     hcomplete hC
 
+/-- The size of an arc complete outside a nonsingular conic satisfies the second-moment-corrected
+admissibility condition at the field order. -/
 theorem l2Admissible_card (C : NonsingularConic (K := K)) {A : Finset (Point K)}
     (hcomplete : CompleteOutside (L := Point K) A C.points) :
     L2Admissible (Fintype.card K) A.card :=

@@ -41,7 +41,7 @@ LEAN_GATE_COMMANDS = [
         "RelativeConicArcs/Gates/ClebschPaperIIStructural.lean",
     ],
 ]
-LEAN_GATE_TERMINALS = 54
+LEAN_GATE_TERMINALS = 55
 ALLOWED_LEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 EXPECTED_EVIDENCE = {
     "matching-module": {
@@ -503,8 +503,19 @@ def lean_import_closure(repo_root: Path, entry: Path) -> dict[str, str]:
     }
 
 
+def metadata_success_line(statement_count: int, evidence_count: int) -> str:
+    """Render the metadata success line from the counts the runner actually observes."""
+    return (
+        f"metadata: {statement_count} statements, "
+        f"{evidence_count} evidence bundles: CHECK OK"
+    )
+
+
 def build_fingerprint(
-    repo_root: Path, paper_root: Path, manifest: dict[str, object]
+    repo_root: Path,
+    paper_root: Path,
+    manifest: dict[str, object],
+    identity: dict[str, object],
 ) -> dict[str, object]:
     bundle_fingerprints = {}
     for name, item in manifest["evidence"].items():
@@ -596,7 +607,10 @@ def build_fingerprint(
         ],
         "evidence": bundle_fingerprints,
         "expected_success": {
-            "metadata": "metadata: 28 statements, 14 evidence bundles: CHECK OK",
+            "metadata": metadata_success_line(
+                len({statement["label"] for statement in identity["statements"]}),
+                len(manifest["evidence"]),
+            ),
             "release": "clebsch factorization release: CHECK OK",
         },
     }
@@ -690,7 +704,7 @@ def main() -> int:
     )
     fingerprint_path = paper_root / FINGERPRINT
     if formal_available:
-        fingerprint = build_fingerprint(repo_root, paper_root, manifest)
+        fingerprint = build_fingerprint(repo_root, paper_root, manifest, identity)
         fingerprint_rendered = json.dumps(fingerprint, indent=2) + "\n"
         if args.update_fingerprint:
             fingerprint_path.write_text(fingerprint_rendered, encoding="utf-8")
@@ -762,10 +776,16 @@ def main() -> int:
             item.get("checksum_root", "."),
             artifact_base=repo_root if is_external else paper_root,
         )
-    print(
-        f"metadata: {len(statement_labels)} statements, "
-        f"{len(evidence)} evidence bundles: CHECK OK"
-    )
+    metadata_line = metadata_success_line(len(statement_labels), len(evidence))
+    expected_success = fingerprint.get("expected_success", {})
+    if not isinstance(expected_success, dict):
+        raise ValueError("evidence fingerprint has no expected-success block")
+    if expected_success.get("metadata") != metadata_line:
+        raise ValueError(
+            "evidence fingerprint pins a stale expected metadata line: "
+            f"{expected_success.get('metadata')!r} does not match {metadata_line!r}"
+        )
+    print(metadata_line)
 
     if args.metadata_only:
         return 0

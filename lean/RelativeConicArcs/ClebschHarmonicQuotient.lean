@@ -56,25 +56,32 @@ noncomputable def euler : MvPolynomial (Fin 3) R →ₗ[R] MvPolynomial (Fin 3) 
 
 variable {R}
 
+/-- Expansion of the conic Laplacian as a combination of iterated partial derivatives. -/
 @[simp] theorem lapl_apply (P : MvPolynomial (Fin 3) R) :
     lapl R P = (4 : R) • pderiv 0 (pderiv 2 P) - pderiv 1 (pderiv 1 P) := by
   simp [lapl]
 
+/-- Expansion of the Euler operator in the three coordinates. -/
 @[simp] theorem euler_apply (P : MvPolynomial (Fin 3) R) :
     euler R P = X 0 * pderiv 0 P + X 1 * pderiv 1 P + X 2 * pderiv 2 P := by
   simp [euler, Fin.sum_univ_three, LinearMap.mulLeft_apply]
 
+/-- Partial derivatives annihilate numeral constants, which enter through the scalars `4` and `6`
+in the commutator identity. -/
 @[simp] theorem pderiv_ofNat (i : Fin 3) (n : ℕ) [n.AtLeastTwo] :
     pderiv i (no_index (OfNat.ofNat n) : MvPolynomial (Fin 3) R) = 0 := by
   rw [show (OfNat.ofNat n : MvPolynomial (Fin 3) R) = C (OfNat.ofNat n) from
     (map_ofNat C n).symm, pderiv_C]
 
+/-- The partial derivative of the conic form `Q = X₀X₂ - X₁²` in the zeroth coordinate. -/
 @[simp] theorem pderiv_zero_conic : pderiv 0 (conic R) = X 2 := by
   simp [conic]
 
+/-- The partial derivative of the conic form `Q = X₀X₂ - X₁²` in the first coordinate. -/
 @[simp] theorem pderiv_one_conic : pderiv 1 (conic R) = -(2 * X 1) := by
   simp [conic]
 
+/-- The partial derivative of the conic form `Q = X₀X₂ - X₁²` in the second coordinate. -/
 @[simp] theorem pderiv_two_conic : pderiv 2 (conic R) = X 0 := by
   simp [conic]
 

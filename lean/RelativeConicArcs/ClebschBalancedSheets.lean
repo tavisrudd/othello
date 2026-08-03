@@ -74,6 +74,7 @@ def equalSheetSum : Submodule K (SheetPair q K) where
       _ = c * rightSum x := congrArg (c * ·) hx
       _ = rightSum (c • x) := by simp [rightSum, ← Finset.mul_sum]
 
+/-- Membership in the equal-sheet-sum hyperplane is the equality of the two coordinate sums. -/
 @[simp] theorem mem_equalSheetSum_iff (x : SheetPair q K) :
     x ∈ equalSheetSum ↔ leftSum x = rightSum x := Iff.rfl
 
@@ -569,6 +570,8 @@ def signedCubicTensor {n d : ℕ} (vectors : Fin n → Fin d → K)
     (epsilon : Fin n → K) : CubicTensor d K :=
   ∑ i, epsilon i • cubicFeature (vectors i)
 
+/-- Coordinates of the signed cubic tensor: the entry at `(i,j,k)` is the signed sum over the
+configuration of the product of the three named coordinates. -/
 @[simp] theorem signedCubicTensor_apply {n d : ℕ} (vectors : Fin n → Fin d → K)
     (epsilon : Fin n → K) (i j k : Fin d) :
     signedCubicTensor vectors epsilon i j k =

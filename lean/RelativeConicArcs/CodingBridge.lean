@@ -72,12 +72,16 @@ def syndromeLeaderSupportsOfWeight (v : ι → W) (s : W) (d : ℕ) : Finset (Fi
   (syndromeLeadersOfWeight (K := K) v s d).image hammingSupport
 
 omit [FiniteDimensional K W] in
+/-- Membership in the set of weight-`d` words mapping to a syndrome is exactly the conjunction of
+having weight `d` and having that syndrome. -/
 @[simp] theorem mem_syndromeLeadersOfWeight {v : ι → W} {s : W} {d : ℕ} {c : ι → K} :
     c ∈ syndromeLeadersOfWeight (K := K) v s d ↔
       hammingWeight c = d ∧ parityCheckMap (K := K) v c = s := by
   simp [syndromeLeadersOfWeight]
 
 omit [FiniteDimensional K W] in
+/-- A finite index set occurs as a weight-`d` leader support for a syndrome exactly when some word
+of weight `d` with that syndrome has it as its support. -/
 @[simp] theorem mem_syndromeLeaderSupportsOfWeight {v : ι → W} {s : W} {d : ℕ}
     {S : Finset ι} :
     S ∈ syndromeLeaderSupportsOfWeight (K := K) v s d ↔
@@ -88,22 +92,26 @@ omit [FiniteDimensional K W] in
 end FiniteSyndromes
 
 omit [DecidableEq ι] in
+/-- The Hamming support of a word consists of the indices with nonzero coordinate. -/
 @[simp] theorem mem_hammingSupport {c : ι → K} {i : ι} :
     i ∈ hammingSupport c ↔ c i ≠ 0 := by
   simp [hammingSupport]
 
 omit [FiniteDimensional K W] [DecidableEq ι] in
+/-- Scaling a word by a nonzero field element leaves its Hamming support unchanged. -/
 theorem hammingSupport_smul_of_ne_zero (a : K) (ha : a ≠ 0) (c : ι → K) :
     hammingSupport (a • c) = hammingSupport c := by
   ext i
   simp [mem_hammingSupport, ha]
 
 omit [FiniteDimensional K W] [DecidableEq ι] in
+/-- Scaling a word by a nonzero field element leaves its Hamming weight unchanged. -/
 theorem hammingWeight_smul_of_ne_zero (a : K) (ha : a ≠ 0) (c : ι → K) :
     hammingWeight (a • c) = hammingWeight c := by
   simp [hammingWeight, hammingSupport_smul_of_ne_zero a ha c]
 
 omit [DecidableEq K] [FiniteDimensional K W] [DecidableEq ι] in
+/-- The parity-check map is linear, so it commutes with scaling a word. -/
 theorem parityCheckMap_smul (v : ι → W) (a : K) (c : ι → K) :
     parityCheckMap (K := K) v (a • c) = a • parityCheckMap (K := K) v c := by
   exact (parityCheckMap (K := K) v).map_smul a c
@@ -151,6 +159,8 @@ theorem card_syndromeLeadersOfWeight_smul_of_ne_zero (v : ι → W)
 end FiniteSyndromeScaling
 
 omit [FiniteDimensional K W] [DecidableEq ι] in
+/-- A lower bound on the weight of the words realizing a syndrome is invariant under scaling the
+syndrome by a nonzero field element, so it depends only on the projective syndrome direction. -/
 theorem syndromeDistanceAtLeast_smul_of_ne_zero (v : ι → W)
     {s : W} {d : ℕ} (a : K) (ha : a ≠ 0)
     (h : SyndromeDistanceAtLeast (K := K) v s d) :
@@ -166,6 +176,8 @@ theorem syndromeDistanceAtLeast_smul_of_ne_zero (v : ι → W)
   exact h c' hc'
 
 omit [FiniteDimensional K W] [DecidableEq ι] in
+/-- The exact syndrome distance is invariant under scaling the syndrome by a nonzero field
+element, so it depends only on the projective syndrome direction. -/
 theorem syndromeDistanceExactly_smul_of_ne_zero (v : ι → W)
     {s : W} {d : ℕ} (a : K) (ha : a ≠ 0)
     (h : SyndromeDistanceExactly (K := K) v s d) :
@@ -177,6 +189,8 @@ theorem syndromeDistanceExactly_smul_of_ne_zero (v : ι → W)
   · exact (hammingWeight_smul_of_ne_zero a ha c).trans hweight
 
 omit [FiniteDimensional K W] [DecidableEq ι] in
+/-- A syndrome has at most one exact distance: any two values satisfying the exact-distance
+condition coincide. -/
 theorem SyndromeDistanceExactly.unique {v : ι → W} {s : W} {d e : ℕ}
     (hd : SyndromeDistanceExactly (K := K) v s d)
     (he : SyndromeDistanceExactly (K := K) v s e) : d = e := by
@@ -229,6 +243,8 @@ theorem syndromeDistanceAtLeast_two_of_one_avoidance (v : ι → W)
   exact havoid i (c i) (by simpa using hsumOne)
 
 omit [DecidableEq K] [FiniteDimensional K W] [DecidableEq ι] in
+/-- A word lies in the parity-check code exactly when its coordinates give a vanishing linear
+combination of the columns. -/
 theorem mem_parityCheckCode_iff (v : ι → W) (c : ι → K) :
     c ∈ parityCheckCode (K := K) v ↔ ∑ i, c i • v i = 0 := by
   simp [parityCheckCode, parityCheckMap, LinearMap.mem_ker,
@@ -608,18 +624,24 @@ structure CodimThreeMDSColumns (v : ι → W) : Prop where
     LinearIndependent K (fun i : S => v i.1)
 
 omit [DecidableEq K] [FiniteDimensional K W] [DecidableEq ι] in
+/-- A rank-three spanning column family gives a code of dimension `n - 3`, where `n` is the number
+of columns. -/
 theorem CodimThreeMDSColumns.code_finrank {v : ι → W}
     (h : CodimThreeMDSColumns (K := K) v) :
     Module.finrank K (parityCheckCode (K := K) v) = Fintype.card ι - 3 :=
   finrank_parityCheckCode (K := K) v h.ambient_finrank h.spans
 
 omit [FiniteDimensional K W] in
+/-- Independence of every subset of at most three columns forces every nonzero codeword to have
+weight at least four. -/
 theorem CodimThreeMDSColumns.minimumDistance_ge_four {v : ι → W}
     (h : CodimThreeMDSColumns (K := K) v) {c : ι → K}
     (hc : c ∈ parityCheckCode (K := K) v) (hc0 : c ≠ 0) :
     4 ≤ hammingWeight c :=
   hammingWeight_ge_four_of_small_independent (K := K) v h.small_independent hc hc0
 
+/-- With at least four columns the bound of the previous theorem is attained: some nonzero
+codeword has weight exactly four, so the minimum distance is exactly four. -/
 theorem CodimThreeMDSColumns.exists_minimumWeight_word {v : ι → W}
     (h : CodimThreeMDSColumns (K := K) v) (hcard : 4 ≤ Fintype.card ι) :
     ∃ c : ι → K, c ∈ parityCheckCode (K := K) v ∧ c ≠ 0 ∧ hammingWeight c = 4 :=
@@ -631,6 +653,8 @@ section ProjectivePlane
 
 variable {K ι : Type*} [Field K] [DecidableEq K] [Fintype ι] [DecidableEq ι]
 
+/-- A projective column: a point of `PG(2,K)`, used as one column of a rank-three parity-check
+matrix. -/
 abbrev PlanePoint (K : Type*) [Field K] := ProjectiveBridge.Point K
 
 noncomputable local instance : DecidableEq (PlanePoint K) := Classical.decEq _

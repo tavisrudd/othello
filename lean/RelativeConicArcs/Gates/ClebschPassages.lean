@@ -17,7 +17,7 @@ import RelativeConicArcs.ClebschPassagesCorrespondence
 
 This is the public replay surface for the algebraic mechanisms used in the
 current Clebsch paper.  The pinching, eigenspace, tight-frame, switching,
-aligned-design globalization, and scalar-factor arguments are symbolic.
+conditional aligned-design overlap argument, and scalar-factor arguments are symbolic.
 Native decision is confined to the displayed finite conference/reflection
 matrices, one finite-field nonsquare check, values of explicitly displayed
 finite vectors, and the 16,384 cases in the normalized two-cut signature

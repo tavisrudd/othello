@@ -36,7 +36,10 @@ identity, statement extractor, paper README and Makefile, this documentation,
 the guarded-Lean launcher and project-owned Lean import closure,
 the admitted checksum manifests, exact command vectors, verification runner, trust
 manifest, Python version, Lean toolchain, Mathlib revision, Nix lock, and
-expected success lines. The manuscript normalization replaces only its
+expected success lines. The expected metadata line is derived from the
+statement and evidence counts the runner observes, and the runner rejects a
+fingerprint whose recorded line disagrees with them, so a stale count cannot
+survive a metadata-only check. The manuscript normalization replaces only its
 displayed fingerprint digest; the identity normalization replaces only its
 derived full-source hash. This is the explicit review-source allowlist, not a
 hash of the entire repository or every transitive dependency. Refresh it only

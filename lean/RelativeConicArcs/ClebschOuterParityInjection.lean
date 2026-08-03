@@ -35,18 +35,27 @@ def fourWeightLift (β φPlus φMinus δ : X) : Carrier k →ₗ[k] X where
     simp only [Pi.smul_apply, smul_add, smul_smul, RingHom.id_apply]
     module
 
+/-- Value of the four-weight lift on the highest basis vector `A` of the first Frobenius carrier:
+the negated highest positive-root defect component. -/
 @[simp] theorem fourWeightLift_A (β φPlus φMinus δ : X) :
     fourWeightLift β φPlus φMinus δ (A : Carrier k) = -β := by
   simp [fourWeightLift, A]
 
+/-- Value of the four-weight lift on the upper middle basis vector `C`: the even weight component
+`φ₊` of the opposite-parity intertwiner. -/
 @[simp] theorem fourWeightLift_C (β φPlus φMinus δ : X) :
     fourWeightLift β φPlus φMinus δ (C : Carrier k) = φPlus := by
   simp [fourWeightLift, C]
 
+/-- Value of the four-weight lift on the lower middle basis vector `B`: the negated odd weight
+component `φ₋` of the opposite-parity intertwiner.  The sign is what makes evaluation on `C - B`
+return the sum `φ₊ + φ₋`. -/
 @[simp] theorem fourWeightLift_B (β φPlus φMinus δ : X) :
     fourWeightLift β φPlus φMinus δ (B : Carrier k) = -φMinus := by
   simp [fourWeightLift, B]
 
+/-- Value of the four-weight lift on the lowest basis vector `D` of the first Frobenius carrier:
+the lowest component obtained from the highest one by Weyl conjugation. -/
 @[simp] theorem fourWeightLift_D (β φPlus φMinus δ : X) :
     fourWeightLift β φPlus φMinus δ (D : Carrier k) = δ := by
   simp [fourWeightLift, D]

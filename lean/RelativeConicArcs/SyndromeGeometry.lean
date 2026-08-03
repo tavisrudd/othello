@@ -27,6 +27,7 @@ noncomputable def projectiveSyndromeDistance (A : Finset P) (x : P) : ℕ := by
   exact if x ∈ A then 1 else if Covered (L := L) A x then 2 else 3
 
 omit [Fintype P] [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Projective syndrome distance one characterizes the selected columns of the arc. -/
 @[simp] theorem projectiveSyndromeDistance_eq_one_iff {A : Finset P} {x : P} :
     projectiveSyndromeDistance (L := L) A x = 1 ↔ x ∈ A := by
   classical
@@ -34,6 +35,8 @@ omit [Fintype P] [DecidableEq L] [Configuration.ProjectivePlane P L] in
   split_ifs <;> simp_all
 
 omit [Fintype P] [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Projective syndrome distance two characterizes the external secant locus: points off the arc
+that lie on a secant of it. -/
 @[simp] theorem projectiveSyndromeDistance_eq_two_iff {A : Finset P} {x : P} :
     projectiveSyndromeDistance (L := L) A x = 2 ↔ x ∉ A ∧ Covered (L := L) A x := by
   classical
@@ -41,6 +44,8 @@ omit [Fintype P] [DecidableEq L] [Configuration.ProjectivePlane P L] in
   split_ifs <;> simp_all
 
 omit [Fintype P] [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Projective syndrome distance three characterizes the ordinary uncovered locus: points off the
+arc lying on no secant of it. -/
 @[simp] theorem projectiveSyndromeDistance_eq_three_iff {A : Finset P} {x : P} :
     projectiveSyndromeDistance (L := L) A x = 3 ↔
       x ∉ A ∧ ¬Covered (L := L) A x := by
@@ -89,6 +94,8 @@ noncomputable def distanceThreeDirections (A : Finset P) : Finset P := by
   exact Finset.univ.filter fun x => projectiveSyndromeDistance (L := L) A x = 3
 
 omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
+/-- Membership in the distance-three direction set is the uncovered condition: outside the arc and
+on no secant of it. -/
 @[simp] theorem mem_distanceThreeDirections {A : Finset P} {x : P} :
     x ∈ distanceThreeDirections (L := L) A ↔
       x ∉ A ∧ ¬Covered (L := L) A x := by

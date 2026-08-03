@@ -33,8 +33,12 @@ regular matching and dihedral parity reductions, exceptional-order endgame,
 and the exact `q = 5, 7, 11` endpoint data.
 
 It also checks the table-free fixed-line algebra: radial translation preserves the top and moment
-data, changes one outer constant affinely, transports the Radical--Hadamard conclusion to every
-noncoalescent parameter, and leaves exactly `|K| - 2` nonmatching noncoalescent parameters.
+data and changes one outer constant affinely; between two parameters with nonzero outer constant
+the presented evaluation space is unchanged, so the three Radical--Hadamard hypotheses are imposed
+at the reference parameter alone and derived at every other noncoalescent parameter; and exactly
+`|K| - 2` nonmatching noncoalescent parameters remain.  The geometric identification of the
+evaluation spaces with the presented top-space, constant-function, and radial-level generators is
+an input, not a conclusion, of this file.
 
 The gate distinguishes kernel-checked implications from classical
 representation and subgroup identifications.  In particular, importing this
@@ -66,6 +70,7 @@ finite-group Hom space or prove Dickson's maximal-subgroup theorem.
 #check RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy
 #check RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant
 #check RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub
+#check RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference
 #check RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent
 #check RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent
 #check RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters
@@ -95,6 +100,7 @@ finite-group Hom space or prove Dickson's maximal-subgroup theorem.
 #print axioms RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy
 #print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant
 #print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub
+#print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference
 #print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent
 #print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent
 #print axioms RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters

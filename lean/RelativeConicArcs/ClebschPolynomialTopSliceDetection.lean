@@ -57,9 +57,13 @@ def raiseLowered : k × k →ₗ[k] k × k where
   map_add' _ _ := by simp
   map_smul' _ _ := by simp
 
+/-- The inclusion of the highest-weight line is scalar multiplication of the highest-weight
+coordinate vector. -/
 @[simp] theorem topLine_apply (a : k) : topLine a = a • topVector := by
   ext <;> simp [topLine, topVector]
 
+/-- The inclusion of the selected lowered-orbit line is scalar multiplication of the
+lowered-orbit coordinate vector. -/
 @[simp] theorem loweredLine_apply (a : k) : loweredLine a = a • loweredVector := by
   ext <;> simp [loweredLine, loweredVector]
 
@@ -83,14 +87,22 @@ theorem mem_range_loweredLine_iff (x : k × k) :
     refine ⟨x.2, ?_⟩
     ext <;> simp [loweredLine, hx]
 
+/-- The divided-power operator carries the highest-weight coordinate vector to the `c`-multiple
+of the selected lowered-orbit coordinate vector. -/
 @[simp] theorem lowerTopBy_topVector (c : k) :
     lowerTopBy c topVector = c • loweredVector := by
   ext <;> simp [lowerTopBy, topVector, loweredVector]
 
+/-- Reading off the lowered-orbit coefficient after applying the divided-power operator to the
+highest-weight coordinate vector returns the operator's scalar `c`.  This is the detection step:
+the scalar is recovered from a single evaluation. -/
 @[simp] theorem loweredCoordinate_lowerTopBy_topVector (c : k) :
     loweredCoordinate (lowerTopBy c topVector) = c := by
   simp [loweredCoordinate, lowerTopBy, topVector]
 
+/-- Raising carries the selected lowered-orbit coordinate vector back to the highest-weight
+coordinate vector, so the two adjacent characteristic-three sections are exchanged on these two
+vectors. -/
 @[simp] theorem raiseLowered_loweredVector :
     raiseLowered (k := k) (loweredVector (k := k)) = topVector := by
   simp [raiseLowered, loweredVector, topVector]

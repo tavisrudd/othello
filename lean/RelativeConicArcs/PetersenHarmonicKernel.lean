@@ -3,11 +3,11 @@ import RelativeConicArcs.KneserPairEigenspace
 /-!
 # The degree-six Petersen kernel
 
-The degree-six zonal kernel on the ten labelled icosahedral face axes has
-only two off-diagonal values, because pairs of two-subsets either are
-disjoint or meet in one point.  Evaluating the normalized Legendre polynomial
-at the two squared angles gives `-65/243` and `47/243`.  Hence the whole
-kernel operator is
+This module studies the algebraic operator obtained from the two orbit values
+`-65/243` and `47/243` on pairs of two-subsets.  When an external geometric
+identification supplies the ten labelled icosahedral face axes and their two
+squared angles, the normalized degree-six Legendre polynomial gives those
+values and the resulting kernel operator is
 
 `(196 I + 47 J - 112 A) / 243`,
 
@@ -15,8 +15,10 @@ where `A` is Petersen adjacency.  Its restriction to the pair-sum
 four-space is scalar because that space is the `-2` eigenspace and has zero
 total sum.  The normalized spherical Gram scalar there is `140/1053`.
 
-The proofs below use the two orbit values and the symbolic Kneser eigenspace
-theorems; no ten-by-ten diagonalization is performed.
+The proofs below start from this displayed algebraic operator and use symbolic
+Kneser eigenspace theorems; they do not formalize the face-axis identification
+or the spherical addition theorem, and no ten-by-ten diagonalization is
+performed.
 -/
 
 namespace RelativeConicArcs.PetersenHarmonicKernel
@@ -27,6 +29,7 @@ open RelativeConicArcs.KneserPairEigenspace
 def legendreSix (s : ℚ) : ℚ :=
   (231 * s ^ 6 - 315 * s ^ 4 + 105 * s ^ 2 - 5) / 16
 
+/-- The chosen degree-six Legendre normalization takes the value one at one. -/
 @[simp]
 theorem legendreSix_one : legendreSix 1 = 1 := by
   norm_num [legendreSix]
@@ -51,12 +54,14 @@ theorem legendreSix_of_sq_one_ninth {s : ℚ} (hs : s ^ 2 = 1 / 9) :
   rw [hs, hs4, hs6]
   norm_num
 
-/-- The reproducing-kernel operator encoded by the two Petersen pair orbits. -/
+/-- The algebraic kernel operator encoded by the two Petersen pair-orbit
+values.  Its identification with a geometric reproducing kernel is external. -/
 def kernelOperator (x : Pair 5 → ℚ) (p : Pair 5) : ℚ :=
   (196 * x p + 47 * totalPairSum x - 112 * adjacency x p) / 243
 
-/-- The probability-normalized spherical Gram operator is the kernel
-operator divided by `dim ℋ₆ = 13`. -/
+/-- The algebraic Gram normalization obtained by dividing the kernel operator
+by thirteen.  Interpreting thirteen as `dim ℋ₆` and this operator as a
+spherical Gram matrix uses the external addition-theorem identification. -/
 def gramOperator (x : Pair 5 → ℚ) (p : Pair 5) : ℚ :=
   kernelOperator x p / 13
 

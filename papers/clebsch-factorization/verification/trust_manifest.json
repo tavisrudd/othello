@@ -49,7 +49,7 @@
       "commands": []
     },
     "paper-ii-structural": {
-      "role": "kernel-checked projective pullback, Lucas coefficient and finite-root calculations, outer-parity and detector implications, affine contraction, rank-three endpoint composition, and table-free fixed-line radial inheritance and count",
+      "role": "kernel-checked projective pullback, Lucas coefficient and finite-root calculations, outer-parity and detector implications, affine contraction, rank-three endpoint composition, and the table-free fixed-line radial argument: invariance of the presented evaluation space between noncoalescent parameters, the Radical--Hadamard hypotheses derived there from the reference parameter, and the q-2 count",
       "checksum_manifest": "verification/paper_ii_structural.sha256",
       "commands": []
     },
@@ -152,7 +152,7 @@
     "The Paper II structural Lean gate verifies the paper-specific coefficient, finite-root, defect, detector, contraction, and endpoint implications. Steinberg and modular Hermite reciprocity identify the concrete coefficient blocks with finite-group Hom spaces; tilting and socle theory identify the ambient symmetric-square slices and validate the root/Weyl intertwiner; Dickson--Giudici identifies the abstract subgroup candidates. Those cited identifications remain classical inputs, so the all-q claims retain classical-input alongside lean.",
     "The generic first-wall checker verifies local formulas conditional on the human Lucas-socle and adjacent-wall theorems; it does not replace either theorem or the outer-parity subgroup calculation.",
     "The small-field trade bundle is exhaustive only at q=9; its q=13,17,19 rows are bounded cross-checks and are not used for the all-q classification.",
-    "The fixed-line Chow-rigidity theorem is structural. Lean checks the reusable radial translation, noncoalescent Radical--Hadamard inheritance, sheet-sign annihilator, and q-2 parameter count. The invariant-space dimensions, exceptional-subgroup normalizers, unique block systems, and unique Chow intersection remain conceptual and classical inputs. The coalescence-point square rank is expressly outside the theorem and is not supplied by a table.",
+    "The fixed-line Chow-rigidity theorem is structural. Lean checks the reusable radial translation, the derivation of the noncoalescent Radical--Hadamard hypotheses from the reference parameter, the sheet-sign annihilator, and the q-2 parameter count. That derivation presents each evaluation space as the parameter-independent top space together with the constant function and the radial level; identifying the geometric evaluation spaces with that presentation is a conceptual input rather than a Lean conclusion. The invariant-space dimensions, exceptional-subgroup normalizers, unique block systems, and unique Chow intersection remain conceptual and classical inputs. The coalescence-point square rank is expressly outside the theorem and is not supplied by a table.",
     "The shared-radial replay checks the two classified configurations and every edge-selected pair; the human resultant identity proves the common nonvanishing mechanism.",
     "Lean checks the arithmetic-gluing implication and its small finite leaves; H3 coset completeness and bounded-word evaluation remain generator/replay obligations.",
     "The names A4, S4, A5, and PSL_2(11) are classical cited inputs, not consequences of group orders alone.",

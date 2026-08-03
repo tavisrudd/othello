@@ -21,11 +21,13 @@ def Arc (A : Finset P) : Prop :=
     a ∈ A → b ∈ A → c ∈ A →
       a ≠ b → a ≠ c → b ≠ c → ¬ Collinear (L := L) a b c
 
+/-- The empty point set is an arc: it has no three distinct points at all. -/
 @[simp] theorem arc_empty : Arc (L := L) (∅ : Finset P) := by
   classical
   intro a _b _c ha
   simp at ha
 
+/-- Every subset of an arc is an arc. -/
 theorem arc_mono {A B : Finset P} (hAB : A ⊆ B) (hB : Arc (L := L) B) :
     Arc (L := L) A := by
   intro a b c ha hb hc
@@ -45,6 +47,8 @@ noncomputable def secants (A : Finset P) : Finset L := by
   exact Finset.univ.filter (Secant A)
 
 omit [Fintype P] [DecidableEq P] in
+/-- Membership in the finite secant set is the secant condition: the line carries two distinct
+points of the given set. -/
 @[simp] theorem mem_secants {A : Finset P} {l : L} :
     l ∈ secants A ↔ Secant A l := by
   classical
@@ -60,6 +64,8 @@ def Covered (A : Finset P) (x : P) : Prop :=
   0 < pointIndex (L := L) A x
 
 omit [Fintype P] [DecidableEq P] in
+/-- A point is covered exactly when some secant of the set passes through it.  This converts the
+counting definition through the secant index into an existence statement. -/
 theorem covered_iff_exists_secant {A : Finset P} {x : P} :
     Covered (L := L) A x ↔ ∃ l : L, Secant A l ∧ x ∈ l := by
   classical
@@ -71,6 +77,7 @@ theorem covered_iff_exists_secant {A : Finset P} {x : P} :
     exact ⟨l, Finset.mem_filter.mpr ⟨mem_secants.mpr hl, hxl⟩⟩
 
 omit [Fintype P] [DecidableEq P] in
+/-- A point collinear with two distinct points of the set is covered by it. -/
 theorem covered_of_collinear_pair {A : Finset P} {x a b : P}
     (ha : a ∈ A) (hb : b ∈ A) (hab : a ≠ b)
     (hcol : Collinear (L := L) x a b) : Covered (L := L) A x := by
@@ -147,6 +154,8 @@ noncomputable def admissiblePositions (H : Finset P) : Finset (Finset P) := by
   exact Finset.univ.powerset.filter fun A => Admissible (L := L) A H
 
 omit [Fintype L] [DecidableEq P] in
+/-- Membership in the family of admissible positions is admissibility: being an arc and being
+disjoint from the prescribed hole set. -/
 @[simp] theorem mem_admissiblePositions {A H : Finset P} :
     A ∈ admissiblePositions (L := L) H ↔ Admissible (L := L) A H := by
   classical
@@ -175,6 +184,8 @@ theorem exists_completeOutside
   have hcard := hmax (insert x A) hinsPos
   simp [hxA] at hcard
 
+/-- Completeness outside a prescribed hole set, restated as the vanishing of the uncovered locus:
+the set is an arc, is disjoint from the holes, and leaves no required point uncovered. -/
 theorem completeOutside_iff_uncovered_eq_empty {A H : Finset P} :
     CompleteOutside (L := L) A H ↔
       Arc (L := L) A ∧ Disjoint A H ∧ uncovered (L := L) A H = ∅ := by
@@ -209,6 +220,8 @@ theorem exists_completeOutside_card_eq_rho
   exact Nat.sInf_mem hne
 
 omit [Fintype P] [DecidableEq P] in
+/-- Every arc that is complete outside the prescribed hole set bounds the relative-completeness
+parameter above by its own cardinality. -/
 theorem rho_le_card {A H : Finset P} (hA : CompleteOutside (L := L) A H) :
     rho (L := L) H ≤ A.card := by
   apply Nat.sInf_le

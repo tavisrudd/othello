@@ -21,29 +21,46 @@ variable {K : Type*} [Field K] [Fintype K] [DecidableEq K]
 noncomputable local instance : Fintype (Conic.Point K) := Fintype.ofFinite _
 noncomputable local instance : DecidableEq (Conic.Point K) := Classical.decEq _
 
+/-- A raw coordinate vector in `K³`, before projectivization. -/
 abbrev Vec (K : Type*) := Fin 3 → K
+/-- A raw point of the certificate: a nonzero coordinate vector.  Two raw points may represent the
+same projective point; the checker compares them by the ray relation below. -/
 abbrev RawPoint (K : Type*) [Zero K] := {v : Vec K // v ≠ 0}
 
+/-- The projective point represented by a raw point. -/
 def toPoint (v : RawPoint K) : Conic.Point K := Projectivization.mk K v.1 v.2
 
+/-- The finite set of projective points represented by a list of raw points.  Repeated rays
+collapse, so its cardinality can be smaller than the list length. -/
 noncomputable def pointSet (xs : List (RawPoint K)) : Finset (Conic.Point K) := by
   classical
   exact xs.toFinset.image toPoint
 
+/-- Two raw vectors span the same ray: one is a scalar multiple of the other.  On nonzero vectors
+this is exactly equality of the represented projective points. -/
 def RayEq (v w : Vec K) : Prop := ∃ a : K, a • w = v
 
+/-- Decision procedure for the ray relation over a finite field: search the finitely many scalars.
+It is kernel-reducible arithmetic, with no native evaluation. -/
 def rayEq (v w : Vec K) : Bool :=
   Finset.fold (fun x y : Bool => x || y) false
     (fun a : K => decide (a • w = v)) Finset.univ
 
+/-- Every listed raw point lies off the conic, expressed as nonvanishing of the conic form
+`XZ - Y²` on its coordinate vector. -/
 def RawDisjoint (xs : List (RawPoint K)) : Prop :=
   ∀ a ∈ xs, ProjectiveCap.Sym2Bridge.conicForm a.1 ≠ 0
 
+/-- The arc condition in raw coordinates: any three pairwise ray-distinct listed vectors have
+nonzero determinant, hence represent three noncollinear projective points. -/
 def RawArc (xs : List (RawPoint K)) : Prop :=
   ∀ a ∈ xs, ∀ b ∈ xs, ∀ c ∈ xs,
     rayEq a.1 b.1 = false → rayEq a.1 c.1 = false → rayEq b.1 c.1 = false →
       Matrix.det ![a.1, b.1, c.1] ≠ 0
 
+/-- Coverage of a raw vector, in the form needed for completeness outside the conic: the vector
+lies on the conic, or represents a listed point, or lies on the secant of two ray-distinct listed
+points. -/
 def RawCovered (xs : List (RawPoint K)) (x : Vec K) : Prop :=
   ProjectiveCap.Sym2Bridge.conicForm x = 0 ∨
     (∃ a ∈ xs, rayEq x a.1 = true) ∨
@@ -78,6 +95,8 @@ instance (xs : List (RawPoint K)) (x : Vec K) : Decidable (RawOrdinaryCovered xs
   unfold RawOrdinaryCovered
   infer_instance
 
+/-- The full raw certificate condition: the listed points avoid the conic, form an arc, and cover
+every canonical projective representative. -/
 def RawValid (xs : List (RawPoint K)) : Prop :=
   RawDisjoint xs ∧ RawArc xs ∧ RawCoverage xs
 
@@ -111,11 +130,15 @@ instance (xs : List (RawPoint K)) : Decidable (RawOrdinaryCoverage xs) := by
 def check (xs : List (RawPoint K)) : Bool :=
   decide (RawDisjoint xs) && decide (RawArc xs) && decide (RawCoverage xs)
 
+/-- Soundness of the executable checker: a `true` verdict yields the raw certificate condition.
+The reduction is by kernel evaluation of the three decidable predicates. -/
 theorem check_rawValid {xs : List (RawPoint K)} (h : check xs = true) : RawValid xs := by
   simp only [check, Bool.and_eq_true] at h
   exact ⟨of_decide_eq_true h.1.1, of_decide_eq_true h.1.2, of_decide_eq_true h.2⟩
 
 omit [Fintype K] [DecidableEq K] in
+/-- On nonzero vectors, the ray relation is exactly equality of the represented projective
+points. -/
 theorem rayEq_iff_mk_eq (v w : RawPoint K) :
     RayEq v.1 w.1 ↔ toPoint v = toPoint w := by
   exact (Projectivization.mk_eq_mk_iff' K v.1 w.1 v.2 w.2).symm
@@ -131,21 +154,26 @@ private theorem fold_or_eq_true_iff {s : Finset K} {p : K → Bool} :
       rw [Finset.fold_insert ha]
       simp [ih]
 
+/-- The Boolean ray test returns `true` exactly on ray-equal vectors. -/
 theorem rayEq_eq_true_iff (v w : Vec K) : rayEq v w = true ↔ RayEq v w := by
   rw [rayEq, fold_or_eq_true_iff]
   simp [RayEq]
 
+/-- The Boolean ray test returns `false` exactly on vectors spanning different rays. -/
 theorem rayEq_eq_false_iff (v w : Vec K) : rayEq v w = false ↔ ¬ RayEq v w := by
   rw [Bool.eq_false_iff]
   exact not_congr (rayEq_eq_true_iff v w)
 
 omit [Fintype K] in
+/-- A projective point belongs to the represented point set exactly when some listed raw point
+represents it. -/
 theorem mem_pointSet {xs : List (RawPoint K)} {p : Conic.Point K} :
     p ∈ pointSet xs ↔ ∃ v ∈ xs, toPoint v = p := by
   classical
   simp [pointSet]
 
 omit [Fintype K] in
+/-- The represented point set has at most as many points as the list has entries. -/
 theorem pointSet_card_le_length (xs : List (RawPoint K)) :
     (pointSet xs).card ≤ xs.length := by
   classical
@@ -205,6 +233,8 @@ private theorem normalized_rep (p : Conic.Point K) :
     funext i
     fin_cases i <;> simp [y, z, h0, div_eq_mul_inv] <;> ac_rfl
 
+/-- The raw arc condition transports to the incidence-theoretic arc condition on the represented
+projective point set. -/
 theorem rawValid_arc {xs : List (RawPoint K)} (h : RawValid xs) :
     Arc (L := Conic.Point K) (pointSet xs) := by
   rw [ProjectiveBridge.arc_iff_projectiveCap]
@@ -263,6 +293,8 @@ theorem rawArc_iff_projectiveCap {xs : List (RawPoint K)} :
       ((ProjectiveCap.Projective.FrameGridBridge.Coordinate.mk_collinear_iff_det_eq_zero
         a.2 b.2 c.2).mpr hdet)
 
+/-- The raw disjointness condition transports to disjointness of the represented point set from
+the standard conic. -/
 theorem rawValid_disjoint {xs : List (RawPoint K)} (h : RawValid xs) :
     Disjoint (pointSet xs) (standardConic (K := K)) := by
   classical
@@ -273,6 +305,9 @@ theorem rawValid_disjoint {xs : List (RawPoint K)} (h : RawValid xs) :
     (mem_standardConic_iff_onConic.mp hpC)
   exact h.1 a ha ((ProjectiveCap.Sym2Bridge.onConic_mk a.1 a.2).mp hon)
 
+/-- Soundness of the certificate: a valid raw certificate represents an arc that is complete
+outside the standard conic.  This theorem is the sole bridge from the checker's field arithmetic
+to projective incidence. -/
 theorem rawValid_complete {xs : List (RawPoint K)} (h : RawValid xs) :
     CompleteOutside (L := Conic.Point K) (pointSet xs) (standardConic (K := K)) := by
   classical

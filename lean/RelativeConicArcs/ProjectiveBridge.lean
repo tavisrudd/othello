@@ -21,6 +21,9 @@ open Configuration Matrix Projectivization
 
 variable {K : Type*} [Field K]
 
+/-- A point of the coordinate projective plane `PG(2,K)`, represented as in Mathlib by a
+projective class of nonzero vectors in `K³`.  Dual lines are represented by the same type, with
+incidence given by orthogonality. -/
 abbrev Point (K : Type*) [Field K] := Projectivization K (Fin 3 → K)
 
 private theorem collinear_iff_det_eq_zero {a b c : Point K} :

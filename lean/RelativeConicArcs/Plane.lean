@@ -18,11 +18,14 @@ variable {P L : Type*} [Membership P L]
 def Collinear (a b c : P) : Prop :=
   ∃ l : L, a ∈ l ∧ b ∈ l ∧ c ∈ l
 
+/-- Collinearity of an ordered triple is invariant under cyclic rotation of its entries. -/
 theorem collinear_rotate {a b c : P} :
     Collinear (L := L) a b c ↔ Collinear (L := L) b c a := by
   simp only [Collinear]
   aesop
 
+/-- Collinearity of an ordered triple is invariant under exchanging its first two entries.
+Together with rotation this makes collinearity a property of the unordered triple. -/
 theorem collinear_swap_left {a b c : P} :
     Collinear (L := L) a b c ↔ Collinear (L := L) b a c := by
   simp only [Collinear]

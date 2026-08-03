@@ -144,12 +144,14 @@ variable (K : Type*) [Field K] (ι : Type*) [Fintype ι]
 /-- The augmentation (total) functional `a ↦ ∑ᵢ aᵢ` on the free space on the matchings. -/
 def sumFunctional : (ι → K) →ₗ[K] K := ∑ i, LinearMap.proj i
 
+/-- The augmentation functional evaluates to the total sum of coordinates. -/
 @[simp] theorem sumFunctional_apply (a : ι → K) : sumFunctional K ι a = ∑ i, a i := by
   simp [sumFunctional, LinearMap.sum_apply]
 
 /-- The augmentation submodule `{a : ∑ᵢ aᵢ = 0}` of the free space on the matchings. -/
 def augmentation : Submodule K (ι → K) := LinearMap.ker (sumFunctional K ι)
 
+/-- Membership in the augmentation submodule is the vanishing of the total coordinate sum. -/
 @[simp] theorem mem_augmentation {a : ι → K} : a ∈ augmentation K ι ↔ ∑ i, a i = 0 := by
   simp [augmentation, LinearMap.mem_ker]
 

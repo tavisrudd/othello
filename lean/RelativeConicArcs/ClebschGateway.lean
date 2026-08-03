@@ -36,6 +36,8 @@ variable [Fintype P] [Fintype L] [DecidableEq P] [DecidableEq L]
 noncomputable abbrev deepTransform (A : Finset P) : Finset P :=
   distanceThreeDirections (L := L) A
 
+/-- Membership in the deep transform of a point set: a point belongs to it exactly when it lies
+outside the set and is covered by no secant of the set. -/
 @[simp] theorem mem_deepTransform {A : Finset P} {x : P} :
     x ∈ deepTransform (L := L) A ↔ x ∉ A ∧ ¬Covered (L := L) A x :=
   mem_distanceThreeDirections
@@ -55,6 +57,8 @@ open CodingBridge
 
 variable {K ι : Type*} [Field K] [DecidableEq K] [Fintype ι] [DecidableEq ι]
 
+/-- A point of the coordinate projective plane over `K`, in the coding-bridge representation used
+for the projective maximum-distance-separable columns below. -/
 abbrev PlanePoint (K : Type*) [Field K] := CodingBridge.PlanePoint K
 
 noncomputable local instance : DecidableEq (PlanePoint K) := Classical.decEq _
@@ -290,6 +294,9 @@ structure DecoratedTransform (Parent Child Decoration : Type*) where
   decoration : Parent → Decoration
   faithful : Function.Injective fun p => (child p, decoration p)
 
+/-- The faithfulness assumption restated as an equivalence: two parents agree exactly when their
+children and decorations agree.  This is the form used when recovering a parent object from its
+transform together with the recorded decoration. -/
 theorem DecoratedTransform.recovers_parent
     {Parent Child Decoration : Type*} (T : DecoratedTransform Parent Child Decoration)
     {p q : Parent} :
