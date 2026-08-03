@@ -5,7 +5,7 @@
 **Date:** 2026-08-02
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
-C603, C620, C656, C819, and C820 complete. A second pair of independent cold reads exposed and
+C603, C620, C656, C660, C819, and C820 complete. A second pair of independent cold reads exposed and
 closed three Version 1 defects: the R7 common-factor proposition now states
 the exact-gcd hypothesis its proof needs, the R6 lower-carrier exhaustion is
 proved by an explicit monodromy/characteristic trichotomy, and R7 finite
@@ -63,6 +63,19 @@ structurally compressed `q=16,32` quotient certificates replay exactly, and
 the repaired proof received independent specialist **ACCEPT**.  The result is
 designated for C821 Version 2 integration; its report is
 `notes/2026-08-02-c620-higher-lucas-modular-carriers.md`.
+
+C660 is complete.  A direct-locus generator froze the exact fourteen-field
+R7 candidate domain before Certificate R7 was read, checked the disjoint
+projective identity `|PG(6,q)| = infinity-rejected + q|B_infinity| + 1`,
+intersected every transported marker condition, and independently rebuilt all
+PGL2 orbits, stabilizers, persistent/central flags, and Frobenius fusion.  The
+later public comparison is exact in every field and retains the null
+covering-radius boundary at `q=7,8,9`.  Structural orbit tuples reduce the
+canonical certificate from 207730 to 23140 bytes without dropping a comparison
+datum.  Byte-identical replay, the SHA-256 manifest, and a fresh independent
+coding/computational review are green.  The exact proof, field ledger, trust
+boundary, and mystery closeout are in
+`notes/2026-08-02-c660-r7-independent-completeness.md`.
 
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
@@ -983,13 +996,12 @@ from queue-row placement:
    uniformly shallow, the exact trace criterion replaces the non-exhaustive
    projective-additive section, the certificates are structurally compressed,
    and the repaired proof has independent specialist acceptance.
-3. **C660 — independent R7 completeness.**  Remove the primary quotient
-   enumerator from the bounded-field completeness route.  This is a trust
-   upgrade, not a stronger deep-hole theorem, and it must retain the
-   (q=7,8,9) covering-radius boundary.
-4. **C821 — Version 2 synthesis.**  Begin only after C820 and C620 close, C646
-   freezes its formal boundary, and C660 either closes or an explicit scope
-   decision leaves that independent replay outside Version 2.  Integrate only
+3. **C660 — independent R7 completeness (complete).**  The frozen direct-locus
+   route removes the primary quotient enumerator, proves exact candidate-domain
+   coverage, matches all fourteen Certificate R7 rows only after freezing, and
+   retains the (q=7,8,9) covering-radius boundary.
+4. **C821 — Version 2 synthesis.**  C820, C620, and C660 are closed; begin only
+   after C646 freezes its formal boundary.  Integrate only
    proved carrier levels; import Wang--Wu--Hu's endpoint criterion; then run
    the full novelty, trust, reproducibility, and specialist-review gates.
 
@@ -1012,10 +1024,9 @@ companion formal geometry and is not a dispatch candidate in this ranking.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C660 | publication gate cleared | remove R7's largest remaining computational single point of trust before final Version 2 synthesis |
-| 2 | C821 | after C646; C620 placement is frozen | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
-| 3 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
-| 4 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C821 | after C646; C620/C660 placement is frozen | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
+| 2 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
+| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1075,8 +1086,8 @@ history.
 
 ## Next command
 
-`go C660`
+`go C821`
 
-(C620 freezes the higher-Lucas arithmetic and placement decision.  C660 is
-the remaining independent-completeness trust upgrade; C646 continues in
-parallel on the formal density/closure boundary.)
+(C620 freezes the higher-Lucas arithmetic and C660 closes the independent R7
+trust upgrade.  C821 is next after C646 freezes the formal density/closure
+boundary.)

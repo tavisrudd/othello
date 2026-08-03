@@ -2,6 +2,9 @@
 
 **Lane:** `reed-solomon`
 
+**Status:** complete 2026-08-02; see
+`notes/2026-08-02-c660-r7-independent-completeness.md`.
+
 **Dependency gate:** Cleared by C545's 2026-07-29 Version 1 publication.  This
 task must not alter or retroactively strengthen the immutable Version 1 claim.
 
