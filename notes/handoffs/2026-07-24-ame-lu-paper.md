@@ -19,8 +19,8 @@ roots carry the frozen public/formal provenance; the cross-paper ledger assigns
 all 63 combined theorem-like labels to exactly one owner; and the immutable
 exporter plan/audit sees 42 public files with zero findings.  Paper I has not
 been trimmed, no Lean or standalone repository was touched, and the old broad
-formal closure is not claimed for Paper II.  The next manuscript step is Phase
-C: sharpen Paper I around exact rigidity, cleaning-based quantitative rounding,
+formal closure is not claimed for Paper II.  C844 is queued next for Phase C:
+sharpen Paper I around exact rigidity, cleaning-based quantitative rounding,
 the robust atlas, and the affine-character obstruction, while deleting only
 material already owned by the green Paper II root.  See
 `2026-08-02-c842-ame-lu-paper-ii-establishment.md`.
