@@ -1,5 +1,7 @@
 # Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21652792-blue.svg)](https://doi.org/10.5281/zenodo.21652792)
+
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- I*
 
 The shared progression is expository; this manuscript is logically

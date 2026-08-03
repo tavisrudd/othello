@@ -333,6 +333,49 @@ reason = "private analysis workspace"
         with self.assertRaisesRegex(exporter.Refused, "already exists"):
             exporter.materialize_repository(self.fx.commit, "demo-paper", first)
 
+    def test_sync_refuses_public_metadata_loss_then_accepts_authority(self) -> None:
+        source_readme = self.fx.root / "papers/demo/README.md"
+        source_readme.write_text("# Demo paper\n", encoding="utf-8")
+        run(self.fx.root, "git", "add", "papers/demo/README.md")
+        run(self.fx.root, "git", "commit", "-qm", "add readme")
+        first_commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+
+        destination = self.fx.root / "demo-paper"
+        exporter.materialize_repository(first_commit, "demo-paper", destination)
+        run(destination, "git", "init", "-q")
+        run(destination, "git", "config", "user.name", "C684 Test")
+        run(destination, "git", "config", "user.email", "c684@example.invalid")
+        run(destination, "git", "config", "commit.gpgsign", "false")
+        run(
+            destination,
+            "git",
+            "remote",
+            "add",
+            "origin",
+            "git@github.com:tavisrudd/demo-paper.git",
+        )
+        run(destination, "git", "add", ".")
+        run(destination, "git", "commit", "-qm", "initial export")
+
+        badge = (
+            "[![DOI](https://img.shields.io/badge/DOI-demo-blue.svg)]"
+            "(https://doi.org/10.5281/zenodo.1)\n"
+        )
+        (destination / "README.md").write_text("# Demo paper\n\n" + badge)
+        run(destination, "git", "add", "README.md")
+        run(destination, "git", "commit", "-qm", "add DOI badge")
+
+        with self.assertRaisesRegex(exporter.Refused, "remove public metadata"):
+            exporter.sync_repository(first_commit, "demo-paper", destination)
+
+        source_readme.write_text("# Demo paper\n\n" + badge, encoding="utf-8")
+        run(self.fx.root, "git", "add", "papers/demo/README.md")
+        run(self.fx.root, "git", "commit", "-qm", "adopt DOI badge")
+        second_commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        manifest = exporter.sync_repository(second_commit, "demo-paper", destination)
+        self.assertEqual((destination / "README.md").read_text(), "# Demo paper\n\n" + badge)
+        self.assertGreater(manifest["synced_files_changed"], 0)
+
     def test_tracked_release_output_has_explicit_immutable_policy(self) -> None:
         (self.fx.root / "papers/demo/main.pdf").write_bytes(b"content-addressed release\n")
         mapping = (self.fx.root / "papers/repositories.toml").read_text()

@@ -1,5 +1,7 @@
 # Golden descent and operator realizations of the Clebsch cubic
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682515-blue.svg)](https://doi.org/10.5281/zenodo.21682515)
+
 **Series:** *The Clebsch cubic: recovering, orienting, and realizing --- III*
 
 The shared progression is expository; this manuscript is logically

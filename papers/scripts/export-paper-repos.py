@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Plan deterministic standalone paper-repository exports.
+"""Plan, materialize, verify, and safely refresh standalone paper exports.
 
-The initial C684 surface is deliberately read-only. `plan` reads both registries and every source
-blob from an immutable Git tree, validates repository boundaries, and reports export size, symlink
-dispositions, and monorepo-coupled text references. It never reads manuscript bytes from the live
-working tree and never writes under ~/src/math-papers.
+Every export is derived from an immutable Git tree.  New candidates are materialized only into
+absent paths.  Existing clean mirrors may be refreshed with ``sync``; that operation refuses path
+deletions and public README or Zenodo-metadata loss unless the caller explicitly acknowledges the
+metadata removal.
 """
 
 from __future__ import annotations
@@ -16,6 +16,7 @@ import json
 import re
 import subprocess
 import sys
+import tempfile
 import tomllib
 import unicodedata
 from dataclasses import dataclass
@@ -102,6 +103,8 @@ GENERATED_FILENAME_GLOBS = (
     "*.synctex.gz",
     "*.xdv",
 )
+MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)\)")
+BARE_URL_RE = re.compile(r"https?://[^\s<>]+")
 
 
 class Refused(RuntimeError):
@@ -464,6 +467,75 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def repository_git(root: Path, *args: str) -> bytes:
+    proc = subprocess.run(
+        ["git", *args],
+        cwd=root,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if proc.returncode:
+        raise Refused(
+            f"git {' '.join(args)} failed in {root}: {proc.stderr.decode().strip()}"
+        )
+    return proc.stdout
+
+
+def protected_readme_targets(data: bytes) -> set[str]:
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise Refused(f"README.md is not UTF-8: {error}") from error
+    targets = set(MARKDOWN_LINK_RE.findall(text))
+    targets.update(match.rstrip(".,;:") for match in BARE_URL_RE.findall(text))
+    return {
+        target
+        for target in targets
+        if target.startswith(("http://", "https://"))
+        or target.partition("?")[0].lower().endswith(".pdf")
+    }
+
+
+def metadata_regressions(current: Path, candidate: Path) -> list[str]:
+    regressions: list[str] = []
+    current_readme = current / "README.md"
+    candidate_readme = candidate / "README.md"
+    if current_readme.is_file() and candidate_readme.is_file():
+        removed = sorted(
+            protected_readme_targets(current_readme.read_bytes())
+            - protected_readme_targets(candidate_readme.read_bytes())
+        )
+        regressions.extend(f"README.md removes link {target!r}" for target in removed)
+
+    current_zenodo = current / ".zenodo.json"
+    candidate_zenodo = candidate / ".zenodo.json"
+    if current_zenodo.is_file() and candidate_zenodo.is_file():
+        try:
+            old = json.loads(current_zenodo.read_text(encoding="utf-8"))
+            new = json.loads(candidate_zenodo.read_text(encoding="utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise Refused(f"cannot compare .zenodo.json metadata: {error}") from error
+        for key in ("title", "creators", "license", "upload_type", "publication_type"):
+            if old.get(key) and not new.get(key):
+                regressions.append(f".zenodo.json removes nonempty field {key!r}")
+        old_related = {
+            (item.get("identifier"), item.get("relation"))
+            for item in old.get("related_identifiers", [])
+            if isinstance(item, dict)
+        }
+        new_related = {
+            (item.get("identifier"), item.get("relation"))
+            for item in new.get("related_identifiers", [])
+            if isinstance(item, dict)
+        }
+        regressions.extend(
+            f".zenodo.json removes related identifier {identifier!r} ({relation!r})"
+            for identifier, relation in sorted(old_related - new_related)
+        )
+    return regressions
+
+
 def plan_repository(
     commit: str, row: dict[str, Any], papers: dict[str, dict[str, Any]]
 ) -> dict[str, Any]:
@@ -715,6 +787,70 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
     return manifest
 
 
+def sync_repository(
+    source_ref: str,
+    repository: str,
+    root: Path,
+    *,
+    allow_metadata_removal: bool = False,
+) -> dict[str, Any]:
+    root = root.expanduser().resolve()
+    if root.name != repository:
+        raise Refused(
+            f"destination basename {root.name!r} does not match repository {repository!r}"
+        )
+    if not (root / ".git").exists():
+        raise Refused(f"destination is not a Git worktree: {root}")
+    if repository_git(root, "status", "--porcelain", "--untracked-files=normal"):
+        raise Refused(f"destination worktree is dirty: {root}")
+    remote = repository_git(root, "remote", "get-url", "--push", "origin").decode().strip()
+    expected_remote = re.compile(
+        rf"(?:github\.com[:/])tavisrudd/{re.escape(repository)}(?:\.git)?$"
+    )
+    if not expected_remote.search(remote):
+        raise Refused(
+            f"destination origin {remote!r} is not tavisrudd/{repository} on GitHub"
+        )
+
+    with tempfile.TemporaryDirectory(prefix=f".{repository}-export-", dir=root.parent) as tmp:
+        candidate = Path(tmp) / repository
+        manifest = materialize_repository(source_ref, repository, candidate)
+        candidate_paths = {
+            item["path"] for item in manifest["files"]
+        } | {"export-manifest.json"}
+        tracked = {
+            path.decode("utf-8")
+            for path in repository_git(root, "ls-files", "-z").split(b"\0")
+            if path
+        }
+        removed_paths = sorted(tracked - candidate_paths)
+        if removed_paths:
+            raise Refused(
+                "sync would remove tracked destination paths; reconcile them explicitly first: "
+                f"{removed_paths}"
+            )
+        regressions = metadata_regressions(root, candidate)
+        if regressions and not allow_metadata_removal:
+            raise Refused(
+                "sync would remove public metadata; move it to the authoritative source or pass "
+                f"--allow-metadata-removal: {regressions}"
+            )
+
+        changed = 0
+        for rel in sorted(candidate_paths):
+            source = candidate / rel
+            destination = root / rel
+            data = source.read_bytes()
+            if not destination.is_file() or destination.read_bytes() != data:
+                changed += 1
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
+            destination.chmod(source.stat().st_mode & 0o777)
+
+    manifest["synced_files_changed"] = changed
+    return manifest
+
+
 def command_plan(args: argparse.Namespace) -> int:
     document = build_plan(args.source_ref, args.repository)
     if args.json:
@@ -765,6 +901,21 @@ def command_materialize(args: argparse.Namespace) -> int:
     print(
         f"materialized={args.out.expanduser()} repository={manifest['repository']} "
         f"source_commit={manifest['source_commit']} files={len(manifest['files']) + 1}"
+    )
+    return 0
+
+
+def command_sync(args: argparse.Namespace) -> int:
+    manifest = sync_repository(
+        args.source_ref,
+        args.repository,
+        args.root,
+        allow_metadata_removal=args.allow_metadata_removal,
+    )
+    print(
+        f"synced={args.root.expanduser()} repository={manifest['repository']} "
+        f"source_commit={manifest['source_commit']} "
+        f"changed={manifest['synced_files_changed']}"
     )
     return 0
 
@@ -870,6 +1021,15 @@ def parser() -> argparse.ArgumentParser:
     materialize.add_argument("--repository", required=True)
     materialize.add_argument("--out", required=True, type=Path)
     materialize.set_defaults(function=command_materialize)
+    sync = subparsers.add_parser(
+        "sync",
+        help="safely refresh one clean Git mirror without deleting paths or public metadata",
+    )
+    sync.add_argument("--source-ref", default="HEAD")
+    sync.add_argument("--repository", required=True)
+    sync.add_argument("--root", required=True, type=Path)
+    sync.add_argument("--allow-metadata-removal", action="store_true")
+    sync.set_defaults(function=command_sync)
     verify = subparsers.add_parser(
         "verify", help="verify one candidate's tracked tree against its canonical export manifest"
     )
