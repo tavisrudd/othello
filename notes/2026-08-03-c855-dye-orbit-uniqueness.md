@@ -176,14 +176,10 @@ return each root.
 | existence condition (characteristic not two, five a square)    | proved here as a corollary, not cited      |
 | the equality arc is an arc at all (no three collinear)         | proved here, unconditionally               |
 | Dye's alternating-group stabilizer, previously cited only      | proved here as a corollary                 |
-| Dye's associated polarity as a separate object                 | **not addressed**; see below               |
+| Dye's unique associated polarity                               | proved below, every odd characteristic     |
 
-The one piece of the cited Dye package not settled here is the *unique associated polarity* as an
-object in its own right — the statement that the hexagon is self-polar for exactly one polarity, and
-that the five non-concurrent one-factors are its five self-polar triangles. The stabilizer corollary
-above makes this plausible and supplies the group, but the polarity itself was not constructed. It
-is a short additional computation in the normal form `X_φ` and is the natural next step; nothing in
-the present argument depends on it.
+With the polarity section below, every clause of the cited Dye package that Paper I actually
+consumes is now proved rather than transferred.
 
 ## Formalization note
 
@@ -248,8 +244,141 @@ of Brianchon count ten. Both order-eleven arcs are projectively equivalent to `E
   merge; whether the stabilizer there is correspondingly larger was not checked. Evidence gap: one
   short computation over the field of five elements; owning successor: none allocated, recorded as a
   descriptive question.
-- *The associated polarity.* Open, and now the only unproved item of the cited Dye package. Stated
-  as a clause above with its exact content; no argument attempted.
+- *The associated polarity.* Settled: unique, explicit, nondegenerate in every odd characteristic,
+  and pinned down by any two of the five triangles.
+- *Why does the associated conic swallow the whole configuration at characteristics five and three?*
+  Partly settled. The quadratic form takes values of norm `−5` at the six vertices and of norm `−9`
+  at the ten Brianchon points, so the two degeneracies are forced by those two norms and nothing
+  else. What is not explained is why the norms are exactly `−5` and `−9`, that is, why the vertex
+  values are `√5` times units and the Brianchon values `3` times units. The `−5` is plainly the
+  discriminant that already runs through the whole argument; the `3` is not accounted for. Evidence
+  gap: no invariant-theoretic derivation attempted. Recorded as a descriptive question with no
+  owning successor.
+- *Why is the external/internal type of the vertices order-dependent while their being a single
+  common type is not?* Open. The six vertex values are pairwise ratios of units of `ℤ[φ]`, which
+  explains why the six always agree, and the same for the ten Brianchon points; but which of the two
+  types occurs varies with the order in a pattern not identified here (external at orders eleven,
+  thirty-one, forty-one, seventy-one; internal at nineteen, twenty-nine, fifty-nine, seventy-nine).
+  Actionable consequence already taken: Paper I must tag Edge's reading to order eleven.
+
+## The associated polarity
+
+### What Paper I actually consumes
+
+Two passages use the clause, and neither needs Dye's broadest synthetic form.
+
+- The introduction, on the reconstruction chain: "The reconstructed conic then determines its
+  polarity, and Dye's theorem identifies the stabilizer as `A₅`." The first half is the tautology
+  that a nonsingular conic determines a polarity; the second half is the stabilizer corollary
+  already proved above.
+- The self-polar structure section and the surrounding hexagon discussion: "Edge's finite-plane
+  construction and Dye's general-field synthetic theory exhibit five triangles on the six vertices,
+  self-polar for `𝒞`. Their vertex-pair matchings partition the fifteen pairs into five perfect
+  matchings of the complete graph on six vertices," together with the sentence "in the displayed
+  coordinates the associated conic is `𝒞`."
+
+So the operative content is: the five triangles cut out by the five *non-concurrent* one-factors are
+self-polar for one and the same polarity, that polarity is unique, and at order eleven its conic is
+the uncovered-locus conic `𝒞`. That is exactly the statement proved below. Note that the
+"vertex-pair matchings partition the fifteen pairs" sentence is the equality structure already
+proved above: the five non-concurrent one-factors are a one-factorization.
+
+The triangle attached to a non-concurrent one-factor `{ab, cd, ef}` is the triangle whose three
+*sides* are the chords `ab`, `cd`, `ef` and whose three vertices are their pairwise intersections;
+the vertex opposite the side `ab` carries the label `{a,b}`, which is the vertex-pair labelling the
+manuscript refers to. It is a genuine triangle precisely because the one-factor is non-concurrent.
+
+### The polarity, explicitly
+
+Work in the golden normal form and take the labelling used above, so the five non-concurrent
+one-factors are `{12,36,45}`, `{13,24,56}`, `{14,26,35}`, `{15,23,46}`, `{16,25,34}`. A symmetric
+matrix `S` makes the triangle with vertices `V₁,V₂,V₃` self-polar exactly when `Vᵢᵀ S Vⱼ = 0` for
+`i ≠ j`, since then the polar `S Vᵢ` of each vertex is the line through the other two. The five
+triangles therefore impose fifteen linear conditions on the six-dimensional space of symmetric
+matrices.
+
+**Theorem (unique associated polarity).** Over any field of odd characteristic containing a golden
+root `φ`, the fifteen conditions have a one-dimensional solution space, spanned by
+
+```
+        ⎡ 2φ−1   −1     −φ   ⎤
+   S =  ⎢  −1   2φ−1    −φ   ⎥,        det S = 4φ.
+        ⎣  −φ    −φ    3φ+1  ⎦
+```
+
+Since `2` is invertible and `φ = 0` is impossible (it would force `0 = 1` in `φ² = φ + 1`), the
+determinant is nonzero, so `S` is a nondegenerate polarity in every odd characteristic. Hence the
+arc has exactly one associated polarity, and it is canonical: the five non-concurrent one-factors
+are determined by the arc alone, so `S` is a projective invariant of the arc.
+
+*Verification.* Both halves are identities in the ring `ℤ[x]/(x² − x − 1)`, computed exactly, so
+they hold in every characteristic without a case split.
+
+- *Existence.* All fifteen conditions `Vᵢᵀ S Vⱼ` reduce to zero in `ℤ[x]/(x² − x − 1)`.
+- *Uniqueness.* The fifteen-by-six coefficient matrix has a five-by-five minor equal to
+  `8·(13 − 8φ)`. The factor `13 − 8φ` has norm `13² + 13·(−8) − 8² = 1`, so it is a unit of `ℤ[φ]`,
+  and `8` is a unit in odd characteristic. So the rank is at least five in every odd characteristic;
+  since `S` is a nonzero solution the rank is exactly five and the solution space is the line
+  through `S`. The minor already lives in the rows coming from the first two triangles alone, so
+  **any two of the five triangles determine the polarity**, and the other three are then forced —
+  which is the geometric content of the classical fact that two triangles in general position have a
+  unique common self-polar conic.
+
+### Consequences, and where Edge's reading is order-specific
+
+Evaluating the quadratic form `Q(v) = vᵀ S v` on the configuration, again exactly in
+`ℤ[x]/(x² − x − 1)`:
+
+- The six vertices give the values `2φ−1` (four times), `3φ+1`, and `3φ−4`. Each has norm `−5`, so
+  each is `√5` times a unit of `ℤ[φ]`. **The vertices lie off the associated conic exactly when the
+  characteristic is not five.** This proves, uniformly, the assertion Paper I currently attributes
+  to Dye's calculation for characteristic eleven ("the six vertices lie on no conic in
+  characteristic eleven" is the stronger statement that no conic at all passes through them, which
+  the development checks separately in the code section; what is proved here is the weaker and
+  differently-used fact that they miss the *associated* conic). In characteristic five all six
+  vertices lie on the conic — consistent with the earlier boundary observation that there the
+  equality configuration degenerates to a conic.
+- The ten Brianchon points give the values `3φ−3`, `6φ−9`, and `3φ`, each of norm `−9`, so each is
+  `3` times a unit. **The Brianchon points lie off the associated conic exactly when the
+  characteristic is not three.** Characteristic three is not vacuous here: `5 = 2 = −1` is a square
+  in the field of nine elements, so the equality configuration exists in the plane of order nine,
+  and there all ten Brianchon points lie on its associated conic.
+- At order eleven the conic of `S` has twelve points and coincides, as a point set, with the
+  uncovered locus `𝒰(A)`. This is the manuscript's "in the displayed coordinates the associated
+  conic is `𝒞`". It is genuinely an order-eleven identification: the Brianchon-count identity gives
+  `|𝒰(A)| = 22 − 10 = 12 = q + 1` only at `q = 11`, and at orders nineteen, twenty-nine, and
+  thirty-one the uncovered locus has one hundred forty, four hundred eighty, and five hundred
+  seventy-two points against a conic of twenty, thirty, and thirty-two.
+- **Edge's external/internal reading does not generalize.** At every order the six vertices share a
+  single conic type and the ten Brianchon points share a single conic type, but which type it is
+  depends on the order. At order eleven the vertices are external and the Brianchon points internal,
+  which is Edge's statement and the one Paper I quotes; at order nineteen it inverts, the vertices
+  being internal and the Brianchon points external; at orders twenty-nine and fifty-nine both are
+  internal; at orders thirty-one and sixty-one both are external. Paper I should therefore keep
+  Edge's reading explicitly tagged to order eleven, which is how it is used, rather than as a
+  property of the hexagon.
+
+### Verdict on the polarity clause
+
+**Proved, for every odd characteristic, in the form Paper I consumes.** The arc has exactly one
+associated polarity, given by the displayed `S`; two of the five triangles already pin it down; the
+polarity is nondegenerate with `det S = 4φ`; the vertices avoid its conic outside characteristic
+five; and at order eleven its conic is exactly the uncovered locus `𝒞`. All of it is a
+`decide`-scale computation over `ZMod 11` after specialization, so like the orbit clause it is
+replaceable in Lean by proof rather than by an audited import.
+
+### Replay
+
+```
+python3 notes/2026-08-03-c855-dye-polarity.py
+```
+
+`notes/2026-08-03-c855-dye-polarity.py` does all of the above in exact arithmetic in
+`ℤ[x]/(x² − x − 1)`: it prints `S`, checks that all fifteen self-polarity conditions vanish
+identically, prints `det S = 4x`, exhibits the unit-times-power-of-two five-by-five minor from the
+first two triangles, evaluates the quadratic form at the vertices and Brianchon points, and at order
+eleven checks that the conic of `S` equals the uncovered locus and recovers Edge's external and
+internal readings by counting how often each polar line meets the conic.
 
 ## What this record does not establish
 
