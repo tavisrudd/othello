@@ -10,9 +10,16 @@
 staging section below. Move the shared projective-plane vocabulary out of the
 cap modules into `RelativeConicArcs` in stages; keep all cap-game material —
 especially cap-game certificates — out of the finitegeom builds and paper
-closures. Re-derivation is rejected. Still open: the lane peg, whether Paper II
-repackaging under C577 waits for this, and whether stage 1 lands immediately
-for AME/LU, Paper IV, and `beyond4_prs`.
+closures. Re-derivation is rejected.
+
+**Sequencing and authorization (Tavis, 2026-08-03):** pegged to `clebsch` with
+explicit cross-lane authorization for the cap-owned and shared
+`RelativeConicArcs` edits and the affected foreign gate revalidations,
+executed by sub-agents under the C855 management session. Stage 1 lands
+immediately in the next free finitegeom build window; stages 2--4 execute as
+one window with a single revalidation sweep; the C855 rename/gate/manifest
+window runs only after that; Paper II repackaging under C577 waits for
+stages 2--4.
 
 ## Why this exists
 
