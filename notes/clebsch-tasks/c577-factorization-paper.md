@@ -4,24 +4,17 @@
 
 **Opened:** 2026-07-24
 
-**Status:** active, blocked on C856.  The C749 human freeze,
-Milnor--Serre exposition pass, deterministic packaging, and local standalone
-forward commit are complete, but the 2026-08-02 standards audit reopened the
-C750/C801 formal closure.  Do not push the current standalone commit.  C856
-must repair and replay the authoritative Lean/trust surface first; C577 then
-owns a new forward synchronization and the remaining publication steps.
-
-**Sequencing and scope (2026-08-03).** Repackaging and the new canonical
-standalone forward commit also wait for C860 stages 2--4.  Those stages change
-the membership of the Paper II gate closure
-(`RelativeConicArcs.Gates.ClebschFactorization` and its axiom audit), so every
-export-manifest hash and the module count must be regenerated afterwards rather
-than before.  C577 must not audit, document, or remediate any `ProjectiveCap`
-or `CapGame` module; it consumes the audited, relocated shared
-projective-plane base that C860 delivers under `RelativeConicArcs`, documented
-during the move.  A residual cap-game import in the Paper II closure after
-C860's stages is a defect to report to C860, not to repair here.  Measured
-deltas: `notes/2026-08-03-c860-execution-design.md`.
+**Status:** active; unblocked 2026-08-03.  C856 is complete and independently
+verified (`notes/2026-08-03-c856-review-verification.md`), and C860 closed by
+the accepted lighter route: the cap-game modules are out of the Paper II gate
+closure, `ProjectiveCap.PlaneAffineChart` entered it, and the five remaining
+`ProjectiveCap` geometry modules are documented to the referee standard
+(`notes/2026-08-03-c860-cap-closure-remediation.md`).  Their documented
+imports remaining in the closure are accepted by explicit user decision, not
+a defect.  The superseded standalone commit `71751691` must still not be
+pushed.  C577 now owns regenerating the export manifests and module counts
+against the changed closure, a new canonical standalone forward commit, its
+isolated replay, and the remaining publication steps.
 
 ## Objective
 
