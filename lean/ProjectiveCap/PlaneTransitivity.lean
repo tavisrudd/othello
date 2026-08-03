@@ -1,4 +1,5 @@
 import ProjectiveCap.Projective
+import ProjectiveCap.ProjectiveCapGame
 import Mathlib.LinearAlgebra.Projectivization.Subspace
 import Mathlib.Tactic
 
