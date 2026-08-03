@@ -511,7 +511,13 @@ with the integrated manuscript.  The archive-facing PDF pass adds the missing
 embedded title, author, subject, and keyword metadata without changing visible
 content.  A final public-package consistency pass finds no stale title, page
 count, hash, or bibliography key and removes the redundant instruction to run
-the source-replay subgate again after the complete gate.
+the source-replay subgate again after the complete gate.  The tracked
+sixteen-page release PDF is committed at `5219da07`.  Build-sys has prepared
+the deterministic standalone refresh and exact optional-formal-companion
+intake in
+`notes/2026-08-02-golden-quantum-statistics-standalone-export.md`; the current
+mirror remains the superseded fourteen-page export, and no Lean or mirror
+mutation is authorized before its recorded gates.
 Frozen report:
 `notes/2026-08-02-c829-golden-external-mathematical-cold-read.md`.
 
