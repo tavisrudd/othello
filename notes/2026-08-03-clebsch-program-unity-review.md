@@ -509,3 +509,105 @@ series is one program; Option 2 explains why the common object carries
 exceptional geometry; Option 3 explains why its rigidity can be used.
 Combining all three as parallel sections would destroy the short-paper
 constraint unless a single stronger theorem makes them formal corollaries.
+
+## Option 4 — the master theorem: the self-reconstructing Clebsch cubic
+
+There is a plausible single theorem under which Options 1--3 become
+corollaries rather than competing architectures.  Its organizing notion is
+that the golden cubic is intrinsically fixed by its own Hodge shadow.
+
+Start with an oriented cubic \(Z\) on the augmentation five-space whose
+singular scheme is a projective frame of six ordinary nodes.  Recover the
+six-axis frame from those nodes and, on the locus where the triangle
+coefficients are nonzero and admit an edge lift, recover the edge-gauge class
+\([A_Z]\).  Define the oriented Hodge-shadow operation by
+
+\[
+ \mathscr H(Z):=H_{A_Z}
+ =\operatorname{Pf}[D_x,A_Z],
+\]
+
+where the determinant-line orientation records the global sign introduced by
+switching.  Call \(Z\) **self-shadowing** if
+
+\[
+ \mathscr H(Z)=\mu Z,\qquad \mu\ne0.
+\]
+
+The proposed master statement is:
+
+> **Golden prolongation theorem.** Up to relabelling and orientation, the
+> golden cubic is the unique nondegenerate self-shadowing six-axis cubic.
+> Its reconstructed edge operator satisfies \(C^2=5I\); its spectral algebra
+> is \(E\simeq\mathbf Q[C]\); and it admits a unique compatible prolongation
+> to the graded \(6|15|6\) Cartan cubic.  The self-shadowing point is reduced
+> and quantitatively transverse to every direction except scale and the
+> declared symmetries.
+
+Schematically,
+
+\[
+ \boxed{
+ \begin{gathered}
+ \mathscr H(Z)\parallel Z\\
+ \Downarrow\\
+ Z\text{ is the golden cubic}\\
+ \Downarrow\\
+ (C,E,\text{rank-three golden module})\\
+ \Downarrow\\
+ \text{unique graded Cartan prolongation}.
+ \end{gathered}}
+\]
+
+The theorem would make the three earlier options immediate.
+
+1. **Lossless Rosetta.**  Once the cubics of Papers I--III are shown to be
+   self-shadowing with the same marked orientation, uniqueness identifies
+   them.  Reconstruction of \(C\) and \(E\) supplies the inverse arrows.
+2. **Exceptional closure.**  The unique-prolongation clause identifies the
+   reconstructed golden operator with the \(6|15|6\) Cartan package and hence
+   its \(27\) lines and \(45\) tritangents.
+3. **Cubic self-testing.**  Reducedness and transverse differential give a
+   local inverse estimate; an effective lower singular-value bound and
+   compact separation on a normalized edge-bounded locus give the robust
+   certification inequality.
+
+This formulation is stronger than a coordinate Rosetta comparison.  It says
+the three cubics agree because an intrinsic fixed-point property admits only
+one object, and that the operator, exceptional extension, and stability are
+forced prolongations of the same rigidity.
+
+Substantial parts of the core already exist:
+
+- triangle holonomy reconstructs the switching class;
+- nonzero proportionality \(H_A=\mu T_A\) forces \(A^2=\lambda I\);
+- the sign locus contains exactly the two oriented golden solutions modulo
+  the declared symmetries;
+- the golden points are projectively isolated and reduced in the full
+  weighted edge ambient space;
+- the six ordinary nodes reconstruct the axis frame;
+- \(E\simeq\mathbf Q[C]\), the carrier has rank three over \(E\), and the
+  commutator determinant is the quadratic norm of the cross determinant.
+
+The genuinely new obligations are:
+
+1. define \(\mathscr H\) intrinsically on the correct oriented cubic
+   groupoid, with no hidden prior choice of \(C\);
+2. settle the global weighted fixed locus or state the uniqueness theorem
+   honestly on the equimodular/sign locus while retaining only local
+   weighted stability;
+3. upgrade the \(6|15|6\) dictionary and Cartan monomial support to exact
+   tensor equality, canonical uniqueness, and reverse reconstruction; and
+4. turn transverse Jacobian rank into an effective stability radius and
+   reconstruction bound.
+
+Paper IV becomes a fourth corollary only if its reconstructed minimum-word
+geometry canonically produces a self-shadowing cubic with the required
+orientation.  That bridge is not presently part of its theorem.
+
+The corresponding short-paper title is *The self-reconstructing Clebsch
+cubic*.  Its one-line punch is:
+
+> The golden cubic is the unique cubic reconstructed by its own Hodge shadow,
+> and its arithmetic, operator, exceptional, and stable realizations are
+> forced by that fixed-point property.
