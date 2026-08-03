@@ -15,12 +15,19 @@ automorphism group.
 
 ## Meaning of “full Lean”
 
-For release purposes, a paper theorem is fully formalized only when its public
-aggregate has no declaration-local native-evaluation axiom, no trusted Python
-premise, and no unformalized human transport.  Ordinary foundational axioms
-reported by Mathlib—such as choice, propositional extensionality, and quotient
-soundness—are permitted and must be listed.  Python programs may remain as
-independent cross-checks but carry no logical weight.
+For release purposes, the formal package is complete when every manuscript
+clause has an exact entry in the series-standard statement, trust, and formal
+coverage ledgers, and every claim described as Lean-proved names an elaborated
+declaration with its actual axioms.  Release-facing Lean terminals have no
+declaration-local native-evaluation axiom or trusted Python premise.  Ordinary
+foundational axioms reported by Mathlib—such as choice, propositional
+extensionality, and quotient soundness—are permitted and must be listed.
+
+Short structural human proofs and exact classical inputs remain legitimate
+proof modes under the series trust standard.  They must be complete in the
+manuscript or pinned to precise literature, and the aggregate must not advertise
+their clauses as kernel checked.  Python programs may remain independent
+cross-checks but carry no logical weight.
 
 Proof-producing reflection, kernel reduction, generated proof terms, and
 proved reusable finite certificates are permitted.  `native_decide` is not a
@@ -39,10 +46,11 @@ release proof endpoint.
 4. **Pair recovery:** prove the exact pair table, the fused-color splitter,
    color-eight recovery of every polar row, parity-image equality with the
    code, unary constancy, and exact arity two.
-5. **Symmetry and plane:** prove the scheme automorphism theorem, construct the
-   fourteen Sylow-13 subgroups and 169 involutions internally, prove the three
-   incidence rules, identify the resulting 183-point plane and polarity, and
-   recover the original internal block.
+5. **Symmetry and plane:** formalize the compact anchor and coordinate-algebra
+   mechanisms; retain sharp three-transitivity, the Sylow/involution
+   construction, and the classical adjoint/polarity dictionary as exact
+   human/classical trust rows when formalizing their general group theory would
+   create a disproportionate dependency tree.
 6. **Hidden field:** construct the operator field, prove its identification
    with \(\mathbf F_8\), the equivalence \(K\simeq\mathbf F_8^{12}\), the three
    scalar actions, and the Gram/spanning consequences.
@@ -53,6 +61,11 @@ release proof endpoint.
 ## Engineering constraints
 
 - Reuse the shared semantic geometry; do not create a second coordinate model.
+- Match the other numbered papers' release machinery: tracked statement
+  identity, claim-by-claim trust manifest, formal theorem map, frozen axiom
+  transcript, generated-artifact provenance, public release allowlist,
+  aggregate import gate, and a single release verifier.  Paper IV may strengthen
+  those standards, but it may not use a weaker or bespoke ledger.
 - Shard expensive proof-producing computations and keep generated artifacts
   deterministic, reviewable, and hash-addressed.
 - Each packet must have a cheap focused build before entering the aggregate.
@@ -63,11 +76,18 @@ release proof endpoint.
 ## Acceptance
 
 - A clean public checkout builds the full aggregate under the pinned toolchain.
-- The aggregate theorem matches every clause of the manuscript main theorem.
+- The statement-identity, trust-manifest, formal-map, axiom-transcript,
+  provenance, allowlist, and release-verifier surfaces use the same schema
+  discipline and cross-checks as the rest of the series.
+- The release correspondence covers every clause of the manuscript main
+  theorem and distinguishes kernel, certificate, classical, and human proof
+  modes exactly.
 - Its axiom closure contains no native-evaluation or project-local axiom and no
   trusted-execution premise.
-- Every former Python/native/human boundary is either a Lean proof or an
-  explicitly cited imported Lean theorem whose assumptions match exactly.
+- Every former native or Python theorem boundary is replaced by a Lean proof,
+  a proof-producing Lean certificate, or an explicitly nonformal independent
+  replay.  Human and classical boundaries are retained only where the
+  architecture report justifies them and the trust ledger states them exactly.
 - Independent Python replay, source hygiene, warning-free PDF, isolated build,
   and immutable-artifact checks pass.
 - Only after C834 is complete may C761 request publication authority.
