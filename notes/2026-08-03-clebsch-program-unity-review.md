@@ -472,25 +472,35 @@ the minuscule \(E_6\) geometry from an order-six conference operator.”
 ### Option 3 — cubic self-testing
 
 The outward-facing single punch is a quantitative recognition theorem.  For
-a normalized symmetric zero-diagonal operator \(A\), put
+a normalized symmetric zero-diagonal operator \(A\) with both cubic
+coefficient vectors nonzero, use the projective proportionality defect
 
 \[
- \Delta(A)=\inf_\mu\|H_A-\mu T_A\|.
+ \Delta_{\mathrm{proj}}(A)
+ =
+ \frac{\|H_A\wedge T_A\|}
+ {\|H_A\|\,\|T_A\|}.
 \]
 
-The exact theorem already gives \(\Delta(A)=0\Rightarrow A^2=\lambda I\)
-when the edges are nonzero, and recognizes the golden orbit on the sign
-locus.  The level-up would prove an effective estimate such as
+Near a fixed orientation one may instead use the normalized affine defect
+\(\|H_A\mp4T_A\|\).  The nonvanishing denominator is essential: allowing
+the proportionality scalar to be zero would admit the 172 non-golden sign
+operators with \(H_A=0\).
+
+The exact theorem already gives
+\(\Delta_{\mathrm{proj}}(A)=0\Rightarrow A^2=\lambda I\) when the edges and
+both shadows are nonzero, and recognizes the golden orbit on the sign locus.
+The level-up would prove an effective estimate such as
 
 \[
  \operatorname{dist}(A,\mathcal C_{\mathrm{gold}})
- \le K_\eta\,\Delta(A)
+ \le K_{\eta,\rho}\,\Delta_{\mathrm{proj}}(A)
 \]
 
-under a normalization and a lower edge bound \(\eta\), together with an
-explicit reconstruction or decoding procedure.  A different exponent may
-be required for a global inequality; the rank-\(14\) Jacobian currently
-supports an effective local theorem.
+under a normalization, a lower edge bound \(\eta\), and lower shadow-norm
+bound \(\rho\), together with an explicit reconstruction or decoding
+procedure.  A different exponent may be required for a global inequality;
+the rank-\(14\) Jacobian currently supports an effective local theorem.
 
 Mathematicians would care because twenty third-order coefficients would
 certify an entire structured operator.  The same theorem becomes robust
@@ -611,3 +621,225 @@ cubic*.  Its one-line punch is:
 > The golden cubic is the unique cubic reconstructed by its own Hodge shadow,
 > and its arithmetic, operator, exceptional, and stable realizations are
 > forced by that fixed-point property.
+
+## Adversarial red team of Options 1--4
+
+**Method.**  This pass reads each headline in its strongest natural sense,
+then asks four hostile questions: whether the claimed inverse really recovers
+the source rather than only a common output; whether markings or gauge choices
+destroy canonicity; whether the new claim exceeds classical inputs and the
+already completed C691/C697/C809 corpus; and whether the proof can remain a
+short single-punch paper.  The exact C691, C697, and C809 certificate replays
+were rerun and passed before these verdicts.
+
+| option | red-team verdict | strongest claim surviving now | decisive missing gate |
+|---|---|---|---|
+| 1. golden round trip | **conditional GO; best Paper-V candidate** | the common oriented cubic reconstructs the six-axis switching class, \(C\), and \(E=\mathbf Q[C]\) | exact three-paper transport and a strict audit of what reconstructs an original source versus only its golden output |
+| 2. exceptional closure | **high-upside NO-GO at present strength** | the operator-derived lines give the graded Cartan representation and cubic support/isomorphism class | resolve the \(24\) coefficient-gauge invariants and prove canonical signed tensor extension plus reverse recovery |
+| 3. cubic self-testing | **promising separate theorem; NO-GO as stated application** | exact recognition and local projective reducedness at the golden orientations | well-posed projective defect, quantitative conditioning, remote-solution exclusion on the claimed domain, and an observable measurement model |
+| 4. golden prolongation master theorem | **north-star conjecture, not a current theorem packet** | its sign-locus recognition and spectral-algebra core are proved | intrinsic shadow domain, global fixed-locus theorem, exact Cartan prolongation, and effective stability do not yet follow from one mechanism |
+
+### Red team 1 — the golden round trip
+
+The central forward and inverse operator claim is real.  C691 proves that the
+Paper-I cubic reconstructs its projective six-node frame, triangle holonomy
+reconstructs the switching class, balance recovers \(B^2=5I\), and the
+operator recovers every cubic coefficient.  The new spectral calculation
+then identifies \(E=\mathbf Q[C]\).  This is the strongest foundation among
+the four options.
+
+The promotional version nevertheless overstates three points.
+
+1. **Golden output is not the entire source.**  Recovering \(C\) does not
+   presently reconstruct the full q11 code and deep-hole incidence, the
+   entire Paper-II matching quotient over every odd field, or Paper III's
+   global Stein cover.  The valid round trip is among the marked golden
+   output packages unless separate inverse functors back to the original
+   sources are proved.
+2. **The Paper-III marking obstruction remains.**  C733 proves negatively
+   that a sheet does not recover the chart lift or the cross-identification
+   of the five-labelled systems.  Option 1 must say “relative to the marked
+   bridge,” not that the cubic canonically recovers all orientation data.
+3. **The increment over C691 may be small.**  C691 already proves
+   \(Z\leftrightarrow[C]\) inside Paper I.  If the Paper-II and Paper-III
+   transports reduce to twenty coefficient comparisons, the result may be a
+   beautiful synthesis note rather than a new major paper.  A targeted
+   precedence audit is also still required.
+
+Paper IV is not in the literal round trip.  Its minimum layer reconstructs
+\(\operatorname{PG}(2,13)\), but no current theorem sends that recovered
+geometry canonically to the oriented golden cubic.
+
+**Surviving headline.**
+
+> Under explicit markings, three independent recognition passages land in
+> one oriented cubic; that cubic is a complete invariant of their common
+> golden operator package.
+
+**Kill/confirm gate.**  Write the three actual transport maps, compose each
+with the C691 inverse, and list exactly which named input data return.  If
+only the already chosen six-axis labels return, demote “round trip” to
+“common complete output invariant.”  If the natural paper-level outputs
+return equivariantly, Option 1 remains a strong short Paper V.
+
+### Red team 2 — exceptional closure
+
+C695/C697 already give more than a numerical analogy: an operator-derived
+twenty-seven-line configuration, the \(6|15|6\) minuscule carrier, all
+tritangent supports, and the standard mixed-plus-Pfaffian Cartan cubic as an
+isomorphism class up to scalar.  That makes the route credible.
+
+It also exposes the exact obstruction to the stronger headline.  The
+\(45\times27\) tritangent exponent matrix has rank \(21\), leaving \(24\)
+multiplicative gauge invariants.  The geometric line and tritangent
+incidences do not currently supply globally comparable local linear
+equations, so they do not select a canonical signed Cartan tensor.  Rational
+descent further needs a determinant-character twist on one row that the
+unoriented line configuration does not choose.  Row exchange, golden
+Galois, and \(27\leftrightarrow27^\vee\) duality are three different
+operations.
+
+There is also a significance trap.  A double-six determining the remaining
+fifteen lines and the \(A_1\times A_5\) model of the Cartan cubic live close
+to classical \(E_6\) geometry.  If Paper V only rederives that standard
+extension in operator coordinates, specialists may call it an explicit
+dictionary rather than a new exceptional construction.  The new theorem
+must concern the arithmetic signed tensor, its uniqueness, or a genuinely
+new reverse characterization.
+
+**Surviving headline.**
+
+> The golden operator canonically determines the minuscule line
+> configuration and a graded Cartan cubic isomorphism class.
+
+**Kill/confirm gate.**  Extract compatible coefficients for the \(45\)
+geometric tritangent factorizations, compute their \(24\) gauge invariants,
+and compare them with the standard Cartan tensor.  Then compute the fibre of
+extensions modulo the allowed marking group.  More than one orbit kills
+“unique”; failure of rational signed descent kills “canonical over
+\(\mathbf Q\)”; a single equivariant orbit with reverse recovery earns the
+holy-shit headline.  A publication-grade classical \(E_6\)/double-six audit
+must run in parallel.
+
+### Red team 3 — cubic self-testing
+
+The original shorthand
+\(\inf_\mu\|H_A-\mu T_A\|\) was ill posed: taking \(\mu=0\) makes every
+zero-Pfaffian example have zero defect.  C809 records 172 such invertible
+non-golden signings.  The option has therefore been corrected above to the
+projective wedge defect, with lower bounds on both shadow norms, or to the
+fixed-ratio defect near one golden orientation.
+
+Even after that repair, the proved theorem is local.  C809 shows rank \(14\)
+in fifteen edge variables at the two golden rays, but explicitly does not
+classify remote real or complex weighted components.  An effective
+implicit-function estimate near the golden ray is plausible; a global
+self-test needs exclusion or quantitative separation of every remote
+component and of the edge-zero and shadow-zero degenerations.
+
+The proposed application also lacks its observation map.  Both \(H_A\) and
+\(T_A\) are cubic functions of the unknown entries of \(A\).  Calling their
+coefficients “twenty measurements” is justified only after a physical or
+statistical protocol shows how those coefficients are observed without
+already learning \(A\).  The free-fermion interpretation suggests such a
+protocol but does not supply it.  C810's aligned-certificate distance is a
+different binary observation map and, in the unrestricted family, corrects
+no unknown substitution; it cannot be cited as generic robustness of the
+cubic self-test.
+
+Finally, local stability from a nonsingular Jacobian may be useful but is not
+automatically a major theorem.  The paper needs either sharp/global
+conditioning, an unexpectedly small measurement scheme, or a convincing
+external application.
+
+**Surviving headline.**
+
+> Near either normalized golden orientation, fixed-ratio cubic-shadow defect
+> controls distance to the golden scaling ray.
+
+**Kill/confirm gate.**  Compute the exact smallest transverse singular value
+and a certified nonlinear remainder bound; search normalized edge-bounded
+space for small-defect remote points; and write the actual measurement map.
+If the condition number is poor or remote approximate solutions occur,
+retain only a local rigidity corollary.  If the bound is effective and the
+coefficients are independently observable, Option 3 becomes a strong
+applications paper, but not the cleanest culmination of the five-paper
+series.
+
+### Red team 4 — the golden prolongation master theorem
+
+The master statement currently joins three mechanisms that are not yet one
+mechanism.
+
+1. **The shadow operation is not defined on a generic cubic.**  Recovering
+   \(A_Z\) from cubic coefficients requires an edge lift and the four-point
+   two-graph identities.  Restricting to edge-liftable, equimodular cubics is
+   honest, but it builds much of the signed-graph structure into the domain
+   and weakens the claim of an intrinsic operation on cubics.
+2. **Global uniqueness is open.**  C809 proves the unique sign orbit and
+   local weighted isolation, not that the saturated weighted fixed locus has
+   no remote real or complex components.  “Unique nondegenerate
+   self-shadowing cubic” is therefore false as a current theorem statement
+   unless its domain is restricted to the scalar sign locus.
+3. **Cartan prolongation is an additional miracle.**  A self-shadow fixed
+   point does not presently force the unresolved \(24\) Cartan gauge
+   invariants.  Appending “unique Cartan prolongation” packages a separate
+   theorem rather than deriving it from Hodge self-shadowing.
+4. **Stability needs more than the word reduced.**  C809 supplies the local
+   transverse Jacobian needed near the golden point, but an effective or
+   global inequality still requires normalization, lower nonvanishing
+   bounds, condition estimates, and remote separation.
+5. **Rosetta orientation is not automatic.**  The fixed locus has two outer
+   orientations, so each paper's marked transport must still prove which
+   one it reaches.
+6. **Paper IV remains external.**  No self-shadowing cubic is yet recovered
+   from its minimum-word theorem.
+
+The workload also violates the short-paper premise.  A global saturated-ideal
+classification, geometric Cartan linearization, three-paper marking audit,
+and quantitative inverse theorem are individually substantial.  Unless one
+new structural argument collapses all four, combining them is a replacement
+mega-paper.
+
+**Surviving restricted master theorem.**
+
+> On the normalized scalar sign locus, the nonzero projective fixed points
+> of the Hodge/triangle shadow comparison are exactly the two oriented golden
+> cubics; each reconstructs \(C\), the rank-three \(E\)-module, and the norm
+> shadow, and each is locally reduced in the weighted ambient space.
+
+This is defensible and nearly assembled, but it is mostly C691+C809 plus the
+spectral-algebra theorem.  It does not yet give Options 2 and 3 as substantial
+corollaries.
+
+**Kill/confirm gate.**  Run the saturated-ideal/global inequality test first.
+If remote weighted components exist, keep the master theorem on the sign
+locus and abandon the universal fixed-point language.  If the golden rays
+are the complete nonzero projective fixed locus, ask whether that theorem
+itself forces the Cartan gauge invariants; if not, Option 4 remains a
+conjunction and should not headline a short paper.
+
+## Red-team disposition
+
+The adversarial ranking is:
+
+1. **Option 1 remains the only present conditional GO for a short Paper V,**
+   after replacing “recovers every source” by “is a complete invariant of
+   the common golden output package” unless the inverse-functor audit proves
+   more.
+2. **Option 2 is the highest-upside independent research gamble.**  Its
+   \(24\)-invariant linearization gate should be run before it influences
+   Paper-V architecture.
+3. **Option 3 is an applications successor, not presently the series
+   culmination.**  Correct the defect, certify conditioning, and supply an
+   observation protocol before using “self-testing.”
+4. **Option 4 is the right conceptual north star but not yet a single
+   theorem.**  In current form it hides two open classification problems and
+   one quantitative theorem inside a unifying sentence.
+
+The red team therefore strengthens rather than replaces the short-paper
+preference: land Option 1 if its exact cross-paper transport is genuinely
+more than collation.  Keep Options 2--4 as separately falsifiable theorem
+gates.  Promote the master theorem only if a new argument makes Cartan
+prolongation and stability consequences of the same fixed-point rigidity,
+rather than adjacent clauses.
