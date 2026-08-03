@@ -58,13 +58,31 @@ This is the manuscript's balanced exchange benchmark at the cross-Gram level,
 proved uniformly in the edge signs rather than by a census of the twenty
 balanced controls.
 
-## Open formal boundary
+## Eigenframe compression bridge
 
 The manuscript's exchange operator is `H = K*K` for the compression
-`K_C(x) = Q₋* D_x Q₊` between orthonormal eigenframes of `C`.  The landed
-results reach that operator only through the equality of spectra, which the
-paper proves separately.  The eigenframe compression bridge is the next formal
-target and is stated as an explicit trust boundary in the module header.
+`K_C(x) = Q₋* D_x Q₊` between orthonormal eigenframes of `C`.
+`RelativeConicArcs.ConferenceExchangeCompression` carries the matrix half of
+that bridge.  For an involution `Q` with eigenprojections `(1 ± Q)/2` and a
+frame `Qp` characterized by `Qpᵀ * Qp = 1` and `Qp * Qpᵀ = (1 + Q)/2`, it
+proves:
+
+- the commutator of the cut sign involution with a block matrix is
+  `fromBlocks 0 (2 • R) (-(2 • Rᵀ)) 0`, and its square is block diagonal with
+  `-(4 • (R * Rᵀ))` and `-(4 • (Rᵀ * R))` on the diagonal;
+- `Kᵀ * K` is the compression `Qpᵀ * (D * ((1 - Q)/2) * D) * Qp`;
+- the commutator acts on a positive eigenframe as twice the complementary
+  projection of the controlled frame; and
+- `4 • (Kᵀ * K) = Qpᵀ * (Lᵀ * L) * Qp` for that commutator `L`.
+
+What remains for the bridge is the spectral half: the compressions of
+`Lᵀ * L` to the two eigenspaces have equal characteristic polynomials, because
+the commutator intertwines them; their product is the characteristic polynomial
+of the block-diagonal `Lᵀ * L`, which is the square of that of the normalized
+cross Gram matrix; and two monic real polynomials with equal squares are equal.
+Until that lands, the exchange results reach the manuscript's operator only
+through the equality of spectra the paper proves separately, which the module
+headers state as an explicit trust boundary.
 
 Still unformalized: the all-orders exchange rigidity theorem with its aligned
 four-set purity formula and inclusion/Ramsey converse; the continuous-control
