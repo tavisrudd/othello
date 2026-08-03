@@ -47,3 +47,14 @@ interfaces, including the R10 stage budget and characteristic-seven lift,
 before sending coordinate classifications and divisor ledgers to the
 appendices.  The canonical and TIT builds are warning-free at 54 and 39 pages;
 the paper retains 75 mapped labels and 69 public evidence artifacts.
+
+## Cold-read repair
+
+A fresh geometry cold read found the 15-page body coherent and no proof bridge
+lost in the appendix move.  Its two minor findings are repaired: the roadmap
+now assigns unconditional trapped-component classification to the exact
+component-selection proposition rather than the conditional numerical theorem,
+and the conclusion repeats the intermediate-lower-package hypothesis before
+the arbitrary-redundancy large-characteristic classification.  The R10 synopsis
+also names the empty carriers in the remaining odd characteristics rather than
+an ambiguous generic odd-characteristic calculation.
