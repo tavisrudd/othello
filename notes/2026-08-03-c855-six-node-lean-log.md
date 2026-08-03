@@ -252,3 +252,91 @@ rewrites `TARGET_MANIFEST.json`, so the six-node delta travels correctly once a 
    point), then adopt the printed delta as one ordinary forward commit in the base repository.
 6. Only then does the certificate-package refresh sequence recorded in the previous section become
    runnable, and publication of the base revision remains the author's decision.
+
+## Extraction succeeded; export refused at the final delta-shape assertion (2026-08-03)
+
+With the quiet window open (`lean/scripts/lean-trust-extract.py plan --area relconic` now ends with
+`quiet window: yes`), the recorded path was run.  Steps one and two of the export chain succeeded and
+the whole verification battery passed; the exporter then refused at its last check, for a reason
+specific to *refreshing* modules that already exist in the base rather than adding new ones.  The
+base repository was not modified: `~/src/lean/finitegeom` head remains `56e4edc`, worktree clean.
+
+### Trust extraction (succeeded)
+
+```
+python3 lean/scripts/lean-trust-extract.py run --unit RelativeConicArcs.PaperIOrientationSpine
+extracted RelativeConicArcs.PaperIOrientationSpine
+  lean/trust/facts/RelativeConicArcs.PaperIOrientationSpine.json
+```
+
+The generated fact records a twenty-one module closure, all twenty-four registered terminals, Mathlib
+`571b8a8e…`, no project axiom, and no opaque or unsafe declaration.  Every terminal reduces to
+`propext`, `Quot.sound`, and (for all but one) `Classical.choice`; the retired Hassett--Tschinkel
+axiom appears nowhere in the unit.  The fact was committed in the authority as the single git change
+this round (`lean: record the orientation spine trust facts`), because the exporter reads the trust
+registry and the fact from the source commit rather than from the worktree.
+
+### Export plan (succeeded, with one pre-existing base defect)
+
+The first plan attempt refused with
+
+```
+refused: base prose disagrees with the base manifest; rerun with --accept-base-prose-drift ...
+  PROVENANCE.md: declares 251-module library state, base records 273
+```
+
+That drift predates this work: the base `PROVENANCE.md` still names a 251-module library state while
+`TARGET_MANIFEST.json` records 273.  The documented `--accept-base-prose-drift` flag leaves the
+drifted sentence untouched and was used for every subsequent invocation.  The drift is a defect the
+base repository owns and should be repaired separately.
+
+The plan then reported a twenty-one module closure whose module count is unchanged at 273, because
+every closure module already exists in the base.
+
+### Export run (refused)
+
+```
+python3 lean/scripts/lean-companion-export.py \
+  --config lean/trust/export/clebsch_support_cubic_orientation.toml \
+  --source-commit HEAD --base-commit HEAD --accept-base-prose-drift \
+  run --workdir ~/.cache/othello-lean-build/companion-export/clebsch-orientation-candidate
+refused: the candidate delta does not match the planned file set: unplanned [],
+missing ['RelativeConicArcs/ClebschGoldenConference.lean', ... , 'lakefile.toml']
+```
+
+Everything before the final assertion passed: both materializations completed, the repeat was
+byte-identical, and `verify` accepted module byte identity, manifest completeness, terminal and
+axiom-audit agreement, and an unchanged base.  The refusal is `forward_delta`, which requires the
+candidate's actual git delta to equal the planned written-file set.
+
+### Why that assertion cannot hold for this export
+
+The planned set is every file the exporter writes; the actual delta is every file whose bytes
+changed.  For a first-time companion those coincide, because none of its modules exist in the base.
+This export refreshes an existing base root, and only two closure modules differ from the base:
+
+- `RelativeConicArcs/PaperIOrientationNodes.lean`
+- `RelativeConicArcs/PaperIOrientationTraceDual.lean`
+
+The other nineteen closure modules, and `lakefile.toml` (the gate is already a declared base root),
+are rewritten with identical bytes and so never appear in the delta.  The refusal names exactly those
+nineteen modules plus `lakefile.toml` as "missing".  No configuration, area, or ordering change can
+make a byte-identical rewrite show up as a delta entry, so the export is structurally blocked in the
+exporter's own code rather than in the area format.
+
+### Options, none taken here
+
+1. Relax `forward_delta` to require the actual delta to be a subset of the planned set, and to report
+   the unchanged planned files separately.  This is a change to a validation gate in the export
+   tooling and needs the tooling owner's decision.
+2. Add an explicit refresh mode that computes the planned set from the base comparison instead of
+   from the written set.
+
+Both are tooling changes rather than area-configuration changes; neither was made.
+
+### State after this attempt
+
+`~/src/lean/finitegeom` head `56e4edc`, worktree clean, nothing written.  The disposable candidate
+tree from the refused run remains under
+`~/.cache/othello-lean-build/companion-export/clebsch-orientation-candidate` and can be discarded.
+In the authority, the only git change is the committed trust fact; this note remains uncommitted.
