@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; C831/C832 structural version integrated under the longer
+**Status:** active; release blocked on C834 full-Lean closure by author
+direction 2026-08-02.  C831/C832 structural version integrated under the longer
 title *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a
 binary conic code*.  The eleven-page warning-free manuscript now leads with
 exact weighted-pair recovery of the full marked conic plane.  Its rank-28
@@ -13,9 +14,10 @@ concrete gates, and axiom audit are green.  The earlier semantic rank,
 minimum-layer exhaustion, orbit spanning, row-family uniqueness, and
 four-anchor scheme-rigidity gates remain green.  The local release audit and
 Paper-I forward pointer remain green.  Public packaging, immutable locators,
-fresh isolated replay, and publication with explicit authority remain; the
-Sylow/involution transport and several exact finite leaves remain explicitly
-human or trusted-execution boundaries in the partial formal mirror.
+fresh isolated replay, and publication with explicit authority remain.  The
+current partial formal mirror is not release-eligible: C834 must replace every
+native/trusted finite leaf and human transport by a theorem-complete public
+Lean aggregate first.
 
 ## Goal
 
