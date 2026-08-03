@@ -291,10 +291,13 @@ with multiplicities
 across the $1548$ normalized representatives. The six presentations
 attaining $12$ form the single Clebsch class; every other class has at
 least $16$ extension points. Theorem~\ref{thm:rigidity} supplies the final
-conic-containment assertion.  The assertion that no non-Clebsch uncovered
-locus lies on a nearer conic is checked by exhaustive exact enumeration of
-all $160930$ nonsingular conics; the orbit ledger stores the resulting
-intersection histograms and one attaining conic per class.
+conic-containment assertion, and the four-point gap between twelve and
+sixteen is the sharpness figure it leaves.  The orbit ledger also records,
+for each class, the largest intersection achieved by any of the $160{,}930$
+nonsingular conics of the plane, together with one conic attaining it.
+Rigidity already excludes conic containment for every non-Clebsch class, so
+that enumeration is reported computation rather than a premise of the
+theorem.
 \end{proof}
 
 \section{Cross-field uniqueness for six-arcs}
@@ -363,6 +366,24 @@ Theorem~\ref{thm:rigidity}, which puts every conic-filling six-arc over
 $\F_{11}$ in the single Clebsch orbit.
 \end{proof}
 
+\begin{remark}[Why characteristics three and five need separate care]
+\label{rem:char-three-five}
+The golden normal form of the geometric paper evaluates the associated
+polarity on the configuration exactly over $\mathbf Z[\varphi]$: the six
+vertices give values of norm $-5$ and the ten Brianchon points values of
+norm $-9$~\cite{RuddRigidity2026}.  So the vertices miss the associated
+conic unless the characteristic is five, and the Brianchon points miss it
+unless the characteristic is three.  Neither exception is vacuous.  In
+characteristic three the configuration exists, since $5=-1$ is a square in
+$\F_9$, but all ten of its Brianchon points lie on its associated conic;
+the $q=9$ case above therefore cannot be closed by conic avoidance, and it
+is the Sylvester clique bound that closes it.  In characteristic five the
+six vertices themselves lie on the associated conic and the two golden
+roots coincide, which is why the $q=5$ entry of
+Theorem~\ref{thm:small-k-conic-filling} is a four-frame rather than a
+six-arc.
+\end{remark}
+
 \section{The binary passant/internal incidence code at
 \texorpdfstring{$q=13$}{q=13}}
 \label{sec:q13-tangent-code}
@@ -370,9 +391,21 @@ $\F_{11}$ in the single Clebsch orbit.
 Fix the conic $\cC:XZ-Y^2=0$ in $\PG(2,13)$.  Let $M$ be the
 $78$-by-$78$ incidence matrix over $\F_2$, with rows indexed by the
 passant lines to $\cC$ and columns indexed by its internal points.
-Madison and Wu determine the nullity of this matrix for every odd
-$q$~\cite[Corollary~6.3]{MadisonWu2012}; their formula
-$(q-1)^2/4$ gives $36$ at $q=13$.  Hollmann and Xiang construct the
+Madison and Wu determine the kernel of this matrix for every odd $q$.  Over
+an algebraic closure of $\F_2$ they give both its dimension $(q-1)^2/4$,
+which is $36$ at $q=13$, and its exact decomposition into pairwise
+nonisomorphic simple modules for
+$\operatorname{PSL}(2,q)$~\cite[Theorem~6.1, Corollary~6.3]{MadisonWu2012}.
+What is added here is the descent.  Over $\F_2$ itself, and for the full
+$\operatorname{PGL}(2,13)$-action, $K=\ker M$ is irreducible with
+endomorphism field $\F_8$; equivalently $K$ carries a canonical
+twelve-dimensional $\F_8$-structure, and extending scalars to the closure
+returns Madison and Wu's three summands as its Galois conjugates.  Every
+nonzero codeword therefore generates $K$ as an
+$\F_2[\operatorname{PGL}(2,13)]$-module, which is why each minimum-word
+orbit below spans.  That descent is a human structural proof, adversarially
+refereed; it is not part of the formal gate.
+Hollmann and Xiang construct the
 elliptic association scheme afforded by the
 $\operatorname{PGL}(2,q)$-action on the passant carrier
 \cite[\S3]{HollmannXiang2006}.  Thus the dimension and the association
@@ -382,6 +415,30 @@ scheme from the minimum words.  They are retained as the historical
 computational source.  Their current paper-level development belongs to
 forthcoming Paper~IV~\cite{RuddPassant2026}, which supplies a standalone
 proof and evidence surface.
+
+One numerical coincidence drives both the weight-eight exclusion below and
+the terminal $k=8$ argument of Section~\ref{sec:small-arc}.  We isolate it.
+
+\begin{lemma}[Pencil saturation at $q=2k-3$]
+\label{lem:pencil-saturation}
+Let $\cC$ be a nonsingular conic in $\PG(2,q)$ with $q$ odd, and let $A$ be
+a $k$-arc of internal points all of whose joins are passant to $\cC$.  If
+$q=2k-3$, then the $k-1$ joins at a vertex $P$ exhaust the passant pencil
+at $P$.  The remaining $q+2-k$ lines through $P$ are then exactly the
+conic-secants through $P$, and they are exactly the tangent lines of $A$ at
+$P$.
+\end{lemma}
+
+\begin{proof}
+An internal point lies on exactly $(q+1)/2$ passants and on no tangent.
+The $k-1$ joins at $P$ are distinct because $A$ is an arc and passant by
+hypothesis, and $k-1=(q+1)/2$ is precisely the condition $q=2k-3$; so they
+are the entire passant pencil at $P$.  The other $q+2-k$ lines through $P$
+are therefore non-passant, hence secant.  Each meets $A$ only in $P$,
+because every other point of $A$ is joined to $P$ by a passant, so each is
+a tangent of $A$ at $P$; and $A$ has exactly $q+2-k$ tangents at each
+vertex.
+\end{proof}
 
 \begin{theorem}[Passant-code theorem]
 \label{thm:q13-tangent-code}
@@ -415,11 +472,11 @@ support point.  These seven points are distinct, proving the elementary
 lower bound $\operatorname{wt}\ge8$.
 
 Suppose first that a word has weight eight.  The preceding parity argument
-shows that its support is an eight-arc, every join of two support points is
-passant, and the passant pencil at every vertex is saturated.  Thus the
-seven remaining lines through each vertex are precisely the seven
-combinatorial tangents to the arc and the seven conic-secants through that
-internal point.
+shows that its support is an eight-arc of internal points, every join of
+two of which is passant.  Since $13=2\cdot8-3$,
+Lemma~\ref{lem:pencil-saturation} applies: the seven remaining lines
+through each vertex are simultaneously the seven conic-secants through that
+internal point and the seven tangents of the arc there.
 
 For an internal point $P$, let
 \[
@@ -599,6 +656,7 @@ order-$2184$ stabilizer-chain enumeration remain in the replay as checks.
 \end{proof}
 
 \section{The small-arc boundary}
+\label{sec:small-arc}
 
 The chord moments reduce the neighboring cases through eight points to a
 finite list of fields. Exact terminal enumeration excludes the remaining
@@ -670,9 +728,9 @@ exterior point type. Every conic-filling arc is such an exterior set.
 
 There is already a structural reduction at $q=13$. An exterior point lies
 on only $(q-1)/2=6$ passants, fewer than the seven distinct chords through
-a vertex of an eight-arc. Hence every vertex would be internal. Each
-internal point lies on exactly $(q+1)/2=7$ passants, so its seven chords
-would exhaust its complete passant pencil.  Its characteristic vector
+a vertex of an eight-arc. Hence every vertex would be internal, and
+$q=13=2k-3$ puts Lemma~\ref{lem:pencil-saturation} in force: the seven
+chords at a vertex exhaust its complete passant pencil.  Its characteristic vector
 would therefore be a weight-eight word of the code in
 Theorem~\ref{thm:q13-tangent-code}, which is impossible.  This gives the
 conceptual $q=13$ exclusion needed for conic filling.
@@ -714,6 +772,36 @@ gives a third exact replay.  The certificate includes a six-point witness in
 each field, proving sharpness.
 \end{proof}
 
+\begin{remark}[The terminal bound six is not uniform in $q$]
+\label{rem:q23-passant-arc}
+The last assertion of Theorem~\ref{thm:small-k-conic-filling} is confined to
+$q\in\{13,17,19\}$ because it fails at $q=23$.  With $\cC:XZ=Y^2$ in
+$\PG(2,23)$, the eight points
+\[
+\begin{gathered}
+(1{:}0{:}1),\ (1{:}1{:}2),\ (1{:}2{:}15),\ (1{:}5{:}15),\\
+(1{:}7{:}20),\ (1{:}12{:}18),\ (1{:}13{:}11),\ (1{:}16{:}11)
+\end{gathered}
+\]
+form an arc off $\cC$ all of whose twenty-eight joins are passant.  The
+check is direct: writing $Q=Y^2-XZ$ with polarization $B$, the join of two
+off-conic points $P,R$ is passant exactly when
+$B(P,R)^2-4Q(P)Q(R)$ is a nonzero non-square, which holds for each of the
+twenty-eight pairs, and none of the $56$ triples is collinear.  Six of the
+vertices are internal and two external, so the configuration does not have
+a single point type.
+
+A bound proved by counting, character sums, or clique arguments, with the
+order entering only as a parameter, is monotone or eventually increasing in
+$q$; no such bound can return six at $q=19$ and allow eight at $q=23$.  Any
+correct argument for $q\in\{13,17,19\}$ must therefore use an arithmetic
+coincidence of the individual order.  Lemma~\ref{lem:pencil-saturation} is
+exactly such a coincidence at $q=13$; at $q=17$ and $q=19$ the passant
+pencils are unsaturated by two and by three lines, external vertices become
+admissible, and the tangent product stops being a function of the conic
+alone.
+\end{remark}
+
 In coding terms, let $C$ be a projective $[k,k-3,4]_q$ MDS code with
 $4\le k\le8$. If its projective distance-three syndrome locus is a
 nonsingular conic, then, up to monomial equivalence, $C$ is the
@@ -740,7 +828,10 @@ claims so that no row hides a change of trust.  In particular, the
 association-algebra span argument and four-anchor rigidity are human proofs,
 not Lean claims.  Conversely, the weight-ten exclusions and the terminal
 three-field bound remain finite certificates; the failed spectral and
-first-order linear-programming bounds are not cited as proofs.
+first-order linear-programming bounds are not cited as proofs.  The
+exhaustive $q=11$ conic-distance audit carries no row at all: rigidity
+makes it redundant, and it survives only as reported computation inside the
+proof of Theorem~\ref{thm:gap}.
 
 The $A_5$ point-orbit decomposition and complete syndrome oracle in
 Paper~I are human structural proofs as well: the former closes by
@@ -767,8 +858,6 @@ Chord-moment, $q=9$, and small-$k$ formal terminals
 & Lean theorem & The named declarations and axiom audit in the pinned gate \\
 Fifteen $q=11$ classes and their uncovered sizes
 & finite certificate & Orbit masses, concurrence counts, and chord defect \\
-$q=11$ conic-distance gap
-& trusted execution & All $160930$ nonsingular conics \\
 Low-degree rigidity
 & finite certificate & Fourteen cubic minors and the symbolic Clebsch kernel \\
 $q=13$ weight-eight exclusion
@@ -778,7 +867,9 @@ $q=13$ weight-ten exclusions
 $q=13$ minimum-word classification and reconstruction
 & trusted execution & All four generated orbits and every pair/triple profile \\
 $q=13$ orbit spans and automorphism group
-& human structural proof & The mod-two elliptic algebra and resolving anchors \\
+& human structural proof & Irreducibility of $\ker M$ over $\F_2$ with
+  endomorphism field $\F_8$, the mod-two elliptic algebra, and resolving
+  anchors \\
 $q=11,13$ seven-arc exclusions
 & finite certificate & Three orbit masses and three quadratic minors \\
 Maximum passant-arc size at $q=13,17,19$

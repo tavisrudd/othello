@@ -97,7 +97,8 @@ TERMINALS = {
         "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal",
         "RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic",
         "RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic",
-        "RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual",
+        "RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval",
+        "RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses",
         "RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame",
         "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes",
         "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B",
@@ -521,7 +522,7 @@ def components_by_row(
             ],
         ),
         20: (
-            "Orbit masses, concurrence counts, and chord defect certify the fifteen uncovered sizes. The absence of a nearer conic remains a trusted exhaustive execution over all 160,930 nonsingular conics; qualitative rigidity is routed separately in row 17.",
+            "Orbit masses, concurrence counts, and chord defect certify the fifteen uncovered sizes. Qualitative rigidity is routed separately in row 17, which makes the exhaustive conic-distance execution redundant; it is retained as reported computation over all 160,930 nonsingular conics rather than as a claim.",
             [
                 finite_certificate(
                     "fifteen-orbit uncovered-size ledger",
@@ -555,7 +556,7 @@ def components_by_row(
             ],
         ),
         24: (
-            "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window and applies the cited partial-cover theorem; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate.",
+            "The manuscript proves the universal chord-defect identity, the odd-order concurrence spectrum, the quadratic barrier, the even-order oval obstruction, and the passant window, and applies the cited partial-cover theorem; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate.",
             [
                 conceptual("universal secant moments and conic-filling window", ["Complete double count in the manuscript; the standard even-order oval nucleus is cited from Hirschfeld"] + CLASSICAL_PARTIAL_COVER, "The identity, defect bound, quadratic barrier, even-order oval obstruction, and lower field-size bound are proved for every k in the manuscript; the stronger upper bound is deduced from the cited partial-cover theorem."),
                 conceptual("Clebsch q=11 specialization", CLASSICAL_DYE, "Only the displayed Clebsch specialization uses Dye's ten Brianchon points; it is not asserted for an arbitrary six-arc."),
@@ -573,15 +574,15 @@ def components_by_row(
             ],
         ),
         26: (
-            "The all-field formula is conceptual; q=19 is checked by an independent exact specialization.",
+            "The golden normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization.",
             [
-                conceptual("Clebsch-family chord count and associated-conic inclusion", CLASSICAL_DYE_ASSOCIATED_CONIC, "The manuscript derives the polynomial from the ten-Brianchon equality and uses Dye's edge criterion for the associated-conic inclusion."),
+                conceptual("Clebsch-family chord count and associated-conic inclusion", CLASSICAL_DYE_ASSOCIATED_CONIC, "The manuscript normalizes the equality configuration over Z[phi], derives the polynomial from the ten-Brianchon equality, and uses Dye's edge criterion for the associated-conic inclusion."),
                 lean("uncovered-locus polynomial", ["clebsch_formula"], axioms),
                 replay("q=19 specialization", ["check_q19_nonexample.py"], q19_coverage, "The replay independently constructs and checks the q=19 specialization.", direct_coordinates),
             ],
         ),
         29: (
-            "Lean proves only the small-arc moment reductions. The q=13 saturated weight-eight exclusion and the orbit-span/automorphism conclusions have human structural proofs. Weight ten, the q=11/q=13 seven-arc leaves, and the sharp q=13,17,19 maximum-six assertion retain finite certificates; the minimum-layer classification remains trusted execution.",
+            "Lean proves only the small-arc moment reductions. The named pencil-saturation lemma, the q=13 saturated weight-eight exclusion, and the orbit-span/automorphism conclusions have human structural proofs. Weight ten, the q=11/q=13 seven-arc leaves, and the sharp q=13,17,19 maximum-six assertion retain finite certificates; the minimum-layer classification remains trusted execution.",
             [
                 conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE + CLASSICAL_PARTIAL_COVER, "The manuscript derives the moment equations, applies the partial-cover window, and proves the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."),
                 conceptual("q=13 tangent reduction", CLASSICAL_SEGRE_TANGENTS, "The manuscript reduces a weight-eight word to a seven-clique and displays the complete six-difference-set, five-row unique-closure certificate."),

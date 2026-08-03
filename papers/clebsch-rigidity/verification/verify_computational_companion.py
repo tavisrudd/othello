@@ -23,7 +23,6 @@ CLAIM_IDS = {
     "q9-sylvester-obstruction",
     "formal-chord-q9-small-k-terminals",
     "q11-six-arc-orbit-ledger",
-    "q11-conic-distance-gap",
     "q11-low-degree-rigidity",
     "q13-weight-eight-exclusion",
     "q13-weight-ten-profile-exclusions",

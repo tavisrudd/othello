@@ -10,7 +10,7 @@ The paper and companion separate exactly five proof modes:
 - finite certificates with checked coverage identities; and
 - trusted exact executions over stated exhaustive domains.
 
-`computational_companion_trust.json` is the thirteen-row atomic claim map.
+`computational_companion_trust.json` is the atomic claim map.
 Its validator enforces the five-mode vocabulary, pins every proof object by
 SHA-256, checks every claim's reduction/invariant/finite-leaf/replay fields,
 and can execute all ten companion commands with `--run`.

@@ -16,7 +16,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
@@ -64,7 +64,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -138,7 +138,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit": [
@@ -165,7 +165,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
@@ -186,7 +186,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 666",
+      "paper_location": "source line 853",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -213,7 +213,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic": [
@@ -235,7 +235,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
@@ -280,7 +280,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 622",
+      "paper_location": "source line 809",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -296,7 +296,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 639",
+      "paper_location": "source line 826",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -344,7 +344,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 768",
+      "paper_location": "source line 955",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -370,7 +370,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -402,7 +402,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -471,7 +471,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 823",
+      "paper_location": "source line 1010",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -518,7 +518,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 354",
+      "paper_location": "source line 541",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -543,7 +543,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
@@ -591,7 +591,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -712,7 +712,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode": [
@@ -726,7 +726,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode"
@@ -823,7 +823,7 @@
         "kind": "theorem-environment",
         "sha256": "c11a7fa262929336dc9123b35a669cae91360dd3baa3b0a8cd8e72b1623962d5"
       },
-      "trust_boundary": "Orbit masses, concurrence counts, and chord defect certify the fifteen uncovered sizes. The absence of a nearer conic remains a trusted exhaustive execution over all 160,930 nonsingular conics; qualitative rigidity is routed separately in row 17."
+      "trust_boundary": "Orbit masses, concurrence counts, and chord defect certify the fifteen uncovered sizes. Qualitative rigidity is routed separately in row 17, which makes the exhaustive conic-distance execution redundant; it is retained as reported computation over all 160,930 nonsingular conics rather than as a claim."
     },
     {
       "cited_inputs": [
@@ -831,7 +831,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 956",
+      "paper_location": "source line 1143",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -858,7 +858,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -890,7 +890,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -912,7 +912,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 1006",
+      "paper_location": "source line 1193",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -999,7 +999,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive": [
@@ -1061,6 +1061,16 @@
                 "propext",
                 "Quot.sound"
               ],
+              "RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
               "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes": [
                 "propext",
                 "Classical.choice",
@@ -1110,8 +1120,7 @@
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
-              ],
-              "RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual": []
+              ]
             },
             "conditional_interfaces": [
               "The proposition-valued interface RelativeConicArcs.PaperIOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate 3+3' decomposition, Schur-lemma upper containment, and Galois descent."
@@ -1119,7 +1128,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
@@ -1139,7 +1148,8 @@
               "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal",
               "RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic",
               "RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic",
-              "RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual",
+              "RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval",
+              "RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses",
               "RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame",
               "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes",
               "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B",
@@ -1159,13 +1169,13 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1022",
+      "paper_location": "source line 1209",
       "route": "mixed",
       "row": 23,
       "source": {
         "id": "prop:invariant-support-bipartition+thm:orientation-two-graph+cor:orientation-cubic-geometry",
         "kind": "theorem-environment",
-        "sha256": "27cb60b94cdeb3a46f222657fde7b944bc01d11ee09ca91dc704e6f7cfc52b81"
+        "sha256": "54a5a78c75a42f50c7ace57ad8bc610fdea522c24f230f230c1813c226a25d65"
       },
       "trust_boundary": "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the eight-step orientation spine; the two commutant equalities use the explicitly recorded classical 3+3' splitting interface."
     },
@@ -1193,7 +1203,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments": [
@@ -1210,7 +1220,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -1241,7 +1251,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1258,7 +1268,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1276,16 +1286,16 @@
           "subclaim": "Sylvester distance-two clique obstruction"
         }
       ],
-      "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
+      "id": "lem-chord-defect+prop-concurrence-spectrum+cor-conic-filling-window+lem-q9-polarity",
       "paper_location": "source line 81",
       "route": "mixed",
       "row": 24,
       "source": {
-        "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
+        "id": "lem:chord-defect+prop:concurrence-spectrum+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "6eea9df631a67dd530f5965d9cbc2724d04cf7aae7144b54787c07f0da45bbdf"
+        "sha256": "8b514a35d7e6a1531d48d323ea6b7a785a7023da028a47bd4357e1e246a2f0a1"
       },
-      "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window and applies the cited partial-cover theorem; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
+      "trust_boundary": "The manuscript proves the universal chord-defect identity, the odd-order concurrence spectrum, the quadratic barrier, the even-order oval obstruction, and the passant window, and applies the cited partial-cover theorem; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
     {
       "components": [
@@ -1304,7 +1314,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1321,7 +1331,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1365,7 +1375,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 339",
+      "paper_location": "source line 342",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1383,14 +1393,14 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "Clebsch-family chord count and associated-conic inclusion",
-          "unconditional_remainder": "The manuscript derives the polynomial from the ten-Brianchon equality and uses Dye's edge criterion for the associated-conic inclusion."
+          "unconditional_remainder": "The manuscript normalizes the equality configuration over Z[phi], derives the polynomial from the ten-Brianchon equality, and uses Dye's edge criterion for the associated-conic inclusion."
         },
         {
           "lean": {
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula": [
@@ -1400,7 +1410,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula"
@@ -1442,16 +1452,16 @@
           "subclaim": "q=19 specialization"
         }
       ],
-      "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 517",
+      "id": "prop-golden-normal-form+prop-clebsch-family-uncovered",
+      "paper_location": "source line 294",
       "route": "mixed",
       "row": 26,
       "source": {
-        "id": "prop:clebsch-family-uncovered",
+        "id": "prop:golden-normal-form+prop:clebsch-family-uncovered",
         "kind": "theorem-environment",
-        "sha256": "4c80b78f56a7acb84cafc60cbbd7b2995489098be1c2304ddad496e25ebed5dc"
+        "sha256": "2f525c1ed925bd5d5862d157ff3477738429f2857ea8e8a48c92e9150a169be2"
       },
-      "trust_boundary": "The all-field formula is conceptual; q=19 is checked by an independent exact specialization."
+      "trust_boundary": "The golden normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization."
     },
     {
       "components": [
@@ -1488,7 +1498,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
             },
             "axioms": {
               "RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card": [
@@ -1515,7 +1525,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747"
+              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
             },
             "terminals": [
               "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card",
@@ -1749,16 +1759,16 @@
           "subclaim": "terminal eight-point exclusions"
         }
       ],
-      "id": "thm-q13-tangent-code+thm-small-k-conic-filling",
-      "paper_location": "source line 386",
+      "id": "thm-q13-tangent-code+lem-pencil-saturation+thm-small-k-conic-filling",
+      "paper_location": "source line 443",
       "route": "mixed",
       "row": 29,
       "source": {
-        "id": "thm:q13-tangent-code+thm:small-k-conic-filling",
+        "id": "thm:q13-tangent-code+lem:pencil-saturation+thm:small-k-conic-filling",
         "kind": "theorem-environment",
-        "sha256": "1445ccbd969d521672b167d475a9bf135ef30d3ada5b61ed10cb1e627ddceb8d"
+        "sha256": "4709b04f45ed4b9e59170057e422b8a36a003f088d1adc3f2db59e9f1fcdcb02"
       },
-      "trust_boundary": "Lean proves only the small-arc moment reductions. The q=13 saturated weight-eight exclusion and the orbit-span/automorphism conclusions have human structural proofs. Weight ten, the q=11/q=13 seven-arc leaves, and the sharp q=13,17,19 maximum-six assertion retain finite certificates; the minimum-layer classification remains trusted execution."
+      "trust_boundary": "Lean proves only the small-arc moment reductions. The named pencil-saturation lemma, the q=13 saturated weight-eight exclusion, and the orbit-span/automorphism conclusions have human structural proofs. Weight ten, the q=11/q=13 seven-arc leaves, and the sharp q=13,17,19 maximum-six assertion retain finite certificates; the minimum-layer classification remains trusted execution."
     },
     {
       "components": [
@@ -1909,17 +1919,17 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "0e03ae223ef4f43652e23fa81463d736a6e73bd1dfb42f1cf54b726a1acdaeb5"
+      "sha256": "06cc6d02768d41d0f618b14ce2852e09ee5ae4003081e8b2b56359db1d0a8d5a"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "8984dd447afe827d586d30e998c6bcd592b2d5a7fc139d955d6b8c3daa9cd57f"
+      "sha256": "11b48e5a40f181b212a58bb483b7fe0796f2440f0d6d619b182f21ee026d8699"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
       "repository": "paper",
-      "sha256": "0e602c27957fbad44a14d6471e74348937591f3a3ab75075305afdfc122160ff"
+      "sha256": "219800e7eb9842f5d64f767762769a470cbd14e19c46c18a1708baf4189d2835"
     }
   },
   "lean_repository": {
@@ -1932,9 +1942,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "c6d7184535d7103e7e1b7117fc0b6aaea6fa9c50135023da0e72a1bb3044231c"
+    "sha256": "4ec99983025f0493eb1578d2cb477d4e0b43ebcf33ca3a92d140fce0093d5331"
   },
-  "manuscript_sha256": "15d766f06cdacdede8dc4441c7f861aeed1595b31d4f66915f8659aaa39db350",
+  "manuscript_sha256": "5d77440c98d63e4c2e0aed99a107cf00ecf4de4bd38979630294beb2fa943efe",
   "public_documents": [
     {
       "path": "README.md",
@@ -1944,7 +1954,7 @@
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "e9393793d255ca53cb4dd6c9ab7cc84a68d3c3a4037742fbef5a3f3c0e1aba55"
+      "sha256": "f6e4ae78568a207251d4617961a5171b55f000f57b06187cda6522f62fcd3123"
     }
   ],
   "reproducibility_environment": {
@@ -1974,7 +1984,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "93130932f829c43e06843d4f1489acb79dbb88f7ac8453cc7fe1294424b742e8"
+    "sha256": "ca737dd3a9a1cadce6c3847e4ae5e43bd5358511b0c91ad33f4a04e29ae5f301"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2322,7 +2332,7 @@
         "axiom_audit": {
           "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
           "repository": "lean",
-          "sha256": "67556c40135f49a37d2ef9326c6af083ec3fdc04c52ec823bda8b7d15d74c568"
+          "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
         },
         "cwd": ".",
         "id": "lean-rigidity-trust-gate",
@@ -2345,12 +2355,12 @@
       {
         "path": "verification/extract_statement_identity.py",
         "repository": "paper",
-        "sha256": "9bfbf66d1b18b7bc581273b29598a926f02f690ba9fd7dbbcf849cfce8a860f4"
+        "sha256": "30bbcce7987ededef1c9afc04805942cb847f161468c9a9826bdb6f004b2a6ab"
       },
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "a40d9c335e31f70f30f16890216d8ac7352a9ceb474041eab03474e40b439819"
+        "sha256": "36412d734d90f40394a2a0bd07a52eaf09b8ae67fe22d1cbafe9803ac151d609"
       },
       {
         "path": "verification/verify_trust_manifest.py",
@@ -2365,12 +2375,12 @@
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "19423f8b3ae5cf43bf6abbc464947b75554cbb6069bd3991ce237d4c551f9990"
+        "sha256": "0f360b2719404e46b87391a9f1e0af5406cb5fa9c82efc4f7e64cceb4b1dacef"
       },
       {
         "path": "verification/verify_computational_companion.py",
         "repository": "paper",
-        "sha256": "f5c6e88c840f95f8254c69c7686cf659d9fed53602b2cb79ae4f121f7028c6d5"
+        "sha256": "166ba9e7582fdb698156abea935566e104e6847a0b9777d575bec21a6b90091f"
       }
     ]
   }

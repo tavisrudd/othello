@@ -43,13 +43,18 @@ ROW_LABELS = {
     ),
     24: (
         "lem:chord-defect",
+        "prop:concurrence-spectrum",
         "cor:conic-filling-window",
         "lem:q9-polarity",
     ),
     25: "thm:why11",
-    26: "prop:clebsch-family-uncovered",
+    26: (
+        "prop:golden-normal-form",
+        "prop:clebsch-family-uncovered",
+    ),
     29: (
         "thm:q13-tangent-code",
+        "lem:pencil-saturation",
         "thm:small-k-conic-filling",
     ),
 }

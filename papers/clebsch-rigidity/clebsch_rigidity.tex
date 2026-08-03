@@ -211,9 +211,12 @@ syndrome locus.
 stabilizer, and its complete-exterior-set interpretation are classical
 \cite{Clebsch1871,Edge1956,Dye1991,BSW1992,SVM1995}. We prove the
 conic-locus identification of Proposition~\ref{prop:deep-holes-conic}
-directly here. The new contribution is the symmetry-free coding criterion,
-the decoder reconstruction and support bipartition, and the uniform
-conic-filling window.  The reconstructed support bipartition and syndrome
+directly here, and Proposition~\ref{prop:golden-normal-form} reproves the
+classical existence, orbit, polarity, and stabilizer statements from one
+normal form over $\mathbf Z[\varphi]$. The new contribution is the symmetry-free coding criterion,
+the decoder reconstruction and support bipartition, the uniform
+conic-filling window, and the concurrence spectrum that refines Dye's
+bound.  The reconstructed support bipartition and syndrome
 cover also determine a balanced signed two-graph and its golden operator;
 their triangle products recover a cubic determinant line.  The underlying
 six-nodal $S_5$-symmetric cubic is known
@@ -267,9 +270,14 @@ called its Brianchon points.
 For a nonsingular conic over an odd field, an \emph{external point} lies on
 two tangents and an \emph{internal point} on none; an \emph{exterior}, or
 \emph{passant}, line is disjoint from the conic.
-Edge's six vertices are external, their fifteen joins are exterior, and
-those joins concur three at a time at ten internal Brianchon
-points~\cite[\S\S29--32]{Edge1956}. Thus the hexagon is a complete exterior
+At $q=11$, Edge's six vertices are external, their fifteen joins are
+exterior, and those joins concur three at a time at ten internal Brianchon
+points~\cite[\S\S29--32]{Edge1956}. This reading is specific to order
+eleven, and we use it only there. At every odd order the six vertices share
+one point type and the ten Brianchon points share one point type, but which
+type occurs depends on the order: at $q=19$ the two types are interchanged,
+the vertices being internal and the Brianchon points external. Tagged to
+$q=11$, Edge's reading makes the hexagon a complete exterior
 set in the terminology of Blokhuis, Seress, and Wilbrink
 \cite[pp.~143,146]{BSW1992}. Their $q=11$ list also contains a Pasch
 configuration, but its four collinear triples prevent it from defining an
@@ -279,11 +287,115 @@ branch, and Proposition~\ref{prop:deep-holes-conic} proves equality.
 
 The displayed hexagon is the arc $K_2$ of Storme and Van~Maldeghem
 \cite[Props.~11--12]{SVM1995} and Dye's synthetic hexagon when $5$ is a
-square in the base field~\cite[Theorem~1, pp.~275--276]{Dye1991}. In
-characteristic $11$, Dye's Theorems~1--3 give projective uniqueness, the
-unique associated polarity, and stabilizer $A_5$; in the displayed
-coordinates the associated conic is $\cC$
-\cite[pp.~275--278]{Dye1991}. His calculation also shows that the six
+square in the base field~\cite[Theorem~1, pp.~275--276]{Dye1991}. The
+following normal form carries the classical package uniformly in the field
+and makes every step an identity in $\mathbf Z[\varphi]$.
+
+\begin{proposition}[Golden normal form and uniform rigidity]
+\label{prop:golden-normal-form}
+Let $K$ be a field of odd characteristic and let $\varphi$ satisfy
+$\varphi^2=\varphi+1$. A six-arc in $\PG(2,K)$ has ten Brianchon points if
+and only if $5$ is a square in $K$ and the arc is
+$\mathrm{PGL}_3(K)$-equivalent to
+\[
+ X_\varphi=\{(1{:}0{:}0),\,(\varphi{:}1{:}1),\,(0{:}1{:}0),\,
+             (1{:}\varphi{:}1),\,(0{:}0{:}1),\,(1{:}1{:}2-\varphi)\}.
+\]
+Such configurations therefore form one $\mathrm{PGL}_3(K)$-orbit.  Their
+five self-polar triangles admit exactly one polarity, represented by
+\[
+ S=\begin{pmatrix}2\varphi-1&-1&-\varphi\\
+                  -1&2\varphi-1&-\varphi\\
+                  -\varphi&-\varphi&3\varphi+1\end{pmatrix},
+ \qquad\det S=4\varphi,
+\]
+and already determined by any two of those triangles.  The projective
+stabilizer is $\A$, acting on the six vertices as $\mathrm{PSL}_2(5)$ acts
+on the projective line over $\F_5$.  Finally, the associated quadratic form
+takes values of norm $-5$ on the six vertices and of norm $-9$ on the ten
+Brianchon points: the vertices lie off the associated conic exactly when
+$\operatorname{char}K\ne5$, and the Brianchon points lie off it exactly when
+$\operatorname{char}K\ne3$.
+\end{proposition}
+
+\begin{proof}
+Chords through an off-vertex concurrence are pairwise disjoint, so a
+concurrence is carried by one of the fifteen perfect matchings of the six
+vertices.  At the maximum of ten, Dye's equality analysis leaves five
+non-concurrent matchings forming a one-factorization
+\cite[\S2.2, pp.~274--275]{Dye1991}.  Label so that this is a fixed
+one-factorization and normalize
+$P_1=(1{:}0{:}0)$, $P_3=(0{:}1{:}0)$, $P_5=(0{:}0{:}1)$, with the unit
+point as the first concurrence and
+$P_2=(x{:}1{:}1)$, $P_4=(1{:}y{:}1)$, $P_6=(1{:}1{:}z)$.  The ten
+concurrence determinants then reduce to $x=y$, $x+z=2$, and $xyz=1$, hence
+to $x^2(2-x)=1$, that is,
+\[
+ (x-1)(x^2-x-1)=0.
+\]
+The root $x=1$ places $P_2$ on a chord of the remaining vertices and is
+excluded by the arc condition, so $x=y=\varphi$ and $z=2-\varphi$; the
+quadratic has a root exactly when its discriminant $5$ is a square.
+Conversely, all twenty triple determinants of $X_\varphi$ reduce in
+$\mathbf Z[x]/(x^2-x-1)$ to $\pm1$, $\pm(x-1)$, $\pm(x-2)$, or $x$, none of
+which vanishes in odd characteristic, and the five non-concurrence
+determinants reduce to $\pm2(x-1)$; thus $X_\varphi$ is a six-arc with
+concurrence count ten.  When $5$ is a nonzero square the two roots
+$\varphi$ and $\bar\varphi=1-\varphi$ give the same projective class: the
+relabelling $(3\,4\,6\,5)$ preserves the concurrence pattern and is
+realized by
+\[
+ G=\begin{pmatrix}-1&1&0\\0&\bar\varphi&\varphi\\0&1&0\end{pmatrix},
+ \qquad G\cdot X_\varphi=X_{\bar\varphi},
+ \qquad\det G=\varphi-\bar\varphi.
+\]
+
+For the stabilizer, the subgroup of $S_6$ preserving the five
+non-concurrent matchings has order $120$, acting on them as $S_5$ through
+the outer automorphism of $S_6$.  Recording which root the normalization
+produces maps this subgroup onto the two roots, with fibres the cosets of
+the induced projective stabilizer; the displayed $G$ shows the map is onto,
+so that stabilizer has index two and is $\A$.
+
+For the polarity, self-polarity of the five triangles imposes fifteen
+linear conditions on the six-dimensional space of symmetric matrices.  The
+displayed $S$ satisfies all fifteen identically in
+$\mathbf Z[x]/(x^2-x-1)$, and the coefficient matrix has a five-by-five
+minor equal to $8(13-8\varphi)$, whose second factor has norm $1$ and is
+therefore a unit of $\mathbf Z[\varphi]$.  The rank is exactly five, so the
+solution space is the line through $S$; that minor uses only rows from the
+first two triangles, so two triangles already determine $S$.  Since
+$\det S=4\varphi$ and $\varphi=0$ would force $0=1$, the polarity is
+nondegenerate in every odd characteristic.  Evaluating $v\mapsto
+v^{\mathsf T}Sv$ gives vertex values $2\varphi-1$ (four times), $3\varphi+1$,
+and $3\varphi-4$, each of norm $-5$, and Brianchon values $3\varphi-3$,
+$6\varphi-9$, and $3\varphi$, each of norm $-9$.  A value vanishes exactly
+when its norm does, which gives the two characteristic conditions.
+\end{proof}
+
+\begin{remark}[Attribution]
+Proposition~\ref{prop:golden-normal-form} reproves classical statements.
+Dye introduces the golden parameter $j$ with $j^2=j+1$ as a root of the
+discriminant-five quadratic and fixes a canonical hexagon with vertices
+$(1,\pm j,0)$, $(0,1,\pm j)$, $(\pm j,0,1)$; his Theorem~1 gives existence
+exactly when the characteristic is not two and $5$ is a square, together
+with transitivity of $\mathrm{PGL}_3(K)$
+\cite[\S2.2, Theorem~1, pp.~274--276]{Dye1991}.  The unique polarity making
+the five triangles self-polar is his Theorem~2(iii)
+\cite[pp.~277--278]{Dye1991}, and the stabilizer $\A$ his Theorem~3
+\cite[p.~278]{Dye1991}; that two triangles in general position have a
+unique common self-polar conic is classical.  What differs is the
+presentation: the triple-perspective normalization forces the factorization
+$(x-1)(x^2-x-1)=0$ rather than Dye's
+$(\lambda\mu\nu)^2-4\lambda\mu\nu-1=0$, and every verification above is an
+identity over $\mathbf Z[\varphi]$ rather than a case analysis over $K$.
+\end{remark}
+
+At $q=11$ the conic of $S$ has twelve points and is $\cC$ in the displayed
+coordinates.  That identification is order-specific: the concurrence count
+gives $|\cU(A)|=22-10=12=q+1$ only at $q=11$, while at $q=19$ the uncovered
+locus already has $140$ points against a conic of $20$.  Dye's calculation
+also shows that the six
 vertices lie on no conic in characteristic $11$
 \cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}. Storme and Van~Maldeghem
 record that the arc is incomplete at $q=11$~\cite[Prop.~13]{SVM1995}, so
@@ -327,6 +439,81 @@ $q^2+q+1-k$ off-arc points proves the identity. Finally,
 \]
 and the second moment gives the defect bound.
 \end{proof}
+
+For six-arcs the defect $t(A)$ is the concurrence count $c(A)=n_3$, and
+that count is far from arbitrary.  Dye's bound $c(A)\le10$ is the top of a
+seven-value spectrum with a single mechanism behind it.
+
+\begin{proposition}[Concurrence spectrum]
+\label{prop:concurrence-spectrum}
+Let $A$ be a six-arc in $\PG(2,q)$ with $q$ odd, and let $c(A)$ count its
+nonvertex triple-chord concurrences.  Identify the fifteen perfect
+matchings of $A$ with the fifteen pairs from the six one-factorizations of
+$K_6$, and let $G$ be the graph on those six one-factorizations whose edges
+are the concurrent matchings, so that $c(A)=|E(G)|$.  Then $G$ is the graph
+of an equivalence relation with at least one odd class.  Consequently, if
+$a_1,\ldots,a_r$ are the class sizes, then
+\[
+ c(A)=\sum_{i}\binom{a_i}{2},\qquad \sum_i a_i=6,
+ \qquad\text{some }a_i\text{ odd},
+\]
+and therefore
+\[
+ c(A)\in\{0,1,2,3,4,6,10\}.
+\]
+The value ten occurs exactly for the partition $5+1$, in which case the
+five non-concurrent matchings form a one-factorization.
+\end{proposition}
+
+\begin{proof}
+Chords through a point off $A$ have pairwise disjoint endpoint pairs, so at
+most three of them concur and a triple concurrence is carried by a perfect
+matching.  Each of the fifteen perfect matchings lies in exactly two of the
+six one-factorizations of $K_6$, and this incidence is the bijection with
+pairs used in the statement; disjoint matchings correspond to meeting
+pairs, and the three matchings containing a fixed edge correspond to a
+perfect matching of the six one-factorizations.
+
+Two facts about $G$ remain.  First, no edge of $A$ lies in three concurrent
+matchings.  This is Dye's edge bound.  A matching containing $uv$ pairs the
+four vertices of $A\setminus\{u,v\}$ in one of three ways, and it is
+concurrent exactly when the corresponding diagonal point of that complete
+quadrangle lies on the line $uv$.  All three would put the three diagonal
+points on $uv$, and the diagonal points of a quadrangle are noncollinear in
+odd characteristic \cite[\S2.2, p.~274]{Dye1991}.  Each concurrent matching
+has three edges and each of the fifteen edges of $A$ lies in at most two of
+them, so $3c(A)\le30$.  This recovers $c(A)\le10$, with equality exactly when the five
+non-concurrent matchings form a one-factorization.  Under the pair
+dictionary the three matchings through $uv$ are a perfect matching of the
+six one-factorizations, and every perfect matching there arises this way;
+so $G$ contains no perfect matching.
+
+Second, adjacency in $G$ is transitive: if two disjoint matchings of a
+triangle triple concur, so does the third.  Take the common triangle
+$A_1=(1{:}0{:}0)$, $A_2=(0{:}1{:}0)$, $A_3=(0{:}0{:}1)$ with the first
+centre of perspective at $(1{:}1{:}1)$, which is legitimate because $A$ is
+an arc, and write the other three vertices as $B_1=(x{:}1{:}1)$,
+$B_2=(1{:}y{:}1)$, $B_3=(1{:}1{:}z)$.  The determinant governing the second
+perspectivity is $xyz-1$ and that governing the third is $1-xyz$, so the
+two conditions coincide.  Only commutativity of the field is used.
+
+A transitive symmetric adjacency is an equivalence relation, so $G$ is a
+disjoint union of complete graphs; having no perfect matching means some
+class has odd size.  Enumerating the partitions of six with an odd part and
+evaluating $\sum\binom{a_i}{2}$ gives the displayed set; the all-even
+partitions $6$ and $4+2$, which would give $15$ and $7$, are exactly the
+ones excluded.  The value ten arises only from $5+1$.
+\end{proof}
+
+\begin{remark}[What is classical here]
+The bound $c(A)\le10$, its quadrangle mechanism, and the one-factorization
+structure at equality are Dye's \cite[\S2.2 and the proof of Theorem~1,
+pp.~274--275]{Dye1991}.  The remaining content is the exclusion of the
+values five, seven, eight, and nine through the transitivity step, which we
+have not found in the literature: Dye's paper treats hexagons with exactly
+ten Brianchon points, and to our knowledge no earlier source constrains the
+count of a six-arc strictly between zero and ten.
+\end{remark}
 
 \section{The rigidity theorem}
 \label{sec:rigidity}
@@ -1142,8 +1329,12 @@ $F_B(x,z)=\det(zB+\operatorname{diag}(x))$, this becomes
 \]
 The cubic descends to the augmentation space
 $\mathbf Q^6/\mathbf Q\mathbf1$.  Conversely, its two-graph identities
-and vanishing signed pair moments reconstruct $B$ and force $B^2=5I$;
-there is a unique balanced switching class up to relabeling.
+and vanishing signed pair moments reconstruct $B$ and force $B^2=5I$.  On
+six labelled axes there are exactly twelve such switching classes.  The
+group $S_6$ permutes them transitively with point stabilizer of order
+sixty, and negation acts on them without fixed points, so the six unordered
+pairs $\{[B],[-B]\}$ carry a transitive $S_6$-action with point stabilizer
+of order $120$.
 \end{theorem}
 
 \begin{corollary}[Nodes, symmetry, and integral commutant]
@@ -1273,10 +1464,37 @@ reconstructed the switching class,
  \qquad(i\ne j),
 \]
 while every diagonal entry of $B^2$ is five.  Thus signed pair balance is
-equivalent to $B^2=5I$.  In the gauge $B_{0i}=1$, the five equations
-$(B^2)_{0i}=0$ say that the positive edges on the remaining five vertices
-form a $2$-regular graph, hence a pentagon.  The twelve labeled pentagons
-form one class up to relabeling, proving uniqueness.
+equivalent to $B^2=5I$.
+
+The gauge $B_{0i}=1$ is reached by switching with $D_0=1$ and $D_i=B_{0i}$,
+and it is the unique such representative of its switching class, since $D$
+is determined once $D_0$ is fixed and $D$ and $-D$ act alike.  In this
+gauge the equation $(B^2)_{0i}=0$ reads $\sum_{k\ne0,i}B_{ki}=0$: four
+signs summing to zero, so exactly two are positive.  The positive edges on
+$\{1,\ldots,5\}$ therefore form a $2$-regular graph, hence a pentagon.
+
+The converse also holds, and it is the direction the later argument uses.
+Let $P$ be any pentagon on $\{1,\ldots,5\}$ and let $B$ be the matrix its
+gauge defines.  Every diagonal entry of $B^2$ is five.  For nonzero
+$i\ne j$, the term $k=0$ contributes $B_{i0}B_{0j}=1$, while each of the
+three remaining indices contributes $+1$ exactly when it is $P$-adjacent to
+both or to neither of $i$ and $j$.  If $i$ and $j$ are $P$-adjacent, one of
+the three is adjacent to neither and two are adjacent to exactly one; if
+they are not, one is adjacent to both and two to exactly one.  Either way
+the three terms are $+1,-1,-1$, so $(B^2)_{ij}=1-1=0$ and $B$ is balanced.
+
+Gauge classes at $0$ therefore correspond bijectively to the
+$5!/(5\cdot2)=12$ pentagons on the other five axes.  The stabilizer of $0$
+in $S_6$ preserves the gauge and acts transitively on those pentagons with
+dihedral stabilizer of order ten, so $S_6$ is transitive on the twelve
+classes and every point stabilizer has order $720/12=60$.  Negation is the
+switching $D_0=1$, $D_i=-1$, which replaces a pentagon by its pentagram and
+so fixes no class; the twelve classes pair into six with stabilizers of
+order $120$.  Since triangle products are switching-invariant, the
+order-sixty stabilizer preserves every $c_{ijk}$ while the outer coset
+reverses them all; this is the $\A\subset S_5$ distinction of
+Corollary~\ref{cor:orientation-cubic-geometry}, seen from the two-graph
+side.
 
 \paragraph{The determinant pencil.}
 For a triple $S=\{i,j,k\}$, its principal minor is
@@ -1365,17 +1583,33 @@ up to scalar, the Clebsch diagonal cubic
 \]
 This cubic surface is smooth: at a singular point the five squares
 $z_i^2$ would be equal, but a sum of five signs cannot vanish in
-characteristic zero.  Here the cross-golden four-space $\Lambda$ and its
-trace orthogonal $\Lambda^\perp$ define exactly the paired determinantal
-hypersurfaces of Hassett and Tschinkel.  Their Proposition~10 therefore
-applies: smoothness of the cubic surface $\mathbf P(\Lambda)\cap\Sigma_2$
-implies that $\det(\Phi_x)=0$ in $\mathbf P(\Lambda^\perp)$ has exactly six
-ordinary double points in linear general position
-\cite[\S3, Proposition~10]{HassettTschinkel2010}.
+characteristic zero.
 
-Pair balance makes each $p_a=[\mathbf1-6e_a]$ singular, and these six
-points already form a projective frame.  They are therefore the complete
-singular locus.  Their node type also follows directly from the same
+Completeness of the singular locus needs neither that smoothness nor a
+transversality hypothesis.  Because $\det(\Phi_x)=-C(x)$, differentiating
+the cross-golden determinant along a centered coordinate line and
+evaluating identifies each of its five partial derivatives with the
+corresponding gradient quadric of $C$, up to sign.  Those five quadrics
+vanish simultaneously at a nonzero centered vector exactly when that vector
+is a nonzero multiple of one of the six centered axis vectors
+$\mathbf1-6e_a$.  Hence the determinantal cubic threefold in
+$\mathbf P(\Lambda^\perp)$ has exactly the six classes
+$p_a=[\mathbf1-6e_a]$ as singular points, and these already form a
+projective frame because the kernel of the cross-golden compression is the
+all-ones line.  Both steps are kernel-checked, the derivative identity over
+any commutative ring containing a root of $t^2=t+1$ and the classification
+of singular points over any field of characteristic zero containing such a
+root; Section~\ref{sec:verification} names the declarations.
+
+The same pairing appears in the literature: the cross-golden four-space
+$\Lambda$ and its trace orthogonal $\Lambda^\perp$ carry the paired
+determinantal hypersurfaces of Hassett and Tschinkel, whose Proposition~10
+characterizes the trace-dual partner of a smooth determinantal cubic
+surface as a cubic threefold with six ordinary double points in linear
+general position \cite[\S3, Proposition~10]{HassettTschinkel2010}.  That
+equivalence is context here; the argument above does not use it.
+
+The node type follows directly from the same
 golden identity. At $p_a$, pair balance gives
 \[
  \operatorname{Hess}(C)_{ij}(p_a)=
@@ -1449,8 +1683,8 @@ No ambient characteristic-zero geometry is used here.
 \label{sec:verification}
 
 The rigidity and field-window arguments use three external mathematical
-inputs, while the orientation section uses one external model identification
-and one determinantal-duality theorem. Dye's Brianchon bound and equality classification identify
+inputs, while the orientation section uses one external model
+identification and no external singular-locus theorem. Dye's Brianchon bound and equality classification identify
 the Clebsch orbit
 \cite[\S2.2--2.3, Theorem~1, pp.~275--276]{Dye1991}; his stabilizer and
 associated-conic results supply the classical Clebsch geometry
@@ -1462,12 +1696,28 @@ Cheltsov, Tschinkel, and Zhang supply a published $S_5$-symmetric equation
 inside their classification of cubics already assumed to be six-nodal.
 Section~\ref{sec:orientation-two-graph} gives the explicit coordinate
 identification, but does not use that citation to transfer singular-locus
-completeness.  That transfer instead uses the equivalence in
-Hassett--Tschinkel for the determinantal hypersurfaces attached to a
-four-space in $\operatorname{End}(V)$ and its trace orthogonal: the cubic
-threefold has six ordinary nodes in linear general position precisely when
-the paired cubic surface is smooth
-\cite[\S3, Proposition~10]{HassettTschinkel2010}.
+completeness.  Nor does it transfer that completeness from
+Hassett--Tschinkel.  Their Proposition~10 relates the determinantal
+hypersurfaces attached to a four-space in $\operatorname{End}(V)$ and its
+trace orthogonal, a cubic threefold with six ordinary nodes in linear
+general position corresponding to a smooth paired cubic surface
+\cite[\S3, Proposition~10]{HassettTschinkel2010}; that statement is
+recorded as context and is not load-bearing.  Singular-locus completeness
+is instead a kernel-checked theorem about the cross-golden family itself.
+Over any commutative ring containing a root of $t^2=t+1$,
+\begin{center}
+\small\path{RelativeConicArcs.PaperIOrientationNodes.}\\
+\small\path{derivative_crossGoldenDeterminantLine_eval}
+\end{center}
+identifies the partial derivatives of the cross-golden determinant with the
+gradient quadrics of the support cubic, and over any field of
+characteristic zero containing such a root,
+\begin{center}
+\small\path{RelativeConicArcs.PaperIOrientationNodes.}\\
+\small\path{singularPoints_crossGoldenDeterminant_eq_axisClasses}
+\end{center}
+identifies the singular points with the six axis classes.  Neither uses a
+smoothness or transversality hypothesis.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
 reconstruction, support bipartition, and the orientation two-graph
@@ -1475,9 +1725,9 @@ reconstruction are proved in the text.  In particular, the conference
 identity gives pair balance and the Hessian ranks, while the five-matching
 normalizer and six-coset bound give the $S_5/A_5$ stabilizer distinction.
 The golden cross block, its
-four-dimensional trace complement, and the smooth Clebsch dual surface put
-the cubic under the cited determinantal theorem, so singular-locus
-completeness is structural.  The paper-owned replay independently constructs
+four-dimensional trace complement, and the resulting gradient
+classification give singular-locus completeness without a smoothness
+input.  The paper-owned replay independently constructs
 the coset actions, signed operator, triangle products, diagonal pencil,
 cross-golden trace dual, switching class, gradient ideals, and Hessian blocks.
 The gradient exhaustion is independent rather than the proof of completeness.

@@ -16,8 +16,8 @@ WARNING_RE = re.compile(
 )
 PAGES_RE = re.compile(r"Output written on .+ \((\d+) pages?,")
 EXPECTED_PAGES = {
-    "clebsch_rigidity.tex": 22,
-    "clebsch_rigidity_computational_companion.tex": 12,
+    "clebsch_rigidity.tex": 25,
+    "clebsch_rigidity_computational_companion.tex": 13,
 }
 
 

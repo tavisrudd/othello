@@ -73,16 +73,6 @@
       "artifacts": ["verification/finite_census_certificates.json"]
     },
     {
-      "id": "q11-conic-distance-gap",
-      "mode": "trusted-execution",
-      "statement": "No non-Clebsch uncovered locus is contained in a conic closer than the recorded four-point gap.",
-      "reduction": "Use the fifteen certified orbit representatives.",
-      "invariant": "The complete conic-intersection histogram for each orbit.",
-      "residual_finite_leaf": "All 160,930 nonsingular conics over F_11.",
-      "replay": "The finite-census audit reconstructs every conic and compares the canonical JSON byte for byte.",
-      "checks": ["finite-census-audit"]
-    },
-    {
       "id": "q11-low-degree-rigidity",
       "mode": "finite-certificate",
       "statement": "Only the Clebsch orbit has a nonzero cubic vanishing on its uncovered locus.",
