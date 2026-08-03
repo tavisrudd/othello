@@ -1,9 +1,37 @@
 {
   "closure": [
+    "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.Gates.GoldenQuantumStatistics",
     "RelativeConicArcs.GoldenBalancedCut"
   ],
   "declaration_module": {
+    "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.balancedSpectrum_sectors": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083_eq_esymm": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.crossGram_eq": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.det_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.det_smul_one_sub_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.powerSum": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.powerSum.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.roots_charpoly_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.schurWeyl_checksum": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081_eq_esymm": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle_sq": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle_transpose": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.trace_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.trace_sq_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet": "RelativeConicArcs.GoldenBalancedCut",
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1": "RelativeConicArcs.GoldenBalancedCut",
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": "RelativeConicArcs.GoldenBalancedCut",
@@ -20,6 +48,33 @@
   "opaque": [],
   "project_axioms": [],
   "project_declarations": [
+    "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark",
+    "RelativeConicArcs.ConferenceExchange.balancedSpectrum_sectors",
+    "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083",
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083.eq_1",
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083_eq_esymm",
+    "RelativeConicArcs.ConferenceExchange.crossGram_eq",
+    "RelativeConicArcs.ConferenceExchange.det_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.det_smul_one_sub_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1",
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
+    "RelativeConicArcs.ConferenceExchange.powerSum",
+    "RelativeConicArcs.ConferenceExchange.powerSum.eq_1",
+    "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram",
+    "RelativeConicArcs.ConferenceExchange.roots_charpoly_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.schurWeyl_checksum",
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081",
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081.eq_1",
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081_eq_esymm",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle.eq_1",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle_sq",
+    "RelativeConicArcs.ConferenceExchange.signedTriangle_transpose",
+    "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.trace_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.trace_sq_normalizedExchange",
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet",
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1",
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
@@ -31,6 +86,46 @@
   ],
   "schema_version": 1,
   "terminal_axioms": {
+    "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.crossGram_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.roots_charpoly_normalizedExchange": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.schurWeyl_checksum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.signedTriangle_sq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": [
       "propext"
     ],
@@ -46,6 +141,102 @@
   },
   "unit": "RelativeConicArcs.Gates.GoldenQuantumStatistics",
   "uses": {
+    "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark": [
+      "RelativeConicArcs.ConferenceExchange.balancedSpectrum_sectors",
+      "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083",
+      "RelativeConicArcs.ConferenceExchange.det_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.powerSum",
+      "RelativeConicArcs.ConferenceExchange.roots_charpoly_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle",
+      "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.trace_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.trace_sq_normalizedExchange"
+    ],
+    "RelativeConicArcs.ConferenceExchange.balancedSpectrum_sectors": [
+      "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083",
+      "RelativeConicArcs.ConferenceExchange.powerSum",
+      "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081"
+    ],
+    "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange": [
+      "RelativeConicArcs.ConferenceExchange.det_smul_one_sub_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083"
+    ],
+    "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083_eq_esymm": [
+      "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083"
+    ],
+    "RelativeConicArcs.ConferenceExchange.crossGram_eq": [
+      "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram"
+    ],
+    "RelativeConicArcs.ConferenceExchange.det_normalizedExchange": [
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.det_smul_one_sub_normalizedExchange": [
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange"
+    ],
+    "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle": [
+      "RelativeConicArcs.ConferenceExchange.crossGram_eq",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle_sq"
+    ],
+    "RelativeConicArcs.ConferenceExchange.powerSum.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.powerSum"
+    ],
+    "RelativeConicArcs.ConferenceExchange.roots_charpoly_normalizedExchange": [
+      "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.schurWeyl_checksum": [
+      "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083",
+      "RelativeConicArcs.ConferenceExchange.powerSum",
+      "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081"
+    ],
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081"
+    ],
+    "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081_eq_esymm": [
+      "RelativeConicArcs.ConferenceExchange.schur\u2082\u2081"
+    ],
+    "RelativeConicArcs.ConferenceExchange.signedTriangle.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.signedTriangle_sq": [
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.signedTriangle_transpose": [
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange": [
+      "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.trace_normalizedExchange": [
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
+    "RelativeConicArcs.ConferenceExchange.trace_sq_normalizedExchange": [
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
+    ],
     "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1": [
       "RelativeConicArcs.GoldenBalancedCut.crossGramDet"
     ],
