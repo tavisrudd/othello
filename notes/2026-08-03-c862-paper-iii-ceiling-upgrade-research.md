@@ -556,3 +556,48 @@ gain is not more material; it is discovering that the arithmetic fibre already a
 the operator carrier, so descent, determinant, and recognition are one theorem-shaped
 mechanism. The integral seam also just became materially more tractable because a 2026
 source supplies the missing global model over \(\mathbf Z[1/10]\).
+
+## Genre-appropriate significance language for future Paper III integration
+
+At the user's direction, Paper III remains unedited in this exposition pass.
+C816 should make three already-proved or theorem-ready implications explicit
+in the abstract, introduction, and conclusion.
+
+First, the rational twist is not merely the determination of a constant.  At
+the golden fibre the incidence residue algebra is the operator's coefficient
+algebra:
+
+> At the golden fibre, the incidence residue algebra is the spectral algebra
+> \(\mathbf Q[C]\) of the conference operator, so the six-axis carrier is a
+> rank-three module over the arithmetic fibre itself.
+
+Second, the determinant square has an arithmetic cause rather than being one
+more formula:
+
+> After splitting the quadratic algebra, the cross block measures the failure
+> of the diagonal algebra to preserve this rank-three module; the commutator
+> determinant is the quadratic norm of its determinant, and the oriented
+> Pfaffian cubic is its square root.
+
+Third, C809 reverses the operator-to-shadow passage:
+
+> Conversely, nonzero coincidence of the triangle and Pfaffian shadows forces
+> the quadratic conference relation; on the sign locus it recovers the unique
+> order-six conference class and its outer orientation.
+
+The general aligned-four-set theorem should be described as local-to-global
+reconstruction from quadratic determinant data: four-local tests recover a
+global two-graph switching class, with arity seven sharp.  The harmonic
+constant remains a return/corollary rather than a competing headline.
+
+The conclusion's causal sentence should be:
+
+> The arithmetic cover, conference operator, and cubic shadows are therefore
+> not parallel realizations: the fibre supplies the operator's coefficient
+> algebra, its norm produces the shadows, and the shadows recognize the
+> operator back.
+
+All of this language remains relative to the marked bridge where required.
+It does not claim that a sheet reconstructs the chart lift or cross-labelling,
+identify the ambient harmonic representations, or classify remote weighted
+solutions.

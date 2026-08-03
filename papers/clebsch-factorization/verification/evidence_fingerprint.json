@@ -11,8 +11,8 @@
   "trust_manifest_sha256": "a532e2781300a7fcec12b180b9b5ae867bf01ae4e3c3ae5b55d1889ca610f0b1",
   "runner_sha256": "7f5ead2afa2efdb72eeca851084476640ee3365ad78e6f3c14750dd50e1cd200",
   "review_sources_sha256": {
-    "normalized_manuscript": "4e15369815547fff97efa4df48769f5babba8116dc4ae58e36dba7072acfe9f4",
-    "normalized_statement_identity": "ed8cd2a8ae51714ed373670e6eb1e30ad501b62dc182d0532e74cf93fa3258e6",
+    "normalized_manuscript": "196a6c212c1ee2d2b4a030c4ac2f0a091a2efa20d37a08670b10a7b63080b636",
+    "normalized_statement_identity": "d11f76cc6b8f557793a7b909254f08b56e7742ce11dfa60145f7cfc77c92c4fb",
     "statement_extractor": "a9c4eed0aafa50a98881550c3efaf647e0fc3a474f509380758e40e85d0d3f1b",
     "paper_readme": "3e5562ffc644cf5f4067eac382ce8532990788c01b5dbe59662ab3a1917b2a86",
     "verification_readme": "c023b2e642ea2d2c400d9f21b48d62c94e47d286e0233261fe1582d8ff355ae2",
@@ -28,7 +28,7 @@
   "project_lean_import_closure_sha256": {
     "ClebschArithmeticGluing.lean": {
       "lean/RelativeConicArcs/Arc.lean": "429cdcdc172ee0cfd92af1a0c7e2a97a6b0f857155505957a7d9279ec9da8d88",
-      "lean/RelativeConicArcs/Certificate.lean": "0e4c97f4207274f0f7c208973d22c49eff3aab449ea55b010985e9a88ed1e8eb",
+      "lean/RelativeConicArcs/Certificate.lean": "80997b0a2cbdcbbee576027deb33c9ca168863ec1365ce3f906bbc3eaddc5eab",
       "lean/RelativeConicArcs/ClebschArithmeticGluing.lean": "85fb3094631b25be50c3e9b680d82fdf4e6650f82bca302a92574c0a32228c27",
       "lean/RelativeConicArcs/ClebschArithmeticGluingData.lean": "2ca60d94d0bab6238751dafd67f5b7088e93ae63683a3875bbfb804f88d98077",
       "lean/RelativeConicArcs/ClebschBalancedSheets.lean": "b9d4e01754afd0ea3639894f50301f789e3e50b32579a1596a62b80d95cfbded",
@@ -50,7 +50,7 @@
       "lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean": "9ea2ba12de452fb6eef09f34d4c204c6e3bc9573f4b317108dea7fe3b714d5c8",
       "lean/RelativeConicArcs/Moments.lean": "a5dfcd948d94f2646aae87c8f71ea904de7ecfc2cb3d5bc5ef4dcca902c725c7",
       "lean/RelativeConicArcs/Plane.lean": "2e12df7194e7b70cbb2745082bc2855882f0ccbe68e7670cd09760ab3e426aed",
-      "lean/RelativeConicArcs/ProjectiveBridge.lean": "66ecf65ce557e3b06d7c583962052e0763c06ec090b0866f53796dfcc12b6e8a",
+      "lean/RelativeConicArcs/ProjectiveBridge.lean": "c4145e6d728dcf3b1a81f7080f51e4a1774dec10f78b9e1458e726f75d6fe412",
       "lean/RelativeConicArcs/SyndromeGeometry.lean": "3b2dafe0f4606fedaf14b7ec77a0091321f9cc42776074a0bab318cb0e80b2a5"
     },
     "ClebschHilbertSymmetry.lean": {
@@ -63,7 +63,7 @@
     },
     "ClebschPaperIIStructural.lean": {
       "lean/RelativeConicArcs/Arc.lean": "429cdcdc172ee0cfd92af1a0c7e2a97a6b0f857155505957a7d9279ec9da8d88",
-      "lean/RelativeConicArcs/Certificate.lean": "0e4c97f4207274f0f7c208973d22c49eff3aab449ea55b010985e9a88ed1e8eb",
+      "lean/RelativeConicArcs/Certificate.lean": "80997b0a2cbdcbbee576027deb33c9ca168863ec1365ce3f906bbc3eaddc5eab",
       "lean/RelativeConicArcs/ClebschA3InvariantMatching.lean": "75fe31a8741de165edc43f6eb27db3209078725c5d0a19300fe79ab9f8ad4904",
       "lean/RelativeConicArcs/ClebschAffineContractionCohomology.lean": "ba24b8cbb37356b9c7bddce8b6c6219e3436609c36059292a6fab68ef8e97e9b",
       "lean/RelativeConicArcs/ClebschAffineExtensionContraction.lean": "cfb7a7d180b1f7c38db714ca5fc1d8d9e73d522d9b87c7df64501fa73711221c",
@@ -111,7 +111,7 @@
       "lean/RelativeConicArcs/Gates/ClebschPaperIIStructural.lean": "a6ba528f0a4d2ab9d3ad9acf814cbe5260e7ae467940abc7c70426146c78bb96",
       "lean/RelativeConicArcs/Moments.lean": "a5dfcd948d94f2646aae87c8f71ea904de7ecfc2cb3d5bc5ef4dcca902c725c7",
       "lean/RelativeConicArcs/Plane.lean": "2e12df7194e7b70cbb2745082bc2855882f0ccbe68e7670cd09760ab3e426aed",
-      "lean/RelativeConicArcs/ProjectiveBridge.lean": "66ecf65ce557e3b06d7c583962052e0763c06ec090b0866f53796dfcc12b6e8a",
+      "lean/RelativeConicArcs/ProjectiveBridge.lean": "c4145e6d728dcf3b1a81f7080f51e4a1774dec10f78b9e1458e726f75d6fe412",
       "lean/RelativeConicArcs/SyndromeGeometry.lean": "3b2dafe0f4606fedaf14b7ec77a0091321f9cc42776074a0bab318cb0e80b2a5"
     }
   },
