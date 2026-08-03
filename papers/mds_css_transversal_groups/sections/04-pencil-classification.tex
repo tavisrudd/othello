@@ -1,0 +1,246 @@
+\section{The non-GRS pencil and its quotient}\label{sec:pencil}
+
+Our first six-party application combines the minimum-support holonomy
+calculation with the imported rigidity theorem to turn a classical
+projective quotient into a complete LU coordinate over odd prime fields.
+Over a finite field of odd order, put
+\[
+H_t=\bigl((0,1,1-t),(0,1,t-1),(1,1-t,0),(1,t-1,0),
+          (1,0,-t),(1,0,t)\bigr),
+\]
+and define
+\[
+ A(t)=-4t(t-1)^2,\qquad
+ B(t)=(t^2-t+1)(t^2-3t+1),\qquad
+ z(t)=\bigl(B(t)/A(t)\bigr)^2.
+\]
+Also put
+\[
+G(t)=t^4-4t^3+7t^2-4t+1.
+\]
+The admitted non-GRS condition is
+\[
+t(t-1)(t^2-t+1)(t^2-3t+1)G(t)\ne0.                    \tag{4.1}
+\]
+Factoring the twenty \(3\)-by-\(3\) column minors gives the first four
+factors, which keep the arc and quotient coordinates nondegenerate.
+The determinant for a conic through the six columns is a unit times
+\(G\), so \(G=0\) is exactly the GRS boundary.  Write
+\(C_t=\ker H_t\) and \(\Psi_t=\Psi_{C_t}\), and let \(A,B,z\) be as in
+\((1.3)\).
+
+\begin{theorem}[Projective and Clifford quotient]\label{thm:lc-pencil}
+For admitted \(t,u\), the following are equivalent:
+\[
+H_t\sim_{\mathrm{proj}}H_u,\qquad
+C_t\sim_{\mathrm{mon}}C_u,\qquad z(t)=z(u),
+\]
+allowing arbitrary party permutations.  If \(q\) is prime, these are
+also equivalent to \(\Psi_t\sim_{\LC}\Psi_u\).
+\end{theorem}
+
+\begin{corollary}[Local classification of the admitted pencil]
+\label{cor:lu-lc-pencil}
+If \(q\) is an odd prime and \(t,u\) are admitted, then
+\[
+ H_t\sim_{\mathrm{proj}}H_u
+ \Longleftrightarrow C_t\sim_{\mathrm{mon}}C_u
+ \Longleftrightarrow \Psi_t\sim_{\LC}\Psi_u
+ \Longleftrightarrow \Psi_t\sim_{\LU}\Psi_u
+ \Longleftrightarrow z(t)=z(u),
+\]
+where every equivalence allows a party permutation.
+\end{corollary}
+
+\AMEFigureSix
+
+\begin{proof}
+Set
+\[
+ y(t)=\frac{(t-1)^2}{t}.
+\]
+Then \(A=-4t^2y\), \(B=t^2(y^2-1)\), and
+\[
+ z=\frac{(y-y^{-1})^2}{16}.
+\]
+It follows that \(z(t)=z(u)\) exactly when
+\[
+ y(u)\in\{y(t),-y(t),y(t)^{-1},-y(t)^{-1}\}.            \tag{4.2}
+\]
+Each of the four relations is realized by a direct projectivity and a
+party permutation.  In order, one may use
+\[
+\begin{array}{c|c}
+\text{relation}&\text{projectivity}\\ \hline
+y(u)=y(t)&\diag(1,(1-u)/(1-t),u/t)\\
+y(u)=-y(t)&\diag(1,(1-u)/(1-t),-u/t)\\
+y(u)=y(t)^{-1}&
+\begin{psmallmatrix}1&0&0\\0&0&(u-1)/t\\0&-u/(1-t)&0\end{psmallmatrix}\\
+y(u)=-y(t)^{-1}&
+\begin{psmallmatrix}1&0&0\\0&0&(1-u)/t\\0&-u/(1-t)&0\end{psmallmatrix}.
+\end{array}
+\]
+The corresponding permutations are respectively the identity,
+\((5\,6)\), \((3\,5)(4\,6)\), and \((3\,5\,4\,6)\).
+All denominators and determinants are nonzero on the admitted locus.
+
+Conversely, the ten signed products of complementary \(3\)-by-\(3\)
+brackets of \(H_t\) form the multiset
+\[
+\{+A,+A,+A,-A,-A,-A,+B,+B,-B,-B\}.                    \tag{4.3}
+\]
+Projectivity and independent column rescaling multiply all ten products
+by one common scalar; party permutation changes at most their common
+sign.  On the admitted locus \(A,B\ne0\).  If \(A^2\ne B^2\), the
+multiplicities three and two in \((4.3)\) distinguish the two opposite
+pairs and recover \((B/A)^2=z\).  If \(A^2=B^2\), the multiset instead
+collapses to two opposite values, each of multiplicity five.  That
+collapsed pattern is itself invariant under the common scaling and sign,
+and it is equivalent to \(z=1\).  Thus the multiset recovers \(z\) in
+both cases, and projective equivalence forces equality of \(z\).
+The equivalence with monomial codes follows from
+Section~\ref{sec:dictionary}, and projective equivalence supplies an LC
+equivalence.
+
+We now specialize the transition atlas from the rigidity argument to
+\(m=3\).  Each four-party support identifies
+its two-dimensional stabilizer plane with the local Pauli-label plane at
+any party in that support.  Overlapping supports therefore give coordinate
+changes between local Weyl frames, and their compositions around a loop
+give holonomy up to local symplectic conjugacy.  By \((4.2)\), these
+minimum-support planes generate the full stabilizer label group.  The
+450 quantities below are conjugacy data of this atlas, not an independent
+choice of scalar contractions.
+
+For the remaining direction assume that \(q\) is prime.  Then a local
+Clifford induces a block \(F_i\in\mathrm{SL}_2(q)\) on each local
+Pauli-label plane.  Put \(K_T=L_{C_t}(T)\) for every four-set
+\(T\).  If \(i,j\in T\), projection
+\(p_i:K_T\to\F_q^2\) onto the Pauli-label plane at \(i\) is an
+isomorphism by \((4.4)\).  Define the transition
+\[
+ M_T(i,j)=p_jp_i^{-1}:(\F_q^2)_i\longrightarrow(\F_q^2)_j
+\]
+and, for distinct four-sets \(T,U\) containing \(i,j\), the holonomy
+\[
+ \operatorname{Hol}(T,U;i,j)=M_U(j,i)M_T(i,j).          \tag{4.4}
+\]
+Local symplectic blocks \(F_i\) send this endomorphism to
+\(F_i\operatorname{Hol}F_i^{-1}\).  Reversing \(T,U\) takes its inverse,
+and a party permutation only relabels the data.  Thus the multiset of
+\[
+ r(M)=\Tr(M)^2/\det M
+\]
+over the \(15\cdot6\cdot5=450\) choices is an LC and party-permutation
+invariant.
+
+Substituting the shortened generators into \((4.4)\), simplifying each
+of the \(450\) rational functions exactly, and collecting equal functions
+gives the following multiset.  The paper-local certificate described in
+Section~\ref{sec:verification} replays both this symbolic enumeration and
+a separate direct-Lagrangian reconstruction:
+\[
+\begin{array}{c|c}
+\text{value of \(r(M)\)}&\text{multiplicity}\\
+\hline
+4&90\\
+-1/z&144\\
+(2z+1)^2/z^2&24\\
+\text{each root of }X^2-8X+(8-16z-1/z)&96.
+\end{array}                                             \tag{4.5}
+\]
+Because \(A,B\ne0\) on the admitted locus, \(z\ne0\).
+The two roots are taken over an algebraic closure; their symmetric
+multiset descends to \(\F_q\).  The multiplicity \(96\) applies to each
+root before specialization;
+coincident values have their multiplicities added.  The identity
+\[
+ 4B(t)^2+A(t)^2=4G(t)^2
+\]
+shows that the excluded GRS locus is exactly \(z=-1/4\).  Away from it,
+the constant \(4\) bin is isolated and the two quadratic roots are
+distinct.  The bin containing \(-1/z\) can merge with neither, one, or
+both of the weight-\(24\) and one weight-\(96\) contributions, so its
+multiplicity is \(144,168,240\), or \(264\).  No other bin has one of
+these multiplicities.  Hence the multiset canonically recovers
+\(-1/z\), including every modular collision, and LC equivalence forces
+equality of \(z\).
+\end{proof}
+
+The map \(t\mapsto z\) has degree eight: the four transformations in
+\((4.2)\), followed by the quadratic relation
+\(t+t^{-1}=y+2\), account for its eight sheets.  The signed refinement
+\(w=B/A\), \(z=w^2\), is not quantum data.  Both even and odd explicit
+party permutations reverse \(w\), and their projectivities lift to
+monomial local Cliffords.
+
+\begin{proof}[Proof of Corollary~\ref{cor:lu-lc-pencil}]
+Theorem~\ref{thm:lc-pencil} gives all equivalences except LU.  Every LC is
+an LU, while Theorem~\ref{thm:lu-lc-rigidity} turns every LU intertwiner
+between the states \(\Psi_t,\Psi_u\) into an LC intertwiner.
+\end{proof}
+
+\begin{proposition}[Frobenius-sector divisors]
+\label{prop:frobenius-sector-divisors}
+Let \(\sigma\) be an automorphism of a finite field of odd order and let
+\(t\) be admitted and non-GRS.  Put
+\[
+ E_\sigma(t)=(\sigma(t)-t)(1-\sigma(t)t),\qquad
+ D_\sigma(t)=((1-\sigma(t))(1-t))^2+\sigma(t)t.
+\]
+Then
+\[
+ \frac{\sigma(t)}{(1-\sigma(t))^2}
+   =\frac{t}{(1-t)^2}
+ \quad\Longleftrightarrow\quad E_\sigma(t)=0.            \tag{4.6}
+\]
+If \(h=(1-\sigma(t))(1-t)\) and
+\(w=(-h,-h,1,1,-1,-1)\), then
+\[
+ H_{\sigma(t)}\diag(w)H_t^{\mathsf T}=0
+ \quad\Longleftrightarrow\quad D_\sigma(t)=0.            \tag{4.7}
+\]
+Moreover \(D_{\mathrm{id}}(t)=G(t)\), and
+\[
+ E_\sigma(t)=0\quad\Longrightarrow\quad D_\sigma(t)\ne0.
+                                                               \tag{4.8}
+\]
+Finally \(G,A,B,z\) commute with \(\sigma\), and \(\sigma\) preserves the
+admitted non-GRS locus.
+\end{proposition}
+
+\begin{proof}
+Admission gives \(t\ne1\), and injectivity of \(\sigma\) gives
+\(\sigma(t)\ne1\).  Cross multiplication in \((4.6)\) gives
+\[
+ s(1-t)^2-t(1-s)^2=(s-t)(1-st)
+\]
+with \(s=\sigma(t)\).  Direct multiplication in \((4.7)\) makes eight
+entries vanish identically and leaves \(-2D_\sigma(t)\) in the last
+entry; odd characteristic gives the equivalence.  Setting \(\sigma\) to
+the identity yields \(D_{\mathrm{id}}=G\).
+
+If \(E_\sigma(t)=0\), then either \(\sigma(t)=t\) or
+\(\sigma(t)t=1\).  In the first case \(D_\sigma(t)=G(t)\).  In the
+second, multiplying \(D_\sigma(t)\) by \(t^2\) gives \(G(t)\).
+Admission excludes \(t=0\) and \(G(t)=0\), proving \((4.8)\).
+The equivariance statements follow by applying \(\sigma\) to the
+defining polynomial and rational expressions.
+\end{proof}
+
+The prime-field hypothesis is necessary for this scalar classification.
+Over \(\F_{p^e}\), the basis permutation
+\(\lvert x\rangle\mapsto\lvert x^p\rangle\) is a local Clifford and sends
+\(\Psi_t\) to \(\Psi_{t^p}\), while \(z(t^p)=z(t)^p\) need not equal
+\(z(t)\).  Concretely, in
+\(\F_{25}=\F_5[s]/(s^2-2)\), both \(s\) and \(-s=s^5\) are admitted, but
+\[
+ z(s)=3+3s,\qquad z(-s)=3+2s.
+\]
+For each field automorphism \(\sigma\),
+Proposition~\ref{prop:frobenius-sector-divisors} gives the collision and
+diagonal-isodual divisors relating \(t\) to \(\sigma(t)\).  It does not
+show that an arbitrary additive local Clifford determines a nontrivial
+field automorphism, nor does it construct a local Clifford from a Galois
+match of \(z\).  Those two representation-theoretic bridges are not
+claimed here, so neither is a full extension-field LC/LU classification.

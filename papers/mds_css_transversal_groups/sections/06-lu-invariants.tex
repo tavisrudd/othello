@@ -1,0 +1,63 @@
+\section{Scalar invariants and generic blindness}\label{sec:invariants}
+
+The operator-valued marginal mechanism retains local Weyl axes.  Fixed-copy
+scalar contractions retain less: on algebraic families they are generically
+constant and can distinguish parameters only on rank-jump strata.  We make
+that limitation precise here; Appendix~\ref{sec:scalar-certificates}
+records two explicit separators on exceptional strata.
+
+For \(r\) ket copies and \(r\) bra copies, choose a permutation
+\(\sigma_i\in S_r\) at each party and contract ket copy \(a\) with bra
+copy \(\sigma_i(a)\).  If \(G\) generates a \(d\)-dimensional code, let
+\(M_{\boldsymbol\sigma}(G)\) be the homogeneous matching system
+\[
+ (u_aG)_i=(v_{\sigma_i(a)}G)_i
+ \quad(1\leq i\leq n,\ 1\leq a\leq r).
+\]
+Counting its solutions gives the normalized contraction
+\begin{equation}\label{eq:permutation-contraction}
+ I_{\boldsymbol\sigma}(\Psi_C)
+   =q^{dr-\rank M_{\boldsymbol\sigma}(G)}.
+\end{equation}
+
+\begin{proposition}[Generic constancy]\label{thm:fixed-copy-boundary}
+Fix \(r\) and a field \(k\) of cardinality \(q\), which is also the local
+Hilbert-space dimension under the code--state dictionary.  Fix an
+irreducible reduced parameter variety \(X\) over \(k\), and a regular
+generator-matrix chart \(G(x)\) of constant code dimension.  Every
+degree-\((r,r)\) permutation contraction of the associated equal-phase
+states has one value at every \(k\)-point of some dense open subscheme
+\(U\subseteq X\) defined over \(k\).  This asserts no existence of
+\(k\)-points in \(U\): if \(U(k)=\varnothing\), the finite-field
+pointwise conclusion is vacuous.  The same holds for party-orbit sums and
+linear combinations.  After evaluating the states as vectors in
+\((\mathbb C^q)^{\otimes n}\), in the stable range \(q\geq r\), every
+scalar LU-invariant of bidegree \((r,r)\) is generically constant in this
+sense.  For a reducible family, the statement holds separately on each
+irreducible component.
+\end{proposition}
+
+\begin{proof}
+Formula~\eqref{eq:permutation-contraction} depends only on the rank of a
+matrix whose entries are regular functions over \(k\).  A maximal nonzero
+minor shows that this rank is constant on a dense open subscheme defined
+over \(k\).  There are only finitely many diagrams at fixed \(r\), so
+their generic-rank opens have a common dense intersection because \(X\)
+is irreducible.  This proves the geometric generic-rank assertion; the
+explicit caveat in the statement is necessary when passing to finite-field
+rational points.  Over the complex vector space
+\((\mathbb C^q)^{\otimes n}\), applied pointwise to each code state, the
+first fundamental theorem for unitary invariants says that local
+copy-permutation diagrams span the bidegree-\((r,r)\) invariants; when the
+local Hilbert-space dimension \(q\) is at least \(r\), there are no
+additional dimension relations among these diagrams
+\cite[Section~2]{CollinsSniady2006}.
+\end{proof}
+
+Thus no fixed copy number can recover a nonconstant pencil coordinate on
+the generic locus.  A scalar witness can still detect a special
+rank-jump stratum, as the four-copy example in
+Appendix~\ref{sec:scalar-certificates} does.  In contrast, the four-party
+operator tensor \((3.2)\) retains the Weyl axes and forces Cliffordness.
+This is the precise distinction between scalar blindness and marginal
+covariant rigidity.

@@ -26,6 +26,10 @@ path = "claim-proof-novelty-ledger.md"
 reason = "internal claim-development ledger, superseded by the public theorem and verification maps"
 
 [[repository.exclude_path]]
+path = "cross-paper-theorem-ownership.md"
+reason = "internal split-ownership ledger; public theorem ownership is expressed by the two manuscripts and their citations"
+
+[[repository.exclude_path]]
 path = "formal-statement-adequacy.md"
 reason = "internal formalization review record, superseded by the public verification map"
 
@@ -52,6 +56,37 @@ reason = "private monorepo-to-public export plan, superseded by the standalone r
 [[repository.exclude_path]]
 path = "release/QUANTUM-CHECKLIST.md"
 reason = "internal submission checklist, not part of the public manuscript repository"
+
+[[repository]]
+name = "mds-css-transversal-groups"
+include_release_pdfs = true
+source = "papers/mds_css_transversal_groups"
+paper_ids = ["mds_css_transversal_groups"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "adversarial-proof-evidence-audit.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger; public boundaries remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger; public trust boundaries remain in the manuscript and release contract"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; public verification contracts remain in the manuscript and supplement"
 
 [[repository]]
 name = "arcs-complete-outside-conic"

@@ -114,6 +114,12 @@ main = "main.tex"
 lane = "ame-lu"
 
 [[paper]]
+id = "mds_css_transversal_groups"
+dir = "papers/mds_css_transversal_groups"
+main = "main.tex"
+lane = "ame-lu"
+
+[[paper]]
 id = "arcs_complete_outside_conic"
 dir = "papers/arcs_complete_outside_conic"
 main = "arcs_complete_outside_conic.tex"

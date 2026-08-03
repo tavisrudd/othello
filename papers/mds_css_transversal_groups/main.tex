@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\numberwithin{equation}{section}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,patterns,positioning,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\hbadness=10000
+\hfuzz=3pt
+
+\newtheoremstyle{upright}
+  {6pt}{6pt}{\normalfont}{}{\bfseries}{.}{.5em}{}
+\theoremstyle{upright}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\LU}{\mathrm{LU}}
+\newcommand{\LC}{\mathrm{LC}}
+\newcommand{\AME}{\mathrm{AME}}
+\newcommand{\GRS}{\mathrm{GRS}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\AMEFigureThree}{%
+  \ifdefined\AMEHideFigureThree\else\input{figures/03-symmetry-groups}\fi}
+\newcommand{\AMEFigureSix}{%
+  \ifdefined\AMEHideFigureSix\else\input{figures/06-pencil-quotient}\fi}
+
+\title{Diagonal Isoduality and Transversal Clifford Groups of
+MDS--CSS Codes}
+\author{Tavis Rudd}
+\date{August 2026}
+\hypersetup{
+  pdftitle={Diagonal Isoduality and Transversal Clifford Groups of
+    MDS--CSS Codes},
+  pdfauthor={Tavis Rudd}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let \(C\) be a linear \([2m,m,m+1]_q\) maximum-distance-separable code.
+The space of diagonal multipliers carrying \(C\) to \(C^\perp\) has
+dimension zero or one, and every nonzero multiplier has full support and is
+unique up to scalar.  Over an odd prime field this nullity test determines
+the exact fixed-party projective transversal logical group of the associated
+\([[2m-1,1,m]]_q\) MDS--CSS code: it is
+\(\F_q^2\rtimes\mathrm{SL}_2(q)\) in the diagonally isodual case and
+\(\F_q^2\rtimes T\) otherwise, where \(T\) is the split torus.  Rigidity of
+stabilizer absolutely maximally entangled states supplies the converse:
+every tensor-product logical implementation is Clifford factor by factor.
+The linear \(\mathrm{SL}_2(q)\) action has coherent Weil lifts, while the
+full affine group retains the Heisenberg obstruction to a scalar splitting.
+
+For six coordinates, diagonal isoduality is exactly self-association of the
+corresponding six-arc and hence the conic boundary.  On an explicit non-GRS
+pencil a degree-eight quotient \(z\) classifies projective and monomial-code
+equivalence over odd fields and local-Clifford and local-unitary equivalence
+over odd prime fields.  The Clebsch \([6,3,4]_{11}\) code gives a worked
+syndrome-geometric application.  Fixed-copy scalar contractions are
+generically constant on the pencil, explaining why the operator-valued
+Weyl atlas retains classification data that bounded scalar invariants lose.
+Exact certificate replays cover the finite six-point computations; the
+all-length multiplier and group theorems are conceptual.
+\end{abstract}
+
+\input{sections/01-introduction}
+\input{sections/02-geometry-ame-dictionary}
+\input{sections/03-diagonal-isoduality}
+\input{sections/04-pencil-classification}
+\input{sections/05-logical-clifford-phase}
+\input{sections/06-lu-invariants}
+\input{sections/08-verification-boundary}
+\input{sections/07-conclusion}
+\appendix
+\input{sections/10-scalar-certificates}
+\input{sections/07-transport-sheaf}
+\input{sections/09-party-extensions}
+
+\section*{AI assistance disclosure}
+
+This project was developed with extensive assistance from OpenAI Codex and
+Anthropic Claude. Under the author's direction, the systems assisted
+throughout with proof exploration, literature research, symbolic and finite
+computation, code and formal-proof development, verification, and manuscript
+drafting and revision. The author checked the resulting arguments,
+computations, code, and cited sources, reviewed and edited all AI-assisted
+material, and assumes responsibility for all content.
+
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}

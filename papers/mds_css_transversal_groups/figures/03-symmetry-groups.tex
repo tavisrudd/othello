@@ -1,0 +1,34 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  box/.style={draw,rounded corners,minimum width=2.4cm,minimum height=8mm,
+              align=center},
+  note/.style={font=\scriptsize,align=center},
+  every node/.style={font=\small}
+]
+  \node[box] (nullity) at (0,1.8)
+    {$\dim\mathcal D(C,C^\perp)$\\is $0$ or $1$};
+  \node[box] (torus) at (-3.4,0)
+    {$\F_q^2\rtimes T$\\nullity $0$};
+  \node[box] (sl) at (3.4,0)
+    {$\F_q^2\rtimes\mathrm{SL}_2(q)$\\nullity $1$};
+  \draw[->] (nullity) -- node[above left,note] {no diagonal\\duality witness} (torus);
+  \draw[->] (nullity) -- node[above right,note] {unique projective\\witness $[s]$} (sl);
+
+  \node[box] (nt) at (-3.4,-2.0)
+    {$\F_q^2\rtimes N(T)$\\transported anchor};
+  \draw[->,dashed] (torus) -- node[right,note]
+    {realized odd\\party motion} (nt);
+
+  \node[note] at (3.4,-1.7)
+    {the linear $\mathrm{SL}_2(q)$ factor has a Weil lift;\\
+     the affine translation factor has a Heisenberg obstruction};
+\end{tikzpicture}
+\caption{The nullity of the diagonal multiplier space selects the exact
+fixed-party projective transversal group.  Party motion is a separate
+extension problem: in the computed non-GRS rows, an odd permutation enlarges
+the transported anchor carrier from $T$ to $N(T)$, but it need not fix the
+chosen encoder input.}
+\label{fig:symmetry-groups}
+\end{figure}

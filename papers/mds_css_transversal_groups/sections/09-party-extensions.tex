@@ -1,0 +1,119 @@
+\section{Computed party-permutation extensions}
+\label{sec:party-extensions}
+
+This optional appendix records the splitting obstruction for the projective
+party-permutation extension, together with finite examples.  It may be
+skipped without affecting the fixed-party transversal-group theorem.
+
+\subsection*{The nonabelian factor set}
+
+Let \(\Gamma\) be the fixed-party projective product-unitary symmetry group,
+\(\widetilde\Gamma\) allows party motion, and \(\Pi\) is the realized
+permutation group, so that
+\(1\to\Gamma\to\widetilde\Gamma\to\Pi\to1\) is exact.
+
+The extension has a section-free outer action
+\(\Pi\to\operatorname{Out}(\Gamma)\): conjugation by any lift of
+\(\pi\in\Pi\) gives an automorphism of \(\Gamma\), and changing the lift
+changes that automorphism by an inner automorphism, because elements of the
+kernel act by inner automorphisms.  For a normalized set-theoretic section
+\(s(1)=1\), write
+\[
+  s(\pi)s(\rho)
+    =f_s(\pi,\rho)s(\pi\rho),\qquad f_s(\pi,\rho)\in\Gamma .
+\]
+Then \(f_s(1,\pi)=f_s(\pi,1)=1\), and, with \(\alpha_\pi\) denoting
+conjugation by \(s(\pi)\), associativity of three chosen lifts gives
+\[
+ f_s(\pi,\rho)f_s(\pi\rho,\upsilon)
+ =\alpha_\pi\!\left(f_s(\rho,\upsilon)\right)
+   f_s(\pi,\rho\upsilon).
+\]
+If another normalized section is \(s'(\pi)=b(\pi)s(\pi)\) with
+\(b(1)=1\), then substituting and commuting no kernel factors gives
+\[
+ f_{s'}(\pi,\rho)
+ =b(\pi)\alpha_\pi\!\left(b(\rho)\right)
+   f_s(\pi,\rho)b(\pi\rho)^{-1}.
+\]
+The order of the factors is essential because \(\Gamma\) need not be
+abelian.  The factor set is identically one precisely when the section
+preserves multiplication, so the extension splits exactly when \(f_s\) can
+be changed to the constant identity factor set by such a normalized \(b\).
+That criterion is what the computed rows below verify.
+
+\subsection*{Computed rows}
+
+\begin{corollary}[Computed party-extension splittings]
+\label{cor:computed-party-splitting}
+The realized projective party-permutation extension splits for both
+non-GRS \(q=11\) pencil classes, the \(q=11\) GRS evaluation-set
+representatives
+\[
+\{0,1,2,3,4,5\},\ \{0,1,2,3,4,6\},\
+\{0,1,2,3,5,6\},\ \{0,1,2,3,5,9\},
+\]
+the enhanced-symmetry \(t=-1\) rows over \(\F_{17}\) and \(\F_{31}\),
+and the \(H_3\) representatives
+\((q,\tau)=(11,4),(19,5),(29,6),(31,13)\).
+For every listed non-GRS or \(H_3\) row, party parity acts on the fixed
+split torus \(T\) by inversion.  Thus, after choosing an anchor leg and
+allowing party motion to transport the corresponding encoder view, a
+realized odd party permutation enlarges the possible local linear
+carrier exactly from \(T\) to
+\[
+ N(T)=\langle T,J\rangle,\qquad
+ J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
+ J^2=-I,\qquad J\diag(a,a^{-1})J^{-1}=\diag(a^{-1},a).
+\]
+Hence \(N(T)/T\cong C_2\).  The linear extension does not split in odd
+characteristic, although its projectivization does.  If the party
+permutation fixes the input leg of a chosen encoder, this carrier acts
+as an actual logical enlargement; otherwise it compares two encoder
+views of the same six-leg tensor.
+\end{corollary}
+
+\begin{proof}
+For each row, an exact finite computation reconstructs the fifteen
+four-support shortened planes, exhausts all \(720\) party permutations,
+and checks the propagated local symplectic blocks against the full CSS
+Lagrangian.  After quotienting by the fixed-party group identified in
+Theorem~\ref{thm:logical-phase}, it is enough to test anchor block \(I\)
+on the GRS locus and anchor blocks \(I,J\) off it; this discards no
+candidate.  In the order in which the six \(q=11\) rows are listed above,
+their party images are
+\[
+ S_5,\quad S_4,\quad V_4,\quad C_5,\quad S_3,\quad D_{12},
+\]
+where \(D_{12}\) has order \(12\).  The \(q=17\) and \(q=31\)
+enhanced rows have party images \(S_4\) and \(S_5\), respectively, and
+each listed \(H_3\) image is \(S_5\).
+
+The certificate records the complete normalized factor set for each
+section.  It also closes a complement of order \(\lvert\Pi\rvert\) whose
+projection to \(\Pi\) is bijective, and verifies that the associated
+normalized cochain changes the factor set to the identity.  Hence every
+listed extension splits.  Conjugating the fixed torus by the stored lifts
+gives the sign action; any odd lift therefore induces the nontrivial
+class of \(N(T)/T\).  The complement is an involution in the projective
+party-extension group; its determinant-one anchor block is \(J\), whose
+square is \(-I\).
+\end{proof}
+
+At \(q=11\), the \(t=2,z=1\) Clebsch/\(H_3\) class has party image
+\(S_5\), while the \(t=10,z=9\) non-GRS class has party image \(S_4\).
+Both extensions split, and odd party motion inverts \(T\).
+After choosing an anchor leg, the possible one-qudit affine carriers
+across transported encoder views therefore form
+\(\F_q^2\rtimes N(T)\).  This is the logical group of a fixed encoder
+only for the subgroup fixing its input leg; general party motion compares
+different encoder views.  The GRS fixed-party logical group and this
+anchored non-GRS carrier have orders \(159720\) and \(2420\), respectively.
+
+Arithmetic symmetry jumps do not change the logical phase.  The
+characteristic-\(17\) tetrahedral specialization lies on the GRS boundary
+and retains the full \(\mathrm{SL}_2(17)\) fixed-party image; its party
+image is \(S_4\), and the computed extension splits.  The
+characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
+fixed-party image is the split torus; its \(S_5\) party image also splits,
+and odd motion enlarges the transported anchor-block carrier to \(N(T)\).

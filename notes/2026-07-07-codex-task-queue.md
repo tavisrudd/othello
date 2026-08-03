@@ -25,6 +25,8 @@ ordering and detail.
 
 ### `ame-lu`
 
+- **C842 `[ame-lu]` [IN PROGRESS; TWO-PAPER SPLIT PHASES A--B]** — freeze the combined identities, create the cross-paper theorem-ownership ledger, register and establish the self-contained Paper II monorepo root `papers/mds_css_transversal_groups`, and stop after its independent warning-free build and complete evidence replay; do not trim Paper I or begin the formal/public extraction split → `notes/2026-08-02-c842-ame-lu-paper-ii-establishment.md`.
+
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every
@@ -218,9 +220,9 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
+- **C843 `[relconic]` [QUEUED; PUBLIC TRUST/EXPORT CLOSURE]** — package the arcs paper's current human-scale Lean boundary for `~/src/lean/finitegeom`, following the Clebsch Paper I pattern: add a narrow independently green paper gate and machine/prose manifests, expose the C637 upper-witness and matching-packing defect terminals with their exact axiom sets, generate source/target content manifests and audits, preserve the external lower-classification boundary, then forward-commit and replay the standalone package without generated q16 data → `notes/2026-08-02-c843-arcs-trust-finitegeom-export.md`.
 - **C659 `[relconic]` [QUEUED; EV 1 — PROJECTIVIZED ARC / DUAL-CHOW BRIDGE]** — construct `PlaneLineCoordinateChart` data from the actual projectivized rank-three arc carrier, identify its representative factor product with the ambient dual Chow form, and prove that maximum-index centers supply the square restrictions and nonsquareness hypotheses needed by the C658 finite-type \(2m\) theorem → `notes/2026-07-26-c659-projective-dual-chow-bridge.md`.
 - **C648 `[relconic]` [QUEUED; EV 1 — ABSTRACT HEISENBERG ORBIT CHORD CALCULUS]** — develop the projective \(C_3^2\)-orbit chord calculus exposed by the q=19 residue, classify when one regular orbit can be the uncovered locus of another, and test a field-uniform collinearity-or-Heisenberg dichotomy without replacing the mechanism question by a larger unstructured census → `notes/2026-07-25-c648-heisenberg-orbit-chord-calculus.md`.
-- **C843 `[relconic]` [QUEUED; PUBLIC TRUST/EXPORT CLOSURE]** — package the arcs paper's current human-scale Lean boundary for `~/src/lean/finitegeom`, following the Clebsch Paper I pattern: add a narrow independently green paper gate and machine/prose manifests, expose the C637 upper-witness and matching-packing defect terminals with their exact axiom sets, generate source/target content manifests and audits, preserve the external lower-classification boundary, then forward-commit and replay the standalone package without generated q16 data → `notes/2026-08-02-c843-arcs-trust-finitegeom-export.md`.
 - **C606 `[relconic]` [QUEUED; only after Version 1 is published]** — develop Theorem 4 from `clebsch_ame_proof_development.md` as a post-publication follow-up to the arcs paper: verify and package the Clebsch six-arc's simultaneous extension complex as the independence complex of the icosahedron, then decide whether it belongs in a Version 2 structural remark or a companion note; do not alter Version 1 → `notes/2026-07-25-c606-clebsch-extension-complex-follow-up.md`.
 
 ### `ame-lu`

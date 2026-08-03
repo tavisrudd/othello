@@ -1,0 +1,121 @@
+\section{Introduction}
+
+A linear \([2m,m,m+1]_q\) maximum-distance-separable (MDS) code
+\(C\leq\F_q^{2m}\) defines an equal-phase Calderbank--Shor--Steane (CSS)
+state
+\[
+ \lvert\Psi_C\rangle=q^{-m/2}\sum_{c\in C}\lvert c\rangle.
+\]
+It is an absolutely maximally entangled state, and choosing one tensor
+factor as an input turns it into the normalized Choi state of a
+\([[2m-1,1,m]]_q\) quantum MDS encoder.  We determine the logical unitaries
+implemented by products of one-site physical operators.
+
+Throughout, \emph{transversal} means a tensor product of one-site physical
+operators with party labels fixed.  Logical groups are projective, so scalar
+phases are divided out.  A party-moving symmetry additionally permutes tensor
+factors and is named explicitly.  The exact group has two branches, detected
+by a linear nullity computation.
+
+\begin{theorem}[Diagonal isoduality and the transversal group]
+\label{cor:diagonal-isodual-transversal-group}
+Let \(q\) be an odd prime, let \(m\geq2\), and let
+\(C\leq\F_q^{2m}\) be a linear \([2m,m,m+1]_q\) MDS code.  Put
+\[
+ \mathcal D(C,C^\perp)
+ =\{s\in\F_q^{2m}:\diag(s)C\subseteq C^\perp\}.
+\]
+This space has dimension zero or one.  Its dimension is one exactly when
+\(C\) is diagonally isodual, meaning that \(SC=C^\perp\) for a nonsingular
+diagonal matrix \(S\).  The projective group of logical unitaries admitting
+transversal physical implementations is
+\[
+\begin{cases}
+ \F_q^2\rtimes\mathrm{SL}_2(q),&\dim\mathcal D(C,C^\perp)=1,\\
+ \F_q^2\rtimes T,&\dim\mathcal D(C,C^\perp)=0,
+\end{cases}
+\qquad
+T=\{\diag(a,a^{-1}):a\in\F_q^\times\}.
+\]
+Every nonzero diagonal-duality witness has full support and is unique up to
+scalar.  On the isodual branch the linear \(\mathrm{SL}_2(q)\) factor has a
+coherent Weil lift, whereas the affine projective group has no homomorphic
+lift through the scalar quotient because of the Weyl commutator.
+\end{theorem}
+
+The proof separates existence from exclusion.  A nonzero off-diagonal block
+of a product Clifford produces a diagonal multiplier between \(C\) and
+\(C^\perp\).  The MDS distance forces that multiplier to have full support
+and forces the multiplier space to be a line.  If the line is absent, every
+block is diagonal and the exact linear image is \(T\).  If it is present,
+the multiplier and its inverse construct all upper and lower elementary
+unipotents, hence all of \(\mathrm{SL}_2(q)\).  Logical Paulis supply the
+translation factor \(\F_q^2\).  The converse uses the following rigidity
+theorem from the companion paper.
+
+\begin{theorem}[Imported stabilizer-AME rigidity
+\cite{RuddAMEStabilizerRigidity2026}]
+\label{thm:lu-lc-rigidity}
+For every prime power \(q\) and \(m\geq2\), every product-unitary
+intertwiner between two stabilizer \(\AME(2m,q)\) states is Clifford on each
+tensor factor.
+\end{theorem}
+
+\begin{corollary}[Imported transversal Clifford no-go
+\cite{RuddAMEStabilizerRigidity2026}]
+\label{cor:transversal-clifford}
+Every tensor-product conversion between the associated stabilizer
+\([[2m-1,1,m]]_q\) encoders is Clifford on every physical factor and on the
+logical factor.  In particular, no code in this family admits a transversal
+non-Clifford logical unitary.
+\end{corollary}
+
+We also use the companion paper's phase-correction lemma: if a product
+Clifford carries one stabilizer label group to another, a product Pauli
+correction carries the corresponding stabilizer state rays.
+\begin{lemma}[Imported stabilizer-character correction
+\cite{RuddAMEStabilizerRigidity2026}]
+\label{lem:pauli-phase-correction}
+For stabilizer states in the standard finite-field Weyl convention, every
+product-Clifford map of their stabilizer label groups can be corrected by a
+product Pauli to map one state ray to the other.
+\end{lemma}
+
+We use only these stated conclusions.  Their proofs, quantitative
+rounding theory, and minimum-support atlas belong to the companion paper and
+are not reproved here.  The MDS--CSS dictionary and all constructions that
+distinguish the two exact Clifford branches are proved in this paper.
+
+For generalized and extended generalized Reed--Solomon codes the standard
+dual formula supplies a diagonal-duality witness, so the first branch recovers
+the full one-qudit projective Clifford group.  An extended
+\([8,4,5]_7\) Reed--Solomon code, for example, gives a
+\([[7,1,4]]_7\) quantum code whose projective transversal logical group has
+order \(7^2\lvert\mathrm{SL}_2(7)\rvert=16464\).  The nullity criterion also
+applies to non-evaluation MDS codes.
+
+At length six, the code has a projective-geometric model as a six-arc in
+\(\PP^2(\F_q)\).  Diagonal isoduality becomes fixed-label Gale
+self-association, which for a six-arc is equivalent to lying on a conic.
+Thus the all-length group theorem specializes to the
+\(\mathrm{SL}_2(q)\)-versus-split-torus logical phase.  An explicit non-GRS
+pencil then admits a degree-eight quotient \(z\): over odd fields it
+classifies projective and monomial-code equivalence, and over odd prime
+fields the imported rigidity theorem upgrades the classification to local
+Clifford and local unitary equivalence.  The extension-field Frobenius
+sectors are stated separately; no full extension-field Clifford
+classification is claimed.
+
+The remaining results explain and test this structure.  The Clebsch
+\([6,3,4]_{11}\) code relates extremal generalized-\(X\) syndromes to twelve
+conic directions while remaining on the nonconic split-torus branch.  Exact
+marginal and four-copy contractions distinguish selected scalar orbits, but
+every fixed-copy scalar contraction is generically constant on a regular
+code family.  This contrast explains why operator-valued Weyl-frame data can
+classify where bounded scalar invariants cannot.
+
+Section~\ref{sec:dictionary} fixes the MDS--CSS and six-arc dictionary.
+Section~\ref{sec:exact-logical} proves the multiplier-line theorem and the
+exact group.  Sections~\ref{sec:pencil}--\ref{sec:invariants} develop the
+six-point applications and scalar boundary.  The appendices contain the
+finite separators, transport calculation, and party-extension tables.

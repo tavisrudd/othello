@@ -1,0 +1,142 @@
+\section{Stabilizer AME states and MDS--CSS models}\label{sec:dictionary}
+
+Let \(q=p^e\) and fix the additive character
+\(\chi(a)=\exp(2\pi i\,\Tr_{\F_q/\F_p}(a)/p)\).  On the standard basis of
+\(\mathbb C^q\), indexed by \(\F_q\), put
+\[
+ X(a)\lvert x\rangle=\lvert x+a\rangle,\qquad
+ Z(b)\lvert x\rangle=\chi(bx)\lvert x\rangle .
+\]
+For \(v=(a,b)\in\F_q^2\), write \(W_v=X(a)Z(b)\), with any fixed
+consistent phase convention when only its projective axis is used.  The
+\(q^2\) single-party operators \(W_v\) form an
+orthogonal basis of the single-party Hilbert--Schmidt space.  A unitary is
+Clifford when conjugation permutes their projective axes
+\(\mathbb C W_v\).
+
+After choosing dual \(\F_p\)-bases of \(\F_q\), this Weyl system is the
+Pauli system of \(e\) \(p\)-level factors.  Its projective Clifford
+normalizer has the standard exact sequence
+\[
+ 1\longrightarrow \F_p^{2e}\longrightarrow
+ \operatorname{PCliff}(q)\longrightarrow
+ \operatorname{Sp}_{2e}(\F_p)\longrightarrow1,          \tag{2.0}
+\]
+including \(p=2\): the kernel is the projective Pauli group, and every
+trace-symplectic \(\F_p\)-linear label map has a Clifford lift
+\cite{DehaeneDeMoor2003,HostensDehaeneDeMoor2005}.
+
+For \(n\) parties, a pure stabilizer state is fixed by an abelian Pauli
+group \(\mathcal S\) of order \(q^n\).  Its projective label group
+\(L\leq(\F_q^2)^n\), viewed additively over \(\F_p\), is maximal isotropic
+for the trace-symplectic form.  This is the standard arbitrary-additive
+prime-power stabilizer correspondence
+\cite[Theorems~13 and 15]{KetkarKlappeneckerKumarSarvepalli2006}.
+For each \(\ell\in L\), write the stabilizer lift as
+\(\widetilde W_\ell=\alpha_\ell W_\ell\), where
+\(\alpha_\ell\ne0\).  Then
+\[
+ \lvert\psi\rangle\langle\psi\rvert
+   =q^{-n}\sum_{\ell\in L}\widetilde W_\ell .           \tag{2.1}
+\]
+If \(A\) is a party set, put
+\[
+ L(A)=\{\ell\in L:\supp(\ell)\subseteq A\}.
+\]
+Weyl orthogonality and partial trace give
+\[
+ \rho^\psi_A=q^{-|A|}\sum_{\ell\in L(A)}\widetilde W_\ell .  \tag{2.2}
+\]
+In particular, \(\rho^\psi_A\) is maximally mixed exactly when
+\(L(A)=\{0\}\).  Thus a stabilizer state on \(2m\) parties is AME exactly
+when it has no nonidentity stabilizer label supported on at most \(m\)
+parties.
+
+The rigidity and atlas theorems use only \((2.0)\)--\((2.2)\).  For the
+geometric classification and explicit six-party applications, we now
+specialize to the MDS--CSS model.
+
+A six-arc is an ordered sextuple of points of \(\PP^2(\F_q)\) with no
+three collinear.  Choose nonzero column representatives and collect them
+in a \(3\)-by-\(6\) matrix \(H\).  The arc condition says that every
+three-column minor of \(H\) is nonzero.  Consequently
+\[
+ C=\ker H\leq\F_q^6
+\]
+is an \([6,3,4]_q\) MDS code, and its dual
+\(C^\perp=\operatorname{rowspace}H\) is MDS with the same parameters.
+Conversely, a parity-check matrix of such a code supplies a six-arc.
+Projectivities, independent rescaling of columns, and permutation of
+columns correspond exactly to monomial equivalences of the kernels.
+These objects exist exactly when \(q\geq4\).  Indeed, from one point of
+a six-arc the five joining lines are distinct, so \(q+1\geq5\).  For
+\(q=4\), a conic together with its nucleus is a six-arc; for \(q\geq5\),
+any six points of a nonsingular conic form a six-arc.
+
+For the resulting CSS stabilizer we use the exact lift
+\[
+ W_{(c,h)}=X(c)Z(h)=\bigotimes_{i=1}^6X(c_i)Z(h_i),
+ \qquad(c,h)\in C\oplus C^\perp .
+\]
+Since \(h\cdot c'=0\) for \(h\in C^\perp\) and \(c'\in C\), these lifts
+multiply without a residual phase and fix \(\lvert\Psi_C\rangle\).
+
+\begin{proposition}[Arc--AME dictionary]\label{thm:dictionary}
+For a six-arc with kernel \(C\), the state \(\lvert\Psi_C\rangle\) in
+\((1.1)\) is a minimal-support stabilizer \(\AME(6,q)\) state.  Its
+projective Pauli-label Lagrangian is
+\[
+ L_C=(C\oplus0)+(0\oplus C^\perp)\leq\F_q^{12}.
+\]
+Monomial code equivalence, together with a party permutation, induces
+local-Clifford equivalence of the corresponding states.
+\end{proposition}
+
+\begin{proof}
+The operators \(X(c)\), \(c\in C\), fix the equal superposition.
+The operators \(Z(h)\), \(h\in C^\perp\), fix it because
+\(\chi(h\cdot c)=1\).  The two subgroups commute, and their label space
+has dimension six and is Lagrangian.
+
+For any three-coordinate set \(I\), puncturing \(C\) to \(I\) is
+bijective: injectivity follows from distance four and both spaces have
+dimension three.  In the partial trace of
+\(\lvert\Psi_C\rangle\langle\Psi_C\rvert\), equality on the complementary
+three coordinates therefore forces equality of the codewords, while the
+projection to \(I\) runs once through \(\F_q^3\).  Hence every
+three-party reduction is \(q^{-3}I\).  Smaller reductions are maximally
+mixed by tracing again, so the state is \(\AME(6,q)\).  Its support has
+the minimum possible size \(q^3\).
+
+A column multiplier \(x\mapsto ax\) is a single-party Clifford operation:
+it sends \(X(b)\) to \(X(ab)\) and \(Z(b)\) to \(Z(a^{-1}b)\).
+Projective row operations do not change the kernel, and column
+permutations permute parties.  This proves the last assertion.
+\end{proof}
+
+For a party set \(S\), let
+\[
+ L_C(S)=\{\ell\in L_C:\supp(\ell)\subseteq S\}.
+\]
+The general stabilizer partial-trace formula specializes to
+\[
+ \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .        \tag{2.3}
+\]
+For later block calculations, write
+\[
+ C_X=C\oplus0,\qquad C^\perp_Z=0\oplus C^\perp,
+ \qquad L_C=C_X\oplus C^\perp_Z .
+\]
+This formula is the bridge used in both the rigidity proof and the
+marginal invariants below.  A Pauli-labelled quantity is not by itself an
+LU invariant; the invariant statements will always be expressed either
+as covariance of the reduced operators or as basis-free tensor
+contractions.
+
+The GRS boundary has a simple geometric meaning.  A dimension-three
+length-six generalized Reed--Solomon code is represented, up to column
+multipliers, by six points on a nonsingular conic in \(\PP^2\).  We use
+``GRS state'' for the state of any such code.  The non-GRS pencil in
+Section~\ref{sec:pencil} consists of arc matrices \(H_t\) away from that
+conic locus and from the other factors needed to keep the columns
+distinct and the displayed coordinates defined.

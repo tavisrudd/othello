@@ -1,0 +1,157 @@
+\section{Transport calculation for the four-copy witness}\label{sec:transport}
+
+We now explain the rank jump behind \eqref{eq:q13-values}.  Fix the six copy
+permutations
+\[
+\boldsymbol\sigma=(1,(03)(12),(23),(02)(13),(01)(23),(021)).
+\]
+Let \(V\) be the three-dimensional message space and let
+\(g_i:V\to k\) be the six coordinate covectors.  Form a bipartite
+four-sheeted cover with vertices \(L_a,R_b\), \(0\leq a,b<4\), and a
+color-\(i\) edge from \(L_a\) to \(R_{\sigma_i(a)}\).  Put \(V\) at each
+vertex and \(k\) at each edge, using \(g_{p(i)}\) as both restriction
+maps for a party assignment \(p\in S_6\).  A global section is a tuple
+\((x_a,y_b)\in V^8\) satisfying
+\begin{equation}\label{eq:transport-section}
+ g_{p(i)}(x_a-y_{\sigma_i(a)})=0 .
+\end{equation}
+on all \(24\) edges.  The three-dimensional constant-section space is
+always present.  Gauging it away leaves the \(24\)-by-\(21\) matching
+matrix in \eqref{eq:permutation-contraction}.
+
+Let \(U=k^4/k(1,1,1,1)\), and let \(\rho_i\) be the action of
+\(\sigma_i\) on \(U\).  For each \(p\), the MDS property makes
+\(g_{p(3)},g_{p(4)},g_{p(5)}\) a basis of \(V^*\).  Define \(Q_p\) by
+\begin{equation}\label{eq:transport-systematic}
+ g_{p(i)}=\sum_{k=0}^2(Q_p)_{ik}g_{p(3+k)}
+ \qquad(0\leq i<3).
+\end{equation}
+Thus \(Q_p\) is the left block obtained by systematizing the
+party-reordered generator matrix on its last three columns; no pivot can
+vanish because every three coordinate covectors are independent.  Put
+\(\widetilde Q_p=2(t-1)Q_p\).  This scalar is a unit on the admitted
+locus.  For the identity assignment, the polynomial representative is
+\[
+\widetilde Q_1=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
+\quad
+\begin{array}{ll}
+a=-2(t-1)^2,&b=-(t^2-t+1),\\
+c=-(t^2-3t+1),&d=-2(t-1).
+\end{array}
+\]
+If \(Y_k\in U\) are the three free copy vectors, then
+\eqref{eq:transport-section} reduces
+to the \(9\)-by-\(9\) block transport operator
+\begin{equation}\label{eq:transport-operator}
+ \widetilde T_p
+ =\bigl((\widetilde Q_p)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
+\end{equation}
+The dimension identity
+\begin{equation}\label{eq:transport-rank-bridge}
+ 21-\rank M_{\pi\boldsymbol\sigma}(G(t))
+   =9-\rank\widetilde T_p
+\end{equation}
+holds over the field \(k\), where \(p=\pi\) in the convention of
+Section~\ref{sec:invariants}.  It follows by quotienting the
+three-dimensional constant-section kernel and then eliminating the three
+free systematic coordinates.  Multiplying the resulting operator by
+the unit \(2(t-1)\) does not change its rank.  All steps are invertible
+on the admitted six-arc locus.
+
+\begin{theorem}[Transport divisor]\label{thm:transport-divisor}
+For a parameter on the admitted odd non-GRS pencil, there exists a party
+assignment \(p\in S_6\) for which the sheaf
+\eqref{eq:transport-section} has a nonconstant
+section if and only if
+\[
+ (B^2-2A^2)(9B^2-4A^2)=0,
+\]
+or equivalently
+\begin{equation}\label{eq:transport-divisor}
+ (z-2)(9z-4)=0.
+\end{equation}
+At a generic point above \(z=2\), exactly \(96\) party assignments have
+rank \(20\); at a generic point above \(z=4/9\), exactly \(192\) do.
+Every other assignment has rank \(21\).
+\end{theorem}
+
+\begin{proof}
+For the identity systematic chart, the coefficients satisfy
+\[
+ a=b+c,\qquad d^2=-2a,\qquad A=a(c-b),\qquad B=bc.
+\]
+Common copy relabelling, a change of basis in \(V\), and rescaling a
+coordinate covector act on \(\widetilde T_p\) by invertible row and column
+operations.  Modulo these operations, the \(720\) party assignments
+split into boundary types and three nonboundary relative-cover types.
+Here the type records the six relative copy permutations
+\(\rho_j^{-1}\rho_i\), equivalently the even-cycle pattern in each pair
+of colored matchings.  Expanding a representative determinant by signed
+cycle covers gives
+\[
+\begin{split}
+P_-&=AB(3B-2A),\\
+P_+&=AB(3B+2A),\\
+P_2&=A(B^2-2A^2).
+\end{split}
+\]
+With integral bases the determinants are respectively
+\[
+64d^3AB(3B-2A),\quad
+64d^3AB(3B+2A),\quad
+64d^3A(B^2-2A^2).
+\]
+All omitted factors are units on the admitted odd pencil.  Every
+assignment outside these three types has a determinant that is a unit
+there.  The signed cycle-cover ledger, the exhaustion of the \(720\)
+assignments, and a fraction-free determinant path are recorded in the
+paper-local certificate.  The two signed types lie above
+\(w=B/A=\pm2/3\), hence \(z=4/9\); the axial type lies above \(z=2\).
+Fraction-free elimination also gives a nonzero \(8\)-minor on each
+component, so the generic kernel is exactly one-dimensional.
+
+The row/column equivalences organize the exceptional assignments into
+double cosets.  The axial stabilizers have orders \(48\) and \(16\),
+with intersection of order \(8\), so its support has size
+\[
+ 48\cdot16/8=96.
+\]
+For either signed type the corresponding orders are \(24\), \(48\), and
+\(6\), giving
+\[
+ 24\cdot48/6=192.
+\]
+The two signed types are distinguished by the sign of \(w\), while the
+axial cycle pattern differs from both; hence their support sets are
+disjoint.  Explicit representatives, stabilizer intersections, and
+complete support sets are in the certificate.
+Equation~\eqref{eq:transport-rank-bridge} turns
+the one-dimensional transport kernels into rank \(20\) of the matching
+matrix.
+\end{proof}
+
+The exceptional arithmetic belongs to this detector, not to
+Theorem~\ref{thm:lu-lc-rigidity}.  The identity
+\(4B^2+A^2=4G^2\) gives, respectively,
+\[
+\begin{array}{c|c}
+\operatorname{char}k&\text{specialized identities}\\ \hline
+3&B^2-2A^2=G^2,\quad 9B^2-4A^2=-A^2,\\
+5&9B^2-4A^2=4G^2,\\
+7&9B^2-4A^2=2(B^2-2A^2).
+\end{array}
+\]
+Thus in characteristic \(3\) both admitted components disappear; in
+characteristic \(5\) the \(z=4/9\) component lies on the excluded GRS
+boundary; and in characteristic \(7\) the two components merge.  The
+disjoint \(96\)- and \(192\)-element supports then give the exact rank
+histogram: \(288\) assignments have rank \(20\), and \(432\) have rank
+\(21\).
+Characteristics \(11,13,41\) introduce only pullback ramification, with
+no further rank drop.  These reductions and the nonzero \(8\)-minors
+that control them are replayed in the certificate.
+
+The divisor records where one scalar contraction changes rank.  It is
+not an LU-orbit boundary and, by
+Proposition~\ref{thm:fixed-copy-boundary}, cannot be promoted to a
+generic coordinate.
