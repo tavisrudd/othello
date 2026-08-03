@@ -10,7 +10,7 @@ Discovery companion:
 
 ## Current status
 
-**C835 and C836 closed; C837 is active (2026-08-02).**
+**C835--C837 closed; C838 is active (2026-08-02).**
 Pastawski--Yoshida Lemma 5 already gives the exact
 three-cleanable-region Clifford obstruction.  The paper now claims only the
 leakage-aware `8 eps` estimate, explicit Weyl-Fourier rounding, and AME global
@@ -19,10 +19,14 @@ one-logical-qudit stabilizer code with a three-correctable-region partition.
 C836 replaced the fixed-`q` shorthand by the uniform scale
 `Theta(min{p^-1,q^-1/2,n^-1/2})`; on the explicit Reed--Solomon tower it is
 `Theta(q^-1)` over prime fields and `Theta(q^-1/2)` at extension degree at
-least two.  C837 now tests collective coercivity, followed by C838 on exact
-atlas compatibility including affine character data.  See
+least two.  C837 extracted the post-branch collective estimate
+`sum_i d_2(U_i,g_i)^2 <= pi^2 eps^2` and showed that it cannot independently
+improve entry: a pre-entry version already contains exact branch selection.
+C838 now tests that selection through atlas compatibility, including affine
+character data.  See
 `2026-08-02-c835-cleaning-rounding-trust-audit.md` and
-`2026-08-02-c836-admissible-ame-rounding-scaling.md`.
+`2026-08-02-c836-admissible-ame-rounding-scaling.md` and
+`2026-08-02-c837-collective-frame-coercivity.md`.
 
 **C830 closed positively with a dimension boundary (2026-08-02): global
 minimum-support rounding.**  Orthogonality of all minimum-support sectors and
