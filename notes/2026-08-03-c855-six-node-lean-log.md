@@ -82,6 +82,8 @@ All commands run from `/home/tavis/src/othello`.
 * The manuscript passages `papers/clebsch-rigidity/clebsch_rigidity.tex` around lines 1370 and
   1466 still attribute singular-locus completeness to the cited proposition; they should be
   rewritten to cite the proved Lean theorem, with Hassett–Tschinkel demoted to context.
+* The Section 9 pin block still names the pre-six-node export state; see the blocked-export
+  section below for why it cannot be refreshed yet.
 * `papers/clebsch-rigidity/verification/build_trust_manifest.py` still lists
   `RelativeConicArcs.PaperIOrientationTraceDual.hassettTschinkel_six_nodes_of_traceDual` in its
   `TERMINALS` orientation group and does not list the two new node theorems; its `parse_axioms`
@@ -90,3 +92,78 @@ All commands run from `/home/tavis/src/othello`.
   documented in `papers/clebsch-rigidity/verification/README.md` (regenerate statement identity and
   trust manifest, refresh `verify-release-output.json` with `--update-output`, rerun
   `build_trust_manifest.py`, then the clean-source release run). Left untouched here.
+
+## Export refresh attempt: blocked upstream of the q11 package (2026-08-03)
+
+Goal: republish the standalone q11 certificate package so the manuscript's Section 9 pin block
+names an export whose aggregate gate carries the 52-terminal audit, and retire the pinned state in
+which `hassettTschinkel_six_nodes_of_traceDual` is still an axiom-bearing terminal.  The refresh was
+not performed.  Nothing was written to either export tree.
+
+### Current pinned state (unchanged)
+
+Manuscript `papers/clebsch-rigidity/clebsch_rigidity.tex`, Section 9:
+
+| Pinned artifact | Value |
+|---|---|
+| certificate-package commit | `09d8e174880e7370966da788da3c5d303df8af4f` |
+| base-library commit        | `570086982b26075a71a331a81bb1b519e9a27e7f` |
+| aggregate gate digest      | `c5d532dbd79dcb2eef602ced85105b72943a0a1af05de11c3c008c1ed9a1d747` |
+| Mathlib commit             | `571b8a8e54219b4d393f75f4b8653fac08197fcc` |
+
+The certificate package's `MANIFEST.json` records `source_commit`
+`81bae5e0eb02c26992f21b71808ef74a22e3b406` (its own gate commit) and pins the base library at the
+same `570086982b…` revision in `lakefile.toml` and `lake-manifest.json`.  The pinned base revision
+is an ancestor of the base library's public `origin/main`.
+
+### Why the refresh cannot proceed
+
+1. **The changed declarations live in the base library, not in the certificate package.**  The
+   six-node change edits `RelativeConicArcs/PaperIOrientationNodes.lean` and
+   `RelativeConicArcs/PaperIOrientationTraceDual.lean`, both of which the certificate package
+   obtains from its pinned base dependency; the package itself ships only the q11 tables and the
+   aggregate gate.  At the pinned base revision — and also at the base checkout's current local
+   head — `PaperIOrientationTraceDual` still declares
+   `hassettTschinkel_six_nodes_of_traceDual` and `PaperIOrientationNodes` contains neither
+   `derivative_crossGoldenDeterminantLine_eval` nor
+   `singularPoints_crossGoldenDeterminant_eq_axisClasses`.  The new gate's two added
+   `#print axioms` lines therefore cannot elaborate against any published base revision.
+
+2. **The base library must be republished first, and its local commits are unpublished.**  The
+   canonical base checkout is eight commits ahead of its public remote, and even that head predates
+   the six-node change (its `PaperIOrientationNodes.lean` differs in content from the authority
+   file).  Because the certificate package resolves its dependency by Git URL and revision, no
+   re-pin can build until a base revision containing the new theorems exists on the public remote.
+   Publishing is out of scope for this task.
+
+3. **No guarded procedure targets the certificate package.**  The companion exporter
+   `lean/scripts/lean-companion-export.py` materializes an area unit onto the canonical base
+   repository only: its canonical-base default is the base checkout, and it explicitly refuses any
+   suffixed `finitegeom-*` clone as authority or output.  The tracked export configurations under
+   `lean/trust/export/` cover only the Golden companion, and `lean/trust/areas/` has no Paper I or
+   Clebsch area.  There is consequently no guarded entry point that can regenerate the certificate
+   package's module set, `MANIFEST.json`, or its axiom audit.  Per the Lean guide, the correct
+   action when a guarded procedure cannot target a root is to stop.
+
+### What a future refresh must do, in order
+
+1. Adopt the six-node change into the canonical base library through the guarded companion-export
+   path (which requires an area configuration that does not yet exist for Paper I), then publish
+   the resulting base revision.
+2. Re-pin the certificate package's `lakefile.toml`, `lake-manifest.json`, and `MANIFEST.json`
+   dependency revision to that published base commit.
+3. Copy the authority's aggregate gate into the package.  The authority's current gate file has
+   SHA-256 `4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319`; the historical export
+   gate is a byte-identical copy of the authority's pre-change gate, so a plain copy is the expected
+   transformation and the new digest is the value the manuscript must pin.
+4. Rebuild the aggregate gate in the package under the owning build window and regenerate
+   `verification/clebsch_rigidity_trust/axiom-audit.txt` from that build's standard output; refresh
+   `MANIFEST.json` module digests and `source_commit`.
+5. Only then update the manuscript pin block and rerun the release chain in
+   `papers/clebsch-rigidity/verification/README.md`: statement identity, trust manifest against both
+   roots, `--update-output`, PDF rebuild, and the clean-source release run.
+
+### Authority state after this attempt
+
+No git state was changed in the authority.  The only authority edit is this log section plus the
+cross-reference added to the preceding section.
