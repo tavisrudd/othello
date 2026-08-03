@@ -23,6 +23,33 @@ finite incidence geometry — and the shared Lean base (now cap-free after
 C860 stage 1) gives the program artifact-level unity no comparable series
 has.
 
+## Recommended cross-paper blurb
+
+For the forward series framing, after the Paper-III recognition upgrades
+land:
+
+> The Clebsch program is a sequence of recognition theorems.  Data that
+> appear too coarse to remember their source---deep-hole syndromes, a
+> quadratic trade, an arithmetic fibre with determinant and Pfaffian
+> shadows, and weighted pairs of minimum supports---recover respectively a
+> projective code with its golden endomorphism order, an exceptional
+> factorization with its orientation, a conference operator with its
+> coefficient algebra, and a binary code with its full marked conic plane.
+> The point is not four isolated exceptional configurations.  It is a
+> common information principle: in the Clebsch six-axis geometry,
+> low-degree shadows retain enough structure to reconstruct the object that
+> cast them.
+
+This is the recommended portfolio-level paragraph and the natural opening
+of Paper V.  In Papers I--IV, use a shortened local version with that
+paper's recognition passage first and the other three compressed into one
+series sentence.  Do not place the full paragraph independently in all four
+abstracts.  Until Paper III contains the reverse-recognition and spectral-
+algebra statements, weaken its clause from ``recover a conference operator
+with its coefficient algebra'' to ``organize the conference operator and
+its cubic shadows.''  The full wording becomes earned when C816 integrates
+the C809 recognition theorem and C862 spectral-algebra packet.
+
 ## The unity gaps, ranked
 
 **U1 — the three cubics are identified nowhere.** The support cubic of
