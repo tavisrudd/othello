@@ -139,7 +139,29 @@ Updated:
   R6-normal-form, R7-calibration, and both stable-component certificate
   replays.
 - exact stable-component and beyond-four gate queue, both axiom audits, and
-  final aggregate trace gate: pending final guarded replay.
+  final aggregate trace gate: pass.  The four targets built successfully and
+  the aggregate trace gate passed; the printed trust set is exactly
+  `propext`, `Classical.choice`, and `Quot.sound`.
+
+## Extra-juice and Tao closeout
+
+The post-gate extra-juice pass checked whether the abstract component API
+could cheaply absorb more of C820's geometry.  It should not: adding a global
+scheme structure would obscure the proved fibrewise reduced boundary, while
+adding concrete carrier equations would merely move the external geometric
+input into a structure field under another name.  The strongest free upgrade
+was instead the exact reconciliation above: polynomial density is over the
+algebraic closure, topological closure selects one reduced component, and the
+recursive theorem consumes that selection without asserting a flat integral
+carrier.
+
+The Tao-style stress test targeted the two plausible hidden assumptions.  The
+elementary-symmetric pullback is injective independently of density; density
+uses infinitude only to extend vanishing from injective tuples.  Component
+selection uses irreducibility and a finite closed cover, not injectivity of the
+marker parametrization or a rational-point density claim.  The gate and axiom
+audit confirm that these are theorem dependencies rather than new axioms.
+No further task-owned strengthening is both free and honest.
 
 ## Mystery ledger
 
@@ -159,4 +181,4 @@ Updated:
 - **Version 2 adoption:** C821 owns manuscript synthesis after this interface
   is frozen; it is not a mathematical or formal gap in C646.
 
-No genuine C646 mystery remains conditional on the final guarded gate.
+No genuine C646 mystery remains.

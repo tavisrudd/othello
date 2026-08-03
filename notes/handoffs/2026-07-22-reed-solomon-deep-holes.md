@@ -5,7 +5,7 @@
 **Date:** 2026-08-02
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
-C603, C620, C656, C660, C819, and C820 complete. A second pair of independent cold reads exposed and
+C603, C620, C646, C656, C660, C819, and C820 complete. A second pair of independent cold reads exposed and
 closed three Version 1 defects: the R7 common-factor proposition now states
 the exact-gcd hypothesis its proof needs, the R6 lower-carrier exhaustion is
 proved by an explicit monodromy/characteristic trichotomy, and R7 finite
@@ -46,7 +46,7 @@ in every geometric fibre.  Consequently the recursively contained carrier is
 exactly the persistent scheme plus that single maximal Lucas carrier, restoring
 the all-level split-free containment and its former numerical threshold without
 claiming higher-Lucas split-freeness, nilpotent integral structure, or a
-covering-radius promotion.  C620 now owns higher-Lucas arithmetic, C646 owns
+covering-radius promotion.  C620 freezes higher-Lucas arithmetic, C646 freezes
 the companion kernel-checked density/closure boundary, and C821 owns final
 Version 2 synthesis.  A bounded theorem-level delta keeps
 Wang--Wu--Hu's projective-subline endpoint criterion as prior art and locates
@@ -94,8 +94,11 @@ reviews were green on the superseded canonical PDF SHA-256
 The internal AI reviews do not replace C545's publication-independent human
 reader gate.  The exact repair and mystery ledger are in
 `notes/2026-07-26-c656-prs-cold-read-release-repairs.md`.
-C646 remains active on companion stable-component formal geometry and does
-not reopen any Version 1 claim.
+C646 closes the companion stable-component formal geometry without reopening
+any Version 1 claim.  Its density, closure-transport, finite-component
+selection, and recursive-composition theorems pass the stable-component and
+beyond-four gates and expose C820's concrete fibre geometry as an explicit
+manuscript/certificate input.
 C545 has repaired C603's release-blocking local trust boundary.
 The adopted aggregate has the exact 17-file R5--R7 closure and 74-target
 axiom audit. The shared contraction API is separated from the companion R9
@@ -1000,14 +1003,13 @@ from queue-row placement:
    route removes the primary quotient enumerator, proves exact candidate-domain
    coverage, matches all fourteen Certificate R7 rows only after freezing, and
    retains the (q=7,8,9) covering-radius boundary.
-4. **C821 — Version 2 synthesis.**  C820, C620, and C660 are closed; begin only
-   after C646 freezes its formal boundary.  Integrate only
+4. **C821 — Version 2 synthesis.**  C820, C620, C646, and C660 are closed.
+   Integrate only
    proved carrier levels; import Wang--Wu--Hu's endpoint criterion; then run
    the full novelty, trust, reproducibility, and specialist-review gates.
 
-Two active tasks are parallel context, not alternative dispatches: C646 owns
-the formal recursive interfaces needed by C821, while C607 owns the broader
-decoding-complexity question.  C608 is a later explicit-decoder consequence
+C607 is parallel context on the broader decoding-complexity question, not an
+alternative dispatch.  C608 is a later explicit-decoder consequence
 and is not on the Version 2 theorem critical path.  The public Version 1
 repository and DOI are immutable inputs; no successor edits or retags them.
 
@@ -1019,12 +1021,11 @@ the same missing geometry.
 ## Open work by expected value
 
 This is the authoritative order for open `reed-solomon` C-items; dependency
-gates remain binding.  C646 is already active on the separately scoped
-companion formal geometry and is not a dispatch candidate in this ranking.
+gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C821 | after C646; C620/C660 placement is frozen | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
+| 1 | C821 | all entry gates closed | assemble the maximal proof-complete Version 2, import the Wang--Wu--Hu endpoint exactly, and present fixed levels as evaluated carrier corollaries |
 | 2 | C608 | publication gate cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion without competing with the Version 2 theorem spine |
 | 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
@@ -1088,6 +1089,6 @@ history.
 
 `go C821`
 
-(C620 freezes the higher-Lucas arithmetic and C660 closes the independent R7
-trust upgrade.  C821 is next after C646 freezes the formal density/closure
-boundary.)
+(C620 freezes the higher-Lucas arithmetic, C646 freezes the formal
+density/closure boundary, and C660 closes the independent R7 trust upgrade.
+C821 is ready.)
