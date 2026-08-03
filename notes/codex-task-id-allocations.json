@@ -2609,8 +2609,17 @@
       "last": 855,
       "purpose": "remediate Paper I Lean referee-artifact standards audit",
       "sequence": 290
+    },
+    {
+      "count": 1,
+      "first": 856,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 856,
+      "purpose": "Repair the complete Paper II Lean standards audit gap set",
+      "sequence": 291
     }
   ],
-  "next_id": 856,
+  "next_id": 857,
   "schema": "codex-task-id-allocations-v1"
 }
