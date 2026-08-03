@@ -49,6 +49,11 @@ the trust manifest; because this is a theorem parameter rather than a global
 axiom, it does not appear in `#print axioms`. The other printed axioms are part
 of Lean's ordinary logical trust boundary or are shown absent.
 
+The main paper's q11 orbit and decoder proofs do not depend on those generated
+tables: they close by stabilizer/orbit arguments and chord-incidence identities.
+The table modules are a redundant formal replay and support the companion's
+strictly sharper finite census results.
+
 The twelve Python programs at the paper root and the certificate and replay
 programs under `verification/` are deterministic exact checks. They enumerate
 the finite domains stated in the manuscript and print bounded summaries.

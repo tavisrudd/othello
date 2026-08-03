@@ -649,6 +649,13 @@ nonzero syndromes, hence ten distinct cosets. Every coset has $|C|$ words.
 The stabilizer further organizes all the small point sets that occur in the
 decoder and orientation constructions.
 
+The next proposition is a structural calculation, not an extraction from
+the finite orbit tables.  We include the stabilizer bookkeeping because it
+is precisely what makes the seven-orbit decomposition independently
+auditable: element eigenspaces determine subgroup fixed points,
+orbit--stabilizer determines their masses, and the masses exhaust the
+projective plane.
+
 \begin{proposition}[The $A_5$ point orbits]
 \label{prop:a5-point-orbits}
 Let $G=\operatorname{Stab}(A)\cong A_5$. Its orbits on $\PG(2,11)$ have
@@ -671,26 +678,38 @@ We derive the orbit sizes without using the finite enumeration.
 The argument first determines the points with each possible nontrivial
 stabilizer, then applies orbit--stabilizer to recover the orbit lengths.
 
-Since $11\nmid60$, the representation is semisimple, and the ternary
-icosahedral representation is irreducible; hence $G$ fixes no projective
-point. The ordinary
-three-dimensional icosahedral character, reduced in $\F_{11}$, shows that
-an involution, an element of order three, and an element of order five fix
-respectively $13$, $1$, and $3$ projective points. Indeed, an involution
-has a one-dimensional eigenspace and a two-dimensional eigenspace; the
-nontrivial order-three eigenvalues are not in $\F_{11}$; and the three
-order-five eigenvalues are distinct because $5\mid10$. Restricting the same
-representation to the standard subgroups of $A_5$ gives the following
-common-fixed-point ledger; the standard subgroup classification of $A_5$
-shows that these are all possible nontrivial proper point stabilizers. Here
-$D_5$ has order ten, and the last row counts points whose stabilizer is
-exactly the displayed subgroup type.
-For the noncyclic entries, determine the common projective eigenlines of
-standard generators: a $D_5$ normalizer retains one of the three $C_5$
-eigenlines, an $S_3$ normalizer retains the unique $C_3$ eigenline, a $V_4$
-has three
-simultaneous eigenlines, and its overgroup $A_4$ permutes those three and
-fixes none. This gives the second row.
+Since $11\nmid60$, Maschke's theorem applies.  Moreover $5$ is a square in
+$\F_{11}$, so the two ordinary ternary icosahedral characters are realized
+over $\F_{11}$, and the ordinary and Brauer characters agree on every
+class.  On the classes $1,2,3,5A,5B$, either has values
+$3,-1,0,\phi,\bar\phi$, where
+$\phi+\bar\phi=1$ and $\phi\bar\phi=-1$; using the class sizes
+$1,15,20,12,12$ gives
+\[
+ \langle\chi,\chi\rangle
+ =\frac{9+15+12(\phi^2+\bar\phi^2)}{60}=1.
+\]
+Thus the cross-characteristic reduction is absolutely irreducible, and
+$G$ fixes no projective point.
+
+The characteristic polynomials make the elementwise fixed-point counts
+transparent.  An involution has eigenspaces of dimensions one and two, and
+therefore fixes $1+(11+1)=13$ projective points.  An element of order three
+has characteristic polynomial
+$(T-1)(T^2+T+1)$; the quadratic factor is irreducible over $\F_{11}$, so it
+fixes one projective point.  An element of order five has three distinct
+eigenvalues in $\F_{11}$ because $5\mid10$, and hence fixes three projective
+points.
+
+It remains only to intersect these eigenspaces inside the standard proper
+subgroups of $A_5$.  Their numbers of conjugates follow from their
+normalizers. A $D_5$ retains one of the three $C_5$ eigenlines and exchanges
+the other two; an $S_3$ retains the unique $C_3$ eigenline; a $V_4$ has
+three simultaneous eigenlines; and its overgroup $A_4$ permutes those three
+and fixes none.  The standard subgroup classification of $A_5$ shows that
+these exhaust the possible nontrivial point stabilizers.  Here $D_5$ has
+order ten, and the last row counts points whose stabilizer is exactly the
+displayed subgroup type.
 \[
 \begin{array}{c|rrrrrr}
 H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
@@ -699,9 +718,10 @@ H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
 \text{points with stabilizer conjugate to }H&0&6&10&12&15&0
 \end{array}
 \]
-For the third row, a $D_5$ fixes one $C_5$ eigenline and exchanges the other
-two; the unique $C_3$ line is already fixed by its $S_3$ normalizer; and
-$A_4$ permutes the three $V_4$ eigenlines without fixing one.
+For the third row, the two exchanged $C_5$ eigenlines have exact stabilizer
+$C_5$; the unique $C_3$ line is already fixed by its $S_3$ normalizer; and
+the three $V_4$ eigenlines have exact stabilizer $V_4$ because $A_4$
+permutes them without fixing one.
 By orbit--stabilizer, the third row already gives the orbits of lengths
 $6$, $10$, $12$, and $15$. To account for the points with exact stabilizer
 $C_2$, observe that each involution lies in
@@ -789,6 +809,9 @@ $Q(s)=s_0s_2-s_1^2$.
 For a point $x\notin A$, its \emph{secant index} is the number of chords of
 $A$ through $x$; by the dictionary above, this is the number of
 weight-two leaders for each nonzero syndrome on the ray $x$.
+The following oracle is likewise derived from incidence identities; the
+syndrome enumeration in the formal package is an independent check of it,
+not an input to its proof.
 
 \begin{proposition}[Complete syndrome oracle and ambiguity enumerator]
 \label{prop:decoding-oracle}
@@ -817,10 +840,19 @@ twenty three-element coordinate supports.
 The DMP dictionary identifies weight-one directions with the six columns,
 weight at most two with the secant union, and weight three with its
 complement.  Proposition~\ref{prop:deep-holes-conic} identifies the last
-set with $Q=0$, proving the oracle.  In the notation of its proof, the
-chord-intersection equations give
-$(n_0,n_1,n_2,n_3)=(12,90,15,10)$, where $n_i$ counts
-projective directions of secant index $i$ and $n_0$ is the uncovered locus.
+set with $Q=0$, proving the oracle.  For completeness, the ambiguity counts
+come from three incidence equations rather than a syndrome table.  If
+$n_i$ counts off-arc points of secant index $i$, then
+\[
+ n_0=12,\qquad n_1+n_2+n_3=133-6-12=115,
+\]
+while chord--point and disjoint-chord-pair incidence give
+\[
+ n_1+2n_2+3n_3=15(11-1)=150,
+ \qquad n_2+3n_3=3\binom64=45.
+\]
+Dye's ten Brianchon points give $n_3=10$, and hence
+$(n_0,n_1,n_2,n_3)=(12,90,15,10)$.
 Every direction has
 ten nonzero affine syndromes.  Thus the distance-two cosets contribute
 $900$ cases of multiplicity one, $150$ of multiplicity two, and $100$ of
@@ -1446,15 +1478,19 @@ It reads no later-paper artifact:
 \begin{center}
 \small\path{check_orientation_two_graph.py}.
 \end{center}
-The formal gate checks the displayed q11 code and decoder tables, the causal
-containing-quadratic rigidity spine, the projective-to-code correspondence,
+None of the preceding manuscript conclusions is imported from the formal
+development.  After the structural proofs are complete, the formal gate
+independently rederives the displayed q11 code and decoder conclusions, the
+causal containing-quadratic rigidity spine, the projective-to-code correspondence,
 the chord-defect specialization, the $q=9$ obstruction, the small-arc moments,
 and the eight orientation mechanisms from the antipodal cover through the
 rational and integral commutants.  Dye's bound and classification remain two
 explicit axioms.  The commutant theorems instead take an explicit
 proposition-valued interface for the classical conjugate $3+3'$ decomposition,
 Schur's lemma, and Galois descent; Lean checks golden equivariance, the reverse
-containment, and the diagonal/off-diagonal integral test.  The companion
+containment, and the diagonal/off-diagonal integral test.  The generated q11
+rows are finite leaves internal to this redundant cross-check; they are not
+premises of the orbit--stabilizer or incidence proofs above.  The companion
 searches lie outside this gate.  The reusable Lean development is distributed in
 \href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}}, while
 the generated q11 tables and aggregate Paper I gate are in
@@ -1467,9 +1503,9 @@ Its pinned artifacts are
 \begin{center}
 \small
 certificate-package commit:
-\path{42ab1a2db30178cf23aa8393d886c63ded24bfbd}\\
+\path{09d8e174880e7370966da788da3c5d303df8af4f}\\
 base-library commit:
-\path{ef6317c5e1a348a91a1928104f9c8e1831bfb03d}\\
+\path{570086982b26075a71a331a81bb1b519e9a27e7f}\\
 aggregate gate:
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}\\
 Mathlib commit:
