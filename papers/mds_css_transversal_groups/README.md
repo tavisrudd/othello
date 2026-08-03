@@ -1,6 +1,6 @@
 # Diagonal isoduality and transversal Clifford groups
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21766797.svg)](https://doi.org/10.5281/zenodo.21766797)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21766797-blue.svg)](https://doi.org/10.5281/zenodo.21766797)
 
 This source tree contains *Diagonal Isoduality and Transversal Clifford Groups
 of MDS--CSS Codes* and its paper-local verification package.

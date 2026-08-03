@@ -1,6 +1,6 @@
 # Arcs complete outside a conic
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21682567.svg)](https://doi.org/10.5281/zenodo.21682567)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682567-blue.svg)](https://doi.org/10.5281/zenodo.21682567)
 
 ## Read the paper
 

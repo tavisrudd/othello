@@ -1,6 +1,6 @@
 # Deep holes beyond redundancy four
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21682069.svg)](https://doi.org/10.5281/zenodo.21682069)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682069-blue.svg)](https://doi.org/10.5281/zenodo.21682069)
 
 This directory contains the manuscript
 *Deep holes of projective Reed--Solomon codes beyond redundancy four:
