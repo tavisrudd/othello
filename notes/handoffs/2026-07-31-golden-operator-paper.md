@@ -526,7 +526,9 @@ Golden quantum-statistics gate and makes the tracked-PDF policy explicitly
 immutable-source. The disposable paper plan, audit, deterministic
 materialization, manifest, sixteen-page check, and exact sixteen-file forward
 delta pass without touching the live mirror. The Lean source gate builds in a
-clean worktree, but the repository has no guarded exporter from an immutable
+clean worktree, and generated facts give exactly `{propext}` for all four
+terminals. The monolithic relconic audit retains 165 unrelated baseline errors,
+and the repository has no guarded exporter from an immutable
 Othello trust unit onto an immutable canonical `~/src/lean/finitegeom` base;
 C845 stops at that exact build-system-owned contract rather than editing either
 destination or using the superseded suffixed clone. Details:

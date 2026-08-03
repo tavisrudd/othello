@@ -87,10 +87,20 @@ and has no promotion role.
 
 The clean disposable Othello worktree at `ee60800c` built
 `RelativeConicArcs.Gates.GoldenQuantumStatistics` successfully through the
-guarded queue (8.48 seconds, 880,208 KiB peak). The aggregate `--no-build`
-phase then refused when a foreign Lean build became live. The facts extractor
-has therefore not written a Golden facts artifact, and no axiom or
-clean-checkout claim is made.
+guarded queue (8.48 seconds, 880,208 KiB peak). The first aggregate
+`--no-build` phase refused when a foreign Lean build became live. After that
+build released the window, `lean-trust-extract.py` generated
+`lean/trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json` from
+the clean worktree. Its exact observed axiom set is `{propext}` for each of the
+four terminals, with no project axiom and no opaque declaration.
+
+The area-wide trust-spine audit is not a usable C845 exit gate: it currently
+reports 165 pre-existing errors across unrelated relconic/AME--LU/Q25 units,
+including missing facts and unreached modules. Global external-view generation
+also incorporates unrelated committed paper-fact changes. C845 therefore
+commits only its generated unit fact and does not absorb or regenerate those
+foreign surfaces. No clean-checkout aggregate or canonical-export claim is
+made.
 
 More fundamentally, the repository contains no guarded exporter that can
 materialize an immutable Othello trust unit on top of an immutable canonical
@@ -125,5 +135,10 @@ prose, axiom, and deterministic-export gates before handing it to C840.
 - **Open:** the canonical finitegeom forward-export mechanism is absent. The
   exact required contract is the seven-point gate above; build-system ownership
   is the evidence gap.
-- **Open:** exact terminal axiom facts and the aggregate no-build confirmation
-  await a quiet build window after that guarded path exists.
+- **Settled:** exact terminal facts are generated; all four terminals use only
+  `propext` and introduce no project axiom.
+- **Open:** the aggregate no-build confirmation and canonical clean-checkout
+  replay await the guarded exporter path.
+- **Open:** the monolithic relconic trust-spine audit has 165 unrelated
+  baseline errors, so a scoped unit check or a repaired area baseline is also
+  required before a global external-view gate can be claimed.
