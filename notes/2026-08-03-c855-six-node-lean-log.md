@@ -340,3 +340,77 @@ Both are tooling changes rather than area-configuration changes; neither was mad
 tree from the refused run remains under
 `~/.cache/othello-lean-build/companion-export/clebsch-orientation-candidate` and can be discarded.
 In the authority, the only git change is the committed trust fact; this note remains uncommitted.
+
+## Subset delta gate, export adopted into the base library (2026-08-03)
+
+The forward-delta gate was changed from equality to containment, and the export chain then ran to
+completion.  The base library now carries the six-node change.
+
+### The gate change
+
+`lean/scripts/lean-companion-export.py`, `forward_delta`: the candidate's actual git delta must now
+be a **subset** of the planned written-file set rather than equal to it.
+
+- An unplanned changed path is refused exactly as before, with the message
+  `the candidate delta leaves the planned file set: unplanned [...]`.
+- A planned file whose bytes the base already carries is no longer an error.  Such files are counted
+  in the printed report as `planned_unchanged_count`, and listed as `planned_unchanged` under the new
+  `run --verbose` flag.  Counting them keeps a refresh that rewrote nothing distinguishable from one
+  that carried its modules across.
+- Deletions and index state in the candidate remain a hard refusal, unchanged.
+
+The module docstring now states the containment contract.  Two regression tests were added to
+`lean/scripts/test_lean_companion_export.py`: one restores a planned file to its base bytes and
+asserts it is reported unchanged rather than missing, the other asserts an unplanned path still
+refuses.  The suite passes.
+
+### Export
+
+```
+python3 lean/scripts/lean-companion-export.py \
+  --config lean/trust/export/clebsch_support_cubic_orientation.toml \
+  --source-commit HEAD --base-commit HEAD --accept-base-prose-drift \
+  run --workdir ~/.cache/othello-lean-build/companion-export/clebsch-orientation-candidate --verbose
+```
+
+Source commit `a4b20bce`, base commit `56e4edc5`, deterministic repeat confirmed, module count
+unchanged at 273, twenty planned files unchanged because the base already carried their bytes.  The
+delta was nine files:
+
+| Kind | Paths |
+|---|---|
+| modified | `README.md`, `TARGET_MANIFEST.json`, `RelativeConicArcs/PaperIOrientationNodes.lean`, `RelativeConicArcs/PaperIOrientationTraceDual.lean` |
+| added    | `trust/CLEBSCH_SUPPORT_CUBIC_ORIENTATION.md`, `trust/ClebschSupportCubicOrientationAxiomAudit.lean`, `trust/areas/clebsch_support_cubic_orientation.toml`, `trust/manifests/clebsch_support_cubic_orientation.json`, `trust/source-manifests/clebsch_support_cubic_orientation.json` |
+
+The pre-existing `PROVENANCE.md` drift (declares a 251-module library state against a 273-module
+manifest) was again accepted untouched and still awaits a separate repair in the base repository.
+
+### Validation in the base library
+
+Delta copied into `~/src/lean/finitegeom` with no hand edits, then, through the guarded runner
+against that root:
+
+```
+python3 lean/scripts/lean-build-queue.py run RelativeConicArcs.PaperIOrientationSpine \
+  --lean-root ~/src/lean/finitegeom --profile single --threads 1 --cores 20-23 --cache-mode off
+passed RelativeConicArcs.PaperIOrientationSpine {'wall_clock': '3:49.88', 'max_rss_kbytes': '9515012', 'exit_status': '0'}
+starting trace-only aggregate gate
+queue complete
+```
+
+The exported axiom audit was then elaborated in the same root through `guarded-lean --root`.  It
+prints all twenty-four orientation terminals, each depending on exactly `propext`,
+`Classical.choice`, and `Quot.sound`.  No other axiom, and no `sorry`, appears in its output.
+
+### Adoption
+
+One ordinary unsigned forward commit in `~/src/lean/finitegeom`:
+
+- message: `Prove the six ordinary nodes of the support cubic and record its orientation boundary`
+- new head: `85dfde9e13e6c3d004e0e659fb83c1a4761902d0`
+- the branch is now nine commits ahead of `origin/main`; the eight earlier unpushed commits are
+  untouched, the worktree is clean, and nothing was pushed.
+
+`hassettTschinkel_six_nodes_of_traceDual` is no longer an axiom-bearing terminal anywhere in the base
+library.  Publishing that revision, and the certificate-package re-pin sequence recorded earlier in
+this note, remain the author's decisions.

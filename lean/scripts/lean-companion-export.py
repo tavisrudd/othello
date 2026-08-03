@@ -7,7 +7,9 @@ derives the unit's project-local module closure and exact terminal list from
 the committed trust registry and generated fact, materializes a disposable
 candidate repository on top of the canonical base tree and history, generates
 every release surface mechanically, verifies byte identity and manifest
-completeness, and prints a read-only forward delta.
+completeness, and prints a read-only forward delta.  The delta must lie inside the
+planned file set: an unplanned changed path is refused, while a planned file the base
+already carries byte for byte is reported as unchanged rather than treated as missing.
 
 The exporter never commits, tags, pushes, fast-forwards, or edits either the
 source repository or the canonical base.  A candidate is always a fresh
@@ -789,7 +791,15 @@ def tree_fingerprint(root: Path) -> dict[str, str]:
     return fingerprint
 
 
-def forward_delta(plan: Plan, out: Path) -> dict[str, Any]:
+def forward_delta(plan: Plan, out: Path, verbose: bool = False) -> dict[str, Any]:
+    """Describe the candidate's delta against the base, requiring it to lie inside the plan.
+
+    Every changed path must be one the plan intended to write; an unplanned path is a hard
+    refusal.  A planned file may be absent from the delta: the exporter rewrites the whole
+    closure, so a module the base already carries byte for byte produces no change.  Those
+    files are counted, and listed when `verbose`, so a refresh that silently rewrites nothing
+    cannot be mistaken for one that carried its modules across.
+    """
     status = git_text(out, "status", "--porcelain", "--untracked-files=all").splitlines()
     added = sorted(line[3:] for line in status if line.startswith("??"))
     modified = sorted(line[3:] for line in status if line.startswith(" M"))
@@ -798,12 +808,22 @@ def forward_delta(plan: Plan, out: Path) -> dict[str, Any]:
         raise Refused("the candidate tree has deletions or index state:\n  " + "\n  ".join(unexpected))
     expected = set(plan.files)
     actual = set(added) | set(modified)
-    if actual != expected:
+    unplanned = sorted(actual - expected)
+    if unplanned:
         raise Refused(
-            "the candidate delta does not match the planned file set: "
-            f"unplanned {sorted(actual - expected)}, missing {sorted(expected - actual)}"
+            "the candidate delta leaves the planned file set: "
+            f"unplanned {unplanned}"
         )
-    return {"added": added, "modified": modified, "file_count": len(actual)}
+    unchanged = sorted(expected - actual)
+    delta: dict[str, Any] = {
+        "added": added,
+        "modified": modified,
+        "file_count": len(actual),
+        "planned_unchanged_count": len(unchanged),
+    }
+    if verbose:
+        delta["planned_unchanged"] = unchanged
+    return delta
 
 
 def command_plan(args: argparse.Namespace) -> int:
@@ -835,7 +855,7 @@ def command_run(args: argparse.Namespace) -> int:
         raise Refused("repeat materialization is not byte-identical")
     result = verify(plan, first)
     result["deterministic_repeat"] = True
-    result["forward_delta"] = forward_delta(plan, first)
+    result["forward_delta"] = forward_delta(plan, first, args.verbose)
     result["prose_drift"] = list(plan.prose_drift)
     shutil.rmtree(second)
     print(canonical_json(result), end="")
@@ -862,6 +882,8 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("--workdir", type=Path, required=True,
                      help="disk-backed directory receiving the disposable candidate")
     run.add_argument("--replace", action="store_true", help="discard an existing candidate directory")
+    run.add_argument("--verbose", action="store_true",
+                     help="list the planned files whose bytes the base already carries")
     args = parser.parse_args(argv)
     try:
         if args.command == "plan":

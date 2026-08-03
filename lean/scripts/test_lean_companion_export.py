@@ -195,6 +195,27 @@ class CompanionExportTests(unittest.TestCase):
         self.assertEqual(EXPORTER.git_text(first, "remote").strip(), "")
         self.assertEqual(EXPORTER.resolve_commit(first, "HEAD"), plan.base.commit)
 
+    def test_planned_file_the_base_already_carries_is_reported_unchanged(self) -> None:
+        plan = self.build()
+        candidate = self.work / "candidate"
+        EXPORTER.materialize(plan, candidate)
+        EXPORTER.git_text(candidate, "checkout", "--", "TARGET_MANIFEST.json")
+        delta = EXPORTER.forward_delta(plan, candidate, verbose=True)
+        self.assertNotIn("TARGET_MANIFEST.json", delta["modified"])
+        self.assertEqual(delta["planned_unchanged"], ["TARGET_MANIFEST.json"])
+        self.assertEqual(delta["planned_unchanged_count"], 1)
+        self.assertEqual(delta["file_count"], len(plan.files) - 1)
+        self.assertNotIn("planned_unchanged", EXPORTER.forward_delta(plan, candidate))
+
+    def test_unplanned_change_is_refused(self) -> None:
+        plan = self.build()
+        candidate = self.work / "candidate"
+        EXPORTER.materialize(plan, candidate)
+        (candidate / "UNPLANNED.md").write_text("stray\n")
+        with self.assertRaises(EXPORTER.Refused) as caught:
+            EXPORTER.forward_delta(plan, candidate)
+        self.assertIn("UNPLANNED.md", str(caught.exception))
+
     def test_candidate_registry_and_audit_record_the_exact_terminals(self) -> None:
         plan = self.build()
         candidate = self.work / "candidate"
