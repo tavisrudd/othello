@@ -4,9 +4,11 @@
 
 **Opened:** 2026-07-24
 
-**Status:** active.  The C749 human
-freeze, C750/C801 Lean closure, and Milnor--Serre exposition pass are
-complete.  Public packaging and the immutable locator remain external.
+**Status:** active.  The C749 human freeze, C750/C801 Lean closure,
+Milnor--Serre exposition pass, deterministic packaging, and local standalone
+forward commit are complete.  The authorized GitHub push is blocked only by
+missing SSH/GitHub credentials in the current environment; the immutable
+locator and locator insertion remain external.
 
 ## Objective
 
@@ -40,15 +42,23 @@ Paper III.
   in notes/2026-08-02-c577-paper-ii-milnor-serre-copy-edit.md.
 - All paper-owned semantic evidence paths and the local aggregate replay are
   green.
+- The authoritative Zenodo metadata now matches the final title and theorem
+  scope at commit `8fa7ac41bfd31906891de8fa0c9c1d6bee799cb4`.  The canonical
+  62-file export is committed forward in the standalone repository at
+  `71751691b026ff99c53a64c522b0464a2c5582e0`; its isolated aggregate replay
+  and export-manifest verification are green.  The attempted authorized push
+  failed because this environment has neither a usable GitHub SSH key nor an
+  authenticated `gh` session.
 - Exact findings and completed trust/editorial repairs are recorded in
   `notes/2026-07-31-c577-paper-ii-new-math-audit.md`.
 
 ## Next action
 
-Once publication authority is available, synchronize the standalone
-repository by an ordinary forward commit, obtain the immutable locator,
-insert the final public citations, run the isolated release replay, and
-perform the separate release pass.
+From an authenticated environment, push standalone commit
+`71751691b026ff99c53a64c522b0464a2c5582e0`, create the immutable public
+release/archive, insert its locator in the authoritative manuscript and
+README, regenerate and forward-commit the canonical export, then rerun the
+isolated release and separate final release pass.
 
 ## Boundaries
 
@@ -68,6 +78,8 @@ boundary and mystery ledger:
 `notes/2026-07-31-c577-paper-ii-new-math-audit.md`.  Earlier theorem
 development remains in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
+Packaging and synchronization report:
+`notes/2026-08-02-c577-paper-ii-packaging-sync.md`.
 
 C797 closes the stronger priority-judo continuation negatively: at \(q=7\),
 seven \(S_4\)-fixed affine placements share the unique two-valued trade and
