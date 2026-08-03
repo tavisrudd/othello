@@ -2,9 +2,9 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** Revised proof/trust exposition and evidence repair accepted by the
-fresh reader; all in-tree replay, manifest, and manuscript gates pass.  Final
-clean-export validation remains before lifecycle closure.
+**Status:** Complete.  Revised proof/trust exposition and evidence repair were
+accepted by the fresh reader; all in-tree replay, manifest, manuscript, and
+clean standalone-export gates pass.
 
 ## Objective
 

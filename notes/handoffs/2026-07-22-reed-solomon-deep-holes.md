@@ -110,6 +110,17 @@ raised the abstract from 78 to 97 and the overall paper from 91 to 94, with
 final ACCEPT and no additional self-citation recommended.  The report is
 `notes/reed-solomon-tasks/c849-prs-v2-abstract-strength-positioning.md`.
 
+C852 is complete.  The recursive-carrier section now prints the exact
+Hankel--Pluecker map, saturated six-generator bridge, and characteristic-wise
+component calculations; the degree-nine Lucas appendix now exposes rational
+rank-two descent, nonsquare transport, genus and deletion bounds, and the exact
+q16/q32/q64 trust split.  The revised abstract tracks those actual headlines.
+A fresh cold reader returned ACCEPT at 97/100.  All fixed-level replays, the
+69-artifact/75-label release checks, warning-free 56-page canonical and 41/50
+TIT builds, and a clean standalone export pass.  The remaining Lean/trust
+standards work is isolated and queued as C854.  The report is
+`notes/reed-solomon-tasks/c852-prs-proof-bottleneck-exposition.md`.
+
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
 Zenodo version DOI `10.5281/zenodo.21682216`, and concept DOI
@@ -1118,7 +1129,8 @@ history.
 
 ## Next command
 
-`go C608`
+`go C854`
 
-(Version 2 synthesis is complete.  C608 is the next unblocked queued
-Reed--Solomon lane task; C607 continues in parallel.)
+(The paper repair is complete.  C854 is the next paper-facing closure and
+requires coordinated ownership of the shared Lean and trust trees; C607 and
+C608 remain separate decoding tasks.)
