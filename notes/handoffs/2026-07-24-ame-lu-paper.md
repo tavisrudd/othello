@@ -10,6 +10,21 @@ Discovery companion:
 
 ## Current status
 
+**C842 closed (2026-08-02): Paper II is independently established and the
+combined baseline remains intact.**  The new authoritative root
+`papers/mds_css_transversal_groups` builds a warning-free 22-page *Diagonal
+Isoduality and Transversal Clifford Groups of MDS--CSS Codes*.  Its complete
+17-artifact package passes all eight deterministic replays.  Both successor
+roots carry the frozen public/formal provenance; the cross-paper ledger assigns
+all 63 combined theorem-like labels to exactly one owner; and the immutable
+exporter plan/audit sees 42 public files with zero findings.  Paper I has not
+been trimmed, no Lean or standalone repository was touched, and the old broad
+formal closure is not claimed for Paper II.  The next manuscript step is Phase
+C: sharpen Paper I around exact rigidity, cleaning-based quantitative rounding,
+the robust atlas, and the affine-character obstruction, while deleting only
+material already owned by the green Paper II root.  See
+`2026-08-02-c842-ame-lu-paper-ii-establishment.md`.
+
 **C839 closed (2026-08-02): the two-paper split and every downstream trust
 and extraction boundary are frozen for cold sessions.**  Preserve the current
 58-page bundle as a content-addressed combined baseline.  Paper I keeps the
@@ -1129,6 +1144,7 @@ extraction.  The authoritative three-session protocol is
 ## Allowed paths
 
 - `papers/ame_lu/**`
+- `papers/mds_css_transversal_groups/**`
 - `lean/RelativeConicArcs/AMELU/**`
 - `lean/RelativeConicArcs/Gates/AMELU*.lean`
 - `notes/handoffs/2026-07-24-ame-lu-paper.md`

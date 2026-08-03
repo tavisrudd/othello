@@ -25,8 +25,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C842 `[ame-lu]` [IN PROGRESS; TWO-PAPER SPLIT PHASES A--B]** — freeze the combined identities, create the cross-paper theorem-ownership ledger, register and establish the self-contained Paper II monorepo root `papers/mds_css_transversal_groups`, and stop after its independent warning-free build and complete evidence replay; do not trim Paper I or begin the formal/public extraction split → `notes/2026-08-02-c842-ame-lu-paper-ii-establishment.md`.
-
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every
