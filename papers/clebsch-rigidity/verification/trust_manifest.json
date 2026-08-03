@@ -1909,12 +1909,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "dba5fa82e112dae6c9df66a39bdb619c23cef4d4ef99f477c7e82c09f197012c"
+      "sha256": "0e03ae223ef4f43652e23fa81463d736a6e73bd1dfb42f1cf54b726a1acdaeb5"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "e27146e7571b8ccc0d0579c50c3dfdf52b82b7f5a7d8bad9d7387235de01565f"
+      "sha256": "8984dd447afe827d586d30e998c6bcd592b2d5a7fc139d955d6b8c3daa9cd57f"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -1932,9 +1932,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "c2ec34b8a89d8f1937097734c1faf00ee2f02b84a35dac643755d2cc2fc3762c"
+    "sha256": "326b3b2f20e1d9e9612ba88424b8cc84e74ed463cec0bba5788b750d72d7a9e8"
   },
-  "manuscript_sha256": "ce7dab32d9af4dd2eceeb9cd6c5834f7ee50ecb5f68f506b7706f55e515e206a",
+  "manuscript_sha256": "2ae7d6269e37e2c27254e9e8ad72fb6c28637017e92f46265cd5137b3873049c",
   "public_documents": [
     {
       "path": "README.md",
@@ -1974,7 +1974,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "fb870911305adce1370eb2d9acc36d2bd7416b3a02914671796eff2e868d5baa"
+    "sha256": "2625354559053f9e8c6c802ac337b40dc42f68da8e8d8df6c60ea5fd4375c449"
   },
   "verify_all": {
     "checker_output_certificate": {
