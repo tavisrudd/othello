@@ -186,7 +186,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 659",
+      "paper_location": "source line 661",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -280,7 +280,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 615",
+      "paper_location": "source line 617",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -296,7 +296,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 632",
+      "paper_location": "source line 634",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -344,7 +344,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 761",
+      "paper_location": "source line 763",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -471,7 +471,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 816",
+      "paper_location": "source line 818",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -518,7 +518,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 347",
+      "paper_location": "source line 349",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -831,7 +831,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 949",
+      "paper_location": "source line 951",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -912,7 +912,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 999",
+      "paper_location": "source line 1001",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -1159,7 +1159,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1015",
+      "paper_location": "source line 1017",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1443,7 +1443,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 510",
+      "paper_location": "source line 512",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1932,9 +1932,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "d69be9a2d973e6516632662076f0b4767e8a3a0492879b1bee5f5e608882d956"
+    "sha256": "c2ec34b8a89d8f1937097734c1faf00ee2f02b84a35dac643755d2cc2fc3762c"
   },
-  "manuscript_sha256": "ab799772ab6ad5b124e1051e91ca36ffce0ee9313819fbb9cb04f35e333a5ecf",
+  "manuscript_sha256": "ce7dab32d9af4dd2eceeb9cd6c5834f7ee50ecb5f68f506b7706f55e515e206a",
   "public_documents": [
     {
       "path": "README.md",
@@ -1974,7 +1974,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "9d4926f5a6593c8d58b1914f0e90fca434ac23c30de10b8becb2abe6ce0646ba"
+    "sha256": "fb870911305adce1370eb2d9acc36d2bd7416b3a02914671796eff2e868d5baa"
   },
   "verify_all": {
     "checker_output_certificate": {
