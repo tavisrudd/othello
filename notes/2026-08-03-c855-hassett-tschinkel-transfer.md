@@ -286,16 +286,36 @@ characteristic-zero geometry.
 
 ### Corroboration
 
-Both gauges were checked symbolically in exact `ℚ(√5)` arithmetic: `B² = 5I`; `BU(t) = (2t−1)U(t)`
-for both roots; `U(t₋)ᵀU(t₊) = 0`; the twenty three-by-three minors of `U(t)` taking values in
-`{±1, ±t}`; the Veronese determinant of the six rows equal to `±(5+3√5)/2`; `det Φ_x = −C(x)` as
-polynomials in `x₀,…,x₅`; and, by solving `∇C = 0` chart by chart after the normalization
-`x₅ = 0`, exactly six projective solutions `e₀,…,e₄` and `(1,1,1,1,1)` — the latter being
-`1 − e₅` — with no positive-dimensional component. These runs are corroboration, not the
-deliverable: the proof above is complete on paper. **Open reproducibility item:** the two scripts
-currently live only in a session scratchpad and are therefore not evidence under
-`notes/research-reproducibility-conventions.md`. A session that wants to quote the numbers must
-re-create them as `notes/2026-08-03-c855-ht-transfer-checks.py` and commit them with the note.
+    python3 notes/2026-08-03-c855-hassett-tschinkel-checks.py
+
+`notes/2026-08-03-c855-hassett-tschinkel-checks.py`
+(SHA-256 `ae54bae539aaea69f1ebd2b8c047292feea0d25b7ce4b8fd6afc6d3427710d35`) is deterministic, uses
+only the Python standard library, prints one `PASS`/`FAIL` line per check, and exits zero exactly
+when all pass. It works in exact `ℚ(t)` arithmetic with `t² = t + 1`; nothing is evaluated
+numerically. Every check runs in both the manuscript gauge and the repository
+`ClebschGoldenConference.conferenceMatrix` gauge. Last run: 26 checks, all `PASS`, exit 0.
+
+* *Setup.* `B² = 5I`; `B U(t) = ±√5 U(t)` for both golden roots; `U(t₋)ᵀU(t₊) = 0`.
+* *Lemma A.* The twenty three-by-three minors of `U(t)` take exactly the value set `{±1, ±t}`.
+* *Lemma B.* The six-by-six Veronese determinant of the six rows is `±(1+3t) = ±√5 t²`, nonzero.
+* *Step 4 inputs.* `det Φ_x = −C(x)` and `∂C/∂xᵢ = −tr(adj(Φ_x) Φ_{eᵢ})`, both as exact
+  polynomial identities in `x₀,…,x₅` over `ℚ(t)`, not as sampled evaluations.
+* *The singular locus, independently of §3.* In the chart `x₅ = 0` the five partials of `C`
+  generate a homogeneous ideal whose Hilbert function in degree six is exactly `6`: at most `6`
+  from a rank computation modulo `2³¹−1` (a modular rank never exceeds the rational rank, which is
+  the direction needed for the upper bound), and at least `6` from an exact integer rank showing
+  the six axis classes impose independent conditions on sextics. Since `6 ≤ 6`, Macaulay's bound
+  makes the Hilbert function constantly `6` from degree six onward, so the projective scheme cut
+  out by the partials is finite of degree six; it contains the six distinct axis classes, hence
+  equals them, each with multiplicity one. This is a complete exact verification of the theorem's
+  conclusion over `ℚ`, obtained without any part of the proof in §3, and its multiplicity-one
+  conclusion independently corroborates that each singular point is an ordinary node.
+* *Exhaustive cross-check.* Over the fields of eleven and nineteen elements — where a golden root
+  exists and the characteristic avoids two, three and five, so the theorem applies — every point
+  of the projective four-space is tested and exactly the six axis classes satisfy all partials.
+
+The script is corroboration, not the deliverable: the proof in §3 is complete on paper and holds
+over every field with a golden root in which `5` and `3` are invertible.
 
 ---
 
