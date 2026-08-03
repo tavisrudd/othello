@@ -1,7 +1,11 @@
 # Diagonal isoduality and transversal Clifford groups
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21766798.svg)](https://doi.org/10.5281/zenodo.21766798)
+
 This source tree contains *Diagonal Isoduality and Transversal Clifford Groups
 of MDS--CSS Codes* and its paper-local verification package.
+
+[Read the paper (PDF).](mds-css-transversal-groups.pdf)
 
 For an odd-prime linear `[2m,m,m+1]_q` MDS code, the paper proves that the
 space of diagonal code-to-dual multipliers has nullity zero or one and that
