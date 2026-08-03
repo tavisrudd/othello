@@ -2582,8 +2582,17 @@
       "last": 852,
       "purpose": "PRS carrier and M9 proof-bottleneck exposition upgrade",
       "sequence": 287
+    },
+    {
+      "count": 1,
+      "first": 853,
+      "kind": "reservation",
+      "lane": "golden",
+      "last": 853,
+      "purpose": "remediate Golden quantum-statistics Lean from scalar identities to standards-compliant theorem-level coverage",
+      "sequence": 288
     }
   ],
-  "next_id": 853,
+  "next_id": 854,
   "schema": "codex-task-id-allocations-v1"
 }
