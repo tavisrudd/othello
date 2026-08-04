@@ -44,8 +44,10 @@ boundaries.
 
 The author is an independent researcher with no institutional affiliation; this
 status, the correspondence address, the ORCID, and the version-independent
-finitegeom DOI are recorded in `.zenodo.json`.  Public finitegeom commit
-`f1d81641827fd037fcbd8363a6f9cd5abf3767cf` matches the complete base formal
-map, but not the supplemental golden-return source map.  Submission therefore
-still requires an immutable finitegeom release containing those supplemental
-sources; no metadata placeholder remains in the manuscript.
+finitegeom DOI are recorded in `.zenodo.json`.  The formal companion is named in `FORMAL_COMPANION.json`, which records the
+repository, the immutable commit, the gate, the axiom audit and the source
+manifest.  That pin is the only place this paper states a companion commit.
+The pinned export matches the complete base formal map but not the supplemental
+golden-return source map, so submission still requires an immutable release
+containing those supplemental sources; no metadata placeholder remains in the
+manuscript.

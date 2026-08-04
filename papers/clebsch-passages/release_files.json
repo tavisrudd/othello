@@ -40,6 +40,7 @@
     "verification/extract_axiom_report.py",
     "verification/extract_source_closure.py",
     "verification/extract_statement_identity.py",
+    "verification/formal_companion.py",
     "verification/four_shadow_axioms.txt",
     "verification/four_shadow_formal.json",
     "verification/four_shadow_source_closure.json",

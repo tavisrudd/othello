@@ -115,6 +115,14 @@ def check_lean_gates(lean_root: Path | None) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--companion-root",
+        type=Path,
+        help=(
+            "checkout of the pinned companion repository; enables resolving the pin "
+            "against it and rejecting a pin older than the newest export"
+        ),
+    )
+    parser.add_argument(
         "--lean-root",
         type=Path,
         help="Lean tree holding the pinned gate closures",
@@ -132,15 +140,24 @@ def main() -> int:
         ["python3", "verification/verify_scaffold.py"],
         PAPER,
     )
-    # FORMAL_COMPANION.json is the single declaration of the optional formal companion.
-    # This checks it is well formed and internally consistent.  It runs without
-    # --lean-root because the deeper check resolves the pinned companion repository,
-    # which is a different repository from the Lean root this verifier is given.
-    run(
-        "formal companion pin",
-        ["python3", "verification/verify_formal_companion.py"],
-        PAPER,
-    )
+    # FORMAL_COMPANION.json is the single declaration of the paper's formal
+    # companions.  The loose-commit guard rejects a companion commit stated anywhere
+    # else, so prose cannot drift away from the pin.  Given a checkout of the pinned
+    # repository, the pin is also resolved against it and required to be that
+    # companion's newest export, which is how a pin left behind by a re-export is
+    # caught rather than discovered later.
+    companion_command = [
+        "python3",
+        "verification/verify_formal_companion.py",
+        "--no-loose-commits",
+    ]
+    if args.companion_root is not None:
+        location = str(args.companion_root.resolve())
+        companion_command += [
+            f"--resolve=companion={location}",
+            f"--require-current=companion={location}",
+        ]
+    run("formal companion pin", companion_command, PAPER)
 
     for stem, label in (
         ("arithmetic_cover", "arithmetic cover"),
