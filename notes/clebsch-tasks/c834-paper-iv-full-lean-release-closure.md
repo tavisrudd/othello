@@ -59,6 +59,18 @@ single pencil table and transported to the subtype model, so both weight-ten ter
 Paper IV gate axiom audit depend only on the foundational axioms.  Report:
 `notes/2026-08-03-c834-weight-ten-pencil-kernel-closure.md`.
 
+The weight-eight tangent-graph module and the reconstruction row cardinality are also kernel
+checked, except for two declarations.  The base point, the internality, distinctness, and
+neighbour identification of the cyclic vertex triples, the base pencil and its join uniqueness, the
+four-clique enumeration with unique extension, five-clique collapse and maximality, the
+common-neighbour cardinality of each four-clique set, and the seven internal points on each passant
+line are all decided by kernel reduction.  The ambient dual-line evaluation, secant coordinates,
+and secant-line subtype moved into the geometry module so the pencil results are available
+upstream.  The Paper IV gate axiom audit therefore reports exactly two native-evaluation axioms,
+`WeightEight.adjacent_iff_tangentCompatibleAtBase` and `WeightEight.fourCliqueSets_complete`, both
+reached only through the weight-eight semantic transport.  Report:
+`notes/2026-08-03-c834-weight-eight-kernel-closure.md`.
+
 The earlier cycle-profile report also settles the route for the rest of weight ten.  The already-formalized pencil-profile
 dichotomy of `RelativeConicArcs.PassantCodeQ13.WeightTen.arbitrary_weightTen_word_has_pencil_profile`
 closes the endpoint with the two existing certificates, so neither the global moment identity and
