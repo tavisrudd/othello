@@ -75,6 +75,16 @@ class ExternalFactTest(unittest.TestCase):
         )
         (self.package / "evidence/gate-axioms.log").write_text(GATE_LOG, encoding="utf-8")
         self.git("init", "-q")
+        self.commit_package()
+        self.head = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=self.package,
+            check=True,
+            text=True,
+            capture_output=True,
+        ).stdout.strip()
+
+    def commit_package(self) -> None:
         self.git("add", "-A")
         self.git(
             "-c",
@@ -88,13 +98,6 @@ class ExternalFactTest(unittest.TestCase):
             "-qm",
             "fixture",
         )
-        self.head = subprocess.run(
-            ["git", "rev-parse", "HEAD"],
-            cwd=self.package,
-            check=True,
-            text=True,
-            capture_output=True,
-        ).stdout.strip()
 
     def git(self, *args: str) -> None:
         subprocess.run(["git", *args], cwd=self.package, check=True, capture_output=True)
@@ -217,8 +220,18 @@ class ExternalFactTest(unittest.TestCase):
         self.make_run(manifest={"lean_root": str(self.root / "elsewhere")})
         self.assertEqual(self.seal("--write").returncode, 2)
 
-    def test_run_at_a_superseded_commit_is_refused(self):
+    def test_run_at_an_unrelated_commit_is_refused(self):
         self.make_run(source={"git_head": "9" * 40})
+        self.assertEqual(self.seal("--write").returncode, 2)
+
+    def test_commit_leaving_lean_sources_untouched_still_seals(self):
+        (self.package / "evidence/extra.txt").write_text("note\n", encoding="utf-8")
+        self.commit_package()
+        self.assertEqual(self.seal("--write").returncode, 0)
+
+    def test_commit_moving_a_lean_source_is_refused(self):
+        (self.package / "lean/Alpha/Profile.lean").write_text("-- edited\n", encoding="utf-8")
+        self.commit_package()
         self.assertEqual(self.seal("--write").returncode, 2)
 
     def test_failed_run_is_refused(self):

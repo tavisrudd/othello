@@ -56,6 +56,15 @@ def git_head(root: Path) -> str:
     ).stdout.strip()
 
 
+def lean_sources_unchanged_since(root: Path, commit: str) -> bool:
+    if not commit:
+        return False
+    result = subprocess.run(
+        ["git", "diff", "--quiet", commit, "HEAD", "--", "lean"], cwd=root, check=False
+    )
+    return result.returncode == 0
+
+
 def read_json(path: Path) -> Any:
     if not path.is_file():
         raise Refused(f"{path}: missing")
@@ -100,11 +109,16 @@ def gate_run(run_dir: Path, package_root: Path, gate: str) -> tuple[Path, dict[s
     source = manifest.get("source", {})
     if source.get("git_dirty") is not False:
         raise Refused(f"{run_dir}: the package tree was dirty during the run")
-    head = git_head(package_root)
-    if source.get("git_head") != head:
+    verified_at = source.get("git_head", "")
+    # The gate verified a set of Lean sources, not a commit.  A later package commit that leaves
+    # every Lean source untouched — sealing the manifest, adding evidence — does not invalidate
+    # what the gate established, but any movement in `lean/` does.
+    if verified_at != git_head(package_root) and not lean_sources_unchanged_since(
+        package_root, verified_at
+    ):
         raise Refused(
-            f"{run_dir}: ran at {source.get('git_head')} but the package Lean source is now at "
-            f"{head}; re-verify the gate before sealing"
+            f"{run_dir}: ran at {verified_at}, and the package Lean sources have changed since; "
+            "re-verify the gate before sealing"
         )
     for result in status.get("results", []):
         if result.get("target") != gate:
