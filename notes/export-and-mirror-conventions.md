@@ -171,11 +171,15 @@ In the paper root, per its `verification/README.md`:
 2. Regenerate the statement identity and the trust manifest (set
    `CLEBSCH_LEAN_ROOT`-style variables to the package checkout as the README
    directs).
-3. **Rebuild the tracked PDFs in place** (`latexmk -xelatex` under
-   `nix develop`) and visually inspect the changed pages. The release runner
-   builds PDFs only in isolated temporary directories to check pages and
-   warnings — it does not detect a stale tracked PDF, so a pin-block edit
-   silently ships an old PDF unless this step is done.
+3. **Refresh the tracked PDFs** through the paper's own manuscript checker in
+   update mode (for Paper I,
+   `nix develop --command python3 verification/check_manuscript_build.py --update`)
+   and visually inspect the changed pages. Do not build by hand: that checker
+   pins `SOURCE_DATE_EPOCH` to make the build byte-reproducible and then
+   requires the tracked PDF to equal a fresh build exactly, so a hand build
+   without the pinned epoch is rejected. That equality is what detects a stale
+   tracked PDF — a paper whose gate lacks it will certify a manuscript edit
+   whose PDF was never rebuilt.
 4. Commit the clean release surface, run the aggregate release verifier with
    `--update-output`, rerun the trust-manifest builder to record the new
    certificate hash, commit, and finish with the clean-source release run.

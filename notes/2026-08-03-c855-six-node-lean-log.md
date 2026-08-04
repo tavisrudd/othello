@@ -474,8 +474,30 @@ Two findings after the first green chain:
    rendered the old pins. Repaired: both PDFs rebuilt in place with `latexmk -xelatex`, the pin
    page visually inspected (all four pins and both digests render correctly), and the
    update-output / manifest-re-record / clean-source sequence rerun to a fresh pass attesting the
-   rebuilt PDF. The companion PDF was byte-unchanged. This blind spot is now documented in
-   `notes/export-and-mirror-conventions.md`.
+   rebuilt PDF. The companion PDF was byte-unchanged.
+
+   The blind spot is now closed in the gate itself rather than only documented. XeLaTeX output
+   here is byte-reproducible once `SOURCE_DATE_EPOCH` and `FORCE_SOURCE_DATE` are pinned, verified
+   by building one source twice in independent temporary directories to identical digests. So
+   `verification/check_manuscript_build.py` now builds each manuscript from a clean directory
+   under a pinned epoch and requires the result to equal the tracked PDF byte for byte, which
+   holds exactly when the tracked PDF is the build of the tracked source. It gained an `--update`
+   mode that writes the tracked PDFs from that same deterministic build, so the committed PDF and
+   the gate's expectation cannot diverge through a hand build. Byte equality was chosen over PDF
+   parsing because the pinned devshell carries only TeX Live and plain Python, and because
+   "rebuild and the bytes agree" is auditable without trusting bespoke normalization code. The
+   epoch is documented in the module, the self-test, and the verification README as a build
+   normalization constant, not a claim about authorship or release date.
+
+   Verified in both directions: the check failed against the previously tracked PDFs, which
+   carried unpinned timestamps; it passed after `--update`; and with a single character changed in
+   the manuscript's pin block and the PDF left untouched — exactly the defect above — it failed
+   with the intended diagnostic, then passed again once the edit was reverted. The self-tests grew
+   to fifteen and still run in milliseconds, one asserting the timestamp pinning that makes byte
+   comparison meaningful and one exercising the stale/update/clean cycle with the build
+   substituted, so the suite does not repeat the release runner's own manuscript build. Both
+   tracked PDFs changed bytes in that commit while their rendered content is unchanged, because
+   they are now produced under the pinned epoch.
 
 2. **Standalone-mirror sync is hard-blocked by the task-ID contamination debt.** The build-sys
    exporter `papers/scripts/export-paper-repos.py sync` refuses `clebsch-rigidity` outright: its
