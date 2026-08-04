@@ -28,6 +28,16 @@ Strengthening candidates from these passes are listed in the gap-closure and
 transfer notes; none is manuscript-integrated yet and all remain behind the
 literature gate.
 
+Six-node Lean closure landed end to end (2026-08-03): the Hassett--Tschinkel
+interface is a proved theorem, the base library carries the change on its
+public remote, the q11 certificate package is re-pinned and resealed at
+`9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5`, the manuscript pins the new
+package/base/gate triple, and the full twenty-six-check release chain is green
+against the sealed package. Working log with exact commits and evidence:
+[`../2026-08-03-c855-six-node-lean-log.md`](../2026-08-03-c855-six-node-lean-log.md).
+Standalone-mirror synchronization and the base `PROVENANCE.md` drift repair
+remain open.
+
 ## Decisions (2026-08-03, author-delegated)
 
 - The exhaustive 160,930-conic distance audit is demoted from a claim row to

@@ -414,3 +414,52 @@ One ordinary unsigned forward commit in `~/src/lean/finitegeom`:
 `hassettTschinkel_six_nodes_of_traceDual` is no longer an axiom-bearing terminal anywhere in the base
 library.  Publishing that revision, and the certificate-package re-pin sequence recorded earlier in
 this note, remain the author's decisions.
+
+## Base published, certificate package re-pinned, release chain green (2026-08-03)
+
+The author pushed the base library: `finitegeom` `origin/main` is now exactly the adopted export
+commit `85dfde9e13e6c3d004e0e659fb83c1a4761902d0`.  The certificate-package refresh sequence recorded
+above then ran to completion.
+
+In `~/src/lean/finitegeom-clebsch-q11-certificates`:
+
+- `lakefile.toml` and `lake-manifest.json` (`rev` and `inputRev`) re-pinned to the published base
+  commit, and the README dependency pin updated to match;
+- the authority aggregate gate copied in byte-identically (SHA-256
+  `4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319`);
+- the gate rebuilt green against the re-pinned base through the guarded queue
+  (run `~/.cache/othello-lean-build/run-20260803-234609-ad38204a`, 5:01 wall), with the trace-only
+  exact-target confirmation;
+- `verification/clebsch_rigidity_trust/axiom-audit.txt` refreshed as a byte-identical copy of the
+  authority audit, the same convention as the sealed package (whose audit was byte-identical to the
+  authority's earlier audit).  The package build's own standard output reproduces every audit row
+  exactly: stripping the Lake `info:` prefixes from the build log yields the authority audit
+  byte-for-byte, all fifty-two rows;
+- `MANIFEST.json` regenerated: dependency commit, gate digest and byte count, and `source_commit`.
+  The `source_commit` ambiguity is resolved by construction: sources were committed first
+  (`dd5274a6ab5c766fc4a538a59b3a670257cbd8d6`) and the manifest was sealed in a second commit
+  (`9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5`) that differs from it only at `MANIFEST.json`, so the
+  recorded `source_commit` names exactly the tree the digests describe.  Only the gate entry changed
+  among the sources; the generator digest is unchanged.
+
+The package worktree is clean, two unpushed commits ahead of its `origin/main`; pushing is the
+author's decision.  The stale clone `~/src/math-papers/finitegeom-clebsch-q11-certificates` (public
+`42ab1a2` pin, no local work, no path references anywhere) was confirmed safe to delete.
+
+In the authority, the release chain then ran per `papers/clebsch-rigidity/verification/README.md`:
+
+- manuscript Section 9 pin block updated to the sealed package commit, the published base commit,
+  and the new gate digest; Mathlib pin unchanged;
+- `build_trust_manifest.py` pinned commits updated (its terminal list already carried the two node
+  theorems and no Hassett--Tschinkel row from the earlier manuscript pass);
+- statement identity regenerated (only the manuscript source digest changed; no statement row moved);
+- trust manifest regenerated against the sealed package;
+- the verification self-test's expected page counts corrected to the grown `26 + 13` pages, with the
+  tool hash re-recorded in the manifest;
+- `verify_release.py --update-output` passed, the certificate hash was re-recorded, and the final
+  clean-source release run passed: `status: passed`, `lean_commit`
+  `9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5`.
+
+Not done here: forward synchronization of the standalone mirror `~/src/math-papers/clebsch-rigidity`
+and its isolated replay (a later C855 step), the base `PROVENANCE.md` module-count drift repair, and
+pushing the certificate package.
