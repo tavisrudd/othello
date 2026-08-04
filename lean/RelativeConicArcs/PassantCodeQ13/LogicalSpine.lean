@@ -4,11 +4,11 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 /-!
 # Structural lemmas in the q=13 passant-code proof
 
-This module contains logical reductions of the human proof, separated from native finite leaves.
-Parity in a seven-line pencil forces the two weight-ten profiles, seven distinct pencil companions
-force weight at least eight, the association identities make the relation operator invertible on
-the code kernel, and the four-anchor argument reduces automorphism classification to three
-geometric rigidity inputs.  None of these theorems uses native evaluation.
+This module contains logical reductions of the human proof, separated from the modules that
+discharge finite checks.  Parity in a seven-line pencil forces the two weight-ten profiles, seven
+distinct pencil companions force weight at least eight, the association identities make the
+relation operator invertible on the code kernel, and the four-anchor argument reduces automorphism
+classification to three geometric rigidity inputs.  No theorem here runs a finite computation.
 -/
 
 namespace RelativeConicArcs.PassantCodeQ13.LogicalSpine

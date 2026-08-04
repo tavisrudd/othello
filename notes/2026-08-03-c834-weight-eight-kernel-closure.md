@@ -65,7 +65,18 @@ gate replay, and the axiom audit are not yet run, so the change is uncommitted.
 tangent-holonomy compatibility relation over the 1,764 ordered vertex pairs. Each pair evaluates
 six tangent products, and each tangent product as defined is a product over the secant-line
 subtype, so a direct decision would re-derive that universe more than ten thousand times. The
-planned route is the same table discipline used for the pencils: rewrite the tangent product as an
+route is the same table discipline used for the pencils: rewrite the tangent product as an
 evaluation product over the displayed secant pencil of the point, which has seven members, and
 index the check by position in precomputed lists of the base point's and the 42 vertex triples'
-pencils, so that each pencil reduces once. This is a design, not a landed proof.
+pencils, so that each pencil reduces once. That replacement is written but not yet elaborated, so
+it is uncommitted.
+
+## The separate native surface of the certificate package
+
+The audit above covers the shared semantic library. The paper's own Lean package under
+`papers/q13-passant-code/lean-certificates` has an independent gate and axiom audit, and its
+sources still contain sixty-four native decisions across forty-five modules: twenty-two in the
+minimum-word orbit enumeration, sixteen in the weight-ten profile certificates, nine in the
+structural upgrade, eight in the association transport, six in the automorphism anchors, and three
+in the association algebra. Closing those is the larger part of the remaining native debt for the
+release theorem.
