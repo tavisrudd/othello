@@ -111,9 +111,9 @@
     "companion_manuscript_sha256": "50ec790620d1fc0ee827237f4eefd64506dedeb203fd6e201cbc05be4676495c",
     "companion_pdf_sha256": "09646fc67fd393a83b2e00c83fecba2ba8af583c1c0d4a815a8a1e932b376f83",
     "companion_trust_sha256": "219800e7eb9842f5d64f767762769a470cbd14e19c46c18a1708baf4189d2835",
-    "manuscript_pdf_sha256": "8836bab9fa78e9fded27e5f2701cbd916de8b78a3f7d68e20843a7bd53c9c69d",
+    "manuscript_pdf_sha256": "19141ec290d90560ef0c2dd09cc2015768047d1b1d574094be75fcf3660c276c",
     "manuscript_sha256": "58492d3dacb9b661987f26eb6b922a758fedae95008ad0b092bbb1279f9a0023",
-    "release_surface_sha256": "cffa1b33d8415e1bd6204e93884d9399fda077b54d127a22e99f68f106a46313",
+    "release_surface_sha256": "d970854a3b7a29fde3b09f51cd75112b286c0853f8c43a14ea6b368081470993",
     "statement_identity_sha256": "35d95ae3b9cd791340628a9c1527ecde32c22a3c0a803b6fc7bc2ced5384204f"
   },
   "lean_commit": "9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5",
