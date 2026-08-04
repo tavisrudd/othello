@@ -20,6 +20,7 @@ remain separately hashed exact certificates.
 namespace PassantCodeQ13.StructuralUpgrade
 
 open Finset
+open RelativeConicArcs
 open RelativeConicArcs.PassantCodeQ13
 open PassantCodeQ13.MinimumWords.RowUniqueness
 open PassantCodeQ13.AssociationTransport
