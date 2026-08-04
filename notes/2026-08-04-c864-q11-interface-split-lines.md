@@ -7,6 +7,13 @@
 both a semantic interface and an exhaustive computation. This note proposes where each one is cut
 when the order-eleven families move to an external package. No file was moved or edited.
 
+**Superseded in part.** An independent feasibility audit,
+`notes/2026-08-04-c864-q11-split-feasibility.md`, found two of the five cuts below unworkable as
+written and three workable only with extra declarations kept.  Read that report together with this
+one; where they disagree, it is correct.  In particular the point-orbit terminals are not declared
+in the module named here, and the decoding-synthesis cut described below as the cleanest is the
+least workable of the five.
+
 ## The rule these lines follow
 
 The order-16 split is the precedent. The monorepo keeps statements and definitions that other
