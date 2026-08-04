@@ -8,15 +8,17 @@ pentagon classification for normalized sign matrices, and the oriented
 six-test recognition packet.  The weighted converse and the implication from
 five balances to the conference square are symbolic kernel proofs.
 
-One orientation classifier uses native evaluation on the complete set of
-`2^10` normalized signings after the structural balance argument has reduced
-the mathematics to labelled pentagons.  It returns the six labelled codes in
-each Hodge orientation; the surviving polynomial identities are proved by
+The orientation classifier is symbolic as well.  The five root-pair balances
+are five linear equations in the ten edge signs; a proved sign lemma settles
+the four edges at the first non-root vertex, and the remaining six Boolean edge
+parameters are then enumerated against the four remaining equations, leaving
+the twelve labelled pentagons.  Each of them gives one polynomial identity
+between the two cubics and one integer coefficient comparison, both proved by
 kernel normalization.  The scalar-sign conclusions remain root-normalized and
 do not include switching reduction or uniqueness modulo switching and
 permutation.  The rank-fourteen rational Jacobian calculation for local
-weighted rigidity is external.  No external certificate or generated source
-is used by the declarations printed here.
+weighted rigidity is external.  No compiled evaluation, external certificate,
+or generated source is used by the declarations printed here.
 -/
 
 #print axioms RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation

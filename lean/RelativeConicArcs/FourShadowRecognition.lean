@@ -24,14 +24,25 @@ is used there.
 The scalar-sign results concern root-normalized matrices encoded by ten
 Boolean edge signs and their nonzero integral scalar multiples.  They do not
 formalize reduction of an arbitrary scalar sign matrix by switching or
-uniqueness modulo switching and permutation.  One theorem exhausts all `2^10`
-normalized signings by compiled evaluation of a decidable statement and
-returns the two oriented six-code fibres; the ensuing cubic identities are
-proved by symbolic normalization.  Compiled evaluation introduces a
-declaration-local axiom for that one theorem, so the Lean compiler is part of
-the trusted base of every result below it; the focused import-only gate prints
-the resulting axiom set.  The rational rank-fourteen Jacobian calculation for
-local weighted rigidity is not formalized in this module.
+uniqueness modulo switching and permutation.  On that locus the five root-pair
+balances are five linear equations in the ten edge signs, one for each non-root
+vertex, and each says that the vertex carries exactly two positive edges to the
+other four non-root vertices.  The positive graph on the five non-root vertices
+is then two-regular, hence a pentagon, and the five equations have exactly
+twelve solutions, one for each labelled pentagon.  Those twelve are extracted in
+two steps.  A proved sign lemma splits four signs summing to zero into its six
+balanced patterns, which settles the four edges at the first non-root vertex;
+in each of the six resulting branches the six remaining Boolean edge parameters
+are enumerated, and every assignment is either refuted by one of the four
+remaining balance equations or matched with one of the twelve listed pentagons.
+That case analysis is the only finite search in the module: `6 × 64` Boolean
+assignments carrying no matrix arithmetic, all discharged by kernel reduction
+behind the sign lemma just described.  The twelve resulting cubic identities and
+the orientation of the `x₀x₁x₂` coefficient are proved by kernel normalization.
+No compiled evaluation, generated certificate, or external computation enters
+any declaration of this module.  The rational
+rank-fourteen Jacobian calculation for local weighted rigidity is not
+formalized in this module.
 -/
 
 namespace RelativeConicArcs.FourShadowRecognition
@@ -491,6 +502,10 @@ private theorem five_sign_balances_force_inner_products
 positive edge and `true` a negative edge. -/
 def boolSign (b : Bool) : ℤ := if b then -1 else 1
 
+private theorem boolSign_false : boolSign false = 1 := rfl
+
+private theorem boolSign_true : boolSign true = -1 := rfl
+
 /-- A root-normalized symmetric sign matrix.  The ten Boolean parameters are
 the edges `12,13,14,15,23,24,25,34,35,45`, in that order. -/
 def normalizedSignMatrix (bits : Fin 10 → Bool) : Matrix (Fin 6) (Fin 6) ℤ :=
@@ -513,12 +528,19 @@ def PentagonGauge (C : Matrix (Fin 6) (Fin 6) ℤ) : Prop :=
   ∀ i, i ≠ 0 →
     ((Finset.univ.filter fun j : Fin 6 => j ≠ 0 ∧ j ≠ i ∧ C i j = 1).card = 2)
 
-private theorem four_bool_signs_sum_zero_positive_count
-    (a b c d : Bool)
+/-- Four edge signs sum to zero exactly when two of them are positive and two
+are negative.  The six listed patterns are the six ways of choosing which two
+of the four edges at a vertex are positive. -/
+private theorem four_bool_sum_zero_cases (a b c d : Bool)
     (hsum : boolSign a + boolSign b + boolSign c + boolSign d = 0) :
-    [a, b, c, d].count false = 2 := by
-  cases a <;> cases b <;> cases c <;> cases d <;>
-    simp_all [boolSign]
+    (a = false ∧ b = false ∧ c = true ∧ d = true) ∨
+    (a = false ∧ b = true ∧ c = false ∧ d = true) ∨
+    (a = false ∧ b = true ∧ c = true ∧ d = false) ∨
+    (a = true ∧ b = false ∧ c = false ∧ d = true) ∨
+    (a = true ∧ b = false ∧ c = true ∧ d = false) ∨
+    (a = true ∧ b = true ∧ c = false ∧ d = false) := by
+  revert hsum
+  cases a <;> cases b <;> cases c <;> cases d <;> decide
 
 /-- The five root-pair balances put every root-normalized signing in pentagon
 gauge.  Each vertex away from the root contributes its own four incident
@@ -574,6 +596,44 @@ theorem pentagonGauge_of_firstRowBalanced (bits : Fin 10 → Bool)
             Fin.sum_univ_succ] <;>
           decide
 
+/-- The five root-pair balances of a root-normalized signing, written as five
+linear equations in the ten edge signs.  The `i`-th equation collects the four
+edges joining the non-root vertex `i` to the other four non-root vertices, so
+it says that `i` carries as many positive as negative such edges. -/
+private theorem firstRowBalanced_rowSums (bits : Fin 10 → Bool)
+    (hbalance : FirstRowBalanced (normalizedSignMatrix bits)) :
+    boolSign (bits 0) + boolSign (bits 1) + boolSign (bits 2) +
+        boolSign (bits 3) = 0 ∧
+      boolSign (bits 0) + boolSign (bits 4) + boolSign (bits 5) +
+        boolSign (bits 6) = 0 ∧
+      boolSign (bits 1) + boolSign (bits 4) + boolSign (bits 7) +
+        boolSign (bits 8) = 0 ∧
+      boolSign (bits 2) + boolSign (bits 5) + boolSign (bits 7) +
+        boolSign (bits 9) = 0 ∧
+      boolSign (bits 3) + boolSign (bits 6) + boolSign (bits 8) +
+        boolSign (bits 9) = 0 := by
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · have hb := hbalance 1 (by decide)
+    simp [pairTriangleSum, triangleSign,
+      normalizedSignMatrix, Fin.sum_univ_succ] at hb
+    linarith
+  · have hb := hbalance 2 (by decide)
+    simp [pairTriangleSum, triangleSign,
+      normalizedSignMatrix, Fin.sum_univ_succ] at hb
+    linarith
+  · have hb := hbalance 3 (by decide)
+    simp [pairTriangleSum, triangleSign,
+      normalizedSignMatrix, Fin.sum_univ_succ] at hb
+    linarith
+  · have hb := hbalance 4 (by decide)
+    simp [pairTriangleSum, triangleSign,
+      normalizedSignMatrix, Fin.sum_univ_succ] at hb
+    linarith
+  · have hb := hbalance 5 (by decide)
+    simp [pairTriangleSum, triangleSign,
+      normalizedSignMatrix, Fin.sum_univ_succ] at hb
+    linarith
+
 /-- The pentagon balance equations imply the conference square by ten
 symbolic inner-product identities.  This is the structural converse; it does
 not enumerate the `2^10` normalized signings. -/
@@ -584,36 +644,7 @@ theorem normalizedSignMatrix_sq_of_firstRowBalanced (bits : Fin 10 → Bool)
   have hsq : ∀ k, boolSign (bits k) * boolSign (bits k) = 1 := by
     intro k
     cases bits k <;> simp [boolSign]
-  have hr1 : boolSign (bits 0) + boolSign (bits 1) + boolSign (bits 2) +
-      boolSign (bits 3) = 0 := by
-    have hb := hbalance 1 (by decide)
-    simp [pairTriangleSum, triangleSign,
-      normalizedSignMatrix, Fin.sum_univ_succ] at hb
-    linarith
-  have hr2 : boolSign (bits 0) + boolSign (bits 4) + boolSign (bits 5) +
-      boolSign (bits 6) = 0 := by
-    have hb := hbalance 2 (by decide)
-    simp [pairTriangleSum, triangleSign,
-      normalizedSignMatrix, Fin.sum_univ_succ] at hb
-    linarith
-  have hr3 : boolSign (bits 1) + boolSign (bits 4) + boolSign (bits 7) +
-      boolSign (bits 8) = 0 := by
-    have hb := hbalance 3 (by decide)
-    simp [pairTriangleSum, triangleSign,
-      normalizedSignMatrix, Fin.sum_univ_succ] at hb
-    linarith
-  have hr4 : boolSign (bits 2) + boolSign (bits 5) + boolSign (bits 7) +
-      boolSign (bits 9) = 0 := by
-    have hb := hbalance 4 (by decide)
-    simp [pairTriangleSum, triangleSign,
-      normalizedSignMatrix, Fin.sum_univ_succ] at hb
-    linarith
-  have hr5 : boolSign (bits 3) + boolSign (bits 6) + boolSign (bits 8) +
-      boolSign (bits 9) = 0 := by
-    have hb := hbalance 5 (by decide)
-    simp [pairTriangleSum, triangleSign,
-      normalizedSignMatrix, Fin.sum_univ_succ] at hb
-    linarith
+  obtain ⟨hr1, hr2, hr3, hr4, hr5⟩ := firstRowBalanced_rowSums bits hbalance
   obtain ⟨h12, h13, h14, h15, h23, h24, h25, h34, h35, h45⟩ :=
     five_sign_balances_force_inner_products (boolSign (bits 0))
       (boolSign (bits 1)) (boolSign (bits 2)) (boolSign (bits 3))
@@ -647,50 +678,52 @@ six-test packet. -/
 def NegativeOrientation012 (C : Matrix (Fin 6) (Fin 6) ℤ) : Prop :=
   shadowCoefficient012 C = -4 * triangleSign C 0 1 2
 
-/-- The six labelled signings with the positive coefficient orientation.  Each
-entry lists the ten edge bits in the order `12,13,14,15,23,24,25,34,35,45`,
-with `true` a negative edge. -/
-private def PositiveSixTestCode (bits : Fin 10 → Bool) : Prop :=
-  bits = ![false, true, false, true, false, true, true, true, false, false] ∨
-    bits = ![false, false, true, true, true, true, false, false, true, false] ∨
-    bits = ![true, false, true, false, false, false, true, true, true, false] ∨
-    bits = ![false, true, true, false, true, false, true, false, false, true] ∨
-    bits = ![true, false, false, true, true, false, false, true, false, true] ∨
-    bits = ![true, true, false, false, false, true, false, false, true, true]
-
-/-- The six labelled signings with the opposite coefficient orientation, in the
-same edge order as the positive fibre. -/
-private def NegativeSixTestCode (bits : Fin 10 → Bool) : Prop :=
-  bits = ![false, false, true, true, true, false, true, true, false, false] ∨
-    bits = ![false, true, true, false, false, true, true, false, true, false] ∨
-    bits = ![true, false, false, true, false, true, false, true, true, false] ∨
-    bits = ![false, true, false, true, true, true, false, false, false, true] ∨
-    bits = ![true, true, false, false, false, false, true, true, false, true] ∨
-    bits = ![true, false, true, false, true, false, false, false, true, true]
-
-/-- Exhaustive evaluation of the `2^10` normalized Boolean signings.  Under
-the five balance equations each signing lies in one of the two oriented
-six-code fibres, together with the matching coefficient orientation.  The
-finite statement is decidable and is discharged by compiled evaluation, so the
-Lean compiler and the reduction axiom for compiled Boolean evaluation belong
-to the trusted base of every result depending on it. -/
-private theorem sixTestCode_classification_of_balanced :
-    ∀ bits : Fin 10 → Bool, FirstRowBalanced (normalizedSignMatrix bits) →
-      (PositiveOrientation012 (normalizedSignMatrix bits) ∧
-          PositiveSixTestCode bits) ∨
-        (NegativeOrientation012 (normalizedSignMatrix bits) ∧
-          NegativeSixTestCode bits) := by
-  simp only [FirstRowBalanced, PositiveOrientation012, NegativeOrientation012,
-    PositiveSixTestCode, NegativeSixTestCode]
-  native_decide
-
-private theorem six_test_code_classification (bits : Fin 10 → Bool)
-    (hbalance : FirstRowBalanced (normalizedSignMatrix bits)) :
-    (PositiveOrientation012 (normalizedSignMatrix bits) ∧
-        PositiveSixTestCode bits) ∨
-      (NegativeOrientation012 (normalizedSignMatrix bits) ∧
-        NegativeSixTestCode bits) :=
-  sixTestCode_classification_of_balanced bits hbalance
+/-- The twelve labelled pentagons, read off from the five vertex balances.
+The ten Boolean parameters are the edges `12,13,14,15,23,24,25,34,35,45`, in
+that order, with `true` a negative edge, and the five hypotheses are the vertex
+balances at `1,2,3,4,5`.  Splitting the four edges at vertex `1` into the six
+patterns with two positive edges leaves six branches; in each of them the four
+remaining balances determine the six remaining edge parameters, and that step
+is checked by kernel reduction over those `2^6` assignments. -/
+private theorem pentagon_bit_classification
+    (b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 : Bool)
+    (r1 : boolSign b0 + boolSign b1 + boolSign b2 + boolSign b3 = 0)
+    (r2 : boolSign b0 + boolSign b4 + boolSign b5 + boolSign b6 = 0)
+    (r3 : boolSign b1 + boolSign b4 + boolSign b7 + boolSign b8 = 0)
+    (r4 : boolSign b2 + boolSign b5 + boolSign b7 + boolSign b9 = 0)
+    (r5 : boolSign b3 + boolSign b6 + boolSign b8 + boolSign b9 = 0) :
+    (b0 = false ∧ b1 = false ∧ b2 = true ∧ b3 = true ∧ b4 = true ∧
+      b5 = false ∧ b6 = true ∧ b7 = true ∧ b8 = false ∧ b9 = false) ∨
+    (b0 = false ∧ b1 = false ∧ b2 = true ∧ b3 = true ∧ b4 = true ∧
+      b5 = true ∧ b6 = false ∧ b7 = false ∧ b8 = true ∧ b9 = false) ∨
+    (b0 = false ∧ b1 = true ∧ b2 = false ∧ b3 = true ∧ b4 = false ∧
+      b5 = true ∧ b6 = true ∧ b7 = true ∧ b8 = false ∧ b9 = false) ∨
+    (b0 = false ∧ b1 = true ∧ b2 = false ∧ b3 = true ∧ b4 = true ∧
+      b5 = true ∧ b6 = false ∧ b7 = false ∧ b8 = false ∧ b9 = true) ∨
+    (b0 = false ∧ b1 = true ∧ b2 = true ∧ b3 = false ∧ b4 = false ∧
+      b5 = true ∧ b6 = true ∧ b7 = false ∧ b8 = true ∧ b9 = false) ∨
+    (b0 = false ∧ b1 = true ∧ b2 = true ∧ b3 = false ∧ b4 = true ∧
+      b5 = false ∧ b6 = true ∧ b7 = false ∧ b8 = false ∧ b9 = true) ∨
+    (b0 = true ∧ b1 = false ∧ b2 = false ∧ b3 = true ∧ b4 = false ∧
+      b5 = true ∧ b6 = false ∧ b7 = true ∧ b8 = true ∧ b9 = false) ∨
+    (b0 = true ∧ b1 = false ∧ b2 = false ∧ b3 = true ∧ b4 = true ∧
+      b5 = false ∧ b6 = false ∧ b7 = true ∧ b8 = false ∧ b9 = true) ∨
+    (b0 = true ∧ b1 = false ∧ b2 = true ∧ b3 = false ∧ b4 = false ∧
+      b5 = false ∧ b6 = true ∧ b7 = true ∧ b8 = true ∧ b9 = false) ∨
+    (b0 = true ∧ b1 = false ∧ b2 = true ∧ b3 = false ∧ b4 = true ∧
+      b5 = false ∧ b6 = false ∧ b7 = false ∧ b8 = true ∧ b9 = true) ∨
+    (b0 = true ∧ b1 = true ∧ b2 = false ∧ b3 = false ∧ b4 = false ∧
+      b5 = false ∧ b6 = true ∧ b7 = true ∧ b8 = false ∧ b9 = true) ∨
+    (b0 = true ∧ b1 = true ∧ b2 = false ∧ b3 = false ∧ b4 = false ∧
+      b5 = true ∧ b6 = false ∧ b7 = false ∧ b8 = true ∧ b9 = true) := by
+  rcases four_bool_sum_zero_cases b0 b1 b2 b3 r1 with
+    ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ <;>
+  cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> cases b8 <;> cases b9 <;>
+  simp only [boolSign_false, boolSign_true] at r2 r3 r4 r5 <;>
+  first
+    | omega
+    | simp
 
 private theorem orientation012_disjoint (bits : Fin 10 → Bool) :
     ¬(PositiveOrientation012 (normalizedSignMatrix bits) ∧
@@ -703,160 +736,176 @@ private theorem orientation012_disjoint (bits : Fin 10 → Bool) :
   simp only [NegativeOrientation012] at hneg
   exact hsign (by linarith)
 
-private theorem positive_six_test_codes (bits : Fin 10 → Bool)
-    (hbalance : FirstRowBalanced (normalizedSignMatrix bits))
-    (horientation : PositiveOrientation012 (normalizedSignMatrix bits)) :
-    PositiveSixTestCode bits := by
-  rcases six_test_code_classification bits hbalance with hpos | hneg
-  · exact hpos.2
-  · exact False.elim (orientation012_disjoint bits ⟨horientation, hneg.1⟩)
-
-private theorem negative_six_test_codes (bits : Fin 10 → Bool)
-    (hbalance : FirstRowBalanced (normalizedSignMatrix bits))
-    (horientation : NegativeOrientation012 (normalizedSignMatrix bits)) :
-    NegativeSixTestCode bits := by
-  rcases six_test_code_classification bits hbalance with hpos | hneg
-  · exact False.elim (orientation012_disjoint bits ⟨hpos.1, horientation⟩)
-  · exact hneg.2
+/-- Every root-normalized signing whose five root-pair moments vanish
+satisfies the full cubic identity, with proportionality scalar `4` or `-4`,
+and its `x₀x₁x₂` coefficient records which of the two scalars occurs.  The
+five balances put the signing in pentagon gauge and single out the twelve
+labelled pentagons; each of them then yields one polynomial identity in the
+six coordinates and one integer coefficient comparison. -/
+private theorem cubicsProportional_orientation_of_firstRowBalanced
+    (bits : Fin 10 → Bool)
+    (hbalance : FirstRowBalanced (normalizedSignMatrix bits)) :
+    (CubicsProportional (normalizedSignMatrix bits) 4 ∧
+        PositiveOrientation012 (normalizedSignMatrix bits)) ∨
+      (CubicsProportional (normalizedSignMatrix bits) (-4) ∧
+        NegativeOrientation012 (normalizedSignMatrix bits)) := by
+  obtain ⟨hr1, hr2, hr3, hr4, hr5⟩ := firstRowBalanced_rowSums bits hbalance
+  rcases pentagon_bit_classification (bits 0) (bits 1) (bits 2) (bits 3)
+      (bits 4) (bits 5) (bits 6) (bits 7) (bits 8) (bits 9)
+      hr1 hr2 hr3 hr4 hr5 with
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩
+  · refine Or.inr ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [NegativeOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inl ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [PositiveOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inl ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [PositiveOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inr ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [NegativeOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inr ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [NegativeOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inl ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [PositiveOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inr ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [NegativeOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inl ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [PositiveOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inl ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [PositiveOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inr ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [NegativeOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inr ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [NegativeOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
+  · refine Or.inl ⟨?_, ?_⟩
+    · intro x
+      simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
+        cubicTerm, triangleSign, normalizedSignMatrix, boolSign,
+        h0, h1, h2, h3, h4, h5, h6, h7, h8, h9]
+      ring
+    · simp [PositiveOrientation012, shadowCoefficient012, triangleSign,
+        normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7,
+        h8, h9]
 
 private theorem orientation012_of_firstRowBalanced (bits : Fin 10 → Bool)
     (hbalance : FirstRowBalanced (normalizedSignMatrix bits)) :
     PositiveOrientation012 (normalizedSignMatrix bits) ∨
       NegativeOrientation012 (normalizedSignMatrix bits) := by
-  rcases six_test_code_classification bits hbalance with hpos | hneg
-  · exact Or.inl hpos.1
-  · exact Or.inr hneg.1
+  rcases cubicsProportional_orientation_of_firstRowBalanced bits hbalance with
+    h | h
+  · exact Or.inl h.2
+  · exact Or.inr h.2
 
-/-- The polynomial identity between the two cubic shadows of one labelled
-pentagon.  Each oriented signing is its own polynomial identity in the six
-coordinates, proved by expanding both cubics and normalizing. -/
-private theorem cubicsProportional_positivePentagon_one :
-    CubicsProportional (normalizedSignMatrix
-      ![false, true, false, true, false, true, true, true, false, false]) 4 := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_positivePentagon_two :
-    CubicsProportional (normalizedSignMatrix
-      ![false, false, true, true, true, true, false, false, true, false]) 4 := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_positivePentagon_three :
-    CubicsProportional (normalizedSignMatrix
-      ![true, false, true, false, false, false, true, true, true, false]) 4 := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_positivePentagon_four :
-    CubicsProportional (normalizedSignMatrix
-      ![false, true, true, false, true, false, true, false, false, true]) 4 := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_positivePentagon_five :
-    CubicsProportional (normalizedSignMatrix
-      ![true, false, false, true, true, false, false, true, false, true]) 4 := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_positivePentagon_six :
-    CubicsProportional (normalizedSignMatrix
-      ![true, true, false, false, false, true, false, false, true, true]) 4 := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_negativePentagon_one :
-    CubicsProportional (normalizedSignMatrix
-      ![false, false, true, true, true, false, true, true, false, false]) (-4) := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_negativePentagon_two :
-    CubicsProportional (normalizedSignMatrix
-      ![false, true, true, false, false, true, true, false, true, false]) (-4) := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_negativePentagon_three :
-    CubicsProportional (normalizedSignMatrix
-      ![true, false, false, true, false, true, false, true, true, false]) (-4) := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_negativePentagon_four :
-    CubicsProportional (normalizedSignMatrix
-      ![false, true, false, true, true, true, false, false, false, true]) (-4) := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_negativePentagon_five :
-    CubicsProportional (normalizedSignMatrix
-      ![true, true, false, false, false, false, true, true, false, true]) (-4) := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-private theorem cubicsProportional_negativePentagon_six :
-    CubicsProportional (normalizedSignMatrix
-      ![true, false, true, false, true, false, false, false, true, true]) (-4) := by
-  intro x
-  simp [matchingEvaluation, GoldenMatchingCubics.bracket, triangleCubic,
-    cubicTerm, triangleSign, normalizedSignMatrix, boolSign]
-  ring
-
-/-- Five root-pair balances and the `012` coefficient with positive Hodge
-orientation force the complete cubic identity.  Finite evaluation selects the
-six labelled positive pentagons; each surviving polynomial identity is then
-proved symbolically. -/
+/-- Five root-pair balances and the `x₀x₁x₂` coefficient with positive Hodge
+orientation force the complete cubic identity.  The balances put the signing
+in pentagon gauge, and the coefficient selects the orientation among the
+twelve labelled pentagons. -/
 theorem cubicsProportional_four_of_sixTests (bits : Fin 10 → Bool)
     (hbalance : FirstRowBalanced (normalizedSignMatrix bits))
     (horientation : PositiveOrientation012 (normalizedSignMatrix bits)) :
     CubicsProportional (normalizedSignMatrix bits) 4 := by
-  rcases positive_six_test_codes bits hbalance horientation with
-    h | h | h | h | h | h
-  · rw [h]; exact cubicsProportional_positivePentagon_one
-  · rw [h]; exact cubicsProportional_positivePentagon_two
-  · rw [h]; exact cubicsProportional_positivePentagon_three
-  · rw [h]; exact cubicsProportional_positivePentagon_four
-  · rw [h]; exact cubicsProportional_positivePentagon_five
-  · rw [h]; exact cubicsProportional_positivePentagon_six
+  rcases cubicsProportional_orientation_of_firstRowBalanced bits hbalance with
+    h | h
+  · exact h.1
+  · exact absurd ⟨horientation, h.2⟩ (orientation012_disjoint bits)
 
-/-- The same six-test packet with the opposite coefficient orientation forces
-the cubic proportionality scalar `-4`. -/
+/-- The same recognition packet with the opposite coefficient orientation
+forces the cubic proportionality scalar `-4`. -/
 theorem cubicsProportional_neg_four_of_sixTests (bits : Fin 10 → Bool)
     (hbalance : FirstRowBalanced (normalizedSignMatrix bits))
     (horientation : NegativeOrientation012 (normalizedSignMatrix bits)) :
     CubicsProportional (normalizedSignMatrix bits) (-4) := by
-  rcases negative_six_test_codes bits hbalance horientation with
-    h | h | h | h | h | h
-  · rw [h]; exact cubicsProportional_negativePentagon_one
-  · rw [h]; exact cubicsProportional_negativePentagon_two
-  · rw [h]; exact cubicsProportional_negativePentagon_three
-  · rw [h]; exact cubicsProportional_negativePentagon_four
-  · rw [h]; exact cubicsProportional_negativePentagon_five
-  · rw [h]; exact cubicsProportional_negativePentagon_six
+  rcases cubicsProportional_orientation_of_firstRowBalanced bits hbalance with
+    h | h
+  · exact absurd ⟨h.2, horientation⟩ (orientation012_disjoint bits)
+  · exact h.1
 
 /-- On normalized scalar sign matrices, nonzero proportionality of the two
 cubic shadows is equivalent to the conference square.  The two possible
