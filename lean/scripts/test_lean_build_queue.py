@@ -555,6 +555,180 @@ class QueueTest(unittest.TestCase):
 
     # gate 3: refusal when another owner holds the lock ----------------------
 
+    # front door -------------------------------------------------------------
+
+    def build_argv(
+        self, targets: list[str], run_dir: Path, extra: list[str] | None = None
+    ) -> list[str]:
+        """`build` argv carrying the fixture stubs through the documented passthrough."""
+        forwarded: list[str] = []
+        for flag in self.run_argv(targets, self.tmp / "unused", extra=None):
+            forwarded.append(flag)
+        # Drop the leading `python RUNNER run <targets>` and the run-only --run-dir pair.
+        tail = forwarded[3 + len(targets):]
+        passthrough: list[str] = []
+        index = 0
+        while index < len(tail):
+            if tail[index] in {"--run-dir", "--lean-root", "--lock-file", "--threads", "--cores"}:
+                index += 2
+                continue
+            passthrough += [f"--run-arg={tail[index]}", f"--run-arg={tail[index + 1]}"]
+            index += 2
+        return [
+            sys.executable,
+            str(RUNNER),
+            "build",
+            *targets,
+            "--lean-root",
+            str(self.lean_root),
+            "--lock-file",
+            str(self.lock_file),
+            "--run-dir",
+            str(run_dir),
+            "--cores",
+            "0-1",
+            "--threads",
+            "2",
+            "--profile",
+            "fixture",
+            *passthrough,
+            *(extra or []),
+        ]
+
+    def build(
+        self,
+        targets: list[str],
+        run_dir: Path,
+        extra: list[str] | None = None,
+        timeout: int = 120,
+    ):
+        return subprocess.run(
+            self.build_argv(targets, run_dir, extra),
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+
+    def test_build_reports_the_outcome_without_a_second_command(self) -> None:
+        result = self.build(["Fix.Alpha"], self.tmp / "build-ok")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("state:   success", result.stdout)
+        self.assertIn("run dir:", result.stdout)
+        self.assertNotIn("resume:", result.stdout)
+
+    def test_build_surfaces_the_first_error_without_opening_a_log(self) -> None:
+        self.plan("Fix.Alpha", "fail")
+        result = self.build(["Fix.Alpha"], self.tmp / "build-fail")
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn("state:   failed", result.stdout)
+        self.assertIn("failed:  Fix.Alpha", result.stdout)
+        self.assertTrue(
+            any(line.strip().startswith("!") for line in result.stdout.splitlines()),
+            f"no error line surfaced to the caller:\n{result.stdout}",
+        )
+
+    def test_build_queues_behind_an_owner_instead_of_refusing(self) -> None:
+        with self.lock_file.open("a+") as holder:
+            fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            holder.write(json.dumps({"run_id": "foreign-run", "pid": 4242}))
+            holder.flush()
+            child = subprocess.Popen(
+                self.build_argv(
+                    ["Fix.Alpha"],
+                    self.tmp / "build-queued",
+                    extra=["--run-arg=--poll-seconds", "--run-arg=1"],
+                ),
+                env=self.env(),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+            )
+            time.sleep(2)
+            self.assertIsNone(child.poll(), "must wait for the owner rather than refuse")
+        stdout, stderr = child.communicate(timeout=60)
+        self.assertEqual(child.returncode, 0, stderr)
+        self.assertIn("queueing behind run foreign-run", stdout)
+        self.assertIn("state:   success", stdout)
+
+    def test_build_hands_back_one_resume_command_when_it_outlasts_the_window(self) -> None:
+        result = self.build(["Fix.Alpha"], self.tmp / "build-handoff", extra=["--foreground", "0"])
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("still running after 0s", result.stdout)
+        resume = [line for line in result.stdout.splitlines() if line.startswith("resume:")]
+        self.assertEqual(len(resume), 1, result.stdout)
+        run_dir = Path(resume[0].split("await", 1)[1].strip())
+        awaited = subprocess.run(
+            [sys.executable, str(RUNNER), "await", str(run_dir)],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        self.assertEqual(awaited.returncode, 0, awaited.stderr)
+        self.assertIn("state:   success", awaited.stdout)
+
+    def test_await_timeout_is_non_mutating_and_resumable(self) -> None:
+        run_dir = self.tmp / "run-await-timeout"
+        self.plan("Fix.Alpha", "hang")
+        process = self.launch(["Fix.Alpha"], run_dir)
+        try:
+            self.wait_until_current(run_dir, "Fix.Alpha")
+            early = subprocess.run(
+                [sys.executable, str(RUNNER), "await", str(run_dir), "--timeout", "2"],
+                env=self.env(),
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            self.assertEqual(early.returncode, 124, early.stdout)
+            self.assertIn("still running", early.stdout)
+            self.assertIn("untouched", early.stdout)
+            # The deadline is the caller's alone: the run is unchanged and still owns the lock.
+            self.assertEqual(self.read_status(run_dir)["state"], "running")
+            self.assertIsNotNone(RUNNER_MODULE.lock_holder(self.lock_file))
+            process.terminate()  # our own child, by PID -- never a pkill
+            process.communicate(timeout=60)
+        finally:
+            if process.poll() is None:
+                process.kill()
+                process.communicate(timeout=30)
+        # A settled run answers immediately, and an interrupt is not reported as a failure.
+        settled = subprocess.run(
+            [sys.executable, str(RUNNER), "await", str(run_dir), "--timeout", "10"],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        self.assertEqual(settled.returncode, 130, settled.stdout)
+        self.assertIn("state:   interrupted", settled.stdout)
+
+    def test_lock_names_the_owner_and_is_free_afterwards(self) -> None:
+        free = subprocess.run(
+            [sys.executable, str(RUNNER), "lock", "--lock-file", str(self.lock_file)],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        self.assertEqual(free.returncode, 0, free.stderr)
+        self.assertIn("free", free.stdout)
+        with self.lock_file.open("a+") as holder:
+            fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            holder.write(json.dumps({"run_id": "foreign-run", "pid": 4242, "since": "now"}))
+            holder.flush()
+            held = subprocess.run(
+                [sys.executable, str(RUNNER), "lock", "--lock-file", str(self.lock_file)],
+                env=self.env(),
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+        self.assertEqual(held.returncode, 2, held.stdout)
+        self.assertIn("foreign-run", held.stdout)
+        self.assertIn("informational only", held.stdout)
+
     def test_refuses_when_another_owner_holds_the_lock(self) -> None:
         run_dir = self.tmp / "run3"
         with self.lock_file.open("a+") as holder:

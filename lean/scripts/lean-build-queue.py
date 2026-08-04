@@ -5,6 +5,13 @@ The caller launches one sequence, walks away, and later reads an atomic status f
 spending agent turns polling Lake.  A single build-owner lock is acquired before the quiet-state
 check and held for the whole run, so two runners cannot both observe a quiet tree and launch.
 
+`build` is the front door and requires no decision beforehand: it queues behind any current owner
+rather than refusing, waits in the foreground, prints the outcome and the first errors itself, and
+hands back a single `await` command when a build outlasts the caller's window.  `await` blocks on
+one run for a caller that cannot poll, and `lock` names the current owner for reporting.  Neither
+`await` nor `lock` mutates anything, and neither is a reservation: the only protection against two
+concurrent builds is the atomic lock acquisition inside `run`.
+
 This is an orchestration tool.  It builds the targets it is given, waits for or refuses a busy
 tree, and terminates only the child it started itself.  It never kills, cleans, or rebuilds work
 owned by another lane.
@@ -38,6 +45,8 @@ MOUNTINFO_DEFAULT = Path("/proc/self/mountinfo")
 EXIT_OK = 0
 EXIT_BUILD_FAILED = 1
 EXIT_REFUSED = 2
+EXIT_TIMED_OUT = 124
+EXIT_ABANDONED = 126
 EXIT_INTERRUPTED = 130
 
 # Lake's `bin/lake` execs `lake.orig`, so `pgrep -x lake` never matches a live build.
@@ -1079,6 +1088,223 @@ def exact_descendant_activity(
     return max(lean or candidates, key=lambda entry: (entry["depth"], entry["pid"]))
 
 
+TERMINAL_STATES = {"success", "failed", "interrupted"}
+
+STATE_EXIT_CODES = {
+    "success": EXIT_OK,
+    "failed": EXIT_BUILD_FAILED,
+    "interrupted": EXIT_INTERRUPTED,
+    "abandoned": EXIT_ABANDONED,
+}
+
+
+def settled_state(run_dir: Path) -> tuple[str | None, dict[str, Any] | None]:
+    """Return a run's state, promoting a dead owner's stale `running` to `abandoned`.
+
+    A terminal status is written on exit and on SIGINT/SIGTERM, so `running` with the lock
+    released means the process died without writing one.  The lock is an open file
+    description, released by the kernel even on an OOM kill, so its absence is evidence.
+    """
+    status = read_json(run_dir / "status.json")
+    if status is None:
+        return None, None
+    state = status.get("state")
+    if state in TERMINAL_STATES:
+        return state, status
+    manifest = read_json(run_dir / "manifest.json") or {}
+    holder = lock_holder(Path(manifest.get("lock_file", "")))
+    if holder is None or holder.get("run_id") != status.get("run_id"):
+        status["note"] = "no live owner holds the lock; the run died without a terminal status"
+        return "abandoned", status
+    return None, status
+
+
+def first_error_lines(run_dir: Path, status: dict[str, Any] | None, limit: int) -> list[str]:
+    """Pull the first Lean errors out of a failed run, newest log first.
+
+    The caller should never have to open a log to learn why a build failed, so this reads
+    the failing target's log and its quiet-wrapper stdout, and falls back to the launcher
+    log for failures that happen before any target starts, such as a refused lock.
+    """
+    if limit <= 0:
+        return []
+    candidates: list[Path] = []
+    failed = (status or {}).get("failed_target")
+    if isinstance(failed, str) and not failed.startswith("<"):
+        candidates.append(run_dir / "logs" / f"{failed}.log")
+        candidates.extend(sorted((run_dir / "logs").glob(f"{failed}.quiet/*/*/stdout.log")))
+        candidates.extend(sorted((run_dir / "logs").glob(f"{failed}.quiet/*/*/stderr.log")))
+    candidates.append(run_dir / "launcher.log")
+    found: list[str] = []
+    for path in candidates:
+        if not path.is_file():
+            continue
+        try:
+            text = path.read_text(errors="replace")
+        except OSError:
+            continue
+        for line in text.splitlines():
+            stripped = line.strip()
+            if not stripped:
+                continue
+            if "error:" in stripped or stripped.startswith(("error", "lean-build-queue:")):
+                if stripped not in found:
+                    found.append(stripped[:400])
+                if len(found) >= limit:
+                    return found
+        if found:
+            return found
+    return found
+
+
+def render_envelope(run_dir: Path, state: str, status: dict[str, Any] | None, errors: int) -> None:
+    """Print one bounded completion envelope: outcome, per-target results, first errors."""
+    status = status or {}
+    print(f"state:   {state}")
+    print(f"run dir: {run_dir}")
+    if status.get("run_id"):
+        print(f"run_id:  {status['run_id']}")
+    for entry in status.get("results", []):
+        wall = entry.get("wall_clock", "")
+        rss = entry.get("max_rss_kbytes", "")
+        suffix = f"  {wall} wall, {rss} kB peak" if wall else ""
+        print(f"  {str(entry.get('outcome')):16} {entry.get('target')}{suffix}")
+    if status.get("failed_target"):
+        print(f"failed:  {status['failed_target']}")
+    if status.get("note"):
+        print(f"note:    {status['note']}")
+    if state != "success":
+        for line in first_error_lines(run_dir, status, errors):
+            print(f"  ! {line}")
+
+
+def wait_for_terminal(
+    run_dir: Path, timeout_seconds: int, poll_seconds: int = 2
+) -> tuple[str | None, dict[str, Any] | None]:
+    """Block until a run settles or the caller's deadline passes.
+
+    The deadline is the caller's alone: reaching it neither stops, resubmits, nor alters the
+    run, so a timed-out wait can always be resumed against the same run directory.
+    """
+    deadline = time.monotonic() + timeout_seconds
+    while True:
+        state, status = settled_state(run_dir)
+        if state is not None:
+            return state, status
+        if time.monotonic() >= deadline:
+            return None, status
+        _sleep(min(poll_seconds, max(1, int(deadline - time.monotonic()))))
+
+
+def command_lock(args: argparse.Namespace) -> int:
+    """Name the current build owner without taking the lock or searching the process table.
+
+    Informational only.  It is not a reservation: a build may start immediately after this
+    returns, so the protection against two concurrent builds remains the atomic acquisition
+    inside `run`, never a check performed beforehand.
+    """
+    lean_root = args.lean_root.expanduser().resolve()
+    lock_file = args.lock_file or STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
+    holder = lock_holder(lock_file.expanduser().resolve())
+    if args.json:
+        print(json.dumps({"held": holder is not None, "owner": holder}, indent=2, sort_keys=True))
+        return EXIT_OK if holder is None else EXIT_REFUSED
+    if holder is None:
+        print("build owner: free")
+        return EXIT_OK
+    targets = holder.get("targets") or []
+    print(f"build owner: held since {holder.get('since')} by run {holder.get('run_id')}")
+    print(f"  pid {holder.get('pid')}  targets: {', '.join(str(t) for t in targets) or 'unknown'}")
+    print("  informational only; `build` queues behind this owner rather than refusing")
+    return EXIT_REFUSED
+
+
+def command_await(args: argparse.Namespace) -> int:
+    """Block in the foreground on one run and print exactly one completion envelope.
+
+    Intended for a caller that cannot poll: one command, one bounded result.  Read-only —
+    it never stops, resets, or resubmits the run it watches.
+    """
+    run_dir = args.run_dir.expanduser().resolve()
+    if not (run_dir / "status.json").is_file() and not (run_dir / "detached.json").is_file():
+        fail(f"no readable run state in {run_dir}")
+    state, status = wait_for_terminal(run_dir, args.timeout)
+    if state is None:
+        print(f"state:   still running after {args.timeout}s")
+        print(f"run dir: {run_dir}")
+        print("the run is untouched; wait again on the same directory to resume")
+        return EXIT_TIMED_OUT
+    render_envelope(run_dir, state, status, args.error_lines)
+    return STATE_EXIT_CODES.get(state, EXIT_BUILD_FAILED)
+
+
+def command_build(args: argparse.Namespace) -> int:
+    """Build targets with no prior decision required of the caller.
+
+    This is the front door.  It queues behind another build owner instead of refusing,
+    waits in the foreground for as long as the caller allows, prints the outcome and the
+    first errors itself, and, when a build outlasts that window, prints the single command
+    that resumes the wait.  A caller never has to ask whether the tree is free, never has
+    to discover a failure later, and never has to open a log to see the first error.
+    """
+    forwarded = [
+        "run",
+        *args.targets,
+        "--profile",
+        args.profile,
+        "--threads",
+        str(args.threads),
+        "--wait-quiet-seconds",
+        str(args.lock_wait),
+        "--detach",
+    ]
+    if args.cores is not None:
+        forwarded += ["--cores", args.cores]
+    if args.lean_root is not None:
+        forwarded += ["--lean-root", str(args.lean_root)]
+    if args.aggregate:
+        forwarded += ["--aggregate", *args.aggregate]
+    if args.lock_file is not None:
+        forwarded += ["--lock-file", str(args.lock_file)]
+    if args.run_dir is not None:
+        forwarded += ["--run-dir", str(args.run_dir)]
+    forwarded += args.run_arg
+
+    lean_root = (args.lean_root or LEAN_ROOT_DEFAULT).expanduser().resolve()
+    lock_file = (
+        args.lock_file or STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
+    ).expanduser().resolve()
+    holder = lock_holder(lock_file)
+    if holder is not None:
+        print(
+            f"queueing behind run {holder.get('run_id')} (held since {holder.get('since')})",
+            flush=True,
+        )
+
+    launch = subprocess.run(
+        [sys.executable, str(Path(__file__).resolve()), *forwarded],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    run_dir: Path | None = None
+    for line in launch.stdout.splitlines():
+        if line.startswith("run dir:"):
+            run_dir = Path(line.split(":", 1)[1].strip())
+    if launch.returncode != EXIT_OK or run_dir is None:
+        sys.stderr.write(launch.stderr)
+        fail(f"could not start the build: {launch.stderr.strip() or launch.stdout.strip()}")
+
+    state, status = wait_for_terminal(run_dir, args.foreground)
+    if state is None:
+        print(f"state:   still running after {args.foreground}s")
+        print(f"run dir: {run_dir}")
+        print(f"resume:  {Path(__file__).resolve()} await {run_dir}")
+        return EXIT_OK
+    render_envelope(run_dir, state, status, args.error_lines)
+    return STATE_EXIT_CODES.get(state, EXIT_BUILD_FAILED)
+
+
 def command_status(args: argparse.Namespace) -> int:
     run_dir = args.run_dir.expanduser().resolve()
     status = read_json(run_dir / "status.json")
@@ -1274,6 +1500,58 @@ def parser() -> argparse.ArgumentParser:
         "--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet")
     )
     restore.set_defaults(function=command_restore)
+
+    build = subparsers.add_parser(
+        "build",
+        help="build targets, queueing behind any current owner and reporting the outcome",
+    )
+    build.add_argument("targets", nargs="+", help="Lean modules to build, in order")
+    build.add_argument("--profile", default="single")
+    build.add_argument("--threads", type=positive_int, default=1)
+    build.add_argument("--cores", default=None, help="taskset CPU list, e.g. 20-23")
+    build.add_argument("--lean-root", type=Path, default=None)
+    build.add_argument("--lock-file", type=Path, default=None)
+    build.add_argument(
+        "--run-dir", type=Path, default=None, help="durable run state; default is auto-named"
+    )
+    build.add_argument("--aggregate", nargs="+", default=None)
+    build.add_argument(
+        "--run-arg",
+        action="append",
+        default=[],
+        help="extra flag forwarded verbatim to `run`; the ordinary front door needs none",
+    )
+    build.add_argument(
+        "--lock-wait",
+        type=nonnegative_int,
+        default=3600,
+        help="seconds to queue behind another build owner before refusing",
+    )
+    build.add_argument(
+        "--foreground",
+        type=nonnegative_int,
+        default=600,
+        help="seconds to wait in the foreground before handing back a resume command",
+    )
+    build.add_argument("--error-lines", type=nonnegative_int, default=5)
+    build.set_defaults(function=command_build)
+
+    await_run = subparsers.add_parser(
+        "await",
+        help="block on one run and print a single completion envelope; never mutates it",
+    )
+    await_run.add_argument("run_dir", type=Path)
+    await_run.add_argument("--timeout", type=positive_int, default=3600)
+    await_run.add_argument("--error-lines", type=nonnegative_int, default=5)
+    await_run.set_defaults(function=command_await)
+
+    lock = subparsers.add_parser(
+        "lock", help="name the current build owner; informational, never a reservation"
+    )
+    lock.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
+    lock.add_argument("--lock-file", type=Path, default=None)
+    lock.add_argument("--json", action="store_true")
+    lock.set_defaults(function=command_lock)
 
     status = subparsers.add_parser("status", help="read a run's status without touching Lake")
     status.add_argument("run_dir", type=Path)

@@ -42,7 +42,41 @@ The wrapper keys the disk-backed settings by `CODEX_THREAD_ID`/the available Cla
 concurrent agent sessions do not share overrides. An explicit environment variable on one invocation
 wins over the saved value. Do not create a shared cross-session environment file.
 
-Unattended builds:
+Ordinary builds — the front door. It needs no prior check of whether the tree is free:
+
+```sh
+lean/scripts/lean-build-queue.py build RelativeConicArcs.Gates.Example --cores 20-23
+```
+
+`build` queues behind another build owner instead of refusing, naming that owner once; waits in
+the foreground; prints one bounded envelope with the per-target outcomes and, on failure, the
+first errors, so a caller never opens a log to learn why a build failed. When a build outlasts
+`--foreground` (default 600s) it prints exactly one resume command and exits zero. Its exit code
+is the build's: 0 success, 1 build failure, 130 interrupted, 126 abandoned. Do not ask whether
+the lock is free before calling it — that question is what this command exists to remove.
+
+Blocking wait on an existing run, for a caller that cannot poll:
+
+```sh
+lean/scripts/lean-build-queue.py await ~/.cache/othello-lean-build/run-<id> --timeout 3600
+```
+
+`await` is read-only: it never stops, resets, or resubmits the run. Exit 124 is the caller's own
+timeout and leaves the run untouched, so waiting again on the same directory resumes it.
+
+Naming the current owner, when you need to report contention rather than act on it:
+
+```sh
+lean/scripts/lean-build-queue.py lock
+```
+
+`lock` is informational and never a reservation: a build may start immediately after it returns.
+The protection against two concurrent builds is the atomic acquisition inside `run`, never a
+check performed beforehand. Never build a check-then-act sequence on it, and never hand-delete a
+lock file — the lock is an open file description that the kernel releases on exit, including an
+OOM kill, so a crashed run never wedges the queue.
+
+Unattended builds, when the queue shape must be controlled explicitly:
 
 ```sh
 lean/scripts/lean-build-queue.py plan --profile q25-two-witness --threads 2
