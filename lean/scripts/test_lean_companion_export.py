@@ -207,6 +207,29 @@ class CompanionExportTests(unittest.TestCase):
         self.assertEqual(delta["file_count"], len(plan.files) - 1)
         self.assertNotIn("planned_unchanged", EXPORTER.forward_delta(plan, candidate))
 
+    def test_readme_bullet_insertion_is_idempotent(self) -> None:
+        # A base that already adopted this area's bullet must still re-export:
+        # the bullet is left as it stands and the rest of the README retargets.
+        readme = self.base / "README.md"
+        bullet = "- `trust/manifests/triangle_identities.json` records the triangle boundary."
+        readme.write_text(readme.read_text().replace(
+            "- boundary bullet anchor\n", f"- boundary bullet anchor\n{bullet}\n"
+        ))
+        git(self.base, "add", "-A")
+        git(self.base, "commit", "--quiet", "-m", "adopted")
+        plan = self.build()
+        candidate_readme = plan.files["README.md"].decode("utf-8")
+        self.assertEqual(candidate_readme.count(bullet), 1)
+        self.assertIn("3-module reviewed", candidate_readme)
+
+    def test_readme_needing_no_change_leaves_the_delta(self) -> None:
+        readme = self.base / "README.md"
+        bullet = "- `trust/manifests/triangle_identities.json` records the triangle boundary."
+        readme.write_text(f"# Base library\n\n- boundary bullet anchor\n{bullet}\n")
+        git(self.base, "add", "-A")
+        git(self.base, "commit", "--quiet", "-m", "adopted")
+        self.assertNotIn("README.md", self.build().files)
+
     def test_unplanned_change_is_refused(self) -> None:
         plan = self.build()
         candidate = self.work / "candidate"

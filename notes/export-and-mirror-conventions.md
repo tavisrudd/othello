@@ -131,7 +131,9 @@ python3 lean/scripts/lean-companion-export.py ... run --workdir <disk-backed-dir
 
 `run` materializes the candidate twice, requires byte-identical repeats, and
 verifies module identity, manifest completeness, and terminal/axiom-audit
-agreement. The forward-delta gate enforces **containment**: every changed
+agreement. Re-exporting an area the base already adopted is supported: the
+configured README bullet is inserted only when it is absent, so a README that
+needs no other change simply drops out of the delta. The forward-delta gate enforces **containment**: every changed
 path must be planned, while planned files whose bytes the base already
 carries are reported as unchanged rather than refused. Copy the printed delta
 into `~/src/lean/finitegeom` with no hand edits, validate the export gate

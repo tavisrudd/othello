@@ -497,8 +497,10 @@ def retarget_module_counts(text: str, label: str, old_count: int, new_count: int
 
 
 def insert_readme_bullet(readme: str, anchor: str, bullet: str) -> str:
+    # Idempotent: a re-export of an already-adopted area finds its own bullet and
+    # leaves the README alone, so the delta carries only what actually changed.
     if bullet.strip() in readme:
-        raise Refused("the README already carries the configured companion bullet")
+        return readme
     lines = readme.splitlines(keepends=True)
     for index, line in enumerate(lines):
         if line.rstrip("\n") == anchor:
