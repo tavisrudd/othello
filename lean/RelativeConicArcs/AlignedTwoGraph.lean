@@ -16,16 +16,23 @@ cuts has its fourth coordinate fixed to zero, and three further bits record
 the outside edges.  The public intermediate theorem identifies the sole
 two-point ambiguity (interchanging two distinct balanced cuts); the
 three-outside-point theorem checks that the three pair signatures eliminate
-it.  Native decision evaluates the 16,384 bounded Boolean cases in the pair
-classifier under the pinned Lean runtime.  The third-point elimination is a
-symbolic argument from that classifier.  No generated data, external program,
-or unproved mathematical axiom is used.
+it.  The third-point elimination is a symbolic argument from that classifier.
 
-Anchor existence is proved here rather than imported.  Ramsey's equality
-`R(3,3) = 6` is derived from a pigeonhole step over the thirty-two Boolean
-words on five vertices, so a rooted two-graph on six points is shown to
-contain an aligned four-set through the root with no supplied monochromatic
-triple.
+Checking methods differ between the two halves of the module and the
+difference is stated where each result is proved.  The pair classifier and the
+anchor-signature classification evaluate their bounded Boolean domains by
+compiled evaluation under the pinned Lean toolchain, so the compiler and its
+reduction axiom are trusted for those two results and for anything derived
+from them.  Every other finite step, including the whole anchor route below,
+is discharged by kernel reduction.  No generated data, external program, or
+unproved mathematical axiom is used anywhere in the module.
+
+Anchor existence is proved in this module.  Both halves of Ramsey's equality
+for triangles are available: six points force a monochromatic triple, by a
+pigeonhole step over the thirty-two Boolean words on five vertices, and five
+points do not, by the pentagon colouring.  Consequently a rooted two-graph on
+six labelled points contains an aligned four-set through the root with no
+supplied monochromatic triple.
 -/
 
 namespace RelativeConicArcs
@@ -112,17 +119,50 @@ theorem alignedAnchor_of_ramseyTriple {α : Type*}
 
 /-- Among five Boolean values three are equal, indexed increasingly.  This is
 the pigeonhole step of the six-point Ramsey argument, isolated so that the
-finite check ranges over the thirty-two Boolean words rather than over
-colourings of the fifteen pairs. -/
+kernel check ranges over the thirty-two Boolean words rather than over
+colourings of the fifteen pairs.  The words are supplied as five separate
+Boolean arguments, so the check enumerates two values five times and never
+builds a function-space enumeration. -/
 private theorem three_equal_of_five (g : Fin 5 → Bool) :
     ∃ a b c : Fin 5, a < b ∧ b < c ∧ g a = g b ∧ g b = g c := by
-  revert g
+  have hword : ∀ b₀ b₁ b₂ b₃ b₄ : Bool, ∃ a b c : Fin 5, a < b ∧ b < c ∧
+      ![b₀, b₁, b₂, b₃, b₄] a = ![b₀, b₁, b₂, b₃, b₄] b ∧
+      ![b₀, b₁, b₂, b₃, b₄] b = ![b₀, b₁, b₂, b₃, b₄] c := by
+    decide
+  have hval : ∀ t : Fin 5, ![g 0, g 1, g 2, g 3, g 4] t = g t := by
+    intro t
+    fin_cases t <;> rfl
+  obtain ⟨a, b, c, hab, hbc, h1, h2⟩ := hword (g 0) (g 1) (g 2) (g 3) (g 4)
+  exact ⟨a, b, c, hab, hbc, by rw [← hval a, ← hval b]; exact h1,
+    by rw [← hval b, ← hval c]; exact h2⟩
+
+/-- A two-colouring of the pairs on five points with no monochromatic triple:
+the pentagon and its complementary pentagram are both five-cycles, and a
+five-cycle contains no triangle.  With the six-point statement below this is
+the sharpness half of Ramsey's equality for triangles. -/
+def pentagonColouring : Fin 5 → Fin 5 → Bool :=
+  ![![false, true, false, false, true],
+    ![true, false, true, false, false],
+    ![false, true, false, true, false],
+    ![false, false, true, false, true],
+    ![true, false, false, true, false]]
+
+/-- Five points do not force a monochromatic triple, so the six-point bound is
+sharp.  Checked by kernel reduction over the increasing triples of a
+five-element set. -/
+theorem no_monochromatic_triple_five :
+    ∀ i j k : Fin 5, i < j → j < k →
+      ¬(pentagonColouring i j = pentagonColouring i k ∧
+        pentagonColouring i k = pentagonColouring j k) := by
   decide
 
-/-- Ramsey's equality `R(3,3) = 6`, in the form the anchor search uses: for
-every two-colouring `f` of the ordered pairs from six points there are three
-points `i < j < k` whose three pairs receive the same colour.  Only the values
-of `f` on increasing pairs are read, so no symmetry hypothesis is needed.
+/-- The six-point half of Ramsey's theorem for triangles, `R(3,3) ≤ 6`, in the
+form the anchor argument uses: for every two-colouring `f` of the ordered pairs
+from six points there are three points `i < j < k` whose three pairs receive
+the same colour.  Only the values of `f` on increasing pairs are read, so `f`
+is not assumed symmetric; instantiating at a symmetric colouring recovers the
+classical statement, and conversely any `f` induces one.  Together with
+`no_monochromatic_triple_five` this gives the equality `R(3,3) = 6`.
 
 The proof is the classical pigeonhole argument.  Three of the five pairs at the
 first point share a colour; if any pair among those three points also has that
@@ -153,17 +193,21 @@ theorem exists_monochromatic_triple (f : Fin 6 → Fin 6 → Bool) :
         exact ⟨a.succ, b.succ, c.succ, Fin.succ_lt_succ_iff.mpr hab,
           Fin.succ_lt_succ_iff.mpr hbc, e1.trans e2.symm, e2.trans e3.symm⟩
 
-/-- Deterministic anchor discovery.  Every rooted two-graph on six points has
-an aligned four-set consisting of the root and three of those points, with no
-supplied monochromatic triple: the triple is produced by `R(3,3) = 6` applied
-to the rooted edges. -/
+/-- Existence of an aligned four-set through the root on six labelled points,
+with no supplied monochromatic triple: the triple is produced by the six-point
+Ramsey bound applied to the rooted edges.  The three indices are returned in
+increasing order, hence are distinct; whether the six points themselves are
+distinct, and distinct from the root, is a property of `v` and `r` that the
+caller supplies. -/
 theorem exists_alignedAnchor {α : Type*}
     (tau : α → α → α → Bool) (hfour : FourSetParity tau)
     (r : α) (v : Fin 6 → α) :
-    ∃ i j k : Fin 6, Aligned tau r (v i) (v j) (v k) := by
-  obtain ⟨i, j, k, _, _, hij, hik⟩ :=
+    ∃ i j k : Fin 6, i < j ∧ j < k ∧ Aligned tau r (v i) (v j) (v k) := by
+  obtain ⟨i, j, k, hij, hjk, hone, htwo⟩ :=
     exists_monochromatic_triple (fun s t => rootedEdge tau r (v s) (v t))
-  exact alignedAnchor_of_ramseyTriple tau hfour r v ⟨i, j, k, hij, hik⟩
+  exact ⟨i, j, k, hij, hjk,
+    aligned_of_rooted_monochromatic_triangle tau hfour r (v i) (v j) (v k)
+      hone htwo⟩
 
 /-- A cut from an outside point to a normalized aligned four-set.  Its value
 is the three-bit word formed by the first three coordinates; the fourth is
@@ -476,10 +520,10 @@ theorem selectedQueryCount_eq (n : ℤ) :
       3 * n ^ 2 - 23 * n + 45 := by
   ring
 
-/-- There are twenty triples in a six-point set, so the anchor search of
-`exists_alignedAnchor` is bounded by twenty tests.  The existence half of that
-search is `exists_monochromatic_triple`; this identity supplies only its
-count. -/
+/-- A six-element set has twenty unordered triples.  This identity counts the
+four-sets formed by a root and a triple of six further points; existence of an
+aligned one among them is `exists_alignedAnchor`.  No declaration in this
+module formalizes a search procedure or bounds its cost. -/
 theorem sixPointAnchor_testCount : Nat.choose 6 3 = 20 := by
   decide
 
