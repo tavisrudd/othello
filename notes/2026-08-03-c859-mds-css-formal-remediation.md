@@ -265,10 +265,24 @@ so the push is a fast-forward.
 
 ### Still open
 
-1. The Lean trust facts and the base-library export still name the renamed
-   declaration by its old name. Re-extraction needs a quiet Lean worktree and
-   another lane is editing `PassantCodeQ13` and `AlignedTwoGraph`, so both the
-   facts refresh and the companion re-export are pending that window.
+1. The trust facts are refreshed. All four affected units — this paper's gate
+   and axiom audit, the focused extension-field audit, and the two pre-split
+   aggregate units — were re-extracted in a quiet window and now match the
+   source: the renamed terminal appears under its new name, no cap-game module
+   remains in any AME--LU closure after the dependency inversion, and no unit
+   reports a project-local axiom. The focused extension-field audit had never
+   had an artifact at all. The spine audit reports no finding against any
+   AME--LU gate.
+
+   The base library still carries the module under the old declaration name at
+   its recorded export commit. It is self-consistent there and the audited
+   terminal set does not include that declaration, so nothing in the published
+   boundary is wrong; it is one revision behind. Refreshing it is blocked by
+   the companion exporter itself: `insert_readme_bullet` refuses when the
+   configured bullet is already in the base README, so an area can be adopted
+   once but never re-exported. Treating a bullet that is already present as
+   satisfied rather than as an error would make the tool idempotent and unblock
+   every future refresh. That tool belongs to the build-system lane.
 2. The rigidity paper's release manifest still carries the release identifier
    `ame-lu-rc1` dated 2026-07-26, which named the pre-split candidate. Choosing
    an identifier for the deposited version is an author decision.
