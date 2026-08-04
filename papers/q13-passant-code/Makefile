@@ -1,12 +1,20 @@
-LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
+# The tracked PDF is byte-reproducible: the pinned epoch fixes the timestamps TeX
+# and the PDF writer would otherwise embed, so two builds of one source agree even
+# at different filesystem paths.  verification/check_manuscript_build.py compares a
+# fresh build against the tracked PDF and is the supported way to refresh it.
+export SOURCE_DATE_EPOCH = 1767225600
+export FORCE_SOURCE_DATE = 1
+
+TEXSHELL ?= nix shell nixpkgs\#texlive.combined.scheme-full -c
+LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 SOURCE := passant_code_q13.tex
 
-.PHONY: all check evidence lean lint warnings clean distclean
+.PHONY: all check evidence lean lint manuscript warnings clean distclean
 
 all: lint passant_code_q13.pdf
 
-check: evidence lean lint passant_code_q13.pdf warnings
+check: evidence lean lint manuscript
 
 evidence:
 	python3 verification/verify_evidence.py
@@ -21,6 +29,9 @@ lint:
 passant_code_q13.pdf: $(SOURCE)
 	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
+
+manuscript:
+	$(TEXSHELL) python3 verification/check_manuscript_build.py
 
 warnings: passant_code_q13.pdf
 	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' passant_code_q13.log; then \

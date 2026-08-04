@@ -404,20 +404,6 @@ def run(command: list[str], cwd: Path) -> str:
     return completed.stdout
 
 
-def check_latex_warnings(log_path: Path) -> None:
-    forbidden = re.compile(
-        r"(LaTeX Warning:|Package .* Warning:|undefined references|"
-        r"multiply defined|Overfull \\hbox|Underfull \\hbox)"
-    )
-    findings = [
-        line for line in log_path.read_text(encoding="utf-8", errors="replace").splitlines()
-        if forbidden.search(line)
-    ]
-    if findings:
-        raise ValueError("manuscript warning scan failed:\n" + "\n".join(findings))
-    print("clebsch factorization warnings: CHECK OK")
-
-
 def check_manuscript_source_lint(source_path: Path) -> None:
     source = source_path.read_text(encoding="utf-8")
     malformed_spacing = re.compile(r",\s*q{1,2}uad\b")
@@ -802,24 +788,21 @@ def main() -> int:
             run(command, repo_root) for command in LEAN_GATE_COMMANDS
         )
         check_lean_axiom_audit(lean_output)
-        run(["make", "-B", "clebsch-factorization"], repo_root / "papers")
-    else:
-        run(
-            [
-                "nix",
-                "shell",
-                "nixpkgs#texlive.combined.scheme-full",
-                "-c",
-                "latexmk",
-                "-xelatex",
-                "-interaction=nonstopmode",
-                "-halt-on-error",
-                "-jobname=clebsch_factorization",
-                "clebsch_factorization.tex",
-            ],
-            paper_root,
-        )
-    check_latex_warnings(paper_root / "clebsch_factorization.log")
+    # Deterministic rebuild in a scratch directory, compared byte for byte against the
+    # tracked PDF.  The previous in-place build refreshed that PDF as a side effect, so a
+    # manuscript edit committed without rebuilding it could never be detected here.  The
+    # checker rejects TeX warnings and the page count itself.
+    run(
+        [
+            "nix",
+            "shell",
+            "nixpkgs#texlive.combined.scheme-full",
+            "-c",
+            "python3",
+            "verification/check_manuscript_build.py",
+        ],
+        paper_root,
+    )
     print("clebsch factorization release: CHECK OK")
     return 0
 
