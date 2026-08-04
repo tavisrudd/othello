@@ -16,3 +16,9 @@
 The deterministic entry point is `python3 supplement/verify.py --replay`.
 The evidence manifest pins every generator, certificate, and load-bearing
 input. The all-length headline theorem has no computational premise.
+
+The formal boundary column refers to the closure of
+`RelativeConicArcs.Gates.MDSCSSTransversalGeometry`, audited by
+`RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms`. Exact declarations
+per label are in `formalization-ledger.md`; the recursive closure, hashes, and
+axiom facts are recorded in `lean/trust/`.

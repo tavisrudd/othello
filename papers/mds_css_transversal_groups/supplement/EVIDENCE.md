@@ -49,26 +49,59 @@ obligations in the text.
 
 ## Lean claim crosswalk
 
-The shared Lean 4 source uses toolchain `v4.32.0-rc1`.  Paper II's semantic
-terminals will be
-`RelativeConicArcs.Gates.MDSCSSTransversalGeometry` and
-`RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms`; the coordinated
-formal split must create and validate them before release.
+The shared Lean 4 source uses toolchain `v4.32.0-rc1` with the pinned Mathlib
+revision recorded beside the development.  This paper's formal surface is
+exactly the transitive closure of two semantic roots:
+
+- `RelativeConicArcs.Gates.MDSCSSTransversalGeometry`, an import-only gate; and
+- `RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms`, which imports only
+  that gate and prints the axiom dependencies of every declaration cited here.
+
+All declaration names below are in the `RelativeConicArcs.AMELU` namespace.
 
 - `Dictionary` and `StabilizerDictionary` cover the MDS--CSS and stabilizer
-  dictionary.
+  dictionary, ending in `isAME_equalPhaseState_iff_isMDSCode634`,
+  `cssLabelSpace_isPauliLagrangian`, and
+  `equalPhaseState_hasMinimalComputationalSupport`.  The character realization
+  `exists_pauliLabel_pairing_eq_dual` supplies the linear algebra behind the
+  imported Pauli phase correction.
 - `DiagonalIsoduality` proves the arbitrary-length multiplier and nullity
-  theorems. `EncoderTransversal` gives a hypothesis-explicit exact-carrier
-  interface.
-- `PencilClassification`, `ExtensionFieldPencil`, and `SyndromeGeometry`
-  cover the unconditional scalar quotient, extension-field divisor algebra,
-  and syndrome core, with the documented geometric or representation-theoretic
-  bridges left explicit.
-- `MarginalMoment`, `FourCopyContraction`, `TransportDivisor`, and
-  `PartyExtensionSplitting` formalize the algebraic or implication layers of
-  the finite applications. The finite ranks and twelve concrete complements
-  remain supplied by the certificates above.
+  theorems, including `diagonalMultiplierSpace_finrank_le_one` and
+  `isDiagonallyIsodual_iff_finrank_eq_one`.  `EncoderTransversal` gives the
+  hypothesis-explicit exact-carrier interface
+  `fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus` with
+  its isodual and nullity dichotomies.
+- `PencilClassification`, `LUPencilClassification`, `ExtensionFieldPencil`, and
+  `SyndromeGeometry` cover the unconditional scalar quotient
+  `pencilZ_eq_iff_samePencilYOrbit`, the classification and local-unitary
+  terminals `admitted_nonGRS_pencil_classified_by_z` and
+  `locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq`, the
+  extension-field divisor algebra `twistedPencil_sectors_disjoint`, and the
+  syndrome core `existsUnique_arcSyndrome_weight_three_on_support`.  The
+  geometric and representation-theoretic bridges remain explicit structure
+  fields.
+- `MarginalMoment`, `LogicalPhase`, `FourCopyContraction`, `TransportDivisor`,
+  and `PartyExtensionSplitting` formalize the algebraic or implication layers
+  of the finite applications, ending in
+  `not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences`,
+  `fixedPartyKernel_eq_specialLinear_or_splitTorus`,
+  `q13_zFour_not_locallyUnitaryEquivalent_zTwelve`,
+  `reducedTransportDivisor_eq_zero_iff_z`, and
+  `genericPartyPermutationExtension_splits_iff`.  The finite ranks and twelve
+  concrete complements are supplied by the certificates above.
 
-The previous broad `AMELUAggregate` filename closure is the frozen combined
-baseline, not Paper II's release contract. No claim in this supplement treats
-the future semantic gate as already validated.
+Trust route.  The three six-party graph cardinalities `card_marginalTriples`,
+`card_marginalStars`, and `card_perfectMatchings` are discharged by exhaustive
+native evaluation and expose declaration-local implementation axioms of the
+pinned toolchain; `rankFourMultiplicity_eq_sixty_add_concurrency` and
+`not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences` are proved from
+the star count and inherit its evaluation axiom.  Every other cited declaration
+depends on no more than `propext`, `Classical.choice`, and `Quot.sound`.  The
+axiom audit module is the record of that.  A hypothesis-explicit terminal
+checks only the deduction from its stated inputs: it does not prove the finite
+rank, orbit, propagation, or geometric facts those inputs assert, which is why
+the certificates in this supplement and the manuscript proofs remain load
+bearing.
+
+The broad `AMELUAggregate` closure mixes this development with the companion
+rigidity paper's material and is not this paper's formal contract.

@@ -21,18 +21,34 @@ replay, and negative scope statement.  These computations support the
 displayed finite applications; they are not premises of
 Theorem~\ref{cor:diagonal-isodual-transversal-group}.
 
-The formal companion uses the shared source namespace
-\texttt{RelativeConicArcs.AMELU}.  Its current kernel-checked layer covers the
-MDS--CSS dictionary, the diagonal-multiplier line and nullity test, conditional
-interfaces for the exact carrier, the pencil quotient and extension-field
-scalar algebra, syndrome geometry, the contraction and transport algebra, and
-the abstract consequences of a supplied party-extension complement.  The
-remaining geometric propagation hypotheses, the complete translation fiber,
-the odd-field Weil lift, the Heisenberg nonsplitting argument, and the twelve
-concrete complements retain the manuscript or certificate boundaries stated
-above.  A paper-specific semantic import gate and content-addressed public
-formal manifest are scheduled for the formal-extraction phase; this draft does
-not use the former broad filename glob as evidence of coverage.
+The formal companion is written in Lean~4 with toolchain \texttt{v4.32.0-rc1}
+and a pinned Mathlib revision, in the shared source namespace
+\texttt{RelativeConicArcs.AMELU}.  This paper's checked surface is exactly the
+transitive closure of the import-only gate
+\texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometry}; the companion
+module \texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms} imports
+only that gate and prints the axiom dependencies of every declaration cited
+here.  A content-addressed record of the closure, covering source hashes,
+imports, terminal names, axiom facts, and toolchain identity, accompanies the
+Lean source; the supplement names the exact declaration behind each statement.
+
+Kernel checking covers the MDS--CSS and stabilizer dictionaries, the
+diagonal-multiplier line and nullity test, the pencil quotient and the
+extension-field scalar algebra, syndrome geometry, the contraction and
+transport algebra, and the abstract consequences of a supplied party-extension
+complement.  The exact carrier, the admitted-pencil classification, the
+marginal and four-copy separators, and the transport rank and orbit bridges are
+stated as interfaces: each derives its conclusion from a structure whose fields
+assert the geometric propagation, orbit-recognition, or finite-certificate
+facts that the text or the supplement establishes, so importing the gate proves
+none of those inputs.  Three six-party graph cardinalities are discharged by
+exhaustive native evaluation and expose declaration-local implementation axioms
+of the pinned toolchain; the rank-four multiplicity identity and the
+marginal-moment separator are proved from the star count and inherit its
+evaluation axiom.  Every other cited declaration depends on no more than
+propositional extensionality, choice, and quotient soundness.  The odd-field Weil lift, the Heisenberg
+nonsplitting argument, the complete translation fiber, and the twelve concrete
+complements retain the manuscript or certificate boundaries stated above.
 
 The local-unitary classification by \(z\) is restricted to odd prime fields.
 Over extension fields, Frobenius is already an additional local Clifford and
