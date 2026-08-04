@@ -3,8 +3,8 @@ schema_version = 1
 [[package]]
 name = "finitegeom-q16-certificates"
 repository = "https://github.com/tavisrudd/finitegeom-q16-certificates"
-commit = "2da3a356bd5a5e6e4f7f67e593c693749e6975ec"
-manifest_sha256 = "ce6a56275140bd2cc1c6caaefeeffb0f24560e37cccbcf279b7cbb48832b9cef"
+commit = "22aadaea310ccc221422778bd63ed4f4a2479988"
+manifest_sha256 = "bf97e36c6bf26767ee3d217e5f7ff327c98c5ceb56e6557e0b3b0b148b589ec6"
 gate = "RelativeConicArcs.Gates.Q16CertificateTrust"
 terminal = "RelativeConicArcs.rhoC_GF16"
 owned_module_prefixes = [

@@ -941,6 +941,53 @@ def command_update_lock(args: argparse.Namespace) -> int:
         lock.close()
 
 
+def command_restore(args: argparse.Namespace) -> int:
+    """Restore a disk-backed Lake artifact archive under the owner guard."""
+    lean_root = args.lean_root.expanduser().resolve()
+    if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
+        fail(f"{lean_root} is not a Lake package")
+    archive = args.archive.expanduser().resolve()
+    home = Path.home().resolve()
+    if not archive.is_relative_to(home) or not archive.is_file():
+        fail(f"artifact archive must be an existing disk-backed file under {home}: {archive}")
+    fs_type, mount = filesystem_type(archive, args.mountinfo)
+    if fs_type in {"tmpfs", "ramfs"}:
+        fail(f"artifact archive must be disk-backed; {archive} is on {fs_type} at {mount}")
+    pgrep = shutil.which(args.pgrep_binary)
+    if pgrep is None:
+        fail(f"{args.pgrep_binary} is unavailable; cannot check for a live foreign build")
+    lock_file = (
+        args.lock_file or STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
+    ).expanduser().resolve()
+    run_id = f"restore-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
+    lock = acquire_lock(lock_file, run_id, ["<lake unpack>"])
+    try:
+        wait_for_quiet(pgrep, 0, 60)
+        quiet_root = STATE_ROOT_DEFAULT / "restores" / run_id
+        quiet_root.mkdir(parents=True, exist_ok=False)
+        env = os.environ.copy()
+        env["RUN_QUIET_LOGDIR"] = str(quiet_root)
+        inner = [args.nix_binary, "develop", "--command", "lake", "unpack", str(archive)]
+        result = subprocess.run(
+            [args.run_quiet_binary, shlex.join(inner)],
+            cwd=lean_root,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.stdout:
+            print(result.stdout, end="")
+        if result.stderr:
+            print(result.stderr, end="", file=sys.stderr)
+        if result.returncode == 0:
+            print(f"artifact archive restored: {archive}")
+            return EXIT_OK
+        return EXIT_BUILD_FAILED
+    finally:
+        lock.close()
+
+
 def lock_holder(lock_file: Path) -> dict[str, Any] | None:
     """Report the lock's contents when it is held, or None when nobody holds it.
 
@@ -1213,6 +1260,20 @@ def parser() -> argparse.ArgumentParser:
         "--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet")
     )
     update_lock.set_defaults(function=command_update_lock)
+
+    restore = subparsers.add_parser(
+        "restore", help="restore a disk-backed Lake pack under the owner guard"
+    )
+    restore.add_argument("archive", type=Path)
+    restore.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
+    restore.add_argument("--lock-file", type=Path, default=None)
+    restore.add_argument("--mountinfo", type=Path, default=MOUNTINFO_DEFAULT, help=argparse.SUPPRESS)
+    restore.add_argument("--nix-binary", default="nix")
+    restore.add_argument("--pgrep-binary", default="pgrep")
+    restore.add_argument(
+        "--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet")
+    )
+    restore.set_defaults(function=command_restore)
 
     status = subparsers.add_parser("status", help="read a run's status without touching Lake")
     status.add_argument("run_dir", type=Path)
