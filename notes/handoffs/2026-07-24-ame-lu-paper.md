@@ -14,13 +14,15 @@ Discovery companion:
 DOI `10.5281/zenodo.21681856` with mirror `8468914`; the transversal-groups
 paper as DOI `10.5281/zenodo.21766797` with mirror `f90b330`. Each now cites
 the other by deposited identifier. Two follow-on items are open, both recorded
-in `2026-08-03-c859-mds-css-formal-remediation.md`: the rigidity paper's mirror
-still publishes the pre-split supplement and six-party sections, whose removal
-needs an explicit reconciling commit in the mirror and is the same decision as
-its crashing release-manifest generator; and the Lean trust facts and base
-library still carry the pre-rename declaration name, pending a quiet Lean
-worktree. The transversal-groups mirror is synchronized at local commit
-`d2e54cb`, unpushed.
+in `2026-08-03-c859-mds-css-formal-remediation.md`. Both mirrors are
+synchronized and unpushed: the transversal-groups paper at `d2e54cb`, and the
+rigidity paper at `1d658b8` after removing the 31 files the split moved out,
+giving it a paper-local TeX linter so its build runs standalone, and repairing
+the release verifier that still expected the moved supplement. Open: the Lean
+trust facts and base library still carry the pre-rename declaration name,
+pending a quiet Lean worktree; the rigidity paper's release identifier still
+names the pre-split candidate; and its verifier still selects the formal
+surface by filename glob.
 
 **C859 closed (2026-08-03): Paper II is formal-companion-ready and publicly
 materialized.** *Diagonal Isoduality and Transversal Clifford Groups of
