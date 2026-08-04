@@ -21,7 +21,7 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_LEAN_COMMIT = "9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5"
+PINNED_LEAN_COMMIT = "fa61ff9d452d8d6887f84e480c68f40d024b6acc"
 PINNED_BASE_COMMIT = "85dfde9e13e6c3d004e0e659fb83c1a4761902d0"
 
 
@@ -31,6 +31,9 @@ TERMINALS = {
         "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit",
         "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit",
         "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit",
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec",
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex",
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff",
     ],
     "code_locus": [
         "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",

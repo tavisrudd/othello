@@ -16,7 +16,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
@@ -64,7 +64,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -138,10 +138,25 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
@@ -165,13 +180,16 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
               "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit",
               "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit"
+              "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit",
+              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec",
+              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex",
+              "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff"
             ],
             "validation": {
               "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
@@ -213,7 +231,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic": [
@@ -235,7 +253,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
@@ -370,7 +388,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -402,7 +420,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -543,7 +561,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
@@ -591,7 +609,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -712,7 +730,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode": [
@@ -726,7 +744,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode"
@@ -858,7 +876,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -890,7 +908,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -999,7 +1017,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive": [
@@ -1128,7 +1146,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
@@ -1203,7 +1221,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments": [
@@ -1220,7 +1238,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -1251,7 +1269,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1268,7 +1286,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1314,7 +1332,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1331,7 +1349,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1400,7 +1418,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula": [
@@ -1410,7 +1428,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula"
@@ -1498,7 +1516,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
             },
             "axioms": {
               "RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card": [
@@ -1525,7 +1543,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
               "repository": "lean",
-              "sha256": "4bc2adb5f64df0a0f3490a948020fbe200d9169d6c08d232a0ed2879e7ab6319"
+              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
             },
             "terminals": [
               "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card",
@@ -1933,7 +1951,7 @@
     }
   },
   "lean_repository": {
-    "commit": "9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5",
+    "commit": "fa61ff9d452d8d6887f84e480c68f40d024b6acc",
     "distribution": "separate shared Git repository",
     "finitegeom_commit": "85dfde9e13e6c3d004e0e659fb83c1a4761902d0",
     "path": ".",
@@ -1942,14 +1960,14 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "6f2a8d6b6f3cc142e24702becabee8f1f7661688a318f59d9fa515b758cca917"
+    "sha256": "a67aa136122315dd201be616ee95aef38d50e5e6bc5e57d4abf09e4825614514"
   },
-  "manuscript_sha256": "d397627020899d86938ad46ac99d508d6032fddb101e0ce0a860ba9bc38dd058",
+  "manuscript_sha256": "35823cbbeadb774fca53e3e8c663f227dfb9d214f43ba38598a06f589ac023be",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "d1f538efd92d48c1262562492a6c63520f49dfdd69b7206deed7fdeff7ad4a5e"
+      "sha256": "2b9d09266ec288560f64bd0e523255dd1208a23b7b56d08384abb91de2e4aae9"
     },
     {
       "path": "verification/README.md",
@@ -1961,7 +1979,7 @@
     "flake": {
       "path": "flake.nix",
       "repository": "paper",
-      "sha256": "28fed9dedeb8702bf3def3523ec918db6cde9299657966fd3e05f1f9ea7ba432"
+      "sha256": "9717287b35144a3e671f9b380b6bbaf4c8ec8da9561f5b2cc41fb2d51948c858"
     },
     "formal_toolchain": {
       "lean": "4.32.0-rc1",
@@ -1970,7 +1988,7 @@
     "lock": {
       "path": "flake.lock",
       "repository": "paper",
-      "sha256": "b2ab69a7105fe245eb9500a4a72c3793b2c1ecae969c1f1bf743d3efc71167a8"
+      "sha256": "9ae203c10f2e27ff1a11363a02ac43747d9766f8f17c975b5d825ed480d120cc"
     },
     "paper_toolchain": {
       "git": "2.54.0",
@@ -1984,7 +2002,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "3c02c7071cdceae97f24c79bb96713bc657b1ebaa0847e0308568914054d976e"
+    "sha256": "395643cf02aa3ad44b519c9c917a6eae855506ae88afd7135353fbcb8f50b4ac"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2332,7 +2350,7 @@
         "axiom_audit": {
           "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
           "repository": "lean",
-          "sha256": "7ce0a3c522909588e3011b21b41cd683ee85bcff598469bc84d5dc74c46f458e"
+          "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
         },
         "cwd": ".",
         "id": "lean-rigidity-trust-gate",
@@ -2349,7 +2367,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "e8e11b8bae63567a5cc51824460c62767924d50f146ef414c94d2756e3f4ff13"
+      "sha256": "7f460fe454434f9229ee19f052b90350962ca84b723e8d3d44bd5cde8dfb36c5"
     },
     "verification_tools": [
       {
@@ -2360,7 +2378,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "9f791ecea493c3214a417f692a7a37efb252a1550e9647d1819c23c4ef34494c"
+        "sha256": "13c7f06a16955a4e26365b0ae4d80d412fc02e7c6e5aa8828e43de9f85728524"
       },
       {
         "path": "verification/verify_trust_manifest.py",

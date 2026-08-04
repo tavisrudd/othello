@@ -14,7 +14,7 @@
       "role": "base"
     },
     {
-      "commit": "9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5",
+      "commit": "fa61ff9d452d8d6887f84e480c68f40d024b6acc",
       "depends_on": "base",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
       "manifest": "MANIFEST.json",
