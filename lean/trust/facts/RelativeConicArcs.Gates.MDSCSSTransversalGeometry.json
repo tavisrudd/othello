@@ -871,7 +871,7 @@
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel": "RelativeConicArcs.AMELU.MarginalWeylExpansion",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel.eq_1": "RelativeConicArcs.AMELU.MarginalWeylExpansion",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel_supportedOn": "RelativeConicArcs.AMELU.MarginalWeylExpansion",
-    "RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ": "RelativeConicArcs.AMELU.ExtensionFieldPencil",
+    "RelativeConicArcs.AMELU.extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges": "RelativeConicArcs.AMELU.ExtensionFieldPencil",
     "RelativeConicArcs.AMELU.familyFactor_coordinateAxes_of_diagonal_equivalent": "RelativeConicArcs.AMELU.GenericTensorRigidity",
     "RelativeConicArcs.AMELU.fiberCard_mul_normalization": "RelativeConicArcs.AMELU.Dictionary",
     "RelativeConicArcs.AMELU.finFourFunctionEquiv": "RelativeConicArcs.AMELU.OrderedFourConjugation",
@@ -2587,7 +2587,7 @@
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel.eq_1",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel_supportedOn",
-    "RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ",
+    "RelativeConicArcs.AMELU.extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges",
     "RelativeConicArcs.AMELU.familyFactor_coordinateAxes_of_diagonal_equivalent",
     "RelativeConicArcs.AMELU.fiberCard_mul_normalization",
     "RelativeConicArcs.AMELU.finFourFunctionEquiv",
@@ -9235,7 +9235,7 @@
       "RelativeConicArcs.AMELU.PauliSupportedOn",
       "RelativeConicArcs.AMELU.extendSubsystemPauliLabel"
     ],
-    "RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ": [
+    "RelativeConicArcs.AMELU.extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges": [
       "RelativeConicArcs.AMELU.ExtensionFieldPencilOrbitInputs",
       "RelativeConicArcs.AMELU.ExtensionFieldPencilOrbitInputs.equivalent_implies_projective_sector",
       "RelativeConicArcs.AMELU.ExtensionFieldPencilOrbitInputs.galois_z_implies_equivalent",
