@@ -8,12 +8,12 @@ against its recorded hash and against the per-path hashes in the matching
 ``*_formal.json``, so the inventory must be regenerated rather than edited by
 hand whenever a module in the closure changes.
 
-Replay:
+Replay, from the paper root, with <lean-root> the Lean package checkout:
 
-    python3 papers/clebsch-passages/verification/extract_source_closure.py \
-        --lean-root lean \
+    python3 verification/extract_source_closure.py \
+        --lean-root <lean-root> \
         --root RelativeConicArcs.Gates.FourShadowRecognition \
-        --output papers/clebsch-passages/verification/four_shadow_source_closure.json
+        --output verification/four_shadow_source_closure.json
 """
 
 from __future__ import annotations

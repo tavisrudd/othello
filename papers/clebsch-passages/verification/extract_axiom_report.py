@@ -12,11 +12,11 @@ axiom list at a width that depends on the invoking environment, so an
 unnormalized report would differ byte for byte between two builds of identical
 sources and defeat the very comparison the verifiers perform.
 
-Replay:
+Replay, from the paper root:
 
-    python3 papers/clebsch-passages/verification/extract_axiom_report.py \
+    python3 verification/extract_axiom_report.py \
         --stdout <run-dir>/logs/<gate>.quiet/*/*/stdout.log \
-        --output papers/clebsch-passages/verification/<gate>_axioms.txt
+        --output verification/<gate>_axioms.txt
 """
 
 from __future__ import annotations
