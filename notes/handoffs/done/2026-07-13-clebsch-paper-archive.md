@@ -2038,3 +2038,34 @@ quantum, and degree-23 coherence material remains inventory and is not
 retained by Paper III. Paper II stays
 closed to the characteristic-zero bridge apart from a possible short forward
 reference to the completed Paper III.
+
+## 2026-08-04 — first Dye axiom eliminated (Paper I stream, C855)
+
+The ten-point bound on the triple-concurrence points of a six-arc is now a theorem rather than a
+declared external input, and it is proved at greater generality than the statement it replaces: it
+holds in the projective plane over any finite field in which two is invertible, not only at order
+eleven. Three new modules carry it — `QuadrangleDiagonal`, proving that the three diagonal points of
+a complete quadrangle are never collinear in odd characteristic; `SixArcConcurrence`, the
+coordinate-free incidence and counting side; and `SixArcConcurrenceBound`, which supplies the
+per-secant bound and concludes. `Q11DyeAxioms` derives the order-eleven statement from it with the
+statement unchanged, so no consumer moved.
+
+The gate `RelativeConicArcs.Gates.ClebschRigidityTrust` is green. Its axiom audit over 222
+declarations leaves exactly one non-standard axiom, the equality classification, reached by three
+terminals; the bound reports only `propext`, `Classical.choice` and `Quot.sound`. The permitted-axiom
+entry for the bound is deleted from `lean/trust/areas/relconic.toml`.
+
+An adversarial referee pass found no mathematical gap and is recorded in
+`notes/2026-08-04-c855-dye-bound-referee.md`; its required prose and destructuring fixes are applied.
+Work record: `notes/2026-08-04-c855-dye-bound-formalization.md`; plan for both axioms:
+`notes/2026-08-04-c855-dye-axiom-elimination-plan.md`.
+
+Toward the second axiom, two further modules landed: `FrameCoordinates`, giving collinearity as a
+determinant in a chosen frame, and `SixArcPerspectivity`, proving that two triangles in double
+perspective are in triple perspective over any field
+(`notes/2026-08-04-c855-triple-perspective.md`). That is the transitivity input for the equality
+classification. Neither module is reached by any gate yet, so nothing validates them in place.
+
+A labelling error was found and corrected in the double-perspective lemma of
+`notes/2026-08-03-c855-structural-exclusions.md`: its two displayed line triples are attached to the
+wrong perspectivities. The determinants are correct as displayed, so the lemma stands.

@@ -165,3 +165,36 @@ generic advice:
 3. Build the import graph and report the top reverse-dependency/cost hubs.
 4. Select one generated family and draft the versioned checker/shard boundary before changing any
    production module layout.
+
+## 2026-08-04 — order-16 certificate package sealed; order-eleven boundary mapped
+
+Session on C864. The official order-16 cold fill failed after two hours fifty-six minutes at its
+focused gate, on a base-library module the gate never needed: the package's result aggregator
+imported the base umbrella, which reached `RelativeConicArcs.Q11Residual`, a module the base cannot
+compile because the module defining its parametrized-hole predicate and previous-player-win
+transport lemma was never exported. Dropping that one import cut the gate closure from 1,390
+project modules to 1,358 and its base contribution from 59 to 27, and removed every order-eleven
+semantic module. Package commit `d780520`.
+
+The gate then passed, all 1,331 modules built, both terminals depending only on `propext`,
+`Classical.choice` and `Quot.sound`. The package was packed to
+`/home/tavis/lean-backups/q16-certificates-d780520-cache.tgz` (359 MB, sha256 `3dbbafc4c5077fd3…`),
+its 593 MB build tree quarantined and erased, restored from the pack alone in nine seconds, and the
+gate confirmed already-current with a trace-only aggregate over 9,973 targets and no leaf rebuilt.
+The quarantine was removed.
+
+Two defects stay open and are recorded in the task card: the base library still ships an
+uncompilable module, whose repair is a game-free/game split rather than a moved declaration because
+its terminal is a normal-play statement; and nothing builds the base standalone before a package
+pins it, which is why the broken export surfaced only inside a consumer's three-hour build.
+
+The order-eleven externalization was scoped but not executed. Inventory:
+`notes/2026-08-04-c864-q11-payload-inventory.md`; split proposal:
+`notes/2026-08-04-c864-q11-interface-split-lines.md`; independent feasibility audit:
+`notes/2026-08-04-c864-q11-split-feasibility.md`, which found two of the five proposed cuts
+unworkable and named the mechanism that hid the problem — a module declaring into another module's
+namespace, so consumers reach its definitions through an `open` and never name it.
+
+Deferred to the next session on C864: the pinned external order-16 trust fact, which is what the
+Al-Seraji--Al-Ogali anchor needs; the base repair batched with the order-eleven externalization so
+the base is re-exported and re-pinned once; and a gate covering the two new classification modules.

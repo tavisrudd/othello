@@ -430,6 +430,18 @@ it must replace every mathematical boundary in that five-mode ledger by a
 kernel-checked Lean theorem and close the complete scholarly-artifact audit
 before the next release is called theorem-complete.
 
+The first of the two declared Dye inputs is closed: the ten-point bound on
+triple-concurrence points is a proved theorem over any field in which two is
+invertible, the rigidity gate is green, and its permitted-axiom entry is
+deleted. The equality classification remains the single non-standard axiom of
+that gate, reached by three terminals. Its transitivity input — two triangles
+in double perspective are in triple perspective — is proved, together with a
+frame-coordinate determinant criterion; neither module is reached by a gate
+yet. Records:
+[`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
+and
+[`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md).
+
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
 q13 and two-graph literature, opening, conclusion, and minor editorial

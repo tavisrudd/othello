@@ -150,7 +150,19 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
     Audit and implementation plan:
     [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md).
 
-11. **C759 external trust exports complete:** the v0.3-compatible manifest, portfolio headline
+11. **C864 order-16 package sealed; order-eleven boundary mapped:** the official order-16
+    certificate package builds green, is packed to a disk-backed cache, and its focused gate is
+    trace-current after an erase-and-restore rehearsal with no leaf rebuilt; both terminals depend
+    only on the standard foundational axioms. Its gate closure no longer reaches the base library's
+    order-eleven material. Two defects remain open: the base ships a module it cannot compile, whose
+    repair is a game-free/game split, and nothing builds the base standalone before a package pins
+    it. The order-eleven externalization is scoped, not executed — inventory, split proposal and an
+    independent feasibility audit are linked from
+    [`../build-sys-tasks/c864-external-certificate-closeout-and-audit.md`](../build-sys-tasks/c864-external-certificate-closeout-and-audit.md);
+    two of the five proposed cuts were found unworkable. Next: the pinned external order-16 trust
+    fact, then the base repair batched with the externalization.
+
+12. **C759 external trust exports complete:** the v0.3-compatible manifest, portfolio headline
     table, and exact 95-terminal JSON projection are generated from C326/C681 authorities;
     deterministic regeneration and stale/manual-edit rejection are tested. Thirty-six terminal
     axiom sets are extracted and matched, while 59 remain explicitly unextracted. The disposable
