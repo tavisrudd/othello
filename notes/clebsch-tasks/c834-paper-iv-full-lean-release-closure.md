@@ -36,6 +36,11 @@ paper's evidence verifier failing on two stale manifest records; that is repaire
 records both generators, both generated data modules, and a statement-shape checker, and the
 verifier passes.
 
+The shared equivariance layer of stage 2 is written and committed, also unelaborated, together with
+the transporter generator and its generated data, whose exhaustive self-checks pass. The open route
+decision of stage 4 is resolved in favour of the symbolic route on stronger evidence than the plan
+assumed. Report: `notes/2026-08-04-c834-equivariance-layer-and-ambient-plane-route.md`.
+
 Three things the referee pass surfaced outrank the remaining leaf-by-leaf work. The four relation
 identifications are the memory risk of the association-transport packet, not the orbit columns, and
 should have the modular inversion removed from the checked predicate before anything is split. The
@@ -47,9 +52,11 @@ the package has never built — deletes the largest automorphism enumeration out
 the structural upgrade's per-point and per-pair statements to a handful of representatives.
 
 Assuming that elaboration succeeds, the paper package under
-`papers/q13-passant-code/lean-certificates` has 46 native decisions across 31 modules — 16 in the
-weight-ten profile certificates, 11 in the row-uniqueness transport, 8 in the structural upgrade, 6
-in the automorphism anchors, 3 in the association algebra, and 2 in the fixed-point exhaustion.
+`papers/q13-passant-code/lean-certificates` has 44 native decisions across 31 modules — 16 in the
+weight-ten profile certificates, 11 in the row-uniqueness transport, 8 in the structural upgrade, 4
+in the automorphism anchors, 3 in the association algebra, and 2 in the fixed-point exhaustion.  The
+two the anchors have lost are the matrix-quantified relation-preservation and bijectivity leaves,
+rewritten by the stage 2 equivariance layer.
 
 ## Execution plan
 
@@ -69,17 +76,23 @@ question that would otherwise be discovered after several failed builds.
    restate the partition as a multiset identity needing no sort. This is the second cliff candidate
    after the fixed-point exhaustion, and the probe is one small module.
 
-**Stage 2 — the shared equivariance layer.** Three later stages consume it.
+**Stage 2 — the shared equivariance layer.** Three later stages consume it. Both items are written;
+neither is elaborated.
 
-3. Prove invariance of the normalized polar invariant under the symmetric-square action
-   symbolically: the polar form and the two discriminants acquire the same determinant factor and
-   the invariant is bi-homogeneous of degree zero, so it is a polynomial identity in the four matrix
-   entries and six point coordinates. This deletes `Automorphisms.matrixAction_preservesRho`, the
-   largest single native enumeration in the package.
-4. Build the displayed point transporter — one group element carrying the base internal point to
-   each of the 78 — and the displayed pair transporter carrying each ordered distinct pair to one of
-   six class representatives. Kernel-check both once. Neither pays for itself against a single
-   consumer; both are built once for stages 5 and 7.
+3. Invariance of the normalized polar invariant under the symmetric-square action is proved
+   symbolically in `PassantCodeQ13.SymmetricSquareInvariance`: the polar form and the discriminant
+   acquire the same determinant factor and the invariant is bi-homogeneous of degree zero, so the
+   two transformation laws are polynomial identities in the four matrix entries and six point
+   coordinates. `Automorphisms.matrixAction_preservesRho`, the largest single native enumeration in
+   the package, and `Automorphisms.matrixAction_bijective`, which the adjugate identity closes for
+   free, are rewritten to consume it. What remains is elaboration and the axiom audit.
+4. The displayed point transporter — one group element carrying the base internal point to each of
+   the 78 — and the displayed pair transporter carrying each ordered distinct pair to one of six
+   class representatives are generated and self-checked by
+   `lean-certificates/generate_transporter_data.py`. What remains is the Lean theorem that each
+   emitted index realizes its transport, kernel-checked once, and a measurement deciding whether the
+   6006-entry pair table needs an index split. All six class representatives share the first point,
+   so a pair statement reduces to one point statement and six second-point cases.
 
 **Stage 3 — finish the association-transport round.**
 
@@ -103,16 +116,19 @@ question that would otherwise be discovered after several failed builds.
 8. Transport the toric cardinalities and parities and the determinant-conic cardinality from
    `Finset` filters over the subtype universes to filters over the displayed coordinate lists,
    reusing the packed incidence table the package already carries.
-9. **Open decision — the two ambient-plane axioms.** The symbolic route proves that distinct
-   normalized representatives are non-proportional, that the renormalized cross product is again a
-   normalized representative, that incidence holds by `ring`, and that a vanishing cross product
-   forces collinearity — the last is the real obligation, is not in Mathlib's cross-product file,
-   and is estimated at sixty to a hundred and twenty reusable lines. The tabulation route is a
-   full-plane incidence table plus roughly twelve blocked modules. Projective normalization is not
-   available: the package's group acts through the symmetric square and preserves the conic, so it
-   is not transitive on ordered pairs of arbitrary plane points. Recommendation: take the symbolic
-   route with tabulation as the fallback, but this is a route choice, not a detail, and it should be
-   confirmed before the work starts.
+9. **The two ambient-plane axioms — symbolic route, confirmed.** Only one of the two is an
+   obligation: plane incidence is a symmetric bilinear expression, so the dual statement is the
+   first with its arguments exchanged. The step previously taken to be the real obligation, that a
+   vanishing cross product forces collinearity, is in the pinned Mathlib as
+   `crossProduct_ne_zero_iff_linearIndependent`; `dot_self_cross`, `dot_cross_self` and
+   `cross_cross_eq_smul_sub_smul` from the same file give incidence of the join and the uniqueness
+   expansion `L × (p × q) = (L · q) p − (L · p) q` without computation. The remaining normalization
+   dictionary — nonzero representatives, normalization as a rescaling, and equality of proportional
+   normalized representatives — is already proved in `PassantCodeQ13.SymmetricSquareInvariance` and
+   is consumed rather than rebuilt. The tabulation fallback is not needed and is not to be built.
+   Projective normalization remains unavailable: the package's group acts through the symmetric
+   square and preserves the conic, so it is not transitive on ordered pairs of arbitrary plane
+   points.
 
 **Stage 5 — the remaining enumerations, where tabulation is the right tool.**
 
