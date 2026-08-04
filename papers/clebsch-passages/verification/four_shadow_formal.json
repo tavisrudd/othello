@@ -17,7 +17,7 @@
     "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate",
     "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation"
   ],
-  "axiom_report_sha256": "68a19380610c3025803847bda446faaeb674e01b85c64838d26f20042480229d",
+  "axiom_report_sha256": "4f70f426e5713d38e1fe8b76603f09d9c2ea8bc6135679fd3851d5b8f7b2e302",
   "claim_map": {
     "oriented_packet": {
       "coverage": "five root-pair balances and the displayed 012 coefficient",
@@ -45,12 +45,12 @@
   "gate_module": "RelativeConicArcs.Gates.FourShadowRecognition",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-four-shadow-formal-v1",
-  "source_closure_sha256": "d7c0d0edae60a2368db3335b481a93936e554893e13be0ceabdcaaff26cfaf13",
+  "source_closure_sha256": "8de2c1d5570bbc6725407289c9e7ada6d7a18fea319e25cc7e9d681cdda84e5c",
   "source_sha256": {
-    "RelativeConicArcs/ClebschGoldenConference.lean": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2",
+    "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
-    "RelativeConicArcs/FourShadowRecognition.lean": "77fc5459958eb377e1c3110ee0f36c593cc083a86112d4510fc0002a6d75dae9",
-    "RelativeConicArcs/Gates/FourShadowRecognition.lean": "ef1825b3d36b1f90b85349dad0ced74b6606693ab47a77b21d4e4260f6c93a27",
+    "RelativeConicArcs/FourShadowRecognition.lean": "56d916155d61b07b5487dd2782c9cf8525db1bb8e39ac6f7d9b8de2a07d05999",
+    "RelativeConicArcs/Gates/FourShadowRecognition.lean": "f20d03f793169d259d150345b822c700c63cbe7d5af0ce5b352bb5c60b47b26b",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",
     "RelativeConicArcs/WeightedMatchingEvaluation.lean": "06ef04d1a05622f94a0e46a87f4d66e2ac5a6f355a1bad9daedcb8e4a5355e66"

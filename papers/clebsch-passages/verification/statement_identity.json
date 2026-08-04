@@ -89,7 +89,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "a83f2af45623df2b20dcf8f3aa62eb3106305186cefd892fec0b54595a35020e",
+  "trust_rows_sha256": "a68ef67947dc822deababa8c1323039d43ebccbd5165ff89cdc1e55f5392fc57",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -236,7 +236,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, characteristic-zero inclusion-rank descent, and the Ramsey equality R(3,3)=6; Lean checks the three-vertex signed-matrix square identity used for the order-six converse, while Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences",
+      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, characteristic-zero inclusion-rank descent, and the Ramsey equality R(3,3)=6, whose two halves are themselves kernel-checked; Lean checks the three-vertex signed-matrix square identity used for the order-six converse, while Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",
@@ -261,7 +261,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by connected Johnson-graph descent; Lean checks the normalized cut classifier, symbolic third-point disambiguation, overlap consistency, switching transport, determinant identity, query polynomial, and calibration, while the classical Ramsey theorem, finite-set extension, and arbitrary-label normalization remain human inputs",
+      "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by connected Johnson-graph descent; Lean checks the normalized cut classifier, symbolic third-point disambiguation, overlap consistency, switching transport, determinant identity, query polynomial, calibration, and anchor existence through both halves of the triangle Ramsey equality, while the finite-set extension and arbitrary-label normalization remain human inputs",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/passages_formal.json",

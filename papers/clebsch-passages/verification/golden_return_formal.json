@@ -2,11 +2,11 @@
   "schema": "clebsch-golden-return-formal-v1",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
-  "axiom_report_sha256": "6d0077951263f4008c3a0f7210efa1f1eda13de9bd5a8efafcbb174c8a28e2e9",
+  "axiom_report_sha256": "39b9b544674cd4936b731bcca563d473cbc4ddb2ce83990f812c265b2afdd26b",
   "verifier_sha256": "e2eaa5b39694a9b3e883940ff62da5c785f2aa482a83743a86a04a240efbb988",
-  "source_closure_sha256": "dde6b962d4718a88f7e2fa26e2de6fbe5b91115ddca8603f1e1f0e381bdd8e55",
+  "source_closure_sha256": "cba7e5961eb0ecc71127393b861cd39341b331126525c23232051f990a386b4b",
   "source_sha256": {
-    "RelativeConicArcs/ClebschGoldenConference.lean": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2",
+    "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ClebschMiddleExterior.lean": "bcf3a769432cb25cd4c6e1c005679243dfc90161781a9cd8350be772827db460",
     "RelativeConicArcs/ClebschMiddleExteriorSquareRows012To023.lean": "9c4761a58af3cbc7b9405422adc010bf8232d958f46b0e6ee3413c08206c3a28",
@@ -56,7 +56,7 @@
   ],
   "trust_boundary": {
     "symbolic": "Ring-general switching, four-point, balance, reconstruction, augmentation, companion, matching-evaluation, commutator-Pfaffian, and three-vertex signed-matrix square identities are kernel-checked symbolic proofs.",
-    "native": "Literal integral matrix, determinant-minor, and finite twenty-triple claims use native decision in the pinned Lean runtime.",
+    "native": "Native decision is confined to the middle-exterior incidence module - the Hodge and middle-exterior square identities with their diagonal, parity, and common-neighbour counts - and to the two degree-ten comparison claims of the golden descent. The order-six conference matrix, its square and its transpose, its twenty triangle signs, and its translation invariance are kernel-checked and no longer contribute a compiled-evaluation axiom.",
     "excluded": "The manifest does not claim formal coverage of the higher-order inclusion/Ramsey exchange-rigidity argument, balanced-class classification, abstract atom recovery, the exterior-cube kernel, binary transvectants, or optional quaternion-order refinements."
   }
 }

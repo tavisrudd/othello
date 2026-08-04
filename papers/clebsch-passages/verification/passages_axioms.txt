@@ -1,106 +1,50 @@
 'RelativeConicArcs.QuadraticPinching.conductor_eq_ker' depends on axioms: [propext, Classical.choice, Quot.sound]
-'RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
-'RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant' depends on axioms: [propext, Quot.sound]
-'RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul._native.native_decide.ax_1_1]
-'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul._native.native_decide.ax_1_1,
- RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_norms._native.native_decide.ax_1_1,
- RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3_is_standardReflection._native.native_decide.ax_1_1,
- RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2_is_standardReflection._native.native_decide.ax_1_1]
-'RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11._native.native_decide.ax_1_1]
-'RelativeConicArcs.TightFrameConference.conference_sq_of_gram' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul' depends on axioms: [propext, Classical.choice, Quot.sound, RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul._native.native_decide.ax_1_1]
+'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization' depends on axioms: [propext, Classical.choice, Quot.sound, RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul._native.native_decide.ax_1_1, RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_norms._native.native_decide.ax_1_1, RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3_is_standardReflection._native.native_decide.ax_1_1, RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2_is_standardReflection._native.native_decide.ax_1_1]
+'RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11' depends on axioms: [propext, Classical.choice, Quot.sound, RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11._native.native_decide.ax_1_1]
+'RelativeConicArcs.TightFrameConference.conference_sq_of_gram' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.SignedEquiangularGram.golden_det_positive' depends on axioms: [propext]
 'RelativeConicArcs.SignedEquiangularGram.golden_det_negative' depends on axioms: [propext]
-'RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq._native.native_decide.ax_1_1]
+'RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch' depends on axioms: [propext]
 'RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.MarkedClebschBridge.chartLift_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
-'RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
-'RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector._native.native_decide.ax_1_1]
-'RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree' depends on axioms: [propext, Classical.choice, Quot.sound, RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum._native.native_decide.ax_1_1, RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector._native.native_decide.ax_1_1]
+'RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff' does not depend on any axioms
 'RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor' does not depend on any axioms
 'RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple' does not depend on any axioms
-'RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced' depends on axioms: [propext,
- RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced._native.native_decide.ax_1_1]
-'RelativeConicArcs.AlignedTwoGraph.pairSignature_classification' depends on axioms: [propext,
- RelativeConicArcs.AlignedTwoGraph.pairSignature_classification._native.native_decide.ax_1_1]
+'RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five' depends on axioms: [propext]
+'RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced' depends on axioms: [propext, RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced._native.native_decide.ax_1_1]
+'RelativeConicArcs.AlignedTwoGraph.pairSignature_classification' depends on axioms: [propext, RelativeConicArcs.AlignedTwoGraph.pairSignature_classification._native.native_decide.ax_1_1]
 'RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps' depends on axioms: [propext]
-'RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.AlignedTwoGraph.pairSignature_classification._native.native_decide.ax_1_1]
+'RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective' depends on axioms: [propext, Classical.choice, Quot.sound, RelativeConicArcs.AlignedTwoGraph.pairSignature_classification._native.native_decide.ax_1_1]
 'RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions' depends on axioms: [propext]
 'RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement' depends on axioms: [propext]
 'RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation' depends on axioms: [propext]
-'RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount' does not depend on any axioms
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square' depends on axioms: [propext]
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package' depends on axioms: [propext, Quot.sound]
-'RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector._native.native_decide.ax_1_1]
-'RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector._native.native_decide.ax_1_1]
-'RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value' depends on axioms: [propext, Classical.choice, Quot.sound, RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector._native.native_decide.ax_1_1]
+'RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound, RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum._native.native_decide.ax_1_1, RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector._native.native_decide.ax_1_1]
+'RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -16,16 +16,16 @@
   "schema_version": 1,
   "sources": [
     {
-      "bytes": 18205,
+      "bytes": 24655,
       "module": "RelativeConicArcs.AlignedTwoGraph",
       "path": "RelativeConicArcs/AlignedTwoGraph.lean",
-      "sha256": "85eb450500217a6949d57f6161a6354d9fc62047b7e4b0c4c1b5fdac81c27be0"
+      "sha256": "6735f192a97fd55a4090c30adfc49ac98a5d110d314efcf08e2331f3ae38c96d"
     },
     {
-      "bytes": 16029,
+      "bytes": 17856,
       "module": "RelativeConicArcs.ClebschGoldenConference",
       "path": "RelativeConicArcs/ClebschGoldenConference.lean",
-      "sha256": "9a2cc1a46d68a3b08576cc7227dd044a8bfd7104f8e36ab5ca91e94c33cce7b2"
+      "sha256": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30"
     },
     {
       "bytes": 6090,
@@ -46,10 +46,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 5254,
+      "bytes": 5491,
       "module": "RelativeConicArcs.Gates.ClebschPassages",
       "path": "RelativeConicArcs/Gates/ClebschPassages.lean",
-      "sha256": "1978f4e8e864c297c66ad947cae8d2e24584cb9a576f27bef68356e6e6a95608"
+      "sha256": "e053838df725592267504e7d2c3b5b99f57704bc07f02a0baf906574543e21c8"
     },
     {
       "bytes": 6426,
@@ -76,10 +76,10 @@
       "sha256": "30746ec72da8651bc8673b89d78f135632d37195b9c44ac5cca4f071808949ad"
     },
     {
-      "bytes": 5835,
+      "bytes": 6251,
       "module": "RelativeConicArcs.PetersenHarmonicKernel",
       "path": "RelativeConicArcs/PetersenHarmonicKernel.lean",
-      "sha256": "77f2195247beccee65a548788c3c9c8efee01177a093ee6f468aa38f64272f2c"
+      "sha256": "146b96027caad330cfea9c16b2236957faf9e23110aebd9f5e1dfc48f1d18841"
     },
     {
       "bytes": 6345,
