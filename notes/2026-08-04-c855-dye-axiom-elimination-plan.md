@@ -100,6 +100,41 @@ reduces the ten concurrence conditions to `x = y`, `x + z = 2`, `xyz = 1`, hence
 configuration is projectively the golden hexagon, and at order eleven, where the golden roots are
 four and eight, its equivalence with `clebschWitness` is a finite check. That is the second axiom.
 
+## Lean shape of the classification steps
+
+Steps 5 to 7 need a labelling and some finite combinatorics, and the following shape keeps both
+small.
+
+Label the arc by a bijection from a six-element index type, obtained from its cardinality. The
+fifteen chords are then the two-element index subsets, and the fifteen perfect matchings of the
+index set are explicit finite data, as are the six one-factorizations; every statement about them
+is decidable, so the combinatorial bookkeeping can be discharged by evaluation rather than by
+developing a theory of one-factorizations.
+
+Call a matching *concurrent* when its three chords share a point. The chord-pairing map already
+proved for triple-concurrence points sends each such point to a concurrent matching, and it is
+injective because two of them sharing a matching would put two distinct chords through two distinct
+points. It is surjective by definition, so the number of concurrent matchings is the number of
+triple-concurrence points, and the equality case says exactly that ten of the fifteen matchings are
+concurrent.
+
+The double-perspective identity is the only further geometric input: if two disjoint matchings are
+concurrent then so is the third matching disjoint from neither, which in frame coordinates is the
+statement that the two concurrence determinants are negatives of each other. With the
+frame-coordinate determinant criterion in place this is a computation on three explicit coordinate
+triples.
+
+That identity makes concurrence transitive on the six one-factorizations, so the concurrent
+matchings form a disjoint union of complete graphs on them, with no perfect matching by the
+quadrangle result. Which partitions of six can occur is then a finite check: the class sizes must
+sum to six, at least one must be odd, and the number of concurrent matchings is the sum of the
+binomial coefficients of the sizes. Ten forces five plus one, and the five non-concurrent matchings
+are the one-factorization indexed by the singleton class.
+
+Fixing a hexagonal ordering compatible with that partition puts the arc in the frame of step 7, and
+at order eleven the identification of the golden normal form with the displayed witness is a single
+explicit projectivity, checkable by evaluation.
+
 ## Order of work and validation
 
 Steps 1, 2, 4, and 5 are incidence and counting arguments and land first. Step 3 is the geometric
