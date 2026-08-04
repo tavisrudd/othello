@@ -1,13 +1,13 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "63d1a4365853c4dc7e37f585ddc6536a074c498dddb5af53e8b697fdb59b1ea1",
+  "main_source_sha256": "1a8e205be4dfaf368c9fcc4910da791018cd57cc2d2fa9bce0bc7be922638da7",
   "section_sha256": {
     "sections/01-introduction.tex": "dbf16a7bf40f3ca9bc1a5475452d215e6f24f20a054506f3a85056c54a5efadc",
-    "sections/02-orientation-cover.tex": "b2253961166b0c37348b3467f56d21393bc2297dc2e3ccd6a50168de70b92d34",
+    "sections/02-orientation-cover.tex": "b2a8989dbee1d36ef25f9ab9596388b01b92229d6f50b6675e82aac680e88d5b",
     "sections/03-orientation-source.tex": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822",
     "sections/04-arithmetic-specialization.tex": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455",
-    "sections/05-golden-operator.tex": "e42c417c0b1b0f6b6023eda380a09722a28d565dbe76876f656d7e0a155892de",
+    "sections/05-golden-operator.tex": "7127f7931a726e8040743ab2dba636a6dcd07d78f12461b9bf1ad35058cdcb91",
     "sections/05-harmonic-realization.tex": "f019d20c504ddd04b670abc39e69fd9790cf351af4419c138efb9967fcba04a1",
     "sections/09-conclusion.tex": "2ce7f1b81acfb72ae20dfa3afede006e09e268c410d4796ec940acb6a2533146",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",

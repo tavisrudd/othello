@@ -2,7 +2,7 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21652792-blue.svg)](https://doi.org/10.5281/zenodo.21652792)
 
-**Series:** *The Clebsch cubic: recovering, orienting, and realizing --- I*
+**Series:** *The Clebsch cubic --- I*
 
 The shared progression is expository; this manuscript is logically
 independent of the other two.
