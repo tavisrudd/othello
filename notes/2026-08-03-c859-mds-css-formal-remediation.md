@@ -286,9 +286,24 @@ so the push is a fast-forward.
 2. The rigidity paper's release manifest still carries the release identifier
    `ame-lu-rc1` dated 2026-07-26, which named the pre-split candidate. Choosing
    an identifier for the deposited version is an author decision.
-3. That verifier still selects its formal surface with a broad `AMELU*` filename
-   glob rather than a paper-specific root contract, which is the replacement the
-   split plan called for.
+3. That verifier now selects its formal surface by declared roots. It names the
+   mixed aggregate, its axiom audit, and the two-uniform gate and audit, and
+   reads each root's module closure from the extracted trust facts, so the
+   release surface and the trust spine describe one graph. The surface drops ten
+   standalone axiom-audit gates that no root imports and keeps every module the
+   paper's claims reach: 82 formal artifacts against the glob's 92.
+
+### Trust-facts coverage for the whole area
+
+Eleven declared extraction units had no facts artifact and seven of their gates
+had never been compiled in this tree, so the spine could not check what any of
+those closures contains. All are built and extracted. The two-uniform gate and
+its axiom audit had existed as sources without any area declaring them, which
+left seven modules of the quantitative chain reachable by no unit at all; both
+are now declared with all seventeen terminals, each depending on propositional
+extensionality, choice, and quotient soundness alone. Across every AME--LU unit
+no project-local axiom appears and no cap-game module remains. The spine audit
+now reports no finding of any class against an AME--LU or MDS--CSS gate.
 
 The transversal-groups mirror is synchronized at local commit `d2e54cb`:
 manifest verified at 47 tracked files, clean warning-free build, clean
