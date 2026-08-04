@@ -174,6 +174,7 @@ q11 payload inventory [`../2026-08-04-c864-q11-payload-inventory.md`](../2026-08
 split lines [`../2026-08-04-c864-q11-interface-split-lines.md`](../2026-08-04-c864-q11-interface-split-lines.md);
 split feasibility [`../2026-08-04-c864-q11-split-feasibility.md`](../2026-08-04-c864-q11-split-feasibility.md);
 residual game-free/game split [`../2026-08-04-c864-q11-residual-game-split.md`](../2026-08-04-c864-q11-residual-game-split.md);
+point-orbit data verdict [`../2026-08-04-c864-point-orbit-data-verdict.md`](../2026-08-04-c864-point-orbit-data-verdict.md);
 Dye audit and anchor review [`../2026-08-04-c864-dye-audit-and-anchor-review.md`](../2026-08-04-c864-dye-audit-and-anchor-review.md).
 
 **Paper I v2** — audit and plan

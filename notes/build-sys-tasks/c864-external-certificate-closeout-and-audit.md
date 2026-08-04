@@ -176,7 +176,15 @@ per-row action theorem with heartbeat and recursion limits raised — and the tw
 family of exhaustive per-point presentation theorems.  Both are certificate payload under the
 ownership boundary above; the orbit definitions and the arithmetic, Brianchon and conic lemmas are
 human-scale and stay.  Whether the point-orbit rows form their own official package or join the
-other Clebsch q11 certificates is undecided.  The full source-side boundary, including the ten
+other Clebsch q11 certificates is undecided.
+
+The point-orbit data module is settled: its group-action half — the sixty matrices, the sixty
+support permutations, the action and fixed-point machinery, and the four leaf-discharging tactic
+macros — is payload and leaves with the rows, while its displayed blocks, index dictionary and the
+five decidable block theorems stay as the interface the rigidity gate audits.  No audited statement
+needs reformulating.  Split the data module in the same window as the package cut, since editing it
+invalidates every row leaf.  Verdict and exact declaration lists:
+`notes/2026-08-04-c864-point-orbit-data-verdict.md`.  The full source-side boundary, including the ten
 modules reached from outside the order-eleven family and the five of those that mix a semantic
 interface with exhaustive work, is inventoried in
 `notes/2026-08-04-c864-q11-payload-inventory.md`.
