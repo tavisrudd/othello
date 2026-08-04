@@ -7,15 +7,29 @@ import Mathlib.Tactic.Ring
 /-!
 # The order-six golden conference matrix
 
-This module fixes the integral symmetric conference matrix on six labelled
-axes.  It proves its square, the covariance of its triangle products under
-diagonal sign changes, and the four-point identity satisfied by triangle
-products of any symmetric signed matrix.
+This module fixes the integral symmetric conference matrix `C` on the six
+labelled golden axes, indexed by `Fin 6` in the order `0, 1, 2, 3, 4, 5`.  It
+proves the conference equation `C * C = 5 • 1` over `ℤ` and over every
+commutative ring reached by the entrywise integer cast, the covariance of the
+triangle products `C i j * C j k * C k i` under diagonal sign changes, the
+translation invariance of the oriented triangle cubic along the all-ones
+vector, and the four-point identity satisfied by the triangle products of an
+arbitrary symmetric matrix whose off-diagonal entries square to one.
 
-The two explicit integer tables are checked by native decision in the pinned
-Lean runtime.  The structural switching, four-point, and base-change statements
-are symbolic proofs over a commutative ring.  They use no generated data or
-external assumptions.
+Three claims about the explicit integer table are finite and are discharged by
+kernel reduction alone.  The symmetry `Cᵀ = C` and the square `C * C = 5 • 1`
+are reduced entrywise by `Matrix.ext`, their thirty-six index pairs are
+enumerated by `Fin` case analysis, and each resulting integer equation is
+closed by the kernel; for the square this evaluates the six-term row-column sum
+at each pair.  The twenty oriented triangle signs are decided as a single
+closed conjunction of integer equations.  Each of these is an exhaustive check
+of its entire finite index domain, not a sample.  No compiled evaluation,
+generated data, imported certificate, or external assumption enters this
+module, so its results rest only on `propext`, `Classical.choice`, and
+`Quot.sound`.
+
+The switching, pair-balance, four-point, and base-change statements are
+symbolic proofs valid over an arbitrary commutative ring.
 -/
 
 namespace RelativeConicArcs
@@ -36,7 +50,8 @@ def conferenceMatrix : Matrix (Fin 6) (Fin 6) ℤ :=
 
 /-- The golden conference matrix is symmetric. -/
 theorem conferenceMatrix_transpose : conferenceMatrix.transpose = conferenceMatrix := by
-  native_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;> rfl
 
 /-- The diagonal of the golden conference matrix vanishes. -/
 theorem conferenceMatrix_apply_self (i : Fin 6) : conferenceMatrix i i = 0 := by
@@ -49,7 +64,8 @@ theorem conferenceMatrix_apply_sq (i j : Fin 6) (hij : i ≠ j) :
 
 /-- The conference equation `C² = 5I` over the integers. -/
 theorem conferenceMatrix_sq : conferenceMatrix * conferenceMatrix = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
-  native_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;> decide
 
 /-- The same labelled conference matrix over a target ring, obtained by
 mapping its integral entries. -/
@@ -138,8 +154,12 @@ theorem conference_triangleSigns :
     triangleSign conferenceMatrix 2 3 5 = -1 ∧
     triangleSign conferenceMatrix 2 4 5 = 1 ∧
     triangleSign conferenceMatrix 3 4 5 = 1 := by
-  native_decide
+  decide
 
+/-- Transport of one integral triangle sign along the entrywise cast: if the
+triangle product of the integral conference matrix on the ordered labels
+`i, j, k` equals `z`, then the corresponding product for the base-changed
+matrix equals the image of `z` in `R`. -/
 private theorem cast_conference_triangleSign (R : Type*) [CommRing R]
     (i j k : Fin 6) (z : ℤ) (h : triangleSign conferenceMatrix i j k = z) :
     triangleSign (conferenceMatrixOver R) i j k = (z : R) := by

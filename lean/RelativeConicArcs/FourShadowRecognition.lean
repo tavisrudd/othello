@@ -28,16 +28,22 @@ uniqueness modulo switching and permutation.  On that locus the five root-pair
 balances are five linear equations in the ten edge signs, one for each non-root
 vertex, and each says that the vertex carries exactly two positive edges to the
 other four non-root vertices.  The positive graph on the five non-root vertices
-is then two-regular, hence a pentagon, and the five equations have exactly
-twelve solutions, one for each labelled pentagon.  Those twelve are extracted in
-two steps.  A proved sign lemma splits four signs summing to zero into its six
-balanced patterns, which settles the four edges at the first non-root vertex;
-in each of the six resulting branches the six remaining Boolean edge parameters
-are enumerated, and every assignment is either refuted by one of the four
-remaining balance equations or matched with one of the twelve listed pentagons.
-That case analysis is the only finite search in the module: `6 × 64` Boolean
-assignments carrying no matrix arithmetic, all discharged by kernel reduction
-behind the sign lemma just described.  The twelve resulting cubic identities and
+is then two-regular; a two-regular simple graph on five vertices is a pentagon,
+and the five equations have exactly twelve solutions, one for each labelled
+pentagon.  Both directions are proved: every solution is one of twelve listed
+sign patterns, and each of those twelve satisfies the five equations.  The
+forward direction is extracted in two steps.  A proved sign lemma splits four
+signs summing to zero into its six balanced patterns, which settles the four
+edges at the first non-root vertex; in each of the six resulting branches the
+six remaining Boolean edge parameters are enumerated, and every assignment is
+either refuted by one of the four remaining balance equations or matched with
+one of the twelve listed pentagons.  That case analysis is the largest finite
+case analysis in the module: `6 × 64` assignments of the ten edge signs, tested
+against the four remaining balance equations as integer literals, with no
+matrix, cubic, or polynomial arithmetic inside the search.  Smaller Boolean and
+index case splits occur elsewhere in the module.  Every one of them, and the
+search just described, is closed by kernel-checked case analysis using linear
+arithmetic and rewriting.  The twelve resulting cubic identities and
 the orientation of the `x₀x₁x₂` coefficient are proved by kernel normalization.
 No compiled evaluation, generated certificate, or external computation enters
 any declaration of this module.  The rational
@@ -388,8 +394,8 @@ private theorem signTriple_prod_eq_neg_sum (x y z : ℤ)
 sign on the edge joining the two chosen vertices, `b, c, d` and `e, f, g` are
 the signs on the edges from those two vertices to the three remaining
 vertices in a common order, and `h, i, j` are the signs on the edges among the
-remaining three, indexed so that `h`, `i`, `j` avoid `b, e`, then `c, f`, then
-`d, g` respectively.
+remaining three, indexed by the triple identities they satisfy: `h = a + d + g`,
+`i = a + c + f`, and `j = a + b + e`.
 
 The two vertex balances and the three triple identities force the pair moment
 `b * e + c * f + d * g` to equal `-1`.  The argument multiplies the three
@@ -520,9 +526,13 @@ def normalizedSignMatrix (bits : Fin 10 → Bool) : Matrix (Fin 6) (Fin 6) ℤ :
 def FirstRowBalanced (C : Matrix (Fin 6) (Fin 6) ℤ) : Prop :=
   ∀ i, i ≠ 0 → pairTriangleSum C 0 i = 0
 
-/-- The positive graph away from the normalized root has degree two at every
-vertex.  A simple two-regular graph on five vertices is a pentagon, so this is
-the labelled gauge form of the pentagon classification. -/
+/-- Every edge from the normalized root is positive, and the positive graph on
+the other five vertices has degree two at each of them.  This predicate states
+that degree condition; the identification of a two-regular simple graph on five
+vertices with a pentagon is mathematical orientation and is not itself
+formalized here.  Each of those five vertices has two positive and two negative
+edges among the other four, so the positive and negative graphs are
+complementary five-cycles and either may be called the pentagon. -/
 def PentagonGauge (C : Matrix (Fin 6) (Fin 6) ℤ) : Prop :=
   (∀ i, i ≠ 0 → C 0 i = 1) ∧
   ∀ i, i ≠ 0 →
@@ -683,8 +693,10 @@ The ten Boolean parameters are the edges `12,13,14,15,23,24,25,34,35,45`, in
 that order, with `true` a negative edge, and the five hypotheses are the vertex
 balances at `1,2,3,4,5`.  Splitting the four edges at vertex `1` into the six
 patterns with two positive edges leaves six branches; in each of them the four
-remaining balances determine the six remaining edge parameters, and that step
-is checked by kernel reduction over those `2^6` assignments. -/
+remaining balances determine the six remaining edge parameters over those `2^6`
+assignments, refuted by linear arithmetic or matched by rewriting.  The
+converse, that each listed pattern satisfies the five balances, is
+`pentagon_bits_balanced`. -/
 private theorem pentagon_bit_classification
     (b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 : Bool)
     (r1 : boolSign b0 + boolSign b1 + boolSign b2 + boolSign b3 = 0)
@@ -724,6 +736,56 @@ private theorem pentagon_bit_classification
   first
     | omega
     | simp
+
+/-- The converse of the pentagon classification: each of the twelve listed sign
+patterns satisfies the five vertex balances.  With the classification itself
+this makes the twelve exactly the solution set of the five equations. -/
+private theorem pentagon_bits_balanced
+    (b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 : Bool)
+    (hcase :
+      (b0 = false ∧ b1 = false ∧ b2 = true ∧ b3 = true ∧ b4 = true ∧
+        b5 = false ∧ b6 = true ∧ b7 = true ∧ b8 = false ∧ b9 = false) ∨
+      (b0 = false ∧ b1 = false ∧ b2 = true ∧ b3 = true ∧ b4 = true ∧
+        b5 = true ∧ b6 = false ∧ b7 = false ∧ b8 = true ∧ b9 = false) ∨
+      (b0 = false ∧ b1 = true ∧ b2 = false ∧ b3 = true ∧ b4 = false ∧
+        b5 = true ∧ b6 = true ∧ b7 = true ∧ b8 = false ∧ b9 = false) ∨
+      (b0 = false ∧ b1 = true ∧ b2 = false ∧ b3 = true ∧ b4 = true ∧
+        b5 = true ∧ b6 = false ∧ b7 = false ∧ b8 = false ∧ b9 = true) ∨
+      (b0 = false ∧ b1 = true ∧ b2 = true ∧ b3 = false ∧ b4 = false ∧
+        b5 = true ∧ b6 = true ∧ b7 = false ∧ b8 = true ∧ b9 = false) ∨
+      (b0 = false ∧ b1 = true ∧ b2 = true ∧ b3 = false ∧ b4 = true ∧
+        b5 = false ∧ b6 = true ∧ b7 = false ∧ b8 = false ∧ b9 = true) ∨
+      (b0 = true ∧ b1 = false ∧ b2 = false ∧ b3 = true ∧ b4 = false ∧
+        b5 = true ∧ b6 = false ∧ b7 = true ∧ b8 = true ∧ b9 = false) ∨
+      (b0 = true ∧ b1 = false ∧ b2 = false ∧ b3 = true ∧ b4 = true ∧
+        b5 = false ∧ b6 = false ∧ b7 = true ∧ b8 = false ∧ b9 = true) ∨
+      (b0 = true ∧ b1 = false ∧ b2 = true ∧ b3 = false ∧ b4 = false ∧
+        b5 = false ∧ b6 = true ∧ b7 = true ∧ b8 = true ∧ b9 = false) ∨
+      (b0 = true ∧ b1 = false ∧ b2 = true ∧ b3 = false ∧ b4 = true ∧
+        b5 = false ∧ b6 = false ∧ b7 = false ∧ b8 = true ∧ b9 = true) ∨
+      (b0 = true ∧ b1 = true ∧ b2 = false ∧ b3 = false ∧ b4 = false ∧
+        b5 = false ∧ b6 = true ∧ b7 = true ∧ b8 = false ∧ b9 = true) ∨
+      (b0 = true ∧ b1 = true ∧ b2 = false ∧ b3 = false ∧ b4 = false ∧
+        b5 = true ∧ b6 = false ∧ b7 = false ∧ b8 = true ∧ b9 = true)) :
+    boolSign b0 + boolSign b1 + boolSign b2 + boolSign b3 = 0 ∧
+    boolSign b0 + boolSign b4 + boolSign b5 + boolSign b6 = 0 ∧
+    boolSign b1 + boolSign b4 + boolSign b7 + boolSign b8 = 0 ∧
+    boolSign b2 + boolSign b5 + boolSign b7 + boolSign b9 = 0 ∧
+    boolSign b3 + boolSign b6 + boolSign b8 + boolSign b9 = 0 := by
+  rcases hcase with
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ |
+    ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ <;>
+  simp [boolSign_false, boolSign_true]
 
 private theorem orientation012_disjoint (bits : Fin 10 → Bool) :
     ¬(PositiveOrientation012 (normalizedSignMatrix bits) ∧
