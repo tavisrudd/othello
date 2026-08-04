@@ -15,11 +15,10 @@ manifest = "RelativeConicArcs/TRUST.md"
 
 owns = ["RelativeConicArcs", "RelativeConicArcs.**"]
 
-# The two Dye axioms.  They are declared here so they appear in the portfolio axiom map, and they
-# sit outside every gate closure, which the checker reports separately.  Declaring an axiom is not
-# endorsing it.
+# The single remaining Dye axiom.  It is declared here so it appears in the portfolio axiom map;
+# declaring an axiom is not endorsing it.  The ten-point bound formerly declared alongside it is now
+# a theorem of RelativeConicArcs.SixArcConcurrence.
 permitted_axioms = [
-  "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
   "RelativeConicArcs.ClebschDye.dye1991_equality_classification",
 ]
 

@@ -53,11 +53,17 @@ theorem instead of declaring it. The statement is unchanged, so its consumers in
 entry point, and the quadrangle theorem's axiom print shows only `propext`, `Classical.choice`, and
 `Quot.sound`. Single-file elaboration against last-built dependencies is a smoke test, not a gate.
 
-`SixArcConcurrenceBound` and the rewritten `Q11DyeAxioms` are written but not yet elaborated: they
-import a module that has no compiled artifact, and compiling one requires the build window, which
-the order-16 certificate cold fill currently holds. The gate
-`RelativeConicArcs.Gates.ClebschRigidityTrust` and its axiom audit are the acceptance evidence and
-run in that window.
+The gate `RelativeConicArcs.Gates.ClebschRigidityTrust` is green, built in one minute at a 3.3 GiB
+peak, and its axiom audit is the acceptance evidence. Across the 222 audited declarations exactly
+one non-standard axiom remains, the equality classification, reached by three downstream terminals.
+The ten-point bound no longer appears as an axiom anywhere: it now reports `propext`,
+`Classical.choice` and `Quot.sound` like any other theorem.
+
+Reaching that took two repairs to `SixArcConcurrenceBound`, both of which only the real build could
+expose, since the module could not elaborate until its dependency had a compiled artifact: the
+coordinate module needed its own decidable-incidence instance, because the one in the neighbouring
+module is file-local, and a membership rewrite assumed the wrong form. The trust registry entry
+permitting the bound as an axiom is deleted; the checker reports no new finding from that removal.
 
 ## Independent referee pass
 
