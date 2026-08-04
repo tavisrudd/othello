@@ -42,6 +42,33 @@ and 5 is a square modulo 11.
 Neither Lean statement is stronger than the cited result in its hypotheses or its conclusion, so no
 re-proof of a Dye theorem is required.
 
+### Both clauses already have paper-grade proofs in the Paper I stream
+
+The `clebsch` lane proved both Dye clauses on 2026-08-03, before this audit and independently of it,
+in `notes/2026-08-03-c855-dye-orbit-uniqueness.md` and its companion
+`notes/2026-08-03-c855-structural-exclusions.md` (commit `6eaf1093` and predecessors). The bound is
+proved structurally for every odd order; the equality classification is proved for every field of
+odd characteristic, in the strictly stronger form that the equality configurations are a single
+projective orbit with the golden normal form, together with the existence condition, the arc
+property, the unique associated polarity, and the alternating-group stabilizer, each obtained as a
+corollary rather than transferred from the citation. That record states the argument is
+`decide`-scale over the integers modulo eleven after specialization, so both axioms are replaceable
+by Lean proofs rather than by audited imports.
+
+This does not change the fidelity verdict above, and it removes the case for treating the Dye
+declarations as a permanent trust boundary. Two dispositions are open, and the choice is a routing
+decision rather than a build-system one:
+
+- Declare both axioms exactly now, as literature inputs with the pinpoints verified above. This
+  reaches an admissible final state for C864's acceptance and leaves the axioms in the boundary.
+- Formalize the C855 proofs and delete both axioms, retiring the Dye inputs from the rigidity trust
+  boundary entirely. This is a nontrivial theorem change, so under C864's own ownership rule it
+  keeps its proof-lane review and gate; it belongs to the Paper I stream in the `clebsch` lane, not
+  to `build-sys`.
+
+The second is the better end state and the first does not block it, so declaring exactly now and
+queueing the formalization separately is the route this report recommends.
+
 ### One residual commitment beyond Theorem 1(ii)
 
 `dye1991_equality_classification` concludes `IsClebschHexagon A`, which is projective equivalence to
@@ -53,6 +80,11 @@ PG(2,11), so proving `(brianchonPoints clebschWitness).card = 10` and rewriting 
 conclusion in terms of the abstract Clebsch-hexagon property would reduce the trusted boundary to
 exactly the definition plus Theorem 1(ii). This is the cheapest available strengthening of the
 rigidity trust boundary and is owned by C864's Dye bullet; it needs the build window.
+
+The Paper I orbit record closes the mathematical half of this gap already: it checks that the golden
+normal form at order eleven is projectively equivalent to the development's displayed witness, so
+`IsClebschHexagon` does land on a genuine Clebsch hexagon. What is missing is a Lean declaration
+saying so.
 
 ## Review of the prepared external-input anchors
 
