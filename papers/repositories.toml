@@ -301,8 +301,8 @@ source = "papers/q13-passant-code"
 paper_ids = ["passant_code_q13"]
 disposition = "active"
 
-[[repository.exclude_path]]
-path = "lean-certificates"
+[[repository.exclude_glob]]
+pattern = "lean-certificates/**"
 reason = "the formal companion depends on the shared Lean library by a monorepo-relative path and is deposited separately once that library is published and pinned"
 
 [[repository.rewrite]]
