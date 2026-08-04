@@ -886,6 +886,61 @@ def command_pack(args: argparse.Namespace) -> int:
         lock.close()
 
 
+def command_update_lock(args: argparse.Namespace) -> int:
+    """Refresh one Lake dependency lock under the shared build-owner guard."""
+    lean_root = args.lean_root.expanduser().resolve()
+    if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
+        fail(f"{lean_root} is not a Lake package")
+    pgrep = shutil.which(args.pgrep_binary)
+    if pgrep is None:
+        fail(f"{args.pgrep_binary} is unavailable; cannot check for a live foreign build")
+    lock_file = (
+        args.lock_file or STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
+    ).expanduser().resolve()
+    run_id = f"update-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
+    lock = acquire_lock(lock_file, run_id, [f"<lake update {args.package}>"])
+    try:
+        wait_for_quiet(pgrep, 0, 60)
+        if args.local_source is not None:
+            local_source = args.local_source.expanduser().resolve()
+            dependency_checkout = lean_root / ".lake" / "packages" / args.package
+            if not (local_source / ".git").exists():
+                fail(f"local dependency source is not a Git checkout: {local_source}")
+            if not (dependency_checkout / ".git").exists():
+                fail(f"Lake dependency checkout is missing: {dependency_checkout}")
+            fetched = subprocess.run(
+                ["git", "fetch", "--no-tags", str(local_source), "HEAD"],
+                cwd=dependency_checkout,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if fetched.returncode != 0:
+                if fetched.stderr:
+                    print(fetched.stderr, end="", file=sys.stderr)
+                return EXIT_BUILD_FAILED
+        quiet_root = STATE_ROOT_DEFAULT / "updates" / run_id
+        quiet_root.mkdir(parents=True, exist_ok=False)
+        env = os.environ.copy()
+        env["RUN_QUIET_LOGDIR"] = str(quiet_root)
+        inner = [args.nix_binary, "develop", "--command", "lake", "update", args.package]
+        result = subprocess.run(
+            [args.run_quiet_binary, shlex.join(inner)],
+            cwd=lean_root,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.stdout:
+            print(result.stdout, end="")
+        if result.stderr:
+            print(result.stderr, end="", file=sys.stderr)
+        return EXIT_OK if result.returncode == 0 else EXIT_BUILD_FAILED
+    finally:
+        lock.close()
+
+
 def lock_holder(lock_file: Path) -> dict[str, Any] | None:
     """Report the lock's contents when it is held, or None when nobody holds it.
 
@@ -1140,6 +1195,24 @@ def parser() -> argparse.ArgumentParser:
     pack.add_argument("--pgrep-binary", default="pgrep")
     pack.add_argument("--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet"))
     pack.set_defaults(function=command_pack)
+
+    update_lock = subparsers.add_parser(
+        "update-lock", help="refresh one Lake dependency lock under the owner guard"
+    )
+    update_lock.add_argument("package", help="exact Lake dependency name")
+    update_lock.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
+    update_lock.add_argument(
+        "--local-source",
+        type=Path,
+        help="prefetch an unpublished revision from this exact local Git checkout",
+    )
+    update_lock.add_argument("--lock-file", type=Path, default=None)
+    update_lock.add_argument("--nix-binary", default="nix")
+    update_lock.add_argument("--pgrep-binary", default="pgrep")
+    update_lock.add_argument(
+        "--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet")
+    )
+    update_lock.set_defaults(function=command_update_lock)
 
     status = subparsers.add_parser("status", help="read a run's status without touching Lake")
     status.add_argument("run_dir", type=Path)

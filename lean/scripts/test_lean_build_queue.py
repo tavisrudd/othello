@@ -42,6 +42,10 @@ if [ "${3:-}" = lake ] && [ "${4:-}" = pack ]; then
   printf 'fixture lake pack\\n' > "$5"
   exit 0
 fi
+if [ "${3:-}" = lake ] && [ "${4:-}" = update ]; then
+  printf '%s\n' "${5:-}" > "$FAKE_LAKE_STATE/updated-package"
+  exit 0
+fi
 [ "${3:-}" = bash ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 [ "${4:-}" = -lc ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 exec bash -lc "export PATH=__BIN__:\\$PATH; ${5:-}"
@@ -295,6 +299,30 @@ class QueueTest(unittest.TestCase):
     def read_status(self, run_dir: Path) -> dict:
         return json.loads((run_dir / "status.json").read_text())
 
+    def update_lock(self, package: str):
+        return subprocess.run(
+            [
+                sys.executable,
+                str(RUNNER),
+                "update-lock",
+                package,
+                "--lean-root",
+                str(self.lean_root),
+                "--lock-file",
+                str(self.lock_file),
+                "--nix-binary",
+                str(self.bin / "nix"),
+                "--pgrep-binary",
+                str(self.bin / "pgrep"),
+                "--run-quiet-binary",
+                str(self.bin / "run-quiet"),
+            ],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
     def wait_until_current(self, run_dir: Path, target: str, timeout: float = 30.0) -> None:
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:
@@ -462,6 +490,11 @@ class QueueTest(unittest.TestCase):
         refused = self.pack(destination)
         self.assertEqual(refused.returncode, 2)
         self.assertIn("refusing to overwrite", refused.stderr)
+
+    def test_update_lock_uses_the_guarded_quiet_envelope(self) -> None:
+        result = self.update_lock("finitegeom")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual((self.state / "updated-package").read_text(), "finitegeom\n")
 
     # gate 2: fail-fast with a diagnostic tail -------------------------------
 
