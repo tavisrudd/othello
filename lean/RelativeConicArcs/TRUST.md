@@ -202,8 +202,20 @@ The generated sources, package-private checker and reduction, source generator,
 independent replay, and frozen report live only in the separately versioned
 `finitegeom-q16-certificates` library.  The exact repository revision and
 content-addressed manifest are pinned in
-`lean/trust/certificate-packages.toml`; the manifest seals all 1330 Lean
+`lean/trust/certificate-packages.toml`; the manifest seals all 1331 Lean
 modules and the replay evidence.
+
+That registry also pins the package's published trust fact, `TRUST_FACT.json`,
+copied byte for byte into `lean/trust/external/finitegeom-q16-certificates.json`.
+The fact is derived from the package's own import-only gate verification and
+records, for every declaration whose axiom dependencies that gate prints, the
+declaring module and the exact axiom list, together with the sealed manifest
+digest and the pinned toolchain.  It is the only route by which this repository
+states anything about the order-16 closure: the closure is deliberately never
+built here, and the local Lean exporter is never asked to elaborate it.  The
+recorded fact shows the exact order-16 terminal `RelativeConicArcs.rhoC_GF16`
+depending on `propext`, `Classical.choice` and `Quot.sound` alone, so no
+literature-derived axiom enters the result.
 
 The nine-line frozen report is a generation summary, not the transition or leaf certificate.
 The generator enumerates all projective caps extending the standard four-frame and emits four
@@ -215,6 +227,12 @@ coverage assertions.  The kernel-checked exhaustive covering lists at sizes five
 have lengths `4, 61, 454, 2633`; the certificate does not require pairwise inequivalence or
 deduplication.  The final ordinary eight-arc class count was already reported by
 Al-Seraji--Al-Ogali (2018), and the matching list length is an external consistency check.
+That comparison is anchored to the package-owned theorem
+`RelativeConicArcs.Q16Classification.rejection_profile`, declared in the package's
+`Q16Profile.lean` and recorded in the pinned trust fact as depending on `propext` and
+`Quot.sound` alone.  Lean checks the exact rejection split; the agreement of that split
+with the published class count is read off afterwards and is not a premise of anything
+Lean proves.
 
 For every eight-leaf, the generated rejection records ordinary-uncovered points.  In 2630 leaves,
 six quadratic evaluation rows have an explicitly checked inverse.  In the remaining three leaves,
@@ -344,10 +362,14 @@ There is no `sorryAx`, custom axiom, `admit`, or `native_decide` dependency.
 
 The only deep asymptotic estimate intentionally not reproved is the Kim--Vu complete-arc bound.
 It is represented by the named hypothesis `KimVuBound`, appears in theorem signatures rather than
-as a global axiom, and is not used by the five finite-example results. The q=11 projectively-GRS
+as a global axiom, and is not used by the five finite-example results. Its single consuming
+theorem is `RelativeConicArcs.Averaging.rhoC_le_of_kimVuBound`, which takes that hypothesis and
+derives the density bound; nothing downstream of it discharges the hypothesis. The q=11 projectively-GRS
 interpretation separately uses the cited classical normal-rational-curve/GRS dictionary; Lean
 checks the complete algebraic implication after that dictionary. The cited ordinary q=16 class
-count is only an external consistency check and is not a proof input.
+count is only an external consistency check and is not a proof input; its formal anchor is the
+package-owned rejection-profile theorem described under the exact q=16 classification provenance
+above.
 
 The paper's six-point matching-design realization calculation and cited seven-point
 nonrealizability result are not represented as a field-linear realization classification in Lean.

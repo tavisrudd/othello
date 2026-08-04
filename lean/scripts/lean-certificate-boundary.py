@@ -93,7 +93,24 @@ def official_library_violations(config: Path, libraries_root: Path) -> list[str]
             path = root / source["path"]
             if not path.is_file() or sha256(path) != source["sha256"]:
                 problems.append(f"{path}: missing or differs from the sealed source")
+        problems.extend(trust_fact_violations(package, root, config.parent))
     return sorted(set(problems))
+
+
+def trust_fact_violations(package: dict, root: Path, trust_dir: Path) -> list[str]:
+    """The monorepo's pinned fact must be the byte-identical artifact the package published."""
+    relative = package.get("trust_fact")
+    if relative is None:
+        return [f"{package['name']}: pins no trust fact"]
+    published = root / "TRUST_FACT.json"
+    pinned = trust_dir / relative
+    if not published.is_file():
+        return [f"{published}: the package publishes no trust fact"]
+    if not pinned.is_file():
+        return [f"{pinned}: the pinned copy is missing"]
+    if published.read_bytes() != pinned.read_bytes():
+        return [f"{pinned}: differs from the package's published trust fact"]
+    return []
 
 
 def main() -> int:

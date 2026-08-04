@@ -38,6 +38,7 @@ from typing import Any, Iterable
 LEAN_ROOT_DEFAULT = Path(__file__).resolve().parents[1]
 TRUST_DIR_NAME = "trust"
 PORTFOLIO_FILE = "portfolio.toml"
+PACKAGES_FILE = "certificate-packages.toml"
 
 REGISTRY_SCHEMA_VERSION = 1
 FACTS_SCHEMA_VERSION = 1
@@ -154,6 +155,10 @@ class ExternalInput:
     entry_mode: str
     entry_declarations: tuple[str, ...]
     anchor: str
+    # When set, the entry declarations live in an external certificate package rather than in this
+    # repository, and are resolved against that package's pinned fact.  The monorepo deliberately
+    # never builds such a closure, so its declarations can be established only by the pin.
+    entry_package: str = ""
 
 
 @dataclass(frozen=True)
@@ -411,6 +416,7 @@ def _load_external_input(entry: dict[str, Any], where: str) -> ExternalInput:
             entry.get("entry_declarations", []), f"{where} entry_declarations"
         ),
         anchor=entry.get("anchor", ""),
+        entry_package=entry.get("entry_package", ""),
     )
 
 
@@ -711,6 +717,90 @@ class UnitFacts:
     exporter_sha256: str
 
 
+@dataclass(frozen=True)
+class PackageFacts:
+    """What an external certificate package's own gate verification established."""
+
+    name: str
+    gate: str
+    terminal: str
+    source_commit: str
+    declarations: dict[str, dict[str, Any]]
+
+
+def load_package_facts(trust_dir: Path) -> tuple[dict[str, PackageFacts], list[Finding]]:
+    """Read every pinned external certificate fact named by the package registry.
+
+    A pin that does not resolve, does not match its recorded hash, or disagrees with the registry
+    is reported rather than silently dropped: an unresolvable pin must not read as an area with no
+    external anchors.
+    """
+    config = trust_dir / PACKAGES_FILE
+    if not config.is_file():
+        return {}, []
+    with config.open("rb") as handle:
+        document = tomllib.load(handle)
+    packages: dict[str, PackageFacts] = {}
+    findings: list[Finding] = []
+    for entry in document.get("package", []):
+        name = _require(entry, "name", PACKAGES_FILE)
+        relative = entry.get("trust_fact")
+        if relative is None:
+            findings.append(
+                Finding(
+                    "external-package-fact-missing",
+                    name,
+                    f"{PACKAGES_FILE} pins no trust fact for this package",
+                )
+            )
+            continue
+        path = trust_dir / relative
+        if not path.is_file():
+            findings.append(
+                Finding("external-package-fact-missing", name, f"pinned fact {relative} is absent")
+            )
+            continue
+        payload = path.read_bytes()
+        if hashlib.sha256(payload).hexdigest() != entry.get("trust_fact_sha256"):
+            findings.append(
+                Finding(
+                    "external-package-fact-stale",
+                    name,
+                    f"{relative} does not match the hash pinned in {PACKAGES_FILE}",
+                )
+            )
+            continue
+        doc = json.loads(payload.decode("utf-8"))
+        if doc.get("schema_version") != FACTS_SCHEMA_VERSION:
+            raise Refused(
+                f"{relative}: external fact schema_version {doc.get('schema_version')} != "
+                f"{FACTS_SCHEMA_VERSION}"
+            )
+        mismatched = [
+            key
+            for key in ("gate", "terminal", "manifest_sha256")
+            if doc.get(key) != entry.get(key)
+        ]
+        if doc.get("package") != name or mismatched:
+            findings.append(
+                Finding(
+                    "external-package-fact-stale",
+                    name,
+                    f"{relative} disagrees with {PACKAGES_FILE} on "
+                    f"{', '.join(['package'] * (doc.get('package') != name) + mismatched)}",
+                )
+            )
+            continue
+        packages[name] = PackageFacts(
+            name=name,
+            gate=doc.get("gate", ""),
+            terminal=doc.get("terminal", ""),
+            source_commit=doc.get("source_commit", ""),
+            declarations=dict(doc.get("declarations", {})),
+        )
+    return packages, findings
+
+
 def load_facts(facts_dir: Path) -> dict[str, UnitFacts]:
     """Read every tracked facts artifact.
 
@@ -755,8 +845,10 @@ def check_all(
     inventory: SourceInventory,
     classes: dict[str, Classification],
     facts: dict[str, UnitFacts],
+    packages: dict[str, PackageFacts] | None = None,
+    package_findings: list[Finding] | None = None,
 ) -> list[Finding]:
-    findings: list[Finding] = []
+    findings: list[Finding] = list(package_findings or [])
     findings += check_libraries(registry, inventory)
     findings += check_classification(classes)
     findings += check_data_trees(lean_root, registry, inventory, classes)
@@ -764,7 +856,7 @@ def check_all(
     findings += check_unit_reachability(registry, inventory, classes)
     findings += check_terminals(registry, facts)
     findings += check_project_axioms(registry, inventory, classes, facts)
-    findings += check_external_inputs(registry, facts)
+    findings += check_external_inputs(registry, facts, packages or {})
     findings += check_generated_docs(lean_root, registry)
     return sorted(findings, key=lambda f: f.sort_key)
 
@@ -1100,7 +1192,11 @@ def check_project_axioms(
     return findings
 
 
-def check_external_inputs(registry: Registry, facts: dict[str, UnitFacts]) -> list[Finding]:
+def check_external_inputs(
+    registry: Registry,
+    facts: dict[str, UnitFacts],
+    packages: dict[str, PackageFacts],
+) -> list[Finding]:
     findings = []
     known: set[str] = set()
     for unit_facts in facts.values():
@@ -1115,10 +1211,19 @@ def check_external_inputs(registry: Registry, facts: dict[str, UnitFacts]) -> li
                         f"area {area.name} names this input but points at no declaration",
                     )
                 )
+            if entry.entry_package:
+                findings += _check_package_anchored_input(entry, packages)
+                continue
             if not facts:
                 continue
+            # An area whose extraction has not run cannot distinguish a wrong anchor from an
+            # unextracted one.  Saying "missing" there would be a claim the evidence does not
+            # support; the absent extraction is already reported against the unit itself.
+            extracted = all(unit.module in facts for unit in area.extraction_units)
             for decl in entry.entry_declarations:
-                if decl not in known:
+                if decl in known:
+                    continue
+                if extracted:
                     findings.append(
                         Finding(
                             "external-input-entry-missing",
@@ -1126,6 +1231,60 @@ def check_external_inputs(registry: Registry, facts: dict[str, UnitFacts]) -> li
                             f"declared entry point {decl} appears in no extraction unit",
                         )
                     )
+                else:
+                    findings.append(
+                        Finding(
+                            "external-input-entry-unverified",
+                            entry.name,
+                            f"declared entry point {decl} cannot be confirmed while area "
+                            f"{area.name} has unextracted units",
+                            severity="warn",
+                        )
+                    )
+    return findings
+
+
+def _check_package_anchored_input(
+    entry: ExternalInput, packages: dict[str, PackageFacts]
+) -> list[Finding]:
+    """Resolve an entry declaration owned by an external certificate package.
+
+    The package's closure is never built here, so the pinned fact is the only admissible evidence
+    that the declaration exists and what it depends on.  An anchor that resolves to the package's
+    own dependency is rejected: such a declaration belongs to a library this repository does audit,
+    and routing it through a certificate pin would hide it from that audit.
+    """
+    package = packages.get(entry.entry_package)
+    if package is None:
+        return [
+            Finding(
+                "external-input-package-unpinned",
+                entry.name,
+                f"anchored in certificate package {entry.entry_package}, which the package "
+                "registry does not pin",
+            )
+        ]
+    findings = []
+    for decl in entry.entry_declarations:
+        record = package.declarations.get(decl)
+        if record is None:
+            findings.append(
+                Finding(
+                    "external-input-entry-missing",
+                    entry.name,
+                    f"declared entry point {decl} is absent from the pinned facts of "
+                    f"{package.name} at {package.source_commit}",
+                )
+            )
+        elif record.get("origin") != "package":
+            findings.append(
+                Finding(
+                    "external-input-entry-not-owned",
+                    entry.name,
+                    f"declared entry point {decl} is not owned by {package.name}; it comes from "
+                    f"{record.get('module')} in that package's dependency",
+                )
+            )
     return findings
 
 
@@ -1617,6 +1776,8 @@ class Context:
     inventory: SourceInventory
     classes: dict[str, Classification]
     facts: dict[str, UnitFacts]
+    packages: dict[str, PackageFacts]
+    package_findings: list[Finding]
 
 
 def build_context(lean_root: Path) -> Context:
@@ -1625,7 +1786,10 @@ def build_context(lean_root: Path) -> Context:
     inventory = scan_sources(lean_root, registry)
     classes = classify(inventory, registry)
     facts = load_facts(trust_dir / "facts")
-    return Context(lean_root, trust_dir, registry, inventory, classes, facts)
+    packages, package_findings = load_package_facts(trust_dir)
+    return Context(
+        lean_root, trust_dir, registry, inventory, classes, facts, packages, package_findings
+    )
 
 
 def report(findings: Iterable[Finding], as_json: bool) -> int:
@@ -1646,7 +1810,15 @@ def report(findings: Iterable[Finding], as_json: bool) -> int:
 
 def cmd_audit(args: argparse.Namespace) -> int:
     ctx = build_context(args.lean_root)
-    findings = check_all(ctx.lean_root, ctx.registry, ctx.inventory, ctx.classes, ctx.facts)
+    findings = check_all(
+        ctx.lean_root,
+        ctx.registry,
+        ctx.inventory,
+        ctx.classes,
+        ctx.facts,
+        ctx.packages,
+        ctx.package_findings,
+    )
     if args.area:
         findings = [f for f in findings if args.area in f.subject or args.area in f.detail]
     return report(findings, args.json)
@@ -1720,7 +1892,15 @@ def cmd_generate(args: argparse.Namespace) -> int:
 def cmd_check(args: argparse.Namespace) -> int:
     """Read-only: regenerate everything in memory and compare canonical bytes with the tree."""
     ctx = build_context(args.lean_root)
-    findings = check_all(ctx.lean_root, ctx.registry, ctx.inventory, ctx.classes, ctx.facts)
+    findings = check_all(
+        ctx.lean_root,
+        ctx.registry,
+        ctx.inventory,
+        ctx.classes,
+        ctx.facts,
+        ctx.packages,
+        ctx.package_findings,
+    )
 
     rendered = _render_all_regions(ctx)
     for path, regions in sorted(rendered.items()):

@@ -14,6 +14,7 @@ and asserts the specific code that fires.
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 import subprocess
@@ -199,6 +200,66 @@ class Fixture:
         }
         facts.update(overrides)
         self.track("trust/facts/Alpha.Gate.json", json.dumps(facts, indent=2, sort_keys=True) + "\n")
+
+    def write_package(self, *, pin_hash: bool = True, **overrides) -> None:
+        """Pin one external certificate package and its published fact."""
+        fact = {
+            "schema_version": 1,
+            "package": "alpha-certificates",
+            "repository": "https://example.invalid/alpha-certificates",
+            "gate": "Alpha.Gates.CertificateTrust",
+            "terminal": "Alpha.Certificates.exact_value",
+            "source_commit": "0" * 40,
+            "manifest_sha256": "1" * 64,
+            "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+            "dependency": {"repository": "https://example.invalid/base", "commit": "2" * 40},
+            "declarations": {
+                "Alpha.Certificates.exact_value": {
+                    "axioms": ["Classical.choice", "propext"],
+                    "module": "Alpha.Certificates.Result",
+                    "origin": "package",
+                },
+                "Alpha.Certificates.rejection_profile": {
+                    "axioms": ["propext"],
+                    "module": "Alpha.Certificates.Profile",
+                    "origin": "package",
+                },
+                "Base.shared_bound": {
+                    "axioms": ["propext"],
+                    "module": "Base/Shared.lean",
+                    "origin": "dependency",
+                },
+            },
+            "evidence": {
+                "axiom_log": "evidence/gate-axioms.log",
+                "axiom_log_sha256": "3" * 64,
+                "replay": "lake build --no-build Alpha.Gates.CertificateTrust",
+            },
+        }
+        fact.update(overrides)
+        payload = json.dumps(fact, indent=2, sort_keys=True) + "\n"
+        self.track("trust/external/alpha-certificates.json", payload)
+        digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+        self.track(
+            "trust/certificate-packages.toml",
+            f'''schema_version = 1
+
+[[package]]
+name = "alpha-certificates"
+repository = "https://example.invalid/alpha-certificates"
+commit = "{"4" * 40}"
+manifest_sha256 = "{"1" * 64}"
+gate = "Alpha.Gates.CertificateTrust"
+terminal = "Alpha.Certificates.exact_value"
+trust_fact = "external/alpha-certificates.json"
+trust_fact_sha256 = "{digest if pin_hash else "5" * 64}"
+owned_module_prefixes = ["Alpha.Certificates"]
+forbidden_artifact_basenames = []
+''',
+        )
+
+    def write_external_input(self, body: str) -> None:
+        self.track("trust/areas/alpha.toml", SPINE + body)
 
 
 class TrustSpineTest(unittest.TestCase):
@@ -602,6 +663,96 @@ class TrustSpineTest(unittest.TestCase):
         self.assertFalse(ts._matches("A.BC", "A.B.**"))
         self.assertTrue(ts._matches("A.BC", "A.B**"))
         self.assertTrue(ts._matches("A.B", "A.B**"))
+
+    # -- external inputs anchored in a certificate package ------------------------------------
+
+    EXTERNAL_PACKAGE_INPUT = """
+[[external_input]]
+name = "class count"
+entry_mode = "consistency-check"
+entry_declarations = ["Alpha.Certificates.rejection_profile"]
+entry_package = "alpha-certificates"
+anchor = "Alpha/TRUST.md#boundary"
+"""
+
+    def test_package_anchored_input_resolves_against_the_pinned_fact(self):
+        self.fx.write_facts()
+        self.fx.write_package()
+        self.fx.write_external_input(self.EXTERNAL_PACKAGE_INPUT)
+        codes = self.fx.audit_codes()
+        self.assertNotIn("external-input-unanchored", codes)
+        self.assertNotIn("external-input-entry-missing", codes)
+        self.assertNotIn("external-package-fact-stale", codes)
+
+    def test_declaration_absent_from_the_pinned_fact_is_reported(self):
+        self.fx.write_facts()
+        self.fx.write_package()
+        self.fx.write_external_input(
+            self.EXTERNAL_PACKAGE_INPUT.replace(
+                "Alpha.Certificates.rejection_profile", "Alpha.Certificates.invented"
+            )
+        )
+        self.assertIn("external-input-entry-missing", self.fx.audit_codes())
+
+    def test_anchor_reaching_into_the_package_dependency_is_rejected(self):
+        self.fx.write_facts()
+        self.fx.write_package()
+        self.fx.write_external_input(
+            self.EXTERNAL_PACKAGE_INPUT.replace(
+                "Alpha.Certificates.rejection_profile", "Base.shared_bound"
+            )
+        )
+        self.assertIn("external-input-entry-not-owned", self.fx.audit_codes())
+
+    def test_anchor_in_an_unpinned_package_is_reported(self):
+        self.fx.write_facts()
+        self.fx.write_external_input(self.EXTERNAL_PACKAGE_INPUT)
+        self.assertIn("external-input-package-unpinned", self.fx.audit_codes())
+
+    def test_edited_pinned_fact_does_not_pass_as_evidence(self):
+        self.fx.write_facts()
+        self.fx.write_package(pin_hash=False)
+        self.fx.write_external_input(self.EXTERNAL_PACKAGE_INPUT)
+        codes = self.fx.audit_codes()
+        self.assertIn("external-package-fact-stale", codes)
+        self.assertIn("external-input-package-unpinned", codes)
+
+    def test_fact_disagreeing_with_its_pin_is_stale(self):
+        self.fx.write_facts()
+        self.fx.write_package(gate="Alpha.Gates.SomethingElse")
+        self.fx.write_external_input(self.EXTERNAL_PACKAGE_INPUT)
+        self.assertIn("external-package-fact-stale", self.fx.audit_codes())
+
+    def test_local_anchor_is_unverified_rather_than_missing_without_extraction(self):
+        self.fx.write_external_input(
+            """
+[[external_input]]
+name = "local bound"
+entry_mode = "hypothesis"
+entry_declarations = ["Alpha.Averaging.bound_consumer"]
+anchor = "Alpha/TRUST.md#boundary"
+"""
+        )
+        self.fx.write_facts(unit="Alpha.Other")
+        self.assertIn("facts-missing", self.fx.audit_codes())
+        codes = self.fx.audit_codes()
+        self.assertIn("external-input-entry-unverified", codes)
+        self.assertNotIn("external-input-entry-missing", codes)
+
+    def test_local_anchor_absent_from_a_complete_extraction_is_missing(self):
+        self.fx.write_external_input(
+            """
+[[external_input]]
+name = "local bound"
+entry_mode = "hypothesis"
+entry_declarations = ["Alpha.Averaging.bound_consumer"]
+anchor = "Alpha/TRUST.md#boundary"
+"""
+        )
+        self.fx.write_facts()
+        codes = self.fx.audit_codes()
+        self.assertNotIn("facts-missing", codes)
+        self.assertIn("external-input-entry-missing", codes)
 
     def test_import_parser_ignores_the_word_import_in_a_body(self):
         imports, _ = ts._parse_header(

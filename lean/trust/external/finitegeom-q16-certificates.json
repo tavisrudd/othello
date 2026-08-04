@@ -1,0 +1,191 @@
+{
+  "declarations": {
+    "RelativeConicArcs.Conic.completeOutside_bound_general": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Conic.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Q16Classification.arbitrary_eight_arc_classification_chain": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16QuadraticTransport",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.arbitrary_eight_arc_projectiveQuadraticAvoidance": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16QuadraticTransport",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.eval_pullbackQuadratic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16QuadraticTransport",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptionalFormOne_factorization": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptionalFormThree_factorization": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptionalFormTwo_arc_hits": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptionalFormTwo_conic_equation": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptionalKernelOne": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptionalKernelThree": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptionalKernelTwo": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptional_arcs_mem_level8": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptional_leaf_records": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.exceptional_records_mem_rejectedLeaves": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.level8_quadraticAvoidance": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16QuadraticAvoidance",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.pullbackQuadratic_ne_zero": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16QuadraticTransport",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Q16Classification.rejection_profile": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16Profile",
+      "origin": "package"
+    },
+    "RelativeConicArcs.no_completeOutside_GF16_card_eight": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16Result",
+      "origin": "package"
+    },
+    "RelativeConicArcs.rhoC_GF16": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q16Result",
+      "origin": "package"
+    }
+  },
+  "dependency": {
+    "commit": "a7665be682907cab5c99b10e3a39a9fc289e2cb3",
+    "repository": "https://github.com/tavisrudd/finitegeom"
+  },
+  "evidence": {
+    "axiom_log": "evidence/gate-axioms.log",
+    "axiom_log_sha256": "5fe9ebc40f6f684cb7c220f7120965e62fd561da550b65d34fc7fad7b299dbb7",
+    "replay": "lake build --no-build RelativeConicArcs.Gates.Q16CertificateTrust"
+  },
+  "gate": "RelativeConicArcs.Gates.Q16CertificateTrust",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "manifest_sha256": "100e1fea3c458f37737d779dadab62954459b3f2d45d982bdda464bb64f8d5d3",
+  "package": "finitegeom-q16-certificates",
+  "repository": "https://github.com/tavisrudd/finitegeom-q16-certificates",
+  "schema_version": 1,
+  "source_commit": "d780520bc995df9db2575b52261786a1142649b0",
+  "terminal": "RelativeConicArcs.rhoC_GF16"
+}

@@ -1662,7 +1662,7 @@ reason = "library root aggregator; gates import the specific terminals they need
 [[external_input]]
 name = "Kim-Vu complete-arc bound"
 entry_mode = "hypothesis"
-entry_declarations = []
+entry_declarations = ["RelativeConicArcs.Averaging.rhoC_le_of_kimVuBound"]
 anchor = "RelativeConicArcs/TRUST.md#explicit-external-boundary"
 
 [[external_input]]
@@ -1674,7 +1674,8 @@ anchor = "RelativeConicArcs/TRUST.md#explicit-external-boundary"
 [[external_input]]
 name = "Al-Seraji--Al-Ogali class count"
 entry_mode = "consistency-check"
-entry_declarations = []
+entry_declarations = ["RelativeConicArcs.Q16Classification.rejection_profile"]
+entry_package = "finitegeom-q16-certificates"
 anchor = "RelativeConicArcs/TRUST.md#exact-q16-classification-provenance"
 
 [[data_tree]]
