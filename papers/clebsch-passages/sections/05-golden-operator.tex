@@ -75,10 +75,11 @@ coloured-triangle Joubert frame of
 unstated scalar or sign convention: its six coordinates are exactly the
 forms \(J_T\) in (5.1).
 
-\subsection{Why order six is exceptional}
+\subsection{Exchange spectra of symmetric conference matrices}
 
-The next theorem explains why this six-axis carrier has no cut-independent
-higher-order analogue.  Let \(C=C^{\mathsf T}\) be any symmetric conference
+The next theorem is a general spectral formula for every symmetric conference
+order; order six is its answer, not its hypothesis.  It explains why this
+six-axis carrier has no cut-independent higher-order analogue.  Let \(C=C^{\mathsf T}\) be any symmetric conference
 matrix of order \(2d\), that is, a zero-diagonal matrix with off-diagonal
 entries in \(\{\pm1\}\) and \(C^2=qI\), where \(q=2d-1\).  Its zero trace
 gives two eigenspaces of dimension \(d\).  For a balanced half
@@ -232,7 +233,8 @@ four-set \(Q\) is known, the
 \[
  1+4(n-4)+6\binom{n-4}{2}=3n^2-23n+45
 \]
-tests on four-sets meeting \(Q\) in at least two points already suffice.
+tests on four-sets meeting \(Q\) in at least two points suffice, and the
+decoder in the proof uses exactly this many.
 An aligned anchor is found deterministically with at most twenty tests, so
 the complete marked reconstruction uses \(O(n^2)\) selected determinants.
 One calibrated triangle product selects between the two global orientations.
@@ -344,6 +346,22 @@ remaining complement sends \(C\) to \(-C\), and one triangle product fixes
 that orientation.
 \end{proof}
 
+\smallskip
+\noindent\emph{The same statement in principal minors.}\par
+For a Seidel matrix the theorem is a statement about principal minors, and it
+is worth recording which ones it uses.  The odd principal minors trivialize the
+problem: the \(1\times1\) minors vanish, the \(2\times2\) minors are all
+\(-1\), and a \(3\times3\) principal minor is twice the triangle sign, so the
+full list of third-order principal minors hands over every triangle product and
+reconstruction up to switching is immediate.  The theorem consults none of
+them.  Its data are the fourth-order principal minors, through
+\(\det C[Q]=3-2w(Q)\) below, and these are invariant under global negation, so
+they cannot distinguish \(C\) from \(-C\) and see each four-set only through
+the single bit \(\det C[Q]\in\{-3,5\}\).  The content is that this
+negation-invariant even-order data still determines the matrix up to exactly
+that ambiguity, that seven vertices are enough and six are not, and that a
+quadratic family of these determinants suffices.
+
 This theorem belongs to the reconstruction-up-to-complementation literature.
 On four vertices a two-graph has zero, two, or four triples, so equality of
 aligned families is precisely four-hypomorphy up to complementation within the
@@ -453,6 +471,27 @@ upper boxes; arrows denote subsequent constructions.  The transported
 determinant-line orientation selects the sign in the cross-golden formula.}
 \label{fig:four-cubic-shadows}
 \end{figure}
+
+\smallskip
+\noindent\emph{What the four descriptions do and do not assert.}\par
+The four formulas below are not four coincidences of equal standing, and it is
+worth separating them before proving them.  For \emph{every} symmetric matrix
+\(A\), expanding \(\operatorname{Pf}[D_x,A]\) over perfect matchings makes the
+coefficient of \(x_S\) the signed complementary minor \(\det A[S^c,S]\), which
+the Hodge convention fixed above identifies with
+\((*\!\bigwedge^3A)_{SS}\).  So the middle-exterior diagonal and the commutator
+Pfaffian are one identity written twice, and their agreement records the
+orientation convention rather than any property of \(C\).  The cross-golden
+determinant presupposes the splitting into golden eigenspaces, so once
+\(C^2=5I\) is known it is a reformulation; its content is that
+\(B_T(x)\) is defined without choosing bases, so its determinant is a map of
+determinant lines.  The remaining agreement is not formal.  The complementary
+minor \(\det A[S^c,S]\) is a polynomial in the entries joining \(S\) to its
+complement, whereas the triangle product
+\(a_{ij}a_{jk}a_{ki}\) uses only entries inside \(S\); for a general symmetric
+zero-diagonal matrix the two are unrelated.  That they are proportional here is
+a property of the conference class, and it is the one identification among the
+four that could fail.
 
 \begin{theorem}[Golden operator and classical cubic shadows]
 \label{thm:operator-shadows}
