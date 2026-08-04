@@ -78,6 +78,44 @@ private theorem line_eq_of_two_points {l m : L} {x y : P} (hxy : x ≠ y)
   obtain ⟨n, _hn, huniq⟩ := Configuration.HasLines.existsUnique_line (P := P) (L := L) x y hxy
   rw [huniq l ⟨hxl, hyl⟩, huniq m ⟨hxm, hym⟩]
 
+/-- Through a triple-concurrence point on a secant, every arc point off that secant is joined to a
+second arc point off that secant. -/
+theorem exists_partner_off_secant {A : Finset P} (hA : Arc (L := L) A) (hcard : A.card = 6)
+    {e : ArcPair A} {x : P} (hx : x ∈ triplePoints (L := L) A) (hxe : x ∈ e.line (L := L))
+    {a : P} (ha : a ∈ A \ e.1) :
+    ∃ b ∈ A \ e.1, b ≠ a ∧ RelativeConicArcs.Collinear (L := L) a b x := by
+  classical
+  obtain ⟨hxA, _hidx⟩ := mem_triplePoints.mp hx
+  obtain ⟨f, haf, hxf⟩ := exists_pair_through (L := L) hA hcard hx (Finset.mem_sdiff.mp ha).1
+  obtain ⟨p, q, hpq, hfpq⟩ := f.exists_eq_pair
+  set r : P := if a = p then q else p with hr
+  have hrf : r ∈ f.1 := by
+    rw [hfpq]
+    by_cases h : a = p
+    · rw [hr, if_pos h]; simp
+    · rw [hr, if_neg h]; simp
+  have hra : r ≠ a := by
+    by_cases h : a = p
+    · have hrq : r = q := by rw [hr, if_pos h]
+      rw [hrq, h]
+      exact fun hqp => hpq hqp.symm
+    · have hrp : r = p := by rw [hr, if_neg h]
+      rw [hrp]
+      exact fun hpa => h hpa.symm
+  have hrA : r ∈ A := f.subset hrf
+  have hdisj : ((pairsThrough (L := L) A x : Finset (ArcPair A)) : Set (ArcPair A)).PairwiseDisjoint
+      fun h => h.1 := pairsThrough_pairwiseDisjoint (L := L) hA hxA
+  have hfmem : f ∈ pairsThrough (L := L) A x := mem_pairsThrough.mpr hxf
+  have hemem : e ∈ pairsThrough (L := L) A x := mem_pairsThrough.mpr hxe
+  have hfe : f ≠ e := by
+    intro hfeeq
+    have : a ∈ e.1 := by rw [← hfeeq]; exact haf
+    exact (Finset.mem_sdiff.mp ha).2 this
+  have hre : r ∉ e.1 := fun hre =>
+    (Finset.disjoint_left.mp (hdisj hfmem hemem hfe) hrf) hre
+  exact ⟨r, Finset.mem_sdiff.mpr ⟨hrA, hre⟩, hra,
+    ⟨f.line (L := L), f.mem_line haf, f.mem_line hrf, hxf⟩⟩
+
 /-- Through a triple-concurrence point on a fixed secant, a fourth arc point off that secant is
 joined to the one remaining arc point.  Here `a` and `b` are the endpoints of one chord through
 `x`, and `c`, `d` are the two remaining arc points off the fixed secant. -/
@@ -93,11 +131,6 @@ theorem collinear_complement {A : Finset P} (hA : Arc (L := L) A) (hcard : A.car
   -- the chord of `x` through `c`
   obtain ⟨f, hcf, hxf⟩ := exists_pair_through (L := L) hA hcard hx (Finset.mem_sdiff.mp hc).1
   obtain ⟨p, q, hpq, hfpq⟩ := f.exists_eq_pair
-  -- name the second endpoint of that chord
-  have hcmem : c = p ∨ c = q := by
-    have := hcf
-    rw [hfpq] at this
-    simpa using this
   set r : P := if c = p then q else p with hr
   have hrf : r ∈ f.1 := by
     rw [hfpq]
