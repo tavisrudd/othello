@@ -2,6 +2,7 @@
 
 **Lane:** `clebsch`
 **Date:** 2026-08-03 (running ledger)
+**Task:** C815
 
 Formalization repeatedly proves more than the manuscript states: a hypothesis
 turns out to be unused, a statement holds over a larger ring or quantifier

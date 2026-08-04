@@ -2,6 +2,7 @@
 
 **Lane:** `clebsch`
 **Date:** 2026-08-03
+**Task:** C815
 
 Sentence-level inventory of every mathematical assertion in
 `papers/clebsch-passages/`. Grouped by section in document order. Line numbers
