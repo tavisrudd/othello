@@ -1,0 +1,78 @@
+% fig-d4-four-shadows.tex --- D4, the four cubic shadows billed by type.
+%
+% Defines \ClebschFourShadows.
+%
+% A redesign of fig:four-cubic-shadows in
+% papers/clebsch-passages/sections/05-golden-operator.tex.  It follows the
+% paragraph "What the four descriptions do and do not assert" that precedes
+% thm:operator-shadows, which separates the four agreements into three
+% registers:
+%   * middle-exterior diagonal and commutator Pfaffian are ONE identity,
+%     holding for every symmetric matrix;
+%   * the cross-golden determinant is a reformulation once C^2 = 5I;
+%   * the triangle holonomy joining them is NOT formal --- it fails for a
+%     general symmetric zero-diagonal matrix, and its holding characterizes
+%     the conference class.  That link carries the emphasis.
+%
+% The classical targets of the original figure (the six outer Joubert
+% coordinates, the Segre cubic, the Segre--Igusa polar map, and the diagonal
+% Clebsch cubic) are deliberately not repeated here; this figure is about
+% the billing of the four agreements.
+
+\providecommand{\ClebschFourShadows}{%
+\begin{tikzpicture}[
+  note/.style={font=\scriptsize,align=left,anchor=north,inner sep=0pt},
+  every node/.style={outer sep=0pt},
+]
+
+\node[csfcentre,text width=34mm] (z) at (0,0.3)
+  {the marked cubic\\[1pt] \(Z_T=J_T\)};
+
+\node[csfnode,line width=1pt,fill=black!8,text width=34mm] (tri) at (-5.7,0.3)
+  {triangle holonomy\\[1pt] \(\sum_S\epsilon_T(S)\,x_S\)};
+
+\node[csfnode,text width=34mm] (wedge) at (5.2,1.65)
+  {middle exterior power\\[1pt] \(\tfrac14\sum_S(K_T)_{SS}\,x_S\)};
+\node[csfnode,text width=34mm] (pf) at (5.2,-0.85)
+  {commutator Pfaffian\\[1pt] \(\tfrac14\operatorname{Pf}[D_x,C_T]\)};
+
+\node[csfnode,text width=44mm] (det) at (0,-2.75)
+  {oriented cross-golden determinant\\[1pt]
+   \(\pm10\sqrt5\,\det B_T(x)\)};
+
+% Register 1: the one identification that carries content.
+\draw[csfstrong] (tri) -- node[font=\scriptsize,above=3pt] {\textbf{not formal}} (z);
+
+% Register 2: one universal identity written twice.
+\draw[csfbiarr] (wedge) -- node[csflab,right=1pt,text width=17mm]
+  {\textbf{universal}} (pf);
+\draw[thin] (wedge.west) -- ($(z.north east)+(0,-0.12)$);
+\draw[thin] (pf.west) -- ($(z.south east)+(0,0.12)$);
+
+% Register 3: a reformulation, not a further identity.
+\draw[csfweak] (z) -- node[csflab,right=1pt] {\textbf{reformulation}} (det);
+
+\node[note,text width=40mm] (ntri) at (-5.7,-1.05)
+  {For a general symmetric zero-diagonal matrix the complementary minor
+   \(\det A[S^{c},S]\) and the triangle product \(a_{ij}a_{jk}a_{ki}\) are
+   unrelated: one uses the entries joining \(S\) to its complement, the
+   other only the entries inside \(S\).  That they are proportional here is
+   a property of the conference class, and it is the one identification
+   among the four that could fail.};
+
+\node[note,text width=40mm] (nuniv) at (5.2,-2.05)
+  {Expanding \(\operatorname{Pf}[D_x,A]\) over perfect matchings makes the
+   coefficient of \(x_S\) the signed complementary minor
+   \(\det A[S^{c},S]=(*\!\bigwedge^{3}A)_{SS}\), for \emph{every} symmetric
+   \(A\).  The two boxes are one identity written twice, and their
+   agreement records the orientation convention rather than any property of
+   \(C_T\).};
+
+\node[note,text width=54mm] (ndet) at (0,-3.7)
+  {Once \(C_T^{2}=5I\) is known this is a reformulation of the golden
+   splitting.  Its content is that \(B_T(x)\) is defined without choosing
+   bases, so its determinant is a map of determinant lines and the
+   transported orientation fixes the sign.};
+
+\end{tikzpicture}%
+}

@@ -1,0 +1,62 @@
+% fig-d1-series-map.tex --- D1, the Clebsch series map.
+%
+% Defines \ClebschSeriesMap{<node>}, where <node> is one of
+% I, II, III, IV, V, or none.  The named node is drawn with a heavier rule
+% and a light grey tint ("you are here"); every other node is plain.
+%
+% Faithful to the ASCII master in
+% notes/2026-08-03-clebsch-program-unity-review.md.  Two conventions are
+% load-bearing and must survive any edit:
+%   * the Paper IV edge is DASHED, because no theorem carries its
+%     reconstructed plane to the oriented cubic torsor;
+%   * the Paper V node states an intent, not a result.
+
+\providecommand{\ClebschSeriesMap}[1]{%
+\csfSetHighlight{#1}%
+\begin{tikzpicture}[
+  every node/.style={outer sep=0pt},
+]
+
+\node[\csfHL{III},text width=64mm] (pIII) at (0,4.7)
+  {\textbf{Paper III} --- passages\\[1pt]
+   arithmetic source: \(z^{2}=5J_{0}\)\\
+   operator shadows: \(\operatorname{Pf}\), \(\det\),
+   \(\textstyle\bigwedge^{3}\), polar};
+
+\node[csfcentre,text width=37mm] (z) at (0,1.85)
+  {\textbf{GOLDEN TORSOR}\\[1pt]
+   \(B^{2}=5I\)\\
+   \(c_{ijk}=B_{ij}B_{jk}B_{ki}\)\\
+   one oriented cubic \(Z\)};
+
+\node[\csfHL{I},text width=37mm] (pI) at (-5.45,1.85)
+  {\textbf{Paper I}\\[1pt]
+   deep-hole syndrome and decoder data recover \(B\) and its support
+   cubic; \(q=11\) is the only field order where such an arc exists};
+
+\node[\csfHL{II},text width=37mm] (pII) at (5.45,1.85)
+  {\textbf{Paper II}\\[1pt]
+   the conic quotient of the icosahedral matching recovers the sheets
+   and the sheet-sign cubic};
+
+\node[\csfHL{IV},text width=40mm] (pIV) at (-3.1,-1.75)
+  {\textbf{Paper IV}\\[1pt]
+   reconstructs \(\PGtwo{13}\) from the minimum-word layer};
+
+\node[\csfHL{V},text width=42mm] (pV) at (3.1,-1.75)
+  {\textbf{Paper V} --- unwritten\\[1pt]
+   intends the Rosetta theorem: the support, sheet-sign, and marked
+   cubics are one torsor};
+
+\draw[csfarr] (pIII) -- node[csflab,right=1pt] {descends the sign} (z);
+
+\draw[csfbiarr] (pI) -- node[csflab,above=1pt] {recognition\\passage} (z);
+\draw[csfbiarr] (z) -- node[csflab,above=1pt] {recognition\\passage} (pII);
+
+\draw[csfopen] ($(z.south)+(-6mm,0)$) -- ($(pIV.north)+(6mm,0)$)
+  node[csflab,pos=0.52] {recognition genre\\(bridge unproved)};
+\draw[csfarr] ($(z.south)+(6mm,0)$) -- ($(pV.north)+(-6mm,0)$)
+  node[csflab,pos=0.52] {harmonic /\\quantum return};
+
+\end{tikzpicture}%
+}

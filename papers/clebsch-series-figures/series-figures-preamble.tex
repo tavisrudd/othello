@@ -1,0 +1,68 @@
+% series-figures-preamble.tex
+%
+% Shared requirements and styles for the Clebsch-series figure set.
+% A host manuscript inputs this once in its preamble, then inputs any of
+% the individual figure files in its body.
+%
+% The styles are deliberately colour-free in meaning: every distinction is
+% carried by line style, line weight, or arrowhead.  The one tint used
+% (light grey) marks the "you are here" node of the series map and remains
+% readable in black and white.
+
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,fit,backgrounds,
+  decorations.pathreplacing}
+
+\tikzset{
+  % Ordinary labelled box.
+  csfnode/.style={draw,thin,rounded corners=2pt,align=center,
+    inner sep=4pt,font=\small},
+  % Emphasised box: heavier rule plus a light tint.
+  csfhi/.style={line width=1pt,fill=black!8},
+  % The two states of a "you are here" node.  These exist as single style
+  % names because a key list does not re-split an expanded macro.
+  csfplain/.style={csfnode},
+  csfmarked/.style={csfnode,csfhi},
+  % The central object of a diagram.
+  csfcentre/.style={csfnode,line width=0.8pt},
+  % Standard directed connector.
+  csfarr/.style={-{Latex[length=2mm]},semithick},
+  % Bidirectional connector (a passage that forgets outward and recovers
+  % inward, or an identity read in both directions).
+  csfbiarr/.style={{Latex[length=2mm]}-{Latex[length=2mm]},semithick},
+  % An asserted-but-unproved bridge.
+  csfopen/.style={-{Latex[length=2mm]},semithick,dashed},
+  % A reformulation rather than a new identity.
+  csfweak/.style={thin,densely dotted},
+  % The one link in a diagram carrying real content.
+  csfstrong/.style={{Latex[length=2mm]}-{Latex[length=2mm]},line width=1pt},
+  % Edge label.
+  csflab/.style={font=\scriptsize,fill=white,inner sep=1.2pt,align=center},
+  csflabsmall/.style={font=\tiny,fill=white,inner sep=1pt,align=center},
+}
+
+% ---------------------------------------------------------------------------
+% "You are here" selection used by the series map (D1).
+%
+%   \csfSetHighlight{III}   % or I, II, IV, V, or none
+%
+% After this call \csfHL{I} expands to the TikZ style name for Paper I's
+% node: either "csfplain" or "csfmarked".  The series map macro calls
+% \csfSetHighlight itself, so a document normally never calls it directly.
+% ---------------------------------------------------------------------------
+\providecommand{\csfHL}[1]{\csname csfhl@#1\endcsname}
+\providecommand{\csfSetHighlight}[1]{%
+  \expandafter\gdef\csname csfhl@I\endcsname{csfplain}%
+  \expandafter\gdef\csname csfhl@II\endcsname{csfplain}%
+  \expandafter\gdef\csname csfhl@III\endcsname{csfplain}%
+  \expandafter\gdef\csname csfhl@IV\endcsname{csfplain}%
+  \expandafter\gdef\csname csfhl@V\endcsname{csfplain}%
+  \expandafter\gdef\csname csfhl@none\endcsname{csfplain}%
+  \expandafter\gdef\csname csfhl@#1\endcsname{csfmarked}%
+}
+\csfSetHighlight{none}
+
+\providecommand{\PGtwo}[1]{\operatorname{PG}(2,#1)}

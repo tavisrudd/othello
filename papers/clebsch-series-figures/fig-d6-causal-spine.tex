@@ -1,0 +1,41 @@
+% fig-d6-causal-spine.tex --- D6, Paper III's causal spine.
+%
+% Defines \ClebschCausalSpine.
+%
+% Left to right: the chain of the Paper III abstract, from the incidence
+% cover to the operator's shadows.  The return arrow underneath is the
+% recognition statement the manuscript actually proves
+% (thm:aligned-faithfulness): marked determinant-(-3) four-subsets recover
+% the conference signing up to switching and global negation.
+
+\providecommand{\ClebschCausalSpine}{%
+\begin{tikzpicture}[
+  spine/.style={csfnode,font=\footnotesize,text width=19mm,
+    minimum height=17mm,anchor=north},
+  every node/.style={outer sep=0pt},
+]
+
+\node[spine] (c1) at (-6.0,0)
+  {incidence cover\\[1pt] degree two over \(\mathbf P(H)\)};
+\node[spine] (c2) at (-3.6,0)
+  {residue-field pinching\\[1pt] nonsplit two-branch};
+\node[spine] (c3) at (-1.2,0)
+  {square class \([5]\)\\[1pt] \(\sqrt{5J_{0}}\)};
+\node[spine] (c4) at (1.2,0)
+  {marked bridge datum\\[1pt] fixes the sign};
+\node[spine,line width=1pt,fill=black!8] (c5) at (3.6,0)
+  {conference operator\\[1pt] \(C\), \(C^{2}=5I\)};
+\node[spine] (c6) at (6.0,0)
+  {shadows\\[1pt] \(\operatorname{Pf}[D_x,C]\), \(\det\), norm};
+
+\foreach \a/\b in {c1/c2,c2/c3,c3/c4,c4/c5,c5/c6}
+  {\draw[csfarr] (\a.east) -- (\b.west);}
+
+\draw[csfarr] (c6.south) -- (6.0,-2.35) -- (3.6,-2.35) -- (c5.south);
+\node[anchor=north,align=center,font=\scriptsize,text width=90mm]
+  at (2.4,-2.55)
+  {recognition: the marked determinant-\((-3)\) four-subsets recover the
+   signing up to switching and global negation};
+
+\end{tikzpicture}%
+}

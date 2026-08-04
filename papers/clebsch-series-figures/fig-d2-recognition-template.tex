@@ -1,0 +1,53 @@
+% fig-d2-recognition-template.tex --- D2, the recognition template.
+%
+% Defines \ClebschRecognitionTemplate.
+%
+% The shape is drawn once and the table instantiates its two slots per
+% paper.  Every pair below is taken from the named paper's abstract:
+%   I    clebsch-rigidity/clebsch_rigidity.tex
+%   II   clebsch-factorization/clebsch_factorization.tex
+%   III  clebsch-passages/clebsch_passages.tex
+%   IV   q13-passant-code/passant_code_q13.tex
+%   AME  ame_lu (stabilizer AME local-unitary rigidity)
+
+\providecommand{\ClebschRecognitionTemplate}{%
+\begin{tikzpicture}[every node/.style={outer sep=0pt}]
+
+\node[csfcentre,text width=36mm] (rich) at (-3.4,0)
+  {rich object\\[1pt] the paper's full structure};
+\node[csfnode,text width=36mm] (coarse) at (3.4,0)
+  {coarse observation\\[1pt] low-degree or local data};
+
+\draw[csfarr] (rich) to[bend left=22]
+  node[csflab,above] {forget} (coarse);
+\draw[csfarr,line width=1pt] (coarse) to[bend left=22]
+  node[csflab,below] {recover (theorem)} (rich);
+
+\node[anchor=north,inner sep=0pt] at (0,-1.9) {%
+  \small
+  \begin{tabular}{@{}l
+    >{\raggedright\arraybackslash}p{40mm}
+    >{\raggedright\arraybackslash}p{45mm}@{}}
+  \toprule
+  & \emph{rich object} & \emph{coarse observation}\\
+  \midrule
+  Paper I
+    & the Clebsch code, a six-arc in \(\PGtwo{11}\)
+    & its projective deep-hole syndrome locus\\\addlinespace[3pt]
+  Paper II
+    & the icosahedral conic matching and its two sheets
+    & a two-valued strength-two quadratic trade\\\addlinespace[3pt]
+  Paper III
+    & the order-six conference operator \(C\)
+    & four-local principal-minor data (the aligned four-sets)\\\addlinespace[3pt]
+  Paper IV
+    & the marked conic plane \(\PGtwo{13}\)
+    & the minimum-word layer of its passant code\\\addlinespace[3pt]
+  AME paper
+    & a stabilizer \(\operatorname{AME}(2m,q)\) state
+    & its product-unitary symmetries\\
+  \bottomrule
+  \end{tabular}};
+
+\end{tikzpicture}%
+}

@@ -1,0 +1,46 @@
+% fig-d5-minor-ladder.tex --- D5, the determinantal ladder for a Seidel matrix.
+%
+% Defines \ClebschMinorLadder.
+%
+% Content is the paragraph "The same statement in principal minors" in
+% papers/clebsch-passages/sections/05-golden-operator.tex, together with
+% thm:aligned-faithfulness.  The point of the picture is that the
+% reconstruction theorem deliberately consults the weakest rung.
+
+\providecommand{\ClebschMinorLadder}{%
+\begin{tikzpicture}[every node/.style={outer sep=0pt}]
+
+\node[csfnode,align=left,text width=84mm] (m1) at (0,0)
+  {\textbf{order 1.}\;\(\det C[\{i\}]=0\).  Every first-order principal
+   minor vanishes: the diagonal is zero.  No information.};
+
+\node[csfnode,align=left,text width=84mm] (m2) at (0,-1.35)
+  {\textbf{order 2.}\;\(\det C[\{i,j\}]=-1\), constantly.  No
+   information.};
+
+\node[csfnode,align=left,text width=84mm] (m3) at (0,-3.0)
+  {\textbf{order 3.}\;\(\det C[\{i,j,k\}]=2\,\epsilon(ijk)\), twice the
+   triangle sign.  The full third-order list hands over every triangle
+   product, so reconstruction up to switching is immediate: this rung
+   trivializes the problem.};
+
+\node[csfnode,align=left,line width=1pt,fill=black!8,text width=84mm] (m4) at (0,-5.35)
+  {\textbf{order 4.}\;\(\det C[Q]=3-2w(Q)\in\{-3,5\}\): one bit per
+   four-set, and invariant under \(C\mapsto-C\).  This is the data the
+   reconstruction theorem uses.  It determines \(C\) up to switching and
+   global negation, it needs at least seven vertices --- and seven is
+   sharp --- and \(O(n^{2})\) selected determinants suffice.};
+
+\draw[decorate,decoration={brace,amplitude=5pt},semithick]
+  ($(m1.north east)+(2mm,0)$) -- ($(m3.south east)+(2mm,0)$);
+\node[anchor=west,align=left,font=\scriptsize,text width=36mm]
+  at (5.0,-1.5)
+  {strictly stronger data.\\ The theorem consults none of it.};
+
+\draw[csfarr] (5.0,-4.6) -- ($(m4.east)+(2mm,0.4)$);
+\node[anchor=west,align=left,font=\scriptsize,text width=36mm]
+  at (5.0,-5.6)
+  {the weakest rung, and the one the theorem uses};
+
+\end{tikzpicture}%
+}

@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{float}
+
+\input{series-figures-preamble}
+
+\input{fig-d1-series-map}
+\input{fig-d2-recognition-template}
+\input{fig-d3-quantifier-ladder}
+\input{fig-d4-four-shadows}
+\input{fig-d5-minor-ladder}
+\input{fig-d6-causal-spine}
+
+\title{Clebsch series figure set}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\noindent
+This document previews the reusable figures of
+\texttt{papers/clebsch-series-figures}.  It is a proof sheet, not a
+manuscript: each figure is defined in its own \texttt{\string\input}-able
+file and is meant to be placed by a host paper with its own caption.  See
+\texttt{README.md} for the input recipe and for the list of edges that
+encode unproved claims.
+
+\clearpage
+\section*{D1 --- the series map}
+
+The five-paper map, with Paper III on top descending the golden sign into
+the central torsor, Papers I and II joined to it by horizontal recognition
+passages, and Papers IV and V below.  Two conventions carry meaning.  The
+Paper IV edge is \emph{dashed}: no theorem carries its reconstructed plane
+to the oriented cubic torsor, so the bridge is an open obligation rather
+than an established arrow.  The Paper V node states an \emph{intent}: that
+paper is unwritten and the Rosetta theorem is not proved.
+
+\bigskip
+\begin{figure}[H]
+\centering
+\ClebschSeriesMap{none}
+\caption{The series map with no node emphasised.}
+\end{figure}
+
+\clearpage
+\section*{D1 --- the five ``you are here'' variants}
+
+Each numbered paper's forward version carries the same map with its own
+node emphasised by a heavier rule and a light tint.
+
+\begin{figure}[H]
+\centering
+\ClebschSeriesMap{I}
+\caption{\texttt{\string\ClebschSeriesMap\{I\}} --- for Paper I.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\ClebschSeriesMap{II}
+\caption{\texttt{\string\ClebschSeriesMap\{II\}} --- for Paper II.}
+\end{figure}
+
+\clearpage
+\begin{figure}[H]
+\centering
+\ClebschSeriesMap{III}
+\caption{\texttt{\string\ClebschSeriesMap\{III\}} --- for Paper III.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\ClebschSeriesMap{IV}
+\caption{\texttt{\string\ClebschSeriesMap\{IV\}} --- for Paper IV.}
+\end{figure}
+
+\clearpage
+\begin{figure}[H]
+\centering
+\ClebschSeriesMap{V}
+\caption{\texttt{\string\ClebschSeriesMap\{V\}} --- for Paper V.}
+\end{figure}
+
+\clearpage
+\section*{D2 --- the recognition template}
+
+The programme is a template with instances, not a study of one object.
+The shape is drawn once; the table instantiates its two slots.
+
+\begin{figure}[H]
+\centering
+\ClebschRecognitionTemplate
+\caption{One shape, five instances.  The rich object is forgotten down to
+a coarse observation, and a theorem of the named paper recovers it.}
+\end{figure}
+
+\clearpage
+\section*{D3 --- the quantifier ladder}
+
+Each bar is a theorem's quantifier range.  Where the theorem's answer is a
+single exceptional object, it is marked as a distinguished point at the end
+of the general range.  The visual argument is general hypothesis,
+exceptional conclusion.
+
+\begin{figure}[H]
+\centering
+\ClebschQuantifierLadder
+\caption{Quantifier ranges of the portfolio's general theorems.}
+\end{figure}
+
+\clearpage
+\section*{D4 --- the four shadows, billed by type}
+
+A redesign of Paper III's four-shadow figure.  The four descriptions are
+not four coincidences of equal standing, and the diagram now separates
+three registers.
+
+\begin{figure}[H]
+\centering
+\ClebschFourShadows
+\caption{The four descriptions of the marked cubic, separated by what kind
+of statement each agreement is.}
+\end{figure}
+
+\clearpage
+\section*{D5 --- the determinantal ladder for a Seidel matrix}
+
+The reconstruction theorem deliberately consults the weakest rung.
+
+\begin{figure}[H]
+\centering
+\ClebschMinorLadder
+\caption{Principal minors of a Seidel matrix by order, and which rung the
+reconstruction theorem uses.}
+\end{figure}
+
+\clearpage
+\section*{D6 --- Paper III's causal spine}
+
+\begin{figure}[H]
+\centering
+\ClebschCausalSpine
+\caption{From the incidence cover to the operator's shadows, with the
+proved recognition return underneath.}
+\end{figure}
+
+\end{document}
