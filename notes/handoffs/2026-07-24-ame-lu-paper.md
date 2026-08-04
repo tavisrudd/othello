@@ -18,11 +18,16 @@ in `2026-08-03-c859-mds-css-formal-remediation.md`. Both mirrors are
 synchronized and unpushed: the transversal-groups paper at `d2e54cb`, and the
 rigidity paper at `1d658b8` after removing the 31 files the split moved out,
 giving it a paper-local TeX linter so its build runs standalone, and repairing
-the release verifier that still expected the moved supplement. The trust facts are refreshed across all four
-affected units. Open: the base library cannot be re-exported because the
-companion exporter refuses an area whose README bullet it already added, so its
-copy stays one revision behind; and the rigidity paper's release verifier still
-selects its formal surface by filename glob rather than a root contract.
+the release verifier that still expected the moved supplement. The rigidity
+paper is now at `7fc60c5`.
+
+Every declared AME--LU extraction unit has trust facts, the two-uniform gates
+are declared with all seventeen terminals, and the rigidity paper's release
+verifier selects its formal surface from those facts by declared roots rather
+than by filename pattern. The spine audit reports no finding against any gate
+of either paper. One item stays open: the base library cannot be re-exported,
+because the companion exporter refuses an area whose README bullet it already
+added, so its copy stays one revision behind the authority.
 
 **C859 closed (2026-08-03): Paper II is formal-companion-ready and publicly
 materialized.** *Diagonal Isoduality and Transversal Clifford Groups of
