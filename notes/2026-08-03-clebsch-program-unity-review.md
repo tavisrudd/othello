@@ -141,13 +141,15 @@ ASCII master of the series map (TikZ versions derive from this):
  Paper I  <-----------  GOLDEN TORSOR  ----------->  Paper II
  deep-hole syndrome     B^2 = 5*I                conic quotient of
  and decoder data       c_ijk = B_ij B_jk B_ki   the icosahedral
- at q = 11 recover      one oriented cubic Z     matching recovers
- B and the support         |            |        sheets and the
- cubic                     |            |        sheet-sign cubic
-                           |            |
-              binary shadow|            |harmonic / quantum
-                           v            v        return
-                      Paper IV      Golden paper
+ recover B and its      one oriented cubic Z     matching recovers
+ support cubic; and        |            |        sheets and the
+ q = 11 is the only        |            |        sheet-sign cubic
+ field order where         |            |
+ such an arc exists        :            |
+        recognition genre  :            |harmonic / quantum
+        (bridge unproved)  :            |return
+                           v            v
+                      Paper IV      Paper V
                 reconstructs        hosts the Rosetta
                 PG(2,13) from       theorem: support,
                 the minimum-word    sheet-sign, and marked
@@ -156,9 +158,21 @@ ASCII master of the series map (TikZ versions derive from this):
 
 Left and right edges are recognition passages (outward forgetting, inward
 recovery proved by the named paper); the top edge supplies the sign from
-characteristic zero; the bottom edges are the two returns. The Rosetta
+characteristic zero; the bottom right edge is the harmonic return. The Rosetta
 theorem asserts that the three cubic vertices name one object under the
 explicit markings.
+
+Three features of the map are deliberate. The Paper IV edge is dashed because
+no current theorem carries its reconstructed plane to the oriented cubic
+torsor: Paper IV belongs to the programme's recognition genre, and the bridge
+into the cubic equivalence is an open obligation, not an established arrow.
+Until the Rosetta theorem is proved, captions in the numbered papers point at
+the identifications rather than at the theorem, so the Paper V node states an
+intent rather than a citable result. And the Paper I node records that eleven
+is forced: the Sylvester-graph obstruction in that paper's computational
+companion makes it the only field order admitting a conic-filling six-arc, so
+the most exceptional-looking corner of the diagram is the conclusion of a
+classification rather than a chosen example.
 
 ## Five-clause epigraph for the completed program
 
@@ -171,11 +185,19 @@ all five, each paper bolding its own clause:
 
 Mapping: takes shape — Paper I; finds its bearings — Paper II; stands fixed
 while its shadows move — Paper III; rebuilds the plane that cast it —
-Paper IV; gathers its shadows home — the golden operator paper (shadow
-sisters, harmonic return, Rosetta). Alternate final clause if the Rosetta
-should be stated rather than implied: "and is one in all its shadows." The
-subtitle extends in parallel if wanted: *Recovering, orienting, realizing,
-rebuilding, returning*. Forward versions only.
+Paper IV; gathers its shadows home — Paper V (shadow sisters, harmonic
+return, Rosetta). Alternate final clause if the Rosetta
+should be stated rather than implied: "and is one in all its shadows."
+
+**Landed 2026-08-04.** The five-clause epigraph is applied to all four released
+papers' forward versions, with breaks fixed at clause boundaries so no bolded
+clause straddles a line, and Paper IV gained the epigraph it lacked. The soft
+final clause was kept: the assertive alternate asserts the Rosetta equality
+that this document's own red team demoted pending the transport audit, and
+baking it into four forward versions before Paper V exists would commit the
+series in print to an unproved claim shape. The parallel gerund subtitle was
+not extended but retired — it duplicated the epigraph four lines above it — so
+the banner is now the series name and number alone.
 
 ## Draft abstract and spine for the golden operator paper
 
