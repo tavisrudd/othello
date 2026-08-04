@@ -72,8 +72,13 @@ reconcile their live rows and reports through the normal lifecycle.
   `/home/tavis/lean-backups/q16-certificates-d780520-cache.tgz` (359 MB, sha256
   `3dbbafc4c5077fd3983f49f18157886ba5a586bc295e862ebe91799756fb122a`), the destructive erase and
   restore rehearsal, and trace-only gate confirmation over 9,973 targets with no leaf rebuilt.
-- Still required: a pinned external trust fact consumed by monorepo trust tooling, which is also
-  what the Al-Seraji--Al-Ogali external-input anchor needs.
+- The pinned external trust fact is published and consumed.  The package publishes its gate's axiom facts through `TRUST_FACT.json`; the monorepo carries a byte-identical pinned copy at
+  `lean/trust/external/finitegeom-q16-certificates.json`, hash-pinned in
+  `lean/trust/certificate-packages.toml`.  Sealing, pinning, and checking run through
+  `lean/scripts/lean-external-fact.py` and involve no Lean run.  The package manifest also needed
+  re-sealing after the umbrella-import repair; the boundary check is green again at package commit
+  `1ea9caace0718c2e041662b0d39d0ec867f299cc`.  Report:
+  `notes/2026-08-04-c864-external-order16-trust-fact.md`.
 
 ### Arcs trust cleanup
 
@@ -85,9 +90,14 @@ reconcile their live rows and reports through the normal lifecycle.
   official q16 package.
 - The arcs manuscript and standalone mirror now refer to the external package and contain no q16
   generator or replay payload.
-- The improved external-input anchors were prepared in the detached C855 worktree but are not yet
-  landed in the monorepo trust registry.  C864 must land them together with the external q16 fact
-  and regenerate/check the external trust projections.
+- The Kim--Vu and Al-Seraji--Al-Ogali anchors are landed.  Kim--Vu points at
+  `RelativeConicArcs.Averaging.rhoC_le_of_kimVuBound`, its only consumer; the class count points at
+  the package-owned `RelativeConicArcs.Q16Classification.rejection_profile` through the new
+  `entry_package` field, and the pinned fact exhibits the required separation by recording the
+  order-16 terminal's axioms.  The NRC/GRS dictionary entry stays unanchored until the strong
+  projective-GRS theorem lands with its own gate.  The shared generated trust views and external
+  trust projections are not yet regenerated: the tree carries a foreign lane's uncommitted facts
+  artifact, so that regeneration waits for a coherent quiet tree.
 
 ### Clebsch-rigidity cleanup
 

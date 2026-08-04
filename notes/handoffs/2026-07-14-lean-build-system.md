@@ -46,6 +46,10 @@ another lane's running build.
   per registered manuscript from tracked TeX/BibTeX/bibliography/manifest bytes; `audit` and `check`
   compare declarations in `lean/trust/papers.toml` against them. Runs no Lake, LaTeX, or BibTeX, so
   it is independent of the extraction window.
+- `lean/scripts/lean-external-fact.py`: `seal`/`pin`/`check` for external certificate-package trust
+  facts. It runs no Lean: `seal` derives a package's `TRUST_FACT.json` from one completed gate run
+  plus the package's sealed manifest and preserved gate log, and refuses a dirty tree, a foreign
+  root, a superseded commit, an unfinished gate, or evidence that differs from the run's own log.
 - `lean/scripts/lean-blast-radius.py`: read-only `hubs`/`radius`/`targets`/`cost-model` over the
   project-local import DAG. Blast radius is exact; cost columns are unvalidated size proxies.
 - Resource profiles: `lean/scripts/lean-build-profiles.json`.
@@ -159,8 +163,15 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
     it. The order-eleven externalization is scoped, not executed — inventory, split proposal and an
     independent feasibility audit are linked from
     [`../build-sys-tasks/c864-external-certificate-closeout-and-audit.md`](../build-sys-tasks/c864-external-certificate-closeout-and-audit.md);
-    two of the five proposed cuts were found unworkable. Next: the pinned external order-16 trust
-    fact, then the base repair batched with the externalization.
+    two of the five proposed cuts were found unworkable. The pinned external order-16 trust fact is
+    now published and consumed: the package publishes its gate's axiom facts, the monorepo pins a
+    byte-identical copy, and three independent checks disagree if any one is edited alone. The
+    Al-Seraji--Al-Ogali class count and the Kim--Vu bound now have exact theorem-level anchors, the
+    first through the new external-package anchor route; the NRC/GRS dictionary is the one external
+    input still unanchored, waiting on the strong projective-GRS theorem and its gate. The shared
+    generated trust views await a quiet tree. Report:
+    [`../2026-08-04-c864-external-order16-trust-fact.md`](../2026-08-04-c864-external-order16-trust-fact.md).
+    Next: the base repair batched with the order-eleven externalization.
 
 12. **C759 external trust exports complete:** the v0.3-compatible manifest, portfolio headline
     table, and exact 95-terminal JSON projection are generated from C326/C681 authorities;
