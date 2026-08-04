@@ -2,23 +2,23 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-26",
-  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes",
+  "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States",
   "public_export": {
     "artifacts": [
       {
-        "bytes": 1207,
+        "bytes": 1077,
         "path": "Makefile",
-        "sha256": "8e7291b7ddc73717c3640e5eeb0bd3d927f2dd81cdefd77f6e02b748bc61a362"
+        "sha256": "e593059a95aa847898c4f079410d8a4b249eecf8bb716659b65ae848414c3480"
       },
       {
-        "bytes": 433301,
+        "bytes": 299831,
         "path": "ame-lu.pdf",
-        "sha256": "bb18d768a1e5df7c0128d8b945e3af4b60e93c1aa6be642380821668fc42389c"
+        "sha256": "02583bb7c4cf8ff7a8fd2681c7ca17a66a0ba373e0b955a140205d55816c7625"
       },
       {
-        "bytes": 2578,
+        "bytes": 2646,
         "path": "figures/01-operator-holonomy.tex",
-        "sha256": "7a9e68a14262ca0b50c65fd7d626a7a7194b36c63d45ac3597445e7679574546"
+        "sha256": "c7aeeac295e83227e7058a1272fb21363c7c14cc2f7f6d814eca318d82a0cc74"
       },
       {
         "bytes": 1805,
@@ -26,224 +26,89 @@
         "sha256": "4f092394e22d1b4df56b7580d4ff32a76f32524d51f7e89f12072b1b8a42d755"
       },
       {
-        "bytes": 2965,
-        "path": "figures/03-symmetry-groups.tex",
-        "sha256": "443e5653f5c258573960fc931c790076e5d9e50e862baff025896f1e05d11b41"
-      },
-      {
-        "bytes": 2545,
+        "bytes": 2558,
         "path": "figures/04-defect-landscape.tex",
-        "sha256": "a90939fef4e1f6d4d08e93295533d393bc455ce606c8003ee5e86c1f3c0aeefc"
+        "sha256": "fec559dc34db4b00355051401b9014b50cd440daec6adf76adb78075aff338fd"
       },
       {
-        "bytes": 1955,
+        "bytes": 1994,
         "path": "figures/05-stability-radius.tex",
-        "sha256": "0b675789e4b33a8f71c7ac4eeb9de02ed53b25acce2a471e749a4315b251c655"
+        "sha256": "503422cef854d588b0642d1ff6ea6b62f944433a04aab840f8bb0ef15afc1b65"
       },
       {
-        "bytes": 2703,
-        "path": "figures/06-pencil-quotient.tex",
-        "sha256": "8cd51bdc3903078504df720dd597cbc2f3a83b48c443f9f095048cebf32f3e15"
-      },
-      {
-        "bytes": 6558,
+        "bytes": 5110,
         "path": "main.tex",
-        "sha256": "085bccd50b8c85b3da8a5cd23019b788908fc7f354e604c1b234e2d6f1426e24"
+        "sha256": "02527cc463144de6683c79648be5d2c0a478f6d7eac57e31893d2b4cb43b1e1d"
       },
       {
-        "bytes": 20952,
+        "bytes": 21350,
         "path": "refs.bib",
-        "sha256": "2a8762f937947af7e1cca096ce9cd8977964f52c5818b38c508e106a1b11a278"
+        "sha256": "47eac5800d57548080d4d7fe5bc2a1d110ac176fa3b9763834283d30c976c6d9"
       },
       {
-        "bytes": 7563,
+        "bytes": 7202,
         "path": "release/verify_release.py",
-        "sha256": "ca3e562179cb859043cb076a97e2e74221cf7a5532f8a79285700528a72bfafb"
+        "sha256": "42614998847e8e1ebde21a8134f4ab41c87004e7ce35b9c1cc72a6024110ed4e"
       },
       {
-        "bytes": 21446,
+        "bytes": 8358,
         "path": "sections/01-introduction.tex",
-        "sha256": "3a0fae7fae5245a3ea9e462c6cb4a31a69d0d828efc26ca91606f54b0e7ebb64"
+        "sha256": "8627c93cc4c063b8983068e0bc0279fd58b10eff51b6fe8264c92ccf7b782b3d"
       },
       {
-        "bytes": 6200,
+        "bytes": 2784,
         "path": "sections/02-geometry-ame-dictionary.tex",
-        "sha256": "9bd45727fd2aa46f56787ac729895b443fe9aa9fc35670ca21789bf0ce92db34"
+        "sha256": "91789afd0cf31b4ae46837dcdb5cb4f34b79cae1b33d96f0e11c61a2337bf413"
       },
       {
-        "bytes": 112090,
-        "path": "sections/03-lu-rigidity.tex",
-        "sha256": "33a0bf5b6484cb080b71406881a8875f55777529d1c8c1f693e263acb0472aa6"
+        "bytes": 14834,
+        "path": "sections/03-exact-rigidity-atlas.tex",
+        "sha256": "efad615112ef752704c3eea2cbf4b81169ae7aa569e0f5d6fbffb00ce553c2e2"
       },
       {
-        "bytes": 8998,
-        "path": "sections/04-pencil-classification.tex",
-        "sha256": "d5e994927c3f0d4da3beac7133b16b42a838357492d9b6416656f14ca2eaac19"
+        "bytes": 14614,
+        "path": "sections/05-quantitative-rounding.tex",
+        "sha256": "e15b4de1537897fa86f2a4943b80b80fc1adf56b7155ff28f086f6377d372207"
       },
       {
-        "bytes": 10679,
-        "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "098a7959a0f6b664a47d880badc54dfffeabcb50395c4274dcb159ed2c15db2f"
-      },
-      {
-        "bytes": 3359,
-        "path": "sections/06-lu-invariants.tex",
-        "sha256": "3bbfd022d9135b990679263a17859ea6a69a81e1158d1b499529568f5087f7ed"
-      },
-      {
-        "bytes": 2011,
+        "bytes": 1638,
         "path": "sections/07-conclusion.tex",
-        "sha256": "f2183ad29e3a48bf392d221362a8d137d675eb58b827860e7360135ef84560f9"
+        "sha256": "c62d0ec83296ae09d59099810d6bedf333f8b56bf78332c7fb2a8324745ea8f7"
       },
       {
-        "bytes": 6318,
-        "path": "sections/07-transport-sheaf.tex",
-        "sha256": "273f370f80635ce0628851931982d0cbda697bdb26ca8dd8eadfe4aa5add7b0d"
-      },
-      {
-        "bytes": 12037,
+        "bytes": 3782,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "fdcbbbe5fa2aae9bf1292dbcab7890e7952cab6adcde7ea13c6dbf044a533c5a"
+        "sha256": "ca3ca136d69cff537e877a8af991c7b2d1daa0c250ce306b7e33fea276d6146c"
       },
       {
-        "bytes": 5676,
-        "path": "sections/09-party-extensions.tex",
-        "sha256": "43bab868869b7dbee47060c279a0122e618811cd3022361c73f5599ba992fecc"
+        "bytes": 11767,
+        "path": "sections/A-partial-weyl-recognition.tex",
+        "sha256": "6575b473197e63d1bfb535a6807f10cc07405baa09e7a2889f0bbefee824e71b"
       },
       {
-        "bytes": 9171,
-        "path": "sections/10-scalar-certificates.tex",
-        "sha256": "9cd5e55f41fec6d5703e92735b5546f0f4fed50b40bd5052a335ed1dc735db4d"
-      },
-      {
-        "bytes": 3951,
-        "path": "supplement/EVIDENCE-MANIFEST.json",
-        "sha256": "175b50ad8bcf627c22d95ff067f8e89cc437130a61e06bdaf4a85f0363fa746e"
-      },
-      {
-        "bytes": 7408,
-        "path": "supplement/EVIDENCE.md",
-        "sha256": "e4b0a6c6b80910f23ca9127da8f71f82c60be308e72ea1a9fd8e42eb85e7185d"
-      },
-      {
-        "bytes": 1094,
-        "path": "supplement/README.md",
-        "sha256": "2190398b29d67ca4534c32a204bdc0a73142d451bbd1c21ece2aa566ca45c482"
-      },
-      {
-        "bytes": 15476,
-        "path": "supplement/evidence/2026-07-19-clebsch-ame-equivalence.json",
-        "sha256": "f2fb460c3c90324bee53cabbe3b495db634fcbb3426c39183685564c48367210"
-      },
-      {
-        "bytes": 24692,
-        "path": "supplement/evidence/2026-07-19-clebsch-ame-equivalence.py",
-        "sha256": "3cc76e380be2447fbf49a779320e8a2ceb2d55b92f62d834c36c3b83dbf38a79"
-      },
-      {
-        "bytes": 24090,
-        "path": "supplement/evidence/2026-07-20-clebsch-ame-pencil-arithmetic.py",
-        "sha256": "29475cf066640668d04a6ebd0f5bbc247670a5803256ec735de8a8acd2569fe5"
-      },
-      {
-        "bytes": 225468,
-        "path": "supplement/evidence/2026-07-23-ame-perfect-tensor-physics.json",
-        "sha256": "0fea19c906fd4ea546c822cf622c81d2721ba40c765ffa39a6badd852c29a7f3"
-      },
-      {
-        "bytes": 30814,
-        "path": "supplement/evidence/2026-07-23-ame-perfect-tensor-physics.py",
-        "sha256": "075f8d6c36b252c66f82e549491d7afa460218d4f96840d0e6cf86a288ed25b7"
-      },
-      {
-        "bytes": 12193,
-        "path": "supplement/evidence/2026-07-23-contraction-rank-drop-divisor.json",
-        "sha256": "9ca05a5ed99bb5342ecff817dc964c6f9424ca4cdd69684298b8cd938225525b"
-      },
-      {
-        "bytes": 31985,
-        "path": "supplement/evidence/2026-07-23-contraction-rank-drop-divisor.py",
-        "sha256": "abd4f23d1ac3b4c610eb3c0a5610866bd941dccdf3bcd59550fa5fd81bb4f1df"
-      },
-      {
-        "bytes": 12228,
-        "path": "supplement/evidence/2026-07-23-four-copy-cover-holonomy.json",
-        "sha256": "d3ac33676b2816c46478b435d33d1bc99057eb8a8ac15e45203cbdd033715c85"
-      },
-      {
-        "bytes": 29015,
-        "path": "supplement/evidence/2026-07-23-four-copy-cover-holonomy.py",
-        "sha256": "f07863591a2ef87f6dd6ff22c339325b6ad67dacc4acaed0590f0921de051ae6"
-      },
-      {
-        "bytes": 12689,
-        "path": "supplement/evidence/2026-07-23-h3-ame-uniform-lu-separation.json",
-        "sha256": "9aa997194da8de379d0b5832a1953d63bd30971f1170d1176f1d000f981ec2cc"
-      },
-      {
-        "bytes": 28682,
-        "path": "supplement/evidence/2026-07-23-h3-ame-uniform-lu-separation.py",
-        "sha256": "a3f1ceeceb9d479e6290841e33c09df615756c7b9cf93ef1f0c3ca9d6a002fb3"
-      },
-      {
-        "bytes": 14303,
-        "path": "supplement/evidence/2026-07-23-h3-pentad-orientation-lu.json",
-        "sha256": "e45079d568b08597d514945c0e1ec0aad539d208e02e4da7ee110975eb6322b3"
-      },
-      {
-        "bytes": 10062,
-        "path": "supplement/evidence/2026-07-23-h3-pentad-orientation-lu.py",
-        "sha256": "906c35a63308ab83d8169f508debe113945f94c85a5596443ffed7eb1921999b"
-      },
-      {
-        "bytes": 749592,
-        "path": "supplement/evidence/2026-07-23-holonomy-completeness.json",
-        "sha256": "0e8d608df0a8024b8dd7dc8f3e39bfad1fad2b222a3452a0da0b8bb09764eec1"
-      },
-      {
-        "bytes": 41571,
-        "path": "supplement/evidence/2026-07-23-holonomy-completeness.py",
-        "sha256": "3d7dcc5a98bafca6c215dc66b024795a9dc024c21fb15d2f5f2063d7a6446f10"
-      },
-      {
-        "bytes": 622348,
-        "path": "supplement/evidence/2026-07-25-ame-lu-party-extension-examples.json",
-        "sha256": "fcc903793d9329e12c3739fe3e524d75b809f7290bc3197d9a59ffe26c428d05"
-      },
-      {
-        "bytes": 29838,
-        "path": "supplement/evidence/2026-07-25-ame-lu-party-extension-examples.py",
-        "sha256": "0a43695889d863fdd34fb45cad3fee30c3f5e9d7ee9696ed27e1b13413eae00b"
-      },
-      {
-        "bytes": 2839,
-        "path": "supplement/verify.py",
-        "sha256": "b91ba7b352527fe5659a8f045ca22048eaa5f51e48fe04e7cf80465c91d97c4d"
+        "bytes": 62262,
+        "path": "sections/B-secondary-quantitative.tex",
+        "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
       }
     ],
-    "tree_sha256": "2ada0216f5176543f8e7612f38e0cba62e4406bf81a36a6593a55288ea3d98cd"
+    "tree_sha256": "6f33eb636f0f3bf02bfa9c31492f56aaa8735f3f6864d209d649667d8334fbdd"
   },
   "formal_companion": {
     "artifacts": [
-      {
-        "bytes": 23163,
-        "path": "lean/CapGame/BuildGame.lean",
-        "sha256": "e31e60bf0f2f0984c82811fac02768d90f3a8204ad73cc5e34392cfa502633c9"
-      },
       {
         "bytes": 15555,
         "path": "lean/FiniteGeom/Code.lean",
         "sha256": "3e952d2f81ddb97f855f60ed5d0d4188d7e15a69fbc018403163bb1267681e55"
       },
       {
-        "bytes": 50566,
+        "bytes": 40490,
         "path": "lean/ProjectiveCap/PlaneTransitivity.lean",
-        "sha256": "5fc66fd86a5a95549837cabe48b7a52c05435ab8446fdaa95f03c61975c03f37"
+        "sha256": "c4e2bc648b9b6a10f3f8a1769027a00a09f30177764713b7e9411b0d28c62b3a"
       },
       {
-        "bytes": 4733,
+        "bytes": 3723,
         "path": "lean/ProjectiveCap/Projective.lean",
-        "sha256": "886f01783902bfaa06244aa7d7762cd16dc8382b21135696bbf6bbdf706c76fe"
+        "sha256": "e8c2bacdf93f05be2e1c9e3682de247e0d3bc844758db1faa7510f1a97c1477f"
       },
       {
         "bytes": 9840,
@@ -291,9 +156,9 @@
         "sha256": "649fce7d6dd7d6a724fcea2d0485bfcb1d1f19bf37cd31d5cd7b0671d29ece89"
       },
       {
-        "bytes": 11271,
+        "bytes": 11572,
         "path": "lean/RelativeConicArcs/AMELU/ExtensionFieldPencil.lean",
-        "sha256": "ca4ceda48d67173fbee7d229c02e63885e9cf0624cf45a5b3e70b30fca54494a"
+        "sha256": "3823eb79c5c6d21da28960a6f5a5a0f6c8ff5c8b8dac02076202e09ff0b177cf"
       },
       {
         "bytes": 12000,
@@ -526,19 +391,19 @@
         "sha256": "355376a7fe75f2c8bc185b505e7e182507c0f7f0bd1edb3ee60129e36ac54fcb"
       },
       {
-        "bytes": 8339,
+        "bytes": 9297,
         "path": "lean/RelativeConicArcs/Arc.lean",
-        "sha256": "f683f6fe80891ea7f4da389fbef14890d34ee660e1e9b3b8f62a3ee60256a240"
+        "sha256": "429cdcdc172ee0cfd92af1a0c7e2a97a6b0f857155505957a7d9279ec9da8d88"
       },
       {
-        "bytes": 28923,
+        "bytes": 30664,
         "path": "lean/RelativeConicArcs/CodingBridge.lean",
-        "sha256": "bf6ac29f91dce5425653494542b5e156302ff2be5914d5310379d5b97d960ed3"
+        "sha256": "dbc4b8d27f63d5c285d284a213c8df4850a3f961d4fe52ab1dbefd715d9cdf4b"
       },
       {
-        "bytes": 21008,
+        "bytes": 22295,
         "path": "lean/RelativeConicArcs/Defect.lean",
-        "sha256": "5caae34f785b5c37df05ed42c8c278dbf88e0ef98b6adf2d514716122f31ee2d"
+        "sha256": "ab613792d038a60765c7dae7be8749e71564179b7667776a138101617e2bd53e"
       },
       {
         "bytes": 3856,
@@ -571,9 +436,9 @@
         "sha256": "82b583015226a723b29f4577ba95c81131b2feff2ae437073e9e38a3bb167e3d"
       },
       {
-        "bytes": 903,
+        "bytes": 920,
         "path": "lean/RelativeConicArcs/Gates/AMELUExtensionFieldPencilAxioms.lean",
-        "sha256": "97657ff0bbd32981fb1253d78efac85458953c474dad0aba01ffd07ac52b325c"
+        "sha256": "a161896929adaf9f08b4148ffbec219de9c9f189fbe9405eec67b0880eb95ddc"
       },
       {
         "bytes": 537,
@@ -646,24 +511,24 @@
         "sha256": "e06b0c5d646bacf2130c370d117aab2af8f75d1bdc9b661cb8b491026c8ca189"
       },
       {
-        "bytes": 21208,
+        "bytes": 24547,
         "path": "lean/RelativeConicArcs/Moments.lean",
-        "sha256": "5892d6448b919dffe5988502b014948831294247657b49a68e0aa228517305e8"
+        "sha256": "a5dfcd948d94f2646aae87c8f71ea904de7ecfc2cb3d5bc5ef4dcca902c725c7"
       },
       {
-        "bytes": 1625,
+        "bytes": 1894,
         "path": "lean/RelativeConicArcs/Plane.lean",
-        "sha256": "4884204d8c0a1c219e969b72c6fa394abc28be3097c7eed6bed97e8f63c21ff5"
+        "sha256": "2e12df7194e7b70cbb2745082bc2855882f0ccbe68e7670cd09760ab3e426aed"
       },
       {
-        "bytes": 15281,
+        "bytes": 7511,
         "path": "lean/RelativeConicArcs/ProjectiveBridge.lean",
-        "sha256": "423405930931867f62730ba3d2013012026f8a64db0af81d7b0ace6a43524a3f"
+        "sha256": "c4145e6d728dcf3b1a81f7080f51e4a1774dec10f78b9e1458e726f75d6fe412"
       },
       {
-        "bytes": 13261,
+        "bytes": 13729,
         "path": "lean/RelativeConicArcs/SyndromeGeometry.lean",
-        "sha256": "0c49ee1527b10ec15ed84d07d0e0780d0f27df7776d048c04dd9d25d49e331b3"
+        "sha256": "3b2dafe0f4606fedaf14b7ec77a0091321f9cc42776074a0bab318cb0e80b2a5"
       },
       {
         "bytes": 567,
@@ -691,6 +556,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "b030f559acc08ef110f5a1bbbe29f1b84c19541fab44b191703dcc827d5b4bc9"
+    "tree_sha256": "abadac6d461fb360400e3546d8aaeba30e27fa173cd055f735363a7d061c922d"
   }
 }

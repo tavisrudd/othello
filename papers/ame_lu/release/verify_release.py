@@ -21,10 +21,6 @@ PAPER_FILES = (
     "main.tex",
     "refs.bib",
     "release/verify_release.py",
-    "supplement/EVIDENCE-MANIFEST.json",
-    "supplement/EVIDENCE.md",
-    "supplement/README.md",
-    "supplement/verify.py",
 )
 
 def digest(path: Path) -> tuple[int, str]:
@@ -44,12 +40,6 @@ def paper_paths() -> list[str]:
             str(path.relative_to(PAPER_ROOT))
             for path in (PAPER_ROOT / directory).glob("*.tex")
         )
-    evidence = json.loads(
-        (PAPER_ROOT / "supplement" / "EVIDENCE-MANIFEST.json").read_text()
-    )
-    paths.update(
-        f"supplement/{artifact['path']}" for artifact in evidence["artifacts"]
-    )
     return sorted(paths)
 
 
@@ -111,8 +101,8 @@ def create_manifest() -> dict[str, object]:
         "release": "ame-lu-rc1",
         "date": "2026-07-26",
         "title": (
-            "Local-Unitary Rigidity of Stabilizer AME States and "
-            "Transversal Clifford Groups of MDS--CSS Codes"
+            "Local-Unitary Rigidity and Quantitative Rounding for "
+            "Stabilizer AME States"
         ),
         "public_export": {
             "artifacts": public,
