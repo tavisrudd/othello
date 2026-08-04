@@ -1,11 +1,13 @@
 {
-  "schema": "clebsch-passages-release-files-v1",
   "files": [
     "ARTIFACT.md",
+    "FORMAL_COMPANION.json",
     "Makefile",
     "README.md",
     "clebsch_passages.pdf",
     "clebsch_passages.tex",
+    "flake.lock",
+    "flake.nix",
     "literature-boundaries.md",
     "release_files.json",
     "sections/01-introduction.tex",
@@ -48,10 +50,12 @@
     "verification/passages_source_closure.json",
     "verification/statement_identity.json",
     "verification/trust_manifest.json",
+    "verification/verify_formal_companion.py",
     "verification/verify_four_shadow_lean.py",
     "verification/verify_golden_return_lean.py",
     "verification/verify_passages_lean.py",
     "verification/verify_release.py",
     "verification/verify_scaffold.py"
-  ]
+  ],
+  "schema": "clebsch-passages-release-files-v1"
 }

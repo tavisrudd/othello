@@ -1,0 +1,10 @@
+{
+  "axiom_audit": "trust/ClebschPassagesAxiomAudit.lean",
+  "commit": "d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed",
+  "concept_doi": "10.5281/zenodo.21650878",
+  "gate": "RelativeConicArcs.Gates.ClebschOrientationMechanisms",
+  "manifest": "trust/manifests/clebsch_passages.json",
+  "relationship": "optional formal companion; no manuscript claim depends on Lean",
+  "repository": "https://github.com/tavisrudd/finitegeom",
+  "schema": "clebsch-passages-formal-companion-v1"
+}

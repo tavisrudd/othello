@@ -152,6 +152,15 @@ def main() -> int:
         ["python3", "verification/verify_scaffold.py"],
         PAPER,
     )
+    # The companion pin, its flake input and its lock must agree.  This runs without
+    # --lean-root: the deeper check resolves the pinned finitegeom tree, which is a
+    # different repository from the Lean root this verifier is given.  Checking the
+    # three against each other is what keeps the pin from drifting unnoticed.
+    run(
+        "formal companion pin",
+        ["python3", "verification/verify_formal_companion.py"],
+        PAPER,
+    )
 
     for stem, label in (
         ("arithmetic_cover", "arithmetic cover"),
