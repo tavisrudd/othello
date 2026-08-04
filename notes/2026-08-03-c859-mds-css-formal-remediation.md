@@ -223,21 +223,58 @@ section no longer forecasts a formal contract that does not exist. A private
 work-item reference in its preamble was also removed, which the export audit
 had been flagging.
 
-Remaining, both needing a decision or another lane's quiet window:
+### The rigidity paper's mirror and release gate
 
-1. The rigidity paper's mirror still publishes the complete pre-split
-   supplement, the six-party sections, the pencil figures, and the formal
-   companion record — all of which now belong to the transversal-groups paper.
-   Synchronization refuses to remove 31 tracked paths without an explicit
-   reconciling `git rm` commit made in the mirror first. That same deletion in
-   the authority is what the paper's release-manifest generator trips on, so
-   the two are one decision, not two. Its authority-side blocker is cleared:
-   the split record was renamed `SPLIT-PROVENANCE.md` so the generated export
-   provenance owns `PROVENANCE.md`, and the export audit is clean.
-2. The Lean trust facts and the base-library export still name the renamed
+Both were repaired on the author's approval. The mirror had kept every file the
+split moved out: the complete evidence supplement, the six-party sections, two
+figures, and a formal-companion pin, 31 tracked paths in all. The new tool
+`papers/scripts/reconcile_mirror_deletions.py` derives that set by materializing
+a fresh export from an immutable authority commit and subtracting it from the
+mirror's tracked files, classifies each candidate by whether its exact bytes
+survive in a sibling mirror, refuses on a dirty tree or an oversized deletion
+set, and commits the removal as its own reviewable forward commit. Comparing by
+content rather than by path matters here: three of the candidates share a name
+with a different paper's file.
+
+Of the 31, eighteen have byte-identical copies in the published
+transversal-groups mirror and ten more are the same material after later edits
+there. `sections/03-lu-rigidity.tex` has no sibling copy because the same
+commit that deleted it created `sections/03-exact-rigidity-atlas.tex` in its
+place. `FORMAL_COMPANION.json` was held back by default and then removed with
+an explicit flag: it pinned the pre-split mixed gate at a pre-split commit, so
+publishing it would have contradicted the paper's own verification section,
+which now states that no paper-specific formal contract exists. A refreshed pin
+belongs in the authority whenever that paper gets its own export area, and the
+exporter will carry it forward from there.
+
+Two further defects surfaced in the same pass. The mirror's `make check` had
+never been able to run, because the Makefile invoked the TeX spacing linter
+from the development monorepo through a parent-relative path; the paper now
+carries its own copy, as the companion already did. And the release verifier
+crashed rather than ran, because it still expected the moved supplement; its
+public surface is now the manuscript, figures, and build, which matches a paper
+that carries no paper-facing computation, and its recorded title matches the
+manuscript again. The regenerated manifest's public tree hash also identifies
+what the old `2ada0216…` locator in the companion's bibliography had been
+pointing at: the pre-split release surface.
+
+The mirror is now at `1d658b8`, three forward commits ahead of its published
+tip: manifest verified at 27 tracked files, warning-free build, clean worktree,
+and a tracked PDF byte-identical to the authority's. No history was rewritten,
+so the push is a fast-forward.
+
+### Still open
+
+1. The Lean trust facts and the base-library export still name the renamed
    declaration by its old name. Re-extraction needs a quiet Lean worktree and
    another lane is editing `PassantCodeQ13` and `AlignedTwoGraph`, so both the
    facts refresh and the companion re-export are pending that window.
+2. The rigidity paper's release manifest still carries the release identifier
+   `ame-lu-rc1` dated 2026-07-26, which named the pre-split candidate. Choosing
+   an identifier for the deposited version is an author decision.
+3. That verifier still selects its formal surface with a broad `AMELU*` filename
+   glob rather than a paper-specific root contract, which is the replacement the
+   split plan called for.
 
 The transversal-groups mirror is synchronized at local commit `d2e54cb`:
 manifest verified at 47 tracked files, clean warning-free build, clean
