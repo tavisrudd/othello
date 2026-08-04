@@ -33,7 +33,27 @@ consequence, and `pending` means the comparison is not yet settled.
 | `ClebschGoldenConference.pairTriangleSum_eq_zero` | holds with `C * C = a • 1` for an arbitrary scalar, the value playing no role off the diagonal | the manuscript uses `q = 2d - 1` | keep-local |
 | `ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply` | needs symmetry alone: no zero diagonal, no unit entries, no conference equation | the manuscript works inside the conference setting | keep-local |
 | `ClebschGoldenConference.sq_eq_five_of_pairTriangleSum_eq_zero` | the converse over any commutative ring, with no reality or characteristic assumption; all four hypotheses genuinely used | the manuscript argues over the reals | pending: relevant if C816 promotes the recognition packet |
+| `ClebschGoldenConference.conferenceMatrixOver` | the base-changed table is defined for `[Ring R]`, so it exists over any ring; only the theorems about it need commutativity | the manuscript works over the reals | keep-local |
+| `ClebschGoldenConference.triangleSign_switch`, `triangleCubic_switch` | drop every hypothesis on the matrix as well: they hold for an arbitrary matrix, not only a symmetric conference matrix | the manuscript switches a conference matrix | keep-local; this is a second relaxation beyond the one on the switching entries recorded above |
+| `ClebschGoldenConference.pairTriangleSum_eq_zero`, `pairTriangleSum_eq_mul_mulApply` | hold for an arbitrary matrix meeting their stated hypotheses, with no zero diagonal | the manuscript's pair-balance display is specifically about the triangle matrix | keep-local |
 | four-shadow orientation route as a whole | kernel reduction only; the compiled evaluator left the trust base | the manuscript does not describe the method | harvest into the verification section when C816 promotes the recognition packet |
+
+## Counterweights: where Lean is narrower than the manuscript
+
+This ledger must not be read as uniform strengthening. Every statement in
+`ClebschGoldenConference` fixes the index type to `Fin 6`, while the
+manuscript states the four-point identity, switching invariance and pair
+balance for a symmetric conference matrix of arbitrary order `2d`. So
+`triangleSign_four_point`, `pairTriangleSum_eq_zero` and
+`sq_eq_five_of_pairTriangleSum_eq_zero` are simultaneously stronger in ring
+generality and strictly weaker in index generality than the manuscript
+sentences they correspond to.
+
+Separately, the Lean `pairTriangleSum` sums over every index, where the
+manuscript's display omits the two endpoints. The two agree exactly when the
+diagonal vanishes, which holds for the conference table but is not a
+hypothesis of the general lemmas. Any statement of correspondence between the
+Lean lemma and the manuscript display has to say so.
 
 Convention: a Lean proof being more general never licenses a novelty or
 priority claim, and never changes the paper's attribution of a classical
