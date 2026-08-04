@@ -6,9 +6,9 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 # Binary matrix semantics for association and orbit certificates
 
 This module evaluates relation and orbit matrices over `Bool`, then proves once that Boolean parity
-linearizes to ordinary matrix multiplication over `ZMod 2`.  Finite leaves never perform field
-arithmetic; their aggregators transport only compact entry checks through
-`booleanParityProduct_linearize`.
+linearizes to ordinary matrix multiplication over `ZMod 2`.  Field arithmetic is confined to the
+leaves that identify a displayed row-mask list with one of these Boolean matrices; every product and
+sum is evaluated on the masks and transported through `booleanParityProduct_linearize`.
 -/
 
 namespace PassantCodeQ13.AssociationTransport

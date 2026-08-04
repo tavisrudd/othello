@@ -1,45 +1,46 @@
-import PassantCodeQ13.AssociationTransport.Base
+import PassantCodeQ13.AssociationTransport.OrbitMasks.Symmetric
+import PassantCodeQ13.AssociationTransport.RelationMasks
 
-/-! # Association certificate for the symmetric-stabilizer minimum-word orbit -/
+/-!
+# Association certificate for the symmetric-stabilizer minimum-word orbit
+
+The Gram matrix of the orbit and the vanishing of its product with the relation of polar invariant
+zero are evaluated on the displayed row and column masks, where one row of a product is the
+exclusive-or of the selected rows of the right-hand factor.  Both identities are exhaustive over the
+full index range and are discharged by kernel reduction; the transport to matrix identities over the
+binary field uses only the symbolic bridges of `PassantCodeQ13.AssociationTransport.PackedRows` and
+`booleanParityProduct_linearize`.
+-/
 
 namespace PassantCodeQ13.AssociationTransport
 
 open PassantCodeQ13.MinimumWords
 
-/-- Compact Boolean evaluation identifies the orbit Gram matrix with `A9` and checks its rows in
-`ker A0`, entrywise. -/
+/-- Word-parallel evaluation identifies the orbit Gram masks with the relation of polar invariant
+nine, and annihilates the orbit by the relation of polar invariant zero. -/
 theorem orbitS4_entry_certificate :
-    let A0 := relationBooleanMatrix 0
-    let A9 := relationBooleanMatrix 9
-    let N := orbitSupportBooleanMatrix (supportOrbit representativeS4)
-    (booleanMatrixEqualityCheck (booleanParityProduct N.transpose N) A9 &&
-      booleanMatrixEqualityCheck (booleanParityProduct A0 N.transpose) booleanZeroMatrix) = true := by
-  native_decide
-
-/-- The compact checks give Boolean orbit Gram and kernel equalities. -/
-theorem orbitS4_boolean_certificate :
-    let A0 := relationBooleanMatrix 0
-    let A9 := relationBooleanMatrix 9
-    let N := orbitSupportBooleanMatrix (supportOrbit representativeS4)
-    booleanParityProduct N.transpose N = A9 ∧
-      booleanParityProduct A0 N.transpose = booleanZeroMatrix := by
-  dsimp only
-  have checks := orbitS4_entry_certificate
-  simp only [Bool.and_eq_true] at checks
-  exact ⟨booleanMatrixEqualityCheck_sound checks.1,
-    booleanMatrixEqualityCheck_sound checks.2⟩
+    maskProduct orbitSymmetricColumns orbitSymmetricSupports = relationRowsRhoNine ∧
+      maskProduct relationRowsRhoZero orbitSymmetricColumns = List.replicate 78 0 := by
+  decide +kernel
 
 /-- The symmetric-stabilizer orbit has Gram matrix `A9` and all its rows lie in `ker A0`. -/
 theorem orbitS4_Gram_and_kernel :
     let N := orbitSupportMatrix (supportOrbit representativeS4)
     N.transpose * N = relationLinearMatrix 9 ∧ relationLinearMatrix 0 * N.transpose = 0 := by
-  have certificate := orbitS4_boolean_certificate
-  dsimp only at certificate
-  simp only [orbitSupportMatrix, relationLinearMatrix]
-  constructor
-  · rw [← booleanMatrix_transpose, ← booleanParityProduct_linearize]
-    exact congrArg booleanMatrix certificate.1
-  · rw [← booleanMatrix_transpose, ← booleanParityProduct_linearize, certificate.2,
-      booleanMatrix_zero]
+  have supports : orbitSupportBooleanMatrix (supportOrbit representativeS4)
+      = (maskMatrix orbitSymmetricSupports : Matrix OrbitCoordinate Coordinate Bool) := by
+    rw [supportOrbit_representativeS4_eq]
+    exact orbitSupportBooleanMatrix_eq_maskMatrix _
+  simp only [orbitSupportMatrix, relationLinearMatrix, supports]
+  rw [← booleanMatrix_transpose, ← maskMatrix_orbitSymmetricColumns]
+  refine ⟨?_, ?_⟩
+  · rw [← booleanParityProduct_linearize,
+      ← maskMatrix_maskProduct orbitSymmetricColumns orbitSymmetricSupports
+        orbitSymmetricSupports_length,
+      orbitS4_entry_certificate.1, maskMatrix_relationRowsRhoNine]
+  · rw [← maskMatrix_relationRowsRhoZero, ← booleanParityProduct_linearize,
+      ← maskMatrix_maskProduct relationRowsRhoZero orbitSymmetricColumns
+        orbitSymmetricColumns_length,
+      orbitS4_entry_certificate.2, maskMatrix_replicate_zero, booleanMatrix_zero]
 
 end PassantCodeQ13.AssociationTransport

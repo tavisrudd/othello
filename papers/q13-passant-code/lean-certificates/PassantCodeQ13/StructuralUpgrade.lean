@@ -1,15 +1,18 @@
 import RelativeConicArcs.PassantCodeQ13.StructuralUpgrade
 import PassantCodeQ13.MinimumWords.RowUniqueness.Base
-import PassantCodeQ13.AssociationTransport.Base
+import PassantCodeQ13.AssociationTransport.RelationCubic
 
 /-!
 # Paper-owned structural certificates for the q=13 passant code
 
 The generic implications live in `RelativeConicArcs.PassantCodeQ13.StructuralUpgrade`.  This module
 checks the bounded q=13 inputs that are small enough to evaluate directly in Lean: pair-only row
-recovery, unary constancy, the fused pair-color split, three toric support parities, the compact
-hidden-field cubic, and the point/line axioms in the normalized 183-point plane.  The larger theta
-positivity and stabilizer-prefix tables remain separately hashed exact certificates.
+recovery, unary constancy, the fused pair-color split, three toric support parities, and the
+point/line axioms in the normalized 183-point plane.  The hidden-field cubic satisfied by the
+rho-nine relation operator is inherited from
+`PassantCodeQ13.AssociationTransport.RelationCubic`, where it is derived from the squaring
+identities of the elliptic relations.  The larger theta positivity and stabilizer-prefix tables
+remain separately hashed exact certificates.
 -/
 
 namespace PassantCodeQ13.StructuralUpgrade
@@ -74,7 +77,8 @@ theorem toricSupport_even_passants :
 theorem hiddenField_cubic_on_image :
     let B := relationLinearMatrix 9
     B ^ 4 + B ^ 3 + B = 0 := by
-  native_decide
+  intro B
+  exact rhoNine_quartic_vanishes
 
 /-- A normalized projective point, used equally for the dual line set. -/
 abbrev PlaneCoordinate := {coordinate : Triple // coordinate ∈ projectiveTriples}

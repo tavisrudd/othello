@@ -20,12 +20,21 @@ terminals of `RelativeConicArcs.Gates.PassantCodeQ13AxiomAudit` report axiom set
 `[propext, Classical.choice, Quot.sound]`. Report:
 `notes/2026-08-04-c834-shared-library-native-closure.md`.
 
-The minimum-word orbit and concurrence layer of the paper's own package is also closed. The paper
-package under `papers/q13-passant-code/lean-certificates` now has 55 native decisions across 39
-modules — 16 in the weight-ten profile certificates, 11 in the row-uniqueness transport, 9 in the
-structural upgrade, 8 in the association transport, 6 in the automorphism anchors, 3 in the
-association algebra, and 2 in the fixed-point exhaustion. Report:
+The minimum-word orbit and concurrence layer of the paper's own package is also closed. Report:
 `notes/2026-08-04-c834-minimum-word-kernel-closure.md`.
+
+The association-transport packet and the hidden-field cubic are rewritten for kernel reduction but
+**not yet elaborated**: the shared build tree's build-owner lock was held by another lane's q16
+certificate gate for the whole of that session, so no elaboration, focused gate, or axiom audit
+could be run. The mathematics is independently confirmed by the tracked generator, which refuses to
+emit unless all nine identities the leaves state hold in exact integer arithmetic. Elaborating these
+modules is the first task of the next build window; the exact order and the manifest debt are in the
+report: `notes/2026-08-04-c834-association-transport-kernel-closure.md`.
+
+Assuming that elaboration succeeds, the paper package under
+`papers/q13-passant-code/lean-certificates` has 46 native decisions across 34 modules — 16 in the
+weight-ten profile certificates, 11 in the row-uniqueness transport, 8 in the structural upgrade, 6
+in the automorphism anchors, 3 in the association algebra, and 2 in the fixed-point exhaustion.
 
 The technique that carried every closure so far: state the finite content on the displayed
 coordinate lists, reduce one table in the kernel, and transport to the subtype model afterwards.
@@ -42,12 +51,19 @@ so that downstream checks reduce on literals. What still exceeds the guard after
 index blocks, one module each, and reassembled by list concatenation. The measured ceiling on the
 `single` profile is roughly one million kernel operations on this data per module.
 
-The association-transport leaves are the next packet: they multiply Boolean matrices given as
-functions on `Fin` types, whose entries read `rhoAt` and index a support list positionally, so the
-same substitutions apply followed by a blockwise split over rows. The fixed-point exhaustion is the
-one leaf that no table substitution reaches — it meets partial supports through a hash map keyed by
-incidence syndrome, over domains far larger than anything reduced so far — and needs a proved
-checker in the style of the weight-ten reachability kernel.
+The association-transport packet added a fourth lever, reusable by every remaining matrix leaf: a
+Boolean matrix presented by the list of its row bitmasks has a parity product costing one
+natural-number operation per pair of a left row and a middle index, instead of one operation per
+triple of indices. `PassantCodeQ13.AssociationTransport.PackedRows` proves that this word-parallel
+evaluation computes `booleanParityProduct`, which linearizes to matrix multiplication over the
+binary field.
+
+The fixed-point exhaustion is the one leaf that no table substitution reaches — it meets partial
+supports through a hash map keyed by incidence syndrome, over domains far larger than anything
+reduced so far — and needs a proved checker in the style of the weight-ten reachability kernel. The
+two ambient-plane axioms of the structural upgrade are the other leaves no table reaches, for the
+opposite reason: they should stop searching altogether and be proved from the cross-product formula
+for the join of two distinct normalized points.
 
 ## Current state
 

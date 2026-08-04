@@ -8,11 +8,11 @@ import RelativeConicArcs.PassantCodeQ13.LogicalSpine
 /-!
 # Orbit Gram matrices and the binary association action
 
-Eight bounded execution leaves check four relation identities and the Gram/kernel pair for each
-orbit.  Their ordinary matrix equalities feed the abstract association-kernel argument, proving
-that each of the
-four orbit row spaces is exactly the kernel of the rho-zero relation matrix.  This aggregator has
-no native evaluation.
+Bounded kernel-reduced leaves check the four relation identities and the Gram/kernel pair for each
+orbit, each on displayed row masks that Lean has identified with the semantic Boolean matrices.
+Their ordinary matrix equalities feed the abstract association-kernel argument, proving that each of
+the four orbit row spaces is exactly the kernel of the rho-zero relation matrix.  Neither this
+aggregator nor any module it imports uses native evaluation.
 
 Polarity identifies that rho-zero matrix with the passant incidence matrix up to row order.  This
 module fixes the point-vector convention: matrices act on coordinate columns, while the transpose
