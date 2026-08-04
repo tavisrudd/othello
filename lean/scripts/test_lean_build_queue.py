@@ -138,6 +138,12 @@ echo "$1" >> "$FAKE_LAKE_STATE/run-quiet-calls.log"
 bash -c "$1" > "$root/result/stdout.log" 2> "$root/result/stderr.log"
 rc=$?
 printf 'exit=%s dir=%s\\n' "$rc" "$root/result"
+# The real wrapper prints bounded tail previews; the ordering of first_error_lines depends on
+# this file being a summary rather than the full build log.
+printf -- '--- stderr (last 10) ---\\n'
+tail -n 10 "$root/result/stderr.log"
+printf -- '--- stdout (last 5) ---\\n'
+tail -n 5 "$root/result/stdout.log"
 exit "$rc"
 """,
 }
@@ -186,6 +192,18 @@ class QueueTest(unittest.TestCase):
         self.lock_file = self.tmp / "owner.lock"
 
     def tearDown(self) -> None:
+        # `build` spawns a detached run that nothing else tracks; an assertion failure or an
+        # expired subprocess timeout would otherwise leave it holding a lock past the test.
+        for detached in self.tmp.glob("*/detached.json"):
+            try:
+                pid = json.loads(detached.read_text()).get("launcher_pid")
+            except (OSError, json.JSONDecodeError):
+                continue
+            if isinstance(pid, int):
+                try:
+                    os.kill(pid, signal.SIGTERM)
+                except OSError:
+                    pass
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     # helpers ---------------------------------------------------------------
@@ -629,6 +647,7 @@ class QueueTest(unittest.TestCase):
         )
 
     def test_build_queues_behind_an_owner_instead_of_refusing(self) -> None:
+        calls = self.state / "lake-calls.log"
         with self.lock_file.open("a+") as holder:
             fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
             holder.write(json.dumps({"run_id": "foreign-run", "pid": 4242}))
@@ -644,12 +663,21 @@ class QueueTest(unittest.TestCase):
                 stderr=subprocess.PIPE,
                 text=True,
             )
-            time.sleep(2)
-            self.assertIsNone(child.poll(), "must wait for the owner rather than refuse")
-        stdout, stderr = child.communicate(timeout=60)
+            time.sleep(3)
+            # The real evidence is that nothing was built while the lock was held; the parent
+            # process staying alive proves nothing, since it waits on a detached grandchild.
+            self.assertFalse(
+                calls.exists(), "must not build behind another owner while the lock is held"
+            )
+            self.assertEqual(
+                RUNNER_MODULE.lock_holder(self.lock_file).get("run_id"),
+                "foreign-run",
+                "the foreign owner must still hold the lock",
+            )
+        stdout, stderr = child.communicate(timeout=90)
         self.assertEqual(child.returncode, 0, stderr)
-        self.assertIn("queueing behind run foreign-run", stdout)
         self.assertIn("state:   success", stdout)
+        self.assertTrue(calls.exists(), "the build must run once the owner releases the lock")
 
     def test_build_hands_back_one_resume_command_when_it_outlasts_the_window(self) -> None:
         result = self.build(["Fix.Alpha"], self.tmp / "build-handoff", extra=["--foreground", "0"])
@@ -703,6 +731,83 @@ class QueueTest(unittest.TestCase):
         )
         self.assertEqual(settled.returncode, 130, settled.stdout)
         self.assertIn("state:   interrupted", settled.stdout)
+
+    def test_build_reports_a_child_that_died_before_writing_a_status(self) -> None:
+        """An invalid target refuses before `run` creates status.json.
+
+        Reporting that as "still running" would burn the whole foreground window and then
+        return success for a build that never started, so it must settle as a failure.
+        """
+        result = self.build(["Not A Module"], self.tmp / "build-prestatus", extra=["--foreground", "30"])
+        self.assertEqual(result.returncode, 125, result.stdout)
+        self.assertIn("failed-before-status", result.stdout)
+        self.assertNotIn("still running", result.stdout)
+        self.assertIn("invalid module name", result.stdout)
+        self.assertFalse((self.tmp / "build-prestatus" / "status.json").exists())
+
+    def test_build_reports_an_exhausted_lock_wait_rather_than_waiting_out_the_window(self) -> None:
+        with self.lock_file.open("a+") as holder:
+            fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            holder.write(json.dumps({"run_id": "foreign-run", "pid": 4242}))
+            holder.flush()
+            result = self.build(
+                ["Fix.Alpha"],
+                self.tmp / "build-lockgiveup",
+                extra=["--lock-wait", "1", "--foreground", "30", "--run-arg=--poll-seconds", "--run-arg=1"],
+            )
+        self.assertEqual(result.returncode, 125, result.stdout)
+        self.assertIn("failed-before-status", result.stdout)
+        self.assertIn("another build owner holds", result.stdout)
+
+    def test_build_does_not_pass_its_lock_wait_to_the_foreign_quiet_wait(self) -> None:
+        """The quiet wait blocks while already holding the lock, so it must stay small.
+
+        A single option driving both waits would let a `build` idle the shared build slot for
+        the whole lock-wait budget because an unrelated Lean process was live.
+        """
+        (self.state / "busy").write_text("lean\n")
+        result = self.build(
+            ["Fix.Alpha"],
+            self.tmp / "build-quiet",
+            extra=["--lock-wait", "3600", "--quiet-wait", "1", "--foreground", "40",
+                   "--run-arg=--poll-seconds", "--run-arg=1"],
+        )
+        self.assertEqual(result.returncode, 2, result.stdout)
+        self.assertIn("state:   refused", result.stdout)
+        self.assertIn("foreign Lean build is live", result.stdout)
+        self.assertIsNone(
+            RUNNER_MODULE.lock_holder(self.lock_file), "the refusing run must release the lock"
+        )
+
+    def test_refused_run_is_not_reported_as_abandoned(self) -> None:
+        run_dir = self.tmp / "run-refused"
+        (self.state / "busy").write_text("lean\n")
+        launched = self.run_queue(["Fix.Alpha"], run_dir, extra=["--wait-quiet-seconds", "1", "--poll-seconds", "1"])
+        self.assertEqual(launched.returncode, 2, launched.stderr)
+        self.assertEqual(self.read_status(run_dir)["state"], "refused")
+        awaited = subprocess.run(
+            [sys.executable, str(RUNNER), "await", str(run_dir), "--timeout", "10"],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        self.assertEqual(awaited.returncode, 2, awaited.stdout)
+        self.assertIn("state:   refused", awaited.stdout)
+        self.assertNotIn("abandoned", awaited.stdout)
+        self.assertNotIn("died without a terminal status", awaited.stdout)
+
+    def test_first_error_lines_prefers_the_full_log_over_the_wrapper_tail(self) -> None:
+        run_dir = self.tmp / "run-firsterror"
+        self.plan("Fix.Alpha", "fail")
+        self.run_queue(["Fix.Alpha"], run_dir)
+        lines = RUNNER_MODULE.first_error_lines(
+            run_dir, self.read_status(run_dir), 5
+        )
+        self.assertTrue(lines, "a failed build must surface at least one error")
+        quiet = sorted((run_dir / "logs").glob("Fix.Alpha.quiet/*/*/stdout.log"))
+        self.assertTrue(quiet, "fixture must produce a quiet stdout log")
+        self.assertIn("elaboration failed in Fix.Alpha", lines[0])
 
     def test_lock_names_the_owner_and_is_free_afterwards(self) -> None:
         free = subprocess.run(

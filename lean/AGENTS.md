@@ -50,10 +50,29 @@ lean/scripts/lean-build-queue.py build RelativeConicArcs.Gates.Example --cores 2
 
 `build` queues behind another build owner instead of refusing, naming that owner once; waits in
 the foreground; prints one bounded envelope with the per-target outcomes and, on failure, the
-first errors, so a caller never opens a log to learn why a build failed. When a build outlasts
-`--foreground` (default 600s) it prints exactly one resume command and exits zero. Its exit code
-is the build's: 0 success, 1 build failure, 130 interrupted, 126 abandoned. Do not ask whether
-the lock is free before calling it — that question is what this command exists to remove.
+first errors, so a caller never opens a log to learn why a build failed. Do not ask whether the
+lock is free before calling it — that question is what this command exists to remove.
+
+Two separate waits, and the distinction matters: `--lock-wait` (default 3600s) queues behind
+another owner and holds nothing meanwhile, while `--quiet-wait` (default 120s) blocks for a
+foreign Lean process *while already holding the build lock*, once per target. Never raise
+`--quiet-wait` to a large value: `pgrep -x lean` matches a language server as readily as a
+build, so a long quiet wait idles the machine's single build slot behind an open editor.
+
+Exit codes, all distinct on purpose:
+
+| code | meaning |
+|---|---|
+| 0 | every target built — or, with a `resume:` line, still running and handed off |
+| 1 | a target failed to build |
+| 2 | the run was refused: a live foreign Lean build, or the queue could not start |
+| 124 | the caller's wait was cancelled or timed out; the build is untouched and still owns the lock |
+| 125 | the run died before writing a status file — an invalid target, or an exhausted lock wait |
+| 126 | the run was abandoned: killed without writing a terminal status, typically an OOM kill |
+| 130 | the run itself was interrupted |
+
+Exit 0 carries two outcomes, so a caller that must distinguish them checks for the `resume:`
+line rather than the code alone.
 
 Blocking wait on an existing run, for a caller that cannot poll:
 

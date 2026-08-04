@@ -46,6 +46,7 @@ EXIT_OK = 0
 EXIT_BUILD_FAILED = 1
 EXIT_REFUSED = 2
 EXIT_TIMED_OUT = 124
+EXIT_INVALID = 125
 EXIT_ABANDONED = 126
 EXIT_INTERRUPTED = 130
 
@@ -584,7 +585,11 @@ def command_run(args: argparse.Namespace) -> int:
         lock_file,
         run_id,
         targets,
-        wait_seconds=args.wait_quiet_seconds,
+        wait_seconds=(
+            args.wait_quiet_seconds
+            if args.wait_lock_seconds is None
+            else args.wait_lock_seconds
+        ),
         poll_seconds=args.poll_seconds,
     )
 
@@ -1088,52 +1093,101 @@ def exact_descendant_activity(
     return max(lean or candidates, key=lambda entry: (entry["depth"], entry["pid"]))
 
 
-TERMINAL_STATES = {"success", "failed", "interrupted"}
+TERMINAL_STATES = {"success", "failed", "refused", "interrupted"}
 
 STATE_EXIT_CODES = {
     "success": EXIT_OK,
     "failed": EXIT_BUILD_FAILED,
+    "refused": EXIT_REFUSED,
     "interrupted": EXIT_INTERRUPTED,
     "abandoned": EXIT_ABANDONED,
+    "failed-before-status": EXIT_INVALID,
 }
 
 
-def settled_state(run_dir: Path) -> tuple[str | None, dict[str, Any] | None]:
-    """Return a run's state, promoting a dead owner's stale `running` to `abandoned`.
+def classify(status: dict[str, Any], manifest: dict[str, Any]) -> str:
+    """Name a run's state, promoting a dead owner's stale `running` to `abandoned`.
 
-    A terminal status is written on exit and on SIGINT/SIGTERM, so `running` with the lock
-    released means the process died without writing one.  The lock is an open file
-    description, released by the kernel even on an OOM kill, so its absence is evidence.
+    A terminal status is written on exit and on SIGINT/SIGTERM, and always before the lock is
+    released, so a non-terminal state with the lock gone means the process died without
+    writing one.  The lock is an open file description that the kernel releases even on an OOM
+    kill, so its absence is evidence rather than inference.  This is the single definition of
+    the rule; every command that reports a state calls it.
+    """
+    state = status.get("state")
+    if state in TERMINAL_STATES:
+        return str(state)
+    lock_path = manifest.get("lock_file")
+    if not isinstance(lock_path, str) or not lock_path:
+        return str(state) if state else "unknown"
+    holder = lock_holder(Path(lock_path))
+    if holder is None or holder.get("run_id") != status.get("run_id"):
+        status["note"] = "no live owner holds the lock; the run died without a terminal status"
+        return "abandoned"
+    return str(state) if state else "unknown"
+
+
+def launcher_is_live(run_dir: Path) -> bool | None:
+    """Whether a detached launcher is still alive; None when there is no launcher record.
+
+    Filesystem-based, so it does not search the process table.  The launcher is this
+    process's own descendant, so its PID is meaningful in this namespace.
+    """
+    detached = read_json(run_dir / "detached.json")
+    if detached is None:
+        return None
+    pid = detached.get("launcher_pid")
+    if not isinstance(pid, int):
+        return None
+    return Path(f"/proc/{pid}").exists()
+
+
+def settled_state(run_dir: Path) -> tuple[str | None, dict[str, Any] | None]:
+    """Return a run's terminal state, or `(None, status)` while it is still going.
+
+    A run refused before it could create its status file — an invalid target name, an
+    exhausted lock wait, a rejected resource profile — leaves a launcher log and nothing
+    else.  Reporting that as "not settled yet" would make the caller wait out its whole
+    window and then call a failure a success, so a dead launcher with no status file is
+    itself a terminal state.
     """
     status = read_json(run_dir / "status.json")
     if status is None:
+        if launcher_is_live(run_dir) is False:
+            return "failed-before-status", None
         return None, None
-    state = status.get("state")
-    if state in TERMINAL_STATES:
-        return state, status
     manifest = read_json(run_dir / "manifest.json") or {}
-    holder = lock_holder(Path(manifest.get("lock_file", "")))
-    if holder is None or holder.get("run_id") != status.get("run_id"):
-        status["note"] = "no live owner holds the lock; the run died without a terminal status"
-        return "abandoned", status
+    state = classify(status, manifest)
+    if state in TERMINAL_STATES or state == "abandoned":
+        return state, status
     return None, status
 
 
-def first_error_lines(run_dir: Path, status: dict[str, Any] | None, limit: int) -> list[str]:
-    """Pull the first Lean errors out of a failed run, newest log first.
+SENTINEL_LOGS = {"<aggregate>": "aggregate-no-build.log", "<mathlib cache get>": "mathlib-cache-get.log"}
 
-    The caller should never have to open a log to learn why a build failed, so this reads
-    the failing target's log and its quiet-wrapper stdout, and falls back to the launcher
-    log for failures that happen before any target starts, such as a refused lock.
+
+def first_error_lines(run_dir: Path, status: dict[str, Any] | None, limit: int) -> list[str]:
+    """Pull the earliest Lean errors out of a failed run.
+
+    The caller should never have to open a log to learn why a build failed.  The full build
+    output is read before the quiet wrapper's own summary, because that summary carries only
+    a tail preview: reading it first would report the last errors, and for a Lean failure the
+    first error is the one that matters and the rest are usually cascade.  Failures that
+    happen before any target starts, such as an invalid target name or an exhausted lock
+    wait, are only in the launcher log, which is the final fallback.
     """
     if limit <= 0:
         return []
+    logs = run_dir / "logs"
     candidates: list[Path] = []
     failed = (status or {}).get("failed_target")
-    if isinstance(failed, str) and not failed.startswith("<"):
-        candidates.append(run_dir / "logs" / f"{failed}.log")
-        candidates.extend(sorted((run_dir / "logs").glob(f"{failed}.quiet/*/*/stdout.log")))
-        candidates.extend(sorted((run_dir / "logs").glob(f"{failed}.quiet/*/*/stderr.log")))
+    if isinstance(failed, str):
+        if failed in SENTINEL_LOGS:
+            candidates.append(logs / SENTINEL_LOGS[failed])
+        elif not failed.startswith("<"):
+            candidates.extend(sorted(logs.glob(f"{failed}.quiet/*/*/stdout.log")))
+            candidates.extend(sorted(logs.glob(f"{failed}.quiet/*/*/stderr.log")))
+            candidates.append(logs / f"{failed}.log")
     candidates.append(run_dir / "launcher.log")
     found: list[str] = []
     for path in candidates:
@@ -1228,7 +1282,13 @@ def command_await(args: argparse.Namespace) -> int:
     run_dir = args.run_dir.expanduser().resolve()
     if not (run_dir / "status.json").is_file() and not (run_dir / "detached.json").is_file():
         fail(f"no readable run state in {run_dir}")
-    state, status = wait_for_terminal(run_dir, args.timeout)
+    try:
+        state, status = wait_for_terminal(run_dir, args.timeout)
+    except KeyboardInterrupt:
+        print()
+        print("state:   wait cancelled; the run is untouched and still owns the lock")
+        print(f"run dir: {run_dir}")
+        return EXIT_TIMED_OUT
     if state is None:
         print(f"state:   still running after {args.timeout}s")
         print(f"run dir: {run_dir}")
@@ -1247,6 +1307,13 @@ def command_build(args: argparse.Namespace) -> int:
     that resumes the wait.  A caller never has to ask whether the tree is free, never has
     to discover a failure later, and never has to open a log to see the first error.
     """
+    # Choose the run directory here rather than scraping it from the child's display output:
+    # the parent must know the path even when the child dies before printing anything.
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    run_dir = (
+        args.run_dir or STATE_ROOT_DEFAULT / f"run-{stamp}-{uuid.uuid4().hex[:8]}"
+    ).expanduser().resolve()
+
     forwarded = [
         "run",
         *args.targets,
@@ -1254,8 +1321,15 @@ def command_build(args: argparse.Namespace) -> int:
         args.profile,
         "--threads",
         str(args.threads),
-        "--wait-quiet-seconds",
+        # These are two different waits.  The lock wait queues behind another build owner and
+        # holds nothing meanwhile; the quiet wait blocks once per target *while already holding
+        # the lock*, so a large value there would idle the whole machine's build slot.
+        "--wait-lock-seconds",
         str(args.lock_wait),
+        "--wait-quiet-seconds",
+        str(args.quiet_wait),
+        "--run-dir",
+        str(run_dir),
         "--detach",
     ]
     if args.cores is not None:
@@ -1264,10 +1338,12 @@ def command_build(args: argparse.Namespace) -> int:
         forwarded += ["--lean-root", str(args.lean_root)]
     if args.aggregate:
         forwarded += ["--aggregate", *args.aggregate]
+    if args.serial_first:
+        forwarded += ["--serial-first", *args.serial_first]
+    if args.cache_mode is not None:
+        forwarded += ["--cache-mode", args.cache_mode]
     if args.lock_file is not None:
         forwarded += ["--lock-file", str(args.lock_file)]
-    if args.run_dir is not None:
-        forwarded += ["--run-dir", str(args.run_dir)]
     forwarded += args.run_arg
 
     lean_root = (args.lean_root or LEAN_ROOT_DEFAULT).expanduser().resolve()
@@ -1277,7 +1353,8 @@ def command_build(args: argparse.Namespace) -> int:
     holder = lock_holder(lock_file)
     if holder is not None:
         print(
-            f"queueing behind run {holder.get('run_id')} (held since {holder.get('since')})",
+            f"another owner held the lock at submission: run {holder.get('run_id')} "
+            f"(since {holder.get('since')}); this build queues behind it",
             flush=True,
         )
 
@@ -1287,15 +1364,19 @@ def command_build(args: argparse.Namespace) -> int:
         text=True,
         check=False,
     )
-    run_dir: Path | None = None
-    for line in launch.stdout.splitlines():
-        if line.startswith("run dir:"):
-            run_dir = Path(line.split(":", 1)[1].strip())
-    if launch.returncode != EXIT_OK or run_dir is None:
-        sys.stderr.write(launch.stderr)
-        fail(f"could not start the build: {launch.stderr.strip() or launch.stdout.strip()}")
+    if launch.returncode != EXIT_OK:
+        detail = launch.stderr.strip() or launch.stdout.strip() or "no diagnostic"
+        fail(f"could not start the build: {detail}")
 
-    state, status = wait_for_terminal(run_dir, args.foreground)
+    try:
+        state, status = wait_for_terminal(run_dir, args.foreground)
+    except KeyboardInterrupt:
+        # The wait is the caller's, but the build is not: it keeps running and keeps the lock.
+        print()
+        print(f"state:   wait cancelled; the build is still running and still owns the lock")
+        print(f"run dir: {run_dir}")
+        print(f"resume:  {Path(__file__).resolve()} await {run_dir}")
+        return EXIT_TIMED_OUT
     if state is None:
         print(f"state:   still running after {args.foreground}s")
         print(f"run dir: {run_dir}")
@@ -1312,22 +1393,16 @@ def command_status(args: argparse.Namespace) -> int:
         fail(f"no readable status.json in {run_dir}")
     manifest = read_json(run_dir / "manifest.json") or {}
 
-    state = status.get("state")
-    if state == "running":
-        holder = lock_holder(Path(manifest.get("lock_file", "")))
-        if holder is None or holder.get("run_id") != status.get("run_id"):
-            # Terminal status is written on exit and on SIGINT/SIGTERM.  "running" with the lock
-            # released means the process died without writing one -- an OOM kill or SIGKILL.
-            state = "abandoned"
-            status["state"] = state
-            status["note"] = "no live owner holds the lock; the run died without a terminal status"
-        else:
-            pid = status.get("pid")
-            lean_root_value = manifest.get("lean_root")
-            if isinstance(pid, int) and isinstance(lean_root_value, str):
-                active = exact_descendant_activity(pid, Path(lean_root_value))
-                if active is not None:
-                    status["active_process"] = active
+    state = classify(status, manifest)
+    if state != status.get("state"):
+        status["state"] = state
+    if state not in TERMINAL_STATES and state != "abandoned":
+        pid = status.get("pid")
+        lean_root_value = manifest.get("lean_root")
+        if isinstance(pid, int) and isinstance(lean_root_value, str):
+            active = exact_descendant_activity(pid, Path(lean_root_value))
+            if active is not None:
+                status["active_process"] = active
 
     if args.json:
         print(json.dumps(status, indent=2, sort_keys=True))
@@ -1438,6 +1513,15 @@ def parser() -> argparse.ArgumentParser:
         default=0,
         help="how long to queue behind a foreign Lean build (default: refuse immediately)",
     )
+    run.add_argument(
+        "--wait-lock-seconds",
+        type=nonnegative_int,
+        default=None,
+        help=(
+            "seconds to queue behind another build owner; defaults to --wait-quiet-seconds, "
+            "which otherwise governs both this and the foreign-quiet wait"
+        ),
+    )
     run.add_argument("--poll-seconds", type=positive_int, default=60)
     run.add_argument("--tail-lines", type=nonnegative_int, default=80)
     run.add_argument("--nix-binary", default="nix")
@@ -1515,17 +1599,31 @@ def parser() -> argparse.ArgumentParser:
         "--run-dir", type=Path, default=None, help="durable run state; default is auto-named"
     )
     build.add_argument("--aggregate", nargs="+", default=None)
+    build.add_argument("--serial-first", nargs="+", default=None)
+    build.add_argument("--cache-mode", choices=("auto", "require", "off"), default=None)
     build.add_argument(
         "--run-arg",
         action="append",
         default=[],
-        help="extra flag forwarded verbatim to `run`; the ordinary front door needs none",
+        help=(
+            "one argv token forwarded verbatim to `run`; a flag with a value needs two, as "
+            "--run-arg=--cache-mode --run-arg=require. The ordinary front door needs none"
+        ),
     )
     build.add_argument(
         "--lock-wait",
         type=nonnegative_int,
         default=3600,
-        help="seconds to queue behind another build owner before refusing",
+        help="seconds to queue behind another build owner before refusing; holds nothing meanwhile",
+    )
+    build.add_argument(
+        "--quiet-wait",
+        type=nonnegative_int,
+        default=120,
+        help=(
+            "seconds to wait for a foreign Lean process to go quiet, per target, while already "
+            "holding the build lock; keep this small so a stalled wait cannot idle the lock"
+        ),
     )
     build.add_argument(
         "--foreground",
