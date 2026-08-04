@@ -124,6 +124,13 @@ a field, of any order, and it is short enough to formalize directly: three cross
 three-by-three determinants, and the observation that the two determinants are negatives of each
 other.
 
+*Correction, established while formalizing this lemma:* the two displayed line triples are
+exchanged relative to the prose. The triple `A₁B₂, A₂B₃, A₃B₁` is the conclusion matching
+`{14, 25, 36}`, and `A₁B₃, A₂B₁, A₃B₂` is the hypothesis matching `{16, 23, 45}`. The displayed
+determinants are correct for the triples as displayed, so the lemma and its proof stand. The Lean
+statement and proof are derived from the lemma statement rather than from these displayed lines;
+see `notes/2026-08-04-c855-triple-perspective.md`.
+
 ### Theorem (the concurrence spectrum)
 
 **Theorem.** Let `A` be a six-arc in the Desarguesian plane of odd order `q`. Then the graph `G` of
