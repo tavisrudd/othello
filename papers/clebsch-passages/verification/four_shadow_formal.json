@@ -15,9 +15,11 @@
     "RelativeConicArcs.FourShadowRecognition.triangleCubic_translate_of_proportional",
     "RelativeConicArcs.FourShadowRecognition.triangleMixedDifference_eq_pairTriangleSum",
     "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate",
-    "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation"
+    "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation",
+    "RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification",
+    "RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced"
   ],
-  "axiom_report_sha256": "4f70f426e5713d38e1fe8b76603f09d9c2ea8bc6135679fd3851d5b8f7b2e302",
+  "axiom_report_sha256": "b7e9946fccc387ea60602bdd0692fbd709ac13767d658e158e915cb9d5be0978",
   "claim_map": {
     "oriented_packet": {
       "coverage": "five root-pair balances and the displayed 012 coefficient",
@@ -45,12 +47,12 @@
   "gate_module": "RelativeConicArcs.Gates.FourShadowRecognition",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-four-shadow-formal-v1",
-  "source_closure_sha256": "8de2c1d5570bbc6725407289c9e7ada6d7a18fea319e25cc7e9d681cdda84e5c",
+  "source_closure_sha256": "87df60c394e702884368ae854e4d8c38f7a470c68eb15aa791b5ff9492060095",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
-    "RelativeConicArcs/FourShadowRecognition.lean": "56d916155d61b07b5487dd2782c9cf8525db1bb8e39ac6f7d9b8de2a07d05999",
-    "RelativeConicArcs/Gates/FourShadowRecognition.lean": "f20d03f793169d259d150345b822c700c63cbe7d5af0ce5b352bb5c60b47b26b",
+    "RelativeConicArcs/FourShadowRecognition.lean": "85c8b97086d0f31756b6ee180905d6b4d7ef054baade45d10381e9159b48da9d",
+    "RelativeConicArcs/Gates/FourShadowRecognition.lean": "38e5baf7ce9c7485a7aa64c9c6ca877777b6d8498d64e20d16b8a47b5f620233",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",
     "RelativeConicArcs/WeightedMatchingEvaluation.lean": "06ef04d1a05622f94a0e46a87f4d66e2ac5a6f355a1bad9daedcb8e4a5355e66"
@@ -58,7 +60,14 @@
   "trust_boundary": {
     "excluded": "The rank-14 weighted Jacobian calculation and any global classification of remote weighted solutions are not formalized.",
     "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound. The one finite step is kernel reduction: the five vertex balances split the four edges at the first non-root vertex into the six patterns with two positive edges, and in each branch the remaining four balances determine the six remaining edge parameters over their 2^6 assignments, giving the twelve labelled pentagons as a proved classification.",
-    "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, the pentagon classification, and each polynomial identity and coefficient comparison are kernel-checked."
+    "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, and each polynomial identity and coefficient comparison are kernel-checked. The pentagon classification is audited in both directions: pentagon_bit_classification derives the twelve listed sign patterns from the five vertex balances, and pentagon_bits_balanced derives the five balances from each listed pattern. That the listed patterns number twelve and are pairwise distinct is read off the displayed list; no Lean statement asserts either."
   },
-  "verifier_sha256": "9e914111e4bfc2ed38ed0baad4f0b427cb04a932ed656a8d6fe11a90921ad16d"
+  "verifier_sha256": "aa6e79f46228b961cae1515f33eb6851934c64ca41f3aacb636863d2b7a2bca6",
+  "axiom_report_provenance": {
+    "build_run_id": "run-20260804-044501-6e4a6456",
+    "gate_stdout_sha256": "cc59605b434463238fe905c5dcca6471a353a8d9fe122a3db67318be67c6ec2c",
+    "generator": "verification/extract_axiom_report.py",
+    "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
+    "gate_stdout": "verification/evidence/gate_stdout/four_shadow.stdout.txt"
+  }
 }

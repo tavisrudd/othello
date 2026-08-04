@@ -3,8 +3,8 @@
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
   "axiom_report_sha256": "6a93cc0d466758f339e456b40c3d539be91d9ca85fe87c63f7597835c84b98d8",
-  "verifier_sha256": "0f63106bc296089059e8d0a1d09a2600a0271ea427dd9281f393c482a5bceea3",
-  "source_closure_sha256": "ac3e2e967a73220c321be2cbecc1216cb479ba2986282f6cdfaa470c8f778cb0",
+  "verifier_sha256": "757d05c982ee34838a3e770377b36d2736574fcbf2a3fa987537dc940b75bf5c",
+  "source_closure_sha256": "d97c79579e9e208d86db399228bbb3b9e86475b103254312eae3e59319805ec3",
   "source_sha256": {
     "RelativeConicArcs/QuadraticPinching.lean": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4",
     "RelativeConicArcs/SplitQuadraticPinching.lean": "d46ec97de2670ef0d34873843a8d2821d532d4a00c56e6ebb829fd8c44def6f2",
@@ -20,7 +20,7 @@
     "RelativeConicArcs/AlignedTwoGraph.lean": "6735f192a97fd55a4090c30adfc49ac98a5d110d314efcf08e2331f3ae38c96d",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ClebschPassagesCorrespondence.lean": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28",
-    "RelativeConicArcs/Gates/ClebschPassages.lean": "e053838df725592267504e7d2c3b5b99f57704bc07f02a0baf906574543e21c8"
+    "RelativeConicArcs/Gates/ClebschPassages.lean": "55f3fddab6c3c873165614e8520aae6da0c4d197acdf5d2235c7dd52720dc5cc"
   },
   "audited_declarations": [
     "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
@@ -189,5 +189,12 @@
     "symbolic": "Pinching, conductor, involutive splitting, tight-frame, signed-Gram, switching, aligned-design disambiguation and globalization, Petersen-eigenspace, fixed-line, determinant, and scalar identities are kernel-checked symbolic proofs.",
     "native": "Native decision is confined to the displayed finite reflection matrices and the F_11 nonsquare leaf, the explicit finite marked fixed vectors together with their third elementary symmetric values, and the aligned two-graph's finite pair and anchor signature classifications over the 16,384 normalized two-cut cases. The order-six conference matrix, its square and its transpose, and the twenty triangle signs are kernel-checked and no longer contribute a compiled-evaluation axiom.",
     "excluded": "No full manuscript row is claimed: the finite-set normalization inputs, global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
+  },
+  "axiom_report_provenance": {
+    "build_run_id": "run-20260804-044501-6e4a6456",
+    "gate_stdout_sha256": "df0a38f30484aaf8336dae9e0c47ca53762b76fd81d1e82f3ddcbcde94524ff0",
+    "generator": "verification/extract_axiom_report.py",
+    "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
+    "gate_stdout": "verification/evidence/gate_stdout/passages.stdout.txt"
   }
 }

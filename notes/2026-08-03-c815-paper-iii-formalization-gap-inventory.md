@@ -109,10 +109,11 @@ Route. These divide into three kinds, and none needs the manuscript weakened:
 
 Ten of the twenty-seven carriers are cleared, from the axiom reports
 regenerated out of the six-gate build `run-20260804-040512-9965a2e4`. The
-four-shadow gate now has no compiled evaluation at any of its sixteen
-terminals, and the conference module contributes none. Passages grew from
-forty-three to forty-six terminals with the Ramsey and anchor additions, and
-then to fifty when the aligned-anchor statements were audited individually.
+four-shadow gate now has no compiled evaluation at any of its terminals, and
+`ClebschGoldenConference.lean` — which is in all three closures — contains no
+`native_decide` at all, which is stronger than the axiom reports alone show.
+The passages gate went from forty-three audited terminals to fifty with the
+Ramsey and anchor additions.
 
 | gate | terminals | carrying a native axiom | was |
 |---|---|---|---|
@@ -120,8 +121,19 @@ then to fifty when the aligned-anchor statements were audited individually.
 | `ClebschGoldenReturn` | 28 | 8 | 13 |
 | `FourShadowRecognition` | 16 | 0 | 4 |
 
-The seventeen remaining carriers descend from fourteen distinct native
-sources, in three families. The golden quadratic characters supply the
+The seventeen remaining carriers depend on thirty-six distinct native axiom
+constants — nine reached by the passages gate, twenty-seven by the
+golden-return gate, with no constant shared between them. Twenty of the
+golden-return constants are the `middleExterior_sq_row_*` lemmas behind a
+single square identity; collapsing that family to one gives seventeen
+independent native sources. An earlier revision of this note said fourteen,
+which was wrong in the direction that understates the surface: it dropped the
+row family and the two golden-descent sources that the same paragraph then
+names. Counting instead by module, five modules emit native axioms:
+`GoldenQuadraticCharacters`, `ClebschInvariantCubic`, `AlignedTwoGraph`,
+`ClebschMiddleExterior` and `ClebschGoldenDescent`.
+
+The seventeen carriers fall into three families. The golden quadratic characters supply the
 reflection factorizations and the `F_11` nonsquare leaf, reaching three
 passages terminals. `ClebschInvariantCubic.markedFixedVector_sum` and
 `sigmaThree_markedFixedVector` reach three more, two of them through the
@@ -217,19 +229,22 @@ consistent with the proof is the one to formalize.
 - Module headers currently describe native evaluation as an accepted internal
   method. Once class A is cleared, every such sentence must be rewritten to the
   actual method, in the same change as the proof.
-- The claim map assigns `signedTriangle_sq`, `triangleSign_four_point`, and
-  `switch_eq_reconstructed_triangleSign` to gates that do not audit them; the
-  assignment must match the gate that actually exports each terminal.
+- Closed and found to be false on inspection: the passages claim map was said
+  to assign `signedTriangle_sq`, `triangleSign_four_point` and
+  `switch_eq_reconstructed_triangleSign` to gates that do not audit them. Every
+  one of its eight supplemental entries names
+  `RelativeConicArcs.Gates.ClebschGoldenReturn`, and all eight declarations are
+  in that gate's audited list. The `golden_return_formal.json` map, which was
+  genuinely missing, now assigns all twenty-eight of its terminals.
 - No Paper III module may cite an internal record; the reference-direction rule
   is checked as part of the closure sweep, not only on changed files.
-- The release allowlist `papers/clebsch-passages/release_files.json` ships the
-  passages and golden-return gate artifacts but none of the four-shadow ones:
-  `verify_four_shadow_lean.py`, `four_shadow_axioms.txt`,
-  `four_shadow_formal.json` and `four_shadow_source_closure.json` are all
-  absent. A reader of the released paper therefore cannot replay the gate whose
-  compiled evaluation this task removed. Whether that is deliberate depends on
-  the promotion decision C816 owns for the recognition packet; if the packet
-  enters the manuscript, the four artifacts must be added in the same change.
+- Closed: the release allowlist shipped the passages and golden-return gate
+  artifacts and both generators but none of the four-shadow ones, so a reader
+  could not replay the gate whose compiled evaluation this task removed. All
+  four four-shadow artifacts are now shipped. Separately, `verify_release.py`
+  ran no Lean gate at all; it now replays all three in source-only mode when
+  given a Lean tree, and names them as unchecked when it is not, so a release
+  run without the Lean sources cannot be mistaken for one with them.
 - Paper III's three gates have no fact file under `lean/trust/facts`, unlike
   Paper I's orientation spine. A read-only `lean/scripts/lean-trust-spine.py
   check` reports `module-unreached-by-units` for `AlignedTwoGraph`,

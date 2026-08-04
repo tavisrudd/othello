@@ -3,8 +3,8 @@
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
   "axiom_report_sha256": "39b9b544674cd4936b731bcca563d473cbc4ddb2ce83990f812c265b2afdd26b",
-  "verifier_sha256": "e2eaa5b39694a9b3e883940ff62da5c785f2aa482a83743a86a04a240efbb988",
-  "source_closure_sha256": "cba7e5961eb0ecc71127393b861cd39341b331126525c23232051f990a386b4b",
+  "verifier_sha256": "77140e531381683f18f2a26d1aefcd3800b28cc0049e7c08cef96516cc6d0e34",
+  "source_closure_sha256": "c972d9a5964e415d6dc2252501d27568e784de54c2cdf923b3decec11acf9ebd",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
@@ -22,7 +22,7 @@
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",
     "RelativeConicArcs/WeightedMatchingEvaluation.lean": "06ef04d1a05622f94a0e46a87f4d66e2ac5a6f355a1bad9daedcb8e4a5355e66",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "e6716d66fdc8fa8885066c45d7a16fdc13cd121048a8c89c3651fdc65b1f738d"
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "87108974c5f4e8cc90d833412f0a1aefc9aaab25611d9a270bc10aa84cf1ebce"
   },
   "audited_declarations": [
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq",
@@ -54,9 +54,64 @@
     "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic",
     "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
   ],
+  "claim_map": {
+    "OPER-1": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq",
+        "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose",
+        "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq",
+        "RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns",
+        "RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate",
+        "RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq",
+        "RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_complement_entry",
+        "RelativeConicArcs.ClebschMiddleExterior.middleExterior_eq_hodge_mul",
+        "RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq",
+        "RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal",
+        "RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff",
+        "RelativeConicArcs.ClebschMiddleExterior.complementIndex_involutive",
+        "RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq",
+        "RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff",
+        "RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic",
+        "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic",
+        "RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_sq",
+        "RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient",
+        "RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison",
+        "RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det",
+        "RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar"
+      ],
+      "excluded": "the geometric identification of the four shadows with the marked golden presentation, and the cross-golden determinant comparison, remain human arguments; the middle-exterior square, its diagonal, its parity criterion, its common-neighbour counts and both degree-ten comparison claims are decided by the compiled evaluator rather than the kernel"
+    },
+    "OPER-3": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero",
+        "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
+        "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
+      ],
+      "excluded": "the general cross-block spectrum formula, the closed-walk count, the inclusion-rank descent, the higher-order Ramsey exclusion, and the classical aligned-design consequences remain human arguments"
+    },
+    "OPER-4": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch",
+        "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign",
+        "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root",
+        "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot"
+      ],
+      "excluded": "the finite-set extension to seven vertices, the passage from arbitrary labels to normalized cut coordinates, and the distinctness of the anchor points remain human inputs; the aligned anchor itself is audited by the passages gate"
+    }
+  },
   "trust_boundary": {
     "symbolic": "Ring-general switching, four-point, balance, reconstruction, augmentation, companion, matching-evaluation, commutator-Pfaffian, and three-vertex signed-matrix square identities are kernel-checked symbolic proofs.",
     "native": "Native decision is confined to the middle-exterior incidence module - the Hodge and middle-exterior square identities with their diagonal, parity, and common-neighbour counts - and to the two degree-ten comparison claims of the golden descent. The order-six conference matrix, its square and its transpose, its twenty triangle signs, and its translation invariance are kernel-checked and no longer contribute a compiled-evaluation axiom.",
     "excluded": "The manifest does not claim formal coverage of the higher-order inclusion/Ramsey exchange-rigidity argument, balanced-class classification, abstract atom recovery, the exterior-cube kernel, binary transvectants, or optional quaternion-order refinements."
+  },
+  "axiom_report_provenance": {
+    "build_run_id": "run-20260804-044501-6e4a6456",
+    "gate_stdout_sha256": "6e52dcfb64b4aa0efa515da4d85e9ca386a90e998f8b7241ca6520180117df86",
+    "generator": "verification/extract_axiom_report.py",
+    "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
+    "gate_stdout": "verification/evidence/gate_stdout/golden_return.stdout.txt"
   }
 }

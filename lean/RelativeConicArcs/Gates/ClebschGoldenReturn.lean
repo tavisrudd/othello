@@ -19,10 +19,17 @@ the order-six balanced exchange-spectrum calculation.  The higher-order
 inclusion-rank and Ramsey exclusion remains a human proof.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
-two-graph reconstruction, and the generic companion identities.  Native
-decision evaluates the explicit integral conference matrix, its twenty
-triangle signs, the determinant-defined middle-exterior operator, and the two
-displayed descent matrices.  No generated certificate or externally supplied
+two-graph reconstruction, and the generic companion identities.  The explicit
+integral conference matrix is kernel-checked: its symmetry, its square, its
+twenty triangle signs, and its translation invariance are discharged by
+`decide` over the thirty-six index pairs, so it contributes no
+compiled-evaluation axiom to any terminal printed here.
+
+Native decision evaluates the determinant-defined middle-exterior operator —
+its Hodge square, the twenty row identities behind its own square, its
+diagonal, its parity criterion, and its two common-neighbour counts — and the
+two displayed descent matrices.  Eight of the twenty-eight terminals printed
+below inherit such an axiom.  No generated certificate or externally supplied
 matrix is imported.
 -/
 

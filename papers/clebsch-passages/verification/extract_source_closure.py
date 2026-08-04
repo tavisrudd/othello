@@ -26,6 +26,11 @@ from pathlib import Path
 
 
 IMPORT_RE = re.compile(r"^import\s+(\S+)\s*$", re.MULTILINE)
+# Any import-looking line the strict form above does not capture must stop the
+# run rather than silently shrink the pinned closure: a `public import` or a
+# trailing comment would otherwise drop a module from the inventory and from
+# every hash derived from it.
+LOOSE_IMPORT_RE = re.compile(r"^\s*(?:public\s+|meta\s+|private\s+)?import\b.*$", re.MULTILINE)
 LOCAL_PREFIX = "RelativeConicArcs"
 
 
@@ -47,7 +52,18 @@ def walk(lean_root: Path, root: str) -> tuple[list[str], set[str]]:
         source = module_path(lean_root, module)
         if not source.is_file():
             raise SystemExit(f"extract_source_closure: missing source for {module}")
-        for imported in IMPORT_RE.findall(source.read_text(encoding="utf-8")):
+        text = source.read_text(encoding="utf-8")
+        strict = IMPORT_RE.findall(text)
+        loose = LOOSE_IMPORT_RE.findall(text)
+        if len(strict) != len(loose):
+            unmatched = [
+                line for line in loose if IMPORT_RE.fullmatch(line.strip()) is None
+            ]
+            raise SystemExit(
+                f"extract_source_closure: {module} has an import this tool cannot "
+                f"parse: {unmatched!r}"
+            )
+        for imported in strict:
             if imported == LOCAL_PREFIX or imported.startswith(LOCAL_PREFIX + "."):
                 pending.append(imported)
             else:

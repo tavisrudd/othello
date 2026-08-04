@@ -31,6 +31,11 @@ CONTINUATION_RE = re.compile(r"^ ")
 
 
 def extract(text: str) -> str:
+    if "error:" in text:
+        raise SystemExit(
+            "extract_axiom_report: the build log reports an error; an axiom report "
+            "may only be taken from a clean gate build"
+        )
     lines: list[str] = []
     inside = False
     for line in text.splitlines():
@@ -45,6 +50,13 @@ def extract(text: str) -> str:
         inside = False
     if not lines:
         raise SystemExit("extract_axiom_report: no #print axioms diagnostics found")
+    for line in lines:
+        if "does not depend on any axioms" in line:
+            continue
+        if not line.rstrip().endswith("]"):
+            raise SystemExit(
+                f"extract_axiom_report: truncated axiom list: {line!r}"
+            )
     return "\n".join(lines) + "\n"
 
 

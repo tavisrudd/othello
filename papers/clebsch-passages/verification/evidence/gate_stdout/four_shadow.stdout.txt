@@ -1,0 +1,50 @@
+✔ [1249/1250] Built RelativeConicArcs.FourShadowRecognition (19s)
+ℹ [1250/1250] Built RelativeConicArcs.Gates.FourShadowRecognition (1.2s)
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:24:0: 'RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation' depends on axioms: [propext,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:25:0: 'RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:26:0: 'RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:27:0: 'RelativeConicArcs.FourShadowRecognition.cubicsProportional_smul_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:28:0: 'RelativeConicArcs.FourShadowRecognition.triangleCubic_translate_of_proportional' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:29:0: 'RelativeConicArcs.FourShadowRecognition.triangleMixedDifference_eq_pairTriangleSum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:30:0: 'RelativeConicArcs.FourShadowRecognition.pairTriangleSum_eq_zero_of_triangleCubic_translate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:31:0: 'RelativeConicArcs.FourShadowRecognition.pairTriangleSum_eq_zero_of_cubicsProportional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:32:0: 'RelativeConicArcs.FourShadowRecognition.exists_scalar_mul_self_of_offDiagonal_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:33:0: 'RelativeConicArcs.FourShadowRecognition.exists_mul_self_eq_scalar_of_cubicsProportional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:34:0: 'RelativeConicArcs.FourShadowRecognition.pentagonGauge_of_firstRowBalanced' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:35:0: 'RelativeConicArcs.FourShadowRecognition.normalizedSignMatrix_sq_of_firstRowBalanced' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:36:0: 'RelativeConicArcs.FourShadowRecognition.cubicsProportional_four_of_sixTests' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:37:0: 'RelativeConicArcs.FourShadowRecognition.cubicsProportional_neg_four_of_sixTests' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:38:0: 'RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:39:0: 'RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:40:0: 'RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:41:0: 'RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced' depends on axioms: [propext]
+Build completed successfully (1250 jobs).

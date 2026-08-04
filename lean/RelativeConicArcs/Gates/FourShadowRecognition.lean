@@ -37,3 +37,5 @@ or generated source is used by the declarations printed here.
 #print axioms RelativeConicArcs.FourShadowRecognition.cubicsProportional_neg_four_of_sixTests
 #print axioms RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare
 #print axioms RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare
+#print axioms RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification
+#print axioms RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced

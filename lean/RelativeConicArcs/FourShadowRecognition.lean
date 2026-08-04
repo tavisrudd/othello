@@ -696,8 +696,12 @@ patterns with two positive edges leaves six branches; in each of them the four
 remaining balances determine the six remaining edge parameters over those `2^6`
 assignments, refuted by linear arithmetic or matched by rewriting.  The
 converse, that each listed pattern satisfies the five balances, is
-`pentagon_bits_balanced`. -/
-private theorem pentagon_bit_classification
+`pentagon_bits_balanced`.  Both directions are public and both are audited by
+the four-shadow gate, so a reader replaying the gate sees the classification
+and its converse rather than only the forward inclusion.  The count twelve and
+the pairwise distinctness of the listed patterns are read off the displayed
+list; no Lean statement asserts either. -/
+theorem pentagon_bit_classification
     (b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 : Bool)
     (r1 : boolSign b0 + boolSign b1 + boolSign b2 + boolSign b3 = 0)
     (r2 : boolSign b0 + boolSign b4 + boolSign b5 + boolSign b6 = 0)
@@ -740,7 +744,7 @@ private theorem pentagon_bit_classification
 /-- The converse of the pentagon classification: each of the twelve listed sign
 patterns satisfies the five vertex balances.  With the classification itself
 this makes the twelve exactly the solution set of the five equations. -/
-private theorem pentagon_bits_balanced
+theorem pentagon_bits_balanced
     (b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 : Bool)
     (hcase :
       (b0 = false ∧ b1 = false ∧ b2 = true ∧ b3 = true ∧ b4 = true ∧

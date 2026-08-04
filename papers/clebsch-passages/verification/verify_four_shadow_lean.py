@@ -84,6 +84,17 @@ def main() -> int:
         raise SystemExit("four-shadow formal replay: FAIL [source closure inventory]")
 
     forbidden = re.compile(r"^\s*(?:axiom|unsafe\s+(?:def|theorem))\b", re.MULTILINE)
+    # Mechanisms that would move a proof outside the kernel without introducing
+    # an axiom the gate's `#print axioms` lines would show.  This gate
+    # claims no compiled evaluation at all, so `native_decide` is refused outright
+    # alongside the other escapes.
+    mechanisms = re.compile(
+        r"\bnative_decide\b"
+        r"|@\[[^\]]*(?:implemented_by|extern)"
+        r"|\bofReduceBool\b"
+        r"|^\s*(?:opaque|partial)\b",
+        re.MULTILINE,
+    )
     workflow_id = re.compile(r"\bC[0-9]{3,}\b")
     workflow_prose = re.compile(
         r"\b(?:TODO|FIXME|pending|temporary|fallback|agent|lane)\b",
@@ -99,6 +110,7 @@ def main() -> int:
         if (
             "sorry" in text
             or forbidden.search(text)
+            or mechanisms.search(text)
             or workflow_id.search(text)
             or workflow_prose.search(text)
         ):

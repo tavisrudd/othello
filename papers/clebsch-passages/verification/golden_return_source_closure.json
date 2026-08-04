@@ -97,10 +97,10 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 3687,
+      "bytes": 4120,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "e6716d66fdc8fa8885066c45d7a16fdc13cd121048a8c89c3651fdc65b1f738d"
+      "sha256": "87108974c5f4e8cc90d833412f0a1aefc9aaab25611d9a270bc10aa84cf1ebce"
     },
     {
       "bytes": 5030,
