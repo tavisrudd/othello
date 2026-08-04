@@ -169,6 +169,18 @@
       "role": "generated row masks of the four elliptic relation matrices and column masks of the four minimum-word orbits"
     },
     {
+      "paper_iv_path": "lean-certificates/generate_transporter_data.py",
+      "bytes": 9166,
+      "sha256": "1f6fd28ce7a1fbb23030ff93b0c56f8a498163425234b53cf2ae5d07bf11b187",
+      "role": "deterministic generator and byte-for-byte checker for the point and ordered-pair transporters of the symmetric-square action, refusing to emit unless the action is exhaustively verified transitive on the internal points and on each polar class"
+    },
+    {
+      "paper_iv_path": "lean-certificates/PassantCodeQ13/Equivariance/TransporterData.lean",
+      "bytes": 34286,
+      "sha256": "900423cd00c10b8551ceb70de24bf69eb3e34cdbd96f9d5c85b512bee8dbb399",
+      "role": "generated matrix indices transporting the base internal point to every internal point and each polar-class representative pair to every ordered distinct pair"
+    },
+    {
       "paper_iv_path": "lean-certificates/generate_minimum_word_orbits.py",
       "bytes": 5996,
       "sha256": "c7f816895c4ca4f8b639055088234e816b0b8505207f96b45155c4971a5fb469",
@@ -271,6 +283,12 @@
       "command": "python3 generate_association_transport_data.py --check",
       "output_contains": "q=13 association transport data: PASS",
       "certifies": "the checked relation and orbit column masks are byte-identical to deterministic regeneration from the normalized polar invariant and the projective action"
+    },
+    {
+      "cwd": "lean-certificates",
+      "command": "python3 generate_transporter_data.py --check",
+      "output_contains": "q=13 transporter data: PASS",
+      "certifies": "the tracked transporter indices are canonical, each one transports as claimed, and the symmetric-square action is transitive on the internal points and on each polar class"
     },
     {
       "cwd": "lean-certificates",
