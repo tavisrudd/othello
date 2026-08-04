@@ -87,3 +87,24 @@ Each cut names statements, not line numbers. Before moving anything, each module
 confirm that the surviving statements do not silently depend on a definition being moved out from
 under them — the coding and Brianchon–Petersen modules are the two where that risk is real, since
 their surviving declarations are definitions rather than closed theorems.
+
+## Sibling-namespace modules to vet before any boundary is drawn
+
+The order-eleven decoding module hid its consumers by declaring into a sibling module's namespace,
+so its definitions are reached through `open` and occur nowhere under a qualified name. A scan of
+human-scale modules found the same pattern in the following, each of which extends another module's
+namespace rather than its own. None is defective today; each needs declaration-level vetting — not
+an import graph — before any externalization, deletion, or split touches it.
+
+| module | namespace it extends |
+|---|---|
+| `RelativeConicArcs/ClebschBalancedSheetsH3.lean` | `ClebschBalancedSheets` |
+| `RelativeConicArcs/ClebschBalancedSheetsB3.lean` | `ClebschBalancedSheets` |
+| `RelativeConicArcs/PaperIOrientationSymmetryGenerators.lean` | `PaperIOrientationSymmetry` |
+| `RelativeConicArcs/ClebschPassageInterfacesData.lean` | `ClebschPassageInterfaces` |
+| `ProjectiveCap/PlaneTransitivity.lean` | `ProjectiveCap.Projective` |
+| `ProjectiveCap/PlaneAffineChart.lean` | `FrameGridBridge`, `ProjectiveCap.Projective` |
+
+Modules that declare only into the library-wide namespace are not in scope here: that is ordinary
+practice and carries no hiding risk. The risk is specific to extending a *sibling module's*
+namespace, where the extending module's name never appears in a consumer.
