@@ -296,6 +296,7 @@ gate = "source programme is not adopted as a standalone publication"
 
 [[repository]]
 name = "q13-passant-code"
+include_release_pdfs = true
 source = "papers/q13-passant-code"
 paper_ids = ["passant_code_q13"]
 disposition = "active"
