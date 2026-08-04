@@ -1,0 +1,95 @@
+# Companion-export configuration for diagonal isoduality and the transversal
+# Clifford groups of MDS--CSS codes.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only
+# the destination file names and the release prose live here.
+
+schema_version = 1
+area = "mds_css_transversal_groups"
+gate = "RelativeConicArcs.Gates.MDSCSSTransversalGeometry"
+trust_statement = "trust/MDS_CSS_TRANSVERSAL_GROUPS.md"
+axiom_audit = "trust/MDSCSSTransversalGroupsAxiomAudit.lean"
+
+statement_title = "Diagonal isoduality and transversal Clifford groups of MDS--CSS codes: formal boundary"
+
+overview = """
+This boundary records the formal companion to Tavis Rudd, *Diagonal Isoduality
+and Transversal Clifford Groups of MDS--CSS Codes* (DOI
+10.5281/zenodo.21766797).  Its scope is exactly that manuscript; the companion
+paper on local-unitary rigidity and quantitative rounding for stabilizer
+absolutely maximally entangled states keeps its own separate boundary.
+"""
+
+correspondence = """
+The exported closure proves the dictionary between ordered six-arcs in a
+projective plane over a finite field, exact `[6,3,4]` maximum-distance-separable
+codes, equal-phase Calderbank--Shor--Steane states, and the absolutely
+maximally entangled property, ending in the equivalence between that property
+and the code being an exact `[6,3,4]` code.  It proves the stabilizer
+dictionary: the tensor Weyl action of the label group `C × Cᗮ`, its Lagrangian
+property for the trace-symplectic form, the exact support criterion, minimality
+of the computational support, and the realization of every linear character on
+a Pauli-label subspace by symplectic pairing with an ambient label.  For a
+linear `[2m,m,m+1]` code over a finite field it proves that the space of
+diagonal multipliers carrying the code to its dual has dimension zero or one,
+that a nonzero multiplier has full support, and that the witness is unique up
+to a unit scalar.  It proves the coset and syndrome geometry of translated
+equal-phase states, the algebraic pencil quotient and its four-branch
+reduction, the Frobenius-sector divisors of the twisted pencil with their
+disjointness and field-automorphism equivariance, the marginal-moment algebra,
+the split-torus Weyl block relations, the cycle-polynomial factorizations of
+the transport divisor and their reduction to `(z-2)(9z-4)`, and the abstract
+consequences of a realized party-permutation extension.
+
+Several exported terminals are hypothesis-explicit interfaces: the exact
+fixed-party affine special-linear or split-torus carrier and its isodual and
+nullity dichotomies, the projective and local-Clifford classification of the
+admitted non-generalized-Reed--Solomon pencil and its local-unitary
+consequence, the fixed-party logical-phase kernel, the marginal and four-copy
+separators, and the transport determinant, rank, and orbit-geometry bridges.
+Each derives its conclusion from a structure whose fields state geometric
+propagation, orbit-recognition, or finite-certificate facts that the closure
+does not prove.
+
+The companion does not prove the arbitrary-additive stabilizer rigidity
+theorem, the transversal Clifford no-go, the Pauli phase-correction lemma, or
+the minimum-support atlas; the manuscript cites those from its companion paper.
+The finite ranks, orbit counts, and party-extension complements consumed by the
+interfaces above are established by exact certificate replays distributed with
+the manuscript rather than inside this closure.
+"""
+
+boundary = """
+Three six-party graph cardinalities — the triple, star, and perfect-matching
+counts — are discharged by exhaustive native evaluation and therefore expose
+declaration-local implementation axioms of the pinned toolchain; the rank-four
+multiplicity identity and the marginal-moment separator are proved from the
+star count and inherit its evaluation axiom.  Every other exported terminal is
+checked by kernel reduction and depends on no more than propositional
+extensionality, choice, and quotient soundness.  The closure contains no
+generated certificate, imported external data, user axiom, unsafe declaration,
+or admitted proof.
+"""
+
+axiom_audit_title = "Axiom audit for diagonal isoduality and transversal Clifford groups of MDS--CSS codes"
+
+axiom_audit_description = """
+This audit prints the axioms of every terminal exported with the diagonal
+isoduality boundary: the six-arc, code, state, and absolutely-maximally-entangled
+dictionary, the stabilizer dictionary and character realization, the diagonal
+multiplier line and nullity test, the exact fixed-party carrier dichotomies
+with their generalized Reed--Solomon and order-16464 instances, the encoder
+conversions and equal-phase rigidity imported from the companion paper, the
+coset and syndrome geometry, the admitted-pencil quotient and its
+classifications, the Frobenius-sector divisors, the marginal-moment separator,
+the fixed-party logical phase, the four-copy separator, the transport divisor,
+and the party-extension splitting consequences.
+"""
+
+readme_anchor = "  ordinary nodes."
+
+readme_bullet = """- `trust/manifests/mds_css_transversal_groups.json` records the diagonal
+  isoduality boundary: the multiplier line and nullity test, the exact
+  fixed-party transversal logical group it selects, the admitted-pencil
+  quotient, the syndrome geometry, and the transport divisor."""
