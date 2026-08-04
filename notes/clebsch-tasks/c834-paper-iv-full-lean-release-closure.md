@@ -119,10 +119,14 @@ filtering.
 ## Standalone pre-release accommodations to reverse
 
 A manuscript-only pre-release of `papers/q13-passant-code` was authorized on 2026-08-03 before the
-formal closure finished, so the standalone export omits the Lean companion.  The mirror
-`~/src/math-papers/q13-passant-code` exists with seven local commits and no remote branch; the
-author publishes and mints the DOI.  Its README states that the Lean development is deposited
-separately and expected the day after the deposit.  The manuscript, its README, and the evidence
+formal closure finished, so the standalone export omits the Lean companion.  The deposit is
+published from the mirror `~/src/math-papers/q13-passant-code` and its archival locator is
+[`10.5281/zenodo.21783971`](https://doi.org/10.5281/zenodo.21783971), recorded as the README badge.
+That deposit is immutable: the formal closure lands as a forward version, never as an edit to it.
+The manuscript itself carries no locator yet, since printing this DOI inside the PDF it identifies
+would need a later version anyway; insert it with the pinned formal-package locators in the same
+release pass.  The README states that the Lean development is deposited separately and expected
+the day after the deposit.  The manuscript, its README, and the evidence
 verifier were all changed to make a manuscript-only checkout coherent, and the deposit's verifier
 passes standalone while reporting the seven digests and one command it cannot check.  Every accommodation below
 exists only because the companion is not yet publishable, and each must be reversed once the shared
