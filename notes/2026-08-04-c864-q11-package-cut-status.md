@@ -28,6 +28,23 @@ printed, so one constant rendered unqualified inside its namespace and fully qua
 the same log read as two conflicting lists; names are now canonicalized when exactly one longer name
 matches at a namespace boundary, with ambiguity still refusing, covered by two new tests.
 
+**The published Dye boundary is true of the pinned base, and already behind the authority.** The
+package resolves `RelativeConicArcs.Q11DyeAxioms` from the base at pin `85dfde9e`, where both
+`dye1991_brianchon_bound` and `dye1991_equality_classification` are axioms, so the sealed fact
+records the rigidity terminal depending on both.  In the monorepo authority only
+`dye1991_equality_classification` remains an axiom: the triple-point bound was derived from the
+general six-arc theorem in `RelativeConicArcs/SixArcConcurrenceBound.lean` earlier the same day, and
+the second axiom's elimination is in progress.  Re-pinning the base therefore removes one cited
+literature assumption from the package's published fact, which raises the value of the base
+re-export beyond fixing the dropped-import defect.  Until that happens, neither the paper prose nor
+the trust manifest may describe the package fact's two Dye axioms as the current boundary.
+
+This also explains one row of the pruned-import audit recorded below: the base copy of
+`Q11DyeAxioms` lacks the `SixArcConcurrenceBound` import the authority now has, and that is age
+rather than breakage — the base version declares both axioms and needs no such import.  It is
+evidence that the fifteen pruned imports must be triaged individually, and that a standalone base
+build is the way to tell staleness from a real break.
+
 Still owed before the point-orbit step is closed: the Clebsch-rigidity paper release chain, whose
 `verification/build_trust_manifest.py` still pins package commit `9c5d474f` and must be advanced to
 `76e7b43e` with the trust manifest, statement identity, PDFs and standalone mirror regenerated; and
