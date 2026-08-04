@@ -152,6 +152,30 @@ the claim. Under the current instruction they are closed by proving the claim.
    before C816 promotes it, it needs either a structural rank argument or a
    Lean-checked rational rank computation compressed behind a proved reduction.
 
+## Paper-side inventory
+
+The sentence-level assertion inventory of the manuscript, README, and artifact
+description is `notes/2026-08-03-paper-iii-assertion-inventory.md`: 506
+assertions in document order, each with source line, theorem label, kind, and
+the external attribution the paper itself makes. It is the paper-side half of
+the bidirectional correspondence map required by the Paper I standard; the
+Lean-side half is the union of the three formal maps.
+
+Two of its findings need author decisions rather than formalization, because
+they are ambiguities in the manuscript's own quantifiers and the instruction is
+that Lean follows the paper:
+
+- the selected-query claim is stated once as sufficiency ("already suffices")
+  and once as an exact count ("exactly the quadratic count"); the formal
+  statement must be one or the other;
+- the abstract says the oriented cubic has four equivalent descriptions while
+  the introduction attributes all four to the six outer translates, leaving it
+  unstated whether the claim is per-total or for the distinguished cubic alone.
+
+The remaining ambiguity list in that inventory records where a formal statement
+must pin a quantifier the prose leaves open; in each case the strongest reading
+consistent with the proof is the one to formalize.
+
 ## Gap class D — documentation and ledger alignment
 
 - The manuscript's reproducibility section states the Lean coverage in prose;
