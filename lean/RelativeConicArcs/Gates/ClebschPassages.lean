@@ -18,19 +18,17 @@ import RelativeConicArcs.ClebschPassagesCorrespondence
 This is the public replay surface for the algebraic mechanisms used in the
 current Clebsch paper.  The pinching, eigenspace, tight-frame, switching,
 conditional aligned-design overlap argument, and scalar-factor arguments are symbolic.
-The order-six conference matrix contributes no compiled-evaluation axiom to
-any terminal printed here; the kernel proofs of its finite table claims live
-in `ClebschGoldenConference` and are printed by the golden-return gate.  Both
-bounds behind the triangle Ramsey equality on six labelled points, and the
-aligned anchor they produce, are kernel-checked and printed below.
+No compiled evaluation enters this gate.  Every terminal printed below
+depends only on `propext`, `Classical.choice` and `Quot.sound`, and four
+depend on no axiom at all.  The order-six conference matrix is kernel-checked
+in `ClebschGoldenConference`; both bounds behind the triangle Ramsey equality
+on six labelled points, and the aligned anchor they produce, are proved here.
 
-Native decision is confined to the displayed finite reflection matrices, one
-finite-field nonsquare check, the values of explicitly displayed finite
-vectors together with their third elementary symmetric function, and the two
-aligned two-graph classifiers: the pair signature over its 16,384 cases and
-the anchor signature over the eight normalized cuts.  Nine of the fifty
-terminals printed below inherit such an axiom.  The third-outside-point
-elimination is symbolic.
+The finite steps are all kernel reductions: the displayed reflection matrices
+and the marked fixed vectors entrywise, the finite-field nonsquare witness by
+deciding the eleven residues, and the two aligned two-graph classifiers over
+their 16,384 and eight cases.  The third-outside-point elimination is
+symbolic.
 
 The gate deliberately does not assert the geometric correspondence between
 Hitchin's spaces and these algebraic models, nor the integral

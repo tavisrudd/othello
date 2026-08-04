@@ -20,31 +20,31 @@ set_option maxRecDepth 10000
 theorem middleExterior_sq_row_024 (T : Fin 20) :
     (middleExterior * middleExterior) 5 T =
       (125 • (1 : Matrix (Fin 20) (Fin 20) ℤ)) 5 T := by
-  native_decide +revert
+  decide +revert
 
 /-- Row 025 of the middle-exterior square identity. -/
 theorem middleExterior_sq_row_025 (T : Fin 20) :
     (middleExterior * middleExterior) 6 T =
       (125 • (1 : Matrix (Fin 20) (Fin 20) ℤ)) 6 T := by
-  native_decide +revert
+  decide +revert
 
 /-- Row 034 of the middle-exterior square identity. -/
 theorem middleExterior_sq_row_034 (T : Fin 20) :
     (middleExterior * middleExterior) 7 T =
       (125 • (1 : Matrix (Fin 20) (Fin 20) ℤ)) 7 T := by
-  native_decide +revert
+  decide +revert
 
 /-- Row 035 of the middle-exterior square identity. -/
 theorem middleExterior_sq_row_035 (T : Fin 20) :
     (middleExterior * middleExterior) 8 T =
       (125 • (1 : Matrix (Fin 20) (Fin 20) ℤ)) 8 T := by
-  native_decide +revert
+  decide +revert
 
 /-- Row 045 of the middle-exterior square identity. -/
 theorem middleExterior_sq_row_045 (T : Fin 20) :
     (middleExterior * middleExterior) 9 T =
       (125 • (1 : Matrix (Fin 20) (Fin 20) ℤ)) 9 T := by
-  native_decide +revert
+  decide +revert
 
 end ClebschMiddleExterior
 end RelativeConicArcs

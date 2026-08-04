@@ -1,3 +1,4 @@
+import RelativeConicArcs.ClebschMiddleExteriorSupport
 import RelativeConicArcs.ClebschMiddleExteriorSquareRows012To023
 import RelativeConicArcs.ClebschMiddleExteriorSquareRows024To045
 import RelativeConicArcs.ClebschMiddleExteriorSquareRows123To135
@@ -20,10 +21,33 @@ open scoped Matrix
 
 set_option maxRecDepth 10000
 
-/-- Middle-degree Hodge complementation squares to minus the identity. -/
+/-- The two concatenation signs of a triple and its complement multiply to
+minus one, which is the whole content of middle-degree Hodge complementation
+squaring to minus the identity. -/
+theorem hodgeSign_mul_complement (S : Fin 20) :
+    hodgeSign S * hodgeSign (complementIndex S) = -1 := by
+  fin_cases S <;> rfl
+
+/-- Middle-degree Hodge complementation squares to minus the identity.  The
+matrix has one nonzero entry in each row, at the complementary label, so the
+product collapses to that single term and the sign is the previous lemma. -/
 theorem hodgeMatrix_sq :
     hodgeMatrix * hodgeMatrix = -(1 : Matrix (Fin 20) (Fin 20) ℤ) := by
-  native_decide
+  ext S T
+  rw [Matrix.mul_apply,
+    Finset.sum_eq_single (complementIndex S)
+      (fun U _ hU => by simp [hodgeMatrix, hU]) (by simp)]
+  by_cases h : T = S
+  · subst h
+    simp only [hodgeMatrix, complementIndex_involutive T, eq_self_iff_true,
+      if_true, Matrix.neg_apply, Matrix.one_apply_eq]
+    rw [neg_mul_neg]
+    exact hodgeSign_mul_complement T
+  · have hzero : hodgeMatrix (complementIndex S) T = 0 := by
+      simp only [hodgeMatrix, complementIndex_involutive S]
+      exact if_neg h
+    rw [hzero, mul_zero, Matrix.neg_apply, Matrix.one_apply_ne (Ne.symm h),
+      neg_zero]
 
 /-- The middle-exterior return satisfies `K² = 125I`. -/
 theorem middleExterior_sq :

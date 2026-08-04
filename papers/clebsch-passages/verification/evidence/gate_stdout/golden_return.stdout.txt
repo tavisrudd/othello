@@ -1,4 +1,13 @@
-ℹ [1410/1410] Built RelativeConicArcs.Gates.ClebschGoldenReturn (5.0s)
+⚠ [1401/1410] Replayed RelativeConicArcs.ClebschMiddleExteriorSquare
+warning: RelativeConicArcs/ClebschMiddleExteriorSquare.lean:42:58: This simp argument is unused:
+  eq_self_iff_true
+
+Hint: Omit it from the simp argument list.
+  simp only [hodgeMatrix, complementIndex_involutive T, e̵q̵_̵s̵e̵l̵f̵_̵i̵f̵f̵_̵t̵r̵u̵e̵,̵if_true, Matrix.neg_apply,
+  ̲  ̲ ̲ ̲ ̲ ̲Matrix.one_apply_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+ℹ [1410/1410] Built RelativeConicArcs.Gates.ClebschGoldenReturn (5.1s)
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:40:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -18,68 +27,35 @@ info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:47:0: 'RelativeConicArcs.
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:49:0: 'RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign' depends on axioms: [propext, Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:50:0: 'RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root' depends on axioms: [propext]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:51:0: 'RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:53:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq._native.native_decide.ax_1_1]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:53:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:54:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_complement_entry' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:55:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_eq_hodge_mul' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:56:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq' depends on axioms: [propext,
- Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_012._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_013._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_014._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_015._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_023._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_024._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_025._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_034._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_035._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_045._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_123._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_124._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_125._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_134._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_135._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_145._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_234._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_235._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_245._native.native_decide.ax_1_1,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq_row_345._native.native_decide.ax_1_1]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:57:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal' depends on axioms: [propext,
- Quot.sound,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal._native.native_decide.ax_1_1]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:58:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff' depends on axioms: [propext,
- Quot.sound,
- RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff._native.native_decide.ax_1_1]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:56:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:57:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:58:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff' depends on axioms: [propext, Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:59:0: 'RelativeConicArcs.ClebschMiddleExterior.complementIndex_involutive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:60:0: 'RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq._native.native_decide.ax_1_1]
+ Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:61:0: 'RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff._native.native_decide.ax_1_1]
+ Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:63:0: 'RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:64:0: 'RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:65:0: 'RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison._native.native_decide.ax_1_1]
+ Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:66:0: 'RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det._native.native_decide.ax_1_1]
+ Quot.sound]
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:67:0: 'RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

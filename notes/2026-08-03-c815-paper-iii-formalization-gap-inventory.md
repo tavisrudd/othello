@@ -105,54 +105,51 @@ Route. These divide into three kinds, and none needs the manuscript weakened:
 - *Small arithmetic leaves* (`two_not_square_zmod11`). Kernel `decide` over
   `ZMod 11` is available and cheap; native evaluation is unnecessary.
 
-### Measured state after the first conversion round (2026-08-04)
+### Measured state: compiled evaluation eliminated (2026-08-04)
 
-Ten of the twenty-seven carriers are cleared, from the axiom reports
-regenerated out of the gate build `run-20260804-050416-1085523f`, whose
-standard output is tracked under
-`papers/clebsch-passages/verification/evidence/gate_stdout/`. The
-four-shadow gate now has no compiled evaluation at any of its terminals, and
-`ClebschGoldenConference.lean` — which is in all three closures — contains no
-`native_decide` at all, which is stronger than the axiom reports alone show.
-The passages gate went from forty-three audited terminals to fifty with the
-Ramsey and anchor additions, and the four-shadow gate from sixteen to nineteen
-with the pentagon classification, its converse, and the five-balance inner
-product lemma.
+All twenty-seven carriers are cleared. The three gates audit fifty,
+twenty-eight and nineteen terminals; every one depends only on `propext`,
+`Classical.choice` and `Quot.sound`, and four of the passages terminals depend
+on no axiom at all. `native_decide` does not occur anywhere in any of the three
+pinned closures, and all three replays now refuse it, so this is a checked
+property rather than a declared boundary.
 
-| gate | terminals | carrying a native axiom | was |
+| gate | terminals | carrying a native axiom | at task start |
 |---|---|---|---|
-| `ClebschPassages` | 50 | 9 | 10 |
-| `ClebschGoldenReturn` | 28 | 8 | 13 |
-| `FourShadowRecognition` | 19 | 0 | 4 |
+| `ClebschPassages` | 50 | 0 | 10 of 43 |
+| `ClebschGoldenReturn` | 28 | 0 | 13 of 28 |
+| `FourShadowRecognition` | 19 | 0 | 4 of 16 |
 
-The seventeen remaining carriers depend on thirty-six distinct native axiom
-constants — nine reached by the passages gate, twenty-seven by the
-golden-return gate, with no constant shared between them. Twenty of the
-golden-return constants are the `middleExterior_sq_row_*` lemmas behind a
-single square identity; collapsing that family to one gives seventeen
-independent native sources. An earlier revision of this note said fourteen,
-which was wrong in the direction that understates the surface: it dropped the
-row family and the two golden-descent sources that the same paragraph then
-names. Counting instead by module, five modules emit native axioms:
-`GoldenQuadraticCharacters`, `ClebschInvariantCubic`, `AlignedTwoGraph`,
-`ClebschMiddleExterior` and `ClebschGoldenDescent`.
+How each family fell, in the order attempted:
 
-The seventeen carriers fall into three families. The golden quadratic characters supply the
-reflection factorizations and the `F_11` nonsquare leaf, reaching three
-passages terminals. `ClebschInvariantCubic.markedFixedVector_sum` and
-`sigmaThree_markedFixedVector` reach three more, two of them through the
-passages correspondence. The aligned two-graph's own
-`pairSignature_classification` and `anchorSignature_eq_false_iff_balanced`
-reach the last three. On the golden-return side every carrier is either the
-middle-exterior incidence module — the Hodge square, the twenty
-`middleExterior_sq_row_*` lemmas behind `middleExterior_sq`, the diagonal, the
-parity criterion and the two common-neighbour counts — or one of the two
-degree-ten comparison claims of the golden descent.
+- *Small arithmetic and displayed finite data.* The nonsquare witness over the
+  eleven residues, the displayed reflection matrices, the marked fixed vectors
+  and their third elementary symmetric value, the middle-exterior diagonal,
+  parity criterion and common-neighbour counts, and the degree-ten comparison
+  determinant by cofactor expansion. Kernel `decide` or `norm_num` throughout.
+- *Finite classification over a parameter space.* The anchor signature over its
+  eight normalized cuts and the pair signature over its 16,384 cases both
+  kernel-decide, the larger in seventeen seconds, which also cleared the
+  seven-signature injectivity that inherited from it.
+- *The twenty middle-exterior row lemmas.* These were expected to need a
+  formalized Cauchy-Binet theorem, since Mathlib has no compound-matrix
+  multiplicativity and the identity `K = 125 I` follows structurally from
+  `C = 5 I` only through it. They kernel-decide as they stand: five rows in
+  fifteen seconds. The structural route is no longer needed for the artifact,
+  though it remains the better proof if the module is ever generalized away
+  from the fixed order-six table.
+- *Middle-degree Hodge complementation.* This one got the structural proof
+  rather than a decision. The matrix carries a single nonzero entry per row, at
+  the complementary label, so the product collapses to one term and the entire
+  content is that a triple's two concatenation signs multiply to minus one.
+  That is now the named lemma `hodgeSign_mul_complement`, and
+  `hodgeMatrix_sq` is a four-line argument from it and the involution.
 
-The three axiom reports are regenerated by
-`papers/clebsch-passages/verification/extract_axiom_report.py` and the three
-closure inventories by `extract_source_closure.py`; neither file may be edited
-by hand, because the verifiers compare them byte for byte.
+This settles the prediction recorded in the mystery ledger of
+2026-08-04-c815-paper-iii-gate-hardening-report.md: the compiled-evaluation
+uses were habitual rather than forced, and every one was cheaper to replace
+than its size suggested. The row family, named there as the case that could
+refute the prediction, did not.
 
 ## Gap class B — manuscript clauses with no formal counterpart
 

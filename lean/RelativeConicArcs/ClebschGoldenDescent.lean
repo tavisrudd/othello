@@ -74,11 +74,12 @@ with the three-copy companion matrix. -/
 theorem conference_mul_degreeTenComparison :
     conferenceMatrix * degreeTenComparison =
       degreeTenComparison * degreeTenCompanion := by
-  native_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;> decide
 
 /-- The comparison lattice has index four. -/
 theorem degreeTenComparison_det : Matrix.det degreeTenComparison = 4 := by
-  native_decide
+  simp [Matrix.det_succ_row_zero, Fin.sum_univ_succ, degreeTenComparison]
 
 /-- Exact conversion from the raw third-transvectant/Fischer scalar to the
 normalized transvectant and Bombieri--Fischer scalar. -/

@@ -2,25 +2,25 @@
   "schema": "clebsch-passages-formal-v1",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
-  "axiom_report_sha256": "6a93cc0d466758f339e456b40c3d539be91d9ca85fe87c63f7597835c84b98d8",
-  "verifier_sha256": "fe84e35200de8a88a2f1959f941cd6bfbb1221f492ae21067dd879b073d24882",
-  "source_closure_sha256": "ba45c684d25f2568e1659c6eee10d15fa5f116215aa9c6213ef799203f450320",
+  "axiom_report_sha256": "9cff40588cda8f5e282ce3fd498553cfb114a693375608dd1453256db0b2b475",
+  "verifier_sha256": "4388fc04545b4f496d756549c91b4fa22890d17ab84832e1442ba14585a5df6e",
+  "source_closure_sha256": "3026cbcaf717cf9e0bf11d069036834d6eaa57da4c59bb850b54b124b58d5adb",
   "source_sha256": {
     "RelativeConicArcs/QuadraticPinching.lean": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4",
     "RelativeConicArcs/SplitQuadraticPinching.lean": "d46ec97de2670ef0d34873843a8d2821d532d4a00c56e6ebb829fd8c44def6f2",
     "RelativeConicArcs/InvolutiveOddUnit.lean": "4c89dc3c2619fc4cd52e53d8c421f6f4cc234a026265d65c00ef2dbb6509f3b6",
-    "RelativeConicArcs/GoldenQuadraticCharacters.lean": "347c060643bd582d2776c18c0108b04731950278779b9d54807209dc5c7f0008",
+    "RelativeConicArcs/GoldenQuadraticCharacters.lean": "e91dc033c8269385018c0f8eae8d28df635e606a59083ccb242cfd88dec1842e",
     "RelativeConicArcs/TightFrameConference.lean": "923582e8230cda462e0a7f42bbf323b6469b5f058ea0f0274e41c7e663993791",
     "RelativeConicArcs/SignedEquiangularGram.lean": "477ff26912f2d63b999ec761ca5417707856914300f5bb156473751bb14df6ad",
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/MarkedClebschBridge.lean": "30746ec72da8651bc8673b89d78f135632d37195b9c44ac5cca4f071808949ad",
     "RelativeConicArcs/KneserPairEigenspace.lean": "eb2c89c22be925a62345746d0d3bf6a639ccd6fe5562859365875bbe3c1c03e6",
     "RelativeConicArcs/PetersenHarmonicKernel.lean": "146b96027caad330cfea9c16b2236957faf9e23110aebd9f5e1dfc48f1d18841",
-    "RelativeConicArcs/ClebschInvariantCubic.lean": "1587594c3a63e4b866075c67cc5deac2e10bf00cd5708c9aaf39168bcd773bdd",
-    "RelativeConicArcs/AlignedTwoGraph.lean": "6735f192a97fd55a4090c30adfc49ac98a5d110d314efcf08e2331f3ae38c96d",
+    "RelativeConicArcs/ClebschInvariantCubic.lean": "3647783f1c7fcec39d311618a4f37c1b293ce064b9621c257b099869ad0f23f7",
+    "RelativeConicArcs/AlignedTwoGraph.lean": "a03ae9c236c6fc5ca986e759bcc40e5b022e3f85fe049ed8a2933d88c73ab3ac",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ClebschPassagesCorrespondence.lean": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28",
-    "RelativeConicArcs/Gates/ClebschPassages.lean": "be7681e88de5179cfd9c8d7a7d4e8711695446a42a9f5cc64c118d51dbdce367"
+    "RelativeConicArcs/Gates/ClebschPassages.lean": "2d02d0e1b017f4a65db24a9a0ba862550c03d7a4f94a355b4f6e41083543fdf1"
   },
   "audited_declarations": [
     "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
@@ -200,12 +200,12 @@
   },
   "trust_boundary": {
     "symbolic": "Pinching, conductor, involutive splitting, tight-frame, signed-Gram, switching, aligned-design disambiguation and globalization, Petersen-eigenspace, fixed-line, determinant, and scalar identities are kernel-checked symbolic proofs.",
-    "native": "Native decision is confined to the displayed finite reflection matrices and the F_11 nonsquare leaf, the explicit finite marked fixed vectors together with their third elementary symmetric values, and the aligned two-graph's finite pair and anchor signature classifications over the 16,384 normalized two-cut cases. The order-six conference matrix, its square and its transpose, and the twenty triangle signs are kernel-checked and no longer contribute a compiled-evaluation axiom.",
+    "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound, and four depend on no axiom at all. The finite steps are kernel reductions: the displayed reflection matrices and the marked fixed vectors are checked entrywise, the nonsquare witness by deciding the eleven residues, and the aligned two-graph's signature classifiers over their 16,384 and eight cases. The replay refuses compiled evaluation anywhere in the pinned closure, so this is a checked property and not a declaration.",
     "excluded": "No full manuscript row is claimed: the finite-set normalization inputs, global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
   },
   "axiom_report_provenance": {
-    "build_run_id": "run-20260804-050416-1085523f",
-    "gate_stdout_sha256": "e2365f5df4419f72d5507d60c43e02d1dd5b37dc44076e0c8c0f89ff82bd713e",
+    "build_run_id": "run-20260804-060023-d43735f6",
+    "gate_stdout_sha256": "a26d7b10b87436102fb59a77491339ee94bdf384e6eace0ca20ba040381da16b",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
     "gate_stdout": "verification/evidence/gate_stdout/passages.stdout.txt"

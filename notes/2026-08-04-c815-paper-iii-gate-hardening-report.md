@@ -14,15 +14,18 @@ disagreements that need a TeX edit are listed at the end for the owner.
 
 ## What the three gates now are
 
-| gate | terminals | carrying a compiled-evaluation axiom |
-|---|---|---|
-| `RelativeConicArcs.Gates.ClebschPassages` | 50 | 9 |
-| `RelativeConicArcs.Gates.ClebschGoldenReturn` | 28 | 8 |
-| `RelativeConicArcs.Gates.FourShadowRecognition` | 19 | 0 |
+| gate | terminals | carrying a compiled-evaluation axiom | at task start |
+|---|---|---|---|
+| `RelativeConicArcs.Gates.ClebschPassages` | 50 | 0 | 10 of 43 |
+| `RelativeConicArcs.Gates.ClebschGoldenReturn` | 28 | 0 | 13 of 28 |
+| `RelativeConicArcs.Gates.FourShadowRecognition` | 19 | 0 | 4 of 16 |
 
-At the start of the task the same three gates had 43, 28 and 16 terminals,
-with 10, 13 and 4 compiled-evaluation carriers. Ten of the twenty-seven
-carriers are cleared and no new one was introduced.
+All twenty-seven compiled-evaluation carriers are cleared. Every audited
+terminal depends only on `propext`, `Classical.choice` and `Quot.sound`, and
+four depend on no axiom at all. `native_decide` occurs nowhere in any of the
+three pinned closures, and all three replays refuse it, so the property is
+checked rather than declared. The per-family account of how they fell is in
+2026-08-03-c815-paper-iii-formalization-gap-inventory.md.
 
 ## The mathematics that changed
 
@@ -126,15 +129,6 @@ boundaries declare it. Refusing it there would be a false claim.
 
 ## What remains
 
-**Seventeen compiled-evaluation carriers**, depending on thirty-six distinct
-native axiom constants — nine reached by the passages gate, twenty-seven by the
-golden-return gate, none shared. Twenty of the golden-return constants are the
-`middleExterior_sq_row_*` lemmas behind one square identity; collapsing that
-family gives seventeen independent sources, emitted by five modules:
-`GoldenQuadraticCharacters`, `ClebschInvariantCubic`, `AlignedTwoGraph`,
-`ClebschMiddleExterior` and `ClebschGoldenDescent`. The per-carrier map is in
-2026-08-03-c815-paper-iii-formalization-gap-inventory.md.
-
 **Gap classes B and C are untouched by this round**: nine manuscript clauses
 with no formal counterpart, and the claims recorded as strengths without
 matching statements — the explicit query family with its distinctness and
@@ -170,16 +164,16 @@ Not edited here. `papers/clebsch-passages/sections/08-verification.tex`:
 
 ## Mystery ledger
 
-- **Native evaluation was used where the kernel was already cheap.**
-  `two_not_square_zmod11` is a decision over eleven residues; the conference
-  table is thirty-six entries; the four-shadow classifier had a structural proof
-  available in the frozen human argument. None of these needed a compiled
-  evaluator. Settled by the `ej`/`tt` pass to this extent: the uses appear
-  habitual rather than forced, which predicts the remaining seventeen carriers
-  are cheaper to clear than their count suggests. The prediction is untested —
-  the middle-exterior square with its twenty row lemmas is the one that could
-  refute it, and a structural Hodge-complementation proof is the route that
-  would collapse the family to one argument.
+- **Native evaluation was used where the kernel was already cheap.** Settled,
+  and settled completely. The prediction recorded here — that the uses were
+  habitual rather than forced, and that the remaining seventeen carriers would
+  be cheaper than their count suggested — held for every one of them, including
+  the twenty middle-exterior row lemmas named as the case that could refute it.
+  They kernel-decide as they stand, five rows in fifteen seconds, so the
+  formalized Cauchy-Binet theorem that seemed to be the only structural route
+  was never needed. What remains genuinely open is why the original author
+  reached for compiled evaluation at all: nothing in the sizes required it, and
+  the whole conversion cost one working session.
 - **The Lean is narrower than the paper exactly where the paper is general.**
   Every conference statement fixes the index type to six labels, while the
   manuscript states the four-point identity, switching invariance and pair

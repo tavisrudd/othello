@@ -19,21 +19,21 @@ the order-six balanced exchange-spectrum calculation.  The higher-order
 inclusion-rank and Ramsey exclusion remains a human proof.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
-two-graph reconstruction, and the generic companion identities.  The explicit
-integral conference matrix is kernel-checked, by three different methods: its
-symmetry and its square are `Matrix.ext` followed by `decide` on each of the
-thirty-six index pairs, its twenty oriented triangle signs are one `decide` on
-the conjunction over the twenty increasing triples, and its translation
-invariance is not finite at all — it holds for an arbitrary commutative ring,
-argument and shift, proved by transporting the twenty integral signs
-symbolically.  None of the four contributes a compiled-evaluation axiom to any
-terminal printed here.
+two-graph reconstruction, and the generic companion identities.  No compiled
+evaluation enters this gate: every terminal printed below depends only on
+`propext`, `Classical.choice` and `Quot.sound`.
 
-Native decision evaluates the determinant-defined middle-exterior operator —
-its Hodge square, the twenty row identities behind its own square, its
-diagonal, its parity criterion, and its two common-neighbour counts — and the
-two displayed descent matrices.  Eight of the twenty-eight terminals printed
-below inherit such an axiom.  No generated certificate or externally supplied
+The explicit integral conference matrix is kernel-checked by three methods.
+Its symmetry and its square are `Matrix.ext` followed by `decide` on each of
+the thirty-six index pairs; its twenty oriented triangle signs are one
+`decide` on the conjunction over the increasing triples; and its translation
+invariance is not finite at all, holding for an arbitrary commutative ring,
+argument and shift.  The middle-exterior return is decided row by row, with
+its diagonal, parity criterion and common-neighbour counts, and the degree-ten
+comparison determinant by cofactor expansion.  Middle-degree Hodge
+complementation squaring to minus the identity is proved structurally rather
+than decided: the matrix carries one nonzero entry per row, so the product
+collapses to a single term.  No generated certificate or externally supplied
 matrix is imported.
 -/
 

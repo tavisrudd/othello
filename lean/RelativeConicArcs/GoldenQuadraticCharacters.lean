@@ -96,16 +96,18 @@ def reflectionE2SubE3 : Matrix (Fin 3) (Fin 3) ℤ :=
 /-- The exchanger is the product of the two displayed reflections. -/
 theorem exchanger_eq_reflection_mul :
     exchangerMatrix = reflectionE2 * reflectionE2SubE3 := by
-  native_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;> decide
 
 /-- The exchanger preserves the standard quadratic form. -/
 theorem exchanger_orthogonal :
     exchangerMatrix.transpose * exchangerMatrix = 1 := by
-  native_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;> decide
 
 /-- The exchanger has determinant one. -/
 theorem exchanger_det : exchangerMatrix.det = 1 := by
-  native_decide
+  simp [Matrix.det_fin_three, exchangerMatrix]
 
 /-- The two reflecting vectors have quadratic norms one and two, so their
 spinor-norm witness is exactly two. -/
@@ -134,19 +136,38 @@ def swapReflectionVector : Fin 3 → ℚ := ![0, 1, -1]
 theorem exchanger_reflection_norms :
     standardNormSq exchangerReflectionVector = 1 ∧
       standardNormSq swapReflectionVector = 2 := by
-  native_decide
+  refine ⟨?_, ?_⟩ <;>
+    norm_num [standardNormSq, exchangerReflectionVector, swapReflectionVector,
+      Fin.sum_univ_three, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.head_cons, Matrix.cons_val_succ, Matrix.cons_val_two,
+      Matrix.cons_val_three, Matrix.cons_val_four, Matrix.tail_cons,
+      Matrix.head_fin_const]
 
 /-- The first displayed integral matrix is the standard reflection formula. -/
 theorem reflectionE2_is_standardReflection :
     reflectionE2.map (Int.castRingHom ℚ) =
       standardReflection exchangerReflectionVector := by
-  native_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [reflectionE2, standardReflection, standardNormSq,
+      exchangerReflectionVector, Fin.sum_univ_three, Matrix.vecMulVec,
+      Matrix.one_apply, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.head_cons, Matrix.cons_val_succ, Matrix.cons_val_two,
+      Matrix.cons_val_three, Matrix.cons_val_four, Matrix.tail_cons,
+      Matrix.head_fin_const]
 
 /-- The second displayed integral matrix is the standard reflection formula. -/
 theorem reflectionE2SubE3_is_standardReflection :
     reflectionE2SubE3.map (Int.castRingHom ℚ) =
       standardReflection swapReflectionVector := by
-  native_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [reflectionE2SubE3, standardReflection, standardNormSq,
+      swapReflectionVector, Fin.sum_univ_three, Matrix.vecMulVec,
+      Matrix.one_apply, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.head_cons, Matrix.cons_val_succ, Matrix.cons_val_two,
+      Matrix.cons_val_three, Matrix.cons_val_four, Matrix.tail_cons,
+      Matrix.head_fin_const]
 
 /-- The exchanger is therefore a product of honest rational reflections,
 with spinor witness equal to the product of their derived norms. -/
@@ -167,6 +188,6 @@ instance : Fact (Nat.Prime 11) := ⟨by norm_num⟩
 
 /-- The spinor witness `2` is nonsquare in `𝔽₁₁`. -/
 theorem two_not_square_zmod11 : ¬ ∃ x : ZMod 11, x ^ 2 = 2 := by
-  native_decide
+  decide
 
 end RelativeConicArcs.GoldenQuadraticCharacters

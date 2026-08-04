@@ -18,7 +18,7 @@ set_option maxRecDepth 10000
 the two triples meet in one label. -/
 theorem middleExterior_mod_two_eq_one_iff (S T : Fin 20) :
     middleExterior S T % 2 = 1 ↔ intersectionSize S T = 1 := by
-  native_decide +revert
+  decide +revert
 
 /-- Complementation is an involution on the triple basis. -/
 theorem complementIndex_involutive : Function.Involutive complementIndex := by
@@ -30,14 +30,14 @@ nontrivial intersection relations. -/
 theorem commonIntersectionOneNeighbors_eq (S T : Fin 20) :
     commonIntersectionOneNeighbors S T =
       if S = T then 9 else if T = complementIndex S then 0 else 4 := by
-  native_decide +revert
+  decide +revert
 
 /-- Among labels distinct from `S`, its complement is characterized by having
 no common intersection-one neighbor with `S`. -/
 theorem commonIntersectionOneNeighbors_eq_zero_iff (S T : Fin 20)
     (hST : S ≠ T) :
     commonIntersectionOneNeighbors S T = 0 ↔ T = complementIndex S := by
-  native_decide +revert
+  decide +revert
 
 end ClebschMiddleExterior
 end RelativeConicArcs

@@ -92,9 +92,12 @@ def check_sources(lean_root: Path, manifest: dict[str, object]) -> None:
     # Mechanisms that would move a proof outside the kernel without introducing
     # an axiom the gate's `#print axioms` lines would show.  `set_option` is
     # covered because `debug.skipKernelTC` disables kernel typechecking outright
-    # and leaves no trace in `#print axioms`.
+    # and leaves no trace in `#print axioms`.  This gate's closure no longer
+    # uses compiled evaluation anywhere, so `native_decide` is refused outright
+    # rather than declared as a trust boundary.
     mechanisms = re.compile(
-        r"(?:@\[|attribute\s*\[)[^\]]*(?:implemented_by|extern)"
+        r"\bnative_decide\b"
+        r"|(?:@\[|attribute\s*\[)[^\]]*(?:implemented_by|extern)"
         r"|\bofReduceBool\b"
         r"|\bset_option\s+(?:debug\.skipKernelTC|allowUnsafeReducibility)",
         re.MULTILINE,

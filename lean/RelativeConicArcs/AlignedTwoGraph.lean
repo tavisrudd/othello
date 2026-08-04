@@ -253,7 +253,7 @@ instance (p : NormalizedCut) : Decidable (IsBalancedCut p) := by
 theorem anchorSignature_eq_false_iff_balanced :
     ∀ p : NormalizedCut,
       (∀ i, anchorSignature p i = false) ↔ IsBalancedCut p := by
-  native_decide
+  decide
 
 /-- Whether a pair of anchor points passes the aligned test with two outside
 points having cuts `p,s` and mutual edge bit `e`. -/
@@ -283,7 +283,7 @@ theorem pairSignature_classification :
       (p = p' ∧ s = s' ∧ e = e') ∨
         (IsBalancedCut p ∧ IsBalancedCut s ∧ p ≠ s ∧
           p' = s ∧ s' = p ∧ e' = e) := by
-  native_decide
+  decide
 
 /-- The three mutual edges among the three outside points. -/
 abbrev OutsideEdges := Fin 3 → Bool

@@ -31,7 +31,7 @@ triangle sign. -/
 theorem middleExterior_diagonal (S : Fin 20) :
     middleExterior S S =
       4 * triangleSign conferenceMatrix (triple S 0) (triple S 1) (triple S 2) := by
-  native_decide +revert
+  decide +revert
 
 end ClebschMiddleExterior
 end RelativeConicArcs

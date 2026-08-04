@@ -35,12 +35,18 @@ theorem sigmaThree_smul (c : ℚ) (y : Fin 5 → ℚ) :
 
 /-- The primitive marked vector lies in the standard sum-zero module. -/
 theorem markedFixedVector_sum : ∑ i, markedFixedVector i = 0 := by
-  native_decide
+  norm_num [markedFixedVector, Fin.sum_univ_five, Matrix.cons_val_zero,
+    Matrix.cons_val_one, Matrix.head_cons, Matrix.cons_val_succ, Matrix.cons_val_two,
+      Matrix.cons_val_three, Matrix.cons_val_four, Matrix.tail_cons,
+      Matrix.head_fin_const]
 
 /-- The normalized Clebsch cubic takes value twenty on the primitive marked
 fixed vector. -/
 theorem sigmaThree_markedFixedVector : sigmaThree markedFixedVector = 20 := by
-  native_decide
+  norm_num [sigmaThree, markedFixedVector, Fin.sum_univ_five,
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons, Matrix.cons_val_succ,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.cons_val_four,
+    Matrix.tail_cons]
 
 /-- The sum-zero parameter of the normalized chart point `xyz`. -/
 def normalizedMarkedVector : Fin 5 → ℚ :=
