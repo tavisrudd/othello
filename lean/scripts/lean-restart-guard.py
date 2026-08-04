@@ -81,11 +81,16 @@ def assert_no_lake() -> None:
 def lake_no_build(modules: list[str]) -> None:
     lake = shutil.which("lake")
     if lake is None:
-        fail("lake is unavailable; enter the Lean development environment first")
+        nix = shutil.which("nix")
+        if nix is None:
+            fail("lake is unavailable and nix cannot provide the guarded no-build probe")
+        command = [nix, "develop", "--command", "lake"]
+    else:
+        command = [lake]
     env = os.environ.copy()
     env["LEAN_NUM_THREADS"] = "1"
     result = subprocess.run(
-        [lake, "build", "--no-build", *modules],
+        [*command, "build", "--no-build", *modules],
         cwd=LEAN_ROOT,
         env=env,
         check=False,
@@ -232,6 +237,7 @@ def command_audit_log(args: argparse.Namespace) -> None:
 
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
+    result.add_argument("--lean-root", type=Path, default=LEAN_ROOT)
     subparsers = result.add_subparsers(dest="command", required=True)
 
     checkpoint = subparsers.add_parser(
@@ -257,7 +263,10 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
+    global LEAN_ROOT, BUILD_LIB
     args = parser().parse_args()
+    LEAN_ROOT = args.lean_root.expanduser().resolve()
+    BUILD_LIB = LEAN_ROOT / ".lake" / "build" / "lib" / "lean"
     args.function(args)
 
 
