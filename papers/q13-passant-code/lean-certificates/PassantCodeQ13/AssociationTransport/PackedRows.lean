@@ -158,13 +158,17 @@ private theorem parity_ofFn_eq_selectedBitParity (selector column : Nat) :
   | nil => intro start; simp [selectedBitParity]
   | cons row rest inductionHypothesis =>
       intro start
-      have shift : ∀ index : Nat, start + (index + 1) = start + 1 + index := by
-        intro index
-        omega
+      have reindex :
+          (fun middle : Fin rest.length =>
+              selector.testBit (start + (middle.1 + 1)) && (rest.getD middle.1 0).testBit column)
+            = fun middle : Fin rest.length =>
+              selector.testBit (start + 1 + middle.1) && (rest.getD middle.1 0).testBit column := by
+        funext middle
+        rw [show start + (middle.1 + 1) = start + 1 + middle.1 from by omega]
       simp only [List.length_cons, List.ofFn_succ, Fin.val_zero, Nat.add_zero,
         List.getD_cons_zero, Fin.val_succ, List.getD_cons_succ, List.foldl_cons,
-        shift, selectedBitParity]
-      rw [foldl_parity_init, inductionHypothesis (start + 1)]
+        selectedBitParity]
+      rw [foldl_parity_init, reindex, inductionHypothesis (start + 1)]
       cases selector.testBit start <;> cases row.testBit column <;> simp
 
 private theorem parity_ofFn_zero (selector column : Nat) (rows : List Nat) :
@@ -211,7 +215,7 @@ theorem maskMatrix_replicate_zero {rowCard columnCard count : Nat} :
     | succ count inductionHypothesis =>
         cases index with
         | zero => simp
-        | succ index => simpa using inductionHypothesis index
+        | succ index => simpa [List.replicate_succ] using inductionHypothesis index
   ext row column
   show ((List.replicate count 0).getD row.1 0).testBit column.1 = _
   rw [zeros]
