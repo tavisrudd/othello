@@ -52,6 +52,13 @@ the profile theorem's fibre sizes and secant-neighbour count into the selection 
 certificates consume, and the projective transport of an arbitrary support point to the fixed base
 point.  Report: `notes/2026-08-02-c834-weight-ten-semantic-bridge.md`.
 
+The semantic weight-ten module's own three finite leaves are now kernel checked.  The passant
+pencil of an internal point, uniqueness of the passant joining two distinct internal points, and
+the passant/secant dichotomy for their join are decided on the displayed coordinate lists through a
+single pencil table and transported to the subtype model, so both weight-ten terminals in the
+Paper IV gate axiom audit depend only on the foundational axioms.  Report:
+`notes/2026-08-03-c834-weight-ten-pencil-kernel-closure.md`.
+
 The earlier cycle-profile report also settles the route for the rest of weight ten.  The already-formalized pencil-profile
 dichotomy of `RelativeConicArcs.PassantCodeQ13.WeightTen.arbitrary_weightTen_word_has_pencil_profile`
 closes the endpoint with the two existing certificates, so neither the global moment identity and
