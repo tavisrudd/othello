@@ -300,3 +300,35 @@ include_release_pdfs = true
 source = "papers/q13-passant-code"
 paper_ids = ["passant_code_q13"]
 disposition = "active"
+
+[[repository.exclude_path]]
+path = "lean-certificates"
+reason = "the formal companion depends on the shared Lean library by a monorepo-relative path and is deposited separately once that library is published and pinned"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint passant_code_q13.pdf\n\ncheck: evidence lean lint passant_code_q13.pdf warnings\n"
+new = "all: passant_code_q13.pdf\n\ncheck: evidence passant_code_q13.pdf warnings\n"
+expected_count = 1
+reason = "the formal companion and the monorepo-wide TeX lint helper are outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lean:\n\tcd lean-certificates && nix develop --command lake build \\\n\t\tPassantCodeQ13.Gates.Main PassantCodeQ13.Gates.AxiomAudit\n\nlint:\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
+new = ""
+expected_count = 1
+reason = "the formal companion and the monorepo-wide TeX lint helper are outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check evidence lean lint warnings clean distclean"
+new = ".PHONY: all check evidence warnings clean distclean"
+expected_count = 1
+reason = "the formal companion and the monorepo-wide TeX lint helper are outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "passant_code_q13.pdf: $(SOURCE)\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "passant_code_q13.pdf: $(SOURCE)\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
