@@ -82,7 +82,28 @@ Successful output is deterministic and must equal
 PDF, statement identity, checker-output certificate, and a canonical hash of
 the complete release surface excluding the output's own hash.
 
-After an intentional scholarly-source change, regenerate the statement
+`check_manuscript_build.py` rebuilds each manuscript from a clean temporary
+directory and rejects TeX warnings, an unexpected page count, and a stale
+tracked PDF. The build pins `SOURCE_DATE_EPOCH` and sets `FORCE_SOURCE_DATE`,
+which fixes the timestamps TeX and the PDF writer embed and makes repeated
+builds byte-identical. The rebuilt PDF must therefore equal the tracked PDF
+exactly, which holds precisely when the tracked PDF is the build of the
+tracked source; a manuscript edit committed without refreshing its PDF fails
+this check. The pinned epoch is a build-normalization constant and is not a
+claim about when the manuscript was written or released.
+
+Regenerate the tracked PDFs with
+
+```text
+nix develop --command python3 verification/check_manuscript_build.py --update
+```
+
+That is the supported way to refresh them. Building by hand without the pinned
+epoch yields a PDF whose embedded timestamps differ from a fresh build, which
+this check rejects.
+
+After an intentional scholarly-source change, refresh the manuscript PDFs as
+above, regenerate the statement
 identity and trust manifest, commit the resulting clean release surface, and
 then refresh the final certificate by adding `--update-output` to the command
 above. After that check passes, rerun `build_trust_manifest.py` to record the

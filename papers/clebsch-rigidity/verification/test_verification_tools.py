@@ -109,6 +109,40 @@ class ReleaseRunnerTests(unittest.TestCase):
             },
         )
 
+    def test_manuscript_build_is_pinned_to_a_fixed_timestamp(self) -> None:
+        """The rebuilt PDF can only be compared byte for byte if dates are pinned."""
+        environment = manuscript.deterministic_environment()
+        self.assertEqual(
+            environment["SOURCE_DATE_EPOCH"], manuscript.DETERMINISTIC_EPOCH
+        )
+        self.assertEqual(environment["FORCE_SOURCE_DATE"], "1")
+
+    def test_manuscript_check_rejects_a_stale_tracked_pdf(self) -> None:
+        """A tracked PDF differing from the fresh build must fail, not be accepted.
+
+        The build itself is substituted, so this exercises the staleness
+        comparison without repeating the release runner's own manuscript build.
+        """
+        source_name = "clebsch_rigidity.tex"
+        original_build = manuscript.build_pdf
+        with tempfile.TemporaryDirectory() as directory:
+            paper_root = Path(directory)
+            (paper_root / source_name).write_bytes(b"unused source")
+            (paper_root / "clebsch_rigidity.pdf").write_bytes(b"tracked bytes")
+            manuscript.build_pdf = lambda *_: b"freshly built bytes"
+            try:
+                with self.assertRaises(RuntimeError) as caught:
+                    manuscript.check_source(paper_root, source_name, 26, update=False)
+                self.assertIn("is stale", str(caught.exception))
+                manuscript.check_source(paper_root, source_name, 26, update=True)
+                self.assertEqual(
+                    (paper_root / "clebsch_rigidity.pdf").read_bytes(),
+                    b"freshly built bytes",
+                )
+                manuscript.check_source(paper_root, source_name, 26, update=False)
+            finally:
+                manuscript.build_pdf = original_build
+
 
 class ManifestSemanticTests(unittest.TestCase):
     def manifest(self) -> dict[str, object]:
