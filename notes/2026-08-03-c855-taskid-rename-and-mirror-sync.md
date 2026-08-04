@@ -186,9 +186,53 @@ in-mirror `verify_release.py` replay.
    re-exported) or dropped from the mirror. This is an independent pre-existing divergence and
    should probably be settled before touching anything else in the mirror.
 
+## Phase 3 completed: both blockers resolved, mirror synchronized
+
+Both open decisions above were settled and the export ran to completion.
+
+**`FORMAL_COMPANION.json` restored to the authority.** The file is a small pin manifest naming
+the two formal companions — the q11 certificate package with its base dependency, and the human
+gate in the base library — plus the Zenodo concept DOI and the statement that no manuscript claim
+depends on Lean. It belongs with the paper, and its absence from the authority was the reason it
+had become a mirror-only orphan drifting at superseded pins. It is now tracked at
+`papers/clebsch-rigidity/FORMAL_COMPANION.json` with its certificate pins refreshed to package
+commit `9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5` and base commit
+`85dfde9e13e6c3d004e0e659fb83c1a4761902d0`; the human-gate block and concept DOI are unchanged.
+The exporter audit stays at zero findings, the export set grew to 57 files, and the authority's
+clean-source release run passed again with the file present. Future syncs now carry it
+automatically instead of leaving it to drift.
+
+**The nine renamed paths reconciled in the mirror.** The exporter asks the operator to reconcile
+tracked-path removals explicitly, which is the correct division of responsibility: a rename is
+indistinguishable from a deletion at the export boundary, so the tool refuses to infer intent.
+The nine superseded `c723_*`/`c725_*` paths were removed in the mirror with one explicit `git rm`
+commit, `4bc256b`, made before any sync so the removal is separately reviewable in the mirror's
+history rather than buried inside a content refresh. No exporter change was needed.
+
+### Export, verification, and replay
+
+```
+python3 papers/scripts/export-paper-repos.py sync --source-ref HEAD \
+  --repository clebsch-rigidity --root ~/src/math-papers/clebsch-rigidity
+synced=... source_commit=a41ca87bc8741a8b3945f9f2e228edfe664fe90c changed=31
+```
+
+The 31 refreshed files were committed in the mirror as one ordinary unsigned forward commit,
+`8c033ea0e972aebd8b0295caa6604acefa24a6c3`, "Synchronize the six-node theorem release". Nothing
+was pushed.
+
+`export-paper-repos.py verify --root ~/src/math-papers/clebsch-rigidity` reports
+`tracked_files=60` against source commit `a41ca87b`.
+
+The mirror's own release gate was then replayed from the mirror root against the pinned package
+checkout and returned `"status": "passed"`. Its release identity agrees with the authority
+exactly: every recorded hash matches, including the canonical `release_surface_sha256`
+`98f738715c722a06f36d…`, the statement identity `3c02c7071cdceae97f24…`, both manuscript source
+and PDF digests, the checker-output certificate, and `lean_commit`
+`9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5`.
+
 ## Open items
 
-- Phase 3 unfinished (see above). The authority is fully green and reproducible; only the
-  public mirror is out of date.
+- The mirror is two commits ahead of its `origin/main`; pushing is the author's decision.
 - No Lean work was performed; `/home/tavis/src/lean/finitegeom-clebsch-q11-certificates` was
   read only.

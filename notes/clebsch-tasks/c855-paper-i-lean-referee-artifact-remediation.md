@@ -35,8 +35,16 @@ public remote, the q11 certificate package is re-pinned and resealed at
 package/base/gate triple, and the full twenty-six-check release chain is green
 against the sealed package. Working log with exact commits and evidence:
 [`../2026-08-03-c855-six-node-lean-log.md`](../2026-08-03-c855-six-node-lean-log.md).
-Standalone-mirror synchronization and the base `PROVENANCE.md` drift repair
-remain open.
+The distributed paper package is also free of internal task-ID contamination:
+the eleven task-ID-named verification artifacts carry semantic filenames, every
+referencing surface was updated, the exporter's private-reference audit is at
+zero findings, and the standalone mirror `~/src/math-papers/clebsch-rigidity`
+now reproduces the authority's exact release identity. `FORMAL_COMPANION.json`
+is tracked in the authority instead of drifting as a mirror-only orphan.
+Report:
+[`../2026-08-03-c855-taskid-rename-and-mirror-sync.md`](../2026-08-03-c855-taskid-rename-and-mirror-sync.md).
+The base `PROVENANCE.md` module-count drift repair remains open, as does the
+section 7 distribution-boundary decision.
 
 ## Decisions (2026-08-03, author-delegated)
 
