@@ -407,7 +407,7 @@
   "sources": [
     {
       "path": "papers/equivariant-robust-completion/frobenius_pair_extension.tex",
-      "sha256": "b4f7d7853822c0c67d028a888f86c521549698f3a772c2ffaeaf335b3f17d1f0"
+      "sha256": "ce68b302d3ff9cb8d1804517458dce5791bf2449fffffefe3457a96d8e362340"
     }
   ],
   "title": "Frobenius-equivariant pair extension and robust repair of eight-arcs",

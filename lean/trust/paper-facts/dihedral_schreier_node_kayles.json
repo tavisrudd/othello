@@ -441,7 +441,7 @@
   "sources": [
     {
       "path": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex",
-      "sha256": "4bbc09ab0fd6af91e93c061396e73cf1bd49e33c66c0e25358e77cff5e1db45e"
+      "sha256": "17e9be577ecd9567ff5bc717cdc3ee782b73bde38bdfca0797b181c58957541f"
     }
   ],
   "title": "Node Kayles on Conic Schreier Graphs:\\\\ Dihedral and Polyhedral Templates",

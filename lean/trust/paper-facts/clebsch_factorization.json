@@ -13,6 +13,12 @@
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
     },
     {
+      "key": "CameronKorchmaros1993",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
       "key": "Dye1991",
       "kind": "bibitem",
       "self_authored": false,
@@ -25,13 +31,19 @@
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
     },
     {
-      "key": "EisenbudPopescu1998",
+      "key": "Giudici2007",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
     },
     {
-      "key": "Giudici2007",
+      "key": "Han2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "McDowellWildon2022",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
@@ -47,16 +59,22 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/clebsch-factorization/clebsch_factorization.tex",
-      "text": "T.~Rudd, \\newblock \\emph{Reconstructing the Clebsch code from its deep-hole syndrome locus}, \\newblock working paper, 2026."
+      "text": "T.~Rudd, \\newblock \\emph{Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus}, \\newblock working paper, 2026."
+    },
+    {
+      "key": "Steinberg1963",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
     }
   ],
   "dir": "papers/clebsch-factorization",
   "environment_counts": {
     "corollary": 10,
-    "lemma": 3,
+    "lemma": 7,
     "proposition": 5,
-    "remark": 4,
-    "theorem": 6
+    "remark": 7,
+    "theorem": 7
   },
   "labels": [
     {
@@ -113,11 +131,27 @@
     },
     {
       "environment": "lemma",
+      "label": "lem:lucas-socle-square-parity"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:projective-trade-reduction"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:shared-radial-cycle"
+    },
+    {
+      "environment": "lemma",
       "label": "lem:split-inert-frames"
     },
     {
       "environment": "lemma",
       "label": "lem:three-ray-cubic"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:uniform-sheet-exclusion"
     },
     {
       "environment": "proposition",
@@ -146,6 +180,18 @@
     {
       "environment": "remark",
       "label": "rem:cubic-target-flag"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:fixed-line-coalescence"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:historical-radial-scalars"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:paley-carrier"
     },
     {
       "environment": "remark",
@@ -201,6 +247,10 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:fixed-line-chow-rigidity"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:rank-three-arithmetic-gluing"
     },
     {
@@ -217,20 +267,20 @@
   "paper": "clebsch_factorization",
   "pdfs": [
     {
-      "bytes": 200125,
-      "pages": 28,
+      "bytes": 283851,
+      "pages": 43,
       "path": "papers/clebsch-factorization/clebsch_factorization.pdf",
-      "sha256": "2d6d1e63cf2cb2ce6c7fb5bf4dbdd2a466e2597028bc9f99e8fae13ca83c6826"
+      "sha256": "e423e039d00c2d404c84299b4a5af6be443e39ad4d2c79793f65a4e71d08cf11"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-factorization/clebsch_factorization.tex",
-      "sha256": "3d0bb608321a0231218e22cd0146823b4a4cf9e40d6b21faeb6b46bad9bf6584"
+      "sha256": "f64ab45852d0ed7a6205fff0e230f3c7c4d3b53c5be31f0ffb41d05a62472f6d"
     }
   ],
-  "title": "Quadratic recovery and cubic orientation\\\\ in conic matching quotients",
-  "title_normalized": "quadratic recovery and cubic orientation in conic matching quotients",
+  "title": "Quadratic trade rigidity and cubic orientation\\\\ in conic matching quotients",
+  "title_normalized": "quadratic trade rigidity and cubic orientation in conic matching quotients",
   "untracked_bibliography": []
 }

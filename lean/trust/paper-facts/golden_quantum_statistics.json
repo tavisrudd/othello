@@ -1,0 +1,268 @@
+{
+  "bibliography": [
+    {
+      "key": "AttasSpectral",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "BengtssonZyczkowski",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "BodmannPaulsen",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "ChengUSB",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "ClebschI",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex",
+      "text": "T.~Rudd, \\emph{Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus}, The Clebsch cubic: Recovering, orienting, and realizing I, preprint (2026)."
+    },
+    {
+      "key": "ClebschIII",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex",
+      "text": "T.~Rudd, \\emph{Golden descent and operator realizations of the Clebsch cubic}, The Clebsch cubic: Recovering, orienting, and realizing III, preprint (2026)."
+    },
+    {
+      "key": "EtTaouiConference",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "EtTaouiMakhlouf",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "FickusMixon",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "Goyal",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "GreavesSuda",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "HoffmanSolazzo",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "HowardMillsonSnowdenVakil",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "Hu",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "IntersectionMatrices",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "JabbourCerf",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "JolliffeInclusion",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "KingHomogeneous",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "Matthews",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "PiccoliniSinglet",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "RahimiKeshari",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "RobbioJabbourCerf",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "Scheel",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "Shchesnovich",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "Somhorst",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    },
+    {
+      "key": "Tichy",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/golden-quantum-statistics/golden_quantum_statistics.tex"
+    }
+  ],
+  "dir": "papers/golden-quantum-statistics",
+  "environment_counts": {
+    "corollary": 1,
+    "proposition": 2,
+    "remark": 2,
+    "theorem": 6
+  },
+  "labels": [
+    {
+      "environment": "equation",
+      "label": "eq:balanced-characteristic-polynomial"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:determinant-stability"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:golden-amplitude"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:holonomy-exchange"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:mixed-pareto"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:segre-nulls"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:stability-lower"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:stability-threshold"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:stability-upper"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:observable-hierarchy"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:photonic-gate"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:balance-obstruction"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:unique-orientation-carrier"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:continuous-control"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:exchange-boundary"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:general-exchange-rigidity"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:hermitian-landscape"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:orbit-boundary"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:squared-rigidity"
+    }
+  ],
+  "main": "papers/golden-quantum-statistics/golden_quantum_statistics.tex",
+  "manifest_labels": null,
+  "paper": "golden_quantum_statistics",
+  "pdfs": [
+    {
+      "bytes": 146431,
+      "pages": 16,
+      "path": "papers/golden-quantum-statistics/golden_quantum_statistics.pdf",
+      "sha256": "a12996a2925c75fdf24d82af9f0996f26121b53956a4f6f0a1034e94027418e0"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/golden-quantum-statistics/golden_quantum_statistics.tex",
+      "sha256": "34d86b824a1ad591915f9400a6ffe33f608d23e760c4c5c3b4158b9c2c113c2b"
+    }
+  ],
+  "title": "Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer",
+  "title_normalized": "exchange landscapes, orientation, and rigidity in the golden six-mode conference interferometer",
+  "untracked_bibliography": []
+}

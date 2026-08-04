@@ -25,6 +25,12 @@
       "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
     },
     {
+      "key": "CTZ2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
+    },
+    {
       "key": "ChengMurray2007",
       "kind": "bibitem",
       "self_authored": false,
@@ -49,6 +55,12 @@
       "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
     },
     {
+      "key": "DuncanHoffmanSolazzo2011",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
+    },
+    {
       "key": "Dye1991",
       "kind": "bibitem",
       "self_authored": false,
@@ -62,6 +74,12 @@
     },
     {
       "key": "GuruswamiVardy2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
+    },
+    {
+      "key": "HassettTschinkel2010",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
@@ -98,6 +116,34 @@
       "text": "T.~Rudd, \\newblock Computational strengthenings of Clebsch syndrome rigidity, \\newblock companion manuscript, 2026."
     },
     {
+      "key": "RuddFactorization2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
+      "text": "T.~Rudd, \\newblock Quadratic trade rigidity and cubic orientation in conic matching quotients, \\newblock Paper~II, released manuscript, version 2, 2026, \\newblock \\href{https://doi.org/10.5281/zenodo.21682217} {doi:10.5281/zenodo.21682217}."
+    },
+    {
+      "key": "RuddGoldenQuantum2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
+      "text": "T.~Rudd, \\newblock Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer, \\newblock companion manuscript, 2026."
+    },
+    {
+      "key": "RuddPassages2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
+      "text": "T.~Rudd, \\newblock Golden descent and operator realizations of the Clebsch cubic, \\newblock Paper~III (\\emph{passages}), released manuscript, version 2, 2026, \\newblock \\href{https://doi.org/10.5281/zenodo.21682515} {doi:10.5281/zenodo.21682515}."
+    },
+    {
+      "key": "RuddPassant2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
+      "text": "T.~Rudd, \\newblock Minimum-word reconstruction of $\\PG(2,13)$ from a binary conic code, \\newblock Paper~IV, companion manuscript, 2026."
+    },
+    {
       "key": "SVM1995",
       "kind": "bibitem",
       "self_authored": false,
@@ -124,12 +170,12 @@
   ],
   "dir": "papers/clebsch-rigidity",
   "environment_counts": {
-    "corollary": 2,
+    "corollary": 4,
     "definition": 1,
     "lemma": 1,
-    "proposition": 7,
-    "remark": 3,
-    "theorem": 3
+    "proposition": 9,
+    "remark": 7,
+    "theorem": 4
   },
   "labels": [
     {
@@ -138,11 +184,19 @@
     },
     {
       "environment": "corollary",
+      "label": "cor:conic-stabilizer-orbit"
+    },
+    {
+      "environment": "corollary",
       "label": "cor:decoder-brianchon"
     },
     {
       "environment": "corollary",
       "label": "cor:named-variety"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:orientation-cubic-geometry"
     },
     {
       "environment": "definition",
@@ -174,6 +228,10 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:concurrence-spectrum"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:decoding-oracle"
     },
     {
@@ -186,7 +244,15 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:golden-normal-form"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:invariant-support-bipartition"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:spectrum-field-restriction"
     },
     {
       "environment": "document",
@@ -214,6 +280,10 @@
     },
     {
       "environment": "document",
+      "label": "sec:orientation-two-graph"
+    },
+    {
+      "environment": "document",
       "label": "sec:rigidity"
     },
     {
@@ -230,6 +300,10 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:orientation-two-graph"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:rigidity"
     }
   ],
@@ -238,26 +312,26 @@
   "paper": "clebsch_rigidity",
   "pdfs": [
     {
-      "bytes": 134439,
-      "pages": 14,
+      "bytes": 206758,
+      "pages": 26,
       "path": "papers/clebsch-rigidity/clebsch_rigidity.pdf",
-      "sha256": "3997a460a855d5ea0be8046bbb5d01982569d3239657331438b1b1a6cadfa694"
+      "sha256": "6f2a8d6b6f3cc142e24702becabee8f1f7661688a318f59d9fa515b758cca917"
     },
     {
-      "bytes": 91688,
-      "pages": 7,
+      "bytes": 136883,
+      "pages": 13,
       "path": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.pdf",
-      "sha256": "13b6d0247eabded6e5ef87a61078f52079d3f0b67c9c7b3379cc8b40f9c88376"
+      "sha256": "26509dc32dddad52a9da7678244d29eefb57d64ca2c7ede58eb40e8e2a75986b"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "sha256": "7fec6a4f7077e424fc5a023e6a75f62ad4704a21ce2d1953bbdd9b7ab4c6f704"
+      "sha256": "d397627020899d86938ad46ac99d508d6032fddb101e0ce0a860ba9bc38dd058"
     }
   ],
-  "title": "Reconstructing the Clebsch code\\\\ from its deep-hole syndrome locus",
-  "title_normalized": "reconstructing the clebsch code from its deep-hole syndrome locus",
+  "title": "Reconstructing the Clebsch code and its golden orientation\\\\ from its deep-hole syndrome locus",
+  "title_normalized": "reconstructing the clebsch code and its golden orientation from its deep-hole syndrome locus",
   "untracked_bibliography": []
 }

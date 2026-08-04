@@ -181,6 +181,12 @@
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
     },
     {
+      "key": "BenSassonEtAl2016",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
       "key": "CMP2017",
       "kind": "bibitem",
       "self_authored": false,
@@ -224,6 +230,12 @@
     },
     {
       "key": "Kaipa2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "LidlNiederreiter1996",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
@@ -272,6 +284,12 @@
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
     },
     {
+      "key": "WangWuHu2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
       "key": "WuDingChen2023",
       "kind": "bibitem",
       "self_authored": false,
@@ -309,6 +327,12 @@
     },
     {
       "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "BenSassonEtAl2016",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
@@ -362,6 +386,12 @@
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
     },
     {
+      "key": "LidlNiederreiter1996",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
       "key": "RaissiGogolinRieraAcin2018",
       "kind": "bibitem",
       "self_authored": false,
@@ -403,6 +433,12 @@
     },
     {
       "key": "Wang2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "WangWuHu2026",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
@@ -533,7 +569,7 @@
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/beyond4_prs/refs.bib",
-      "title": "Local-Unitary Rigidity and Transversal Clifford Groups for MDS--CSS AME States"
+      "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States"
     },
     {
       "key": "RuddFactorization2026",
@@ -622,18 +658,26 @@
   ],
   "dir": "papers/beyond4_prs",
   "environment_counts": {
-    "corollary": 3,
-    "definition": 5,
+    "corollary": 4,
+    "definition": 7,
     "example": 1,
-    "lemma": 10,
-    "proposition": 18,
-    "remark": 1,
-    "theorem": 6
+    "lemma": 14,
+    "proposition": 45,
+    "remark": 3,
+    "theorem": 12
   },
   "labels": [
     {
+      "environment": "",
+      "label": "app:r9-slices"
+    },
+    {
       "environment": "corollary",
       "label": "cor:q8-quantum-extension"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:r10"
     },
     {
       "environment": "corollary",
@@ -660,8 +704,96 @@
       "label": "def:polar-spaces"
     },
     {
+      "environment": "definition",
+      "label": "def:r8-lower-package"
+    },
+    {
+      "environment": "definition",
+      "label": "def:r9-pointed-domain"
+    },
+    {
       "environment": "equation",
       "label": "eq:lift"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:maximal-lucas-carrier"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-bottom-cover"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-cyclic-binary"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-cyclic-veronese"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-deletion"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-gcd-one"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-inner-budget"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-marker-cubic"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-outer-budget"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r8-secant-carrier"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-base-bad"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-base-degree"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-bezout"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-deletion"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-one-point-budget"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-three-point-budget"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-top-budget"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r9-two-point-budget"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:recursive-carrier"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:uniform-threshold"
     },
     {
       "environment": "example",
@@ -669,7 +801,15 @@
     },
     {
       "environment": "figure",
+      "label": "fig:lucas-monodromy"
+    },
+    {
+      "environment": "figure",
       "label": "fig:polar-flow"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:r9-slice-cover"
     },
     {
       "environment": "lemma",
@@ -705,6 +845,22 @@
     },
     {
       "environment": "lemma",
+      "label": "lem:r8-bottom-strata"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:r8-monodromy"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:r8-outer-selection"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:r8-two-marker"
+    },
+    {
+      "environment": "lemma",
       "label": "lem:s3"
     },
     {
@@ -714,6 +870,50 @@
     {
       "environment": "proposition",
       "label": "prop:contained-rank-two"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:e7-additive"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:e7-as"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:e7-orbit"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:final-pair"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:linearized"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:lucas-kernel"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:m9-invariant-block"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:maximal-lucas-union"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r10-char7-lift"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r10-escape"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r10-pointed-budgets"
     },
     {
       "environment": "proposition",
@@ -784,12 +984,88 @@
       "label": "prop:r7-pointed"
     },
     {
+      "environment": "proposition",
+      "label": "prop:r8-bottom"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r8-contained"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r8-lp61"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r8-modular"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-budgets"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-char7"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-components"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-contained"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-deletion"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-orbits"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-other-modular"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-residual"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r9-slice"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:recursive-component-selection"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:reduced-terminal-carrier"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:upper-radius"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:r8-contained"
+    },
+    {
       "environment": "",
       "label": "sec:boundary"
     },
     {
       "environment": "",
       "label": "sec:dictionary"
+    },
+    {
+      "environment": "",
+      "label": "sec:fixed"
+    },
+    {
+      "environment": "",
+      "label": "sec:lucas"
     },
     {
       "environment": "",
@@ -810,6 +1086,10 @@
     {
       "environment": "",
       "label": "sec:r67"
+    },
+    {
+      "environment": "",
+      "label": "sec:recursive-carriers"
     },
     {
       "environment": "",
@@ -849,7 +1129,19 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:e7"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:induction"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:m9-shallow"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
     },
     {
       "environment": "theorem",
@@ -869,6 +1161,18 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:r8"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:r9"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:recursive-carrier"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:spine"
     }
   ],
@@ -877,27 +1181,27 @@
   "paper": "beyond4_prs",
   "pdfs": [
     {
-      "bytes": 397166,
-      "pages": 22,
+      "bytes": 554391,
+      "pages": 41,
       "path": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.pdf",
-      "sha256": "f4881b8f4e2860d15b8a02001579a574132483d3d06ea979a977a985a82d9437"
+      "sha256": "eb2b7f57d6cb99f87f1b83d30170d2aabfa417757c0b0b45ed35366c0ce5c09c"
     },
     {
-      "bytes": 238821,
-      "pages": 30,
+      "bytes": 381997,
+      "pages": 56,
       "path": "papers/beyond4_prs/prs-beyond-redundancy-four.pdf",
-      "sha256": "6928f096a24b1f8c135e2532af91d2efa65a0fbbb3d64464f1566b3e71d22ab6"
+      "sha256": "526888d498f4503ac24a366610c27d4fc513ec2409003c9771a5f780d68173d6"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/beyond4_prs/main.tex",
-      "sha256": "ecdce310e025700232078ada7ac8f2693e704fc048b4667231e69de85b5ba466"
+      "sha256": "ba29911b0472b5f3b4a850bc18e7b78ef629ec128ef5a0ec1f9f99816deb69db"
     },
     {
       "path": "papers/beyond4_prs/frontmatter/abstract.tex",
-      "sha256": "dadac3646dcd0f749c299f5fc1debdb433e117a950e5ed8ba03ae357e6500002"
+      "sha256": "8610b540d3465cbf2c1ac9c6f2d42f492a6826bab49b669d6348d17fe0551ebf"
     },
     {
       "path": "papers/beyond4_prs/frontmatter/index-terms.tex",
@@ -905,11 +1209,11 @@
     },
     {
       "path": "papers/beyond4_prs/sections/01-introduction.tex",
-      "sha256": "829ef6bc6ea12174d5a68897686deeb51d1ab06ed9b692734344bbff6399b3eb"
+      "sha256": "2e8fa5cdfc2406051a8f1c8a9582cbec5707fb3299f3eab0f1f690266c360112"
     },
     {
       "path": "papers/beyond4_prs/sections/02-overview.tex",
-      "sha256": "b69b0b0974e3641b0e8255eb901346fd82cb47fbd10977820048d2fdcbd64cd6"
+      "sha256": "5cb249d972a8b94eaa127541e7e47e5a2b2f6a58c01ec957a15de939076d49c6"
     },
     {
       "path": "papers/beyond4_prs/sections/03-dictionary.tex",
@@ -921,31 +1225,51 @@
     },
     {
       "path": "papers/beyond4_prs/sections/05-polar-induction.tex",
-      "sha256": "908bf48f0d9fc07a1ea50ad7eb1907112f1e6f3e3dde964f8893936c13d7e865"
+      "sha256": "32728c1b5e23262b2b17d34d471a72e239c1ba9145f17ff530205a5e754452e6"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/07-recursive-carriers.tex",
+      "sha256": "537a569cea9d9158d3d1d15812f10f11cc370383ba2709b118d3857f62806405"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/08-fixed-level-roadmap.tex",
+      "sha256": "6c986d5eebec3c8557b6ee3cdd59957af16b32060a9b63fa7cc420bae524d86a"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/11-provenance-boundary.tex",
+      "sha256": "629d89e74dbeb62baed988c544ee75c8d5e039123a42312965bdac32cacec00b"
+    },
+    {
+      "path": "papers/beyond4_prs/frontmatter/acknowledgment.tex",
+      "sha256": "8d5d2f5f72beba701b85c6b83e78a6b92ac7138c94ac9ba26f11fd7bd2ae3560"
     },
     {
       "path": "papers/beyond4_prs/sections/06-redundancies-six-seven.tex",
-      "sha256": "1dfe162e7ffb1385f64a6299cdaf3da49700b4e131db0b29f81560616f890f74"
+      "sha256": "94a92404da63606527de8bcc90480236cadcde020cb59bea82c54ccfc1c20c15"
     },
     {
       "path": "papers/beyond4_prs/frontmatter/r6-exceptional-table.tex",
       "sha256": "984070b502841313b5e28d35f0b1d4bfab6dd0de49dcdf435e4d81dac38ec4ab"
     },
     {
+      "path": "papers/beyond4_prs/sections/07-fixed-level-eight-nine.tex",
+      "sha256": "3cebc0d243b4d4910a35142c2abb8b0aef1e58baa5fb80a8fbb99e0816555923"
+    },
+    {
+      "path": "papers/beyond4_prs/appendices/r9-slice-data.tex",
+      "sha256": "1cdd8d202248e6192f1da0e21d39b493ad32df13766bf091f4467d5926fdc9a1"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/09-lucas-carriers.tex",
+      "sha256": "dccd6b5daf575843e75f2bd3da738879f6556f5c72aa4ee1bf556df4ce0f27d7"
+    },
+    {
       "path": "papers/beyond4_prs/sections/10-verification.tex",
-      "sha256": "2b8205ae506330f991fe91147d24c87f76136d88226bfad68959de24fb330e6f"
-    },
-    {
-      "path": "papers/beyond4_prs/sections/11-provenance-boundary.tex",
-      "sha256": "28c6e80f7e8436b31434de3c6c53e889d6e37500d41e25e54d5b43fd8397a36a"
-    },
-    {
-      "path": "papers/beyond4_prs/frontmatter/acknowledgment.tex",
-      "sha256": "51768801765993648fa02229e810fcc55feb5b711bdba2d2a0da118992d86236"
+      "sha256": "ed66eed5d42d8c4e0b7366afe035cb9d9cf055523b05e88c9c97f24d14d5c3ce"
     }
   ],
-  "title": "Deep holes of projective Reed--Solomon codes beyond redundancy four: exact classifications at redundancies five through seven",
-  "title_normalized": "deep holes of projective reed-solomon codes beyond redundancy four: exact classifications at redundancies five through seven",
+  "title": "Deep holes of projective Reed--Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten",
+  "title_normalized": "deep holes of projective reed-solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten",
   "untracked_bibliography": [
     "papers/beyond4_prs/main.bbl",
     "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl",

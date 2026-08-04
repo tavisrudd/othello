@@ -139,7 +139,7 @@
   "sources": [
     {
       "path": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex",
-      "sha256": "cc9459d3a1ff1450583fc88bfc12327c4fecbe8d83b5759ce3e441fcb5468b64"
+      "sha256": "22f76cda4e986d719e95cad36fbe02efaa54e0c349dc689b232e6e2ae368e902"
     }
   ],
   "title": "Semilinear rigidity of four-point-frame continuation graphs",

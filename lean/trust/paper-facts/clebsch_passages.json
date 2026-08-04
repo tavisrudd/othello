@@ -1,7 +1,31 @@
 {
   "bibliography": [
     {
+      "key": "AttasSpectralMonomorphy",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "BMS",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
       "key": "BinaryForms",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "BoussairiTwoGraphs",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "CohanHarmonics",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-passages/sections/10-references.tex"
@@ -13,7 +37,49 @@
       "source": "papers/clebsch-passages/sections/10-references.tex"
     },
     {
+      "key": "DammakGraphHypomorphy",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "DharmavaramCapsids",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
       "key": "DyeClebsch",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "GillespieTwoGraph",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "GodsilProblems",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "GreavesSuda",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "HMSVOuter",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "HaemersParsaeiMajd",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-passages/sections/10-references.tex"
@@ -31,7 +97,43 @@
       "source": "papers/clebsch-passages/sections/10-references.tex"
     },
     {
+      "key": "IntersectionMatrices",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "JolliffeInclusion",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "MagsinoMixonParshall",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "MeyerHarmonics",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
       "key": "MukaiUmemura",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "PouzetHomogeneousTriples",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "PouzetHypergraphIsomorphy",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-passages/sections/10-references.tex"
@@ -51,14 +153,26 @@
   ],
   "dir": "papers/clebsch-passages",
   "environment_counts": {
-    "proposition": 2,
+    "proposition": 3,
     "remark": 1,
-    "theorem": 2
+    "theorem": 5
   },
   "labels": [
     {
+      "environment": "",
+      "label": "app:marking-ambiguities"
+    },
+    {
       "environment": "equation",
       "label": "eq:face-axis-labels"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:four-cubic-shadows"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:source-shadow-return"
     },
     {
       "environment": "proposition",
@@ -78,7 +192,15 @@
     },
     {
       "environment": "",
+      "label": "sec:golden-operator"
+    },
+    {
+      "environment": "",
       "label": "sec:harmonic"
+    },
+    {
+      "environment": "",
+      "label": "sec:orientation-source"
     },
     {
       "environment": "",
@@ -86,11 +208,27 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:aligned-faithfulness"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:arithmetic-main"
     },
     {
       "environment": "theorem",
+      "label": "thm:balanced-exchange-rigidity"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:harmonic-main"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:operator-shadows"
+    },
+    {
+      "environment": "proposition",
+      "label": "thm:orientation-source"
     }
   ],
   "main": "papers/clebsch-passages/clebsch_passages.tex",
@@ -98,48 +236,60 @@
   "paper": "clebsch_passages",
   "pdfs": [
     {
-      "bytes": 111079,
-      "pages": 10,
+      "bytes": 206998,
+      "pages": 27,
       "path": "papers/clebsch-passages/clebsch_passages.pdf",
-      "sha256": "79a8a6aaee1b488d7195459f90baca41755c7c026226357adb6c013b181e33c5"
+      "sha256": "2538790c0535938ba3fc43daff95ca95c696af3724659fdc44e2c25bb4e8bb2e"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-passages/clebsch_passages.tex",
-      "sha256": "72de14be6e645c30b4da8030dd92414c1aa7a600a479f8468e2f7913a68677a0"
+      "sha256": "bccb0327be9ccddaed2941c107755cf349ec390ffaed3df841bcd596ec934d2e"
     },
     {
       "path": "papers/clebsch-passages/sections/01-introduction.tex",
-      "sha256": "8930da0f48142f1d3ec9146ef274d3a325680782f44b48ceb7cfab3c78d08a8b"
+      "sha256": "dbf16a7bf40f3ca9bc1a5475452d215e6f24f20a054506f3a85056c54a5efadc"
     },
     {
       "path": "papers/clebsch-passages/sections/02-orientation-cover.tex",
-      "sha256": "9cdf9341e605d047f3c98c11064cb53867d5c21844f768b7d99610e6f84fb172"
+      "sha256": "34328aed7d067a8f43efb7875769410e66fe02679fad391a23beb9996adb366b"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/03-orientation-source.tex",
+      "sha256": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822"
     },
     {
       "path": "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
-      "sha256": "6fe0b87257239de230393862cf2ec91adb4cd859eb74a8cb3ee4ba384c75d177"
+      "sha256": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/05-golden-operator.tex",
+      "sha256": "6036b73ae02b4063c902ded81702b0fc1ee2854a0a530dacf34a8bddb27cd9d6"
     },
     {
       "path": "papers/clebsch-passages/sections/05-harmonic-realization.tex",
-      "sha256": "f6c7fea92a5f3a26d7deeb88234036902547caaa6653527151adfa105264ac1f"
-    },
-    {
-      "path": "papers/clebsch-passages/sections/08-verification.tex",
-      "sha256": "8b0f511a006d74c0cfac4d51763c39bcbba6c2202ba18923ca5f1e2c1411b52b"
+      "sha256": "278565585415fd1e8a8d73e13536b6a5583c3b5cb19e5b0ed8e213cbb7f53fc3"
     },
     {
       "path": "papers/clebsch-passages/sections/09-conclusion.tex",
-      "sha256": "0609d028066f9dda772f162475b9f4f6958c43e15a1a765457296a9213d32782"
+      "sha256": "0c3cb0fed30d0a69b7d5f1a1564b8199903b512f0f68c04ead171c0e1b6d549b"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/07-marking-ambiguities.tex",
+      "sha256": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/08-verification.tex",
+      "sha256": "14fd06707e3eeaba50d08170025a516ddb31641455a7c2412975e7e19968af77"
     },
     {
       "path": "papers/clebsch-passages/sections/10-references.tex",
-      "sha256": "3b2b4c3d9cab7b2e461a3d1e89bb449f1608075cb5b3ce694e6816fd8cdc9a13"
+      "sha256": "adfe54289d4f19789f41b0ca9de828541a06f5a9fb7cea4dab55289997d4d892"
     }
   ],
-  "title": "Arithmetic and harmonic realizations of the Clebsch cubic",
-  "title_normalized": "arithmetic and harmonic realizations of the clebsch cubic",
+  "title": "Golden descent and operator realizations of the Clebsch cubic",
+  "title_normalized": "golden descent and operator realizations of the clebsch cubic",
   "untracked_bibliography": []
 }

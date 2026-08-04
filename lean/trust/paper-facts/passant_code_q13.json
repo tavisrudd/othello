@@ -1,0 +1,94 @@
+{
+  "bibliography": [
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/q13-passant-code/passant_code_q13.tex"
+    },
+    {
+      "key": "DromsMellingerMeyer2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/q13-passant-code/passant_code_q13.tex"
+    },
+    {
+      "key": "HollmannXiang2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/q13-passant-code/passant_code_q13.tex"
+    },
+    {
+      "key": "MaLiuTian2024",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/q13-passant-code/passant_code_q13.tex"
+    },
+    {
+      "key": "MadisonWu2012",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/q13-passant-code/passant_code_q13.tex"
+    },
+    {
+      "key": "Tranchida2024",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/q13-passant-code/passant_code_q13.tex"
+    }
+  ],
+  "dir": "papers/q13-passant-code",
+  "environment_counts": {
+    "proposition": 1,
+    "theorem": 1
+  },
+  "labels": [
+    {
+      "environment": "equation",
+      "label": "eq:scheme"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:weight-ten-moment"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:hidden-field"
+    },
+    {
+      "environment": "document",
+      "label": "sec:distance"
+    },
+    {
+      "environment": "table",
+      "label": "tab:trust"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
+    }
+  ],
+  "main": "papers/q13-passant-code/passant_code_q13.tex",
+  "manifest_labels": null,
+  "paper": "passant_code_q13",
+  "pdfs": [
+    {
+      "bytes": 121152,
+      "pages": 11,
+      "path": "papers/q13-passant-code/passant_code_q13.pdf",
+      "sha256": "3963091209d7bac109ad5dd7f80100e6a1e74185662c0a49a188602ac8ccfc37"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/q13-passant-code/passant_code_q13.tex",
+      "sha256": "e230262195fc441ae5130f862a19cffc30aabcad9cbc6797c2456e9c79c96a63"
+    }
+  ],
+  "title": "Minimum-word reconstruction of $\\PG(2,13)$\\\\ from a binary conic code",
+  "title_normalized": "minimum-word reconstruction of (2,13) from a binary conic code",
+  "untracked_bibliography": [
+    "papers/q13-passant-code/lean-certificates/.lake/packages/mathlib/docs/references.bib"
+  ]
+}

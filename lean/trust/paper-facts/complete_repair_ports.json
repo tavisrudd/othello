@@ -314,9 +314,9 @@
   ],
   "dir": "papers/complete-repair-ports",
   "environment_counts": {
-    "corollary": 2,
+    "corollary": 3,
     "definition": 3,
-    "proposition": 3,
+    "proposition": 4,
     "remark": 2,
     "theorem": 6
   },
@@ -332,6 +332,10 @@
     {
       "environment": "proposition",
       "label": "prop:concat-parameters"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:filtration-boundary"
     },
     {
       "environment": "document",
@@ -391,17 +395,17 @@
   "paper": "complete_repair_ports",
   "pdfs": [
     {
-      "bytes": 143550,
-      "pages": 14,
+      "bytes": 152308,
+      "pages": 16,
       "path": "papers/complete-repair-ports/complete_repair_ports.pdf",
-      "sha256": "df79abb931f9cd87904533cdffc8f7c1d20591d1a04cfed24ac666c9c787ed69"
+      "sha256": "a9f2165a30b271c0950ca140cde3557f920bf3d49df43499e92d2f770a2f691c"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/complete-repair-ports/complete_repair_ports.tex",
-      "sha256": "88d59047da5791775690f3e6c4d25af03b660da5777a8f9c7388317f035ec239"
+      "sha256": "08db2040acfb95da01a09b43188a69357a2d5647b46234790c20df8e90659791"
     }
   ],
   "title": "Complete Bounded Repair Ports:\\\\ \\large Transfer, Reliability, and Geometric Structure",

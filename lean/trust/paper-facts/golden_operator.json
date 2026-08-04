@@ -90,7 +90,7 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/golden-operator/golden_operator.tex",
-      "text": "T.~Rudd, \\emph{Arithmetic and harmonic realizations of the Clebsch cubic}, preprint, 2026."
+      "text": "T.~Rudd, \\emph{Golden descent and operator realizations of the Clebsch cubic}, preprint, 2026."
     },
     {
       "key": "RuddRigidity",
@@ -180,7 +180,7 @@
   "sources": [
     {
       "path": "papers/golden-operator/golden_operator.tex",
-      "sha256": "d701eb571f4987bd5fff24a3784e12b441f8efc023b24d879c185b393a6e9a50"
+      "sha256": "4cce2383a75524bbb6fcabe138c0f0da605132bad407dbe03217cd3bd7e414f1"
     }
   ],
   "title": "The golden conference operator and its shadow sisters",

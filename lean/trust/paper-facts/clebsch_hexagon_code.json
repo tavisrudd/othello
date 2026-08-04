@@ -450,7 +450,7 @@
   "sources": [
     {
       "path": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex",
-      "sha256": "226eeee01d78b7a28f356cc362b1a4d5ca9c2c667bba58f0abda7ce33cb270c0"
+      "sha256": "7176a6fccbfca4d58820b7aebbb5bb91986d47913444489f4ce9bfc6466e2941"
     }
   ],
   "title": "Deep-hole rigidity and factorization memory\\\\ in the Clebsch hexagon code",
