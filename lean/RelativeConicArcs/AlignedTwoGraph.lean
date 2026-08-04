@@ -20,6 +20,12 @@ it.  Native decision evaluates the 16,384 bounded Boolean cases in the pair
 classifier under the pinned Lean runtime.  The third-point elimination is a
 symbolic argument from that classifier.  No generated data, external program,
 or unproved mathematical axiom is used.
+
+Anchor existence is proved here rather than imported.  Ramsey's equality
+`R(3,3) = 6` is derived from a pigeonhole step over the thirty-two Boolean
+words on five vertices, so a rooted two-graph on six points is shown to
+contain an aligned four-set through the root with no supplied monochromatic
+triple.
 -/
 
 namespace RelativeConicArcs
@@ -90,9 +96,9 @@ theorem aligned_of_rooted_monochromatic_triangle {α : Type*}
         cases tau r i j <;> decide
   exact hlast.symm
 
-/-- The Ramsey anchor step, separated from the classical input `R(3,3)=6`:
-any supplied monochromatic triple among six rooted vertices yields one of the
-twenty tested aligned four-sets. -/
+/-- The anchor step in conditional form: any supplied monochromatic triple
+among six rooted vertices yields one of the twenty tested aligned four-sets.
+The triple is produced without hypotheses in `exists_alignedAnchor`. -/
 theorem alignedAnchor_of_ramseyTriple {α : Type*}
     (tau : α → α → α → Bool) (hfour : FourSetParity tau)
     (r : α) (v : Fin 6 → α)
@@ -103,6 +109,61 @@ theorem alignedAnchor_of_ramseyTriple {α : Type*}
   obtain ⟨i, j, k, hij, hik⟩ := hramsey
   exact ⟨i, j, k, aligned_of_rooted_monochromatic_triangle tau hfour
     r (v i) (v j) (v k) hij hik⟩
+
+/-- Among five Boolean values three are equal, indexed increasingly.  This is
+the pigeonhole step of the six-point Ramsey argument, isolated so that the
+finite check ranges over the thirty-two Boolean words rather than over
+colourings of the fifteen pairs. -/
+private theorem three_equal_of_five (g : Fin 5 → Bool) :
+    ∃ a b c : Fin 5, a < b ∧ b < c ∧ g a = g b ∧ g b = g c := by
+  revert g
+  decide
+
+/-- Ramsey's equality `R(3,3) = 6`, in the form the anchor search uses: for
+every two-colouring `f` of the ordered pairs from six points there are three
+points `i < j < k` whose three pairs receive the same colour.  Only the values
+of `f` on increasing pairs are read, so no symmetry hypothesis is needed.
+
+The proof is the classical pigeonhole argument.  Three of the five pairs at the
+first point share a colour; if any pair among those three points also has that
+colour it closes a monochromatic triple with the first point, and otherwise
+the three points carry the opposite colour on all three of their pairs. -/
+theorem exists_monochromatic_triple (f : Fin 6 → Fin 6 → Bool) :
+    ∃ i j k : Fin 6, i < j ∧ j < k ∧ f i j = f i k ∧ f i k = f j k := by
+  obtain ⟨a, b, c, hab, hbc, hga, hgb⟩ :=
+    three_equal_of_five (fun t => f 0 t.succ)
+  by_cases h1 : f a.succ b.succ = f 0 a.succ
+  · exact ⟨0, a.succ, b.succ, Fin.succ_pos a, Fin.succ_lt_succ_iff.mpr hab,
+      hga, hga.symm.trans h1.symm⟩
+  · by_cases h2 : f a.succ c.succ = f 0 a.succ
+    · exact ⟨0, a.succ, c.succ, Fin.succ_pos a,
+        Fin.succ_lt_succ_iff.mpr (hab.trans hbc), hga.trans hgb,
+        (hga.trans hgb).symm.trans h2.symm⟩
+    · by_cases h3 : f b.succ c.succ = f 0 b.succ
+      · exact ⟨0, b.succ, c.succ, Fin.succ_pos b,
+          Fin.succ_lt_succ_iff.mpr hbc, hgb, hgb.symm.trans h3.symm⟩
+      · have e1 : f a.succ b.succ = !(f 0 a.succ) := by
+          cases hv : f a.succ b.succ <;> cases hw : f 0 a.succ <;> simp_all
+        have e2 : f a.succ c.succ = !(f 0 a.succ) := by
+          cases hv : f a.succ c.succ <;> cases hw : f 0 a.succ <;> simp_all
+        have e3 : f b.succ c.succ = !(f 0 a.succ) := by
+          have e3' : f b.succ c.succ = !(f 0 b.succ) := by
+            cases hv : f b.succ c.succ <;> cases hw : f 0 b.succ <;> simp_all
+          rw [e3', hga]
+        exact ⟨a.succ, b.succ, c.succ, Fin.succ_lt_succ_iff.mpr hab,
+          Fin.succ_lt_succ_iff.mpr hbc, e1.trans e2.symm, e2.trans e3.symm⟩
+
+/-- Deterministic anchor discovery.  Every rooted two-graph on six points has
+an aligned four-set consisting of the root and three of those points, with no
+supplied monochromatic triple: the triple is produced by `R(3,3) = 6` applied
+to the rooted edges. -/
+theorem exists_alignedAnchor {α : Type*}
+    (tau : α → α → α → Bool) (hfour : FourSetParity tau)
+    (r : α) (v : Fin 6 → α) :
+    ∃ i j k : Fin 6, Aligned tau r (v i) (v j) (v k) := by
+  obtain ⟨i, j, k, _, _, hij, hik⟩ :=
+    exists_monochromatic_triple (fun s t => rootedEdge tau r (v s) (v t))
+  exact alignedAnchor_of_ramseyTriple tau hfour r v ⟨i, j, k, hij, hik⟩
 
 /-- A cut from an outside point to a normalized aligned four-set.  Its value
 is the three-bit word formed by the first three coordinates; the fourth is
@@ -415,10 +476,10 @@ theorem selectedQueryCount_eq (n : ℤ) :
       3 * n ^ 2 - 23 * n + 45 := by
   ring
 
-/-- There are twenty triples in a six-point set.  Combined with an external
-proof of the classical Ramsey statement `R(3,3)=6`, this numerical identity
-bounds the corresponding anchor search by twenty tests; it does not prove the
-Ramsey existence statement. -/
+/-- There are twenty triples in a six-point set, so the anchor search of
+`exists_alignedAnchor` is bounded by twenty tests.  The existence half of that
+search is `exists_monochromatic_triple`; this identity supplies only its
+count. -/
 theorem sixPointAnchor_testCount : Nat.choose 6 3 = 20 := by
   decide
 
