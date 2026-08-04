@@ -258,6 +258,10 @@ lean/scripts/lean-restart-guard.py verify /home/<checkpoint>
 
 - The restart guard hashes `.olean`, `.olean.hash`, `.ilean.hash`, and `.trace`; it is not a backup.
   Pair uncertain work with the guarded `pack` command.
+- A module whose imports lack compiled artifacts cannot be elaborated at all: single-file
+  elaboration refuses a missing dependency `.olean`. Compile a new module and every new module it
+  imports before putting any of them in a gate's path. Otherwise the first elaboration of that
+  source happens inside a long aggregate build, and an ordinary error costs the whole run.
 - Never use `/tmp` for build trees, caches, checkpoints, packs, or large logs. `/tmp` is tmpfs on
   this host and counts against RAM.
 
@@ -280,6 +284,12 @@ lean/scripts/lean-restart-guard.py verify /home/<checkpoint>
 - In a focused target, a dependency finishes before its consumer; wide builds can still co-schedule
   unrelated siblings. Use the profile's serial-first boundary rather than assuming all workers have
   the same peak.
+- Import graphs are evidence about modules, not about declarations, and are not sufficient grounds
+  for moving or splitting sources. A module that declares into another module's namespace is reached
+  through `open`, so its declarations occur nowhere under a qualified name and a search for the
+  module's own name finds no consumer. Before relocating a declaration, establish where it is used
+  at declaration level, including through opened namespaces, and separate what a surviving statement
+  mentions in its type from what its proof consumes.
 
 ## Referee-facing prose and names
 
