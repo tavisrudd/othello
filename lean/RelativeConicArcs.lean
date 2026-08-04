@@ -25,6 +25,8 @@ import RelativeConicArcs.Asymptotic
 import RelativeConicArcs.Averaging
 import RelativeConicArcs.Nucleus
 import RelativeConicArcs.Results
+import RelativeConicArcs.ParametrizedHoles
 import RelativeConicArcs.Q11Residual
+import RelativeConicArcs.Q11ResidualGame
 import RelativeConicArcs.Q11Coding
 import RelativeConicArcs.Q9Terminal

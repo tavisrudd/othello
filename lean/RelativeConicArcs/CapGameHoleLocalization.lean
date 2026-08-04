@@ -1,4 +1,4 @@
-import RelativeConicArcs.ProjectiveBridge
+import RelativeConicArcs.ParametrizedHoles
 import ProjectiveCap.ProjectiveCapGame
 
 /-!
@@ -24,8 +24,10 @@ started from `A` never leaves `H`:
   are exactly the uncovered holes.
 
 The remaining declarations transport the game across a finite parametrization
-`e : I ↪ Point K` of `H`. `ParametrizedHoleValid A e` is the induced validity
-predicate on `Finset I`, and `win_parametrizedHoles_iff` and
+`e : I ↪ Point K` of `H`. The induced validity predicate on `Finset I` is
+`RelativeConicArcs.ProjectiveBridge.ParametrizedHoleValid A e`, which mentions
+no game and is stated with the rest of the game-free bridge; here
+`win_parametrizedHoles_iff` and
 `isP_parametrizedHoles_iff` state that the normal-play win and
 previous-player-win values of the position `A ∪ T.map e` in the full plane game
 agree with those of `T` in the parametrized game. This is an exact
@@ -125,11 +127,6 @@ theorem legalExtensions_sdiff_holes_eq_uncovered {A H : Finset (Point K)}
 /-! ## Exact game localization through a finite parametrization -/
 
 variable {I : Type*} [Fintype I] [DecidableEq I]
-
-/-- Validity of a hole-parameter position after adjoining it to a fixed projective seed. -/
-noncomputable def ParametrizedHoleValid (A : Finset (Point K))
-    (e : I ↪ Point K) (T : Finset I) : Prop :=
-  ProjectiveCap.Projective.Cap K (Fin 3 → K) (A ∪ T.map e)
 
 /-- A relatively complete seed has exactly the same normal-play game as any injective
 parametrization of its prescribed holes.  This is the dynamic bridge from the static

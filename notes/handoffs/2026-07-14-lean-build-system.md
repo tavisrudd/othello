@@ -96,9 +96,12 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    [`../build-sys-tasks/c864-external-certificate-closeout-and-audit.md`](../build-sys-tasks/c864-external-certificate-closeout-and-audit.md).
    Done: the order-16 package is sealed, packed, restore-rehearsed trace-current, and its external
    trust fact is published and pinned; the Kim--Vu and Al-Seraji--Al-Ogali anchors are exact.
-   Next: the base-library game-free/game split, batched with the order-eleven externalization so the
-   base is re-exported and re-pinned once; then the q11/q13/q25 packages, the portfolio audit, the
-   Arcs/Clebsch-rigidity trust disposition, and the all-paper export replay.
+   The base-library game-free/game split is landed and gate-green in the monorepo: the validity
+   predicate now sits in `RelativeConicArcs/ParametrizedHoles.lean`, `Q11Residual` is game-free, and
+   the terminals are in `Q11ResidualGame`.
+   Next: the order-eleven externalization, carrying the batched base re-export and re-pin with it;
+   then the q11/q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition,
+   and the all-paper export replay.
 2. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
@@ -170,6 +173,7 @@ Passages formal companion [`../2026-07-28-c685-clebsch-passages-formal-companion
 q11 payload inventory [`../2026-08-04-c864-q11-payload-inventory.md`](../2026-08-04-c864-q11-payload-inventory.md);
 split lines [`../2026-08-04-c864-q11-interface-split-lines.md`](../2026-08-04-c864-q11-interface-split-lines.md);
 split feasibility [`../2026-08-04-c864-q11-split-feasibility.md`](../2026-08-04-c864-q11-split-feasibility.md);
+residual game-free/game split [`../2026-08-04-c864-q11-residual-game-split.md`](../2026-08-04-c864-q11-residual-game-split.md);
 Dye audit and anchor review [`../2026-08-04-c864-dye-audit-and-anchor-review.md`](../2026-08-04-c864-dye-audit-and-anchor-review.md).
 
 **Paper I v2** — audit and plan

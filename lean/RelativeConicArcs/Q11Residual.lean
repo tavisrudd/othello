@@ -1,18 +1,21 @@
 import RelativeConicArcs.ExampleChecks.Q11
+import RelativeConicArcs.ParametrizedHoles
 import CapGame.GraphMirror
-import RelativeConicArcs.CapGameHoleLocalization
 
 /-!
-# The residual game of the `q = 11` relative-conic witness
+# The residual conflict graph of the `q = 11` relative-conic witness
 
 The six-point witness `Examples.q11Witness` leaves all twelve points of the standard conic
 available.  Two conic points conflict when they and one witness point are collinear.  This file
 records that finite residual directly on `Fin 12`, identifies it with the standard icosahedral
-graph, and proves that its independent-set building game is P by an explicit antipodal mirror.
+graph, and proves that the legal projective continuations of the witness inside the conic are
+exactly the independent sets of that graph — as raw arcs
+(`continuation_rawArc_iff`) and in the parametrized-position form
+(`parametrizedHoleValid_iff`).
 
-The determinant and finite-table statements are discharged by kernel reduction.  The game-value
-conclusion is not an exhaustive game-tree computation: it is an application of the generic
-fixed-point-free conflict-graph mirror theorem.
+The determinant and finite-table statements are discharged by kernel reduction.  No declaration
+here asserts a game value; the normal-play value of the residual independent-set building game,
+and its transport back to the projective cap game, are in `RelativeConicArcs.Q11ResidualGame`.
 -/
 
 namespace RelativeConicArcs
@@ -307,35 +310,6 @@ theorem parametrizedHoleValid_iff (S : Finset (Fin 12)) :
       (pointSet q11Witness ∪ S.map conicEmbedding) ↔ IndepValid Adj S
   rw [← pointSet_continuation, ← rawArc_iff_projectiveCap]
   exact continuation_rawArc_iff S
-
-/-- The residual independent-set building game is P by antipodal reply. -/
-theorem isP :
-    FiniteBuildGame.IsP (IndepValid Adj) (∅ : Finset (Fin 12)) := by
-  exact initialIndepP_of_fpf_adjPreserving_involution Adj adj_symmetric antipode
-    antipode_involutive antipode_fixedPointFree adj_antipode_iff antipodal_chord_nonedge
-
-/-- The actual six-point projective cap position is P.  Static relative completeness confines
-every continuation to the conic, the determinant table identifies those continuations with the
-icosahedral independent-set game, and the antipodal mirror supplies the replies. -/
-theorem seed_isP :
-    FiniteBuildGame.IsP
-      (ProjectiveCap.Projective.Cap (ZMod 11) (Fin 3 → ZMod 11))
-      (pointSet q11Witness) := by
-  have hcomplete : CompleteOutside (L := Conic.Point (ZMod 11))
-      (pointSet q11Witness) (Conic.standardConic (K := ZMod 11)) :=
-    check_sound q11_check
-  have hlocal := ProjectiveBridge.isP_parametrizedHoles_iff
-    (K := ZMod 11) conicEmbedding hcomplete conicEmbedding_range (∅ : Finset (Fin 12))
-  have hpred : FiniteBuildGame.IsP
-      (ProjectiveBridge.ParametrizedHoleValid
-        (K := ZMod 11) (pointSet q11Witness) conicEmbedding) (∅ : Finset (Fin 12)) := by
-    have htransport := FiniteBuildGame.isP_equiv (Equiv.refl (Fin 12))
-      (Validα := IndepValid Adj)
-      (Validβ := ProjectiveBridge.ParametrizedHoleValid
-        (K := ZMod 11) (pointSet q11Witness) conicEmbedding)
-      (fun S => by simpa using parametrizedHoleValid_iff S) (∅ : Finset (Fin 12))
-    exact htransport.mpr isP
-  simpa using hlocal.mpr hpred
 
 end Q11Residual
 end Examples

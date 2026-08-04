@@ -149,19 +149,22 @@ drops the gate closure from 1,390 project modules to 1,358 and its base contribu
 modules to 27, and no order-eleven semantic module remains.  The package fix is committed as
 `d780520`; the gate then passed and was confirmed trace-current after a pack, erase and restore.
 
-Two consequences remain open, both deferred to a later session on this item so the base is
-re-exported and re-pinned once rather than twice:
+The monorepo half of the first consequence is done; the second, and the base re-export itself,
+remain deferred so the base is re-exported and re-pinned once rather than twice:
 
-- **The base still ships an uncompilable module.**  The missing declarations are not moveable as a
-  block: the validity predicate is a plain cap predicate and is game-free, but the transport lemma
-  is stated in normal-play game vocabulary, and the residual module's own terminal proves that the
-  six-point cap position is a previous-player win.  The repair is a split — a game-free module
-  holding the conic parametrization, the icosahedral adjacency, and the validity dictionary, plus a
-  separate module holding the game terminal — with the validity predicate moved to a game-free home
-  so the base takes only the first.  Nine gates reach the residual module today, all of them for its
-  game-free half only; its game declarations have no consumer outside the module.  This preserves
-  the accepted game residue in the Paper I and arcs closures recorded in
-  `notes/2026-08-03-c860-cap-closure-remediation.md`.
+- **The monorepo source split is landed and gate-green.**  `RelativeConicArcs/ParametrizedHoles.lean`
+  now holds the game-free validity predicate under its unchanged fully qualified name,
+  `RelativeConicArcs/Q11Residual.lean` keeps the conic parametrization, the icosahedral adjacency
+  and both directions of the validity dictionary with no game content, and
+  `RelativeConicArcs/Q11ResidualGame.lean` holds the two game terminals.  `Q11Coding` was the second
+  base module broken by the same dropped import and now takes the predicate from the new leaf.  All
+  nine gates reaching the residual module are green.  This preserves the accepted game residue in
+  the Paper I and arcs closures recorded in `notes/2026-08-03-c860-cap-closure-remediation.md`.
+  Report: `notes/2026-08-04-c864-q11-residual-game-split.md`.
+- **The base is not yet re-exported.**  The batched re-export must add
+  `RelativeConicArcs/ParametrizedHoles.lean` to the base module set, refresh the base copies of
+  `Q11Residual.lean` and `Q11Coding.lean`, and keep `Q11ResidualGame.lean`,
+  `CapGameHoleLocalization.lean` and `ProjectiveCap/ProjectiveCapGame.lean` out of it.
 - **Nothing builds the base standalone before a package pins it.**  That is why a broken export
   surfaced only inside a consumer's three-hour build.  A standalone base build belongs in the export
   tooling as a gate.

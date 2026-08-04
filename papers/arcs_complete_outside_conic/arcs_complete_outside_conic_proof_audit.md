@@ -332,7 +332,7 @@ ordinary complete arc. `completed_witness_matchings_oneFactorization` proves tha
 antipodal edges are distinct and that the augmented colour classes are six pairwise edge-disjoint
 perfect matchings partitioning the augmented graph.
 
-The auxiliary P-value conclusion remains in `RelativeConicArcs/Q11Residual.lean` and uses the
+The auxiliary P-value conclusion remains in `RelativeConicArcs/Q11ResidualGame.lean` and uses the
 generic antipodal conflict-graph mirror theorem, not an exhaustive game-tree evaluator. It is not
 used by the paper's bounds.
 

@@ -1,6 +1,7 @@
 import RelativeConicArcs.EvaluationDichotomy
 import RelativeConicArcs.Q9Terminal
 import RelativeConicArcs.Q11Residual
+import RelativeConicArcs.Q11ResidualGame
 import RelativeConicArcs.Q11Coding
 import RelativeConicArcs.UncoveredLocusReconstruction
 import RelativeConicArcs.MatchingDesignRigidity
