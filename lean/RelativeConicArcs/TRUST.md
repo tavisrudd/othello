@@ -358,6 +358,28 @@ reports exactly:
 These are the accepted Mathlib foundations used throughout the projective quotient development.
 There is no `sorryAx`, custom axiom, `admit`, or `native_decide` dependency.
 
+## External certificate packages and what full checking requires
+
+Some exhaustive enumerations are checked in separately versioned certificate libraries rather than
+here: the order-16 classification today, and the order-11 point-orbit action once its package is
+cut.  For those results, checking the mathematics end to end means running two enumerations, not
+one — the local gates in this repository, and the package's own import-only gate over its sealed
+sources.  The pinned registry records everything that second run needs: the package revision, the
+content-addressed manifest digest covering every Lean module and the replay evidence, the exact
+toolchain, and the terminals with their axiom lists.
+
+Relying on the pinned fact instead of re-running the package gate is a statement about where a
+computation was performed, not about whether it can be checked.  It is the same kind of reliance as
+building against a cached Mathlib rather than compiling Mathlib from source: the artifact is
+reproducible from named sources under a pinned toolchain, and the record says exactly what to
+re-run to eliminate the reliance.  One difference is worth stating precisely.  A package theorem is
+not present in this repository's Lean environment, so no local declaration imports it or depends on
+it; local statements are proved locally, and the package result is cited alongside them.  It never
+enters as an axiom or as a hypothesis of a local theorem.
+
+This is therefore a different situation from the boundary below, where an external result is used
+without a reproducible enumeration behind it.
+
 ## Explicit external boundary
 
 The only deep asymptotic estimate intentionally not reproved is the Kim--Vu complete-arc bound.
@@ -373,7 +395,7 @@ above.
 
 The paper's six-point matching-design realization calculation and cited seven-point
 nonrealizability result are not represented as a field-linear realization classification in Lean.
-The C637 lower-bound classifications at q=13,17,19 are likewise external: Lean checks the
+The lower-bound classifications at q=13,17,19 are likewise external: Lean checks the
 attaining witnesses but does not prove the three exact equalities.
 Likewise, the Beyond-4, Clebsch rigidity/factorization, and AME-LU references attached to the
 coding/design comparisons are contextual citations, not formal proof inputs; the underlying

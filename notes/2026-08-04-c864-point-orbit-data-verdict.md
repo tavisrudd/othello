@@ -59,16 +59,23 @@ Moves to the official order-eleven certificate package: `matrixCode`, `supportPe
 seventy-two row aggregators, and the matrix, support and fixed-point satellites, together with the
 exhaustive theorems that tie the displayed blocks to the action.
 
-## What this costs, and it must be stated
+## What changes, and what the manifest must say
 
 After the cut the monorepo proves that the seven displayed blocks partition the plane's canonical
 indices with the recorded sizes, and that the six-, ten- and twelve-element blocks are the witness,
 the Brianchon set and the standard conic. It no longer proves inside the monorepo that those blocks
 are the orbits of the icosahedral `A5` action — that theorem, and the exhaustive verification
-behind it, become an external package result consumed as a pinned trust fact. This is the same
-separation the order-sixteen split established, and it is the reason the split is admissible at
-all; but the manuscript prose and the trust manifest must say plainly which half is checked where,
-rather than continuing to read as though one closure proves both.
+behind it, become an external package result consumed as a pinned trust fact, exactly as the
+order-sixteen split established.
+
+The trust manifest must say that full checking requires enumerating both halves: the local block
+theorems here, and the package's own import-only gate over its sealed sources. That is a statement
+about where each enumeration runs, not a gap in what can be checked — the same kind of reliance as
+building against a cached Mathlib rather than compiling Mathlib from source, with the pinned
+revision, manifest digest and toolchain recording exactly what to re-run to remove it. It is not
+the same as the manifest's explicit external boundary, where a cited result has no reproducible
+enumeration behind it at all. `RelativeConicArcs/TRUST.md` now carries that distinction as its own
+section; the manuscript prose needs the matching sentence at the cut.
 
 ## Sequencing
 
