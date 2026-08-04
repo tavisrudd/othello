@@ -43,6 +43,8 @@ DOCSTRINGS = {
         "Orbit of the second representative with a dihedral stabilizer of order 24.",
     "orbitDihedralCSupports":
         "Orbit of the third representative with a dihedral stabilizer of order 24.",
+    "minimumWordSupports":
+        "The 364 supports of the four orbits together, in orbit order and without repetition.",
 }
 
 
@@ -121,11 +123,16 @@ def main() -> None:
     arguments = parser.parse_args()
 
     blocks = []
+    union: list[int] = []
     for name, representative in REPRESENTATIVES.items():
         orbit = support_orbit(representative)
         if len(orbit) != 91:
             raise SystemExit(f"{name}: expected 91 supports, computed {len(orbit)}")
         blocks.append(render(name, orbit))
+        union.extend(code for code in orbit if code not in union)
+    if len(union) != 364:
+        raise SystemExit(f"minimumWordSupports: expected 364 supports, computed {len(union)}")
+    blocks.append(render("minimumWordSupports", union))
 
     text = (
         "/-!\n"
@@ -135,8 +142,9 @@ def main() -> None:
         "supports of one orbit of the symmetric-square action of `PGL(2,13)` on the displayed\n"
         "weight-twelve representative, in the order in which the normalized projective matrices\n"
         "first produce them.  A support is the 78-bit natural number whose set bits are the\n"
-        "positions of its points in the normalized internal-point order.  Lean checks each list\n"
-        "against the projective action itself; the lists carry no trust of their own.\n"
+        "positions of its points in the normalized internal-point order.  The last list is the\n"
+        "union of the four orbits without repetition.  Lean checks every list against the\n"
+        "projective action itself; the lists carry no trust of their own.\n"
         "-/\n"
         "\n"
         "namespace PassantCodeQ13.MinimumWords\n"
