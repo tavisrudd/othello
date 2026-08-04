@@ -20,6 +20,8 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.AssociationAlgebra.rhoZero_square
 #print axioms PassantCodeQ13.AssociationAlgebra.rankThirtySix_squaring_cycle
 #print axioms PassantCodeQ13.AssociationTransport.booleanParityProduct_linearize
+#print axioms PassantCodeQ13.AssociationTransport.maskMatrix_maskProduct
+#print axioms PassantCodeQ13.AssociationTransport.maskMatrix_maskXor
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoZero_entry_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoNine_entry_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoTen_entry_certificate

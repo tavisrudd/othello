@@ -82,14 +82,20 @@ Replay, from `papers/q13-passant-code/lean-certificates`:
 
 ```sh
 python3 generate_association_transport_data.py --check
+python3 check_association_transport_statements.py
 ```
 
-It fails if the tracked module differs from the generated text.
+The first fails if the tracked module differs from the generated text. The second reads the
+committed literals of both generated modules and checks every statement of the packet as Lean will
+read it, including the transpose direction and the factor order of each product; it exits nonzero on
+any mismatch. Neither carries logical weight: both are independent cross-checks of Lean sources
+whose own proofs are what establish the results.
 
 | artifact | sha256 |
 |---|---|
 | `generate_association_transport_data.py`                       | `20c7f89170993c8a599165dfbee21642e4c0962a0349c7e44bc8f49297cfc5f9` |
 | `PassantCodeQ13/AssociationTransport/RelationData.lean`        | `38c2dd3857645aa1e636dc9440aaf2414810c92eeda8ead96f474c5ba2cb83c5` |
+| `check_association_transport_statements.py`                    | `0ca0a3c6905c0e92423bff74606b6a328a1b077bc968508d440b1d63a820c05f` |
 
 ## Statements
 
@@ -119,6 +125,39 @@ equality.
    generated data module, and its `--check` command have no manifest records. The manifest also
    still lacks records for `generate_minimum_word_orbits.py` and `OrbitData.lean`, which predates
    this round.
+5. Refresh the referee-facing module inventory in
+   `papers/q13-passant-code/verification/README.md`. Its "Lean release layout" lists the paper
+   package's finite leaves, and it is missing every module added by this round and by the
+   minimum-word round before it — the packed-row bridge, the generated mask data, the four relation
+   and four orbit identifications, the cubic, the normalized index and indexed incidence tables, the
+   orbit data, and the concurrence and row-uniqueness blocks. Rebuild the list from the package
+   rather than appending to it, and do so after elaboration, since a check that has to be split
+   adds modules.
+
+## Findings from a self-review after the commit
+
+`check_association_transport_statements.py`, an emulator of the Lean definitions run against the
+committed literals, confirms all of the statements as Lean will read them: the four relation identifications, the four orbit-column
+identifications with the transpose in the stated direction, and, for each orbit, that the mask
+identity `maskProduct columns supports` is the parity product of the transposed support matrix with
+the support matrix and that `maskProduct relationRowsRhoZero columns` is the product of `A0` with the
+transposed support matrix — that is, the factor order and index arities are the intended ones. It
+also confirms the squaring identities, the identity masks, the mixed product, and each step of the
+cubic derivation, including that the fourth power reached as `B²·B²` agrees with the one reached as
+`B³·B`.
+
+Two defects surfaced. The axiom audit did not print the packed-row bridges, although every leaf now
+depends on them for its transport, exactly as it depends on `booleanParityProduct_linearize`, which
+it does print; `maskMatrix_maskProduct` and `maskMatrix_maskXor` are now printed too. And the
+release-layout inventory above was stale before this round as well as after it.
+
+One estimate in this report was pessimistic. The orbit-column comparison is not the check most
+likely to exceed the guard: `PassantCodeQ13.IndexedIncidenceTable` already discharges 6084
+evaluations of indexed incidence by kernel reduction, and each of those performs two positional list
+scans and field arithmetic, which is heavier per entry than an orbit-column comparison. The heaviest
+new checks are instead the four relation identifications, each of which evaluates the normalized
+polar invariant — including an inverse in the prime field — once per ordered pair of internal
+points. Elaborate those first.
 
 ## The remaining structural-upgrade decisions
 
