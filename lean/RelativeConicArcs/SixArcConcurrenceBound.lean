@@ -36,6 +36,10 @@ noncomputable local instance instFintypePoint : Fintype (ProjectiveBridge.Point 
 noncomputable local instance instDecidableEqPoint : DecidableEq (ProjectiveBridge.Point K) :=
   Classical.decEq _
 
+noncomputable local instance instDecidableCoordinateIncidence
+    (p l : ProjectiveBridge.Point K) : Decidable (p ∈ l) :=
+  Classical.propDecidable _
+
 /-- A secant of a six-arc carries at most two triple-concurrence points. -/
 theorem card_triplePoints_on_secant_le_two (h2 : (2 : K) ≠ 0)
     {A : Finset (ProjectiveBridge.Point K)}
@@ -45,9 +49,9 @@ theorem card_triplePoints_on_secant_le_two (h2 : (2 : K) ≠ 0)
       fun x => x ∈ e.line (L := ProjectiveBridge.Point K)).card ≤ 2 := by
   classical
   by_contra hgt
-  push_neg at hgt
+  rw [not_le] at hgt
   obtain ⟨x, hx, y, hy, z, hz, hxy, hxz, hyz⟩ := Finset.two_lt_card.mp hgt
-  simp only [Finset.mem_filter] at hx hy hz
+  rw [Finset.mem_filter] at hx hy hz
   obtain ⟨hxT, hxe⟩ := hx
   obtain ⟨hyT, hye⟩ := hy
   obtain ⟨hzT, hze⟩ := hz
