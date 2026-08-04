@@ -59,6 +59,26 @@ the order-16 certificate cold fill currently holds. The gate
 `RelativeConicArcs.Gates.ClebschRigidityTrust` and its axiom audit are the acceptance evidence and
 run in that window.
 
+## Independent referee pass
+
+An independent adversarial review of the whole chain is recorded in
+`notes/2026-08-04-c855-dye-bound-referee.md`. Its verdict is accept with required fixes, and it
+found no mathematical gap: the replacement theorem is verbatim the axiom's statement, the two point
+sets agree definitionally despite being defined in different files with their own local finiteness
+and decidability instances, and every step of the counting argument matches the human proof. It
+also confirmed that the characteristic hypothesis enters at exactly one place, the independence of
+the three pairwise sums, and that the Lean development proves the Fano step that the human proof
+cites as known.
+
+The required fixes are applied: the wrong destructuring of the three-element cardinality lemma in
+`SixArcConcurrenceBound` (the flat existential form was destructured with the bounded form's
+pattern), a header in `SixArcConcurrence` claiming the unconditional theorem that lives in the
+other module, two unwitnessed sharpness claims, and the stale trust-boundary description in
+`Q11DyeAxioms`. The per-secant lemma was also renamed to say what it proves rather than how.
+One registry consequence remains for the build window: `lean/trust/areas/relconic.toml` still lists
+the bound among the permitted axioms of the area, and that entry must be deleted rather than
+re-anchored once the gate is green.
+
 ## What remains for the second axiom
 
 `dye1991_equality_classification` is still declared. Its paper-grade proof is in

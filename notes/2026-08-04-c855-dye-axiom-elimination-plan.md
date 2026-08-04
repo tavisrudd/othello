@@ -36,6 +36,8 @@ Here `brianchonPoints A` is the off-arc points meeting exactly three secants of 
   as a private lemma, which this work makes public.
 - `RelativeConicArcs.ProjectiveTripleNormalization.exists_mapEquiv_ordered_triple`: ordered
   projective transitivity on noncollinear triples, recording the three images pointwise.
+- `ProjectiveCap.Projective.quad_normal_form`: the four-point normal form, which is what the landed
+  route actually uses for the quadrangle step.
 
 ## Step 1 — the secant count of a six-arc
 
