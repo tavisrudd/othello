@@ -31,16 +31,16 @@
       "sha256": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7"
     },
     {
-      "bytes": 50651,
+      "bytes": 50643,
       "module": "RelativeConicArcs.FourShadowRecognition",
       "path": "RelativeConicArcs/FourShadowRecognition.lean",
-      "sha256": "85c8b97086d0f31756b6ee180905d6b4d7ef054baade45d10381e9159b48da9d"
+      "sha256": "7d9e8f90ccbc73ddd34e6dbfcd5788bdcb84f4b1d8f17ccb78f599f1fe0caa92"
     },
     {
-      "bytes": 2936,
+      "bytes": 3030,
       "module": "RelativeConicArcs.Gates.FourShadowRecognition",
       "path": "RelativeConicArcs/Gates/FourShadowRecognition.lean",
-      "sha256": "38e5baf7ce9c7485a7aa64c9c6ca877777b6d8498d64e20d16b8a47b5f620233"
+      "sha256": "c479c3a253d210ba5439e7d2843a7e1308bf4b8d3e9a11a6374ba47b5477aa85"
     },
     {
       "bytes": 5030,

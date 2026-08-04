@@ -451,7 +451,7 @@ private theorem pairMoment_add_one_eq_zero_of_signBalances
                       | (exfalso; omega)
                       | norm_num
 
-private theorem five_sign_balances_force_inner_products
+theorem five_sign_balances_force_inner_products
     (a b c d e f g h i j : ℤ)
     (ha : a * a = 1) (hb : b * b = 1) (hc : c * c = 1)
     (hd : d * d = 1) (he : e * e = 1) (hf : f * f = 1)

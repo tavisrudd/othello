@@ -20,10 +20,14 @@ inclusion-rank and Ramsey exclusion remains a human proof.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  The explicit
-integral conference matrix is kernel-checked: its symmetry, its square, its
-twenty triangle signs, and its translation invariance are discharged by
-`decide` over the thirty-six index pairs, so it contributes no
-compiled-evaluation axiom to any terminal printed here.
+integral conference matrix is kernel-checked, by three different methods: its
+symmetry and its square are `Matrix.ext` followed by `decide` on each of the
+thirty-six index pairs, its twenty oriented triangle signs are one `decide` on
+the conjunction over the twenty increasing triples, and its translation
+invariance is not finite at all — it holds for an arbitrary commutative ring,
+argument and shift, proved by transporting the twenty integral signs
+symbolically.  None of the four contributes a compiled-evaluation axiom to any
+terminal printed here.
 
 Native decision evaluates the determinant-defined middle-exterior operator —
 its Hodge square, the twenty row identities behind its own square, its

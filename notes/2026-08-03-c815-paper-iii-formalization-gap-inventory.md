@@ -108,18 +108,22 @@ Route. These divide into three kinds, and none needs the manuscript weakened:
 ### Measured state after the first conversion round (2026-08-04)
 
 Ten of the twenty-seven carriers are cleared, from the axiom reports
-regenerated out of the six-gate build `run-20260804-040512-9965a2e4`. The
+regenerated out of the gate build `run-20260804-050416-1085523f`, whose
+standard output is tracked under
+`papers/clebsch-passages/verification/evidence/gate_stdout/`. The
 four-shadow gate now has no compiled evaluation at any of its terminals, and
 `ClebschGoldenConference.lean` — which is in all three closures — contains no
 `native_decide` at all, which is stronger than the axiom reports alone show.
 The passages gate went from forty-three audited terminals to fifty with the
-Ramsey and anchor additions.
+Ramsey and anchor additions, and the four-shadow gate from sixteen to nineteen
+with the pentagon classification, its converse, and the five-balance inner
+product lemma.
 
 | gate | terminals | carrying a native axiom | was |
 |---|---|---|---|
 | `ClebschPassages` | 50 | 9 | 10 |
 | `ClebschGoldenReturn` | 28 | 8 | 13 |
-| `FourShadowRecognition` | 16 | 0 | 4 |
+| `FourShadowRecognition` | 19 | 0 | 4 |
 
 The seventeen remaining carriers depend on thirty-six distinct native axiom
 constants — nine reached by the passages gate, twenty-seven by the

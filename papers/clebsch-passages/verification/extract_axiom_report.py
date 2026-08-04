@@ -50,6 +50,19 @@ def extract(text: str) -> str:
         inside = False
     if not lines:
         raise SystemExit("extract_axiom_report: no #print axioms diagnostics found")
+    # A declaration name long enough to wrap before the phrase leaves no line for
+    # the prefix pattern to match, so the diagnostic would vanish from the report
+    # without any line looking truncated.  Counting the phrase across the whole
+    # log catches that: under-reporting is the failure direction that matters.
+    emitted = len(lines)
+    present = text.count("depends on axioms") + text.count(
+        "does not depend on any axioms"
+    )
+    if emitted != present:
+        raise SystemExit(
+            f"extract_axiom_report: the log holds {present} axiom diagnostics but "
+            f"{emitted} were extracted; a declaration name probably wrapped"
+        )
     for line in lines:
         if "does not depend on any axioms" in line:
             continue

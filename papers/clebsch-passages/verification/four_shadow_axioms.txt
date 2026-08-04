@@ -14,5 +14,6 @@
 'RelativeConicArcs.FourShadowRecognition.cubicsProportional_neg_four_of_sixTests' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.FourShadowRecognition.five_sign_balances_force_inner_products' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced' depends on axioms: [propext]

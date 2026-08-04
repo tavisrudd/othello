@@ -46,10 +46,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 6007,
+      "bytes": 6052,
       "module": "RelativeConicArcs.Gates.ClebschPassages",
       "path": "RelativeConicArcs/Gates/ClebschPassages.lean",
-      "sha256": "55f3fddab6c3c873165614e8520aae6da0c4d197acdf5d2235c7dd52720dc5cc"
+      "sha256": "be7681e88de5179cfd9c8d7a7d4e8711695446a42a9f5cc64c118d51dbdce367"
     },
     {
       "bytes": 6426,

@@ -1,5 +1,5 @@
-✔ [1249/1250] Built RelativeConicArcs.FourShadowRecognition (19s)
-ℹ [1250/1250] Built RelativeConicArcs.Gates.FourShadowRecognition (1.2s)
+✔ [1249/1250] Built RelativeConicArcs.FourShadowRecognition (23s)
+ℹ [1250/1250] Built RelativeConicArcs.Gates.FourShadowRecognition (867ms)
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:24:0: 'RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation' depends on axioms: [propext,
  Quot.sound]
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:25:0: 'RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate' depends on axioms: [propext]
@@ -43,8 +43,11 @@ info: RelativeConicArcs/Gates/FourShadowRecognition.lean:38:0: 'RelativeConicArc
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:39:0: 'RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/FourShadowRecognition.lean:40:0: 'RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:40:0: 'RelativeConicArcs.FourShadowRecognition.five_sign_balances_force_inner_products' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/FourShadowRecognition.lean:41:0: 'RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:41:0: 'RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:42:0: 'RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced' depends on axioms: [propext]
 Build completed successfully (1250 jobs).

@@ -56,9 +56,10 @@ def walk(lean_root: Path, root: str) -> tuple[list[str], set[str]]:
         strict = IMPORT_RE.findall(text)
         loose = LOOSE_IMPORT_RE.findall(text)
         if len(strict) != len(loose):
-            unmatched = [
-                line for line in loose if IMPORT_RE.fullmatch(line.strip()) is None
-            ]
+            # Report the raw lines rather than the stripped ones: an indented
+            # import matches the strict pattern once stripped, so filtering on
+            # the stripped form would leave the diagnostic empty.
+            unmatched = [line for line in loose if IMPORT_RE.fullmatch(line) is None]
             raise SystemExit(
                 f"extract_source_closure: {module} has an import this tool cannot "
                 f"parse: {unmatched!r}"

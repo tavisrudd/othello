@@ -116,7 +116,7 @@ def check_lean_gates(lean_root: Path | None) -> None:
             "clebsch-passages release: UNCHECKED [Lean gates: "
             f"{names}] pass --lean-root to replay them"
         )
-        return
+        return False
     for name, script in verifiers:
         run(
             f"{name} Lean gate",
@@ -129,6 +129,7 @@ def check_lean_gates(lean_root: Path | None) -> None:
             ],
             PAPER,
         )
+    return True
 
 
 def main() -> int:
@@ -180,11 +181,19 @@ def main() -> int:
         if not evidence.is_dir():
             raise SystemExit("clebsch-passages release: FAIL [missing evidence directory]")
 
-    check_lean_gates(args.lean_root.resolve() if args.lean_root else None)
+    lean_checked = check_lean_gates(
+        args.lean_root.resolve() if args.lean_root else None
+    )
 
     run("manuscript build", ["make", "-B"], PAPER)
     check_latex_log()
-    print("clebsch-passages release: ALL CHECKS PASS")
+    if lean_checked:
+        print("clebsch-passages release: ALL CHECKS PASS")
+    else:
+        print(
+            "clebsch-passages release: ALL CHECKS PASS EXCEPT THE LEAN GATES "
+            "(rerun with --lean-root for a complete release check)"
+        )
     return 0
 
 

@@ -88,9 +88,12 @@ switching, Petersen, fixed-line, and normalized aligned-design mechanisms.
 For aligned designs it checks the two-cut classifier by native decision and
 proves the third-point disambiguation, overlap consistency, signing transport,
 four-by-four determinant identity, and query polynomial symbolically.  The
-classical Ramsey theorem, finite-set extension, and normalization from an
-arbitrary labelled two-graph remain human inputs, as do the global Hitchin
-correspondences, face-axis addition theorem, and raw spherical moment.
+two bounds behind the triangle Ramsey equality on six labelled points, and the
+aligned anchor they produce, are kernel-checked and printed by the gate; the
+finite-set extension, the normalization from an arbitrary labelled two-graph,
+and the distinctness of the six anchor points from each other and from the
+root remain human inputs, as do the global Hitchin correspondences, face-axis
+addition theorem, and raw spherical moment.
 `passages_source_closure.json` is the exact project-local transitive import
 closure produced by the repository import-closure tool; the verifier pins the
 inventory, every listed source, and its own bytes.
@@ -130,3 +133,44 @@ takes Lean as a proof dependency.
 import closure.  A guarded gate log is checked by replacing `--source-only`
 with `--axiom-log /path/to/gate-stdout.log`; the replay program does not invoke
 Lean or Lake directly.
+
+The four-shadow recognition gate is the third pinned formal map, replayed the
+same way:
+
+```text
+python3 verification/verify_four_shadow_lean.py \
+  --lean-root /path/to/formal-artifact --source-only
+```
+
+It covers the translation extraction, pair moments, diagonal and scalar
+square, pentagon gauge, ten inner products, cubic homogeneity, and the
+pentagon classification in both directions.  Alone among the three gates it
+claims no compiled evaluation at all: every audited terminal depends only on
+`propext`, `Classical.choice` and `Quot.sound`, and the replay enforces that
+claim by refusing `native_decide` anywhere in the pinned closure rather than
+merely recording it.  The rank-14 weighted Jacobian calculation and any global
+classification of remote weighted solutions are not formalized.
+`four_shadow_formal.json`, `four_shadow_axioms.txt` and
+`four_shadow_source_closure.json` play the same roles as their counterparts
+above.
+
+Each gate's axiom report is generated from a tracked build log rather than
+written by hand.  `evidence/gate_stdout/passages.stdout.txt`,
+`golden_return.stdout.txt` and `four_shadow.stdout.txt` are the standard
+output of the gate builds the reports were taken from; each manifest pins the
+log's bytes under `axiom_report_provenance`, and the replay checks that pin.
+To regenerate a report, or to check one against its log:
+
+```text
+python3 verification/extract_axiom_report.py \
+  --stdout verification/evidence/gate_stdout/<gate>.stdout.txt \
+  --output verification/<gate>_axioms.txt
+
+python3 verification/verify_<gate>_lean.py \
+  --lean-root /path/to/formal-artifact \
+  --axiom-log verification/evidence/gate_stdout/<gate>.stdout.txt
+```
+
+`extract_source_closure.py` regenerates a closure inventory from a Lean tree
+the same way.  Neither a report nor an inventory may be edited by hand: the
+verifiers compare them byte for byte.

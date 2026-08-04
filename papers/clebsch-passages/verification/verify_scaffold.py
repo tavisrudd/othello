@@ -14,6 +14,7 @@ MAIN = PAPER / "clebsch_passages.tex"
 MANIFEST = PAPER / "verification" / "trust_manifest.json"
 IDENTITY = PAPER / "verification" / "statement_identity.json"
 GOLDEN_FORMAL = PAPER / "verification" / "golden_return_formal.json"
+FOUR_SHADOW_FORMAL = PAPER / "verification" / "four_shadow_formal.json"
 
 ALLOWED_STATUSES = {
     "proven",
@@ -161,6 +162,38 @@ def main() -> None:
                 "supplemental_gate" not in row,
                 f"empty supplemental gate for {claim_id}",
             )
+    # Every released gate must map every terminal it audits to a claim row, and
+    # must pin a tracked build log for its axiom report: a shipped artifact with
+    # no stated correspondence and no replayable provenance is not evidence.
+    four_shadow_map = json.loads(FOUR_SHADOW_FORMAL.read_text(encoding="utf-8"))
+    for label, gate_map in (
+        ("passages", formal_map),
+        ("golden-return", golden_map),
+        ("four-shadow", four_shadow_map),
+    ):
+        audited = set(gate_map.get("audited_declarations", []))
+        mapped = {
+            declaration
+            for row in gate_map.get("claim_map", {}).values()
+            for key in ("declarations", "supplemental_declarations")
+            for declaration in row.get(key, [])
+        }
+        require(
+            bool(gate_map.get("claim_map")),
+            f"{label} gate has no claim map",
+        )
+        require(
+            audited <= mapped,
+            f"{label} gate audits declarations no claim row names",
+        )
+        provenance = gate_map.get("axiom_report_provenance", {})
+        require(
+            bool(provenance.get("gate_stdout"))
+            and (PAPER / provenance.get("gate_stdout", "")).is_file()
+            and bool(provenance.get("gate_stdout_sha256")),
+            f"{label} gate axiom report has no tracked provenance",
+        )
+
     require(bool(manifest.get("local_release_ready")),
             "local release gate is not ready")
     require(manifest.get("submission_ready") is False,

@@ -74,6 +74,20 @@ def main() -> int:
     if sha256(CLOSURE_INVENTORY) != manifest["source_closure_sha256"]:
         raise SystemExit("four-shadow formal replay: FAIL [source closure hash]")
 
+    provenance = manifest.get("axiom_report_provenance")
+    if provenance is not None:
+        # The tracked gate stdout is what makes the axiom report replayable by
+        # someone other than its author, so its bytes are pinned like any other
+        # input rather than merely referenced.
+        log = HERE.parent / provenance["gate_stdout"]
+        if not log.is_file():
+            raise SystemExit(
+                "four-shadow formal replay: FAIL [missing gate stdout "
+                f"{provenance['gate_stdout']}]"
+            )
+        if sha256(log) != provenance["gate_stdout_sha256"]:
+            raise SystemExit("four-shadow formal replay: FAIL [gate stdout hash]")
+
     inventory = json.loads(CLOSURE_INVENTORY.read_text(encoding="utf-8"))
     if inventory.get("roots") != [manifest["gate_module"]]:
         raise SystemExit("four-shadow formal replay: FAIL [source closure root]")
@@ -83,16 +97,25 @@ def main() -> int:
     if observed_sources != manifest["source_sha256"]:
         raise SystemExit("four-shadow formal replay: FAIL [source closure inventory]")
 
-    forbidden = re.compile(r"^\s*(?:axiom|unsafe\s+(?:def|theorem))\b", re.MULTILINE)
+    # A declaration keyword may be preceded by attributes and by any number of
+    # modifiers, so anchoring on the bare keyword at line start is not a check:
+    # `private axiom` walks straight past it.
+    modifiers = (
+        r"(?:@\[[^\]]*\]\s*|(?:private|protected|noncomputable|nonrec|scoped|local)\s+)*"
+    )
+    forbidden = re.compile(
+        rf"^\s*{modifiers}(?:axiom|opaque|partial|unsafe)\b", re.MULTILINE
+    )
     # Mechanisms that would move a proof outside the kernel without introducing
-    # an axiom the gate's `#print axioms` lines would show.  This gate
-    # claims no compiled evaluation at all, so `native_decide` is refused outright
-    # alongside the other escapes.
+    # an axiom the gate's `#print axioms` lines would show.  `set_option` is
+    # covered because `debug.skipKernelTC` disables kernel typechecking outright
+    # and leaves no trace in `#print axioms`.
     mechanisms = re.compile(
         r"\bnative_decide\b"
-        r"|@\[[^\]]*(?:implemented_by|extern)"
+        r"|"
+        r"(?:@\[|attribute\s*\[)[^\]]*(?:implemented_by|extern)"
         r"|\bofReduceBool\b"
-        r"|^\s*(?:opaque|partial)\b",
+        r"|\bset_option\s+(?:debug\.skipKernelTC|allowUnsafeReducibility)",
         re.MULTILINE,
     )
     workflow_id = re.compile(r"\bC[0-9]{3,}\b")

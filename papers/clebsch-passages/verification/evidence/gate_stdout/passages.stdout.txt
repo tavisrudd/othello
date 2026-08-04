@@ -1,4 +1,4 @@
-ℹ [8629/8629] Built RelativeConicArcs.Gates.ClebschPassages (51s)
+ℹ [8629/8629] Built RelativeConicArcs.Gates.ClebschPassages (46s)
 info: RelativeConicArcs/Gates/ClebschPassages.lean:41:0: 'RelativeConicArcs.QuadraticPinching.conductor_eq_ker' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: RelativeConicArcs/Gates/ClebschPassages.lean:42:0: 'RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul' depends on axioms: [propext,
  Classical.choice,
