@@ -8,19 +8,21 @@ TEX_SOURCES := main.tex $(wildcard sections/*.tex) $(wildcard figures/*.tex) $(w
 PDF_BASENAME := ame-lu
 PDF := $(PDF_BASENAME).pdf
 
+LINT_TEX := python3 scripts/lint_tex_spacing.py
+
 .PHONY: all check lint release-check clean
 
 all: lint $(PDF)
 
 lint:
-	python3 ../scripts/lint_tex_spacing.py $(TEX_SOURCES)
+	$(LINT_TEX) $(TEX_SOURCES)
 
 $(PDF): $(TEX_SOURCES) refs.bib
-	python3 ../scripts/lint_tex_spacing.py $(TEX_SOURCES)
+	$(LINT_TEX) $(TEX_SOURCES)
 	$(LATEXMK) $(LATEXMK_FLAGS) -jobname=$(PDF_BASENAME) main.tex
 
 check: lint
-	python3 ../scripts/lint_tex_spacing.py $(TEX_SOURCES)
+	$(LINT_TEX) $(TEX_SOURCES)
 	$(LATEXMK) $(LATEXMK_FLAGS) -jobname=$(PDF_BASENAME) main.tex
 	@test -f $(PDF_BASENAME).log
 	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' $(PDF_BASENAME).log; then exit 1; fi
