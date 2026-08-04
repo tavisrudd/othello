@@ -159,6 +159,14 @@ def main() -> int:
     )
     parser.add_argument("--lean-root", type=Path, required=True)
     parser.add_argument(
+        "--companion-root",
+        type=Path,
+        help=(
+            "checkout of the base library the certificate package depends on; enables "
+            "resolving the human companion and rejecting a pin older than its newest export"
+        ),
+    )
+    parser.add_argument(
         "--update-output",
         action="store_true",
         help="replace the deterministic release-output certificate after all checks pass",
@@ -169,6 +177,27 @@ def main() -> int:
         "lean": args.lean_root.resolve(),
     }
     os.environ["CLEBSCH_LEAN_ROOT"] = str(repositories["lean"])
+
+    # FORMAL_COMPANION.json is the single place this paper names an external formal
+    # artifact. The guard rejects a commit restated beside a pinned repository
+    # anywhere else, so the manifest's own copies cannot drift away from it. The
+    # certificate package is resolved against the Lean root already supplied and
+    # required to be that package's newest export; the base library is checked the
+    # same way when its checkout is given.
+    companion = [
+        sys.executable,
+        str(paper_root / "verification" / "verify_formal_companion.py"),
+        "--no-loose-commits",
+        f"--resolve=certificate={repositories['lean']}",
+        f"--require-current=certificate={repositories['lean']}",
+    ]
+    if args.companion_root is not None:
+        base = args.companion_root.resolve()
+        companion += [f"--resolve=human={base}", f"--require-current=human={base}"]
+    completed = subprocess.run(companion, cwd=paper_root, text=True, capture_output=True)
+    if completed.returncode:
+        raise ValueError((completed.stdout + completed.stderr).strip())
+    print(completed.stdout.strip())
     manifest_path = args.manifest.resolve()
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(manifest, dict):

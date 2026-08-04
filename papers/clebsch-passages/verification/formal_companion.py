@@ -39,12 +39,21 @@ from pathlib import Path
 SCHEMA = "formal-companion-v2"
 COMMIT_RE = re.compile(r"\b[0-9a-f]{40}\b")
 DOI_RE = re.compile(r"^10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+$")
-ARTIFACT_KEYS = {"role", "repository", "commit", "gate", "manifest"}
-OPTIONAL_KEYS = {"axiom_audit", "depends_on", "coverage"}
+# A pinned artifact always names where it lives and which immutable commit. A gate
+# and manifest are present when the artifact is one this paper audits; a base library
+# a package merely depends on is pinned by revision alone.
+ARTIFACT_KEYS = {"role", "repository", "commit"}
+OPTIONAL_KEYS = {"gate", "manifest", "axiom_audit", "depends_on", "coverage"}
 # Text the guard reads. Binary artifacts and generated evidence are excluded:
 # a commit named there is data under some other check, not a claim in prose.
 GUARD_SUFFIXES = {".md", ".tex", ".json", ".txt", ".nix", ".toml"}
 GUARD_SKIP_PARTS = {"evidence", "__pycache__", ".git", "lean-certificates"}
+# How close a commit must sit to a pinned repository name to count as a restatement
+# of that pin. A paper legitimately records other revisions -- a Mathlib toolchain
+# pin, for one -- and those are labelled with their own project and sit far from any
+# companion name. Measured on this repository, unrelated revisions are several
+# hundred characters away at the closest, while a restatement is adjacent.
+GUARD_PROXIMITY = 200
 
 
 class CompanionError(SystemExit):
@@ -131,6 +140,8 @@ def resolve(pin: dict, role: str, checkout: Path) -> None:
     if not entries:
         raise CompanionError(f"no artifact with role {role}")
     entry = entries[0]
+    if "manifest" not in entry or "gate" not in entry:
+        raise CompanionError(f"{role}: pinned by revision alone; nothing to resolve")
     commit = entry["commit"] if _git_commit_available(checkout, entry["commit"]) else None
 
     required = {
@@ -176,6 +187,8 @@ def check_current(pin: dict, role: str, checkout: Path) -> None:
     entry = next((e for e in pin["artifacts"] if e["role"] == role), None)
     if entry is None:
         raise CompanionError(f"no artifact with role {role}")
+    if "manifest" not in entry:
+        raise CompanionError(f"{role}: pinned by revision alone; it has no manifest history")
     result = subprocess.run(
         ["git", "-C", str(checkout), "log", "-1", "--format=%H", "--", entry["manifest"]],
         capture_output=True,
@@ -214,11 +227,18 @@ def check_no_loose_commits(paper: Path, pin: dict) -> None:
             text = path.read_text(encoding="utf-8")
         except (OSError, UnicodeDecodeError):
             continue
-        if not any(name in text for name in names):
+        positions = [
+            match.start()
+            for name in names
+            for match in re.finditer(re.escape(name), text)
+        ]
+        if not positions:
             continue
-        for found in COMMIT_RE.findall(text):
-            if found not in allowed:
-                offenders.append(f"{path.relative_to(paper)}:{found[:8]}")
+        for found in COMMIT_RE.finditer(text):
+            if found.group(0) in allowed:
+                continue
+            if any(abs(found.start() - at) <= GUARD_PROXIMITY for at in positions):
+                offenders.append(f"{path.relative_to(paper)}:{found.group(0)[:8]}")
     if offenders:
         raise CompanionError(
             "commit named outside the pin: " + ", ".join(sorted(set(offenders))[:8])
