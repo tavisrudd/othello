@@ -4,10 +4,6 @@ import RelativeConicArcs.ExampleChecks.Q9
 import RelativeConicArcs.ExampleChecks.Q11
 import RelativeConicArcs.ExampleChecks.Q16
 import RelativeConicArcs.Q11NonGRS
-import RelativeConicArcs.Q16ExceptionalArithmetic
-import RelativeConicArcs.Q16Profile
-import RelativeConicArcs.Q16QuadraticTransport
-import RelativeConicArcs.Q16Result
 
 /-!
 # Exact small results
@@ -98,9 +94,6 @@ theorem rhoC_GF16_bounds : 8 ≤ rhoC (K := GF16) ∧ rhoC (K := GF16) ≤ 9 := 
   · rw [← L2_sixteen]
     simpa using (NonsingularConic.standard (K := GF16)).finite_lower_bound.2
   · simpa [q16Witness] using rhoC_le_length_of_check q16_check
-
-/-- Exact replacement for the former two-value `GF(16)` bound. -/
-theorem rhoC_GF16 : rhoC (K := GF16) = 9 := RelativeConicArcs.rhoC_GF16
 
 end Examples
 end RelativeConicArcs

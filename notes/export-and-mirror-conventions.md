@@ -8,22 +8,31 @@ synchronization.
 
 ## Edit authorities and tree roles
 
-All editing happens in the monorepo, nowhere else:
+Shared-library and paper editing happens in the monorepo:
 
-- **Lean sources:** `~/src/othello/lean/` is the only tree where Lean
-  development happens. Follow `lean/AGENTS.md` for every edit, build, or
-  generator run.
+- **Shared Lean sources:** `~/src/othello/lean/` is the authority for the
+  human-scale library and semantic APIs consumed by certificate packages.
+  Follow `lean/AGENTS.md` for every edit, build, or generator run.
 - **Paper sources:** `~/src/othello/papers/<paper>/` is the only tree where
   manuscript, verification-script, and manifest edits happen.
 
-Everything downstream is a tooled export target, written only by the guarded
+Certificate-only source is the narrow exception.  Once a certificate package
+has passed a byte-for-byte provenance migration, its repository under
+`~/src/lean/finitegeom-*` is the authority for its generated leaves,
+package-private checker composition, aggregate certificate gate, and generator.
+Those files must not also exist in the monorepo or `finitegeom`.  The package
+depends one-way on a pinned `finitegeom` commit and exposes only its audited
+terminal gate; shared definitions and reusable reductions remain monorepo-owned.
+
+Everything else downstream is a tooled export target, written only by the guarded
 tools named below and only as ordinary forward commits:
 
 - `~/src/lean/finitegeom` — the canonical exported Lean base library. Its
   content changes only by adopting a companion-export delta.
 - `~/src/lean/finitegeom-*` — certificate/companion packages depending on the
-  base by public Git URL and pinned revision. Their content changes only by
-  the re-pin sequence below.
+  base by public Git URL and pinned revision. Package-private certificate
+  sources change in their owning repository; base pins, copied shared gates,
+  axiom audits, and seals change only by the re-pin sequence below.
 - `~/src/math-papers/<paper-repo>` — standalone paper mirrors with
   independent histories. Their content changes only by
   `papers/scripts/export-paper-repos.py sync`.
@@ -33,9 +42,11 @@ inside `~/src/lean/` or `~/src/math-papers/`. Exporter candidate trees belong
 in disk-backed cache directories (for example
 `~/.cache/othello-lean-build/companion-export/`), and stray copies of these
 repositories anywhere else are not authorities for anything. Never push any of
-these repositories; publishing is the author's decision. Synchronization is
-one-way, monorepo to downstream: edit and validate here first, then export. A
-mirror is never merged back.
+these repositories; publishing is the author's decision. Synchronization of
+shared sources and papers is one-way, monorepo to downstream: edit and validate
+here first, then export. Certificate-package authority is also one-way:
+package-private sources never flow back into the monorepo or base. A mirror is
+never merged back.
 
 ## Paper export to `~/src/math-papers/`
 

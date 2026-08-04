@@ -5,9 +5,10 @@ import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
 /-!
 # Projective classification certificates for eight-arcs in `PG(2,16)`
 
-This module is the rules-only semantic kernel for C101.  Generated data enumerate projective
-classes by extending the standard four-frame.  Every transition carries an explicit invertible
-`3 x 3` matrix, so soundness depends only on finite-field arithmetic and projective linear maps,
+This module is the rules-only semantic kernel for the generated classification.
+The certificate data enumerate projective classes by extending the standard
+four-frame. Every transition carries an explicit invertible `3 × 3` matrix, so
+soundness depends only on finite-field arithmetic and projective linear maps,
 not on a trusted canonical-labeling program.
 -/
 

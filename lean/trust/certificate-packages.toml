@@ -1,0 +1,28 @@
+schema_version = 1
+
+[[package]]
+name = "finitegeom-q16-certificates"
+repository = "https://github.com/tavisrudd/finitegeom-q16-certificates"
+commit = "d1a2a9036e159f24334de4f8ca83ef7413ff26bb"
+manifest_sha256 = "fa81bace73cf0fbd08817b778a81de1b6e2f5790af3cd9ddc9a7a0b4f2083b76"
+gate = "RelativeConicArcs.Gates.ArcsCompleteOutsideConic"
+terminal = "RelativeConicArcs.rhoC_GF16"
+owned_module_prefixes = [
+  "RelativeConicArcs.Q16Certificate",
+  "RelativeConicArcs.Q16ExceptionalArithmetic",
+  "RelativeConicArcs.Q16LeafData",
+  "RelativeConicArcs.Q16Profile",
+  "RelativeConicArcs.Q16QuadraticAvoidance",
+  "RelativeConicArcs.Q16QuadraticTransport",
+  "RelativeConicArcs.Q16Reduction",
+  "RelativeConicArcs.Q16Result",
+  "RelativeConicArcs.Q16StepKernel",
+]
+forbidden_artifact_basenames = [
+  "analyze_c201_q16.py",
+  "check_q16_uncovered_patterns.json",
+  "check_q16_uncovered_patterns.py",
+  "check_q16_uncovered_patterns.sha256",
+  "search_rhoc16.cpp",
+  "search_rhoc16_output.txt",
+]

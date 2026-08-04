@@ -1927,12 +1927,12 @@ their unit relations survive in every odd characteristic.
 \subsection{The \texorpdfstring{\(q=16\)}{q=16} augmentation and leaf certificates}
 \label{app:q16-certificates}
 
-For the \(q=16\) exclusion, the supplement contains the source generator
-\path{search_rhoc16.cpp}, its frozen
-report \path{search_rhoc16_output.txt}, and their SHA-256
-digests.  The nine-line report is only a generation summary, not the
-certificate: the proof objects are the emitted Lean transition and leaf
-modules consumed by the gate.  Each certified transition carries an invertible matrix and
+For the \(q=16\) exclusion, the separately versioned
+\texttt{finitegeom-q16-certificates} library contains the source generator,
+its frozen report, their SHA-256 digests, and the emitted Lean modules.  The
+nine-line report is only a generation summary, not the certificate: the proof
+objects are the transition and leaf modules consumed by the package gate.
+Each certified transition carries an invertible matrix and
 checked source--target scalar equalities.  The Lean checker separately
 verifies that these transitions cover every legal augmentation of the
 standard four-frame.  At the leaves it checks either six independent

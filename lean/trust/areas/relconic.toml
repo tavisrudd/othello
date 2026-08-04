@@ -1678,33 +1678,6 @@ entry_mode = "consistency-check"
 entry_declarations = []
 anchor = "RelativeConicArcs/TRUST.md#exact-q16-classification-provenance"
 
-# ---------------------------------------------------------------------------------------------
-# Generated data trees.
-
-[[data_tree]]
-path = "RelativeConicArcs/Q16CertificateData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "L[0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q16CertificateRows"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "R[0-9]_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q16LeafData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "L_[0-9][0-9][0-9].lean", role = "leaf" },
-]
-
 [[data_tree]]
 path = "RelativeConicArcs/Q25CarrierLineData"
 provenance = "legacy-unverified"

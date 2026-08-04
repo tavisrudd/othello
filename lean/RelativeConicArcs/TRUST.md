@@ -198,17 +198,12 @@ separate Lean declarations and are not inputs to the proof.
 
 ## Exact q=16 classification provenance
 
-Source generator:
-`papers/arcs_complete_outside_conic/search_rhoc16.cpp`
-
-SHA-256:
-`589af8430e94b4c9c23ce895e6d32d2b3b5b9b387b1fb23ed6d3875cdee39031`
-
-Frozen report:
-`papers/arcs_complete_outside_conic/search_rhoc16_output.txt`
-
-SHA-256:
-`6989079b5cb64b0e57d5c42b872093fff99f861300b8fbb909daef450c15cc63`
+The generated sources, package-private checker and reduction, source generator,
+independent replay, and frozen report live only in the separately versioned
+`finitegeom-q16-certificates` library.  The exact repository revision and
+content-addressed manifest are pinned in
+`lean/trust/certificate-packages.toml`; the manifest seals all 1330 Lean
+modules and the replay evidence.
 
 The nine-line frozen report is a generation summary, not the transition or leaf certificate.
 The generator enumerates all projective caps extending the standard four-frame and emits four
@@ -224,7 +219,7 @@ Al-Seraji--Al-Ogali (2018), and the matching list length is an external consiste
 For every eight-leaf, the generated rejection records ordinary-uncovered points.  In 2630 leaves,
 six quadratic evaluation rows have an explicitly checked inverse.  In the remaining three leaves,
 an explicitly checked linear combination forces any conic equation through the uncovered locus to
-vanish at a selected point. `Q16Profile.lean` checks the exact 2630+3 split, while
+vanish at a selected point. The package's `Q16Profile.lean` checks the exact 2630+3 split, while
 `Q16ExceptionalArithmetic.lean` identifies the actual three forced-hit records and proves that
 their evaluation kernels are precisely the three displayed coefficient lines, in addition to the
 factorizations, hit counts `(2,7,2)`, and middle nonsingular model.
@@ -232,15 +227,8 @@ factorizations, hit counts `(2,7,2)`, and middle nonsingular model.
 including projective invariance of ordinary uncoveredness and quadratic zero sets. The C++ program and report are reproducible
 provenance only; the theorem depends on the emitted data through kernel-checked local predicates.
 
-The generic leaf calculation also has a smaller incidence certificate:
-
-```text
-papers/arcs_complete_outside_conic/check_q16_uncovered_patterns.py
-papers/arcs_complete_outside_conic/check_q16_uncovered_patterns.json
-papers/arcs_complete_outside_conic/check_q16_uncovered_patterns.sha256
-```
-
-It reconstructs every ordinary-uncovered locus directly from the frozen
+The official package also contains a smaller independent incidence replay. It
+reconstructs every ordinary-uncovered locus directly from the frozen
 level-eight list.  On exactly 2630 leaves it records three collinear
 uncovered points and three noncollinear uncovered points outside their line.
 The first triple forces that line to divide any containing quadratic, while
@@ -248,11 +236,11 @@ the second triple excludes the residual linear factor.  The three remaining
 leaves are precisely the forced-hit records analyzed above.  The checker also
 verifies both displayed split factorizations on all 4096 coordinate vectors
 and the middle form's invertible coordinate-change matrix and standard-conic
-transport.  Replay from the paper directory with:
+transport.  Replay from the certificate package root with:
 
 ```text
-python3 check_q16_uncovered_patterns.py --check
-sha256sum -c check_q16_uncovered_patterns.sha256
+python3 scripts/check_q16_uncovered_patterns.py --check
+python3 scripts/seal_manifest.py
 ```
 
 This exact Python incidence check explains the generic obstruction; the

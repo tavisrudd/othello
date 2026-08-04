@@ -3,7 +3,6 @@ import RelativeConicArcs.Asymptotic
 import RelativeConicArcs.Averaging
 import RelativeConicArcs.EvaluationObstruction
 import RelativeConicArcs.MatchingDesignRigidity
-import RelativeConicArcs.Q16ExceptionalArithmetic
 import RelativeConicArcs.QuadraticLineTriangleObstruction
 import RelativeConicArcs.Results
 import RelativeConicArcs.TangentPairFourGroup
@@ -15,8 +14,8 @@ import RelativeConicArcs.UncoveredLocusReconstruction
 This import-only module checks the formal results used by the manuscript on arcs complete outside
 a prescribed conic.  It covers the defect and capacity bounds, complete-affine specialization,
 projective averaging, additive asymptotics, uncovered-locus reconstruction, matching-design
-rigidity, characteristic-two equality exclusion, the elementary evaluation obstruction, the five
-small-field values, and the exhaustive quadratic-avoidance theorem over `GF(16)`.
+rigidity, characteristic-two equality exclusion, the elementary evaluation obstruction, and the
+small-field results derived without the external order-16 certificate package.
 
 The rank-three realization classification for ten-point matching designs is not a Lean theorem and
 is therefore outside this gate.
@@ -75,16 +74,3 @@ is therefore outside this gate.
 #print axioms RelativeConicArcs.Examples.rhoC_GF8
 #print axioms RelativeConicArcs.Examples.rhoC_GF9
 #print axioms RelativeConicArcs.Examples.rhoC_ZMod11
-#print axioms RelativeConicArcs.Q16Classification.exceptionalKernelOne
-#print axioms RelativeConicArcs.Q16Classification.exceptionalKernelTwo
-#print axioms RelativeConicArcs.Q16Classification.exceptionalKernelThree
-#print axioms RelativeConicArcs.Q16Classification.exceptionalFormOne_factorization
-#print axioms RelativeConicArcs.Q16Classification.exceptionalFormThree_factorization
-#print axioms RelativeConicArcs.Q16Classification.exceptionalFormOne_arc_hits
-#print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwo_arc_hits
-#print axioms RelativeConicArcs.Q16Classification.exceptionalFormThree_arc_hits
-#print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwoMatrix_isUnit
-#print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwo_conic_equation
-#print axioms RelativeConicArcs.Q16Classification.arbitrary_eight_arc_projectiveQuadraticAvoidance
-#print axioms RelativeConicArcs.no_completeOutside_GF16_card_eight
-#print axioms RelativeConicArcs.rhoC_GF16

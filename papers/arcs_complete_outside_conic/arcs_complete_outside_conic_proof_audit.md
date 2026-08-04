@@ -214,8 +214,9 @@ classical moment equations.
 
 The lower bounds for \(q=5,8,9,11\), and the preliminary lower bound eight at
 \(q=16\), are analytic. The exact value \(\rho_C(16)=9\) additionally uses an
-exhaustive projective classification of eight-arcs.  The source
-`search_rhoc16.cpp` reports 2633 frame-normalized classes.  Its Lean output
+exhaustive projective classification of eight-arcs.  The generator in the
+separately versioned `finitegeom-q16-certificates` package reports 2633
+frame-normalized classes.  Its Lean output
 does not trust canonical labels: each augmentation is checked by an explicit
 invertible projective matrix and pointwise scalar equalities.  Each parent
 book has a `StepBook.coverage` theorem proving that every legal extension occurs among certified
@@ -356,9 +357,9 @@ transport and relabelling preserve the results; replacing one witness point chan
 count from 12 to 20 and collapses the stabilizer from 60 to 2, while a mutated generator is
 rejected.
 
-The exact-search report is frozen separately as `search_rhoc16_output.txt`.
-The public certificate package records the generator and report hashes in
-`MANIFEST.json` and pins its human-scale `finitegeom` dependency.
+The exact-search report is frozen in the public certificate package. Its
+`MANIFEST.json` records the generator, replay evidence, and report hashes and
+pins the human-scale `finitegeom` dependency.
 
 ## Lean formalization
 
