@@ -21,7 +21,7 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_LEAN_COMMIT = "fa61ff9d452d8d6887f84e480c68f40d024b6acc"
+PINNED_LEAN_COMMIT = "c36699656de88f6a2fc1a5e53cf9a6153705aa7f"
 PINNED_BASE_COMMIT = "85dfde9e13e6c3d004e0e659fb83c1a4761902d0"
 
 

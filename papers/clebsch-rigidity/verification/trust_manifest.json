@@ -1951,7 +1951,7 @@
     }
   },
   "lean_repository": {
-    "commit": "fa61ff9d452d8d6887f84e480c68f40d024b6acc",
+    "commit": "c36699656de88f6a2fc1a5e53cf9a6153705aa7f",
     "distribution": "separate shared Git repository",
     "finitegeom_commit": "85dfde9e13e6c3d004e0e659fb83c1a4761902d0",
     "path": ".",
@@ -1960,9 +1960,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "a67aa136122315dd201be616ee95aef38d50e5e6bc5e57d4abf09e4825614514"
+    "sha256": "5ef40b74fc4a2d8f1593b02dfdc9670c99e03eca3d2d87f5887ba853335cf62d"
   },
-  "manuscript_sha256": "35823cbbeadb774fca53e3e8c663f227dfb9d214f43ba38598a06f589ac023be",
+  "manuscript_sha256": "e1239a3e88e2ed23cbc6742baa495329dc7db049f17a2c86d4ece5faa55c15e6",
   "public_documents": [
     {
       "path": "README.md",
@@ -2002,7 +2002,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "395643cf02aa3ad44b519c9c917a6eae855506ae88afd7135353fbcb8f50b4ac"
+    "sha256": "204f1e8df4520367b282ba9ed631ff56d8164621944158916332a9fc4d1f7dee"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2378,7 +2378,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "13c7f06a16955a4e26365b0ae4d80d412fc02e7c6e5aa8828e43de9f85728524"
+        "sha256": "7a5041dc3353ba708f0aa2ff92482cdf76ef080b1c8eff7044cd1b20ada6bf26"
       },
       {
         "path": "verification/verify_trust_manifest.py",

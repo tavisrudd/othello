@@ -1547,15 +1547,15 @@
   },
   "evidence": {
     "axiom_log": "verification/clebsch_rigidity_trust/gate-run.log",
-    "axiom_log_sha256": "5e69781436fd8f17067dd684b8899a15fb42adc549ca1ec505c289b5fcfa9ad0",
+    "axiom_log_sha256": "c5747a3fde88a65ad9110c46c22930ecbea33f241c80ac0475c82205952b37de",
     "replay": "lake build --no-build RelativeConicArcs.Gates.ClebschRigidityTrust"
   },
   "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
-  "manifest_sha256": "3f378f200773863d05150ab08a39b90e0af878744f429db2057036f1195bf023",
+  "manifest_sha256": "6077ff0c8ae83ab4d3c367e1da5d2c77af77c0dc1a2e922d22578e3380fb2ceb",
   "package": "finitegeom-clebsch-q11-certificates",
   "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
   "schema_version": 1,
-  "source_commit": "27fc94552b9e6a92dc37f5e0382cb17134c3434b",
+  "source_commit": "fa61ff9d452d8d6887f84e480c68f40d024b6acc",
   "terminal": "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"
 }
