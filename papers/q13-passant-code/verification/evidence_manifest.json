@@ -55,8 +55,8 @@
     },
     {
       "paper_iv_path": "lean-certificates/PassantCodeQ13/SemanticTransports.lean",
-      "bytes": 4358,
-      "sha256": "47625a0ea75671b51db2123b65afc8b5802236c9c894df92d1659400d1cef127",
+      "bytes": 4359,
+      "sha256": "28ef54a2ded2d4717860613a2f7696f6fd3d2ee4a4037a264bbc68feca6cb3f6",
       "role": "kernel-checked identification of executable rank 42 with semantic incidence-map rank and code dimension 36"
     },
     {
@@ -158,61 +158,61 @@
   ],
   "commands": [
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 generate_weight_ten_profiles.py --check",
       "output_contains": "OK weight_ten_profiles.json 4219 bytes sha256=46d71b19e8ef20becb377743d91b13c5ecbdd75a28d413c7a7c189cfc62a4404",
       "certifies": "the tracked certificate is canonical and byte-identical to regeneration"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 replay_weight_ten_profiles.py",
       "output_contains": "independent q=13 weight-ten replay: PASS",
       "certifies": "both weight-ten syndrome intersections are empty by an independently reconstructed incidence matrix"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 check_q13_tangent_code.py",
       "output_contains": "q=13 tangent-code replay: PASS",
       "certifies": "omega=5, d=12, 364 minimum words, 78 recovered rows, and automorphism group PGL(2,13)"
     },
     {
-      "cwd": "papers/q13-passant-code/lean-certificates",
+      "cwd": "lean-certificates",
       "command": "python3 generate_rank_transport.py --check",
       "output_contains": "q=13 semantic rank transport data: PASS",
       "certifies": "the checked recovery and expansion masks are byte-identical to deterministic regeneration from the normalized conic incidence matrix"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 verify_weight_eight_theta.py --check weight_eight_theta.json",
       "output_contains": "q=13 weight-eight theta certificate: PASS",
       "certifies": "the exact positive-semidefinite completion has rank 28, clique bound five, and the stated equality kernel"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 verify_weight_ten_moment.py --check weight_ten_moment.json",
       "output_contains": "q=13 weight-ten moment certificate: PASS",
       "certifies": "the two global weight-ten shapes and all line/point stabilizer leaves are exhausted"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 verify_pair_reconstruction.py --check pair_reconstruction.json",
       "output_contains": "q=13 pair reconstruction certificate: PASS",
       "certifies": "weighted pairs recover all relations, the passant rows, the code image, hidden field, and exact arity two"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 verify_minimum_geometry.py --check minimum_geometry.json",
       "output_contains": "q=13 minimum geometry certificate: PASS",
       "certifies": "the four minimum orbits have the stated toric--octahedral constructions, stabilizers, parity, and Grams"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 verify_ambient_plane.py --check ambient_plane.json",
       "output_contains": "q=13 ambient plane certificate: PASS",
       "certifies": "Sylow subgroups and involutions recover the 183-point plane, conic polarity, and internal/chord incidence"
     },
     {
-      "cwd": "papers/q13-passant-code/verification",
+      "cwd": "verification",
       "command": "python3 verify_hidden_field.py --check hidden_field.json",
       "output_contains": "q=13 hidden-field certificate: PASS",
       "certifies": "the compact F8 operator-field theorem and Frobenius Gram scalars hold exactly"

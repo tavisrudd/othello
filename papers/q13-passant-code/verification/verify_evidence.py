@@ -28,9 +28,7 @@ def main() -> None:
         assert digest(path) == record["sha256"], path
 
     for record in manifest["commands"]:
-        cwd = PAPER_ROOT / Path(record["cwd"]).relative_to(
-            "papers/q13-passant-code"
-        )
+        cwd = PAPER_ROOT / Path(record["cwd"])
         completed = subprocess.run(
             shlex.split(record["command"]),
             cwd=cwd,
