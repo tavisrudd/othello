@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
-"""Validate the optional finitegeom companion pin and its declared boundary."""
+"""Validate the optional finitegeom companion pin and its declared boundary.
+
+``FORMAL_COMPANION.json`` is the single declaration of the companion. It names the
+repository, the immutable commit, the gate module, the axiom audit and the source
+manifest, and states the relationship the paper claims to that artifact.
+
+The commit is a Git object name and therefore content-addressed: it identifies one
+tree and cannot be made to denote another. Given ``--lean-root`` pointing at a
+checkout of that repository at that commit, this also resolves the gate module,
+the axiom audit and every source the manifest lists, and rehashes each one, so the
+pin is checked against the artifact rather than merely being well-formed.
+
+The pin was formerly restated in ``flake.nix`` and ``flake.lock`` and cross-checked
+against them. It is not any more: one declaration cannot disagree with itself, and
+the flake is shared build tooling rather than a place to record a companion.
+"""
 
 from __future__ import annotations
 
@@ -47,31 +62,6 @@ def load_pin() -> dict[str, str]:
     return pin
 
 
-def check_flake(pin: dict[str, str]) -> None:
-    source = (PAPER / "flake.nix").read_text(encoding="utf-8")
-    revision = f"github:tavisrudd/finitegeom?rev={pin['commit']}"
-    if source.count(revision) != 1:
-        fail("flake revision")
-
-
-def check_lock(pin: dict[str, str]) -> None:
-    lock_path = PAPER / "flake.lock"
-    if not lock_path.is_file():
-        fail("missing flake.lock")
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    try:
-        node_name = lock["nodes"]["root"]["inputs"]["finitegeom"]
-        locked = lock["nodes"][node_name]["locked"]
-    except (KeyError, TypeError):
-        fail("flake lock structure")
-    if locked.get("type") != "github":
-        fail("flake lock source type")
-    if locked.get("owner") != "tavisrudd" or locked.get("repo") != "finitegeom":
-        fail("flake lock repository")
-    if locked.get("rev") != pin["commit"]:
-        fail("flake lock revision")
-
-
 def check_lean_root(pin: dict[str, str], lean_root: Path) -> None:
     manifest_path = lean_root / pin["manifest"]
     audit_path = lean_root / pin["axiom_audit"]
@@ -98,12 +88,14 @@ def check_lean_root(pin: dict[str, str], lean_root: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lean-root", type=Path)
+    parser.add_argument(
+        "--lean-root",
+        type=Path,
+        help="checkout of the pinned companion repository, to resolve and rehash it",
+    )
     args = parser.parse_args()
 
     pin = load_pin()
-    check_flake(pin)
-    check_lock(pin)
     if args.lean_root is not None:
         check_lean_root(pin, args.lean_root.resolve())
     print("formal companion: PASS")

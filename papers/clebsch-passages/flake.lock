@@ -1,41 +1,6 @@
 {
   "nodes": {
-    "finitegeom": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1785258751,
-        "narHash": "sha256-LMSziZQ0Rvb1Nj2n7bQbE8AolWlrfHDztdJwxnBPL0c=",
-        "owner": "tavisrudd",
-        "repo": "finitegeom",
-        "rev": "d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tavisrudd",
-        "repo": "finitegeom",
-        "rev": "d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1784796856,
-        "narHash": "sha256-wWFrV5/Qbm+lyt5x20E/bSbfJiGKMo4RCxZV8cl/WZI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "e2587caef70cea85dd97d7daab492899902dbf5d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1785090369,
         "narHash": "sha256-m0pDuRJG7EDo9ri+4Ksu83VsI+PlxNC9lNBfydejce4=",
@@ -53,8 +18,7 @@
     },
     "root": {
       "inputs": {
-        "finitegeom": "finitegeom",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

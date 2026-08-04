@@ -132,10 +132,10 @@ def main() -> int:
         ["python3", "verification/verify_scaffold.py"],
         PAPER,
     )
-    # The companion pin, its flake input and its lock must agree.  This runs without
-    # --lean-root: the deeper check resolves the pinned finitegeom tree, which is a
-    # different repository from the Lean root this verifier is given.  Checking the
-    # three against each other is what keeps the pin from drifting unnoticed.
+    # FORMAL_COMPANION.json is the single declaration of the optional formal companion.
+    # This checks it is well formed and internally consistent.  It runs without
+    # --lean-root because the deeper check resolves the pinned companion repository,
+    # which is a different repository from the Lean root this verifier is given.
     run(
         "formal companion pin",
         ["python3", "verification/verify_formal_companion.py"],

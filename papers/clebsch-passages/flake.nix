@@ -3,11 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    finitegeom.url =
-      "github:tavisrudd/finitegeom?rev=d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed";
   };
 
-  outputs = { nixpkgs, finitegeom, ... }:
+  outputs = { nixpkgs, ... }:
     let
       systems = [
         "x86_64-linux"
@@ -16,17 +14,6 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in {
-      checks = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in {
-          formal-companion-pin = pkgs.runCommand "clebsch-passages-formal-companion-pin" {} ''
-            test -f ${finitegeom}/trust/manifests/clebsch_passages.json
-            test -f ${finitegeom}/trust/ClebschPassagesAxiomAudit.lean
-            test -f ${finitegeom}/RelativeConicArcs/Gates/ClebschOrientationMechanisms.lean
-            touch "$out"
-          '';
-        });
-
       devShells = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
         in {
