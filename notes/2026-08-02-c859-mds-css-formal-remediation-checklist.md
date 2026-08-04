@@ -127,10 +127,10 @@ coordination with their recorded owners; do not edit foreign dirty work.
 
 ## 6. Reconcile portfolio and cross-lane drift
 
-- [ ] Coordinate the Paper II title additions required by
+- [x] Coordinate the Paper II title additions required by
   `notes/2026-07-31-work-summary.md` and `papers/papers-index.md` with their
   owners.
-- [ ] Coordinate correction of the stale self-authored title in
+- [x] Coordinate correction of the stale self-authored title in
   `papers/beyond4_prs/refs.bib:RuddAMELU2026` with the `reed-solomon` owner.
 - [x] Re-run the bounded Paper II paper-facts audit after those owner-approved
   changes and record each cleared finding.
@@ -159,7 +159,7 @@ coordination with their recorded owners; do not edit foreign dirty work.
 
 ## 8. Public formal export and standalone synchronization
 
-- [ ] Coordinate any required public `finitegeom` materialization with the
+- [x] Coordinate any required public `finitegeom` materialization with the
   owning build-system lane; do not directly edit or publish its foreign tree
   without authority.
 - [x] Verify that the public formal export contains the exact two semantic

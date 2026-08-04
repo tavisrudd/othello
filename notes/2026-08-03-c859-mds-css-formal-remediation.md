@@ -2,9 +2,9 @@
 
 **Lane:** `ame-lu`
 
-**Status:** complete; manuscript-ready, formal-companion-ready, and
-standalone-ready. Public release remains gated on two cross-lane title repairs
-and the author's push decision.
+**Status:** complete; manuscript-ready, formal-companion-ready,
+standalone-ready, and publicly materialized in the base Lean library. Only the
+author's push decision remains.
 
 ## What now exists
 
@@ -135,25 +135,50 @@ was pushed; the mirror's `origin/main` still points at the previous commit.
 - Manuscript-ready: yes.
 - Formal-companion-ready: yes, at the boundary stated above.
 - Standalone-ready: yes, locally.
-- Public-release-ready: no. Two title-drift errors remain open, both outside
-  this lane's edit scope, and the mirror commit is unpushed.
+- Public-release-ready: yes on content. Every drift error is cleared and the
+  formal boundary is exported; the standalone and base-library commits are
+  unpushed, which is the author's decision.
+
+## Cross-lane repairs and public materialization
+
+All four items opened during remediation were closed on the user's instruction.
+
+The portfolio index, the work summary, and the results snapshot now name both
+papers by their current titles: the index carries a separate entry for each,
+the work summary's generated manuscripts region was refreshed and its
+hand-written table row split in two, and the snapshot's Paper I heading and
+list entry were corrected. The companion self-citation in
+`papers/beyond4_prs/refs.bib` now gives Paper I's current title; the
+Reed--Solomon lane must rebuild that manuscript for its compiled bibliography
+to follow, which is the pre-existing condition its other three self-citations
+were already in. Both AME facts artifacts were regenerated; other lanes' facts
+were left at their committed state. The paper-facts check now reports zero
+errors for Paper II and no title drift for either AME paper.
+
+Public materialization: the new export configuration
+`lean/trust/export/mds_css_transversal_groups.toml` declares the semantic gate,
+the destination trust statement `trust/MDS_CSS_TRANSVERSAL_GROUPS.md`, and the
+axiom audit `trust/MDSCSSTransversalGroupsAxiomAudit.lean`. The guarded
+companion export ran twice with byte-identical repeats against base commit
+`85dfde9` and produced a 23-file forward delta (nine added, fourteen updated,
+51 planned files already byte-identical in the base), carrying the 66-module
+closure and all 93 terminals. The delta was adopted into
+`~/src/lean/finitegeom` as ordinary forward commit `e41b50b`. There the gate
+builds through the guarded queue and is trace-current, and the exported audit
+elaborates to the same 93 results with the same five native-evaluation
+carriers. Nothing was pushed. The base's `PROVENANCE.md` carries pre-existing
+prose drift (it declares 251 modules against a recorded 273), which the
+exporter reported and left untouched.
 
 ## Open items
 
-1. `papers/papers-index.md` and `notes/2026-07-31-work-summary.md` name the
-   pre-split combined AME--LU title and do not name Paper II at all. The
-   work-summary manuscripts table is a generated region that
-   `paper-facts.py generate` refreshes; the index is hand-written. Both are
-   portfolio documents whose Paper I and Paper II rows this lane owns.
-2. `papers/beyond4_prs/refs.bib:RuddAMELU2026` still gives the pre-split
-   combined title for the companion paper. That file belongs to the
-   `reed-solomon` lane.
-3. Paper I's own facts artifact `lean/trust/paper-facts/ame_lu.json` is stale
-   against its current bibliography — regeneration changes it substantially.
-   That is Paper I's to refresh, not this task's.
-4. Public `finitegeom` materialization of the two roots was not attempted: the
-   export configuration for this area does not exist and the `build-sys` lane
-   owns that surface.
+1. The base library's older `trust/AME_LU.md` boundary still describes a single
+   accompanying manuscript and was exported from the pre-split aggregate gate at
+   source commit `10d1941a`. Refreshing it belongs to Paper I's own export.
+2. Other lanes' paper-facts artifacts and the Reed--Solomon compiled
+   bibliography remain stale against their sources.
+3. Nothing is published: the standalone mirror commit `f90b330` and the base
+   library commit `e41b50b` are both unpushed.
 
 ## Discovery discriminator
 

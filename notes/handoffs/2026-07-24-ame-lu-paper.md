@@ -10,15 +10,21 @@ Discovery companion:
 
 ## Current status
 
-**C859 queued next (2026-08-02): Paper II formal/trust remediation.** C858
-found no mathematical theorem or finite-evidence defect, but Paper II is not
-formal- or release-ready: its semantic gate, axiom audit, recursive trust
-contract, registered terminals, and generated paper facts are absent; public
-surfaces still describe those as future work; and the theorem map omits the
-now-explicit imported minimum-support atlas. Clear the complete checklist in
-`2026-08-02-c859-mds-css-formal-remediation-checklist.md`, including guarded
-exact-root validation and standalone resynchronization, before claiming formal
-or release readiness.
+**C859 closed (2026-08-03): Paper II is formal-companion-ready and publicly
+materialized.** *Diagonal Isoduality and Transversal Clifford Groups of
+MDS--CSS Codes* now has its own semantic gate
+`RelativeConicArcs.Gates.MDSCSSTransversalGeometry`, an axiom audit over all 93
+cited declarations, per-terminal axiom declarations in the relconic trust
+spine, both extracted facts artifacts, a registered adopted-label/claim-manifest/
+terminal set, and a generated paper-facts artifact. Three graph counts use
+exhaustive native evaluation and two marginal-moment terminals inherit the star
+count's axiom; everything else is kernel checked. The public surfaces state
+that boundary in the present tense, the theorem map records all four imported
+companion results including the minimum-support atlas, and the portfolio and
+Reed--Solomon title drift is cleared. The standalone mirror is at `f90b330` and
+the base Lean library carries the exported boundary at `e41b50b`; both are
+unpushed, which is the remaining author decision. See
+`2026-08-03-c859-mds-css-formal-remediation.md`.
 
 **C858 closed `FAIL — REMEDIATION REQUIRED` (2026-08-02): Paper II's
 mathematics and all eight evidence replays pass, but the formal/public trust

@@ -25,7 +25,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C859 `[ame-lu]` [QUEUED NEXT; PAPER II FORMAL/TRUST REMEDIATION]** — close C858's release-blocking formal and trust gaps without changing theorem strength: create and validate Paper II's semantic gate and axiom audit, compute its recursive formal contract and paper facts, reconcile atlas ownership and public verification prose, clear bounded portfolio/title/bibliography findings with their owners, and forward-synchronize the fully validated standalone; every required action is frozen in the exhaustive checklist → `notes/2026-08-02-c859-mds-css-formal-remediation-checklist.md`.
 
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
