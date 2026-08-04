@@ -73,7 +73,25 @@ python3 papers/scripts/export-paper-repos.py sync  --source-ref HEAD \
 After a sync, replay the paper's own release gate inside the mirror (its
 verification README gives the command; supply the pinned Lean package
 checkout where required) and require agreement with the authority's release
-identity before the result is called synchronized.
+identity before the result is called synchronized. Agreement means the
+recorded hashes match, including the canonical release-surface hash, not
+merely that the mirror's gate passes.
+
+Two refusals have no tool-side workaround and must be resolved deliberately:
+
+- **Renames read as deletions.** `sync` refuses to remove tracked mirror
+  paths, and a rename in the authority leaves the old names orphaned
+  downstream. Reconcile them in the mirror with an explicit `git rm` commit
+  made *before* the sync, so the removal is separately reviewable in the
+  mirror's history rather than buried inside a content refresh. Never delete
+  mirror files as a side effect of a sync, and never add exclusions or
+  rewrites to `papers/repositories.toml` to make a refusal disappear.
+- **Mirror-only files drift.** Anything tracked downstream but absent from
+  the authority blocks every future sync and silently rots — a pin manifest
+  left only in a mirror will keep naming superseded commits. The fix is to
+  move the file into the authority so the exporter carries it, not to delete
+  it downstream. Keep every pin that describes the paper's formal companions
+  in the authority for this reason.
 
 ## Lean export for a paper: base library, certificate package, release chain
 
