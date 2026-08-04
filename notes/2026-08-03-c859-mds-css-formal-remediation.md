@@ -186,3 +186,60 @@ Nothing incidental arose outside the requested remediation. Two defects found
 while inspecting rendered pages — the stale figure equation reference and the
 figure label collision — are deliverables of this task's validation step and
 are recorded above rather than on the discovery track.
+
+## Post-closure follow-up (2026-08-03, after publication)
+
+Both paper mirrors were pushed by the author: the transversal-groups paper at
+`f90b330` with DOI `10.5281/zenodo.21766797`, and the rigidity paper at
+`8468914` with DOI `10.5281/zenodo.21681856`. That closed the companion-locator
+gate both manuscripts were waiting on, and each now cites the other by
+deposited identifier and public repository instead of by a frozen source-tree
+hash.
+
+Two mathematical and editorial repairs followed.
+
+The transversal-groups paper states the arc--AME dictionary in both directions.
+Lean proves `IsAME (equalPhaseState C) ↔ IsMDSCode634 C`, while Proposition 2.1
+had asserted only that a six-arc kernel gives an AME state; the converse is now
+stated and proved in three lines from the support criterion, so the manuscript
+matches the kernel-checked equivalence. This was the one case found where the
+formal development was strictly stronger than a paper claim.
+
+`extensionField_pencil_classified_by_galoisZ` is renamed
+`extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges`. Its two
+structure fields are exactly the representation-theoretic bridges the
+manuscript declines to claim, so a name asserting classification overstated
+what the type proves. The module header and docstring now say it is a
+criterion relative to those hypotheses. All five affected gates rebuilt and the
+trace-only aggregate gate passed.
+
+A page-by-page render sweep of the rigidity paper found defects that its
+warning-free build does not catch: three macros in appendix B had lost their
+backslashes and printed `mathrmHS` and `leq` in the text; the operator-pushing
+figure's holonomy label collided with the axis and the arrow; the
+defect-landscape annotation collided with a marker; and the stability-radius
+legend was crossed by a plot line. All are repaired, and its verification
+section no longer forecasts a formal contract that does not exist. A private
+work-item reference in its preamble was also removed, which the export audit
+had been flagging.
+
+Remaining, both needing a decision or another lane's quiet window:
+
+1. The rigidity paper's mirror still publishes the complete pre-split
+   supplement, the six-party sections, the pencil figures, and the formal
+   companion record — all of which now belong to the transversal-groups paper.
+   Synchronization refuses to remove 31 tracked paths without an explicit
+   reconciling `git rm` commit made in the mirror first. That same deletion in
+   the authority is what the paper's release-manifest generator trips on, so
+   the two are one decision, not two. Its authority-side blocker is cleared:
+   the split record was renamed `SPLIT-PROVENANCE.md` so the generated export
+   provenance owns `PROVENANCE.md`, and the export audit is clean.
+2. The Lean trust facts and the base-library export still name the renamed
+   declaration by its old name. Re-extraction needs a quiet Lean worktree and
+   another lane is editing `PassantCodeQ13` and `AlignedTwoGraph`, so both the
+   facts refresh and the companion re-export are pending that window.
+
+The transversal-groups mirror is synchronized at local commit `d2e54cb`:
+manifest verified at 47 tracked files, clean warning-free build, clean
+worktree, and a tracked PDF byte-identical to the authority's. It is unpushed,
+as is the base-library boundary commit.
