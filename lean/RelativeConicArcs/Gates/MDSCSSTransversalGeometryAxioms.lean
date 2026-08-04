@@ -4,7 +4,7 @@ import RelativeConicArcs.Gates.MDSCSSTransversalGeometry
 # Axiom audit for diagonal isoduality and transversal Clifford groups of MDS--CSS codes
 
 This module imports only the semantic gate of the MDS--CSS transversal-group
-development and prints the axiom dependencies of every declaration that
+development and prints the axiom dependencies of every declaration that this
 manuscript cites: the six-arc/MDS/CSS/AME dictionary, the stabilizer
 dictionary and the character realization behind the Pauli phase correction,
 the diagonal multiplier line and nullity test, the exact fixed-party carrier

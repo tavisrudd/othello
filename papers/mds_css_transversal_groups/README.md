@@ -40,13 +40,13 @@ This paper's checked surface is exactly the transitive closure of the
 import-only gate `RelativeConicArcs.Gates.MDSCSSTransversalGeometry`, and the
 axiom dependencies of every declaration the paper cites are printed by
 `RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms`. A content-addressed
-record of that closure — source hashes, imports, terminal names, axiom facts,
-and toolchain identity — is kept with the Lean development and is summarized in
-`supplement/EVIDENCE.md`. The dictionary, multiplier-line, syndrome, pencil
-quotient, Frobenius-sector, and party-splitting statements are kernel-checked;
-the exact-carrier, classification, separator, and transport terminals derive
-their conclusions from structures whose fields state the inputs the manuscript
-proves or certifies separately; three six-party graph cardinalities use
+record of that closure — its modules, imports, terminal names, axiom facts,
+exporter digest, and toolchain identity — is kept with the Lean development and
+is summarized in `supplement/EVIDENCE.md`. The dictionary, multiplier-line,
+syndrome, pencil quotient, Frobenius-sector, and party-splitting statements are
+checked by kernel reduction; the exact-carrier, classification, logical-phase,
+separator, and transport terminals derive their conclusions from structures
+whose fields state the inputs the manuscript proves or certifies separately; three six-party graph cardinalities use
 exhaustive native evaluation, and the two marginal-moment terminals proved from
 the star count inherit its evaluation axiom.
 

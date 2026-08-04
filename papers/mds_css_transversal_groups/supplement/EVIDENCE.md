@@ -50,10 +50,11 @@ obligations in the text.
 ## Lean claim crosswalk
 
 The shared Lean 4 source uses toolchain `v4.32.0-rc1` with the pinned Mathlib
-revision recorded beside the development.  This paper's formal surface is
-exactly the transitive closure of two semantic roots:
+revision recorded beside the development.  The formal companion has two
+semantic roots:
 
-- `RelativeConicArcs.Gates.MDSCSSTransversalGeometry`, an import-only gate; and
+- `RelativeConicArcs.Gates.MDSCSSTransversalGeometry`, an import-only gate
+  whose transitive closure is this paper's checked surface; and
 - `RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms`, which imports only
   that gate and prints the axiom dependencies of every declaration cited here.
 

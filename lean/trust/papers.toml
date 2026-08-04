@@ -118,6 +118,47 @@ id = "mds_css_transversal_groups"
 dir = "papers/mds_css_transversal_groups"
 main = "main.tex"
 lane = "ame-lu"
+adopted_labels = [
+  "prop:diagonal-multiplier-line",
+  "cor:diagonal-isodual-transversal-group",
+  "lem:six-arc-self-association",
+  "thm:lc-pencil",
+  "cor:lu-lc-pencil",
+  "prop:clebsch-x-syndrome",
+  "thm:fixed-copy-boundary",
+]
+manifest = "verification/claims.json"
+manifest_labels = "claims[].label"
+# The declarations this manuscript cites.  The list is the terminal set of its semantic gate
+# restricted to the statements the paper names; the companion rigidity paper owns the imported
+# encoder-conversion and equal-phase rigidity results that appear here.
+lean_terminals = [
+  "RelativeConicArcs.AMELU.isAME_equalPhaseState_iff_isMDSCode634",
+  "RelativeConicArcs.AMELU.cssLabelSpace_isPauliLagrangian",
+  "RelativeConicArcs.AMELU.equalPhaseState_hasMinimalComputationalSupport",
+  "RelativeConicArcs.AMELU.exists_pauliLabel_pairing_eq_dual",
+  "RelativeConicArcs.AMELU.diagonalMultiplierSpace_finrank_le_one",
+  "RelativeConicArcs.AMELU.diagonalDualityMultiplierSpace_finrank_eq_zero_or_one",
+  "RelativeConicArcs.AMELU.isDiagonallyIsodual_iff_finrank_eq_one",
+  "RelativeConicArcs.AMELU.diagonalDuality_existsUnique_unit_smul_eq",
+  "RelativeConicArcs.AMELU.fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus",
+  "RelativeConicArcs.AMELU.diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy",
+  "RelativeConicArcs.AMELU.diagonalDualityNullity_fixedPartyProjectiveTransversal_dichotomy",
+  "RelativeConicArcs.AMELU.grs_projectiveTransversal_eq_affineSpecialLinear",
+  "RelativeConicArcs.AMELU.affineSpecialLinearOrder_seven",
+  "RelativeConicArcs.AMELU.encoderConversion_logical_and_physical_isClifford",
+  "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent_from_generic",
+  "RelativeConicArcs.AMELU.fixedPartyKernel_eq_specialLinear_or_splitTorus",
+  "RelativeConicArcs.AMELU.pencilZ_eq_iff_samePencilYOrbit",
+  "RelativeConicArcs.AMELU.admitted_nonGRS_pencil_classified_by_z",
+  "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq",
+  "RelativeConicArcs.AMELU.twistedPencil_sectors_disjoint",
+  "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_weight_three_on_support",
+  "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences",
+  "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve",
+  "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z",
+  "RelativeConicArcs.AMELU.genericPartyPermutationExtension_splits_iff",
+]
 
 [[paper]]
 id = "arcs_complete_outside_conic"

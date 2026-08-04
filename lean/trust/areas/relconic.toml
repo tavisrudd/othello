@@ -627,27 +627,27 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.card_marginalTriples"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "card_marginalTriples._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalTriples._native.native_decide.ax_1_1", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.card_marginalStars"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "card_marginalStars._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.card_perfectMatchings"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "card_perfectMatchings._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_perfectMatchings._native.native_decide.ax_1_1", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.rankFourMultiplicity_eq_sixty_add_concurrency"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "card_marginalStars._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "card_marginalStars._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.fixedPartyKernel_eq_specialLinear_or_splitTorus"

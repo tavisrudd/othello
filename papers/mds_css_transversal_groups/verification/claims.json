@@ -1,0 +1,305 @@
+{
+  "schema": "mds-css-transversal-groups-claim-manifest-v1",
+  "lean_gate": "RelativeConicArcs.Gates.MDSCSSTransversalGeometry",
+  "lean_axiom_audit": "RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "evidence_manifest": "supplement/EVIDENCE-MANIFEST.json",
+  "replay_command": "python3 supplement/verify.py --replay",
+  "claims": [
+    {
+      "label": "thm:dictionary",
+      "statement": "Ordered six-arcs, exact [6,3,4]_q codes, equal-phase CSS states, and the AME property correspond, and IsAME(equalPhaseState C) holds exactly when C is an exact [6,3,4] code.",
+      "route": "lean-unconditional",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.isMDSCode634_arcKernel",
+        "RelativeConicArcs.AMELU.isAME_equalPhaseState_arcKernel",
+        "RelativeConicArcs.AMELU.isAME_equalPhaseState_iff_isMDSCode634",
+        "RelativeConicArcs.AMELU.projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent",
+        "RelativeConicArcs.AMELU.tensorWeylAction_equalPhaseState_of_mem_cssLabelSpace",
+        "RelativeConicArcs.AMELU.cssLabelSpace_isPauliLagrangian",
+        "RelativeConicArcs.AMELU.mem_cssSupportedLabelSpace_iff_support_subset",
+        "RelativeConicArcs.AMELU.equalPhaseState_hasMinimalComputationalSupport"
+      ],
+      "evidence": [
+        "evidence/2026-07-19-clebsch-ame-equivalence.json"
+      ],
+      "boundary": "The Clebsch/GRS separation certificate covers the displayed AME(6,11) state against all six-point GRS-derived states; it classifies no other non-GRS state."
+    },
+    {
+      "label": "prop:diagonal-multiplier-line",
+      "statement": "For a linear [2m,m,m+1]_q MDS code the space of diagonal code-to-dual multipliers has dimension zero or one; a nonzero multiplier has full support and is unique up to a unit scalar.",
+      "route": "lean-unconditional",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.diagonalMultiplier_ne_zero_at",
+        "RelativeConicArcs.AMELU.diagonalMultiplierSpace_finrank_le_one",
+        "RelativeConicArcs.AMELU.diagonalMultiplierSpace_self_eq_span_one",
+        "RelativeConicArcs.AMELU.diagonalDualityMultiplierSpace_finrank_eq_zero_or_one",
+        "RelativeConicArcs.AMELU.isDiagonallyIsodual_iff_finrank_eq_one",
+        "RelativeConicArcs.AMELU.not_isDiagonallyIsodual_iff_finrank_eq_zero",
+        "RelativeConicArcs.AMELU.diagonalDuality_existsUnique_unit_smul_eq",
+        "RelativeConicArcs.AMELU.diagonalDuality_multiplier_ratio_eq",
+        "RelativeConicArcs.AMELU.GenericDiagonalDuality.diagonalMultiplierBilinForm_eq_zero",
+        "RelativeConicArcs.AMELU.genericDiagonalDualityOfMultiplier"
+      ],
+      "evidence": [],
+      "boundary": "No computational premise; the statement is proved for every finite field and every exact half-dimensional MDS pair."
+    },
+    {
+      "label": "cor:diagonal-isodual-transversal-group",
+      "statement": "Over an odd prime field the multiplier nullity determines the exact fixed-party projective transversal logical group of the associated [[2m-1,1,m]]_q code: F_q^2 semidirect SL_2(q) when C is diagonally isodual, and F_q^2 semidirect T otherwise.",
+      "route": "lean-interface",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus",
+        "RelativeConicArcs.AMELU.diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy",
+        "RelativeConicArcs.AMELU.diagonalDualityNullity_fixedPartyProjectiveTransversal_dichotomy",
+        "RelativeConicArcs.AMELU.offDiagonalBlock_fixedPartyProjectiveTransversal_eq_affineSpecialLinear",
+        "RelativeConicArcs.AMELU.grs_projectiveTransversal_eq_affineSpecialLinear",
+        "RelativeConicArcs.AMELU.affineSpecialLinearOrder_seven",
+        "RelativeConicArcs.AMELU.genericCSSLabel_lowerDualityShear",
+        "RelativeConicArcs.AMELU.genericCSSLabel_upperDualityShear",
+        "RelativeConicArcs.AMELU.oneLegQuantumMDSParameters_singletonEquality",
+        "RelativeConicArcs.AMELU.isMDSCode2m_oneLegQuantumMDSParameters"
+      ],
+      "evidence": [],
+      "boundary": "The Lean terminal derives the dichotomy from a structure whose fields assert special linearity, coordinatewise propagation, the block-to-multiplier converse, and the complete translation fiber; those inputs are proved in the manuscript. The converse direction imports the companion paper's rigidity theorem."
+    },
+    {
+      "label": "thm:lu-lc-rigidity",
+      "statement": "For every prime power q and m at least two, every product-unitary intertwiner between stabilizer AME(2m,q) states is Clifford on each tensor factor.",
+      "route": "imported",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.genericLocallyUnitaryEquivalent_equalPhaseState_implies_genericLocallyCliffordEquivalent",
+        "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent_from_generic"
+      ],
+      "evidence": [],
+      "boundary": "Owned and proved in the companion rigidity paper. The declarations listed here are the equal-phase specialization this paper invokes, not the arbitrary-additive theorem."
+    },
+    {
+      "label": "cor:transversal-clifford",
+      "statement": "Every tensor-product conversion between the associated [[2m-1,1,m]]_q encoders is Clifford on every physical factor and on the logical factor.",
+      "route": "imported",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_chosenLeg",
+        "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_and_physical_isClifford",
+        "RelativeConicArcs.AMELU.encoderConversion_logical_and_physical_isClifford"
+      ],
+      "evidence": [],
+      "boundary": "Owned and proved in the companion rigidity paper; present in this closure because the exact-carrier argument uses the encoder conversions directly."
+    },
+    {
+      "label": "lem:pauli-phase-correction",
+      "statement": "A product-Clifford map of stabilizer label groups can be corrected by a product Pauli so that it carries one state ray to the other.",
+      "route": "imported",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.pauliSymplecticToDual_injective",
+        "RelativeConicArcs.AMELU.exists_pauliLabel_pairing_eq_dual"
+      ],
+      "evidence": [],
+      "boundary": "Owned by the companion rigidity paper. Only the character-realization ingredient is formalized here: every linear character on a Pauli-label subspace is symplectic pairing with an ambient label."
+    },
+    {
+      "label": "lem:six-arc-self-association",
+      "statement": "At length six, diagonal isoduality of the code is fixed-label Gale self-association of the six-arc, which holds exactly when the arc lies on a conic.",
+      "route": "conceptual",
+      "lean_terminals": [],
+      "evidence": [
+        "evidence/2026-07-23-ame-perfect-tensor-physics.json"
+      ],
+      "boundary": "The Gale/conic equivalence is a manuscript proof; the certificate replays symbolic Gale identities at q=11,13,101."
+    },
+    {
+      "label": "thm:logical-phase",
+      "statement": "For an odd-prime-field six-arc the fixed-party logical kernel is SL_2(q) on the conic locus and the diagonal split torus off it.",
+      "route": "lean-interface",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.fixedPartyKernel_eq_specialLinear_or_splitTorus",
+        "RelativeConicArcs.AMELU.splitTorusWeylBlock_isSpecialLinear",
+        "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_self",
+        "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_splitTorusBlock"
+      ],
+      "evidence": [
+        "evidence/2026-07-23-ame-perfect-tensor-physics.json"
+      ],
+      "boundary": "The Lean terminal takes four explicit propagation hypotheses as structure fields; the party-moving normalizer clause is a manuscript proof input."
+    },
+    {
+      "label": "thm:lc-pencil",
+      "statement": "On the admitted non-GRS pencil the degree-eight quotient z classifies projective and monomial-code equivalence over odd finite fields.",
+      "route": "lean-interface",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.pencilZ_eq_iff_samePencilYOrbit",
+        "RelativeConicArcs.AMELU.pencilFrameRatio_crossDifference",
+        "RelativeConicArcs.AMELU.pencilFrameRatio_eq_iff",
+        "RelativeConicArcs.AMELU.admitted_nonGRS_pencil_classified_by_z"
+      ],
+      "evidence": [
+        "evidence/2026-07-23-holonomy-completeness.json"
+      ],
+      "boundary": "The algebraic quotient is unconditional; the classification terminal names its projectivity, bracket-invariance, and local-Clifford holonomy inputs as structure fields."
+    },
+    {
+      "label": "cor:lu-lc-pencil",
+      "statement": "Over odd prime fields, two admitted non-GRS pencil states are local-unitary equivalent exactly when they are local-Clifford equivalent, and exactly when their z values agree.",
+      "route": "lean-interface",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent",
+        "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq"
+      ],
+      "evidence": [
+        "evidence/2026-07-23-holonomy-completeness.json"
+      ],
+      "boundary": "Restricted to odd prime fields: over extension fields Frobenius is an additional local Clifford and no orbit classification is claimed. Uses the imported rigidity theorem and the imported minimum-support atlas."
+    },
+    {
+      "label": "prop:frobenius-sector-divisors",
+      "statement": "The twisted pencil's Gale pairing multiplier, its vanishing criterion, sector disjointness, and the equivariance of the pencil coordinates under a field automorphism.",
+      "route": "lean-unconditional",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.twistedPencilGaleDivisor_refl",
+        "RelativeConicArcs.AMELU.pencilGalePairing_multiplier",
+        "RelativeConicArcs.AMELU.pencilGalePairing_multiplier_zero_iff",
+        "RelativeConicArcs.AMELU.twistedPencil_sectors_disjoint",
+        "RelativeConicArcs.AMELU.map_pencilGRSQuartic",
+        "RelativeConicArcs.AMELU.map_pencilA",
+        "RelativeConicArcs.AMELU.map_pencilB",
+        "RelativeConicArcs.AMELU.map_pencilZ",
+        "RelativeConicArcs.AMELU.admitted_nonGRS_map_iff"
+      ],
+      "evidence": [],
+      "boundary": "Scalar algebra only; the full extension-field Clifford orbit classification is not claimed."
+    },
+    {
+      "label": "lem:coset-syndrome-charts",
+      "statement": "Translated equal-phase states are classified by code cosets, distinct cosets are orthogonal, dual-code phase stabilizers read the translation character, and every syndrome has exactly one minimum representative on each three-party support.",
+      "route": "lean-unconditional",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.tensorWeylAction_X_equalPhaseState_eq_translated",
+        "RelativeConicArcs.AMELU.translatedEqualPhaseState_eq_iff",
+        "RelativeConicArcs.AMELU.stateInnerProduct_translatedEqualPhaseState_eq_zero",
+        "RelativeConicArcs.AMELU.tensorWeylAction_Z_translatedEqualPhaseState",
+        "RelativeConicArcs.AMELU.supportedArcSyndrome_bijective_of_card_three",
+        "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_supported_on_three",
+        "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_weight_three_on_support"
+      ],
+      "evidence": [],
+      "boundary": "No computational premise."
+    },
+    {
+      "label": "prop:clebsch-x-syndrome",
+      "statement": "For the Clebsch [6,3,4]_11 code the twelve conic rays give 120 syndromes with a transitive C_10 x A_5 orbit, and each balanced three-party support carries one minimum X-representative.",
+      "route": "conceptual-with-cited-input",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.supportedArcSyndrome_bijective_of_card_three",
+        "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_weight_three_on_support"
+      ],
+      "evidence": [
+        "evidence/2026-07-19-clebsch-ame-equivalence.json"
+      ],
+      "boundary": "Composes the unconditional syndrome core with the cited Clebsch conic, count, and orbit theorem; the defining arc is nonconic, so the fixed-party logical image is the split torus."
+    },
+    {
+      "label": "rem:clebsch-x-syndrome-boundary",
+      "statement": "Scope remark separating the syndrome charts from the fixed-input operator-pushing fibres and from the computed party image.",
+      "route": "conceptual",
+      "lean_terminals": [],
+      "evidence": [],
+      "boundary": "Remark only; asserts no new result."
+    },
+    {
+      "label": "thm:lu-h3-grs",
+      "statement": "Every odd good non-GRS H3 reduction is separated from the GRS locus by the rank-four marginal-moment multiplicity.",
+      "route": "lean-interface",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.card_marginalTriples",
+        "RelativeConicArcs.AMELU.card_marginalStars",
+        "RelativeConicArcs.AMELU.card_perfectMatchings",
+        "RelativeConicArcs.AMELU.rankFourMultiplicity_eq_sixty_add_concurrency",
+        "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences"
+      ],
+      "evidence": [
+        "evidence/2026-07-23-h3-ame-uniform-lu-separation.json",
+        "evidence/2026-07-23-h3-pentad-orientation-lu.json"
+      ],
+      "boundary": "Bad and GRS reductions are excluded. The three graph cardinalities are exhaustive native evaluations, and the multiplicity identity and separator inherit the star-count evaluation axiom; the incidence and rank bridges are structure fields."
+    },
+    {
+      "label": "thm:q13-lu",
+      "statement": "At q=13 the classes z=4 and z=12 are separated by an exact four-copy contraction, hence are inequivalent under arbitrary local unitaries.",
+      "route": "certificate-checked",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern",
+        "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern",
+        "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve"
+      ],
+      "evidence": [
+        "evidence/2026-07-23-ame-perfect-tensor-physics.json"
+      ],
+      "boundary": "The Lean terminal derives inequivalence from the two certified orbit sums 720/13^9 and 3024/13^9; the certificate exhausts all 720 party permutations."
+    },
+    {
+      "label": "thm:fixed-copy-boundary",
+      "statement": "For irreducible regular code charts every fixed-copy scalar contraction is generically constant on the pencil, so bounded scalar invariants lose the classification data the operator-valued Weyl atlas retains.",
+      "route": "conceptual",
+      "lean_terminals": [],
+      "evidence": [
+        "evidence/2026-07-23-contraction-rank-drop-divisor.json"
+      ],
+      "boundary": "Conceptual contraction-rank proof; the certificate covers the admitted pencil's rank-drop divisor, not a general statement about all invariants."
+    },
+    {
+      "label": "thm:transport-divisor",
+      "statement": "The reduced four-copy transport operator drops rank exactly on (z-2)(9z-4), with the two components merging in characteristic seven.",
+      "route": "lean-interface",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor",
+        "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor",
+        "RelativeConicArcs.AMELU.axialCyclePolynomial_factor",
+        "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_three_factors",
+        "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z",
+        "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial",
+        "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven",
+        "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_factor",
+        "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_factor",
+        "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_factor",
+        "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight",
+        "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine",
+        "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_negative",
+        "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_positive"
+      ],
+      "evidence": [
+        "evidence/2026-07-23-four-copy-cover-holonomy.json",
+        "evidence/2026-07-23-contraction-rank-drop-divisor.json"
+      ],
+      "boundary": "The cycle-polynomial algebra is unconditional; the determinant expansion, systematic rank bridge, and double-coset orbit counts enter as structure fields backed by the certificates."
+    },
+    {
+      "label": "cor:computed-party-splitting",
+      "statement": "For the twelve listed rows the realized party-permutation extension splits, with explicit complements.",
+      "route": "certificate-checked",
+      "lean_terminals": [
+        "RelativeConicArcs.AMELU.GroupExtension.factorSet_change",
+        "RelativeConicArcs.AMELU.GroupExtension.factorSet_trivializable_iff_splitting",
+        "RelativeConicArcs.AMELU.GroupExtension.Splitting.semidirectProductEquiv",
+        "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_associativity",
+        "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_change",
+        "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_trivializable_iff_splits",
+        "RelativeConicArcs.AMELU.genericPartyPermutationExtension_splits_iff",
+        "RelativeConicArcs.AMELU.genericPartyPermutationGroupExtensionSplitting",
+        "RelativeConicArcs.AMELU.genericPartyPermutationSemidirectProductEquiv",
+        "RelativeConicArcs.AMELU.genericPartyPermutation_natCard"
+      ],
+      "evidence": [
+        "evidence/2026-07-25-ame-lu-party-extension-examples.json"
+      ],
+      "boundary": "Exactly the twelve named rows. The abstract splitting consequences are unconditional once a complement is supplied; the complements are certificate-checked."
+    },
+    {
+      "label": "lem:conic-matchings",
+      "statement": "For six points on a conic over an odd field the three matching lines are concurrent.",
+      "route": "conceptual",
+      "lean_terminals": [],
+      "evidence": [],
+      "boundary": "Manuscript proof; no certificate and no Lean terminal."
+    }
+  ]
+}

@@ -1,0 +1,787 @@
+{
+  "bibliography": [
+    {
+      "key": "CollinsSniady2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "DehaeneDeMoor2003",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "Dickson1901",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "Faber2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "Gerardin1976",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "HostensDehaeneDeMoor2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "HowardMillsonSnowdenVakil2008",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "HuffmanPless2003",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "KetkarKlappeneckerKumarSarvepalli2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "RuddAMEStabilizerRigidity2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl",
+      "text": "Tavis Rudd. \\newblock Local-unitary rigidity and quantitative rounding for stabilizer {AME} states, 2026. \\newblock Companion preprint; frozen combined source tree 2ada0216f5176543f8e7612f38e0cba62e4406bf81a36a6593a55288ea3d98cd."
+    },
+    {
+      "key": "RuddClebsch2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl",
+      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus. \\newblock Preprint, \\url{https://github.com/tavisrudd/clebsch-rigidity}, 2026."
+    },
+    {
+      "key": "AharonovBenOr2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Fault-Tolerant Quantum Computation With Constant Error Rate"
+    },
+    {
+      "key": "AndersonJochymOConnor2014",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Classification of Transversal Gates in Qubit Stabilizer Codes"
+    },
+    {
+      "key": "AuddyYuan2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Perturbation Bounds for (Nearly) Orthogonally Decomposable Tensors"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Arcs in Finite Projective Spaces"
+    },
+    {
+      "key": "BraunsteinCaves1994",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Statistical Distance and the Geometry of Quantum States"
+    },
+    {
+      "key": "BravyiKonig2013",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Classification of Topologically Protected Gates for Local Stabilizer Codes"
+    },
+    {
+      "key": "BravyiTerhal2009",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "A No-Go Theorem for a Two-Dimensional Self-Correcting Quantum Memory Based on Stabilizer Codes"
+    },
+    {
+      "key": "BryanLeutheusserReichsteinVanRaamsdonk2019",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Locally Maximally Entangled States of Multipart Quantum Systems"
+    },
+    {
+      "key": "BryanReichsteinVanRaamsdonk2018",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Existence of Locally Maximally Entangled Quantum States via Geometric Invariant Theory"
+    },
+    {
+      "key": "BurchardtRaissi2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Stochastic Local Operations with Classical Communication of Absolutely Maximally Entangled States"
+    },
+    {
+      "key": "ChakrabortyGottesman2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "No-Go Theorem on Fault Tolerant Gadgets for Multiple Logical Qubits"
+    },
+    {
+      "key": "ChangJing2022",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Local Unitary Equivalence of Generic Multi-qubits Based on the {CP} Decomposition"
+    },
+    {
+      "key": "Coble1922",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Associated Sets of Points"
+    },
+    {
+      "key": "CollinsSniady2006",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Integration with Respect to the {Haar} Measure on Unitary, Orthogonal and Symplectic Group"
+    },
+    {
+      "key": "DasuBurton2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "A Classification of Transversal {Clifford} Gates for Qubit Stabilizer Codes"
+    },
+    {
+      "key": "DehaeneDeMoor2003",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "The {Clifford} Group, Stabilizer States, and Linear and Quadratic Operations over {GF}(2)"
+    },
+    {
+      "key": "Dickson1901",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Linear Groups: With an Exposition of the Galois Field Theory"
+    },
+    {
+      "key": "DolgachevOrtland1988",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Point Sets in Projective Spaces and Theta Functions"
+    },
+    {
+      "key": "EastinKnill2009",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Restrictions on Transversal Encoded Quantum Gate Sets"
+    },
+    {
+      "key": "EnglbrechtKraus2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Symmetries and Entanglement of Stabilizer States"
+    },
+    {
+      "key": "Faber2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Finite \\(p\\)-Irregular Subgroups of \\(\\operatorname{PGL}_2(k)\\)"
+    },
+    {
+      "key": "Gerardin1976",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Three {Weil} Representations Associated to Finite Fields"
+    },
+    {
+      "key": "Gottesman1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Fault-Tolerant Quantum Computation with Higher-Dimensional Systems"
+    },
+    {
+      "key": "GourKrausWallach2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Almost All Multipartite Qubit Quantum States Have Trivial Stabilizer"
+    },
+    {
+      "key": "GrasslGeiselmannBeth1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Quantum {Reed--Solomon} Codes"
+    },
+    {
+      "key": "GrossVanDenNest2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "The {LU-LC} Conjecture, Diagonal Local Operations and Quadratic Forms over {GF(2)}"
+    },
+    {
+      "key": "Harshman1970",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Foundations of the {PARAFAC} Procedure: Models and Conditions for an ``Explanatory'' Multi-modal Factor Analysis"
+    },
+    {
+      "key": "Hirschfeld1998",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Projective Geometries over Finite Fields"
+    },
+    {
+      "key": "Holmes2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Quantum Logic Codes: Complete Transversal Logical {Clifford} Instruction Sets for High-Rate Stabilizer Quantum Error Correcting Codes"
+    },
+    {
+      "key": "HostensDehaeneDeMoor2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Stabilizer States and {Clifford} Operations for Systems of Arbitrary Dimensions, and Modular Arithmetic"
+    },
+    {
+      "key": "HowardMillsonSnowdenVakil2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "A Description of the Outer Automorphism of {{$S_6$}}, and the Invariants of Six Points in Projective Space"
+    },
+    {
+      "key": "HuberGrassl2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Quantum Codes of Maximal Distance and Highly Entangled Subspaces"
+    },
+    {
+      "key": "HuffmanPless2003",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Fundamentals of Error-Correcting Codes"
+    },
+    {
+      "key": "HyllusEtAl2012",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Fisher Information and Multiparticle Entanglement"
+    },
+    {
+      "key": "JiChenWeiYing2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "The {LU--LC} Conjecture Is False"
+    },
+    {
+      "key": "JochymOConnorKubicaYoder2018",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "The Disjointness of Stabilizer Codes and Limitations on Fault-Tolerant Logical Gates"
+    },
+    {
+      "key": "KetkarKlappeneckerKumarSarvepalli2006",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Nonbinary Stabilizer Codes over Finite Fields"
+    },
+    {
+      "key": "KoldaBader2009",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Tensor Decompositions and Applications"
+    },
+    {
+      "key": "Kruskal1977",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Three-way Arrays: Rank and Uniqueness of Trilinear Decompositions, with Application to Arithmetic Complexity and Statistics"
+    },
+    {
+      "key": "LyonsWalckBlanda2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Classification of Nonproduct States with Maximum Stabilizer Dimension"
+    },
+    {
+      "key": "Pahari2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Classification and Exact Local Masking in Finite-Field Clifford Dual-Unitary Circuits"
+    },
+    {
+      "key": "PastawskiYoshida2015",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Fault-Tolerant Logical Gates in Quantum Error-Correcting Codes"
+    },
+    {
+      "key": "PastawskiYoshidaHarlowPreskill2015",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Holographic Quantum Error-Correcting Codes: Toy Models for the Bulk/Boundary Correspondence"
+    },
+    {
+      "key": "Rains1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Quantum Codes of Minimum Distance Two"
+    },
+    {
+      "key": "RaissiGogolinRieraAcin2018",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Optimal Quantum Error Correcting Codes from Absolutely Maximally Entangled States"
+    },
+    {
+      "key": "RamadasLakshminarayan2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Local Unitary Equivalence of Absolutely Maximally Entangled States Constructed from Orthogonal Arrays"
+    },
+    {
+      "key": "RatherAravindaLakshminarayan2022",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Construction and Local Equivalence of Dual-Unitary Operators: From Dynamical Maps to Quantum Combinatorial Designs"
+    },
+    {
+      "key": "RuddAMEStabilizerRigidity2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer {AME} States"
+    },
+    {
+      "key": "RuddClebsch2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Reconstructing the {Clebsch} Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus"
+    },
+    {
+      "key": "SayginelEtAl2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Fault-Tolerant Logical {Clifford} Gates from Code Automorphisms"
+    },
+    {
+      "key": "Segre1955",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Ovals in a Finite Projective Plane"
+    },
+    {
+      "key": "SidiropoulosBro2000",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "On the Uniqueness of Multilinear Decomposition of {N}-way Arrays"
+    },
+    {
+      "key": "SlowikSawickiMaciazek2021",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Designing Locally Maximally Entangled Quantum States with Arbitrary Local Symmetries"
+    },
+    {
+      "key": "Tan2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Transversal Gates of the \\(((3,3,2))\\) Qutrit Code and Local Symmetries of the Absolutely Maximally Entangled State of Four Qutrits"
+    },
+    {
+      "key": "TansuwannontChanTakagi2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Construction of the Full Logical {Clifford} Group for High-Rate Quantum {Reed--Muller} Codes Using Only Transversal and Fold-Transversal Gates"
+    },
+    {
+      "key": "TansuwannontTakadaFujii2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Clifford Gates with Logical Transversality for Self-Dual {CSS} Codes"
+    },
+    {
+      "key": "Toth2012",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Multipartite Entanglement and High-Precision Metrology"
+    },
+    {
+      "key": "VanDenNestDehaeneDeMoor2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Local Unitary versus Local {Clifford} Equivalence of Stabilizer States"
+    },
+    {
+      "key": "VanDenNestDehaeneDeMoor2005Invariants",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Finite Set of Invariants to Characterize Local {Clifford} Equivalence of Stabilizer States"
+    },
+    {
+      "key": "Wirthmuller2011",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Automorphisms of Stabilizer Codes"
+    },
+    {
+      "key": "WongJiang2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Local Unitary Decomposition of Tripartite Arbitrary Leveled Qudit Stabilizer States into $p$-level-qudit {EPR} and {GHZ} States"
+    },
+    {
+      "key": "ZhuLiao2024",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "A Class of Double-Twisted Generalized {Reed--Solomon} Codes"
+    },
+    {
+      "key": "ZhuZhao2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "On Iso-Dual {MDS} Codes From Elliptic Curves"
+    }
+  ],
+  "dir": "papers/mds_css_transversal_groups",
+  "environment_counts": {
+    "corollary": 3,
+    "lemma": 4,
+    "proposition": 5,
+    "remark": 1,
+    "theorem": 7
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:computed-party-splitting"
+    },
+    {
+      "environment": "theorem",
+      "label": "cor:diagonal-isodual-transversal-group"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:lu-lc-pencil"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:transversal-clifford"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:css-reduced-state"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:equal-phase-css-state"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:marginal-moment-count"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:marginal-moment-rank"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:permutation-contraction"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:q13-values"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-divisor"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-operator"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-rank-bridge"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-section"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-systematic"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:pencil-quotient"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:symmetry-groups"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:conic-matchings"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:coset-syndrome-charts"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:pauli-phase-correction"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:six-arc-self-association"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:clebsch-x-syndrome"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:diagonal-multiplier-line"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:frobenius-sector-divisors"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:clebsch-x-syndrome-boundary"
+    },
+    {
+      "environment": "",
+      "label": "sec:dictionary"
+    },
+    {
+      "environment": "",
+      "label": "sec:exact-logical"
+    },
+    {
+      "environment": "",
+      "label": "sec:invariants"
+    },
+    {
+      "environment": "",
+      "label": "sec:logical"
+    },
+    {
+      "environment": "",
+      "label": "sec:party-extensions"
+    },
+    {
+      "environment": "",
+      "label": "sec:pencil"
+    },
+    {
+      "environment": "",
+      "label": "sec:scalar-certificates"
+    },
+    {
+      "environment": "",
+      "label": "sec:transport"
+    },
+    {
+      "environment": "",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "proposition",
+      "label": "thm:dictionary"
+    },
+    {
+      "environment": "proposition",
+      "label": "thm:fixed-copy-boundary"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:lc-pencil"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:logical-phase"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:lu-h3-grs"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:lu-lc-rigidity"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:q13-lu"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:transport-divisor"
+    }
+  ],
+  "main": "papers/mds_css_transversal_groups/main.tex",
+  "manifest_labels": [
+    "thm:dictionary",
+    "prop:diagonal-multiplier-line",
+    "cor:diagonal-isodual-transversal-group",
+    "thm:lu-lc-rigidity",
+    "cor:transversal-clifford",
+    "lem:pauli-phase-correction",
+    "lem:six-arc-self-association",
+    "thm:logical-phase",
+    "thm:lc-pencil",
+    "cor:lu-lc-pencil",
+    "prop:frobenius-sector-divisors",
+    "lem:coset-syndrome-charts",
+    "prop:clebsch-x-syndrome",
+    "rem:clebsch-x-syndrome-boundary",
+    "thm:lu-h3-grs",
+    "thm:q13-lu",
+    "thm:fixed-copy-boundary",
+    "thm:transport-divisor",
+    "cor:computed-party-splitting",
+    "lem:conic-matchings"
+  ],
+  "paper": "mds_css_transversal_groups",
+  "pdfs": [
+    {
+      "bytes": 198984,
+      "pages": 22,
+      "path": "papers/mds_css_transversal_groups/mds-css-transversal-groups.pdf",
+      "sha256": "08ddf7ec515c8c4d3f437f2315719a44b122a7f6031ba0934fc272fe8492c186"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/mds_css_transversal_groups/main.tex",
+      "sha256": "5d88c360935f7d946c96a0ab0d5d92df7f967c58412dd9df989395371c1c87f7"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/figures/03-symmetry-groups.tex",
+      "sha256": "6c06fe0094c53218d86ad8009624c33eae9f2aaccd5a6faa4574c0e200a83bd0"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/figures/06-pencil-quotient.tex",
+      "sha256": "8cd51bdc3903078504df720dd597cbc2f3a83b48c443f9f095048cebf32f3e15"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/01-introduction.tex",
+      "sha256": "6ad0ea695918682d711143b279a9dedc39fce8799f7d50b6ae6c00ed527493db"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/02-geometry-ame-dictionary.tex",
+      "sha256": "fee45d56d69597b9d16bdd5f1d717295ae320fb0a9b6a6e70dc3f304830db18f"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/03-diagonal-isoduality.tex",
+      "sha256": "ef8ddddd9be0a456dc10c64c6ae9485da41ce3e1d0987d7e6b180762b2efc4c0"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/04-pencil-classification.tex",
+      "sha256": "808e86a9bb41691e95b4b0ed7350513b0cb8dd4f95bcaf1df22cde8418200d5d"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/05-logical-clifford-phase.tex",
+      "sha256": "0e0f7b69172770aaa8dd6eb8e74db2e775674181288ac98a783f36a49bb2aa48"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/06-lu-invariants.tex",
+      "sha256": "9e638aa4b2ff7aca0e9366054356aa237b6d38f9e408e13b204cfcf048953f50"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/08-verification-boundary.tex",
+      "sha256": "d6865ba3c64707f980be718d0fd2fbcdb4a775a39d17b8d5ed8ba254f7a24d02"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/07-conclusion.tex",
+      "sha256": "76918e3f8d03c557c23f10e3066d54343fc208e9e66edfc2d1bd4670624fecca"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/10-scalar-certificates.tex",
+      "sha256": "58abf5d92a1e3eae920ebad4e66a938852a51ef003e26ed6b797357b4622eb1a"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/07-transport-sheaf.tex",
+      "sha256": "273f370f80635ce0628851931982d0cbda697bdb26ca8dd8eadfe4aa5add7b0d"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/sections/09-party-extensions.tex",
+      "sha256": "b6c3b05dd5e4e707dbf009eaf573b6a1f9bf255a6643a58c82cfb731595ac9d1"
+    }
+  ],
+  "title": "Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes",
+  "title_normalized": "diagonal isoduality and transversal clifford groups of mds-css codes",
+  "untracked_bibliography": [
+    "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+  ]
+}

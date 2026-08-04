@@ -17,7 +17,7 @@ import RelativeConicArcs.Gates.AMELUPartyExtensionSplitting
 
 This import-only module is the semantic root of the formal companion to the
 manuscript on diagonal isoduality and transversal Clifford groups of MDS--CSS
-codes.  Its transitive closure is the exact body of Lean material that
+codes.  Its transitive closure is the exact body of Lean material that this
 manuscript cites; nothing outside that closure may be described as checked for
 it.
 

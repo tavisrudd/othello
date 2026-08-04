@@ -1,0 +1,69 @@
+\begin{thebibliography}{HDDM05}
+
+\bibitem[C{\'S}06]{CollinsSniady2006}
+Beno{\^i}t Collins and Piotr {\'S}niady.
+\newblock Integration with respect to the {Haar} measure on unitary, orthogonal
+  and symplectic group.
+\newblock {\em Communications in Mathematical Physics}, 264(3):773--795, 2006.
+
+\bibitem[DDM03]{DehaeneDeMoor2003}
+Jeroen Dehaene and Bart De~Moor.
+\newblock The {Clifford} group, stabilizer states, and linear and quadratic
+  operations over {GF}(2).
+\newblock {\em Physical Review A}, 68(4):042318, 2003.
+
+\bibitem[Dic01]{Dickson1901}
+Leonard~Eugene Dickson.
+\newblock {\em Linear Groups: With an Exposition of the Galois Field Theory}.
+\newblock B. G. Teubner, Leipzig, 1901.
+
+\bibitem[Fab23]{Faber2023}
+Xander Faber.
+\newblock Finite \(p\)-irregular subgroups of \(\operatorname{PGL}_2(k)\).
+\newblock {\em La Matematica}, 2(2):479--522, 2023.
+
+\bibitem[G{\'e}r76]{Gerardin1976}
+Paul G{\'e}rardin.
+\newblock Three {Weil} representations associated to finite fields.
+\newblock {\em Bulletin of the American Mathematical Society}, 82(2):268--270,
+  1976.
+
+\bibitem[HDDM05]{HostensDehaeneDeMoor2005}
+Erik Hostens, Jeroen Dehaene, and Bart De~Moor.
+\newblock Stabilizer states and {Clifford} operations for systems of arbitrary
+  dimensions, and modular arithmetic.
+\newblock {\em Physical Review A}, 71(4):042315, 2005.
+
+\bibitem[HMSV08]{HowardMillsonSnowdenVakil2008}
+Benjamin Howard, John Millson, Andrew Snowden, and Ravi Vakil.
+\newblock A description of the outer automorphism of {{$S_6$}}, and the
+  invariants of six points in projective space.
+\newblock {\em Journal of Combinatorial Theory, Series A}, 115(7):1296--1303,
+  2008.
+
+\bibitem[HP03]{HuffmanPless2003}
+W.~Cary Huffman and Vera Pless.
+\newblock {\em Fundamentals of Error-Correcting Codes}.
+\newblock Cambridge University Press, 2003.
+
+\bibitem[KKKS06]{KetkarKlappeneckerKumarSarvepalli2006}
+Avanti Ketkar, Andreas Klappenecker, Santosh Kumar, and Pradeep~Kiran
+  Sarvepalli.
+\newblock Nonbinary stabilizer codes over finite fields.
+\newblock {\em IEEE Transactions on Information Theory}, 52(11):4892--4914,
+  2006.
+
+\bibitem[Rud26a]{RuddAMEStabilizerRigidity2026}
+Tavis Rudd.
+\newblock Local-unitary rigidity and quantitative rounding for stabilizer {AME}
+  states, 2026.
+\newblock Companion preprint; frozen combined source tree
+  2ada0216f5176543f8e7612f38e0cba62e4406bf81a36a6593a55288ea3d98cd.
+
+\bibitem[Rud26b]{RuddClebsch2026}
+Tavis Rudd.
+\newblock Reconstructing the {Clebsch} code and its golden orientation from its
+  deep-hole syndrome locus.
+\newblock Preprint, \url{https://github.com/tavisrudd/clebsch-rigidity}, 2026.
+
+\end{thebibliography}
