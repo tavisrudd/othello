@@ -91,6 +91,37 @@ passed.
 The four trace-current gates were confirmed current after the earlier targets in the same run
 built their shared closure, not skipped from stale artifacts.
 
+## The pruning is not use-checked, and fifteen more base modules are pruned
+
+Comparing every base module's import list against its monorepo counterpart shows that the export
+prunes imports from seventeen files. Two are the modules repaired here, and two more are those same
+two files reported against the post-split monorepo sources. The remaining fifteen are:
+
+| base module | import pruned |
+|---|---|
+| `ProjectiveCap/GridMirror.lean`                        | `ProjectiveCap.PlaneTransitivityGame` |
+| `ProjectiveCap/ExtensionCount.lean`                    | `ProjectiveCap.StableFacts` |
+| `ProjectiveCap/Mirror.lean`                            | `ProjectiveCap.ProjectiveCapGame` |
+| `ProjectiveCap/Binary.lean`                            | `ProjectiveCap.ProjectiveCapGame` |
+| `ProjectiveCap/StableFacts.lean`                       | `ProjectiveCap.PlaneTransitivityGame` |
+| `ProjectiveCap/EscapeParity.lean`                      | `ProjectiveCap.Almost.OddEscape` |
+| `ProjectiveCap/FrameGridBridge.lean`                   | `ProjectiveCap.PlaneAffineChart`, `ProjectiveCap.PlaneTransitivityGame` |
+| `ProjectiveCap/ConicLocalization.lean`                 | `ProjectiveCap.Almost.OddEscape` |
+| `ProjectiveCap/EllipticMirror.lean`                    | `ProjectiveCap.PlaneTransitivityGame` |
+| `RelativeConicArcs/Certificate.lean`                   | `ProjectiveCap.PlaneAffineChart` |
+| `RelativeConicArcs/ProjectiveTripleNormalization.lean` | `ProjectiveCap.PlaneAffineChart` |
+| `RelativeConicArcs/Q11DyeAxioms.lean`                  | `RelativeConicArcs.SixArcConcurrenceBound` |
+| `RelativeConicArcs/OddSixArcAffinePrism.lean`          | `ProjectiveCap.PlaneAffineChart` |
+| `RelativeConicArcs/Gates/AMELUAggregate.lean`          | `RelativeConicArcs.AMELU.SyndromeGeometry` |
+| `RelativeConicArcs/Gates/ClebschPassages.lean`         | `RelativeConicArcs.AlignedTwoGraph` |
+
+No base module imports a module the base does not ship, so a pruned import is invisible to any
+name-resolution check and shows up only as an unresolved identifier during elaboration. Whether
+each of these fifteen is a genuine defect or a redundant import correctly dropped cannot be settled
+by reading import lists: it depends on whether the file uses a declaration from the pruned module,
+including through an opened namespace. The standalone base build is the decisive check, which is
+one more reason to make it an export gate rather than a manual step.
+
 ## What the batched base re-export must do
 
 When the order-eleven externalization re-exports and re-pins the base:
