@@ -57,7 +57,8 @@ lemmas stay.
 
 - Whether the point-orbit rows form their own official package or join the other Clebsch q11
   certificates.
-- Where the split line falls inside each of the five mixed interface modules.
+- Where the split line falls inside each of the five mixed interface modules; a proposal is in
+  `notes/2026-08-04-c864-q11-interface-split-lines.md`.
 - The disposition of `Q11Residual`, which is entangled with the base-library export defect and its
   game half; that repair is described in the task card.
 
