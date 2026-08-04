@@ -1304,4 +1304,9 @@ its own weaker manuscript-build step.
 **Evidence:** CHECKED — byte comparison of both trees over all 56 release-surface files, and
 `pdfinfo` on each PDF; the only non-rewrite difference was the timestamp.
 
-**Status:** open lead
+**Status:** partly closed 2026-08-04 — the epoch pin and byte-equality gate are applied to
+`clebsch-passages`, `clebsch-factorization` and `q13-passant-code`, each verified by a
+negative test. Paper I already had it. The toolchain half is still open: those three and
+`ame_lu`, `beyond4_prs`, `golden-quantum-statistics`, `golden-operator` and
+`mds_css_transversal_groups` resolve TeX from the mutable flake registry, so a nixpkgs
+move still shifts the bytes. Only `clebsch-passages` has a flake to pin it to.
