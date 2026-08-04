@@ -2344,7 +2344,7 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "e408a6715b8f9c79408c7262e6a95bf5f7bb16d98981836402adbbdfdaff3746"
+      "sha256": "90bb09ec2229f1490d6394eedd4dc4752c9b8ed699df30baaa723d00c5d4ae05"
     },
     "output": {
       "path": "verification/verify-release-output.json",
