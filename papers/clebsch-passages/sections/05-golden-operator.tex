@@ -385,11 +385,26 @@ For a three-subset \(S\subset X\), set
  Z_T(x)=\frac14\sum_{|S|=3}(K_T)_{SS}x_S,
  \qquad D_x=\operatorname{diag}(x).
 \]
-The Hodge orientation is transported with the ordered axis basis.  Thus an
-odd relabelling or switching transports both \(K_T\) and the sign of its
-diagonal; it is not legitimate to switch the matrix while holding the old
-Hodge convention fixed.  Figure~\ref{fig:four-cubic-shadows} separates the
-four normalized formulas from their classical consequences.
+The Hodge star is taken in the ordered axis basis.  Writing \(X=\{0,\dots,5\}\)
+in its order and \(S^{c}\) for the complementary triple in increasing order,
+\[
+ *e_S=\operatorname{sgn}(S,S^{c})\,e_{S^{c}},
+ \qquad
+ \operatorname{sgn}(S,S^{c})=(-1)^{\sigma(S)-3},
+ \qquad
+ \sigma(S)=\sum_{i\in S}i,
+\]
+where \(\operatorname{sgn}(S,S^{c})\) is the sign of the permutation listing
+\(S\) and then \(S^{c}\).  The exponent counts that listing's inversions:
+writing \(S=\{a_0<a_1<a_2\}\), the element \(a_k\) has \(k\) elements of \(S\)
+below it, hence \(a_k-k\) of \(S^{c}\), and these sum to \(\sigma(S)-3\).
+Since \(\sigma(S)+\sigma(S^{c})=15\), complementary signs multiply to
+\((-1)^{9}=-1\),
+which is \(*^2=-1\) in middle degree.  The orientation therefore travels with
+the ordered basis: an odd relabelling or switching transports both \(K_T\) and
+the sign of its diagonal, and it is not legitimate to switch the matrix while
+holding the old Hodge convention fixed.  Figure~\ref{fig:four-cubic-shadows}
+separates the four normalized formulas from their classical consequences.
 
 \begin{figure}[t]
 \centering
@@ -506,8 +521,8 @@ form without an enumeration.
 
 Expand the Pfaffian of \([D_x,C_T]\) over perfect matchings.  The coefficient
 of \(x_S\) pairs \(S\) bijectively with \(S^c\), and its signed sum is the
-complementary \(3\)-minor of \(C_T\).  The Hodge convention makes this minor
-\((K_T)_{SS}\).  Two dihedral representatives and complementation give
+complementary \(3\)-minor of \(C_T\).  The Hodge convention displayed above
+makes that signed minor equal to \((K_T)_{SS}\).  Two dihedral representatives and complementation give
 \((K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\), so the Pfaffian is \(4Z_T\);
 squaring gives the determinant identity.
 
