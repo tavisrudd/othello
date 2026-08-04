@@ -7,6 +7,19 @@ III formal commit from 2026-08-01 onward together with the unfinished
 four-shadow worktree.  A box may be checked only after the stated evidence is
 committed.
 
+## Governing instruction (2026-08-03)
+
+Author decision: every gap is closed by strengthening the formal side.  No
+manuscript claim may be narrowed, reworded, or demoted so that the Lean surface
+agrees with it, and no strength may be removed from a task or handoff claim
+that the manuscript makes.  Where a box below offered a choice between
+formalizing and narrowing, only the formalizing branch remains open.  Lean
+comments and manifests are brought into line with the paper, never the reverse.
+Structural, human-readable proofs are preferred to finite certificates; an
+unavoidable finite check must sit behind a proved structural reduction.  The
+complete gap analysis against the Paper I and Paper II standards is
+`notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`.
+
 ## Build and lifecycle integrity
 
 - [x] Remove every direct `nix ... lake` invocation from the Paper III replay
@@ -43,16 +56,20 @@ committed.
 
 ## Aligned-design API and claims
 
-- [ ] State exactly that `normalizedSevenSignature_injective` concerns the
-  normalized seven-point data type.
-- [ ] State exactly that `global_agreement_of_common_seven_restrictions` is a
-  conditional overlap theorem whose co-containment and normalization inputs
-  remain external.
-- [ ] Do not call `selectedQueryCount_eq` a proved family cardinality unless a
-  query family, distinctness theorem, and cardinality theorem are formalized.
-- [ ] Do not call `sixPointAnchor_testCount` deterministic anchor discovery;
-  separate the numerical `Nat.choose 6 3 = 20` identity from the external
-  Ramsey existence input.
+- [ ] Formalize the transport from an arbitrary labelled two-graph on seven or
+  more vertices to the normalized seven-point data type, so that
+  `normalizedSevenSignature_injective` yields faithfulness at the manuscript's
+  quantifier range.
+- [ ] Formalize the finite-set extension to a common seven-set, so that
+  `global_agreement_of_common_seven_restrictions` is unconditional over the
+  manuscript's hypotheses rather than conditional on supplied co-containment
+  and normalization.
+- [ ] Formalize an explicit query family with its distinctness and cardinality
+  theorems, so `selectedQueryCount_eq` is a proved family cardinality.
+- [ ] Formalize the anchor existence half from a Lean proof of the Ramsey
+  equality `R(3,3) = 6`, keeping it separate from the numerical identity
+  `Nat.choose 6 3 = 20`, so `sixPointAnchor_testCount` covers deterministic
+  anchor discovery.
 - [ ] Synchronize the C799 task card, handoff, formal map, and report with those
   exact strengths.
 - [ ] Add missing public documentation for the three balanced-cut constants.
@@ -84,10 +101,9 @@ committed.
   corroborating replay.  The finite classification is the exact proof step and
   is disclosed as such in the module header and the focused gate.
 - [ ] Formalize root normalization by switching for arbitrary scalar sign
-  matrices, or narrow every objective and completion claim to normalized
-  scalar sign matrices.
-- [ ] Formalize the promised uniqueness of the conference switching class, or
-  remove that strength from task and handoff claims.
+  matrices, so the recognition statement holds at the manuscript's quantifier
+  range rather than only on normalized representatives.
+- [ ] Formalize the uniqueness of the conference switching class.
 - [x] Explain in the module header the native domain, kernel bridge, normalized
   scope, and the external rank-14 weighted-Jacobian boundary.  The header now
   also states that compiled evaluation introduces a declaration-local axiom
@@ -113,6 +129,37 @@ committed.
   both orientation predicates named the opposite fibre.  The definition and its
   docstring are corrected, and an exact recomputation of the twelve balanced
   signings is committed with the report.
+
+## Native-execution axioms at public terminals
+
+Twenty-seven of the eighty-seven audited terminals across the three Paper III
+gates depend on a compiled-evaluation axiom.  The Paper I standard admits none
+at a terminal.  The exact terminal lists and the structural replacement route
+for each kind are in the gap inventory.
+
+- [ ] `FourShadowRecognition`: replace the orientation classifier by the
+  pentagon relabelling-parity proof, clearing all four terminals.
+- [ ] `AlignedTwoGraph`: replace the pair-signature, anchor-signature, and
+  normalized seven-signature classifications by parameter-space arguments
+  transported symbolically.
+- [ ] `ClebschMiddleExterior` and `ClebschGoldenDescent`: replace the literal
+  matrix, Hodge square, support, and degree-ten determinant evaluations by the
+  Hodge-complementation and Gram routes the manuscript already argues.
+- [ ] `GoldenQuadraticCharacters`, `ClebschInvariantCubic`, and
+  `ClebschPassagesCorrespondence`: replace the reflection, marked-vector, and
+  chart-value leaves by kernel reduction or symbolic identities.
+- [ ] `ClebschGoldenConference`: same treatment, after author permission,
+  because Paper I and the golden-operator lane import it.
+
+## Ledger alignment
+
+- [ ] Make the trust manifest, the three formal maps, the module headers, and
+  the manuscript's reproducibility section describe one identical surface, with
+  every disagreement repaired on the Lean side.
+- [ ] Remove every module comment that describes a proof method no longer used
+  once a native step is replaced, in the same change as the proof.
+- [ ] Record each claim row's coverage at its true strength: a row is `partial`
+  only while a listed manuscript clause has no kernel-checked counterpart.
 
 ## Acceptance evidence
 
