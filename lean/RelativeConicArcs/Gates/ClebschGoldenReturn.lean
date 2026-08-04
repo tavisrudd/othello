@@ -39,11 +39,22 @@ That sign identity is in turn a parity computation.  The displayed
 complementation table is proved to be set complement on the underlying
 three-element subsets, and to be characterized by that property; the displayed
 sign table is proved to be minus one to the number of inversions of the map
-concatenating a triple with its increasing complement, that is, the sign of
-the concatenation permutation.  The inversion count is three less than the sum
-of the triple's labels, complementary label sums add to fifteen, and the
-product of the two signs is therefore `(-1)^17`.  No generated certificate or
-externally supplied matrix is imported.
+concatenating a triple with its increasing complement.  That map is proved to
+be a permutation of the six labels, and minus one to an inversion count is a
+permutation sign by the standard inversion formula, but no comparison with a
+library permutation-sign function is formalized.  The inversion count is three
+less than the sum of the triple's labels, complementary label sums add to
+fifteen, and the product of the two signs is therefore `(-1)^17`.
+
+Each link in that chain is itself a kernel decision, over the twenty labels
+for set complement, the inversion-count identification, the inversion count
+against the label sum, and the complementary label sums; over the four hundred
+ordered pairs of labels for distinctness of their subsets; and over the seven
+hundred and twenty label-position-pair triples for injectivity of the
+concatenation map.  The exhaustive checking that the sign table previously
+carried has moved to these statements about the tables rather than
+disappeared, but each is verifiable by a reader directly from the displayed
+data.  No generated certificate or externally supplied matrix is imported.
 -/
 
 #print axioms RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq

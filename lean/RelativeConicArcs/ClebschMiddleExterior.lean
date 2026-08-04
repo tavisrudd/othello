@@ -9,22 +9,42 @@ lexicographic order.  The third compound matrix is defined entrywise by the
 corresponding `3 × 3` minor.  Signed complementation defines the middle Hodge
 matrix, and their product is the middle-exterior return.
 
-Two displayed tables carry the complementation datum: the index involution
+Two displayed tables carry the complementation datum: the index table
 `complementIndex` and the sign table `hodgeSign`.  This module proves that
 neither is an arbitrary choice.  A basis label's triple and the triple of its
 `complementIndex` image are complementary subsets of the six labels, and that
-property determines the involution; the sign table is minus one to the number
-of inversions of the map which concatenates a triple with its increasing
-complement, that is, the sign of the concatenation permutation.  The inversion
-count is three less than the sum of the triple's labels, so the sign depends
-only on the parity of that sum.  Because two complementary triples have label
-sums adding to `0 + 1 + 2 + 3 + 4 + 5 = 15`, the two complementary signs
-multiply to `(-1)^17 = -1`, which is the parity computation behind
-middle-degree Hodge complementation squaring to minus the identity.
+property determines the table; the sign table is minus one to the number of
+inversions of the map which concatenates a triple with its increasing
+complement.  That map is proved to be a permutation of the six labels, and
+minus one to the inversion count is the sign of a permutation by the standard
+inversion formula, but that identification is stated as ambient convention and
+is not formalized here: no comparison with a library permutation-sign function
+is proved.  The inversion count is three less than the sum of the triple's
+labels, so the sign depends only on the parity of that sum.  Because two
+complementary triples have label sums adding to `0 + 1 + 2 + 3 + 4 + 5 = 15`,
+the two complementary signs multiply to `(-1)^17 = -1`, which is the parity
+computation behind middle-degree Hodge complementation squaring to minus the
+identity.  The exponent `17` is the normalized form `(σ(S)+1) + (σ(Sᶜ)+1)`
+used below to keep both exponents natural numbers; in the equivalent form
+`(-1)^(σ(S)-3)` for each sign the product exponent is `9`.
 
-Every finite step here is a kernel decision over the twenty labels or the
-thirty-six ordered pairs of positions; no `20 × 20` return matrix, generated
-table, compiled evaluation, or external axiom is used.
+The exhaustive checking that the displayed signs previously carried has not
+disappeared; it has moved down to the tables themselves and changed subject.
+Six statements are kernel decisions: that distinct labels have distinct
+subsets and that the concatenation map is injective, over the four hundred
+ordered pairs of labels and the seven hundred and twenty label-position-pair
+triples respectively; and, over the twenty labels, that the index table is set
+complement, that the sign table is minus one to the inversion count, that the
+inversion count is the label sum less three, and that complementary label sums
+are fifteen.  Each of the latter four is a statement a reader can verify
+directly from the displayed tables, rather than an opaque list of signs.  No
+`20 × 20` return matrix, generated table, compiled evaluation, or external
+axiom is used.
+
+The table `triple` itself remains displayed data whose documented description —
+the increasing three-subsets of six labels in lexicographic order — is not
+formally supported here; the inversion argument takes its increasingness as
+given.
 -/
 
 namespace RelativeConicArcs
@@ -62,9 +82,12 @@ def complementIndex : Fin 20 → Fin 20 :=
   ![19, 18, 17, 16, 15, 14, 13, 12, 11, 10,
     9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
-/-- Sign of the permutation obtained by concatenating a triple with its
-increasing complement.  The table is identified with that permutation sign by
-`hodgeSign_eq_neg_one_pow_inversions`. -/
+/-- Sign attached to a basis label by concatenating its triple with the
+increasing complementary triple.  `hodgeSign_eq_neg_one_pow_inversions` proves
+that the table is minus one to the inversion count of that concatenation,
+which is the sign of the concatenation permutation under the standard
+inversion formula for permutation signs; the comparison with a library
+permutation-sign function is not formalized. -/
 def hodgeSign : Fin 20 → ℤ :=
   ![1, -1, 1, -1, 1, -1, 1, 1, -1, 1,
     -1, 1, -1, -1, 1, -1, 1, -1, 1, -1]
@@ -83,7 +106,7 @@ theorem tripleSet_complementIndex (S : Fin 20) :
   revert S
   decide
 
-/-- Set complement characterizes the index involution: a basis label is the
+/-- Set complement characterizes the index table: a basis label is the
 complement of `S` exactly when its subset is the set complement of `S`'s.  So
 `complementIndex` records complementation rather than choosing a pairing. -/
 theorem eq_complementIndex_iff (S T : Fin 20) :
@@ -123,19 +146,24 @@ theorem concatenation_injective (S : Fin 20) :
   revert S
   decide
 
-/-- The concatenation map is a permutation of the six labels. -/
+/-- The concatenation map is a permutation of the six labels.  This is what
+licenses reading its inversion count as a permutation statistic; it is not
+itself used in the proof of the sign identity below. -/
 theorem concatenation_bijective (S : Fin 20) :
     Function.Bijective (concatenation S) :=
   Finite.injective_iff_bijective.mp (concatenation_injective S)
 
 /-- Inversions of the concatenation map: ordered pairs of positions whose
-labels appear in the opposite order.  The sign of a permutation is minus one
-raised to the number of its inversions. -/
+labels appear in the opposite order.  Minus one raised to this count is the
+sign of a permutation under the standard inversion formula, which is used here
+as ambient convention rather than as a formalized comparison. -/
 def concatenationInversions (S : Fin 20) : ℕ :=
   (Finset.univ.filter fun p : Fin 6 × Fin 6 =>
     p.1 < p.2 ∧ concatenation S p.2 < concatenation S p.1).card
 
-/-- The displayed sign table is the sign of the concatenation permutation. -/
+/-- The displayed sign table is minus one to the number of inversions of the
+concatenation map, that is, the sign of that permutation under the standard
+inversion formula. -/
 theorem hodgeSign_eq_neg_one_pow_inversions (S : Fin 20) :
     hodgeSign S = (-1 : ℤ) ^ concatenationInversions S := by
   revert S

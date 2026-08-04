@@ -68,13 +68,39 @@ minus the identity, and it is now four rewrites rather than a table.
 `hodgeSign_complement` and `hodgeMatrix_complement_entry` are derived from it
 by ordinary algebra instead of twenty cases.
 
-The three remaining finite steps are kernel decisions over the twenty labels
-about the *basis tables themselves* — that `tripleSet` is injective, that the
-index table is set complement, that the sign table is the inversion sign, and
-that the inversion count is the label sum minus three. Nothing about the
-mathematics of the Hodge square is checked case by case any more. This is the
-sense in which "structural" is now literally true rather than a description of
-the matrix's shape.
+Six statements remain kernel decisions, and they are about the *basis tables
+themselves* rather than about the Hodge square: that distinct labels have
+distinct subsets, over the four hundred ordered pairs of labels; that the
+concatenation map is injective, over the seven hundred and twenty
+label-position-pair triples; and, over the twenty labels, that the index table
+is set complement, that the sign table is the inversion sign, that the
+inversion count is the label sum less three, and that complementary label sums
+are fifteen.
+
+The exhaustive checking did not go away — it moved down a level and changed
+subject. What genuinely improved is that each of the four twenty-case
+statements is now something a reader can verify directly from the displayed
+tables by a two-line argument, instead of an opaque list of twenty signs, and
+that the Hodge square itself is no longer among them. That is the sense in
+which "structural" is now closer to literally true; it is not the claim that
+nothing is checked case by case.
+
+Two limits of the strengthening should be stated plainly. First, the
+identification of "minus one to the inversion count" with a library
+permutation-sign function is not formalized: it is used as ambient convention,
+and the module, the `hodgeSign` docstring, and the gate header all say so.
+Formalizing it is the stronger form of the referee's suggestion and remains
+open — the route is `Equiv.ofBijective` on the concatenation map, which is
+what `concatenation_bijective` exists for, together with a reusable lemma
+relating `Equiv.Perm.sign` to an inversion count via Mathlib's `signAux`, whose
+definition is already a product over ordered pairs. Note that `decide` cannot
+close that equation, because `Equiv.ofBijective` routes through
+`Function.surjInv` and is noncomputable. Second, `triple` itself remains
+displayed data: nothing yet proves each of its rows is increasing, that each
+`tripleSet` has three elements, or that the twenty labels exhaust the
+three-subsets, and increasingness is the tacit hypothesis of the whole
+inversion argument. A `triple_strictMono` decision would close the first and,
+with injectivity and cardinality three, the rest.
 
 ## Files changed
 
@@ -103,9 +129,14 @@ single-file entry point, which does not need the build lock:
    importing Mathlib alone — no `RelativeConicArcs` import — carrying all
    twelve new declarations plus the three that were rewritten downstream
    (`hodgeSign_complement`, `hodgeMatrix_complement_entry`, `hodgeMatrix_sq`).
-   Exit zero in fourteen seconds, no errors or warnings. This is the whole
-   proof content of the change, since every other edited file changed only its
-   header prose.
+   Exit zero in fourteen seconds, no errors or warnings. This reproduces the
+   statements of the three rewritten downstream proofs but not their
+   environment: the real modules open the conference and matrix namespaces, and
+   the real `hodgeMatrix_sq` elaborates with the four row leaves in scope.
+   `simp [hodgeMatrix, h, hodgeSign_complement]` in
+   `hodgeMatrix_complement_entry` is exactly the kind of call whose behaviour
+   can change under a larger simp set, so those three are validated
+   synthetically only.
 2. `RelativeConicArcs/ClebschMiddleExterior.lean` itself, in its real import
    context against the existing `ClebschGoldenConference` object file. Exit
    zero in four seconds, no errors or warnings, so the new names do not clash
@@ -128,11 +159,23 @@ lock:
    inventory from the resulting tracked build log with the committed
    extractors — the audited terminal count rises from twenty-eight to
    thirty-three;
-3. update `golden_return_formal.json`: source hashes, axiom-report and closure
+3. replace the pinned gate stdout,
+   `verification/evidence/gate_stdout/golden_return.stdout.txt`, which is a
+   release file whose bytes are pinned, and update the two provenance fields
+   that describe it, `axiom_report_provenance.gate_stdout_sha256` and
+   `axiom_report_provenance.build_run_id`. This is not optional bookkeeping:
+   `verify_golden_return_lean.py` checks the stdout hash inside its source
+   check, which runs even in `--source-only` mode, and that is the mode
+   `verify_release.py` uses. Skipping it fails the paper-local replay and the
+   release verifier;
+4. update `golden_return_formal.json`: source hashes, axiom-report and closure
    hashes, `audited_declarations`, the OPER-1 declaration list, and the
    `trust_boundary.native` prose, which should now name the parity route for
-   the Hodge square;
-4. rerun the paper-local replay and the release verifier.
+   the Hodge square. All five new terminals must appear in some claim row —
+   `verify_scaffold.py` requires the audited declarations to be contained in
+   the union of the claim-map declaration lists, so omitting them fails with a
+   complaint that the gate audits declarations no claim row names;
+5. rerun the paper-local replay and the release verifier.
 
 What the smoke tests do not cover is the seven leaf and gate modules that
 import the changed one. Their proofs are unchanged, but they must be
@@ -183,6 +226,15 @@ in middle degree, since \(\sigma(S)+\sigma(S^c)=15\). The parity formula is
 the reason the transport warning is needed, and stating it turns a warning
 into a computation the reader can perform.
 
+Two cautions if that display is added. It should say in the same breath that
+the Lean matrix entry in row \(S\) is \(-\epsilon(S,S^c)\) because it realizes
+\(\epsilon(S^c,S)\); a referee comparing the display against `hodgeMatrix`
+will otherwise read a sign error where there is none. And the display's
+exponent is \(9\) while the Lean module and `hodgeSign_mul_complement` carry
+`17`, because Lean normalizes each exponent to \(\sigma+1\) to keep it a
+natural number. Both are correct and the module header now records the shift,
+but the paper should either use \(\sigma-3\) consistently or note it.
+
 **`sections/05-golden-operator.tex`, line 509.** "The Hodge convention makes
 this minor \((K_T)_{SS}\)" is the load-bearing use of the convention in the
 Pfaffian argument. If the display above is added, this sentence can cite it
@@ -202,7 +254,30 @@ convention they rest on instead of stipulating it.
 ## Relation to the referee suggestion
 
 This is the strengthening the referee proposed and the earlier closure pass
-deliberately deferred as a scope decision rather than a repair. It is now
-taken. The gate header's interim disclosure of the displayed-data dependency
-is removed in the same change, because the dependency is gone rather than
-merely disclosed.
+deliberately deferred as a scope decision rather than a repair. It is taken in
+its parity form, not in full: the displayed tables are still displayed, but
+they are now cross-checked against each other and against a parity invariant,
+and the Hodge square no longer rests on the sign table directly. The full form
+of the suggestion — a formal bridge to a library permutation-sign function —
+remains open and is described above.
+
+The gate header's interim disclosure accordingly changed subject rather than
+being dropped. It no longer says the Hodge sign identity is a twenty-case
+check on the displayed signs, because it is not; it now names the four
+twenty-case decisions about the tables that the parity chain rests on instead.
+
+## Independent review
+
+An adversarial review of this change is
+`notes/2026-08-04-c815-hodge-review.md`. It verified the mathematics by an
+independent enumeration with zero mismatches, confirmed both declaration moves
+break no consumer and create no import cycle, and confirmed every manuscript
+line citation above. Its verdict was go-with-fixes. Every prose fix it asked
+for is applied: the gate header's restored disclosure of the surviving
+decisions, the qualification of the permutation-sign claim at all four sites,
+the corrected decision domains and counts, the pinned gate stdout and its two
+provenance fields added to the regeneration list, and the two cautions on the
+proposed manuscript display. The one code fix it recommended, a
+`triple_strictMono` decision closing the last unbacked displayed table, is
+deferred only because no Lean may be elaborated at present; it is named in the
+limits paragraph above.
