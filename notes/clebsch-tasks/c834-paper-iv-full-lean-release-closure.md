@@ -20,17 +20,34 @@ terminals of `RelativeConicArcs.Gates.PassantCodeQ13AxiomAudit` report axiom set
 `[propext, Classical.choice, Quot.sound]`. Report:
 `notes/2026-08-04-c834-shared-library-native-closure.md`.
 
-The remaining native surface is the paper's own package under
-`papers/q13-passant-code/lean-certificates`: 64 native decisions across 45 modules — 22 in the
-minimum-word orbit enumeration, 16 in the weight-ten profile certificates, 9 in the structural
-upgrade, 8 in the association transport, 6 in the automorphism anchors, 3 in the association
-algebra. It has its own gate and axiom audit. That is the larger part of the acceptance criterion
-and is untouched.
+The minimum-word orbit and concurrence layer of the paper's own package is also closed. The paper
+package under `papers/q13-passant-code/lean-certificates` now has 55 native decisions across 39
+modules — 16 in the weight-ten profile certificates, 11 in the row-uniqueness transport, 9 in the
+structural upgrade, 8 in the association transport, 6 in the automorphism anchors, 3 in the
+association algebra, and 2 in the fixed-point exhaustion. Report:
+`notes/2026-08-04-c834-minimum-word-kernel-closure.md`.
 
 The technique that carried every closure so far: state the finite content on the displayed
 coordinate lists, reduce one table in the kernel, and transport to the subtype model afterwards.
 Deciding directly over `InternalPoint` or `PassantLine` re-derives the subtype universe once per
 element and exhausts the memory guard; deciding over a `Finset` powerset does the same.
+
+Three further levers were established by the minimum-word closure and apply to the remaining
+packets. Any operation that locates an object by scanning a coordinate list — `internalIndex`,
+`incidentAt`, `rhoAt` — must be replaced by a packed natural-number table whose agreement with the
+scan is kernel-checked once over the finite index domain; the scan itself is what exhausts the
+guard, not the field arithmetic, which reduces cheaply. Any object recomputed inside a larger check
+must first be identified with a displayed list, emitted by a tracked generator and checked by Lean,
+so that downstream checks reduce on literals. What still exceeds the guard after both is split into
+index blocks, one module each, and reassembled by list concatenation. The measured ceiling on the
+`single` profile is roughly one million kernel operations on this data per module.
+
+The association-transport leaves are the next packet: they multiply Boolean matrices given as
+functions on `Fin` types, whose entries read `rhoAt` and index a support list positionally, so the
+same substitutions apply followed by a blockwise split over rows. The fixed-point exhaustion is the
+one leaf that no table substitution reaches — it meets partial supports through a hash map keyed by
+incidence syndrome, over domains far larger than anything reduced so far — and needs a proved
+checker in the style of the weight-ten reachability kernel.
 
 ## Current state
 
