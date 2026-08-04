@@ -13,6 +13,9 @@ semantic certificate APIs, proved reductions suitable for reuse, package pins, a
 facts.  Imported certificate libraries must be restored from guarded content-addressed caches and
 must never be rebuilt merely because an unrelated monorepo leaf changed.
 
+After the portfolio split is complete, sanity-check every registered paper Lean export.  This is
+an all-paper release-boundary pass, not a spot check of only the papers whose certificates moved.
+
 This item is the integrated closeout for the remaining execution in C686/C687 and the certificate
 boundary portion of C287/C324.  It does not silently re-peg or discard those tasks: completion must
 reconcile their live rows and reports through the normal lifecycle.
@@ -135,7 +138,17 @@ commit a self-contained official source state.
 9. Regenerate and check external trust exports from local semantic facts plus pinned external
    package facts.  The normal monorepo exporter must never attempt to elaborate an external
    certificate gate.
-10. Update C287/C324/C686/C687 records and the build-sys handoff, then complete C864 through the
+10. Enumerate every registered paper Lean companion export and standalone Lean-for-paper package.
+    For each one, run the guarded export plan, materialize two disposable candidates from the exact
+    committed source/base revisions, require byte-identical outputs and complete manifests, verify
+    the declared terminals and axiom facts, and run the paper's documented import-only release
+    gate.  Check that every paper reference and package pin resolves to the intended local semantic
+    library or official certificate package and that no export reintroduces an extracted payload.
+11. Run the global paper-export audit/check commands after the individual replays, including stale
+    manifest, unexpected deletion, reverse-reference, and unregistered-paper detection.  Record a
+    bounded result table naming every paper/export, source revision, base/package revision, gate,
+    and pass/fail disposition; no configured paper may be silently skipped.
+12. Update C287/C324/C686/C687 records and the build-sys handoff, then complete C864 through the
     archive-first lifecycle.
 
 ## Cache and build contract
@@ -175,6 +188,9 @@ commit a self-contained official source state.
    generated family, an imported external leaf, a copied generator, and an edited package pin.
 10. A final bounded audit reports zero unexplained certificate findings and names every official
     repository, revision, manifest hash, cache hash, gate, terminal, and remaining trusted axiom.
+11. Every registered paper Lean export has a fresh two-materialization identity check, complete
+    manifest and terminal/axiom agreement, and a green documented release gate after the
+    certificate removals; the global audit reports no missing, stale, or unregistered export.
 
 ## Owned paths
 
