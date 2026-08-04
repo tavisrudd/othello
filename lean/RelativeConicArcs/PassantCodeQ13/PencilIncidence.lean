@@ -1,4 +1,4 @@
-import RelativeConicArcs.PassantCodeQ13.WeightEight
+import RelativeConicArcs.PassantCodeQ13.Geometry
 
 /-!
 # Pencils of passant and secant lines through the internal points of the standard conic
@@ -37,16 +37,16 @@ def secantCoordinateList : List Triple :=
 
 /-- The displayed secant-line list enumerates exactly the semantic secant coordinate finset. -/
 theorem secantCoordinateList_toFinset :
-    secantCoordinateList.toFinset = WeightEight.secantCoordinates := by
+    secantCoordinateList.toFinset = secantCoordinates := by
   decide +kernel
 
 /-- The displayed passant lines containing a given normalized point. -/
 def passantPencilList (point : Triple) : List Triple :=
-  passantCoordinateList.filter fun line => WeightEight.lineValue line point == 0
+  passantCoordinateList.filter fun line => lineValue line point == 0
 
 /-- The displayed secant lines containing a given normalized point. -/
 def secantPencilList (point : Triple) : List Triple :=
-  secantCoordinateList.filter fun line => WeightEight.lineValue line point == 0
+  secantCoordinateList.filter fun line => lineValue line point == 0
 
 /-- The lines common to two displayed pencils. -/
 def commonPencilLines (first second : List Triple) : List Triple :=

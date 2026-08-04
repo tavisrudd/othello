@@ -89,6 +89,20 @@ abbrev InternalPoint := {point : Triple // point ∈ internalCoordinates}
 /-- A passant projective line in the fixed normalized dual coordinate model. -/
 abbrev PassantLine := {line : Triple // line ∈ passantCoordinates}
 
+/-- Evaluation of a homogeneous dual line at a homogeneous point; the line contains the point
+exactly when this value vanishes. -/
+def lineValue (line : Triple) (point : Triple) : Field13 :=
+  line.x * point.x + line.y * point.y + line.z * point.z
+
+/-- The normalized secant lines of the standard conic: the dual triples on which `Y^2 - 4XZ` is a
+nonzero square. -/
+def secantCoordinates : Finset Triple :=
+  projectiveTriples.filter fun line =>
+    lineDiscriminant line ≠ 0 ∧ isNonzeroSquare (lineDiscriminant line) = true
+
+/-- A normalized conic-secant line in the fixed dual-coordinate model. -/
+abbrev SecantLine := {line : Triple // line ∈ secantCoordinates}
+
 /-- Incidence between a normalized dual line and a normalized point. -/
 def Incident (line : PassantLine) (point : InternalPoint) : Prop :=
   line.1.x * point.1.x + line.1.y * point.1.y + line.1.z * point.1.z = 0

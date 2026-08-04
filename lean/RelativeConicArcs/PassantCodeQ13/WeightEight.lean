@@ -1,23 +1,30 @@
-import RelativeConicArcs.PassantCodeQ13.Geometry
+import RelativeConicArcs.PassantCodeQ13.PencilJoins
 import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # The cyclic tangent graph used in the weight-eight exclusion
 
 After fixing one internal point, the tangent-product reduction produces a graph on three cyclic
-orbits of length fourteen.  The module defines the conic-secant product in the normalized conic
-model and identifies its tangent-holonomy compatibility relation with the six cyclic difference
-sets.  Row parity saturates the seven passant pencils of a normalized weight-eight word.  Once the
-classical arc/tangent lemma supplies pairwise passant joins and tangent holonomy one, the semantic
-support therefore maps to a seven-clique.
+orbits of length fourteen.  The module forms the product of the conic secants through an internal
+point, evaluated at a second point, and identifies the resulting tangent-holonomy compatibility
+relation with the six cyclic difference sets.  Row parity saturates the seven passant pencils of a
+normalized weight-eight word.  Once the classical arc/tangent lemma supplies pairwise passant joins
+and tangent holonomy one, the semantic support therefore maps to a seven-clique.
 
 The finite checks enumerate the 4-cliques, extend each by its common neighbor, and verify that the
 resulting 5-cliques have no further common neighbor.  A separate logical lemma turns this
 unique-extension certificate into the five-clique bound, excluding the transported seven-clique
 without enumerating binary words of length 78.
 
-The terminal checks use native evaluation on 42 vertices.  Their dependency therefore contains the
-declaration-local native-decision axiom reported by the pinned Lean toolchain.
+The base point, the internality and injectivity of the cyclic vertex triples, their identification
+with the passant-join neighbors of the base point, the four-clique enumeration and its length, the
+unique extension of each four-clique, the collapse to fourteen five-cliques and their maximality,
+and the cardinality of each four-clique set's common neighbors are decided by kernel reduction.
+Two checks are decided by native evaluation on the 42 vertices: the identification of the cyclic
+difference sets with the tangent-holonomy compatibility relation, and the agreement of the
+enumerated four-clique sets with the four-element clique subsets of the ambient powerset.  Their
+dependency therefore contains the declaration-local native-decision axiom reported by the pinned
+Lean toolchain.
 -/
 
 namespace RelativeConicArcs.PassantCodeQ13.WeightEight
@@ -45,7 +52,7 @@ def cyclicAction (point : Triple) : Triple :=
 
 /-- The fixed internal point used to normalize the tangent graph. -/
 def basePoint : InternalPoint :=
-  ⟨⟨1, 0, 2⟩, by native_decide⟩
+  ⟨⟨1, 0, 2⟩, by decide +kernel⟩
 
 /-- The three seeds for the cyclic orbits of passant-join neighbors of `basePoint`. -/
 def orbitSeed : Fin 3 → Triple
@@ -60,7 +67,7 @@ def vertexTriple (vertex : Vertex) : Triple :=
 /-- Every cyclic vertex triple is an internal point of the normalized conic model. -/
 theorem vertexTriple_internal : ∀ vertex : Vertex,
     vertexTriple vertex ∈ internalCoordinates := by
-  native_decide
+  decide +kernel
 
 /-- The semantic internal point represented by a cyclic graph vertex. -/
 def vertexPoint (vertex : Vertex) : InternalPoint :=
@@ -73,18 +80,6 @@ def PassantJoin (first second : InternalPoint) : Prop :=
 instance (first second : InternalPoint) : Decidable (PassantJoin first second) := by
   unfold PassantJoin
   infer_instance
-
-/-- The normalized secant lines of the standard conic. -/
-def secantCoordinates : Finset Triple :=
-  projectiveTriples.filter fun line =>
-    lineDiscriminant line ≠ 0 ∧ isNonzeroSquare (lineDiscriminant line) = true
-
-/-- A normalized conic-secant line in the fixed dual-coordinate model. -/
-abbrev SecantLine := {line : Triple // line ∈ secantCoordinates}
-
-/-- Evaluation of a homogeneous dual line at a homogeneous point. -/
-def lineValue (line : Triple) (point : Triple) : Field13 :=
-  line.x * point.x + line.y * point.y + line.z * point.z
 
 /-- The product of the seven conic-secants through an internal point, evaluated at another point. -/
 def tangentProduct (point argument : InternalPoint) : Field13 :=
@@ -140,28 +135,74 @@ def basePassantLines : Finset PassantLine :=
   Finset.univ.filter fun line => Incident line basePoint
 
 /-- Exactly seven passant lines contain the normalized base point. -/
-theorem basePassantLines_card : basePassantLines.card = 7 := by
-  native_decide
+theorem basePassantLines_card : basePassantLines.card = 7 :=
+  card_passantLines_through basePoint
 
 /-- A second internal point determines at most one passant line through the base point. -/
 theorem passantLine_through_base_unique_for_point : ∀ point : InternalPoint,
     point ≠ basePoint → ∀ first second : PassantLine,
       Incident first basePoint → Incident first point →
-      Incident second basePoint → Incident second point → first = second := by
-  native_decide
+      Incident second basePoint → Incident second point → first = second :=
+  fun _ distinct _ _ first_base first_point second_base second_point =>
+    passantLine_join_unique distinct first_base first_point second_base second_point
+
+/-- No cyclic vertex triple is the base point. -/
+private theorem vertexTriple_ne_basePoint : ∀ vertex : Vertex, vertexTriple vertex ≠ basePoint.1 := by
+  decide +kernel
+
+/-- Distinct cyclic vertices carry distinct coordinate triples. -/
+private theorem vertexTriple_injective : ∀ first second : Vertex,
+    vertexTriple first = vertexTriple second → first = second := by
+  decide +kernel
+
+/-- Every cyclic vertex triple shares a passant line with the base point. -/
+private theorem vertexTriple_meets_base : ∀ vertex : Vertex,
+    commonPencilLines (passantPencilList basePoint.1)
+      (passantPencilList (vertexTriple vertex)) ≠ [] := by
+  decide +kernel
 
 /-- Every cyclic vertex represents a distinct passant-join neighbor of the base point. -/
 theorem vertexPoint_is_baseNeighbor : ∀ vertex : Vertex,
     vertexPoint vertex ≠ basePoint ∧ PassantJoin basePoint (vertexPoint vertex) := by
-  native_decide
+  intro vertex
+  refine ⟨fun equal => vertexTriple_ne_basePoint vertex (congrArg Subtype.val equal), ?_⟩
+  exact (exists_common_passantLine_iff basePoint (vertexPoint vertex)).mpr
+    (vertexTriple_meets_base vertex)
 
 /-- A cyclic vertex as a semantic passant-join neighbor of the base point. -/
 def vertexNeighbor (vertex : Vertex) : BaseNeighbor :=
   ⟨vertexPoint vertex, vertexPoint_is_baseNeighbor vertex⟩
 
+/-- The coordinate triples of the internal points sharing a passant line with the base point. -/
+def baseNeighborTriples : List Triple :=
+  internalCoordinateList.filter fun point =>
+    point != basePoint.1 &&
+      !(commonPencilLines (passantPencilList basePoint.1) (passantPencilList point)).isEmpty
+
+/-- The cyclic vertices carry exactly the passant-join neighbors of the base point. -/
+theorem baseNeighborTriples_toFinset :
+    baseNeighborTriples.toFinset = (vertices.map vertexTriple).toFinset := by
+  decide +kernel
+
 /-- The cyclic coordinates enumerate all 42 passant-join neighbors of the base point once. -/
 theorem vertexNeighbor_bijective : Function.Bijective vertexNeighbor := by
-  native_decide
+  constructor
+  · intro first second equal
+    exact vertexTriple_injective first second (congrArg (fun neighbor => neighbor.1.1) equal)
+  · intro neighbor
+    have triple_mem : neighbor.1.1 ∈ baseNeighborTriples := by
+      refine List.mem_filter.mpr ⟨mem_internalCoordinateList neighbor.1, ?_⟩
+      have distinct : ¬ neighbor.1.1 = basePoint.1 :=
+        fun equal => neighbor.2.1 (Subtype.ext equal)
+      have meets : commonPencilLines (passantPencilList basePoint.1)
+          (passantPencilList neighbor.1.1) ≠ [] :=
+        (exists_common_passantLine_iff basePoint neighbor.1).mp neighbor.2.2
+      simp [distinct, meets]
+    have vertex_mem : neighbor.1.1 ∈ vertices.map vertexTriple := by
+      rw [← List.mem_toFinset, ← baseNeighborTriples_toFinset, List.mem_toFinset]
+      exact triple_mem
+    obtain ⟨vertex, -, triple_eq⟩ := List.mem_map.mp vertex_mem
+    exact ⟨vertex, Subtype.ext (Subtype.ext triple_eq)⟩
 
 /-- The cyclic tangent vertices are equivalent to the semantic passant-join neighbors. -/
 noncomputable def vertexNeighborEquiv : Vertex ≃ BaseNeighbor :=
@@ -221,28 +262,28 @@ def fiveCliqueCodes : List Nat :=
 
 /-- There are exactly seventy 4-cliques in the tangent graph. -/
 theorem fourCliques_length : fourCliques.length = 70 := by
-  native_decide
+  decide +kernel
 
 /-- Every enumerated 4-clique has exactly one common neighbor. -/
 theorem fourClique_unique_extension_check :
     fourCliques.all (fun members => (commonNeighbors members).length == 1) = true := by
-  native_decide
+  decide +kernel
 
 /-- Unique extension collapses the seventy 4-cliques to fourteen 5-cliques. -/
 theorem fiveCliqueCodes_length : fiveCliqueCodes.length = 14 := by
-  native_decide
+  decide +kernel
 
 /-- None of the fourteen 5-cliques admits a further common neighbor. -/
 theorem fiveClique_maximality_check :
     fourCliques.all (fun members =>
       (commonNeighbors members).all fun candidate =>
         (commonNeighbors (candidate :: members)).isEmpty) = true := by
-  native_decide
+  decide +kernel
 
 /-- Every enumerated four-vertex clique has exactly one common neighbor. -/
 theorem fourCliqueSet_unique_extension_check :
     fourCliqueSets.all (fun members => (commonNeighborSet members).card == 1) = true := by
-  native_decide
+  decide +kernel
 
 /-- Every four-vertex clique in the cyclic graph has exactly one common neighbor. -/
 theorem fourCliqueSet_unique_extension (members : Finset Vertex)

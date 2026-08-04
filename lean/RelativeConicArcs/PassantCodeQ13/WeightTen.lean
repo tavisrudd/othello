@@ -1,5 +1,5 @@
 import RelativeConicArcs.PassantCodeQ13.LogicalSpine
-import RelativeConicArcs.PassantCodeQ13.PencilJoins
+import RelativeConicArcs.PassantCodeQ13.WeightEight
 
 /-!
 # Pencil profiles of weight-ten words in the q=13 passant code
@@ -42,8 +42,8 @@ theorem joining_passantLine_unique (base point : InternalPoint) (distinct : poin
 
 /-- Two internal points have secant join when a normalized conic-secant contains both. -/
 def SecantJoin (first second : InternalPoint) : Prop :=
-  ∃ line : WeightEight.SecantLine,
-    WeightEight.lineValue line.1 first.1 = 0 ∧ WeightEight.lineValue line.1 second.1 = 0
+  ∃ line : SecantLine,
+    lineValue line.1 first.1 = 0 ∧ lineValue line.1 second.1 = 0
 
 instance (first second : InternalPoint) : Decidable (SecantJoin first second) := by
   unfold SecantJoin

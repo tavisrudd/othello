@@ -5,7 +5,7 @@ import RelativeConicArcs.PassantCodeQ13.PencilIncidence
 
 The finite pencil facts of `RelativeConicArcs.PassantCodeQ13.PencilIncidence` are stated on the
 displayed coordinate lists of the normalized `q = 13` model.  This module transports them to the
-subtypes `InternalPoint`, `PassantLine`, and `WeightEight.SecantLine` used by the geometric
+subtypes `InternalPoint`, `PassantLine`, and `SecantLine` used by the geometric
 arguments: the passant pencil of an internal point has exactly seven members, two distinct internal
 points are joined by at most one passant line, and two distinct internal points with no common
 passant line have a common conic secant.
@@ -31,7 +31,7 @@ theorem mem_passantCoordinateList (line : PassantLine) :
   exact line.2
 
 /-- Every secant line occurs in the displayed secant-line list. -/
-theorem mem_secantCoordinateList (line : WeightEight.SecantLine) :
+theorem mem_secantCoordinateList (line : SecantLine) :
     line.1 ∈ secantCoordinateList := by
   rw [← List.mem_toFinset, secantCoordinateList_toFinset]
   exact line.2
@@ -47,13 +47,13 @@ theorem passantPencilList_nodup (point : Triple) : (passantPencilList point).Nod
 /-- Membership in a displayed passant pencil. -/
 theorem mem_passantPencilList {line point : Triple} :
     line ∈ passantPencilList point ↔
-      line ∈ passantCoordinateList ∧ WeightEight.lineValue line point = 0 := by
+      line ∈ passantCoordinateList ∧ lineValue line point = 0 := by
   simp [passantPencilList, List.mem_filter]
 
 /-- Membership in a displayed secant pencil. -/
 theorem mem_secantPencilList {line point : Triple} :
     line ∈ secantPencilList point ↔
-      line ∈ secantCoordinateList ∧ WeightEight.lineValue line point = 0 := by
+      line ∈ secantCoordinateList ∧ lineValue line point = 0 := by
   simp [secantPencilList, List.mem_filter]
 
 /-- Membership in the intersection of two displayed pencils. -/
@@ -129,8 +129,8 @@ theorem exists_common_passantLine_iff (base point : InternalPoint) :
 /-- A conic secant joins two internal points exactly when the displayed secant pencils of the two
 points share a member. -/
 theorem exists_common_secantLine_iff (base point : InternalPoint) :
-    (∃ line : WeightEight.SecantLine,
-        WeightEight.lineValue line.1 base.1 = 0 ∧ WeightEight.lineValue line.1 point.1 = 0) ↔
+    (∃ line : SecantLine,
+        lineValue line.1 base.1 = 0 ∧ lineValue line.1 point.1 = 0) ↔
       commonPencilLines (secantPencilList base.1) (secantPencilList point.1) ≠ [] := by
   constructor
   · rintro ⟨line, base_value, point_value⟩
@@ -142,7 +142,7 @@ theorem exists_common_secantLine_iff (base point : InternalPoint) :
     obtain ⟨base_mem, point_mem⟩ := mem_commonPencilLines.mp mem
     obtain ⟨list_mem, base_value⟩ := mem_secantPencilList.mp base_mem
     obtain ⟨-, point_value⟩ := mem_secantPencilList.mp point_mem
-    have coordinate : line ∈ WeightEight.secantCoordinates := by
+    have coordinate : line ∈ secantCoordinates := by
       rw [← secantCoordinateList_toFinset]
       exact List.mem_toFinset.mpr list_mem
     exact ⟨⟨line, coordinate⟩, base_value, point_value⟩
@@ -179,8 +179,8 @@ contains both. -/
 theorem no_common_passantLine_iff_common_secantLine {base point : InternalPoint}
     (distinct : point ≠ base) :
     (¬ ∃ line : PassantLine, Incident line base ∧ Incident line point) ↔
-      ∃ line : WeightEight.SecantLine,
-        WeightEight.lineValue line.1 base.1 = 0 ∧ WeightEight.lineValue line.1 point.1 = 0 := by
+      ∃ line : SecantLine,
+        lineValue line.1 base.1 = 0 ∧ lineValue line.1 point.1 = 0 := by
   have table := List.all_eq_true.mp pencilTable_passant_secant_dichotomy
   have entry := List.all_eq_true.mp
     (table _ (mem_pencilTable (mem_internalCoordinateList base)))
