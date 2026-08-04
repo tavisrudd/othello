@@ -111,11 +111,11 @@
     "companion_manuscript_sha256": "997f4c42550b7fae1ff6eceb27dcce1f4d9643a1d074c78940d71307a6f9d128",
     "companion_pdf_sha256": "26509dc32dddad52a9da7678244d29eefb57d64ca2c7ede58eb40e8e2a75986b",
     "companion_trust_sha256": "884603c4596e2827acae3c9b26a5e43fa2bd2808c664438fd5f833d7ff19d90a",
-    "manuscript_pdf_sha256": "6f2a8d6b6f3cc142e24702becabee8f1f7661688a318f59d9fa515b758cca917",
-    "manuscript_sha256": "d397627020899d86938ad46ac99d508d6032fddb101e0ce0a860ba9bc38dd058",
-    "release_surface_sha256": "28e5543d6b8b0fb112301e87ceccaa5887f880c1efe30e0d09cfe199a26ee73d",
-    "statement_identity_sha256": "3c02c7071cdceae97f24c79bb96713bc657b1ebaa0847e0308568914054d976e"
+    "manuscript_pdf_sha256": "4cb30b808b23533916e5a5cb1b1b403db350410569a1a47e1c87fa44a5374232",
+    "manuscript_sha256": "e1239a3e88e2ed23cbc6742baa495329dc7db049f17a2c86d4ece5faa55c15e6",
+    "release_surface_sha256": "eb54213e901d7bf5ce9871067bc5070655de449ca104383b5754ea808f766f3c",
+    "statement_identity_sha256": "204f1e8df4520367b282ba9ed631ff56d8164621944158916332a9fc4d1f7dee"
   },
-  "lean_commit": "9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5",
+  "lean_commit": "c36699656de88f6a2fc1a5e53cf9a6153705aa7f",
   "status": "passed"
 }
