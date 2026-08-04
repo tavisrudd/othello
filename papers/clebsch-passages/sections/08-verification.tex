@@ -29,7 +29,12 @@ extension across the branch divisor remain human arguments.
 The operator theorem has a separate structural route.  Its conference,
 triangle, two-graph, middle-exterior square and diagonal, support recovery,
 and golden-descent mechanisms are checked by the pinned golden-return Lean
-gate.  The same gate proves symbolically that the fixed conference
+gate.  Middle-degree Hodge complementation is not checked entry by entry
+there: complementation on the triple basis is proved to be set complement on
+the underlying three-element subsets, the sign attached to a triple is proved
+to be the sign of its concatenation with the increasing complementary triple,
+and the square identity then follows from the parity of two complementary
+label sums.  The same gate proves symbolically that the fixed conference
 commutator Pfaffian is four times its triangle cubic and checks the
 three-vertex signed-matrix identity used in the order-six exchange-spectrum
 converse.  The unrestricted inclusion-rank and Ramsey exclusion is a human
@@ -38,10 +43,12 @@ seven-point cut signatures, the distinct-balanced-cut ambiguity, and its
 symbolic elimination by the third outside point.  It also checks complement
 consistency on overlapping local restrictions, the conference-signing
 switching transport, the identity \(\det C[Q]=3-2w(Q)\), the selected-query
-polynomial, and the count of twenty possible anchor tests.  The classical
-Ramsey input \(R(3,3)=6\), finite-set extension to seven vertices, and the
-passage from arbitrary labels to the normalized cut coordinates remain
-human combinatorial steps.  Coherence of the outer six-family, the cross-golden
+polynomial, and the count of twenty possible anchor tests.  Both bounds behind the
+triangle Ramsey equality \(R(3,3)=6\) are kernel-checked, together with the
+existence of an aligned four-set through the root on six labelled points.
+Distinctness of those six points from each other and from the root, the
+finite-set extension to seven vertices, and the passage from arbitrary labels
+to the normalized cut coordinates remain human combinatorial steps.  Coherence of the outer six-family, the cross-golden
 determinant comparison, and the classical
 Joubert--Segre--Igusa identifications remain human proofs with primary
 literature inputs; they are not inferred from a finite matrix check.
@@ -49,11 +56,19 @@ literature inputs; they are not inferred from a finite matrix check.
 The \texttt{verification} directory distributed with the paper contains
 the exact programs, canonical certificates, checksums, toolchain
 requirements, and aggregate replay command.  It also records the exact
-claim-to-evidence correspondence.  A paper-specific Lean gate now proves the
+claim-to-evidence correspondence.  Three paper-specific Lean gates now prove the
 abstract pinching and conductor mechanisms, involutive splitting, golden
 discriminant and reflection characters, tight-frame conference mechanism,
 marked relative sign transport, Petersen eigenspace and two-orbit kernel
-calculation, and fixed-line cubic normalization.  Its declaration map records
+calculation, and fixed-line cubic normalization.
+
+No step of any of the three gates leaves the kernel.  Their finite content is
+discharged by kernel decision over an explicitly bounded domain, by rewriting,
+or by cofactor expansion; every audited terminal depends only on
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}, and
+several on strictly fewer.  Compiled evaluation occurs nowhere in the pinned
+source closures, and each replay refuses it, so this is a checked property of
+the distributed artifact rather than a declared boundary.  Its declaration map records
 partial mechanism coverage only: no complete geometric manuscript row is
 declared formally proved at its full geometric strength.  In particular, the
 global incidence and Stein identifications, scheme-theoretic chart
