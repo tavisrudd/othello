@@ -1,0 +1,194 @@
+# C855 — Paper I task-ID rename and mirror sync
+
+**Lane**: `clebsch`
+**Date**: 2026-08-03
+**Scope**: `papers/clebsch-rigidity/` (authority) + `~/src/math-papers/clebsch-rigidity` (mirror, exporter only)
+
+Goal: remove internal task-ID contamination (C722/C723/C724/C725) from the distributed
+Paper I package, rerun the release chain, export the standalone mirror.
+
+## Status
+
+- [x] Phase 1 — rename + reference cleanup; exporter audit `findings=99` → `findings=0`
+- [x] Phase 2 — release chain rerun; final clean gate `"status": "passed"`
+- [ ] Phase 3 — **BLOCKED at `sync`**: the exporter refuses tracked-path removal in the
+      mirror. Stopped as instructed; no mirror file touched.
+
+## Authority commits
+
+| Commit | Message |
+|---|---|
+| `98bcfd084b365fdc652df5d17d93e8ec71538cf2` | Paper I: rename the verification artifacts without internal task identifiers |
+| `2e4a3fc52ac2be3effca0fb98621bc8a624fd6f7` | Paper I: refresh the displayed checker-output digest for the renamed artifacts |
+| `b2441750aac0b84bd067d7f630b0af7424af992e` | Paper I: refresh the release certificate for the renamed verification surface |
+
+## Phase 1 — renames
+
+All eleven via `git mv` inside `papers/clebsch-rigidity/verification/`:
+
+| Old | New |
+|---|---|
+| `c722_clique_structure.py`            | `clique_structure.py`            |
+| `c722_clique_structure.json`          | `clique_structure.json`          |
+| `c723_q13_weight10_independent.py`    | `q13_weight10_independent.py`    |
+| `c723_q13_weight10_profiles.py`       | `q13_weight10_profiles.py`       |
+| `c723_q13_weight10_profiles.json`     | `q13_weight10_profiles.json`     |
+| `c725_terminal_orbit_dag.py`          | `terminal_orbit_dag.py`          |
+| `c725_terminal_orbit_dag.json.gz`     | `terminal_orbit_dag.json.gz`     |
+| `c725_terminal_orbit_dag.sha256`      | `terminal_orbit_dag.sha256`      |
+| `c725_terminal_orbit_dag_replay.py`   | `terminal_orbit_dag_replay.py`   |
+| `c725_terminal_orbit_dag_replay.json` | `terminal_orbit_dag_replay.json` |
+| `c725_finite_boundary_manifest.json`  | `finite_boundary_manifest.json`  |
+
+### Schema-string renames (task IDs were embedded in artifact `"schema"` values)
+
+| Old schema | New schema |
+|---|---|
+| `c722-clique-structure-v1`                     | `clique-structure-v1`                     |
+| `c723-q13-weight10-profiles-v1`                | `q13-weight10-profiles-v1`                |
+| `clebsch-c725-terminal-passant-orbit-dag-v1`   | `clebsch-terminal-passant-orbit-dag-v1`   |
+| `clebsch-c725-ordered-backtracking-replay-v1`  | `clebsch-ordered-backtracking-replay-v1`  |
+| `clebsch-c725-final-finite-boundary-v1`        | `clebsch-final-finite-boundary-v1`        |
+
+One stdout token also carried a task ID: `c725_terminal_orbit_dag_regeneration=PASS` →
+`terminal_orbit_dag_regeneration=PASS` (printed by `terminal_orbit_dag.py --check`).
+
+### Prose task-ID removals (docstrings; no mathematical content changed)
+
+- `clique_structure.py`: "Exact C722 audit for the q=9 and q=13 clique-structure branches" → "Exact audit for …".
+- `q13_weight10_independent.py`: "…replay of the C723 q=13 exclusions" → "…replay of the q=13 exclusions".
+- `terminal_orbit_dag.py`: "…verify the C725 terminal passant-arc orbit DAG" → "…verify the terminal passant-arc orbit DAG".
+- `terminal_orbit_dag_replay.py`: "…replay for the C725 orbit DAG" → "…replay for the terminal orbit DAG".
+- `build_finite_census_certificates.py`: "…compact C724 finite-census certificates" → "…compact finite-census certificates".
+  (This one was flagged by the audit but was not tied to any rename.)
+
+### Referencing surfaces touched
+
+Hand-edited (path/schema strings only):
+
+- `clebsch_rigidity_computational_companion.tex` — five `\path{}` references in the
+  companion's replay-command tables.
+- `clebsch_rigidity.tex` — the displayed SHA-256 of `verification/checker_outputs.json`
+  (`cd438633…` → `36ab223c…`), required because the checker-output certificate changed.
+- `verification/README.md` — the finite-leaf-map filename.
+- `verification/build_trust_manifest.py` — 22 path references (command argv lists, the
+  evidence pin, and the release-surface pathset).
+- `verification/capture_checker_outputs.py` — the five extra-checker argv entries.
+- `verification/verify_computational_companion.py` — the boundary-manifest path.
+- `verification/computational_companion_trust.json` (hand-maintained; no generator) —
+  paths plus the three pinned artifact SHA-256 values.
+- `verification/finite_boundary_manifest.json` (hand-maintained; no generator) — schema,
+  artifact paths, and the three embedded artifact/independent-artifact SHA-256 values.
+- `verification/terminal_orbit_dag.sha256` — all five lines recomputed (filenames and hashes).
+- The renamed scripts' own `ARTIFACT`/`CERTIFICATE`/`MANIFEST`/`OUTPUT`/`SCHEMA` constants.
+
+`verification/verify_release.py` needed no edit — it derives the release pathset rather than
+hardcoding filenames.
+
+Regenerated by their own generators (not hand-edited):
+
+| Artifact | Generator |
+|---|---|
+| `clique_structure.json`          | `clique_structure.py`                          |
+| `q13_weight10_profiles.json`     | `q13_weight10_profiles.py`                     |
+| `terminal_orbit_dag.json.gz`     | `terminal_orbit_dag.py --write`                |
+| `terminal_orbit_dag_replay.json` | `terminal_orbit_dag_replay.py --write`         |
+| `checker_outputs.json`           | `capture_checker_outputs.py --output …`        |
+| `statement_identity.json`        | `extract_statement_identity.py --output …`     |
+| `trust_manifest.json`            | `build_trust_manifest.py`                      |
+| `verify-release-output.json`     | `verify_release.py --update-output`            |
+
+New artifact hashes after regeneration:
+
+- `q13_weight10_profiles.json` `aebe48e8…` → `396bd914ee21e8fe07a6ebbd77f71baf5e59ec2c2dd23c522a7973118640b30e`
+- `terminal_orbit_dag.json.gz` `8e18a337…` → `cb666c206dd797aef8f06b22f0c6aa61c58b6658f4a139ee271114c0c21f66c4`
+- `terminal_orbit_dag_replay.json` `ba9d31b9…` → `a8756a774074907553feb76f72e07df3e70c2c4ccdce3bf5cc442bd3c36fc3cc`
+- `checker_outputs.json` `cd438633…` → `36ab223c1d92cf4bd82a2e52f830b37faa03e7405d3fb742bb1bb3cdc4d76d7a`
+
+No mathematical statement, claim, gate semantics, or check inventory changed. The check
+count stayed at twenty-six and the claim-row count at nineteen.
+
+## Phase 2 — release chain results
+
+All from the paper root under `nix develop`, with
+`--lean-root /home/tavis/src/lean/finitegeom-clebsch-q11-certificates` (unmodified).
+
+| Step | Result |
+|---|---|
+| `verification/test_verification_tools.py`                     | 13 tests, OK |
+| `verify_computational_companion.py`                           | `companion_claims=12 modes=5 checks=10 artifacts=4 finite_boundary_claims=7 status=ok` |
+| `extract_statement_identity.py --output …`                    | regenerated (companion + main source digests updated) |
+| `build_trust_manifest.py`                                     | 19 claim rows |
+| `capture_checker_outputs.py --output …`                       | 20-entry certificate regenerated (4 stdout hashes changed) |
+| `latexmk -xelatex` on the companion                           | rebuilt |
+| `latexmk -xelatex` on the main manuscript                     | rebuilt |
+| `pdftotext` scan of both PDFs for `c72[0-9]`                  | zero matches |
+| `verify_release.py --update-output` (first attempt)           | **FAILED**: "manuscript displays a stale digest for verification/checker_outputs.json" — fixed forward by updating the digest in `clebsch_rigidity.tex`, rebuilding the main PDF, and regenerating identity + manifest |
+| `verify_release.py --update-output` (after fix)               | `"status": "passed"`, 26/26 checks, `lean_commit 9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5` |
+| `build_trust_manifest.py` (record new certificate hash)        | 19 claim rows |
+| `verify_release.py` (final, no `--update-output`)             | `"status": "passed"`, clean worktree |
+
+Final release identity: `statement_identity_sha256`
+`3c02c7071cdceae97f24c79bb96713bc657b1ebaa0847e0308568914054d976e`,
+`lean_commit` `9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5`.
+
+The stale-digest failure is worth noting for future renames: the main manuscript prints the
+SHA-256 of the checker-output certificate, so *any* change to a checker's stdout forces a
+main-manuscript edit and a main-PDF rebuild even when the rename itself only touches the
+companion.
+
+## Phase 3 — mirror export: BLOCKED at `sync`
+
+```text
+python3 papers/scripts/export-paper-repos.py audit --source-ref HEAD --repository clebsch-rigidity
+findings=0
+
+python3 papers/scripts/export-paper-repos.py plan --source-ref HEAD --repository clebsch-rigidity
+source_commit=b2441750aac0b84bd067d7f630b0af7424af992e
+clebsch-rigidity: active mains=2 files=56 bytes=2273377 excluded_symlinks=0 reference_findings=0
+```
+
+`sync` refused, verbatim:
+
+```text
+REFUSED: sync would remove tracked destination paths; reconcile them explicitly first:
+['FORMAL_COMPANION.json', 'verification/c723_q13_weight10_independent.py',
+ 'verification/c723_q13_weight10_profiles.json', 'verification/c723_q13_weight10_profiles.py',
+ 'verification/c725_finite_boundary_manifest.json', 'verification/c725_terminal_orbit_dag.json.gz',
+ 'verification/c725_terminal_orbit_dag.py', 'verification/c725_terminal_orbit_dag.sha256',
+ 'verification/c725_terminal_orbit_dag_replay.json', 'verification/c725_terminal_orbit_dag_replay.py']
+```
+
+Analysis of the ten refused paths:
+
+- Nine are the mirror copies of files this task renamed. They are exactly the renamed set
+  minus `c722_clique_structure.{py,json}`, which the mirror never carried — the
+  clique-structure audit is not part of the exported pathset.
+- `FORMAL_COMPANION.json` is a **pre-existing** orphan, not caused by this task. It exists
+  only in the mirror (last touched there by "Synchronize the structural Paper I release",
+  `58900f0`) and has no counterpart anywhere in `papers/clebsch-rigidity/`. Any sync attempt
+  before this task would have hit the same refusal on it.
+
+The refusal is unconditional in `export-paper-repos.py`: the tracked-path-removal check at
+the `removed_paths` guard raises before the metadata check, and `--allow-metadata-removal`
+does not cover it. There is no exporter flag that reconciles a rename. Per the task's hard
+rules I stopped rather than deleting mirror files by hand.
+
+Not run, because they depend on a completed sync: `verify`, the mirror commit, and the
+in-mirror `verify_release.py` replay.
+
+### What a follow-up needs to decide
+
+1. Whether the operator removes the nine orphaned `c72*` paths in the mirror with an explicit
+   `git rm` commit there (the "reconcile them explicitly first" the tool asks for), or whether
+   `export-paper-repos.py` should grow a rename/removal reconciliation mode.
+2. What `FORMAL_COMPANION.json` is and whether it should be restored to the authority (and so
+   re-exported) or dropped from the mirror. This is an independent pre-existing divergence and
+   should probably be settled before touching anything else in the mirror.
+
+## Open items
+
+- Phase 3 unfinished (see above). The authority is fully green and reproducible; only the
+  public mirror is out of date.
+- No Lean work was performed; `/home/tavis/src/lean/finitegeom-clebsch-q11-certificates` was
+  read only.
