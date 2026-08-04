@@ -185,6 +185,18 @@
       "bytes": 6869,
       "sha256": "0d2027aaa50266b78274a6b815ec9a30f81c62743287b560f446bb13b69db094",
       "role": "independent cross-check that each association-transport statement, read as Lean elaborates it, holds of the committed masks: transpose direction, factor order, and index arity"
+    },
+    {
+      "paper_iv_path": "lean-certificates/generate_weight_ten_reachability.py",
+      "bytes": 19868,
+      "sha256": "73555dca92062bc65595cfd53d561a85c46076dffd2be9af130955344ad19db7",
+      "role": "deterministic generator and byte-for-byte checker for the isolated weight-ten reachability layer certificates and their transition data"
+    },
+    {
+      "paper_iv_path": "lean-certificates/weight_ten_reachability_manifest.json",
+      "bytes": 22121,
+      "sha256": "cdb5300d08c8d491e09fc1d83f581d1a82956350aab9dcf58188af6c3c3a91b0",
+      "role": "hash manifest of the generated isolated weight-ten reachability modules"
     }
   ],
   "commands": [
@@ -265,6 +277,12 @@
       "command": "python3 check_association_transport_statements.py",
       "output_contains": "q=13 association transport statements: PASS",
       "certifies": "every association-transport statement holds of the committed masks when the Lean definitions are evaluated independently"
+    },
+    {
+      "cwd": "lean-certificates",
+      "command": "python3 generate_weight_ten_reachability.py --check",
+      "output_contains": "q=13 isolated weight-ten reachability data: PASS",
+      "certifies": "the tracked isolated weight-ten reachability modules are byte-identical to deterministic regeneration from the indexed syndrome semantics"
     }
   ],
   "boundary": "The scripts are exact trusted executions. The old syndrome and clique replays remain independent cross-checks, while the theorem-facing weight-eight and weight-ten claims use the structural theta and moment certificates. Lean checks the generated rank data against the semantic incidence relation and proves incidence-map rank 42 and code dimension 36. The structural Lean packets and remaining human transports are recorded in claim_map.json and the tracked axiom audit."

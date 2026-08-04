@@ -47,9 +47,115 @@ the package has never built — deletes the largest automorphism enumeration out
 the structural upgrade's per-point and per-pair statements to a handful of representatives.
 
 Assuming that elaboration succeeds, the paper package under
-`papers/q13-passant-code/lean-certificates` has 46 native decisions across 34 modules — 16 in the
+`papers/q13-passant-code/lean-certificates` has 46 native decisions across 31 modules — 16 in the
 weight-ten profile certificates, 11 in the row-uniqueness transport, 8 in the structural upgrade, 6
 in the automorphism anchors, 3 in the association algebra, and 2 in the fixed-point exhaustion.
+
+## Execution plan
+
+Every remaining native decision, release surface, and pre-release accommodation is owned by exactly
+one stage below. Stages 1 and 2 come first because their outcomes change the shape of later stages;
+within a stage the order is free. The one open architectural decision is marked.
+
+**Stage 1 — probes, before committing to any leaf work.** These are cheap and each one settles a
+question that would otherwise be discovered after several failed builds.
+
+1. Elaborate `AssociationTransport/RelationMasks/RhoZero.lean` and record its measured peak. It
+   calibrates the cost of one kernel evaluation of the normalized polar invariant and therefore
+   every remaining leaf that touches it, and it answers whether the kernel caches the reduction of
+   `internalCoordinateList`.
+2. Probe `WeightTen/Aggregate.lean`'s 595-element `List.mergeSort` for kernel reduction at
+   acceptable cost. If it does not reduce, replace the sort by a sorted-insertion certificate or
+   restate the partition as a multiset identity needing no sort. This is the second cliff candidate
+   after the fixed-point exhaustion, and the probe is one small module.
+
+**Stage 2 — the shared equivariance layer.** Three later stages consume it.
+
+3. Prove invariance of the normalized polar invariant under the symmetric-square action
+   symbolically: the polar form and the two discriminants acquire the same determinant factor and
+   the invariant is bi-homogeneous of degree zero, so it is a polynomial identity in the four matrix
+   entries and six point coordinates. This deletes `Automorphisms.matrixAction_preservesRho`, the
+   largest single native enumeration in the package.
+4. Build the displayed point transporter — one group element carrying the base internal point to
+   each of the 78 — and the displayed pair transporter carrying each ordered distinct pair to one of
+   six class representatives. Kernel-check both once. Neither pays for itself against a single
+   consumer; both are built once for stages 5 and 7.
+
+**Stage 3 — finish the association-transport round.**
+
+5. Remove the modular inversion from the checked predicate of the four relation identifications
+   before splitting anything, then elaborate the whole packet, `RelationCubic`, `StructuralUpgrade`
+   and the package gate, and regenerate the axiom audit. A four-way row split of each relation
+   module is the fallback if the inverse-free predicate is not enough.
+6. Close the three association-algebra decisions: identify `relationMatrix v` with the displayed
+   masks, prove one symbolic bridge from its `matrixProduct` to `maskProduct` and from `xorFour` to
+   iterated `maskXor`, and take the ranks by kernel reduction on the displayed masks. Then narrow
+   the disclosure in `AssociationTransport.lean`'s header, which currently records that this native
+   evaluation exists in the import closure.
+
+**Stage 4 — the structural upgrade's eight decisions.**
+
+7. Reduce the per-point and per-pair statements through the stage 2 transporters:
+   `unaryDegree_fiftySix` to one representative point, `pairColorEight_recovers_polarRows` and
+   `fusedColorSix_splits` to six representative pairs. Pack pair concurrence as one mask per ordered
+   pair, not as a scalar table; the mask form makes `fusedColorSix_splits` a single module of about
+   fifty thousand kernel steps, the scalar form needs roughly six blocks.
+8. Transport the toric cardinalities and parities and the determinant-conic cardinality from
+   `Finset` filters over the subtype universes to filters over the displayed coordinate lists,
+   reusing the packed incidence table the package already carries.
+9. **Open decision — the two ambient-plane axioms.** The symbolic route proves that distinct
+   normalized representatives are non-proportional, that the renormalized cross product is again a
+   normalized representative, that incidence holds by `ring`, and that a vanishing cross product
+   forces collinearity — the last is the real obligation, is not in Mathlib's cross-product file,
+   and is estimated at sixty to a hundred and twenty reusable lines. The tabulation route is a
+   full-plane incidence table plus roughly twelve blocked modules. Projective normalization is not
+   available: the package's group acts through the symmetric square and preserves the conic, so it
+   is not transitive on ordered pairs of arbitrary plane points. Recommendation: take the symbolic
+   route with tabulation as the fallback, but this is a route choice, not a detail, and it should be
+   confirmed before the work starts.
+
+**Stage 5 — the remaining enumerations, where tabulation is the right tool.**
+
+10. Row uniqueness: tabulate over the existing seven-way residue shard. The structural route loses
+    here — a triple-indexed transporter costs as much as the enumeration it replaces, and the index
+    ordering guard is not equivariant, so the statement would first have to be restated over sets.
+11. Automorphism anchors: the anchor triple is fixed, so no orbit reduction applies; tabulate the
+    signature statements. Stage 2 has already removed the expensive one.
+12. Weight-ten profiles: the seven isolated fibres and seven cycle residues are shard-sized by
+    construction and run on the established reachability kernel. Base-point normalization is already
+    their structural reduction; no further one exists.
+13. Fixed-point exhaustion: `fixedPoint_slices_are_stabilizer_orbits` reduces to a packed
+    action-index table over the order-28 stabilizer and is small. `fixedPoint_weightTwelveExhaustion`
+    needs a proved checker in the style of the weight-ten reachability kernel; its cheap half is
+    exhibiting the solutions and its expensive half is excluding every other candidate, which no
+    table removes. Both leaves also use `eraseDups` and `toFinset`, which are quadratic in decidable
+    equality and need attention independently of the search.
+
+**Stage 6 — the release surfaces.** The task card requires seven; only the axiom transcript and part
+of generated-artifact provenance have had any work, and the rest had no owner before this plan.
+
+14. Statement identity: a tracked map from each manuscript clause to its Lean statement, with the
+    same schema discipline as the other numbered papers.
+15. Claim-by-claim trust manifest, distinguishing kernel, certificate, classical and human proof
+    modes exactly, with no clause advertised as kernel-checked that is not.
+16. Theorem-to-source formal map.
+17. Public release allowlist, and a release verifier that actively rejects a native-evaluation or
+    trusted-execution placeholder rather than merely reporting one.
+18. Refresh the referee-facing module inventory in `verification/README.md`. Its "Lean release
+    layout" is missing every module added by the association-transport round and by the minimum-word
+    round before it. Rebuild the list from the package rather than appending, and do it after the
+    leaf work, since a check that has to be split adds modules.
+19. Exercise a clean-checkout build of the full aggregate under the pinned toolchain with the
+    companion present. This has never been run, because the companion is currently excluded from the
+    export.
+
+**Stage 7 — reverse the pre-release accommodations.** All five are listed in the section below and
+none was scheduled before this plan: the `papers/repositories.toml` exclusion and its `Makefile`
+rewrite, the companion-absent skip in `verify_evidence.py`, the two README sentences, the
+repository-relative `lean-certificates/` paths in the manuscript and `verification/README.md`, and
+the `git rm` in the standalone mirror. They are reversed only once the companion is exported,
+published and pinned, and the forward version carries the pinned locators. Only then may C761
+request publication authority.
 
 The technique that carried every closure so far: state the finite content on the displayed
 coordinate lists, reduce one table in the kernel, and transport to the subtype model afterwards.
