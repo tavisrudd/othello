@@ -151,6 +151,13 @@
       "source": "papers/ame_lu/ame-lu.bbl"
     },
     {
+      "key": "RuddMDSCSSTransversalGroups2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/ame_lu/ame-lu.bbl",
+      "text": "Tavis Rudd. \\newblock Diagonal isoduality and transversal {Clifford} groups of {MDS--CSS} codes. \\newblock \\url{https://doi.org/10.5281/zenodo.21766797}, 2026. \\newblock Companion preprint; sources at \\url{https://github.com/tavisrudd/mds-css-transversal-groups}."
+    },
+    {
       "key": "SidiropoulosBro2000",
       "kind": "bibitem",
       "self_authored": false,
@@ -529,6 +536,13 @@
       "title": "Reconstructing the {Clebsch} Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus"
     },
     {
+      "key": "RuddMDSCSSTransversalGroups2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Diagonal Isoduality and Transversal {Clifford} Groups of {MDS--CSS} Codes"
+    },
+    {
       "key": "SayginelEtAl2025",
       "kind": "bibtex",
       "self_authored": false,
@@ -882,10 +896,10 @@
   "paper": "ame_lu",
   "pdfs": [
     {
-      "bytes": 297514,
+      "bytes": 299831,
       "pages": 35,
       "path": "papers/ame_lu/ame-lu.pdf",
-      "sha256": "08d76f3b4afa8eec52772f6a91a25e7e717556967f5542083f4e67b675f8eb57"
+      "sha256": "02583bb7c4cf8ff7a8fd2681c7ca17a66a0ba373e0b955a140205d55816c7625"
     }
   ],
   "schema_version": 1,
@@ -896,7 +910,7 @@
     },
     {
       "path": "papers/ame_lu/figures/01-operator-holonomy.tex",
-      "sha256": "7a9e68a14262ca0b50c65fd7d626a7a7194b36c63d45ac3597445e7679574546"
+      "sha256": "c7aeeac295e83227e7058a1272fb21363c7c14cc2f7f6d814eca318d82a0cc74"
     },
     {
       "path": "papers/ame_lu/figures/02-axis-recovery.tex",
@@ -904,11 +918,11 @@
     },
     {
       "path": "papers/ame_lu/figures/04-defect-landscape.tex",
-      "sha256": "a90939fef4e1f6d4d08e93295533d393bc455ce606c8003ee5e86c1f3c0aeefc"
+      "sha256": "fec559dc34db4b00355051401b9014b50cd440daec6adf76adb78075aff338fd"
     },
     {
       "path": "papers/ame_lu/figures/05-stability-radius.tex",
-      "sha256": "0b675789e4b33a8f71c7ac4eeb9de02ed53b25acce2a471e749a4315b251c655"
+      "sha256": "503422cef854d588b0642d1ff6ea6b62f944433a04aab840f8bb0ef15afc1b65"
     },
     {
       "path": "papers/ame_lu/sections/01-introduction.tex",
@@ -928,7 +942,7 @@
     },
     {
       "path": "papers/ame_lu/sections/08-verification-boundary.tex",
-      "sha256": "3ef0ea76fb92c81660dd9d210bc404b21eb65a747226bae3d9cca28b6bffb478"
+      "sha256": "ca3ca136d69cff537e877a8af991c7b2d1daa0c250ce306b7e33fea276d6146c"
     },
     {
       "path": "papers/ame_lu/sections/07-conclusion.tex",
@@ -940,7 +954,7 @@
     },
     {
       "path": "papers/ame_lu/sections/B-secondary-quantitative.tex",
-      "sha256": "46c247809011f81d1667842ff81a9f926836aaf7d1b6db4e58310e34a8d59dc3"
+      "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
     }
   ],
   "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States",
