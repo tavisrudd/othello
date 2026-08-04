@@ -42,3 +42,18 @@ now gives the exact three-part human theorem package: golden spectral descent,
 determinant-line norm factorization with the factor `8000`, and the C809 converse
 recognition theorem with its marking, orientation, weighted, and integral boundaries.
 No manuscript or Lean source was changed. C862 remains active.
+
+## Independent review of the proposals
+
+`notes/2026-08-04-c862-paper-iii-and-series-upgrade-review.md` reviews the
+upgrade proposals against a full read of the manuscript, the portfolio README,
+and the rendered first pages of all four released Clebsch PDFs. Its main
+findings are that Theorem I must be restated around the involution
+correspondence rather than the isomorphism, that the multiplicity-one defence
+against the coincidence objection already exists in the harmonic section and
+should be applied uniformly, that `PJ3` is under-ranked, and that the
+exceptionality perception is manufactured by front matter and portfolio
+packaging rather than by the mathematics. It also confirms the three C815
+manuscript corrections as already applied and its compiled-evaluation checklist
+item as stale. No manuscript, Lean, or release file was changed. C862 remains
+active.
