@@ -10,6 +10,18 @@ Discovery companion:
 
 ## Current status
 
+**Both papers are published (2026-08-03).** The rigidity paper is deposited as
+DOI `10.5281/zenodo.21681856` with mirror `8468914`; the transversal-groups
+paper as DOI `10.5281/zenodo.21766797` with mirror `f90b330`. Each now cites
+the other by deposited identifier. Two follow-on items are open, both recorded
+in `2026-08-03-c859-mds-css-formal-remediation.md`: the rigidity paper's mirror
+still publishes the pre-split supplement and six-party sections, whose removal
+needs an explicit reconciling commit in the mirror and is the same decision as
+its crashing release-manifest generator; and the Lean trust facts and base
+library still carry the pre-rename declaration name, pending a quiet Lean
+worktree. The transversal-groups mirror is synchronized at local commit
+`d2e54cb`, unpushed.
+
 **C859 closed (2026-08-03): Paper II is formal-companion-ready and publicly
 materialized.** *Diagonal Isoduality and Transversal Clifford Groups of
 MDS--CSS Codes* now has its own semantic gate
