@@ -2681,8 +2681,17 @@
       "last": 863,
       "purpose": "Paper I II IV genre-appropriate significance exposition and Paper III advisory routing",
       "sequence": 298
+    },
+    {
+      "count": 1,
+      "first": 864,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 864,
+      "purpose": "finish external certificate packaging and audit all certificate families",
+      "sequence": 299
     }
   ],
-  "next_id": 864,
+  "next_id": 865,
   "schema": "codex-task-id-allocations-v1"
 }
