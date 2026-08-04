@@ -2,7 +2,7 @@
 
 **Lane:** `build-sys`
 
-**Status:** ACTIVE — q16 authority split landed; official cold build is filling the first cache
+**Status:** ACTIVE — order-16 package sealed: gate green, packed, and restore-rehearsed trace-current; order-eleven externalization scoped but not executed
 
 ## Goal
 
@@ -67,9 +67,13 @@ reconcile their live rows and reports through the normal lifecycle.
   It resumed from byte-verified `Q16CertificateLevels`, `Q16StepKernel`, and `Q16Reduction`
   sentinels with four measured workers.  Do not submit another heavy Lean build until it is
   terminal.
-- Still required: focused gate success, exact axiom capture, q16 package pack, destructive-cache
-  restore rehearsal, trace-only gate confirmation, and a pinned external trust fact consumed by
-  monorepo trust tooling.
+- Complete: focused gate success, exact axiom capture (both terminals depend only on `propext`,
+  `Classical.choice` and `Quot.sound`), the package pack at
+  `/home/tavis/lean-backups/q16-certificates-d780520-cache.tgz` (359 MB, sha256
+  `3dbbafc4c5077fd3983f49f18157886ba5a586bc295e862ebe91799756fb122a`), the destructive erase and
+  restore rehearsal, and trace-only gate confirmation over 9,973 targets with no leaf rebuilt.
+- Still required: a pinned external trust fact consumed by monorepo trust tooling, which is also
+  what the Al-Seraji--Al-Ogali external-input anchor needs.
 
 ### Arcs trust cleanup
 
