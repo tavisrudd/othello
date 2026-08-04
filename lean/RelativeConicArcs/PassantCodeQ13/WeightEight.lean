@@ -16,15 +16,13 @@ resulting 5-cliques have no further common neighbor.  A separate logical lemma t
 unique-extension certificate into the five-clique bound, excluding the transported seven-clique
 without enumerating binary words of length 78.
 
-The base point, the internality and injectivity of the cyclic vertex triples, their identification
-with the passant-join neighbors of the base point, the four-clique enumeration and its length, the
-unique extension of each four-clique, the collapse to fourteen five-cliques and their maximality,
-and the cardinality of each four-clique set's common neighbors are decided by kernel reduction.
-Two checks are decided by native evaluation on the 42 vertices: the identification of the cyclic
-difference sets with the tangent-holonomy compatibility relation, and the agreement of the
-enumerated four-clique sets with the four-element clique subsets of the ambient powerset.  Their
-dependency therefore contains the declaration-local native-decision axiom reported by the pinned
-Lean toolchain.
+Every finite check in this module is decided by kernel reduction, and no statement depends on
+native evaluation or on an external certificate.  The checks over the 42 vertices read the vertex
+triples and their passant and secant pencils from precomputed lists, so each pencil is reduced once
+rather than once per vertex pair, and the tangent product is evaluated over the seven conic secants
+through a point rather than over all normalized secants.  The agreement of the enumerated
+four-clique sets with the four-element clique subsets of the ambient powerset is proved rather than
+computed, since materializing that powerset is not feasible for the kernel.
 -/
 
 namespace RelativeConicArcs.PassantCodeQ13.WeightEight
@@ -208,11 +206,105 @@ theorem vertexNeighbor_bijective : Function.Bijective vertexNeighbor := by
 noncomputable def vertexNeighborEquiv : Vertex ≃ BaseNeighbor :=
   Equiv.ofBijective vertexNeighbor vertexNeighbor_bijective
 
+/-- The evaluation product of a list of dual lines at a point. -/
+def pencilEvaluationProduct (pencil : List Triple) (argument : Triple) : Field13 :=
+  (pencil.map fun line => lineValue line argument).prod
+
+/-- The tangent product is the evaluation product of the point's displayed secant pencil. -/
+theorem tangentProduct_eq_pencilEvaluationProduct (point argument : InternalPoint) :
+    tangentProduct point argument
+      = pencilEvaluationProduct (secantPencilList point.1) argument.1 := by
+  have guarded_prod := prod_secantLine
+    fun line => if lineValue line point.1 = 0 then lineValue line argument.1 else 1
+  rw [tangentProduct, guarded_prod]
+  exact prod_guarded_eq_prod_pencil secantCoordinateList point.1
+    fun line => lineValue line argument.1
+
+/-- The position of a cyclic vertex in the displayed vertex list. -/
+def vertexIndex (vertex : Vertex) : Nat := 14 * vertex.1.1 + vertex.2.1
+
+/-- The coordinate triples of the cyclic vertices, in the displayed vertex order. -/
+def vertexTriples : List Triple := vertices.map vertexTriple
+
+/-- The passant pencils of the cyclic vertex triples, in the displayed vertex order. -/
+def vertexPassantPencils : List (List Triple) := vertexTriples.map passantPencilList
+
+/-- The secant pencils of the cyclic vertex triples, in the displayed vertex order. -/
+def vertexSecantPencils : List (List Triple) := vertexTriples.map secantPencilList
+
+/-- The secant pencil of the normalized base point. -/
+def baseSecantPencil : List Triple := secantPencilList basePoint.1
+
+/-- The coordinate triple of a cyclic vertex, read from the precomputed list. -/
+def vertexTripleAt (vertex : Vertex) : Triple :=
+  vertexTriples.getD (vertexIndex vertex) ⟨0, 0, 0⟩
+
+/-- The passant pencil of a cyclic vertex, read from the precomputed list. -/
+def vertexPassantPencil (vertex : Vertex) : List Triple :=
+  vertexPassantPencils.getD (vertexIndex vertex) []
+
+/-- The secant pencil of a cyclic vertex, read from the precomputed list. -/
+def vertexSecantPencil (vertex : Vertex) : List Triple :=
+  vertexSecantPencils.getD (vertexIndex vertex) []
+
+/-- The precomputed triple of a vertex is its coordinate triple. -/
+private theorem vertexTripleAt_eq : ∀ vertex : Vertex,
+    vertexTripleAt vertex = vertexTriple vertex := by
+  decide +kernel
+
+/-- The precomputed passant pencil of a vertex is the pencil of its coordinate triple. -/
+private theorem vertexPassantPencil_eq : ∀ vertex : Vertex,
+    vertexPassantPencil vertex = passantPencilList (vertexTriple vertex) := by
+  decide +kernel
+
+/-- The precomputed secant pencil of a vertex is the pencil of its coordinate triple. -/
+private theorem vertexSecantPencil_eq : ∀ vertex : Vertex,
+    vertexSecantPencil vertex = secantPencilList (vertexTriple vertex) := by
+  decide +kernel
+
+/-- Adjacency agrees with distinctness, a shared passant, and the tangent-holonomy identity,
+all read from the precomputed vertex pencils. -/
+private theorem adjacent_iff_pencil_check : ∀ first second : Vertex,
+    adjacent first second = true ↔
+      (vertexTripleAt first ≠ vertexTripleAt second ∧
+        commonPencilLines (vertexPassantPencil first) (vertexPassantPencil second) ≠ [] ∧
+        pencilEvaluationProduct baseSecantPencil (vertexTripleAt first)
+              * pencilEvaluationProduct (vertexSecantPencil first) (vertexTripleAt second)
+              * pencilEvaluationProduct (vertexSecantPencil second) basePoint.1
+            = pencilEvaluationProduct baseSecantPencil (vertexTripleAt second)
+              * pencilEvaluationProduct (vertexSecantPencil second) (vertexTripleAt first)
+              * pencilEvaluationProduct (vertexSecantPencil first) basePoint.1) := by
+  decide +kernel
+
 /-- The six cyclic difference sets are exactly the semantic tangent compatibility relation. -/
 theorem adjacent_iff_tangentCompatibleAtBase : ∀ first second : Vertex,
     adjacent first second = true ↔
       TangentCompatibleAtBase (vertexPoint first) (vertexPoint second) := by
-  native_decide
+  intro first second
+  have distinct_iff : (vertexTriple first ≠ vertexTriple second) ↔
+      (vertexPoint first ≠ vertexPoint second) :=
+    not_congr ⟨fun equal => Subtype.ext equal, fun equal => congrArg Subtype.val equal⟩
+  have join_iff : commonPencilLines (passantPencilList (vertexTriple first))
+        (passantPencilList (vertexTriple second)) ≠ [] ↔
+      PassantJoin (vertexPoint first) (vertexPoint second) :=
+    (exists_common_passantLine_iff (vertexPoint first) (vertexPoint second)).symm
+  have holonomy_iff :
+      (pencilEvaluationProduct baseSecantPencil (vertexTriple first)
+            * pencilEvaluationProduct (secantPencilList (vertexTriple first))
+                (vertexTriple second)
+            * pencilEvaluationProduct (secantPencilList (vertexTriple second)) basePoint.1
+          = pencilEvaluationProduct baseSecantPencil (vertexTriple second)
+            * pencilEvaluationProduct (secantPencilList (vertexTriple second))
+                (vertexTriple first)
+            * pencilEvaluationProduct (secantPencilList (vertexTriple first)) basePoint.1) ↔
+      TangentHolonomyOne basePoint (vertexPoint first) (vertexPoint second) := by
+    unfold TangentHolonomyOne
+    simp only [tangentProduct_eq_pencilEvaluationProduct]
+    rfl
+  rw [adjacent_iff_pencil_check first second]
+  simp only [vertexTripleAt_eq, vertexPassantPencil_eq, vertexSecantPencil_eq]
+  unfold TangentCompatibleAtBase
+  exact and_congr distinct_iff (and_congr join_iff holonomy_iff)
 
 /-- Executable clique predicate for a finite vertex set. -/
 def isClique (members : List Vertex) : Bool :=
@@ -246,10 +338,71 @@ def fourCliques : List (List Vertex) :=
 def fourCliqueSets : List (Finset Vertex) :=
   fourCliques.map List.toFinset
 
+/-- The displayed vertex list repeats no vertex. -/
+private theorem vertices_nodup : vertices.Nodup := by
+  decide +kernel
+
+/-- The displayed vertex list enumerates every vertex. -/
+private theorem vertices_toFinset : vertices.toFinset = (Finset.univ : Finset Vertex) := by
+  decide +kernel
+
+/-- A finite set of size `n` inside a duplicate-free list is the member set of one of that list's
+sublists of length `n`. -/
+private theorem exists_sublistsLen_toFinset {α : Type*} [DecidableEq α] {enumeration : List α}
+    (nodup : enumeration.Nodup) {members : Finset α} {size : ℕ}
+    (subset : members ⊆ enumeration.toFinset) (card_members : members.card = size) :
+    ∃ chosen ∈ enumeration.sublistsLen size, chosen.toFinset = members := by
+  obtain ⟨listed, listed_eq⟩ := Quotient.exists_rep members.val
+  have toFinset_val : enumeration.toFinset.val = (enumeration : Multiset α) := by
+    rw [List.toFinset_val, nodup.dedup]
+  have members_le : members.val ≤ (enumeration : Multiset α) := by
+    rw [← toFinset_val]
+    exact Finset.val_le_iff.mpr subset
+  rw [← listed_eq] at members_le
+  obtain ⟨chosen, chosen_perm, chosen_sublist⟩ := Multiset.coe_le.mp members_le
+  have chosen_coe : (chosen : Multiset α) = members.val := by
+    rw [← listed_eq]
+    exact Quotient.sound chosen_perm
+  refine ⟨chosen, List.mem_sublistsLen.mpr ⟨chosen_sublist, ?_⟩, ?_⟩
+  · have card_eq : Multiset.card (chosen : Multiset α) = members.card := by
+      rw [chosen_coe]
+      rfl
+    simpa [card_members] using card_eq
+  · ext element
+    rw [List.mem_toFinset, ← Multiset.mem_coe, chosen_coe]
+    rfl
+
+/-- A vertex list is a clique exactly when its member set is one. -/
+private theorem isClique_iff_isCliqueSet {chosen : List Vertex} :
+    isClique chosen = true ↔ IsCliqueSet chosen.toFinset := by
+  simp only [isClique, List.all_eq_true, Bool.or_eq_true, beq_iff_eq, IsCliqueSet,
+    List.mem_toFinset]
+  constructor
+  · intro all first first_mem second second_mem distinct
+    exact (all first first_mem second second_mem).resolve_left distinct
+  · intro clique first first_mem second second_mem
+    by_cases equal : first = second
+    · exact Or.inl equal
+    · exact Or.inr (clique first_mem second_mem equal)
+
 /-- The list enumeration contains every four-vertex clique. -/
 theorem fourCliqueSets_complete : fourCliqueSets.toFinset =
     (Finset.univ.powersetCard 4 |>.filter IsCliqueSet) := by
-  native_decide
+  ext members
+  simp only [List.mem_toFinset, Finset.mem_filter, Finset.mem_powersetCard, fourCliqueSets,
+    fourCliques, List.mem_map, List.mem_filter]
+  constructor
+  · rintro ⟨chosen, ⟨sublist_mem, clique⟩, chosen_eq⟩
+    obtain ⟨sublist, length⟩ := List.mem_sublistsLen.mp sublist_mem
+    have nodup : chosen.Nodup := vertices_nodup.sublist sublist
+    subst chosen_eq
+    exact ⟨⟨Finset.subset_univ _, by rw [List.toFinset_card_of_nodup nodup, length]⟩,
+      isClique_iff_isCliqueSet.mp clique⟩
+  · rintro ⟨⟨-, card_members⟩, clique⟩
+    obtain ⟨chosen, chosen_mem, chosen_eq⟩ :=
+      exists_sublistsLen_toFinset vertices_nodup
+        (by rw [vertices_toFinset]; exact Finset.subset_univ members) card_members
+    exact ⟨chosen, ⟨chosen_mem, isClique_iff_isCliqueSet.mpr (chosen_eq ▸ clique)⟩, chosen_eq⟩
 
 /-- The orbit-major bit encoding of a finite vertex list. -/
 def encodeVertices (members : List Vertex) : Nat :=

@@ -12,28 +12,15 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
-## Resume here (2026-08-03)
+## Resume here (2026-08-04)
 
-Two proofs are written in the worktree and have never been elaborated in place, because the
-shared Lean tree's build lock was held by other work:
+The shared library is closed. No source file under `lean/RelativeConicArcs/PassantCodeQ13/`
+contains `native_decide`, both replacement proofs are elaborated and committed, and all 23
+terminals of `RelativeConicArcs.Gates.PassantCodeQ13AxiomAudit` report axiom sets contained in
+`[propext, Classical.choice, Quot.sound]`. Report:
+`notes/2026-08-04-c834-shared-library-native-closure.md`.
 
-- `lean/RelativeConicArcs/PassantCodeQ13/WeightEight.lean` — the structural replacement for
-  `fourCliqueSets_complete` (verified in isolation against the built module, then ported in) and
-  the kernel replacement for `adjacent_iff_tangentCompatibleAtBase`, which rewrites the tangent
-  product as an evaluation product over a point's seven-member secant pencil and reads the vertex
-  triples and both pencils from precomputed lists so each pencil reduces once instead of once per
-  vertex pair;
-- `lean/RelativeConicArcs/PassantCodeQ13/PencilJoins.lean` — the two lemmas that rewrite supports,
-  `prod_secantLine` and `prod_guarded_eq_prod_pencil`.
-
-No source file under `lean/RelativeConicArcs/PassantCodeQ13/` contains `native_decide` any more.
-The sequence to finish is: elaborate `WeightEight.lean` through the guarded entry point (about four
-minutes, since the four-clique enumeration re-reduces), build
-`RelativeConicArcs.Gates.PassantCodeQ13AxiomAudit` through the queue, confirm the audit reports only
-`propext`, `Classical.choice`, and `Quot.sound`, then commit. Before the last pass the audit
-reported exactly two native-evaluation axioms, both from those two declarations.
-
-After that the remaining native surface is the paper's own package under
+The remaining native surface is the paper's own package under
 `papers/q13-passant-code/lean-certificates`: 64 native decisions across 45 modules — 22 in the
 minimum-word orbit enumeration, 16 in the weight-ten profile certificates, 9 in the structural
 upgrade, 8 in the association transport, 6 in the automorphism anchors, 3 in the association
@@ -93,16 +80,18 @@ Paper IV gate axiom audit depend only on the foundational axioms.  Report:
 `notes/2026-08-03-c834-weight-ten-pencil-kernel-closure.md`.
 
 The weight-eight tangent-graph module and the reconstruction row cardinality are also kernel
-checked, except for two declarations.  The base point, the internality, distinctness, and
+checked.  The base point, the internality, distinctness, and
 neighbour identification of the cyclic vertex triples, the base pencil and its join uniqueness, the
 four-clique enumeration with unique extension, five-clique collapse and maximality, the
 common-neighbour cardinality of each four-clique set, and the seven internal points on each passant
 line are all decided by kernel reduction.  The ambient dual-line evaluation, secant coordinates,
 and secant-line subtype moved into the geometry module so the pencil results are available
-upstream.  The Paper IV gate axiom audit therefore reports exactly two native-evaluation axioms,
-`WeightEight.adjacent_iff_tangentCompatibleAtBase` and `WeightEight.fourCliqueSets_complete`, both
-reached only through the weight-eight semantic transport.  Report:
-`notes/2026-08-03-c834-weight-eight-kernel-closure.md`.
+upstream.  The last two exceptions were closed on 2026-08-04:
+`WeightEight.adjacent_iff_tangentCompatibleAtBase` now reduces one table over the ordered vertex
+pairs through the precomputed pencils and bridges symbolically to the semantic relation, and
+`WeightEight.fourCliqueSets_complete` is proved from a general sublist lemma rather than computed.
+Reports: `notes/2026-08-03-c834-weight-eight-kernel-closure.md` and
+`notes/2026-08-04-c834-shared-library-native-closure.md`.
 
 The earlier cycle-profile report also settles the route for the rest of weight ten.  The already-formalized pencil-profile
 dichotomy of `RelativeConicArcs.PassantCodeQ13.WeightTen.arbitrary_weightTen_word_has_pencil_profile`

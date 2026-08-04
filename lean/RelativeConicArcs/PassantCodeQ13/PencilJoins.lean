@@ -147,6 +147,31 @@ theorem card_internalPoints_on (line : PassantLine) :
   rw [card_eq, List.toFinset_card_of_nodup (passantRowList_nodup line.1)]
   exact passantRowList_length line
 
+/-- The displayed secant-line list repeats no coordinate triple. -/
+theorem secantCoordinateList_nodup : secantCoordinateList.Nodup := by
+  decide +kernel
+
+/-- A product indexed by the conic secants is the product over the displayed secant list. -/
+theorem prod_secantLine {M : Type*} [CommMonoid M] (value : Triple → M) :
+    (∏ line : SecantLine, value line.1) = (secantCoordinateList.map value).prod := by
+  classical
+  have univ_eq : (Finset.univ : Finset SecantLine) = secantCoordinates.attach := rfl
+  rw [univ_eq, Finset.prod_attach, ← secantCoordinateList_toFinset,
+    List.prod_toFinset _ secantCoordinateList_nodup]
+
+/-- Guarding a family by incidence with a point discards exactly the lines outside that point's
+pencil. -/
+theorem prod_guarded_eq_prod_pencil {M : Type*} [CommMonoid M]
+    (lines : List Triple) (point : Triple) (value : Triple → M) :
+    (lines.map fun line => if lineValue line point = 0 then value line else 1).prod
+      = ((lines.filter fun line => lineValue line point == 0).map value).prod := by
+  induction lines with
+  | nil => rfl
+  | cons line rest inductive_step =>
+    by_cases incident : lineValue line point = 0
+    · simp [incident, inductive_step]
+    · simp [incident, inductive_step]
+
 /-- A passant line joins two internal points exactly when the displayed pencils of the two points
 share a member. -/
 theorem exists_common_passantLine_iff (base point : InternalPoint) :
