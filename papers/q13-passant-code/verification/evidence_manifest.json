@@ -1,13 +1,14 @@
 {
   "schema": "q13-passant-code-structural-evidence-v2",
   "source": {
-    "commit": "1ff658b90bfa93092e31f178f9e610e02a10e695",
-    "root": "papers/clebsch-rigidity"
+    "work": "Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus, and its computational companion Computational strengthenings of Clebsch syndrome rigidity",
+    "concept_doi": "10.5281/zenodo.21650878",
+    "relation": "Four programs of that companion were copied into this paper and adapted here. Each adapted file records the SHA-256 digest of the exact antecedent it was copied from, so the derivation is checkable against any published revision of the companion without naming a repository layout."
   },
   "files": [
     {
       "paper_iv_path": "verification/check_q13_tangent_code.py",
-      "source_path": "check_q13_tangent_code.py",
+      "antecedent": "the companion's q=13 tangent-code program",
       "source_bytes": 24263,
       "source_sha256": "c843d9e6dce7601620f52aeb1f223a8d98bd7dd0fc9eba208b99c3143973a198",
       "bytes": 26948,
@@ -16,7 +17,7 @@
     },
     {
       "paper_iv_path": "verification/generate_weight_ten_profiles.py",
-      "source_path": "verification/c723_q13_weight10_profiles.py",
+      "antecedent": "the companion's q=13 weight-ten profile generator",
       "source_bytes": 7378,
       "source_sha256": "96e95067a3ce8f0f69180c6d78049ddf94905091640a07dfe366234fd383dd78",
       "bytes": 7381,
@@ -25,7 +26,7 @@
     },
     {
       "paper_iv_path": "verification/weight_ten_profiles.json",
-      "source_path": "verification/c723_q13_weight10_profiles.json",
+      "antecedent": "the companion's q=13 weight-ten profile certificate",
       "source_bytes": 4209,
       "source_sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9",
       "bytes": 4219,
@@ -34,7 +35,7 @@
     },
     {
       "paper_iv_path": "verification/replay_weight_ten_profiles.py",
-      "source_path": "verification/c723_q13_weight10_independent.py",
+      "antecedent": "the companion's independent q=13 weight-ten replay",
       "source_bytes": 3368,
       "source_sha256": "6cafb6ec9fc18feda15a3e0d9ab324b8e00b19d2f6281c822d84d22980f701a5",
       "bytes": 3367,

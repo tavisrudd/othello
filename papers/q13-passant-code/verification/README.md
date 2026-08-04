@@ -33,20 +33,27 @@ The normalized transport terminals remain
 The arbitrary-word weight-ten profile terminal is
 `RelativeConicArcs.Gates.PassantCodeQ13.arbitrary_weightTen_profile_transport`.
 
-## Evidence to extract
+## Derived evidence programs
 
-The following Paper-I files were copied byte-for-byte into this root at the
-source revision recorded by `evidence_manifest.json`:
+Four programs here were copied from the computational companion of
+*Reconstructing the Clebsch code and its golden orientation from its deep-hole
+syndrome locus* (concept DOI
+[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878)) and then
+adapted:
 
-- `papers/clebsch-rigidity/check_q13_tangent_code.py`;
-- `papers/clebsch-rigidity/verification/c723_q13_weight10_profiles.py`;
-- `papers/clebsch-rigidity/verification/c723_q13_weight10_profiles.json`;
-- `papers/clebsch-rigidity/verification/c723_q13_weight10_independent.py`.
+- `check_q13_tangent_code.py`, from that companion's q=13 tangent-code program;
+- `generate_weight_ten_profiles.py`, from its q=13 weight-ten profile
+  generator;
+- `weight_ten_profiles.json`, from the corresponding weight-ten profile
+  certificate;
+- `replay_weight_ten_profiles.py`, from its independent weight-ten replay.
 
-The copies are regular files and are now owned by Paper IV. Subsequent changes
-must use paper-local names and semantics, preserve the migration provenance,
-and refresh the current-file hashes. They must not depend on an internal task
-report.
+`evidence_manifest.json` records, for each of the four, the SHA-256 digest of
+the exact antecedent it was copied from together with the digest of the file as
+it now stands, so the derivation stays checkable against any published revision
+of the companion. These files are regular files owned by this paper. Later
+changes must keep paper-local names and semantics, preserve those antecedent
+digests, and refresh the current-file digests.
 
 The current paper-local entry points are:
 

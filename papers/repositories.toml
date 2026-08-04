@@ -298,5 +298,4 @@ gate = "source programme is not adopted as a standalone publication"
 name = "q13-passant-code"
 source = "papers/q13-passant-code"
 paper_ids = ["passant_code_q13"]
-disposition = "gated"
-gate = "release identity and standalone validation contract are not yet frozen"
+disposition = "active"
