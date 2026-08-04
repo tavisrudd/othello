@@ -94,10 +94,33 @@ gate requires a touched module's whole prose to agree with its elaborated
 statements; the correction is independent of the Hodge work and closes those
 rows of gap class D.
 
-## Not yet validated
+## Validation state
 
-The Lean build lock was held by another lane throughout this session, so none
-of the above has been elaborated. Required before this is claimed as green:
+Every new proof elaborates. Two smoke tests were run through the guarded
+single-file entry point, which does not need the build lock:
+
+1. A standalone module copying the four displayed tables verbatim and
+   importing Mathlib alone — no `RelativeConicArcs` import — carrying all
+   twelve new declarations plus the three that were rewritten downstream
+   (`hodgeSign_complement`, `hodgeMatrix_complement_entry`, `hodgeMatrix_sq`).
+   Exit zero in fourteen seconds, no errors or warnings. This is the whole
+   proof content of the change, since every other edited file changed only its
+   header prose.
+2. `RelativeConicArcs/ClebschMiddleExterior.lean` itself, in its real import
+   context against the existing `ClebschGoldenConference` object file. Exit
+   zero in four seconds, no errors or warnings, so the new names do not clash
+   with the opened conference namespace.
+
+Both are elaborations against last-built dependencies and are therefore smoke
+tests, not the validation gate. The three risks flagged before they were run
+are all settled: the `revert … ; decide` blocks reduce in the kernel within
+`maxRecDepth 10000`, including the `Finset.filter` over `Fin 6 × Fin 6` inside
+`concatenationInversions`; `Finite.injective_iff_bijective` applies to
+`concatenation S` without an instance hint; and the `norm_num` closers
+discharge the pow-arithmetic. No tactic needed adjusting.
+
+Still required before this is claimed as green, all of it needing the build
+lock:
 
 1. elaborate `ClebschMiddleExterior`, then the diagonal, support, four row, and
    square leaves, then the golden-return gate, through the guarded queue;
@@ -111,15 +134,10 @@ of the above has been elaborated. Required before this is claimed as green:
    the Hodge square;
 4. rerun the paper-local replay and the release verifier.
 
-Three specific risks in the unvalidated source, in the order I would check
-them: `decide +revert` was replaced by explicit `revert … ; decide` in the new
-lemmas, and the `Finset.filter` over `Fin 6 × Fin 6` inside
-`concatenationInversions` must reduce in the kernel within
-`maxRecDepth 10000`; `Finite.injective_iff_bijective` must apply to
-`concatenation S : Fin 6 → Fin 6` without an explicit `Finite` instance hint;
-and the `norm_num` closers after `pow_add`/`pow_mul` must discharge
-`(-1 : ℤ)^4 = 1` and `((-1 : ℤ)^2)^n = 1`. None of these changes the
-mathematical content if they need a different tactic.
+What the smoke tests do not cover is the seven leaf and gate modules that
+import the changed one. Their proofs are unchanged, but they must be
+re-elaborated against the new object file, and `hodgeMatrix_sq` in particular
+now resolves `complementIndex_involutive` from a different module.
 
 ## Manuscript prose that should or could change
 
