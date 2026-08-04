@@ -1,6 +1,5 @@
 {
   "closure": [
-    "CapGame.BuildGame",
     "FiniteGeom.Code",
     "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective",
@@ -72,121 +71,6 @@
   ],
   "declaration_module": {
     "Circle.eq_1": "RelativeConicArcs.AMELU.ProductUnitarySymmetryTopology",
-    "FiniteBuildGame.Grundy": "CapGame.BuildGame",
-    "FiniteBuildGame.Grundy.congr_simp": "CapGame.BuildGame",
-    "FiniteBuildGame.Grundy.eq_def": "CapGame.BuildGame",
-    "FiniteBuildGame.IsP": "CapGame.BuildGame",
-    "FiniteBuildGame.IsP.eq_1": "CapGame.BuildGame",
-    "FiniteBuildGame.LegalExtensions": "CapGame.BuildGame",
-    "FiniteBuildGame.LegalExtensions.eq_1": "CapGame.BuildGame",
-    "FiniteBuildGame.Move": "CapGame.BuildGame",
-    "FiniteBuildGame.Move.congr_simp": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.casesOn": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.childP": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.ctorIdx": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.legal": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.mk": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.mk.inj": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.mk.injEq": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.mk.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.mk.sizeOf_spec": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.move": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.noConfusionType": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.rec": "CapGame.BuildGame",
-    "FiniteBuildGame.NCert.recOn": "CapGame.BuildGame",
-    "FiniteBuildGame.PCert": "CapGame.BuildGame",
-    "FiniteBuildGame.PCert.casesOn": "CapGame.BuildGame",
-    "FiniteBuildGame.PCert.mk": "CapGame.BuildGame",
-    "FiniteBuildGame.PCert.rec": "CapGame.BuildGame",
-    "FiniteBuildGame.PCert.recOn": "CapGame.BuildGame",
-    "FiniteBuildGame.PCert.reply": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.book": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.casesOn": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.ctorIdx": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.mk": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.mk.inj": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.mk.injEq": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.mk.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.mk.sizeOf_spec": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.noConfusionType": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.rec": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.recOn": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.root_eq": "CapGame.BuildGame",
-    "FiniteBuildGame.PCertDAG.valid": "CapGame.BuildGame",
-    "FiniteBuildGame.PairReplyBook": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.Node": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.Row": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.ValidFor": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.casesOn": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.ctorIdx": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.isP_root": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.mk": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.mk.inj": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.mk.injEq": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.mk.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.mk.sizeOf_spec": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.noConfusionType": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.rec": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.recOn": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.root": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.casesOn": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.child": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.ctorIdx": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.mk": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.mk.inj": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.mk.injEq": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.mk.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.mk.sizeOf_spec": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.mover": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.noConfusion": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.noConfusionType": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.rec": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.recOn": "CapGame.BuildGame",
-    "FiniteBuildGame.ReplyBookRow.reply": "CapGame.BuildGame",
-    "FiniteBuildGame.SizeValueConstant": "CapGame.BuildGame",
-    "FiniteBuildGame.Win": "CapGame.BuildGame",
-    "FiniteBuildGame.Win.congr_simp": "CapGame.BuildGame",
-    "FiniteBuildGame.Win.eq_def": "CapGame.BuildGame",
-    "FiniteBuildGame.instDecidableEqReplyBookRow": "CapGame.BuildGame",
-    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq": "CapGame.BuildGame",
-    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_empty_iff_isP_of_frame_chain": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_equiv": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_iff_all_children_win": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_iff_grundy_eq_zero": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_map": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_of_no_moves": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_of_pairReplyBook": "CapGame.BuildGame",
-    "FiniteBuildGame.isP_of_replyStrategy": "CapGame.BuildGame",
-    "FiniteBuildGame.lt_mex_mem": "CapGame.BuildGame",
-    "FiniteBuildGame.mem_legalExtensions": "CapGame.BuildGame",
-    "FiniteBuildGame.mex": "CapGame.BuildGame",
-    "FiniteBuildGame.mex_eq_of": "CapGame.BuildGame",
-    "FiniteBuildGame.mex_eq_zero_iff": "CapGame.BuildGame",
-    "FiniteBuildGame.mex_ne_zero_iff": "CapGame.BuildGame",
-    "FiniteBuildGame.mex_not_mem": "CapGame.BuildGame",
-    "FiniteBuildGame.mex_singleton_zero": "CapGame.BuildGame",
-    "FiniteBuildGame.move_equiv": "CapGame.BuildGame",
-    "FiniteBuildGame.move_map": "CapGame.BuildGame",
-    "FiniteBuildGame.ncert_sound": "CapGame.BuildGame",
-    "FiniteBuildGame.pcertDAG_sound": "CapGame.BuildGame",
-    "FiniteBuildGame.pcert_sound": "CapGame.BuildGame",
-    "FiniteBuildGame.sizeValueConstant_of_transitive": "CapGame.BuildGame",
-    "FiniteBuildGame.win_equiv": "CapGame.BuildGame",
-    "FiniteBuildGame.win_iff_exists_isP_child": "CapGame.BuildGame",
-    "FiniteBuildGame.win_iff_exists_move": "CapGame.BuildGame",
-    "FiniteBuildGame.win_iff_grundy_ne_zero": "CapGame.BuildGame",
-    "FiniteBuildGame.win_iff_not_win_succ": "CapGame.BuildGame",
-    "FiniteBuildGame.win_map": "CapGame.BuildGame",
-    "FiniteBuildGame.win_of_move_to_isP": "CapGame.BuildGame",
     "FiniteGeom.IsMDS": "FiniteGeom.Code",
     "FiniteGeom.IsMDS.eq_1": "RelativeConicArcs.AMELU.Definitions",
     "FiniteGeom.dualCode": "FiniteGeom.Code",
@@ -274,19 +158,9 @@
     "GroupExtension.toOuterMulAut": "RelativeConicArcs.AMELU.NonabelianExtensionInvariant",
     "Matrix.row.eq_1": "RelativeConicArcs.ProjectiveBridge",
     "ProjectiveCap.Projective.Cap": "ProjectiveCap.Projective",
-    "ProjectiveCap.Projective.CapTransitiveStatement": "ProjectiveCap.Projective",
     "ProjectiveCap.Projective.Collinear": "ProjectiveCap.Projective",
-    "ProjectiveCap.Projective.InitialPStatement": "ProjectiveCap.Projective",
-    "ProjectiveCap.Projective.LegalExtensions": "ProjectiveCap.Projective",
     "ProjectiveCap.Projective.Point": "ProjectiveCap.Projective",
-    "ProjectiveCap.Projective.Win": "ProjectiveCap.Projective",
-    "ProjectiveCap.Projective.capTransitiveStatement_four": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.capTransitiveStatement_one": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.capTransitiveStatement_three": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.capTransitiveStatement_two": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.capTransitive_of_mapEquiv": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.cap_empty": "ProjectiveCap.Projective",
-    "ProjectiveCap.Projective.cap_extendable": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.cap_image_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.cap_map_mapEquiv": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.cap_map_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
@@ -305,14 +179,10 @@
     "ProjectiveCap.Projective.comp_rep_triple": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.dependent_of_collinear": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.exists_cons_li": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.exists_frame": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.independent_triple_iff": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.independent_triple_map": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.independent_triple_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.independent_triple_of_li": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.initialPStatement_iff_isP_frame": "ProjectiveCap.Projective",
-    "ProjectiveCap.Projective.initialPStatement_iff_isP_frame_of_finrank": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.isP_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.li_rotate": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.li_sub01": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.li_sub02": "ProjectiveCap.PlaneTransitivity",
@@ -334,7 +204,6 @@
     "ProjectiveCap.Projective.mapLinearEquiv_mk": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.mapLinearEquiv_symm_apply": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.mapLinearEquiv_symm_eq": "ProjectiveCap.PlaneTransitivity",
-    "ProjectiveCap.Projective.mem_legalExtensions": "ProjectiveCap.Projective",
     "ProjectiveCap.Projective.mem_projectivization_of_rep_mem": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.mk_ne_of_li_pair": "ProjectiveCap.PlaneTransitivity",
     "ProjectiveCap.Projective.ne_of_li_pair": "ProjectiveCap.PlaneTransitivity",
@@ -1139,7 +1008,7 @@
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel": "RelativeConicArcs.AMELU.MarginalWeylExpansion",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel.eq_1": "RelativeConicArcs.AMELU.MarginalWeylExpansion",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel_supportedOn": "RelativeConicArcs.AMELU.MarginalWeylExpansion",
-    "RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ": "RelativeConicArcs.AMELU.ExtensionFieldPencil",
+    "RelativeConicArcs.AMELU.extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges": "RelativeConicArcs.AMELU.ExtensionFieldPencil",
     "RelativeConicArcs.AMELU.familyFactor_coordinateAxes_of_diagonal_equivalent": "RelativeConicArcs.AMELU.GenericTensorRigidity",
     "RelativeConicArcs.AMELU.fiberCard_mul_normalization": "RelativeConicArcs.AMELU.Dictionary",
     "RelativeConicArcs.AMELU.finFourFunctionEquiv": "RelativeConicArcs.AMELU.OrderedFourConjugation",
@@ -1936,20 +1805,10 @@
     "RelativeConicArcs.PairExtensionConflict": "RelativeConicArcs.SyndromeGeometry",
     "RelativeConicArcs.PairExtensionIndependent": "RelativeConicArcs.SyndromeGeometry",
     "RelativeConicArcs.PlaneOrder": "RelativeConicArcs.Plane",
-    "RelativeConicArcs.ProjectiveBridge.ParametrizedHoleValid": "RelativeConicArcs.ProjectiveBridge",
     "RelativeConicArcs.ProjectiveBridge.Point": "RelativeConicArcs.ProjectiveBridge",
     "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap": "RelativeConicArcs.ProjectiveBridge",
     "RelativeConicArcs.ProjectiveBridge.collinear_iff_projective_collinear": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.instFintypePoint": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.isP_parametrizedHoles_iff": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_sdiff_holes_eq_uncovered": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_subset_holes": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_subset_holes_of_completeOutside": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.move_mem_holes_of_completeOutside": "RelativeConicArcs.ProjectiveBridge",
     "RelativeConicArcs.ProjectiveBridge.planeOrder_eq_card": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.projectiveCap_subset_union_of_completeOutside": "RelativeConicArcs.ProjectiveBridge",
-    "RelativeConicArcs.ProjectiveBridge.win_parametrizedHoles_iff": "RelativeConicArcs.ProjectiveBridge",
     "RelativeConicArcs.Secant": "RelativeConicArcs.Arc",
     "RelativeConicArcs.admissiblePositions": "RelativeConicArcs.Arc",
     "RelativeConicArcs.admissiblePositions.eq_1": "RelativeConicArcs.Arc",
@@ -2079,121 +1938,6 @@
   "project_axioms": [],
   "project_declarations": [
     "Circle.eq_1",
-    "FiniteBuildGame.Grundy",
-    "FiniteBuildGame.Grundy.congr_simp",
-    "FiniteBuildGame.Grundy.eq_def",
-    "FiniteBuildGame.IsP",
-    "FiniteBuildGame.IsP.eq_1",
-    "FiniteBuildGame.LegalExtensions",
-    "FiniteBuildGame.LegalExtensions.eq_1",
-    "FiniteBuildGame.Move",
-    "FiniteBuildGame.Move.congr_simp",
-    "FiniteBuildGame.NCert",
-    "FiniteBuildGame.NCert.casesOn",
-    "FiniteBuildGame.NCert.childP",
-    "FiniteBuildGame.NCert.ctorIdx",
-    "FiniteBuildGame.NCert.legal",
-    "FiniteBuildGame.NCert.mk",
-    "FiniteBuildGame.NCert.mk.inj",
-    "FiniteBuildGame.NCert.mk.injEq",
-    "FiniteBuildGame.NCert.mk.noConfusion",
-    "FiniteBuildGame.NCert.mk.sizeOf_spec",
-    "FiniteBuildGame.NCert.move",
-    "FiniteBuildGame.NCert.noConfusion",
-    "FiniteBuildGame.NCert.noConfusionType",
-    "FiniteBuildGame.NCert.rec",
-    "FiniteBuildGame.NCert.recOn",
-    "FiniteBuildGame.PCert",
-    "FiniteBuildGame.PCert.casesOn",
-    "FiniteBuildGame.PCert.mk",
-    "FiniteBuildGame.PCert.rec",
-    "FiniteBuildGame.PCert.recOn",
-    "FiniteBuildGame.PCert.reply",
-    "FiniteBuildGame.PCertDAG",
-    "FiniteBuildGame.PCertDAG.book",
-    "FiniteBuildGame.PCertDAG.casesOn",
-    "FiniteBuildGame.PCertDAG.ctorIdx",
-    "FiniteBuildGame.PCertDAG.mk",
-    "FiniteBuildGame.PCertDAG.mk.inj",
-    "FiniteBuildGame.PCertDAG.mk.injEq",
-    "FiniteBuildGame.PCertDAG.mk.noConfusion",
-    "FiniteBuildGame.PCertDAG.mk.sizeOf_spec",
-    "FiniteBuildGame.PCertDAG.noConfusion",
-    "FiniteBuildGame.PCertDAG.noConfusionType",
-    "FiniteBuildGame.PCertDAG.rec",
-    "FiniteBuildGame.PCertDAG.recOn",
-    "FiniteBuildGame.PCertDAG.root_eq",
-    "FiniteBuildGame.PCertDAG.valid",
-    "FiniteBuildGame.PairReplyBook",
-    "FiniteBuildGame.ReplyBookDAG",
-    "FiniteBuildGame.ReplyBookDAG.Node",
-    "FiniteBuildGame.ReplyBookDAG.Row",
-    "FiniteBuildGame.ReplyBookDAG.ValidFor",
-    "FiniteBuildGame.ReplyBookDAG.casesOn",
-    "FiniteBuildGame.ReplyBookDAG.ctorIdx",
-    "FiniteBuildGame.ReplyBookDAG.isP_root",
-    "FiniteBuildGame.ReplyBookDAG.mk",
-    "FiniteBuildGame.ReplyBookDAG.mk.inj",
-    "FiniteBuildGame.ReplyBookDAG.mk.injEq",
-    "FiniteBuildGame.ReplyBookDAG.mk.noConfusion",
-    "FiniteBuildGame.ReplyBookDAG.mk.sizeOf_spec",
-    "FiniteBuildGame.ReplyBookDAG.noConfusion",
-    "FiniteBuildGame.ReplyBookDAG.noConfusionType",
-    "FiniteBuildGame.ReplyBookDAG.rec",
-    "FiniteBuildGame.ReplyBookDAG.recOn",
-    "FiniteBuildGame.ReplyBookDAG.root",
-    "FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows",
-    "FiniteBuildGame.ReplyBookRow",
-    "FiniteBuildGame.ReplyBookRow.casesOn",
-    "FiniteBuildGame.ReplyBookRow.child",
-    "FiniteBuildGame.ReplyBookRow.ctorIdx",
-    "FiniteBuildGame.ReplyBookRow.mk",
-    "FiniteBuildGame.ReplyBookRow.mk.inj",
-    "FiniteBuildGame.ReplyBookRow.mk.injEq",
-    "FiniteBuildGame.ReplyBookRow.mk.noConfusion",
-    "FiniteBuildGame.ReplyBookRow.mk.sizeOf_spec",
-    "FiniteBuildGame.ReplyBookRow.mover",
-    "FiniteBuildGame.ReplyBookRow.noConfusion",
-    "FiniteBuildGame.ReplyBookRow.noConfusionType",
-    "FiniteBuildGame.ReplyBookRow.rec",
-    "FiniteBuildGame.ReplyBookRow.recOn",
-    "FiniteBuildGame.ReplyBookRow.reply",
-    "FiniteBuildGame.SizeValueConstant",
-    "FiniteBuildGame.Win",
-    "FiniteBuildGame.Win.congr_simp",
-    "FiniteBuildGame.Win.eq_def",
-    "FiniteBuildGame.instDecidableEqReplyBookRow",
-    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq",
-    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1",
-    "FiniteBuildGame.isP_empty_iff_isP_of_frame_chain",
-    "FiniteBuildGame.isP_equiv",
-    "FiniteBuildGame.isP_iff_all_children_win",
-    "FiniteBuildGame.isP_iff_grundy_eq_zero",
-    "FiniteBuildGame.isP_map",
-    "FiniteBuildGame.isP_of_no_moves",
-    "FiniteBuildGame.isP_of_pairReplyBook",
-    "FiniteBuildGame.isP_of_replyStrategy",
-    "FiniteBuildGame.lt_mex_mem",
-    "FiniteBuildGame.mem_legalExtensions",
-    "FiniteBuildGame.mex",
-    "FiniteBuildGame.mex_eq_of",
-    "FiniteBuildGame.mex_eq_zero_iff",
-    "FiniteBuildGame.mex_ne_zero_iff",
-    "FiniteBuildGame.mex_not_mem",
-    "FiniteBuildGame.mex_singleton_zero",
-    "FiniteBuildGame.move_equiv",
-    "FiniteBuildGame.move_map",
-    "FiniteBuildGame.ncert_sound",
-    "FiniteBuildGame.pcertDAG_sound",
-    "FiniteBuildGame.pcert_sound",
-    "FiniteBuildGame.sizeValueConstant_of_transitive",
-    "FiniteBuildGame.win_equiv",
-    "FiniteBuildGame.win_iff_exists_isP_child",
-    "FiniteBuildGame.win_iff_exists_move",
-    "FiniteBuildGame.win_iff_grundy_ne_zero",
-    "FiniteBuildGame.win_iff_not_win_succ",
-    "FiniteBuildGame.win_map",
-    "FiniteBuildGame.win_of_move_to_isP",
     "FiniteGeom.IsMDS",
     "FiniteGeom.IsMDS.eq_1",
     "FiniteGeom.dualCode",
@@ -2281,19 +2025,9 @@
     "GroupExtension.toOuterMulAut",
     "Matrix.row.eq_1",
     "ProjectiveCap.Projective.Cap",
-    "ProjectiveCap.Projective.CapTransitiveStatement",
     "ProjectiveCap.Projective.Collinear",
-    "ProjectiveCap.Projective.InitialPStatement",
-    "ProjectiveCap.Projective.LegalExtensions",
     "ProjectiveCap.Projective.Point",
-    "ProjectiveCap.Projective.Win",
-    "ProjectiveCap.Projective.capTransitiveStatement_four",
-    "ProjectiveCap.Projective.capTransitiveStatement_one",
-    "ProjectiveCap.Projective.capTransitiveStatement_three",
-    "ProjectiveCap.Projective.capTransitiveStatement_two",
-    "ProjectiveCap.Projective.capTransitive_of_mapEquiv",
     "ProjectiveCap.Projective.cap_empty",
-    "ProjectiveCap.Projective.cap_extendable",
     "ProjectiveCap.Projective.cap_image_mapLinearEquiv",
     "ProjectiveCap.Projective.cap_map_mapEquiv",
     "ProjectiveCap.Projective.cap_map_mapLinearEquiv",
@@ -2312,14 +2046,10 @@
     "ProjectiveCap.Projective.comp_rep_triple",
     "ProjectiveCap.Projective.dependent_of_collinear",
     "ProjectiveCap.Projective.exists_cons_li",
-    "ProjectiveCap.Projective.exists_frame",
     "ProjectiveCap.Projective.independent_triple_iff",
     "ProjectiveCap.Projective.independent_triple_map",
     "ProjectiveCap.Projective.independent_triple_mapLinearEquiv",
     "ProjectiveCap.Projective.independent_triple_of_li",
-    "ProjectiveCap.Projective.initialPStatement_iff_isP_frame",
-    "ProjectiveCap.Projective.initialPStatement_iff_isP_frame_of_finrank",
-    "ProjectiveCap.Projective.isP_mapLinearEquiv",
     "ProjectiveCap.Projective.li_rotate",
     "ProjectiveCap.Projective.li_sub01",
     "ProjectiveCap.Projective.li_sub02",
@@ -2341,7 +2071,6 @@
     "ProjectiveCap.Projective.mapLinearEquiv_mk",
     "ProjectiveCap.Projective.mapLinearEquiv_symm_apply",
     "ProjectiveCap.Projective.mapLinearEquiv_symm_eq",
-    "ProjectiveCap.Projective.mem_legalExtensions",
     "ProjectiveCap.Projective.mem_projectivization_of_rep_mem",
     "ProjectiveCap.Projective.mk_ne_of_li_pair",
     "ProjectiveCap.Projective.ne_of_li_pair",
@@ -3146,7 +2875,7 @@
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel.eq_1",
     "RelativeConicArcs.AMELU.extendSubsystemPauliLabel_supportedOn",
-    "RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ",
+    "RelativeConicArcs.AMELU.extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges",
     "RelativeConicArcs.AMELU.familyFactor_coordinateAxes_of_diagonal_equivalent",
     "RelativeConicArcs.AMELU.fiberCard_mul_normalization",
     "RelativeConicArcs.AMELU.finFourFunctionEquiv",
@@ -3943,20 +3672,10 @@
     "RelativeConicArcs.PairExtensionConflict",
     "RelativeConicArcs.PairExtensionIndependent",
     "RelativeConicArcs.PlaneOrder",
-    "RelativeConicArcs.ProjectiveBridge.ParametrizedHoleValid",
     "RelativeConicArcs.ProjectiveBridge.Point",
     "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap",
     "RelativeConicArcs.ProjectiveBridge.collinear_iff_projective_collinear",
-    "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-    "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-    "RelativeConicArcs.ProjectiveBridge.isP_parametrizedHoles_iff",
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_sdiff_holes_eq_uncovered",
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_subset_holes",
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_subset_holes_of_completeOutside",
-    "RelativeConicArcs.ProjectiveBridge.move_mem_holes_of_completeOutside",
     "RelativeConicArcs.ProjectiveBridge.planeOrder_eq_card",
-    "RelativeConicArcs.ProjectiveBridge.projectiveCap_subset_union_of_completeOutside",
-    "RelativeConicArcs.ProjectiveBridge.win_parametrizedHoles_iff",
     "RelativeConicArcs.Secant",
     "RelativeConicArcs.admissiblePositions",
     "RelativeConicArcs.admissiblePositions.eq_1",
@@ -4082,587 +3801,6 @@
   "terminal_axioms": {},
   "unit": "RelativeConicArcs.Gates.AMELUAggregateAxioms",
   "uses": {
-    "FiniteBuildGame.Grundy": [
-      "FiniteBuildGame.LegalExtensions",
-      "FiniteBuildGame.mex"
-    ],
-    "FiniteBuildGame.Grundy.congr_simp": [
-      "FiniteBuildGame.Grundy"
-    ],
-    "FiniteBuildGame.Grundy.eq_def": [
-      "FiniteBuildGame.Grundy",
-      "FiniteBuildGame.LegalExtensions",
-      "FiniteBuildGame.mex"
-    ],
-    "FiniteBuildGame.IsP": [
-      "FiniteBuildGame.Win"
-    ],
-    "FiniteBuildGame.IsP.eq_1": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Win"
-    ],
-    "FiniteBuildGame.LegalExtensions": [
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.LegalExtensions.eq_1": [
-      "FiniteBuildGame.LegalExtensions",
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.Move.congr_simp": [
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.NCert.casesOn": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.mk",
-      "FiniteBuildGame.NCert.rec"
-    ],
-    "FiniteBuildGame.NCert.childP": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.move"
-    ],
-    "FiniteBuildGame.NCert.ctorIdx": [
-      "FiniteBuildGame.NCert"
-    ],
-    "FiniteBuildGame.NCert.legal": [
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.move"
-    ],
-    "FiniteBuildGame.NCert.mk": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert"
-    ],
-    "FiniteBuildGame.NCert.mk.inj": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.mk",
-      "FiniteBuildGame.NCert.mk.noConfusion"
-    ],
-    "FiniteBuildGame.NCert.mk.injEq": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.mk",
-      "FiniteBuildGame.NCert.mk.inj"
-    ],
-    "FiniteBuildGame.NCert.mk.noConfusion": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.mk",
-      "FiniteBuildGame.NCert.noConfusion"
-    ],
-    "FiniteBuildGame.NCert.mk.sizeOf_spec": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.mk"
-    ],
-    "FiniteBuildGame.NCert.move": [
-      "FiniteBuildGame.NCert"
-    ],
-    "FiniteBuildGame.NCert.noConfusion": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.casesOn",
-      "FiniteBuildGame.NCert.noConfusionType"
-    ],
-    "FiniteBuildGame.NCert.noConfusionType": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.casesOn"
-    ],
-    "FiniteBuildGame.NCert.rec": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.mk"
-    ],
-    "FiniteBuildGame.NCert.recOn": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.mk",
-      "FiniteBuildGame.NCert.rec"
-    ],
-    "FiniteBuildGame.PCert.casesOn": [
-      "FiniteBuildGame.PCert",
-      "FiniteBuildGame.PCert.mk",
-      "FiniteBuildGame.PCert.rec",
-      "FiniteBuildGame.PairReplyBook"
-    ],
-    "FiniteBuildGame.PCert.mk": [
-      "FiniteBuildGame.PCert",
-      "FiniteBuildGame.PairReplyBook"
-    ],
-    "FiniteBuildGame.PCert.rec": [
-      "FiniteBuildGame.PCert",
-      "FiniteBuildGame.PCert.mk",
-      "FiniteBuildGame.PairReplyBook"
-    ],
-    "FiniteBuildGame.PCert.recOn": [
-      "FiniteBuildGame.PCert",
-      "FiniteBuildGame.PCert.mk",
-      "FiniteBuildGame.PCert.rec",
-      "FiniteBuildGame.PairReplyBook"
-    ],
-    "FiniteBuildGame.PCert.reply": [
-      "FiniteBuildGame.PCert",
-      "FiniteBuildGame.PairReplyBook"
-    ],
-    "FiniteBuildGame.PCertDAG.book": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.ReplyBookDAG"
-    ],
-    "FiniteBuildGame.PCertDAG.casesOn": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.mk",
-      "FiniteBuildGame.PCertDAG.rec",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.ctorIdx": [
-      "FiniteBuildGame.PCertDAG"
-    ],
-    "FiniteBuildGame.PCertDAG.mk": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.mk.inj": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.mk",
-      "FiniteBuildGame.PCertDAG.mk.noConfusion",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.mk.injEq": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.mk",
-      "FiniteBuildGame.PCertDAG.mk.inj",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.mk.noConfusion": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.mk",
-      "FiniteBuildGame.PCertDAG.noConfusion",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.mk.sizeOf_spec": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.noConfusion": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.casesOn",
-      "FiniteBuildGame.PCertDAG.noConfusionType",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.noConfusionType": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.casesOn",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.rec": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.recOn": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.mk",
-      "FiniteBuildGame.PCertDAG.rec",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.root_eq": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.book",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.PCertDAG.valid": [
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.book",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor"
-    ],
-    "FiniteBuildGame.PairReplyBook": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.Node": [
-      "FiniteBuildGame.ReplyBookDAG"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.Row": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.ValidFor": [
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.Node",
-      "FiniteBuildGame.ReplyBookDAG.Row",
-      "FiniteBuildGame.ReplyBookDAG.root",
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.child",
-      "FiniteBuildGame.ReplyBookRow.mover",
-      "FiniteBuildGame.ReplyBookRow.reply"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.casesOn": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG.rec",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.ctorIdx": [
-      "FiniteBuildGame.ReplyBookDAG"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.isP_root": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.Node",
-      "FiniteBuildGame.ReplyBookDAG.Row",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.root",
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.child",
-      "FiniteBuildGame.ReplyBookRow.mover",
-      "FiniteBuildGame.ReplyBookRow.reply",
-      "FiniteBuildGame.isP_of_replyStrategy"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.mk": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.mk.inj": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG.mk.noConfusion",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.mk.injEq": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG.mk.inj",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.mk.noConfusion": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG.noConfusion",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.mk.sizeOf_spec": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.noConfusion": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.casesOn",
-      "FiniteBuildGame.ReplyBookDAG.noConfusionType",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.noConfusionType": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.casesOn",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.rec": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.recOn": [
-      "FiniteBuildGame.ReplyBookDAG",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG.rec",
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.root": [
-      "FiniteBuildGame.ReplyBookDAG"
-    ],
-    "FiniteBuildGame.ReplyBookDAG.validFor_of_finiteRows": [
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.ReplyBookDAG.Node",
-      "FiniteBuildGame.ReplyBookDAG.Row",
-      "FiniteBuildGame.ReplyBookDAG.ValidFor",
-      "FiniteBuildGame.ReplyBookDAG.mk",
-      "FiniteBuildGame.ReplyBookDAG.root",
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.child",
-      "FiniteBuildGame.ReplyBookRow.mover",
-      "FiniteBuildGame.ReplyBookRow.reply"
-    ],
-    "FiniteBuildGame.ReplyBookRow.casesOn": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk",
-      "FiniteBuildGame.ReplyBookRow.rec"
-    ],
-    "FiniteBuildGame.ReplyBookRow.child": [
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookRow.ctorIdx": [
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookRow.mk": [
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookRow.mk.inj": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk",
-      "FiniteBuildGame.ReplyBookRow.mk.noConfusion"
-    ],
-    "FiniteBuildGame.ReplyBookRow.mk.injEq": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk",
-      "FiniteBuildGame.ReplyBookRow.mk.inj"
-    ],
-    "FiniteBuildGame.ReplyBookRow.mk.noConfusion": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk",
-      "FiniteBuildGame.ReplyBookRow.noConfusion"
-    ],
-    "FiniteBuildGame.ReplyBookRow.mk.sizeOf_spec": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk"
-    ],
-    "FiniteBuildGame.ReplyBookRow.mover": [
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.ReplyBookRow.noConfusion": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.casesOn",
-      "FiniteBuildGame.ReplyBookRow.noConfusionType"
-    ],
-    "FiniteBuildGame.ReplyBookRow.noConfusionType": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.casesOn"
-    ],
-    "FiniteBuildGame.ReplyBookRow.rec": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk"
-    ],
-    "FiniteBuildGame.ReplyBookRow.recOn": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk",
-      "FiniteBuildGame.ReplyBookRow.rec"
-    ],
-    "FiniteBuildGame.ReplyBookRow.reply": [
-      "FiniteBuildGame.ReplyBookRow"
-    ],
-    "FiniteBuildGame.SizeValueConstant": [
-      "FiniteBuildGame.Win"
-    ],
-    "FiniteBuildGame.Win": [
-      "FiniteBuildGame.LegalExtensions"
-    ],
-    "FiniteBuildGame.Win.congr_simp": [
-      "FiniteBuildGame.Win"
-    ],
-    "FiniteBuildGame.Win.eq_def": [
-      "FiniteBuildGame.LegalExtensions",
-      "FiniteBuildGame.Win"
-    ],
-    "FiniteBuildGame.instDecidableEqReplyBookRow": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.instDecidableEqReplyBookRow.decEq"
-    ],
-    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.mk",
-      "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1"
-    ],
-    "FiniteBuildGame.instDecidableEqReplyBookRow.decEq.match_1": [
-      "FiniteBuildGame.ReplyBookRow",
-      "FiniteBuildGame.ReplyBookRow.casesOn",
-      "FiniteBuildGame.ReplyBookRow.mk"
-    ],
-    "FiniteBuildGame.isP_empty_iff_isP_of_frame_chain": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.SizeValueConstant",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_not_win_succ"
-    ],
-    "FiniteBuildGame.isP_equiv": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_equiv"
-    ],
-    "FiniteBuildGame.isP_iff_all_children_win": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_exists_isP_child",
-      "FiniteBuildGame.win_of_move_to_isP"
-    ],
-    "FiniteBuildGame.isP_iff_grundy_eq_zero": [
-      "FiniteBuildGame.Grundy",
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.IsP.eq_1",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_grundy_ne_zero"
-    ],
-    "FiniteBuildGame.isP_map": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_map"
-    ],
-    "FiniteBuildGame.isP_of_no_moves": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.IsP.eq_1",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_exists_move"
-    ],
-    "FiniteBuildGame.isP_of_pairReplyBook": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.PairReplyBook",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.isP_iff_all_children_win",
-      "FiniteBuildGame.win_of_move_to_isP"
-    ],
-    "FiniteBuildGame.isP_of_replyStrategy": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.lt_mex_mem": [
-      "FiniteBuildGame.mex"
-    ],
-    "FiniteBuildGame.mem_legalExtensions": [
-      "FiniteBuildGame.LegalExtensions",
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.mex_eq_of": [
-      "FiniteBuildGame.mex",
-      "FiniteBuildGame.mex_not_mem"
-    ],
-    "FiniteBuildGame.mex_eq_zero_iff": [
-      "FiniteBuildGame.lt_mex_mem",
-      "FiniteBuildGame.mex",
-      "FiniteBuildGame.mex_not_mem"
-    ],
-    "FiniteBuildGame.mex_ne_zero_iff": [
-      "FiniteBuildGame.mex",
-      "FiniteBuildGame.mex_eq_zero_iff"
-    ],
-    "FiniteBuildGame.mex_not_mem": [
-      "FiniteBuildGame.mex"
-    ],
-    "FiniteBuildGame.mex_singleton_zero": [
-      "FiniteBuildGame.mex",
-      "FiniteBuildGame.mex_eq_of"
-    ],
-    "FiniteBuildGame.move_equiv": [
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.move_map": [
-      "FiniteBuildGame.Move"
-    ],
-    "FiniteBuildGame.ncert_sound": [
-      "FiniteBuildGame.NCert",
-      "FiniteBuildGame.NCert.childP",
-      "FiniteBuildGame.NCert.legal",
-      "FiniteBuildGame.NCert.move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_of_move_to_isP"
-    ],
-    "FiniteBuildGame.pcertDAG_sound": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.PCertDAG",
-      "FiniteBuildGame.PCertDAG.book",
-      "FiniteBuildGame.PCertDAG.root_eq",
-      "FiniteBuildGame.PCertDAG.valid",
-      "FiniteBuildGame.ReplyBookDAG.isP_root",
-      "FiniteBuildGame.ReplyBookDAG.root"
-    ],
-    "FiniteBuildGame.pcert_sound": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.PCert",
-      "FiniteBuildGame.PCert.reply",
-      "FiniteBuildGame.isP_of_pairReplyBook"
-    ],
-    "FiniteBuildGame.sizeValueConstant_of_transitive": [
-      "FiniteBuildGame.SizeValueConstant",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_map"
-    ],
-    "FiniteBuildGame.win_equiv": [
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.move_equiv",
-      "FiniteBuildGame.win_iff_exists_move"
-    ],
-    "FiniteBuildGame.win_iff_exists_isP_child": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_exists_move"
-    ],
-    "FiniteBuildGame.win_iff_exists_move": [
-      "FiniteBuildGame.LegalExtensions",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.Win.eq_def",
-      "FiniteBuildGame.mem_legalExtensions"
-    ],
-    "FiniteBuildGame.win_iff_grundy_ne_zero": [
-      "FiniteBuildGame.Grundy",
-      "FiniteBuildGame.Grundy.eq_def",
-      "FiniteBuildGame.LegalExtensions",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.Win.eq_def",
-      "FiniteBuildGame.mem_legalExtensions",
-      "FiniteBuildGame.mex",
-      "FiniteBuildGame.mex_ne_zero_iff"
-    ],
-    "FiniteBuildGame.win_iff_not_win_succ": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.SizeValueConstant",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_exists_isP_child",
-      "FiniteBuildGame.win_of_move_to_isP"
-    ],
-    "FiniteBuildGame.win_map": [
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.move_map",
-      "FiniteBuildGame.win_iff_exists_move"
-    ],
-    "FiniteBuildGame.win_of_move_to_isP": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_exists_move"
-    ],
     "FiniteGeom.IsMDS": [
       "FiniteGeom.minDist"
     ],
@@ -5068,99 +4206,13 @@
       "ProjectiveCap.Projective.Collinear",
       "ProjectiveCap.Projective.Point"
     ],
-    "ProjectiveCap.Projective.CapTransitiveStatement": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point"
-    ],
     "ProjectiveCap.Projective.Collinear": [
       "ProjectiveCap.Projective.Point"
-    ],
-    "ProjectiveCap.Projective.InitialPStatement": [
-      "FiniteBuildGame.IsP",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point"
-    ],
-    "ProjectiveCap.Projective.LegalExtensions": [
-      "FiniteBuildGame.LegalExtensions",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point"
-    ],
-    "ProjectiveCap.Projective.Win": [
-      "FiniteBuildGame.Win",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point"
-    ],
-    "ProjectiveCap.Projective.capTransitiveStatement_four": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.CapTransitiveStatement",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.capTransitive_of_mapEquiv",
-      "ProjectiveCap.Projective.mapEquiv",
-      "ProjectiveCap.Projective.mapEquiv_eq_of_rep_eq",
-      "ProjectiveCap.Projective.mapEquiv_mk_eq_mk",
-      "ProjectiveCap.Projective.quad_normal_form"
-    ],
-    "ProjectiveCap.Projective.capTransitiveStatement_one": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.CapTransitiveStatement",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.capTransitive_of_mapEquiv",
-      "ProjectiveCap.Projective.exists_cons_li",
-      "ProjectiveCap.Projective.mapEquiv",
-      "ProjectiveCap.Projective.mapEquiv_eq_of_rep_eq"
-    ],
-    "ProjectiveCap.Projective.capTransitiveStatement_three": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.CapTransitiveStatement",
-      "ProjectiveCap.Projective.Collinear",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.capTransitive_of_mapEquiv",
-      "ProjectiveCap.Projective.independent_triple_iff",
-      "ProjectiveCap.Projective.mapEquiv",
-      "ProjectiveCap.Projective.mapEquiv_eq_of_rep_eq",
-      "ProjectiveCap.Projective.not_collinear_iff_independent"
-    ],
-    "ProjectiveCap.Projective.capTransitiveStatement_two": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.CapTransitiveStatement",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.capTransitive_of_mapEquiv",
-      "ProjectiveCap.Projective.exists_cons_li",
-      "ProjectiveCap.Projective.mapEquiv",
-      "ProjectiveCap.Projective.mapEquiv_eq_of_rep_eq"
-    ],
-    "ProjectiveCap.Projective.capTransitive_of_mapEquiv": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.cap_map_mapEquiv",
-      "ProjectiveCap.Projective.mapEquiv"
     ],
     "ProjectiveCap.Projective.cap_empty": [
       "ProjectiveCap.Projective.Cap",
       "ProjectiveCap.Projective.Point",
       "ProjectiveCap.Projective.cap_of_card_le_two"
-    ],
-    "ProjectiveCap.Projective.cap_extendable": [
-      "FiniteBuildGame.Move",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Collinear",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.cap_pair",
-      "ProjectiveCap.Projective.cap_quad_of_independent",
-      "ProjectiveCap.Projective.cap_triple_of_independent",
-      "ProjectiveCap.Projective.exists_cons_li",
-      "ProjectiveCap.Projective.independent_triple_iff",
-      "ProjectiveCap.Projective.independent_triple_of_li",
-      "ProjectiveCap.Projective.li_rotate",
-      "ProjectiveCap.Projective.li_sub01",
-      "ProjectiveCap.Projective.li_sub02",
-      "ProjectiveCap.Projective.li_with_sum12",
-      "ProjectiveCap.Projective.li_with_sum13",
-      "ProjectiveCap.Projective.li_with_sum23",
-      "ProjectiveCap.Projective.mk_ne_of_li_pair",
-      "ProjectiveCap.Projective.ne_of_li_pair",
-      "ProjectiveCap.Projective.not_collinear_iff_independent",
-      "ProjectiveCap.Projective.sum_ne_zero_of_li"
     ],
     "ProjectiveCap.Projective.cap_image_mapLinearEquiv": [
       "ProjectiveCap.Projective.Cap",
@@ -5274,16 +4326,6 @@
       "ProjectiveCap.Projective.Point",
       "ProjectiveCap.Projective.independent_triple_iff"
     ],
-    "ProjectiveCap.Projective.exists_frame": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.cap_quad_of_independent",
-      "ProjectiveCap.Projective.independent_triple_of_li",
-      "ProjectiveCap.Projective.li_with_sum12",
-      "ProjectiveCap.Projective.li_with_sum13",
-      "ProjectiveCap.Projective.li_with_sum23",
-      "ProjectiveCap.Projective.sum_ne_zero_of_li"
-    ],
     "ProjectiveCap.Projective.independent_triple_iff": [
       "ProjectiveCap.Projective.Point",
       "ProjectiveCap.Projective.comp_rep_triple"
@@ -5301,37 +4343,6 @@
       "ProjectiveCap.Projective.independent_triple_of_li",
       "ProjectiveCap.Projective.mapLinearEquiv",
       "ProjectiveCap.Projective.mapLinearEquiv_mk"
-    ],
-    "ProjectiveCap.Projective.initialPStatement_iff_isP_frame": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.isP_empty_iff_isP_of_frame_chain",
-      "FiniteBuildGame.sizeValueConstant_of_transitive",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.CapTransitiveStatement",
-      "ProjectiveCap.Projective.InitialPStatement",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.cap_empty"
-    ],
-    "ProjectiveCap.Projective.initialPStatement_iff_isP_frame_of_finrank": [
-      "FiniteBuildGame.IsP",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.InitialPStatement",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.capTransitiveStatement_four",
-      "ProjectiveCap.Projective.capTransitiveStatement_one",
-      "ProjectiveCap.Projective.capTransitiveStatement_three",
-      "ProjectiveCap.Projective.capTransitiveStatement_two",
-      "ProjectiveCap.Projective.cap_extendable",
-      "ProjectiveCap.Projective.initialPStatement_iff_isP_frame"
-    ],
-    "ProjectiveCap.Projective.isP_mapLinearEquiv": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.isP_equiv",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.cap_map_mapLinearEquiv",
-      "ProjectiveCap.Projective.mapLinearEquiv"
     ],
     "ProjectiveCap.Projective.mapEquiv": [
       "ProjectiveCap.Projective.Point"
@@ -5390,12 +4401,6 @@
     "ProjectiveCap.Projective.mapLinearEquiv_symm_eq": [
       "ProjectiveCap.Projective.Point",
       "ProjectiveCap.Projective.mapLinearEquiv"
-    ],
-    "ProjectiveCap.Projective.mem_legalExtensions": [
-      "FiniteBuildGame.mem_legalExtensions",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.LegalExtensions",
-      "ProjectiveCap.Projective.Point"
     ],
     "ProjectiveCap.Projective.mem_projectivization_of_rep_mem": [
       "ProjectiveCap.Projective.Point"
@@ -11003,7 +10008,7 @@
       "RelativeConicArcs.AMELU.PauliSupportedOn",
       "RelativeConicArcs.AMELU.extendSubsystemPauliLabel"
     ],
-    "RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ": [
+    "RelativeConicArcs.AMELU.extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges": [
       "RelativeConicArcs.AMELU.ExtensionFieldPencilOrbitInputs",
       "RelativeConicArcs.AMELU.ExtensionFieldPencilOrbitInputs.equivalent_implies_projective_sector",
       "RelativeConicArcs.AMELU.ExtensionFieldPencilOrbitInputs.galois_z_implies_equivalent",
@@ -17146,12 +16151,6 @@
     "RelativeConicArcs.PairExtensionIndependent": [
       "RelativeConicArcs.PairExtensionConflict"
     ],
-    "RelativeConicArcs.ProjectiveBridge.ParametrizedHoleValid": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint"
-    ],
     "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap": [
       "ProjectiveCap.Projective.Cap",
       "ProjectiveCap.Projective.Collinear",
@@ -17166,102 +16165,10 @@
       "RelativeConicArcs.Collinear",
       "RelativeConicArcs.ProjectiveBridge.Point"
     ],
-    "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint": [
-      "RelativeConicArcs.ProjectiveBridge.Point"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.instFintypePoint": [
-      "RelativeConicArcs.ProjectiveBridge.Point"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.isP_parametrizedHoles_iff": [
-      "FiniteBuildGame.IsP",
-      "FiniteBuildGame.Win",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point",
-      "RelativeConicArcs.CompleteOutside",
-      "RelativeConicArcs.ProjectiveBridge.ParametrizedHoleValid",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-      "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-      "RelativeConicArcs.ProjectiveBridge.win_parametrizedHoles_iff"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_sdiff_holes_eq_uncovered": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.LegalExtensions",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.mem_legalExtensions",
-      "RelativeConicArcs.Arc",
-      "RelativeConicArcs.Covered",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-      "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-      "RelativeConicArcs.arc_insert_iff_not_covered",
-      "RelativeConicArcs.arc_insert_of_not_covered",
-      "RelativeConicArcs.uncovered"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_subset_holes": [
-      "ProjectiveCap.Projective.LegalExtensions",
-      "ProjectiveCap.Projective.Point",
-      "RelativeConicArcs.CompleteOutside",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-      "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-      "RelativeConicArcs.ProjectiveBridge.legalExtensions_subset_holes_of_completeOutside"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.legalExtensions_subset_holes_of_completeOutside": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.LegalExtensions",
-      "ProjectiveCap.Projective.Point",
-      "ProjectiveCap.Projective.mem_legalExtensions",
-      "RelativeConicArcs.CompleteOutside",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-      "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-      "RelativeConicArcs.ProjectiveBridge.move_mem_holes_of_completeOutside"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.move_mem_holes_of_completeOutside": [
-      "FiniteBuildGame.Move",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point",
-      "RelativeConicArcs.CompleteOutside",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-      "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-      "RelativeConicArcs.ProjectiveBridge.projectiveCap_subset_union_of_completeOutside"
-    ],
     "RelativeConicArcs.ProjectiveBridge.planeOrder_eq_card": [
       "RelativeConicArcs.PlaneOrder",
       "RelativeConicArcs.ProjectiveBridge.Point",
       "RelativeConicArcs.card_points"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.projectiveCap_subset_union_of_completeOutside": [
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Collinear",
-      "RelativeConicArcs.Arc",
-      "RelativeConicArcs.Collinear",
-      "RelativeConicArcs.CompleteOutside",
-      "RelativeConicArcs.Covered",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.collinear_iff_projective_collinear",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-      "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-      "RelativeConicArcs.Secant",
-      "RelativeConicArcs.covered_iff_exists_secant"
-    ],
-    "RelativeConicArcs.ProjectiveBridge.win_parametrizedHoles_iff": [
-      "FiniteBuildGame.Move",
-      "FiniteBuildGame.Win",
-      "FiniteBuildGame.win_iff_exists_move",
-      "ProjectiveCap.Projective.Cap",
-      "ProjectiveCap.Projective.Point",
-      "RelativeConicArcs.Arc",
-      "RelativeConicArcs.CompleteOutside",
-      "RelativeConicArcs.Covered",
-      "RelativeConicArcs.ProjectiveBridge.ParametrizedHoleValid",
-      "RelativeConicArcs.ProjectiveBridge.Point",
-      "RelativeConicArcs.ProjectiveBridge.instDecidableEqPoint",
-      "RelativeConicArcs.ProjectiveBridge.instFintypePoint",
-      "RelativeConicArcs.ProjectiveBridge.move_mem_holes_of_completeOutside"
     ],
     "RelativeConicArcs.admissiblePositions": [
       "RelativeConicArcs.Admissible"
