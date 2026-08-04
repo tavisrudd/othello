@@ -32,8 +32,7 @@ Here `brianchonPoints A` is the off-arc points meeting exactly three secants of 
   projective plane in Mathlib's `Configuration.ProjectivePlane` vocabulary.
 - `RelativeConicArcs.ProjectiveBridge` in `ProjectiveBridge.lean`: points and dual lines are both
   `Projectivization K (Fin 3 → K)`, incidence is orthogonality, and incidence collinearity agrees
-  with the projectivization predicate. It already contains a determinant criterion for collinearity
-  as a private lemma, which this work makes public.
+  with the projectivization predicate.
 - `RelativeConicArcs.ProjectiveTripleNormalization.exists_mapEquiv_ordered_triple`: ordered
   projective transitivity on noncollinear triples, recording the three images pointwise.
 - `ProjectiveCap.Projective.quad_normal_form`: the four-point normal form, which is what the landed
