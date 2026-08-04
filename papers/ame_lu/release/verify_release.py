@@ -15,6 +15,17 @@ PAPER_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = PAPER_ROOT.parents[1]
 MANIFEST_PATH = PAPER_ROOT / "release" / "RELEASE-MANIFEST.json"
 
+# The formal roots this paper claims.  The exact-rigidity and atlas chain exits through the
+# mixed AME--CSS aggregate, which also carries the companion paper's six-party applications;
+# the two-uniform and quantitative appendices exit through their own gate.  Naming both here
+# keeps the release surface a declared contract rather than a filename pattern.
+FORMAL_ROOTS = (
+    "RelativeConicArcs.Gates.AMELUAggregate",
+    "RelativeConicArcs.Gates.AMELUAggregateAxioms",
+    "RelativeConicArcs.Gates.AMELUTwoUniformRigidity",
+    "RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms",
+)
+
 PAPER_FILES = (
     "Makefile",
     "ame-lu.pdf",
@@ -44,19 +55,26 @@ def paper_paths() -> list[str]:
 
 
 def formal_paths() -> list[str]:
-    """Return the complete project-owned AME--LU verification graph."""
-    roots = {
-        str(path.relative_to(REPO_ROOT))
-        for path in
-        (REPO_ROOT / "lean" / "RelativeConicArcs" / "AMELU").glob("*.lean")
-    }
-    roots.update(
-        str(path.relative_to(REPO_ROOT))
-        for path in
-        (REPO_ROOT / "lean" / "RelativeConicArcs" / "Gates").glob(
-            "AMELU*.lean"
-        )
-    )
+    """Return the verification graph of this paper's declared formal roots.
+
+    The roots are named, not matched by filename: a glob over `AMELU*` would
+    silently acquire any future module whose name happens to start that way and
+    silently drop one that is renamed.  Each root's module closure is read from
+    the trust facts the Lean layer extracts by elaboration, so the release
+    surface and the trust spine describe the same graph.
+    """
+    facts_dir = REPO_ROOT / "lean" / "trust" / "facts"
+    modules: set[str] = set()
+    for gate in FORMAL_ROOTS:
+        artifact = facts_dir / f"{gate}.json"
+        if not artifact.is_file():
+            raise SystemExit(
+                f"no trust facts for {gate}; extract them before running the "
+                "formal profile"
+            )
+        facts = json.loads(artifact.read_text())
+        modules.add(gate)
+        modules.update(facts["closure"])
     paths = {
         "lean/flake.lock",
         "lean/flake.nix",
@@ -64,23 +82,10 @@ def formal_paths() -> list[str]:
         "lean/lakefile.toml",
         "lean/lean-toolchain",
     }
-    pending = list(roots)
-    while pending:
-        path = pending.pop()
-        if path in paths:
-            continue
-        paths.add(path)
-        for line in (REPO_ROOT / path).read_text().splitlines():
-            if not line.startswith("import "):
-                continue
-            for module in line.removeprefix("import ").split():
-                dependency = (
-                    REPO_ROOT
-                    / "lean"
-                    / f"{module.replace('.', '/')}.lean"
-                )
-                if dependency.is_file():
-                    pending.append(str(dependency.relative_to(REPO_ROOT)))
+    for module in modules:
+        source = REPO_ROOT / "lean" / f"{module.replace('.', '/')}.lean"
+        if source.is_file():
+            paths.add(str(source.relative_to(REPO_ROOT)))
     return sorted(paths)
 
 

@@ -46,9 +46,9 @@
         "sha256": "47eac5800d57548080d4d7fe5bc2a1d110ac176fa3b9763834283d30c976c6d9"
       },
       {
-        "bytes": 7209,
+        "bytes": 7866,
         "path": "release/verify_release.py",
-        "sha256": "d35203f580b5d8c302a135daa40b3842721b18ee82ccf37b8c1fe9469f351c06"
+        "sha256": "f7e8a6c18394d7f81a1a18d9d5da341cddaed65cfd692da742d7e826a961a1f7"
       },
       {
         "bytes": 8358,
@@ -91,7 +91,7 @@
         "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
       }
     ],
-    "tree_sha256": "298321b57bb5c018c24f525c2dca531b8776936391705e8f2db5f6291bc3addd"
+    "tree_sha256": "cdb1994f2a1f5fd9357adb5f870a11cbc2798911c57e90b47c7b7a8b1f5b523f"
   },
   "formal_companion": {
     "artifacts": [
@@ -426,29 +426,9 @@
         "sha256": "1f634cc20b233c8120a02f7829cdb719f26cc101b306d1d5d595c429f617958a"
       },
       {
-        "bytes": 622,
-        "path": "lean/RelativeConicArcs/Gates/AMELUDictionaryAxioms.lean",
-        "sha256": "b6dd6be076429820d65219c9215ab3bbcc49bd8096ea4ab395324856d095701a"
-      },
-      {
-        "bytes": 588,
-        "path": "lean/RelativeConicArcs/Gates/AMELUExtensionFieldPencil.lean",
-        "sha256": "82b583015226a723b29f4577ba95c81131b2feff2ae437073e9e38a3bb167e3d"
-      },
-      {
-        "bytes": 920,
-        "path": "lean/RelativeConicArcs/Gates/AMELUExtensionFieldPencilAxioms.lean",
-        "sha256": "a161896929adaf9f08b4148ffbec219de9c9f189fbe9405eec67b0880eb95ddc"
-      },
-      {
         "bytes": 537,
         "path": "lean/RelativeConicArcs/Gates/AMELULogicalPhaseFourCopy.lean",
         "sha256": "6bc4fa709f8d3b17f1999a38e69196ac40659cf8dc53de7055f59edf68524bad"
-      },
-      {
-        "bytes": 702,
-        "path": "lean/RelativeConicArcs/Gates/AMELULogicalPhaseFourCopyAxioms.lean",
-        "sha256": "3142cb703c3efeeccf12f8a66072a55502a965f325a0c0093e48224c6ad6c850"
       },
       {
         "bytes": 531,
@@ -456,29 +436,9 @@
         "sha256": "7d052b864c0fb27a08b37bb8d81bf49dabb82b6235e2c15930bb9e3412a69f81"
       },
       {
-        "bytes": 668,
-        "path": "lean/RelativeConicArcs/Gates/AMELUMarginalMomentAxioms.lean",
-        "sha256": "d9b99861bcb4d925eeab52e2360d4c62efb3839f66a373144d41c60db73bb055"
-      },
-      {
-        "bytes": 700,
-        "path": "lean/RelativeConicArcs/Gates/AMELUPartyExtensionSplitting.lean",
-        "sha256": "f6d4eccfea3ad6d99cb06f012eb1a9b2ec1834ff9e642eaa7a45c670f927f06f"
-      },
-      {
-        "bytes": 957,
-        "path": "lean/RelativeConicArcs/Gates/AMELUPartyExtensionSplittingAxioms.lean",
-        "sha256": "7af7e4ec950d5548e3c6c907822dcf48b71366dc35fb35807b21b02b9c1ee146"
-      },
-      {
         "bytes": 408,
         "path": "lean/RelativeConicArcs/Gates/AMELUPencilClassification.lean",
         "sha256": "1e3732cf4142eac6f182d5f07dd84b98136adfe56dbc9bccc1ceba93af4be2b8"
-      },
-      {
-        "bytes": 541,
-        "path": "lean/RelativeConicArcs/Gates/AMELUPencilClassificationAxioms.lean",
-        "sha256": "646083508ee79a4f78af3742a347da37009612fa05843d31fd5c5373affbe0e8"
       },
       {
         "bytes": 315,
@@ -486,19 +446,9 @@
         "sha256": "89c19b40510becef198e0fb9409df462372b6e62d0403550ff3e63d441f6e981"
       },
       {
-        "bytes": 861,
-        "path": "lean/RelativeConicArcs/Gates/AMELUStabilizerDictionaryAxioms.lean",
-        "sha256": "ef9326ef1e649ea475c4e22293338713bd062538bb86c8defe65b76daad0b48e"
-      },
-      {
         "bytes": 328,
         "path": "lean/RelativeConicArcs/Gates/AMELUTransportDivisor.lean",
         "sha256": "3006156e4313495f52ee50c302d576d667ab1d40c396f90fbac9ccd1742d752e"
-      },
-      {
-        "bytes": 1383,
-        "path": "lean/RelativeConicArcs/Gates/AMELUTransportDivisorAxioms.lean",
-        "sha256": "39d7c796c70b67b7d8434f846376fc392ca3741351779094e2168307921946e2"
       },
       {
         "bytes": 593,
@@ -556,6 +506,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "abadac6d461fb360400e3546d8aaeba30e27fa173cd055f735363a7d061c922d"
+    "tree_sha256": "f662ddf1363e38ad3100c0121307d648424664351bd1251dbd9c9794d53fafd3"
   }
 }

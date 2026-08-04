@@ -1,0 +1,1093 @@
+{
+  "closure": [
+    "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.TwoUniformDiscreteness",
+    "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.TwoUniformProductSymmetry",
+    "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
+  ],
+  "declaration_module": {
+    "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.casesOn": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.ctorIdx": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.exists_nearby_symmetry": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.frobeniusSq_le": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.inj": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.injEq": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.noConfusion": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.sizeOf_spec": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusion": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusionType": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.rec": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.recOn": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold_pos": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator.conjTranspose": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator.mul": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.casesOn": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.mk": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.normalized": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.pair": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.rec": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.recOn": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.single": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.Label": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.LocalOperator": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.SystemOperator": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_symm": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_update": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.conjTranspose_localGeneratorSum": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.defectSq": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_mul_symmetry": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.eq_tracelessPart_add_scalar": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_localGeneratorSum_mulVec_eq_zero": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.exp_siteOperator": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.expectation": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.expectation.congr_simp": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_add": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_eq_stateInner": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum_eq_zero": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_sum": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_zero": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.frobeniusSq": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.isHermitian_tracelessPart": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.isProductOperator_one": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum.eq_1": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_zero_of_ray_invariant": "RelativeConicArcs.AMELU.TwoUniformDiscreteness",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_isHermitian": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_smul": "RelativeConicArcs.AMELU.TwoUniformProductSymmetry",
+    "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant": "RelativeConicArcs.AMELU.TwoUniformDiscreteness",
+    "RelativeConicArcs.AMELU.Multipartite.noncommProd_siteOperator": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.single_of_pair": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.siteAlgHom": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteAlgHom_apply": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator.congr_simp": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_add": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_commute": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_conjTranspose": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_eq_tensorOperator": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul_apply_of_ne": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_one": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul_one": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_zero": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_add_right": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_localGeneratorSum_mulVec": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_mulVec_left": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_self_localGeneratorSum_mulVec": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_left": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_right": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.sum_div_const": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.sum_eq_sum_update": "RelativeConicArcs.AMELU.SiteOperators",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_apply": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_conjTranspose": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_eq_noncommProd": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp_eq_exp_traceless_add_scalar": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_one": "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+    "RelativeConicArcs.AMELU.Multipartite.trace_isReal_of_isHermitian": "RelativeConicArcs.AMELU.TwoUniformProductSymmetry",
+    "RelativeConicArcs.AMELU.Multipartite.trace_mul_self_of_isHermitian": "RelativeConicArcs.AMELU.TwoUniformIsometry",
+    "RelativeConicArcs.AMELU.Multipartite.trace_tracelessPart": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart.eq_1": "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart_eq_zero_of_productUnitary_ray_invariant": "RelativeConicArcs.AMELU.TwoUniformProductSymmetry"
+  },
+  "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "lean_version": "4.32.0-rc1",
+  "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "opaque": [],
+  "project_axioms": [],
+  "project_declarations": [
+    "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.casesOn",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.ctorIdx",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.exists_nearby_symmetry",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.frobeniusSq_le",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.inj",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.injEq",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.noConfusion",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusion",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusionType",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.rec",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.recOn",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold",
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold_pos",
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator",
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator.conjTranspose",
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator.mul",
+    "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.casesOn",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.mk",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.normalized",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.pair",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.rec",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.recOn",
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.single",
+    "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+    "RelativeConicArcs.AMELU.Multipartite.Label",
+    "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+    "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+    "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_symm",
+    "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_update",
+    "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition",
+    "RelativeConicArcs.AMELU.Multipartite.conjTranspose_localGeneratorSum",
+    "RelativeConicArcs.AMELU.Multipartite.defectSq",
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_mul_symmetry",
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul",
+    "RelativeConicArcs.AMELU.Multipartite.eq_tracelessPart_add_scalar",
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_localGeneratorSum_mulVec_eq_zero",
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero",
+    "RelativeConicArcs.AMELU.Multipartite.exp_siteOperator",
+    "RelativeConicArcs.AMELU.Multipartite.expectation",
+    "RelativeConicArcs.AMELU.Multipartite.expectation.congr_simp",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_add",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_eq_stateInner",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum_eq_zero",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_sum",
+    "RelativeConicArcs.AMELU.Multipartite.expectation_zero",
+    "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+    "RelativeConicArcs.AMELU.Multipartite.isHermitian_tracelessPart",
+    "RelativeConicArcs.AMELU.Multipartite.isProductOperator_one",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum.eq_1",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_zero_of_ray_invariant",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_isHermitian",
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_smul",
+    "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant",
+    "RelativeConicArcs.AMELU.Multipartite.noncommProd_siteOperator",
+    "RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue",
+    "RelativeConicArcs.AMELU.Multipartite.single_of_pair",
+    "RelativeConicArcs.AMELU.Multipartite.siteAlgHom",
+    "RelativeConicArcs.AMELU.Multipartite.siteAlgHom_apply",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator.congr_simp",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_add",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_commute",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_conjTranspose",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_eq_tensorOperator",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul_apply_of_ne",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_one",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul_one",
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_zero",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_add_right",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_localGeneratorSum_mulVec",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_mulVec_left",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_self_localGeneratorSum_mulVec",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_left",
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_right",
+    "RelativeConicArcs.AMELU.Multipartite.sum_div_const",
+    "RelativeConicArcs.AMELU.Multipartite.sum_eq_sum_update",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_apply",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_conjTranspose",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_eq_noncommProd",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp_eq_exp_traceless_add_scalar",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul",
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_one",
+    "RelativeConicArcs.AMELU.Multipartite.trace_isReal_of_isHermitian",
+    "RelativeConicArcs.AMELU.Multipartite.trace_mul_self_of_isHermitian",
+    "RelativeConicArcs.AMELU.Multipartite.trace_tracelessPart",
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart",
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart.eq_1",
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart_eq_zero_of_productUnitary_ray_invariant"
+  ],
+  "schema_version": 1,
+  "terminal_axioms": {
+    "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_mul_symmetry": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_localGeneratorSum_mulVec_eq_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.exp_siteOperator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_zero_of_ray_invariant": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_localGeneratorSum_mulVec": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_self_localGeneratorSum_mulVec": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_eq_noncommProd": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp_eq_exp_traceless_add_scalar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart_eq_zero_of_productUnitary_ray_invariant": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "unit": "RelativeConicArcs.Gates.AMELUTwoUniformRigidity",
+  "uses": {
+    "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite": [
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs": [
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.casesOn": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.rec",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.ctorIdx": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.exists_nearby_symmetry": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.frobeniusSq_le": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.inj": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.noConfusion",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.injEq": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.inj",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusion",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusion": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.casesOn",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusionType",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.noConfusionType": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.casesOn",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.rec": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.recOn": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.mk",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.rec",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold_pos": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold",
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator.conjTranspose": [
+      "RelativeConicArcs.AMELU.Multipartite.IsProductOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_conjTranspose"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsProductOperator.mul": [
+      "RelativeConicArcs.AMELU.Multipartite.IsProductOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform": [
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.casesOn": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.mk",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.rec",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.mk": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.normalized": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.pair": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.rec": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.mk",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.recOn": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.mk",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.rec",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.single": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.SystemOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_symm": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_update": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition": [
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.exists_nearby_symmetry",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.frobeniusSq_le",
+      "RelativeConicArcs.AMELU.Multipartite.ApproximateDecompositionInputs.threshold",
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul",
+      "RelativeConicArcs.AMELU.Multipartite.frobeniusSq",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.conjTranspose_localGeneratorSum": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_conjTranspose"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.defectSq": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_mul_symmetry": [
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_eq_stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_right"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul": [
+      "RelativeConicArcs.AMELU.Multipartite.IsRaySymmetry",
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.defectSq",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_eq_stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_mulVec_left",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_left"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.eq_tracelessPart_add_scalar": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart.eq_1"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_localGeneratorSum_mulVec_eq_zero": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_self_localGeneratorSum_mulVec"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.exp_siteOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteAlgHom",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation.congr_simp": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation_add": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation_eq_stateInner": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.single",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_sum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.sum_div_const"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum_eq_zero": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation_sum": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_add",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_zero"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.expectation_zero": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.frobeniusSq": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.isHermitian_tracelessPart": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.isProductOperator_one": [
+      "RelativeConicArcs.AMELU.Multipartite.IsProductOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_one"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum.eq_1": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.eq_tracelessPart_add_scalar",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_add",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul_one",
+      "RelativeConicArcs.AMELU.Multipartite.sum_div_const",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_zero_of_ray_invariant": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_zero"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_isHermitian": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.conjTranspose_localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_smul": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_eq_stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_localGeneratorSum_eq_zero",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_isHermitian",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_add_right",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_mulVec_left",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_right"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.noncommProd_siteOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_commute",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_eq_tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_one"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue": [
+      "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_mulVec_left",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_left",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_right"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.single_of_pair": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_one"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteAlgHom": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_add",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_one",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_zero"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteAlgHom_apply": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteAlgHom",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator.congr_simp": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_add": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_commute": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul_apply_of_ne"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_conjTranspose": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_symm",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_eq_tensorOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_update",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply",
+      "RelativeConicArcs.AMELU.Multipartite.sum_eq_sum_update"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul_apply_of_ne": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_update",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply",
+      "RelativeConicArcs.AMELU.Multipartite.sum_eq_sum_update"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_one": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul_one": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_one",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_smul"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.siteOperator_zero": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner": [
+      "RelativeConicArcs.AMELU.Multipartite.Label"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_add_right": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_localGeneratorSum_mulVec": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.pair",
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform.single",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.expectation",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_eq_stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.expectation_sum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_isHermitian",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_mul",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_mulVec_left",
+      "RelativeConicArcs.AMELU.Multipartite.sum_div_const"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_mulVec_left": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_self_localGeneratorSum_mulVec": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner_localGeneratorSum_mulVec",
+      "RelativeConicArcs.AMELU.Multipartite.trace_mul_self_of_isHermitian"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_left": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.stateInner_smul_right": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.stateInner"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.sum_eq_sum_update": [
+      "RelativeConicArcs.AMELU.Multipartite.AgreesOffSite",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.agreesOffSite_update"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_apply": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_conjTranspose": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_eq_noncommProd": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.noncommProd_siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_commute",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.exp_siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum.eq_1",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator",
+      "RelativeConicArcs.AMELU.Multipartite.siteOperator_commute",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_eq_noncommProd"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp_eq_exp_traceless_add_scalar": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tensorOperator_one": [
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_apply"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.trace_isReal_of_isHermitian": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.trace_mul_self_of_isHermitian": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.trace_tracelessPart": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart.eq_1"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart.eq_1": [
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart"
+    ],
+    "RelativeConicArcs.AMELU.Multipartite.tracelessPart_eq_zero_of_productUnitary_ray_invariant": [
+      "RelativeConicArcs.AMELU.Multipartite.IsTwoUniform",
+      "RelativeConicArcs.AMELU.Multipartite.Label",
+      "RelativeConicArcs.AMELU.Multipartite.LocalOperator",
+      "RelativeConicArcs.AMELU.Multipartite.SystemOperator",
+      "RelativeConicArcs.AMELU.Multipartite.isHermitian_tracelessPart",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar",
+      "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_smul",
+      "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator",
+      "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp",
+      "RelativeConicArcs.AMELU.Multipartite.trace_tracelessPart",
+      "RelativeConicArcs.AMELU.Multipartite.tracelessPart"
+    ]
+  },
+  "uses_included": true
+}
