@@ -175,23 +175,14 @@ theorem normalizeTriple_eq_scaleTriple {point : Triple} (nonzero : point ≠ ⟨
         intro third_zero
         exact nonzero (by simp [first_zero, second_zero, third_zero])
       refine ⟨z⁻¹, inv_ne_zero_field z third_nonzero, ?_⟩
-      simp only [normalizeTriple, scaleTriple, verticalTriple, first_zero, second_zero,
-        bne_iff_ne, ne_eq, not_true_eq_false, if_false, ite_false]
-      rw [Triple.mk.injEq]
-      refine ⟨by simp, by simp, ?_⟩
-      rw [mul_comm, mul_inv_cancel_field z third_nonzero]
+      simp [normalizeTriple, scaleTriple, verticalTriple, first_zero, second_zero,
+        mul_comm, mul_inv_cancel_field z third_nonzero]
     · refine ⟨y⁻¹, inv_ne_zero_field y second_zero, ?_⟩
-      simp only [normalizeTriple, scaleTriple, infiniteTriple, first_zero, bne_iff_ne, ne_eq,
-        not_true_eq_false, if_false, ite_false, if_pos]
-      rw [Triple.mk.injEq]
-      refine ⟨by simp, ?_, by ring⟩
-      rw [mul_comm, mul_inv_cancel_field y second_zero]
+      simp [normalizeTriple, scaleTriple, first_zero, second_zero, bne_iff_ne, ne_eq,
+        mul_comm, mul_inv_cancel_field y second_zero]
   · refine ⟨x⁻¹, inv_ne_zero_field x first_zero, ?_⟩
-    simp only [normalizeTriple, scaleTriple, affineTriple, bne_iff_ne, ne_eq, first_zero,
-      not_false_eq_true, if_pos]
-    rw [Triple.mk.injEq]
-    refine ⟨?_, by ring, by ring⟩
-    rw [mul_comm, mul_inv_cancel_field x first_zero]
+    simp [normalizeTriple, scaleTriple, first_zero, bne_iff_ne, ne_eq,
+      mul_comm, mul_inv_cancel_field x first_zero]
 
 /-- Rescaling a normalized representative by a nonzero factor does not change its normalization.
 Decided over all 183 representatives and all 13 scalars. -/
@@ -223,11 +214,12 @@ theorem eq_of_scaleTriple_mem {point image : Triple} {factor : Field13} (nonzero
     have one_case := List.all_eq_true.mp identity 1 (mem_fieldElements 1)
     have : normalizeTriple (scaleTriple 1 image) = image := by
       rcases Bool.or_eq_true .. ▸ one_case with zero_case | equal_case
-      · exact absurd (by simpa using zero_case) one_ne_zero
+      · exact absurd (by simpa using zero_case) (by decide : (1 : Field13) ≠ 0)
       · simpa using equal_case
     simpa [scaleTriple] using this
-  rw [rescaled] at self ⊢
-  exact self.symm.trans normalized ▸ normalized
+  rw [rescaled] at self
+  rw [rescaled]
+  exact self.symm.trans normalized
 
 /-! ## The normalized polar parameter on coordinate triples -/
 
@@ -269,7 +261,8 @@ theorem polarInvariant_act {matrix : Matrix2} (invertible : determinant matrix �
   set commonFactor : Field13 := (firstFactor * secondFactor * determinant matrix ^ 2) ^ 2 with
     commonFactor_def
   have commonFactor_nonzero : commonFactor ≠ 0 := by
-    rw [commonFactor_def]
+    rw [commonFactor_def, pow_two (firstFactor * secondFactor * determinant matrix ^ 2),
+      pow_two (determinant matrix)]
     exact mul_ne_zero_field _ _
       (mul_ne_zero_field _ _
         (mul_ne_zero_field _ _ firstFactor_nonzero secondFactor_nonzero)
@@ -368,8 +361,9 @@ theorem act_injective_on_internalCoordinateList {matrix : Matrix2}
   have adjugate_equal :
       scaleTriple leftFactor (scaleTriple (determinant matrix ^ 2) left) =
         scaleTriple rightFactor (scaleTriple (determinant matrix ^ 2) right) := by
-    rw [← symmetricSquareImage_adjugate matrix left, ← symmetricSquareImage_adjugate matrix right,
-      ← symmetricSquareImage_scaleTriple, ← symmetricSquareImage_scaleTriple, rescaled_images]
+    have transported := congrArg (symmetricSquareImage (adjugate matrix)) rescaled_images
+    rwa [symmetricSquareImage_scaleTriple, symmetricSquareImage_scaleTriple,
+      symmetricSquareImage_adjugate, symmetricSquareImage_adjugate] at transported
   have squared_nonzero : determinant matrix ^ 2 ≠ 0 := by
     have := mul_ne_zero_field _ _ invertible invertible
     simpa [pow_two] using this
@@ -380,13 +374,18 @@ theorem act_injective_on_internalCoordinateList {matrix : Matrix2}
         scaleTriple leftFactor (scaleTriple (determinant matrix ^ 2)
             (scaleTriple (leftFactor⁻¹ * rightFactor) right)) =
           scaleTriple rightFactor (scaleTriple (determinant matrix ^ 2) right) := by
+      have scalar : ∀ coordinate : Field13,
+          leftFactor * (determinant matrix ^ 2 * (leftFactor⁻¹ * rightFactor * coordinate))
+            = rightFactor * (determinant matrix ^ 2 * coordinate) := by
+        intro coordinate
+        calc leftFactor * (determinant matrix ^ 2 * (leftFactor⁻¹ * rightFactor * coordinate))
+            = leftFactor * leftFactor⁻¹ *
+                (rightFactor * (determinant matrix ^ 2 * coordinate)) := by ring
+          _ = rightFactor * (determinant matrix ^ 2 * coordinate) := by
+              rw [mul_inv_cancel_field leftFactor leftFactor_nonzero, one_mul]
       obtain ⟨rx, ry, rz⟩ := right
       simp only [scaleTriple, Triple.mk.injEq]
-      refine ⟨?_, ?_, ?_⟩ <;>
-        · calc leftFactor * (determinant matrix ^ 2 * (leftFactor⁻¹ * rightFactor * _))
-              = leftFactor * leftFactor⁻¹ * (rightFactor * (determinant matrix ^ 2 * _)) := by ring
-            _ = rightFactor * (determinant matrix ^ 2 * _) := by
-                rw [mul_inv_cancel_field leftFactor leftFactor_nonzero, one_mul]
+      exact ⟨scalar rx, scalar ry, scalar rz⟩
     rw [expand]
     exact adjugate_equal
   have factor_nonzero : leftFactor⁻¹ * rightFactor ≠ 0 :=
