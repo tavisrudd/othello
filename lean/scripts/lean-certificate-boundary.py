@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import re
 import subprocess
 import tomllib
@@ -61,16 +63,53 @@ def violations(repo_root: Path, lean_root: Path, config: Path) -> list[str]:
     return sorted(set(problems))
 
 
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def official_library_violations(config: Path, libraries_root: Path) -> list[str]:
+    with config.open("rb") as handle:
+        document = tomllib.load(handle)
+    problems: list[str] = []
+    for package in document.get("package", []):
+        root = libraries_root / package["name"]
+        if not root.is_dir():
+            problems.append(f"{root}: official library checkout is missing")
+            continue
+        head = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=root, check=True, text=True, capture_output=True
+        ).stdout.strip()
+        if head != package["commit"]:
+            problems.append(f"{root}: HEAD {head} does not match pin {package['commit']}")
+        manifest_path = root / "MANIFEST.json"
+        if not manifest_path.is_file():
+            problems.append(f"{manifest_path}: missing")
+            continue
+        if sha256(manifest_path) != package["manifest_sha256"]:
+            problems.append(f"{manifest_path}: hash does not match the monorepo pin")
+            continue
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        for source in manifest.get("sources", []):
+            path = root / source["path"]
+            if not path.is_file() or sha256(path) != source["sha256"]:
+                problems.append(f"{path}: missing or differs from the sealed source")
+    return sorted(set(problems))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--lean-root", type=Path)
     parser.add_argument("--config", type=Path)
+    parser.add_argument("--libraries-root", type=Path, default=Path.home() / "src/lean")
+    parser.add_argument("--verify-official-libraries", action="store_true")
     args = parser.parse_args()
     repo_root = args.repo_root.resolve()
     lean_root = (args.lean_root or repo_root / "lean").resolve()
     config = (args.config or lean_root / "trust/certificate-packages.toml").resolve()
     problems = violations(repo_root, lean_root, config)
+    if args.verify_official_libraries:
+        problems.extend(official_library_violations(config, args.libraries_root.resolve()))
     if problems:
         print("certificate boundary violations:")
         for problem in problems:
