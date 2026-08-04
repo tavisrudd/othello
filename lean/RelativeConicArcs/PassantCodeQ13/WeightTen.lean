@@ -1,5 +1,5 @@
 import RelativeConicArcs.PassantCodeQ13.LogicalSpine
-import RelativeConicArcs.PassantCodeQ13.WeightEight
+import RelativeConicArcs.PassantCodeQ13.PencilJoins
 
 /-!
 # Pencil profiles of weight-ten words in the q=13 passant code
@@ -14,9 +14,10 @@ The terminal theorem transports an arbitrary weight-ten codeword, without choosi
 coordinates or a preferred support point, to exactly one of the two pencil profiles used by the
 finite certificates: one fibre of size three and six singleton fibres with no secant neighbor, or
 seven singleton fibres with two secant neighbors.  Its finite geometric inputs are the seven
-passant lines through an internal point and uniqueness of the joining passant line.  A separate
-finite check identifies the complementary joins with conic secants.  These checks use native
-evaluation on the fixed 78-point normalized model.
+passant lines through an internal point, uniqueness of the joining passant line, and the
+identification of the complementary joins with conic secants.  All three are supplied by
+`RelativeConicArcs.PassantCodeQ13.PencilJoins` and are checked by kernel reduction on the fixed
+78-point normalized model.
 -/
 
 namespace RelativeConicArcs.PassantCodeQ13.WeightTen
@@ -28,16 +29,16 @@ def passantPencil (base : InternalPoint) : Finset PassantLine :=
   Finset.univ.filter fun line => Incident line base
 
 /-- Every internal point lies on exactly seven passant lines. -/
-theorem passantPencil_card (base : InternalPoint) : (passantPencil base).card = 7 := by
-  native_decide +revert
+theorem passantPencil_card (base : InternalPoint) : (passantPencil base).card = 7 :=
+  card_passantLines_through base
 
 /-- Two distinct internal points lie on at most one common passant line. -/
 theorem joining_passantLine_unique (base point : InternalPoint) (distinct : point ≠ base)
     (first second : PassantLine)
     (first_base : Incident first base) (first_point : Incident first point)
     (second_base : Incident second base) (second_point : Incident second point) :
-    first = second := by
-  native_decide +revert
+    first = second :=
+  passantLine_join_unique distinct first_base first_point second_base second_point
 
 /-- Two internal points have secant join when a normalized conic-secant contains both. -/
 def SecantJoin (first second : InternalPoint) : Prop :=
@@ -50,8 +51,8 @@ instance (first second : InternalPoint) : Decidable (SecantJoin first second) :=
 
 /-- Distinct internal points have secant join exactly when they do not have passant join. -/
 theorem not_passantJoin_iff_secantJoin (base point : InternalPoint) (distinct : point ≠ base) :
-    ¬WeightEight.PassantJoin base point ↔ SecantJoin base point := by
-  native_decide +revert
+    ¬WeightEight.PassantJoin base point ↔ SecantJoin base point :=
+  no_common_passantLine_iff_common_secantLine distinct
 
 /-- A semantic passant neighbor of a fixed internal point. -/
 abbrev PassantNeighbor (base : InternalPoint) :=
@@ -102,7 +103,7 @@ def secantNeighborCount (support : Finset InternalPoint) (base : InternalPoint) 
 
 private theorem zmodTwo_eq_zero_or_one (value : ZMod 2) : value = 0 ∨ value = 1 := by
   revert value
-  native_decide
+  decide
 
 private theorem word_eq_one_of_mem_support (word : InternalPoint → ZMod 2)
     {point : InternalPoint} (point_mem : point ∈ CodingBridge.hammingSupport word) :
