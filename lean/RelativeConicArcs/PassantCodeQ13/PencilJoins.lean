@@ -6,9 +6,9 @@ import RelativeConicArcs.PassantCodeQ13.PencilIncidence
 The finite pencil facts of `RelativeConicArcs.PassantCodeQ13.PencilIncidence` are stated on the
 displayed coordinate lists of the normalized `q = 13` model.  This module transports them to the
 subtypes `InternalPoint`, `PassantLine`, and `SecantLine` used by the geometric
-arguments: the passant pencil of an internal point has exactly seven members, two distinct internal
-points are joined by at most one passant line, and two distinct internal points with no common
-passant line have a common conic secant.
+arguments: the passant pencil of an internal point has exactly seven members, the row of a passant
+line has exactly seven members, two distinct internal points are joined by at most one passant
+line, and two distinct internal points with no common passant line have a common conic secant.
 
 Nothing here performs a finite computation; every step is either a membership transport between a
 displayed list and its coordinate finset, or a rearrangement of the corresponding list statement.
@@ -105,6 +105,47 @@ theorem card_passantLines_through (base : InternalPoint) :
       exact ⟨⟨target, coordinate⟩, Finset.mem_filter.mpr ⟨Finset.mem_univ _, value⟩, rfl⟩
   rw [card_eq, List.toFinset_card_of_nodup (passantPencilList_nodup base.1)]
   exact passantPencilList_length base
+
+/-- The displayed internal-point list repeats no coordinate triple. -/
+theorem internalCoordinateList_nodup : internalCoordinateList.Nodup := by
+  decide +kernel
+
+/-- A displayed passant row repeats no coordinate triple. -/
+theorem passantRowList_nodup (line : Triple) : (passantRowList line).Nodup :=
+  internalCoordinateList_nodup.filter _
+
+/-- Membership in a displayed passant row. -/
+theorem mem_passantRowList {point line : Triple} :
+    point ∈ passantRowList line ↔
+      point ∈ internalCoordinateList ∧ lineValue line point = 0 := by
+  simp [passantRowList, List.mem_filter]
+
+/-- The row of a passant line has exactly seven members. -/
+theorem passantRowList_length (line : PassantLine) : (passantRowList line.1).length = 7 := by
+  have table := List.all_eq_true.mp passantRowTable_length
+  have entry := table _ (mem_passantRowTable (mem_passantCoordinateList line))
+  simpa using entry
+
+/-- The set of internal points on a passant line has cardinality seven. -/
+theorem card_internalPoints_on (line : PassantLine) :
+    (Finset.univ.filter fun point : InternalPoint => Incident line point).card = 7 := by
+  classical
+  have card_eq : (Finset.univ.filter fun point : InternalPoint => Incident line point).card
+      = (passantRowList line.1).toFinset.card := by
+    refine Finset.card_bij (fun point _ => point.1) ?_ ?_ ?_
+    · intro point mem
+      exact List.mem_toFinset.mpr (mem_passantRowList.mpr
+        ⟨mem_internalCoordinateList point, (Finset.mem_filter.mp mem).2⟩)
+    · intro first _ second _ equal
+      exact Subtype.ext equal
+    · intro target mem
+      obtain ⟨list_mem, value⟩ := mem_passantRowList.mp (List.mem_toFinset.mp mem)
+      have coordinate : target ∈ internalCoordinates := by
+        rw [← internalCoordinateList_toFinset]
+        exact List.mem_toFinset.mpr list_mem
+      exact ⟨⟨target, coordinate⟩, Finset.mem_filter.mpr ⟨Finset.mem_univ _, value⟩, rfl⟩
+  rw [card_eq, List.toFinset_card_of_nodup (passantRowList_nodup line.1)]
+  exact passantRowList_length line
 
 /-- A passant line joins two internal points exactly when the displayed pencils of the two points
 share a member. -/

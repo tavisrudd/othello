@@ -11,16 +11,18 @@ and a line contains a point exactly when the standard dot product of their coord
 vanishes.
 
 This module computes, for every internal point, the list of passant lines and the list of secant
-lines through it, and records three finite incidence facts about those pencils:
+lines through it, and dually the list of internal points on each passant line, and records four
+finite incidence facts:
 
 * each passant pencil has exactly seven members;
 * two distinct internal points lie on at most one common passant line;
 * two distinct internal points lie on no common passant line exactly when they lie on a common
-  secant line.
+  secant line;
+* each passant line contains exactly seven internal points.
 
-The three facts are stated on the displayed coordinate lists and are decided by kernel reduction of
-a single pencil table over the 78 internal points; the pairwise statements then range over the
-ordered pairs of table entries.  No step uses native evaluation, an external certificate, or a
+The facts are stated on the displayed coordinate lists and are decided by kernel reduction of a
+pencil table over the 78 internal points and a row table over the 78 passant lines; the pairwise
+statements then range over the ordered pairs of pencil-table entries.  No step uses native evaluation, an external certificate, or a
 search over the ambient projective plane.  The transport of these statements to the subtypes
 `InternalPoint` and `PassantLine` is carried out in
 `RelativeConicArcs.PassantCodeQ13.PencilJoins`.
@@ -72,6 +74,25 @@ theorem pencilTable_common_passant_length_le_one :
     pencilTable.all (fun first => pencilTable.all fun second =>
       first.1 == second.1 ||
         decide ((commonPencilLines first.2.1 second.2.1).length ≤ 1)) = true := by
+  decide +kernel
+
+/-- The displayed internal points lying on a given normalized dual line. -/
+def passantRowList (line : Triple) : List Triple :=
+  internalCoordinateList.filter fun point => lineValue line point == 0
+
+/-- Each passant line together with the internal points on it, in the displayed order of the
+passant lines. -/
+def passantRowTable : List (Triple × List Triple) :=
+  passantCoordinateList.map fun line => (line, passantRowList line)
+
+/-- The row table lists the internal points of every displayed passant line. -/
+theorem mem_passantRowTable {line : Triple} (mem : line ∈ passantCoordinateList) :
+    (line, passantRowList line) ∈ passantRowTable :=
+  List.mem_map_of_mem mem
+
+/-- Every passant line contains exactly seven internal points. -/
+theorem passantRowTable_length :
+    passantRowTable.all (fun entry => entry.2.length == 7) = true := by
   decide +kernel
 
 /-- Two distinct internal points lie on no common passant line exactly when they lie on a common

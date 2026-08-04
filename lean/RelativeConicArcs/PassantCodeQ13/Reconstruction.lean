@@ -1,4 +1,5 @@
 import RelativeConicArcs.PassantCodeQ13.AssociationAlgebra
+import RelativeConicArcs.PassantCodeQ13.PencilJoins
 
 /-!
 # Reconstruction from the minimum-support hypergraph
@@ -93,8 +94,8 @@ theorem minimumSupports_eq_weightTwelveLayer
 
 /-- Every passant row in the normalized `q = 13` model contains seven internal points. -/
 theorem passantRow_card (line : PassantLine) :
-    (ConicPassantCode.rowSupport Incident line).card = 7 := by
-  native_decide +revert
+    (ConicPassantCode.rowSupport Incident line).card = 7 :=
+  card_internalPoints_on line
 
 /-- A complete transport for admissible seven-sets identifies the reconstructed row family.
 
