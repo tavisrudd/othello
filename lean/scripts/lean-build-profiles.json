@@ -9,8 +9,10 @@
     "q16-generated": {
       "description": "RelativeConicArcs Q16 generated leaves; approximately 1.3 GiB per worker.",
       "reserve_mib": 8192,
-      "verified_max_threads": 6,
-      "worker_peak_mib": 1330
+    "verified_max_threads": 6,
+    "worker_peak_mib": 1330,
+    "shared_checker_peak_mib": 4102,
+    "concurrent_sibling_peak_mib": 1330
     },
     "clebsch-passages": {
       "description": "Paper III structural gate; measured peak 3.55 GiB, serialized with a 4 GiB envelope.",
