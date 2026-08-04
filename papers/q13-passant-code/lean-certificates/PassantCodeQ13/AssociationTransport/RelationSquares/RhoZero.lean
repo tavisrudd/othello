@@ -49,7 +49,8 @@ theorem rhoZero_square_parity_certificate :
     maskMatrix_maskXor relationRowsRhoNine _ (relationRowsRhoNine_length.trans innerLength.symm),
     maskMatrix_maskXor relationRowsRhoTen relationRowsRhoTwelve
       (relationRowsRhoTen_length.trans relationRowsRhoTwelve_length.symm),
-    booleanMatrix_xor, booleanMatrix_xor, booleanMatrix_xor, booleanMatrix_identity,
+    booleanMatrix_xor, booleanMatrix_xor, booleanMatrix_xor,
+    maskMatrix_identityMasks, booleanMatrix_identity,
     maskMatrix_relationRowsRhoNine, maskMatrix_relationRowsRhoTen,
     maskMatrix_relationRowsRhoTwelve]
   simp only [add_assoc]
