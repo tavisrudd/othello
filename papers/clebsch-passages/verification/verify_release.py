@@ -27,26 +27,6 @@ def run(name: str, command: list[str], cwd: Path = PAPER) -> None:
     print(f"clebsch-passages release: PASS [{name}]")
 
 
-def check_latex_log() -> None:
-    log = (PAPER / "clebsch_passages.log").read_text(
-        encoding="utf-8", errors="replace"
-    )
-    forbidden = (
-        "LaTeX Warning:",
-        "Package rerunfilecheck Warning:",
-        "Overfull \\hbox",
-        "Underfull \\hbox",
-        "undefined references",
-        "undefined citations",
-    )
-    found = [marker for marker in forbidden if marker in log]
-    if found:
-        raise SystemExit(f"clebsch-passages release: FAIL [LaTeX warnings] {found}")
-    if "Output written on clebsch_passages.xdv" not in log:
-        raise SystemExit("clebsch-passages release: FAIL [LaTeX output missing]")
-    print("clebsch-passages release: PASS [warning-free manuscript build]")
-
-
 def check_release_files() -> None:
     allowlist_path = PAPER / "release_files.json"
     allowlist = json.loads(allowlist_path.read_text(encoding="utf-8"))
@@ -194,8 +174,19 @@ def main() -> int:
         args.lean_root.resolve() if args.lean_root else None
     )
 
-    run("manuscript build", ["make", "-B"], PAPER)
-    check_latex_log()
+    run(
+        "spacing lint",
+        ["python3", "../scripts/lint_tex_spacing.py", "clebsch_passages.tex", "sections"],
+        PAPER,
+    )
+    # Deterministic rebuild in a scratch directory, compared byte for byte against the
+    # tracked PDF.  This replaces an in-place `make` that rebuilt the tracked PDF and so
+    # could never detect a manuscript edit committed without refreshing it.
+    run(
+        "manuscript build",
+        ["python3", "verification/check_manuscript_build.py"],
+        PAPER,
+    )
     if lean_checked:
         print("clebsch-passages release: ALL CHECKS PASS")
     else:

@@ -21,6 +21,7 @@
     "sections/09-conclusion.tex",
     "sections/10-references.tex",
     "verification/README.md",
+    "verification/check_manuscript_build.py",
     "verification/evidence/arithmetic_cover.json",
     "verification/evidence/arithmetic_cover.py",
     "verification/evidence/arithmetic_cover.sha256",
