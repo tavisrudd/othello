@@ -714,10 +714,10 @@
   "paper": "mds_css_transversal_groups",
   "pdfs": [
     {
-      "bytes": 198984,
-      "pages": 22,
+      "bytes": 202329,
+      "pages": 23,
       "path": "papers/mds_css_transversal_groups/mds-css-transversal-groups.pdf",
-      "sha256": "08ddf7ec515c8c4d3f437f2315719a44b122a7f6031ba0934fc272fe8492c186"
+      "sha256": "4acbdf789f3ed346e4dc537782e89bab6e304da4f7f54936f17b1fc996022414"
     }
   ],
   "schema_version": 1,
@@ -732,11 +732,11 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/figures/06-pencil-quotient.tex",
-      "sha256": "8cd51bdc3903078504df720dd597cbc2f3a83b48c443f9f095048cebf32f3e15"
+      "sha256": "ead89342e9106fd15a0cb3678e13ad1af24578d6eda78caaffe5647a567c871a"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/01-introduction.tex",
-      "sha256": "6ad0ea695918682d711143b279a9dedc39fce8799f7d50b6ae6c00ed527493db"
+      "sha256": "754b74ae224d920a739a6d17c6fd2cb0c20c998d6b5dd687a75ff7bc72567e87"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/02-geometry-ame-dictionary.tex",
@@ -760,7 +760,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/08-verification-boundary.tex",
-      "sha256": "d6865ba3c64707f980be718d0fd2fbcdb4a775a39d17b8d5ed8ba254f7a24d02"
+      "sha256": "304d2bd569c3cec3e25e5e377671235e7b56246214b85d0ffb504073037ae5c9"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/07-conclusion.tex",

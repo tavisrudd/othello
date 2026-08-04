@@ -167,18 +167,33 @@ beyond redundancy four: exact classifications at redundancies five through seven
   twisted-RS results, and unfinished redundancy ten remain outside.  Numbering and ship-order
   admission wait for C538's manuscript-level review.
 
-**Active unnumbered candidate · `ame_lu`** — *Local-Unitary Rigidity of Stabilizer AME States and
-Transversal Clifford Groups of MDS--CSS Codes*
+**Active unnumbered candidate · `ame_lu`** — *Local-Unitary Rigidity and Quantitative Rounding for
+Stabilizer AME States*
 - *Lane:* `ame-lu`.
-- *Status:* 18-page local candidate with a clean reproducible release candidate; no public deposit,
-  DOI, license grant, or submission has occurred.
+- *Status:* 35-page candidate, deposited as DOI `10.5281/zenodo.21681856`, with a standalone mirror;
+  no submission has occurred.
 - *Owns:* the arbitrary-length LU-to-LC theorem for equal-phase MDS--CSS states, its generalization
   to every stabilizer AME state (CSS, equal phase, classical linearity, and MDS are all unnecessary
-  for rigidity), the factorwise transversal no-go, the exact diagonal-isodual group dichotomy, and
-  the projective logical group `F_q^2 : SL_2(q)` for odd-prime GRS codes of even length `2m <= q+1`.
-- *Trust:* the marginal-to-rigidity chain is in the formal aggregate; the projective-finiteness
-  corollary has a completed module not yet imported by that aggregate, and the Choi/encoder
-  construction and exact GRS transversal-group computation remain manuscript proofs.
+  for rigidity), the factorwise transversal no-go, the Pauli phase-correction lemma, the
+  minimum-support atlas, and the cleaning-based quantitative rounding chain with its uniform scale
+  and the affine stabilizer-character obstruction.
+- *Trust:* the marginal-to-rigidity chain is in the formal aggregate; the quantitative rounding and
+  two-uniform estimates are manuscript proofs, and the Choi/encoder construction remains one.
+
+**Active unnumbered candidate · `mds_css_transversal_groups`** — *Diagonal Isoduality and
+Transversal Clifford Groups of MDS--CSS Codes*
+- *Lane:* `ame-lu`.  Split from the AME rigidity paper above, which it cites and does not reprove.
+- *Status:* 23-page candidate, deposited as DOI `10.5281/zenodo.21766797`, with a standalone mirror;
+  no submission has occurred.
+- *Owns:* the diagonal code-to-dual multiplier line and its nullity test, the exact fixed-party
+  projective transversal group `F_q^2 : SL_2(q)` versus `F_q^2 : T` that the nullity selects, the
+  six-arc self-association and conic boundary, the degree-eight pencil quotient and its
+  local-Clifford/local-unitary classification over odd prime fields, the Frobenius-sector divisors,
+  the Clebsch syndrome application, and the fixed-copy scalar blindness boundary.
+- *Trust:* its own semantic Lean gate `RelativeConicArcs.Gates.MDSCSSTransversalGeometry` and axiom
+  audit, with a registered terminal set and a public claim manifest; the exact carrier,
+  classification, separator, logical-phase, and transport terminals are hypothesis-explicit
+  interfaces over manuscript proofs and replayable certificates.
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base. The Clebsch program is the exception:

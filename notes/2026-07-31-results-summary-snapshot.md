@@ -48,9 +48,11 @@ The results are grouped as follows.
    classifications at redundancies five through seven*.
 8. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
    Structure* — local memory and exact transfer of erasure repair.
-9. *Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford
-   Groups of MDS–CSS Codes* — every product-unitary intertwiner of a stabilizer
-   absolutely maximally entangled state is local Clifford.
+9. *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME
+   States* — every product-unitary intertwiner of a stabilizer absolutely
+   maximally entangled state is local Clifford.  The transversal-group half of
+   this material now stands alone as *Diagonal Isoduality and Transversal
+   Clifford Groups of MDS–CSS Codes*.
 10. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
     extending Frobenius-invariant arcs by conjugate point pairs.
 11. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
@@ -1751,7 +1753,7 @@ The manuscript is assembled and has survived several independent readings. Its
 remaining obstacles are specialist citation review and publication
 infrastructure, not missing central mathematics.
 
-## *Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS–CSS Codes*
+## *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States*
 
 A pure state of \(2m\) parties, each of local dimension \(q\), is *absolutely
 maximally entangled* when every \(m\)-party marginal is maximally mixed. Two
