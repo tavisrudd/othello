@@ -1,4 +1,42 @@
-# C864 — order-eleven package cut: authority side done, downstream blocked
+# C864 — order-eleven point-orbit package cut
+
+**Outcome: the cut is done.** The blocker described further down was dissolved by a change of
+ownership decision, not by the base export it assumed. The point-orbit family, displayed blocks
+included, now belongs to `finitegeom-clebsch-q11-certificates`; the monorepo keeps no point-orbit
+module and consumes the package's pinned trust fact.
+
+What landed, in order: package sources refreshed to the authority's bytes and the displayed-block
+interface added (`9deca60`); manifest sealed over 122 modules (`27fc945`); cold gate green in the
+package root in 17m33s at a 5.61 GiB peak; pack to
+`/home/tavis/lean-backups/clebsch-q11-certificates-27fc945-cache.tgz` (39,336,154 bytes, sha256
+`3ee72f7b0e327b5e4a38b6bc915b5ca9e13e58c526767a6c88c2459a7f0d1ef8`); the package build directory
+quarantined, restored from that pack alone, and the gate then confirmed trace-current with no leaf
+rebuilt; trust fact sealed over 171 declarations from the trace-only run and published (`76e7b43`);
+the fact pinned into `lean/trust/certificate-packages.toml` by hash; the 113 monorepo point-orbit
+modules and the generator deleted, the rigidity gate's four orbit audits and family import dropped,
+and the monorepo gate green again (`ab1dc6cc`). `lean-external-fact.py check` and
+`lean-certificate-boundary.py --verify-official-libraries` are both green, and the package tree is
+clean.
+
+Three findings worth keeping. The gate now also audits `pointVec_eq_projectiveVec`,
+`pointVec_witnessIndex` and `mem_standardConicIndices_iff`, without which the orbit statements
+identify the witness and the conic only by bare index. The sealed fact shows the rigidity terminal
+depending on the two cited Dye 1991 inputs while every point-orbit statement depends on nothing
+beyond `propext`, `Classical.choice` and `Quot.sound`, which is the separation the Dye audit item
+needs. And sealing exposed a real defect in `lean-external-fact.py`: it compared axiom names as
+printed, so one constant rendered unqualified inside its namespace and fully qualified elsewhere in
+the same log read as two conflicting lists; names are now canonicalized when exactly one longer name
+matches at a namespace boundary, with ambiguity still refusing, covered by two new tests.
+
+Still owed before the point-orbit step is closed: the Clebsch-rigidity paper release chain, whose
+`verification/build_trust_manifest.py` still pins package commit `9c5d474f` and must be advanced to
+`76e7b43e` with the trust manifest, statement identity, PDFs and standalone mirror regenerated; and
+a machine check that the modules the package and monorepo both carry stay byte-identical, so the
+drift measured at the start of this cut cannot recur silently.
+
+---
+
+## Superseded: the blocker as it stood before the ownership decision
 
 **Date:** 2026-08-04
 **Lane:** `build-sys`

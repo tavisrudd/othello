@@ -99,14 +99,15 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    The base-library game-free/game split is landed and gate-green in the monorepo: the validity
    predicate now sits in `RelativeConicArcs/ParametrizedHoles.lean`, `Q11Residual` is game-free, and
    the terminals are in `Q11ResidualGame`.
-   The point-orbit interface/payload split is landed and gate-green, and the point-orbit rows are
-   decided to join `finitegeom-clebsch-q11-certificates`.
-   Next: the order-eleven cut is blocked on the exported base surface — the package payload needs
-   the displayed blocks, the base carries no point-orbit module, and no monorepo gate, fact or
-   export config exists for the arcs/rigidity human areas; the base commit must then be published
-   before the package can pin it. After that: the package refresh and reseal, the monorepo
-   deletions, the q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust
-   disposition, and the all-paper export replay.
+   The order-eleven point-orbit family is externalized: `finitegeom-clebsch-q11-certificates` owns
+   it at commit `76e7b43e`, sealed over 122 modules, gate-green, pack/restore-rehearsed
+   trace-current, with its trust fact published and pinned; the monorepo deletions landed and both
+   the boundary and external-fact checks are green.
+   Next: the Clebsch-rigidity paper release chain, which still pins package commit `9c5d474f`;
+   a byte-identity check over the modules the package and monorepo both carry; then the remaining
+   order-eleven families (coding, Brianchon--Petersen, decoding synthesis), the q13/q25 packages,
+   the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the all-paper export
+   replay.
 2. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
