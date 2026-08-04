@@ -7,10 +7,12 @@ import RelativeConicArcs.ClebschMiddleExteriorSquareRows145To345
 /-!
 # Square of the middle-exterior return
 
-This leaf checks the two square identities for signed Hodge complementation
-and the determinant-defined middle-exterior return.  Native decision evaluates
-the definitions imported from `ClebschMiddleExterior`; no return matrix or
-generated certificate is stored here.
+This leaf assembles the two square identities for signed Hodge complementation
+and the determinant-defined middle-exterior return.  The Hodge square is a
+structural argument from the parity of complementary label sums; the return
+square is assembled from the twenty row identities, each of which is a kernel
+decision on the determinant-defined entries.  No return matrix or generated
+certificate is stored here, and no compiled evaluation is used.
 -/
 
 namespace RelativeConicArcs
@@ -21,18 +23,10 @@ open scoped Matrix
 
 set_option maxRecDepth 10000
 
-/-- The two concatenation signs of a triple and its complement multiply to
-minus one, which is the whole content of middle-degree Hodge complementation
-squaring to minus the identity.  The signs are displayed data on the
-lexicographically ordered triple basis, so this is checked on each of the
-twenty labels rather than derived from the permutation sign. -/
-theorem hodgeSign_mul_complement (S : Fin 20) :
-    hodgeSign S * hodgeSign (complementIndex S) = -1 := by
-  fin_cases S <;> rfl
-
 /-- Middle-degree Hodge complementation squares to minus the identity.  The
 matrix has one nonzero entry in each row, at the complementary label, so the
-product collapses to that single term and the sign is the previous lemma. -/
+product collapses to that single term, whose sign is
+`hodgeSign_mul_complement`. -/
 theorem hodgeMatrix_sq :
     hodgeMatrix * hodgeMatrix = -(1 : Matrix (Fin 20) (Fin 20) ℤ) := by
   ext S T

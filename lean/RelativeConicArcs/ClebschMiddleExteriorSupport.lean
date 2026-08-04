@@ -4,9 +4,10 @@ import RelativeConicArcs.ClebschMiddleExterior
 # Mod-two support recovery for the middle-exterior return
 
 This leaf checks the parity graph and the common-neighbor characterization of
-complementation on the twenty increasing triples.  Native decision evaluates
-the determinant-defined return and the finite incidence relations.  No stored
-graph or generated certificate is imported.
+complementation on the twenty increasing triples, by kernel decisions on the
+determinant-defined return and the finite incidence relations.  No stored
+graph or generated certificate is imported, and no compiled evaluation is
+used.
 -/
 
 namespace RelativeConicArcs
@@ -19,11 +20,6 @@ the two triples meet in one label. -/
 theorem middleExterior_mod_two_eq_one_iff (S T : Fin 20) :
     middleExterior S T % 2 = 1 ↔ intersectionSize S T = 1 := by
   decide +revert
-
-/-- Complementation is an involution on the triple basis. -/
-theorem complementIndex_involutive : Function.Involutive complementIndex := by
-  intro S
-  fin_cases S <;> rfl
 
 /-- Common-neighbor counts distinguish equality, complementation, and the two
 nontrivial intersection relations. -/

@@ -4,8 +4,9 @@ import RelativeConicArcs.ClebschMiddleExterior
 # Middle-exterior square on rows 145 through 345
 
 This leaf checks five rows of the determinant-defined square identity by
-native decision.  The row partition bounds elaboration memory; no return
-entries or generated certificate are stored.
+kernel decision on the twenty entries of each row.  The row partition bounds
+elaboration memory; no return entries or generated certificate are stored, and
+no compiled evaluation is used.
 -/
 
 namespace RelativeConicArcs

@@ -34,9 +34,16 @@ intertwining identity is decided over the thirty-six index pairs, and the
 degree-ten comparison determinant falls to cofactor expansion.  Middle-degree
 Hodge complementation squaring to minus the identity is proved structurally
 rather than decided: the matrix carries one nonzero entry per row, so the
-product collapses to a single term whose sign is `hodgeSign_mul_complement`,
-itself a twenty-case `rfl` on the displayed signs.  No generated certificate or externally supplied
-matrix is imported.
+product collapses to a single term whose sign is `hodgeSign_mul_complement`.
+That sign identity is in turn a parity computation.  The displayed
+complementation table is proved to be set complement on the underlying
+three-element subsets, and to be characterized by that property; the displayed
+sign table is proved to be minus one to the number of inversions of the map
+concatenating a triple with its increasing complement, that is, the sign of
+the concatenation permutation.  The inversion count is three less than the sum
+of the triple's labels, complementary label sums add to fifteen, and the
+product of the two signs is therefore `(-1)^17`.  No generated certificate or
+externally supplied matrix is imported.
 -/
 
 #print axioms RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq
@@ -52,6 +59,11 @@ matrix is imported.
 #print axioms RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root
 #print axioms RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot
 
+#print axioms RelativeConicArcs.ClebschMiddleExterior.tripleSet_complementIndex
+#print axioms RelativeConicArcs.ClebschMiddleExterior.eq_complementIndex_iff
+#print axioms RelativeConicArcs.ClebschMiddleExterior.concatenation_bijective
+#print axioms RelativeConicArcs.ClebschMiddleExterior.hodgeSign_eq_neg_one_pow_inversions
+#print axioms RelativeConicArcs.ClebschMiddleExterior.hodgeSign_mul_complement
 #print axioms RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq
 #print axioms RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_complement_entry
 #print axioms RelativeConicArcs.ClebschMiddleExterior.middleExterior_eq_hodge_mul
