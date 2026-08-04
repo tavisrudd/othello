@@ -83,6 +83,30 @@ leaf may be removed until its replacement is connected to the complete domain.  
 use the manuscript's orbit-transitivity and double-count mechanism rather than semantic support
 filtering.
 
+## Standalone pre-release accommodations to reverse
+
+A manuscript-only pre-release of `papers/q13-passant-code` was authorized before the formal closure
+finished, so the standalone export currently omits the Lean companion.  Every accommodation below
+exists only because the companion is not yet publishable, and each must be reversed once the shared
+library is exported, published, and pinned:
+
+- `papers/repositories.toml` excludes `lean-certificates/**` from the `q13-passant-code` export and
+  rewrites the `Makefile` to drop the `lean` target; both the exclusion and that rewrite go away
+  when the companion ships.
+- `papers/q13-passant-code/verification/verify_evidence.py` skips the manifest records naming the
+  companion package or the shared library when the companion directory is absent, reporting the
+  count of skipped checks.  The skip stays only while a manuscript-only checkout is a supported
+  distribution; if the companion always ships, delete it.
+- `papers/q13-passant-code/README.md` states that the Lean development is deposited separately and
+  that this version's formal artifact still contains native-evaluation leaves.  Both sentences must
+  be replaced when the closure lands.
+- The manuscript's public-command paragraph and `verification/README.md` still name
+  `lean-certificates/` as a repository-relative path; the release chain must replace those with the
+  pinned public locator.
+- The standalone mirror `~/src/math-papers/q13-passant-code` has a `git rm` commit removing the
+  companion.  Restoring it downstream is an ordinary forward commit through the exporter, not a
+  history repair.
+
 ## Objective
 
 Replace Paper IV's partial formal mirror by a theorem-complete public Lean
