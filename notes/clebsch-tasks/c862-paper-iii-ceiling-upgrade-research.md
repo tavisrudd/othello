@@ -43,6 +43,50 @@ determinant-line norm factorization with the factor `8000`, and the C809 convers
 recognition theorem with its marking, orientation, weighted, and integral boundaries.
 No manuscript or Lean source was changed. C862 remains active.
 
+## Authorized prose-only edit batch
+
+The user has explicitly authorized applying the cheap prose upgrades now,
+without waiting for the C800 reconciliation, and has expanded C862's scope to
+cover them. This is a deliberate exception to the report-only boundary above and
+to C816's manuscript-promotion ownership: it covers **prose, statement wording,
+front matter, and metadata only**. No theorem is added or removed, no formal
+surface changes, no released version is altered, and no mirror is synchronized.
+C816 retains promotion of the recognition theorem and of any new mathematics.
+
+Batch, in application order:
+
+- [ ] P1 — front matter, all four papers: retire the small-caps gerund subtitle,
+      reduce the banner to the series name and number, extend the epigraph to
+      its five-clause form with breaks at clause boundaries so no bolded clause
+      straddles a line, and give Paper IV the epigraph it lacks.
+- [ ] P2 — Paper III abstract: lead with the discriminant/conductor rather than
+      "we determine the rational twist", per `02-orientation-cover.tex:99–106`.
+- [ ] P3 — Paper III: shadow inventory remark before `thm:operator-shadows`
+      billing the four descriptions by type, which also settles the
+      "four equivalent descriptions" ambiguity.
+- [ ] P4 — Paper III: retitle `\subsection{Why order six is exceptional}`.
+- [ ] P5 — Paper III: state the four-local reconstruction theorem in
+      principal-minor language, with the even-order-minors-only sharpening.
+- [ ] P6 — Paper III: settle the selected-query sufficiency/exact-count
+      ambiguity in one direction.
+- [ ] P7 — Paper III: the two-elevens disambiguation clause.
+- [ ] P8 — Paper III: name the Gaunt factorization as a proposition.
+- [ ] P9 — Paper III: promote the general square-class lemma out of the proof of
+      `thm:arithmetic-main` as an unnamed displayed lemma, not advertised.
+- [ ] P10 — Paper III: keywords and Mathematics Subject Classification additions
+      (`two-graph`, `Seidel matrix`, `principal minors`, `reconstruction`;
+      `05B20`, `05C22`).
+- [ ] P11 — portfolio README: regenerate the paper abstracts from the manuscript
+      sources, add the forced-`q = 11` Sylvester statement to Paper I's standout,
+      cross-link Paper I's chord-defect mechanism to its all-planes
+      generalization in the arcs paper, add the general-theorems table, and
+      replace the vague Paper V description.
+
+Held back from this batch, needing C816 or new mathematics: the spectral remark
+and the determinant-line norm proposition; the all-even-orders recognition
+statement; anything asserting local weighted rigidity, which stays behind the
+rank-14 certificate.
+
 ## Independent review of the proposals
 
 `notes/2026-08-04-c862-paper-iii-and-series-upgrade-review.md` reviews the

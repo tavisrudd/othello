@@ -551,6 +551,86 @@ of value:
 | Whether characteristic three is a genuine bad prime for the paper's model | **narrowed, not settled** | read C708/C711's existing localization first; predicted outcome is that the comparison needs `Z[1/30]`, matching C682's minimal base |
 | Whether the two elevens are ever conflated by readers | **untested, but cheap to prevent** | one clause in the harmonic section |
 
+## Concessions after independent review
+
+An independent Fable pass
+(`notes/2026-08-04-c862-fable-independent-opinion.md`) attacked the five claims
+above. Three are conceded outright and are superseded by its findings; the
+record below is what now governs, not the earlier text of this note.
+
+1. **The Theorem I critique above did not go far enough.** The involution
+   clause is also formal — any isomorphism of quadratic fields intertwines the
+   unique nontrivial automorphisms — and the rank-three clause is dimension
+   division. The only non-formal content is that the incidence deck exchange,
+   defined without reference to `C`, acts as the spectral involution, and the
+   manuscript already owns that calculation inside Proposition
+   `thm:orientation-source` at `03-orientation-source.tex:88–92`. So the
+   spectral statement should be a titled remark, not a numbered theorem in any
+   wording. Proposition II and Theorem III still carry promotion.
+
+2. **The multiplicity-one proposition is the second-best answer to the
+   coincidence objection.** The better answer inverts it. The Pfaffian
+   coefficient of `x_S` is a signed complementary minor, which for a generic
+   symmetric zero-diagonal matrix is not proportional to the triangle product,
+   so the coincidence is a rigidity theorem with a generic counterexample class
+   rather than a representation-theoretic inevitability. Separately, the proof
+   of `thm:operator-shadows` at `05-golden-operator.tex:522–527` shows the
+   middle-exterior diagonal and the Pfaffian coefficient are the same signed
+   complementary minor for *any* symmetric matrix, so two of the four
+   advertised descriptions are one construction written twice. The correct
+   insertion is an inventory remark billing the descriptions by type — one
+   universal identity, one reformulation whose content is the determinant-line
+   norm, one coincidence that characterizes the object — which also resolves the
+   abstract's "four equivalent descriptions" ambiguity better than choosing a
+   count. Multiplicity one stays where it is true: the harmonic bridge.
+
+3. **Keep the epigraph text.** Replacing it is the aim-(c) bad trade; a series
+   about a genuinely beautiful object should not scrub its own affection for it.
+   Fix the line breaks and extend to the five-clause form.
+
+4. **Partially held: the front-matter thesis.** The independent pass puts the
+   split nearer 40/60 packaging to content, on the evidence that the cold
+   reviewer engaged with the mathematics in detail and still scored generality
+   low. That is fair for Paper III's own score, where content placement
+   dominates. The claim in this note concerned the series and portfolio reading,
+   where the entry point does most of the work. Both stand; they answer
+   different questions.
+
+5. **`PJ3` should not be advertised.** Bill it as an unnamed displayed lemma and
+   keep it out of the abstract: it is standard descent for quadratic covers, and
+   an arithmetic-geometry referee who sees it presented as a highlight will mark
+   the paper down. Its value is register, not novelty.
+
+6. **The relative module may be much cheaper than Arm 3 implies**, since the
+   incidence scheme is a projective bundle over the three-skew-form locus, which
+   carries the universal isotropic subbundle. Treat as promising and unverified:
+   the arrow to the Stein normalization is not obviously the one that produces a
+   rank-three sheaf, so this needs a bounded check before Arm 3 is re-costed.
+
+7. **New, and better than anything in this note:** the recognition theorem and
+   the degree observation compose into a statement quantified over all even
+   orders and all symmetric zero-diagonal matrices with nonzero entries, whose
+   entire solution set is the order-six golden operator. Every ingredient is
+   proved; only the statement is new. That is the mathematical rather than
+   editorial form of "the exceptional object as the endpoint of a
+   classification", and it belongs in the recognition subsection of the forward
+   version and as Paper V's opening theorem.
+
+### Front-matter decision
+
+A follow-up pass settled the layout question. The small-caps gerund subtitle and
+the epigraph are the same sentence twice, so the gerund line is retired rather
+than extended. The banner reduces to the series name and number; the epigraph
+carries the arc, extended to five clauses with breaks at clause boundaries so no
+bolded clause straddles a line, and Paper IV gains the epigraph it lacks. The
+proposed variant that would have given the banner a general programme name was
+rejected: it forks the series identity against three immutably released papers
+whose first line is already *The Clebsch cubic*, buys one line inside the
+packaging fraction, and does not touch the impression a referee forms from the
+title and abstract. The softer final clause is kept, because the assertive
+alternate asserts the Rosetta equality that the unity review's own red team
+demoted pending the transport audit.
+
 ## Disposition
 
 C862 remains open. No manuscript, Lean, release, or public-package file was
