@@ -2,7 +2,8 @@ import PassantCodeQ13.AssociationTransport.PackedRows
 import PassantCodeQ13.AssociationTransport.RelationData
 
 /-!
-# Column masks of the minimum-word orbit with symmetric stabilizer
+# Column masks of the orbit with stabilizer isomorphic to the symmetric group on four letters,
+whose Gram matrix is the elliptic relation of polar invariant nine
 
 The displayed column masks of `PassantCodeQ13.AssociationTransport.RelationData` are compared
 entrywise with the transpose of the support matrix of the displayed orbit.  The comparison is

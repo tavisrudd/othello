@@ -128,7 +128,7 @@ def relationRowsRhoTwelve : List Nat := [
   3170693105448059136, 19610953166168787072, 2490310455057572694128,
   2361240244515755012112, 1771508930166529335308, 667834848093099327908]
 
-/-- Column masks of the orbit with stabilizer isomorphic to the symmetric group on four letters: bit `k` of entry `i` records that the `k`-th support of the orbit contains the internal point of index `i`. -/
+/-- Column masks of the orbit with stabilizer isomorphic to the symmetric group on four letters, whose Gram matrix is the elliptic relation of polar invariant nine: bit `k` of entry `i` records that the `k`-th support of the orbit contains the internal point of index `i`. -/
 def orbitSymmetricColumns : List Nat := [
   1238544816080398193015130377, 406199668010747218595289605, 621540241397028212776641292,
   19418666575970258749752418, 619593395086149913726157970, 87044503759844852673609968,
@@ -157,7 +157,7 @@ def orbitSymmetricColumns : List Nat := [
   328912826126487230429136960, 84020346807349129982904449, 164454057491421071253962818,
   619575958868704141138485256, 154752171028215733708394496, 1243077981080424494680510504]
 
-/-- Column masks of the first orbit with a dihedral stabilizer of order 24. -/
+/-- Column masks of the orbit with a dihedral stabilizer of order 24 whose Gram matrix is the elliptic relation of polar invariant nine. -/
 def orbitDihedralAColumns : List Nat := [
   156027066992675395490425097, 79789114490140583933250053, 619283171570652778848584460,
   43597081061791272829789282, 29165409186023649212634258, 310091243627766872635605232,
@@ -186,7 +186,7 @@ def orbitDihedralAColumns : List Nat := [
   39453011970086951589022242, 77843489256820665466488832, 12111145257993059549864064,
   1392767554502911423017910290, 928568514987062771168084097, 20551946531975597448511488]
 
-/-- Column masks of the second orbit with a dihedral stabilizer of order 24. -/
+/-- Column masks of the orbit with a dihedral stabilizer of order 24 whose Gram matrix is the elliptic relation of polar invariant twelve. -/
 def orbitDihedralBColumns : List Nat := [
   43549668460825635291400457, 310096558019547618921957893, 29014219760826392085267212,
   79941400431654806834119778, 155956301257320872372356242, 619291163621991136163266800,
@@ -215,7 +215,7 @@ def orbitDihedralBColumns : List Nat := [
   174093877386942496978894848, 1240509965909847910079529100, 116212716777642793485732100,
   319269937641441248713968128, 623806466569113495920444424, 1551298907335822705524736]
 
-/-- Column masks of the third orbit with a dihedral stabilizer of order 24. -/
+/-- Column masks of the orbit with a dihedral stabilizer of order 24 whose Gram matrix is the elliptic relation of polar invariant ten. -/
 def orbitDihedralCColumns : List Nat := [
   619428089263729024121777155, 155970476993543424346030692, 79800910308081812025409944,
   29014224579745069215549537, 310108961718553259926357258, 43672448800431857714922132,

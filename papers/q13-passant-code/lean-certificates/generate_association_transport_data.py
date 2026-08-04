@@ -44,14 +44,18 @@ DOCSTRINGS = {
         "Row masks of the elliptic relation whose normalized polar invariant is twelve.",
     "orbitSymmetricColumns":
         "Column masks of the orbit with stabilizer isomorphic to the symmetric group on four "
-        "letters: bit `k` of entry `i` records that the `k`-th support of the orbit contains the "
-        "internal point of index `i`.",
+        "letters, whose Gram matrix is the elliptic relation of polar invariant nine: bit `k` of "
+        "entry `i` records that the `k`-th support of the orbit contains the internal point of "
+        "index `i`.",
     "orbitDihedralAColumns":
-        "Column masks of the first orbit with a dihedral stabilizer of order 24.",
+        "Column masks of the orbit with a dihedral stabilizer of order 24 whose Gram matrix is the "
+        "elliptic relation of polar invariant nine.",
     "orbitDihedralBColumns":
-        "Column masks of the second orbit with a dihedral stabilizer of order 24.",
+        "Column masks of the orbit with a dihedral stabilizer of order 24 whose Gram matrix is the "
+        "elliptic relation of polar invariant twelve.",
     "orbitDihedralCColumns":
-        "Column masks of the third orbit with a dihedral stabilizer of order 24.",
+        "Column masks of the orbit with a dihedral stabilizer of order 24 whose Gram matrix is the "
+        "elliptic relation of polar invariant ten.",
 }
 
 
@@ -174,6 +178,7 @@ def main() -> None:
     if arguments.check:
         if not OUTPUT.is_file() or OUTPUT.read_text() != text:
             raise SystemExit(f"{OUTPUT} differs from the generated text")
+        print("q=13 association transport data: PASS")
         return
     OUTPUT.write_text(text)
 

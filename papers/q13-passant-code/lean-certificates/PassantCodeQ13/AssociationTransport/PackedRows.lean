@@ -12,9 +12,14 @@ a left-hand row and a middle index, rather than one operation per triple of indi
 `maskMatrix_maskProduct` proves that this evaluation computes the Boolean parity product of
 `PassantCodeQ13.AssociationTransport.Base`, which `booleanParityProduct_linearize` in turn identifies
 with matrix multiplication over the binary field; `maskMatrix_maskXor` does the same for entrywise
-addition.  The hypotheses are exactly the length conditions making the mask lists describe matrices
-on the stated index types: a mask list shorter than its row count would silently read the zero row.
-Every result in this module is symbolic, and no declaration here performs a finite search.
+addition.  Only the right-hand factor of a product carries a length hypothesis, and that asymmetry is
+the point: the mask evaluation walks the right-hand list, while `booleanParityProduct` sums over the
+middle index type, so a right-hand list shorter than the middle index count would silently drop
+middle indices, and that is the case the hypothesis excludes.  A short left-hand list needs no
+hypothesis, because it makes the mask matrix of the product and the mask matrix of the left factor
+read the zero row at the same indices.  Entrywise exclusive-or constrains both lengths, since it
+reads both lists at the same index.  Every result in this module is symbolic, and no declaration
+here performs a finite search.
 -/
 
 namespace PassantCodeQ13.AssociationTransport

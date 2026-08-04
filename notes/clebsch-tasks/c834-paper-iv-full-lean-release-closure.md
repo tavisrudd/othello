@@ -28,8 +28,23 @@ The association-transport packet and the hidden-field cubic are rewritten for ke
 certificate gate for the whole of that session, so no elaboration, focused gate, or axiom audit
 could be run. The mathematics is independently confirmed by the tracked generator, which refuses to
 emit unless all nine identities the leaves state hold in exact integer arithmetic. Elaborating these
-modules is the first task of the next build window; the exact order and the manifest debt are in the
-report: `notes/2026-08-04-c834-association-transport-kernel-closure.md`.
+modules is the first task of the next build window; the exact order is in the report:
+`notes/2026-08-04-c834-association-transport-kernel-closure.md`. An independent referee pass
+reproduced every committed table and identity from the Lean definitions and found no soundness hole:
+`notes/2026-08-04-c834-independent-review.md`. It also found that the round's first commit left the
+paper's evidence verifier failing on two stale manifest records; that is repaired, the manifest now
+records both generators, both generated data modules, and a statement-shape checker, and the
+verifier passes.
+
+Three things the referee pass surfaced outrank the remaining leaf-by-leaf work. The four relation
+identifications are the memory risk of the association-transport packet, not the orbit columns, and
+should have the modular inversion removed from the checked predicate before anything is split. The
+three native decisions of `PassantCodeQ13.AssociationAlgebra` prove the same identities the packet
+has already reduced, in a parallel mask presentation, and need only a list identification and one
+symbolic bridge. And the symmetric-square action is transitive on the internal points and on each of
+the six relation classes, so an equivariance lemma plus two displayed transporters — a shared layer
+the package has never built — deletes the largest automorphism enumeration outright and collapses
+the structural upgrade's per-point and per-pair statements to a handful of representatives.
 
 Assuming that elaboration succeeds, the paper package under
 `papers/q13-passant-code/lean-certificates` has 46 native decisions across 34 modules — 16 in the

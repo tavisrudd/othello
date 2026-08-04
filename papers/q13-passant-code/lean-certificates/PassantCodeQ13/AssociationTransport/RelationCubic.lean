@@ -1,9 +1,12 @@
 import PassantCodeQ13.AssociationTransport.RelationSquares
 
 /-!
-# The cubic satisfied by the rho-nine relation operator on its image
+# A quartic identity for the rho-nine relation operator
 
-Over the binary field the relation operator `A9` satisfies `B⁴ + B³ + B = 0`.  The only finite input
+Over the binary field the relation operator `A9` satisfies `B⁴ + B³ + B = 0` on the whole ambient
+space of the 78 internal coordinates.  Nothing here proves that the cofactor `t³ + t² + 1` is
+irreducible over the binary field, and nothing here restricts the identity to an image.  The only
+finite input
 beyond the squaring identities is the mixed product `A10 A9`, evaluated on the displayed row masks
 and discharged by kernel reduction; the powers of `B` are then rewritten by the squaring identities
 and the identity is closed by the vanishing of `M + M` over the binary field.
@@ -37,8 +40,7 @@ private theorem addSelf_eq_zero (matrix : Matrix Coordinate Coordinate (ZMod 2))
   ext row column
   simpa using doubling (matrix row column)
 
-/-- The relation operator `A9` satisfies the hidden irreducible cubic on its image: multiplying
-`B³ + B² + I` by `B` gives the zero ambient matrix. -/
+/-- Multiplying `B³ + B² + I` by `B = A9` gives the zero ambient matrix over the binary field. -/
 theorem rhoNine_quartic_vanishes :
     relationLinearMatrix 9 ^ 4 + relationLinearMatrix 9 ^ 3 + relationLinearMatrix 9 = 0 := by
   have square : relationLinearMatrix 9 ^ 2 = relationLinearMatrix 10 := by

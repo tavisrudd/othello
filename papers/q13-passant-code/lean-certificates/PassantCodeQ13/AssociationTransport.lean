@@ -11,8 +11,10 @@ import RelativeConicArcs.PassantCodeQ13.LogicalSpine
 Bounded kernel-reduced leaves check the four relation identities and the Gram/kernel pair for each
 orbit, each on displayed row masks that Lean has identified with the semantic Boolean matrices.
 Their ordinary matrix equalities feed the abstract association-kernel argument, proving that each of
-the four orbit row spaces is exactly the kernel of the rho-zero relation matrix.  Neither this
-aggregator nor any module it imports uses native evaluation.
+the four orbit row spaces is exactly the kernel of the rho-zero relation matrix.  No module under
+`AssociationTransport/` uses native evaluation; the import closure of this aggregator does contain
+native evaluation, in the rank and squaring leaves of `PassantCodeQ13.AssociationAlgebra`, which
+this argument does not use.
 
 Polarity identifies that rho-zero matrix with the passant incidence matrix up to row order.  This
 module fixes the point-vector convention: matrices act on coordinate columns, while the transpose

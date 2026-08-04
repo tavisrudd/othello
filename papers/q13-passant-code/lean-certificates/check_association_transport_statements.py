@@ -13,11 +13,13 @@ from pathlib import Path
 PKG = Path(__file__).parent / "PassantCodeQ13"
 Q = 13
 
+VERBOSE = "--verbose" in sys.argv
 failures = []
 
 
 def check(name, condition):
-    print(f"{'ok  ' if condition else 'FAIL'}  {name}")
+    if VERBOSE:
+        print(f"{'ok  ' if condition else 'FAIL'}  {name}")
     if not condition:
         failures.append(name)
 
@@ -119,13 +121,11 @@ ORBIT_SPEC = {"Symmetric": ("orbitSymmetricSupports", "orbitSymmetricColumns", 9
               "DihedralB": ("orbitDihedralBSupports", "orbitDihedralBColumns", 12),
               "DihedralC": ("orbitDihedralCSupports", "orbitDihedralCColumns", 10)}
 
-print("== RelationMasks: maskMatrix relationRowsRhoV = relationBooleanMatrix V ==")
 for value, name in RELATIONS.items():
     check(f"{name}_entry_certificate",
           mask_matrix(DATA[name], 78, 78) == relation_boolean_matrix(value))
     check(f"{name}_length", len(DATA[name]) == 78)
 
-print("\n== OrbitMasks: maskMatrix columns = (maskMatrix supports).transpose ==")
 for orbit, (supports, columns, _) in ORBIT_SPEC.items():
     check(f"{orbit}Columns_entry_certificate",
           mask_matrix(DATA[columns], 78, 91)
@@ -133,7 +133,6 @@ for orbit, (supports, columns, _) in ORBIT_SPEC.items():
     check(f"{orbit}Supports_length", len(ORBITS[supports]) == 91)
     check(f"{orbit}Columns_length", len(DATA[columns]) == 78)
 
-print("\n== Orbit leaves: the mask identities, and that they are the intended matrix products ==")
 for orbit, (supports, columns, target) in ORBIT_SPEC.items():
     gram_masks = mask_product(DATA[columns], ORBITS[supports])
     check(f"{orbit} gram mask identity", gram_masks == DATA[RELATIONS[target]])
@@ -147,7 +146,6 @@ for orbit, (supports, columns, target) in ORBIT_SPEC.items():
           mask_matrix(kernel_masks, 78, 91)
           == boolean_parity_product(relation_boolean_matrix(0), transpose(N)))
 
-print("\n== RelationSquares ==")
 for source, target in ((9, 10), (10, 12), (12, 9)):
     check(f"A{source} squared is A{target}",
           mask_product(DATA[RELATIONS[source]], DATA[RELATIONS[source]]) == DATA[RELATIONS[target]])
@@ -158,7 +156,6 @@ check("A0 squared is I + A9 + A10 + A12",
 check("identityMasks 78 is the Boolean identity",
       mask_matrix(identity_masks(78), 78, 78) == boolean_identity_matrix(78))
 
-print("\n== RelationCubic ==")
 check("A10 A9 is A12 + A9",
       mask_product(DATA[RELATIONS[10]], DATA[RELATIONS[9]])
       == mask_xor(DATA[RELATIONS[12]], DATA[RELATIONS[9]]))
@@ -173,10 +170,11 @@ check("B to the fourth is B squared squared", B4 == mask_product(B2, B2))
 check("B to the fourth is A12", B4 == DATA[RELATIONS[12]])
 check("B^4 + B^3 + B vanishes", mask_xor(mask_xor(B4, B3), B) == [0] * 78)
 
-print("\n== Cross-check: mask evaluation against the triple-index parity product ==")
 check("maskProduct A9 A9 agrees with booleanParityProduct",
       mask_matrix(mask_product(DATA[RELATIONS[9]], DATA[RELATIONS[9]]), 78, 78)
       == boolean_parity_product(relation_boolean_matrix(9), relation_boolean_matrix(9)))
 
-print(f"\n{len(failures)} failure(s)" + (": " + ", ".join(failures) if failures else ""))
-sys.exit(1 if failures else 0)
+if failures:
+    print(f"{len(failures)} failure(s): " + ", ".join(failures))
+    sys.exit(1)
+print("q=13 association transport statements: PASS")

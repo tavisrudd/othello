@@ -2,7 +2,8 @@ import PassantCodeQ13.AssociationTransport.PackedRows
 import PassantCodeQ13.AssociationTransport.RelationData
 
 /-!
-# Column masks of the second minimum-word orbit with dihedral stabilizer
+# Column masks of the orbit with a dihedral stabilizer of order 24 whose Gram matrix is the
+elliptic relation of polar invariant twelve
 
 The displayed column masks of `PassantCodeQ13.AssociationTransport.RelationData` are compared
 entrywise with the transpose of the support matrix of the displayed orbit.  The comparison is

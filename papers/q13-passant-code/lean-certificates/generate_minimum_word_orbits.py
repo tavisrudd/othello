@@ -156,6 +156,7 @@ def main() -> None:
     if arguments.check:
         if not OUTPUT.is_file() or OUTPUT.read_text() != text:
             raise SystemExit(f"{OUTPUT} differs from the generated text")
+        print("q=13 minimum-word orbit data: PASS")
         return
     OUTPUT.write_text(text)
 
