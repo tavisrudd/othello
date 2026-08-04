@@ -53,6 +53,9 @@
     "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff",
     "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
     "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple",
+    "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
+    "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five",
+    "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor",
     "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced",
     "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification",
     "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps",
@@ -139,6 +142,9 @@
         "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff",
         "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
         "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple",
+        "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
+        "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five",
+        "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor",
         "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced",
         "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification",
         "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps",
@@ -157,7 +163,7 @@
         "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root",
         "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot"
       ],
-      "excluded": "the classical Ramsey theorem, finite-set extension to a common seven-set, normalization from arbitrary labelled two-graphs to the cut API, and identification of the determinant-minus-three family with the aligned family remain human arguments"
+      "excluded": "finite-set extension to a common seven-set, normalization from arbitrary labelled two-graphs to the cut API, and identification of the determinant-minus-three family with the aligned family remain human arguments; anchor existence is no longer excluded, since both halves of the triangle Ramsey equality and the aligned anchor on six labelled points are kernel-checked"
     },
     "HARM-1": {
       "coverage": "partial mechanism; no full row claim",
@@ -182,6 +188,6 @@
   "trust_boundary": {
     "symbolic": "Pinching, conductor, involutive splitting, tight-frame, signed-Gram, switching, aligned-design disambiguation and globalization, Petersen-eigenspace, fixed-line, determinant, and scalar identities are kernel-checked symbolic proofs.",
     "native": "Native decision is confined to displayed finite conference/reflection matrices, explicit finite vectors, finite conference signs, the 16,384 normalized two-cut cases, and the F_11 nonsquare leaf.",
-    "excluded": "No full manuscript row is claimed: the classical Ramsey and finite-set normalization inputs, global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
+    "excluded": "No full manuscript row is claimed: the finite-set normalization inputs, global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
   }
 }

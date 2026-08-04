@@ -59,6 +59,9 @@ claim.
 #print axioms RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff
 #print axioms RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor
 #print axioms RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple
+#print axioms RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple
+#print axioms RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five
+#print axioms RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor
 #print axioms RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced
 #print axioms RelativeConicArcs.AlignedTwoGraph.pairSignature_classification
 #print axioms RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps

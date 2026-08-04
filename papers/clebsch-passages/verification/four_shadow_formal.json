@@ -57,8 +57,8 @@
   },
   "trust_boundary": {
     "excluded": "The rank-14 weighted Jacobian calculation and any global classification of remote weighted solutions are not formalized.",
-    "native": "One theorem, the orientation classifier over the 1024 normalized ten-edge Boolean signings, is discharged by compiled evaluation of a decidable statement and carries a declaration-local axiom. The four declarations below it \u2014 cubicsProportional_four_of_sixTests, cubicsProportional_neg_four_of_sixTests, exists_nonzero_cubicsProportional_iff_conferenceSquare and exists_nonzero_cubicsProportional_smul_iff_conferenceSquare \u2014 inherit that axiom; every other audited declaration depends only on propext, Classical.choice and Quot.sound.",
-    "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, and each surviving polynomial identity are kernel-checked."
+    "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound. The one finite step is kernel reduction: the five vertex balances split the four edges at the first non-root vertex into the six patterns with two positive edges, and in each branch the remaining four balances determine the six remaining edge parameters over their 2^6 assignments, giving the twelve labelled pentagons as a proved classification.",
+    "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, the pentagon classification, and each polynomial identity and coefficient comparison are kernel-checked."
   },
   "verifier_sha256": "9e914111e4bfc2ed38ed0baad4f0b427cb04a932ed656a8d6fe11a90921ad16d"
 }

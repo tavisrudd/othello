@@ -11,7 +11,7 @@
     "map": "verification/passages_formal.json",
     "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
     "supplemental_map": "verification/golden_return_formal.json",
-    "boundary": "Lean proves the abstract pinching, involution, conductor, golden-character, tight-frame, switching, triangle, rooted two-graph reconstruction, normalized aligned-design cut classifier, symbolic third-point disambiguation, overlap consistency, signing transport, principal-four determinant identity, query polynomial, middle-exterior, fixed-conference commutator-Pfaffian, order-six signed-triangle square, support-recovery, Petersen-eigenspace, fixed-line, and scalar-normalization mechanisms. It does not prove the global Hitchin incidence and Stein identifications, the scheme-theoretic chart correspondence, the geometric golden-fibre identification, coherence of the outer six-family, the higher-order inclusion/Ramsey exchange-rigidity argument, the classical Ramsey theorem and finite-set normalization inputs to aligned-design faithfulness, the cross-golden determinant comparison, the classical Joubert--Segre--Igusa identifications, face-axis geometry and the spherical addition theorem, or the raw degree-six moment. No complete geometric manuscript row is claimed."
+    "boundary": "Lean proves the abstract pinching, involution, conductor, golden-character, tight-frame, switching, triangle, rooted two-graph reconstruction, normalized aligned-design cut classifier, symbolic third-point disambiguation, overlap consistency, signing transport, principal-four determinant identity, query polynomial, both halves of the triangle Ramsey equality and the resulting aligned anchor on six labelled points, middle-exterior, fixed-conference commutator-Pfaffian, order-six signed-triangle square, support-recovery, Petersen-eigenspace, fixed-line, and scalar-normalization mechanisms. It does not prove the global Hitchin incidence and Stein identifications, the scheme-theoretic chart correspondence, the geometric golden-fibre identification, coherence of the outer six-family, the higher-order inclusion/Ramsey exchange-rigidity argument, the finite-set normalization inputs to aligned-design faithfulness, the cross-golden determinant comparison, the classical Joubert--Segre--Igusa identifications, face-axis geometry and the spherical addition theorem, or the raw degree-six moment. No complete geometric manuscript row is claimed."
   },
   "claims": [
     {
@@ -159,7 +159,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, characteristic-zero inclusion-rank descent, and the Ramsey equality R(3,3)=6; Lean checks the three-vertex signed-matrix square identity used for the order-six converse, while Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences",
+      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, characteristic-zero inclusion-rank descent, and the Ramsey equality R(3,3)=6, whose two halves are themselves kernel-checked; Lean checks the three-vertex signed-matrix square identity used for the order-six converse, while Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",
@@ -184,7 +184,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by connected Johnson-graph descent; Lean checks the normalized cut classifier, symbolic third-point disambiguation, overlap consistency, switching transport, determinant identity, query polynomial, and calibration, while the classical Ramsey theorem, finite-set extension, and arbitrary-label normalization remain human inputs",
+      "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by connected Johnson-graph descent; Lean checks the normalized cut classifier, symbolic third-point disambiguation, overlap consistency, switching transport, determinant identity, query polynomial, calibration, and anchor existence through both halves of the triangle Ramsey equality, while the finite-set extension and arbitrary-label normalization remain human inputs",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/passages_formal.json",
