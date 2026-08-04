@@ -45,12 +45,16 @@ The formal source namespace is
 \texttt{RelativeConicArcs.AMELU}.  In the checked Lean toolchain
 \texttt{v4.32.0-rc1}, the relevant exact cores lie in the support-profile,
 tensor-rigidity, holonomy-centralizer, stabilizer-dictionary,
-encoder-transversal, and multipartite modules.  Their current aggregate
-audit reports only \texttt{propext}, \texttt{Classical.choice}, and
-\texttt{Quot.sound} for these declarations.  The aggregate belongs to the
-pre-split formal companion: a paper-specific semantic gate and recursive
-formal-root contract have not yet been created.  Accordingly, this paper
-does not describe the whole theorem package as end-to-end formalized.
+encoder-transversal, and multipartite modules.  Their aggregate audit reports
+only \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound} for
+these declarations.  That aggregate spans a wider development than this
+paper: it also carries the six-party MDS--CSS applications that appear in the
+companion paper \cite{RuddMDSCSSTransversalGroups2026}, so it is not a
+closure specific to the results here, and no content-addressed contract
+identifies a subset of it as this paper's own.  Each row of
+Table~\ref{tab:trust-boundary} therefore states which algebraic core is
+kernel checked, and the paper claims no end-to-end formalization of any
+theorem family.
 
 The cleaning theorem uses three cited exact inputs: stabilizer cleaning,
 localization of nested commutators, and the exact three-cleanable-region

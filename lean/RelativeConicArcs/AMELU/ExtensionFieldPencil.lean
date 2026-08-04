@@ -14,13 +14,15 @@ fixed-party intertwiner sector:
 The untwisted off-diagonal divisor is the conic, or GRS, quartic.  The module
 proves both divisor identities and the explicit six-coordinate Gale
 multiplier by ring algebra.  It also packages the extension-field orbit
-argument: once a local-Clifford relation supplies one projective Frobenius
-sector, and conversely a Galois match of the scalar invariant supplies a
-local Clifford, the orbits are exactly the Galois orbits of `pencilZ`.
+criterion: on the hypothesis that a local-Clifford relation supplies one
+projective Frobenius sector, and conversely that a Galois match of the scalar
+invariant supplies a local Clifford, an equivalence of two admitted parameters
+holds exactly when their `pencilZ` values are Galois related.
 
 The divisor theorems and field-automorphism identities are unconditional and
-kernel checked.  The final orbit theorem is conditional on the two named
-sector-to-Clifford bridges; it does not postulate a hidden reconstruction of
+kernel checked.  The orbit criterion is not a classification: it
+takes the two named sector-to-Clifford bridges as explicit hypotheses, neither
+of which is proved here, and it does not postulate a hidden reconstruction of
 a Desarguesian spread.
 -/
 
@@ -236,9 +238,11 @@ structure ExtensionFieldPencilOrbitInputs
       IsAdmittedNonGRSParameter u →
       PencilZGaloisRelated twist t u → extensionEquivalent t u
 
-/-- Once the sector-reduction and construction bridges hold, extension-field
-orbits of the admitted non-GRS pencil are exactly Galois orbits of `pencilZ`. -/
-theorem extensionField_pencil_classified_by_galoisZ
+/-- Given the sector-reduction and construction bridges as hypotheses, two
+admitted non-GRS parameters are `extensionEquivalent` exactly when their
+`pencilZ` values lie in one Galois orbit.  The bridges are not proved here, so
+this is a criterion relative to them rather than a classification. -/
+theorem extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges
     [Field 𝔽] [Fintype 𝔽] [DecidableEq 𝔽]
     {κ : Type*} (twist : κ → 𝔽 ≃+* 𝔽)
     (w : WeylConvention 𝔽) (classification : PencilClassificationInputs 𝔽 w)

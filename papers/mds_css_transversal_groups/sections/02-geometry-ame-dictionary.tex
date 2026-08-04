@@ -89,8 +89,11 @@ projective Pauli-label Lagrangian is
 \[
  L_C=(C\oplus0)+(0\oplus C^\perp)\leq\F_q^{12}.
 \]
-Monomial code equivalence, together with a party permutation, induces
-local-Clifford equivalence of the corresponding states.
+Conversely, for a linear \([6,3]_q\) code \(C\) the state
+\(\lvert\Psi_C\rangle\) is \(\AME(6,q)\) only if \(C\) has minimum distance
+four, so the dictionary is an equivalence.  Monomial code equivalence,
+together with a party permutation, induces local-Clifford equivalence of the
+corresponding states.
 \end{proposition}
 
 \begin{proof}
@@ -108,6 +111,13 @@ projection to \(I\) runs once through \(\F_q^3\).  Hence every
 three-party reduction is \(q^{-3}I\).  Smaller reductions are maximally
 mixed by tracing again, so the state is \(\AME(6,q)\).  Its support has
 the minimum possible size \(q^3\).
+
+For the converse, suppose the linear \([6,3]_q\) code \(C\) has a nonzero word
+\(c\) of weight at most three, and choose a three-party set \(A\) containing
+its support.  Then \((c,0)\) is a nonidentity label of \(L_C\) supported on
+\(A\), so \(L_C(A)\neq\{0\}\) and \(\rho_A\) is not maximally mixed.  Hence an
+AME equal-phase state forces minimum distance four, which at length six and
+dimension three is the exact \([6,3,4]_q\) parameter set.
 
 A column multiplier \(x\mapsto ax\) is a single-party Clifford operation:
 it sends \(X(b)\) to \(X(ab)\) and \(Z(b)\) to \(Z(a^{-1}b)\).

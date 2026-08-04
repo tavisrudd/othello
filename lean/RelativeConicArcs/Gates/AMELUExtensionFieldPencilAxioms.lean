@@ -16,4 +16,4 @@ terminals in one import environment.
 #print axioms RelativeConicArcs.AMELU.twistedPencil_sectors_disjoint
 #print axioms RelativeConicArcs.AMELU.map_pencilZ
 #print axioms RelativeConicArcs.AMELU.admitted_nonGRS_map_iff
-#print axioms RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ
+#print axioms RelativeConicArcs.AMELU.extensionEquivalent_iff_pencilZGaloisRelated_of_orbitBridges
