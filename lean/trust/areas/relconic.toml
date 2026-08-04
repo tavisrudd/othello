@@ -804,6 +804,124 @@ declaration = "RelativeConicArcs.AMELU.genericPartyPermutation_natCard"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
+# The two-uniform and quantitative-rounding chain of the stabilizer-AME rigidity manuscript.
+# It is reached through its own import-only gate rather than through the mixed AME--LU aggregate,
+# because no result here enters the MDS--CSS transversal-group closure.  Every terminal is checked
+# by kernel reduction; the approximate-decomposition terminal states its analytic inputs as
+# structure fields rather than proving them.
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
+terminals = [
+  "RelativeConicArcs.AMELU.Multipartite.stateInner_localGeneratorSum_mulVec",
+  "RelativeConicArcs.AMELU.Multipartite.stateInner_self_localGeneratorSum_mulVec",
+  "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero",
+  "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_localGeneratorSum_mulVec_eq_zero",
+  "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul",
+  "RelativeConicArcs.AMELU.Multipartite.tensorOperator_eq_noncommProd",
+  "RelativeConicArcs.AMELU.Multipartite.exp_siteOperator",
+  "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp",
+  "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar",
+  "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp_eq_exp_traceless_add_scalar",
+  "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant",
+  "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_zero_of_ray_invariant",
+  "RelativeConicArcs.AMELU.Multipartite.tracelessPart_eq_zero_of_productUnitary_ray_invariant",
+  "RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue",
+  "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul",
+  "RelativeConicArcs.AMELU.Multipartite.defectSq_mul_symmetry",
+  "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition",
+]
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.stateInner_localGeneratorSum_mulVec"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.stateInner_self_localGeneratorSum_mulVec"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_stateInner_self_eq_zero"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.eq_zero_of_localGeneratorSum_mulVec_eq_zero"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.tensorOperator_mul"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.tensorOperator_eq_noncommProd"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.exp_siteOperator"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_traceless_add_scalar"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.tensorOperator_exp_eq_exp_traceless_add_scalar"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.localGeneratorSum_eq_zero_of_ray_invariant"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.tracelessPart_eq_zero_of_productUnitary_ray_invariant"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.defectSq_mul_symmetry"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[gate]]
 module = "RelativeConicArcs.Gates.GoldenProofSpine"
 terminals = [
