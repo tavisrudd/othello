@@ -463,3 +463,33 @@ In the authority, the release chain then ran per `papers/clebsch-rigidity/verifi
 Not done here: forward synchronization of the standalone mirror `~/src/math-papers/clebsch-rigidity`
 and its isolated replay (a later C855 step), the base `PROVENANCE.md` module-count drift repair, and
 pushing the certificate package.
+
+## Stale-PDF repair and blocked mirror sync (2026-08-03, later)
+
+Two findings after the first green chain:
+
+1. **The release runner does not detect a stale tracked PDF.** It builds both manuscripts only in
+   isolated temporary directories, checking pages and warnings, and attests the *tracked* PDF's
+   hash as an input — so the first green chain shipped a manuscript PDF whose Section 9 still
+   rendered the old pins. Repaired: both PDFs rebuilt in place with `latexmk -xelatex`, the pin
+   page visually inspected (all four pins and both digests render correctly), and the
+   update-output / manifest-re-record / clean-source sequence rerun to a fresh pass attesting the
+   rebuilt PDF. The companion PDF was byte-unchanged. This blind spot is now documented in
+   `notes/export-and-mirror-conventions.md`.
+
+2. **Standalone-mirror sync is hard-blocked by the task-ID contamination debt.** The build-sys
+   exporter `papers/scripts/export-paper-repos.py sync` refuses `clebsch-rigidity` outright: its
+   reference scan flags the task-ID-named verification files (the clique-structure, q13
+   weight-ten, and terminal-orbit-DAG scripts and data) and every reference to them in the
+   companion and verification surfaces. The current public mirror already ships those names, so
+   nothing regressed, but no further sync can land until the coordinated rename recorded in the
+   C855 freeze note (files, manifests, verifier, README, companion prose, checker-output
+   certificate, then the full release chain again) is performed. The repository-map entry for
+   `clebsch-rigidity` has no rewrites or exclusions; the fix is the authority-side rename, not a
+   scan waiver.
+
+The export process guide requested by the author is committed as
+`notes/export-and-mirror-conventions.md`, routed from the workspace guide's standalone-mirrors
+section. It fixes the edit authorities (all Lean edits in `~/src/othello/lean`, all paper edits in
+`~/src/othello/papers/`), the downstream write-only-via-tooling rule for `~/src/lean/` and
+`~/src/math-papers/`, and the complete paper-export and Lean-for-paper chains.
