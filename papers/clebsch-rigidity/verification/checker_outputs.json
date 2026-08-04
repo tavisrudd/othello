@@ -71,9 +71,9 @@
       "sha256": "d6e4c25e99f431815d4744a37d16a753dd5e9f2e456a1d5f7a04afeceaa437df"
     },
     "q13-weight-ten-certificate": {
-      "bytes": 118,
+      "bytes": 113,
       "lines": 1,
-      "sha256": "5802c4f7be53ca807ff7ffa5252d8b902b2c6fdf85b02ed8279373c3510fced4"
+      "sha256": "592b7be77d59021982a6d793f282b01feb4ac36f8a4d9e6a2c2e343fdf66d24e"
     },
     "q13-weight-ten-independent": {
       "bytes": 174,
@@ -91,9 +91,9 @@
       "sha256": "e7a67317e0dcfda1973cf813b7577093ab6feb4d2532a6d3d1d31275af946814"
     },
     "terminal-orbit-dag-regeneration": {
-      "bytes": 42,
+      "bytes": 37,
       "lines": 1,
-      "sha256": "d831b031cd978306a1daa84dca61afdd14244045cedfd3c9f3b1f18c33aec262"
+      "sha256": "b067b767d882787c3469b618e6ec49bd5dfca3c587ffa2c28a065c1395716080"
     },
     "verification/conic_filling_verify.py": {
       "bytes": 228,

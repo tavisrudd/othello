@@ -154,7 +154,7 @@ def main() -> int:
     if used_checks != set(commands):
         raise ValueError("every admitted executable check must support a claim")
 
-    boundary_path = Path(__file__).with_name("c725_finite_boundary_manifest.json")
+    boundary_path = Path(__file__).with_name("finite_boundary_manifest.json")
     boundary = json.loads(boundary_path.read_text(encoding="utf-8"))
     boundary_claims = boundary.get("claims")
     if not isinstance(boundary_claims, list) or len(boundary_claims) != 7:

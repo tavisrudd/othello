@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-ARTIFACT = ROOT / "c723_q13_weight10_profiles.json"
+ARTIFACT = ROOT / "q13_weight10_profiles.json"
 Q = 13
 
 
@@ -161,7 +161,7 @@ def build_record() -> dict[str, object]:
         b"".join(column.to_bytes(10, "big") for column in columns)
     ).hexdigest()
     return {
-        "schema": "c723-q13-weight10-profiles-v1",
+        "schema": "q13-weight10-profiles-v1",
         "field": 13,
         "conic": "XZ-Y^2=0",
         "base_point": list(internal[base]),

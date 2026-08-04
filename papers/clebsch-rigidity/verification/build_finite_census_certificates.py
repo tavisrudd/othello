@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and verify the compact C724 finite-census certificates.
+"""Build and verify the compact finite-census certificates.
 
 The default mode checks the tracked proof objects directly.  ``--audit``
 regenerates them from the full frame-normalized enumerations and compares the

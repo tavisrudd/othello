@@ -1,5 +1,5 @@
 {
-  "schema": "clebsch-c725-final-finite-boundary-v1",
+  "schema": "clebsch-final-finite-boundary-v1",
   "claims": [
     {
       "id": "q11-six-arc-census-and-numerical-gap",
@@ -32,17 +32,17 @@
     {
       "id": "q13-weight-ten-profile-exclusions",
       "mode": "xor-disjointness-certificate-plus-independent-full-fibre-dynamic-programming",
-      "artifact": "verification/c723_q13_weight10_profiles.json",
-      "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9",
+      "artifact": "verification/q13_weight10_profiles.json",
+      "sha256": "396bd914ee21e8fe07a6ebbd77f71baf5e59ec2c2dd23c522a7973118640b30e",
       "boundary": "the two exhaustive binary-incidence profiles remain irreducibly finite"
     },
     {
       "id": "q13-q17-q19-maximum-passant-arc-size-six",
       "mode": "root-edge-orbit-dag-plus-independent-ordered-backtracking-and-legacy-cross-language-replay",
-      "artifact": "verification/c725_terminal_orbit_dag.json.gz",
-      "sha256": "8e18a337ed6a0c60633e8c3df901201fa08d1e04b1ad6d4d7e3aef04a6a111bd",
-      "independent_artifact": "verification/c725_terminal_orbit_dag_replay.json",
-      "independent_sha256": "ba9d31b9b428cc8d2efc171293f4c9bf1d3d607371dabccc6049cba5f6bdbdc6",
+      "artifact": "verification/terminal_orbit_dag.json.gz",
+      "sha256": "cb666c206dd797aef8f06b22f0c6aa61c58b6658f4a139ee271114c0c21f66c4",
+      "independent_artifact": "verification/terminal_orbit_dag_replay.json",
+      "independent_sha256": "a8756a774074907553feb76f72e07df3e70c2c4ccdce3bf5cc442bd3c36fc3cc",
       "legacy_inputs": [
         {
           "path": "verification/conic_filling_q13.json",
@@ -62,10 +62,10 @@
     {
       "id": "q17-q19-terminal-six-arc-projective-classification",
       "mode": "root-edge-orbit-dag-plus-global-projective-quotient",
-      "artifact": "verification/c725_terminal_orbit_dag.json.gz",
-      "sha256": "8e18a337ed6a0c60633e8c3df901201fa08d1e04b1ad6d4d7e3aef04a6a111bd",
-      "independent_artifact": "verification/c725_terminal_orbit_dag_replay.json",
-      "independent_sha256": "ba9d31b9b428cc8d2efc171293f4c9bf1d3d607371dabccc6049cba5f6bdbdc6",
+      "artifact": "verification/terminal_orbit_dag.json.gz",
+      "sha256": "cb666c206dd797aef8f06b22f0c6aa61c58b6658f4a139ee271114c0c21f66c4",
+      "independent_artifact": "verification/terminal_orbit_dag_replay.json",
+      "independent_sha256": "a8756a774074907553feb76f72e07df3e70c2c4ccdce3bf5cc442bd3c36fc3cc",
       "boundary": "22 and 94 projective classes with empty extension sets, complete only for q=17 and q=19; no uniform orbit formula"
     }
   ]

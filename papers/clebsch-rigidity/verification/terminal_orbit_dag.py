@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and directly verify the C725 terminal passant-arc orbit DAG.
+"""Build and directly verify the terminal passant-arc orbit DAG.
 
 The vertices are PGL(2,q)-orbits of pairwise-passant arcs with no collinear
 triple, for q in 13, 17, 19.  Edges are extension orbits under the setwise
@@ -30,9 +30,9 @@ EXPECTED_SUMMARY = {
     17: {"passant_edges": 20808, "edge_orbits": 13, "six_orbits": 22, "six_mass": 50184, "pair_fingerprints": 22},
     19: {"passant_edges": 32490, "edge_orbits": 15, "six_orbits": 94, "six_mass": 395124, "pair_fingerprints": 92},
 }
-SCHEMA = "clebsch-c725-terminal-passant-orbit-dag-v1"
-CERTIFICATE = Path(__file__).with_name("c725_terminal_orbit_dag.json.gz")
-MANIFEST = Path(__file__).with_name("c725_finite_boundary_manifest.json")
+SCHEMA = "clebsch-terminal-passant-orbit-dag-v1"
+CERTIFICATE = Path(__file__).with_name("terminal_orbit_dag.json.gz")
+MANIFEST = Path(__file__).with_name("finite_boundary_manifest.json")
 PAPER_ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -115,7 +115,7 @@ def read_certificate() -> dict[str, object]:
 
 def verify_manifest() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    assert manifest["schema"] == "clebsch-c725-final-finite-boundary-v1"
+    assert manifest["schema"] == "clebsch-final-finite-boundary-v1"
     checked: set[tuple[str, str]] = set()
     for claim in manifest["claims"]:
         pairs = []
@@ -616,7 +616,7 @@ def main() -> None:
         else:
             assert encoded == CERTIFICATE.read_bytes()
             verify_manifest()
-            print("c725_terminal_orbit_dag_regeneration=PASS")
+            print("terminal_orbit_dag_regeneration=PASS")
         return
 
     certificate = read_certificate()

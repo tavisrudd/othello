@@ -591,10 +591,10 @@ def components_by_row(
                 finite_certificate(
                     "q=13 weight-ten profile exclusions",
                     [
-                        ["python3", "verification/c723_q13_weight10_profiles.py", "--check"],
-                        ["python3", "verification/c723_q13_weight10_independent.py"],
+                        ["python3", "verification/q13_weight10_profiles.py", "--check"],
+                        ["python3", "verification/q13_weight10_independent.py"],
                     ],
-                    ["verification/c723_q13_weight10_profiles.json"],
+                    ["verification/q13_weight10_profiles.json"],
                     "The two exhaustive pencil-profile domains contain 6,531,840 and 166,561,920 supports.",
                     "Canonical disjoint sets of partial 78-bit XOR syndromes exclude zero; a differently split full-fibre dynamic program checks the same domains.",
                     "The old meet-in-the-middle branch in check_q13_tangent_code.py remains corroboration.",
@@ -611,13 +611,13 @@ def components_by_row(
                 finite_certificate(
                     "q=13,17,19 maximum passant-arc size six",
                     [
-                        ["python3", "verification/c725_terminal_orbit_dag.py"],
-                        ["python3", "verification/c725_terminal_orbit_dag.py", "--check"],
-                        ["python3", "verification/c725_terminal_orbit_dag_replay.py", "--check"],
+                        ["python3", "verification/terminal_orbit_dag.py"],
+                        ["python3", "verification/terminal_orbit_dag.py", "--check"],
+                        ["python3", "verification/terminal_orbit_dag_replay.py", "--check"],
                     ],
                     [
-                        "verification/c725_terminal_orbit_dag.json.gz",
-                        "verification/c725_terminal_orbit_dag_replay.json",
+                        "verification/terminal_orbit_dag.json.gz",
+                        "verification/terminal_orbit_dag_replay.json",
                     ],
                     "The complete 604, 4,442, and 11,260-node root-edge orbit DAGs over q=13,17,19, including every transition and terminal blocker assignment.",
                     "Rooted transition masses and the global edge-coverage identity inductively cover every labelled arc; explicit six-point witnesses prove sharpness.",
@@ -757,27 +757,27 @@ def checks() -> list[dict[str, object]]:
         ),
         (
             "q13-weight-ten-certificate",
-            ["python3", "verification/c723_q13_weight10_profiles.py", "--check"],
+            ["python3", "verification/q13_weight10_profiles.py", "--check"],
             900,
         ),
         (
             "q13-weight-ten-independent",
-            ["python3", "verification/c723_q13_weight10_independent.py"],
+            ["python3", "verification/q13_weight10_independent.py"],
             900,
         ),
         (
             "terminal-orbit-dag-direct",
-            ["python3", "verification/c725_terminal_orbit_dag.py"],
+            ["python3", "verification/terminal_orbit_dag.py"],
             180,
         ),
         (
             "terminal-orbit-dag-regeneration",
-            ["python3", "verification/c725_terminal_orbit_dag.py", "--check"],
+            ["python3", "verification/terminal_orbit_dag.py", "--check"],
             900,
         ),
         (
             "terminal-orbit-dag-independent",
-            ["python3", "verification/c725_terminal_orbit_dag_replay.py", "--check"],
+            ["python3", "verification/terminal_orbit_dag_replay.py", "--check"],
             900,
         ),
     ):
@@ -846,7 +846,7 @@ def build_manifest() -> dict[str, object]:
                 "paper", "verification/computational_companion_trust.json"
             ),
             "finite_boundary_manifest": file_evidence(
-                "paper", "verification/c725_finite_boundary_manifest.json"
+                "paper", "verification/finite_boundary_manifest.json"
             ),
             "evidence": [
                 file_evidence("paper", f"verification/{name}")
@@ -854,14 +854,14 @@ def build_manifest() -> dict[str, object]:
                     "build_finite_census_certificates.py",
                     "finite_census_certificates.json",
                     "finite_census_certificates.sha256",
-                    "c723_q13_weight10_profiles.py",
-                    "c723_q13_weight10_profiles.json",
-                    "c723_q13_weight10_independent.py",
-                    "c725_terminal_orbit_dag.py",
-                    "c725_terminal_orbit_dag.json.gz",
-                    "c725_terminal_orbit_dag_replay.py",
-                    "c725_terminal_orbit_dag_replay.json",
-                    "c725_terminal_orbit_dag.sha256",
+                    "q13_weight10_profiles.py",
+                    "q13_weight10_profiles.json",
+                    "q13_weight10_independent.py",
+                    "terminal_orbit_dag.py",
+                    "terminal_orbit_dag.json.gz",
+                    "terminal_orbit_dag_replay.py",
+                    "terminal_orbit_dag_replay.json",
+                    "terminal_orbit_dag.sha256",
                 )
             ],
         },

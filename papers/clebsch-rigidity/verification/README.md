@@ -14,7 +14,7 @@ The paper and companion separate exactly five proof modes:
 Its validator enforces the five-mode vocabulary, pins every proof object by
 SHA-256, checks every claim's reduction/invariant/finite-leaf/replay fields,
 and can execute all ten companion commands with `--run`.
-`c725_finite_boundary_manifest.json` is the lower-level finite-leaf map.  Its
+`finite_boundary_manifest.json` is the lower-level finite-leaf map.  Its
 paths are paper-root-relative and its terminal classification is backed by
 the root-edge DAG and independent labelled replay, with no dependency on an
 internal task record.

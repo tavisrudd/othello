@@ -633,7 +633,7 @@
               {
                 "path": "verification/build_finite_census_certificates.py",
                 "repository": "paper",
-                "sha256": "5ab3f74d40b4c2565f2405974c6cefdc9217bdbf651b7e74266b4566bd1662b2"
+                "sha256": "58975c6fdd519478177827e9450b4d8d470de16d69a34c32214ec957300610b6"
               }
             ],
             "checker_commands": [
@@ -762,7 +762,7 @@
               {
                 "path": "verification/build_finite_census_certificates.py",
                 "repository": "paper",
-                "sha256": "5ab3f74d40b4c2565f2405974c6cefdc9217bdbf651b7e74266b4566bd1662b2"
+                "sha256": "58975c6fdd519478177827e9450b4d8d470de16d69a34c32214ec957300610b6"
               }
             ],
             "checker_commands": [
@@ -1548,28 +1548,28 @@
           "computation": {
             "artifacts": [
               {
-                "path": "verification/c723_q13_weight10_profiles.py",
+                "path": "verification/q13_weight10_profiles.py",
                 "repository": "paper",
-                "sha256": "96e95067a3ce8f0f69180c6d78049ddf94905091640a07dfe366234fd383dd78"
+                "sha256": "9172d34d3e0f8d1066eb7b2d6b9839bf0c5c02ac2c6061b4344858d057326226"
               },
               {
-                "path": "verification/c723_q13_weight10_independent.py",
+                "path": "verification/q13_weight10_independent.py",
                 "repository": "paper",
-                "sha256": "6cafb6ec9fc18feda15a3e0d9ab324b8e00b19d2f6281c822d84d22980f701a5"
+                "sha256": "1301cf60e0b7d89684bea192d0b6cce7beb87dfd47ed7da6d31eeb32f795700f"
               }
             ],
             "checker_commands": [
               {
                 "argv": [
                   "python3",
-                  "verification/c723_q13_weight10_profiles.py",
+                  "verification/q13_weight10_profiles.py",
                   "--check"
                 ]
               },
               {
                 "argv": [
                   "python3",
-                  "verification/c723_q13_weight10_independent.py"
+                  "verification/q13_weight10_independent.py"
                 ]
               }
             ],
@@ -1579,9 +1579,9 @@
             "soundness_bridge": "Canonical disjoint sets of partial 78-bit XOR syndromes exclude zero; a differently split full-fibre dynamic program checks the same domains.",
             "supporting_artifacts": [
               {
-                "path": "verification/c723_q13_weight10_profiles.json",
+                "path": "verification/q13_weight10_profiles.json",
                 "repository": "paper",
-                "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9"
+                "sha256": "396bd914ee21e8fe07a6ebbd77f71baf5e59ec2c2dd23c522a7973118640b30e"
               }
             ]
           },
@@ -1619,7 +1619,7 @@
               {
                 "path": "verification/build_finite_census_certificates.py",
                 "repository": "paper",
-                "sha256": "5ab3f74d40b4c2565f2405974c6cefdc9217bdbf651b7e74266b4566bd1662b2"
+                "sha256": "58975c6fdd519478177827e9450b4d8d470de16d69a34c32214ec957300610b6"
               }
             ],
             "checker_commands": [
@@ -1649,34 +1649,34 @@
           "computation": {
             "artifacts": [
               {
-                "path": "verification/c725_terminal_orbit_dag.py",
+                "path": "verification/terminal_orbit_dag.py",
                 "repository": "paper",
-                "sha256": "1935033475798f8fd38a37213cf5821100f2a669b68e7678881ef53cd06ddc6d"
+                "sha256": "d4eef9654c2f3ceb7ec48f3cba199a1a6490cafd3d1f3e4dd3f22c91b85c19b8"
               },
               {
-                "path": "verification/c725_terminal_orbit_dag_replay.py",
+                "path": "verification/terminal_orbit_dag_replay.py",
                 "repository": "paper",
-                "sha256": "070562160723ab83fe3a7a40b03b65622af3969329581d7d1ac9586303266afb"
+                "sha256": "e8357f4b875a9f803e63acff43dc1c7cdc658f527859849750baad26d52de4c3"
               }
             ],
             "checker_commands": [
               {
                 "argv": [
                   "python3",
-                  "verification/c725_terminal_orbit_dag.py"
+                  "verification/terminal_orbit_dag.py"
                 ]
               },
               {
                 "argv": [
                   "python3",
-                  "verification/c725_terminal_orbit_dag.py",
+                  "verification/terminal_orbit_dag.py",
                   "--check"
                 ]
               },
               {
                 "argv": [
                   "python3",
-                  "verification/c725_terminal_orbit_dag_replay.py",
+                  "verification/terminal_orbit_dag_replay.py",
                   "--check"
                 ]
               }
@@ -1687,14 +1687,14 @@
             "soundness_bridge": "Rooted transition masses and the global edge-coverage identity inductively cover every labelled arc; explicit six-point witnesses prove sharpness.",
             "supporting_artifacts": [
               {
-                "path": "verification/c725_terminal_orbit_dag.json.gz",
+                "path": "verification/terminal_orbit_dag.json.gz",
                 "repository": "paper",
-                "sha256": "8e18a337ed6a0c60633e8c3df901201fa08d1e04b1ad6d4d7e3aef04a6a111bd"
+                "sha256": "cb666c206dd797aef8f06b22f0c6aa61c58b6658f4a139ee271114c0c21f66c4"
               },
               {
-                "path": "verification/c725_terminal_orbit_dag_replay.json",
+                "path": "verification/terminal_orbit_dag_replay.json",
                 "repository": "paper",
-                "sha256": "ba9d31b9b428cc8d2efc171293f4c9bf1d3d607371dabccc6049cba5f6bdbdc6"
+                "sha256": "a8756a774074907553feb76f72e07df3e70c2c4ccdce3bf5cc442bd3c36fc3cc"
               }
             ]
           },
@@ -1778,7 +1778,7 @@
               {
                 "path": "verification/build_finite_census_certificates.py",
                 "repository": "paper",
-                "sha256": "5ab3f74d40b4c2565f2405974c6cefdc9217bdbf651b7e74266b4566bd1662b2"
+                "sha256": "58975c6fdd519478177827e9450b4d8d470de16d69a34c32214ec957300610b6"
               }
             ],
             "checker_commands": [
@@ -1858,7 +1858,7 @@
       {
         "path": "verification/build_finite_census_certificates.py",
         "repository": "paper",
-        "sha256": "5ab3f74d40b4c2565f2405974c6cefdc9217bdbf651b7e74266b4566bd1662b2"
+        "sha256": "58975c6fdd519478177827e9450b4d8d470de16d69a34c32214ec957300610b6"
       },
       {
         "path": "verification/finite_census_certificates.json",
@@ -1871,55 +1871,55 @@
         "sha256": "e9a9ccf8d9c80843c4b77d34e0b3735d887fe91cbbb62e71d94cf97ae881441f"
       },
       {
-        "path": "verification/c723_q13_weight10_profiles.py",
+        "path": "verification/q13_weight10_profiles.py",
         "repository": "paper",
-        "sha256": "96e95067a3ce8f0f69180c6d78049ddf94905091640a07dfe366234fd383dd78"
+        "sha256": "9172d34d3e0f8d1066eb7b2d6b9839bf0c5c02ac2c6061b4344858d057326226"
       },
       {
-        "path": "verification/c723_q13_weight10_profiles.json",
+        "path": "verification/q13_weight10_profiles.json",
         "repository": "paper",
-        "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9"
+        "sha256": "396bd914ee21e8fe07a6ebbd77f71baf5e59ec2c2dd23c522a7973118640b30e"
       },
       {
-        "path": "verification/c723_q13_weight10_independent.py",
+        "path": "verification/q13_weight10_independent.py",
         "repository": "paper",
-        "sha256": "6cafb6ec9fc18feda15a3e0d9ab324b8e00b19d2f6281c822d84d22980f701a5"
+        "sha256": "1301cf60e0b7d89684bea192d0b6cce7beb87dfd47ed7da6d31eeb32f795700f"
       },
       {
-        "path": "verification/c725_terminal_orbit_dag.py",
+        "path": "verification/terminal_orbit_dag.py",
         "repository": "paper",
-        "sha256": "1935033475798f8fd38a37213cf5821100f2a669b68e7678881ef53cd06ddc6d"
+        "sha256": "d4eef9654c2f3ceb7ec48f3cba199a1a6490cafd3d1f3e4dd3f22c91b85c19b8"
       },
       {
-        "path": "verification/c725_terminal_orbit_dag.json.gz",
+        "path": "verification/terminal_orbit_dag.json.gz",
         "repository": "paper",
-        "sha256": "8e18a337ed6a0c60633e8c3df901201fa08d1e04b1ad6d4d7e3aef04a6a111bd"
+        "sha256": "cb666c206dd797aef8f06b22f0c6aa61c58b6658f4a139ee271114c0c21f66c4"
       },
       {
-        "path": "verification/c725_terminal_orbit_dag_replay.py",
+        "path": "verification/terminal_orbit_dag_replay.py",
         "repository": "paper",
-        "sha256": "070562160723ab83fe3a7a40b03b65622af3969329581d7d1ac9586303266afb"
+        "sha256": "e8357f4b875a9f803e63acff43dc1c7cdc658f527859849750baad26d52de4c3"
       },
       {
-        "path": "verification/c725_terminal_orbit_dag_replay.json",
+        "path": "verification/terminal_orbit_dag_replay.json",
         "repository": "paper",
-        "sha256": "ba9d31b9b428cc8d2efc171293f4c9bf1d3d607371dabccc6049cba5f6bdbdc6"
+        "sha256": "a8756a774074907553feb76f72e07df3e70c2c4ccdce3bf5cc442bd3c36fc3cc"
       },
       {
-        "path": "verification/c725_terminal_orbit_dag.sha256",
+        "path": "verification/terminal_orbit_dag.sha256",
         "repository": "paper",
-        "sha256": "96bf23dcadcc391995e596559bb2b77a7cc7a7c1d3d22b620769039f55e879b9"
+        "sha256": "a99f37c7c6c62f1d0966987507964bede42c204e57c9fe95f5c9c5a5b7bc3db6"
       }
     ],
     "finite_boundary_manifest": {
-      "path": "verification/c725_finite_boundary_manifest.json",
+      "path": "verification/finite_boundary_manifest.json",
       "repository": "paper",
-      "sha256": "cfad5275c75424b7c3a29b0189e9be17b3c241687b7cda7528293d59e31d3204"
+      "sha256": "c8b106d98036183841b782a566b7f8fbeb8965bbed94e9778523f0794f057798"
     },
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "50ec790620d1fc0ee827237f4eefd64506dedeb203fd6e201cbc05be4676495c"
+      "sha256": "997f4c42550b7fae1ff6eceb27dcce1f4d9643a1d074c78940d71307a6f9d128"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
@@ -1929,7 +1929,7 @@
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
       "repository": "paper",
-      "sha256": "219800e7eb9842f5d64f767762769a470cbd14e19c46c18a1708baf4189d2835"
+      "sha256": "884603c4596e2827acae3c9b26a5e43fa2bd2808c664438fd5f833d7ff19d90a"
     }
   },
   "lean_repository": {
@@ -1954,7 +1954,7 @@
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "f6e4ae78568a207251d4617961a5171b55f000f57b06187cda6522f62fcd3123"
+      "sha256": "4e3e8f687d50b60b01356b30580ebed1493f67965af822c59c1e51f4b22d9211"
     }
   ],
   "reproducibility_environment": {
@@ -1984,19 +1984,19 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "35d95ae3b9cd791340628a9c1527ecde32c22a3c0a803b6fc7bc2ced5384204f"
+    "sha256": "6591947d93b8ddd27a8575ce8856d3b056b4e9df44907356e927ae057a737291"
   },
   "verify_all": {
     "checker_output_certificate": {
       "generator": {
         "path": "verification/capture_checker_outputs.py",
         "repository": "paper",
-        "sha256": "ec57c9af91a35d1d2b7c3b2ce37c60e10214f3ffdde5ff403716ad3d09f2e333"
+        "sha256": "5b3494cfd89fda4683492c42a47e186fec9ebbd043cdca6abdf73008f2ce4a9c"
       },
       "output": {
         "path": "verification/checker_outputs.json",
         "repository": "paper",
-        "sha256": "cd4386336e06e11c9e2aa3228c18e828ad216bc78fd05f7387502ab6a06d0e04"
+        "sha256": "36ab223c1d92cf4bd82a2e52f830b37faa03e7405d3fb742bb1bb3cdc4d76d7a"
       }
     },
     "checks": [
@@ -2253,21 +2253,21 @@
       {
         "argv": [
           "python3",
-          "verification/c723_q13_weight10_profiles.py",
+          "verification/q13_weight10_profiles.py",
           "--check"
         ],
         "cwd": ".",
         "id": "check-q13-weight-ten-certificate",
         "repository": "paper",
-        "stdout_bytes": 118,
+        "stdout_bytes": 113,
         "stdout_lines": 1,
-        "stdout_sha256": "5802c4f7be53ca807ff7ffa5252d8b902b2c6fdf85b02ed8279373c3510fced4",
+        "stdout_sha256": "592b7be77d59021982a6d793f282b01feb4ac36f8a4d9e6a2c2e343fdf66d24e",
         "timeout_seconds": 900
       },
       {
         "argv": [
           "python3",
-          "verification/c723_q13_weight10_independent.py"
+          "verification/q13_weight10_independent.py"
         ],
         "cwd": ".",
         "id": "check-q13-weight-ten-independent",
@@ -2280,7 +2280,7 @@
       {
         "argv": [
           "python3",
-          "verification/c725_terminal_orbit_dag.py"
+          "verification/terminal_orbit_dag.py"
         ],
         "cwd": ".",
         "id": "check-terminal-orbit-dag-direct",
@@ -2293,21 +2293,21 @@
       {
         "argv": [
           "python3",
-          "verification/c725_terminal_orbit_dag.py",
+          "verification/terminal_orbit_dag.py",
           "--check"
         ],
         "cwd": ".",
         "id": "check-terminal-orbit-dag-regeneration",
         "repository": "paper",
-        "stdout_bytes": 42,
+        "stdout_bytes": 37,
         "stdout_lines": 1,
-        "stdout_sha256": "d831b031cd978306a1daa84dca61afdd14244045cedfd3c9f3b1f18c33aec262",
+        "stdout_sha256": "b067b767d882787c3469b618e6ec49bd5dfca3c587ffa2c28a065c1395716080",
         "timeout_seconds": 900
       },
       {
         "argv": [
           "python3",
-          "verification/c725_terminal_orbit_dag_replay.py",
+          "verification/terminal_orbit_dag_replay.py",
           "--check"
         ],
         "cwd": ".",
@@ -2360,7 +2360,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "0313536969c9cc25c0c440b5ce79bd0da72f023bfb5e207a9f8f3ef7da97ab82"
+        "sha256": "9f791ecea493c3214a417f692a7a37efb252a1550e9647d1819c23c4ef34494c"
       },
       {
         "path": "verification/verify_trust_manifest.py",
@@ -2380,7 +2380,7 @@
       {
         "path": "verification/verify_computational_companion.py",
         "repository": "paper",
-        "sha256": "166ba9e7582fdb698156abea935566e104e6847a0b9777d575bec21a6b90091f"
+        "sha256": "101809596aba775189b593ad877b8fb460c515153d89d98e94630175ac56ed7f"
       }
     ]
   }

@@ -14,16 +14,16 @@
       "sha256": "7a50315cdf7a605d6d979bb2a070d1ddbf98b65cf53404e0e60da1fd47aaa041"
     },
     {
-      "path": "verification/c723_q13_weight10_profiles.json",
-      "sha256": "aebe48e831c9da14c33e3bf1ec1156ba8a7e0ee8bbe676b413e528fb83e87ff9"
+      "path": "verification/q13_weight10_profiles.json",
+      "sha256": "396bd914ee21e8fe07a6ebbd77f71baf5e59ec2c2dd23c522a7973118640b30e"
     },
     {
-      "path": "verification/c725_terminal_orbit_dag.json.gz",
-      "sha256": "8e18a337ed6a0c60633e8c3df901201fa08d1e04b1ad6d4d7e3aef04a6a111bd"
+      "path": "verification/terminal_orbit_dag.json.gz",
+      "sha256": "cb666c206dd797aef8f06b22f0c6aa61c58b6658f4a139ee271114c0c21f66c4"
     },
     {
-      "path": "verification/c725_terminal_orbit_dag_replay.json",
-      "sha256": "ba9d31b9b428cc8d2efc171293f4c9bf1d3d607371dabccc6049cba5f6bdbdc6"
+      "path": "verification/terminal_orbit_dag_replay.json",
+      "sha256": "a8756a774074907553feb76f72e07df3e70c2c4ccdce3bf5cc442bd3c36fc3cc"
     }
   ],
   "claims": [
@@ -102,7 +102,7 @@
       "residual_finite_leaf": "The exact domains of 6,531,840 and 166,561,920 supports.",
       "replay": "A separately split full-fibre dynamic program reproduces both empty intersections.",
       "checks": ["q13-weight-ten-certificate", "q13-weight-ten-independent"],
-      "artifacts": ["verification/c723_q13_weight10_profiles.json"]
+      "artifacts": ["verification/q13_weight10_profiles.json"]
     },
     {
       "id": "q13-minimum-layer-classification",
@@ -145,8 +145,8 @@
       "replay": "Independent increasing-index backtracking and the legacy C++/discriminant replay reproduce the labelled levels.",
       "checks": ["terminal-orbit-dag-direct", "terminal-orbit-dag-regeneration", "terminal-orbit-dag-independent", "terminal-orbit-legacy"],
       "artifacts": [
-        "verification/c725_terminal_orbit_dag.json.gz",
-        "verification/c725_terminal_orbit_dag_replay.json"
+        "verification/terminal_orbit_dag.json.gz",
+        "verification/terminal_orbit_dag_replay.json"
       ]
     },
     {
@@ -165,11 +165,11 @@
     {"id": "finite-census-direct", "argv": ["python3", "verification/build_finite_census_certificates.py"]},
     {"id": "finite-census-audit", "argv": ["python3", "verification/build_finite_census_certificates.py", "--audit"]},
     {"id": "q13-tangent-code", "argv": ["python3", "check_q13_tangent_code.py"]},
-    {"id": "q13-weight-ten-certificate", "argv": ["python3", "verification/c723_q13_weight10_profiles.py", "--check"]},
-    {"id": "q13-weight-ten-independent", "argv": ["python3", "verification/c723_q13_weight10_independent.py"]},
-    {"id": "terminal-orbit-dag-direct", "argv": ["python3", "verification/c725_terminal_orbit_dag.py"]},
-    {"id": "terminal-orbit-dag-regeneration", "argv": ["python3", "verification/c725_terminal_orbit_dag.py", "--check"]},
-    {"id": "terminal-orbit-dag-independent", "argv": ["python3", "verification/c725_terminal_orbit_dag_replay.py", "--check"]},
+    {"id": "q13-weight-ten-certificate", "argv": ["python3", "verification/q13_weight10_profiles.py", "--check"]},
+    {"id": "q13-weight-ten-independent", "argv": ["python3", "verification/q13_weight10_independent.py"]},
+    {"id": "terminal-orbit-dag-direct", "argv": ["python3", "verification/terminal_orbit_dag.py"]},
+    {"id": "terminal-orbit-dag-regeneration", "argv": ["python3", "verification/terminal_orbit_dag.py", "--check"]},
+    {"id": "terminal-orbit-dag-independent", "argv": ["python3", "verification/terminal_orbit_dag_replay.py", "--check"]},
     {"id": "terminal-orbit-legacy", "argv": ["python3", "verification/conic_filling_verify.py"]}
   ]
 }

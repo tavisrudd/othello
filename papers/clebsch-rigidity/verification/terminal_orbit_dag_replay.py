@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent ordered backtracking replay for the C725 orbit DAG.
+"""Independent ordered backtracking replay for the terminal orbit DAG.
 
 This program never computes a projective canonical key or a stabilizer.  It
 enumerates labelled arcs once, in increasing point-index order, using the
@@ -18,9 +18,9 @@ from pathlib import Path
 
 
 Point = tuple[int, int, int]
-CERTIFICATE = Path(__file__).with_name("c725_terminal_orbit_dag.json.gz")
-OUTPUT = Path(__file__).with_name("c725_terminal_orbit_dag_replay.json")
-SCHEMA = "clebsch-c725-terminal-passant-orbit-dag-v1"
+CERTIFICATE = Path(__file__).with_name("terminal_orbit_dag.json.gz")
+OUTPUT = Path(__file__).with_name("terminal_orbit_dag_replay.json")
+SCHEMA = "clebsch-terminal-passant-orbit-dag-v1"
 
 
 def normalize(vector: Point, q: int) -> Point:
@@ -152,7 +152,7 @@ def generate() -> dict[str, object]:
     certificate = json.loads(gzip.decompress(CERTIFICATE.read_bytes()))
     assert certificate["schema"] == SCHEMA
     return {
-        "schema": "clebsch-c725-ordered-backtracking-replay-v1",
+        "schema": "clebsch-ordered-backtracking-replay-v1",
         "fields": [field_replay(field) for field in certificate["fields"]],
     }
 

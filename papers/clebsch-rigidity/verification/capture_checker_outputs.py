@@ -38,23 +38,23 @@ EXTRA_CHECKERS = (
     ),
     (
         "q13-weight-ten-certificate",
-        (sys.executable, "verification/c723_q13_weight10_profiles.py", "--check"),
+        (sys.executable, "verification/q13_weight10_profiles.py", "--check"),
     ),
     (
         "q13-weight-ten-independent",
-        (sys.executable, "verification/c723_q13_weight10_independent.py"),
+        (sys.executable, "verification/q13_weight10_independent.py"),
     ),
     (
         "terminal-orbit-dag-direct",
-        (sys.executable, "verification/c725_terminal_orbit_dag.py"),
+        (sys.executable, "verification/terminal_orbit_dag.py"),
     ),
     (
         "terminal-orbit-dag-regeneration",
-        (sys.executable, "verification/c725_terminal_orbit_dag.py", "--check"),
+        (sys.executable, "verification/terminal_orbit_dag.py", "--check"),
     ),
     (
         "terminal-orbit-dag-independent",
-        (sys.executable, "verification/c725_terminal_orbit_dag_replay.py", "--check"),
+        (sys.executable, "verification/terminal_orbit_dag_replay.py", "--check"),
     ),
 )
 

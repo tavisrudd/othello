@@ -899,7 +899,7 @@ Its paths are relative to the present directory.  Recorded outputs and
 source hashes are in \path{verification/checker_outputs.json}.  The terminal
 $k=8$ certificate is checked by
 \begin{center}
-\small\path{verification/c725_terminal_orbit_dag.py}.
+\small\path{verification/terminal_orbit_dag.py}.
 \end{center}
 The program \path{verification/conic_filling_verify.py} is instead a legacy
 independent replay.  The clean companion entry point is
@@ -923,13 +923,13 @@ Fifteen classes, gap, low-degree rigidity, and seven-arc leaves
 $q=9$ exclusion and uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py} \\
 $q=13$ weight-ten profiles
-& \path{verification/c723_q13_weight10_profiles.py} \path{--check} and
-  \path{verification/c723_q13_weight10_independent.py} \\
+& \path{verification/q13_weight10_profiles.py} \path{--check} and
+  \path{verification/q13_weight10_independent.py} \\
 $q=13$ code, minimum layer, structural identities, and old audits
 & \path{check_q13_tangent_code.py} \\
 Root-edge DAGs and independent labelled replay
-& \path{verification/c725_terminal_orbit_dag.py} and
-  \path{verification/c725_terminal_orbit_dag_replay.py} \path{--check} \\
+& \path{verification/terminal_orbit_dag.py} and
+  \path{verification/terminal_orbit_dag_replay.py} \path{--check} \\
 Legacy passant-arc replay for $q=13,17,19$
 & \path{verification/conic_filling_verify.py} \\
 \bottomrule

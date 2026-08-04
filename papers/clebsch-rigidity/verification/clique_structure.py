@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact C722 audit for the q=9 and q=13 clique-structure branches."""
+"""Exact audit for the q=9 and q=13 clique-structure branches."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-ARTIFACT = ROOT / "c722_clique_structure.json"
+ARTIFACT = ROOT / "clique_structure.json"
 
 Q9_DISTANCE_TWO_MASKS = (
     53594597232, 54622190240, 33466854864, 50697329312,
@@ -464,7 +464,7 @@ def q13_record() -> dict[str, object]:
 
 def build_record() -> dict[str, object]:
     return {
-        "schema": "c722-clique-structure-v1",
+        "schema": "clique-structure-v1",
         "q9": q9_record(),
         "q13": q13_record(),
         "boundary": {
