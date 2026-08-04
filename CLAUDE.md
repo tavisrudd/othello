@@ -134,6 +134,13 @@ apply synchronized changes there as ordinary forward commits. Do not replace, re
 re-export over an existing standalone repository unless the user explicitly requests that
 destructive history replacement.
 
+Before any paper-mirror synchronization, Lean companion export, certificate-package re-pin, or
+other operation that writes under `~/src/math-papers/` or `~/src/lean/`, read
+`notes/export-and-mirror-conventions.md` completely. It names the edit authorities, the guarded
+export tools, and the full Lean-for-paper release chain; only those tools write downstream, and
+never create ad hoc clones or worktrees under either root. This is a routed read, not startup
+context.
+
 ## Literature cache: load on demand
 
 Before re-fetching a paper for a literature task, read `/tmp/persistent/tavis/lit-search/README.md`
