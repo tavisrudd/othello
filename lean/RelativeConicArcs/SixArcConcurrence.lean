@@ -10,15 +10,16 @@ is a point lying on three secants, whose three pairs of endpoints therefore part
 points.  Such points are the *triple-concurrence points* of the arc; classically they are the
 Brianchon points of a hexagon.
 
-This file proves that a six-arc in the projective plane over a field in which two is invertible has
-at most ten triple-concurrence points.  The proof counts incidences between the fifteen secants of
-the arc and the triple-concurrence points in two ways.  Each such point lies on exactly three
-secants; conversely a secant carries at most two of them, because a triple-concurrence point on a
-secant is a diagonal point of the complete quadrangle formed by the four arc points off that
-secant, distinct triple-concurrence points on the secant pair those four points differently, and
-the three diagonal points of a quadrangle are not collinear when two is invertible.
+Everything here is incidence-theoretic and holds in an arbitrary finite projective plane.  The
+results describe how the chords through a triple-concurrence point pair up the arc: they partition
+the six arc points, two such points on a common secant cannot share a chord, and once one chord of
+such a point is known its remaining chord joins the two remaining arc points off the secant.
 
-The bound is sharp: it is attained by the six-arcs classically called Clebsch hexagons.
+The counting result of this file is conditional: it reduces a bound of ten triple-concurrence
+points to a bound of two of them on each secant, by counting incidences between the arc's fifteen
+secants and its triple-concurrence points in two ways.  The per-secant bound needs coordinates and
+a field in which two is invertible; it, and the resulting unconditional bound, are established in
+`RelativeConicArcs.SixArcConcurrenceBound`.
 -/
 
 namespace RelativeConicArcs

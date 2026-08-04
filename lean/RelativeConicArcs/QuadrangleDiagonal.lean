@@ -11,8 +11,9 @@ Each pair of opposite sides meets in one point, and those three points are the *
 the quadrangle.
 
 The theorem of this file is that the three diagonal points are never collinear when two is
-invertible in `K`.  In characteristic two the statement fails: there the three diagonal points are
-always collinear, and the quadrangle together with its diagonal points is the Fano configuration.
+invertible in `K`.  The hypothesis is needed: classically, in characteristic two the three diagonal
+points are collinear and the quadrangle together with them is the Fano configuration.  That
+converse is not established here.
 The proof normalizes the quadrangle so that scaled representatives of three of its points form a
 basis whose coordinate sum represents the fourth; in that frame the three diagonal points are
 represented by the three pairwise sums of the basis vectors, and those three vectors are

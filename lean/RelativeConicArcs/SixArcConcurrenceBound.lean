@@ -14,8 +14,11 @@ quadrangle formed by the four arc points off the secant: its remaining two chord
 points, distinct triple-concurrence points on the secant pair them differently, and a quadrangle
 admits only three pairings, whose three diagonal points are not collinear when two is invertible.
 
-Classically the bound is Dye's inequality for the number of Brianchon points of a hexagon, and it
-is sharp: the six-arcs attaining it are the Clebsch hexagons.
+The same bound appears, for a hexagon's Brianchon points, as the ten-point count of R. H. Dye,
+"Hexagons, conics, \(A_5\) and \(\mathrm{PSL}_2(K)\)", Journal of the London Mathematical
+Society (2) 44 (1991), 270--286, Section 2.2, page 275, doi:10.1112/jlms/s2-44.2.270, where the
+six-arcs attaining it are also shown to form a single projective class.  Only the bound is
+established here.
 -/
 
 namespace RelativeConicArcs
@@ -34,7 +37,7 @@ noncomputable local instance instDecidableEqPoint : DecidableEq (ProjectiveBridg
   Classical.decEq _
 
 /-- A secant of a six-arc carries at most two triple-concurrence points. -/
-theorem card_filter_line_le_two (h2 : (2 : K) ≠ 0)
+theorem card_triplePoints_on_secant_le_two (h2 : (2 : K) ≠ 0)
     {A : Finset (ProjectiveBridge.Point K)}
     (hA : Arc (L := ProjectiveBridge.Point K) A) (hcard : A.card = 6)
     (e : ArcPair A) :
@@ -43,7 +46,7 @@ theorem card_filter_line_le_two (h2 : (2 : K) ≠ 0)
   classical
   by_contra hgt
   push_neg at hgt
-  obtain ⟨x, hx, y, hy, z, hz, hxy, hxz, hyz⟩ := Finset.two_lt_card_iff.mp hgt
+  obtain ⟨x, hx, y, hy, z, hz, hxy, hxz, hyz⟩ := Finset.two_lt_card.mp hgt
   simp only [Finset.mem_filter] at hx hy hz
   obtain ⟨hxT, hxe⟩ := hx
   obtain ⟨hyT, hye⟩ := hy
@@ -104,7 +107,7 @@ theorem card_triplePoints_le_ten (h2 : (2 : K) ≠ 0)
     (hA : Arc (L := ProjectiveBridge.Point K) A) (hcard : A.card = 6) :
     (triplePoints (L := ProjectiveBridge.Point K) A).card ≤ 10 :=
   card_triplePoints_le_ten_of_secant_bound hA hcard fun e =>
-    card_filter_line_le_two h2 hA hcard e
+    card_triplePoints_on_secant_le_two h2 hA hcard e
 
 end Coordinate
 

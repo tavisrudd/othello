@@ -3,18 +3,22 @@ import RelativeConicArcs.Q11Coding
 import RelativeConicArcs.SixArcConcurrenceBound
 
 /-!
-# The exact Dye boundary used by Clebsch rigidity
+# The six-arc concurrence boundary used by Clebsch rigidity
 
-The paper needs two consequences of Dye's equality classification for six-arcs.  They are stated
-here, specialized to `PG(2,11)` and to the project's actual incidence model, so every downstream
-`#print axioms` exposes the precise external input.  No other geometric or computational claim is
-imported through this boundary.
+Two statements about six-arcs of `PG(2,11)` are needed by the Clebsch rigidity development, both
+phrased in the project's incidence model: a bound of ten on the off-arc points lying on three
+secants, and the classification of the arcs attaining that bound as a single projective class.
 
-The external source is R. H. Dye, “Hexagons, conics, \(A_5\) and
+The bound is a theorem here, specialized from
+`RelativeConicArcs.SixArcConcurrence.card_triplePoints_le_ten`, which proves it for every finite
+field in which two is invertible.
+
+The classification is the single external input of this module, and every downstream
+`#print axioms` exposes it.  Its source is R. H. Dye, “Hexagons, conics, \(A_5\) and
 \(\mathrm{PSL}_2(K)\),” *Journal of the London Mathematical Society* (2) 44
-(1991), 270--286, doi:10.1112/jlms/s2-44.2.270. The two declarations below
-specialize the ten-point bound in Section 2.2, page 275, and the equality
-classification in Theorem 1(ii), page 275.
+(1991), 270--286, doi:10.1112/jlms/s2-44.2.270, Theorem 1(ii), page 275, whose ten-point count in
+Section 2.2, page 275 is the same bound proved here.  No other geometric or computational claim is
+imported through this boundary.
 -/
 
 namespace RelativeConicArcs.ClebschDye
