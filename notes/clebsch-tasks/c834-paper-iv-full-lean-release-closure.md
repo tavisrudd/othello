@@ -12,6 +12,39 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
+## Resume here (2026-08-03)
+
+Two proofs are written in the worktree and have never been elaborated in place, because the
+shared Lean tree's build lock was held by other work:
+
+- `lean/RelativeConicArcs/PassantCodeQ13/WeightEight.lean` — the structural replacement for
+  `fourCliqueSets_complete` (verified in isolation against the built module, then ported in) and
+  the kernel replacement for `adjacent_iff_tangentCompatibleAtBase`, which rewrites the tangent
+  product as an evaluation product over a point's seven-member secant pencil and reads the vertex
+  triples and both pencils from precomputed lists so each pencil reduces once instead of once per
+  vertex pair;
+- `lean/RelativeConicArcs/PassantCodeQ13/PencilJoins.lean` — the two lemmas that rewrite supports,
+  `prod_secantLine` and `prod_guarded_eq_prod_pencil`.
+
+No source file under `lean/RelativeConicArcs/PassantCodeQ13/` contains `native_decide` any more.
+The sequence to finish is: elaborate `WeightEight.lean` through the guarded entry point (about four
+minutes, since the four-clique enumeration re-reduces), build
+`RelativeConicArcs.Gates.PassantCodeQ13AxiomAudit` through the queue, confirm the audit reports only
+`propext`, `Classical.choice`, and `Quot.sound`, then commit. Before the last pass the audit
+reported exactly two native-evaluation axioms, both from those two declarations.
+
+After that the remaining native surface is the paper's own package under
+`papers/q13-passant-code/lean-certificates`: 64 native decisions across 45 modules — 22 in the
+minimum-word orbit enumeration, 16 in the weight-ten profile certificates, 9 in the structural
+upgrade, 8 in the association transport, 6 in the automorphism anchors, 3 in the association
+algebra. It has its own gate and axiom audit. That is the larger part of the acceptance criterion
+and is untouched.
+
+The technique that carried every closure so far: state the finite content on the displayed
+coordinate lists, reduce one table in the kernel, and transport to the subtype model afterwards.
+Deciding directly over `InternalPoint` or `PassantLine` re-derives the subtype universe once per
+element and exhausts the memory guard; deciding over a `Finset` powerset does the same.
+
 ## Current state
 
 The incidence/dimension packet is partially closed.  The normalized 183-point coordinate model,
@@ -85,8 +118,13 @@ filtering.
 
 ## Standalone pre-release accommodations to reverse
 
-A manuscript-only pre-release of `papers/q13-passant-code` was authorized before the formal closure
-finished, so the standalone export currently omits the Lean companion.  Every accommodation below
+A manuscript-only pre-release of `papers/q13-passant-code` was authorized on 2026-08-03 before the
+formal closure finished, so the standalone export omits the Lean companion.  The mirror
+`~/src/math-papers/q13-passant-code` exists with seven local commits and no remote branch; the
+author publishes and mints the DOI.  Its README states that the Lean development is deposited
+separately and expected the day after the deposit.  The manuscript, its README, and the evidence
+verifier were all changed to make a manuscript-only checkout coherent, and the deposit's verifier
+passes standalone while reporting the seven digests and one command it cannot check.  Every accommodation below
 exists only because the companion is not yet publishable, and each must be reversed once the shared
 library is exported, published, and pinned:
 
