@@ -1276,3 +1276,32 @@ conclusion survives.
 the identification of the geometric spaces with that presentation is REASONED
 in the manuscript, not formalized.
 **Status:** open lead; not allocated, and no manuscript change made.
+
+### 2026-08-04 — Paper III's manuscript build is not byte-reproducible, unlike Paper I's
+
+**Provenance:** synchronizing `papers/clebsch-passages` to its standalone mirror, then
+comparing the two release surfaces file by file as the export conventions require.
+
+**Was I looking for this?:** no — the question was whether the mirror's tracked tree agreed
+with the authority's after a sync that had been blocked by four mirror-only files.
+
+**Observed:** the authority and mirror PDFs differed in three bytes, entirely from an
+embedded `CreationDate`. Paper III's build pins no `SOURCE_DATE_EPOCH`, so two builds of
+identical sources differ. Its release verifier consequently rebuilds the tracked PDF in
+place and passes, rather than comparing a fresh build against the tracked bytes. Paper I's
+`check_manuscript_build.py` does pin the epoch and does require exact equality, which is
+what lets its gate detect a tracked PDF that was never rebuilt after a source edit.
+
+**Why it may matter / strongest question:** two consequences, one already observed. First,
+the authority and a mirror can never agree on PDF bytes once the mirror replays its own
+gate, so release-surface agreement has to be asserted with the PDF excluded or with the
+exported copy restored, which is what was done here. Second, and more serious, a Paper III
+manuscript edit whose PDF is never rebuilt cannot be caught by its own release gate — the
+gate rebuilds instead of refusing. That is the exact failure Paper I's pinned epoch exists
+to prevent. The question is whether Paper III should adopt Paper I's checker rather than
+its own weaker manuscript-build step.
+
+**Evidence:** CHECKED — byte comparison of both trees over all 56 release-surface files, and
+`pdfinfo` on each PDF; the only non-rewrite difference was the timestamp.
+
+**Status:** open lead
