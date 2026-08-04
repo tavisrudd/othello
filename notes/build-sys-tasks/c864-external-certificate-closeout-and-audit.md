@@ -123,6 +123,47 @@ reconcile their live rows and reports through the normal lifecycle.
   literature input, or documented external certificate fact; “warning with no entry declaration”
   is not an admissible final state.
 
+### Base-library export defect and the order-eleven boundary
+
+The order-16 cold fill failed after nearly three hours, at the gate, on a base-library module the
+gate never needed.  The package's small result aggregator imported the base umbrella
+`RelativeConicArcs.Results`, which reaches the order-eleven non-GRS module, the order-eleven coding
+module, the order-eleven semantic family, and finally `RelativeConicArcs.Q11Residual`, which the
+base cannot compile: it consumes a parametrized-hole validity predicate and a previous-player-win
+transport lemma whose defining module was not exported into the base.  Removing that one import
+drops the gate closure from 1,390 project modules to 1,358 and its base contribution from 59
+modules to 27, and no order-eleven semantic module remains.  The package fix is committed as
+`d780520`; the gate then passed and was confirmed trace-current after a pack, erase and restore.
+
+Two consequences remain open, both deferred to a later session on this item so the base is
+re-exported and re-pinned once rather than twice:
+
+- **The base still ships an uncompilable module.**  The missing declarations are not moveable as a
+  block: the validity predicate is a plain cap predicate and is game-free, but the transport lemma
+  is stated in normal-play game vocabulary, and the residual module's own terminal proves that the
+  six-point cap position is a previous-player win.  The repair is a split — a game-free module
+  holding the conic parametrization, the icosahedral adjacency, and the validity dictionary, plus a
+  separate module holding the game terminal — with the validity predicate moved to a game-free home
+  so the base takes only the first.  Nine gates reach the residual module today, all of them for its
+  game-free half only; its game declarations have no consumer outside the module.  This preserves
+  the accepted game residue in the Paper I and arcs closures recorded in
+  `notes/2026-08-03-c860-cap-closure-remediation.md`.
+- **Nothing builds the base standalone before a package pins it.**  That is why a broken export
+  surfaced only inside a consumer's three-hour build.  A standalone base build belongs in the export
+  tooling as a gate.
+
+Measured order-eleven payload, for the externalization pass: 148 order-eleven modules in the
+monorepo, of which 66 carry generated content.  The two dominant families are the point-orbit rows
+— 60 generated row leaves under 72 row aggregators, about 660 KB of source, each leaf an exhaustive
+per-row action theorem with heartbeat and recursion limits raised — and the twenty-module semantic
+family of exhaustive per-point presentation theorems.  Both are certificate payload under the
+ownership boundary above; the orbit definitions and the arithmetic, Brianchon and conic lemmas are
+human-scale and stay.  Whether the point-orbit rows form their own official package or join the
+other Clebsch q11 certificates is undecided.  The full source-side boundary, including the ten
+modules reached from outside the order-eleven family and the five of those that mix a semantic
+interface with exhaustive work, is inventoried in
+`notes/2026-08-04-c864-q11-payload-inventory.md`.
+
 ### Remaining official package candidates
 
 - `~/src/lean/finitegeom-clebsch-q11-certificates`
