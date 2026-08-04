@@ -99,9 +99,14 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    The base-library game-free/game split is landed and gate-green in the monorepo: the validity
    predicate now sits in `RelativeConicArcs/ParametrizedHoles.lean`, `Q11Residual` is game-free, and
    the terminals are in `Q11ResidualGame`.
-   Next: the order-eleven externalization, carrying the batched base re-export and re-pin with it;
-   then the q11/q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition,
-   and the all-paper export replay.
+   The point-orbit interface/payload split is landed and gate-green, and the point-orbit rows are
+   decided to join `finitegeom-clebsch-q11-certificates`.
+   Next: the order-eleven cut is blocked on the exported base surface — the package payload needs
+   the displayed blocks, the base carries no point-orbit module, and no monorepo gate, fact or
+   export config exists for the arcs/rigidity human areas; the base commit must then be published
+   before the package can pin it. After that: the package refresh and reseal, the monorepo
+   deletions, the q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust
+   disposition, and the all-paper export replay.
 2. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
@@ -175,6 +180,7 @@ split lines [`../2026-08-04-c864-q11-interface-split-lines.md`](../2026-08-04-c8
 split feasibility [`../2026-08-04-c864-q11-split-feasibility.md`](../2026-08-04-c864-q11-split-feasibility.md);
 residual game-free/game split [`../2026-08-04-c864-q11-residual-game-split.md`](../2026-08-04-c864-q11-residual-game-split.md);
 point-orbit data verdict [`../2026-08-04-c864-point-orbit-data-verdict.md`](../2026-08-04-c864-point-orbit-data-verdict.md);
+order-eleven package cut status [`../2026-08-04-c864-q11-package-cut-status.md`](../2026-08-04-c864-q11-package-cut-status.md);
 Dye audit and anchor review [`../2026-08-04-c864-dye-audit-and-anchor-review.md`](../2026-08-04-c864-dye-audit-and-anchor-review.md).
 
 **Paper I v2** — audit and plan
