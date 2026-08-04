@@ -178,6 +178,12 @@ def resource_plan(args: argparse.Namespace) -> dict[str, Any]:
             f"resource profile {args.profile!r} is unsafe: requires {required_total_mib} MiB "
             f"including reserve/tmpfs, host has {memory['MemTotal']} MiB"
         )
+    if memory["MemAvailable"] < required_total_mib:
+        fail(
+            f"insufficient memory currently available for {args.profile!r}: "
+            f"need {required_total_mib} MiB including reserve/tmpfs, "
+            f"have {memory['MemAvailable']} MiB"
+        )
     if workload_peak_mib and memory["MemAvailable"] < workload_peak_mib + 1024:
         fail(
             f"insufficient memory currently available for {args.profile!r}: "
