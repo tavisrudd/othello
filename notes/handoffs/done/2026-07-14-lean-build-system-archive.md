@@ -198,3 +198,38 @@ namespace, so consumers reach its definitions through an `open` and never name i
 Deferred to the next session on C864: the pinned external order-16 trust fact, which is what the
 Al-Seraji--Al-Ogali anchor needs; the base repair batched with the order-eleven externalization so
 the base is re-exported and re-pinned once; and a gate covering the two new classification modules.
+
+## 2026-08-04 — pinned external order-16 trust fact and the Al-Seraji anchor
+
+The order-16 package now publishes its own `TRUST_FACT.json`, derived from one completed gate run
+plus its sealed manifest and preserved gate log, and the monorepo carries a byte-identical
+hash-pinned copy. `lean/scripts/lean-external-fact.py` seals, pins, and checks it and runs no Lean.
+The registry gained `trust_fact`/`trust_fact_sha256`; three checks now disagree if any one artifact
+is edited alone.
+
+`[[external_input]]` gained `entry_package`, resolving entry declarations against a package's
+pinned fact. This was chosen over package-qualifying the declaration name so entry declarations
+stay real Lean names and the departure from this repository is visible where it is declared. An
+anchor resolving into the package's own dependency is rejected: that library is audited here.
+
+The Al-Seraji--Al-Ogali class count is anchored to the package-owned
+`RelativeConicArcs.Q16Classification.rejection_profile`; the Kim--Vu bound to
+`RelativeConicArcs.Averaging.rhoC_le_of_kimVuBound`, its only consumer. The pinned fact exhibits the
+required separation by recording the order-16 terminal's axioms as `propext`, `Classical.choice`,
+`Quot.sound` alone.
+
+Two defects surfaced and were repaired. The trust spine reported a correct anchor as
+`external-input-entry-missing` when the area's extraction had simply never run; it now separates
+that case at warning severity. The package manifest verified itself against a moving `HEAD`, so the
+documented replay was red immediately after every seal; it now verifies against the commit it seals
+and requires the Lean sources to be unmoved since. The package manifest also needed re-sealing after
+the umbrella-import repair.
+
+Not done here: the shared generated trust views. A regeneration showed the global graph manifest
+and `trust/PORTFOLIO.md` diverging far beyond this change and would have folded in another lane's
+uncommitted complete-ports facts artifact; the regenerated files were restored to their committed
+content and the two new `enters_at` edges wait for a quiet tree. Recorded, not fixed: a
+task-identifier-shaped label in `RelativeConicArcs/TRUST.md` and the `C637Witness` module family,
+which is the owning proof lane's rename.
+
+Report: `notes/2026-08-04-c864-external-order16-trust-fact.md`.
