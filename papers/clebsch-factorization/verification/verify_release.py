@@ -795,9 +795,9 @@ def main() -> int:
     run(
         [
             "nix",
-            "shell",
-            "nixpkgs#texlive.combined.scheme-full",
-            "-c",
+            "develop",
+            ".#manuscript-cas-full",
+            "--command",
             "python3",
             "verification/check_manuscript_build.py",
         ],

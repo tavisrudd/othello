@@ -5,7 +5,9 @@
 export SOURCE_DATE_EPOCH = 1767225600
 export FORCE_SOURCE_DATE = 1
 
-TEXSHELL ?= nix shell nixpkgs\#texlive.combined.scheme-full -c
+# The pinned toolchain: same nixpkgs revision as every other paper, so the tracked
+# PDF is reproducible here, in a standalone mirror, and on another machine.
+TEXSHELL ?= nix develop .\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 SOURCE := passant_code_q13.tex
