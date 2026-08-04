@@ -15,6 +15,8 @@ must never be rebuilt merely because an unrelated monorepo leaf changed.
 
 After the portfolio split is complete, sanity-check every registered paper Lean export.  This is
 an all-paper release-boundary pass, not a spot check of only the papers whose certificates moved.
+C864 also owns the complete disposition of the Arcs and Clebsch-rigidity trust findings described
+below; neither paper may retain an untriaged warning when the task closes.
 
 This item is the integrated closeout for the remaining execution in C686/C687 and the certificate
 boundary portion of C287/C324.  It does not silently re-peg or discard those tasks: completion must
@@ -97,6 +99,30 @@ reconcile their live rows and reports through the normal lifecycle.
 - Preserve this worktree exactly until its changes are reviewed and adopted; do not recreate or
   overwrite it.
 
+### Required Arcs and Clebsch-rigidity trust disposition
+
+- Replace the empty Kim--Vu entry declaration with the exact formal hypothesis-consumer anchor and
+  verify that the extracted gate fact reports the intended assumption boundary.  The paper and
+  trust manifest must state precisely what is imported from Kim--Vu and what Lean proves from it.
+- Keep the Al-Seraji--Al-Ogali class count only as a literature consistency check, anchored to the
+  formal rejection-profile theorem.  It must not appear as an axiom, hypothesis, or dependency of
+  the q16 result; the external q16 fact must demonstrate that separation.
+- Land the strong projective/monomial GRS theorem from the C855 worktree, validate its focused gate,
+  and remove the NRC/GRS dictionary warning rather than merely renaming or suppressing it.
+- Audit the two Dye declarations used by Clebsch rigidity.  If they remain genuine literature
+  inputs, give each an exact theorem-level entry declaration, stable bibliographic pinpoint,
+  extracted gate occurrence, and paper statement of the residual trust boundary.  If the current
+  Lean closure does not use one, remove the orphan declaration and stale prose.  C864 does not
+  require re-proving a genuine Dye theorem unless the audit reveals that the existing declaration
+  is stronger than the cited result.
+- Re-extract all affected local gates and import the pinned external q16/q11 package facts.  Then
+  regenerate `RelativeConicArcs/TRUST.md`, the machine-readable area registry/facts, dependency
+  graph, external trust projections, and both papers' trust-facing prose from the reconciled state.
+- Run the orphan, terminal-coverage, expected-axiom, external-input-anchor, stale-export, and
+  paper/Lean reconciliation checks.  Every finding must end as proved/closed, precisely declared
+  literature input, or documented external certificate fact; “warning with no entry declaration”
+  is not an admissible final state.
+
 ### Remaining official package candidates
 
 - `~/src/lean/finitegeom-clebsch-q11-certificates`
@@ -138,17 +164,20 @@ commit a self-contained official source state.
 9. Regenerate and check external trust exports from local semantic facts plus pinned external
    package facts.  The normal monorepo exporter must never attempt to elaborate an external
    certificate gate.
-10. Enumerate every registered paper Lean companion export and standalone Lean-for-paper package.
+10. Complete the Arcs/Clebsch-rigidity trust disposition above, including the Kim--Vu and
+    Al-Seraji--Al-Ogali anchors, the strong NRC/GRS closure, Dye input audit, fresh local/external
+    facts, regenerated trust documents, and paper/Lean reconciliation with zero untriaged warning.
+11. Enumerate every registered paper Lean companion export and standalone Lean-for-paper package.
     For each one, run the guarded export plan, materialize two disposable candidates from the exact
     committed source/base revisions, require byte-identical outputs and complete manifests, verify
     the declared terminals and axiom facts, and run the paper's documented import-only release
     gate.  Check that every paper reference and package pin resolves to the intended local semantic
     library or official certificate package and that no export reintroduces an extracted payload.
-11. Run the global paper-export audit/check commands after the individual replays, including stale
+12. Run the global paper-export audit/check commands after the individual replays, including stale
     manifest, unexpected deletion, reverse-reference, and unregistered-paper detection.  Record a
     bounded result table naming every paper/export, source revision, base/package revision, gate,
     and pass/fail disposition; no configured paper may be silently skipped.
-12. Update C287/C324/C686/C687 records and the build-sys handoff, then complete C864 through the
+13. Update C287/C324/C686/C687 records and the build-sys handoff, then complete C864 through the
     archive-first lifecycle.
 
 ## Cache and build contract
@@ -191,6 +220,10 @@ commit a self-contained official source state.
 11. Every registered paper Lean export has a fresh two-materialization identity check, complete
     manifest and terminal/axiom agreement, and a green documented release gate after the
     certificate removals; the global audit reports no missing, stale, or unregistered export.
+12. Arcs and Clebsch rigidity have zero untriaged trust warnings: Kim--Vu and any surviving Dye
+    inputs have exact theorem-level anchors and cited scope, Al-Seraji--Al-Ogali is demonstrably only
+    a consistency check, the NRC/GRS gap is closed by the validated strong theorem, and all local
+    and external facts, generated trust views, and paper statements agree.
 
 ## Owned paths
 
