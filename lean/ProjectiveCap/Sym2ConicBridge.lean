@@ -1,4 +1,5 @@
 import ProjectiveCap.PlaneTransitivity
+import ProjectiveCap.FiniteBuildGame
 import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
 import Mathlib.Tactic
 
