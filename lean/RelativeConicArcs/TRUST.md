@@ -361,12 +361,14 @@ There is no `sorryAx`, custom axiom, `admit`, or `native_decide` dependency.
 ## External certificate packages and what full checking requires
 
 Some exhaustive enumerations are checked in separately versioned certificate libraries rather than
-here: the order-16 classification today, and the order-11 point-orbit action once its package is
-cut.  For those results, checking the mathematics end to end means running two enumerations, not
-one — the local gates in this repository, and the package's own import-only gate over its sealed
-sources.  The pinned registry records everything that second run needs: the package revision, the
-content-addressed manifest digest covering every Lean module and the replay evidence, the exact
-toolchain, and the terminals with their axiom lists.
+here: the order-16 classification, and the order-11 icosahedral point-orbit family — the sixty
+projective transformations, their action on all 133 canonical points, the seven point orbits, the
+index-to-point dictionary, and the per-row verification behind them.  Neither is built in this
+repository.  For those results, checking the mathematics end to end means running the owning
+package's import-only gate over its sealed sources; this repository's own gates check everything
+else and consume the package's published fact by hash.  The pinned registry records everything that
+second run needs: the package revision, the content-addressed manifest digest covering every Lean
+module and the replay evidence, the exact toolchain, and the terminals with their axiom lists.
 
 Relying on the pinned fact instead of re-running the package gate is a statement about where a
 computation was performed, not about whether it can be checked.  It is the same kind of reliance as

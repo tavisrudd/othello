@@ -28,3 +28,19 @@ forbidden_artifact_basenames = [
   "search_rhoc16.cpp",
   "search_rhoc16_output.txt",
 ]
+
+[[package]]
+name = "finitegeom-clebsch-q11-certificates"
+repository = "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
+commit = "76e7b43e45e2d1c0d2a120efcce7871938ee9e05"
+manifest_sha256 = "3f378f200773863d05150ab08a39b90e0af878744f429db2057036f1195bf023"
+gate = "RelativeConicArcs.Gates.ClebschRigidityTrust"
+terminal = "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"
+trust_fact = "external/finitegeom-clebsch-q11-certificates.json"
+trust_fact_sha256 = "af3792b481d5f2d1f65fa9ff434d9facdcf64da3c532d570664a2a369b71e82d"
+owned_module_prefixes = [
+  "RelativeConicArcs.Q11A5PointOrbits",
+]
+forbidden_artifact_basenames = [
+  "generate-q11-a5-point-action.py",
+]

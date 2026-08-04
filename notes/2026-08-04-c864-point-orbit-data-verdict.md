@@ -7,6 +7,14 @@
 point-orbit statements verbatim, or the statements are reformulated intrinsically so the data can
 leave with the rest of the family.
 
+**Superseded in part.** The interface/payload boundary below is right and is preserved inside the
+certificate package, but its conclusion that the displayed blocks stay monorepo-side was overturned
+the same day: the blocks reach generated Brianchon tables and an exhaustive ledger theorem, so the
+whole family moved to `finitegeom-clebsch-q11-certificates`. See
+`notes/2026-08-04-c864-point-orbit-ownership-fable-review.md` and
+`notes/2026-08-04-c864-q11-package-cut-status.md`; where they disagree with the text below, they are
+correct.
+
 **Verdict: the module is two things, and the cut runs between them.** Its group-action half is
 certificate payload and leaves with the row leaves. Its displayed-block half is the interface and
 stays. No statement has to be reformulated, and the paper-facing surface is preserved verbatim.

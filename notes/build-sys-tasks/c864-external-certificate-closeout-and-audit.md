@@ -178,13 +178,18 @@ ownership boundary above; the orbit definitions and the arithmetic, Brianchon an
 human-scale and stay.  Whether the point-orbit rows form their own official package or join the
 other Clebsch q11 certificates is undecided.
 
-The point-orbit data module is settled: its group-action half — the sixty matrices, the sixty
-support permutations, the action and fixed-point machinery, and the four leaf-discharging tactic
-macros — is payload and leaves with the rows, while its displayed blocks, index dictionary and the
-five decidable block theorems stay as the interface the rigidity gate audits.  No audited statement
-needs reformulating.  Split the data module in the same window as the package cut, since editing it
-invalidates every row leaf.  Verdict and exact declaration lists:
-`notes/2026-08-04-c864-point-orbit-data-verdict.md`.  The full source-side boundary, including the ten
+The point-orbit family is cut and now belongs entirely to
+`finitegeom-clebsch-q11-certificates`, displayed blocks included.  The data module was first split
+into a displayed-block interface and the group-action payload, which is the right internal boundary
+and is preserved inside the package; but the interface does not stay monorepo-side, because its
+`brianchonSet` and `triplePointSet` are built from generated Brianchon tables and
+`triplePointSet_eq_brianchonSet` is proved from the exhaustive intersection ledger, and because the
+base library documents itself as excluding the order-eleven orbit/action family.  The monorepo
+keeps no point-orbit module and consumes the package's pinned fact; its rigidity gate no longer
+audits the four orbit statements.  Verdict and declaration lists:
+`notes/2026-08-04-c864-point-orbit-data-verdict.md`; ownership review:
+`notes/2026-08-04-c864-point-orbit-ownership-fable-review.md`; cut record:
+`notes/2026-08-04-c864-q11-package-cut-status.md`.  The full source-side boundary, including the ten
 modules reached from outside the order-eleven family and the five of those that mix a semantic
 interface with exhaustive work, is inventoried in
 `notes/2026-08-04-c864-q11-payload-inventory.md`.

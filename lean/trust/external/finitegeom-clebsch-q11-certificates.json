@@ -1,0 +1,1561 @@
+{
+  "declarations": {
+    "RelativeConicArcs.ClebschChordDefect.card_sixVertexPerfectMatchings": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschChordDefect.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschChordDefect.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula": {
+      "axioms": [
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschChordDefect.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschChordDefect.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschChordDefect.primePower_candidates_of_chordDefect": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschChordDefect.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
+        "RelativeConicArcs.ClebschDye.dye1991_equality_classification",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11CodeRigidityBridge",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q11DyeAxioms.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschDye.dye1991_equality_classification": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "RelativeConicArcs.ClebschDye.dye1991_equality_classification",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q11DyeAxioms.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
+        "RelativeConicArcs.ClebschDye.dye1991_equality_classification",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DyeConsequences",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
+        "RelativeConicArcs.ClebschDye.dye1991_equality_classification",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11RigiditySpine",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.parityCheckCode_mem_monomialWordEquiv": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11CodeRigidityBridge",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.pointIndexEquiv": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11CodeRigidityBridge",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.projectiveSyndromePoint_surjective": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11CodeRigidityBridge",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DyeConsequences",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DyeConsequences",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.sixArc_uncoveredOnLine_card_le_six": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.SixArcDegenerateConicExclusion",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SixArcDefectBridge.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschDye.sixArc_uncovered_card_le_twelve_of_subset_planeQuadraticLocus": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.SixArcDegenerateConicExclusion",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.sixArc_uncovered_card_le_twelve_of_subset_two_lines": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.SixArcDegenerateConicExclusion",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.sub_mem_parityCheckCode_iff_same_syndrome": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11CodeRigidityBridge",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.syndromeDistanceExactly_iff_exists_minimumLeader": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11CodeRigidityBridge",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschDye.uncovered_eq_distanceThreeDirections": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11CodeRigidityBridge",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschGateway.Q11Extension.conicPoint_extension_minimumDistance_four": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.ClebschGatewayQ11Extension",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschGateway.Q11Extension.conicPoint_oneColumnMDS": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.ClebschGatewayQ11Extension",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschGateway.Q11Extension.parent_deepTransform_eq_standardConic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.ClebschGatewayQ11Extension",
+      "origin": "package"
+    },
+    "RelativeConicArcs.ClebschGateway.oneColumnArcExtension_iff_mem_deepTransform": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschGateway.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschGateway.oneColumnMDS_of_mem_deepTransform": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschGateway.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschGateway.rawArc_complete_empty": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschGateway.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ClebschGateway.s5_quotientCharacter_inference": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ClebschGateway.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Conic.completeOutside_bound_general": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Conic.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.action_on_witness": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.matrices_nonsingular": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.matrixVec_pointVec_ne_zero": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_orbitPoints_iff_orbitIndex": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.orbitIndex_pointAction": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.orbitPoints_invariant": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.order_five_count": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.order_five_fixed_union": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.representative_pointOrbit": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.supportPerm_injective": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.supportPerm_permutation": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.support_family_closed": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.triplePointSet_invariant": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchon_concurrences": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11BrianchonPetersen",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11BrianchonPetersen.disjoint_chord_intersection_ledger": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11BrianchonPetersen",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11BrianchonPetersen.invariant_total_oneFactorization": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11BrianchonPetersen",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11BrianchonPetersen.petersen_parameters": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11BrianchonPetersen",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_sound": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.distanceOne_leader_count_one": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_allTriples": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.distanceThree_leader_count_twenty": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_nonzero_branches": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.witness_code_coveringRadius_three": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+      "origin": "package"
+    },
+    "RelativeConicArcs.OddSixArcAffinePrism.directionDet_eq_zero_of_common_infinity": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcAffinePrism.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcAffinePrism.normalized_triangularPrism_impossible": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcAffinePrism.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcAffinePrism.triangularPrism_impossible": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcAffinePrism.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcLineBound.triangularPrism_parallelism_contradiction": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcLineBound.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcLineBound.uncoveredOnLine_card_le_order_sub_five": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcLineBound.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcPrismExtraction.card_coveredOnLine_ne_five": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcPrismExtraction.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcPrismExtraction.card_coveredOnLine_ne_five_of_incidence_extraction": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcPrismExtraction.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcPrismExtraction.disjointLine_fiveUncovered_impossible": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcPrismExtraction.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcPrismExtraction.incidencePrismWitness_of_five": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcPrismExtraction.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcPrismExtraction.projectivePrismWitness_of_incidence": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcPrismExtraction.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.OddSixArcPrismExtraction.sixArc_uncoveredOnLine_card_le_order_sub_five": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/OddSixArcPrismExtraction.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCommutant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCommutant.integralGoldenOperator_commutes_oddA5Action": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCommutant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCommutant.oddA5ActionMatrix_one": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCommutant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCommutant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCommutant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCommutant.rationalGoldenOperator_commutes_oddA5Action": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCommutant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCover.FiveOrbital.inverse_closed": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCover.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCover.antipodalCosetCover_fiber_card_two": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCover.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCover.antipodalQuotient_fiber_card_two": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCover.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCover.fiveOrbitalElements_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCover.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCover.fiveOrbital_one_mem_each_other_fiber": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCover.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCover.fiveOrbitals_card_five": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCover.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationCover.fiveOrbitals_selfPaired": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationCover.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationDeterminant.det_principalMinorFive": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationDeterminant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationDeterminant.det_principalMinorFour": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationDeterminant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationDeterminant.det_principal_three": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationDeterminant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbitalMatrix": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationDeterminant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationDeterminant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationDeterminant.det_signed_three": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationDeterminant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationDeterminant.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.fiberOddOrbitalMatrix_transpose": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.fourPoint_twoGraph_identity": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.pairBalance_iff_sq_five": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.positivePentagonNeighbors_card_two": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.supportCubic_translation_invariant": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.supportMomentOne_eq_zero": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.supportMomentTwo_eq_zero": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.supportMomentZero_eq_zero": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.supportSign_eq_triangleProduct": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.supportSign_reconstructs_switchingClass": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationHolonomy.supportSign_switching_invariant": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationHolonomy.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.deletedPrincipalBlock_mulVec_eq_zero_iff": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.deletedPrincipalBlock_mulVec_incidentRow": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.deletedPrincipalBlock_sq": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.finrank_deletedPrincipalBlock_range": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationNodes.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.A5_no_sign_quotient": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.liftChange_eq_diagonalSwitch": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.normalized_pentagon_side_diagonal_opposite": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.orbitalExchange_eq_neg": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.pentagonNext_orbit_surjective": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.rawAxisRepresentative_mem_implies_orbital": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.rawFiberOddOrbitalMatrix_eq_conference_transport": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.rawOrbitalExchange_eq_neg": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationPentagon.signedOrbitalMatrix_sq": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationPentagon.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.matchingAction_injective": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryCore.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.matchingEvenGenerators_eq_alternating": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryGenerators.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.matchingIndex_spec": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryCore.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetry.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetry.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.normalizesDistinguishedMatchings_iff_mem_normalizer": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryCore.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetry.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetry.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.preservesSupportSign_of_matchingSign_eq_one": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryGenerators.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.reversesSupportSign_of_matchingSign_eq_neg_one": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryGenerators.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.supportCubicProjectiveStabilizer_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryCore.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.supportCubicProjectiveStabilizer_eq_lineStabilizer": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryGenerators.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationSymmetryCore.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.conjugateGoldenBases_orthogonal": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.crossGoldenBlock_translation_invariant": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.crossGoldenMap_mem_ker_iff_constant": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.finrank_crossGoldenMap_range": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.finrank_traceAnnihilator": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.goldenEigenspaceBasis_eigen": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.goldenEigenspaceBasis_eq_paper_transport": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.paperConferenceMatrix_eq_transport": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.PaperIOrientationTraceDual.tracePairing_nondegenerate": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/PaperIOrientationTraceDual.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.ProjectiveTripleNormalization.exists_mapEquiv_ordered_triple": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/ProjectiveTripleNormalization.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Q9Sylvester.catalog_complete": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q9Sylvester.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Q9Sylvester.conic_point_count": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q9Sylvester.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q9Sylvester.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Q9Sylvester.passantJoin_iff_distance_two": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q9Sylvester.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SixVertexOneFactorization.oneFactorization_has_triangularPrism_normalForm": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SixVertexOneFactorization.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SixVertexOneFactorization.properFiveEdgeColoring_extract_prism_colors": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SixVertexOneFactorization.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SixVertexOneFactorization.properFiveEdgeColoring_extract_prism_edges": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SixVertexOneFactorization.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SixVertexOneFactorization.properFiveEdgeColoring_has_triangularPrism_normalForm": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SixVertexOneFactorization.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SixVertexOneFactorization.properFiveEdgeColoring_isOneFactorization": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SixVertexOneFactorization.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKChordMoments.fiveArc_ne_conic_card_of_moments": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKChordMoments.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKChordMoments.fourArc_conic_order_of_moments": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKChordMoments.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKChordMoments.sevenArc_conic_spectrum_formulas_of_moments": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKChordMoments.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKChordMoments.sevenArc_primePower_candidates_of_spectrum": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKChordMoments.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKChordMoments.sevenArc_primePower_spectra_of_moments": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKChordMoments.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKChordMoments.uncovered_of_three_index_moments": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKChordMoments.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKGeometricBridge.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKGeometricBridge.fiveArc_uncovered_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKGeometricBridge.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKGeometricBridge.fourArc_conic_card_order": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKGeometricBridge.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKGeometricBridge.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKGeometricBridge.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.SmallKGeometricBridge.sevenArc_uncovered_card": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/SmallKGeometricBridge.lean",
+      "origin": "dependency"
+    }
+  },
+  "dependency": {
+    "commit": "85dfde9e13e6c3d004e0e659fb83c1a4761902d0",
+    "repository": "https://github.com/tavisrudd/finitegeom"
+  },
+  "evidence": {
+    "axiom_log": "verification/clebsch_rigidity_trust/gate-run.log",
+    "axiom_log_sha256": "5e69781436fd8f17067dd684b8899a15fb42adc549ca1ec505c289b5fcfa9ad0",
+    "replay": "lake build --no-build RelativeConicArcs.Gates.ClebschRigidityTrust"
+  },
+  "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "manifest_sha256": "3f378f200773863d05150ab08a39b90e0af878744f429db2057036f1195bf023",
+  "package": "finitegeom-clebsch-q11-certificates",
+  "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
+  "schema_version": 1,
+  "source_commit": "27fc94552b9e6a92dc37f5e0382cb17134c3434b",
+  "terminal": "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"
+}

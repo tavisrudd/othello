@@ -72,13 +72,41 @@ def read_json(path: Path) -> Any:
         return json.load(handle)
 
 
+def canonical_axiom_names(names: set[str]) -> dict[str, str]:
+    """Map each abbreviated axiom rendering to the fully qualified name it denotes.
+
+    Lean prints an axiom under the shortest name unambiguous at the print site, so the same
+    constant appears unqualified inside its own namespace and fully qualified elsewhere in the
+    same log.  A name is canonicalized only when exactly one longer name in the log ends with it
+    at a namespace boundary; a name matching several longer ones is left alone, so a genuine
+    disagreement between two axiom lists is still reported rather than normalized away.
+    """
+    mapping: dict[str, str] = {}
+    for name in names:
+        longer = {other for other in names if other != name and other.endswith("." + name)}
+        if len(longer) == 1:
+            mapping[name] = longer.pop()
+    return mapping
+
+
 def axiom_facts(log_text: str) -> dict[str, tuple[str, tuple[str, ...]]]:
     """Map each printed declaration to its source path and axiom list."""
     folded = re.sub(r"\n\s+", " ", log_text)
+    printed = {
+        part.strip()
+        for match in AXIOM_RE.finditer(folded)
+        for part in match["axioms"].split(",")
+        if part.strip()
+    }
+    canonical = canonical_axiom_names(printed)
     facts: dict[str, tuple[str, tuple[str, ...]]] = {}
     for match in AXIOM_RE.finditer(folded):
         axioms = tuple(
-            sorted(part.strip() for part in match["axioms"].split(",") if part.strip())
+            sorted(
+                canonical.get(part.strip(), part.strip())
+                for part in match["axioms"].split(",")
+                if part.strip()
+            )
         )
         decl = match["decl"]
         path = match["path"]

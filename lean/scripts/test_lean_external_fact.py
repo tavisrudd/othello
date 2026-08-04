@@ -307,6 +307,44 @@ class ExternalFactTest(unittest.TestCase):
         )
         self.assertEqual(self.run_tool("check").returncode, 1)
 
+    def write_gate_log(self, log: str) -> None:
+        """Replace the run's gate log and the package's preserved copy, which must agree."""
+        (self.run_dir / "logs/gate.nobuild.log").write_text(log, encoding="utf-8")
+        (self.package / "evidence/gate-axioms.log").write_text(log, encoding="utf-8")
+        self.commit_package()
+
+    def test_seal_accepts_the_same_axiom_under_two_qualifications(self) -> None:
+        """A log printing one axiom unqualified and fully qualified is not a disagreement.
+
+        Lean renders an axiom under the shortest name unambiguous where it is printed, so a
+        module's own audit inside its namespace and a gate's audit outside it disagree only in
+        display.
+        """
+        log = GATE_LOG + (
+            "info: lean/Alpha/Dye.lean:20:0: 'Alpha.Certificates.cited_bound' depends on axioms:"
+            " [propext, cited_input]\n"
+            "info: lean/Alpha/Gate.lean:5:0: 'Alpha.Certificates.cited_bound' depends on axioms:"
+            " [propext, Alpha.Certificates.cited_input]\n"
+        )
+        self.write_gate_log(log)
+        self.assertEqual(self.seal("--write").returncode, 0)
+        self.assertEqual(
+            self.sealed()["declarations"]["Alpha.Certificates.cited_bound"]["axioms"],
+            ["Alpha.Certificates.cited_input", "propext"],
+        )
+
+    def test_seal_still_refuses_a_genuine_axiom_disagreement(self) -> None:
+        log = GATE_LOG + (
+            "info: lean/Alpha/One.lean:20:0: 'Alpha.Certificates.split' depends on axioms:"
+            " [propext, Alpha.Certificates.first_input]\n"
+            "info: lean/Alpha/Two.lean:5:0: 'Alpha.Certificates.split' depends on axioms:"
+            " [propext, Alpha.Certificates.second_input]\n"
+        )
+        self.write_gate_log(log)
+        result = self.seal("--write")
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("two different axiom lists", result.stdout + result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

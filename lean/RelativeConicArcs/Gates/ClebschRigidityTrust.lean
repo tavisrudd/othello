@@ -1,4 +1,3 @@
-import RelativeConicArcs.Q11A5PointOrbits
 import RelativeConicArcs.Q11Coding
 import RelativeConicArcs.Q11DecodingSynthesis
 import RelativeConicArcs.Q11DyeConsequences
@@ -17,7 +16,14 @@ decoding, chord-defect, field-uniqueness, small-arc classification, and
 support-cubic orientation results used by the focused Clebsch hexagon paper.
 
 The coordinate modules check the displayed finite configuration and decoder
-tables by kernel reduction.  The rigidity conclusion additionally depends on
+tables by kernel reduction.  The order-sixty projective action of the
+icosahedral group, its seven point orbits, the dictionary between canonical
+point indices and the projective points they denote, and the exhaustive
+per-row verification behind them are not checked here: they are the payload of
+the separately versioned order-eleven certificate library, whose own
+import-only gate checks them and whose published trust fact this repository
+consumes by hash, pinned in `lean/trust/certificate-packages.toml`.  The
+rigidity conclusion additionally depends on
 the ten-point Brianchon bound and equality classification in R. H. Dye,
 “Hexagons, conics, \(A_5\) and \(\mathrm{PSL}_2(K)\),” *Journal of the
 London Mathematical Society* (2) 44 (1991), Theorems 1 and 3, pages 275--278,
@@ -34,12 +40,6 @@ golden equivariance, the reverse rational containment, and the integral
 coefficient test are kernel checked.  No native execution enters these
 terminals.
 -/
-
--- The explicit order-sixty action and its point orbits.
-#print axioms RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition
-#print axioms RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit
-#print axioms RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit
-#print axioms RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit
 
 -- The code--arc dictionary and syndrome conic.
 #print axioms RelativeConicArcs.Examples.Q11Coding.witness_mds_columns
