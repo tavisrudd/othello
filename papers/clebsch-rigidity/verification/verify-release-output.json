@@ -109,11 +109,11 @@
   "inputs": {
     "checker_outputs_sha256": "36ab223c1d92cf4bd82a2e52f830b37faa03e7405d3fb742bb1bb3cdc4d76d7a",
     "companion_manuscript_sha256": "997f4c42550b7fae1ff6eceb27dcce1f4d9643a1d074c78940d71307a6f9d128",
-    "companion_pdf_sha256": "b70a126b4b85264a5c39bd45ae22759e6096fd51d24d18f8ebfc4edf58802534",
+    "companion_pdf_sha256": "26509dc32dddad52a9da7678244d29eefb57d64ca2c7ede58eb40e8e2a75986b",
     "companion_trust_sha256": "884603c4596e2827acae3c9b26a5e43fa2bd2808c664438fd5f833d7ff19d90a",
-    "manuscript_pdf_sha256": "d98ecd6b07992041ae3ae2da42e4b62fe02cba5662eff5e7e5bfd9cf0f15ba94",
+    "manuscript_pdf_sha256": "6f2a8d6b6f3cc142e24702becabee8f1f7661688a318f59d9fa515b758cca917",
     "manuscript_sha256": "d397627020899d86938ad46ac99d508d6032fddb101e0ce0a860ba9bc38dd058",
-    "release_surface_sha256": "98f738715c722a06f36d9c1c5982cee32b4d487e18baaf8541371c3248722758",
+    "release_surface_sha256": "2a0afec6df00804986b30739b6c4622b1bf6d30143b944a2316c2b2606f21cba",
     "statement_identity_sha256": "3c02c7071cdceae97f24c79bb96713bc657b1ebaa0847e0308568914054d976e"
   },
   "lean_commit": "9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5",
