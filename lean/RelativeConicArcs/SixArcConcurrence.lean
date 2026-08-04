@@ -233,6 +233,24 @@ theorem collinear_complement {A : Finset P} (hA : Arc (L := L) A) (hcard : A.car
   rw [← hrd]
   exact hcolcr
 
+/-- Distinct triple-concurrence points on a common secant join a fixed arc point off that secant
+to different arc points: a shared chord would meet the secant twice. -/
+theorem not_collinear_common_chord {A : Finset P} (hA : Arc (L := L) A)
+    {e : ArcPair A} {x y a b : P}
+    (hxe : x ∈ e.line (L := L)) (hye : y ∈ e.line (L := L)) (hxy : x ≠ y)
+    (ha : a ∈ A \ e.1) (hab : a ≠ b)
+    (hx : RelativeConicArcs.Collinear (L := L) a b x)
+    (hy : RelativeConicArcs.Collinear (L := L) a b y) : False := by
+  classical
+  obtain ⟨l, hal, hbl, hxl⟩ := hx
+  obtain ⟨m, ham, hbm, hym⟩ := hy
+  have hlm : l = m := line_eq_of_two_points (L := L) hab hal hbl ham hbm
+  have hyl : y ∈ l := by rw [hlm]; exact hym
+  have hle : l = e.line (L := L) := line_eq_of_two_points (L := L) hxy hxl hyl hxe hye
+  have hae : a ∈ e.line (L := L) := by rw [← hle]; exact hal
+  have haA : a ∈ A := (Finset.mem_sdiff.mp ha).1
+  exact (Finset.mem_sdiff.mp ha).2 (ArcPair.mem_of_mem_arc_of_mem_line (L := L) hA e haA hae)
+
 /-- **Incidence count for triple-concurrence points.**  A six-arc has fifteen secants, each
 triple-concurrence point lies on three of them, so a bound of two such points per secant bounds
 their total number by ten. -/
