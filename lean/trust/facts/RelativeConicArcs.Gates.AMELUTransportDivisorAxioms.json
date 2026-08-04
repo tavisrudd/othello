@@ -1,0 +1,1934 @@
+{
+  "closure": [
+    "FiniteGeom.Code",
+    "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.Gates.AMELUTransportDivisor",
+    "RelativeConicArcs.Gates.AMELUTransportDivisorAxioms"
+  ],
+  "declaration_module": {
+    "FiniteGeom.IsMDS": "FiniteGeom.Code",
+    "FiniteGeom.IsMDS.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "FiniteGeom.dualCode": "FiniteGeom.Code",
+    "FiniteGeom.dualDist": "FiniteGeom.Code",
+    "FiniteGeom.dualDist_le_hammingNorm": "FiniteGeom.Code",
+    "FiniteGeom.dual_word_column_relation": "FiniteGeom.Code",
+    "FiniteGeom.instFactPrimeOfNatNat_finiteGeom": "FiniteGeom.Code",
+    "FiniteGeom.le_dualDist_rowCode_of_column_independent": "FiniteGeom.Code",
+    "FiniteGeom.le_minDist": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode_rowCode": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode_rowCode_iff_mulVec": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode_rowCode_of_column_relation": "FiniteGeom.Code",
+    "FiniteGeom.minDist": "FiniteGeom.Code",
+    "FiniteGeom.minDist.congr_simp": "RelativeConicArcs.AMELU.Definitions",
+    "FiniteGeom.minDist_le_hammingNorm": "FiniteGeom.Code",
+    "FiniteGeom.rowCode": "FiniteGeom.Code",
+    "FiniteGeom.row_mem_rowCode": "FiniteGeom.Code",
+    "FiniteGeom.singleton_bound": "FiniteGeom.Code",
+    "RelativeConicArcs.AMELU.BasisLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ContractionPattern": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.ConventionDictionary": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.arcCode": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.casesOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.code": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.ctorIdx": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.injEq": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.sizeOf_spec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.rec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.recOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.state": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl_usesTracePhase": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.CopyMessages": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.casesOn": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.ctorIdx": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.lu_implies_equal_contractionOrbitSum": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.inj": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.injEq": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.noConfusion": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.sizeOf_spec": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusion": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusionType": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.rec": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.recOn": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.sourceContractionOrbitSum": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_contraction_eq_rankOrbitSum": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_rankOrbitSum_evaluation": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.targetContractionOrbitSum": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_contraction_eq_rankOrbitSum": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_rankOrbitSum_evaluation": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.IsAME": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsCliffordMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsMDSCode634": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsNormalized": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsSixArc": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsUnitaryMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.LocalMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.LocallyCliffordEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.MonomiallyEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.Party": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.PlaneCoordinate": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ProjectivelyEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SameMatrixAxis": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.ctorIdx": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.isSixArc": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.kernel_isMDSCode634": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.injEq": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.sizeOf_spec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.points": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.rec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.recOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.State": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axialActions": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_cycleCover": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_factor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.casesOn": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.ctorIdx": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.inj": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.injEq": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.noConfusion": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.sizeOf_spec": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSignedActions": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_cycleCover": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_factor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusion": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusionType": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSignedActions": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_cycleCover": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_factor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.rec": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.recOn": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_card": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_negative": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_positive": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_negative": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_positive": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.casesOn": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.ctorIdx": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.inj": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.injEq": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.noConfusion": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.sizeOf_spec": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSignedSupport": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSigned_card": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negative_disjoint_positive": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusion": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusionType": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSignedSupport": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSigned_card": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.rec": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.recOn": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.casesOn": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.ctorIdx": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.kernelExcess_eq": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_le": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.inj": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.injEq": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.noConfusion": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.sizeOf_spec": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusion": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusionType": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.rec": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.recOn": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank_le": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.UsesTracePhase": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.casesOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.character": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.character_nontrivial": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.ctorIdx": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.inj": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.injEq": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.sizeOf_spec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusionType": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.rec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.recOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.arcKernel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.arcKernel.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.assembleLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.assembleLabel.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_not_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.axialCyclePolynomial": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.axialCyclePolynomial.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.axialCyclePolynomial_factor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.axialTransportFactor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.axialTransportFactor.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.codeStateNormalization": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.constrainedTransportParty": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.contractionMatchingMap": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionMatchingMap.eq_1": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionMatchingRank": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionMatchingRank.eq_1": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionMatchingRank_relabelBraCopies": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum.eq_1": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.contractionValueFromRank": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.equalPhaseState": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.equalPhaseState.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_not_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.freeTransportParty": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.generatedWord": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.generatedWord.eq_1": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.generatedWord_add": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.generatedWord_smul": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.generatorCode": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.generatorLinearMap": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.isMDS_of_isMDSCode634": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.localAction": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.locallyCliffordEquivalent_implies_locallyUnitaryEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.marginalEntry": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.matrixProduct": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.mem_arcKernel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.monomialLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.monomialLabel_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.normalizeContractionPattern": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.normalizeContractionPattern.eq_1": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.normalizeContractionPattern_zero": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.parityCheckMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteContractionPattern": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.permuteContractionPattern_trans": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.permuteLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteLabel_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteLabel_refl": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteLabel_trans": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState_refl": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState_trans": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.q13FourCopyPattern": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.q13ZFourGenerator": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.q13ZTwelveGenerator": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_z": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_three_factors": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportOperator": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.relabelBraCopies": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.relabelBraCopies.eq_1": "RelativeConicArcs.AMELU.FourCopyContraction",
+    "RelativeConicArcs.AMELU.selectedTripleMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.signedTransportFactor": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.signedTransportFactor.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.signedTransportFactor_eq": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.signedTransportFactor_eq_two_mul_axial_of_charSeven": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.tracePhase": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.transportA": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.transportA.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.transportB": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.transportB.eq_1": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.transportCoefficientMatrix": "RelativeConicArcs.AMELU.TransportDivisor",
+    "RelativeConicArcs.AMELU.weylMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.weylMatrix.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.weylMatrix_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.weylMatrix_zero_zero": "RelativeConicArcs.AMELU.Definitions"
+  },
+  "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "lean_version": "4.32.0-rc1",
+  "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "opaque": [],
+  "project_axioms": [],
+  "project_declarations": [
+    "FiniteGeom.IsMDS",
+    "FiniteGeom.IsMDS.eq_1",
+    "FiniteGeom.dualCode",
+    "FiniteGeom.dualDist",
+    "FiniteGeom.dualDist_le_hammingNorm",
+    "FiniteGeom.dual_word_column_relation",
+    "FiniteGeom.instFactPrimeOfNatNat_finiteGeom",
+    "FiniteGeom.le_dualDist_rowCode_of_column_independent",
+    "FiniteGeom.le_minDist",
+    "FiniteGeom.mem_dualCode",
+    "FiniteGeom.mem_dualCode_rowCode",
+    "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+    "FiniteGeom.mem_dualCode_rowCode_of_column_relation",
+    "FiniteGeom.minDist",
+    "FiniteGeom.minDist.congr_simp",
+    "FiniteGeom.minDist_le_hammingNorm",
+    "FiniteGeom.rowCode",
+    "FiniteGeom.row_mem_rowCode",
+    "FiniteGeom.singleton_bound",
+    "RelativeConicArcs.AMELU.BasisLabel",
+    "RelativeConicArcs.AMELU.ContractionPattern",
+    "RelativeConicArcs.AMELU.ConventionDictionary",
+    "RelativeConicArcs.AMELU.ConventionDictionary.arcCode",
+    "RelativeConicArcs.AMELU.ConventionDictionary.casesOn",
+    "RelativeConicArcs.AMELU.ConventionDictionary.code",
+    "RelativeConicArcs.AMELU.ConventionDictionary.ctorIdx",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.injEq",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType",
+    "RelativeConicArcs.AMELU.ConventionDictionary.rec",
+    "RelativeConicArcs.AMELU.ConventionDictionary.recOn",
+    "RelativeConicArcs.AMELU.ConventionDictionary.state",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl_usesTracePhase",
+    "RelativeConicArcs.AMELU.CopyMessages",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.casesOn",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.ctorIdx",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.lu_implies_equal_contractionOrbitSum",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.inj",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.injEq",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.noConfusion",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusion",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusionType",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.rec",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.recOn",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.sourceContractionOrbitSum",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_contraction_eq_rankOrbitSum",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_rankOrbitSum_evaluation",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.targetContractionOrbitSum",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_contraction_eq_rankOrbitSum",
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_rankOrbitSum_evaluation",
+    "RelativeConicArcs.AMELU.IsAME",
+    "RelativeConicArcs.AMELU.IsCliffordMatrix",
+    "RelativeConicArcs.AMELU.IsMDSCode634",
+    "RelativeConicArcs.AMELU.IsNormalized",
+    "RelativeConicArcs.AMELU.IsSixArc",
+    "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+    "RelativeConicArcs.AMELU.LocalMatrix",
+    "RelativeConicArcs.AMELU.LocallyCliffordEquivalent",
+    "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+    "RelativeConicArcs.AMELU.MonomiallyEquivalent",
+    "RelativeConicArcs.AMELU.Party",
+    "RelativeConicArcs.AMELU.PlaneCoordinate",
+    "RelativeConicArcs.AMELU.ProjectivelyEquivalent",
+    "RelativeConicArcs.AMELU.SameMatrixAxis",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.ctorIdx",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.isSixArc",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.kernel_isMDSCode634",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.injEq",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.points",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.rec",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.recOn",
+    "RelativeConicArcs.AMELU.State",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axialActions",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_cycleCover",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_factor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.casesOn",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.ctorIdx",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.inj",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.injEq",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.noConfusion",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSignedActions",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_cycleCover",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_factor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusion",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusionType",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSignedActions",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_cycleCover",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_factor",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.rec",
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.recOn",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_card",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_negative",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_positive",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_negative",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_positive",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.casesOn",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.ctorIdx",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.inj",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.injEq",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.noConfusion",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSignedSupport",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSigned_card",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negative_disjoint_positive",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusion",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusionType",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSignedSupport",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSigned_card",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.rec",
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.recOn",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.casesOn",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.ctorIdx",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.kernelExcess_eq",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_le",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.inj",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.injEq",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.noConfusion",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusion",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusionType",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.rec",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.recOn",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank",
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank_le",
+    "RelativeConicArcs.AMELU.UsesTracePhase",
+    "RelativeConicArcs.AMELU.WeylConvention",
+    "RelativeConicArcs.AMELU.WeylConvention.casesOn",
+    "RelativeConicArcs.AMELU.WeylConvention.character",
+    "RelativeConicArcs.AMELU.WeylConvention.character_nontrivial",
+    "RelativeConicArcs.AMELU.WeylConvention.ctorIdx",
+    "RelativeConicArcs.AMELU.WeylConvention.mk",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.inj",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.injEq",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusion",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusionType",
+    "RelativeConicArcs.AMELU.WeylConvention.rec",
+    "RelativeConicArcs.AMELU.WeylConvention.recOn",
+    "RelativeConicArcs.AMELU.arcKernel",
+    "RelativeConicArcs.AMELU.arcKernel.eq_1",
+    "RelativeConicArcs.AMELU.assembleLabel",
+    "RelativeConicArcs.AMELU.assembleLabel.eq_1",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_mem",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_not_mem",
+    "RelativeConicArcs.AMELU.axialCyclePolynomial",
+    "RelativeConicArcs.AMELU.axialCyclePolynomial.eq_1",
+    "RelativeConicArcs.AMELU.axialCyclePolynomial_factor",
+    "RelativeConicArcs.AMELU.axialTransportFactor",
+    "RelativeConicArcs.AMELU.axialTransportFactor.eq_1",
+    "RelativeConicArcs.AMELU.codeStateNormalization",
+    "RelativeConicArcs.AMELU.constrainedTransportParty",
+    "RelativeConicArcs.AMELU.contractionMatchingMap",
+    "RelativeConicArcs.AMELU.contractionMatchingMap.eq_1",
+    "RelativeConicArcs.AMELU.contractionMatchingRank",
+    "RelativeConicArcs.AMELU.contractionMatchingRank.eq_1",
+    "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern",
+    "RelativeConicArcs.AMELU.contractionMatchingRank_relabelBraCopies",
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum.eq_1",
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern",
+    "RelativeConicArcs.AMELU.contractionValueFromRank",
+    "RelativeConicArcs.AMELU.equalPhaseState",
+    "RelativeConicArcs.AMELU.equalPhaseState.eq_1",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_mem",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_not_mem",
+    "RelativeConicArcs.AMELU.freeTransportParty",
+    "RelativeConicArcs.AMELU.generatedWord",
+    "RelativeConicArcs.AMELU.generatedWord.eq_1",
+    "RelativeConicArcs.AMELU.generatedWord_add",
+    "RelativeConicArcs.AMELU.generatedWord_smul",
+    "RelativeConicArcs.AMELU.generatorCode",
+    "RelativeConicArcs.AMELU.generatorLinearMap",
+    "RelativeConicArcs.AMELU.isMDS_of_isMDSCode634",
+    "RelativeConicArcs.AMELU.localAction",
+    "RelativeConicArcs.AMELU.locallyCliffordEquivalent_implies_locallyUnitaryEquivalent",
+    "RelativeConicArcs.AMELU.marginalEntry",
+    "RelativeConicArcs.AMELU.matrixProduct",
+    "RelativeConicArcs.AMELU.mem_arcKernel",
+    "RelativeConicArcs.AMELU.monomialLabel",
+    "RelativeConicArcs.AMELU.monomialLabel_apply",
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial.eq_1",
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor",
+    "RelativeConicArcs.AMELU.normalizeContractionPattern",
+    "RelativeConicArcs.AMELU.normalizeContractionPattern.eq_1",
+    "RelativeConicArcs.AMELU.normalizeContractionPattern_zero",
+    "RelativeConicArcs.AMELU.parityCheckMatrix",
+    "RelativeConicArcs.AMELU.permuteContractionPattern",
+    "RelativeConicArcs.AMELU.permuteContractionPattern_trans",
+    "RelativeConicArcs.AMELU.permuteLabel",
+    "RelativeConicArcs.AMELU.permuteLabel_apply",
+    "RelativeConicArcs.AMELU.permuteLabel_refl",
+    "RelativeConicArcs.AMELU.permuteLabel_trans",
+    "RelativeConicArcs.AMELU.permuteState",
+    "RelativeConicArcs.AMELU.permuteState_apply",
+    "RelativeConicArcs.AMELU.permuteState_refl",
+    "RelativeConicArcs.AMELU.permuteState_trans",
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial.eq_1",
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor",
+    "RelativeConicArcs.AMELU.q13FourCopyPattern",
+    "RelativeConicArcs.AMELU.q13ZFourGenerator",
+    "RelativeConicArcs.AMELU.q13ZTwelveGenerator",
+    "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor.eq_1",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_z",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_three_factors",
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z",
+    "RelativeConicArcs.AMELU.reducedTransportOperator",
+    "RelativeConicArcs.AMELU.relabelBraCopies",
+    "RelativeConicArcs.AMELU.relabelBraCopies.eq_1",
+    "RelativeConicArcs.AMELU.selectedTripleMatrix",
+    "RelativeConicArcs.AMELU.signedTransportFactor",
+    "RelativeConicArcs.AMELU.signedTransportFactor.eq_1",
+    "RelativeConicArcs.AMELU.signedTransportFactor_eq",
+    "RelativeConicArcs.AMELU.signedTransportFactor_eq_two_mul_axial_of_charSeven",
+    "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial",
+    "RelativeConicArcs.AMELU.tracePhase",
+    "RelativeConicArcs.AMELU.transportA",
+    "RelativeConicArcs.AMELU.transportA.eq_1",
+    "RelativeConicArcs.AMELU.transportB",
+    "RelativeConicArcs.AMELU.transportB.eq_1",
+    "RelativeConicArcs.AMELU.transportCoefficientMatrix",
+    "RelativeConicArcs.AMELU.weylMatrix",
+    "RelativeConicArcs.AMELU.weylMatrix.eq_1",
+    "RelativeConicArcs.AMELU.weylMatrix_apply",
+    "RelativeConicArcs.AMELU.weylMatrix_zero_zero"
+  ],
+  "schema_version": 1,
+  "terminal_axioms": {},
+  "unit": "RelativeConicArcs.Gates.AMELUTransportDivisorAxioms",
+  "uses": {
+    "FiniteGeom.IsMDS": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.IsMDS.eq_1": [
+      "FiniteGeom.IsMDS",
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.dualDist": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.dualDist_le_hammingNorm": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.minDist_le_hammingNorm"
+    ],
+    "FiniteGeom.dual_word_column_relation": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.le_dualDist_rowCode_of_column_independent": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.le_minDist",
+      "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.le_minDist": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.mem_dualCode": [
+      "FiniteGeom.dualCode"
+    ],
+    "FiniteGeom.mem_dualCode_rowCode": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode",
+      "FiniteGeom.rowCode",
+      "FiniteGeom.row_mem_rowCode"
+    ],
+    "FiniteGeom.mem_dualCode_rowCode_iff_mulVec": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode_rowCode",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.mem_dualCode_rowCode_of_column_relation": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.minDist.congr_simp": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.minDist_le_hammingNorm": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.row_mem_rowCode": [
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.singleton_bound": [
+      "FiniteGeom.minDist",
+      "FiniteGeom.minDist_le_hammingNorm"
+    ],
+    "RelativeConicArcs.AMELU.BasisLabel": [
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.ContractionPattern": [
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.arcCode": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.casesOn": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.rec",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.code": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.arcCode",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.points",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.ctorIdx": [
+      "RelativeConicArcs.AMELU.ConventionDictionary"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.injEq": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.casesOn",
+      "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.casesOn",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.rec": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.recOn": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.rec",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.state": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.code",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl_usesTracePhase": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.weyl",
+      "RelativeConicArcs.AMELU.UsesTracePhase"
+    ],
+    "RelativeConicArcs.AMELU.CopyMessages": [
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.casesOn": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.rec",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.ctorIdx": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.lu_implies_equal_contractionOrbitSum": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.sourceContractionOrbitSum",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.targetContractionOrbitSum",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.inj": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.noConfusion",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.injEq": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.inj",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusion",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusion": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.casesOn",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusionType",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.noConfusionType": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.casesOn",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.rec": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.recOn": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.mk",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.rec",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.sourceContractionOrbitSum": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_contraction_eq_rankOrbitSum": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.sourceContractionOrbitSum",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_rankOrbitSum_evaluation": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.targetContractionOrbitSum": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_contraction_eq_rankOrbitSum": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.targetContractionOrbitSum",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_rankOrbitSum_evaluation": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.IsAME": [
+      "RelativeConicArcs.AMELU.IsNormalized",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.marginalEntry"
+    ],
+    "RelativeConicArcs.AMELU.IsCliffordMatrix": [
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.SameMatrixAxis",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.matrixProduct",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.IsMDSCode634": [
+      "FiniteGeom.minDist",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.IsNormalized": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State"
+    ],
+    "RelativeConicArcs.AMELU.IsSixArc": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.selectedTripleMatrix"
+    ],
+    "RelativeConicArcs.AMELU.IsUnitaryMatrix": [
+      "RelativeConicArcs.AMELU.LocalMatrix"
+    ],
+    "RelativeConicArcs.AMELU.LocallyCliffordEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsCliffordMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.MonomiallyEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.monomialLabel"
+    ],
+    "RelativeConicArcs.AMELU.ProjectivelyEquivalent": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.SameMatrixAxis": [
+      "RelativeConicArcs.AMELU.LocalMatrix"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.rec",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.ctorIdx": [
+      "RelativeConicArcs.AMELU.SixArcMDSKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.isSixArc": [
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.points"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.kernel_isMDSCode634": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.points",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.injEq": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.points": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.rec": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.recOn": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.rec",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.State": [
+      "RelativeConicArcs.AMELU.BasisLabel"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axialActions": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_cycleCover": [
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axialActions",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_factor": [
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axialActions",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_cycleCover",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial_factor",
+      "RelativeConicArcs.AMELU.reducedTransportOperator",
+      "RelativeConicArcs.AMELU.transportA",
+      "RelativeConicArcs.AMELU.transportB"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.casesOn": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.rec",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.ctorIdx": [
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.inj": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.noConfusion",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.injEq": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.inj",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusion",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSignedActions": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_cycleCover": [
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSignedActions",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_factor": [
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSignedActions",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_cycleCover",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor",
+      "RelativeConicArcs.AMELU.reducedTransportOperator",
+      "RelativeConicArcs.AMELU.transportA",
+      "RelativeConicArcs.AMELU.transportB"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusion": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.casesOn",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusionType",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.noConfusionType": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.casesOn",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSignedActions": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_cycleCover": [
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSignedActions",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_factor": [
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSignedActions",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_cycleCover",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor",
+      "RelativeConicArcs.AMELU.reducedTransportOperator",
+      "RelativeConicArcs.AMELU.transportA",
+      "RelativeConicArcs.AMELU.transportB"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.rec": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.recOn": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.mk",
+      "RelativeConicArcs.AMELU.TransportCycleCoverInputs.rec",
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.reducedTransportOperator"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_card": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_negative": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSignedSupport"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_positive": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSignedSupport"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_negative": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_card",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_negative",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSignedSupport",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSigned_card"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_positive": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axialSupport",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_card",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.axial_disjoint_positive",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSignedSupport",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSigned_card"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.casesOn": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.rec"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.ctorIdx": [
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.inj": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.injEq": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.inj"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSignedSupport": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSigned_card": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSignedSupport"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negative_disjoint_positive": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.negativeSignedSupport",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSignedSupport"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusion": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.casesOn",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusionType"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.noConfusionType": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.casesOn"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSignedSupport": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSigned_card": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.positiveSignedSupport"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.rec": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.recOn": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.mk",
+      "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.rec"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.casesOn": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.rec"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.ctorIdx": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.kernelExcess_eq": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.kernelExcess_eq",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_le",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.kernelExcess_eq",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_le",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_le": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.inj": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.injEq": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.inj"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusion": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.casesOn",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusionType"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.noConfusionType": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.casesOn"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.rec": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.recOn": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.mk",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.rec"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank_le": [
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs",
+      "RelativeConicArcs.AMELU.TransportRankBridgeInputs.transportRank"
+    ],
+    "RelativeConicArcs.AMELU.UsesTracePhase": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.tracePhase"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.casesOn": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.rec"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.character": [
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.character_nontrivial": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.ctorIdx": [
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk": [
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.inj": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.injEq": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.mk.inj"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusion": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.casesOn",
+      "RelativeConicArcs.AMELU.WeylConvention.noConfusionType"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusionType": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.casesOn"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.rec": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.recOn": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.rec"
+    ],
+    "RelativeConicArcs.AMELU.arcKernel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.parityCheckMatrix"
+    ],
+    "RelativeConicArcs.AMELU.arcKernel.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.parityCheckMatrix"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel.eq_1": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel_apply_mem": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel_apply_not_mem": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.axialCyclePolynomial.eq_1": [
+      "RelativeConicArcs.AMELU.axialCyclePolynomial"
+    ],
+    "RelativeConicArcs.AMELU.axialCyclePolynomial_factor": [
+      "RelativeConicArcs.AMELU.axialCyclePolynomial",
+      "RelativeConicArcs.AMELU.transportA",
+      "RelativeConicArcs.AMELU.transportB"
+    ],
+    "RelativeConicArcs.AMELU.axialTransportFactor.eq_1": [
+      "RelativeConicArcs.AMELU.axialTransportFactor"
+    ],
+    "RelativeConicArcs.AMELU.constrainedTransportParty": [
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.contractionMatchingMap": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.CopyMessages",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.generatedWord"
+    ],
+    "RelativeConicArcs.AMELU.contractionMatchingMap.eq_1": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.CopyMessages",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingMap",
+      "RelativeConicArcs.AMELU.generatedWord"
+    ],
+    "RelativeConicArcs.AMELU.contractionMatchingRank": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.CopyMessages",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingMap"
+    ],
+    "RelativeConicArcs.AMELU.contractionMatchingRank.eq_1": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.CopyMessages",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingMap",
+      "RelativeConicArcs.AMELU.contractionMatchingRank"
+    ],
+    "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingRank",
+      "RelativeConicArcs.AMELU.contractionMatchingRank_relabelBraCopies",
+      "RelativeConicArcs.AMELU.normalizeContractionPattern"
+    ],
+    "RelativeConicArcs.AMELU.contractionMatchingRank_relabelBraCopies": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.CopyMessages",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingMap",
+      "RelativeConicArcs.AMELU.contractionMatchingRank",
+      "RelativeConicArcs.AMELU.contractionMatchingRank.eq_1",
+      "RelativeConicArcs.AMELU.generatedWord",
+      "RelativeConicArcs.AMELU.relabelBraCopies"
+    ],
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingRank",
+      "RelativeConicArcs.AMELU.contractionValueFromRank",
+      "RelativeConicArcs.AMELU.permuteContractionPattern"
+    ],
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum.eq_1": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingRank",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.contractionValueFromRank",
+      "RelativeConicArcs.AMELU.permuteContractionPattern"
+    ],
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.contractionMatchingRank",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum.eq_1",
+      "RelativeConicArcs.AMELU.contractionValueFromRank",
+      "RelativeConicArcs.AMELU.permuteContractionPattern",
+      "RelativeConicArcs.AMELU.permuteContractionPattern_trans"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.codeStateNormalization"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_mem": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_not_mem": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.freeTransportParty": [
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.generatedWord": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.generatedWord.eq_1": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.generatedWord"
+    ],
+    "RelativeConicArcs.AMELU.generatedWord_add": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.generatedWord"
+    ],
+    "RelativeConicArcs.AMELU.generatedWord_smul": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.generatedWord"
+    ],
+    "RelativeConicArcs.AMELU.generatorCode": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.generatorLinearMap"
+    ],
+    "RelativeConicArcs.AMELU.generatorLinearMap": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.generatedWord",
+      "RelativeConicArcs.AMELU.generatedWord_add",
+      "RelativeConicArcs.AMELU.generatedWord_smul"
+    ],
+    "RelativeConicArcs.AMELU.isMDS_of_isMDSCode634": [
+      "FiniteGeom.IsMDS",
+      "FiniteGeom.minDist",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.localAction": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State"
+    ],
+    "RelativeConicArcs.AMELU.locallyCliffordEquivalent_implies_locallyUnitaryEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsCliffordMatrix",
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.LocallyCliffordEquivalent",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.SameMatrixAxis",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.matrixProduct",
+      "RelativeConicArcs.AMELU.permuteState",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.marginalEntry": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.matrixProduct": [
+      "RelativeConicArcs.AMELU.LocalMatrix"
+    ],
+    "RelativeConicArcs.AMELU.mem_arcKernel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.parityCheckMatrix"
+    ],
+    "RelativeConicArcs.AMELU.monomialLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.monomialLabel_apply": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.monomialLabel"
+    ],
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial.eq_1": [
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial"
+    ],
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor": [
+      "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.transportA",
+      "RelativeConicArcs.AMELU.transportB"
+    ],
+    "RelativeConicArcs.AMELU.normalizeContractionPattern": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.relabelBraCopies"
+    ],
+    "RelativeConicArcs.AMELU.normalizeContractionPattern.eq_1": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.normalizeContractionPattern",
+      "RelativeConicArcs.AMELU.relabelBraCopies"
+    ],
+    "RelativeConicArcs.AMELU.normalizeContractionPattern_zero": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.normalizeContractionPattern"
+    ],
+    "RelativeConicArcs.AMELU.parityCheckMatrix": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.permuteContractionPattern": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.permuteContractionPattern_trans": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.permuteContractionPattern"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel_apply": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel_refl": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel_trans": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteState": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteState_apply": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.permuteState_refl": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.permuteState_trans": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial.eq_1": [
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial"
+    ],
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor": [
+      "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial",
+      "RelativeConicArcs.AMELU.transportA",
+      "RelativeConicArcs.AMELU.transportB"
+    ],
+    "RelativeConicArcs.AMELU.q13FourCopyPattern": [
+      "RelativeConicArcs.AMELU.ContractionPattern"
+    ],
+    "RelativeConicArcs.AMELU.q13ZFourGenerator": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.q13ZTwelveGenerator": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve": [
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.lu_implies_equal_contractionOrbitSum",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.sourceContractionOrbitSum",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_contraction_eq_rankOrbitSum",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.source_rankOrbitSum_evaluation",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.targetContractionOrbitSum",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_contraction_eq_rankOrbitSum",
+      "RelativeConicArcs.AMELU.FourCopySeparatorInputs.target_rankOrbitSum_evaluation",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.contractionRankOrbitSum",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.generatorCode",
+      "RelativeConicArcs.AMELU.q13FourCopyPattern",
+      "RelativeConicArcs.AMELU.q13ZFourGenerator",
+      "RelativeConicArcs.AMELU.q13ZTwelveGenerator"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.signedTransportFactor"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor.eq_1": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor",
+      "RelativeConicArcs.AMELU.signedTransportFactor"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.axialTransportFactor.eq_1",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor.eq_1",
+      "RelativeConicArcs.AMELU.signedTransportFactor",
+      "RelativeConicArcs.AMELU.signedTransportFactor_eq"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor.eq_1",
+      "RelativeConicArcs.AMELU.signedTransportFactor",
+      "RelativeConicArcs.AMELU.signedTransportFactor_eq_two_mul_axial_of_charSeven"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_z": [
+      "RelativeConicArcs.AMELU.reducedTransportDivisor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor_eq"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_three_factors": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z": [
+      "RelativeConicArcs.AMELU.reducedTransportDivisor",
+      "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_z"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportOperator": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.constrainedTransportParty",
+      "RelativeConicArcs.AMELU.freeTransportParty",
+      "RelativeConicArcs.AMELU.transportCoefficientMatrix"
+    ],
+    "RelativeConicArcs.AMELU.relabelBraCopies": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.relabelBraCopies.eq_1": [
+      "RelativeConicArcs.AMELU.ContractionPattern",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.relabelBraCopies"
+    ],
+    "RelativeConicArcs.AMELU.selectedTripleMatrix": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.signedTransportFactor.eq_1": [
+      "RelativeConicArcs.AMELU.signedTransportFactor"
+    ],
+    "RelativeConicArcs.AMELU.signedTransportFactor_eq": [
+      "RelativeConicArcs.AMELU.signedTransportFactor"
+    ],
+    "RelativeConicArcs.AMELU.signedTransportFactor_eq_two_mul_axial_of_charSeven": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.signedTransportFactor",
+      "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial"
+    ],
+    "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial": [
+      "RelativeConicArcs.AMELU.axialTransportFactor",
+      "RelativeConicArcs.AMELU.signedTransportFactor"
+    ],
+    "RelativeConicArcs.AMELU.transportA.eq_1": [
+      "RelativeConicArcs.AMELU.transportA"
+    ],
+    "RelativeConicArcs.AMELU.transportB.eq_1": [
+      "RelativeConicArcs.AMELU.transportB"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix": [
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix.eq_1": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix_apply": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix_zero_zero": [
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ]
+  },
+  "uses_included": true
+}

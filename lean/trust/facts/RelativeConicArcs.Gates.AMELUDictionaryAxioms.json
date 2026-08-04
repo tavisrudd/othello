@@ -1,0 +1,3231 @@
+{
+  "closure": [
+    "FiniteGeom.Code",
+    "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective",
+    "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.Arc",
+    "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.Defect",
+    "RelativeConicArcs.Gates.AMELUDictionary",
+    "RelativeConicArcs.Gates.AMELUDictionaryAxioms",
+    "RelativeConicArcs.Moments",
+    "RelativeConicArcs.Plane",
+    "RelativeConicArcs.ProjectiveBridge",
+    "RelativeConicArcs.SyndromeGeometry"
+  ],
+  "declaration_module": {
+    "FiniteGeom.IsMDS": "FiniteGeom.Code",
+    "FiniteGeom.IsMDS.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "FiniteGeom.dualCode": "FiniteGeom.Code",
+    "FiniteGeom.dualDist": "FiniteGeom.Code",
+    "FiniteGeom.dualDist_le_hammingNorm": "FiniteGeom.Code",
+    "FiniteGeom.dual_word_column_relation": "FiniteGeom.Code",
+    "FiniteGeom.instFactPrimeOfNatNat_finiteGeom": "FiniteGeom.Code",
+    "FiniteGeom.le_dualDist_rowCode_of_column_independent": "FiniteGeom.Code",
+    "FiniteGeom.le_minDist": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode_rowCode": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode_rowCode_iff_mulVec": "FiniteGeom.Code",
+    "FiniteGeom.mem_dualCode_rowCode_of_column_relation": "FiniteGeom.Code",
+    "FiniteGeom.minDist": "FiniteGeom.Code",
+    "FiniteGeom.minDist.congr_simp": "RelativeConicArcs.AMELU.Definitions",
+    "FiniteGeom.minDist_le_hammingNorm": "FiniteGeom.Code",
+    "FiniteGeom.rowCode": "FiniteGeom.Code",
+    "FiniteGeom.row_mem_rowCode": "FiniteGeom.Code",
+    "FiniteGeom.singleton_bound": "FiniteGeom.Code",
+    "Matrix.row.eq_1": "RelativeConicArcs.ProjectiveBridge",
+    "ProjectiveCap.Projective.Cap": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.Collinear": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.Point": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.cap_empty": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.cap_image_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.cap_map_mapEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.cap_map_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.cap_mono": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.cap_of_card_le_two": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.cap_of_forall_triple": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.cap_pair": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.cap_quad_of_independent": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.cap_singleton": "ProjectiveCap.Projective",
+    "ProjectiveCap.Projective.cap_triple_of_independent": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.collinear_iff_dependent": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.collinear_mapEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.collinear_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.collinear_of_collinear_pair": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.collinear_of_dependent": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.comp_rep_triple": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.dependent_of_collinear": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.exists_cons_li": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.independent_triple_iff": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.independent_triple_map": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.independent_triple_mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.independent_triple_of_li": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.li_rotate": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.li_sub01": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.li_sub02": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.li_sub12": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.li_with_sum12": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.li_with_sum13": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.li_with_sum23": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv.eq_1": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv_eq_of_rep_eq": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv_mapEquiv_symm": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv_mk": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv_mk_eq_mk": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv_symm_eq": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapEquiv_symm_mapEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapLinearEquiv": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapLinearEquiv.eq_1": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapLinearEquiv_apply_symm": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapLinearEquiv_mk": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapLinearEquiv_symm_apply": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mapLinearEquiv_symm_eq": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mem_projectivization_of_rep_mem": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.mk_ne_of_li_pair": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.ne_of_li_pair": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.not_collinear_iff_independent": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.quad_normal_form": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.rep_mem_span_pair_of_collinear": "ProjectiveCap.PlaneTransitivity",
+    "ProjectiveCap.Projective.sum_ne_zero_of_li": "ProjectiveCap.PlaneTransitivity",
+    "RelativeConicArcs.AMELU.BasisLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.CodeFiber": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.ConventionDictionary": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.arcCode": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.casesOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.code": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.ctorIdx": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.injEq": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.sizeOf_spec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.rec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.recOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.state": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.state_isAME": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl_usesTracePhase": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsAME": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsCliffordMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsMDSCode634": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsNormalized": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsSixArc": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.IsUnitaryMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.LocalMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.LocallyCliffordEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.MonomiallyEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.Party": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.PauliLabel": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.PauliSupportedOn": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.PlaneCoordinate": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.ProjectivelyEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SameMatrixAxis": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.ctorIdx": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.isSixArc": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.kernel_isMDSCode634": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.injEq": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.sizeOf_spec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.points": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.rec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.recOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.State": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.UsesTracePhase": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.casesOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.character": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.character_nontrivial": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.ctorIdx": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.inj": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.injEq": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.sizeOf_spec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusion": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusionType": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.rec": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.WeylConvention.recOn": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.arcKernel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.arcKernel.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.arcKernel_eq_parityCheckCode": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.assembleLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.assembleLabel.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_not_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.card_codeFiber": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.card_codewordFinset": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.card_environmentFiber": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeFiberEquivKer": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeProjection": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeProjection.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeProjection_bijective_of_card_three": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeProjection_injective_of_card_three": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeProjection_surjective": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeStateNormalization": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.codeStateNormalization_mul_conj": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codewordFinset": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codewordFinset.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codeword_eq_of_eq_outside": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.codimThreeMDSColumns_of_isSixArc": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.conjugate_weyl_multiplier": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.cssLabelSpace": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.cssSupportedLabelSpace": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.environmentFiberEquivCodeFiber": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.environmentFiberFinset": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.environmentFiberFinset.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.equalPhaseState": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.equalPhaseState.congr_simp": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.equalPhaseState.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_not_mem": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.fiberCard_mul_normalization": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.finrank_ker_codeProjection": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.hammingWeight_eq_hammingNorm": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.inverseMonomialPreimage": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.inverseMonomialPreimage.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.inverseMultiplierLabel": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.inverseMultiplierLabel.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState_arcKernel": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.isCliffordMatrix_multiplierMatrix": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.isMDSCode634_arcKernel": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.isMDS_of_isMDSCode634": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.isNormalized_equalPhaseState": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.isUnitaryMatrix_multiplierMatrix": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.localAction": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.localAction_multiplierMatrix": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.locallyCliffordEquivalent_implies_locallyUnitaryEquivalent": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.marginalEntry": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_of_ne": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_self": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.matrixProduct": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.matrixProduct.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.mem_arcKernel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.mem_cssLabelSpace": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.mem_cssSupportedLabelSpace": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.mem_of_monomiallyEquivalent": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.monomialLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.monomialLabel.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.monomialLabel_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.monomiallyEquivalent_equalPhaseState_locallyCliffordEquivalent": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.multiplierMatrix": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.multiplierMatrix.congr_simp": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.multiplierMatrix.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.multiplierMatrix_apply": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.parityCheckMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.parityCheckMatrix.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.pauliSupport": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.pauliSupport_subset_iff": "RelativeConicArcs.AMELU.CSS",
+    "RelativeConicArcs.AMELU.permuteLabel": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteLabel_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteLabel_refl": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteLabel_trans": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState_refl": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.permuteState_trans": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.projectivelyEquivalent_arcKernel_monomiallyEquivalent": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.selectedTripleMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.selectedTripleMatrix.eq_1": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.smallLinearIndependent_of_isSixArc": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.span_eq_top_of_isSixArc": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.subsystemLabel_eq_of_assemble_mem": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.tracePhase": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.tripleLinearIndependent_of_isSixArc": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.weylMatrix": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.weylMatrix.congr_simp": "RelativeConicArcs.AMELU.Dictionary",
+    "RelativeConicArcs.AMELU.weylMatrix.eq_1": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.weylMatrix_apply": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.AMELU.weylMatrix_zero_zero": "RelativeConicArcs.AMELU.Definitions",
+    "RelativeConicArcs.Admissible": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.Admissible.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.Arc": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.ArcPair": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.card": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.existsUnique_line": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.exists_eq_pair": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.line": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.line.congr_simp": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.line_injective": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.line_unique": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.mem_line": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.mem_of_mem_arc_of_mem_line": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.ArcPair.subset": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.ambient_finrank": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.casesOn": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.code_finrank": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.exists_minimumWeight_word": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.minimumDistance_ge_four": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.mk": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.rec": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.recOn": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.small_independent": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.spans": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.HasCoveringRadiusThree": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.PlanePoint": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly.unique": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.arc_image_iff_triples_linearIndependent": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_eq_supports": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_smul_of_ne_zero": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_three": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.every_syndrome_has_weight_le_three": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.exists_codeword_hammingWeight_eq_four": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.exists_unique_weightThree_leader_on_support": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.finrank_parityCheckCode": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingSupport": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingSupport.congr_simp": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingSupport.eq_1": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingSupport_smul_of_ne_zero": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingWeight": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingWeight.congr_simp": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingWeight.eq_1": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingWeight_ge_four_of_small_independent": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.hammingWeight_smul_of_ne_zero": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.instDecidableEqPlanePoint": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.mem_hammingSupport": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.mem_syndromeLeaderSupportsOfWeight": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.mem_syndromeLeadersOfWeight": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.parityCheckCode": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.parityCheckCode.eq_1": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.parityCheckMap": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.parityCheckMap.eq_1": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.parityCheckMap_smul": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.small_independent_of_triple_independent": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_one_of_ne_zero": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_smul_of_ne_zero": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_three_of_pair_avoidance": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_two_of_one_avoidance": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceExactly_smul_of_ne_zero": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight.eq_1": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight.congr_simp": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight.eq_1": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.CodingBridge.syndrome_leader_unique_of_support": "RelativeConicArcs.CodingBridge",
+    "RelativeConicArcs.Collinear": "RelativeConicArcs.Plane",
+    "RelativeConicArcs.Collinear.eq_1": "RelativeConicArcs.Plane",
+    "RelativeConicArcs.CompleteOutside": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.Covered": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.Covered.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.MaximalExtensionIn": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.MaximalPairExtensionIndependent": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.PairExtensionConflict": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.PairExtensionIndependent": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.PlaneOrder": "RelativeConicArcs.Plane",
+    "RelativeConicArcs.ProjectiveBridge.Point": "RelativeConicArcs.ProjectiveBridge",
+    "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap": "RelativeConicArcs.ProjectiveBridge",
+    "RelativeConicArcs.ProjectiveBridge.collinear_iff_projective_collinear": "RelativeConicArcs.ProjectiveBridge",
+    "RelativeConicArcs.ProjectiveBridge.planeOrder_eq_card": "RelativeConicArcs.ProjectiveBridge",
+    "RelativeConicArcs.Secant": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.admissiblePositions": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.admissiblePositions.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.arc_empty": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.arc_insert_iff_not_covered": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.arc_insert_of_not_covered": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.arc_mono": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.arc_union_iff_extension_hypergraph": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.arc_union_iff_pairExtensionIndependent_of_arc_locus": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.card_arcPair": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_disjointOrderedPairs": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_disjointPartners": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_externalOrderedPairs": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_external_pointsOnLine_eq_sum_indicator": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_external_pointsOnPairLine": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_orderedPairsThrough": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_pairsThrough_eq_sum_indicator": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_points": "RelativeConicArcs.Plane",
+    "RelativeConicArcs.card_pointsOnLine": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_points_on_line": "RelativeConicArcs.Plane",
+    "RelativeConicArcs.card_requiredLocus": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.card_secants": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.card_weightTwoLeaderSupports": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.choose_two_mul_choose_sub_two": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.collinear_rotate": "RelativeConicArcs.Plane",
+    "RelativeConicArcs.collinear_swap_left": "RelativeConicArcs.Plane",
+    "RelativeConicArcs.completeOutside_empty_of_maximalExtensionIn_full": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.completeOutside_iff_distanceThreeDirections_subset": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.completeOutside_iff_uncovered_eq_empty": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.coverage_bound": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.coveredRequired": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.coveredRequired.eq_1": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.covered_disjoint_uncovered": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.covered_iff_exists_secant": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.covered_of_collinear_pair": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.covered_union_uncovered": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.disjointOrderedPairs": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.disjointOrderedPairs.eq_1": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.disjointPartners": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.disjointPartners.eq_1": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.distanceThreeDirections": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.distanceThreeDirections.eq_1": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.distance_three_weightTwoLeaderSupports_eq_empty": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.distance_two_leader_support_count": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.exists_completeOutside": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.exists_completeOutside_card_eq_rho": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.externalOrderedPairs": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.externalOrderedPairs.eq_1": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.externalOrderedPairs_eq_disjointOrderedPairs": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.external_eq_holes_union_required": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.first_secant_moment": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.first_secant_moment_split": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.first_weightTwoLeader_moment": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.holeIncidence": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.holeIncidence.eq_1": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.holeRemainder": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.holeRemainder.eq_1": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.holeRemainder_nonneg": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.holes_disjoint_required": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.instDecidableIncidence": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.intermediateHoles": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.intermediateRequired": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.maximalExtensionIn_iff_maximalPairExtensionIndependent": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.mem_admissiblePositions": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.mem_disjointOrderedPairs": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.mem_disjointPartners": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.mem_distanceThreeDirections": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.mem_orderedPairsThrough": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.mem_pairsThrough": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.mem_pointsOnLine": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.mem_secants": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.oneColumnExtension_iff_distance_three": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.orderedPairsThrough": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.orderedPairsThrough.eq_1": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.orderedPairsThrough_pairwiseDisjoint": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pairsThrough": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pairsThrough.eq_1": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pairsThrough_pairwiseDisjoint": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pointIndex": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.pointIndex.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.pointIndex_eq_card_pairsThrough": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pointIndex_le_half_card": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pointsOnLine": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pointsOnLine.eq_1": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.pointsOnPairLine_inter_arc": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.powersetCard_filter_disjoint": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.projectiveSyndromeDistance": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.projectiveSyndromeDistance.congr_simp": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_one_iff": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_three_iff": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_two_iff": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.requiredLocus": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.requiredLocus.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.requiredRemainder": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.requiredRemainder.eq_1": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.requiredRemainder_nonneg": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.rho": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.rho.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.rho_le_card": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.scaledDefect": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.scaledDefect.eq_1": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.scaledDefect_eq_remainders": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.scaledDefect_eq_weightTwoLeader_remainders": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.scaledDefect_eq_zero_iff": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.scaledDefect_nonneg": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.secants": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.secants.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.secants_eq_image_pairLine": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.second_secant_moment": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.second_secant_moment_split": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.second_weightTwoLeader_collision_moment": "RelativeConicArcs.SyndromeGeometry",
+    "RelativeConicArcs.stability_bound": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.sum_choose_required_eq_sum_choose_coveredRequired": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.sum_required_eq_sum_coveredRequired": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.two_mul_choose_two": "RelativeConicArcs.Moments",
+    "RelativeConicArcs.uncovered": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.uncovered.eq_1": "RelativeConicArcs.Arc",
+    "RelativeConicArcs.uncovered_bound": "RelativeConicArcs.Defect",
+    "RelativeConicArcs.weightTwoLeaderSupports": "RelativeConicArcs.SyndromeGeometry"
+  },
+  "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "lean_version": "4.32.0-rc1",
+  "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "opaque": [],
+  "project_axioms": [],
+  "project_declarations": [
+    "FiniteGeom.IsMDS",
+    "FiniteGeom.IsMDS.eq_1",
+    "FiniteGeom.dualCode",
+    "FiniteGeom.dualDist",
+    "FiniteGeom.dualDist_le_hammingNorm",
+    "FiniteGeom.dual_word_column_relation",
+    "FiniteGeom.instFactPrimeOfNatNat_finiteGeom",
+    "FiniteGeom.le_dualDist_rowCode_of_column_independent",
+    "FiniteGeom.le_minDist",
+    "FiniteGeom.mem_dualCode",
+    "FiniteGeom.mem_dualCode_rowCode",
+    "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+    "FiniteGeom.mem_dualCode_rowCode_of_column_relation",
+    "FiniteGeom.minDist",
+    "FiniteGeom.minDist.congr_simp",
+    "FiniteGeom.minDist_le_hammingNorm",
+    "FiniteGeom.rowCode",
+    "FiniteGeom.row_mem_rowCode",
+    "FiniteGeom.singleton_bound",
+    "Matrix.row.eq_1",
+    "ProjectiveCap.Projective.Cap",
+    "ProjectiveCap.Projective.Collinear",
+    "ProjectiveCap.Projective.Point",
+    "ProjectiveCap.Projective.cap_empty",
+    "ProjectiveCap.Projective.cap_image_mapLinearEquiv",
+    "ProjectiveCap.Projective.cap_map_mapEquiv",
+    "ProjectiveCap.Projective.cap_map_mapLinearEquiv",
+    "ProjectiveCap.Projective.cap_mono",
+    "ProjectiveCap.Projective.cap_of_card_le_two",
+    "ProjectiveCap.Projective.cap_of_forall_triple",
+    "ProjectiveCap.Projective.cap_pair",
+    "ProjectiveCap.Projective.cap_quad_of_independent",
+    "ProjectiveCap.Projective.cap_singleton",
+    "ProjectiveCap.Projective.cap_triple_of_independent",
+    "ProjectiveCap.Projective.collinear_iff_dependent",
+    "ProjectiveCap.Projective.collinear_mapEquiv",
+    "ProjectiveCap.Projective.collinear_mapLinearEquiv",
+    "ProjectiveCap.Projective.collinear_of_collinear_pair",
+    "ProjectiveCap.Projective.collinear_of_dependent",
+    "ProjectiveCap.Projective.comp_rep_triple",
+    "ProjectiveCap.Projective.dependent_of_collinear",
+    "ProjectiveCap.Projective.exists_cons_li",
+    "ProjectiveCap.Projective.independent_triple_iff",
+    "ProjectiveCap.Projective.independent_triple_map",
+    "ProjectiveCap.Projective.independent_triple_mapLinearEquiv",
+    "ProjectiveCap.Projective.independent_triple_of_li",
+    "ProjectiveCap.Projective.li_rotate",
+    "ProjectiveCap.Projective.li_sub01",
+    "ProjectiveCap.Projective.li_sub02",
+    "ProjectiveCap.Projective.li_sub12",
+    "ProjectiveCap.Projective.li_with_sum12",
+    "ProjectiveCap.Projective.li_with_sum13",
+    "ProjectiveCap.Projective.li_with_sum23",
+    "ProjectiveCap.Projective.mapEquiv",
+    "ProjectiveCap.Projective.mapEquiv.eq_1",
+    "ProjectiveCap.Projective.mapEquiv_eq_of_rep_eq",
+    "ProjectiveCap.Projective.mapEquiv_mapEquiv_symm",
+    "ProjectiveCap.Projective.mapEquiv_mk",
+    "ProjectiveCap.Projective.mapEquiv_mk_eq_mk",
+    "ProjectiveCap.Projective.mapEquiv_symm_eq",
+    "ProjectiveCap.Projective.mapEquiv_symm_mapEquiv",
+    "ProjectiveCap.Projective.mapLinearEquiv",
+    "ProjectiveCap.Projective.mapLinearEquiv.eq_1",
+    "ProjectiveCap.Projective.mapLinearEquiv_apply_symm",
+    "ProjectiveCap.Projective.mapLinearEquiv_mk",
+    "ProjectiveCap.Projective.mapLinearEquiv_symm_apply",
+    "ProjectiveCap.Projective.mapLinearEquiv_symm_eq",
+    "ProjectiveCap.Projective.mem_projectivization_of_rep_mem",
+    "ProjectiveCap.Projective.mk_ne_of_li_pair",
+    "ProjectiveCap.Projective.ne_of_li_pair",
+    "ProjectiveCap.Projective.not_collinear_iff_independent",
+    "ProjectiveCap.Projective.quad_normal_form",
+    "ProjectiveCap.Projective.rep_mem_span_pair_of_collinear",
+    "ProjectiveCap.Projective.sum_ne_zero_of_li",
+    "RelativeConicArcs.AMELU.BasisLabel",
+    "RelativeConicArcs.AMELU.CodeFiber",
+    "RelativeConicArcs.AMELU.ConventionDictionary",
+    "RelativeConicArcs.AMELU.ConventionDictionary.arcCode",
+    "RelativeConicArcs.AMELU.ConventionDictionary.casesOn",
+    "RelativeConicArcs.AMELU.ConventionDictionary.code",
+    "RelativeConicArcs.AMELU.ConventionDictionary.ctorIdx",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.injEq",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion",
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion",
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType",
+    "RelativeConicArcs.AMELU.ConventionDictionary.rec",
+    "RelativeConicArcs.AMELU.ConventionDictionary.recOn",
+    "RelativeConicArcs.AMELU.ConventionDictionary.state",
+    "RelativeConicArcs.AMELU.ConventionDictionary.state_isAME",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl",
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl_usesTracePhase",
+    "RelativeConicArcs.AMELU.IsAME",
+    "RelativeConicArcs.AMELU.IsCliffordMatrix",
+    "RelativeConicArcs.AMELU.IsMDSCode634",
+    "RelativeConicArcs.AMELU.IsNormalized",
+    "RelativeConicArcs.AMELU.IsSixArc",
+    "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+    "RelativeConicArcs.AMELU.LocalMatrix",
+    "RelativeConicArcs.AMELU.LocallyCliffordEquivalent",
+    "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+    "RelativeConicArcs.AMELU.MonomiallyEquivalent",
+    "RelativeConicArcs.AMELU.Party",
+    "RelativeConicArcs.AMELU.PauliLabel",
+    "RelativeConicArcs.AMELU.PauliSupportedOn",
+    "RelativeConicArcs.AMELU.PlaneCoordinate",
+    "RelativeConicArcs.AMELU.ProjectivelyEquivalent",
+    "RelativeConicArcs.AMELU.SameMatrixAxis",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.ctorIdx",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.isSixArc",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.kernel_isMDSCode634",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.injEq",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.points",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.rec",
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.recOn",
+    "RelativeConicArcs.AMELU.State",
+    "RelativeConicArcs.AMELU.UsesTracePhase",
+    "RelativeConicArcs.AMELU.WeylConvention",
+    "RelativeConicArcs.AMELU.WeylConvention.casesOn",
+    "RelativeConicArcs.AMELU.WeylConvention.character",
+    "RelativeConicArcs.AMELU.WeylConvention.character_nontrivial",
+    "RelativeConicArcs.AMELU.WeylConvention.ctorIdx",
+    "RelativeConicArcs.AMELU.WeylConvention.mk",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.inj",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.injEq",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion",
+    "RelativeConicArcs.AMELU.WeylConvention.mk.sizeOf_spec",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusion",
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusionType",
+    "RelativeConicArcs.AMELU.WeylConvention.rec",
+    "RelativeConicArcs.AMELU.WeylConvention.recOn",
+    "RelativeConicArcs.AMELU.arcKernel",
+    "RelativeConicArcs.AMELU.arcKernel.eq_1",
+    "RelativeConicArcs.AMELU.arcKernel_eq_parityCheckCode",
+    "RelativeConicArcs.AMELU.assembleLabel",
+    "RelativeConicArcs.AMELU.assembleLabel.eq_1",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_mem",
+    "RelativeConicArcs.AMELU.assembleLabel_apply_not_mem",
+    "RelativeConicArcs.AMELU.card_codeFiber",
+    "RelativeConicArcs.AMELU.card_codewordFinset",
+    "RelativeConicArcs.AMELU.card_environmentFiber",
+    "RelativeConicArcs.AMELU.codeFiberEquivKer",
+    "RelativeConicArcs.AMELU.codeProjection",
+    "RelativeConicArcs.AMELU.codeProjection.eq_1",
+    "RelativeConicArcs.AMELU.codeProjection_bijective_of_card_three",
+    "RelativeConicArcs.AMELU.codeProjection_injective_of_card_three",
+    "RelativeConicArcs.AMELU.codeProjection_surjective",
+    "RelativeConicArcs.AMELU.codeStateNormalization",
+    "RelativeConicArcs.AMELU.codeStateNormalization_mul_conj",
+    "RelativeConicArcs.AMELU.codewordFinset",
+    "RelativeConicArcs.AMELU.codewordFinset.eq_1",
+    "RelativeConicArcs.AMELU.codeword_eq_of_eq_outside",
+    "RelativeConicArcs.AMELU.codimThreeMDSColumns_of_isSixArc",
+    "RelativeConicArcs.AMELU.conjugate_weyl_multiplier",
+    "RelativeConicArcs.AMELU.cssLabelSpace",
+    "RelativeConicArcs.AMELU.cssSupportedLabelSpace",
+    "RelativeConicArcs.AMELU.environmentFiberEquivCodeFiber",
+    "RelativeConicArcs.AMELU.environmentFiberFinset",
+    "RelativeConicArcs.AMELU.environmentFiberFinset.eq_1",
+    "RelativeConicArcs.AMELU.equalPhaseState",
+    "RelativeConicArcs.AMELU.equalPhaseState.congr_simp",
+    "RelativeConicArcs.AMELU.equalPhaseState.eq_1",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_mem",
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_not_mem",
+    "RelativeConicArcs.AMELU.fiberCard_mul_normalization",
+    "RelativeConicArcs.AMELU.finrank_ker_codeProjection",
+    "RelativeConicArcs.AMELU.hammingWeight_eq_hammingNorm",
+    "RelativeConicArcs.AMELU.inverseMonomialPreimage",
+    "RelativeConicArcs.AMELU.inverseMonomialPreimage.eq_1",
+    "RelativeConicArcs.AMELU.inverseMultiplierLabel",
+    "RelativeConicArcs.AMELU.inverseMultiplierLabel.eq_1",
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState",
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState_arcKernel",
+    "RelativeConicArcs.AMELU.isCliffordMatrix_multiplierMatrix",
+    "RelativeConicArcs.AMELU.isMDSCode634_arcKernel",
+    "RelativeConicArcs.AMELU.isMDS_of_isMDSCode634",
+    "RelativeConicArcs.AMELU.isNormalized_equalPhaseState",
+    "RelativeConicArcs.AMELU.isUnitaryMatrix_multiplierMatrix",
+    "RelativeConicArcs.AMELU.localAction",
+    "RelativeConicArcs.AMELU.localAction_multiplierMatrix",
+    "RelativeConicArcs.AMELU.locallyCliffordEquivalent_implies_locallyUnitaryEquivalent",
+    "RelativeConicArcs.AMELU.marginalEntry",
+    "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_of_ne",
+    "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_self",
+    "RelativeConicArcs.AMELU.matrixProduct",
+    "RelativeConicArcs.AMELU.matrixProduct.eq_1",
+    "RelativeConicArcs.AMELU.mem_arcKernel",
+    "RelativeConicArcs.AMELU.mem_cssLabelSpace",
+    "RelativeConicArcs.AMELU.mem_cssSupportedLabelSpace",
+    "RelativeConicArcs.AMELU.mem_of_monomiallyEquivalent",
+    "RelativeConicArcs.AMELU.monomialLabel",
+    "RelativeConicArcs.AMELU.monomialLabel.eq_1",
+    "RelativeConicArcs.AMELU.monomialLabel_apply",
+    "RelativeConicArcs.AMELU.monomiallyEquivalent_equalPhaseState_locallyCliffordEquivalent",
+    "RelativeConicArcs.AMELU.multiplierMatrix",
+    "RelativeConicArcs.AMELU.multiplierMatrix.congr_simp",
+    "RelativeConicArcs.AMELU.multiplierMatrix.eq_1",
+    "RelativeConicArcs.AMELU.multiplierMatrix_apply",
+    "RelativeConicArcs.AMELU.parityCheckMatrix",
+    "RelativeConicArcs.AMELU.parityCheckMatrix.eq_1",
+    "RelativeConicArcs.AMELU.pauliSupport",
+    "RelativeConicArcs.AMELU.pauliSupport_subset_iff",
+    "RelativeConicArcs.AMELU.permuteLabel",
+    "RelativeConicArcs.AMELU.permuteLabel_apply",
+    "RelativeConicArcs.AMELU.permuteLabel_refl",
+    "RelativeConicArcs.AMELU.permuteLabel_trans",
+    "RelativeConicArcs.AMELU.permuteState",
+    "RelativeConicArcs.AMELU.permuteState_apply",
+    "RelativeConicArcs.AMELU.permuteState_refl",
+    "RelativeConicArcs.AMELU.permuteState_trans",
+    "RelativeConicArcs.AMELU.projectivelyEquivalent_arcKernel_monomiallyEquivalent",
+    "RelativeConicArcs.AMELU.projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent",
+    "RelativeConicArcs.AMELU.selectedTripleMatrix",
+    "RelativeConicArcs.AMELU.selectedTripleMatrix.eq_1",
+    "RelativeConicArcs.AMELU.smallLinearIndependent_of_isSixArc",
+    "RelativeConicArcs.AMELU.span_eq_top_of_isSixArc",
+    "RelativeConicArcs.AMELU.subsystemLabel_eq_of_assemble_mem",
+    "RelativeConicArcs.AMELU.tracePhase",
+    "RelativeConicArcs.AMELU.tripleLinearIndependent_of_isSixArc",
+    "RelativeConicArcs.AMELU.weylMatrix",
+    "RelativeConicArcs.AMELU.weylMatrix.congr_simp",
+    "RelativeConicArcs.AMELU.weylMatrix.eq_1",
+    "RelativeConicArcs.AMELU.weylMatrix_apply",
+    "RelativeConicArcs.AMELU.weylMatrix_zero_zero",
+    "RelativeConicArcs.Admissible",
+    "RelativeConicArcs.Admissible.eq_1",
+    "RelativeConicArcs.Arc",
+    "RelativeConicArcs.ArcPair",
+    "RelativeConicArcs.ArcPair.card",
+    "RelativeConicArcs.ArcPair.existsUnique_line",
+    "RelativeConicArcs.ArcPair.exists_eq_pair",
+    "RelativeConicArcs.ArcPair.line",
+    "RelativeConicArcs.ArcPair.line.congr_simp",
+    "RelativeConicArcs.ArcPair.line_injective",
+    "RelativeConicArcs.ArcPair.line_unique",
+    "RelativeConicArcs.ArcPair.mem_line",
+    "RelativeConicArcs.ArcPair.mem_of_mem_arc_of_mem_line",
+    "RelativeConicArcs.ArcPair.subset",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.ambient_finrank",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.casesOn",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.code_finrank",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.exists_minimumWeight_word",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.minimumDistance_ge_four",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.mk",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.rec",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.recOn",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.small_independent",
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.spans",
+    "RelativeConicArcs.CodingBridge.HasCoveringRadiusThree",
+    "RelativeConicArcs.CodingBridge.PlanePoint",
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly",
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly.unique",
+    "RelativeConicArcs.CodingBridge.arc_image_iff_triples_linearIndependent",
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_eq_supports",
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_smul_of_ne_zero",
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_three",
+    "RelativeConicArcs.CodingBridge.every_syndrome_has_weight_le_three",
+    "RelativeConicArcs.CodingBridge.exists_codeword_hammingWeight_eq_four",
+    "RelativeConicArcs.CodingBridge.exists_unique_weightThree_leader_on_support",
+    "RelativeConicArcs.CodingBridge.finrank_parityCheckCode",
+    "RelativeConicArcs.CodingBridge.hammingSupport",
+    "RelativeConicArcs.CodingBridge.hammingSupport.congr_simp",
+    "RelativeConicArcs.CodingBridge.hammingSupport.eq_1",
+    "RelativeConicArcs.CodingBridge.hammingSupport_smul_of_ne_zero",
+    "RelativeConicArcs.CodingBridge.hammingWeight",
+    "RelativeConicArcs.CodingBridge.hammingWeight.congr_simp",
+    "RelativeConicArcs.CodingBridge.hammingWeight.eq_1",
+    "RelativeConicArcs.CodingBridge.hammingWeight_ge_four_of_small_independent",
+    "RelativeConicArcs.CodingBridge.hammingWeight_smul_of_ne_zero",
+    "RelativeConicArcs.CodingBridge.instDecidableEqPlanePoint",
+    "RelativeConicArcs.CodingBridge.mem_hammingSupport",
+    "RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff",
+    "RelativeConicArcs.CodingBridge.mem_syndromeLeaderSupportsOfWeight",
+    "RelativeConicArcs.CodingBridge.mem_syndromeLeadersOfWeight",
+    "RelativeConicArcs.CodingBridge.parityCheckCode",
+    "RelativeConicArcs.CodingBridge.parityCheckCode.eq_1",
+    "RelativeConicArcs.CodingBridge.parityCheckMap",
+    "RelativeConicArcs.CodingBridge.parityCheckMap.eq_1",
+    "RelativeConicArcs.CodingBridge.parityCheckMap_smul",
+    "RelativeConicArcs.CodingBridge.small_independent_of_triple_independent",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_one_of_ne_zero",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_smul_of_ne_zero",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_three_of_pair_avoidance",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_two_of_one_avoidance",
+    "RelativeConicArcs.CodingBridge.syndromeDistanceExactly_smul_of_ne_zero",
+    "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight",
+    "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight.eq_1",
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight",
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight.congr_simp",
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight.eq_1",
+    "RelativeConicArcs.CodingBridge.syndrome_leader_unique_of_support",
+    "RelativeConicArcs.Collinear",
+    "RelativeConicArcs.Collinear.eq_1",
+    "RelativeConicArcs.CompleteOutside",
+    "RelativeConicArcs.Covered",
+    "RelativeConicArcs.Covered.eq_1",
+    "RelativeConicArcs.MaximalExtensionIn",
+    "RelativeConicArcs.MaximalPairExtensionIndependent",
+    "RelativeConicArcs.PairExtensionConflict",
+    "RelativeConicArcs.PairExtensionIndependent",
+    "RelativeConicArcs.PlaneOrder",
+    "RelativeConicArcs.ProjectiveBridge.Point",
+    "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap",
+    "RelativeConicArcs.ProjectiveBridge.collinear_iff_projective_collinear",
+    "RelativeConicArcs.ProjectiveBridge.planeOrder_eq_card",
+    "RelativeConicArcs.Secant",
+    "RelativeConicArcs.admissiblePositions",
+    "RelativeConicArcs.admissiblePositions.eq_1",
+    "RelativeConicArcs.arc_empty",
+    "RelativeConicArcs.arc_insert_iff_not_covered",
+    "RelativeConicArcs.arc_insert_of_not_covered",
+    "RelativeConicArcs.arc_mono",
+    "RelativeConicArcs.arc_union_iff_extension_hypergraph",
+    "RelativeConicArcs.arc_union_iff_pairExtensionIndependent_of_arc_locus",
+    "RelativeConicArcs.card_arcPair",
+    "RelativeConicArcs.card_disjointOrderedPairs",
+    "RelativeConicArcs.card_disjointPartners",
+    "RelativeConicArcs.card_externalOrderedPairs",
+    "RelativeConicArcs.card_external_pointsOnLine_eq_sum_indicator",
+    "RelativeConicArcs.card_external_pointsOnPairLine",
+    "RelativeConicArcs.card_orderedPairsThrough",
+    "RelativeConicArcs.card_pairsThrough_eq_sum_indicator",
+    "RelativeConicArcs.card_points",
+    "RelativeConicArcs.card_pointsOnLine",
+    "RelativeConicArcs.card_points_on_line",
+    "RelativeConicArcs.card_requiredLocus",
+    "RelativeConicArcs.card_secants",
+    "RelativeConicArcs.card_weightTwoLeaderSupports",
+    "RelativeConicArcs.choose_two_mul_choose_sub_two",
+    "RelativeConicArcs.collinear_rotate",
+    "RelativeConicArcs.collinear_swap_left",
+    "RelativeConicArcs.completeOutside_empty_of_maximalExtensionIn_full",
+    "RelativeConicArcs.completeOutside_iff_distanceThreeDirections_subset",
+    "RelativeConicArcs.completeOutside_iff_uncovered_eq_empty",
+    "RelativeConicArcs.coverage_bound",
+    "RelativeConicArcs.coveredRequired",
+    "RelativeConicArcs.coveredRequired.eq_1",
+    "RelativeConicArcs.covered_disjoint_uncovered",
+    "RelativeConicArcs.covered_iff_exists_secant",
+    "RelativeConicArcs.covered_of_collinear_pair",
+    "RelativeConicArcs.covered_union_uncovered",
+    "RelativeConicArcs.disjointOrderedPairs",
+    "RelativeConicArcs.disjointOrderedPairs.eq_1",
+    "RelativeConicArcs.disjointPartners",
+    "RelativeConicArcs.disjointPartners.eq_1",
+    "RelativeConicArcs.distanceThreeDirections",
+    "RelativeConicArcs.distanceThreeDirections.eq_1",
+    "RelativeConicArcs.distance_three_weightTwoLeaderSupports_eq_empty",
+    "RelativeConicArcs.distance_two_leader_support_count",
+    "RelativeConicArcs.exists_completeOutside",
+    "RelativeConicArcs.exists_completeOutside_card_eq_rho",
+    "RelativeConicArcs.externalOrderedPairs",
+    "RelativeConicArcs.externalOrderedPairs.eq_1",
+    "RelativeConicArcs.externalOrderedPairs_eq_disjointOrderedPairs",
+    "RelativeConicArcs.external_eq_holes_union_required",
+    "RelativeConicArcs.first_secant_moment",
+    "RelativeConicArcs.first_secant_moment_split",
+    "RelativeConicArcs.first_weightTwoLeader_moment",
+    "RelativeConicArcs.holeIncidence",
+    "RelativeConicArcs.holeIncidence.eq_1",
+    "RelativeConicArcs.holeRemainder",
+    "RelativeConicArcs.holeRemainder.eq_1",
+    "RelativeConicArcs.holeRemainder_nonneg",
+    "RelativeConicArcs.holes_disjoint_required",
+    "RelativeConicArcs.instDecidableIncidence",
+    "RelativeConicArcs.intermediateHoles",
+    "RelativeConicArcs.intermediateRequired",
+    "RelativeConicArcs.maximalExtensionIn_iff_maximalPairExtensionIndependent",
+    "RelativeConicArcs.mem_admissiblePositions",
+    "RelativeConicArcs.mem_disjointOrderedPairs",
+    "RelativeConicArcs.mem_disjointPartners",
+    "RelativeConicArcs.mem_distanceThreeDirections",
+    "RelativeConicArcs.mem_orderedPairsThrough",
+    "RelativeConicArcs.mem_pairsThrough",
+    "RelativeConicArcs.mem_pointsOnLine",
+    "RelativeConicArcs.mem_secants",
+    "RelativeConicArcs.oneColumnExtension_iff_distance_three",
+    "RelativeConicArcs.orderedPairsThrough",
+    "RelativeConicArcs.orderedPairsThrough.eq_1",
+    "RelativeConicArcs.orderedPairsThrough_pairwiseDisjoint",
+    "RelativeConicArcs.pairsThrough",
+    "RelativeConicArcs.pairsThrough.eq_1",
+    "RelativeConicArcs.pairsThrough_pairwiseDisjoint",
+    "RelativeConicArcs.pointIndex",
+    "RelativeConicArcs.pointIndex.eq_1",
+    "RelativeConicArcs.pointIndex_eq_card_pairsThrough",
+    "RelativeConicArcs.pointIndex_le_half_card",
+    "RelativeConicArcs.pointsOnLine",
+    "RelativeConicArcs.pointsOnLine.eq_1",
+    "RelativeConicArcs.pointsOnPairLine_inter_arc",
+    "RelativeConicArcs.powersetCard_filter_disjoint",
+    "RelativeConicArcs.projectiveSyndromeDistance",
+    "RelativeConicArcs.projectiveSyndromeDistance.congr_simp",
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_one_iff",
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_three_iff",
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_two_iff",
+    "RelativeConicArcs.requiredLocus",
+    "RelativeConicArcs.requiredLocus.eq_1",
+    "RelativeConicArcs.requiredRemainder",
+    "RelativeConicArcs.requiredRemainder.eq_1",
+    "RelativeConicArcs.requiredRemainder_nonneg",
+    "RelativeConicArcs.rho",
+    "RelativeConicArcs.rho.eq_1",
+    "RelativeConicArcs.rho_le_card",
+    "RelativeConicArcs.scaledDefect",
+    "RelativeConicArcs.scaledDefect.eq_1",
+    "RelativeConicArcs.scaledDefect_eq_remainders",
+    "RelativeConicArcs.scaledDefect_eq_weightTwoLeader_remainders",
+    "RelativeConicArcs.scaledDefect_eq_zero_iff",
+    "RelativeConicArcs.scaledDefect_nonneg",
+    "RelativeConicArcs.secants",
+    "RelativeConicArcs.secants.eq_1",
+    "RelativeConicArcs.secants_eq_image_pairLine",
+    "RelativeConicArcs.second_secant_moment",
+    "RelativeConicArcs.second_secant_moment_split",
+    "RelativeConicArcs.second_weightTwoLeader_collision_moment",
+    "RelativeConicArcs.stability_bound",
+    "RelativeConicArcs.sum_choose_required_eq_sum_choose_coveredRequired",
+    "RelativeConicArcs.sum_required_eq_sum_coveredRequired",
+    "RelativeConicArcs.two_mul_choose_two",
+    "RelativeConicArcs.uncovered",
+    "RelativeConicArcs.uncovered.eq_1",
+    "RelativeConicArcs.uncovered_bound",
+    "RelativeConicArcs.weightTwoLeaderSupports"
+  ],
+  "schema_version": 1,
+  "terminal_axioms": {},
+  "unit": "RelativeConicArcs.Gates.AMELUDictionaryAxioms",
+  "uses": {
+    "FiniteGeom.IsMDS": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.IsMDS.eq_1": [
+      "FiniteGeom.IsMDS",
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.dualDist": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.dualDist_le_hammingNorm": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.minDist_le_hammingNorm"
+    ],
+    "FiniteGeom.dual_word_column_relation": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.le_dualDist_rowCode_of_column_independent": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.le_minDist",
+      "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.le_minDist": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.mem_dualCode": [
+      "FiniteGeom.dualCode"
+    ],
+    "FiniteGeom.mem_dualCode_rowCode": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode",
+      "FiniteGeom.rowCode",
+      "FiniteGeom.row_mem_rowCode"
+    ],
+    "FiniteGeom.mem_dualCode_rowCode_iff_mulVec": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode_rowCode",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.mem_dualCode_rowCode_of_column_relation": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_dualCode_rowCode_iff_mulVec",
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.minDist.congr_simp": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.minDist_le_hammingNorm": [
+      "FiniteGeom.minDist"
+    ],
+    "FiniteGeom.row_mem_rowCode": [
+      "FiniteGeom.rowCode"
+    ],
+    "FiniteGeom.singleton_bound": [
+      "FiniteGeom.minDist",
+      "FiniteGeom.minDist_le_hammingNorm"
+    ],
+    "ProjectiveCap.Projective.Cap": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.Collinear": [
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.cap_empty": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.cap_of_card_le_two"
+    ],
+    "ProjectiveCap.Projective.cap_image_mapLinearEquiv": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.collinear_mapLinearEquiv",
+      "ProjectiveCap.Projective.mapLinearEquiv",
+      "ProjectiveCap.Projective.mapLinearEquiv_apply_symm"
+    ],
+    "ProjectiveCap.Projective.cap_map_mapEquiv": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.collinear_mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv_mapEquiv_symm"
+    ],
+    "ProjectiveCap.Projective.cap_map_mapLinearEquiv": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.cap_image_mapLinearEquiv",
+      "ProjectiveCap.Projective.mapLinearEquiv"
+    ],
+    "ProjectiveCap.Projective.cap_mono": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.cap_of_card_le_two": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.cap_of_forall_triple": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.cap_pair": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.cap_of_card_le_two"
+    ],
+    "ProjectiveCap.Projective.cap_quad_of_independent": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.cap_of_forall_triple",
+      "ProjectiveCap.Projective.independent_triple_iff",
+      "ProjectiveCap.Projective.li_sub01",
+      "ProjectiveCap.Projective.li_sub02",
+      "ProjectiveCap.Projective.li_sub12",
+      "ProjectiveCap.Projective.ne_of_li_pair",
+      "ProjectiveCap.Projective.not_collinear_iff_independent"
+    ],
+    "ProjectiveCap.Projective.cap_singleton": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.cap_of_card_le_two"
+    ],
+    "ProjectiveCap.Projective.cap_triple_of_independent": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.cap_of_forall_triple",
+      "ProjectiveCap.Projective.independent_triple_iff",
+      "ProjectiveCap.Projective.li_sub01",
+      "ProjectiveCap.Projective.li_sub02",
+      "ProjectiveCap.Projective.li_sub12",
+      "ProjectiveCap.Projective.ne_of_li_pair",
+      "ProjectiveCap.Projective.not_collinear_iff_independent"
+    ],
+    "ProjectiveCap.Projective.collinear_iff_dependent": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.collinear_of_dependent",
+      "ProjectiveCap.Projective.dependent_of_collinear"
+    ],
+    "ProjectiveCap.Projective.collinear_mapEquiv": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_map",
+      "ProjectiveCap.Projective.mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv_symm_mapEquiv",
+      "ProjectiveCap.Projective.not_collinear_iff_independent"
+    ],
+    "ProjectiveCap.Projective.collinear_mapLinearEquiv": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_mapLinearEquiv",
+      "ProjectiveCap.Projective.mapLinearEquiv",
+      "ProjectiveCap.Projective.mapLinearEquiv_symm_apply",
+      "ProjectiveCap.Projective.not_collinear_iff_independent"
+    ],
+    "ProjectiveCap.Projective.collinear_of_collinear_pair": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mem_projectivization_of_rep_mem",
+      "ProjectiveCap.Projective.rep_mem_span_pair_of_collinear"
+    ],
+    "ProjectiveCap.Projective.collinear_of_dependent": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_iff",
+      "ProjectiveCap.Projective.mem_projectivization_of_rep_mem"
+    ],
+    "ProjectiveCap.Projective.comp_rep_triple": [
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.dependent_of_collinear": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_iff"
+    ],
+    "ProjectiveCap.Projective.independent_triple_iff": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.comp_rep_triple"
+    ],
+    "ProjectiveCap.Projective.independent_triple_map": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_iff",
+      "ProjectiveCap.Projective.independent_triple_of_li",
+      "ProjectiveCap.Projective.mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv_mk"
+    ],
+    "ProjectiveCap.Projective.independent_triple_mapLinearEquiv": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_iff",
+      "ProjectiveCap.Projective.independent_triple_of_li",
+      "ProjectiveCap.Projective.mapLinearEquiv",
+      "ProjectiveCap.Projective.mapLinearEquiv_mk"
+    ],
+    "ProjectiveCap.Projective.mapEquiv": [
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.mapEquiv.eq_1": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapEquiv"
+    ],
+    "ProjectiveCap.Projective.mapEquiv_eq_of_rep_eq": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv_mk_eq_mk"
+    ],
+    "ProjectiveCap.Projective.mapEquiv_mapEquiv_symm": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv_mk"
+    ],
+    "ProjectiveCap.Projective.mapEquiv_mk": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapEquiv"
+    ],
+    "ProjectiveCap.Projective.mapEquiv_mk_eq_mk": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv_mk"
+    ],
+    "ProjectiveCap.Projective.mapEquiv_symm_eq": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapEquiv"
+    ],
+    "ProjectiveCap.Projective.mapEquiv_symm_mapEquiv": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapEquiv",
+      "ProjectiveCap.Projective.mapEquiv_mk"
+    ],
+    "ProjectiveCap.Projective.mapLinearEquiv": [
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.mapLinearEquiv.eq_1": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapLinearEquiv"
+    ],
+    "ProjectiveCap.Projective.mapLinearEquiv_apply_symm": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapLinearEquiv"
+    ],
+    "ProjectiveCap.Projective.mapLinearEquiv_mk": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapLinearEquiv"
+    ],
+    "ProjectiveCap.Projective.mapLinearEquiv_symm_apply": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapLinearEquiv"
+    ],
+    "ProjectiveCap.Projective.mapLinearEquiv_symm_eq": [
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.mapLinearEquiv"
+    ],
+    "ProjectiveCap.Projective.mem_projectivization_of_rep_mem": [
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.mk_ne_of_li_pair": [
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.ne_of_li_pair": [
+      "ProjectiveCap.Projective.Point"
+    ],
+    "ProjectiveCap.Projective.not_collinear_iff_independent": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.collinear_iff_dependent"
+    ],
+    "ProjectiveCap.Projective.quad_normal_form": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_iff",
+      "ProjectiveCap.Projective.not_collinear_iff_independent"
+    ],
+    "ProjectiveCap.Projective.rep_mem_span_pair_of_collinear": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.collinear_iff_dependent",
+      "ProjectiveCap.Projective.independent_triple_iff"
+    ],
+    "RelativeConicArcs.AMELU.BasisLabel": [
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.CodeFiber": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeProjection"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.arcCode": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.casesOn": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.rec",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.code": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.arcCode",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.points",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.ctorIdx": [
+      "RelativeConicArcs.AMELU.ConventionDictionary"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.injEq": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk.inj",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusion": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.casesOn",
+      "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.noConfusionType": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.casesOn",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.rec": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.recOn": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.mk",
+      "RelativeConicArcs.AMELU.ConventionDictionary.rec",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.UsesTracePhase",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.state": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.code",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.state_isAME": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.arcCode",
+      "RelativeConicArcs.AMELU.ConventionDictionary.code",
+      "RelativeConicArcs.AMELU.ConventionDictionary.state",
+      "RelativeConicArcs.AMELU.IsAME",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.kernel_isMDSCode634",
+      "RelativeConicArcs.AMELU.isAME_equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.ConventionDictionary.weyl_usesTracePhase": [
+      "RelativeConicArcs.AMELU.ConventionDictionary",
+      "RelativeConicArcs.AMELU.ConventionDictionary.weyl",
+      "RelativeConicArcs.AMELU.UsesTracePhase"
+    ],
+    "RelativeConicArcs.AMELU.IsAME": [
+      "RelativeConicArcs.AMELU.IsNormalized",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.marginalEntry"
+    ],
+    "RelativeConicArcs.AMELU.IsCliffordMatrix": [
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.SameMatrixAxis",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.matrixProduct",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.IsMDSCode634": [
+      "FiniteGeom.minDist",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.IsNormalized": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State"
+    ],
+    "RelativeConicArcs.AMELU.IsSixArc": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.selectedTripleMatrix"
+    ],
+    "RelativeConicArcs.AMELU.IsUnitaryMatrix": [
+      "RelativeConicArcs.AMELU.LocalMatrix"
+    ],
+    "RelativeConicArcs.AMELU.LocallyCliffordEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsCliffordMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.MonomiallyEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.monomialLabel"
+    ],
+    "RelativeConicArcs.AMELU.PauliLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel"
+    ],
+    "RelativeConicArcs.AMELU.PauliSupportedOn": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PauliLabel"
+    ],
+    "RelativeConicArcs.AMELU.ProjectivelyEquivalent": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.SameMatrixAxis": [
+      "RelativeConicArcs.AMELU.LocalMatrix"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.rec",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.ctorIdx": [
+      "RelativeConicArcs.AMELU.SixArcMDSKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.isSixArc": [
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.points"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.kernel_isMDSCode634": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.points",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.injEq": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.inj",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusion": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.noConfusionType": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.casesOn",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.points": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.rec": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.SixArcMDSKernel.recOn": [
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.mk",
+      "RelativeConicArcs.AMELU.SixArcMDSKernel.rec",
+      "RelativeConicArcs.AMELU.arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.State": [
+      "RelativeConicArcs.AMELU.BasisLabel"
+    ],
+    "RelativeConicArcs.AMELU.UsesTracePhase": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.tracePhase"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.casesOn": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.rec"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.character": [
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.character_nontrivial": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.ctorIdx": [
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk": [
+      "RelativeConicArcs.AMELU.WeylConvention"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.inj": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.injEq": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.mk.inj"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.noConfusion": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.noConfusion"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.mk.sizeOf_spec": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusion": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.casesOn",
+      "RelativeConicArcs.AMELU.WeylConvention.noConfusionType"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.noConfusionType": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.casesOn"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.rec": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk"
+    ],
+    "RelativeConicArcs.AMELU.WeylConvention.recOn": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.mk",
+      "RelativeConicArcs.AMELU.WeylConvention.rec"
+    ],
+    "RelativeConicArcs.AMELU.arcKernel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.parityCheckMatrix"
+    ],
+    "RelativeConicArcs.AMELU.arcKernel.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.parityCheckMatrix"
+    ],
+    "RelativeConicArcs.AMELU.arcKernel_eq_parityCheckCode": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.mem_arcKernel",
+      "RelativeConicArcs.AMELU.parityCheckMatrix",
+      "RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel.eq_1": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel_apply_mem": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.assembleLabel_apply_not_mem": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.card_codeFiber": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.CodeFiber",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeFiberEquivKer",
+      "RelativeConicArcs.AMELU.codeProjection",
+      "RelativeConicArcs.AMELU.codeProjection_surjective",
+      "RelativeConicArcs.AMELU.finrank_ker_codeProjection"
+    ],
+    "RelativeConicArcs.AMELU.card_codewordFinset": [
+      "FiniteGeom.minDist",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codewordFinset",
+      "RelativeConicArcs.AMELU.codewordFinset.eq_1"
+    ],
+    "RelativeConicArcs.AMELU.card_environmentFiber": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.CodeFiber",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel",
+      "RelativeConicArcs.AMELU.card_codeFiber",
+      "RelativeConicArcs.AMELU.environmentFiberEquivCodeFiber",
+      "RelativeConicArcs.AMELU.environmentFiberFinset",
+      "RelativeConicArcs.AMELU.environmentFiberFinset.eq_1"
+    ],
+    "RelativeConicArcs.AMELU.codeFiberEquivKer": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.CodeFiber",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeProjection"
+    ],
+    "RelativeConicArcs.AMELU.codeProjection": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.codeProjection.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeProjection"
+    ],
+    "RelativeConicArcs.AMELU.codeProjection_bijective_of_card_three": [
+      "FiniteGeom.minDist",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeProjection",
+      "RelativeConicArcs.AMELU.codeProjection_injective_of_card_three"
+    ],
+    "RelativeConicArcs.AMELU.codeProjection_injective_of_card_three": [
+      "FiniteGeom.minDist",
+      "FiniteGeom.minDist_le_hammingNorm",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeProjection"
+    ],
+    "RelativeConicArcs.AMELU.codeProjection_surjective": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeProjection",
+      "RelativeConicArcs.AMELU.codeProjection_bijective_of_card_three"
+    ],
+    "RelativeConicArcs.AMELU.codeStateNormalization_mul_conj": [
+      "RelativeConicArcs.AMELU.codeStateNormalization"
+    ],
+    "RelativeConicArcs.AMELU.codewordFinset": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.codewordFinset.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codewordFinset"
+    ],
+    "RelativeConicArcs.AMELU.codeword_eq_of_eq_outside": [
+      "FiniteGeom.minDist",
+      "FiniteGeom.minDist_le_hammingNorm",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.codimThreeMDSColumns_of_isSixArc": [
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.smallLinearIndependent_of_isSixArc",
+      "RelativeConicArcs.AMELU.span_eq_top_of_isSixArc",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.mk"
+    ],
+    "RelativeConicArcs.AMELU.conjugate_weyl_multiplier": [
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.matrixProduct",
+      "RelativeConicArcs.AMELU.multiplierMatrix",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.cssLabelSpace": [
+      "FiniteGeom.dualCode",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PauliLabel"
+    ],
+    "RelativeConicArcs.AMELU.cssSupportedLabelSpace": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PauliLabel",
+      "RelativeConicArcs.AMELU.PauliSupportedOn",
+      "RelativeConicArcs.AMELU.cssLabelSpace"
+    ],
+    "RelativeConicArcs.AMELU.environmentFiberEquivCodeFiber": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.CodeFiber",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel",
+      "RelativeConicArcs.AMELU.codeProjection"
+    ],
+    "RelativeConicArcs.AMELU.environmentFiberFinset": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.environmentFiberFinset.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel",
+      "RelativeConicArcs.AMELU.environmentFiberFinset"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.codeStateNormalization"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState.congr_simp": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_mem": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState_apply_of_not_mem": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.fiberCard_mul_normalization": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.codeStateNormalization_mul_conj"
+    ],
+    "RelativeConicArcs.AMELU.finrank_ker_codeProjection": [
+      "FiniteGeom.minDist",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.codeProjection",
+      "RelativeConicArcs.AMELU.codeProjection_surjective"
+    ],
+    "RelativeConicArcs.AMELU.hammingWeight_eq_hammingNorm": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.CodingBridge.hammingWeight"
+    ],
+    "RelativeConicArcs.AMELU.inverseMonomialPreimage": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.inverseMonomialPreimage.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.inverseMonomialPreimage"
+    ],
+    "RelativeConicArcs.AMELU.inverseMultiplierLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.inverseMultiplierLabel.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.inverseMultiplierLabel"
+    ],
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsAME",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsNormalized",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.isNormalized_equalPhaseState",
+      "RelativeConicArcs.AMELU.marginalEntry",
+      "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_of_ne",
+      "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_self"
+    ],
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState_arcKernel": [
+      "RelativeConicArcs.AMELU.IsAME",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.isAME_equalPhaseState",
+      "RelativeConicArcs.AMELU.isMDSCode634_arcKernel"
+    ],
+    "RelativeConicArcs.AMELU.isCliffordMatrix_multiplierMatrix": [
+      "RelativeConicArcs.AMELU.IsCliffordMatrix",
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.SameMatrixAxis",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.conjugate_weyl_multiplier",
+      "RelativeConicArcs.AMELU.isUnitaryMatrix_multiplierMatrix",
+      "RelativeConicArcs.AMELU.matrixProduct",
+      "RelativeConicArcs.AMELU.multiplierMatrix",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.isMDSCode634_arcKernel": [
+      "FiniteGeom.le_minDist",
+      "FiniteGeom.minDist",
+      "FiniteGeom.minDist_le_hammingNorm",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.arcKernel_eq_parityCheckCode",
+      "RelativeConicArcs.AMELU.codimThreeMDSColumns_of_isSixArc",
+      "RelativeConicArcs.AMELU.hammingWeight_eq_hammingNorm",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.code_finrank",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.exists_minimumWeight_word",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.minimumDistance_ge_four",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.AMELU.isMDS_of_isMDSCode634": [
+      "FiniteGeom.IsMDS",
+      "FiniteGeom.minDist",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.isNormalized_equalPhaseState": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.IsNormalized",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.card_codewordFinset",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.codeStateNormalization_mul_conj",
+      "RelativeConicArcs.AMELU.codewordFinset",
+      "RelativeConicArcs.AMELU.equalPhaseState"
+    ],
+    "RelativeConicArcs.AMELU.isUnitaryMatrix_multiplierMatrix": [
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.multiplierMatrix"
+    ],
+    "RelativeConicArcs.AMELU.localAction": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State"
+    ],
+    "RelativeConicArcs.AMELU.localAction_multiplierMatrix": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.inverseMultiplierLabel",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.multiplierMatrix"
+    ],
+    "RelativeConicArcs.AMELU.locallyCliffordEquivalent_implies_locallyUnitaryEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsCliffordMatrix",
+      "RelativeConicArcs.AMELU.IsUnitaryMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.LocallyCliffordEquivalent",
+      "RelativeConicArcs.AMELU.LocallyUnitaryEquivalent",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.SameMatrixAxis",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.matrixProduct",
+      "RelativeConicArcs.AMELU.permuteState",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.marginalEntry": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.assembleLabel"
+    ],
+    "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_of_ne": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.marginalEntry",
+      "RelativeConicArcs.AMELU.subsystemLabel_eq_of_assemble_mem"
+    ],
+    "RelativeConicArcs.AMELU.marginalEntry_equalPhaseState_self": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel",
+      "RelativeConicArcs.AMELU.card_environmentFiber",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.environmentFiberFinset",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.fiberCard_mul_normalization",
+      "RelativeConicArcs.AMELU.marginalEntry"
+    ],
+    "RelativeConicArcs.AMELU.matrixProduct": [
+      "RelativeConicArcs.AMELU.LocalMatrix"
+    ],
+    "RelativeConicArcs.AMELU.matrixProduct.eq_1": [
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.matrixProduct"
+    ],
+    "RelativeConicArcs.AMELU.mem_arcKernel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.parityCheckMatrix"
+    ],
+    "RelativeConicArcs.AMELU.mem_cssLabelSpace": [
+      "FiniteGeom.dualCode",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PauliLabel",
+      "RelativeConicArcs.AMELU.cssLabelSpace"
+    ],
+    "RelativeConicArcs.AMELU.mem_cssSupportedLabelSpace": [
+      "FiniteGeom.dualCode",
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PauliLabel",
+      "RelativeConicArcs.AMELU.PauliSupportedOn",
+      "RelativeConicArcs.AMELU.cssLabelSpace",
+      "RelativeConicArcs.AMELU.cssSupportedLabelSpace",
+      "RelativeConicArcs.AMELU.mem_cssLabelSpace"
+    ],
+    "RelativeConicArcs.AMELU.mem_of_monomiallyEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.inverseMonomialPreimage",
+      "RelativeConicArcs.AMELU.monomialLabel"
+    ],
+    "RelativeConicArcs.AMELU.monomialLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.monomialLabel.eq_1": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.monomialLabel"
+    ],
+    "RelativeConicArcs.AMELU.monomialLabel_apply": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.monomialLabel"
+    ],
+    "RelativeConicArcs.AMELU.monomiallyEquivalent_equalPhaseState_locallyCliffordEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsCliffordMatrix",
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.LocallyCliffordEquivalent",
+      "RelativeConicArcs.AMELU.MonomiallyEquivalent",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.codeStateNormalization",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.inverseMonomialPreimage",
+      "RelativeConicArcs.AMELU.inverseMultiplierLabel",
+      "RelativeConicArcs.AMELU.isCliffordMatrix_multiplierMatrix",
+      "RelativeConicArcs.AMELU.localAction",
+      "RelativeConicArcs.AMELU.localAction_multiplierMatrix",
+      "RelativeConicArcs.AMELU.mem_of_monomiallyEquivalent",
+      "RelativeConicArcs.AMELU.monomialLabel",
+      "RelativeConicArcs.AMELU.multiplierMatrix",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.multiplierMatrix": [
+      "RelativeConicArcs.AMELU.LocalMatrix"
+    ],
+    "RelativeConicArcs.AMELU.multiplierMatrix.congr_simp": [
+      "RelativeConicArcs.AMELU.multiplierMatrix"
+    ],
+    "RelativeConicArcs.AMELU.multiplierMatrix.eq_1": [
+      "RelativeConicArcs.AMELU.multiplierMatrix"
+    ],
+    "RelativeConicArcs.AMELU.multiplierMatrix_apply": [
+      "RelativeConicArcs.AMELU.multiplierMatrix"
+    ],
+    "RelativeConicArcs.AMELU.parityCheckMatrix": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.parityCheckMatrix.eq_1": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.parityCheckMatrix"
+    ],
+    "RelativeConicArcs.AMELU.pauliSupport": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PauliLabel"
+    ],
+    "RelativeConicArcs.AMELU.pauliSupport_subset_iff": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PauliLabel",
+      "RelativeConicArcs.AMELU.PauliSupportedOn",
+      "RelativeConicArcs.AMELU.pauliSupport"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel_apply": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel_refl": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteLabel_trans": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteState": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteLabel"
+    ],
+    "RelativeConicArcs.AMELU.permuteState_apply": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.permuteState_refl": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.permuteState_trans": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.State",
+      "RelativeConicArcs.AMELU.permuteState"
+    ],
+    "RelativeConicArcs.AMELU.projectivelyEquivalent_arcKernel_monomiallyEquivalent": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.MonomiallyEquivalent",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.ProjectivelyEquivalent",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.arcKernel_eq_parityCheckCode",
+      "RelativeConicArcs.AMELU.monomialLabel",
+      "RelativeConicArcs.AMELU.parityCheckMatrix",
+      "RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.AMELU.projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent": [
+      "RelativeConicArcs.AMELU.LocallyCliffordEquivalent",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.ProjectivelyEquivalent",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.arcKernel",
+      "RelativeConicArcs.AMELU.equalPhaseState",
+      "RelativeConicArcs.AMELU.monomiallyEquivalent_equalPhaseState_locallyCliffordEquivalent",
+      "RelativeConicArcs.AMELU.projectivelyEquivalent_arcKernel_monomiallyEquivalent"
+    ],
+    "RelativeConicArcs.AMELU.selectedTripleMatrix": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate"
+    ],
+    "RelativeConicArcs.AMELU.selectedTripleMatrix.eq_1": [
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.selectedTripleMatrix"
+    ],
+    "RelativeConicArcs.AMELU.smallLinearIndependent_of_isSixArc": [
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.tripleLinearIndependent_of_isSixArc",
+      "RelativeConicArcs.CodingBridge.small_independent_of_triple_independent"
+    ],
+    "RelativeConicArcs.AMELU.span_eq_top_of_isSixArc": [
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.tripleLinearIndependent_of_isSixArc"
+    ],
+    "RelativeConicArcs.AMELU.subsystemLabel_eq_of_assemble_mem": [
+      "RelativeConicArcs.AMELU.BasisLabel",
+      "RelativeConicArcs.AMELU.IsMDSCode634",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.assembleLabel",
+      "RelativeConicArcs.AMELU.codeword_eq_of_eq_outside"
+    ],
+    "RelativeConicArcs.AMELU.tripleLinearIndependent_of_isSixArc": [
+      "RelativeConicArcs.AMELU.IsSixArc",
+      "RelativeConicArcs.AMELU.Party",
+      "RelativeConicArcs.AMELU.PlaneCoordinate",
+      "RelativeConicArcs.AMELU.selectedTripleMatrix"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix": [
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix.congr_simp": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix.eq_1": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix_apply": [
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.AMELU.weylMatrix_zero_zero": [
+      "RelativeConicArcs.AMELU.LocalMatrix",
+      "RelativeConicArcs.AMELU.WeylConvention",
+      "RelativeConicArcs.AMELU.WeylConvention.character",
+      "RelativeConicArcs.AMELU.weylMatrix"
+    ],
+    "RelativeConicArcs.Admissible": [
+      "RelativeConicArcs.Arc"
+    ],
+    "RelativeConicArcs.Admissible.eq_1": [
+      "RelativeConicArcs.Admissible",
+      "RelativeConicArcs.Arc"
+    ],
+    "RelativeConicArcs.Arc": [
+      "RelativeConicArcs.Collinear"
+    ],
+    "RelativeConicArcs.ArcPair.card": [
+      "RelativeConicArcs.ArcPair"
+    ],
+    "RelativeConicArcs.ArcPair.existsUnique_line": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.exists_eq_pair"
+    ],
+    "RelativeConicArcs.ArcPair.exists_eq_pair": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.card"
+    ],
+    "RelativeConicArcs.ArcPair.line": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.existsUnique_line"
+    ],
+    "RelativeConicArcs.ArcPair.line.congr_simp": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line"
+    ],
+    "RelativeConicArcs.ArcPair.line_injective": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.exists_eq_pair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.mem_line",
+      "RelativeConicArcs.ArcPair.subset"
+    ],
+    "RelativeConicArcs.ArcPair.line_unique": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.existsUnique_line",
+      "RelativeConicArcs.ArcPair.line"
+    ],
+    "RelativeConicArcs.ArcPair.mem_line": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.existsUnique_line",
+      "RelativeConicArcs.ArcPair.line"
+    ],
+    "RelativeConicArcs.ArcPair.mem_of_mem_arc_of_mem_line": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.exists_eq_pair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.mem_line",
+      "RelativeConicArcs.ArcPair.subset"
+    ],
+    "RelativeConicArcs.ArcPair.subset": [
+      "RelativeConicArcs.ArcPair"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.ambient_finrank": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.casesOn": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.mk",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.rec"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.code_finrank": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.ambient_finrank",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.spans",
+      "RelativeConicArcs.CodingBridge.finrank_parityCheckCode",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.exists_minimumWeight_word": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.ambient_finrank",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.small_independent",
+      "RelativeConicArcs.CodingBridge.exists_codeword_hammingWeight_eq_four",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.minimumDistance_ge_four": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.small_independent",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.hammingWeight_ge_four_of_small_independent",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.mk": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.rec": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.mk"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.recOn": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.mk",
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.rec"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.small_independent": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns"
+    ],
+    "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.spans": [
+      "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns"
+    ],
+    "RelativeConicArcs.CodingBridge.HasCoveringRadiusThree": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.PlanePoint": [
+      "RelativeConicArcs.ProjectiveBridge.Point"
+    ],
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast": [
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly.unique": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.arc_image_iff_triples_linearIndependent": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "ProjectiveCap.Projective.independent_triple_iff",
+      "ProjectiveCap.Projective.not_collinear_iff_independent",
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.CodingBridge.PlanePoint",
+      "RelativeConicArcs.CodingBridge.instDecidableEqPlanePoint",
+      "RelativeConicArcs.ProjectiveBridge.Point",
+      "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap"
+    ],
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_eq_supports": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.hammingWeight.eq_1",
+      "RelativeConicArcs.CodingBridge.mem_syndromeLeadersOfWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight",
+      "RelativeConicArcs.CodingBridge.syndrome_leader_unique_of_support"
+    ],
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_smul_of_ne_zero": [
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.hammingWeight_smul_of_ne_zero",
+      "RelativeConicArcs.CodingBridge.mem_syndromeLeadersOfWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.parityCheckMap_smul",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.card_syndromeLeadersOfWeight_three": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.exists_unique_weightThree_leader_on_support",
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.mem_syndromeLeadersOfWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight",
+      "RelativeConicArcs.CodingBridge.syndrome_leader_unique_of_support"
+    ],
+    "RelativeConicArcs.CodingBridge.every_syndrome_has_weight_le_three": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.hammingWeight.eq_1",
+      "RelativeConicArcs.CodingBridge.mem_hammingSupport",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.exists_codeword_hammingWeight_eq_four": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.hammingWeight.eq_1",
+      "RelativeConicArcs.CodingBridge.hammingWeight_ge_four_of_small_independent",
+      "RelativeConicArcs.CodingBridge.mem_hammingSupport",
+      "RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.CodingBridge.exists_unique_weightThree_leader_on_support": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.mem_hammingSupport",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.syndrome_leader_unique_of_support"
+    ],
+    "RelativeConicArcs.CodingBridge.finrank_parityCheckCode": [
+      "RelativeConicArcs.CodingBridge.parityCheckCode",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingSupport.congr_simp": [
+      "RelativeConicArcs.CodingBridge.hammingSupport"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingSupport.eq_1": [
+      "RelativeConicArcs.CodingBridge.hammingSupport"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingSupport_smul_of_ne_zero": [
+      "RelativeConicArcs.CodingBridge.hammingSupport"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingWeight": [
+      "RelativeConicArcs.CodingBridge.hammingSupport"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingWeight.congr_simp": [
+      "RelativeConicArcs.CodingBridge.hammingWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingWeight.eq_1": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingWeight_ge_four_of_small_independent": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff",
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.CodingBridge.hammingWeight_smul_of_ne_zero": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingSupport_smul_of_ne_zero",
+      "RelativeConicArcs.CodingBridge.hammingWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.instDecidableEqPlanePoint": [
+      "RelativeConicArcs.CodingBridge.PlanePoint"
+    ],
+    "RelativeConicArcs.CodingBridge.mem_hammingSupport": [
+      "RelativeConicArcs.CodingBridge.hammingSupport"
+    ],
+    "RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff": [
+      "RelativeConicArcs.CodingBridge.parityCheckCode"
+    ],
+    "RelativeConicArcs.CodingBridge.mem_syndromeLeaderSupportsOfWeight": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.mem_syndromeLeadersOfWeight": [
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.parityCheckCode": [
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.parityCheckCode.eq_1": [
+      "RelativeConicArcs.CodingBridge.parityCheckCode",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.parityCheckMap.eq_1": [
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.parityCheckMap_smul": [
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_one_of_ne_zero": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.mem_hammingSupport",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_smul_of_ne_zero": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.hammingWeight_smul_of_ne_zero",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.parityCheckMap_smul"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_three_of_pair_avoidance": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_two_of_one_avoidance": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeDistanceExactly_smul_of_ne_zero": [
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceAtLeast",
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly",
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.hammingWeight_smul_of_ne_zero",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.parityCheckMap_smul",
+      "RelativeConicArcs.CodingBridge.syndromeDistanceAtLeast_smul_of_ne_zero"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight.eq_1": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight": [
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight.congr_simp": [
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight.eq_1": [
+      "RelativeConicArcs.CodingBridge.hammingWeight",
+      "RelativeConicArcs.CodingBridge.parityCheckMap",
+      "RelativeConicArcs.CodingBridge.syndromeLeadersOfWeight"
+    ],
+    "RelativeConicArcs.CodingBridge.syndrome_leader_unique_of_support": [
+      "RelativeConicArcs.CodingBridge.hammingSupport",
+      "RelativeConicArcs.CodingBridge.mem_hammingSupport",
+      "RelativeConicArcs.CodingBridge.parityCheckMap"
+    ],
+    "RelativeConicArcs.Collinear.eq_1": [
+      "RelativeConicArcs.Collinear"
+    ],
+    "RelativeConicArcs.CompleteOutside": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.Covered"
+    ],
+    "RelativeConicArcs.Covered": [
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.Covered.eq_1": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.MaximalExtensionIn": [
+      "RelativeConicArcs.Arc"
+    ],
+    "RelativeConicArcs.MaximalPairExtensionIndependent": [
+      "RelativeConicArcs.PairExtensionIndependent"
+    ],
+    "RelativeConicArcs.PairExtensionConflict": [
+      "RelativeConicArcs.Collinear"
+    ],
+    "RelativeConicArcs.PairExtensionIndependent": [
+      "RelativeConicArcs.PairExtensionConflict"
+    ],
+    "RelativeConicArcs.ProjectiveBridge.arc_iff_projectiveCap": [
+      "ProjectiveCap.Projective.Cap",
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.Collinear",
+      "RelativeConicArcs.ProjectiveBridge.Point"
+    ],
+    "RelativeConicArcs.ProjectiveBridge.collinear_iff_projective_collinear": [
+      "ProjectiveCap.Projective.Collinear",
+      "ProjectiveCap.Projective.Point",
+      "RelativeConicArcs.Collinear",
+      "RelativeConicArcs.ProjectiveBridge.Point"
+    ],
+    "RelativeConicArcs.ProjectiveBridge.planeOrder_eq_card": [
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.ProjectiveBridge.Point",
+      "RelativeConicArcs.card_points"
+    ],
+    "RelativeConicArcs.admissiblePositions": [
+      "RelativeConicArcs.Admissible"
+    ],
+    "RelativeConicArcs.admissiblePositions.eq_1": [
+      "RelativeConicArcs.Admissible",
+      "RelativeConicArcs.admissiblePositions"
+    ],
+    "RelativeConicArcs.arc_empty": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.Collinear"
+    ],
+    "RelativeConicArcs.arc_insert_iff_not_covered": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.Secant",
+      "RelativeConicArcs.arc_insert_of_not_covered",
+      "RelativeConicArcs.covered_iff_exists_secant"
+    ],
+    "RelativeConicArcs.arc_insert_of_not_covered": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.Collinear",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.collinear_rotate",
+      "RelativeConicArcs.collinear_swap_left",
+      "RelativeConicArcs.covered_of_collinear_pair"
+    ],
+    "RelativeConicArcs.arc_mono": [
+      "RelativeConicArcs.Arc"
+    ],
+    "RelativeConicArcs.arc_union_iff_extension_hypergraph": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.Collinear",
+      "RelativeConicArcs.PairExtensionConflict",
+      "RelativeConicArcs.PairExtensionIndependent",
+      "RelativeConicArcs.arc_mono",
+      "RelativeConicArcs.collinear_rotate",
+      "RelativeConicArcs.collinear_swap_left"
+    ],
+    "RelativeConicArcs.arc_union_iff_pairExtensionIndependent_of_arc_locus": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.PairExtensionIndependent",
+      "RelativeConicArcs.arc_mono",
+      "RelativeConicArcs.arc_union_iff_extension_hypergraph"
+    ],
+    "RelativeConicArcs.card_arcPair": [
+      "RelativeConicArcs.ArcPair"
+    ],
+    "RelativeConicArcs.card_disjointOrderedPairs": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.card_disjointPartners",
+      "RelativeConicArcs.disjointOrderedPairs",
+      "RelativeConicArcs.disjointOrderedPairs.eq_1",
+      "RelativeConicArcs.disjointPartners"
+    ],
+    "RelativeConicArcs.card_disjointPartners": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.card",
+      "RelativeConicArcs.ArcPair.subset",
+      "RelativeConicArcs.disjointPartners",
+      "RelativeConicArcs.powersetCard_filter_disjoint"
+    ],
+    "RelativeConicArcs.card_externalOrderedPairs": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.card_orderedPairsThrough",
+      "RelativeConicArcs.externalOrderedPairs",
+      "RelativeConicArcs.externalOrderedPairs.eq_1",
+      "RelativeConicArcs.orderedPairsThrough",
+      "RelativeConicArcs.orderedPairsThrough_pairwiseDisjoint",
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.card_external_pointsOnLine_eq_sum_indicator": [
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pointsOnLine"
+    ],
+    "RelativeConicArcs.card_external_pointsOnPairLine": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.card",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.card_pointsOnLine",
+      "RelativeConicArcs.pointsOnLine",
+      "RelativeConicArcs.pointsOnPairLine_inter_arc"
+    ],
+    "RelativeConicArcs.card_orderedPairsThrough": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.orderedPairsThrough",
+      "RelativeConicArcs.orderedPairsThrough.eq_1",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.pointIndex_eq_card_pairsThrough"
+    ],
+    "RelativeConicArcs.card_pairsThrough_eq_sum_indicator": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.pairsThrough.eq_1"
+    ],
+    "RelativeConicArcs.card_points": [
+      "RelativeConicArcs.PlaneOrder"
+    ],
+    "RelativeConicArcs.card_pointsOnLine": [
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.card_points_on_line",
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pointsOnLine",
+      "RelativeConicArcs.pointsOnLine.eq_1"
+    ],
+    "RelativeConicArcs.card_points_on_line": [
+      "RelativeConicArcs.PlaneOrder"
+    ],
+    "RelativeConicArcs.card_requiredLocus": [
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.covered_disjoint_uncovered",
+      "RelativeConicArcs.covered_union_uncovered",
+      "RelativeConicArcs.requiredLocus",
+      "RelativeConicArcs.uncovered"
+    ],
+    "RelativeConicArcs.card_secants": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.line_injective",
+      "RelativeConicArcs.secants",
+      "RelativeConicArcs.secants_eq_image_pairLine"
+    ],
+    "RelativeConicArcs.card_weightTwoLeaderSupports": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.pointIndex_eq_card_pairsThrough",
+      "RelativeConicArcs.weightTwoLeaderSupports"
+    ],
+    "RelativeConicArcs.collinear_rotate": [
+      "RelativeConicArcs.Collinear"
+    ],
+    "RelativeConicArcs.collinear_swap_left": [
+      "RelativeConicArcs.Collinear"
+    ],
+    "RelativeConicArcs.completeOutside_empty_of_maximalExtensionIn_full": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.CompleteOutside",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.MaximalExtensionIn",
+      "RelativeConicArcs.arc_insert_iff_not_covered",
+      "RelativeConicArcs.arc_mono"
+    ],
+    "RelativeConicArcs.completeOutside_iff_distanceThreeDirections_subset": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.CompleteOutside",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.distanceThreeDirections",
+      "RelativeConicArcs.mem_distanceThreeDirections"
+    ],
+    "RelativeConicArcs.completeOutside_iff_uncovered_eq_empty": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.CompleteOutside",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.uncovered"
+    ],
+    "RelativeConicArcs.coverage_bound": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.holeIncidence",
+      "RelativeConicArcs.scaledDefect",
+      "RelativeConicArcs.scaledDefect.eq_1",
+      "RelativeConicArcs.scaledDefect_nonneg"
+    ],
+    "RelativeConicArcs.coveredRequired": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.coveredRequired.eq_1": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.covered_disjoint_uncovered": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.requiredLocus",
+      "RelativeConicArcs.uncovered"
+    ],
+    "RelativeConicArcs.covered_iff_exists_secant": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.Secant",
+      "RelativeConicArcs.mem_secants",
+      "RelativeConicArcs.secants"
+    ],
+    "RelativeConicArcs.covered_of_collinear_pair": [
+      "RelativeConicArcs.Collinear",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.Secant",
+      "RelativeConicArcs.covered_iff_exists_secant"
+    ],
+    "RelativeConicArcs.covered_union_uncovered": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.requiredLocus",
+      "RelativeConicArcs.uncovered"
+    ],
+    "RelativeConicArcs.disjointOrderedPairs": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.disjointPartners"
+    ],
+    "RelativeConicArcs.disjointOrderedPairs.eq_1": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.disjointOrderedPairs",
+      "RelativeConicArcs.disjointPartners"
+    ],
+    "RelativeConicArcs.disjointPartners": [
+      "RelativeConicArcs.ArcPair"
+    ],
+    "RelativeConicArcs.disjointPartners.eq_1": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.disjointPartners"
+    ],
+    "RelativeConicArcs.distanceThreeDirections": [
+      "RelativeConicArcs.projectiveSyndromeDistance"
+    ],
+    "RelativeConicArcs.distanceThreeDirections.eq_1": [
+      "RelativeConicArcs.distanceThreeDirections",
+      "RelativeConicArcs.projectiveSyndromeDistance"
+    ],
+    "RelativeConicArcs.distance_three_weightTwoLeaderSupports_eq_empty": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.Secant",
+      "RelativeConicArcs.covered_iff_exists_secant",
+      "RelativeConicArcs.mem_pairsThrough",
+      "RelativeConicArcs.mem_secants",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.projectiveSyndromeDistance",
+      "RelativeConicArcs.projectiveSyndromeDistance_eq_three_iff",
+      "RelativeConicArcs.secants",
+      "RelativeConicArcs.secants_eq_image_pairLine",
+      "RelativeConicArcs.weightTwoLeaderSupports"
+    ],
+    "RelativeConicArcs.distance_two_leader_support_count": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.card_weightTwoLeaderSupports",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.projectiveSyndromeDistance",
+      "RelativeConicArcs.weightTwoLeaderSupports"
+    ],
+    "RelativeConicArcs.exists_completeOutside": [
+      "RelativeConicArcs.Admissible",
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.CompleteOutside",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.admissiblePositions",
+      "RelativeConicArcs.arc_insert_of_not_covered",
+      "RelativeConicArcs.mem_admissiblePositions"
+    ],
+    "RelativeConicArcs.exists_completeOutside_card_eq_rho": [
+      "RelativeConicArcs.CompleteOutside",
+      "RelativeConicArcs.exists_completeOutside",
+      "RelativeConicArcs.rho",
+      "RelativeConicArcs.rho.eq_1"
+    ],
+    "RelativeConicArcs.externalOrderedPairs": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.orderedPairsThrough"
+    ],
+    "RelativeConicArcs.externalOrderedPairs.eq_1": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.externalOrderedPairs",
+      "RelativeConicArcs.orderedPairsThrough"
+    ],
+    "RelativeConicArcs.externalOrderedPairs_eq_disjointOrderedPairs": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.exists_eq_pair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.line_injective",
+      "RelativeConicArcs.ArcPair.mem_of_mem_arc_of_mem_line",
+      "RelativeConicArcs.disjointOrderedPairs",
+      "RelativeConicArcs.externalOrderedPairs",
+      "RelativeConicArcs.mem_disjointOrderedPairs",
+      "RelativeConicArcs.mem_orderedPairsThrough",
+      "RelativeConicArcs.mem_pairsThrough",
+      "RelativeConicArcs.orderedPairsThrough",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.pairsThrough_pairwiseDisjoint"
+    ],
+    "RelativeConicArcs.external_eq_holes_union_required": [
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.first_secant_moment": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.card_external_pointsOnLine_eq_sum_indicator",
+      "RelativeConicArcs.card_external_pointsOnPairLine",
+      "RelativeConicArcs.card_pairsThrough_eq_sum_indicator",
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.pointIndex_eq_card_pairsThrough",
+      "RelativeConicArcs.pointsOnLine"
+    ],
+    "RelativeConicArcs.first_secant_moment_split": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.external_eq_holes_union_required",
+      "RelativeConicArcs.first_secant_moment",
+      "RelativeConicArcs.holeIncidence",
+      "RelativeConicArcs.holes_disjoint_required",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredLocus",
+      "RelativeConicArcs.sum_required_eq_sum_coveredRequired"
+    ],
+    "RelativeConicArcs.first_weightTwoLeader_moment": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.card_weightTwoLeaderSupports",
+      "RelativeConicArcs.first_secant_moment",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.weightTwoLeaderSupports"
+    ],
+    "RelativeConicArcs.holeIncidence": [
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.holeIncidence.eq_1": [
+      "RelativeConicArcs.holeIncidence",
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.holeRemainder": [
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.holeRemainder.eq_1": [
+      "RelativeConicArcs.holeRemainder",
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.holeRemainder_nonneg": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.holeRemainder",
+      "RelativeConicArcs.holeRemainder.eq_1",
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.holes_disjoint_required": [
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.intermediateHoles": [
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.intermediateRequired": [
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.maximalExtensionIn_iff_maximalPairExtensionIndependent": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.MaximalExtensionIn",
+      "RelativeConicArcs.MaximalPairExtensionIndependent",
+      "RelativeConicArcs.PairExtensionIndependent",
+      "RelativeConicArcs.arc_union_iff_pairExtensionIndependent_of_arc_locus"
+    ],
+    "RelativeConicArcs.mem_admissiblePositions": [
+      "RelativeConicArcs.Admissible",
+      "RelativeConicArcs.admissiblePositions"
+    ],
+    "RelativeConicArcs.mem_disjointOrderedPairs": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.disjointOrderedPairs",
+      "RelativeConicArcs.disjointPartners"
+    ],
+    "RelativeConicArcs.mem_disjointPartners": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.disjointPartners"
+    ],
+    "RelativeConicArcs.mem_distanceThreeDirections": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.distanceThreeDirections",
+      "RelativeConicArcs.projectiveSyndromeDistance"
+    ],
+    "RelativeConicArcs.mem_orderedPairsThrough": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.orderedPairsThrough",
+      "RelativeConicArcs.orderedPairsThrough.eq_1",
+      "RelativeConicArcs.pairsThrough"
+    ],
+    "RelativeConicArcs.mem_pairsThrough": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pairsThrough"
+    ],
+    "RelativeConicArcs.mem_pointsOnLine": [
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pointsOnLine"
+    ],
+    "RelativeConicArcs.mem_secants": [
+      "RelativeConicArcs.Secant",
+      "RelativeConicArcs.secants"
+    ],
+    "RelativeConicArcs.oneColumnExtension_iff_distance_three": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.arc_insert_iff_not_covered",
+      "RelativeConicArcs.projectiveSyndromeDistance",
+      "RelativeConicArcs.projectiveSyndromeDistance_eq_three_iff"
+    ],
+    "RelativeConicArcs.orderedPairsThrough": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.pairsThrough"
+    ],
+    "RelativeConicArcs.orderedPairsThrough.eq_1": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.orderedPairsThrough",
+      "RelativeConicArcs.pairsThrough"
+    ],
+    "RelativeConicArcs.orderedPairsThrough_pairwiseDisjoint": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.line_injective",
+      "RelativeConicArcs.mem_orderedPairsThrough",
+      "RelativeConicArcs.orderedPairsThrough"
+    ],
+    "RelativeConicArcs.pairsThrough": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.instDecidableIncidence"
+    ],
+    "RelativeConicArcs.pairsThrough.eq_1": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pairsThrough"
+    ],
+    "RelativeConicArcs.pairsThrough_pairwiseDisjoint": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.line_injective",
+      "RelativeConicArcs.ArcPair.mem_line",
+      "RelativeConicArcs.ArcPair.subset",
+      "RelativeConicArcs.mem_pairsThrough",
+      "RelativeConicArcs.pairsThrough"
+    ],
+    "RelativeConicArcs.pointIndex": [
+      "RelativeConicArcs.secants"
+    ],
+    "RelativeConicArcs.pointIndex.eq_1": [
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.secants"
+    ],
+    "RelativeConicArcs.pointIndex_eq_card_pairsThrough": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.line_injective",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.pointIndex.eq_1",
+      "RelativeConicArcs.secants",
+      "RelativeConicArcs.secants_eq_image_pairLine"
+    ],
+    "RelativeConicArcs.pointIndex_le_half_card": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.card",
+      "RelativeConicArcs.ArcPair.subset",
+      "RelativeConicArcs.pairsThrough",
+      "RelativeConicArcs.pairsThrough_pairwiseDisjoint",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.pointIndex_eq_card_pairsThrough"
+    ],
+    "RelativeConicArcs.pointsOnLine": [
+      "RelativeConicArcs.instDecidableIncidence"
+    ],
+    "RelativeConicArcs.pointsOnLine.eq_1": [
+      "RelativeConicArcs.instDecidableIncidence",
+      "RelativeConicArcs.pointsOnLine"
+    ],
+    "RelativeConicArcs.pointsOnPairLine_inter_arc": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.mem_line",
+      "RelativeConicArcs.ArcPair.mem_of_mem_arc_of_mem_line",
+      "RelativeConicArcs.ArcPair.subset",
+      "RelativeConicArcs.pointsOnLine"
+    ],
+    "RelativeConicArcs.powersetCard_filter_disjoint": [
+      "RelativeConicArcs.ArcPair"
+    ],
+    "RelativeConicArcs.projectiveSyndromeDistance": [
+      "RelativeConicArcs.Covered"
+    ],
+    "RelativeConicArcs.projectiveSyndromeDistance.congr_simp": [
+      "RelativeConicArcs.projectiveSyndromeDistance"
+    ],
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_one_iff": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.projectiveSyndromeDistance"
+    ],
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_three_iff": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.projectiveSyndromeDistance"
+    ],
+    "RelativeConicArcs.projectiveSyndromeDistance_eq_two_iff": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.projectiveSyndromeDistance"
+    ],
+    "RelativeConicArcs.requiredLocus.eq_1": [
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.requiredRemainder": [
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.pointIndex"
+    ],
+    "RelativeConicArcs.requiredRemainder.eq_1": [
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredRemainder"
+    ],
+    "RelativeConicArcs.requiredRemainder_nonneg": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredRemainder",
+      "RelativeConicArcs.requiredRemainder.eq_1"
+    ],
+    "RelativeConicArcs.rho": [
+      "RelativeConicArcs.CompleteOutside"
+    ],
+    "RelativeConicArcs.rho.eq_1": [
+      "RelativeConicArcs.CompleteOutside",
+      "RelativeConicArcs.rho"
+    ],
+    "RelativeConicArcs.rho_le_card": [
+      "RelativeConicArcs.CompleteOutside",
+      "RelativeConicArcs.rho"
+    ],
+    "RelativeConicArcs.scaledDefect": [
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.holeIncidence"
+    ],
+    "RelativeConicArcs.scaledDefect.eq_1": [
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.holeIncidence",
+      "RelativeConicArcs.scaledDefect"
+    ],
+    "RelativeConicArcs.scaledDefect_eq_remainders": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.first_secant_moment_split",
+      "RelativeConicArcs.holeIncidence",
+      "RelativeConicArcs.holeRemainder",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredRemainder",
+      "RelativeConicArcs.scaledDefect",
+      "RelativeConicArcs.scaledDefect.eq_1",
+      "RelativeConicArcs.second_secant_moment_split"
+    ],
+    "RelativeConicArcs.scaledDefect_eq_weightTwoLeader_remainders": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.card_weightTwoLeaderSupports",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.holeRemainder",
+      "RelativeConicArcs.holeRemainder.eq_1",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredRemainder",
+      "RelativeConicArcs.requiredRemainder.eq_1",
+      "RelativeConicArcs.scaledDefect",
+      "RelativeConicArcs.scaledDefect_eq_remainders",
+      "RelativeConicArcs.weightTwoLeaderSupports"
+    ],
+    "RelativeConicArcs.scaledDefect_eq_zero_iff": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.holeRemainder",
+      "RelativeConicArcs.holeRemainder.eq_1",
+      "RelativeConicArcs.holeRemainder_nonneg",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredRemainder",
+      "RelativeConicArcs.requiredRemainder.eq_1",
+      "RelativeConicArcs.requiredRemainder_nonneg",
+      "RelativeConicArcs.scaledDefect",
+      "RelativeConicArcs.scaledDefect_eq_remainders"
+    ],
+    "RelativeConicArcs.scaledDefect_nonneg": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.holeRemainder",
+      "RelativeConicArcs.holeRemainder_nonneg",
+      "RelativeConicArcs.requiredRemainder",
+      "RelativeConicArcs.requiredRemainder_nonneg",
+      "RelativeConicArcs.scaledDefect",
+      "RelativeConicArcs.scaledDefect_eq_remainders"
+    ],
+    "RelativeConicArcs.secants": [
+      "RelativeConicArcs.Secant"
+    ],
+    "RelativeConicArcs.secants.eq_1": [
+      "RelativeConicArcs.Secant",
+      "RelativeConicArcs.secants"
+    ],
+    "RelativeConicArcs.secants_eq_image_pairLine": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.ArcPair.exists_eq_pair",
+      "RelativeConicArcs.ArcPair.line",
+      "RelativeConicArcs.ArcPair.line_unique",
+      "RelativeConicArcs.ArcPair.mem_line",
+      "RelativeConicArcs.ArcPair.subset",
+      "RelativeConicArcs.Secant",
+      "RelativeConicArcs.secants"
+    ],
+    "RelativeConicArcs.second_secant_moment": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.card_disjointOrderedPairs",
+      "RelativeConicArcs.card_externalOrderedPairs",
+      "RelativeConicArcs.choose_two_mul_choose_sub_two",
+      "RelativeConicArcs.disjointOrderedPairs",
+      "RelativeConicArcs.externalOrderedPairs",
+      "RelativeConicArcs.externalOrderedPairs_eq_disjointOrderedPairs",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.two_mul_choose_two"
+    ],
+    "RelativeConicArcs.second_secant_moment_split": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.external_eq_holes_union_required",
+      "RelativeConicArcs.holes_disjoint_required",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredLocus",
+      "RelativeConicArcs.second_secant_moment",
+      "RelativeConicArcs.sum_choose_required_eq_sum_choose_coveredRequired"
+    ],
+    "RelativeConicArcs.second_weightTwoLeader_collision_moment": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.card_weightTwoLeaderSupports",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.second_secant_moment",
+      "RelativeConicArcs.weightTwoLeaderSupports"
+    ],
+    "RelativeConicArcs.stability_bound": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.holeRemainder",
+      "RelativeConicArcs.intermediateHoles",
+      "RelativeConicArcs.intermediateRequired",
+      "RelativeConicArcs.requiredRemainder",
+      "RelativeConicArcs.scaledDefect",
+      "RelativeConicArcs.scaledDefect_eq_remainders"
+    ],
+    "RelativeConicArcs.sum_choose_required_eq_sum_choose_coveredRequired": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.sum_required_eq_sum_coveredRequired": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.pointIndex",
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.uncovered": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.requiredLocus"
+    ],
+    "RelativeConicArcs.uncovered.eq_1": [
+      "RelativeConicArcs.Covered",
+      "RelativeConicArcs.requiredLocus",
+      "RelativeConicArcs.uncovered"
+    ],
+    "RelativeConicArcs.uncovered_bound": [
+      "RelativeConicArcs.Arc",
+      "RelativeConicArcs.PlaneOrder",
+      "RelativeConicArcs.card_requiredLocus",
+      "RelativeConicArcs.coverage_bound",
+      "RelativeConicArcs.coveredRequired",
+      "RelativeConicArcs.holeIncidence",
+      "RelativeConicArcs.requiredLocus",
+      "RelativeConicArcs.uncovered"
+    ],
+    "RelativeConicArcs.weightTwoLeaderSupports": [
+      "RelativeConicArcs.ArcPair",
+      "RelativeConicArcs.pairsThrough"
+    ]
+  },
+  "uses_included": true
+}
