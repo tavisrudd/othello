@@ -6,9 +6,7 @@
 export SOURCE_DATE_EPOCH = 1767225600
 export FORCE_SOURCE_DATE = 1
 
-# `path:.` rather than `.` so the directory builds before its files are
-# tracked by Git; once they are tracked either form works.
-LATEXMK ?= nix develop path:.\#manuscript --command latexmk
+LATEXMK ?= nix develop .\#manuscript --command latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 
 FIGURES = $(wildcard fig-d*.tex)

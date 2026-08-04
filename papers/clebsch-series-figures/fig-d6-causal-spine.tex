@@ -1,14 +1,40 @@
 % fig-d6-causal-spine.tex --- D6, Paper III's causal spine.
 %
-% Defines \ClebschCausalSpine.
+% Defines \ClebschCausalSpine[<variant>], where <variant> is "current" or
+% "final".  The argument is optional and defaults to "current", so a bare
+% \ClebschCausalSpine keeps drawing what it always drew.  Any unrecognised
+% argument is treated as "current".
 %
-% Left to right: the chain of the Paper III abstract, from the incidence
-% cover to the operator's shadows.  The return arrow underneath is the
-% recognition statement the manuscript actually proves
-% (thm:aligned-faithfulness): marked determinant-(-3) four-subsets recover
-% the conference signing up to switching and global negation.
+% Left to right in both variants: the chain of the Paper III abstract, from
+% the incidence cover to the operator's shadows.  Only the return arrow
+% underneath differs.
+%
+%   current --- the recognition statement the manuscript actually proves
+%     (thm:aligned-faithfulness): marked determinant-(-3) four-subsets
+%     recover the conference signing up to switching and global negation.
+%
+%   final --- the triangle/Pfaffian recognition of
+%     notes/2026-08-03-c862-paper-iii-spectral-descent-recognition-theorem-packet.md
+%     (Theorem III there, proved earlier in C809).  Two hypotheses do two
+%     different jobs and must stay separate in the label: all off-diagonal
+%     entries nonzero is what forces A^2 = lambda I on the whole nonzero-edge
+%     torus, and the scalar sign locus is what pins lambda = 5 and produces
+%     the unique order-six conference class with its two outer orientations.
+%
+% The return arrow of the "final" variant is drawn with csfforth, a DOUBLE
+% rule, and tagged with a csfbadge reading "proved; awaiting promotion".
+% This is a third claim status and must not be drawn like either of the two
+% D1 caveats: the dashed csfopen edge there marks a bridge no theorem
+% supports, and the Paper V node marks a paper that does not exist.  This
+% theorem is proved; only its appearance in the manuscript is pending.  The
+% Lean note under it is deliberately narrower than the human statement,
+% because the formalisation is: it is stated over an integral domain, and
+% its orientation split rests on one compiled finite check rather than on a
+% kernel-checked parity argument
+% (notes/2026-08-02-c815-four-shadow-lean-formalization.md).
 
-\providecommand{\ClebschCausalSpine}{%
+\providecommand{\ClebschCausalSpine}[1][current]{%
+\csfSetSpineReturn{#1}%
 \begin{tikzpicture}[
   spine/.style={csfnode,font=\footnotesize,text width=19mm,
     minimum height=17mm,anchor=north},
@@ -31,11 +57,43 @@
 \foreach \a/\b in {c1/c2,c2/c3,c3/c4,c4/c5,c5/c6}
   {\draw[csfarr] (\a.east) -- (\b.west);}
 
+\ifnum\csfSpineFinal=1
+
+\draw[csfforth] (c6.south) -- (6.0,-2.35) -- (3.6,-2.35) -- (c5.south);
+\node[csfbadge,anchor=east] at (3.25,-2.35) {proved; awaiting promotion};
+
+\node[anchor=north,align=flush center,font=\scriptsize,text width=120mm]
+  (spinestmt) at (0,-2.95)
+  {recognition, stronger form: for symmetric \(A\) with zero diagonal and
+   \emph{every} off-diagonal entry nonzero, \(\operatorname{Pf}[D_x,A]=\mu
+   T_A(x)\) with \(\mu\ne0\) forces \(A^{2}=\lambda I\); restricted to the
+   scalar sign locus \(A=sB\), \(b_{ij}=\pm1\), it recovers the unique
+   order-six conference class together with its two outer orientations
+   \(\mu=\pm4\)};
+
+\node[align=flush center,font=\scriptsize,text width=110mm,
+  below=3.5mm of spinestmt] (spinedeg)
+  {The order is a conclusion, not a hypothesis:
+   \(\operatorname{Pf}[D_x,A]\) has degree \(n/2\) for an operator of order
+   \(n\), while the triangle cubic \(T_A\) has degree three, so
+   unhomogenized proportionality is possible only at \(n=6\).};
+
+\node[align=flush center,font=\tiny,text width=110mm,
+  below=3.5mm of spinedeg]
+  {Proved in characteristic \(\ne2\), and formalized over an integral
+   domain: the quadratic converse and the pentagon gauge are kernel-checked,
+   while the orientation split rests on one compiled finite check.  It is
+   not yet a statement of the manuscript.};
+
+\else
+
 \draw[csfarr] (c6.south) -- (6.0,-2.35) -- (3.6,-2.35) -- (c5.south);
 \node[anchor=north,align=center,font=\scriptsize,text width=90mm]
   at (2.4,-2.55)
   {recognition: the marked determinant-\((-3)\) four-subsets recover the
    signing up to switching and global negation};
+
+\fi
 
 \end{tikzpicture}%
 }

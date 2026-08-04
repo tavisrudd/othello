@@ -35,6 +35,16 @@
   csfbiarr/.style={{Latex[length=2mm]}-{Latex[length=2mm]},semithick},
   % An asserted-but-unproved bridge.
   csfopen/.style={-{Latex[length=2mm]},semithick,dashed},
+  % A proved statement that is not yet in the manuscript.  Deliberately a
+  % DOUBLE rule: it must never be confused with the dashed csfopen bridge,
+  % which asserts something no theorem supports.  This one is established
+  % mathematics awaiting promotion, so it is drawn heavier than an ordinary
+  % arrow, not lighter.
+  csfforth/.style={-{Implies},double,double distance=1.6pt,line width=0.5pt},
+  % The tag that names that status, ruled to match csfforth.
+  csfbadge/.style={draw,double,double distance=1pt,line width=0.4pt,
+    rounded corners=1pt,align=center,font=\scriptsize\bfseries,
+    inner sep=3pt,fill=white},
   % A reformulation rather than a new identity.
   csfweak/.style={thin,densely dotted},
   % The one link in a diagram carrying real content.
@@ -64,5 +74,23 @@
   \expandafter\gdef\csname csfhl@#1\endcsname{csfmarked}%
 }
 \csfSetHighlight{none}
+
+% ---------------------------------------------------------------------------
+% Return-arrow selection used by the causal spine (D6).
+%
+%   \csfSetSpineReturn{current}   % the manuscript's reconstruction theorem
+%   \csfSetSpineReturn{final}     % the triangle--Pfaffian recognition
+%
+% After this call \csfSpineFinal expands to 1 for the "final" variant and to
+% 0 otherwise, so an unrecognised argument falls back to "current".  The
+% spine macro calls \csfSetSpineReturn itself.
+% ---------------------------------------------------------------------------
+\providecommand{\csfSpineFinal}{\csname csfspine@final\endcsname}
+\providecommand{\csfSetSpineReturn}[1]{%
+  \expandafter\gdef\csname csfspine@current\endcsname{0}%
+  \expandafter\gdef\csname csfspine@final\endcsname{0}%
+  \expandafter\gdef\csname csfspine@#1\endcsname{1}%
+}
+\csfSetSpineReturn{current}
 
 \providecommand{\PGtwo}[1]{\operatorname{PG}(2,#1)}

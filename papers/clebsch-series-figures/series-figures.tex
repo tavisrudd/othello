@@ -28,8 +28,8 @@ This document previews the reusable figures of
 \texttt{papers/clebsch-series-figures}.  It is a proof sheet, not a
 manuscript: each figure is defined in its own \texttt{\string\input}-able
 file and is meant to be placed by a host paper with its own caption.  See
-\texttt{README.md} for the input recipe and for the list of edges that
-encode unproved claims.
+\texttt{README.md} for the input recipe and for the three claim statuses
+the drawings encode.
 
 \clearpage
 \section*{D1 --- the series map}
@@ -143,11 +143,35 @@ reconstruction theorem uses.}
 \clearpage
 \section*{D6 --- Paper III's causal spine}
 
+The spine is the same in both variants; only the return arrow differs.  The
+\texttt{current} variant returns by the reconstruction theorem the
+manuscript proves today.  The \texttt{final} variant returns by the
+triangle--Pfaffian recognition, which is proved but not yet promoted into
+the manuscript --- a third claim status, drawn as a \emph{double} rule with
+a tag naming it.  It is neither of D1's two caveats: the dashed Paper IV
+edge there marks a bridge no theorem supports, and the Paper V node marks a
+paper that does not exist.  Nothing here is speculative; the double rule
+says forthcoming.
+
 \begin{figure}[H]
 \centering
-\ClebschCausalSpine
-\caption{From the incidence cover to the operator's shadows, with the
-proved recognition return underneath.}
+\ClebschCausalSpine[current]
+\caption{\texttt{\string\ClebschCausalSpine[current]}, the default.  From the
+incidence cover to the operator's shadows, returning by the reconstruction
+theorem the manuscript states: marked determinant-\((-3)\) four-subsets
+recover the signing up to switching and global negation.}
+\end{figure}
+
+\clearpage
+\begin{figure}[H]
+\centering
+\ClebschCausalSpine[final]
+\caption{\texttt{\string\ClebschCausalSpine[final]}.  The same spine
+returning by the triangle--Pfaffian recognition instead.  The two
+hypotheses do different work: nonzero off-diagonal entries give
+\(A^{2}=\lambda I\) across the whole nonzero-edge torus, and the scalar
+sign locus is what pins the golden value and produces the order-six
+conference class with its two outer orientations.}
 \end{figure}
 
 \end{document}
