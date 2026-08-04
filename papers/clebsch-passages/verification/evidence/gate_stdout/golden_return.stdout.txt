@@ -1,59 +1,81 @@
-✔ [1404/1410] Built RelativeConicArcs.ClebschMiddleExteriorSquare (3.6s)
-ℹ [1410/1410] Built RelativeConicArcs.Gates.ClebschGoldenReturn (927ms)
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:42:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq' depends on axioms: [propext,
+✔ [1394/1404] Built RelativeConicArcs.ClebschMiddleExterior (2.9s)
+✔ [1396/1404] Built RelativeConicArcs.ClebschMiddleExteriorDiagonal (1.4s)
+✔ [1397/1404] Built RelativeConicArcs.ClebschMiddleExteriorSquareRows145To345 (6.3s)
+✔ [1398/1404] Built RelativeConicArcs.ClebschMiddleExteriorSquareRows123To135 (6.2s)
+✔ [1399/1404] Built RelativeConicArcs.ClebschMiddleExteriorSquareRows024To045 (5.9s)
+✔ [1400/1404] Built RelativeConicArcs.ClebschMiddleExteriorSquareRows012To023 (6.1s)
+✔ [1401/1405] Built RelativeConicArcs.ClebschMiddleExteriorSupport (6.7s)
+✔ [1404/1410] Built RelativeConicArcs.ClebschMiddleExteriorSquare (1.0s)
+ℹ [1410/1410] Built RelativeConicArcs.Gates.ClebschGoldenReturn (953ms)
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:60:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:43:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:61:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:44:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:62:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:45:0: 'RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:46:0: 'RelativeConicArcs.ClebschGoldenConference.triangleSign_switch' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:47:0: 'RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:48:0: 'RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:63:0: 'RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:64:0: 'RelativeConicArcs.ClebschGoldenConference.triangleSign_switch' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:65:0: 'RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:66:0: 'RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:49:0: 'RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:51:0: 'RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:52:0: 'RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:53:0: 'RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:55:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:56:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_complement_entry' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:67:0: 'RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:69:0: 'RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:70:0: 'RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:71:0: 'RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:73:0: 'RelativeConicArcs.ClebschMiddleExterior.tripleSet_complementIndex' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:57:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_eq_hodge_mul' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:74:0: 'RelativeConicArcs.ClebschMiddleExterior.eq_complementIndex_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:58:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:59:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:60:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:61:0: 'RelativeConicArcs.ClebschMiddleExterior.complementIndex_involutive' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:75:0: 'RelativeConicArcs.ClebschMiddleExterior.concatenation_bijective' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:62:0: 'RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:76:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeSign_eq_neg_one_pow_inversions' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:63:0: 'RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:77:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeSign_mul_complement' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:65:0: 'RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:66:0: 'RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:78:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:79:0: 'RelativeConicArcs.ClebschMiddleExterior.hodgeMatrix_complement_entry' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:67:0: 'RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:80:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_eq_hodge_mul' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:68:0: 'RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:81:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:82:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:83:0: 'RelativeConicArcs.ClebschMiddleExterior.middleExterior_mod_two_eq_one_iff' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:84:0: 'RelativeConicArcs.ClebschMiddleExterior.complementIndex_involutive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:69:0: 'RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:85:0: 'RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:71:0: 'RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:86:0: 'RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:72:0: 'RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:88:0: 'RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:89:0: 'RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient' depends on axioms: [propext,
+ Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:74:0: 'RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:90:0: 'RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:91:0: 'RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:92:0: 'RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:94:0: 'RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic' depends on axioms: [propext,
+ Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:95:0: 'RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic' depends on axioms: [propext,
+ Quot.sound]
+info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:97:0: 'RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
 Build completed successfully (1410 jobs).

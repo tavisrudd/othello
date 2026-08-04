@@ -38,8 +38,8 @@ complement, that the sign table is minus one to the inversion count, that the
 inversion count is the label sum less three, and that complementary label sums
 are fifteen.  Each of the latter four is a statement a reader can verify
 directly from the displayed tables, rather than an opaque list of signs.  No
-`20 × 20` return matrix, generated table, compiled evaluation, or external
-axiom is used.
+`20 × 20` return matrix, generated table, compiled evaluation, or
+external axiom is used.
 
 The table `triple` itself remains displayed data whose documented description —
 the increasing three-subsets of six labels in lexicographic order — is not
