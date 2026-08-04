@@ -18,7 +18,7 @@ From `papers/ame_lu/`, verify and export without overwriting an existing file:
 
 ```text
 python3 release/verify_release.py
-python3 release/verify_release.py --export /path/ame-lu-rc1.tar.gz
+python3 release/verify_release.py --export /path/ame-lu-2026-08-03.tar.gz
 ```
 
 The archive excludes drafting ledgers, task records, build intermediates,
@@ -36,7 +36,7 @@ section and figure sources:
 
 ```text
 python3 release/verify_release.py \
-  --profile arxiv --export /path/ame-lu-arxiv-rc1.tar.gz
+  --profile arxiv --export /path/ame-lu-arxiv-2026-08-03.tar.gz
 ```
 
 Select XeLaTeX and `main.tex` when checking the uploaded source. Do not upload

@@ -1,7 +1,7 @@
 {
   "schema": "ame-lu-release-manifest-v1",
-  "release": "ame-lu-rc1",
-  "date": "2026-07-26",
+  "release": "ame-lu-2026-08-03",
+  "date": "2026-08-03",
   "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States",
   "public_export": {
     "artifacts": [
@@ -46,9 +46,9 @@
         "sha256": "47eac5800d57548080d4d7fe5bc2a1d110ac176fa3b9763834283d30c976c6d9"
       },
       {
-        "bytes": 7202,
+        "bytes": 7209,
         "path": "release/verify_release.py",
-        "sha256": "42614998847e8e1ebde21a8134f4ab41c87004e7ce35b9c1cc72a6024110ed4e"
+        "sha256": "d35203f580b5d8c302a135daa40b3842721b18ee82ccf37b8c1fe9469f351c06"
       },
       {
         "bytes": 8358,
@@ -91,7 +91,7 @@
         "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
       }
     ],
-    "tree_sha256": "6f33eb636f0f3bf02bfa9c31492f56aaa8735f3f6864d209d649667d8334fbdd"
+    "tree_sha256": "298321b57bb5c018c24f525c2dca531b8776936391705e8f2db5f6291bc3addd"
   },
   "formal_companion": {
     "artifacts": [

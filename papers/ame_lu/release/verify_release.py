@@ -98,8 +98,8 @@ def create_manifest() -> dict[str, object]:
     formal = [record(REPO_ROOT / path, path) for path in formal_paths()]
     return {
         "schema": "ame-lu-release-manifest-v1",
-        "release": "ame-lu-rc1",
-        "date": "2026-07-26",
+        "release": "ame-lu-2026-08-03",
+        "date": "2026-08-03",
         "title": (
             "Local-Unitary Rigidity and Quantitative Rounding for "
             "Stabilizer AME States"
