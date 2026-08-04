@@ -1,6 +1,8 @@
-import RelativeConicArcs.Q11A5PointOrbitsData
+import RelativeConicArcs.Q11A5PointOrbitsBlocks
 
-/-! Static partition certificates for the seven Q11 A5 point blocks. -/
+/-! Finite combinatorics of the seven displayed point blocks of `PG(2,11)`: that they partition the
+133 canonical indices with the recorded sizes, and which block is the witness and which the
+standard conic.  These statements are about the displayed sets alone and mention no group action. -/
 
 namespace RelativeConicArcs.Examples.Q11A5PointOrbits
 

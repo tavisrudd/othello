@@ -1,6 +1,7 @@
-import RelativeConicArcs.Q11A5PointOrbitsData
+import RelativeConicArcs.Q11A5PointOrbitsBlocks
 
-/-! Static Brianchon-to-orbit bridges for the Q11 Clebsch witness. -/
+/-! Identification of the Brianchon points of the order-eleven Clebsch witness with a displayed
+point block, and of the triple-chord-intersection ledger with the Brianchon set. -/
 
 namespace RelativeConicArcs.Examples.Q11A5PointOrbits
 

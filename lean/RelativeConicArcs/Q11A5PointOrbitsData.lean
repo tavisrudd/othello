@@ -1,18 +1,22 @@
-import RelativeConicArcs.Q11BrianchonPetersen
+import RelativeConicArcs.Q11A5PointOrbitsBlocks
 
 /-!
-# Data for the finite A5 point-orbit bridge for the Clebsch hexagon
+# The sixty normalized projectivities of the order-eleven icosahedral action
 
-This base module records sixty normalized projective matrices over `F_11`,
-the canonical 133 representatives of `PG(2,11)`, and the explicit orbit
-data.  The bounded matrix, support, row, and fixed-point modules verify by
-kernel reduction that these matrices are invertible, preserve the displayed
-six-arc, act on every projective point as recorded, and have the stated fixed
-sets.
+This base module records sixty normalized projective transformations of `PG(2,11)` as row-major
+`3 × 3` matrix codes over `F_11`, each normalized by making its first nonzero entry equal to one,
+together with the sixty induced permutations of the six witness-column directions.  It defines the
+resulting action on the 133 canonical point indices of
+`RelativeConicArcs.Q11A5PointOrbitsBlocks`, the iterated support permutations and the exact
+order-five predicate, and the per-element fixed-point sets and their order-five union.
 
-This is a finite bridge, not the pencil-and-paper derivation that the projective stabilizer is the
-icosahedral `A5` representation.  Every finite assertion uses kernel-checked `norm_num` or ordinary
-`decide`; there is no `native_decide`, external oracle, or new axiom.
+Nothing is proved here.  The bounded matrix, support, row, and fixed-point modules verify by kernel
+reduction that these matrices are invertible, preserve the displayed six-arc, act on every
+projective point as recorded, and have the stated fixed sets; the tactic macros below are the
+shared normalization those bounded checks use.  This is a finite bridge, not the pencil-and-paper
+derivation that the projective stabilizer is the icosahedral `A5` representation.  Every finite
+assertion downstream uses kernel-checked `norm_num` or ordinary `decide`; there is no
+`native_decide`, external oracle, or new axiom.
 -/
 
 namespace RelativeConicArcs.Examples.Q11A5PointOrbits
@@ -22,20 +26,8 @@ open Q11Coding
 set_option maxHeartbeats 100000000
 set_option maxRecDepth 100000
 
-private instance : Fact (Nat.Prime 11) := ⟨by decide⟩
-
-abbrev Scalar := ZMod 11
-abbrev Vec3 := Fin 3 → Scalar
-abbrev PointIndex := Fin 133
 abbrev GroupIndex := Fin 60
 abbrev MatrixCode := Fin 9 → Fin 11
-
-/-- Canonical representatives `[1:y:z]`, `[0:1:z]`, `[0:0:1]`. -/
-def pointVec (p : PointIndex) : Vec3 :=
-  if _ : p.1 < 121 then
-    ![1, ((p.1 / 11 : ℕ) : Scalar), ((p.1 % 11 : ℕ) : Scalar)]
-  else if _ : p.1 < 132 then ![0, 1, ((p.1 - 121 : ℕ) : Scalar)]
-  else ![0, 0, 1]
 
 /-- Sixty row-major `3 × 3` matrices over `F_11`, each normalized by making
 its first nonzero entry equal to one.  The matrix checker proves that every
@@ -184,28 +176,9 @@ def matrixDet (g : GroupIndex) : Scalar :=
     matrixEntry g 0 2 *
       (matrixEntry g 1 0 * matrixEntry g 2 1 - matrixEntry g 1 1 * matrixEntry g 2 0)
 
-/-- Convert a homogeneous vector to the canonical point index.  The final branch also makes the
-function total at zero; `matrixVec_pointVec_ne_zero` below verifies that this branch is never used
-by the normalized projective action on the 133 canonical representatives. -/
-def canonicalIndex (v : Vec3) : PointIndex :=
-  if h0 : v 0 ≠ 0 then
-    let y := v 1 / v 0
-    let z := v 2 / v 0
-    ⟨y.val * 11 + z.val, by have hy := y.val_lt; have hz := z.val_lt; omega⟩
-  else if h1 : v 1 ≠ 0 then
-    let z := v 2 / v 1
-    ⟨121 + z.val, by have hz := z.val_lt; omega⟩
-  else
-    132
-
 /-- The normalized projective action on all 133 canonical points. -/
 def pointAction (g : GroupIndex) (p : PointIndex) : PointIndex :=
   canonicalIndex (matrixVec g (pointVec p))
-
-/-- The six witness directions in canonical point indexing. -/
-def witnessIndex (i : Fin 6) : PointIndex := ![110, 100, 51, 93, 125, 18] i
-
-def witnessSet : Finset PointIndex := Finset.univ.image witnessIndex
 
 macro "q11_witness_action_norm" : tactic =>
   `(tactic|
@@ -241,107 +214,9 @@ instance (g : GroupIndex) : Decidable (OrderFive g) := by
   unfold OrderFive
   infer_instance
 
-/-- Representatives of the seven point orbits, ordered by first canonical index. -/
-def orbitRepresentative (i : Fin 7) : PointIndex := ![0, 1, 2, 3, 4, 6, 18] i
-
-def orbitSize (i : Fin 7) : Nat := ![12, 30, 30, 10, 15, 30, 6] i
-
-/-- The seven point-orbit blocks in canonical indexing.  Recording the blocks explicitly avoids
-the large kernel term produced by repeatedly constructing and deduplicating 133-element images. -/
-def orbitPoints (i : Fin 7) : Finset PointIndex :=
-  ![
-    {0, 12, 26, 42, 49, 58, 69, 82, 97, 103, 111, 132},
-    {1, 5, 13, 15, 16, 21, 34, 35, 50, 52, 53, 54, 61, 63, 67,
-      73, 80, 83, 89, 91, 95, 98, 101, 104, 107, 108, 114, 115, 116, 120},
-    {2, 7, 8, 14, 19, 33, 37, 41, 44, 46, 57, 60, 65, 66, 68,
-      75, 77, 78, 79, 92, 96, 102, 105, 118, 119, 121, 122, 124, 127, 131},
-    {3, 9, 36, 40, 59, 62, 70, 72, 86, 87},
-    {4, 17, 24, 27, 29, 30, 31, 43, 47, 56, 74, 85, 90, 106, 112},
-    {6, 10, 11, 20, 22, 23, 25, 28, 32, 38, 39, 45, 48, 55, 64,
-      71, 76, 81, 84, 88, 94, 99, 109, 113, 117, 123, 126, 128, 129, 130},
-    {18, 51, 93, 100, 110, 125}
-  ] i
-
-/-- The block label of a canonical point.  The last block is the default; the partition
-certificate below verifies that the preceding tests and this default cover exactly one block. -/
-def orbitIndex (p : PointIndex) : Fin 7 :=
-  if p ∈ orbitPoints 0 then 0
-  else if p ∈ orbitPoints 1 then 1
-  else if p ∈ orbitPoints 2 then 2
-  else if p ∈ orbitPoints 3 then 3
-  else if p ∈ orbitPoints 4 then 4
-  else if p ∈ orbitPoints 5 then 5
-  else 6
-
 /-- Image of one point under the 60 normalized projectivities. -/
 def pointOrbit (p : PointIndex) : Finset PointIndex :=
   Finset.univ.image fun g : GroupIndex => pointAction g p
-
-/-! Action arithmetic is checked in the separately compiled `Q11A5PointOrbitsRows*` leaves. -/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/-- Canonical indices of the standard conic `XZ-Y^2=0`. -/
-def standardConicIndices : Finset PointIndex :=
-  {0, 12, 26, 42, 49, 58, 69, 82, 97, 103, 111, 132}
 
 /-- Fixed points of one normalized projectivity. -/
 def fixedPoints (g : GroupIndex) : Finset PointIndex :=
@@ -352,29 +227,6 @@ the twelve-point conic. -/
 def orderFiveFixedUnion : Finset PointIndex :=
   ((Finset.univ : Finset GroupIndex).filter OrderFive).biUnion fixedPoints
 
-/-- Embed an affine `(y,z)` code as the canonical index of `[1:y:z]`. -/
-def codeIndex (p : Q11BrianchonPetersen.AffinePointCode) : PointIndex :=
-  ⟨p.1.1 * 11 + p.2.1, by have hy := p.1.2; have hz := p.2.2; omega⟩
-
-theorem codeIndex_injective : Function.Injective codeIndex := by
-  intro a b h
-  have hv := congrArg Fin.val h
-  change a.1.1 * 11 + a.2.1 = b.1.1 * 11 + b.2.1 at hv
-  have ha := a.1.2
-  have hb := b.1.2
-  have hza := a.2.2
-  have hzb := b.2.2
-  apply Prod.ext <;> apply Fin.ext
-  · omega
-  · omega
-
-def codeEmbedding : Q11BrianchonPetersen.AffinePointCode ↪ PointIndex :=
-  ⟨codeIndex, codeIndex_injective⟩
-
-def brianchonSet : Finset PointIndex :=
-  Q11BrianchonPetersen.brianchonPointCodes.map codeEmbedding
-
-def triplePointSet : Finset PointIndex :=
-  Q11BrianchonPetersen.tripleChordIntersectionCodes.map codeEmbedding
+/-! Action arithmetic is checked in the separately compiled `Q11A5PointOrbitsRows*` leaves. -/
 
 end RelativeConicArcs.Examples.Q11A5PointOrbits
