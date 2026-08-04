@@ -72,10 +72,10 @@
   },
   "trust_boundary": {
     "excluded": "The rank-14 weighted Jacobian calculation and any global classification of remote weighted solutions are not formalized.",
-    "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound. The one finite step is kernel reduction: the five vertex balances split the four edges at the first non-root vertex into the six patterns with two positive edges, and in each branch the remaining four balances determine the six remaining edge parameters over their 2^6 assignments, giving the listed labelled pentagons as a proved classification in both directions; that they number twelve and are pairwise distinct is read off the displayed list rather than proved.",
+    "native": "No compiled evaluation is used, and the replay refuses it anywhere in the pinned closure along with any external import outside Mathlib. Every audited declaration depends only on propext, Classical.choice and Quot.sound. The one finite step is kernel reduction: the five vertex balances split the four edges at the first non-root vertex into the six patterns with two positive edges, and in each branch the remaining four balances determine the six remaining edge parameters over their 2^6 assignments, giving the listed labelled pentagons as a proved classification in both directions; that they number twelve and are pairwise distinct is read off the displayed list rather than proved.",
     "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, and each polynomial identity and coefficient comparison are kernel-checked. The pentagon classification is audited in both directions: pentagon_bit_classification derives the twelve listed sign patterns from the five vertex balances, and pentagon_bits_balanced derives the five balances from each listed pattern. That the listed patterns number twelve and are pairwise distinct is read off the displayed list; no Lean statement asserts either."
   },
-  "verifier_sha256": "8e911741d742a02e2fc2509e05bfb340cf58cbaed8c0c8c548d2830328daefe4",
+  "verifier_sha256": "69db1ce83e5b8d516795c9db5f04f193b71ba1d137d85f55cb1fa23c969e61f5",
   "axiom_report_provenance": {
     "build_run_id": "run-20260804-050416-1085523f",
     "gate_stdout_sha256": "027b009020d0c2b5e04bd35080618c05d8d2c4981565c7798eddd80256657feb",

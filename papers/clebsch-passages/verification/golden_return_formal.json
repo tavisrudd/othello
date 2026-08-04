@@ -3,8 +3,8 @@
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
   "axiom_report_sha256": "f722f054a683f95a17cf02e7781e57b9bd00aa9cc77e32e6c5eef2a000a25dcc",
-  "verifier_sha256": "081563d89e9c35e336dafe6341b8058802b99bb4ae7075aada9a5f0a1dd56c0f",
-  "source_closure_sha256": "b792ded7da457cfb3ffbdf0180b81d8aafeb6ea04448b0e1fe1a252e08d821d8",
+  "verifier_sha256": "e1959986c36b7bbebda8042f7a7f5d78719f586712fcea3d80a8820c7fe57230",
+  "source_closure_sha256": "f9a3e0e9d2d58306ab9a3194195754cf6ae89bd7498740af9df5829aea77b00c",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
@@ -13,7 +13,7 @@
     "RelativeConicArcs/ClebschMiddleExteriorSquareRows024To045.lean": "bc0f33c47310733f5e1808a1250512f749b7cb8407fe7c40883f38e3d0086dc7",
     "RelativeConicArcs/ClebschMiddleExteriorSquareRows123To135.lean": "26ac95967a22aed6f4f722ba81e856faa31fa37b5a9161a751ee64dbcb596c0c",
     "RelativeConicArcs/ClebschMiddleExteriorSquareRows145To345.lean": "ece28a396dfea9eee73ab1b410a061751183b7f1428322245f81bd438bf028c6",
-    "RelativeConicArcs/ClebschMiddleExteriorSquare.lean": "342de0935727fcbaa7d9d01f6eea3186daa74a553a7b89ae0ec8445bef523564",
+    "RelativeConicArcs/ClebschMiddleExteriorSquare.lean": "9c0a1cc65165bdc63c968a9ff6b17ededa7ef7c3ef956f1362ace1d06f7b843b",
     "RelativeConicArcs/ClebschMiddleExteriorDiagonal.lean": "ea7de3fae1b1fb9e5fbf4dd6805b865debffdbcf8d923ffdae73e9a5be375e4f",
     "RelativeConicArcs/ClebschMiddleExteriorSupport.lean": "c932f3ac39086ffc506edc9dfc021b5579af2af5eb5f2d472bd95c3547e6f21d",
     "RelativeConicArcs/ClebschGoldenDescent.lean": "f8582958e6c06d9b9d47e6f7fba2d77a3182ec06659d67bd171e76f78e5260ff",
@@ -22,7 +22,7 @@
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",
     "RelativeConicArcs/WeightedMatchingEvaluation.lean": "06ef04d1a05622f94a0e46a87f4d66e2ac5a6f355a1bad9daedcb8e4a5355e66",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "ecf45a6523d75ebf3beb3afc50d20b562cbf3a2d16f5b633964473fa5030ef69"
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "eb2dec361fbe9d297740ecfa4952e8cc2dc4b3a882dbccbcf7e110c98a85390d"
   },
   "audited_declarations": [
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq",
@@ -80,7 +80,7 @@
         "RelativeConicArcs.ClebschGoldenDescent.degreeTenComparison_det",
         "RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar"
       ],
-      "excluded": "the geometric identification of the four shadows with the marked golden presentation, and the cross-golden determinant comparison, remain human arguments; the Hodge square, the middle-exterior square, its diagonal, its parity criterion, its common-neighbour counts and both degree-ten comparison claims are decided by the compiled evaluator rather than the kernel"
+      "excluded": "the geometric identification of the four shadows with the marked golden presentation, and the cross-golden determinant comparison, remain human arguments."
     },
     "OPER-3": {
       "coverage": "partial mechanism; no full row claim",
@@ -104,12 +104,12 @@
   },
   "trust_boundary": {
     "symbolic": "Ring-general switching, four-point, balance, reconstruction, augmentation, companion, matching-evaluation, commutator-Pfaffian, and three-vertex signed-matrix square identities are kernel-checked symbolic proofs.",
-    "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound. The finite steps are kernel reductions: the order-six conference matrix entrywise over its thirty-six index pairs and its twenty triangle signs, the middle-exterior return over its twenty rows together with its diagonal, parity criterion and common-neighbour counts, and the degree-ten comparison by cofactor expansion. Middle-degree Hodge complementation squaring to minus the identity is not a decision at all: the matrix has one nonzero entry per row, so the product collapses to a single term whose sign is hodgeSign_mul_complement. The replay refuses compiled evaluation anywhere in the pinned closure.",
+    "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound. The finite steps are kernel decisions: the order-six conference matrix entrywise over its thirty-six index pairs and its twenty triangle signs, the middle-exterior return over its twenty rows together with its diagonal, parity criterion and common-neighbour counts, and the conference intertwining identity over its thirty-six index pairs; the degree-ten comparison determinant falls to cofactor expansion instead. Middle-degree Hodge complementation squaring to minus the identity is not a decision at all: the matrix has one nonzero entry per row, so the product collapses to a single term whose sign is hodgeSign_mul_complement, itself a twenty-case rfl on the displayed signs. The replay refuses compiled evaluation anywhere in the pinned closure and refuses any external import outside Mathlib.",
     "excluded": "The manifest does not claim formal coverage of the higher-order inclusion/Ramsey exchange-rigidity argument, balanced-class classification, abstract atom recovery, the exterior-cube kernel, binary transvectants, or optional quaternion-order refinements."
   },
   "axiom_report_provenance": {
-    "build_run_id": "run-20260804-060023-d43735f6",
-    "gate_stdout_sha256": "63fb6f3590b3a5ba6e28cc8277f4d703a90cad7aecdb0e8cb3e5abdb1a75b283",
+    "build_run_id": "run-20260804-063513-68ab1bf6",
+    "gate_stdout_sha256": "f9b9d4f14cca1014607c71c3b78746608b5d59520796c38a787022d74aa14b77",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
     "gate_stdout": "verification/evidence/gate_stdout/golden_return.stdout.txt"

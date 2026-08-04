@@ -23,7 +23,9 @@ set_option maxRecDepth 10000
 
 /-- The two concatenation signs of a triple and its complement multiply to
 minus one, which is the whole content of middle-degree Hodge complementation
-squaring to minus the identity. -/
+squaring to minus the identity.  The signs are displayed data on the
+lexicographically ordered triple basis, so this is checked on each of the
+twenty labels rather than derived from the permutation sign. -/
 theorem hodgeSign_mul_complement (S : Fin 20) :
     hodgeSign S * hodgeSign (complementIndex S) = -1 := by
   fin_cases S <;> rfl
@@ -39,8 +41,8 @@ theorem hodgeMatrix_sq :
       (fun U _ hU => by simp [hodgeMatrix, hU]) (by simp)]
   by_cases h : T = S
   · subst h
-    simp only [hodgeMatrix, complementIndex_involutive T, eq_self_iff_true,
-      if_true, Matrix.neg_apply, Matrix.one_apply_eq]
+    simp only [hodgeMatrix, complementIndex_involutive T, if_true,
+      Matrix.neg_apply, Matrix.one_apply_eq]
     rw [neg_mul_neg]
     exact hodgeSign_mul_complement T
   · have hzero : hodgeMatrix (complementIndex S) T = 0 := by

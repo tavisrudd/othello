@@ -43,10 +43,10 @@
       "sha256": "ea7de3fae1b1fb9e5fbf4dd6805b865debffdbcf8d923ffdae73e9a5be375e4f"
     },
     {
-      "bytes": 3028,
+      "bytes": 3182,
       "module": "RelativeConicArcs.ClebschMiddleExteriorSquare",
       "path": "RelativeConicArcs/ClebschMiddleExteriorSquare.lean",
-      "sha256": "342de0935727fcbaa7d9d01f6eea3186daa74a553a7b89ae0ec8445bef523564"
+      "sha256": "9c0a1cc65165bdc63c968a9ff6b17ededa7ef7c3ef956f1362ace1d06f7b843b"
     },
     {
       "bytes": 1603,
@@ -97,10 +97,10 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 4417,
+      "bytes": 4596,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "ecf45a6523d75ebf3beb3afc50d20b562cbf3a2d16f5b633964473fa5030ef69"
+      "sha256": "eb2dec361fbe9d297740ecfa4952e8cc2dc4b3a882dbccbcf7e110c98a85390d"
     },
     {
       "bytes": 5030,

@@ -16,7 +16,7 @@ disagreements that need a TeX edit are listed at the end for the owner.
 
 | gate | terminals | carrying a compiled-evaluation axiom | at task start |
 |---|---|---|---|
-| `RelativeConicArcs.Gates.ClebschPassages` | 50 | 0 | 10 of 43 |
+| `RelativeConicArcs.Gates.ClebschPassages` | 50 | 0 | 10 of 47 |
 | `RelativeConicArcs.Gates.ClebschGoldenReturn` | 28 | 0 | 13 of 28 |
 | `RelativeConicArcs.Gates.FourShadowRecognition` | 19 | 0 | 4 of 16 |
 
@@ -169,9 +169,8 @@ Not edited here. `papers/clebsch-passages/sections/08-verification.tex`:
   habitual rather than forced, and that the remaining seventeen carriers would
   be cheaper than their count suggested — held for every one of them, including
   the twenty middle-exterior row lemmas named as the case that could refute it.
-  They kernel-decide as they stand, five rows in fifteen seconds, so the
-  formalized Cauchy-Binet theorem that seemed to be the only structural route
-  was never needed. What remains genuinely open is why the original author
+  They kernel-decide as they stand, so the formalized Cauchy-Binet theorem that
+  seemed to be the only structural route was never needed. What remains genuinely open is why the original author
   reached for compiled evaluation at all: nothing in the sizes required it, and
   the whole conversion cost one working session.
 - **The Lean is narrower than the paper exactly where the paper is general.**

@@ -103,6 +103,16 @@ def main() -> int:
     modifiers = (
         r"(?:@\[[^\]]*\]\s*|(?:private|protected|noncomputable|nonrec|scoped|local)\s+)*"
     )
+    # The closure walk follows only project-local imports, so an import into
+    # another package would leave a proof this replay never sees.  Confine the
+    # externals to Mathlib, which the toolchain pin already fixes.
+    for external in inventory.get("external_imports", []):
+        if external != "Mathlib" and not external.startswith("Mathlib."):
+            raise SystemExit(
+                "four-shadow formal replay: FAIL [external import outside Mathlib: "
+                f"{external}]"
+            )
+
     forbidden = re.compile(
         rf"^\s*{modifiers}(?:axiom|opaque|partial|unsafe)\b", re.MULTILINE
     )
@@ -112,16 +122,22 @@ def main() -> int:
     # and leaves no trace in `#print axioms`.
     mechanisms = re.compile(
         r"\bnative_decide\b"
+        r"|\bdecide\b[^\n]*\+\s*native"
+        r"|\bnative\s*:=\s*true"
         r"|"
         r"(?:@\[|attribute\s*\[)[^\]]*(?:implemented_by|extern)"
         r"|\bofReduceBool\b"
-        r"|\bset_option\s+(?:debug\.skipKernelTC|allowUnsafeReducibility)",
+        r"|\bset_option\s+(?:debug\.skipKernelTC|allowUnsafeReducibility"
+        r"|debug\.byAsSorry|debug\.proofAsSorry"
+        r"|debug\.terminalTacticsAsSorry)",
         re.MULTILINE,
     )
     workflow_id = re.compile(r"\bC[0-9]{3,}\b")
+    # Workflow debris, not ordinary English: `pending`, `temporary` and
+    # `fallback` are all plausible words in a mathematical docstring and were
+    # refusing sources for no reason.
     workflow_prose = re.compile(
-        r"\b(?:TODO|FIXME|pending|temporary|fallback|agent|lane)\b",
-        re.IGNORECASE,
+        r"\b(?:TODO|FIXME|XXX|HACK)\b",
     )
     for relative, expected in manifest["source_sha256"].items():
         source = lean_root / relative

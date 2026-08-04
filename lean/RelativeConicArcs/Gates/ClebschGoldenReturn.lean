@@ -29,11 +29,13 @@ the thirty-six index pairs; its twenty oriented triangle signs are one
 `decide` on the conjunction over the increasing triples; and its translation
 invariance is not finite at all, holding for an arbitrary commutative ring,
 argument and shift.  The middle-exterior return is decided row by row, with
-its diagonal, parity criterion and common-neighbour counts, and the degree-ten
-comparison determinant by cofactor expansion.  Middle-degree Hodge
-complementation squaring to minus the identity is proved structurally rather
-than decided: the matrix carries one nonzero entry per row, so the product
-collapses to a single term.  No generated certificate or externally supplied
+its diagonal, parity criterion and common-neighbour counts; the conference
+intertwining identity is decided over the thirty-six index pairs, and the
+degree-ten comparison determinant falls to cofactor expansion.  Middle-degree
+Hodge complementation squaring to minus the identity is proved structurally
+rather than decided: the matrix carries one nonzero entry per row, so the
+product collapses to a single term whose sign is `hodgeSign_mul_complement`,
+itself a twenty-case `rfl` on the displayed signs.  No generated certificate or externally supplied
 matrix is imported.
 -/
 

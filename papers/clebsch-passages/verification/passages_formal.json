@@ -3,8 +3,8 @@
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
   "axiom_report_sha256": "9cff40588cda8f5e282ce3fd498553cfb114a693375608dd1453256db0b2b475",
-  "verifier_sha256": "4388fc04545b4f496d756549c91b4fa22890d17ab84832e1442ba14585a5df6e",
-  "source_closure_sha256": "3026cbcaf717cf9e0bf11d069036834d6eaa57da4c59bb850b54b124b58d5adb",
+  "verifier_sha256": "5b9bb8a62bcc4932b5340251ee5db2982136572be4cc2b329844db836316b878",
+  "source_closure_sha256": "5cf947921a7309f7b72a39d8ec0d9e65fbe4ac4b896f95500bd52469ba04cb7d",
   "source_sha256": {
     "RelativeConicArcs/QuadraticPinching.lean": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4",
     "RelativeConicArcs/SplitQuadraticPinching.lean": "d46ec97de2670ef0d34873843a8d2821d532d4a00c56e6ebb829fd8c44def6f2",
@@ -20,7 +20,7 @@
     "RelativeConicArcs/AlignedTwoGraph.lean": "a03ae9c236c6fc5ca986e759bcc40e5b022e3f85fe049ed8a2933d88c73ab3ac",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ClebschPassagesCorrespondence.lean": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28",
-    "RelativeConicArcs/Gates/ClebschPassages.lean": "2d02d0e1b017f4a65db24a9a0ba862550c03d7a4f94a355b4f6e41083543fdf1"
+    "RelativeConicArcs/Gates/ClebschPassages.lean": "d006b5220469bb23d528e9df0b5a0d8812a7322e2f47c9cf2dc332c6c0045427"
   },
   "audited_declarations": [
     "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
@@ -200,12 +200,12 @@
   },
   "trust_boundary": {
     "symbolic": "Pinching, conductor, involutive splitting, tight-frame, signed-Gram, switching, aligned-design disambiguation and globalization, Petersen-eigenspace, fixed-line, determinant, and scalar identities are kernel-checked symbolic proofs.",
-    "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound, and four depend on no axiom at all. The finite steps are kernel reductions: the displayed reflection matrices and the marked fixed vectors are checked entrywise, the nonsquare witness by deciding the eleven residues, and the aligned two-graph's signature classifiers over their 16,384 and eight cases. The replay refuses compiled evaluation anywhere in the pinned closure, so this is a checked property and not a declaration.",
+    "native": "No compiled evaluation is used. Every audited declaration depends only on propext, Classical.choice and Quot.sound, and four depend on no axiom at all. The finite steps use three methods: kernel decision for the displayed reflection matrices entrywise, the nonsquare witness over the eleven residues, and the aligned two-graph's signature classifiers over their 16,384 and eight cases; norm_num rewriting for the marked fixed vector sum, its third elementary symmetric value, the reflection-vector norms and the identification of each displayed integral reflection with the rational reflection formula; and cofactor expansion for one determinant. The replay refuses compiled evaluation anywhere in the pinned closure and refuses any external import outside Mathlib, so this is a checked property and not a declaration.",
     "excluded": "No full manuscript row is claimed: the finite-set normalization inputs, global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
   },
   "axiom_report_provenance": {
-    "build_run_id": "run-20260804-060023-d43735f6",
-    "gate_stdout_sha256": "a26d7b10b87436102fb59a77491339ee94bdf384e6eace0ca20ba040381da16b",
+    "build_run_id": "run-20260804-063513-68ab1bf6",
+    "gate_stdout_sha256": "891b3a69a760d2641d21118bda0cd5ea9a14f0115ccafd6bb28f3b5745991fc0",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
     "gate_stdout": "verification/evidence/gate_stdout/passages.stdout.txt"

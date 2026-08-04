@@ -85,7 +85,7 @@ python3 verification/verify_passages_lean.py \
 declarations and records the missing geometric hypotheses.  Its gate proves
 the abstract pinching, conductor, involution, golden-character, tight-frame,
 switching, Petersen, fixed-line, and normalized aligned-design mechanisms.
-For aligned designs it checks the two-cut classifier by native decision and
+For aligned designs it checks the two-cut classifier by kernel decision and
 proves the third-point disambiguation, overlap consistency, signing transport,
 four-by-four determinant identity, and query polynomial symbolically.  The
 two bounds behind the triangle Ramsey equality on six labelled points, and the
@@ -125,8 +125,8 @@ python3 verification/verify_golden_return_lean.py \
 
 `golden_return_formal.json` fixes the Lean toolchain, source hashes, audit
 gate, declarations, and exact exclusions.  `golden_return_axioms.txt` records
-the complete pinned `#print axioms` output, including each native-decision
-terminal; replay rejects any change to that report.  This supplemental gate
+the complete pinned `#print axioms` output; replay rejects any change to that
+report.  This supplemental gate
 contributes partial mechanism coverage to `OPER-1`, `OPER-3`, and `OPER-4`; no manuscript theorem
 takes Lean as a proof dependency.
 `golden_return_source_closure.json` pins the exact project-local transitive
@@ -144,11 +144,11 @@ python3 verification/verify_four_shadow_lean.py \
 
 It covers the translation extraction, pair moments, diagonal and scalar
 square, pentagon gauge, ten inner products, cubic homogeneity, and the
-pentagon classification in both directions.  Alone among the three gates it
-claims no compiled evaluation at all: every audited terminal depends only on
-`propext`, `Classical.choice` and `Quot.sound`, and the replay enforces that
-claim by refusing `native_decide` anywhere in the pinned closure rather than
-merely recording it.  The rank-14 weighted Jacobian calculation and any global
+pentagon classification in both directions.  As with the other two gates,
+every audited terminal depends only on `propext`, `Classical.choice` and
+`Quot.sound`, and the replay enforces that by refusing compiled evaluation
+anywhere in the pinned closure, and any external import outside Mathlib,
+rather than merely recording the boundary.  The rank-14 weighted Jacobian calculation and any global
 classification of remote weighted solutions are not formalized.
 `four_shadow_formal.json`, `four_shadow_axioms.txt` and
 `four_shadow_source_closure.json` play the same roles as their counterparts

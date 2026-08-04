@@ -24,11 +24,15 @@ depend on no axiom at all.  The order-six conference matrix is kernel-checked
 in `ClebschGoldenConference`; both bounds behind the triangle Ramsey equality
 on six labelled points, and the aligned anchor they produce, are proved here.
 
-The finite steps are all kernel reductions: the displayed reflection matrices
-and the marked fixed vectors entrywise, the finite-field nonsquare witness by
-deciding the eleven residues, and the two aligned two-graph classifiers over
-their 16,384 and eight cases.  The third-outside-point elimination is
-symbolic.
+The finite steps use three methods.  Kernel `decide` takes the displayed
+reflection matrices entrywise, the finite-field nonsquare witness over the
+eleven residues, and the two aligned two-graph classifiers over their 16,384
+and eight cases.  `norm_num` takes the marked fixed vector sum, its third
+elementary symmetric value, the two reflection-vector norms and the
+identification of each displayed integral reflection with the rational
+reflection formula; these are rewriting procedures producing kernel-checked
+terms, not evaluations of a `Decidable` instance.  One determinant falls to
+cofactor expansion.  The third-outside-point elimination is symbolic.
 
 The gate deliberately does not assert the geometric correspondence between
 Hitchin's spaces and these algebraic models, nor the integral
