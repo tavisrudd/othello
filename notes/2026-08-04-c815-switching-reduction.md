@@ -141,13 +141,29 @@ root row of the target conference matrix, independently of the pattern. Nothing
 about the pentagon enters. The genuine content is carried by the relabellings,
 which differ per pattern.
 
-The switching API built here — composition, involution, the square transport,
-closure of sign matrices under switching, and root normalization — is stated
-for its own sake and is not four-shadow-specific. The aligned-certificate work
-reasons about edge toggles and switching transport on the same objects, so
-whether these declarations should move to a shared module before that work
-reuses them is an architecture question for its owner rather than something to
-settle here.
+The library already carried a root-gauge switching layer: `ClebschTwoGraph`
+defines `rootSwitchSign` and proves its signs square to one, for an arbitrary
+commutative ring and under the weaker hypothesis that off-diagonal entries
+square to one. The first version of this work defined its own copy. That
+duplicate is removed: `FourShadowRecognition` now imports `ClebschTwoGraph`
+and uses the existing signs, with
+`offDiagonal_mul_self_of_isSignMatrix` supplying their hypothesis from the
+sign-matrix property. The four-shadow closure grows by exactly that one module,
+which imports only `ClebschGoldenConference` and is already pinned by the
+passages gate.
+
+What remains genuinely new here is the transport layer — the matching-evaluation
+switching factor, the scalar-level proportionality transport, the square
+transport, closure of sign matrices under switching, and the identification of
+a root-normalized sign matrix with a ten-bit signing. Of the library's other
+switching consumers, the Paper I orientation modules
+(`PaperIOrientationHolonomy`, `PaperIOrientationPentagon`,
+`MarkedClebschBridge`) use the same multiplicative encoding and already share
+`switchMatrix` and `rootSwitchSign`, so they are the candidates for a shared
+home. The aligned-design side uses a different encoding — `AlignedTwoGraph`
+states switching with Boolean parameters and `Bool.xor` over an arbitrary
+vertex type, with a global negation — so the aligned-certificate work inherits
+the argument pattern but not these declarations.
 
 Order six remains hard-coded, as it is throughout the module: the matching
 evaluation is a fifteen-term sum over the perfect matchings of six labels, so

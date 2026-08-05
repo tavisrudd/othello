@@ -1,5 +1,5 @@
-✔ [1249/1250] Built RelativeConicArcs.FourShadowRecognition (28s)
-ℹ [1250/1250] Built RelativeConicArcs.Gates.FourShadowRecognition (926ms)
+✔ [1250/1251] Built RelativeConicArcs.FourShadowRecognition (28s)
+ℹ [1251/1251] Built RelativeConicArcs.Gates.FourShadowRecognition (1.4s)
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:30:0: 'RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation' depends on axioms: [propext,
  Quot.sound]
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:31:0: 'RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate' depends on axioms: [propext]
@@ -83,16 +83,12 @@ info: RelativeConicArcs/Gates/FourShadowRecognition.lean:62:0: 'RelativeConicArc
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:63:0: 'RelativeConicArcs.FourShadowRecognition.isSignMatrix_switchMatrix' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/FourShadowRecognition.lean:64:0: 'RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_mul_self' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-info: RelativeConicArcs/Gates/FourShadowRecognition.lean:65:0: 'RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_root_row' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:64:0: 'RelativeConicArcs.FourShadowRecognition.offDiagonal_mul_self_of_isSignMatrix' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:65:0: 'RelativeConicArcs.FourShadowRecognition.rootSwitchSign_root_row' depends on axioms: [propext]
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:66:0: 'RelativeConicArcs.FourShadowRecognition.exists_bits_eq_of_rootNormalized' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/FourShadowRecognition.lean:67:0: 'RelativeConicArcs.FourShadowRecognition.exists_bits_switchMatrix_rootSwitchSigns' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/FourShadowRecognition.lean:67:0: 'RelativeConicArcs.FourShadowRecognition.exists_bits_switchMatrix_rootSwitchSign' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:68:0: 'RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix' depends on axioms: [propext,
@@ -107,4 +103,4 @@ info: RelativeConicArcs/Gates/FourShadowRecognition.lean:70:0: 'RelativeConicArc
 info: RelativeConicArcs/Gates/FourShadowRecognition.lean:71:0: 'RelativeConicArcs.FourShadowRecognition.exists_switchMatrix_submatrix_eq_conferenceMatrix' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-Build completed successfully (1250 jobs).
+Build completed successfully (1251 jobs).

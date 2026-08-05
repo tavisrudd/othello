@@ -1,4 +1,5 @@
 import RelativeConicArcs.ClebschOperatorShadows
+import RelativeConicArcs.ClebschTwoGraph
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.LinearCombination
@@ -61,6 +62,7 @@ namespace RelativeConicArcs.FourShadowRecognition
 
 open Matrix
 open ClebschGoldenConference
+open ClebschTwoGraph
 open GoldenCommutatorPfaffian
 
 variable {R : Type*} [CommRing R] [IsDomain R]
@@ -1033,7 +1035,9 @@ every one of its three labels twice, and multiplies the commutator-Pfaffian
 cubic by `d 0 * d 1 * d 2 * d 3 * d 4 * d 5`, because each perfect matching of
 the six labels meets every label once.  Switching by the root row of a sign
 matrix therefore carries it into the root gauge, and both the recognition
-statement and the conference square transport along that switching.
+statement and the conference square transport along that switching.  The root
+gauge signs themselves are the ones already used for the two-graph
+presentation, `ClebschTwoGraph.rootSwitchSign`, rather than a second copy.
 -/
 
 /-- A symmetric matrix on the six labels with vanishing diagonal whose
@@ -1188,18 +1192,12 @@ theorem switchMatrix_mul_self_eq_iff (d : Fin 6 → ℤ) (hd : ∀ i, d i * d i 
     rw [h]
     exact switchMatrix_smul_one d hd
 
-/-- The switching signs that carry the root row of a sign matrix to `1`. -/
-def rootSwitchSigns (C : Matrix (Fin 6) (Fin 6) ℤ) : Fin 6 → ℤ :=
-  fun i => if i = 0 then 1 else C 0 i
-
-/-- The root switching signs square to one. -/
-theorem rootSwitchSigns_mul_self (C : Matrix (Fin 6) (Fin 6) ℤ)
-    (hC : IsSignMatrix C) (i : Fin 6) :
-    rootSwitchSigns C i * rootSwitchSigns C i = 1 := by
-  rcases eq_or_ne i 0 with rfl | hi
-  · simp [rootSwitchSigns]
-  · rcases hC.2.2 0 i (Ne.symm hi) with h | h <;>
-      simp [rootSwitchSigns, hi, h]
+/-- Off the diagonal a sign matrix has entries squaring to one, which is the
+hypothesis under which the root-gauge switching signs of the two-graph
+presentation are defined. -/
+theorem offDiagonal_mul_self_of_isSignMatrix (C : Matrix (Fin 6) (Fin 6) ℤ)
+    (hC : IsSignMatrix C) (i j : Fin 6) (hij : i ≠ j) : C i j * C i j = 1 := by
+  rcases hC.2.2 i j hij with h | h <;> simp [h]
 
 private theorem eq_one_or_neg_one_of_mul_self {z : ℤ} (h : z * z = 1) :
     z = 1 ∨ z = -1 := by
@@ -1222,14 +1220,14 @@ theorem isSignMatrix_switchMatrix (d : Fin 6 → ℤ) (hd : ∀ i, d i * d i = 1
 
 /-- Switching a sign matrix by its own root row makes every root edge
 positive. -/
-theorem rootSwitchSigns_root_row (C : Matrix (Fin 6) (Fin 6) ℤ)
+theorem rootSwitchSign_root_row (C : Matrix (Fin 6) (Fin 6) ℤ)
     (hC : IsSignMatrix C) (i : Fin 6) (hi : i ≠ 0) :
-    switchMatrix (rootSwitchSigns C) C 0 i = 1 := by
-  have h0 : rootSwitchSigns C 0 = 1 := by simp [rootSwitchSigns]
-  have hi' : rootSwitchSigns C i = C 0 i := by simp [rootSwitchSigns, hi]
-  show rootSwitchSigns C 0 * C 0 i * rootSwitchSigns C i = 1
+    switchMatrix (rootSwitchSign C) C 0 i = 1 := by
+  have h0 : rootSwitchSign C 0 = 1 := by simp [rootSwitchSign]
+  have hi' : rootSwitchSign C i = C 0 i := by simp [rootSwitchSign, hi]
+  show rootSwitchSign C 0 * C 0 i * rootSwitchSign C i = 1
   rw [h0, hi', one_mul]
-  simpa [rootSwitchSigns, hi] using rootSwitchSigns_mul_self C hC i
+  simpa [rootSwitchSign, hi] using rootSwitchSign_sq C (offDiagonal_mul_self_of_isSignMatrix C hC) i
 
 private theorem boolSign_decide_eq {z : ℤ} (h : z = 1 ∨ z = -1) :
     boolSign (decide (z = -1)) = z := by
@@ -1293,13 +1291,13 @@ theorem exists_bits_eq_of_rootNormalized (B : Matrix (Fin 6) (Fin 6) ℤ)
 
 /-- Switching a sign matrix by its own root row lands in the root-normalized
 family. -/
-theorem exists_bits_switchMatrix_rootSwitchSigns (C : Matrix (Fin 6) (Fin 6) ℤ)
+theorem exists_bits_switchMatrix_rootSwitchSign (C : Matrix (Fin 6) (Fin 6) ℤ)
     (hC : IsSignMatrix C) :
     ∃ bits : Fin 10 → Bool,
-      switchMatrix (rootSwitchSigns C) C = normalizedSignMatrix bits :=
+      switchMatrix (rootSwitchSign C) C = normalizedSignMatrix bits :=
   exists_bits_eq_of_rootNormalized _
-    (isSignMatrix_switchMatrix _ (rootSwitchSigns_mul_self C hC) C hC)
-    (rootSwitchSigns_root_row C hC)
+    (isSignMatrix_switchMatrix _ (rootSwitchSign_sq C (offDiagonal_mul_self_of_isSignMatrix C hC)) C hC)
+    (rootSwitchSign_root_row C hC)
 
 /-- Nonzero proportionality of the two cubic shadows characterizes the
 conference square on every sign matrix of order six, with no root gauge
@@ -1308,10 +1306,10 @@ theorem exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix
     (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C) :
     (∃ mu : ℤ, mu ≠ 0 ∧ CubicsProportional C mu) ↔
       C * C = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
-  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSigns C hC
-  have hd := rootSwitchSigns_mul_self C hC
-  rw [← exists_nonzero_cubicsProportional_switchMatrix (rootSwitchSigns C) hd C,
-    ← switchMatrix_mul_self_eq_iff (rootSwitchSigns C) hd C, hbits]
+  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSign C hC
+  have hd := rootSwitchSign_sq C (offDiagonal_mul_self_of_isSignMatrix C hC)
+  rw [← exists_nonzero_cubicsProportional_switchMatrix (rootSwitchSign C) hd C,
+    ← switchMatrix_mul_self_eq_iff (rootSwitchSign C) hd C, hbits]
   exact exists_nonzero_cubicsProportional_iff_conferenceSquare bits
 
 /-- The indicator vector of the last three labels. -/
@@ -1380,13 +1378,13 @@ the two appears. -/
 theorem cubicsProportional_eq_four_or_neg_four_of_isSignMatrix
     (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C) {mu : ℤ} (hmu : mu ≠ 0)
     (hprop : CubicsProportional C mu) : mu = 4 ∨ mu = -4 := by
-  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSigns C hC
-  have hd := rootSwitchSigns_mul_self C hC
-  have hprod := switchSignProduct_mul_self (rootSwitchSigns C) hd
+  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSign C hC
+  have hd := rootSwitchSign_sq C (offDiagonal_mul_self_of_isSignMatrix C hC)
+  have hprod := switchSignProduct_mul_self (rootSwitchSign C) hd
   have hsq : normalizedSignMatrix bits * normalizedSignMatrix bits =
       5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
     rw [← hbits]
-    exact (switchMatrix_mul_self_eq_iff (rootSwitchSigns C) hd C).mpr
+    exact (switchMatrix_mul_self_eq_iff (rootSwitchSign C) hd C).mpr
       ((exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix C
         hC).mp ⟨mu, hmu, hprop⟩)
   have hsymm : (normalizedSignMatrix bits).transpose = normalizedSignMatrix bits := by
@@ -1396,13 +1394,13 @@ theorem cubicsProportional_eq_four_or_neg_four_of_isSignMatrix
     intro i hi
     exact pairTriangleSum_eq_zero (normalizedSignMatrix bits) 5 hsymm hsq 0 i
       (Ne.symm hi)
-  have hback : switchMatrix (rootSwitchSigns C) (normalizedSignMatrix bits) = C := by
-    rw [← hbits, switchMatrix_switchMatrix_self (rootSwitchSigns C) hd]
+  have hback : switchMatrix (rootSwitchSign C) (normalizedSignMatrix bits) = C := by
+    rw [← hbits, switchMatrix_switchMatrix_self (rootSwitchSign C) hd]
   have hcarry : ∀ nu : ℤ, CubicsProportional (normalizedSignMatrix bits) nu →
-      mu = rootSwitchSigns C 0 * rootSwitchSigns C 1 * rootSwitchSigns C 2 *
-        rootSwitchSigns C 3 * rootSwitchSigns C 4 * rootSwitchSigns C 5 * nu := by
+      mu = rootSwitchSign C 0 * rootSwitchSign C 1 * rootSwitchSign C 2 *
+        rootSwitchSign C 3 * rootSwitchSign C 4 * rootSwitchSign C 5 * nu := by
     intro nu hnu
-    have := (cubicsProportional_switchMatrix_iff (rootSwitchSigns C) hd
+    have := (cubicsProportional_switchMatrix_iff (rootSwitchSign C) hd
       (normalizedSignMatrix bits) nu).mpr hnu
     rw [hback] at this
     exact cubicsProportional_unique_of_isSignMatrix C hC hprop this
@@ -1548,12 +1546,12 @@ theorem exists_switchMatrix_submatrix_eq_conferenceMatrix
     ∃ (d : Fin 6 → ℤ) (σ : Equiv.Perm (Fin 6)),
       (∀ i, d i * d i = 1) ∧
         switchMatrix d (C.submatrix σ σ) = conferenceMatrix := by
-  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSigns C hC
-  have hd := rootSwitchSigns_mul_self C hC
+  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSign C hC
+  have hd := rootSwitchSign_sq C (offDiagonal_mul_self_of_isSignMatrix C hC)
   have hsq' : normalizedSignMatrix bits * normalizedSignMatrix bits =
       5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
     rw [← hbits]
-    exact (switchMatrix_mul_self_eq_iff (rootSwitchSigns C) hd C).mpr hsq
+    exact (switchMatrix_mul_self_eq_iff (rootSwitchSign C) hd C).mpr hsq
   have hsymm : (normalizedSignMatrix bits).transpose = normalizedSignMatrix bits := by
     ext i j
     fin_cases i <;> fin_cases j <;> rfl
@@ -1564,12 +1562,12 @@ theorem exists_switchMatrix_submatrix_eq_conferenceMatrix
   obtain ⟨σ, hσ⟩ :=
     exists_relabel_switchMatrix_eq_conferenceMatrix_of_firstRowBalanced bits
       hbalance
-  refine ⟨fun i => conferenceGaugeSigns i * rootSwitchSigns C (σ i), σ,
+  refine ⟨fun i => conferenceGaugeSigns i * rootSwitchSign C (σ i), σ,
     fun i => ?_, ?_⟩
-  · calc conferenceGaugeSigns i * rootSwitchSigns C (σ i) *
-        (conferenceGaugeSigns i * rootSwitchSigns C (σ i))
+  · calc conferenceGaugeSigns i * rootSwitchSign C (σ i) *
+        (conferenceGaugeSigns i * rootSwitchSign C (σ i))
         = conferenceGaugeSigns i * conferenceGaugeSigns i *
-            (rootSwitchSigns C (σ i) * rootSwitchSigns C (σ i)) := by ring
+            (rootSwitchSign C (σ i) * rootSwitchSign C (σ i)) := by ring
       _ = 1 := by rw [conferenceGaugeSigns_mul_self i, hd (σ i)]; ring
   · rw [← hσ, ← hbits]
     ext i j
