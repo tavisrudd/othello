@@ -108,6 +108,62 @@ exported in the same round for the base library to be self-consistent: adopting 
 boundary would leave the orientation statement in the base still disclaiming results that the base
 then carries.
 
+## The base manifest repair
+
+`TARGET_MANIFEST.json` in the base library described a tree that had moved under it.  Three modules,
+`RelativeConicArcs/Q16CertificateLevels.lean`, `RelativeConicArcs/Q16Reduction.lean`, and
+`RelativeConicArcs/Q16StepKernel.lean`, were deleted when the order-16 certificate internals moved
+into their own package, and `ProjectiveCap/Sym2ConicBridge.lean` gained an import; neither change
+updated the manifest.  The repair drops the three entries, refreshes the bridge's recorded size and
+digest, and retargets the declared module count in `README.md` and `PROVENANCE.md` from 277 to 274.
+It adds no entry, so it makes no claim about the 29 tracked sources the manifest has never listed.
+The bytes are written through the companion exporter's own canonicalization, so they are what an
+export would produce.  With that in place the export `plan` runs: 26 closure modules, base 274
+against candidate 286.
+
+A related condition surfaced and was deliberately left alone.  Six of the ten per-area manifests
+under `trust/manifests/` already disagree with the base tree — `clebsch_rigidity_human.json` in 17
+of its 27 entries — because shared modules moved forward under them in earlier exports.  Those
+manifests read as historical records of what each boundary carried when it was adopted, and
+refreshing their digests would assert a review that did not happen.  Whether they are snapshots or
+live claims is a question for their owner.
+
+## The export round
+
+Both boundaries were exported against the repaired base and adopted there as ordinary forward
+commits; nothing was pushed.  The six-arc delta added twelve modules and the boundary's statement,
+audit, registry, and manifests, and moved four shared modules — `ProjectiveCap/Grid.lean`,
+`ProjectiveCap/Sym2ConicBridge.lean`, `RelativeConicArcs/Certificate.lean`, and
+`RelativeConicArcs/Conic.lean` — forward to the versions its closure needs.  Its gate builds in the
+base and the exported audit elaborates to eleven terminals, each on `propext`, `Classical.choice`,
+and `Quot.sound`.
+
+The orientation boundary was re-exported in the same round so its corrected correspondence text
+reaches the base.  Because the renamed modules arrive under their new names while the base still
+carried the eleven manuscript-named ones, the superseded files, their library roots, and their
+manifest entries were removed in a separate preceding commit, so the two sets never coexist.  The
+refreshed gate builds in the base at 24 audited terminals, all on the same three axioms.
+
+One check remains outstanding.  A build of the other paper-facing base gates — both Arcs gates, the
+Clebsch rigidity human gate, the order-eleven module, the six-arc defect bridge, and the orientation
+and passages gates — is meant to establish that the four shared modules break nothing that was
+previously green.  It has not completed: the shared tree is held by another build, and the queued
+run refused after its quiet wait.  Until it passes, the adoption is unverified beyond the two gates
+named above.
+
+## A pre-existing failure in the base
+
+The base library does not currently pass its own published replay, for a reason unrelated to this
+work.  `ProjectiveCap.Binary` and `ProjectiveCap.EllipticMirror`, both named in the base README's
+replay recipe, fail in `ProjectiveCap/Binary.lean` and `ProjectiveCap/Mirror.lean`: they apply
+`InitialPStatement` to a field argument, while the only definition the base carries, in
+`CapGame/Affine.lean`, takes none.  The version they are written against is in
+`ProjectiveCap/ProjectiveCapGame.lean`, which the base has never carried.  The failures reproduce
+with every commit of this round reverted, so they predate it.  This is the same root cause as the
+manifest drift: direct edits to the base that bypassed the export path, leaving a half-migrated
+projective-cap layer.  Repairing it means exporting that layer forward as its own reviewed step, and
+it belongs to the projective-cap material rather than to Paper I.
+
 ## What the base library and the package still need
 
 The base library `finitegeom` carries `RelativeConicArcs.Q11DyeAxioms` as a human module stating the

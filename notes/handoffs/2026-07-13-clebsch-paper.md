@@ -538,10 +538,17 @@ correspondence text now names the six-arc boundary as the place the bound and th
 classification are proved; the two must therefore be exported in the same round.
 The facts artifact is extracted and committed: 26 modules, eleven terminals, every one
 carrying only `propext`, `Classical.choice` and `Quot.sound`, and no project axiom.
-What now blocks the export is the base library itself — `TARGET_MANIFEST.json` at its
-HEAD disagrees with its own tree in four entries, one digest mismatch in
-`ProjectiveCap/Sym2ConicBridge.lean` and three listed-but-absent `Q16` modules — which
-stops every companion export until the base's owner repairs it. In the base library the order-eleven specializations
+The base library's `TARGET_MANIFEST.json` disagreed with its own tree in four entries
+and is repaired, and both boundaries are exported and adopted there as forward commits,
+with the eleven superseded manuscript-named orientation modules removed in the same
+round. Both gates build in the base and their audits carry no project axiom. One check
+is outstanding: the build confirming that the four shared modules the export moved
+forward break no previously green base gate has not completed, because another lane
+holds the shared tree. Separately, the base does not pass its own published replay —
+`ProjectiveCap.Binary` and `ProjectiveCap.EllipticMirror` fail on an
+`InitialPStatement` whose defining module the base never carried — and those failures
+reproduce with this round reverted, so repairing that half-migrated projective-cap
+layer is its owner's work, not Paper I's. In the base library the order-eleven specializations
 remain axioms of `RelativeConicArcs.Q11DyeAxioms`; replacing them by proofs of the
 exported theorems is forward work under the re-pin. Seven consumer modules of the wider order-eleven rigidity development — the defect
 bridge, the degenerate-conic exclusion, perspectivity, the two prism modules, and the
