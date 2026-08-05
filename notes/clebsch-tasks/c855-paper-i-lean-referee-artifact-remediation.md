@@ -219,11 +219,17 @@ package: every file in the published transitive closure is in scope.
 - [x] Remove compatibility aliases that would keep misleading public names
   alive, unless a separately justified downstream migration requires one. None was
   introduced by these renames.
-- [ ] Give the order-eleven six-arc concurrence development a declared extraction
-  unit. Sixteen of its modules are area-owned but imported by no declared unit, so
-  the companion export has no route to carry the proved concurrence bound and
-  equality classification into the certificate package. Report:
-  `notes/2026-08-04-c855-orientation-name-remediation.md`.
+- [x] Give the order-eleven six-arc concurrence development a declared extraction
+  unit. `RelativeConicArcs.SixArcConcurrenceSpine` is an import-only module over the
+  concurrence bound, the chord-matching and one-factorization combinatorics, the
+  golden normal form, and the order-eleven identification; the area registry declares
+  it as a gate with eleven terminals, and its closure covers ten previously unreached
+  modules. Its facts artifact is still missing: extraction refuses while another lane's
+  uncommitted Lean work is in the worktree, so the eleven declared axiom sets are
+  unconfirmed and the export configuration for this boundary is a separate release
+  decision. Seven consumer modules of the wider order-eleven rigidity development
+  remain reached by no unit. Report:
+  `notes/2026-08-05-c855-six-arc-extraction-gate.md`.
 
 ### 4. Document every scholarly declaration
 

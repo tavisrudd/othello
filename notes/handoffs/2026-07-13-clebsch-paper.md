@@ -499,15 +499,25 @@ claims canonicity. The rigidity gate is green after those renames and the spine'
 trust fact is re-extracted under its new unit name, with 24 terminals and no
 project axiom.
 
-Still open on this surface, in the order that blocks the rest: sixteen modules of
-the order-eleven six-arc development are imported by no declared extraction unit,
-so the companion export has no route to carry the newly proved concurrence bound
-and equality classification into the certificate package — a declared import-only
-gate over that development, registered as an area gate, is the fix and is a
-validation-gate decision. Until then the package re-pin cannot retire the axiom
-downstream, and the tracked audit
+The extraction route for that material now exists. `RelativeConicArcs.SixArcConcurrenceSpine`
+is an import-only module over the concurrence bound, the chord-matching and
+one-factorization combinatorics, the golden normal form, and the order-eleven
+identification; `lean/trust/areas/relconic.toml` declares it as a gate with eleven
+terminals, the module elaborates, and its closure covers ten modules that no unit
+reached before. Two things are still needed before the package re-pin can retire the
+axiom downstream: the facts artifact, whose extraction refuses while another lane's
+uncommitted Lean work sits in the worktree, so the eleven declared axiom sets are
+unconfirmed; and an export configuration, since choosing between a new companion
+boundary and widening the existing golden-orientation one is a release decision.
+Seven consumer modules of the wider order-eleven rigidity development — the defect
+bridge, the degenerate-conic exclusion, perspectivity, the two prism modules, and the
+rigidity spine and code bridge — are still reached by no unit and are left visible as
+errors rather than declared away. Report:
+[`../2026-08-05-c855-six-arc-extraction-gate.md`](../2026-08-05-c855-six-arc-extraction-gate.md).
+
+Also still open on this surface: the tracked audit
 `lean/verification/clebsch_rigidity_trust/axiom-audit.txt` cannot be refreshed
-here at all: four of its 52 rows are package-only `Q11A5PointOrbits` terminals, so
+here at all, because four of its 52 rows are package-only `Q11A5PointOrbits` terminals, so
 it is the package gate's output, not this repository's. `trust/PORTFOLIO.md` and
 `trust/graph-manifest.json` are stale against regeneration and were stale before
 this work. `RelativeConicArcs/Q11DyeAxioms.lean` now declares no axiom, so its
