@@ -1019,6 +1019,40 @@ cd papers/clebsch-covers
 ./scripts/verify-all.sh
 ```
 
+## Released-paper corrections owed
+
+Both papers below are released with DOIs. None of these edits has been made.
+
+**Paper IV — the operator-field paragraph is pre-empted by its own cited
+source (C877).** Madison and Wu's Theorem 6.1(i) decomposes the code over an
+algebraic closure of \(\mathbf F_2\) into three pairwise non-isomorphic simple
+twelve-dimensional \(\operatorname{PSL}(2,13)\)-modules. Those three form one
+Frobenius orbit — the lane's own scalars \(\alpha,\alpha^2,\alpha^4\) supply
+this, and Madison and Wu do not state it — so the \(\mathbf F_2\)-form is a
+single irreducible thirty-six-dimensional module with endomorphism field
+\(\mathbf F_8\), and irreducibility makes every-family-spans immediate. The
+paper credits that source only with the nullity formula. Rewrite to credit the
+module decomposition and claim only what survives: the marking of \(A_9\) among
+the three conjugates, and building the \(\mathbf F_8\) action from minimum-word
+pair data rather than from block theory. The Frobenius-orbit step is the
+auditor's inference and is marked as such in their report.
+Also owed: a prior credit for the elliptic association scheme to Hollmann's 1982
+Eindhoven thesis, which Hollmann and Xiang themselves cite as its first
+description.
+
+**Clebsch III — a wrong benchmark and missing two-graph attribution (C876).**
+The manuscript names size five for arbitrary three-uniform hypergraphs as the
+closest benchmark to its four-local reconstruction theorem. The real benchmark
+is four from seven points, via Dammak, Lopez, Pouzet and Si Kaddour for
+\(4\le k\le v-3\); the paper's own ledger row `OPER-4` records this correctly,
+so the sentence contradicts the paper's evidence map. C878 settled that the two
+theorems are independent rather than one being a corollary — the hypotheses are
+incomparable, with an explicit switching witness — so only the sentence and the
+attribution change, not the result. Separately, the two-graph definition and the
+descendant correspondence used as the two-graph equation belong to Higman,
+Taylor and Seidel via Brouwer and Van Maldeghem \S1.1.12 and are uncited.
+Clebsch I under-attributes the same material.
+
 ## Paper IV series novelty position
 
 Audited in C869, report `../2026-08-05-c869-paper-iv-series-literature-audit.md`.
