@@ -894,17 +894,27 @@ for which no predecessor was located. Madison and Wu supply the general
 dimension formula and Hollmann and Xiang the elliptic association scheme used
 to explain the minimum layer.
 
-A later audit added one pre-emption and withdrew one claimed contradiction. The
-underlying passant-line/internal-point incidence graph is the graph `X.182.1` in
-Conder and Potočnik's census of semisymmetric graphs: it is edge-transitive but
-not vertex-transitive, and two distinct cubic bipartite graphs of girth twelve
-exist at order \(182\), of which this is the non-symmetric one. The two side
-kernels prove the semisymmetry independently — they are \([91,14,28]\) and
-\([91,14,26]\), and a part-swapping automorphism would force them to be
-equivalent. An earlier reading held that this asymmetry contradicted a published
-equivalence claim of Crnković, Rukavina and Šimac; it does not, since their
-symmetric-graph paper uses the equivalence correctly and their later
-semisymmetric work tabulates both sides with differing distances. The asymmetry
+A later audit added pre-emptions and withdrew one claimed contradiction. The
+object identified in the censuses is the cubic **correspondence** graph on
+\(182\) vertices, not the passant-line/internal-point incidence graph, which is
+\(7\)-regular on \(156\) vertices; an earlier version of this paragraph
+conflated the two. That correspondence graph is `X.182.1` in Conder and
+Potočnik's census of semisymmetric graphs — edge-transitive but not
+vertex-transitive, one of the two cubic bipartite graphs of girth twelve at that
+order — and it is pre-empted harder than the census alone shows: it is one of
+exactly five graphs in Iofinova and Ivanov's 1985 classification of biprimitive
+cubic semisymmetric graphs, the member with automorphism group
+\(\operatorname{PGL}(2,13)\), whose two sides are its two degree-\(91\)
+primitive actions. The amalgam, not merely the graph, is classical.
+
+The two side kernels, however, are **not** pre-empted. They are
+\([91,14,28]\) and \([91,14,26]\), they prove the semisymmetry independently
+since a part-swapping automorphism would force them to be equivalent, and
+Crnković, Rukavina and Šimac's semisymmetric paper — read at full text — does not
+contain order \(182\), their graphs coming from a G-graph construction rather
+than the census. An earlier reading held that this asymmetry contradicted a
+published equivalence claim of theirs; it does not, and that same paper states
+plainly that the two sides generally differ in minimum distance. The asymmetry
 is real, the claimed contradiction is retracted.
 
 The proof is led by a human argument; computation records discovery and is
