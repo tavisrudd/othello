@@ -198,19 +198,36 @@ the claim. Under the current instruction they are closed by proving the claim.
 
 1. `AlignedTwoGraph.selectedQueryCount_eq` is presented as a family
    cardinality. Formalize an explicit query family, its distinctness, and its
-   cardinality `3n^2 - 23n + 45`.
+   cardinality `3n^2 - 23n + 45`. **Closed 2026-08-04.**
+   `AlignedTwoGraph.selectedQueryFamily` is the family of four-point subsets
+   meeting a fixed four-point anchor in at least two points, and
+   `card_selectedQueryFamily` proves its cardinality is that polynomial; the
+   count is a cardinality, so the tests are distinct by construction. What the
+   manuscript additionally asserts, that this family suffices for a decoder
+   working from one anchor, is not formalized.
 2. `AlignedTwoGraph.sixPointAnchor_testCount` mixes the arithmetic identity
    `Nat.choose 6 3 = 20` with deterministic anchor discovery. Formalize the
    existence half — every two-colouring of the triangles on six points contains
-   an aligned anchor — from a Lean proof of `R(3,3) = 6`.
+   an aligned anchor — from a Lean proof of `R(3,3) = 6`. **Closed.**
+   `exists_monochromatic_triple`, `no_monochromatic_triple_five` and
+   `exists_alignedAnchor` carry it, and `sixPointAnchor_testCount` now claims
+   only the arithmetic identity.
 3. `AlignedTwoGraph.normalizedSevenSignature_injective` is stated only for the
    normalized seven-point data type while the manuscript's Theorem
    `thm:aligned-faithfulness` quantifies over every two-graph on at least seven
    labelled vertices. Formalize the normalization transport so the general
-   statement is the theorem.
+   statement is the theorem. **Closed 2026-08-04.**
+   `AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq` is the general
+   statement. Rooting at a point of an aligned four-set whose triangle bit is
+   zero makes the anchor's six edges vanish, which replaces the manuscript's
+   two switching normalizations. Report:
+   `notes/2026-08-04-c815-aligned-design-faithfulness.md`.
 4. `global_agreement_of_common_seven_restrictions` leaves co-containment and
    normalization external. Formalize the finite-set extension so the theorem is
-   unconditional in the manuscript's quantifier range.
+   unconditional in the manuscript's quantifier range. **Closed 2026-08-04.**
+   Its hypothesis is now discharged: any two triples span at most six points and
+   extend to a seven-point subset, on which the seven-point theorem supplies one
+   complement bit for both.
 5. Four-shadow: root normalization by switching is proved only for normalized
    scalar sign matrices, and uniqueness of the conference switching class is
    claimed but unproved. Both are to be formalized. **Closed 2026-08-04.**

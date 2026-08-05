@@ -6,8 +6,9 @@ reports, manifests, and all paper-local replays are green with no
 compiled-evaluation axiom at any terminal, the documentation and gate-replay
 obligations of the audit checklist are closed, the recognition theorem is
 transported off the root gauge and the conference switching class is proved
-unique, and the remaining work is the aligned-design strengths, the rank-14
-weighted Jacobian, and gap class B before the API is handed to C823
+unique, the aligned-design strengths are formalized at the manuscript's quantifier
+range, and the remaining work is the rank-14 weighted Jacobian and gap class B
+before the API is handed to C823
 
 ## Objective
 

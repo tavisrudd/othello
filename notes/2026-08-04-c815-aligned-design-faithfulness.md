@@ -63,12 +63,27 @@ finite classifications it rests on, `anchorSignature_eq_false_iff_balanced` and
 `pairSignature_classification`, are kernel-decided in `AlignedTwoGraph` over eight and 16,384
 cases respectively.
 
-The `ClebschPassages` gate now audits fifty-five terminals, six of which depend on no axiom.
+The `ClebschPassages` gate now audits fifty-six terminals, six of which depend on no axiom.
 
 What remains human in manuscript row OPER-4: the identification of the marked
 determinant-\((-3)\) family of a symmetric conference matrix with the aligned family, and the
-cardinality of the selected query family. `selectedQueryCount_eq` remains the algebraic identity
-only; it does not define the query family or prove distinctness.
+sufficiency of the selected query family for a decoder working from one anchor.
+
+## The query family
+
+`AlignedTwoGraph.selectedQueryFamily`, in `lean/RelativeConicArcs/AlignedQueryFamily.lean`, is the
+family of four-point subsets meeting a fixed four-point anchor in at least two points, and
+`card_selectedQueryFamily` proves that its cardinality is `3n^2 - 23n + 45` for `n` points. The
+proof splits a four-set into its anchor part and its outside part; that is a bijection onto pairs
+of a `k`-subset of the anchor and a `(4-k)`-subset of the complement, so the three fibres have
+sizes `6*C(n-4,2)`, `4(n-4)` and `1`. Because the count is the cardinality of an explicitly
+described family, the tests it counts are distinct by construction, which is what the earlier
+`selectedQueryCount_eq` identity did not supply. This closes item 1 of gap class C.
+
+The manuscript says more than the count: that this family of tests suffices for a decoder working
+from a single anchor. That is not formalized, and the faithfulness proof above does not establish
+it, since each of its seven-point restrictions locates its own anchor rather than reusing a global
+one.
 
 ## Records updated
 
@@ -98,4 +113,4 @@ nix develop --command python3 verification/verify_release.py --lean-root ../../l
 
 The gate build, both paper-local replay modes, and all twenty release checks pass. The tracked gate
 log for the axiom report is the standard output of build run
-`run-20260805-031122-7c87d1c6`.
+`run-20260805-033610-e983d3b4`.
