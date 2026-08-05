@@ -150,6 +150,25 @@ free:
 Thus the correspondence thickens each of the code's twelve hidden-field
 coordinates; the nilpotent direction is not an unrelated summand.
 
+Equivalently, with \(M=U\oplus U'\) and \(\Gamma_C\) the graph of
+\(C:U\to U'\), the nilpotent exchange gives the exact self-extension
+
+\[
+ 0\longrightarrow K
+ \cong\Gamma_C
+ \longrightarrow M
+ \longrightarrow M/\Gamma_C
+ \cong K
+ \longrightarrow0,
+\]
+
+where \(\operatorname{im}\varepsilon=\ker\varepsilon=\Gamma_C\).  It is the
+regular length-two extension over the dual-number algebra, not a semisimple
+sum after the exchange operator is retained.  It has the algebraic shape of a
+first-order thickening between the two nonconjugate frame factorizations above
+their common Gram scalar \(A_9\); no frame-moduli scheme realizing that
+interpretation is constructed here.
+
 Paper I reconstructs the integral golden order
 \(\mathbf Z[B]\cong\mathbf Z[\sqrt5]\), with \(B^2=5I\).  Reducing its
 abstract order modulo two gives
@@ -178,6 +197,47 @@ identification of the underlying configurations, group actions, or Clebsch
 cubics.  It requires no lift to \(\mathbf F_{169}\): Paper IV recovers a
 characteristic-two, \(\mathbf F_8\)-linear thickening of the same dual-number
 degeneration carried by the golden order in Paper I.
+
+The marking is also available.  In Paper I's mod-two order,
+\(\delta=B+I\) is the unique nonzero element of the nilradical over
+\(\mathbf F_2\).  In Paper IV, \(\varepsilon=J+I\) is intrinsic because
+\(J\) is defined by the stabilizer-intersection correspondence.  Hence, once
+the canonical inclusion \(\mathbf F_2\subset\mathbf F_8\) is fixed, the
+marked algebra map
+
+\[
+ \sqrt5\bmod2\longmapsto J,
+ \qquad
+ \delta\longmapsto\varepsilon
+\]
+
+is canonical at the operator-algebra level.  What is not canonical is an
+identification of the Paper-I six-axis representation with the Paper-IV
+seventy-two-dimensional frame module; their modules over the common algebra
+have different shapes.
+
+Paper III supplies a third occurrence of the same local algebra.  Its Stein
+cover has multiplication
+
+\[
+ z^2=5J_0.
+\]
+
+On the branch fibre \(J_0=0\), this becomes the dual-number algebra
+\(k[z]/(z^2)\).  The numbered series therefore contains one length-two local
+model in three roles:
+
+\[
+\begin{array}{c|c}
+\text{Paper I} & \text{special fibre at the conductor prime }2\\
+\text{Paper III} & \text{branch fibre of the golden incidence cover}\\
+\text{Paper IV} & \text{octahedral--toric frame-exchange thickening}
+\end{array}
+\]
+
+This three-way seam is an equality of marked local algebra types.  No map from
+Paper IV's frame moduli to Paper III's harmonic-cubic base, and no equality of
+their Clebsch cubic sections, is asserted.
 
 The bipartite graph has \(273\) edges, girth twelve, and binary adjacency rank
 \(77\), hence nullity fourteen.  Distinct vertices on one side have at most
@@ -331,6 +391,5 @@ paper promotion.
 4. Determine whether the \(182\)-vertex cubic coset graph is classical.
 5. Decide whether the weaker regular-orbit golden norm shadow has a conceptual
    formulation worth retaining after the stronger octahedral--toric transform.
-6. Determine whether the dual-number algebra comparison is functorial enough
-   to identify a common marked order, rather than only an abstract scalar
-   extension.
+6. Determine whether the marked special-fibre comparison lifts to a morphism
+   of deformation problems or remains only a common local algebra type.
