@@ -1,0 +1,67 @@
+{
+  "faithfulness": [
+    {
+      "aligned_families": 17,
+      "class_sizes": [
+        2,
+        6,
+        12
+      ],
+      "counterexample": [
+        30,
+        45
+      ],
+      "determines_up_to_complement": false,
+      "points": 5,
+      "two_graphs": 64
+    },
+    {
+      "aligned_families": 462,
+      "class_sizes": [
+        2,
+        4,
+        12
+      ],
+      "counterexample": [
+        31446,
+        46566
+      ],
+      "determines_up_to_complement": false,
+      "points": 6,
+      "two_graphs": 1024
+    },
+    {
+      "aligned_families": 16384,
+      "class_sizes": [
+        2
+      ],
+      "counterexample": null,
+      "determines_up_to_complement": true,
+      "points": 7,
+      "two_graphs": 32768
+    },
+    {
+      "aligned_families": 1048576,
+      "class_sizes": [
+        2
+      ],
+      "counterexample": null,
+      "determines_up_to_complement": true,
+      "points": 8,
+      "two_graphs": 2097152
+    }
+  ],
+  "independence": {
+    "four_sets_with_different_induced_type": 20,
+    "graph_four_hypomorphic": false,
+    "points": 7,
+    "same_aligned_family": true,
+    "same_two_graph": true,
+    "total_four_sets": 35
+  },
+  "source_sha256": {
+    "05-golden-operator.tex": "7127f7931a726e8040743ab2dba636a6dcd07d78f12461b9bf1ad35058cdcb91"
+  },
+  "theorem": "for |V| >= 7 the aligned family determines the two-graph up to complement; five and six points fail, so seven is sharp",
+  "verdict": "our hypothesis is one derived bit per four-set and theirs is the isomorphism type of an induced four-vertex graph; graphs in one switching class always satisfy ours and generally fail theirs, so the graph theorem cannot be restricted to give the two-graph one, and the shared numbers four and seven are not a shared mechanism"
+}

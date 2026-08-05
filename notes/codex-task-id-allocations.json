@@ -2780,8 +2780,35 @@
       "last": 875,
       "purpose": "score minus and parabolic levels against public tables",
       "sequence": 309
+    },
+    {
+      "count": 1,
+      "first": 876,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 876,
+      "purpose": "two-graph literature audit of Clebsch III and the golden-operator programme",
+      "sequence": 310
+    },
+    {
+      "count": 1,
+      "first": 877,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 877,
+      "purpose": "deep unrestricted novelty re-audit of the Paper IV series",
+      "sequence": 311
+    },
+    {
+      "count": 1,
+      "first": 878,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 878,
+      "purpose": "independent check of aligned-design faithfulness and its independence from graph 4-hypomorphy",
+      "sequence": 312
     }
   ],
-  "next_id": 876,
+  "next_id": 879,
   "schema": "codex-task-id-allocations-v1"
 }
