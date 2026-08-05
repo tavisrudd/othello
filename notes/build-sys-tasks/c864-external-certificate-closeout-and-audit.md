@@ -257,6 +257,32 @@ commit a self-contained official source state.
 13. Update C287/C324/C686/C687 records and the build-sys handoff, then complete C864 through the
     archive-first lifecycle.
 
+## Near-term plan while the Paper I remediation holds the Lean tree
+
+The Paper I theorem-complete remediation is actively rewriting `RelativeConicArcs` sources, the
+`relconic` trust area, and the Clebsch-rigidity release chain.  Its uncommitted work is in the shared
+tree.  Until it settles, C864 takes only steps that need neither the heavyweight build window nor a
+quiet tree, and evidence that would be invalidated by its next commit is not produced.
+
+Deferred until the tree is coherent again: the Clebsch-rigidity release-chain replay, the base
+re-export and re-pin, the shared generated trust views and external trust projections, and any
+further monorepo certificate deletion.
+
+Runnable now, in order:
+
+1. **Package/monorepo byte-identity audit for the order-eleven point-orbit package.**  Pure file
+   comparison against committed revisions; runs no Lean and takes no lock.  For each of the 122
+   sealed sources, compare against the sealed monorepo commit, against current monorepo `HEAD`, and
+   against the pinned base revision.  Classify every module as sealed-faithful, drifted since the
+   seal, still-present monorepo shadow, base overlap, or intentionally package-only, and record the
+   intentional differences the acceptance criteria require to be listed and justified.
+2. **Adversarial boundary-checker fixtures.**  Execution-order step 8's permanent test: a novel
+   generated family, an imported external certificate leaf, a copied generator, and an edited
+   package pin must each be rejected.  Python only, no Lean and no shared state.
+3. **Split-line planning for the remaining order-eleven families** — coding, Brianchon--Petersen,
+   decoding synthesis.  Read-only inventory and import-DAG analysis producing a proposed boundary;
+   execution waits, because the remediation is editing the same area.
+
 ## Cache and build contract
 
 - All Lean operations use the guarded queue.  No direct `lean`, `lake`, `nix ... lake`, cache copy,
