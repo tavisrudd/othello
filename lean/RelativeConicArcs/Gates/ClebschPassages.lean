@@ -11,6 +11,7 @@ import RelativeConicArcs.PetersenHarmonicKernel
 import RelativeConicArcs.ClebschInvariantCubic
 import RelativeConicArcs.AlignedTwoGraph
 import RelativeConicArcs.AlignedFamilyFaithfulness
+import RelativeConicArcs.AlignedQueryFamily
 import RelativeConicArcs.ClebschPassagesCorrespondence
 
 /-!
@@ -37,8 +38,9 @@ identification of each displayed integral reflection with the rational
 reflection formula; these are rewriting procedures producing kernel-checked
 terms, not evaluations of a `Decidable` instance.  One determinant falls to
 cofactor expansion.  The third-outside-point elimination, the normalization of
-an arbitrary two-graph onto that classifier, and the extension from seven points
-to larger point sets are symbolic.
+an arbitrary two-graph onto that classifier, the extension from seven points to
+larger point sets, and the count of the tests meeting a fixed four-point anchor
+in at least two points are symbolic.
 
 The gate deliberately does not assert the geometric correspondence between
 Hitchin's spaces and these algebraic models, nor the integral
@@ -94,6 +96,7 @@ claim.
 #print axioms RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq
+#print axioms RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package

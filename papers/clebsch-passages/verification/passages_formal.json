@@ -2,17 +2,18 @@
   "schema": "clebsch-passages-formal-v1",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
-  "axiom_report_sha256": "b013619dc680e353ce6452653ba5d13acdef75e888cff6d20298dbe3a05199a4",
+  "axiom_report_sha256": "04b975fa9eec7537fecf044935ae29831b0204d88ad61935c9609b82f26a5ba4",
   "verifier_sha256": "5b9bb8a62bcc4932b5340251ee5db2982136572be4cc2b329844db836316b878",
-  "source_closure_sha256": "906f7f5f2f0fab7b30f755278ba4efc96bfe51da7b67a9b7b640780c1b351d3a",
+  "source_closure_sha256": "9644b10c39a0bb62c10136293d5da8aa98165dcad74275b657de8b8ccabdb813",
   "source_sha256": {
     "RelativeConicArcs/AlignedFamilyFaithfulness.lean": "1e7670f2533c172afa37acf3fd081b3467bd010dd4306960060099d0ad21ed56",
+    "RelativeConicArcs/AlignedQueryFamily.lean": "1b7dfc9171f244495996209594bdfeb78a11134100af74611dacf3fb295f63ce",
     "RelativeConicArcs/AlignedTwoGraph.lean": "62942c1ab50568ad5603b99a2d381f017ed874e091a454100bf46ef276bc2fcd",
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschInvariantCubic.lean": "3647783f1c7fcec39d311618a4f37c1b293ce064b9621c257b099869ad0f23f7",
     "RelativeConicArcs/ClebschPassagesCorrespondence.lean": "a7f152ab5fad8cfe4847c7cffd5103eb1c4cdba749b2428ce0327408117f8e28",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
-    "RelativeConicArcs/Gates/ClebschPassages.lean": "836306b7910c3e07078d0c974e48e098a703da8a6a155bbe341f013810512c16",
+    "RelativeConicArcs/Gates/ClebschPassages.lean": "361740f1fb6b805bbb5d03688ab918b2cf7e5dd72546775a87ea4f1bfbcb104a",
     "RelativeConicArcs/GoldenQuadraticCharacters.lean": "e91dc033c8269385018c0f8eae8d28df635e606a59083ccb242cfd88dec1842e",
     "RelativeConicArcs/InvolutiveOddUnit.lean": "4c89dc3c2619fc4cd52e53d8c421f6f4cc234a026265d65c00ef2dbb6509f3b6",
     "RelativeConicArcs/KneserPairEigenspace.lean": "eb2c89c22be925a62345746d0d3bf6a639ccd6fe5562859365875bbe3c1c03e6",
@@ -72,6 +73,7 @@
     "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement",
     "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven",
     "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq",
+    "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily",
     "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square",
     "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal",
     "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package",
@@ -173,7 +175,8 @@
         "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned",
         "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement",
         "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven",
-        "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq"
+        "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq",
+        "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily"
       ],
       "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "supplemental_declarations": [
@@ -182,7 +185,7 @@
         "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root",
         "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot"
       ],
-      "excluded": "Lean checks the two-graph half of the row: for every two-graph on a finite point set with at least seven points the aligned four-sets determine the triangle values on distinct triples up to one global complement bit, including anchor existence, the normalization onto the cut API, the seven-point classifier, the extension of any two triples to a common seven-point restriction, and the overlap agreement of complement bits. Outside the gate: the identification of the marked determinant-minus-three family of a symmetric conference matrix with the aligned family, and the cardinality of the selected query family."
+      "excluded": "Lean checks the two-graph half of the row: for every two-graph on a finite point set with at least seven points the aligned four-sets determine the triangle values on distinct triples up to one global complement bit, including anchor existence, the normalization onto the cut API, the seven-point classifier, the extension of any two triples to a common seven-point restriction, and the overlap agreement of complement bits. The selected query family is defined explicitly as the four-point subsets meeting a fixed four-point anchor in at least two points, and its cardinality is checked to be the quadratic count. Outside the gate: the identification of the marked determinant-minus-three family of a symmetric conference matrix with the aligned family, and the sufficiency of that query family for a decoder working from a single anchor."
     },
     "HARM-1": {
       "coverage": "partial mechanism; no full row claim",
@@ -215,8 +218,8 @@
     "excluded": "No full manuscript row is claimed: the finite-set normalization inputs, global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
   },
   "axiom_report_provenance": {
-    "build_run_id": "run-20260805-032810-939fe5ce",
-    "gate_stdout_sha256": "2806a2d88d6a76ad4ee9225154b6ad87ee88399f2b8d562d39e017f23f4fa31e",
+    "build_run_id": "run-20260805-033610-e983d3b4",
+    "gate_stdout_sha256": "335daca395d70b2dacff0ce5f6c52fdb21837ccfe5cf530c272dff287e49b583",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
     "gate_stdout": "verification/evidence/gate_stdout/passages.stdout.txt"

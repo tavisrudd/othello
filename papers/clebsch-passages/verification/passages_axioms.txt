@@ -46,6 +46,7 @@
 'RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square' depends on axioms: [propext]
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package' depends on axioms: [propext, Quot.sound]

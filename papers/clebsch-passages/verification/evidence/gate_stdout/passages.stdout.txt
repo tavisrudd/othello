@@ -1,107 +1,108 @@
-ℹ [8630/8630] Replayed RelativeConicArcs.Gates.ClebschPassages
-info: RelativeConicArcs/Gates/ClebschPassages.lean:49:0: 'RelativeConicArcs.QuadraticPinching.conductor_eq_ker' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:50:0: 'RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul' depends on axioms: [propext,
+ℹ [8631/8631] Replayed RelativeConicArcs.Gates.ClebschPassages
+info: RelativeConicArcs/Gates/ClebschPassages.lean:51:0: 'RelativeConicArcs.QuadraticPinching.conductor_eq_ker' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:52:0: 'RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:51:0: 'RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:52:0: 'RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:53:0: 'RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:53:0: 'RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:54:0: 'RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:55:0: 'RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:54:0: 'RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:56:0: 'RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:55:0: 'RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:56:0: 'RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:57:0: 'RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:58:0: 'RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:57:0: 'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:59:0: 'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:58:0: 'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:60:0: 'RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:59:0: 'RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:61:0: 'RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:60:0: 'RelativeConicArcs.TightFrameConference.conference_sq_of_gram' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:62:0: 'RelativeConicArcs.TightFrameConference.conference_sq_of_gram' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:61:0: 'RelativeConicArcs.SignedEquiangularGram.golden_det_positive' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:62:0: 'RelativeConicArcs.SignedEquiangularGram.golden_det_negative' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:63:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:63:0: 'RelativeConicArcs.SignedEquiangularGram.golden_det_positive' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:64:0: 'RelativeConicArcs.SignedEquiangularGram.golden_det_negative' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:65:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:64:0: 'RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:65:0: 'RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:66:0: 'RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:67:0: 'RelativeConicArcs.MarkedClebschBridge.chartLift_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:68:0: 'RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:66:0: 'RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:67:0: 'RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:68:0: 'RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:69:0: 'RelativeConicArcs.MarkedClebschBridge.chartLift_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:70:0: 'RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:69:0: 'RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:71:0: 'RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:70:0: 'RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:72:0: 'RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:71:0: 'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:73:0: 'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:72:0: 'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:73:0: 'RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:74:0: 'RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:75:0: 'RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:74:0: 'RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:76:0: 'RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:75:0: 'RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:77:0: 'RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:76:0: 'RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff' does not depend on any axioms
-info: RelativeConicArcs/Gates/ClebschPassages.lean:77:0: 'RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor' does not depend on any axioms
-info: RelativeConicArcs/Gates/ClebschPassages.lean:78:0: 'RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple' does not depend on any axioms
-info: RelativeConicArcs/Gates/ClebschPassages.lean:79:0: 'RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:78:0: 'RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff' does not depend on any axioms
+info: RelativeConicArcs/Gates/ClebschPassages.lean:79:0: 'RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor' does not depend on any axioms
+info: RelativeConicArcs/Gates/ClebschPassages.lean:80:0: 'RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple' does not depend on any axioms
+info: RelativeConicArcs/Gates/ClebschPassages.lean:81:0: 'RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:80:0: 'RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:81:0: 'RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:82:0: 'RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:83:0: 'RelativeConicArcs.AlignedTwoGraph.pairSignature_classification' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:84:0: 'RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:85:0: 'RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:82:0: 'RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:83:0: 'RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:84:0: 'RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:85:0: 'RelativeConicArcs.AlignedTwoGraph.pairSignature_classification' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:86:0: 'RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:87:0: 'RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:86:0: 'RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:87:0: 'RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:88:0: 'RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:89:0: 'RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:88:0: 'RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:89:0: 'RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:90:0: 'RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:91:0: 'RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:90:0: 'RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:91:0: 'RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount' does not depend on any axioms
-info: RelativeConicArcs/Gates/ClebschPassages.lean:92:0: 'RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff' does not depend on any axioms
-info: RelativeConicArcs/Gates/ClebschPassages.lean:93:0: 'RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned' does not depend on any axioms
-info: RelativeConicArcs/Gates/ClebschPassages.lean:94:0: 'RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement' depends on axioms: [propext, Classical.choice, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:95:0: 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:92:0: 'RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:93:0: 'RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount' does not depend on any axioms
+info: RelativeConicArcs/Gates/ClebschPassages.lean:94:0: 'RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff' does not depend on any axioms
+info: RelativeConicArcs/Gates/ClebschPassages.lean:95:0: 'RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned' does not depend on any axioms
+info: RelativeConicArcs/Gates/ClebschPassages.lean:96:0: 'RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:97:0: 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:96:0: 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:98:0: 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:97:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square' depends on axioms: [propext]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:98:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:99:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package' depends on axioms: [propext, Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:100:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:99:0: 'RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:100:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square' depends on axioms: [propext]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:101:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:102:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package' depends on axioms: [propext, Quot.sound]
+info: RelativeConicArcs/Gates/ClebschPassages.lean:103:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:101:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:104:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:102:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:105:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-info: RelativeConicArcs/Gates/ClebschPassages.lean:103:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors' depends on axioms: [propext,
+info: RelativeConicArcs/Gates/ClebschPassages.lean:106:0: 'RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-All targets up-to-date (8630 jobs).
+All targets up-to-date (8631 jobs).
