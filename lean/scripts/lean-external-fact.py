@@ -23,6 +23,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 import tomllib
 from pathlib import Path
 from typing import Any
@@ -222,15 +223,77 @@ def encode(fact: dict[str, Any]) -> str:
     return json.dumps(fact, indent=2, sort_keys=True) + "\n"
 
 
+MANIFEST_BASENAME = "MANIFEST.json"
+SEAL_SCRIPT = Path("scripts") / "seal_manifest.py"
+
+
+def git_out(root: Path, *args: str) -> str:
+    result = subprocess.run(
+        ["git", "-C", str(root), *args], capture_output=True, text=True, check=False
+    )
+    if result.returncode != 0:
+        raise Refused(f"{root}: git {' '.join(args)} failed")
+    return result.stdout.strip()
+
+
+def reseal_manifest(package_root: Path) -> None:
+    """Regenerate the package manifest through the package's own sealer."""
+    script = package_root / SEAL_SCRIPT
+    if not script.is_file():
+        raise Refused(f"{script}: the package has no manifest sealer to run")
+    result = subprocess.run(
+        [sys.executable, str(script), "--write"],
+        cwd=package_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise Refused(f"{script}: manifest reseal failed: {result.stdout.strip()}")
+
+
+def commit_seal(package_root: Path, paths: list[str]) -> str:
+    """Commit the manifest and fact together so the seal is one commit, and check that it is.
+
+    Two independent consumers require this shape.  A paper's formal-companion check pins the tip of
+    the manifest's own history, while its release runner requires the package checkout to be at the
+    pinned commit; both hold only when the manifest and the fact it describes are sealed in the same
+    commit and that commit is `HEAD`.  Sealing them in separate commits satisfies one check and
+    breaks the other, in either order.
+    """
+    git_out(package_root, "add", *paths)
+    subprocess.run(
+        ["git", "-C", str(package_root), "-c", "commit.gpgsign=false", "commit", "-q", "-m",
+         "Seal the certificate manifest and its trust fact"],
+        check=False,
+        capture_output=True,
+    )
+    head = git_out(package_root, "rev-parse", "HEAD")
+    for basename in (MANIFEST_BASENAME, FACT_BASENAME):
+        tip = git_out(package_root, "log", "-1", "--format=%H", "--", basename)
+        if tip != head:
+            raise Refused(
+                f"{basename}: sealed at {tip[:8]}, not at HEAD {head[:8]}; the manifest and the "
+                "trust fact must be sealed in one commit that is HEAD"
+            )
+    return head
+
+
 def cmd_seal(args: argparse.Namespace) -> int:
     package_root = args.package_root.resolve()
     entry = package_entry(args.config, args.package or package_root.name)
+    if args.reseal_manifest:
+        reseal_manifest(package_root)
     fact = render_fact(package_root, entry, args.run_dir.resolve(), args.evidence)
     encoded = encode(fact)
     target = package_root / FACT_BASENAME
     if args.write:
         target.write_text(encoded, encoding="utf-8")
         print(f"wrote {target} ({len(fact['declarations'])} declarations)")
+        if args.commit:
+            paths = [MANIFEST_BASENAME, FACT_BASENAME, args.evidence]
+            head = commit_seal(package_root, paths)
+            print(f"sealed manifest and fact in {head}")
         return 0
     if not target.is_file() or target.read_text(encoding="utf-8") != encoded:
         print(f"{target} is missing or stale")
@@ -326,6 +389,16 @@ def main() -> int:
         "--evidence",
         default="evidence/gate-axioms.log",
         help="package-relative path of the preserved gate log",
+    )
+    seal.add_argument(
+        "--reseal-manifest",
+        action="store_true",
+        help="regenerate the package manifest through its own sealer before writing the fact",
+    )
+    seal.add_argument(
+        "--commit",
+        action="store_true",
+        help="commit the manifest, fact and evidence as one commit and require it to be HEAD",
     )
     seal.add_argument("--write", action="store_true")
     seal.set_defaults(func=cmd_seal)

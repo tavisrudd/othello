@@ -333,6 +333,33 @@ class ExternalFactTest(unittest.TestCase):
             ["Alpha.Certificates.cited_input", "propext"],
         )
 
+    def test_seal_commits_the_manifest_and_fact_as_one_commit_at_head(self) -> None:
+        """The paper checks that pin both the manifest tip and the package HEAD must agree."""
+        sealer = self.package / "scripts" / "seal_manifest.py"
+        sealer.parent.mkdir(exist_ok=True)
+        sealer.write_text(
+            "import json, pathlib, sys\n"
+            "p = pathlib.Path('MANIFEST.json')\n"
+            "d = json.loads(p.read_text())\n"
+            "d['module_count'] = len(d['sources'])\n"
+            "p.write_text(json.dumps(d, indent=2, sort_keys=True) + '\\n')\n",
+            encoding="utf-8",
+        )
+        self.commit_package()
+        result = self.seal("--reseal-manifest", "--commit", "--write")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        head = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=self.package, text=True, capture_output=True
+        ).stdout.strip()
+        for basename in ("MANIFEST.json", "TRUST_FACT.json"):
+            tip = subprocess.run(
+                ["git", "log", "-1", "--format=%H", "--", basename],
+                cwd=self.package,
+                text=True,
+                capture_output=True,
+            ).stdout.strip()
+            self.assertEqual(tip, head, basename)
+
     def test_seal_still_refuses_a_genuine_axiom_disagreement(self) -> None:
         log = GATE_LOG + (
             "info: lean/Alpha/One.lean:20:0: 'Alpha.Certificates.split' depends on axioms:"
