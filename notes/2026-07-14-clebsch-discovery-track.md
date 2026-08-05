@@ -1310,3 +1310,30 @@ negative test. Paper I already had it. The toolchain half is still open: those t
 `ame_lu`, `beyond4_prs`, `golden-quantum-statistics`, `golden-operator` and
 `mds_css_transversal_groups` resolve TeX from the mutable flake registry, so a nixpkgs
 move still shifts the bytes. Only `clebsch-passages` has a flake to pin it to.
+
+## 2026-08-04 — the two golden roots may give one projective class over any field
+
+**Observation:** at order eleven the golden hexagon of the root \(\varphi=4\) and
+the golden hexagon of the root \(\varphi=8\) both map onto the same displayed
+six-arc witness, so the two roots do not separate projective classes there.  The
+normal form itself is field-generic: over any field containing a golden root, a
+six-arc with ten triple-concurrence points is the hexagon
+\((1:0:0),(\varphi:1:1),(0:1:0),(1:\varphi:1),(0:0:1),(1:1:2-\varphi)\).  The two
+roots of \(x^2=x+1\) are \(\varphi\) and \(1-\varphi\), and the order-eleven
+computation exhibits an explicit projectivity between their hexagons.
+
+**Why it may matter / strongest question:** if that projectivity is the image of a
+frame relabelling valid over every field, then the classification "such a six-arc
+is projectively unique" holds over an arbitrary field with a golden root, and no
+finite order-specific step is needed for any future field.  The order-eleven
+identification with the displayed witness would then factor as a general
+uniqueness theorem followed by one exhibited representative.  The strongest
+question is which relabelling of the hexagonal listing realizes
+\(\varphi \mapsto 1-\varphi\) on the normal form.
+
+**Evidence:** CHECKED at order eleven only — both explicit matrices are recorded
+and their six scalar identities are kernel-checked in
+`lean/RelativeConicArcs/Q11GoldenHexagonWitness.lean`.  Nothing is checked for a
+general field.
+
+**Status:** open; not required by any allocated task.
