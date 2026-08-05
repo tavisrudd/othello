@@ -457,15 +457,22 @@ no chord, so they partition the fifteen chords. An adversarial review confirms b
 commits and settles the remaining route's feasibility by exhaustive
 computation: the hexagonal labelling is now proved in
 `SixArcHexagonalOrder`: two chord matchings of a six-element set with no common
-chord close a hexagon, purely combinatorially. What remains for the axiom is the
-plane-level assembly — apply that labelling to two factors of the
-one-factorization, relabel so the four matchings the golden normal form consumes
-each share a chord with a chosen factor while differing from it and are hence
-concurrent, discharge the normal form's non-collinearity hypotheses from the arc
-condition, and supply one explicit order-eleven projectivity per golden root
-onto the displayed witness. The prism-uniqueness step and the perspectivity
-theorem are both off the remaining critical path. None of the six new modules is
-reached by a gate yet. Records:
+chord close a hexagon, purely combinatorially. The plane-level assembly is also
+closed. `SixArcGoldenNormalForm.exists_golden_frame` proves that a six-arc with
+ten triple-concurrence points, over any finite field in which two is invertible,
+is the golden hexagon `(1:0:0), (φ:1:1), (0:1:0), (1:φ:1), (0:0:1), (1:1:2−φ)`
+in a suitable frame, with `φ² = φ + 1`; so the ground field contains a golden
+root whenever such an arc exists. Two factors of the one-factorization give the
+hexagonal labelling, the relabelling that sends the last three points to
+`p₅, p₆, p₄` makes each of the four matchings the normal form consumes share a
+chord with a chosen factor while differing from it — hence not a factor, hence
+concurrent — and the non-collinearity hypotheses come from the arc condition
+together with the fact that the line joining a chord endpoint to an off-arc point
+of that chord is the chord itself. The prism-uniqueness step and the
+perspectivity theorem are both off the critical path and unused. What remains for
+the axiom is the single order-eleven step: `φ = 4` or `φ = 8`, each with its own
+explicit projectivity onto the displayed witness. None of the seven new modules
+is reached by a gate yet. Records:
 [`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
 and
 [`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md),
@@ -479,8 +486,10 @@ the equality structure in
 [`../2026-08-04-c855-one-factorization.md`](../2026-08-04-c855-one-factorization.md),
 the review with its committed replay programs in
 [`../2026-08-04-c855-dye-formalization-review.md`](../2026-08-04-c855-dye-formalization-review.md),
-and the hexagonal labelling in
-[`../2026-08-04-c855-hexagonal-order.md`](../2026-08-04-c855-hexagonal-order.md).
+the hexagonal labelling in
+[`../2026-08-04-c855-hexagonal-order.md`](../2026-08-04-c855-hexagonal-order.md),
+and the plane-level assembly in
+[`../2026-08-04-c855-golden-hexagon-assembly.md`](../2026-08-04-c855-golden-hexagon-assembly.md).
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
