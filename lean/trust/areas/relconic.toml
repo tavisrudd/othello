@@ -1016,6 +1016,67 @@ terminals = [
 ]
 coverage_rule = "closure"
 
+# The structural Clebsch passages gate.  Its terminals are the pinching, golden-character,
+# tight-frame, conference, Petersen-eigenspace, invariant-cubic, aligned two-graph, and
+# chart-correspondence results the Clebsch passages companion distributes.  No terminal uses
+# compiled evaluation: the finite steps are kernel `decide`, `norm_num`, and one cofactor
+# expansion, so every terminal below stands on the foundational axioms or on none.
+[[gate]]
+module = "RelativeConicArcs.Gates.ClebschPassages"
+terminals = [
+  "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
+  "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul",
+  "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal",
+  "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral",
+  "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit",
+  "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant",
+  "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant",
+  "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive",
+  "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul",
+  "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization",
+  "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11",
+  "RelativeConicArcs.TightFrameConference.conference_sq_of_gram",
+  "RelativeConicArcs.SignedEquiangularGram.golden_det_positive",
+  "RelativeConicArcs.SignedEquiangularGram.golden_det_negative",
+  "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq",
+  "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch",
+  "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not",
+  "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not",
+  "RelativeConicArcs.MarkedClebschBridge.chartLift_smul",
+  "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+  "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
+  "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum",
+  "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general",
+  "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq",
+  "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector",
+  "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree",
+  "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization",
+  "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff",
+  "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
+  "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple",
+  "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
+  "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five",
+  "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor",
+  "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced",
+  "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification",
+  "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps",
+  "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective",
+  "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions",
+  "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement",
+  "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation",
+  "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum",
+  "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq",
+  "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount",
+  "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square",
+  "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal",
+  "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package",
+  "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar",
+  "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value",
+  "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient",
+  "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors",
+]
+coverage_rule = "closure"
+
 # ---------------------------------------------------------------------------------------------
 # Terminals.
 #
@@ -1577,6 +1638,256 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.GoldenMatchingCarrier.derivative_matchingCoordinatePolynomial_centeredNode"
 gates = ["RelativeConicArcs.Gates.GoldenCubicNodes"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.QuadraticPinching.conductor_eq_ker"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.TightFrameConference.conference_sq_of_gram"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SignedEquiangularGram.golden_det_positive"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SignedEquiangularGram.golden_det_negative"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.MarkedClebschBridge.chartLift_smul"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors"
+gates = ["RelativeConicArcs.Gates.ClebschPassages"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 # ---------------------------------------------------------------------------------------------

@@ -1,0 +1,91 @@
+# Companion-export configuration for the structural Clebsch passages boundary.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only
+# the destination file names and the release prose live here.
+
+schema_version = 1
+area = "clebsch_passages"
+gate = "RelativeConicArcs.Gates.ClebschPassages"
+trust_statement = "trust/CLEBSCH_PASSAGES.md"
+axiom_audit = "trust/ClebschPassagesAxiomAudit.lean"
+
+statement_title = "Structural Clebsch passages: formal boundary"
+
+overview = """
+This boundary records the algebraic mechanisms accompanying Tavis Rudd,
+*Golden descent and operator realizations of the Clebsch cubic*
+(DOI 10.5281/zenodo.21682515).
+"""
+
+correspondence = """
+The exported closure proves the residue-field pinching of a two-branch
+quadratic singularity, identifies its conductor with the residue kernel and,
+in the split case, with the branch ideal, and gives the involutive even/odd
+splitting together with the multiplication law satisfied by the square of an
+anti-invariant unit.  Over a commutative base it characterizes existence of a
+root of `t^2 = t + 1` by existence of a square root of five, factors the
+golden exchanger as a product of two reflections, and checks that two is not a
+square modulo eleven.  It derives the conference identity `C^2 = 5I` from the
+tight-frame Gram condition, computes the signed equiangular Gram determinants
+of both golden orientations, and proves that the triangle cubic of the
+displayed order-six conference matrix is invariant under switching.  For the
+marked chart it proves the deck-sign scaling law and the two negative
+comparisons that separate the sheet triangle cubic and the sheet pair sum.
+On the Petersen side it exhibits the unique pair-sum eigenvector of a general
+Kneser pair operator, computes the dimension of the eigenspace at eigenvalue
+negative two, and evaluates the pair-sum Gram scalar and its norm.  It fixes
+the marked invariant cubic up to scale, identifies its value with a multiple
+of the third elementary symmetric polynomial, and factors the resulting Gaunt
+coefficient.  For aligned two-graphs it proves complementation, the rooted
+exclusive-or form of the triangle function, both bounds behind the triangle
+Ramsey equality on six labelled points and the aligned anchor they produce,
+the pair-signature classification and its swap elimination, injectivity of the
+normalized seven-point signature, global agreement from common seven-point
+restrictions, the calibrated-triangle exclusion, recovery of a signing up to
+switching and negation, the four-point signing determinant, and the exact
+query counts.  Finally it transports these mechanisms to the chart
+correspondence: the branch square, the chart conductor, the golden structural
+package, the Petersen pullback scalar, the normalized marked chart value, and
+the two structural factors the marked value determines.
+
+The companion does not assert the geometric correspondence between Hitchin's
+spaces and these algebraic models, and it does not claim the integral
+Mukai--Umemura comparison.  Those inputs are established in the accompanying
+paper by ordinary mathematical proof or cited literature, and no manuscript
+row is claimed to be formalized in full.
+"""
+
+boundary = """
+Every terminal is a kernel proof.  The finite steps use kernel `decide` on the
+displayed reflection matrices, the eleven residues, and the two aligned
+two-graph classifiers over their sixteen thousand three hundred eighty-four
+and eight cases; `norm_num` on the marked fixed vector, its third elementary
+symmetric value, the reflection norms, and the identification of each
+displayed integral reflection with the rational reflection formula; and one
+cofactor expansion for a determinant.  Compiled evaluation enters no terminal,
+so each one depends on `propext`, `Classical.choice` and `Quot.sound` or on no
+axiom at all.  The closure contains no generated certificate, native
+evaluation, imported external data, user axiom, unsafe declaration, or
+admitted proof.
+"""
+
+axiom_audit_title = "Axiom audit for the structural Clebsch passages"
+
+axiom_audit_description = """
+This audit prints the axioms of the terminals exported with the structural
+Clebsch passages boundary: the quadratic and split pinching results, the
+involutive odd-unit splitting, the golden quadratic characters and reflection
+factorization, the tight-frame conference identity, the signed equiangular
+Gram determinants, the conference square and switching invariance of the
+triangle cubic, the marked chart comparisons, the Kneser pair eigenspace and
+Petersen harmonic scalars, the marked invariant cubic and its Gaunt
+coefficient, the aligned two-graph classification and query counts, and the
+chart correspondence transports.
+"""
+
+readme_anchor = "  library state; the exact 24-module foundation is archived as `v0.1.0`."
+
+readme_bullet = """- `trust/manifests/clebsch_passages.json` content-addresses the three-module
+  symbolic state added after `v0.1.0`; in `v0.3.0` it records the superseding
+  13-module structural closure."""
