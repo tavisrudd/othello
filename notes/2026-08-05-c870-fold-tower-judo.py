@@ -80,18 +80,23 @@ def fold_once(half):
 
     axis = points[0]
     link = tuple(v for v in points if bilinear(axis, v) == 1)
-    index = {point: slot for slot, point in enumerate(link)}
     pairs = tuple(sorted({tuple(sorted((v, v ^ axis))) for v in link}))
     assert len(pairs) * 2 == len(link)
 
+    # Evaluate the affine functionals on the pair representatives directly.  An
+    # earlier version read codeword bits at link positions while the words were
+    # indexed over the full point set.
     folded = set()
-    for word in code:
-        values = [
-            ((word >> index[low]) & 1, (word >> index[high]) & 1)
-            for low, high in pairs
-        ]
-        if all(low == high for low, high in values):
-            folded.add(sum(low << slot for slot, (low, _) in enumerate(values)))
+    for coefficients in range(1 << (2 * half + 1)):
+        functional, constant = coefficients >> 1, coefficients & 1
+        if parity(functional & axis):
+            continue
+        folded.add(
+            sum(
+                (parity(functional & low) ^ constant) << slot
+                for slot, (low, _) in enumerate(pairs)
+            )
+        )
     folded = tuple(sorted(folded))
     return {
         "rank": 2 * half,
@@ -148,7 +153,6 @@ def quotient_model(half):
     code = affine_code(points, 2 * half)
     axis = points[0]
     link = tuple(v for v in points if bilinear(axis, v) == 1)
-    index = {point: slot for slot, point in enumerate(link)}
     origin = link[0]
 
     perpendicular = [v for v in range(ambient) if bilinear(axis, v) == 0]
@@ -180,13 +184,16 @@ def quotient_model(half):
     assert sorted(pair_labels) == sorted(zeros)
 
     folded = set()
-    for word in code:
-        values = [
-            ((word >> index[low]) & 1, (word >> index[high]) & 1)
-            for low, high in pairs
-        ]
-        if all(low == high for low, high in values):
-            folded.add(sum(low << slot for slot, (low, _) in enumerate(values)))
+    for coefficients in range(1 << (2 * half + 1)):
+        functional, constant = coefficients >> 1, coefficients & 1
+        if parity(functional & axis):
+            continue
+        folded.add(
+            sum(
+                (parity(functional & low) ^ constant) << slot
+                for slot, (low, _) in enumerate(pairs)
+            )
+        )
     intrinsic = set(affine_code(tuple(pair_labels), 2 * half - 2))
     assert intrinsic == folded
 

@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""The code-level fold works only at plus type, so it is not a graph consequence.
+"""The code-level fold is type-general, and the tetrad count is closed form.
 
 Three exact results:
 
-  1. Across plus, minus and parabolic quadrics the fold always lands on a point
-     set of exactly the next level's size — the behaviour a graph-level antipodal
-     quotient predicts — but the affine code descends in full only at plus type.
-     At minus and parabolic type the folded code collapses to a much smaller
-     dimension.  So the code-level statement is not a formal consequence of the
-     graph-level one.
+  1. Across plus, minus and parabolic quadrics the fold lands on a point set of
+     exactly the next level's size AND the affine code descends in full, at every
+     type.  A first version of this checker reported descent only at plus type;
+     that was an indexing error, and the retraction is recorded here so the
+     corrected behaviour is not mistaken for a new result.
   2. The nonsingular set of every F2 quadratic form is a perfect difference set:
      each nonzero vector occurs as a difference the same number of times.  That
      gives a closed form for the dual tetrad count at every rank and type, hence
@@ -29,7 +28,7 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-OUTPUT = HERE / "2026-08-05-c872-fold-is-plus-type-only.json"
+OUTPUT = HERE / "2026-08-05-c872-fold-type-generality.json"
 TOWER_SOURCE = HERE / "2026-08-05-c870-fold-tower-judo.py"
 
 
@@ -101,18 +100,24 @@ def fold(kind, half):
 
     axis = points[0]
     link = tuple(v for v in points if bilinear(axis, v) == 1)
-    index = {point: slot for slot, point in enumerate(link)}
     pairs = tuple(sorted({tuple(sorted((v, v ^ axis))) for v in link}))
     assert len(pairs) * 2 == len(link)
 
+    # Evaluate the affine functionals directly on the pair representatives.  An
+    # earlier version indexed codeword bits by position in the link while the
+    # words were indexed by position in the full point set, which silently read
+    # the wrong coordinate and produced a spurious plus-type dichotomy.
     folded = set()
-    for word in code:
-        values = [
-            ((word >> index[low]) & 1, (word >> index[high]) & 1)
-            for low, high in pairs
-        ]
-        if all(low == high for low, high in values):
-            folded.add(sum(low << slot for slot, (low, _) in enumerate(values)))
+    for coefficients in range(1 << (dimension + 1)):
+        functional, constant = coefficients >> 1, coefficients & 1
+        if parity(functional & axis):
+            continue  # not constant on the pairs
+        folded.add(
+            sum(
+                (parity(functional & low) ^ constant) << slot
+                for slot, (low, _) in enumerate(pairs)
+            )
+        )
     return {
         "type": kind,
         "rank": dimension,
@@ -197,7 +202,7 @@ def certificate():
     for entry in folds:
         descends = entry["folded"] == entry["next_level_code"]
         entry["code_descends_in_full"] = descends
-        assert descends == (entry["type"] == "+"), entry
+        assert descends, entry
 
     differences = [
         difference_set(kind, half)
@@ -208,10 +213,11 @@ def certificate():
     return {
         "fold_by_type": folds,
         "verdict": (
-            "the point count descends at every type, which is what a graph-level "
-            "antipodal quotient predicts, but the affine code descends in full "
-            "only at plus type; the code-level fold therefore carries content "
-            "beyond the graph-level Taylor extension statement"
+            "the affine code descends in full at plus, minus and parabolic type "
+            "alike; an earlier claim that descent happens only at plus type was "
+            "an indexing error and is retracted, so the code-level fold runs "
+            "exactly parallel to the graph-level Taylor extension statement and "
+            "adds no type-sensitivity to it"
         ),
         "difference_sets": differences,
         "difference_set_note": (

@@ -120,11 +120,11 @@
         7,
         16
       ],
-      "code_descends_in_full": false,
+      "code_descends_in_full": true,
       "folded": [
         10,
-        3,
-        2
+        5,
+        4
       ],
       "link": 20,
       "next_level_code": [
@@ -142,11 +142,11 @@
         9,
         64
       ],
-      "code_descends_in_full": false,
+      "code_descends_in_full": true,
       "folded": [
         36,
-        4,
-        4
+        7,
+        16
       ],
       "link": 72,
       "next_level_code": [
@@ -164,11 +164,11 @@
         8,
         28
       ],
-      "code_descends_in_full": false,
+      "code_descends_in_full": true,
       "folded": [
         16,
-        4,
-        2
+        6,
+        6
       ],
       "link": 32,
       "next_level_code": [
@@ -186,11 +186,11 @@
         10,
         120
       ],
-      "code_descends_in_full": false,
+      "code_descends_in_full": true,
       "folded": [
         64,
-        5,
-        4
+        8,
+        28
       ],
       "link": 128,
       "next_level_code": [
@@ -204,7 +204,7 @@
     }
   ],
   "input_sha256": {
-    "2026-08-05-c870-fold-tower-judo.py": "ed09222ad3800cf0f06e42feaea641eceff676b6452a9afe0a83cb528da41ee5"
+    "2026-08-05-c870-fold-tower-judo.py": "ab02de7a48adaf36ca88136b3a35ac56e87a3447a76d892aadb92fa6320d2a27"
   },
   "translation_identity": {
     "identity": "Q(x+t) = Q'(x) + 1 with Q'(x) = Q(x) + B(t,x), for Q(t)=1",
@@ -214,5 +214,5 @@
     "zero_count": 120,
     "zero_set_translates_to_nonsingular_set": true
   },
-  "verdict": "the point count descends at every type, which is what a graph-level antipodal quotient predicts, but the affine code descends in full only at plus type; the code-level fold therefore carries content beyond the graph-level Taylor extension statement"
+  "verdict": "the affine code descends in full at plus, minus and parabolic type alike; an earlier claim that descent happens only at plus type was an indexing error and is retracted, so the code-level fold runs exactly parallel to the graph-level Taylor extension statement and adds no type-sensitivity to it"
 }

@@ -2753,8 +2753,17 @@
       "last": 872,
       "purpose": "fold is plus-type only: code-level content beyond the graph-level Taylor extension",
       "sequence": 306
+    },
+    {
+      "count": 1,
+      "first": 873,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 873,
+      "purpose": "triangulate the Brouwer-Shult 1990 statement through later citing literature",
+      "sequence": 307
     }
   ],
-  "next_id": 873,
+  "next_id": 874,
   "schema": "codex-task-id-allocations-v1"
 }
