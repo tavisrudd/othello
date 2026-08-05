@@ -1014,6 +1014,29 @@ terminals = [
 ]
 coverage_rule = "closure"
 
+# The six-arc triple-concurrence development.  It is import-only and carries no `#print axioms`
+# line of its own.  Its terminals are the ten-point bound on the points off a six-arc lying on
+# three of its secants, the chord-matching dictionary and one-factorization that count the equality
+# case, the hexagonal order and golden normal form it produces, and the identification of an
+# order-eleven six-arc attaining the bound with the displayed witness.  The first and last of these
+# are the two statements the order-eleven certificate package consumes.
+[[gate]]
+module = "RelativeConicArcs.SixArcConcurrenceSpine"
+terminals = [
+  "RelativeConicArcs.SixArcConcurrence.card_triplePoints_on_secant_le_two",
+  "RelativeConicArcs.SixArcConcurrence.card_triplePoints_le_ten",
+  "RelativeConicArcs.SixArcChordMatchings.card_concurrentMatchings_eq_card_triplePoints",
+  "RelativeConicArcs.SixArcOneFactorization.card_filter_mem_nonconcurrentMatchings",
+  "RelativeConicArcs.SixArcOneFactorization.card_nonconcurrentMatchings",
+  "RelativeConicArcs.SixArcOneFactorization.disjoint_of_mem_nonconcurrentMatchings",
+  "RelativeConicArcs.SixArcHexagonalOrder.exists_hexagonal_order",
+  "RelativeConicArcs.GoldenHexagonNormalForm.golden_normal_form_of_concurrent_matchings",
+  "RelativeConicArcs.SixArcGoldenNormalForm.exists_golden_frame",
+  "RelativeConicArcs.SixArcGoldenNormalForm.exists_golden_root",
+  "RelativeConicArcs.Q11GoldenHexagonWitness.exists_mapEquiv_toWitness",
+]
+coverage_rule = "closure"
+
 # The structural Clebsch passages gate.  Its terminals are the pinching, golden-character,
 # tight-frame, conference, Petersen-eigenspace, invariant-cubic, aligned two-graph, and
 # chart-correspondence results the Clebsch passages companion distributes.  No terminal uses
@@ -1886,6 +1909,61 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors"
 gates = ["RelativeConicArcs.Gates.ClebschPassages"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcConcurrence.card_triplePoints_on_secant_le_two"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcConcurrence.card_triplePoints_le_ten"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcChordMatchings.card_concurrentMatchings_eq_card_triplePoints"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcOneFactorization.card_filter_mem_nonconcurrentMatchings"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcOneFactorization.card_nonconcurrentMatchings"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcOneFactorization.disjoint_of_mem_nonconcurrentMatchings"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcHexagonalOrder.exists_hexagonal_order"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.GoldenHexagonNormalForm.golden_normal_form_of_concurrent_matchings"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcGoldenNormalForm.exists_golden_frame"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.SixArcGoldenNormalForm.exists_golden_root"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Q11GoldenHexagonWitness.exists_mapEquiv_toWitness"
+gates = ["RelativeConicArcs.SixArcConcurrenceSpine"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 # ---------------------------------------------------------------------------------------------
