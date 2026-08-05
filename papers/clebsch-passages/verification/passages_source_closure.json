@@ -1,6 +1,8 @@
 {
   "external_imports": [
     "Mathlib",
+    "Mathlib.Data.Finset.Card",
+    "Mathlib.Data.Fintype.Card",
     "Mathlib.Data.Fintype.Defs",
     "Mathlib.Data.Matrix.Mul",
     "Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
@@ -9,17 +11,23 @@
     "Mathlib.Tactic.NormNum",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 15,
+  "module_count": 16,
   "roots": [
     "RelativeConicArcs.Gates.ClebschPassages"
   ],
   "schema_version": 1,
   "sources": [
     {
-      "bytes": 24641,
+      "bytes": 32103,
+      "module": "RelativeConicArcs.AlignedFamilyFaithfulness",
+      "path": "RelativeConicArcs/AlignedFamilyFaithfulness.lean",
+      "sha256": "f360c1a1aa11c686f6c55a8f0cd3fa33ca8a46baf674eb6d1762703535db5fb7"
+    },
+    {
+      "bytes": 24388,
       "module": "RelativeConicArcs.AlignedTwoGraph",
       "path": "RelativeConicArcs/AlignedTwoGraph.lean",
-      "sha256": "a03ae9c236c6fc5ca986e759bcc40e5b022e3f85fe049ed8a2933d88c73ab3ac"
+      "sha256": "53dac19b1fcbbcba92233fb9663a082576dd4969cc768a90a7070a605391341d"
     },
     {
       "bytes": 17856,
@@ -46,10 +54,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 6246,
+      "bytes": 6971,
       "module": "RelativeConicArcs.Gates.ClebschPassages",
       "path": "RelativeConicArcs/Gates/ClebschPassages.lean",
-      "sha256": "d006b5220469bb23d528e9df0b5a0d8812a7322e2f47c9cf2dc332c6c0045427"
+      "sha256": "836306b7910c3e07078d0c974e48e098a703da8a6a155bbe341f013810512c16"
     },
     {
       "bytes": 7633,

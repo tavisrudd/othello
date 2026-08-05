@@ -41,6 +41,11 @@
 'RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount' does not depend on any axioms
+'RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff' does not depend on any axioms
+'RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned' does not depend on any axioms
+'RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square' depends on axioms: [propext]
 'RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package' depends on axioms: [propext, Quot.sound]

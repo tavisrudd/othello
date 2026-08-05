@@ -38,17 +38,23 @@ label sums.  The same gate proves symbolically that the fixed conference
 commutator Pfaffian is four times its triangle cubic and checks the
 three-vertex signed-matrix identity used in the order-six exchange-spectrum
 converse.  The unrestricted inclusion-rank and Ramsey exclusion is a human
-proof.  Lean covers rooted recovery of triangle signs, the normalized
-seven-point cut signatures, the distinct-balanced-cut ambiguity, and its
-symbolic elimination by the third outside point.  It also checks complement
-consistency on overlapping local restrictions, the conference-signing
-switching transport, the identity \(\det C[Q]=3-2w(Q)\), the selected-query
-polynomial, and the count of twenty possible anchor tests.  Both bounds behind the
-triangle Ramsey equality \(R(3,3)=6\) are kernel-checked, together with the
-existence of an aligned four-set through the root on six labelled points.
-Distinctness of those six points from each other and from the root, the
-finite-set extension to seven vertices, and the passage from arbitrary labels
-to the normalized cut coordinates remain human combinatorial steps.  Coherence of the outer six-family, the cross-golden
+proof.  Theorem~\ref{thm:aligned-faithfulness} is kernel-checked in its
+two-graph form: for every two-graph on a finite set of at least seven points,
+the aligned four-sets determine the triangle values on distinct triples up to
+one global complement bit.  The formal proof follows the one above.  Both
+bounds behind the triangle Ramsey equality \(R(3,3)=6\) and the aligned
+four-set they produce through a root are checked; so are the passage from
+arbitrary labels to the normalized cut coordinates, the seven-point cut
+signatures with their distinct-balanced-cut ambiguity, the symbolic
+elimination of that ambiguity by the third outside point, the distinctness of
+the seven points, the extension of any two triples to a common seven-point
+restriction, and the agreement of the complement bits on the overlap.  Lean
+also checks the conference-signing switching transport, the identity
+\(\det C[Q]=3-2w(Q)\), the selected-query polynomial, and the count of twenty
+possible anchor tests.  The identification of the marked
+determinant-\((-3)\) design of a conference matrix with the aligned family,
+and the cardinality of the selected query family, remain human steps.
+Coherence of the outer six-family, the cross-golden
 determinant comparison, and the classical
 Joubert--Segre--Igusa identifications remain human proofs with primary
 literature inputs; they are not inferred from a finite matrix check.

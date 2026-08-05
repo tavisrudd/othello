@@ -18,14 +18,11 @@ two-point ambiguity (interchanging two distinct balanced cuts); the
 three-outside-point theorem checks that the three pair signatures eliminate
 it.  The third-point elimination is a symbolic argument from that classifier.
 
-Checking methods differ between the two halves of the module and the
-difference is stated where each result is proved.  The pair classifier and the
-anchor-signature classification evaluate their bounded Boolean domains by
-compiled evaluation under the pinned Lean toolchain, so the compiler and its
-reduction axiom are trusted for those two results and for anything derived
-from them.  Every other finite step, including the whole anchor route below,
-is discharged by kernel reduction.  No generated data, external program, or
-unproved mathematical axiom is used anywhere in the module.
+Every finite step in this module is discharged by kernel reduction, including
+the anchor-signature classification over the eight normalized cuts and the pair
+classifier over its 16,384 cases.  Neither compiled evaluation, nor generated
+data, nor an external program, nor an unproved mathematical axiom is used
+anywhere in the module.
 
 Anchor existence is proved in this module.  Both halves of Ramsey's equality
 for triangles are available: six points force a monochromatic triple, by a
