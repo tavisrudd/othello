@@ -29,7 +29,10 @@
     "same_side_common_neighbor_pair_counts": {
       "0": 3822,
       "1": 273
-    }
+    },
+    "toric_chord_endpoint_image_rank": 13,
+    "toric_chord_endpoint_incidence_rank": 13,
+    "toric_chord_endpoint_intersection_with_kernel_dimension": 0
   },
   "families": {
     "octahedral": {

@@ -78,7 +78,10 @@ transform.
 
 The bipartite graph has \(273\) edges, girth twelve, and binary adjacency rank
 \(77\), hence nullity fourteen.  Distinct vertices on one side have at most
-one common neighbor: \(273\) pairs have one and \(3822\) have none.
+one common neighbor: \(273\) pairs have one and \(3822\) have none.  The most
+obvious explanation of the nullity is false: the natural rank-thirteen cut
+space obtained by recording the endpoints of the ninety-one toric chords
+meets \(\ker C\) trivially.  Its image under \(C\) also has rank thirteen.
 
 ## The corrected three-plus-one structure
 
@@ -204,7 +207,8 @@ paper promotion.
 1. Give a coordinate-free double-coset proof of the two neighbor-sum
    identities.
 2. Identify the fourteen-dimensional kernel of \(C\).  Its dimension equals
-   the number of conic points, but no module identification is asserted.
+   the number of conic points, but it is not the natural chord-endpoint cut
+   space; no abstract module identification is asserted.
 3. Decide whether the full minimum hypergraph canonically selects \(A_9\) and
    thereby rigidifies the Frobenius ambiguity of the recovered \(\mathbf F_8\).
 4. Determine whether the \(182\)-vertex cubic coset graph is classical.

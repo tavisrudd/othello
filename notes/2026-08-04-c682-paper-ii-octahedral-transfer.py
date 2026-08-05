@@ -133,6 +133,19 @@ def compute():
         sum(matching_adjacency[i][j] * sign[j] for j in range(14)) == -4 * sign[i]
         for i in range(14)
     )
+    sheet_indices = [
+        [i for i, matching in enumerate(matchings) if matching in sheet] for sheet in sheets
+    ]
+    heawood = [[0] * 14 for _ in range(14)]
+    for i in sheet_indices[0]:
+        for j in sheet_indices[1]:
+            heawood[i][j] = heawood[j][i] = 1 - matching_adjacency[i][j]
+    assert {sum(row) for row in heawood} == {3}
+    assert {
+        sum(heawood[i][k] * heawood[j][k] for k in range(14))
+        for side in sheet_indices
+        for i, j in itertools.combinations(side, 2)
+    } == {1}
 
     return {
         "schema": "c682-paper-ii-octahedral-transfer-v1",
@@ -170,6 +183,9 @@ def compute():
             "sheet_sign_spans_correspondence_kernel": True,
             "shared_chord_graph_degree": 4,
             "sheet_sign_adjacency_eigenvalue": -4,
+            "bipartite_complement_degree": 3,
+            "bipartite_complement_same_side_common_neighbors": 1,
+            "bipartite_complement_is_Fano_incidence_graph": True,
         },
         "all_stabilizer_intersection_order_counts": dict(sorted(intersection_counts.items())),
         "trusted_inputs": [str(SOURCE.relative_to(ROOT))],

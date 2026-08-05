@@ -86,6 +86,16 @@ The graph is bipartite across the two projective sheets.  This exhibits the
 trade as the unique defect of an octahedral--toric double-coset transform,
 rather than only as a null vector of quadratic evaluation.
 
+There is also a classical identification.  The bipartite complement of the
+shared-chord graph is three-regular, and every two vertices on one side have
+exactly one common neighbor.  It is therefore the incidence graph of the Fano
+plane, namely the Heawood graph.  The shared-chord graph is the bipartite
+complement of Heawood.  This makes the rank argument conceptual: \(C\) is the
+ordinary unoriented vertex--edge incidence matrix of a connected bipartite
+graph.  Over any field of odd characteristic, the equations
+\(x_u+x_v=0\) along its edges force one alternating value on the two color
+classes.  Hence its left kernel is the sheet-sign line without calculation.
+
 ## Comparison with Paper IV
 
 The two papers now have parallel invariant operations:
@@ -147,12 +157,9 @@ enumeration by the short orbit-stabilizer proof it visibly suggests.
 
 ## Open questions
 
-1. Derive \(\operatorname{rank}(C^{\mathsf T})=13\) from the permutation
-   characters of \(G/S_4\) and \(G/D_{12}\).
-2. Express the quadratic moment map of Paper II as a factor of, or refinement
+1. Express the quadratic moment map of Paper II as a factor of, or refinement
    of, the chord-incidence transform.
-3. Formulate a single octahedral--toric Hecke interface whose specializations
+2. Formulate a single octahedral--toric Hecke interface whose specializations
    contain both the \(q=7\) defect line and the \(q=13\) frame equivalence.
-4. Determine whether the shared-chord graph or its incidence subdivision is a
-   standard named coset graph.
-
+3. Determine whether the full matching--chord incidence subdivision has a
+   useful standard name beyond its Heawood-complement contraction.

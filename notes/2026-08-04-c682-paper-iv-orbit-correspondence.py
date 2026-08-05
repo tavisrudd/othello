@@ -172,6 +172,22 @@ def compute():
             common_neighbor_counts[(correspondence[i] & correspondence[j]).bit_count()] += 1
     assert common_neighbor_counts == {0: 3822, 1: 273}
 
+    toric_chords = []
+    for subgroup in toric_stabilizers:
+        point_orbits = module.orbits(tuple(range(14)), list(subgroup), module.mobius)
+        toric_chords.append(next(orbit for orbit in point_orbits if len(orbit) == 2))
+    endpoint_rows = [
+        sum(1 << j for j, chord in enumerate(toric_chords) if endpoint in chord)
+        for endpoint in range(14)
+    ]
+    endpoint_images = [
+        sum(1 << i for i, row in enumerate(correspondence) if (row & vector).bit_count() % 2)
+        for vector in endpoint_rows
+    ]
+    endpoint_rank = module.binary_rank(endpoint_rows)
+    endpoint_image_rank = module.binary_rank(endpoint_images)
+    assert endpoint_rank == endpoint_image_rank == 13
+
     first_row = correspondence[0]
     first_neighbor = next(j for j in range(91) if first_row >> j & 1)
     edge_group = octahedral_stabilizers[0] & toric_stabilizers[first_neighbor]
@@ -204,6 +220,9 @@ def compute():
             "binary_rank": rank,
             "binary_nullity": 91 - rank,
             "same_side_common_neighbor_pair_counts": dict(sorted(common_neighbor_counts.items())),
+            "toric_chord_endpoint_incidence_rank": endpoint_rank,
+            "toric_chord_endpoint_image_rank": endpoint_image_rank,
+            "toric_chord_endpoint_intersection_with_kernel_dimension": 0,
         },
         "identities": {
             "octahedral_is_xor_of_three_toric_neighbors": True,

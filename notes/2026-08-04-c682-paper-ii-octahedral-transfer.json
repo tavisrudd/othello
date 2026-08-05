@@ -44,6 +44,9 @@
   "psl_order": 168,
   "schema": "c682-paper-ii-octahedral-transfer-v1",
   "trade": {
+    "bipartite_complement_degree": 3,
+    "bipartite_complement_is_Fano_incidence_graph": true,
+    "bipartite_complement_same_side_common_neighbors": 1,
     "each_chord_occurs_once_in_each_sheet": true,
     "shared_chord_graph_degree": 4,
     "sheet_sign_adjacency_eigenvalue": -4,
