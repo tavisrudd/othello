@@ -441,18 +441,23 @@ normal form `(1:0:0), (φ:1:1), (0:1:0), (1:φ:1), (0:0:1), (1:1:2−φ)` with
 `φ² = φ + 1`, so the ground field contains a golden root. The shared
 frame-coordinate helpers are promoted into `FrameCoordinates`, and the
 perspectivity module now compiles against that compiled dependency rather than
-a scratch copy. What remains for the axiom is the chord-pairing bijection to
-concurrent matchings, the `5 + 1` partition at count ten, the hexagonal
-labelling that supplies the four concurrences, and the order-eleven projectivity
-onto the displayed witness. None of the three new modules is reached by a gate
-yet. Records:
+a scratch copy. The chord-pairing dictionary is also closed: counting
+triple-concurrence points of a six-arc is counting its concurrent chord
+matchings, by a bijection proved in `SixArcChordMatchings` over an arbitrary
+finite projective plane. What remains for the axiom is transitivity of
+concurrence on the six one-factorizations with the `5 + 1` partition at count
+ten, the hexagonal labelling that supplies the four concurrences, and the
+order-eleven projectivity onto the displayed witness. None of the four new
+modules is reached by a gate yet. Records:
 [`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
 and
 [`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md),
 with the two new proofs reported in
 [`../2026-08-04-c855-triple-perspective.md`](../2026-08-04-c855-triple-perspective.md)
 and
-[`../2026-08-04-c855-golden-normal-form.md`](../2026-08-04-c855-golden-normal-form.md).
+[`../2026-08-04-c855-golden-normal-form.md`](../2026-08-04-c855-golden-normal-form.md),
+and the chord-pairing bijection in
+[`../2026-08-04-c855-chord-pairing-bijection.md`](../2026-08-04-c855-chord-pairing-bijection.md).
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
