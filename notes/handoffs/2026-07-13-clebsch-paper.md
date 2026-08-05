@@ -1083,7 +1083,17 @@ Current state:
   level, partly superseded), `../2026-08-05-c867-ladder-record-attack.md`
   (uniform ladder, symmetry obstructions, Eisenstein model),
   `../2026-08-05-c866-exceptional-code-ladder-literature-audit.md` (novelty).
-- **Novelty: largely dissolved. Do not start a manuscript on this track.** The
+- **Novelty: contested, and it turns on one unread paper.** C872 overturned the
+  thinness verdict below, conditionally. Running the fold at minus and parabolic
+  type shows the point count descends every time — the graph-level behaviour —
+  while the affine code descends in full **only at plus type**. So if the
+  Brouwer--Shult hypothesis is type-general, the code-level fold is not a formal
+  consequence of it: the code descent sees the Arf invariant and the
+  antipodal-cover structure does not. Obtaining Brouwer and Shult (1990) at full
+  text is therefore the lane's highest-value read; it decides whether this track
+  holds a theorem or a footnote. Do not start a manuscript before that read, and
+  do not abandon the track on the paragraph below alone.
+- The pre-emption itself, which still stands as far as it goes. The
   level codes are Calderbank--Kantor two-weight codes (C866). The fold itself is
   Brouwer--Shult 1990, stated at general rank as Proposition 3.6.1 of Brouwer
   and Van Maldeghem's *Strongly Regular Graphs*: in the graph on the nonsingular
