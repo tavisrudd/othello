@@ -104,6 +104,27 @@ Two refusals have no tool-side workaround and must be resolved deliberately:
   it downstream. Keep every pin that describes the paper's formal companions
   in the authority for this reason.
 
+## The portfolio summary
+
+`papers/summary/` is the authority for the public portfolio summary published at
+`~/src/math-papers/math-papers-summary`. Edit it there and nowhere else; the
+mirror is downstream like any other.
+
+It is **not** carried by `export-paper-repos.py`. The registry requires every
+repository to claim at least one paper id from `lean/trust/papers.toml`, with
+the id's registered directory equal to the repository source, and the summary is
+not a paper. Until the exporter grows a non-paper repository kind, refresh the
+mirror by copying the authority tree over it and committing there — one way,
+authority first, never the reverse. Do not give the summary a borrowed paper id
+to get it past the check: that would make a real paper's identity name a
+directory it does not live in.
+
+Because no tool checks it, the summary is the one surface where a claim can
+drift out of agreement with the paper it describes without anything failing.
+The rule that keeps it honest is in `literature-audit-conventions.md`
+\S "Novelty text has one home": every novelty or priority sentence here quotes a
+ledger row rather than restating it.
+
 ## Lean export for a paper: base library, certificate package, release chain
 
 This is the full chain that takes a validated Lean change from the authority

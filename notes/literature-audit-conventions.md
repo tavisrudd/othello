@@ -118,6 +118,35 @@ Every fetched source is added to the shared literature cache with its key and SH
 `CLAUDE.md` § "Literature cache: load on demand". The cache records fetched bytes, not that a paper
 was read — read depth lives in the audit report and is never inferred from cache presence.
 
+## Novelty text has one home
+
+A novelty, priority, or "to our knowledge" claim lives in exactly one place: the
+row of the owning paper's claim–proof–novelty ledger that records it. Every
+other surface — the manuscript, a portfolio summary, a results snapshot, a
+handoff, a README — quotes that row or paraphrases it with an explicit pointer
+back. No surface may state such a claim independently.
+
+The reason is a failure this rule is named after. A novelty sentence was copied
+by hand into a public summary, the owning paper's ledger row was later corrected
+by an audit, and the copy was not. The paper and its own evidence map then
+contradicted each other in print, and the contradiction was found by an outside
+audit rather than by us. Hand-copied novelty claims are the highest-consequence
+sentences in the collection and the ones an audit most often changes, which is
+the worst possible combination for duplication.
+
+Two obligations follow.
+
+**When an audit changes a verdict**, its closing checklist names every surface
+that repeats it and records which were updated and which were not. Listing a
+surface and leaving it stale is acceptable and traceable; failing to list it is
+not. Assume at least four surfaces exist — manuscript, ledger, snapshot, public
+summary — and check rather than recall.
+
+**When a surface needs a novelty sentence that no ledger row carries**, the row
+comes first. Write the ledger entry, then quote it. A claim that cannot be
+stated as a ledger row with its evidence and search depth attached is not ready
+to appear anywhere.
+
 ## Relationship to other records
 
 The audit report is the durable artifact and owns the verdicts. Incidental observations met while
