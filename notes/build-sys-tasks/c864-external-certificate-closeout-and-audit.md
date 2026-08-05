@@ -163,6 +163,16 @@ remain deferred so the base is re-exported and re-pinned once rather than twice:
   nine gates reaching the residual module are green.  This preserves the accepted game residue in
   the Paper I and arcs closures recorded in `notes/2026-08-03-c860-cap-closure-remediation.md`.
   Report: `notes/2026-08-04-c864-q11-residual-game-split.md`.
+- **The base re-export and the order-eleven package re-seal are one atomic window.**  The monorepo
+  renamed eleven `RelativeConicArcs.PaperIOrientation*` modules and their namespaces to
+  `SupportOrientation*`; the base still carries the old names at both the pinned revision and its own
+  `HEAD`, and the package's gate imports, axiom-audit names, sealed trust fact, the monorepo's pinned
+  copy of that fact, and the Clebsch-rigidity trust manifest all still use them.  Exporting the
+  renamed base without re-pinning and resealing the package in the same window leaves the package
+  unbuildable.  Evidence: `notes/2026-08-05-c864-q11-package-source-audit.md`.
+  That window also carries the two record fixes the audit found: correct `PROVENANCE.md` to the real
+  extraction revision `0ddbca65`, and seal the monorepo revision in `MANIFEST.json` as a field
+  distinct from the package's own `source_commit`.
 - **The base is not yet re-exported.**  The batched re-export must add
   `RelativeConicArcs/ParametrizedHoles.lean` to the base module set, refresh the base copies of
   `Q11Residual.lean` and `Q11Coding.lean`, and keep `Q11ResidualGame.lean`,
@@ -270,12 +280,15 @@ further monorepo certificate deletion.
 
 Runnable now, in order:
 
-1. **Package/monorepo byte-identity audit for the order-eleven point-orbit package.**  Pure file
-   comparison against committed revisions; runs no Lean and takes no lock.  For each of the 122
-   sealed sources, compare against the sealed monorepo commit, against current monorepo `HEAD`, and
-   against the pinned base revision.  Classify every module as sealed-faithful, drifted since the
-   seal, still-present monorepo shadow, base overlap, or intentionally package-only, and record the
-   intentional differences the acceptance criteria require to be listed and justified.
+1. **Package/monorepo byte-identity audit for the order-eleven point-orbit package.**  Done, through
+   the new `lean/scripts/lean-package-source-audit.py`, which runs no Lean and takes no lock.  The
+   package's bytes are faithful to the monorepo authority `0ddbca65`; the only differing source is
+   the gate, whose two sides differ exactly as intended; the seven order-eleven modules both trees
+   still carry are byte-identical, so the remaining cut is a pure deletion.  The audit also found
+   the stale `PROVENANCE.md` extraction revision and the unpropagated orientation rename recorded
+   below.  Report: `notes/2026-08-05-c864-q11-package-source-audit.md`.  Re-run it immediately
+   before the remaining order-eleven cut: nothing but this audit detects drift in those seven
+   duplicated sources, and the area is under active edit.
 2. **Adversarial boundary-checker fixtures.**  Execution-order step 8's permanent test: a novel
    generated family, an imported external certificate leaf, a copied generator, and an edited
    package pin must each be rejected.  Python only, no Lean and no shared state.

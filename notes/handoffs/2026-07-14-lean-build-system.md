@@ -105,11 +105,18 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    pack/restore-rehearsed
    trace-current, with its trust fact published and pinned; the monorepo deletions landed and both
    the boundary and external-fact checks are green.
-   Next: the Clebsch-rigidity paper release chain, which still pins package commit `9c5d474f`;
-   a byte-identity check over the modules the package and monorepo both carry; then the remaining
-   order-eleven families (coding, Brianchon--Petersen, decoding synthesis), the q13/q25 packages,
-   the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the all-paper export
-   replay.
+   The package/monorepo byte-identity audit is done and green through the new
+   `lean-package-source-audit.py`; it also established that the base re-export and the package
+   re-seal must happen in one window, because the monorepo's orientation rename has not reached the
+   base, the package, or the paper's trust manifest
+   (`../2026-08-05-c864-q11-package-source-audit.md`).
+   The Paper I remediation currently holds the shared tree and the Clebsch-rigidity release chain, so
+   C864 is taking only steps that need no build window and no quiet tree; the near-term plan is on
+   the card.  Next there: the adversarial boundary-checker fixtures, then split-line planning for the
+   remaining order-eleven families (coding, Brianchon--Petersen, decoding synthesis).  Then, once the
+   tree is coherent, the release-chain replay, the atomic base re-export and package re-seal, the
+   q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
+   all-paper export replay.
 2. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
