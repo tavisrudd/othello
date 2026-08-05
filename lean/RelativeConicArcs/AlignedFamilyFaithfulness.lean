@@ -25,10 +25,17 @@ triangle bit of the seven points.  Larger point sets are handled by covering any
 two triples with one seven-point restriction and matching the complement bits on
 the overlap.
 
-Every step here is symbolic.  The two finite classifications it depends on,
+No step here is a search or an enumeration of two-graphs.  The finite checks
+are kernel reductions over small Boolean case splits: the Boolean identities
+behind the transport lemmas range over at most five bits, and the index facts
+over `Fin 7`.  The two finite classifications the argument depends on,
 `anchorSignature_eq_false_iff_balanced` and `pairSignature_classification`, are
-kernel-decided in `AlignedTwoGraph`; no compiled evaluation, generated data, or
-unproved axiom is used.
+kernel-decided in `AlignedTwoGraph` over eight and 16,384 cases.  No compiled
+evaluation, generated data, external program, or unproved axiom is used.
+
+A two-graph is a function on three-element subsets; it is recorded here as a
+function of three arguments that is invariant under permuting them, with the
+value at a repeated argument irrelevant to every statement below.
 -/
 
 namespace RelativeConicArcs
@@ -432,9 +439,9 @@ variable {tau sigma : α → α → α → Bool}
 
 /-- On a seven-point set, two two-graphs with the same aligned four-sets differ
 by a single complement bit.  The anchor is produced inside the proof by the
-six-point Ramsey bound, and both two-graphs are shifted so that their common
-anchor bit vanishes before the normalized seven-point classification is
-applied. -/
+six-point Ramsey bound; each of the two two-graphs is then shifted by its own
+triangle bit on that common anchor, so that both anchor bits vanish before the
+normalized seven-point classification is applied. -/
 theorem exists_complementBit_on_seven [DecidableEq α]
     (hsymT : TriangleSymmetric tau) (hparT : FourSetParity tau)
     (hsymS : TriangleSymmetric sigma) (hparS : FourSetParity sigma)
@@ -579,9 +586,13 @@ With `aligned_complement_iff`, which says that complementing preserves the
 family, this is the exact statement that the aligned four-sets determine the
 two-graph up to complement.
 
-The hypotheses quantify over triples and four-sets of pairwise distinct points
-only; nothing is assumed about the value of a triangle bit at a repeated
-argument, and nothing is concluded about it. -/
+The aligned-family hypothesis and the conclusion range over pairwise distinct
+points only.  The permutation invariance and parity laws, on the other hand,
+are assumed at every argument tuple, repeated arguments included, and they do
+constrain the repeated-argument values: parity at `a b c c` forces
+`tau a c c = tau b c c`.  This costs no generality, because a function on
+three-element subsets satisfying the four-set law extends to such a tuple
+function by taking the value `false` whenever two arguments coincide. -/
 theorem exists_complementBit_of_alignedFamily_eq [Fintype α]
     (hsymT : TriangleSymmetric tau) (hparT : FourSetParity tau)
     (hsymS : TriangleSymmetric sigma) (hparS : FourSetParity sigma)

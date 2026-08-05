@@ -229,13 +229,21 @@ def anchorSignature (p : NormalizedCut) : Fin 4 → Bool
   | 2 => equalBit (cutBit p 0) (cutBit p 1) && equalBit (cutBit p 1) (cutBit p 3)
   | 3 => equalBit (cutBit p 0) (cutBit p 1) && equalBit (cutBit p 1) (cutBit p 2)
 
-/-- The balanced normalized cut with three-bit word `011`. -/
+/-- The balanced cut with coordinates `1,1,0`: the outside point is joined to
+the first two anchor coordinates and not to the third.  With the fourth
+coordinate normalized to zero, it splits the anchor into the pair carrying
+coordinates `0,1` and the pair carrying coordinate `2` and the root, whence the
+name. -/
 def balancedCut12 : NormalizedCut := 3
 
-/-- The balanced normalized cut with three-bit word `101`. -/
+/-- The balanced cut with coordinates `1,0,1`: it splits the anchor into the
+pair carrying coordinates `0,2` and the pair carrying coordinate `1` and the
+root. -/
 def balancedCut13 : NormalizedCut := 5
 
-/-- The balanced normalized cut with three-bit word `110`. -/
+/-- The balanced cut with coordinates `0,1,1`: it splits the anchor into the
+pair carrying coordinate `0` and the root, and the pair carrying coordinates
+`1,2`. -/
 def balancedCut14 : NormalizedCut := 6
 
 /-- The three normalized balanced cuts of a four-point anchor. -/
