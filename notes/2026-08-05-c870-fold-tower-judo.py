@@ -101,6 +101,104 @@ def fold_once(half):
     }
 
 
+def independent_basis(vectors):
+    pivots = {}
+    chosen = []
+    for vector in vectors:
+        value = vector
+        for pivot in sorted(pivots, reverse=True):
+            if (value >> pivot) & 1:
+                value ^= pivots[pivot]
+        if value:
+            pivots[value.bit_length() - 1] = value
+            chosen.append(vector)
+    return chosen
+
+
+def coordinates(vector, basis):
+    pivots = {}
+    labels = {}
+    for index, element in enumerate(basis):
+        value, label = element, 1 << index
+        for pivot in sorted(pivots, reverse=True):
+            if (value >> pivot) & 1:
+                value ^= pivots[pivot]
+                label ^= labels[pivot]
+        pivots[value.bit_length() - 1] = value
+        labels[value.bit_length() - 1] = label
+    value, label = vector, 0
+    for pivot in sorted(pivots, reverse=True):
+        if (value >> pivot) & 1:
+            value ^= pivots[pivot]
+            label ^= labels[pivot]
+    assert value == 0, "vector outside the basis span"
+    return label
+
+
+def quotient_model(half):
+    """The fold target, built intrinsically rather than read off the fold.
+
+    On alpha-perp modulo alpha the function Qbar(s) = Q(s) + B(u0,s) is
+    well defined, because Q(alpha) = 1, B(alpha,s) = 0 on alpha-perp and
+    B(u0,alpha) = 1 cancel in pairs.  No step of this uses the rank.
+    """
+    quadratic, bilinear = plus_form(half)
+    ambient = 1 << (2 * half)
+    points = tuple(v for v in range(ambient) if quadratic(v) == 1)
+    code = affine_code(points, 2 * half)
+    axis = points[0]
+    link = tuple(v for v in points if bilinear(axis, v) == 1)
+    index = {point: slot for slot, point in enumerate(link)}
+    origin = link[0]
+
+    perpendicular = [v for v in range(ambient) if bilinear(axis, v) == 0]
+    basis = independent_basis([axis] + perpendicular)
+    assert len(basis) == 2 * half - 1 and basis[0] == axis
+    lifts = basis[1:]
+
+    def quotient_quadratic(label):
+        vector = 0
+        for slot, lift in enumerate(lifts):
+            if (label >> slot) & 1:
+                vector ^= lift
+        return quadratic(vector) ^ bilinear(origin, vector)
+
+    zeros = [
+        label
+        for label in range(1 << (2 * half - 2))
+        if quotient_quadratic(label) == 0
+    ]
+    expected = (1 << (2 * half - 3)) - (1 << (half - 2))
+    assert len(zeros) == expected
+
+    pairs = tuple(sorted({tuple(sorted((v, v ^ axis))) for v in link}))
+    pair_labels = []
+    for low, high in pairs:
+        label = coordinates(low ^ origin, basis) >> 1
+        assert coordinates(high ^ origin, basis) >> 1 == label
+        pair_labels.append(label)
+    assert sorted(pair_labels) == sorted(zeros)
+
+    folded = set()
+    for word in code:
+        values = [
+            ((word >> index[low]) & 1, (word >> index[high]) & 1)
+            for low, high in pairs
+        ]
+        if all(low == high for low, high in values):
+            folded.add(sum(low << slot for slot, (low, _) in enumerate(values)))
+    intrinsic = set(affine_code(tuple(pair_labels), 2 * half - 2))
+    assert intrinsic == folded
+
+    return {
+        "rank": 2 * half,
+        "quotient_rank": 2 * half - 2,
+        "quotient_zero_count": len(zeros),
+        "expected_next_level_points": expected,
+        "intrinsic_code_equals_folded_code": True,
+    }
+
+
 def certificate():
     levels = {}
     for half in (2, 3, 4, 5):
@@ -137,6 +235,7 @@ def certificate():
         ),
         "levels": levels,
         "steps": steps,
+        "quotient_models": [quotient_model(half) for half in (3, 4, 5)],
         "exceptional_labels": {
             "10": "E10 overextended",
             "8": "E8 root pairs",

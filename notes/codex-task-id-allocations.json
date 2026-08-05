@@ -2735,8 +2735,17 @@
       "last": 870,
       "purpose": "fold tower at general rank: priority judo on the Calderbank-Kantor concession",
       "sequence": 304
+    },
+    {
+      "count": 1,
+      "first": 871,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 871,
+      "purpose": "literature sweep on the rank-generic fold tower and the biadjacency side-equivalence criterion",
+      "sequence": 305
     }
   ],
-  "next_id": 871,
+  "next_id": 872,
   "schema": "codex-task-id-allocations-v1"
 }

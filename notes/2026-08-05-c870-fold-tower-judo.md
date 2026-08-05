@@ -36,6 +36,35 @@ plus-type quadric.  Verified exactly at every rank the enumeration reaches:
 Comparison is on parameters and full weight enumerator at each step, not on
 parameters alone.
 
+## The intrinsic quotient, and why no rank enters
+
+The fold above is read off the code.  The theorem needs the target built
+intrinsically, and that is where a hidden low-rank hypothesis would live if
+there were one.  There is not.
+
+On \(\alpha^\perp/\langle\alpha\rangle\) put
+
+\[
+ \bar Q(s)=Q(s)+B(u_0,s),
+\]
+
+for any chosen \(u_0\) in the link.  It is well defined because
+
+\[
+ \bar Q(s+\alpha)=\bar Q(s)+\underbrace{Q(\alpha)}_{1}
+ +\underbrace{B(\alpha,s)}_{0\ \text{on}\ \alpha^\perp}
+ +\underbrace{B(u_0,\alpha)}_{1}=\bar Q(s),
+\]
+
+and the three facts used — \(\alpha\) nonsingular, \(s\) perpendicular to
+\(\alpha\), \(u_0\) in the link — are the defining conditions, not features of
+any particular rank.  Its zero set has exactly \(2^{2l-3}-2^{l-2}\) elements,
+which is the point count of the next level down.
+
+Checked at ranks six, eight and ten: the antipodal pairs of the link map
+bijectively onto that zero set, and the affine code built intrinsically on the
+zero set equals the folded code word for word, not merely in parameters.
+
 ## What this converts
 
 The Calderbank–Kantor family stops being the thing we rediscovered and becomes
@@ -92,10 +121,11 @@ no randomness.
   the C682 argument contains no rank-four hypothesis.
 - **Settled — the judo is available and costs no new mathematics.**  The
   broader statement is already proved; only the framing changes.
-- **Open — the general-rank proof needs writing out.**  The computation
-  confirms it at four ranks; the rank-generic argument should be written as a
-  theorem with the quotient form identified at general \(l\), and checked for
-  any hidden low-rank assumption.
+- **Settled — no hidden low-rank assumption.**  See the intrinsic quotient
+  section above; the well-definedness of \(\bar Q\) uses only \(Q(\alpha)=1\),
+  \(B(\alpha,s)=0\) on \(\alpha^\perp\), and \(B(u_0,\alpha)=1\).  Verified
+  against the fold at ranks six, eight and ten.  What remains is writing the
+  argument up as a theorem, which is exposition rather than mathematics.
 - **Open — a fresh novelty question.**  Whether any literature relates
   two-weight family members by a fold at any rank. C866 did not ask this and
   its verdict does not cover it.
