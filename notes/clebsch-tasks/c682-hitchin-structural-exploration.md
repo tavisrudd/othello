@@ -300,6 +300,46 @@ explicitly separated.
   intrinsic on the distinguished integral support lattice, though not from
   the bare rational conjugacy class of \(K\).
 
+- Paper IV's octahedral--toric minimum frames close a second exact
+  operator-reconstruction loop.  Their cubic transition gives the frame
+  metacode \([182,37,28]_2\); its 78 minimum words are exactly the paired
+  physical-coordinate columns and equivariantly reconstruct both support
+  matrices.  The minimum shell is \(G/D_{28}\), spans the canonical
+  \([182,36,28]_2\) constituent, and the weight-38 shell is two
+  \(G/C_2\) orbits rather than one regular orbit.
+- The reusable parity--complement theorem gives
+  \(\ker C=[91,14,28]_2\) and
+  \(\ker(C+J)=[91,15,28]_2\).  Exhaustion of all 127 nonzero sums in the
+  seven-dimensional cross-commutant proves that the latter is the unique
+  maximum-dimension kernel at maximum distance 28 in that natural family.
+  It is not an unrestricted best-parameter code.  The literal
+  \(\mathbf F_{169}\) lift is impossible: the relevant characteristic-13
+  nullity is zero and the exact determinant is \(2^{39}5^{13}\).
+- Repeating the construction on either weight-38 orbit gives the exact
+  higher shell code \([1092,37,204]_2\).  Its 91 minimum words are the
+  lighter coordinate half, span the whole code, and recover one preceding
+  frame.  Together with the period-two \(C\leftrightarrow C+J\) operation,
+  this gives a finite \(78\to91\to182\to1092\to91\) correspondence cycle,
+  not an unbounded tower.
+- The exceptional-series analog is exact.  The 45 Cartan tritangents on the
+  27 minuscule \(E_6\) weights give the unrestricted parameter-optimal
+  \([27,6,12]_2\) code.  Its 36 minimum words are exactly the 36 Schläfli
+  double-sixes and reconstruct all 27 lines and 45 tritangents, giving a
+  literal exceptional-series instance of the Paper-IV minimum-shell recovery
+  loop.  The \(E_6\times A_2\subset E_8\) bracket-support lift gives
+  \([81,8,36]_2\), two below the unrestricted optimum, and proves a general
+  \(A_2\)-transversal lift theorem
+  \(d_{\rm lift}=\min(3d,2n-\maxwt)\).  The signed
+  \(\operatorname{ad}_z\) linearization is the next finite exceptional gate;
+  the \(3|4|4\) boundary-transfer matrices, rather than fixed-degree kernels,
+  are the viable positive-rate McKay/convolutional gate.
+- Standard propagation constructions from \([91,15,28]_2\) are far below
+  current unrestricted tables.  The one credible record attempt is a
+  projective-system column completion: first test \([140,15,60]_2\), then
+  \([160,15,69]_2\), which would improve the current public lower bound 68.
+  The exact cutting-plane ILP has 32767 column types and 32767 message
+  constraints.
+
 ## Active order
 
 The McKay-corner classification is complete.  The all-weight
@@ -312,9 +352,13 @@ failure.  The direct golden/Clebsch-to-\(E_8\) gap is closed at the first
 balanced harmonic slice and has the correct bi-McKay graded descent
 formulation.  Its explicit all-degree coupled Weyl presentation is also
 closed, including the exact integral index-four comparison at degree ten.
-A preprojective-corner identification remains the only nearby optional
-successor.  C682 remains open exploration, with completion or selection of
-a parked branch left to the user.
+A preprojective-corner identification remains the nearby optional successor
+on the original Hitchin branch.  On the new Paper-IV branch, the highest-value
+optional successor is a conceptual Hecke/design proof of distances 28 and 204,
+or the signed \(E_8\) linearization \(\operatorname{ad}_z\) at the canonical
+Clebsch/Coble seed, followed by a claim-specific literature audit and an
+explicit manuscript-promotion decision.  C682 remains open exploration, with
+completion or selection of either successor left to the user.
 
 ## Parked branches
 
@@ -342,3 +386,5 @@ Golden/\(E_8\) descent bundle:
 `notes/2026-07-30-c682-golden-e8-descent.md`.
 All-degree golden Weyl descent bundle:
 `notes/2026-07-30-c682-golden-e8-weyl-descent.md`.
+Paper-IV frame/operator and project-up report:
+`notes/2026-08-04-c682-paper-iv-orbit-correspondence.md`.

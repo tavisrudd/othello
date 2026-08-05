@@ -1,0 +1,73 @@
+{
+  "field_order": 13,
+  "group": "PGL(2,13)",
+  "group_order": 2184,
+  "metacode": {
+    "dimension": 37,
+    "length": 182,
+    "minimum_distance": 28
+  },
+  "minimum_shell": {
+    "equals_paired_coordinate_columns": true,
+    "equivariant_coordinate_recovery": true,
+    "homogeneous_space": "PGL(2,13)/D28",
+    "orbit_count": 1,
+    "size": 78,
+    "span_parameters": [
+      182,
+      36,
+      28
+    ],
+    "stabilizer": "D28",
+    "stabilizer_element_order_profile": {
+      "1": 1,
+      "2": 15,
+      "7": 6,
+      "14": 6
+    },
+    "stabilizer_order": 28,
+    "weight": 28
+  },
+  "next_shell": {
+    "orbit_count": 2,
+    "orbits": [
+      {
+        "size": 1092,
+        "stabilizer_element_order_profile": {
+          "1": 1,
+          "2": 1
+        },
+        "stabilizer_order": 2
+      },
+      {
+        "size": 1092,
+        "stabilizer_element_order_profile": {
+          "1": 1,
+          "2": 1
+        },
+        "stabilizer_order": 2
+      }
+    ],
+    "regular_group_orbit": false,
+    "size": 2184,
+    "weight": 38
+  },
+  "reconstruction": {
+    "all_rows_have_zero_passant_syndrome": true,
+    "left_binary_rank": 36,
+    "left_exactly_original_octahedral_orbit": true,
+    "left_support_family_size": 91,
+    "paper_iv_minimum_geometry_replay": true,
+    "right_binary_rank": 36,
+    "right_exactly_original_toric_orbit": true,
+    "right_support_family_size": 91,
+    "support_weight": 12
+  },
+  "schema": "c682-paper-iv-metacode-geometry-v1",
+  "trusted_inputs": [
+    "notes/2026-08-04-c682-paper-iv-orbit-correspondence.py",
+    "notes/2026-08-04-c682-paper-iv-orbit-correspondence.json",
+    "notes/2026-08-04-c682-paper-iv-frame-metacode.json",
+    "papers/q13-passant-code/verification/verify_minimum_geometry.py"
+  ]
+}

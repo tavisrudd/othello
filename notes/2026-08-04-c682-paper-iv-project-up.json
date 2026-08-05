@@ -1,0 +1,390 @@
+{
+  "arithmetic_fibers": {
+    "F169_nullity": 0,
+    "absolute_determinant_of_CtC_minus_I": 671088640000000000000,
+    "determinant_factorization": "2^39 * 5^13",
+    "explanation": "scalar extension from F13 preserves nullity",
+    "nullity_of_CtC_minus_I": {
+      "13": 0,
+      "2": 37,
+      "5": 13
+    }
+  },
+  "descendants": {
+    "minimum_word_residual_parameters": [
+      63,
+      14,
+      16
+    ],
+    "minimum_word_residual_weight_enumerator": [
+      {
+        "count": 1,
+        "weight": 0
+      },
+      {
+        "count": 14,
+        "weight": 16
+      },
+      {
+        "count": 21,
+        "weight": 18
+      },
+      {
+        "count": 70,
+        "weight": 20
+      },
+      {
+        "count": 1,
+        "weight": 21
+      },
+      {
+        "count": 126,
+        "weight": 22
+      },
+      {
+        "count": 70,
+        "weight": 23
+      },
+      {
+        "count": 238,
+        "weight": 24
+      },
+      {
+        "count": 462,
+        "weight": 25
+      },
+      {
+        "count": 567,
+        "weight": 26
+      },
+      {
+        "count": 1022,
+        "weight": 27
+      },
+      {
+        "count": 924,
+        "weight": 28
+      },
+      {
+        "count": 1491,
+        "weight": 29
+      },
+      {
+        "count": 1428,
+        "weight": 30
+      },
+      {
+        "count": 1757,
+        "weight": 31
+      },
+      {
+        "count": 1757,
+        "weight": 32
+      },
+      {
+        "count": 1428,
+        "weight": 33
+      },
+      {
+        "count": 1491,
+        "weight": 34
+      },
+      {
+        "count": 924,
+        "weight": 35
+      },
+      {
+        "count": 1022,
+        "weight": 36
+      },
+      {
+        "count": 567,
+        "weight": 37
+      },
+      {
+        "count": 462,
+        "weight": 38
+      },
+      {
+        "count": 238,
+        "weight": 39
+      },
+      {
+        "count": 70,
+        "weight": 40
+      },
+      {
+        "count": 126,
+        "weight": 41
+      },
+      {
+        "count": 1,
+        "weight": 42
+      },
+      {
+        "count": 70,
+        "weight": 43
+      },
+      {
+        "count": 21,
+        "weight": 45
+      },
+      {
+        "count": 14,
+        "weight": 47
+      },
+      {
+        "count": 1,
+        "weight": 63
+      }
+    ],
+    "minimum_word_shortened_word_count": 2,
+    "punctured_parameters": [
+      90,
+      15,
+      27
+    ],
+    "shortened_parameters": [
+      90,
+      14,
+      28
+    ]
+  },
+  "iteration_closure": {
+    "block_metacode_equals_minimum_shell_span": true,
+    "block_metacode_of_C_plus_J_dimension": 36,
+    "block_metacode_parameters": [
+      182,
+      36,
+      28
+    ],
+    "conclusion": "same-level iteration closes after removing the constant line",
+    "double_parity_complement_returns_C": true
+  },
+  "octahedral_kernel": {
+    "definition": "ker(C^T)",
+    "parameters": [
+      91,
+      14,
+      26
+    ],
+    "weight_enumerator": [
+      {
+        "count": 1,
+        "weight": 0
+      },
+      {
+        "count": 28,
+        "weight": 26
+      },
+      {
+        "count": 78,
+        "weight": 28
+      },
+      {
+        "count": 91,
+        "weight": 32
+      },
+      {
+        "count": 364,
+        "weight": 34
+      },
+      {
+        "count": 182,
+        "weight": 36
+      },
+      {
+        "count": 1274,
+        "weight": 40
+      },
+      {
+        "count": 3796,
+        "weight": 42
+      },
+      {
+        "count": 2730,
+        "weight": 44
+      },
+      {
+        "count": 2548,
+        "weight": 48
+      },
+      {
+        "count": 4004,
+        "weight": 50
+      },
+      {
+        "count": 1106,
+        "weight": 52
+      },
+      {
+        "count": 182,
+        "weight": 56
+      }
+    ]
+  },
+  "parity_complement_kernel": {
+    "definition": "ker(C+J)=ker(C)+<all-ones>",
+    "minimum_shell_homogeneous_space": "PGL(2,13)/D28",
+    "minimum_shell_orbit_count": 1,
+    "minimum_shell_size": 78,
+    "minimum_shell_stabilizer_order": 28,
+    "parameters": [
+      91,
+      15,
+      28
+    ],
+    "weight_enumerator": [
+      {
+        "count": 1,
+        "weight": 0
+      },
+      {
+        "count": 78,
+        "weight": 28
+      },
+      {
+        "count": 273,
+        "weight": 32
+      },
+      {
+        "count": 156,
+        "weight": 35
+      },
+      {
+        "count": 546,
+        "weight": 36
+      },
+      {
+        "count": 2590,
+        "weight": 39
+      },
+      {
+        "count": 2548,
+        "weight": 40
+      },
+      {
+        "count": 5278,
+        "weight": 43
+      },
+      {
+        "count": 4914,
+        "weight": 44
+      },
+      {
+        "count": 4914,
+        "weight": 47
+      },
+      {
+        "count": 5278,
+        "weight": 48
+      },
+      {
+        "count": 2548,
+        "weight": 51
+      },
+      {
+        "count": 2590,
+        "weight": 52
+      },
+      {
+        "count": 546,
+        "weight": 55
+      },
+      {
+        "count": 156,
+        "weight": 56
+      },
+      {
+        "count": 273,
+        "weight": 59
+      },
+      {
+        "count": 78,
+        "weight": 63
+      },
+      {
+        "count": 1,
+        "weight": 91
+      }
+    ]
+  },
+  "quantum_css": {
+    "dual_weight_three_witness": "a cubic row of C",
+    "parameters": [
+      91,
+      63,
+      3
+    ],
+    "reason": "ker(C) is doubly even and its dual has distance 3",
+    "stabilizer_generator_weight": 28
+  },
+  "schema": "c682-paper-iv-project-up-v1",
+  "toric_kernel": {
+    "definition": "ker(C)",
+    "parameters": [
+      91,
+      14,
+      28
+    ],
+    "weight_enumerator": [
+      {
+        "count": 1,
+        "weight": 0
+      },
+      {
+        "count": 78,
+        "weight": 28
+      },
+      {
+        "count": 273,
+        "weight": 32
+      },
+      {
+        "count": 546,
+        "weight": 36
+      },
+      {
+        "count": 2548,
+        "weight": 40
+      },
+      {
+        "count": 4914,
+        "weight": 44
+      },
+      {
+        "count": 5278,
+        "weight": 48
+      },
+      {
+        "count": 2590,
+        "weight": 52
+      },
+      {
+        "count": 156,
+        "weight": 56
+      }
+    ]
+  },
+  "transition_matrix": {
+    "column_weight": 3,
+    "columns": 91,
+    "row_weight": 3,
+    "rows": 91
+  },
+  "trusted_inputs": [
+    "notes/2026-08-04-c682-paper-iv-orbit-correspondence.py",
+    "notes/2026-08-04-c682-paper-iv-orbit-correspondence.json",
+    "notes/2026-08-04-c682-paper-iv-frame-metacode.json",
+    "papers/q13-passant-code/verification/verify_minimum_geometry.py"
+  ],
+  "unrestricted_code_table_context": {
+    "best_known_lower_bound": 36,
+    "best_known_upper_bound": 38,
+    "parameters": [
+      91,
+      15
+    ],
+    "url": "https://www.codetables.de/BKLC/BKLC.php?q=2&n=91&k=15"
+  }
+}

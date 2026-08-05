@@ -22,6 +22,7 @@ use std::time::Instant;
 const FRAME: usize = 91;
 const LENGTH: usize = 2 * FRAME;
 const WORDS: usize = 3;
+const LOW_SHELL_CEILING: usize = 38;
 
 #[derive(Parser, Debug)]
 struct Args {
@@ -166,27 +167,45 @@ fn kernel_basis(mut rows: Vec<Word3>) -> (usize, Vec<Word3>) {
 #[derive(Clone)]
 struct Stats {
     counts: [u64; LENGTH + 1],
+    left_counts: [u64; FRAME + 1],
+    right_counts: [u64; FRAME + 1],
+    residual_counts: [u64; LENGTH + 1],
     minimum_nonzero_weight: usize,
     minimum_coefficient: u64,
     minimum_word: Word3,
-    words_at_or_below_coordinate_weight: Vec<(Word3, u64)>,
+    low_shell_words: Vec<(Word3, u64)>,
 }
 
 impl Stats {
     fn new() -> Self {
         Self {
             counts: [0; LENGTH + 1],
+            left_counts: [0; FRAME + 1],
+            right_counts: [0; FRAME + 1],
+            residual_counts: [0; LENGTH + 1],
             minimum_nonzero_weight: usize::MAX,
             minimum_coefficient: u64::MAX,
             minimum_word: Word3::default(),
-            words_at_or_below_coordinate_weight: Vec::new(),
+            low_shell_words: Vec::new(),
         }
     }
 
     #[inline]
-    fn record(&mut self, word: Word3, coefficient: u64) {
+    fn record(&mut self, word: Word3, coefficient: u64, residual_support: Word3) {
         let weight = word.weight();
         self.counts[weight] += 1;
+        let left_weight = word.0[0].count_ones() as usize
+            + (word.0[1] & ((1u64 << 27) - 1)).count_ones() as usize;
+        let right_weight =
+            (word.0[1] >> 27).count_ones() as usize + word.0[2].count_ones() as usize;
+        self.left_counts[left_weight] += 1;
+        self.right_counts[right_weight] += 1;
+        self.residual_counts[Word3([
+            word.0[0] & !residual_support.0[0],
+            word.0[1] & !residual_support.0[1],
+            word.0[2] & !residual_support.0[2],
+        ])
+        .weight()] += 1;
         if coefficient != 0
             && (weight < self.minimum_nonzero_weight
                 || (weight == self.minimum_nonzero_weight
@@ -196,15 +215,19 @@ impl Stats {
             self.minimum_coefficient = coefficient;
             self.minimum_word = word;
         }
-        if coefficient != 0 && weight <= 28 {
-            self.words_at_or_below_coordinate_weight
-                .push((word, coefficient));
+        if coefficient != 0 && weight <= LOW_SHELL_CEILING {
+            self.low_shell_words.push((word, coefficient));
         }
     }
 
     fn merge(mut self, other: Self) -> Self {
         for weight in 0..=LENGTH {
             self.counts[weight] += other.counts[weight];
+            self.residual_counts[weight] += other.residual_counts[weight];
+        }
+        for weight in 0..=FRAME {
+            self.left_counts[weight] += other.left_counts[weight];
+            self.right_counts[weight] += other.right_counts[weight];
         }
         if other.minimum_nonzero_weight < self.minimum_nonzero_weight
             || (other.minimum_nonzero_weight == self.minimum_nonzero_weight
@@ -214,8 +237,7 @@ impl Stats {
             self.minimum_coefficient = other.minimum_coefficient;
             self.minimum_word = other.minimum_word;
         }
-        self.words_at_or_below_coordinate_weight
-            .extend(other.words_at_or_below_coordinate_weight);
+        self.low_shell_words.extend(other.low_shell_words);
         self
     }
 }
@@ -239,15 +261,19 @@ fn word_from_coefficient(basis: &[Word3], coefficient: u64) -> Word3 {
     word
 }
 
-fn enumerate_reference(basis: &[Word3], bits: usize) -> Stats {
+fn enumerate_reference(basis: &[Word3], bits: usize, residual_support: Word3) -> Stats {
     let mut stats = Stats::new();
     for coefficient in 0..(1u64 << bits) {
-        stats.record(word_from_coefficient(basis, coefficient), coefficient);
+        stats.record(
+            word_from_coefficient(basis, coefficient),
+            coefficient,
+            residual_support,
+        );
     }
     stats
 }
 
-fn enumerate_gray(basis: &[Word3], bits: usize, low_bits: usize) -> Stats {
+fn enumerate_gray(basis: &[Word3], bits: usize, low_bits: usize, residual_support: Word3) -> Stats {
     let low_bits = low_bits.min(bits);
     let high_bits = bits - low_bits;
     let low_count = 1u64 << low_bits;
@@ -261,7 +287,7 @@ fn enumerate_gray(basis: &[Word3], bits: usize, low_bits: usize) -> Stats {
             let mut low_coefficient = 0u64;
             for index in 0..low_count {
                 let coefficient = (high_coefficient << low_bits) | low_coefficient;
-                stats.record(word, coefficient);
+                stats.record(word, coefficient, residual_support);
                 if index + 1 != low_count {
                     let flip = (index + 1).trailing_zeros() as usize;
                     word.xor_assign(basis[flip]);
@@ -294,6 +320,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     assert!(coordinate_columns
         .iter()
         .all(|&column| rows.iter().all(|&row| !row.dot(column))));
+    let residual_support = coordinate_columns[0];
     let (rank, basis) = kernel_basis(rows.clone());
     assert_eq!(rank, 145);
     assert_eq!(basis.len(), 37);
@@ -310,8 +337,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     if !args.no_self_check {
         let check_bits = args.self_check_bits.min(args.bits);
-        let reference = enumerate_reference(&basis, check_bits);
-        let optimized = enumerate_gray(&basis, check_bits, args.low_bits);
+        let reference = enumerate_reference(&basis, check_bits, residual_support);
+        let optimized = enumerate_gray(&basis, check_bits, args.low_bits, residual_support);
         assert_eq!(optimized.counts, reference.counts);
         assert_eq!(
             optimized.minimum_nonzero_weight,
@@ -323,7 +350,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     let started = Instant::now();
-    let stats = enumerate_gray(&basis, args.bits, args.low_bits);
+    let stats = enumerate_gray(&basis, args.bits, args.low_bits, residual_support);
     let elapsed = started.elapsed();
     let total: u64 = stats.counts.iter().sum();
     assert_eq!(total, 1u64 << args.bits);
@@ -332,8 +359,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         assert_eq!(stats.counts[28], 78);
         assert!(stats.counts[1..28].iter().all(|&count| count == 0));
         let mut minimum_words: Vec<Word3> = stats
-            .words_at_or_below_coordinate_weight
+            .low_shell_words
             .iter()
+            .filter(|(word, _)| word.weight() == 28)
             .map(|&(word, _)| word)
             .collect();
         minimum_words.sort_by_key(|word| word.0);
@@ -341,6 +369,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         coordinate_columns.sort_by_key(|word| word.0);
         coordinate_columns.dedup();
         assert_eq!(minimum_words, coordinate_columns);
+        assert_eq!(stats.left_counts[0], 1);
+        assert_eq!(stats.right_counts[0], 1);
+        assert_eq!(stats.residual_counts[0], 2);
+        assert!(stats.residual_counts.iter().all(|count| count % 2 == 0));
         for weight in 0..=LENGTH {
             assert_eq!(stats.counts[weight], stats.counts[LENGTH - weight]);
         }
@@ -352,6 +384,51 @@ fn main() -> Result<(), Box<dyn Error>> {
         .enumerate()
         .filter(|&(_, &count)| count != 0)
         .map(|(weight, &count)| json!({"weight": weight, "count": count}))
+        .collect();
+    let left_weight_enumerator: Vec<_> = stats
+        .left_counts
+        .iter()
+        .enumerate()
+        .filter(|&(_, &count)| count != 0)
+        .map(|(weight, &count)| json!({"weight": weight, "count": count}))
+        .collect();
+    let right_weight_enumerator: Vec<_> = stats
+        .right_counts
+        .iter()
+        .enumerate()
+        .filter(|&(_, &count)| count != 0)
+        .map(|(weight, &count)| json!({"weight": weight, "count": count}))
+        .collect();
+    let residual_weight_enumerator: Vec<_> = stats
+        .residual_counts
+        .iter()
+        .enumerate()
+        .filter(|&(_, &count)| count != 0)
+        .map(|(weight, &count)| json!({"weight": weight, "count": count / 2}))
+        .collect();
+    let left_minimum = stats.left_counts[1..]
+        .iter()
+        .position(|&count| count != 0)
+        .map(|index| index + 1);
+    let right_minimum = stats.right_counts[1..]
+        .iter()
+        .position(|&count| count != 0)
+        .map(|index| index + 1);
+    let residual_minimum = stats.residual_counts[1..]
+        .iter()
+        .position(|&count| count != 0)
+        .map(|index| index + 1);
+    let mut low_shell_words = stats.low_shell_words;
+    low_shell_words.sort_by_key(|(word, coefficient)| (word.weight(), word.0, *coefficient));
+    let low_shell_certificate: Vec<_> = low_shell_words
+        .iter()
+        .map(|(word, coefficient)| {
+            json!({
+                "weight": word.weight(),
+                "coefficient": format!("0x{coefficient:x}"),
+                "words_le": word.0.map(|lane| format!("0x{lane:016x}")),
+            })
+        })
         .collect();
     let result = json!({
         "schema": "c682-paper-iv-frame-metacode-enumerator-v1",
@@ -365,6 +442,26 @@ fn main() -> Result<(), Box<dyn Error>> {
         "minimum_witness_coefficient": format!("0x{:x}", stats.minimum_coefficient),
         "minimum_witness_words_le": stats.minimum_word.0.map(|word| format!("0x{word:016x}")),
         "minimum_words_equal_paired_coordinate_columns": args.bits == basis.len(),
+        "left_projection": {
+            "length": FRAME,
+            "dimension": args.bits,
+            "minimum_distance": left_minimum,
+            "weight_enumerator": left_weight_enumerator,
+        },
+        "right_projection": {
+            "length": FRAME,
+            "dimension": args.bits,
+            "minimum_distance": right_minimum,
+            "weight_enumerator": right_weight_enumerator,
+        },
+        "minimum_word_residual": {
+            "length": LENGTH - residual_support.weight(),
+            "dimension": args.bits - 1,
+            "minimum_distance": residual_minimum,
+            "weight_enumerator": residual_weight_enumerator,
+        },
+        "low_shell_ceiling": LOW_SHELL_CEILING,
+        "low_shell_words": low_shell_certificate,
         "weight_enumerator": weight_enumerator,
         "trusted_inputs": ["notes/2026-08-04-c682-paper-iv-orbit-correspondence.json"],
     });
@@ -396,8 +493,8 @@ mod tests {
             Word3([0b0101, 0, 0]),
             Word3([0b1001, 0, 0]),
         ];
-        let reference = enumerate_reference(&basis, basis.len());
-        let gray = enumerate_gray(&basis, basis.len(), 2);
+        let reference = enumerate_reference(&basis, basis.len(), Word3::default());
+        let gray = enumerate_gray(&basis, basis.len(), 2, Word3::default());
         assert_eq!(gray.counts, reference.counts);
         assert_eq!(
             gray.minimum_nonzero_weight,

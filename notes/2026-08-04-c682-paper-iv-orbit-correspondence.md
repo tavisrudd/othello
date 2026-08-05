@@ -461,13 +461,35 @@ words gives the exact parameters
 
 There are exactly seventy-eight minimum words, and they are exactly the
 paired octahedral--toric syndrome columns of the seventy-eight physical
-coordinates.  The all-ones word gives complement symmetry of the complete
-weight enumerator.  The next nonzero weight is thirty-eight, with 2184 words;
-the equality of that multiplicity with \(|G|\) is recorded without an orbit
-identification.  The decoding radius, local soundness, and the algorithmic
-meaning of the fourteen-dimensional kernel of \(C\) remain open.  The
-presently observed real spectral gap does not by itself prove those further
-binary claims.
+coordinates.  This reverses the construction.  Starting from the abstract
+cubic graph alone, form \(K_\Gamma=\ker(I+A_\Gamma)\), take its weight-
+twenty-eight shell, and regard those seventy-eight words as columns.  Their
+two ninety-one-bit halves transpose to the original octahedral and toric
+support matrices, up to the unavoidable simultaneous permutation of the
+recovered coordinates.  Thus the graph does restore the lost
+seventy-eight-coordinate embedding; the earlier one-way limitation is false.
+
+The recovery is equivariant.  The minimum shell is one
+\(G\)-orbit with stabilizer \(D_{28}\), hence is the homogeneous space
+
+\[
+ \operatorname{PGL}_2(13)/D_{28}
+\]
+
+of internal conic points.  Its span is the canonical
+\([182,36,28]_2\) nontrivial constituent.  The next nonzero weight is
+thirty-eight.  Its 2184 words do not form a regular orbit despite the
+numerical equality with \(|G|\): they split into two orbits of size 1092,
+each with an involutory stabilizer.  This exact correction is a useful second
+layer for future interpretation rather than evidence for a group-coordinate
+code.
+
+The all-ones word gives complement symmetry of the complete weight
+enumerator.  The two one-frame projections are both \([91,37,14]_2\), and
+the residual on a minimum word is \([154,36,20]_2\).  The decoding radius
+of the full metacode is thirteen.  Local soundness and a practical decoder
+remain open; the presently observed real spectral gap does not by itself
+prove those further binary claims.
 
 The exhaustive kernel derives a basis from the certified transition, stores
 each word in three `u64`s, and Gray-enumerates
@@ -475,8 +497,293 @@ each word in three `u64`s, and Gray-enumerates
 took about thirty-two seconds.  Before the full run, its optimized evaluator
 is compared with a from-scratch evaluator on \(2^{20}\) words; the full result
 also checks code membership of the basis and coordinate columns, the unique
-zero word, complement symmetry, and equality of the entire minimum-word set
-with the physical coordinate columns.
+zero word, complement symmetry, both projected weight enumerators, the
+minimum-word residual enumerator, and equality of the entire minimum-word set
+with the physical coordinate columns.  A separate checker then certifies the
+two low-shell orbit decompositions, equivariance of all seventy-eight column
+labels, exact reconstruction of both support matrices, their ranks and
+weights, and replay of their zero passant syndromes.
+
+### Projecting up: the parity--complement lift
+
+The fourteen-dimensional kernel of the transition now has an exact coding
+meaning.  On the toric side,
+
+\[
+ D=\ker C=[91,14,28]_2,
+\]
+
+with 78 minimum words.  The opposite kernel is genuinely asymmetric:
+\(\ker C^{\mathsf T}=[91,14,26]_2\).  Let \(J\) denote the all-ones
+matrix.  The toric parity-complement kernel is
+
+\[
+ \boxed{\ker(C+J)=D\oplus\langle\mathbf1\rangle=[91,15,28]_2}.
+\]
+
+It halves the metacode length while preserving its distance, doubling the
+relative distance from \(2/13\) to \(4/13\).  Its 78 minimum words are again
+one \(G/D_{28}\) orbit, so the shorter code retains the same intrinsic
+coordinate carrier.
+
+This is an instance of a reusable parity--complement theorem.  If \(C\) is
+an \(n\)-by-\(n\) binary incidence matrix with \(n\) odd and all row and
+column degrees odd, then
+
+\[
+ \ker(C+J)=\ker C\oplus\langle\mathbf1\rangle,
+ \qquad
+ d(\ker(C+J))=
+ \min\{d(\ker C),\ n-\maxwt(\ker C)\}.
+\]
+
+Column regularity forces every kernel word to have even parity; adding the
+constant word converts every odd-parity solution of \((C+J)x=0\) into a
+word of \(\ker C\).  Here \(\maxwt(D)=56\), so the complementary coset
+starts at weight 35 and the distance remains 28.  The construction is
+canonical and equivariant, not a choice of complement.
+
+This is not an unrestricted best-parameter code: the public binary-code table
+has lower and upper bounds 36 and 38 for \([91,15]\).  Its stronger claim is
+structural.  A complete audit constructs all seven
+\(S_4\backslash G/D_{24}\) cross-orbitals and exhausts all 127 nonzero binary
+sums in their cross-commutant.  No kernel has distance above 28, and none at
+distance 28 has dimension above 15; \(\ker(C+J)\) is the unique
+maximum-dimension code at that maximum distance.  The separate optimality
+certificate records the exact bounded search.  The
+resulting reusable level-up method is: select a sparse Hecke/Radon orbital,
+take its binary kernel, apply the parity-complement lift, and use its minimum
+orbit as a reconstruction carrier.
+
+The literal golden-field lift is obstructed.  Block elimination reduces the
+frame kernel to \(\ker(I-C^{\mathsf T}C)\).  Its nullities in
+characteristics 2, 5, and 13 are respectively 37, 13, and 0, and
+
+\[
+ |\det(C^{\mathsf T}C-I)|=2^{39}5^{13}.
+\]
+
+Hence scalar extension to \(\mathbf F_{169}\) still has zero kernel.  The
+binary code is an intrinsically characteristic-two torsion fibre, not a
+trace or subfield shadow of an \(\mathbf F_{169}\)-linear code.  The positive
+``project up'' operation is therefore the parity-complement/Hecke lift above,
+not golden Frobenius descent.
+
+The same-level operation does not iterate indefinitely.  In characteristic
+two, \((C+J)+J=C\), and the block metacode formed from \(C+J\) is exactly the
+minimum-shell span \([182,36,28]_2\): it removes the constant line and returns
+the nontrivial constituent already present.  Thus parity complementation is a
+canonical two-cycle/closure operation.  A genuinely higher step must change
+the homogeneous space, for example by using either weight-thirty-eight
+\(G/C_2\) orbit as a new 1092-row incidence layer.  That shell lift is a
+separate computation, not a consequence of the parity-complement theorem.
+
+That genuinely higher step is positive.  The weight-thirty-eight shell splits
+by half-weights into the two orbits \((17,21)\) and \((21,17)\), each of size
+1092.  For either orbit, transpose its 1092-by-182 support matrix and take the
+span of the 182 coordinate columns.  The resulting shell code has
+
+\[
+ \boxed{[1092,37,204]_2}.
+\]
+
+The two 91-element coordinate halves have weights 204 and 252, exchanged
+between the two orientations.  Exactly the 91 lighter columns are minimum
+words, and those 91 words already span dimension 37.  Thus the higher code's
+minimum shell canonically recovers one of the preceding 91-vertex frames.  Its
+all-ones word is already in that span.  Complementing the 182 incidence
+columns produces a 36-dimensional subspace, and adjoining the all-ones word
+recovers the original 37-space; the complemented subspace's distance is not
+yet computed.  Thus the operation again exposes the constant-line extension
+rather than creating a new 38-dimensional level.
+
+The minimum-distance proof is bounded but not a full \(2^{37}\)-by-1092
+sweep.  The checker extracts 25 pairwise-disjoint information sets of size 37.
+Any word of weight at most 204 restricts to weight at most eight on one such
+set; enumerating all restriction patterns of weights zero through eight over
+all 25 sets proves distance 204 and minimum multiplicity 91.  The construction
+therefore closes as a shell-correspondence cycle rather than an unbounded code
+tower:
+
+\[
+ 78\ \text{physical coordinates}
+ \longrightarrow 91\ \text{frames}
+ \longrightarrow 182\ \text{paired frames}
+ \longrightarrow 1092\ \text{shell objects}
+ \longrightarrow 91\ \text{recovered frames}.
+\]
+
+### Alternative ladders and the exceptional-series route
+
+The finite shell cycle also gives a negative theorem-shaped heuristic: with
+the group and its finite homogeneous spaces fixed, repeated orbit incidence
+cannot produce an asymptotic family.  The parity-complement operation is
+period two, and the next shell returns one of the preceding frames.  An
+infinite ladder must vary the group, the degree, or the covering object.
+
+The affine-\(E_8\) McKay recurrence is the strongest candidate for an
+infinite exceptional ladder.  Its all-degree third- and ninth-transvectant
+operators are bounded-width block recurrences whose combinatorial phases have
+period 60.  After reduction at a good prime and truncation or tail-biting,
+such a recurrence becomes a convolutional/quasi-cyclic parity-check system.
+C682's established rational statements supply the following coding roles to
+test after reduction:
+
+\[
+\begin{array}{c|c}
+\text{operator statement}&\text{coding statement}\\
+\hline
+\text{maximal rank}&\text{noncatastrophic local encoder}\\
+\text{boundary-quotient surjectivity}&\text{controllability}\\
+\text{unique continuation}&\text{observability / distance mechanism}\\
+\text{modulo-60 phases}&\text{tail-biting quasi-cyclic phases}\\
+\text{Smith and bad-prime data}&\text{characteristics where the encoder degenerates}
+\end{array}
+\]
+
+The caveat is substantive.  The global Weyl coefficients are polynomial in
+the invariant exponents, not constant with period 60; modulo \(p\) the
+coefficient system acquires an additional \(p\)-period.  Moreover, each
+fixed-degree transvectant kernel has dimension at most three, so using those
+kernels directly would give zero asymptotic rate.  A viable family must use a
+systematic graph realization \((x,Dx)\) or the already constructed
+boundary-quotient input/output system.  The bounded next experiment is to
+reduce its \(3|4|4\)-dimensional transfer matrices at the smallest good
+primes and compute graph-code column distances over one \(60p\)
+superperiod.  No \(\Theta(r)\) distance or positive-rate theorem is yet
+claimed.
+
+The finite exceptional ladder already gives an exact positive result.  The
+Cartan cubic's 45 tritangent monomials on the 27 minuscule \(E_6\) weights
+define a binary support-incidence kernel
+
+\[
+ \boxed{[27,6,12]_2},
+ \qquad
+ W(z)=1+36z^{12}+27z^{16}.
+\]
+
+The public table gives the exact unrestricted optimum \(d=12\) for
+\([27,6]\).  This is therefore an unrestricted parameter-optimal code
+produced by the same operator-support-to-kernel method; no novelty claim about
+the code's identity is made without a dedicated audit.
+
+More importantly for the series, this is not merely a good parameter match.
+The 36 weight-12 words are exactly the 36 Schläfli double-sixes, and they span
+the code.  Pair cooccurrence in this minimum shell has only two values: 8 on
+the 135 intersecting pairs of cubic-surface lines and 6 on the 216 skew pairs.
+Taking the 45 triangles of the recovered intersection graph returns exactly
+the original 45 tritangent planes.  Hence the shell alone reconstructs the
+full marked \(27\)-line/Cartan-support geometry:
+\[
+ \text{Cartan support}\longrightarrow[27,6,12]_2
+ \longrightarrow\text{double-sixes}
+ \longrightarrow\text{27 lines and 45 tritangents}.
+\]
+This is a literal \(E_6\) realization of Paper IV's
+operator-kernel-minimum-shell-reconstruction loop, and it lands at an
+unrestricted optimal code rather than only a symmetry-constrained optimum.
+
+Under \(E_6\times A_2\subset E_8\),
+
+\[
+ \mathfrak e_8=(78,1)\oplus(1,8)\oplus(27,3)
+ \oplus(27^\vee,3^\vee).
+\]
+
+The nonzero support of the grade-one bracket tensor consists of the 45
+tritangents times the six bijections to the three \(A_2\) colors.  Its 270
+weight-three checks on \(27\times3\) coordinates have binary kernel
+
+\[
+ \boxed{[81,8,36]_2},
+\]
+
+with weight enumerator
+\[
+ 1+36z^{36}+81z^{38}+108z^{42}+27z^{48}+3z^{54}.
+\]
+This is near-optimal, not SOTA: the exact unrestricted optimum at
+\([81,8]\) is 38.
+
+The computation exposes a reusable \(A_2\)-transversal lift theorem.  Let
+\(\mathcal H\) be a connected three-uniform hypergraph on \(n\) vertices,
+let \(D=\ker_{\mathbf F_2}I_{\mathcal H}=[n,k,d]\), and assume its
+two-section is connected.  Put one lifted check on every hyperedge and every
+bijection of its vertices to three colors.  Every lifted word has the unique
+form
+\[
+ x_{v,a}=u_v+s_a,\qquad
+ u\in D,\quad
+ s\in\{000,110,101,011\}.
+\]
+Consequently
+\[
+ K\cong D\oplus\mathbf F_2^2,\qquad
+ W_K(z)=W_D(z^3)+3\sum_{u\in D}z^{\,2n-\operatorname{wt}(u)},
+\]
+and
+\[
+ d(K)=\min\{3d(D),\,2n-\maxwt(D)\}.
+\]
+For the \(E_6\) tritangent code this forces distance 36.  Hence the support
+lift itself can never reach the \([81,8,38]\) optimum; the correct refinement
+is to linearize the signed operator
+\(\operatorname{ad}_z:(27,3)\to(27^\vee,3^\vee)\) at a canonical
+Clebsch/Coble seed and test its primewise rank-jump kernels and minimum shells.
+The 270 rows are support checks for a nonzero bracket tensor, not a scalar
+cubic on commuting \(27\otimes3\) variables.
+
+The arithmetic data point to one cheaper intermediate test.  The same
+transition determinant that kills the characteristic-13 lift leaves a
+13-dimensional characteristic-5 kernel.  Exact enumeration of the resulting
+five-ary code is feasible with a packed \(5^{13}\) sweep and would determine
+whether the bad-prime fibre is merely torsion or a useful higher-alphabet
+code.  This has a better chance of producing an unusual finite code than any
+further binary puncturing or Plotkin product of the present codes.
+
+The SOTA forecast is consequently layered.  The \([27,6,12]_2\) code is
+already unrestricted parameter-optimal.  The \([91,15,28]_2\) code is exact
+SOTA only in its full seven-orbital cross-commutant, and
+\([81,8,36]_2\) misses the unrestricted optimum by two.  The most plausible
+next exceptional improvement is the signed \(\operatorname{ad}_z\)
+81-carrier; the most plausible infinite-family result is free or column
+distance for the boundary-transfer McKay system.  Classical tensor products,
+Plotkin sums, ordinary residuals, and further fixed-\(G\) shell iteration all
+worsen the known rate-distance tradeoff and are low-priority routes.
+
+There is one credible unrestricted binary record attempt, but it changes the
+shape of the construction.  Regard a generator matrix of
+\([91,15,28]_2\) as 91 points in \(\operatorname{PG}(14,2)\), and append a
+multiset of new projective columns chosen to flatten the heaviest hyperplane
+sections.  In a fixed message basis, the 78 minimum words define the current
+worst hyperplanes.  Across all 32767 nonzero candidate column types, one
+column meets at most 52 of those 78 hyperplanes.  Therefore raising all current
+minimum words by \(\delta\) using \(m\) appended columns requires
+\[
+ 78\delta\le52m.
+\]
+This first-moment obstruction rules out record-level extensions at several
+nearer lengths and makes two larger gates sharp:
+
+- \(m=49\): test a \([140,15,60]_2\) completion; distance 61 is impossible
+  from this seed by the same inequality;
+- \(m=69\): test \([160,15,69]_2\), which would improve the public lower
+  bound 68 while remaining below the upper bound 72.
+
+The exact completion problem is a cutting-plane integer program.  With one
+nonnegative multiplicity \(x_a\) for each nonzero column type,
+\[
+ \sum_a x_a=m,\qquad
+ \operatorname{wt}_{\rm seed}(u)+
+ \sum_{a:u\cdot a=1}x_a\ge d
+\]
+for every nonzero message \(u\).  Separation is only a 32767-message scan.
+This is the best unrestricted-SOTA route found in the alternative-attack
+audit.  It need not preserve the full \(G\)-symmetry; an orbit-restricted solve
+is a useful warm start, while a genuine impossibility result requires the
+unrestricted column multiset.  The \(m=49,d=60\) gate is being used before
+the potential \(m=69,d=69\) record attempt.
 
 There is also a uniform group-theoretic complexity calculation.  Whenever
 the relevant octahedral subgroup exists, put
@@ -684,6 +991,23 @@ have the same rank-thirty-six constraint algebra and the same
 excitation spectra differ.  They are classical commuting-Pauli Hamiltonians,
 not by themselves quantum memories.
 
+The shorter toric kernel supplies a separate exact CSS code.  Every word of
+\(D=\ker C=[91,14,28]_2\) has weight divisible by four, so \(D\) is
+self-orthogonal.  Its 78 minimum words span it.  The 91 columns of a generator
+matrix are nonzero and pairwise distinct, while a cubic row of \(C\) lies in
+\(D^\perp\); hence \(d(D^\perp)=3\).  Taking \(D\) for both CSS check spaces
+therefore gives
+
+\[
+ [[91,63,3]]_2.
+\]
+
+This is a high-rate, exactly symmetric distance-three memory with a
+weight-twenty-eight stabilizer generating set, not a quantum-LDPC or
+best-parameter claim.  Its value is as the quantum shadow of the same
+minimum-shell carrier; the denser parity-complement lift contains the odd
+all-ones word and is not itself self-orthogonal.
+
 ### A finite hypergraph-product seed
 
 The symmetric \(182\)-square matrix \(H\) has rank \(145\), kernel dimension
@@ -837,13 +1161,15 @@ is preliminary.  A calibrated assessment is:
 \begin{array}{l|c|c}
 \text{application}&\text{present strength}&\text{with soundness/decoder}\\
 \hline
-\text{finite-geometry verification}&94&97\\
-\text{Paper-IV frame reconstruction}&91&95\\
+\text{finite-geometry verification}&97&98\\
+\text{Paper-IV frame reconstruction}&98&99\\
+\text{equivariant code construction}&93&96\\
+\text{exceptional-series code ladder}&96&98\\
 \text{symmetry-aware orbit archives}&88&93\\
 \text{classical redundant-syndrome decoding}&88&94\\
 \text{quantum syndrome validation}&75&90\\
 \text{batched simulation and decoder benchmarks}&86&91\\
-\text{finite quantum-LDPC seed}&55&68\\
+\text{finite quantum-code seeds}&64&72\\
 \text{quantum-walk and spectral model}&61&78\\
 \text{general-purpose bitmap compression}&43&55
 \end{array}
@@ -898,8 +1224,8 @@ hard-coded basis, and performs the three-word Gray sweep.  Replay its complete
 \(2^{37}\)-word certificate from the repository root with
 
 ```sh
-cargo run --release --manifest-path rust/Cargo.toml \
-  --bin c682_frame_metacode -- \
+make -C rust release
+rust/target/release/c682_frame_metacode \
   --bits 37 --low-bits 20 --self-check-bits 20 \
   --check notes/2026-08-04-c682-paper-iv-frame-metacode.json \
   > /tmp/c682-frame-metacode.json
@@ -911,20 +1237,123 @@ bounded from-scratch comparison covers \(2^{20}\) words; the full-run checks
 listed in the algorithmic section are independent invariants around the
 optimized sweep, not a second full implementation.
 
-This is one implementation with several independent invariant checks, not two
-independent implementations.  It proves the stated facts for the explicitly
-exhausted \(q=13\) group action.  A human double-coset proof of the two XOR
-identities remains desirable.  No novelty claim is made; the cubic coset graph
-and the associated Hecke/Radon transform require a literature audit before
-paper promotion.
+Replay the independent low-shell geometry and project-up certificates with
+
+```sh
+python3 notes/2026-08-04-c682-paper-iv-metacode-geometry.py \
+  --check notes/2026-08-04-c682-paper-iv-metacode-geometry.json
+sha256sum -c notes/2026-08-04-c682-paper-iv-metacode-geometry.sha256
+python3 notes/2026-08-04-c682-paper-iv-project-up.py \
+  --check notes/2026-08-04-c682-paper-iv-project-up.json
+sha256sum -c notes/2026-08-04-c682-paper-iv-project-up.sha256
+python3 notes/2026-08-04-paper-iv-project-up-optimality.py --check
+sha256sum -c notes/2026-08-04-paper-iv-project-up-optimality.sha256
+g++ -std=c++20 -O3 -march=native -fopenmp \
+  notes/2026-08-04-paper-iv-higher-shell.cpp \
+  -o /tmp/paper-iv-higher-shell
+OMP_NUM_THREADS=24 /tmp/paper-iv-higher-shell --check \
+  notes/2026-08-04-c682-paper-iv-frame-metacode.json \
+  notes/2026-08-04-c682-paper-iv-orbit-correspondence.json \
+  notes/2026-08-04-paper-iv-higher-shell.json
+sha256sum -c notes/2026-08-04-paper-iv-higher-shell.sha256
+python3 notes/2026-08-04-c682-e6-e8-code-ladder.py --check
+sha256sum -c notes/2026-08-04-c682-e6-e8-code-ladder.sha256
+```
+
+The geometry checker reconstructs the support matrices independently from the
+enumerator's recorded low-shell words.  The project-up checker uses direct
+binary elimination and complete enumeration of only \(2^{14}\) and
+\(2^{15}\) one-frame words, plus independent modular elimination and an exact
+Bareiss determinant.  The unrestricted \([91,15]\) comparison is contextual,
+not a novelty claim: the cited public table records a best-known distance 36
+and upper bound 38, against 28 here.  The optimality checker independently
+constructs all seven cross-orbitals, exhausts their 127 sums, uses complete
+Gray enumeration through dimension 29, and applies exact Hamming-volume
+bounds to every remaining kernel of dimension at least 40.
+The higher-shell checker uses 25 disjoint information sets per orientation to
+reduce the distance proof to 1,293,467,300 bounded restriction patterns each;
+its tracked report states the compiler/OpenMP trust boundary and the absence of
+a second full exhaustive implementation.  The exceptional-ladder checker
+independently reconstructs the Cartan supports, enumerates all 72 sixers and
+pairs them into the 36 double-sixes, compares them word-for-word with the
+minimum shell, and recovers the 45 tritangents from shell cooccurrences.  It
+derives the 81-coordinate kernel both from all 270 bracket-support checks and
+from the general \(A_2\)-transversal normal form.
+
+The corresponding source/output byte counts are: metacode enumerator 17195
+and JSON 436301; shell-geometry checker 8830 and JSON 1760; project-up checker
+13013 and JSON 6696; cross-commutant Python constructor 8968, Rust enumerator
+2670, and JSON 6331; higher-shell C++ checker 17789 and JSON 14749.  The
+exceptional-ladder checker is 12415 bytes and its JSON certificate is 2309
+bytes.  The adjacent checksum manifests pin every load-bearing file by
+SHA-256.
+
+The full \(2^{37}\) weight enumerator still has one optimized implementation
+with several independent invariant checks, not two full implementations.  Its
+minimum-shell interpretation is separately replayed from the recorded words,
+and the shorter project-up codes have independent complete enumerations.  The
+bundle proves the stated facts for the explicitly exhausted \(q=13\) group
+action.  A human double-coset proof of the two XOR identities remains
+desirable.  No novelty claim is made; the cubic coset graph and the associated
+Hecke/Radon transform require a literature audit before paper promotion.
+
+## EJ + TT closeout and mystery ledger
+
+The closeout pass asked whether the numerical coincidences were shadows of a
+larger operator theorem, whether the construction could be iterated, and which
+claims still depend on exhaustive computation.
+
+- **Settled — coordinate recovery.**  The 78 minimum metacode words are not
+  merely equal in number to the physical coordinates: equivariant transposition
+  reconstructs both Paper-IV support matrices exactly.
+- **Settled — the 2184-word coincidence.**  Weight 38 is not a regular
+  \(G\)-orbit.  It is two \(G/C_2\) orbits of size 1092.
+- **Settled — reusable level-up theorem.**  Parity complementation gives the
+  general odd-regular kernel theorem and the canonical \([91,15,28]_2\)
+  code.  Full cross-commutant exhaustion proves its exact constrained
+  optimality.
+- **Settled — literal golden lift.**  Characteristic 13 and therefore
+  \(\mathbf F_{169}\) have zero relevant kernel; the determinant has only
+  primes 2 and 5.  The binary code is not a golden trace/subfield code.
+- **Settled — higher iteration.**  The two weight-38 orbits yield
+  \([1092,37,204]_2\) shell codes whose 91 minimum words recover one frame.
+  Same-level parity complementation is period two, so the result is a finite
+  correspondence cycle rather than an unbounded tower.
+- **Settled — exceptional lift.**  The \(E_6\) tritangent kernel is the
+  unrestricted-optimal \([27,6,12]_2\) code.  Its minimum shell is exactly the
+  36 double-sixes and reconstructs all 27 lines and 45 tritangents.  The exact
+  \(A_2\)-transversal theorem gives the \(E_8\) bracket-support code
+  \([81,8,36]_2\) and proves why that unsigned lift cannot attain distance 38.
+- **Open — conceptual distance proof.**  The values 28 and 204 are certified
+  by exhaustive Gray enumeration and disjoint-information-set enumeration,
+  respectively.  A Hecke-module, design, or local-combinatorial proof is
+  absent; this is the principal theorem-quality evidence gap for a future
+  Paper-IV integration task.
+- **Open — representation-theoretic name.**  The \([91,14,28]_2\) toric
+  kernel has a concrete \(D_{28}\)-orbital minimum generator, but a
+  generator-free trace/cross-ratio description is still missing.
+- **Open — family theorem and novelty.**  The bidirectional cubic locality is
+  special to \(q=13\).  No all-\(q\) support theorem or literature-closed
+  novelty claim exists; both require a separately allocated successor before
+  manuscript promotion.
+- **Open — unrestricted record completion.**  The only surviving standard
+  record route is the exact projective-column ILP, first at
+  \([140,15,60]_2\) and then at the potential \([160,15,69]_2\) table
+  improvement.  Feasibility, a canonical generator, and a full novelty audit
+  are required before any record claim.
+- **Open — infinite McKay ladder.**  Fixed-degree kernels have zero
+  asymptotic rate.  The boundary-transfer graph code and signed
+  \(\operatorname{ad}_z\) carrier are the exact successors; neither has a
+  certified finite-field distance profile yet.
 
 ## Open questions
 
 1. Give a coordinate-free double-coset proof of the two neighbor-sum
    identities.
-2. Identify the fourteen-dimensional kernel of \(C\).  Its dimension equals
-   the number of conic points, but it is not the natural chord-endpoint cut
-   space; no abstract module identification is asserted.
+2. Give an intrinsic trace/cross-ratio characterization of the two
+   \(D_{28}\)-orbitals whose union is a minimum word of
+   \(\ker C=[91,14,28]_2\).  The exact code and its homogeneous minimum shell
+   are now known; only the generator-free orbital description remains.
 3. Decide whether the full minimum hypergraph canonically selects \(A_9\) and
    thereby rigidifies the Frobenius ambiguity of the recovered \(\mathbf F_8\).
 4. Determine whether the \(182\)-vertex cubic coset graph is classical.
@@ -941,11 +1370,16 @@ paper promotion.
 9. Decide whether the transition can be recovered in subquadratic time from
    the unlabelled minimum-support hypergraph, without first supplying the
    reconstructed \(G\)-action.
-10. Compute the exact real singular spectrum, Smith normal form, and integer
-    Markov basis of \(C\); these respectively control information contraction,
-    characteristic dependence, and the algebraic-statistical fibres.
+10. Complete the Smith normal form and integer Markov basis of \(C\).  The
+    determinant and characteristic-2/5/13 nullities now delimit the arithmetic
+    fibres; the real singular spectrum and integral elementary divisors remain
+    separate questions.
 11. Compute the frame metacode soundness and a practical decoder, then decide
     whether the redundant Pauli frames support useful measurement-error
     correction or a nontrivial CSS construction.
 12. Implement explicit-bitset, coset-generated, and packed-module kernels and
     benchmark frame conversion, batch syndrome evaluation, and archive size.
+13. Explain conceptually why each weight-38 \(G/C_2\) orbit produces the
+    \([1092,37,204]_2\) code and why its lighter 91-column half is the complete
+    minimum shell.  The exact finite closure cycle is certified; a
+    representation-theoretic distance proof is not.

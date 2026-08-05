@@ -3,7 +3,7 @@
 **Date:** 2026-08-04
 **Task:** C682
 **Lane:** `clebsch`
-**Status:** Draft — advisory; no manuscript, Lean, or release file changed by this document
+**Status:** Updated — exact operator bridge supersedes the original soft-framing recommendation; no manuscript, Lean, or release file changed by this document
 
 ## Problem
 
@@ -25,6 +25,103 @@ homogeneous space and three chord-indexed punctured conics. Why the exceptional
 non-dihedral marking is octahedral is left as a census observation.
 
 Those two problems have one answer.
+
+## Exact upgrade: minimum-shell reconstruction through the frame operator
+
+The original proposal below was deliberately weak: explain the missing
+icosahedral marking arithmetically and connect Papers I and IV only as opposite
+ends of the weight spectrum.  The subsequent exact computation found a much
+stronger bridge.
+
+Paper IV's octahedral and toric minimum-word orbits define a canonical cubic
+transition matrix \(C\).  Its bipartite frame operator
+
+\[
+ H=\begin{pmatrix}I&C\\ C^{\mathsf T}&I\end{pmatrix}
+\]
+
+has binary kernel \([182,37,28]_2\).  The 78 minimum words are exactly the
+paired columns of the two Paper-IV support matrices.  Conversely, starting
+only from the cubic frame graph, taking the minimum shell of \(\ker H\) and
+transposing its two halves reconstructs both support matrices and hence the
+original 78-coordinate Paper-IV geometry.  The minimum shell is the intrinsic
+homogeneous space \(\operatorname{PGL}_2(13)/D_{28}\), and its span is the
+canonical \([182,36,28]_2\) nontrivial constituent.
+
+This is a real invariant-operation connection to the series.  Papers I and IV
+now both recover their geometric carrier from an extremal code shell; Paper
+III supplies the program's operator-realization language; and Paper II's
+matching-quotient/Radon viewpoint supplies the correct setting for the sparse
+homogeneous transition.  No claim is made that this operator already recovers
+the oriented Clebsch cubic, so the final cubic edge remains dashed, but Paper
+IV is no longer connected merely by analogy or arithmetic absence.
+
+Projecting to one frame gives an additional theorem.  The toric kernel and its
+canonical parity-complement lift are
+
+\[
+ \ker C=[91,14,28]_2,
+ \qquad
+ \ker(C+J)=[91,15,28]_2.
+\]
+
+For every odd square incidence matrix with odd row and column degrees,
+\(\ker(C+J)=\ker C\oplus\langle\mathbf1\rangle\), with distance
+\(\min\{d, n-\maxwt\}\).  This reusable theorem preserves distance here,
+halves the metacode length, and retains the same 78-word minimum carrier.  It
+is not an unrestricted best-parameter code—the public \([91,15]\) lower bound
+is 36—but it is the unique maximum-dimension code at the maximum distance 28
+among kernels of all 127 nonzero sums in the seven-dimensional natural
+cross-commutant.
+
+The lift does not come from the golden extension field.  The relevant
+nullities in characteristics 2, 5, and 13 are 37, 13, and 0, with determinant
+\(2^{39}5^{13}\); scalar extension to \(\mathbf F_{169}\) therefore remains
+zero.  Nor does parity complementation itself create an infinite tower:
+applying it twice returns \(C\), while the block metacode of \(C+J\) returns
+the \([182,36,28]_2\) minimum-shell span.  Any next level must use a new shell
+homogeneous space.  Doing so with either weight-38 \(G/C_2\) orbit gives an
+exact \([1092,37,204]_2\) code.  Its 91 minimum words are precisely the
+lighter coordinate half and span the whole code, so its minimum shell recovers
+one preceding frame.  The process is therefore a finite
+\(78\to91\to182\to1092\to91\) shell-correspondence cycle, not an unbounded
+tower.
+
+The exceptional-series analog is now exact as well.  The 45 tritangent
+supports of the Cartan cubic on the 27 minuscule \(E_6\) weights have kernel
+\([27,6,12]_2\), meeting the unrestricted optimum for those parameters.  Its
+36 minimum words are exactly the 36 Schläfli double-sixes.  They span the code,
+and their pair-cooccurrence relation reconstructs all 27 cubic-surface lines
+and all 45 tritangent planes.  Thus this is the same full loop as Paper IV:
+canonical invariant-operation support, kernel code, homogeneous minimum shell,
+and recovery of the original carrier geometry.  The actual
+\(E_6\times A_2\subset E_8\) bracket-support lift on \(27\times3\) coordinates
+gives \([81,8,36]_2\), two below the unrestricted optimum, and proves a general
+\(A_2\)-transversal lift formula
+\[
+ d_{\rm lift}=\min\{3d,\,2n-\maxwt\}.
+\]
+Thus the Paper-IV operator-support method does project upward through the
+same \(E_6/E_8\) architecture used elsewhere in the series.  The support lift
+itself cannot gain the missing two units at length 81; the next exact target
+is the signed linearization
+\(\operatorname{ad}_z:(27,3)\to(27^\vee,3^\vee)\), not another unsigned
+incidence matrix.
+
+Separately, the best unrestricted-record attack found from the Paper-IV seed
+is a projective column completion of \([91,15,28]_2\).  The sharp preliminary
+gates are \([140,15,60]_2\), followed—if feasible—by
+\([160,15,69]_2\), which would improve the current public lower bound 68.
+This extension problem is an exact 32767-type cutting-plane integer program,
+not a claim that the present code is already record-setting.
+
+The exact report, replay commands, certificates, algorithmic consequences,
+information-geometric formulation, physical interpretation, and compact-data
+structure analysis are in
+`notes/2026-08-04-c682-paper-iv-orbit-correspondence.md`.  This exact bridge is
+now the primary recommendation.  The original Approaches A and B below remain
+useful as lightweight exposition around it; Approach C is no longer the right
+mathematical diagnosis.
 
 ## Context
 
@@ -239,9 +336,11 @@ boundary.
 
 ## Recommendation
 
-**Approach A, with Approach B applied alongside it.** They are complementary
-rather than competing: A repairs the paper, B repairs the packaging, and
-together they cost one remark and a few sentences of front matter.
+**Superseded by the exact frame-operator bridge above.** Approach A, with
+Approach B alongside it, remains the low-cost expository layer: A explains the
+arithmetic branch and B explains the weight-spectrum opposition.  They should
+now support the minimum-shell reconstruction theorem rather than carry Paper
+IV's series membership by themselves.
 
 Justification:
 
