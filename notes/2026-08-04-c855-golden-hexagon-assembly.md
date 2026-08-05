@@ -25,6 +25,12 @@ the point list. In particular the ground field contains a golden root whenever s
 This is the whole of the equality classification except its final order-eleven step: identifying
 the golden hexagon with the displayed witness `Examples.q11Witness`.
 
+The corollary `exists_golden_root` records the field consequence on its own: over a field in which
+two is invertible, a six-arc with ten triple-concurrence points exists only if `x² = x + 1` is
+solvable there. Contrapositively the bound of ten is unattainable whenever five is a nonsquare and
+the characteristic is not five — an exclusion for other orders that costs nothing here, since the
+normal form already produces the root.
+
 ## How the four concurrences are produced
 
 The three inputs were already in place. Equality in the ten-point bound makes the chord matchings

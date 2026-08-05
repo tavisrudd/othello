@@ -302,6 +302,19 @@ theorem exists_golden_frame (h2 : (2 : K) ≠ 0)
   rw [hu0', hu1', hu2', hv2', hv4', hv6', hAval]
   exact sextuple_cycle_last_three
 
+/-- **A six-arc attaining the ten-point concurrence bound forces a golden root in the ground
+field.**  If the projective plane over a field in which two is invertible carries a six-arc with
+exactly ten triple-concurrence points, then `x² = x + 1` is solvable in that field.  Contrapositively
+the bound of ten is not attained over a field in which five is a nonsquare and the characteristic is
+not five. -/
+theorem exists_golden_root (h2 : (2 : K) ≠ 0)
+    {A : Finset (ProjectiveBridge.Point K)}
+    (hA : Arc (L := ProjectiveBridge.Point K) A) (hcard : A.card = 6)
+    (hten : (SixArcConcurrence.triplePoints (L := ProjectiveBridge.Point K) A).card = 10) :
+    ∃ φ : K, φ * φ = φ + 1 := by
+  obtain ⟨_u, _hu, φ, hφ, _⟩ := exists_golden_frame h2 hA hcard hten
+  exact ⟨φ, hφ⟩
+
 end Coordinate
 end SixArcGoldenNormalForm
 end RelativeConicArcs
