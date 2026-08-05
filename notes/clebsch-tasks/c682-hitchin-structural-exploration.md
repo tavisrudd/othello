@@ -333,12 +333,22 @@ explicitly separated.
   \(\operatorname{ad}_z\) linearization is the next finite exceptional gate;
   the \(3|4|4\) boundary-transfer matrices, rather than fixed-degree kernels,
   are the viable positive-rate McKay/convolutional gate.
+- The intervening \(E_7\) level is stronger: the 28 bitangents carry the
+  unrestricted-optimal and dimension-maximal \([28,7,12]_2\) code, whose 63
+  minimum words are the Steiner complexes.  Shortening any bitangent gives
+  the exact \(E_6\) code and sends the 36 surviving minimum words to the
+  double-sixes.  Its dual \([28,21,4]\) has 315 syzygetic tetrads and gives
+  CSS \([[28,14,4]]\); those tetrads prove that no fixed-rate CSS construction
+  retaining the \(E_7\) half can attain distance five.  The signed 56-weight
+  \(\mathbf F_4\) phase lift is the next finite quantum gate.
 - Standard propagation constructions from \([91,15,28]_2\) are far below
   current unrestricted tables.  The one credible record attempt is a
   projective-system column completion: first test \([140,15,60]_2\), then
   \([160,15,69]_2\), which would improve the current public lower bound 68.
   The exact cutting-plane ILP has 32767 column types and 32767 message
-  constraints.
+  constraints.  Its first gate is now closed negatively: an exact Farkas
+  certificate rules out even a fractional \([140,15,60]_2\) completion.  The
+  independent \([160,15,69]_2\) target remains untested and lower priority.
 
 ## Active order
 
@@ -355,10 +365,11 @@ closed, including the exact integral index-four comparison at degree ten.
 A preprojective-corner identification remains the nearby optional successor
 on the original Hitchin branch.  On the new Paper-IV branch, the highest-value
 optional successor is a conceptual Hecke/design proof of distances 28 and 204,
-or the signed \(E_8\) linearization \(\operatorname{ad}_z\) at the canonical
-Clebsch/Coble seed, followed by a claim-specific literature audit and an
-explicit manuscript-promotion decision.  C682 remains open exploration, with
-completion or selection of either successor left to the user.
+the signed 56-weight \(E_7\to E_8\) phase lift, or the signed \(E_8\)
+linearization \(\operatorname{ad}_z\) at the canonical Clebsch/Coble seed,
+followed by a claim-specific literature audit and an explicit
+manuscript-promotion decision.  C682 remains open exploration, with completion
+or selection of a successor left to the user.
 
 ## Parked branches
 

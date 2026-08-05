@@ -108,12 +108,31 @@ is the signed linearization
 \(\operatorname{ad}_z:(27,3)\to(27^\vee,3^\vee)\), not another unsigned
 incidence matrix.
 
-Separately, the best unrestricted-record attack found from the Paper-IV seed
-is a projective column completion of \([91,15,28]_2\).  The sharp preliminary
-gates are \([140,15,60]_2\), followed—if feasible—by
-\([160,15,69]_2\), which would improve the current public lower bound 68.
-This extension problem is an exact 32767-type cutting-plane integer program,
-not a claim that the present code is already record-setting.
+There is now a stronger intervening exceptional link.  The 28 bitangents,
+viewed as the odd quadratic refinements of a six-dimensional symplectic
+binary space, carry the optimal and dimension-maximal (E_7) code
+\[
+ [28,7,12]_2,qquad 1+63z^{12}+63z^{16}+z^{28}.
+\]
+Its 63 minimum words are the Steiner complexes.  Shortening at any bitangent
+gives the exact (E_6) tritangent code, and the 36 surviving Steiner
+complexes become the double-sixes.  Thus the clean finite ladder is
+\[
+ E_7:[28,7,12]\longrightarrow E_6:[27,6,12]
+\]
+by a one-coordinate, one-dimension shortening that preserves minimum
+distance and unrestricted optimality.  The dual shell consists of 315
+syzygetic tetrads.  They force the associated CSS code to
+\([[28,14,4]]\); a fixed-rate CSS construction retaining the (E_7) half
+cannot reach five because its opposite seven-space cannot contain all 315
+tetrads.  A signed 56-weight/Freudenthal phase lift over \(\mathbf F_4\) is
+the correct next quantum test.
+
+Separately, the projective-column completion of \([91,15,28]_2\) has failed
+its first exact record gate.  An integer Farkas certificate rules out even a
+fractional 49-column completion to \([140,15,60]_2\) after checking all 32767
+column types.  The independent \([160,15,69]_2\) target was not run and
+remains lower priority.
 
 The exact report, replay commands, certificates, algorithmic consequences,
 information-geometric formulation, physical interpretation, and compact-data

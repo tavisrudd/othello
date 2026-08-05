@@ -684,6 +684,36 @@ This is a literal \(E_6\) realization of Paper IV's
 operator-kernel-minimum-shell-reconstruction loop, and it lands at an
 unrestricted optimal code rather than only a symmetry-constrained optimum.
 
+The next finite exceptional level preserves the optimum exactly.  On the 28
+odd quadratic refinements of a six-dimensional symplectic binary space—the
+28 bitangents—the affine-function code is
+\[
+ \boxed{[28,7,12]_2},\qquad
+ W(z)=1+63z^{12}+63z^{16}+z^{28}.
+\]
+Its 63 minimum words are the Steiner complexes and form a
+\(2\)-\((28,12,11)\) design.  Their pairwise intersections, of size 4 or 6,
+recover the symplectic pairing on the 63 nonzero vectors.  Shortening at any
+bitangent gives \([27,6,12]_2\); an explicit shell-derived coordinate
+isomorphism identifies it word-for-word with the Cartan-tritangent code, and
+the 36 surviving minimum words are the double-sixes.  Griesmer proves
+distance optimality, while the exact \([28,8,11]\) bound proves that this is
+also dimension-maximal at distance 12.  Thus
+\[
+ E_7:[28,7,12]\ \xrightarrow{\text{shorten one bitangent}}\
+ E_6:[27,6,12]
+\]
+is the first exact optimality-preserving exceptional code ladder.
+
+The \(E_7\) code is self-orthogonal with dual \([28,21,4]\); the 315
+weight-four dual words are the syzygetic tetrads, giving a CSS
+\([[28,14,4]]\) code.  This is one below the known stabilizer distance 5.
+The gap cannot be closed at fixed \([[28,14]]\) while retaining the \(E_7\)
+code as a CSS half: a seven-dimensional opposite half contains at most 127
+nonzero words and cannot absorb all 315 tetrads.  The correct quantum attack
+is a signed \(\mathbf F_4\)/Pauli phase lift on the 56 antipodal \(E_7\)
+weights, not another unsigned CSS incidence construction.
+
 Under \(E_6\times A_2\subset E_8\),
 
 \[
@@ -743,8 +773,9 @@ code.  This has a better chance of producing an unusual finite code than any
 further binary puncturing or Plotkin product of the present codes.
 
 The SOTA forecast is consequently layered.  The \([27,6,12]_2\) code is
-already unrestricted parameter-optimal.  The \([91,15,28]_2\) code is exact
-SOTA only in its full seven-orbital cross-commutant, and
+the shortening of the unrestricted-optimal and dimension-maximal
+\([28,7,12]_2\) \(E_7\) code.  The \([91,15,28]_2\) code is exact SOTA only
+in its full seven-orbital cross-commutant, and
 \([81,8,36]_2\) misses the unrestricted optimum by two.  The most plausible
 next exceptional improvement is the signed \(\operatorname{ad}_z\)
 81-carrier; the most plausible infinite-family result is free or column
@@ -752,8 +783,8 @@ distance for the boundary-transfer McKay system.  Classical tensor products,
 Plotkin sums, ordinary residuals, and further fixed-\(G\) shell iteration all
 worsen the known rate-distance tradeoff and are low-priority routes.
 
-There is one credible unrestricted binary record attempt, but it changes the
-shape of the construction.  Regard a generator matrix of
+The one credible unrestricted binary record attempt changes the shape of the
+construction, but its first exact gate is now closed negatively.  Regard a generator matrix of
 \([91,15,28]_2\) as 91 points in \(\operatorname{PG}(14,2)\), and append a
 multiset of new projective columns chosen to flatten the heaviest hyperplane
 sections.  In a fixed message basis, the 78 minimum words define the current
@@ -764,12 +795,20 @@ minimum words by \(\delta\) using \(m\) appended columns requires
  78\delta\le52m.
 \]
 This first-moment obstruction rules out record-level extensions at several
-nearer lengths and makes two larger gates sharp:
+nearer lengths and originally left two larger gates:
 
 - \(m=49\): test a \([140,15,60]_2\) completion; distance 61 is impossible
   from this seed by the same inequality;
 - \(m=69\): test \([160,15,69]_2\), which would improve the public lower
   bound 68 while remaining below the upper bound 72.
+
+The first gate is in fact impossible in the stronger fractional relaxation.
+An exact 100-row integer Farkas certificate combines the length equation, the
+aggregate minimum-shell cut, all 78 minimum-word inequalities, and 20
+weight-36 inequalities.  Its combined right side is 1321, while its
+coefficient on every one of the 32767 nonzero column types is nonpositive
+(maximum 0, minimum \(-4919\)).  Hence no nonnegative real, and therefore no
+integer, 49-column completion to \([140,15,60]_2\) exists from this seed.
 
 The exact completion problem is a cutting-plane integer program.  With one
 nonnegative multiplicity \(x_a\) for each nonzero column type,
@@ -779,11 +818,12 @@ nonnegative multiplicity \(x_a\) for each nonzero column type,
  \sum_{a:u\cdot a=1}x_a\ge d
 \]
 for every nonzero message \(u\).  Separation is only a 32767-message scan.
-This is the best unrestricted-SOTA route found in the alternative-attack
-audit.  It need not preserve the full \(G\)-symmetry; an orbit-restricted solve
-is a useful warm start, while a genuine impossibility result requires the
-unrestricted column multiset.  The \(m=49,d=60\) gate is being used before
-the potential \(m=69,d=69\) record attempt.
+The \([160,15,69]_2\) target is not ruled out by the 49-column certificate,
+but was not run because the experiment was explicitly gated on success at
+140.  It remains a lower-priority independent completion problem.  It need
+not preserve the full \(G\)-symmetry; an orbit-restricted solve is a useful
+warm start, while a genuine impossibility result requires the unrestricted
+column multiset.
 
 There is also a uniform group-theoretic complexity calculation.  Whenever
 the relevant octahedral subgroup exists, put
@@ -1258,6 +1298,10 @@ OMP_NUM_THREADS=24 /tmp/paper-iv-higher-shell --check \
 sha256sum -c notes/2026-08-04-paper-iv-higher-shell.sha256
 python3 notes/2026-08-04-c682-e6-e8-code-ladder.py --check
 sha256sum -c notes/2026-08-04-c682-e6-e8-code-ladder.sha256
+python3 notes/2026-08-04-c682-e7-bitangent-extension.py --check
+sha256sum -c notes/2026-08-04-c682-e7-bitangent-extension.sha256
+python3 notes/2026-08-04-paper-iv-column-extension-obstruction.py --check
+sha256sum -c notes/2026-08-04-paper-iv-column-extension-obstruction.sha256
 ```
 
 The geometry checker reconstructs the support matrices independently from the
@@ -1278,15 +1322,19 @@ independently reconstructs the Cartan supports, enumerates all 72 sixers and
 pairs them into the 36 double-sixes, compares them word-for-word with the
 minimum shell, and recovers the 45 tritangents from shell cooccurrences.  It
 derives the 81-coordinate kernel both from all 270 bracket-support checks and
-from the general \(A_2\)-transversal normal form.
+from the general \(A_2\)-transversal normal form.  The \(E_7\) checker
+constructs all quadratic refinements and Steiner complexes independently,
+tests every shortening, and finds a shell-derived coordinate isomorphism to
+the Cartan code.  The column-extension checker verifies the integer Farkas
+combination against all 32767 column types without solver trust.
 
 The corresponding source/output byte counts are: metacode enumerator 17195
 and JSON 436301; shell-geometry checker 8830 and JSON 1760; project-up checker
 13013 and JSON 6696; cross-commutant Python constructor 8968, Rust enumerator
 2670, and JSON 6331; higher-shell C++ checker 17789 and JSON 14749.  The
 exceptional-ladder checker is 12415 bytes and its JSON certificate is 2309
-bytes.  The adjacent checksum manifests pin every load-bearing file by
-SHA-256.
+bytes; the \(E_7\) checker and JSON certificate are 13886 and 2239 bytes.
+The adjacent checksum manifests pin every load-bearing file by SHA-256.
 
 The full \(2^{37}\) weight enumerator still has one optimized implementation
 with several independent invariant checks, not two full implementations.  Its
@@ -1324,6 +1372,11 @@ claims still depend on exhaustive computation.
   36 double-sixes and reconstructs all 27 lines and 45 tritangents.  The exact
   \(A_2\)-transversal theorem gives the \(E_8\) bracket-support code
   \([81,8,36]_2\) and proves why that unsigned lift cannot attain distance 38.
+- **Settled — optimal exceptional extension.**  The \(E_7\) bitangent code is
+  the optimal and dimension-maximal \([28,7,12]_2\) code; shortening any
+  coordinate gives the exact \(E_6\) code.  Its Steiner minimum shell recovers
+  the symplectic geometry, and its 315 dual tetrads explain the CSS distance-4
+  ceiling at fixed \([[28,14]]\).
 - **Open — conceptual distance proof.**  The values 28 and 204 are certified
   by exhaustive Gray enumeration and disjoint-information-set enumeration,
   respectively.  A Hecke-module, design, or local-combinatorial proof is
@@ -1336,11 +1389,10 @@ claims still depend on exhaustive computation.
   special to \(q=13\).  No all-\(q\) support theorem or literature-closed
   novelty claim exists; both require a separately allocated successor before
   manuscript promotion.
-- **Open — unrestricted record completion.**  The only surviving standard
-  record route is the exact projective-column ILP, first at
-  \([140,15,60]_2\) and then at the potential \([160,15,69]_2\) table
-  improvement.  Feasibility, a canonical generator, and a full novelty audit
-  are required before any record claim.
+- **Settled — first unrestricted completion gate.**  An exact Farkas
+  certificate rules out even a fractional 49-column completion to
+  \([140,15,60]_2\).  The unrelated \([160,15,69]_2\) completion remains
+  untested and lower priority.
 - **Open — infinite McKay ladder.**  Fixed-degree kernels have zero
   asymptotic rate.  The boundary-transfer graph code and signed
   \(\operatorname{ad}_z\) carrier are the exact successors; neither has a
