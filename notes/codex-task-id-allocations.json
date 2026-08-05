@@ -2690,8 +2690,17 @@
       "last": 864,
       "purpose": "finish external certificate packaging and audit all certificate families",
       "sequence": 299
+    },
+    {
+      "count": 2,
+      "first": 865,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 866,
+      "purpose": "E9 affine level code; literature/novelty audit of the E6-E7-E8-E9 exceptional code ladder",
+      "sequence": 300
     }
   ],
-  "next_id": 865,
+  "next_id": 867,
   "schema": "codex-task-id-allocations-v1"
 }

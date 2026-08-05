@@ -1,0 +1,82 @@
+{
+  "e9_code": {
+    "carrier": "240 nonsingular vectors of E9/2E9, the mod-2 images of the real affine roots alpha + n.delta of the affine E8 root system",
+    "css_parameters": [
+      240,
+      220,
+      4
+    ],
+    "doubly_even": true,
+    "dual_parameters": [
+      240,
+      230,
+      4
+    ],
+    "dual_tetrad_count": 264180,
+    "parameters": [
+      240,
+      10,
+      112
+    ],
+    "radical_generator_is_isotropic": true,
+    "self_orthogonal": true,
+    "weight_enumerator": {
+      "0": 1,
+      "112": 255,
+      "120": 512,
+      "128": 255,
+      "240": 1
+    }
+  },
+  "input_sha256": {
+    "2026-08-05-c682-e8-root-pair-ladder.py": "23bc273e3ac891ddcfbd6e0bd6d1192c5afb227c375226f148905fa6b3d5f1e6"
+  },
+  "level_fold": {
+    "folded_parameters": [
+      120,
+      9,
+      56
+    ],
+    "folded_weight_enumerator": {
+      "0": 1,
+      "120": 1,
+      "56": 255,
+      "64": 255
+    },
+    "matches_c682_packed_code": true,
+    "pairs": 120
+  },
+  "optimality": {
+    "attains_best_known": false,
+    "codetables_240_10": {
+      "exact": false,
+      "lower": 114,
+      "upper": 116
+    },
+    "gap_to_best_known_lower_bound": 2,
+    "note": "the affine level step does not preserve unrestricted optimality; the Plotkin partner [120,1,120] over-delivers while the doubled E8 distance 112 falls below the [240,10] record range 114-116"
+  },
+  "plotkin_identity": {
+    "components": [
+      [
+        120,
+        9,
+        56
+      ],
+      [
+        120,
+        1,
+        120
+      ]
+    ],
+    "distance": 112,
+    "exact_set_equality": true,
+    "form": "|u|u+v| with u in the E8 code and v in the repetition code"
+  },
+  "series_ladder": [
+    "E9 [240,10,112] affine real-root code",
+    "E8 [120,9,56] root-pair code by the level fold",
+    "E7 [28,7,12] bitangent code by the root-link antipodal fold",
+    "E6 [27,6,12] tritangent code by shortening"
+  ]
+}
