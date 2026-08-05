@@ -1337,3 +1337,45 @@ and their six scalar identities are kernel-checked in
 general field.
 
 **Status:** open; not required by any allocated task.
+
+### 2026-08-05 — the fold's parent theorem is combinatorial, so a non-quadratic tower may exist
+
+**Provenance:** C873 triangulation of Brouwer and Shult (1990), reported in
+`2026-08-05-c873-brouwer-shult-triangulation.md`, via the zbMATH review
+(reviewer Hao Li) held at `review only`.
+
+**Was I looking for this?:** no — the audit question was the scope of the
+hypothesis in the Taylor-extension proposition, in order to decide whether our
+code-level fold said anything the graph-level statement did not.
+
+**Observed / musing:** the theorem the fold specialises is not about quadratic
+forms at all. It works with arbitrary finite graphs and a coclique-parity
+condition, and its main statement is a biconditional: a graph is non-empty,
+reduced and satisfies that condition if and only if it is the Taylor double of a
+smaller graph with a point adjoined. Quadrics, field, type and rank enter only
+when the theorem is applied to a family. So the whole exceptional ladder is one
+application of a combinatorial characterisation, and the orthogonal geometry is
+scenery rather than mechanism.
+
+**Why it may matter / strongest question:** the natural generalisation is
+combinatorial, not geometric. Any family satisfying the odd-coclique condition
+folds. A family that satisfies it and is **not** of quadratic-form type would
+give a tower outside the two-weight setting, which is where a genuinely new
+statement would live — as opposed to our tower, which is a known family related
+by a known operation. The strongest question: does such a family exist with
+codes attached, and does the affine-function construction have an analogue there?
+
+**Structural mechanism:** the coclique-parity condition alone; the antipodal
+double cover it forces is what our fold inverts.
+
+**Discriminator / falsifier:** exhibit one family satisfying the condition whose
+members are not nonsingular-point graphs of quadratic forms over a finite field.
+If every such family turns out to be of quadratic-form type, or if the known
+examples are already catalogued alongside the orthogonal ones, the lead is dead
+and the baseline already captures it.
+
+**Evidence:** OPEN — rests on a `review only` characterisation of the parent
+theorem; the 1990 paper was not obtained, and no search for such a family has
+been run.
+
+**Status:** open lead; allocates nothing.

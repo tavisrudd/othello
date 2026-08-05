@@ -1089,8 +1089,18 @@ Current state:
   type-general and runs exactly parallel to the graph statement (C872). What
   survives of the fold is the code-level restatement alone. Brouwer and Shult
   (1990) is still worth obtaining, now to pin the scope of a known result rather
-  than to decide a claim of ours; that is delegated as C873 by triangulation
-  through later citing literature. The
+  than to decide a claim of ours. C873 settled that by triangulation: the
+  Brouwer--Shult theorem is not about quadratic forms at all. It concerns
+  arbitrary finite graphs under a coclique-parity condition, and its main
+  statement is a biconditional — a non-empty reduced graph satisfies that
+  condition exactly when it is the Taylor double of a smaller graph with a point
+  adjoined. Type and rank never arise in the theorem; they enter only on
+  application to a family. Two consequences bind any write-up. **Citation rule:**
+  cite Brouwer and Van Maldeghem Proposition 3.6.1, which was read, and name
+  Brouwer and Shult as its source; do not cite the 1990 paper directly for the
+  identities, which was never obtained. **No converse fallback:** the converse is
+  the biconditional itself, at arbitrary-graph generality, so it subsumes any
+  binary instance we could prove. The
   level codes are Calderbank--Kantor two-weight codes (C866). The fold itself is
   Brouwer--Shult 1990, stated at general rank as Proposition 3.6.1 of Brouwer
   and Van Maldeghem's *Strongly Regular Graphs*: in the graph on the nonsingular
