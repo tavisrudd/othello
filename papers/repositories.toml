@@ -332,3 +332,10 @@ old = "passant_code_q13.pdf: $(SOURCE)\n\tpython3 ../scripts/lint_tex_spacing.py
 new = "passant_code_q13.pdf: $(SOURCE)\n"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "math-papers-summary"
+include_release_pdfs = false
+source = "papers/summary"
+paper_ids = []
+disposition = "active"
