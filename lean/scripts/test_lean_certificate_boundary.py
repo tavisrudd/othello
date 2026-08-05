@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import subprocess
 import sys
 import tempfile
@@ -64,12 +65,40 @@ forbidden_artifact_basenames = ["generator.cpp"]
             self.assertIn("imports Example.Generated.Leaf", result.stdout)
             self.assertIn("generator.cpp", result.stdout)
 
-    def make_library(self, root: Path, libraries: Path, *, fact: str = "{}\n") -> Path:
+    def test_owned_module_source_in_the_monorepo_fails(self) -> None:
+        """The return path that matters most: the payload comes back as monorepo source."""
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make_repo(directory)
+            leaf = root / "lean/Example/Generated/Leaf.lean"
+            leaf.parent.mkdir(parents=True)
+            leaf.write_text("theorem row_0 : True := trivial\n", encoding="utf-8")
+            result = self.run_check(root)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("module belongs to certs", result.stdout)
+
+    def make_library(
+        self,
+        root: Path,
+        libraries: Path,
+        *,
+        fact: str = "{}\n",
+        sources: dict[str, str] | None = None,
+    ) -> Path:
         """An official checkout whose published trust fact the monorepo pins."""
         package = libraries / "certs"
         package.mkdir(parents=True)
         subprocess.run(["git", "init", "-q"], cwd=package, check=True)
-        (package / "MANIFEST.json").write_text('{"sources": []}\n', encoding="utf-8")
+        entries = []
+        for relative, text in (sources or {}).items():
+            source = package / relative
+            source.parent.mkdir(parents=True, exist_ok=True)
+            source.write_text(text, encoding="utf-8")
+            entries.append(
+                {"path": relative, "sha256": hashlib.sha256(text.encode()).hexdigest()}
+            )
+        (package / "MANIFEST.json").write_text(
+            json.dumps({"sources": entries}) + "\n", encoding="utf-8"
+        )
         (package / "TRUST_FACT.json").write_text(fact, encoding="utf-8")
         subprocess.run(["git", "add", "-A"], cwd=package, check=True, capture_output=True)
         subprocess.run(
@@ -153,6 +182,70 @@ forbidden_artifact_basenames = ["generator.cpp"]
             result = self.run_library_check(root, libraries)
             self.assertEqual(result.returncode, 1)
             self.assertIn("the pinned copy is missing", result.stdout)
+
+    def edit_pin(self, root: Path, old: str, new: str) -> None:
+        config = root / "lean/trust/certificate-packages.toml"
+        config.write_text(
+            config.read_text(encoding="utf-8").replace(old, new), encoding="utf-8"
+        )
+
+    def test_edited_commit_pin_fails(self) -> None:
+        """A pin moved off the revision the checkout actually holds."""
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make_repo(directory)
+            libraries = Path(directory) / "libraries"
+            package = self.make_library(root, libraries, fact='{"package": "certs"}\n')
+            pinned = root / "lean/trust/external/certs.json"
+            pinned.parent.mkdir(parents=True)
+            pinned.write_text('{"package": "certs"}\n', encoding="utf-8")
+            head = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=package,
+                check=True,
+                text=True,
+                capture_output=True,
+            ).stdout.strip()
+            self.edit_pin(root, head, "f" * 40)
+            result = self.run_library_check(root, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("does not match pin", result.stdout)
+
+    def test_edited_manifest_hash_pin_fails(self) -> None:
+        """A manifest reseal that the monorepo's pin was not updated to follow."""
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make_repo(directory)
+            libraries = Path(directory) / "libraries"
+            package = self.make_library(root, libraries, fact='{"package": "certs"}\n')
+            pinned = root / "lean/trust/external/certs.json"
+            pinned.parent.mkdir(parents=True)
+            pinned.write_text('{"package": "certs"}\n', encoding="utf-8")
+            (package / "MANIFEST.json").write_text(
+                '{"sources": [], "resealed": true}\n', encoding="utf-8"
+            )
+            result = self.run_library_check(root, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("hash does not match the monorepo pin", result.stdout)
+
+    def test_sealed_source_altered_in_the_package_fails(self) -> None:
+        """A generated leaf edited in the official checkout after its seal."""
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make_repo(directory)
+            libraries = Path(directory) / "libraries"
+            package = self.make_library(
+                root,
+                libraries,
+                fact='{"package": "certs"}\n',
+                sources={"Example/Generated/Leaf.lean": "theorem row_0 : True := trivial\n"},
+            )
+            pinned = root / "lean/trust/external/certs.json"
+            pinned.parent.mkdir(parents=True)
+            pinned.write_text('{"package": "certs"}\n', encoding="utf-8")
+            (package / "Example/Generated/Leaf.lean").write_text(
+                "theorem row_0 : True := by trivial\n", encoding="utf-8"
+            )
+            result = self.run_library_check(root, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("differs from the sealed source", result.stdout)
 
     def test_package_publishing_no_trust_fact_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

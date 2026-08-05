@@ -296,9 +296,16 @@ Runnable now, in order:
    below.  Report: `notes/2026-08-05-c864-q11-package-source-audit.md`.  Re-run it immediately
    before the remaining order-eleven cut: nothing but this audit detects drift in those seven
    duplicated sources, and the area is under active edit.
-2. **Adversarial boundary-checker fixtures.**  Execution-order step 8's permanent test: a novel
-   generated family, an imported external certificate leaf, a copied generator, and an edited
-   package pin must each be rejected.  Python only, no Lean and no shared state.
+2. **Adversarial boundary-checker fixtures.**  Three of step 8's four return paths are covered and
+   green: the payload returning as monorepo source, an imported external leaf, a copied generator
+   under a declared name, and all three edited-pin paths — moved commit pin, unfollowed manifest
+   reseal, and a sealed source altered inside the official checkout.  The fourth, a novel generated
+   family, needs a generated-banner detection rule plus a declared pending-family allowlist, because
+   the monorepo currently carries 9,332 banner-bearing Lean files and an unqualified rule would turn
+   the gate red across the tree.  That changes what the boundary gate asserts, so it is surfaced for
+   a decision rather than taken; the allowlist would double as completion evidence, since it is
+   empty only when every family has been externalized.  Report:
+   `notes/2026-08-05-c864-boundary-checker-fixtures.md`.
 3. **Split-line planning for the remaining order-eleven families** — coding, Brianchon--Petersen,
    decoding synthesis.  Read-only inventory and import-DAG analysis producing a proposed boundary;
    execution waits, because the remediation is editing the same area.
