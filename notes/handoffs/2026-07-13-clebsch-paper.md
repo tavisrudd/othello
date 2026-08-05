@@ -1057,13 +1057,22 @@ Clebsch I under-attributes the same material.
 
 Audited in C869, report `../2026-08-05-c869-paper-iv-series-literature-audit.md`.
 
-- **Pre-empted.** The graph is `X.182.1` in Conder and Potocnik's census of
-  **semisymmetric** graphs. It is edge- but not vertex-transitive; two distinct
-  cubic bipartite girth-twelve graphs exist at order 182, and this is not the
-  symmetric one. Our own kernels prove the semisymmetry independently: they are
-  \([91,14,28]\) and \([91,14,26]\), and a part-swapping automorphism would
-  force them to be equivalent. This answers the orbit-correspondence bundle's
-  open question 4 affirmatively, in the census the bundle was not looking at.
+- **Pre-empted, harder than first recorded (C877).** The object is the cubic
+  **correspondence** graph on 182 vertices, not the passant-line/internal-point
+  incidence graph, which is 7-regular on 156 vertices; earlier notes conflated
+  them. It is `X.182.1` in Conder and Potocnik's semisymmetric census, and it is
+  one of exactly five graphs in Iofinova and Ivanov's 1985 classification of
+  biprimitive cubic semisymmetric graphs — the member with automorphism group
+  \(\operatorname{PGL}(2,13)\), whose two sides are its two degree-91 primitive
+  actions. The amalgam, not just the graph, is classical. This answers the
+  orbit-correspondence bundle's open question 4 affirmatively.
+- **Not pre-empted: the two side kernels.** \([91,14,28]\) and \([91,14,26]\)
+  are unlocated. Crnkovic, Rukavina and Simac's semisymmetric paper, read at full
+  text, does not contain order 182 — their graphs come from a G-graph
+  construction rather than the census — and it states plainly that the two sides
+  generally differ in minimum distance, confirming the retraction below from the
+  primary source. The kernels prove the semisymmetry independently, since a
+  part-swapping automorphism would force them to be equivalent.
 - **Withdrawn.** An earlier reading of C869 held that the lane contained a
   counterexample to a published equivalence claim of Crnkovic, Rukavina and
   Simac. It does not. Their symmetric-graph paper uses the equivalence
@@ -1073,9 +1082,15 @@ Audited in C869, report `../2026-08-05-c869-paper-iv-series-literature-audit.md`
   originally matched belongs to a different graph. The asymmetry between our
   two sides is real; the claim that it contradicts published work is retracted.
   Full trail in `../2026-08-05-c871-fold-tower-literature-audit.md`.
-- **No predecessor located.** The parity-complement lift, the cross-orbital
-  exhaustion, the higher shell, the support-XOR identities, and the colour-lift
-  theorem.
+- **No predecessor located, re-confirmed unrestricted (C877).** The
+  parity-complement lift, the cross-orbital exhaustion, the higher shell, the
+  support-XOR identities, and the colour-lift theorem. These negatives are now
+  materially stronger than the first round's, having been searched with direct
+  parameter, group and construction queries. The exception is the
+  parity-complement lemma, which carries no parameters and gained nothing from
+  lifting the restriction; state it with proof and claim nothing for it. The one
+  place a support-XOR predecessor would most plausibly sit is the
+  Iofinova--Ivanov 1985 primary, which was not obtained.
 - **Folklore, correctly identified as such.** The frame channel, the
   dual-number frame modules and golden exchange, the \(\mathbf F_{64}\)
   exclusion, the Tanner framing, the quantum formulations, the algorithmic
