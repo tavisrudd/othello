@@ -21,10 +21,16 @@ step factors through a reducible twenty-term table and a proved monomial
 mixed-difference identity; no generated certificate or finite classification
 is used there.
 
-The scalar-sign results concern root-normalized matrices encoded by ten
-Boolean edge signs and their nonzero integral scalar multiples.  They do not
-formalize reduction of an arbitrary scalar sign matrix by switching or
-uniqueness modulo switching and permutation.  On that locus the five root-pair
+The scalar-sign results are stated first for root-normalized matrices encoded
+by ten Boolean edge signs and their nonzero integral scalar multiples, and are
+then transported to arbitrary symmetric zero-diagonal matrices with entries
+`±1` by switching with the root row.  Along that switching the triangle cubic
+is unchanged and the commutator-Pfaffian cubic is multiplied by the product of
+the six switching signs, so nonzero proportionality and the conference square
+transport in both directions.  Every sign matrix with the conference square is
+also carried onto the displayed conference matrix by one relabelling of the six
+axes followed by one diagonal switching, which is the uniqueness of the
+conference switching class.  On the normalized locus the five root-pair
 balances are five linear equations in the ten edge signs, one for each non-root
 vertex, and each says that the vertex carries exactly two positive edges to the
 other four non-root vertices.  The positive graph on the five non-root vertices
@@ -1017,5 +1023,421 @@ theorem exists_nonzero_cubicsProportional_smul_iff_conferenceSquare
     exact ⟨mu, hmu, (cubicsProportional_smul_iff s hs _ mu).mp hprop⟩
   · rintro ⟨mu, hmu, hprop⟩
     exact ⟨mu, hmu, (cubicsProportional_smul_iff s hs _ mu).mpr hprop⟩
+
+/-! ### Arbitrary sign matrices
+
+The statements above fix the root gauge, in which every edge at the label `0`
+is positive.  This part removes that restriction.  Diagonal switching by signs
+`d i` leaves the triangle cubic unchanged, because each triangle product meets
+every one of its three labels twice, and multiplies the commutator-Pfaffian
+cubic by `d 0 * d 1 * d 2 * d 3 * d 4 * d 5`, because each perfect matching of
+the six labels meets every label once.  Switching by the root row of a sign
+matrix therefore carries it into the root gauge, and both the recognition
+statement and the conference square transport along that switching.
+-/
+
+/-- A symmetric matrix on the six labels with vanishing diagonal whose
+off-diagonal entries are `1` or `-1`.  These are the sign matrices of the
+recognition theorem before any root normalization. -/
+def IsSignMatrix (C : Matrix (Fin 6) (Fin 6) ℤ) : Prop :=
+  (∀ i, C i i = 0) ∧ (∀ i j, C j i = C i j) ∧
+    ∀ i j, i ≠ j → C i j = 1 ∨ C i j = -1
+
+omit [IsDomain R] in
+/-- Diagonal switching multiplies the commutator-Pfaffian cubic by the product
+of the six switching signs.  Each of the fifteen perfect matchings of the six
+labels uses every label exactly once, so every term acquires the same
+factor. -/
+theorem matchingEvaluation_switchMatrix (d : Fin 6 → R)
+    (C : Matrix (Fin 6) (Fin 6) R) (x : Fin 6 → R) :
+    matchingEvaluation (switchMatrix d C) x =
+      d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * matchingEvaluation C x := by
+  simp only [matchingEvaluation, switchMatrix]
+  ring
+
+omit [IsDomain R] in
+/-- Six signs squaring to one have a product squaring to one. -/
+theorem switchSignProduct_mul_self (d : Fin 6 → R) (hd : ∀ i, d i * d i = 1) :
+    (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+        (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) = 1 := by
+  calc (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+        (d 0 * d 1 * d 2 * d 3 * d 4 * d 5)
+      = d 0 * d 0 * (d 1 * d 1) * (d 2 * d 2) * (d 3 * d 3) * (d 4 * d 4) *
+          (d 5 * d 5) := by ring
+    _ = 1 := by rw [hd 0, hd 1, hd 2, hd 3, hd 4, hd 5]; ring
+
+/-- Diagonal switching transports nonzero proportionality of the two cubic
+shadows in both directions.  The triangle cubic is unchanged and the
+commutator-Pfaffian cubic acquires the product of the switching signs, so the
+proportionality scalar is multiplied by that product. -/
+theorem exists_nonzero_cubicsProportional_switchMatrix
+    (d : Fin 6 → R) (hd : ∀ i, d i * d i = 1) (C : Matrix (Fin 6) (Fin 6) R) :
+    (∃ mu : R, mu ≠ 0 ∧ CubicsProportional (switchMatrix d C) mu) ↔
+      ∃ mu : R, mu ≠ 0 ∧ CubicsProportional C mu := by
+  have hprod := switchSignProduct_mul_self d hd
+  have he0 : d 0 * d 1 * d 2 * d 3 * d 4 * d 5 ≠ 0 := by
+    intro h
+    rw [h, mul_zero] at hprod
+    exact zero_ne_one hprod
+  constructor
+  · rintro ⟨mu, hmu, hprop⟩
+    refine ⟨d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu, mul_ne_zero he0 hmu,
+      fun x => ?_⟩
+    have hx := hprop x
+    rw [matchingEvaluation_switchMatrix, triangleCubic_switch d hd] at hx
+    calc matchingEvaluation C x
+        = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+            (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * matchingEvaluation C x := by
+          rw [hprod, one_mul]
+      _ = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+            ((d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * matchingEvaluation C x) := by
+          ring
+      _ = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * (mu * triangleCubic C x) := by
+          rw [hx]
+      _ = d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu * triangleCubic C x := by ring
+  · rintro ⟨mu, hmu, hprop⟩
+    refine ⟨d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu, mul_ne_zero he0 hmu,
+      fun x => ?_⟩
+    rw [matchingEvaluation_switchMatrix, triangleCubic_switch d hd, hprop x]
+    ring
+
+/-- Switching twice with the same signs returns the original matrix. -/
+theorem switchMatrix_switchMatrix_self (d : Fin 6 → ℤ)
+    (hd : ∀ i, d i * d i = 1) (C : Matrix (Fin 6) (Fin 6) ℤ) :
+    switchMatrix d (switchMatrix d C) = C := by
+  ext i j
+  calc switchMatrix d (switchMatrix d C) i j
+      = d i * d i * (d j * d j) * C i j := by simp only [switchMatrix]; ring
+    _ = C i j := by rw [hd i, hd j]; ring
+
+/-- Diagonal switching commutes with matrix multiplication in the sense that
+the square of a switched matrix is the switch of its square. -/
+theorem switchMatrix_mul_switchMatrix (d : Fin 6 → ℤ)
+    (hd : ∀ i, d i * d i = 1) (C : Matrix (Fin 6) (Fin 6) ℤ) :
+    switchMatrix d C * switchMatrix d C = switchMatrix d (C * C) := by
+  ext i j
+  simp only [switchMatrix, Matrix.mul_apply, Finset.sum_mul, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun k _ => ?_
+  calc d i * C i k * d k * (d k * C k j * d j)
+      = d k * d k * (d i * (C i k * C k j) * d j) := by ring
+    _ = d i * (C i k * C k j) * d j := by rw [hd k]; ring
+
+/-- The scalar matrix `5 • 1` is fixed by every diagonal switching whose signs
+square to one. -/
+theorem switchMatrix_smul_one (d : Fin 6 → ℤ) (hd : ∀ i, d i * d i = 1) :
+    switchMatrix d (5 • (1 : Matrix (Fin 6) (Fin 6) ℤ)) =
+      5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
+  ext i j
+  rcases eq_or_ne i j with rfl | hij
+  · calc switchMatrix d (5 • (1 : Matrix (Fin 6) (Fin 6) ℤ)) i i
+        = 5 * (d i * d i) := by
+          simp only [switchMatrix, Matrix.smul_apply, Matrix.one_apply_eq]
+          ring
+      _ = (5 • (1 : Matrix (Fin 6) (Fin 6) ℤ)) i i := by
+          rw [hd i]
+          simp [Matrix.one_apply_eq]
+  · simp [switchMatrix, Matrix.one_apply_ne hij]
+
+/-- The conference square is invariant under diagonal switching. -/
+theorem switchMatrix_mul_self_eq_iff (d : Fin 6 → ℤ) (hd : ∀ i, d i * d i = 1)
+    (C : Matrix (Fin 6) (Fin 6) ℤ) :
+    switchMatrix d C * switchMatrix d C = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) ↔
+      C * C = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
+  rw [switchMatrix_mul_switchMatrix d hd]
+  constructor
+  · intro h
+    calc C * C = switchMatrix d (switchMatrix d (C * C)) :=
+          (switchMatrix_switchMatrix_self d hd _).symm
+      _ = switchMatrix d (5 • (1 : Matrix (Fin 6) (Fin 6) ℤ)) := by rw [h]
+      _ = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := switchMatrix_smul_one d hd
+  · intro h
+    rw [h]
+    exact switchMatrix_smul_one d hd
+
+/-- The switching signs that carry the root row of a sign matrix to `1`. -/
+def rootSwitchSigns (C : Matrix (Fin 6) (Fin 6) ℤ) : Fin 6 → ℤ :=
+  fun i => if i = 0 then 1 else C 0 i
+
+/-- The root switching signs square to one. -/
+theorem rootSwitchSigns_mul_self (C : Matrix (Fin 6) (Fin 6) ℤ)
+    (hC : IsSignMatrix C) (i : Fin 6) :
+    rootSwitchSigns C i * rootSwitchSigns C i = 1 := by
+  rcases eq_or_ne i 0 with rfl | hi
+  · simp [rootSwitchSigns]
+  · rcases hC.2.2 0 i (Ne.symm hi) with h | h <;>
+      simp [rootSwitchSigns, hi, h]
+
+private theorem eq_one_or_neg_one_of_mul_self {z : ℤ} (h : z * z = 1) :
+    z = 1 ∨ z = -1 := by
+  have hz : (z - 1) * (z + 1) = 0 := by linear_combination h
+  rcases mul_eq_zero.mp hz with h1 | h1
+  · exact Or.inl (by linarith)
+  · exact Or.inr (by linarith)
+
+/-- Switching a sign matrix by signs squaring to one gives a sign matrix. -/
+theorem isSignMatrix_switchMatrix (d : Fin 6 → ℤ) (hd : ∀ i, d i * d i = 1)
+    (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C) :
+    IsSignMatrix (switchMatrix d C) := by
+  refine ⟨fun i => by simp [switchMatrix, hC.1 i], fun i j => ?_, fun i j hij => ?_⟩
+  · simp only [switchMatrix, hC.2.1 i j]
+    ring
+  · rcases eq_one_or_neg_one_of_mul_self (hd i) with hi | hi <;>
+      rcases eq_one_or_neg_one_of_mul_self (hd j) with hj | hj <;>
+        rcases hC.2.2 i j hij with hc | hc <;>
+          simp [switchMatrix, hi, hj, hc]
+
+/-- Switching a sign matrix by its own root row makes every root edge
+positive. -/
+theorem rootSwitchSigns_root_row (C : Matrix (Fin 6) (Fin 6) ℤ)
+    (hC : IsSignMatrix C) (i : Fin 6) (hi : i ≠ 0) :
+    switchMatrix (rootSwitchSigns C) C 0 i = 1 := by
+  have h0 : rootSwitchSigns C 0 = 1 := by simp [rootSwitchSigns]
+  have hi' : rootSwitchSigns C i = C 0 i := by simp [rootSwitchSigns, hi]
+  show rootSwitchSigns C 0 * C 0 i * rootSwitchSigns C i = 1
+  rw [h0, hi', one_mul]
+  simpa [rootSwitchSigns, hi] using rootSwitchSigns_mul_self C hC i
+
+private theorem boolSign_decide_eq {z : ℤ} (h : z = 1 ∨ z = -1) :
+    boolSign (decide (z = -1)) = z := by
+  rcases h with h | h <;> subst h <;> decide
+
+/-- A sign matrix whose root edges are all positive is one of the
+root-normalized signings, with the ten Boolean parameters read off its
+upper-triangular edges. -/
+theorem exists_bits_eq_of_rootNormalized (B : Matrix (Fin 6) (Fin 6) ℤ)
+    (hB : IsSignMatrix B) (hroot : ∀ i, i ≠ 0 → B 0 i = 1) :
+    ∃ bits : Fin 10 → Bool, B = normalizedSignMatrix bits := by
+  refine ⟨![decide (B 1 2 = -1), decide (B 1 3 = -1), decide (B 1 4 = -1),
+      decide (B 1 5 = -1), decide (B 2 3 = -1), decide (B 2 4 = -1),
+      decide (B 2 5 = -1), decide (B 3 4 = -1), decide (B 3 5 = -1),
+      decide (B 4 5 = -1)], ?_⟩
+  have e12 : boolSign (decide (B 1 2 = -1)) = B 1 2 :=
+    boolSign_decide_eq (hB.2.2 1 2 (by decide))
+  have e13 : boolSign (decide (B 1 3 = -1)) = B 1 3 :=
+    boolSign_decide_eq (hB.2.2 1 3 (by decide))
+  have e14 : boolSign (decide (B 1 4 = -1)) = B 1 4 :=
+    boolSign_decide_eq (hB.2.2 1 4 (by decide))
+  have e15 : boolSign (decide (B 1 5 = -1)) = B 1 5 :=
+    boolSign_decide_eq (hB.2.2 1 5 (by decide))
+  have e23 : boolSign (decide (B 2 3 = -1)) = B 2 3 :=
+    boolSign_decide_eq (hB.2.2 2 3 (by decide))
+  have e24 : boolSign (decide (B 2 4 = -1)) = B 2 4 :=
+    boolSign_decide_eq (hB.2.2 2 4 (by decide))
+  have e25 : boolSign (decide (B 2 5 = -1)) = B 2 5 :=
+    boolSign_decide_eq (hB.2.2 2 5 (by decide))
+  have e34 : boolSign (decide (B 3 4 = -1)) = B 3 4 :=
+    boolSign_decide_eq (hB.2.2 3 4 (by decide))
+  have e35 : boolSign (decide (B 3 5 = -1)) = B 3 5 :=
+    boolSign_decide_eq (hB.2.2 3 5 (by decide))
+  have e45 : boolSign (decide (B 4 5 = -1)) = B 4 5 :=
+    boolSign_decide_eq (hB.2.2 4 5 (by decide))
+  have s21 : B 2 1 = B 1 2 := hB.2.1 1 2
+  have s31 : B 3 1 = B 1 3 := hB.2.1 1 3
+  have s41 : B 4 1 = B 1 4 := hB.2.1 1 4
+  have s51 : B 5 1 = B 1 5 := hB.2.1 1 5
+  have s32 : B 3 2 = B 2 3 := hB.2.1 2 3
+  have s42 : B 4 2 = B 2 4 := hB.2.1 2 4
+  have s52 : B 5 2 = B 2 5 := hB.2.1 2 5
+  have s43 : B 4 3 = B 3 4 := hB.2.1 3 4
+  have s53 : B 5 3 = B 3 5 := hB.2.1 3 5
+  have s54 : B 5 4 = B 4 5 := hB.2.1 4 5
+  have r01 : B 0 1 = 1 := hroot 1 (by decide)
+  have r02 : B 0 2 = 1 := hroot 2 (by decide)
+  have r03 : B 0 3 = 1 := hroot 3 (by decide)
+  have r04 : B 0 4 = 1 := hroot 4 (by decide)
+  have r05 : B 0 5 = 1 := hroot 5 (by decide)
+  have c10 : B 1 0 = 1 := by rw [hB.2.1 0 1]; exact r01
+  have c20 : B 2 0 = 1 := by rw [hB.2.1 0 2]; exact r02
+  have c30 : B 3 0 = 1 := by rw [hB.2.1 0 3]; exact r03
+  have c40 : B 4 0 = 1 := by rw [hB.2.1 0 4]; exact r04
+  have c50 : B 5 0 = 1 := by rw [hB.2.1 0 5]; exact r05
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [normalizedSignMatrix, hB.1, r01, r02, r03, r04, r05, c10, c20, c30,
+      c40, c50, s21, s31, s41, s51, s32, s42, s52, s43, s53, s54,
+      e12, e13, e14, e15, e23, e24, e25, e34, e35, e45]
+
+/-- Switching a sign matrix by its own root row lands in the root-normalized
+family. -/
+theorem exists_bits_switchMatrix_rootSwitchSigns (C : Matrix (Fin 6) (Fin 6) ℤ)
+    (hC : IsSignMatrix C) :
+    ∃ bits : Fin 10 → Bool,
+      switchMatrix (rootSwitchSigns C) C = normalizedSignMatrix bits :=
+  exists_bits_eq_of_rootNormalized _
+    (isSignMatrix_switchMatrix _ (rootSwitchSigns_mul_self C hC) C hC)
+    (rootSwitchSigns_root_row C hC)
+
+/-- Nonzero proportionality of the two cubic shadows characterizes the
+conference square on every sign matrix of order six, with no root gauge
+assumed.  Root switching reduces the statement to the normalized family. -/
+theorem exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix
+    (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C) :
+    (∃ mu : ℤ, mu ≠ 0 ∧ CubicsProportional C mu) ↔
+      C * C = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
+  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSigns C hC
+  have hd := rootSwitchSigns_mul_self C hC
+  rw [← exists_nonzero_cubicsProportional_switchMatrix (rootSwitchSigns C) hd C,
+    ← switchMatrix_mul_self_eq_iff (rootSwitchSigns C) hd C, hbits]
+  exact exists_nonzero_cubicsProportional_iff_conferenceSquare bits
+
+/-- The same characterization for an arbitrary nonzero common edge scale: a
+scalar sign matrix has proportional cubic shadows exactly when its sign part
+has the conference square. -/
+theorem exists_nonzero_cubicsProportional_smul_iff_conferenceSquare_of_isSignMatrix
+    (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C) (s : ℤ) (hs : s ≠ 0) :
+    (∃ mu : ℤ, mu ≠ 0 ∧ CubicsProportional (s • C) mu) ↔
+      C * C = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
+  rw [← exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix C hC]
+  constructor
+  · rintro ⟨mu, hmu, hprop⟩
+    exact ⟨mu, hmu, (cubicsProportional_smul_iff s hs _ mu).mp hprop⟩
+  · rintro ⟨mu, hmu, hprop⟩
+    exact ⟨mu, hmu, (cubicsProportional_smul_iff s hs _ mu).mpr hprop⟩
+
+/-- The switching signs carrying a relabelled root-normalized pentagon onto the
+displayed conference matrix.  The same signs work for every labelled
+pentagon. -/
+def conferenceGaugeSigns : Fin 6 → ℤ := ![1, 1, 1, 1, -1, -1]
+
+private theorem conferenceGaugeSigns_mul_self (i : Fin 6) :
+    conferenceGaugeSigns i * conferenceGaugeSigns i = 1 := by
+  fin_cases i <;> decide
+
+/-- Each of the twelve labelled pentagons is carried onto the displayed
+conference matrix by a relabelling of the six axes followed by one fixed
+diagonal switching.  The relabellings fix the root and the first non-root
+label and permute the remaining four, exhibiting the twelve labelled pentagons
+as one orbit. -/
+theorem exists_relabel_switchMatrix_eq_conferenceMatrix_of_firstRowBalanced
+    (bits : Fin 10 → Bool)
+    (hbalance : FirstRowBalanced (normalizedSignMatrix bits)) :
+    ∃ σ : Equiv.Perm (Fin 6),
+      switchMatrix conferenceGaugeSigns
+          ((normalizedSignMatrix bits).submatrix σ σ) = conferenceMatrix := by
+  obtain ⟨r1, r2, r3, r4, r5⟩ := firstRowBalanced_rowSums bits hbalance
+  rcases pentagon_bit_classification (bits 0) (bits 1) (bits 2) (bits 3)
+      (bits 4) (bits 5) (bits 6) (bits 7) (bits 8) (bits 9) r1 r2 r3 r4 r5 with
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ |
+    ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9⟩
+  · exact ⟨⟨![0, 1, 4, 5, 3, 2], ![0, 1, 5, 4, 2, 3], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 4, 5, 2, 3], ![0, 1, 4, 5, 2, 3], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 3, 5, 4, 2], ![0, 1, 5, 2, 4, 3], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 3, 5, 2, 4], ![0, 1, 4, 2, 5, 3], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 3, 4, 5, 2], ![0, 1, 5, 2, 3, 4], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 3, 4, 2, 5], ![0, 1, 4, 2, 3, 5], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 2, 5, 4, 3], ![0, 1, 2, 5, 4, 3], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 2, 5, 3, 4], ![0, 1, 2, 4, 5, 3], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 2, 4, 5, 3], ![0, 1, 2, 5, 3, 4], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 2, 4, 3, 5], ![0, 1, 2, 4, 3, 5], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 2, 3, 5, 4], ![0, 1, 2, 3, 5, 4], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+  · exact ⟨⟨![0, 1, 2, 3, 4, 5], ![0, 1, 2, 3, 4, 5], by decide, by decide⟩, by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [switchMatrix, conferenceGaugeSigns, conferenceMatrix,
+          normalizedSignMatrix, boolSign, h0, h1, h2, h3, h4, h5, h6, h7, h8,
+          h9]⟩
+
+/-- Every order-six sign matrix with the conference square is carried onto the
+displayed conference matrix by one relabelling of the axes followed by one
+diagonal switching.  Hence any two such matrices differ by a relabelling and a
+switching: the conference class is a single switching class. -/
+theorem exists_switchMatrix_submatrix_eq_conferenceMatrix
+    (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C)
+    (hsq : C * C = 5 • (1 : Matrix (Fin 6) (Fin 6) ℤ)) :
+    ∃ (d : Fin 6 → ℤ) (σ : Equiv.Perm (Fin 6)),
+      (∀ i, d i * d i = 1) ∧
+        switchMatrix d (C.submatrix σ σ) = conferenceMatrix := by
+  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSigns C hC
+  have hd := rootSwitchSigns_mul_self C hC
+  have hsq' : normalizedSignMatrix bits * normalizedSignMatrix bits =
+      5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
+    rw [← hbits]
+    exact (switchMatrix_mul_self_eq_iff (rootSwitchSigns C) hd C).mpr hsq
+  have hsymm : (normalizedSignMatrix bits).transpose = normalizedSignMatrix bits := by
+    ext i j
+    fin_cases i <;> fin_cases j <;> rfl
+  have hbalance : FirstRowBalanced (normalizedSignMatrix bits) := by
+    intro i hi
+    exact pairTriangleSum_eq_zero (normalizedSignMatrix bits) 5 hsymm hsq' 0 i
+      (Ne.symm hi)
+  obtain ⟨σ, hσ⟩ :=
+    exists_relabel_switchMatrix_eq_conferenceMatrix_of_firstRowBalanced bits
+      hbalance
+  refine ⟨fun i => conferenceGaugeSigns i * rootSwitchSigns C (σ i), σ,
+    fun i => ?_, ?_⟩
+  · calc conferenceGaugeSigns i * rootSwitchSigns C (σ i) *
+        (conferenceGaugeSigns i * rootSwitchSigns C (σ i))
+        = conferenceGaugeSigns i * conferenceGaugeSigns i *
+            (rootSwitchSigns C (σ i) * rootSwitchSigns C (σ i)) := by ring
+      _ = 1 := by rw [conferenceGaugeSigns_mul_self i, hd (σ i)]; ring
+  · rw [← hσ, ← hbits]
+    ext i j
+    simp only [switchMatrix, Matrix.submatrix_apply]
+    ring
 
 end RelativeConicArcs.FourShadowRecognition

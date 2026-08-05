@@ -4,23 +4,46 @@
     "RelativeConicArcs.FourShadowRecognition.cubicsProportional_four_of_sixTests",
     "RelativeConicArcs.FourShadowRecognition.cubicsProportional_neg_four_of_sixTests",
     "RelativeConicArcs.FourShadowRecognition.cubicsProportional_smul_iff",
+    "RelativeConicArcs.FourShadowRecognition.exists_bits_eq_of_rootNormalized",
+    "RelativeConicArcs.FourShadowRecognition.exists_bits_switchMatrix_rootSwitchSigns",
     "RelativeConicArcs.FourShadowRecognition.exists_mul_self_eq_scalar_of_cubicsProportional",
     "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare",
+    "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix",
     "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare",
+    "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare_of_isSignMatrix",
+    "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_switchMatrix",
+    "RelativeConicArcs.FourShadowRecognition.exists_relabel_switchMatrix_eq_conferenceMatrix_of_firstRowBalanced",
     "RelativeConicArcs.FourShadowRecognition.exists_scalar_mul_self_of_offDiagonal_zero",
+    "RelativeConicArcs.FourShadowRecognition.exists_switchMatrix_submatrix_eq_conferenceMatrix",
+    "RelativeConicArcs.FourShadowRecognition.five_sign_balances_force_inner_products",
+    "RelativeConicArcs.FourShadowRecognition.isSignMatrix_switchMatrix",
+    "RelativeConicArcs.FourShadowRecognition.matchingEvaluation_switchMatrix",
     "RelativeConicArcs.FourShadowRecognition.normalizedSignMatrix_sq_of_firstRowBalanced",
     "RelativeConicArcs.FourShadowRecognition.pairTriangleSum_eq_zero_of_cubicsProportional",
     "RelativeConicArcs.FourShadowRecognition.pairTriangleSum_eq_zero_of_triangleCubic_translate",
     "RelativeConicArcs.FourShadowRecognition.pentagonGauge_of_firstRowBalanced",
+    "RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification",
+    "RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced",
+    "RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_mul_self",
+    "RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_root_row",
+    "RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_self_eq_iff",
+    "RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_switchMatrix",
+    "RelativeConicArcs.FourShadowRecognition.switchMatrix_smul_one",
+    "RelativeConicArcs.FourShadowRecognition.switchMatrix_switchMatrix_self",
+    "RelativeConicArcs.FourShadowRecognition.switchSignProduct_mul_self",
     "RelativeConicArcs.FourShadowRecognition.triangleCubic_translate_of_proportional",
     "RelativeConicArcs.FourShadowRecognition.triangleMixedDifference_eq_pairTriangleSum",
     "RelativeConicArcs.GoldenCommutatorPfaffian.matchingEvaluation_translate",
-    "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation",
-    "RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification",
-    "RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced",
-    "RelativeConicArcs.FourShadowRecognition.five_sign_balances_force_inner_products"
+    "RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation"
   ],
-  "axiom_report_sha256": "d7f554bf8e60a9542b8cb8abff7ac195b46b7ef97d1fdcee2516bcd831d57ffa",
+  "axiom_report_provenance": {
+    "build_run_id": "run-20260805-020812-dec19706",
+    "gate_stdout": "verification/evidence/gate_stdout/four_shadow.stdout.txt",
+    "gate_stdout_sha256": "a83f8621211e82182d24b833df936ae124e033fb8d94de92c9eb8f45e8cfafd1",
+    "generator": "verification/extract_axiom_report.py",
+    "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand."
+  },
+  "axiom_report_sha256": "c8f793d9bc30f2e62bf043f1a81c4e740269072bc87bf846bc894e4fc1a2030b",
   "claim_map": {
     "oriented_packet": {
       "coverage": "five root-pair balances and the displayed 012 coefficient",
@@ -36,7 +59,7 @@
       ]
     },
     "sign_classification": {
-      "coverage": "normalized integral signs and arbitrary nonzero integral common scale",
+      "coverage": "normalized integral signs, arbitrary nonzero integral common scale, and, through the switching reduction, every symmetric zero-diagonal matrix with entries plus or minus one",
       "declarations": [
         "RelativeConicArcs.FourShadowRecognition.pentagonGauge_of_firstRowBalanced",
         "RelativeConicArcs.FourShadowRecognition.normalizedSignMatrix_sq_of_firstRowBalanced",
@@ -44,6 +67,32 @@
         "RelativeConicArcs.FourShadowRecognition.five_sign_balances_force_inner_products",
         "RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification",
         "RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced"
+      ]
+    },
+    "switching_class": {
+      "coverage": "uniqueness of the conference switching class: one relabelling and one diagonal switching carry any sign matrix with square five times the identity onto the displayed conference matrix",
+      "declarations": [
+        "RelativeConicArcs.FourShadowRecognition.exists_relabel_switchMatrix_eq_conferenceMatrix_of_firstRowBalanced",
+        "RelativeConicArcs.FourShadowRecognition.exists_switchMatrix_submatrix_eq_conferenceMatrix"
+      ]
+    },
+    "switching_reduction": {
+      "coverage": "arbitrary symmetric zero-diagonal matrices with entries plus or minus one, reduced to the root gauge by switching with the root row",
+      "declarations": [
+        "RelativeConicArcs.FourShadowRecognition.matchingEvaluation_switchMatrix",
+        "RelativeConicArcs.FourShadowRecognition.switchSignProduct_mul_self",
+        "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_switchMatrix",
+        "RelativeConicArcs.FourShadowRecognition.switchMatrix_switchMatrix_self",
+        "RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_switchMatrix",
+        "RelativeConicArcs.FourShadowRecognition.switchMatrix_smul_one",
+        "RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_self_eq_iff",
+        "RelativeConicArcs.FourShadowRecognition.isSignMatrix_switchMatrix",
+        "RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_mul_self",
+        "RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_root_row",
+        "RelativeConicArcs.FourShadowRecognition.exists_bits_eq_of_rootNormalized",
+        "RelativeConicArcs.FourShadowRecognition.exists_bits_switchMatrix_rootSwitchSigns",
+        "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix",
+        "RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare_of_isSignMatrix"
       ]
     },
     "weighted_converse": {
@@ -60,12 +109,12 @@
   "gate_module": "RelativeConicArcs.Gates.FourShadowRecognition",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-four-shadow-formal-v1",
-  "source_closure_sha256": "e77d572b7400fff6e1f98cc0a5fb58bccc0ab9a1ea5ee2f4a0761c923c1b67d0",
+  "source_closure_sha256": "07e227ff8a98e1c6aa67788f0a06296dcc69e24c461b0747abe293ea2b25c88c",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
-    "RelativeConicArcs/FourShadowRecognition.lean": "7d9e8f90ccbc73ddd34e6dbfcd5788bdcb84f4b1d8f17ccb78f599f1fe0caa92",
-    "RelativeConicArcs/Gates/FourShadowRecognition.lean": "c479c3a253d210ba5439e7d2843a7e1308bf4b8d3e9a11a6374ba47b5477aa85",
+    "RelativeConicArcs/FourShadowRecognition.lean": "75ca6f117d4325d2ae373dde19ff40bb0797ba0745c514a3b5d93a7f477e25e5",
+    "RelativeConicArcs/Gates/FourShadowRecognition.lean": "9644b2adf7190f8586ae88ea982577fad70db65942da06877f6c9d8ad116cc37",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",
     "RelativeConicArcs/WeightedMatchingEvaluation.lean": "06ef04d1a05622f94a0e46a87f4d66e2ac5a6f355a1bad9daedcb8e4a5355e66"
@@ -73,14 +122,7 @@
   "trust_boundary": {
     "excluded": "The rank-14 weighted Jacobian calculation and any global classification of remote weighted solutions are not formalized.",
     "native": "No compiled evaluation is used, and the replay refuses it anywhere in the pinned closure along with any external import outside Mathlib. Every audited declaration depends only on propext, Classical.choice and Quot.sound. The one finite step is kernel reduction: the five vertex balances split the four edges at the first non-root vertex into the six patterns with two positive edges, and in each branch the remaining four balances determine the six remaining edge parameters over their 2^6 assignments, giving the listed labelled pentagons as a proved classification in both directions; that they number twelve and are pairwise distinct is read off the displayed list rather than proved.",
-    "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, and each polynomial identity and coefficient comparison are kernel-checked. The pentagon classification is audited in both directions: pentagon_bit_classification derives the twelve listed sign patterns from the five vertex balances, and pentagon_bits_balanced derives the five balances from each listed pattern. That the listed patterns number twelve and are pairwise distinct is read off the displayed list; no Lean statement asserts either."
+    "symbolic": "Translation extraction, pair moments, diagonal and scalar square, pentagon degree, ten inner products, cubic homogeneity, and each polynomial identity and coefficient comparison are kernel-checked. The pentagon classification is audited in both directions: pentagon_bit_classification derives the twelve listed sign patterns from the five vertex balances, and pentagon_bits_balanced derives the five balances from each listed pattern. That the listed patterns number twelve and are pairwise distinct is read off the displayed list; no Lean statement asserts either.  Diagonal switching multiplies the commutator-Pfaffian cubic by the product of the six switching signs and leaves the triangle cubic unchanged, so nonzero proportionality, the conference square, and the sign-matrix property all transport along switching; that transport carries the normalized statements to arbitrary sign matrices and identifies the twelve labelled pentagons as one orbit under relabelling."
   },
-  "verifier_sha256": "69db1ce83e5b8d516795c9db5f04f193b71ba1d137d85f55cb1fa23c969e61f5",
-  "axiom_report_provenance": {
-    "build_run_id": "run-20260804-050416-1085523f",
-    "gate_stdout_sha256": "027b009020d0c2b5e04bd35080618c05d8d2c4981565c7798eddd80256657feb",
-    "generator": "verification/extract_axiom_report.py",
-    "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
-    "gate_stdout": "verification/evidence/gate_stdout/four_shadow.stdout.txt"
-  }
+  "verifier_sha256": "69db1ce83e5b8d516795c9db5f04f193b71ba1d137d85f55cb1fa23c969e61f5"
 }

@@ -14,10 +14,13 @@ the four edges at the first non-root vertex, and the remaining six Boolean edge
 parameters are then enumerated against the four remaining equations, leaving
 the twelve labelled pentagons.  Each of them gives one polynomial identity
 between the two cubics and one integer coefficient comparison, both proved by
-kernel normalization.  The scalar-sign conclusions remain root-normalized and
-do not include switching reduction or uniqueness modulo switching and
-permutation.  The rank-fourteen rational Jacobian calculation for local
-weighted rigidity is external.  No compiled evaluation, external certificate,
+kernel normalization.  The scalar-sign conclusions are then transported off the
+root gauge: switching by the root row carries an arbitrary symmetric
+zero-diagonal matrix with entries `±1` into the normalized family, and the same
+twelve pentagons carry one relabelling and one diagonal switching onto the
+displayed conference matrix, so the recognition statement and the uniqueness of
+the conference switching class hold for every such matrix.  The rank-fourteen
+rational Jacobian calculation for local weighted rigidity is external.  No compiled evaluation, external certificate,
 or generated source is used by the declarations printed here.
 -/
 
@@ -40,3 +43,19 @@ or generated source is used by the declarations printed here.
 #print axioms RelativeConicArcs.FourShadowRecognition.five_sign_balances_force_inner_products
 #print axioms RelativeConicArcs.FourShadowRecognition.pentagon_bit_classification
 #print axioms RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced
+#print axioms RelativeConicArcs.FourShadowRecognition.matchingEvaluation_switchMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.switchSignProduct_mul_self
+#print axioms RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_switchMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.switchMatrix_switchMatrix_self
+#print axioms RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_switchMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_self_eq_iff
+#print axioms RelativeConicArcs.FourShadowRecognition.switchMatrix_smul_one
+#print axioms RelativeConicArcs.FourShadowRecognition.isSignMatrix_switchMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_mul_self
+#print axioms RelativeConicArcs.FourShadowRecognition.rootSwitchSigns_root_row
+#print axioms RelativeConicArcs.FourShadowRecognition.exists_bits_eq_of_rootNormalized
+#print axioms RelativeConicArcs.FourShadowRecognition.exists_bits_switchMatrix_rootSwitchSigns
+#print axioms RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare_of_isSignMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.exists_relabel_switchMatrix_eq_conferenceMatrix_of_firstRowBalanced
+#print axioms RelativeConicArcs.FourShadowRecognition.exists_switchMatrix_submatrix_eq_conferenceMatrix
