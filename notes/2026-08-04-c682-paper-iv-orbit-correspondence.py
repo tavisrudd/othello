@@ -270,6 +270,23 @@ def compute():
                 centralizer_equations.append(row)
     centralizer_dimension = 144 - module.gf8_rank(centralizer_equations)
     assert centralizer_dimension == 1
+    psl_generators = [(1, 1, 0, 1), (0, 1, 12, 0)]
+    assert len(module.generated_subgroup(tuple(psl_generators))) == 1092
+    psl_matrices = [
+        module.group_matrix_over_f8(element, list(points), f8_basis, expanded_pivots)
+        for element in psl_generators
+    ]
+    psl_centralizer_equations = []
+    for matrix in psl_matrices:
+        for i in range(12):
+            for j in range(12):
+                row = [0] * 144
+                for k in range(12):
+                    row[12 * i + k] ^= matrix[k][j]
+                    row[12 * k + j] ^= matrix[i][k]
+                psl_centralizer_equations.append(row)
+    psl_centralizer_dimension = 144 - module.gf8_rank(psl_centralizer_equations)
+    assert psl_centralizer_dimension == 1
 
     first_row = correspondence[0]
     first_neighbor = next(j for j in range(91) if first_row >> j & 1)
@@ -320,6 +337,9 @@ def compute():
             "centralizer_dimension_over_F8": centralizer_dimension,
             "centralizer": "F8_scalars_only",
             "equivariant_F64_refinement_exists": False,
+            "PSL2_13_subgroup_order": 1092,
+            "PSL2_13_centralizer_dimension_over_F8": psl_centralizer_dimension,
+            "PSL_equivariant_F64_refinement_exists": False,
         },
         "all_stabilizer_intersection_order_counts": dict(sorted(intersection_orders.items())),
         "trusted_inputs": [str(SOURCE.relative_to(ROOT))],

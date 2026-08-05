@@ -51,6 +51,9 @@
   "field_order": 13,
   "group_order": 2184,
   "hidden_F8_module": {
+    "PSL2_13_centralizer_dimension_over_F8": 1,
+    "PSL2_13_subgroup_order": 1092,
+    "PSL_equivariant_F64_refinement_exists": false,
     "centralizer": "F8_scalars_only",
     "centralizer_dimension_over_F8": 1,
     "dimension_over_F8": 12,

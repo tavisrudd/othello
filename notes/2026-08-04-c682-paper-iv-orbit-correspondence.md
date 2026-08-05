@@ -274,6 +274,19 @@ and then reducing would kill the nilpotent and retain only the scalar
 \(\mathbf F_8\) inside \(\mathbf F_{64}\); it is not a normalization of the
 nonreduced Paper-IV algebra itself.
 
+Passing to the index-two orientation-preserving subgroup does not help.  The
+standard order-thirteen unipotent and order-two Weyl element generate
+\(\operatorname{PSL}(2,13)\) of order \(1092\), and their common centralizer
+on the \(\mathbf F_8\)-module is again only the scalar line:
+
+\[
+ \operatorname{End}_{\mathbf F_8\operatorname{PSL}(2,13)}(K)
+ =\mathbf F_8.
+\]
+
+Hence the missing \(\mathbf F_{64}\)-repair cannot be recovered merely by
+forgetting the outer projective sheet exchange.
+
 The bipartite graph has \(273\) edges, girth twelve, and binary adjacency rank
 \(77\), hence nullity fourteen.  Distinct vertices on one side have at most
 one common neighbor: \(273\) pairs have one and \(3822\) have none.  The most
