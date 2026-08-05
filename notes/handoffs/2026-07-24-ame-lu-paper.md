@@ -1257,6 +1257,19 @@ extraction.  The authoritative three-session protocol is
 6. Run `make check`, inspect the PDF, and close the second-draft fix plan.
 7. Complete a clean public replay/export plan and obtain a cold expert read.
 
+## Manuscript toolchain (handed over 2026-08-04, unallocated)
+
+`papers/ame_lu/Makefile` pins `SOURCE_DATE_EPOCH` but still resolves TeX from
+the mutable flake registry, so a byte-equality PDF check would fail against a
+correct tracked PDF whenever the registry moves.  The four Clebsch-series papers
+now copy one shared `papers/flake.nix`/`flake.lock`, build through
+`nix develop .#manuscript`, and gate the release on a fresh build equalling the
+tracked PDF byte for byte.  The full recipe, its failure modes, and the hash
+refresh it forces are in
+`notes/2026-08-04-shared-paper-toolchain-recipe.md`.  Adopting it here is this
+lane's call and needs an allocated `ame-lu` task; the same applies to
+`papers/mds_css_transversal_groups/` if it grows a manuscript build.
+
 ## Allowed paths
 
 - `papers/ame_lu/**`

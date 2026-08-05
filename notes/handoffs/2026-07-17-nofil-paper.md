@@ -69,6 +69,16 @@ sharpness-negative release gate, a cleared novelty audit, and adversarial + cold
   LaTeX+PDF, explicit mixed-trust verification map, verbatim adequacy appendix for headline Lean
   statements, AI/provenance section, adversarial review, and repeated cold-prose review.
 
+- **Manuscript toolchain (handed over 2026-08-04, unallocated).** This lane has
+  no manuscript root yet.  When one is created, take the shared pinned TeX
+  toolchain with it rather than a private `nix shell nixpkgs#...` line: copy
+  `papers/flake.nix` and `papers/flake.lock` verbatim, build through
+  `nix develop .#manuscript` with `SOURCE_DATE_EPOCH` and `FORCE_SOURCE_DATE`
+  fixed, and gate the release on a fresh build equalling the tracked PDF byte
+  for byte.  Doing this at creation costs nothing; retrofitting it later forces
+  a PDF rebuild and a refresh of every hash that records it.  Recipe and failure
+  modes: `notes/2026-08-04-shared-paper-toolchain-recipe.md`.
+
 ## Cross-lane relationships (foreign; do not re-peg without approval)
 
 The open mathematical program under this paper's geometries is `cap`-owned, not here. This lane owns

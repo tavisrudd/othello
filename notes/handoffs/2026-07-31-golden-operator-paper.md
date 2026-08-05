@@ -781,6 +781,20 @@ reference remain user-owned.
 5. Review C814's two accepted mathematics packages separately before
    authorizing any paper inclusion; do not import them ad hoc.
 
+## Manuscript toolchain (handed over 2026-08-04, unallocated)
+
+`papers/golden-operator/Makefile` and
+`papers/golden-quantum-statistics/Makefile` resolve TeX from the mutable flake
+registry and pin no build epoch, so neither manuscript builds reproducibly and
+neither can gate on a stale tracked PDF.  The four Clebsch-series papers now
+copy one shared `papers/flake.nix`/`flake.lock`, build through
+`nix develop .#manuscript` with `SOURCE_DATE_EPOCH` and `FORCE_SOURCE_DATE`
+fixed, and require a fresh build to equal the tracked PDF byte for byte.  The
+recipe, its failure modes, and the hash refresh the first pinned rebuild forces
+are in `notes/2026-08-04-shared-paper-toolchain-recipe.md`.  Adopting it is this
+lane's call and needs an allocated `golden` task; the accepted PRA manuscript
+should not change bytes for any other reason first.
+
 ## Ownership and allowed paths
 
 Golden owns:
