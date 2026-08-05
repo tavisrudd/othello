@@ -1070,8 +1070,11 @@ root, fold antipodal pairs, shorten.
  \to [27,6,12]_{E_6}
 \]
 
-The E6, E7, and E8 members attain the exact unrestricted minimum-distance
-optimum; every level above E8 falls short. The 240-point member is the root
+Attaining the exact unrestricted optimum is **not** an E-series property: C875
+scored the whole family and every tabulated even-rank level of both types is
+optimal, minus type included, while the parabolic levels are the sole shortfall
+with a growing deficit — optimal at rank five, one below at rank seven, four
+below at rank nine. The 240-point member is the root
 link of an \(E_{10}\) root and coincides with the affine \(E_9\) code built
 from the affine root lattice; the complementary 256-point root hyperplane is
 \((E_8\oplus A_1)/2\) and gives \([256,10,120]\) against an exact record of 124.
@@ -1140,11 +1143,24 @@ Current state:
   \(\mathbf F_4\)-linear functional are additive and so inherit all 32130
   tetrads as weight-four dual words. Additivity, not the alphabet, is the
   obstruction, and it explains the distance-four stall at every level at once.
-- Live frontiers: the four-unit gap at \([256,10]\), which is the only level
-  above E8 with no proved obstruction; and, on the E8 carrier, whether 120
-  points of \(\mathrm{PG}(8,4)\) can sit in four-general position invariantly
-  under a large proper subgroup of \(O_8^+(2)\), which is the only remaining
-  route to distance five there and is not expected to work.
+- **Track closed as a paper vehicle (C874).** The code-level fold is a formal
+  property of any matched Taylor double — every row has fibre-difference
+  all-ones, so the fibre-constant subcode is codimension one and folds onto the
+  base graph's code — certified against the quadric links, the Paley two-graphs,
+  the pentagon and random graphs. No quadratic form is involved anywhere, so the
+  code-level residue is empty and no judo move exists. C868's
+  no-other-equivariant-code claim was re-proved exhaustively over both
+  \(\mathbf F_2\) and \(\mathbf F_4\) and is now theorem-grade, which also
+  strengthens C867. Do not spend further effort here.
+- Live frontiers, both narrow: the parabolic deficit, which grows from zero at
+  rank five to four at rank nine with no mechanism offered and is the only
+  unexplained numerical pattern left; and, on the E8 carrier, whether 120 points
+  of \(\mathrm{PG}(8,4)\) can sit in four-general position invariantly under a
+  large proper subgroup of \(O_8^+(2)\), which is not expected to work.
+- One caution carried out of C874 for the Paper IV side: the cross-orbital
+  optimality certificate's Hamming exclusion at dimension forty survives by
+  1.6 percent on exact volumes. It is sound as stated and must not be transferred
+  to nearby parameters without recomputation.
 
 Outbound literature queries on this track must not disclose our unpublished
 parameters or constructions; verdicts blocked by that constraint are recorded
