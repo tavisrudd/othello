@@ -264,7 +264,14 @@ commit a self-contained official source state.
     manifest, unexpected deletion, reverse-reference, and unregistered-paper detection.  Record a
     bounded result table naming every paper/export, source revision, base/package revision, gate,
     and pass/fail disposition; no configured paper may be silently skipped.
-13. Update C287/C324/C686/C687 records and the build-sys handoff, then complete C864 through the
+13. Re-run the package source audit for every adopted package against its authority revision and
+    require zero drift, as the final evidence step before closeout.  A package and the monorepo
+    build from separate copies of any source both still carry, so nothing else detects a divergence
+    between them; the audit is the only check that does.  The same re-run is required immediately
+    before each remaining deletion, not only here: a duplicate that is byte-identical today can
+    drift under any lane editing the area, and the pre-deletion run is what makes the deletion
+    provably a deletion rather than a silent overwrite of the newer bytes.
+14. Update C287/C324/C686/C687 records and the build-sys handoff, then complete C864 through the
     archive-first lifecycle.
 
 ## Near-term plan while the Paper I remediation holds the Lean tree
@@ -336,7 +343,10 @@ Runnable now, in order:
 11. Every registered paper Lean export has a fresh two-materialization identity check, complete
     manifest and terminal/axiom agreement, and a green documented release gate after the
     certificate removals; the global audit reports no missing, stale, or unregistered export.
-12. Arcs and Clebsch rigidity have zero untriaged trust warnings: Kim--Vu and any surviving Dye
+12. A closing source audit of every adopted package against its authority revision reports zero
+    drift, with each surviving difference named and justified, and each deletion is covered by its
+    own immediately preceding audit run.
+13. Arcs and Clebsch rigidity have zero untriaged trust warnings: Kim--Vu and any surviving Dye
     inputs have exact theorem-level anchors and cited scope, Al-Seraji--Al-Ogali is demonstrably only
     a consistency check, the NRC/GRS gap is closed by the validated strong theorem, and all local
     and external facts, generated trust views, and paper statements agree.
