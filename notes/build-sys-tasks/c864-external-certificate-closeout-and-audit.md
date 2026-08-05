@@ -239,6 +239,10 @@ commit a self-contained official source state.
     Al-Seraji--Al-Ogali anchors, the strong NRC/GRS closure, Dye input audit, fresh local/external
     facts, regenerated trust documents, and paper/Lean reconciliation with zero untriaged warning.
 11. Enumerate every registered paper Lean companion export and standalone Lean-for-paper package.
+    The registered companion-export areas are exactly the configurations in `lean/trust/export/`:
+    Clebsch passages, Clebsch support-cubic orientation, golden quantum statistics, and MDS--CSS
+    transversal groups.  Each must be re-exported here against the resealed base manifest, not
+    only the areas whose certificates moved.
     For each one, run the guarded export plan, materialize two disposable candidates from the exact
     committed source/base revisions, require byte-identical outputs and complete manifests, verify
     the declared terminals and axiom facts, and run the paper's documented import-only release
