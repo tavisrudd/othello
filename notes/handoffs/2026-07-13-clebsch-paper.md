@@ -140,8 +140,18 @@ accepted the formalization with prose fixes only, all applied.  Reports:
 `notes/2026-08-04-c815-aligned-design-faithfulness.md` and
 `notes/2026-08-04-c815-aligned-faithfulness-review.md`.
 
+The determinant-square clause of gap class B row OPER-1 is closed.  The
+determinant of an order-six skew-symmetric matrix with vanishing diagonal is
+the square of its Pfaffian over any commutative ring, so the fixed conference
+bracket matrix has determinant sixteen times the square of its triangle cubic;
+the golden-return gate audits both terminals with no compiled-evaluation axiom
+and all three Lean gates replay.  Report:
+`notes/2026-08-05-c815-determinant-square.md`.  It also records that the
+release gate's manuscript-build check now fails on the tracked PDF, which no
+Paper III Lean work touches.
+
 What remains for C815 is the rank-14 weighted Jacobian of gap class C and the
-nine manuscript clauses of gap class B in
+rest of the manuscript clauses of gap class B in
 `notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`.  Two human
 inputs remain in manuscript row OPER-4: the identification of the marked
 determinant-minus-three family of a conference matrix with the aligned family,
@@ -504,12 +514,17 @@ is an import-only module over the concurrence bound, the chord-matching and
 one-factorization combinatorics, the golden normal form, and the order-eleven
 identification; `lean/trust/areas/relconic.toml` declares it as a gate with eleven
 terminals, the module elaborates, and its closure covers ten modules that no unit
-reached before. Two things are still needed before the package re-pin can retire the
-axiom downstream: the facts artifact, whose extraction refuses while another lane's
-uncommitted Lean work sits in the worktree, so the eleven declared axiom sets are
-unconfirmed; and an export configuration, since choosing between a new companion
-boundary and widening the existing golden-orientation one is a release decision.
-Seven consumer modules of the wider order-eleven rigidity development — the defect
+reached before. It is exported as a companion boundary of its own,
+`lean/trust/export/clebsch_six_arc_concurrence.toml`, rather than through the
+golden-orientation boundary, which shares no module or terminal with it and whose
+correspondence text now names the six-arc boundary as the place the bound and the
+classification are proved; the two must therefore be exported in the same round.
+One thing is still needed before the package re-pin can retire the axiom downstream:
+the facts artifact, whose extraction refuses while another lane's uncommitted Lean
+work sits in the worktree, so the eleven declared axiom sets are unconfirmed and the
+export `plan` stops at that gap. In the base library the order-eleven specializations
+remain axioms of `RelativeConicArcs.Q11DyeAxioms`; replacing them by proofs of the
+exported theorems is forward work under the re-pin. Seven consumer modules of the wider order-eleven rigidity development — the defect
 bridge, the degenerate-conic exclusion, perspectivity, the two prism modules, and the
 rigidity spine and code bridge — are still reached by no unit and are left visible as
 errors rather than declared away. Report:
