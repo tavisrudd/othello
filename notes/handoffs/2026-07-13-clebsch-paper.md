@@ -1023,23 +1023,22 @@ cd papers/clebsch-covers
 
 Audited in C869, report `../2026-08-05-c869-paper-iv-series-literature-audit.md`.
 
-- **Act on first.** The lane holds a counterexample to a published claim.
-  Crnkovic, Rukavina and Simac (arXiv:2002.06690, AAECC) build LDPC codes from
-  the same trivalent symmetric graphs and tabulate every bipartite one below
-  200 vertices. Their row for our 182-vertex graph is \([91,14,26]\), one of
-  our two biadjacency kernels; the other, \([91,14,28]\), is missing because
-  they assert the two sides always give equivalent codes on the grounds that an
-  arc-transitive graph is vertex-transitive. That fails for a bipartite graph
-  whose automorphism group preserves the parts, which is our case, and the two
-  kernels have different minimum distances. Their LCD marking against our
-  doubly-even side corroborates it independently. **Do not assert this publicly
-  until the published AAECC version is read**; only the preprint has been seen,
-  and a DOI-less 2019 item by the same group may carry the table earlier and
-  was not obtained.
-- **Pre-empted.** The 182-vertex cubic coset graph is entry `C182.4` of
-  Conder's census of trivalent symmetric graphs, the unique bipartite girth-12
-  cubic symmetric graph of that order. This answers the orbit-correspondence
-  bundle's own open question 4 affirmatively.
+- **Pre-empted.** The graph is `X.182.1` in Conder and Potocnik's census of
+  **semisymmetric** graphs. It is edge- but not vertex-transitive; two distinct
+  cubic bipartite girth-twelve graphs exist at order 182, and this is not the
+  symmetric one. Our own kernels prove the semisymmetry independently: they are
+  \([91,14,28]\) and \([91,14,26]\), and a part-swapping automorphism would
+  force them to be equivalent. This answers the orbit-correspondence bundle's
+  open question 4 affirmatively, in the census the bundle was not looking at.
+- **Withdrawn.** An earlier reading of C869 held that the lane contained a
+  counterexample to a published equivalence claim of Crnkovic, Rukavina and
+  Simac. It does not. Their symmetric-graph paper uses the equivalence
+  correctly, since arc-transitive does imply vertex-transitive, and their 2022
+  follow-up on semisymmetric graphs states explicitly that the transpose gives
+  another code and tabulates both sides with differing distances. The row
+  originally matched belongs to a different graph. The asymmetry between our
+  two sides is real; the claim that it contradicts published work is retracted.
+  Full trail in `../2026-08-05-c871-fold-tower-literature-audit.md`.
 - **No predecessor located.** The parity-complement lift, the cross-orbital
   exhaustion, the higher shell, the support-XOR identities, and the colour-lift
   theorem.
@@ -1084,9 +1083,25 @@ Current state:
   level, partly superseded), `../2026-08-05-c867-ladder-record-attack.md`
   (uniform ladder, symmetry obstructions, Eisenstein model),
   `../2026-08-05-c866-exceptional-code-ladder-literature-audit.md` (novelty).
-- Novelty: the level codes themselves are Calderbank--Kantor two-weight codes
-  and are not new. No predecessor was located for the root-link fold statement,
-  the affine-root-lattice carrier, or the ladder as an exceptional series.
+- **Novelty: largely dissolved. Do not start a manuscript on this track.** The
+  level codes are Calderbank--Kantor two-weight codes (C866). The fold itself is
+  Brouwer--Shult 1990, stated at general rank as Proposition 3.6.1 of Brouwer
+  and Van Maldeghem's *Strongly Regular Graphs*: in the graph on the nonsingular
+  points of a quadratic form over \(\mathbf F_2\), the vertices at distance two
+  from a fixed vertex form the **Taylor extension** of the graph two ranks down.
+  A Taylor extension is an antipodal double cover, so it carries our involution
+  and its antipodal classes are our fold. The arithmetic matches at our rank
+  with no adjustment. That book also heads a subsection "Tower and clique
+  sizes", and names our bottom three levels outright: the graph on the 120 root
+  pairs comes from the E8 root system, its local graph is the **Gosset graph**,
+  which is the Taylor extension of the **Schlafli graph**, itself labelled the
+  E6 graph. Our 120-56-28-27 chain is three named classical objects with a
+  published relationship, so the C870 recommendation to lead with the
+  general-rank tower is **reversed**: the tower is the occupied part. Calderbank
+  and Kantor genuinely contain no rank relation, but the gap is filled in the
+  strongly-regular-graph literature instead. What survives is the code-level
+  weight-enumerator statement and the affine-root-lattice carrier, judged too
+  thin to carry a paper.
   Before any design claim, read the Chakravarti IMA chapter
   (DOI `10.1007/978-1-4613-8994-1_4`) at full text; it is still at metadata
   only. MathSciNet is NOT COVERED, so "to our knowledge" stays on every

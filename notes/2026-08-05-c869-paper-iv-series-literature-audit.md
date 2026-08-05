@@ -3,7 +3,34 @@
 **Date:** 2026-08-05
 **Task:** C869
 **Lane:** `clebsch`
-**Status:** complete
+**Status:** complete, with two findings retracted — see below before using anything here
+
+> **Retraction, 2026-08-05, by C871
+> (`2026-08-05-c871-fold-tower-literature-audit.md`).**
+> Two of this report's findings are withdrawn.
+>
+> 1. The graph is **semisymmetric**, not symmetric. It is `X.182.1` in Conder
+>    and Potocnik's semisymmetric census, not `C182.4` in the symmetric one;
+>    two distinct cubic bipartite girth-twelve graphs exist at order 182, and
+>    this report matched on girth, which the symmetric census already fixes,
+>    rather than on transitivity, which was free and discriminating.
+> 2. The **counterexample claim is withdrawn entirely.** Crnkovic, Rukavina and
+>    Simac make no error: their symmetric-graph paper uses the equivalence
+>    correctly, since arc-transitive does imply vertex-transitive, and their
+>    2022 follow-up on semisymmetric graphs states explicitly that the transpose
+>    gives another code and tabulates both sides with differing distances. The
+>    `182D` row matched here belongs to a different graph and the parameter
+>    agreement was coincidence.
+>
+> Our own certified numbers already implied item 1 and should have caught it:
+> the two biadjacency kernels are \([91,14,28]\) and \([91,14,26]\), and a
+> part-swapping automorphism would force them to be equivalent and so to share
+> a minimum distance. The asymmetry between the two sides is real; only the
+> claim that it contradicts published work is withdrawn.
+>
+> Everything else in this report stands, including the no-predecessor verdicts
+> on the parity-complement lift, the cross-orbital exhaustion, the higher shell,
+> the support-XOR identities, and the colour-lift theorem.
 
 Audited bundles (all dated 2026-08-04, all in `notes/`):
 
