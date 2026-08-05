@@ -609,6 +609,102 @@ automatic differentiation.  It does not yet carry a Fisher metric or a
 probability model, so the safe conclusion is an algebraic tangent object,
 not a statistical-manifold identification.
 
+## Quantum and physical formulations
+
+The binary support identities have direct realizations as commuting Pauli
+constraints, a CSS seed, and a single-particle hopping model.  None requires
+identifying the finite-field dual-number module with a complex Hilbert space.
+
+### Redundant Pauli measurements and metachecks
+
+Let \(W\subset\mathbf F_2^{78}\) be the common row span of \(N_O\) and
+\(N_5\), of dimension thirty-six, and put
+
+\[
+ Z(v)=\prod_{i:v_i=1}Z_i
+\]
+
+on seventy-eight qubits.  The two support families are redundant generating
+frames for the same abelian Pauli subgroup.  Their operator identities are
+
+\[
+ Z(O)=Z(T_1)Z(T_2)Z(T_3),
+ \qquad
+ Z(T)=Z(O_1)Z(O_2)Z(O_3).
+\]
+
+Thus they give two weight-twelve measurement schedules for the same
+constraint algebra, with three-local classical conversion between outcome
+bits.  Independently measured syndrome vectors \((x,y)\) must satisfy the
+weight-four metachecks encoded by
+
+\[
+ H\binom{x}{y}=0,
+ \qquad
+ H=\begin{pmatrix}I&C\\ C^{\mathsf T}&I\end{pmatrix}.
+\]
+
+Physical data-error syndromes form the thirty-six-dimensional joint image of
+\((N_O,N_5)\), while \(\ker H\) has one additional constant direction.
+Measurement noise generally violates the metachecks.  A distance and
+soundness theorem for this metacode would therefore give a concrete route to
+redundant, potentially single-shot-style syndrome validation; neither claim
+is made without that theorem.
+
+The two commuting twelve-body Hamiltonians
+
+\[
+ \mathsf H_O=\sum_{O\in\mathcal O}\frac{I-Z(O)}2,
+ \qquad
+ \mathsf H_T=\sum_{T\in\mathcal T_5}\frac{I-Z(T)}2
+\]
+
+have the same rank-thirty-six constraint algebra and the same
+\(2^{42}\)-dimensional ground space, although their redundant terms and
+excitation spectra differ.  They are classical commuting-Pauli Hamiltonians,
+not by themselves quantum memories.
+
+### A finite hypergraph-product seed
+
+The symmetric \(182\)-square matrix \(H\) has rank \(145\), kernel dimension
+\(37\), and row and column weight four.  Its self-hypergraph product therefore
+defines a CSS code with
+
+\[
+ N_Q=2\cdot182^2=66248,
+ \qquad
+ K_Q=2\cdot37^2=2738,
+\]
+
+and stabilizer-check weight at most eight.  This is a concrete finite quantum
+LDPC construction with the inherited coset symmetry.  Its distance is not
+known; coordinate columns already give classical frame-code words of weight
+twenty-eight, so the construction is a structured test instance rather than
+an asserted competitive asymptotic family.
+
+### Chiral hopping and quantum walks
+
+Over \(\mathbf C\), the adjacency Hamiltonian
+
+\[
+ \mathsf A=\begin{pmatrix}0&C\\ C^{\mathsf T}&0\end{pmatrix}
+\]
+
+is a cubic, bipartite, chiral hopping model on 182 sites.  Since \(C\) has
+rational rank seventy-seven, \(\mathsf A\) has twenty-eight exact zero-energy
+states.  Its nonzero energies are the signed singular values of \(C\), and
+the same singular values determine the eigenphases of the Szegedy
+quantization of the channel \(C/3\).  Equal sublattice sizes mean that the
+zero modes are not protected merely by a sublattice-index argument; a
+representation-theoretic stability statement would be needed.
+
+The finite-field relation
+\(\varepsilon^2=0\), with
+\(\operatorname{im}\varepsilon=\ker\varepsilon\) on the paired module, is an
+acyclic algebraic differential.  Without a complex lift, inner product, and
+locality model it does not define a protected logical sector, exceptional
+point, topological phase, or supersymmetric Hamiltonian.
+
 ## Evidence and replay
 
 The committed checker constructs the two \(G\)-orbits from Paper IV's tracked
@@ -667,3 +763,6 @@ paper promotion.
 10. Compute the exact real singular spectrum, Smith normal form, and integer
     Markov basis of \(C\); these respectively control information contraction,
     characteristic dependence, and the algebraic-statistical fibres.
+11. Compute the frame metacode distance and soundness, then decide whether the
+    redundant Pauli frames support useful measurement-error correction or a
+    nontrivial CSS construction.
