@@ -1019,6 +1019,43 @@ cd papers/clebsch-covers
 ./scripts/verify-all.sh
 ```
 
+## Paper IV series novelty position
+
+Audited in C869, report `../2026-08-05-c869-paper-iv-series-literature-audit.md`.
+
+- **Act on first.** The lane holds a counterexample to a published claim.
+  Crnkovic, Rukavina and Simac (arXiv:2002.06690, AAECC) build LDPC codes from
+  the same trivalent symmetric graphs and tabulate every bipartite one below
+  200 vertices. Their row for our 182-vertex graph is \([91,14,26]\), one of
+  our two biadjacency kernels; the other, \([91,14,28]\), is missing because
+  they assert the two sides always give equivalent codes on the grounds that an
+  arc-transitive graph is vertex-transitive. That fails for a bipartite graph
+  whose automorphism group preserves the parts, which is our case, and the two
+  kernels have different minimum distances. Their LCD marking against our
+  doubly-even side corroborates it independently. **Do not assert this publicly
+  until the published AAECC version is read**; only the preprint has been seen,
+  and a DOI-less 2019 item by the same group may carry the table earlier and
+  was not obtained.
+- **Pre-empted.** The 182-vertex cubic coset graph is entry `C182.4` of
+  Conder's census of trivalent symmetric graphs, the unique bipartite girth-12
+  cubic symmetric graph of that order. This answers the orbit-correspondence
+  bundle's own open question 4 affirmatively.
+- **No predecessor located.** The parity-complement lift, the cross-orbital
+  exhaustion, the higher shell, the support-XOR identities, and the colour-lift
+  theorem.
+- **Folklore, correctly identified as such.** The frame channel, the
+  dual-number frame modules and golden exchange, the \(\mathbf F_{64}\)
+  exclusion, the Tanner framing, the quantum formulations, the algorithmic
+  bounds, the compact representations, the Farkas certificate, the
+  Clebsch-connection document, and the E7 design, tetrad and CSS residue.
+- The E6 code reaches the same Calderbank--Kantor family by a second route, its
+  own Cartan-cubic monomial-support derivation landing on the minus-type
+  elliptic-quadric two-weight code. All three level codes are one family read
+  at three ranks.
+- The code-CFT root-lattice literature is **not** a predecessor for the quantum
+  frame formulations and must not be cited as one; it stays relevant only to
+  the E8 and E9 items.
+
 ## Exceptional code ladder
 
 Research track, no manuscript yet. One binary code per exceptional level, each
