@@ -111,7 +111,11 @@ The replay program never starts Lean or Lake itself.
 The operator consolidation uses the expanded golden-return theorem package as
 a second pinned formal map.  It covers the conference, triangle, two-graph,
 middle-exterior, support-recovery, golden-descent, fixed-conference
-commutator-Pfaffian, and order-six signed-triangle mechanisms.  The general
+commutator-Pfaffian, order-six skew determinant-square, and order-six
+signed-triangle mechanisms.  The determinant square is proved for every
+order-six skew-symmetric matrix with vanishing diagonal over a commutative
+ring, and specialized to the fixed conference bracket matrix, whose
+determinant is sixteen times the square of its triangle cubic.  The general
 inclusion/Ramsey exchange-rigidity proof, the classical inputs to the
 aligned-design faithfulness argument, outer-family coherence, the cross-golden
 determinant comparison, and the classical Joubert--Segre--Igusa

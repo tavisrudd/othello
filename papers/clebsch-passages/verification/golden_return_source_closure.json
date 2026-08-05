@@ -12,7 +12,7 @@
     "Mathlib.Tactic.NormNum.NatFactorial",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 17,
+  "module_count": 18,
   "roots": [
     "RelativeConicArcs.Gates.ClebschGoldenReturn"
   ],
@@ -97,10 +97,16 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 6297,
+      "bytes": 6856,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "e0fa2b6f5a59b762ebfa35a47a3900ebc3550fb0b9a1816f212bd598f4f6e682"
+      "sha256": "15293f65fe37a4cfdcbdb044f62ab1d0d6d3cb55c574c4984fc20b52de6ef871"
+    },
+    {
+      "bytes": 5731,
+      "module": "RelativeConicArcs.GoldenCommutatorDeterminant",
+      "path": "RelativeConicArcs/GoldenCommutatorDeterminant.lean",
+      "sha256": "e06a8bb0d4d024aa3b57e5e7166f983d4d887e57473d16922e2f989ba0f78e61"
     },
     {
       "bytes": 5030,

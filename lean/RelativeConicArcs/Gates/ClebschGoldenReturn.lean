@@ -4,6 +4,7 @@ import RelativeConicArcs.ClebschMiddleExteriorDiagonal
 import RelativeConicArcs.ClebschMiddleExteriorSupport
 import RelativeConicArcs.ClebschGoldenDescent
 import RelativeConicArcs.ClebschOperatorShadows
+import RelativeConicArcs.GoldenCommutatorDeterminant
 import RelativeConicArcs.ConferenceCutSpectrum
 
 /-!
@@ -13,7 +14,12 @@ This gate imports the formal package for the order-six golden conference
 matrix, its triangle cubic and two-graph reconstruction, the fixed
 middle-exterior return, and the restriction-of-scalars comparison.
 The commutator-Pfaffian bridge identifies the matching expansion of the
-fixed conference matrix with four times its triangle cubic.
+fixed conference matrix with four times its triangle cubic, and the
+determinant of an order-six skew-symmetric matrix with vanishing diagonal is
+the square of that Pfaffian, so the determinant of the fixed conference
+bracket matrix is sixteen times the square of the triangle cubic.  Both
+determinant statements are polynomial identities over an arbitrary commutative
+ring.
 The three-vertex principal-block identity gives the formal algebraic core of
 the order-six balanced exchange-spectrum calculation.  The higher-order
 inclusion-rank and Ramsey exclusion remains a human proof.
@@ -93,5 +99,7 @@ data.  No generated certificate or externally supplied matrix is imported.
 
 #print axioms RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic
 #print axioms RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic
+#print axioms RelativeConicArcs.GoldenCommutatorDeterminant.det_eq_pfaffianSix_sq
+#print axioms RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq
 
 #print axioms RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq

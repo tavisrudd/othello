@@ -132,9 +132,11 @@
       "supplemental_declarations": [
         "RelativeConicArcs.ClebschMiddleExterior.middleExterior_diagonal",
         "RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic",
-        "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic"
+        "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic",
+        "RelativeConicArcs.GoldenCommutatorDeterminant.det_eq_pfaffianSix_sq",
+        "RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq"
       ],
-      "excluded": "coherence of the outer six-family, the determinant-square identity, and the cross-golden determinant comparison remain human proofs"
+      "excluded": "coherence of the outer six-family and the cross-golden determinant comparison remain human proofs.  The determinant-square identity is checked: the determinant of an order-six skew-symmetric matrix with vanishing diagonal is the square of its Pfaffian, so the determinant of the fixed conference bracket matrix is sixteen times the square of its triangle cubic."
     },
     "OPER-2": {
       "coverage": "partial mechanism; no full row claim",

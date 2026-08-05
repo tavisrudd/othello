@@ -32,16 +32,18 @@
     "RelativeConicArcs.ClebschGoldenDescent.normalizedReturnScalar",
     "RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic",
     "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic",
+    "RelativeConicArcs.GoldenCommutatorDeterminant.det_eq_pfaffianSix_sq",
+    "RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq",
     "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
   ],
   "axiom_report_provenance": {
-    "build_run_id": "run-20260804-200729-e9005914",
+    "build_run_id": "run-20260805-222156-546ff8b3",
     "gate_stdout": "verification/evidence/gate_stdout/golden_return.stdout.txt",
-    "gate_stdout_sha256": "09b38e78a56b35588a01a9dee065b19d4c9475862d100ace176b939d98c919c1",
+    "gate_stdout_sha256": "3ab45e5fe018bdb767a1ead4c553c7675fbf3353c825233b2367690396e5c259",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand."
   },
-  "axiom_report_sha256": "88aa1edc3edc222a923b73010d81d0d3e6fcba3660110c3fad8bc17dbb7e9c2d",
+  "axiom_report_sha256": "36bd38d559f4839901a2c45edad996aad2362119e150264dc9d5aade8913ab45",
   "claim_map": {
     "OPER-1": {
       "coverage": "partial mechanism; no full row claim",
@@ -62,6 +64,8 @@
         "RelativeConicArcs.ClebschMiddleExterior.commonIntersectionOneNeighbors_eq_zero_iff",
         "RelativeConicArcs.ClebschOperatorShadows.matchingEvaluation_conferenceMatrix_eq_triangleCubic",
         "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic",
+        "RelativeConicArcs.GoldenCommutatorDeterminant.det_eq_pfaffianSix_sq",
+        "RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq",
         "RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_sq",
         "RelativeConicArcs.ClebschGoldenDescent.goldenCompanion_mul_descendedCoefficient",
         "RelativeConicArcs.ClebschGoldenDescent.conference_mul_degreeTenComparison",
@@ -98,7 +102,7 @@
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-golden-return-formal-v1",
-  "source_closure_sha256": "af5358445986d75da21ad86d9f3c3c8f8d9cf4fa5d745f075049f64068a0d67d",
+  "source_closure_sha256": "fa7dc0a011f2e23ee83c854c09b228d65c6e23bf819a6b44013539e3ba73e901",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschGoldenDescent.lean": "f8582958e6c06d9b9d47e6f7fba2d77a3182ec06659d67bd171e76f78e5260ff",
@@ -113,7 +117,8 @@
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ConferenceCutSpectrum.lean": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "e0fa2b6f5a59b762ebfa35a47a3900ebc3550fb0b9a1816f212bd598f4f6e682",
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "15293f65fe37a4cfdcbdb044f62ab1d0d6d3cb55c574c4984fc20b52de6ef871",
+    "RelativeConicArcs/GoldenCommutatorDeterminant.lean": "e06a8bb0d4d024aa3b57e5e7166f983d4d887e57473d16922e2f989ba0f78e61",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",
     "RelativeConicArcs/WeightedMatchingEvaluation.lean": "06ef04d1a05622f94a0e46a87f4d66e2ac5a6f355a1bad9daedcb8e4a5355e66"
