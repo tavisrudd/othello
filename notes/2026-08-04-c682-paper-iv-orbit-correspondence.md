@@ -126,9 +126,9 @@ repairing it.
 
 ## Companion delegated probes
 
-These two results were obtained in bounded delegated exact probes but are not
-certified by the attached correspondence checker.  They remain advisory until
-their executed constructions receive separate committed evidence bundles.
+The route-1 result now has its own committed exact bundle at
+`notes/2026-08-04-c682-paper-ii-octahedral-transfer.md`; route 3 remains
+advisory until its finite-field construction receives a separate bundle.
 
 ### Route 1: common octahedral carrier
 
@@ -210,4 +210,3 @@ paper promotion.
 4. Determine whether the \(182\)-vertex cubic coset graph is classical.
 5. Decide whether the weaker regular-orbit golden norm shadow has a conceptual
    formulation worth retaining after the stronger octahedral--toric transform.
-
