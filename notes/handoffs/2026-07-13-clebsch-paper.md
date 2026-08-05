@@ -434,13 +434,25 @@ The first of the two declared Dye inputs is closed: the ten-point bound on
 triple-concurrence points is a proved theorem over any field in which two is
 invertible, the rigidity gate is green, and its permitted-axiom entry is
 deleted. The equality classification remains the single non-standard axiom of
-that gate, reached by three terminals. Its transitivity input — two triangles
-in double perspective are in triple perspective — is proved, together with a
-frame-coordinate determinant criterion; neither module is reached by a gate
+that gate, reached by three terminals. Two of its inputs are now proved over an
+arbitrary field: two triangles in double perspective are in triple perspective,
+and a hexagon whose four named chord triples are concurrent has the golden
+normal form `(1:0:0), (φ:1:1), (0:1:0), (1:φ:1), (0:0:1), (1:1:2−φ)` with
+`φ² = φ + 1`, so the ground field contains a golden root. The shared
+frame-coordinate helpers are promoted into `FrameCoordinates`, and the
+perspectivity module now compiles against that compiled dependency rather than
+a scratch copy. What remains for the axiom is the chord-pairing bijection to
+concurrent matchings, the `5 + 1` partition at count ten, the hexagonal
+labelling that supplies the four concurrences, and the order-eleven projectivity
+onto the displayed witness. None of the three new modules is reached by a gate
 yet. Records:
 [`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
 and
-[`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md).
+[`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md),
+with the two new proofs reported in
+[`../2026-08-04-c855-triple-perspective.md`](../2026-08-04-c855-triple-perspective.md)
+and
+[`../2026-08-04-c855-golden-normal-form.md`](../2026-08-04-c855-golden-normal-form.md).
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
@@ -925,6 +937,24 @@ Local aggregate replay:
 cd papers/clebsch-covers
 ./scripts/verify-all.sh
 ```
+
+## Companion-export chain
+
+Paper III's formal companion is back on the guarded chain. Its gate
+`RelativeConicArcs.Gates.ClebschPassages` is declared in
+`lean/trust/areas/relconic.toml` with all fifty terminals and their expected
+axioms, its extracted fact is committed, and
+`lean/trust/export/clebsch_passages.toml` supplies the destination names and
+release prose. The exporter's `plan` resolves the fifteen-module closure and the
+full destination file set.
+
+Running the export is blocked by drift in the canonical base rather than by
+anything Paper III owns: `TARGET_MANIFEST.json` in `~/src/lean/finitegeom`
+disagrees with its own tree at four paths — `ProjectiveCap/Sym2ConicBridge.lean`
+changed, and the three `Q16` modules were moved to a certificate package —
+because three base commits landed without resealing that manifest. Every
+companion export refuses until the base is resealed, so the reseal is the
+blocker to raise before the next export of any area.
 
 ## Release and verification policy
 
