@@ -162,6 +162,13 @@ randomness.
   uncomparable against public tables at that length.
 - **Open — novelty.**  Delegated as C866; see that report.
 
+**Superseded in part by C867.**  The affine carrier is not special: this code
+is the root-link half of the \(E_{10}\) code \([496,11,240]\), so the Plotkin
+description above is an accident of the degenerate carrier rather than the
+operation that produces the code.  C867 also proves no Plotkin rebalancing
+beats 112 here, and that no invariant enlargement of this code exists.  See
+`2026-08-05-c867-ladder-record-attack.md`.
+
 ## Vibe check
 
 Solid but deliberately deflationary.  The affine level was the obvious next

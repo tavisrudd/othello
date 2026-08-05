@@ -2699,8 +2699,17 @@
       "last": 866,
       "purpose": "E9 affine level code; literature/novelty audit of the E6-E7-E8-E9 exceptional code ladder",
       "sequence": 300
+    },
+    {
+      "count": 1,
+      "first": 867,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 867,
+      "purpose": "record-matching attack on the exceptional code ladder: symmetry obstructions and the E10 root-hyperplane carrier",
+      "sequence": 301
     }
   ],
-  "next_id": 867,
+  "next_id": 868,
   "schema": "codex-task-id-allocations-v1"
 }
