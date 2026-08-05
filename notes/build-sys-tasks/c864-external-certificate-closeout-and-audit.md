@@ -296,15 +296,16 @@ Runnable now, in order:
    below.  Report: `notes/2026-08-05-c864-q11-package-source-audit.md`.  Re-run it immediately
    before the remaining order-eleven cut: nothing but this audit detects drift in those seven
    duplicated sources, and the area is under active edit.
-2. **Adversarial boundary-checker fixtures.**  Three of step 8's four return paths are covered and
-   green: the payload returning as monorepo source, an imported external leaf, a copied generator
-   under a declared name, and all three edited-pin paths — moved commit pin, unfollowed manifest
-   reseal, and a sealed source altered inside the official checkout.  The fourth, a novel generated
-   family, needs a generated-banner detection rule plus a declared pending-family allowlist, because
-   the monorepo currently carries 9,332 banner-bearing Lean files and an unqualified rule would turn
-   the gate red across the tree.  That changes what the boundary gate asserts, so it is surfaced for
-   a decision rather than taken; the allowlist would double as completion evidence, since it is
-   empty only when every family has been externalized.  Report:
+2. **Adversarial boundary-checker fixtures.**  Done; all four of step 8's return paths are covered
+   and green, and both real-tree checks pass.  Covered: the payload returning as monorepo source, an
+   imported external leaf, a copied generator under a declared name and under any other name, all
+   three edited-pin paths — moved commit pin, unfollowed manifest reseal, sealed source altered
+   inside the official checkout — and a novel generated family.  The last needed two new rules, an
+   undeclared-generated-family rule in the default check and a content-identity rule against the
+   official checkouts, plus a `pending_family` table in `lean/trust/certificate-packages.toml`
+   declaring each generated family still resident in the monorepo with the package that will own it.
+   That table is the remaining externalization scope in machine-checked form and must be empty at
+   closeout, including its four `resident-unclassified` entries.  Report:
    `notes/2026-08-05-c864-boundary-checker-fixtures.md`.
 3. **Split-line planning for the remaining order-eleven families** — coding, Brianchon--Petersen,
    decoding synthesis.  Read-only inventory and import-DAG analysis producing a proposed boundary;
@@ -344,7 +345,9 @@ Runnable now, in order:
 8. The strong Clebsch-rigidity projective-GRS theorem and focused gate pass, closing the NRC/GRS
    trust warning at theorem strength rather than by prose reclassification.
 9. The permanent boundary test rejects all known return paths and includes fixtures for a novel
-   generated family, an imported external leaf, a copied generator, and an edited package pin.
+   generated family, an imported external leaf, a copied generator, and an edited package pin.  The
+   `pending_family` table is empty, with no family left `external-pending` or
+   `resident-unclassified`.
 10. A final bounded audit reports zero unexplained certificate findings and names every official
     repository, revision, manifest hash, cache hash, gate, terminal, and remaining trusted axiom.
 11. Every registered paper Lean export has a fresh two-materialization identity check, complete

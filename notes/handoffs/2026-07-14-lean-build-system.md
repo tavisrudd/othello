@@ -81,7 +81,14 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   manifest and preserved gate log, and refuses a dirty tree, a foreign root, moved Lean sources, an
   unfinished gate, or evidence differing from the run's own log.
 - `lean-certificate-boundary.py`: rejects certificate-owned sources, imports, and replay artifacts
-  in the monorepo; `--verify-official-libraries` also checks package pins and published facts.
+  in the monorepo, plus any generated family belonging to no package and to no declared pending
+  family; `--verify-official-libraries` also checks package pins and published facts and rejects a
+  monorepo file byte-identical to one an official package owns.  The `pending_family` table in
+  `lean/trust/certificate-packages.toml` declares each generated family still resident here and the
+  package that will own it; it is empty only when the externalization is complete.
+- `lean-package-source-audit.py`: read-only comparison of a package's sealed sources against the
+  monorepo revision they came from, the current tree, and the pinned base.  Runs no Lean, takes no
+  lock, so it is valid while another lane holds the tree.
 - `paper-facts.py`: per-manuscript facts from tracked bytes, plus `audit`/`check`. Runs no Lake,
   LaTeX, or BibTeX.
 - `lean-companion-export.py`: `plan`/`run` for companion export onto the canonical `finitegeom`
@@ -202,6 +209,10 @@ per-step cards under [`../build-sys-tasks/`](../build-sys-tasks/).
 [`../2026-07-19-c365-literature-audit-conventions-fable-review.md`](../2026-07-19-c365-literature-audit-conventions-fable-review.md).
 Its read-depth vocabulary and coverage outcomes are the source of truth for the C328
 evidence-metadata schema and must change together with it.
+
+## Discovery track
+
+Incidental observations: [`../2026-08-05-build-sys-discovery-track.md`](../2026-08-05-build-sys-discovery-track.md).
 
 ## Registered spin-off (no C task)
 

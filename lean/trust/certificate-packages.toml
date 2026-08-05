@@ -44,3 +44,49 @@ owned_module_prefixes = [
 forbidden_artifact_basenames = [
   "generate-q11-a5-point-action.py",
 ]
+
+# Generated families still resident in the monorepo, each named with the official package
+# that will own it.  A generated source outside both the owned prefixes above and these
+# prefixes is a family that was never declared, and is rejected.  These declarations are
+# the remaining externalization scope: this table is empty exactly when it is finished.
+#
+# `disposition` is `external-pending` when the owning package is decided, and
+# `resident-unclassified` when the source is generated but its ownership has not been
+# determined.  Neither may survive closeout.
+
+[[pending_family]]
+name = "order-25 certificate data"
+owner = "finitegeom-q25-certificates"
+disposition = "external-pending"
+path_prefixes = ["lean/RelativeConicArcs/Q25"]
+
+[[pending_family]]
+name = "order-13 passant-code certificates"
+owner = "finitegeom-projective-cap-q13-certificates"
+disposition = "external-pending"
+path_prefixes = ["papers/q13-passant-code/lean-certificates/"]
+
+[[pending_family]]
+name = "order-eleven families awaiting their cut"
+owner = "finitegeom-clebsch-q11-certificates"
+disposition = "external-pending"
+path_prefixes = [
+  "lean/RelativeConicArcs/ClebschGatewayQ11Extension.lean",
+  "lean/RelativeConicArcs/Q11BrianchonPetersen.lean",
+  "lean/RelativeConicArcs/Q11CodeRigidityBridge.lean",
+  "lean/RelativeConicArcs/Q11DecodingSynthesis.lean",
+  "lean/RelativeConicArcs/Q11DyeConsequences.lean",
+  "lean/RelativeConicArcs/Q11RigiditySpine.lean",
+  "lean/RelativeConicArcs/SixArcDegenerateConicExclusion.lean",
+]
+
+[[pending_family]]
+name = "generated data modules of undetermined ownership"
+owner = "undetermined"
+disposition = "resident-unclassified"
+path_prefixes = [
+  "lean/RelativeConicArcs/AMELU/",
+  "lean/RelativeConicArcs/ClebschArithmeticGluingData.lean",
+  "lean/RelativeConicArcs/ClebschSchemeFourierData.lean",
+  "lean/RelativeConicArcs/SplitQuadraticPinching.lean",
+]
