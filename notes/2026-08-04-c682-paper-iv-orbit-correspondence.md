@@ -136,6 +136,20 @@ hidden field \(\mathbf F_8\), the paired frames carry
  \mathbf F_8[\varepsilon]/(\varepsilon^2).}
 \]
 
+The nilpotent has \(\mathbf F_8\)-rank twelve and its kernel equals its image,
+also of \(\mathbf F_8\)-dimension twelve.  Hence the paired frame module is
+free:
+
+\[
+ \boxed{
+ U\oplus U'
+ \cong
+ \bigl(\mathbf F_8[\varepsilon]/(\varepsilon^2)\bigr)^{12}.}
+\]
+
+Thus the correspondence thickens each of the code's twelve hidden-field
+coordinates; the nilpotent direction is not an unrelated summand.
+
 Paper I reconstructs the integral golden order
 \(\mathbf Z[B]\cong\mathbf Z[\sqrt5]\), with \(B^2=5I\).  Reducing its
 abstract order modulo two gives
