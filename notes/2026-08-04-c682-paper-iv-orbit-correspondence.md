@@ -395,6 +395,110 @@ completion premise is correct.
   relevant shadows.  This is computationally real but currently lacks the
   conceptual force of the failed \(A_5/C_5\) proposal.
 
+## Algorithmic consequences
+
+The correspondence gives an efficient reconstruction statement in addition
+to its structural interpretation.  Put \(M=91\), let \(n=78\) be the number
+of internal-point coordinates, and let \(w\) be the machine word size used
+for packed binary rows.  The matrix \(C\) has exactly
+
+\[
+ E=3M=273
+\]
+
+nonzero entries.  Once the marked transition is given, the identities
+
+\[
+ N_O=CN_5,\qquad N_5=C^{\mathsf T}N_O
+\]
+
+have the following exact algorithmic content.
+
+1. Every coordinate of either frame has query locality three in the other
+   frame.  Every complete support row is the XOR of three support rows from
+   the opposite frame.
+2. Reconstructing one complete frame from the other uses exactly \(2M=182\)
+   packed-row XORs, hence
+   \(\Theta(Mn/w)\) word operations in the dense bitset model.  This is
+   output-optimal up to constants.  Verifying both directions uses twice
+   that work.
+3. The marked transition certificate consists of \(3M=273\) incidences,
+   rather than the \(M^2=8281\) possible cross-family pairs.  For an abstract
+   family of cubic frame atlases this is a linear-size
+   \(\Theta(M)\) selected-relation certificate.  This bound assumes that the
+   marked coset transition is supplied or constructed group-theoretically;
+   discovering it from an entirely unlabelled pair of hypergraphs is a
+   separate canonical-labelling problem.
+4. The nontrivial code module can be recovered from
+   \[
+    \ker(C^{\mathsf T}C+I)
+      =\langle\mathbf1\rangle\oplus\operatorname{im}N_5
+   \]
+   using only sparse products by \(C\) and \(C^{\mathsf T}\).  Each such
+   product costs \(\Theta(E)\).  Standard randomized black-box linear algebra
+   therefore gives an expected \(\widetilde O(ME)=\widetilde O(M^2)\)
+   arithmetic route with \(O(M+E)\) matrix storage, without materializing the
+   dense two-step matrix.  A deterministic complexity improvement is not
+   claimed here.
+
+For each of the seventy-eight coordinates, the paired column vectors satisfy
+the weight-four consistency checks
+
+\[
+ x_i+\sum_{j\sim i}y_j=0,
+ \qquad
+ y_j+\sum_{i\sim j}x_i=0.
+\]
+
+Their solution space is a binary length-(182), dimension-(37) frame code;
+the trivial line accounts for the extra dimension above Paper IV's
+thirty-six-dimensional module.  Its minimum distance, decoding radius, and
+the algorithmic meaning of the fourteen-dimensional kernel of \(C\) are not
+yet known.  A distance or local-soundness theorem would turn the weight-four
+checks into a local tester and could support expander-style erasure or error
+correction.  The presently observed real spectral gap does not by itself
+prove those binary claims and is not part of the certificate.
+
+There is also a uniform group-theoretic complexity calculation.  Whenever
+the relevant octahedral subgroup exists, put
+
+\[
+ X_q=\operatorname{PGL}_2(q)/S_4,
+ \qquad
+ Y_q=\operatorname{PGL}_2(q)/D_{2(q-1)}.
+\]
+
+Then
+
+\[
+ |X_q|=\frac{q(q^2-1)}{24},\qquad
+ |Y_q|=\frac{q(q+1)}2,
+\]
+
+and the \(D_8\)-double-coset correspondence has degrees
+
+\[
+ 3\quad\text{and}\quad\frac{q-1}{4},
+ \qquad
+ E_q=\frac{q(q^2-1)}8=\Theta(q^3).
+\]
+
+Thus the marked correspondence can be enumerated in output-linear
+\(\Theta(q^3)\) group operations instead of testing all
+\(|X_q||Y_q|=\Theta(q^5)\) cross-pairs.  At \(q=13\) both degrees equal
+three: it is the unique bidirectional three-local point in this homogeneous
+family.  The support-XOR identities themselves have only been proved at
+\(q=13\); the uniform asymptotic calculation must not be advertised as a
+uniform code-reconstruction theorem without an additional support theorem.
+
+The resulting safe algorithmic statement for Paper IV is:
+
+> Given either marked minimum-support frame and the intrinsic
+> \(D_8\)-transition, the other frame is reconstructed and the paired atlas
+> is verified with three-query locality and optimal linear work in the
+> explicit support data; the hidden code module is recoverable by sparse
+> two-step transition algebra.
+
 ## Evidence and replay
 
 The committed checker constructs the two \(G\)-orbits from Paper IV's tracked
@@ -444,3 +548,9 @@ paper promotion.
 7. Determine what symmetry must be forgotten, or what base object enlarged,
    before an \(\mathbf F_{64}\)-repair can exist; none is available
    \(G\)-equivariantly on the code module.
+8. Determine the distance and local-test soundness of the length-(182)
+   frame-consistency code, and whether its cubic girth-twelve presentation
+   admits a provably linear-time decoder.
+9. Decide whether the transition can be recovered in subquadratic time from
+   the unlabelled minimum-support hypergraph, without first supplying the
+   reconstructed \(G\)-action.
