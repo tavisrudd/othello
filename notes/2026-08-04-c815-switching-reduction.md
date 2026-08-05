@@ -61,6 +61,34 @@ under the symmetric group on the five non-root labels. Each of the twelve
 identities is closed by kernel-checked case analysis over the thirty-six index
 pairs; no compiled evaluation and no external certificate enter any of them.
 
+## The proportionality scalar is determined
+
+A closeout pass added the strengthening that the transport makes cheap. The
+existing statements said only that *some* nonzero scalar exists. The scalar is
+in fact unique and equal to `4` or `-4`.
+
+Uniqueness needs a point where the triangle cubic does not vanish, and there is
+a structural one: at the indicator vector of a triple, every monomial except
+that triple's has a vanishing coordinate, so the cubic equals that triple's
+sign — `±1` on a sign matrix, never zero. No search and no case analysis is
+involved; `triangleCubic_lastTripleBump` is one `simp`. Hence
+`cubicsProportional_unique_of_isSignMatrix`.
+
+The value then follows from the transport:
+`cubicsProportional_switchMatrix_iff` states switching at the level of the
+scalar rather than of its existence, so the normalized dichotomy `±4` carries
+to the general matrix multiplied by the product of the switching signs, itself
+`±1`. That is
+`cubicsProportional_eq_four_or_neg_four_of_isSignMatrix`. The companion
+`cubicsProportional_neg_switchMatrix` records the consequence in the form the
+human proof states: switching by signs of product `-1` negates the scalar, so
+the sign is a marker of the switched representative and not of the switching
+class.
+
+`isSignMatrix_normalizedSignMatrix` closes the loop by exhibiting the
+normalized signings as sign matrices, so the general statements are genuine
+generalizations of the ones they were built from.
+
 Two supporting facts are stated in the ring generality the module already
 uses: the matching evaluation transport and the sign-product square hold over
 any commutative ring, and the proportionality transport over any integral
@@ -70,7 +98,7 @@ as the manuscript's sign locus is.
 ## Evidence
 
 The gate `RelativeConicArcs.Gates.FourShadowRecognition` now audits
-thirty-five terminals, all of the new declarations included. Every one depends
+forty-two terminals, all of the new declarations included. Every one depends
 only on `propext`, `Classical.choice` and `Quot.sound`; `native_decide` occurs
 nowhere in the pinned closure and the replay refuses it.
 
@@ -103,3 +131,27 @@ Two facts about the twelve pentagons remain read off the displayed list rather
 than proved: that they number twelve, and that they are pairwise distinct. The
 trust boundary says so. Neither is used by any statement above; the uniqueness
 theorem quantifies over sign matrices, not over the list.
+
+## Observations
+
+The uniform switching is explained, not mysterious. The same signs
+`(1,1,1,1,-1,-1)` work for all twelve pentagons because a normalized pentagon
+has an all-positive root row, so the signs are forced entry by entry to be the
+root row of the target conference matrix, independently of the pattern. Nothing
+about the pentagon enters. The genuine content is carried by the relabellings,
+which differ per pattern.
+
+The switching API built here — composition, involution, the square transport,
+closure of sign matrices under switching, and root normalization — is stated
+for its own sake and is not four-shadow-specific. The aligned-certificate work
+reasons about edge toggles and switching transport on the same objects, so
+whether these declarations should move to a shared module before that work
+reuses them is an architecture question for its owner rather than something to
+settle here.
+
+Order six remains hard-coded, as it is throughout the module: the matching
+evaluation is a fifteen-term sum over the perfect matchings of six labels, so
+the switching factor is the product of six signs by construction. The
+manuscript states switching invariance for conference matrices of arbitrary
+even order. Generalizing the index type is untouched and remains the one axis
+on which the formalization is narrower than the paper.
