@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-07-31
+**Date:** 2026-08-05
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -34,9 +34,10 @@ The results are grouped as follows.
    realizations of the same four-dimensional space, joined by a marked
    orientation source theorem, and the conference operator that carries it
    through the classical Clebsch–Segre shadows.
-4. *A binary [78,36,12] code from the passant lines of a conic over
-   \(\mathbb F_{13}\)* — a code whose minimum words reconstruct the geometry
-   and the full symmetry group they came from.
+4. *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary
+   conic code* — a code whose minimum words reconstruct the geometry and the
+   full symmetry group they came from. It was earlier titled *A binary
+   [78,36,12] code from the passant lines of a conic over \(\mathbb F_{13}\)*.
 5. The golden conference operator source programme — one marked order-six
    conference operator and the cubic, polar, determinantal, fermionic,
    anomaly, and lattice shadows it generates. This is a source-development
@@ -61,7 +62,8 @@ The results are grouped as follows.
     Schur-generates the two outer Fano modules, while the conic-link code is
     their defect-two jet modification.
 13. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
-    matrices of order 668.
+    matrices of order 668, and a ladder of binary codes along the exceptional
+    root systems that is proved but closed as a publication route.
 14. Two open programmes with substantial partial results: complete arcs of
     square-root size relative to a conic, and the outcome of the cap game on
     odd projective planes.
@@ -117,6 +119,29 @@ closes the degenerate line-pair branch. Separately the \(A_5\) orbit profile
 \([6,10,12,15,30,30,30]\) is *derived* from fixed-point spectra and the subgroup
 ledger; a second off-arc orbit would breach \(c\le15\), forcing \(c=10\) and
 identifying \(\mathcal U\) with the unique orbit of size twelve — the conic.
+
+Both inputs that were previously cited at order eleven are now proved from
+scratch and machine-checked in Lean. Counting triple-concurrence points of a
+six-arc is the same as counting its concurrent chord matchings, by a bijection
+valid in an arbitrary finite projective plane, and the bound of ten such points
+is a theorem over every field in which two is invertible. Equality is rigid in a
+strong form. When a six-arc has ten triple-concurrence points, every chord lies
+in exactly one non-concurrent chord matching, there are five such matchings, and
+they share no chord, so they one-factorize the fifteen chords; two matchings of a
+six-element set with no common chord close a hexagon; and the labelling that
+produces puts the arc in the golden normal form
+\[
+ (1{:}0{:}0),\ (\varphi{:}1{:}1),\ (0{:}1{:}0),\ (1{:}\varphi{:}1),\
+ (0{:}0{:}1),\ (1{:}1{:}2-\varphi),
+ \qquad \varphi^2=\varphi+1,
+\]
+in a suitable frame, over any finite field in which two is invertible. Attaining
+the bound therefore forces a golden root into the ground field. At order eleven
+the two roots are \(\varphi=4\) and \(\varphi=8\), and each carries its golden
+hexagon onto the displayed witness by an explicit projectivity of determinant
+three. The older route through prism uniqueness and the perspectivity theorem —
+two triangles in double perspective are in triple perspective, itself proved over
+an arbitrary field — is off the critical path and unused.
 
 ### The classification through eight points
 
@@ -189,6 +214,29 @@ digit-weight lemma show one faithful Jacobi eigenvalue has exactly its Frobenius
 collisions, which makes every matching multiplication-Frobenius and lets a
 genus-one character sum with Hasse's bound finish, leaving \(q\in\{3,7,11\}\)
 where \(q=7\) fails covering and \(q=11\) is the hexagon.
+
+The saturated-internal branch is reduced to a pure clique question and is closed
+outright in one residue class. Dropping the arc condition and keeping only chord
+externality makes such an arc a clique of size \((q+3)/2\) in the graph on the
+\(q(q-1)/2\) internal points of the conic in which two points are adjacent when
+their join is an external line. That graph has clique number \((q+3)/2\) for
+\(q\equiv3\pmod4\) but \((q+1)/2\) for \(q\equiv1\pmod4\) with \(q>5\), over
+every odd prime power up to \(49\). So for \(q\equiv1\pmod4\) the branch is
+empty for a reason that uses neither the arc condition nor any conjecture, and
+proving the clique bound \(\omega\le(q+1)/2\) in general closes that whole
+residue class unconditionally and for all fields. The same mechanism provably
+cannot decide \(q\equiv3\pmod4\): there the \((q+1)/2\) internal points of an
+external line together with that line's pole form a genuine extremal clique, the
+pole being the unique candidate extension exactly in that congruence class.
+Containment in a Baer subline is separately excluded for every odd prime power by
+an exact coboundary identity on the norm-one circle, which confines the
+configuration to a single coset of size \((q+1)/2\); with the affine-line case
+this forces \(q=5\). By exhaustive check the branch is empty for every odd prime
+power up to \(43\), and in the class \(q\equiv3\pmod4\) up to \(151\). The two
+surviving obstructions are the general clique bound and a stability statement for
+\(\pm1\)-valued Frobenius-odd minimum eigenfunctions of the Paley graph of order
+\(q^2\); both are direction theorems for point sets with character-restricted
+differences, so one sufficiently general Rédei-type tool would settle both.
 
 The nonsaturated branch is reduced but open. Deleting an arc point on a spare
 external line gives an affine \((k-1)\)-arc determining every direction but one,
@@ -323,7 +371,9 @@ exception.
 
 **Priority boundary.** The \(q=11\) six-arc itself is classical, with Edge
 (1956), Blokhuis–Seress–Wilbrink (1992), and Korchmáros (1981) as prior names;
-Dye (1991) supplies the ten-Brianchon bound and the \(A_5\) stabilizer; Calvo
+Dye (1991) supplies the ten-Brianchon bound and the \(A_5\) stabilizer, although
+that bound and its equality case are now proved here from scratch rather than
+imported; Calvo
 (2024) owns the modern reflection-arrangement ledger; and Jurrius–Pellikaan
 (2015) own the general arrangement-decoder mechanism. What is claimed here is
 the exact covering \(\mathcal U(A)=\mathcal C(\mathbb F_{11})\) — each source
@@ -572,6 +622,43 @@ The full geometric integral localization remains unspecified. Pullback across
 retained theorems, and every functorial shadow of the conference operator
 belongs to the separate golden-operator paper below rather than here.
 
+### Recognition from four-point shadows and from aligned designs
+
+Two recognition theorems are proved and machine-checked in Lean but are not yet
+in the manuscript; integrating them is authorized future work.
+
+The first recognizes the golden conference class from cubic data alone, at full
+generality rather than on a normalized family. For an arbitrary symmetric
+zero-diagonal matrix with entries \(\pm1\), nonzero proportionality between the
+triangle cubic and the commutator-Pfaffian cubic characterizes the golden
+conference switching class, and the two orientations are projectively isolated.
+The mechanism is a switching reduction: diagonal switching multiplies the
+commutator-Pfaffian cubic by the product of the six switching signs and leaves
+the triangle cubic unchanged, so switching by the root row carries any such
+matrix into the normalized family together with its proportionality constant and
+its conference square. One relabelling and one fixed diagonal switching then
+carry every such matrix whose square is \(5\cdot1\) onto the displayed conference
+matrix, which is exactly the uniqueness of the conference switching class.
+
+The second is a faithfulness theorem for aligned designs at the quantifier range
+the manuscript states. For every two-graph on a finite point set with at least
+seven points, the aligned four-sets determine the triangle values on distinct
+triples up to one global complement bit. Rooting at a point of an aligned
+four-set whose triangle bit is zero makes the anchor's six edges vanish, which
+replaces the two switching normalizations the earlier argument used, so the
+general transport, the seven-point distinctness obligation, and the extension to
+an arbitrary finite set all come out of one proof. The query family a decoder
+working from one anchor uses is defined explicitly and has size \(3n^2-23n+45\).
+
+Around those two theorems sit three exact certificate facts. Aligned
+certificates at seven points have distance exactly two and correction radius
+zero, and the whole spectrum is even by edge-toggle parity. The scalar third cut
+moment separates all four classes at order twenty-six, so the full histogram is
+unnecessary. Conference contraction forces the two-pivot plane, and the counting
+that recovers the separator reduces coherent pentads and spanning aligned hexads
+to intercalates in the Latin classes and Pasch configurations in the Steiner
+classes.
+
 ### The wider inventory of passages
 
 The results below concern which later constructions retain the orientation bit
@@ -736,7 +823,13 @@ ten-dimensional rational Klein representation of \(\operatorname{PSL}_2(11)\)
 is positive, its discriminant-five lift fails. The proposed degree-23
 \(M_{23}\)/Golay coherence test is a future unity test, not a result.
 
-## *A binary [78,36,12] code from the passant lines of a conic over \(\mathbb F_{13}\)*
+## *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code*
+
+This paper was earlier titled *A binary [78,36,12] code from the passant lines
+of a conic over \(\mathbb F_{13}\)*; the current title names the reconstruction
+rather than the parameters. A manuscript-only pre-release was deposited on
+2026-08-03 at DOI `10.5281/zenodo.21783971`, with the Lean companion held back
+for a forward version.
 
 Take the conic in \(\operatorname{PG}(2,13)\), its \(78\) internal points and
 its \(78\) passant lines, and let \(K\) be the kernel of the incidence matrix
@@ -748,17 +841,25 @@ The minimum distance is exactly \(12\), proved without a support search. Segre
 tangent triples exclude weight eight: after one point is fixed, a cyclic
 42-vertex compatibility graph has clique number five while a weight-eight word
 would need a seven-clique. The two forced weight-ten pencil profiles are
-excluded, and a dihedral weight-twelve word is constructed. All \(364\) minimum
-words split into one \(S_4\) and three \(D_{24}\) projective orbits, and every
-one of those orbits spans the whole code.
+excluded, and a dihedral weight-twelve word is constructed. Exact
+positive-semidefinite and line-moment certificates now carry both exclusions,
+replacing the corresponding subset and syndrome searches. All \(364\) minimum
+words split into one \(S_4\) and three \(D_{24}\) projective orbits — one
+octahedral family and three chord-indexed punctured-conic families — and every
+one of those orbits spans the whole code. The reason they all span is
+structural: the code is \(12\)-dimensional over a canonical operator field
+\(\mathbb F_8\), and that hidden scalar action forces each family to span.
 
-The reconstruction is the headline. Pair concurrence among minimum words
-recovers whether two points are joined by a passant or a secant;
-triple-concurrence profiles recover all six elliptic orbitals; and the \(78\)
-all-zero-triple seven-cliques are exactly the passant incidence rows, so the
-minimum layer rebuilds the incidence matrix it was defined by. The common
-automorphism group of the code, the minimum-support hypergraph, and the
-association scheme is exactly \(\operatorname{PGL}(2,13)\).
+The reconstruction is the headline, and it now runs on pair data alone. The
+weighted pair concurrences among minimum words reconstruct the passant incidence
+matrix, the code itself, and the six-class elliptic association scheme; the
+resulting group action then reconstructs all points and lines of
+\(\operatorname{PG}(2,13)\), the distinguished conic, and its polarity, with no
+coordinates and no triple concurrence used anywhere. Equivalently, the weighted
+two-section of the minimum-support hypergraph is a complete invariant of this
+marked conic-plane presentation. The common automorphism group of the code, the
+minimum-support hypergraph, and the association scheme is exactly
+\(\operatorname{PGL}(2,13)\).
 
 **Priority boundary.** The code itself is not new and the boundary is closer
 than earlier drafts made visible. Droms, Mellinger and Meyer introduced this
@@ -770,6 +871,19 @@ proves the classification, spanning, reconstruction, and symmetry statements,
 for which no predecessor was located. Madison and Wu supply the general
 dimension formula and Hollmann and Xiang the elliptic association scheme used
 to explain the minimum layer.
+
+A later audit added one pre-emption and withdrew one claimed contradiction. The
+underlying passant-line/internal-point incidence graph is the graph `X.182.1` in
+Conder and Potočnik's census of semisymmetric graphs: it is edge-transitive but
+not vertex-transitive, and two distinct cubic bipartite graphs of girth twelve
+exist at order \(182\), of which this is the non-symmetric one. The two side
+kernels prove the semisymmetry independently — they are \([91,14,28]\) and
+\([91,14,26]\), and a part-swapping automorphism would force them to be
+equivalent. An earlier reading held that this asymmetry contradicted a published
+equivalence claim of Crnković, Rukavina and Šimac; it does not, since their
+symmetric-graph paper uses the equivalence correctly and their later
+semisymmetric work tabulates both sides with differing distances. The asymmetry
+is real, the claimed contradiction is retracted.
 
 The proof is led by a human argument; computation records discovery and is
 retained only where finite bulk has resisted conceptual compression. Two Lean
@@ -2493,6 +2607,91 @@ and every subgroup of order six is closed. No Legendre pair and no Hadamard
 matrix of order \(668\) is constructed here, and unrestricted order \(668\)
 remains open.
 
+### A code ladder along the exceptional root systems — pre-empted
+
+This track is recorded for completeness and as a closed route, not as a claim.
+A literature audit found the individual level codes to be folklore, the linking
+operation to be a published theorem, and the tower itself to be named and related
+in the strongly-regular-graph literature; a follow-up pass then removed the one
+residue that had looked like new content. The verdicts are stated after the
+construction below, and nothing here should be written up as novel.
+
+Each exceptional level carries one binary code: restrict the affine linear
+functions to the nonsingular vectors of a mod-two quadratic space. One repeated
+operation links consecutive levels — take the link of a root, fold antipodal
+pairs, shorten — giving
+\[
+ [496,11,240]_{E_{10}}
+ \to [240,10,112]
+ \to [120,9,56]_{E_8}
+ \to [28,7,12]_{E_7}
+ \to [27,6,12]_{E_6}.
+\]
+The \(240\)-point member is the root link of an \(E_{10}\) root and coincides
+with the affine \(E_9\) code built from the affine root lattice; the
+complementary \(256\)-point root hyperplane is \((E_8\oplus A_1)/2\) and gives
+\([256,10,120]\) against an exact record of \(124\).
+
+Attaining the unrestricted optimum is not a property of the exceptional series.
+Scoring the whole family by type shows every tabulated even-rank level of both
+types is optimal, minus type included, while the parabolic levels are the sole
+shortfall and their deficit grows: optimal at rank five, one below at rank seven,
+four below at rank nine. That growth is the one numerical pattern here with no
+mechanism behind it.
+
+Three barriers are closed by proof rather than by failed search. No
+\(O_8^+(2)\)-invariant code of dimension ten contains the \(E_8\) code, so the
+exact record dimension \([120,10,56]\) is incompatible with full root-pair
+symmetry. No Plotkin \(|u|u+v|\) code at \([240,10]\) with length-\(120\) halves
+beats distance \(112\). And every unsigned quantum lift stalls at CSS distance
+four, one below the exact \([[28,14,5]]\) and \([[120,102,5]]\) records; the
+canonical repair alphabet, \(E_8/2E_8\cong\mathbf F_4^4\) over the Eisenstein
+integers with \(\omega\) acting freely on the \(120\) coordinates in \(40\)
+orbits, does not fix it. The natural nine-dimensional \(\mathbf F_4\) code there
+is Hermitian self-orthogonal at exactly the record dimension yet still has dual
+distance four, because conjugation and every \(\mathbf F_4\)-linear functional
+are additive and so inherit all \(32{,}130\) tetrads as weight-four dual words.
+Additivity, not the alphabet, is the obstruction, and it explains the
+distance-four stall at every level simultaneously.
+
+**The pre-emption, in three layers.** The level codes are Calderbank--Kantor
+two-weight codes; the \(E_8\) root-pair code, the \(E_7\) bitangent code and the
+\(E_6\) code are known in substance, point set, weights and all, and the \(E_6\)
+code reaches the same family by a second route through its own Cartan-cubic
+monomial support, landing on the minus-type elliptic-quadric two-weight code — so
+all three level codes are one family read at three ranks. The fold is
+Brouwer--Shult (1990), available as Proposition
+3.6.1 of Brouwer and Van Maldeghem's *Strongly Regular Graphs*: in the graph on
+the nonsingular points of a quadratic form over \(\mathbf F_2\), the vertices at
+distance two from a fixed vertex form the Taylor extension of the graph two ranks
+down, and a Taylor extension is an antipodal double cover whose classes are the
+fold. That theorem is about arbitrary finite graphs under a coclique-parity
+condition — type and rank enter only on application — and it is a biconditional,
+so it subsumes any binary converse worth proving. The same book names the bottom
+three levels outright: the graph on the \(120\) root pairs comes from the \(E_8\)
+root system, its local graph is the Gosset graph, itself the Taylor extension of
+the Schläfli graph, labelled there the \(E_6\) graph. Finally the code-level fold
+turns out to be a formal property of any matched Taylor double — every row has
+fibre-difference all-ones, so the fibre-constant subcode has codimension one and
+folds onto the base graph's code — verified against the quadric links, the Paley
+two-graphs, the pentagon, and random graphs, with no quadratic form involved
+anywhere. An earlier claim that the code-level fold works only at plus type, and
+therefore carried content beyond the graph statement, was withdrawn as an
+indexing error. What survives is the weight-enumerator statement at code level
+and the affine-root-lattice carrier, which is too thin to carry a paper. Two
+narrow frontiers remain: the parabolic deficit, and whether \(120\) points of
+\(\operatorname{PG}(8,4)\) can sit in four-general position invariantly under a
+large proper subgroup of \(O_8^+(2)\), which is not expected to work.
+
+Two limits on the audit itself should travel with any use of this material.
+Chakravarti's 1990 chapter in the IMA volume is held at metadata only and must be
+read at full text before any design claim, and MathSciNet was not covered, so
+every negative here carries a "to our knowledge". On the quantum side there is no
+located predecessor for this particular construction, but an adjacent
+code-conformal-field-theory literature builds stabilizer codes from \(E_8\) root
+lattices, so no blanket absence claim is available there and that literature must
+be cited rather than treated as unrelated.
+
 ## Two open programmes
 
 ### Complete arcs of square-root size relative to a conic
@@ -2620,18 +2819,29 @@ are vacuous because a natural number can encode the whole residual.
   orientation torsor and the structural determinantal six-node proof; the
   computational strengthenings travel in a companion, *Computational
   strengthenings of Clebsch syndrome rigidity*, with a five-mode claim ledger.
-  What remains is publication packaging. The all-sizes extension of the
-  conic-filling classification is **not proved**: it is complete over every odd
-  field up to \(43\), the saturated branch is closed uniformly and the
-  nonsaturated branch reduced to slack at least two, and the exact remaining
-  obstruction is an upper bound on the largest arc whose secants all avoid a
-  fixed conic — measured to be tight, so possibly false.
+  Both previously cited order-eleven inputs are now proved from scratch and
+  machine-checked: the ten-point bound on triple-concurrence points holds over
+  every field in which two is invertible, and attaining it forces the golden
+  normal form and hence a golden root in the ground field. What remains is
+  publication packaging. The all-sizes extension of the conic-filling
+  classification is **not proved**: it is complete over every odd field up to
+  \(43\), the saturated-external branch is closed uniformly, the
+  saturated-internal branch is now a pure clique bound that is settled in the
+  class \(q\equiv1\pmod4\) as far as it has been measured, and the nonsaturated
+  branch is reduced to slack at least two. The exact remaining obstruction is an
+  upper bound on the largest arc whose secants all avoid a fixed conic —
+  measured to be tight, so possibly false.
 - ***Quadratic trade rigidity and cubic orientation in conic matching
   quotients:*** complete theorem arc, with the one-factorization property
   derived rather than assumed and the completeness theorem naming the two
   occurring configurations; public packaging remains.
-- ***Golden descent and operator realizations of the Clebsch cubic:*** both
-  prior proof gaps closed — the chart factorization is scheme-theoretic through
+- ***Golden descent and operator realizations of the Clebsch cubic:*** two
+  recognition theorems are proved and machine-checked but not yet in the
+  manuscript — the golden conference switching class is characterized by nonzero
+  triangle-to-Pfaffian cubic proportionality for arbitrary sign matrices and is
+  unique, and aligned four-sets determine a two-graph's triangle values up to one
+  global complement bit on at least seven points. Both
+  prior proof gaps are closed — the chart factorization is scheme-theoretic through
   a global Stein algebra, and the two realizations share one marked orientation
   source. The forward version has absorbed a bounded operator core as one chain
   from the incidence descent to the harmonic return, plus the
@@ -2639,14 +2849,19 @@ are vacuous because a natural number can encode the whole residual.
   unchanged and keep the earlier title. The strongest bridge is explicitly
   relative to a marked datum with a complete ambiguity ledger; artifact locator
   and author metadata remain.
-- ***A binary [78,36,12] code from the passant lines of a conic over
-  \(\mathbb F_{13}\):*** minimum distance, the 364-word minimum layer and its
-  four orbits, spanning, reconstruction of the passant incidence rows and the
-  elliptic scheme, and the exact automorphism group are proved by a human
+- ***Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary
+  conic code*** (formerly *A binary [78,36,12] code from the passant lines of a
+  conic over \(\mathbb F_{13}\)*): minimum distance, the 364-word minimum layer
+  and its four orbits, spanning through a hidden \(\mathbb F_8\) operator field,
+  reconstruction of the whole marked plane from weighted pair concurrences alone,
+  and the exact automorphism group are proved by a human
   argument, with a semantic Lean spine and sharded finite leaves supporting it.
   The published interval for this code's minimum distance was
-  \(8\le d\le12\); this closes it at the top and adds everything above it. Four
-  concrete transports and public release remain.
+  \(8\le d\le12\); this closes it at the top and adds everything above it. A
+  manuscript-only pre-release is deposited; the underlying incidence graph is
+  pre-empted as a known semisymmetric graph, and an earlier claim that its
+  side-asymmetry contradicts published work is retracted. Four
+  concrete transports and full public release remain.
 - **The golden conference operator source programme:** mathematics proved and
   frozen across the cubic, polar, determinantal, pure-spinor, Boolean,
   measurement, fermionic, anomaly, Clifford, and lattice shadows, with the
@@ -2707,7 +2922,13 @@ are vacuous because a natural number can encode the whole residual.
 - **Unassigned adjacent results:** \(25\) of the \(30\) mod-\(3\)-compatible
   fixed common multiplier subgroups for Hadamard order \(668\) are impossible,
   by a nine-compression congruence and a shift-\(111\) orbit lock; five cases
-  remain, no matrix is constructed, and the order remains open.
+  remain, no matrix is constructed, and the order remains open. The exceptional
+  code ladder from \(E_{10}\) down to \(E_6\) is proved and its three quantum and
+  symmetry barriers are closed by proof, but the track is **pre-empted**: the
+  level codes are Calderbank--Kantor two-weight codes, the fold is
+  Brouwer--Shult, the tower is named and related in the strongly-regular-graph
+  literature, and the code-level residue turned out to be a formal property of
+  any matched Taylor double. It is not a publication route.
 - **Open programmes:** square-root complete arcs and the odd-plane cap game,
   both with substantial partial results and explicitly no global claim. The cap
   game's causal-local route is falsified by an explicit \(\mathbb F_{11}\)
