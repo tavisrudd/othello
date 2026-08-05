@@ -2744,8 +2744,17 @@
       "last": 871,
       "purpose": "literature sweep on the rank-generic fold tower and the biadjacency side-equivalence criterion",
       "sequence": 305
+    },
+    {
+      "count": 1,
+      "first": 872,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 872,
+      "purpose": "fold is plus-type only: code-level content beyond the graph-level Taylor extension",
+      "sequence": 306
     }
   ],
-  "next_id": 872,
+  "next_id": 873,
   "schema": "codex-task-id-allocations-v1"
 }

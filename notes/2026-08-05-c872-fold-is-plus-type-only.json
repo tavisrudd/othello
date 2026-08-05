@@ -1,0 +1,218 @@
+{
+  "difference_set_note": "the nonsingular set of any F2 quadratic form is a perfect difference set with lambda = N(N-1)/(2(2^n-1)); dual weight-two and weight-three words are impossible, so CSS distance is exactly four whenever the tetrad count is nonzero, at every rank and type, with no search",
+  "difference_sets": [
+    {
+      "closed_form": "T = (2^n - 1) * lambda * (lambda - 1) / 6",
+      "css_distance": 4,
+      "points": 28,
+      "rank": 6,
+      "repetition_number": 6,
+      "tetrads": 315,
+      "type": "+"
+    },
+    {
+      "closed_form": "T = (2^n - 1) * lambda * (lambda - 1) / 6",
+      "css_distance": 4,
+      "points": 120,
+      "rank": 8,
+      "repetition_number": 28,
+      "tetrads": 32130,
+      "type": "+"
+    },
+    {
+      "closed_form": "T = (2^n - 1) * lambda * (lambda - 1) / 6",
+      "css_distance": 4,
+      "points": 496,
+      "rank": 10,
+      "repetition_number": 120,
+      "tetrads": 2434740,
+      "type": "+"
+    },
+    {
+      "closed_form": "T = (2^n - 1) * lambda * (lambda - 1) / 6",
+      "css_distance": 4,
+      "points": 36,
+      "rank": 6,
+      "repetition_number": 10,
+      "tetrads": 945,
+      "type": "-"
+    },
+    {
+      "closed_form": "T = (2^n - 1) * lambda * (lambda - 1) / 6",
+      "css_distance": 4,
+      "points": 136,
+      "rank": 8,
+      "repetition_number": 36,
+      "tetrads": 53550,
+      "type": "-"
+    }
+  ],
+  "fold_by_type": [
+    {
+      "code": [
+        28,
+        7,
+        12
+      ],
+      "code_descends_in_full": true,
+      "folded": [
+        6,
+        5,
+        2
+      ],
+      "link": 12,
+      "next_level_code": [
+        6,
+        5,
+        2
+      ],
+      "next_level_points": 6,
+      "rank": 6,
+      "type": "+"
+    },
+    {
+      "code": [
+        120,
+        9,
+        56
+      ],
+      "code_descends_in_full": true,
+      "folded": [
+        28,
+        7,
+        12
+      ],
+      "link": 56,
+      "next_level_code": [
+        28,
+        7,
+        12
+      ],
+      "next_level_points": 28,
+      "rank": 8,
+      "type": "+"
+    },
+    {
+      "code": [
+        496,
+        11,
+        240
+      ],
+      "code_descends_in_full": true,
+      "folded": [
+        120,
+        9,
+        56
+      ],
+      "link": 240,
+      "next_level_code": [
+        120,
+        9,
+        56
+      ],
+      "next_level_points": 120,
+      "rank": 10,
+      "type": "+"
+    },
+    {
+      "code": [
+        36,
+        7,
+        16
+      ],
+      "code_descends_in_full": false,
+      "folded": [
+        10,
+        3,
+        2
+      ],
+      "link": 20,
+      "next_level_code": [
+        10,
+        5,
+        4
+      ],
+      "next_level_points": 10,
+      "rank": 6,
+      "type": "-"
+    },
+    {
+      "code": [
+        136,
+        9,
+        64
+      ],
+      "code_descends_in_full": false,
+      "folded": [
+        36,
+        4,
+        4
+      ],
+      "link": 72,
+      "next_level_code": [
+        36,
+        7,
+        16
+      ],
+      "next_level_points": 36,
+      "rank": 8,
+      "type": "-"
+    },
+    {
+      "code": [
+        64,
+        8,
+        28
+      ],
+      "code_descends_in_full": false,
+      "folded": [
+        16,
+        4,
+        2
+      ],
+      "link": 32,
+      "next_level_code": [
+        16,
+        6,
+        6
+      ],
+      "next_level_points": 16,
+      "rank": 7,
+      "type": "o"
+    },
+    {
+      "code": [
+        256,
+        10,
+        120
+      ],
+      "code_descends_in_full": false,
+      "folded": [
+        64,
+        5,
+        4
+      ],
+      "link": 128,
+      "next_level_code": [
+        64,
+        8,
+        28
+      ],
+      "next_level_points": 64,
+      "rank": 9,
+      "type": "o"
+    }
+  ],
+  "input_sha256": {
+    "2026-08-05-c870-fold-tower-judo.py": "ed09222ad3800cf0f06e42feaea641eceff676b6452a9afe0a83cb528da41ee5"
+  },
+  "translation_identity": {
+    "identity": "Q(x+t) = Q'(x) + 1 with Q'(x) = Q(x) + B(t,x), for Q(t)=1",
+    "nonsingular_count": 120,
+    "rank": 8,
+    "twisted_is_a_quadratic_form": true,
+    "zero_count": 120,
+    "zero_set_translates_to_nonsingular_set": true
+  },
+  "verdict": "the point count descends at every type, which is what a graph-level antipodal quotient predicts, but the affine code descends in full only at plus type; the code-level fold therefore carries content beyond the graph-level Taylor extension statement"
+}
