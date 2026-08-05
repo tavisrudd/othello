@@ -1,0 +1,254 @@
+{
+  "dimension": 37,
+  "enumerated_basis_bits": 37,
+  "enumerated_codewords": 137438953472,
+  "length": 182,
+  "minimum_nonzero_weight": 28,
+  "minimum_witness_coefficient": "0x1",
+  "minimum_witness_words_le": [
+    "0x0000000000003fff",
+    "0x000001fff8000000",
+    "0x0000000000000000"
+  ],
+  "minimum_words_equal_paired_coordinate_columns": true,
+  "rank": 145,
+  "schema": "c682-paper-iv-frame-metacode-enumerator-v1",
+  "source_schema": "c682-paper-iv-octahedral-toric-correspondence-v3",
+  "trusted_inputs": [
+    "notes/2026-08-04-c682-paper-iv-orbit-correspondence.json"
+  ],
+  "weight_enumerator": [
+    {
+      "count": 1,
+      "weight": 0
+    },
+    {
+      "count": 78,
+      "weight": 28
+    },
+    {
+      "count": 2184,
+      "weight": 38
+    },
+    {
+      "count": 1729,
+      "weight": 40
+    },
+    {
+      "count": 2496,
+      "weight": 42
+    },
+    {
+      "count": 6006,
+      "weight": 44
+    },
+    {
+      "count": 10556,
+      "weight": 46
+    },
+    {
+      "count": 31759,
+      "weight": 48
+    },
+    {
+      "count": 70980,
+      "weight": 50
+    },
+    {
+      "count": 143962,
+      "weight": 52
+    },
+    {
+      "count": 294840,
+      "weight": 54
+    },
+    {
+      "count": 776139,
+      "weight": 56
+    },
+    {
+      "count": 1749020,
+      "weight": 58
+    },
+    {
+      "count": 3746834,
+      "weight": 60
+    },
+    {
+      "count": 8466185,
+      "weight": 62
+    },
+    {
+      "count": 18383001,
+      "weight": 64
+    },
+    {
+      "count": 40396902,
+      "weight": 66
+    },
+    {
+      "count": 86340436,
+      "weight": 68
+    },
+    {
+      "count": 178181471,
+      "weight": 70
+    },
+    {
+      "count": 363798344,
+      "weight": 72
+    },
+    {
+      "count": 713399960,
+      "weight": 74
+    },
+    {
+      "count": 1333179666,
+      "weight": 76
+    },
+    {
+      "count": 2381422043,
+      "weight": 78
+    },
+    {
+      "count": 4012491938,
+      "weight": 80
+    },
+    {
+      "count": 6316376976,
+      "weight": 82
+    },
+    {
+      "count": 9218697176,
+      "weight": 84
+    },
+    {
+      "count": 12341053270,
+      "weight": 86
+    },
+    {
+      "count": 15049475532,
+      "weight": 88
+    },
+    {
+      "count": 16650977252,
+      "weight": 90
+    },
+    {
+      "count": 16650977252,
+      "weight": 92
+    },
+    {
+      "count": 15049475532,
+      "weight": 94
+    },
+    {
+      "count": 12341053270,
+      "weight": 96
+    },
+    {
+      "count": 9218697176,
+      "weight": 98
+    },
+    {
+      "count": 6316376976,
+      "weight": 100
+    },
+    {
+      "count": 4012491938,
+      "weight": 102
+    },
+    {
+      "count": 2381422043,
+      "weight": 104
+    },
+    {
+      "count": 1333179666,
+      "weight": 106
+    },
+    {
+      "count": 713399960,
+      "weight": 108
+    },
+    {
+      "count": 363798344,
+      "weight": 110
+    },
+    {
+      "count": 178181471,
+      "weight": 112
+    },
+    {
+      "count": 86340436,
+      "weight": 114
+    },
+    {
+      "count": 40396902,
+      "weight": 116
+    },
+    {
+      "count": 18383001,
+      "weight": 118
+    },
+    {
+      "count": 8466185,
+      "weight": 120
+    },
+    {
+      "count": 3746834,
+      "weight": 122
+    },
+    {
+      "count": 1749020,
+      "weight": 124
+    },
+    {
+      "count": 776139,
+      "weight": 126
+    },
+    {
+      "count": 294840,
+      "weight": 128
+    },
+    {
+      "count": 143962,
+      "weight": 130
+    },
+    {
+      "count": 70980,
+      "weight": 132
+    },
+    {
+      "count": 31759,
+      "weight": 134
+    },
+    {
+      "count": 10556,
+      "weight": 136
+    },
+    {
+      "count": 6006,
+      "weight": 138
+    },
+    {
+      "count": 2496,
+      "weight": 140
+    },
+    {
+      "count": 1729,
+      "weight": 142
+    },
+    {
+      "count": 2184,
+      "weight": 144
+    },
+    {
+      "count": 78,
+      "weight": 154
+    },
+    {
+      "count": 1,
+      "weight": 182
+    }
+  ]
+}

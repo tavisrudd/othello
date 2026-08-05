@@ -258,6 +258,10 @@ def compute():
 
     toric_columns = transpose_binary(toric_rows, 78)
     octahedral_columns = transpose_binary(octahedral_rows, 78)
+    paired_coordinate_columns = [
+        octahedral_columns[index] | (toric_columns[index] << 91)
+        for index in range(78)
+    ]
 
     def multiply_row(vector, rows):
         answer = 0
@@ -367,7 +371,7 @@ def compute():
     assert len(generated) == 2184
 
     return {
-        "schema": "c682-paper-iv-octahedral-toric-correspondence-v2",
+        "schema": "c682-paper-iv-octahedral-toric-correspondence-v3",
         "field_order": 13,
         "group_order": len(group),
         "coordinate_count": len(points),
@@ -379,6 +383,13 @@ def compute():
             "definition": "stabilizer_intersection_order_8",
             "left_degrees": dict(sorted(Counter(row.bit_count() for row in correspondence).items())),
             "right_degrees": dict(sorted(Counter(row.bit_count() for row in correspondence_transpose).items())),
+            "left_neighbor_indices": [
+                [j for j in range(91) if row >> j & 1] for row in correspondence
+            ],
+            "paired_coordinate_column_words_le": [
+                [f"0x{column >> (64 * word) & ((1 << 64) - 1):016x}" for word in range(3)]
+                for column in paired_coordinate_columns
+            ],
             "edge_count": sum(row.bit_count() for row in correspondence),
             "edge_stabilizer_order": len(edge_group),
             "edge_stabilizer_order_profile": dict(sorted(edge_order_profile.items())),

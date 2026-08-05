@@ -452,12 +452,31 @@ the weight-four consistency checks
 
 Their solution space is a binary length-(182), dimension-(37) frame code;
 the trivial line accounts for the extra dimension above Paper IV's
-thirty-six-dimensional module.  Its minimum distance, decoding radius, and
-the algorithmic meaning of the fourteen-dimensional kernel of \(C\) are not
-yet known.  A distance or local-soundness theorem would turn the weight-four
-checks into a local tester and could support expander-style erasure or error
-correction.  The presently observed real spectral gap does not by itself
-prove those binary claims and is not part of the certificate.
+thirty-six-dimensional module.  Exhaustive enumeration of all \(2^{37}\)
+words gives the exact parameters
+
+\[
+ \boxed{[182,37,28]_2}.
+\]
+
+There are exactly seventy-eight minimum words, and they are exactly the
+paired octahedral--toric syndrome columns of the seventy-eight physical
+coordinates.  The all-ones word gives complement symmetry of the complete
+weight enumerator.  The next nonzero weight is thirty-eight, with 2184 words;
+the equality of that multiplicity with \(|G|\) is recorded without an orbit
+identification.  The decoding radius, local soundness, and the algorithmic
+meaning of the fourteen-dimensional kernel of \(C\) remain open.  The
+presently observed real spectral gap does not by itself prove those further
+binary claims.
+
+The exhaustive kernel derives a basis from the certified transition, stores
+each word in three `u64`s, and Gray-enumerates
+\(137438953472\) codewords.  On the present 24-thread host the complete sweep
+took about thirty-two seconds.  Before the full run, its optimized evaluator
+is compared with a from-scratch evaluator on \(2^{20}\) words; the full result
+also checks code membership of the basis and coordinate columns, the unique
+zero word, complement symmetry, and equality of the entire minimum-word set
+with the physical coordinate columns.
 
 There is also a uniform group-theoretic complexity calculation.  Whenever
 the relevant octahedral subgroup exists, put
@@ -517,12 +536,12 @@ kernel of
  H\binom{x}{y}=0.
 \]
 
-Every row of \(H\) has weight four.  Its solution space is therefore an
-actual binary Tanner code with parameters \([182,37,d]_2\), where the minimum
-distance \(d\) remains unknown.  The constant solution is one dimension and
-the complementary thirty-six-dimensional constituent is the Paper-IV code
-module.  Syndrome computation takes \(\Theta(E)\) bit operations in the
-sparse model.  A positive local-soundness inequality
+Every row of \(H\) has weight four.  Its solution space is therefore the
+binary Tanner code \([182,37,28]_2\).  Its seventy-eight minimum words are
+exactly the paired physical coordinate syndromes.  The constant solution is
+one dimension and the complementary thirty-six-dimensional constituent is
+the Paper-IV code module.  Syndrome computation takes \(\Theta(E)\) bit
+operations in the sparse model.  A positive local-soundness inequality
 
 \[
  |\operatorname{supp}(Hz)|
@@ -646,10 +665,11 @@ weight-four metachecks encoded by
 
 Physical data-error syndromes form the thirty-six-dimensional joint image of
 \((N_O,N_5)\), while \(\ker H\) has one additional constant direction.
-Measurement noise generally violates the metachecks.  A distance and
-soundness theorem for this metacode would therefore give a concrete route to
-redundant, potentially single-shot-style syndrome validation; neither claim
-is made without that theorem.
+Measurement noise generally violates the metachecks.  The exact metacode
+distance is twenty-eight, so thirteen adversarial measurement-bit errors are
+uniquely correctable in principle and every pattern of at most twenty-seven
+erasures is recoverable.  An efficient decoder and a local-soundness theorem
+are still required before claiming useful or single-shot syndrome validation.
 
 The two commuting twelve-body Hamiltonians
 
@@ -815,15 +835,15 @@ is preliminary.  A calibrated assessment is:
 
 \[
 \begin{array}{l|c|c}
-\text{application}&\text{present strength}&\text{with distance/soundness}\
+\text{application}&\text{present strength}&\text{with soundness/decoder}\\
 \hline
 \text{finite-geometry verification}&94&97\\
 \text{Paper-IV frame reconstruction}&91&95\\
 \text{symmetry-aware orbit archives}&88&93\\
-\text{classical redundant-syndrome decoding}&79&94\\
-\text{quantum syndrome validation}&67&90\\
+\text{classical redundant-syndrome decoding}&88&94\\
+\text{quantum syndrome validation}&75&90\\
 \text{batched simulation and decoder benchmarks}&86&91\\
-\text{finite quantum-LDPC seed}&48&65\\
+\text{finite quantum-LDPC seed}&55&68\\
 \text{quantum-walk and spectral model}&61&78\\
 \text{general-purpose bitmap compression}&43&55
 \end{array}
@@ -843,8 +863,9 @@ The weak systems pitch would be that this example improves Elias--Fano or
 Roaring compression; it does not.  The stronger and accurate claim is that a
 single exceptional finite-geometric object has mutually validating bitset,
 coset, coding, channel, and quantum-syndrome representations, with exact local
-conversion among the relevant frames.  The decisive next computation is the
-distance and local-soundness profile of the frame metacode.
+conversion among the relevant frames.  The decisive next step is the
+local-soundness profile and a practical decoder for the now-certified
+\([182,37,28]_2\) metacode.
 
 ## Evidence and replay
 
@@ -871,6 +892,25 @@ load-bearing input is
 representatives and exact finite-field operations are reused rather than
 copied.  The JSON certificate records the bounded output.
 
+The metacode enumerator reads the canonical adjacency and paired coordinate
+columns from that certificate, derives \(\ker H\) rather than accepting a
+hard-coded basis, and performs the three-word Gray sweep.  Replay its complete
+\(2^{37}\)-word certificate from the repository root with
+
+```sh
+cargo run --release --manifest-path rust/Cargo.toml \
+  --bin c682_frame_metacode -- \
+  --bits 37 --low-bits 20 --self-check-bits 20 \
+  --check notes/2026-08-04-c682-paper-iv-frame-metacode.json \
+  > /tmp/c682-frame-metacode.json
+sha256sum -c notes/2026-08-04-c682-paper-iv-frame-metacode.sha256
+```
+
+The tracked JSON contains the complete weight enumerator.  The Rust kernel's
+bounded from-scratch comparison covers \(2^{20}\) words; the full-run checks
+listed in the algorithmic section are independent invariants around the
+optimized sweep, not a second full implementation.
+
 This is one implementation with several independent invariant checks, not two
 independent implementations.  It proves the stated facts for the explicitly
 exhausted \(q=13\) group action.  A human double-coset proof of the two XOR
@@ -895,8 +935,8 @@ paper promotion.
 7. Determine what symmetry must be forgotten, or what base object enlarged,
    before an \(\mathbf F_{64}\)-repair can exist; none is available
    \(G\)-equivariantly on the code module.
-8. Determine the distance and local-test soundness of the length-(182)
-   frame-consistency code, and whether its cubic girth-twelve presentation
+8. Determine the local-test soundness of the \([182,37,28]_2\)
+   frame-consistency code and whether its cubic girth-twelve presentation
    admits a provably linear-time decoder.
 9. Decide whether the transition can be recovered in subquadratic time from
    the unlabelled minimum-support hypergraph, without first supplying the
@@ -904,8 +944,8 @@ paper promotion.
 10. Compute the exact real singular spectrum, Smith normal form, and integer
     Markov basis of \(C\); these respectively control information contraction,
     characteristic dependence, and the algebraic-statistical fibres.
-11. Compute the frame metacode distance and soundness, then decide whether the
-    redundant Pauli frames support useful measurement-error correction or a
-    nontrivial CSS construction.
+11. Compute the frame metacode soundness and a practical decoder, then decide
+    whether the redundant Pauli frames support useful measurement-error
+    correction or a nontrivial CSS construction.
 12. Implement explicit-bitset, coset-generated, and packed-module kernels and
     benchmark frame conversion, batch syndrome evaluation, and archive size.
