@@ -36,8 +36,11 @@ concurrent matchings. Since each chord lies in exactly three chord matchings in 
 matching through each chord fails to be concurrent, and the count of five follows from
 `5 × 3 = 15`.
 
-The triple-perspectivity theorem is therefore not needed for the partition. It remains needed later,
-to place the concurrences in the hexagonal labelling that the golden normal form consumes.
+The triple-perspectivity theorem is therefore not needed for the partition. An adversarial review
+recorded in `notes/2026-08-04-c855-dye-formalization-review.md` establishes further that it is not
+needed for the remaining labelling step either: a chord matching is concurrent exactly when it is
+not one of the five factors, so no perspectivity argument appears anywhere in the remaining chain.
+`SixArcPerspectivity` stands as an independent theorem.
 
 ## New combinatorial content
 
@@ -66,14 +69,21 @@ an axiom audit.
 ## What the second Dye axiom still needs
 
 `dye1991_equality_classification` remains declared. Steps 2, 5, 6 and 7 of the plan are formalized.
-What is left is the labelling and the order-eleven identification:
+What is left is the labelling and the order-eleven identification, in the simplified form the review
+established:
 
-- from the one-factorization, a hexagonal labelling `p1 … p6` of the arc in which the four matchings
-  that `GoldenHexagonNormalForm.golden_normal_form_of_concurrent_matchings` consumes all avoid the
-  one-factorization, hence are concurrent. Two of its factors have union a six-cycle, which fixes a
-  hexagonal order in which the remaining three factors are determined; a further explicit
-  relabelling then moves the required four matchings off the one-factorization.
+- from the one-factorization, take two factors; their union is a six-cycle, which fixes a hexagonal
+  labelling `p1 … p6` in which those two factors are `{p1p2, p3p4, p5p6}` and `{p1p6, p2p3, p4p5}`.
+  Composing with the relabelling `q4 = p5`, `q5 = p6`, `q6 = p4` carries the four matchings that
+  `GoldenHexagonNormalForm.golden_normal_form_of_concurrent_matchings` consumes off the
+  one-factorization. Each of the four images shares a chord with one of the two chosen factors while
+  differing from it, so `disjoint_of_mem_nonconcurrentMatchings` alone shows it is not a factor,
+  hence concurrent. The three remaining factors never have to be identified.
 - discharging that theorem's seven non-collinearity hypotheses and `p2 ≠ x` from the arc condition
-  and the concurrence points being off the arc;
-- at order eleven, where the golden roots are four and eight, the explicit projectivity carrying the
-  normal form to `Examples.q11Witness`, a finite check.
+  together with the concurrences already assumed: a concurrence point on a side of the coordinate
+  triangle is forced to be a vertex, which the arc condition excludes. `x ∉ A` is already proved as
+  `SixArcChordMatchings.notMem_of_concurrentAt`.
+- at order eleven the two golden roots four and eight each admit an explicit projectivity carrying
+  the golden hexagon onto `Examples.q11Witness`, so the branch on the root is closed by one matrix
+  each with no normalization step. Witness matrices and their independent replay are recorded in
+  `notes/2026-08-04-c855-dye-formalization-review.md`.

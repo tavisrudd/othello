@@ -453,11 +453,15 @@ finite projective plane. The equality structure follows from that dictionary by
 counting alone, without the perspectivity theorem: `SixArcOneFactorization`
 proves that at ten triple-concurrence points every chord lies in exactly one
 non-concurrent chord matching, that there are five of them, and that they share
-no chord, so they partition the fifteen chords. What remains for the axiom is
-the hexagonal labelling that puts the four required concurrences off that
-one-factorization and discharges the normal form's non-collinearity
-hypotheses, and the order-eleven projectivity onto the displayed witness. None
-of the five new modules is reached by a gate yet. Records:
+no chord, so they partition the fifteen chords. An adversarial review confirms both
+commits and settles the remaining route's feasibility by exhaustive
+computation: what remains for the axiom is the hexagonal labelling from two
+factors of that one-factorization, composed with an explicit relabelling that
+puts the four required matchings off it, the normal form's non-collinearity
+hypotheses from the arc condition, and one explicit order-eleven projectivity
+per golden root onto the displayed witness. The prism-uniqueness step and the
+perspectivity theorem are both off the remaining critical path. None of the
+five new modules is reached by a gate yet. Records:
 [`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
 and
 [`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md),
@@ -467,8 +471,10 @@ and
 [`../2026-08-04-c855-golden-normal-form.md`](../2026-08-04-c855-golden-normal-form.md),
 the chord-pairing bijection in
 [`../2026-08-04-c855-chord-pairing-bijection.md`](../2026-08-04-c855-chord-pairing-bijection.md),
-and the equality structure in
-[`../2026-08-04-c855-one-factorization.md`](../2026-08-04-c855-one-factorization.md).
+the equality structure in
+[`../2026-08-04-c855-one-factorization.md`](../2026-08-04-c855-one-factorization.md),
+and the review with its committed replay programs in
+[`../2026-08-04-c855-dye-formalization-review.md`](../2026-08-04-c855-dye-formalization-review.md).
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,

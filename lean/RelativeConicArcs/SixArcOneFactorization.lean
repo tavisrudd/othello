@@ -22,8 +22,10 @@ invertibility of two.
 
 The one-factorization produced here is the combinatorial half of the classification of the six-arcs
 attaining the bound in R. H. Dye, "Hexagons, conics, \(A_5\) and \(\mathrm{PSL}_2(K)\)",
-Journal of the London Mathematical Society (2) 44 (1991), 270--286, Section 2.2, page 275.  What is
-established here is the partition of the chords by the non-concurrent matchings, not the projective
+Journal of the London Mathematical Society (2) 44 (1991), 270--286,
+doi:10.1112/jlms/s2-44.2.270, in the proof of Theorem 1, Section 2.3, page 275, where the five
+triangles whose sides are chords of the hexagon and whose vertices are not its vertices are exactly
+the chord matchings that are not concurrent.  What is established here is the partition of the chords by the non-concurrent matchings, not the projective
 equivalence of the arcs attaining the bound.
 -/
 
