@@ -450,11 +450,12 @@ it must replace every mathematical boundary in that five-mode ledger by a
 kernel-checked Lean theorem and close the complete scholarly-artifact audit
 before the next release is called theorem-complete.
 
-The first of the two declared Dye inputs is closed: the ten-point bound on
-triple-concurrence points is a proved theorem over any field in which two is
-invertible, the rigidity gate is green, and its permitted-axiom entry is
-deleted. The equality classification remains the single non-standard axiom of
-that gate, reached by three terminals. Two of its inputs are now proved over an
+Both declared Dye inputs are now closed, and the Paper I rigidity gate carries no
+non-standard axiom at any terminal. The ten-point bound on triple-concurrence
+points is a proved theorem over any field in which two is invertible, and the
+equality classification is a proved theorem at order eleven; both permitted-axiom
+entries are deleted, so `lean/trust/areas/relconic.toml` permits no axiom. Two of
+the classification's inputs are proved over an
 arbitrary field: two triangles in double perspective are in triple perspective,
 and a hexagon whose four named chord triples are concurrent has the golden
 normal form `(1:0:0), (φ:1:1), (0:1:0), (1:φ:1), (0:0:1), (1:1:2−φ)` with
@@ -484,10 +485,19 @@ chord with a chosen factor while differing from it — hence not a factor, hence
 concurrent — and the non-collinearity hypotheses come from the arc condition
 together with the fact that the line joining a chord endpoint to an off-arc point
 of that chord is the chord itself. The prism-uniqueness step and the
-perspectivity theorem are both off the critical path and unused. What remains for
-the axiom is the single order-eleven step: `φ = 4` or `φ = 8`, each with its own
-explicit projectivity onto the displayed witness. None of the seven new modules
-is reached by a gate yet. Records:
+perspectivity theorem are both off the critical path and unused. The order-eleven
+step is also proved: `φ = 4` or `φ = 8` in the field of eleven elements, and each
+root has its own explicit projectivity, of determinant three, carrying its golden
+hexagon onto the displayed witness. All eight new modules are now reached by the
+rigidity gate through the converted classification, whose build log carries no Dye
+axiom, `sorry`, or compiled-evaluation axiom at any of its 201 axiom reports.
+Still open on this surface: `trust/PORTFOLIO.md` and `trust/graph-manifest.json`
+are stale against regeneration and were stale before this work; the pinned
+order-eleven certificate package, the paper's `trust_manifest.json`, and its prose
+about two classical Dye assumptions still describe the classification as assumed,
+and are refreshed only by the export and re-pin chain; and
+`RelativeConicArcs/Q11DyeAxioms.lean` now declares no axiom, so its name and the
+`ClebschDye` namespace belong to the semantic rename pass. Records:
 [`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
 and
 [`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md),
@@ -503,8 +513,10 @@ the review with its committed replay programs in
 [`../2026-08-04-c855-dye-formalization-review.md`](../2026-08-04-c855-dye-formalization-review.md),
 the hexagonal labelling in
 [`../2026-08-04-c855-hexagonal-order.md`](../2026-08-04-c855-hexagonal-order.md),
-and the plane-level assembly in
-[`../2026-08-04-c855-golden-hexagon-assembly.md`](../2026-08-04-c855-golden-hexagon-assembly.md).
+the plane-level assembly in
+[`../2026-08-04-c855-golden-hexagon-assembly.md`](../2026-08-04-c855-golden-hexagon-assembly.md),
+and the order-eleven identification with the axiom retirement in
+[`../2026-08-04-c855-order-eleven-witness-identification.md`](../2026-08-04-c855-order-eleven-witness-identification.md).
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,

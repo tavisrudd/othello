@@ -174,10 +174,10 @@ package: every file in the published transitive closure is in scope.
 - [ ] Eliminate every trusted-execution-only mathematical boundary. Native
   evaluation may accelerate a proof only when the final theorem's axiom audit
   remains within the accepted foundational/library trust base.
-- [ ] Eliminate the two ad hoc Dye axioms: either import exact, audited
-  kernel-checked library theorems with matching hypotheses and normalization,
-  or formalize the required Dye results from definitions in the Paper I
-  closure.
+- [x] Eliminate the two ad hoc Dye axioms: both are formalized from definitions in
+  the Paper I closure, `lean/trust/areas/relconic.toml` permits no axiom, and the
+  rigidity gate's build log carries no Dye axiom at any of its 201 axiom reports.
+  Report: `notes/2026-08-04-c855-order-eleven-witness-identification.md`.
 - [ ] Prove `ClassicalOddA5ThreePlusThreeSplitting` in Lean (possibly from
   already kernel-checked library results); a citation or declared unproved
   interface is not sufficient for release.

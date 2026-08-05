@@ -23,11 +23,13 @@ per-row verification behind them are not checked here: they are the payload of
 the separately versioned order-eleven certificate library, whose own
 import-only gate checks them and whose published trust fact this repository
 consumes by hash, pinned in `lean/trust/certificate-packages.toml`.  The
-rigidity conclusion additionally depends on
-the ten-point Brianchon bound and equality classification in R. H. Dye,
+rigidity conclusion uses the ten-point
+Brianchon bound and the equality classification of six-arcs attaining it; both
+are kernel-checked theorems of this repository and neither is assumed.  The
+same two statements appear as Theorems 1 and 3, pages 275--278 of R. H. Dye,
 “Hexagons, conics, \(A_5\) and \(\mathrm{PSL}_2(K)\),” *Journal of the
-London Mathematical Society* (2) 44 (1991), Theorems 1 and 3, pages 275--278,
-doi:10.1112/jlms/s2-44.2.270.  The small-arc bridge reduces the four-, five-,
+London Mathematical Society* (2) 44 (1991), doi:10.1112/jlms/s2-44.2.270, which
+is cited as the antecedent.  The small-arc bridge reduces the four-, five-,
 and seven-arc cases to exact secant moments; separate executable certificates
 discharge the finite geometric exclusions not covered by those symbolic
 reductions.
@@ -53,7 +55,7 @@ terminals.
 #print axioms RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree
 #print axioms RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports
 
--- The symmetry-free rigidity implication and its exact classical seam.
+-- The symmetry-free rigidity implication and its six-arc concurrence inputs.
 #print axioms RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card
 #print axioms RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card
 #print axioms RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic

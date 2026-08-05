@@ -15,12 +15,10 @@ manifest = "RelativeConicArcs/TRUST.md"
 
 owns = ["RelativeConicArcs", "RelativeConicArcs.**"]
 
-# The single remaining Dye axiom.  It is declared here so it appears in the portfolio axiom map;
-# declaring an axiom is not endorsing it.  The ten-point bound formerly declared alongside it is now
-# a theorem of RelativeConicArcs.SixArcConcurrence.
-permitted_axioms = [
-  "RelativeConicArcs.ClebschDye.dye1991_equality_classification",
-]
+# No axiom is permitted in this area.  The ten-point six-arc concurrence bound and the equality
+# classification of the arcs attaining it were once declared here; both are now theorems of
+# RelativeConicArcs.SixArcConcurrence and RelativeConicArcs.Q11GoldenHexagonWitness.
+permitted_axioms = []
 
 # ---------------------------------------------------------------------------------------------
 # Gates.  The relconic targets are independently compiled import-only modules, so completeness is
@@ -1958,8 +1956,9 @@ modules = [
 ]
 severity = "info"
 reason = """\
-Clebsch/A5 orbit exploration reached through the two declared Dye axioms.  It is not paper-facing \
-through this area's gates and `lean/RelativeConicArcs/TRUST.md` makes no audit claim about it."""
+Clebsch/A5 orbit exploration adjacent to the order-eleven six-arc development.  It is not \
+paper-facing through this area's gates and `lean/RelativeConicArcs/TRUST.md` makes no audit claim \
+about it."""
 
 [[unreached]]
 modules = ["RelativeConicArcs"]
