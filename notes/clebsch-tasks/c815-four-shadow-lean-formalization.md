@@ -4,14 +4,14 @@
 **Status:** reopened after formal audit; the three Paper III gates, their axiom
 reports, manifests, and all paper-local replays are green with no
 compiled-evaluation axiom at any terminal, the documentation and gate-replay
-obligations of the audit checklist are closed, and the remaining work is
-mathematical — four-shadow root normalization by switching and uniqueness of
-the conference switching class, the aligned-design strengths, the rank-14
-weighted Jacobian, and gap class B — before the API is handed to C823
+obligations of the audit checklist are closed, the recognition theorem is
+transported off the root gauge and the conference switching class is proved
+unique, and the remaining work is the aligned-design strengths, the rank-14
+weighted Jacobian, and gap class B before the API is handed to C823
 
 ## Objective
 
-Formalize the reusable converse theorem behind C809: for a symmetric zero-diagonal order-six matrix with nonzero off-diagonal entries, nonzero proportionality between the triangle cubic and the commutator-Pfaffian/third-compound cubic forces the quadratic relation $A^2=\lambda I$. Formalize the root-normalized scalar-sign specialization that detects the conference square and its oriented six-test recognition packet. Reduction of arbitrary sign matrices and uniqueness modulo switching and permutation are outside this API.
+Formalize the reusable converse theorem behind C809: for a symmetric zero-diagonal order-six matrix with nonzero off-diagonal entries, nonzero proportionality between the triangle cubic and the commutator-Pfaffian/third-compound cubic forces the quadratic relation $A^2=\lambda I$. Formalize the root-normalized scalar-sign specialization that detects the conference square and its oriented six-test recognition packet. Reduction of arbitrary sign matrices and uniqueness modulo switching and permutation were originally excluded; the 2026-08-03 author instruction to close every gap by strengthening the formal side brought both into scope, and both are now formalized.
 
 ## Required scope
 

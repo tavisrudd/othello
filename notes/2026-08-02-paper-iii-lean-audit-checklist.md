@@ -133,10 +133,18 @@ now refuse it.
   and audit the finite classification as the exact proof step rather than a
   corroborating replay.  The finite classification is the exact proof step and
   is disclosed as such in the module header and the focused gate.
-- [ ] Formalize root normalization by switching for arbitrary scalar sign
+- [x] Formalize root normalization by switching for arbitrary scalar sign
   matrices, so the recognition statement holds at the manuscript's quantifier
-  range rather than only on normalized representatives.
-- [ ] Formalize the uniqueness of the conference switching class.
+  range rather than only on normalized representatives.  Switching by the root
+  row lands in the normalized family and carries proportionality, the
+  conference square and the sign-matrix property with it:
+  `RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix`
+  and its scaled form.
+- [x] Formalize the uniqueness of the conference switching class.  One
+  relabelling and one diagonal switching carry any sign matrix with square
+  `5 • 1` onto the displayed conference matrix:
+  `RelativeConicArcs.FourShadowRecognition.exists_switchMatrix_submatrix_eq_conferenceMatrix`.
+  Report: `notes/2026-08-04-c815-switching-reduction.md`.
 - [x] Explain in the module header the proof domain, kernel bridge, normalized
   scope, and the external rank-14 weighted-Jacobian boundary.  Superseded in
   part on 2026-08-04: the compiled-evaluation sentence this box asked for is

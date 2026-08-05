@@ -114,16 +114,25 @@ axiom.  The audit checklist
 `notes/2026-08-02-paper-iii-lean-audit-checklist.md` is refreshed to that state
 and carries a dated summary of what is still open.
 
-What remains for C815 is therefore purely mathematical: gap classes B and C of
-`notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md` — nine
-manuscript clauses with no formal counterpart, and the six claims recorded as
-strengths without matching statements.  The current work order is four-shadow
-root normalization by switching for arbitrary scalar sign matrices together
-with uniqueness of the conference switching class, since C815 owns those and
-C823 inherits them; then the aligned-design strengths (general faithfulness
-transport, the finite-set extension to a common seven-set, the explicit query
-family, and the anchor step's distinctness obligation); then the rank-14
-weighted Jacobian and gap class B.
+The four-shadow half of gap class C is closed.  Diagonal switching multiplies
+the commutator-Pfaffian cubic by the product of the six switching signs and
+leaves the triangle cubic unchanged, so switching by the root row reduces an
+arbitrary symmetric zero-diagonal matrix with entries `±1` to the normalized
+family and carries nonzero proportionality and the conference square with it;
+the recognition theorem now holds at the manuscript's quantifier range.  One
+relabelling together with one fixed diagonal switching carries every such
+matrix with square `5 • 1` onto the displayed conference matrix, which is the
+uniqueness of the conference switching class.  The four-shadow gate audits
+thirty-five terminals, none carrying a compiled-evaluation axiom, and the two
+paper-local replays and the release gate pass.  Report:
+`notes/2026-08-04-c815-switching-reduction.md`.
+
+What remains for C815 is the rest of gap classes B and C of
+`notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`: the
+aligned-design strengths (general faithfulness transport, the finite-set
+extension to a common seven-set, the explicit query family, and the anchor
+step's distinctness obligation), the rank-14 weighted Jacobian, and the nine
+manuscript clauses of gap class B.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
@@ -356,7 +365,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | complete at the normalized-core boundary; normalized cut classifier, symbolic third-point elimination, conditional overlap consistency, query-polynomial identity, determinant/switching transport, formal audits, and paper gate green | Ramsey existence, arbitrary finite-set normalization, and query-family cardinality remain human inputs; shared `AlignedTwoGraph` API is available to C815 and C823 |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
 | [C809 — four-shadow characterization](../clebsch-tasks/c809-four-shadow-characterization.md) | complete; positive math-only freeze; no paper promotion | none; nonzero triangle--Pfaffian proportionality characterizes the sign conference class, the two orientations are projectively isolated, and any manuscript/novelty integration requires a separately allocated follow-up |
-| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | reopened; all three gates, their axiom reports, manifests, and every paper-local replay are green with no compiled-evaluation axiom at any terminal, and the documentation, gate-replay, and manuscript-correction obligations are closed | formalize four-shadow root normalization by switching and uniqueness of the conference switching class, then the aligned-design strengths, the rank-14 weighted Jacobian, and gap class B, then run the closeout before handing the API to C823 |
+| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | reopened; all three gates and every replay are green with no compiled-evaluation axiom at any terminal, and the four-shadow recognition theorem now holds for arbitrary sign matrices with the conference switching class proved unique | formalize the aligned-design strengths, then the rank-14 weighted Jacobian and gap class B, then run the closeout before handing the API to C823 |
 | [C816 — Paper III four-shadow integration](../clebsch-tasks/c816-paper-iii-four-shadow-integration.md) | fifth Paper III route task; begin after C800 reconciliation; manuscript promotion authorized | complete the full precedence audit, integrate the characterization and exact weighted boundary, refresh trust/release surfaces, then run Milnor--Serre, red-team, PDF inspection, and a fresh context-free cold-read regrade |
 | [C810 — aligned-certificate distance](../clebsch-tasks/c810-aligned-certificate-distance.md) | complete; exact seven-point distance two and correction radius zero; no paper promotion | none; the all-even spectrum follows from edge-toggle parity, and the conference-only multi-class question is outside the triggered cheap-stop boundary |
 | [C811 — quadratic-twist specialization](../clebsch-tasks/c811-quadratic-twist-specialization.md) | queued; math only; paper promotion excluded | stress-test the fibre-recovery claim and quickly delimit standard Kummer precedence before seeking a sharper geometric lemma |

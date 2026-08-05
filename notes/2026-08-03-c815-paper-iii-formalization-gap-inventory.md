@@ -213,7 +213,15 @@ the claim. Under the current instruction they are closed by proving the claim.
    unconditional in the manuscript's quantifier range.
 5. Four-shadow: root normalization by switching is proved only for normalized
    scalar sign matrices, and uniqueness of the conference switching class is
-   claimed but unproved. Both are to be formalized.
+   claimed but unproved. Both are to be formalized. **Closed 2026-08-04.**
+   Switching multiplies the commutator-Pfaffian cubic by the product of the six
+   switching signs and leaves the triangle cubic unchanged, so switching by the
+   root row reduces an arbitrary sign matrix to the normalized family and
+   carries the recognition statement with it; and one relabelling together with
+   the fixed switching `(1,1,1,1,-1,-1)` carries each of the twelve labelled
+   pentagons onto the displayed conference matrix, which is the uniqueness of
+   the switching class. Report:
+   `notes/2026-08-04-c815-switching-reduction.md`.
 6. The rank-14 local weighted Jacobian rigidity calculation is an external
    rational certificate. It backs C809, which is not yet in the manuscript;
    before C816 promotes it, it needs either a structural rank argument or a
