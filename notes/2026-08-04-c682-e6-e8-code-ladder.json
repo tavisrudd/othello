@@ -1,0 +1,103 @@
+{
+  "bounded_scope": {
+    "binary_codewords_enumerated": {
+      "base": 64,
+      "lift": 256
+    },
+    "claim": "support-incidence code of the E8 bracket tensor",
+    "not_claimed": "kernel of a scalar cubic on 27 tensor 3",
+    "primes_with_rank_checked": [
+      2,
+      3,
+      5,
+      7,
+      11,
+      13
+    ]
+  },
+  "e6_a2_bracket_support_lift": {
+    "binary_parameters": [
+      81,
+      8,
+      36
+    ],
+    "binary_weight_enumerator": {
+      "0": 1,
+      "36": 36,
+      "38": 81,
+      "42": 108,
+      "48": 27,
+      "54": 3
+    },
+    "check_weight": 3,
+    "checks": 270,
+    "construction": "45 E6 tritangents times all 6 A2 color bijections",
+    "coordinates": 81,
+    "ranks_by_prime": {
+      "11": 73,
+      "13": 73,
+      "2": 73,
+      "3": 73,
+      "5": 73,
+      "7": 73
+    }
+  },
+  "e6_tritangent_code": {
+    "binary_parameters": [
+      27,
+      6,
+      12
+    ],
+    "binary_weight_enumerator": {
+      "0": 1,
+      "12": 36,
+      "16": 27
+    },
+    "check_weight": 3,
+    "checks": 45,
+    "coordinates": 27,
+    "maximum_nonzero_weight": 16,
+    "minimum_shell": {
+      "double_sixes_enumerated": 36,
+      "equals_all_schlaefli_double_sixes": true,
+      "intersection_relation_recovered_by_cooccurrence_8": true,
+      "pair_cooccurrence_profile": {
+        "6": 216,
+        "8": 135
+      },
+      "sixers_enumerated": 72,
+      "size": 36,
+      "span_dimension": 6,
+      "tritangent_planes_recovered_as_45_triangles": true
+    },
+    "ranks_by_prime": {
+      "11": 21,
+      "13": 21,
+      "2": 21,
+      "3": 21,
+      "5": 21,
+      "7": 21
+    }
+  },
+  "normal_form": {
+    "dimension_formula": "k+2",
+    "distance_formula": "min(3*d, 2*n-maxwt(D))",
+    "elimination_equals_formula_word_set": true,
+    "formula": "x_(v,a) = u_v + s_a",
+    "s_space": [
+      "000",
+      "011",
+      "101",
+      "110"
+    ],
+    "two_section_connected": true,
+    "u_space": "kernel of the 45-by-27 E6 tritangent incidence matrix",
+    "weight_enumerator_formula_checked": true
+  },
+  "schema": "c682-e6-e8-code-ladder-v1",
+  "trusted_input": {
+    "path": "2026-07-29-c697-schlafli-hodge-e6.py",
+    "role": "canonical 27 labels and 45 Cartan tritangent monomials",
+    "sha256": "e1c2fa7c877062dddc6858761e6cc6c07bedcbae7d69e93618a21fcc94bd9c03"
+  }
+}
