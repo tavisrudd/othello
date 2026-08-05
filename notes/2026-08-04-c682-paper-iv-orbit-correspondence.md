@@ -239,6 +239,41 @@ This three-way seam is an equality of marked local algebra types.  No map from
 Paper IV's frame moduli to Paper III's harmonic-cubic base, and no equality of
 their Clebsch cubic sections, is asserted.
 
+### The normalization temptation is obstructed
+
+Paper I's maximal golden order has residue field \(\mathbf F_4\) above two,
+whereas the conductor-two order has the dual-number fibre just used.  After
+extension by Paper IV's hidden field, the corresponding semisimple repair
+would be
+
+\[
+ \mathbf F_8\otimes_{\mathbf F_2}\mathbf F_4
+ \cong\mathbf F_{64}.
+\]
+
+This suggests a six-dimensional \(\mathbf F_{64}\)-refinement of the
+twelve-dimensional \(\mathbf F_8\)-module, but exact centralizer computation
+rules it out:
+
+\[
+ \boxed{
+ \operatorname{End}_{\mathbf F_8G}(K)=\mathbf F_8.}
+\]
+
+The calculation imposes commutation with elements of orders seven, three, and
+thirteen on a general twelve-square \(\mathbf F_8\)-matrix; the resulting
+linear system has rank \(143\), leaving only the scalar line.  Since the
+centralizer of those three elements already consists only of scalars, so does
+the centralizer of all of \(G\).
+
+Thus no \(G\)-equivariant \(\mathbf F_{64}\)-action exists.  The dual-number
+thickening is not an incomplete field structure waiting to be normalized
+inside Paper IV; it is the maximal symmetry-compatible continuation of the
+hidden \(\mathbf F_8\)-module.  The map suggested by normalizing Paper I first
+and then reducing would kill the nilpotent and retain only the scalar
+\(\mathbf F_8\) inside \(\mathbf F_{64}\); it is not a normalization of the
+nonreduced Paper-IV algebra itself.
+
 The bipartite graph has \(273\) edges, girth twelve, and binary adjacency rank
 \(77\), hence nullity fourteen.  Distinct vertices on one side have at most
 one common neighbor: \(273\) pairs have one and \(3822\) have none.  The most
@@ -393,3 +428,6 @@ paper promotion.
    formulation worth retaining after the stronger octahedral--toric transform.
 6. Determine whether the marked special-fibre comparison lifts to a morphism
    of deformation problems or remains only a common local algebra type.
+7. Determine what symmetry must be forgotten, or what base object enlarged,
+   before an \(\mathbf F_{64}\)-repair can exist; none is available
+   \(G\)-equivariantly on the code module.

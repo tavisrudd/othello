@@ -221,6 +221,56 @@ def compute():
     assert module.binary_rank(toric_columns + [all_vertices]) == 37
     assert module.binary_rank(octahedral_columns + [all_vertices]) == 37
 
+    a0 = module.relation_matrix(list(points), 0)
+    projection_to_code = module.binary_add(
+        module.identity(len(points)), module.binary_multiply(a0, a0)
+    )
+    binary_code_basis, _ = module.coordinate_basis(projection_to_code)
+    scalar_alpha_squared = module.binary_multiply(rho_nine, rho_nine)
+    f8_basis = []
+    expanded_basis = []
+    for vector in binary_code_basis:
+        packet = [
+            vector,
+            module.binary_multiply([vector], rho_nine)[0],
+            module.binary_multiply([vector], scalar_alpha_squared)[0],
+        ]
+        if module.binary_rank(expanded_basis + packet) == len(expanded_basis) + 3:
+            f8_basis.append(vector)
+            expanded_basis.extend(packet)
+    assert len(f8_basis) == 12 and len(expanded_basis) == 36
+    _, expanded_pivots = module.coordinate_basis(expanded_basis)
+    element_orders = {element: module.projective_order(element) for element in group}
+    nonsplit_point = (1, 0, 2)
+    nonsplit_normalizer = [
+        element for element in group if module.act_quadratic(element, nonsplit_point) == nonsplit_point
+    ]
+    centralizer_test_elements = [
+        next(element for element in nonsplit_normalizer if element_orders[element] == 7),
+        next(
+            element
+            for element in group
+            if element_orders[element] == 3
+            and sum(module.mobius(element, point) == point for point in range(14)) == 2
+        ),
+        next(element for element in group if element_orders[element] == 13),
+    ]
+    centralizer_test_matrices = [
+        module.group_matrix_over_f8(element, list(points), f8_basis, expanded_pivots)
+        for element in centralizer_test_elements
+    ]
+    centralizer_equations = []
+    for matrix in centralizer_test_matrices:
+        for i in range(12):
+            for j in range(12):
+                row = [0] * 144
+                for k in range(12):
+                    row[12 * i + k] ^= matrix[k][j]
+                    row[12 * k + j] ^= matrix[i][k]
+                centralizer_equations.append(row)
+    centralizer_dimension = 144 - module.gf8_rank(centralizer_equations)
+    assert centralizer_dimension == 1
+
     first_row = correspondence[0]
     first_neighbor = next(j for j in range(91) if first_row >> j & 1)
     edge_group = octahedral_stabilizers[0] & toric_stabilizers[first_neighbor]
@@ -264,6 +314,12 @@ def compute():
             "toric_is_xor_of_three_octahedral_neighbors": True,
             "each_adjacent_support_intersection_size": 4,
             "common_gram_relation_rho": 9,
+        },
+        "hidden_F8_module": {
+            "dimension_over_F8": 12,
+            "centralizer_dimension_over_F8": centralizer_dimension,
+            "centralizer": "F8_scalars_only",
+            "equivariant_F64_refinement_exists": False,
         },
         "all_stabilizer_intersection_order_counts": dict(sorted(intersection_orders.items())),
         "trusted_inputs": [str(SOURCE.relative_to(ROOT))],

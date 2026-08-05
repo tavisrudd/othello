@@ -50,6 +50,12 @@
   },
   "field_order": 13,
   "group_order": 2184,
+  "hidden_F8_module": {
+    "centralizer": "F8_scalars_only",
+    "centralizer_dimension_over_F8": 1,
+    "dimension_over_F8": 12,
+    "equivariant_F64_refinement_exists": false
+  },
   "identities": {
     "common_gram_relation_rho": 9,
     "each_adjacent_support_intersection_size": 4,
