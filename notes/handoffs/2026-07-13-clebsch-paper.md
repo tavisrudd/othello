@@ -1019,6 +1019,60 @@ cd papers/clebsch-covers
 ./scripts/verify-all.sh
 ```
 
+## Exceptional code ladder
+
+Research track, no manuscript yet. One binary code per exceptional level, each
+the restriction of affine linear functions to the nonsingular vectors of a
+mod-2 quadratic space, linked by one repeated operation: take the link of a
+root, fold antipodal pairs, shorten.
+
+\[
+ [496,11,240]_{E_{10}}
+ \to [240,10,112]
+ \to [120,9,56]_{E_8}
+ \to [28,7,12]_{E_7}
+ \to [27,6,12]_{E_6}
+\]
+
+The E6, E7, and E8 members attain the exact unrestricted minimum-distance
+optimum; every level above E8 falls short. The 240-point member is the root
+link of an \(E_{10}\) root and coincides with the affine \(E_9\) code built
+from the affine root lattice; the complementary 256-point root hyperplane is
+\((E_8\oplus A_1)/2\) and gives \([256,10,120]\) against an exact record of 124.
+
+Current state:
+
+- Reports: `../2026-08-05-c682-e8-root-pair-ladder.md` (E8 to E6 and the
+  quantum-record audit), `../2026-08-05-c865-e9-affine-level-code.md` (affine
+  level, partly superseded), `../2026-08-05-c867-ladder-record-attack.md`
+  (uniform ladder, symmetry obstructions, Eisenstein model),
+  `../2026-08-05-c866-exceptional-code-ladder-literature-audit.md` (novelty).
+- Novelty: the level codes themselves are Calderbank--Kantor two-weight codes
+  and are not new. No predecessor was located for the root-link fold statement,
+  the affine-root-lattice carrier, or the ladder as an exceptional series.
+  Before any design claim, read the Chakravarti IMA chapter
+  (DOI `10.1007/978-1-4613-8994-1_4`) at full text; it is still at metadata
+  only. MathSciNet is NOT COVERED, so "to our knowledge" stays on every
+  negative. Quantum codes from E8 root lattices do exist in the code-CFT
+  literature, so no blanket absence claim is available there.
+- Closed negatively, with proofs rather than failed searches: no
+  \(O_8^+(2)\)-invariant dimension-ten code contains the E8 code, so the exact
+  \([120,10,56]\) record dimension is incompatible with full root-pair
+  symmetry; and no Plotkin \(|u|u+v|\) code at \([240,10]\) with length-120
+  halves beats distance 112.
+- Every unsigned lift stalls at CSS distance four, one below the exact
+  \([[28,14,5]]\) and \([[120,102,5]]\) records. The alphabet needed to fix
+  that is canonical and free: \(E_8/2E_8\cong\mathbf F_4^4\) over the
+  Eisenstein integers, with \(Q(v)\) the parity of the \(\mathbf F_4\)-weight
+  and \(\omega\) acting freely on the 120 coordinates in 40 orbits.
+- Live frontiers: which \(\mathbf F_4\)-linear code on the Eisenstein carrier
+  is Hermitian self-orthogonal with dual distance five, and the four-unit gap
+  at \([256,10]\), which is the only level above E8 with no proved obstruction.
+
+Outbound literature queries on this track must not disclose our unpublished
+parameters or constructions; verdicts blocked by that constraint are recorded
+as open gaps rather than guessed.
+
 ## Companion-export chain
 
 Paper III's formal companion is back on the guarded chain. Its gate
