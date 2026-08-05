@@ -1,11 +1,13 @@
 # C815 — Lean formalization of four-shadow recognition
 
 **Lane:** `clebsch`  
-**Status:** reopened after formal audit; the source, focused gate, axiom
-report, manifest, and paper-local replay are now green, and the remaining work
-is the module-wide docstring/hypothesis audit, the manifest's disclosure of the
-finite terminal, and the two full Paper III gate runs before the API is handed
-to C823
+**Status:** reopened after formal audit; the three Paper III gates, their axiom
+reports, manifests, and all paper-local replays are green with no
+compiled-evaluation axiom at any terminal, the documentation and gate-replay
+obligations of the audit checklist are closed, and the remaining work is
+mathematical — four-shadow root normalization by switching and uniqueness of
+the conference switching class, the aligned-design strengths, the rank-14
+weighted Jacobian, and gap class B — before the API is handed to C823
 
 ## Objective
 
