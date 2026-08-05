@@ -7,7 +7,7 @@
 
 schema_version = 1
 area = "clebsch_support_cubic_orientation"
-gate = "RelativeConicArcs.PaperIOrientationSpine"
+gate = "RelativeConicArcs.SupportOrientationSpine"
 trust_statement = "trust/CLEBSCH_SUPPORT_CUBIC_ORIENTATION.md"
 axiom_audit = "trust/ClebschSupportCubicOrientationAxiomAudit.lean"
 

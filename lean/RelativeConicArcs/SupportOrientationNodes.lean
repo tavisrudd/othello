@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationTraceDual
+import RelativeConicArcs.SupportOrientationTraceDual
 import RelativeConicArcs.GoldenCubicNodes
 import RelativeConicArcs.GoldenCubicNodeHessians
 
@@ -31,17 +31,17 @@ Everything below is proved from the definitions; nothing in this module is
 assumed or discharged outside the kernel.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationNodes
+namespace RelativeConicArcs.SupportOrientationNodes
 
 open scoped Matrix
 open GoldenCubicNodesBase
 open GoldenCubicNodes
 open GoldenCubicNodeHessians
 open ClebschGoldenConference
-open PaperIOrientationPentagon
-open PaperIOrientationHolonomy
-open PaperIOrientationDeterminant
-open PaperIOrientationTraceDual
+open SupportOrientationPentagon
+open SupportOrientationHolonomy
+open SupportOrientationDeterminant
+open SupportOrientationTraceDual
 
 /-- Five-by-five principal block obtained by deleting one support axis. -/
 def deletedPrincipalBlock (a : Fin 6) : Matrix (Fin 5) (Fin 5) ℚ :=
@@ -224,7 +224,7 @@ axis classes as singular points.
 Two further features of the same configuration are established separately: the
 six classes are a projective frame because the kernel of the
 cross-golden compression is exactly the all-ones line
-(`PaperIOrientationTraceDual.crossGoldenMap_mem_ker_iff_constant`), and each is
+(`SupportOrientationTraceDual.crossGoldenMap_mem_ker_iff_constant`), and each is
 an ordinary double point (`supportCubic_framePoints_ordinaryNodes`).
 
 The corresponding statement in the literature is the determinantal duality of
@@ -275,4 +275,4 @@ theorem supportCubic_framePoints_ordinaryNodes
 #print axioms deletedPrincipalBlock_mulVec_eq_zero_iff
 #print axioms finrank_deletedPrincipalBlock_range
 
-end RelativeConicArcs.PaperIOrientationNodes
+end RelativeConicArcs.SupportOrientationNodes

@@ -14,7 +14,7 @@ the Boolean orientation is the corresponding `A₅/C₅ → A₅/D₅` cover.
 The two orbitals are defined by the two inverse-stable `C₅` double cosets.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationCover
+namespace RelativeConicArcs.SupportOrientationCover
 
 open Equiv Equiv.Perm
 
@@ -299,4 +299,4 @@ theorem fiveOrbital_one_mem_each_other_fiber (orbital : FiveOrbital)
 #print axioms fiveOrbitals_card_five
 #print axioms fiveOrbital_one_mem_each_other_fiber
 
-end RelativeConicArcs.PaperIOrientationCover
+end RelativeConicArcs.SupportOrientationCover

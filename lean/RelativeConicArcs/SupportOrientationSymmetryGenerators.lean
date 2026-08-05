@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationSymmetryCore
+import RelativeConicArcs.SupportOrientationSymmetryCore
 import Mathlib.GroupTheory.IndexNormal
 
 /-!
@@ -12,10 +12,10 @@ frame permutations rather than an enumeration of the full frame symmetric
 group.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationSymmetry
+namespace RelativeConicArcs.SupportOrientationSymmetry
 
 open Equiv Equiv.Perm
-open PaperIOrientationHolonomy
+open SupportOrientationHolonomy
 
 /-- The three-cycle used to generate the even matching action. -/
 def matchingThreeCycle : Equiv.Perm (Fin 5) where
@@ -410,4 +410,4 @@ theorem supportCubicProjectiveStabilizer_eq_lineStabilizer :
 #print axioms reversesSupportSign_of_matchingSign_eq_neg_one
 #print axioms supportCubicProjectiveStabilizer_eq_lineStabilizer
 
-end RelativeConicArcs.PaperIOrientationSymmetry
+end RelativeConicArcs.SupportOrientationSymmetry

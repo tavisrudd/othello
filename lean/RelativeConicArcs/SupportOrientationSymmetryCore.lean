@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationNodes
+import RelativeConicArcs.SupportOrientationNodes
 import Mathlib.GroupTheory.SpecificGroups.Alternating.Simple
 
 /-!
@@ -17,11 +17,11 @@ generator module identifies its even subgroup with the oriented cubic
 stabilizer and compares the full normalizer with the cubic-line stabilizer.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationSymmetry
+namespace RelativeConicArcs.SupportOrientationSymmetry
 
 open Equiv Equiv.Perm
-open PaperIOrientationCover
-open PaperIOrientationHolonomy
+open SupportOrientationCover
+open SupportOrientationHolonomy
 
 abbrev S5 := Equiv.Perm Letter
 abbrev SixPointFrame := Fin 6
@@ -261,4 +261,4 @@ instance (sigma : Equiv.Perm SixPointFrame) :
 #print axioms supportCubicProjectiveStabilizer_card
 #print axioms supportCubic_projectiveStabilizer_equiv_S5
 
-end RelativeConicArcs.PaperIOrientationSymmetry
+end RelativeConicArcs.SupportOrientationSymmetry

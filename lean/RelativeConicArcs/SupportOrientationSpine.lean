@@ -1,11 +1,11 @@
-import RelativeConicArcs.PaperIOrientationCover
-import RelativeConicArcs.PaperIOrientationPentagon
-import RelativeConicArcs.PaperIOrientationHolonomy
-import RelativeConicArcs.PaperIOrientationDeterminant
-import RelativeConicArcs.PaperIOrientationTraceDual
-import RelativeConicArcs.PaperIOrientationNodes
-import RelativeConicArcs.PaperIOrientationSymmetry
-import RelativeConicArcs.PaperIOrientationCommutant
+import RelativeConicArcs.SupportOrientationCover
+import RelativeConicArcs.SupportOrientationPentagon
+import RelativeConicArcs.SupportOrientationHolonomy
+import RelativeConicArcs.SupportOrientationDeterminant
+import RelativeConicArcs.SupportOrientationTraceDual
+import RelativeConicArcs.SupportOrientationNodes
+import RelativeConicArcs.SupportOrientationSymmetry
+import RelativeConicArcs.SupportOrientationCommutant
 
 /-!
 # Orientation proof spine for the Clebsch support cubic
@@ -17,7 +17,7 @@ cross-golden trace dual, the six ordinary nodes, the recovered `S₅/A₅`
 symmetry boundary, and the rational and integral commutants.
 
 The commutant terminals are conditional on
-`PaperIOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting`.  That
+`SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting`.  That
 interface states the classical conjugate `3+3'` decomposition, Schur-lemma,
 and Galois-descent input explicitly.  Golden equivariance and the
 diagonal/off-diagonal integral descent are kernel checked in the imported

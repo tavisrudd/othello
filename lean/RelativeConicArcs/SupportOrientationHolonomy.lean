@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationPentagon
+import RelativeConicArcs.SupportOrientationPentagon
 import RelativeConicArcs.ClebschTwoGraph
 
 /-!
@@ -12,12 +12,12 @@ golden conference equation and supplies the low-degree cancellations which
 make the support cubic translation invariant.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationHolonomy
+namespace RelativeConicArcs.SupportOrientationHolonomy
 
 open Matrix
 open scoped Matrix
 open ClebschGoldenConference
-open PaperIOrientationPentagon
+open SupportOrientationPentagon
 open ClebschTwoGraph
 
 /-- The support sign is the triangle holonomy of the signed orbital matrix. -/
@@ -133,7 +133,7 @@ theorem supportMomentOne_eq_zero (i : Fin 6) : supportMomentOne i = 0 := by
 theorem supportMomentZero_eq_zero : supportMomentZero = 0 := by
   simp [supportMomentZero, supportMomentOne_eq_zero]
 
-/-- The Paper-I support cubic in the normalized switching class. -/
+/-- The support cubic in the normalized switching class. -/
 def supportCubic (x : Fin 6 → ℤ) : ℤ :=
   triangleCubic fiberOddOrbitalMatrix x
 
@@ -157,4 +157,4 @@ theorem supportCubic_translation_invariant (x : Fin 6 → ℤ) (u : ℤ) :
 #print axioms supportMomentZero_eq_zero
 #print axioms supportCubic_translation_invariant
 
-end RelativeConicArcs.PaperIOrientationHolonomy
+end RelativeConicArcs.SupportOrientationHolonomy

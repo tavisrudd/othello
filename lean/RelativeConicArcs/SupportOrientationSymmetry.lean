@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationSymmetryGenerators
+import RelativeConicArcs.SupportOrientationSymmetryGenerators
 
 /-!
 # Recovered `S5/A5` symmetry
@@ -17,11 +17,11 @@ bound the line stabilizer by order `120`, proving equality with the matching
 normalizer without enumerating frame permutations.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationSymmetry
+namespace RelativeConicArcs.SupportOrientationSymmetry
 
 open Equiv Equiv.Perm
-open PaperIOrientationCover
-open PaperIOrientationHolonomy
+open SupportOrientationCover
+open SupportOrientationHolonomy
 
 /-- The intrinsic matching normalizer is exactly the group preserving the
 support cubic line. -/
@@ -104,4 +104,4 @@ theorem orientedSupportCubic_index_two :
 #print axioms orientedSupportCubic_stabilizer_equiv_A5
 #print axioms orientedSupportCubic_index_two
 
-end RelativeConicArcs.PaperIOrientationSymmetry
+end RelativeConicArcs.SupportOrientationSymmetry

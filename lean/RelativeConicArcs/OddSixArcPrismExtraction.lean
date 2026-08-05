@@ -36,17 +36,20 @@ noncomputable local instance : DecidableEq (Point K) := Classical.decEq (Point K
 noncomputable local instance instDecidableIncidence (p l : Point K) : Decidable (p ∈ l) :=
   Classical.propDecidable _
 
-/-- A canonical labelling of a six-element finset by `Fin 6`. -/
-noncomputable def canonicalLabel (A : Finset (Point K)) (hcard : A.card = 6) : Fin 6 → Point K :=
+/-- A labelling of a six-element finset by `Fin 6`, read off the noncomputably chosen equivalence
+`Finset.equivFinOfCardEq`.  It depends on that choice and on nothing else: no order, incidence, or
+symmetry of the ambient plane determines it, and no invariance under such structure is claimed.
+The results below use it only as a fixed index for the six points. -/
+noncomputable def chosenLabel (A : Finset (Point K)) (hcard : A.card = 6) : Fin 6 → Point K :=
   fun i => ((Finset.equivFinOfCardEq hcard).symm i : A)
 
-theorem canonicalLabel_injective (A : Finset (Point K)) (hcard : A.card = 6) :
-    Function.Injective (canonicalLabel A hcard) := by
+theorem chosenLabel_injective (A : Finset (Point K)) (hcard : A.card = 6) :
+    Function.Injective (chosenLabel A hcard) := by
   intro i j hij
   exact (Finset.equivFinOfCardEq hcard).symm.injective (Subtype.ext hij)
 
-theorem mem_iff_exists_canonicalLabel (A : Finset (Point K)) (hcard : A.card = 6) (x : Point K) :
-    x ∈ A ↔ ∃ i : Fin 6, canonicalLabel A hcard i = x := by
+theorem mem_iff_exists_chosenLabel (A : Finset (Point K)) (hcard : A.card = 6) (x : Point K) :
+    x ∈ A ↔ ∃ i : Fin 6, chosenLabel A hcard i = x := by
   constructor
   · intro hx
     let y : A := ⟨x, hx⟩
@@ -56,9 +59,9 @@ theorem mem_iff_exists_canonicalLabel (A : Finset (Point K)) (hcard : A.card = 6
     exact ((Finset.equivFinOfCardEq hcard).symm i).property
 
 /-- The canonical labelling, packaged as an embedding for mapping endpoint finsets. -/
-noncomputable def canonicalLabelEmbedding (A : Finset (Point K)) (hcard : A.card = 6) :
+noncomputable def chosenLabelEmbedding (A : Finset (Point K)) (hcard : A.card = 6) :
     Fin 6 ↪ Point K :=
-  ⟨canonicalLabel A hcard, canonicalLabel_injective A hcard⟩
+  ⟨chosenLabel A hcard, chosenLabel_injective A hcard⟩
 
 /-- A valid canonical edge of `K₆`, regarded as an unordered pair of arc points. -/
 noncomputable def labelledArcPair (A : Finset (Point K)) (hcard : A.card = 6)
@@ -66,7 +69,7 @@ noncomputable def labelledArcPair (A : Finset (Point K)) (hcard : A.card = 6)
     (he : e ∈ SixVertexOneFactorization.allEdges) : ArcPair A := by
   classical
   refine ⟨(SixVertexOneFactorization.edgeVertices e).map
-    (canonicalLabelEmbedding A hcard), ?_⟩
+    (chosenLabelEmbedding A hcard), ?_⟩
   rw [Finset.mem_powersetCard]
   constructor
   · intro x hx
@@ -76,12 +79,12 @@ noncomputable def labelledArcPair (A : Finset (Point K)) (hcard : A.card = 6)
     have helt : e.1 < e.2 := (Finset.mem_filter.mp he).2
     simp [SixVertexOneFactorization.edgeVertices, ne_of_lt helt]
 
-theorem canonicalLabel_mem_labelledArcPair
+theorem chosenLabel_mem_labelledArcPair
     (A : Finset (Point K)) (hcard : A.card = 6)
     (e : SixVertexOneFactorization.Edge)
     (he : e ∈ SixVertexOneFactorization.allEdges) {i : Fin 6}
     (hi : i ∈ SixVertexOneFactorization.edgeVertices e) :
-    canonicalLabel A hcard i ∈ (labelledArcPair A hcard e he).1 := by
+    chosenLabel A hcard i ∈ (labelledArcPair A hcard e he).1 := by
   classical
   exact Finset.mem_map.mpr ⟨i, hi, rfl⟩
 
@@ -92,7 +95,7 @@ theorem labelledArcPair_injective_on
     (hf : f ∈ SixVertexOneFactorization.allEdges)
     (h : labelledArcPair A hcard e he = labelledArcPair A hcard f hf) : e = f := by
   apply SixVertexOneFactorization.edgeVertices_injective_on_allEdges he hf
-  apply Finset.map_injective (canonicalLabelEmbedding A hcard)
+  apply Finset.map_injective (chosenLabelEmbedding A hcard)
   exact congrArg Subtype.val h
 
 /-- The chord determined by a valid canonical edge. -/
@@ -110,10 +113,10 @@ theorem labelledChordLine_ne_disjointLine
   intro hel
   have hi : e.1 ∈ SixVertexOneFactorization.edgeVertices e := by
     simp [SixVertexOneFactorization.edgeVertices]
-  have hpair := canonicalLabel_mem_labelledArcPair A hcard e he hi
-  have hchord : canonicalLabel A hcard e.1 ∈ labelledChordLine A hcard e he :=
+  have hpair := chosenLabel_mem_labelledArcPair A hcard e he hi
+  have hchord : chosenLabel A hcard e.1 ∈ labelledChordLine A hcard e he :=
     (labelledArcPair A hcard e he).mem_line hpair
-  have hA : canonicalLabel A hcard e.1 ∈ A :=
+  have hA : chosenLabel A hcard e.1 ∈ A :=
     ((Finset.equivFinOfCardEq hcard).symm e.1).property
   exact (Finset.disjoint_left.mp hdisj)
     (mem_pointsOnLine.mpr (hel ▸ hchord)) hA
@@ -202,20 +205,20 @@ theorem chordColor_proper
   have hd : chordDirection A hcard l hdisj e he =
       chordDirection A hcard l hdisj f hf :=
     (chordColor_eq_iff_direction_eq hcard hdisj hfive he hf).mp hcolor
-  have hiA : canonicalLabel A hcard i ∈ A :=
+  have hiA : chosenLabel A hcard i ∈ A :=
     ((Finset.equivFinOfCardEq hcard).symm i).property
-  have hil : canonicalLabel A hcard i ∉ l := by
+  have hil : chosenLabel A hcard i ∉ l := by
     intro hil
     exact (Finset.disjoint_left.mp hdisj) (mem_pointsOnLine.mpr hil) hiA
-  have hiE : canonicalLabel A hcard i ∈ labelledChordLine A hcard e he :=
+  have hiE : chosenLabel A hcard i ∈ labelledChordLine A hcard e he :=
     (labelledArcPair A hcard e he).mem_line
-      (canonicalLabel_mem_labelledArcPair A hcard e he hie)
-  have hiF : canonicalLabel A hcard i ∈ labelledChordLine A hcard f hf :=
+      (chosenLabel_mem_labelledArcPair A hcard e he hie)
+  have hiF : chosenLabel A hcard i ∈ labelledChordLine A hcard f hf :=
     (labelledArcPair A hcard f hf).mem_line
-      (canonicalLabel_mem_labelledArcPair A hcard f hf hif)
+      (chosenLabel_mem_labelledArcPair A hcard f hf hif)
   have hdE := chordDirection_mem_chordLine hcard hdisj e he
   have hdF := chordDirection_mem_chordLine hcard hdisj f hf
-  have hid : canonicalLabel A hcard i ≠ chordDirection A hcard l hdisj e he := by
+  have hid : chosenLabel A hcard i ≠ chordDirection A hcard l hdisj e he := by
     intro hid
     exact hil (hid ▸ chordDirection_mem_line hcard hdisj e he)
   have hlines : labelledChordLine A hcard e he = labelledChordLine A hcard f hf :=
@@ -260,18 +263,18 @@ theorem collinear_colorPoint_edge
     (hcolor : chordColor A hcard l hdisj hfive
       (SixVertexOneFactorization.edge a b) = i) :
     Collinear (L := Point K) (colorPoint A l hfive i)
-      (canonicalLabel A hcard a) (canonicalLabel A hcard b) := by
+      (chosenLabel A hcard a) (chosenLabel A hcard b) := by
   have he : SixVertexOneFactorization.edge a b ∈ SixVertexOneFactorization.allEdges :=
     SixVertexOneFactorization.edge_mem_allEdges_of_ne hab
   refine ⟨labelledChordLine A hcard (SixVertexOneFactorization.edge a b) he, ?_, ?_, ?_⟩
   · rw [← chordDirection_eq_colorPoint A hcard l hdisj hfive he hcolor]
     exact chordDirection_mem_chordLine hcard hdisj _ he
   · apply (labelledArcPair A hcard (SixVertexOneFactorization.edge a b) he).mem_line
-    apply canonicalLabel_mem_labelledArcPair A hcard _ he
+    apply chosenLabel_mem_labelledArcPair A hcard _ he
     rw [SixVertexOneFactorization.edgeVertices_edge]
     simp
   · apply (labelledArcPair A hcard (SixVertexOneFactorization.edge a b) he).mem_line
-    apply canonicalLabel_mem_labelledArcPair A hcard _ he
+    apply chosenLabel_mem_labelledArcPair A hcard _ he
     rw [SixVertexOneFactorization.edgeVertices_edge]
     simp
 
@@ -311,14 +314,14 @@ theorem incidencePrismWitness_of_five
   obtain ⟨q, hq, i₀, i₁, i₂, hi01, hi02, hi12,
       hc01, hc23, hc45, hc02, hc14, hc35, hc03, hc15, hc24⟩ :=
     SixVertexOneFactorization.properFiveEdgeColoring_extract_prism_edges color hproper
-  let p : Fin 6 → Point K := fun j => canonicalLabel A hcard (q j)
+  let p : Fin 6 → Point K := fun j => chosenLabel A hcard (q j)
   let d₀ := colorPoint A l hfive i₀
   let d₁ := colorPoint A l hfive i₁
   let d₂ := colorPoint A l hfive i₂
   have hp : Function.Injective p :=
-    (canonicalLabel_injective A hcard).comp hq.1
+    (chosenLabel_injective A hcard).comp hq.1
   have hpA (x : Point K) : x ∈ A ↔ ∃ i, p i = x := by
-    rw [mem_iff_exists_canonicalLabel A hcard x]
+    rw [mem_iff_exists_chosenLabel A hcard x]
     constructor
     · rintro ⟨j, rfl⟩
       obtain ⟨i, rfl⟩ := hq.2 j

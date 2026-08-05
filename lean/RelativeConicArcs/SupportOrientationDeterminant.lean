@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationHolonomy
+import RelativeConicArcs.SupportOrientationHolonomy
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Adjugate
@@ -11,16 +11,16 @@ This packet expands the determinant of the golden signed orbital matrix after
 adding six diagonal variables.  The coefficients are principal minors.  The
 three-by-three coefficient is twice triangle holonomy; complementary minors
 then give the size-four value `5`, size-five value `0`, and determinant
-`-125`.  The displayed expansion is the Paper-I determinant pencil.
+`-125`.  The displayed expansion is the determinant pencil of the signed orbital matrix.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationDeterminant
+namespace RelativeConicArcs.SupportOrientationDeterminant
 
 open Matrix
 open scoped Matrix
 open ClebschGoldenConference
-open PaperIOrientationPentagon
-open PaperIOrientationHolonomy
+open SupportOrientationPentagon
+open SupportOrientationHolonomy
 
 /-- Elementary symmetric polynomial in the six displayed coordinates. -/
 def elementarySymmetric (k : ℕ) (x : Fin 6 → ℤ) : ℤ :=
@@ -741,4 +741,4 @@ theorem determinantPencil_oddPart_eq_supportCubic (x : Fin 6 → ℤ) :
 #print axioms det_signedOrbital_add_diagonal
 #print axioms determinantPencil_oddPart_eq_supportCubic
 
-end RelativeConicArcs.PaperIOrientationDeterminant
+end RelativeConicArcs.SupportOrientationDeterminant

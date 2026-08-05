@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationCover
+import RelativeConicArcs.SupportOrientationCover
 import RelativeConicArcs.MarkedClebschBridge
 import RelativeConicArcs.ClebschTwoGraph
 import Mathlib.GroupTheory.SpecificGroups.Alternating.Simple
@@ -8,23 +8,23 @@ import Mathlib.GroupTheory.SpecificGroups.Alternating.Simple
 
 The two inverse-stable five-valent orbitals of the antipodal cover give,
 after choosing one lift above each of the six axes, a symmetric signed
-matrix.  This packet fixes the root gauge used in Paper I.  A different
+matrix.  This module fixes the root gauge used throughout.  A different
 choice of lifts is diagonal switching, while exchanging the two orbitals
 negates the matrix.
 
 The last theorem works on the full twelve-point cover.  Its proof separates
 the two points in every fibre: equal sheet signs and opposite sheet signs are
-the two cancellation cases in the paper.
+the two cancellation cases.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationPentagon
+namespace RelativeConicArcs.SupportOrientationPentagon
 
 open Matrix
 open scoped Matrix
 open ClebschGoldenConference
 open MarkedClebschBridge
 open ClebschTwoGraph
-open PaperIOrientationCover
+open SupportOrientationCover
 
 /-- Explicit representatives for the base axis and the five first-orbital
 neighbors above all other axes. -/
@@ -121,16 +121,16 @@ theorem pentagonNext_orbit_surjective : Function.Surjective
 
 /-- `A5` has no nontrivial sign quotient.  This is the group-theoretic
 obstruction which rules out the equal-sign disconnected alternatives. -/
-theorem A5_no_sign_quotient (f : PaperIOrientationCover.A5 →* ℤˣ) : f = 1 := by
-  have hfive : 5 ≤ Nat.card PaperIOrientationCover.Letter := by
+theorem A5_no_sign_quotient (f : SupportOrientationCover.A5 →* ℤˣ) : f = 1 := by
+  have hfive : 5 ≤ Nat.card SupportOrientationCover.Letter := by
     rw [Nat.card_eq_fintype_card]
     decide
-  letI : IsSimpleGroup PaperIOrientationCover.A5 :=
-    alternatingGroup.isSimpleGroup (α := PaperIOrientationCover.Letter) hfive
+  letI : IsSimpleGroup SupportOrientationCover.A5 :=
+    alternatingGroup.isSimpleGroup (α := SupportOrientationCover.Letter) hfive
   rcases (inferInstance : f.ker.Normal).eq_bot_or_eq_top with hker | hker
   · have hinj : Function.Injective f := (MonoidHom.ker_eq_bot_iff f).mp hker
     have hcard := Fintype.card_le_of_injective f hinj
-    have hA5 : Fintype.card PaperIOrientationCover.A5 = 60 := by
+    have hA5 : Fintype.card SupportOrientationCover.A5 = 60 := by
       rw [card_alternatingGroup]
       norm_num
     rw [hA5] at hcard
@@ -223,4 +223,4 @@ theorem orbitalDifference_sq_eq_ten_one_sub_deck :
 #print axioms signedOrbitalMatrix_sq
 #print axioms orbitalDifference_sq_eq_ten_one_sub_deck
 
-end RelativeConicArcs.PaperIOrientationPentagon
+end RelativeConicArcs.SupportOrientationPentagon

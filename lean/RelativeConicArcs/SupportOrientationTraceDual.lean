@@ -1,4 +1,4 @@
-import RelativeConicArcs.PaperIOrientationDeterminant
+import RelativeConicArcs.SupportOrientationDeterminant
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.LinearAlgebra.BilinearForm.Orthogonal
 import Mathlib.Data.Matrix.Basis
@@ -16,22 +16,23 @@ The trace pairing on three-by-three matrices is perfect, so the five-dimensional
 cross-golden image has a four-dimensional trace annihilator; both dimensions are
 recorded here.  The singular locus of the resulting determinantal cubic
 threefold is not treated in this module: it is classified, from the determinant
-identity proved below, in `RelativeConicArcs.PaperIOrientationNodes`.
+identity proved below, in `RelativeConicArcs.SupportOrientationNodes`.
 
 Every declaration in this module is proved from the definitions; nothing is
 assumed.
 -/
 
-namespace RelativeConicArcs.PaperIOrientationTraceDual
+namespace RelativeConicArcs.SupportOrientationTraceDual
 
 open Matrix
 open scoped Matrix
 open ClebschGoldenConference
-open PaperIOrientationPentagon
-open PaperIOrientationHolonomy
+open SupportOrientationPentagon
+open SupportOrientationHolonomy
 
-/-- The six-by-three basis displayed verbatim in Paper I. -/
-def paperGoldenEigenspaceBasis {R : Type*} [CommRing R] (t : R) :
+/-- The six-by-three golden eigenspace basis written out in the displayed axis order and
+switching gauge fixed below. -/
+def displayedGoldenEigenspaceBasis {R : Type*} [CommRing R] (t : R) :
     Matrix (Fin 6) (Fin 3) R :=
   !![t, t, -1;
      t, 1, -t;
@@ -40,19 +41,20 @@ def paperGoldenEigenspaceBasis {R : Type*} [CommRing R] (t : R) :
      0, 1, 0;
      0, 0, 1]
 
-/-- Paper-row to repository conference-row order. -/
-def paperAxisOrder : Fin 6 ≃ Fin 6 where
+/-- The permutation carrying the displayed axis order to this development's conference-row
+order. -/
+def displayedAxisOrder : Fin 6 ≃ Fin 6 where
   toFun := ![0, 1, 4, 5, 3, 2]
   invFun := ![0, 1, 5, 4, 2, 3]
   left_inv := by decide
   right_inv := by decide
 
-/-- Switching signs accompanying the row-order transport. -/
-def paperAxisSign : Fin 6 → ℤ := ![1, 1, -1, -1, 1, 1]
+/-- The switching signs accompanying that row-order transport. -/
+def displayedAxisSign : Fin 6 → ℤ := ![1, 1, -1, -1, 1, 1]
 
-/-- Conference matrix in the row order and switching gauge used by the paper's
-displayed `U(t)`. -/
-def paperConferenceMatrix : Matrix (Fin 6) (Fin 6) ℤ :=
+/-- The conference matrix in the displayed axis order and switching gauge, that is, the gauge in
+which the golden eigenspace basis takes the form written out above. -/
+def displayedConferenceMatrix : Matrix (Fin 6) (Fin 6) ℤ :=
   !![0, 1, 1, 1, 1, 1;
      1, 0, 1, 1, -1, -1;
      1, 1, 0, -1, 1, -1;
@@ -61,9 +63,9 @@ def paperConferenceMatrix : Matrix (Fin 6) (Fin 6) ℤ :=
      1, -1, -1, 1, 1, 0]
 
 /-- Exact permutation/switching bridge between the two conference gauges. -/
-theorem paperConferenceMatrix_eq_transport (i j : Fin 6) :
-    paperConferenceMatrix i j = paperAxisSign i *
-      conferenceMatrix (paperAxisOrder i) (paperAxisOrder j) * paperAxisSign j := by
+theorem displayedConferenceMatrix_eq_transport (i j : Fin 6) :
+    displayedConferenceMatrix i j = displayedAxisSign i *
+      conferenceMatrix (displayedAxisOrder i) (displayedAxisOrder j) * displayedAxisSign j := by
   fin_cases i <;> fin_cases j <;> decide
 
 /-- The displayed basis transported to the row order and switching gauge of
@@ -77,15 +79,15 @@ def goldenEigenspaceBasis {R : Type*} [CommRing R] (t : R) :
      -1, -t, t;
      -1, 0, 0]
 
-/-- Exact row-permutation/switching bridge from the paper display to the
-repository conference gauge. -/
-theorem goldenEigenspaceBasis_eq_paper_transport
+/-- Exact row-permutation and switching bridge from the displayed gauge to this development's
+conference gauge. -/
+theorem goldenEigenspaceBasis_eq_displayed_transport
     {R : Type*} [CommRing R] (t : R) (i : Fin 6) (j : Fin 3) :
-    goldenEigenspaceBasis t (paperAxisOrder i) j =
-      (paperAxisSign i : R) * paperGoldenEigenspaceBasis t i j := by
+    goldenEigenspaceBasis t (displayedAxisOrder i) j =
+      (displayedAxisSign i : R) * displayedGoldenEigenspaceBasis t i j := by
   fin_cases i <;> fin_cases j <;>
-    simp [goldenEigenspaceBasis, paperGoldenEigenspaceBasis,
-      paperAxisOrder, paperAxisSign]
+    simp [goldenEigenspaceBasis, displayedGoldenEigenspaceBasis,
+      displayedAxisOrder, displayedAxisSign]
 
 /-- The displayed columns are eigenvectors of the signed orbital matrix. -/
 theorem goldenEigenspaceBasis_eigen {R : Type*} [CommRing R]
@@ -320,8 +322,8 @@ theorem det_crossGoldenBlock_eq_neg_supportCubic
   ring
 
 #print axioms goldenEigenspaceBasis_eigen
-#print axioms goldenEigenspaceBasis_eq_paper_transport
-#print axioms paperConferenceMatrix_eq_transport
+#print axioms goldenEigenspaceBasis_eq_displayed_transport
+#print axioms displayedConferenceMatrix_eq_transport
 #print axioms conjugateGoldenBases_orthogonal
 #print axioms crossGoldenBlock_translation_invariant
 #print axioms crossGoldenMap_mem_ker_iff_constant
@@ -330,4 +332,4 @@ theorem det_crossGoldenBlock_eq_neg_supportCubic
 #print axioms finrank_traceAnnihilator
 #print axioms det_crossGoldenBlock_eq_neg_supportCubic
 
-end RelativeConicArcs.PaperIOrientationTraceDual
+end RelativeConicArcs.SupportOrientationTraceDual
