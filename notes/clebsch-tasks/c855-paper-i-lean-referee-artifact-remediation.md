@@ -194,25 +194,36 @@ package: every file in the published transitive closure is in scope.
 
 ### 3. Replace manuscript-relative and false-strength API names
 
-- [ ] Rename all eleven `PaperIOrientation*` modules to stable mathematical
+- [x] Rename all eleven `PaperIOrientation*` modules to stable mathematical
   names and update their filenames, imports, namespaces, manifests, gates, and
-  correspondence maps atomically.
-- [ ] Remove `PaperI`, paper-number, task-number, and manuscript-section
+  correspondence maps atomically. They now carry a `SupportOrientation` stem;
+  the rigidity gate is green and the spine's trust fact is re-extracted.
+- [x] Remove `PaperI`, paper-number, task-number, and manuscript-section
   prefixes from public declarations where the mathematical object has a stable
-  semantic name.
-- [ ] Move manuscript correspondence into the paper's formal map or prose; do
-  not encode it in reusable library identifiers.
-- [ ] Audit every public identifier for unjustified strength words such as
+  semantic name. A library-wide scan finds none left outside the Q25 and Baer
+  generated data trees, whose row-index names belong to another lane.
+- [x] Move manuscript correspondence into the paper's formal map or prose; do
+  not encode it in reusable library identifiers. The trace-dual gauge bridge's
+  `paper*` declarations are now `displayed*` and name the gauge itself.
+- [x] Audit every public identifier for unjustified strength words such as
   `canonical`, `unique`, `exact`, `complete`, `classification`, or
-  `reconstruction`.
-- [ ] Rename `OddSixArcPrismExtraction.canonicalLabel`: it is currently a
-  noncomputably chosen equivalence obtained from `Finset.equivFinOfCardEq`, not
-  a canonical construction. Use a chosen-label name unless an actual
-  choice-independence/canonicity theorem is supplied.
-- [ ] Check that theorem names state the real quantifiers, hypotheses, and
-  conclusion and do not imply a stronger uniform or constructive result.
-- [ ] Remove compatibility aliases that would keep misleading public names
-  alive, unless a separately justified downstream migration requires one.
+  `reconstruction`. The one hit in the renamed modules, `completeFourMatrixModTwo`,
+  is the complete graph on four vertices.
+- [x] Rename `OddSixArcPrismExtraction.canonicalLabel`: now `chosenLabel`, with a
+  docstring stating that it depends on the chosen equivalence and on nothing else,
+  and claiming no invariance.
+- [x] Check that theorem names state the real quantifiers, hypotheses, and
+  conclusion and do not imply a stronger uniform or constructive result. One
+  terminal named its conclusion through an undefined `B`; it is now
+  `oddModule_rationalCommutant_eq_adjoinGoldenOperator`.
+- [x] Remove compatibility aliases that would keep misleading public names
+  alive, unless a separately justified downstream migration requires one. None was
+  introduced by these renames.
+- [ ] Give the order-eleven six-arc concurrence development a declared extraction
+  unit. Sixteen of its modules are area-owned but imported by no declared unit, so
+  the companion export has no route to carry the proved concurrence bound and
+  equality classification into the certificate package. Report:
+  `notes/2026-08-04-c855-orientation-name-remediation.md`.
 
 ### 4. Document every scholarly declaration
 

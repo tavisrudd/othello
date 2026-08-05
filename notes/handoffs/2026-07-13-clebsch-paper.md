@@ -491,13 +491,28 @@ root has its own explicit projectivity, of determinant three, carrying its golde
 hexagon onto the displayed witness. All eight new modules are now reached by the
 rigidity gate through the converted classification, whose build log carries no Dye
 axiom, `sorry`, or compiled-evaluation axiom at any of its 201 axiom reports.
-Still open on this surface: `trust/PORTFOLIO.md` and `trust/graph-manifest.json`
-are stale against regeneration and were stale before this work; the pinned
-order-eleven certificate package, the paper's `trust_manifest.json`, and its prose
-about two classical Dye assumptions still describe the classification as assumed,
-and are refreshed only by the export and re-pin chain; and
-`RelativeConicArcs/Q11DyeAxioms.lean` now declares no axiom, so its name and the
-`ClebschDye` namespace belong to the semantic rename pass. Records:
+The manuscript-relative Lean names are also replaced: the eleven orientation
+modules now carry a `SupportOrientation` stem, the trace-dual gauge bridge no
+longer names its declarations after the paper's display, the rational-commutant
+terminal names the algebra it equals, and the chosen six-point labelling no longer
+claims canonicity. The rigidity gate is green after those renames and the spine's
+trust fact is re-extracted under its new unit name, with 24 terminals and no
+project axiom.
+
+Still open on this surface, in the order that blocks the rest: sixteen modules of
+the order-eleven six-arc development are imported by no declared extraction unit,
+so the companion export has no route to carry the newly proved concurrence bound
+and equality classification into the certificate package — a declared import-only
+gate over that development, registered as an area gate, is the fix and is a
+validation-gate decision. Until then the package re-pin cannot retire the axiom
+downstream, and the tracked audit
+`lean/verification/clebsch_rigidity_trust/axiom-audit.txt` cannot be refreshed
+here at all: four of its 52 rows are package-only `Q11A5PointOrbits` terminals, so
+it is the package gate's output, not this repository's. `trust/PORTFOLIO.md` and
+`trust/graph-manifest.json` are stale against regeneration and were stale before
+this work. `RelativeConicArcs/Q11DyeAxioms.lean` now declares no axiom, so its
+name and the `ClebschDye` namespace remain for a rename coordinated with the
+package. Records:
 [`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
 and
 [`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md),
@@ -515,8 +530,10 @@ the hexagonal labelling in
 [`../2026-08-04-c855-hexagonal-order.md`](../2026-08-04-c855-hexagonal-order.md),
 the plane-level assembly in
 [`../2026-08-04-c855-golden-hexagon-assembly.md`](../2026-08-04-c855-golden-hexagon-assembly.md),
-and the order-eleven identification with the axiom retirement in
-[`../2026-08-04-c855-order-eleven-witness-identification.md`](../2026-08-04-c855-order-eleven-witness-identification.md).
+the order-eleven identification with the axiom retirement in
+[`../2026-08-04-c855-order-eleven-witness-identification.md`](../2026-08-04-c855-order-eleven-witness-identification.md),
+and the name remediation in
+[`../2026-08-04-c855-orientation-name-remediation.md`](../2026-08-04-c855-orientation-name-remediation.md).
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
