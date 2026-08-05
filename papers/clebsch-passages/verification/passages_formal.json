@@ -143,7 +143,12 @@
       "declarations": [
         "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch"
       ],
-      "excluded": "outer matching-frame identification, Joubert and Segre equations, diagonal Clebsch section, and Segre--Igusa polar map"
+      "excluded": "outer matching-frame identification, the identification of the six signed translates with the classical Joubert coordinates, the diagonal Clebsch section, and the Segre--Igusa polar map.  The two Segre equations themselves are checked: the six signed translates of the triangle cubic sum to zero and their cubes sum to zero, identically in the coordinates and over every commutative ring.",
+      "supplemental_gate": "RelativeConicArcs.Gates.ClebschGoldenReturn",
+      "supplemental_declarations": [
+        "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic",
+        "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube"
+      ]
     },
     "OPER-3": {
       "coverage": "partial mechanism; no full row claim",

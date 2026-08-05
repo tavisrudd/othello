@@ -5,6 +5,7 @@ import RelativeConicArcs.ClebschMiddleExteriorSupport
 import RelativeConicArcs.ClebschGoldenDescent
 import RelativeConicArcs.ClebschOperatorShadows
 import RelativeConicArcs.GoldenCommutatorDeterminant
+import RelativeConicArcs.ClebschOuterSegreRelations
 import RelativeConicArcs.ConferenceCutSpectrum
 
 /-!
@@ -19,7 +20,11 @@ determinant of an order-six skew-symmetric matrix with vanishing diagonal is
 the square of that Pfaffian, so the determinant of the fixed conference
 bracket matrix is sixteen times the square of the triangle cubic.  Both
 determinant statements are polynomial identities over an arbitrary commutative
-ring.
+ring.  The six signed translates of the triangle cubic under the reorderings
+fixing the first three labels sum to zero and have cubes summing to zero, so
+they satisfy the two equations of the Segre cubic threefold; the
+identification of that map with the classical Joubert construction, and the
+Segre--Igusa polar map, are not formalized.
 The three-vertex principal-block identity gives the formal algebraic core of
 the order-six balanced exchange-spectrum calculation.  The higher-order
 inclusion-rank and Ramsey exclusion remains a human proof.
@@ -101,5 +106,8 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic
 #print axioms RelativeConicArcs.GoldenCommutatorDeterminant.det_eq_pfaffianSix_sq
 #print axioms RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq
+
+#print axioms RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic
+#print axioms RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube
 
 #print axioms RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq

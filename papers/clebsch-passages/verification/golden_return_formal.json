@@ -34,16 +34,18 @@
     "RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic",
     "RelativeConicArcs.GoldenCommutatorDeterminant.det_eq_pfaffianSix_sq",
     "RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq",
-    "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
+    "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq",
+    "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic",
+    "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube"
   ],
   "axiom_report_provenance": {
-    "build_run_id": "run-20260805-222156-546ff8b3",
+    "build_run_id": "run-20260805-225300-ec011d0d",
     "gate_stdout": "verification/evidence/gate_stdout/golden_return.stdout.txt",
-    "gate_stdout_sha256": "3ab45e5fe018bdb767a1ead4c553c7675fbf3353c825233b2367690396e5c259",
+    "gate_stdout_sha256": "2ccc8eb85177ed5557e4fb4fa6875e9504aca6890f7139efe1c4c6482caae20c",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand."
   },
-  "axiom_report_sha256": "36bd38d559f4839901a2c45edad996aad2362119e150264dc9d5aade8913ab45",
+  "axiom_report_sha256": "50a7f40c3118ee9e97aa7af2501f36c4d30e31bb2d26b4d94b1c75437ad94959",
   "claim_map": {
     "OPER-1": {
       "coverage": "partial mechanism; no full row claim",
@@ -79,6 +81,14 @@
       ],
       "excluded": "the geometric identification of the four shadows with the marked golden presentation, and the cross-golden determinant comparison, remain human arguments."
     },
+    "OPER-2": {
+      "coverage": "partial mechanism; no full row claim",
+      "declarations": [
+        "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic",
+        "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube"
+      ],
+      "excluded": "the outer matching-frame identification, the identification of the six signed translates with the classical Joubert coordinates, the diagonal Clebsch section, and the Segre--Igusa polar map remain human arguments.  What is checked is that the six signed translates of the triangle cubic under the reorderings fixing the first three labels satisfy both equations of the Segre cubic threefold, identically in the coordinates and over every commutative ring."
+    },
     "OPER-3": {
       "coverage": "partial mechanism; no full row claim",
       "declarations": [
@@ -102,7 +112,7 @@
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-golden-return-formal-v1",
-  "source_closure_sha256": "fa7dc0a011f2e23ee83c854c09b228d65c6e23bf819a6b44013539e3ba73e901",
+  "source_closure_sha256": "ac46410cbb3f64226f3bc5cf653c12f4aa0f2c336217e2664ad97186c70f2407",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschGoldenDescent.lean": "f8582958e6c06d9b9d47e6f7fba2d77a3182ec06659d67bd171e76f78e5260ff",
@@ -115,9 +125,10 @@
     "RelativeConicArcs/ClebschMiddleExteriorSquareRows145To345.lean": "64034171f29a5a6edf69c86be0261da2cd8d47d389c7115941b636632fb7beda",
     "RelativeConicArcs/ClebschMiddleExteriorSupport.lean": "8cd70df6efd666d6c537f5183f85a1c460ff25e9964d2042247bf7b90e864d39",
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
+    "RelativeConicArcs/ClebschOuterSegreRelations.lean": "d9d183bc0068da893cbc829f9eec755efb34bd02f72f8b7e0fb071eabc608840",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ConferenceCutSpectrum.lean": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "15293f65fe37a4cfdcbdb044f62ab1d0d6d3cb55c574c4984fc20b52de6ef871",
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "fa9029625916b53bbf2f2ebcba5122840326cabb8c50ae341e5748fc997ea2bf",
     "RelativeConicArcs/GoldenCommutatorDeterminant.lean": "e06a8bb0d4d024aa3b57e5e7166f983d4d887e57473d16922e2f989ba0f78e61",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",

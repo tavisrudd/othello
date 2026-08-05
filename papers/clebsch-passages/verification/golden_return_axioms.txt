@@ -32,4 +32,6 @@
 'RelativeConicArcs.ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.GoldenCommutatorDeterminant.det_eq_pfaffianSix_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
