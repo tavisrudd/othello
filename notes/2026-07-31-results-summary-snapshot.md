@@ -659,6 +659,28 @@ that recovers the separator reduces coherent pentads and spanning aligned hexads
 to intercalates in the Latin classes and Pasch configurations in the Steiner
 classes.
 
+A two-graph literature audit, still in progress, has found two defects in the
+second theorem, and one of them is mathematical rather than bibliographic. The
+hypothesis that the four triangle values on every four-set sum to zero is the
+definition of a two-graph, verbatim, and the proof opens by fixing a root and
+forming the graph on the remaining points whose edges are the triples through the
+root — that is the descendant correspondence between two-graphs and switching
+classes of graphs. The machinery is standard and currently uncited, here and in
+the rigidity paper's use of the four-point identity; both need the same citation
+repair. More seriously, the closest benchmark named in the manuscript is wrong.
+It cites eventual reconstruction from local size five for arbitrary 3-uniform
+hypergraphs, whereas Dammak, Lopez, Pouzet and Si Kaddour give four-local
+reconstruction up to complementation for ordinary graphs, valid for
+\(4\le k\le v-3\) and hence at \(k=4\) from seven points — the same two numbers as
+the theorem. That coincidence is unexplained. Two-graphs on four points are
+switching classes rather than graphs, eight against sixty-four, so the two-graph
+hypothesis is weaker and its conclusion correspondingly weaker, and neither
+theorem immediately implies the other. Whether the two-graph statement is a
+corollary of the graph statement or genuinely independent is open and should be
+settled before the next revision. No two-graph reconstruction theorem was located
+at full search strength, and Seidel's 1976 and Seidel--Taylor's 1981 surveys are
+carried as access gaps rather than as negatives.
+
 ### The wider inventory of passages
 
 The results below concern which later constructions retain the orientation bit
@@ -1274,6 +1296,26 @@ pure-spinor product, the unmarked-reconstruction boundary, and the exact
 anomaly-cost clauses. The real picture is that the operator layer holds while
 the classical-geometry layer is thinner than the earlier framing suggested;
 four statements need attribution surgery rather than retraction.
+
+A second audit at full parameter strength adds three verdicts and one free
+upgrade. The \(2\text{-}(10,5,16)\) design formed by the thirty-six extremal
+order-ten cut halves lies in a parameter family that is not merely known but
+exhaustively enumerated: Morales and Velarde count \(27{,}121{,}734\) resolvable
+designs with those parameters, of which \(2{,}006{,}690\) are simple. No novelty
+attaches to the parameters, and the contribution is identifying which member the
+conference structure produces. The upgrade comes from the same source: every
+resolvable \(2\text{-}(10,5,16)\) design is automatically a
+\(3\text{-}(10,5,6)\) design, and the seventy-two blocks here arise as the two
+halves of thirty-six cuts, which is a natural resolvability candidate — if it is
+resolvable it is a three-design at no cost, joining the programme's other
+three-design results. That is a small computation and worth running. Separately,
+"biangular tight frame in dimension nine" names an established object with its
+own literature and should be cited rather than used as a generic description.
+Against those, the three Paley three-designs \(3\text{-}(14,7,35)\),
+\(3\text{-}(18,9,63)\) and \(3\text{-}(18,9,84)\) have no located predecessor at
+full search strength, and neither do the Sylvester cut-frame identities
+\(K^2=10K+75I\) and \((K-5I)^2=100I\), although the Sylvester graph and its
+Bose--Mesner decomposition are catalogued machinery rather than new objects.
 
 ## *Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity*
 
@@ -2871,7 +2913,10 @@ are vacuous because a natural number can encode the whole residual.
   manuscript of its own — it feeds forward versions of the paper above. Its
   literature audit found five clean pre-emptions, two close to verbatim, so the
   classical-geometry layer needs attribution surgery; the operator layer has no
-  located predecessor. The exchange-statistics companion adds a general oriented
+  located predecessor. A second audit adds that the order-ten cut-half design's
+  parameter family is exhaustively enumerated, with a free three-design upgrade
+  available if that design is resolvable, while the three Paley three-designs and
+  the Sylvester cut-frame identities survive at full search strength. The exchange-statistics companion adds a general oriented
   top-exterior theorem, a universal balance obstruction that explains the
   unbalanced zeros without golden input, and the symmetric-cube permanent-side
   invariant, but the full photonic demonstrator is a no-go on 2026 hardware and

@@ -97,14 +97,19 @@ Clebsch cubic*
   release gates are closed; submission still requires an immutable finitegeom
   release containing the supplemental golden-return sources.
 
-**Clebsch fourth paper · `q13-passant-code`** — *A binary [78,36,12] code from the passant
-lines of a conic over F13*
-- *Status:* C761 has installed the standalone manuscript, verification, and release-planning
-  infrastructure. The human proof, paper-owned evidence extraction, semantic Lean gate, novelty
-  audit, isolated replay, and public artifact remain active work.
-- *Scope:* exact dimension and minimum distance, 364 minimum words in four projective orbits,
-  spanning by every orbit, reconstruction of the elliptic association scheme and passant incidence
-  matrix from the minimum layer, and exact coordinate-permutation automorphism group
+**Clebsch fourth paper · `q13-passant-code`** — *Minimum-word reconstruction of `PG(2,13)` from a
+binary conic code* (earlier titled *A binary [78,36,12] code from the passant lines of a conic over
+F13*)
+- *Status:* a manuscript-only pre-release was deposited 2026-08-03 as DOI
+  `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version. C761 has
+  installed the standalone manuscript, verification, and release-planning
+  infrastructure. The proof-producing formal closure, the exhaustive Lean standards checklist,
+  isolated replay, and the full public artifact remain active work.
+- *Scope:* exact dimension and minimum distance, 364 minimum words in four projective orbits — one
+  octahedral family and three chord-indexed punctured-conic families — spanning by every orbit
+  through a canonical `F₈` operator field, reconstruction of the passant incidence matrix, the code,
+  the elliptic association scheme and then all of `PG(2,13)` with its conic and polarity from
+  weighted pair concurrences alone, and exact coordinate-permutation automorphism group
   `PGL(2,13)`.
 - *Boundary:* Paper IV does not own the through-eight or all-`k` conic-filling classification.
   It cites Paper I for motivation and becomes the canonical home of the full q13 code proof.

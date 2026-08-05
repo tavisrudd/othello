@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-31**, with quiet stretches Jun 28–30 and Jul 27.
+Activity spans **2026-06-14 → 2026-08-05**, with quiet stretches Jun 28–30 and Jul 27.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -843,6 +843,85 @@ marking rather than absolute.
   and **exhausting that criterion on the five survivors** rather than leaving it untried; C741 is
   live on the paired residual cases. Both closures kept C736's feasible nine-compression witnesses as
   **positive controls**, so the screens are known not to be vacuous.
+
+---
+
+## Week 10 — Aug 1–5 · Four papers in parallel, an imported axiom retired, and a track killed by its own audit
+
+- **Aug 1 — the fourth paper is stood up and the group is graded.** `clebsch` C761 set up Paper IV
+  at `papers/q13-passant-code`, froze its theorem and human proof, installed a paper-owned evidence
+  gate and migrated the q13 evidence out of Paper I. C762 sharpened Paper I's forward exposition,
+  C763 consolidated Paper III's selective golden core and C764 added the determinant-versus-permanent
+  boundary; C680 was retired behind them. On `golden`, the six cubic node Hessians, the projective
+  frame carrier and the chart Hessian were formalized and the node trust gate closed (C758/C759).
+  The day's governing document is the group review
+  (`notes/2026-08-01-clebsch-golden-paper-review.md`): **no repackaging of existing results clears
+  the A−/A band**, because every headline concerns one exceptional object over one or two small
+  fields — which is what makes C756's all-`k` theorem the lane's only identified top-tier route.
+
+- **Aug 2 — Paper II's human proof closes; Paper IV takes its structural version.** `clebsch` C749
+  closed the reopened human-proof gate after an adversarial cold **MAJOR** → localized repairs →
+  **MINOR** → context-free **GO**; C797 killed trade-only carrier reconstruction at q=7 and **C798
+  turned that failure into the sharp positive boundary theorem** (`q−2` nonmatching exact-trade
+  orbits, unique matching Chow point, no orbit table in the spine), with C801 formalizing the
+  table-free version and C856 closing the standards audit over the fifty-six-file project-owned
+  closure. C831/C832 completed Paper IV's structural version and its partial-formal boundary, and
+  C817 finished the structural mathematics upgrade with all six subitems positive and **no manuscript
+  change made**.
+
+- **Aug 3 — releases, mirrors, and a pre-release.** C860 removed the cap-game modules from the paper
+  closures and documented the five residual geometry modules, clearing the last shared-closure debt
+  gating Paper II; an independent review verified every C856 claim. C855 landed the six-node
+  Hassett–Tschinkel closure end to end — base library, resealed q11 package, rebuilt PDFs, standalone
+  mirror reproducing the authority's release identity — and closed the q13 scheme gaps. C863 made
+  genre-appropriate significance explicit in Papers I, II and IV and routed the Paper III candidate
+  language into C862 rather than editing that manuscript. On `ame-lu`, the two-paper split reached
+  published state with both mirrors synchronized, the MDS–CSS transversal-groups paper registered its
+  formal contract and semantic gate, and paper summaries and Zenodo metadata were aligned across the
+  portfolio. **Paper IV was deposited as a manuscript-only pre-release** at DOI
+  `10.5281/zenodo.21783971`, Lean companion excluded and due as a forward version.
+
+- **Aug 4 — the imported Dye axioms die, and Paper III's formal surface hardens.** C855 ran the
+  elimination chain to the end in one day: the chord-pairing bijection (triple-concurrence points =
+  concurrent chord matchings, over an arbitrary finite projective plane), the one-factorization at
+  ten points, the hexagonal-order lemma, the golden normal form over any field where 2 is invertible,
+  and the order-eleven witness identification with `φ = 4, 8` and explicit determinant-three
+  projectivities. **Both permitted-axiom entries were deleted**, so `relconic.toml` now permits no
+  axiom; the manuscript-relative Lean names were replaced in the same pass and the spine's trust fact
+  re-extracted. C815 closed the four-shadow half of gap class C by a switching reduction, formalized
+  aligned-design faithfulness at the manuscript's own quantifier range with the `3n² − 23n + 45`
+  query family, and hardened three gates to **no compiled-evaluation axiom at any terminal**, with a
+  cold referee accepting on prose fixes only. C834 rewrote Paper IV's association-transport and
+  equivariance layers for kernel reduction, blocked on another lane holding the build-owner lock.
+  C682 delivered the Paper IV correspondence bundle — octahedral toric correspondence, frame
+  metacode, higher shell, project-up optimality, column-extension obstruction, `F₆₄` exclusion,
+  Tanner/channel/quantum/algorithmic/compact-representation documents — and documented the first
+  `E₆`–`E₈` code ladder.
+
+- **Aug 5 — the exceptional ladder is built, audited, and closed on the same day.** C682/C865 pushed
+  the ladder up to the affine `E₉` level and unified it from `E₁₀`; C867 closed two record-matching
+  routes with proofs (no `O₈⁺(2)`-invariant dimension-ten containment; no Plotkin improvement at
+  `[240,10]`), and C868 closed the Eisenstein/`F₄` route by identifying **additivity** as the reason
+  every unsigned lift stalls at CSS distance four. Then the audits ran the other way. C866 found the
+  level codes to be Calderbank–Kantor two-weight codes; C869 found the Paper IV incidence graph to be
+  `X.182.1` in Conder–Potočnik's semisymmetric census and **C871 retracted** the lane's claimed
+  counterexample to a published Crnković–Rukavina–Šimac equivalence — the row originally matched
+  belongs to a different graph. C870's fold-tower judo was **withdrawn by C872** as an indexing
+  fault: the fold is type-general, not plus-type only. C873 triangulated Brouwer–Shult without
+  obtaining the 1990 paper, establishing that the theorem is about arbitrary graphs under a
+  coclique-parity condition, is a biconditional (so no converse fallback exists), and that
+  Brouwer–Van Maldeghem's "Tower and clique sizes" already names the 120–56–28–27 chain as
+  Gosset-over-Schläfli — **reversing C870's recommendation to lead with the general-rank tower**.
+  C874 then closed the track as a paper vehicle by proving the code-level fold is a formal property
+  of any matched Taylor double, certified against quadric links, Paley two-graphs, the pentagon and
+  random graphs, with no quadratic form involved; C875 scored the levels by type and retired the
+  folding lead, leaving the parabolic deficit as the only unexplained pattern. C876 opened a
+  two-graph literature audit of Paper III and the golden programme and immediately found an
+  attribution defect (the descendant correspondence used under a private name) plus a **wrong
+  benchmark**: the closest prior result is Dammak–Lopez–Pouzet–Si Kaddour's four-local reconstruction
+  up to complementation from seven points, not the five-threshold hypergraph result — the same two
+  numbers as our theorem, with the reduction between them unsettled and now owed before the next
+  revision.
 
 ---
 

@@ -338,6 +338,27 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   `q=3`, slack one factors into `q = 5,9,27` (all removed by the finite classification), so
   `C(k−1,2) ≥ q+2` always; at slack two the first surviving boundary is `(q,k) = (53,12)`.
 
+  **The saturated-internal branch is now a pure clique bound, and half of it is closed.** Dropping
+  the arc condition and keeping only chord externality makes such an arc a clique of size `(q+3)/2`
+  in the graph `Γ_q` on the `q(q−1)/2` internal points of the conic, adjacent when their join is an
+  external line. Exhaustively for every odd prime power `q ≤ 49`, `ω(Γ_q) = (q+3)/2` for
+  `q ≡ 3 (mod 4)` but `(q+1)/2` for `q ≡ 1 (mod 4)`, `q > 5`. So the invariant half **alone** empties
+  the branch for `q ≡ 1 (mod 4)` — no arc condition, no Paley eigenfunctions, no
+  Baker–Ebert–Hemmeter–Woldar conjecture — and proving `ω(Γ_q) ≤ (q+1)/2` in general closes that
+  residue class unconditionally for all fields. It **provably cannot** decide `q ≡ 3 (mod 4)`: there
+  `C_ℓ ∪ {ℓ^⊥}` (an external line's internal points plus its pole) is a genuine extremal clique, the
+  pole being the unique candidate extension exactly in that class. Separately, Baer-subline
+  containment is settled unconditionally for every odd prime power by an exact coboundary identity
+  `χ(c−c′) = δλ(c)λ(c′)` on the norm-one circle, which confines the system to one `λ`-coset of size
+  `(q+1)/2 < (q+3)/2`; with the affine-line case, containment in any Baer subline forces `q = 5`.
+  Coverage by exhaustion is `q ≤ 43` in general and `q ≤ 151` within `q ≡ 3 (mod 4)`. The two
+  surviving gates — the general clique bound, and Baer-subline *stability* for `±1`-valued
+  Frobenius-odd `λ_min`-eigenfunctions of support `≤ q+3` — are both direction theorems for point
+  sets with character-restricted differences, so one Rédei–Szőnyi-strength tool could close both.
+  Closed, do not retry: density and spectral-stability arguments (Paley sits at edge density exactly
+  `1/2`, interlacing is already tight), valuation-versus-Parseval counting, and the coupled
+  cross-ratio invariant `g_ij`, whose pigeonhole runs one short in the unhelpful direction.
+
   **Why counting cannot finish it — with the measurement that says so.** For every odd prime power
   `q ≤ 43` and every `k`, the only conic-filling arcs are the two known ones; nine of the sixteen
   fields close by counting alone and seven need the conic-external arcs enumerated. Both the
@@ -355,16 +376,34 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   no support search — Segre tangent triples exclude weight eight (a cyclic 42-vertex compatibility
   graph has clique number five against a required seven-clique), the two forced weight-ten pencil
   profiles are excluded, and a dihedral weight-twelve word is constructed. All 364 minimum words
-  fall into one `S₄` and three `D₂₄` projective orbits, **every** orbit spans the code, pair
-  concurrence recovers passant-versus-secant join type, triple-concurrence profiles recover all six
-  elliptic orbitals, the 78 all-zero-triple seven-cliques are exactly the passant incidence rows,
-  and the common code/hypergraph/scheme automorphism group is exactly `PGL(2,13)`. **Priority is
+  fall into one `S₄` and three `D₂₄` projective orbits — one octahedral family and three
+  chord-indexed punctured-conic families — and **every** orbit spans the code. The reconstruction now
+  runs on pair data alone: weighted pair concurrences among minimum words rebuild the passant
+  incidence matrix, the code, and the six-class elliptic association scheme, and the resulting group
+  action then rebuilds all points and lines of `PG(2,13)`, the conic, and its polarity, with no
+  coordinates and **no triple concurrence**; equivalently the weighted 2-section of the
+  minimum-support hypergraph is a complete invariant of this marked conic-plane presentation. The
+  spanning has a structural reason: the code is 12-dimensional over a canonical operator field `F₈`,
+  and that hidden scalar action forces every family to span. Exact positive-semidefinite and
+  line-moment certificates now carry the weight-eight and weight-ten exclusions, replacing the
+  subset and syndrome searches. The common code/hypergraph/scheme automorphism group is exactly
+  `PGL(2,13)`. The paper is retitled **Minimum-word reconstruction of `PG(2,13)` from a binary conic
+  code**, and a manuscript-only pre-release was deposited 2026-08-03 at DOI
+  `10.5281/zenodo.21783971`, with the Lean companion held back for a forward version. **Priority is
   closer than earlier drafts showed:** Droms–Mellinger–Meyer introduced this same
   passant-line/internal-point parity-check code and bounded its distance, and the Ma–Liu–Tian survey
   records `(q+3)/2 ≤ d ≤ q−1`, i.e. `8 ≤ d ≤ 12` at q=13. The paper closes that interval at the top
   and adds the classification, spanning, reconstruction and symmetry results, for which no
   predecessor was located; Madison–Wu supply the dimension formula and Hollmann–Xiang the elliptic
-  scheme. The proof is human-led with two green Lean surfaces beneath it — shared semantic modules
+  scheme. A later audit added one pre-emption and withdrew one claimed contradiction: the underlying
+  passant-line/internal-point incidence graph is `X.182.1` in Conder–Potočnik's census of
+  **semisymmetric** graphs (edge- but not vertex-transitive; two distinct cubic bipartite girth-12
+  graphs exist at order 182 and this is the non-symmetric one), which our own side kernels
+  `[91,14,28]` and `[91,14,26]` prove independently, since a part-swapping automorphism would force
+  them equivalent; and an earlier reading that this asymmetry contradicts a published equivalence
+  claim of Crnković–Rukavina–Šimac is **retracted** — their symmetric-graph paper uses the
+  equivalence correctly and their semisymmetric follow-up tabulates both sides with differing
+  distances. The proof is human-led with two green Lean surfaces beneath it — shared semantic modules
   carrying the logical spine, and a paper-owned package checking the irreducibly finite leaves in
   small auditable shards — and neither is a claim that the main theorem is machine-checked.
 
@@ -374,8 +413,8 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   characteristic — is proved by a short synthetic argument: the fifteen chords properly 5-edge-colour
   `K₆`, hence one-factorize it; three factor classes normalize to a triangular prism; and the two
   parallelism conditions force `a(b−1) = −1` and `a(b−1) = +1` simultaneously. That alone bounds
-  `|U(A)| ≤ 12`, so with Dye's `c ≤ 10` it forces `c = 10` and closes the line-pair branch without a
-  census. Separately, the **`A₅` orbit profile `[6, 10, 12, 15, 30, 30, 30]` is *derived*** from
+  `|U(A)| ≤ 12`, so with the ten-Brianchon bound `c ≤ 10` it forces `c = 10` and closes the
+  line-pair branch without a census — and that bound is no longer imported (see below). Separately, the **`A₅` orbit profile `[6, 10, 12, 15, 30, 30, 30]` is *derived*** from
   fixed-point spectra and the subgroup ledger, not assumed; a second off-arc orbit would already
   breach `c ≤ 15`, forcing `c = 10` and identifying `U` with the unique 12-orbit — the conic. The
   1,548-class census survives only as the independent size-gap clause and a regression check.
@@ -385,6 +424,20 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   so the off-conic excess is exactly `(q−4)(q−11)`. Within that congruence class the conic is the
   whole uncovered locus **exactly at q=11**. The q=19 count of 140 deep holes on no conic is now a
   corollary of the formula, and its checker demoted to independent verification.
+
+  **Both Dye inputs are now proved rather than imported, and machine-checked.** Counting
+  triple-concurrence points of a six-arc is counting its concurrent chord matchings, by a bijection
+  proved over an arbitrary finite projective plane, and the ten-point bound holds over any field in
+  which 2 is invertible. Equality is rigid: at ten triple-concurrence points every chord lies in
+  exactly one non-concurrent matching, there are five of them and they share no chord, so they
+  one-factorize the fifteen chords; two matchings of a six-set with no common chord close a hexagon;
+  and the resulting labelling puts the arc in the golden normal form
+  `(1:0:0), (φ:1:1), (0:1:0), (1:φ:1), (0:0:1), (1:1:2−φ)` with `φ² = φ + 1`, over any finite field
+  in which 2 is invertible — so attaining the bound **forces a golden root into the ground field**.
+  At `q = 11` the roots are `φ = 4, 8`, each with an explicit determinant-three projectivity onto the
+  displayed witness. The prism-uniqueness step and the perspectivity theorem (two triangles in double
+  perspective are in triple perspective, itself proved over an arbitrary field) are off the critical
+  path and unused. Consequently `lean/trust/areas/relconic.toml` now permits **no** axiom.
 
   **The two reflection-arrangement exceptions.** The fifteen Clebsch secants **are** the
   projectivized `H₃` icosahedral mirrors — an equality of arrangements, not of incidence ledgers,
@@ -465,10 +518,58 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   without a support search: Segre tangent triples exclude weight eight (after fixing one point a
   cyclic 42-vertex compatibility graph has clique number five against a required seven-clique), the
   two forced weight-ten pencil profiles are excluded, and a dihedral weight-twelve word is
-  constructed. All 364 minimum words split into one `S₄` and three `D₂₄` projective orbits; pair
-  concurrence recovers passant-versus-secant join type, triple-concurrence profiles recover all six
-  elliptic orbitals, the 78 all-zero-triple seven-cliques are exactly the passant incidence rows, and
-  the common code/hypergraph/scheme automorphism group is exactly `PGL(2,13)`.
+  constructed. All 364 minimum words split into one `S₄` and three `D₂₄` projective orbits, and the
+  common code/hypergraph/scheme automorphism group is exactly `PGL(2,13)`. That code is now the
+  fourth numbered paper, where the reconstruction runs on weighted pair concurrences alone; see its
+  own bullet above.
+
+- **The exceptional code ladder** (`clebsch`, research track) — **proved, and pre-empted; not a
+  publication route.** One binary code per exceptional level: restrict the affine linear functions to
+  the nonsingular vectors of a mod-2 quadratic space. One repeated operation links the levels — take
+  the link of a root, fold antipodal pairs, shorten — giving
+  `[496,11,240]_{E₁₀} → [240,10,112] → [120,9,56]_{E₈} → [28,7,12]_{E₇} → [27,6,12]_{E₆}`. The
+  240-point member is the root link of an `E₁₀` root and coincides with the affine `E₉` code from the
+  affine root lattice; the complementary 256-point root hyperplane is `(E₈ ⊕ A₁)/2`, giving
+  `[256,10,120]` against an exact record of 124. **Optimality is not an E-series property:** scoring
+  the family by type, every tabulated even-rank level of both types is optimal, minus type included,
+  while the parabolic levels are the sole shortfall with a growing deficit — optimal at rank five, one
+  below at rank seven, four below at rank nine. That growth is the one unexplained numerical pattern
+  left. **Three barriers closed by proof rather than failed search:** no `O₈⁺(2)`-invariant
+  dimension-ten code contains the `E₈` code, so the record `[120,10,56]` dimension is incompatible
+  with full root-pair symmetry; no Plotkin `|u|u+v|` code at `[240,10]` with length-120 halves beats
+  distance 112; and every unsigned quantum lift stalls at CSS distance four, one below the exact
+  `[[28,14,5]]` and `[[120,102,5]]` records — the canonical repair alphabet `E₈/2E₈ ≅ F₄⁴` over the
+  Eisenstein integers (`ω` acting freely on the 120 coordinates in 40 orbits) does not fix it, since
+  the natural nine-dimensional `F₄` code is Hermitian self-orthogonal at exactly the record dimension
+  yet still has dual distance four, because conjugation and every `F₄`-linear functional are additive
+  and so inherit all 32,130 tetrads as weight-four dual words. **Additivity, not the alphabet, is the
+  obstruction**, and it explains the distance-four stall at every level at once. **Why it is closed:**
+  the level codes are Calderbank–Kantor two-weight codes (the `E₆` code reaches the same family by a
+  second route through its own Cartan-cubic monomial support, landing on the minus-type
+  elliptic-quadric two-weight code, so all three are one family read at three ranks); the fold is
+  Brouwer–Shult 1990, available as Proposition 3.6.1 of Brouwer–Van Maldeghem's *Strongly Regular
+  Graphs* — in the graph on the nonsingular points of a quadratic form over `F₂`, the vertices at
+  distance two from a fixed vertex form the Taylor extension of the graph two ranks down, an
+  antipodal double cover whose classes are our fold — and that theorem is about arbitrary finite
+  graphs under a coclique-parity condition, stated as a **biconditional**, so it subsumes any binary
+  converse we could prove; the same book's "Tower and clique sizes" names our bottom three levels
+  outright (the 120 root pairs from `E₈`, local graph the **Gosset** graph, itself the Taylor
+  extension of the **Schläfli** graph, labelled the `E₆` graph). Finally the code-level fold is a
+  formal property of **any** matched Taylor double — every row has fibre-difference all-ones, so the
+  fibre-constant subcode is codimension one and folds onto the base graph's code — certified against
+  the quadric links, the Paley two-graphs, the pentagon and random graphs, with no quadratic form
+  anywhere. An earlier claim that the fold works only at plus type, and so carried content beyond the
+  graph statement, was **withdrawn as an indexing error**. What survives is the code-level
+  weight-enumerator statement and the affine-root-lattice carrier, too thin to carry a paper. Two
+  narrow frontiers remain: the parabolic deficit, and whether 120 points of `PG(8,4)` can sit in
+  four-general position invariantly under a large proper subgroup of `O₈⁺(2)` (not expected to work).
+  Audit limits that travel with the material: Chakravarti's 1990 IMA chapter is held at metadata only
+  and must be read at full text before any design claim, MathSciNet was not covered so every negative
+  keeps a "to our knowledge", and an adjacent code-CFT literature builds stabilizer codes from `E₈`
+  root lattices, so no blanket absence claim is available on the quantum side. One caution for the
+  Paper IV side: the cross-orbital optimality certificate's Hamming exclusion at dimension forty
+  survives by 1.6% on exact volumes — sound as stated, but not transferable to nearby parameters
+  without recomputation.
 
 - **Frobenius-equivariant pair extension of eight-arcs** (`baer`). **Headline, Lean-built:** *every*
   Frobenius-invariant eight-arc in `PG(2,25)` admits a fresh conjugate-pair extension — proved by an
@@ -853,6 +954,49 @@ localization remains unspecified; pullback across `σ₃ = 0` and the all-degree
 open; and every functorial shadow of the conference operator belongs to the separate golden-operator
 manuscript below rather than here.
 
+**Two recognition theorems are proved and machine-checked but not yet in the manuscript.**
+*Four-shadow recognition*, now at full generality rather
+than on a normalized family: for an arbitrary symmetric zero-diagonal `±1` matrix, nonzero
+proportionality between the triangle cubic and the commutator-Pfaffian cubic characterizes the
+golden conference switching class, and the two orientations are projectively isolated. The mechanism
+is a switching reduction — diagonal switching multiplies the commutator-Pfaffian cubic by the product
+of the six switching signs and leaves the triangle cubic unchanged, so switching by the root row
+carries any such matrix into the normalized family with its proportionality constant and conference
+square intact — and one relabelling plus one fixed diagonal switching then carry every such matrix
+with square `5·1` onto the displayed conference matrix, which is uniqueness of the conference
+switching class. *Aligned-design faithfulness*, at the manuscript's own quantifier range: for every
+two-graph on a finite point set with `|V| ≥ 7`, the aligned four-sets determine the triangle values
+on distinct triples up to one global complement bit; rooting at a point of an aligned four-set with
+triangle bit zero kills the anchor's six edges and replaces the two switching normalizations, so
+general transport, seven-point distinctness and the finite-set extension all fall out of one proof;
+the decoder's query family is explicit with cardinality `3n² − 23n + 45`. Around them sit three exact
+certificate facts: aligned certificates at seven points have distance exactly two and correction
+radius zero (whole spectrum even, by edge-toggle parity); the scalar third cut moment separates all
+four order-26 classes, so the full histogram is unnecessary; and conference contraction forces the
+two-pivot plane, with coherent pentads and spanning aligned hexads reducing to intercalates in the
+Latin classes and Pasch configurations in the Steiner classes.
+
+**A two-graph literature audit has found two defects in that material, and one of them is
+mathematical rather than bibliographic.** *Attribution:* the faithfulness theorem's defining hypothesis — the four
+triangle values on every 4-set sum to zero — **is** the definition of a two-graph verbatim, and its
+proof opens with the descendant correspondence (fix `r`, form `G_r` on `V∖{r}` with `ij` an edge when
+`τ(rij)=1`), i.e. the standard two-graph/switching-class machinery under a private name and without
+citation. The same applies to the rigidity paper's use of the four-point identity. Fix in both:
+cite Brouwer–Van Maldeghem §1.1.12 (with Higman/Taylor for regular two-graphs and Seidel for the
+Seidel matrix and switching) and call the identity the descendant relation. *Benchmark, and the
+exposed part:* the manuscript names the closest general benchmark as eventual reconstruction from
+local size **five** for arbitrary 3-uniform hypergraphs, but the paper's own literature ledger is
+right and the sentence is wrong — the closest benchmark is Dammak–Lopez–Pouzet–Si Kaddour's
+**four**-local reconstruction up to complementation for ordinary graphs, valid for `4 ≤ k ≤ v−3` and
+hence at `k=4` from `v ≥ 7`. Four and seven, the same two numbers. That coincidence is unexplained:
+two-graphs on four points are switching classes (8 of them) rather than graphs (64), so two-graph
+4-hypomorphy up to complementation is a *weaker* hypothesis with a correspondingly weaker conclusion,
+and neither theorem immediately implies the other. **Whether the two-graph statement is a corollary
+of the graph statement or genuinely independent must be settled before the next revision** — it is
+cheaper than another literature round. No two-graph reconstruction theorem was located anywhere at
+full search strength; Seidel's 1976 and Seidel–Taylor's 1981 surveys could not be obtained and are
+carried as access gaps rather than negatives.
+
 The remaining headline Clebsch-facing results and censuses are:
 
 - **Arithmetic phase and intrinsic bit.** The H₃/A₅ configuration has an all-odd-field arithmetic
@@ -1077,6 +1221,23 @@ determinant/Pfaffian, adjugation and centered squaring — not accidental formul
   unmarked-reconstruction boundary, and the exact anomaly-cost clauses. Four statements need
   attribution surgery, not retraction; the classical-geometry layer is thinner than the earlier
   framing suggested.
+
+- **A second audit, at full parameter strength, adds three verdicts and one free upgrade.** The
+  `2-(10,5,16)` design of the 36 extremal order-ten cut halves sits in a **parameter family that is
+  not merely known but exhaustively enumerated** — Morales–Velarde count 27,121,734 resolvable
+  `2-(10,5,16)` designs, of which 2,006,690 are simple — so no novelty attaches to the parameters and
+  the contribution is identifying *which* member the conference structure produces. The free upgrade
+  is attached to the same source: every resolvable `2-(10,5,16)` is automatically a `3-(10,5,6)`, and
+  the programme's 72 blocks arise as the two halves of 36 cuts, which is a natural resolvability
+  candidate — **if it is resolvable it is a 3-design at no cost**, connecting it to the programme's
+  other 3-design results. That is a small computational check and worth taking. "Biangular tight
+  frame in dimension nine" is a **named published concept** with its own literature and must be cited
+  rather than used as if generic. Against that, the three Paley 3-designs `3-(14,7,35)`,
+  `3-(18,9,63)` and `3-(18,9,84)` have **no predecessor located at full search strength** — exactly
+  the discriminating parameter queries that earlier hygiene constraints forbade — and the Sylvester
+  cut-frame identities `K² = 10K + 75I` and `(K−5I)² = 100I` were not located either, though the
+  setting (Sylvester graph, Bose–Mesner decomposition) is classical machinery rather than a new
+  object.
 
 ### Projective Reed–Solomon deep holes and reconstruction
 
@@ -1648,10 +1809,17 @@ infinite family, no asymptotic statement, and no transferable technique — and 
 papers reach the top tier only when the exceptional object closes a general question. The general
 question here is open at `k = 9`. The theorem would be a **new** headline paper (rigidity + all-k
 classification + golden operator), not a retrofit. Current state: proved for every `k` over every
-odd `q ≤ 43`, saturated branch uniformly closed, nonsaturated branch reduced to slack `≥ 2` with
-`(q,k) = (53,12)` the first surviving boundary. The exact remaining obstruction is a clique bound
+odd `q ≤ 43`, saturated-external branch uniformly closed, saturated-internal branch reduced to a pure
+clique bound in the external-join graph on internal points — settled for `q ≡ 1 (mod 4)` as far as it
+has been measured, and provably not settleable that way for `q ≡ 3 (mod 4)` — and nonsaturated branch
+reduced to slack `≥ 2` with `(q,k) = (53,12)` the first surviving boundary. The exact remaining
+obstruction is a clique bound
 `m(q) < √(2q) + O(1)` for a Paley-type graph on the points off the conic, measured to be tight
 rather than generous — so it may be false for some `q`, and that possibility is itself the finding.
+The two live gates — the invariant-half clique bound `ω(Γ_q) ≤ (q+1)/2`, and Baer-subline stability
+for `±1`-valued Frobenius-odd minimum eigenfunctions — are both direction theorems for point sets
+with character-restricted differences; a Rédei–Szőnyi-strength tool serving both is the highest
+-leverage single target in the lane.
 
 **Clebsch publication:** the three released papers have cleared their mathematical gates and what
 remains is external. The rigidity paper carries the golden orientation as well as the
@@ -1659,9 +1827,14 @@ reconstruction, and its companion carries a five-mode claim ledger; the trade-ri
 the one-factorization split rather than assuming it; the passages paper has closed both of its former
 proof gaps, states its orientation bridge relative to an explicit marked datum, and its forward
 version has absorbed a bounded golden-operator core. Each still owes an immutable artifact locator,
-and the passages paper also owes author affiliation/contact metadata. The q13 passant-code paper is
-the active build: human proof, paper-owned evidence, semantic modules and sharded Lean gates are
-green, with four concrete transports and release outstanding. The golden operator lane keeps its
+and the passages paper also owes author affiliation/contact metadata. The rigidity paper no longer
+imports either Dye statement, so its permitted-axiom list is empty; what blocks calling it
+theorem-complete is the companion export route, not the mathematics. The passages paper owes two
+things from the two-graph audit before its next revision: the descendant-correspondence citations,
+and a decision on whether its faithfulness theorem is a corollary of four-local graph reconstruction
+up to complementation. The q13 passant-code paper is retitled, has a manuscript-only pre-release
+deposited, and remains the active build: human proof, paper-owned evidence, semantic modules and
+sharded Lean gates are green, with four concrete transports and full release outstanding. The golden operator lane keeps its
 proved source mathematics but is no longer chasing a manuscript of its own; its live obligation is
 absorbing the five literature pre-emptions into whatever forward version consumes it. Keep the
 modular sequel separate: its proved centre is the
@@ -1887,12 +2060,20 @@ answer), the `q−5` line lemma with its one-factorization and prism arguments, 
 missing: the projective `A₅` *support* action, the full monomial coefficient equivariance and its
 chirality decoders, and the affine stabilizer/orbit infrastructure — with an explicit
 guard that this work must not be disguised as a final `decide` after the group action has been
-assumed. **Two axioms, deliberately**: Dye's ten-Brianchon bound and its equality classification, in
-a single named module with an audited dependency split (the `u + c = 22` bridge depends on neither).
-No exact formalization of Dye exists in the pinned mathlib tree or in any public Lean/Rocq/Isabelle
-archive — the Rocq geometry archive has incidence planes, duality, Desargues, matroids, but no
-conic/Brianchon/Clebsch layer — so the choice was between importing two precisely named statements
-and starting a separate substantial formal-geometry project. The `A₃`/`H₃` synthesis is being closed
+assumed. **The two deliberate axioms are now retired.** Dye's ten-Brianchon bound and its equality
+classification were carried as axioms in a single named module with an audited dependency split (the
+`u + c = 22` bridge depended on neither), because no exact formalization of Dye existed in the pinned
+mathlib tree or in any public Lean/Rocq/Isabelle archive — the Rocq geometry archive has incidence
+planes, duality, Desargues, matroids, but no conic/Brianchon/Clebsch layer — so the choice was
+between importing two precisely named statements and starting a separate formal-geometry project.
+Both are now proved outright (bound over any field where 2 is invertible; equality classification at
+order eleven, via the chord-matching bijection, the one-factorization, the hexagonal order lemma and
+the golden normal form), the permitted-axiom entries are deleted, and the rigidity gate carries no
+project axiom at any of its 201 axiom reports. The module keeps its `Q11DyeAxioms` name and
+`ClebschDye` namespace pending a rename coordinated with the certificate package. One packaging gap
+remains: sixteen modules of the order-eleven six-arc development are reached by no declared gate, so
+the companion export cannot yet carry the new theorems downstream until an import-only gate is
+declared over that development. The `A₃`/`H₃` synthesis is being closed
 under a hard **compactness gate**: reusable definitions and short counting only, and if a subclaim
 needs a large generated case-split tree, stop, record the obstruction and its estimated size, and
 leave the manuscript's computer-assisted label intact.
@@ -2011,7 +2192,7 @@ independent results. Neither column measures depth, and none of them should be s
 | — | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | multiplier nullity selects the exact fixed-party transversal logical group | 23-page deposited candidate; own semantic Lean gate, axiom audit, and claim manifest |
 | — | Golden descent and operator realizations of the Clebsch cubic (Clebsch III) | one oriented coordinate line behind both realizations, relative to a marked datum, plus a bounded operator core | v1/v2 released under the earlier title; forward version consolidated |
 | — | Quadratic trade rigidity and cubic orientation in conic matching quotients (Clebsch II) | the conic-ideal factorization quotient and its `B₃/H₃` completeness, with one-factorization derived | v1/v2 released; forward human/Lean strengthening active |
-| — | A binary [78,36,12] code from the passant lines of a conic over F13 (Clebsch IV) | minimum words reconstruct the passant geometry and `PGL(2,13)` | human proof + semantic Lean spine + sharded leaves green; four transports and release remain |
+| — | Minimum-word reconstruction of `PG(2,13)` from a binary conic code (Clebsch IV) | weighted pair concurrences among minimum words reconstruct the marked plane and `PGL(2,13)` | manuscript-only pre-release deposited; human proof + semantic Lean spine + sharded leaves green; four transports and full release remain |
 | — | *(not a paper)* golden conference operator source programme | one operator, and the cubic/polar/determinantal/fermionic/anomaly/lattice shadows it generates | source lane for Clebsch III forward versions; five literature pre-emptions to absorb |
 
 The arcs manuscript was retitled when it acquired the zero-defect matching-design capstone that
