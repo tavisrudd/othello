@@ -51,16 +51,21 @@ the target, which the envelope records as built.
 The count of `gate-terminal-undeclared` findings is unchanged, so every terminal of the new gate
 carries a declared expected axiom set.
 
+The facts artifact `lean/trust/facts/RelativeConicArcs.SixArcConcurrenceSpine.json` is extracted and
+committed.  It records a 26-module closure and eleven terminals, every one of them carrying exactly
+`Classical.choice`, `Quot.sound`, and `propext`, and no project axiom.  The area check reports no
+axiom mismatch and no absent terminal, so the eleven declared axiom sets agree with Lean.
+
 ## What is not done
 
-The facts artifact `lean/trust/facts/RelativeConicArcs.SixArcConcurrenceSpine.json` does not exist
-yet, so the check reports one further `facts-missing` finding against the new unit and the eleven
-declared axiom sets are unconfirmed.  `lean/scripts/lean-trust-extract.py run` refuses while the
-Lean worktree carries another lane's uncommitted work — currently
-`lean/RelativeConicArcs/GoldenCommutatorDeterminant.lean` — because an extraction taken then would
-describe a tree that exists at no commit.  The extraction is one command in the next quiet window,
-and the declared axiom sets stand or fall by it; until then the missing artifact is itself the
-error, so nothing reads green on unverified evidence.
+The export cannot run yet, for a reason in the base library rather than here.  With the facts
+artifact in place, `plan` gets through the configuration, the fact, the terminal agreement, and the
+closure, and then refuses on the base's own state: `TARGET_MANIFEST.json` at the base HEAD disagrees
+with the base tree in four entries.  `ProjectiveCap/Sym2ConicBridge.lean` has a digest mismatch,
+and `RelativeConicArcs/Q16CertificateLevels.lean`, `RelativeConicArcs/Q16Reduction.lean`, and
+`RelativeConicArcs/Q16StepKernel.lean` are listed as sources but absent from the tree.  The base
+worktree is clean, so the inconsistency is in the commit.  This blocks every companion export, not
+this one, and repairing it belongs to the base library's owner.
 
 Seven further modules of the wider order-eleven rigidity development remain reached by no unit:
 `SixArcDefectBridge`, `SixArcDegenerateConicExclusion`, `SixArcPerspectivity`,
@@ -93,9 +98,9 @@ manifest digest.  A boundary carrying exactly the concurrence development lets t
 it consumes, and makes its re-pin show the two axioms being replaced by the theorems that displace
 them.
 
-The configuration's `plan` mode loads, validates the area name and gate, and passes the private-
-reference audit on all its prose; it stops exactly at the missing facts artifact, so the
-configuration is checked as far as the extraction gap allows.
+The configuration's `plan` mode loads, validates the area name and gate, passes the private-
+reference audit on all its prose, and agrees with the registry on the eleven terminals and the
+26-module closure.  It stops only at the base-manifest inconsistency recorded below.
 
 Both configurations now describe the split.  The orientation configuration's correspondence text
 names the six-arc boundary as the place the bound and classification are proved, so the two must be

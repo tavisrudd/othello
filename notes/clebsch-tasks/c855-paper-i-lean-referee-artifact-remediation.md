@@ -227,10 +227,10 @@ package: every file in the published transitive closure is in scope.
   modules. `lean/trust/export/clebsch_six_arc_concurrence.toml` gives it a companion
   boundary of its own, separate from the golden-orientation boundary, whose
   correspondence text now names it as the place the bound and the classification are
-  proved; the two must be exported in the same round. Its facts artifact is still
-  missing: extraction refuses while another lane's uncommitted Lean work is in the
-  worktree, so the eleven declared axiom sets are unconfirmed and the export `plan`
-  stops at that gap. Seven consumer modules of the wider order-eleven rigidity
+  proved; the two must be exported in the same round. The facts artifact is extracted:
+  26 modules, eleven terminals, each on the three foundational axioms and no project
+  axiom. The export itself is blocked in the base library, whose `TARGET_MANIFEST.json`
+  disagrees with its own tree in four entries. Seven consumer modules of the wider order-eleven rigidity
   development remain reached by no unit. Report:
   `notes/2026-08-05-c855-six-arc-extraction-gate.md`.
 

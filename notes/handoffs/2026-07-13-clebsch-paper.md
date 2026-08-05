@@ -519,10 +519,12 @@ reached before. It is exported as a companion boundary of its own,
 golden-orientation boundary, which shares no module or terminal with it and whose
 correspondence text now names the six-arc boundary as the place the bound and the
 classification are proved; the two must therefore be exported in the same round.
-One thing is still needed before the package re-pin can retire the axiom downstream:
-the facts artifact, whose extraction refuses while another lane's uncommitted Lean
-work sits in the worktree, so the eleven declared axiom sets are unconfirmed and the
-export `plan` stops at that gap. In the base library the order-eleven specializations
+The facts artifact is extracted and committed: 26 modules, eleven terminals, every one
+carrying only `propext`, `Classical.choice` and `Quot.sound`, and no project axiom.
+What now blocks the export is the base library itself — `TARGET_MANIFEST.json` at its
+HEAD disagrees with its own tree in four entries, one digest mismatch in
+`ProjectiveCap/Sym2ConicBridge.lean` and three listed-but-absent `Q16` modules — which
+stops every companion export until the base's owner repairs it. In the base library the order-eleven specializations
 remain axioms of `RelativeConicArcs.Q11DyeAxioms`; replacing them by proofs of the
 exported theorems is forward work under the re-pin. Seven consumer modules of the wider order-eleven rigidity development — the defect
 bridge, the degenerate-conic exclusion, perspectivity, the two prism modules, and the
