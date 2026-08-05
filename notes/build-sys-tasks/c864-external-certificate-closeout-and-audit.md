@@ -2,7 +2,9 @@
 
 **Lane:** `build-sys`
 
-**Status:** ACTIVE — order-16 package sealed: gate green, packed, and restore-rehearsed trace-current; order-eleven externalization scoped but not executed
+**Status:** ACTIVE — order-16 package sealed, pinned, and closed out: gate green, packed, and
+restore-rehearsed trace-current.  The order-eleven point-orbit family is externalized and pinned;
+the remaining order-eleven families, order-13, and order-25 are not yet executed.
 
 ## Goal
 

@@ -2,8 +2,9 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-08-04
-**Status**: ACTIVE — order-16 package sealed and its external trust fact pinned; C864 owns the
-remaining certificate externalization, the base-library repair, and the all-paper export replay
+**Status**: ACTIVE — the order-16 and order-eleven point-orbit packages are sealed and their
+external trust facts pinned; C864 owns the remaining certificate externalization, the base-library
+repair, and the all-paper export replay
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -100,7 +101,8 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    predicate now sits in `RelativeConicArcs/ParametrizedHoles.lean`, `Q11Residual` is game-free, and
    the terminals are in `Q11ResidualGame`.
    The order-eleven point-orbit family is externalized: `finitegeom-clebsch-q11-certificates` owns
-   it at commit `76e7b43e`, sealed over 122 modules, gate-green, pack/restore-rehearsed
+   it at commit `c366996`, sealing source commit `4f61b2dc` over 122 modules, gate-green,
+   pack/restore-rehearsed
    trace-current, with its trust fact published and pinned; the monorepo deletions landed and both
    the boundary and external-fact checks are green.
    Next: the Clebsch-rigidity paper release chain, which still pins package commit `9c5d474f`;
