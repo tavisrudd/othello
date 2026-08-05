@@ -140,7 +140,17 @@ accepted the formalization with prose fixes only, all applied.  Reports:
 `notes/2026-08-04-c815-aligned-design-faithfulness.md` and
 `notes/2026-08-04-c815-aligned-faithfulness-review.md`.
 
-Two clauses of gap class B are closed.  The Segre equations of row OPER-2 are
+Row OPER-3 is covered down to its polynomial core: the cut identity
+`B * Bᵀ = q • 1 - A * A` for a cut of arbitrary size, the trace of the square of
+a zero-diagonal sign matrix, and the four-set Hamilton-cycle dichotomy
+`w ∈ {3, -1}`.  Its order-three block identity and its Ramsey input were
+already proved in earlier work.  What stays human there is the support-sorted
+closed-four-walk count, the inclusion-rank descent, and every eigenvalue
+statement; the inclusion-rank input is a classical theorem and is not a
+candidate for formalization, so this row stays at partial coverage by design.
+Report: `notes/2026-08-05-c815-cut-block-core.md`.
+
+Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic
 under the reorderings fixing the first three labels sum to zero and their cubes
 sum to zero, over any commutative ring, which is stronger than the manuscript's
