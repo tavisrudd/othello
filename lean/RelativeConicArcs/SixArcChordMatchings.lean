@@ -146,6 +146,23 @@ theorem triplePoint_of_concurrentAt {A : Finset P} (hA : Arc (L := L) A) (hcard 
   refine ⟨SixArcConcurrence.mem_triplePoints.mpr ⟨hxA, ?_⟩, heq⟩
   rw [pointIndex_eq_card_pairsThrough (L := L) hA x, heq, hM.1]
 
+/-- Distinct triple-concurrence points of a six-arc carry different chord matchings: two chords
+through both points would both be the line joining them, putting four arc points on one line. -/
+theorem eq_of_pairsThrough_eq {A : Finset P} (hA : Arc (L := L) A)
+    {x y : P} (hx : x ∈ SixArcConcurrence.triplePoints (L := L) A)
+    (hxy : pairsThrough (L := L) A x = pairsThrough (L := L) A y) : x = y := by
+  classical
+  by_contra hne
+  have hcardx : (pairsThrough (L := L) A x).card = 3 :=
+    (isChordMatching_pairsThrough (L := L) hA hx).1
+  obtain ⟨e, he, f, hf, hef⟩ := Finset.one_lt_card.mp (by rw [hcardx]; omega)
+  have hxe : x ∈ e.line (L := L) := mem_pairsThrough.mp he
+  have hxf : x ∈ f.line (L := L) := mem_pairsThrough.mp hf
+  have hye : y ∈ e.line (L := L) := mem_pairsThrough.mp (by rw [← hxy]; exact he)
+  have hyf : y ∈ f.line (L := L) := mem_pairsThrough.mp (by rw [← hxy]; exact hf)
+  exact hef (ArcPair.line_injective (L := L) hA
+    (line_eq_of_two_points (L := L) hne hxe hye hxf hyf))
+
 /-- **The chord-pairing bijection.**  For a six-arc, sending a triple-concurrence point to the set
 of chords through it is a bijection onto the concurrent chord matchings, so the two sets have the
 same cardinality. -/
@@ -158,19 +175,8 @@ theorem card_concurrentMatchings_eq_card_triplePoints {A : Finset P} (hA : Arc (
   · intro x hx
     exact mem_concurrentMatchings.mpr
       ⟨isChordMatching_pairsThrough (L := L) hA hx, x, concurrentAt_pairsThrough (L := L) x⟩
-  · -- two distinct triple-concurrence points carry different chord matchings
-    intro x hx y hy hxy
-    by_contra hne
-    obtain ⟨hxA, _hidx⟩ := SixArcConcurrence.mem_triplePoints.mp hx
-    have hcardx : (pairsThrough (L := L) A x).card = 3 :=
-      (isChordMatching_pairsThrough (L := L) hA hx).1
-    obtain ⟨e, he, f, hf, hef⟩ := Finset.one_lt_card.mp (by rw [hcardx]; omega)
-    have hxe : x ∈ e.line (L := L) := mem_pairsThrough.mp he
-    have hxf : x ∈ f.line (L := L) := mem_pairsThrough.mp hf
-    have hye : y ∈ e.line (L := L) := mem_pairsThrough.mp (by rw [← hxy]; exact he)
-    have hyf : y ∈ f.line (L := L) := mem_pairsThrough.mp (by rw [← hxy]; exact hf)
-    exact hef (ArcPair.line_injective (L := L) hA
-      (line_eq_of_two_points (L := L) hne hxe hye hxf hyf))
+  · intro x hx y _hy hxy
+    exact eq_of_pairsThrough_eq (L := L) hA hx hxy
   · intro M hM
     obtain ⟨hmatch, x, hconc⟩ := mem_concurrentMatchings.mp hM
     obtain ⟨hxtriple, heq⟩ := triplePoint_of_concurrentAt (L := L) hA hcard hmatch hconc

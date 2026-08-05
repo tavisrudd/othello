@@ -449,11 +449,15 @@ perspectivity module now compiles against that compiled dependency rather than
 a scratch copy. The chord-pairing dictionary is also closed: counting
 triple-concurrence points of a six-arc is counting its concurrent chord
 matchings, by a bijection proved in `SixArcChordMatchings` over an arbitrary
-finite projective plane. What remains for the axiom is transitivity of
-concurrence on the six one-factorizations with the `5 + 1` partition at count
-ten, the hexagonal labelling that supplies the four concurrences, and the
-order-eleven projectivity onto the displayed witness. None of the four new
-modules is reached by a gate yet. Records:
+finite projective plane. The equality structure follows from that dictionary by
+counting alone, without the perspectivity theorem: `SixArcOneFactorization`
+proves that at ten triple-concurrence points every chord lies in exactly one
+non-concurrent chord matching, that there are five of them, and that they share
+no chord, so they partition the fifteen chords. What remains for the axiom is
+the hexagonal labelling that puts the four required concurrences off that
+one-factorization and discharges the normal form's non-collinearity
+hypotheses, and the order-eleven projectivity onto the displayed witness. None
+of the five new modules is reached by a gate yet. Records:
 [`../2026-08-04-c855-dye-bound-formalization.md`](../2026-08-04-c855-dye-bound-formalization.md)
 and
 [`../2026-08-04-c855-dye-axiom-elimination-plan.md`](../2026-08-04-c855-dye-axiom-elimination-plan.md),
@@ -461,8 +465,10 @@ with the two new proofs reported in
 [`../2026-08-04-c855-triple-perspective.md`](../2026-08-04-c855-triple-perspective.md)
 and
 [`../2026-08-04-c855-golden-normal-form.md`](../2026-08-04-c855-golden-normal-form.md),
-and the chord-pairing bijection in
-[`../2026-08-04-c855-chord-pairing-bijection.md`](../2026-08-04-c855-chord-pairing-bijection.md).
+the chord-pairing bijection in
+[`../2026-08-04-c855-chord-pairing-bijection.md`](../2026-08-04-c855-chord-pairing-bijection.md),
+and the equality structure in
+[`../2026-08-04-c855-one-factorization.md`](../2026-08-04-c855-one-factorization.md).
 
 The 2026-07-30 v2 referee cold-read revisions are complete.  The rational
 \(A_5\)-module wording, theorem hierarchy, computational/formal boundary,
