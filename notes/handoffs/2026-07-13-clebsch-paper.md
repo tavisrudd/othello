@@ -140,6 +140,13 @@ accepted the formalization with prose fixes only, all applied.  Reports:
 `notes/2026-08-04-c815-aligned-design-faithfulness.md` and
 `notes/2026-08-04-c815-aligned-faithfulness-review.md`.
 
+Two clauses of gap class B are closed.  The Segre equations of row OPER-2 are
+proved directly: the six signed translates of the conference triangle cubic
+under the reorderings fixing the first three labels sum to zero and their cubes
+sum to zero, over any commutative ring, which is stronger than the manuscript's
+citation of them as classical.  Report:
+`notes/2026-08-05-c815-segre-relations.md`.
+
 The determinant-square clause of gap class B row OPER-1 is closed.  The
 determinant of an order-six skew-symmetric matrix with vanishing diagonal is
 the square of its Pfaffian over any commutative ring, so the fixed conference

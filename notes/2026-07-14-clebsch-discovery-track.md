@@ -1379,3 +1379,43 @@ theorem; the 1990 paper was not obtained, and no search for such a family has
 been run.
 
 **Status:** retired -> mirage, closed same day by C874. The code-level fold is a formal property of *any* matched Taylor double: every row has fibre-difference all-ones, so the fibre-constant subcode is codimension one and folds onto the base graph's code. Certified in `2026-08-05-c874-taylor-code-descent.py` against the quadric links at ranks six and eight, the Paley two-graphs on 10, 14 and 26 points, the pentagon, and random graphs. The coclique-parity condition therefore selects nothing — every graph's double folds — so a non-quadratic family buys no new phenomenon, and the folded codes there are ordinary graph codes of catalogued families. The lead was wrong in its premise that the condition was restrictive.
+
+## 2026-08-05 — the fifteen pairs of outer cubics are the fifteen perfect matchings
+
+**Found while:** formalizing the two Segre equations of the six outer cubics for
+Paper III's gap class B row OPER-2. Not sought.
+
+**Observation:** for the fixed order-six integral conference matrix, write the
+six outer cubics as the signed translates of its oriented triangle cubic under
+the reorderings fixing the labels `0`, `1`, `2`. Every one of the fifteen
+pairwise sums is exactly twice a perfect-matching product,
+
+    Z_a + Z_b = ±2 (x_i - x_j)(x_k - x_l)(x_m - x_n),
+
+and the fifteen matchings so produced are all distinct, so the fifteen pairs of
+outer cubics are in bijection with the fifteen perfect matchings of six labels.
+The eight sums involving the identity reordering or lying inside the odd
+translates carry `-2`; the other seven carry `+2`.
+
+**Why it may matter:** the still-open half of OPER-2 is the outer
+matching-frame identification, and this exhibits the matching cubics — already
+formalized in `RelativeConicArcs.GoldenMatchingCubics` for the five noncrossing
+matchings — directly inside the outer family rather than beside it. A
+formalization would need all fifteen matching products rather than the five
+noncrossing ones.
+
+**Prior art caution:** this is almost certainly classical. The Segre cubic
+threefold carries fifteen nodes and fifteen planes indexed by the same
+combinatorics, and the relation between its coordinates and the matchings of
+six points is standard in that literature. Treat this as a rediscovery until a
+literature check says otherwise; no novelty is claimed.
+
+**Evidence:** exact integer polynomial expansion in
+`notes/2026-08-05-c815-outer-pair-matchings.py`, output
+`notes/2026-08-05-c815-outer-pair-matchings.txt`, hashes in the adjacent
+`.sha256`. Replay with
+`uv run --with sympy python3 notes/2026-08-05-c815-outer-pair-matchings.py`.
+The same script re-derives both Segre equations, which are independently
+kernel-checked in `RelativeConicArcs.ClebschOuterSegreRelations`.
+
+**Status:** open lead, unpromoted. No C-ID allocated.
