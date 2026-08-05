@@ -1,0 +1,96 @@
+{
+  "additive_obstruction": {
+    "statement": "conjugation and every F4-linear functional are additive, so any code whose column map is additive plus a constant sends each of the 32130 tetrads u+v+w+x=0 to a weight-four dependency; its Hermitian dual distance is therefore exactly four, independently of the alphabet",
+    "tetrads": 32130,
+    "witness": [
+      [
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        2
+      ]
+    ]
+  },
+  "carrier": "the 120 nonsingular vectors of E8/2E8 = F4^4, Q(v) the parity of the F4-weight; see 2026-08-05-c867-ladder-record-attack.py",
+  "families": {
+    "constants + F4-linear + Hermitian (additive)": {
+      "f4_dimension": 9,
+      "hermitian_self_orthogonal": true,
+      "minimum_dependent_columns": 4,
+      "quantum_parameters": [
+        120,
+        102
+      ]
+    },
+    "constants + F4-linear + Hermitian + mixed products": {
+      "f4_dimension": 21,
+      "hermitian_self_orthogonal": true,
+      "minimum_dependent_columns": 4,
+      "quantum_parameters": [
+        120,
+        78
+      ]
+    },
+    "constants + F4-linear + Hermitian + products": {
+      "f4_dimension": 15,
+      "hermitian_self_orthogonal": true,
+      "minimum_dependent_columns": 4,
+      "quantum_parameters": [
+        120,
+        90
+      ]
+    },
+    "constants + F4-linear + mixed products": {
+      "f4_dimension": 17,
+      "hermitian_self_orthogonal": true,
+      "minimum_dependent_columns": 3,
+      "quantum_parameters": [
+        120,
+        86
+      ]
+    },
+    "constants + F4-linear + products": {
+      "f4_dimension": 11,
+      "hermitian_self_orthogonal": true,
+      "minimum_dependent_columns": 3,
+      "quantum_parameters": [
+        120,
+        98
+      ]
+    }
+  },
+  "input_sha256": {
+    "2026-08-05-c867-ladder-record-attack.py": "94b0d443d1826f68e261fe664e958e75a1867841d7fb5bea9da0cb17d610f534"
+  },
+  "module_structure": {
+    "rank_A": 8,
+    "rank_A_plus_I": 120,
+    "rank_A_plus_J": 9,
+    "rank_J": 1,
+    "rank_three_suborbits": [
+      63,
+      56,
+      1
+    ],
+    "valency": 56
+  },
+  "verdict": "the Eisenstein F4 alphabet does not by itself reach dual distance five; distance five on these coordinates requires a non-additive column map, and every natural equivariant non-additive enrichment tested here introduces weight-three dependencies instead"
+}

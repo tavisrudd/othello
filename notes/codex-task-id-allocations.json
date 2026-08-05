@@ -2708,8 +2708,26 @@
       "last": 867,
       "purpose": "record-matching attack on the exceptional code ladder: symmetry obstructions and the E10 root-hyperplane carrier",
       "sequence": 301
+    },
+    {
+      "count": 1,
+      "first": 868,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 868,
+      "purpose": "Hermitian F4 code on the Eisenstein E8 carrier: distance-five quantum target",
+      "sequence": 302
+    },
+    {
+      "count": 1,
+      "first": 869,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 869,
+      "purpose": "literature and novelty audit of the Paper IV orbit-correspondence and higher-shell findings",
+      "sequence": 303
     }
   ],
-  "next_id": 868,
+  "next_id": 870,
   "schema": "codex-task-id-allocations-v1"
 }

@@ -1065,9 +1065,17 @@ Current state:
   that is canonical and free: \(E_8/2E_8\cong\mathbf F_4^4\) over the
   Eisenstein integers, with \(Q(v)\) the parity of the \(\mathbf F_4\)-weight
   and \(\omega\) acting freely on the 120 coordinates in 40 orbits.
-- Live frontiers: which \(\mathbf F_4\)-linear code on the Eisenstein carrier
-  is Hermitian self-orthogonal with dual distance five, and the four-unit gap
-  at \([256,10]\), which is the only level above E8 with no proved obstruction.
+  C868 closed that route: the natural nine-dimensional \(\mathbf F_4\) code on
+  those coordinates is Hermitian self-orthogonal at exactly the record
+  dimension but still has dual distance four, because conjugation and every
+  \(\mathbf F_4\)-linear functional are additive and so inherit all 32130
+  tetrads as weight-four dual words. Additivity, not the alphabet, is the
+  obstruction, and it explains the distance-four stall at every level at once.
+- Live frontiers: the four-unit gap at \([256,10]\), which is the only level
+  above E8 with no proved obstruction; and, on the E8 carrier, whether 120
+  points of \(\mathrm{PG}(8,4)\) can sit in four-general position invariantly
+  under a large proper subgroup of \(O_8^+(2)\), which is the only remaining
+  route to distance five there and is not expected to work.
 
 Outbound literature queries on this track must not disclose our unpublished
 parameters or constructions; verdicts blocked by that constraint are recorded
