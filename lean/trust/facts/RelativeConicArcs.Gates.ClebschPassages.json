@@ -1,0 +1,2091 @@
+{
+  "closure": [
+    "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.Gates.ClebschPassages",
+    "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.TightFrameConference"
+  ],
+  "declaration_module": {
+    "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.Aligned": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.DistinctTriple": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.FourSetParity": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedCut": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.ctorIdx": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.cut": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.edge": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.inj": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.injEq": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.noConfusion": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.sizeOf_spec": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusion": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusionType": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.rec": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.recOn": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.OutsideEdges": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.PairOutcome": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.SwitchingNegationEquivalent": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut12": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut13": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut14": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.complement": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.complementBit_unique": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.edgeTriangle": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.equalBit": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.fourCycleSum": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.instDecidableSameNormalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.outsidePair": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.outsidePair.match_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pairAligned": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pairOutcome_of_same_signatures": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.match_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pentagonColouring": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.rootedEdge": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix.eq_1": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver.eq_1": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_apply_self": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_apply_sq": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conference_pairTriangleSum_eq_zero": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.cubicTerm": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.cubicTerm.eq_1": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum.eq_1": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.sq_eq_five_of_pairTriangleSum_eq_zero": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.switchMatrix": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.switchMatrix.eq_1": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic.eq_1": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_neg": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign.eq_1": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschInvariantCubic.IsMarkedStabilizerFixed": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.chartFactor_at_normalizedMarkedVector": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.condonShortley_denominators": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector.eq_1": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector.eq_1": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor.eq_1": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree.eq_1": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThreeLine_coefficient_unique": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_normalizedMarkedVector": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_smul": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.smul_markedFixedVector_injective": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor.eq_1": "RelativeConicArcs.ClebschInvariantCubic",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix_transpose": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign.eq_1": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign_sq": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign": "RelativeConicArcs.ClebschTwoGraph",
+    "RelativeConicArcs.GoldenQuadraticCharacters.discriminant_deck_neg": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_det": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_orthogonal": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_norms": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate_involutive": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate_relation": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenRoot_of_sqrtFive": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.golden_discriminant_square": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.golden_mul_conjugate": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.instFactPrimeOfNatNat_relativeConicArcs": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3_is_standardReflection": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2_is_standardReflection": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflection_norm_product": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.InvolutiveOddUnit.AntiInvariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.Invariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart.eq_1": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.exists_invariant_add_mul_invariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.invariant_add_mul_invariant_unique": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.invariant_eq_zero_of_antiInvariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.isUnit_of_square_isUnit": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.localized_existsUnique_invariant_add_mul_invariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.map_evenPart": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.map_oddPart": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.mul_invariant_of_antiInvariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.oddPart": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.oddPart.eq_1": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant": "RelativeConicArcs.InvolutiveOddUnit",
+    "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.Pair": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.Pair.card_vertices": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.Pair.vertices": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.Pair.vertices.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_add": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_eq_total_sub_incidence": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_smul": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.card_commonIncidentPairs": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.card_disjointPairs": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.card_incidentPairs": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.card_inter_vertices": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.disjointPairs": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.disjointPairs.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.finrank_standardSubmodule": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum_pairSum": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.incidentPairs": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.incidentPairs.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.pairFinset": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_eq_zero_of_sum_eq_zero": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_petersenVertexWeight": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight_sum": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.standardSubmodule": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.standardSubmodule_eq_ker": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.sum_adjacency": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum_over_pair": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidentPairs_const": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.sum_pairSums": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum_eq_zero_of_petersenEigen": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear.eq_1": "RelativeConicArcs.KneserPairEigenspace",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.axisOrder": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.casesOn": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift_injective": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.ctorIdx": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.faceLabels": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.inj": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.injEq": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.noConfusion": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.sizeOf_spec": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusion": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusionType": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.planeLabels": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.rec": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.recOn": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.chartLift_smul": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.neg_chartLift_apply": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.neg_neg_chartLift": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference.eq_1": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference_not": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum.eq_1": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_switch": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator.eq_1": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramScalar_ne_zero": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator.eq_1": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator_pairSum": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernel_coefficients": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix.eq_1": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_of_sq_five_ninth": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_of_sq_one_ninth": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_one": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.PetersenHarmonicKernel.totalPairSum_pairSum_eq_zero": "RelativeConicArcs.PetersenHarmonicKernel",
+    "RelativeConicArcs.QuadraticPinching.conductor_eq_ker": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.eq_zero_of_mul_mem_ground": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.groundElement": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.ker_le_conductor": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.kernelElement": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.mem_residuePinching_iff": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.mem_subalgebraConductor_iff": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.residuePinching": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.sub_eq_mem_conductor_iff": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.subalgebraConductor": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.QuadraticPinching.subalgebraConductor_le": "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.SignedEquiangularGram.det_signedGram": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_negative": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_negative_ne_zero": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_positive": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_positive_ne_zero": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SignedEquiangularGram.golden_ne_zero": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SignedEquiangularGram.signedGram": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SignedEquiangularGram.signedGram.eq_1": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.branchIdeal": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.diagonalElement": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.diagonalElement.eq_1": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.exists_splitEvaluate": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.mem_splitPinching_iff": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.mem_splitPinching_zero_iff": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.product_isIntegral": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate.eq_1": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate_mem": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.splitPinching": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.subringConductor": "RelativeConicArcs.SplitQuadraticPinching",
+    "RelativeConicArcs.TightFrameConference.conference_sq_of_gram": "RelativeConicArcs.TightFrameConference",
+    "RelativeConicArcs.TightFrameConference.gram_sq_of_frameOperator": "RelativeConicArcs.TightFrameConference"
+  },
+  "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "lean_version": "4.32.0-rc1",
+  "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "opaque": [],
+  "project_axioms": [],
+  "project_declarations": [
+    "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
+    "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.Aligned",
+    "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+    "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+    "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.ctorIdx",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.cut",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.edge",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.inj",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.injEq",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.noConfusion",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.sizeOf_spec",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusion",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusionType",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.rec",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.recOn",
+    "RelativeConicArcs.AlignedTwoGraph.OutsideEdges",
+    "RelativeConicArcs.AlignedTwoGraph.PairOutcome",
+    "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature",
+    "RelativeConicArcs.AlignedTwoGraph.SwitchingNegationEquivalent",
+    "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced",
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut12",
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut13",
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut14",
+    "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement",
+    "RelativeConicArcs.AlignedTwoGraph.complement",
+    "RelativeConicArcs.AlignedTwoGraph.complementBit_unique",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1",
+    "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum",
+    "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq",
+    "RelativeConicArcs.AlignedTwoGraph.edgeTriangle",
+    "RelativeConicArcs.AlignedTwoGraph.equalBit",
+    "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor",
+    "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
+    "RelativeConicArcs.AlignedTwoGraph.fourCycleSum",
+    "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix",
+    "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions",
+    "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut",
+    "RelativeConicArcs.AlignedTwoGraph.instDecidableSameNormalizedSevenSignature",
+    "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five",
+    "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature",
+    "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective",
+    "RelativeConicArcs.AlignedTwoGraph.outsidePair",
+    "RelativeConicArcs.AlignedTwoGraph.outsidePair.match_1",
+    "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+    "RelativeConicArcs.AlignedTwoGraph.pairOutcome_of_same_signatures",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.match_1",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification",
+    "RelativeConicArcs.AlignedTwoGraph.pentagonColouring",
+    "RelativeConicArcs.AlignedTwoGraph.rootedEdge",
+    "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq",
+    "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation",
+    "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount",
+    "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps",
+    "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix.eq_1",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver.eq_1",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_apply_self",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_apply_sq",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq",
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose",
+    "RelativeConicArcs.ClebschGoldenConference.conference_pairTriangleSum_eq_zero",
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate",
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns",
+    "RelativeConicArcs.ClebschGoldenConference.cubicTerm",
+    "RelativeConicArcs.ClebschGoldenConference.cubicTerm.eq_1",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum.eq_1",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply",
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero",
+    "RelativeConicArcs.ClebschGoldenConference.sq_eq_five_of_pairTriangleSum_eq_zero",
+    "RelativeConicArcs.ClebschGoldenConference.switchMatrix",
+    "RelativeConicArcs.ClebschGoldenConference.switchMatrix.eq_1",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic.eq_1",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_neg",
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign.eq_1",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch",
+    "RelativeConicArcs.ClebschInvariantCubic.IsMarkedStabilizerFixed",
+    "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine",
+    "RelativeConicArcs.ClebschInvariantCubic.chartFactor_at_normalizedMarkedVector",
+    "RelativeConicArcs.ClebschInvariantCubic.condonShortley_denominators",
+    "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree",
+    "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector",
+    "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization",
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector",
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector.eq_1",
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum",
+    "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector",
+    "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector.eq_1",
+    "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor",
+    "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor.eq_1",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree.eq_1",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThreeLine_coefficient_unique",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_normalizedMarkedVector",
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_smul",
+    "RelativeConicArcs.ClebschInvariantCubic.smul_markedFixedVector_injective",
+    "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor",
+    "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor.eq_1",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value",
+    "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix_transpose",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot",
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root",
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign",
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign.eq_1",
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign_sq",
+    "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign",
+    "RelativeConicArcs.GoldenQuadraticCharacters.discriminant_deck_neg",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_det",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_orthogonal",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_norms",
+    "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate_involutive",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate_relation",
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenRoot_of_sqrtFive",
+    "RelativeConicArcs.GoldenQuadraticCharacters.golden_discriminant_square",
+    "RelativeConicArcs.GoldenQuadraticCharacters.golden_mul_conjugate",
+    "RelativeConicArcs.GoldenQuadraticCharacters.instFactPrimeOfNatNat_relativeConicArcs",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3_is_standardReflection",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2_is_standardReflection",
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflection_norm_product",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection",
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector",
+    "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector.eq_1",
+    "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11",
+    "RelativeConicArcs.InvolutiveOddUnit.AntiInvariant",
+    "RelativeConicArcs.InvolutiveOddUnit.Invariant",
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart",
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart.eq_1",
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart",
+    "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant",
+    "RelativeConicArcs.InvolutiveOddUnit.exists_invariant_add_mul_invariant",
+    "RelativeConicArcs.InvolutiveOddUnit.invariant_add_mul_invariant_unique",
+    "RelativeConicArcs.InvolutiveOddUnit.invariant_eq_zero_of_antiInvariant",
+    "RelativeConicArcs.InvolutiveOddUnit.isUnit_of_square_isUnit",
+    "RelativeConicArcs.InvolutiveOddUnit.localized_existsUnique_invariant_add_mul_invariant",
+    "RelativeConicArcs.InvolutiveOddUnit.map_evenPart",
+    "RelativeConicArcs.InvolutiveOddUnit.map_oddPart",
+    "RelativeConicArcs.InvolutiveOddUnit.mul_invariant_of_antiInvariant",
+    "RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv",
+    "RelativeConicArcs.InvolutiveOddUnit.oddPart",
+    "RelativeConicArcs.InvolutiveOddUnit.oddPart.eq_1",
+    "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant",
+    "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector",
+    "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.Pair",
+    "RelativeConicArcs.KneserPairEigenspace.Pair.card_vertices",
+    "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+    "RelativeConicArcs.KneserPairEigenspace.Pair.vertices.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_add",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_eq_total_sub_incidence",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero",
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_smul",
+    "RelativeConicArcs.KneserPairEigenspace.card_commonIncidentPairs",
+    "RelativeConicArcs.KneserPairEigenspace.card_disjointPairs",
+    "RelativeConicArcs.KneserPairEigenspace.card_incidentPairs",
+    "RelativeConicArcs.KneserPairEigenspace.card_inter_vertices",
+    "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs",
+    "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.disjointPairs",
+    "RelativeConicArcs.KneserPairEigenspace.disjointPairs.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+    "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.finrank_standardSubmodule",
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum_pairSum",
+    "RelativeConicArcs.KneserPairEigenspace.incidentPairs",
+    "RelativeConicArcs.KneserPairEigenspace.incidentPairs.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_eq_zero_of_sum_eq_zero",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero",
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_petersenVertexWeight",
+    "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace",
+    "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight",
+    "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight_sum",
+    "RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo",
+    "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+    "RelativeConicArcs.KneserPairEigenspace.standardSubmodule_eq_ker",
+    "RelativeConicArcs.KneserPairEigenspace.sum_adjacency",
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum",
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum_over_pair",
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidentPairs_const",
+    "RelativeConicArcs.KneserPairEigenspace.sum_pairSums",
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum",
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum.eq_1",
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum_eq_zero_of_petersenEigen",
+    "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear",
+    "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear.eq_1",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.axisOrder",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.casesOn",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift_injective",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.ctorIdx",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.faceLabels",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.inj",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.injEq",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.noConfusion",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.sizeOf_spec",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusion",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusionType",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.planeLabels",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.rec",
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.recOn",
+    "RelativeConicArcs.MarkedClebschBridge.chartLift_smul",
+    "RelativeConicArcs.MarkedClebschBridge.neg_chartLift_apply",
+    "RelativeConicArcs.MarkedClebschBridge.neg_neg_chartLift",
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference.eq_1",
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference_not",
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum.eq_1",
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not",
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_switch",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator.eq_1",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum",
+    "RelativeConicArcs.PetersenHarmonicKernel.gramScalar_ne_zero",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator.eq_1",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator_pairSum",
+    "RelativeConicArcs.PetersenHarmonicKernel.kernel_coefficients",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix.eq_1",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_of_sq_five_ninth",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_of_sq_one_ninth",
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_one",
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq",
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general",
+    "RelativeConicArcs.PetersenHarmonicKernel.totalPairSum_pairSum_eq_zero",
+    "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
+    "RelativeConicArcs.QuadraticPinching.eq_zero_of_mul_mem_ground",
+    "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul",
+    "RelativeConicArcs.QuadraticPinching.groundElement",
+    "RelativeConicArcs.QuadraticPinching.ker_le_conductor",
+    "RelativeConicArcs.QuadraticPinching.kernelElement",
+    "RelativeConicArcs.QuadraticPinching.mem_residuePinching_iff",
+    "RelativeConicArcs.QuadraticPinching.mem_subalgebraConductor_iff",
+    "RelativeConicArcs.QuadraticPinching.residuePinching",
+    "RelativeConicArcs.QuadraticPinching.sub_eq_mem_conductor_iff",
+    "RelativeConicArcs.QuadraticPinching.subalgebraConductor",
+    "RelativeConicArcs.QuadraticPinching.subalgebraConductor_le",
+    "RelativeConicArcs.SignedEquiangularGram.det_signedGram",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_negative",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_negative_ne_zero",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_positive",
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_positive_ne_zero",
+    "RelativeConicArcs.SignedEquiangularGram.golden_ne_zero",
+    "RelativeConicArcs.SignedEquiangularGram.signedGram",
+    "RelativeConicArcs.SignedEquiangularGram.signedGram.eq_1",
+    "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral",
+    "RelativeConicArcs.SplitQuadraticPinching.branchIdeal",
+    "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal",
+    "RelativeConicArcs.SplitQuadraticPinching.diagonalElement",
+    "RelativeConicArcs.SplitQuadraticPinching.diagonalElement.eq_1",
+    "RelativeConicArcs.SplitQuadraticPinching.exists_splitEvaluate",
+    "RelativeConicArcs.SplitQuadraticPinching.mem_splitPinching_iff",
+    "RelativeConicArcs.SplitQuadraticPinching.mem_splitPinching_zero_iff",
+    "RelativeConicArcs.SplitQuadraticPinching.product_isIntegral",
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate",
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate.eq_1",
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate_mem",
+    "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+    "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit",
+    "RelativeConicArcs.SplitQuadraticPinching.subringConductor",
+    "RelativeConicArcs.TightFrameConference.conference_sq_of_gram",
+    "RelativeConicArcs.TightFrameConference.gram_sq_of_frameOperator"
+  ],
+  "schema_version": 1,
+  "terminal_axioms": {
+    "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple": [],
+    "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff": [],
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced": [
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement": [
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions": [
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five": [
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification": [
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation": [
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount": [],
+    "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps": [
+      "propext"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor": [],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch": [
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square": [
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.chartLift_smul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.QuadraticPinching.conductor_eq_ker": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_negative": [
+      "propext"
+    ],
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_positive": [
+      "propext"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.TightFrameConference.conference_sq_of_gram": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "unit": "RelativeConicArcs.Gates.ClebschPassages",
+  "uses": {
+    "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.balancedCut12",
+      "RelativeConicArcs.AlignedTwoGraph.balancedCut13",
+      "RelativeConicArcs.AlignedTwoGraph.balancedCut14"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.rec",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.ctorIdx": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.cut": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.edge": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.inj": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.noConfusion",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.injEq": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.inj",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.noConfusion": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusion",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk.sizeOf_spec": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusion": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusionType",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.noConfusionType": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.rec": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.recOn": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.rec",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.PairOutcome": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle",
+      "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.complement"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.rootedEdge",
+      "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced": [
+      "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut12": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut13": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.balancedCut14": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
+      "RelativeConicArcs.AlignedTwoGraph.complementBit_unique"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.complementBit_unique": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.cutBit": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum": [
+      "RelativeConicArcs.AlignedTwoGraph.fourCycleSum",
+      "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle",
+      "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
+      "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.fourCycleSum"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+      "RelativeConicArcs.AlignedTwoGraph.complementBit_unique"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut": [
+      "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.balancedCut12",
+      "RelativeConicArcs.AlignedTwoGraph.balancedCut13",
+      "RelativeConicArcs.AlignedTwoGraph.balancedCut14"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.instDecidableSameNormalizedSevenSignature": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature",
+      "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five": [
+      "RelativeConicArcs.AlignedTwoGraph.pentagonColouring"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.cut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.edge",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.outsidePair",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.cut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.edge",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges",
+      "RelativeConicArcs.AlignedTwoGraph.PairOutcome",
+      "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature",
+      "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature",
+      "RelativeConicArcs.AlignedTwoGraph.pairOutcome_of_same_signatures",
+      "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.outsidePair": [
+      "RelativeConicArcs.AlignedTwoGraph.outsidePair.match_1"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairAligned": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairOutcome_of_same_signatures": [
+      "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.PairOutcome",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature.match_1"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification": [
+      "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation": [
+      "RelativeConicArcs.AlignedTwoGraph.SwitchingNegationEquivalent",
+      "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq",
+      "RelativeConicArcs.AlignedTwoGraph.edgeTriangle"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.PairOutcome"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor": [
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver.eq_1",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_apply_self": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_apply_sq": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conference_pairTriangleSum_eq_zero": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_transpose",
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum",
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleCubic_translate": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver",
+      "RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns",
+      "RelativeConicArcs.ClebschGoldenConference.cubicTerm",
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.conference_triangleSigns": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.cubicTerm": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.cubicTerm.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.cubicTerm",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply": [
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero": [
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum",
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.sq_eq_five_of_pairTriangleSum_eq_zero": [
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum",
+      "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_mul_mulApply"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.switchMatrix.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.switchMatrix"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic": [
+      "RelativeConicArcs.ClebschGoldenConference.cubicTerm"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.cubicTerm",
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_neg": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch": [
+      "RelativeConicArcs.ClebschGoldenConference.cubicTerm",
+      "RelativeConicArcs.ClebschGoldenConference.switchMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch": [
+      "RelativeConicArcs.ClebschGoldenConference.switchMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine": [
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.chartFactor_at_normalizedMarkedVector": [
+      "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_normalizedMarkedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree": [
+      "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine",
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.exists_smul_markedFixedVector": [
+      "RelativeConicArcs.ClebschInvariantCubic.IsMarkedStabilizerFixed",
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization": [
+      "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor",
+      "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector.eq_1": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector.eq_1": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor.eq_1": [
+      "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree.eq_1": [
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThreeLine_coefficient_unique": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector_sum",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_normalizedMarkedVector": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector.eq_1",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_markedFixedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_smul"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.sigmaThree_smul": [
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.smul_markedFixedVector_injective": [
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector"
+    ],
+    "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor.eq_1": [
+      "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal": [
+      "RelativeConicArcs.SplitQuadraticPinching.branchIdeal",
+      "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.SplitQuadraticPinching.subringConductor"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors": [
+      "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization",
+      "RelativeConicArcs.ClebschInvariantCubic.petersenRestrictionFactor",
+      "RelativeConicArcs.ClebschInvariantCubic.wignerSixFactor"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate",
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate_relation",
+      "RelativeConicArcs.GoldenQuadraticCharacters.golden_discriminant_square",
+      "RelativeConicArcs.GoldenQuadraticCharacters.golden_mul_conjugate"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient": [
+      "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine",
+      "RelativeConicArcs.ClebschInvariantCubic.eq_gauntCoefficient_mul_sigmaThree",
+      "RelativeConicArcs.ClebschInvariantCubic.markedFixedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
+    ],
+    "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value": [
+      "RelativeConicArcs.ClebschInvariantCubic.chartFactor_at_normalizedMarkedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector",
+      "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
+    ],
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1": [
+      "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix"
+    ],
+    "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix_transpose": [
+      "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix"
+    ],
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_nonroot": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign",
+      "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix"
+    ],
+    "RelativeConicArcs.ClebschTwoGraph.reconstructed_triangle_root": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign",
+      "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix"
+    ],
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign.eq_1": [
+      "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign"
+    ],
+    "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign_sq": [
+      "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign"
+    ],
+    "RelativeConicArcs.ClebschTwoGraph.switch_eq_reconstructed_triangleSign": [
+      "RelativeConicArcs.ClebschGoldenConference.switchMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.triangleSign",
+      "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix",
+      "RelativeConicArcs.ClebschTwoGraph.rootSwitchSign"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.discriminant_deck_neg": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_det": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix",
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2",
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_orthogonal": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_factorization": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerMatrix",
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector",
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_eq_reflection_mul",
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_norms",
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2",
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3",
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3_is_standardReflection",
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2_is_standardReflection",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection",
+      "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exchanger_reflection_norms": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.exists_goldenRoot_iff_exists_sqrtFive": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenRoot_of_sqrtFive",
+      "RelativeConicArcs.GoldenQuadraticCharacters.golden_discriminant_square"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate_involutive": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate_relation": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate",
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate.eq_1"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.golden_mul_conjugate": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate",
+      "RelativeConicArcs.GoldenQuadraticCharacters.goldenConjugate.eq_1"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3_is_standardReflection": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2SubE3",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection",
+      "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2_is_standardReflection": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector",
+      "RelativeConicArcs.GoldenQuadraticCharacters.reflectionE2",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardReflection"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector"
+    ],
+    "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.instFactPrimeOfNatNat_relativeConicArcs"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart.eq_1": [
+      "RelativeConicArcs.InvolutiveOddUnit.evenPart"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart": [
+      "RelativeConicArcs.InvolutiveOddUnit.evenPart",
+      "RelativeConicArcs.InvolutiveOddUnit.oddPart"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant": [
+      "RelativeConicArcs.InvolutiveOddUnit.exists_invariant_add_mul_invariant",
+      "RelativeConicArcs.InvolutiveOddUnit.invariant_add_mul_invariant_unique"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.exists_invariant_add_mul_invariant": [
+      "RelativeConicArcs.InvolutiveOddUnit.AntiInvariant",
+      "RelativeConicArcs.InvolutiveOddUnit.Invariant",
+      "RelativeConicArcs.InvolutiveOddUnit.evenPart",
+      "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart",
+      "RelativeConicArcs.InvolutiveOddUnit.isUnit_of_square_isUnit",
+      "RelativeConicArcs.InvolutiveOddUnit.map_evenPart",
+      "RelativeConicArcs.InvolutiveOddUnit.map_oddPart",
+      "RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv",
+      "RelativeConicArcs.InvolutiveOddUnit.oddPart"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.invariant_add_mul_invariant_unique": [
+      "RelativeConicArcs.InvolutiveOddUnit.invariant_eq_zero_of_antiInvariant",
+      "RelativeConicArcs.InvolutiveOddUnit.isUnit_of_square_isUnit"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.localized_existsUnique_invariant_add_mul_invariant": [
+      "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.map_evenPart": [
+      "RelativeConicArcs.InvolutiveOddUnit.evenPart"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.map_oddPart": [
+      "RelativeConicArcs.InvolutiveOddUnit.oddPart"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv": [
+      "RelativeConicArcs.InvolutiveOddUnit.AntiInvariant",
+      "RelativeConicArcs.InvolutiveOddUnit.Invariant"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.oddPart.eq_1": [
+      "RelativeConicArcs.InvolutiveOddUnit.oddPart"
+    ],
+    "RelativeConicArcs.InvolutiveOddUnit.square_invariant_of_antiInvariant": [
+      "RelativeConicArcs.InvolutiveOddUnit.mul_invariant_of_antiInvariant"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.Pair": [
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.Pair.card_vertices": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.Pair.vertices": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.Pair.vertices.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.adjacency": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.adjacency.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_add": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_eq_total_sub_incidence": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.card_vertices",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.card_inter_vertices",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum_over_pair",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency_eq_total_sub_incidence",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum_pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.sum_pairSums",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.adjacency_smul": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.card_commonIncidentPairs": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.card_incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.card_disjointPairs": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.card_vertices",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.disjointPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.card_incidentPairs": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.card_inter_vertices": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.card_vertices",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.disjointPairs": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.disjointPairs.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.disjointPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen": [
+      "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency_eq_total_sub_incidence",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero",
+      "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum_eq_zero_of_petersenEigen"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.finrank_standardSubmodule",
+      "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace",
+      "RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.finrank_standardSubmodule": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule_eq_ker",
+      "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.incidenceSum_pairSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.card_commonIncidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.commonIncidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.incidentPairs": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.incidentPairs.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.pairSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.pairSum.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_eq_zero_of_sum_eq_zero": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum_pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum_eq_zero_of_sum_eq_zero"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.pairSum_petersenVertexWeight": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace",
+      "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace": [
+      "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector",
+      "RelativeConicArcs.KneserPairEigenspace.Pair"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight_sum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace",
+      "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.petersenNegTwoEigenspace",
+      "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight",
+      "RelativeConicArcs.KneserPairEigenspace.petersenVertexWeight_sum",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.standardSubmodule_eq_ker": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.sum_adjacency": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.card_disjointPairs",
+      "RelativeConicArcs.KneserPairEigenspace.disjointPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.card_vertices",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidenceSum_over_pair": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.sum_incidentPairs_const": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.card_incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.sum_pairSums": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.incidentPairs",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.sum_incidentPairs_const"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.totalPairSum_eq_zero_of_petersenEigen": [
+      "RelativeConicArcs.KneserPairEigenspace.IsPetersenNegTwoEigenvector",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.sum_adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.vertexTotalLinear"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.axisOrder": [
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.casesOn": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.rec"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift_injective": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.ctorIdx": [
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.faceLabels": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.inj": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.noConfusion"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.injEq": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.inj"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.noConfusion": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusion"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk.sizeOf_spec": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusion": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.casesOn",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusionType"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.noConfusionType": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.casesOn"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.planeLabels": [
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.rec": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.recOn": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.mk",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.rec"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.chartLift_smul": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.neg_chartLift_apply": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.neg_neg_chartLift": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetConference_not": [
+      "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not": [
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic",
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic_neg",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference_not",
+      "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic",
+      "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1"
+    ],
+    "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_switch": [
+      "RelativeConicArcs.ClebschGoldenConference.switchMatrix",
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic",
+      "RelativeConicArcs.ClebschGoldenConference.triangleCubic_switch",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.PetersenHarmonicKernel.gramOperator",
+      "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.PetersenHarmonicKernel.gramOperator",
+      "RelativeConicArcs.PetersenHarmonicKernel.gramOperator.eq_1",
+      "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator",
+      "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator_pairSum"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator.eq_1": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum",
+      "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator_pairSum": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency",
+      "RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum",
+      "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator",
+      "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator.eq_1",
+      "RelativeConicArcs.PetersenHarmonicKernel.totalPairSum_pairSum_eq_zero"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix.eq_1": [
+      "RelativeConicArcs.PetersenHarmonicKernel.legendreSix"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_of_sq_five_ninth": [
+      "RelativeConicArcs.PetersenHarmonicKernel.legendreSix",
+      "RelativeConicArcs.PetersenHarmonicKernel.legendreSix.eq_1"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_of_sq_one_ninth": [
+      "RelativeConicArcs.PetersenHarmonicKernel.legendreSix",
+      "RelativeConicArcs.PetersenHarmonicKernel.legendreSix.eq_1"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.legendreSix_one": [
+      "RelativeConicArcs.PetersenHarmonicKernel.legendreSix"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.pairSum_norm_sq_general": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum",
+      "RelativeConicArcs.KneserPairEigenspace.incidenceSum_pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum"
+    ],
+    "RelativeConicArcs.PetersenHarmonicKernel.totalPairSum_pairSum_eq_zero": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.Pair.vertices",
+      "RelativeConicArcs.KneserPairEigenspace.pairFinset",
+      "RelativeConicArcs.KneserPairEigenspace.pairSum",
+      "RelativeConicArcs.KneserPairEigenspace.sum_pairSums",
+      "RelativeConicArcs.KneserPairEigenspace.totalPairSum"
+    ],
+    "RelativeConicArcs.QuadraticPinching.conductor_eq_ker": [
+      "RelativeConicArcs.QuadraticPinching.eq_zero_of_mul_mem_ground",
+      "RelativeConicArcs.QuadraticPinching.ker_le_conductor",
+      "RelativeConicArcs.QuadraticPinching.residuePinching",
+      "RelativeConicArcs.QuadraticPinching.subalgebraConductor"
+    ],
+    "RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul": [
+      "RelativeConicArcs.QuadraticPinching.groundElement",
+      "RelativeConicArcs.QuadraticPinching.kernelElement",
+      "RelativeConicArcs.QuadraticPinching.residuePinching"
+    ],
+    "RelativeConicArcs.QuadraticPinching.groundElement": [
+      "RelativeConicArcs.QuadraticPinching.residuePinching"
+    ],
+    "RelativeConicArcs.QuadraticPinching.ker_le_conductor": [
+      "RelativeConicArcs.QuadraticPinching.residuePinching",
+      "RelativeConicArcs.QuadraticPinching.subalgebraConductor"
+    ],
+    "RelativeConicArcs.QuadraticPinching.kernelElement": [
+      "RelativeConicArcs.QuadraticPinching.residuePinching"
+    ],
+    "RelativeConicArcs.QuadraticPinching.mem_residuePinching_iff": [
+      "RelativeConicArcs.QuadraticPinching.residuePinching"
+    ],
+    "RelativeConicArcs.QuadraticPinching.mem_subalgebraConductor_iff": [
+      "RelativeConicArcs.QuadraticPinching.subalgebraConductor"
+    ],
+    "RelativeConicArcs.QuadraticPinching.sub_eq_mem_conductor_iff": [
+      "RelativeConicArcs.QuadraticPinching.conductor_eq_ker",
+      "RelativeConicArcs.QuadraticPinching.residuePinching",
+      "RelativeConicArcs.QuadraticPinching.subalgebraConductor"
+    ],
+    "RelativeConicArcs.QuadraticPinching.subalgebraConductor_le": [
+      "RelativeConicArcs.QuadraticPinching.subalgebraConductor"
+    ],
+    "RelativeConicArcs.SignedEquiangularGram.det_signedGram": [
+      "RelativeConicArcs.SignedEquiangularGram.signedGram"
+    ],
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_negative_ne_zero": [
+      "RelativeConicArcs.SignedEquiangularGram.golden_ne_zero"
+    ],
+    "RelativeConicArcs.SignedEquiangularGram.golden_det_positive_ne_zero": [
+      "RelativeConicArcs.SignedEquiangularGram.golden_ne_zero"
+    ],
+    "RelativeConicArcs.SignedEquiangularGram.signedGram.eq_1": [
+      "RelativeConicArcs.SignedEquiangularGram.signedGram"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral": [
+      "RelativeConicArcs.SplitQuadraticPinching.product_isIntegral",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal": [
+      "RelativeConicArcs.SplitQuadraticPinching.branchIdeal",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.SplitQuadraticPinching.subringConductor"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.diagonalElement": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.diagonalElement.eq_1": [
+      "RelativeConicArcs.SplitQuadraticPinching.diagonalElement",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.exists_splitEvaluate": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.mem_splitPinching_iff": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.mem_splitPinching_zero_iff": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.product_isIntegral": [
+      "RelativeConicArcs.SplitQuadraticPinching.diagonalElement",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate.eq_1": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate_mem": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ]
+  },
+  "uses_included": true
+}
