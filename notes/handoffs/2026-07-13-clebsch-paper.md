@@ -127,12 +127,27 @@ thirty-five terminals, none carrying a compiled-evaluation axiom, and the two
 paper-local replays and the release gate pass.  Report:
 `notes/2026-08-04-c815-switching-reduction.md`.
 
-What remains for C815 is the rest of gap classes B and C of
-`notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`: the
-aligned-design strengths (general faithfulness transport, the finite-set
-extension to a common seven-set, the explicit query family, and the anchor
-step's distinctness obligation), the rank-14 weighted Jacobian, and the nine
-manuscript clauses of gap class B.
+The aligned-design strengths are closed.  The manuscript's faithfulness theorem
+now holds in Lean at its own quantifier range: for every two-graph on a finite
+point set with at least seven points the aligned four-sets determine the
+triangle values on distinct triples up to one global complement bit.  Rooting at
+a point of an aligned four-set whose triangle bit is zero makes the anchor's six
+edges vanish, which replaces the manuscript's two switching normalizations, so
+the general transport, the seven-point distinctness obligation, and the
+finite-set extension all fall out of one proof.  The selected query family is
+also defined explicitly and counted at `3n^2 - 23n + 45`.  A cold referee review
+accepted the formalization with prose fixes only, all applied.  Reports:
+`notes/2026-08-04-c815-aligned-design-faithfulness.md` and
+`notes/2026-08-04-c815-aligned-faithfulness-review.md`.
+
+What remains for C815 is the rank-14 weighted Jacobian of gap class C and the
+nine manuscript clauses of gap class B in
+`notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`.  Two human
+inputs remain in manuscript row OPER-4: the identification of the marked
+determinant-minus-three family of a conference matrix with the aligned family,
+and the sufficiency of the query family for a decoder working from one anchor.
+The passages gate now audits fifty-six terminals, still with no compiled
+evaluation anywhere.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
@@ -151,7 +166,7 @@ block that theorem.
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; existing gates are green, but C855 is required to formalize every paper/companion mathematical assertion in Lean and close the full referee-artifact standards debt before the next release is called theorem-complete | [C855](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; C856 closed the fixed-line inheritance, public-docstring, and verification-expectation gaps on every project-owned file, an independent 2026-08-03 review confirmed every C856 claim, and C860 has cleared the shared projective-cap closure — the game modules are out of the paper closures and the five residual geometry modules are documented — so the full transitive closure is at the referee standard | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815's three gates are green with no compiled-evaluation axiom at any terminal and its remaining work is the unformalized manuscript mathematics of gap classes B and C before C823 | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md) |
+| Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815's three gates are green with no compiled-evaluation axiom at any terminal, aligned-design faithfulness is formalized at the manuscript's quantifier range, and its remaining work is the rank-14 weighted Jacobian and the manuscript clauses of gap class B before C823 | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md) |
 | Paper IV — *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete; a manuscript-only standalone pre-release was published 2026-08-03 at DOI `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version; C834 must still complete the proof-producing formal closure and then C857 the exhaustive Lean standards checklist before the full release | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
@@ -365,7 +380,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | complete at the normalized-core boundary; normalized cut classifier, symbolic third-point elimination, conditional overlap consistency, query-polynomial identity, determinant/switching transport, formal audits, and paper gate green | Ramsey existence, arbitrary finite-set normalization, and query-family cardinality remain human inputs; shared `AlignedTwoGraph` API is available to C815 and C823 |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
 | [C809 — four-shadow characterization](../clebsch-tasks/c809-four-shadow-characterization.md) | complete; positive math-only freeze; no paper promotion | none; nonzero triangle--Pfaffian proportionality characterizes the sign conference class, the two orientations are projectively isolated, and any manuscript/novelty integration requires a separately allocated follow-up |
-| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | reopened; all three gates and every replay are green with no compiled-evaluation axiom at any terminal, and the four-shadow recognition theorem now holds for arbitrary sign matrices with the conference switching class proved unique | formalize the aligned-design strengths, then the rank-14 weighted Jacobian and gap class B, then run the closeout before handing the API to C823 |
+| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | reopened; all three gates and every replay are green with no compiled-evaluation axiom at any terminal, the four-shadow recognition theorem holds for arbitrary sign matrices with the conference switching class proved unique, and aligned-design faithfulness is formalized at the manuscript's quantifier range | formalize the rank-14 weighted Jacobian and gap class B, then run the closeout before handing the API to C823 |
 | [C816 — Paper III four-shadow integration](../clebsch-tasks/c816-paper-iii-four-shadow-integration.md) | fifth Paper III route task; begin after C800 reconciliation; manuscript promotion authorized | complete the full precedence audit, integrate the characterization and exact weighted boundary, refresh trust/release surfaces, then run Milnor--Serre, red-team, PDF inspection, and a fresh context-free cold-read regrade |
 | [C810 — aligned-certificate distance](../clebsch-tasks/c810-aligned-certificate-distance.md) | complete; exact seven-point distance two and correction radius zero; no paper promotion | none; the all-even spectrum follows from edge-toggle parity, and the conference-only multi-class question is outside the triggered cheap-stop boundary |
 | [C811 — quadratic-twist specialization](../clebsch-tasks/c811-quadratic-twist-specialization.md) | queued; math only; paper promotion excluded | stress-test the fibre-recovery claim and quickly delimit standard Kummer precedence before seeking a sharper geometric lemma |
