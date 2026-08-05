@@ -1,0 +1,43 @@
+{
+ "affine_code_weight_distribution": {
+  "0": 1,
+  "120": 1,
+  "56": 255,
+  "64": 255
+ },
+ "f2_cap": 12,
+ "f2_submodule_dims": [
+  0,
+  1,
+  8,
+  9
+ ],
+ "f2_submodules": [
+  "constants_dim1",
+  "linear_functionals_dim8",
+  "affine_code_dim9"
+ ],
+ "f4_cap": 12,
+ "f4_submodule_dims": [
+  0,
+  1,
+  8,
+  9
+ ],
+ "f4_submodules": [
+  "f4_constants_dim1",
+  "f4_extension_of_linear_functionals_dim8",
+  "f4_extension_of_affine_code_dim9"
+ ],
+ "fixed_space_calibration": "P-fixed spaces equal orbit-indicator spans (dim 4)",
+ "sylow_is_2group": true,
+ "sylow_orbit_sizes": [
+  8,
+  16,
+  32,
+  64
+ ],
+ "sylow_order": 4096,
+ "verdict_f2": "complete list of GO8+(2)-invariant F2-subspaces of F2^120 with dim <= 12",
+ "verdict_f4": "complete list of GO8+(2)-invariant F4-subspaces of F4^120 with dim <= 12"
+}

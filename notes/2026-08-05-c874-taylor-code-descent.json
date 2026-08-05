@@ -1,0 +1,164 @@
+{
+ "cases": {
+  "paley13_plus_isolated": {
+   "base_graph_code_dim": 13,
+   "base_vertices": 14,
+   "code_dim_taylor_hat": 14,
+   "fibre_constant_subcode_dim": 13,
+   "folded_dim": 13,
+   "folded_weight_distribution": {
+    "0": 1,
+    "10": 1001,
+    "12": 91,
+    "14": 1,
+    "2": 91,
+    "4": 1001,
+    "6": 3003,
+    "8": 3003
+   },
+   "full_descent": true
+  },
+  "paley25_plus_isolated": {
+   "base_graph_code_dim": 13,
+   "base_vertices": 26,
+   "code_dim_taylor_hat": 14,
+   "fibre_constant_subcode_dim": 13,
+   "folded_dim": 13,
+   "folded_weight_distribution": {
+    "0": 1,
+    "10": 1430,
+    "12": 2275,
+    "14": 2275,
+    "16": 1430,
+    "18": 325,
+    "20": 65,
+    "26": 1,
+    "6": 65,
+    "8": 325
+   },
+   "full_descent": true
+  },
+  "paley9_plus_isolated": {
+   "base_graph_code_dim": 5,
+   "base_vertices": 10,
+   "code_dim_taylor_hat": 6,
+   "fibre_constant_subcode_dim": 5,
+   "folded_dim": 5,
+   "folded_weight_distribution": {
+    "0": 1,
+    "10": 1,
+    "4": 15,
+    "6": 15
+   },
+   "full_descent": true
+  },
+  "pentagon_plus_isolated": {
+   "base_graph_code_dim": 5,
+   "base_vertices": 6,
+   "code_dim_taylor_hat": 6,
+   "fibre_constant_subcode_dim": 5,
+   "folded_dim": 5,
+   "folded_weight_distribution": {
+    "0": 1,
+    "2": 15,
+    "4": 15,
+    "6": 1
+   },
+   "full_descent": true
+  },
+  "quadric_plus_rank6": {
+   "folded_dim": 5,
+   "folded_weight_distribution": {
+    "0": 1,
+    "2": 15,
+    "4": 15,
+    "6": 1
+   },
+   "graph_code_equals_restricted_affine": true,
+   "link": 12,
+   "points": 28,
+   "rank": 6,
+   "restricted_affine_dim": 6
+  },
+  "quadric_plus_rank8": {
+   "folded_dim": 7,
+   "folded_weight_distribution": {
+    "0": 1,
+    "12": 63,
+    "16": 63,
+    "28": 1
+   },
+   "graph_code_equals_restricted_affine": true,
+   "link": 56,
+   "points": 120,
+   "rank": 8,
+   "restricted_affine_dim": 8
+  },
+  "random_n11_seed2": {
+   "base_graph_code_dim": 10,
+   "base_vertices": 11,
+   "code_dim_taylor_hat": 10,
+   "fibre_constant_subcode_dim": 9,
+   "folded_dim": 9,
+   "folded_weight_distribution": {
+    "0": 1,
+    "1": 3,
+    "10": 3,
+    "11": 1,
+    "2": 11,
+    "3": 41,
+    "4": 86,
+    "5": 114,
+    "6": 114,
+    "7": 86,
+    "8": 41,
+    "9": 11
+   },
+   "full_descent": false
+  },
+  "random_n13_seed3": {
+   "base_graph_code_dim": 12,
+   "base_vertices": 13,
+   "code_dim_taylor_hat": 12,
+   "fibre_constant_subcode_dim": 11,
+   "folded_dim": 11,
+   "folded_weight_distribution": {
+    "0": 1,
+    "1": 5,
+    "10": 90,
+    "11": 26,
+    "12": 5,
+    "13": 1,
+    "2": 26,
+    "3": 90,
+    "4": 195,
+    "5": 311,
+    "6": 396,
+    "7": 396,
+    "8": 311,
+    "9": 195
+   },
+   "full_descent": false
+  },
+  "random_n8_seed1": {
+   "base_graph_code_dim": 8,
+   "base_vertices": 8,
+   "code_dim_taylor_hat": 8,
+   "fibre_constant_subcode_dim": 7,
+   "folded_dim": 7,
+   "folded_weight_distribution": {
+    "0": 1,
+    "1": 4,
+    "2": 12,
+    "3": 28,
+    "4": 38,
+    "5": 28,
+    "6": 12,
+    "7": 4,
+    "8": 1
+   },
+   "full_descent": false
+  }
+ },
+ "lemma": "For every tested graph, each adjacency row of the matched Taylor double has fibre-difference all-ones, the fibre-constant subcode has codimension one, and its fold equals <1> + A.(even coefficient vectors); the descent is a formal property of Taylor doubles, with no quadratic-form input."
+}
