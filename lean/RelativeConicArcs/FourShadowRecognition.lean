@@ -1066,10 +1066,52 @@ theorem switchSignProduct_mul_self (d : Fin 6 → R) (hd : ∀ i, d i * d i = 1)
           (d 5 * d 5) := by ring
     _ = 1 := by rw [hd 0, hd 1, hd 2, hd 3, hd 4, hd 5]; ring
 
+omit [IsDomain R] in
+/-- Diagonal switching multiplies the proportionality scalar by the product of
+the switching signs.  The triangle cubic is unchanged and the
+commutator-Pfaffian cubic acquires that product. -/
+theorem cubicsProportional_switchMatrix_iff
+    (d : Fin 6 → R) (hd : ∀ i, d i * d i = 1) (C : Matrix (Fin 6) (Fin 6) R)
+    (mu : R) :
+    CubicsProportional (switchMatrix d C)
+        (d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu) ↔ CubicsProportional C mu := by
+  have hprod := switchSignProduct_mul_self d hd
+  constructor
+  · intro h x
+    have hx := h x
+    rw [matchingEvaluation_switchMatrix, triangleCubic_switch d hd] at hx
+    calc matchingEvaluation C x
+        = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+            (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * matchingEvaluation C x := by
+          rw [hprod, one_mul]
+      _ = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+            ((d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * matchingEvaluation C x) := by
+          ring
+      _ = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+            (d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu * triangleCubic C x) := by
+          rw [hx]
+      _ = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
+            (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * mu * triangleCubic C x := by
+          ring
+      _ = mu * triangleCubic C x := by rw [hprod, one_mul]
+  · intro h x
+    rw [matchingEvaluation_switchMatrix, triangleCubic_switch d hd, h x]
+    ring
+
+omit [IsDomain R] in
+/-- Switching by signs whose product is `-1` negates the proportionality
+scalar.  The sign of the scalar is therefore a marker of the switched
+representative, not of the switching class. -/
+theorem cubicsProportional_neg_switchMatrix (d : Fin 6 → R)
+    (hd : ∀ i, d i * d i = 1)
+    (hneg : d 0 * d 1 * d 2 * d 3 * d 4 * d 5 = -1)
+    (C : Matrix (Fin 6) (Fin 6) R) (mu : R) (hprop : CubicsProportional C mu) :
+    CubicsProportional (switchMatrix d C) (-mu) := by
+  have h := (cubicsProportional_switchMatrix_iff d hd C mu).mpr hprop
+  rwa [hneg, neg_one_mul] at h
+
 /-- Diagonal switching transports nonzero proportionality of the two cubic
-shadows in both directions.  The triangle cubic is unchanged and the
-commutator-Pfaffian cubic acquires the product of the switching signs, so the
-proportionality scalar is multiplied by that product. -/
+shadows in both directions. -/
 theorem exists_nonzero_cubicsProportional_switchMatrix
     (d : Fin 6 → R) (hd : ∀ i, d i * d i = 1) (C : Matrix (Fin 6) (Fin 6) R) :
     (∃ mu : R, mu ≠ 0 ∧ CubicsProportional (switchMatrix d C) mu) ↔
@@ -1079,27 +1121,19 @@ theorem exists_nonzero_cubicsProportional_switchMatrix
     intro h
     rw [h, mul_zero] at hprod
     exact zero_ne_one hprod
+  have hcancel : ∀ mu : R,
+      d 0 * d 1 * d 2 * d 3 * d 4 * d 5 *
+        (d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu) = mu := by
+    intro mu
+    rw [← mul_assoc, hprod, one_mul]
   constructor
   · rintro ⟨mu, hmu, hprop⟩
-    refine ⟨d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu, mul_ne_zero he0 hmu,
-      fun x => ?_⟩
-    have hx := hprop x
-    rw [matchingEvaluation_switchMatrix, triangleCubic_switch d hd] at hx
-    calc matchingEvaluation C x
-        = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
-            (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * matchingEvaluation C x := by
-          rw [hprod, one_mul]
-      _ = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) *
-            ((d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * matchingEvaluation C x) := by
-          ring
-      _ = (d 0 * d 1 * d 2 * d 3 * d 4 * d 5) * (mu * triangleCubic C x) := by
-          rw [hx]
-      _ = d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu * triangleCubic C x := by ring
+    refine ⟨d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu, mul_ne_zero he0 hmu, ?_⟩
+    apply (cubicsProportional_switchMatrix_iff d hd C _).mp
+    rwa [hcancel mu]
   · rintro ⟨mu, hmu, hprop⟩
-    refine ⟨d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu, mul_ne_zero he0 hmu,
-      fun x => ?_⟩
-    rw [matchingEvaluation_switchMatrix, triangleCubic_switch d hd, hprop x]
-    ring
+    exact ⟨d 0 * d 1 * d 2 * d 3 * d 4 * d 5 * mu, mul_ne_zero he0 hmu,
+      (cubicsProportional_switchMatrix_iff d hd C mu).mpr hprop⟩
 
 /-- Switching twice with the same signs returns the original matrix. -/
 theorem switchMatrix_switchMatrix_self (d : Fin 6 → ℤ)
@@ -1279,6 +1313,108 @@ theorem exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix
   rw [← exists_nonzero_cubicsProportional_switchMatrix (rootSwitchSigns C) hd C,
     ← switchMatrix_mul_self_eq_iff (rootSwitchSigns C) hd C, hbits]
   exact exists_nonzero_cubicsProportional_iff_conferenceSquare bits
+
+/-- The indicator vector of the last three labels. -/
+def lastTripleBump : Fin 6 → ℤ := ![0, 0, 0, 1, 1, 1]
+
+/-- At the indicator vector of a triple the triangle cubic collapses to the
+single triangle sign of that triple, since every other monomial has a
+vanishing coordinate. -/
+theorem triangleCubic_lastTripleBump (C : Matrix (Fin 6) (Fin 6) ℤ) :
+    triangleCubic C lastTripleBump = triangleSign C 3 4 5 := by
+  simp [triangleCubic, cubicTerm, lastTripleBump]
+
+/-- A triangle of a sign matrix carries a nonzero sign. -/
+theorem triangleSign_ne_zero_of_isSignMatrix (C : Matrix (Fin 6) (Fin 6) ℤ)
+    (hC : IsSignMatrix C) (i j k : Fin 6) (hij : i ≠ j) (hjk : j ≠ k)
+    (hki : k ≠ i) : triangleSign C i j k ≠ 0 := by
+  rcases hC.2.2 i j hij with h1 | h1 <;> rcases hC.2.2 j k hjk with h2 | h2 <;>
+    rcases hC.2.2 k i hki with h3 | h3 <;>
+      simp [triangleSign, h1, h2, h3]
+
+/-- The triangle cubic of a sign matrix takes a nonzero value, so a sign matrix
+has at most one proportionality scalar. -/
+theorem cubicsProportional_unique_of_isSignMatrix
+    (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C) {mu nu : ℤ}
+    (hmu : CubicsProportional C mu) (hnu : CubicsProportional C nu) :
+    mu = nu := by
+  have hx : triangleCubic C lastTripleBump ≠ 0 := by
+    rw [triangleCubic_lastTripleBump]
+    exact triangleSign_ne_zero_of_isSignMatrix C hC 3 4 5 (by decide)
+      (by decide) (by decide)
+  have h : mu * triangleCubic C lastTripleBump =
+      nu * triangleCubic C lastTripleBump := by
+    rw [← hmu lastTripleBump, ← hnu lastTripleBump]
+  exact mul_right_cancel₀ hx h
+
+/-- The root-normalized signings are sign matrices, so the statements above
+subsume the normalized ones. -/
+theorem isSignMatrix_normalizedSignMatrix (bits : Fin 10 → Bool) :
+    IsSignMatrix (normalizedSignMatrix bits) := by
+  refine ⟨fun i => by fin_cases i <;> rfl, fun i j => by
+    fin_cases i <;> fin_cases j <;> rfl, fun i j _ => ?_⟩
+  have hb : ∀ k, boolSign (bits k) = 1 ∨ boolSign (bits k) = -1 := by
+    intro k
+    cases bits k
+    · exact Or.inl rfl
+    · exact Or.inr rfl
+  fin_cases i <;> fin_cases j <;>
+    first
+      | exact absurd rfl (by assumption)
+      | exact Or.inl rfl
+      | exact hb 0
+      | exact hb 1
+      | exact hb 2
+      | exact hb 3
+      | exact hb 4
+      | exact hb 5
+      | exact hb 6
+      | exact hb 7
+      | exact hb 8
+      | exact hb 9
+
+/-- On a sign matrix the proportionality scalar is exactly one of the two
+Hodge orientations.  Root switching carries the normalized dichotomy `±4` to
+the general statement, and the product of the switching signs decides which of
+the two appears. -/
+theorem cubicsProportional_eq_four_or_neg_four_of_isSignMatrix
+    (C : Matrix (Fin 6) (Fin 6) ℤ) (hC : IsSignMatrix C) {mu : ℤ} (hmu : mu ≠ 0)
+    (hprop : CubicsProportional C mu) : mu = 4 ∨ mu = -4 := by
+  obtain ⟨bits, hbits⟩ := exists_bits_switchMatrix_rootSwitchSigns C hC
+  have hd := rootSwitchSigns_mul_self C hC
+  have hprod := switchSignProduct_mul_self (rootSwitchSigns C) hd
+  have hsq : normalizedSignMatrix bits * normalizedSignMatrix bits =
+      5 • (1 : Matrix (Fin 6) (Fin 6) ℤ) := by
+    rw [← hbits]
+    exact (switchMatrix_mul_self_eq_iff (rootSwitchSigns C) hd C).mpr
+      ((exists_nonzero_cubicsProportional_iff_conferenceSquare_of_isSignMatrix C
+        hC).mp ⟨mu, hmu, hprop⟩)
+  have hsymm : (normalizedSignMatrix bits).transpose = normalizedSignMatrix bits := by
+    ext i j
+    fin_cases i <;> fin_cases j <;> rfl
+  have hbalance : FirstRowBalanced (normalizedSignMatrix bits) := by
+    intro i hi
+    exact pairTriangleSum_eq_zero (normalizedSignMatrix bits) 5 hsymm hsq 0 i
+      (Ne.symm hi)
+  have hback : switchMatrix (rootSwitchSigns C) (normalizedSignMatrix bits) = C := by
+    rw [← hbits, switchMatrix_switchMatrix_self (rootSwitchSigns C) hd]
+  have hcarry : ∀ nu : ℤ, CubicsProportional (normalizedSignMatrix bits) nu →
+      mu = rootSwitchSigns C 0 * rootSwitchSigns C 1 * rootSwitchSigns C 2 *
+        rootSwitchSigns C 3 * rootSwitchSigns C 4 * rootSwitchSigns C 5 * nu := by
+    intro nu hnu
+    have := (cubicsProportional_switchMatrix_iff (rootSwitchSigns C) hd
+      (normalizedSignMatrix bits) nu).mpr hnu
+    rw [hback] at this
+    exact cubicsProportional_unique_of_isSignMatrix C hC hprop this
+  have hsign := eq_one_or_neg_one_of_mul_self hprod
+  rcases orientation012_of_firstRowBalanced bits hbalance with hpos | hneg
+  · have h4 := hcarry 4 (cubicsProportional_four_of_sixTests bits hbalance hpos)
+    rcases hsign with h | h <;> rw [h] at h4 <;> [exact Or.inl (by linarith);
+      exact Or.inr (by linarith)]
+  · have h4 := hcarry (-4)
+      (cubicsProportional_neg_four_of_sixTests bits hbalance hneg)
+    rcases hsign with h | h <;> rw [h] at h4 <;> [exact Or.inr (by linarith);
+      exact Or.inl (by linarith)]
 
 /-- The same characterization for an arbitrary nonzero common edge scale: a
 scalar sign matrix has proportional cubic shadows exactly when its sign part

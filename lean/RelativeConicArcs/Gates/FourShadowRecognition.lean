@@ -19,7 +19,10 @@ root gauge: switching by the root row carries an arbitrary symmetric
 zero-diagonal matrix with entries `±1` into the normalized family, and the same
 twelve pentagons carry one relabelling and one diagonal switching onto the
 displayed conference matrix, so the recognition statement and the uniqueness of
-the conference switching class hold for every such matrix.  The rank-fourteen
+the conference switching class hold for every such matrix.  The proportionality
+scalar of a sign matrix is unique, because the triangle cubic at the indicator
+vector of a triple is that triple's sign, and it is `4` or `-4`, the product of
+the switching signs deciding which.  The rank-fourteen
 rational Jacobian calculation for local weighted rigidity is external.  No compiled evaluation, external certificate,
 or generated source is used by the declarations printed here.
 -/
@@ -45,7 +48,14 @@ or generated source is used by the declarations printed here.
 #print axioms RelativeConicArcs.FourShadowRecognition.pentagon_bits_balanced
 #print axioms RelativeConicArcs.FourShadowRecognition.matchingEvaluation_switchMatrix
 #print axioms RelativeConicArcs.FourShadowRecognition.switchSignProduct_mul_self
+#print axioms RelativeConicArcs.FourShadowRecognition.cubicsProportional_switchMatrix_iff
+#print axioms RelativeConicArcs.FourShadowRecognition.cubicsProportional_neg_switchMatrix
 #print axioms RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_switchMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.triangleCubic_lastTripleBump
+#print axioms RelativeConicArcs.FourShadowRecognition.triangleSign_ne_zero_of_isSignMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.cubicsProportional_unique_of_isSignMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.isSignMatrix_normalizedSignMatrix
+#print axioms RelativeConicArcs.FourShadowRecognition.cubicsProportional_eq_four_or_neg_four_of_isSignMatrix
 #print axioms RelativeConicArcs.FourShadowRecognition.switchMatrix_switchMatrix_self
 #print axioms RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_switchMatrix
 #print axioms RelativeConicArcs.FourShadowRecognition.switchMatrix_mul_self_eq_iff
