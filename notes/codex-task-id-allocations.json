@@ -2762,8 +2762,26 @@
       "last": 873,
       "purpose": "triangulate the Brouwer-Shult 1990 statement through later citing literature",
       "sequence": 307
+    },
+    {
+      "count": 1,
+      "first": 874,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 874,
+      "purpose": "final ej/judo review of the exceptional-ladder and Paper IV day",
+      "sequence": 308
+    },
+    {
+      "count": 1,
+      "first": 875,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 875,
+      "purpose": "score minus and parabolic levels against public tables",
+      "sequence": 309
     }
   ],
-  "next_id": 874,
+  "next_id": 876,
   "schema": "codex-task-id-allocations-v1"
 }

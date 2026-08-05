@@ -1378,4 +1378,4 @@ and the baseline already captures it.
 theorem; the 1990 paper was not obtained, and no search for such a family has
 been run.
 
-**Status:** open lead; allocates nothing.
+**Status:** retired -> mirage, closed same day by C874. The code-level fold is a formal property of *any* matched Taylor double: every row has fibre-difference all-ones, so the fibre-constant subcode is codimension one and folds onto the base graph's code. Certified in `2026-08-05-c874-taylor-code-descent.py` against the quadric links at ranks six and eight, the Paley two-graphs on 10, 14 and 26 points, the pentagon, and random graphs. The coclique-parity condition therefore selects nothing — every graph's double folds — so a non-quadratic family buys no new phenomenon, and the folded codes there are ordinary graph codes of catalogued families. The lead was wrong in its premise that the condition was restrictive.
