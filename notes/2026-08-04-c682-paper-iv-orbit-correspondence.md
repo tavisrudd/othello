@@ -705,6 +705,147 @@ acyclic algebraic differential.  Without a complex lift, inner product, and
 locality model it does not define a protected logical sector, exceptional
 point, topological phase, or supersymmetric Hamiltonian.
 
+## Memory- and compute-efficient representations
+
+The actual Paper-IV dimensions favor fixed-width representations over general
+compressed bitmap libraries.  A coordinate support uses seventy-eight bits,
+a one-sided frame vector uses ninety-one bits, and all coordinate and frame
+indices fit in one byte.  The natural hot-path representation is therefore a
+`u128` per support together with fixed-degree adjacency arrays
+
+```text
+Support = u128
+oct_to_toric = [[u8; 3]; 91]
+toric_to_oct = [[u8; 3]; 91].
+```
+
+This makes support intersection a masked population count and every frame
+conversion two whole-row XORs.  One explicit support family occupies 1456
+bytes, both families 2912 bytes, one direction of the cubic transition 273
+bytes, and both directions 546 bytes.  The symmetric metacheck adjacency has
+182 rows of degree four and occupies 728 bytes as `[[u8; 4]; 182]`.
+
+### Succinct storage versus hot-path storage
+
+A twelve-subset of a seventy-eight-set has information content
+
+\[
+ \log_2\binom{78}{12}\approx45.30\text{ bits}.
+\]
+
+An enumerative code therefore needs forty-six bits per support, and a
+row-local Elias--Fano representation is of order fifty-seven bits before
+metadata, compared with seventy-eight packed bits or one 128-bit machine
+word.  These encodings are appropriate for immutable archives, but decoding
+and list merging make them inferior for the XOR- and popcount-heavy verifier.
+
+The same distinction holds for the transition.  Elias--Fano encoding of the
+273 sorted edge positions in a universe of size \(91^2\) uses approximately
+236 bytes, only thirty-seven bytes less than the direct three-byte neighbor
+array.  Fixed triplets are therefore the preferred computational form.
+Roaring containers are still less suitable at this scale: a twelve-element
+array container alone uses twenty-four bytes before its header, already more
+than a `u128` support.
+
+The strongest archival compression is group-theoretic rather than generic.
+Each support family can be regenerated from one representative and a Schreier
+transversal, while the complete transition is determined by
+
+\[
+ S_4\longleftarrow D_8\longrightarrow D_{24}
+\]
+
+and three local coset representatives.  A compact research artifact should
+store that provenance and generate explicit rows on demand; a verifier should
+materialize the fixed-width rows after loading it.
+
+### Packed module and batched syndrome forms
+
+An abstract code-module element needs thirty-six bits as a vector in
+\(\mathbf F_8^{12}\).  An element of the paired dual-number module needs
+seventy-two bits and fits in a `u128`, naturally split into thirty-six-bit
+primal and tangent lanes.  Field addition is XOR and multiplication can use a
+fixed \(8\)-by-\(8\) lookup table.  Expansion to the seventy-eight physical
+coordinates still requires an explicit or generated basis, so this is a
+module representation rather than a replacement for support masks.
+
+For batches of syndrome samples, the layout should be transposed: one machine
+word stores the same vertex bit from sixty-four experimental shots.  Each
+output lane is then the XOR of three words, giving
+\(\Theta(EB/w)\) word operations for \(B\) samples.  This representation is
+suited to Monte Carlo measurement-noise tests and decoder benchmarking.
+
+### Implicit hypergraph-product storage
+
+The 66248-qubit hypergraph-product matrices should never be materialized.  A
+dense 66248-square binary matrix would occupy approximately 549 megabytes,
+whereas every weight-eight check is generated from the 728-byte metacheck
+adjacency.  A derived qubit is indexed by a sector and a pair of indices below
+182; the complete identifier needs seventeen bits and therefore fits in a
+`u32`, but not a `u16`.
+
+This is also the scale at which compressed dynamic sets become useful.  One
+dense error component occupies about 8.3 kilobytes.  At a one-percent error
+rate a Roaring-style array stores roughly 662 sixteen-bit locations, about
+1.3 kilobytes before small headers, and supports the toggles, intersections,
+and symmetric differences needed by a decoder.  Elias--Fano can reduce an
+immutable sorted error trace to roughly 715 bytes, but is less appropriate
+for active decoding.
+
+The recommended hierarchy is therefore:
+
+1. fixed `u128` masks and byte triplets for Paper-IV computation;
+2. representatives, subgroup data, and Schreier trees for archival storage;
+3. packed \(\mathbf F_8\) and dual-number vectors for abstract module work;
+4. bit-sliced arrays for batched syndrome experiments;
+5. implicit Kronecker indexing for the hypergraph product;
+6. Roaring sets for dynamic sparse large-code errors; and
+7. Elias--Fano for immutable large traces or publication artifacts.
+
+These structures compress classical descriptions and stabilizer-control
+data.  They do not compress an arbitrary seventy-eight-qubit state; the
+quantum saving depends on the state or operation remaining in the stabilizer
+and sparse-error regimes.
+
+## Application assessment
+
+As an exact mathematical and algorithmic package, the present result is
+strong; as a general data-compression or deployable quantum-hardware result it
+is preliminary.  A calibrated assessment is:
+
+\[
+\begin{array}{l|c|c}
+\text{application}&\text{present strength}&\text{with distance/soundness}\
+\hline
+\text{finite-geometry verification}&94&97\\
+\text{Paper-IV frame reconstruction}&91&95\\
+\text{symmetry-aware orbit archives}&88&93\\
+\text{classical redundant-syndrome decoding}&79&94\\
+\text{quantum syndrome validation}&67&90\\
+\text{batched simulation and decoder benchmarks}&86&91\\
+\text{finite quantum-LDPC seed}&48&65\\
+\text{quantum-walk and spectral model}&61&78\\
+\text{general-purpose bitmap compression}&43&55
+\end{array}
+\]
+
+The scores are judgments of present applicability, not mathematical
+correctness.  The most compelling uses are machine-checkable finite
+mathematics, orbit and design databases, redundant syndrome-measurement
+experiments, high-throughput decoder simulation, and sparse linear-algebra
+benchmarks in which explicit, coset, and module implementations cross-check
+one another.  The hypergraph-product construction is currently a structured
+decoder test instance rather than a competitive asymptotic code, and the
+chiral graph is a precise finite hopping model rather than an asserted
+physical phase.
+
+The weak systems pitch would be that this example improves Elias--Fano or
+Roaring compression; it does not.  The stronger and accurate claim is that a
+single exceptional finite-geometric object has mutually validating bitset,
+coset, coding, channel, and quantum-syndrome representations, with exact local
+conversion among the relevant frames.  The decisive next computation is the
+distance and local-soundness profile of the frame metacode.
+
 ## Evidence and replay
 
 The committed checker constructs the two \(G\)-orbits from Paper IV's tracked
@@ -766,3 +907,5 @@ paper promotion.
 11. Compute the frame metacode distance and soundness, then decide whether the
     redundant Pauli frames support useful measurement-error correction or a
     nontrivial CSS construction.
+12. Implement explicit-bitset, coset-generated, and packed-module kernels and
+    benchmark frame conversion, batch syndrome evaluation, and archive size.
