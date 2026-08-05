@@ -1,0 +1,58 @@
+{
+  "all_stabilizer_intersection_order_counts": {
+    "1": 4368,
+    "2": 3276,
+    "6": 364,
+    "8": 273
+  },
+  "coordinate_count": 78,
+  "correspondence": {
+    "binary_nullity": 14,
+    "binary_rank": 77,
+    "connected": true,
+    "definition": "stabilizer_intersection_order_8",
+    "edge_count": 273,
+    "edge_stabilizer_order": 8,
+    "edge_stabilizer_order_profile": {
+      "1": 1,
+      "2": 5,
+      "4": 2
+    },
+    "generated_group_order": 2184,
+    "girth": 12,
+    "left_degrees": {
+      "3": 91
+    },
+    "right_degrees": {
+      "3": 91
+    },
+    "same_side_common_neighbor_pair_counts": {
+      "0": 3822,
+      "1": 273
+    }
+  },
+  "families": {
+    "octahedral": {
+      "count": 91,
+      "stabilizer": "S4",
+      "support_size": 12
+    },
+    "toric_r5": {
+      "count": 91,
+      "stabilizer": "D24",
+      "support_size": 12
+    }
+  },
+  "field_order": 13,
+  "group_order": 2184,
+  "identities": {
+    "common_gram_relation_rho": 9,
+    "each_adjacent_support_intersection_size": 4,
+    "octahedral_is_xor_of_three_toric_neighbors": true,
+    "toric_is_xor_of_three_octahedral_neighbors": true
+  },
+  "schema": "c682-paper-iv-octahedral-toric-correspondence-v1",
+  "trusted_inputs": [
+    "papers/q13-passant-code/verification/verify_minimum_geometry.py"
+  ]
+}
