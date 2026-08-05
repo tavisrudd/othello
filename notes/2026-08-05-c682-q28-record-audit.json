@@ -1,0 +1,78 @@
+{
+  "e7_css_comparison": {
+    "coordinate_transitive": true,
+    "minimum_logical_support_count": 315,
+    "minimum_support_point_degree": 45,
+    "parameters": [
+      28,
+      14,
+      4
+    ],
+    "public_record_is_not_monomially_equivalent_to_a_coordinate_transitive_phase_lift": true,
+    "same_minimum_support_incidence_structure": false
+  },
+  "public_quantum_code": {
+    "coordinate_transitive": false,
+    "displayed_subfield_subcode_dimension": 0,
+    "gf4_stabilizer_dimension": 7,
+    "hermitian_self_orthogonal": true,
+    "minimum_logical_support_count": 504,
+    "minimum_logical_word_count": 1512,
+    "minimum_support_pair_degree_distribution": {
+      "10": 28,
+      "11": 35,
+      "12": 84,
+      "13": 63,
+      "14": 49,
+      "15": 42,
+      "16": 35,
+      "17": 14,
+      "18": 14,
+      "19": 7,
+      "7": 7
+    },
+    "minimum_support_point_degree_distribution": {
+      "82": 7,
+      "86": 7,
+      "94": 7,
+      "98": 7
+    },
+    "order_7_support_automorphism": true,
+    "parameters": [
+      28,
+      14,
+      5
+    ],
+    "pure": true,
+    "stabilizer_weight_enumerator": {
+      "0": 1,
+      "16": 756,
+      "18": 2394,
+      "20": 4725,
+      "22": 5292,
+      "24": 2835,
+      "26": 378,
+      "28": 3
+    },
+    "trace_code_dimension": 14,
+    "trace_weight_enumerator": {
+      "0": 1,
+      "10": 1708,
+      "12": 3759,
+      "14": 4706,
+      "16": 3759,
+      "18": 1708,
+      "20": 329,
+      "22": 35,
+      "24": 7,
+      "28": 1,
+      "4": 7,
+      "6": 35,
+      "8": 329
+    }
+  },
+  "source": {
+    "frozen_matrix_sha256": "57bcf6b3daabcd46f6ae0a8658952096e90f9f1e04d982aedd4f166a2e2b8f50",
+    "url": "https://www.markus-grassl.de/QECC/circuits/28_14_5.html"
+  }
+}

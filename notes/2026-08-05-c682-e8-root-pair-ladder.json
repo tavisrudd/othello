@@ -1,0 +1,57 @@
+{
+  "e8_code": {
+    "carrier": "120 nonsingular vectors of O_8^+(2), equivalently E8 root pairs",
+    "css_parameters": [
+      120,
+      102,
+      4
+    ],
+    "dual_parameters": [
+      120,
+      111,
+      4
+    ],
+    "dual_tetrad_count": 32130,
+    "minimum_shell_design": "2-(120,56,55)",
+    "minimum_shell_size": 255,
+    "parameters": [
+      120,
+      9,
+      56
+    ],
+    "self_orthogonal": true,
+    "weight_enumerator": {
+      "0": 1,
+      "120": 1,
+      "56": 255,
+      "64": 255
+    }
+  },
+  "input_sha256": {
+    "2026-08-04-c682-e7-bitangent-extension.py": "7b3e03db2bd6d4a9bc1311e56b9c5090ac9cab025568569fcb6b1906cdd2be35"
+  },
+  "root_link_fold": {
+    "all_roots_checked": 120,
+    "antipodal_pair_count": 28,
+    "exact_affine_quadric_code_equality": true,
+    "fixed_alpha": 17,
+    "neighbor_slice_size": 56,
+    "parameters": [
+      28,
+      7,
+      12
+    ],
+    "quotient_zero_set_size": 28,
+    "weight_enumerator": {
+      "0": 1,
+      "12": 63,
+      "16": 63,
+      "28": 1
+    }
+  },
+  "series_ladder": [
+    "E8 [120,9,56] root-pair code",
+    "E7 [28,7,12] bitangent code by root-link antipodal fold",
+    "E6 [27,6,12] tritangent code by shortening"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "best_remaining_weight4_supports": 19,
+  "claim_boundary": "not an impossibility theorem",
+  "dependent_weight4_counts": [
+    78,
+    31,
+    114,
+    56,
+    59,
+    19
+  ],
+  "iterations": 6,
+  "local_blocking_clauses": 357,
+  "status": "bounded_cutting_plane_negative_only"
+}

@@ -128,6 +128,23 @@ cannot reach five because its opposite seven-space cannot contain all 315
 tetrads.  A signed 56-weight/Freudenthal phase lift over \(\mathbf F_4\) is
 the correct next quantum test.
 
+The next level is exact too.  The 120 nonsingular vectors of the plus-type
+eight-dimensional quadratic space, equivalently the 120 antipodal \(E_8\)
+root pairs, carry
+\[
+ [120,9,56]_2,\qquad 1+255z^{56}+255z^{64}+z^{120},
+\]
+at the exact unrestricted \([120,9]\) optimum.  Fixing a root and folding its
+56 nonsingular neighbors by \(u\leftrightarrow u+\alpha\) gives the 28
+decompositions of that root and exactly the \(E_7\) bitangent code.  Hence the
+finite exceptional bridge is now
+\[
+ E_8:[120,9,56]\longrightarrow
+ E_7:[28,7,12]\longrightarrow
+ E_6:[27,6,12].
+\]
+The first arrow is a root-link antipodal fold; the second is shortening.
+
 Separately, the projective-column completion of \([91,15,28]_2\) has failed
 its first exact record gate.  An integer Farkas certificate rules out even a
 fractional 49-column completion to \([140,15,60]_2\) after checking all 32767

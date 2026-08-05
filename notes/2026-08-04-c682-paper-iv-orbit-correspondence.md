@@ -714,6 +714,29 @@ nonzero words and cannot absorb all 315 tetrads.  The correct quantum attack
 is a signed \(\mathbf F_4\)/Pauli phase lift on the 56 antipodal \(E_7\)
 weights, not another unsigned CSS incidence construction.
 
+The natural \(E_8\) level is the 120-root-pair quadric, not the
+81-coordinate bracket support.  Affine functions on the 120 nonsingular
+vectors of \(O_8^+(2)\) give the unrestricted-optimal
+\[
+ \boxed{[120,9,56]_2},\qquad
+ 1+255z^{56}+255z^{64}+z^{120}.
+\]
+Fixing a root \(\alpha\) leaves 56 nonsingular neighbors with
+\(B(\alpha,u)=1\).  The involution \(u\mapsto u+\alpha\) folds them into the
+28 decompositions of \(\alpha\).  Codewords constant on these pairs descend
+exactly to the \(E_7\) bitangent code.  All 120 root choices were checked:
+\[
+ [120,9,56]_{E_8}
+ \xrightarrow{\text{root link + antipodal fold}}
+ [28,7,12]_{E_7}
+ \xrightarrow{\text{shorten}}
+ [27,6,12]_{E_6}.
+\]
+Thus every displayed level is unrestricted distance-optimal.  The \(E_8\)
+point is not dimension-maximal at 56 because a \([120,10,56]\) code exists,
+but the full root-pair symmetry and exact residue ladder are additional
+structure.
+
 Under \(E_6\times A_2\subset E_8\),
 
 \[
@@ -772,9 +795,10 @@ whether the bad-prime fibre is merely torsion or a useful higher-alphabet
 code.  This has a better chance of producing an unusual finite code than any
 further binary puncturing or Plotkin product of the present codes.
 
-The SOTA forecast is consequently layered.  The \([27,6,12]_2\) code is
-the shortening of the unrestricted-optimal and dimension-maximal
-\([28,7,12]_2\) \(E_7\) code.  The \([91,15,28]_2\) code is exact SOTA only
+The SOTA forecast is consequently layered.  The unrestricted-optimal
+\([120,9,56]_{E_8}\) root-pair code folds to the unrestricted-optimal and
+dimension-maximal \([28,7,12]_{E_7}\) code, which shortens to
+\([27,6,12]_{E_6}\).  The \([91,15,28]_2\) code is exact SOTA only
 in its full seven-orbital cross-commutant, and
 \([81,8,36]_2\) misses the unrestricted optimum by two.  The most plausible
 next exceptional improvement is the signed \(\operatorname{ad}_z\)
@@ -1300,6 +1324,10 @@ python3 notes/2026-08-04-c682-e6-e8-code-ladder.py --check
 sha256sum -c notes/2026-08-04-c682-e6-e8-code-ladder.sha256
 python3 notes/2026-08-04-c682-e7-bitangent-extension.py --check
 sha256sum -c notes/2026-08-04-c682-e7-bitangent-extension.sha256
+python3 notes/2026-08-05-c682-e8-root-pair-ladder.py --check
+sha256sum -c notes/2026-08-05-c682-e8-root-pair-ladder.sha256
+python3 notes/2026-08-05-c682-q28-record-audit.py --check
+sha256sum -c notes/2026-08-05-c682-q28-record-audit.sha256
 python3 notes/2026-08-04-paper-iv-column-extension-obstruction.py --check
 sha256sum -c notes/2026-08-04-paper-iv-column-extension-obstruction.sha256
 ```
@@ -1377,6 +1405,9 @@ claims still depend on exhaustive computation.
   coordinate gives the exact \(E_6\) code.  Its Steiner minimum shell recovers
   the symplectic geometry, and its 315 dual tetrads explain the CSS distance-4
   ceiling at fixed \([[28,14]]\).
+- **Settled — full finite exceptional ladder.**  The optimal
+  \([120,9,56]_{E_8}\) root-pair code folds through every root link to the
+  \(E_7\) code, giving an exact optimal \(E_8\to E_7\to E_6\) chain.
 - **Open — conceptual distance proof.**  The values 28 and 204 are certified
   by exhaustive Gray enumeration and disjoint-information-set enumeration,
   respectively.  A Hecke-module, design, or local-combinatorial proof is

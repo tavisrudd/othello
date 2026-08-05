@@ -341,6 +341,13 @@ explicitly separated.
   CSS \([[28,14,4]]\); those tetrads prove that no fixed-rate CSS construction
   retaining the \(E_7\) half can attain distance five.  The signed 56-weight
   \(\mathbf F_4\) phase lift is the next finite quantum gate.
+- The full finite exceptional ladder is now exact.  Affine functions on the
+  120 nonsingular vectors of \(O_8^+(2)\), equivalently \(E_8\) root pairs,
+  give the unrestricted-optimal \([120,9,56]_2\) code.  Fixing any root,
+  restricting to its 56 nonsingular neighbors, and folding
+  \(u\leftrightarrow u+\alpha\) gives exactly the \(E_7\) bitangent code.
+  Thus \(E_8:[120,9,56]\to E_7:[28,7,12]\to E_6:[27,6,12]\) is an exact
+  optimal ladder.
 - Standard propagation constructions from \([91,15,28]_2\) are far below
   current unrestricted tables.  The one credible record attempt is a
   projective-system column completion: first test \([140,15,60]_2\), then
