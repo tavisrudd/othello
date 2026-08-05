@@ -2726,8 +2726,17 @@
       "last": 869,
       "purpose": "literature and novelty audit of the Paper IV orbit-correspondence and higher-shell findings",
       "sequence": 303
+    },
+    {
+      "count": 1,
+      "first": 870,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 870,
+      "purpose": "fold tower at general rank: priority judo on the Calderbank-Kantor concession",
+      "sequence": 304
     }
   ],
-  "next_id": 870,
+  "next_id": 871,
   "schema": "codex-task-id-allocations-v1"
 }

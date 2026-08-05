@@ -1,0 +1,180 @@
+{
+  "consequence": "the two-weight codes catalogued by Calderbank and Kantor are the objects of this tower and the fold is its structure map; the exceptional instances are corollaries of the general statement rather than separate constructions",
+  "exceptional_labels": {
+    "10": "E10 overextended",
+    "4": "below the exceptional range",
+    "6": "E7 bitangents",
+    "8": "E8 root pairs"
+  },
+  "input_sha256": {
+    "2026-08-05-c867-ladder-record-attack.py": "94b0d443d1826f68e261fe664e958e75a1867841d7fb5bea9da0cb17d610f534"
+  },
+  "levels": {
+    "10": {
+      "code": {
+        "parameters": [
+          496,
+          11,
+          240
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "240": 1023,
+          "256": 1023,
+          "496": 1
+        }
+      },
+      "folded": {
+        "parameters": [
+          120,
+          9,
+          56
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "120": 1,
+          "56": 255,
+          "64": 255
+        }
+      },
+      "link_size": 240,
+      "rank": 10
+    },
+    "4": {
+      "code": {
+        "parameters": [
+          6,
+          5,
+          2
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "2": 15,
+          "4": 15,
+          "6": 1
+        }
+      },
+      "folded": {
+        "parameters": [
+          1,
+          1,
+          1
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "1": 1
+        }
+      },
+      "link_size": 2,
+      "rank": 4
+    },
+    "6": {
+      "code": {
+        "parameters": [
+          28,
+          7,
+          12
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "12": 63,
+          "16": 63,
+          "28": 1
+        }
+      },
+      "folded": {
+        "parameters": [
+          6,
+          5,
+          2
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "2": 15,
+          "4": 15,
+          "6": 1
+        }
+      },
+      "link_size": 12,
+      "rank": 6
+    },
+    "8": {
+      "code": {
+        "parameters": [
+          120,
+          9,
+          56
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "120": 1,
+          "56": 255,
+          "64": 255
+        }
+      },
+      "folded": {
+        "parameters": [
+          28,
+          7,
+          12
+        ],
+        "weight_enumerator": {
+          "0": 1,
+          "12": 63,
+          "16": 63,
+          "28": 1
+        }
+      },
+      "link_size": 56,
+      "rank": 8
+    }
+  },
+  "statement": "for every l >= 3, the root-link antipodal fold carries the affine code of the rank-2l plus-type quadric onto the affine code of the rank-2(l-1) plus-type quadric; the exceptional ladder is the bottom of this tower",
+  "steps": [
+    {
+      "folded_parameters": [
+        6,
+        5,
+        2
+      ],
+      "from_rank": 6,
+      "identical": true,
+      "target_parameters": [
+        6,
+        5,
+        2
+      ],
+      "to_rank": 4
+    },
+    {
+      "folded_parameters": [
+        28,
+        7,
+        12
+      ],
+      "from_rank": 8,
+      "identical": true,
+      "target_parameters": [
+        28,
+        7,
+        12
+      ],
+      "to_rank": 6
+    },
+    {
+      "folded_parameters": [
+        120,
+        9,
+        56
+      ],
+      "from_rank": 10,
+      "identical": true,
+      "target_parameters": [
+        120,
+        9,
+        56
+      ],
+      "to_rank": 8
+    }
+  ]
+}
