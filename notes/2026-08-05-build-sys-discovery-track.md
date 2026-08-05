@@ -25,3 +25,22 @@ during the order-25 extraction; doing it after means regenerating the leaves twi
 data.
 **Status:** open lead.  Not acted on: these are another owner's generated sources, and hand-editing
 generated output to repair its prose is exactly what the workspace rules forbid.
+
+### 2026-08-05 — the banner repair is already happening at extraction time
+
+**Provenance:** the portfolio audit's diff of the order-25 candidate package against the monorepo.
+**Was I looking for this?:** no — the audit question was whether any root holds a stale certificate
+shadow.
+**Observed:** the order-25 candidate has already rewritten every generated banner, dropping the task
+identifier from the heading and repathing the generator from the internal notes directory to a
+package-local `scripts/` path.  This is the repair the earlier entry above predicted would be
+self-repairing at externalization, now confirmed on 9,500 files.
+**Why it may matter:** it settles the open question in that entry — the generator relocation does not
+need to precede the extraction, because the extraction is where it naturally happens.  What it
+raises instead is a declaration question, since a transformation of that size has to be recorded in
+the package's provenance to stay distinguishable from corruption.  That part is task work and is in
+the portfolio audit report, not here.
+**Evidence:** CHECKED — read from the diff of a line-mask data file and confirmed uniform across the
+family.
+**Status:** open lead, narrowed: the remaining question is whether the families that have not been
+extracted yet should be left with their current banners until their own cut.

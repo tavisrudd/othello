@@ -244,6 +244,13 @@ commit a self-contained official source state.
    `lean/`, paper trees, standalone mirrors, every `~/src/lean` checkout, registered worktrees,
    backup checkouts, and current build artifacts.  Classify each finding as semantic API, official
    certificate payload, stale shadow, unrelated generated scholarly data, or false positive.
+   The Lean-source half is done through `lean/scripts/lean-certificate-portfolio-audit.py`: no stale
+   shadow survives in any paper mirror or backup working tree, the order-25 candidate rewrites every
+   generated banner in a transformation that is correct but undeclared, the two projective-cap
+   candidates hold no payload at all, and three unclassified generated modules have already
+   propagated into the base and into a published paper export.  Report:
+   `notes/2026-08-05-c864-certificate-portfolio-audit.md`.  Still to sweep: current build artifacts,
+   and generated non-Lean payload such as data files and replay outputs.
 7. Remove every stale shadow after byte identity and authority are established.  Never delete the
    sole current copy, foreign dirty work, or an uncommitted candidate without first preserving it
    in its official repository.

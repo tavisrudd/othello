@@ -88,7 +88,10 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   package that will own it; it is empty only when the externalization is complete.
 - `lean-package-source-audit.py`: read-only comparison of a package's sealed sources against the
   monorepo revision they came from, the current tree, and the pinned base.  Runs no Lean, takes no
-  lock, so it is valid while another lane holds the tree.
+  lock, so it is valid while another lane holds the tree.  It iterates the package's sources, so it
+  cannot yet report authority files the package lacks.
+- `lean-certificate-portfolio-audit.py`: read-only sweep of any set of working roots for generated
+  Lean families, recognizing a generated source by its naming of its own generator.
 - `paper-facts.py`: per-manuscript facts from tracked bytes, plus `audit`/`check`. Runs no Lake,
   LaTeX, or BibTeX.
 - `lean-companion-export.py`: `plan`/`run` for companion export onto the canonical `finitegeom`
