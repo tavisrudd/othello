@@ -1019,7 +1019,9 @@ coverage_rule = "closure"
 # three of its secants, the chord-matching dictionary and one-factorization that count the equality
 # case, the hexagonal order and golden normal form it produces, and the identification of an
 # order-eleven six-arc attaining the bound with the displayed witness.  The first and last of these
-# are the two statements the order-eleven certificate package consumes.
+# are the two statements the order-eleven certificate package consumes.  It is exported as its own
+# companion boundary rather than through the orientation spine above: the two share no module and
+# no terminal, and the downstream package pins only this one.
 [[gate]]
 module = "RelativeConicArcs.SixArcConcurrenceSpine"
 terminals = [

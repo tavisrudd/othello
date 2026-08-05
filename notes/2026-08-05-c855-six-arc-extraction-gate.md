@@ -70,7 +70,44 @@ and the last four import the `Q11Dye`/`Clebsch` trees whose naming and packaging
 with the order-eleven certificate package.  They are left as undeclared reachability errors rather
 than covered by a declared exclusion, so they stay visible.
 
-No export configuration was written.  `lean/trust/export/` holds one configuration per companion
-boundary, and each carries release prose for a public statement; choosing between a new boundary for
-this development and widening the existing golden-orientation boundary is a release decision that
-the package re-pin should make.
+## The export boundary, and why it is its own
+
+`lean/trust/export/clebsch_six_arc_concurrence.toml` gives the gate a companion boundary of its own
+rather than adding it to the golden-orientation boundary of the Clebsch support cubic.  Three
+reasons, in the order they decided it.
+
+The orientation boundary's published correspondence text states that that companion does not prove
+the ten-point bound or the equality classification.  Widening it would mean editing what an already
+exported and manuscript-pinned boundary claims, which is a heavier act than publishing a second
+boundary beside it.
+
+Each export configuration names exactly one gate and derives its closure, terminal list, and axiom
+audit from that gate.  Widening therefore means either repointing the orientation configuration at a
+different gate, which changes that boundary's identity anyway, or importing the six-arc modules into
+`SupportOrientationSpine`, which fuses two developments that share no declaration: plane incidence
+geometry of six points and their fifteen chords on one side, the antipodal cover, determinant
+pencil, and singular locus of a cubic threefold on the other.
+
+The consumer is the order-eleven certificate package, which pins the base library by commit and
+manifest digest.  A boundary carrying exactly the concurrence development lets that package pin what
+it consumes, and makes its re-pin show the two axioms being replaced by the theorems that displace
+them.
+
+The configuration's `plan` mode loads, validates the area name and gate, and passes the private-
+reference audit on all its prose; it stops exactly at the missing facts artifact, so the
+configuration is checked as far as the extraction gap allows.
+
+Both configurations now describe the split.  The orientation configuration's correspondence text
+names the six-arc boundary as the place the bound and classification are proved, so the two must be
+exported in the same round for the base library to be self-consistent: adopting only the six-arc
+boundary would leave the orientation statement in the base still disclaiming results that the base
+then carries.
+
+## What the base library and the package still need
+
+The base library `finitegeom` carries `RelativeConicArcs.Q11DyeAxioms` as a human module stating the
+two order-eleven consequences as explicit axioms, and `trust/CLEBSCH_RIGIDITY_HUMAN.md` documents it
+that way.  The exported closure here does not include that module: it supplies the general theorems
+the specializations need.  Replacing the base's axioms by proofs, and correcting the two base
+documents that describe them as cited external inputs, is forward work in the base under the package
+re-pin, not part of this export.

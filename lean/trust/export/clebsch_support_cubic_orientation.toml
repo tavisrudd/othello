@@ -36,11 +36,18 @@ two conditional on the explicit classical splitting interface named in the
 exported spine module.
 
 The companion does not prove the deep-hole syndrome classification, the
-code--arc dictionary, the decoder stratification, the ten-point Brianchon
-bound and its equality classification, or the small-arc exclusions.  Those
-results are established in the accompanying paper by ordinary mathematical
-proof, cited literature, or exact certificate computation, and the generated
-finite tables supporting them are distributed separately.
+code--arc dictionary, the decoder stratification, or the small-arc exclusions.
+Those results are established in the accompanying paper by ordinary
+mathematical proof, cited literature, or exact certificate computation, and the
+generated finite tables supporting them are distributed separately.
+
+The ten-point bound on the triple-concurrence points of a six-arc and the
+classification of the arcs attaining it are also outside this boundary.  They
+are proved in the separate six-arc concurrence boundary distributed alongside
+it, which shares no module and no terminal with this one: that development is
+plane incidence geometry of six points and their fifteen chords, while this one
+concerns the antipodal cover, determinant pencil, and singular locus of a cubic
+threefold.
 """
 
 boundary = """

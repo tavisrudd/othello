@@ -36,6 +36,13 @@ doi:10.1112/jlms/s2-44.2.270: the ten-point count in Section 2.2, page 275, and 
 of the arcs attaining it in Theorem 1(ii), page 275.  That paper is the cited antecedent; the
 proofs collected here are the ones checked in this repository and import no claim from it.
 
+The development stands on its own.  It shares no declaration with the orientation spine
+`RelativeConicArcs.SupportOrientationSpine`, which treats the antipodal cover, determinant pencil,
+and singular locus of the support cubic; neither uses the other, and the two are distributed as
+separate companion boundaries.  The order-eleven module `RelativeConicArcs.Q11DyeAxioms` records
+the two endpoints below, specialized to order eleven, and derives them from the terminals collected
+here.
+
 Every terminal below is a kernel proof.  The general statements quantify over an arbitrary field
 with two invertible, or over an arbitrary finite point type with the incidence hypotheses named in
 their statements; only the order-eleven identification fixes a field.  The closure contains no

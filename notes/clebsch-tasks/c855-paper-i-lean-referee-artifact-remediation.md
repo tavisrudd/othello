@@ -224,11 +224,14 @@ package: every file in the published transitive closure is in scope.
   concurrence bound, the chord-matching and one-factorization combinatorics, the
   golden normal form, and the order-eleven identification; the area registry declares
   it as a gate with eleven terminals, and its closure covers ten previously unreached
-  modules. Its facts artifact is still missing: extraction refuses while another lane's
-  uncommitted Lean work is in the worktree, so the eleven declared axiom sets are
-  unconfirmed and the export configuration for this boundary is a separate release
-  decision. Seven consumer modules of the wider order-eleven rigidity development
-  remain reached by no unit. Report:
+  modules. `lean/trust/export/clebsch_six_arc_concurrence.toml` gives it a companion
+  boundary of its own, separate from the golden-orientation boundary, whose
+  correspondence text now names it as the place the bound and the classification are
+  proved; the two must be exported in the same round. Its facts artifact is still
+  missing: extraction refuses while another lane's uncommitted Lean work is in the
+  worktree, so the eleven declared axiom sets are unconfirmed and the export `plan`
+  stops at that gap. Seven consumer modules of the wider order-eleven rigidity
+  development remain reached by no unit. Report:
   `notes/2026-08-05-c855-six-arc-extraction-gate.md`.
 
 ### 4. Document every scholarly declaration
