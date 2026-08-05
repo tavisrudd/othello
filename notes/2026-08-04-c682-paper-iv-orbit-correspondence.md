@@ -499,6 +499,116 @@ The resulting safe algorithmic statement for Paper IV is:
 > explicit support data; the hidden code module is recoverable by sparse
 > two-step transition algebra.
 
+## Computer-science and statistical formulations
+
+The transition is simultaneously a sparse constraint system and a finite
+information channel.  These are literal reformulations of the exact matrices,
+not analogies.
+
+### Tanner code and linear constraint system
+
+For one of the seventy-eight coordinates, write
+\(x,y\in\mathbf F_2^{91}\) for its two frame columns.  The paired atlas is the
+kernel of
+
+\[
+ H=\begin{pmatrix}I&C\\ C^{\mathsf T}&I\end{pmatrix},
+ \qquad
+ H\binom{x}{y}=0.
+\]
+
+Every row of \(H\) has weight four.  Its solution space is therefore an
+actual binary Tanner code with parameters \([182,37,d]_2\), where the minimum
+distance \(d\) remains unknown.  The constant solution is one dimension and
+the complementary thirty-six-dimensional constituent is the Paper-IV code
+module.  Syndrome computation takes \(\Theta(E)\) bit operations in the
+sparse model.  A positive local-soundness inequality
+
+\[
+ |\operatorname{supp}(Hz)|
+ \geq \alpha\,\operatorname{dist}(z,\ker H)
+\]
+
+would promote the presentation to a locally testable code and provide a
+precise target for iterative or expander-style decoding.
+
+The more general minimum-support atlas also gives a finite-group
+synchronization problem: local frames propagated along a spanning tree are
+checked by cycle holonomies, while the residual Pauli or orientation character
+is a genuine gauge ambiguity invisible to the linear transition data.
+
+### The frame channel
+
+Over the real numbers put \(P=C/3\).  This is a discrete memoryless channel:
+an octahedral frame outputs one of its three adjacent toric frames uniformly.
+Transitivity and cubic biregularity make it weakly symmetric, so its capacity
+is
+
+\[
+ \operatorname{Cap}(P)
+ =\log_2 91-\log_2 3
+ =\log_2(91/3).
+\]
+
+Equivalently, the uniform distribution on the 273 edges is a coupling of the
+uniform measures on the two frame spaces and has mutual information
+\(\log_2(91/3)\).  The rational rank of \(C\) is exactly seventy-seven, so the
+channel has a fourteen-dimensional space of real input contrasts that are
+completely invisible at the output.
+
+At the uniform distribution, the Fisher metric on the probability simplex is
+a scaled Euclidean metric.  The derivative of the channel is multiplication
+by \(P\), hence the singular values of \(P\) are exactly the local
+Fisher-information retention factors.  This makes the unidentified
+fourteen-dimensional rational kernel a statistical tangent-space obstruction,
+independently of its still-unresolved representation-theoretic meaning.
+
+The analogous Paper-II matching-to-chord channel erases precisely the
+one-dimensional sheet-sign contrast: each chord occurs once in each
+\(\operatorname{PSL}_2(7)\)-sheet, so the two uniform sheet distributions
+have identical chord output.  Its channel capacity is
+\(\log_2(28/4)=\log_2 7\).  Thus Paper II's strength-two trade is exactly a
+nonidentifiable statistical contrast, while Paper IV has a balanced
+fourteen-dimensional contrast kernel.
+
+### Ordinary moments versus binary Gram data
+
+The common Gram identity is characteristic-two and must not be described as
+equality of ordinary covariance matrices.  The exact integer diagonal counts
+are fourteen in both families, but their off-diagonal co-occurrence profiles
+are
+
+\[
+\begin{array}{c|ccc}
+ &0&2&5\\ \hline
+ \mathcal O&819&1638&546
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+ &0&2&3\\ \hline
+ \mathcal T_5&273&2184&546.
+\end{array}
+\]
+
+Every entrywise difference is even, which is why the two Grams agree over
+\(\mathbf F_2\).  Statistically, the two uniform support models have the same
+one-coordinate marginals but are distinguishable by labelled pair
+co-occurrences.  What collides is their complete-orbit quadratic parity
+sketch, not their real second moment.
+
+Finally, the integer kernel lattice \(\ker_{\mathbf Z}C\) defines the toric
+ideal of the channel design matrix.  Its circuits and Markov basis would give
+the elementary moves between latent frame counts with the same observed
+image.  Computing that basis is a concrete algebraic-statistics route to the
+fourteen-dimensional kernel, but no identification is asserted here.
+
+The dual-number module supplies a separate, genuinely infinitesimal
+structure: \(\mathbf F_8[\varepsilon]/(\varepsilon^2)\) represents a
+first-order tangent thickening and is the algebra used by forward-mode
+automatic differentiation.  It does not yet carry a Fisher metric or a
+probability model, so the safe conclusion is an algebraic tangent object,
+not a statistical-manifold identification.
+
 ## Evidence and replay
 
 The committed checker constructs the two \(G\)-orbits from Paper IV's tracked
@@ -554,3 +664,6 @@ paper promotion.
 9. Decide whether the transition can be recovered in subquadratic time from
    the unlabelled minimum-support hypergraph, without first supplying the
    reconstructed \(G\)-action.
+10. Compute the exact real singular spectrum, Smith normal form, and integer
+    Markov basis of \(C\); these respectively control information contraction,
+    characteristic dependence, and the algebraic-statistical fibres.

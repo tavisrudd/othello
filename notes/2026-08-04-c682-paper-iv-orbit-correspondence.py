@@ -7,6 +7,7 @@ import argparse
 import importlib.util
 import json
 from collections import Counter, deque
+from fractions import Fraction
 from pathlib import Path
 
 
@@ -71,6 +72,42 @@ def gram_rows(support_rows, size):
             answer[bit.bit_length() - 1] ^= support
             row ^= bit
     return answer
+
+
+def integer_gram(supports, point_index, size):
+    answer = [[0] * size for _ in range(size)]
+    for support in supports:
+        indices = [point_index[point] for point in support]
+        for i in indices:
+            for j in indices:
+                answer[i][j] += 1
+    return answer
+
+
+def rational_rank(matrix):
+    work = [[Fraction(value) for value in row] for row in matrix]
+    row_count = len(work)
+    column_count = len(work[0])
+    rank = 0
+    for column in range(column_count):
+        pivot = next(
+            (row for row in range(rank, row_count) if work[row][column]),
+            None,
+        )
+        if pivot is None:
+            continue
+        work[rank], work[pivot] = work[pivot], work[rank]
+        scale = work[rank][column]
+        for j in range(column, column_count):
+            work[rank][j] /= scale
+        for row in range(rank + 1, row_count):
+            if not work[row][column]:
+                continue
+            scale = work[row][column]
+            for j in range(column, column_count):
+                work[row][j] -= scale * work[rank][j]
+        rank += 1
+    return rank
 
 
 def graph_girth(left_rows):
@@ -155,6 +192,11 @@ def compute():
             for row in correspondence_transpose] == toric_rows
 
     rank = module.binary_rank(correspondence)
+    rational_correspondence = [
+        [int(row >> j & 1) for j in range(91)] for row in correspondence
+    ]
+    rational_correspondence_rank = rational_rank(rational_correspondence)
+    assert rational_correspondence_rank == 77
     girth, adjacency = graph_girth(correspondence)
     seen = {0}
     queue = deque([0])
@@ -171,6 +213,32 @@ def compute():
         for j in range(i + 1, 91):
             common_neighbor_counts[(correspondence[i] & correspondence[j]).bit_count()] += 1
     assert common_neighbor_counts == {0: 3822, 1: 273}
+
+    octahedral_integer_gram = integer_gram(octahedral, point_index, 78)
+    toric_integer_gram = integer_gram(toric_five, point_index, 78)
+    octahedral_diagonal_profile = Counter(
+        octahedral_integer_gram[i][i] for i in range(78)
+    )
+    toric_diagonal_profile = Counter(toric_integer_gram[i][i] for i in range(78))
+    octahedral_off_diagonal_profile = Counter(
+        octahedral_integer_gram[i][j]
+        for i in range(78)
+        for j in range(i + 1, 78)
+    )
+    toric_off_diagonal_profile = Counter(
+        toric_integer_gram[i][j]
+        for i in range(78)
+        for j in range(i + 1, 78)
+    )
+    integer_gram_difference_profile = Counter(
+        octahedral_integer_gram[i][j] - toric_integer_gram[i][j]
+        for i in range(78)
+        for j in range(i + 1, 78)
+    )
+    assert octahedral_diagonal_profile == toric_diagonal_profile == {14: 78}
+    assert octahedral_off_diagonal_profile == {0: 819, 2: 1638, 5: 546}
+    assert toric_off_diagonal_profile == {0: 273, 2: 2184, 3: 546}
+    assert integer_gram_difference_profile == {-2: 546, 0: 1911, 2: 546}
 
     toric_chords = []
     for subgroup in toric_stabilizers:
@@ -299,7 +367,7 @@ def compute():
     assert len(generated) == 2184
 
     return {
-        "schema": "c682-paper-iv-octahedral-toric-correspondence-v1",
+        "schema": "c682-paper-iv-octahedral-toric-correspondence-v2",
         "field_order": 13,
         "group_order": len(group),
         "coordinate_count": len(points),
@@ -319,6 +387,8 @@ def compute():
             "girth": girth,
             "binary_rank": rank,
             "binary_nullity": 91 - rank,
+            "rational_rank": rational_correspondence_rank,
+            "rational_nullity": 91 - rational_correspondence_rank,
             "same_side_common_neighbor_pair_counts": dict(sorted(common_neighbor_counts.items())),
             "toric_chord_endpoint_incidence_rank": endpoint_rank,
             "toric_chord_endpoint_image_rank": endpoint_image_rank,
@@ -331,6 +401,27 @@ def compute():
             "toric_is_xor_of_three_octahedral_neighbors": True,
             "each_adjacent_support_intersection_size": 4,
             "common_gram_relation_rho": 9,
+        },
+        "ordinary_moment_comparison": {
+            "integer_grams_equal": False,
+            "common_diagonal_profile": dict(sorted(octahedral_diagonal_profile.items())),
+            "octahedral_off_diagonal_profile": dict(
+                sorted(octahedral_off_diagonal_profile.items())
+            ),
+            "toric_off_diagonal_profile": dict(
+                sorted(toric_off_diagonal_profile.items())
+            ),
+            "octahedral_minus_toric_off_diagonal_profile": dict(
+                sorted(integer_gram_difference_profile.items())
+            ),
+            "all_integer_gram_differences_even": True,
+        },
+        "information_channel": {
+            "transition": "C/3",
+            "input_size": 91,
+            "output_size": 91,
+            "row_support_size": 3,
+            "capacity_bits": "log2(91/3)",
         },
         "hidden_F8_module": {
             "dimension_over_F8": 12,

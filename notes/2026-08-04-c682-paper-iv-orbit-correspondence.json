@@ -23,6 +23,8 @@
     "left_degrees": {
       "3": 91
     },
+    "rational_nullity": 14,
+    "rational_rank": 77,
     "right_degrees": {
       "3": 91
     },
@@ -65,7 +67,36 @@
     "octahedral_is_xor_of_three_toric_neighbors": true,
     "toric_is_xor_of_three_octahedral_neighbors": true
   },
-  "schema": "c682-paper-iv-octahedral-toric-correspondence-v1",
+  "information_channel": {
+    "capacity_bits": "log2(91/3)",
+    "input_size": 91,
+    "output_size": 91,
+    "row_support_size": 3,
+    "transition": "C/3"
+  },
+  "ordinary_moment_comparison": {
+    "all_integer_gram_differences_even": true,
+    "common_diagonal_profile": {
+      "14": 78
+    },
+    "integer_grams_equal": false,
+    "octahedral_minus_toric_off_diagonal_profile": {
+      "-2": 546,
+      "0": 1911,
+      "2": 546
+    },
+    "octahedral_off_diagonal_profile": {
+      "0": 819,
+      "2": 1638,
+      "5": 546
+    },
+    "toric_off_diagonal_profile": {
+      "0": 273,
+      "2": 2184,
+      "3": 546
+    }
+  },
+  "schema": "c682-paper-iv-octahedral-toric-correspondence-v2",
   "trusted_inputs": [
     "papers/q13-passant-code/verification/verify_minimum_geometry.py"
   ]
