@@ -36,16 +36,19 @@
     "RelativeConicArcs.GoldenCommutatorDeterminant.det_conferenceBracket_eq_sixteen_triangleCubic_sq",
     "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq",
     "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic",
-    "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube"
+    "RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube",
+    "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul",
+    "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one"
   ],
   "axiom_report_provenance": {
-    "build_run_id": "run-20260805-225300-ec011d0d",
+    "build_run_id": "run-20260805-230441-d8331aab",
     "gate_stdout": "verification/evidence/gate_stdout/golden_return.stdout.txt",
-    "gate_stdout_sha256": "2ccc8eb85177ed5557e4fb4fa6875e9504aca6890f7139efe1c4c6482caae20c",
+    "gate_stdout_sha256": "e3c66c1d7f291f55eeb63c808d7431f4e203cd6d77d09758022d3e100e58939d",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand."
   },
-  "axiom_report_sha256": "50a7f40c3118ee9e97aa7af2501f36c4d30e31bb2d26b4d94b1c75437ad94959",
+  "axiom_report_sha256": "ea5bf42dab3abcd1bc3a38729d1977e0435e78e07358ddfe89ebbe99bc16be9a",
   "claim_map": {
     "OPER-1": {
       "coverage": "partial mechanism; no full row claim",
@@ -94,9 +97,12 @@
       "declarations": [
         "RelativeConicArcs.ClebschGoldenConference.pairTriangleSum_eq_zero",
         "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
-        "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq"
+        "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq",
+        "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul",
+        "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
+        "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one"
       ],
-      "excluded": "the general cross-block spectrum formula, the closed-walk count, the inclusion-rank descent, the higher-order Ramsey exclusion, and the classical aligned-design consequences remain human arguments"
+      "excluded": "the organization of the fourth trace by the support of a closed four-walk, the inclusion-rank descent, the higher-order Ramsey exclusion, and the classical aligned-design consequences remain human arguments, as does every eigenvalue and singular-value statement.  What is checked is the polynomial core: the cross block of a cut of a matrix squaring to a scalar satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, and the three signed Hamilton-cycle products of any four-set sum to 3 or to -1."
     },
     "OPER-4": {
       "coverage": "partial mechanism; no full row claim",
@@ -112,7 +118,7 @@
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-golden-return-formal-v1",
-  "source_closure_sha256": "ac46410cbb3f64226f3bc5cf653c12f4aa0f2c336217e2664ad97186c70f2407",
+  "source_closure_sha256": "97d0b1fab58a292c916945ef78eeaac40970920c65ac6016ef8e916354a011bf",
   "source_sha256": {
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschGoldenDescent.lean": "f8582958e6c06d9b9d47e6f7fba2d77a3182ec06659d67bd171e76f78e5260ff",
@@ -127,8 +133,9 @@
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
     "RelativeConicArcs/ClebschOuterSegreRelations.lean": "d9d183bc0068da893cbc829f9eec755efb34bd02f72f8b7e0fb071eabc608840",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
+    "RelativeConicArcs/ConferenceCutBlocks.lean": "593e2cee94ec992246eb997d8bd3ce9c6a856335bc7238a2aba7bba657ab86d7",
     "RelativeConicArcs/ConferenceCutSpectrum.lean": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "fa9029625916b53bbf2f2ebcba5122840326cabb8c50ae341e5748fc997ea2bf",
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "d2a9f2a8f21b35786dd35cc4d68dda89eebee5c3658f12c190a286a8ebbd27b9",
     "RelativeConicArcs/GoldenCommutatorDeterminant.lean": "e06a8bb0d4d024aa3b57e5e7166f983d4d887e57473d16922e2f989ba0f78e61",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",

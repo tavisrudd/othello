@@ -4,15 +4,18 @@
     "Mathlib.Data.Fin.VecNotation",
     "Mathlib.Data.Fintype.Card",
     "Mathlib.Data.Matrix.Basic",
+    "Mathlib.Data.Matrix.Block",
     "Mathlib.Data.Matrix.Mul",
     "Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
     "Mathlib.LinearAlgebra.Matrix.Notation",
+    "Mathlib.LinearAlgebra.Matrix.Trace",
     "Mathlib.Tactic.FinCases",
+    "Mathlib.Tactic.LinearCombination",
     "Mathlib.Tactic.NormNum",
     "Mathlib.Tactic.NormNum.NatFactorial",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 19,
+  "module_count": 20,
   "roots": [
     "RelativeConicArcs.Gates.ClebschGoldenReturn"
   ],
@@ -97,16 +100,22 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
+      "bytes": 6735,
+      "module": "RelativeConicArcs.ConferenceCutBlocks",
+      "path": "RelativeConicArcs/ConferenceCutBlocks.lean",
+      "sha256": "593e2cee94ec992246eb997d8bd3ce9c6a856335bc7238a2aba7bba657ab86d7"
+    },
+    {
       "bytes": 1716,
       "module": "RelativeConicArcs.ConferenceCutSpectrum",
       "path": "RelativeConicArcs/ConferenceCutSpectrum.lean",
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 7395,
+      "bytes": 8183,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "fa9029625916b53bbf2f2ebcba5122840326cabb8c50ae341e5748fc997ea2bf"
+      "sha256": "d2a9f2a8f21b35786dd35cc4d68dda89eebee5c3658f12c190a286a8ebbd27b9"
     },
     {
       "bytes": 5731,

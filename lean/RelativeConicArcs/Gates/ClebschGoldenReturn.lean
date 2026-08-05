@@ -7,6 +7,7 @@ import RelativeConicArcs.ClebschOperatorShadows
 import RelativeConicArcs.GoldenCommutatorDeterminant
 import RelativeConicArcs.ClebschOuterSegreRelations
 import RelativeConicArcs.ConferenceCutSpectrum
+import RelativeConicArcs.ConferenceCutBlocks
 
 /-!
 # Trust gate for the golden conference and middle-exterior return
@@ -26,8 +27,15 @@ they satisfy the two equations of the Segre cubic threefold; the
 identification of that map with the classical Joubert construction, and the
 Segre--Igusa polar map, are not formalized.
 The three-vertex principal-block identity gives the formal algebraic core of
-the order-six balanced exchange-spectrum calculation.  The higher-order
-inclusion-rank and Ramsey exclusion remains a human proof.
+the order-six balanced exchange-spectrum calculation.  For a cut of arbitrary
+size, the cross block of a matrix squaring to a scalar satisfies
+`B * Bᵀ = q • 1 - A * A` on the chosen subset, the trace of the square of a
+zero-diagonal sign matrix is the number of ordered pairs of distinct indices,
+and the three signed Hamilton-cycle products of any four-set sum to `3` or
+`-1`.  The organization of the fourth trace by the support of a closed
+four-walk, the inclusion-rank descent, and the higher-order Ramsey exclusion
+remain human proofs, as does every eigenvalue and singular-value statement:
+nothing here leaves polynomial algebra.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  No compiled
@@ -111,3 +119,7 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube
 
 #print axioms RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq
+
+#print axioms RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul
+#print axioms RelativeConicArcs.ConferenceCutBlocks.trace_mul_self
+#print axioms RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one

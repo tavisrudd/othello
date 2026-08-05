@@ -112,15 +112,21 @@ The operator consolidation uses the expanded golden-return theorem package as
 a second pinned formal map.  It covers the conference, triangle, two-graph,
 middle-exterior, support-recovery, golden-descent, fixed-conference
 commutator-Pfaffian, order-six skew determinant-square, outer Segre-relation,
-and order-six signed-triangle mechanisms.  The determinant square is proved for every
+cut-block, and order-six signed-triangle mechanisms.  The determinant square is proved for every
 order-six skew-symmetric matrix with vanishing diagonal over a commutative
 ring, and specialized to the fixed conference bracket matrix, whose
 determinant is sixteen times the square of its triangle cubic.  The six
 signed translates of the triangle cubic under the reorderings fixing the first
 three labels are checked to satisfy both equations of the Segre cubic
 threefold: they sum to zero and their cubes sum to zero, identically in the
-coordinates and over every commutative ring.  The general
-inclusion/Ramsey exchange-rigidity proof, the classical inputs to the
+coordinates and over every commutative ring.  For a cut of arbitrary size of a
+matrix squaring to a scalar, the cross block satisfies `B * Bᵀ = q • 1 - A * A`
+on the chosen subset, the trace of the square of a zero-diagonal sign matrix is
+the number of ordered pairs of distinct indices, and the three signed
+Hamilton-cycle products of any four-set sum to `3` or to `-1`.  No eigenvalue
+or singular-value statement is formalized.  The closed-walk organization of the fourth
+trace, the inclusion-rank descent and Ramsey exclusion behind
+exchange rigidity, the classical inputs to the
 aligned-design faithfulness argument, outer-family coherence, the cross-golden
 determinant comparison, the identification of the six translates with the
 classical Joubert coordinates, and the Segre--Igusa polar map remain human
