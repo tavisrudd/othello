@@ -125,6 +125,12 @@ reconcile their live rows and reports through the normal lifecycle.
   the q16 result; the external q16 fact must demonstrate that separation.
 - Land the strong projective/monomial GRS theorem from the C855 worktree, validate its focused gate,
   and remove the NRC/GRS dictionary warning rather than merely renaming or suppressing it.
+- The pinned fact cannot answer the Dye question: it is stale.  The monorepo's `Q11DyeAxioms` now
+  declares no axioms — both Dye statements are theorems there — while the base at the pinned revision
+  still declares both as axioms and the published trust fact records them as trusted inputs of the
+  rigidity terminal.  Answer the audit against monorepo source after the Paper I remediation settles,
+  and re-derive the axiom list from a fresh gate run rather than carrying the published one forward.
+  Evidence: `notes/2026-08-05-c864-order-eleven-remaining-split-lines.md`.
 - Audit the two Dye declarations used by Clebsch rigidity.  If they remain genuine literature
   inputs, give each an exact theorem-level entry declaration, stable bibliographic pinpoint,
   extracted gate occurrence, and paper statement of the residual trust boundary.  If the current
@@ -307,9 +313,14 @@ Runnable now, in order:
    That table is the remaining externalization scope in machine-checked form and must be empty at
    closeout, including its four `resident-unclassified` entries.  Report:
    `notes/2026-08-05-c864-boundary-checker-fixtures.md`.
-3. **Split-line planning for the remaining order-eleven families** — coding, Brianchon--Petersen,
-   decoding synthesis.  Read-only inventory and import-DAG analysis producing a proposed boundary;
-   execution waits, because the remediation is editing the same area.
+3. **Split-line planning for the remaining order-eleven families.**  Done.  The remaining cut is the
+   order-16 kind, not the point-orbit kind: the definitions its statements quantify over are
+   closed-form arithmetic rather than enumerated tables, so statements and definitions stay and the
+   exhaustive proofs move.  Per-module dispositions, the treatment of the eight coding terminals,
+   and the sequencing against the Paper I remediation are in
+   `notes/2026-08-05-c864-order-eleven-remaining-split-lines.md`.  Two conditions before execution:
+   the owning proof lane agrees to the eight coding terminals moving, and the remediation lands,
+   since it is replacing the Dye axioms with proofs and would otherwise force an immediate reseal.
 
 ## Cache and build contract
 
