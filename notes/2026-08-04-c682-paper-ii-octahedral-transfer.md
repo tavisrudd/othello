@@ -75,6 +75,21 @@ combinatorial recovery:
  =\ker(C^{\mathsf T}).}
 \]
 
+The quadratic moment map \(\mu\) therefore factors canonically through the
+chord transform on its image.  Indeed, Paper II gives
+\(\ker\mu=\mathbf F_7s=\ker C^{\mathsf T}\), so there is a unique injective
+linear map
+
+\[
+ \bar\mu:\operatorname{im}C^{\mathsf T}\longrightarrow\operatorname{im}\mu
+ \quad\text{with}\quad
+ \mu=\bar\mu\,C^{\mathsf T}.
+\]
+
+Both images have dimension thirteen, so \(\bar\mu\) is an isomorphism.  This
+does not yet give a coordinate formula for \(\bar\mu\), but it settles the
+existence of the incidence factorization without another computation.
+
 If \(A=C C^{\mathsf T}-4I\), then \(A\) is the four-regular graph joining two
 matchings when they share a chord, and
 
@@ -125,6 +140,12 @@ ways; their exceptional data are recovered by parallel Hecke/Radon operators.
 The operators have different ranks and local degrees, so no uniform
 invertibility theorem is asserted.
 
+The change of shape is forced by orbit sizes.  In general the ratio of the
+octahedral-marking space to the split-chord space is \((q-1)/12\).  It is
+one half at \(q=7\), producing the rectangular defect transform here, and one
+at \(q=13\), where Paper IV's transform becomes square and recovers the code
+constituent as a two-step fixed space.
+
 ## Evidence and replay
 
 The committed checker constructs \(G\), the \(B_3\) matching orbit, all
@@ -157,8 +178,8 @@ enumeration by the short orbit-stabilizer proof it visibly suggests.
 
 ## Open questions
 
-1. Express the quadratic moment map of Paper II as a factor of, or refinement
-   of, the chord-incidence transform.
+1. Find a geometric coordinate formula for the canonical isomorphism
+   \(\bar\mu\) between chord incidence and quadratic moments.
 2. Formulate a single octahedral--toric Hecke interface whose specializations
    contain both the \(q=7\) defect line and the \(q=13\) frame equivalence.
 3. Determine whether the full matching--chord incidence subdivision has a

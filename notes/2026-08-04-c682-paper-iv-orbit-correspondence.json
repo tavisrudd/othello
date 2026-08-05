@@ -32,7 +32,9 @@
     },
     "toric_chord_endpoint_image_rank": 13,
     "toric_chord_endpoint_incidence_rank": 13,
-    "toric_chord_endpoint_intersection_with_kernel_dimension": 0
+    "toric_chord_endpoint_intersection_with_kernel_dimension": 0,
+    "two_step_fixed_space_decomposition": "trivial_line_plus_36_dimensional_support_incidence_image",
+    "two_step_fixed_space_dimension_each_side": 37
   },
   "families": {
     "octahedral": {

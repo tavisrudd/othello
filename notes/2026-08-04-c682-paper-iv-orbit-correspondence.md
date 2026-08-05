@@ -76,6 +76,23 @@ This explains the previously unexplained Gram collision: the octahedral and
 same elliptic relation operator, related by an intrinsic double-coset Radon
 transform.
 
+The graph also reconstructs the code constituent without using the
+seventy-eight coordinates.  On either color class, the fixed space of the
+two-step walk has dimension thirty-seven, and exactly
+
+\[
+ \ker(C^{\mathsf T}C+I)
+ =\langle\mathbf1\rangle\oplus\operatorname{im}N_5,
+ \qquad
+ \ker(CC^{\mathsf T}+I)
+ =\langle\mathbf1\rangle\oplus\operatorname{im}N_O.
+\]
+
+Thus the nontrivial thirty-six-dimensional fixed constituent of the cubic
+coset graph is Paper IV's code-incidence module.  The graph does not by itself
+restore the original seventy-eight-coordinate embedding, but it recovers the
+abstract binary \(G\)-module carried by the code.
+
 The bipartite graph has \(273\) edges, girth twelve, and binary adjacency rank
 \(77\), hence nullity fourteen.  Distinct vertices on one side have at most
 one common neighbor: \(273\) pairs have one and \(3822\) have none.  The most
@@ -109,6 +126,20 @@ series' recurrent mechanism: extremal support data reconstruct an incidence
 correspondence, an operator algebra, and a marking of one of its spectral
 classes.  It should not be described as a new appearance of the Clebsch
 *cubic* merely because the correspondence graph has degree three.
+
+There is a simple reason that the transform becomes balanced precisely at
+thirteen.  For every odd \(q\) admitting the relevant octahedral subgroup,
+
+\[
+ \frac{|\operatorname{PGL}_2(q)/S_4|}
+ {|\operatorname{PGL}_2(q)/D_{2(q-1)}|}
+ =\frac{q-1}{12}.
+\]
+
+Hence \(q=13\) is the unique order at which the octahedral-marking space and
+the chord space have the same size.  Paper IV sits exactly at the square-
+transform threshold; at \(q=7\) the corresponding Paper-II transform is
+rectangular with ratio one half.
 
 ## Why the compactified-pencil proposal fails
 

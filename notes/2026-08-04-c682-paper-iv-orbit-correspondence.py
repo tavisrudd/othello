@@ -188,6 +188,39 @@ def compute():
     endpoint_image_rank = module.binary_rank(endpoint_images)
     assert endpoint_rank == endpoint_image_rank == 13
 
+    toric_columns = transpose_binary(toric_rows, 78)
+    octahedral_columns = transpose_binary(octahedral_rows, 78)
+
+    def multiply_row(vector, rows):
+        answer = 0
+        while vector:
+            bit = vector & -vector
+            answer ^= rows[bit.bit_length() - 1]
+            vector ^= bit
+        return answer
+
+    toric_two_step_plus_identity = [
+        multiply_row(row, correspondence) ^ (1 << j)
+        for j, row in enumerate(correspondence_transpose)
+    ]
+    octahedral_two_step_plus_identity = [
+        multiply_row(row, correspondence_transpose) ^ (1 << i)
+        for i, row in enumerate(correspondence)
+    ]
+    all_vertices = (1 << 91) - 1
+    assert module.binary_rank(toric_columns) == module.binary_rank(octahedral_columns) == 36
+    assert all(multiply_row(column, toric_two_step_plus_identity) == 0 for column in toric_columns)
+    assert all(
+        multiply_row(column, octahedral_two_step_plus_identity) == 0
+        for column in octahedral_columns
+    )
+    assert multiply_row(all_vertices, toric_two_step_plus_identity) == 0
+    assert multiply_row(all_vertices, octahedral_two_step_plus_identity) == 0
+    assert 91 - module.binary_rank(toric_two_step_plus_identity) == 37
+    assert 91 - module.binary_rank(octahedral_two_step_plus_identity) == 37
+    assert module.binary_rank(toric_columns + [all_vertices]) == 37
+    assert module.binary_rank(octahedral_columns + [all_vertices]) == 37
+
     first_row = correspondence[0]
     first_neighbor = next(j for j in range(91) if first_row >> j & 1)
     edge_group = octahedral_stabilizers[0] & toric_stabilizers[first_neighbor]
@@ -223,6 +256,8 @@ def compute():
             "toric_chord_endpoint_incidence_rank": endpoint_rank,
             "toric_chord_endpoint_image_rank": endpoint_image_rank,
             "toric_chord_endpoint_intersection_with_kernel_dimension": 0,
+            "two_step_fixed_space_dimension_each_side": 37,
+            "two_step_fixed_space_decomposition": "trivial_line_plus_36_dimensional_support_incidence_image",
         },
         "identities": {
             "octahedral_is_xor_of_three_toric_neighbors": True,
