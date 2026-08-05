@@ -14,8 +14,14 @@ is a bijection onto the concurrent chord matchings.  Consequently the two sets h
 cardinality, so counting the triple-concurrence points of a six-arc is counting its concurrent
 chord matchings.
 
-Both directions are incidence-theoretic and hold in an arbitrary finite projective plane; neither
-coordinates nor a hypothesis on the characteristic enters.  Injectivity uses that two distinct
+A second section collects the chord-level combinatorics used to construct and recognize chord
+matchings: existence of the chord on two distinct points of `A`, the chord matching formed by three
+chords with pairwise disjoint endpoint pairs, and the fact that a chord matching of a six-element
+set containing two given chords consists of those two and the chord on the two remaining points.
+These statements involve no incidence structure.
+
+Both directions of the bijection are incidence-theoretic and hold in an arbitrary finite projective
+plane; neither coordinates nor a hypothesis on the characteristic enters.  Injectivity uses that two distinct
 chords through two distinct points would force both points onto one line meeting the arc four
 times, and surjectivity uses that the concurrence point of a chord matching cannot itself lie on
 the arc, so that the bound of three secants through an off-arc point of a six-arc applies to it.
@@ -183,6 +189,125 @@ theorem card_concurrentMatchings_eq_card_triplePoints {A : Finset P} (hA : Arc (
     exact ⟨x, hxtriple, heq⟩
 
 end Plane
+
+section ChordCombinatorics
+
+variable {P : Type*} [DecidableEq P]
+
+/-- Two distinct points of `A` are the endpoint pair of a chord of `A`. -/
+theorem exists_arcPair_val {A : Finset P} {a b : P} (ha : a ∈ A) (hb : b ∈ A) (hab : a ≠ b) :
+    ∃ e : ArcPair A, e.1 = {a, b} := by
+  refine ⟨⟨{a, b}, ?_⟩, rfl⟩
+  rw [Finset.mem_powersetCard]
+  refine ⟨?_, Finset.card_pair hab⟩
+  intro p hp
+  simp only [Finset.mem_insert, Finset.mem_singleton] at hp
+  rcases hp with rfl | rfl
+  · exact ha
+  · exact hb
+
+omit [DecidableEq P] in
+/-- Two chords with disjoint endpoint pairs are distinct. -/
+theorem ne_of_disjoint_val {A : Finset P} {e f : ArcPair A} (hef : Disjoint e.1 f.1) : e ≠ f := by
+  intro h
+  obtain ⟨p, hp⟩ : e.1.Nonempty := Finset.card_pos.mp (by rw [e.card]; norm_num)
+  exact Finset.disjoint_left.mp hef hp (h ▸ hp)
+
+/-- Three chords with pairwise disjoint endpoint pairs form a chord matching. -/
+theorem isChordMatching_triple {A : Finset P} {e f g : ArcPair A}
+    (hef : Disjoint e.1 f.1) (heg : Disjoint e.1 g.1) (hfg : Disjoint f.1 g.1) :
+    IsChordMatching A ({e, f, g} : Finset (ArcPair A)) := by
+  classical
+  refine ⟨?_, ?_⟩
+  · rw [Finset.card_insert_of_notMem (by simp [ne_of_disjoint_val hef, ne_of_disjoint_val heg]),
+      Finset.card_insert_of_notMem (by simp [ne_of_disjoint_val hfg]), Finset.card_singleton]
+  · intro x hx y hy hxy
+    simp only [Finset.coe_insert, Set.mem_insert_iff, Finset.coe_singleton,
+      Set.mem_singleton_iff] at hx hy
+    rcases hx with rfl | rfl | rfl <;> rcases hy with rfl | rfl | rfl <;>
+      first
+        | exact absurd rfl hxy
+        | exact hef
+        | exact heg
+        | exact hfg
+        | exact hef.symm
+        | exact heg.symm
+        | exact hfg.symm
+
+/-- A chord matching of a six-element set that contains two given chords consists of those two and
+the chord on the two remaining points. -/
+theorem eq_triple_of_mem {A : Finset P} (hcard : A.card = 6)
+    {M : Finset (ArcPair A)} (hM : IsChordMatching A M) {e f g : ArcPair A}
+    (he : e ∈ M) (hf : f ∈ M) (hef : e ≠ f) (hg : g.1 = A \ (e.1 ∪ f.1)) :
+    M = {e, f, g} := by
+  classical
+  have hsub : ({e, f} : Finset (ArcPair A)) ⊆ M := by
+    intro x hx
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl
+    · exact he
+    · exact hf
+  have hone : (M \ {e, f}).card = 1 := by
+    rw [Finset.card_sdiff_of_subset hsub, hM.1, Finset.card_pair hef]
+  obtain ⟨g', hg'⟩ := Finset.card_eq_one.mp hone
+  have hg'mem : g' ∈ M \ {e, f} := by rw [hg']; exact Finset.mem_singleton_self g'
+  have hg'M : g' ∈ M := (Finset.mem_sdiff.mp hg'mem).1
+  have hg'ef : g' ∉ ({e, f} : Finset (ArcPair A)) := (Finset.mem_sdiff.mp hg'mem).2
+  have hg'e : g' ≠ e := fun h => hg'ef (by rw [h]; simp)
+  have hg'f : g' ≠ f := fun h => hg'ef (by rw [h]; simp)
+  have hMeq : M = {e, f, g'} := by
+    rw [← Finset.union_sdiff_of_subset hsub, hg']
+    ext x
+    simp only [Finset.mem_union, Finset.mem_insert, Finset.mem_singleton]
+    tauto
+  have hg'val : g'.1 = A \ (e.1 ∪ f.1) := by
+    apply Finset.Subset.antisymm
+    · intro p hp
+      refine Finset.mem_sdiff.mpr ⟨g'.subset hp, ?_⟩
+      intro hpef
+      rcases Finset.mem_union.mp hpef with hpe | hpf
+      · exact Finset.disjoint_left.mp (hM.2 hg'M he hg'e) hp hpe
+      · exact Finset.disjoint_left.mp (hM.2 hg'M hf hg'f) hp hpf
+    · intro p hp
+      obtain ⟨hpA, hpef⟩ := Finset.mem_sdiff.mp hp
+      have hpU : p ∈ M.biUnion fun c => c.1 := by
+        rw [biUnion_eq_of_isChordMatching hcard hM]; exact hpA
+      obtain ⟨c, hcM, hpc⟩ := Finset.mem_biUnion.mp hpU
+      rw [hMeq] at hcM
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hcM
+      rcases hcM with rfl | rfl | rfl
+      · exact absurd (Finset.mem_union_left _ hpc) hpef
+      · exact absurd (Finset.mem_union_right _ hpc) hpef
+      · exact hpc
+  have hgg' : g' = g := Subtype.ext (by rw [hg'val, hg])
+  rw [hMeq, hgg']
+
+/-- The chord of a chord matching of a six-element set through a given point, described by that
+point and its partner. -/
+theorem exists_mem_val_pair {A : Finset P} (hcard : A.card = 6)
+    {M : Finset (ArcPair A)} (hM : IsChordMatching A M) {p : P} (hp : p ∈ A) :
+    ∃ (e : ArcPair A) (q : P), e ∈ M ∧ q ≠ p ∧ e.1 = {p, q} := by
+  classical
+  have hpU : p ∈ M.biUnion fun c => c.1 := by
+    rw [biUnion_eq_of_isChordMatching hcard hM]; exact hp
+  obtain ⟨e, heM, hpe⟩ := Finset.mem_biUnion.mp hpU
+  obtain ⟨s, t, hst, hevalue⟩ := e.exists_eq_pair
+  obtain ⟨q, hq, hqp⟩ : ∃ q ∈ e.1, q ≠ p := by
+    rw [hevalue] at hpe ⊢
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hpe
+    rcases hpe with rfl | rfl
+    · exact ⟨t, by simp, fun h => hst h.symm⟩
+    · exact ⟨s, by simp, hst⟩
+  refine ⟨e, q, heM, hqp, ?_⟩
+  refine (Finset.eq_of_subset_of_card_le ?_ ?_).symm
+  · intro r hr
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hr
+    rcases hr with rfl | rfl
+    · exact hpe
+    · exact hq
+  · simp [e.card, Finset.card_pair (Ne.symm hqp)]
+
+end ChordCombinatorics
 
 end SixArcChordMatchings
 end RelativeConicArcs

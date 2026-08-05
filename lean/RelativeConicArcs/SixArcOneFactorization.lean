@@ -52,83 +52,6 @@ endpoint pairs. -/
   classical
   simp [matchings]
 
-omit [DecidableEq P] in
-/-- Two chords of `A` with disjoint endpoint pairs are distinct. -/
-private theorem ne_of_disjoint {A : Finset P} {e f : ArcPair A} (hef : Disjoint e.1 f.1) :
-    e ≠ f := by
-  intro h
-  obtain ⟨p, hp⟩ : e.1.Nonempty := Finset.card_pos.mp (by rw [e.card]; norm_num)
-  exact Finset.disjoint_left.mp hef hp (h ▸ hp)
-
-/-- Three chords with pairwise disjoint endpoint pairs form a chord matching. -/
-private theorem isChordMatching_triple {A : Finset P} {e f g : ArcPair A}
-    (hef : Disjoint e.1 f.1) (heg : Disjoint e.1 g.1) (hfg : Disjoint f.1 g.1) :
-    IsChordMatching A ({e, f, g} : Finset (ArcPair A)) := by
-  classical
-  refine ⟨?_, ?_⟩
-  · rw [Finset.card_insert_of_notMem (by simp [ne_of_disjoint hef, ne_of_disjoint heg]),
-      Finset.card_insert_of_notMem (by simp [ne_of_disjoint hfg]), Finset.card_singleton]
-  · intro x hx y hy hxy
-    simp only [Finset.coe_insert, Set.mem_insert_iff, Finset.coe_singleton,
-      Set.mem_singleton_iff] at hx hy
-    rcases hx with rfl | rfl | rfl <;> rcases hy with rfl | rfl | rfl <;>
-      first
-        | exact absurd rfl hxy
-        | exact hef
-        | exact heg
-        | exact hfg
-        | exact hef.symm
-        | exact heg.symm
-        | exact hfg.symm
-
-/-- A chord matching of a six-element set that contains two given chords consists of those two and
-the chord on the two remaining points. -/
-private theorem eq_triple_of_mem {A : Finset P} (hcard : A.card = 6)
-    {M : Finset (ArcPair A)} (hM : IsChordMatching A M) {e f g : ArcPair A}
-    (he : e ∈ M) (hf : f ∈ M) (hef : e ≠ f) (hg : g.1 = A \ (e.1 ∪ f.1)) :
-    M = {e, f, g} := by
-  classical
-  have hsub : ({e, f} : Finset (ArcPair A)) ⊆ M := by
-    intro x hx
-    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
-    rcases hx with rfl | rfl
-    · exact he
-    · exact hf
-  have hone : (M \ {e, f}).card = 1 := by
-    rw [Finset.card_sdiff_of_subset hsub, hM.1, Finset.card_pair hef]
-  obtain ⟨g', hg'⟩ := Finset.card_eq_one.mp hone
-  have hg'mem : g' ∈ M \ {e, f} := by rw [hg']; exact Finset.mem_singleton_self g'
-  have hg'M : g' ∈ M := (Finset.mem_sdiff.mp hg'mem).1
-  have hg'ef : g' ∉ ({e, f} : Finset (ArcPair A)) := (Finset.mem_sdiff.mp hg'mem).2
-  have hg'e : g' ≠ e := fun h => hg'ef (by rw [h]; simp)
-  have hg'f : g' ≠ f := fun h => hg'ef (by rw [h]; simp)
-  have hMeq : M = {e, f, g'} := by
-    rw [← Finset.union_sdiff_of_subset hsub, hg']
-    ext x
-    simp only [Finset.mem_union, Finset.mem_insert, Finset.mem_singleton]
-    tauto
-  have hg'val : g'.1 = A \ (e.1 ∪ f.1) := by
-    apply Finset.Subset.antisymm
-    · intro p hp
-      refine Finset.mem_sdiff.mpr ⟨g'.subset hp, ?_⟩
-      intro hpef
-      rcases Finset.mem_union.mp hpef with hpe | hpf
-      · exact Finset.disjoint_left.mp (hM.2 hg'M he hg'e) hp hpe
-      · exact Finset.disjoint_left.mp (hM.2 hg'M hf hg'f) hp hpf
-    · intro p hp
-      obtain ⟨hpA, hpef⟩ := Finset.mem_sdiff.mp hp
-      have hpU : p ∈ M.biUnion fun c => c.1 := by
-        rw [biUnion_eq_of_isChordMatching hcard hM]; exact hpA
-      obtain ⟨c, hcM, hpc⟩ := Finset.mem_biUnion.mp hpU
-      rw [hMeq] at hcM
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hcM
-      rcases hcM with rfl | rfl | rfl
-      · exact absurd (Finset.mem_union_left _ hpc) hpef
-      · exact absurd (Finset.mem_union_right _ hpc) hpef
-      · exact hpc
-  have hgg' : g' = g := Subtype.ext (by rw [hg'val, hg])
-  rw [hMeq, hgg']
-
 /-- Removing two of four distinct points leaves the other two. -/
 private theorem sdiff_pair_of_four {a b c d : P} (hac : a ≠ c) (had : a ≠ d) (hbc : b ≠ c)
     (hbd : b ≠ d) : ({a, b, c, d} : Finset P) \ {a, b} = {c, d} := by
@@ -174,16 +97,8 @@ theorem card_filter_mem_matchings {A : Finset P} (hcard : A.card = 6) (e : ArcPa
   obtain ⟨hcA, hce⟩ := hpt (show c ∈ ({a, b, c, d} : Finset P) by simp)
   obtain ⟨hdA, hde⟩ := hpt (show d ∈ ({a, b, c, d} : Finset P) by simp)
   -- the chords joining two points of `A`
-  have hchord : ∀ {x y : P}, x ∈ A → y ∈ A → x ≠ y → ∃ t : ArcPair A, t.1 = {x, y} := by
-    intro x y hx hy hxy
-    refine ⟨⟨{x, y}, ?_⟩, rfl⟩
-    rw [Finset.mem_powersetCard]
-    refine ⟨?_, Finset.card_pair hxy⟩
-    intro p hp
-    simp only [Finset.mem_insert, Finset.mem_singleton] at hp
-    rcases hp with rfl | rfl
-    · exact hx
-    · exact hy
+  have hchord : ∀ {x y : P}, x ∈ A → y ∈ A → x ≠ y → ∃ t : ArcPair A, t.1 = {x, y} :=
+    fun hx hy hxy => exists_arcPair_val hx hy hxy
   obtain ⟨eab, heab⟩ := hchord haA hbA hab
   obtain ⟨ecd, hecd⟩ := hchord hcA hdA hcd
   obtain ⟨eac, heac⟩ := hchord haA hcA hac
