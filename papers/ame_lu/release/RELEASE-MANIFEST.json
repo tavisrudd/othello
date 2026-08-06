@@ -256,9 +256,9 @@
         "sha256": "ba33e12ce2efb009a11388795cf0a7de85462bbdbaa4c2ed790913f86881dd75"
       },
       {
-        "bytes": 11040,
+        "bytes": 11287,
         "path": "lean/RelativeConicArcs/AMELU/MarginalMoment.lean",
-        "sha256": "7c4694e22871cde777964f1b4dabecd628ee72b6163a23b795a69202a1777264"
+        "sha256": "719ee8821956be05d58cca381d3b81a73ca555116d86ddf3365a23fa3120c8da"
       },
       {
         "bytes": 15744,
@@ -506,6 +506,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "f662ddf1363e38ad3100c0121307d648424664351bd1251dbd9c9794d53fafd3"
+    "tree_sha256": "9689cefd30fe04d163d32ba93e5f84b3a67906db69e57bd1a254c411ddabb131"
   }
 }
