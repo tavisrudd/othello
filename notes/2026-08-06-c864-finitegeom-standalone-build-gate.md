@@ -122,6 +122,16 @@ The thirteen `trust/*AxiomAudit.lean` modules belong to no library and so are bu
 They are elaborated during export validation, not by `lake build`, so this is a coverage
 observation rather than a defect.
 
+Two further coverage gaps surfaced while reviewing the projective-cap repair
+(`2026-08-06-c864-projectivecap-standalone-repair.md`), both predating it. `TARGET_MANIFEST.json`
+describes itself as content-addressing the complete reviewed library state, but six modules —
+`RelativeConicArcs.ClebschFamilyRegimes`, `.CodeArcDictionaryTransport`,
+`.ComplementaryTriangleSign`, `.ConicFillingOrderElimination`, `.GoldenOrderConductorTwo` and
+`.PartialLinearSpaceCodeWeight` — are present in the tree and absent from its `sources` list, so
+their bytes are sealed by nothing. The same six are roots of no library, so a target builds them
+only if something a root imports reaches them. Whether each is live content or residue is not
+established here.
+
 ## Replay
 
 ```sh

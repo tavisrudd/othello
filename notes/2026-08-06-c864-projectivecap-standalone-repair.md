@@ -45,13 +45,20 @@ extracted on 2026-07-26, a week before that split existed, so at extraction time
 they use lived inside `ProjectiveCap.Projective` and `ProjectiveCap.PlaneTransitivity`, which they
 already imported. Nothing was dropped then.
 
-What changed is that on 2026-08-05 an area export (the six-arc triple-concurrence boundary) carried
-`ProjectiveCap.Projective`, `ProjectiveCap.PlaneTransitivity`, and `ProjectiveCap.PlaneAffineChart`
-into finitegeom as part of its closure. Those three arrived in their post-split, game-free form and
-replaced the pre-split copies byte for byte. The export's own gate was satisfied — its closure
-elaborated, and every file it planned matched the authority exactly — but the declarations the
-split had moved out of those base modules vanished from finitegeom, and the six older consumers
-that still referenced them were not in the export's closure and were left behind unchanged.
+What changed is that on 2026-08-03, hours after the split, the adoption of the MDS--CSS
+transversal-group boundary (finitegeom `e41b50b`) carried `ProjectiveCap.Projective` and
+`ProjectiveCap.PlaneTransitivity` into finitegeom as part of its closure. Both arrived in their
+post-split, game-free form and replaced the pre-split copies byte for byte: `InitialPStatement`
+occurs twice in `ProjectiveCap/Projective.lean` at that commit's parent and not at all in the
+commit itself. The export's own gate was satisfied — its closure elaborated, and every file it
+planned matched the authority exactly — but the declarations the split had moved out of those base
+modules vanished from finitegeom, and the six older consumers that still referenced them were not in
+the export's closure and were left behind unchanged.
+
+The six-arc triple-concurrence adoption of 2026-08-05 (`3ffd27d`) is a separate later event in the
+same pattern: it brought `ProjectiveCap.PlaneAffineChart` across, along with `ProjectiveCap.Grid` and
+`ProjectiveCap.Sym2ConicBridge`, and it is the source of the duplicate affine-chart content recorded
+below. It did not touch either base module, so it is not what removed the declarations.
 
 So the failure is not a halfway split. It is an export that correctly updated a shared base module
 while consumers outside its closure kept depending on declarations that update removed. The static
@@ -74,7 +81,7 @@ stays inside the projective-cap namespace: `ProjectiveCap.ProjectiveCapGame` imp
 roots in finitegeom; `ProjectiveCap.PlaneTransitivityGame` imports `ProjectiveCap.PlaneTransitivity`
 and `ProjectiveCap.ProjectiveCapGame`. Nothing outside `ProjectiveCap.*` is added. Both modules are
 short. Both are taken byte-identically from the monorepo authority, which restores exactly the
-declarations the 2026-08-05 export removed, so finitegeom's projective-cap content becomes a
+declarations the 2026-08-03 export removed, so finitegeom's projective-cap content becomes a
 truthful subset of the authority rather than a fork of it.
 
 **Delete the unbuildable modules.** Rejected on evidence. The game declarations are referenced
