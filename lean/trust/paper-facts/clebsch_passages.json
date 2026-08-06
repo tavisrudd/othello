@@ -242,17 +242,17 @@
   "paper": "clebsch_passages",
   "pdfs": [
     {
-      "bytes": 217298,
+      "bytes": 217369,
       "pages": 29,
       "path": "papers/clebsch-passages/clebsch_passages.pdf",
-      "sha256": "780e6235fa8dcc53e31901682200664b5e97d2bf00846fa167c0ea1aa5157995"
+      "sha256": "cba798e5c3c62204af8366bcba26daabce9c9532c9340c3a4abf1d7bf4ce3f6a"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-passages/clebsch_passages.tex",
-      "sha256": "1a8e205be4dfaf368c9fcc4910da791018cd57cc2d2fa9bce0bc7be922638da7"
+      "sha256": "d601e4281f6fedb9b9c105650ea80bfa74071fea65ac8e23b149a15f7228b331"
     },
     {
       "path": "papers/clebsch-passages/sections/01-introduction.tex",

@@ -1181,16 +1181,16 @@
   "paper": "beyond4_prs_submission",
   "pdfs": [
     {
-      "bytes": 553320,
+      "bytes": 553287,
       "pages": 41,
       "path": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.pdf",
-      "sha256": "f4dadbe6238f919aa02429943cbc3a5ae3c80461b53c15f462640d1f3578999d"
+      "sha256": "25bd2b5255bba6142f8cfeab0e445e1d4fe77a5fc1d37f28d6221c463a9bdf4a"
     },
     {
-      "bytes": 381596,
+      "bytes": 381557,
       "pages": 56,
       "path": "papers/beyond4_prs/prs-beyond-redundancy-four.pdf",
-      "sha256": "67a0c251f70c3a140eeede11c63a0cc16a9f03b21d8b6ffde4867585ce245d48"
+      "sha256": "1a0b6d35df6a23e875efea00a88ce3287567db23d41aae9e1451999ea6846387"
     }
   ],
   "schema_version": 1,
@@ -1205,7 +1205,7 @@
     },
     {
       "path": "papers/beyond4_prs/frontmatter/index-terms.tex",
-      "sha256": "a494b4e1555ec3f1a812c90b64991a421848935fc556a84728dd2b3f4cf1028d"
+      "sha256": "6c5e7446fd7ec799a5939e0674510153dd35d645199bda535f40a8c21a252b7f"
     },
     {
       "path": "papers/beyond4_prs/sections/01-introduction.tex",

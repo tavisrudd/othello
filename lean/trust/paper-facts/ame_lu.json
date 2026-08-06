@@ -896,17 +896,17 @@
   "paper": "ame_lu",
   "pdfs": [
     {
-      "bytes": 299831,
+      "bytes": 300290,
       "pages": 35,
       "path": "papers/ame_lu/ame-lu.pdf",
-      "sha256": "02583bb7c4cf8ff7a8fd2681c7ca17a66a0ba373e0b955a140205d55816c7625"
+      "sha256": "45f707bd0119ce8cb9ae9aa5610252f731e5d27dc29bf653e9b9810d203d34d6"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/ame_lu/main.tex",
-      "sha256": "02527cc463144de6683c79648be5d2c0a478f6d7eac57e31893d2b4cb43b1e1d"
+      "sha256": "b33ccd590a331dfa1b6b3776afc876c8ddf35bfdeef1e537a103225175b9b70c"
     },
     {
       "path": "papers/ame_lu/figures/01-operator-holonomy.tex",
@@ -923,6 +923,10 @@
     {
       "path": "papers/ame_lu/figures/05-stability-radius.tex",
       "sha256": "503422cef854d588b0642d1ff6ea6b62f944433a04aab840f8bb0ef15afc1b65"
+    },
+    {
+      "path": "papers/ame_lu/frontmatter/index-terms.tex",
+      "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
     },
     {
       "path": "papers/ame_lu/sections/01-introduction.tex",

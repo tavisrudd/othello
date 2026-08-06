@@ -318,10 +318,10 @@
   "paper": "clebsch_rigidity",
   "pdfs": [
     {
-      "bytes": 206313,
+      "bytes": 206791,
       "pages": 27,
       "path": "papers/clebsch-rigidity/clebsch_rigidity.pdf",
-      "sha256": "28cfb550fd3b01a9e71ab33bcd5b5443c3ab8e219ac1e50ff50aec1b31fdc8ad"
+      "sha256": "46b012419591ee57d5cff6758d74042a1c1dad8e07d66b8c1b4700b9c1ff5f6c"
     },
     {
       "bytes": 136883,
@@ -334,7 +334,7 @@
   "sources": [
     {
       "path": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "sha256": "57fd3071096a35546f7cea27e5c258b501d6c8b5eb60959373cc374c7dbff060"
+      "sha256": "b9999274be726a92e5ad1a1d5619028c505b84b89d5e241232e0d743248c4cf9"
     }
   ],
   "title": "Reconstructing the Clebsch code and its golden orientation\\\\ from its deep-hole syndrome locus",
