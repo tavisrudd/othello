@@ -206,6 +206,39 @@ def dangling_citations(files: dict[str, bytes]) -> list[str]:
     return findings
 
 
+def cited_apparatus(
+    source_repo: Path, source_commit: str, files: dict[str, bytes]
+) -> dict[str, bytes]:
+    """Carry the verification apparatus that the exported modules cite.
+
+    A generated table names the generator, checker and data that make it
+    reviewable rather than merely present.  Exporting the table without them
+    publishes a citation that resolves nowhere, so whatever a planned module cites
+    is carried beside it, at the same relative path it names.
+
+    Only citations resolving under the source `lean/` root are carried: that is the
+    tree whose root the candidate's root corresponds to, so the path a module names
+    is the path the reader finds.  A citation reaching anywhere else — a paper
+    supplement, say — is left for `dangling_citations` to report, because carrying
+    it would put the file somewhere its own citation does not name.
+    """
+    carried: dict[str, bytes] = {}
+    for path, data in sorted(files.items()):
+        if not path.endswith(".lean"):
+            continue
+        for cited in sorted(set(CITED_ARTIFACT_RE.findall(data.decode("utf-8", "replace")))):
+            if cited in files or cited in carried or DOI_RE.match(cited):
+                continue
+            blob = read_blob_if_present(source_repo, source_commit, f"lean/{cited}")
+            if blob is not None:
+                carried[cited] = blob
+    return carried
+
+
+def read_blob_if_present(repo: Path, commit: str, path: str) -> bytes | None:
+    return read_blob(repo, commit, path) if blob_exists(repo, commit, path) else None
+
+
 def audit_text(label: str, text: str) -> list[str]:
     findings = []
     for name, pattern in PRIVATE_PATTERNS:
@@ -699,6 +732,7 @@ def build_plan(
     files: dict[str, bytes] = {}
     for module in source.modules:
         files[module.path] = module.data
+    files.update(cited_apparatus(source_repo, source_commit, files))
     manifest = updated_target_manifest(source, base)
     files["TARGET_MANIFEST.json"] = canonical_json(manifest).encode("utf-8")
     files["lakefile.toml"] = insert_lakefile_roots(
