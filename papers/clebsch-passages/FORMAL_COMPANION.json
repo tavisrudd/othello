@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "axiom_audit": "trust/ClebschPassagesAxiomAudit.lean",
-      "commit": "f1d81641827fd037fcbd8363a6f9cd5abf3767cf",
+      "commit": "bb31411b9a74d93f74d89bc9fe06f68e343fc339",
       "coverage": "the structural formal companion for this paper; it does not carry the supplemental golden-return sources, which remain in the authority tree",
       "gate": "RelativeConicArcs.Gates.ClebschPassages",
       "manifest": "trust/manifests/clebsch_passages.json",
