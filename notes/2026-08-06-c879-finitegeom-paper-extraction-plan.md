@@ -20,7 +20,7 @@ completion pass.
 The C864 phase-1 stale-build-residue sweep is not itself a C879 prerequisite to
 repeat. The relevant handoff is the final C864 state: all adopted areas are exported
 from tracked configurations, their deltas are empty, certificate boundaries are
-green, and the affected paper gates have clean release evidence.
+green, and the affected paper interfaces have clean release evidence.
 
 ## Proposed architecture
 
@@ -62,7 +62,7 @@ and declared paper dependency.
 ## Paper-facing and shared module/gate naming standard
 
 This standard applies to both exported shared libraries and paper-facing exported
-closures: modules imported by a paper or shared gate, exported through a public API,
+closures: modules imported by a paper or shared public interface, exported through a public API,
 named by a trust manifest, or required to reproduce a paper claim. It does not rename
 unrelated internal development modules. Internal names change only when the module is
 promoted into one of these public closures.
@@ -78,34 +78,35 @@ Use these shapes:
 Shared/<domain>/
   Definitions.lean
   <MathematicalSubject>.lean
-  Gates/
-    <Boundary>.lean
-    <Boundary>AxiomAudit.lean
+TavisRuddFiniteGeom.lean
+Verification/
+  AxiomAudit.lean
+  DependencyGraph.json
 
 Papers/<full-paper-alias>/
+  PaperInterface.lean
   <MathematicalSubject>.lean
-  Gates/
-    <Boundary>.lean
-    <Boundary>AxiomAudit.lean
+  Verification/
+    AxiomAudit.lean
+    DependencyGraph.json
 ```
 
 Rules:
 
 - ordinary files name the mathematical object, interface, or theorem family;
-- `Gate` is a local project term, not a Lean or Mathlib standard. Here it means a
-  stable Lean root module that imports the complete declared closure for one public
-  area, is used as the exact build/export target, and has no accidental dependency
-  on unrelated paper code;
-- `Gates/<Boundary>.lean` is that root module for one named boundary;
-- `Gates/<Boundary>AxiomAudit.lean` is the machine-readable axiom inspection for that
-  exact boundary, not a second mathematical proof of it;
-- a gate is not itself a mathematical theorem and must not be named `Trust`, `Human`,
-  `Aggregate`, or `Axioms`;
-- use `CertificateGate` only for a genuinely separate certificate boundary;
+- `PaperInterface.lean` is the reviewer-facing Lean entry point: readable definitions,
+  theorem statements, and the paper-facing public imports;
+- `Verification/` contains machine-facing audits, dependency graphs, and replay
+  metadata; `AxiomAudit.lean` audits the `PaperInterface` closure and is not a second
+  mathematical proof;
+- `Gate` remains an operational build/export term in manifests and tooling, not a
+  reviewer-facing module naming convention;
+- an additional Lean aggregate is allowed only when it names a real mathematical or
+  certificate boundary, such as `QuantumExtension.lean` or `Certificate.lean`;
 - reserve `Trust` for manifests, reports, and external trust facts, not Lean module
   names;
-- replace status/history suffixes such as `Human` and `Additions` with mathematical
-  names or precise boundary names;
+- replace status/history suffixes such as `Human`, `Additions`, `Aggregate`, and
+  `Axioms` with mathematical names or precise verification filenames;
 - use `Core`, `Foundation`, `Extensions`, or `Examples` only when they describe the
   actual API layer;
 - keep generated leaves in their owning certificate package and name their mathematical
@@ -113,22 +114,23 @@ Rules:
 
 The q11 and q16 certificate repositories are frozen exceptions to this migration:
 their existing module, gate, and audit names are not renamed. The finitegeom-side
-public adapter, pin, manifest, and paper gate may follow this standard, but the
+public adapter, pin, manifest, and paper interface may follow this standard, but the
 separately versioned certificate source remains byte-compatible with its current API.
 
-Thus the eventual PRS roots would be explicit, for example:
+Thus the eventual PRS public surface would be:
 
 ```text
-TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.Geometric
-TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.GeometricAxiomAudit
-TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.QuantumExtension
-TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.QuantumExtensionAxiomAudit
+TavisRuddFiniteGeom.Papers.Beyond4PRS.PaperInterface
+TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.AxiomAudit
+TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension
 ```
 
 The first source split preserves existing module names. This naming cleanup is a later
 one-paper-facing-family chunk with its own reverse-closure and synchronization; it does
 not trigger a repository-wide rename. Shared-library families use the same rule and
-must be migrated only with their complete reverse-import gate set.
+may expose their own `PaperInterface` only when they genuinely have a reviewer-facing
+public surface. Existing q11 and q16 certificate repositories remain byte-compatible
+exceptions and are not renamed.
 
 The first physical split must not also rename namespaces. Initially preserve existing
 module names behind package-specific source roots, for example:
@@ -169,18 +171,18 @@ not serve as the primary ownership map.
    existing module names and one Lake project. Do not combine this step with a
    namespace rewrite.
 6. Extract one already C864-validated, human-scale paper area as the pilot. Use the
-   main beyond-four PRS geometric gate first: its project-owned closure is small and
+   main beyond-four PRS geometric interface first: its project-owned closure is small and
    its paper-specific modules have no other paper consumers. Keep the balanced quantum
    extension and its AME--LU adapter as a separate later chunk; do not combine that
    cross-paper branch with the PRS pilot. Retain shared modules centrally and use
    temporary compatibility shims where necessary.
 7. Validate the pilot from a clean package-local source tree: use the existing area
-   manifest and standalone-build gate, build only the paper gate and audit through
+   manifest and standalone-build gate, build only the `PaperInterface` and audit through
    the guarded queue, run its checker, compare declarations and axioms, and run the
    source/manifest audits. Do not run a repository-wide build.
 8. For every later change, compute the exact reverse-import closure before building.
    A paper-private move rebuilds only that paper; a shared API change rebuilds every
-   affected paper gate; manifest-only changes require no Lean build.
+   affected paper interface; manifest-only changes require no Lean build.
 9. Extract the remaining leaf papers in dependency order: complete ports,
    equivariant completion, q13 after its certificate package is sealed, Clebsch
    passages, MDS/CSS after the AME--LU API is frozen, then Clebsch rigidity/hexagon
@@ -254,15 +256,16 @@ next safe chunk:
 | C879.4 | Convert the checker to enforcement for shared-to-paper and undeclared paper-to-paper imports. | Existing tree passes; adversarial cases fail as intended; commit policy. |
 | C879.5 | Create the `beyond4_prs` paper directory/package scaffold without moving Lean. | Manifest, source listing, and clean-tree checks; commit scaffold. |
 | C879.6 | Materialize a byte-preserving beyond-four PRS geometric candidate from the registered area, excluding the balanced quantum branch. | Source audit and empty export delta; commit candidate metadata only. |
-| C879.7 | Validate the beyond-four PRS geometric candidate’s bounded gate and axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
-| C879.8 | Move one paper-private module family behind the preserved module names. | Exact reverse-closure check, smallest affected gate, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
+| C879.7 | Validate the beyond-four PRS `PaperInterface` and its axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
+| C879.8 | Move one paper-private module family behind the preserved module names. | Exact reverse-closure check, smallest affected `PaperInterface`, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
 | C879.9 | Move the next paper-private family or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared-module move is permitted in this chunk. |
-| C879.10 | Extract one genuinely shared API family identified by overlap review. | Declaration-level review, affected-gate list, bounded shared gate, downstream exports, and all affected-paper replays; commit only when synchronized. |
-| C879.11 | Add the first explicit paper adapter for a real cross-paper dependency. | Adapter-only gate, import-firewall check, axiom audit, downstream pin updates, and affected-paper replay. |
+| C879.10 | Extract one genuinely shared API family identified by overlap review. | Declaration-level review, affected-interface list, bounded shared build target, downstream exports, and all affected-paper replays; commit only when synchronized. |
+| C879.11 | Add the first explicit paper adapter for a real cross-paper dependency. | Adapter-only build target, import-firewall check, axiom audit, downstream pin updates, and affected-paper replay. |
 | C879.12+ | Repeat the paper-private/shared-family cycle for the next paper. | Each row is a separate synchronized commit set and must leave every affected package buildable. |
 
 Chunks C879.0--C879.6 should not require a Lean elaboration. C879.7 and later may
-elaborate Lean, but only the exact affected gate is allowed. If C879.7 cannot fit the
+elaborate Lean, but only the exact affected `PaperInterface` or named mathematical
+aggregate is allowed. If C879.7 cannot fit the
 budget with the available cache, the pilot is too large; choose a smaller human-scale
 area before moving source.
 
@@ -282,17 +285,17 @@ raising a worker cap or bypassing the queue.
 | C879.4 | No Lean; enforcement tests and real-tree scan | 5–20 min | Safe. |
 | C879.5 | No Lean; PRS directory/package scaffold | 5–15 min | Safe. |
 | C879.6 | No elaboration; byte-preserving area materialization and source audit | 5–20 min | Safe if the export has no delta. |
-| C879.7 | Main PRS gate plus axiom audit; 16-module main closure and 17-module audited closure | 2–10 min warm; 10–25 min cold | Safe only with restored dependencies and an exact target. |
-| C879.8 | One PRS-private family, initially 1–4 modules, plus its exact gate | 2–10 min | Safe after the family and target are named. |
+| C879.7 | Main PRS `PaperInterface` plus `Verification/AxiomAudit`; 16-module main closure and 17-module audited closure | 2–10 min warm; 10–25 min cold | Safe only with restored dependencies and an exact target. |
+| C879.8 | One PRS-private family, initially 1–4 modules, plus its exact `PaperInterface` | 2–10 min | Safe after the family and target are named. |
 | C879.9 | Next PRS-private family, same limit | 2–10 min | Safe only if the reverse closure remains bounded. |
-| C879.10 | One shared API family plus every reverse-dependent paper gate | 5–25 min warm; unbounded cold | Conditional; split if more than one heavy paper gate is affected. |
+| C879.10 | One shared API family plus every reverse-dependent paper interface | 5–25 min warm; unbounded cold | Conditional; split if more than one heavy paper interface is affected. |
 | C879.11 | PRS balanced adapter, importing AME--LU and PRS interfaces | 5–25 min warm; potentially hours cold | Not guaranteed sub-30-minute; first ship its manifest/API-only change, then measure the exact adapter gate. |
 | C879.12+ | One named family at a time | Must be measured per family | Never instantiate as a bulk migration. |
 
 The PRS pilot must therefore use explicit families rather than “one family” as an
 open-ended unit: foundation/contraction, R5, polar/R6--R7, stable-components, and
 covering-radius interfaces. A family is eligible only when its source list and affected
-gate fit the small-closure bound.
+`PaperInterface`/aggregate target fit the small-closure bound.
 
 The 25-minute budget applies to the complete chunk, including synchronization and
 commit. If a clean package replay, downstream export, or affected-paper check exceeds
@@ -301,7 +304,7 @@ long gate as a separately scheduled operation. It is not acceptable to call a lo
 build “background work” while declaring the chunk shipped.
 
 The first chunk after any source move is never a namespace cleanup. Namespace changes
-are separate chunks with their own reverse-closure calculation and gate. The first
+are separate chunks with their own reverse-closure calculation and exact target. The first
 package extraction is likewise separate from namespace cleanup and shared-library
 movement.
 
