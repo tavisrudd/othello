@@ -38,12 +38,12 @@ FORBIDDEN_SCOPE = {
     "torsor",
 }
 ODD_A5_COMMUTANT_TERMINALS = {
-    "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B",
-    "RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
+    "RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator",
+    "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
 }
 CLASSICAL_ODD_A5_SPLITTING = (
     "The proposition-valued interface "
-    "RelativeConicArcs.PaperIOrientationCommutant."
+    "RelativeConicArcs.SupportOrientationCommutant."
     "ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate "
     "3+3' decomposition, Schur-lemma upper containment, and Galois descent."
 )
@@ -71,8 +71,12 @@ def validate_displayed_digest(
     artifact: Path,
     artifact_label: str,
 ) -> None:
+    # A long artifact path has to be set as a display to typeset without an overfull box, so the
+    # label may be wrapped in a centred group and a size command.  What the check is about is that
+    # the manuscript names this artifact and shows exactly one digest for it.
     pattern = re.compile(
-        rf"The SHA-256 digest of\s+\\path\{{{re.escape(artifact_label)}\}} is"
+        r"The SHA-256 digest of\s*(?:\\begin\{center\}\s*)?(?:\\small\s*)?"
+        rf"\\path\{{{re.escape(artifact_label)}\}}\s*(?:\\end\{{center\}}\s*)?is"
         rf".*?\\path\{{([0-9a-f]{{64}})\}}",
         re.DOTALL,
     )
@@ -145,7 +149,7 @@ def validate_lean(
         fail(f"{where} must be an object")
     gate = validate_file(value.get("gate"), repositories, f"{where}.gate")
     audit_path = validate_file(value.get("audit"), repositories, f"{where}.audit")
-    if gate.name != "ClebschRigidityTrust.lean":
+    if gate.name != "ClebschRigidityWithOrderElevenCertificates.lean":
         fail(f"{where}.gate is not the Paper I aggregate gate")
     audit = audit_cache.setdefault(audit_path, parse_audit(audit_path))
     terminals = value.get("terminals")
@@ -181,7 +185,7 @@ def validate_lean(
     command = require_string(validation.get("command"), f"{where}.validation.command")
     if command != (
         "nix develop --command env LEAN_NUM_THREADS=1 lake build "
-        "RelativeConicArcs.Gates.ClebschRigidityTrust"
+        "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
     ):
         fail(f"{where}.validation.command does not run the Paper I gate")
 
@@ -443,8 +447,8 @@ def main() -> int:
         repositories["lean"]
         / "RelativeConicArcs"
         / "Gates"
-        / "ClebschRigidityTrust.lean",
-        "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+        / "ClebschRigidityWithOrderElevenCertificates.lean",
+        "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
     )
     validate_file(
         manifest.get("manuscript_pdf"),

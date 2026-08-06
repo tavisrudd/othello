@@ -1,22 +1,16 @@
 {
   "artifacts": [
     {
-      "commit": "9711f4a1adf4fca40729d41442dce9e76c7db3a0",
-      "gate": "RelativeConicArcs.Gates.ClebschRigidityHuman",
-      "manifest": "trust/manifests/clebsch_rigidity_human.json",
-      "repository": "https://github.com/tavisrudd/finitegeom",
-      "role": "human"
-    },
-    {
-      "commit": "85dfde9e13e6c3d004e0e659fb83c1a4761902d0",
-      "coverage": "the base library revision the certificate package depends on",
-      "repository": "https://github.com/tavisrudd/finitegeom",
-      "role": "base"
-    },
-    {
-      "commit": "c36699656de88f6a2fc1a5e53cf9a6153705aa7f",
-      "depends_on": "base",
+      "commit": "3b15c5e9bf1bfba924c63b7b5fafb68d39b6eed5",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+      "manifest": "trust/manifests/clebsch_rigidity.json",
+      "repository": "https://github.com/tavisrudd/finitegeom",
+      "role": "shared-library"
+    },
+    {
+      "commit": "a80e7de66a65c1b9cc5367dabbfdb7b8576ba671",
+      "depends_on": "shared-library",
+      "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
       "manifest": "MANIFEST.json",
       "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
       "role": "certificate"

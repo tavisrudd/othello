@@ -1777,14 +1777,14 @@ recorded as context and is not load-bearing.  Singular-locus completeness
 is instead a kernel-checked theorem about the cross-golden family itself.
 Over any commutative ring containing a root of $t^2=t+1$,
 \begin{center}
-\small\path{RelativeConicArcs.PaperIOrientationNodes.}\\
+\small\path{RelativeConicArcs.SupportOrientationNodes.}\\
 \small\path{derivative_crossGoldenDeterminantLine_eval}
 \end{center}
 identifies the partial derivatives of the cross-golden determinant with the
 gradient quadrics of the support cubic, and over any field of
 characteristic zero containing such a root,
 \begin{center}
-\small\path{RelativeConicArcs.PaperIOrientationNodes.}\\
+\small\path{RelativeConicArcs.SupportOrientationNodes.}\\
 \small\path{singularPoints_crossGoldenDeterminant_eq_axisClasses}
 \end{center}
 identifies the singular points with the six axis classes.  Neither uses a
@@ -1812,8 +1812,12 @@ independently rederives the displayed q11 code and decoder conclusions, the
 causal containing-quadratic rigidity spine, the projective-to-code correspondence,
 the chord-defect specialization, the $q=9$ obstruction, the small-arc moments,
 and the eight orientation mechanisms from the antipodal cover through the
-rational and integral commutants.  Dye's bound and classification remain two
-explicit axioms.  The commutant theorems instead take an explicit
+rational and integral commutants.  Dye's ten-point bound and his equality
+classification are theorems of the development rather than assumptions: the
+bound is proved for every field in which two is invertible and specialized to
+$q=11$, and the classification is obtained from the golden normal form together
+with the two explicit projectivities carrying its order-eleven instances onto
+the displayed witness.  The commutant theorems take an explicit
 proposition-valued interface for the classical conjugate $3+3'$ decomposition,
 Schur's lemma, and Galois descent; Lean checks golden equivariance, the reverse
 containment, and the diagonal/off-diagonal integral test.  The generated q11
@@ -1823,19 +1827,19 @@ searches lie outside this gate.  The reusable Lean development is distributed in
 \href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}}, while
 the generated q11 tables and aggregate Paper I gate are in
 \href{https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates}
-{\texttt{the q11 package}}.  The base library's
-version-independent archival locator is the Zenodo concept
+{\texttt{the q11 package}}.  The
+version-independent archival locator of \texttt{finitegeom} is the Zenodo concept
 DOI \href{https://doi.org/10.5281/zenodo.21650878}
 {\texttt{10.5281/zenodo.21650878}}. The formalization uses Lean 4.32.0-rc1.
 Its pinned artifacts are
 \begin{center}
 \small
 certificate-package commit:
-\path{c36699656de88f6a2fc1a5e53cf9a6153705aa7f}\\
-base-library commit:
-\path{85dfde9e13e6c3d004e0e659fb83c1a4761902d0}\\
+\path{a80e7de66a65c1b9cc5367dabbfdb7b8576ba671}\\
+shared-library commit:
+\path{3b15c5e9bf1bfba924c63b7b5fafb68d39b6eed5}\\
 aggregate gate:
-\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}\\
+\path{RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean}\\
 Mathlib commit:
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
 \end{center}
@@ -1844,15 +1848,18 @@ The SHA-256 digest of \path{verification/checker_outputs.json} is
 \small\path{36ab223c1d92cf4bd82a2e52f830b37faa03e7405d3fb742bb1bb3cdc4d76d7a}.
 \end{center}
 The SHA-256 digest of
-\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is
 \begin{center}
-\small\path{0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc}.
+\small\path{RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean}
+\end{center}
+is
+\begin{center}
+\small\path{d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6}.
 \end{center}
 This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its
-recorded axiom audit lists the standard logical axioms and exactly the two
-Dye axioms above for the rigidity implication; the gate uses neither
-admitted declarations nor native execution.  Because the classical $3+3'$
+recorded axiom audit lists the standard logical axioms alone for every audited
+terminal, and the gate uses neither admitted declarations nor native
+execution.  Because the classical $3+3'$
 input is a theorem parameter rather than a global axiom, the trust manifest
 records that interface beside the two commutant terminals.
 

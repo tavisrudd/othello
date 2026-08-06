@@ -14,13 +14,21 @@ import re
 
 
 SHELLS = {"bash", "dash", "fish", "powershell", "pwsh", "sh", "zsh"}
+# The Paper I sources are split across two repositories, and the identity check must follow that
+# split.  `git diff <commit> -- <path>` over a path a repository does not carry reports no
+# difference, so one list checked against one checkout would pass vacuously for every source that
+# lives in the other.  The dependency-owned half is therefore checked against a finitegeom checkout
+# when one is supplied, and reported unchecked by name when it is not.
 LEAN_SCHOLARLY_PATHS = (
-    "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+    "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
     "RelativeConicArcs/Q11A5PointOrbits.lean",
+    "verification/clebsch_rigidity_trust/axiom-audit.txt",
+)
+FINITEGEOM_SCHOLARLY_PATHS = (
     "RelativeConicArcs/Q11Coding.lean",
     "RelativeConicArcs/Q11DecodingSynthesis.lean",
     "RelativeConicArcs/Q11CodeRigidityBridge.lean",
-    "RelativeConicArcs/Q11DyeAxioms.lean",
+    "RelativeConicArcs/Q11BrianchonClassification.lean",
     "RelativeConicArcs/Q11RigiditySpine.lean",
     "RelativeConicArcs/SixArcDefectBridge.lean",
     "RelativeConicArcs/SixArcDegenerateConicExclusion.lean",
@@ -29,7 +37,6 @@ LEAN_SCHOLARLY_PATHS = (
     "RelativeConicArcs/Q9Sylvester.lean",
     "RelativeConicArcs/SmallKChordMoments.lean",
     "RelativeConicArcs/SmallKGeometricBridge.lean",
-    "verification/clebsch_rigidity_trust/axiom-audit.txt",
 )
 
 
@@ -159,11 +166,12 @@ def main() -> int:
     )
     parser.add_argument("--lean-root", type=Path, required=True)
     parser.add_argument(
-        "--companion-root",
+        "--finitegeom-root",
         type=Path,
         help=(
-            "checkout of the base library the certificate package depends on; enables "
-            "resolving the human companion and rejecting a pin older than its newest export"
+            "checkout of the finitegeom repository the certificate package depends on; enables "
+            "resolving its pinned artifact, checking the dependency-owned Paper I sources, and "
+            "rejecting a pin older than its newest export"
         ),
     )
     parser.add_argument(
@@ -182,8 +190,8 @@ def main() -> int:
     # artifact. The guard rejects a commit restated beside a pinned repository
     # anywhere else, so the manifest's own copies cannot drift away from it. The
     # certificate package is resolved against the Lean root already supplied and
-    # required to be that package's newest export; the base library is checked the
-    # same way when its checkout is given.
+    # required to be that package's newest export; finitegeom is checked the same
+    # way when its checkout is given.
     companion = [
         sys.executable,
         str(paper_root / "verification" / "verify_formal_companion.py"),
@@ -191,9 +199,12 @@ def main() -> int:
         f"--resolve=certificate={repositories['lean']}",
         f"--require-current=certificate={repositories['lean']}",
     ]
-    if args.companion_root is not None:
-        base = args.companion_root.resolve()
-        companion += [f"--resolve=human={base}", f"--require-current=human={base}"]
+    if args.finitegeom_root is not None:
+        shared = args.finitegeom_root.resolve()
+        companion += [
+            f"--resolve=shared-library={shared}",
+            f"--require-current=shared-library={shared}",
+        ]
     completed = subprocess.run(companion, cwd=paper_root, text=True, capture_output=True)
     if completed.returncode:
         raise ValueError((completed.stdout + completed.stderr).strip())
@@ -250,6 +261,40 @@ def main() -> int:
         raise RuntimeError(
             "the Paper I Lean source paths differ from the pinned commit"
         )
+    if args.finitegeom_root is None:
+        names = ", ".join(FINITEGEOM_SCHOLARLY_PATHS)
+        print(
+            "clebsch-rigidity release: UNCHECKED [dependency-owned Paper I sources: "
+            f"{names}] pass --finitegeom-root to check them"
+        )
+    else:
+        pinned_dependency = next(
+            (
+                entry.get("commit")
+                for entry in json.loads(
+                    (paper_root / "FORMAL_COMPANION.json").read_text(encoding="utf-8")
+                )["artifacts"]
+                if entry.get("role") == "shared-library"
+            ),
+            None,
+        )
+        if not pinned_dependency:
+            raise RuntimeError("FORMAL_COMPANION.json pins no shared-library commit")
+        dependency_identity = run(
+            [
+                "git",
+                "diff",
+                "--quiet",
+                pinned_dependency,
+                "--",
+                *FINITEGEOM_SCHOLARLY_PATHS,
+            ],
+            args.finitegeom_root.resolve(),
+        )
+        if dependency_identity.returncode != 0:
+            raise RuntimeError(
+                "the dependency-owned Paper I sources differ from the pinned commit"
+            )
 
     validator_command = [
         sys.executable,

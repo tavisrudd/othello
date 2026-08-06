@@ -34,7 +34,7 @@ nineteen-row statement identity, the companion's five-mode claim map, trust
 manifest, validators, clean release runner, unit tests, and deterministic
 successful output. The twenty selected exact checker invocations and pinned
 Nix environment are release-local; the aggregate formal gate is
-`RelativeConicArcs/Gates/ClebschRigidityTrust.lean` in the shared formal
+`RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean` in the
 certificate package.  It imports the causal rigidity spine and all eight
 orientation packets.  The commutant terminals are conditional only on the
 explicit classical conjugate `3+3'` Schur--Galois interface recorded in the
@@ -48,8 +48,8 @@ cross-check and as evidence for the companion's sharper finite census claims.
 The reusable formal source is distributed in
 `https://github.com/tavisrudd/finitegeom`; the aggregate q11 gate is in
 `https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates`.  Both
-revisions are recorded in the manuscript.  The base library's
-version-independent archival locator is the Zenodo concept DOI
+revisions are recorded in the manuscript.  The version-independent archival
+locator of `finitegeom` is the Zenodo concept DOI
 [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
 From this directory, supply a checkout of the q11 certificate package
 as `--lean-root`:

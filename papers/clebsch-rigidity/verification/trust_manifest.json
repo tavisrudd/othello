@@ -16,34 +16,28 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
-                "RelativeConicArcs.ClebschDye.dye1991_equality_classification"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
-                "RelativeConicArcs.ClebschDye.dye1991_equality_classification"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card": [
                 "propext",
@@ -62,9 +56,9 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -76,7 +70,7 @@
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -138,7 +132,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit": [
@@ -178,9 +172,9 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
@@ -192,7 +186,7 @@
               "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -231,7 +225,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic": [
@@ -251,9 +245,9 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
@@ -261,7 +255,7 @@
               "RelativeConicArcs.Examples.Q11Coding.witness_code_coveringRadius_three"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -341,7 +335,7 @@
               {
                 "path": "check_code_automorphisms.py",
                 "repository": "paper",
-                "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
+                "sha256": "0edc7d4ed4f5a478cf69fb3ec51972ef0a51ae7db191a24968782908db9af182"
               }
             ],
             "checker_commands": [
@@ -388,7 +382,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -418,9 +412,9 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -430,7 +424,7 @@
               "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -456,7 +450,7 @@
               {
                 "path": "check_code_automorphisms.py",
                 "repository": "paper",
-                "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
+                "sha256": "0edc7d4ed4f5a478cf69fb3ec51972ef0a51ae7db191a24968782908db9af182"
               }
             ],
             "checker_commands": [
@@ -561,34 +555,28 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
-                "RelativeConicArcs.ClebschDye.dye1991_equality_classification"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
-                "RelativeConicArcs.ClebschDye.dye1991_equality_classification"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound"
+                "Quot.sound"
               ],
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card": [
                 "propext",
@@ -607,9 +595,9 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -621,7 +609,7 @@
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -730,27 +718,25 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode": [
                 "propext",
                 "Classical.choice",
-                "Quot.sound",
-                "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
-                "RelativeConicArcs.ClebschDye.dye1991_equality_classification"
+                "Quot.sound"
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -876,7 +862,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -906,9 +892,9 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -918,7 +904,7 @@
               "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -962,7 +948,7 @@
               {
                 "path": "check_code_automorphisms.py",
                 "repository": "paper",
-                "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
+                "sha256": "0edc7d4ed4f5a478cf69fb3ec51972ef0a51ae7db191a24968782908db9af182"
               }
             ],
             "checker_commands": [
@@ -1017,165 +1003,165 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
-              "RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive": [
+              "RelativeConicArcs.SupportOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive": [
+              "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B": [
+              "RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationCover.antipodalQuotient_fiber_card_two": [
+              "RelativeConicArcs.SupportOrientationCover.antipodalQuotient_fiber_card_two": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationCover.fiveOrbital_one_mem_each_other_fiber": [
+              "RelativeConicArcs.SupportOrientationCover.fiveOrbital_one_mem_each_other_fiber": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationCover.fiveOrbitals_selfPaired": [
+              "RelativeConicArcs.SupportOrientationCover.fiveOrbitals_selfPaired": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal": [
+              "RelativeConicArcs.SupportOrientationDeterminant.det_signedOrbital_add_diagonal": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic": [
+              "RelativeConicArcs.SupportOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationHolonomy.fourPoint_twoGraph_identity": [
+              "RelativeConicArcs.SupportOrientationHolonomy.fourPoint_twoGraph_identity": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationHolonomy.pairBalance_iff_sq_five": [
+              "RelativeConicArcs.SupportOrientationHolonomy.pairBalance_iff_sq_five": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationHolonomy.supportCubic_translation_invariant": [
+              "RelativeConicArcs.SupportOrientationHolonomy.supportCubic_translation_invariant": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationHolonomy.supportSign_eq_triangleProduct": [
+              "RelativeConicArcs.SupportOrientationHolonomy.supportSign_eq_triangleProduct": [
                 "propext",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses": [
+              "RelativeConicArcs.SupportOrientationNodes.derivative_crossGoldenDeterminantLine_eval": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes": [
+              "RelativeConicArcs.SupportOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame": [
+              "RelativeConicArcs.SupportOrientationNodes.supportCubic_framePoints_ordinaryNodes": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck": [
+              "RelativeConicArcs.SupportOrientationNodes.supportCubic_singularLocus_eq_frame": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationPentagon.signedOrbitalMatrix_sq": [
+              "RelativeConicArcs.SupportOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff": [
+              "RelativeConicArcs.SupportOrientationPentagon.signedOrbitalMatrix_sq": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine": [
+              "RelativeConicArcs.SupportOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two": [
+              "RelativeConicArcs.SupportOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5": [
+              "RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_index_two": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5": [
+              "RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ],
-              "RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic": [
+              "RelativeConicArcs.SupportOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.SupportOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic": [
                 "propext",
                 "Classical.choice",
                 "Quot.sound"
               ]
             },
             "conditional_interfaces": [
-              "The proposition-valued interface RelativeConicArcs.PaperIOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate 3+3' decomposition, Schur-lemma upper containment, and Galois descent."
+              "The proposition-valued interface RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate 3+3' decomposition, Schur-lemma upper containment, and Galois descent."
             ],
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
-              "RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
-              "RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5",
-              "RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff",
-              "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5",
-              "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two",
-              "RelativeConicArcs.PaperIOrientationCover.antipodalQuotient_fiber_card_two",
-              "RelativeConicArcs.PaperIOrientationCover.fiveOrbitals_selfPaired",
-              "RelativeConicArcs.PaperIOrientationCover.fiveOrbital_one_mem_each_other_fiber",
-              "RelativeConicArcs.PaperIOrientationPentagon.signedOrbitalMatrix_sq",
-              "RelativeConicArcs.PaperIOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck",
-              "RelativeConicArcs.PaperIOrientationHolonomy.supportSign_eq_triangleProduct",
-              "RelativeConicArcs.PaperIOrientationHolonomy.fourPoint_twoGraph_identity",
-              "RelativeConicArcs.PaperIOrientationHolonomy.pairBalance_iff_sq_five",
-              "RelativeConicArcs.PaperIOrientationHolonomy.supportCubic_translation_invariant",
-              "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal",
-              "RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic",
-              "RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic",
-              "RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval",
-              "RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses",
-              "RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame",
-              "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes",
-              "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B",
-              "RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive",
-              "RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive"
+              "RelativeConicArcs.SupportOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
+              "RelativeConicArcs.SupportOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5",
+              "RelativeConicArcs.SupportOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff",
+              "RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5",
+              "RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_index_two",
+              "RelativeConicArcs.SupportOrientationCover.antipodalQuotient_fiber_card_two",
+              "RelativeConicArcs.SupportOrientationCover.fiveOrbitals_selfPaired",
+              "RelativeConicArcs.SupportOrientationCover.fiveOrbital_one_mem_each_other_fiber",
+              "RelativeConicArcs.SupportOrientationPentagon.signedOrbitalMatrix_sq",
+              "RelativeConicArcs.SupportOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck",
+              "RelativeConicArcs.SupportOrientationHolonomy.supportSign_eq_triangleProduct",
+              "RelativeConicArcs.SupportOrientationHolonomy.fourPoint_twoGraph_identity",
+              "RelativeConicArcs.SupportOrientationHolonomy.pairBalance_iff_sq_five",
+              "RelativeConicArcs.SupportOrientationHolonomy.supportCubic_translation_invariant",
+              "RelativeConicArcs.SupportOrientationDeterminant.det_signedOrbital_add_diagonal",
+              "RelativeConicArcs.SupportOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic",
+              "RelativeConicArcs.SupportOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic",
+              "RelativeConicArcs.SupportOrientationNodes.derivative_crossGoldenDeterminantLine_eval",
+              "RelativeConicArcs.SupportOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses",
+              "RelativeConicArcs.SupportOrientationNodes.supportCubic_singularLocus_eq_frame",
+              "RelativeConicArcs.SupportOrientationNodes.supportCubic_framePoints_ordinaryNodes",
+              "RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator",
+              "RelativeConicArcs.SupportOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive",
+              "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1221,7 +1207,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments": [
@@ -1236,16 +1222,16 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
               "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1269,7 +1255,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1284,16 +1270,16 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
               "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1332,7 +1318,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1347,16 +1333,16 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
               "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1418,7 +1404,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula": [
@@ -1426,15 +1412,15 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1516,7 +1502,7 @@
             "audit": {
               "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
               "repository": "lean",
-              "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+              "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
             },
             "axioms": {
               "RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card": [
@@ -1541,9 +1527,9 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "0936dd75942cd1fd65608484f2fc7685c88aa703d1d32ccd25442d68e2cd06dc"
+              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
             },
             "terminals": [
               "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card",
@@ -1552,7 +1538,7 @@
               "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1951,28 +1937,28 @@
     }
   },
   "lean_repository": {
-    "commit": "c36699656de88f6a2fc1a5e53cf9a6153705aa7f",
+    "commit": "a80e7de66a65c1b9cc5367dabbfdb7b8576ba671",
     "distribution": "separate shared Git repository",
-    "finitegeom_commit": "85dfde9e13e6c3d004e0e659fb83c1a4761902d0",
+    "finitegeom_commit": "3b15c5e9bf1bfba924c63b7b5fafb68d39b6eed5",
     "path": ".",
     "url": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
   },
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "4cb30b808b23533916e5a5cb1b1b403db350410569a1a47e1c87fa44a5374232"
+    "sha256": "03882ebf7b1034a323db98c40f5172d058fcea3ff9034c2f3eb40c0fdfe307d3"
   },
-  "manuscript_sha256": "e1239a3e88e2ed23cbc6742baa495329dc7db049f17a2c86d4ece5faa55c15e6",
+  "manuscript_sha256": "7637b20ff3c161c3447cafa999c3a023e25a35989039038a6ebcb5b103a0e094",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "2b9d09266ec288560f64bd0e523255dd1208a23b7b56d08384abb91de2e4aae9"
+      "sha256": "d4bd8002637173db23d3fdb992ac57a2370d99ee1d3b3a99866f810a568e7d45"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "12cd91ca80cfc717b77e6b8befb74f71ecde267f3c1c49097d883a0428b2fda0"
+      "sha256": "f425dfc5672431ac292a3208fe4191f59cc1c56c46d97b01340642cdcf040fe0"
     }
   ],
   "reproducibility_environment": {
@@ -2002,7 +1988,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "204f1e8df4520367b282ba9ed631ff56d8164621944158916332a9fc4d1f7dee"
+    "sha256": "d3dc781fa21c2d1dce3d6918072db88cc22c8a36a03ff491328df1ca23cec829"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2345,12 +2331,12 @@
           "LEAN_NUM_THREADS=1",
           "lake",
           "build",
-          "RelativeConicArcs.Gates.ClebschRigidityTrust"
+          "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
         ],
         "axiom_audit": {
           "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
           "repository": "lean",
-          "sha256": "83f808cfdf16b0cde6b91eac8087062de3d8cd44fe59e2c8aac4b9aeb54864a4"
+          "sha256": "d293ed7d3878b92bae143ad97585cac4098f0bd39888ff4f1f35994e6a70b048"
         },
         "cwd": ".",
         "id": "lean-rigidity-trust-gate",
@@ -2362,12 +2348,12 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "90bb09ec2229f1490d6394eedd4dc4752c9b8ed699df30baaa723d00c5d4ae05"
+      "sha256": "ef8eb4319711fd76e4aa7dcc8ad86851f905c131e8ad45109878839a479e9a28"
     },
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "7f460fe454434f9229ee19f052b90350962ca84b723e8d3d44bd5cde8dfb36c5"
+      "sha256": "1ac940429d199e5fd009045cdb969d97ea31ff9fd43d3d645f957bbcfbe2ad79"
     },
     "verification_tools": [
       {
@@ -2378,12 +2364,12 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "7a5041dc3353ba708f0aa2ff92482cdf76ef080b1c8eff7044cd1b20ada6bf26"
+        "sha256": "8ef59f75319274fedc6c340bfa1ad374de1e49a2ea6fbadbf241655e1eefcaae"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "8d653fdb53b908c3bfe6136f96704ddc7ae3181598dcf63a889311c3226ec8bc"
+        "sha256": "73608d670e5b43ed003e79e0618ff4a5594702b98e881ac336a06d28109124bc"
       },
       {
         "path": "verification/test_verification_tools.py",
@@ -2393,7 +2379,7 @@
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "851a718237e9d05cc02a2a4f02cc14d47bd491e2cb106a97bf3bf6e51ed8847b"
+        "sha256": "e9c1062926d3539279990055bcd9dd0ab7319b5f066dd9205c1440db14d5db79"
       },
       {
         "path": "verification/verify_computational_companion.py",

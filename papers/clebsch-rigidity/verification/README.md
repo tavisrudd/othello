@@ -36,14 +36,15 @@ absolute path of the pinned formal repository when regenerating or checking
 the manifest directly; the aggregate release runner supplies it automatically.
 
 The aggregate formal gate is
-`RelativeConicArcs/Gates/ClebschRigidityTrust.lean` in the pinned
-`https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates`
+`RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean` in the
+pinned `https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates`
 repository, whose manifest pins the reusable
 `https://github.com/tavisrudd/finitegeom` dependency. Its tracked axiom
 output is `verification/clebsch_rigidity_trust/axiom-audit.txt`.
-The gate records the exact two classical Dye assumptions used by the
-rigidity implication. It also prints the causal rigidity and eight-packet
-orientation terminals. The rational and integral commutant theorems take the
+The gate audits the order-eleven certificates the package proves together with
+the results it imports from the dependency, including the ten-point Brianchon
+bound and its equality classification, which are theorems there. It also prints
+the causal rigidity and eight-packet orientation terminals. The rational and integral commutant theorems take the
 explicit proposition-valued classical `3+3'` splitting interface recorded in
 the trust manifest; because this is a theorem parameter rather than a global
 axiom, it does not appear in `#print axioms`. The other printed axioms are part

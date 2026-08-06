@@ -19,10 +19,10 @@ LEAN_ROOT = Path(
 ).resolve()
 IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
-GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
+GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_LEAN_COMMIT = "c36699656de88f6a2fc1a5e53cf9a6153705aa7f"
-PINNED_BASE_COMMIT = "85dfde9e13e6c3d004e0e659fb83c1a4761902d0"
+PINNED_PACKAGE_COMMIT = "a80e7de66a65c1b9cc5367dabbfdb7b8576ba671"
+PINNED_FINITEGEOM_COMMIT = "3b15c5e9bf1bfba924c63b7b5fafb68d39b6eed5"
 
 
 TERMINALS = {
@@ -81,38 +81,38 @@ TERMINALS = {
         "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra",
     ],
     "orientation_symmetry": [
-        "RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
-        "RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5",
-        "RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff",
-        "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5",
-        "RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two",
+        "RelativeConicArcs.SupportOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
+        "RelativeConicArcs.SupportOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5",
+        "RelativeConicArcs.SupportOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff",
+        "RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5",
+        "RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_index_two",
     ],
     "orientation_spine": [
-        "RelativeConicArcs.PaperIOrientationCover.antipodalQuotient_fiber_card_two",
-        "RelativeConicArcs.PaperIOrientationCover.fiveOrbitals_selfPaired",
-        "RelativeConicArcs.PaperIOrientationCover.fiveOrbital_one_mem_each_other_fiber",
-        "RelativeConicArcs.PaperIOrientationPentagon.signedOrbitalMatrix_sq",
-        "RelativeConicArcs.PaperIOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck",
-        "RelativeConicArcs.PaperIOrientationHolonomy.supportSign_eq_triangleProduct",
-        "RelativeConicArcs.PaperIOrientationHolonomy.fourPoint_twoGraph_identity",
-        "RelativeConicArcs.PaperIOrientationHolonomy.pairBalance_iff_sq_five",
-        "RelativeConicArcs.PaperIOrientationHolonomy.supportCubic_translation_invariant",
-        "RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal",
-        "RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic",
-        "RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic",
-        "RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval",
-        "RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses",
-        "RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame",
-        "RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes",
-        "RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B",
-        "RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive",
-        "RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
+        "RelativeConicArcs.SupportOrientationCover.antipodalQuotient_fiber_card_two",
+        "RelativeConicArcs.SupportOrientationCover.fiveOrbitals_selfPaired",
+        "RelativeConicArcs.SupportOrientationCover.fiveOrbital_one_mem_each_other_fiber",
+        "RelativeConicArcs.SupportOrientationPentagon.signedOrbitalMatrix_sq",
+        "RelativeConicArcs.SupportOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck",
+        "RelativeConicArcs.SupportOrientationHolonomy.supportSign_eq_triangleProduct",
+        "RelativeConicArcs.SupportOrientationHolonomy.fourPoint_twoGraph_identity",
+        "RelativeConicArcs.SupportOrientationHolonomy.pairBalance_iff_sq_five",
+        "RelativeConicArcs.SupportOrientationHolonomy.supportCubic_translation_invariant",
+        "RelativeConicArcs.SupportOrientationDeterminant.det_signedOrbital_add_diagonal",
+        "RelativeConicArcs.SupportOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic",
+        "RelativeConicArcs.SupportOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic",
+        "RelativeConicArcs.SupportOrientationNodes.derivative_crossGoldenDeterminantLine_eval",
+        "RelativeConicArcs.SupportOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses",
+        "RelativeConicArcs.SupportOrientationNodes.supportCubic_singularLocus_eq_frame",
+        "RelativeConicArcs.SupportOrientationNodes.supportCubic_framePoints_ordinaryNodes",
+        "RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator",
+        "RelativeConicArcs.SupportOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive",
+        "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
     ],
 }
 
 CLASSICAL_ODD_A5_SPLITTING = (
     "The proposition-valued interface "
-    "RelativeConicArcs.PaperIOrientationCommutant."
+    "RelativeConicArcs.SupportOrientationCommutant."
     "ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate "
     "3+3' decomposition, Schur-lemma upper containment, and Galois descent."
 )
@@ -332,7 +332,7 @@ def lean(
         "validation": {
             "command": (
                 "nix develop --command env LEAN_NUM_THREADS=1 lake build "
-                "RelativeConicArcs.Gates.ClebschRigidityTrust"
+                "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
             ),
             "toolchain": {
                 "lean": "4.32.0-rc1",
@@ -812,7 +812,7 @@ def checks() -> list[dict[str, object]]:
                 "LEAN_NUM_THREADS=1",
                 "lake",
                 "build",
-                "RelativeConicArcs.Gates.ClebschRigidityTrust",
+                "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
             ],
             "timeout_seconds": 1800,
             "axiom_audit": file_evidence("lean", AUDIT_PATH),
@@ -879,8 +879,8 @@ def build_manifest() -> dict[str, object]:
             "distribution": "separate shared Git repository",
             "url": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
             "path": ".",
-            "commit": PINNED_LEAN_COMMIT,
-            "finitegeom_commit": PINNED_BASE_COMMIT,
+            "commit": PINNED_PACKAGE_COMMIT,
+            "finitegeom_commit": PINNED_FINITEGEOM_COMMIT,
         },
         "reproducibility_environment": {
             "platform": "x86_64-linux",
