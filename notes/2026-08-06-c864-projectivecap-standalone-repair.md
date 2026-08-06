@@ -89,8 +89,118 @@ the failure calls for.
 
 ## What changed
 
-(recorded below as the work lands)
+Everything below is in the finitegeom repository. No monorepo Lean source was touched: the
+authority already carries the correct content, and the defect was entirely downstream.
+
+`ProjectiveCap/ProjectiveCapGame.lean` and `ProjectiveCap/PlaneTransitivityGame.lean` were added,
+byte-identical to `lean/ProjectiveCap/` in the monorepo at `094aebe5`. Six modules each regained
+exactly one import line and changed in no other way: `Binary.lean` and `Mirror.lean` import
+`ProjectiveCap.ProjectiveCapGame`; `EllipticMirror.lean`, `FrameGridBridge.lean`, `GridMirror.lean`
+and `StableFacts.lean` import `ProjectiveCap.PlaneTransitivityGame`. Every project-namespace import
+under `ProjectiveCap/` now resolves inside the tree, and the only import leaving the namespace is
+`CapGame.BuildGame`, which finitegeom already carried as a root of its own library.
+
+The bookkeeping that no tool models had to be done by hand:
+
+- `lakefile.toml` roots both new modules in the `ProjectiveCap` library, which goes from twenty-two
+  roots to twenty-four, in the sorted order the exporter's insertion produces.
+- `TARGET_MANIFEST.json` gains a `sources` entry for each new module and its `module_count` rises
+  from 317 to 319. The manifest's `roots` list is untouched: it holds the gate and area roots the
+  exporter accumulates, not every module, and neither new module is one. `external_imports` is
+  likewise unchanged, confirmed by reading both modules' import lines — neither imports Mathlib.
+- `README.md` and `PROVENANCE.md` each state the library-state module count in prose; both were
+  moved from 317 to 319. Leaving either at 317 makes every area export refuse with
+  `base prose disagrees with the base manifest`.
+
+One further manifest edit was needed and is worth recording, because the first export attempt found
+it rather than review. `TARGET_MANIFEST.json` content-addresses every module, so adding an import
+line to the six consumers invalidated their recorded `bytes` and `sha256`. All twelve exports
+refused with `base manifest entry for ProjectiveCap/Binary.lean does not match the base tree` until
+those six digests were refreshed. Recomputing digests across the whole manifest changed exactly the
+six modules edited here and nothing else, which is independent confirmation that the source change
+is confined to those six files.
 
 ## Validation
 
-(recorded below as each gate passes)
+**The projective-cap library builds.** Exit 0, no `resume:` line:
+
+```sh
+python3 lean/scripts/lean-build-queue.py build ProjectiveCap \
+  --lean-root ~/src/lean/finitegeom --cores 20-23
+```
+
+```
+state:   success
+  cache-restored   <mathlib cache get>  0:08.54 wall, 456664 kB peak
+  built            ProjectiveCap  0:34.29 wall, 1911396 kB peak
+  gate-passed      <aggregate>
+```
+
+**All seven declared targets build together.** Exit 0; the six that were already green stayed
+trace-current and the aggregate gate passed:
+
+```sh
+python3 lean/scripts/lean-build-queue.py build \
+  Sumfree CapGame ProjectiveCap FiniteGeom RepairCodes RepairPorts RelativeConicArcs \
+  --lean-root ~/src/lean/finitegeom --cores 20-23
+```
+
+```
+state:   success
+  skipped-current  Sumfree
+  skipped-current  CapGame
+  skipped-current  ProjectiveCap
+  skipped-current  FiniteGeom
+  skipped-current  RepairCodes
+  skipped-current  RepairPorts
+  skipped-current  RelativeConicArcs
+  gate-passed      <aggregate>
+```
+
+This is the first time finitegeom has built every target it declares.
+
+**All twelve area exports remain idempotent.** Against monorepo `094aebe5` and finitegeom
+`dca9ce75`, every configuration exits 0 with `forward_delta.file_count` 0: `ame_lu`,
+`arcs_complete_outside_conic_additions`, `arcs_complete_outside_conic_human`,
+`clebsch_factorization`, `clebsch_passages`, `clebsch_rigidity_human`,
+`clebsch_six_arc_concurrence`, `clebsch_support_cubic_orientation`, `complete_ports`,
+`golden_quantum_statistics`, `mds_css_transversal_groups`, `prs_beyond_redundancy_four`. Because
+the exporter now also refuses a candidate that would not resolve as a repository of its own, this
+gate covers the new roots and imports as well as the hand edits.
+
+**The certificate boundary is green.** `python3 lean/scripts/lean-certificate-boundary.py` exits 0
+with `certificate boundary ok`. It was run without `--verify-official-libraries`, which stays red
+until the order-eleven package's deletions, gate rename and manifest reseal land.
+
+## Found and deliberately not touched
+
+**finitegeom's projective-cap consumers still predate the 2026-08-03 reorganization.** Five import
+differences from the authority remain, all resolving inside the tree and none blocking a build:
+`Certificate.lean` imports `ProjectiveCap.Almost.OddEscape` where the monorepo does not;
+`ConicLocalization.lean` and `EscapeParity.lean` do not where the monorepo does;
+`ExtensionCount.lean` imports `ProjectiveCap.GridGame` where the monorepo imports
+`ProjectiveCap.StableFacts`; and `FrameGridBridge.lean` does not import
+`ProjectiveCap.PlaneAffineChart`.
+
+That last one has substance behind it. finitegeom's `FrameGridBridge.lean` is 841 lines against the
+authority's 294, because it still holds the affine-chart incidence dictionary inline that the
+monorepo moved into `ProjectiveCap.PlaneAffineChart` on 2026-08-03. finitegeom also carries
+`PlaneAffineChart.lean` byte-identically, arrived by the 2026-08-05 export, so the same declarations
+exist twice in the repository. This compiles because no module imports both, and
+`PlaneAffineChart.lean` is imported by nothing in finitegeom at all. Adding the authority's
+`import ProjectiveCap.PlaneAffineChart` to `FrameGridBridge.lean` would collide the duplicates, so
+it was not added. Resolving this means bringing finitegeom's projective-cap consumers up to the
+authority's post-reorganization form — a content refresh of the area, not an import fix.
+
+**The projective-cap area has no export configuration.** Nothing under `lean/trust/export/` covers
+it, which is why its content drifted from the authority without any gate noticing and why the
+divergences above persist. The area's modules enter finitegeom only as incidental closure of other
+areas' exports, which is exactly the mechanism that caused this failure.
+
+**The general defect the failure exposes.** An area export byte-identically replacing a shared base
+module can delete declarations that consumers outside the export's closure depend on. Every
+existing gate passed while finitegeom was broken: the export's own closure elaborated, no import
+dangled, and the module-resolution check saw a consistent tree. Only a full library build catches
+it, and only because finitegeom now declares every module as a root of some library. No guard for
+this class was added here; a reverse-declaration-use check against the modules an export replaces
+would be the shape of one.
