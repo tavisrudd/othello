@@ -61,6 +61,40 @@ owner = "finitegeom-q25-certificates"
 disposition = "external-pending"
 path_prefixes = ["lean/RelativeConicArcs/Q25"]
 
+# The non-Lean half of the same family: the generators that write those modules, the
+# independent replay programs, the replay checker, and the canonical data the checker
+# reads.  Every one of them moves with the family under the ownership boundary, so
+# they are declared here rather than left invisible to the boundary check — which
+# scans `lean` and `papers` only and would never have reached `notes/`.  The dated
+# `notes/*-c151-*.md` reports are research records and stay; only executable payload
+# and its data are listed.  Determination:
+# notes/2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md
+[[pending_family]]
+name = "order-25 generators, replay programs, and replay data"
+owner = "finitegeom-q25-certificates"
+disposition = "external-pending"
+path_prefixes = [
+  "notes/2026-07-15-c151-exactness-generator.py",
+  "notes/2026-07-15-c151-line-mask-generator.py",
+  "notes/2026-07-15-c151-mask-generator.py",
+  "notes/2026-07-15-c151-residual-cover-generator.py",
+  "notes/2026-07-15-c151-residual-cover.cpp",
+  "notes/2026-07-15-c151-residual-quotient.cpp",
+  "notes/2026-07-15-c151-residual-transport-generator.py",
+  "notes/2026-07-15-c151-row-witnesses.py",
+  "notes/2026-07-15-c151-shared-line-composition.py",
+  "notes/2026-07-16-c151-residual-class-link-generator.py",
+  "notes/2026-07-17-c151-residual-conclusion-dispatch-generator.py",
+  "notes/2026-07-17-c151-residual-conclusion-generator.py",
+  "notes/2026-07-17-c151-residual-equality-generator.py",
+  "notes/2026-07-18-c151-exhaustion-check.py",
+  "notes/2026-07-18-c151-exhaustion-conclusion-generator.py",
+  "notes/2026-07-18-c151-exhaustion-dispatch-generator.py",
+  "notes/2026-07-18-c151-minimum-mask-spectrum.json",
+  "notes/2026-07-18-c151-minimum-mask-spectrum.py",
+  "notes/2026-07-18-c151-strict-class-bound-generator.py",
+]
+
 [[pending_family]]
 name = "order-13 passant-code certificates"
 owner = "finitegeom-projective-cap-q13-certificates"
@@ -93,4 +127,8 @@ determination = "notes/2026-08-05-c864-base-generated-module-classification.md"
 path_prefixes = [
   "lean/RelativeConicArcs/ClebschArithmeticGluingData.lean",
   "lean/RelativeConicArcs/ClebschSchemeFourierData.lean",
+  # The generators of those two tables stay for the same reason the tables do: a
+  # frozen human-scale table is only reviewable beside the program that wrote it.
+  "lean/verification/clebsch_arithmetic_gluing/",
+  "lean/verification/clebsch_scheme_fourier/",
 ]
