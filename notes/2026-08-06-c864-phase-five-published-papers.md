@@ -162,14 +162,62 @@ A concurrent session is writing `notes/2026-08-06-c879-finitegeom-paper-extracti
 `notes/2026-08-06-c879-module-name-mapping.json` in this worktree. Those paths were left untouched
 and every commit here used explicit whole-file pathspecs.
 
+## The trust boundary, settled
+
+Decision 1 below is closed. The fact's `terminal` field names
+`RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition`: the seven blocks of the
+order-sixty action are distinct, cover all 133 points of `PG(2,11)`, and have sizes 6, 10, 12, 15,
+30, 30, 30. That is the package's own exhaustive contribution.
+
+The fact already separated `origin: package` from `origin: dependency` for all 175 declarations, and
+only the single `terminal` string overstated. The sealer accepted it because appearing in the gate
+log was the whole test, and a gate imports far more than its package proves. Both `seal` and `check`
+now require the terminal to be defined in a module the package's own manifest seals, so a fact
+sealed before the rule is reported rather than trusted. The package is resealed at `76c2e563` and
+re-pinned in the monorepo; `lean-external-fact.py check` is green.
+
+### What the two Dye statements actually are
+
+Both are theorems of the shared library, over `propext`, `Classical.choice` and `Quot.sound` alone.
+The ten-point Brianchon bound specializes
+`RelativeConicArcs.SixArcConcurrence.card_triplePoints_le_ten`, which holds for every field in which
+two is invertible — more general than the order-eleven statement the paper needs. The equality
+classification specializes `Q11GoldenHexagonWitness.exists_mapEquiv_toWitness`, which combines the
+golden normal form with the two explicit projectivities carrying its order-eleven instances onto the
+displayed witness. Dye 1991 is cited as the antecedent for both.
+
+The module holding them is `RelativeConicArcs/Q11BrianchonClassification.lean`. Its former name
+declared them axioms, as did the prose in the rigidity spine, the concurrence spine, the defect
+bridge, the consequences module, both area export configurations and the paper index; all now state
+what the results are. The regenerated `trust/PORTFOLIO.md` corroborates independently: the tree's
+project-local axiom table lists two axioms, both in other areas' modules, and neither Dye statement
+appears.
+
+Regenerating that view also exposed a scanner defect. `lean-trust-spine.py` matched line-initial
+`axiom` inside module docstrings, so a header sentence beginning "axiom is imported" was published
+as a project-local axiom named `is`. The scanner now blanks nested block comments and line comments.
+Repository-wide spine findings went from 115 to 112.
+
+finitegeom, the certificate package and the paper still carry the old module name and the axiom
+prose. They clear through the export, adopt, re-pin and release chain, which has not run.
+
 ## Open decisions, in the order they block work
 
-1. What the order-eleven package's external fact should assert, now that its declared terminal is
-   proved by finitegeom rather than by the package. Clebsch rigidity and its companion cannot be
-   released until this is settled.
+1. ~~What the order-eleven package's external fact should assert.~~ Settled above.
 2. Whether `verify_release.py` should check the finitegeom half of the Paper I scholarly pathset
    against a finitegeom checkout, restoring coverage that the cut made vacuous.
 3. Whether MDS--CSS transversal groups gets its own release verifier, and what it should cover.
 4. Whether the arcs paper advances to the order-16 package at `0b04429b` and a current finitegeom
    revision, which requires re-checking its cited gates and theorem names across that change.
 5. Whether "monorepo" is also unwanted in exported paper prose.
+6. Whether the `_human` suffix comes off the Clebsch rigidity and arcs areas before the re-export.
+   Two of the twelve areas carry it: `clebsch_rigidity_human` and `arcs_complete_outside_conic_human`,
+   the two whose enumerated material was externalized into a certificate package. It was meant to
+   separate the human-scale half from the generated half, but under the shared-Lean contract
+   finitegeom holds only human-scale material, so the suffix distinguishes the area from nothing —
+   the other ten areas are equally human-scale and carry no suffix. It is also the vocabulary of the
+   two orphan gates `ClebschRigidityHuman.lean` and `ArcsCompleteOutsideConicHuman.lean` that phase 1
+   deleted as export residue. Dropping it renames the area configuration, its trust statement
+   `trust/CLEBSCH_RIGIDITY_HUMAN.md`, its axiom audit `trust/ClebschRigidityHumanAxiomAudit.lean`,
+   finitegeom's area, manifest and source-manifest files, and the manifest path the paper's pin
+   names. Doing it before the re-export costs one cycle; doing it after costs two.
