@@ -76,7 +76,7 @@ local-Clifford rigidity terminal, the equal-phase MDS--CSS specialization, the
 holonomy reductions, and projective Clifford finiteness.
 """
 
-readme_anchor = "  bounded-radius forms."
+readme_anchor = "  calculus in its finite reliability and bounded-radius forms."
 
 readme_bullet = """- `trust/manifests/ame_lu.json` content-addresses the stabilizer-AME rigidity
   boundary: the stabilizer dictionary and exact shortening, the arbitrary-arity
