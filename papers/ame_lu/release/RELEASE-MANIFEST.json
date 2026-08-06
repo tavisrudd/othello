@@ -6,14 +6,14 @@
   "public_export": {
     "artifacts": [
       {
-        "bytes": 1077,
+        "bytes": 1107,
         "path": "Makefile",
-        "sha256": "e593059a95aa847898c4f079410d8a4b249eecf8bb716659b65ae848414c3480"
+        "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 299831,
+        "bytes": 300372,
         "path": "ame-lu.pdf",
-        "sha256": "02583bb7c4cf8ff7a8fd2681c7ca17a66a0ba373e0b955a140205d55816c7625"
+        "sha256": "130b0fbb431eb0664a128eea8f2ba0da8bdc3745956e8e877405d9c683ff550f"
       },
       {
         "bytes": 2646,
@@ -36,9 +36,14 @@
         "sha256": "503422cef854d588b0642d1ff6ea6b62f944433a04aab840f8bb0ef15afc1b65"
       },
       {
-        "bytes": 5110,
+        "bytes": 270,
+        "path": "frontmatter/index-terms.tex",
+        "sha256": "3f4946bd81554445ea34aab25854c99f31da7331b8c51e3b0ad62229915c3743"
+      },
+      {
+        "bytes": 5174,
         "path": "main.tex",
-        "sha256": "02527cc463144de6683c79648be5d2c0a478f6d7eac57e31893d2b4cb43b1e1d"
+        "sha256": "b33ccd590a331dfa1b6b3776afc876c8ddf35bfdeef1e537a103225175b9b70c"
       },
       {
         "bytes": 21350,
@@ -46,9 +51,9 @@
         "sha256": "47eac5800d57548080d4d7fe5bc2a1d110ac176fa3b9763834283d30c976c6d9"
       },
       {
-        "bytes": 7866,
+        "bytes": 7881,
         "path": "release/verify_release.py",
-        "sha256": "f7e8a6c18394d7f81a1a18d9d5da341cddaed65cfd692da742d7e826a961a1f7"
+        "sha256": "b103e07609d1622f31403d2cbec1d05b17f136925eef05f8c64138e87bcf66e2"
       },
       {
         "bytes": 8358,
@@ -91,7 +96,7 @@
         "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
       }
     ],
-    "tree_sha256": "cdb1994f2a1f5fd9357adb5f870a11cbc2798911c57e90b47c7b7a8b1f5b523f"
+    "tree_sha256": "e904b7302bde9bd329c0296e18e7e74969566d817632961e787625e57cbf8103"
   },
   "formal_companion": {
     "artifacts": [

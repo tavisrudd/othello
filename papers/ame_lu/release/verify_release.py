@@ -46,7 +46,7 @@ def record(path: Path, name: str) -> dict[str, object]:
 
 def paper_paths() -> list[str]:
     paths = set(PAPER_FILES)
-    for directory in ("sections", "figures"):
+    for directory in ("frontmatter", "sections", "figures"):
         paths.update(
             str(path.relative_to(PAPER_ROOT))
             for path in (PAPER_ROOT / directory).glob("*.tex")
