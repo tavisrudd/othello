@@ -246,6 +246,59 @@ Both sides now apply the same exemptions, with a regression test asserting that 
 is not carried.  The fix also removes a quieter hazard: exporting one area could silently rewrite a
 module that area does not own.
 
+## Every finitegeom area is now registered
+
+All eleven areas finitegeom seals have a tracked export configuration, were re-exported from it,
+and were adopted with their gate green.  The only configuration without a corresponding area is
+`golden_quantum_statistics`, which is not on finitegeom's `main` at all.
+
+Three areas needed only a configuration, their gates and terminals having been declared already:
+the Arcs additions (whose fact was stale, naming three projective-cap grid modules the import
+closure no longer carries), complete ports, and — after the work below — the beyond-four PRS
+boundary.  Two needed their gates declared from scratch: Clebsch factorization, whose 23 terminals
+carry no project axiom, and the beyond-four PRS boundary.
+
+Two structural points came out of the remaining registrations.
+
+**An area may audit through a sibling gate.**  AME/LU and the beyond-four PRS boundary print their
+audited declarations from a separate `...AxiomAudit` gate that imports the aggregate, and those
+modules print under opened namespaces, so the printed names are short.  Declaring the short forms
+would have registered 170 declarations that do not exist, which is precisely what the registry's own
+comment warns against.  Each short name was instead resolved against the extracted
+`project_declarations` set and required to be unique; all resolved, none ambiguously.
+
+**The beyond-four PRS area was sealed from six roots**, which no single-gate export could reproduce.
+Its aggregate gate imports the foundation, redundancy-five, polar-induction and stable-component
+gates, so one root spans it after all, and its 16-module closure matches the 17 sealed sources minus
+the audit gate the exporter writes separately.  No exporter change was needed.
+
+Registering the complete ports area also required clearing six private references from the authority:
+three module headers citing internal planning notes as the authority for what they formalize, and
+three describing their subject as a work lane.
+
+## Native evaluation is banned in trust declarations
+
+The AME/LU registration measured five terminals discharged by `native_decide`: three counting the
+marginal stars, one the marginal triples, one the perfect matchings.  Each exposed a
+declaration-local evaluation axiom, so those counts were trusted to the compiled evaluator rather
+than checked by the kernel, and finitegeom's published statement that every printed terminal is
+kernel checked was inaccurate.  The same five reached the MDS--CSS area, whose registry had recorded
+the evaluation axioms as expected.
+
+Rather than document the boundary, the proofs were replaced.  All three counts are now discharged by
+`decide` at a raised recursion and heartbeat allowance, and the module elaborates in about a minute.
+Both affected gates were re-extracted and no extracted fact anywhere carries a native evaluation
+axiom.
+
+The spine now rejects this rather than relying on review.  A `native_decide` proof names its axiom
+after the declaration it discharged, so the axiom cannot be recognized from a fixed list; the new
+check recognizes the marker the toolchain builds into it, and also the legacy global spellings
+`Lean.ofReduceBool` and `Lean.trustCompiler`.  Declaring such an axiom as expected no longer makes it
+acceptable.  Two tests cover the per-declaration and legacy forms.
+
+Declaring the previously unregistered gates and their terminals dropped the repository-wide spine
+check from 161 findings to 115.
+
 ## State at the end of this window
 
 - Monorepo `c822cef0` carries the re-extracted passages fact.
