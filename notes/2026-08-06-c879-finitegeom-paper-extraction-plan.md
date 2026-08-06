@@ -59,6 +59,60 @@ shared APIs may not import papers. A genuine cross-paper result, such as the PRS
 balanced quantum extension consuming AME--LU results, must use an explicit adapter
 and declared paper dependency.
 
+## Paper-facing module and gate naming standard
+
+This standard applies only to the paper-facing exported closure: modules imported by a
+paper gate, exported through its public API, named by its trust manifest, or required
+to reproduce its paper claim. It does not rename unrelated internal development
+modules. Internal names change only when the module is promoted into a paper-facing
+closure.
+
+Use mathematical subject names for paper-facing ordinary modules and reserve
+infrastructure words for actual infrastructure. This follows the Lean/mathlib norm of
+UpperCamelCase file names, snake_case propositions, and lowerCamelCase data/functions.
+The paper's textbook section or review history is not a module taxonomy.
+
+For each paper, use this shape:
+
+```text
+Papers/<full-paper-alias>/
+  Foundation.lean
+  PolarInduction.lean
+  RedundancyFive.lean
+  StableComponents.lean
+  Gates/
+    Geometric.lean
+    GeometricAxiomAudit.lean
+```
+
+Rules:
+
+- ordinary files name the mathematical object or theorem family;
+- `Gate` means a stable import/build boundary, not a mathematical theorem;
+- `AxiomAudit` means the machine-readable axiom inspection for one named gate;
+- use `CertificateGate` only for a genuinely separate certificate package;
+- reserve `Trust` for manifests, reports, and external trust facts, not Lean module
+  names;
+- replace vague role/status suffixes such as `Human`, `Additions`, `Aggregate`, and
+  `Axioms` with mathematical names or the precise infrastructure name;
+- use `Core`, `Foundation`, `Extensions`, or `Examples` only when they describe the
+  actual API layer, not chronology or ownership history;
+- keep generated leaves in the owning certificate package and name their mathematical
+  partition, not a build order or task number.
+
+Thus the eventual PRS roots would be explicit, for example:
+
+```text
+TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.Geometric
+TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.GeometricAxiomAudit
+TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.QuantumExtension
+TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.QuantumExtensionAxiomAudit
+```
+
+The first source split preserves existing module names. This naming cleanup is a later
+one-paper-facing-family chunk with its own reverse-closure and synchronization; it does
+not trigger a repository-wide rename.
+
 The first physical split must not also rename namespaces. Initially preserve existing
 module names behind package-specific source roots, for example:
 
