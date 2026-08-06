@@ -305,7 +305,21 @@ python3 ~/src/othello/lean/scripts/lean-package-source-audit.py \
 **Checkpoint 9.**  `lean-certificate-boundary.py --verify-official-libraries` is green, including the
 new collision rule.  (There is no checkpoint 8; the numbering skips it and always did.)
 
-## Phase 5 — published papers — RESUME HERE
+## Phase 5 — published papers — steps 22 through 25 done; step 26 STOPPED on Clebsch rigidity
+
+Executed on 2026-08-06; findings and evidence in
+`2026-08-06-c864-phase-five-published-papers.md`. Checkpoint 10 passes. Step 24 needed nothing: the
+one in-scope lock of the four was the order-eleven package's, already advanced in phase 3.
+
+Step 26 ran for Clebsch passages, Clebsch factorization, AME/LU, beyond-four PRS, golden quantum
+statistics and the arcs replay, all green. It did **not** run for Clebsch rigidity or its companion,
+because the falsifier stated for the package-terminal decision below was observed: the paper's
+`rigidity-headline` claim cites the package's gate as Lean evidence for
+`RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic`, which finitegeom now
+proves. That decision must be settled before this chain runs; the report lists everything else the
+chain will need. Two further defects and one exported internal term are recorded there.
+
+Steps 27 through 30 have not run and no mirror has been synchronized.
 
 Every count in this phase was measured before phases 1 through 4 ran, and those phases moved
 finitegeom by five commits, the certificate package by three, and the monorepo by more.  **Re-measure

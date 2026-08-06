@@ -134,7 +134,16 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    start there, not from the card's execution order. It carries the resume state, the decisions
    already taken, exact commands, and its own stop points; it excludes the projective-cap, order-13
    and order-25 externalizations and the unpublished papers, so finishing it does not close C864.
-   Its phases 1 through 4 are done and it resumes at step 22, the first paper-side step
+   Its phases 1 through 4 are done, and phase 5 ran through checkpoint 10 and most of step 26
+   (`../2026-08-06-c864-phase-five-published-papers.md`): the beyond-four PRS bibliography, the
+   restating documents and eight facts artifacts are current, and the Clebsch passages, Clebsch
+   factorization, AME/LU, beyond-four PRS and golden quantum statistics release gates are green.
+   **The Clebsch rigidity chain is stopped by a declared falsifier** — the paper cites the
+   order-eleven package's gate as evidence for a terminal finitegeom now proves — so what that
+   package's external fact should assert is the decision blocking Paper I's release. Also open
+   there: MDS--CSS transversal groups has no release verifier at all though its Makefile calls one,
+   and the arcs paper still pins a superseded order-16 package. No mirror has been synchronized.
+   The earlier phases resumed at step 22, the first paper-side step
    (`../2026-08-06-c864-finitegeom-standalone-build-gate.md` and
    `../2026-08-06-c864-order-eleven-package-reseal.md`): all twelve areas are registered,
    adopted and idempotent with golden quantum statistics now among them, the stale build residue is
@@ -320,7 +329,8 @@ passages re-export and the unregistered arcs area [`../2026-08-05-c864-passages-
 export-completion execution plan [`../2026-08-06-c864-export-completion-execution-plan.md`](../2026-08-06-c864-export-completion-execution-plan.md);
 standalone build gate [`../2026-08-06-c864-finitegeom-standalone-build-gate.md`](../2026-08-06-c864-finitegeom-standalone-build-gate.md);
 projective-cap repair [`../2026-08-06-c864-projectivecap-standalone-repair.md`](../2026-08-06-c864-projectivecap-standalone-repair.md);
-order-eleven package reseal [`../2026-08-06-c864-order-eleven-package-reseal.md`](../2026-08-06-c864-order-eleven-package-reseal.md).
+order-eleven package reseal [`../2026-08-06-c864-order-eleven-package-reseal.md`](../2026-08-06-c864-order-eleven-package-reseal.md);
+phase 5 published papers [`../2026-08-06-c864-phase-five-published-papers.md`](../2026-08-06-c864-phase-five-published-papers.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
