@@ -7,11 +7,18 @@ import PassantCodeQ13.AssociationTransport.RelationCubic
 
 The generic implications live in `RelativeConicArcs.PassantCodeQ13.StructuralUpgrade`.  This module
 checks the bounded q=13 inputs that are small enough to evaluate in Lean.  Every check stated in this
-module — pair-only row recovery, unary constancy, the fused pair-color split, the three toric support
-cardinalities and parities, the determinant-conic cardinality, and the point and line axioms of the
-normalized 183-point plane — is discharged by native evaluation, so each carries the
-declaration-local axiom that compiled evaluation introduces.  The hidden-field quartic satisfied by
-the rho-nine relation operator is the one result here that does not: it is inherited from
+module is discharged in one of two ways.
+
+The checks whose domain is the 364-member decoded support family — pair-only row recovery, unary
+constancy, and the fused pair-color split — and the point and line axioms of the normalized
+183-point plane, whose domain is the ordered pairs of that plane, are discharged by native
+evaluation, so each carries the declaration-local axiom that compiled evaluation introduces.
+
+The checks whose domain is the 78 internal points or the 183 plane coordinates — the three toric
+support cardinalities, their passant parities, and the determinant-conic cardinality — are
+discharged by kernel reduction and carry no evaluation axiom.
+
+The hidden-field quartic satisfied by the rho-nine relation operator is inherited from
 `PassantCodeQ13.AssociationTransport.RelationCubic`, where it is derived from the squaring
 identities of the elliptic relations.  The larger theta positivity and stabilizer-prefix tables
 remain separately hashed exact certificates.
@@ -62,18 +69,25 @@ def toricSupport (r : Field13) : Finset InternalPoint :=
 def HasEvenPassantIntersections (support : Finset InternalPoint) : Prop :=
   ∀ line : PassantLine, ((support.filter fun point => Incident line point).card % 2 = 0)
 
+/-- The parity condition is decidable, being a bounded quantifier over the finite passant lines
+with a decidable body; stating the instance lets the condition be evaluated as written. -/
+instance (support : Finset InternalPoint) :
+    Decidable (HasEvenPassantIntersections support) := by
+  unfold HasEvenPassantIntersections
+  infer_instance
+
 /-- The three toric levels have twelve internal points. -/
 theorem toricSupport_cards :
     (toricSupport 2).card = 12 ∧ (toricSupport 5).card = 12 ∧
       (toricSupport 11).card = 12 := by
-  native_decide
+  decide +kernel
 
 /-- The three toric levels satisfy every passant parity check. -/
 theorem toricSupport_even_passants :
     HasEvenPassantIntersections (toricSupport 2) ∧
       HasEvenPassantIntersections (toricSupport 5) ∧
       HasEvenPassantIntersections (toricSupport 11) := by
-  native_decide +revert
+  decide +kernel
 
 /-- The relation operator `A₉` satisfies the hidden irreducible cubic on its image: multiplying
 `B³+B²+I` by `B` gives the zero ambient matrix. -/
@@ -100,7 +114,14 @@ theorem planeCoordinate_card : Fintype.card PlaneCoordinate = 183 := by
 /-- The determinant conic has fourteen normalized points. -/
 theorem determinantConic_card :
     (Finset.univ.filter fun point : PlaneCoordinate => pointDiscriminant point.1 = 0).card = 14 := by
-  native_decide
+  decide +kernel
+
+/-- Unique existence over the finite normalized plane is decidable: it unfolds to an existential
+and a bounded uniqueness clause, both over a fintype with decidable incidence and equality. -/
+instance (predicate : PlaneCoordinate → Prop) [DecidablePred predicate] :
+    Decidable (∃! coordinate : PlaneCoordinate, predicate coordinate) := by
+  unfold ExistsUnique
+  infer_instance
 
 /-- Every two distinct normalized points lie on a unique normalized line. -/
 theorem uniqueLine_through_two_points (first second : PlaneCoordinate)

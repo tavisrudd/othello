@@ -14,6 +14,11 @@ the check fail rather than making a false statement provable.
 
 namespace PassantCodeQ13.Equivariance
 
+-- The pair table is one list literal with 78 * 78 entries, and a list literal is
+-- elaborated by one recursive step per entry, so the default elaborator recursion
+-- depth is too small to read this file.
+set_option maxRecDepth 20000
+
 /-- Index in the normalized matrix list of a matrix carrying the internal point of index zero to the internal point of each index. -/
 def pointTransporterIndices : List Nat := [
   0, 2, 3, 5, 1, 4, 12, 14,

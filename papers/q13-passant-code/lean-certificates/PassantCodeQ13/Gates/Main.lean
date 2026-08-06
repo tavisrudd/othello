@@ -136,8 +136,11 @@ theorem ellipticSchemeAutomorphismsAreProjective
   PassantCodeQ13.Automorphisms.preservesRho_iff_projective permutation
 
 /-- The decoded minimum layer recovers the polarity rows from concurrence-eight neighborhoods,
-has constant unary degree 56, and splits the fused concurrence-six color by pair-derived walks. -/
-theorem pairOnlyReconstruction :
+has constant unary degree 56, and splits the fused concurrence-six color by pair-derived walks.
+
+The pair-only interface bundles those three clauses with the common unary degree itself, so it is
+a structure carrying data rather than a proposition, and the witness is a definition. -/
+def pairOnlyReconstruction :
     RelativeConicArcs.PassantCodeQ13.PairOnlyReconstructionCertificate
       PassantCodeQ13.MinimumWords.RowUniqueness.semanticMinimumSupports :=
   PassantCodeQ13.StructuralUpgrade.pairOnlyCertificate

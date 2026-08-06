@@ -52,6 +52,9 @@ theorem matrixAction_bijective (matrix : Fin PassantCodeQ13.MinimumWords.project
       act (PassantCodeQ13.MinimumWords.projectiveMatrices.get matrix) (internalAt first.val) =
         act (PassantCodeQ13.MinimumWords.projectiveMatrices.get matrix) (internalAt second.val) := by
     have transported := congrArg (fun index : Coordinate => internalAt index.val) equal_images
+    -- The indexed action is the coordinate action followed by re-indexing, and the transport
+    -- lemma is stated about that re-indexing, so the index map is expanded before rewriting.
+    simp only [matrixAction] at transported
     rwa [SymmetricSquare.internalAt_ofNat_internalIndex first_acted,
       SymmetricSquare.internalAt_ofNat_internalIndex second_acted] at transported
   exact SymmetricSquare.internalAt_injective first second
@@ -75,8 +78,11 @@ theorem matrixAction_preservesRho
     ((SymmetricSquare.mem_internalCoordinateList_iff _).mp first_mem).2.1
   have second_nondegenerate :=
     ((SymmetricSquare.mem_internalCoordinateList_iff _).mp second_mem).2.1
-  rw [SymmetricSquare.rhoAt_eq_polarInvariant, SymmetricSquare.rhoAt_eq_polarInvariant,
-    SymmetricSquare.internalAt_ofNat_internalIndex first_acted,
+  rw [SymmetricSquare.rhoAt_eq_polarInvariant, SymmetricSquare.rhoAt_eq_polarInvariant]
+  -- The indexed action is expanded here too, so that the transport lemma applies to the
+  -- re-indexing it is stated about.
+  simp only [matrixAction]
+  rw [SymmetricSquare.internalAt_ofNat_internalIndex first_acted,
     SymmetricSquare.internalAt_ofNat_internalIndex second_acted]
   exact SymmetricSquare.polarInvariant_act
     (SymmetricSquare.determinant_ne_zero_of_mem matrix_mem) first_nondegenerate

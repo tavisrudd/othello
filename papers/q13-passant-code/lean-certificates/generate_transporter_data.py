@@ -184,6 +184,11 @@ def main() -> None:
         "\n"
         "namespace PassantCodeQ13.Equivariance\n"
         "\n"
+        "-- The pair table is one list literal with 78 * 78 entries, and a list literal is\n"
+        "-- elaborated by one recursive step per entry, so the default elaborator recursion\n"
+        "-- depth is too small to read this file.\n"
+        "set_option maxRecDepth 20000\n"
+        "\n"
         + "\n".join(blocks)
         + "\nend PassantCodeQ13.Equivariance\n"
     )
