@@ -368,6 +368,29 @@ class AreaExportTests(unittest.TestCase):
         )
         self.assertEqual(carried, {"verification/gluing/generate.py": b"print('data')\n"})
 
+    def test_a_cited_lean_module_is_not_carried_as_apparatus(self) -> None:
+        """A module reaches the target through a closure, never as apparatus.
+
+        Carrying it here would overwrite whatever the destination already seals at
+        that path while leaving that seal describing the previous bytes, so an
+        export would silently rewrite a module its own area does not own.
+        """
+        module = self.source / "lean" / "ProjectiveCap" / "Mirror.lean"
+        module.parent.mkdir(parents=True, exist_ok=True)
+        module.write_text("-- newer authority bytes\n")
+        git(self.source, "add", "-A")
+        git(self.source, "commit", "--quiet", "-m", "module")
+        commit = EXPORTER.resolve_commit(self.source, "HEAD")
+        self.assertEqual(
+            EXPORTER.cited_apparatus(
+                self.source,
+                commit,
+                {"RelativeConicArcs/Cited.lean":
+                 b"/-! Mirrored by `ProjectiveCap/Mirror.lean`. -/\n"},
+            ),
+            {},
+        )
+
     def test_a_citation_outside_the_lean_root_is_not_carried(self) -> None:
         """A paper supplement has no path in the candidate that its citation names."""
         record = self.source / "papers" / "supplement" / "records.json"

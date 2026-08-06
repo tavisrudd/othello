@@ -223,13 +223,25 @@ def cited_apparatus(
     is the path the reader finds.  A citation reaching anywhere else — a paper
     supplement, say — is left for `dangling_citations` to report, because carrying
     it would put the file somewhere its own citation does not name.
+
+    A Lean module or release-metadata file is never apparatus, and the exemptions
+    here are the same ones `dangling_citations` applies.  A module reaches the
+    target through a closure and its manifest entry; carrying it as apparatus
+    instead would overwrite whatever the destination already seals at that path
+    while leaving that seal describing the previous bytes, so the export would
+    silently rewrite a module this area does not own.
     """
     carried: dict[str, bytes] = {}
     for path, data in sorted(files.items()):
         if not path.endswith(".lean"):
             continue
         for cited in sorted(set(CITED_ARTIFACT_RE.findall(data.decode("utf-8", "replace")))):
-            if cited in files or cited in carried or DOI_RE.match(cited):
+            if (
+                cited in files
+                or cited in carried
+                or cited.endswith(CITATION_EXEMPT_SUFFIXES)
+                or DOI_RE.match(cited)
+            ):
                 continue
             blob = read_blob_if_present(source_repo, source_commit, f"lean/{cited}")
             if blob is not None:
