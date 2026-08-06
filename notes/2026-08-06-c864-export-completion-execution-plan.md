@@ -37,9 +37,20 @@ export, certificate re-pin, or paper-mirror synchronization — nothing else may
 `~/src/lean/` or `~/src/math-papers/`.  `notes/research-reproducibility-conventions.md` before any
 paper-facing computational claim.  `papers/style-guide.md` before touching manuscript prose.
 
-### Progress: phase 1 steps 1--3 and checkpoints 1--2 are done
+### Progress: phases 1 and 2 are done
 
-Executed on 2026-08-06 and committed in finitegeom; resume at step 4.
+Executed on 2026-08-06 and committed in both repositories; resume at step 12, the order-eleven
+package's lock refresh.  Findings and evidence:
+`2026-08-06-c864-finitegeom-standalone-build-gate.md`.
+
+One thing phase 2 found is not repaired and is not this plan's to repair.  **finitegeom's
+`ProjectiveCap` library does not compile**: six of its modules were exported with an import of
+`ProjectiveCap.ProjectiveCapGame` or `ProjectiveCap.PlaneTransitivityGame` removed while the
+declarations they use stayed, and finitegeom carries neither module.  The other six default targets
+build green.  The projective-cap area has no export configuration, its externalizations are out of
+scope here, and the repair needs a determination about the game-free split, so it is recorded for
+its owner.  Nothing in phases 3--6 depends on it, but a decision to repair it in finitegeom should
+land *before* step 13 pins a finitegeom revision into the certificate package.
 
 - The two orphan gates are deleted, their `lakefile.toml` roots removed, and their entries plus the
   stale `RelativeConicArcs.PaperIOrientationSpine` root removed from `TARGET_MANIFEST.json`
@@ -47,23 +58,36 @@ Executed on 2026-08-06 and committed in finitegeom; resume at step 4.
 - **Checkpoint 1 passed.**  No manifest entry names an absent path, no root names an absent module,
   `module_count` matches `sources`, and `RelativeConicArcs.Gates.ArcsCompleteOutsideConic` builds
   green in finitegeom.
-- **Checkpoint 2 passed**, after two fixes it surfaced, both now committed.  The eleven-area
-  idempotence run first refused every area with `base prose disagrees with the base manifest`: the
-  hand edit in step 3 changed the module count while finitegeom's `README.md` and `PROVENANCE.md`
-  still said 316.  This is precisely the failure checkpoint 2 exists to catch — do not skip it after
-  any hand edit to a generated manifest.  The support-cubic orientation area then showed a
-  one-file delta, its trust statement still calling the artifact a companion, which the vocabulary
-  rule forbids; it was adopted.  All eleven adopted areas now report an empty delta.
-- Golden quantum statistics reports a 12-file delta, which is expected and is step 6's work: it is
-  the one configured area not yet adopted on finitegeom.
+- **Checkpoint 2 passed**, after two fixes it surfaced.  The eleven-area idempotence run first
+  refused every area with `base prose disagrees with the base manifest`: the hand edit in step 3
+  changed the module count while finitegeom's `README.md` and `PROVENANCE.md` still said 316.  This
+  is precisely the failure checkpoint 2 exists to catch — do not skip it after any hand edit to a
+  generated manifest.  The support-cubic orientation area then showed a one-file delta, its trust
+  statement still calling the artifact a companion, which the vocabulary rule forbids; it was
+  adopted.
+- **Step 4 done.**  The residue sweep deleted 264 files and 28.4 MB — a build output whose Lean
+  source no longer exists in its root, and nothing else — across all three roots, with the build
+  owner free.  The portfolio audit now reports no built module without a source anywhere.
+- **Checkpoint 3 passed.**  Golden quantum statistics exported to a twelve-file delta, its gate
+  built green in finitegeom, the delta was adopted, and its re-export is empty.  All twelve
+  configured areas report an empty forward delta, so every configuration has an adopted counterpart.
+- **Step 7 done.**  None of the seven order-eleven modules carries a generated banner — the
+  decision's falsifier did not fire — so the `pending_family` entry naming them is removed and
+  `lean-certificate-boundary.py` is green.
+- **Checkpoint 4 passed.**  The module-collision rule and the standalone-resolution gate both go red
+  on constructed violations and are green on the real tree; all three suites pass.  The collision
+  rule also fires on the real order-eleven package, for the eight modules phase 3 removes.
+- **Step 9 changed shape.**  finitegeom had never built standalone: four libraries declared no roots
+  and so named absent top-level module files, because `insert_lakefile_roots` searched past the end
+  of the named library's section and donated their modules to an unrelated library.  Both the
+  exporter and finitegeom's `lakefile.toml` are fixed, and six of seven targets build green.
 
-### State at the start of this plan
+### Current state
 
 - Monorepo `~/src/othello` is clean and its work is committed.
 - finitegeom `~/src/lean/finitegeom` is clean, and its local `main` is **ahead of `origin/main`**.
-  All eleven of its adopted areas are registered under `lean/trust/export/`, re-exported from tracked
-  configurations, gate-green, and idempotent.  A twelfth configuration, golden quantum statistics,
-  is registered but not yet adopted.
+  All twelve of its areas are registered under `lean/trust/export/`, re-exported from tracked
+  configurations, gate-green, and idempotent.
 - The order-eleven package `~/src/lean/finitegeom-clebsch-q11-certificates` has an **uncommitted
   worktree** at `HEAD` `20ae258`, holding work this plan continues: the finitegeom re-pin in
   `lakefile.toml`, `lake-manifest.json` and `README.md`; the gate renamed to
@@ -76,7 +100,7 @@ Executed on 2026-08-06 and committed in finitegeom; resume at step 4.
 
 ## Scope
 
-In scope for this first pass: the finitegeom tree and its eleven areas, the order-eleven certificate
+In scope for this first pass: the finitegeom tree and its twelve areas, the order-eleven certificate
 package, and the published papers — Clebsch rigidity as Paper I with its computational companion,
 factorization as Paper II, passages as Paper III, arcs complete outside a conic, beyond-four
 projective Reed--Solomon, AME/LU, MDS--CSS transversal groups, and golden quantum statistics — plus

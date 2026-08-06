@@ -134,6 +134,19 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    start there, not from the card's execution order. It carries the resume state, the decisions
    already taken, exact commands, and its own stop points; it excludes the projective-cap, order-13
    and order-25 externalizations and the unpublished papers, so finishing it does not close C864.
+   Its phases 1 and 2 are done and it resumes at step 12
+   (`../2026-08-06-c864-finitegeom-standalone-build-gate.md`): all twelve areas are registered,
+   adopted and idempotent with golden quantum statistics now among them, the stale build residue is
+   swept, the order-eleven `pending_family` entry is gone, and two guards are in place — a package
+   module colliding with the pinned finitegeom revision, and an export that would not resolve as a
+   repository of its own. That second gate found that finitegeom had never built standalone: four
+   libraries declared no roots because the exporter's root insertion donated their modules to an
+   unrelated library. Six of the seven targets now build green. The seventh, `ProjectiveCap`, does
+   not compile — six modules were exported with an import of `ProjectiveCap.ProjectiveCapGame` or
+   `ProjectiveCap.PlaneTransitivityGame` removed while the declarations they use stayed, and
+   finitegeom carries neither module. That area has no export configuration and its repair needs a
+   determination about the game-free split, so it is recorded for its owner; a decision to repair it
+   should land before the certificate package pins a finitegeom revision.
    Done: the order-16 package is sealed, packed, restore-rehearsed trace-current, and its external
    trust fact is published and pinned; the Kim--Vu and Al-Seraji--Al-Ogali anchors are exact.
    The finitegeom game-free/game split is landed and gate-green in the monorepo: the validity
@@ -195,12 +208,8 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    bridge; q13 Segre foundation; q13 tangent-code certificates; then the v2 release, aligning
    q11/q13 on one upstream commit and preserving the v1 aggregate unchanged.
 
-Four of the five registered areas are current on finitegeom.  MDS--CSS transversal groups was adopted
-in the previous window; Clebsch passages was re-exported and adopted in this one after its stale
-trust fact was re-extracted, bringing the signed two-graph core across and rebuilding green there;
-support-cubic orientation and six-arc concurrence both report empty deltas.  Golden quantum
-statistics is still unadopted on finitegeom's `main`, so exporting it would adopt a new area rather
-than refresh one.
+Every registered area is current on finitegeom and reports an empty forward delta, golden quantum
+statistics included since its adoption on 2026-08-06.
 
 Two findings changed the shape of the remaining export work
 (`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`).  The orientation rename has
@@ -213,8 +222,7 @@ unregistered ones seal 290 modules against 130 registered, and five of them name
 commit `10d1941a` of 2026-07-28.  They span the AME/LU aggregate, both arcs areas, Clebsch
 factorization, Clebsch rigidity, complete ports, and the beyond-four PRS foundation, so registering
 them crosses several lanes.  All eleven are now registered, re-exported from a tracked configuration,
-and adopted with their gate green; the only configuration without a corresponding area is
-`golden_quantum_statistics`, which is not on finitegeom's `main`.  The human Arcs area supplies the
+and adopted with their gate green, and golden quantum statistics joined them as a twelfth.  The human Arcs area supplies the
 `ParametrizedHoles.lean` leaf and the game-free `Q11Residual`/`Q11Coding` that finitegeom lacked, and
 the human Clebsch rigidity area makes both Dye statements theorems there rather than axioms.
 Declaring the previously unregistered gates and their terminals dropped the repository-wide spine
@@ -296,7 +304,8 @@ non-Lean payload and build artifacts [`../2026-08-05-c864-non-lean-payload-and-b
 payload seal convention and reverse audit [`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`](../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md);
 dangling artifact citations [`../2026-08-05-c864-dangling-artifact-citations.md`](../2026-08-05-c864-dangling-artifact-citations.md);
 passages re-export and the unregistered arcs area [`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`](../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md);
-export-completion execution plan [`../2026-08-06-c864-export-completion-execution-plan.md`](../2026-08-06-c864-export-completion-execution-plan.md).
+export-completion execution plan [`../2026-08-06-c864-export-completion-execution-plan.md`](../2026-08-06-c864-export-completion-execution-plan.md);
+standalone build gate [`../2026-08-06-c864-finitegeom-standalone-build-gate.md`](../2026-08-06-c864-finitegeom-standalone-build-gate.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
