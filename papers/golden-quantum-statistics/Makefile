@@ -1,16 +1,29 @@
-LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
+# The tracked PDF is byte-reproducible: the pinned epoch fixes the timestamps TeX
+# and the PDF writer would otherwise embed, so two builds of one source agree even
+# at different filesystem paths.  verification/check_manuscript_build.py compares a
+# fresh build against the tracked PDF and is the supported way to refresh it.
+export SOURCE_DATE_EPOCH = 1767225600
+export FORCE_SOURCE_DATE = 1
+
+# The pinned toolchain: same nixpkgs revision as every other paper, so the tracked
+# PDF is reproducible here, in a standalone copy, and on another machine.
+TEXSHELL ?= nix develop .\#manuscript --command
+LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 UV ?= uv
 SOURCE := golden_quantum_statistics.tex
 
-.PHONY: all check lint verify verify-sources warnings clean distclean
+.PHONY: all check lint manuscript verify verify-sources clean distclean
 
 all: lint golden_quantum_statistics.pdf
 
-check: lint verify verify-sources golden_quantum_statistics.pdf warnings
+check: lint verify verify-sources manuscript
 
 lint:
 	python3 verification/lint_tex_spacing.py $(SOURCE)
+
+manuscript:
+	$(TEXSHELL) python3 verification/check_manuscript_build.py
 
 verify:
 	python3 verification/verify.py --check
@@ -26,14 +39,6 @@ verify-sources:
 golden_quantum_statistics.pdf: $(SOURCE)
 	python3 verification/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
-
-warnings: golden_quantum_statistics.pdf
-	@if [ ! -f golden_quantum_statistics.log ]; then \
-		$(LATEXMK) -g $(LATEXMK_FLAGS) $(SOURCE); \
-	fi
-	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' golden_quantum_statistics.log; then \
-		exit 1; \
-	fi
 
 clean:
 	$(LATEXMK) -c $(SOURCE)

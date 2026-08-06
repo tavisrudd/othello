@@ -1,8 +1,8 @@
 {
   "files": {
     "Makefile": {
-      "bytes": 1490,
-      "sha256": "90fc0c1c1da701aeab57ca2338f770176fbc101971331a2284b509542da1f94c"
+      "bytes": 1790,
+      "sha256": "5fcb8b3bac6cf2fba01f22197cb5d073fa64ec4e2ec8cd93d42b0c48ff0aa358"
     },
     "golden_quantum_statistics.tex": {
       "bytes": 54531,
@@ -23,6 +23,10 @@
     "verification/README.md": {
       "bytes": 1998,
       "sha256": "28185ef880145d1e0165ba3b4e3cfeed927912c01e4048e551494cb87a0b5c96"
+    },
+    "verification/check_manuscript_build.py": {
+      "bytes": 4892,
+      "sha256": "1659d840c185aca2924275ec0eebb5454c33bd603769535fe228fdea7728cc4e"
     },
     "verification/evidence/anomaly_inverse.json": {
       "bytes": 14269,
@@ -69,8 +73,8 @@
       "sha256": "511eb6837ec3b59769f4a2e3d76a9658403907f270246e9d739bec1afcc345e0"
     },
     "verification/verify.py": {
-      "bytes": 15269,
-      "sha256": "5c90a68e496f97de24ab02956b644f532941dca9fe58131e66189bbc65144e13"
+      "bytes": 15375,
+      "sha256": "8f2b26a4c004301bddd721e1a460313bfc53720c866f3a5add670910e9a05b37"
     }
   },
   "schema": "golden-quantum-statistics-manifest-v1"

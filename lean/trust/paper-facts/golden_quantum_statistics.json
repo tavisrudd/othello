@@ -249,10 +249,10 @@
   "paper": "golden_quantum_statistics",
   "pdfs": [
     {
-      "bytes": 146431,
+      "bytes": 146417,
       "pages": 16,
       "path": "papers/golden-quantum-statistics/golden_quantum_statistics.pdf",
-      "sha256": "a12996a2925c75fdf24d82af9f0996f26121b53956a4f6f0a1034e94027418e0"
+      "sha256": "ec706743b848d42186499ca70dd8a1dae43b6fc387939682fa583dce4cc53eb0"
     }
   ],
   "schema_version": 1,
