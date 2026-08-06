@@ -167,6 +167,45 @@ def filesystem_type(path: Path) -> str:
     return best_type
 
 
+# A backticked repository-relative path naming a file, as Lean prose cites a
+# generator, a replay program, or the data either one reads.  Bare module names and
+# ordinary mathematics carry no slash, and a citation without an extension is prose
+# about a directory rather than a file.
+CITED_ARTIFACT_RE = re.compile(r"`((?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+\.[A-Za-z0-9]+)`")
+# Paths a Lean module cites that are Lean modules or release metadata rather than
+# verification apparatus; the candidate carries them or the manifest check already
+# covers them.
+CITATION_EXEMPT_SUFFIXES = (".lean", ".md", ".toml", ".lock", ".nix")
+# A DOI has the shape of a path and is not one.  Citing published literature by DOI is
+# required elsewhere in the artifact rules, so it must never read as a missing file.
+DOI_RE = re.compile(r"^10\.\d{4,9}/")
+
+
+def dangling_citations(files: dict[str, bytes]) -> list[str]:
+    """Artifact paths the candidate's own sources cite but do not carry.
+
+    A generated table names its generator, its schema, and the data the generator
+    read, which is what makes the table reviewable rather than merely present.  The
+    citation is true in the repository the module was written in and false in a
+    release built from a module subset, where the named program was never copied.
+    A reader of the release then has a path that resolves nowhere.
+    """
+    carried = set(files)
+    findings: list[str] = []
+    for path, data in sorted(files.items()):
+        if not path.endswith(".lean"):
+            continue
+        for cited in sorted(set(CITED_ARTIFACT_RE.findall(data.decode("utf-8", "replace")))):
+            if (
+                cited.endswith(CITATION_EXEMPT_SUFFIXES)
+                or cited in carried
+                or DOI_RE.match(cited)
+            ):
+                continue
+            findings.append(f"{path}: cites {cited}, which this candidate does not carry")
+    return findings
+
+
 def audit_text(label: str, text: str) -> list[str]:
     findings = []
     for name, pattern in PRIVATE_PATTERNS:
@@ -645,6 +684,7 @@ def build_plan(
     base_rev: str,
     config_path: Path,
     accept_drift: bool,
+    strict_citations: bool = False,
 ) -> Plan:
     config = load_config(config_path)
     if not worktree_is_clean(base_repo):
@@ -695,6 +735,15 @@ def build_plan(
         findings.extend(audit_text(path, data.decode("utf-8", "replace")))
     if findings:
         raise Refused("candidate content carries private references:\n  " + "\n  ".join(findings))
+
+    dangling = dangling_citations(files)
+    if dangling:
+        if strict_citations:
+            raise Refused(
+                "candidate cites artifacts it does not carry:\n  " + "\n  ".join(dangling)
+            )
+        for finding in dangling:
+            print(f"warning: {finding}", file=sys.stderr)
 
     return Plan(
         source=source,
@@ -831,7 +880,7 @@ def forward_delta(plan: Plan, out: Path, verbose: bool = False) -> dict[str, Any
 def command_plan(args: argparse.Namespace) -> int:
     plan = build_plan(
         REPO_ROOT, args.source_commit, args.base_repo, args.base_commit,
-        args.config, args.accept_base_prose_drift,
+        args.config, args.accept_base_prose_drift, args.strict_citations,
     )
     guard_paths(args.base_repo, None)
     print(canonical_json(plan.summary()), end="")
@@ -841,7 +890,7 @@ def command_plan(args: argparse.Namespace) -> int:
 def command_run(args: argparse.Namespace) -> int:
     plan = build_plan(
         REPO_ROOT, args.source_commit, args.base_repo, args.base_commit,
-        args.config, args.accept_base_prose_drift,
+        args.config, args.accept_base_prose_drift, args.strict_citations,
     )
     workdir = args.workdir
     first = workdir / "candidate"
@@ -876,6 +925,9 @@ def main(argv: list[str] | None = None) -> int:
                         help="exact commit of the canonical base repository")
     parser.add_argument("--accept-base-prose-drift", action="store_true",
                         help="leave base statements that already disagree with the base manifest")
+    parser.add_argument("--strict-citations", action="store_true",
+                        help="refuse a candidate whose sources cite an artifact path it does"
+                             " not carry, instead of warning")
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("plan", help="derive and print the export plan without writing anything")
     run = subparsers.add_parser(
