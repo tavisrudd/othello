@@ -361,11 +361,14 @@ Runnable now, in order:
 6. **Non-Lean payload and build-artifact sweep.**  Done; findings and the two new machine rules are
    in `notes/2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md` and summarized under
    execution step 6 above.
-7. **Remaining without a build window:** the two banner repaths that the base re-export must carry
-   (`ClebschArithmeticGluingData`, `ClebschSchemeFourierData` naming paths their exports lack), the
-   reverse direction of the package source audit, which reports authority files a package lacks and
-   would have found the replay program the order-25 candidate is missing, and one settled convention
-   for how a package seals its non-Lean payload.
+7. **Payload seal convention and reverse-direction audit.**  Done.  The convention is in the cache
+   and build contract above; the audit now reports authority files a package lacks, payload the
+   manifest does not seal, and a declared family with no sealed source at all, with `--strict`
+   promoting the first two to defects.  Both adopted packages are complete against their authority
+   and both carry unsealed payload to migrate at their next reseal.  Report:
+   `notes/2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`.
+8. **Remaining without a build window:** the two banner repaths that the base re-export must carry
+   (`ClebschArithmeticGluingData`, `ClebschSchemeFourierData` naming paths their exports lack).
 
 ## Cache and build contract
 
@@ -374,8 +377,16 @@ Runnable now, in order:
 - One heavyweight build owns the host at a time.  Use measured profiles and the shared build-owner
   lock across the monorepo, official libraries, dependency checkouts, and restore rehearsals.
 - Every official package records an immutable base revision, resolved `lake-manifest.json`, source
-  commit, manifest hash, focused import-only trust gate, exact public terminals, and generator/replay
-  hashes.
+  commit, manifest hash, focused import-only trust gate, and exact public terminals.
+- Non-Lean payload is sealed one way: a single `support_files` list in `MANIFEST.json`, holding every
+  generator, replay program, replay input, canonical output, and gate evidence file with its path,
+  byte count, and SHA-256.  Packaging — flake, lakefile, licence, citation, README, the sealing
+  program itself — is not payload and is not listed.  Everything under `scripts/`, `artifacts/`,
+  `evidence/`, and `verification/` is payload and must appear.  `generator` and
+  `verification_artifacts` are the earlier spellings; `lean-package-source-audit.py` reads all three
+  and reports payload the manifest omits or no longer matches, so each adopted package migrates at
+  its next reseal rather than out of band.  Determination:
+  `notes/2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`.
 - For each package, acceptance includes both a clean cold build and a separate pack/erase/restore
   replay.  The latter must show the focused gate trace-current and must audit that no validated
   sentinel or generated leaf rebuilt.

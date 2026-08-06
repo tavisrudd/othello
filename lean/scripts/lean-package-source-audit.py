@@ -21,6 +21,31 @@ name in one import closure and is always a defect.  A module the monorepo still
 carries is a duplicate source: admissible only while its extraction is pending,
 and only while the two copies agree.
 
+Two further questions the sealed-source pass cannot answer, because it iterates
+what the package has:
+
+  missing-from-package   the authority carries a file inside a family the package
+                         owns, and the package does not seal it.  A package that
+                         is behind its authority looks perfect from the inside;
+                         only naming the family and reading the authority's own
+                         file list finds the gap.  Families are named by
+                         `--family-prefix`, or taken from the package's declared
+                         `owned_module_prefixes`.
+
+  unsealed payload       a program or data file in the package's payload
+                         directories that its manifest does not seal.  Generated
+                         Lean sources are sealed exactly; generators, replay
+                         programs, replay data and gate evidence have been sealed
+                         by convention, in three different shapes.  The convention
+                         is one list, `support_files`, holding every payload file
+                         with its size and hash; `generator` and
+                         `verification_artifacts` are read as legacy spellings of
+                         the same thing until each package's next reseal.
+
+Both are reported always and set the exit code only under `--strict`, because the
+adopted packages predate the convention and cannot be resealed outside their own
+release window.
+
 The audit reads committed Git objects and the package worktree.  It runs no Lean
 and takes no build lock.
 """
@@ -35,6 +60,7 @@ import json
 import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 
@@ -154,6 +180,111 @@ def classify_difference(monorepo: Path, authority: str, authority_path: str,
     return "DIFFERS-from-authority"
 
 
+# Where a package keeps payload as opposed to packaging.  A flake, a lakefile, a
+# licence and a README describe how to build and cite the artifact; the programs and
+# data under these directories are the artifact's evidence, and every one of them
+# must be sealed.
+PAYLOAD_DIRECTORIES = ("scripts", "artifacts", "evidence", "verification")
+# The program that writes the manifest is packaging, not evidence: it produces the
+# seal rather than being sealed by it, and every package keeps it in the same place.
+SEALING_PROGRAMS = ("scripts/seal_manifest.py",)
+
+
+def support_entries(manifest: dict) -> dict[str, str]:
+    """The manifest's sealed non-Lean payload, in whichever shape it records it."""
+    entries: dict[str, str] = {}
+    for key in ("support_files", "verification_artifacts"):
+        for entry in manifest.get(key, []):
+            entries[entry["path"]] = entry["sha256"]
+    generator = manifest.get("generator")
+    if isinstance(generator, dict):
+        entries[generator["path"]] = generator["sha256"]
+    return entries
+
+
+def payload_audit(package: Path, manifest: dict) -> tuple[list[str], list[str]]:
+    """Compare the package's payload directories against what its manifest seals.
+
+    Returns the unsealed payload files and the sealed entries whose bytes on disk
+    no longer match, so a package that edits a generator after sealing it is caught
+    by the same pass that catches one that never sealed it.
+    """
+    sealed = support_entries(manifest)
+    unsealed: list[str] = []
+    drifted: list[str] = []
+    for directory in PAYLOAD_DIRECTORIES:
+        for path in sorted((package / directory).rglob("*")):
+            if not path.is_file():
+                continue
+            relative = path.relative_to(package).as_posix()
+            if relative not in sealed and relative not in SEALING_PROGRAMS:
+                unsealed.append(relative)
+    for relative, digest in sorted(sealed.items()):
+        path = package / relative
+        if not path.is_file():
+            drifted.append(f"{relative}: sealed but absent from the package")
+        elif hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+            drifted.append(f"{relative}: on-disk bytes differ from the seal")
+    return unsealed, drifted
+
+
+def missing_from_package(
+    monorepo: Path, authority: str, prefixes: list[str], sealed: set[str]
+) -> list[str]:
+    """Authority files inside an owned family that the package does not seal."""
+    if not prefixes:
+        return []
+    listing = subprocess.run(
+        ["git", "-C", str(monorepo), "ls-tree", "-r", "--name-only", authority],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    return sorted(
+        path
+        for path in listing.stdout.splitlines()
+        if any(path.startswith(prefix) for prefix in prefixes) and path not in sealed
+    )
+
+
+def declared_family_prefixes(
+    package_name: str, config: Path, source_prefix: str, sealed_paths: list[str]
+) -> list[str]:
+    """The package's owned module prefixes, as authority paths.
+
+    A package that the boundary configuration already knows needs no second
+    declaration of what it owns: the prefixes that reject its payload from the
+    monorepo are the same prefixes that say which authority files it must hold.
+
+    The module prefix is not itself a path.  Packages differ in where they root
+    their modules — at the package root or under `lean/` — so each prefix is
+    anchored against a sealed source that carries it, and the anchor rather than an
+    assumed layout is what maps it into the authority tree.  A prefix that anchors
+    nowhere is reported: a family with no sealed source at all is a gap that a
+    reverse-direction audit must not silently pass.
+    """
+    if not config.is_file():
+        return []
+    with config.open("rb") as handle:
+        document = tomllib.load(handle)
+    for package in document.get("package", []):
+        if package["name"] != package_name:
+            continue
+        prefixes = []
+        for prefix in package["owned_module_prefixes"]:
+            module_path = prefix.replace(".", "/")
+            anchor = next(
+                (path for path in sealed_paths if module_path in path), None
+            )
+            if anchor is None:
+                prefixes.append(f"UNANCHORED:{module_path}")
+                continue
+            head = anchor[: anchor.index(module_path)]
+            prefixes.append(f"{source_prefix}{head}{module_path}")
+        return prefixes
+    return []
+
+
 def audit(package: Path, monorepo: Path, base: Path, authority: str,
           source_prefix: str, transformation: str | None = None
           ) -> tuple[dict[str, list[str]], dict[str, str]]:
@@ -228,6 +359,25 @@ def main() -> int:
         metavar="SUBSTRING",
         help="also list the paths of every class whose label contains SUBSTRING",
     )
+    parser.add_argument(
+        "--family-prefix",
+        action="append",
+        default=[],
+        metavar="PATH_PREFIX",
+        help="authority path prefix of a family this package owns; defaults to the"
+             " package's declared owned_module_prefixes.  Authority files under it"
+             " that the package does not seal are reported as missing",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        help="certificate-package configuration holding the owned module prefixes",
+    )
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="treat missing authority files and unsealed payload as defects",
+    )
     args = parser.parse_args()
 
     if not (args.package / "MANIFEST.json").is_file():
@@ -263,11 +413,45 @@ def main() -> int:
                 for path in paths:
                     print(f"  {path}")
 
+    manifest = json.loads((args.package / "MANIFEST.json").read_text())
+    sealed_paths = [entry["path"] for entry in manifest["sources"]]
+    sealed = {f"{args.source_prefix}{path}" for path in sealed_paths}
+    prefixes = args.family_prefix or declared_family_prefixes(
+        args.package.name,
+        args.config or Path(__file__).resolve().parents[1] / "trust/certificate-packages.toml",
+        args.source_prefix,
+        sealed_paths,
+    )
+    unanchored = [p for p in prefixes if p.startswith("UNANCHORED:")]
+    prefixes = [p for p in prefixes if not p.startswith("UNANCHORED:")]
+    missing = missing_from_package(args.monorepo, resolved, prefixes, sealed)
+    unsealed, drifted = payload_audit(args.package, manifest)
+
+    for prefix in unanchored:
+        print(f"\nOWNED FAMILY WITH NO SEALED SOURCE: {prefix.split(':', 1)[1]}")
+    if prefixes:
+        print(f"\nowned families: {', '.join(prefixes)}")
+        print(f"{len(missing):5d}  missing-from-package")
+        for path in missing[:20]:
+            print(f"       {path}")
+        if len(missing) > 20:
+            print(f"       ... and {len(missing) - 20} more")
+    else:
+        print("\nowned families: none declared; reverse direction not audited")
+    print(f"{len(support_entries(manifest)):5d}  sealed payload files")
+    print(f"{len(unsealed):5d}  unsealed payload files")
+    for path in unsealed[:20]:
+        print(f"       {path}")
+    for problem in drifted:
+        print(f"       PAYLOAD-DRIFT {problem}")
+
     defective = any(
         "WORKTREE-DRIFT" in label or "BASE-OVERLAP" in label
         or "DIFFERS-from-authority" in label or "still-in-monorepo-DRIFTED" in label
         for label in detail
     )
+    if drifted or unanchored or (args.strict and (missing or unsealed)):
+        defective = True
     return 1 if defective else 0
 
 

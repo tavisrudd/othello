@@ -90,10 +90,14 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   `resident_family` table declares generated data a written determination keeps here permanently.
 - `lean-package-source-audit.py`: read-only comparison of a package's sealed sources against the
   monorepo revision they came from, the current tree, and the pinned base.  Runs no Lean, takes no
-  lock, so it is valid while another lane holds the tree.  It iterates the package's sources, so it
-  cannot yet report authority files the package lacks.  `--declared-transformation` names an
+  lock, so it is valid while another lane holds the tree.  `--declared-transformation` names an
   extraction-time comment normalization the package declares in its `PROVENANCE.md`; sources the
-  rules reproduce are reported as transformed, and everything else stays a defect.
+  rules reproduce are reported as transformed, and everything else stays a defect.  It also runs in
+  reverse: authority files inside an owned family that the package does not seal, payload files the
+  manifest does not seal, and an owned family with no sealed source at all.  Owned families come
+  from `--family-prefix` or the declared `owned_module_prefixes`, anchored against a sealed source
+  rather than an assumed layout.  `--strict` promotes the first two to defects; payload sealed and
+  then edited is a defect either way.
 - `lean-certificate-portfolio-audit.py`: read-only sweep of any set of working roots for generated
   Lean families, recognizing a generated source by its naming of its own generator.  `--payload`
   reports those generators and whether each is resident; `--build-artifacts` reports build outputs
@@ -138,7 +142,12 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    (`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`): the boundary checker now
    resolves the generator every generated banner names and rejects one no family declares, the
    order-25 generators, replay programs and replay data are declared payload, and the point-orbit and
-   order-16 build residue is measured and queued for the base re-export window.  Then, once the
+   order-16 build residue is measured and queued for the base re-export window.  The non-Lean payload
+   seal convention is settled as one `support_files` list read alongside both earlier spellings, and
+   the source audit now runs in reverse
+   (`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`): both adopted packages hold
+   every authority file in the families they own, and the order-eleven package's reseal window picks
+   up its two unsealed gate-evidence files.  Then, once the
    tree is coherent, the release-chain replay, the atomic base re-export and package re-seal, the
    q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
    all-paper export replay.
@@ -220,7 +229,8 @@ Dye audit and anchor review [`../2026-08-04-c864-dye-audit-and-anchor-review.md`
 portfolio audit [`../2026-08-05-c864-certificate-portfolio-audit.md`](../2026-08-05-c864-certificate-portfolio-audit.md);
 order-25 banner transformation [`../2026-08-05-c864-q25-banner-transformation-declaration.md`](../2026-08-05-c864-q25-banner-transformation-declaration.md);
 base generated-module classification [`../2026-08-05-c864-base-generated-module-classification.md`](../2026-08-05-c864-base-generated-module-classification.md);
-non-Lean payload and build artifacts [`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`](../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md).
+non-Lean payload and build artifacts [`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`](../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md);
+payload seal convention and reverse audit [`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`](../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
