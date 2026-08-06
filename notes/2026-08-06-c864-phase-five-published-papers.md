@@ -124,13 +124,17 @@ five further defects the chain exposed are under "Paper I released".
 
 ## Two further defects found
 
-**MDS--CSS transversal groups has no runnable release gate.** Its `Makefile` `release-check` target
-ends with `python3 release/verify_release.py --require-formal`, and `papers/mds_css_transversal_groups/release/`
-contains no tracked file at all. Everything before that line passes: twelve certificate cases,
-seventeen evidence artifacts, eight replayed bundles, the spacing lint and the manuscript build. The
-sibling AME/LU paper, which was split from the same source, has the verifier this one is missing.
-Writing it is a design decision about what constitutes this paper's public export and formal
-companion, not a repair, so it is recorded rather than improvised.
+**MDS--CSS transversal groups had no runnable release gate, and now does.** Its `Makefile`
+`release-check` target has ended with `python3 release/verify_release.py --require-formal` since the
+paper was split from AME/LU, while `papers/mds_css_transversal_groups/release/` held no tracked file,
+so the target could never finish and the release surface was never content-addressed. Everything
+before that line already passed: twelve certificate cases, seventeen evidence artifacts, eight
+replayed bundles, the spacing lint and the manuscript build. The verifier is modelled on the AME/LU
+one the paper was split from — twenty declared public artifacts, and a formal companion of
+seventy-two files derived from the trust facts of `MDSCSSTransversalGeometry` and its axiom audit,
+each recorded with bytes and a SHA-256 and reduced to one tree hash. It additionally refuses a
+declared public artifact that is absent and an unwritten manifest, rather than silently reporting a
+smaller surface. `make release-check` now runs to completion.
 
 **The arcs paper's pins are superseded and advancing them is a re-verification, not a bump.** Its
 README and manuscript pin finitegeom `0b3f37d2` and the order-16 certificate package `ecee482d`,
