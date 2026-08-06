@@ -30,7 +30,7 @@ from equality.  The defect identity, equality criterion, and deletion
 stability are independently formalized in Lean; the finite field values use
 the trust boundaries stated below.
 
-The human-scale formal development is distributed in
+The Lean formalization is distributed in
 [`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom). Its archived
 0.2.0 release has DOI
 [`10.5281/zenodo.21664257`](https://doi.org/10.5281/zenodo.21664257), and the
@@ -39,9 +39,10 @@ later matching-packing/small-odd supplement is fixed at commit
 The generated exhaustive order-16 proof is in the separately pinned
 [`finitegeom-q16-certificates`](https://github.com/tavisrudd/finitegeom-q16-certificates)
 package at commit
-[`ecee482d`](https://github.com/tavisrudd/finitegeom-q16-certificates/commit/ecee482dd8d3501a0077a0781398a34df5f0f604).
+[`0b04429b`](https://github.com/tavisrudd/finitegeom-q16-certificates/commit/0b04429b6da2226f5cb53d299264cb782e54e000),
+which pins `finitegeom` at `a7665be6`, an ancestor of the commit above.
 The manuscript identifies the exact gates, theorem names, trust boundaries,
-and classical inputs. The formal sources are not bundled here.
+and classical inputs. The Lean sources are not bundled here.
 
 ## Contents
 
@@ -54,10 +55,11 @@ and classical inputs. The formal sources are not bundled here.
   \(q=11\) structure, invariance, and mutation checks.
 - `check_match10_rank_three.py`, its JSON certificate, and checksum —
   rank-three realization evidence.
-- `search_rhoc16.cpp` and its frozen report — exact \(q=16\) augmentation
-  generator.
-- `check_q16_uncovered_patterns.py`, its JSON certificate, and checksum —
-  line–triangle witnesses for the \(2630+3\) terminal partition.
+- The exact \(q=16\) augmentation generator `scripts/search_rhoc16.cpp` with
+  its frozen report, and the line–triangle pattern checker
+  `scripts/check_q16_uncovered_patterns.py` with its JSON certificate for the
+  \(2630+3\) terminal partition, are in the `finitegeom-q16-certificates`
+  package pinned above, not in this repository.
 - `small_odd_relative_conic_classifier.cpp`, its four canonical JSON
   summaries, the independent \(q=13\) frame check, and their checksum —
   exhaustive lower classifications at \(q=13,17,19\). Lean independently
@@ -66,10 +68,21 @@ and classical inputs. The formal sources are not bundled here.
 
 ## Reproduction
 
-Build the manuscript with a full TeX Live installation:
+Rebuild the manuscript and check the tracked PDF against that build:
 
 ```text
-latexmk -xelatex -interaction=nonstopmode -halt-on-error \
+nix develop .#manuscript --command \
+  python3 verification/check_manuscript_build.py
+```
+
+The pinned flake fixes the TeX toolchain and the checker fixes the build clock,
+so the rebuilt PDF must equal the tracked one byte for byte; `--update`
+refreshes the tracked PDF from the same build. With a full TeX Live
+installation and no Nix, the underlying command is:
+
+```text
+SOURCE_DATE_EPOCH=1767225600 FORCE_SOURCE_DATE=1 \
+  latexmk -xelatex -interaction=nonstopmode -halt-on-error \
   arcs_complete_outside_conic.tex
 ```
 
@@ -83,12 +96,15 @@ Replay the compact public certificates:
 
 ```text
 python3 check_match10_rank_three.py --check
-python3 check_q16_uncovered_patterns.py --check \
-  --levels /absolute/path/to/finitegeom/RelativeConicArcs/Q16CertificateLevels.lean
 ```
 
-The rank-three replay requires Singular; the other commands use the Python
-standard library.
+The rank-three replay requires Singular. In a checkout of
+`finitegeom-q16-certificates` at the pinned commit, the order-16 pattern
+checker replays against the level data that package carries:
+
+```text
+python3 scripts/check_q16_uncovered_patterns.py --check
+```
 
 Replay the small odd-order classifications with:
 
@@ -109,13 +125,13 @@ diff -u small_odd_q13_frame_check.json /var/tmp/q13-frame.json
 sha256sum -c small_odd_relative_conic.sha256
 ```
 
-Regenerate the \(q=16\) search report with:
+Regenerate the \(q=16\) search report from the same package checkout with:
 
 ```text
-g++ -O3 -std=c++20 search_rhoc16.cpp -o /var/tmp/search_rhoc16
-/var/tmp/search_rhoc16 --emit-lean
+c++ -O3 -std=c++20 scripts/search_rhoc16.cpp -o search_rhoc16
+./search_rhoc16 --emit-lean
 ```
 
 The search report is a generation summary, not the formal certificate. The
-kernel-checked transition and leaf modules in the separate formal repository
-establish the exhaustive covering-list result.
+kernel-checked transition and leaf modules in that package establish the
+exhaustive covering-list result.

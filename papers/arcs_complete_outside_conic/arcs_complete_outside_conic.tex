@@ -1810,7 +1810,7 @@ uncovered locus $\cC(\F_5)$.
 The main body develops the mathematical mechanism; the appendices separate
 secondary deductions from finite exclusion.  The corresponding evidence and
 trust boundaries are summarized below.  In the public \texttt{finitegeom}
-repository, the base human boundary is recorded in
+repository, the trust boundary is recorded in
 \path{trust/ARCS_COMPLETE_OUTSIDE_CONIC.md}.  The matching-packing and small
 odd-order supplement is recorded separately in
 \path{trust/ARCS_COMPLETE_OUTSIDE_CONIC_ADDITIONS.md}.  Under
@@ -1824,16 +1824,16 @@ The archived \texttt{finitegeom} release 0.2.0 has DOI
 \href{https://doi.org/10.5281/zenodo.21664257}
 {\texttt{10.5281/zenodo.21664257}}; the later supplement is fixed at public
 commit \href{https://github.com/tavisrudd/finitegeom/commit/575cf3e991168fb96eb24c318263c5d0552aa531}
-{\texttt{0b3f37d}}.  The generated order-\(16\) proof is distributed
+{\texttt{575cf3e9}}.  The generated order-\(16\) proof is distributed
 separately in \texttt{finitegeom-q16-certificates}, fixed at public commit
-\href{https://github.com/tavisrudd/finitegeom-q16-certificates/commit/ecee482dd8d3501a0077a0781398a34df5f0f604}
-{\texttt{ecee482d}} and pinned there to \texttt{finitegeom} commit
-\texttt{ef6317c5}.
+\href{https://github.com/tavisrudd/finitegeom-q16-certificates/commit/0b04429b6da2226f5cb53d299264cb782e54e000}
+{\texttt{0b04429b}} and pinned there to \texttt{finitegeom} commit
+\texttt{a7665be6}, an ancestor of the commit above.
 This appendix states the mathematical certificate contracts and the trust
 boundary; raw generated certificates, generators, and replay scripts remain
-in the companion.
+in that package.
 
-The human gate and supplement also check the discrete gap, complete-affine equality orders,
+Those two gates also check the discrete gap, complete-affine equality orders,
 three-value equality spectra, and the standard-conic characteristic-two
 conclusions.  The identification of an arbitrary equality oval or hyperoval
 with its prescribed-conic configuration remains a paper proof.
@@ -1859,16 +1859,17 @@ computer algebra outside Lean.
 Claim & Certificate and checker & Remaining trust\\ \hline
 Defect, bounds, transfer, exact reconstruction, matching rigidity,
 bad-concurrence stability, and the two-unit design-nonexistence gap&
-\texttt{Gates.ArcsCompleteOutside\allowbreak ConicHuman} and
-\texttt{Gates.ArcsCompleteOutside\allowbreak ConicAdditions}; the named
+\texttt{Gates.ArcsCompleteOutside\allowbreak Conic} and
+\texttt{Gates.ArcsCompleteOutside\allowbreak ConicAdditions} in
+\texttt{finitegeom}; the named
 reconstruction and matching terminals in the two public trust documents&
 Lean kernel, Mathlib, and
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}\\
 \(q=16\) exclusion&
 augmentation transitions, the line--triangle pattern certificate,
 \(2630+3\) Lean leaf records, and
-\texttt{Q16QuadraticTransport}, imported by the separate certificate-package
-gate \texttt{Gates.ArcsCompleteOutside\allowbreak Conic}&
+\texttt{Q16QuadraticTransport}, imported by the certificate package's own
+gate \texttt{Gates.Q16CertificateTrust}&
 The theorem trusts the Lean kernel and Mathlib.  Exact Python arithmetic
 certifies the geometric compression independently but is not a premise of the
 Lean theorem; generator labels and deduplication are not trusted\\

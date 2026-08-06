@@ -426,17 +426,17 @@
   "paper": "arcs_complete_outside_conic",
   "pdfs": [
     {
-      "bytes": 189340,
+      "bytes": 189442,
       "pages": 26,
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.pdf",
-      "sha256": "d504d3ffa70209e66365df5f405d99e55fc029b9a1387588de5eb92e6c1c6b79"
+      "sha256": "d538b5b79caafb175f5fa9f4d01aeec98d9921adf587930c2e6c65d436c881cf"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
-      "sha256": "dec1a62794588168b24e0df63b846676d7deda68adf223dd42b0cacccc5d1a79"
+      "sha256": "36d6aa8fe6d905e8b6d155f3f84b6677d530050a70c7a60530e856b283bd3b64"
     }
   ],
   "title": "Arcs complete outside a conic:\\\\ a prescribed-hole defect identity and matching-design rigidity",

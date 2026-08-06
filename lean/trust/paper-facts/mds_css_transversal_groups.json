@@ -714,17 +714,17 @@
   "paper": "mds_css_transversal_groups",
   "pdfs": [
     {
-      "bytes": 203714,
+      "bytes": 204033,
       "pages": 23,
       "path": "papers/mds_css_transversal_groups/mds-css-transversal-groups.pdf",
-      "sha256": "0198e28e318aaf0483ccc7e2bf0c1d5900e257bac064c63fd7c6e048574f36ed"
+      "sha256": "521ae7cfee355d3d2d9897cbfde1279e746a2fe9d27cfdafafbcb048022b979a"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/mds_css_transversal_groups/main.tex",
-      "sha256": "5d88c360935f7d946c96a0ab0d5d92df7f967c58412dd9df989395371c1c87f7"
+      "sha256": "dfd8e10b0a67a4e9bd4bcfa39b7794368c7e656e24b028e9bc8ac4cdb6f41c1e"
     },
     {
       "path": "papers/mds_css_transversal_groups/figures/03-symmetry-groups.tex",
@@ -733,6 +733,10 @@
     {
       "path": "papers/mds_css_transversal_groups/figures/06-pencil-quotient.tex",
       "sha256": "ead89342e9106fd15a0cb3678e13ad1af24578d6eda78caaffe5647a567c871a"
+    },
+    {
+      "path": "papers/mds_css_transversal_groups/frontmatter/index-terms.tex",
+      "sha256": "49f98d78f6f6f0cdfb8c76f388398efa07f00419f29bdd6940d904ff2cb85a85"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/01-introduction.tex",
